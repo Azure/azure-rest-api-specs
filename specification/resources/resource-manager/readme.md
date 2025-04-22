@@ -65,10 +65,6 @@ tag: package-links-2016-09
 tag: package-managedapplications-2018-06
 ```
 
-``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2023-08
-```
-
 ``` yaml $(package-templatespecs)
 tag: package-templatespecs-2022-02
 ```
@@ -210,19 +206,6 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
-```
-
-### Tag: package-deploymentscripts-2023-08
-
-These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentscripts-2023-08'
-input-file:
-  - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
-
-suppressions:
-  - code: OperationsAPIImplementation
-    reason: OperationsAPI will come from Resources
 ```
 
 ### Tag: package-resources-2023-07
@@ -529,24 +512,6 @@ These settings apply only when `--tag=package-subscriptions-2021-01` is specifie
 ``` yaml $(tag) == 'package-subscriptions-2021-01'
 input-file:
 - Microsoft.Resources/stable/2021-01-01/subscriptions.json
-```
-
-### Tag: package-deploymentscripts-2020-10
-
-These settings apply only when `--tag=package-deploymentscripts-2020-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentscripts-2020-10'
-input-file:
-- Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
-```
-
-### Tag: package-deploymentscripts-2019-10-preview
-
-These settings apply only when `--tag=package-deploymentscripts-2019-10-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentscripts-2019-10-preview'
-input-file:
-- Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
 ```
 
 ### Tag: package-features-2021-07
@@ -1217,60 +1182,6 @@ directive:
     from: managedapplications.json
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
-  - from: deploymentScripts.json
-    suppress: TrackedResourceGetOperation
-    where: $.definitions.AzureCliScript
-    reason: Tooling issue.
-  - from: deploymentScripts.json
-    suppress: TrackedResourcePatchOperation
-    where: $.definitions.AzureCliScript
-    reason: Tooling issue.
-  - from: deploymentScripts.json
-    suppress: TrackedResourceGetOperation
-    where: $.definitions.AzurePowerShellScript
-    reason: Tooling issue
-  - from: deploymentScripts.json
-    suppress: TrackedResourcePatchOperation
-    where: $.definitions.AzurePowerShellScript
-    reason: Tooling issue
-  - suppress: OperationsAPIImplementation
-    from: deploymentScripts.json
-    where: $.paths
-    reason: OperationsAPI will come from Resources
-  - suppress: IntegerTypeMustHaveFormat
-    from: deploymentScripts.json
-    reason: Tooling issue, default is int32, explicitly mentioning the format as per doc, it still flags breaking change.
-  - suppress: ResourceNameRestriction
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: PropertiesTypeObjectNoDefinition
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: SubscriptionsAndResourceGroupCasing
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: ParametersInPointGet
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: GetCollectionOnlyHasValueAndNextLink
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: PatchIdentityProperty
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: LroErrorContent
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: ProvisioningStateSpecifiedForLROPut
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - from: deploymentScripts.json
-    suppress: R3006
-    where:
-      - $.definitions.DeploymentScript.properties
-      - $.definitions.AzureCliScript.properties
-      - $.definitions.AzurePowerShellScript.properties
-    reason: Currently systemData is not allowed
   - from: deploymentStacks.json
     suppress: OperationsAPIImplementation
     where: $.paths
@@ -1744,7 +1655,6 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
-  - package-deploymentscripts: true
   - package-templatespecs: true
   - package-deploymentstacks: true
   - package-changes: true

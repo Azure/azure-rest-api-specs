@@ -3,7 +3,7 @@
   "info": {
     "title": "DeploymentScriptsClient",
     "description": "The APIs listed in this specification can be used to manage Deployment Scripts resource through the Azure Resource Manager.",
-    "version": "2023-08-01"
+    "version": "2019-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -46,9 +46,6 @@
           "DeploymentScriptsCreate": {
             "$ref": "./examples/DeploymentScripts_Create.json"
           },
-          "DeploymentScriptsCreateNoUserManagedIdentity": {
-            "$ref": "./examples/DeploymentScripts_Create_No_UserManagedIdentity.json"
-          },
           "DeploymentScriptsCreate_MinCreate": {
             "$ref": "./examples/DeploymentScripts_Min_Create.json"
           },
@@ -57,9 +54,6 @@
           },
           "DeploymentScriptsCreate_UsingExistingStorageAccount": {
             "$ref": "./examples/DeploymentScripts_Create_Using_Existing_StorageAccount.json"
-          },
-          "DeploymentScriptsCreate_UsingAciWithSubnets": {
-            "$ref": "./examples/DeploymentScripts_Create_Using_Custom_Aci_Name_With_SubnetIds.json"
           }
         },
         "parameters": [
@@ -413,6 +407,7 @@
   "definitions": {
     "DeploymentScript": {
       "required": [
+        "identity",
         "location",
         "kind"
       ],
@@ -421,7 +416,7 @@
       "discriminator": "kind",
       "properties": {
         "identity": {
-          "description": "Optional property. Managed identity to be used for this deployment script. Currently, only user-assigned MSI is supported.",
+          "description": "Managed identity to be used for this deployment script. Currently, only user-assigned MSI is supported.",
           "$ref": "#/definitions/ManagedServiceIdentity"
         },
         "location": {
@@ -454,7 +449,7 @@
         "systemData": {
           "readOnly": true,
           "description": "The system metadata related to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -585,6 +580,7 @@
         },
         "scriptContent": {
           "type": "string",
+          "maxLength": 32000,
           "description": "Script body."
         },
         "arguments": {
@@ -596,10 +592,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnvironmentVariable"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "forceUpdateTag": {
           "type": "string",
@@ -681,31 +674,6 @@
         }
       }
     },
-    "ContainerGroupSubnetId": {
-      "description": "Container group subnet information.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID of subnet.",
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks/subnets"
-              }
-            ]
-          }
-        },
-        "name": {
-          "description": "Friendly name for the subnet.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
     "ContainerConfiguration": {
       "type": "object",
       "description": "Settings to customize ACI container instance.",
@@ -715,16 +683,6 @@
           "description": "Container group name, if not specified then the name will get auto-generated. Not specifying a 'containerGroupName' indicates the system to generate a unique name which might end up flagging an Azure Policy as non-compliant. Use 'containerGroupName' when you have an Azure Policy that expects a specific naming convention or when you want to fully control the name. 'containerGroupName' property must be between 1 and 63 characters long, must contain only lowercase letters, numbers, and dashes and it cannot start or end with a dash and consecutive dashes are not allowed. To specify a 'containerGroupName', add the following object to properties: { \"containerSettings\": { \"containerGroupName\": \"contoso-container\" } }. If you do not want to specify a 'containerGroupName' then do not add 'containerSettings' property.",
           "minLength": 1,
           "maxLength": 63
-        },
-        "subnetIds": {
-          "type": "array",
-          "description": "The subnet resource IDs for a container group.",
-          "items": {
-            "$ref": "#/definitions/ContainerGroupSubnetId"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
         }
       }
     },
@@ -777,7 +735,7 @@
         },
         "error": {
           "description": "Error that is relayed from the script execution.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       }
     },
@@ -851,7 +809,6 @@
     },
     "DeploymentScriptListResult": {
       "description": "List of deployment scripts.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -869,7 +826,6 @@
     },
     "ScriptLogsList": {
       "description": "Deployment script execution logs.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -929,10 +885,9 @@
       }
     },
     "DeploymentScriptsError": {
-      "type": "object",
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       },
       "description": "Deployment scripts error response."
@@ -963,6 +918,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90,
       "x-ms-parameter-location": "method"
