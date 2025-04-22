@@ -6,38 +6,13 @@
   },
   "paths": {},
   "definitions": {
-    "customerManagedKeyEncryption": {
+    "CustomerManagedKeyEncryption": {
       "type": "object",
-      "description": "All Customer-managed key encryption properties for the resource.",
+      "description": "Customer-managed key encryption properties for the resource.",
       "properties": {
         "keyEncryptionKeyIdentity": {
-          "type": "object",
-          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
-          "properties": {
-            "identityType": {
-              "type": "string",
-              "description": "Values can be systemAssignedIdentity or userAssignedIdentity",
-              "enum": [
-                "systemAssignedIdentity",
-                "userAssignedIdentity",
-                "delegatedResourceIdentity"
-              ],
-              "x-ms-enum": {
-                "name": "IdentityType",
-                "modelAsString": true
-              }
-            },
-            "userAssignedIdentityResourceId": {
-              "type": "string",
-              "format": "arm-id",
-              "description": "user assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity and delegatedResourceIdentity."
-            },
-            "delegatedIdentityClientId": {
-              "type": "string",
-              "format": "uuid",
-              "description": "delegated identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity and userAssignedIdentity - internal use only."
-            }
-          }
+          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
         },
         "keyEncryptionKeyUrl": {
           "type": "string",
@@ -45,26 +20,92 @@
         }
       }
     },
-    "encryption": {
+    "Encryption": {
       "type": "object",
       "description": "(Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled.",
       "properties": {
         "infrastructureEncryption": {
-          "type": "string",
-          "description": "Values are enabled and disabled.",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "x-ms-enum": {
-            "name": "InfrastructureEncryption",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/InfrastructureEncryption",
+          "description": "Values are enabled and disabled."
         },
         "customerManagedKeyEncryption": {
-          "$ref": "#/definitions/customerManagedKeyEncryption",
+          "$ref": "#/definitions/CustomerManagedKeyEncryption",
           "description": "All Customer-managed key encryption properties for the resource."
         }
+      }
+    },
+    "InfrastructureEncryption": {
+      "type": "string",
+      "description": "(Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "InfrastructureEncryption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "enabled",
+            "description": "Encryption is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "Encryption is disabled"
+          }
+        ]
+      }
+    },
+    "KeyEncryptionKeyIdentity": {
+      "type": "object",
+      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentityType",
+          "description": "The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity."
+        },
+        "delegatedIdentityClientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "delegated identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity and userAssignedIdentity - internal use only."
+        }
+      }
+    },
+    "KeyEncryptionKeyIdentityType": {
+      "type": "string",
+      "description": "The type of identity to use.",
+      "enum": [
+        "systemAssignedIdentity",
+        "userAssignedIdentity",
+        "delegatedResourceIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "KeyEncryptionKeyIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssignedIdentity",
+            "value": "systemAssignedIdentity",
+            "description": "System assigned identity"
+          },
+          {
+            "name": "UserAssignedIdentity",
+            "value": "userAssignedIdentity",
+            "description": "User assigned identity"
+          },
+          {
+            "name": "DelegatedResourceIdentity",
+            "value": "delegatedResourceIdentity",
+            "description": "Delegated identity"
+          }
+        ]
       }
     }
   }

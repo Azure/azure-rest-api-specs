@@ -2,13 +2,9 @@
   "swagger": "2.0",
   "info": {
     "title": "Network security perimeter common type definitions",
-    "version": "0000-00-00",
-    "description": "Common types for network security perimeters based on a shared API specification. These common, versioned type definitions are intended for resource providers (RPs, except Network RP) to use, and reuse, for defining their own API versions that share a set of type definitions that is consistent across providers.",
-    "contact": {}
+    "version": "5.0",
+    "description": "Common types for network security perimeters based on a shared API specification. These common, versioned type definitions are intended for resource providers (RPs, except Network RP) to use, and reuse, for defining their own API versions that share a set of type definitions that is consistent across providers."
   },
-  "schemes": [
-    "https"
-  ],
   "host": "management.azure.com",
   "paths": {},
   "definitions": {
@@ -37,10 +33,12 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "Inbound",
             "value": "Inbound",
             "description": "Applies to inbound network traffic to the secured resources."
           },
           {
+            "name": "Outbound",
             "value": "Outbound",
             "description": "Applies to outbound network traffic from the secured resources"
           }
@@ -58,8 +56,7 @@
           "type": "array",
           "description": "Address prefixes in the CIDR format for inbound rules",
           "items": {
-            "type": "string",
-            "description": "An IP address prefix (CIDR) for inbound rules"
+            "type": "string"
           }
         },
         "subscriptions": {
@@ -67,12 +64,11 @@
           "description": "Subscriptions for inbound rules",
           "items": {
             "type": "object",
-            "description": "Subscription identifiers",
             "properties": {
               "id": {
                 "type": "string",
                 "format": "arm-id",
-                "description": "The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') "
+                "description": "The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000')"
               }
             }
           }
@@ -88,26 +84,59 @@
           "type": "array",
           "description": "Fully qualified domain names (FQDN) for outbound rules",
           "items": {
-            "type": "string",
-            "description": "A fully qualified domain name (FQDN)"
+            "type": "string"
           }
         },
         "emailAddresses": {
           "type": "array",
           "description": "Email addresses for outbound rules",
           "items": {
-            "type": "string",
-            "description": "An email address"
+            "type": "string"
           }
         },
         "phoneNumbers": {
           "type": "array",
           "description": "Phone numbers for outbound rules",
           "items": {
-            "type": "string",
-            "description": "A phone number"
+            "type": "string"
           }
         }
+      }
+    },
+    "IssueType": {
+      "type": "string",
+      "description": "Type of issue",
+      "enum": [
+        "Unknown",
+        "ConfigurationPropagationFailure",
+        "MissingPerimeterConfiguration",
+        "MissingIdentityConfiguration"
+      ],
+      "x-ms-enum": {
+        "name": "IssueType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown issue type"
+          },
+          {
+            "name": "ConfigurationPropagationFailure",
+            "value": "ConfigurationPropagationFailure",
+            "description": "An error occurred while applying the network security perimeter (NSP) configuration."
+          },
+          {
+            "name": "MissingPerimeterConfiguration",
+            "value": "MissingPerimeterConfiguration",
+            "description": "A network connectivity issue is happening on the resource which could be addressed either by adding new resources to the network security perimeter (NSP) or by modifying access rules."
+          },
+          {
+            "name": "MissingIdentityConfiguration",
+            "value": "MissingIdentityConfiguration",
+            "description": "An managed identity hasn't been associated with the resource. The resource will still be able to validate inbound traffic from the network security perimeter (NSP) or matching inbound access rules, but it won't be able to perform outbound access as a member of the NSP."
+          }
+        ]
       }
     },
     "NetworkSecurityPerimeter": {
@@ -121,7 +150,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "resourceType": "Microsoft.Network/networkSecurityPerimeters"
+                "type": "Microsoft.Network/networkSecurityPerimeters"
               }
             ]
           }
@@ -135,8 +164,8 @@
           "type": "string",
           "description": "Location of the network security perimeter",
           "x-ms-mutability": [
-            "create",
-            "read"
+            "read",
+            "create"
           ]
         }
       }
@@ -215,9 +244,38 @@
       ],
       "x-ms-enum": {
         "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
-        "modelAsString": true
-      },
-      "readOnly": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          }
+        ]
+      }
     },
     "NetworkSecurityProfile": {
       "type": "object",
@@ -251,8 +309,7 @@
           "type": "array",
           "description": "List of log categories that are enabled",
           "items": {
-            "type": "string",
-            "description": "Log category"
+            "type": "string"
           }
         }
       }
@@ -267,59 +324,23 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/ProvisioningIssueProperties"
+          "$ref": "#/definitions/ProvisioningIssueProperties",
+          "readOnly": true
         }
-      },
-      "readOnly": true
+      }
     },
     "ProvisioningIssueProperties": {
       "type": "object",
       "description": "Details of a provisioning issue for a network security perimeter (NSP) configuration. Resource providers should generate separate provisioning issue elements for each separate issue detected, and include a meaningful and distinctive description, as well as any appropriate suggestedResourceIds and suggestedAccessRules",
       "properties": {
         "issueType": {
-          "type": "string",
+          "$ref": "#/definitions/IssueType",
           "description": "Type of issue",
-          "enum": [
-            "Unknown",
-            "ConfigurationPropagationFailure",
-            "MissingPerimeterConfiguration",
-            "MissingIdentityConfiguration"
-          ],
-          "x-ms-enum": {
-            "name": "IssueType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Unknown",
-                "description": "Unknown issue type"
-              },
-              {
-                "value": "ConfigurationPropagationFailure",
-                "description": "An error occurred while applying the network security perimeter (NSP) configuration."
-              },
-              {
-                "value": "MissingPerimeterConfiguration",
-                "description": "A network connectivity issue is happening on the resource which could be addressed either by adding new resources to the network security perimeter (NSP) or by modifying access rules."
-              },
-              {
-                "value": "MissingIdentityConfiguration",
-                "description": "An managed identity hasn't been associated with the resource. The resource will still be able to validate inbound traffic from the network security perimeter (NSP) or matching inbound access rules, but it won't be able to perform outbound access as a member of the NSP."
-              }
-            ]
-          },
           "readOnly": true
         },
         "severity": {
-          "type": "string",
+          "$ref": "#/definitions/Severity",
           "description": "Severity of the issue.",
-          "enum": [
-            "Warning",
-            "Error"
-          ],
-          "x-ms-enum": {
-            "name": "Severity",
-            "modelAsString": true
-          },
           "readOnly": true
         },
         "description": {
@@ -333,8 +354,7 @@
           "items": {
             "type": "string",
             "format": "arm-id",
-            "description": "Fully qualified resource ID of the suggested resource",
-            "readOnly": true
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "readOnly": true
         },
@@ -347,8 +367,7 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
-      },
-      "readOnly": true
+      }
     },
     "PublicNetworkAccess": {
       "type": "string",
@@ -363,14 +382,17 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "Enabled",
             "value": "Enabled",
             "description": "Allows public network access to the resource"
           },
           {
+            "name": "Disabled",
             "value": "Disabled",
             "description": "Disallows public network access to the resource"
           },
           {
+            "name": "SecuredByPerimeter",
             "value": "SecuredByPerimeter",
             "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
           }
@@ -399,36 +421,45 @@
         "Audit"
       ],
       "x-ms-enum": {
-        "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
+        "name": "ResourceAssociationAccessMode",
         "modelAsString": true,
         "values": [
           {
-            "name": "Succeeded",
-            "value": "Succeeded"
+            "name": "Enforced",
+            "value": "Enforced",
+            "description": "Enforced access mode - traffic to the resource that failed access checks is blocked"
           },
           {
-            "name": "Creating",
-            "value": "Creating"
+            "name": "Learning",
+            "value": "Learning",
+            "description": "Learning access mode - traffic to the resource is enabled for analysis but not blocked"
           },
           {
-            "name": "Updating",
-            "value": "Updating"
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Audit access mode - traffic to the resource that fails access checks is logged but not blocked"
+          }
+        ]
+      }
+    },
+    "Severity": {
+      "type": "string",
+      "description": "Severity of the issue.",
+      "enum": [
+        "Warning",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "Severity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Warning",
+            "value": "Warning"
           },
           {
-            "name": "Deleting",
-            "value": "Deleting"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled"
+            "name": "Error",
+            "value": "Error"
           }
         ]
       }
