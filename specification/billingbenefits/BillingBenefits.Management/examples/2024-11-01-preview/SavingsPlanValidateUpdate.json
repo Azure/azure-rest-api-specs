@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "appliedScopeProperties": {
+            "managementGroupId": "/providers/Microsoft.Management/managementGroups/30000000-0000-0000-0000-000000000100",
+            "tenantId": "30000000-0000-0000-0000-000000000100"
+          },
+          "appliedScopeType": "ManagementGroup"
+        },
+        {
+          "appliedScopeProperties": {
+            "managementGroupId": "/providers/Microsoft.Management/managementGroups/MockMG",
+            "tenantId": "30000000-0000-0000-0000-000000000100"
+          },
+          "appliedScopeType": "ManagementGroup"
+        }
+      ]
+    },
+    "savingsPlanId": "30000000-0000-0000-0000-000000000000",
+    "savingsPlanOrderId": "20000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": true
+          },
+          {
+            "valid": true
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SavingsPlan_ValidateUpdate",
+  "title": "SavingsPlanValidateUpdate"
+}
