@@ -576,5 +576,6 @@ using Microsoft.EventGrid.SystemEvents;
 );
 
 @@clientName(AcsUserEngagement, "ACSUserEngagement", "go");
+@@clientName(AcsMessageReactionContent, "ACSMessageReactionContent", "go");
 
 // [END] ACS renames (and acronym casing)

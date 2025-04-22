@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { createMockCore, createMockGithub } from "../../test/mocks.js";
+import { PER_PAGE_MAX } from "../src/github.js";
 import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
+import {
+  createMockCore,
+  createMockGithub,
+  createMockRequestError,
+} from "./mocks.js";
 
 describe("updateLabels", () => {
   it("loads inputs from env", async () => {
@@ -35,6 +40,7 @@ describe("updateLabels", () => {
       owner: "TestRepoOwnerLoginEnv",
       repo: "TestRepoNameEnv",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "TestRepoOwnerLoginEnv",
@@ -58,6 +64,7 @@ describe("updateLabels", () => {
       payload: {
         action: "completed",
         workflow_run: {
+          event: "pull_request",
           head_sha: "abc123",
           id: 456,
           repository: {
@@ -83,6 +90,7 @@ describe("updateLabels", () => {
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "TestRepoOwnerLogin",
@@ -106,6 +114,7 @@ describe("updateLabels", () => {
       payload: {
         action: "completed",
         workflow_run: {
+          event: "pull_request",
           head_sha: "abc123",
           id: 456,
           repository: {
@@ -139,6 +148,7 @@ describe("updateLabels", () => {
       owner: "TestRepoOwnerLoginEnv",
       repo: "TestRepoNameEnv",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "TestRepoOwnerLoginEnv",
@@ -164,6 +174,49 @@ describe("updateLabelsImpl", () => {
         core: createMockCore(),
       }),
     ).rejects.toThrow();
+
+    expect(github.rest.issues.addLabels).toBeCalledTimes(0);
+    expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
+  });
+
+  it("handles missing issue_number", async () => {
+    const github = createMockGithub();
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [],
+      },
+    });
+
+    // No labels to add/remove, so should no-op rather than throw, even if issue_number is missing
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        issue_number: NaN,
+        run_id: 456,
+        github: github,
+        core: createMockCore(),
+      }),
+    ).resolves.toBeUndefined();
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: "label-foo=true" }],
+      },
+    });
+
+    // Label to add/remove, but issue_number is missing, so throw
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        issue_number: NaN,
+        run_id: 456,
+        github: github,
+        core: createMockCore(),
+      }),
+    ).rejects.toThrow("issue_number");
 
     expect(github.rest.issues.addLabels).toBeCalledTimes(0);
     expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
@@ -200,6 +253,7 @@ describe("updateLabelsImpl", () => {
       owner: "owner",
       repo: "repo",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "owner",
@@ -249,6 +303,7 @@ describe("updateLabelsImpl", () => {
       owner: "owner",
       repo: "repo",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
 
     // Ensure no labels are added or removed if any are invalid
@@ -265,7 +320,9 @@ describe("updateLabelsImpl", () => {
           artifacts: [{ name: "label-foo=false" }],
         },
       });
-      github.rest.issues.removeLabel.mockRejectedValue({ status: status });
+      github.rest.issues.removeLabel.mockRejectedValue(
+        createMockRequestError(status),
+      );
 
       const updateLabelsImplPromise = updateLabelsImpl({
         owner: "owner",
@@ -286,6 +343,7 @@ describe("updateLabelsImpl", () => {
         owner: "owner",
         repo: "repo",
         run_id: 456,
+        per_page: PER_PAGE_MAX,
       });
       expect(github.rest.issues.addLabels).toBeCalledTimes(0);
       expect(github.rest.issues.removeLabel).toBeCalledWith({

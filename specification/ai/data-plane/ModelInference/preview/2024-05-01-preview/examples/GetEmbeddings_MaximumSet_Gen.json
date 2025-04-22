@@ -1,0 +1,50 @@
+{
+  "title": "maximum set embeddings",
+  "operationId": "GetEmbeddings",
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "extra-parameters": "error",
+    "body": {
+      "input": [
+        "This is a very good text"
+      ],
+      "dimensions": 1024,
+      "encoding_format": "float",
+      "input_type": "text",
+      "model": "my-model-name"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "cknxthfa",
+        "data": [
+          {
+            "index": 0,
+            "object": "embedding",
+            "embedding": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "object": "list",
+        "model": "my-model-name",
+        "usage": {
+          "prompt_tokens": 15,
+          "total_tokens": 15
+        }
+      }
+    }
+  }
+}

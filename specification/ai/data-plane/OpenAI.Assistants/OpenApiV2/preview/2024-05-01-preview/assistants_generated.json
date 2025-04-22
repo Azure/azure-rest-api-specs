@@ -111,7 +111,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -519,6 +519,9 @@
       "get": {
         "operationId": "GetFileContent",
         "description": "Returns information about a specific file. Does not retrieve file content.",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -532,8 +535,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           }
         },
@@ -729,7 +731,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -971,7 +973,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -1255,7 +1257,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -1503,7 +1505,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -1908,7 +1910,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -2068,7 +2070,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -3983,7 +3985,7 @@
       "properties": {
         "file_search": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The results of the file search.",
           "additionalProperties": {
             "type": "string"
           },

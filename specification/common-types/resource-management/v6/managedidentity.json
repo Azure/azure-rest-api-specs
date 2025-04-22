@@ -28,7 +28,7 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "The identities assigned to this resource by the user.",
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
           "additionalProperties": {
             "allOf": [
               {
@@ -55,29 +55,7 @@
       ],
       "x-ms-enum": {
         "name": "ManagedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned managed identity."
-          },
-          {
-            "name": "SystemAssigned,UserAssigned",
-            "value": "SystemAssigned,UserAssigned",
-            "description": "System and user assigned managed identity."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "SystemAssignedServiceIdentity": {
@@ -114,19 +92,7 @@
       ],
       "x-ms-enum": {
         "name": "SystemAssignedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed system identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned managed system identity."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "UserAssignedIdentity": {

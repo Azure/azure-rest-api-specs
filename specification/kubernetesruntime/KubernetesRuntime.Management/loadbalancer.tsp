@@ -47,7 +47,7 @@ model LoadBalancerProperties {
   @added(Microsoft.KubernetesRuntime.Versions.v2024_03_01)
   bgpPeers?: string[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Resource provision state")
   provisioningState?: ProvisioningState;
 }

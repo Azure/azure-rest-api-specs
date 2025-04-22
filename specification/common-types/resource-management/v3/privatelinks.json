@@ -8,22 +8,22 @@
   "definitions": {
     "PrivateEndpoint": {
       "type": "object",
-      "description": "The private endpoint resource.",
+      "description": "The Private Endpoint resource.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The resource identifier of the private endpoint",
+          "description": "The ARM identifier for Private Endpoint",
           "readOnly": true
         }
       }
     },
     "PrivateEndpointConnection": {
       "type": "object",
-      "description": "The private endpoint connection resource",
+      "description": "The Private Endpoint Connection resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The private endpoint connection properties",
+          "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -35,23 +35,20 @@
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
-      "description": "List of private endpoint connections associated with the specified resource before version v6.\n\nThis model represents the standard `PrivateEndpointConnectionResourceListResult` envelope for versions v3, v4, and v5. It has been deprecated for v6 and beyond.\n\nNote: This is only intended for use with versions before v6. Do not use this if you are already on CommonTypes.Version.v6 or beyond.\n\nIf you are migrating to v6 or above, use `PrivateEndpointConnectionResourceListResult` directly.",
+      "description": "List of private endpoint connection associated with the specified storage account",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Array of private endpoint connections.",
+          "description": "Array of private endpoint connections",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
+          }
         }
       }
     },
     "PrivateEndpointConnectionProperties": {
       "type": "object",
-      "description": "Properties of the private endpoint connection.",
+      "description": "Properties of the PrivateEndpointConnectProperties.",
       "properties": {
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
@@ -82,30 +79,9 @@
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Connection has been provisioned"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "Connection is being created"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Connection is being deleted"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Connection provisioning has failed"
-          }
-        ]
-      }
+        "modelAsString": true
+      },
+      "readOnly": true
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -117,29 +93,12 @@
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Connection waiting for approval or rejection"
-          },
-          {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "Connection approved"
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected",
-            "description": "Connection Rejected"
-          }
-        ]
+        "modelAsString": true
       }
     },
     "PrivateLinkResource": {
       "type": "object",
-      "description": "A private link resource.",
+      "description": "A private link resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
@@ -155,15 +114,14 @@
     },
     "PrivateLinkResourceListResult": {
       "type": "object",
-      "description": "A list of private link resources for versions before v6.\n\nThis model represents the standard `PrivateLinkResourceListResult` envelope for versions v3, v4, and v5. It has been deprecated for v6 and beyond.\n\nNote: This is only intended for use with versions before v6. Do not use this if you are already on CommonTypes.Version.v6 or beyond.\n\nIf you are migrating to v6 or above, use `PrivateLinkResourceListResult` directly.",
+      "description": "A list of private link resources",
       "properties": {
         "value": {
           "type": "array",
           "description": "Array of private link resources",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -186,7 +144,7 @@
         },
         "requiredZoneNames": {
           "type": "array",
-          "description": "The private link resource private link DNS zone name.",
+          "description": "The private link resource Private link DNS zone name.",
           "items": {
             "type": "string"
           }
@@ -216,7 +174,7 @@
     "PrivateEndpointConnectionName": {
       "name": "privateEndpointConnectionName",
       "in": "path",
-      "description": "The name of the private endpoint connection associated with the Azure resource.",
+      "description": "The name of the private endpoint connection associated with the Azure resource",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
