@@ -7,3 +7,8 @@ using Azure.ClientGenerator.Core;
   "OnlineExperimentationMgmtClient",
   "java"
 );
+
+@@clientName(Microsoft.OnlineExperimentation,
+  "OnlineExperimentationMgmtClient",
+  "python"
+);
