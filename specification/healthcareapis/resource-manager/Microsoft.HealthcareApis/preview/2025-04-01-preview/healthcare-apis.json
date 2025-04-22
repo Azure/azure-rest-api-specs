@@ -4177,6 +4177,21 @@
           "type": "string",
           "description": "The filesystem name of connected storage account.",
           "readOnly": false
+        },
+        "storageIndexingConfiguration": {
+          "description": "The configuration for indexing the connected storage.",
+          "$ref": "#/definitions/StorageIndexingConfiguration"
+        }
+      }
+    },
+    "StorageIndexingConfiguration": {
+      "description": "The configuration for indexing the connected storage.",
+      "type": "object",
+      "properties": {
+        "storageEventQueueName": {
+          "type": "string",
+          "description": "The name of the queue that contains storage cloud events.",
+          "readOnly": false
         }
       }
     },
