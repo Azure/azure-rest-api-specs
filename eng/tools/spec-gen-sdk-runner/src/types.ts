@@ -3,7 +3,7 @@
  */
 export interface SpecGenSdkCmdInput {
   workingFolder: string;
-  isTriggeredByPipeline: string;
+  runMode: string;
   localSpecRepoPath: string;
   localSdkRepoPath: string;
   tspConfigPath?: string;
