@@ -1,11 +1,9 @@
 import "./commons.tsp"; // Import common types
 import "./endpoints.tsp"; // Import EndpointProperties type
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using LiftrBase.Data;
 
 namespace Neon.Postgres.Models;
 
