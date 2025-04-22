@@ -192,14 +192,14 @@ model TranslateTarget {
   grade?: string = "basic";
 
   @doc("""
-    Desired tone of target translation. Default is 'informal'
+    Desired tone of target translation.
     """)
-  tone?: string = "informal";
+  tone?: string;
 
   @doc("""
     Desired gender of target translation.
     """)
-  gender?: string = "neutral";
+  gender?: string;
 
   @doc("""
     Reference dataset ID having sentence pair to generate adaptive customized translation.
