@@ -802,6 +802,19 @@
             "alternateName": {
               "type": "string",
               "description": "Alternate name specified when alias and namespace names are same."
+            },
+            "confidentialComputeMode": {
+              "description": "This determines if namespace is backed by Confidential Compute infrastructure. Native: Backed by confidential compute infrastructure. Supports confidentiality and integrity. Preserving: Not backed by confidential compute infrastructure, but customer could build a solution to control encryption of data that the service processes at-rest using Customer managed keys",
+              "enum": [
+                "Native",
+                "Preserving"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ConfidentialComputeMode",
+                "modelAsString": true
+              },
+              "default": "Preserving"
             }
           },
           "description": "Namespace properties supplied for create namespace operation."
