@@ -134,7 +134,7 @@ model AgentEvaluationResult {
   @doc("Score of the given evaluator. No restriction on range.")
   score: float32;
 
-  @doc("Status of the evaluator result. Options: Running, Succeeded, Failed, NotApplicable.")
+  @doc("Status of the evaluator result. Options: Running, Completed, Failed, NotApplicable.")
   status: string;
 
   @doc("Reasoning for the evaluation result.")
@@ -163,7 +163,7 @@ model AgentEvaluation {
   @doc("Identifier of the agent evaluation run.")
   id: string;
 
-  @doc("Status of the agent evaluation. Options: Running, Succeeded, Failed.")
+  @doc("Status of the agent evaluation. Options: Running, Completed, Failed.")
   status: string;
 
   @doc("The agent evaluation result.")
