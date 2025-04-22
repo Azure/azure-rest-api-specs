@@ -10150,6 +10150,10 @@
         "vectorEmbeddingPolicy": {
           "$ref": "#/definitions/VectorEmbeddingPolicy",
           "description": "The vector embedding policy for the container."
+        },
+        "fullTextPolicy": {
+          "$ref": "#/definitions/FullTextPolicy",
+          "description": "The FullText policy for the container."
         }
       },
       "required": [
@@ -10224,6 +10228,23 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VectorEmbedding"
+          }
+        }
+      }
+    },
+    "FullTextPolicy": {
+      "type": "object",
+      "description": "Cosmos DB FullText Policy",
+      "properties": {
+        "defaultLanguage": {
+          "type": "string",
+          "description": "The default language for a full text paths."
+        },
+        "fullTextPaths": {
+          "description": "List of FullText Paths",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FullTextPath"
           }
         }
       }
@@ -10366,6 +10387,23 @@
         "dataType",
         "distanceFunction",
         "dimensions"
+      ]
+    },
+    "FullTextPath": {
+      "type": "object",
+      "description": "Represents the full text path specification.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the full text field in the document."
+        },
+        "language": {
+          "description": "The language of the full text field in the document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path"
       ]
     },
     "CompositePathList": {
