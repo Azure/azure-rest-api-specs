@@ -21,7 +21,8 @@ import {
   TspConfigGoDpServiceDirMatchPatternSubRule,
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigPythonMgmtPackageDirectorySubRule,
-  TspConfigPythonAzPackageNameEqualStringSubRule,
+  TspConfigPythonMgmtNamespaceSubRule,
+  TspConfigPythonDpPackageNameEqualStringSubRule,
   TspConfigPythonAzGenerateTestTrueSubRule,
   TspConfigPythonAzGenerateSampleTrueSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
@@ -179,32 +180,11 @@ const commonAzureServiceDirTestCases = createParameterTestCases(
 const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "experimentalExtensibleEnums",
-  true,
-  false,
-  [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
-);
-
-const newTsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
   "experimental-extensible-enums",
   true,
   false,
   [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
 );
-
-const mixTsManagementExperimentalExtensibleEnumsTestCases = {
-  description: `Validate @azure-tools/typespec-ts's mix options: experimental-extensible-enums/experimentalExtensibleEnums with different values`,
-  folder: "aaa.Management",
-  tspconfigContent: createEmitterOptionExample(
-    "@azure-tools/typespec-ts",
-    { key: "experimentalExtensibleEnums", value: true },
-    { key: "experimental-extensible-enums", value: false },
-  ),
-  success: false,
-  subRules: [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
-};
 
 const tsManagementPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
@@ -218,32 +198,11 @@ const tsManagementPackageDirTestCases = createEmitterOptionTestCases(
 const tsManagementPackageNameTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "packageDetails.name",
-  "@azure/arm-aaa-bbb",
-  "@azure/aaa-bbb",
-  [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
-);
-
-const newTsManagementPackageNameTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
   "package-details.name",
   "@azure/arm-aaa-bbb",
   "@azure/aaa-bbb",
   [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
 );
-
-const mixTsManagementPackageNameTestCases = {
-  description: `Validate @azure-tools/typespec-ts's mix options: package-details/packageDetails with different values`,
-  folder: "aaa.Management",
-  tspconfigContent: createEmitterOptionExample(
-    "@azure-tools/typespec-ts",
-    { key: "packageDetails.name", value: "@azure/arm-aaa-bbb" },
-    { key: "package-details.name", value: "@azure/aaa-bbb" },
-  ),
-  success: false,
-  subRules: [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
-};
 
 const tsDpPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
@@ -257,23 +216,11 @@ const tsDpPackageDirTestCases = createEmitterOptionTestCases(
 const tsDpPackageNameTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   "",
-  "packageDetails.name",
+  "package-details.name",
   "@azure-rest/aaa-bbb",
   "@azure/aaa-bbb",
   [new TspConfigTsDpPackageNameMatchPatternSubRule()],
 );
-
-const mixTsDpPackageNameTestCases = {
-  description: `Validate @azure-tools/typespec-ts's mix options: package-details/packageDetails with different values`,
-  folder: "",
-  tspconfigContent: createEmitterOptionExample(
-    "",
-    { key: "packageDetails.name", value: "@azure/azure-rest-aaa-bbb" },
-    { key: "package-details.name", value: "@azure/aaa-bbb" },
-  ),
-  success: false,
-  subRules: [new TspConfigTsDpPackageNameMatchPatternSubRule()],
-};
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
@@ -411,13 +358,13 @@ const pythonManagementPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonMgmtPackageDirectorySubRule()],
 );
 
-const pythonManagementPackageNameTestCases = createEmitterOptionTestCases(
+const pythonManagementNamespaceTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   managementTspconfigFolder,
-  "package-name",
-  "{package-dir}",
-  "aaa",
-  [new TspConfigPythonAzPackageNameEqualStringSubRule()],
+  "namespace",
+  "azure.mgmt.aaa",
+  "azure-aaa",
+  [new TspConfigPythonMgmtNamespaceSubRule()],
 );
 
 const pythonManagementGenerateTestTestCases = createEmitterOptionTestCases(
@@ -447,13 +394,13 @@ const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpPackageDirectorySubRule()],
 );
 
-const pythonAzPackageNameTestCases = createEmitterOptionTestCases(
+const pythonDpPackageNameTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   "",
   "package-name",
   "{package-dir}",
   "aaa",
-  [new TspConfigPythonAzPackageNameEqualStringSubRule()],
+  [new TspConfigPythonDpPackageNameEqualStringSubRule()],
 );
 
 const pythonAzGenerateTestTestCases = createEmitterOptionTestCases(
@@ -590,16 +537,11 @@ describe("tspconfig", function () {
     // common
     ...commonAzureServiceDirTestCases,
     // ts
-    ...newTsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementPackageDirTestCases,
-    ...newTsManagementPackageNameTestCases,
     ...tsManagementPackageNameTestCases,
-    mixTsManagementExperimentalExtensibleEnumsTestCases,
-    mixTsManagementPackageNameTestCases,
     ...tsDpPackageDirTestCases,
     ...tsDpPackageNameTestCases,
-    mixTsDpPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
@@ -618,11 +560,11 @@ describe("tspconfig", function () {
     ...javaManagementPackageDirTestCases,
     // python
     ...pythonManagementPackageDirTestCases,
-    ...pythonManagementPackageNameTestCases,
+    ...pythonManagementNamespaceTestCases,
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpPackageDirTestCases,
-    ...pythonAzPackageNameTestCases,
+    ...pythonDpPackageNameTestCases,
     ...pythonAzGenerateTestTestCases,
     ...pythonAzGenerateSampleTestCases,
     // csharp

@@ -26,8 +26,8 @@ options:
   "@azure-tools/typespec-python":
     package-dir: "azure-developer-loadtesting"
     namespace: "azure.developer.loadtesting"
-    generate-test: true
-    generate-sample: true
+    generate-test: false
+    generate-sample: false
     package-mode: azure-dataplane
     flavor: azure
   "@azure-tools/typespec-ts":
@@ -45,6 +45,7 @@ options:
     package-dir: "Azure.Developer.LoadTesting"
     clear-output-folder: true
     namespace: "{package-dir}"
+    generate-sample: false
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-java":
@@ -52,6 +53,7 @@ options:
     namespace: com.azure.developer.loadtesting
     enable-sync-stack: false
     partial-update: true
-    generate-tests: false
+    generate-test: false
+    generate-sample: false
     service-name: Load Testing
     flavor: azure
