@@ -129,13 +129,15 @@ export const CommitStatusState = {
 export async function writeToActionsSummary(content, core) {
   const summaryFilePath = process.env.GITHUB_STEP_SUMMARY;
   if (!summaryFilePath) {
-    core.warning('GITHUB_STEP_SUMMARY environment variable not set, cannot write to summary');
+    core.warning(
+      "GITHUB_STEP_SUMMARY environment variable not set, cannot write to summary",
+    );
     return;
   }
 
   try {
     fs.appendFileSync(summaryFilePath, content);
-    core.info('Successfully wrote to the GitHub Actions summary');
+    core.info("Successfully wrote to the GitHub Actions summary");
   } catch (error) {
     core.warning(`Failed to write to GitHub Actions summary: ${error}`);
   }

@@ -55,44 +55,48 @@ export async function setSpecGenSdkStatusImpl({
   head_sha,
   target_url,
   github,
-  core
+  core,
 }) {
   const statusName = "[TEST IGNORE] spec-gen-sdk status";
-  const checks = await github.paginate(
-    github.rest.checks.listForRef,
-    {
-      owner,
-      repo,
-      ref: head_sha,
-      per_page: PER_PAGE_MAX
-    }
-  );
+  const checks = await github.paginate(github.rest.checks.listForRef, {
+    owner,
+    repo,
+    ref: head_sha,
+    per_page: PER_PAGE_MAX,
+  });
   // Filter sdk generation check runs
-  const specGenSdkChecks = checks.filter(check =>
-    check.app?.name === 'Azure Pipelines' &&
-    check.name.includes('SDK Generation')
-  );  
+  const specGenSdkChecks = checks.filter(
+    (check) =>
+      check.app?.name === "Azure Pipelines" &&
+      check.name.includes("SDK Generation"),
+  );
 
-  core.info(`Found ${specGenSdkChecks.length} check runs from Azure Pipelines:`)
+  core.info(
+    `Found ${specGenSdkChecks.length} check runs from Azure Pipelines:`,
+  );
   for (const check of specGenSdkChecks) {
     core.info(`- ${check.name}: ${check.status} (${check.conclusion})`);
   }
 
   // Check if all SDK generation checks have completed
-  const allCompleted = specGenSdkChecks.length > 0 && specGenSdkChecks.every(check => 
-    check.status === CheckStatus.COMPLETED
-  );
-  const allIncompletedChecks = specGenSdkChecks.filter(check =>
-    check.status !== CheckStatus.COMPLETED
+  const allCompleted =
+    specGenSdkChecks.length > 0 &&
+    specGenSdkChecks.every((check) => check.status === CheckStatus.COMPLETED);
+  const allIncompletedChecks = specGenSdkChecks.filter(
+    (check) => check.status !== CheckStatus.COMPLETED,
   );
   for (const check of allIncompletedChecks) {
-    core.info(`incompleted check runs: ${check.name}: ${check.status} (${check.conclusion})`);
+    core.info(
+      `incompleted check runs: ${check.name}: ${check.status} (${check.conclusion})`,
+    );
   }
-  
+
   if (!allCompleted) {
     // At least one check is still running or none found yet, set status to pending
-    core.info("Some SDK generation checks are not completed. Setting status to pending.");
-    
+    core.info(
+      "Some SDK generation checks are not completed. Setting status to pending.",
+    );
+
     await github.rest.repos.createCommitStatus({
       owner,
       repo,
@@ -100,17 +104,19 @@ export async function setSpecGenSdkStatusImpl({
       state: CommitStatusState.PENDING,
       context: statusName,
       description: "Waiting for all spec-gen-sdk checks to complete",
-      target_url
+      target_url,
     });
   } else {
     // All checks are completed, check their conclusions
     const result = await processResult({
       checkRuns: specGenSdkChecks,
-      core
+      core,
     });
-      
-    core.info(`All SDK generation checks completed. Setting status to ${result.state}.`);
-    
+
+    core.info(
+      `All SDK generation checks completed. Setting status to ${result.state}.`,
+    );
+
     await github.rest.repos.createCommitStatus({
       owner,
       repo,
@@ -118,7 +124,7 @@ export async function setSpecGenSdkStatusImpl({
       state: result.state,
       context: statusName,
       description: result.description,
-      target_url
+      target_url,
     });
   }
 }
@@ -129,22 +135,21 @@ export async function setSpecGenSdkStatusImpl({
  * @param {typeof import("@actions/core")} params.core
  * @returns {Promise<{state: import("./github.js").CommitStatusState, description: string}>}
  */
-async function processResult({
-  checkRuns,
-  core
-}) {
+async function processResult({ checkRuns, core }) {
   /** @type {import("./github.js").CommitStatusState} */
   let state = CommitStatusState.SUCCESS;
   let specGenSdkFailedRequiredLanguages = "";
   let description = "spec-gen-sdk checks succeeded";
 
   // Create a summary of the results
-  let summaryContent = '## spec-gen-sdk Checks Result\n\n';
-  summaryContent += '| Language | Status | Required Check |\n';
-  summaryContent += '|----------|--------|---------------|\n';
+  let summaryContent = "## spec-gen-sdk Checks Result\n\n";
+  summaryContent += "| Language | Status | Required Check |\n";
+  summaryContent += "|----------|--------|---------------|\n";
 
   for (const checkRun of checkRuns) {
-    core.info(`Processing check run: ${checkRun.name} (${checkRun.conclusion})`);
+    core.info(
+      `Processing check run: ${checkRun.name} (${checkRun.conclusion})`,
+    );
     // Extract the ADO build ID and project URL from the check run details URL
     const buildUrlRegex = /^(.*?)(?=\/_build\/).*?[?&]buildId=(\d+)/;
     const match = checkRun.details_url.match(buildUrlRegex);
@@ -167,7 +172,7 @@ async function processResult({
     // Parse the JSON data
     if (!result.artifactData) {
       throw new Error(
-        `Artifact '${artifactName}' not found in the build with details_url:${checkRun.details_url}`
+        `Artifact '${artifactName}' not found in the build with details_url:${checkRun.details_url}`,
       );
     }
     const artifactJsonObj = JSON.parse(result.artifactData);
@@ -176,35 +181,41 @@ async function processResult({
     const isSpecGenSdkCheckRequired = artifactJsonObj.isSpecGenSdkCheckRequired;
     if (isSpecGenSdkCheckRequired && executionResult !== "succeeded") {
       state = CommitStatusState.FAILURE;
-      const shortLanguageName = language.split('-').pop();
+      const shortLanguageName = language.split("-").pop();
       specGenSdkFailedRequiredLanguages += shortLanguageName + ", ";
     }
 
     // Add status emoji
-    const statusEmoji = 
-      executionResult === 'succeeded' ? '✅' : 
-      executionResult === 'failed' ? '❌' : 
-      executionResult === 'pending' ? '⏳' : '❓';
-    
+    const statusEmoji =
+      executionResult === "succeeded"
+        ? "✅"
+        : executionResult === "failed"
+          ? "❌"
+          : executionResult === "pending"
+            ? "⏳"
+            : "❓";
+
     summaryContent += `| ${language} | ${statusEmoji} ${executionResult} | ${isSpecGenSdkCheckRequired} |\n`;
   }
 
   if (state === CommitStatusState.FAILURE) {
-    specGenSdkFailedRequiredLanguages = specGenSdkFailedRequiredLanguages.replace(/,\s*$/, '');
+    specGenSdkFailedRequiredLanguages =
+      specGenSdkFailedRequiredLanguages.replace(/,\s*$/, "");
     description = `spec-gen-sdk failed for ${specGenSdkFailedRequiredLanguages} languages`;
   }
 
   // Add overall result
-  summaryContent += '\n### Overall Result\n\n';
-  summaryContent += state === CommitStatusState.SUCCESS 
-    ? '✅ All required spec-gen-sdk checks passed successfully!' 
-    : `❌ spec-gen-sdk checks failed for: ${specGenSdkFailedRequiredLanguages}`;
-  
+  summaryContent += "\n### Overall Result\n\n";
+  summaryContent +=
+    state === CommitStatusState.SUCCESS
+      ? "✅ All required spec-gen-sdk checks passed successfully!"
+      : `❌ spec-gen-sdk checks failed for: ${specGenSdkFailedRequiredLanguages}`;
+
   // Write to the summary page
   await writeToActionsSummary(summaryContent, core);
 
   return {
     state,
-    description
+    description,
   };
 }

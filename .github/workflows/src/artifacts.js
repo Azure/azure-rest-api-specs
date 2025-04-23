@@ -46,9 +46,7 @@ export async function getAzurePipelineArtifact({
   );
 
   if (response.status === 404) {
-    core.info(
-      `Artifact '${artifactName}' not found (404)`,
-    );
+    core.info(`Artifact '${artifactName}' not found (404)`);
   } else if (response.ok) {
     // Step 1: Get the download URL for the artifact
     /** @type {Artifacts} */
