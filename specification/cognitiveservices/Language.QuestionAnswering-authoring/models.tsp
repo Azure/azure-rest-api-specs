@@ -636,7 +636,7 @@ model QnaRecord {
    * Unique ID for the QnA.
    */
   @key
-  @visibility(Lifecycle.Read, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   id: int32;
 
   /**
