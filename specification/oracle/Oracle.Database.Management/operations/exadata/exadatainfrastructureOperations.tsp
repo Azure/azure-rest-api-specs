@@ -1,5 +1,5 @@
 import "../commons.tsp";
-import "../../../models/exadata/exadatainfra.tsp";
+import "../../models/exadata/exadatainfra.tsp";
 
 using Azure.ResourceManager;
 using Autorest;

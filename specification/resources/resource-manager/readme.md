@@ -26,9 +26,6 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-```
-
-``` yaml $(package-2022-12)
 tag: package-2022-12
 ```
 
@@ -53,7 +50,7 @@ tag: package-databoundaries-2024-08
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2025-03
+tag: package-resources-2025-04
 ```
 
 ``` yaml $(package-subscriptions)
@@ -271,6 +268,15 @@ These settings apply only when `--tag=package-resources-2025-03` is specified on
 ``` yaml $(tag) == 'package-resources-2025-03'
 input-file:
   - Microsoft.Resources/stable/2025-03-01/resources.json
+```
+
+### Tag: package-resources-2025-04
+
+These settings apply only when `--tag=package-resources-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2025-04'
+input-file:
+  - Microsoft.Resources/stable/2025-04-01/resources.json
 ```
 
 ### Tag: package-2022-12
