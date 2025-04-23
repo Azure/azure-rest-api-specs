@@ -33,16 +33,12 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    azure-sdk-for-js: true
-    is-modular-library: true
-    generate-metadata: true
+    flavor: "azure"
     experimental-extensible-enums: true
-    examples-directory: "{project-root}/examples"
     typespec-title-map:
       HybridConnectivityManagementAPIClient: HybridConnectivityManagementAPI
     generate-sample: true
     package-dir: "arm-hybridconnectivity"
-    flavor: "azure"
     package-details:
       name: "@azure/arm-hybridconnectivity"
   "@azure-tools/typespec-go":
@@ -56,3 +52,4 @@ options:
     head-as-boolean: true
     inject-spans: true
     remove-unreferenced-types: true
+    factory-gather-all-params: false

@@ -2,8 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/contosowidgetmanager"
   "dependencies":
-    "additionalDirectories":
-      - "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/"
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -46,3 +44,6 @@ options:
     inject-spans: true
     single-client: true
     slice-elements-byval: true
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/"

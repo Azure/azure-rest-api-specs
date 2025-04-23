@@ -11,19 +11,15 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.PineconeVectorDb"
+    package-dir: "Azure.ResourceManager.PineconeVectorDB"
     flavor: azure
     clear-output-folder: true
-    use-write-core: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
-    azure-sdk-for-js: true
-    is-modular-library: true
-    generate-metadata: true
+    flavor: "azure"
     experimental-extensible-enums: true
     generate-sample: true
     package-dir: "arm-pineconevectordb"
-    flavor: "azure"
     package-details:
       name: "@azure/arm-pineconevectordb"
   "@azure-tools/typespec-python":
@@ -34,6 +30,7 @@ options:
     generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-pineconevectordb"
+    namespace: "com.azure.resourcemanager.pineconevectordb"
     flavor: "azure"
     service-name: "Pinecone Vector Db"
   "@azure-tools/typespec-go":

@@ -2796,35 +2796,6 @@
         ]
       }
     },
-    "DataGenerationConnectionInfo": {
-      "type": "object",
-      "description": "Represents the connection info for the Azure resource to use during data generation as part of training a custom model.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Connection type for data generation settings. Currently only supports Azure Open AI.",
-          "enum": [
-            "azureOpenAI"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Resource ID for the data generation resource. Looks something like \"/subscriptions/<SUBSCRIPTION-ID-GUID>/resourceGroups/<RG-NAME>/providers/Microsoft.CognitiveServices/accounts/<AOAI-ACCOUNT-NAME>\"."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "Deployment name of model to be used for synthetic data generation."
-        }
-      },
-      "required": [
-        "kind",
-        "resourceId",
-        "deploymentName"
-      ]
-    },
     "DataGenerationSetting": {
       "type": "object",
       "description": "Represents the settings for using data generation as part of training a custom model.",
@@ -2834,7 +2805,7 @@
           "description": "If set to true, augment customer provided training data with synthetic data to improve model quality."
         },
         "dataGenerationConnectionInfo": {
-          "$ref": "#/definitions/DataGenerationConnectionInfo",
+          "$ref": "#/definitions/TextAnalysisAuthoringDataGenerationConnectionInfo",
           "description": "Represents the connection info for the Azure resource to use during data generation as part of training a custom model."
         }
       },
@@ -3767,6 +3738,35 @@
         }
       ],
       "x-ms-discriminator-value": "CustomTextSentiment"
+    },
+    "TextAnalysisAuthoringDataGenerationConnectionInfo": {
+      "type": "object",
+      "description": "Represents the connection info for the Azure resource to use during data generation as part of training a custom model.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Connection type for data generation settings. Currently only supports Azure Open AI.",
+          "enum": [
+            "AzureOpenAI"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID for the data generation resource. Looks something like \"/subscriptions/<SUBSCRIPTION-ID-GUID>/resourceGroups/<RG-NAME>/providers/Microsoft.CognitiveServices/accounts/<AOAI-ACCOUNT-NAME>\"."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "Deployment name of model to be used for synthetic data generation."
+        }
+      },
+      "required": [
+        "kind",
+        "resourceId",
+        "deploymentName"
+      ]
     },
     "TextAnalysisAuthoringDeleteDeploymentOptions": {
       "type": "object",

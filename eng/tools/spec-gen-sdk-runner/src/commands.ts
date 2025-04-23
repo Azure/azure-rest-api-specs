@@ -67,7 +67,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   }
 
   logMessage("ending group logging", LogLevel.EndGroup);
-  logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
+  logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPathText);
 
   return statusCode;
 }
@@ -86,21 +86,24 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let shouldLabelBreakingChange = false;
   let breakingChangeLabel = "";
   let executionReport;
+  let changedSpecPathText = "";
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
       continue;
     }
     pushedSpecConfigCount = 0;
+    changedSpecPathText = "";
     if (changedSpec.typespecProject) {
       specGenSdkCommand.push("--tsp-config-relative-path", changedSpec.typespecProject);
+      changedSpecPathText = changedSpec.typespecProject;
       pushedSpecConfigCount++;
     }
     if (changedSpec.readmeMd) {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
+      changedSpecPathText = changedSpecPathText + " " + changedSpec.readmeMd;
       pushedSpecConfigCount++;
     }
-    const changedSpecPathText = `${changedSpec.typespecProject} ${changedSpec.readmeMd}`;
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
 
@@ -128,27 +131,28 @@ export async function generateSdkForSpecPr(): Promise<number> {
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
+    logIssuesToPipeline(executionReport?.vsoLogPath, changedSpecPathText);
   }
   // Process the breaking change label artifacts
-  statusCode = processBreakingChangeLabelArtifacts(
-    commandInput,
-    shouldLabelBreakingChange,
-    breakingChangeLabel,
-  );
+  statusCode =
+    processBreakingChangeLabelArtifacts(
+      commandInput,
+      shouldLabelBreakingChange,
+      breakingChangeLabel,
+    ) || statusCode;
   return statusCode;
 }
 
 /**
  * Generate SDKs for batch specs.
  */
-export async function generateSdkForBatchSpecs(runMode: string): Promise<number> {
+export async function generateSdkForBatchSpecs(batchType: string): Promise<number> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
-  // Get the spec paths based on the run mode
-  const specConfigPaths = getSpecPaths(runMode, commandInput.localSpecRepoPath);
+  // Get the spec paths based on the batch run type
+  const specConfigPaths = getSpecPaths(batchType, commandInput.localSpecRepoPath);
 
   // Prepare variables
   let statusCode = 0;
@@ -205,7 +209,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(executionReport.vsoLogPath, specConfigPath);
+    logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPath);
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
@@ -286,15 +290,29 @@ function parseArguments(): SpecGenSdkCmdInput {
   const workingFolder: string = path.resolve(
     getArgumentValue(args, "--wf", path.join(localSpecRepoPath, "..")),
   );
+
+  // Set runMode to "release" by default
+  let runMode = "release";
+  const batchType: string = getArgumentValue(args, "--batch-type", "");
+  const pullRequestNumber: string = getArgumentValue(args, "--pr-number", "");
+  if (batchType) {
+    runMode = "batch";
+  } else if (pullRequestNumber) {
+    runMode = "spec-pull-request";
+  }
+
   return {
     workingFolder,
     localSpecRepoPath,
     localSdkRepoPath,
     sdkRepoName,
-    isTriggeredByPipeline: getArgumentValue(args, "--tr", "false"),
+    sdkLanguage: sdkRepoName.replace("-pr", ""),
+    runMode,
     tspConfigPath: getArgumentValue(args, "--tsp-config-relative-path", ""),
     readmePath: getArgumentValue(args, "--readme-relative-path", ""),
     prNumber: getArgumentValue(args, "--pr-number", ""),
+    apiVersion: getArgumentValue(args, "--api-version", ""),
+    sdkReleaseType: getArgumentValue(args, "--sdk-release-type", ""),
     specCommitSha: getArgumentValue(args, "--commit", "HEAD"),
     specRepoHttpsUrl: getArgumentValue(args, "--spec-repo-url", ""),
     headRepoHttpsUrl: getArgumentValue(args, "--head-repo-url", ""),
@@ -321,11 +339,11 @@ function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
     commandInput.sdkRepoName,
     "-c",
     commandInput.specCommitSha,
-    "-t",
-    commandInput.isTriggeredByPipeline,
+    "--rm",
+    commandInput.runMode,
   );
   if (commandInput.specRepoHttpsUrl) {
-    specGenSdkCommand.push("--spec-repo-url", commandInput.specRepoHttpsUrl);
+    specGenSdkCommand.push("--spec-repo-https-url", commandInput.specRepoHttpsUrl);
   }
   if (commandInput.prNumber) {
     specGenSdkCommand.push("--pr-number", commandInput.prNumber);
@@ -342,18 +360,24 @@ function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
   if (commandInput.headBranch) {
     specGenSdkCommand.push("--head-branch", commandInput.headBranch);
   }
+  if (commandInput.apiVersion) {
+    specGenSdkCommand.push("--api-version", commandInput.apiVersion);
+  }
+  if (commandInput.sdkReleaseType) {
+    specGenSdkCommand.push("--sdk-release-type", commandInput.sdkReleaseType);
+  }
   return specGenSdkCommand;
 }
 
 /**
- * Get the spec paths based on the run mode.
- * @param runMode The run mode.
+ * Get the spec paths based on the batch run type.
+ * @param batchType The batch run type.
  * @param specRepoPath The specification repository path.
  * @returns The spec paths.
  */
-function getSpecPaths(runMode: string, specRepoPath: string): string[] {
+function getSpecPaths(batchType: string, specRepoPath: string): string[] {
   const specConfigPaths: string[] = [];
-  switch (runMode) {
+  switch (batchType) {
     case "all-specs": {
       specConfigPaths.push(
         ...getAllTypeSpecPaths(specRepoPath),
@@ -460,7 +484,7 @@ function processBreakingChangeLabelArtifacts(
         breakingChangeLabelArtifactFileName,
       ),
       JSON.stringify({
-        language: commandInput.sdkRepoName,
+        language: commandInput.sdkLanguage,
         labelAction: shouldLabelBreakingChange,
       }),
     );
