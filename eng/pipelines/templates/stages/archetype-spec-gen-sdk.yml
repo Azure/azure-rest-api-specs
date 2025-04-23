@@ -212,7 +212,8 @@ extends:
             parameters:
               ArtifactName: $(SpecGenSdkArtifactName)
               ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)"
-              CustomCondition: and(succeeded(), ne(variables['SpecGenSdkArtifactName'], ''))
+              CustomCondition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
+              SkipRenamingArtifact: true
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:

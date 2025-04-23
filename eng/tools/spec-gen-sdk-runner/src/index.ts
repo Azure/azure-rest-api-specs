@@ -24,5 +24,5 @@ export async function main() {
   if (statusCode !== 0) {
     console.log("##vso[task.complete result=Failed;]");
   }
-  exit(statusCode);
+  exit(0);
 }

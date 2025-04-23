@@ -1,5 +1,5 @@
 // @ts-check
-
+import fs from "node:fs";
 export const PER_PAGE_MAX = 100;
 
 /**
@@ -120,3 +120,23 @@ export const CommitStatusState = {
    */
   SUCCESS: "success",
 };
+
+/**
+ * Writes content to the GitHub Actions summary
+ * @param {string} content - Markdown content to add to the summary
+ * @param {typeof import("@actions/core")} core - GitHub Actions core library
+ */
+export async function writeToActionsSummary(content, core) {
+  const summaryFilePath = process.env.GITHUB_STEP_SUMMARY;
+  if (!summaryFilePath) {
+    core.warning('GITHUB_STEP_SUMMARY environment variable not set, cannot write to summary');
+    return;
+  }
+
+  try {
+    fs.appendFileSync(summaryFilePath, content);
+    core.info('Successfully wrote to the GitHub Actions summary');
+  } catch (error) {
+    core.warning(`Failed to write to GitHub Actions summary: ${error}`);
+  }
+}
