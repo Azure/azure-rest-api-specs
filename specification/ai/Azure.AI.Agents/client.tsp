@@ -45,6 +45,9 @@ using Azure.AI.Agents;
 @@clientName(listThreads, "InternalGetThreads", "csharp");
 @@access(uploadFile, Access.internal, "python, java, javascript");
 
+@@clientName(RunStepOpenAPIToolCall, "RunStepOpenApiToolCall", "java");
+@@clientName(RunStepOpenAPIToolCall.openAPI, "openApi", "java");
+
 // In addition to top-level response value containers, trivial intermediate structure -- levels of single-use model
 // hierarchy that don't convey explanatory or functional benefit to consumers of the surface -- should also be
 // internalized and merged into the more useful top-level type.
