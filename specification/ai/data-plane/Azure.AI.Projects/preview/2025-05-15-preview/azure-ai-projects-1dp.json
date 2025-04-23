@@ -3382,7 +3382,7 @@
         },
         "outputs": {
           "type": "object",
-          "description": "Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}', 'logId': 'azureai://accounts/{AccountName}/projects/{myproject}/datasets/{dataset-name}/versions/{dataset-version}' }",
+          "description": "Read-only result outputs. Evaluation Results will have logs and results under the eval_results folder. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}', 'evaluationMetrics': '{serialized-json-metrics}' }",
           "additionalProperties": {
             "type": "string"
           },
@@ -3403,6 +3403,14 @@
         "ResultType": {
           "$ref": "#/definitions/ResultType",
           "description": "Type of Evaluation result"
+        },
+        "Metrics": {
+          "type": "object",
+          "description": "Aggregated metrics",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
         },
         "BlobUri": {
           "type": "string",
@@ -3456,6 +3464,14 @@
         "ResultType": {
           "$ref": "#/definitions/ResultType",
           "description": "Type of Evaluation result"
+        },
+        "Metrics": {
+          "type": "object",
+          "description": "Aggregated metrics",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
         },
         "BlobUri": {
           "type": "string",
