@@ -21,7 +21,7 @@ import { fetchWithRetry } from "./retries.js";
  * @param {import('./retries.js').RetryOptions} [params.retryOptions]
  * @returns {Promise<{artifactData: string}>}
  */
-export async function GetAzurePipelineArtifact({
+export async function getAzurePipelineArtifact({
   ado_build_id,
   ado_project_url,
   artifactName,

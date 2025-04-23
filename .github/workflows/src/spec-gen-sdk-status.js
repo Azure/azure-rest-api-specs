@@ -1,6 +1,6 @@
 // @ts-check
 import { extractInputs } from "./context.js";
-import { GetAzurePipelineArtifact } from "./artifacts.js";
+import { getAzurePipelineArtifact } from "./artifacts.js";
 import {
   CheckConclusion,
   CheckStatus,
@@ -162,7 +162,7 @@ async function processResult({
       // hardcode for testing now
       artifactName = "spec-gen-sdk-artifact-FailedAttempt1";
     }
-    const result = await GetAzurePipelineArtifact({
+    const result = await getAzurePipelineArtifact({
       ado_build_id,
       ado_project_url,
       artifactName,
