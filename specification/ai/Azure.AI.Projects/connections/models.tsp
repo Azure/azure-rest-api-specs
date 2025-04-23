@@ -70,9 +70,13 @@ model EntraIDCredentials extends BaseCredentials {
 
 @doc("Custom credential defintion")
 model CustomCredential extends BaseCredentials {
-  @doc("The credential type ")
+  @doc("The credential type")
   @visibility(Lifecycle.Read)
   type: CredentialType.custom;
+
+  @doc("The credential type")
+  @visibility(Lifecycle.Read)
+  keys: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
