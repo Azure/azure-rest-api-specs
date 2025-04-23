@@ -31,11 +31,11 @@ openapi-type: arm
 tag: package-2025-03
 ```
 
-### Tag: package-preview-2025-03
+### Tag: package-2025-03
 
 These settings apply only when `--tag=package-2025-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-03'
+```yaml $(tag) == 'package-2025-03'
 input-file:
   - Microsoft.Network/stable/2025-03-01/network.json
   - Microsoft.Network/stable/2025-03-01/webapplicationfirewall.json
