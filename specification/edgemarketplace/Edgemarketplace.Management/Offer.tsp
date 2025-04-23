@@ -13,6 +13,7 @@ namespace Microsoft.EdgeMarketplace;
 /**
  * An offer.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" ""
 @extensionResource
 model Offer is Azure.ResourceManager.ExtensionResource<OfferProperties> {
   ...ResourceNameParameter<
@@ -30,20 +31,7 @@ interface Offers {
    */
   get is ArmResourceRead<
     Offer,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * Id of the offer
-       */
-      @path
-      offerId: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -53,12 +41,6 @@ interface Offers {
     Offer,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource.
-       */
-      @path
-      resourceUri: string;
-
       /**
        * The number of result items to return.
        */
@@ -98,20 +80,7 @@ interface Offers {
     Offer,
     AccessTokenRequest,
     ArmResponse<DiskAccessToken>,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * Id of the offer
-       */
-      @path
-      offerId: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -121,20 +90,7 @@ interface Offers {
     Offer,
     AccessTokenReadRequest,
     ArmResponse<DiskAccessToken>,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * Id of the offer
-       */
-      @path
-      offerId: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 }
 

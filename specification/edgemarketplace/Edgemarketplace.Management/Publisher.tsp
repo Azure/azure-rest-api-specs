@@ -13,6 +13,7 @@ namespace Microsoft.EdgeMarketplace;
 /**
  * A publisher who provides offers.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" ""
 @extensionResource
 model Publisher
   is Azure.ResourceManager.ExtensionResource<PublisherProperties> {
@@ -31,21 +32,7 @@ interface Publishers {
    */
   get is ArmResourceRead<
     Publisher,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * Name of the publisher
-       */
-      @pattern("^.*$")
-      @path
-      publisherName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -55,12 +42,6 @@ interface Publishers {
     Publisher,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource.
-       */
-      @path
-      resourceUri: string;
-
       /**
        * The number of result items to return.
        */

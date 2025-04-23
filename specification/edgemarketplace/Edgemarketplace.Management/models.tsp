@@ -72,6 +72,7 @@ model PublisherProperties {
   /**
    * The resource provisioning state
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
   provisioningState: ResourceProvisioningState;
 }
 
@@ -126,6 +127,7 @@ model OfferProperties {
   /**
    * The resource provisioning state
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
   provisioningState?: ResourceProvisioningState;
 
   /**
