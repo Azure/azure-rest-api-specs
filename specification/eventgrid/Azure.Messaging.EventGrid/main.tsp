@@ -153,7 +153,7 @@ namespace Microsoft.EventGrid {
     failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully acknowledged cloud events.")
-    @visibility(Lifecycle.Read)
+    @visibility(Lifecycle.Read) 
     succeededLockTokens: string[];
   }
 
