@@ -106,7 +106,7 @@ interface Evaluations {
   ): {
     @statusCode statusCode: 200;
     @doc("The operation results.")
-    @body operationResults: Record<unknown>
+    @body operationResults: Record<unknown>[]
   };
 
   // Upload API set
