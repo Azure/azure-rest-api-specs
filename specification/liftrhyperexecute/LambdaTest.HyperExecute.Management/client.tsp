@@ -26,6 +26,10 @@ using LambdaTest.HyperExecute;
   "LambdaTestHyperExecuteMarketplaceDetails",
   "csharp"
 );
+@@clientName(LiftrBase.MarketplaceSubscriptionStatus,
+  "LambdaTestHyperExecuteMarketplaceSubscriptionStatus",
+  "csharp"
+);
 @@clientName(LiftrBase.OfferDetails,
   "LambdaTestHyperExecuteOfferDetails",
   "csharp"
