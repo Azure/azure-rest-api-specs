@@ -25,8 +25,12 @@ model Publisher
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" ""
 @armResourceOperations
 interface Publishers {
+  /**
+   * List Publisher resources in subscription
+   */
   listBySubscription is ArmListBySubscription<
     Publisher,
     {

@@ -24,8 +24,12 @@ model Offer is Azure.ResourceManager.ExtensionResource<OfferProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" ""
 @armResourceOperations
 interface Offers {
+  /**
+   * List Offer resources by subscription
+   */
   listBySubscription is ArmListBySubscription<
     Offer,
     {
