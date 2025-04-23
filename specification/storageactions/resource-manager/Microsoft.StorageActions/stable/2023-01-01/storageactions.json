@@ -53,7 +53,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all of the available Storage Actions Rest API operations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -98,9 +98,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
-            "description": "The request body",
+            "description": "The parameters to preview action condition.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageTaskPreviewAction"
@@ -284,7 +284,7 @@
             "pattern": "^[a-z0-9]{3,18}$"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The parameters to create a Storage Task.",
             "required": true,
@@ -375,7 +375,7 @@
             "pattern": "^[a-z0-9]{3,18}$"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "The parameters to provide to update the storage task resource.",
             "required": true,
@@ -614,6 +614,23 @@
     }
   },
   "definitions": {
+    "ElseCondition": {
+      "type": "object",
+      "description": "The else block of storage task operation",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "List of operations to execute in the else block",
+          "items": {
+            "$ref": "#/definitions/StorageTaskOperationInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "operations"
+      ]
+    },
     "IfCondition": {
       "type": "object",
       "description": "The if block of storage task operation",
@@ -891,17 +908,9 @@
           "$ref": "#/definitions/IfCondition",
           "description": "The if block of storage task operation"
         },
-        "tags": {
-          "type": "object",
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/StorageTaskUpdateProperties",
-          "description": "Properties of the storage task.",
-          "x-ms-client-flatten": true
+        "else": {
+          "$ref": "#/definitions/ElseCondition",
+          "description": "The else block of storage task operation"
         }
       },
       "required": [
@@ -929,12 +938,14 @@
           "description": "The StorageTaskAssignment items on this page",
           "items": {
             "$ref": "#/definitions/StorageTaskAssignment"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -950,12 +961,14 @@
           "description": "The StorageTask items on this page",
           "items": {
             "$ref": "#/definitions/StorageTask"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1343,12 +1356,14 @@
           "description": "The StorageTaskReportInstance items on this page",
           "items": {
             "$ref": "#/definitions/StorageTaskReportInstance"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1371,7 +1386,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/StorageTaskProperties",
+          "$ref": "#/definitions/StorageTaskUpdateProperties",
           "description": "Properties of the storage task.",
           "x-ms-client-flatten": true
         }

@@ -26,6 +26,21 @@ union MatchedBlockName {
 }
 
 /**
+ * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+ */
+union ManagedServiceIdentityType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  SystemAssigned: "SystemAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  UserAssigned: "UserAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
+}
+
+/**
  * The operation to be performed on the object.
  */
 union StorageTaskOperationName {
@@ -85,21 +100,6 @@ union ProvisioningState {
   Canceled: "Canceled",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
-}
-
-/**
- * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
- */
-union ManagedServiceIdentityType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  SystemAssigned: "SystemAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  UserAssigned: "UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
 }
 
 /**
@@ -248,6 +248,38 @@ model StorageTaskPreviewActionIfCondition {
 }
 
 /**
+ * Managed service identity (system assigned and/or user assigned identities)
+ */
+model ManagedServiceIdentity {
+  /**
+   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @visibility(Lifecycle.Read)
+  @format("uuid")
+  principalId?: string;
+
+  /**
+   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @visibility(Lifecycle.Read)
+  @format("uuid")
+  tenantId?: string;
+
+  /**
+   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+   */
+  type: ManagedServiceIdentityType;
+
+  /**
+   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
  * Properties of the storage task.
  */
 model StorageTaskProperties {
@@ -298,17 +330,9 @@ model StorageTaskAction {
   `if`: IfCondition;
 
   /**
-   * Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.
+   * The else block of storage task operation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  /**
-   * Properties of the storage task.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: StorageTaskUpdateProperties;
+  `else`?: ElseCondition;
 }
 
 /**
@@ -324,13 +348,13 @@ model IfCondition {
    * List of operations to execute when the condition predicate satisfies.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  operations: StorageTaskOperationInfo[];
+  operations: StorageTaskOperation[];
 }
 
 /**
  * Represents an operation to be performed on the object
  */
-model StorageTaskOperationInfo {
+model StorageTaskOperation {
   /**
    * The operation to be performed on the object.
    */
@@ -354,76 +378,14 @@ model StorageTaskOperationInfo {
 }
 
 /**
- * Properties of the storage task.
+ * The else block of storage task operation
  */
-model StorageTaskUpdateProperties {
+model ElseCondition {
   /**
-   * Storage task version.
+   * List of operations to execute in the else block
    */
-  @visibility(Lifecycle.Read)
-  @maxValue(1)
-  @minValue(1)
-  taskVersion?: int64;
-
-  /**
-   * Storage Task is enabled when set to true and disabled when set to false
-   */
-  enabled?: boolean;
-
-  /**
-   * Text that describes the purpose of the storage task
-   */
-  description?: string;
-
-  /**
-   * The storage task action that is executed
-   */
-  action?: StorageTaskAction;
-
-  /**
-   * Represents the provisioning state of the storage task.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * The creation date and time of the storage task in UTC.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  creationTimeInUtc?: utcDateTime;
-}
-
-/**
- * Managed service identity (system assigned and/or user assigned identities)
- */
-model ManagedServiceIdentity {
-  /**
-   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  principalId?: string;
-
-  /**
-   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  tenantId?: string;
-
-  /**
-   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
-   */
-  type: ManagedServiceIdentityType;
-
-  /**
-   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  operations: StorageTaskOperation[];
 }
 
 /**
@@ -475,7 +437,48 @@ model StorageTaskUpdateParameters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: StorageTaskProperties;
+  properties?: StorageTaskUpdateProperties;
+}
+
+/**
+ * Properties of the storage task.
+ */
+model StorageTaskUpdateProperties {
+  /**
+   * Storage task version.
+   */
+  @visibility(Lifecycle.Read)
+  @maxValue(1)
+  @minValue(1)
+  taskVersion?: int64;
+
+  /**
+   * Storage Task is enabled when set to true and disabled when set to false
+   */
+  enabled?: boolean;
+
+  /**
+   * Text that describes the purpose of the storage task
+   */
+  description?: string;
+
+  /**
+   * The storage task action that is executed
+   */
+  action?: StorageTaskAction;
+
+  /**
+   * Represents the provisioning state of the storage task.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The creation date and time of the storage task in UTC.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  creationTimeInUtc?: utcDateTime;
 }
 
 /**
@@ -612,27 +615,5 @@ model StorageTaskAssignment {
   @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 }
-
-/**
- * The else block of storage task operation
- */
-model ElseCondition {
-  /**
-   * List of operations to execute in the else block
-   */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  operations: StorageTaskOperationInfo[];
-}
-
-@@doc(StorageTaskAssignmentsListResult.value,
-  "List of Storage Task Assignment Resource IDs associated with this Storage Task."
-);
-@@doc(StorageTaskReportInstance.properties,
-  "Storage task execution report for a run instance."
-);
-@@OpenAPI.extension(StorageTaskAssignmentsListResult.value,
-  "x-ms-identifiers",
-  #[]
-);
 @@visibility(Azure.Core.Page.value, Lifecycle.Read);
 @@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
