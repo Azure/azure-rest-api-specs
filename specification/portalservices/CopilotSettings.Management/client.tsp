@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.PortalServices;
 
 @@clientName(Microsoft.PortalServices,
   "PortalServicesCopilotMgmtClient",
@@ -14,6 +15,11 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
-  "PortalServiceResourceProvisioningState",
+  "PortalServicesResourceProvisioningState",
+  "csharp"
+);
+
+@@clientName(CopilotSettingsResource,
+  "PortalServicesCopilotSettings",
   "csharp"
 );
