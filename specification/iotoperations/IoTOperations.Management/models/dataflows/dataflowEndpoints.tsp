@@ -435,3 +435,70 @@ union CloudEventAttributeType {
   @doc("CreateOrRemap type")
   CreateOrRemap: "CreateOrRemap",
 }
+
+@doc("System and Use Assigned Managed Identity properties")
+model ManagedIdentity {
+  @doc("System-assigned managed identity authentication.")
+  systemAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationSystemAssignedManagedIdentity;
+
+  @doc("User-assigned managed identity authentication.")
+  userAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationUserAssignedManagedIdentity;
+}
+@doc("DataflowEndpoint Authentication SystemAssignedManagedIdentity properties")
+model DataflowEndpointAuthenticationSystemAssignedManagedIdentity {
+  @doc("Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration.")
+  audience?: string;
+}
+
+@doc("DataflowEndpoint Authentication UserAssignedManagedIdentity properties")
+model DataflowEndpointAuthenticationUserAssignedManagedIdentity {
+  @doc("Client ID for the user-assigned managed identity.")
+  clientId: string;
+
+  @doc("Resource identifier (application ID URI) of the resource, affixed with the .default suffix.")
+  scope?: string;
+
+  @doc("Tenant ID.")
+  tenantId: string;
+}
+
+@doc("DataflowEndpoint Authentication Sasl properties")
+model DataflowEndpointAuthenticationSasl {
+  @doc("Type of SASL authentication. Can be PLAIN, SCRAM-SHA-256, or SCRAM-SHA-512.")
+  saslType: DataflowEndpointAuthenticationSaslType;
+
+  @doc("Token secret name.")
+  secretRef: string;
+}
+
+@doc("DataflowEndpoint Authentication Access Token properties")
+model DataflowEndpointAuthenticationAccessToken {
+  @doc("Token secret name.")
+  secretRef: string;
+}
+
+@doc("DataflowEndpoint Authentication Sasl Type properties")
+union DataflowEndpointAuthenticationSaslType {
+  string,
+
+  @doc("PLAIN Type")
+  Plain: "Plain",
+
+  @doc("SCRAM_SHA_256 Type")
+  ScramSha256: "ScramSha256",
+
+  @doc("SCRAM_SHA_512 Type")
+  ScramSha512: "ScramSha512",
+}
+
+@doc("Service Account Token for BrokerAuthentication")
+model DataflowEndpointAuthenticationServiceAccountToken {
+  @doc("Audience of the service account. Optional, defaults to the broker internal service account audience.")
+  audience: string;
+}
+
+@doc("DataflowEndpoint Authentication X509 properties")
+model DataflowEndpointAuthenticationX509 {
+  @doc("Secret reference of the X.509 certificate.")
+  secretRef: string;
+}
