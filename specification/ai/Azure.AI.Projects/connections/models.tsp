@@ -57,6 +57,7 @@ model ApiKeyCredentials extends BaseCredentials {
 
   @doc("API Key")
   @visibility(Lifecycle.Read)
+  @encodedName("application/json", "key")
   apiKey?: string;
 }
 
