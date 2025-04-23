@@ -44,7 +44,7 @@ to get approval.
 
 ### Release planner
 
-A [release plan](https://aka.ms/azsdkdocs/release-plans) should have been created, please do so if you have not. A release plan well help guide you through the REST API and SDK creation process. 
+A [release plan](https://aka.ms/azsdkdocs/release-plans) should have been created. If not, please create one as it will help guide you through the REST API and SDK creation process. 
 
 ## ❔Got questions? Need additional info?? We are here to help!
 
