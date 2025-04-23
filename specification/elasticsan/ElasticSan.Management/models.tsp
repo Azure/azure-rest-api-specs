@@ -466,35 +466,6 @@ model PrivateLinkServiceConnectionState {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
-}
-
-/**
  * The auto scale settings on Elastic San Appliance.
  */
 model AutoScaleProperties {
@@ -946,7 +917,7 @@ model PrivateLinkResourceListResult is Azure.Core.Page<PrivateLinkResource>;
  * A private link resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateLinkResource extends Resource {
+model PrivateLinkResource extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Resource properties.
    */
