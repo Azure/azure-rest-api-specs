@@ -128,9 +128,9 @@ suppressions:
 
 ### Tag: package-2025-01
 
-These settings apply only when `--tag=package-preview-2025-01` is specified on the command line.
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-01'
+```yaml $(tag) == 'package-2025-01'
 input-file:
   - Microsoft.Security/stable/2025-01-01/defenderForStorageSettings.json
   - Microsoft.Security/stable/2025-01-01/operations.json
