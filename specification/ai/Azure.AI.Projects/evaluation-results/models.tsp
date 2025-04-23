@@ -22,6 +22,9 @@ model EvaluationResult {
   @doc("Type of Evaluation result")
   ResultType?: ResultType;
 
+  @doc("Aggregated metrics")
+  Metrics?: Record<float64>;
+
   @doc("Blob URI")
   BlobUri?: string;
 

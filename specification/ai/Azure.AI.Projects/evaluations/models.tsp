@@ -143,7 +143,7 @@ model Evaluation {
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
 
-  @doc("Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}', 'logId': 'azureai://accounts/{AccountName}/projects/{myproject}/datasets/{dataset-name}/versions/{dataset-version}' }")
+  @doc("Read-only result outputs. Evaluation Results will have logs and results under the eval_results folder. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}', 'evaluationMetrics': '{serialized-json-metrics}' }")
   @visibility(Lifecycle.Read)
   outputs: Record<string>;
 }
