@@ -23,3 +23,8 @@ using Microsoft.PortalServices;
   "PortalServicesCopilotSettings",
   "csharp"
 );
+
+@@clientName(CopilotSettingsProperties,
+  "PortalServicesCopilotSettingsProperties ",
+  "csharp"
+);
