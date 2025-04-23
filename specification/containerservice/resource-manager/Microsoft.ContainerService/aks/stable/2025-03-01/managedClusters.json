@@ -5197,10 +5197,18 @@
         },
         "enableVnetIntegration": {
           "type": "boolean",
-          "description": "Whether to enable apiserver vnet integration for the cluster or not."
+          "description": "Whether to enable apiserver vnet integration for the cluster or not. See aka.ms/AksVnetIntegration for more details."
         },
         "subnetId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
           "title": "The subnet to be used when apiserver vnet integration is enabled.",
           "description": "It is required when: 1. creating a new cluster with BYO Vnet; 2. updating an existing cluster to enable apiserver vnet integration."
         }
