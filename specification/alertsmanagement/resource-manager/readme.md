@@ -44,6 +44,13 @@ directive:
     where:
      - $.definitions.FetchInvestigationResultParameters.properties.investigationId.format
      - $.definitions.InvestigationMetadata.properties.id.format
+  - suppress: AvoidAdditionalProperties
+    reason: These are property bags that originate from user input (directly or indirectly), such as metric dimensions.
+    from: Issues.json
+    where:
+     - $.definitions.AzureMetricData.properties.dimensions
+     - $.definitions.TransactionEdge.properties.metadata
+     - $.definitions.TransactionNode.properties.metadata
 ```
 
 ``` yaml
