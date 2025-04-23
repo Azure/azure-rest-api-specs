@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
+using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
@@ -64,13 +65,12 @@ interface Evaluations {
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
   op checkAnnotation(
-    @doc("Api Version.")
-    @query("api-version")
-    apiVersion: string
+    ...Azure.Core.Foundations.ApiVersionParameter;
   ): {
       @statusCode statusCode: 200;
       @doc("List of supported annotation.")
       @body supportedAnnotationList: string[];
+
   };
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -81,9 +81,8 @@ interface Evaluations {
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
   op submitAnnotation(
-    @doc("Api Version.")
-    @query("api-version")
-    apiVersion: string,
+    ...Azure.Core.Foundations.ApiVersionParameter;
+
     @doc("Annotation data inputList of supported annotation.")
     @body annotationDTO: AnnotationDTO
   ): {
@@ -100,12 +99,12 @@ interface Evaluations {
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
   op operationResults(
-    @doc("Api Version.")
-    @query apiVersion: string,
+    ...Azure.Core.Foundations.ApiVersionParameter;
+
     @doc("Operation ID for the polling operation.")
     @path operationId: string,
   ): {
-    @statusCode statusCode: 202;
+    @statusCode statusCode: 200;
     @doc("The operation results.")
     @body operationResults: Record<unknown>
   };
