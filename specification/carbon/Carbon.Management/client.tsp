@@ -50,3 +50,5 @@ using Microsoft.Carbon;
   "ResourceGroupCarbonEmissionTopItemMonthlySummary",
   "csharp"
 );
+@@clientName(Microsoft.Carbon, "CarbonOptimizationMgmt", "python");
+@@clientName(Microsoft.Carbon, "CarbonOptimizationManagementClient", "java");
