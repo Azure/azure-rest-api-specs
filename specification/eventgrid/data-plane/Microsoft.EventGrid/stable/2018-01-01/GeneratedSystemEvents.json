@@ -427,6 +427,7 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -468,6 +469,7 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -1302,6 +1304,7 @@
           "items": {
             "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -1349,18 +1352,19 @@
           "$ref": "#/definitions/AcsRouterCommunicationError",
           "description": "Router Communication Inner Error"
         },
-        "details": {
+        "errors": {
           "type": "array",
           "description": "List of Router Communication Errors",
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
       "required": [
         "innererror",
-        "details"
+        "errors"
       ]
     },
     "AcsRouterEventData": {
@@ -1414,6 +1418,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -1449,6 +1454,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -1580,6 +1586,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "requestedWorkerSelectors": {
@@ -1588,6 +1595,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -1624,6 +1632,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "scheduledOn": {
@@ -1661,6 +1670,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "expiredRequestedWorkerSelectors": {
@@ -1669,6 +1679,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "scheduledOn": {
@@ -1809,6 +1820,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "expiredRequestedWorkerSelectors": {
@@ -1817,6 +1829,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "scheduledOn": {
@@ -1850,6 +1863,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "expiredAttachedWorkerSelectors": {
@@ -1858,6 +1872,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -2225,7 +2240,8 @@
           "description": "Router Worker Registered Queue Info",
           "items": {
             "$ref": "#/definitions/AcsRouterQueueDetails"
-          }
+          },
+          "readOnly": true
         },
         "channelConfigurations": {
           "type": "array",
@@ -2233,6 +2249,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "totalCapacity": {
@@ -2335,7 +2352,8 @@
           "description": "Router Worker Updated Queue Info",
           "items": {
             "$ref": "#/definitions/AcsRouterQueueDetails"
-          }
+          },
+          "readOnly": true
         },
         "channelConfigurations": {
           "type": "array",
@@ -2343,6 +2361,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "totalCapacity": {
@@ -2369,7 +2388,8 @@
           "description": "Router Worker Properties Updated",
           "items": {
             "$ref": "#/definitions/AcsRouterUpdatedWorkerProperty"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -2419,6 +2439,7 @@
           "items": {
             "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "receivedTimestamp": {
@@ -2642,6 +2663,73 @@
         }
       }
     },
+    "ApiManagementCircuitBreakerClosedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Closed event.",
+      "properties": {
+        "backendName": {
+          "type": "string",
+          "description": "Name of the backend for which the circuit has closed."
+        },
+        "circuitBreaker": {
+          "$ref": "#/definitions/ApiManagementCircuitBreakerProperties",
+          "description": "Information related to the circuit breaker configured on the backend."
+        }
+      },
+      "required": [
+        "backendName",
+        "circuitBreaker"
+      ]
+    },
+    "ApiManagementCircuitBreakerOpenedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Opened event.",
+      "properties": {
+        "backendName": {
+          "type": "string",
+          "description": "Name of the backend for which the circuit has opened."
+        },
+        "circuitBreaker": {
+          "$ref": "#/definitions/ApiManagementCircuitBreakerProperties",
+          "description": "Information related to the circuit breaker configured on the backend."
+        }
+      },
+      "required": [
+        "backendName",
+        "circuitBreaker"
+      ]
+    },
+    "ApiManagementCircuitBreakerProperties": {
+      "type": "object",
+      "description": "Information related to the circuit breaker configured on the backend.",
+      "properties": {
+        "rules": {
+          "type": "object",
+          "description": "Overview of all configured rules and respective details.",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "rules"
+      ]
+    },
+    "ApiManagementExpiredGatewayTokenProperties": {
+      "type": "object",
+      "description": "Information related to a gateway token that has expired for a self-hosted gateway deployment.",
+      "properties": {
+        "expiredAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the gateway token has expired.",
+          "x-ms-client-name": "expiresOn"
+        }
+      },
+      "required": [
+        "expiredAtUtc"
+      ]
+    },
     "ApiManagementGatewayApiAddedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIAdded event.",
@@ -2742,6 +2830,64 @@
         }
       }
     },
+    "ApiManagementGatewayProperties": {
+      "type": "object",
+      "description": "Information related to a given self-hosted gateway deployment.",
+      "properties": {
+        "gatewayId": {
+          "type": "string",
+          "description": "Id of Gateway that is used to deploy the gateway to get the configuration for. This is the ARM resource ID referenced in the Azure API Management instance. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateway/<GatewayName>`"
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "Unique instance ID of the deployed gateway"
+        }
+      },
+      "required": [
+        "gatewayId",
+        "instanceId"
+      ]
+    },
+    "ApiManagementGatewayTokenExpiredEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenExpired event.",
+      "properties": {
+        "gatewayInfo": {
+          "$ref": "#/definitions/ApiManagementGatewayProperties",
+          "description": "Information related to a given self-hosted gateway deployment.",
+          "x-ms-client-name": "gateway"
+        },
+        "tokenInfo": {
+          "$ref": "#/definitions/ApiManagementExpiredGatewayTokenProperties",
+          "description": "Information related to a an expired gateway token for a self-hosted gateway deployment.",
+          "x-ms-client-name": "token"
+        }
+      },
+      "required": [
+        "gatewayInfo",
+        "tokenInfo"
+      ]
+    },
+    "ApiManagementGatewayTokenNearExpiryEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenNearExpiry event.",
+      "properties": {
+        "gatewayInfo": {
+          "$ref": "#/definitions/ApiManagementGatewayProperties",
+          "description": "Information related to a given self-hosted gateway deployment.",
+          "x-ms-client-name": "gateway"
+        },
+        "tokenInfo": {
+          "$ref": "#/definitions/ApiManagementNearExpiryGatewayTokenProperties",
+          "description": "Information related to a an expired gateway token for a self-hosted gateway deployment.",
+          "x-ms-client-name": "token"
+        }
+      },
+      "required": [
+        "gatewayInfo",
+        "tokenInfo"
+      ]
+    },
     "ApiManagementGatewayUpdatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayUpdated event.",
@@ -2751,6 +2897,21 @@
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
         }
       }
+    },
+    "ApiManagementNearExpiryGatewayTokenProperties": {
+      "type": "object",
+      "description": "Information related to a gateway token that is near expiry for a self-hosted gateway deployment.",
+      "properties": {
+        "expiredAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the gateway token will expire.",
+          "x-ms-client-name": "expiresOn"
+        }
+      },
+      "required": [
+        "expiredAtUtc"
+      ]
     },
     "ApiManagementProductCreatedEventData": {
       "type": "object",
@@ -3095,21 +3256,24 @@
           "description": "Hosts added to the cluster in this event, if any.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "removedHostNames": {
           "type": "array",
           "description": "Hosts removed from the cluster in this event, if any.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "inMaintenanceHostNames": {
           "type": "array",
           "description": "Hosts in Maintenance mode in the cluster, if any.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -3221,7 +3385,8 @@
           "description": "Stdout outputs from the execution, if any.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -4076,6 +4241,50 @@
       },
       "required": [
         "metadata"
+      ]
+    },
+    "EdgeSolutionVersionPublishedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Edge.SolutionVersionPublished event.",
+      "properties": {
+        "externalValidationId": {
+          "type": "string",
+          "description": "A GUID to uniquely track External Solution Validation"
+        },
+        "targetId": {
+          "type": "string",
+          "description": "ARM ID of the Target resource"
+        },
+        "solutionTemplateId": {
+          "type": "string",
+          "description": "ARM ID of the Solution Template resource"
+        },
+        "solutionTemplateVersionId": {
+          "type": "string",
+          "description": "ARM ID of the Solution Template Version resource"
+        },
+        "solutionVersionId": {
+          "type": "string",
+          "description": "ARM ID of the Solution Version resource"
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "API Version supported for the resources"
+        },
+        "callbackUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Direct URL to callback for updating validation status"
+        }
+      },
+      "required": [
+        "externalValidationId",
+        "targetId",
+        "solutionTemplateId",
+        "solutionTemplateVersionId",
+        "solutionVersionId",
+        "apiVersion",
+        "callbackUrl"
       ]
     },
     "EventGridMQTTClientCreatedOrUpdatedEventData": {
@@ -6221,7 +6430,8 @@
           "description": "Lists of the geometry ID of the geofence which is expired relative to the user time in the request.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "geometries": {
           "type": "array",
@@ -6229,6 +6439,7 @@
           "items": {
             "$ref": "#/definitions/MapsGeofenceGeometry"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "invalidPeriodGeofenceGeometryId": {
@@ -6236,7 +6447,8 @@
           "description": "Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "isEventPublished": {
           "type": "boolean",
