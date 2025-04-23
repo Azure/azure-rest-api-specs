@@ -28,7 +28,7 @@ namespace Azure.AI.Projects.Agents {
   @@clientName(deleteFile, "InternalDeleteFile", "csharp");
   @@access(listThreads, Access.internal, "csharp");
   @@clientName(listThreads, "InternalGetThreads", "csharp");
-  @@access(uploadFile, Access.internal, "python, java, javascript");
+  @@access(uploadFile, Access.internal, "python, javascript");
 
   // In addition to top-level response value containers, trivial intermediate structure -- levels of single-use model
   // hierarchy that don't convey explanatory or functional benefit to consumers of the surface -- should also be
@@ -267,6 +267,11 @@ namespace Azure.AI.Projects.Agents {
   @@clientName(ThreadRun.assistantId, "agentId", "python");
   @@clientName(CreateRunOptions.assistantId, "agentId", "python");
   @@clientName(CreateAndRunThreadOptions.assistantId, "agentId", "python");
+
+  @@clientName(RunStepOpenAPIToolCall, "RunStepOpenApiToolCall", "java");
+  @@clientName(RunStepOpenAPIToolCall.openAPI, "openApi", "java");
+  
+
   // From https://platform.openai.com/docs/agents/how-it-works
   // "Note that deleting an AgentFile doesn’t delete the original File object, it simply deletes the association
   // between that File and the Agent."
