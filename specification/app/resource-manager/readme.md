@@ -78,15 +78,15 @@ directive:
   - suppress: PutResponseCodes
     from: ConnectedEnvironmentsCertificates.json
     reason: |
-      Do not introduce breaking changes in GA services 
+      Do not introduce breaking changes in GA services
   - suppress: PutResponseCodes
     from: ConnectedEnvironmentsDaprComponents.json
     reason: |
-      Do not introduce breaking changes in GA services 
+      Do not introduce breaking changes in GA services
   - suppress: PutResponseCodes
     from: ConnectedEnvironmentsStorages.json
     reason: |
-      Do not introduce breaking changes in GA services 
+      Do not introduce breaking changes in GA services
 ```
 
 ### Tag: package-preview-2025-02-02-preview
@@ -129,6 +129,16 @@ input-file:
   - Microsoft.App/preview/2025-02-02-preview/SourceControls.json
   - Microsoft.App/preview/2025-02-02-preview/Subscriptions.json
   - Microsoft.App/preview/2025-02-02-preview/Usages.json
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: CommonDefinitions.json
+    reason: |
+      Do not introduce breaking changes in GA services
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows/{workflowName}"].get.responses["200"].schema.properties
+    from: LogicAppsExtension.json
+    reason: |
+      Do not introduce breaking changes in GA services
 ```
 
 ### Tag: package-preview-2024-10
