@@ -135,8 +135,8 @@ directive:
     reason: |
       Do not introduce breaking changes in GA services
   - suppress: TrackedExtensionResourcesAreNotAllowed
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows/{workflowName}"].get.responses["200"].schema.properties
     from: LogicAppsExtension.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows/{workflowName}"].get.responses["200"].schema.properties
     reason: |
       Do not introduce breaking changes in GA services
 ```
