@@ -4817,7 +4817,7 @@
           "description": "The security settings of an agent pool."
         },
         "gpuProfile": {
-          "$ref": "#/definitions/AgentPoolGPUProfile",
+          "$ref": "#/definitions/GPUProfile",
           "description": "The GPU settings of an agent pool."
         },
         "artifactStreamingProfile": {
@@ -8336,13 +8336,30 @@
       },
       "description": "The security settings of an agent pool."
     },
-    "AgentPoolGPUProfile": {
+    "GPUProfile": {
       "type": "object",
       "properties": {
-        "installGPUDriver": {
-          "type": "boolean",
-          "title": "Whether to auto install GPU drivers or not.",
-          "description": "The default value is true when the vmSize of the agent pool contains a GPU, false otherwise. GPU Driver Installation can only be set true when VM has an associated GPU resource. Setting this field to false prevents automatic GPU driver installation. In that case, in order for the GPU to be usable, the user must perform GPU driver installation themselves."
+        "driver": {
+          "type": "string",
+          "description": "Whether to install GPU drivers. When it's not specified, default is Install.",
+          "enum": [
+            "Install",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "GPUDriver",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Install",
+                "description": "Install driver."
+              },
+              {
+                "value": "None",
+                "description": "Skip driver install."
+              }
+            ]
+          }
         },
         "driverType": {
           "type": "string",
