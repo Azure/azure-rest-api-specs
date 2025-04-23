@@ -16,6 +16,7 @@ import "./models/dataflows/dataflowProfiles.tsp";
 import "./models/dataflows/dataflows.tsp";
 import "./models/dataflows/dataflowGraphs.tsp";
 import "./models/diagnostics/diagnostic.tsp";
+import "./models/registryEndpoints/registryEndpoint.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
