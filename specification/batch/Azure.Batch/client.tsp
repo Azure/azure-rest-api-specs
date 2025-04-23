@@ -102,6 +102,8 @@ interface BatchClient {
 
 /* C SHARP OVERRIDES */
 // Api overrides
+@@access(Azure.Batch.Jobs.deleteJob, Access.internal, "csharp");
+@@clientName(BatchClient.deleteJob, "deleteJobInternal", "csharp");
 @@access(Azure.Batch.Pools.poolExists, Access.internal, "csharp");
 @@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
 @@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
