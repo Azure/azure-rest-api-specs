@@ -27,9 +27,11 @@ model AzureAISearchIndex extends Index {
   type: IndexType.azureSearch;
 
   @doc("Name of connection to Azure AI Search")
+  @visibility(Lifecycle.Create)
   connectionName: string;
 
   @doc("Name of index in Azure AI Search resource to attach")
+  @visibility(Lifecycle.Create)
   indexName: string;
 }
 
@@ -40,6 +42,7 @@ model ManagedAzureAISearchIndex extends Index {
   type: IndexType.managedAzureSearch;
 
   @doc("Vector store id of managed index")
+  @visibility(Lifecycle.Create)
   vectorStoreId: string;
 }
 
@@ -50,15 +53,19 @@ model CosmosDBIndex extends Index {
   type: IndexType.cosmosDB;
 
   @doc("Name of connection to CosmosDB")
+  @visibility(Lifecycle.Create)
   connectionName: string;
 
   @doc("Name of the CosmosDB Database")
+  @visibility(Lifecycle.Create)
   databaseName: string;
 
   @doc("Name of CosmosDB Container")
+  @visibility(Lifecycle.Create)
   containerName: string;
 
   @doc("Embedding model configuration")
+  @visibility(Lifecycle.Create)
   embeddingConfiguration: EmbeddingConfiguration;
 }
 
@@ -66,9 +73,11 @@ model CosmosDBIndex extends Index {
 @added(Versions.v2025_05_01)
 model EmbeddingConfiguration {
   @doc("Deployment name of embedding model. It can point to a model deployment either in the parent AIServices or a connection.")
+  @visibility(Lifecycle.Create)
   modelDeploymentName: string;
 
   @doc("Embedding field")
+  @visibility(Lifecycle.Create)
   embeddingField: string;
 }
 

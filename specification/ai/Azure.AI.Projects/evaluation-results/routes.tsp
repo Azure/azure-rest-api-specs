@@ -56,5 +56,5 @@ interface EvaluationResults
     EvaluationResult,
     AssetCredentialRequest,
     AssetCredentialResponse
-  >; 
+  >;
 }

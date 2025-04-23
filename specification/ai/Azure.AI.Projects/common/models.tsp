@@ -73,9 +73,11 @@ alias AssetBase = {
   version: string;
 
   @doc("The asset description text.")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   description?: string;
 
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 };
 
@@ -180,16 +182,6 @@ union BlobReferenceCredentialType {
   SAS: "SAS",
 }
 
-@doc("SAS Credential")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
-model SASCredential {
-  @doc("Credential Type")
-  CredentialType: BlobReferenceCredentialType.SAS;
-
-  @doc("Full SAS URI, including the storage, container/blob path and SAS token")
-  SASUri: string;
-}
 @doc("Represents a reference to a blob for consumption")
 model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")

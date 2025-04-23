@@ -21,32 +21,77 @@ namespace Azure.AI.Projects;
 union AttackStrategy {
   string,
 
-  @doc("Represents a default set of easy complexity attacks. Easy complexity attack strategies are defined as attacks that do not require any Large Language Model to convert or orchestrate.")
+  @doc("Represents a default set of easy complexity attacks. Easy complexity attacks require less effort, such as translation of a prompt into some encoding, and does not require any Large Language Model to convert or orchestrate.")
   Easy: "easy",
 
-  @doc("Represents ASCII art, a graphic design technique that uses printable characters.")
+  @doc("Represents a default set of moderate complexity attacks. Moderate complexity attacks require having access to resources such as another generative AI model.")
+  Moderate: "moderate",
+
+  @doc("Represents a default set of difficult complexity attacks. Difficult complexity attacks include attacks that require access to significant resources and effort to execute an attack such as knowledge of search-based algorithms in addition to a generative AI model.")
+  Difficult: "difficult",
+
+  @doc("Generates visual art using ASCII characters, often used for creative or obfuscation purposes.")
   AsciiArt: "ascii_art",
 
-  @doc("Represents ASCII smuggling, a technique for encoding or hiding data.")
+  @doc("Conceals data within ASCII characters, making it harder to detect.")
   AsciiSmuggler: "ascii_smuggler",
 
-  @doc("Represents the Atbash cipher, a substitution cipher that reverses the alphabet.")
+  @doc("Implements the Atbash cipher, a simple substitution cipher where each letter is mapped to its reverse.")
   Atbash: "atbash",
 
-  @doc("Represents Base64 encoding, a method for encoding binary data as text.")
+  @doc("Encodes binary data into a text format using Base64, commonly used for data transmission.")
   Base64: "base64",
 
-  @doc("Represents binary encoding, a representation of data in binary format.")
+  @doc("Converts text into binary code, representing data in a series of 0s and 1s.")
   Binary: "binary",
 
-  @doc("Represents the Caesar cipher, a substitution cipher that shifts characters.")
+  @doc("Applies the Caesar cipher, a substitution cipher that shifts characters by a fixed number of positions.")
   Caesar: "caesar",
 
-  @doc("Represents character space manipulation, a technique involving spacing between characters.")
+  @doc("Alters text by adding spaces between characters, often used for obfuscation.")
   CharacterSpace: "character_space",
 
-  @doc("Represents character swapping, a technique for rearranging characters in text.")
+  @doc("Injects specially crafted prompts to bypass AI safeguards, known as User Injected Prompt Attacks (UPIA).")
   Jailbreak: "jailbreak",
+
+  @doc("Utilizes ANSI escape sequences to manipulate text appearance and behavior.")
+  AnsiiAttack: "ansii_attack",
+
+  @doc("Swaps characters within text to create variations or obfuscate the original content.")
+  CharacterSwap: "character_swap",
+
+  @doc("Appends an adversarial suffix to the prompt.")
+  SuffixAppend: "suffix_append",
+
+  @doc("Joins multiple strings together, often used for concatenation or obfuscation.")
+  StringJoin: "string_join",
+
+  @doc("Uses Unicode characters that look similar to standard characters, creating visual confusion.")
+  UnicodeConfusable: "unicode_confusable",
+
+  @doc("Substitutes standard characters with Unicode equivalents, often for obfuscation.")
+  UnicodeSubstitution: "unicode_substitution",
+
+  @doc("Adds diacritical marks to characters, changing their appearance and sometimes their meaning.")
+  Diacritic: "diacritic",
+
+  @doc("Flips characters from front to back, creating a mirrored effect.")
+  Flip: "flip",
+
+  @doc("Transforms text into Leetspeak, a form of encoding that replaces letters with similar-looking numbers or symbols.")
+  Leetspeak: "leetspeak",
+
+  @doc("Applies the ROT13 cipher, a simple substitution cipher that shifts characters by 13 positions.")
+  ROT13: "rot13",
+
+  @doc("Encodes text into Morse code, using dots and dashes to represent characters.")
+  Morse: "morse",
+
+  @doc("Encodes text into URL format.")
+  Url: "url",
+
+  @doc("Represents the baseline direct adversarial probing, which is used by attack strategies as the attack objective.")
+  Baseline: "baseline",
 }
 
 @doc("Risk category for the attack objective.")
@@ -88,13 +133,13 @@ model RedTeam {
   id: string;
 
   @doc("Name of the red-team scan.")
-  scanName: string;
+  scanName?: string;
 
   @doc("Number of simulation rounds.")
   numTurns: int32;
 
   @doc("List of attack strategies or nested lists of attack strategies.")
-  attackStrategy: AttackStrategy[];
+  attackStrategies: AttackStrategy[];
 
   @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
   simulationOnly: boolean;
@@ -230,31 +275,31 @@ model AttackObjective {
   Messages: Array<Message>;
 }
 
-
 @doc("Simulation type.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 union SimulationType {
   string,
+
   @doc("Default simulation type.")
-  Default: "Default";
+  Default: "Default",
 
   @doc("Custom persona simulation type.")
-  CustomPersona: "CustomPersona";
+  CustomPersona: "CustomPersona",
 
   @doc("Harm turn generator simulation type.")
-  HarmTurnGenerator: "HarmTurnGenerator";
+  HarmTurnGenerator: "HarmTurnGenerator",
 }
 
 @doc("Customization Parameters")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 model CustomizationParameters {
-    @doc("Application scenario.")
-    ApplicationScenario?: string;
+  @doc("Application scenario.")
+  ApplicationScenario?: string;
 
-    @doc("List of harm categories.")
-    HarmCategories: Array<string>;
+  @doc("List of harm categories.")
+  HarmCategories: Array<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
@@ -319,6 +364,7 @@ model SimulationResultDTO {
 model LongRunningResponse {
   @doc("The location.")
   Location: string;
+
   @doc("The OperationResult.")
   OperationResult: unknown;
 }
