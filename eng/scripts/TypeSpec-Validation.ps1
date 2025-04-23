@@ -55,7 +55,8 @@ if ($typespecFolders) {
     }
 
     npm exec --no -- tsv $typespecFolder 2>&1 | Write-Host
-    if ($LASTEXITCODE) {
+    Write-Host "Exit code: $LASTEXITCODE"
+    if ($LASTEXITCODE -ne 0) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
       $errorString += "`n > npm ci"
