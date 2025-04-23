@@ -210,9 +210,9 @@ extends:
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
-              ArtifactName: $(BreakingChangeLabelArtifactName)
-              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(BreakingChangeLabelArtifactPath)"
-              CustomCondition: and(succeeded(), ne(variables['BreakingChangeLabelArtifactName'], ''))
+              ArtifactName: $(SpecGenSdkArtifactName)
+              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)"
+              CustomCondition: and(succeeded(), ne(variables['SpecGenSdkArtifactName'], ''))
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
