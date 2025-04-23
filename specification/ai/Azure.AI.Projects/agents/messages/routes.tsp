@@ -57,7 +57,7 @@ op listMessages is Azure.Core.Foundations.Operation<
     threadId: string;
 
     /** Filter messages by the run ID that generated them. */
-    @query
+    @query("run_id")
     runId?: string;
 
     ...OpenAIListRequestOptions;
