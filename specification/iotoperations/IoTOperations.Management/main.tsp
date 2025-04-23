@@ -14,6 +14,7 @@ import "./models/broker/listeners.tsp";
 import "./models/dataflows/dataflowEndpoints.tsp";
 import "./models/dataflows/dataflowProfiles.tsp";
 import "./models/dataflows/dataflows.tsp";
+import "./models/dataflows/dataflowGraphs.tsp";
 import "./models/diagnostics/diagnostic.tsp";
 
 using TypeSpec.Http;
@@ -21,6 +22,7 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Microsoft.IoTOperations.Diagnostics;
+using Microsoft.IoTOperations.DataflowGraphs;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @armProviderNamespace
@@ -116,6 +118,16 @@ interface Dataflow {
   listByResourceGroup is ArmResourceListByParent<DataflowResource>;
 }
 
+// /instance/dataflowProfiles/dataflowGraphs resource Operations
+
+@armResourceOperations
+@added(Versions.`2025-07-01-preview`)
+interface DataflowGraph {
+  get is ArmResourceRead<DataflowGraphResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowGraphResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataflowGraphResource>;
+  listByDataflowProfile is ArmResourceListByParent<DataflowGraphResource>;
+}
 // /instance/dataflowEndpoints resource Operations
 @armResourceOperations
 interface DataflowEndpoint {

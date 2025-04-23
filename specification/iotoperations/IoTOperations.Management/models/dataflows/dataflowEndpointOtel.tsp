@@ -9,7 +9,7 @@ namespace Microsoft.IoTOperations;
 model DataflowEndpointOtel {
   @doc("The number of seconds to wait before sending metrics to the Otel collector.")
   metricIntervalSec?: int32;
-  
+
   @doc("Host of the OpenTelemetry in the form of <host>:<port>.")
   host: string;
 

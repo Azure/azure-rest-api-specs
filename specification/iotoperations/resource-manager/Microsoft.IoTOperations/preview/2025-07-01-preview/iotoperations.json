@@ -64,6 +64,9 @@
       "name": "Dataflow"
     },
     {
+      "name": "DataflowGraph"
+    },
+    {
       "name": "DataflowEndpoint"
     },
     {
@@ -2221,6 +2224,296 @@
         "x-ms-examples": {
           "DataflowProfile_Delete": {
             "$ref": "./examples/DataflowProfile_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles/{dataflowProfileName}/dataflowGraphs": {
+      "get": {
+        "operationId": "DataflowGraph_ListByDataflowProfile",
+        "tags": [
+          "DataflowGraph"
+        ],
+        "description": "List DataflowGraphResource resources by DataflowProfileResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "dataflowProfileName",
+            "in": "path",
+            "description": "Name of Instance dataflowProfile resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataflowGraphResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles/{dataflowProfileName}/dataflowGraphs/{dataflowGraphName}": {
+      "get": {
+        "operationId": "DataflowGraph_Get",
+        "tags": [
+          "DataflowGraph"
+        ],
+        "description": "Get a DataflowGraphResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "dataflowProfileName",
+            "in": "path",
+            "description": "Name of Instance dataflowProfile resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "dataflowGraphName",
+            "in": "path",
+            "description": "Name of Instance dataflowEndpoint resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataflowGraphs.DataflowGraphResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataflowGraph_CreateOrUpdate",
+        "tags": [
+          "DataflowGraph"
+        ],
+        "description": "Create a DataflowGraphResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "dataflowProfileName",
+            "in": "path",
+            "description": "Name of Instance dataflowProfile resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "dataflowGraphName",
+            "in": "path",
+            "description": "Name of Instance dataflowEndpoint resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataflowGraphs.DataflowGraphResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DataflowGraphResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataflowGraphs.DataflowGraphResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataflowGraphResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataflowGraphs.DataflowGraphResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DataflowGraph_Delete",
+        "tags": [
+          "DataflowGraph"
+        ],
+        "description": "Delete a DataflowGraphResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "dataflowProfileName",
+            "in": "path",
+            "description": "Name of Instance dataflowProfile resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "dataflowGraphName",
+            "in": "path",
+            "description": "Name of Instance dataflowEndpoint resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5101,6 +5394,391 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "DataflowGraphResourceListResult": {
+      "type": "object",
+      "description": "The response of a DataflowGraphResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataflowGraphResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DataflowGraphs.DataflowGraphResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataflowGraphs.ConnectionInput": {
+      "type": "object",
+      "description": "DataflowGraph Node Connection Input",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the source node.",
+          "maxLength": 64
+        },
+        "schema": {
+          "$ref": "#/definitions/DataflowGraphs.SchemaSettings",
+          "description": "Schema settings for the source node."
+        }
+      },
+      "required": [
+        "name",
+        "schema"
+      ]
+    },
+    "DataflowGraphs.ConnectionOutput": {
+      "type": "object",
+      "description": "DataflowGraph Node Connection Output",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the destination node.",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DataflowGraphs.DataflowGraphResource": {
+      "type": "object",
+      "description": "Instance dataflowEndpoint resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataflowGraphs.Properties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataflowGraphs.DestinationNode": {
+      "type": "object",
+      "description": "DataflowGraph destination node properties.",
+      "properties": {
+        "destinationSettings": {
+          "$ref": "#/definitions/DataflowGraphs.DestinationSettings",
+          "description": "Destination configuration."
+        }
+      },
+      "required": [
+        "destinationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphs.Node"
+        }
+      ],
+      "x-ms-discriminator-value": "Destination"
+    },
+    "DataflowGraphs.DestinationSettings": {
+      "type": "object",
+      "description": "DataflowGraph destination node settings.",
+      "properties": {
+        "endpointRef": {
+          "type": "string",
+          "description": "The endpoint reference for the destination."
+        },
+        "dataDestination": {
+          "type": "string",
+          "description": "Data destination at the endpoint."
+        },
+        "outputSchemaSettings": {
+          "$ref": "#/definitions/DataflowGraphs.SchemaSettings",
+          "description": "Output schema settings."
+        }
+      },
+      "required": [
+        "endpointRef",
+        "dataDestination"
+      ]
+    },
+    "DataflowGraphs.GraphNode": {
+      "type": "object",
+      "description": "DataflowGraph graph node properties.",
+      "properties": {
+        "graphSettings": {
+          "$ref": "#/definitions/DataflowGraphs.GraphSettings",
+          "description": "Graph configuration."
+        }
+      },
+      "required": [
+        "graphSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphs.Node"
+        }
+      ],
+      "x-ms-discriminator-value": "Graph"
+    },
+    "DataflowGraphs.GraphNodeConfiguration": {
+      "type": "object",
+      "description": "DataflowGraph graph node configuration.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key of the configuration.",
+          "maxLength": 64
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the configuration."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "DataflowGraphs.GraphSettings": {
+      "type": "object",
+      "description": "DataflowGraph graph node settings.",
+      "properties": {
+        "registryEndpointRef": {
+          "type": "string",
+          "description": "Reference to the registry endpoint for pulling the artifact."
+        },
+        "artifact": {
+          "type": "string",
+          "description": "The artifact name and version to pull."
+        },
+        "configuration": {
+          "type": "array",
+          "description": "Configuration key-value pairs.",
+          "items": {
+            "$ref": "#/definitions/DataflowGraphs.GraphNodeConfiguration"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        }
+      },
+      "required": [
+        "registryEndpointRef",
+        "artifact"
+      ]
+    },
+    "DataflowGraphs.Node": {
+      "type": "object",
+      "description": "DataflowGraph node properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the node.",
+          "maxLength": 64
+        },
+        "type": {
+          "$ref": "#/definitions/DataflowGraphs.NodeType",
+          "description": "Type of the node."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "DataflowGraphs.NodeConnection": {
+      "type": "object",
+      "description": "DataflowGraph Node Connection",
+      "properties": {
+        "from": {
+          "$ref": "#/definitions/DataflowGraphs.ConnectionInput",
+          "description": "Information about the source node."
+        },
+        "to": {
+          "$ref": "#/definitions/DataflowGraphs.ConnectionOutput",
+          "description": "Information about the destination node."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "DataflowGraphs.NodeType": {
+      "type": "string",
+      "description": "DataflowGraph node types.",
+      "enum": [
+        "Source",
+        "Graph",
+        "Destination"
+      ],
+      "x-ms-enum": {
+        "name": "NodeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Source",
+            "value": "Source",
+            "description": "Dataflow source node."
+          },
+          {
+            "name": "Graph",
+            "value": "Graph",
+            "description": "Dataflow graph node."
+          },
+          {
+            "name": "Destination",
+            "value": "Destination",
+            "description": "Dataflow destination node."
+          }
+        ]
+      }
+    },
+    "DataflowGraphs.Properties": {
+      "type": "object",
+      "description": "DataflowGraph properties",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/OperationalMode",
+          "description": "The mode of the dataflow graph."
+        },
+        "requestDiskPersistence": {
+          "$ref": "#/definitions/OperationalMode",
+          "description": "Disk persistence mode."
+        },
+        "profileRef": {
+          "type": "string",
+          "description": "Reference to the dataflow profile"
+        },
+        "nodes": {
+          "type": "array",
+          "description": "List of nodes in the dataflow graph.",
+          "items": {
+            "$ref": "#/definitions/DataflowGraphs.Node"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the dataflow graph.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "profileRef",
+        "nodes"
+      ]
+    },
+    "DataflowGraphs.SchemaSettings": {
+      "type": "object",
+      "description": "DataflowGraph output schema settings.",
+      "properties": {
+        "serializationFormat": {
+          "$ref": "#/definitions/DataflowGraphs.SerializationFormat",
+          "description": "Output serialization format."
+        },
+        "schemaRef": {
+          "type": "string",
+          "description": "Reference to the schema that describes the output of the transformation."
+        }
+      },
+      "required": [
+        "serializationFormat"
+      ]
+    },
+    "DataflowGraphs.SerializationFormat": {
+      "type": "string",
+      "description": "Serialization format for dataflow graph.",
+      "enum": [
+        "Delta",
+        "Json",
+        "Parquet",
+        "Avro"
+      ],
+      "x-ms-enum": {
+        "name": "SerializationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta Format"
+          },
+          {
+            "name": "Json",
+            "value": "Json",
+            "description": "JSON Format"
+          },
+          {
+            "name": "Parquet",
+            "value": "Parquet",
+            "description": "Parquet Format"
+          },
+          {
+            "name": "Avro",
+            "value": "Avro",
+            "description": "Avro serialization format."
+          }
+        ]
+      }
+    },
+    "DataflowGraphs.SourceNode": {
+      "type": "object",
+      "description": "DataflowGraph source node properties.",
+      "properties": {
+        "sourceSettings": {
+          "$ref": "#/definitions/DataflowGraphs.SourceSettings",
+          "description": "Source configuration."
+        }
+      },
+      "required": [
+        "sourceSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphs.Node"
+        }
+      ],
+      "x-ms-discriminator-value": "Source"
+    },
+    "DataflowGraphs.SourceSettings": {
+      "type": "object",
+      "description": "DataflowGraph source node settings.",
+      "properties": {
+        "endpointRef": {
+          "type": "string",
+          "description": "The endpoint reference for the source."
+        },
+        "dataSources": {
+          "type": "array",
+          "description": "List of data sources.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "endpointRef",
+        "dataSources"
       ]
     },
     "DataflowMappingType": {
