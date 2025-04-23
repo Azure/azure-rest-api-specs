@@ -204,7 +204,7 @@ model TranslateTarget {
   @doc("""
     Reference dataset ID having sentence pair to generate adaptive customized translation.
     """)
-  adaptiveDatasetIds?: string[];
+  adaptiveDatasetId?: string;
 
   @doc("""
     Reference sentence pairs to generate adaptive results.
@@ -245,7 +245,7 @@ model TranslateBodyDetails {
   @doc("""
     Translation target parameters.
     """)
-  targets: TranslateTarget;
+  targets: TranslateTarget[];
 }
 
 @doc("Reference sentence pair.")
