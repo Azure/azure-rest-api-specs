@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -110,7 +112,7 @@ interface ManagedClusters {
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
-    FaultSimulationContent,
+    FaultSimulationContentWrapper,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
       ArmAsyncOperationHeader
@@ -428,6 +430,13 @@ model ManagedClusterProperties {
    * The number of outbound ports allocated for SNAT for each node in the backend pool of the default load balancer. The default value is 0 which provides dynamic port allocation based on pool size.
    */
   allocatedOutboundPorts?: int32;
+
+  /**
+   * The VM image the node types are configured with. This property controls the Service Fabric component packages to be used for the cluster. Allowed values are: 'Windows'. The default value is 'Windows'.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known acronym, consistency with other properties"
+  @added(Versions.v2025_03_01_preview)
+  VMImage?: string = "Windows";
 }
 
 /**

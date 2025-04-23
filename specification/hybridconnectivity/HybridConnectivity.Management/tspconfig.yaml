@@ -18,6 +18,7 @@ options:
   "@azure-tools/typespec-csharp":
     flavor: "azure"
     namespace: "Azure.ResourceManager.HybridConnectivity"
+    package-dir: "Azure.ResourceManager.HybridConnectivity"
     clear-output-folder: true
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
@@ -27,24 +28,18 @@ options:
     service-name: "Hybrid Connectivity"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-hybridconnectivity"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.hybridconnectivity"
+    flavor: "azure"
     generate-test: true
     generate-sample: true
-    flavor: "azure"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    examples-directory: "{project-root}/examples"
-    typespecTitleMap:
-      HybridConnectivityManagementAPIClient: HybridConnectivityManagementAPI
-    generateSample: true
-    package-dir: "arm-hybridconnectivity"
     flavor: "azure"
-    packageDetails:
+    experimental-extensible-enums: true
+    typespec-title-map:
+      HybridConnectivityManagementAPIClient: HybridConnectivityManagementAPI
+    generate-sample: true
+    package-dir: "arm-hybridconnectivity"
+    package-details:
       name: "@azure/arm-hybridconnectivity"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/hybridconnectivity"
@@ -57,3 +52,4 @@ options:
     head-as-boolean: true
     inject-spans: true
     remove-unreferenced-types: true
+    factory-gather-all-params: false
