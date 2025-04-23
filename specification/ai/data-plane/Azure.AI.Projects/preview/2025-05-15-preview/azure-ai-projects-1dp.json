@@ -1976,23 +1976,13 @@
       "type": "object",
       "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
       "properties": {
-        "AzureEndpoint": {
+        "DeploymentName": {
           "type": "string",
-          "description": "Endpoint targetURI for AOAI model."
-        },
-        "apiKey": {
-          "type": "string",
-          "description": "API Key for AOAI model."
-        },
-        "azureDeployment": {
-          "type": "string",
-          "description": "Deployment name for AOAI model."
+          "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
         }
       },
       "required": [
-        "AzureEndpoint",
-        "apiKey",
-        "azureDeployment"
+        "DeploymentName"
       ],
       "allOf": [
         {

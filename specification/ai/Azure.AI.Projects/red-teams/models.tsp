@@ -129,14 +129,8 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
   @visibility(Lifecycle.Read)
   type: "AzureAOAIModel";
 
-  @doc("Endpoint targetURI for AOAI model.")
-  AzureEndpoint: string;
-
-  @doc("API Key for AOAI model.")
-  apiKey: string;
-
-  @doc("Deployment name for AOAI model.")
-  azureDeployment: string;
+  @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`.")
+  DeploymentName: string;
 }
 
 @doc("Abstract class for target configuration.")
