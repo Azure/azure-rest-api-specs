@@ -870,7 +870,7 @@ model BatchSupportedImage {
   nodeAgentSKUId: string;
 
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
-  imageReference: BatchImageReference;
+  imageReference: BatchVmImageReference;
 
   @doc("The type of operating system (e.g. Windows or Linux) of the Image.")
   osType: OSType;
@@ -890,7 +890,7 @@ model BatchSupportedImage {
   To get the list of all Azure Marketplace Image references verified by Azure Batch, see the
   ' List Supported Images ' operation.
   """)
-model BatchImageReference {
+model BatchVmImageReference {
   @doc("The publisher of the Azure Virtual Machines Marketplace Image. For example, Canonical or MicrosoftWindowsServer.")
   publisher?: string;
 
@@ -1406,7 +1406,7 @@ model SecurityProfile {
   securityType: SecurityTypes;
 
   @doc("Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Specifies the security settings like secure boot and vTPM used while creating the virtual machine.")
-  uefiSettings: UefiSettings;
+  uefiSettings: BatchUefiSettings;
 }
 
 @doc("""
@@ -1733,7 +1733,7 @@ model UserIdentity {
 }
 
 @doc("Specifies the security settings like secure boot and vTPM used while creating the virtual machine.")
-model UefiSettings {
+model BatchUefiSettings {
   @doc("Specifies whether secure boot should be enabled on the virtual machine.")
   secureBootEnabled?: boolean;
 
@@ -1978,7 +1978,7 @@ model BatchPoolSpecification {
   """)
 model VirtualMachineConfiguration {
   @doc("A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use.")
-  imageReference: BatchImageReference;
+  imageReference: BatchVmImageReference;
 
   @doc("The SKU of the Batch Compute Node agent to be provisioned on Compute Nodes in the Pool. The Batch Compute Node agent is a program that runs on each Compute Node in the Pool, and provides the command-and-control interface between the Compute Node and the Batch service. There are different implementations of the Compute Node agent, known as SKUs, for different operating systems. You must specify a Compute Node agent SKU which matches the selected Image reference. To get the list of supported Compute Node agent SKUs along with their list of verified Image references, see the 'List supported Compute Node agent SKUs' operation.")
   @clientName("nodeAgentSkuId", "!go")
@@ -2017,7 +2017,7 @@ model VirtualMachineConfiguration {
 
   @doc("Settings for the operating system disk of the Virtual Machine.")
   @clientName("OsDisk")
-  osDisk?: OSDisk;
+  osDisk?: BatchOsDisk;
 
   @doc("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
   securityProfile?: SecurityProfile;
@@ -2119,9 +2119,9 @@ model VMExtension {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Settings for the operating system disk of the compute node (VM).")
-model OSDisk {
+model BatchOsDisk {
   @doc("Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM).")
-  ephemeralOSDiskSettings?: DiffDiskSettings;
+  ephemeralOSDiskSettings?: BatchDiffDiskSettings;
 
   @doc("Specifies the caching requirements. Possible values are: None, ReadOnly, ReadWrite. The default values are: None for Standard storage. ReadOnly for Premium storage.")
   caching?: CachingType;
@@ -2140,7 +2140,7 @@ model OSDisk {
   Specifies the ephemeral Disk Settings for the operating system disk used by the
   compute node (VM).
   """)
-model DiffDiskSettings {
+model BatchDiffDiskSettings {
   @doc("Specifies the ephemeral disk placement for operating system disk for all VMs in the pool. This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.")
   placement?: DiffDiskPlacement;
 }
@@ -2166,7 +2166,7 @@ model NetworkConfiguration {
 
   @doc("The Public IPAddress configuration for Compute Nodes in the Batch Pool.")
   @clientName("publicIpAddressConfiguration", "!go")
-  publicIPAddressConfiguration?: PublicIpAddressConfiguration;
+  publicIPAddressConfiguration?: BatchPublicIpAddressConfiguration;
 
   @doc("Whether this pool should enable accelerated networking. Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.")
   enableAcceleratedNetworking?: boolean;
@@ -2177,7 +2177,7 @@ model NetworkConfiguration {
 model BatchPoolEndpointConfiguration {
   @doc("A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.")
   @clientName("inboundNatPools", "!go")
-  inboundNATPools: InboundNatPool[];
+  inboundNATPools: BatchInboundNatPool[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
@@ -2185,7 +2185,7 @@ model BatchPoolEndpointConfiguration {
   A inbound NAT Pool that can be used to address specific ports on Compute Nodes
   in a Batch Pool externally.
   """)
-model InboundNatPool {
+model BatchInboundNatPool {
   @doc("The name of the endpoint. The name must be unique within a Batch Pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400.")
   name: string;
 
@@ -2222,7 +2222,7 @@ model NetworkSecurityGroupRule {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The public IP Address configuration of the networking configuration of a Pool.")
-model PublicIpAddressConfiguration {
+model BatchPublicIpAddressConfiguration {
   @doc("The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.")
   @clientName("IpAddressProvisioningType")
   provision?: IpAddressProvisioningType;
@@ -2334,7 +2334,7 @@ model ManagedDisk {
   storageAccountType?: StorageAccountType;
 
   @doc("Specifies the security profile settings for the managed disk.")
-  securityProfile?: VMDiskSecurityProfile;
+  securityProfile?: BatchVMDiskSecurityProfile;
 }
 
 @doc("""
@@ -3637,7 +3637,7 @@ model ExitOptions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.")
 @clientName("VmDiskSecurityProfile")
-model VMDiskSecurityProfile {
+model BatchVMDiskSecurityProfile {
   @doc("Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs.")
   securityEncryptionType?: SecurityEncryptionTypes;
 }
@@ -4185,7 +4185,7 @@ model BatchNodeAgentInfo {
 @doc("Info about the current state of the virtual machine.")
 model VirtualMachineInfo {
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
-  imageReference?: BatchImageReference;
+  imageReference?: BatchVmImageReference;
 
   @doc("The resource ID of the Compute Node's current Virtual Machine Scale Set VM. Only defined if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.")
   scaleSetVmResourceId?: string;
