@@ -271,7 +271,7 @@ union sourceContentStructureKind {
   /**
    * Unstructured.
    */
-  unstructured: "unstructured",
+  unstructured: "Unstructured",
 }
 
 /**

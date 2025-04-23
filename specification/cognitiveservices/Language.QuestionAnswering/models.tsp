@@ -422,6 +422,7 @@ model KnowledgeBaseAnswerDialog {
   /**
    * List of prompts associated with the answer.
    */
+  @maxItems(20)
   prompts?: KnowledgeBaseAnswerPrompt[];
 }
 
