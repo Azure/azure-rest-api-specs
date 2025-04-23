@@ -1468,6 +1468,46 @@
         }
       }
     },
+    "/evaluations/runs:runAgent": {
+      "post": {
+        "operationId": "Evaluations_CreateAgentEvaluation",
+        "description": "Creates an agent evaluation run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "Agent evaluation to be run",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentEvaluationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AgentEvaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/evaluations/runs:updateUpload/{name}": {
       "patch": {
         "operationId": "Evaluations_UploadUpdateRun",
@@ -2435,6 +2475,44 @@
           }
         }
       }
+    },
+    "/runs/agents/{runId}": {
+      "get": {
+        "operationId": "EvaluationResults_GetAgentEvaluationResults",
+        "description": "Get agent evaluation results.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "Agent run id, for agent API v1, it's `[thread_id]:[run_id]`; for agent API v2, it's only the run_id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AgentEvaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2466,79 +2544,6 @@
         }
       ],
       "x-ms-discriminator-value": "AOAI"
-    },
-    "AnnotationDTO": {
-      "type": "object",
-      "description": "Represents the data transfer object for an annotation.",
-      "properties": {
-        "AnnotationTask": {
-          "type": "string",
-          "description": "The task associated with the annotation."
-        },
-        "ContentType": {
-          "type": "string",
-          "description": "The type of content being annotated."
-        },
-        "UserTextList": {
-          "type": "array",
-          "description": "A list of user-provided text inputs.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "Contents": {
-          "type": "array",
-          "description": "A collection of content objects related to the annotation.",
-          "items": {
-            "$ref": "#/definitions/Content"
-          },
-          "x-ms-identifiers": []
-        },
-        "MetricList": {
-          "type": "array",
-          "description": "A list of metrics associated with the annotation.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "PromptVersion": {
-          "type": "string",
-          "description": "The version of the prompt used for the annotation."
-        },
-        "UserAgent": {
-          "type": "string",
-          "description": "The user agent information."
-        },
-        "PartnerId": {
-          "type": "string",
-          "description": "The partner identifier."
-        },
-        "ModelId": {
-          "type": "string",
-          "description": "The model identifier."
-        },
-        "InferenceType": {
-          "type": "string",
-          "description": "The type of inference performed."
-        },
-        "ClientRequestId": {
-          "type": "string",
-          "description": "The client request identifier."
-        }
-      },
-      "required": [
-        "AnnotationTask",
-        "ContentType",
-        "UserTextList",
-        "Contents",
-        "MetricList",
-        "PromptVersion",
-        "UserAgent",
-        "PartnerId",
-        "ModelId",
-        "InferenceType",
-        "ClientRequestId"
-      ]
     },
     "AgentEvaluation": {
       "type": "object",
@@ -2688,6 +2693,79 @@
         "name",
         "samplingPercent",
         "maxRequestRate"
+      ]
+    },
+    "AnnotationDTO": {
+      "type": "object",
+      "description": "Represents the data transfer object for an annotation.",
+      "properties": {
+        "AnnotationTask": {
+          "type": "string",
+          "description": "The task associated with the annotation."
+        },
+        "ContentType": {
+          "type": "string",
+          "description": "The type of content being annotated."
+        },
+        "UserTextList": {
+          "type": "array",
+          "description": "A list of user-provided text inputs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Contents": {
+          "type": "array",
+          "description": "A collection of content objects related to the annotation.",
+          "items": {
+            "$ref": "#/definitions/Content"
+          },
+          "x-ms-identifiers": []
+        },
+        "MetricList": {
+          "type": "array",
+          "description": "A list of metrics associated with the annotation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PromptVersion": {
+          "type": "string",
+          "description": "The version of the prompt used for the annotation."
+        },
+        "UserAgent": {
+          "type": "string",
+          "description": "The user agent information."
+        },
+        "PartnerId": {
+          "type": "string",
+          "description": "The partner identifier."
+        },
+        "ModelId": {
+          "type": "string",
+          "description": "The model identifier."
+        },
+        "InferenceType": {
+          "type": "string",
+          "description": "The type of inference performed."
+        },
+        "ClientRequestId": {
+          "type": "string",
+          "description": "The client request identifier."
+        }
+      },
+      "required": [
+        "AnnotationTask",
+        "ContentType",
+        "UserTextList",
+        "Contents",
+        "MetricList",
+        "PromptVersion",
+        "UserAgent",
+        "PartnerId",
+        "ModelId",
+        "InferenceType",
+        "ClientRequestId"
       ]
     },
     "ApiKeyCredentials": {
