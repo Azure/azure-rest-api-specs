@@ -158,10 +158,6 @@ async function processResult({
     const ado_build_id = match[2];
     let artifactName = "spec-gen-sdk-artifact";
     const artifactFileName = `${artifactName}.json`;
-    if (checkRun.conclusion === CheckConclusion.FAILURE) {
-      // hardcode for testing now
-      artifactName = "spec-gen-sdk-artifact-FailedAttempt1";
-    }
     const result = await getAzurePipelineArtifact({
       ado_build_id,
       ado_project_url,
