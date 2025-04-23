@@ -20,6 +20,8 @@ npm ci
 
 The swagger converter will not be able to accurately represent every part of every API in TypeSpec. This document outlines some common changes you may need to make to a converted TypeSpec to make it conform to your existing service API, pass validation checks, and follow best practices.
 
+- Avoid extensive refactoring of the converted spec. The goal is to get a working spec that can compile successfully and then iteratively improve it.
+- A good example of a well structured data-plane spec is the [Contoso Widget Manager][contoso-widget-manager] spec. Use this as a reference for your own spec.
 - DO configure your tspconfig.yaml. Example of a well configured tspconfig.yaml file: [example tspconfig.yaml][tspconfig]
 - DO extend the `@azure-tools/typespec-azure-rulesets/data-plane` linter rule set in your tspconfig.yaml. Example:
 
@@ -47,8 +49,24 @@ linter:
 ```
 
 - DO ensure that you have a security definition (`@useAuth`) specified for your service. See: [Security definitions in TypeSpec][security-definitions]. The @useAuth decorator should only be defined ONCE in the entire specification above the @server definition.
-- DO ensure you have versioning enabled over your service definition. This means making sure that the `@typespec/versioning` library is important and the `@versioned` decorator is specified over the namespace. The `@versioned` decorator should be configured according to the documentation defined in this page: [Versioning][versioning]. Check for a a versioning enum and add one if it doesnt exist, see examples in the following link: https://typespec.io/docs/libraries/versioning/reference/decorators/#@TypeSpec.Versioning.versioned
-- If any files are using any of the versioning decorators, make sure to import the `@typespec/versioning` libray and add a using statement. Example:
+- Make sure that the `@typespec/versioning` library is imported and the `@versioned` decorator is specified over the namespace in main.tsp. Define a versions enum under the namespace you're decorating. Pass the versions enum to the `@versioned` decorator. The versions enum is defined once at the bottom of main.tsp file. Example:
+
+```tsp
+// this is the main.tsp file
+
+
+@versioned(Versions)
+namespace Contoso.WidgetManager;
+/** Service api versions **/
+enum Versions {
+  /** The 2023-11-01 api version **/
+  v2023_11_01: "2023-11-01",
+}
+```
+
+- All models, enums, unions, and operations should be added under the main namespace declared in the project.
+- Avoid having models, enums, unions, operations, and other types declared outside of a namespace.
+- If any files are using any of the versioning decorators, such as `@added`, `@removed`, `@changedType`, make sure to import the `@typespec/versioning` libray and add a using statement. Example:
 
 ```tsp
 import "@typespec/versioning";
@@ -78,11 +96,12 @@ union WidgetColor {
 
 - Avoid suppressing warnings
 - Operation names should be camel case
-- DO use `union` instead of `enum` to define Azure enums. For more information about how to define enums for Azure services see the following documentation: [Defining enums for Azure services][no-enum]. 
+- DO use `union` instead of `enum` to define Azure enums. For more information about how to define enums for Azure services see the following documentation: [Defining enums for Azure services][no-enum].
 - Avoid importing or using templates from the `@azure-tools/typespec-azure-resource-manager` library in a data-plane specification
 - DO make client customizations in a `client.tsp` file
 - Avoid importing or using `@azure-tools/typespec-client-generator-core` in other files aside from client.tsp.
 - DO run `tsp compile .` on your specification and make one attempt to address all warnings. Do not attempt to address warnings more than once even if they aren't resolved.
+- Attempt to address any FIXME or TODO comments in the spec. If you are unable to address them, leave them untouched
 
 #### Additional considerations
 
@@ -97,7 +116,7 @@ union WidgetColor {
 
 Examples of common errors and warnings that should be addressed after running the `tsp compile` command:
 
-- If you see an error with a message like: "referencing types from versioned namespace 'Azure.Core.Foundations' but didn't specify which versions with @useDependency", you should add the @useDependency decorator over each api version entry in your api versions enum. Example of a properly configured api versions enum: 
+- If you see an error with a message like: "referencing types from versioned namespace 'Azure.Core.Foundations' but didn't specify which versions with @useDependency", you should add the @useDependency decorator over each api version entry in your api versions enum. Example of a properly configured api versions enum:
 
 ```
 /** Service api versions **/
@@ -116,6 +135,7 @@ enum Versions {
 
 <!-- LINKS -->
 
+[contoso-widget-manager]: ../specification/contosowidgetmanager/Contoso.WidgetManager/
 [tspconfig]: ../specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml
 [security-definitions]: https://azure.github.io/typespec-azure/docs/reference/azure-style-guide#security-definitions
 [versioning]: https://typespec.io/docs/libraries/versioning/guide#implementing-versioned-apis
