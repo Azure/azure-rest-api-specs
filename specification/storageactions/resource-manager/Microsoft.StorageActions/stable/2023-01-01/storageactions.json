@@ -908,9 +908,17 @@
           "$ref": "#/definitions/IfCondition",
           "description": "The if block of storage task operation"
         },
-        "else": {
-          "$ref": "#/definitions/ElseCondition",
-          "description": "The else block of storage task operation"
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageTaskUpdateProperties",
+          "description": "Properties of the storage task."
         }
       },
       "required": [
@@ -1190,6 +1198,57 @@
           "description": "Represents the value property of the pair."
         }
       }
+    },
+    "StorageTaskUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "taskVersion": {
+          "readOnly": true,
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1,
+          "format": "int64",
+          "description": "Storage task version."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Storage Task is enabled when set to true and disabled when set to false"
+        },
+        "description": {
+          "type": "string",
+          "description": "Text that describes the purpose of the storage task"
+        },
+        "action": {
+          "$ref": "#/definitions/StorageTaskAction",
+          "description": "The storage task action that is executed"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Represents the provisioning state of the storage task.",
+          "enum": [
+            "ValidateSubscriptionQuotaBegin",
+            "ValidateSubscriptionQuotaEnd",
+            "Accepted",
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "creationTimeInUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time of the storage task in UTC."
+        }
+      },
+      "description": "Properties of the storage task."
     },
     "StorageTaskProperties": {
       "type": "object",
