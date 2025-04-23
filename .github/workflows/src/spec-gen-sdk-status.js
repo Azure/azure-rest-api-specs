@@ -2,7 +2,6 @@
 import { extractInputs } from "./context.js";
 import { getAzurePipelineArtifact } from "./artifacts.js";
 import {
-  CheckConclusion,
   CheckStatus,
   CommitStatusState,
   PER_PAGE_MAX,
