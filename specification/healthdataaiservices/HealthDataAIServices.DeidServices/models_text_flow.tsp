@@ -12,7 +12,7 @@ model DeidentificationContent {
   inputText: string;
 
   @doc("Operation to perform on the input documents.")
-  @clientName("operationType", "java")
+  @clientName("operationType", "csharp,java")
   operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
 
   @doc("Customization parameters to override default service behaviors.")

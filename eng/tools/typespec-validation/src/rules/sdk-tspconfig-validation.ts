@@ -361,6 +361,15 @@ export class TspConfigPythonMgmtPackageDirectorySubRule extends TspconfigEmitter
   }
 }
 
+export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "namespace", new RegExp(/^azure\.mgmt(\.[a-z]+){1,2}$/));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 // ----- Python data plane sub rules -----
 export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -371,13 +380,16 @@ export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOp
   }
 }
 
-// ----- Python azure sub rules -----
-export class TspConfigPythonAzPackageNameEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigPythonDpPackageNameEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "package-name", "{package-dir}");
   }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
 }
 
+// ----- Python azure sub rules -----
 export class TspConfigPythonAzGenerateTestTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "generate-test", true);
@@ -461,8 +473,9 @@ export const defaultRules = [
   new TspConfigGoDpPackageDirectoryMatchPatternSubRule(),
   new TspConfigGoDpModuleMatchPatternSubRule(),
   new TspConfigPythonMgmtPackageDirectorySubRule(),
+  new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpPackageDirectorySubRule(),
-  new TspConfigPythonAzPackageNameEqualStringSubRule(),
+  new TspConfigPythonDpPackageNameEqualStringSubRule(),
   new TspConfigPythonAzGenerateTestTrueSubRule(),
   new TspConfigPythonAzGenerateSampleTrueSubRule(),
   new TspConfigCsharpAzPackageDirectorySubRule(),
