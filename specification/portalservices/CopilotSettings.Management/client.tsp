@@ -12,3 +12,8 @@ using Azure.ClientGenerator.Core;
   "PortalServicesCopilotMgmtClient",
   "java"
 );
+
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+  "PortalServiceResourceProvisioningState",
+  "csharp"
+);
