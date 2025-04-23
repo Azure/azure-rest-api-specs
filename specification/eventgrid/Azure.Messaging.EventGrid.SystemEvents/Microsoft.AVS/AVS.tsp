@@ -74,12 +74,15 @@ model AvsClusterEventData {
   operationId: string;
 
   /** Hosts added to the cluster in this event, if any. */
+  @visibility(Lifecycle.Read)
   addedHostNames?: string[];
 
   /** Hosts removed from the cluster in this event, if any. */
+  @visibility(Lifecycle.Read)
   removedHostNames?: string[];
 
   /** Hosts in Maintenance mode in the cluster, if any. */
+  @visibility(Lifecycle.Read)
   inMaintenanceHostNames?: string[];
 }
 
@@ -92,5 +95,6 @@ model AvsScriptExecutionEventData {
   cmdletId: string;
 
   /** Stdout outputs from the execution, if any. */
+  @visibility(Lifecycle.Read)
   output?: string[];
 }

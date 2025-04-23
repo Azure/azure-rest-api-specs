@@ -441,6 +441,7 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -482,6 +483,7 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -1345,6 +1347,7 @@
           "items": {
             "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -1392,18 +1395,19 @@
           "$ref": "#/definitions/AcsRouterCommunicationError",
           "description": "Router Communication Inner Error"
         },
-        "details": {
+        "errors": {
           "type": "array",
           "description": "List of Router Communication Errors",
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
       "required": [
         "innererror",
-        "details"
+        "errors"
       ]
     },
     "AcsRouterEventData": {
@@ -1457,6 +1461,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -1492,6 +1497,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -1623,6 +1629,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "requestedWorkerSelectors": {
@@ -1631,6 +1638,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -1667,6 +1675,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "scheduledOn": {
@@ -1706,6 +1715,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "expiredRequestedWorkerSelectors": {
@@ -1714,6 +1724,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "scheduledOn": {
@@ -1855,6 +1866,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "expiredRequestedWorkerSelectors": {
@@ -1863,6 +1875,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "scheduledOn": {
@@ -1897,6 +1910,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "expiredAttachedWorkerSelectors": {
@@ -1905,6 +1919,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -2274,7 +2289,8 @@
           "description": "Router Worker Registered Queue Info",
           "items": {
             "$ref": "#/definitions/AcsRouterQueueDetails"
-          }
+          },
+          "readOnly": true
         },
         "channelConfigurations": {
           "type": "array",
@@ -2282,6 +2298,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "totalCapacity": {
@@ -2387,7 +2404,8 @@
           "description": "Router Worker Updated Queue Info",
           "items": {
             "$ref": "#/definitions/AcsRouterQueueDetails"
-          }
+          },
+          "readOnly": true
         },
         "channelConfigurations": {
           "type": "array",
@@ -2395,6 +2413,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "totalCapacity": {
@@ -2421,7 +2440,8 @@
           "description": "Router Worker Properties Updated",
           "items": {
             "$ref": "#/definitions/AcsRouterUpdatedWorkerProperty"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -2474,6 +2494,7 @@
           "items": {
             "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "receivedTimestamp": {
@@ -3300,21 +3321,24 @@
           "description": "Hosts added to the cluster in this event, if any.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "removedHostNames": {
           "type": "array",
           "description": "Hosts removed from the cluster in this event, if any.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "inMaintenanceHostNames": {
           "type": "array",
           "description": "Hosts in Maintenance mode in the cluster, if any.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -3426,7 +3450,8 @@
           "description": "Stdout outputs from the execution, if any.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -6526,7 +6551,8 @@
           "description": "Lists of the geometry ID of the geofence which is expired relative to the user time in the request.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "geometries": {
           "type": "array",
@@ -6534,6 +6560,7 @@
           "items": {
             "$ref": "#/definitions/MapsGeofenceGeometry"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "invalidPeriodGeofenceGeometryId": {
@@ -6541,7 +6568,8 @@
           "description": "Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "isEventPublished": {
           "type": "boolean",
