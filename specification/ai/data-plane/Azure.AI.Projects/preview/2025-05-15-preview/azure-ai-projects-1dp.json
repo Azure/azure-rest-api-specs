@@ -1515,6 +1515,46 @@
         }
       }
     },
+    "/evaluations/runs:runAgent": {
+      "post": {
+        "operationId": "Evaluations_CreateAgentEvaluation",
+        "description": "Creates an agent evaluation run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "Agent evaluation to be run",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentEvaluationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AgentEvaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/evaluations/runs:upload": {
       "post": {
         "operationId": "Evaluations_UploadRun",
@@ -2538,6 +2578,156 @@
         "ModelId",
         "InferenceType",
         "ClientRequestId"
+      ]
+    },
+    "AgentEvaluation": {
+      "type": "object",
+      "description": "Evaluation response for agent evaluation run.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the agent evaluation run."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the agent evaluation. Options: Running, Completed, Failed."
+        },
+        "result": {
+          "type": "array",
+          "description": "The agent evaluation result.",
+          "items": {
+            "$ref": "#/definitions/AgentEvaluationResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "AgentEvaluationRedactionConfiguration": {
+      "type": "object",
+      "description": "The redaction configuration will allow the user to control what is redacted.",
+      "properties": {
+        "redactScoreProperties": {
+          "type": "boolean",
+          "description": "Redact score properties. If not specified, the default is to redact in production."
+        }
+      }
+    },
+    "AgentEvaluationRequest": {
+      "type": "object",
+      "description": "Evaluation request for agent run.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "Identifier of the agent run."
+        },
+        "threadId": {
+          "type": "string",
+          "description": "Identifier of the agent thread. This field is mandatory currently, but it will be optional in the future."
+        },
+        "evaluators": {
+          "type": "object",
+          "description": "Evaluators to be used for the evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorConfiguration"
+          }
+        },
+        "samplingConfiguration": {
+          "$ref": "#/definitions/AgentEvaluationSamplingConfiguration",
+          "description": "Sampling configuration for the evaluation."
+        },
+        "redactionConfiguration": {
+          "$ref": "#/definitions/AgentEvaluationRedactionConfiguration",
+          "description": "Redaction configuration for the evaluation."
+        },
+        "appInsightsConnectionString": {
+          "type": "string",
+          "description": "Optional and temporary way to pass the AppInsights connection string to the evaluator. When this string is not null, the evaluation results will be logged to Azure AppInsights."
+        }
+      },
+      "required": [
+        "runId",
+        "evaluators"
+      ]
+    },
+    "AgentEvaluationResult": {
+      "type": "object",
+      "description": "Result for the agent evaluation evaluator run.",
+      "properties": {
+        "evaluator": {
+          "type": "string",
+          "description": "Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion."
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "Score of the given evaluator. No restriction on range."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the evaluator result. Options: Running, Completed, Failed, NotApplicable."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reasoning for the evaluation result."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the evaluator that was used to evaluate the agent's completion."
+        },
+        "threadId": {
+          "type": "string",
+          "description": "The unique identifier of the thread."
+        },
+        "runId": {
+          "type": "string",
+          "description": "The unique identifier of the run."
+        },
+        "error": {
+          "type": "string",
+          "description": "A string explaining why there was an error, if applicable."
+        },
+        "additionalDetails": {
+          "type": "object",
+          "description": "Additional properties relevant to the evaluator. These will differ between evaluators.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "evaluator",
+        "score",
+        "status",
+        "runId"
+      ]
+    },
+    "AgentEvaluationSamplingConfiguration": {
+      "type": "object",
+      "description": "Definition for sampling strategy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the sampling strategy."
+        },
+        "samplingPercent": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of sampling per hour (0-100)."
+        },
+        "maxRequestRate": {
+          "type": "number",
+          "format": "float",
+          "description": "Maximum request rate per hour (0 to 1000)."
+        }
+      },
+      "required": [
+        "name",
+        "samplingPercent",
+        "maxRequestRate"
       ]
     },
     "ApiKeyCredentials": {
