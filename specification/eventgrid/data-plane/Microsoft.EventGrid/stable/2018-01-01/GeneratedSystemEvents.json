@@ -2642,6 +2642,73 @@
         }
       }
     },
+    "ApiManagementCircuitBreakerClosedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Closed event.",
+      "properties": {
+        "backendName": {
+          "type": "string",
+          "description": "Name of the backend for which the circuit has closed."
+        },
+        "circuitBreaker": {
+          "$ref": "#/definitions/ApiManagementCircuitBreakerProperties",
+          "description": "Information related to the circuit breaker configured on the backend."
+        }
+      },
+      "required": [
+        "backendName",
+        "circuitBreaker"
+      ]
+    },
+    "ApiManagementCircuitBreakerOpenedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Opened event.",
+      "properties": {
+        "backendName": {
+          "type": "string",
+          "description": "Name of the backend for which the circuit has opened."
+        },
+        "circuitBreaker": {
+          "$ref": "#/definitions/ApiManagementCircuitBreakerProperties",
+          "description": "Information related to the circuit breaker configured on the backend."
+        }
+      },
+      "required": [
+        "backendName",
+        "circuitBreaker"
+      ]
+    },
+    "ApiManagementCircuitBreakerProperties": {
+      "type": "object",
+      "description": "Information related to the circuit breaker configured on the backend.",
+      "properties": {
+        "rules": {
+          "type": "object",
+          "description": "Overview of all configured rules and respective details.",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "rules"
+      ]
+    },
+    "ApiManagementExpiredGatewayTokenProperties": {
+      "type": "object",
+      "description": "Information related to a gateway token that has expired for a self-hosted gateway deployment.",
+      "properties": {
+        "expiredAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the gateway token has expired.",
+          "x-ms-client-name": "expiresOn"
+        }
+      },
+      "required": [
+        "expiredAtUtc"
+      ]
+    },
     "ApiManagementGatewayApiAddedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIAdded event.",
@@ -2742,6 +2809,64 @@
         }
       }
     },
+    "ApiManagementGatewayProperties": {
+      "type": "object",
+      "description": "Information related to a given self-hosted gateway deployment.",
+      "properties": {
+        "gatewayId": {
+          "type": "string",
+          "description": "Id of Gateway that is used to deploy the gateway to get the configuration for. This is the ARM resource ID referenced in the Azure API Management instance. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateway/<GatewayName>`"
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "Unique instance ID of the deployed gateway"
+        }
+      },
+      "required": [
+        "gatewayId",
+        "instanceId"
+      ]
+    },
+    "ApiManagementGatewayTokenExpiredEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenExpired event.",
+      "properties": {
+        "gatewayInfo": {
+          "$ref": "#/definitions/ApiManagementGatewayProperties",
+          "description": "Information related to a given self-hosted gateway deployment.",
+          "x-ms-client-name": "gateway"
+        },
+        "tokenInfo": {
+          "$ref": "#/definitions/ApiManagementExpiredGatewayTokenProperties",
+          "description": "Information related to a an expired gateway token for a self-hosted gateway deployment.",
+          "x-ms-client-name": "token"
+        }
+      },
+      "required": [
+        "gatewayInfo",
+        "tokenInfo"
+      ]
+    },
+    "ApiManagementGatewayTokenNearExpiryEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenNearExpiry event.",
+      "properties": {
+        "gatewayInfo": {
+          "$ref": "#/definitions/ApiManagementGatewayProperties",
+          "description": "Information related to a given self-hosted gateway deployment.",
+          "x-ms-client-name": "gateway"
+        },
+        "tokenInfo": {
+          "$ref": "#/definitions/ApiManagementNearExpiryGatewayTokenProperties",
+          "description": "Information related to a an expired gateway token for a self-hosted gateway deployment.",
+          "x-ms-client-name": "token"
+        }
+      },
+      "required": [
+        "gatewayInfo",
+        "tokenInfo"
+      ]
+    },
     "ApiManagementGatewayUpdatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayUpdated event.",
@@ -2751,6 +2876,21 @@
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
         }
       }
+    },
+    "ApiManagementNearExpiryGatewayTokenProperties": {
+      "type": "object",
+      "description": "Information related to a gateway token that is near expiry for a self-hosted gateway deployment.",
+      "properties": {
+        "expiredAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the gateway token will expire.",
+          "x-ms-client-name": "expiresOn"
+        }
+      },
+      "required": [
+        "expiredAtUtc"
+      ]
     },
     "ApiManagementProductCreatedEventData": {
       "type": "object",
