@@ -27,6 +27,41 @@ model Publisher
 
 @armResourceOperations
 interface Publishers {
+  listBySubscription is ArmListBySubscription<
+    Publisher,
+    {
+      /**
+       * Filter the result list using the given expression.
+       */
+      @query("$filter")
+      filter?: string;
+
+      /**
+       * The number of result items to return.
+       */
+      @query("$top")
+      top?: int32;
+
+      /**
+       * The number of result items to skip.
+       */
+      @query("skip")
+      skip?: int32;
+
+      /**
+       * The maximum number of result items per page.
+       */
+      @query("maxpagesize")
+      maxPageSize?: int32;
+
+      /**
+       * Skip over when retrieving results.
+       */
+      @query("$skipToken")
+      skipToken?: string;
+    }
+  >;
+
   /**
    * Get a Publisher
    */
