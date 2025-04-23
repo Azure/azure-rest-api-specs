@@ -2354,7 +2354,7 @@
       "description": "Location for NewRelic resource"
     },
     "PublisherIdParameter": {
-      "type": "string",
+      "type": "object",
       "properties": {},
       "description": "Publisher Id for NewRelic resource"
     },
@@ -2950,8 +2950,10 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SaaSData",
-          "description": "saas Id"
+          "saaSResourceId": {
+            "type": "string",
+            "description": "saas resource id"
+          }
         }
       },
       "description": "Response of get SaaSInfo Operation.",
