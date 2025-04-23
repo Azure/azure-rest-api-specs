@@ -1,0 +1,92 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.PowerBIDedicated;
+/**
+ * Represents an instance of an auto scale v-core resource.
+ */
+model AutoScaleVCore
+  is Azure.ResourceManager.TrackedResource<AutoScaleVCoreProperties> {
+  ...ResourceNameParameter<
+    Resource = AutoScaleVCore,
+    KeyName = "vcoreName",
+    SegmentName = "autoScaleVCores",
+    NamePattern = "^[-a-zA-Z0-9_]+$"
+  >;
+
+  /**
+   * The SKU of the auto scale v-core resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  sku: AutoScaleVCoreSku;
+}
+
+@armResourceOperations
+interface AutoScaleVCores {
+  /**
+   * Gets details about the specified auto scale v-core.
+   */
+  get is ArmResourceRead<AutoScaleVCore>;
+
+  /**
+   * Provisions the specified auto scale v-core based on the configuration specified in the request.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  create is ArmResourceCreateOrReplaceSync<
+    AutoScaleVCore,
+    Response = ArmResourceUpdatedResponse<AutoScaleVCore>
+  >;
+
+  /**
+   * Updates the current state of the specified auto scale v-core.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    AutoScaleVCore,
+    PatchModel = AutoScaleVCoreUpdateParameters
+  >;
+
+  /**
+   * Deletes the specified auto scale v-core.
+   */
+  delete is ArmResourceDeleteSync<AutoScaleVCore>;
+
+  /**
+   * Gets all the auto scale v-cores for the given resource group.
+   */
+  listByResourceGroup is ArmResourceListByParent<
+    AutoScaleVCore,
+    Response = ArmResponse<AutoScaleVCoreListResult>
+  >;
+
+  /**
+   * Lists all the auto scale v-cores for the given subscription.
+   */
+  listBySubscription is ArmListBySubscription<
+    AutoScaleVCore,
+    Response = ArmResponse<AutoScaleVCoreListResult>
+  >;
+}
+
+@@maxLength(AutoScaleVCore.name, 63);
+@@minLength(AutoScaleVCore.name, 3);
+@@doc(AutoScaleVCore.name,
+  "The name of the auto scale v-core. It must be a minimum of 3 characters, and a maximum of 63."
+);
+@@doc(AutoScaleVCore.properties,
+  "Properties of an auto scale v-core resource."
+);
+@@doc(AutoScaleVCores.create::parameters.resource,
+  "Contains the information used to provision the auto scale v-core."
+);
+@@doc(AutoScaleVCores.update::parameters.properties,
+  "Request object that contains the updated information for the auto scale v-core."
+);
