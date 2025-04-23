@@ -57,7 +57,8 @@ interface SavingsPlanModels {
   @operationId("SavingsPlan_Update")
   update is ArmCustomPatchAsync<
     SavingsPlanModel,
-    PatchModel = SavingsPlanUpdateRequest
+    PatchModel = SavingsPlanUpdateRequest,
+    Response = ArmResponse<SavingsPlanModel> | ArmAcceptedLroResponse | ArmResourceNotFoundResponse
   >;
 
   /**

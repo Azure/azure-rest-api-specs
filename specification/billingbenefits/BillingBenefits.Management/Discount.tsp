@@ -45,7 +45,7 @@ interface Discounts {
   update is ArmCustomPatchAsync<
     Discount,
     PatchModel = DiscountPatchRequest,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Discount> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

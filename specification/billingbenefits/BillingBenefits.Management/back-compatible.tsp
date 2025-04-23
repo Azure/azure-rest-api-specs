@@ -1,4 +1,3 @@
-import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -15,9 +14,6 @@ using Microsoft.BillingBenefits;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DiscountPatchRequest.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AppliedDiscount.properties);
 
 @@clientName(SavingsPlanOrderAliasModels.create::parameters.resource, "body");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -38,5 +34,3 @@ using Microsoft.BillingBenefits;
 
 @@clientName(Discounts.create::parameters.resource, "body");
 @@clientName(Discounts.update::parameters.properties, "body");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Discount.properties);

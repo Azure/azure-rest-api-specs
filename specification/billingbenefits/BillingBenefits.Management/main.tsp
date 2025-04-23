@@ -18,6 +18,7 @@ import "./SavingsPlanModel.tsp";
 import "./ReservationOrderAliasResponse.tsp";
 import "./Discount.tsp";
 import "./routes.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

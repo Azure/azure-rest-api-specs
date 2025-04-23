@@ -53,9 +53,19 @@ interface ReservationOrderAliasResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReservationOrderAlias_Create")
-  create is ArmResourceCreateOrReplaceAsync<
-    ReservationOrderAliasResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  @armResourceCreateOrUpdate(ReservationOrderAliasResponse)
+  create is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      ReservationOrderAliasResponse,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<ReservationOrderAliasResponse>
+    >,
+    ReservationOrderAliasRequest,
+    ReservationOrderAliasResponse | ArmResourceCreatedResponse<
+      ReservationOrderAliasResponse,
+      LroHeaders = ArmAsyncOperationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
+    ErrorResponse
   >;
 }
 
