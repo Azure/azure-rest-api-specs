@@ -36,7 +36,7 @@ model Properties {
   mode?: OperationalMode; // Should this be optional?
 
   @doc("Disk persistence mode.")
-  requestDiskPersistence?: OperationalMode; 
+  requestDiskPersistence?: OperationalMode;
 
   @doc("Reference to the dataflow profile")
   profileRef: string; // should we leverage k8s-bridge translation here? https://armwiki.azurewebsites.net/rpaas/arc-rp/conversion/SchemaTranslation.html#kubernetes-bridge-custom-filters
@@ -118,7 +118,7 @@ model GraphSettings { // Maybe this resource isn't needed?
 
   @doc("Configuration key-value pairs.")
   @OpenAPI.extension("x-ms-identifiers", #["key"])
-  configuration?: GraphNodeConfiguration[]
+  configuration?: GraphNodeConfiguration[];
 }
 
 @doc("DataflowGraph graph node configuration.")
