@@ -5,6 +5,8 @@ using Azure.ResourceManager;
 
 namespace Playwright.Management;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 @armResourceOperations
 interface PlaywrightWorkspaces
   extends TrackedResourceOperations<
