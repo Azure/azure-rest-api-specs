@@ -38,14 +38,14 @@ union ResultType {
   string,
 
   @doc("Benchmark result")
-  Benchmark: "Benchmark";
+  Benchmark: "Benchmark",
 
   @doc("Evaluations Result")
-  Evaluation: "Evaluation";
+  Evaluation: "Evaluation",
 
   @doc("Red Team Result")
-  Redteam: "Redteam";
+  Redteam: "Redteam",
 
   @doc("Simulation Result")
-  Simulation: "Simulation";
+  Simulation: "Simulation",
 }

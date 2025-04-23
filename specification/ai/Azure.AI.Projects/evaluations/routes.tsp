@@ -27,7 +27,7 @@ alias ListEvaluationParameters = {
   @query
   properties?: string;
 
-  ...StandardListQueryParameters
+  ...StandardListQueryParameters;
 };
 
 @route("evaluations")
@@ -53,7 +53,20 @@ interface Evaluations {
       @body
       evaluation: Evaluation;
     },
-    Evaluation
+    ResourceCreatedResponse<Evaluation>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates an agent evaluation run.")
+  @route("runs:runAgent")
+  @post
+  createAgentEvaluation is Azure.Core.Foundations.Operation<
+    {
+      @doc("Agent evaluation to be run")
+      @body
+      evaluation: AgentEvaluationRequest;
+    },
+    ResourceCreatedResponse<AgentEvaluation>
   >;
 
   // Evaluation Private APIs
@@ -64,13 +77,12 @@ interface Evaluations {
   @useAuth(BearerAuth)
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
-  op checkAnnotation(
-    ...Azure.Core.Foundations.ApiVersionParameter;
-  ): {
-      @statusCode statusCode: 200;
-      @doc("List of supported annotation.")
-      @body supportedAnnotationList: string[];
+  checkAnnotation(...Azure.Core.Foundations.ApiVersionParameter): {
+    @statusCode statusCode: 200;
 
+    @doc("List of supported annotation.")
+    @body
+    supportedAnnotationList: string[];
   };
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -80,15 +92,18 @@ interface Evaluations {
   @useAuth(BearerAuth)
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
-  op submitAnnotation(
-    ...Azure.Core.Foundations.ApiVersionParameter;
+  submitAnnotation(
+    ...Azure.Core.Foundations.ApiVersionParameter,
 
     @doc("Annotation data inputList of supported annotation.")
-    @body annotationDTO: AnnotationDTO
+    @body
+    annotationDTO: AnnotationDTO,
   ): {
     @statusCode statusCode: 202;
+
     @doc("The data for annotation.")
-    @body fileContentResult: string;
+    @body
+    fileContentResult: string;
   };
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -98,15 +113,18 @@ interface Evaluations {
   @useAuth(BearerAuth)
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
-  op operationResults(
-    ...Azure.Core.Foundations.ApiVersionParameter;
+  operationResults(
+    ...Azure.Core.Foundations.ApiVersionParameter,
 
     @doc("Operation ID for the polling operation.")
-    @path operationId: string,
+    @path
+    operationId: string,
   ): {
     @statusCode statusCode: 200;
+
     @doc("The operation results.")
-    @body operationResults: Record<unknown>[]
+    @body
+    operationResults: Record<unknown>[];
   };
 
   // Upload API set
