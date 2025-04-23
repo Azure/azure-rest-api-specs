@@ -1,4 +1,4 @@
-import "../../../models/exadata/dnsPrivateViews.tsp";
+import "../../models/exadata/dnsPrivateViews.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
@@ -7,10 +7,6 @@ namespace Oracle.Database;
 
 @armResourceOperations
 interface DnsPrivateViews extends OracleLocationBasedResource<DnsPrivateView> {}
-
-@@doc(DnsPrivateViews.listByLocation,
-  "List DnsPrivateView resources by Location"
-);
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(DnsPrivateViews.listByLocation,

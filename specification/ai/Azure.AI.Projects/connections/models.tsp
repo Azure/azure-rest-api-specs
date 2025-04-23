@@ -15,7 +15,6 @@ namespace Azure.AI.Projects;
 @discriminator("authType")
 @added(Versions.v2025_05_01)
 model Connection {
-
   @doc("The name of the resource")
   @visibility(Lifecycle.Read)
   @key("name")
@@ -45,7 +44,6 @@ model Connection {
 @doc("A base class for connection credentials")
 @discriminator("authType")
 model BaseCredentials {
-
   @doc("The type of credential used by the connection")
   @visibility(Lifecycle.Read)
   authType: CredentialType;
@@ -53,7 +51,6 @@ model BaseCredentials {
 
 @doc("API Key Credential definition")
 model ApiKeyCredentials extends BaseCredentials {
-
   @doc("The credentail type")
   @visibility(Lifecycle.Read)
   authType: CredentialType.apiKey;
@@ -66,7 +63,6 @@ model ApiKeyCredentials extends BaseCredentials {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Entra ID credential definition")
 model EntraIDCredentials extends BaseCredentials {
-
   @doc("The credential type")
   @visibility(Lifecycle.Read)
   authType: CredentialType.entraId;
@@ -74,7 +70,6 @@ model EntraIDCredentials extends BaseCredentials {
 
 @doc("Custom credential defintion")
 model CustomCredential extends BaseCredentials {
-
   @doc("The credential type ")
   @visibility(Lifecycle.Read)
   authType: CredentialType.custom;
@@ -83,7 +78,6 @@ model CustomCredential extends BaseCredentials {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Shared Access Signature (SAS) credential definition")
 model SASCredentials extends BaseCredentials {
-
   @doc("The credential type")
   @visibility(Lifecycle.Read)
   authType: CredentialType.SAS;
@@ -95,7 +89,6 @@ model SASCredentials extends BaseCredentials {
 
 @doc("Credentials that do not require authentication")
 model NoAuthenticationCredentials extends BaseCredentials {
-
   @doc("The credential type ")
   @visibility(Lifecycle.Read)
   authType: CredentialType.None;
@@ -112,7 +105,7 @@ union ConnectionType {
   @doc("Azure Blob Storage, with specified container")
   AzureBlobStorage: "AzureBlob",
 
-  @doc("Azure Blob Storage, with container not specified (used by Assistants)")
+  @doc("Azure Blob Storage, with container not specified (used by Agents)")
   AzureStorageAccount: "AzureStorageAccount",
 
   @doc("Azure AI Search")

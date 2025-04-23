@@ -148,6 +148,97 @@ model Evaluation {
   outputs: Record<string>;
 }
 
+@doc("Definition for sampling strategy.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluationSamplingConfiguration {
+  @doc("Name of the sampling strategy.")
+  name: string;
+
+  @doc("Percentage of sampling per hour (0-100).")
+  samplingPercent: float32;
+
+  @doc("Maximum request rate per hour (0 to 1000).")
+  maxRequestRate: float32;
+}
+
+@doc("The redaction configuration will allow the user to control what is redacted.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluationRedactionConfiguration {
+  @doc("Redact score properties. If not specified, the default is to redact in production.")
+  redactScoreProperties?: boolean;
+}
+
+@doc("Evaluation request for agent run.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluationRequest {
+  @doc("Identifier of the agent run.")
+  runId: string;
+
+  @doc("Identifier of the agent thread. This field is mandatory currently, but it will be optional in the future.")
+  threadId?: string;
+
+  @doc("Evaluators to be used for the evaluation.")
+  evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Sampling configuration for the evaluation.")
+  samplingConfiguration?: AgentEvaluationSamplingConfiguration;
+
+  @doc("Redaction configuration for the evaluation.")
+  redactionConfiguration?: AgentEvaluationRedactionConfiguration;
+
+  @doc("Optional and temporary way to pass the AppInsights connection string to the evaluator. When this string is not null, the evaluation results will be logged to Azure AppInsights.")
+  appInsightsConnectionString?: string;
+}
+
+@doc("Result for the agent evaluation evaluator run.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluationResult {
+  @doc("Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion.")
+  evaluator: string;
+
+  @doc("Score of the given evaluator. No restriction on range.")
+  score: float32;
+
+  @doc("Status of the evaluator result. Options: Running, Completed, Failed, NotApplicable.")
+  status: string;
+
+  @doc("Reasoning for the evaluation result.")
+  reason?: string;
+
+  @doc("Version of the evaluator that was used to evaluate the agent's completion.")
+  version?: string;
+
+  @doc("The unique identifier of the thread.")
+  threadId?: string;
+
+  @doc("The unique identifier of the run.")
+  runId: string;
+
+  @doc("A string explaining why there was an error, if applicable.")
+  error?: string;
+
+  @doc("Additional properties relevant to the evaluator. These will differ between evaluators.")
+  additionalDetails?: Record<string>;
+}
+
+@doc("Evaluation response for agent evaluation run.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluation {
+  @doc("Identifier of the agent evaluation run.")
+  id: string;
+
+  @doc("Status of the agent evaluation. Options: Running, Completed, Failed.")
+  status: string;
+
+  @doc("The agent evaluation result.")
+  result?: Array<AgentEvaluationResult>;
+}
+
 @doc("Message content.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)

@@ -53,7 +53,20 @@ interface Evaluations {
       @body
       evaluation: Evaluation;
     },
-    Evaluation
+    ResourceCreatedResponse<Evaluation>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates an agent evaluation run.")
+  @route("runs:runAgent")
+  @post
+  createAgentEvaluation is Azure.Core.Foundations.Operation<
+    {
+      @doc("Agent evaluation to be run")
+      @body
+      evaluation: AgentEvaluationRequest;
+    },
+    ResourceCreatedResponse<AgentEvaluation>
   >;
 
   // Evaluation Private APIs
