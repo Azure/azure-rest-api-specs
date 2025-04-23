@@ -110,16 +110,27 @@ union RiskCategory {
   Sexual: "Sexual",
 
   @doc("Represents content related to self-harm.")
-  SelfHarm: "SelfHarm",
+  SelfHarm: "SelfHarm"
+}
 
-  @doc("Represents content involving protected material.")
-  ProtectedMaterial: "ProtectedMaterial",
+@doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AzureOpenAIModelConfiguration extends TargetConfig {
+  @visibility(Lifecycle.Read)
+  type: "AzureOpenAIModel";
 
-  @doc("Represents content related to code vulnerabilities.")
-  CodeVulnerability: "CodeVulnerability",
+  @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`.")
+  modelDeploymentName: string;
+}
 
-  @doc("Represents content with ungrounded attributes.")
-  UngroundedAttributes: "UngroundedAttributes",
+@doc("Abstract class for target configuration.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+@discriminator("type")
+model TargetConfig {
+  @doc("Type of the model configuration.")
+  type: string;
 }
 
 @doc("Red team details.")
@@ -159,4 +170,7 @@ model RedTeam {
   @doc("Status of the red-team. It is set by service and is read-only.")
   @visibility(Lifecycle.Read)
   status?: string;
+
+  @doc("Target configuration for the red-team run.")
+  targetConfig: TargetConfig;
 }

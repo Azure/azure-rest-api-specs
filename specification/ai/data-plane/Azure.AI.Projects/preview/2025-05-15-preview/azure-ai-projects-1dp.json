@@ -2046,6 +2046,25 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
+    "AzureOpenAIModelConfiguration": {
+      "type": "object",
+      "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "ModelDeploymentName": {
+          "type": "string",
+          "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
+        }
+      },
+      "required": [
+        "ModelDeploymentName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureOpenAIModel"
+    },
     "BaseCredentials": {
       "type": "object",
       "description": "A base class for connection credentials",
@@ -3278,6 +3297,10 @@
           "type": "string",
           "description": "Status of the red-team. It is set by service and is read-only.",
           "readOnly": true
+        },
+        "targetConfig": {
+          "$ref": "#/definitions/TargetConfig",
+          "description": "Target configuration for the red-team run."
         }
       },
       "required": [
@@ -3285,7 +3308,8 @@
         "numTurns",
         "attackStrategies",
         "simulationOnly",
-        "riskCategories"
+        "riskCategories",
+        "targetConfig"
       ]
     },
     "RiskCategory": {
@@ -3295,10 +3319,7 @@
         "HateUnfairness",
         "Violence",
         "Sexual",
-        "SelfHarm",
-        "ProtectedMaterial",
-        "CodeVulnerability",
-        "UngroundedAttributes"
+        "SelfHarm"
       ],
       "x-ms-enum": {
         "name": "RiskCategory",
@@ -3323,21 +3344,6 @@
             "name": "SelfHarm",
             "value": "SelfHarm",
             "description": "Represents content related to self-harm."
-          },
-          {
-            "name": "ProtectedMaterial",
-            "value": "ProtectedMaterial",
-            "description": "Represents content involving protected material."
-          },
-          {
-            "name": "CodeVulnerability",
-            "value": "CodeVulnerability",
-            "description": "Represents content related to code vulnerabilities."
-          },
-          {
-            "name": "UngroundedAttributes",
-            "value": "UngroundedAttributes",
-            "description": "Represents content with ungrounded attributes."
           }
         ]
       }
@@ -3417,6 +3423,20 @@
         "name",
         "size",
         "tier"
+      ]
+    },
+    "TargetConfig": {
+      "type": "object",
+      "description": "Abstract class for target configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the model configuration."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
     }
   },
