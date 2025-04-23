@@ -277,135 +277,6 @@
         }
       }
     },
-    "/connections/withCredentials": {
-      "post": {
-        "operationId": "Connections_ListWithCredentials",
-        "description": "List all connections in the project, with their connection credentials",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "connectionType",
-            "in": "query",
-            "description": "List connections of this specific type",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "AzureOpenAI",
-              "AzureBlob",
-              "AzureStorageAccount",
-              "CognitiveSearch",
-              "CosmosDB",
-              "ApiKey",
-              "AppConfig",
-              "AppInsights",
-              "CustomKeys"
-            ],
-            "x-ms-enum": {
-              "name": "ConnectionType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "AzureOpenAI",
-                  "value": "AzureOpenAI",
-                  "description": "Azure OpenAI Service"
-                },
-                {
-                  "name": "AzureBlobStorage",
-                  "value": "AzureBlob",
-                  "description": "Azure Blob Storage, with specified container"
-                },
-                {
-                  "name": "AzureStorageAccount",
-                  "value": "AzureStorageAccount",
-                  "description": "Azure Blob Storage, with container not specified (used by Agents)"
-                },
-                {
-                  "name": "AzureAISearch",
-                  "value": "CognitiveSearch",
-                  "description": "Azure AI Search"
-                },
-                {
-                  "name": "CosmosDB",
-                  "value": "CosmosDB",
-                  "description": "CosmosDB"
-                },
-                {
-                  "name": "APIKey",
-                  "value": "ApiKey",
-                  "description": "Generic connection that uses API Key authentication"
-                },
-                {
-                  "name": "ApplicationConfiguration",
-                  "value": "AppConfig",
-                  "description": "Application Configuration"
-                },
-                {
-                  "name": "ApplicationInsights",
-                  "value": "AppInsights",
-                  "description": "Application Insights"
-                },
-                {
-                  "name": "Custom",
-                  "value": "CustomKeys",
-                  "description": "Custom Keys"
-                }
-              ]
-            }
-          },
-          {
-            "name": "defaultConnection",
-            "in": "query",
-            "description": "List connections that are default connections",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Internal.ConnectionPaged"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/datasets": {
       "get": {
         "operationId": "Datasets_ListLatest",
@@ -1291,10 +1162,11 @@
       "type": "object",
       "description": "API Key Credential definition",
       "properties": {
-        "apiKey": {
+        "key": {
           "type": "string",
           "description": "API Key",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "apiKey"
         }
       },
       "allOf": [
@@ -2078,28 +1950,6 @@
       "discriminator": "type",
       "required": [
         "type"
-      ]
-    },
-    "Internal.ConnectionPaged": {
-      "type": "object",
-      "description": "Paged collection of Connection items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Connection items on this page",
-          "items": {
-            "$ref": "#/definitions/Connection"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ListSortOrder": {
