@@ -30,9 +30,10 @@ model Error {
   /**
    * The key vault server error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "innererror")
-  innerError?: Error;
+  innerError?: NullableError;
 }
 
 /**
