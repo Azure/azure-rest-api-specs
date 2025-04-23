@@ -5,11 +5,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
-// Business case supported API versions.
-import "./BusinessCaseApiVersions.tsp";
-
-// Add Business case service routes here.
-import "./businesscaseroutes.tsp";
+import "./ApiVersions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -18,9 +14,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The operations endpoint is implemented at a common place required for this resource provider."
 @armProviderNamespace
 @service(#{ title: "Azure Migrate Assessment Service" })
-@versioned(BusinessCaseApiVersions)
+@versioned(AKSApiVersions)
 @doc("Azure Migrate Resource Provider management API.")
 namespace Microsoft.Migrate;
+
+interface Operations extends Azure.ResourceManager.Operations {}

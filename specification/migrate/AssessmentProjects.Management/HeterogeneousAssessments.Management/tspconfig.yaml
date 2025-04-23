@@ -27,6 +27,7 @@ options:
     generate-test: true
     generate-sample: true
     flavor: "azure"
+    namespace: "azure.mgmt.migrate"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-migrate"
     namespace: "com.azure.resourcemanager.migrate"
@@ -39,6 +40,19 @@ options:
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-migrate"
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{project-root}"
+    fix-const-stuttering: true
+    generate-fakes: true
+    inject-spans: true
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    module-version: "0.1.0"
+    package-dir: "arm-migrate"
+    service-dir: "sdk/resourcemanager/migrate"
+    single-client: true
+    slice-elements-byval: true
+    generate-examples: true
+    head-as-boolean: true
   "@azure-tools/typespec-client-generator-cli":
     "additionalDirectories":
       - "specification/migrate/AssessmentProjects.Management/Common"
