@@ -3,7 +3,7 @@
   "info": {
     "title": "CognitiveServicesManagementClient",
     "description": "Cognitive Services Management Client",
-    "version": "2024-10-01"
+    "version": "2025-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -643,6 +643,9 @@
           },
           {
             "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/usageFilterParameter"
           }
         ],
         "responses": {
@@ -3702,6 +3705,1222 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}": {
+      "put": {
+        "tags": [
+          "CognitiveServicesProjects"
+        ],
+        "description": "Create Cognitive Services Account's Project. Project is a sub-resource of an account which give AI developer it's individual container to work on.",
+        "operationId": "Projects_Create",
+        "x-ms-examples": {
+          "Create Project": {
+            "$ref": "./examples/CreateProject.json"
+          },
+          "Create Project Min": {
+            "$ref": "./examples/CreateProjectMin.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "name": "project",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            },
+            "description": "The parameters to provide for the created project."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created successfully or already existed, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "201": {
+            "description": "If resource is created successfully, the service should return 201 (OK).",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "CognitiveServicesProjects"
+        ],
+        "description": "Updates a Cognitive Services Project",
+        "operationId": "Projects_Update",
+        "x-ms-examples": {
+          "Update Project": {
+            "$ref": "./examples/UpdateProjects.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "name": "project",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            },
+            "description": "The parameters to provide for the created project."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "CognitiveServicesProjects"
+        ],
+        "description": "Deletes a Cognitive Services project from the resource group. ",
+        "operationId": "Projects_Delete",
+        "x-ms-examples": {
+          "Delete Project": {
+            "$ref": "./examples/DeleteProject.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+          },
+          "204": {
+            "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "CognitiveServicesProjects"
+        ],
+        "description": "Returns a Cognitive Services project specified by the parameters.",
+        "operationId": "Projects_Get",
+        "x-ms-examples": {
+          "Get Project": {
+            "$ref": "./examples/GetProject.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects": {
+      "get": {
+        "tags": [
+          "CognitiveServicesProjects"
+        ],
+        "description": "Returns all the projects in a Cognitive Services account.",
+        "operationId": "Projects_List",
+        "x-ms-examples": {
+          "List Project": {
+            "$ref": "./examples/ListProjects.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}": {
+      "delete": {
+        "tags": [
+          "AccountConnectionResource"
+        ],
+        "summary": "Delete Cognitive Services account connection by name.",
+        "operationId": "AccountConnection_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAccountConnection": {
+            "$ref": "./examples/AccountConnection/delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AccountConnectionResource"
+        ],
+        "summary": "Lists Cognitive Services account connection by name.",
+        "operationId": "AccountConnection_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAccountConnection": {
+            "$ref": "./examples/AccountConnection/get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AccountConnectionResource"
+        ],
+        "summary": "Update Cognitive Services account connection under the specified account.",
+        "operationId": "AccountConnection_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parameters for account connection update.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionUpdateContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateAccountConnection": {
+            "$ref": "./examples/AccountConnection/update.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AccountConnectionResource"
+        ],
+        "summary": "Create or update Cognitive Services account connection under the specified account.",
+        "operationId": "AccountConnection_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The object for creating or updating a new account connection",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateAccountConnection": {
+            "$ref": "./examples/AccountConnection/create.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections": {
+      "get": {
+        "tags": [
+          "AccountConnectionResource"
+        ],
+        "summary": "Lists all the available  Cognitive Services account connections under the specified account.",
+        "operationId": "AccountConnection_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "includeAll",
+            "description": "query parameter that indicates if get connection call should return both connections and datastores",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAccountConnections": {
+            "$ref": "./examples/AccountConnection/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}": {
+      "delete": {
+        "tags": [
+          "ProjectConnectionResource"
+        ],
+        "summary": "Delete Cognitive Services project connection by name.",
+        "operationId": "ProjectConnection_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteProjectConnection": {
+            "$ref": "./examples/ProjectConnection/delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ProjectConnectionResource"
+        ],
+        "summary": "Lists Cognitive Services project connection by name.",
+        "operationId": "ProjectConnection_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetProjectConnection": {
+            "$ref": "./examples/ProjectConnection/get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ProjectConnectionResource"
+        ],
+        "summary": "Update Cognitive Services project connection under the specified project.",
+        "operationId": "ProjectConnection_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parameters for account connection update.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionUpdateContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateProjectConnection": {
+            "$ref": "./examples/ProjectConnection/update.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProjectConnectionResource"
+        ],
+        "summary": "Create or update Cognitive Services project connection under the specified project.",
+        "operationId": "ProjectConnection_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The object for creating or updating a new account connection",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateProjectConnection": {
+            "$ref": "./examples/ProjectConnection/create.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections": {
+      "get": {
+        "tags": [
+          "ProjectConnectionResource"
+        ],
+        "summary": "Lists all the available Cognitive Services project connections under the specified project.",
+        "operationId": "ProjectConnection_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "includeAll",
+            "description": "query parameter that indicates if get connection call should return both connections and datastores",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListProjectConnection": {
+            "$ref": "./examples/ProjectConnection/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/capabilityHosts/{capabilityHostName}": {
+      "delete": {
+        "tags": [
+          "AccountCapabilityHost"
+        ],
+        "summary": "Delete account capabilityHost.",
+        "operationId": "AccountCapabilityHosts_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/capabilityHostNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Account CapabilityHost.": {
+            "$ref": "./examples/AccountCapabilityHost/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "AccountCapabilityHost"
+        ],
+        "summary": "Get account capabilityHost.",
+        "operationId": "AccountCapabilityHosts_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/capabilityHostNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Account CapabilityHost.": {
+            "$ref": "./examples/AccountCapabilityHost/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AccountCapabilityHost"
+        ],
+        "summary": "Create or update account capabilityHost.",
+        "operationId": "AccountCapabilityHosts_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/capabilityHostNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "CapabilityHost definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update request is successful.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Account CapabilityHost.": {
+            "$ref": "./examples/AccountCapabilityHost/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/capabilityHosts/{capabilityHostName}": {
+      "delete": {
+        "tags": [
+          "ProjectCapabilityHost"
+        ],
+        "summary": "Delete project capabilityHost.",
+        "operationId": "ProjectCapabilityHosts_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/capabilityHostNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Project CapabilityHost.": {
+            "$ref": "./examples/ProjectCapabilityHost/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "ProjectCapabilityHost"
+        ],
+        "summary": "Get project capabilityHost.",
+        "operationId": "ProjectCapabilityHosts_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/capabilityHostNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Project CapabilityHost.": {
+            "$ref": "./examples/ProjectCapabilityHost/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProjectCapabilityHost"
+        ],
+        "summary": "Create or update project capabilityHost.",
+        "operationId": "ProjectCapabilityHosts_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/capabilityHostNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "CapabilityHost definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update request is successful.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Project CapabilityHost.": {
+            "$ref": "./examples/ProjectCapabilityHost/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
     }
   },
   "definitions": {
@@ -3901,7 +5120,7 @@
         },
         "amlWorkspace": {
           "$ref": "#/definitions/UserOwnedAmlWorkspace",
-          "description": "The user owned AML workspace properties."
+          "description": "The user owned AML account properties."
         },
         "privateEndpointConnections": {
           "type": "array",
@@ -4001,6 +5220,24 @@
         },
         "raiMonitorConfig": {
           "$ref": "#/definitions/RaiMonitorConfig"
+        },
+        "networkInjections": {
+          "$ref": "#/definitions/NetworkInjections"
+        },
+        "allowProjectManagement": {
+          "type": "boolean",
+          "description": "Specifies whether this resource support project management as child resources, used as containers for access management, data isolation and cost in AI Foundry."
+        },
+        "defaultProject": {
+          "type": "string",
+          "description": "Specifies the project that is targeted when data plane endpoints are called without a project parameter."
+        },
+        "associatedProjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the projects that are associated with this resource."
         }
       },
       "description": "Properties of Cognitive Services account."
@@ -5173,14 +6410,14 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Full resource id of a AML workspace resource."
+          "description": "Full resource id of a AML account resource."
         },
         "identityClientId": {
           "type": "string",
-          "description": "Identity Client id of a AML workspace resource."
+          "description": "Identity Client id of a AML account resource."
         }
       },
-      "description": "The user owned AML workspace for Cognitive Services account."
+      "description": "The user owned AML account for Cognitive Services account."
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
@@ -6355,7 +7592,7 @@
             "name": "RaiPolicyMode",
             "modelAsString": true
           },
-          "description": "Rai policy mode. The enum value mapping is as below: Default = 0, Deferred=1, Blocking=2, Asynchronous_filter =3. Please use 'Asynchronous_filter' after 2024-10-01. It is the same as 'Deferred' in previous version."
+          "description": "Rai policy mode. The enum value mapping is as below: Default = 0, Deferred=1, Blocking=2, Asynchronous_filter =3. Please use 'Asynchronous_filter' after 2025-06-01. It is the same as 'Deferred' in previous version."
         },
         "basePolicyName": {
           "type": "string",
@@ -6823,6 +8060,891 @@
         }
       },
       "description": "The Defender for AI resource properties."
+    },
+    "ConnectionPropertiesV2BasicResource": {
+      "required": [
+        "properties"
+      ],
+      "description": "Connection base resource schema.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      }
+    },
+    "ConnectionPropertiesV2": {
+      "required": [
+        "authType"
+      ],
+      "type": "object",
+      "description": "Connection property base schema.",
+      "properties": {
+        "authType": {
+          "description": "Authentication type of the connection target",
+          "$ref": "#/definitions/ConnectionAuthType"
+        },
+        "category": {
+          "description": "Category of the connection",
+          "$ref": "#/definitions/ConnectionCategory"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string"
+        },
+        "expiryTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "group": {
+          "description": "Group based on connection category",
+          "$ref": "#/definitions/ConnectionGroup",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "description": "Store user metadata for this connection",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement"
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus"
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string"
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "discriminator": "authType"
+    },
+    "ConnectionAuthType": {
+      "description": "Authentication type of the connection target",
+      "enum": [
+        "PAT",
+        "ManagedIdentity",
+        "UsernamePassword",
+        "None",
+        "SAS",
+        "AccountKey",
+        "ServicePrincipal",
+        "AccessKey",
+        "ApiKey",
+        "CustomKeys",
+        "OAuth2",
+        "AAD"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ConnectionAuthType",
+        "modelAsString": true
+      }
+    },
+    "ConnectionCategory": {
+      "description": "Category of the connection",
+      "enum": [
+        "PythonFeed",
+        "ContainerRegistry",
+        "Git",
+        "S3",
+        "Snowflake",
+        "AzureSqlDb",
+        "AzureSynapseAnalytics",
+        "AzureMySqlDb",
+        "AzurePostgresDb",
+        "ADLSGen2",
+        "Redis",
+        "ApiKey",
+        "AzureOpenAI",
+        "AIServices",
+        "CognitiveSearch",
+        "CognitiveService",
+        "CustomKeys",
+        "AzureBlob",
+        "AzureOneLake",
+        "CosmosDb",
+        "CosmosDbMongoDbApi",
+        "AzureDataExplorer",
+        "AzureMariaDb",
+        "AzureDatabricksDeltaLake",
+        "AzureSqlMi",
+        "AzureTableStorage",
+        "AmazonRdsForOracle",
+        "AmazonRdsForSqlServer",
+        "AmazonRedshift",
+        "Db2",
+        "Drill",
+        "GoogleBigQuery",
+        "Greenplum",
+        "Hbase",
+        "Hive",
+        "Impala",
+        "Informix",
+        "MariaDb",
+        "MicrosoftAccess",
+        "MySql",
+        "Netezza",
+        "Oracle",
+        "Phoenix",
+        "PostgreSql",
+        "Presto",
+        "SapOpenHub",
+        "SapBw",
+        "SapHana",
+        "SapTable",
+        "Spark",
+        "SqlServer",
+        "Sybase",
+        "Teradata",
+        "Vertica",
+        "Pinecone",
+        "Cassandra",
+        "Couchbase",
+        "MongoDbV2",
+        "MongoDbAtlas",
+        "AmazonS3Compatible",
+        "FileServer",
+        "FtpServer",
+        "GoogleCloudStorage",
+        "Hdfs",
+        "OracleCloudStorage",
+        "Sftp",
+        "GenericHttp",
+        "ODataRest",
+        "Odbc",
+        "GenericRest",
+        "AmazonMws",
+        "Concur",
+        "Dynamics",
+        "DynamicsAx",
+        "DynamicsCrm",
+        "GoogleAdWords",
+        "Hubspot",
+        "Jira",
+        "Magento",
+        "Marketo",
+        "Office365",
+        "Eloqua",
+        "Responsys",
+        "OracleServiceCloud",
+        "PayPal",
+        "QuickBooks",
+        "Salesforce",
+        "SalesforceServiceCloud",
+        "SalesforceMarketingCloud",
+        "SapCloudForCustomer",
+        "SapEcc",
+        "ServiceNow",
+        "SharePointOnlineList",
+        "Shopify",
+        "Square",
+        "WebTable",
+        "Xero",
+        "Zoho",
+        "GenericContainerRegistry",
+        "Elasticsearch",
+        "OpenAI",
+        "Serp",
+        "BingLLMSearch",
+        "Serverless",
+        "ManagedOnlineEndpoint"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ConnectionCategory",
+        "modelAsString": true
+      }
+    },
+    "ConnectionGroup": {
+      "description": "Group based on connection category",
+      "enum": [
+        "Azure",
+        "AzureAI",
+        "Database",
+        "NoSQL",
+        "File",
+        "GenericProtocol",
+        "ServicesAndApps"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ConnectionGroup",
+        "modelAsString": true
+      }
+    },
+    "ManagedPERequirement": {
+      "enum": [
+        "Required",
+        "NotRequired",
+        "NotApplicable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedPERequirement",
+        "modelAsString": true
+      }
+    },
+    "ManagedPEStatus": {
+      "enum": [
+        "Inactive",
+        "Active",
+        "NotApplicable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedPEStatus",
+        "modelAsString": true
+      }
+    },
+    "PATAuthTypeConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionPersonalAccessToken"
+        }
+      },
+      "x-ms-discriminator-value": "PAT"
+    },
+    "ConnectionPersonalAccessToken": {
+      "type": "object",
+      "properties": {
+        "pat": {
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ManagedIdentityAuthTypeConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionManagedIdentity"
+        }
+      },
+      "x-ms-discriminator-value": "ManagedIdentity"
+    },
+    "ConnectionManagedIdentity": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        }
+      }
+    },
+    "UsernamePasswordAuthTypeConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionUsernamePassword"
+        }
+      },
+      "x-ms-discriminator-value": "UsernamePassword"
+    },
+    "ConnectionUsernamePassword": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "securityToken": {
+          "description": "Optional, required by connections like SalesForce for extra security in addition to UsernamePassword",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "NoneAuthTypeConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "None"
+    },
+    "SASAuthTypeConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionSharedAccessSignature"
+        }
+      },
+      "x-ms-discriminator-value": "SAS"
+    },
+    "ConnectionSharedAccessSignature": {
+      "type": "object",
+      "properties": {
+        "sas": {
+          "type": "string"
+        }
+      }
+    },
+    "AccountKeyAuthTypeConnectionProperties": {
+      "description": "This connection type covers the account key connection for Azure storage",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionAccountKey"
+        }
+      },
+      "x-ms-discriminator-value": "AccountKey"
+    },
+    "ConnectionAccountKey": {
+      "description": "Account key object for connection credential.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      }
+    },
+    "ServicePrincipalAuthTypeConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionServicePrincipal"
+        }
+      },
+      "x-ms-discriminator-value": "ServicePrincipal"
+    },
+    "ConnectionServicePrincipal": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecret": {
+          "x-ms-secret": true,
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      }
+    },
+    "AccessKeyAuthTypeConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionAccessKey"
+        }
+      },
+      "x-ms-discriminator-value": "AccessKey"
+    },
+    "ConnectionAccessKey": {
+      "type": "object",
+      "properties": {
+        "accessKeyId": {
+          "type": "string"
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ApiKeyAuthConnectionProperties": {
+      "description": "This connection type covers the generic ApiKey auth connection categories, for examples:\r\nAzureOpenAI:\r\n    Category:= AzureOpenAI\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {ApiKey} as .ApiKey\r\n    Target:= {ApiBase}\r\n            \r\nCognitiveService:\r\n    Category:= CognitiveService\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {SubscriptionKey} as ApiKey\r\n    Target:= ServiceRegion={serviceRegion}\r\n            \r\nCognitiveSearch:\r\n    Category:= CognitiveSearch\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {Key} as ApiKey\r\n    Target:= {Endpoint}\r\n            \r\nUse Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionApiKey"
+        }
+      },
+      "x-ms-discriminator-value": "ApiKey"
+    },
+    "ConnectionApiKey": {
+      "description": "Api key object for connection credential.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomKeysConnectionProperties": {
+      "description": "Category:= CustomKeys\r\nAuthType:= CustomKeys (as type discriminator)\r\nCredentials:= {CustomKeys} as CustomKeys\r\nTarget:= {any value}\r\nUse Metadata property bag for ApiVersion and other metadata fields",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "description": "Custom Keys credential object",
+          "$ref": "#/definitions/CustomKeys"
+        }
+      },
+      "x-ms-discriminator-value": "CustomKeys"
+    },
+    "CustomKeys": {
+      "description": "Custom Keys credential object",
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OAuth2AuthTypeConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionOAuth2"
+        }
+      },
+      "x-ms-discriminator-value": "OAuth2"
+    },
+    "ConnectionOAuth2": {
+      "description": "ClientId and ClientSecret are required. Other properties are optional\r\ndepending on each OAuth2 provider's implementation.",
+      "type": "object",
+      "properties": {
+        "authUrl": {
+          "description": "Required by Concur connection category",
+          "type": "string",
+          "format": "uri"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client id in the format of UUID",
+          "format": "uuid"
+        },
+        "clientSecret": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "developerToken": {
+          "description": "Required by GoogleAdWords connection category",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "password": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "refreshToken": {
+          "description": "Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho\r\nwhere user needs to get RefreshToken offline",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "tenantId": {
+          "description": "Required by QuickBooks and Xero connection categories",
+          "type": "string"
+        },
+        "username": {
+          "description": "Concur, ServiceNow auth server AccessToken grant type is 'Password'\r\nwhich requires UsernamePassword",
+          "type": "string"
+        }
+      }
+    },
+    "AADAuthTypeConnectionProperties": {
+      "description": "This connection type covers the AAD auth for any applicable Azure service",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "AAD"
+    },
+    "ConnectionUpdateContent": {
+      "description": "The properties that the Cognitive services connection will be updated with.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The properties that the Cognitive services connection will be updated with.",
+          "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      }
+    },
+    "ConnectionPropertiesV2BasicResourceArmPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+          }
+        }
+      }
+    },
+    "CapabilityHostResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/CapabilityHost"
+        }
+      },
+      "x-ms-client-name": "CapabilityHost",
+      "additionalProperties": false
+    },
+    "CapabilityHost": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
+      "properties": {
+        "aiServicesConnections": {
+          "description": "List of AI services connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "capabilityHostKind": {
+          "description": "Kind of this capability host.",
+          "default": "Agents",
+          "$ref": "#/definitions/CapabilityHostKind"
+        },
+        "customerSubnet": {
+          "description": "Customer subnet info to help set up this capability host.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the CapabilityHost.",
+          "$ref": "#/definitions/CapabilityHostProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "storageConnections": {
+          "description": "List of Storage connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "threadStorageConnections": {
+          "description": "List of Thread storage connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "vectorStoreConnections": {
+          "description": "List of VectorStore connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "CapabilityHostProperties",
+      "additionalProperties": false
+    },
+    "CapabilityHostProvisioningState": {
+      "description": "Provisioning state of capability host.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "CapabilityHostProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Failed"
+          },
+          {
+            "value": "Canceled"
+          },
+          {
+            "value": "Creating"
+          },
+          {
+            "value": "Updating"
+          },
+          {
+            "value": "Deleting"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "CapabilityHostKind": {
+      "enum": [
+        "Agents"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CapabilityHostKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Agents"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ResourceBase": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The asset description text.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "NetworkInjections": {
+      "description": "Specifies in AI Foundry where virtual network injection occurs to secure scenarios like Agents entirely within the user's private network, eliminating public internet exposure while maintaining control over network configurations and resources.",
+      "type": "object",
+      "properties": {
+        "scenario": {
+          "type": "string",
+          "enum": [
+            "none",
+            "agent"
+          ],
+          "x-ms-enum": {
+            "name": "scenarioType",
+            "modelAsString": true
+          },
+          "description": "Specifies what features in AI Foundry network injection applies to. Currently only supports 'agent' for agent scenarios. 'none' means no network injection."
+        },
+        "subnetArmId": {
+          "description": "Specify the subnet for which your Agent Client is injected into.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "useMicrosoftManagedNetwork": {
+          "description": "Boolean to enable Microsoft Managed Network for subnet delegation",
+          "type": "boolean"
+        }
+      }
+    },
+    "Project": {
+      "description": "Cognitive Services project is an Azure resource representing the provisioned account's project, it's type, location and SKU.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "Properties of Cognitive Services project."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/AzureEntityResource"
+        }
+      ]
+    },
+    "ProjectProperties": {
+      "description": "Properties of Cognitive Services Project'.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the cognitive services project at the time the operation was called.",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "ResolvingDNS"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the Cognitive Services Project."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the Cognitive Services Project."
+        },
+        "endpoints": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The list of endpoint for this Cognitive Services Project.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isDefault": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Indicates whether the project is the default project for the account."
+        }
+      }
+    },
+    "ProjectListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of projects.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Project"
+          },
+          "description": "Gets the list of Cognitive Services projects and their properties."
+        }
+      },
+      "description": "The list of cognitive services projects operation response."
     }
   },
   "parameters": {
@@ -6984,6 +9106,58 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the RAI Content Filter.",
       "x-ms-parameter-location": "method"
+    },
+    "projectNameParameter": {
+      "name": "projectName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of Cognitive Services account's project.",
+      "x-ms-parameter-location": "method"
+    },
+    "connectionNameParameter": {
+      "in": "path",
+      "name": "connectionName",
+      "description": "Friendly name of the connection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "ConnectionName": {
+      "in": "path",
+      "name": "connectionName",
+      "description": "Friendly name of the connection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "TargetParameter": {
+      "in": "query",
+      "name": "target",
+      "description": "Target of the connection.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CategoryParameter": {
+      "in": "query",
+      "name": "category",
+      "description": "Category of the connection.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "capabilityHostNameParameter": {
+      "name": "capabilityHostName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the capability host associated with the Cognitive Services Resource",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
     }
   }
 }
