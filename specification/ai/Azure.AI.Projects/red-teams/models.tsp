@@ -110,16 +110,7 @@ union RiskCategory {
   Sexual: "Sexual",
 
   @doc("Represents content related to self-harm.")
-  SelfHarm: "SelfHarm",
-
-  @doc("Represents content involving protected material.")
-  ProtectedMaterial: "ProtectedMaterial",
-
-  @doc("Represents content related to code vulnerabilities.")
-  CodeVulnerability: "CodeVulnerability",
-
-  @doc("Represents content with ungrounded attributes.")
-  UngroundedAttributes: "UngroundedAttributes",
+  SelfHarm: "SelfHarm"
 }
 
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
@@ -127,10 +118,10 @@ union RiskCategory {
 @removed(Versions.v_latest)
 model AzureOpenAIModelConfiguration extends TargetConfig {
   @visibility(Lifecycle.Read)
-  type: "AzureAOAIModel";
+  type: "AzureOpenAIModel";
 
   @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`.")
-  DeploymentName: string;
+  ModelDeploymentName: string;
 }
 
 @doc("Abstract class for target configuration.")

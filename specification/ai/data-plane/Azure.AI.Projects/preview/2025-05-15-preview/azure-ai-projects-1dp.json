@@ -1976,20 +1976,20 @@
       "type": "object",
       "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
       "properties": {
-        "DeploymentName": {
+        "ModelDeploymentName": {
           "type": "string",
           "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
         }
       },
       "required": [
-        "DeploymentName"
+        "ModelDeploymentName"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/TargetConfig"
         }
       ],
-      "x-ms-discriminator-value": "AzureAOAIModel"
+      "x-ms-discriminator-value": "AzureOpenAIModel"
     },
     "BaseCredentials": {
       "type": "object",
@@ -3245,10 +3245,7 @@
         "HateUnfairness",
         "Violence",
         "Sexual",
-        "SelfHarm",
-        "ProtectedMaterial",
-        "CodeVulnerability",
-        "UngroundedAttributes"
+        "SelfHarm"
       ],
       "x-ms-enum": {
         "name": "RiskCategory",
@@ -3273,21 +3270,6 @@
             "name": "SelfHarm",
             "value": "SelfHarm",
             "description": "Represents content related to self-harm."
-          },
-          {
-            "name": "ProtectedMaterial",
-            "value": "ProtectedMaterial",
-            "description": "Represents content involving protected material."
-          },
-          {
-            "name": "CodeVulnerability",
-            "value": "CodeVulnerability",
-            "description": "Represents content related to code vulnerabilities."
-          },
-          {
-            "name": "UngroundedAttributes",
-            "value": "UngroundedAttributes",
-            "description": "Represents content with ungrounded attributes."
           }
         ]
       }
