@@ -110,7 +110,7 @@ namespace Microsoft.EventGrid {
   @doc("Details of the Receive operation response.")
   model ReceiveResult {
     @doc("Array of receive responses, one per cloud event.")
-    value: ReceiveDetails[];
+    value: ReceiveDetails[]; 
   }
 
   @doc("Failed LockToken information.")
