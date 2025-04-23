@@ -1294,15 +1294,15 @@
       "type": "object",
       "description": "A base class for connection credentials",
       "properties": {
-        "authType": {
+        "type": {
           "$ref": "#/definitions/CredentialType",
           "description": "The type of credential used by the connection",
           "readOnly": true
         }
       },
-      "discriminator": "authType",
+      "discriminator": "type",
       "required": [
-        "authType"
+        "type"
       ]
     },
     "BlobReferenceForConsumption": {
@@ -1332,10 +1332,6 @@
       "type": "object",
       "description": "Response from the list and get connections operations",
       "properties": {
-        "authType": {
-          "type": "string",
-          "description": "Discriminator property for Connection."
-        },
         "name": {
           "type": "string",
           "description": "The name of the resource",
@@ -1370,9 +1366,7 @@
           "readOnly": true
         }
       },
-      "discriminator": "authType",
       "required": [
-        "authType",
         "name",
         "type",
         "target",
@@ -2292,10 +2286,11 @@
       "type": "object",
       "description": "Shared Access Signature (SAS) credential definition",
       "properties": {
-        "sasToken": {
+        "SAS": {
           "type": "string",
           "description": "SAS token",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "sasToken"
         }
       },
       "allOf": [
