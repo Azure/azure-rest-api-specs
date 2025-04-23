@@ -53,7 +53,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Lists all of the available Storage Actions Rest API operations.",
+        "description": "List the operations for the provider",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -98,9 +98,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
-            "description": "The parameters to preview action condition.",
+            "description": "The request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageTaskPreviewAction"
@@ -284,7 +284,7 @@
             "pattern": "^[a-z0-9]{3,18}$"
           },
           {
-            "name": "parameters",
+            "name": "resource",
             "in": "body",
             "description": "The parameters to create a Storage Task.",
             "required": true,
@@ -375,7 +375,7 @@
             "pattern": "^[a-z0-9]{3,18}$"
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "description": "The parameters to provide to update the storage task resource.",
             "required": true,
@@ -614,23 +614,6 @@
     }
   },
   "definitions": {
-    "ElseCondition": {
-      "type": "object",
-      "description": "The else block of storage task operation",
-      "properties": {
-        "operations": {
-          "type": "array",
-          "description": "List of operations to execute in the else block",
-          "items": {
-            "$ref": "#/definitions/StorageTaskOperationInfo"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "operations"
-      ]
-    },
     "IfCondition": {
       "type": "object",
       "description": "The if block of storage task operation",
@@ -910,15 +893,15 @@
         },
         "tags": {
           "type": "object",
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters."
+          }
         },
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageTaskUpdateProperties",
-          "description": "Properties of the storage task."
+          "description": "Properties of the storage task.",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -943,18 +926,15 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Storage Task Assignment Resource IDs associated with this Storage Task.",
+          "description": "The StorageTaskAssignment items on this page",
           "items": {
             "$ref": "#/definitions/StorageTaskAssignment"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -970,14 +950,12 @@
           "description": "The StorageTask items on this page",
           "items": {
             "$ref": "#/definitions/StorageTask"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1199,57 +1177,6 @@
         }
       }
     },
-    "StorageTaskUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "taskVersion": {
-          "readOnly": true,
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 1,
-          "format": "int64",
-          "description": "Storage task version."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Storage Task is enabled when set to true and disabled when set to false"
-        },
-        "description": {
-          "type": "string",
-          "description": "Text that describes the purpose of the storage task"
-        },
-        "action": {
-          "$ref": "#/definitions/StorageTaskAction",
-          "description": "The storage task action that is executed"
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Represents the provisioning state of the storage task.",
-          "enum": [
-            "ValidateSubscriptionQuotaBegin",
-            "ValidateSubscriptionQuotaEnd",
-            "Accepted",
-            "Creating",
-            "Succeeded",
-            "Deleting",
-            "Canceled",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "creationTimeInUtc": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date and time of the storage task in UTC."
-        }
-      },
-      "description": "Properties of the storage task."
-    },
     "StorageTaskProperties": {
       "type": "object",
       "description": "Properties of the storage task.",
@@ -1416,14 +1343,12 @@
           "description": "The StorageTaskReportInstance items on this page",
           "items": {
             "$ref": "#/definitions/StorageTaskReportInstance"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1449,6 +1374,43 @@
           "$ref": "#/definitions/StorageTaskProperties",
           "description": "Properties of the storage task.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StorageTaskUpdateProperties": {
+      "type": "object",
+      "description": "Properties of the storage task.",
+      "properties": {
+        "taskVersion": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Storage task version.",
+          "minimum": 1,
+          "maximum": 1,
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Storage Task is enabled when set to true and disabled when set to false"
+        },
+        "description": {
+          "type": "string",
+          "description": "Text that describes the purpose of the storage task"
+        },
+        "action": {
+          "$ref": "#/definitions/StorageTaskAction",
+          "description": "The storage task action that is executed"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Represents the provisioning state of the storage task.",
+          "readOnly": true
+        },
+        "creationTimeInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time of the storage task in UTC.",
+          "readOnly": true
         }
       }
     }

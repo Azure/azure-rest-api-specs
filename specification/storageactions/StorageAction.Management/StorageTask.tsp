@@ -73,33 +73,13 @@ interface StorageTasks {
   listBySubscription is ArmListBySubscription<StorageTask>;
 
   /**
-   * Lists Resource IDs of the Storage Task Assignments associated with this Storage Task.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @get
-  @action("storageTaskAssignments")
-  @operationId("StorageTaskAssignment_List")
-  list is ArmResourceActionSync<
-    StorageTask,
-    void,
-    ArmResponse<StorageTaskAssignmentsListResult>,
-    Parameters = {
-      /**
-       * Optional, specifies the maximum number of Storage Task Assignment Resource IDs to be included in the list response.
-       */
-      @query("$maxpagesize")
-      $maxpagesize?: int32;
-    }
-  >;
-
-  /**
    * Fetch the storage tasks run report summary for each assignment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("reports")
   @operationId("StorageTasksReport_List")
-  storageTasksReportList is ArmResourceActionSync<
+  list is ArmResourceActionSync<
     StorageTask,
     void,
     ArmResponse<StorageTaskReportSummary>,
@@ -115,6 +95,26 @@ interface StorageTasks {
        */
       @query("$filter")
       $filter?: string;
+    }
+  >;
+
+  /**
+   * Lists Resource IDs of the Storage Task Assignments associated with this Storage Task.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @action("storageTaskAssignments")
+  @operationId("StorageTaskAssignment_List")
+  storageTaskAssignmentList is ArmResourceActionSync<
+    StorageTask,
+    void,
+    ArmResponse<StorageTaskAssignmentsListResult>,
+    Parameters = {
+      /**
+       * Optional, specifies the maximum number of Storage Task Assignment Resource IDs to be included in the list response.
+       */
+      @query("$maxpagesize")
+      $maxpagesize?: int32;
     }
   >;
 }
