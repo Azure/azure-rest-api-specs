@@ -358,19 +358,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QuestionAnsweringAuthoringExportJobState"
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
@@ -398,6 +385,9 @@
           "Successful query": {
             "$ref": "./examples/questionanswering/authoring/SuccessfulProjectSubmitExportJob.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }

@@ -92,7 +92,7 @@ interface QuestionAnsweringProjects {
   @route("/authoring/query-knowledgebases/projects/{projectName}/:export")
   @post
   @pollingOperation(QuestionAnsweringProjects.getExportStatus)
-  export is Foundations.Operation<
+  export is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.

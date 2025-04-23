@@ -927,25 +927,18 @@ model FeedbackRecord {
 /**
  * The request has been accepted for processing, but processing has not yet completed.
  */
-model AcceptedResponse is Response<202>;
+model AcceptedResponse is TypeSpec.Http.AcceptedResponse;
 
 /**
  * There is no content to send for this request, but the headers may be useful.
  */
-model NoContentResponse is Response<204>;
+model NoContentResponse is TypeSpec.Http.NoContentResponse;
 
 /**
  * Feedback recorded successfully.
  */
 model AddFeedBackNoContentResponse is NoContentResponse;
 
-alias ExportJobOkResponse = TypeSpec.Http.OkResponse &
-  QuestionAnsweringAuthoringExportJobState &
-  Foundations.LongRunningStatusLocation;
-
-alias ExportJobAcceptedResponse = TypeSpec.Http.AcceptedResponse &
-  Foundations.LongRunningStatusLocation;
-
-alias ExportJobResponse = ExportJobOkResponse | ExportJobAcceptedResponse;
+alias ExportJobResponse = AcceptedResponse;
 
 alias DeleteProjectAcceptedResponse = TypeSpec.Http.AcceptedResponse;
