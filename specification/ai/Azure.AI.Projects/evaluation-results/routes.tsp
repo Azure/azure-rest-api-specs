@@ -4,6 +4,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
+import "../evaluations/models.tsp";
 import "./models.tsp";
 import "../servicepatterns.tsp";
 import "../main.tsp";
@@ -68,6 +69,6 @@ interface EvaluationResults
       @path
       runId: string;
     },
-    Array<AgentEvaluationResult>
+    ResourceCreatedResponse<AgentEvaluation>
   >;
 }

@@ -46,35 +46,3 @@ union ResultType {
   @doc("Simulation Result")
   Simulation: "Simulation";
 }
-
-@doc("Evaluation result for agent run.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
-model AgentEvaluationResult {
-  @doc("Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion.")
-  evaluator: string;
-
-  @doc("Score of the given evaluator. No restriction on range.")
-  score: float32;
-
-  @doc("Status of the evaluation result. Options: Success, Failure, NotApplicable.")
-  status: string;
-
-  @doc("Reasoning for the evaluation result.")
-  reason?: string;
-
-  @doc("Version of the evaluator that was used to evaluate the agent's completion.")
-  version?: string;
-
-  @doc("The unique identifier of the thread.")
-  threadId?: string;
-
-  @doc("The unique identifier of the run.")
-  runId: string;
-
-  @doc("A string explaining why there was an error, if applicable.")
-  error?: string;
-
-  @doc("Additional properties relevant to the evaluator. These will differ between evaluators.")
-  additionalDetails?: Record<string>;
-}
