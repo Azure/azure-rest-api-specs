@@ -217,11 +217,11 @@ model Resource {
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * The name of the PowerBI Dedicated resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
+  // /**
+  //  * The name of the PowerBI Dedicated resource.
+  //  */
+  // @visibility(Lifecycle.Read)
+  // name?: string;
 
   /**
    * The type of the PowerBI Dedicated resource.
@@ -248,18 +248,58 @@ model Resource {
 }
 
 /**
- * The error object
+ * Metadata pertaining to creation and last modification of the resource.
  */
-model ErrorResponseError {
+model SystemData {
   /**
-   * Error code
+   * An identifier for the identity that created the resource.
    */
-  code?: string;
+  createdBy?: string;
 
   /**
-   * Error message indicating why the operation failed.
+   * The type of identity that created the resource.
    */
-  message?: string;
+  createdByType?: IdentityType;
+
+  /**
+   * The timestamp of resource creation (UTC).
+   */
+  createdAt?: utcDateTime;
+
+  /**
+   * An identifier for the identity that last modified the resource.
+   */
+  lastModifiedBy?: string;
+
+  /**
+   * The type of identity that last modified the resource.
+   */
+  lastModifiedByType?: IdentityType;
+
+  /**
+   * The timestamp of resource last modification (UTC).
+   */
+  lastModifiedAt?: utcDateTime;
+}
+/**
+ * The error object
+ */
+@error
+model ErrorResponse {
+  /**
+   * The error object.
+   */
+  error?: {
+    /**
+     * Error code.
+     */
+    code?: string;
+
+    /**
+     * Error message indicating why the operation failed.
+     */
+    message?: string;
+  };
 }
 
 /**
@@ -295,6 +335,9 @@ model DedicatedCapacities {
    */
   @items
   value: DedicatedCapacity[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -560,4 +603,78 @@ model AutoScaleVCoreListResult {
    */
   @items
   value: AutoScaleVCore[];
+
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Result listing capacities. It contains a list of operations and a URL link to get the next set of results.
+ */
+@pagedResult
+model OperationListResult {
+  /**
+   * List of capacities supported by the Microsoft.PowerBIDedicated resource provider.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @items
+  @visibility(Lifecycle.Read)
+  value?: Operation[];
+
+  /**
+   * URL to get the next set of operation list results if there are any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Capacities REST API operation.
+ */
+model Operation {
+  /**
+   * Operation name: {provider}/{resource}/{operation}.
+   */
+  name: string;
+
+  /**
+   * The object that represents the operation.
+   */
+  display?: {
+    /**
+     * Service provider: Microsoft.PowerBIDedicated.
+     */
+    provider?: string;
+
+    /**
+     * Resource on which the operation is performed: capacity, etc.
+     */
+    resource?: string;
+
+    /**
+     * Operation type: create, update, delete, etc.
+     */
+    operation?: string;
+
+    /**
+     * Localized description of the operation.
+     */
+    description?: string;
+  };
+
+  /**
+   * Origin of the operation.
+   */
+  origin?: string;
+
+  /**
+   * Additional properties to expose performance metrics to shoebox.
+   */
+  properties?: {
+    /**
+     * Service specification for exposing performance metrics to shoebox.
+     */
+    serviceSpecification?: ServiceSpecification;
+  };
 }

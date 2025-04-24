@@ -26,7 +26,8 @@ interface CapacitiesOperationGroup {
   listSkus is ArmProviderActionSync<
     Response = SkuEnumerationForNewResourceResult,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = ErrorResponse
   >;
   /**
    * Check the name availability in the target location.
@@ -38,6 +39,7 @@ interface CapacitiesOperationGroup {
     Request = CheckCapacityNameAvailabilityParameters,
     Response = CheckCapacityNameAvailabilityResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = ErrorResponse
   >;
 }

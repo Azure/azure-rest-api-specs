@@ -22,3 +22,7 @@ using Microsoft.PowerBIDedicated;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AutoScaleVCore.properties);
+
+@@clientName(CapacitiesOperationGroup.checkNameAvailability::parameters.body,
+  "capacityParameters"
+);

@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager.Private;
 
 namespace Microsoft.PowerBIDedicated;
 /**
@@ -34,14 +35,16 @@ interface Capacities {
   /**
    * Gets details about the specified dedicated capacity.
    */
-  getDetails is ArmResourceRead<DedicatedCapacity>;
+  getDetails is ArmResourceRead<DedicatedCapacity, Error = ErrorResponse>;
 
   /**
    * Provisions the specified Dedicated capacity based on the configuration specified in the request.
    */
   create is ArmResourceCreateOrReplaceAsync<
     DedicatedCapacity,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ErrorResponse
   >;
 
   /**
@@ -55,7 +58,8 @@ interface Capacities {
     Response = ArmResponse<DedicatedCapacity> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: DedicatedCapacity;
-    })
+    }),
+    Error = ErrorResponse
   >;
 
   /**
@@ -64,7 +68,8 @@ interface Capacities {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     DedicatedCapacity,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -72,7 +77,8 @@ interface Capacities {
    */
   listByResourceGroup is ArmResourceListByParent<
     DedicatedCapacity,
-    Response = ArmResponse<DedicatedCapacities>
+    Response = ArmResponse<DedicatedCapacities>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -80,18 +86,29 @@ interface Capacities {
    */
   list is ArmListBySubscription<
     DedicatedCapacity,
-    Response = ArmResponse<DedicatedCapacities>
+    Response = ArmResponse<DedicatedCapacities>,
+    Error = ErrorResponse
   >;
 
   /**
    * Suspends operation of the specified dedicated capacity instance.
    */
-  suspend is ArmResourceActionAsync<DedicatedCapacity, void, OkResponse>;
+  suspend is ArmResourceActionAsync<
+    DedicatedCapacity,
+    void,
+    OkResponse,
+    Error = ErrorResponse
+  >;
 
   /**
    * Resumes operation of the specified Dedicated capacity instance.
    */
-  resume is ArmResourceActionAsync<DedicatedCapacity, void, OkResponse>;
+  resume is ArmResourceActionAsync<
+    DedicatedCapacity,
+    void,
+    OkResponse,
+    Error = ErrorResponse
+  >;
 
   /**
    * Lists eligible SKUs for a PowerBI Dedicated resource.
@@ -101,7 +118,8 @@ interface Capacities {
   listSkusForCapacity is ArmResourceActionSync<
     DedicatedCapacity,
     void,
-    ArmResponse<SkuEnumerationForExistingResourceResult>
+    ArmResponse<SkuEnumerationForExistingResourceResult>,
+    Error = ErrorResponse
   >;
 }
 

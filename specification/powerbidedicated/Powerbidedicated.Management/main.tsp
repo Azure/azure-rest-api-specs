@@ -23,6 +23,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Azure.ResourceManager.Private;
 /**
  * PowerBI Dedicated Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Power BI dedicated capacities
  */
@@ -45,4 +46,27 @@ enum Versions {
   v2021_01_01: "2021-01-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+/**
+ * This is the interface that implements the standard Azure Resource Manager operation that returns
+ * all supported RP operations. You should have exactly one declaration for each
+ * Azure Resource Manager service. It implements
+ *   GET "/providers/Microsoft.ContosoProviderHub/operations"
+ */
+interface Operations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+  @tag("Operations")
+  @autoRoute
+  @armUpdateProviderNamespace
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationListResult> | ErrorResponse;
+}

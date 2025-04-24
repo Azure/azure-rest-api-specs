@@ -34,7 +34,7 @@ interface AutoScaleVCores {
   /**
    * Gets details about the specified auto scale v-core.
    */
-  get is ArmResourceRead<AutoScaleVCore>;
+  get is ArmResourceRead<AutoScaleVCore, Error = ErrorResponse>;
 
   /**
    * Provisions the specified auto scale v-core based on the configuration specified in the request.
@@ -42,7 +42,8 @@ interface AutoScaleVCores {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceSync<
     AutoScaleVCore,
-    Response = ArmResourceUpdatedResponse<AutoScaleVCore>
+    Response = ArmResourceUpdatedResponse<AutoScaleVCore>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -51,20 +52,22 @@ interface AutoScaleVCores {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AutoScaleVCore,
-    PatchModel = AutoScaleVCoreUpdateParameters
+    PatchModel = AutoScaleVCoreUpdateParameters,
+    Error = ErrorResponse
   >;
 
   /**
    * Deletes the specified auto scale v-core.
    */
-  delete is ArmResourceDeleteSync<AutoScaleVCore>;
+  delete is ArmResourceDeleteSync<AutoScaleVCore, Error = ErrorResponse>;
 
   /**
    * Gets all the auto scale v-cores for the given resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     AutoScaleVCore,
-    Response = ArmResponse<AutoScaleVCoreListResult>
+    Response = ArmResponse<AutoScaleVCoreListResult>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -72,7 +75,8 @@ interface AutoScaleVCores {
    */
   listBySubscription is ArmListBySubscription<
     AutoScaleVCore,
-    Response = ArmResponse<AutoScaleVCoreListResult>
+    Response = ArmResponse<AutoScaleVCoreListResult>,
+    Error = ErrorResponse
   >;
 }
 
