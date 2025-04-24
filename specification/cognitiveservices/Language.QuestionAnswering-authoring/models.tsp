@@ -340,13 +340,11 @@ model QuestionAnsweringProjectMetadata {
   /**
    * Represents the project last modified date-time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
   /**
    * Represents the project last deployment date-time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime?: utcDateTime;
 }
 
@@ -794,7 +792,6 @@ model ProjectDeployment {
   /**
    * Represents the project last deployment date-time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime?: utcDateTime;
 }
 
