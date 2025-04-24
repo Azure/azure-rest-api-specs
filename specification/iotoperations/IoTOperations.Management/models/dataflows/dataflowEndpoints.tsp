@@ -1,7 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./dataflowEndpointOtel.tsp";
+import "./dataflowEndpointOpenTelemetry.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
@@ -57,7 +57,7 @@ model DataflowEndpointProperties {
 
   @doc("OpenTelemetry endpoint.")
   @added(Versions.`2025-07-01-preview`)
-  otelSettings?: DataflowEndpointOtel;
+  openTelemetrySettings?: DataflowEndpointOpenTelemetry;
 
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
@@ -104,7 +104,7 @@ union EndpointType {
 
   @added(Versions.`2025-07-01-preview`)
   @doc("OpenTelemetry Type")
-  Otel: "Otel",
+  OpenTelemetry: "OpenTelemetry",
 }
 
 @doc("Azure Data Explorer endpoint properties")

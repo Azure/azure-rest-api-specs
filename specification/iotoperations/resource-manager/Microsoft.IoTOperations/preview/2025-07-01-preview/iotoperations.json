@@ -5277,14 +5277,14 @@
         "method"
       ]
     },
-    "DataflowEndpointOtel": {
+    "DataflowEndpointOpenTelemetry": {
       "type": "object",
       "description": "OpenTelemetry endpoint properties",
       "properties": {
         "metricIntervalSec": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of seconds to wait before sending metrics to the Otel collector."
+          "description": "The number of seconds to wait before sending metrics to the Open telemetry collector."
         },
         "host": {
           "type": "string",
@@ -5335,8 +5335,8 @@
           "$ref": "#/definitions/DataflowEndpointMqtt",
           "description": "Broker endpoint."
         },
-        "otelSettings": {
-          "$ref": "#/definitions/DataflowEndpointOtel",
+        "openTelemetrySettings": {
+          "$ref": "#/definitions/DataflowEndpointOpenTelemetry",
           "description": "OpenTelemetry endpoint."
         },
         "provisioningState": {
@@ -6270,7 +6270,7 @@
         "EventGrid",
         "LocalMq",
         "FabricRT",
-        "Otel"
+        "OpenTelemetry"
       ],
       "x-ms-enum": {
         "name": "EndpointType",
@@ -6327,8 +6327,8 @@
             "description": "FabricRT Type"
           },
           {
-            "name": "Otel",
-            "value": "Otel",
+            "name": "OpenTelemetry",
+            "value": "OpenTelemetry",
             "description": "OpenTelemetry Type"
           }
         ]
