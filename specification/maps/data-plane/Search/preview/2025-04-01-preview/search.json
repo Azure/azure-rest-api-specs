@@ -670,7 +670,7 @@
           {
             "name": "resultTypeGroups",
             "in": "query",
-            "description": "A comma separated list of returned entity type groups. The possible values are \n\n- Address\n- Place\n\nPlaces includes non-address entities, such as cities, postcodes, landmarks, populated places, etc.",
+            "description": "A comma separated list of returned entity type groups. The possible values are \n\n- Address\n- Place\n\n",
             "type": "array",
             "items": {
               "type": "string",
@@ -699,7 +699,7 @@
           {
             "name": "resultTypes",
             "in": "query",
-            "description": "A comma separated list of returned entity types.\nDefault value is all possible entity types.\n",
+            "description": "A comma separated list of returned entity types.\nWhen type group is set to Address, the supported types are:\n\n- Address\n- RoadBlock\n- RoadIntersection\n\nAll other types belong to the Place type group. These may include entities such as AdminDivision1, Neighborhood, PopulatedPlace, and more. Default value is all possible entity types.",
             "required": false,
             "type": "array",
             "items": {
@@ -2081,12 +2081,12 @@
               {
                 "name": "Address",
                 "value": "Address",
-                "description": "A specific address location, which can be further categorized into resultTypes such as RoadIntersection and RoadBlock."
+                "description": "A specific address location. Supported types are: \n\n- Address\n- RoadIntersection\n- RoadBlock\n\n"
               },
               {
                 "name": "Place",
                 "value": "Place",
-                "description": "All non-address general place or location, such as cities, postcodes, landmarks, populated places."
+                "description": "All other types belong to the Place type group. These may include entities such as AdminDivision1, Neighborhood, PopulatedPlace, and more."
               }
             ]
           }
