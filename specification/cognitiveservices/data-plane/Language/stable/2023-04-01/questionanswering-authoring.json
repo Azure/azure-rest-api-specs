@@ -185,12 +185,12 @@
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
-            "description": "Parameters needed to create the project.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProjectOptions"
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadataCreateOrUpdate"
             }
           }
         ],
@@ -210,7 +210,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1508,22 +1508,9 @@
         "message"
       ]
     },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "description": "A response containing error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -1534,31 +1521,6 @@
           "description": "Inner error."
         }
       }
-    },
-    "CreateProjectOptions": {
-      "type": "object",
-      "description": "Parameters needed to create the project.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the project."
-        },
-        "language": {
-          "type": "string",
-          "description": "Language of the text records. This is BCP-47 representation of a language. For\nexample, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for\nEnglish as default."
-        },
-        "multilingualResource": {
-          "type": "boolean",
-          "description": "Set to true to enable creating knowledgebases in different languages for the\nsame resource."
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "Configurable settings of the Project."
-        }
-      },
-      "required": [
-        "language"
-      ]
     },
     "Error": {
       "type": "object",
@@ -1764,7 +1726,7 @@
       "description": "Project assets the needs to be imported.",
       "properties": {
         "metadata": {
-          "$ref": "#/definitions/CreateProjectOptions",
+          "$ref": "#/definitions/QuestionAnsweringProjectMetadata",
           "description": "Parameters needed to create the project."
         },
         "assets": {
@@ -2684,12 +2646,14 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Project creation date-time."
+          "description": "Project creation date-time.",
+          "readOnly": true
         },
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Represents the project last modified date-time."
+          "description": "Represents the project last modified date-time.",
+          "readOnly": true
         },
         "lastDeployedDateTime": {
           "type": "string",
@@ -2700,6 +2664,33 @@
       "required": [
         "projectName"
       ]
+    },
+    "QuestionAnsweringProjectMetadataCreateOrUpdate": {
+      "type": "object",
+      "description": "Represents the project.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the project."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the text records. This is BCP-47 representation of a language. For\nexample, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for\nEnglish as default."
+        },
+        "multilingualResource": {
+          "type": "boolean",
+          "description": "Resource enabled for multiple languages across projects or not."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "Configurable settings of the Project."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last deployment date-time."
+        }
+      }
     },
     "RefreshSourceOptions": {
       "type": "object",

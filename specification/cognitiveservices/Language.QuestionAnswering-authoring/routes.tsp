@@ -4,8 +4,8 @@ import "./models.tsp";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
+import "./ops.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -36,25 +36,10 @@ interface QuestionAnsweringProjects {
    * Create or update a project.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
-  @createsOrUpdatesResource(QuestionAnsweringProjectMetadata)
-  @patch(#{ implicitOptionality: false })
-  createProject is Foundations.ResourceOperation<
+  createProject is ResourceCreateOrUpdateWithJsonContentType<
     QuestionAnsweringProjectMetadata,
-    {
-      /**
-       * The name of the project to use.
-       */
-      @doc("This request has a JSON body.")
-      @TypeSpec.Http.header("Content-Type")
-      contentType: "application/json";
-
-      /**
-       * Parameters needed to create the project.
-       */
-      @bodyRoot
-      body: CreateProjectOptions;
-    },
-    Foundations.ResourceCreatedOrOkResponse<QuestionAnsweringProjectMetadata>,
+    {},
+    ServiceTraits,
     ErrorResponse
   >;
 

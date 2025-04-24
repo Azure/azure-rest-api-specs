@@ -335,11 +335,13 @@ model QuestionAnsweringProjectMetadata {
   /**
    * Project creation date-time.
    */
+  @visibility(Lifecycle.Read)
   createdDateTime?: utcDateTime;
 
   /**
    * Represents the project last modified date-time.
    */
+  @visibility(Lifecycle.Read)
   lastModifiedDateTime?: utcDateTime;
 
   /**
@@ -426,34 +428,6 @@ model InnerErrorModel {
    * the error.
    */
   innererror?: InnerErrorModel;
-}
-
-/**
- * Parameters needed to create the project.
- */
-model CreateProjectOptions {
-  /**
-   * Description of the project.
-   */
-  description?: string;
-
-  /**
-   * Language of the text records. This is BCP-47 representation of a language. For
-   * example, use "en" for English; "es" for Spanish etc. If not set, use "en" for
-   * English as default.
-   */
-  language: string;
-
-  /**
-   * Set to true to enable creating knowledgebases in different languages for the
-   * same resource.
-   */
-  multilingualResource?: boolean;
-
-  /**
-   * Configurable settings of the Project.
-   */
-  settings?: ProjectSettings;
 }
 
 /**
@@ -554,7 +528,7 @@ model ImportJobOptions {
   /**
    * Parameters needed to create the project.
    */
-  metadata?: CreateProjectOptions;
+  metadata?: QuestionAnsweringProjectMetadata;
 
   /**
    * All assets for this project.
