@@ -1,13 +1,23 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
 
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
+
+alias Source = "Source";
+alias Destination = "Destination";
+alias BuiltInTransformation = "BuiltInTransformation";
+alias Map = "Map";
+alias Filter = "Filter";
+alias Branch = "Branch";
+alias Concatenate = "Concatenate";
+alias Sink = "Sink";
 
 /** ******************* */
 /**
@@ -41,6 +51,15 @@ model DataflowProperties {
   @OpenAPI.extension("x-ms-identifiers", #[])
   operations: DataflowOperation[];
 
+  @doc("Reference to the DataflowProfile resource.")
+  @added(Versions.`2025-07-01-preview`)
+  profileRef?: string; // should this be added
+
+  @doc("Connections between operations in the Dataflow.")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @added(Versions.`2025-07-01-preview`)
+  connections?: DataflowConnection[];
+
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -63,6 +82,10 @@ model DataflowOperation {
 
   @doc("Destination configuration.")
   destinationSettings?: DataflowDestinationOperationSettings;
+
+  @doc("Wasm configuration.")
+  @added(Versions.`2025-07-01-preview`)
+  wasmSettings?: DataflowWasmOperationSettings;
 }
 
 @doc("Dataflow Operation Type properties")
@@ -70,13 +93,43 @@ union OperationType {
   string,
 
   @doc("Dataflow Source Operation")
-  Source: "Source",
+  Source: Source,
 
   @doc("Dataflow Destination Operation")
-  Destination: "Destination",
+  Destination: Destination,
 
   @doc("Dataflow BuiltIn Transformation Operation")
-  BuiltInTransformation: "BuiltInTransformation",
+  BuiltInTransformation: BuiltInTransformation,
+
+  @doc("Map Operation")
+  @added(Versions.`2025-07-01-preview`)
+  Map: Map,
+  
+  @doc("Filter Operation")
+  @added(Versions.`2025-07-01-preview`)
+  Filter: Filter,
+  
+  @doc("Branch Operation")
+  @added(Versions.`2025-07-01-preview`)
+  Branch: Branch,
+  
+  @doc("Concatenate Operation")
+  @added(Versions.`2025-07-01-preview`)
+  Concatenate: Concatenate,
+}
+
+@doc("Dataflow Wasm Operation properties")
+@added(Versions.`2025-07-01-preview`)
+model DataflowWasmOperationSettings {
+  @doc("The reference to the wasm function")
+  function: DataflowWasmOperationFunction;
+}
+
+@doc("Dataflow Wasm Operation Function properties")
+@added(Versions.`2025-07-01-preview`)
+model DataflowWasmOperationFunction {
+  @doc("The URI of the function.")
+  uri: string;
 }
 
 @doc("Dataflow BuiltIn Transformation properties")
@@ -231,4 +284,87 @@ model DataflowSourceOperationSettings {
 
   @doc("List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.")
   dataSources: NonEmptyString[];
+}
+
+@doc("Dataflow Connection properties")
+@added(Versions.`2025-07-01-preview`)
+model DataflowConnection {
+  @doc("Connection input properties.")
+  from: DataflowConnectionInput;
+
+  @doc("Connection output properties.")
+  to: DataflowConnectionOutput;
+}
+
+@doc("Dataflow Connection Output properties")
+@added(Versions.`2025-07-01-preview`)
+model DataflowConnectionOutput {
+  @doc("The ID of the destination operation.")
+  id: string;
+
+  @doc("Operator type.")
+  operator: DataflowConnectionOutputOperator;
+
+  // `arm` is ommitted
+
+  @doc("The name of the module.")
+  moduleName?: string;
+}
+
+@doc("Dataflow Connection Output Operator properties")
+@added(Versions.`2025-07-01-preview`)
+union DataflowConnectionOutputOperator {
+  string,
+
+  @doc("Sink operator")
+  Sink,
+
+  @doc("Map operator")
+  Map,
+
+  @doc("Filter operator")
+  Filter,
+
+  @doc("Branch operator")
+  Branch,
+
+  @doc("Concatenate operator")
+  Concatenate,
+}
+
+
+@doc("Dataflow Connection Input properties")
+@added(Versions.`2025-07-01-preview`)
+model DataflowConnectionInput {
+  @doc("The ID of the source operation.")
+  id: string;
+
+  @doc("Operator type.")
+  operator: DataflowConnectionInputOperator;
+
+  // `arm` is ommitted
+
+  @doc("The name of the module.")
+  moduleName?: string;
+}
+
+@doc("Dataflow Connection Input Operator properties")
+@added(Versions.`2025-07-01-preview`)
+union DataflowConnectionInputOperator {
+  string,
+
+  @doc("Source operator")
+  Source,
+
+  @doc("Map operator")
+  Map,
+
+  @doc("Filter operator")
+  Filter,
+
+  @doc("Branch operator")
+  Branch,
+
+  @doc("Concatenate operator")
+  Concatenate,
 }
