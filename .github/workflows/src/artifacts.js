@@ -89,3 +89,21 @@ export async function getAzurePipelineArtifact({
   }
   return { artifactData };
 }
+
+/**
+ * Extracts the ADO build ID and project URL from the given build URL.
+ * @param {string} buildUrl
+ * @returns {{projectUrl: string, buildId: string}}
+ * @throws {Error} If the build URL does not match the expected format.
+ */
+export function getAdoBuildInfoFromUrl(buildUrl) {
+  // Extract the ADO build ID and project URL from the check run details URL
+  const buildUrlRegex = /^(.*?)(?=\/_build\/).*?[?&]buildId=(\d+)/;
+  const match = buildUrl.match(buildUrlRegex);
+  if (!match) {
+    throw new Error(
+      `Could not extract build ID or project URL from the URL: ${buildUrl}`,
+    );
+  }
+  return { projectUrl: match[1], buildId: match[2] };
+}

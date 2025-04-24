@@ -1,6 +1,9 @@
 // @ts-check
 import { extractInputs } from "./context.js";
-import { getAzurePipelineArtifact } from "./artifacts.js";
+import {
+  getAdoBuildInfoFromUrl,
+  getAzurePipelineArtifact,
+} from "./artifacts.js";
 import {
   CheckStatus,
   CommitStatusState,
@@ -150,16 +153,9 @@ async function processResult({ checkRuns, core }) {
     core.info(
       `Processing check run: ${checkRun.name} (${checkRun.conclusion})`,
     );
-    // Extract the ADO build ID and project URL from the check run details URL
-    const buildUrlRegex = /^(.*?)(?=\/_build\/).*?[?&]buildId=(\d+)/;
-    const match = checkRun.details_url.match(buildUrlRegex);
-    if (!match) {
-      throw new Error(
-        `Could not extract build ID or project URL from check run details URL: ${checkRun.details_url}`,
-      );
-    }
-    const ado_project_url = match[1];
-    const ado_build_id = match[2];
+    const buildInfo = getAdoBuildInfoFromUrl(checkRun.details_url);
+    const ado_project_url = buildInfo.projectUrl;
+    const ado_build_id = buildInfo.buildId;
     let artifactName = "spec-gen-sdk-artifact";
     const artifactFileName = `${artifactName}.json`;
     const result = await getAzurePipelineArtifact({
@@ -177,11 +173,11 @@ async function processResult({ checkRuns, core }) {
     }
     const artifactJsonObj = JSON.parse(result.artifactData);
     const language = artifactJsonObj.language;
+    const shortLanguageName = language.split("-").pop();
     const executionResult = artifactJsonObj.result;
     const isSpecGenSdkCheckRequired = artifactJsonObj.isSpecGenSdkCheckRequired;
     if (isSpecGenSdkCheckRequired && executionResult !== "succeeded") {
       state = CommitStatusState.FAILURE;
-      const shortLanguageName = language.split("-").pop();
       specGenSdkFailedRequiredLanguages += shortLanguageName + ", ";
     }
 
@@ -195,7 +191,7 @@ async function processResult({ checkRuns, core }) {
             ? "⏳"
             : "❓";
 
-    summaryContent += `| ${language} | ${statusEmoji} ${executionResult} | ${isSpecGenSdkCheckRequired} |\n`;
+    summaryContent += `| ${shortLanguageName} | ${statusEmoji} ${executionResult} | ${isSpecGenSdkCheckRequired} |\n`;
   }
 
   if (state === CommitStatusState.FAILURE) {

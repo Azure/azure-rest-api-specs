@@ -139,6 +139,6 @@ export async function writeToActionsSummary(content, core) {
     fs.appendFileSync(summaryFilePath, content);
     core.info("Successfully wrote to the GitHub Actions summary");
   } catch (error) {
-    core.warning(`Failed to write to GitHub Actions summary: ${error}`);
+    throw new Error(`Failed to write to the GitHub Actions summary: ${error}`);
   }
 }
