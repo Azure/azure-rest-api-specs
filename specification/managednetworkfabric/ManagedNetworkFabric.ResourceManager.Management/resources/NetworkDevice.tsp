@@ -75,6 +75,15 @@ interface NetworkDevices {
   >;
 
   @doc("Run the RO Command on the Network Device.")
+  @removed(Versions.v2024_06_15_preview)
+  runRoCommand is ArmResourceActionAsync<
+  NetworkDevice,
+  DeviceRoCommand,
+  CommonPostActionResponseForDeviceROCommands
+>;
+
+  @doc("Run the RO Command on the Network Device.")
+  @added(Versions.v2024_06_15_preview)
   runRoCommand is ArmResourceActionAsync<
     NetworkDevice,
     DeviceRoCommand,
