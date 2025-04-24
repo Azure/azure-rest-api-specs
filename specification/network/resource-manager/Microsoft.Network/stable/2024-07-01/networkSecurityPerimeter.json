@@ -1551,6 +1551,14 @@
         "id": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
           "description": "Network security perimeter identifier."
         },
         "tags": {
@@ -1725,6 +1733,14 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Resources/subscriptions"
+              }
+            ]
+          },
           "description": "Subscription id in the ARM id format."
         }
       }
@@ -1735,6 +1751,14 @@
         "id": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
           "description": "NSP id in the ARM id format."
         },
         "perimeterGuid": {
@@ -1972,6 +1996,14 @@
         },
         "autoApprovedRemotePerimeterResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
           "description": "Perimeter ARM Id for the remote NSP with which the link gets created in Auto-approval mode. It should be used when the NSP admin have Microsoft.Network/networkSecurityPerimeters/linkPerimeter/action permission on the remote NSP resource.",
           "x-ms-mutability": [
             "read",
@@ -2088,6 +2120,14 @@
         "remotePerimeterResourceId": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
           "description": "Perimeter ARM Id for the remote NSP with which the link is created."
         },
         "remotePerimeterGuid": {
