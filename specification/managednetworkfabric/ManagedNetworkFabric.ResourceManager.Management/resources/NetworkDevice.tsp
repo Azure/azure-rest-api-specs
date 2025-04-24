@@ -74,11 +74,14 @@ interface NetworkDevices {
     CommonPostActionResponseForStateUpdate
   >;
 
+  @tag("CommonPostActionResponseForDeviceROCommandsOperationStatusResult")
   @doc("Run the RO Command on the Network Device.")
   runRoCommand is ArmResourceActionAsync<
     NetworkDevice,
     DeviceRoCommand,
-    CommonPostActionResponseForDeviceROCommandsOperationStatusResult
+    never,
+    LroHeaders = ArmLroLocationHeader<FinalResult = CommonPostActionResponseForDeviceROCommandsOperationStatusResult> &
+      ArmAsyncOperationHeader
   >;
 
   @doc("Run the RW Command on the Network Device.")
