@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-azure-resource-manager";
-import "../../../models/exadata/vmcluster.tsp";
-import "../../../models/exadata/privateIpAddresses.tsp";
+import "../../models/exadata/vmcluster.tsp";
+import "../../models/exadata/privateIpAddresses.tsp";
 
 using Azure.ResourceManager;
 using Autorest;

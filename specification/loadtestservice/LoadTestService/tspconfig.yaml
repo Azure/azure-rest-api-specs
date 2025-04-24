@@ -26,17 +26,17 @@ options:
   "@azure-tools/typespec-python":
     package-dir: "azure-developer-loadtesting"
     namespace: "azure.developer.loadtesting"
-    generate-test: true
-    generate-sample: true
+    generate-test: false
+    generate-sample: false
     package-mode: azure-dataplane
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "load-testing-rest"
     title: Azure Load Testing
     description: Azure Load Testing Client
-    generateMetadata: false
-    generateTest: false
-    packageDetails:
+    generate-metadata: false
+    generate-test: false
+    package-details:
       name: "@azure-rest/load-testing"
       description: "This package contains Microsoft Azure LoadTestingClient client library."
       version: 1.0.1
@@ -45,6 +45,7 @@ options:
     package-dir: "Azure.Developer.LoadTesting"
     clear-output-folder: true
     namespace: "{package-dir}"
+    generate-sample-project: false
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-java":
@@ -53,5 +54,6 @@ options:
     enable-sync-stack: false
     partial-update: true
     generate-tests: false
+    generate-samples: false
     service-name: Load Testing
     flavor: azure

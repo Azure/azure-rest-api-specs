@@ -17,7 +17,7 @@ import {
   vsoAddAttachment,
   vsoLogIssue,
 } from "./log.js";
-import { SpecGenSdkCmdInput, VsoLogs } from "./types.js";
+import { SpecGenSdkArtifactInfo, SpecGenSdkCmdInput, VsoLogs } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 
 /**
@@ -67,7 +67,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   }
 
   logMessage("ending group logging", LogLevel.EndGroup);
-  logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
+  logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPathText);
 
   return statusCode;
 }
@@ -80,6 +80,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   // Get the spec paths from the changed files
   const changedSpecs = detectChangedSpecConfigFiles(commandInput);
+  let managementPlaneSpecType = false;
+  let dataPlaneSpecType = false;
 
   let statusCode = 0;
   let pushedSpecConfigCount;
@@ -98,11 +100,21 @@ export async function generateSdkForSpecPr(): Promise<number> {
       specGenSdkCommand.push("--tsp-config-relative-path", changedSpec.typespecProject);
       changedSpecPathText = changedSpec.typespecProject;
       pushedSpecConfigCount++;
+      if (changedSpec.typespecProject.includes(".Management")) {
+        managementPlaneSpecType = true;
+      } else {
+        dataPlaneSpecType = true;
+      }
     }
     if (changedSpec.readmeMd) {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
       changedSpecPathText = changedSpecPathText + " " + changedSpec.readmeMd;
       pushedSpecConfigCount++;
+      if (changedSpec.readmeMd.includes("resource-manager")) {
+        managementPlaneSpecType = true;
+      } else if (changedSpec.readmeMd.includes("data-plane")) {
+        dataPlaneSpecType = true;
+      }
     }
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
@@ -131,12 +143,17 @@ export async function generateSdkForSpecPr(): Promise<number> {
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
+    logIssuesToPipeline(executionReport?.vsoLogPath, changedSpecPathText);
   }
-  // Process the breaking change label artifacts
+  // Process the spec-gen-sdk artifacts
+  const specGenSdkArtifactInfo: SpecGenSdkArtifactInfo = {
+    managementPlane: managementPlaneSpecType,
+    dataPlane: dataPlaneSpecType,
+  };
   statusCode =
-    processBreakingChangeLabelArtifacts(
+    generateArtifact(
       commandInput,
+      specGenSdkArtifactInfo,
       shouldLabelBreakingChange,
       breakingChangeLabel,
     ) || statusCode;
@@ -146,13 +163,13 @@ export async function generateSdkForSpecPr(): Promise<number> {
 /**
  * Generate SDKs for batch specs.
  */
-export async function generateSdkForBatchSpecs(runMode: string): Promise<number> {
+export async function generateSdkForBatchSpecs(batchType: string): Promise<number> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
-  // Get the spec paths based on the run mode
-  const specConfigPaths = getSpecPaths(runMode, commandInput.localSpecRepoPath);
+  // Get the spec paths based on the batch run type
+  const specConfigPaths = getSpecPaths(batchType, commandInput.localSpecRepoPath);
 
   // Prepare variables
   let statusCode = 0;
@@ -209,7 +226,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(executionReport.vsoLogPath, specConfigPath);
+    logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPath);
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
@@ -290,12 +307,24 @@ function parseArguments(): SpecGenSdkCmdInput {
   const workingFolder: string = path.resolve(
     getArgumentValue(args, "--wf", path.join(localSpecRepoPath, "..")),
   );
+
+  // Set runMode to "release" by default
+  let runMode = "release";
+  const batchType: string = getArgumentValue(args, "--batch-type", "");
+  const pullRequestNumber: string = getArgumentValue(args, "--pr-number", "");
+  if (batchType) {
+    runMode = "batch";
+  } else if (pullRequestNumber) {
+    runMode = "spec-pull-request";
+  }
+
   return {
     workingFolder,
     localSpecRepoPath,
     localSdkRepoPath,
     sdkRepoName,
-    isTriggeredByPipeline: getArgumentValue(args, "--tr", "false"),
+    sdkLanguage: sdkRepoName.replace("-pr", ""),
+    runMode,
     tspConfigPath: getArgumentValue(args, "--tsp-config-relative-path", ""),
     readmePath: getArgumentValue(args, "--readme-relative-path", ""),
     prNumber: getArgumentValue(args, "--pr-number", ""),
@@ -327,11 +356,11 @@ function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
     commandInput.sdkRepoName,
     "-c",
     commandInput.specCommitSha,
-    "-t",
-    commandInput.isTriggeredByPipeline,
+    "--rm",
+    commandInput.runMode,
   );
   if (commandInput.specRepoHttpsUrl) {
-    specGenSdkCommand.push("--spec-repo-url", commandInput.specRepoHttpsUrl);
+    specGenSdkCommand.push("--spec-repo-https-url", commandInput.specRepoHttpsUrl);
   }
   if (commandInput.prNumber) {
     specGenSdkCommand.push("--pr-number", commandInput.prNumber);
@@ -358,14 +387,14 @@ function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
 }
 
 /**
- * Get the spec paths based on the run mode.
- * @param runMode The run mode.
+ * Get the spec paths based on the batch run type.
+ * @param batchType The batch run type.
  * @param specRepoPath The specification repository path.
  * @returns The spec paths.
  */
-function getSpecPaths(runMode: string, specRepoPath: string): string[] {
+function getSpecPaths(batchType: string, specRepoPath: string): string[] {
   const specConfigPaths: string[] = [];
-  switch (runMode) {
+  switch (batchType) {
     case "all-specs": {
       specConfigPaths.push(
         ...getAllTypeSpecPaths(specRepoPath),
@@ -443,41 +472,39 @@ function getBreakingChangeInfo(executionReport: any): [boolean, string] {
 }
 
 /**
- * Process the breaking change label artifacts.
+ * Generate the spec-gen-sdk artifacts.
  * @param commandInput - The command input.
+ * @param artifactInfo - The spec-gen-sdk artifact information.
  * @param shouldLabelBreakingChange - A flag indicating whether to label breaking changes.
+ * @param breakingChangeLabel - The breaking change label.
  * @returns the run status code.
  */
-function processBreakingChangeLabelArtifacts(
+function generateArtifact(
   commandInput: SpecGenSdkCmdInput,
+  artifactInfo: SpecGenSdkArtifactInfo,
   shouldLabelBreakingChange: boolean,
   breakingChangeLabel: string,
 ): number {
-  const breakingChangeLabelArtifactName = "spec-gen-sdk-breaking-change-artifact";
-  const breakingChangeLabelArtifactFileName = breakingChangeLabelArtifactName + ".json";
-  const breakingChangeLabelArtifactPath = "out/breaking-change-label-artifact";
-  const breakingChangeLabelArtifactAbsoluteFolder = path.join(
+  const specGenSdkArtifactName = "spec-gen-sdk-artifact";
+  const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
+  const specGenSdkArtifactPath = "out/spec-gen-sdk-artifact";
+  const specGenSdkArtifactAbsoluteFolder = path.join(
     commandInput.workingFolder,
-    breakingChangeLabelArtifactPath,
+    specGenSdkArtifactPath,
   );
   try {
-    if (!fs.existsSync(breakingChangeLabelArtifactAbsoluteFolder)) {
-      fs.mkdirSync(breakingChangeLabelArtifactAbsoluteFolder, { recursive: true });
+    if (!fs.existsSync(specGenSdkArtifactAbsoluteFolder)) {
+      fs.mkdirSync(specGenSdkArtifactAbsoluteFolder, { recursive: true });
     }
-    // Write breaking change label artifact
+    // Write artifact
+    artifactInfo.language = commandInput.sdkLanguage;
+    artifactInfo.labelAction = shouldLabelBreakingChange;
     fs.writeFileSync(
-      path.join(
-        commandInput.workingFolder,
-        breakingChangeLabelArtifactPath,
-        breakingChangeLabelArtifactFileName,
-      ),
-      JSON.stringify({
-        language: commandInput.sdkRepoName,
-        labelAction: shouldLabelBreakingChange,
-      }),
+      path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
+      JSON.stringify(artifactInfo, undefined, 2),
     );
-    setVsoVariable("BreakingChangeLabelArtifactName", breakingChangeLabelArtifactName);
-    setVsoVariable("BreakingChangeLabelArtifactPath", breakingChangeLabelArtifactPath);
+    setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
+    setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
     setVsoVariable("BreakingChangeLabelAction", shouldLabelBreakingChange ? "add" : "remove");
     setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
   } catch (error) {
