@@ -2025,15 +2025,17 @@ alias ContainerNamePathParameter = {
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
 alias MetadataHeaders = {
   /** The metadata headers. */
-  #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Record string will help generate"
-  @header("x-ms-meta") metadata?: Record<string>;
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-meta")
+  metadata?: string;
 };
 
 // NOTE: this does not explicitly let emitters know that this is a special type of header used for collection of object replication headers. Logic should be handwritten to handle this.
 alias ObjectReplicationHeaders = {
   /** Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed). */
-  #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
-  @header("x-ms-or") objectReplicationRules?: Record<string>;
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-or")
+  objectReplicationRules?: string;
 };
 
 /** The If-Unmodified-Since header. */
