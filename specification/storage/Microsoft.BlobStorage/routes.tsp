@@ -601,6 +601,7 @@ namespace Storage.Blob {
         ...EncryptionAlgorithmParameter,
         ...IfTagsParameter,
         ...ConditionalRequestHeaders,
+        ...StructuredBodyParameter,
       ): (BodyParameter & {
         /** The media type of the body of the response. */
         @header("Content-Type")
@@ -1035,7 +1036,7 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...LeaseIdRequiredParameter;
-          ...ProposedLeaseIdOptionalParameter;
+          ...ProposedLeaseIdRequiredParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
         },
@@ -1335,7 +1336,7 @@ namespace Storage.Blob {
             ...ConditionalRequestHeaders;
             ...IfTagsParameter;
             ...BlobContentLengthRequired;
-            ...BlobSequenceNumberParameter;
+            ...SequenceNumberParameter;
             ...BlobTagsHeaderParameter;
             ...ImmutabilityPolicyExpiryParameter;
             ...ImmutabilityPolicyModeParameter;
@@ -1389,7 +1390,7 @@ namespace Storage.Blob {
             ...IfSequenceNumberEqualToParameter;
             ...ConditionalRequestHeaders;
             ...IfTagsParameter;
-            ...StructuredBodyPut;
+            ...StructuredBodyParameter;
             ...StructuredContentLengthParameter;
           },
           {
@@ -1717,7 +1718,7 @@ namespace Storage.Blob {
             ...EncryptionScopeParameter;
             ...ConditionalRequestHeaders;
             ...IfTagsParameter;
-            ...StructuredBodyPut;
+            ...StructuredBodyParameter;
             ...StructuredContentLengthParameter;
           },
           {

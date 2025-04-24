@@ -1355,7 +1355,7 @@ alias SkuNameResponseHeader = {
 alias ContentCrc64ResponseHeader = {
   /** This response header is returned so that the client can check for the integrity of the copied content. */
   @header("x-ms-content-crc64")
-  contentCrc64: string;
+  contentCrc64: bytes;
 };
 
 /** The copy status response header. */
@@ -1509,7 +1509,7 @@ alias ContentRangeResponseHeader = {
 /** The Content-MD5 response header. */
 alias ContentMd5ResponseHeader = {
   /** If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity. */
-  @header("Content-MD5") contentMd5: string;
+  @header("Content-MD5") contentMd5: bytes;
 };
 
 /** The Content-Length response header. */
@@ -1561,7 +1561,7 @@ alias EtagResponseHeader = {
 /** The copy source tags header parameter. */
 alias CopySourceTagsParameter = {
   /** Optional, default 'replace'.  Indicates if source tags should be copied or replaced with the tags specified by x-ms-tags. */
-  @header("x-ms-copy-source-tags")
+  @header("x-ms-copy-source-tag-option")
   copySourceTags?: string;
 };
 
@@ -1640,7 +1640,7 @@ alias ContentCrc64Parameter = {
   /** Specify the transactional crc64 for the body, to be validated by the service. */
   @clientName("transactionalContentCrc64")
   @header("x-ms-content-crc64")
-  contentCrc64?: string;
+  contentCrc64?: bytes;
 };
 
 /** The access tier optional parameter. */
@@ -1655,7 +1655,7 @@ alias ContentMd5Parameter = {
   /** Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded. */
   @clientName("transactionalContentMD5")
   @header("Content-MD5")
-  contentMd5?: string;
+  contentMd5?: bytes;
 };
 
 /** The legal hold optional parameter. */
@@ -1687,13 +1687,6 @@ alias BlobTagsHeaderParameter = {
   @clientName("BlobTagsString")
   @header("x-ms-tags")
   blobTags?: string;
-};
-
-/** The blob sequence number parameter. */
-alias BlobSequenceNumberParameter = {
-  /** Optional.  The sequence number is a user-controlled property that you can use to track requests. The value of the sequence number must be between 0 and 2^63 - 1. The default value is 0. */
-  @header("x-ms-blob-sequence-number")
-  blobSequenceNumber?: int64;
 };
 
 /** The encryption scope parameter. */
@@ -1914,10 +1907,10 @@ model BlobName {
   /** Whether the blob name is encoded. */
   @Xml.attribute
   @Xml.name("Encoded")
-  encoded: boolean;
+  encoded?: boolean;
 
   /** The blob name. */
-  @Xml.unwrapped content: string;
+  @Xml.unwrapped content?: string;
 }
 
 /** Represents a blob prefix. */
@@ -2019,7 +2012,7 @@ union ListBlobsIncludeItem {
 alias LeaseDurationHeader = {
   /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
   @header("x-ms-lease-duration")
-  duration?: int32;
+  duration?: LeaseDuration;
 };
 
 /** The container name path parameter */
@@ -2163,7 +2156,7 @@ alias StructuredContentLengthResponseHeader = {
   structuredContentLength?: int64;
 };
 
-alias StructuredBodyPut = {
+alias StructuredBodyParameter = {
   /** Required if the request body is a structured message. Specifies the message schema version and properties. */
   @header("x-ms-structured-body")
   structuredBodyType?: string;
