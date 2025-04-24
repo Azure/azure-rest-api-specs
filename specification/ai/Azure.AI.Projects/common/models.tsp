@@ -9,7 +9,7 @@ namespace Azure.AI.Projects;
 
 
 alias AssetBase = {
-  @doc("A unique identifier for the asset, assetId probably")
+  @doc("AssetId, a unique identifier for the asset")
   @visibility(Lifecycle.Read)
   id?: string;
 
