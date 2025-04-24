@@ -7,3 +7,7 @@ using Azure.ClientGenerator.Core;
   "ProgrammableConnectivityMgmt",
   "python"
 );
+@@clientName(Microsoft.ProgrammableConnectivity,
+  "ProgrammableConnectivityMgmtClient",
+  "java"
+);
