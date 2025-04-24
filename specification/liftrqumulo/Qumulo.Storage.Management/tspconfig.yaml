@@ -29,10 +29,25 @@ options:
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-qumulo"
+    package-name: "azure-mgmt-qumulo"
     namespace: "azure.mgmt.qumulo"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/liftrqumulo"
+    package-dir: "armqumulo"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-qumulo"
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
