@@ -544,8 +544,6 @@ model CommonPostActionResponseForDeviceROCommandsOperationStatusResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
 @doc("Common response for device Ro Commands.")
 model CommonPostActionResponseForDeviceROCommands {
-  @removed(Versions.v2024_06_15_preview)
-  ...ErrorResponse;
 
   @doc("Gets the configuration state.")
   @visibility(Lifecycle.Read)
