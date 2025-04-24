@@ -1667,6 +1667,70 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}/participants:moveHere": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Add a participant to the call.",
+        "description": "Add a participant to the call.",
+        "operationId": "CallConnection_MoveParticipants",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "moveParticipantRequest",
+            "in": "body",
+            "description": "The move participants request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveParticipantsRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
+            "type": "string",
+            "format": "date-time-rfc1123"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the move participant request and will begin processing it. You will receive either MoveParticipantSucceeded or MoveParticipantFailed event at your specified callback URI to update you on the status of the request.",
+            "schema": {
+              "$ref": "#/definitions/MoveParticipantsResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallConnection_MoveParticipants": {
+            "$ref": "./examples/CallConnection_MoveParticipants.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/participants/{participantRawId}": {
       "get": {
         "tags": [
@@ -2027,7 +2091,10 @@
     },
     "AzureOpenAIDialog": {
       "description": "Azure Open AI Dialog",
-      "required": [],
+      "required": [
+        "kind",
+        "context"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -2038,13 +2105,13 @@
       "x-ms-discriminator-value": "azureOpenAI"
     },
     "CommunicationIdentifierModel": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+      "$ref": "../../../Common/preview/2025-03-15-preview/common.json#/definitions/CommunicationIdentifierModel"
     },
     "PhoneNumberIdentifierModel": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/PhoneNumberIdentifierModel"
+      "$ref": "../../../Common/preview/2025-03-15-preview/common.json#/definitions/PhoneNumberIdentifierModel"
     },
     "CommunicationUserIdentifierModel": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationUserIdentifierModel"
+      "$ref": "../../../Common/preview/2025-03-15-preview/common.json#/definitions/CommunicationUserIdentifierModel"
     },
     "CallIntelligenceOptions": {
       "description": "AI options for the call.",
@@ -2084,7 +2151,7 @@
       "x-ms-discriminator-value": "powerVirtualAgents"
     },
     "MicrosoftTeamsAppIdentifierModel": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
+      "$ref": "../../../Common/preview/2025-03-15-preview/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
     },
     "CustomCallingContext": {
       "description": "The custom calling context which will be sent to the target",
@@ -2232,7 +2299,7 @@
           "description": "Defines the locale for the data e.g en-CA, en-AU",
           "type": "string"
         },
-        "speechRecognitionModelEndpointId": {
+        "speechModelEndpointId": {
           "description": "Endpoint where the custom model was deployed.",
           "type": "string"
         },
@@ -2247,13 +2314,16 @@
       }
     },
     "MicrosoftTeamsUserIdentifierModel": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
+      "$ref": "../../../Common/preview/2025-03-15-preview/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
+    },
+    "TeamsExtensionUserIdentifierModel": {
+      "$ref": "../../../Common/preview/2025-03-15-preview/common.json#/definitions/TeamsExtensionUserIdentifierModel"
     },
     "CommunicationErrorResponse": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+      "$ref": "../../../Common/preview/2025-03-15-preview/common.json#/definitions/CommunicationErrorResponse"
     },
     "CommunicationError": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationError"
+      "$ref": "../../../Common/preview/2025-03-15-preview/common.json#/definitions/CommunicationError"
     },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
@@ -2789,7 +2859,7 @@
           "description": "Defines Locale for the transcription e,g en-US",
           "type": "string"
         },
-        "speechRecognitionModelEndpointId": {
+        "speechModelEndpointId": {
           "description": "Endpoint where the custom model was deployed.",
           "type": "string"
         },
@@ -3057,16 +3127,13 @@
       }
     },
     "UpdateTranscriptionRequest": {
-      "required": [
-        "locale"
-      ],
       "type": "object",
       "properties": {
         "locale": {
           "description": "Defines new locale for transcription.",
           "type": "string"
         },
-        "speechRecognitionModelEndpointId": {
+        "speechModelEndpointId": {
           "description": "Sets Endpoint id where the custom model was deployed.",
           "type": "string"
         },
@@ -3502,6 +3569,56 @@
         }
       }
     },
+    "MoveParticipantsRequest": {
+      "description": "The request payload for moving participant to the call.",
+      "required": [
+        "targetParticipants",
+        "fromCall"
+      ],
+      "type": "object",
+      "properties": {
+        "targetParticipants": {
+          "description": "The participant to Move.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifierModel"
+          }
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        },
+        "fromCall": {
+          "description": "The CallConnectionId for the call you want to move the participant from",
+          "type": "string"
+        }
+      }
+    },
+    "MoveParticipantsResponse": {
+      "description": "The response payload for moving participants to the call.",
+      "type": "object",
+      "properties": {
+        "participants": {
+          "description": "List of current participants in the call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CallParticipant"
+          }
+        },
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
+        },
+        "fromCall": {
+          "description": "The CallConnectionId for the call you want to move the participant from",
+          "type": "string"
+        }
+      }
+    },
     "RecordingContentType": {
       "description": "The content type of call recording.",
       "enum": [
@@ -3585,6 +3702,10 @@
         "externalStorage": {
           "$ref": "#/definitions/ExternalStorage",
           "description": "Optional property to specify location where recording will be stored"
+        },
+        "postProcessingOptions": {
+          "$ref": "#/definitions/PostProcessingOptions",
+          "description": "The post processing options for the recording."
         }
       }
     },
@@ -3645,6 +3766,50 @@
           "format": "uri",
           "description": "Uri of a container or a location within a container",
           "type": "string"
+        }
+      }
+    },
+    "PostProcessingOptions": {
+      "required": [
+        "transcription"
+      ],
+      "type": "object",
+      "properties": {
+        "cognitiveServicesEndpoint": {
+          "description": "The identifier of the Cognitive Service resource assigned to the post recording processing.\r\nThe Cognitive Service resource will be used by the summarization feature.",
+          "type": "string"
+        },
+        "transcription": {
+          "$ref": "#/definitions/Transcription",
+          "description": "Define options of the transcription for the post recording processing."
+        },
+        "summarization": {
+          "$ref": "#/definitions/Summarization",
+          "description": "Define options of the summarization for the post recording processing."
+        }
+      }
+    },
+    "Transcription": {
+      "required": [
+        "enableTranscription"
+      ],
+      "type": "object",
+      "properties": {
+        "enableTranscription": {
+          "description": "Determine if the Transcription should be enabled for the post recording processing.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Summarization": {
+      "required": [
+        "enableSummarization"
+      ],
+      "type": "object",
+      "properties": {
+        "enableSummarization": {
+          "description": "Determine if the summarization should be enabled for the post recording processing.",
+          "type": "boolean"
         }
       }
     },
@@ -4322,6 +4487,74 @@
         }
       }
     },
+    "MoveParticipantSucceeded": {
+      "description": "Moving the participant successfully event.",
+      "type": "object",
+      "properties": {
+        "fromCall": {
+          "description": "The CallConnectionId for the call you want to move the participant from",
+          "type": "string"
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant"
+        }
+      }
+    },
+    "MoveParticipantFailed": {
+      "description": "Moving the participant failed event.",
+      "type": "object",
+      "properties": {
+        "fromCall": {
+          "description": "The CallConnectionId for the call you want to move the participant from",
+          "type": "string"
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant"
+        }
+      }
+    },
     "RecordingStateChanged": {
       "type": "object",
       "properties": {
@@ -4604,6 +4837,11 @@
         "speech": {
           "description": "The recognized speech in string.",
           "type": "string"
+        },
+        "confidence": {
+          "format": "double",
+          "description": "The confidence of the recognized speech.",
+          "type": "number"
         }
       }
     },
@@ -5608,7 +5846,9 @@
     },
     "AzureOpenAIDialogUpdate": {
       "description": "Azure Open AI Dialog for UpdateDialog API Call",
-      "required": [],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
