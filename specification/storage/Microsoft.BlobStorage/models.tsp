@@ -204,6 +204,7 @@ model ListContainersSegmentResponse {
   @Xml.name("MaxResults") maxResults?: int32;
 
   /** The container segment. */
+  @pageItems
   @Xml.name("Containers")
   containerItems: ContainerItem[];
 
