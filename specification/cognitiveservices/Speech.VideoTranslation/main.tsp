@@ -118,6 +118,21 @@ union EventHubVideoTranslationEventKind {
   IterationCompletion: "IterationCompletion",
 }
 
+@added(ApiVersions.v2025_05_20)
+@doc("Emotional platform voice kind.")
+union EmotionalPlatformVoiceKind {
+  string,
+
+  /** Let API to decide whether enable emotional voice for the target locale. */
+  Auto: "Auto",
+
+  /** Force to enable emotional voice if there is voice supported emotion for the target locale. */
+  Enable: "Enable",
+
+  /** Disable platform voice emotion for the target locale. */
+  Disable: "Disable",
+}
+
 @doc("Translation webvtt file.")
 model WebvttFile {
   @doc("Translation webvtt file url.")
@@ -236,6 +251,10 @@ model IterationInput {
   @added(ApiVersions.v2025_05_20)
   @doc("This parameter specifies the primary color of the subtitles in the video translation output. The value should be provided in the format <bb><gg><rr> or #<bb><gg><rr>, where <bb> represents the blue component, <gg> represents the green component, and <rr> represents the red component of the color. For example, EBA205 or #EBA205 would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal")
   subtitlePrimaryColor?: string;
+
+  @added(ApiVersions.v2025_05_20)
+  @doc("This parameter specifies whether or not enable the emotion for platform voice, by default let server to decide whether enable emotion for better quality for the target locale.")
+  emotionalPlatformVoiceKind?: EmotionalPlatformVoiceKind;
 }
 
 @added(ApiVersions.v2025_05_20)

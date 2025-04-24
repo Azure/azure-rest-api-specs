@@ -778,6 +778,36 @@
         }
       }
     },
+    "EmotionalPlatformVoiceKind": {
+      "type": "string",
+      "description": "Emotional platform voice kind.",
+      "enum": [
+        "Auto",
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "EmotionalPlatformVoiceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Let API to decide whether enable emotional voice for the target locale."
+          },
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Force to enable emotional voice if there is voice supported emotion for the target locale."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable platform voice emotion for the target locale."
+          }
+        ]
+      }
+    },
     "EventHubConfig": {
       "type": "object",
       "description": "EventHub configuration.",
@@ -938,6 +968,10 @@
         "subtitlePrimaryColor": {
           "type": "string",
           "description": "This parameter specifies the primary color of the subtitles in the video translation output. The value should be provided in the format <bb><gg><rr> or #<bb><gg><rr>, where <bb> represents the blue component, <gg> represents the green component, and <rr> represents the red component of the color. For example, EBA205 or #EBA205 would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal"
+        },
+        "emotionalPlatformVoiceKind": {
+          "$ref": "#/definitions/EmotionalPlatformVoiceKind",
+          "description": "This parameter specifies whether or not enable the emotion for platform voice, by default let server to decide whether enable emotion for better quality for the target locale."
         }
       }
     },
