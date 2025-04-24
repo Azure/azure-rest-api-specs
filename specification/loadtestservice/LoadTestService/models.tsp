@@ -1297,7 +1297,7 @@ model ListTestRunQueryParams {
   @doc("Comma separated list of type of entities that have created the test run.")
   @query(#{ explode: false })
   @added(APIVersions.v2024_07_01_preview)
-  createdByType?: string[];
+  createdByTypes?: string[];
 }
 
 @doc("Parameters for list test operation")
