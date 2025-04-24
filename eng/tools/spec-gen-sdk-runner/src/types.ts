@@ -38,6 +38,7 @@ export interface SpecGenSdkArtifactInfo {
   result: string;
   labelAction?: boolean;
   isSpecGenSdkCheckRequired: boolean;
+  datetime: string;
 }
 
 /**

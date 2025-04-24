@@ -512,6 +512,7 @@ function generateArtifact(
       labelAction: hasBreakingChange,
       isSpecGenSdkCheckRequired:
         hasManagementPlaneSpecs && SpecGenSdkRequiredSettings[commandInput.sdkLanguage as SdkName],
+      datetime: new Date().toISOString(),
     };
     fs.writeFileSync(
       path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
