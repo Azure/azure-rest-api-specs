@@ -135,24 +135,6 @@ model Resources {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-@doc("struct for VMExtension data")
-model VirtualMachineExtensionData {
-  @doc("name of VM extension")
-  name: string;
-
-  @doc("location of VM extension")
-  location?: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "this is created as record because we don't want copy VMextensionProperties type here and update this everytime there a new property added in underlying type in compute"
-  @doc("properties for VM extension e.g. publisher, version etc, value can dynamic int32,string, bool etc.")
-  properties: Record<unknown>; //map with key as string and value type can be dynamic (string, int32)
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags are simple key/value pair where key and value is of type string"
-  @doc("Resource tags for creates/updates")
-  tags?: Record<string>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
   @doc("baseProfile, Resource properties that common across all resources ")
@@ -160,9 +142,6 @@ model ResourceProvisionPayload {
 
   @doc("resourceOverrides, properties per resource that needs to be overwritted from baseProfile")
   resourceOverrides?: Array<string>;
-
-  @doc("vmExtensions, array of Virtual machine extensions to be added to all the VMs created in this request")
-  vmExtensions?: Array<VirtualMachineExtensionData>;
 
   @doc("Number of resources to be created")
   resourceCount: int32;
