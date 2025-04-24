@@ -1602,7 +1602,7 @@ alias CopySourceParameter = {
 alias SourceContentMd5Parameter = {
   /** Specify the md5 calculated for the range of bytes that must be read from the copy source. */
   @header("x-ms-source-content-md5")
-  sourceContentMd5?: string;
+  sourceContentMd5?: bytes;
 };
 
 /** The source if tags parameter. */
