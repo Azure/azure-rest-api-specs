@@ -214,11 +214,11 @@ model IterationInput {
   exportSubtitleInVideo?: boolean;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Translate with TTS custom lexicon for TTS synthesis, proivde the custom lexicon file with URL, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are requied.")
+  @doc("Translate with TTS custom lexicon for TTS synthesis, provide the custom lexicon file with URL, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are required.")
   ttsCustomLexiconFileUrl?: url;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Translate with TTS custom lexicon for TTS synthesis, proivde the custom lexicon file with file ID in Audio Content Creation, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are requied.")
+  @doc("Translate with TTS custom lexicon for TTS synthesis, provide the custom lexicon file with file ID in Audio Content Creation, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are required.")
   ttsCustomLexiconFileIdInAudioContentCreation?: Guid;
 
   @added(ApiVersions.v2025_05_20)
@@ -399,9 +399,6 @@ interface OperationOperations {
   getOperation is ops.ResourceRead<Operation>;
 }
 
-@doc("Empty request body.")
-model EmptyRequest {}
-
 @added(ApiVersions.v2025_05_20)
 interface EventHubConfigOperations {
   @doc("Create or replace EventHub configuration.")
@@ -412,76 +409,15 @@ interface EventHubConfigOperations {
   @doc("Get EventHub configuration.")
   @route("/configurations/event-hub")
   @get
-  getEventHubConfig is RpcOperation<EmptyRequest, EventHubConfig>;
+  getEventHubConfig is RpcOperation<{}, EventHubConfig>;
 
   @doc("Get EventHub configuration.")
   @delete
   @route("/configurations/event-hub")
-  deleteEventHubConfig is RpcOperation<EventHubConfig, NoContentResponse>;
+  deleteEventHubConfig is RpcOperation<{}, NoContentResponse>;
 
   @doc("Send ping to EventHub to verify configuration.")
   @route("/configurations/event-hub:ping")
   @post
-  pingEventHub is RpcOperation<EmptyRequest,NoContentResponse>;
+  pingEventHub is RpcOperation<{}, OkResponse>;
 }
-
-// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using custom operation signature for specific requirements"
-// @added(ApiVersions.v2025_05_20)
-// @doc("Create or replace EventHub configuration.")
-// @route("/configurations/event-hub")
-// @put
-// op createOrReplaceEventHubConfig(
-//   @doc("API version parameter")
-//   @query("api-version")
-//   apiVersion: string,
-
-//   // @ApiVersionParameter("api-version")
-//   @doc("EventHub configuration.")
-//   @body
-//   resource: EventHubConfig,
-// ): EventHubConfig;
-
-// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using custom operation signature for specific requirements"
-// @added(ApiVersions.v2025_05_20)
-// @doc("Get EventHub configuration.")
-// @route("/configurations/event-hub")
-// @get
-// op getEventHubConfig(
-//   @doc("API version parameter")
-//   @query("api-version")
-//   apiVersion: string,
-// ): {
-//   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Union of literals should include the base scalar as a variant to make it an open enum. (ex: `union Choice { Yes: " yes ", No: " no ", string };`)."
-//   @statusCode status: 200;
-
-//   @doc("EventHub configuration.")
-//   @added(ApiVersions.v2025_05_20)
-//   @body
-//   resource?: EventHubConfig;
-// };
-
-// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using custom operation signature for specific requirements"
-// @added(ApiVersions.v2025_05_20)
-// @doc("Delete EventHub configuration.")
-// @route("/configurations/event-hub")
-// @delete
-// op deleteEventHubConfig(
-//   @doc("API version parameter")
-//   @query("api-version")
-//   apiVersion: string,
-// ): {
-//   @statusCode status: 204;
-// };
-
-// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using custom operation signature for specific requirements"
-// @added(ApiVersions.v2025_05_20)
-// @doc("Send ping to EventHub to verify configuration.")
-// @route("/configurations/event-hub:ping")
-// @post
-// op pingEventHub(
-//   @doc("API version parameter")
-//   @query("api-version")
-//   apiVersion: string,
-// ): {
-//   @statusCode status: 200;
-// };
