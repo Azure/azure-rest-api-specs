@@ -4,6 +4,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
+import "../evaluations/models.tsp";
 import "./models.tsp";
 import "../servicepatterns.tsp";
 import "../main.tsp";
@@ -56,5 +57,18 @@ interface EvaluationResults
     EvaluationResult,
     AssetCredentialRequest,
     AssetCredentialResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get agent evaluation results.")
+  @route("/runs/agents/{runId}")
+  @get
+  getAgentEvaluationResults is Azure.Core.Foundations.Operation<
+    {
+      @doc("Agent run id, for agent API v1, it's `[thread_id]:[run_id]`; for agent API v2, it's only the run_id.")
+      @path
+      runId: string;
+    },
+    ResourceCreatedResponse<AgentEvaluation>
   >;
 }
