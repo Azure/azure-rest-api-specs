@@ -133,7 +133,7 @@ directive:
   - suppress: AvoidAdditionalProperties
     from: CommonDefinitions.json    
     where:
-      - $.definitions.DaprSubscription.properties.properties.metadata
+      - $.definitions.DaprSubscription.properties.properties.properties.metadata
       - $.definitions.ServiceBind.properties.customizedKeys
     reason: |
       Do not introduce breaking changes in GA services
