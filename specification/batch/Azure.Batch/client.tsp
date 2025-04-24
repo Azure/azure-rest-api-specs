@@ -104,6 +104,28 @@ interface BatchClient {
 // Api overrides
 @@access(Azure.Batch.Jobs.deleteJob, Access.internal, "csharp");
 @@clientName(BatchClient.deleteJob, "deleteJobInternal", "csharp");
+@@access(Azure.Batch.Jobs.terminateJob, Access.internal, "csharp");
+@@clientName(BatchClient.terminateJob, "terminateJobInternal", "csharp");
+@@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "csharp");
+@@clientName(BatchClient.deleteJobSchedule,
+  "deleteJobScheduleInternal",
+  "csharp"
+);
+@@access(Azure.Batch.JobSchedules.terminateJobSchedule,
+  Access.internal,
+  "csharp"
+);
+@@clientName(BatchClient.terminateJobSchedule,
+  "terminateJobScheduleInternal",
+  "csharp"
+);
+@@access(Azure.Batch.Pools.deletePool, Access.internal, "csharp");
+@@clientName(BatchClient.deletePool, "deletePoolInternal", "csharp");
+@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "csharp");
+@@clientName(BatchClient.deleteCertificate,
+  "deleteCertificateInternal",
+  "csharp"
+);
 @@access(Azure.Batch.Pools.poolExists, Access.internal, "csharp");
 @@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
 @@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
