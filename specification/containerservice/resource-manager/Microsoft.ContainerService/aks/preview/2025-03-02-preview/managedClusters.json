@@ -7902,136 +7902,134 @@
         }
       }
     },
-    "definitions": {
-      "LocalDNSOverrides": {
-        "type": "object",
-        "properties": {
-          "queryLogging": {
-            "type": "string",
-            "enum": ["Error", "Log"],
-            "x-ms-enum": {
-              "name": "LocalDNSQueryLogging",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Error",
-                  "description": "Enables error logging in localDNS. See [errors plugin](https://coredns.io/plugins/errors) for more information."
-                },
-                {
-                  "value": "Log",
-                  "description": "Enables query logging in localDNS. See [log plugin](https://coredns.io/plugins/log) for more information."
-                }
-              ]
-            },
-            "description": "Log level for DNS queries in localDNS.",
-            "default": "Error"
+    "LocalDNSOverrides": {
+      "type": "object",
+      "properties": {
+        "queryLogging": {
+          "type": "string",
+          "enum": ["Error", "Log"],
+          "x-ms-enum": {
+            "name": "LocalDNSQueryLogging",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Error",
+                "description": "Enables error logging in localDNS. See [errors plugin](https://coredns.io/plugins/errors) for more information."
+              },
+              {
+                "value": "Log",
+                "description": "Enables query logging in localDNS. See [log plugin](https://coredns.io/plugins/log) for more information."
+              }
+            ]
           },
-          "protocol": {
-            "type": "string",
-            "enum": ["PreferUDP", "ForceTCP"],
-            "x-ms-enum": {
-              "name": "LocalDNSProtocol",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "PreferUDP",
-                  "description": "Prefer UDP protocol for connections from localDNS to upstream DNS server."
-                },
-                {
-                  "value": "ForceTCP",
-                  "description": "Enforce TCP protocol for connections from localDNS to upstream DNS server."
-                }
-              ]
-            },
-            "description": "Enforce TCP or prefer UDP protocol for connections from localDNS to upstream DNS server.",
-            "default": "PreferUDP"
+          "description": "Log level for DNS queries in localDNS.",
+          "default": "Error"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": ["PreferUDP", "ForceTCP"],
+          "x-ms-enum": {
+            "name": "LocalDNSProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "PreferUDP",
+                "description": "Prefer UDP protocol for connections from localDNS to upstream DNS server."
+              },
+              {
+                "value": "ForceTCP",
+                "description": "Enforce TCP protocol for connections from localDNS to upstream DNS server."
+              }
+            ]
           },
-          "forwardDestination": {
-            "type": "string",
-            "enum": ["ClusterCoreDNS", "VnetDNS"],
-            "x-ms-enum": {
-              "name": "LocalDNSForwardDestination",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "ClusterCoreDNS",
-                  "description": "Forward DNS queries from localDNS to cluster CoreDNS."
-                },
-                {
-                  "value": "VnetDNS",
-                  "description": "Forward DNS queries from localDNS to DNS server configured in the VNET. A VNET can have multiple DNS servers configured."
-                }
-              ]
-            },
-            "description": "Destination server for DNS queries to be forwarded from localDNS.",
-            "default": "ClusterCoreDNS"
+          "description": "Enforce TCP or prefer UDP protocol for connections from localDNS to upstream DNS server.",
+          "default": "PreferUDP"
+        },
+        "forwardDestination": {
+          "type": "string",
+          "enum": ["ClusterCoreDNS", "VnetDNS"],
+          "x-ms-enum": {
+            "name": "LocalDNSForwardDestination",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ClusterCoreDNS",
+                "description": "Forward DNS queries from localDNS to cluster CoreDNS."
+              },
+              {
+                "value": "VnetDNS",
+                "description": "Forward DNS queries from localDNS to DNS server configured in the VNET. A VNET can have multiple DNS servers configured."
+              }
+            ]
           },
-          "forwardPolicy": {
-            "type": "string",
-            "enum": ["Sequential", "RoundRobin", "Random"],
-            "x-ms-enum": {
-              "name": "LocalDNSForwardPolicy",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Sequential",
-                  "description": "Implements sequential upstream DNS server selection. See [forward plugin](https://coredns.io/plugins/forward) for more information."
-                },
-                {
-                  "value": "RoundRobin",
-                  "description": "Implements round robin upstream DNS server selection. See [forward plugin](https://coredns.io/plugins/forward) for more information."
-                },
-                {
-                  "value": "Random",
-                  "description": "Implements random upstream DNS server selection. See [forward plugin](https://coredns.io/plugins/forward) for more information."
-                }
-              ]
-            },
-            "description": "Forward policy for selecting upstream DNS server. See [forward plugin](https://coredns.io/plugins/forward) for more information.",
-            "default": "Sequential"
+          "description": "Destination server for DNS queries to be forwarded from localDNS.",
+          "default": "ClusterCoreDNS"
+        },
+        "forwardPolicy": {
+          "type": "string",
+          "enum": ["Sequential", "RoundRobin", "Random"],
+          "x-ms-enum": {
+            "name": "LocalDNSForwardPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Sequential",
+                "description": "Implements sequential upstream DNS server selection. See [forward plugin](https://coredns.io/plugins/forward) for more information."
+              },
+              {
+                "value": "RoundRobin",
+                "description": "Implements round robin upstream DNS server selection. See [forward plugin](https://coredns.io/plugins/forward) for more information."
+              },
+              {
+                "value": "Random",
+                "description": "Implements random upstream DNS server selection. See [forward plugin](https://coredns.io/plugins/forward) for more information."
+              }
+            ]
           },
-          "maxConcurrent": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of concurrent queries. See [forward plugin](https://coredns.io/plugins/forward) for more information.",
-            "default": 1000
+          "description": "Forward policy for selecting upstream DNS server. See [forward plugin](https://coredns.io/plugins/forward) for more information.",
+          "default": "Sequential"
+        },
+        "maxConcurrent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of concurrent queries. See [forward plugin](https://coredns.io/plugins/forward) for more information.",
+          "default": 1000
+        },
+        "cacheDurationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Cache max TTL in seconds. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
+          "default": 3600
+        },
+        "serveStaleDurationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Serve stale duration in seconds. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
+          "default": 3600
+        },
+        "serveStale": {
+          "type": "string",
+          "enum": ["Verify", "Immediate", "Disable"],
+          "x-ms-enum": {
+            "name": "LocalDNSServeStale",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Verify",
+                "description": "Serve stale data with verification. First verify that an entry is still unavailable from the source before sending the expired entry to the client. See [cache plugin](https://coredns.io/plugins/cache) for more information."
+              },
+              {
+                "value": "Immediate",
+                "description": "Serve stale data immediately. Send the expired entry to the client before checking to see if the entry is available from the source. See [cache plugin](https://coredns.io/plugins/cache) for more information."
+              },
+              {
+                "value": "Disable",
+                "description": "Disable serving stale data."
+              }
+            ]
           },
-          "cacheDurationInSeconds": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Cache max TTL in seconds. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
-            "default": 3600
-          },
-          "serveStaleDurationInSeconds": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Serve stale duration in seconds. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
-            "default": 3600
-          },
-          "serveStale": {
-            "type": "string",
-            "enum": ["Verify", "Immediate", "Disable"],
-            "x-ms-enum": {
-              "name": "LocalDNSServeStale",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Verify",
-                  "description": "Serve stale data with verification. First verify that an entry is still unavailable from the source before sending the expired entry to the client. See [cache plugin](https://coredns.io/plugins/cache) for more information."
-                },
-                {
-                  "value": "Immediate",
-                  "description": "Serve stale data immediately. Send the expired entry to the client before checking to see if the entry is available from the source. See [cache plugin](https://coredns.io/plugins/cache) for more information."
-                },
-                {
-                  "value": "Disable",
-                  "description": "Disable serving stale data."
-                }
-              ]
-            },
-            "description": "Policy for serving stale data. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
-            "default": "Verify"
-          }
+          "description": "Policy for serving stale data. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
+          "default": "Verify"
         }
       }
     },
