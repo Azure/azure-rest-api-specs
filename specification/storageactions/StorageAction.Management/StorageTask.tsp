@@ -13,8 +13,9 @@ namespace Microsoft.StorageActions;
 /**
  * Represents Storage Task.
  */
-model StorageTask
-  is Azure.ResourceManager.TrackedResource<StorageTaskProperties, false> {
+@Azure.ResourceManager.Private.armResourceInternal(StorageTaskProperties)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model StorageTask extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = StorageTask,
     KeyName = "storageTaskName",
@@ -27,6 +28,11 @@ model StorageTask
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity: ManagedServiceIdentity;
+
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  properties?: StorageTaskProperties;
 }
 
 @armResourceOperations
