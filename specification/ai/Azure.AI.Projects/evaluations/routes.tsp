@@ -69,6 +69,19 @@ interface Evaluations {
     ResourceCreatedResponse<AgentEvaluation>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get agent evaluation results.")
+  @route("/runs/agents/{runId}")
+  @get
+  getAgentEvaluationResults is Azure.Core.Foundations.Operation<
+    {
+      @doc("Agent run id, for agent API v1, it's `[thread_id]:[run_id]`; for agent API v2, it's only the run_id.")
+      @path
+      runId: string;
+    },
+    ResourceCreatedResponse<AgentEvaluation>
+  >;
+
   // Evaluation Private APIs
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Check annotation supported by the service.")
