@@ -33,3 +33,7 @@ using Microsoft.DurableTask;
   "DurableTaskRetentionPolicyDetails",
   "csharp"
 );
+@@clientName(RetentionPolicyProperties,
+  "DurableTaskRetentionPolicyProperties",
+  "csharp"
+);
