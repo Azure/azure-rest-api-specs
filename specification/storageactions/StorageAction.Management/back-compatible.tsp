@@ -9,7 +9,6 @@ using Microsoft.StorageActions;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageTaskUpdateParameters.properties);
 
-@@clientName(StorageTaskOperation, "StorageTaskOperationInfo");
 @@clientName(StorageTasks.create::parameters.resource, "parameters");
 @@clientName(StorageTasks.update::parameters.properties, "parameters");
 @@clientName(StorageTasksOperationGroup.previewActions::parameters.body,

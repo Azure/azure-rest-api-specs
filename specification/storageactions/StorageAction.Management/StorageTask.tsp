@@ -65,12 +65,18 @@ interface StorageTasks {
   /**
    * Lists all the storage tasks available under the given resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<StorageTask>;
+  listByResourceGroup is ArmResourceListByParent<
+    StorageTask,
+    Response = StorageTasksListResult
+  >;
 
   /**
    * Lists all the storage tasks available under the subscription.
    */
-  listBySubscription is ArmListBySubscription<StorageTask>;
+  listBySubscription is ArmListBySubscription<
+    StorageTask,
+    Response = StorageTasksListResult
+  >;
 
   /**
    * Fetch the storage tasks run report summary for each assignment.

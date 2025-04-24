@@ -145,9 +145,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StorageTaskListResult"
+              "$ref": "#/definitions/StorageTasksListResult"
             }
           },
           "default": {
@@ -187,9 +187,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StorageTaskListResult"
+              "$ref": "#/definitions/StorageTasksListResult"
             }
           },
           "default": {
@@ -622,7 +622,7 @@
           "type": "array",
           "description": "List of operations to execute in the else block",
           "items": {
-            "$ref": "#/definitions/StorageTaskOperationInfo"
+            "$ref": "#/definitions/StorageTaskOperation"
           },
           "x-ms-identifiers": []
         }
@@ -643,7 +643,7 @@
           "type": "array",
           "description": "List of operations to execute when the condition predicate satisfies.",
           "items": {
-            "$ref": "#/definitions/StorageTaskOperationInfo"
+            "$ref": "#/definitions/StorageTaskOperation"
           },
           "x-ms-identifiers": []
         }
@@ -935,11 +935,12 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The StorageTaskAssignment items on this page",
+          "description": "List of Storage Task Assignment Resource IDs associated with this Storage Task.",
           "items": {
             "$ref": "#/definitions/StorageTaskAssignment"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -952,30 +953,7 @@
         "value"
       ]
     },
-    "StorageTaskListResult": {
-      "type": "object",
-      "description": "The response of a StorageTask list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The StorageTask items on this page",
-          "items": {
-            "$ref": "#/definitions/StorageTask"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "StorageTaskOperationInfo": {
+    "StorageTaskOperation": {
       "type": "object",
       "description": "Represents an operation to be performed on the object",
       "properties": {
@@ -1353,11 +1331,12 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The StorageTaskReportInstance items on this page",
+          "description": "Gets storage tasks run result summary.",
           "items": {
             "$ref": "#/definitions/StorageTaskReportInstance"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1428,6 +1407,30 @@
           "readOnly": true
         }
       }
+    },
+    "StorageTasksListResult": {
+      "type": "object",
+      "description": "The response from the List Storage Task operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets the list of storage tasks and their properties.",
+          "items": {
+            "$ref": "#/definitions/StorageTask"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {}

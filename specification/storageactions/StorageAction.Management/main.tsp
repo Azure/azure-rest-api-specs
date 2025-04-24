@@ -44,6 +44,7 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
 @@doc(Operations.list,
   "Lists all of the available Storage Actions Rest API operations."
 );
