@@ -7889,21 +7889,18 @@
         "vnetDNSOverrides": {
           "type": "object",
           "description": "VnetDNS overrides apply to DNS traffic from pods with dnsPolicy:default or kubelet (referred to as VnetDNS traffic).",
-          "additionalProperties": {
-            "$ref": "#/definitions/LocalDNSOverrides"
-          }
+          "$ref": "#/definitions/LocalDNSOverrides"
         },
         "kubeDNSOverrides": {
           "type": "object",
           "description": "KubeDNS overrides apply to DNS traffic from pods with dnsPolicy:ClusterFirst (referred to as KubeDNS traffic).",
-          "additionalProperties": {
-            "$ref": "#/definitions/LocalDNSOverrides"
-          }
+          "$ref": "#/definitions/LocalDNSOverrides"
         }
       }
     },
     "LocalDNSOverrides": {
       "type": "object",
+      "description": "Overrides for localDNS profile.",
       "properties": {
         "queryLogging": {
           "type": "string",
