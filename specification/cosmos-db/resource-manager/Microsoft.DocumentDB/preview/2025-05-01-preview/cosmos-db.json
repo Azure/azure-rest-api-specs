@@ -10152,6 +10152,13 @@
           "$ref": "#/definitions/MaterializedViewDefinition",
           "description": "The configuration for defining Materialized Views. This must be specified only for creating a Materialized View container."
         },
+        "materializedViews": {
+          "type": "array",
+          "description": "Materialized Views defined on the container.",
+          "items": {
+            "$ref": "#/definitions/MaterializedViewDetails"
+          }
+        },
         "computedProperties": {
           "description": "List of computed properties",
           "type": "array",
@@ -10661,6 +10668,20 @@
         "sourceCollectionId",
         "definition"
       ]
+    },
+    "MaterializedViewDetails": {
+      "type": "object",
+      "description": "MaterializedViewDetails, contains Id & _rid fields of materialized view.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id field of Materialized container."  
+        },
+        "_rid": {
+          "type": "string",
+          "description": "_rid field of Materialized container."
+        }
+      }
     },
     "SqlStoredProcedureResource": {
       "type": "object",
