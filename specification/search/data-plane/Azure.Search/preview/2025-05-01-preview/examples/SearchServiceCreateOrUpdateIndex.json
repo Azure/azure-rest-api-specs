@@ -333,6 +333,17 @@
             },
             "name": "aml",
             "kind": "aml"
+          },
+          {
+            "amlParameters": {
+              "uri": "https://my-custom-endpoint.org/",
+              "resourceId": "aml resource id",
+              "timeout": "PT1M",
+              "region": "aml region",
+              "modelName": "Cohere-embed-v4"
+            },
+            "name": "aml-cohere",
+            "kind": "aml"
           }
         ],
         "compressions": [
@@ -774,6 +785,17 @@
                 "timeout": "PT1M",
                 "modelName": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32"
               }
+            },
+            {
+              "name": "aml-cohere",
+              "kind": "aml",
+              "amlParameters": {
+                "resourceId": "aml resource id",
+                "region": "aml region",
+                "uri": "https://my-custom-endpoint.org/",
+                "timeout": "PT1M",
+                "modelName": "Cohere-embed-v4"
+              }
             }
           ],
           "compressions": [
@@ -817,6 +839,7 @@
     "201": {
       "body": {
         "name": "temp-preview-test",
+        "description": "description",
         "defaultScoringProfile": "stringFieldBoost",
         "permissionFilterOption": "enabled",
         "fields": [
@@ -1210,6 +1233,17 @@
                 "uri": "https://my-custom-endpoint.org/",
                 "timeout": "PT1M",
                 "modelName": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32"
+              }
+            },
+            {
+              "name": "aml-cohere",
+              "kind": "aml",
+              "amlParameters": {
+                "resourceId": "aml resource id",
+                "region": "aml region",
+                "uri": "https://my-custom-endpoint.org/",
+                "timeout": "PT1M",
+                "modelName": "Cohere-embed-v4"
               }
             }
           ],

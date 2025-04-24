@@ -235,6 +235,7 @@
                 }
               ]
             },
+            "rankingOrder": "BoostedRerankerScore",
             "flightingOptIn": true
           }
         ]
@@ -327,6 +328,17 @@
             },
             "name": "aml",
             "kind": "aml"
+          },
+          {
+            "amlParameters": {
+              "uri": "https://my-custom-endpoint.org/",
+              "resourceId": "aml resource id",
+              "timeout": "PT1M",
+              "region": "aml region",
+              "modelName": "Cohere-embed-v4"
+            },
+            "name": "aml-cohere",
+            "kind": "aml"
           }
         ],
         "compressions": [
@@ -374,6 +386,7 @@
       "body": {
         "@odata.etag": "0x1234568AE7E58A1",
         "name": "temp-preview-test",
+        "description": "description",
         "defaultScoringProfile": "stringFieldBoost",
         "permissionFilterOption": "enabled",
         "fields": [
@@ -652,6 +665,7 @@
             {
               "name": "testconfig",
               "flightingOptIn": true,
+              "rankingOrder": "BoostedRerankerScore",
               "prioritizedFields": {
                 "titleField": {
                   "fieldName": "category"
@@ -766,6 +780,17 @@
                 "uri": "https://my-custom-endpoint.org/",
                 "timeout": "PT1M",
                 "modelName": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32"
+              }
+            },
+            {
+              "name": "aml-cohere",
+              "kind": "aml",
+              "amlParameters": {
+                "resourceId": "aml resource id",
+                "region": "aml region",
+                "uri": "https://my-custom-endpoint.org/",
+                "timeout": "PT1M",
+                "modelName": "Cohere-embed-v4"
               }
             }
           ],
