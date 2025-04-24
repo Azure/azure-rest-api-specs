@@ -5297,10 +5297,15 @@
         "tls": {
           "$ref": "#/definitions/TlsProperties",
           "description": "TLS configuration."
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties",
+          "description": "Properties"
         }
       },
       "required": [
-        "host"
+        "host",
+        "properties"
       ]
     },
     "DataflowEndpointProperties": {
@@ -7153,6 +7158,19 @@
           "description": "The metrics settings for the resource."
         }
       }
+    },
+    "Properties": {
+      "type": "object",
+      "description": "Properties",
+      "properties": {
+        "nameSet": {
+          "type": "string",
+          "description": "name set"
+        }
+      },
+      "required": [
+        "nameSet"
+      ]
     },
     "ProvisioningState": {
       "type": "string",
