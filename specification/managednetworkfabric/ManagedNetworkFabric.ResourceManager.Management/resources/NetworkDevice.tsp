@@ -78,7 +78,7 @@ interface NetworkDevices {
   runRoCommand is ArmResourceActionAsync<
     NetworkDevice,
     DeviceRoCommand,
-    LroHeaders = ArmLroLocationHeader<FinalResult = CommonPostActionResponseForDeviceROCommandsOperationStatusResult> &
+    LroHeaders = ArmLroLocationHeader<FinalResult =  CommonPostActionResponseForDeviceROCommandsOperationStatusResult> &
       ArmAsyncOperationHeader
   >;
 
