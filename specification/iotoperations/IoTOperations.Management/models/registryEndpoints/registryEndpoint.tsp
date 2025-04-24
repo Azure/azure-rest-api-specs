@@ -39,16 +39,10 @@ model RegistryEndpointProperties {
   @minLength(3)
   host: string;
 
-  authentication: RegistryEndpointAuthentication;
-}
+  @doc("The authentication settings for the Azure Container Registry.")
+  authentication: Authentication;
 
-@doc("RegistryEndpoint authentication properties")
-@added(Versions.`2025-07-01-preview`)
-model RegistryEndpointAuthentication {
-  @doc("The authentication type.")
-  @discriminator("type")
-  type: RegistryEndpointAuthenticationType;
-
-  @doc("The authentication configuration.")
-  configuration: RegistryEndpointAuthenticationConfiguration;
+  @doc("The status of the last operation.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }

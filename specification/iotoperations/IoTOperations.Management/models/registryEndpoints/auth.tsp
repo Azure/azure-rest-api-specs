@@ -30,7 +30,7 @@ union AuthenticationMethod {
 
 @doc("System assigned identity authentication")
 @added(Versions.`2025-07-01-preview`)
-model SystemAssignedIdentityAuthentication {
+model SystemAssignedIdentityAuthentication extends Authentication {
   @doc("The authentication method.")
   method: SystemAssignedManagedIdentity;
 
@@ -38,3 +38,41 @@ model SystemAssignedIdentityAuthentication {
   systemAssignedManagedIdentitySettings: SystemAssignedManagedIdentitySettings;
 }
 
+@doc("User assigned identity authentication")
+@added(Versions.`2025-07-01-preview`)
+model UserAssignedIdentityAuthentication extends Authentication {
+  @doc("The authentication method.")
+  method: UserAssignedManagedIdentity;
+
+  @doc("User assigned managed identity properties")
+  userAssignedManagedIdentitySettings: UserAssignedManagedIdentitySettings;
+}
+
+@doc("System assigned managed identity properties")
+@added(Versions.`2025-07-01-preview`)
+model SystemAssignedManagedIdentitySettings {
+  ...DataflowEndpointAuthenticationSystemAssignedManagedIdentity;
+}
+
+@doc("User assigned managed identity properties")
+@added(Versions.`2025-07-01-preview`)
+model UserAssignedManagedIdentitySettings {
+  ...DataflowEndpointAuthenticationUserAssignedManagedIdentity;
+}
+
+@doc("Anonymous authentication")
+@added(Versions.`2025-07-01-preview`)
+model AnonymousAuthentication extends Authentication {
+  @doc("The authentication method.")
+  method: Anonymous;
+
+  @doc("Anonymous authentication properties")
+  anonymousSettings: AnonymousSettings;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRDs are modeled as empty models"
+@doc("Anonymous authentication properties")
+@added(Versions.`2025-07-01-preview`)
+model AnonymousSettings {
+ 
+}
