@@ -347,6 +347,7 @@ model QuestionAnsweringProjectMetadata {
   /**
    * Represents the project last deployment date-time.
    */
+  @visibility(Lifecycle.Read)
   lastDeployedDateTime?: utcDateTime;
 }
 
