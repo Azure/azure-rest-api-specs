@@ -32,6 +32,16 @@ options:
     namespace: "com.azure.resourcemanager.computeschedule"
     flavor: "azure"
     service-name: "Compute Schedule"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/computeschedule"
+    package-dir: "armcomputeschedule"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
