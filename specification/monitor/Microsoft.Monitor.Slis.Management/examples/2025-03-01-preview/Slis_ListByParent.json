@@ -45,7 +45,7 @@
               "sloProperties": {
                 "target": {
                   "value": 99,
-                  "comparator": "gte",
+                  "comparator": ">=",
                   "compliancePeriodDays": 30,
                   "complianceCalculationType": "CalendarDays"
                 }
@@ -53,7 +53,7 @@
               "sliProperties": {
                 "windowUptimeCriteria": {
                   "target": 95,
-                  "comparator": "gte"
+                  "comparator": ">="
                 },
                 "signals": {
                   "signalSources": [
@@ -65,14 +65,9 @@
                       "metricName": "Stamp1Latency",
                       "filters": [
                         {
-                          "logic": "AND",
-                          "conditions": [
-                            {
-                              "dimensionName": "ApiName",
-                              "operator": "eq",
-                              "value": "GetContosoUsers"
-                            }
-                          ]
+                          "dimensionName": "ApiName",
+                          "operator": "==",
+                          "value": "GetContosoUsers"
                         }
                       ],
                       "spatialAggregation": {
@@ -95,14 +90,9 @@
                       "metricName": "Stamp2Latency",
                       "filters": [
                         {
-                          "logic": "AND",
-                          "conditions": [
-                            {
-                              "dimensionName": "ApiName",
-                              "operator": "eq",
-                              "value": "GetContosoUsers"
-                            }
-                          ]
+                          "dimensionName": "ApiName",
+                          "operator": "==",
+                          "value": "GetContosoUsers"
                         }
                       ],
                       "spatialAggregation": {

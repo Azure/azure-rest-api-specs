@@ -90,13 +90,26 @@ union HasTablesWithOids {
 }
 
 /**
- * Represents the presence of Oids in Tables under a DB.
+ * Represents the presence of custom data types in a DB.
  */
 union HasCustomDataTypes {
   @doc("The Database has custom data types.")
   True: "true",
 
   @doc("The Database does not have custom data types.")
+  False: "false",
+
+  string,
+}
+
+/**
+ * Represents an Enum with boolean values.
+ */
+union BoolValue {
+  @doc("Represents a true boolean value.")
+  True: "true",
+
+  @doc("Represents a false boolean value.")
   False: "false",
 
   string,
@@ -513,6 +526,60 @@ union Language {
 }
 
 /**
+ * Represents the TLS version.
+ */
+union TlsVersion {
+  string,
+
+  /**
+   * UNKNOWN TLS version.
+   */
+  UNKNOWN: "UNKNOWN",
+
+  /**
+   * TLS version 1.0.
+   */
+  Tls1_0: "Tls1_0",
+
+  /**
+   * TLS version 1.1.
+   */
+  Tls1_1: "Tls1_1",
+
+  /**
+   * TLS version 1.2.
+   */
+  Tls1_2: "Tls1_2",
+
+  /**
+   * TLS version 1.3.
+   */
+  Tls1_3: "Tls1_3",
+}
+
+/**
+ * Represents the Auth method.
+ */
+union PgSqlAuthenticationMethod {
+  string,
+
+  /**
+   * UNKNOWN Authentication method version.
+   */
+  UNKNOWN: "UNKNOWN",
+
+  /**
+   * MD5 Auth.
+   */
+  MD5: "MD5",
+
+  /**
+   * SCRAM_SHA_256 Auth.
+   */
+  SCRAM_SHA_256: "SCRAM_SHA_256",
+}
+
+/**
  * List of Sites.
  */
 model PgsqlSiteList is Azure.Core.Page<PgsqlSite>;
@@ -685,6 +752,76 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   maxConnections?: int64;
 
   /**
+   * Indicates whether the system has custom casts defined.
+   */
+  hasCustomCasts?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) parsers defined.
+   */
+  hasCustomFtsParsers?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) templates defined.
+   */
+  hasCustomFtsTemplates?: BoolValue;
+
+  /**
+   * Specifies the TLS version used by the system.
+   */
+  tlsVersion?: TlsVersion;
+
+  /**
+   * Specifies the PostgreSQL authentication method used by the system.
+   */
+  pgSqlAuthMethod?: PgSqlAuthenticationMethod;
+
+  /**
+   * Indicates whether the system supports SSL connections.
+   */
+  supportsSsl?: BoolValue;
+
+  /**
+   * Indicates whether the system supports IPv6 connections.
+   */
+  supportsIpv6Connections?: BoolValue;
+
+  /**
+   * Indicates whether the system supports IPv4 connections.
+   */
+  supportsIpv4Connections?: BoolValue;
+
+  /**
+   * The number of compute IOPS (Input/Output Operations Per Second) collected.
+   */
+  computeIopsCollected?: int32;
+
+  /**
+   * The number of storage IOPS (Input/Output Operations Per Second) collected.
+   */
+  storageIopsCollected?: int32;
+
+  /**
+   * The storage throughput collected, measured in units per second.
+   */
+  storageThroughPutCollected?: int32;
+
+  /**
+   * Indicates whether read replica functionality is enabled.
+   */
+  isReadReplicaEnabled?: BoolValue;
+
+  /**
+   * The number of read replicas configured for the system.
+   */
+  readReplicaCount?: int32;
+
+  /**
+   * Indicates whether disaster recovery (DR) functionality is enabled.
+   */
+  isDrEnabled?: BoolValue;
+
+  /**
    * Resource tags
    */
   @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
@@ -787,6 +924,76 @@ model PgsqlInstanceResourcePatch {
    * The maximum number of connections allowed in the instance
    */
   maxConnections?: int64;
+
+  /**
+   * Indicates whether the system has custom casts defined.
+   */
+  hasCustomCasts?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) parsers defined.
+   */
+  hasCustomFtsParsers?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) templates defined.
+   */
+  hasCustomFtsTemplates?: BoolValue;
+
+  /**
+   * Specifies the TLS version used by the system.
+   */
+  tlsVersion?: TlsVersion;
+
+  /**
+   * Specifies the PostgreSQL authentication method used by the system.
+   */
+  pgSqlAuthMethod?: PgSqlAuthenticationMethod;
+
+  /**
+   * Indicates whether the system supports SSL connections.
+   */
+  supportsSsl?: BoolValue;
+
+  /**
+   * Indicates whether the system supports IPv6 connections.
+   */
+  supportsIpv6Connections?: BoolValue;
+
+  /**
+   * Indicates whether the system supports IPv4 connections.
+   */
+  supportsIpv4Connections?: BoolValue;
+
+  /**
+   * The number of compute IOPS (Input/Output Operations Per Second) collected.
+   */
+  computeIopsCollected?: int32;
+
+  /**
+   * The number of storage IOPS (Input/Output Operations Per Second) collected.
+   */
+  storageIopsCollected?: int32;
+
+  /**
+   * The storage throughput collected, measured in units per second.
+   */
+  storageThroughPutCollected?: int32;
+
+  /**
+   * Indicates whether read replica functionality is enabled.
+   */
+  isReadReplicaEnabled?: BoolValue;
+
+  /**
+   * The number of read replicas configured for the system.
+   */
+  readReplicaCount?: int32;
+
+  /**
+   * Indicates whether disaster recovery (DR) functionality is enabled.
+   */
+  isDrEnabled?: BoolValue;
 
   /**
    * Resource tags
@@ -941,6 +1148,16 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   hasCustomDataTypes?: HasCustomDataTypes;
 
   /**
+   * Gets or sets storage size of PGSQL database.
+   */
+  storageSizeInMb?: float32;
+
+  /**
+   * Gets or sets hasSuperUserCreatedObjects of PGSQL database.
+   */
+  hasSuperUserCreatedObjects?: BoolValue;
+
+  /**
    * The number of errors.
    */
   errorCount?: int64;
@@ -1019,6 +1236,16 @@ model PgsqlDatabaseResourcePatch {
    * Whether the database has custom data types.
    */
   hasCustomDataTypes?: HasCustomDataTypes;
+
+  /**
+   * Gets or sets storage size of PGSQL database.
+   */
+  storageSizeInMb?: float32;
+
+  /**
+   * Gets or sets hasSuperUserCreatedObjects of PGSQL database.
+   */
+  hasSuperUserCreatedObjects?: BoolValue;
 
   /**
    * The number of errors.

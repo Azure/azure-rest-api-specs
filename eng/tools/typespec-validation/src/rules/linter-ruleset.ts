@@ -1,8 +1,8 @@
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
-import { TsvHost } from "../tsv-host.js";
+import { Rule } from "../rule.js";
+import { fileExists, readTspConfig } from "../utils.js";
 
 // Maps deprecated rulesets to the replacement rulesets
 const deprecatedRulesets = new Map<string, string>([
@@ -19,20 +19,20 @@ export class LinterRulesetRule implements Rule {
   readonly description =
     "Ensures each spec includes the correct linter ruleset (data-plane or management-plane)";
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
 
-    const configText = await host.readTspConfig(folder);
+    const configText = await readTspConfig(folder);
     const config = yamlParse(configText);
 
     const rpFolder =
       config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
     stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
 
-    const mainTspExists = await host.checkFileExists(join(folder, "main.tsp"));
-    const clientTspExists = await host.checkFileExists(join(folder, "client.tsp"));
+    const mainTspExists = await fileExists(join(folder, "main.tsp"));
+    const clientTspExists = await fileExists(join(folder, "client.tsp"));
     let files = [];
     if (mainTspExists) {
       files.push("main.tsp");
