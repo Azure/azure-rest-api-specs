@@ -12797,7 +12797,26 @@
         }
       }
     },
-    "CommonPostActionResponseForDeviceROCommandsOperationStatusResult": {
+    "CommonPostActionResponseForDeviceROCommands": {
+      "type": "object",
+      "description": "Common response for device Ro Commands.",
+      "properties": {
+        "configurationState": {
+          "$ref": "#/definitions/ConfigurationState",
+          "description": "Gets the configuration state.",
+          "readOnly": true
+        },
+        "outputUrl": {
+          "type": "string",
+          "description": "Predefined link containing Device RO Command output."
+        },
+        "deviceConfigurationPreview": {
+          "type": "string",
+          "description": "Device RO command Response limited to 4000 characters."
+        }
+      }
+    },
+"CommonPostActionResponseForDeviceROCommandsOperationStatusResult": {
       "type": "object",
       "title": "The current status of an async operation.",
       "required": [
@@ -12845,25 +12864,6 @@
         "status": {
           "description": "Operation status.",
           "type": "string"
-        }
-      }
-    },
-    "CommonPostActionResponseForDeviceROCommands": {
-      "type": "object",
-      "description": "Common response for device Ro Commands.",
-      "properties": {
-        "configurationState": {
-          "$ref": "#/definitions/ConfigurationState",
-          "description": "Gets the configuration state.",
-          "readOnly": true
-        },
-        "outputUrl": {
-          "type": "string",
-          "description": "Predefined link containing Device RO Command output."
-        },
-        "deviceConfigurationPreview": {
-          "type": "string",
-          "description": "Device RO command Response limited to 4000 characters."
         }
       }
     },
