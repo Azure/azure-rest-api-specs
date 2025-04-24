@@ -35,3 +35,12 @@ These settings apply only when `--tag=2025-05-15-preview` is specified on the co
 input-file:
   - preview/2025-05-15-preview/azure-ai-projects-1dp.json
 ```
+
+# Suppressions
+``` yaml
+suppressions:
+  - code: LintDiff
+    from: azure-ai-projects-1dp.json
+    where: $.paths.["/evaluations/runs:runAgent"].post.operationId
+    reason: False alert. Evaluation should appear after underscore for clarity's sake.
+```
