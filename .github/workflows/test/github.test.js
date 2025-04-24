@@ -31,7 +31,9 @@ describe("writeToActionsSummary function", () => {
   });
   it("should return without error", async () => {
     const originalEnvValue = process.env.GITHUB_STEP_SUMMARY;
-    process.env.GITHUB_STEP_SUMMARY = "/tmp/test-summary.md";
+    if (!originalEnvValue) {
+      process.env.GITHUB_STEP_SUMMARY = "/tmp/test-summary.md";
+    }
 
     // Call function
     const result = await writeToActionsSummary("Test content", mockCore);
@@ -39,7 +41,9 @@ describe("writeToActionsSummary function", () => {
     // Verify result
     expect(result).undefined;
     expect(mockCore.info).toHaveBeenCalled();
-    process.env.GITHUB_STEP_SUMMARY = originalEnvValue;
+    if (process.env.GITHUB_STEP_SUMMARY === "/tmp/test-summary.md") {
+      process.env.GITHUB_STEP_SUMMARY = originalEnvValue;
+    }
   });
   it("should handle exception", async () => {
     // Mock
