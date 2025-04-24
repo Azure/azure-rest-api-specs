@@ -12,7 +12,7 @@ import {
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
   TspConfigGoMgmtFixConstStutteringTrueSubRule,
-  TspConfigGoMgmtGenerateExamplesTrueSubRule,
+  TspConfigGoMgmtGenerateSamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
   TspConfigGoAzGenerateFakesTrueSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
@@ -22,7 +22,6 @@ import {
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigPythonMgmtPackageDirectorySubRule,
   TspConfigPythonMgmtNamespaceSubRule,
-  TspConfigPythonDpPackageNameEqualStringSubRule,
   TspConfigPythonAzGenerateTestTrueSubRule,
   TspConfigPythonAzGenerateSampleTrueSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
@@ -208,8 +207,8 @@ const tsDpPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   "",
   "package-dir",
-  "arm--rest",
-  "aaa-",
+  "arm-aaa-rest",
+  "aaa--rest",
   [new TspConfigTsDpPackageDirectorySubRule()],
 );
 
@@ -261,10 +260,10 @@ const goManagementFixConstStutteringTestCases = createEmitterOptionTestCases(
 const goManagementGenerateExamplesTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
-  "generate-examples",
+  "generate-samples",
   true,
   false,
-  [new TspConfigGoMgmtGenerateExamplesTrueSubRule()],
+  [new TspConfigGoMgmtGenerateSamplesTrueSubRule()],
 );
 
 const goManagementGenerateFakesTestCases = createEmitterOptionTestCases(
@@ -392,15 +391,6 @@ const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
   "azure-aaa-bbb-ccc",
   "azure-aa-b-c-d",
   [new TspConfigPythonDpPackageDirectorySubRule()],
-);
-
-const pythonDpPackageNameTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-python",
-  "",
-  "package-name",
-  "{package-dir}",
-  "aaa",
-  [new TspConfigPythonDpPackageNameEqualStringSubRule()],
 );
 
 const pythonAzGenerateTestTestCases = createEmitterOptionTestCases(
@@ -564,7 +554,6 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpPackageDirTestCases,
-    ...pythonDpPackageNameTestCases,
     ...pythonAzGenerateTestTestCases,
     ...pythonAzGenerateSampleTestCases,
     // csharp
@@ -593,7 +582,8 @@ describe("tspconfig", function () {
 
     const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(c.folder);
-    strictEqual(result.success, true);
+    const returnSuccess = c.folder.includes(".Management")? c.success : true;
+    strictEqual(result.success, returnSuccess);
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
     if (!c.success)
