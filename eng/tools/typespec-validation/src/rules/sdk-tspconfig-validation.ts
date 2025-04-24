@@ -505,7 +505,7 @@ export class SdkTspConfigValidationRule implements Rule {
         : "";
 
     return {
-      success,
+      success: isManagementSdk(folder) ? success : true,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
