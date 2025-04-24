@@ -1440,7 +1440,7 @@
           "200": {
             "description": "Get SaaSInfo completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SaaSInfo"
+              "$ref": "#/definitions/SaaSInfoListResponse"
             }
           },
           "default": {
@@ -3076,6 +3076,29 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "SaaSInfoListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SaaSInfo"
+          },
+          "x-cadl-name": "SaaSInfo[]",
+          "description": "The SaaSInfo items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Response of get SaaS info operation.",
+      "required": [
+        "value"
       ]
     },
     "PlanDataResource": {
