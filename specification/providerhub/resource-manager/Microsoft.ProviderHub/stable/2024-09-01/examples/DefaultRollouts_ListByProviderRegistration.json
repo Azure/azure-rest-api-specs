@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
-    "api-version": "2021-06-01-preview"
+    "api-version": "2024-09-01"
   },
   "responses": {
     "200": {
@@ -79,7 +79,12 @@
                   "eastus2euap",
                   "centraluseuap",
                   "allcompletedregions"
-                ]
+                ],
+                "manifestCheckinStatus": {
+                  "isCheckedIn": true,
+                  "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
+                  "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
+                }
               }
             }
           },
@@ -156,6 +161,11 @@
                     "code": "RolloutStoppedByUser",
                     "message": "Rollout was explicitly stopped by the user."
                   }
+                },
+                "manifestCheckinStatus": {
+                  "isCheckedIn": true,
+                  "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
+                  "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
                 }
               }
             }

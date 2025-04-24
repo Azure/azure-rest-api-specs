@@ -2,29 +2,64 @@
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
-    "rolloutName": "2020week10",
+    "releaseName": "2020week10",
     "api-version": "2024-09-01",
     "properties": {
       "properties": {
-        "specification": {
-          "expeditedRollout": {
-            "enabled": true
+        "operationType": "Rollout",
+        "providerNamespace": "Microsoft.Contoso",
+        "frontloadLocation": "Israel Central",
+        "copyFromLocation": "eastus",
+        "environmentType": "Prod",
+        "serviceFeatureFlag": "DoNotCreate",
+        "includeResourceTypes": [
+          "servers"
+        ],
+        "excludeResourceTypes": [
+          "monitors"
+        ],
+        "overrideManifestLevelFields": {
+          "resourceHydrationAccounts": [
+            {
+              "subscriptionId": "e4eae963-2d15-43e6-a097-98bd75b33edd",
+              "accountName": "classichydrationprodsn01"
+            }
+          ]
+        },
+        "overrideEndpointLevelFields": {
+          "enabled": true,
+          "apiVersions": [
+            "2024-04-01-preview"
+          ],
+          "endpointUri": "https://resource-endpoint.com/",
+          "locations": [
+            "East US"
+          ],
+          "requiredFeatures": [
+            "<feature flag>"
+          ],
+          "featuresRule": "Any",
+          "timeout": "PT20S",
+          "endpointType": "Production",
+          "dstsConfiguration": {
+            "serviceName": "resourceprovider",
+            "serviceDnsName": "messaging.azure-ppe.net"
           },
-          "canary": {
-            "skipRegions": [
-              "eastus2euap"
-            ]
-          },
-          "restOfTheWorldGroupTwo": {
-            "waitDuration": "PT4H"
-          }
-        }
+          "skuLink": "http://endpointuri/westus/skus",
+          "apiVersion": "2024-04-01-preview",
+          "zones": [
+            "zone1"
+          ]
+        },
+        "ignoreFields": [
+          "apiversion"
+        ]
       }
     }
   },
   "responses": {
     "201": {
-      "description": "Default rollout started successfully.",
+      "description": "New region frontload release started successfully.",
       "headers": {
         "location": "https://management.azure.com/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/operationStauses/11111111-f7ef-471a-a2f4-d0ebbf494f77",
         "retry-after": "5000"
@@ -111,7 +146,7 @@
       }
     },
     "200": {
-      "description": "Default rollout updated successfully.",
+      "description": "New region frontload release updated successfully.",
       "body": {
         "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week10",
         "name": "Microsoft.Contoso/2020week10",

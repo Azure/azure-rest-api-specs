@@ -3,7 +3,7 @@
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
     "rolloutName": "canaryTesting99",
-    "api-version": "2021-06-01-preview"
+    "api-version": "2024-09-01"
   },
   "responses": {
     "200": {
@@ -23,12 +23,17 @@
         "properties": {
           "provisioningState": "Completed",
           "specification": {
+            "autoProvisionConfig": {
+              "storage": true,
+              "resourceGraph": true
+            },
             "canary": {
               "regions": [
                 "eastus2euap",
                 "centraluseuap"
               ]
             },
+            "refreshSubscriptionRegistration": true,
             "providerRegistration": {
               "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
               "name": "Microsoft.Contoso",
@@ -54,6 +59,9 @@
                 "management": {
                   "manifestOwners": [
                     "SPARTA-PlatformServiceAdministrator"
+                  ],
+                  "authorizationOwners": [
+                    "RPAAS-PlatformServiceAdministrator"
                   ],
                   "incidentRoutingService": "",
                   "incidentRoutingTeam": "",
@@ -126,7 +134,12 @@
             "completedRegions": [
               "eastus2euap",
               "centraluseuap"
-            ]
+            ],
+            "manifestCheckinStatus": {
+              "isCheckedIn": true,
+              "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
+              "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
+            }
           }
         }
       }

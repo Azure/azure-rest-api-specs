@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
-    "api-version": "2021-06-01-preview"
+    "api-version": "2024-09-01"
   },
   "responses": {
     "200": {
@@ -13,6 +13,7 @@
             "properties": {
               "routingType": "Default",
               "regionality": "Regional",
+              "crossTenantTokenValidation": "EnsureSecureValidation",
               "endpoints": [
                 {
                   "apiVersions": [
@@ -69,6 +70,9 @@
                 "manifestOwners": [
                   "SPARTA-PlatformServiceAdministrator"
                 ],
+                "authorizationOwners": [
+                  "RPAAS-PlatformServiceAdministrator"
+                ],
                 "incidentRoutingService": "",
                 "incidentRoutingTeam": "",
                 "incidentContactEmail": "helpme@contoso.com",
@@ -81,13 +85,25 @@
                 ],
                 "resourceAccessPolicy": "NotSpecified"
               },
+              "metadata": {},
+              "notifications": [
+                {
+                  "notificationType": "SubscriptionNotification",
+                  "skipNotifications": "Disabled"
+                }
+              ],
               "openApiConfiguration": {
                 "validation": {
                   "allowNoncompliantCollectionResponse": false
                 }
+              },
+              "requestHeaderOptions": {
+                "optOutHeaders": "SystemDataCreatedByLastModifiedBy"
               }
             },
-            "name": "employees",
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourceTypeRegistrations/employees",
+            "name": "Microsoft.Contoso/employees",
+            "type": "Microsoft.ProviderHub/providerRegistrations/resourceTypeRegistrations",
             "systemData": {
               "createdBy": "string",
               "createdByType": "User",
