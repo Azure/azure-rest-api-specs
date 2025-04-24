@@ -36,7 +36,10 @@ op ResourceCreateOrUpdateWithJsonContentType<
     @TypeSpec.Http.header("Content-Type")
     contentType: "application/json";
 
-    ...Foundations.ResourceBody<Resource>;
+    @doc("The resource instance.")
+    @body
+    body: Resource;
+
     ...Azure.Core.Traits.Private.TraitProperties<
       MethodTraits & ServiceTraits,
       TraitLocation.Parameters,
