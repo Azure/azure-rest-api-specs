@@ -6300,7 +6300,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/CommonPostActionResponseForDeviceROCommandsOperationStatusResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -12796,14 +12797,61 @@
         }
       }
     },
+    "CommonPostActionResponseForDeviceROCommandsOperationStatusResult": {
+      "type": "object",
+      "title": "The current status of an async operation.",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "endTime": {
+          "description": "The end time of the operation.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "If present, details of the operation error.",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/CommonPostActionResponseForDeviceROCommands",
+          "description": "The additional properties of the operation status result.",
+          "x-ms-client-flatten": true
+        },
+        "resourceId": {
+          "description": "Fully qualified ID of the resource against which the original async operation was started.",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The start time of the operation.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
+        }
+      }
+    },
     "CommonPostActionResponseForDeviceROCommands": {
       "type": "object",
       "description": "Common response for device Ro Commands.",
       "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-          "description": "The error object."
-        },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
           "description": "Gets the configuration state.",

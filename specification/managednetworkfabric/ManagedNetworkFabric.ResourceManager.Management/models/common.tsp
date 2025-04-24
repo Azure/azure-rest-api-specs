@@ -506,10 +506,42 @@ model DeviceRoCommand {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
-@doc("Common response for device Ro Commands.")
-model CommonPostActionResponseForDeviceROCommands {
+@doc("The current status of an async operation.")
+model CommonPostActionResponseForDeviceROCommandsOperationStatusResult {
   ...ErrorResponse;
 
+  @doc("The end time of the operation.")
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  @doc("Fully qualified ID for the async operation.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("Name of the async operation.")
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  @doc("The additional properties of the operation status result.")
+  properties?: CommonPostActionResponseForDeviceROCommands;
+  //TODO: how to add x-ms-client-flatten
+
+  @doc("Fully qualified ID of the resource against which the original async operation was started.")
+  @visibility(Lifecycle.Read)
+  resourceId?: string;
+  //TODO: how to addd format arm-id
+
+  @doc("The start time of the operation.")
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  @doc("Operation status.")
+  status: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+@doc("Common response for device Ro Commands.")
+model CommonPostActionResponseForDeviceROCommands {
   @doc("Gets the configuration state.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
