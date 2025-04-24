@@ -1492,6 +1492,10 @@
           "type": "string",
           "description": "Status of the agent evaluation. Options: Running, Completed, Failed."
         },
+        "error": {
+          "type": "string",
+          "description": "The reason of the request failure for the long running process, if applicable."
+        },
         "result": {
           "type": "array",
           "description": "The agent evaluation result.",
@@ -1550,7 +1554,8 @@
       },
       "required": [
         "runId",
-        "evaluators"
+        "evaluators",
+        "appInsightsConnectionString"
       ]
     },
     "AgentEvaluationResult": {
