@@ -2,10 +2,12 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.StorageActions;
@@ -382,7 +384,8 @@ model StorageTaskReportSummary is Azure.Core.Page<StorageTaskReportInstance>;
  * Storage Tasks run report instance
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model StorageTaskReportInstance extends ProxyResource {
+model StorageTaskReportInstance
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Storage task execution report for a run instance.
    */
@@ -612,3 +615,6 @@ model StorageTaskPreviewActionIfCondition {
    */
   condition?: string;
 }
+
+@@visibility(Azure.Core.Page.value, Lifecycle.Read);
+@@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
