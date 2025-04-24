@@ -30,9 +30,7 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
  * Uploads a file for use by other operations.
  *
  * @param contentType The 'content-type' header value, always 'multipart/format-data' for this operation.
- * @param file The file data (not filename) to upload.
- * @param purpose The intended purpose of the file.
- * @param filename A filename to associate with the uploaded data.
+ * @param file The file and its purpose to upload.
  * @returns A representation of the uploaded file.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -44,17 +42,24 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 @route("/files")
 op uploadFile(
   @header contentType: "multipart/form-data",
-  @clientName("Data", "csharp") file: bytes,
-  purpose: FilePurpose,
+  @multipartBody file: {
+    /** The file data (not filename) to upload. */
+    @clientName("Data", "csharp") file: HttpPart<bytes>;
 
-  /*
-   * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
-   *            in the multipart Content-Disposition header for the data section and can be provided independently of
-   *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
-   *            file input, like curl does) but should remain configurable when using a stream or other data source
-   *            lacking an a priori name.
-   */
-  filename?: string,
+    /** The intended purpose of the file. */
+    @added(ServiceApiVersions.v2024_07_01_Preview)
+    purpose: HttpPart<FilePurpose>;
+
+    /*
+     * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
+     *            in the multipart Content-Disposition header for the data section and can be provided independently of
+     *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
+     *            file input, like curl does) but should remain configurable when using a stream or other data source
+     *            lacking an a priori name.
+     */
+    @doc("A filename to associate with the uploaded data.")
+    filename?: HttpPart<string>;
+  },
 ): OpenAIFile;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"

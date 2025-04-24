@@ -1,8 +1,9 @@
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { TsvHost } from "../tsv-host.js";
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
+import { Rule } from "../rule.js";
+import { RuleResult } from "../rule-result.js";
+import { Suppression } from "suppressions";
+import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -16,8 +17,8 @@ export abstract class TspconfigSubRuleBase {
     this.expectedValue = expectedValue;
   }
 
-  public async execute(host: TsvHost, folder: string): Promise<RuleResult> {
-    const tspconfigExists = await host.checkFileExists(join(folder, "tspconfig.yaml"));
+  public async execute(folder: string): Promise<RuleResult> {
+    const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists)
       return this.createFailedResult(
         `Failed to find ${join(folder, "tspconfig.yaml")}`,
@@ -26,7 +27,7 @@ export abstract class TspconfigSubRuleBase {
 
     let config = undefined;
     try {
-      const configText = await host.readTspConfig(folder);
+      const configText = await readTspConfig(folder);
       config = yamlParse(configText);
     } catch (error) {
       return this.createFailedResult(
@@ -47,8 +48,6 @@ export abstract class TspconfigSubRuleBase {
   protected skip(_config: any, _folder: string): SkipResult {
     return { shouldSkip: false };
   }
-
-  protected abstract validate(config: any): RuleResult;
 
   protected validateValue(
     actual: string | boolean | undefined,
@@ -72,6 +71,9 @@ export abstract class TspconfigSubRuleBase {
       errorOutput: `- ${error}. ${action}.`,
     };
   }
+
+  public abstract getPathOfKeyToValidate(): string;
+  protected abstract validate(config: any): RuleResult;
 }
 
 class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
@@ -95,6 +97,10 @@ class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
 
     return { success: true };
   }
+
+  public getPathOfKeyToValidate() {
+    return `parameters.${this.keyToValidate}.default`;
+  }
 }
 
 class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
@@ -105,18 +111,18 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     this.emitterName = emitterName;
   }
 
-  protected validate(config: any): RuleResult {
+  protected tryFindOption(config: any): Record<string, any> | undefined {
     let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
     for (const segment of this.keyToValidate.split(".")) {
       if (option && typeof option === "object" && !Array.isArray(option) && segment in option)
         option = option![segment];
-      else
-        return this.createFailedResult(
-          `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
-          `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
-        );
+      else return undefined;
     }
+    return option;
+  }
 
+  protected validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
     if (option === undefined)
       return this.createFailedResult(
         `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
@@ -131,6 +137,10 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       );
 
     return { success: true };
+  }
+
+  public getPathOfKeyToValidate() {
+    return `options.${this.emitterName}.${this.keyToValidate}`;
   }
 }
 
@@ -179,36 +189,9 @@ export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOpti
 }
 
 // ----- TS management modular sub rules -----
-export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-ts", "generateMetadata", true);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-ts", "hierarchyClient", false);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
 export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "experimentalExtensibleEnums", true);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-ts", "enableOperationGroup", true);
+    super("@azure-tools/typespec-ts", "experimental-extensible-enums", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -228,12 +211,35 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends Tspcon
   constructor() {
     super(
       "@azure-tools/typespec-ts",
-      "packageDetails.name",
+      "package-details.name",
       new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
     );
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+// ----- TS data plane sub rules -----
+export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+-)*rest$/));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
+export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-ts",
+      "package-details.name",
+      new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/),
+    );
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
   }
 }
 
@@ -314,9 +320,9 @@ export class TspConfigGoMgmtFixConstStutteringTrueSubRule extends TspconfigEmitt
   }
 }
 
-export class TspConfigGoMgmtGenerateExamplesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigGoMgmtGenerateSamplesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-go", "generate-examples", true);
+    super("@azure-tools/typespec-go", "generate-samples", true);
   }
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
@@ -355,6 +361,15 @@ export class TspConfigPythonMgmtPackageDirectorySubRule extends TspconfigEmitter
   }
 }
 
+export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "namespace", new RegExp(/^azure\.mgmt(\.[a-z]+){1,2}$/));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 // ----- Python data plane sub rules -----
 export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -366,12 +381,6 @@ export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOp
 }
 
 // ----- Python azure sub rules -----
-export class TspConfigPythonAzPackageNameEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-python", "package-name", "{package-dir}");
-  }
-}
-
 export class TspConfigPythonAzGenerateTestTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "generate-test", true);
@@ -395,6 +404,29 @@ export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitt
   constructor() {
     super("@azure-tools/typespec-csharp", "namespace", "{package-dir}");
   }
+  override validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
+
+    if (option === undefined)
+      return this.createFailedResult(
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
+      );
+
+    const packageDir = config?.options?.[this.emitterName]?.["package-dir"];
+    const actualValue = option as unknown as undefined | string | boolean;
+    if (
+      this.validateValue(actualValue, this.expectedValue) ||
+      (packageDir !== undefined && this.validateValue(actualValue, packageDir))
+    ) {
+      return { success: true };
+    }
+
+    return this.createFailedResult(
+      `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}" or the value of "package-dir" option or parameter`,
+      `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}" or the value of "package-dir" option or parameter`,
+    );
+  }
 }
 
 export class TspConfigCsharpAzClearOutputFolderTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
@@ -415,17 +447,16 @@ export class TspConfigCsharpMgmtPackageDirectorySubRule extends TspconfigEmitter
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzPackageDirectorySubRule(),
-  new TspConfigTsMgmtModularGenerateMetadataTrueSubRule(),
-  new TspConfigTsMgmtModularHierarchyClientFalseSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
-  new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
+  new TspConfigTsDpPackageDirectorySubRule(),
+  new TspConfigTsDpPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
   new TspConfigGoMgmtFixConstStutteringTrueSubRule(),
-  new TspConfigGoMgmtGenerateExamplesTrueSubRule(),
+  new TspConfigGoMgmtGenerateSamplesTrueSubRule(),
   new TspConfigGoAzGenerateFakesTrueSubRule(),
   new TspConfigGoMgmtHeadAsBooleanTrueSubRule(),
   new TspConfigGoAzInjectSpansTrueSubRule(),
@@ -433,8 +464,8 @@ export const defaultRules = [
   new TspConfigGoDpPackageDirectoryMatchPatternSubRule(),
   new TspConfigGoDpModuleMatchPatternSubRule(),
   new TspConfigPythonMgmtPackageDirectorySubRule(),
+  new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpPackageDirectorySubRule(),
-  new TspConfigPythonAzPackageNameEqualStringSubRule(),
   new TspConfigPythonAzGenerateTestTrueSubRule(),
   new TspConfigPythonAzGenerateSampleTrueSubRule(),
   new TspConfigCsharpAzPackageDirectorySubRule(),
@@ -444,26 +475,46 @@ export const defaultRules = [
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
-  private rules: TspconfigSubRuleBase[] = [];
+  private subRules: TspconfigSubRuleBase[] = [];
+  private suppressedKeyPaths: Set<string> = new Set();
   name = "SdkTspConfigValidation";
   description = "Validate the SDK tspconfig.yaml file";
 
-  constructor(rules?: TspconfigSubRuleBase[]) {
-    this.rules = rules || defaultRules;
+  constructor(subRules: TspconfigSubRuleBase[] = defaultRules) {
+    this.subRules = subRules;
   }
-  async execute(host?: TsvHost, folder?: string): Promise<RuleResult> {
+
+  async execute(folder: string): Promise<RuleResult> {
+    const tspConfigPath = join(folder, "tspconfig.yaml");
+    const suppressions = await getSuppressions(tspConfigPath);
+    this.setSuppressedKeyPaths(suppressions);
+
     const failedResults = [];
     let success = true;
-    for (const rule of this.rules) {
-      const result = await rule.execute(host!, folder!);
+    for (const subRule of this.subRules) {
+      // TODO: support wildcard
+      if (this.suppressedKeyPaths.has(subRule.getPathOfKeyToValidate())) continue;
+      const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
       success &&= result.success;
     }
 
-    // NOTE: to avoid huge impact on existing PRs, we always return true with info/warning messages.
+    const stdOutputFailedResults =
+      failedResults.length > 0
+        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\n Please see https://aka.ms/azsdk/spec-gen-sdk-config for more info.`
+        : "";
+
     return {
-      success: true,
-      stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${failedResults.map((r) => r.errorOutput).join("\n")}`,
+      success,
+      stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
+  }
+
+  private setSuppressedKeyPaths(suppressions: Suppression[]) {
+    this.suppressedKeyPaths = new Set<string>();
+    for (const suppression of suppressions) {
+      if (!suppression.rules?.includes(this.name)) continue;
+      for (const ignoredKey of suppression.subRules ?? []) this.suppressedKeyPaths.add(ignoredKey);
+    }
   }
 }
