@@ -12,7 +12,6 @@ namespace Azure.AI.Projects;
 
 @doc("Response from the list and get connections operations")
 @resource("connections")
-@discriminator("authType")
 @added(Versions.v2025_05_01)
 model Connection {
   @doc("The name of the resource")
@@ -42,21 +41,22 @@ model Connection {
 }
 
 @doc("A base class for connection credentials")
-@discriminator("authType")
+@discriminator("type")
 model BaseCredentials {
   @doc("The type of credential used by the connection")
   @visibility(Lifecycle.Read)
-  authType: CredentialType;
+  type: CredentialType;
 }
 
 @doc("API Key Credential definition")
 model ApiKeyCredentials extends BaseCredentials {
   @doc("The credentail type")
   @visibility(Lifecycle.Read)
-  authType: CredentialType.apiKey;
+  type: CredentialType.apiKey;
 
   @doc("API Key")
   @visibility(Lifecycle.Read)
+  @encodedName("application/json", "key")
   apiKey?: string;
 }
 
@@ -65,14 +65,18 @@ model ApiKeyCredentials extends BaseCredentials {
 model EntraIDCredentials extends BaseCredentials {
   @doc("The credential type")
   @visibility(Lifecycle.Read)
-  authType: CredentialType.entraId;
+  type: CredentialType.entraId;
 }
 
 @doc("Custom credential defintion")
 model CustomCredential extends BaseCredentials {
-  @doc("The credential type ")
+  @doc("The credential type")
   @visibility(Lifecycle.Read)
-  authType: CredentialType.custom;
+  type: CredentialType.custom;
+
+  @doc("The credential type")
+  @visibility(Lifecycle.Read)
+  keys: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -80,10 +84,11 @@ model CustomCredential extends BaseCredentials {
 model SASCredentials extends BaseCredentials {
   @doc("The credential type")
   @visibility(Lifecycle.Read)
-  authType: CredentialType.SAS;
+  type: CredentialType.SAS;
 
   @doc("SAS token")
   @visibility(Lifecycle.Read)
+  @encodedName("application/json", "SAS")
   sasToken?: string;
 }
 
@@ -91,7 +96,7 @@ model SASCredentials extends BaseCredentials {
 model NoAuthenticationCredentials extends BaseCredentials {
   @doc("The credential type ")
   @visibility(Lifecycle.Read)
-  authType: CredentialType.None;
+  type: CredentialType.None;
 }
 
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
