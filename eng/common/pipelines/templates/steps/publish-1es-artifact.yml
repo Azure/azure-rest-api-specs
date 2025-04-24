@@ -12,10 +12,11 @@ parameters:
   ArtifactPath: ''
   CustomCondition: true
   SbomEnabled: true
+  SkipRenamingArtifact: false
 
 steps:
   - pwsh: |
-      if ($env:AGENT_JOBSTATUS -eq "Failed") {
+      if (($env:AGENT_JOBSTATUS -eq "Failed") -and ('${{ parameters.SkipRenamingArtifact }}' -eq 'false')) {
         Write-Host "Setting artifact name to ${{ parameters.ArtifactName }}-FailedAttempt$(System.JobAttempt) because there were failures." 
         Write-Host "##vso[task.setvariable variable=PublishArtifactName;]${{ parameters.ArtifactName }}-FailedAttempt$(System.JobAttempt)"
       } else {
