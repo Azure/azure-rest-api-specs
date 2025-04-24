@@ -52,7 +52,7 @@ model ImageGenerationsOptions {
   @doc("""
     The number of images to generate. Defaults to 1.
     """)
-  n?: int32 = 1;
+  n: int32 = 1;
 
   @doc("""
     ID of the specific AI model to use, if more than one model is available on the endpoint.
