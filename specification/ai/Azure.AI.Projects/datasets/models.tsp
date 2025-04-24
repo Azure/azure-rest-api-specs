@@ -32,7 +32,7 @@ model DatasetVersion {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
-  datasetUri: string;
+  dataUri: string;
 
   @doc("Dataset type")
   type: DatasetType;
@@ -51,7 +51,7 @@ model FileDatasetVersion extends DatasetVersion {
   type: DatasetType.uri_file;
 
   @doc("Indicates OpenAI Purpose. FileDatasets created with this field will be compatible with OpenAI-specific features")
-  openAIPurpose: string;
+  purpose: string;
 }
 
 @doc("FileDatasetVersion Definition")
