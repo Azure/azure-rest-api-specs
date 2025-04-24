@@ -11,14 +11,32 @@ using Azure.AI.Agents;
 // operation that exposes the underlying data directly.
 
 @@clientName(Agent, "PersistentAgent", "csharp, java");
-@@clientName(AgentsApiResponseFormat, "PersistentAgentsApiResponseFormat", "csharp,java");
-@@clientName(AgentsApiResponseFormatMode, "PersistentAgentsApiResponseFormatMode", "csharp,java");
-@@clientName(AgentsApiToolChoiceOptionMode, "PersistentAgentsApiToolChoiceOptionMode", "csharp,java");
-@@clientName(AgentsNamedToolChoice, "PersistentAgentsNamedToolChoice", "csharp,java");
-@@clientName(AgentsNamedToolChoiceType, "PersistentAgentsNamedToolChoiceType", "csharp,java");
+@@clientName(AgentsApiResponseFormat,
+  "PersistentAgentsApiResponseFormat",
+  "csharp,java"
+);
+@@clientName(AgentsApiResponseFormatMode,
+  "PersistentAgentsApiResponseFormatMode",
+  "csharp,java"
+);
+@@clientName(AgentsApiToolChoiceOptionMode,
+  "PersistentAgentsApiToolChoiceOptionMode",
+  "csharp,java"
+);
+@@clientName(AgentsNamedToolChoice,
+  "PersistentAgentsNamedToolChoice",
+  "csharp,java"
+);
+@@clientName(AgentsNamedToolChoiceType,
+  "PersistentAgentsNamedToolChoiceType",
+  "csharp,java"
+);
 @@clientName(AgentStreamEvent, "PersistentAgentStreamEvent", "csharp,java");
 @@clientName(AgentThread, "PersistentAgentThread", "csharp,java");
-@@clientName(AgentThreadCreationOptions, "PersistentAgentThreadCreationOptions", "csharp,java");
+@@clientName(AgentThreadCreationOptions,
+  "PersistentAgentThreadCreationOptions",
+  "csharp,java"
+);
 
 @@clientName(AgentDeletionStatus, "InternalAgentDeletionStatus", "csharp");
 @@access(deleteAgent, Access.internal, "csharp");
@@ -44,6 +62,9 @@ using Azure.AI.Agents;
 @@access(listThreads, Access.internal, "csharp");
 @@clientName(listThreads, "InternalGetThreads", "csharp");
 @@access(uploadFile, Access.internal, "python, java, javascript");
+
+@@clientName(RunStepOpenAPIToolCall, "RunStepOpenApiToolCall", "java");
+@@clientName(RunStepOpenAPIToolCall.openAPI, "openApi", "java");
 
 // In addition to top-level response value containers, trivial intermediate structure -- levels of single-use model
 // hierarchy that don't convey explanatory or functional benefit to consumers of the surface -- should also be
