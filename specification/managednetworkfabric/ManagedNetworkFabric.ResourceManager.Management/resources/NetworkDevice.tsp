@@ -76,7 +76,10 @@ interface NetworkDevices {
 
   @doc("Run the RO Command on the Network Device.")
   @removed(Versions.v2024_06_15_preview)
-  runRoCommand is ArmResourceActionAsync<
+  @renamedFrom(Versions.v2024_06_15_preview, "runRoCommand")
+  @sharedRoute
+  @action("runRoCommand")
+  runRoCommandDeprecated is ArmResourceActionAsync<
   NetworkDevice,
   DeviceRoCommand,
   CommonPostActionResponseForDeviceROCommands
@@ -84,6 +87,8 @@ interface NetworkDevices {
 
   @doc("Run the RO Command on the Network Device.")
   @added(Versions.v2024_06_15_preview)
+  @sharedRoute
+  @action("runRoCommand")
   runRoCommand is ArmResourceActionAsync<
     NetworkDevice,
     DeviceRoCommand,
