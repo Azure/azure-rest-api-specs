@@ -120,7 +120,7 @@ model AgentEvaluationRequest {
   @doc("Redaction configuration for the evaluation.")
   redactionConfiguration?: AgentEvaluationRedactionConfiguration;
 
-  @doc("Optional and temporary way to pass the AppInsights connection string to the evaluator. When this string is not null, the evaluation results will be logged to Azure AppInsights.")
+  @doc("Pass the AppInsights connection string to the agent evaluation for the evaluation results and the errors logs.")
   appInsightsConnectionString: string;
 }
 
