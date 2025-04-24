@@ -634,8 +634,12 @@
           }
         },
         "targets": {
-          "$ref": "#/definitions/TranslateTarget",
-          "description": "Translation target parameters."
+          "type": "array",
+          "description": "Translation target parameters.",
+          "items": {
+            "$ref": "#/definitions/TranslateTarget"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -754,12 +758,9 @@
           "type": "string",
           "description": "Desired gender of target translation."
         },
-        "adaptiveDatasetIds": {
-          "type": "array",
-          "description": "Reference dataset ID having sentence pair to generate adaptive customized translation.",
-          "items": {
-            "type": "string"
-          }
+        "adaptiveDatasetId": {
+          "type": "string",
+          "description": "Reference dataset ID having sentence pair to generate adaptive customized translation."
         },
         "referenceTextPairs": {
           "type": "array",
