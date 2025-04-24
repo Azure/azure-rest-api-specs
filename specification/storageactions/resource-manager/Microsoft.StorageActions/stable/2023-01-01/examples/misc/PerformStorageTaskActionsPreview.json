@@ -1,23 +1,25 @@
 {
   "parameters": {
-    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616",
     "api-version": "2023-01-01",
     "location": "eastus",
     "monitor": "true",
     "parameters": {
       "properties": {
-        "container": {
-          "name": "firstContainer",
-          "metadata": [
-            {
-              "key": "mContainerKey1",
-              "value": "mContainerValue1"
-            }
-          ]
+        "action": {
+          "elseBlockExists": true,
+          "if": {
+            "condition": "[[equals(AccessTier, 'Hot')]]"
+          }
         },
         "blobs": [
           {
             "name": "folder1/file1.txt",
+            "metadata": [
+              {
+                "key": "mKey1",
+                "value": "mValue1"
+              }
+            ],
             "properties": [
               {
                 "key": "Creation-Time",
@@ -92,12 +94,6 @@
                 "value": "1"
               }
             ],
-            "metadata": [
-              {
-                "key": "mKey1",
-                "value": "mValue1"
-              }
-            ],
             "tags": [
               {
                 "key": "tKey1",
@@ -107,6 +103,12 @@
           },
           {
             "name": "folder2/file1.txt",
+            "metadata": [
+              {
+                "key": "mKey2",
+                "value": "mValue2"
+              }
+            ],
             "properties": [
               {
                 "key": "Creation-Time",
@@ -121,12 +123,6 @@
                 "value": "0x6FB67175454D36D"
               }
             ],
-            "metadata": [
-              {
-                "key": "mKey2",
-                "value": "mValue2"
-              }
-            ],
             "tags": [
               {
                 "key": "tKey2",
@@ -135,32 +131,39 @@
             ]
           }
         ],
-        "action": {
-          "if": {
-            "condition": "[[equals(AccessTier, 'Hot')]]"
-          },
-          "elseBlockExists": true
+        "container": {
+          "name": "firstContainer",
+          "metadata": [
+            {
+              "key": "mContainerKey1",
+              "value": "mContainerValue1"
+            }
+          ]
         }
       }
-    }
+    },
+    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "container": {
-            "name": "firstContainer",
-            "metadata": [
-              {
-                "key": "mContainerKey1",
-                "value": "mContainerValue1"
-              }
-            ]
+          "action": {
+            "elseBlockExists": true,
+            "if": {
+              "condition": "[[equals(AccessTier, 'Hot')]]"
+            }
           },
           "blobs": [
             {
               "name": "folder1/file1.txt",
               "matchedBlock": "If",
+              "metadata": [
+                {
+                  "key": "mKey1",
+                  "value": "mValue1"
+                }
+              ],
               "properties": [
                 {
                   "key": "Creation-Time",
@@ -235,12 +238,6 @@
                   "value": "1"
                 }
               ],
-              "metadata": [
-                {
-                  "key": "mKey1",
-                  "value": "mValue1"
-                }
-              ],
               "tags": [
                 {
                   "key": "tKey1",
@@ -251,6 +248,12 @@
             {
               "name": "folder2/file1.txt",
               "matchedBlock": "Else",
+              "metadata": [
+                {
+                  "key": "mKey2",
+                  "value": "mValue2"
+                }
+              ],
               "properties": [
                 {
                   "key": "Creation-Time",
@@ -265,12 +268,6 @@
                   "value": "0x6FB67175454D36D"
                 }
               ],
-              "metadata": [
-                {
-                  "key": "mKey2",
-                  "value": "mValue2"
-                }
-              ],
               "tags": [
                 {
                   "key": "tKey2",
@@ -279,14 +276,19 @@
               ]
             }
           ],
-          "action": {
-            "if": {
-              "condition": "[[equals(AccessTier, 'Hot')]]"
-            },
-            "elseBlockExists": true
+          "container": {
+            "name": "firstContainer",
+            "metadata": [
+              {
+                "key": "mContainerKey1",
+                "value": "mContainerValue1"
+              }
+            ]
           }
         }
       }
     }
-  }
+  },
+  "operationId": "StorageTasks_PreviewActions",
+  "title": "PerformStorageTaskActionsPreview"
 }

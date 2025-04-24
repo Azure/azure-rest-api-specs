@@ -3,12 +3,7 @@
   "info": {
     "title": "StorageActionsManagementClient",
     "version": "2023-01-01",
-    "description": "The Azure Storage Actions Management API.",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "description": "The Azure Storage Actions Management API."
   },
   "schemes": [
     "https"
@@ -20,38 +15,12 @@
   "consumes": [
     "application/json"
   ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "tags": [
-    {
-      "name": "Operations"
-    },
-    {
-      "name": "StorageTasks"
-    }
-  ],
   "paths": {
     "/providers/Microsoft.StorageActions/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
-          "Operations"
+          "Storage Actions Operations"
         ],
         "description": "Lists all of the available Storage Actions Rest API operations.",
         "parameters": [
@@ -61,13 +30,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -86,6 +55,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageActions/locations/{location}/previewActions": {
       "post": {
         "operationId": "StorageTasks_PreviewActions",
+        "tags": [
+          "StorageTasks"
+        ],
         "description": "Runs the input conditions against input object metadata properties and designates matched objects in response.",
         "parameters": [
           {
@@ -95,7 +67,11 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "description": "The location to perform preview of the actions.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -109,13 +85,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK -- Storage tasks preview action was performed and returned successfully.",
             "schema": {
               "$ref": "#/definitions/StorageTaskPreviewAction"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -145,13 +121,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK -- List of storage tasks was retrieved and returned successfully.",
             "schema": {
-              "$ref": "#/definitions/StorageTaskListResult"
+              "$ref": "#/definitions/StorageTasksListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -176,24 +152,24 @@
         "description": "Lists all the storage tasks available under the given resource group.",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK -- List of storage tasks in the given resource group retrieved and returned successfully.",
             "schema": {
-              "$ref": "#/definitions/StorageTaskListResult"
+              "$ref": "#/definitions/StorageTasksListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -218,34 +194,27 @@
         "description": "Get the storage task properties",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskName"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storageTaskName",
-            "in": "path",
-            "description": "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 18,
-            "pattern": "^[a-z0-9]{3,18}$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK -- properties retrieved successfully for the storage task.",
             "schema": {
               "$ref": "#/definitions/StorageTask"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -265,23 +234,10 @@
         "description": "Asynchronously creates a new storage task resource with the specified parameters. If a storage task is already created and a subsequent create request is issued with different properties, the storage task properties will be updated. If a storage task is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "storageTaskName",
-            "in": "path",
-            "description": "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 18,
-            "pattern": "^[a-z0-9]{3,18}$"
+            "$ref": "#/parameters/StorageTaskName"
           },
           {
             "name": "parameters",
@@ -291,48 +247,37 @@
             "schema": {
               "$ref": "#/definitions/StorageTask"
             }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'StorageTask' update operation succeeded",
+            "description": "OK -- Update storage task with the same properties specified in the request body.",
             "schema": {
               "$ref": "#/definitions/StorageTask"
             }
           },
           "201": {
-            "description": "Resource 'StorageTask' create operation succeeded",
+            "description": "OK -- Create storage task with the same properties specified in the request body.",
             "schema": {
               "$ref": "#/definitions/StorageTask"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
             "headers": {
               "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -356,23 +301,10 @@
         "description": "Update storage task properties",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "storageTaskName",
-            "in": "path",
-            "description": "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 18,
-            "pattern": "^[a-z0-9]{3,18}$"
+            "$ref": "#/parameters/StorageTaskName"
           },
           {
             "name": "parameters",
@@ -382,31 +314,31 @@
             "schema": {
               "$ref": "#/definitions/StorageTaskUpdateParameters"
             }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK -- returned when the update request body had no changes.",
             "schema": {
               "$ref": "#/definitions/StorageTask"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "Accepted -- update request accepted; operation will complete asynchronously.",
             "headers": {
               "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -430,45 +362,32 @@
         "description": "Delete the storage task resource.",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskName"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storageTaskName",
-            "in": "path",
-            "description": "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 18,
-            "pattern": "^[a-z0-9]{3,18}$"
           }
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously.",
             "headers": {
               "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "type": "string"
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "NoContent -- specified storage task does not exist."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -494,29 +413,15 @@
         "description": "Fetch the storage tasks run report summary for each assignment.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "storageTaskName",
-            "in": "path",
-            "description": "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 18,
-            "pattern": "^[a-z0-9]{3,18}$"
+            "$ref": "#/parameters/StorageTaskName"
           },
           {
             "name": "$maxpagesize",
             "in": "query",
             "description": "Optional, specifies the maximum number of Storage Task Assignment Resource IDs to be included in the list response.",
-            "required": false,
             "type": "integer",
             "format": "int32"
           },
@@ -524,19 +429,24 @@
             "name": "$filter",
             "in": "query",
             "description": "Optional. When specified, it can be used to query using reporting properties.",
-            "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK -- Storage tasks run report summary retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/StorageTaskReportSummary"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -561,42 +471,34 @@
         "description": "Lists Resource IDs of the Storage Task Assignments associated with this Storage Task.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "storageTaskName",
-            "in": "path",
-            "description": "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 18,
-            "pattern": "^[a-z0-9]{3,18}$"
+            "$ref": "#/parameters/StorageTaskName"
           },
           {
             "name": "$maxpagesize",
             "in": "query",
             "description": "Optional, specifies the maximum number of Storage Task Assignment Resource IDs to be included in the list response.",
-            "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK -- List of Storage Task Assignment Resource IDs retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/StorageTaskAssignmentsListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -622,7 +524,7 @@
           "type": "array",
           "description": "List of operations to execute in the else block",
           "items": {
-            "$ref": "#/definitions/StorageTaskOperationInfo"
+            "$ref": "#/definitions/StorageTaskOperation"
           },
           "x-ms-identifiers": []
         }
@@ -643,7 +545,7 @@
           "type": "array",
           "description": "List of operations to execute when the condition predicate satisfies.",
           "items": {
-            "$ref": "#/definitions/StorageTaskOperationInfo"
+            "$ref": "#/definitions/StorageTaskOperation"
           },
           "x-ms-identifiers": []
         }
@@ -653,246 +555,23 @@
         "operations"
       ]
     },
-    "ManagedServiceIdentity": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/ManagedServiceIdentityType",
-          "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed)."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "ManagedServiceIdentityType": {
-      "type": "string",
-      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned,UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None"
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned"
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned"
-          },
-          {
-            "name": "SystemAssigned,UserAssigned",
-            "value": "SystemAssigned,UserAssigned"
-          }
-        ]
-      }
-    },
-    "MatchedBlockName": {
-      "type": "string",
-      "description": "Represents the condition block name that matched blob properties.",
-      "enum": [
-        "If",
-        "Else",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "MatchedBlockName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "If",
-            "value": "If"
-          },
-          {
-            "name": "Else",
-            "value": "Else"
-          },
-          {
-            "name": "None",
-            "value": "None"
-          }
-        ]
-      }
-    },
-    "OnFailure": {
-      "type": "string",
-      "description": "Action to be taken when the operation fails for a object.",
-      "enum": [
-        "break"
-      ],
-      "x-ms-enum": {
-        "name": "OnFailure",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "break",
-            "value": "break"
-          }
-        ]
-      }
-    },
-    "OnSuccess": {
-      "type": "string",
-      "description": "Action to be taken when the operation is successful for a object.",
-      "enum": [
-        "continue"
-      ],
-      "x-ms-enum": {
-        "name": "OnSuccess",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "continue",
-            "value": "continue"
-          }
-        ]
-      }
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "Represents the provisioning state of the storage task.",
-      "enum": [
-        "ValidateSubscriptionQuotaBegin",
-        "ValidateSubscriptionQuotaEnd",
-        "Accepted",
-        "Creating",
-        "Succeeded",
-        "Deleting",
-        "Canceled",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ValidateSubscriptionQuotaBegin",
-            "value": "ValidateSubscriptionQuotaBegin"
-          },
-          {
-            "name": "ValidateSubscriptionQuotaEnd",
-            "value": "ValidateSubscriptionQuotaEnd"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "RunResult": {
-      "type": "string",
-      "description": "Represents the overall result of the execution for the run instance",
-      "enum": [
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "RunResult",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "RunStatusEnum": {
-      "type": "string",
-      "description": "Represents the status of the execution.",
-      "enum": [
-        "InProgress",
-        "Finished"
-      ],
-      "x-ms-enum": {
-        "name": "RunStatusEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InProgress",
-            "value": "InProgress"
-          },
-          {
-            "name": "Finished",
-            "value": "Finished"
-          }
-        ]
-      }
-    },
     "StorageTask": {
       "type": "object",
       "description": "Represents Storage Task.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identity of the resource."
+        },
         "properties": {
           "$ref": "#/definitions/StorageTaskProperties",
           "description": "Properties of the storage task.",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identity of the resource."
         }
       },
       "required": [
-        "properties",
-        "identity"
+        "identity",
+        "properties"
       ],
       "allOf": [
         {
@@ -935,53 +614,40 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The StorageTaskAssignment items on this page",
+          "description": "List of Storage Task Assignment Resource IDs associated with this Storage Task.",
           "items": {
             "$ref": "#/definitions/StorageTaskAssignment"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
+          "description": "Request URL that can be used to query next page of Resource IDs. Returned when total number of requested Resource IDs exceed maximum page size.",
           "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
-    "StorageTaskListResult": {
-      "type": "object",
-      "description": "The response of a StorageTask list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The StorageTask items on this page",
-          "items": {
-            "$ref": "#/definitions/StorageTask"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "StorageTaskOperationInfo": {
+    "StorageTaskOperation": {
       "type": "object",
       "description": "Represents an operation to be performed on the object",
       "properties": {
         "name": {
-          "$ref": "#/definitions/StorageTaskOperationName",
-          "description": "The operation to be performed on the object."
+          "type": "string",
+          "description": "The operation to be performed on the object.",
+          "enum": [
+            "SetBlobTier",
+            "SetBlobTags",
+            "SetBlobImmutabilityPolicy",
+            "SetBlobLegalHold",
+            "SetBlobExpiry",
+            "DeleteBlob",
+            "UndeleteBlob"
+          ],
+          "x-ms-enum": {
+            "name": "StorageTaskOperationName",
+            "modelAsString": true
+          }
         },
         "parameters": {
           "type": "object",
@@ -991,64 +657,31 @@
           }
         },
         "onSuccess": {
-          "$ref": "#/definitions/OnSuccess",
-          "description": "Action to be taken when the operation is successful for a object."
+          "type": "string",
+          "description": "Action to be taken when the operation is successful for a object.",
+          "enum": [
+            "continue"
+          ],
+          "x-ms-enum": {
+            "name": "onSuccess",
+            "modelAsString": true
+          }
         },
         "onFailure": {
-          "$ref": "#/definitions/OnFailure",
-          "description": "Action to be taken when the operation fails for a object."
+          "type": "string",
+          "description": "Action to be taken when the operation fails for a object.",
+          "enum": [
+            "break"
+          ],
+          "x-ms-enum": {
+            "name": "onFailure",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "name"
       ]
-    },
-    "StorageTaskOperationName": {
-      "type": "string",
-      "description": "The operation to be performed on the object.",
-      "enum": [
-        "SetBlobTier",
-        "SetBlobTags",
-        "SetBlobImmutabilityPolicy",
-        "SetBlobLegalHold",
-        "SetBlobExpiry",
-        "DeleteBlob",
-        "UndeleteBlob"
-      ],
-      "x-ms-enum": {
-        "name": "StorageTaskOperationName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SetBlobTier",
-            "value": "SetBlobTier"
-          },
-          {
-            "name": "SetBlobTags",
-            "value": "SetBlobTags"
-          },
-          {
-            "name": "SetBlobImmutabilityPolicy",
-            "value": "SetBlobImmutabilityPolicy"
-          },
-          {
-            "name": "SetBlobLegalHold",
-            "value": "SetBlobLegalHold"
-          },
-          {
-            "name": "SetBlobExpiry",
-            "value": "SetBlobExpiry"
-          },
-          {
-            "name": "DeleteBlob",
-            "value": "DeleteBlob"
-          },
-          {
-            "name": "UndeleteBlob",
-            "value": "UndeleteBlob"
-          }
-        ]
-      }
     },
     "StorageTaskPreviewAction": {
       "type": "object",
@@ -1098,6 +731,7 @@
       "properties": {
         "container": {
           "$ref": "#/definitions/StorageTaskPreviewContainerProperties",
+          "type": "object",
           "description": "Properties of a sample container to test for a match with the preview action."
         },
         "blobs": {
@@ -1110,6 +744,7 @@
         },
         "action": {
           "$ref": "#/definitions/StorageTaskPreviewActionCondition",
+          "type": "object",
           "description": "Preview action to test"
         }
       },
@@ -1152,8 +787,17 @@
           "x-ms-identifiers": []
         },
         "matchedBlock": {
-          "$ref": "#/definitions/MatchedBlockName",
+          "type": "string",
           "description": "Represents the condition block name that matched blob properties.",
+          "enum": [
+            "If",
+            "Else",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "matchedBlockName",
+            "modelAsString": true
+          },
           "readOnly": true
         }
       }
@@ -1215,8 +859,22 @@
           "description": "The storage task action that is executed"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "type": "string",
           "description": "Represents the provisioning state of the storage task.",
+          "enum": [
+            "ValidateSubscriptionQuotaBegin",
+            "ValidateSubscriptionQuotaEnd",
+            "Accepted",
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "creationTimeInUtc": {
@@ -1237,8 +895,7 @@
       "description": "Storage Tasks run report instance",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/StorageTaskReportProperties",
-          "description": "Storage task execution report for a run instance."
+          "$ref": "#/definitions/StorageTaskReportProperties"
         }
       },
       "allOf": [
@@ -1313,13 +970,21 @@
           "readOnly": true
         },
         "runStatusEnum": {
-          "$ref": "#/definitions/RunStatusEnum",
+          "type": "string",
           "description": "Represents the status of the execution.",
+          "enum": [
+            "InProgress",
+            "Finished"
+          ],
+          "x-ms-enum": {
+            "name": "RunStatusEnum",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "summaryReportPath": {
           "type": "string",
-          "description": "Full path to the verbose report stored in the reporting container as specified in the assignment execution context for the storage account.",
+          "description": "Full path to the verbose report stored in the reporting container as specified in the assignment execution context for the storage account. ",
           "readOnly": true
         },
         "taskId": {
@@ -1341,8 +1006,16 @@
           "readOnly": true
         },
         "runResult": {
-          "$ref": "#/definitions/RunResult",
+          "type": "string",
           "description": "Represents the overall result of the execution for the run instance",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "RunResult",
+            "modelAsString": true
+          },
           "readOnly": true
         }
       }
@@ -1353,29 +1026,26 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The StorageTaskReportInstance items on this page",
+          "description": "Gets storage tasks run result summary.",
           "items": {
             "$ref": "#/definitions/StorageTaskReportInstance"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
+          "description": "Request URL that can be used to query next page of storage task run results summary. Returned when the number of run instances and summary reports exceed maximum page size.",
           "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "StorageTaskUpdateParameters": {
       "type": "object",
       "description": "Parameters of the storage task update request",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         },
         "tags": {
@@ -1417,8 +1087,22 @@
           "description": "The storage task action that is executed"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "type": "string",
           "description": "Represents the provisioning state of the storage task.",
+          "enum": [
+            "ValidateSubscriptionQuotaBegin",
+            "ValidateSubscriptionQuotaEnd",
+            "Accepted",
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "creationTimeInUtc": {
@@ -1428,7 +1112,39 @@
           "readOnly": true
         }
       }
+    },
+    "StorageTasksListResult": {
+      "type": "object",
+      "description": "The response from the List Storage Task operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets the list of storage tasks and their properties.",
+          "items": {
+            "$ref": "#/definitions/StorageTask"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of storage tasks. Returned when total number of requested storage tasks exceed maximum page size.",
+          "readOnly": true
+        }
+      }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "StorageTaskName": {
+      "name": "storageTaskName",
+      "in": "path",
+      "description": "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 18,
+      "pattern": "^[a-z0-9]{3,18}$",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

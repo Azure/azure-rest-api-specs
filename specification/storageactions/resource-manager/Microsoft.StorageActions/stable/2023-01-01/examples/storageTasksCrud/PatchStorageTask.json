@@ -1,8 +1,5 @@
 {
   "parameters": {
-    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616",
-    "resourceGroupName": "res4228",
-    "storageTaskName": "mytask1",
     "api-version": "2023-01-01",
     "monitor": "true",
     "parameters": {
@@ -14,82 +11,85 @@
       },
       "properties": {
         "action": {
+          "else": {
+            "operations": [
+              {
+                "name": "DeleteBlob",
+                "onFailure": "break",
+                "onSuccess": "continue"
+              }
+            ]
+          },
           "if": {
             "condition": "[[equals(AccessTier, 'Cool')]]",
             "operations": [
               {
                 "name": "SetBlobTier",
+                "onFailure": "break",
+                "onSuccess": "continue",
                 "parameters": {
                   "tier": "Hot"
-                },
-                "onSuccess": "continue",
-                "onFailure": "break"
-              }
-            ]
-          },
-          "else": {
-            "operations": [
-              {
-                "name": "DeleteBlob",
-                "onSuccess": "continue",
-                "onFailure": "break"
+                }
               }
             ]
           }
         }
       }
-    }
+    },
+    "resourceGroupName": "res4228",
+    "storageTaskName": "mytask1",
+    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616"
   },
   "responses": {
     "200": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.StorageActions/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-01-01"
-      },
       "body": {
-        "id": "/subscriptions/c86a9c18-8373-41fa-92d4-1d7bdc16977b/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/mytask1",
         "name": "mytask1",
         "type": "Microsoft.StorageActions/storageTasks",
-        "location": "westus",
+        "id": "/subscriptions/c86a9c18-8373-41fa-92d4-1d7bdc16977b/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/mytask1",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
             "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myUserAssignedIdentity": {
-              "principalId": "aaaaaaaa-0000-0000-0000-000000000000",
-              "clientId": "bbbbbbbb-0000-0000-0000-000000000000"
+              "clientId": "bbbbbbbb-0000-0000-0000-000000000000",
+              "principalId": "aaaaaaaa-0000-0000-0000-000000000000"
             }
           }
         },
+        "location": "westus",
         "properties": {
-          "enabled": true,
           "description": "Storage task",
           "action": {
+            "else": {
+              "operations": [
+                {
+                  "name": "DeleteBlob",
+                  "onFailure": "break",
+                  "onSuccess": "continue"
+                }
+              ]
+            },
             "if": {
               "condition": "[[equals(AccessTier, 'Cool')]]",
               "operations": [
                 {
                   "name": "SetBlobTier",
+                  "onFailure": "break",
+                  "onSuccess": "continue",
                   "parameters": {
                     "tier": "Hot"
-                  },
-                  "onSuccess": "continue",
-                  "onFailure": "break"
-                }
-              ]
-            },
-            "else": {
-              "operations": [
-                {
-                  "name": "DeleteBlob",
-                  "onSuccess": "continue",
-                  "onFailure": "break"
+                  }
                 }
               ]
             }
           },
-          "taskVersion": 1,
+          "creationTimeInUtc": "2023-07-06T00:24:59.1441663Z",
+          "enabled": true,
           "provisioningState": "Succeeded",
-          "creationTimeInUtc": "2023-07-06T00:24:59.1441663Z"
+          "taskVersion": 1
         }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.StorageActions/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-01-01"
       }
     },
     "202": {
@@ -97,5 +97,7 @@
         "location": "https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.StorageActions/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-01-01"
       }
     }
-  }
+  },
+  "operationId": "StorageTasks_Update",
+  "title": "PatchStorageTask"
 }
