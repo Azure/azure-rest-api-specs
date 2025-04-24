@@ -7859,29 +7859,51 @@
       "properties": {
         "mode": {
           "type": "string",
-          "enum": ["Preferred", "Required", "Disabled"],
+          "enum": [
+            "Preferred",
+            "Required",
+            "Disabled"
+          ],
           "x-ms-enum": {
             "name": "LocalDNSMode",
             "modelAsString": true,
             "values": [
-              { "value": "Preferred", "description": "If the current orchestrator version supports this feature, prefer enabling localDNS." },
-              { "value": "Required", "description": "Enable localDNS." },
-              { "value": "Disabled", "description": "Disable localDNS." }
+              {
+                "value": "Preferred",
+                "description": "If the current orchestrator version supports this feature, prefer enabling localDNS."
+              },
+              {
+                "value": "Required",
+                "description": "Enable localDNS."
+              },
+              {
+                "value": "Disabled",
+                "description": "Disable localDNS."
+              }
             ]
           },
           "description": "Mode of enablement for localDNS.",
           "default": "Preferred"
         },
         "state": {
-        "readOnly": true,
+          "readOnly": true,
           "type": "string",
-          "enum": ["Enabled", "Disabled"],
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "x-ms-enum": {
             "name": "LocalDNSState",
             "modelAsString": true,
             "values": [
-              { "value": "Enabled", "description": "localDNS is enabled." },
-              { "value": "Disabled", "description": "localDNS is disabled." }
+              {
+                "value": "Enabled",
+                "description": "localDNS is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "localDNS is disabled."
+              }
             ]
           },
           "description": "System-generated state of localDNS."
@@ -7904,7 +7926,10 @@
       "properties": {
         "queryLogging": {
           "type": "string",
-          "enum": ["Error", "Log"],
+          "enum": [
+            "Error",
+            "Log"
+          ],
           "x-ms-enum": {
             "name": "LocalDNSQueryLogging",
             "modelAsString": true,
@@ -7924,7 +7949,10 @@
         },
         "protocol": {
           "type": "string",
-          "enum": ["PreferUDP", "ForceTCP"],
+          "enum": [
+            "PreferUDP",
+            "ForceTCP"
+          ],
           "x-ms-enum": {
             "name": "LocalDNSProtocol",
             "modelAsString": true,
@@ -7944,7 +7972,10 @@
         },
         "forwardDestination": {
           "type": "string",
-          "enum": ["ClusterCoreDNS", "VnetDNS"],
+          "enum": [
+            "ClusterCoreDNS",
+            "VnetDNS"
+          ],
           "x-ms-enum": {
             "name": "LocalDNSForwardDestination",
             "modelAsString": true,
@@ -7964,7 +7995,11 @@
         },
         "forwardPolicy": {
           "type": "string",
-          "enum": ["Sequential", "RoundRobin", "Random"],
+          "enum": [
+            "Sequential",
+            "RoundRobin",
+            "Random"
+          ],
           "x-ms-enum": {
             "name": "LocalDNSForwardPolicy",
             "modelAsString": true,
@@ -8006,7 +8041,11 @@
         },
         "serveStale": {
           "type": "string",
-          "enum": ["Verify", "Immediate", "Disable"],
+          "enum": [
+            "Verify",
+            "Immediate",
+            "Disable"
+          ],
           "x-ms-enum": {
             "name": "LocalDNSServeStale",
             "modelAsString": true,
