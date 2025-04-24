@@ -110,7 +110,7 @@ model Error {
 
   @doc("Gets the error message parameters.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   messageParameters?: NameValuePair<string, string>[];
 
   @doc("Gets the time stamp when the error was updated.")

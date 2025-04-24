@@ -19,12 +19,12 @@ model AssessedWorkloadProperties<TLinkages, TRecommendations> {
 
   @doc("The linkages list.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkages?: TLinkages[];
 
   @doc("The recommendation list.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   recommendations?: TRecommendations[];
 }
 
@@ -75,22 +75,22 @@ model Recommendations<TMigrationIssues, TMigrationSuitability, TSkus> {
 
   @doc("The total cost details.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   totalCost?: CostDetailsCommon[];
 
   @doc("The total cost details.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   totalSavings?: SavingsDetailsCommon[];
 
   @doc("The migration issues list.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   migrationIssues?: TMigrationIssues[];
 
   @doc("The Skus list.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   skus?: TSkus[];
 }
 
@@ -123,7 +123,7 @@ model Configuration {
 model RecommendedFor {
   @doc("The list of strategy type.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   strategies?: StrategyType[];
 }
 
@@ -147,12 +147,12 @@ model MigrationIssues {
 
   @doc("The recommended action.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   recommendedActions?: string[];
 
   @doc("The more information list.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   moreInformation?: MoreInformation[];
 }
 
@@ -180,7 +180,7 @@ model Skus<TMigrationSuitability> {
 
   @doc("The source name.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sources?: SourceRecommendation<TMigrationSuitability>[];
 
   @doc("The sku details.")
@@ -211,16 +211,16 @@ model SkuDetails {
 
   @doc("The capabilities.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   capabilities?: NameValuePair<string, string>[];
 
   @doc("The sku cost details.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   totalCost?: CostDetailsCommon[];
 
   @doc("The sku savings details.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   totalSavings?: SavingsDetailsCommon[];
 }

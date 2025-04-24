@@ -39,14 +39,14 @@ model BranchProperties {
   databaseName?: string;
 
   @doc("Roles associated with the branch")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   roles?: NeonRoleProperties[];
 
   @doc("Neon Databases associated with the branch")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   databases?: NeonDatabaseProperties[];
 
   @doc("Endpoints associated with the branch")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   endpoints?: EndpointProperties[];
 }
