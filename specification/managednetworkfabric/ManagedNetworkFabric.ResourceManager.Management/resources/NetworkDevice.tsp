@@ -120,4 +120,5 @@ interface NetworkDevices {
 );
 @@doc(NetworkDevices.upgrade::parameters.body, "Request payload.");
 @@doc(NetworkDevices.runRoCommand::parameters.body, "Request the command.");
+@@doc(NetworkDevices.runRoCommandDeprecated::parameters.body, "Request the command.");
 @@doc(NetworkDevices.runRwCommand::parameters.body, "Request the command.");
