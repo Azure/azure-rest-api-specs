@@ -524,12 +524,14 @@ model CommonPostActionResponseForDeviceROCommandsOperationStatusResult {
 
   @doc("The additional properties of the operation status result.")
   properties?: CommonPostActionResponseForDeviceROCommands;
-  //TODO: how to add x-ms-client-flatten
 
   @doc("Fully qualified ID of the resource against which the original async operation was started.")
   @visibility(Lifecycle.Read)
-  resourceId?: string;
-  //TODO: how to addd format arm-id
+  resourceId?: Azure.Core.armResourceIdentifier<[
+      {
+        type: "Microsoft.ManagedNetworkFabric/NOTSUREABOUTTHETYPE";
+      }
+    ]>;
 
   @doc("The start time of the operation.")
   @visibility(Lifecycle.Read)
