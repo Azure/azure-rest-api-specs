@@ -131,7 +131,10 @@ input-file:
   - Microsoft.App/preview/2025-02-02-preview/Usages.json
 directive:
   - suppress: AvoidAdditionalProperties
-    from: CommonDefinitions.json
+    from: CommonDefinitions.json    
+    where:
+      - $.definitions.DaprSubscription.properties.properties.metadata
+      - $.definitions.ServiceBind.properties.customizedKeys
     reason: |
       Do not introduce breaking changes in GA services
   - suppress: TrackedExtensionResourcesAreNotAllowed
