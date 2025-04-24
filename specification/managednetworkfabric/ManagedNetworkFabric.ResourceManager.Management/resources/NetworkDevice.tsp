@@ -5,6 +5,11 @@ using Azure.ResourceManager;
 
 using TypeSpec.Http;
 
+
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+
+
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
