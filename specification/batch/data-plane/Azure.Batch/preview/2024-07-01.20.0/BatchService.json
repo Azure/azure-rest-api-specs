@@ -10303,6 +10303,16 @@
         }
       }
     },
+    "BatchDiffDiskSettings": {
+      "type": "object",
+      "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the\ncompute node (VM).",
+      "properties": {
+        "placement": {
+          "$ref": "#/definitions/DiffDiskPlacement",
+          "description": "Specifies the ephemeral disk placement for operating system disk for all VMs in the pool. This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements."
+        }
+      }
+    },
     "BatchError": {
       "type": "object",
       "description": "An error response received from the Azure Batch service.",
@@ -10380,45 +10390,49 @@
         ]
       }
     },
-    "BatchImageReference": {
+    "BatchInboundNatPool": {
       "type": "object",
-      "description": "A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image.\nTo get the list of all Azure Marketplace Image references verified by Azure Batch, see the\n' List Supported Images ' operation.",
+      "description": "A inbound NAT Pool that can be used to address specific ports on Compute Nodes\nin a Batch Pool externally.",
       "properties": {
-        "publisher": {
+        "name": {
           "type": "string",
-          "description": "The publisher of the Azure Virtual Machines Marketplace Image. For example, Canonical or MicrosoftWindowsServer."
+          "description": "The name of the endpoint. The name must be unique within a Batch Pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400."
         },
-        "offer": {
-          "type": "string",
-          "description": "The offer type of the Azure Virtual Machines Marketplace Image. For example, UbuntuServer or WindowsServer."
+        "protocol": {
+          "$ref": "#/definitions/InboundEndpointProtocol",
+          "description": "The protocol of the endpoint."
         },
-        "sku": {
-          "type": "string",
-          "description": "The SKU of the Azure Virtual Machines Marketplace Image. For example, 18.04-LTS or 2019-Datacenter."
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number on the Compute Node. This must be unique within a Batch Pool. Acceptable values are between 1 and 65535 except for 29876 and 29877 as these are reserved. If any reserved values are provided the request fails with HTTP status code 400."
         },
-        "version": {
-          "type": "string",
-          "description": "The version of the Azure Virtual Machines Marketplace Image. A value of 'latest' can be specified to select the latest version of an Image. If omitted, the default is 'latest'."
+        "frontendPortRangeStart": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first port number in the range of external ports that will be used to provide inbound access to the backendPort on individual Compute Nodes. Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved. All ranges within a Pool must be distinct and cannot overlap. Each range must contain at least 40 ports. If any reserved or overlapping values are provided the request fails with HTTP status code 400."
         },
-        "virtualMachineImageId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version. This property is mutually exclusive with other ImageReference properties. The Azure Compute Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://learn.microsoft.com/azure/batch/nodes-and-pools#virtual-network-vnet-and-firewall-configuration."
+        "frontendPortRangeEnd": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last port number in the range of external ports that will be used to provide inbound access to the backendPort on individual Compute Nodes. Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved by the Batch service. All ranges within a Pool must be distinct and cannot overlap. Each range must contain at least 40 ports. If any reserved or overlapping values are provided the request fails with HTTP status code 400."
         },
-        "exactVersion": {
-          "type": "string",
-          "description": "The specific version of the platform image or marketplace image used to create the node. This read-only field differs from 'version' only if the value specified for 'version' when the pool was created was 'latest'.",
-          "readOnly": true
-        },
-        "sharedGalleryImageId": {
-          "type": "string",
-          "description": "The shared gallery image unique identifier. This property is mutually exclusive with other properties and can be fetched from shared gallery image GET call."
-        },
-        "communityGalleryImageId": {
-          "type": "string",
-          "description": "The community gallery image unique identifier. This property is mutually exclusive with other properties and can be fetched from community gallery image GET call."
+        "networkSecurityGroupRules": {
+          "type": "array",
+          "description": "A list of network security group rules that will be applied to the endpoint. The maximum number of rules that can be specified across all the endpoints on a Batch Pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityGroupRule"
+          },
+          "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "name",
+        "protocol",
+        "backendPort",
+        "frontendPortRangeStart",
+        "frontendPortRangeEnd"
+      ]
     },
     "BatchJob": {
       "type": "object",
@@ -13081,6 +13095,33 @@
         }
       }
     },
+    "BatchOsDisk": {
+      "type": "object",
+      "description": "Settings for the operating system disk of the compute node (VM).",
+      "properties": {
+        "ephemeralOSDiskSettings": {
+          "$ref": "#/definitions/BatchDiffDiskSettings",
+          "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM)."
+        },
+        "caching": {
+          "$ref": "#/definitions/CachingType",
+          "description": "Specifies the caching requirements. Possible values are: None, ReadOnly, ReadWrite. The default values are: None for Standard storage. ReadOnly for Premium storage."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The initial disk size in GB when creating new OS disk."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDisk",
+          "description": "The managed disk parameters."
+        },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        }
+      }
+    },
     "BatchPool": {
       "type": "object",
       "description": "A Pool in the Azure Batch service.",
@@ -13467,7 +13508,7 @@
           "type": "array",
           "description": "A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.",
           "items": {
-            "$ref": "#/definitions/InboundNatPool"
+            "$ref": "#/definitions/BatchInboundNatPool"
           },
           "x-ms-client-name": "inboundNatPools",
           "x-ms-identifiers": []
@@ -13485,7 +13526,7 @@
           "type": "array",
           "description": "A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.",
           "items": {
-            "$ref": "#/definitions/InboundNatPool"
+            "$ref": "#/definitions/BatchInboundNatPool"
           },
           "x-ms-client-name": "inboundNatPools",
           "x-ms-identifiers": []
@@ -14290,6 +14331,24 @@
         "dedicatedCoreTime"
       ]
     },
+    "BatchPublicIpAddressConfiguration": {
+      "type": "object",
+      "description": "The public IP Address configuration of the networking configuration of a Pool.",
+      "properties": {
+        "provision": {
+          "$ref": "#/definitions/IpAddressProvisioningType",
+          "description": "The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.",
+          "x-ms-client-name": "IpAddressProvisioningType"
+        },
+        "ipAddressIds": {
+          "type": "array",
+          "description": "The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
+          }
+        }
+      }
+    },
     "BatchStartTask": {
       "type": "object",
       "description": "Batch will retry Tasks when a recovery operation is triggered on a Node.\nExamples of recovery operations include (but are not limited to) when an\nunhealthy Node is rebooted or a Compute Node disappeared due to host failure.\nRetries due to recovery operations are independent of and are not counted\nagainst the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal\nretry due to a recovery operation may occur. Because of this, all Tasks should\nbe idempotent. This means Tasks need to tolerate being interrupted and\nrestarted without causing any corruption or duplicate data. The best practice\nfor long running Tasks is to use some form of checkpointing. In some cases the\nStartTask may be re-run even though the Compute Node was not rebooted. Special\ncare should be taken to avoid StartTasks which create breakaway process or\ninstall/launch services from the StartTask working directory, as this will\nblock Batch from being able to re-run the StartTask.",
@@ -14555,7 +14614,7 @@
           "x-ms-client-name": "nodeAgentSkuId"
         },
         "imageReference": {
-          "$ref": "#/definitions/BatchImageReference",
+          "$ref": "#/definitions/BatchVmImageReference",
           "description": "The reference to the Azure Virtual Machine's Marketplace Image."
         },
         "osType": {
@@ -15501,6 +15560,20 @@
         "waitTime"
       ]
     },
+    "BatchUefiSettings": {
+      "type": "object",
+      "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine.",
+      "properties": {
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether secure boot should be enabled on the virtual machine."
+        },
+        "vTpmEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether vTPM should be enabled on the virtual machine."
+        }
+      }
+    },
     "BatchUserAssignedIdentity": {
       "type": "object",
       "description": "The user assigned Identity",
@@ -15524,6 +15597,46 @@
       "required": [
         "resourceId"
       ]
+    },
+    "BatchVmImageReference": {
+      "type": "object",
+      "description": "A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image.\nTo get the list of all Azure Marketplace Image references verified by Azure Batch, see the\n' List Supported Images ' operation.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the Azure Virtual Machines Marketplace Image. For example, Canonical or MicrosoftWindowsServer."
+        },
+        "offer": {
+          "type": "string",
+          "description": "The offer type of the Azure Virtual Machines Marketplace Image. For example, UbuntuServer or WindowsServer."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The SKU of the Azure Virtual Machines Marketplace Image. For example, 18.04-LTS or 2019-Datacenter."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the Azure Virtual Machines Marketplace Image. A value of 'latest' can be specified to select the latest version of an Image. If omitted, the default is 'latest'."
+        },
+        "virtualMachineImageId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version. This property is mutually exclusive with other ImageReference properties. The Azure Compute Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://learn.microsoft.com/azure/batch/nodes-and-pools#virtual-network-vnet-and-firewall-configuration."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "The specific version of the platform image or marketplace image used to create the node. This read-only field differs from 'version' only if the value specified for 'version' when the pool was created was 'latest'.",
+          "readOnly": true
+        },
+        "sharedGalleryImageId": {
+          "type": "string",
+          "description": "The shared gallery image unique identifier. This property is mutually exclusive with other properties and can be fetched from shared gallery image GET call."
+        },
+        "communityGalleryImageId": {
+          "type": "string",
+          "description": "The community gallery image unique identifier. This property is mutually exclusive with other properties and can be fetched from community gallery image GET call."
+        }
+      }
     },
     "CachingType": {
       "type": "string",
@@ -15816,16 +15929,6 @@
             "description": "The Ephemeral OS Disk is stored on the VM cache."
           }
         ]
-      }
-    },
-    "DiffDiskSettings": {
-      "type": "object",
-      "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the\ncompute node (VM).",
-      "properties": {
-        "placement": {
-          "$ref": "#/definitions/DiffDiskPlacement",
-          "description": "Specifies the ephemeral disk placement for operating system disk for all VMs in the pool. This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements."
-        }
       }
     },
     "DisableBatchJobOption": {
@@ -16174,50 +16277,6 @@
         ]
       }
     },
-    "InboundNatPool": {
-      "type": "object",
-      "description": "A inbound NAT Pool that can be used to address specific ports on Compute Nodes\nin a Batch Pool externally.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the endpoint. The name must be unique within a Batch Pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400."
-        },
-        "protocol": {
-          "$ref": "#/definitions/InboundEndpointProtocol",
-          "description": "The protocol of the endpoint."
-        },
-        "backendPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The port number on the Compute Node. This must be unique within a Batch Pool. Acceptable values are between 1 and 65535 except for 29876 and 29877 as these are reserved. If any reserved values are provided the request fails with HTTP status code 400."
-        },
-        "frontendPortRangeStart": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The first port number in the range of external ports that will be used to provide inbound access to the backendPort on individual Compute Nodes. Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved. All ranges within a Pool must be distinct and cannot overlap. Each range must contain at least 40 ports. If any reserved or overlapping values are provided the request fails with HTTP status code 400."
-        },
-        "frontendPortRangeEnd": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The last port number in the range of external ports that will be used to provide inbound access to the backendPort on individual Compute Nodes. Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved by the Batch service. All ranges within a Pool must be distinct and cannot overlap. Each range must contain at least 40 ports. If any reserved or overlapping values are provided the request fails with HTTP status code 400."
-        },
-        "networkSecurityGroupRules": {
-          "type": "array",
-          "description": "A list of network security group rules that will be applied to the endpoint. The maximum number of rules that can be specified across all the endpoints on a Batch Pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityGroupRule"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "name",
-        "protocol",
-        "backendPort",
-        "frontendPortRangeStart",
-        "frontendPortRangeEnd"
-      ]
-    },
     "InstanceViewStatus": {
       "type": "object",
       "description": "The instance view status.",
@@ -16415,7 +16474,7 @@
           "description": "The configuration for endpoints on Compute Nodes in the Batch Pool."
         },
         "publicIPAddressConfiguration": {
-          "$ref": "#/definitions/PublicIpAddressConfiguration",
+          "$ref": "#/definitions/BatchPublicIpAddressConfiguration",
           "description": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
           "x-ms-client-name": "publicIpAddressConfiguration"
         },
@@ -16443,7 +16502,7 @@
           "description": "The configuration for endpoints on Compute Nodes in the Batch Pool."
         },
         "publicIPAddressConfiguration": {
-          "$ref": "#/definitions/PublicIpAddressConfiguration",
+          "$ref": "#/definitions/BatchPublicIpAddressConfiguration",
           "description": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
           "x-ms-client-name": "publicIpAddressConfiguration"
         },
@@ -16529,33 +16588,6 @@
         "source",
         "relativeMountPath"
       ]
-    },
-    "OSDisk": {
-      "type": "object",
-      "description": "Settings for the operating system disk of the compute node (VM).",
-      "properties": {
-        "ephemeralOSDiskSettings": {
-          "$ref": "#/definitions/DiffDiskSettings",
-          "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM)."
-        },
-        "caching": {
-          "$ref": "#/definitions/CachingType",
-          "description": "Specifies the caching requirements. Possible values are: None, ReadOnly, ReadWrite. The default values are: None for Standard storage. ReadOnly for Premium storage."
-        },
-        "diskSizeGB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The initial disk size in GB when creating new OS disk."
-        },
-        "managedDisk": {
-          "$ref": "#/definitions/ManagedDisk",
-          "description": "The managed disk parameters."
-        },
-        "writeAcceleratorEnabled": {
-          "type": "boolean",
-          "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
-        }
-      }
     },
     "OSType": {
       "type": "string",
@@ -16703,24 +16735,6 @@
       "required": [
         "name"
       ]
-    },
-    "PublicIpAddressConfiguration": {
-      "type": "object",
-      "description": "The public IP Address configuration of the networking configuration of a Pool.",
-      "properties": {
-        "provision": {
-          "$ref": "#/definitions/IpAddressProvisioningType",
-          "description": "The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.",
-          "x-ms-client-name": "IpAddressProvisioningType"
-        },
-        "ipAddressIds": {
-          "type": "array",
-          "description": "The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.ipV4Address"
-          }
-        }
-      }
     },
     "RecentBatchJob": {
       "type": "object",
@@ -16894,7 +16908,7 @@
           "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings."
         },
         "uefiSettings": {
-          "$ref": "#/definitions/UefiSettings",
+          "$ref": "#/definitions/BatchUefiSettings",
           "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
         }
       },
@@ -16917,7 +16931,7 @@
           "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings."
         },
         "uefiSettings": {
-          "$ref": "#/definitions/UefiSettings",
+          "$ref": "#/definitions/BatchUefiSettings",
           "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
         }
       }
@@ -17027,20 +17041,6 @@
             "description": "The data disk / OS disk should use standard SSD locally redundant storage."
           }
         ]
-      }
-    },
-    "UefiSettings": {
-      "type": "object",
-      "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine.",
-      "properties": {
-        "secureBootEnabled": {
-          "type": "boolean",
-          "description": "Specifies whether secure boot should be enabled on the virtual machine."
-        },
-        "vTpmEnabled": {
-          "type": "boolean",
-          "description": "Specifies whether vTPM should be enabled on the virtual machine."
-        }
       }
     },
     "UpgradeMode": {
@@ -17295,7 +17295,7 @@
       "description": "The configuration for Compute Nodes in a Pool based on the Azure Virtual\nMachines infrastructure.",
       "properties": {
         "imageReference": {
-          "$ref": "#/definitions/BatchImageReference",
+          "$ref": "#/definitions/BatchVmImageReference",
           "description": "A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use."
         },
         "nodeAgentSKUId": {
@@ -17340,7 +17340,7 @@
           "x-ms-identifiers": []
         },
         "osDisk": {
-          "$ref": "#/definitions/OSDisk",
+          "$ref": "#/definitions/BatchOsDisk",
           "description": "Settings for the operating system disk of the Virtual Machine.",
           "x-ms-client-name": "OsDisk"
         },
@@ -17363,7 +17363,7 @@
       "description": "The configuration for Compute Nodes in a Pool based on the Azure Virtual\nMachines infrastructure.",
       "properties": {
         "imageReference": {
-          "$ref": "#/definitions/BatchImageReference",
+          "$ref": "#/definitions/BatchVmImageReference",
           "description": "A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use."
         },
         "nodeAgentSKUId": {
@@ -17408,7 +17408,7 @@
           "x-ms-identifiers": []
         },
         "osDisk": {
-          "$ref": "#/definitions/OSDisk",
+          "$ref": "#/definitions/BatchOsDisk",
           "description": "Settings for the operating system disk of the Virtual Machine.",
           "x-ms-client-name": "OsDisk"
         },
@@ -17427,7 +17427,7 @@
       "description": "Info about the current state of the virtual machine.",
       "properties": {
         "imageReference": {
-          "$ref": "#/definitions/BatchImageReference",
+          "$ref": "#/definitions/BatchVmImageReference",
           "description": "The reference to the Azure Virtual Machine's Marketplace Image."
         },
         "scaleSetVmResourceId": {
