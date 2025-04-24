@@ -75,7 +75,7 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
   """)
 @actionSeparator("/")
 @route("images/generations")
-@added(ModelInference.Versions.v2025_05_01_Preview)
+@added(ModelInference.Versions.v2025_05_15_Preview)
 op getImageGenerations is Azure.Core.RpcOperation<
   {
     ...ImageGenerationsOptions;

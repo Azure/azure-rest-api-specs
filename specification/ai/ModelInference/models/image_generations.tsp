@@ -11,7 +11,7 @@ namespace ModelInference;
 @doc("""
   The configuration information for an image generation request.
   """)
-@added(ModelInference.Versions.v2025_05_01_Preview)
+@added(ModelInference.Versions.v2025_05_15_Preview)
 model ImageGenerationsOptions {
   @doc("""
     The prompt to use for the image geneartion. Read the model documentation to understand
@@ -69,7 +69,7 @@ model ImageGenerationsOptions {
 }
 
 @doc("The preset size of the image to generate.")
-@added(ModelInference.Versions.v2025_05_01_Preview)
+@added(ModelInference.Versions.v2025_05_15_Preview)
 union ImageGenerationPreset {
   string,
 
@@ -102,7 +102,7 @@ union ImageGenerationPreset {
 }
 
 @doc("The size of the image to generate.")
-@added(ModelInference.Versions.v2025_05_01_Preview)
+@added(ModelInference.Versions.v2025_05_15_Preview)
 model ImageGenerationSize {
   @doc("The width of the image to generate, in pixels.")
   width: int32;
@@ -112,7 +112,7 @@ model ImageGenerationSize {
 }
 
 @doc("The image generation format to use in the output.")
-@added(ModelInference.Versions.v2025_05_01_Preview)
+@added(ModelInference.Versions.v2025_05_15_Preview)
 union ImageGenerationOutputFormat {
   string,
 
@@ -124,7 +124,7 @@ union ImageGenerationOutputFormat {
 }
 
 @doc("Represents an image to use for guidance during the generation.")
-@added(ModelInference.Versions.v2025_05_01_Preview)
+@added(ModelInference.Versions.v2025_05_15_Preview)
 model ImageGenerationPrompt {
   @doc("""
     The input image encoded in base64 string as a data URL.
@@ -141,7 +141,7 @@ model ImageGenerationPrompt {
 }
 
 @doc("The quality of the image to generate.")
-@added(ModelInference.Versions.v2025_05_01_Preview)
+@added(ModelInference.Versions.v2025_05_15_Preview)
 union ImageGenerationQuality {
   string,
 
@@ -153,7 +153,7 @@ union ImageGenerationQuality {
 }
 
 @doc("The result of an image generation request.")
-@added(ModelInference.Versions.v2025_05_01_Preview)
+@added(ModelInference.Versions.v2025_05_15_Preview)
 model ImageGenerationsResult {
   @doc("Unique identifier for the generation result.")
   id: string;
@@ -180,7 +180,7 @@ model ImageGenerationsResult {
 }
 
 @doc("Representation of a single image generation.")
-@added(ModelInference.Versions.v2025_05_01_Preview)
+@added(ModelInference.Versions.v2025_05_15_Preview)
 model ImageGenerationItem {
   @doc("The image generated, encoded in base64.")
   image: string;
@@ -190,7 +190,7 @@ model ImageGenerationItem {
 }
 
 @doc("Usage counts for image generation API.")
-@added(ModelInference.Versions.v2025_05_01_Preview)
+@added(ModelInference.Versions.v2025_05_15_Preview)
 model ImageGenerationUsage {
   @doc("The number of image generations performed.")
   image_generations: int32;

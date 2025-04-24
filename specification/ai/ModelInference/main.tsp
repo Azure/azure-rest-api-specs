@@ -43,6 +43,6 @@ enum Versions {
   v2025_05_01: "2025-05-01",
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2025-05-01-preview version of the AI.Model service.")
-  v2025_05_01_Preview: "2025-05-01-preview",
+  @doc("The 2025-05-15-preview version of the AI.Model service.")
+  v2025_05_15_Preview: "2025-05-15-preview",
 }
