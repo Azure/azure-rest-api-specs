@@ -12,7 +12,7 @@ import {
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
   TspConfigGoMgmtFixConstStutteringTrueSubRule,
-  TspConfigGoMgmtGenerateExamplesTrueSubRule,
+  TspConfigGoMgmtGenerateSamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
   TspConfigGoAzGenerateFakesTrueSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
@@ -22,7 +22,6 @@ import {
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigPythonMgmtPackageDirectorySubRule,
   TspConfigPythonMgmtNamespaceSubRule,
-  TspConfigPythonDpPackageNameEqualStringSubRule,
   TspConfigPythonAzGenerateTestTrueSubRule,
   TspConfigPythonAzGenerateSampleTrueSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
@@ -261,10 +260,10 @@ const goManagementFixConstStutteringTestCases = createEmitterOptionTestCases(
 const goManagementGenerateExamplesTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
-  "generate-examples",
+  "generate-samples",
   true,
   false,
-  [new TspConfigGoMgmtGenerateExamplesTrueSubRule()],
+  [new TspConfigGoMgmtGenerateSamplesTrueSubRule()],
 );
 
 const goManagementGenerateFakesTestCases = createEmitterOptionTestCases(
@@ -392,15 +391,6 @@ const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
   "azure-aaa-bbb-ccc",
   "azure-aa-b-c-d",
   [new TspConfigPythonDpPackageDirectorySubRule()],
-);
-
-const pythonDpPackageNameTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-python",
-  "",
-  "package-name",
-  "{package-dir}",
-  "aaa",
-  [new TspConfigPythonDpPackageNameEqualStringSubRule()],
 );
 
 const pythonAzGenerateTestTestCases = createEmitterOptionTestCases(
