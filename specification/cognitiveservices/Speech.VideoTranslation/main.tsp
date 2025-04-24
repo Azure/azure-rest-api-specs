@@ -5,13 +5,12 @@ import "@typespec/openapi";
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Keeping this in the spec for now"
 @doc("Video translation API to translate video from source locale to target locale.")
-@versioned(VideoTranslation.ApiVersions)
+@versioned(ApiVersions)
 @service(#{ title: "Video Translation" })
 @server(
   "{endpoint}/videotranslation",
@@ -30,6 +29,7 @@ using TypeSpec.OpenAPI;
   },
   license: #{ name: "Copyright (c) Microsoft. All rights reserved." },
 })
+@versioned(ApiVersions)
 namespace Microsoft.Speech.VideoTranslation;
 
 @doc("Provide your Speech resource key here.")
@@ -55,6 +55,10 @@ enum ApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2024-05-20-preview version of the VideoTranslation service.")
   v2024_05_20_preview: "2024-05-20-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("The 2025-05-20 GA version of the VideoTranslation service.")
+  v2025_05_20: "2025-05-20",
 }
 
 @doc("Task status.")
@@ -102,6 +106,18 @@ union WebvttFileKind {
   MetadataJson: "MetadataJson",
 }
 
+@added(ApiVersions.v2025_05_20)
+@doc("EventHub event kind.")
+union EventHubVideoTranslationEventKind {
+  string,
+
+  /** Send event to EventHub when translation completed or failed. */
+  TranslationCompletion: "TranslationCompletion",
+
+  /** Send event to EventHub when iteration completed or failed. */
+  IterationCompletion: "IterationCompletion",
+}
+
 @doc("Translation webvtt file.")
 model WebvttFile {
   @doc("Translation webvtt file url.")
@@ -110,6 +126,10 @@ model WebvttFile {
   @doc("Translation webvtt file kind.")
   kind: WebvttFileKind;
 }
+
+@doc("Guid, for example: 8e2da02e-f9b3-4a1c-941f-8da60f16c2e5")
+@pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+scalar Guid extends string;
 
 @doc("Locale name, for example: en-US")
 @pattern("^[A-Za-z]{2,4}([_-][A-Za-z]{4})?([_-]([A-Za-z]{2}|[0-9]{3}))?$")
@@ -126,7 +146,8 @@ scalar resourceId extends string;
 @doc("Translation input.")
 model TranslationInput {
   @doc("The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.")
-  sourceLocale: localeName;
+  @madeOptional(ApiVersions.v2025_05_20)
+  sourceLocale?: localeName;
 
   @doc("The target locale of the translation. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.")
   targetLocale: localeName;
@@ -135,7 +156,12 @@ model TranslationInput {
   voiceKind: VoiceKind;
 
   @doc("Translation video file url.")
-  videoFileUrl: url;
+  @madeOptional(ApiVersions.v2025_05_20)
+  videoFileUrl?: url;
+
+  @added(ApiVersions.v2025_05_20)
+  @doc("Translation audio file url.")
+  audioFileUrl?: url;
 
   @doc("Number of speakers in the video.")
   speakerCount?: int32;
@@ -152,11 +178,19 @@ model IterationResult {
   @doc("Translated video file URL.")
   translatedVideoFileUrl?: url;
 
+  @added(ApiVersions.v2025_05_20)
+  @doc("Translated audio file URL.")
+  translatedAudioFileUrl?: url;
+
   @doc("Source locale subtitle file URL.")
   sourceLocaleSubtitleWebvttFileUrl?: url;
 
   @doc("Target locale subtitle file URL.")
   targetLocaleSubtitleWebvttFileUrl?: url;
+
+  @added(ApiVersions.v2025_05_20)
+  @doc("Target locale Advanced SubStation Alpha format subtitle file URL, only response when specify export this file explicitly in iteration creation API.")
+  targetLocaleAdvancedSubtitleFileUrl?: url;
 
   @doc("Metadata json webvtt file URL.")
   metadataJsonWebvttFileUrl?: url;
@@ -178,6 +212,49 @@ model IterationInput {
 
   @doc("Export subtitle in video.")
   exportSubtitleInVideo?: boolean;
+
+  @added(ApiVersions.v2025_05_20)
+  @doc("Translate with TTS custom lexicon for TTS synthesis, proivde the custom lexicon file with URL, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are requied.")
+  ttsCustomLexiconFileUrl?: url;
+
+  @added(ApiVersions.v2025_05_20)
+  @doc("Translate with TTS custom lexicon for TTS synthesis, proivde the custom lexicon file with file ID in Audio Content Creation, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are requied.")
+  ttsCustomLexiconFileIdInAudioContentCreation?: Guid;
+
+  @added(ApiVersions.v2025_05_20)
+  @doc("This parameter allows for the adjustment of video playback speed to ensure better alignment with translated audio. When enabled, the API can slow down or speed up the video to match the timing of the translated audio, providing a more synchronized and seamless viewing experience.")
+  enableVideoSpeedAdjustment?: boolean;
+
+  @added(ApiVersions.v2025_05_20)
+  @doc("This parameter, when enabled, allows the API to export subtitles in the Advanced SubStation Alpha format. The subtitle file can specify font styles and colors, which helps in addressing character display issues in certain target locales such as Arabic (Ar), Japanese (Ja), Korean (Ko), and Chinese (Ch). By using this parameter, you can ensure that the subtitles are visually appealing and correctly rendered across different languages and regions.")
+  exportTargetLocaleAdvancedSubtitleFile?: boolean;
+
+  @added(ApiVersions.v2025_05_20)
+  @doc("Indicate whether allow the API to correct the speech recognition (SR) results using the subtitles from the original video file. By leveraging the existing subtitles, the API can enhance the accuracy of the transcribed text, ensuring that the final output is more precise and reliable.")
+  enableOcrCorrectionFromSubtitle?: boolean;
+
+  @added(ApiVersions.v2025_05_20)
+  @doc("This parameter specifies the primary color of the subtitles in the video translation output. The value should be provided in the format <bb><gg><rr> or #<bb><gg><rr>, where <bb> represents the blue component, <gg> represents the green component, and <rr> represents the red component of the color. For example, EBA205 or #EBA205 would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal")
+  subtitlePrimaryColor?: string;
+}
+
+@added(ApiVersions.v2025_05_20)
+@doc("EventHub configuration.")
+model EventHubConfig {
+  @doc("Indicate whether enable sending event to EventHub.")
+  isEnabled: boolean;
+
+  @doc("EventHub namespace host name, for example: [YourNamespace].servicebus.windows.net")
+  eventHubNamespaceHostName: string;
+
+  @doc("EventHub name")
+  eventHubName: string;
+
+  @doc("Managed identity client ID for user-assigned managed identity; API will use system-assigned managed identity if not specified.")
+  managedIdentityClientId?: Guid;
+
+  @doc("Enabled event kinds for notification.")
+  enabledEvents: EventHubVideoTranslationEventKind[];
 }
 
 @doc("Operation ID header.")
@@ -321,3 +398,90 @@ interface OperationOperations {
   @doc("Fetch a operation by ID.")
   getOperation is ops.ResourceRead<Operation>;
 }
+
+@doc("Empty request body.")
+model EmptyRequest {}
+
+@added(ApiVersions.v2025_05_20)
+interface EventHubConfigOperations {
+  @doc("Create or replace EventHub configuration.")
+  @route("/configurations/event-hub")
+  @put
+  createOrReplaceEventHubConfig is RpcOperation<EventHubConfig, EventHubConfig>;
+
+  @doc("Get EventHub configuration.")
+  @route("/configurations/event-hub")
+  @get
+  getEventHubConfig is RpcOperation<EmptyRequest, EventHubConfig>;
+
+  @doc("Get EventHub configuration.")
+  @delete
+  @route("/configurations/event-hub")
+  deleteEventHubConfig is RpcOperation<EventHubConfig, NoContentResponse>;
+
+  @doc("Send ping to EventHub to verify configuration.")
+  @route("/configurations/event-hub:ping")
+  @post
+  pingEventHub is RpcOperation<EmptyRequest,NoContentResponse>;
+}
+
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using custom operation signature for specific requirements"
+// @added(ApiVersions.v2025_05_20)
+// @doc("Create or replace EventHub configuration.")
+// @route("/configurations/event-hub")
+// @put
+// op createOrReplaceEventHubConfig(
+//   @doc("API version parameter")
+//   @query("api-version")
+//   apiVersion: string,
+
+//   // @ApiVersionParameter("api-version")
+//   @doc("EventHub configuration.")
+//   @body
+//   resource: EventHubConfig,
+// ): EventHubConfig;
+
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using custom operation signature for specific requirements"
+// @added(ApiVersions.v2025_05_20)
+// @doc("Get EventHub configuration.")
+// @route("/configurations/event-hub")
+// @get
+// op getEventHubConfig(
+//   @doc("API version parameter")
+//   @query("api-version")
+//   apiVersion: string,
+// ): {
+//   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Union of literals should include the base scalar as a variant to make it an open enum. (ex: `union Choice { Yes: " yes ", No: " no ", string };`)."
+//   @statusCode status: 200;
+
+//   @doc("EventHub configuration.")
+//   @added(ApiVersions.v2025_05_20)
+//   @body
+//   resource?: EventHubConfig;
+// };
+
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using custom operation signature for specific requirements"
+// @added(ApiVersions.v2025_05_20)
+// @doc("Delete EventHub configuration.")
+// @route("/configurations/event-hub")
+// @delete
+// op deleteEventHubConfig(
+//   @doc("API version parameter")
+//   @query("api-version")
+//   apiVersion: string,
+// ): {
+//   @statusCode status: 204;
+// };
+
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using custom operation signature for specific requirements"
+// @added(ApiVersions.v2025_05_20)
+// @doc("Send ping to EventHub to verify configuration.")
+// @route("/configurations/event-hub:ping")
+// @post
+// op pingEventHub(
+//   @doc("API version parameter")
+//   @query("api-version")
+//   apiVersion: string,
+// ): {
+//   @statusCode status: 200;
+// };
