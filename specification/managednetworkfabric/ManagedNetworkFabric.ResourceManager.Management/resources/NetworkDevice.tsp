@@ -78,9 +78,7 @@ interface NetworkDevices {
   runRoCommand is ArmResourceActionAsync<
     NetworkDevice,
     DeviceRoCommand,
-    never,
-    LroHeaders = ArmLroLocationHeader<FinalResult =  CommonPostActionResponseForDeviceROCommandsOperationStatusResult> &
-      ArmAsyncOperationHeader
+    CommonPostActionResponseForDeviceROCommandsOperationStatusResult
   >;
 
   @doc("Run the RW Command on the Network Device.")
