@@ -80,6 +80,7 @@ interface NetworkDevices {
     DeviceRoCommand,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = CommonPostActionResponseForDeviceROCommandsOperationStatusResult> 
+    & Azure.Core.FoundationsRetryAfterHeader
   >;
 
   @doc("Run the RW Command on the Network Device.")
