@@ -1503,30 +1503,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NetworkSecurityPerimeterProperties",
           "description": "The network security perimeter properties"
-        },
-        "location": {
-          "type": "string",
-          "description": "The location in which NSP is created."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Network security perimeter identifier."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
         }
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "The Network Security Perimeter resource"
@@ -1570,6 +1551,14 @@
         "id": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
           "description": "Network security perimeter identifier."
         },
         "tags": {
@@ -1589,26 +1578,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspProfileProperties",
           "description": "Properties of the network security perimeter profile"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the profile resource that is unique within a perimeter. This name can be used to access the resource."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Identifier of the network security perimeter profile in ARM id format."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
         }
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "The network security perimeter profile resource"
@@ -1653,26 +1627,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspAccessRuleProperties",
           "description": "Properties of the NSP access rule."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the access rule that is unique within a profile. This name can be used to access the resource."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "NSP access rule identifier."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
         }
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "The NSP access rule resource"
@@ -1774,6 +1733,14 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Resources/subscriptions"
+              }
+            ]
+          },
           "description": "Subscription id in the ARM id format."
         }
       }
@@ -1784,6 +1751,14 @@
         "id": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
           "description": "NSP id in the ARM id format."
         },
         "perimeterGuid": {
@@ -1805,26 +1780,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspAssociationProperties",
           "description": "Properties of the NSP resource association."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "NSP resource association identifier."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
         }
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "The NSP resource association resource"
@@ -1910,11 +1870,6 @@
           "description": "Resource type."
         }
       },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/Resource"
-        }
-      ],
       "description": "Resource that is onboarded to use network security perimeter. Also referred as perimeter associable resource."
     },
     "PerimeterAssociableResourcesListResult": {
@@ -2009,7 +1964,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "The network security perimeter link resource"
@@ -2041,6 +1996,14 @@
         },
         "autoApprovedRemotePerimeterResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
           "description": "Perimeter ARM Id for the remote NSP with which the link gets created in Auto-approval mode. It should be used when the NSP admin have Microsoft.Network/networkSecurityPerimeters/linkPerimeter/action permission on the remote NSP resource.",
           "x-ms-mutability": [
             "read",
@@ -2124,7 +2087,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "The network security perimeter linkReference resource"
@@ -2157,6 +2120,14 @@
         "remotePerimeterResourceId": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
           "description": "Perimeter ARM Id for the remote NSP with which the link is created."
         },
         "remotePerimeterGuid": {
@@ -2236,7 +2207,7 @@
       "description": "The NSP logging configuration",
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
