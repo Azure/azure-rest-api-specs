@@ -22,6 +22,9 @@ model EvaluationResult {
   @doc("Type of Evaluation result")
   ResultType?: ResultType;
 
+  @doc("Aggregated metrics")
+  Metrics?: Record<float64>;
+
   @doc("Blob URI")
   BlobUri?: string;
 
@@ -35,14 +38,14 @@ union ResultType {
   string,
 
   @doc("Benchmark result")
-  Benchmark: "Benchmark";
+  Benchmark: "Benchmark",
 
   @doc("Evaluations Result")
-  Evaluation: "Evaluation";
+  Evaluation: "Evaluation",
 
   @doc("Red Team Result")
-  Redteam: "Redteam";
+  Redteam: "Redteam",
 
   @doc("Simulation Result")
-  Simulation: "Simulation";
+  Simulation: "Simulation",
 }

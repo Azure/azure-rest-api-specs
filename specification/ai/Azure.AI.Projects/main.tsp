@@ -21,11 +21,11 @@ namespace Azure.AI {
 
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
 @useAuth(
-  BearerAuth | OAuth2Auth<[
+  OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
+      scopes: ["https://cognitiveservices.azure.com/.default"], // TODO: Replace with ["https://ai.azure.com/.default"]
     }
   ]>
 )
@@ -35,7 +35,10 @@ namespace Azure.AI {
   "Azure AI",
   {
     @doc("""
-      Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/api/projects/<project-name>
+      Project endpoint. In the form "https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/_project"
+      if your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form 
+      "https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/<your-project-name>" if you want to explicitly
+      specify the Foundry Project name.
       """)
     endpoint: url,
   }

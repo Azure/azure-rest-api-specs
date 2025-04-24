@@ -42,7 +42,7 @@ interface RedTeams {
       @body
       RedTeam: RedTeam;
     },
-    RedTeam
+    ResourceCreatedResponse<RedTeam>
   >;
 
   // Private Upload API
@@ -82,7 +82,6 @@ interface RedTeams {
     RedTeam
   >;
 
-
   // Simulation Private APIs
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get the jailbreak dataset with type.")
@@ -98,7 +97,7 @@ interface RedTeams {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  #suppress "@azure-tools/typespec-azure-core/no-query-explode" 
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode"
   @doc("Get the attack objectives.")
   @route("/simulation/attackobjectives")
   @get
