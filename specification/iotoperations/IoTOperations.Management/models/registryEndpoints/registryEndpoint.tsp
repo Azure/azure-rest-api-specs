@@ -32,7 +32,6 @@ model RegistryEndpointResource is ProxyResource<RegistryEndpointProperties> {
 @doc("RegistryEndpoint properties")
 @added(Versions.`2025-07-01-preview`)
 model RegistryEndpointProperties {
-  
   @doc("The Azure Container Registry endpoint hostname.")
   @pattern("^[a-z0-9]+\\.azurecr\\.io$")
   @maxLength(63)

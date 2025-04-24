@@ -22,9 +22,7 @@ model Authentication {
 @added(Versions.`2025-07-01-preview`)
 union AuthenticationMethod {
   string,
-
   ManagedIdentityMethod,
-
   AnonymousMethod,
 }
 
@@ -73,6 +71,4 @@ model AnonymousAuthentication extends Authentication {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRDs are modeled as empty models"
 @doc("Anonymous authentication properties")
 @added(Versions.`2025-07-01-preview`)
-model AnonymousSettings {
- 
-}
+model AnonymousSettings {}
