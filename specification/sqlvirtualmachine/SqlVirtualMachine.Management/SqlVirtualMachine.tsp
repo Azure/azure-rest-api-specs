@@ -59,7 +59,7 @@ interface SqlVirtualMachines {
     SqlVirtualMachine,
     PatchModel = SqlVirtualMachineUpdate,
     Response = ArmResponse<SqlVirtualMachine>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = SqlVirtualMachine> &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = SqlVirtualMachine> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
