@@ -8,12 +8,12 @@ using TypeSpec.Versioning;
 
 using Azure.ResourceManager;
 
-namespace Microsoft.IoTOperations.DataflowGraphs;
+namespace Microsoft.IoTOperations;
 
 @doc("Instance dataflowEndpoint resource")
 @added(Versions.`2025-07-01-preview`)
 @parentResource(DataflowProfileResource)
-model DataflowGraphResource is ProxyResource<Properties> {
+model DataflowGraphResource is ProxyResource<DataflowGraphProperties> {
   @doc("Name of Instance dataflowEndpoint resource")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("dataflowGraphName")
@@ -31,7 +31,7 @@ model DataflowGraphResource is ProxyResource<Properties> {
 
 @doc("DataflowGraph properties")
 @added(Versions.`2025-07-01-preview`)
-model Properties {
+model DataflowGraphProperties {
   @doc("The mode of the dataflow graph.")
   mode?: OperationalMode; // Should this be optional?
 
@@ -43,11 +43,11 @@ model Properties {
 
   @doc("List of nodes in the dataflow graph.")
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  nodes: Node[];
+  nodes: DataflowGraphNode[];
 
   @doc("List of connections between nodes in the dataflow graph.")
   @OpenAPI.extension("x-ms-identifiers", #[])
-  nodeConnections: NodeConnection[];
+  nodeConnections: DataflowGraphNodeConnection[];
 
   @doc("The provisioning state of the dataflow graph.")
   @visibility(Lifecycle.Read)
@@ -57,18 +57,18 @@ model Properties {
 @doc("DataflowGraph node properties.")
 @added(Versions.`2025-07-01-preview`)
 @discriminator("type")
-model Node {
+model DataflowGraphNode {
   @doc("Name of the node.")
   @maxLength(64)
   name: string;
 
   @doc("Type of the node.")
-  type: NodeType;
+  type: DataflowGraphNodeType;
 }
 
 @doc("DataflowGraph node types.")
 @added(Versions.`2025-07-01-preview`)
-union NodeType {
+union DataflowGraphNodeType {
   string,
 
   @doc("Dataflow source node.")
@@ -83,17 +83,17 @@ union NodeType {
 
 @doc("DataflowGraph source node properties.")
 @added(Versions.`2025-07-01-preview`)
-model SourceNode extends Node {
+model DataflowGraphSourceNode extends DataflowGraphNode {
   @doc("Type of the source node.")
-  type: NodeType.Source;
+  type: DataflowGraphNodeType.Source;
 
   @doc("Source configuration.")
-  sourceSettings: SourceSettings;
+  sourceSettings: DataflowGraphSourceSettings;
 }
 
 @doc("DataflowGraph source node settings.")
 @added(Versions.`2025-07-01-preview`)
-model SourceSettings {
+model DataflowGraphSourceSettings {
   @doc("The endpoint reference for the source.")
   endpointRef: string; // should we leverage k8s-bridge translation here? https://armwiki.azurewebsites.net/rpaas/arc-rp/conversion/SchemaTranslation.html#kubernetes-bridge-custom-filters
 
@@ -103,17 +103,17 @@ model SourceSettings {
 
 @doc("DataflowGraph graph node properties.")
 @added(Versions.`2025-07-01-preview`)
-model GraphNode extends Node {
+model DataflowGraphGraphNode extends DataflowGraphNode {
   @doc("Type of the graph node.")
-  type: NodeType.Graph;
+  type: DataflowGraphNodeType.Graph;
 
   @doc("Graph configuration.")
-  graphSettings: GraphSettings;
+  graphSettings: DataflowGraphNodeGraphSettings;
 }
 
 @doc("DataflowGraph graph node settings.")
 @added(Versions.`2025-07-01-preview`)
-model GraphSettings { // Maybe this resource isn't needed?
+model DataflowGraphNodeGraphSettings { // Maybe this resource isn't needed?
   @doc("Reference to the registry endpoint for pulling the artifact.")
   registryEndpointRef: string; // should we leverage k8s-bridge translation here? https://armwiki.azurewebsites.net/rpaas/arc-rp/conversion/SchemaTranslation.html#kubernetes-bridge-custom-filters
 
@@ -122,12 +122,12 @@ model GraphSettings { // Maybe this resource isn't needed?
 
   @doc("Configuration key-value pairs.")
   @OpenAPI.extension("x-ms-identifiers", #["key"])
-  configuration?: GraphNodeConfiguration[];
+  configuration?: DataflowGraphGraphNodeConfiguration[];
 }
 
 @doc("DataflowGraph graph node configuration.")
 @added(Versions.`2025-07-01-preview`)
-model GraphNodeConfiguration {
+model DataflowGraphGraphNodeConfiguration {
   @doc("Key of the configuration.")
   @maxLength(64)
   key: string;
@@ -138,17 +138,17 @@ model GraphNodeConfiguration {
 
 @doc("DataflowGraph destination node properties.")
 @added(Versions.`2025-07-01-preview`)
-model DestinationNode extends Node {
+model DatafloGraphDestinationNode extends DataflowGraphNode {
   @doc("Type of the destination node.")
-  type: NodeType.Destination;
+  type: DataflowGraphNodeType.Destination;
 
   @doc("Destination configuration.")
-  destinationSettings: DestinationSettings;
+  destinationSettings: DataflowGraphDestinationNodeSettings;
 }
 
 @doc("DataflowGraph destination node settings.")
 @added(Versions.`2025-07-01-preview`)
-model DestinationSettings {
+model DataflowGraphDestinationNodeSettings {
   @doc("The endpoint reference for the destination.")
   endpointRef: string; // should we leverage k8s-bridge translation here? https://armwiki.azurewebsites.net/rpaas/arc-rp/conversion/SchemaTranslation.html#kubernetes-bridge-custom-filters
 
@@ -156,14 +156,14 @@ model DestinationSettings {
   dataDestination: string;
 
   @doc("Output schema settings.")
-  outputSchemaSettings?: SchemaSettings;
+  outputSchemaSettings?: DataflowGraphSchemaSettings;
 }
 
 @doc("DataflowGraph output schema settings.")
 @added(Versions.`2025-07-01-preview`)
-model SchemaSettings {
+model DataflowGraphSchemaSettings {
   @doc("Output serialization format.")
-  serializationFormat: SerializationFormat;
+  serializationFormat: DataflowGraphSerializationFormat;
 
   @doc("Reference to the schema that describes the output of the transformation.")
   schemaRef?: string;
@@ -171,37 +171,37 @@ model SchemaSettings {
 
 @doc("Serialization format for dataflow graph.")
 @added(Versions.`2025-07-01-preview`)
-union SerializationFormat { // Is this net new or should we just update TransformationSerializationFormat with Avro?
+union DataflowGraphSerializationFormat { // Is this net new or should we just update TransformationSerializationFormat with Avro?
   TransformationSerializationFormat,
 
   @doc("Avro serialization format.")
   Avro: "Avro",
 }
 
-@doc("DataflowGraph Node Connection")
+@doc("DataflowGraph DataflowGraphNode Connection")
 @added(Versions.`2025-07-01-preview`)
-model NodeConnection {
+model DataflowGraphNodeConnection {
   @doc("Information about the source node.")
-  from: ConnectionInput;
+  from: DataflowGraphConnectionInput;
 
   @doc("Information about the destination node.")
-  to: ConnectionOutput;
+  to: DataflowGraphConnectionOutput;
 }
 
-@doc("DataflowGraph Node Connection Input")
+@doc("DataflowGraph DataflowGraphNode Connection Input")
 @added(Versions.`2025-07-01-preview`)
-model ConnectionInput {
+model DataflowGraphConnectionInput {
   @doc("Name of the source node.")
   @maxLength(64)
   name: string;
 
   @doc("Schema settings for the source node.")
-  schema: SchemaSettings;
+  schema: DataflowGraphSchemaSettings;
 }
 
-@doc("DataflowGraph Node Connection Output")
+@doc("DataflowGraph DataflowGraphNode Connection Output")
 @added(Versions.`2025-07-01-preview`)
-model ConnectionOutput {
+model DataflowGraphConnectionOutput {
   @doc("Name of the destination node.")
   @maxLength(64)
   name: string;

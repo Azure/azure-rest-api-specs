@@ -18,15 +18,4 @@ model DataflowEndpointOpenTelemetry {
 
   @doc("TLS configuration.")
   tls?: TlsProperties;
-
-  @doc("Properties of the thing")
-  @added(Versions.`2025-07-01-preview`)
-  properties: Properties;
-}
-
-@doc("Properties bag")
-@added(Versions.`2025-07-01-preview`)
-model Properties {
-  @doc("name set")
-  nameSet: string;
 }
