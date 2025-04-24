@@ -16,7 +16,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using LiftrBase;
 using LiftrBase.Data;
 
 @armProviderNamespace
