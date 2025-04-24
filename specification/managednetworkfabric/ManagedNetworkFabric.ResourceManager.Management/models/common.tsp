@@ -507,7 +507,6 @@ model DeviceRoCommand {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
 @doc("The current status of an async operation.")
-@added(Versions.v2024_06_15_preview)
 model CommonPostActionResponseForDeviceROCommandsOperationStatusResult {
   ...ErrorResponse;
 
