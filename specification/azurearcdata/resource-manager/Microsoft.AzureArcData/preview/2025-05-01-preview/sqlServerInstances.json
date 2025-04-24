@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-09-01-preview",
+    "version": "2025-05-01-preview",
     "title": "AzureArcDataManagementClient",
     "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
   },
@@ -31,13 +31,14 @@
           "type": "string",
           "description": "SQL Server version.",
           "enum": [
+            "Unknown",
             "SQL Server 2012",
             "SQL Server 2014",
             "SQL Server 2016",
             "SQL Server 2017",
             "SQL Server 2019",
             "SQL Server 2022",
-            "Unknown"
+            "SQL Server 2025"
           ],
           "x-ms-enum": {
             "name": "sqlVersion",
@@ -54,7 +55,8 @@
             "Web",
             "Developer",
             "Express",
-            "Business Intelligence"
+            "Business Intelligence",
+            "Standard Developer"
           ],
           "x-ms-enum": {
             "name": "editionType",
@@ -64,6 +66,11 @@
         "containerResourceId": {
           "type": "string",
           "description": "ARM Resource id of the container resource (Azure Arc for Servers).",
+          "readOnly": true
+        },
+        "vmId": {
+          "type": "string",
+          "description": "The unique ID of the hybrid machine that this resource belongs to.",
           "readOnly": true
         },
         "createTime": {
@@ -159,7 +166,8 @@
             "ServerCAL",
             "LicenseOnly",
             "PAYG",
-            "Paid"
+            "Paid",
+            "FabricCapacity"
           ],
           "x-ms-enum": {
             "name": "arcSqlServerLicenseType",
@@ -274,6 +282,12 @@
           "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
           "$ref": "#/definitions/ServiceType"
         },
+        "maxServerMemoryMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "max server memory (MB) value configured for this instance.",
+          "readOnly": true
+        },
         "isMicrosoftPkiCertTrustConfigured": {
           "type": "boolean",
           "description": "Indicates whether Microsoft PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
@@ -283,6 +297,10 @@
           "type": "boolean",
           "description": "Indicates whether DigiCert PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
           "readOnly": true
+        },
+        "authentication": {
+          "description": "Authentication related configuration for the SQL Server Instance.",
+          "$ref": "#/definitions/Authentication"
         }
       }
     },
@@ -294,13 +312,14 @@
           "type": "string",
           "description": "SQL Server version.",
           "enum": [
+            "Unknown",
             "SQL Server 2012",
             "SQL Server 2014",
             "SQL Server 2016",
             "SQL Server 2017",
             "SQL Server 2019",
             "SQL Server 2022",
-            "Unknown"
+            "SQL Server 2025"
           ],
           "x-ms-enum": {
             "name": "sqlVersion",
@@ -317,7 +336,8 @@
             "Web",
             "Developer",
             "Express",
-            "Business Intelligence"
+            "Business Intelligence",
+            "Standard Developer"
           ],
           "x-ms-enum": {
             "name": "editionType",
@@ -327,6 +347,11 @@
         "containerResourceId": {
           "type": "string",
           "description": "ARM Resource id of the container resource (Azure Arc for Servers).",
+          "readOnly": true
+        },
+        "vmId": {
+          "type": "string",
+          "description": "The unique ID of the hybrid machine that this resource belongs to.",
           "readOnly": true
         },
         "createTime": {
@@ -422,7 +447,8 @@
             "ServerCAL",
             "LicenseOnly",
             "PAYG",
-            "Paid"
+            "Paid",
+            "FabricCapacity"
           ],
           "x-ms-enum": {
             "name": "arcSqlServerLicenseType",
@@ -533,19 +559,26 @@
           "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
           "$ref": "#/definitions/ServiceType"
         },
+        "authentication": {
+          "description": "Authentication related configuration for the SQL Server Instance.",
+          "$ref": "#/definitions/Authentication"
+        },
         "databaseMirroringEndpoint": {
           "description": "Database mirroring endpoint related properties.",
           "$ref": "#/definitions/DBMEndpoint"
         },
         "isMicrosoftPkiCertTrustConfigured": {
           "type": "boolean",
-          "description": "Indicates whether Microsoft PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
-          "readOnly": true
+          "description": "Indicates whether Microsoft PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains."
         },
         "isDigiCertPkiCertTrustConfigured": {
           "type": "boolean",
-          "description": "Indicates whether DigiCert PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
-          "readOnly": true
+          "description": "Indicates whether DigiCert PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains."
+        },
+        "maxServerMemoryMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "max server memory (MB) value configured for this instance."
         }
       }
     },
@@ -608,6 +641,12 @@
           "type": "string",
           "description": "Name of the certificate.",
           "readOnly": true
+        },
+        "certificateExpiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The certificate expiry date",
+          "readOnly": true
         }
       }
     },
@@ -640,6 +679,30 @@
           "items": {
             "type": "string"
           }
+        },
+        "hostIPAddresses": {
+          "type": "array",
+          "description": "The IP addresses and subnet masks associated with the SQL Failover Cluster Instance on this host.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/hostIPAddressInformation"
+          }
+        }
+      }
+    },
+    "hostIPAddressInformation": {
+      "type": "object",
+      "description": "IP address and subnet mask.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet mask",
+          "readOnly": true
         }
       }
     },
@@ -730,6 +793,43 @@
         }
       }
     },
+    "DiskSizes": {
+      "description": "disk size values",
+      "type": "object",
+      "properties": {
+        "diskType": {
+          "type": "string",
+          "description": "Type of managed disk."
+        },
+        "redundancy": {
+          "type": "string",
+          "description": "Redundancy option."
+        },
+        "size": {
+          "type": "string",
+          "description": "Size of the managed disk - e.g. P30, P40."
+        },
+        "caching": {
+          "type": "string",
+          "description": "Caching configuration - e.g. read only caching"
+        },
+        "maxSizeInGib": {
+          "type": "number",
+          "format": "float",
+          "description": "max disk size in GiB."
+        },
+        "maxThroughputInMbps": {
+          "type": "number",
+          "format": "float",
+          "description": "max throughput in MB/s."
+        },
+        "maxIops": {
+          "type": "number",
+          "format": "float",
+          "description": "max IO requirements/s (IOPS)."
+        }
+      }
+    },
     "Migration": {
       "description": "Migration related configuration.",
       "type": "object",
@@ -754,11 +854,22 @@
           "description": "The time when Migration Assessment Report upload was last performed.",
           "readOnly": true
         },
+        "version": {
+          "type": "string",
+          "description": "version of this migration assessment report - to be passed by the migration assessment engine.",
+          "readOnly": true
+        },
+        "settings": {
+          "$ref": "#/definitions/MigrationAssessmentSettings"
+        },
         "serverAssessments": {
           "$ref": "#/definitions/ServerAssessments"
         },
         "skuRecommendationResults": {
           "$ref": "#/definitions/SkuRecommendationResults"
+        },
+        "impactedObjectsSummary": {
+          "$ref": "./common.json#/definitions/ImpactedObjectsSuitabilitySummary"
         }
       }
     },
@@ -807,6 +918,118 @@
             "description": "Power BI Report Server."
           }
         ]
+      }
+    },
+    "MiLinkAssessmentCategory": {
+      "description": "Validation category for the MI Link prerequisites assessment.",
+      "type": "string",
+      "enum": [
+        "SqlInstance",
+        "SqlInstanceDatabase",
+        "ManagedInstance",
+        "ManagedInstanceDatabase",
+        "ManagedInstanceCrossValidation",
+        "Certificates",
+        "BoxToMiNetworkConnectivity",
+        "MiToBoxNetworkConnectivity",
+        "Dag"
+      ],
+      "x-ms-enum": {
+        "name": "miLinkAssessmentCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SqlInstance",
+            "description": "Assessments of the given instance on the on-premise SQL Server (box)."
+          },
+          {
+            "value": "SqlInstanceDatabase",
+            "description": "Assessments of the database(s) on the given instance on the on-premise SQL Server (box)."
+          },
+          {
+            "value": "ManagedInstance",
+            "description": "Assessments of the Managed Instance."
+          },
+          {
+            "value": "ManagedInstanceDatabase",
+            "description": "Assessments of the database(s) on the Managed Instance."
+          },
+          {
+            "value": "ManagedInstanceCrossValidation",
+            "description": "Assessments that use data from both the Managed Instance and the given instance of the on-premise SQL Server (box) for the validations."
+          },
+          {
+            "value": "Certificates",
+            "description": "Assessments of the necessary certificates configuration."
+          },
+          {
+            "value": "BoxToMiNetworkConnectivity",
+            "description": "Assessment of network connectivity from the on-premise SQL Server (box) to the Managed Instance."
+          },
+          {
+            "value": "MiToBoxNetworkConnectivity",
+            "description": "Assessments of network connectivity from the Managed Instance to the on-premise SQL Server (box)."
+          },
+          {
+            "value": "Dag",
+            "description": "Assessments of the Distributed Availability Group."
+          }
+        ]
+      }
+    },
+    "MigrationAssessmentSettings": {
+      "description": "Settings impacting the migration assessment computation - configurable with some default values if not set.",
+      "type": "object",
+      "properties": {
+        "targetLocation": {
+          "type": "string",
+          "description": "The target location for Azure SQL SKU for migration. - default West US"
+        },
+        "percentile": {
+          "type": "number",
+          "format": "float",
+          "description": "Indicate the percentile value for the performance sample. (Default is 95th percentile)"
+        },
+        "lookbackPeriodInDays": {
+          "type": "number",
+          "format": "int32",
+          "description": "How far back to check the performance data - default is 30 (days)."
+        },
+        "strategy": {
+          "type": "string",
+          "description": "Minimize cost or Migrate to PaaS. - to evaluate based on the recommended strategy"
+        },
+        "currency": {
+          "type": "string",
+          "description": "currency to calculate prices - default USD."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "flat discount percentage to apply for the price - default 0"
+        },
+        "costOptions": {
+          "description": "Selected cost option value.",
+          "$ref": "#/definitions/CostOptionSelectedValues"
+        }
+      }
+    },
+    "CostOptionSelectedValues": {
+      "description": "Cost option value for the different cost factors selected.",
+      "type": "object",
+      "properties": {
+        "computeAndStorageCostOption": {
+          "type": "string",
+          "description": "selected cost saving option e.g. With1YearASPAndDevTest."
+        },
+        "sqlLicenseCostOption": {
+          "type": "string",
+          "description": "With Azure Hybrid Benefit(AHB) or not for SQL."
+        },
+        "windowsLicenseCostOption": {
+          "type": "string",
+          "description": "With Azure Hybrid Benefit(AHB) or not for Windows."
+        }
       }
     },
     "ServerAssessments": {
@@ -875,7 +1098,10 @@
           "$ref": "#/definitions/SkuRecommendationResultsNumberOfServerBlockerIssues"
         },
         "monthlyCost": {
-          "$ref": "#/definitions/SkuRecommendationResultsMonthlyCost"
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "monthlyCostOptions": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsMonthlyCostOptions"
         },
         "targetSku": {
           "type": "object",
@@ -904,6 +1130,36 @@
                   "description": "Indicates if zone redundancy is available for the target SKU."
                 }
               }
+            },
+            "computeSize": {
+              "type": "number",
+              "format": "int32",
+              "description": "Compute Size in vCores."
+            },
+            "storageMaxSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "max storage for this particular SKU, in MB."
+            },
+            "predictedDataSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "The predicted data size in MB in Azure SQL, will impact the billing cost."
+            },
+            "predictedLogSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "The predicted log size in MB in Azure SQL, will impact the billing cost."
+            },
+            "maxStorageIops": {
+              "type": "number",
+              "format": "float",
+              "description": "The max storage IOPS in Azure SQL, will impact the billing cost."
+            },
+            "maxThroughputMBps": {
+              "type": "number",
+              "format": "float",
+              "description": "The max throughput in Azure SQL, will impact the billing cost."
             }
           }
         }
@@ -920,7 +1176,10 @@
           "$ref": "#/definitions/SkuRecommendationResultsNumberOfServerBlockerIssues"
         },
         "monthlyCost": {
-          "$ref": "#/definitions/SkuRecommendationResultsMonthlyCost"
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "monthlyCostOptions": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsMonthlyCostOptions"
         },
         "targetSku": {
           "type": "object",
@@ -949,6 +1208,36 @@
                   "description": "Indicates if zone redundancy is available for the target SKU."
                 }
               }
+            },
+            "computeSize": {
+              "type": "number",
+              "format": "int32",
+              "description": "Compute Size in vCores."
+            },
+            "storageMaxSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "max storage for this particular SKU, in MB."
+            },
+            "predictedDataSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "The predicted data size in MB in Azure SQL, will impact the billing cost."
+            },
+            "predictedLogSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "The predicted log size in MB in Azure SQL, will impact the billing cost."
+            },
+            "maxStorageIops": {
+              "type": "number",
+              "format": "float",
+              "description": "The max storage IOPS in Azure SQL, will impact the billing cost."
+            },
+            "maxThroughputMBps": {
+              "type": "number",
+              "format": "float",
+              "description": "The max throughput in Azure SQL, will impact the billing cost."
             }
           }
         }
@@ -965,7 +1254,10 @@
           "$ref": "#/definitions/SkuRecommendationResultsNumberOfServerBlockerIssues"
         },
         "monthlyCost": {
-          "$ref": "#/definitions/SkuRecommendationResultsMonthlyCost"
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "monthlyCostOptions": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsMonthlyCostOptions"
         },
         "targetSku": {
           "type": "object",
@@ -985,6 +1277,78 @@
                   "description": "The virtual machine family of the target SKU."
                 }
               }
+            },
+            "computeSize": {
+              "type": "number",
+              "format": "int32",
+              "description": "Compute Size in vCores."
+            },
+            "predictedDataSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "The predicted data size in MB in Azure SQL, will impact the billing cost."
+            },
+            "predictedLogSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "The predicted log size in MB in Azure SQL, will impact the billing cost."
+            },
+            "virtualMachineSize": {
+              "type": "object",
+              "description": "size parameters for VM size.",
+              "properties": {
+                "virtualMachineFamily": {
+                  "type": "string",
+                  "description": "Virtual Machine Family, for example : standardMSFamily"
+                },
+                "sizeName": {
+                  "type": "string",
+                  "description": "VM Size, for example : M64ls"
+                },
+                "computeSize": {
+                  "type": "number",
+                  "format": "int32",
+                  "description": "Compute Size in vCores."
+                },
+                "azureSkuName": {
+                  "type": "string",
+                  "description": "Virtual Machine SKU name,: Eg : Standard_F16s."
+                },
+                "vCPUsAvailable": {
+                  "type": "number",
+                  "format": "int32",
+                  "description": "Available vCores. This can be less than the vCores in the Constrained vCPU VM Sizes."
+                },
+                "maxNetworkInterfaces": {
+                  "type": "number",
+                  "format": "int32",
+                  "description": "Max network interfaces."
+                }
+              }
+            },
+            "dataDiskSizes": {
+              "description": "Data disk sizes.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiskSizes"
+              },
+              "x-ms-identifiers": []
+            },
+            "logDiskSizes": {
+              "description": "Log disk sizes.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiskSizes"
+              },
+              "x-ms-identifiers": []
+            },
+            "tempDbDiskSizes": {
+              "description": "temp db disk sizes.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiskSizes"
+              },
+              "x-ms-identifiers": []
             }
           }
         }
@@ -994,27 +1358,6 @@
       "description": "Number of blocker issues to fix before migrating to the target platform.",
       "type": "integer",
       "format": "int32"
-    },
-    "SkuRecommendationResultsMonthlyCost": {
-      "description": "The Monthly cost of the particular SKU.",
-      "type": "object",
-      "properties": {
-        "computeCost": {
-          "format": "float",
-          "description": "Represents the Cost of Compute.",
-          "type": "number"
-        },
-        "storageCost": {
-          "format": "float",
-          "description": "Represents the Cost of Storage.",
-          "type": "number"
-        },
-        "totalCost": {
-          "format": "float",
-          "description": "Represents the Total Cost.",
-          "type": "number"
-        }
-      }
     },
     "SqlServerInstanceTelemetryRequest": {
       "description": "The Arc SQL Server instance telemetry retrieval request.",
@@ -1387,18 +1730,32 @@
             "modelAsString": true
           }
         },
-        "databaseName": {
-          "type": "string",
-          "description": "The name of the database to be replicated to the Azure SQL Managed Instance."
+        "databaseNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of strings, where each value represents the name of a database to be replicated to the Azure SQL Managed Instance."
         },
         "availabilityGroupName": {
           "type": "string",
           "description": "The name of the availability group to be used for the database replication."
+        },
+        "assessmentCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MiLinkAssessmentCategory"
+          },
+          "description": "An array of strings, where each value represents the category of the assessment to be run. If this field is not provided, all assessment categories will be run."
+        },
+        "sqlServerIpAddress": {
+          "type": "string",
+          "description": "The IP address of the SQL Server instance."
         }
       },
       "required": [
         "azureManagedInstanceResourceId",
-        "databaseName",
+        "databaseNames",
         "availabilityGroupName"
       ]
     },
@@ -1427,19 +1784,7 @@
           "description": "The name of the requirement."
         },
         "category": {
-          "type": "string",
-          "description": "The category of the requirement.",
-          "enum": [
-            "SQLServer",
-            "ManagedInstance",
-            "ManagedInstanceCrossValidation",
-            "Dag",
-            "Certificates"
-          ],
-          "x-ms-enum": {
-            "name": "assessmentCategory",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/MiLinkAssessmentCategory"
         },
         "status": {
           "type": "string",
@@ -1461,6 +1806,53 @@
         "additionalInformation": {
           "type": "string",
           "description": "Additional details about the check, including any recommended actions."
+        },
+        "failingDbs": {
+          "type": "array",
+          "description": "List of names of databases that are failing the given assessment.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Authentication": {
+      "description": "Authentication related configuration for the SQL Server Instance.",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Mode of authentication in SqlServer.",
+          "enum": [
+            "Mixed",
+            "Windows",
+            "Undefined"
+          ],
+          "x-ms-enum": {
+            "name": "mode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Mixed",
+                "description": "Mixed mode authentication for SQL Server which includes windows and SQL Authentication."
+              },
+              {
+                "value": "Windows",
+                "description": "Windows Authentication for SQL Server."
+              },
+              {
+                "value": "Undefined",
+                "description": "Used for scenarios were the mode cannot be determined."
+              }
+            ]
+          }
+        },
+        "sqlServerEntraIdentity": {
+          "type": "array",
+          "description": "Entra Authentication configuration for the SQL Server Instance.",
+          "items": {
+            "$ref": "./common.json#/definitions/EntraAuthentication"
+          }
         }
       }
     }
