@@ -5677,6 +5677,14 @@
             "name"
           ]
         },
+        "nodeConnections": {
+          "type": "array",
+          "description": "List of connections between nodes in the dataflow graph.",
+          "items": {
+            "$ref": "#/definitions/DataflowGraphs.NodeConnection"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the dataflow graph.",
@@ -5685,7 +5693,8 @@
       },
       "required": [
         "profileRef",
-        "nodes"
+        "nodes",
+        "nodeConnections"
       ]
     },
     "DataflowGraphs.SchemaSettings": {

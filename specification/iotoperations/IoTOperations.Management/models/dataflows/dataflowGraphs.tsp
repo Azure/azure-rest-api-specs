@@ -45,6 +45,10 @@ model Properties {
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   nodes: Node[];
 
+  @doc("List of connections between nodes in the dataflow graph.")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  nodeConnections: NodeConnection[];
+
   @doc("The provisioning state of the dataflow graph.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
