@@ -41,6 +41,6 @@ input-file:
 suppressions:
   - code: LintDiff
     from: azure-ai-projects-1dp.json
-    where: $.paths.["/evaluations/runs:runAgent"].post.operationId
+    where: $.paths["/evaluations/runs:runAgent"].post.operationId
     reason: False alert. Evaluation should appear after underscore for clarity's sake.
 ```
