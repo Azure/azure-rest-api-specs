@@ -34,7 +34,7 @@ tag: package-preview-2025-05-01
 
 These settings apply only when `--tag=package-preview-2025-05-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-05-01-preview'
+```yaml $(tag) == 'package-preview-2025-05-01'
 input-file:
   - Microsoft.DocumentDB/preview/2025-05-01-preview/chaosFault.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/copyJobs.json
