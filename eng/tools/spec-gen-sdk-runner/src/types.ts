@@ -39,4 +39,6 @@ export interface SpecGenSdkArtifactInfo {
   language?: string;
   labelAction?: boolean;
   isSpecGenSdkCheckRequired?: boolean;
+  stagedArtifactsFolder?: string;
+  serviceNames?: string;
 }

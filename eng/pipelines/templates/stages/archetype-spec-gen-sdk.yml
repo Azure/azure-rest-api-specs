@@ -198,21 +198,10 @@ extends:
             displayName: 'Generate SDK'
 
           - pwsh: |
-              Write-Host "$(GeneratedSDK.ExecutionReportPath)"
-              $executionReportPath = "$(GeneratedSDK.ExecutionReportPath)"
-              if (Test-Path -Path $executionReportPath)
-              {
-                Write-Host "executionReportPath exists"
-                $executionReport = Get-Content -Path $executionReportPath
-                $executionReportObj = $executionReport | ConvertFrom-Json
-
-                Write-Host "stagedArtifactsFolder : $($executionReportObj.stagedArtifactsFolder)"
-                for-each ($pkg in $executionReportObj.packages)
-                {
-                  Write-Host "serviceName : $($pkg.$serviceName)"
-                }
-              }
-            displayName: "View Excecution Report"
+              Write-Host "Service Names: $(SpecGenSdkServiceNames)"
+              Write-Host "Staged SDK Folder: $(SpecGenSdkArtifactPath)"
+              exit 1
+            displayName: 'View SDK Generation Runtime Variables'
 
           - task: Powershell@2
             inputs:

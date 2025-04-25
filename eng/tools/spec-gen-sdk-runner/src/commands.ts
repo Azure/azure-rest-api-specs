@@ -89,6 +89,9 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let breakingChangeLabel = "";
   let executionReport;
   let changedSpecPathText = "";
+  let stagedArtifactsFolder = "out/spec-gen-sdk-artifact";
+  let serviceNames = "";
+
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
@@ -136,6 +139,17 @@ export async function generateSdkForSpecPr(): Promise<number> {
       // Read the execution report to determine if the generation was successful
       executionReport = getExecutionReport(commandInput);
       const executionResult = executionReport.executionResult;
+
+      if (executionReport.stagedArtifactsFolder) {
+        stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
+      }
+
+      for (const pkg of executionReport.packages) {
+        if (pkg.serviceName) {
+          serviceNames += `${pkg.serviceName},`;
+        }
+      }
+      
       [shouldLabelBreakingChange, breakingChangeLabel] = getBreakingChangeInfo(executionReport);
       logMessage(`Runner command execution result:${executionResult}`);
     } catch (error) {
@@ -149,6 +163,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
   const specGenSdkArtifactInfo: SpecGenSdkArtifactInfo = {
     managementPlane: managementPlaneSpecType,
     dataPlane: dataPlaneSpecType,
+    stagedArtifactsFolder: stagedArtifactsFolder,
+    serviceNames: serviceNames
   };
   statusCode =
     generateArtifact(
@@ -271,7 +287,6 @@ function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
     commandInput.workingFolder,
     `${commandInput.sdkRepoName}_tmp/execution-report.json`,
   );
-  console.log(`##vso[task.setVariable variable=GeneratedSDK.ExecutionReportPath]${executionReportPath}`);
   return JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
 }
 
@@ -488,7 +503,7 @@ function generateArtifact(
 ): number {
   const specGenSdkArtifactName = "spec-gen-sdk-artifact";
   const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
-  const specGenSdkArtifactPath = "out/spec-gen-sdk-artifact";
+  const specGenSdkArtifactPath = artifactInfo.stagedArtifactsFolder!;
   const specGenSdkArtifactAbsoluteFolder = path.join(
     commandInput.workingFolder,
     specGenSdkArtifactPath,
@@ -504,6 +519,7 @@ function generateArtifact(
       path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
       JSON.stringify(artifactInfo, undefined, 2),
     );
+    setVsoVariable("SpecGenSdkServiceNames", artifactInfo.serviceNames!);
     setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
     setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
     setVsoVariable("BreakingChangeLabelAction", shouldLabelBreakingChange ? "add" : "remove");
