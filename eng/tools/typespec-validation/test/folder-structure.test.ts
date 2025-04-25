@@ -693,11 +693,11 @@ options:
 
     it("should enable both validations when explicitly configured", async function () {
       // Setup mocks for successful validation of both structures
-      fileExistsSpy.mockImplementation(async (file: string) => {
+      fileExistsSpy.mockImplementation(async (_: string) => {
         return true;
       });
 
-      vi.mocked(globby.globby).mockImplementation(async (pattern) => {
+      vi.mocked(globby.globby).mockImplementation(async (_) => {
         return ["/gitroot/specification/foo/Foo.Management/tspconfig.yaml"];
       });
 
