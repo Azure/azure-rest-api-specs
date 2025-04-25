@@ -39,7 +39,7 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Files.getFile, "get", "python");
 @@access(Azure.AI.Agents.Files.getFileContent, Access.internal, "python");
 
-@@clientName(Azure.AI.Agents.Files, "GetFilesClient", "csharp");
+@@clientName(Azure.AI.Agents.Files, "FilesClient", "csharp");
 @@access(Azure.AI.Agents.Files.listFiles, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.Files.listFiles, "InternalListFiles", "csharp");
 @@clientName(Azure.AI.Agents.Files.uploadFile, "UploadFile", "csharp");
@@ -57,7 +57,7 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Messages.getMessage, "get", "python");
 @@clientName(Azure.AI.Agents.Messages.updateMessage, "update", "python");
 
-@@clientName(Azure.AI.Agents.Messages, "GetMessagesClient", "csharp");
+@@clientName(Azure.AI.Agents.Messages, "MessagesClient", "csharp");
 @@clientName(Azure.AI.Agents.Messages.createMessage, "CreateMessage", "csharp");
 @@access(Azure.AI.Agents.Messages.listMessages, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.Messages.listMessages,
@@ -77,7 +77,7 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Threads.updateThread, "update", "python");
 @@clientName(Azure.AI.Agents.Threads.deleteThread, "delete", "python");
 
-@@clientName(Azure.AI.Agents.Threads, "GetThreadsClient", "csharp");
+@@clientName(Azure.AI.Agents.Threads, "ThreadsClient", "csharp");
 @@clientName(Azure.AI.Agents.Threads.createThread, "CreateThread", "csharp");
 @@access(Azure.AI.Agents.Threads.listThreads, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.Threads.listThreads,
@@ -117,7 +117,7 @@ using Azure.AI.Agents;
 );
 @@clientName(Azure.AI.Agents.Runs.cancelRun, "cancel", "python");
 
-@@clientName(Azure.AI.Agents.Runs, "GetRunsClient", "csharp");
+@@clientName(Azure.AI.Agents.Runs, "RunsClient", "csharp");
 @@clientName(Azure.AI.Agents.Runs.createRun, "CreateRun", "csharp");
 @@access(Azure.AI.Agents.Runs.listRuns, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.Runs.listRuns, "InternalGetRuns", "csharp");
@@ -136,7 +136,7 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.RunSteps.getRunStep, "get", "python");
 @@clientName(Azure.AI.Agents.RunSteps.listRunSteps, "list", "python");
 
-@@clientName(Azure.AI.Agents.RunSteps, "GetRunStepsClient", "csharp");
+@@clientName(Azure.AI.Agents.RunSteps, "RunStepsClient", "csharp");
 @@clientName(Azure.AI.Agents.RunSteps.getRunStep, "GetRunStep", "csharp");
 @@access(Azure.AI.Agents.RunSteps.listRunSteps, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.RunSteps.listRunSteps,
@@ -163,7 +163,7 @@ using Azure.AI.Agents;
   "python"
 );
 
-@@clientName(Azure.AI.Agents.VectorStores, "GetVectorStoresClient", "csharp");
+@@clientName(Azure.AI.Agents.VectorStores, "VectorStoresClient", "csharp");
 @@clientName(Azure.AI.Agents.VectorStores.listVectorStores,
   "ListVectorStores",
   "csharp"
@@ -206,7 +206,7 @@ using Azure.AI.Agents;
   "python"
 );
 
-@@clientName(Azure.AI.Agents.FileBatches, "GetFileBatchesClient", "csharp");
+@@clientName(Azure.AI.Agents.FileBatches, "FileBatchesClient", "csharp");
 @@clientName(Azure.AI.Agents.FileBatches.createVectorStoreFileBatch,
   "CreateVectorStoreFileBatch",
   "csharp"
@@ -246,7 +246,7 @@ using Azure.AI.Agents;
 );
 
 @@clientName(Azure.AI.Agents.VectorStoreFiles,
-  "GetVectorStoreFilesClient",
+  "VectorStoreFilesClient",
   "csharp"
 );
 @@clientName(Azure.AI.Agents.VectorStoreFiles.listVectorStoreFiles,
