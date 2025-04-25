@@ -19,6 +19,16 @@ import {
 } from "./log.js";
 import { SpecGenSdkArtifactInfo, SpecGenSdkCmdInput, VsoLogs } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
+import {
+  getBreakingChangeInfo,
+  getExecutionReport,
+  getSpecPaths,
+  logIssuesToPipeline,
+  parseArguments,
+  prepareSpecGenSdkCommand,
+  processBreakingChangeLabelArtifacts,
+  setPipelineVariables,
+} from "./commandUtils.js";
 
 /**
  * Generate SDK for a single spec.
@@ -181,7 +191,6 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   let succeededCount = 0;
   let executionReport;
 
-  logMessage(`Testtetss`, LogLevel.Group);
   // Generate SDKs for each spec
   for (const specConfigPath of specConfigPaths) {
     logMessage(`Generating SDK from ${specConfigPath}`, LogLevel.Group);
@@ -295,12 +304,12 @@ export function setPipelineVariables(
  * @returns The spec-gen-sdk command input.
  */
 export function parseArguments(): SpecGenSdkCmdInput {
-  // --scp /mnt/vss/_work/1/s/azure-rest-api-specs 
-  // --sdp /mnt/vss/_work/1/s/azure-sdk-for-go 
-  // --wf /mnt/vss/_work/1/s 
-  // --lang azure-sdk-for-go 
-  // --commit 4f8a82159c81d23b1d77726ed0e8dab2e069cdaf 
-  // --spec-repo-url https://github.com/Azure/azure-rest-api-specs 
+  // --scp /mnt/vss/_work/1/s/azure-rest-api-specs
+  // --sdp /mnt/vss/_work/1/s/azure-sdk-for-go
+  // --wf /mnt/vss/_work/1/s
+  // --lang azure-sdk-for-go
+  // --commit 4f8a82159c81d23b1d77726ed0e8dab2e069cdaf
+  // --spec-repo-url https://github.com/Azure/azure-rest-api-specs
   // --pr-number 34043
   const __filename: string = fileURLToPath(import.meta.url);
   const __dirname: string = path.dirname(__filename);
