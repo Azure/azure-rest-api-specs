@@ -200,7 +200,7 @@ async function getSwagger(swaggerPath, readmeFolder, repoRoot, logger) {
  * @returns {Promise<Map<string, Set<string>>>}
  */
 async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
-  const initialSwagger = resolve(repoRoot, readmePath, swaggerPath);
+  const initialSwagger = join(readmePath, swaggerPath);
   const visited = new Set();
   const toVisit = new Set([initialSwagger]);
   const externalFileRefs = new Map();
@@ -220,12 +220,15 @@ async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
       .map(p => relative(repoRoot, p))
       .filter((p) => !visited.has(p) && !example(p));
 
+    // Add the ref to the dependency map for the current path
+    if (currentSwagger !== initialSwagger) { 
+      if (!externalFileRefs.has(currentSwagger)) {
+        externalFileRefs.set(currentSwagger, new Set());
+      }
+    }
+
     for (const ref of currentRefs) {
-      // Add the ref to the dependency map for the current path
-      if (currentSwagger !== initialSwagger) { 
-        if (!externalFileRefs.has(currentSwagger)) {
-          externalFileRefs.set(currentSwagger, new Set());
-        }
+      if (currentSwagger !== initialSwagger) {
         externalFileRefs.get(currentSwagger).add(ref);
       }
       
@@ -311,6 +314,9 @@ export function getAffectedSwaggers(swaggerFile, specModel) {
   if (affectedSwaggers.size === 0) {
     throw new Error(`No affected swaggers found in specModel for ${swaggerFile}`);
   }
+
+  // Add the existing swagger file to the affected swagger file list
+  affectedSwaggers.add(swaggerFile);
 
   return affectedSwaggers;
 }
