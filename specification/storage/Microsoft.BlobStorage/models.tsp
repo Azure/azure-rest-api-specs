@@ -908,7 +908,9 @@ model ListBlobsFlatSegmentResponse {
 @Xml.name("Blobs")
 model BlobFlatListSegment {
   /** The blob items. */
-  @Xml.name("BlobItems") blobItems: BlobItemInternal[];
+  @pageItems
+  @Xml.name("BlobItems")
+  blobItems: BlobItemInternal[];
 }
 
 /** Represents a page list. */
@@ -1924,7 +1926,7 @@ model BlobPrefix {
 @Xml.name("Blobs")
 model BlobHierarchyListSegment {
   /** The blob items */
-  @Azure.Core.items
+  @pageItems
   @Xml.name("BlobItems")
   blobItems: BlobItemInternal[];
 
