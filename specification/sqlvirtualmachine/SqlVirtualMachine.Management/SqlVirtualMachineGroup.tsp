@@ -43,7 +43,7 @@ interface SqlVirtualMachineGroups {
     SqlVirtualMachineGroup,
     PatchModel = SqlVirtualMachineGroupUpdate,
     Response = ArmResponse<SqlVirtualMachineGroup> &
-      ArmLroLocationHeader<FinalResult = SqlVirtualMachineGroup>
+      ArmAsyncOperationHeader<FinalResult = SqlVirtualMachineGroup>
   >;
 
   /**
