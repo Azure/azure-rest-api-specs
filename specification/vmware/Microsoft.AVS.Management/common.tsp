@@ -35,12 +35,10 @@ model ResourceList<
   FriendlyNameFormat extends valueof string = "{name}List"
 > is Azure.Core.Page<Resource>;
 
-// use { @bodyRoot _: void } with the next version of typespec-azure
-// https://github.com/Azure/typespec-azure/issues/3759
-
-// Just like ArmResourceActionSync, but with no request body.
+/**
+ * Just like ArmResourceActionSync, but with no request body.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @autoRoute
 @armResourceAction(TResource)
 @post
