@@ -1,3 +1,4 @@
+import debug from "debug";
 import { readFile } from "fs/promises";
 import { globby } from "globby";
 import path from "path";
@@ -6,6 +7,9 @@ import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { fileExists, normalizePath, readTspConfig } from "../utils.js";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
