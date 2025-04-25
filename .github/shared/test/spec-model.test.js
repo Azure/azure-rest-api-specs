@@ -157,7 +157,6 @@ describe("getAffectedReadmeTags", () => {
 });
 
 describe("getAffectedSwaggers", () => {
-  // TODO: Test with swaggers that have layers of dependencies
   it("returns affected swaggers", async ({ expect }) => {
     const specModel = await getSpecModel(
       "specification/contosowidgetmanager",
@@ -268,8 +267,9 @@ describe("getAffectedSwaggers", () => {
 
 // Stress test the parser against all specs in the specification/ folder. This 
 // is a long-running test and should be run manually. To run this test, remove
-// the .skip() from the describe block. 
-describe.skip("Parse readmes", () => {
+// the '.skip' from the describe block. Put '.skip' back in when done or this
+// test may fail unexpectedly in the future.
+describe("Parse readmes", () => {
   it("Does not produce exceptions", { timeout: 30 * 60 * 1000 /* 30 minutes */ }, async ({ expect }) => {
     const excludeFolders = [
       "authorization",        // specification/authorization/resource-manager/readme.md defines has duplicate tags including 'package-2020-10-01'
@@ -288,8 +288,12 @@ describe.skip("Parse readmes", () => {
     const folders = await readdir(join(repoRoot, "specification"), { withFileTypes: true });
     const services = folders.filter(f => f.isDirectory() && !excludeFolders.includes(f.name)).map(f => f.name);
     for (const folder of services) {
-      if (folder < "security") {
-        // Skip folders up to some point
+      // Folders are listed in alphabetical order, when running this function 
+      // iteratively over all service folders, a value can be placed in in this
+      // condition to skip folders that appear before a given folder. This means
+      // you won't have to wait for tests to run over all folders that have 
+      // previously passed.
+      if (folder < "000") {
         console.log(`Skipping service: ${folder}`);
         continue;
       }
