@@ -104,15 +104,15 @@ union OperationType {
   @doc("Map Operation")
   @added(Versions.`2025-07-01-preview`)
   Map: Map,
-  
+
   @doc("Filter Operation")
   @added(Versions.`2025-07-01-preview`)
   Filter: Filter,
-  
+
   @doc("Branch Operation")
   @added(Versions.`2025-07-01-preview`)
   Branch: Branch,
-  
+
   @doc("Concatenate Operation")
   @added(Versions.`2025-07-01-preview`)
   Concatenate: Concatenate,
@@ -331,7 +331,6 @@ union DataflowConnectionOutputOperator {
   @doc("Concatenate operator")
   Concatenate,
 }
-
 
 @doc("Dataflow Connection Input properties")
 @added(Versions.`2025-07-01-preview`)

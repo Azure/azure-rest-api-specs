@@ -28,7 +28,8 @@ union RegistryEndpointAuthenticationMethod {
 
 @doc("System assigned identity authentication")
 @added(Versions.`2025-07-01-preview`)
-model SystemAssignedIdentityAuthentication extends RegistryEndpointAuthentication {
+model SystemAssignedIdentityAuthentication
+  extends RegistryEndpointAuthentication {
   @doc("The authentication method.")
   method: SystemAssignedManagedIdentity;
 
@@ -38,7 +39,8 @@ model SystemAssignedIdentityAuthentication extends RegistryEndpointAuthenticatio
 
 @doc("User assigned identity authentication")
 @added(Versions.`2025-07-01-preview`)
-model UserAssignedIdentityAuthentication extends RegistryEndpointAuthentication {
+model UserAssignedIdentityAuthentication
+  extends RegistryEndpointAuthentication {
   @doc("The authentication method.")
   method: UserAssignedManagedIdentity;
 
