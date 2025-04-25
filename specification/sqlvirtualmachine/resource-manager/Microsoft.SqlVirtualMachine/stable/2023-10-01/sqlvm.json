@@ -363,9 +363,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SqlVirtualMachineGroup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -379,7 +385,11 @@
           "Updates a SQL virtual machine group tags.": {
             "$ref": "./examples/UpdateSqlVirtualMachineGroup.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "SqlVirtualMachineGroups_Delete",
@@ -985,9 +995,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SqlVirtualMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -1001,7 +1017,11 @@
           "Updates a SQL virtual machine tags.": {
             "$ref": "./examples/UpdateSqlVirtualMachine.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "SqlVirtualMachines_Delete",

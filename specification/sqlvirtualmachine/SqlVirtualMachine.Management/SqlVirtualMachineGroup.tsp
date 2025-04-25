@@ -42,9 +42,8 @@ interface SqlVirtualMachineGroups {
   update is ArmCustomPatchAsync<
     SqlVirtualMachineGroup,
     PatchModel = SqlVirtualMachineGroupUpdate,
-    Response = ArmResponse<SqlVirtualMachineGroup>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = SqlVirtualMachineGroup> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResponse<SqlVirtualMachineGroup> &
+      ArmLroLocationHeader<FinalResult = SqlVirtualMachineGroup>
   >;
 
   /**
