@@ -8,19 +8,19 @@ using TypeSpec.Versioning;
 
 using Azure.ResourceManager;
 
-namespace Microsoft.IoTOperations.RegistryEndpoints;
+namespace Microsoft.IoTOperations;
 
-@doc("Model for Authentication")
+@doc("Model for RegistryEndpointAuthentication")
 @discriminator("method")
 @added(Versions.`2025-07-01-preview`)
-model Authentication {
+model RegistryEndpointAuthentication {
   @doc("The authentication method.")
-  method: AuthenticationMethod;
+  method: RegistryEndpointAuthenticationMethod;
 }
 
 @doc("The authentication method.")
 @added(Versions.`2025-07-01-preview`)
-union AuthenticationMethod {
+union RegistryEndpointAuthenticationMethod {
   string,
   ManagedIdentityMethod,
   AnonymousMethod,
@@ -28,7 +28,7 @@ union AuthenticationMethod {
 
 @doc("System assigned identity authentication")
 @added(Versions.`2025-07-01-preview`)
-model SystemAssignedIdentityAuthentication extends Authentication {
+model SystemAssignedIdentityAuthentication extends RegistryEndpointAuthentication {
   @doc("The authentication method.")
   method: SystemAssignedManagedIdentity;
 
@@ -38,7 +38,7 @@ model SystemAssignedIdentityAuthentication extends Authentication {
 
 @doc("User assigned identity authentication")
 @added(Versions.`2025-07-01-preview`)
-model UserAssignedIdentityAuthentication extends Authentication {
+model UserAssignedIdentityAuthentication extends RegistryEndpointAuthentication {
   @doc("The authentication method.")
   method: UserAssignedManagedIdentity;
 
@@ -60,7 +60,7 @@ model UserAssignedManagedIdentitySettings {
 
 @doc("Anonymous authentication")
 @added(Versions.`2025-07-01-preview`)
-model AnonymousAuthentication extends Authentication {
+model AnonymousAuthentication extends RegistryEndpointAuthentication {
   @doc("The authentication method.")
   method: Anonymous;
 
@@ -68,7 +68,7 @@ model AnonymousAuthentication extends Authentication {
   anonymousSettings: AnonymousSettings;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRDs are modeled as empty models"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRD type is modeled as empty object"
 @doc("Anonymous authentication properties")
 @added(Versions.`2025-07-01-preview`)
 model AnonymousSettings {}

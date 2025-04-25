@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 
 using Azure.ResourceManager;
 
-namespace Microsoft.IoTOperations.RegistryEndpoints;
+namespace Microsoft.IoTOperations;
 
 @doc("RegistryEndpoint resource")
 @parentResource(InstanceResource)
@@ -39,7 +39,7 @@ model RegistryEndpointProperties {
   host: string;
 
   @doc("The authentication settings for the Azure Container Registry.")
-  authentication: Authentication;
+  authentication: RegistryEndpointAuthentication;
 
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)

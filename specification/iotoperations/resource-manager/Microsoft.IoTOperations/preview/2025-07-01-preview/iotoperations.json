@@ -3156,6 +3156,25 @@
         }
       }
     },
+    "AnonymousAuthentication": {
+      "type": "object",
+      "description": "Anonymous authentication",
+      "properties": {
+        "anonymousSettings": {
+          "$ref": "#/definitions/AnonymousSettings",
+          "description": "Anonymous authentication properties"
+        }
+      },
+      "required": [
+        "anonymousSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegistryEndpointAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "Anonymous"
+    },
     "AnonymousMethod": {
       "type": "string",
       "description": "x509 Certificate Method",
@@ -3173,6 +3192,10 @@
           }
         ]
       }
+    },
+    "AnonymousSettings": {
+      "type": "object",
+      "description": "Anonymous authentication properties"
     },
     "AuthorizationConfig": {
       "type": "object",
@@ -7421,35 +7444,12 @@
       },
       "readOnly": true
     },
-    "RegistryEndpoints.AnonymousAuthentication": {
+    "RegistryEndpointAuthentication": {
       "type": "object",
-      "description": "Anonymous authentication",
-      "properties": {
-        "anonymousSettings": {
-          "$ref": "#/definitions/RegistryEndpoints.AnonymousSettings",
-          "description": "Anonymous authentication properties"
-        }
-      },
-      "required": [
-        "anonymousSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegistryEndpoints.Authentication"
-        }
-      ],
-      "x-ms-discriminator-value": "Anonymous"
-    },
-    "RegistryEndpoints.AnonymousSettings": {
-      "type": "object",
-      "description": "Anonymous authentication properties"
-    },
-    "RegistryEndpoints.Authentication": {
-      "type": "object",
-      "description": "Model for Authentication",
+      "description": "Model for RegistryEndpointAuthentication",
       "properties": {
         "method": {
-          "$ref": "#/definitions/RegistryEndpoints.AuthenticationMethod",
+          "$ref": "#/definitions/RegistryEndpointAuthenticationMethod",
           "description": "The authentication method."
         }
       },
@@ -7458,7 +7458,7 @@
         "method"
       ]
     },
-    "RegistryEndpoints.AuthenticationMethod": {
+    "RegistryEndpointAuthenticationMethod": {
       "type": "string",
       "description": "The authentication method.",
       "enum": [
@@ -7467,7 +7467,7 @@
         "Anonymous"
       ],
       "x-ms-enum": {
-        "name": "AuthenticationMethod",
+        "name": "RegistryEndpointAuthenticationMethod",
         "modelAsString": true,
         "values": [
           {
@@ -7488,7 +7488,7 @@
         ]
       }
     },
-    "RegistryEndpoints.RegistryEndpointProperties": {
+    "RegistryEndpointProperties": {
       "type": "object",
       "description": "RegistryEndpoint properties",
       "properties": {
@@ -7500,7 +7500,7 @@
           "pattern": "^[a-z0-9]+\\.azurecr\\.io$"
         },
         "authentication": {
-          "$ref": "#/definitions/RegistryEndpoints.Authentication",
+          "$ref": "#/definitions/RegistryEndpointAuthentication",
           "description": "The authentication settings for the Azure Container Registry."
         },
         "provisioningState": {
@@ -7514,12 +7514,12 @@
         "authentication"
       ]
     },
-    "RegistryEndpoints.RegistryEndpointResource": {
+    "RegistryEndpointResource": {
       "type": "object",
       "description": "RegistryEndpoint resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RegistryEndpoints.RegistryEndpointProperties",
+          "$ref": "#/definitions/RegistryEndpointProperties",
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
@@ -7538,76 +7538,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "RegistryEndpoints.SystemAssignedIdentityAuthentication": {
-      "type": "object",
-      "description": "System assigned identity authentication",
-      "properties": {
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/RegistryEndpoints.SystemAssignedManagedIdentitySettings",
-          "description": "System assigned managed identity properties"
-        }
-      },
-      "required": [
-        "systemAssignedManagedIdentitySettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegistryEndpoints.Authentication"
-        }
-      ],
-      "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
-    },
-    "RegistryEndpoints.SystemAssignedManagedIdentitySettings": {
-      "type": "object",
-      "description": "System assigned managed identity properties",
-      "properties": {
-        "audience": {
-          "type": "string",
-          "description": "Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration."
-        }
-      }
-    },
-    "RegistryEndpoints.UserAssignedIdentityAuthentication": {
-      "type": "object",
-      "description": "User assigned identity authentication",
-      "properties": {
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/RegistryEndpoints.UserAssignedManagedIdentitySettings",
-          "description": "User assigned managed identity properties"
-        }
-      },
-      "required": [
-        "userAssignedManagedIdentitySettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegistryEndpoints.Authentication"
-        }
-      ],
-      "x-ms-discriminator-value": "UserAssignedManagedIdentity"
-    },
-    "RegistryEndpoints.UserAssignedManagedIdentitySettings": {
-      "type": "object",
-      "description": "User assigned managed identity properties",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "Client ID for the user-assigned managed identity."
-        },
-        "scope": {
-          "type": "string",
-          "description": "Resource identifier (application ID URI) of the resource, affixed with the .default suffix."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant ID."
-        }
-      },
-      "required": [
-        "clientId",
-        "tenantId"
       ]
     },
     "RetainmentPolicyMode": {
@@ -8118,6 +8048,35 @@
         }
       }
     },
+    "SystemAssignedIdentityAuthentication": {
+      "type": "object",
+      "description": "System assigned identity authentication",
+      "properties": {
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/SystemAssignedManagedIdentitySettings",
+          "description": "System assigned managed identity properties"
+        }
+      },
+      "required": [
+        "systemAssignedManagedIdentitySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegistryEndpointAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
+    },
+    "SystemAssignedManagedIdentitySettings": {
+      "type": "object",
+      "description": "System assigned managed identity properties",
+      "properties": {
+        "audience": {
+          "type": "string",
+          "description": "Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration."
+        }
+      }
+    },
     "TlsCertMethod": {
       "type": "object",
       "description": "Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported",
@@ -8310,6 +8269,47 @@
           }
         ]
       }
+    },
+    "UserAssignedIdentityAuthentication": {
+      "type": "object",
+      "description": "User assigned identity authentication",
+      "properties": {
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/UserAssignedManagedIdentitySettings",
+          "description": "User assigned managed identity properties"
+        }
+      },
+      "required": [
+        "userAssignedManagedIdentitySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegistryEndpointAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "UserAssignedManagedIdentity"
+    },
+    "UserAssignedManagedIdentitySettings": {
+      "type": "object",
+      "description": "User assigned managed identity properties",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client ID for the user-assigned managed identity."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Resource identifier (application ID URI) of the resource, affixed with the .default suffix."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID."
+        }
+      },
+      "required": [
+        "clientId",
+        "tenantId"
+      ]
     },
     "VolumeClaimResourceRequirements": {
       "type": "object",
