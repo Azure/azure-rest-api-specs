@@ -487,6 +487,13 @@ export class SdkTspConfigValidationRule implements Rule {
   async execute(folder: string): Promise<RuleResult> {
     const tspConfigPath = join(folder, "tspconfig.yaml");
     const suppressions = await getSuppressions(tspConfigPath);
+
+    const shouldSuppressEntireRule = suppressions.some(
+      (s) => s.rules?.includes(this.name) === true && (!s.subRules || s.subRules.length === 0),
+    );
+    if (shouldSuppressEntireRule)
+      return { success: true, stdOutput: `[${this.name}]: validation skipped.` };
+
     this.setSuppressedKeyPaths(suppressions);
 
     const failedResults = [];
@@ -514,7 +521,10 @@ export class SdkTspConfigValidationRule implements Rule {
     this.suppressedKeyPaths = new Set<string>();
     for (const suppression of suppressions) {
       if (!suppression.rules?.includes(this.name)) continue;
-      for (const ignoredKey of suppression.subRules ?? []) this.suppressedKeyPaths.add(ignoredKey);
+      for (const ignoredKey of suppression.subRules ?? []) {
+        this.suppressedKeyPaths.add(ignoredKey);
+        console.warn(`Skip validation on ${ignoredKey}.`);
+      }
     }
   }
 }
