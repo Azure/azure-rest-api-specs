@@ -4,6 +4,7 @@ import "./models-shared.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace TextTranslation;
@@ -46,6 +47,7 @@ model DictionaryExamplesParameters {
   to: string;
 }
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("Response for the dictionary lookup API.")
 model DictionaryLookupResult {
   ...CommonResultHeaders;
@@ -55,6 +57,7 @@ model DictionaryLookupResult {
   result: DictionaryLookupItem[];
 }
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("Response for the dictionary examples API.")
 model DictionaryExamplesResult {
   ...CommonResultHeaders;
@@ -74,6 +77,7 @@ model DictionaryExampleTextItem extends InputTextItem {
   translation: string;
 }
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("Dictionary Lookup Element")
 model DictionaryLookupItem {
   @doc("""
@@ -96,6 +100,7 @@ model DictionaryLookupItem {
   translations: DictionaryTranslation[];
 }
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("Translation source term.")
 model DictionaryTranslation {
   @doc("""
@@ -174,6 +179,7 @@ model BackTranslation {
   frequencyCount: int32;
 }
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("Dictionary Example element")
 model DictionaryExampleItem {
   @doc("""
@@ -194,6 +200,7 @@ model DictionaryExampleItem {
   examples: DictionaryExample[];
 }
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("Dictionary Example")
 model DictionaryExample {
   @doc("""

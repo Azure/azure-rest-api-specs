@@ -381,71 +381,6 @@
         "score"
       ]
     },
-    "DictionaryExample": {
-      "type": "object",
-      "description": "Dictionary Example",
-      "properties": {
-        "sourcePrefix": {
-          "type": "string",
-          "description": "The string to concatenate before the value of sourceTerm to form a complete example.\nDo not add a space character, since it is already there when it should be.\nThis value may be an empty string."
-        },
-        "sourceTerm": {
-          "type": "string",
-          "description": "A string equal to the actual term looked up. The string is added with sourcePrefix\nand sourceSuffix to form the complete example. Its value is separated so it can be\nmarked in a user interface, e.g., by bolding it."
-        },
-        "sourceSuffix": {
-          "type": "string",
-          "description": "The string to concatenate after the value of sourceTerm to form a complete example.\nDo not add a space character, since it is already there when it should be.\nThis value may be an empty string."
-        },
-        "targetPrefix": {
-          "type": "string",
-          "description": "A string similar to sourcePrefix but for the target."
-        },
-        "targetTerm": {
-          "type": "string",
-          "description": "A string similar to sourceTerm but for the target."
-        },
-        "targetSuffix": {
-          "type": "string",
-          "description": "A string similar to sourceSuffix but for the target."
-        }
-      },
-      "required": [
-        "sourcePrefix",
-        "sourceTerm",
-        "sourceSuffix",
-        "targetPrefix",
-        "targetTerm",
-        "targetSuffix"
-      ]
-    },
-    "DictionaryExampleItem": {
-      "type": "object",
-      "description": "Dictionary Example element",
-      "properties": {
-        "normalizedSource": {
-          "type": "string",
-          "description": "A string giving the normalized form of the source term. Generally, this should be identical\nto the value of the Text field at the matching list index in the body of the request."
-        },
-        "normalizedTarget": {
-          "type": "string",
-          "description": "A string giving the normalized form of the target term. Generally, this should be identical\nto the value of the Translation field at the matching list index in the body of the request."
-        },
-        "examples": {
-          "type": "array",
-          "description": "A list of examples for the (source term, target term) pair.",
-          "items": {
-            "$ref": "#/definitions/DictionaryExample"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "normalizedSource",
-        "normalizedTarget",
-        "examples"
-      ]
-    },
     "DictionaryExampleTextItem": {
       "type": "object",
       "description": "Element containing the text with translation.",
@@ -482,50 +417,6 @@
         "to"
       ]
     },
-    "DictionaryExamplesResult": {
-      "type": "object",
-      "description": "Response for the dictionary examples API.",
-      "properties": {
-        "result": {
-          "type": "array",
-          "description": "Array of the dictionary examples elements.",
-          "items": {
-            "$ref": "#/definitions/DictionaryExampleItem"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "result"
-      ]
-    },
-    "DictionaryLookupItem": {
-      "type": "object",
-      "description": "Dictionary Lookup Element",
-      "properties": {
-        "normalizedSource": {
-          "type": "string",
-          "description": "A string giving the normalized form of the source term.\nFor example, if the request is \"JOHN\", the normalized form will be \"john\".\nThe content of this field becomes the input to lookup examples."
-        },
-        "displaySource": {
-          "type": "string",
-          "description": "A string giving the source term in a form best suited for end-user display.\nFor example, if the input is \"JOHN\", the display form will reflect the usual\nspelling of the name: \"John\"."
-        },
-        "translations": {
-          "type": "array",
-          "description": "A list of translations for the source term.",
-          "items": {
-            "$ref": "#/definitions/DictionaryTranslation"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "normalizedSource",
-        "displaySource",
-        "translations"
-      ]
-    },
     "DictionaryLookupParameters": {
       "type": "object",
       "description": "Request parameters for the dictionary lookup API.",
@@ -542,66 +433,6 @@
       "required": [
         "from",
         "to"
-      ]
-    },
-    "DictionaryLookupResult": {
-      "type": "object",
-      "description": "Response for the dictionary lookup API.",
-      "properties": {
-        "result": {
-          "type": "array",
-          "description": "Array of the dictionary lookup elements.",
-          "items": {
-            "$ref": "#/definitions/DictionaryLookupItem"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "result"
-      ]
-    },
-    "DictionaryTranslation": {
-      "type": "object",
-      "description": "Translation source term.",
-      "properties": {
-        "normalizedTarget": {
-          "type": "string",
-          "description": "A string giving the normalized form of this term in the target language.\nThis value should be used as input to lookup examples."
-        },
-        "displayTarget": {
-          "type": "string",
-          "description": "A string giving the term in the target language and in a form best suited\nfor end-user display. Generally, this will only differ from the normalizedTarget\nin terms of capitalization. For example, a proper noun like \"Juan\" will have\nnormalizedTarget = \"juan\" and displayTarget = \"Juan\"."
-        },
-        "posTag": {
-          "type": "string",
-          "description": "A string associating this term with a part-of-speech tag."
-        },
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "A value between 0.0 and 1.0 which represents the \"confidence\" \n(or perhaps more accurately, \"probability in the training data\") of that translation pair. \nThe sum of confidence scores for one source word may or may not sum to 1.0."
-        },
-        "prefixWord": {
-          "type": "string",
-          "description": "A string giving the word to display as a prefix of the translation. Currently,\nthis is the gendered determiner of nouns, in languages that have gendered determiners.\nFor example, the prefix of the Spanish word \"mosca\" is \"la\", since \"mosca\" is a feminine noun in Spanish. \nThis is only dependent on the translation, and not on the source. \nIf there is no prefix, it will be the empty string."
-        },
-        "backTranslations": {
-          "type": "array",
-          "description": "A list of \"back translations\" of the target. For example, source words that the target can translate to.\nThe list is guaranteed to contain the source word that was requested (e.g., if the source word being\nlooked up is \"fly\", then it is guaranteed that \"fly\" will be in the backTranslations list).\nHowever, it is not guaranteed to be in the first position, and often will not be.",
-          "items": {
-            "$ref": "#/definitions/BackTranslation"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "normalizedTarget",
-        "displayTarget",
-        "posTag",
-        "confidence",
-        "prefixWord",
-        "backTranslations"
       ]
     },
     "ErrorDetails": {
