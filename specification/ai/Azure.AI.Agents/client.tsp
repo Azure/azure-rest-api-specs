@@ -233,7 +233,7 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // VectorStoreFiles sub‐client (under /vector_stores/{vectorStoreId}/files)
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Agents.VectorStoreFiles, "files", "python");
+@@clientName(Azure.AI.Agents.VectorStoreFiles, "vector_store_files", "python");
 @@clientName(Azure.AI.Agents.VectorStoreFiles.listVectorStoreFiles,
   "list",
   "python"
