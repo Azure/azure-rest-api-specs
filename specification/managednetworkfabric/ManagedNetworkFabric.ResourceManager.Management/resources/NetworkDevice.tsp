@@ -2,13 +2,9 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
 using TypeSpec.Http;
-
-
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
-
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
@@ -85,10 +81,10 @@ interface NetworkDevices {
   @sharedRoute
   @action("runRoCommand")
   runRoCommandDeprecated is ArmResourceActionAsync<
-  NetworkDevice,
-  DeviceRoCommand,
-  CommonPostActionResponseForDeviceROCommandsDeprecated
->;
+    NetworkDevice,
+    DeviceRoCommand,
+    CommonPostActionResponseForDeviceROCommandsDeprecated
+  >;
 
   @doc("Run the RO Command on the Network Device.")
   @added(Versions.v2024_06_15_preview)
@@ -118,5 +114,7 @@ interface NetworkDevices {
 );
 @@doc(NetworkDevices.upgrade::parameters.body, "Request payload.");
 @@doc(NetworkDevices.runRoCommand::parameters.body, "Request the command.");
-@@doc(NetworkDevices.runRoCommandDeprecated::parameters.body, "Request the command.");
+@@doc(NetworkDevices.runRoCommandDeprecated::parameters.body,
+  "Request the command."
+);
 @@doc(NetworkDevices.runRwCommand::parameters.body, "Request the command.");

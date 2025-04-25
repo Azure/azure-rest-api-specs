@@ -528,10 +528,10 @@ model CommonPostActionResponseForDeviceROCommandsOperationStatusResult {
   @doc("Fully qualified ID of the resource against which the original async operation was started.")
   @visibility(Lifecycle.Read)
   resourceId?: Azure.Core.armResourceIdentifier<[
-      {
-        type: "Microsoft.ManagedNetworkFabric/NOTSUREABOUTTHETYPE";
-      }
-    ]>;
+    {
+      type: "Microsoft.ManagedNetworkFabric/NOTSUREABOUTTHETYPE";
+    }
+  ]>;
 
   @doc("The start time of the operation.")
   @visibility(Lifecycle.Read)
@@ -544,7 +544,10 @@ model CommonPostActionResponseForDeviceROCommandsOperationStatusResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
 @doc("Common response for device Ro Commands.")
 @removed(Versions.v2024_06_15_preview)
-@renamedFrom(Versions.v2024_06_15_preview, "CommonPostActionResponseForDeviceROCommands")
+@renamedFrom(
+  Versions.v2024_06_15_preview,
+  "CommonPostActionResponseForDeviceROCommands"
+)
 model CommonPostActionResponseForDeviceROCommandsDeprecated {
   ...ErrorResponse;
 
@@ -559,7 +562,6 @@ model CommonPostActionResponseForDeviceROCommandsDeprecated {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
 @doc("Common response for device Ro Commands.")
 model CommonPostActionResponseForDeviceROCommands {
-
   @doc("Gets the configuration state.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
