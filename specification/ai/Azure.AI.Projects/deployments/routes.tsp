@@ -34,6 +34,10 @@ interface Deployments {
       @query("modelName")
       modelName?: string;
 
+      @doc("Type of deployment to filter list by")
+      @query("deploymentType")
+      deploymentType?: DeploymentType;
+
       ...StandardListQueryParameters;
     }>
   >;

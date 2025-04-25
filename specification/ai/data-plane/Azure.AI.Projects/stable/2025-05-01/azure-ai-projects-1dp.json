@@ -807,6 +807,27 @@
             "type": "string"
           },
           {
+            "name": "deploymentType",
+            "in": "query",
+            "description": "Type of deployment to filter list by",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ModelDeployment"
+            ],
+            "x-ms-enum": {
+              "name": "DeploymentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ModelDeployment",
+                  "value": "ModelDeployment",
+                  "description": "Model deployment"
+                }
+              ]
+            }
+          },
+          {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
