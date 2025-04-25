@@ -1,6 +1,5 @@
 namespace Microsoft.AVS;
 
-using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -26,13 +25,13 @@ interface Clusters {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @useFinalStateVia("location")
+  @Azure.Core.useFinalStateVia("location")
   update is ArmCustomPatchAsync<
     Cluster,
     ClusterUpdate,
     Response = ArmResponse<Cluster> | ArmResourceCreatedResponse<
       Cluster,
-      LroHeaders = LocationHeader
+      LroHeaders = LocationHeader & Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
