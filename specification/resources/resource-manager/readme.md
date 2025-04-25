@@ -65,28 +65,12 @@ tag: package-links-2016-09
 tag: package-managedapplications-2018-06
 ```
 
-``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2023-08
-```
-
-``` yaml $(package-templatespecs)
-tag: package-templatespecs-2022-02
-```
-
-``` yaml $(package-deploymentstacks)
-tag: package-deploymentstacks-2024-03
-```
-
 ``` yaml $(package-changes)
 tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
 tag: package-snapshots-2022-11
-```
-
-``` yaml $(package-bicep)
-tag: package-bicep-2023-11
 ```
 
 ### Tag: package-policy-2025-03-stable
@@ -165,14 +149,6 @@ input-file:
   - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
 ```
 
-### Tag: package-bicep-2023-11
-
-These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-bicep-2023-11'
-input-file:
-  - Microsoft.Resources/stable/2023-11-01/bicepClient.json
-```
 
 ### Tag: package-policy-2023-04
 
@@ -212,18 +188,6 @@ override-info:
   title: PolicyClient
 ```
 
-### Tag: package-deploymentscripts-2023-08
-
-These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentscripts-2023-08'
-input-file:
-  - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
-
-suppressions:
-  - code: OperationsAPIImplementation
-    reason: OperationsAPI will come from Resources
-```
 
 ### Tag: package-resources-2023-07
 
@@ -540,23 +504,7 @@ input-file:
 - Microsoft.Resources/stable/2021-01-01/subscriptions.json
 ```
 
-### Tag: package-deploymentscripts-2020-10
 
-These settings apply only when `--tag=package-deploymentscripts-2020-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentscripts-2020-10'
-input-file:
-- Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
-```
-
-### Tag: package-deploymentscripts-2019-10-preview
-
-These settings apply only when `--tag=package-deploymentscripts-2019-10-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentscripts-2019-10-preview'
-input-file:
-- Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
-```
 
 ### Tag: package-features-2021-07
 
@@ -746,59 +694,11 @@ override-info:
   title: PolicyClient
 ```
 
-### Tag: package-templatespecs-2022-02
 
-These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-templatespecs-2022-02'
-input-file:
-- Microsoft.Resources/stable/2022-02-01/templateSpecs.json
-```
 
-### Tag: package-templatespecs-2021-05
 
-These settings apply only when `--tag=package-templatespecs-2021-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-templatespecs-2021-05'
-input-file:
-- Microsoft.Resources/stable/2021-05-01/templateSpecs.json
-```
-
-### Tag: package-templatespecs-2021-03-preview
-
-These settings apply only when `--tag=package-templatespecs-2021-03-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-templatespecs-2021-03-preview'
-input-file:
-- Microsoft.Resources/preview/2021-03-01-preview/templateSpecs.json
-```
-
-### Tag: package-templatespecs-2019-06-preview
-
-These settings apply only when `--tag=package-templatespecs-2019-06-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-templatespecs-2019-06-preview'
-input-file:
-- Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
-```
-
-### Tag: package-deploymentstacks-2022-08-preview
-
-These settings apply only when `--tag=package-deploymentstacks-2022-08-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentstacks-2022-08-preview'
-input-file:
-- Microsoft.Resources/preview/2022-08-01-preview/deploymentStacks.json
-```
-
-### Tag: package-deploymentstacks-2024-03
-
-These settings apply only when `--tag=package-deploymentstacks-2024-03` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentstacks-2024-03'
-input-file:
-- Microsoft.Resources/stable/2024-03-01/deploymentStacks.json
-```
 
 ### Tag: package-policy-2016-12
 
@@ -1753,10 +1653,6 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
-  - package-deploymentscripts: true
-  - package-templatespecs: true
-  - package-deploymentstacks: true
   - package-changes: true
   - package-snapshots: true
-  - package-bicep: true
 ```
