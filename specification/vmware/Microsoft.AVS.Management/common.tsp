@@ -52,7 +52,6 @@ op ArmResourceActionSyncNoRequestBody<
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<TResponse> | ErrorResponse;
 
-//
 /**
  * Like ArmResourceActionAsync, but with no request body and ArmNoContentResponse.
  */

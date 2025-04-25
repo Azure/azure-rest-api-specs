@@ -29,7 +29,7 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     ClusterUpdate,
-    Response = ArmResponse<Cluster> | ArmResourceCreatedResponse<
+    Response = Cluster | ArmResourceCreatedResponse<
       Cluster,
       LroHeaders = LocationHeader & Azure.Core.Foundations.RetryAfterHeader
     >

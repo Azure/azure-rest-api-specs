@@ -35,7 +35,7 @@ interface PrivateClouds {
   update is ArmCustomPatchAsync<
     PrivateCloud,
     PrivateCloudUpdate,
-    Response = ArmResponse<PrivateCloud> | ArmResourceCreatedResponse<
+    Response = PrivateCloud | ArmResourceCreatedResponse<
       PrivateCloud,
       LroHeaders = LocationHeader & Azure.Core.Foundations.RetryAfterHeader
     >
