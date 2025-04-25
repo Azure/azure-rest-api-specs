@@ -7,107 +7,108 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Agents;
-
-/**
- * Creates a new thread. Threads contain messages and can be run by agents.
- *
- * @returns Information about the newly created thread.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@post
-@route("/threads")
-op createThread is Azure.Core.Foundations.Operation<
-  {
+namespace Azure.AI.Agents {
+  /**
+   * A collection of thread operations under `/threads`.
+   */
+  @route("/threads")
+  interface Threads {
     /**
-     * The details used to create a new agent thread.
+     * Creates a new thread. Threads contain messages and can be run by agents.
+     *
+     * @returns Information about the newly created thread.
      */
-    ...AgentThreadCreationOptions;
-  },
-  AgentThread
->;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+    @post
+    createThread is Azure.Core.Foundations.Operation<
+      {
+        /**
+         * The details used to create a new agent thread.
+         */
+        ...AgentThreadCreationOptions;
+      },
+      AgentThread
+    >;
 
-// list threads?
-
-/**
- * Gets information about an existing thread.
- *
- * @param threadId The ID of the thread to retrieve information about.
- * @returns Information about the requested thread.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
-@get
-@route("/threads/{threadId}")
-op getThread is Azure.Core.Foundations.Operation<
-  {
-    @doc("Identifier of the thread.")
-    @path
-    threadId: string;
-  },
-  AgentThread
->;
-
-/**
- * Modifies an existing thread.
- *
- * @param threadId The ID of the thread to modify.
- * @param updateAgentThreadOptions The details of the modification to perform on a specified thread.
- * @returns Information about the modified thread.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@post
-@route("/threads/{threadId}")
-op updateThread is Azure.Core.Foundations.Operation<
-  {
     /**
-     * The details used to update an existing agent thread.
+     * Gets a list of threads that were previously created.
+     *
+     * @returns The requested list of threads.
      */
-    ...UpdateAgentThreadOptions;
-  },
-  AgentThread
->;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+    @get
+    listThreads is Azure.Core.Foundations.Operation<
+      {
+        ...OpenAIListRequestOptions;
+      },
+      OpenAIPageableListOf<AgentThread>
+    >;
 
-/**
- * Deletes an existing thread.
- *
- * @param threadId The ID of the thread to delete.
- * @returns Status information about the requested thread deletion operation.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@delete
-@route("/threads/{threadId}")
-op deleteThread is Azure.Core.Foundations.Operation<
-  {
-    @doc("Identifier of the thread.")
-    @path
-    threadId: string;
-  },
-  ThreadDeletionStatus
->;
+    /**
+     * Gets information about an existing thread.
+     *
+     * @param threadId The ID of the thread to retrieve information about.
+     * @returns Information about the requested thread.
+     */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names"   "mirrored API name parity"
+    @get
+    @route("/{threadId}")
+    getThread is Azure.Core.Foundations.Operation<
+      {
+        @doc("Identifier of the thread.")
+        @path
+        threadId: string;
+      },
+      AgentThread
+    >;
 
-/**
- * Gets a list of threads that were previously created.
- *
- * @returns The requested list of threads.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@get
-@route("/threads")
-op listThreads is Azure.Core.Foundations.Operation<
-  {
-    ...OpenAIListRequestOptions;
-  },
-  OpenAIPageableListOf<AgentThread>
->;
+    /**
+     * Modifies an existing thread.
+     *
+     * @param threadId The ID of the thread to modify.
+     * @returns Information about the modified thread.
+     */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+    @post
+    @route("/{threadId}")
+    updateThread is Azure.Core.Foundations.Operation<
+      {
+        /**
+         * The details used to update an existing agent thread.
+         */
+        ...UpdateAgentThreadOptions;
+      },
+      AgentThread
+    >;
+
+    /**
+     * Deletes an existing thread.
+     *
+     * @param threadId The ID of the thread to delete.
+     * @returns Status information about the requested thread deletion operation.
+     */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+    @delete
+    @route("/{threadId}")
+    deleteThread is Azure.Core.Foundations.Operation<
+      {
+        @doc("Identifier of the thread.")
+        @path
+        threadId: string;
+      },
+      ThreadDeletionStatus
+    >;
+  }
+}

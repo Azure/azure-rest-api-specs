@@ -321,7 +321,7 @@
     },
     "/files": {
       "get": {
-        "operationId": "ListFiles",
+        "operationId": "Files_ListFiles",
         "description": "Gets a list of previously uploaded files.",
         "parameters": [
           {
@@ -407,7 +407,7 @@
         }
       },
       "post": {
-        "operationId": "UploadFile",
+        "operationId": "Files_UploadFile",
         "description": "Uploads a file for use by other operations.",
         "consumes": [
           "multipart/form-data"
@@ -510,7 +510,7 @@
     },
     "/files/{fileId}": {
       "get": {
-        "operationId": "GetFile",
+        "operationId": "Files_GetFile",
         "description": "Returns information about a specific file. Does not retrieve file content.",
         "parameters": [
           {
@@ -546,7 +546,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteFile",
+        "operationId": "Files_DeleteFile",
         "description": "Delete a previously uploaded file.",
         "parameters": [
           {
@@ -562,7 +562,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Status of the deletion operation.",
             "schema": {
               "$ref": "#/definitions/FileDeletionStatus"
             }
@@ -584,7 +584,7 @@
     },
     "/files/{fileId}/content": {
       "get": {
-        "operationId": "GetFileContent",
+        "operationId": "Files_GetFileContent",
         "description": "Retrieves the raw content of a specific file.",
         "produces": [
           "application/octet-stream",
@@ -626,7 +626,7 @@
     },
     "/threads": {
       "get": {
-        "operationId": "ListThreads",
+        "operationId": "Threads_ListThreads",
         "description": "Gets a list of threads that were previously created.",
         "parameters": [
           {
@@ -748,7 +748,7 @@
         }
       },
       "post": {
-        "operationId": "CreateThread",
+        "operationId": "Threads_CreateThread",
         "description": "Creates a new thread. Threads contain messages and can be run by agents.",
         "parameters": [
           {
@@ -787,7 +787,7 @@
     },
     "/threads/{threadId}": {
       "get": {
-        "operationId": "GetThread",
+        "operationId": "Threads_GetThread",
         "description": "Gets information about an existing thread.",
         "parameters": [
           {
@@ -823,7 +823,7 @@
         }
       },
       "post": {
-        "operationId": "UpdateThread",
+        "operationId": "Threads_UpdateThread",
         "description": "Modifies an existing thread.",
         "parameters": [
           {
@@ -863,7 +863,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteThread",
+        "operationId": "Threads_DeleteThread",
         "description": "Deletes an existing thread.",
         "parameters": [
           {
@@ -901,7 +901,7 @@
     },
     "/threads/{threadId}/messages": {
       "get": {
-        "operationId": "ListMessages",
+        "operationId": "Messages_ListMessages",
         "description": "Gets a list of messages that exist on a thread.",
         "parameters": [
           {
@@ -1038,7 +1038,7 @@
         }
       },
       "post": {
-        "operationId": "CreateMessage",
+        "operationId": "Messages_CreateMessage",
         "description": "Creates a new message on a specified thread.",
         "parameters": [
           {
@@ -1084,8 +1084,8 @@
     },
     "/threads/{threadId}/messages/{messageId}": {
       "get": {
-        "operationId": "GetMessage",
-        "description": "Gets an existing message from an existing thread.",
+        "operationId": "Messages_GetMessage",
+        "description": "Retrieves an existing message.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1127,7 +1127,7 @@
         }
       },
       "post": {
-        "operationId": "UpdateMessage",
+        "operationId": "Messages_UpdateMessage",
         "description": "Modifies an existing message on an existing thread.",
         "parameters": [
           {
@@ -1190,7 +1190,7 @@
     },
     "/threads/{threadId}/runs": {
       "get": {
-        "operationId": "ListRuns",
+        "operationId": "Runs_ListRuns",
         "description": "Gets a list of runs for a specified thread.",
         "parameters": [
           {
@@ -1319,7 +1319,7 @@
         }
       },
       "post": {
-        "operationId": "CreateRun",
+        "operationId": "Runs_CreateRun",
         "description": "Creates a new run for an agent thread.",
         "parameters": [
           {
@@ -1335,7 +1335,7 @@
           {
             "name": "include[]",
             "in": "query",
-            "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.",
+            "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content`\nto fetch the file search result content.",
             "required": false,
             "type": "array",
             "items": {
@@ -1391,7 +1391,7 @@
     },
     "/threads/{threadId}/runs/{runId}": {
       "get": {
-        "operationId": "GetRun",
+        "operationId": "Runs_GetRun",
         "description": "Gets an existing run from an existing thread.",
         "parameters": [
           {
@@ -1434,7 +1434,7 @@
         }
       },
       "post": {
-        "operationId": "UpdateRun",
+        "operationId": "Runs_UpdateRun",
         "description": "Modifies an existing thread run.",
         "parameters": [
           {
@@ -1497,8 +1497,8 @@
     },
     "/threads/{threadId}/runs/{runId}/cancel": {
       "post": {
-        "operationId": "CancelRun",
-        "description": "Cancels a run of an in progress thread.",
+        "operationId": "Runs_CancelRun",
+        "description": "Cancels a run of an in‐progress thread.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1542,7 +1542,7 @@
     },
     "/threads/{threadId}/runs/{runId}/steps": {
       "get": {
-        "operationId": "ListRunSteps",
+        "operationId": "RunSteps_ListRunSteps",
         "description": "Gets a list of run steps from a thread run.",
         "parameters": [
           {
@@ -1706,8 +1706,8 @@
     },
     "/threads/{threadId}/runs/{runId}/steps/{stepId}": {
       "get": {
-        "operationId": "GetRunStep",
-        "description": "Gets a single run step from a thread run.",
+        "operationId": "RunSteps_GetRunStep",
+        "description": "Retrieves a single run step from a thread run.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1762,7 +1762,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Information about the requested run step.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RunStep"
             }
@@ -1784,8 +1784,8 @@
     },
     "/threads/{threadId}/runs/{runId}/submit_tool_outputs": {
       "post": {
-        "operationId": "SubmitToolOutputsToRun",
-        "description": "Submits outputs from tools as requested by tool calls in a run. Runs that need submitted tool outputs will have a status of 'requires_action' with a required_action.type of 'submit_tool_outputs'.",
+        "operationId": "Runs_SubmitToolOutputsToRun",
+        "description": "Submits outputs from tools as requested by tool calls in a run.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1822,7 +1822,7 @@
                 },
                 "stream": {
                   "type": "boolean",
-                  "description": "If true, returns a stream of events that happen during the Run as server-sent events, terminating when the run enters a terminal state.",
+                  "description": "If true, returns a stream of events that happen during the Run as SSE, terminating at `[DONE]`.",
                   "x-nullable": true
                 }
               },
@@ -1873,7 +1873,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Information about the newly created thread.",
+            "description": "Information about the newly created thread run.",
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
@@ -1895,7 +1895,7 @@
     },
     "/vector_stores": {
       "get": {
-        "operationId": "ListVectorStores",
+        "operationId": "VectorStores_ListVectorStores",
         "description": "Returns a list of vector stores.",
         "parameters": [
           {
@@ -2017,7 +2017,7 @@
         }
       },
       "post": {
-        "operationId": "CreateVectorStore",
+        "operationId": "VectorStores_CreateVectorStore",
         "description": "Creates a vector store.",
         "parameters": [
           {
@@ -2056,7 +2056,7 @@
     },
     "/vector_stores/{vectorStoreId}": {
       "get": {
-        "operationId": "GetVectorStore",
+        "operationId": "VectorStores_GetVectorStore",
         "description": "Returns the vector store object matching the specified ID.",
         "parameters": [
           {
@@ -2092,8 +2092,8 @@
         }
       },
       "post": {
-        "operationId": "ModifyVectorStore",
-        "description": "The ID of the vector store to modify.",
+        "operationId": "VectorStores_ModifyVectorStore",
+        "description": "Modifies an existing vector store.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2136,7 +2136,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteVectorStore",
+        "operationId": "VectorStores_DeleteVectorStore",
         "description": "Deletes the vector store object matching the specified ID.",
         "parameters": [
           {
@@ -2174,7 +2174,7 @@
     },
     "/vector_stores/{vectorStoreId}/file_batches": {
       "post": {
-        "operationId": "CreateVectorStoreFileBatch",
+        "operationId": "FileBatches_CreateVectorStoreFileBatch",
         "description": "Create a vector store file batch.",
         "parameters": [
           {
@@ -2248,7 +2248,7 @@
     },
     "/vector_stores/{vectorStoreId}/file_batches/{batchId}": {
       "get": {
-        "operationId": "GetVectorStoreFileBatch",
+        "operationId": "FileBatches_GetVectorStoreFileBatch",
         "description": "Retrieve a vector store file batch.",
         "parameters": [
           {
@@ -2293,7 +2293,7 @@
     },
     "/vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel": {
       "post": {
-        "operationId": "CancelVectorStoreFileBatch",
+        "operationId": "FileBatches_CancelVectorStoreFileBatch",
         "description": "Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.",
         "parameters": [
           {
@@ -2338,7 +2338,7 @@
     },
     "/vector_stores/{vectorStoreId}/file_batches/{batchId}/files": {
       "get": {
-        "operationId": "ListVectorStoreFileBatchFiles",
+        "operationId": "FileBatches_ListVectorStoreFileBatchFiles",
         "description": "Returns a list of vector store files in a batch.",
         "parameters": [
           {
@@ -2515,7 +2515,7 @@
     },
     "/vector_stores/{vectorStoreId}/files": {
       "get": {
-        "operationId": "ListVectorStoreFiles",
+        "operationId": "VectorStoreFiles_ListVectorStoreFiles",
         "description": "Returns a list of vector store files.",
         "parameters": [
           {
@@ -2683,7 +2683,7 @@
         }
       },
       "post": {
-        "operationId": "CreateVectorStoreFile",
+        "operationId": "VectorStoreFiles_CreateVectorStoreFile",
         "description": "Create a vector store file by attaching a file to a vector store.",
         "parameters": [
           {
@@ -2715,7 +2715,7 @@
                 },
                 "chunking_strategy": {
                   "$ref": "#/definitions/VectorStoreChunkingStrategyRequest",
-                  "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.",
+                  "description": "The chunking strategy used to chunk the file. If not set, uses the auto strategy.",
                   "x-ms-client-name": "chunkingStrategy"
                 }
               }
@@ -2746,7 +2746,7 @@
     },
     "/vector_stores/{vectorStoreId}/files/{fileId}": {
       "get": {
-        "operationId": "GetVectorStoreFile",
+        "operationId": "VectorStoreFiles_GetVectorStoreFile",
         "description": "Retrieves a vector store file.",
         "parameters": [
           {
@@ -2789,8 +2789,8 @@
         }
       },
       "delete": {
-        "operationId": "DeleteVectorStoreFile",
-        "description": "Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted.\nTo delete the file, use the delete file endpoint.",
+        "operationId": "VectorStoreFiles_DeleteVectorStoreFile",
+        "description": "Deletes a vector store file. This removes the file‐to‐store link (does not delete the file itself).",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
