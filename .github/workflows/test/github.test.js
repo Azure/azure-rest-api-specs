@@ -1,72 +1,30 @@
-import { describe, expect, vi, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { writeToActionsSummary } from "../src/github.js";
 import { createMockCore } from "./mocks.js";
-import fs from "fs";
 
 const mockCore = createMockCore();
-// Mock the entire fs module
-vi.mock("fs", async () => {
-  const actual = await vi.importActual("fs");
-  return {
-    ...actual,
-    appendFileSync: vi.fn(),
-  };
-});
 
 describe("writeToActionsSummary function", () => {
-  it("should warn when GITHUB_STEP_SUMMARY isn't set", async () => {
-    // Mock value
-    const originalEnvValue = process.env.GITHUB_STEP_SUMMARY;
-    process.env.GITHUB_STEP_SUMMARY = "";
-
+  it("should add content to the summary and write it", async () => {
     // Call function
     const result = await writeToActionsSummary("Test content", mockCore);
 
     // Verify result
     expect(result).undefined;
 
-    // Verify warning was logged
-    expect(mockCore.warning).toHaveBeenCalled();
-    process.env.GITHUB_STEP_SUMMARY = originalEnvValue;
+    // Verify summary methods were called
+    expect(mockCore.summary.addRaw).toHaveBeenCalledWith("Test content");
+    expect(mockCore.summary.write).toHaveBeenCalled();
   });
-  it("should return without error", async () => {
-    const originalEnvValue = process.env.GITHUB_STEP_SUMMARY;
-    if (!originalEnvValue) {
-      process.env.GITHUB_STEP_SUMMARY = "/tmp/test-summary.md";
-    }
 
-    // Call function
-    const result = await writeToActionsSummary("Test content", mockCore);
-
-    // Verify result
-    expect(result).undefined;
-    expect(mockCore.info).toHaveBeenCalled();
-    if (process.env.GITHUB_STEP_SUMMARY === "/tmp/test-summary.md") {
-      process.env.GITHUB_STEP_SUMMARY = originalEnvValue;
-    }
-  });
   it("should handle exception", async () => {
-    // Mock
-    const originalEnvValue = process.env.GITHUB_STEP_SUMMARY;
-    process.env.GITHUB_STEP_SUMMARY = "/tmp/test-summary.md";
+    // Create a mock with a write method that throws an error
+    const mockCoreWithError = createMockCore();
+    mockCoreWithError.summary.write.mockRejectedValue(new Error("Mock write error"));
 
-    // Create spy on appendFileSync before each test
-    const appendFileSyncMock = vi
-      .spyOn(fs, "appendFileSync")
-      .mockImplementation(vi.fn());
-
-    // Make appendFileSync throw an error
-    appendFileSyncMock.mockImplementation(() => {
-      throw new Error("Mock file write error");
-    });
-
-    // Call function and validate
+    // Call function and validate it throws
     await expect(
-      writeToActionsSummary("Test content", mockCore),
-    ).rejects.toThrow();
-
-    // Restore original implementation after each test
-    appendFileSyncMock.mockRestore();
-    process.env.GITHUB_STEP_SUMMARY = originalEnvValue;
+      writeToActionsSummary("Test content", mockCoreWithError)
+    ).rejects.toThrow("Failed to write to the GitHub Actions summary");
   });
 });
