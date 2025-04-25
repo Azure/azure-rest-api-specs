@@ -164,6 +164,7 @@ async function processResult({ checkRuns, core }) {
       artifactName,
       artifactFileName,
       core,
+      fallbackToFailedArtifact: true,
     });
     // Parse the JSON data
     if (!result.artifactData) {

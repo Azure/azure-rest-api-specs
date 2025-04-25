@@ -65,7 +65,13 @@ export async function getAzurePipelineArtifact({
       core.info(`Artifact '${artifactName}' not found (404)`);
       return { artifactData };
     } else {
-      response = await fetchFailedArtifact({ado_build_id, ado_project_url, artifactName, core, retryOptions});
+      response = await fetchFailedArtifact({
+        ado_build_id,
+        ado_project_url,
+        artifactName,
+        core,
+        retryOptions,
+      });
     }
   }
 
@@ -165,16 +171,16 @@ export async function fetchFailedArtifact({
     );
   }
   /** @type {ListArtifactsResponse} */
-  const listArtifactResponse = /** @type {ListArtifactsResponse} */ (await response.json());
+  const listArtifactResponse = /** @type {ListArtifactsResponse} */ (
+    await response.json()
+  );
   core.info(`Artifacts found: ${JSON.stringify(listArtifactResponse)}`);
   // Use filter to get matching artifacts and sort them in descending alphabetical order
   const artifactsList = listArtifactResponse.value
-    .filter(artifact => artifact.name.includes(artifactName))
+    .filter((artifact) => artifact.name.includes(artifactName))
     .sort((a, b) => b.name.localeCompare(a.name)); // Descending order (Z to A)
   if (artifactsList.length === 0) {
-    throw new Error(
-      `No artifacts found with name containing ${artifactName}`,
-    );
+    throw new Error(`No artifacts found with name containing ${artifactName}`);
   }
   artifactName = artifactsList[0].name;
   apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
