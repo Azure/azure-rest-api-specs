@@ -2936,7 +2936,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Diagnostics.DiagnosticResource"
+              "$ref": "#/definitions/DiagnosticResource"
             }
           },
           "default": {
@@ -2989,7 +2989,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Diagnostics.DiagnosticResource"
+              "$ref": "#/definitions/DiagnosticResource"
             }
           }
         ],
@@ -2997,13 +2997,13 @@
           "200": {
             "description": "Resource 'DiagnosticResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Diagnostics.DiagnosticResource"
+              "$ref": "#/definitions/DiagnosticResource"
             }
           },
           "201": {
             "description": "Resource 'DiagnosticResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Diagnostics.DiagnosticResource"
+              "$ref": "#/definitions/DiagnosticResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -6285,33 +6285,12 @@
         "function"
       ]
     },
-    "DiagnosticResourceListResult": {
-      "type": "object",
-      "description": "The response of a DiagnosticResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DiagnosticResource items on this page",
-          "items": {
-            "$ref": "#/definitions/Diagnostics.DiagnosticResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "Diagnostics.DiagnosticProperties": {
+    "DiagnosticProperties": {
       "type": "object",
       "description": "Diagnostic Resource properties",
       "properties": {
         "remoteSupport": {
-          "$ref": "#/definitions/Diagnostics.RemoteSupportProperties",
+          "$ref": "#/definitions/DiagnosticsRemoteSupportProperties",
           "description": "Remote Support Settings For Diagnostic."
         },
         "provisioningState": {
@@ -6321,12 +6300,12 @@
         }
       }
     },
-    "Diagnostics.DiagnosticResource": {
+    "DiagnosticResource": {
       "type": "object",
       "description": "Instance diagnostic resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Diagnostics.DiagnosticProperties",
+          "$ref": "#/definitions/DiagnosticProperties",
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
@@ -6347,7 +6326,39 @@
         }
       ]
     },
-    "Diagnostics.RemoteSupportAccessLevels": {
+    "DiagnosticResourceListResult": {
+      "type": "object",
+      "description": "The response of a DiagnosticResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DiagnosticResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DiagnosticResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DiagnosticsLogs": {
+      "type": "object",
+      "description": "Diagnostic Log properties",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
+          "default": "info"
+        }
+      }
+    },
+    "DiagnosticsRemoteSupportAccessLevels": {
       "type": "string",
       "description": "DiagnosticAccessLevels allowed",
       "enum": [
@@ -6355,7 +6366,7 @@
         "DiagnoseAndRepair"
       ],
       "x-ms-enum": {
-        "name": "RemoteSupportAccessLevels",
+        "name": "DiagnosticsRemoteSupportAccessLevels",
         "modelAsString": true,
         "values": [
           {
@@ -6371,7 +6382,7 @@
         ]
       }
     },
-    "Diagnostics.RemoteSupportActivationState": {
+    "DiagnosticsRemoteSupportActivationState": {
       "type": "string",
       "description": "Represents the activation state of Diagnostic.",
       "enum": [
@@ -6380,7 +6391,7 @@
         "Expired"
       ],
       "x-ms-enum": {
-        "name": "RemoteSupportActivationState",
+        "name": "DiagnosticsRemoteSupportActivationState",
         "modelAsString": true,
         "values": [
           {
@@ -6401,32 +6412,21 @@
         ]
       }
     },
-    "Diagnostics.RemoteSupportProperties": {
+    "DiagnosticsRemoteSupportProperties": {
       "type": "object",
       "description": "RemoteSupport properties",
       "properties": {
         "state": {
-          "$ref": "#/definitions/Diagnostics.RemoteSupportActivationState",
+          "$ref": "#/definitions/DiagnosticsRemoteSupportActivationState",
           "description": "Activation state of Diagnostic."
         },
         "accessLevel": {
-          "$ref": "#/definitions/Diagnostics.RemoteSupportAccessLevels",
+          "$ref": "#/definitions/DiagnosticsRemoteSupportAccessLevels",
           "description": "Access level for Diagnostic."
         },
         "expirationTimestamp": {
           "type": "string",
           "description": "Expiration timestamp for Diagnostic."
-        }
-      }
-    },
-    "DiagnosticsLogs": {
-      "type": "object",
-      "description": "Diagnostic Log properties",
-      "properties": {
-        "level": {
-          "type": "string",
-          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
-          "default": "info"
         }
       }
     },

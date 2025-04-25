@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 
 using Azure.ResourceManager;
 
-namespace Microsoft.IoTOperations.Diagnostics;
+namespace Microsoft.IoTOperations;
 
 @doc("Instance diagnostic resource")
 @parentResource(InstanceResource)
@@ -31,7 +31,7 @@ model DiagnosticResource is ProxyResource<DiagnosticProperties> {
 
 @doc("Represents the activation state of Diagnostic.")
 @added(Versions.`2025-07-01-preview`)
-union RemoteSupportActivationState {
+union DiagnosticsRemoteSupportActivationState {
   string,
 
   @doc("Remote Support is enabled.")
@@ -46,7 +46,7 @@ union RemoteSupportActivationState {
 
 @doc("DiagnosticAccessLevels allowed")
 @added(Versions.`2025-07-01-preview`)
-union RemoteSupportAccessLevels {
+union DiagnosticsRemoteSupportAccessLevels {
   string,
 
   @doc("Diagnose access level")
@@ -58,12 +58,12 @@ union RemoteSupportAccessLevels {
 
 @doc("RemoteSupport properties")
 @added(Versions.`2025-07-01-preview`)
-model RemoteSupportProperties {
+model DiagnosticsRemoteSupportProperties {
   @doc("Activation state of Diagnostic.")
-  state?: RemoteSupportActivationState;
+  state?: DiagnosticsRemoteSupportActivationState;
 
   @doc("Access level for Diagnostic.")
-  accessLevel?: RemoteSupportAccessLevels;
+  accessLevel?: DiagnosticsRemoteSupportAccessLevels;
 
   @doc("Expiration timestamp for Diagnostic.")
   expirationTimestamp?: string;
@@ -73,7 +73,7 @@ model RemoteSupportProperties {
 @added(Versions.`2025-07-01-preview`)
 model DiagnosticProperties {
   @doc("Remote Support Settings For Diagnostic.")
-  remoteSupport?: RemoteSupportProperties;
+  remoteSupport?: DiagnosticsRemoteSupportProperties;
 
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
