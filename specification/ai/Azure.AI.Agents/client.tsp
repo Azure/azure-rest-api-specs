@@ -29,7 +29,6 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // Files sub‐client (agent file operations)
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Agents.Files, "files", "python");
 @@clientName(Azure.AI.Agents.Files.listFiles, "list", "python");
 @@access(Azure.AI.Agents.Files.uploadFile,
   Access.internal,
@@ -51,7 +50,6 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // Messages sub‐client
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Agents.Messages, "messages", "python");
 @@clientName(Azure.AI.Agents.Messages.createMessage, "create", "python");
 @@clientName(Azure.AI.Agents.Messages.listMessages, "list", "python");
 @@clientName(Azure.AI.Agents.Messages.getMessage, "get", "python");
@@ -70,7 +68,6 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // Threads sub-client
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Agents.Threads, "threads", "python");
 @@clientName(Azure.AI.Agents.Threads.createThread, "create", "python");
 @@clientName(Azure.AI.Agents.Threads.listThreads, "list", "python");
 @@clientName(Azure.AI.Agents.Threads.getThread, "get", "python");
@@ -106,7 +103,6 @@ using Azure.AI.Agents;
 );
 
 // nested Runs interface
-@@clientName(Azure.AI.Agents.Runs, "runs", "python");
 @@clientName(Azure.AI.Agents.Runs.createRun, "create", "python");
 @@clientName(Azure.AI.Agents.Runs.listRuns, "list", "python");
 @@clientName(Azure.AI.Agents.Runs.getRun, "get", "python");
@@ -132,7 +128,6 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // RunSteps sub‐client (/threads/{threadId}/runs/{runId}/steps)
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Agents.RunSteps, "steps", "python");
 @@clientName(Azure.AI.Agents.RunSteps.getRunStep, "get", "python");
 @@clientName(Azure.AI.Agents.RunSteps.listRunSteps, "list", "python");
 
@@ -147,7 +142,6 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // VectorStores sub‐client
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Agents.VectorStores, "vector_stores", "python");
 @@clientName(Azure.AI.Agents.VectorStores.listVectorStores, "list", "python");
 @@clientName(Azure.AI.Agents.VectorStores.createVectorStore,
   "create",
@@ -188,7 +182,6 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // FileBatches sub‐client
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Agents.FileBatches, "file_batches", "python");
 @@clientName(Azure.AI.Agents.FileBatches.createVectorStoreFileBatch,
   "create",
   "python"
@@ -227,7 +220,6 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // VectorStoreFiles sub‐client (under /vector_stores/{vectorStoreId}/files)
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Agents.VectorStoreFiles, "vector_store_files", "python");
 @@clientName(Azure.AI.Agents.VectorStoreFiles.listVectorStoreFiles,
   "list",
   "python"
