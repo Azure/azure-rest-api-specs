@@ -570,7 +570,6 @@ model CommonPostActionResponseForDeviceROCommands {
   outputUrl?: string;
 
   @doc("Device RO command Response limited to 4000 characters.")
-  @added(Versions.v2024_06_15_preview)
   deviceConfigurationPreview?: string;
 }
 
