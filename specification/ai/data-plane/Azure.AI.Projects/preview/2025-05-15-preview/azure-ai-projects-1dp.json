@@ -736,6 +736,27 @@
             "type": "string"
           },
           {
+            "name": "deploymentType",
+            "in": "query",
+            "description": "Type of deployment to filter list by",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ModelDeployment"
+            ],
+            "x-ms-enum": {
+              "name": "DeploymentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ModelDeployment",
+                  "value": "ModelDeployment",
+                  "description": "Model deployment"
+                }
+              ]
+            }
+          },
+          {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
@@ -1927,13 +1948,13 @@
       "type": "object",
       "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
       "properties": {
-        "ModelDeploymentName": {
+        "modelDeploymentName": {
           "type": "string",
           "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
         }
       },
       "required": [
-        "ModelDeploymentName"
+        "modelDeploymentName"
       ],
       "allOf": [
         {
