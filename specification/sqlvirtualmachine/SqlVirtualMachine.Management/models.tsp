@@ -1407,3 +1407,69 @@ model SqlVmTroubleshooting {
   @visibility(Lifecycle.Read)
   virtualMachineResourceId?: string;
 }
+
+/**
+ * Virtual machine resource id for response.
+ */
+model OperationListResult is Azure.Core.Page<Operation>;
+
+/**
+ * Display metadata associated with the operation.
+ */
+model OperationDisplay {
+  /** 
+  The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
+   */
+  @visibility(Lifecycle.Read)
+  provider?: string;
+
+  /** 
+    The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
+     */
+  @visibility(Lifecycle.Read)
+  resource?: string;
+
+  /** 
+    The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
+     */
+  @visibility(Lifecycle.Read)
+  operation?: string;
+
+  /** The short, localized friendly description of the operation; suitable for tool tips and detailed views. */
+  @visibility(Lifecycle.Read)
+  description?: string;
+}
+
+/**
+ * Result of the request to list SQL operations.
+ */
+model Operation {
+  /** 
+    The name of the operation being performed on this particular object."
+     */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** he localized display information for this particular operation / action. */
+  @visibility(Lifecycle.Read)
+  display?: OperationDisplay;
+
+  /** 
+    The intended executor of the operation."
+     */
+  @visibility(Lifecycle.Read)
+  origin?: OperationOrigin;
+
+  /** 
+    Additional descriptions for the operation.
+     */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-client-flatten", false)
+  properties?: Record<{}>;
+}
+
+@@visibility(Azure.Core.Page.value, Lifecycle.Read);
+@@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);

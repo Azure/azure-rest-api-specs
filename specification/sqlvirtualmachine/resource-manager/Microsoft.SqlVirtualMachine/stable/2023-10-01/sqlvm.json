@@ -69,7 +69,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1676,12 +1676,14 @@
           "description": "The AvailabilityGroupListener items on this page",
           "items": {
             "$ref": "#/definitions/AvailabilityGroupListener"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -2080,6 +2082,108 @@
         "privateIpAddress",
         "sqlVirtualMachineInstance"
       ]
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Result of the request to list SQL operations.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object.\"",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "he localized display information for this particular operation / action.",
+          "readOnly": true
+        },
+        "origin": {
+          "$ref": "#/definitions/OperationOrigin",
+          "description": "The intended executor of the operation.\"",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional descriptions for the operation.",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Virtual machine resource id for response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationOrigin": {
+      "type": "string",
+      "description": "The intended executor of the operation.",
+      "enum": [
+        "user",
+        "system"
+      ],
+      "x-ms-enum": {
+        "name": "OperationOrigin",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "user",
+            "value": "user"
+          },
+          {
+            "name": "system",
+            "value": "system"
+          }
+        ]
+      }
     },
     "OsType": {
       "type": "string",
@@ -2556,12 +2660,14 @@
           "description": "The SqlVirtualMachineGroup items on this page",
           "items": {
             "$ref": "#/definitions/SqlVirtualMachineGroup"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -2640,12 +2746,14 @@
           "description": "The SqlVirtualMachine items on this page",
           "items": {
             "$ref": "#/definitions/SqlVirtualMachine"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
