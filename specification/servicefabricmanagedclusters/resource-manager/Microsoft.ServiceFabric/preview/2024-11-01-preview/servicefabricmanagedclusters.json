@@ -6465,11 +6465,15 @@
         },
         "securityType": {
           "$ref": "#/definitions/SecurityType",
-          "description": "Specifies the security type of the nodeType. Only Standard and TrustedLaunch are currently supported"
+          "description": "Specifies the security type of the nodeType. Supported values include Standard, TrustedLaunch and ConfidentialVM."
+        },
+        "securityEncryptionType": {
+          "$ref": "#/definitions/SecurityEncryptionType",
+          "description": "Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob and VMGuestStateOnly for encryption of just the VMGuestState blob. Note: It can be set for only Confidential VMs."
         },
         "secureBootEnabled": {
           "type": "boolean",
-          "description": "Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch SecurityType"
+          "description": "Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch and ConfidentialVM SecurityType."
         },
         "enableNodePublicIP": {
           "type": "boolean",
@@ -7173,12 +7177,37 @@
         "kind"
       ]
     },
+    "SecurityEncryptionType": {
+      "type": "string",
+      "description": "Specifies the securityEncryptionType type of the nodeType. Only DiskWithVMGuestState and VMGuestStateOnly are currently supported",
+      "enum": [
+        "DiskWithVMGuestState",
+        "VMGuestStateOnly"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DiskWithVMGuestState",
+            "value": "DiskWithVMGuestState",
+            "description": "For encryption of the managed disk along with VMGuestState blob."
+          },
+          {
+            "name": "VMGuestStateOnly",
+            "value": "VMGuestStateOnly",
+            "description": "For encryption of just the VMGuestState blob."
+          }
+        ]
+      }
+    },
     "SecurityType": {
       "type": "string",
       "description": "Specifies the security type of the nodeType. Only Standard and TrustedLaunch are currently supported",
       "enum": [
         "TrustedLaunch",
-        "Standard"
+        "Standard",
+        "ConfidentialVM"
       ],
       "x-ms-enum": {
         "name": "SecurityType",
@@ -7193,6 +7222,11 @@
             "name": "Standard",
             "value": "Standard",
             "description": "Standard is the default security type for all machines."
+          },
+          {
+            "name": "ConfidentialVM",
+            "value": "ConfidentialVM",
+            "description": "ConfidentialVM provides hardware-based encryption, trusted execution environment (TEE) and isolation of the VM memory & CPU from host."
           }
         ]
       }
