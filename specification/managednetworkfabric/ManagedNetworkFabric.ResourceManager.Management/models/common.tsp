@@ -529,7 +529,7 @@ model CommonPostActionResponseForDeviceROCommandsOperationStatusResult {
   @visibility(Lifecycle.Read)
   resourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.ManagedNetworkFabric/NOTSUREABOUTTHETYPE";
+      type: "Microsoft.ManagedNetworkFabric/networkDevices";
     }
   ]>;
 
