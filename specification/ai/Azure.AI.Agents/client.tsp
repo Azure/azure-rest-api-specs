@@ -7,12 +7,12 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents, "AgentsClient", "python, javascript");
 @@clientName(Azure.AI.Agents, "PersistentAgentsClient", "csharp, java");
 
-@@clientName(Azure.AI.Agents.Agents, "agents", "python")
-@@clientName(Azure.AI.Agents.Agents.createAgent, "create", "python")
-@@clientName(Azure.AI.Agents.Agents.updateAgent, "update", "python")
-@@clientName(Azure.AI.Agents.Agents.listAgents,  "list",   "python")
-@@clientName(Azure.AI.Agents.Agents.getAgent,    "get",    "python")
-@@clientName(Azure.AI.Agents.Agents.deleteAgent, "delete", "python")
+@@clientName(Azure.AI.Agents.Agents, "agents", "python");
+@@clientName(Azure.AI.Agents.Agents.createAgent, "create", "python");
+@@clientName(Azure.AI.Agents.Agents.updateAgent, "update", "python");
+@@clientName(Azure.AI.Agents.Agents.listAgents,  "list",   "python");
+@@clientName(Azure.AI.Agents.Agents.getAgent,    "get",    "python");
+@@clientName(Azure.AI.Agents.Agents.deleteAgent, "delete", "python");
 
 @@clientName(Agent, "PersistentAgent", "csharp, java");
 @@clientName(AgentsApiResponseFormat,
