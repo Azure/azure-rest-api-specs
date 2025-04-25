@@ -18,10 +18,26 @@ export async function main() {
       type: "string",
       short: "f",
     },
+    validateOldStructure: {
+      type: "boolean",
+      default: true,
+      short: "o",
+      description: "Enable validation of the old directory structure",
+    },
+    validateNewStructure: {
+      type: "boolean",
+      default: true,
+      short: "n",
+      description: "Enable validation of the new directory structure",
+    },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
   const folder = parsedArgs.positionals[0];
   const absolutePath = normalizePath(folder);
+
+  // Get the validate structure flags from command line args
+  const validateOldStructure = parsedArgs.values.validateOldStructure as boolean;
+  const validateNewStructure = parsedArgs.values.validateNewStructure as boolean;
 
   if (!(await fileExists(absolutePath))) {
     console.log(`Folder ${absolutePath} does not exist`);
@@ -45,7 +61,10 @@ export async function main() {
   }
 
   const rules = [
-    new FolderStructureRule(),
+    new FolderStructureRule({
+      validateOldStructure,
+      validateNewStructure,
+    }),
     new NpmPrefixRule(),
     new EmitAutorestRule(),
     new FlavorAzureRule(),
