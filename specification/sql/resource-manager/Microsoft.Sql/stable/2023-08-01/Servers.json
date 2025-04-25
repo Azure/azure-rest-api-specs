@@ -1177,6 +1177,31 @@
             "name": "ExternalGovernanceStatus",
             "modelAsString": true
           }
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Number of days this server will stay soft-deleted.",
+          "type": "integer"
+        },
+        "createMode": {
+          "description": "Create mode for server, only valid values for this are Normal and Restore.",
+          "enum": [
+            "Normal",
+            "ServerMigrationV1",
+            "DatabaseMigrationV1",
+            "ServerMigration",
+            "Standby",
+            "Restore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerCreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
