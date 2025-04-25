@@ -126,6 +126,18 @@ interface BatchClient {
   "deleteCertificateInternal",
   "csharp"
 );
+@@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "csharp");
+@@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "csharp");
+@@access(Azure.Batch.Nodes.startNode, Access.internal, "csharp");
+@@clientName(BatchClient.startNode, "startNodeInternal", "csharp");
+@@access(Azure.Batch.Nodes.rebootNode, Access.internal, "csharp");
+@@clientName(BatchClient.rebootNode, "rebootNodeInternal", "csharp");
+@@access(Azure.Batch.Nodes.reimageNode, Access.internal, "csharp");
+@@clientName(BatchClient.reimageNode, "reimageNodeInternal", "csharp");
+@@access(Azure.Batch.Jobs.disableJob, Access.internal, "csharp");
+@@clientName(BatchClient.disableJob, "disableJobInternal", "csharp");
+@@access(Azure.Batch.Jobs.enableJob, Access.internal, "csharp");
+@@clientName(BatchClient.enableJob, "enableJobInternal", "csharp");
 @@access(Azure.Batch.Pools.poolExists, Access.internal, "csharp");
 @@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
 @@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
