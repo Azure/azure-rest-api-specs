@@ -5,15 +5,24 @@ import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { SpecGenSdkCmdInput } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 import {
+<<<<<<< HEAD
   generateArtifact,
+=======
+>>>>>>> 5372582540 (refactor commands.ts and add new file for commandUtils.ts)
   getBreakingChangeInfo,
   getExecutionReport,
   getSpecPaths,
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
+<<<<<<< HEAD
   setPipelineVariables,
 } from "./command-helpers.js";
+=======
+  processBreakingChangeLabelArtifacts,
+  setPipelineVariables,
+} from "./commandUtils.js";
+>>>>>>> 5372582540 (refactor commands.ts and add new file for commandUtils.ts)
 
 /**
  * Generate SDK for a single spec.
@@ -177,7 +186,6 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   let succeededCount = 0;
   let executionReport;
 
-  logMessage(`Testtetss`, LogLevel.Group);
   // Generate SDKs for each spec
   for (const specConfigPath of specConfigPaths) {
     logMessage(`Generating SDK from ${specConfigPath}`, LogLevel.Group);
