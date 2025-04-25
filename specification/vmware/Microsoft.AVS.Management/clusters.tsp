@@ -30,7 +30,8 @@ interface Clusters {
     ClusterUpdate,
     Response = Cluster | ArmResourceCreatedResponse<
       Cluster,
-      LroHeaders = LocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 

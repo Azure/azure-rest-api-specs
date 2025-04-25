@@ -36,7 +36,8 @@ interface PrivateClouds {
     PrivateCloudUpdate,
     Response = PrivateCloud | ArmResourceCreatedResponse<
       PrivateCloud,
-      LroHeaders = LocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      LroHeaders = ArmLroLocationHeader<FinalResult = PrivateCloud> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
