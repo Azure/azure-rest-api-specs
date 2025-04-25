@@ -1074,14 +1074,14 @@ directive:
     reason: Suppressing errors for existing APIs
   - suppress: BodyTopLevelProperties
     from: managedCassandra.json
-    where: $.definitions.CommandPublicResource
     reason: Suppressing errors for existing APIs
   - suppress: RequiredPropertiesMissingInResourceModel
     from: managedCassandra.json
     reason: Suppressing errors for existing APIs
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    reason: _rid, _ts etc are backend properties
+    where: $.definitions.MaterializedViewDetails
+    reason: _rid is a backend property
 ```
 
 ---
