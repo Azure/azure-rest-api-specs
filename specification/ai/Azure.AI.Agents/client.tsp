@@ -14,14 +14,14 @@ using Azure.AI.Agents;
 // Agents sub‐client
 // --------------------------------------------------------------------------------
 
-@@clientName(Azure.AI.Agents.Agents, "GetAdministrationClient", "csharp");
-@@clientName(Azure.AI.Agents.Agents.createAgent, "CreateAgent", "csharp");
-@@clientName(Azure.AI.Agents.Agents.updateAgent, "UpdateAgent", "csharp");
-@@clientName(Azure.AI.Agents.Agents.getAgent, "GetAgent", "csharp");
-@@access(Azure.AI.Agents.Agents.listAgents, Access.internal, "csharp");
-@@clientName(Azure.AI.Agents.Agents.listAgents, "InternalGetAgents", "csharp");
-@@access(Azure.AI.Agents.Agents.deleteAgent, Access.internal, "csharp");
-@@clientName(Azure.AI.Agents.Agents.deleteAgent,
+@@clientName(Azure.AI.Agents, "AdministrationClient", "csharp");
+@@clientName(Azure.AI.Agents.createAgent, "CreateAgent", "csharp");
+@@clientName(Azure.AI.Agents.updateAgent, "UpdateAgent", "csharp");
+@@clientName(Azure.AI.Agents.getAgent, "GetAgent", "csharp");
+@@access(Azure.AI.Agents.listAgents, Access.internal, "csharp");
+@@clientName(Azure.AI.Agents.listAgents, "InternalGetAgents", "csharp");
+@@access(Azure.AI.Agents.deleteAgent, Access.internal, "csharp");
+@@clientName(Azure.AI.Agents.deleteAgent,
   "InternalDeleteAgent",
   "csharp"
 );
