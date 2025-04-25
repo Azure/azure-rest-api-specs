@@ -40,7 +40,6 @@ model SqlAssessmentSettings is AssessmentSettings {
   entityUptime?: EntityUptime;
 
   @doc("Gets or sets SQL the preferred azure targets.")
-  @identifiers(#[])
   preferredTargets?: AzureTarget[];
 
   @doc("Gets or sets user configurable SQL managed instance settings.")

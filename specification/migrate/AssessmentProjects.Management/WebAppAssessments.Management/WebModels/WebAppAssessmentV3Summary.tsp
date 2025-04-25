@@ -24,6 +24,5 @@ model WebAppAssessmentV3Summary is ProxyResource<WebAppSummaryProperties> {
 model WebAppSummaryProperties is SummaryProperties {
   @doc("Light summary of the discovered entity.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   discoveredEntityLightSummary?: DiscoveredEntityLightSummary;
 }
