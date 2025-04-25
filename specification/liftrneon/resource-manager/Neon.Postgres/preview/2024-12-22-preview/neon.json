@@ -516,6 +516,7 @@
           "description": "Marketplace details of the resource.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -547,6 +548,15 @@
       "type": "object",
       "description": "Properties specific to Neon Organization resource",
       "properties": {
+        "marketplaceDetails": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
+          "description": "Marketplace details of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "userDetails": {
           "$ref": "#/definitions/LiftrBase.UserDetails",
           "description": "Details of the user."
@@ -627,6 +637,24 @@
         "offerDetails"
       ]
     },
+    "LiftrBase.MarketplaceDetailsUpdate": {
+      "type": "object",
+      "description": "Marketplace details for an organization",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "SaaS subscription id for the the marketplace offer"
+        },
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/LiftrBase.OfferDetailsUpdate",
+          "description": "Offer details for the marketplace that is selected by the user"
+        }
+      }
+    },
     "LiftrBase.MarketplaceSubscriptionStatus": {
       "type": "string",
       "description": "Marketplace subscription status of a resource.",
@@ -697,6 +725,36 @@
         "offerId",
         "planId"
       ]
+    },
+    "LiftrBase.OfferDetailsUpdate": {
+      "type": "object",
+      "description": "Offer details for the marketplace that is selected by the user",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for the marketplace offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id for the marketplace offer"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id for the marketplace offer"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name for the marketplace offer"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Term Name for the marketplace offer"
+        },
+        "termId": {
+          "type": "string",
+          "description": "Term Id for the marketplace offer"
+        }
+      }
     },
     "LiftrBase.SingleSignOnProperties": {
       "type": "object",

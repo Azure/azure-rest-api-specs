@@ -13,11 +13,10 @@ options:
     flavor: azure
     package-dir: "Azure.ResourceManager.IotOperations"
     clear-output-folder: true
-    use-write-core: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-iotoperations"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.iotoperations"
     flavor: "azure"
     generate-test: true
     generate-sample: true
@@ -27,12 +26,8 @@ options:
     service-name: "IoT Operations"
     flavor: "azure"
   "@azure-tools/typespec-ts":
-    azure-sdk-for-js: true
     is-modular-library: true
-    generate-metadata: true
-    hierarchy-client: false
     experimental-extensible-enums: true
-    enable-operation-group: true
     generate-sample: true
     package-dir: "arm-iotoperations"
     flavor: "azure"

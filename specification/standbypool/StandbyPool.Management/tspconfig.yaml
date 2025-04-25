@@ -20,6 +20,7 @@ options:
     omit-unreachable-types: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-standbypool"
+    namespace: "com.azure.resourcemanager.standbypool"
     flavor: "azure"
     service-name: "Standby Pool"
   "@azure-tools/typespec-csharp":
@@ -28,19 +29,15 @@ options:
     clear-output-folder: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
-    azure-sdk-for-js: true
     is-modular-library: true
-    generate-metadata: true
-    hierarchy-client: false
     experimental-extensible-enums: true
-    enable-operation-group: true
     package-dir: "arm-standbypool"
     flavor: "azure"
     package-details:
       name: "@azure/arm-standbypool"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-standbypool"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.standbypool"
     flavor: "azure"
     generate-test: true
     generate-sample: true

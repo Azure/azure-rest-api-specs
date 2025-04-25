@@ -18,7 +18,7 @@ options:
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-healthdataaiservices"
     flavor: "azure"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.healthdataaiservices"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
@@ -27,12 +27,8 @@ options:
     namespace: "com.azure.resourcemanager.healthdataaiservices"
     service-name: "Health Data AI Services"
   "@azure-tools/typespec-ts":
-    azure-sdk-for-js: true
     is-modular-library: true
-    generate-metadata: true
-    hierarchy-client: false
     experimental-extensible-enums: true
-    enable-operation-group: true
     package-dir: "arm-healthdataaiservices"
     emitter-output-dir: "{project-root}/{service-dir}/{package-dir}"
     flavor: "azure"

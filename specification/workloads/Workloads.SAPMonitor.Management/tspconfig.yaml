@@ -14,19 +14,15 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/monitors/{version-status}/{version}/monitors.json"
   "@azure-tools/typespec-ts":
-    azure-sdk-for-js: true
     is-modular-library: true
-    generate-metadata: true
-    hierarchy-client: false
     experimental-extensible-enums: true
-    enable-operation-group: true
     package-dir: "arm-sapmonitors"
     flavor: "azure"
     package-details:
       name: "@azure/arm-sapmonitors"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-sapmonitors"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.sapmonitors"
     flavor: "azure"
     generate-test: true
     generate-sample: true
