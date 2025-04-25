@@ -19,7 +19,7 @@ namespace Azure.AI.Agents {
     /**
      * Returns a list of vector store files.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"      "mirrored API responds with a container"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
@@ -42,7 +42,7 @@ namespace Azure.AI.Agents {
     /**
      * Create a vector store file by attaching a file to a vector store.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"      "mirrored API responds with a container"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
@@ -73,7 +73,7 @@ namespace Azure.AI.Agents {
     /**
      * Retrieves a vector store file.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"      "mirrored API responds with a container"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
@@ -96,7 +96,7 @@ namespace Azure.AI.Agents {
     /**
      * Deletes a vector store file. This removes the file‐to‐store link (does not delete the file itself).
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"      "mirrored API responds with a container"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @delete

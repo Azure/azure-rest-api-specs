@@ -18,9 +18,9 @@ namespace Azure.AI.Agents {
     /**
      * Returns a list of vector stores.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"      "mirrored API responds with a container"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"       "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     listVectorStores is Azure.Core.Foundations.Operation<
@@ -33,7 +33,7 @@ namespace Azure.AI.Agents {
     /**
      * Creates a vector store.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"      "mirrored API responds with a container"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
@@ -50,9 +50,9 @@ namespace Azure.AI.Agents {
     /**
      * Returns the vector store object matching the specified ID.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"      "mirrored API responds with a container"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"       "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     @route("/{vectorStoreId}")
@@ -69,7 +69,7 @@ namespace Azure.AI.Agents {
     /**
      * Modifies an existing vector store.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"      "mirrored API responds with a container"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
@@ -92,9 +92,9 @@ namespace Azure.AI.Agents {
     /**
      * Deletes the vector store object matching the specified ID.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"      "mirrored API responds with a container"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"       "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @delete
     @route("/{vectorStoreId}")

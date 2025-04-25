@@ -70,7 +70,7 @@ namespace Azure.AI.Agents {
            *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
            *            file input, like curl does) but should remain configurable when using a stream or other data source
            *            lacking an a priori name.
-          */
+           */
           @doc("The name of the file.")
           filename?: HttpPart<string>;
         };

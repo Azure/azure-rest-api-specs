@@ -19,7 +19,7 @@ namespace Azure.AI.Agents {
      * @returns Information about the newly created thread.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     createThread is Azure.Core.Foundations.Operation<
@@ -39,7 +39,7 @@ namespace Azure.AI.Agents {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     listThreads is Azure.Core.Foundations.Operation<
@@ -56,9 +56,9 @@ namespace Azure.AI.Agents {
      * @returns Information about the requested thread.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"   "mirrored API name parity"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
     @route("/{threadId}")
     getThread is Azure.Core.Foundations.Operation<
@@ -77,7 +77,7 @@ namespace Azure.AI.Agents {
      * @returns Information about the modified thread.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{threadId}")
@@ -98,7 +98,7 @@ namespace Azure.AI.Agents {
      * @returns Status information about the requested thread deletion operation.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @delete
     @route("/{threadId}")

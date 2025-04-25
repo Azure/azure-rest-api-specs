@@ -17,7 +17,7 @@ namespace Azure.AI.Agents {
    * @returns Information about the newly created thread run.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @post
   @route("/threads/runs")
@@ -46,7 +46,7 @@ namespace Azure.AI.Agents {
      * @returns Information about the new thread run.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @doc("Creates a new run for an agent thread.")
@@ -80,7 +80,7 @@ namespace Azure.AI.Agents {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     listRuns is Azure.Core.Foundations.Operation<
@@ -102,9 +102,9 @@ namespace Azure.AI.Agents {
      * @returns The requested information about the specified thread run.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names"   "mirrored API name parity"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
     @route("/{runId}")
     getRun is Azure.Core.Foundations.Operation<
@@ -128,7 +128,7 @@ namespace Azure.AI.Agents {
      * @returns Information about the modified run.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{runId}")
@@ -157,7 +157,7 @@ namespace Azure.AI.Agents {
      * @returns Updated information about the run.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{runId}/submit_tool_outputs")
@@ -190,7 +190,7 @@ namespace Azure.AI.Agents {
      * @returns Updated information about the cancelled run.
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id"      "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{runId}/cancel")

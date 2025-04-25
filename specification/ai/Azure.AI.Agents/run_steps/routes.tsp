@@ -83,6 +83,7 @@ namespace Azure.AI.Agents {
           """)
         @query("include[]")
         include?: RunAdditionalFieldList[];
+
         ...OpenAIListRequestOptions;
       },
       OpenAIPageableListOf<RunStep>
