@@ -110,7 +110,7 @@ union RiskCategory {
   Sexual: "Sexual",
 
   @doc("Represents content related to self-harm.")
-  SelfHarm: "SelfHarm",
+  SelfHarm: "SelfHarm"
 }
 
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
