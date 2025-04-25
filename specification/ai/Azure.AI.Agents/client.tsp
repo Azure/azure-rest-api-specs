@@ -7,8 +7,12 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents, "AgentsClient", "python, javascript");
 @@clientName(Azure.AI.Agents, "PersistentAgentsClient", "csharp, java");
 
-// Trivial response value containers should treat these containers as internal details and instead surface a shimmed
-// operation that exposes the underlying data directly.
+@@clientName(Azure.AI.Agents.Agents, "agents", "python")
+@@clientName(Azure.AI.Agents.Agents.createAgent, "create", "python")
+@@clientName(Azure.AI.Agents.Agents.updateAgent, "update", "python")
+@@clientName(Azure.AI.Agents.Agents.listAgents,  "list",   "python")
+@@clientName(Azure.AI.Agents.Agents.getAgent,    "get",    "python")
+@@clientName(Azure.AI.Agents.Agents.deleteAgent, "delete", "python")
 
 @@clientName(Agent, "PersistentAgent", "csharp, java");
 @@clientName(AgentsApiResponseFormat,
@@ -39,12 +43,12 @@ using Azure.AI.Agents;
 );
 
 @@clientName(AgentDeletionStatus, "InternalAgentDeletionStatus", "csharp");
-@@access(deleteAgent, Access.internal, "csharp");
-@@clientName(deleteAgent, "InternalDeleteAgent", "csharp");
+@@access(Azure.AI.Agents.Agents.deleteAgent, Access.internal, "csharp");
+@@clientName(Azure.AI.Agents.Agents.deleteAgent, "InternalDeleteAgent", "csharp");
 @@access(deleteThread, Access.internal, "csharp");
 @@clientName(deleteThread, "InternalDeleteThread", "csharp");
-@@access(listAgents, Access.internal, "csharp");
-@@clientName(listAgents, "InternalGetAgents", "csharp");
+@@access(Azure.AI.Agents.Agents.listAgents, Access.internal, "csharp");
+@@clientName(Azure.AI.Agents.Agents.listAgents, "InternalGetAgents", "csharp");
 @@access(listRunSteps, Access.internal, "csharp");
 @@clientName(listRunSteps, "InternalGetRunSteps", "csharp");
 @@access(listMessages, Access.internal, "csharp");
@@ -298,7 +302,7 @@ using Azure.AI.Agents;
 @@clientName(CreateRunOptions.assistantId, "agentId", "python");
 @@clientName(CreateAndRunThreadOptions.assistantId, "agentId", "python");
 // From https://platform.openai.com/docs/agents/how-it-works
-// "Note that deleting an AgentFile doesn’t delete the original File object, it simply deletes the association
+// "Note that deleting an AgentFile doesn�t delete the original File object, it simply deletes the association
 // between that File and the Agent."
 
 //@override(Azure.AI.Agents.createAgent, "java")
