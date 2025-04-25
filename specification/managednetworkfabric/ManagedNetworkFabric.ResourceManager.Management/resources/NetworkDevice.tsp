@@ -87,7 +87,7 @@ interface NetworkDevices {
   runRoCommandDeprecated is ArmResourceActionAsync<
   NetworkDevice,
   DeviceRoCommand,
-  CommonPostActionResponseForDeviceROCommands
+  CommonPostActionResponseForDeviceROCommandsDeprecated
 >;
 
   @doc("Run the RO Command on the Network Device.")
