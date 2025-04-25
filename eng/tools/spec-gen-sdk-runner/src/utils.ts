@@ -48,7 +48,6 @@ export function findFilesRecursive(directory: string, fileName: string): string[
 }
 
 export function findReadmeFiles(directory: string): string[] {
-  console.log('directory', directory)
   return findFilesRecursive(directory, "readme.md");
 }
 
@@ -450,7 +449,7 @@ export function objectToMap<T>(obj: Record<string, T>): Map<string, T> {
  * To ensure the path is consistent across both Windows and Linux environments
  * Convert the path to POSIX style and remove any redundant slashes.
  * @param p - The path to normalize
- * @returns 
+ * @returns
  */
 export function normalizePath(p: string): string {
   return p.replace(/\\/g, "/").replace(/\/+/g, "/");
