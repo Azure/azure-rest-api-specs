@@ -176,3 +176,20 @@ directive:
     transform: >
         $['required'] = ['type'];
 ```
+
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $.definitions
+    transform: >
+      $.LoginServerProperties.properties.tls = {
+          "$ref": "#/definitions/TlsProperties",
+          "description": "The TLS properties of the connected registry login server.",
+          "readOnly": true
+        };
+      $.TlsProperties.properties.certificate = {
+          "$ref": "#/definitions/TlsCertificateProperties",
+          "description": "The certificate used to configure HTTPS for the login server.",
+          "readOnly": true
+        };
+```
