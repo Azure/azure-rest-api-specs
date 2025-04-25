@@ -35,7 +35,7 @@ options:
     generateTest: true
     generateMetadata: false
     packageDetails:
-      name: "@azure/ai-projects-1dp"
+    name: "@azure/ai-projects-1dp"
     flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-projects"
@@ -45,6 +45,11 @@ options:
     enable-sync-stack: true
     generate-tests: false
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/ai/projects"
+    package-dir: "aiprojects"
+    generate-fakes: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
