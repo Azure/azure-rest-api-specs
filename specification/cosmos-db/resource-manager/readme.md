@@ -1080,7 +1080,7 @@ directive:
     reason: Suppressing errors for existing APIs
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.MaterializedViewDetails.properties._rid_
+    where: $.definitions.MaterializedViewDetails.properties._rid
     reason: _rid is a backend property
 ```
 
