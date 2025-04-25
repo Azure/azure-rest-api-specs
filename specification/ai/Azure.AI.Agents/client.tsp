@@ -128,7 +128,6 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // RunSteps sub‐client (/threads/{threadId}/runs/{runId}/steps)
 // --------------------------------------------------------------------------------
-//@@clientName(Azure.AI.Agents.RunSteps, "steps", "python");
 @@clientName(Azure.AI.Agents.RunSteps.getRunStep, "get", "python");
 @@clientName(Azure.AI.Agents.RunSteps.listRunSteps, "list", "python");
 
