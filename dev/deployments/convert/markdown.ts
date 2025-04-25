@@ -15,39 +15,62 @@ export function writeMarkdownFiles(basePath: string, filePaths: string[], compon
   writeFileSync(path.resolve(basePath, 'readme.typescript.md'), getTypescriptReadme(clientName, componentName));
 }
 
-export function replaceSourceReadmes(basePath: string) {
-  let readme = readFileSync(path.resolve(basePath, '../readme.md'), 'utf8');
-
-  // Replace all markdown blocks between headings starting with ##
-  readme = readme.replace(/(##.*?\n)([\s\S]*?)(?=\n##|$)/g, (match, heading) => {
-    if (match.startsWith('### Tag: package-deploymentstacks') ||
-      match.startsWith('### Tag: package-deploymentscripts') ||
-      match.startsWith('### Tag: package-templatespecs') ||
-      match.startsWith('### Tag: package-bicep')) {
-        return '';
+function replaceMarkdownSection(readme: string, matcher: (heading: string) => boolean) {
+  return readme.replace(/(##.*?\n)([\s\S]*?)(?=\n##|$)/g, (match, _) => {
+    if (matcher(match.split('\n')[0])) {
+      return '';
     }
 
     return match;
   });
+}
 
-  readme = readme
-    .replace(/\n  - package-deploymentscripts: true/g, '')
-    .replace(/\n  - package-templatespecs: true/g, '')
-    .replace(/\n  - package-deploymentstacks: true/g, '')
-    .replace(/\n  - package-bicep: true/g, '');
+function replaceCodeblockSection(readme: string, matcher: (heading: string) => boolean) {
+  return readme.replace(/(```.*?\n)([\s\S]*?)(\n```\n\n)/g, (match, _) => {
+    if (matcher(match.split('\n')[0])) {
+      return '';
+    }
 
-    readme = readme.replace(/(```.*?\n)([\s\S]*?)(\n```\n\n)/g, (match, openingTag) => {
-      if ( match.indexOf('$(package-deploymentscripts)') !== -1 ||
-        match.indexOf('$(package-templatespecs)') !== -1 ||
-        match.indexOf('$(package-deploymentstacks)') !== -1 ||
-        match.indexOf('$(package-bicep)') !== -1) {
-        return '';
+    return match;
+  });
+}
+
+function replaceFile(filePath: string, updateFunc: (content: string) => string) {
+  const content = readFileSync(filePath, 'utf8');
+  const updatedContent = updateFunc(content);
+  writeFileSync(filePath, updatedContent);
+}
+
+export function replaceSourceReadmes(basePath: string) {
+  const packagePattern = /package-deploymentscripts|package-templatespecs|package-deploymentstacks|package-bicep/;
+
+  const readmes = [
+    'readme.md',
+    'readme.go.md',
+    'readme.java.md',
+    'readme.nodejs.md',
+    'readme.python.md',
+    'readme.ruby.md',
+    'readme.terraform.md',
+    'readme.typescript.md',
+  ];
+
+  for (const readme of readmes) {
+    replaceFile(path.resolve(basePath, `../${readme}`), (content) => {
+      content = replaceMarkdownSection(content, (heading) => packagePattern.test(heading));
+      content = replaceCodeblockSection(content, heading => packagePattern.test(heading));
+
+      if (readme === 'readme.md') {
+        content = content
+          .replace(/\n  - package-deploymentscripts: true/g, '')
+          .replace(/\n  - package-templatespecs: true/g, '')
+          .replace(/\n  - package-deploymentstacks: true/g, '')
+          .replace(/\n  - package-bicep: true/g, '');
       }
 
-      return match;
-    });    
-  
-    writeFileSync(path.resolve(basePath, '../readme.md'), readme)
+      return content;
+    });
+  }
 }
 
 function getPackageName(apiVersion: string) {
