@@ -1045,7 +1045,10 @@ directive:
     reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
   - suppress: ArmResourcePropertiesBag
     from: mongoMIrbac.json
-    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api    
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ArmResourcePropertiesBag
+    from: tablerbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api  
   - suppress: PutResponseCodes
     from: dataTransferService.json
     reason: Suppressing errors for existing APIs
@@ -1073,10 +1076,12 @@ directive:
     from: managedCassandra.json
     where: $.definitions.CommandPublicResource
     reason: Suppressing errors for existing APIs
-  - suppress: BodyTopLevelProperties
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: managedCassandra.json
-    where: $.definitions.BackupResource
     reason: Suppressing errors for existing APIs
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    reason: _rid, _ts etc are backend properties
 ```
 
 ---
