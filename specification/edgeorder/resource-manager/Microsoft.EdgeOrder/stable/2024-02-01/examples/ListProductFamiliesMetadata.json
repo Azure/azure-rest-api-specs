@@ -1,13 +1,13 @@
 {
   "parameters": {
-    "subscriptionId": "eb5dc900-6186-49d8-b7d7-febd866fdc1d",
-    "api-version": "2024-02-01",
+    "Referer": [
+      "https://management.azure.com/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/providers/Microsoft.EdgeOrder/productFamiliesMetadata?api-version=2024-02-01"
+    ],
     "User-Agent": [
       "vscode-restclient"
     ],
-    "Referer": [
-      "https://management.azure.com/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/providers/Microsoft.EdgeOrder/productFamiliesMetadata?api-version=2024-02-01"
-    ]
+    "api-version": "2024-02-01",
+    "subscriptionId": "eb5dc900-6186-49d8-b7d7-febd866fdc1d"
   },
   "responses": {
     "200": {
@@ -15,12 +15,18 @@
         "value": [
           {
             "properties": {
-              "productLines": [],
-              "resourceProviderDetails": [
-                {
-                  "resourceProviderNamespace": "Microsoft.DataBoxEdge"
-                }
-              ],
+              "description": {
+                "attributes": [],
+                "descriptionType": "Base",
+                "keywords": [],
+                "links": [],
+                "shortDescription": "Azure managed physical edge compute device"
+              },
+              "availabilityInformation": {
+                "availabilityStage": "Available",
+                "disabledReason": "None"
+              },
+              "displayName": "Azure Stack Edge",
               "filterableProperties": [
                 {
                   "type": "ShipToCountries",
@@ -35,29 +41,25 @@
                   ]
                 }
               ],
-              "displayName": "Azure Stack Edge",
-              "description": {
-                "descriptionType": "Base",
-                "shortDescription": "Azure managed physical edge compute device",
-                "keywords": [],
-                "attributes": [],
-                "links": []
-              },
-              "imageInformation": [],
-              "availabilityInformation": {
-                "availabilityStage": "Available",
-                "disabledReason": "None"
-              },
               "hierarchyInformation": {
+                "configurationName": "",
                 "productFamilyName": "azurestackedge",
                 "productLineName": "",
-                "productName": "",
-                "configurationName": ""
-              }
+                "productName": ""
+              },
+              "imageInformation": [],
+              "productLines": [],
+              "resourceProviderDetails": [
+                {
+                  "resourceProviderNamespace": "Microsoft.DataBoxEdge"
+                }
+              ]
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ProductsAndConfigurations_ListProductFamiliesMetadata",
+  "title": "ListProductFamiliesMetadata"
 }

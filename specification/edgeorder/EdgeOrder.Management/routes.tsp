@@ -129,3 +129,9 @@ interface OrdersOperationGroup {
     $top?: int32,
   ): ArmResponse<OrderResourceList> | ErrorResponse;
 }
+@@doc(ProductsAndConfigurationsOperationGroup.listConfigurations::parameters.body,
+  "Filters for showing the configurations."
+);
+@@doc(ProductsAndConfigurationsOperationGroup.listProductFamilies::parameters.body,
+  "Filters for showing the product families."
+);

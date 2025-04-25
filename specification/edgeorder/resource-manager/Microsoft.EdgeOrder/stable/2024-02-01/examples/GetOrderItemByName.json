@@ -1,119 +1,121 @@
 {
   "parameters": {
-    "subscriptionId": "eb5dc900-6186-49d8-b7d7-febd866fdc1d",
-    "resourceGroupName": "YourResourceGroupName",
-    "orderItemName": "TestOrderItemName1",
-    "api-version": "2024-02-01",
+    "Referer": [
+      "https://management.azure.com/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName1?api-version=2024-02-01"
+    ],
     "User-Agent": [
       "vscode-restclient"
     ],
-    "Referer": [
-      "https://management.azure.com/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName1?api-version=2024-02-01"
-    ]
+    "api-version": "2024-02-01",
+    "orderItemName": "TestOrderItemName1",
+    "resourceGroupName": "YourResourceGroupName",
+    "subscriptionId": "eb5dc900-6186-49d8-b7d7-febd866fdc1d"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "TestOrderItemName1",
+        "type": "Microsoft.EdgeOrder/orderItems",
+        "id": "/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName1",
+        "location": "eastus",
         "properties": {
+          "addressDetails": {
+            "forwardAddress": {
+              "addressValidationStatus": "Valid",
+              "contactDetails": {
+                "contactName": "XXXX XXXX",
+                "emailList": [
+                  "xxxx@xxxx.xxx"
+                ],
+                "phone": "0000000000",
+                "phoneExtension": ""
+              },
+              "shippingAddress": {
+                "addressType": "None",
+                "city": "San Francisco",
+                "companyName": "Microsoft",
+                "country": "US",
+                "postalCode": "94107",
+                "stateOrProvince": "CA",
+                "streetAddress1": "16 TOWNSEND ST",
+                "streetAddress2": "UNIT 1"
+              }
+            }
+          },
+          "orderId": "/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/locations/eastus/orders/TestOrderName1",
           "orderItemDetails": {
-            "productDetails": {
-              "displayInfo": {
-                "productFamilyDisplayName": "Azure Stack Edge",
-                "configurationDisplayName": "Azure Stack Edge Pro - 1 GPU"
-              },
-              "hierarchyInformation": {
-                "productFamilyName": "azurestackedge",
-                "productLineName": "azurestackedge",
-                "productName": "azurestackedgegpu",
-                "configurationName": "edgep_base"
-              },
-              "productDoubleEncryptionStatus": "Disabled"
-            },
-            "orderItemType": "Purchase",
+            "cancellationStatus": "NotCancellable",
             "currentStage": {
-              "stageStatus": "Succeeded",
               "stageName": "Confirmed",
+              "stageStatus": "Succeeded",
               "startTime": "2022-03-04T11:05:00.3575338+05:30"
             },
+            "deletionStatus": "NotAllowed",
+            "managementRpDetailsList": [
+              {
+                "resourceProviderNamespace": "Microsoft.DataBoxEdge"
+              }
+            ],
+            "notificationEmailList": [],
             "orderItemStageHistory": [
               {
-                "stageStatus": "Succeeded",
                 "stageName": "Placed",
+                "stageStatus": "Succeeded",
                 "startTime": "2022-03-04T10:55:54.3427968+05:30"
               },
               {
-                "stageStatus": "Succeeded",
                 "stageName": "Confirmed",
+                "stageStatus": "Succeeded",
                 "startTime": "2022-03-04T11:05:00.3575338+05:30"
               },
               {
-                "stageStatus": "None",
-                "stageName": "ReadyToShip"
+                "stageName": "ReadyToShip",
+                "stageStatus": "None"
               },
               {
-                "stageStatus": "None",
-                "stageName": "Shipped"
+                "stageName": "Shipped",
+                "stageStatus": "None"
               },
               {
-                "stageStatus": "None",
-                "stageName": "Delivered"
+                "stageName": "Delivered",
+                "stageStatus": "None"
               },
               {
-                "stageStatus": "None",
-                "stageName": "InUse"
+                "stageName": "InUse",
+                "stageStatus": "None"
               }
             ],
+            "orderItemType": "Purchase",
             "preferences": {
               "transportPreferences": {
                 "preferredShipmentType": "MicrosoftManaged"
               }
             },
-            "notificationEmailList": [],
-            "cancellationStatus": "NotCancellable",
-            "deletionStatus": "NotAllowed",
-            "returnStatus": "NotReturnable",
-            "managementRpDetailsList": [
-              {
-                "resourceProviderNamespace": "Microsoft.DataBoxEdge"
-              }
-            ]
-          },
-          "addressDetails": {
-            "forwardAddress": {
-              "shippingAddress": {
-                "streetAddress1": "16 TOWNSEND ST",
-                "streetAddress2": "UNIT 1",
-                "city": "San Francisco",
-                "stateOrProvince": "CA",
-                "country": "US",
-                "postalCode": "94107",
-                "companyName": "Microsoft",
-                "addressType": "None"
+            "productDetails": {
+              "displayInfo": {
+                "configurationDisplayName": "Azure Stack Edge Pro - 1 GPU",
+                "productFamilyDisplayName": "Azure Stack Edge"
               },
-              "contactDetails": {
-                "contactName": "XXXX XXXX",
-                "phone": "0000000000",
-                "phoneExtension": "",
-                "emailList": [
-                  "xxxx@xxxx.xxx"
-                ]
+              "hierarchyInformation": {
+                "configurationName": "edgep_base",
+                "productFamilyName": "azurestackedge",
+                "productLineName": "azurestackedge",
+                "productName": "azurestackedgegpu"
               },
-              "addressValidationStatus": "Valid"
-            }
+              "productDoubleEncryptionStatus": "Disabled"
+            },
+            "returnStatus": "NotReturnable"
           },
-          "startTime": "2022-03-04T10:55:10.2820482+05:30",
-          "orderId": "/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/locations/eastus/orders/TestOrderName1"
+          "startTime": "2022-03-04T10:55:10.2820482+05:30"
         },
         "systemData": {
           "createdAt": "0001-01-01T05:30:00+05:30",
           "lastModifiedAt": "0001-01-01T05:30:00+05:30"
         },
-        "location": "eastus",
-        "tags": {},
-        "name": "TestOrderItemName1",
-        "id": "/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName1",
-        "type": "Microsoft.EdgeOrder/orderItems"
+        "tags": {}
       }
     }
-  }
+  },
+  "operationId": "OrderItems_Get",
+  "title": "GetOrderItemByName"
 }
