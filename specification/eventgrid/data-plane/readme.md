@@ -145,6 +145,7 @@ input-file:
 - Microsoft.ResourceNotifications/stable/2018-01-01/ContainerServiceEventResources.json
 - Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 - Microsoft.ApiCenter/stable/2018-01-01/ApiCenter.json
+- Microsoft.Edge/stable/2018-01-01/Edge.json
 ```
 
 ### Tag: package-2023-11-01
@@ -176,6 +177,7 @@ input-file:
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
 - Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
+- Microsoft.Edge/stable/2018-01-01/Edge.json
 
 ```
 
@@ -290,6 +292,7 @@ input-file:
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
   - $(this-folder)/Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
+  - $(this-folder)/Microsoft.Edge/stable/2018-01-01/Edge.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

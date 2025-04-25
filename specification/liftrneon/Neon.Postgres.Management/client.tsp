@@ -23,3 +23,37 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(LiftrBase.SingleSignOnStates, "NeonSingleSignOnState", "csharp");
+
+@@clientName(Neon.Postgres.Models.Project, "NeonProject", "csharp");
+@@clientName(Neon.Postgres.Models.ProjectProperties,
+  "NeonProjectProperties",
+  "csharp"
+);
+
+@@clientName(Neon.Postgres.Models.Branch, "NeonBranch", "csharp");
+@@clientName(Neon.Postgres.Models.BranchProperties,
+  "NeonBranchProperties",
+  "csharp"
+);
+
+@@clientName(Neon.Postgres.Models.Endpoint, "NeonEndpoint", "csharp");
+@@clientName(Neon.Postgres.Models.EndpointProperties,
+  "NeonEndpointProperties",
+  "csharp"
+);
+
+@@clientName(Neon.Postgres.Models.Compute, "NeonCompute", "csharp");
+@@clientName(Neon.Postgres.Models.ComputeProperties,
+  "NeonComputeProperties",
+  "csharp"
+);
+
+@@clientName(Neon.Postgres.Models.ProjectProperties.pgVersion,
+  "postgresVersion",
+  "csharp"
+);
+
+@@clientName(Neon.Postgres.Models.ProjectProperties.attributes,
+  "attribute",
+  "csharp"
+);
