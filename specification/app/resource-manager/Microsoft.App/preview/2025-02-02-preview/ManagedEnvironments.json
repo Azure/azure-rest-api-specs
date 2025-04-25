@@ -1620,7 +1620,8 @@
           "properties": {
             "keyUrl": {
               "description": "Key URL pointing to a key in KeyVault. Version segment of the Url is required.",
-              "type": "string"
+              "type": "string",
+              "format": "uri"
             },
             "auth": {
               "description": "Configuration properties for the authentication to the Key Vault",
@@ -1628,7 +1629,8 @@
               "properties": {
                 "identity": {
                   "description": "Resource ID of a user-assigned managed identity to authenticate to the Key Vault. The identity must be assigned to the managed environment, in the same tenant as the Key Vault, and it must have the following key permissions on the Key Vault: wrapkey, unwrapkey, get.",
-                  "type": "string"
+                  "type": "string",
+                  "format": "arm-id"
                 }
               }
             }
