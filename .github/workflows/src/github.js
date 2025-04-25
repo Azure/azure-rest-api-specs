@@ -1,5 +1,4 @@
 // @ts-check
-import fs from "node:fs";
 export const PER_PAGE_MAX = 100;
 
 /**
@@ -128,9 +127,7 @@ export const CommitStatusState = {
  */
 export async function writeToActionsSummary(content, core) {
   try {
-    await core.summary
-      .addRaw(content)
-      .write();
+    await core.summary.addRaw(content).write();
     core.info("Successfully wrote to the GitHub Actions summary");
   } catch (error) {
     throw new Error(`Failed to write to the GitHub Actions summary: ${error}`);
