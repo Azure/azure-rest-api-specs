@@ -508,7 +508,7 @@ export class SdkTspConfigValidationRule implements Rule {
 
     const stdOutputFailedResults =
       failedResults.length > 0
-        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\n Please see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\n For additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation.`
+        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\nPlease see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\nFor additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation.`
         : "";
 
     return {
