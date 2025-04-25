@@ -49,13 +49,13 @@ model UserAssignedIdentityAuthentication extends RegistryEndpointAuthentication 
 @doc("System assigned managed identity properties")
 @added(Versions.`2025-07-01-preview`)
 model SystemAssignedManagedIdentitySettings {
-  ...DataflowEndpointAuthenticationSystemAssignedManagedIdentity;
+  ...BaseSystemAssignedManagedIdentity;
 }
 
 @doc("User assigned managed identity properties")
 @added(Versions.`2025-07-01-preview`)
 model UserAssignedManagedIdentitySettings {
-  ...DataflowEndpointAuthenticationUserAssignedManagedIdentity;
+  ...BaseUserAssignedManagedIdentity;
 }
 
 @doc("Anonymous authentication")
