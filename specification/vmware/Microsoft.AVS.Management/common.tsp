@@ -1,6 +1,5 @@
 namespace Microsoft.AVS;
 
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -85,3 +84,21 @@ op ArmResourceActionAsyncBaseNoRequestBody<
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): TResponse | ErrorResponse;
+
+/**
+ * Just like ArmAcceptedLroResponse, but with a ResponseBody.
+ * @template Description The description of the response status (defaults to `Resource operation accepted`)
+ * @template LroHeaders Optional.  The lro headers that appear in the Accepted response
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+@doc(Description)
+model ArmAcceptedLroResponseWithResponseBody<
+  ResponseBody,
+  Description extends valueof string = "Resource operation accepted.",
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
+    Azure.Core.Foundations.RetryAfterHeader
+> {
+  ...AcceptedResponse;
+  ...LroHeaders;
+  ...Body<ResponseBody>;
+}
