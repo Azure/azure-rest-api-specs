@@ -1,4 +1,4 @@
-import { describe, test, expect, vi, beforeEach } from "vitest";
+import { describe, test, expect, vi, beforeEach, type Mock } from "vitest";
 import * as utils from "../../src/utils.js";
 import {
   generateSdkForBatchSpecs,
@@ -11,6 +11,13 @@ import * as changeFiles from "../../src/change-files.js";
 import fs from "node:fs";
 import path from "node:path";
 import { LogLevel } from "../../src/log.js";
+
+function getNormalizedFsCalls(mockFn: Mock): any[][] {
+  return mockFn.mock.calls.map((args: any[]) => {
+    const [filePath, ...rest] = args
+    return [String(filePath).replace(/\\/g, '/'), ...rest]
+  })
+}
 
 describe("generateSdkForSingleSpec", () => {
   beforeEach(() => {
@@ -345,12 +352,16 @@ describe("generateSdkForBatchSpecs", () => {
     expect(code).toBe(0);
     expect(utils.runSpecGenSdkCommand).not.toHaveBeenCalled();
     expect(utils.resetGitRepo).not.toHaveBeenCalled();
-    const markdownFilePath = path.join(mockInput.workingFolder, "out/logs/generation-summary.md");
+    const markdownFilePath = path.normalize(
+      path.join(mockInput.workingFolder, "out/logs/generation-summary.md"),
+    );
     expect(log.logMessage).toHaveBeenCalledWith(
       `Runner: markdown file written to ${markdownFilePath}`,
     );
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
-    expect(fs.writeFileSync).toMatchSnapshot();
+    
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+    expect(calls).toMatchSnapshot();
   });
 
   test("should generate SDKs for all specs successfully", async () => {
@@ -385,12 +396,16 @@ describe("generateSdkForBatchSpecs", () => {
     expect(result).toBe(0);
     expect(commandUtils.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalledTimes(mockSpecPaths.length);
-    const markdownFilePath = path.join(mockInput.workingFolder, "out/logs/generation-summary.md");
+    const markdownFilePath = path.normalize(
+      path.join(mockInput.workingFolder, "out/logs/generation-summary.md"),
+    );
     expect(log.logMessage).toHaveBeenCalledWith(
       `Runner: markdown file written to ${markdownFilePath}`,
     );
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
-    expect(fs.writeFileSync).toMatchSnapshot();
+
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+    expect(calls).toMatchSnapshot();
   });
 
   test("should handle errors during SDK generation", async () => {
@@ -427,7 +442,9 @@ describe("generateSdkForBatchSpecs", () => {
     expect(result).toBe(1);
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalledTimes(mockSpecPaths.length);
     expect(logSpy).toHaveBeenCalledTimes(11);
-    const markdownFilePath = path.join(mockInput.workingFolder, "out/logs/generation-summary.md");
+    const markdownFilePath = path.normalize(
+      path.join(mockInput.workingFolder, "out/logs/generation-summary.md"),
+    );
     expect(logSpy).toHaveBeenNthCalledWith(1, `Generating SDK from ${mockSpecPaths[0]}`, "group");
     expect(logSpy).toHaveBeenNthCalledWith(
       3,
@@ -438,7 +455,9 @@ describe("generateSdkForBatchSpecs", () => {
     expect(logSpy).toHaveBeenNthCalledWith(6, `Generating SDK from ${mockSpecPaths[1]}`, "group");
     expect(logSpy).toHaveBeenCalledWith(`Runner: markdown file written to ${markdownFilePath}`);
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
-    expect(fs.writeFileSync).toMatchSnapshot();
+
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+    expect(calls).toMatchSnapshot();
     logSpy.mockRestore();
   });
 });

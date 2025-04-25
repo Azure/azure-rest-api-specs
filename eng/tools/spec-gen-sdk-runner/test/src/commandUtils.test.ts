@@ -52,14 +52,14 @@ describe("commands.ts", () => {
     test("runMode is release when it has no batch-type and no pr-number", () => {
       const mockArgs = [
         "--scp",
-        `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
         "--lang",
         "azure-sdk-for-go",
       ];
       vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", ...mockArgs]);
       const result = parseArguments();
       expect(result.localSpecRepoPath).toBe(
-        `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-go");
       expect(result.prNumber).toBe("");
@@ -69,7 +69,7 @@ describe("commands.ts", () => {
     test("runMode is release when it has pr-number", () => {
       const mockArgs = [
         "--scp",
-        `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
         "--pr-number",
         "1234",
       ];
@@ -78,7 +78,7 @@ describe("commands.ts", () => {
       const result = parseArguments();
 
       expect(result.localSpecRepoPath).toBe(
-        `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-net");
       expect(result.prNumber).toBe("1234");
@@ -88,7 +88,7 @@ describe("commands.ts", () => {
     test("runMode is batch when it has batch-type", () => {
       const mockArgs = [
         "--scp",
-        `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
         "--batch-type",
         "all-specs",
       ];
@@ -97,7 +97,7 @@ describe("commands.ts", () => {
       const result = parseArguments();
 
       expect(result.localSpecRepoPath).toBe(
-        `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-net");
       expect(result.prNumber).toBe("");
@@ -270,7 +270,7 @@ describe("commands.ts", () => {
 
       const result = generateArtifact(mockCommandInput, mockArtifactInfo, true, "breaking-change");
 
-      const breakingChangeLabelArtifactPath = "/working/folder/out/spec-gen-sdk-artifact";
+      const breakingChangeLabelArtifactPath = path.normalize("/working/folder/out/spec-gen-sdk-artifact");
       expect(result).toBe(0);
       expect(fs.mkdirSync).toHaveBeenCalledWith(breakingChangeLabelArtifactPath, {
         recursive: true,
