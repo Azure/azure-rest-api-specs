@@ -27,7 +27,7 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_09_18_preview: "2024-09-18-preview",
 
-   /** 2024-09-18 version */
+  /** 2024-09-18 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -40,7 +40,7 @@ union Region {
   string,
 
   @doc("Region: East US")
-  astus: "eastus",
+  eastus: "eastus",
 
   @doc("Region: Central US")
   centralus: "centralus",
