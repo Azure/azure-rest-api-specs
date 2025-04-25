@@ -136,6 +136,17 @@ interface DataflowEndpoint {
   listByResourceGroup is ArmResourceListByParent<DataflowEndpointResource>;
 }
 
+// /instance/registryEndpoints resource Operations
+@armResourceOperations
+@added(Versions.`2025-07-01-preview`)
+interface RegistryEndpoint {
+  get is ArmResourceRead<RegistryEndpointResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<RegistryEndpointResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<RegistryEndpointResource>;
+  listByResourceGroup is ArmResourceListByParent<RegistryEndpointResource>;
+}
+
+// /instance/diagnostics resource Operations
 @armResourceOperations
 @added(Versions.`2025-07-01-preview`)
 interface Diagnostic {
