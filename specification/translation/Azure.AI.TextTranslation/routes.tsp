@@ -3,8 +3,11 @@ import "@azure-tools/typespec-azure-core";
 import "./models-languages.tsp";
 import "./models-translate.tsp";
 import "./models-transliterate.tsp";
+import "./models-breaksentence.tsp";
+import "./models-dictionary.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace TextTranslation;
 
@@ -63,5 +66,44 @@ op transliterate is CustomOperation<
   InputTextItem[],
   TransliterateParameters,
   TransliterateResult,
+  ErrorResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+@removed(APIVersion.v2025_05_01_preview)
+@post
+@route("breaksentence")
+@summary("Find Sentence Boundaries")
+@doc("Find Sentence Boundaries")
+op findSentenceBoundaries is CustomOperation<
+  InputTextItem[],
+  BreakSentenceParameters,
+  BreakSentenceResult,
+  ErrorResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+@removed(APIVersion.v2025_05_01_preview)
+@post
+@route("dictionary/lookup")
+@summary("Lookup Dictionary Entries")
+@doc("Lookup Dictionary Entries")
+op lookupDictionaryEntries is CustomOperation<
+  InputTextItem[],
+  DictionaryLookupParameters,
+  DictionaryLookupResult,
+  ErrorResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+@removed(APIVersion.v2025_05_01_preview)
+@post
+@route("dictionary/examples")
+@summary("Lookup Dictionary Examples")
+@doc("Lookup Dictionary Examples")
+op lookupDictionaryExamples is CustomOperation<
+  DictionaryExampleTextItem[],
+  DictionaryExamplesParameters,
+  DictionaryExamplesResult,
   ErrorResponse
 >;
