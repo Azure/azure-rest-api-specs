@@ -27,6 +27,7 @@ using Azure.ResourceManager.Private;
 /**
  * PowerBI Dedicated Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Power BI dedicated capacities
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armProviderNamespace
 @service(#{ title: "PowerBIDedicated" })
 @versioned(Versions)

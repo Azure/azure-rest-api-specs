@@ -13,6 +13,7 @@ namespace Microsoft.PowerBIDedicated;
 /**
  * Represents an instance of an auto scale v-core resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AutoScaleVCore
   is Azure.ResourceManager.TrackedResource<AutoScaleVCoreProperties> {
   ...ResourceNameParameter<
@@ -29,6 +30,7 @@ model AutoScaleVCore
   sku: AutoScaleVCoreSku;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface AutoScaleVCores {
   /**
