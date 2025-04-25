@@ -14,7 +14,7 @@ using Azure.AI.Agents;
 // Agents sub‐client
 // --------------------------------------------------------------------------------
 
-@@clientName(Azure.AI.Agents, "AdministrationClient", "csharp");
+@@clientName(Azure.AI.Agents, "AgentsAdministrationClient", "csharp");
 @@clientName(Azure.AI.Agents.createAgent, "CreateAgent", "csharp");
 @@clientName(Azure.AI.Agents.updateAgent, "UpdateAgent", "csharp");
 @@clientName(Azure.AI.Agents.getAgent, "GetAgent", "csharp");
@@ -57,7 +57,7 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Messages.getMessage, "get", "python");
 @@clientName(Azure.AI.Agents.Messages.updateMessage, "update", "python");
 
-@@clientName(Azure.AI.Agents.Messages, "MessagesClient", "csharp");
+@@clientName(Azure.AI.Agents.Messages, "ThreadMessagesClient", "csharp");
 @@clientName(Azure.AI.Agents.Messages.createMessage, "CreateMessage", "csharp");
 @@access(Azure.AI.Agents.Messages.listMessages, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.Messages.listMessages,
