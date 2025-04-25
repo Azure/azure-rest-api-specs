@@ -177,6 +177,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   let succeededCount = 0;
   let executionReport;
 
+  logMessage(`Testtetss`, LogLevel.Group);
   // Generate SDKs for each spec
   for (const specConfigPath of specConfigPaths) {
     logMessage(`Generating SDK from ${specConfigPath}`, LogLevel.Group);
