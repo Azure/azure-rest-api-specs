@@ -1637,7 +1637,7 @@
           {
             "name": "clusterUpdate",
             "in": "body",
-            "description": "The cluster properties to be updated.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClusterUpdate"
@@ -1652,7 +1652,7 @@
             }
           },
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "Resource 'Cluster' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Cluster"
             },
@@ -1660,11 +1660,6 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -7372,6 +7367,19 @@
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "Azure.ResourceManager.ArmResponse<Cluster>": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Cluster",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
     },
     "AzureHybridBenefitType": {
       "type": "string",
