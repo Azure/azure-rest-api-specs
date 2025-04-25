@@ -179,7 +179,7 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(commandUtils, "getExecutionReport").mockReturnValue(mockExecutionReport);
     vi.spyOn(commandUtils, "getBreakingChangeInfo").mockReturnValue([false, ""]);
-    vi.spyOn(commandUtils, "processBreakingChangeLabelArtifacts").mockReturnValue(0);
+    vi.spyOn(commandUtils, "generateArtifact").mockReturnValue(0);
     vi.spyOn(commandUtils, "logIssuesToPipeline").mockImplementation(() => {});
     vi.spyOn(log, "logMessage").mockImplementation(() => {});
 
@@ -216,7 +216,7 @@ describe("generateSdkForSpecPr", () => {
 
     vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
-    vi.spyOn(commandUtils, "processBreakingChangeLabelArtifacts").mockReturnValue(0);
+    vi.spyOn(commandUtils, "generateArtifact").mockReturnValue(0);
     vi.spyOn(log, "logMessage").mockImplementation(() => {});
 
     const statusCode = await generateSdkForSpecPr();

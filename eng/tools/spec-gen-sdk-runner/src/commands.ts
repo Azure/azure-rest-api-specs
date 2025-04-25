@@ -5,24 +5,15 @@ import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { SpecGenSdkCmdInput } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 import {
-<<<<<<< HEAD
   generateArtifact,
-=======
->>>>>>> 5372582540 (refactor commands.ts and add new file for commandUtils.ts)
   getBreakingChangeInfo,
   getExecutionReport,
   getSpecPaths,
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
-<<<<<<< HEAD
   setPipelineVariables,
 } from "./command-helpers.js";
-=======
-  processBreakingChangeLabelArtifacts,
-  setPipelineVariables,
-} from "./commandUtils.js";
->>>>>>> 5372582540 (refactor commands.ts and add new file for commandUtils.ts)
 
 /**
  * Generate SDK for a single spec.
@@ -175,6 +166,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   // Get the spec paths based on the batch run type
   const specConfigPaths = getSpecPaths(batchType, commandInput.localSpecRepoPath);
+
   // Prepare variables
   let statusCode = 0;
   let markdownContent = "\n";

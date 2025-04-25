@@ -2,7 +2,7 @@ import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import path from "node:path";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
-import { SpecGenSdkCmdInput, VsoLogs } from "./types.js";
+import { SpecGenSdkArtifactInfo, SpecGenSdkCmdInput, VsoLogs } from "./types.js";
 import { findReadmeFiles, getArgumentValue, getAllTypeSpecPaths, objectToMap } from "./utils.js";
 
 /**
@@ -14,7 +14,7 @@ export function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
   // Read the execution report to determine if the generation was successful
   const executionReportPath = path.join(
     commandInput.workingFolder,
-    `${commandInput.sdkLanguage}_tmp/execution-report.json`,
+    `${commandInput.sdkRepoName}_tmp/execution-report.json`,
   );
   return JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
 }
@@ -35,6 +35,7 @@ export function setPipelineVariables(
   setVsoVariable("PrTitle", prTitle);
   setVsoVariable("PrBody", prBody);
 }
+
 /**
  * Parse the arguments.
  * @returns The spec-gen-sdk command input.
@@ -218,43 +219,41 @@ export function getBreakingChangeInfo(executionReport: any): [boolean, string] {
   }
   return [false, breakingChangeLabel];
 }
-// { shouldLabelBreakingChange: true, breakingChangeLabel: "breaking-change" }
+
 /**
- * Process the breaking change label artifacts.
+ * Generate the spec-gen-sdk artifacts.
  * @param commandInput - The command input.
+ * @param artifactInfo - The spec-gen-sdk artifact information.
  * @param shouldLabelBreakingChange - A flag indicating whether to label breaking changes.
+ * @param breakingChangeLabel - The breaking change label.
  * @returns the run status code.
  */
-export function processBreakingChangeLabelArtifacts(
+export function generateArtifact(
   commandInput: SpecGenSdkCmdInput,
+  artifactInfo: SpecGenSdkArtifactInfo,
   shouldLabelBreakingChange: boolean,
   breakingChangeLabel: string,
 ): number {
-  const breakingChangeLabelArtifactName = "spec-gen-sdk-breaking-change-artifact";
-  const breakingChangeLabelArtifactFileName = breakingChangeLabelArtifactName + ".json";
-  const breakingChangeLabelArtifactPath = "out/breaking-change-label-artifact";
-  const breakingChangeLabelArtifactAbsoluteFolder = path.join(
+  const specGenSdkArtifactName = "spec-gen-sdk-artifact";
+  const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
+  const specGenSdkArtifactPath = "out/spec-gen-sdk-artifact";
+  const specGenSdkArtifactAbsoluteFolder = path.join(
     commandInput.workingFolder,
-    breakingChangeLabelArtifactPath,
+    specGenSdkArtifactPath,
   );
   try {
-    if (!fs.existsSync(breakingChangeLabelArtifactAbsoluteFolder)) {
-      fs.mkdirSync(breakingChangeLabelArtifactAbsoluteFolder, { recursive: true });
+    if (!fs.existsSync(specGenSdkArtifactAbsoluteFolder)) {
+      fs.mkdirSync(specGenSdkArtifactAbsoluteFolder, { recursive: true });
     }
-    // Write breaking change label artifact
+    // Write artifact
+    artifactInfo.language = commandInput.sdkLanguage;
+    artifactInfo.labelAction = shouldLabelBreakingChange;
     fs.writeFileSync(
-      path.join(
-        commandInput.workingFolder,
-        breakingChangeLabelArtifactPath,
-        breakingChangeLabelArtifactFileName,
-      ),
-      JSON.stringify({
-        language: commandInput.sdkLanguage,
-        labelAction: shouldLabelBreakingChange,
-      }),
+      path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
+      JSON.stringify(artifactInfo, undefined, 2),
     );
-    setVsoVariable("BreakingChangeLabelArtifactName", breakingChangeLabelArtifactName);
-    setVsoVariable("BreakingChangeLabelArtifactPath", breakingChangeLabelArtifactPath);
+    setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
+    setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
     setVsoVariable("BreakingChangeLabelAction", shouldLabelBreakingChange ? "add" : "remove");
     setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
   } catch (error) {

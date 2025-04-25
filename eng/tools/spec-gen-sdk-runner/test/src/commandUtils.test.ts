@@ -10,7 +10,7 @@ import {
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
-  processBreakingChangeLabelArtifacts,
+  generateArtifact,
   setPipelineVariables,
 } from "../../src/commandUtils.js";
 import { LogLevel } from "../../src/log.js";
@@ -239,12 +239,12 @@ describe("commands.ts", () => {
     });
   });
 
-  describe("processBreakingChangeLabelArtifacts", () => {
+  describe("generateArtifact", () => {
     beforeEach(() => {
       vi.clearAllMocks();
     });
 
-    test("should process breaking change label artifacts successfully", () => {
+    test("should generate artifact successfully", () => {
       vi.spyOn(fs, "existsSync").mockReturnValue(false);
       vi.spyOn(fs, "mkdirSync").mockImplementation(() => undefined);
       vi.spyOn(fs, "writeFileSync").mockImplementation(() => {});
@@ -261,33 +261,46 @@ describe("commands.ts", () => {
         specRepoHttpsUrl: "",
       };
 
-      const result = processBreakingChangeLabelArtifacts(mockCommandInput, true, "breaking-change");
+      const mockArtifactInfo = {
+        language: "",
+        labelAction: false,
+        managementPlane: true,
+        dataPlane: false,
+      };
 
-      const breakingChangeLabelArtifactPath = "/working/folder/out/breaking-change-label-artifact";
+      const result = generateArtifact(mockCommandInput, mockArtifactInfo, true, "breaking-change");
+
+      const breakingChangeLabelArtifactPath = "/working/folder/out/spec-gen-sdk-artifact";
       expect(result).toBe(0);
       expect(fs.mkdirSync).toHaveBeenCalledWith(breakingChangeLabelArtifactPath, {
         recursive: true,
       });
       expect(fs.writeFileSync).toHaveBeenCalledWith(
-        path.join(breakingChangeLabelArtifactPath, "spec-gen-sdk-breaking-change-artifact.json"),
-        JSON.stringify({
-          language: "javascript",
-          labelAction: true,
-        }),
+        path.join(breakingChangeLabelArtifactPath, "spec-gen-sdk-artifact.json"),
+        JSON.stringify(
+          {
+            language: "javascript",
+            labelAction: true,
+            managementPlane: true,
+            dataPlane: false,
+          },
+          undefined,
+          2,
+        ),
       );
       expect(log.setVsoVariable).toHaveBeenCalledWith(
-        "BreakingChangeLabelArtifactName",
-        "spec-gen-sdk-breaking-change-artifact",
+        "SpecGenSdkArtifactName",
+        "spec-gen-sdk-artifact",
       );
       expect(log.setVsoVariable).toHaveBeenCalledWith(
-        "BreakingChangeLabelArtifactPath",
-        "out/breaking-change-label-artifact",
+        "SpecGenSdkArtifactPath",
+        "out/spec-gen-sdk-artifact",
       );
       expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabelAction", "add");
       expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabel", "breaking-change");
     });
 
-    test("should handle errors during artifact processing", () => {
+    test("should handle errors during artifact generation", () => {
       vi.spyOn(fs, "existsSync").mockReturnValue(false);
       vi.spyOn(fs, "mkdirSync").mockImplementation(() => {
         throw new Error("mkdir failed");
@@ -305,7 +318,15 @@ describe("commands.ts", () => {
         specCommitSha: "",
         specRepoHttpsUrl: "",
       };
-      const result = processBreakingChangeLabelArtifacts(mockCommandInput, true, "breaking-change");
+
+      const mockArtifactInfo = {
+        language: "",
+        labelAction: false,
+        managementPlane: true,
+        dataPlane: false,
+      };
+
+      const result = generateArtifact(mockCommandInput, mockArtifactInfo, true, "breaking-change");
 
       expect(result).toBe(1);
       expect(log.logMessage).toHaveBeenCalledWith("ending group logging", LogLevel.EndGroup);
