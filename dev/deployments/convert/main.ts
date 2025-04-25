@@ -343,11 +343,12 @@ function writeSuppressions(basePath: string, apiFilesByService: Record<string, s
 }
 
 function main() {
+  // change this if wanting to base off a later commit #
+  const baseCommit = 'fc1f625dbec2d92ba4d9dd0df16ece543b04fec9';
   const serviceBasePath = path.resolve(__dirname, '../../../specification/resources');
   const rpBasePath = path.resolve(serviceBasePath, 'resource-manager/Microsoft.Resources');
 
-  spawnSync('git', ['checkout', 'HEAD', '--', serviceBasePath]);
-  spawnSync('git', ['clean', '-xfd', serviceBasePath]);
+  spawnSync('git', ['restore', `--source=${baseCommit}`, '--worktree', '--', serviceBasePath]);
 
   let apiFilesByService: Record<string, string[]> = {};
   apiFilesByService['deployments'] = generateDeploymentsFiles(rpBasePath);
