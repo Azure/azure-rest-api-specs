@@ -74,6 +74,9 @@
     },
     {
       "name": "Diagnostic"
+    },
+    {
+      "name": "ConnectorConfigInstance"
     }
   ],
   "paths": {
@@ -1654,6 +1657,256 @@
         "x-ms-examples": {
           "BrokerListener_Delete": {
             "$ref": "./examples/BrokerListener_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances": {
+      "get": {
+        "operationId": "ConnectorConfigInstance_ListByResourceGroup",
+        "tags": [
+          "ConnectorConfigInstance"
+        ],
+        "description": "List ConnectorConfigInstanceResource resources by InstanceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorConfigInstanceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances/{connectorConfigInstanceName}": {
+      "get": {
+        "operationId": "ConnectorConfigInstance_Get",
+        "tags": [
+          "ConnectorConfigInstance"
+        ],
+        "description": "Get a ConnectorConfigInstanceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "connectorConfigInstanceName",
+            "in": "path",
+            "description": "Name of ConnectorConfigInstance resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorConfigInstanceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConnectorConfigInstance_CreateOrUpdate",
+        "tags": [
+          "ConnectorConfigInstance"
+        ],
+        "description": "Create a ConnectorConfigInstanceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "connectorConfigInstanceName",
+            "in": "path",
+            "description": "Name of ConnectorConfigInstance resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorConfigInstanceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConnectorConfigInstanceResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorConfigInstanceResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConnectorConfigInstanceResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorConfigInstanceResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ConnectorConfigInstance_Delete",
+        "tags": [
+          "ConnectorConfigInstance"
+        ],
+        "description": "Delete a ConnectorConfigInstanceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "connectorConfigInstanceName",
+            "in": "path",
+            "description": "Name of ConnectorConfigInstance resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4457,6 +4710,243 @@
             "description": "CreateOrRemap type"
           }
         ]
+      }
+    },
+    "ConnectorConfigInstanceAllocation": {
+      "type": "object",
+      "description": "ConnectorConfigInstanceAllocation properties",
+      "properties": {
+        "allocationType": {
+          "$ref": "#/definitions/ConnectorConfigInstanceAllocationType",
+          "description": "The allocation type for the Connector profile."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the allocation for the Connector Instance when created."
+        }
+      }
+    },
+    "ConnectorConfigInstanceAllocationType": {
+      "type": "string",
+      "description": "ConnectorConfigInstanceAllocationType properties",
+      "enum": [
+        "OneToOneAllocation",
+        "BucketizedAllocation"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorConfigInstanceAllocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OneToOneAllocation",
+            "value": "OneToOneAllocation",
+            "description": "OneToOneAllocation"
+          },
+          {
+            "name": "BucketizedAllocation",
+            "value": "BucketizedAllocation",
+            "description": "BucketizedAllocation"
+          }
+        ]
+      }
+    },
+    "ConnectorConfigInstanceAssetEndpointProfiles": {
+      "type": "object",
+      "description": "ConnectorConfigInstanceAssetEndpointProfiles properties",
+      "properties": {
+        "aepName": {
+          "type": "string",
+          "description": "The asset endpoint profile name."
+        },
+        "detectionConfiguration": {
+          "$ref": "#/definitions/ConnectorConfigInstanceDetectionConfiguration",
+          "description": "detection settings for the connector profile"
+        },
+        "jsonForm": {
+          "type": "string",
+          "description": "Stringified JSON for AEP UX"
+        },
+        "aepAdditionalConfigurationSchemaRef": {
+          "type": "string",
+          "description": "Reference to the schema for the additional configuration for the AEP"
+        }
+      }
+    },
+    "ConnectorConfigInstanceDetectionConfiguration": {
+      "type": "object",
+      "description": "ConnectorConfigInstanceDetectionConfiguration properties",
+      "properties": {
+        "enabled": {
+          "$ref": "#/definitions/OperationalMode",
+          "description": "The operational mode for detection."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limits how many dassets can be created."
+        },
+        "dassetAdditionalConfiguration": {
+          "type": "string",
+          "description": "Additional configuration for the asset detection"
+        }
+      }
+    },
+    "ConnectorConfigInstanceDiagnostics": {
+      "type": "object",
+      "description": "ConnectorConfigInstanceDiagnostics properties",
+      "properties": {
+        "logs": {
+          "$ref": "#/definitions/ConnectorConfigInstanceLogSettings",
+          "description": "The log settings for the Connector profile."
+        }
+      }
+    },
+    "ConnectorConfigInstanceLogSettings": {
+      "type": "object",
+      "description": "ConnectorConfigInstanceLogSettings properties",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
+          "default": "info"
+        }
+      }
+    },
+    "ConnectorConfigInstanceProperties": {
+      "type": "object",
+      "description": "ConnectorConfigInstance properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "allocation": {
+          "$ref": "#/definitions/ConnectorConfigInstanceAllocation",
+          "description": "The allocation for the Connector profile."
+        },
+        "assetEndpointProfiless": {
+          "type": "array",
+          "description": "The asset endpoints assigned to this connector.",
+          "items": {
+            "$ref": "#/definitions/ConnectorConfigInstanceAssetEndpointProfiles"
+          },
+          "x-ms-identifiers": []
+        },
+        "runtimeConfiguration": {
+          "$ref": "#/definitions/ConnectorConfigInstanceRuntimeConfiguration",
+          "description": "The runtime configuration for the Connector profile."
+        },
+        "diagnostics": {
+          "$ref": "#/definitions/ConnectorConfigInstanceDiagnostics",
+          "description": "Diagnostics settings for the Connector profile."
+        }
+      }
+    },
+    "ConnectorConfigInstanceResource": {
+      "type": "object",
+      "description": "ConnectorConfigInstance resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorConfigInstanceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorConfigInstanceResourceLimits": {
+      "type": "object",
+      "description": "ConnectorConfigInstanceResourceLimits properties",
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "description": "The CPU limit for the connector."
+        },
+        "memory": {
+          "type": "string",
+          "description": "The memory limit for the connector."
+        }
+      }
+    },
+    "ConnectorConfigInstanceResourceListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorConfigInstanceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorConfigInstanceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorConfigInstanceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorConfigInstanceResourceRequests": {
+      "type": "object",
+      "description": "ConnectorConfigInstanceResourceRequests properties",
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "description": "The CPU request for the connector."
+        },
+        "memory": {
+          "type": "string",
+          "description": "The memory request for the connector."
+        }
+      }
+    },
+    "ConnectorConfigInstanceResources": {
+      "type": "object",
+      "description": "ConnectorConfigInstanceResources properties",
+      "properties": {
+        "limits": {
+          "$ref": "#/definitions/ConnectorConfigInstanceResourceLimits",
+          "description": "The limits for the connector."
+        },
+        "requests": {
+          "$ref": "#/definitions/ConnectorConfigInstanceResourceRequests",
+          "description": "The requests for the connector."
+        }
+      }
+    },
+    "ConnectorConfigInstanceRuntimeConfiguration": {
+      "type": "object",
+      "description": "ConnectorConfigInstanceRuntimeConfiguration properties",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas for the connector.",
+          "minimum": 1
+        },
+        "resources": {
+          "$ref": "#/definitions/ConnectorConfigInstanceResources",
+          "description": "The resources for the connector."
+        }
       }
     },
     "CustomStateStoreRetainmentPolicy": {
