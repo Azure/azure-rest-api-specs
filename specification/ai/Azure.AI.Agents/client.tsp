@@ -13,12 +13,6 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // Agents sub‐client
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Agents.Agents, "agents", "python");
-@@clientName(Azure.AI.Agents.Agents.createAgent, "create", "python");
-@@clientName(Azure.AI.Agents.Agents.updateAgent, "update", "python");
-@@clientName(Azure.AI.Agents.Agents.listAgents, "list", "python");
-@@clientName(Azure.AI.Agents.Agents.getAgent, "get", "python");
-@@clientName(Azure.AI.Agents.Agents.deleteAgent, "delete", "python");
 
 @@clientName(Azure.AI.Agents.Agents, "GetAdministrationClient", "csharp");
 @@clientName(Azure.AI.Agents.Agents.createAgent, "CreateAgent", "csharp");
