@@ -120,8 +120,8 @@ model AgentEvaluationRequest {
   @doc("Redaction configuration for the evaluation.")
   redactionConfiguration?: AgentEvaluationRedactionConfiguration;
 
-  @doc("Optional and temporary way to pass the AppInsights connection string to the evaluator. When this string is not null, the evaluation results will be logged to Azure AppInsights.")
-  appInsightsConnectionString?: string;
+  @doc("Pass the AppInsights connection string to the agent evaluation for the evaluation results and the errors logs.")
+  appInsightsConnectionString: string;
 }
 
 @doc("Result for the agent evaluation evaluator run.")
@@ -165,6 +165,9 @@ model AgentEvaluation {
 
   @doc("Status of the agent evaluation. Options: Running, Completed, Failed.")
   status: string;
+
+  @doc("The reason of the request failure for the long running process, if applicable.")
+  error?: string;
 
   @doc("The agent evaluation result.")
   result?: Array<AgentEvaluationResult>;
