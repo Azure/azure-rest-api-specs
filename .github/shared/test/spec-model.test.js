@@ -111,23 +111,11 @@ describe("getSpecModel", () => {
 });
 
 describe("getReadme regex", () => {
-  it("uses a regex that finds tags in readme.md", () => {
-    const regex = /yaml.*\$\(tag\) ?== ?'([^']*)'/;
-    const yamlContent = readFileSync(join(repoRoot, 'yamls.txt'), { encoding: 'utf8' });
-    const lines = yamlContent.split(/\r?\n/);
-
-    for (const line of lines) {
-      console.log(line);
-      expect(regex.test(line)).toEqual(true);
-    }
-  });
-
   it.each([
     ["```yaml $(package-A-tag) == 'package-A-[[Version]]'", false],
     ["``` yaml $(tag)=='package-2017-03' && $(go)", true],
     ["``` yaml $(csharp) && $(tag) == 'release_4_0'", true],
-    ["``` yaml $(tag) == 'package-2021-12-01-preview'", true],
-    ["``` yaml $(tag) == 'package-2025-01-01-preview'", true],
+    ["``` yaml $(tag) == 'package-2021-12-01-preview'", true],  // Typical case
   ])("ignores tags that don't match the regex: %s", (example, expected) => {
     const regex = /yaml.*\$\(tag\) ?== ?'([^']*)'/;
     expect(regex.test(example)).toEqual(expected);

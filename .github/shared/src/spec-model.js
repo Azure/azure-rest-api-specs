@@ -199,7 +199,6 @@ async function getSwagger(swaggerPath, readmeFolder, repoRoot, logger) {
  * @param {string} repoRoot
  * @returns {Promise<Map<string, Set<string>>>}
  */
-// TODO: clean up relative path resolution (does resolve need to be called so many times?)
 async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
   const initialSwagger = resolve(repoRoot, readmePath, swaggerPath);
   const visited = new Set();
@@ -218,18 +217,15 @@ async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
     );
     const currentRefs = currentSchema
       .paths("file")
-      .filter((p) => !visited.has(p) && !example(p))
-      .map(p => relative(repoRoot, p));
-
-    // Don't add the initial path to the dependency map
-    if (currentSwagger !== initialSwagger) {
-      externalFileRefs.set(currentSwagger, new Set());
-    }
+      .map(p => relative(repoRoot, p))
+      .filter((p) => !visited.has(p) && !example(p));
 
     for (const ref of currentRefs) {
       // Add the ref to the dependency map for the current path
-      // TODO: Simplify
       if (currentSwagger !== initialSwagger) { 
+        if (!externalFileRefs.has(currentSwagger)) {
+          externalFileRefs.set(currentSwagger, new Set());
+        }
         externalFileRefs.get(currentSwagger).add(ref);
       }
       
