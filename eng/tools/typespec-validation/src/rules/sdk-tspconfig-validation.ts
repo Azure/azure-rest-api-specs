@@ -223,7 +223,7 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends Tspcon
 // ----- TS data plane sub rules -----
 export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+-)*-rest$/));
+    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+-)*rest$/));
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
@@ -320,9 +320,9 @@ export class TspConfigGoMgmtFixConstStutteringTrueSubRule extends TspconfigEmitt
   }
 }
 
-export class TspConfigGoMgmtGenerateExamplesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigGoMgmtGenerateSamplesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-go", "generate-examples", true);
+    super("@azure-tools/typespec-go", "generate-samples", true);
   }
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
@@ -374,15 +374,6 @@ export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptions
 export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "package-dir", new RegExp(/^azure(-[a-z]+){1,3}$/));
-  }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
-  }
-}
-
-export class TspConfigPythonDpPackageNameEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-python", "package-name", "{package-dir}");
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
@@ -465,7 +456,7 @@ export const defaultRules = [
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
   new TspConfigGoMgmtFixConstStutteringTrueSubRule(),
-  new TspConfigGoMgmtGenerateExamplesTrueSubRule(),
+  new TspConfigGoMgmtGenerateSamplesTrueSubRule(),
   new TspConfigGoAzGenerateFakesTrueSubRule(),
   new TspConfigGoMgmtHeadAsBooleanTrueSubRule(),
   new TspConfigGoAzInjectSpansTrueSubRule(),
@@ -475,7 +466,6 @@ export const defaultRules = [
   new TspConfigPythonMgmtPackageDirectorySubRule(),
   new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpPackageDirectorySubRule(),
-  new TspConfigPythonDpPackageNameEqualStringSubRule(),
   new TspConfigPythonAzGenerateTestTrueSubRule(),
   new TspConfigPythonAzGenerateSampleTrueSubRule(),
   new TspConfigCsharpAzPackageDirectorySubRule(),
@@ -511,12 +501,11 @@ export class SdkTspConfigValidationRule implements Rule {
 
     const stdOutputFailedResults =
       failedResults.length > 0
-        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\n Please see https://aka.ms/azsdk/spec-gen-sdk-config for more info.`
+        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\n Please see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\n For additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation.`
         : "";
 
-    // NOTE: to avoid huge impact on existing PRs, we always return true with info/warning messages.
     return {
-      success: true,
+      success: isManagementSdk(folder) ? success : true,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }

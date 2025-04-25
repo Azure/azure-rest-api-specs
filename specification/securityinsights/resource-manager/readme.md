@@ -1206,7 +1206,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell

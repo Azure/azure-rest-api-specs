@@ -17,7 +17,7 @@ import {
   vsoAddAttachment,
   vsoLogIssue,
 } from "./log.js";
-import { SpecGenSdkCmdInput, VsoLogs } from "./types.js";
+import { SpecGenSdkArtifactInfo, SpecGenSdkCmdInput, VsoLogs } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 
 /**
@@ -80,6 +80,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   // Get the spec paths from the changed files
   const changedSpecs = detectChangedSpecConfigFiles(commandInput);
+  let managementPlaneSpecType = false;
+  let dataPlaneSpecType = false;
 
   let statusCode = 0;
   let pushedSpecConfigCount;
@@ -98,11 +100,21 @@ export async function generateSdkForSpecPr(): Promise<number> {
       specGenSdkCommand.push("--tsp-config-relative-path", changedSpec.typespecProject);
       changedSpecPathText = changedSpec.typespecProject;
       pushedSpecConfigCount++;
+      if (changedSpec.typespecProject.includes(".Management")) {
+        managementPlaneSpecType = true;
+      } else {
+        dataPlaneSpecType = true;
+      }
     }
     if (changedSpec.readmeMd) {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
       changedSpecPathText = changedSpecPathText + " " + changedSpec.readmeMd;
       pushedSpecConfigCount++;
+      if (changedSpec.readmeMd.includes("resource-manager")) {
+        managementPlaneSpecType = true;
+      } else if (changedSpec.readmeMd.includes("data-plane")) {
+        dataPlaneSpecType = true;
+      }
     }
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
@@ -133,10 +145,15 @@ export async function generateSdkForSpecPr(): Promise<number> {
     logMessage("ending group logging", LogLevel.EndGroup);
     logIssuesToPipeline(executionReport?.vsoLogPath, changedSpecPathText);
   }
-  // Process the breaking change label artifacts
+  // Process the spec-gen-sdk artifacts
+  const specGenSdkArtifactInfo: SpecGenSdkArtifactInfo = {
+    managementPlane: managementPlaneSpecType,
+    dataPlane: dataPlaneSpecType,
+  };
   statusCode =
-    processBreakingChangeLabelArtifacts(
+    generateArtifact(
       commandInput,
+      specGenSdkArtifactInfo,
       shouldLabelBreakingChange,
       breakingChangeLabel,
     ) || statusCode;
@@ -455,41 +472,39 @@ function getBreakingChangeInfo(executionReport: any): [boolean, string] {
 }
 
 /**
- * Process the breaking change label artifacts.
+ * Generate the spec-gen-sdk artifacts.
  * @param commandInput - The command input.
+ * @param artifactInfo - The spec-gen-sdk artifact information.
  * @param shouldLabelBreakingChange - A flag indicating whether to label breaking changes.
+ * @param breakingChangeLabel - The breaking change label.
  * @returns the run status code.
  */
-function processBreakingChangeLabelArtifacts(
+function generateArtifact(
   commandInput: SpecGenSdkCmdInput,
+  artifactInfo: SpecGenSdkArtifactInfo,
   shouldLabelBreakingChange: boolean,
   breakingChangeLabel: string,
 ): number {
-  const breakingChangeLabelArtifactName = "spec-gen-sdk-breaking-change-artifact";
-  const breakingChangeLabelArtifactFileName = breakingChangeLabelArtifactName + ".json";
-  const breakingChangeLabelArtifactPath = "out/breaking-change-label-artifact";
-  const breakingChangeLabelArtifactAbsoluteFolder = path.join(
+  const specGenSdkArtifactName = "spec-gen-sdk-artifact";
+  const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
+  const specGenSdkArtifactPath = "out/spec-gen-sdk-artifact";
+  const specGenSdkArtifactAbsoluteFolder = path.join(
     commandInput.workingFolder,
-    breakingChangeLabelArtifactPath,
+    specGenSdkArtifactPath,
   );
   try {
-    if (!fs.existsSync(breakingChangeLabelArtifactAbsoluteFolder)) {
-      fs.mkdirSync(breakingChangeLabelArtifactAbsoluteFolder, { recursive: true });
+    if (!fs.existsSync(specGenSdkArtifactAbsoluteFolder)) {
+      fs.mkdirSync(specGenSdkArtifactAbsoluteFolder, { recursive: true });
     }
-    // Write breaking change label artifact
+    // Write artifact
+    artifactInfo.language = commandInput.sdkLanguage;
+    artifactInfo.labelAction = shouldLabelBreakingChange;
     fs.writeFileSync(
-      path.join(
-        commandInput.workingFolder,
-        breakingChangeLabelArtifactPath,
-        breakingChangeLabelArtifactFileName,
-      ),
-      JSON.stringify({
-        language: commandInput.sdkLanguage,
-        labelAction: shouldLabelBreakingChange,
-      }),
+      path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
+      JSON.stringify(artifactInfo, undefined, 2),
     );
-    setVsoVariable("BreakingChangeLabelArtifactName", breakingChangeLabelArtifactName);
-    setVsoVariable("BreakingChangeLabelArtifactPath", breakingChangeLabelArtifactPath);
+    setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
+    setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
     setVsoVariable("BreakingChangeLabelAction", shouldLabelBreakingChange ? "add" : "remove");
     setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
   } catch (error) {
