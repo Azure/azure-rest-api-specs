@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -53,42 +52,23 @@ op ArmResourceActionSyncNoRequestBody<
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<TResponse> | ErrorResponse;
 
-// Just like ArmResourceActionAsync, but with no request body.
+//
+/**
+ * Like ArmResourceActionAsync, but with no request body and ArmNoContentResponse.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 op ArmResourceActionNoContentAsyncNoRequestBody<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters extends TypeSpec.Reflection.Model = Foundations.BaseParameters<TResource>
-> is ArmResourceActionAsyncBaseNoRequestBody<
+> is ArmResourceActionAsyncBase<
   TResource,
+  void,
   ArmAcceptedLroResponse | ArmNoContentResponse<"Action completed successfully.">,
   TBaseParameters
 >;
 
-// Just like ArmResourceActionAsyncBase, but with no request body.
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-@autoRoute
-@extension("x-ms-long-running-operation", true)
-@extension(
-  "x-ms-long-running-operation-options",
-  #{ `final-state-via`: "location" }
-)
-@armResourceAction(TResource)
-@post
-op ArmResourceActionAsyncBaseNoRequestBody<
-  TResource extends Azure.ResourceManager.Foundations.Resource,
-  TResponse,
-  TBaseParameters extends TypeSpec.Reflection.Model
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): TResponse | ErrorResponse;
-
 /**
  * Just like ArmAcceptedLroResponse, but with a ResponseBody.
- * @template Description The description of the response status (defaults to `Resource operation accepted`)
- * @template LroHeaders Optional.  The lro headers that appear in the Accepted response
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
 @doc(Description)
