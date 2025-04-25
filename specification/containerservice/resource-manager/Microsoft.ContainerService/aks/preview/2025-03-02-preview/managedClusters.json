@@ -7859,29 +7859,51 @@
       "properties": {
         "mode": {
           "type": "string",
-          "enum": ["Preferred", "Required", "Disabled"],
+          "enum": [
+            "Preferred",
+            "Required",
+            "Disabled"
+          ],
           "x-ms-enum": {
             "name": "LocalDNSMode",
             "modelAsString": true,
             "values": [
-              { "value": "Preferred", "description": "If the current orchestrator version supports this feature, prefer enabling localDNS." },
-              { "value": "Required", "description": "Enable localDNS." },
-              { "value": "Disabled", "description": "Disable localDNS." }
+              {
+                "value": "Preferred",
+                "description": "If the current orchestrator version supports this feature, prefer enabling localDNS."
+              },
+              {
+                "value": "Required",
+                "description": "Enable localDNS."
+              },
+              {
+                "value": "Disabled",
+                "description": "Disable localDNS."
+              }
             ]
           },
           "description": "Mode of enablement for localDNS.",
           "default": "Preferred"
         },
         "state": {
-        "readOnly": true,
+          "readOnly": true,
           "type": "string",
-          "enum": ["Enabled", "Disabled"],
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "x-ms-enum": {
             "name": "LocalDNSState",
             "modelAsString": true,
             "values": [
-              { "value": "Enabled", "description": "localDNS is enabled." },
-              { "value": "Disabled", "description": "localDNS is disabled." }
+              {
+                "value": "Enabled",
+                "description": "localDNS is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "localDNS is disabled."
+              }
             ]
           },
           "description": "System-generated state of localDNS."
