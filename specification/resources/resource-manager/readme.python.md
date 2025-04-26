@@ -78,18 +78,6 @@ batch:
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
   - multiapiscript-subscriptions: true
-  - tag: package-deploymentscripts-2023-08
-  - tag: package-deploymentscripts-2020-10
-  - tag: package-deploymentscripts-2019-10-preview
-  - multiapiscript-deploymentscripts: true
-  - tag: package-templatespecs-2022-02
-  - tag: package-templatespecs-2021-05
-  - tag: package-templatespecs-2021-03-preview
-  - tag: package-templatespecs-2019-06-preview
-  - multiapiscript-templatespecs: true
-  - tag: package-deploymentstacks-2024-03
-  - tag: package-deploymentstacks-2022-08-preview
-  - multiapiscript-deploymentstacks: true
   - tag: package-changes-2022-05
   - multiapiscript-changes: true
   - tag: package-databoundaries-2024-08
@@ -144,30 +132,6 @@ perform-load: false
 clear-output-folder: false
 ```
 
-```yaml $(multiapiscript-deploymentscripts)
-package-name: azure-mgmt-resource#deploymentscripts
-multiapiscript: true
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts
-perform-load: false
-clear-output-folder: false
-```
-
-
-```yaml $(multiapiscript-templatespecs)
-package-name: azure-mgmt-resource#templatespecs
-multiapiscript: true
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs
-perform-load: false
-clear-output-folder: false
-```
-
-```yaml $(multiapiscript-deploymentstacks)
-package-name: azure-mgmt-resource#deploymentstacks
-multiapiscript: true
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentstacks
-perform-load: false
-clear-output-folder: false
-```
 
 ```yaml $(multiapiscript-locks)
 package-name: azure-mgmt-resource#locks

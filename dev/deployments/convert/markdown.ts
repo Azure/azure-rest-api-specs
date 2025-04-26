@@ -34,6 +34,9 @@ function replaceCodeblockSection(readme: string, matcher: (heading: string) => b
     return match;
   });
 }
+function removeLinesMatching(readme: string, matcher: (line: string) => boolean) {
+  return readme.split('\n').filter(x => !matcher(x)).join('\n');
+}
 
 function replaceFile(filePath: string, updateFunc: (content: string) => string) {
   const content = readFileSync(filePath, 'utf8');
@@ -42,7 +45,7 @@ function replaceFile(filePath: string, updateFunc: (content: string) => string) 
 }
 
 export function replaceSourceReadmes(basePath: string) {
-  const packagePattern = /package-deploymentscripts|package-templatespecs|package-deploymentstacks|package-bicep/;
+  const packagePattern = /(deploymentscripts|templatespecs|deploymentstacks|bicep)/;
 
   const readmes = [
     'readme.md',
@@ -60,13 +63,7 @@ export function replaceSourceReadmes(basePath: string) {
       content = replaceMarkdownSection(content, (heading) => packagePattern.test(heading));
       content = replaceCodeblockSection(content, heading => packagePattern.test(heading));
 
-      if (readme === 'readme.md') {
-        content = content
-          .replace(/\n  - package-deploymentscripts: true/g, '')
-          .replace(/\n  - package-templatespecs: true/g, '')
-          .replace(/\n  - package-deploymentstacks: true/g, '')
-          .replace(/\n  - package-bicep: true/g, '');
-      }
+      content = removeLinesMatching(content, line => packagePattern.test(line));
 
       return content;
     });
