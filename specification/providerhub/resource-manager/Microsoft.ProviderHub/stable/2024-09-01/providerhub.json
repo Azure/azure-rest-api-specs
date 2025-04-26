@@ -2834,45 +2834,6 @@
         }
       }
     },
-    "/providers/{providerNamespace}/validateManifestAppliedInAllRegions": {
-      "post": {
-        "tags": [
-          "NewRegionFrontloadRelease"
-        ],
-        "description": "Validates the manifest has been applied in all regions.",
-        "operationId": "NewRegionFrontloadRelease_ValidateManifest",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ProviderNamespaceParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_ValidateManifest": {
-            "$ref": "./examples/NewRegionFrontloadRelease_ValidateManifest.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Manifest match message.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}": {
       "put": {
         "tags": [
@@ -4201,21 +4162,44 @@
         }
       }
     },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The extended location type.",
+      "enum": [
+        "NotSpecified",
+        "CustomLocation",
+        "EdgeZone",
+        "ArcZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The extended location type is not specified.",
+            "value": "NotSpecified"
+          },
+          {
+            "description": "The extended location type is custom location.",
+            "value": "CustomLocation"
+          },
+          {
+            "description": "The extended location type is edge zone.",
+            "value": "EdgeZone"
+          },
+          {
+            "description": "The extended location type is arc zone.",
+            "value": "ArcZone"
+          }
+        ]
+      }
+    },
     "ExtendedLocationOptions": {
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "NotSpecified",
-            "CustomLocation",
-            "EdgeZone",
-            "ArcZone"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ExtendedLocationType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type."
         },
         "supportedPolicy": {
           "enum": [
@@ -4273,6 +4257,88 @@
         }
       }
     },
+    "RoutingType": {
+      "type": "string",
+      "description": "The routing type.",
+      "enum": [
+        "Default",
+        "ProxyOnly",
+        "HostBased",
+        "Extension",
+        "Tenant",
+        "Fanout",
+        "LocationBased",
+        "Failover",
+        "CascadeExtension",
+        "ChildFanout",
+        "CascadeAuthorizedExtension",
+        "BypassEndpointSelectionOptimization",
+        "LocationMapping",
+        "ServiceFanout"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The resource routing type is default.",
+            "value": "Default"
+          },
+          {
+            "description": "The resource routing type is proxy only.",
+            "value": "ProxyOnly"
+          },
+          {
+            "description": "The resource routing type is host based.",
+            "value": "HostBased"
+          },
+          {
+            "description": "The resource routing type is extension.",
+            "value": "Extension"
+          },
+          {
+            "description": "The resource routing type is tenant.",
+            "value": "Tenant"
+          },
+          {
+            "description": "The resource routing type is fanout.",
+            "value": "Fanout"
+          },
+          {
+            "description": "The resource routing type is location based.",
+            "value": "LocationBased"
+          },
+          {
+            "description": "The resource routing type is failover.",
+            "value": "Failover"
+          },
+          {
+            "description": "The resource routing type is cascade extension.",
+            "value": "CascadeExtension"
+          },
+          {
+            "description": "The resource routing type is child fanout.",
+            "value": "ChildFanout"
+          },
+          {
+            "description": "The resource routing type is cascade authorized extension.",
+            "value": "CascadeAuthorizedExtension"
+          },
+          {
+            "description": "The resource routing type is bypass endpoint selection optimization.",
+            "value": "BypassEndpointSelectionOptimization"
+          },
+          {
+            "description": "The resource routing type is location mapping.",
+            "value": "LocationMapping"
+          },
+          {
+            "description": "The resource routing type is service fanout.",
+            "value": "ServiceFanout"
+          }
+        ]
+      }
+    },
     "ResourceType": {
       "type": "object",
       "properties": {
@@ -4281,28 +4347,8 @@
           "type": "string"
         },
         "routingType": {
-          "description": "The routing type.",
-          "enum": [
-            "Default",
-            "ProxyOnly",
-            "HostBased",
-            "Extension",
-            "Tenant",
-            "Fanout",
-            "LocationBased",
-            "Failover",
-            "CascadeExtension",
-            "ChildFanout",
-            "CascadeAuthorizedExtension",
-            "BypassEndpointSelectionOptimization",
-            "LocationMapping",
-            "ServiceFanout"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RoutingType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RoutingType",
+          "description": "The resource routing type."
         },
         "additionalOptions": {
           "description": "The additional options.",
@@ -5317,19 +5363,10 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "properties": {
-        "contents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationsDefinition"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
         "properties": {
           "type": "object",
           "allOf": [
@@ -5339,7 +5376,7 @@
           ]
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -6298,23 +6335,8 @@
       "type": "object",
       "properties": {
         "routingType": {
-          "description": "The routing type.",
-          "enum": [
-            "Default",
-            "ProxyOnly",
-            "HostBased",
-            "Extension",
-            "Tenant",
-            "Fanout",
-            "LocationBased",
-            "Failover",
-            "CascadeExtension"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RoutingType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RoutingType",
+          "description": "The resource routing type."
         },
         "additionalOptions": {
           "description": "The additional options.",
@@ -7353,16 +7375,8 @@
           }
         },
         "type": {
-          "description": "The type.",
-          "enum": [
-            "NotSpecified",
-            "EdgeZone",
-            "ArcZone"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ExtendedLocationType"
-          }
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type."
         }
       }
     },

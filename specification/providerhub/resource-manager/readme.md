@@ -28,6 +28,33 @@ These are the global settings for the providerhub.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2024-09-01
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: providerhub.json
+    where:
+      - $.definitions.ResourceTypeRegistrationProperties.properties.resourceConcurrencyControlOptions
+      - $.definitions.ResourceTypeRegistrationProperties.properties.metadata
+      - $.definitions.RolloutStatusBase.properties.failedOrSkippedRegions
+      - $.definitions.CustomRolloutStatus.properties.failedOrSkippedRegions
+    reason: This version requires metadata to be defined as an additional property.
+
+  - suppress: RepeatedPathInfo
+    from: providerhub.json
+    where:
+      - $.definitions.FrontloadPayloadProperties.properties.providerNamespace
+    reason: This version requires the provider namespace to be in the body.
+
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: providerhub.json
+    where:
+      - $.definitions.OperationsDefinitionArrayResponseWithContinuation
+    reason: Historically the operations definition response doesn't include ID property.
+
+  - suppress: PutRequestResponseSchemeArm
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}"].put.responses["200"]
+    reason: Pre-existing lint error not introduced in this API version.
 ```
 
 ### Tag: package-2024-09-01
