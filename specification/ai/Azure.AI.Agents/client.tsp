@@ -180,39 +180,39 @@ using Azure.AI.Agents;
 );
 
 // --------------------------------------------------------------------------------
-// VectorStoreFileBatches sub‐client
+// FileBatches sub‐client
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Agents.VectorStoreFileBatches.createVectorStoreFileBatch,
+@@clientName(Azure.AI.Agents.FileBatches.createVectorStoreFileBatch,
   "create",
   "python"
 );
-@@clientName(Azure.AI.Agents.VectorStoreFileBatches.getVectorStoreFileBatch,
+@@clientName(Azure.AI.Agents.FileBatches.getVectorStoreFileBatch,
   "get",
   "python"
 );
-@@clientName(Azure.AI.Agents.VectorStoreFileBatches.cancelVectorStoreFileBatch,
+@@clientName(Azure.AI.Agents.FileBatches.cancelVectorStoreFileBatch,
   "cancel",
   "python"
 );
-@@clientName(Azure.AI.Agents.VectorStoreFileBatches.listVectorStoreFileBatchFiles,
+@@clientName(Azure.AI.Agents.FileBatches.listVectorStoreFileBatchFiles,
   "list_files",
   "python"
 );
 
-@@clientName(Azure.AI.Agents.VectorStoreFileBatches, "FileBatchesClient", "csharp");
-@@clientName(Azure.AI.Agents.VectorStoreFileBatches.createVectorStoreFileBatch,
+@@clientName(Azure.AI.Agents.FileBatches, "FileBatchesClient", "csharp");
+@@clientName(Azure.AI.Agents.FileBatches.createVectorStoreFileBatch,
   "CreateVectorStoreFileBatch",
   "csharp"
 );
-@@clientName(Azure.AI.Agents.VectorStoreFileBatches.getVectorStoreFileBatch,
+@@clientName(Azure.AI.Agents.FileBatches.getVectorStoreFileBatch,
   "GetVectorStoreFileBatch",
   "csharp"
 );
-@@clientName(Azure.AI.Agents.VectorStoreFileBatches.cancelVectorStoreFileBatch,
+@@clientName(Azure.AI.Agents.FileBatches.cancelVectorStoreFileBatch,
   "CancelVectorStoreFileBatch",
   "csharp"
 );
-@@clientName(Azure.AI.Agents.VectorStoreFileBatches.listVectorStoreFileBatchFiles,
+@@clientName(Azure.AI.Agents.FileBatches.listVectorStoreFileBatchFiles,
   "ListVectorStoreFileBatchFiles",
   "csharp"
 );
