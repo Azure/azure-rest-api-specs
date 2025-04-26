@@ -29,15 +29,6 @@ parameters:
     type: string
     default: ''
 
-resources:
-  repositories:
-    - repository: SpecRepo
-      type: git
-      name: $(SpecRepoOwner)/$(SpecRepoName)
-    - repository: SdkRepo
-      type: git
-      name: $(SdkRepoOwner)/$(SdkRepoName)
-
 extends:
   template: /eng/pipelines/templates/stages/1es-redirect.yml
   parameters:
@@ -137,32 +128,24 @@ extends:
 
             displayName: "Create Run Time Variables"
 
-          - checkout: SpecRepo
-            displayName: "Checkout SpecRepo"
-            path: $(SpecRepoDirectory)
-
-          - checkout: SdkRepo
-            displayName: "Checkout SdkRepo"
-            path: $(SdkRepoDirectory)
-
-          #- template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
-          #  parameters:
-          #    Paths:
-          #      - '/*'
-          #      - '!sdk/**/test-recordings/*'
-          #      - '!sdk/**/recordings/*'
-          #      - '!sdk/**/SessionRecords/*'
-          #      - '!sdk/**/session-records/*'
-          #    Repositories:
-          #      - Name: $(SpecRepoOwner)/$(SpecRepoName)
-          #        Commitish: $(SpecRepoCommit)
-          #        WorkingDirectory: $(SpecRepoDirectory)
-          #      - Name: $(SdkRepoOwner)/$(SdkRepoName)
-          #        Commitish: ${{ parameters.SdkRepoCommit }}
-          #        WorkingDirectory: $(SdkRepoDirectory)
-          #    SkipCheckoutNone: true
-          #    ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
-          #      TokenToUseForAuth: $(azuresdk-github-pat)
+          - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
+            parameters:
+              Paths:
+                - '/*'
+                - '!sdk/**/test-recordings/*'
+                - '!sdk/**/recordings/*'
+                - '!sdk/**/SessionRecords/*'
+                - '!sdk/**/session-records/*'
+              Repositories:
+                - Name: $(SpecRepoOwner)/$(SpecRepoName)
+                  Commitish: $(SpecRepoCommit)
+                  WorkingDirectory: $(SpecRepoDirectory)
+                - Name: $(SdkRepoOwner)/$(SdkRepoName)
+                  Commitish: ${{ parameters.SdkRepoCommit }}
+                  WorkingDirectory: $(SdkRepoDirectory)
+              SkipCheckoutNone: true
+              ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
+                TokenToUseForAuth: $(azuresdk-github-pat)
 
           - task: NodeTool@0
             inputs:
@@ -223,13 +206,15 @@ extends:
               Write-Host "Staged SDK Folder: $(SpecGenSdkArtifactPath)"
             displayName: 'View SDK Generation Runtime Variables'
 
-          - template: /eng/common/pipelines/templates/steps/save-package-properties.yml
-            parameters:
-              ServiceDirectory: "auto"
-              DiffDirectory: $(SpecGenSdkArtifactPath)/diff
-              PackageInfoDirectory: $(SpecGenSdkArtifactPath)/PackageInfo
-              TargetPath: $(SpecRepoDirectory)
-              ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+          - pwsh: |
+              . $(SpecRepoDirectory)/eng/common/scripts/Helpers/ApiView-Helpers.ps1
+              Save-PackageProperties `
+                -repoRoot $(SdkRepoDirectory) `
+                -serviceNames $(SpecGenSdkServiceNames) `
+                -outPutDirectory $(SpecGenSdkArtifactPath)/PackageInfo
+            workingDirectory: $(SdkRepoDirectory)
+            displayName: Dump Package properties
+            condition: and(succeeded(), ne(variables['SpecGenSdkServiceNames'], ''), ne(variables['SpecGenSdkArtifactPath'], ''))
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:

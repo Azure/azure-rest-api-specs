@@ -62,7 +62,7 @@ steps:
       - task: Powershell@2
         displayName: Save package properties
         inputs:
-          filePath: ${{ parameters.ScriptDirectory }}/Save-Package-Properties.ps1
+          filePath: ${{ parameters.ScriptDirectory }}/Save-Package-Properties.ps1${{ parameters.ScriptDirectory }}/Save-Package-Properties.ps1
           arguments: >
             -ServiceDirectory '${{parameters.ServiceDirectory}}'
             -OutDirectory '${{ parameters.PackageInfoDirectory }}'
