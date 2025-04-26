@@ -61,6 +61,66 @@ input-file:
   - stable/2023-08-01/deploymentScripts.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - from: deploymentScripts.json
+    suppress: TrackedResourceGetOperation
+    where: $.definitions.AzureCliScript
+    reason: Tooling issue.
+  - from: deploymentScripts.json
+    suppress: TrackedResourcePatchOperation
+    where: $.definitions.AzureCliScript
+    reason: Tooling issue.
+  - from: deploymentScripts.json
+    suppress: TrackedResourceGetOperation
+    where: $.definitions.AzurePowerShellScript
+    reason: Tooling issue
+  - from: deploymentScripts.json
+    suppress: TrackedResourcePatchOperation
+    where: $.definitions.AzurePowerShellScript
+    reason: Tooling issue
+  - suppress: OperationsAPIImplementation
+    from: deploymentScripts.json
+    where: $.paths
+    reason: OperationsAPI will come from Resources
+  - suppress: IntegerTypeMustHaveFormat
+    from: deploymentScripts.json
+    reason: Tooling issue, default is int32, explicitly mentioning the format as per doc, it still flags breaking change.
+  - suppress: ResourceNameRestriction
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PropertiesTypeObjectNoDefinition
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SubscriptionsAndResourceGroupCasing
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ParametersInPointGet
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PatchIdentityProperty
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroErrorContent
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - from: deploymentScripts.json
+    suppress: R3006
+    where:
+      - $.definitions.DeploymentScript.properties
+      - $.definitions.AzureCliScript.properties
+      - $.definitions.AzurePowerShellScript.properties
+    reason: Currently systemData is not allowed
+```
+
 # Code Generation
 
 ## Swagger to SDK
@@ -70,33 +130,30 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_deployments']
-  - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)

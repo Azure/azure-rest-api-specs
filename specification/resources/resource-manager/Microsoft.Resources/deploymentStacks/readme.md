@@ -52,6 +52,50 @@ input-file:
   - stable/2024-03-01/deploymentStacks.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - from: deploymentStacks.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: OperationsAPI will come from Resources
+  - from: deploymentStacks.json
+    suppress: TrackedResourcePatchOperation
+    where: $.definitions
+    reason: Not a tracked resource.
+  - suppress: PathForTrackedResourceTypes
+    from: deploymentStacks.json
+    reason: "A deployment stack resource is a proxy location-mapped resource type."
+  - suppress: TenantLevelAPIsNotAllowed
+    from: deploymentStacks.json
+    reason: "Working with deployment stacks at the management group scope is supported."
+  - suppress: TrackedResourcePatchOperation
+    from: deploymentStacks.json
+    reason: "A deployment stack resource is a proxy location-mapped resource type."
+  - suppress: AvoidAdditionalProperties
+    from: deploymentStacks.json
+    reason: "Deployment properties such as 'parameters', 'outputs', and 'template' are dynamic types. For example, properties of the parameters object are defined by the template content."
+  - suppress: PostResponseCodes
+    from: deploymentStacks.json
+    reason: "Validate endpoints have 200, 202, 400, and default responses. The 400 response inherits the error response."
+  - suppress: LroErrorContent
+    from: deploymentStacks.json
+    reason: Error response is inherited via allOf on flagged response.
+  - suppress: NoErrorCodeResponses
+    from: deploymentStacks.json
+    reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
+  - suppress: MissingXmsErrorResponse
+    from: deploymentStacks.json
+    reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
+  - suppress: DeleteResponseCodes
+    from: deploymentStacks.json
+    reason: Deployment stacks supports synchronous delete with 200 response.
+  - suppress: OperationsAPIImplementation
+    from: deploymentStacks.json
+    reason: This comes from resources.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
@@ -61,33 +105,30 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_deployments']
-  - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)

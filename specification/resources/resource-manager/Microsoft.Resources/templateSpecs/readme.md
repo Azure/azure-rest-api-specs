@@ -70,6 +70,32 @@ input-file:
   - stable/2022-02-01/templateSpecs.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OperationsAPIImplementation
+    from: templateSpecs.json
+    where: $.paths
+    reason: OperationsAPI will come from Resources
+  - suppress: R3006
+    from: templateSpecs.json
+    where:
+      - $.definitions.TemplateSpec.properties
+      - $.definitions.TemplateSpecVersion.properties
+      - $.definitions.TemplateSpecUpdateModel.properties
+      - $.definitions.TemplateSpecVersionUpdateModel.properties
+    reason: Currently systemData is not allowed
+  - suppress: TrackedResourceListByImmediateParent
+    from: templateSpecs.json
+    where: $.definitions
+    reason: Tooling issue
+  - suppress: TrackedResourceListByResourceGroup
+    from: templateSpecs.json
+    where: $.definitions.TemplateSpecVersion
+    reason: Tooling issue
+```
+
 # Code Generation
 
 ## Swagger to SDK
@@ -79,33 +105,30 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_deployments']
-  - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)
