@@ -29,6 +29,15 @@ parameters:
     type: string
     default: ''
 
+resources:
+  repositories:
+    - repository: SpecRepo
+      type: git
+      name: $(SpecRepoOwner)/$(SpecRepoName)
+    - repository: SdkRepo
+      type: git
+      name: $(SdkRepoOwner)/$(SdkRepoName)
+
 extends:
   template: /eng/pipelines/templates/stages/1es-redirect.yml
   parameters:
@@ -128,24 +137,32 @@ extends:
 
             displayName: "Create Run Time Variables"
 
-          - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
-            parameters:
-              Paths:
-                - '/*'
-                - '!sdk/**/test-recordings/*'
-                - '!sdk/**/recordings/*'
-                - '!sdk/**/SessionRecords/*'
-                - '!sdk/**/session-records/*'
-              Repositories:
-                - Name: $(SpecRepoOwner)/$(SpecRepoName)
-                  Commitish: $(SpecRepoCommit)
-                  WorkingDirectory: $(SpecRepoDirectory)
-                - Name: $(SdkRepoOwner)/$(SdkRepoName)
-                  Commitish: ${{ parameters.SdkRepoCommit }}
-                  WorkingDirectory: $(SdkRepoDirectory)
-              SkipCheckoutNone: true
-              ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
-                TokenToUseForAuth: $(azuresdk-github-pat)
+          - checkout: SpecRepo
+            displayName: "Checkout SpecRepo"
+            path: $(SpecRepoDirectory)
+
+          - checkout: SdkRepo
+            displayName: "Checkout SdkRepo"
+            path: $(SdkRepoDirectory)
+
+          #- template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
+          #  parameters:
+          #    Paths:
+          #      - '/*'
+          #      - '!sdk/**/test-recordings/*'
+          #      - '!sdk/**/recordings/*'
+          #      - '!sdk/**/SessionRecords/*'
+          #      - '!sdk/**/session-records/*'
+          #    Repositories:
+          #      - Name: $(SpecRepoOwner)/$(SpecRepoName)
+          #        Commitish: $(SpecRepoCommit)
+          #        WorkingDirectory: $(SpecRepoDirectory)
+          #      - Name: $(SdkRepoOwner)/$(SdkRepoName)
+          #        Commitish: ${{ parameters.SdkRepoCommit }}
+          #        WorkingDirectory: $(SdkRepoDirectory)
+          #    SkipCheckoutNone: true
+          #    ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
+          #      TokenToUseForAuth: $(azuresdk-github-pat)
 
           - task: NodeTool@0
             inputs:
