@@ -8,9 +8,7 @@
       }
     }
   },
-  "required": [
-    "packages"
-  ],
+  "required": ["packages"],
   "definitions": {
     "PackageResult": {
       "properties": {
@@ -22,11 +20,7 @@
         "result": {
           // Status of package. By default it's succeeded.
           "type": "string",
-          "enum": [
-            "failed",
-            "succeeded",
-            "warning"
-          ],
+          "enum": ["failed", "succeeded", "warning"],
           "default": "succeeded"
         },
         "path": {
@@ -48,15 +42,13 @@
         },
         "typespecProject": {
           // List of related typespec project of this package.
+          // Must provide this field if dryRun is true.
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "language": {
-          "type": "string"
-        },        
-        "apiViewArtifact": {
+        "version": {
           "type": "string"
         },
         "changelog": {
@@ -71,16 +63,13 @@
               "type": "boolean"
             },
             "breakingChangeItems": {
-              // The breaking change details quote from the changelog
               "type": "array",
               "items": {
                 "type": "string"
               }
             }
           },
-          "required": [
-            "content"
-          ]
+          "required": ["content"]
         },
         "artifacts": {
           "type": "array",
@@ -88,14 +77,18 @@
             "type": "string"
           }
         },
+        "apiViewArtifact": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
         "installInstructions": {
           // See #InstallInstructionScriptOutput
           "$ref": "InstallInstructionScriptOutput"
         }
       },
-      "required": [
-        "path"
-      ]
+      "required": ["path"]
     }
   }
 }
