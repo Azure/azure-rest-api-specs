@@ -8,13 +8,12 @@ using Azure.AI.Agents;
 // Root client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Agents, "AgentsClient", "python, javascript");
-@@clientName(Azure.AI.Agents, "PersistentAgentsClient", "csharp, java");
 
 // --------------------------------------------------------------------------------
 // Agents sub‐client
 // --------------------------------------------------------------------------------
 
-@@clientName(Azure.AI.Agents.Agents, "AgentsAdministrationClient", "csharp, java");
+@@clientName(Azure.AI.Agents, "AgentsAdministrationClient", "csharp, java");
 @@clientName(Azure.AI.Agents.createAgent, "CreateAgent", "csharp");
 @@clientName(Azure.AI.Agents.updateAgent, "UpdateAgent", "csharp");
 @@clientName(Azure.AI.Agents.getAgent, "GetAgent", "csharp");
