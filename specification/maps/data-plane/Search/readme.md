@@ -39,6 +39,15 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Tag: package-preview-2025-04
+
+These settings apply only when `--tag=package-preview-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-04'
+input-file:
+  - preview/2025-04-01-preview/search.json
+```
+
 ### Tag: package-2025-01
 
 These settings apply only when `--tag=package-2025-01` is specified on the command line.
