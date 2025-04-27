@@ -27,35 +27,53 @@ directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.BrokerAuthenticatorMethodCustom.properties.headers
     reason: User defined properties that are not subject to any validations.
+
   - suppress: AvoidAdditionalProperties
     where: $.definitions.BrokerAuthenticatorMethodX509.properties.authorizationAttributes
     reason: User defined properties that are not subject to any validations.
+
   - suppress: AvoidAdditionalProperties
     where: $.definitions.BrokerAuthenticatorMethodX509Attributes.properties.attributes
     reason: User defined properties that are not subject to any validations.
+
   - suppress: AvoidAdditionalProperties
     where: $.definitions.PrincipalDefinition.properties.attributes.items
     reason: User defined properties that are not subject to any validations.
+
   - suppress: AvoidAdditionalProperties
     where: $.definitions.VolumeClaimResourceRequirements.properties.limits
     reason: User defined properties that are not subject to any validations.
+
   - suppress: AvoidAdditionalProperties
     where: $.definitions.VolumeClaimResourceRequirements.properties.requests
     reason: User defined properties that are not subject to any validations.
+
   - suppress: AvoidAdditionalProperties
     where: $.definitions.VolumeClaimSpecSelector.properties.matchLabels
     reason: User defined properties that are not subject to any validations.
+
   - suppress: BodyTopLevelProperties
     reason: Temporary suppression due to failing pipeline.
+
   - suppress: PatchBodyParametersSchema
     reason: Type is required because it is a part of managed identity.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}"].patch.parameters[4].schema.properties.identity
+
   - suppress: AvoidAdditionalProperties
     where: $.definitions.InstanceProperties.properties.features
     reason: User defined feature flags that are not subject to any validations and can differ between the versions of AIO deployed on the customer's cluster.
+
   - suppress: AvoidAdditionalProperties
     where: $.definitions.InstanceFeature.properties.settings
     reason: User defined feature flag settings that are not subject to any validations and can differ between the versions of AIO deployed on the customer's cluster.
+    
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.ConnectorTemplateHelmConfigurationSettings.properties.values
+    reason: There represent helm values to customer provided helm charts hence the properties are not known ahead of time.
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.ConnectorTemplateRuntimeImageConfigurationSettings.properties.additionalConfiguration
+    reason: These are additional configuration settings with dynamic properties that are not known ahead of time.
 ```
 
 ### Basic Information
