@@ -1,4 +1,3 @@
-
 # DeploymentStacks
 
 > see https://aka.ms/autorest

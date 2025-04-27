@@ -1,4 +1,3 @@
-
 # TemplateSpecs
 
 > see https://aka.ms/autorest

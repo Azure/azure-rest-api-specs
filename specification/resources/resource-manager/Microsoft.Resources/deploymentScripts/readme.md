@@ -1,4 +1,3 @@
-
 # DeploymentScripts
 
 > see https://aka.ms/autorest

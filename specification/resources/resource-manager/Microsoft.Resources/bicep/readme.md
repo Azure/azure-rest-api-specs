@@ -1,4 +1,3 @@
-
 # Bicep
 
 > see https://aka.ms/autorest

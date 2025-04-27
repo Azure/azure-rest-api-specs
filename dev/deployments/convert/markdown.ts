@@ -6,12 +6,19 @@ export function writeMarkdownFiles(basePath: string, filePaths: string[], compon
   apiVersions.sort((a, b) => b.localeCompare(a));
   const latestApiVersion = apiVersions[0];
 
-  writeFileSync(path.resolve(basePath, 'readme.md'), getMainReadme(clientName, componentName, filePaths, latestApiVersion, suppressions[componentName]));
-  writeFileSync(path.resolve(basePath, 'readme.csharp.md'), getCsharpReadme(componentName));
-  writeFileSync(path.resolve(basePath, 'readme.go.md'), getGoReadme(componentName));
-  writeFileSync(path.resolve(basePath, 'readme.java.md'), getJavaReadme(componentName, latestApiVersion));
-  writeFileSync(path.resolve(basePath, 'readme.python.md'), getPythonReadme(componentName));
-  writeFileSync(path.resolve(basePath, 'readme.typescript.md'), getTypescriptReadme(clientName, componentName));
+  writeReadme(basePath, 'readme.md', getMainReadme(clientName, componentName, filePaths, latestApiVersion, suppressions[componentName]).trimStart());
+  writeReadme(basePath, 'readme.csharp.md', getCsharpReadme(componentName).trimStart());
+  writeReadme(basePath, 'readme.go.md', getGoReadme(componentName).trimStart());
+  writeReadme(basePath, 'readme.java.md', getJavaReadme(componentName, latestApiVersion).trimStart());
+  writeReadme(basePath, 'readme.python.md', getPythonReadme(componentName).trimStart());
+  writeReadme(basePath, 'readme.typescript.md', getTypescriptReadme(clientName, componentName).trimStart());
+}
+
+function writeReadme(basePath: string, fileName: string, readme: string) {
+  // Remove leading + trailing whitespace, add a final newline
+  readme = readme.trim() + '\n';
+
+  writeFileSync(path.resolve(basePath, fileName), readme);
 }
 
 function removeMarkdownSectionMatching(readme: string, matcher: (heading: string) => boolean) {

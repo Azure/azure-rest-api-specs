@@ -1,4 +1,3 @@
-
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.

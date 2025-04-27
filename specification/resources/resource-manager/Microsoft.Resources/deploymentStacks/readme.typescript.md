@@ -1,4 +1,3 @@
-
 ## TypeScript
 
 These settings apply only when `--typescript` is specified on the command line.
