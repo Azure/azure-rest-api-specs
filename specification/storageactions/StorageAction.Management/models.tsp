@@ -574,7 +574,20 @@ model LocationParameter {
   @path
   @segment("locations")
   @key
+  @doc("The location name.")
   location: string;
+}
+
+/** The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only. */
+model StorageTaskNameParameter {
+  @path
+  @minLength(3)
+  @maxLength(18)
+  @pattern("^[a-z0-9]{3,18}$")
+  @segment("storageTaskNames")
+  @key
+  @doc("The Storage Task name.")
+  storageTaskName: string;
 }
 
 model StorageTasksListResult is Azure.Core.Page<StorageTask>;
