@@ -1,3 +1,7 @@
+// This file contains common aliases used across the IoT Operations Management API.
+// It should contain simple scalar aliases or aliases for objects with simple scalar properties.
+// Complex objects or models should be defined in their respective files.
+
 alias BaseUserAssignedManagedIdentity = {
   @doc("Client ID for the user-assigned managed identity.")
   clientId: string;

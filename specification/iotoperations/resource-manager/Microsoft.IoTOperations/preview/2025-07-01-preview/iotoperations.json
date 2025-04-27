@@ -76,7 +76,7 @@
       "name": "Diagnostic"
     },
     {
-      "name": "ConnectorConfigInstance"
+      "name": "ConnectorTemplate"
     }
   ],
   "paths": {
@@ -1667,11 +1667,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances": {
       "get": {
-        "operationId": "ConnectorConfigInstance_ListByResourceGroup",
+        "operationId": "ConnectorTemplate_ListByResourceGroup",
         "tags": [
-          "ConnectorConfigInstance"
+          "ConnectorTemplate"
         ],
-        "description": "List ConnectorConfigInstanceResource resources by InstanceResource",
+        "description": "List ConnectorTemplateResource resources by InstanceResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1697,7 +1697,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorConfigInstanceResourceListResult"
+              "$ref": "#/definitions/ConnectorTemplateResourceListResult"
             }
           },
           "default": {
@@ -1714,11 +1714,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances/{connectorConfigInstanceName}": {
       "get": {
-        "operationId": "ConnectorConfigInstance_Get",
+        "operationId": "ConnectorTemplate_Get",
         "tags": [
-          "ConnectorConfigInstance"
+          "ConnectorTemplate"
         ],
-        "description": "Get a ConnectorConfigInstanceResource",
+        "description": "Get a ConnectorTemplateResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1742,7 +1742,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorConfigInstance resource",
+            "description": "Name of ConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1754,7 +1754,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorConfigInstanceResource"
+              "$ref": "#/definitions/ConnectorTemplateResource"
             }
           },
           "default": {
@@ -1766,11 +1766,11 @@
         }
       },
       "put": {
-        "operationId": "ConnectorConfigInstance_CreateOrUpdate",
+        "operationId": "ConnectorTemplate_CreateOrUpdate",
         "tags": [
-          "ConnectorConfigInstance"
+          "ConnectorTemplate"
         ],
-        "description": "Create a ConnectorConfigInstanceResource",
+        "description": "Create a ConnectorTemplateResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1794,7 +1794,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorConfigInstance resource",
+            "description": "Name of ConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1807,21 +1807,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectorConfigInstanceResource"
+              "$ref": "#/definitions/ConnectorTemplateResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ConnectorConfigInstanceResource' update operation succeeded",
+            "description": "Resource 'ConnectorTemplateResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectorConfigInstanceResource"
+              "$ref": "#/definitions/ConnectorTemplateResource"
             }
           },
           "201": {
-            "description": "Resource 'ConnectorConfigInstanceResource' create operation succeeded",
+            "description": "Resource 'ConnectorTemplateResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectorConfigInstanceResource"
+              "$ref": "#/definitions/ConnectorTemplateResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1848,11 +1848,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "ConnectorConfigInstance_Delete",
+        "operationId": "ConnectorTemplate_Delete",
         "tags": [
-          "ConnectorConfigInstance"
+          "ConnectorTemplate"
         ],
-        "description": "Delete a ConnectorConfigInstanceResource",
+        "description": "Delete a ConnectorTemplateResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1876,7 +1876,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorConfigInstance resource",
+            "description": "Name of ConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -4712,99 +4712,301 @@
         ]
       }
     },
-    "ConnectorConfigInstanceAllocation": {
-      "type": "object",
-      "description": "ConnectorConfigInstanceAllocation properties",
-      "properties": {
-        "allocationType": {
-          "$ref": "#/definitions/ConnectorConfigInstanceAllocationType",
-          "description": "The allocation type for the Connector profile."
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The size of the allocation for the Connector Instance when created."
-        }
-      }
-    },
-    "ConnectorConfigInstanceAllocationType": {
+    "ConnectorImagePullPolicy": {
       "type": "string",
-      "description": "ConnectorConfigInstanceAllocationType properties",
+      "description": "Image pull policy.",
       "enum": [
-        "OneToOneAllocation",
-        "BucketizedAllocation"
+        "Always",
+        "IfNotPresent",
+        "Never"
       ],
       "x-ms-enum": {
-        "name": "ConnectorConfigInstanceAllocationType",
+        "name": "ConnectorImagePullPolicy",
         "modelAsString": true,
         "values": [
           {
-            "name": "OneToOneAllocation",
-            "value": "OneToOneAllocation",
-            "description": "OneToOneAllocation"
+            "name": "Always",
+            "value": "Always",
+            "description": "Always pull the image."
           },
           {
-            "name": "BucketizedAllocation",
-            "value": "BucketizedAllocation",
-            "description": "BucketizedAllocation"
+            "name": "IfNotPresent",
+            "value": "IfNotPresent",
+            "description": "IfNotPresent pull the image."
+          },
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "Never pull the image."
           }
         ]
       }
     },
-    "ConnectorConfigInstanceAssetEndpointProfiles": {
+    "ConnectorTemplateAioMetadata": {
       "type": "object",
-      "description": "ConnectorConfigInstanceAssetEndpointProfiles properties",
+      "description": "ConnectorTemplateAioMetadata properties",
       "properties": {
-        "aepName": {
+        "aioMinVersion": {
           "type": "string",
-          "description": "The asset endpoint profile name."
+          "description": "The minimum version of AIO required for the connector."
         },
-        "detectionConfiguration": {
-          "$ref": "#/definitions/ConnectorConfigInstanceDetectionConfiguration",
-          "description": "detection settings for the connector profile"
-        },
-        "jsonForm": {
+        "aioMaxVersion": {
           "type": "string",
-          "description": "Stringified JSON for AEP UX"
-        },
-        "aepAdditionalConfigurationSchemaRef": {
-          "type": "string",
-          "description": "Reference to the schema for the additional configuration for the AEP"
+          "description": "The maximum version of AIO required for the connector."
         }
       }
     },
-    "ConnectorConfigInstanceDetectionConfiguration": {
+    "ConnectorTemplateAllocation": {
       "type": "object",
-      "description": "ConnectorConfigInstanceDetectionConfiguration properties",
+      "description": "ConnectorTemplateAllocation properties",
       "properties": {
-        "enabled": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "The operational mode for detection."
+        "policy": {
+          "$ref": "#/definitions/ConnectorTemplateAllocationPolicy",
+          "description": "The allocation policy type"
         },
-        "limit": {
+        "bucketSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Limits how many dassets can be created."
-        },
-        "dassetAdditionalConfiguration": {
-          "type": "string",
-          "description": "Additional configuration for the asset detection"
+          "description": "TThe bucketized allocation of AEPs for connectors",
+          "minimum": 1,
+          "maximum": 100
         }
+      },
+      "required": [
+        "policy"
+      ]
+    },
+    "ConnectorTemplateAllocationPolicy": {
+      "type": "string",
+      "description": "ConnectorTemplateAllocationPolicy properties",
+      "enum": [
+        "Bucketized"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorTemplateAllocationPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bucketized",
+            "value": "Bucketized",
+            "description": "Bucketized"
+          }
+        ]
       }
     },
-    "ConnectorConfigInstanceDiagnostics": {
+    "ConnectorTemplateDiagnostics": {
       "type": "object",
-      "description": "ConnectorConfigInstanceDiagnostics properties",
+      "description": "ConnectorTemplateDiagnostics properties",
       "properties": {
         "logs": {
-          "$ref": "#/definitions/ConnectorConfigInstanceLogSettings",
-          "description": "The log settings for the Connector profile."
+          "$ref": "#/definitions/ConnectorTemplateLogSettings",
+          "description": "The log settings for the Connector template."
+        }
+      },
+      "required": [
+        "logs"
+      ]
+    },
+    "ConnectorTemplateHelmAdvancedConfiguration": {
+      "type": "object",
+      "description": "ConnectorTemplateHelmAdvancedConfiguration properties",
+      "properties": {
+        "delete": {
+          "$ref": "#/definitions/ConnectorTemplateHelmDeleteConfiguration",
+          "description": "Delete operation configuration for the Helm chart."
+        },
+        "install": {
+          "$ref": "#/definitions/ConnectorTemplateHelmInstallConfiguration",
+          "description": "Install operation configuration for the Helm chart."
+        },
+        "upgrade": {
+          "$ref": "#/definitions/ConnectorTemplateHelmUpgradeConfiguration",
+          "description": "Upgrade operation configuration for the Helm chart."
         }
       }
     },
-    "ConnectorConfigInstanceLogSettings": {
+    "ConnectorTemplateHelmAuthSecretRef": {
       "type": "object",
-      "description": "ConnectorConfigInstanceLogSettings properties",
+      "description": "ConnectorTemplateHelmAuthSecretRef properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the secret."
+        },
+        "passwordKey": {
+          "type": "string",
+          "description": "The key of the password in the secret."
+        },
+        "usernameKey": {
+          "type": "string",
+          "description": "The key of the username in the secret."
+        }
+      },
+      "required": [
+        "name",
+        "passwordKey",
+        "usernameKey"
+      ]
+    },
+    "ConnectorTemplateHelmConfiguration": {
+      "type": "object",
+      "description": "ConnectorTemplateHelmConfiguration properties",
+      "properties": {
+        "helmConfigurationSettings": {
+          "$ref": "#/definitions/ConnectorTemplateHelmConfigurationSettings",
+          "description": "The Helm configuration settings"
+        }
+      },
+      "required": [
+        "helmConfigurationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorTemplateRuntimeConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "HelmConfiguration"
+    },
+    "ConnectorTemplateHelmConfigurationSettings": {
+      "type": "object",
+      "description": "ConnectorTemplateHelmConfiguration properties",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "The registry of the Helm chart."
+        },
+        "repository": {
+          "type": "string",
+          "description": "The repoistory of the Helm chart."
+        },
+        "releaseName": {
+          "type": "string",
+          "description": "The release name of the Helm chart."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the Helm chart."
+        },
+        "authSecretRef": {
+          "$ref": "#/definitions/ConnectorTemplateHelmAuthSecretRef",
+          "description": "Authentication secret reference for the Helm chart."
+        },
+        "advancedConfiguration": {
+          "$ref": "#/definitions/ConnectorTemplateHelmAdvancedConfiguration",
+          "description": "Advanced configuration for the Helm chart. \ninstall, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`"
+        },
+        "values": {
+          "type": "object",
+          "description": "A map of values to pass to the helm chart",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "releaseName",
+        "version"
+      ]
+    },
+    "ConnectorTemplateHelmDeleteConfiguration": {
+      "type": "object",
+      "description": "ConnectorTemplateHelmDeleteConfiguration properties",
+      "properties": {
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout for the operation in seconds."
+        },
+        "waitForJobs": {
+          "type": "boolean",
+          "description": "The wait for jobs flag."
+        },
+        "atomic": {
+          "type": "boolean",
+          "description": "Atomic flag for the operation."
+        },
+        "disableHooks": {
+          "type": "boolean",
+          "description": "Disable hooks flag for the operation."
+        },
+        "wait": {
+          "type": "boolean",
+          "description": "The wait flag for the operation."
+        }
+      }
+    },
+    "ConnectorTemplateHelmInstallConfiguration": {
+      "type": "object",
+      "description": "ConnectorTemplateHelmInstallConfiguration properties",
+      "properties": {
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout for the operation in seconds."
+        },
+        "waitForJobs": {
+          "type": "boolean",
+          "description": "The wait for jobs flag."
+        },
+        "atomic": {
+          "type": "boolean",
+          "description": "Atomic flag for the operation."
+        },
+        "disableHooks": {
+          "type": "boolean",
+          "description": "Disable hooks flag for the operation."
+        },
+        "wait": {
+          "type": "boolean",
+          "description": "The wait flag for the operation."
+        }
+      }
+    },
+    "ConnectorTemplateHelmUpgradeConfiguration": {
+      "type": "object",
+      "description": "ConnectorTemplateHelmUpgradeConfiguration properties",
+      "properties": {
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout for the operation in seconds."
+        },
+        "waitForJobs": {
+          "type": "boolean",
+          "description": "The wait for jobs flag."
+        },
+        "atomic": {
+          "type": "boolean",
+          "description": "Atomic flag for the operation."
+        },
+        "disableHooks": {
+          "type": "boolean",
+          "description": "Disable hooks flag for the operation."
+        },
+        "wait": {
+          "type": "boolean",
+          "description": "The wait flag for the operation."
+        }
+      }
+    },
+    "ConnectorTemplateImagePullSecret": {
+      "type": "object",
+      "description": "ConnectorTemplateImagePullSecret properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the image pull secret."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ConnectorTemplateLogSettings": {
+      "type": "object",
+      "description": "ConnectorTemplateLogSettings properties",
       "properties": {
         "level": {
           "type": "string",
@@ -4813,43 +5015,231 @@
         }
       }
     },
-    "ConnectorConfigInstanceProperties": {
+    "ConnectorTemplateManagedConfiguration": {
       "type": "object",
-      "description": "ConnectorConfigInstance properties",
+      "description": "ConnectorTemplateManagedConfiguration properties",
+      "properties": {
+        "managedConfigurationSettings": {
+          "$ref": "#/definitions/ConnectorTemplateManagedConfigurationSettings",
+          "description": "The managed configuration settings"
+        }
+      },
+      "required": [
+        "managedConfigurationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorTemplateRuntimeConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedConfiguration"
+    },
+    "ConnectorTemplateManagedConfigurationSettings": {
+      "type": "object",
+      "description": "ConnectorTemplateManagedConfiguration properties",
+      "properties": {
+        "managedConfigurationType": {
+          "$ref": "#/definitions/ConnectorTemplateManagedConfigurationType",
+          "description": "The type of the managed configuration."
+        },
+        "allocation": {
+          "$ref": "#/definitions/ConnectorTemplateAllocation",
+          "description": "Allocation settings for the managed configuration."
+        },
+        "persistentVolumeClaimTemplates": {
+          "type": "array",
+          "description": "The persistent volume claim templates for the managed configuration.",
+          "items": {
+            "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaimTemplate"
+          },
+          "x-ms-identifiers": [
+            "mountPath"
+          ]
+        }
+      },
+      "discriminator": "managedConfigurationType",
+      "required": [
+        "managedConfigurationType"
+      ]
+    },
+    "ConnectorTemplateManagedConfigurationType": {
+      "type": "string",
+      "description": "Managed configuration types.",
+      "enum": [
+        "ImageConfiguration",
+        "StatefulSetConfiguration"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorTemplateManagedConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ImageConfiguration",
+            "value": "ImageConfiguration",
+            "description": "Image Configuration Type"
+          },
+          {
+            "name": "StatefulSetConfiguration",
+            "value": "StatefulSetConfiguration",
+            "description": "StatefulSet Configuration Type"
+          }
+        ]
+      }
+    },
+    "ConnectorTemplatePersistentVolumeClaim": {
+      "type": "object",
+      "description": "ConnectorTemplatePersistentVolumeClaim properties",
+      "properties": {
+        "claimName": {
+          "type": "string",
+          "description": "The name of the persistent volume claim."
+        },
+        "mountPath": {
+          "type": "string",
+          "description": "The mount path for the persistent volume claim."
+        }
+      },
+      "required": [
+        "claimName",
+        "mountPath"
+      ]
+    },
+    "ConnectorTemplatePersistentVolumeClaimResourceRequests": {
+      "type": "object",
+      "description": "ConnectorTemplatePersistentVolumeClaimResourceRequests properties",
+      "properties": {
+        "storage": {
+          "type": "string",
+          "description": "The storage resource request for the PVC."
+        }
+      },
+      "required": [
+        "storage"
+      ]
+    },
+    "ConnectorTemplatePersistentVolumeClaimResourceRequirements": {
+      "type": "object",
+      "description": "ConnectorTemplatePersistentVolumeClaimResourceRequirements properties",
+      "properties": {
+        "requests": {
+          "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaimResourceRequests",
+          "description": "Requests represents the minimum amount of compute resources required. If Requests is omitted for any container, the Kubelet will enforce that the container has at least as much CPU/Memory as requested. If it is omitted for all containers, the Kubelet will enforce that the Pod has at least as much CPU/Memory as requested. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        }
+      },
+      "required": [
+        "requests"
+      ]
+    },
+    "ConnectorTemplatePersistentVolumeClaimTemplate": {
+      "type": "object",
+      "description": "ConnectorTemplatePersistentVolumeClaimTemplate properties",
+      "properties": {
+        "mountPath": {
+          "type": "string",
+          "description": "The mount path for the persistent volume claim."
+        },
+        "volumeName": {
+          "type": "string",
+          "description": "VolumeName is the binding reference to the PersistentVolume backing this claim."
+        },
+        "volumeMode": {
+          "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaimVolumeMode",
+          "description": "volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. This is a beta feature."
+        },
+        "volumeAttributesClassName": {
+          "type": "string",
+          "description": "A custom volume class name for specific volume attributes or configurations. This can be used to define custom settings for volume provisioning."
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": "Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1"
+        },
+        "accessModes": {
+          "type": "array",
+          "description": "AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "dataSource": {
+          "$ref": "#/definitions/LocalKubernetesReference",
+          "description": "This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field."
+        },
+        "dataSourceRef": {
+          "$ref": "#/definitions/KubernetesReference",
+          "description": "Specifies the object from which to populate the volume with data, if a non-empty volume is desired. This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object. When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value. For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. There are two important differences between DataSource and DataSourceRef: * While DataSource only allows two specific types of objects, DataSourceRef allows any non-core object, as well as PersistentVolumeClaim objects. * While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified. (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled."
+        },
+        "resources": {
+          "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaimResourceRequirements",
+          "description": "The resource requests for the PVC, such as storage size."
+        }
+      },
+      "required": [
+        "mountPath",
+        "resources"
+      ]
+    },
+    "ConnectorTemplatePersistentVolumeClaimVolumeMode": {
+      "type": "string",
+      "description": "Volume mode types.",
+      "enum": [
+        "Filesystem",
+        "Block"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorTemplatePersistentVolumeClaimVolumeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Filesystem",
+            "value": "Filesystem",
+            "description": "Filesystem volume mode"
+          },
+          {
+            "name": "Block",
+            "value": "Block",
+            "description": "Block volume mode"
+          }
+        ]
+      }
+    },
+    "ConnectorTemplateProperties": {
+      "type": "object",
+      "description": "ConnectorTemplate properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "allocation": {
-          "$ref": "#/definitions/ConnectorConfigInstanceAllocation",
-          "description": "The allocation for the Connector profile."
-        },
-        "assetEndpointProfiless": {
-          "type": "array",
-          "description": "The asset endpoints assigned to this connector.",
-          "items": {
-            "$ref": "#/definitions/ConnectorConfigInstanceAssetEndpointProfiles"
-          },
-          "x-ms-identifiers": []
+        "aioMetadata": {
+          "$ref": "#/definitions/ConnectorTemplateAioMetadata",
+          "description": "Metadata about AIO."
         },
         "runtimeConfiguration": {
-          "$ref": "#/definitions/ConnectorConfigInstanceRuntimeConfiguration",
-          "description": "The runtime configuration for the Connector profile."
+          "$ref": "#/definitions/ConnectorTemplateRuntimeConfiguration",
+          "description": "The runtime configuration for the Connector template."
         },
         "diagnostics": {
-          "$ref": "#/definitions/ConnectorConfigInstanceDiagnostics",
-          "description": "Diagnostics settings for the Connector profile."
+          "$ref": "#/definitions/ConnectorTemplateDiagnostics",
+          "description": "Diagnostics settings for the Connector template."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the Connector template."
         }
-      }
+      },
+      "required": [
+        "version"
+      ]
     },
-    "ConnectorConfigInstanceResource": {
+    "ConnectorTemplateResource": {
       "type": "object",
-      "description": "ConnectorConfigInstance resource",
+      "description": "ConnectorTemplate resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ConnectorConfigInstanceProperties",
+          "$ref": "#/definitions/ConnectorTemplateProperties",
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
@@ -4870,29 +5260,15 @@
         }
       ]
     },
-    "ConnectorConfigInstanceResourceLimits": {
+    "ConnectorTemplateResourceListResult": {
       "type": "object",
-      "description": "ConnectorConfigInstanceResourceLimits properties",
-      "properties": {
-        "cpu": {
-          "type": "string",
-          "description": "The CPU limit for the connector."
-        },
-        "memory": {
-          "type": "string",
-          "description": "The memory limit for the connector."
-        }
-      }
-    },
-    "ConnectorConfigInstanceResourceListResult": {
-      "type": "object",
-      "description": "The response of a ConnectorConfigInstanceResource list operation.",
+      "description": "The response of a ConnectorTemplateResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ConnectorConfigInstanceResource items on this page",
+          "description": "The ConnectorTemplateResource items on this page",
           "items": {
-            "$ref": "#/definitions/ConnectorConfigInstanceResource"
+            "$ref": "#/definitions/ConnectorTemplateResource"
           }
         },
         "nextLink": {
@@ -4905,49 +5281,136 @@
         "value"
       ]
     },
-    "ConnectorConfigInstanceResourceRequests": {
+    "ConnectorTemplateRuntimeConfiguration": {
       "type": "object",
-      "description": "ConnectorConfigInstanceResourceRequests properties",
+      "description": "ConnectorTemplateRuntimeConfiguration properties",
       "properties": {
-        "cpu": {
-          "type": "string",
-          "description": "The CPU request for the connector."
-        },
-        "memory": {
-          "type": "string",
-          "description": "The memory request for the connector."
+        "runtimeConfigurationType": {
+          "$ref": "#/definitions/ConnectorTemplateRuntimeConfigurationType",
+          "description": "Runtime configuration type for the Connector template."
         }
+      },
+      "discriminator": "runtimeConfigurationType",
+      "required": [
+        "runtimeConfigurationType"
+      ]
+    },
+    "ConnectorTemplateRuntimeConfigurationType": {
+      "type": "string",
+      "description": "Runtime configuration types.",
+      "enum": [
+        "HelmConfiguration",
+        "ManagedConfiguration"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorTemplateRuntimeConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HelmConfiguration",
+            "value": "HelmConfiguration",
+            "description": "Helm Configuration Type"
+          },
+          {
+            "name": "ManagedConfiguration",
+            "value": "ManagedConfiguration",
+            "description": "Managed Configuration Type"
+          }
+        ]
       }
     },
-    "ConnectorConfigInstanceResources": {
+    "ConnectorTemplateRuntimeImageConfiguration": {
       "type": "object",
-      "description": "ConnectorConfigInstanceResources properties",
+      "description": "ConnectorTemplateRuntimeImageConfiguration properties",
       "properties": {
-        "limits": {
-          "$ref": "#/definitions/ConnectorConfigInstanceResourceLimits",
-          "description": "The limits for the connector."
-        },
-        "requests": {
-          "$ref": "#/definitions/ConnectorConfigInstanceResourceRequests",
-          "description": "The requests for the connector."
+        "imageConfigurationSettings": {
+          "$ref": "#/definitions/ConnectorTemplateRuntimeImageConfigurationSettings",
+          "description": "The image configuration settings"
         }
-      }
+      },
+      "required": [
+        "imageConfigurationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorTemplateManagedConfigurationSettings"
+        }
+      ],
+      "x-ms-discriminator-value": "ImageConfiguration"
     },
-    "ConnectorConfigInstanceRuntimeConfiguration": {
+    "ConnectorTemplateRuntimeImageConfigurationSettings": {
       "type": "object",
-      "description": "ConnectorConfigInstanceRuntimeConfiguration properties",
+      "description": "ConnectorTemplateRuntimeImageConfiguration properties",
       "properties": {
+        "additionalConfiguration": {
+          "type": "object",
+          "description": "Additional configuration for the image of the managed configuration.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "image": {
+          "type": "string",
+          "description": "The image of the managed configuration."
+        },
+        "imageTag": {
+          "type": "string",
+          "description": "The tag of the image"
+        },
+        "imagePullPolicy": {
+          "$ref": "#/definitions/ConnectorImagePullPolicy",
+          "description": "The pull policy of the image"
+        },
+        "imageDigest": {
+          "type": "string",
+          "description": "The digest of the image"
+        },
+        "imagePullSecrets": {
+          "type": "array",
+          "description": "Image pull secret for the image.",
+          "items": {
+            "$ref": "#/definitions/ConnectorTemplateImagePullSecret"
+          },
+          "x-ms-identifiers": []
+        },
         "replicas": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of replicas for the connector.",
-          "minimum": 1
+          "description": "The number of replicas for the managed configuration."
         },
-        "resources": {
-          "$ref": "#/definitions/ConnectorConfigInstanceResources",
-          "description": "The resources for the connector."
+        "persistentVolumeClaims": {
+          "type": "array",
+          "description": "The persistent volume claims for the managed configuration.",
+          "items": {
+            "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaim"
+          },
+          "x-ms-identifiers": [
+            "claimName"
+          ]
         }
-      }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "ConnectorTemplateRuntimeStatefulSetConfiguration": {
+      "type": "object",
+      "description": "ConnectorTemplateRuntimeStatefulSetConfiguration properties",
+      "properties": {
+        "statefulSetConfigurationSettings": {
+          "type": "string",
+          "description": "The stateful set configuration settings"
+        }
+      },
+      "required": [
+        "statefulSetConfigurationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorTemplateManagedConfigurationSettings"
+        }
+      ],
+      "x-ms-discriminator-value": "StatefulSetConfiguration"
     },
     "CustomStateStoreRetainmentPolicy": {
       "type": "object",
@@ -9110,10 +9573,6 @@
         "name": {
           "type": "string",
           "description": "Name of the resource. This must match the name of a resource in spec.resourceClaims."
-        },
-        "resources": {
-          "$ref": "#/definitions/VolumeClaimResourceRequirements",
-          "description": "The amount of compute resources required."
         }
       },
       "required": [

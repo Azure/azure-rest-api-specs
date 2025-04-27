@@ -408,9 +408,6 @@ model VolumeClaimResourceRequirements {
 model VolumeClaimResourceRequirementsClaims {
   @doc("Name of the resource. This must match the name of a resource in spec.resourceClaims.")
   name: string;
-
-  @doc("The amount of compute resources required.")
-  resources?: VolumeClaimResourceRequirements;
 }
 
 @doc("VolumeClaimSpecSelector properties")
