@@ -89,28 +89,42 @@ model ConnectorTemplateProperties {
 //- `host` is a required property in DataflowEnpoints but optional here
 @added(Versions.`2025-07-01-preview`)
 model ConnectorTemplateMqttConnectionConfiguration {
-  @doc("authentication properties. DEFAULT: kubernetes.audience=aio-internal. NOTE - Enum field only property is allowed")
+  /**
+   * Authentication properties.
+   */
   authentication?: ConnectorTemplateMqttAuthentication;
 
-  @doc("Host of the Broker in the form of <hostname>:<port>. Optional; connects to Broker if omitted.")
+  /**
+   * Host of the Broker in the form of <hostname>:<port>.
+   */
   host?: string;
 
-  @doc("Enable or disable websockets.")
+  /**
+   * The protocol to use for the connection. Currently only `mqtt` is supported.
+   */
   protocol?: ConnectorTemplateMqttProtocolType;
 
-  @doc("Broker KeepAlive for connection in seconds.")
+  /**
+   * KeepAlive for connection in seconds.
+   */
   @minValue(0)
   keepAliveSeconds?: int32;
 
-  @doc("The max number of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.")
+  /**
+   * The max number of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.
+   */
   @minValue(0)
   maxInflightMessages?: int32;
 
-  @doc("Session expiry in seconds.")
+  /**
+   * Session expiry in seconds.
+   */
   @minValue(0)
   sessionExpirySeconds?: int32;
 
-  @doc("TLS configuration.")
+  /**
+   * TLS configuration.
+   */
   tls?: TlsProperties;
 }
 
@@ -120,7 +134,9 @@ model ConnectorTemplateMqttConnectionConfiguration {
 @added(Versions.`2025-07-01-preview`)
 @discriminator("method")
 model ConnectorTemplateMqttAuthentication {
-  @doc("The authentication method for the MQTT connection.")
+  /**
+   * The authentication method for the MQTT connection.
+   */
   method: ConnectorTemplateMqttAuthenticationMethod;
 }
 
@@ -138,10 +154,9 @@ union ConnectorTemplateMqttAuthenticationMethod {
 }
 
 /**
- * ConnectorTemplateMqttProtocolType properties
+ * Mqtt protocol types.
  */
 @added(Versions.`2025-07-01-preview`)
-@doc("Mqtt protocol types.")
 union ConnectorTemplateMqttProtocolType {
   string,
 
@@ -254,7 +269,9 @@ model ConnectorTemplateRuntimeConfiguration {
   runtimeConfigurationType: ConnectorTemplateRuntimeConfigurationType;
 }
 
-@doc("Runtime configuration types.")
+/**
+ * Runtime configuration types.
+ */
 @added(Versions.`2025-07-01-preview`)
 union ConnectorTemplateRuntimeConfigurationType {
   string,
@@ -415,12 +432,24 @@ model ConnectorTemplatePersistentVolumeClaimTemplate {
   accessModes?: string[];
 
   /**
-   * This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field.
+   * This field can be used to specify either: 
+   * - An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)
+   * - An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. 
+   * 
+   * If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field.
    */
   dataSource?: LocalKubernetesReference;
 
   /**
-   * Specifies the object from which to populate the volume with data, if a non-empty volume is desired. This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object. When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value. For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. There are two important differences between DataSource and DataSourceRef: * While DataSource only allows two specific types of objects, DataSourceRef allows any non-core object, as well as PersistentVolumeClaim objects. * While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified. (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
+   * Specifies the object from which to populate the volume with data, if a non-empty volume is desired. 
+   * This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object. 
+   * When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. 
+   * This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value. 
+   * For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. 
+   * 
+   * There are two important differences between DataSource and DataSourceRef:
+   * - While DataSource only allows two specific types of objects, DataSourceRef allows any non-core object, as well as PersistentVolumeClaim objects.
+   * - While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified. 
    */
   dataSourceRef?: KubernetesReference;
 
@@ -431,10 +460,9 @@ model ConnectorTemplatePersistentVolumeClaimTemplate {
 }
 
 /**
- * ConnectorTemplatePersistentVolumeClaimVolumeMode properties
+ * Volume mode types.
  */
 @added(Versions.`2025-07-01-preview`)
-@doc("Volume mode types.")
 union ConnectorTemplatePersistentVolumeClaimVolumeMode {
   string,
 
@@ -455,7 +483,9 @@ union ConnectorTemplatePersistentVolumeClaimVolumeMode {
 @added(Versions.`2025-07-01-preview`)
 model ConnectorTemplatePersistentVolumeClaimResourceRequirements {
   /**
-   * Requests represents the minimum amount of compute resources required. If Requests is omitted for any container, the Kubelet will enforce that the container has at least as much CPU/Memory as requested. If it is omitted for all containers, the Kubelet will enforce that the Pod has at least as much CPU/Memory as requested. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   * Requests represents the minimum amount of compute resources required.
+   * If Requests is omitted for any container, the Kubelet will enforce that the container has at least as much CPU/Memory as requested. 
+   * If it is omitted for all containers, the Kubelet will enforce that the Pod has at least as much CPU/Memory as requested. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    */
   requests: ConnectorTemplatePersistentVolumeClaimResourceRequests;
 }
@@ -502,7 +532,9 @@ union ConnectorTemplateAllocationPolicy {
   Bucketized,
 }
 
-@doc("Managed configuration types.")
+/**
+ * Managed configuration types.
+ */
 @added(Versions.`2025-07-01-preview`)
 union ConnectorTemplateManagedConfigurationType {
   string,
@@ -627,7 +659,9 @@ model ConnectorTemplateImagePullSecret {
   name: string;
 }
 
-@doc("Image pull policy.")
+/**
+ * Image pull policy.
+ */
 @added(Versions.`2025-07-01-preview`)
 union ConnectorImagePullPolicy {
   string,
@@ -635,18 +669,19 @@ union ConnectorImagePullPolicy {
   /**
    * Always pull the image.
    */
-  Always: "Always",
+  Always,
 
   /**
    * IfNotPresent pull the image.
    */
-  IfNotPresent: "IfNotPresent",
+  IfNotPresent,
 
   /**
    * Never pull the image.
    */
-  Never: "Never",
+  Never,
 }
+
 /**
  * ConnectorTemplateHelmAdvancedConfiguration properties
  */

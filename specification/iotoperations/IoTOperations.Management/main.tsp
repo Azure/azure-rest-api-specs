@@ -118,6 +118,15 @@ interface Dataflow {
   listByResourceGroup is ArmResourceListByParent<DataflowResource>;
 }
 
+// /instance/dataflowEndpoints resource Operations
+@armResourceOperations
+interface DataflowEndpoint {
+  get is ArmResourceRead<DataflowEndpointResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowEndpointResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataflowEndpointResource>;
+  listByResourceGroup is ArmResourceListByParent<DataflowEndpointResource>;
+}
+
 // /instance/dataflowProfiles/dataflowGraphs resource Operations
 
 @armResourceOperations
@@ -128,14 +137,6 @@ interface DataflowGraph {
   delete is ArmResourceDeleteWithoutOkAsync<DataflowGraphResource>;
   listByDataflowProfile is ArmResourceListByParent<DataflowGraphResource>;
 }
-// /instance/dataflowEndpoints resource Operations
-@armResourceOperations
-interface DataflowEndpoint {
-  get is ArmResourceRead<DataflowEndpointResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowEndpointResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<DataflowEndpointResource>;
-  listByResourceGroup is ArmResourceListByParent<DataflowEndpointResource>;
-}
 
 // /instance/registryEndpoints resource Operations
 @armResourceOperations
@@ -144,7 +145,7 @@ interface RegistryEndpoint {
   get is ArmResourceRead<RegistryEndpointResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<RegistryEndpointResource>;
   delete is ArmResourceDeleteWithoutOkAsync<RegistryEndpointResource>;
-  listByResourceGroup is ArmResourceListByParent<RegistryEndpointResource>;
+  listByInstanceResource is ArmResourceListByParent<RegistryEndpointResource>;
 }
 
 // /instance/diagnostics resource Operations
@@ -154,15 +155,15 @@ interface Diagnostic {
   get is ArmResourceRead<DiagnosticResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DiagnosticResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DiagnosticResource>;
-  listByResourceGroup is ArmResourceListByParent<DiagnosticResource>;
+  listByInstanceResource is ArmResourceListByParent<DiagnosticResource>;
 }
 
-// /instance/connectorConfigInstances resource Operations
+// /instance/connectorTemplates resource Operations
 @armResourceOperations
 @added(Versions.`2025-07-01-preview`)
 interface ConnectorTemplate {
   get is ArmResourceRead<ConnectorTemplateResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ConnectorTemplateResource>;
   delete is ArmResourceDeleteWithoutOkAsync<ConnectorTemplateResource>;
-  listByResourceGroup is ArmResourceListByParent<ConnectorTemplateResource>;
+  listByInstanceResource is ArmResourceListByParent<ConnectorTemplateResource>;
 }
