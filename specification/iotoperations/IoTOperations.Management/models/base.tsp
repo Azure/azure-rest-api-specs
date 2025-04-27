@@ -165,14 +165,6 @@ union CertManagerIssuerKind {
   ClusterIssuer: "ClusterIssuer",
 }
 
-alias SystemAssignedManagedIdentity = "SystemAssignedManagedIdentity";
-alias UserAssignedManagedIdentity = "UserAssignedManagedIdentity";
-alias AccessToken = "AccessToken";
-alias Sasl = "Sasl";
-alias X509Certificate = "X509Certificate";
-alias Anonymous = "Anonymous";
-alias ServiceAccountToken = "ServiceAccountToken";
-
 @doc("Managed Identity Method")
 union ManagedIdentityMethod {
   string,

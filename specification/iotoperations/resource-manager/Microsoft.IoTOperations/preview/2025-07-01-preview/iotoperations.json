@@ -4794,6 +4794,50 @@
         ]
       }
     },
+    "ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs": {
+      "type": "object",
+      "description": "ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties",
+      "properties": {
+        "defaultDatasetConfigSchemaRef": {
+          "type": "string",
+          "description": "The default configuration schema reference for datasets."
+        },
+        "defaultEventsConfigSchemaRef": {
+          "type": "string",
+          "description": "The default configuration schema reference for events."
+        },
+        "defaultProcessControlConfigSchemaRef": {
+          "type": "string",
+          "description": "The default configuration schema reference for process control."
+        },
+        "defaultStreamsConfigSchemaRef": {
+          "type": "string",
+          "description": "The default configuration schema reference for streams."
+        }
+      }
+    },
+    "ConnectorTemplateDeviceInboundEndpointType": {
+      "type": "object",
+      "description": "ConnectorTemplateDeviceInboundEndpointType properties",
+      "properties": {
+        "endpointType": {
+          "$ref": "#/definitions/NonEmptyString",
+          "description": "The type of the device inbound endpoint."
+        },
+        "version": {
+          "$ref": "#/definitions/NonEmptyString",
+          "description": "The version of the device inbound endpoint."
+        },
+        "configurationSchemaRefs": {
+          "$ref": "#/definitions/ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs",
+          "description": "The configuration schema references for the device inbound endpoint."
+        }
+      },
+      "required": [
+        "endpointType",
+        "version"
+      ]
+    },
     "ConnectorTemplateDiagnostics": {
       "type": "object",
       "description": "ConnectorTemplateDiagnostics properties",
@@ -4893,7 +4937,7 @@
         },
         "advancedConfiguration": {
           "$ref": "#/definitions/ConnectorTemplateHelmAdvancedConfiguration",
-          "description": "Advanced configuration for the Helm chart. \ninstall, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`"
+          "description": "Advanced configuration for the Helm chart.\ninstall, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`"
         },
         "values": {
           "type": "object",
@@ -5086,6 +5130,96 @@
         ]
       }
     },
+    "ConnectorTemplateMqttAuthentication": {
+      "type": "object",
+      "description": "ConnectorTemplateMqttAuthentication properties",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/ConnectorTemplateMqttAuthenticationMethod",
+          "description": "The authentication method for the MQTT connection."
+        }
+      },
+      "discriminator": "method",
+      "required": [
+        "method"
+      ]
+    },
+    "ConnectorTemplateMqttAuthenticationMethod": {
+      "type": "string",
+      "description": "ConnectorTemplateMqttAuthenticationMethod properties",
+      "enum": [
+        "ServiceAccountToken"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorTemplateMqttAuthenticationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceAccountToken",
+            "value": "ServiceAccountToken",
+            "description": "Service Account Token authentication"
+          }
+        ]
+      }
+    },
+    "ConnectorTemplateMqttConnectionConfiguration": {
+      "type": "object",
+      "description": "ConnectorTemplateMqttConnectionConfiguration properties",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/ConnectorTemplateMqttAuthentication",
+          "description": "authentication properties. DEFAULT: kubernetes.audience=aio-internal. NOTE - Enum field only property is allowed"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host of the Broker in the form of <hostname>:<port>. Optional; connects to Broker if omitted."
+        },
+        "protocol": {
+          "$ref": "#/definitions/ConnectorTemplateMqttProtocolType",
+          "description": "Enable or disable websockets."
+        },
+        "keepAliveSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Broker KeepAlive for connection in seconds.",
+          "minimum": 0
+        },
+        "maxInflightMessages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.",
+          "minimum": 0
+        },
+        "sessionExpirySeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Session expiry in seconds.",
+          "minimum": 0
+        },
+        "tls": {
+          "$ref": "#/definitions/TlsProperties",
+          "description": "TLS configuration."
+        }
+      }
+    },
+    "ConnectorTemplateMqttProtocolType": {
+      "type": "string",
+      "description": "Mqtt protocol types.",
+      "enum": [
+        "Mqtt"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorTemplateMqttProtocolType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mqtt",
+            "value": "Mqtt",
+            "description": "Mqtt protocol"
+          }
+        ]
+      }
+    },
     "ConnectorTemplatePersistentVolumeClaim": {
       "type": "object",
       "description": "ConnectorTemplatePersistentVolumeClaim properties",
@@ -5225,12 +5359,30 @@
           "$ref": "#/definitions/ConnectorTemplateDiagnostics",
           "description": "Diagnostics settings for the Connector template."
         },
+        "deviceInboundEndpointTypes": {
+          "type": "array",
+          "description": "Device inbound endpoint types",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ConnectorTemplateDeviceInboundEndpointType"
+          },
+          "x-ms-identifiers": [
+            "endpointType",
+            "version"
+          ]
+        },
+        "mqttConnectionConfiguration": {
+          "$ref": "#/definitions/ConnectorTemplateMqttConnectionConfiguration",
+          "description": "Mqtt connection configuration settings"
+        },
         "version": {
           "type": "string",
           "description": "The version of the Connector template."
         }
       },
       "required": [
+        "runtimeConfiguration",
+        "deviceInboundEndpointTypes",
         "version"
       ]
     },
@@ -5411,6 +5563,38 @@
         }
       ],
       "x-ms-discriminator-value": "StatefulSetConfiguration"
+    },
+    "ConnectorTemplateServiceAccountAuthentication": {
+      "type": "object",
+      "description": "ConnectorTemplateServiceAccountAuthentication properties",
+      "properties": {
+        "serviceAccountTokenSettings": {
+          "$ref": "#/definitions/ConnectorTemplateServiceAccountTokenSettings",
+          "description": "The service account token for the MQTT connection."
+        }
+      },
+      "required": [
+        "serviceAccountTokenSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorTemplateMqttAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "ServiceAccountToken"
+    },
+    "ConnectorTemplateServiceAccountTokenSettings": {
+      "type": "object",
+      "description": "ConnectorTemplateServiceAccountTokenSettings properties",
+      "properties": {
+        "audience": {
+          "type": "string",
+          "description": "The audience for the service account token."
+        }
+      },
+      "required": [
+        "audience"
+      ]
     },
     "CustomStateStoreRetainmentPolicy": {
       "type": "object",

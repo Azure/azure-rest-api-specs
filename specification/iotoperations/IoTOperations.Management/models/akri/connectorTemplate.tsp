@@ -8,23 +8,13 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 namespace Microsoft.IoTOperations;
 
-alias OneToOneAllocation = "OneToOneAllocation";
-alias BucketizedAllocation = "BucketizedAllocation";
-alias ManagedConfiguration = "ManagedConfiguration";
-alias HelmConfiguration = "HelmConfiguration";
-alias ImageConfiguration = "ImageConfiguration";
-alias StatefulSetConfiguration = "StatefulSetConfiguration";
-alias Bucketized = "Bucketized";
-alias Filesystem = "Filesystem";
-alias Block = "Block";
-
 /**
  * ConnectorTemplate resource
  */
 @parentResource(InstanceResource)
 @added(Versions.`2025-07-01-preview`)
 model ConnectorTemplateResource is ProxyResource<ConnectorTemplateProperties> {
-  /** 
+  /**
    * Name of ConnectorTemplate resource
    */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
@@ -62,7 +52,7 @@ model ConnectorTemplateProperties {
   /**
    * The runtime configuration for the Connector template.
    */
-  runtimeConfiguration?: ConnectorTemplateRuntimeConfiguration;
+  runtimeConfiguration: ConnectorTemplateRuntimeConfiguration;
 
   /**
    * Diagnostics settings for the Connector template.
@@ -70,9 +60,170 @@ model ConnectorTemplateProperties {
   diagnostics?: ConnectorTemplateDiagnostics;
 
   /**
+   * Device inbound endpoint types
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["endpointType", "version"])
+  @minItems(1)
+  deviceInboundEndpointTypes: ConnectorTemplateDeviceInboundEndpointType[];
+
+  /**
+   * Mqtt connection configuration settings
+   */
+  mqttConnectionConfiguration?: ConnectorTemplateMqttConnectionConfiguration;
+
+  /**
    * The version of the Connector template.
    */
   version: string; // Probably not needed.
+}
+
+/**
+ * ConnectorTemplateMqttConnectionConfiguration properties
+ */
+//- This doesn't have the `cloudEventAttributes` property like DataflowEnpoints has
+//- This doesn't have the `retain` property like DataflowEnpoints has
+//- This doesn't have the `clientIdPrefix` property like DataflowEnpoints has
+//- This doesn't have the `retain` property like DataflowEnpoints has
+//- This doesn't have the `qos` property like DataflowEnpoints has
+//- The only supported protocol is `mqtt`
+//- `host` is a required property in DataflowEnpoints but optional here
+@added(Versions.`2025-07-01-preview`)
+model ConnectorTemplateMqttConnectionConfiguration {
+  @doc("authentication properties. DEFAULT: kubernetes.audience=aio-internal. NOTE - Enum field only property is allowed")
+  authentication?: ConnectorTemplateMqttAuthentication;
+
+  @doc("Host of the Broker in the form of <hostname>:<port>. Optional; connects to Broker if omitted.")
+  host?: string;
+
+  @doc("Enable or disable websockets.")
+  protocol?: ConnectorTemplateMqttProtocolType;
+
+  @doc("Broker KeepAlive for connection in seconds.")
+  @minValue(0)
+  keepAliveSeconds?: int32;
+
+  @doc("The max number of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.")
+  @minValue(0)
+  maxInflightMessages?: int32;
+
+  @doc("Session expiry in seconds.")
+  @minValue(0)
+  sessionExpirySeconds?: int32;
+
+  @doc("TLS configuration.")
+  tls?: TlsProperties;
+}
+
+/**
+ * ConnectorTemplateMqttAuthentication properties
+ */
+@added(Versions.`2025-07-01-preview`)
+@discriminator("method")
+model ConnectorTemplateMqttAuthentication {
+  @doc("The authentication method for the MQTT connection.")
+  method: ConnectorTemplateMqttAuthenticationMethod;
+}
+
+/**
+ * ConnectorTemplateMqttAuthenticationMethod properties
+ */
+@added(Versions.`2025-07-01-preview`)
+union ConnectorTemplateMqttAuthenticationMethod {
+  string,
+
+  /**
+   * Service Account Token authentication
+   */
+  ServiceAccountToken,
+}
+
+/**
+ * ConnectorTemplateMqttProtocolType properties
+ */
+@added(Versions.`2025-07-01-preview`)
+@doc("Mqtt protocol types.")
+union ConnectorTemplateMqttProtocolType {
+  string,
+
+  /**
+   * Mqtt protocol
+   */
+  Mqtt,
+}
+
+/**
+ * ConnectorTemplateServiceAccountAuthentication properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model ConnectorTemplateServiceAccountAuthentication
+  extends ConnectorTemplateMqttAuthentication {
+  /**
+   * The authentication method for the MQTT connection.
+   */
+  method: ServiceAccountToken;
+
+  /**
+   * The service account token for the MQTT connection.
+   */
+  serviceAccountTokenSettings: ConnectorTemplateServiceAccountTokenSettings;
+}
+
+/**
+ * ConnectorTemplateServiceAccountTokenSettings properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model ConnectorTemplateServiceAccountTokenSettings {
+  /**
+   * The audience for the service account token.
+   */
+  audience: string;
+}
+
+/**
+ * ConnectorTemplateDeviceInboundEndpointType properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model ConnectorTemplateDeviceInboundEndpointType {
+  /**
+   * The type of the device inbound endpoint.
+   */
+  endpointType: NonEmptyString;
+
+  /**
+   * The version of the device inbound endpoint.
+   */
+  version: NonEmptyString;
+
+  /**
+   * The configuration schema references for the device inbound endpoint.
+   */
+  configurationSchemaRefs?: ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs;
+}
+
+/**
+ * ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
+  /**
+   * The default configuration schema reference for datasets.
+   */
+  defaultDatasetConfigSchemaRef?: string;
+
+  /**
+   * The default configuration schema reference for events.
+   */
+  defaultEventsConfigSchemaRef?: string;
+
+  /**
+   * The default configuration schema reference for process control.
+   */
+  defaultProcessControlConfigSchemaRef?: string;
+
+  /**
+   * The default configuration schema reference for streams.
+   */
+  defaultStreamsConfigSchemaRef?: string;
 }
 
 /**
@@ -84,12 +235,12 @@ model ConnectorTemplateAioMetadata {
    * The minimum version of AIO required for the connector.
    */
   aioMinVersion?: string;
+
   /**
    * The maximum version of AIO required for the connector.
    */
   aioMaxVersion?: string;
 }
-
 
 /**
  * ConnectorTemplateRuntimeConfiguration properties
@@ -100,7 +251,7 @@ model ConnectorTemplateRuntimeConfiguration {
   /**
    * Runtime configuration type for the Connector template.
    */
-  runtimeConfigurationType: ConnectorTemplateRuntimeConfigurationType; // We could call this property `type`
+  runtimeConfigurationType: ConnectorTemplateRuntimeConfigurationType;
 }
 
 @doc("Runtime configuration types.")
@@ -123,11 +274,13 @@ union ConnectorTemplateRuntimeConfigurationType {
  * ConnectorTemplateHelmConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateHelmConfiguration extends ConnectorTemplateRuntimeConfiguration {
+model ConnectorTemplateHelmConfiguration
+  extends ConnectorTemplateRuntimeConfiguration {
   /**
    * The runtime configuration type for the Connector template.
    */
   runtimeConfigurationType: HelmConfiguration;
+
   /**
    * The Helm configuration settings
    */
@@ -165,7 +318,7 @@ model ConnectorTemplateHelmConfigurationSettings {
   authSecretRef?: ConnectorTemplateHelmAuthSecretRef;
 
   /**
-   * Advanced configuration for the Helm chart. 
+   * Advanced configuration for the Helm chart.
    * install, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`
    */
   advancedConfiguration?: ConnectorTemplateHelmAdvancedConfiguration;
@@ -181,7 +334,8 @@ model ConnectorTemplateHelmConfigurationSettings {
  * ConnectorTemplateManagedConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateManagedConfiguration extends ConnectorTemplateRuntimeConfiguration {
+model ConnectorTemplateManagedConfiguration
+  extends ConnectorTemplateRuntimeConfiguration {
   /**
    * The runtime configuration type for the Connector template.
    */
@@ -203,7 +357,7 @@ model ConnectorTemplateManagedConfigurationSettings {
    * The type of the managed configuration.
    */
   managedConfigurationType: ConnectorTemplateManagedConfigurationType; // Property could be called `type` instead of `managedConfigurationType`
-  
+
   /**
    * Allocation settings for the managed configuration.
    */
@@ -303,7 +457,6 @@ model ConnectorTemplatePersistentVolumeClaimResourceRequirements {
   /**
    * Requests represents the minimum amount of compute resources required. If Requests is omitted for any container, the Kubelet will enforce that the container has at least as much CPU/Memory as requested. If it is omitted for all containers, the Kubelet will enforce that the Pod has at least as much CPU/Memory as requested. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    */
-  
   requests: ConnectorTemplatePersistentVolumeClaimResourceRequests;
 }
 
@@ -346,7 +499,7 @@ union ConnectorTemplateAllocationPolicy {
   /**
    * Bucketized
    */
-  Bucketized
+  Bucketized,
 }
 
 @doc("Managed configuration types.")
@@ -369,7 +522,8 @@ union ConnectorTemplateManagedConfigurationType {
  * ConnectorTemplateRuntimeImageConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateRuntimeImageConfiguration extends ConnectorTemplateManagedConfigurationSettings {
+model ConnectorTemplateRuntimeImageConfiguration
+  extends ConnectorTemplateManagedConfigurationSettings {
   /**
    * The managed configuration type for the Connector template.
    */
@@ -385,7 +539,8 @@ model ConnectorTemplateRuntimeImageConfiguration extends ConnectorTemplateManage
  * ConnectorTemplateRuntimeStatefulSetConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateRuntimeStatefulSetConfiguration extends ConnectorTemplateManagedConfigurationSettings {
+model ConnectorTemplateRuntimeStatefulSetConfiguration
+  extends ConnectorTemplateManagedConfigurationSettings {
   /**
    * The managed configuration type for the Connector template.
    */
@@ -470,9 +625,7 @@ model ConnectorTemplateImagePullSecret {
    * The name of the image pull secret.
    */
   name: string;
-
 }
-
 
 @doc("Image pull policy.")
 @added(Versions.`2025-07-01-preview`)
@@ -547,7 +700,7 @@ alias HelmOperationConfiguration = {
  */
 @added(Versions.`2025-07-01-preview`)
 model ConnectorTemplateHelmDeleteConfiguration {
-  ...HelmOperationConfiguration
+  ...HelmOperationConfiguration;
 }
 
 /**
@@ -555,7 +708,7 @@ model ConnectorTemplateHelmDeleteConfiguration {
  */
 @added(Versions.`2025-07-01-preview`)
 model ConnectorTemplateHelmInstallConfiguration {
-  ...HelmOperationConfiguration
+  ...HelmOperationConfiguration;
 }
 
 /**
@@ -563,7 +716,7 @@ model ConnectorTemplateHelmInstallConfiguration {
  */
 @added(Versions.`2025-07-01-preview`)
 model ConnectorTemplateHelmUpgradeConfiguration {
-  ...HelmOperationConfiguration
+  ...HelmOperationConfiguration;
 }
 
 /**
@@ -587,8 +740,6 @@ model ConnectorTemplateHelmAuthSecretRef {
   usernameKey: string;
 }
 
-
-
 /**
  * ConnectorTemplateDiagnostics properties
  */
@@ -607,4 +758,3 @@ model ConnectorTemplateDiagnostics {
 model ConnectorTemplateLogSettings {
   ...DiagnosticsLogs;
 }
-
