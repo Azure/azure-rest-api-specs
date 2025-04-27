@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "query": "1 Microsoft Way, Redmond",
+    "coordinates": "abc",
+    "resultTypeGroups": "Place",
+    "AzureKey": "[subscription-key]"
+  },
+  "responses": {
+    "400": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
+      "body": {
+        "error": {
+          "message": "Invalid coordinates format for Coordinates. Expected format: 'Longitude,Latitude'."
+        }
+      }
+    }
+  }
+}
