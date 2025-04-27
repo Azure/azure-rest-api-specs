@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Azure.AI.Projects, "AIProjectClient");
 
+// Shorter method names for SDK datasets operations
 @@clientName(Azure.AI.Projects.Datasets.listLatest, "list");
 @@clientName(Azure.AI.Projects.Datasets.getVersion, "get");
 @@clientName(Azure.AI.Projects.Datasets.deleteVersion, "delete");
@@ -15,7 +16,24 @@ using Azure.ClientGenerator.Core;
   "pendingUpload"
 );
 
+// Shorter method names for SDK Index operations
 @@clientName(Azure.AI.Projects.Indexes.listLatest, "list");
 @@clientName(Azure.AI.Projects.Indexes.getVersion, "get");
 @@clientName(Azure.AI.Projects.Indexes.deleteVersion, "delete");
 @@clientName(Azure.AI.Projects.Indexes.createOrUpdateVersion, "createOrUpdate");
+
+// In Python, the emitter changes "keys" to "keys_property", since there is already
+// a "keys" method in the generated code due to usage of MutableMapping. Call it credential_keys instead.
+@@clientName(Azure.AI.Projects.CustomCredential.keys,
+  "credential_keys",
+  "python"
+);
+
+// All SDKs hand-write a single public method with boolean "includeCredentials" input parameters
+// that calls either on of the internal methods below
+@@access(Azure.AI.Projects.Connections.get, Access.internal);
+@@access(Azure.AI.Projects.Connections.getWithCredentials, Access.internal);
+
+// For some reason for Python the emitter creates an empty ServicePatternsOperations operation
+// class. Mark it as internal here. Apply to all languages just in case.
+@@access(Azure.AI.Projects.ServicePatterns, Access.internal);

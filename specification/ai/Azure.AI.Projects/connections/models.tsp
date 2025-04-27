@@ -68,7 +68,7 @@ model EntraIDCredentials extends BaseCredentials {
   type: CredentialType.entraId;
 }
 
-@doc("Custom credential defintion")
+@doc("Custom credential definition")
 model CustomCredential extends BaseCredentials {
   @doc("The credential type")
   @visibility(Lifecycle.Read)
