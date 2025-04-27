@@ -1,0 +1,2191 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Dashboard",
+    "version": "2024-10-01",
+    "description": "The Microsoft.Dashboard Rest API spec."
+  },
+  "paths": {
+    "/providers/Microsoft.Dashboard/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "summary": "List all available API operations provided by Microsoft.Dashboard.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Dashboard/grafana": {
+      "get": {
+        "operationId": "Grafana_List",
+        "summary": "List all resources of workspaces for Grafana under the specified subscription.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafanaListResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_List": {
+            "$ref": "./examples/Grafana_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana": {
+      "get": {
+        "operationId": "Grafana_ListByResourceGroup",
+        "summary": "List all resources of workspaces for Grafana under the specified resource group.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafanaListResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_ListByResourceGroup": {
+            "$ref": "./examples/Grafana_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}": {
+      "get": {
+        "operationId": "Grafana_Get",
+        "summary": "Get the properties of a specific workspace for Grafana resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_Get": {
+            "$ref": "./examples/Grafana_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Grafana_Create",
+        "summary": "Create or update a workspace for Grafana resource. This API is idempotent, so user can either create a new grafana or update an existing grafana.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation URI for long running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_Create": {
+            "$ref": "./examples/Grafana_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Grafana_Update",
+        "summary": "Update a workspace for Grafana resource.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafanaUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation URI for long running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_Update": {
+            "$ref": "./examples/Grafana_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Grafana_Delete",
+        "summary": "Delete a workspace for Grafana resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation URI for long running operation."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_Delete": {
+            "$ref": "./examples/Grafana_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/checkEnterpriseDetails": {
+      "post": {
+        "operationId": "Grafana_CheckEnterpriseDetails",
+        "summary": "Retrieve enterprise add-on details information",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseDetails"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnterpriseDetails_Post": {
+            "$ref": "./examples/EnterpriseDetails_Post.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/fetchAvailablePlugins": {
+      "post": {
+        "operationId": "Grafana_FetchAvailablePlugins",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/GrafanaAvailablePluginListResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_FetchAvailablePlugins": {
+            "$ref": "./examples/Grafana_FetchAvailablePlugins.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/integrationFabrics": {
+      "get": {
+        "operationId": "IntegrationFabrics_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabricListResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_List": {
+            "$ref": "./examples/IntegrationFabrics_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/integrationFabrics/{integrationFabricName}": {
+      "get": {
+        "operationId": "IntegrationFabrics_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "integrationFabricName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,18}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Get": {
+            "$ref": "./examples/IntegrationFabrics_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IntegrationFabrics_Create",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "integrationFabricName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,18}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation URI for long running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Create": {
+            "$ref": "./examples/IntegrationFabrics_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "IntegrationFabrics_Update",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "integrationFabricName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,18}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabricUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Update": {
+            "$ref": "./examples/IntegrationFabrics_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "IntegrationFabrics_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "integrationFabricName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,18}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Delete": {
+            "$ref": "./examples/IntegrationFabrics_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/managedPrivateEndpoints": {
+      "get": {
+        "operationId": "ManagedPrivateEndpoints_List",
+        "summary": "List all managed private endpoints of a grafana resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModelListResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoint_List": {
+            "$ref": "./examples/ManagedPrivateEndpoints_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/managedPrivateEndpoints/{managedPrivateEndpointName}": {
+      "get": {
+        "operationId": "ManagedPrivateEndpoints_Get",
+        "summary": "Get a specific managed private endpoint of a grafana resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoint_Get": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedPrivateEndpoints_Create",
+        "summary": "Create or update a managed private endpoint for a grafana resource.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation URI for long running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoint_Create": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManagedPrivateEndpoints_Update",
+        "summary": "Update a managed private endpoint for an existing grafana resource.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation URI for long running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_Patch": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedPrivateEndpoints_Delete",
+        "summary": "Delete a managed private endpoint for a grafana resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation URI for long running operation."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoint_Delete": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_List",
+        "summary": "Get private endpoint connection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/PrivateEndpointConnections_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "summary": "Get private endpoint connections.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_Approve",
+        "summary": "Manual approve private endpoint connection",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation URI for long running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Approve": {
+            "$ref": "./examples/PrivateEndpointConnections_Approve.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "summary": "Delete private endpoint connection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation URI for long running operation."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_List",
+        "summary": "List all private link resources information for this grafana resource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/PrivateLinkResources_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "summary": "Get specific private link resource information for this grafana resource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/refreshManagedPrivateEndpoints": {
+      "post": {
+        "operationId": "ManagedPrivateEndpoints_Refresh",
+        "summary": "Refresh and sync managed private endpoints of a grafana resource to latest state.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation URI for long running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoint_Refresh": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Refresh.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AzureMonitorWorkspaceIntegration": {
+      "type": "object",
+      "properties": {
+        "azureMonitorWorkspaceResourceId": {
+          "type": "string"
+        }
+      }
+    },
+    "EnterpriseConfigurations": {
+      "type": "object",
+      "properties": {
+        "marketplacePlanId": {
+          "type": "string"
+        },
+        "marketplaceAutoRenew": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "MarketplaceAutoRenew",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EnterpriseDetails": {
+      "type": "object",
+      "properties": {
+        "saasSubscriptionDetails": {
+          "$ref": "#/definitions/SaasSubscriptionDetails"
+        },
+        "marketplaceTrialQuota": {
+          "$ref": "#/definitions/MarketplaceTrialQuota"
+        }
+      }
+    },
+    "GrafanaAvailablePlugin": {
+      "type": "object",
+      "properties": {
+        "pluginId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GrafanaAvailablePluginListResponse": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/GrafanaAvailablePlugin"
+          },
+          "x-ms-identifiers": [
+            "pluginId"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GrafanaConfigurations": {
+      "type": "object",
+      "properties": {
+        "smtp": {
+          "$ref": "#/definitions/Smtp"
+        },
+        "snapshots": {
+          "$ref": "#/definitions/Snapshots"
+        },
+        "users": {
+          "$ref": "#/definitions/Users"
+        },
+        "security": {
+          "$ref": "#/definitions/Security"
+        }
+      }
+    },
+    "GrafanaIntegrations": {
+      "type": "object",
+      "properties": {
+        "azureMonitorWorkspaceIntegrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMonitorWorkspaceIntegration"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "GrafanaPlugin": {
+      "type": "object",
+      "properties": {
+        "pluginId": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IntegrationFabric": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IntegrationFabricProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "IntegrationFabricListResponse": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/IntegrationFabric"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IntegrationFabricProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleted",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id"
+        },
+        "dataSourceResourceId": {
+          "type": "string",
+          "format": "arm-id"
+        },
+        "scenarios": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IntegrationFabricPropertiesUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "scenarios": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IntegrationFabricUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/IntegrationFabricPropertiesUpdateParameters"
+        }
+      }
+    },
+    "ManagedGrafana": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedGrafanaProperties"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ManagedGrafanaListResponse": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ManagedGrafana"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedGrafanaProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleted",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "grafanaVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "zoneRedundancy": {
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneRedundancy",
+            "modelAsString": true
+          }
+        },
+        "apiKey": {
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApiKey",
+            "modelAsString": true
+          }
+        },
+        "deterministicOutboundIP": {
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "DeterministicOutboundIP",
+            "modelAsString": true
+          }
+        },
+        "outboundIPs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "autoGeneratedDomainNameLabelScope": {
+          "type": "string",
+          "enum": [
+            "TenantReuse"
+          ],
+          "x-ms-enum": {
+            "name": "AutoGeneratedDomainNameLabelScope",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "grafanaIntegrations": {
+          "$ref": "#/definitions/GrafanaIntegrations"
+        },
+        "enterpriseConfigurations": {
+          "$ref": "#/definitions/EnterpriseConfigurations"
+        },
+        "grafanaConfigurations": {
+          "$ref": "#/definitions/GrafanaConfigurations"
+        },
+        "grafanaPlugins": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/GrafanaPlugin"
+          }
+        },
+        "grafanaMajorVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "ManagedGrafanaPropertiesUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "zoneRedundancy": {
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneRedundancy",
+            "modelAsString": true
+          }
+        },
+        "apiKey": {
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApiKey",
+            "modelAsString": true
+          }
+        },
+        "deterministicOutboundIP": {
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "DeterministicOutboundIP",
+            "modelAsString": true
+          }
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "grafanaIntegrations": {
+          "$ref": "#/definitions/GrafanaIntegrations"
+        },
+        "enterpriseConfigurations": {
+          "$ref": "#/definitions/EnterpriseConfigurations"
+        },
+        "grafanaConfigurations": {
+          "$ref": "#/definitions/GrafanaConfigurations"
+        },
+        "grafanaPlugins": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/GrafanaPlugin"
+          }
+        },
+        "grafanaMajorVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "ManagedGrafanaUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedGrafanaPropertiesUpdateParameters"
+        }
+      }
+    },
+    "ManagedPrivateEndpointConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedPrivateEndpointConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedPrivateEndpointModel": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedPrivateEndpointModelProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "ManagedPrivateEndpointModelListResponse": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ManagedPrivateEndpointModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedPrivateEndpointModelProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleted",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "privateLinkResourceId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "privateLinkResourceRegion": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "requestMessage": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "connectionState": {
+          "$ref": "#/definitions/ManagedPrivateEndpointConnectionState",
+          "readOnly": true
+        },
+        "privateLinkServiceUrl": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "privateLinkServicePrivateIP": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedPrivateEndpointUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MarketplaceTrialQuota": {
+      "type": "object",
+      "properties": {
+        "availablePromotion": {
+          "type": "string",
+          "default": "None",
+          "enum": [
+            "None",
+            "FreeTrial"
+          ],
+          "x-ms-enum": {
+            "name": "AvailablePromotion",
+            "modelAsString": true
+          }
+        },
+        "grafanaResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Dashboard/grafana"
+              }
+            ]
+          }
+        },
+        "trialStartAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "trialEndAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpoint"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionProvisioningState"
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleted",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "groupId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SaasSubscriptionDetails": {
+      "type": "object",
+      "properties": {
+        "planId": {
+          "type": "string"
+        },
+        "offerId": {
+          "type": "string"
+        },
+        "publisherId": {
+          "type": "string"
+        },
+        "term": {
+          "$ref": "#/definitions/SubscriptionTerm"
+        }
+      }
+    },
+    "Security": {
+      "type": "object",
+      "properties": {
+        "csrfAlwaysCheck": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Smtp": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "host": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "fromAddress": {
+          "type": "string"
+        },
+        "fromName": {
+          "type": "string"
+        },
+        "startTLSPolicy": {
+          "type": "string",
+          "enum": [
+            "OpportunisticStartTLS",
+            "MandatoryStartTLS",
+            "NoStartTLS"
+          ],
+          "x-ms-enum": {
+            "name": "StartTLSPolicy",
+            "modelAsString": true
+          }
+        },
+        "skipVerify": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Snapshots": {
+      "type": "object",
+      "properties": {
+        "externalEnabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SubscriptionTerm": {
+      "type": "object",
+      "properties": {
+        "termUnit": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Users": {
+      "type": "object",
+      "properties": {
+        "viewersCanEdit": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "IntegrationFabricNameParameter": {
+      "name": "integrationFabricName",
+      "in": "path",
+      "description": "The integration fabric name of Azure Managed Grafana.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,18}[a-z0-9A-Z]$",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedPrivateEndpointNameParameter": {
+      "name": "managedPrivateEndpointName",
+      "in": "path",
+      "description": "The managed private endpoint name of Azure Managed Grafana.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "description": "The private endpoint connection name of Azure Managed Grafana.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The workspace name of Azure Managed Grafana.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

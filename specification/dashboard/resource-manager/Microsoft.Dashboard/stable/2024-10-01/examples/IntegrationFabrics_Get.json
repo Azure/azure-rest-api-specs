@@ -1,28 +1,30 @@
 {
   "parameters": {
     "api-version": "2024-10-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "integrationFabricName": "sampleIntegration",
     "resourceGroupName": "myResourceGroup",
-    "workspaceName": "myWorkspace",
-    "integrationFabricName": "sampleIntegration"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceName": "myWorkspace"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Dashboard/grafana/myWorkspace/integrationFabrics/myIntegrationFabricName",
         "name": "sampleIntegration",
         "type": "Microsoft.Dashboard/grafana/integrationFabrics",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Dashboard/grafana/myWorkspace/integrationFabrics/myIntegrationFabricName",
+        "location": "West US",
         "properties": {
-          "provisioningState": "Succeeded",
-          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myAks",
           "dataSourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAmw",
+          "provisioningState": "Succeeded",
           "scenarios": [
             "scenario1",
             "scenario2"
-          ]
-        },
-        "location": "West US"
+          ],
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myAks"
+        }
       }
     }
-  }
+  },
+  "operationId": "IntegrationFabrics_Get",
+  "title": "IntegrationFabrics_Get"
 }

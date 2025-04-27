@@ -216,11 +216,13 @@ model ManagedGrafanaProperties {
   /**
    * Whether a Grafana instance uses deterministic outbound IPs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   deterministicOutboundIP?: DeterministicOutboundIP = DeterministicOutboundIP.Disabled;
 
   /**
    * List of outbound IPs if deterministicOutboundIP is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   outboundIPs?: string[];
 
@@ -449,6 +451,7 @@ model Smtp {
    * The StartTLSPolicy setting of the SMTP configuration
    * https://pkg.go.dev/github.com/go-mail/mail#StartTLSPolicy
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   startTLSPolicy?: StartTLSPolicy;
 
   /**
@@ -536,7 +539,7 @@ model ManagedServiceIdentity {
  */
 model ManagedGrafanaUpdateParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  sku?: ResourceSku;
+  sku?: ResourceSkuProperty;
 
   /**
    * The managed identity of the grafana resource.
@@ -572,6 +575,7 @@ model ManagedGrafanaPropertiesUpdateParameters {
   /**
    * Whether a Grafana instance uses deterministic outbound IPs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   deterministicOutboundIP?: DeterministicOutboundIP = DeterministicOutboundIP.Disabled;
 
   /**
@@ -809,6 +813,7 @@ model ManagedPrivateEndpointModelProperties {
   /**
    * The private IP of private endpoint after approval. This property is empty before connection is approved.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   privateLinkServicePrivateIP?: string;
 }

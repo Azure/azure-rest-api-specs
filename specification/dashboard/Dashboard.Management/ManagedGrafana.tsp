@@ -26,7 +26,7 @@ model ManagedGrafana
    * The Sku of the grafana resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  sku?: ResourceSku;
+  sku?: ResourceSkuProperty;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
@@ -50,6 +50,7 @@ interface ManagedGrafanas {
   /**
    * Update a workspace for Grafana resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
@@ -118,6 +119,7 @@ interface ManagedGrafanas {
   /**
    * Refresh and sync managed private endpoints of a grafana resource to latest state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("refreshManagedPrivateEndpoints")
   @operationId("ManagedPrivateEndpoints_Refresh")

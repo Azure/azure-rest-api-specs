@@ -31,11 +31,12 @@ interface IntegrationFabrics {
 
   create is ArmResourceCreateOrReplaceAsync<IntegrationFabric>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     IntegrationFabric,
     PatchModel = IntegrationFabricUpdateParameters,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = IntegrationFabric> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

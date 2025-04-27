@@ -44,6 +44,7 @@ interface ManagedPrivateEndpointModels {
   /**
    * Update a managed private endpoint for an existing grafana resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
@@ -51,7 +52,7 @@ interface ManagedPrivateEndpointModels {
   update is ArmCustomPatchAsync<
     ManagedPrivateEndpointModel,
     PatchModel = ManagedPrivateEndpointUpdateParameters,
-    Response = ArmResponse<ManagedPrivateEndpointModel> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmResponse<ManagedPrivateEndpointModel> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ManagedPrivateEndpointModel> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ManagedPrivateEndpointModel;

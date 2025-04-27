@@ -38,7 +38,11 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   approve is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceCreatedResponse<PrivateEndpointConnection>
+    Response = ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmResourceCreatedResponse<
+      Resource = PrivateEndpointConnection,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
