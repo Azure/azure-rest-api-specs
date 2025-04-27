@@ -29,8 +29,8 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
-// All SDKs hand-write a single public method with boolean "includeCredentials" input parameters
-// that calls either on of the internal methods below
+// Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
+// input parameter that calls either on these two.
 @@access(Azure.AI.Projects.Connections.get, Access.internal);
 @@access(Azure.AI.Projects.Connections.getWithCredentials, Access.internal);
 
