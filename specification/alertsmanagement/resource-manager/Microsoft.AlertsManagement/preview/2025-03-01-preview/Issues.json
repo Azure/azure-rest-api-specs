@@ -660,16 +660,6 @@
       "type": "object",
       "description": "An abnormal event details",
       "properties": {
-        "category": {
-          "type": "string",
-          "description": "The details category",
-          "enum": [
-            "Log"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "data": {
           "$ref": "#/definitions/AbnormalEventData",
           "description": "The details data, which could be user generated or system generated"
@@ -680,7 +670,6 @@
         }
       },
       "required": [
-        "category",
         "data",
         "insight"
       ],
@@ -1000,16 +989,6 @@
       "type": "object",
       "description": "An azure metric details",
       "properties": {
-        "category": {
-          "type": "string",
-          "description": "The details category",
-          "enum": [
-            "Metric"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "data": {
           "$ref": "#/definitions/AzureMetricData",
           "description": "The details data, which could be user generated or system generated"
@@ -1020,7 +999,6 @@
         }
       },
       "required": [
-        "category",
         "data",
         "insight"
       ],
@@ -1202,23 +1180,12 @@
       "type": "object",
       "description": "An diagnostics details",
       "properties": {
-        "category": {
-          "type": "string",
-          "description": "The details category",
-          "enum": [
-            "Diagnostics"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "insight": {
           "$ref": "#/definitions/DiagnosticsInsight",
           "description": "Insight about the anomaly, this is system generated"
         }
       },
       "required": [
-        "category",
         "insight"
       ],
       "allOf": [
@@ -1305,23 +1272,12 @@
       "type": "object",
       "description": "An investigation details",
       "properties": {
-        "category": {
-          "type": "string",
-          "description": "The details category",
-          "enum": [
-            "Investigation"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "data": {
           "$ref": "#/definitions/StartInvestigationParameters",
           "description": "The parameters used for this investigation execution"
         }
       },
       "required": [
-        "category",
         "data"
       ],
       "allOf": [
@@ -1864,16 +1820,6 @@
       "type": "object",
       "description": "A related alert details",
       "properties": {
-        "category": {
-          "type": "string",
-          "description": "The details category",
-          "enum": [
-            "Alert"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "data": {
           "$ref": "#/definitions/RelatedAlertData",
           "description": "The details data, which could be user generated or system generated"
@@ -1884,7 +1830,6 @@
         }
       },
       "required": [
-        "category",
         "data",
         "insight"
       ],
@@ -2000,23 +1945,12 @@
       "type": "object",
       "description": "A resource health details",
       "properties": {
-        "category": {
-          "type": "string",
-          "description": "The details category",
-          "enum": [
-            "ResourceHealth"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "insight": {
           "$ref": "#/definitions/ResourceHealthInsight",
           "description": "Insight about the anomaly, this is system generated"
         }
       },
       "required": [
-        "category",
         "insight"
       ],
       "allOf": [
