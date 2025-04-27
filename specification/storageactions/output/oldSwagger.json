@@ -1,0 +1,923 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StorageActionsManagementClient",
+    "version": "2023-01-01",
+    "description": "The Azure Storage Actions Management API."
+  },
+  "paths": {
+    "/providers/Microsoft.StorageActions/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/misc/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageActions/locations/{location}/previewActions": {
+      "post": {
+        "operationId": "StorageTasks_PreviewActions",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageTaskPreviewAction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskPreviewAction"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PerformStorageTaskActionsPreview": {
+            "$ref": "./examples/misc/PerformStorageTaskActionsPreview.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageActions/storageTasks": {
+      "get": {
+        "operationId": "StorageTasks_ListBySubscription",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StorageTasksListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListStorageTasksBySubscription": {
+            "$ref": "./examples/storageTasksList/ListStorageTasksBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks": {
+      "get": {
+        "operationId": "StorageTasks_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StorageTasksListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListStorageTasksByResourceGroup": {
+            "$ref": "./examples/storageTasksList/ListStorageTasksByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}": {
+      "get": {
+        "operationId": "StorageTasks_Get",
+        "parameters": [
+          {
+            "name": "storageTaskName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 18,
+            "pattern": "^[a-z0-9]{3,18}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StorageTask"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetStorageTask": {
+            "$ref": "./examples/storageTasksCrud/GetStorageTask.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StorageTasks_Create",
+        "parameters": [
+          {
+            "name": "storageTaskName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 18,
+            "pattern": "^[a-z0-9]{3,18}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageTask"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StorageTask"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StorageTask"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutStorageTask": {
+            "$ref": "./examples/storageTasksCrud/PutStorageTask.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "StorageTasks_Update",
+        "parameters": [
+          {
+            "name": "storageTaskName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 18,
+            "pattern": "^[a-z0-9]{3,18}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageTaskUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StorageTask"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchStorageTask": {
+            "$ref": "./examples/storageTasksCrud/PatchStorageTask.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "StorageTasks_Delete",
+        "parameters": [
+          {
+            "name": "storageTaskName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 18,
+            "pattern": "^[a-z0-9]{3,18}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteStorageTask": {
+            "$ref": "./examples/storageTasksCrud/DeleteStorageTask.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}/reports": {
+      "get": {
+        "operationId": "StorageTasksReport_List",
+        "parameters": [
+          {
+            "name": "storageTaskName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 18,
+            "pattern": "^[a-z0-9]{3,18}$"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskReportSummary"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListStorageTasksByResourceGroup": {
+            "$ref": "./examples/storageTasksList/ListStorageTasksRunReportSummary.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}/storageTaskAssignments": {
+      "get": {
+        "operationId": "StorageTaskAssignment_List",
+        "parameters": [
+          {
+            "name": "storageTaskName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 18,
+            "pattern": "^[a-z0-9]{3,18}$"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignmentsListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListStorageTaskAssignmentsByResourceGroup": {
+            "$ref": "./examples/storageTasksList/ListStorageTaskAssignmentIds.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ElseCondition": {
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskOperation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "operations"
+      ]
+    },
+    "IfCondition": {
+      "type": "object",
+      "properties": {
+        "condition": {
+          "type": "string"
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskOperation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "condition",
+        "operations"
+      ]
+    },
+    "StorageTask": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageTaskProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "identity",
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StorageTaskAction": {
+      "type": "object",
+      "properties": {
+        "if": {
+          "$ref": "#/definitions/IfCondition"
+        },
+        "else": {
+          "$ref": "#/definitions/ElseCondition"
+        }
+      },
+      "required": [
+        "if"
+      ]
+    },
+    "StorageTaskAssignment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageTaskAssignmentsListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/StorageTaskAssignment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StorageTaskOperation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "SetBlobTier",
+            "SetBlobTags",
+            "SetBlobImmutabilityPolicy",
+            "SetBlobLegalHold",
+            "SetBlobExpiry",
+            "DeleteBlob",
+            "UndeleteBlob"
+          ],
+          "x-ms-enum": {
+            "name": "StorageTaskOperationName",
+            "modelAsString": true
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "onSuccess": {
+          "type": "string",
+          "enum": [
+            "continue"
+          ],
+          "x-ms-enum": {
+            "name": "OnSuccess",
+            "modelAsString": true
+          }
+        },
+        "onFailure": {
+          "type": "string",
+          "enum": [
+            "break"
+          ],
+          "x-ms-enum": {
+            "name": "OnFailure",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "StorageTaskPreviewAction": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageTaskPreviewActionProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "StorageTaskPreviewActionCondition": {
+      "type": "object",
+      "properties": {
+        "if": {
+          "$ref": "#/definitions/StorageTaskPreviewActionIfCondition"
+        },
+        "elseBlockExists": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "elseBlockExists",
+        "if"
+      ]
+    },
+    "StorageTaskPreviewActionIfCondition": {
+      "type": "object",
+      "properties": {
+        "condition": {
+          "type": "string"
+        }
+      }
+    },
+    "StorageTaskPreviewActionProperties": {
+      "type": "object",
+      "properties": {
+        "container": {
+          "$ref": "#/definitions/StorageTaskPreviewContainerProperties",
+          "type": "object"
+        },
+        "blobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskPreviewBlobProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "action": {
+          "$ref": "#/definitions/StorageTaskPreviewActionCondition",
+          "type": "object"
+        }
+      },
+      "required": [
+        "action",
+        "blobs",
+        "container"
+      ]
+    },
+    "StorageTaskPreviewBlobProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskPreviewKeyValueProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskPreviewKeyValueProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskPreviewKeyValueProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "matchedBlock": {
+          "type": "string",
+          "enum": [
+            "If",
+            "Else",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "MatchedBlockName",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "StorageTaskPreviewContainerProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskPreviewKeyValueProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "StorageTaskPreviewKeyValueProperties": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "StorageTaskProperties": {
+      "type": "object",
+      "properties": {
+        "taskVersion": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 1,
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/StorageTaskAction"
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "ValidateSubscriptionQuotaBegin",
+            "ValidateSubscriptionQuotaEnd",
+            "Accepted",
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "creationTimeInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "action",
+        "description",
+        "enabled"
+      ]
+    },
+    "StorageTaskReportInstance": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageTaskReportProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StorageTaskReportProperties": {
+      "type": "object",
+      "properties": {
+        "taskAssignmentId": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments"
+              }
+            ]
+          }
+        },
+        "storageAccountId": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "readOnly": true
+        },
+        "finishTime": {
+          "type": "string",
+          "readOnly": true
+        },
+        "objectsTargetedCount": {
+          "type": "string",
+          "readOnly": true
+        },
+        "objectsOperatedOnCount": {
+          "type": "string",
+          "readOnly": true
+        },
+        "objectFailedCount": {
+          "type": "string",
+          "readOnly": true
+        },
+        "objectsSucceededCount": {
+          "type": "string",
+          "readOnly": true
+        },
+        "runStatusError": {
+          "type": "string",
+          "readOnly": true
+        },
+        "runStatusEnum": {
+          "type": "string",
+          "enum": [
+            "InProgress",
+            "Finished"
+          ],
+          "x-ms-enum": {
+            "name": "RunStatusEnum",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "summaryReportPath": {
+          "type": "string",
+          "readOnly": true
+        },
+        "taskId": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageActions/storageTasks"
+              }
+            ]
+          }
+        },
+        "taskVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "runResult": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "RunResult",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "StorageTaskReportSummary": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/StorageTaskReportInstance"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StorageTaskUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageTaskProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StorageTasksListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/StorageTask"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "StorageTaskName": {
+      "name": "storageTaskName",
+      "in": "path",
+      "description": "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 18,
+      "pattern": "^[a-z0-9]{3,18}$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

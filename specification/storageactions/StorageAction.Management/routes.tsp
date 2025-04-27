@@ -35,4 +35,3 @@ interface StorageTasksOperationGroup {
 @@doc(StorageTasksOperationGroup.previewActions::parameters.body,
   "The parameters to preview action condition."
 );
-@@alternateType(LocationParameter.location, azureLocation);

@@ -27,7 +27,7 @@ model StorageTask extends Foundations.TrackedResource {
    * The managed service identity of the resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  identity: ManagedServiceIdentity;
+  identity: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten

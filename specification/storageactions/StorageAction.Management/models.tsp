@@ -26,21 +26,6 @@ union MatchedBlockName {
 }
 
 /**
- * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
- */
-union ManagedServiceIdentityType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  SystemAssigned: "SystemAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  UserAssigned: "UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
-}
-
-/**
  * The operation to be performed on the object.
  */
 union StorageTaskOperationName {
@@ -248,38 +233,6 @@ model StorageTaskPreviewActionIfCondition {
 }
 
 /**
- * Managed service identity (system assigned and/or user assigned identities)
- */
-model ManagedServiceIdentity {
-  /**
-   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  principalId?: string;
-
-  /**
-   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  tenantId?: string;
-
-  /**
-   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
-   */
-  type: ManagedServiceIdentityType;
-
-  /**
-   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
-}
-
-/**
  * Properties of the storage task.
  */
 model StorageTaskProperties {
@@ -424,7 +377,7 @@ model StorageTaskUpdateParameters {
   /**
    * The identity of the resource.
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   /**
    * Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.
@@ -616,6 +569,14 @@ model StorageTaskAssignment {
   id?: Azure.Core.armResourceIdentifier;
 }
 
+/** The default location parameter type. */
+model LocationParameter {
+  @path
+  @segment("locations")
+  @key
+  location: string;
+}
+
 model StorageTasksListResult is Azure.Core.Page<StorageTask>;
 
 @@doc(StorageTaskAssignmentsListResult.value,
@@ -639,3 +600,7 @@ model StorageTasksListResult is Azure.Core.Page<StorageTask>;
 @@OpenAPI.extension(StorageTasksListResult.value, "x-ms-identifiers", #[]);
 @@visibility(Azure.Core.Page.value, Lifecycle.Read);
 @@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
+@@visibility(StorageTaskPreviewBlobProperties.matchedBlock, Lifecycle.Read);
+@@visibility(StorageTaskReportProperties.runStatusEnum, Lifecycle.Read);
+@@alternateType(StorageTaskPreviewActionProperties.container, {});
+@@alternateType(StorageTaskPreviewActionProperties.action, {});
