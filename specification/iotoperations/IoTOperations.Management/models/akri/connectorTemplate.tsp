@@ -497,7 +497,7 @@ union ConnectorTemplateAllocationPolicy {
   string,
 
   /**
-   * Bucketized
+   * Bucketized allocation policy
    */
   Bucketized,
 }
