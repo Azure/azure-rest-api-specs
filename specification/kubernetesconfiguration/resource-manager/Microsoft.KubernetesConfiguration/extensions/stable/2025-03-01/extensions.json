@@ -48,9 +48,6 @@
           },
           "Create Extension with Plan": {
             "$ref": "./examples/CreateExtensionWithPlan.json"
-          },
-          "Create Extension With Identity": {
-            "$ref": "./examples/CreateExtensionWithIdentity.json"
           }
         },
         "parameters": [
@@ -647,7 +644,7 @@
         "identity": {
           "description": "Identity of the Extension resource",
           "x-nullable": true,
-          "$ref": "#/definitions/ManagedServiceIdentity"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
         },
         "systemData": {
           "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
@@ -746,64 +743,8 @@
               }
             }
           }
-        },
-        "identity": {
-          "description": "Identity of the Extension resource",
-          "x-nullable": true,
-          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       }
-    },
-    "ManagedServiceIdentity": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of identity used for the resource. Only user assigned identities are supported for 'Bring your own Identity' model.",
-          "enum": [
-            "UserAssigned",
-            "SystemAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentitiesAdditionalProperties"
-          },
-          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
-        }
-      },
-      "description": "Identity for the resource."
-    },
-    "UserAssignedIdentitiesAdditionalProperties": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal id of user assigned identity."
-        },
-        "clientId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The client id of user assigned identity."
-        }
-      },
-      "description": "Additional properties for the User Assigned Identity."
     },
     "ManagementDetails": {
       "type": "object",
