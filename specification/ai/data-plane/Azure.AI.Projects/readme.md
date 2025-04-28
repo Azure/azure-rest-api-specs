@@ -15,11 +15,11 @@ openapi-type: data-plane
 
 # Releases
 
-### Release latest
-These settings apply only when `--tag=latest` is specified on the command line.
+### Release v1
+These settings apply only when `--tag=v1` is specified on the command line.
 ``` yaml $(tag) == 'latest'
 input-file:
-  - stable/latest/azure-ai-projects-1dp.json
+  - stable/v1/azure-ai-projects-1dp.json
 ```
 
 ### Release v2025-05-01
