@@ -17,6 +17,7 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+    package-name: "azure-mgmt-programmableconnectivity"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-programmableconnectivity"
     namespace: "com.azure.resourcemanager.programmableconnectivity"
@@ -32,12 +33,19 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+    generate-examples: true
   "@azure-tools/typespec-csharp":
     flavor: azure
     package-dir: "Azure.ResourceManager.ProgrammableConnectivity"
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    experimentalExtensibleEnums: true
+    package-dir: "@azure/arm-programmableconnectivity"
+    packageDetails:
+      name: "@azure/arm-programmableconnectivity"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
