@@ -432,24 +432,24 @@ model ConnectorTemplatePersistentVolumeClaimTemplate {
   accessModes?: string[];
 
   /**
-   * This field can be used to specify either: 
+   * This field can be used to specify either:
    * - An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)
-   * - An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. 
-   * 
+   * - An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source.
+   *
    * If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field.
    */
   dataSource?: LocalKubernetesReference;
 
   /**
-   * Specifies the object from which to populate the volume with data, if a non-empty volume is desired. 
-   * This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object. 
-   * When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. 
-   * This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value. 
-   * For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. 
-   * 
+   * Specifies the object from which to populate the volume with data, if a non-empty volume is desired.
+   * This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object.
+   * When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner.
+   * This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value.
+   * For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty.
+   *
    * There are two important differences between DataSource and DataSourceRef:
    * - While DataSource only allows two specific types of objects, DataSourceRef allows any non-core object, as well as PersistentVolumeClaim objects.
-   * - While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified. 
+   * - While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified.
    */
   dataSourceRef?: KubernetesReference;
 
@@ -484,7 +484,7 @@ union ConnectorTemplatePersistentVolumeClaimVolumeMode {
 model ConnectorTemplatePersistentVolumeClaimResourceRequirements {
   /**
    * Requests represents the minimum amount of compute resources required.
-   * If Requests is omitted for any container, the Kubelet will enforce that the container has at least as much CPU/Memory as requested. 
+   * If Requests is omitted for any container, the Kubelet will enforce that the container has at least as much CPU/Memory as requested.
    * If it is omitted for all containers, the Kubelet will enforce that the Pod has at least as much CPU/Memory as requested. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    */
   requests: ConnectorTemplatePersistentVolumeClaimResourceRequests;
