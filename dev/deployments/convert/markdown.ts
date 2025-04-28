@@ -11,7 +11,7 @@ export function writeMarkdownFiles(basePath: string, filePaths: string[], compon
   writeReadme(basePath, 'readme.md', getMainReadme(clientName, componentName, filePaths, latestApiVersion, suppressions[componentName]).trimStart());
   writeReadme(basePath, 'readme.csharp.md', getCsharpReadme(componentName).trimStart());
   writeReadme(basePath, 'readme.go.md', getGoReadme(componentName).trimStart());
-  writeReadme(basePath, 'readme.java.md', getJavaReadme(componentName, latestApiVersion).trimStart());
+  writeReadme(basePath, 'readme.java.md', getJavaReadme(componentName).trimStart());
   writeReadme(basePath, 'readme.python.md', getPythonReadme(componentName).trimStart());
   writeReadme(basePath, 'readme.typescript.md', getTypescriptReadme(clientName, componentName).trimStart());
 }
@@ -249,8 +249,8 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Azure.Management.Deployments.${componentName}
-  output-folder: $(csharp-sdks-folder)/deployments/Microsoft.Azure.Management.Deployments/src/Generated
+  namespace: Azure.ResourceManager.Deployments.${componentName}
+  output-folder: $(csharp-sdks-folder)/deployments/Azure.ResourceManager.Deployments.${componentName}/GeneratedProtocol
 \`\`\`
 `;
 }
@@ -264,7 +264,7 @@ These settings apply only when \`--go\` is specified on the command line.
 
 \`\`\` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/deployments/${componentName.toLowerCase()}
+module-name: sdk/resourcemanager/deployments/arm${componentName.toLowerCase()}
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
@@ -272,17 +272,12 @@ azure-arm: true
 `;
 }
 
-function getJavaReadme(componentName: string, latestApiVersion: string) {
+function getJavaReadme(componentName: string) {
   return `
 ## Java
 
 These settings apply only when \`--java\` is specified on the command line.
 Please also specify \`--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>\`.
-
-### Tag: ${getPackageName(latestApiVersion)} and java
-
-These settings apply only when \`--tag=${getPackageName(latestApiVersion)} --java\` is specified on the command line.
-Please also specify \`--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>\`.
 
 \`\`\` yaml $(java)
 java:

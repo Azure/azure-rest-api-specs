@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Azure.Management.Deployments.DeploymentStacks
-  output-folder: $(csharp-sdks-folder)/deployments/Microsoft.Azure.Management.Deployments/src/Generated
+  namespace: Azure.ResourceManager.Deployments.DeploymentStacks
+  output-folder: $(csharp-sdks-folder)/deployments/Azure.ResourceManager.Deployments.DeploymentStacks/GeneratedProtocol
 ```
