@@ -167,6 +167,91 @@ describe("folder-structure", function () {
       });
     }
 
+    // Helper function for testing same date in both preview and stable versions
+    function mockPreviewVersionWithMatchingStable() {
+      // First, make sure we're actually mocking the folder structure correctly
+      const serviceFolderPath = "/gitroot/specification/foo/resource-manager/myservice";
+      const previewVersionPath = `${serviceFolderPath}/preview/2023-01-01-preview`;
+      const stableDatePath = `${serviceFolderPath}/stable/2023-01-01`;
+
+      fileExistsSpy.mockImplementation(async (file: string) => {
+        // Special handling for the critical paths that validateNoConflictingVersionDates checks
+        // This is the key fix - exactly match the paths checked by validateNoConflictingVersionDates
+        if (file === previewVersionPath || file === stableDatePath) {
+          console.log(`[TEST] fileExists mock returning true for critical path: ${file}`);
+          return true;
+        }
+
+        // Other paths needed for service folder validation to succeed until version check
+        if (file.includes("tspconfig.yaml")) return true;
+        if (file.includes("main.tsp")) return true;
+        if (file.includes("examples")) return true;
+        if (file.includes("preview")) return true;
+        if (file.includes("stable")) return true;
+        return true;
+      });
+
+      vi.mocked(globby.globby).mockImplementation(async (patterns: string | readonly string[]) => {
+        const patternStr = typeof patterns === "string" ? patterns : patterns.join(",");
+
+        // For checking preview versions
+        if (patternStr.includes("preview") && patternStr.includes("onlyDirectories")) {
+          return ["2023-01-01-preview/"];
+        }
+
+        // For checking stable versions
+        if (patternStr.includes("stable") && patternStr.includes("onlyDirectories")) {
+          return ["2023-01-01/"];
+        }
+
+        // Service folder contents should include both preview and stable
+        if (patternStr.includes("myservice/*")) {
+          return ["tspconfig.yaml", "main.tsp", "examples/", "preview/", "stable/"];
+        }
+
+        // For validateServiceFolder checks
+        if (patternStr.includes("onlyFiles") || patternStr.includes("markDirectories")) {
+          return ["tspconfig.yaml", "main.tsp", "examples/", "preview/", "stable/"];
+        }
+
+        return [];
+      });
+
+      // Special handling for paths normalization to ensure consistent path formatting
+      normalizePathSpy.mockImplementation((path: string) => {
+        if (path.includes("preview/2023-01-01-preview")) {
+          return previewVersionPath;
+        }
+        if (path.includes("stable/2023-01-01")) {
+          return stableDatePath;
+        }
+        if (path.includes("myservice")) {
+          return serviceFolderPath;
+        }
+        return "/gitroot";
+      });
+    }
+
+    // Helper function to mock operations service folder
+    function mockOperationsFolder(valid: boolean = true) {
+      fileExistsSpy.mockImplementation(async (file: string) => {
+        if (file.includes("main.tsp")) return valid;
+        if (file.includes("tspconfig.yaml")) return valid;
+        return true;
+      });
+
+      vi.mocked(globby.globby).mockImplementation(async (patterns: string | readonly string[]) => {
+        if (typeof patterns === "string" && patterns.includes("/*")) {
+          if (valid) {
+            return ["main.tsp", "tspconfig.yaml", "preview/", "stable/"];
+          } else {
+            return []; // Empty for invalid case
+          }
+        }
+        return [];
+      });
+    }
+
     // Test RP namespace validation
     it("should validate a valid RP namespace structure", async function () {
       normalizePathSpy.mockReturnValue("/gitroot");
@@ -239,6 +324,26 @@ describe("folder-structure", function () {
       const result = await rule.execute("/gitroot/specification/foo/resource-manager");
       assert(!result.success);
       assert(result.errorOutput && result.errorOutput.includes("operations"));
+    });
+
+    // Test operations folder validation (rule #10)
+    it("should validate a valid operations folder", async function () {
+      normalizePathSpy.mockReturnValue("/gitroot");
+      mockOperationsFolder(true);
+
+      const rule = new FolderStructureRule({ validateOldStructure: false });
+      const result = await rule.execute("/gitroot/specification/foo/resource-manager/operations");
+      assert(result.success);
+    });
+
+    it("should fail with invalid operations folder", async function () {
+      normalizePathSpy.mockReturnValue("/gitroot");
+      mockOperationsFolder(false);
+
+      const rule = new FolderStructureRule({ validateOldStructure: false });
+      const result = await rule.execute("/gitroot/specification/foo/resource-manager/operations");
+      assert(!result.success);
+      assert(result.errorOutput);
     });
 
     // Test data-plane validation with proper mocking - better approach
@@ -414,6 +519,111 @@ describe("folder-structure", function () {
 
       assert(!result.success);
       assert(result.errorOutput && result.errorOutput.includes("Invalid"));
+    });
+
+    // Test rule #9: prohibiting preview and stable with same date
+    it("should fail when preview and stable have same date", async function () {
+      console.log("[TEST] Starting test for conflicting dates using direct approach");
+
+      // Define paths for the test
+      const serviceFolderPath = "/gitroot/specification/foo/resource-manager/myservice";
+      const date = "2023-01-01";
+      const previewVersion = `${date}-preview`;
+      const stableVersion = date;
+      const previewVersionPath = `${serviceFolderPath}/preview/${previewVersion}`;
+      const stableVersionPath = `${serviceFolderPath}/stable/${stableVersion}`;
+
+      console.log(`[TEST] Preview path: ${previewVersionPath}`);
+      console.log(`[TEST] Stable path: ${stableVersionPath}`);
+
+      // Set up mocks directly in the test
+      fileExistsSpy.mockImplementation(async (path: string) => {
+        console.log(`[TEST] fileExists called with path: ${path}`);
+
+        // Critical - return true for both preview and stable paths with same date
+        if (path === previewVersionPath || path === stableVersionPath) {
+          console.log(`[TEST] ✓ Returning TRUE for date conflict path: ${path}`);
+          return true;
+        }
+
+        // Return true for validation-required paths
+        if (path.includes("tspconfig.yaml")) return true;
+        if (path.includes("main.tsp")) return true;
+        if (path.includes("examples")) return true;
+        if (path.includes("preview")) return true;
+        if (path.includes("stable")) return true;
+
+        // Must return true for examples folder within version folder
+        if (path.includes(`${previewVersionPath}/examples`)) return true;
+
+        return true;
+      });
+
+      // Mock globby to return appropriate version directories
+      vi.mocked(globby.globby).mockImplementation(async (patterns: string | readonly string[]) => {
+        const patternStr = typeof patterns === "string" ? patterns : patterns.join(",");
+        console.log(`[TEST] globby called with patterns: ${patternStr}`);
+
+        // For preview version directories
+        if (patternStr.includes("preview") && patternStr.includes("onlyDirectories")) {
+          return [`${previewVersion}/`];
+        }
+
+        // For stable version directories
+        if (patternStr.includes("stable") && patternStr.includes("onlyDirectories")) {
+          return [`${stableVersion}/`];
+        }
+
+        // For version folder content validation
+        if (patternStr.includes(`${previewVersion}`) || patternStr.includes(`${stableVersion}`)) {
+          return ["examples/", "example.json"];
+        }
+
+        // For examples folder
+        if (patternStr.includes("examples")) {
+          return ["example.json"];
+        }
+
+        // For service folder structure validation
+        if (patternStr.includes("/*") || patternStr.includes("markDirectories")) {
+          return ["tspconfig.yaml", "main.tsp", "examples/", "preview/", "stable/"];
+        }
+
+        return [];
+      });
+
+      // Mock path normalization
+      normalizePathSpy.mockImplementation((pathToNormalize: string) => {
+        console.log(`[TEST] normalizePath called with: ${pathToNormalize}`);
+
+        if (pathToNormalize.includes(`preview/${previewVersion}`)) {
+          return previewVersionPath;
+        }
+        if (pathToNormalize.includes(`stable/${stableVersion}`)) {
+          return stableVersionPath;
+        }
+        if (pathToNormalize.includes("myservice")) {
+          return serviceFolderPath;
+        }
+
+        return "/gitroot";
+      });
+
+      // Create the rule and execute on the preview version path to trigger validation
+      const rule = new FolderStructureRule({ validateOldStructure: false });
+      console.log(`[TEST] Executing rule on preview version path: ${previewVersionPath}`);
+      const result = await rule.execute(previewVersionPath);
+      console.log("[TEST] Rule execution result:", JSON.stringify(result, null, 2));
+
+      // Verify validation fails due to the date conflict
+      assert(
+        !result.success,
+        "Validation should fail when preview and stable versions share the same date",
+      );
+      assert(
+        result.errorOutput && result.errorOutput.includes("same date"),
+        "Error message should mention having the same date",
+      );
     });
   });
 
