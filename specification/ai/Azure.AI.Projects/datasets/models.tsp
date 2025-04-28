@@ -49,9 +49,6 @@ model DatasetVersion {
 model FileDatasetVersion extends DatasetVersion {
   @doc("Dataset type")
   type: DatasetType.uri_file;
-
-  @doc("Indicates OpenAI Purpose. FileDatasets created with this field will be compatible with OpenAI-specific features")
-  purpose: string;
 }
 
 @doc("FileDatasetVersion Definition")
