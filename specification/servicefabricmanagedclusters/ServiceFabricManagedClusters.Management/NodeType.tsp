@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./ManagedCluster.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -140,7 +142,7 @@ interface NodeTypes {
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
-    FaultSimulationContent,
+    FaultSimulationContentWrapper,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
       ArmAsyncOperationHeader
@@ -437,12 +439,17 @@ model NodeTypeProperties {
   vmSetupActions?: VmSetupAction[];
 
   /**
-   * Specifies the security type of the nodeType. Only Standard and TrustedLaunch are currently supported
+   * Specifies the security type of the nodeType. Supported values include Standard, TrustedLaunch and ConfidentialVM.
    */
   securityType?: SecurityType;
 
   /**
-   * Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch SecurityType
+   * Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob and VMGuestStateOnly for encryption of just the VMGuestState blob. Note: It can be set for only Confidential VMs.
+   */
+  securityEncryptionType?: SecurityEncryptionType;
+
+  /**
+   * Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch and ConfidentialVM SecurityType.
    */
   secureBootEnabled?: boolean;
 
@@ -524,6 +531,12 @@ model NodeTypeProperties {
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
   vmApplications?: VmApplication[];
+
+  /**
+   * 	Setting this to true allows stateless node types to scale out without equal distribution across zones.
+   */
+  @added(Versions.v2025_03_01_preview)
+  zoneBalance?: boolean;
 }
 
 /**
@@ -1164,6 +1177,28 @@ union SecurityType {
    * Standard is the default security type for all machines.
    */
   Standard: "Standard",
+
+  /**
+   * ConfidentialVM provides hardware-based encryption, trusted execution environment (TEE) and isolation of the VM memory & CPU from host.
+   */
+  ConfidentialVM: "ConfidentialVM",
+}
+
+/**
+ * Specifies the securityEncryptionType type of the nodeType. Only DiskWithVMGuestState and VMGuestStateOnly are currently supported
+ */
+union SecurityEncryptionType {
+  string,
+
+  /**
+   * For encryption of the managed disk along with VMGuestState blob.
+   */
+  DiskWithVMGuestState: "DiskWithVMGuestState",
+
+  /**
+   * For encryption of just the VMGuestState blob.
+   */
+  VMGuestStateOnly: "VMGuestStateOnly",
 }
 
 /**
