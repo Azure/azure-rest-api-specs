@@ -45,17 +45,17 @@ union DiagnosticsRemoteSupportActivationState {
   /**
    * Remote Support is enabled.
    */
-  Enabled: "Enabled",
+  Enabled,
 
   /**
    * Remote Support is disabled.
    */
-  Disabled: "Disabled",
+  Disabled,
 
   /**
    * Remote Support has Expired.
    */
-  Expired: "Expired",
+  Expired,
 }
 
 /**
@@ -68,12 +68,12 @@ union DiagnosticsRemoteSupportAccessLevels {
   /**
    * Diagnose access level
    */
-  Diagnose: "Diagnose",
+  Diagnose,
 
   /**
    * Diagnose And Repair Access Level
    */
-  DiagnoseAndRepair: "DiagnoseAndRepair",
+  DiagnoseAndRepair,
 }
 
 /**

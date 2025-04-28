@@ -81,7 +81,7 @@ model MetricProperties {
 @doc("Diagnostic Self tracing properties")
 model SelfTracing {
   @doc("The toggle to enable/disable self tracing.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("The self tracing interval.")
   @minValue(1)
@@ -105,7 +105,7 @@ model BatchingConfiguration {
 @doc("Tls properties")
 model TlsProperties {
   @doc("Mode for TLS.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("Trusted CA certificate config map.")
   trustedCaCertificateConfigMapRef?: string;

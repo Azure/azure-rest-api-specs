@@ -45,7 +45,7 @@ model BrokerAuthorizationProperties {
 @doc("Broker AuthorizationConfig properties")
 model AuthorizationConfig {
   @doc("Enable caching of the authorization rules.")
-  cache?: OperationalMode = OperationalMode.Enabled;
+  cache?: OperationalMode = Enabled;
 
   @doc("The authorization rules to follow. If no rule is set, but Authorization Resource is used that would mean DenyAll.")
   @OpenAPI.extension("x-ms-identifiers", #[])

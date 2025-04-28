@@ -45,7 +45,7 @@ model DataflowResource is ProxyResource<DataflowProperties> {
 @doc("Dataflow Resource properties")
 model DataflowProperties {
   @doc("Mode for Dataflow. Optional; defaults to Enabled.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("List of operations including source and destination references as well as transformation.")
   @OpenAPI.extension("x-ms-identifiers", #[])

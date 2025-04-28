@@ -236,7 +236,7 @@ model DataflowEndpointKafka {
   batching?: DataflowEndpointKafkaBatching;
 
   @doc("Copy Broker properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an Broker source.")
-  copyMqttProperties?: OperationalMode = OperationalMode.Enabled;
+  copyMqttProperties?: OperationalMode = Enabled;
 
   @doc("Compression. Can be none, gzip, lz4, or snappy. No effect if the endpoint is used as a source.")
   compression?: DataflowEndpointKafkaCompression = DataflowEndpointKafkaCompression.None;
@@ -248,7 +248,7 @@ model DataflowEndpointKafka {
   partitionStrategy?: DataflowEndpointKafkaPartitionStrategy = DataflowEndpointKafkaPartitionStrategy.Default;
 
   @doc("TLS configuration.")
-  tls?: TlsProperties = #{ mode: OperationalMode.Enabled };
+  tls?: TlsProperties = #{ mode: Enabled };
 
   @doc("Cloud event mapping config.")
   cloudEventAttributes?: CloudEventAttributeType;
@@ -279,7 +279,7 @@ union KafkaAuthMethod {
 @doc("Kafka endpoint Batching properties")
 model DataflowEndpointKafkaBatching {
   @doc("Mode for batching.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("Batching latency in milliseconds.")
   @minValue(0)
@@ -386,7 +386,7 @@ model DataflowEndpointMqtt {
   sessionExpirySeconds?: int32;
 
   @doc("TLS configuration.")
-  tls?: TlsProperties = #{ mode: OperationalMode.Enabled };
+  tls?: TlsProperties = #{ mode: Enabled };
 
   @doc("Cloud event mapping config.")
   cloudEventAttributes?: CloudEventAttributeType;
