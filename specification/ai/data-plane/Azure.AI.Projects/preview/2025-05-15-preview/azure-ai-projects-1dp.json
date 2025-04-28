@@ -176,6 +176,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Connections_List_MaximumSet": {
+            "$ref": "./examples/Connections_List_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -226,6 +231,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Connections_Get_MaximumSet": {
+            "$ref": "./examples/Connections_Get_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -273,6 +283,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Connections_GetWithCredentials_MaximumSet": {
+            "$ref": "./examples/Connections_GetWithCredentials_MaximumSet_Gen.json"
           }
         }
       }
@@ -359,6 +374,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_ListLatest_MaximumSet": {
+            "$ref": "./examples/Datasets_ListLatest_MaximumSet_Gen.json"
+          },
+          "Datasets_ListLatest_MinimumSet": {
+            "$ref": "./examples/Datasets_ListLatest_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -457,6 +480,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Datasets_ListVersions_MaximumSet": {
+            "$ref": "./examples/Datasets_ListVersions_MaximumSet_Gen.json"
+          },
+          "Datasets_ListVersions_MinimumSet": {
+            "$ref": "./examples/Datasets_ListVersions_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -503,6 +534,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_GetVersion_MaximumSet": {
+            "$ref": "./examples/Datasets_GetVersion_MaximumSet_Gen.json"
+          },
+          "Datasets_GetVersion_MinimumSet": {
+            "$ref": "./examples/Datasets_GetVersion_MinimumSet_Gen.json"
           }
         }
       },
@@ -562,6 +601,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Datasets_CreateOrUpdateVersion_MaximumSet": {
+            "$ref": "./examples/Datasets_CreateOrUpdateVersion_MaximumSet_Gen.json"
+          },
+          "Datasets_CreateOrUpdateVersion_MinimumSet": {
+            "$ref": "./examples/Datasets_CreateOrUpdateVersion_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -601,6 +648,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_DeleteVersion_MaximumSet": {
+            "$ref": "./examples/Datasets_DeleteVersion_MaximumSet_Gen.json"
+          },
+          "Datasets_DeleteVersion_MinimumSet": {
+            "$ref": "./examples/Datasets_DeleteVersion_MinimumSet_Gen.json"
           }
         }
       }
@@ -656,6 +711,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Datasets_GetCredentials_MaximumSet": {
+            "$ref": "./examples/Datasets_GetCredentials_MaximumSet_Gen.json"
+          },
+          "Datasets_GetCredentials_MinimumSet": {
+            "$ref": "./examples/Datasets_GetCredentials_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -710,6 +773,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Datasets_StartPendingUploadVersion_MaximumSet": {
+            "$ref": "./examples/Datasets_StartPendingUploadVersion_MaximumSet_Gen.json"
+          },
+          "Datasets_StartPendingUploadVersion_MinimumSet": {
+            "$ref": "./examples/Datasets_StartPendingUploadVersion_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -734,6 +805,27 @@
             "description": "Model name (the publisher specific name) to filter models by",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "deploymentType",
+            "in": "query",
+            "description": "Type of deployment to filter list by",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ModelDeployment"
+            ],
+            "x-ms-enum": {
+              "name": "DeploymentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ModelDeployment",
+                  "value": "ModelDeployment",
+                  "description": "Model deployment"
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -773,6 +865,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_List_MaximumSet": {
+            "$ref": "./examples/Deployments_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -825,6 +922,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Deployments_Get_MaximumSet": {
+            "$ref": "./examples/Deployments_Get_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -874,6 +976,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_List_MaximumSet": {
+            "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -926,6 +1033,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Evaluations_Get_MaximumSet": {
+            "$ref": "./examples/Evaluations_Get_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -966,6 +1078,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Evaluations_CreateRun_MaximumSet": {
+            "$ref": "./examples/Evaluations_CreateRun_MaximumSet_Gen.json"
+          },
+          "Evaluations_CreateRun_MinimumSet": {
+            "$ref": "./examples/Evaluations_CreateRun_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1005,6 +1125,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_CreateAgentEvaluation_MaximumSet": {
+            "$ref": "./examples/Evaluations_CreateAgentEvaluation_MaximumSet_Gen.json"
+          },
+          "Evaluations_CreateAgentEvaluation_MinimumSet": {
+            "$ref": "./examples/Evaluations_CreateAgentEvaluation_MinimumSet_Gen.json"
           }
         }
       }
@@ -1091,6 +1219,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Indexes_ListLatest_MaximumSet": {
+            "$ref": "./examples/Indexes_ListLatest_MaximumSet_Gen.json"
+          },
+          "Indexes_ListLatest_MinimumSet": {
+            "$ref": "./examples/Indexes_ListLatest_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1189,6 +1325,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Indexes_ListVersions_MaximumSet": {
+            "$ref": "./examples/Indexes_ListVersions_MaximumSet_Gen.json"
+          },
+          "Indexes_ListVersions_MinimumSet": {
+            "$ref": "./examples/Indexes_ListVersions_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1235,6 +1379,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Indexes_GetVersion_MaximumSet": {
+            "$ref": "./examples/Indexes_GetVersion_MaximumSet_Gen.json"
+          },
+          "Indexes_GetVersion_MinimumSet": {
+            "$ref": "./examples/Indexes_GetVersion_MinimumSet_Gen.json"
           }
         }
       },
@@ -1294,6 +1446,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Indexes_CreateOrUpdateVersion_MaximumSet": {
+            "$ref": "./examples/Indexes_CreateOrUpdateVersion_MaximumSet_Gen.json"
+          },
+          "Indexes_CreateOrUpdateVersion_MinimumSet": {
+            "$ref": "./examples/Indexes_CreateOrUpdateVersion_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -1333,6 +1493,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Indexes_DeleteVersion_MaximumSet": {
+            "$ref": "./examples/Indexes_DeleteVersion_MaximumSet_Gen.json"
+          },
+          "Indexes_DeleteVersion_MinimumSet": {
+            "$ref": "./examples/Indexes_DeleteVersion_MinimumSet_Gen.json"
           }
         }
       }
@@ -1385,6 +1553,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RedTeams_List_MaximumSet": {
+            "$ref": "./examples/RedTeams_List_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1435,6 +1608,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "RedTeams_Get_MaximumSet": {
+            "$ref": "./examples/RedTeams_Get_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1474,6 +1652,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedTeams_CreateRun_MaximumSet": {
+            "$ref": "./examples/RedTeams_CreateRun_MaximumSet_Gen.json"
+          },
+          "RedTeams_CreateRun_MinimumSet": {
+            "$ref": "./examples/RedTeams_CreateRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -1871,7 +2057,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -1927,13 +2113,13 @@
       "type": "object",
       "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
       "properties": {
-        "ModelDeploymentName": {
+        "modelDeploymentName": {
           "type": "string",
           "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
         }
       },
       "required": [
-        "ModelDeploymentName"
+        "modelDeploymentName"
       ],
       "allOf": [
         {
