@@ -63,6 +63,60 @@ union LogicalOperationKind {
 }
 
 /**
+ * Type of scorer to be used
+ */
+@added(Versions.v2025_05_15_preview)
+union Scorer {
+  string,
+
+  /**
+   * Set this value for scoring based on classic algorithms like wordnet, tfidf, ngram etc.
+   */
+  Classic: "Classic",
+
+  /**
+   * Set this value for scoring based on transformer based models.
+   */
+  Transformer: "Transformer",
+
+  /**
+   * Set this scorer to use AI search semantic based ranking. Semantic ranking should be configured for this to be used.
+   */
+  Semantic: "Semantic",
+}
+
+/**
+ * Kind of matching policy to be used
+ */
+@added(Versions.v2025_05_15_preview)
+union MatchingPolicyKind {
+  string,
+
+  /**
+   * Prebuilt weights will be used for giving preference to question and answer columns when quering AI search
+   */
+  Prebuilt: "Prebuilt",
+}
+
+/**
+ * Fields to be considred for matching policy
+ */
+@added(Versions.v2025_05_15_preview)
+union MatchingPolicyFieldsType {
+  string,
+
+  /**
+   * Include 'Questions' field
+   */
+  Questions: "Questions",
+
+  /**
+   * Include 'Answer' field
+   */
+  Answer: "Answer",
+}
+
+/**
  * Human-readable error code.
  */
 union ErrorCode {
@@ -259,6 +313,12 @@ model AnswersOptions {
    * (Optional) Flag to enable Query over Unstructured Sources.
    */
   includeUnstructuredSources?: boolean;
+
+   /**
+   * To fine tune query results
+   */
+   @added(Versions.v2025_05_15_preview)
+   queryPreferences?: QueryPreferences;
 }
 
 /**
@@ -348,6 +408,55 @@ model ShortAnswerOptions {
   @maxValue(10)
   @minValue(1)
   topAnswersWithSpan?: int32;
+}
+
+/**
+ * Additional properties to fine tune query results
+ */
+@added(Versions.v2025_05_15_preview)
+model QueryPreferences {
+  /**
+   * To specify what scoring algorithm is preferred
+   */
+  scorer?: Scorer;
+
+  /**
+   * Policy for controling exact query match behaviour
+   */
+  matchingPolicy?: MatchingPolicy;
+}
+
+/**
+ * Specify parameters for query matching
+ */
+@added(Versions.v2025_05_15_preview)
+@discriminator("kind")
+model MatchingPolicy {
+  /**
+   * Kind of matching policy to be applied
+   */
+  kind: MatchingPolicyKind;
+}
+
+/**
+ * Represents fields for Prebuilt query matching. Prebuilt weights will be used for giving preference to question and answer columns when quering AI search
+ */
+@added(Versions.v2025_05_15_preview)
+model PrebuiltQueryMatchingPolicy extends MatchingPolicy {
+  /**
+   * Matching policy kind
+   */
+  kind: MatchingPolicyKind.Prebuilt;
+
+  /**
+   * List of fields to filter during query. For ex if only "questions" is used then query will be filtered on that column
+   */
+  fields?: MatchingPolicyFieldsType[];
+
+  /**
+   * Disabling full match on query. Enabling this will give preference to qna pairs that have exact match.
+   */
+  disableFullMatch?: boolean;
 }
 
 /**
