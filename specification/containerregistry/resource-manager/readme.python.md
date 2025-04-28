@@ -18,8 +18,9 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2023-07-01"
+default-api-version: "2025-04-01"
 batch:
+  - tag: package-2025-04-only
   - tag: package-2025-03-preview-only
   - tag: package-2024-11-preview-only
   - tag: package-2023-11-preview-only
@@ -36,6 +37,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/
 perform-load: false
+```
+
+### Tag: package-2025-04-only and python
+
+These settings apply only when `--tag=package-2025-04-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2025-04-only' && $(python)
+namespace: azure.mgmt.containerregistry.v2025_04_01
+output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2025_04_01
 ```
 
 ### Tag: package-2025-03-preview-only and python
@@ -164,4 +175,21 @@ directive:
     where: $.definitions.TaskStepUpdateParameters
     transform: >
         $['required'] = ['type'];
+```
+
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $.definitions
+    transform: >
+      $.LoginServerProperties.properties.tls = {
+          "$ref": "#/definitions/TlsProperties",
+          "description": "The TLS properties of the connected registry login server.",
+          "readOnly": true
+        };
+      $.TlsProperties.properties.certificate = {
+          "$ref": "#/definitions/TlsCertificateProperties",
+          "description": "The certificate used to configure HTTPS for the login server.",
+          "readOnly": true
+        };
 ```
