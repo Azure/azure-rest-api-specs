@@ -13,6 +13,7 @@ export function createMockGithub() {
     },
     rest: {
       actions: {
+        listJobsForWorkflowRun: vi.fn().mockResolvedValue({ data: [] }),
         listWorkflowRunArtifacts: vi
           .fn()
           .mockResolvedValue({ data: { artifacts: [] } }),
@@ -32,6 +33,7 @@ export function createMockGithub() {
         get: vi.fn(),
       },
       repos: {
+        createCommitStatus: vi.fn(),
         listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
           data: [],
         }),

@@ -1,9 +1,13 @@
 import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import debug from "debug";
 import { access, readFile } from "fs/promises";
 import defaultPath, { join, PlatformPath } from "path";
+import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
-import { TsvHost } from "./tsv-host.js";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 // Wraps execNpm() to return error (and coalesce stdout and stderr) instead of throwing
 export async function runNpm(
@@ -52,8 +56,8 @@ export function normalizePathImpl(folder: string, path: PlatformPath = defaultPa
     .replace(/^([a-z]):/, (_match, driveLetter) => driveLetter.toUpperCase() + ":");
 }
 
-export async function gitDiffTopSpecFolder(host: TsvHost, folder: string) {
-  const git = host.gitOperation(folder);
+export async function gitDiffTopSpecFolder(folder: string) {
+  const git = simpleGit(folder);
   let topSpecFolder = folder.replace(/(^.*specification\/[^\/]*)(.*)/, "$1");
   let stdOutput = `Running git diff on folder ${topSpecFolder}`;
   let gitStatus = await git.status(["--porcelain", topSpecFolder]);
