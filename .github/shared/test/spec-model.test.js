@@ -68,8 +68,6 @@ describe("getSpecModel", () => {
                   {
                     path: swaggerPathStable,
                     content: swaggerContentStable,
-                    // TODO: Absolute paths won't test properly across machines.
-                    // Make paths relative or remove comment
                     refs: expect.any(Map),
                   },
                 ],
@@ -80,8 +78,6 @@ describe("getSpecModel", () => {
                   {
                     path: swaggerPathPreview,
                     content: swaggerContentPreview,
-                    // TODO: Absolute paths won't test properly across machines.
-                    // Make paths relative or remove comment
                     refs: expect.any(Map),
                   },
                 ],
@@ -127,8 +123,7 @@ describe("getReadme regex", () => {
 describe("getAffectedReadmeTags", () => {
   it("returns affected readme tags", async ({ expect }) => {
     const specModel = await getSpecModel(
-      "specification/contosowidgetmanager",
-      // { repoRoot: resolve(__dirname, "fixtures/getAffectedReadmeTags") }
+      "specification/contosowidgetmanager"
     );
 
     const actual = getAffectedReadmeTags(
