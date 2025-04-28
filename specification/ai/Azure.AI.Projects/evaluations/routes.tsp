@@ -19,7 +19,7 @@ alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @route("evaluations")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
+@removed(Versions.v1)
 interface Evaluations {
   @doc("Get an evaluation run by name.")
   get is EvaluationsOperations.ResourceRead<Evaluation>;
