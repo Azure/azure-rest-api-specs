@@ -20,6 +20,29 @@ options:
     namespace: "com.azure.resourcemanager.marketplace"
     service-name: "reviews"
     flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-reviews"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-reviews"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/reviews"
+    package-dir: "armreviews"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-reviews"
+    namespace: "azure.mgmt.reviews"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
