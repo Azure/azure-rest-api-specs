@@ -53,8 +53,8 @@ model AcsCallEndedEventData
   reason?: AcsCallEndReasonProperties;
 
   /** Duration of the call in seconds. */
-  @encode(DurationKnownEncoding.seconds)
-  callDurationInSeconds?: duration;
+  @encode(DurationKnownEncoding.seconds, float32)
+  callDurationInSeconds?: float32;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event. */
