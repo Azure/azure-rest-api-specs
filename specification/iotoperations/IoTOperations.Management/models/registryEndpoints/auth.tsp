@@ -3,6 +3,8 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+
 
 namespace Microsoft.IoTOperations;
 
@@ -68,6 +70,8 @@ model RegistryEndpointAnonymousAuthentication
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRD type is modeled as empty object"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "This is an empty model and should not conain extra properites"
 @doc("RegistryEdnpoint Anonymous authentication properties")
 @added(Versions.`2025-07-01-preview`)
+@extension("additionalProperties", false)
 model RegistryEndpointAnonymousSettings {}
