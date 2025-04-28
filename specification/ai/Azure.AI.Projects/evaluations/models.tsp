@@ -53,8 +53,9 @@ model InputDataset extends InputData {
 model Evaluation {
   @doc("Identifier of the evaluation.")
   @key("name")
+  @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
-  id: string;
+  name: string;
 
   @doc("Data for evaluation.")
   data: InputData;
