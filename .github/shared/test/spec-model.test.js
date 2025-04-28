@@ -122,9 +122,7 @@ describe("getReadme regex", () => {
 
 describe("getAffectedReadmeTags", () => {
   it("returns affected readme tags", async ({ expect }) => {
-    const specModel = await getSpecModel(
-      "specification/contosowidgetmanager"
-    );
+    const specModel = await getSpecModel("specification/contosowidgetmanager");
 
     const actual = getAffectedReadmeTags(
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
