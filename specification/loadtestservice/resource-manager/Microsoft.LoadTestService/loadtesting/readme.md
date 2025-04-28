@@ -70,20 +70,3 @@ These settings apply only when `--tag=package-2022-12-01` is specified on the co
 input-file:
   - stable/2022-12-01/loadtestservice.json
 ```
-
-### Tag: package-2022-04-15-preview
-
-These settings apply only when `--tag=package-2022-04-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-04-15-preview'
-input-file:
-  - preview/2022-04-15-preview/loadtestservice.json
-```
-### Tag: package-2021-12-01-preview
-
-These settings apply only when `--tag=package-2021-12-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-12-01-preview'
-input-file:
-  - preview/2021-12-01-preview/loadtestservice.json
-```
