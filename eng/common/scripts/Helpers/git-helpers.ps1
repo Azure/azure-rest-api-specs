@@ -46,12 +46,15 @@ function Get-ChangedFiles {
   # Ref: https://github.com/msysgit/msysgit/wiki/Git-for-Windows-Unicode-Support#disable-quoted-file-names
   # Ref: https://github.com/msysgit/msysgit/wiki/Git-for-Windows-Unicode-Support#disable-commit-message-transcoding
   # Git PR diff: https://docs.github.com/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-comparing-branches-in-pull-requests#three-dot-and-two-dot-git-diff-comparisons
-  $command = "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff `"$TargetCommittish...$SourceCommittish`" --name-only --diff-filter=$DiffFilterType"
   if ($DiffPath) {
-    $command = $command + " -- `'$DiffPath`'"
+    Push-Location $DiffPath
   }
+  $command = "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff $TargetCommittish $SourceCommittish --name-only --diff-filter=$DiffFilterType"
   Write-Host $command
   $changedFiles = Invoke-Expression -Command $command
+  if ($DiffPath) {
+    Pop-Location
+  }
   if (!$changedFiles) {
     Write-Host "No changed files in git diff between $TargetCommittish and $SourceCommittish"
   }
