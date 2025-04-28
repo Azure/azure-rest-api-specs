@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -69,7 +70,7 @@ model ConnectorTemplateProperties {
   /**
    * Mqtt connection configuration settings
    */
-  mqttConnectionConfiguration?: ConnectorTemplateMqttConnectionConfiguration;
+  mqttConnectionConfiguration?: ConnectorsMqttConnectionConfiguration;
 
   /**
    * The version of the Connector template.
@@ -77,122 +78,6 @@ model ConnectorTemplateProperties {
   version: string; // Probably not needed.
 }
 
-/**
- * ConnectorTemplateMqttConnectionConfiguration properties
- */
-//- This doesn't have the `cloudEventAttributes` property like DataflowEnpoints has
-//- This doesn't have the `retain` property like DataflowEnpoints has
-//- This doesn't have the `clientIdPrefix` property like DataflowEnpoints has
-//- This doesn't have the `retain` property like DataflowEnpoints has
-//- This doesn't have the `qos` property like DataflowEnpoints has
-//- The only supported protocol is `mqtt`
-//- `host` is a required property in DataflowEnpoints but optional here
-@added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateMqttConnectionConfiguration {
-  /**
-   * Authentication properties.
-   */
-  authentication?: ConnectorTemplateMqttAuthentication;
-
-  /**
-   * Host of the Broker in the form of <hostname>:<port>.
-   */
-  host?: string;
-
-  /**
-   * The protocol to use for the connection. Currently only `mqtt` is supported.
-   */
-  protocol?: ConnectorTemplateMqttProtocolType;
-
-  /**
-   * KeepAlive for connection in seconds.
-   */
-  @minValue(0)
-  keepAliveSeconds?: int32;
-
-  /**
-   * The max number of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.
-   */
-  @minValue(0)
-  maxInflightMessages?: int32;
-
-  /**
-   * Session expiry in seconds.
-   */
-  @minValue(0)
-  sessionExpirySeconds?: int32;
-
-  /**
-   * TLS configuration.
-   */
-  tls?: TlsProperties;
-}
-
-/**
- * ConnectorTemplateMqttAuthentication properties
- */
-@added(Versions.`2025-07-01-preview`)
-@discriminator("method")
-model ConnectorTemplateMqttAuthentication {
-  /**
-   * The authentication method for the MQTT connection.
-   */
-  method: ConnectorTemplateMqttAuthenticationMethod;
-}
-
-/**
- * ConnectorTemplateMqttAuthenticationMethod properties
- */
-@added(Versions.`2025-07-01-preview`)
-union ConnectorTemplateMqttAuthenticationMethod {
-  string,
-
-  /**
-   * Service Account Token authentication
-   */
-  ServiceAccountToken,
-}
-
-/**
- * Mqtt protocol types.
- */
-@added(Versions.`2025-07-01-preview`)
-union ConnectorTemplateMqttProtocolType {
-  string,
-
-  /**
-   * Mqtt protocol
-   */
-  Mqtt,
-}
-
-/**
- * ConnectorTemplateServiceAccountAuthentication properties
- */
-@added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateServiceAccountAuthentication
-  extends ConnectorTemplateMqttAuthentication {
-  /**
-   * The authentication method for the MQTT connection.
-   */
-  method: ServiceAccountToken;
-
-  /**
-   * The service account token for the MQTT connection.
-   */
-  serviceAccountTokenSettings: ConnectorTemplateServiceAccountTokenSettings;
-}
-
-/**
- * ConnectorTemplateServiceAccountTokenSettings properties
- */
-@added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateServiceAccountTokenSettings {
-  /**
-   * The audience for the service account token.
-   */
-  audience: string;
-}
 
 /**
  * ConnectorTemplateDeviceInboundEndpointType properties
@@ -246,15 +131,7 @@ model ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
  */
 @added(Versions.`2025-07-01-preview`)
 model ConnectorTemplateAioMetadata {
-  /**
-   * The minimum version of AIO required for the connector.
-   */
-  aioMinVersion?: string;
-
-  /**
-   * The maximum version of AIO required for the connector.
-   */
-  aioMaxVersion?: string;
+  ...AkriAioMetadata;
 }
 
 /**
@@ -608,7 +485,7 @@ model ConnectorTemplateRuntimeImageConfigurationSettings {
   /**
    * The pull policy of the image
    */
-  imagePullPolicy?: ConnectorImagePullPolicy;
+  imagePullPolicy?: ConnectorsImagePullPolicy;
 
   /**
    * The digest of the image
@@ -618,7 +495,7 @@ model ConnectorTemplateRuntimeImageConfigurationSettings {
   /**
    * Image pull secret for the image.
    */
-  imagePullSecrets?: ConnectorTemplateImagePullSecret[];
+  imagePullSecrets?: ConnectorsImagePullSecret[];
 
   /**
    * The number of replicas for the managed configuration.
@@ -648,39 +525,8 @@ model ConnectorTemplatePersistentVolumeClaim {
   mountPath: string;
 }
 
-/**
- * ConnectorTemplateImagePullSecret properties
- */
-@added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateImagePullSecret {
-  /**
-   * The name of the image pull secret.
-   */
-  name: string;
-}
 
-/**
- * Image pull policy.
- */
-@added(Versions.`2025-07-01-preview`)
-union ConnectorImagePullPolicy {
-  string,
 
-  /**
-   * Always pull the image.
-   */
-  Always,
-
-  /**
-   * IfNotPresent pull the image.
-   */
-  IfNotPresent,
-
-  /**
-   * Never pull the image.
-   */
-  Never,
-}
 
 /**
  * ConnectorTemplateHelmAdvancedConfiguration properties

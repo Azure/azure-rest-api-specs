@@ -2,16 +2,19 @@
 // It should contain simple scalar aliases or aliases for objects with simple scalar properties.
 // Complex objects or models should be defined in their respective files.
 alias Sasl = "Sasl";
+alias Cron = "Cron";
 alias Mqtt = "Mqtt";
 alias Block = "Block";
 alias Never = "Never";
 alias Always = "Always";
 alias Expired = "Expired";
+alias RunOnce = "RunOnce";
 alias Enabled = "Enabled";
 alias Disabled = "Disabled";
 alias Diagnose = "Diagnose";
 alias Anonymous = "Anonymous";
 alias Bucketized = "Bucketized";
+alias Continuous = "Continuous";
 alias Filesystem = "Filesystem";
 alias AccessToken = "AccessToken";
 alias IfNotPresent = "IfNotPresent";
