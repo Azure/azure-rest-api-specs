@@ -19,7 +19,7 @@ model SolacePubsubSourceConnectorProperties extends DataSourceProperties {
   @doc("Solace Pubsub+ connection URI, e.g. tcp://127.0.0.1:55555.")
   connectionUri: url;
 
-  @doc("Solace Pubsub+ connection username.")
+  @doc("Solace Pubsub+ connection username. Note: Currently we support only username/password. expose TLS related, properties is we want to support client certificate authentication")
   userName: string;
 
   @doc("Solace Pubsub+ connection password.")
@@ -35,7 +35,7 @@ model SolacePubsubSourceConnectorProperties extends DataSourceProperties {
   @doc("PubSub+ queue name to consume from, must exist on event broker.")
   solaceQueue?: string;
 
-  @doc("PubSub+ Kafka Source connector message processor.")
+  @doc("PubSub+ Kafka Source connector message processor. PubSub+ Kafka Source connector message processor Refer to https://github.com/SolaceProducts/pubsubplus-connector-kafka-source")
   messageProcessor?: string;
 
   @doc("If enabled, maps/forwards the user properties Map from Solace message to Kafka record headers.")

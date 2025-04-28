@@ -21,5 +21,5 @@ model AutoScalingProperties extends ScalingProperties {
 
   @doc("Current parallelism count.")
   @visibility(Lifecycle.Read)
-  currentParallelism: int32;
+  currentParallelism?: int32;
 }
