@@ -19,20 +19,16 @@ options:
     omit-unreachable-types: true
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    generateSample: true
+    is-modular-library: true
+    experimental-extensible-enums: true
+    generate-sample: true
     package-dir: "arm-servicenetworking"
     flavor: "azure"
-    packageDetails:
+    package-details:
       name: "@azure/arm-servicenetworking"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-servicenetworking"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.servicenetworking"
     flavor: "azure"
     generate-test: true
     generate-sample: true
@@ -48,11 +44,11 @@ options:
     inject-spans: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-servicenetworking"
+    namespace: "com.azure.resourcemanager.servicenetworking"
     flavor: "azure"
     service-name: "Traffic Controller"
   "@azure-tools/typespec-csharp":
     flavor: azure
     package-dir: "Azure.ResourceManager.ServiceNetworking"
     clear-output-folder: true
-    use-write-core: true
     namespace: "{package-dir}"

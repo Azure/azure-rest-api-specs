@@ -19,24 +19,33 @@ parameters:
 extends:
   ${{ if and(parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal')) }}:
     template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
+    parameters:
+      settings:
+        skipBuildTagsForGitHubPullRequests: true
+      sdl:
+        ${{ if and(parameters.GenerateBaselines, eq(variables['Build.SourceBranchName'], 'main'), eq(variables['System.TeamProject'], 'internal')) }}:
+          autobaseline:
+            isMainPipeline: true
+            disableAutoBaselineOnNonDefaultBranches: true
+            enableForGitHub: true
+        sourceAnalysisPool:
+          name: azsdk-pool
+          image: windows-2022
+          os: windows
+        psscriptanalyzer:
+          compiled: true
+          break: true
+        policy: M365
+      stages: ${{ parameters.stages }}
   ${{ else }}:
     template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
-  parameters:
-    settings:
-      skipBuildTagsForGitHubPullRequests: true
-    sdl:
-      ${{ if and(parameters.GenerateBaselines, eq(variables['Build.SourceBranchName'], 'main'), eq(variables['System.TeamProject'], 'internal')) }}:
-        autobaseline:
-          isMainPipeline: true
-          disableAutoBaselineOnNonDefaultBranches: true
-          enableForGitHub: true
-      sourceAnalysisPool:
-        name: azsdk-pool
-        image: windows-2022
-        os: windows
-      psscriptanalyzer:
-        compiled: true
-        break: true
-      policy: M365
-
-    stages: ${{ parameters.stages }}
+    parameters:
+      settings:
+        skipBuildTagsForGitHubPullRequests: true
+      sdl: # SDLSources stage still runs even all tools are disabled. 1es team uses it for other purposes and they have the following work item to remove the stage.
+        enableAllTools: false # https://dev.azure.com/mseng/1ES/_workitems/edit/2253084
+        sourceAnalysisPool:
+          name: azsdk-pool
+          image: windows-2022
+          os: windows
+      stages: ${{ parameters.stages }}
