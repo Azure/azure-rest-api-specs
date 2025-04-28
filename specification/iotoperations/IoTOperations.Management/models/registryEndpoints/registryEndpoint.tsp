@@ -10,11 +10,15 @@ using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
-@doc("RegistryEndpoint resource")
+/**
+ * RegistryEndpoint resource
+ */
 @parentResource(InstanceResource)
 @added(Versions.`2025-07-01-preview`)
 model RegistryEndpointResource is ProxyResource<RegistryEndpointProperties> {
-  @doc("Name of RegistryEndpoint resource")
+  /**
+   * Name of RegistryEndpoint resource
+   */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("registryEndpointName")
   @path
@@ -24,24 +28,34 @@ model RegistryEndpointResource is ProxyResource<RegistryEndpointProperties> {
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @doc("Edge location of the resource.")
+  /**
+   * Edge location of the resource.
+   */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
-@doc("RegistryEndpoint properties")
+/**
+ * RegistryEndpoint properties
+ */
 @added(Versions.`2025-07-01-preview`)
 model RegistryEndpointProperties {
-  @doc("The Azure Container Registry endpoint hostname.")
+  /**
+   * The Azure Container Registry endpoint hostname.
+   */
   @pattern("^[a-z0-9]+\\.azurecr\\.io$")
   @maxLength(63)
   @minLength(3)
   host: string;
 
-  @doc("The authentication settings for the Azure Container Registry.")
+  /**
+   * The authentication settings for the Azure Container Registry.
+   */
   authentication: RegistryEndpointAuthentication;
 
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
