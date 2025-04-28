@@ -27,10 +27,10 @@ model DiagnosticResource is ProxyResource<DiagnosticProperties> {
   @segment("diagnostics")
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   /**
    * Edge location of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
@@ -107,9 +107,9 @@ model DiagnosticProperties {
    */
   remoteSupport?: DiagnosticsRemoteSupportProperties;
 
-  @visibility(Lifecycle.Read)
   /**
    * The status of the last operation.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

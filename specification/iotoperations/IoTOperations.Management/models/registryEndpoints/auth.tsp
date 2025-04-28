@@ -96,11 +96,11 @@ model RegistryEndpointAnonymousAuthentication
   anonymousSettings: RegistryEndpointAnonymousSettings;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRD type is modeled as empty object"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "This is an empty model and should not conain extra properites"
 /**
  * RegistryEndpoint Anonymous authentication properties
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRD type is modeled as empty object"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "This is an empty model and should not conain extra properites"
 @added(Versions.`2025-07-01-preview`)
 @extension("additionalProperties", false)
 model RegistryEndpointAnonymousSettings {}
