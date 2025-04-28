@@ -305,4 +305,49 @@ using Microsoft.Workloads;
   "ErsInactive",
   "csharp"
 );
-@@clientName(CentralServerVirtualMachineType.ERS, "Ers", "csharp");
+@@clientName(CentralServerVmDetails.type, "VirtualMachineType", "csharp");
+@@alternateType(CentralServerVmDetails.virtualMachineId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DatabaseConfiguration.subnetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DatabaseVmDetails.virtualMachineId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(DeployerVmPackages.url, "PackageUri", "csharp");
+@@alternateType(DeploymentConfiguration.appLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(DeploymentWithOSConfiguration.appLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(DiscoveryConfiguration.appLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(DiskSkuName.Standard_LRS, "StandardLrs", "csharp");
+@@clientName(DiskSkuName.Premium_LRS, "PremiumLrs", "csharp");
+@@clientName(DiskSkuName.StandardSSD_LRS, "StandardSsdLrs", "csharp");
+@@clientName(DiskSkuName.UltraSSD_LRS, "UltraSsdLrs", "csharp");
+@@clientName(DiskSkuName.Premium_ZRS, "PremiumZrs", "csharp");
+@@clientName(DiskSkuName.StandardSSD_ZRS, "StandardSsdZrs", "csharp");
+@@clientName(DiskSkuName.PremiumV2_LRS, "PremiumV2Lrs", "csharp");
+@@alternateType(MountFileShareConfiguration.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(MountFileShareConfiguration.id, "FileShareId", "csharp");
+@@alternateType(MountFileShareConfiguration.privateEndpointId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SAPAvailabilityZoneDetailsRequest.appLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
