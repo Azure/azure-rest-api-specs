@@ -416,7 +416,7 @@ model AzureDataExplorerDataConnectionProperties
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Overwritten in client.tsp, but tsp pipelines run from main.tsp as well"
 model Banner {
   port?: int32;
   banner?: string;
@@ -980,7 +980,7 @@ model IpAddressAsset extends InventoryAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Overwritten in client.tsp, but tsp pipelines run from main.tsp as well"
 model IpBlock {
   ipBlock?: string;
   sources?: Source[];
@@ -1175,7 +1175,7 @@ model PageCause {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Overwritten in client.tsp, but tsp pipelines run from main.tsp as well"
 model Port {
   port?: int32;
   firstSeen?: utcDateTime;
@@ -1368,7 +1368,7 @@ model SoaRecord {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Overwritten in client.tsp, but tsp pipelines run from main.tsp as well"
 model Source {
   source?: string;
   firstSeen?: utcDateTime;

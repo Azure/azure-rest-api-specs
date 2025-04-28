@@ -6,10 +6,13 @@ using Azure.ClientGenerator.Core;
 @TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.5`)
 namespace ClientCustomizations;
 
-@client({
-  name: "Client",
-  service: KeyVault,
-})
+@client(
+  {
+    name: "Client",
+    service: KeyVault,
+  },
+  "go"
+)
 interface Client {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deleteRoleDefinition is KeyVault.RoleDefinitions.delete;

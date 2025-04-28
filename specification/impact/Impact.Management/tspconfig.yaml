@@ -20,7 +20,7 @@ options:
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-impactreporting"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.impactreporting"
     generate-test: true
     generate-sample: true
     flavor: "azure"
@@ -35,17 +35,15 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-ts":
     flavor: "azure"
-    isModularLibrary: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    generateSample: true
+    is-modular-library: true
+    experimental-extensible-enums: true
+    generate-sample: true
     package-dir: "arm-impactreporting"
-    packageDetails:
+    package-details:
       name: "@azure/arm-impactreporting"

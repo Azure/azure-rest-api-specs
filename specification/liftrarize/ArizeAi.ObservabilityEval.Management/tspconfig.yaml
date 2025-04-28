@@ -14,8 +14,38 @@ options:
     package-dir: "Azure.ResourceManager.ArizeAIObservabilityEval"
     flavor: azure
     clear-output-folder: true
-    use-write-core: true
     namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/arizeaiobservabilityeval"
+    package-dir: "azure-mgmt-arizeaiobservabilityeval"
+    namespace: "azure.mgmt.arizeaiobservabilityeval"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/arizeaiobservabilityeval"
+    package-dir: "armarizeaiobservabilityeval"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/arizeaiobservabilityeval"
+    package-dir: "azure-resourcemanager-arizeaiobservabilityeval"
+    namespace: "com.azure.resourcemanager.arizeaiobservabilityeval"
+    service-name: "Arize AI Observability Eval"
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    flavor: "azure"
+    experimental-extensible-enums: true
+    generate-sample: true
+    package-dir: "arm-arizeaiobservabilityeval"
+    package-details:
+      name: "@azure/arm-arizeaiobservabilityeval"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

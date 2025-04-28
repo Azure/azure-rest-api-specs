@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-10
+tag: package-2025-01-01
 ```
 
 ### Suppression
@@ -37,6 +37,56 @@ directive:
     from: JavaComponents.json
     reason: |
       Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
+  - suppress: PatchBodyParametersSchema
+    from: ManagedEnvironments.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"].patch.parameters[3].schema.properties.identity
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+```
+
+### Tag: package-2025-01-01
+
+These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - Microsoft.App/stable/2025-01-01/AuthConfigs.json
+  - Microsoft.App/stable/2025-01-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2025-01-01/BillingMeters.json
+  - Microsoft.App/stable/2025-01-01/CommonDefinitions.json
+  - Microsoft.App/stable/2025-01-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2025-01-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2025-01-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2025-01-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2025-01-01/ContainerApps.json
+  - Microsoft.App/stable/2025-01-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2025-01-01/Diagnostics.json
+  - Microsoft.App/stable/2025-01-01/Global.json
+  - Microsoft.App/stable/2025-01-01/JavaComponents.json
+  - Microsoft.App/stable/2025-01-01/Jobs.json
+  - Microsoft.App/stable/2025-01-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2025-01-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2025-01-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2025-01-01/SessionPools.json
+  - Microsoft.App/stable/2025-01-01/SourceControls.json
+  - Microsoft.App/stable/2025-01-01/Subscriptions.json
+  - Microsoft.App/stable/2025-01-01/Usages.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: SessionPools.json
+    reason: |
+      Session Pool is using managed identity. While the type is a required property, this rule prevent it being present in the patch request body.
+  - suppress: PutResponseCodes
+    from: ConnectedEnvironmentsCertificates.json
+    reason: |
+      Do not introduce breaking changes in GA services 
+  - suppress: PutResponseCodes
+    from: ConnectedEnvironmentsDaprComponents.json
+    reason: |
+      Do not introduce breaking changes in GA services 
+  - suppress: PutResponseCodes
+    from: ConnectedEnvironmentsStorages.json
+    reason: |
+      Do not introduce breaking changes in GA services 
 ```
 
 ### Tag: package-preview-2024-10
