@@ -10,11 +10,15 @@ using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
-@doc("Instance diagnostic resource")
+/**
+ * Instance diagnostic resource
+ */
 @parentResource(InstanceResource)
 @added(Versions.`2025-07-01-preview`)
 model DiagnosticResource is ProxyResource<DiagnosticProperties> {
-  @doc("Name of Instance diagnostic resource")
+  /**
+   * Name of Instance diagnostic resource
+   */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("diagnosticName")
   @path
@@ -24,58 +28,88 @@ model DiagnosticResource is ProxyResource<DiagnosticProperties> {
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @doc("Edge location of the resource.")
+  /**
+   * Edge location of the resource.
+   */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
-@doc("Represents the activation state of Diagnostic.")
+/**
+ * Represents the activation state of Diagnostic.
+ */
 @added(Versions.`2025-07-01-preview`)
 union DiagnosticsRemoteSupportActivationState {
   string,
 
-  @doc("Remote Support is enabled.")
+  /**
+   * Remote Support is enabled.
+   */
   Enabled: "Enabled",
 
-  @doc("Remote Support is disabled.")
+  /**
+   * Remote Support is disabled.
+   */
   Disabled: "Disabled",
 
-  @doc("Remote Support has Expired.")
+  /**
+   * Remote Support has Expired.
+   */
   Expired: "Expired",
 }
 
-@doc("DiagnosticAccessLevels allowed")
+/**
+ * DiagnosticAccessLevels allowed
+ */
 @added(Versions.`2025-07-01-preview`)
 union DiagnosticsRemoteSupportAccessLevels {
   string,
 
-  @doc("Diagnose access level")
+  /**
+   * Diagnose access level
+   */
   Diagnose: "Diagnose",
 
-  @doc("Diagnose And Repair Access Level")
+  /**
+   * Diagnose And Repair Access Level
+   */
   DiagnoseAndRepair: "DiagnoseAndRepair",
 }
 
-@doc("RemoteSupport properties")
+/**
+ * RemoteSupport properties
+ */
 @added(Versions.`2025-07-01-preview`)
 model DiagnosticsRemoteSupportProperties {
-  @doc("Activation state of Diagnostic.")
+  /**
+   * Activation state of Diagnostic.
+   */
   state?: DiagnosticsRemoteSupportActivationState;
 
-  @doc("Access level for Diagnostic.")
+  /**
+   * Access level for Diagnostic.
+   */
   accessLevel?: DiagnosticsRemoteSupportAccessLevels;
 
-  @doc("Expiration timestamp for Diagnostic.")
+  /**
+   * Expiration timestamp for Diagnostic.
+   */
   expirationTimestamp?: string;
 }
 
-@doc("Diagnostic Resource properties")
+/**
+ * Diagnostic Resource properties
+ */
 @added(Versions.`2025-07-01-preview`)
 model DiagnosticProperties {
-  @doc("Remote Support Settings For Diagnostic.")
+  /**
+   * Remote Support Settings For Diagnostic.
+   */
   remoteSupport?: DiagnosticsRemoteSupportProperties;
 
   @visibility(Lifecycle.Read)
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   provisioningState?: ProvisioningState;
 }
