@@ -16,6 +16,7 @@ import "./AddressResource.tsp";
 import "./OrderItemResource.tsp";
 import "./OrderResource.tsp";
 import "./routes.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
