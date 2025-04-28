@@ -32,7 +32,7 @@ model DatasetVersion {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
-  datasetUri: string;
+  dataUri: string;
 
   @doc("Dataset type")
   type: DatasetType;
