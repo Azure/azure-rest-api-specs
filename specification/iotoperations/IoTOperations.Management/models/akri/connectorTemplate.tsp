@@ -315,7 +315,7 @@ model ConnectorTemplateHelmConfigurationSettings {
   registry: string;
 
   /**
-   * The repoistory of the Helm chart.
+   * The repository of the Helm chart.
    */
   repository: string;
 
@@ -390,7 +390,7 @@ model ConnectorTemplateManagedConfigurationSettings {
 /**
  * ConnectorTemplatePersistentVolumeClaimTemplate properties
  */
-// This differes slightly from the VolumeClaimSpec used by Mq broker. Perhaps we should allign with that.
+// This differs slightly from the VolumeClaimSpec used by Mq broker. Perhaps we should allign with that.
 // Some of the differences are:
 // 1. This doesn't have a `selector` property.
 // 2. This has a `volumeAttributesClassName` property.

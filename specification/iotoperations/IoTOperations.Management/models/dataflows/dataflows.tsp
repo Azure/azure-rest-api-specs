@@ -305,7 +305,7 @@ model DataflowConnectionOutput {
   @doc("Operator type.")
   operator: DataflowConnectionOutputOperator;
 
-  // `arm` is ommitted
+  // `arm` is omitted
 
   @doc("The name of the module.")
   moduleName?: string;
@@ -341,7 +341,7 @@ model DataflowConnectionInput {
   @doc("Operator type.")
   operator: DataflowConnectionInputOperator;
 
-  // `arm` is ommitted
+  // `arm` is omitted
 
   @doc("The name of the module.")
   moduleName?: string;
