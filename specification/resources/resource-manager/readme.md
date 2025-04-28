@@ -1493,6 +1493,21 @@ directive:
     from: resources.json
     where: $.definitions.ProviderPermissionListResult
     reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2016-02-01/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2016-07-01/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2016-09-01/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2017-05-10/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2018-02-01/resources.json
+    reason: Pre-existing lint error.
 ```
 
 ---

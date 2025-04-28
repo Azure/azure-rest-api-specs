@@ -73,10 +73,6 @@ input-file:
 
 ``` yaml
 directive:
-  - suppress: OperationsAPIImplementation
-    from: templateSpecs.json
-    where: $.paths
-    reason: OperationsAPI will come from Resources
   - suppress: R3006
     from: templateSpecs.json
     where:
@@ -93,6 +89,21 @@ directive:
     from: templateSpecs.json
     where: $.definitions.TemplateSpecVersion
     reason: Tooling issue
+  - suppress: OperationsAPIImplementation
+    from: templateSpecs.json
+    reason: Operations API is implemented as a separate service.
+  - suppress: AvoidAdditionalProperties
+    from: templateSpecs.json
+    reason: Pre-existing lint error.
+  - suppress: MissingTypeObject
+    from: templateSpecs.json
+    reason: Pre-existing lint error.
+  - suppress: ParametersInPointGet
+    from: templateSpecs.json
+    reason: Pre-existing lint error.
+  - suppress: PathForTrackedResourceTypes
+    from: templateSpecs.json
+    reason: Pre-existing lint error.
 ```
 
 # Code Generation

@@ -80,10 +80,6 @@ directive:
     suppress: TrackedResourcePatchOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
-  - suppress: OperationsAPIImplementation
-    from: deploymentScripts.json
-    where: $.paths
-    reason: OperationsAPI will come from Resources
   - suppress: IntegerTypeMustHaveFormat
     from: deploymentScripts.json
     reason: Tooling issue, default is int32, explicitly mentioning the format as per doc, it still flags breaking change.
@@ -118,6 +114,18 @@ directive:
       - $.definitions.AzureCliScript.properties
       - $.definitions.AzurePowerShellScript.properties
     reason: Currently systemData is not allowed
+  - suppress: OperationsAPIImplementation
+    from: deploymentScripts.json
+    reason: Operations API is implemented as a separate service.
+  - suppress: XmsPageableForListCalls
+    from: deploymentScripts.json
+    reason: Pre-existing lint error.
+  - suppress: AvoidAdditionalProperties
+    from: deploymentScripts.json
+    reason: Pre-existing lint error.
+  - suppress: MissingTypeObject
+    from: deploymentScripts.json
+    reason: Pre-existing lint error.
 ```
 
 # Code Generation

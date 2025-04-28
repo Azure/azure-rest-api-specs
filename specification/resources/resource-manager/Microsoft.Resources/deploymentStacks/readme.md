@@ -56,10 +56,6 @@ input-file:
 ``` yaml
 directive:
   - from: deploymentStacks.json
-    suppress: OperationsAPIImplementation
-    where: $.paths
-    reason: OperationsAPI will come from Resources
-  - from: deploymentStacks.json
     suppress: TrackedResourcePatchOperation
     where: $.definitions
     reason: Not a tracked resource.
@@ -92,7 +88,10 @@ directive:
     reason: Deployment stacks supports synchronous delete with 200 response.
   - suppress: OperationsAPIImplementation
     from: deploymentStacks.json
-    reason: This comes from resources.json
+    reason: Operations API is implemented as a separate service.
+  - suppress: DefaultErrorResponseSchema
+    from: deploymentStacks.json
+    reason: Pre-existing lint error.
 ```
 
 # Code Generation

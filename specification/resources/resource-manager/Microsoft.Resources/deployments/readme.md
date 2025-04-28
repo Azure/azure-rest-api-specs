@@ -69,11 +69,11 @@ input-file:
   - stable/2016-09-01/deployments.json
 ```
 
-### Tag: package-deployments-2017-05
+### Tag: package-deployments-2017-0510
 
-These settings apply only when `--tag=package-deployments-2017-05` is specified on the command line.
+These settings apply only when `--tag=package-deployments-2017-0510` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2017-05'
+``` yaml $(tag) == 'package-deployments-2017-0510'
 input-file:
   - stable/2017-05-10/deployments.json
 ```
@@ -114,11 +114,11 @@ input-file:
   - stable/2019-05-01/deployments.json
 ```
 
-### Tag: package-deployments-2019-05
+### Tag: package-deployments-2019-0510
 
-These settings apply only when `--tag=package-deployments-2019-05` is specified on the command line.
+These settings apply only when `--tag=package-deployments-2019-0510` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2019-05'
+``` yaml $(tag) == 'package-deployments-2019-0510'
 input-file:
   - stable/2019-05-10/deployments.json
 ```
@@ -266,49 +266,10 @@ directive:
     from: deployments.json
     where: $.paths
     reason: route definitions under an extension resource with Microsoft.Management
-  - suppress: BodyTopLevelProperties
-    from: deployments.json
-    where: $.definitions.ResourceGroup.properties
-    reason: managedBy is a top level property
-  - suppress: BodyTopLevelProperties
-    from: deployments.json
-    where: $.definitions.GenericResource.properties
-    reason: managedBy is a top level property
-  - suppress: BodyTopLevelProperties
-    from: deployments.json
-    where: $.definitions.GenericResourceExpanded.properties
-    reason: 'createdTime,changedTime & provisioningState are top-level properties'
-  - suppress: BodyTopLevelProperties
-    from: deployments.json
-    where: $.definitions.TagDetails.properties
-    reason: TagDetails is a top level property
-  - suppress: BodyTopLevelProperties
-    from: deployments.json
-    where: $.definitions.TagValue.properties
-    reason: TagValue is a top level property
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
-    where: $.definitions.TagValue
-    reason: TagValue will be deprecated soon
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
-    where: $.definitions.TagDetails
-    reason: TagDetails will be deprecated soon
-  - suppress: XmsResourceInPutResponse
-    from: deployments.json
-    where: '$.paths["/subscriptions/{subscriptionId}/tagNames/{tagName}"].put'
-    reason: TagDetails is not an Azure resource
   - suppress: DescriptionAndTitleMissing
     where: $.definitions.AliasPathMetadata
     from: deployments.json
     reason: This was already checked in - not my code
-  - from: deployments.json
-    suppress: R4009
-    where:
-      - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].put'
-      - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].patch'
-      - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].get'
-    reason: The tags API does not support system data
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     where: $.paths
     from: deployments.json
@@ -445,32 +406,30 @@ directive:
     reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: deployments.json
-    where: $.definitions.ProviderListResult
-    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
-    where: $.definitions.ProviderResourceTypeListResult
-    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
-    where: $.definitions.TagsListResult
-    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
     where: $.definitions.DeploymentOperation
     reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: deployments.json
     where: $.definitions.DeploymentOperationsListResult
     reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: OperationsAPIImplementation
+    from: deployments.json
+    reason: Operations API is implemented as a separate service.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: deployments.json
+    reason: Pre-existing lint error.
+  - suppress: RequiredDefaultResponse
+    from: deployments.json
+    reason: Pre-existing lint error.
   - suppress: RequiredPropertiesMissingInResourceModel
     from: deployments.json
-    where: $.definitions.OperationListResult
-    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
-  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: Pre-existing lint error.
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: deployments.json
-    where: $.definitions.ProviderPermissionListResult
-    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+    reason: Pre-existing lint error.
+  - suppress: DescriptionMustNotBeNodeName
+    from: deployments.json
+    reason: Pre-existing lint error.
 ```
 
 # Code Generation

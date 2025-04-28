@@ -42,6 +42,15 @@ input-file:
   - stable/2023-11-01/bicepClient.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OperationsAPIImplementation
+    from: bicepClient.json
+    reason: Operations API is implemented as a separate service.
+```
+
 # Code Generation
 
 ## Swagger to SDK

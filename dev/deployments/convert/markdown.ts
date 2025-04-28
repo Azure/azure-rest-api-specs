@@ -1,7 +1,9 @@
 import path from "path";
 import { readFileSync, writeFileSync } from "fs";
 
-export function writeMarkdownFiles(basePath: string, filePaths: string[], componentName: string, clientName: string) {
+type Component = 'Deployments' | 'DeploymentScripts' | 'DeploymentStacks' | 'TemplateSpecs' | 'Bicep';
+
+export function writeMarkdownFiles(basePath: string, filePaths: string[], componentName: Component, clientName: string) {
   const apiVersions = filePaths.map((filePath) => getApiVersionFromFilePath(filePath));
   apiVersions.sort((a, b) => b.localeCompare(a));
   const latestApiVersion = apiVersions[0];
@@ -21,24 +23,24 @@ function writeReadme(basePath: string, fileName: string, readme: string) {
   writeFileSync(path.resolve(basePath, fileName), readme);
 }
 
-function removeMarkdownSectionMatching(readme: string, matcher: (heading: string) => boolean) {
+function replaceMarkdownSectionMatching(readme: string, matcher: (heading: string) => boolean, replacer: (body: string) => string) {
   return readme.replace(/(##.*?\n)([\s\S]*?)(?=\n##|$)/g, (match, _) => {
-    if (matcher(match.split('\n')[0])) {
-      return '';
-    }
+    return matcher(match.split('\n')[0]) ? replacer(match) : match;
+  });
+}
 
-    return match;
+function removeMarkdownSectionMatching(readme: string, matcher: (heading: string) => boolean) {
+  return replaceMarkdownSectionMatching(readme, matcher, (_) => '');
+}
+
+function replaceCodeblockMatching(readme: string, matcher: (heading: string) => boolean, replacer: (body: string) => string) {
+  return readme.replace(/(```.*?\n)([\s\S]*?)(\n```\n\n)/g, (match, _) => {
+    return matcher(match.split('\n')[0]) ? replacer(match) : match;
   });
 }
 
 function removeCodeblockMatching(readme: string, matcher: (heading: string) => boolean) {
-  return readme.replace(/(```.*?\n)([\s\S]*?)(\n```\n\n)/g, (match, _) => {
-    if (matcher(match.split('\n')[0])) {
-      return '';
-    }
-
-    return match;
-  });
+  return replaceCodeblockMatching(readme, matcher, (_) => '');
 }
 
 function removeLinesMatching(readme: string, matcher: (line: string) => boolean) {
@@ -83,6 +85,31 @@ export function replaceSourceReadmes(basePath: string) {
       if (readme === 'readme.md') {
         const movedFilesPattern = /from: (deploymentScripts|templateSpecs|deploymentStacks|bicep)/;
         content = removeSuppressionMatching(content, body => movedFilesPattern.test(body));
+
+        content = replaceMarkdownSectionMatching(
+          content,
+          (heading) => heading === '## Suppression', 
+          (sup) => replaceCodeblockMatching(sup, (_) => true, (cb) => {
+            return cb.trimEnd().replace(`\n\`\`\``, `
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2016-02-01/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2016-07-01/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2016-09-01/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2017-05-10/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2018-02-01/resources.json
+    reason: Pre-existing lint error.
+\`\`\`
+
+`);
+          }));
       }
 
       content = removeLinesMatching(content, line => packagePattern.test(line));
@@ -94,9 +121,10 @@ export function replaceSourceReadmes(basePath: string) {
 
 function getPackageName(apiVersion: string) {
   const year = apiVersion.split('-')[0];
-  const month = apiVersion.split('-')[1];  
+  const month = apiVersion.split('-')[1];
+  const suffix = apiVersion.split('-')[2] === '01' ? '' : `${apiVersion.split('-')[2]}`;
 
-  return `package-deployments-${year}-${month}`;
+  return `package-deployments-${year}-${month}${suffix}`;
 }
 
 function getApiVersionFromFilePath(filePath: string) {
@@ -307,56 +335,85 @@ typescript:
 `;
 }
 
-const suppressions: Record<string, string> = {
+type Suppression = {
+  suppress: string;
+  where?: string;
+  reason?: string;
+};
+
+const operationsApiSuppression: Suppression = {
+  suppress: 'OperationsAPIImplementation',
+  reason: 'Operations API is implemented as a separate service.',
+};
+
+const newSuppressions: Record<Component, Suppression[]> = {
+  Deployments: [
+    operationsApiSuppression,
+    { suppress: 'ProvisioningStateMustBeReadOnly' },
+    { suppress: 'RequiredDefaultResponse' },
+    { suppress: 'RequiredPropertiesMissingInResourceModel' },
+    { suppress: 'RequestSchemaForTrackedResourcesMustHaveTags' },
+    { suppress: 'DescriptionMustNotBeNodeName' },
+  ],
+  DeploymentScripts: [
+    operationsApiSuppression,
+    { suppress: 'XmsPageableForListCalls' },
+    { suppress: 'AvoidAdditionalProperties' },
+    { suppress: 'MissingTypeObject' },
+  ],
+  DeploymentStacks: [
+    operationsApiSuppression,
+    { suppress: 'DefaultErrorResponseSchema' },
+  ],
+  TemplateSpecs: [
+    operationsApiSuppression,
+    { suppress: 'AvoidAdditionalProperties' },
+    { suppress: 'MissingTypeObject' },
+    { suppress: 'ParametersInPointGet' },
+    { suppress: 'PathForTrackedResourceTypes' },
+  ],
+  Bicep: [
+    operationsApiSuppression,
+  ],
+};
+
+function getNewSuppressions(component: Component) {
+  let output = '';
+  for (const suppression of newSuppressions[component]) {
+    const { suppress, where, reason } = suppression;
+    const reasonText = reason ?? 'Pre-existing lint error.';
+    output += `  - suppress: ${suppress}
+    from: ${filePathLookup[component]}
+    reason: ${reasonText}
+`;
+    if (where) {
+      output += `    where: ${where}
+`;
+    }
+  }
+
+  return output;
+}
+
+const filePathLookup: Record<Component, string> = {
+  Deployments: 'deployments.json',
+  DeploymentScripts: 'deploymentScripts.json',
+  DeploymentStacks: 'deploymentStacks.json',
+  TemplateSpecs: 'templateSpecs.json',
+  Bicep: 'bicepClient.json',
+};
+
+const suppressions: Record<Component, string> = {
   Deployments: `
 directive:
   - suppress: UniqueResourcePaths
     from: deployments.json
     where: $.paths
     reason: route definitions under an extension resource with Microsoft.Management
-  - suppress: BodyTopLevelProperties
-    from: deployments.json
-    where: $.definitions.ResourceGroup.properties
-    reason: managedBy is a top level property
-  - suppress: BodyTopLevelProperties
-    from: deployments.json
-    where: $.definitions.GenericResource.properties
-    reason: managedBy is a top level property
-  - suppress: BodyTopLevelProperties
-    from: deployments.json
-    where: $.definitions.GenericResourceExpanded.properties
-    reason: 'createdTime,changedTime & provisioningState are top-level properties'
-  - suppress: BodyTopLevelProperties
-    from: deployments.json
-    where: $.definitions.TagDetails.properties
-    reason: TagDetails is a top level property
-  - suppress: BodyTopLevelProperties
-    from: deployments.json
-    where: $.definitions.TagValue.properties
-    reason: TagValue is a top level property
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
-    where: $.definitions.TagValue
-    reason: TagValue will be deprecated soon
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
-    where: $.definitions.TagDetails
-    reason: TagDetails will be deprecated soon
-  - suppress: XmsResourceInPutResponse
-    from: deployments.json
-    where: '$.paths["/subscriptions/{subscriptionId}/tagNames/{tagName}"].put'
-    reason: TagDetails is not an Azure resource
   - suppress: DescriptionAndTitleMissing
     where: $.definitions.AliasPathMetadata
     from: deployments.json
     reason: This was already checked in - not my code
-  - from: deployments.json
-    suppress: R4009
-    where:
-      - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].put'
-      - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].patch'
-      - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].get'
-    reason: The tags API does not support system data
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     where: $.paths
     from: deployments.json
@@ -493,32 +550,13 @@ directive:
     reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: deployments.json
-    where: $.definitions.ProviderListResult
-    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
-    where: $.definitions.ProviderResourceTypeListResult
-    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
-    where: $.definitions.TagsListResult
-    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
     where: $.definitions.DeploymentOperation
     reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: deployments.json
     where: $.definitions.DeploymentOperationsListResult
     reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
-    where: $.definitions.OperationListResult
-    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: deployments.json
-    where: $.definitions.ProviderPermissionListResult
-    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+${getNewSuppressions('Deployments')}
 `,
   DeploymentScripts: `
 directive:
@@ -538,10 +576,6 @@ directive:
     suppress: TrackedResourcePatchOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
-  - suppress: OperationsAPIImplementation
-    from: deploymentScripts.json
-    where: $.paths
-    reason: OperationsAPI will come from Resources
   - suppress: IntegerTypeMustHaveFormat
     from: deploymentScripts.json
     reason: Tooling issue, default is int32, explicitly mentioning the format as per doc, it still flags breaking change.
@@ -576,13 +610,10 @@ directive:
       - $.definitions.AzureCliScript.properties
       - $.definitions.AzurePowerShellScript.properties
     reason: Currently systemData is not allowed
+${getNewSuppressions('DeploymentScripts')}
 `,
   DeploymentStacks: `
 directive:
-  - from: deploymentStacks.json
-    suppress: OperationsAPIImplementation
-    where: $.paths
-    reason: OperationsAPI will come from Resources
   - from: deploymentStacks.json
     suppress: TrackedResourcePatchOperation
     where: $.definitions
@@ -614,16 +645,10 @@ directive:
   - suppress: DeleteResponseCodes
     from: deploymentStacks.json
     reason: Deployment stacks supports synchronous delete with 200 response.
-  - suppress: OperationsAPIImplementation
-    from: deploymentStacks.json
-    reason: This comes from resources.json
+${getNewSuppressions('DeploymentStacks')}
 `,
-    TemplateSpecs: `
+  TemplateSpecs: `
 directive:
-  - suppress: OperationsAPIImplementation
-    from: templateSpecs.json
-    where: $.paths
-    reason: OperationsAPI will come from Resources
   - suppress: R3006
     from: templateSpecs.json
     where:
@@ -640,5 +665,10 @@ directive:
     from: templateSpecs.json
     where: $.definitions.TemplateSpecVersion
     reason: Tooling issue
+${getNewSuppressions('TemplateSpecs')}
+`,
+  Bicep: `
+directive:
+${getNewSuppressions('Bicep')}
 `,
 }
