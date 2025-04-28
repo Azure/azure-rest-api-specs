@@ -7,3 +7,7 @@ using Azure.ClientGenerator.Core;
   "SecretsStoreExtensionMgmt",
   "python"
 );
+@@clientName(Microsoft.SecretSyncController,
+  "SecretsStoreExtensionMgmtClient",
+  "java"
+);
