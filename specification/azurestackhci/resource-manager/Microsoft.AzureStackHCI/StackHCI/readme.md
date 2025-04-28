@@ -75,6 +75,7 @@ suppressions:
       - edgeDeviceJobs.json
       - securitySettings.json
       - edgeNodePool.json
+      - validatedSolutionRecipes.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -237,7 +238,6 @@ input-file:
   - preview/2025-02-01-preview/edgeDeviceJobs.json
   - preview/2025-02-01-preview/edgeDevices.json
   - preview/2025-02-01-preview/extensions.json
-  - preview/2025-02-01-preview/hci.json
   - preview/2025-02-01-preview/hciCommon.json
   - preview/2025-02-01-preview/offers.json
   - ../operations/preview/2025-02-01-preview/operations.json
@@ -247,6 +247,7 @@ input-file:
   - preview/2025-02-01-preview/updateRuns.json
   - preview/2025-02-01-preview/updates.json
   - preview/2025-02-01-preview/updateSummaries.json
+  - preview/2025-02-01-preview/validatedSolutionRecipes.json
 ```
 
 ### Tag: package-preview-2024-11

@@ -556,6 +556,23 @@
         "authentication": {
           "description": "Authentication related configuration for the SQL Server Instance.",
           "$ref": "#/definitions/Authentication"
+        },
+        "databaseMirroringEndpoint": {
+          "description": "Database mirroring endpoint related properties.",
+          "$ref": "#/definitions/DBMEndpoint"
+        },
+        "isMicrosoftPkiCertTrustConfigured": {
+          "type": "boolean",
+          "description": "Indicates whether Microsoft PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains."
+        },
+        "isDigiCertPkiCertTrustConfigured": {
+          "type": "boolean",
+          "description": "Indicates whether DigiCert PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains."
+        },
+        "maxServerMemoryMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "max server memory (MB) value configured for this instance."
         }
       }
     },
