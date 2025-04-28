@@ -11,49 +11,49 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
-@doc("Mode of DecimalHandling")
-union DecimalHandlingModes {
-  @doc("precise mode")
-  Precise: "Precise",
-
-  @doc("Double mode")
-  Double: "Double",
-
-  @doc("Double mode")
-  String: "String",
-
-  string,
-}
-
-@doc("Mode of PublicationAutocreateMode")
+@doc("Type of PublicationAutocreateMode")
 union PublicationAutocreateModes {
-  @doc("AllTables mode")
+  @doc("The AllTables mode.")
   AllTables: "AllTables",
 
-  @doc("Disabled mode")
+  @doc("The Disabled mode.")
   Disabled: "Disabled",
 
-  @doc("Filtered mode")
+  @doc("The Filtered mode.")
   Filtered: "Filtered",
 
   string,
 }
 
-@doc("Mode of SkippedOperationsMode")
-union SkippedOperationsModes {
-  @doc("InsertOrCreate mode")
+@doc("Enum DecimalHandlingMode for Cdc")
+union DecimalHandlingMode {
+  @doc("The Precise mode.")
+  PreciseMode: "Precise",
+
+  @doc("The Double mode.")
+  DoubleMode: "Double",
+
+  @doc("The String mode.")
+  StringMode: "String",
+
+  string,
+}
+
+@doc("Enum SkippedOperationsMode for Cdc")
+union SkippedOperationsMode {
+  @doc("The InsertOrCreate mode.")
   InsertOrCreate: "InsertOrCreate",
 
-  @doc("Update mode")
+  @doc("The Update mode.")
   Update: "Update",
 
-  @doc("Delete mode")
+  @doc("The Delete mode.")
   Delete: "Delete",
 
-  @doc("Truncate mode")
+  @doc("The Truncate mode.")
   Truncate: "Truncate",
 
-  @doc("None mode")
+  @doc("The None mode.")
   None: "None",
 
   string,
@@ -95,20 +95,20 @@ model PostgreSqlSourceConnectorProperties extends DataSourceProperties {
   @doc("Tables used as source.")
   tableNames: string;
 
-  @doc("Tables to be included, regex supported.")
+  @doc("Tables used as source.")
   tableIncludeList?: string;
 
-  @doc("Tables to be excluded, regex supported.")
+  @doc("Tables to be excluded.")
   tableExcludeList?: string;
 
-  @doc("Columns to be included, regex supported.")
+  @doc("Columns to be included.")
   columnIncludeList?: string;
 
-  @doc("Columns to be excluded, regex supported.")
+  @doc("Columns to be excluded.")
   columnExcludeList?: string;
 
   @doc("Handling mode for DECIMAL and NUMERIC.")
-  decimalHandlingMode?: DecimalHandlingModes;
+  decimalHandlingMode?: DecimalHandlingMode;
 
   @Azure.ResourceManager.identifiers(#[])
   @doc("Select table rows to include in the snapshot.")
@@ -118,7 +118,7 @@ model PostgreSqlSourceConnectorProperties extends DataSourceProperties {
   publicationAutocreateMode?: PublicationAutocreateModes;
 
   @doc("Operation types to be skipped.")
-  skippedOperations?: SkippedOperationsModes[];
+  skippedOperations?: SkippedOperationsMode[];
 
   @doc("Publication Name of Postgre.")
   publicationName?: string;

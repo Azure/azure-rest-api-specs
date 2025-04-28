@@ -16,6 +16,8 @@ import "./connector/postgreSqlSourceConnector.tsp";
 import "./connector/sqlServerSourceConnector.tsp";
 import "./connector/solacePubSubSourceConnector.tsp";
 import "./connector/managedAzureMapsWeatherSourceConnector.tsp";
+import "./connector/eventHubSourceConnector.tsp";
+import "./connector/dataverseSourceConnector.tsp";
 import "./authModels/authModel.tsp";
 import "./authModels/connectionString.tsp";
 import "./authModels/usernamePassword.tsp";
