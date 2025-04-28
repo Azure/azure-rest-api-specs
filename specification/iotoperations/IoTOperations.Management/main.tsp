@@ -18,6 +18,7 @@ import "./models/dataflows/dataflowGraphs.tsp";
 import "./models/diagnostics/diagnostic.tsp";
 import "./models/registryEndpoints/registryEndpoint.tsp";
 import "./models/akri/connectorTemplate.tsp";
+import "./models/akri/connectorInstance.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -166,4 +167,14 @@ interface ConnectorTemplate {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ConnectorTemplateResource>;
   delete is ArmResourceDeleteWithoutOkAsync<ConnectorTemplateResource>;
   listByInstanceResource is ArmResourceListByParent<ConnectorTemplateResource>;
+}
+
+// /instance/connectorTemplates/connectorInstances resource Operations
+@armResourceOperations
+@added(Versions.`2025-07-01-preview`)
+interface ConnectorInstance {
+  get is ArmResourceRead<ConnectorInstanceResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<ConnectorInstanceResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<ConnectorInstanceResource>;
+  listByConnectorTemplate is ArmResourceListByParent<ConnectorInstanceResource>;
 }
