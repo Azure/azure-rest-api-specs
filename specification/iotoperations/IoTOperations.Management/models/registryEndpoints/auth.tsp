@@ -58,7 +58,8 @@ model RegistryEndpointUserAssignedManagedIdentitySettings {
 
 @doc("Anonymous authentication")
 @added(Versions.`2025-07-01-preview`)
-model RegistryEndpointAnonymousAuthentication extends RegistryEndpointAuthentication {
+model RegistryEndpointAnonymousAuthentication
+  extends RegistryEndpointAuthentication {
   @doc("The authentication method.")
   method: Anonymous;
 
