@@ -96,6 +96,12 @@
           },
           "Operations_List_MinimumSet": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          },
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -135,6 +141,12 @@
         "x-ms-examples": {
           "Organizations_ListBySubscription_MaximumSet": {
             "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Organizations_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Organizations_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -189,6 +201,12 @@
           },
           "Organizations_GetPostgresVersions_MinimumSet": {
             "$ref": "./examples/Organizations_GetPostgresVersions_MinimumSet_Gen.json"
+          },
+          "Organizations_GetPostgresVersions_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_GetPostgresVersions_MaximumSet_Gen.json"
+          },
+          "Organizations_GetPostgresVersions_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_GetPostgresVersions_MinimumSet_Gen.json"
           }
         }
       }
@@ -228,6 +246,12 @@
         "x-ms-examples": {
           "Organizations_ListByResourceGroup_MaximumSet": {
             "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Organizations_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Organizations_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -279,6 +303,9 @@
         },
         "x-ms-examples": {
           "Organizations_Get_MaximumSet": {
+            "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
+          },
+          "Organizations_Get_MaximumSet_Gen": {
             "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
           }
         }
@@ -352,6 +379,9 @@
         },
         "x-ms-examples": {
           "Organizations_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Organizations_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
@@ -427,6 +457,9 @@
         "x-ms-examples": {
           "Organizations_Update_MaximumSet": {
             "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
+          },
+          "Organizations_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -489,6 +522,9 @@
         "x-ms-examples": {
           "Organizations_Delete_MaximumSet": {
             "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
+          },
+          "Organizations_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -542,6 +578,9 @@
         "x-ms-examples": {
           "Projects_List_MaximumSet": {
             "$ref": "./examples/Projects_List_MaximumSet_Gen.json"
+          },
+          "Projects_List_MaximumSet_Gen": {
+            "$ref": "./examples/Projects_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -582,14 +621,14 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Project"
+              "$ref": "#/definitions/Models.Project"
             }
           },
           "default": {
@@ -601,6 +640,9 @@
         },
         "x-ms-examples": {
           "Projects_Get_MaximumSet": {
+            "$ref": "./examples/Projects_Get_MaximumSet_Gen.json"
+          },
+          "Projects_Get_MaximumSet_Gen": {
             "$ref": "./examples/Projects_Get_MaximumSet_Gen.json"
           }
         }
@@ -637,7 +679,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "resource",
@@ -645,7 +687,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Project"
+              "$ref": "#/definitions/Models.Project"
             }
           }
         ],
@@ -653,13 +695,13 @@
           "200": {
             "description": "Resource 'Project' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Project"
+              "$ref": "#/definitions/Models.Project"
             }
           },
           "201": {
             "description": "Resource 'Project' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Project"
+              "$ref": "#/definitions/Models.Project"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -682,6 +724,9 @@
         },
         "x-ms-examples": {
           "Projects_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Projects_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Projects_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Projects_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
@@ -722,7 +767,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "properties",
@@ -730,7 +775,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProjectUpdate"
+              "$ref": "#/definitions/Models.ProjectUpdate"
             }
           }
         ],
@@ -738,7 +783,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Project"
+              "$ref": "#/definitions/Models.Project"
             }
           },
           "202": {
@@ -764,6 +809,9 @@
         },
         "x-ms-examples": {
           "Projects_Update_MaximumSet": {
+            "$ref": "./examples/Projects_Update_MaximumSet_Gen.json"
+          },
+          "Projects_Update_MaximumSet_Gen": {
             "$ref": "./examples/Projects_Update_MaximumSet_Gen.json"
           }
         },
@@ -804,7 +852,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -823,6 +871,9 @@
         },
         "x-ms-examples": {
           "Projects_Delete_MaximumSet": {
+            "$ref": "./examples/Projects_Delete_MaximumSet_Gen.json"
+          },
+          "Projects_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Projects_Delete_MaximumSet_Gen.json"
           }
         }
@@ -861,7 +912,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -880,6 +931,9 @@
         },
         "x-ms-examples": {
           "Branches_List_MaximumSet": {
+            "$ref": "./examples/Branches_List_MaximumSet_Gen.json"
+          },
+          "Branches_List_MaximumSet_Gen": {
             "$ref": "./examples/Branches_List_MaximumSet_Gen.json"
           }
         },
@@ -921,7 +975,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -929,14 +983,14 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Branch"
+              "$ref": "#/definitions/Models.Branch"
             }
           },
           "default": {
@@ -948,6 +1002,9 @@
         },
         "x-ms-examples": {
           "Branches_Get_MaximumSet": {
+            "$ref": "./examples/Branches_Get_MaximumSet_Gen.json"
+          },
+          "Branches_Get_MaximumSet_Gen": {
             "$ref": "./examples/Branches_Get_MaximumSet_Gen.json"
           }
         }
@@ -984,7 +1041,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -992,7 +1049,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "resource",
@@ -1000,7 +1057,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Branch"
+              "$ref": "#/definitions/Models.Branch"
             }
           }
         ],
@@ -1008,13 +1065,13 @@
           "200": {
             "description": "Resource 'Branch' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Branch"
+              "$ref": "#/definitions/Models.Branch"
             }
           },
           "201": {
             "description": "Resource 'Branch' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Branch"
+              "$ref": "#/definitions/Models.Branch"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1037,6 +1094,9 @@
         },
         "x-ms-examples": {
           "Branches_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Branches_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Branches_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Branches_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
@@ -1077,7 +1137,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1085,7 +1145,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "properties",
@@ -1093,7 +1153,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BranchUpdate"
+              "$ref": "#/definitions/Models.BranchUpdate"
             }
           }
         ],
@@ -1101,7 +1161,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Branch"
+              "$ref": "#/definitions/Models.Branch"
             }
           },
           "202": {
@@ -1127,6 +1187,9 @@
         },
         "x-ms-examples": {
           "Branches_Update_MaximumSet": {
+            "$ref": "./examples/Branches_Update_MaximumSet_Gen.json"
+          },
+          "Branches_Update_MaximumSet_Gen": {
             "$ref": "./examples/Branches_Update_MaximumSet_Gen.json"
           }
         },
@@ -1167,7 +1230,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1175,7 +1238,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -1194,6 +1257,9 @@
         },
         "x-ms-examples": {
           "Branches_Delete_MaximumSet": {
+            "$ref": "./examples/Branches_Delete_MaximumSet_Gen.json"
+          },
+          "Branches_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Branches_Delete_MaximumSet_Gen.json"
           }
         }
@@ -1232,7 +1298,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1240,7 +1306,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -1259,6 +1325,9 @@
         },
         "x-ms-examples": {
           "Computes_List_MaximumSet": {
+            "$ref": "./examples/Computes_List_MaximumSet_Gen.json"
+          },
+          "Computes_List_MaximumSet_Gen": {
             "$ref": "./examples/Computes_List_MaximumSet_Gen.json"
           }
         },
@@ -1300,7 +1369,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1308,7 +1377,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "computeName",
@@ -1316,14 +1385,14 @@
             "description": "The name of the Compute",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Compute"
+              "$ref": "#/definitions/Models.Compute"
             }
           },
           "default": {
@@ -1335,6 +1404,9 @@
         },
         "x-ms-examples": {
           "Computes_Get_MaximumSet": {
+            "$ref": "./examples/Computes_Get_MaximumSet_Gen.json"
+          },
+          "Computes_Get_MaximumSet_Gen": {
             "$ref": "./examples/Computes_Get_MaximumSet_Gen.json"
           }
         }
@@ -1371,7 +1443,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1379,7 +1451,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "computeName",
@@ -1387,7 +1459,7 @@
             "description": "The name of the Compute",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "resource",
@@ -1395,7 +1467,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Compute"
+              "$ref": "#/definitions/Models.Compute"
             }
           }
         ],
@@ -1403,13 +1475,13 @@
           "200": {
             "description": "Resource 'Compute' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Compute"
+              "$ref": "#/definitions/Models.Compute"
             }
           },
           "201": {
             "description": "Resource 'Compute' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Compute"
+              "$ref": "#/definitions/Models.Compute"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1432,6 +1504,9 @@
         },
         "x-ms-examples": {
           "Computes_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Computes_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Computes_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Computes_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
@@ -1472,7 +1547,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1480,7 +1555,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "computeName",
@@ -1488,7 +1563,7 @@
             "description": "The name of the Compute",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "properties",
@@ -1496,7 +1571,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ComputeUpdate"
+              "$ref": "#/definitions/Models.ComputeUpdate"
             }
           }
         ],
@@ -1504,7 +1579,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Compute"
+              "$ref": "#/definitions/Models.Compute"
             }
           },
           "202": {
@@ -1530,6 +1605,9 @@
         },
         "x-ms-examples": {
           "Computes_Update_MaximumSet": {
+            "$ref": "./examples/Computes_Update_MaximumSet_Gen.json"
+          },
+          "Computes_Update_MaximumSet_Gen": {
             "$ref": "./examples/Computes_Update_MaximumSet_Gen.json"
           }
         },
@@ -1570,7 +1648,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1578,7 +1656,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "computeName",
@@ -1586,7 +1664,7 @@
             "description": "The name of the Compute",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -1605,6 +1683,9 @@
         },
         "x-ms-examples": {
           "Computes_Delete_MaximumSet": {
+            "$ref": "./examples/Computes_Delete_MaximumSet_Gen.json"
+          },
+          "Computes_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Computes_Delete_MaximumSet_Gen.json"
           }
         }
@@ -1643,7 +1724,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1651,7 +1732,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -1670,6 +1751,9 @@
         },
         "x-ms-examples": {
           "Endpoints_List_MaximumSet": {
+            "$ref": "./examples/Endpoints_List_MaximumSet_Gen.json"
+          },
+          "Endpoints_List_MaximumSet_Gen": {
             "$ref": "./examples/Endpoints_List_MaximumSet_Gen.json"
           }
         },
@@ -1711,7 +1795,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1719,7 +1803,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "endpointName",
@@ -1727,14 +1811,14 @@
             "description": "The name of the Endpoint",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/Models.Endpoint"
             }
           },
           "default": {
@@ -1746,6 +1830,9 @@
         },
         "x-ms-examples": {
           "Endpoints_Get_MaximumSet": {
+            "$ref": "./examples/Endpoints_Get_MaximumSet_Gen.json"
+          },
+          "Endpoints_Get_MaximumSet_Gen": {
             "$ref": "./examples/Endpoints_Get_MaximumSet_Gen.json"
           }
         }
@@ -1782,7 +1869,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1790,7 +1877,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "endpointName",
@@ -1798,7 +1885,7 @@
             "description": "The name of the Endpoint",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "resource",
@@ -1806,7 +1893,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/Models.Endpoint"
             }
           }
         ],
@@ -1814,13 +1901,13 @@
           "200": {
             "description": "Resource 'Endpoint' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/Models.Endpoint"
             }
           },
           "201": {
             "description": "Resource 'Endpoint' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/Models.Endpoint"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1843,6 +1930,9 @@
         },
         "x-ms-examples": {
           "Endpoints_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Endpoints_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Endpoints_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
@@ -1883,7 +1973,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1891,7 +1981,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "endpointName",
@@ -1899,7 +1989,7 @@
             "description": "The name of the Endpoint",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "properties",
@@ -1907,7 +1997,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EndpointUpdate"
+              "$ref": "#/definitions/Models.EndpointUpdate"
             }
           }
         ],
@@ -1915,7 +2005,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/Models.Endpoint"
             }
           },
           "202": {
@@ -1941,6 +2031,9 @@
         },
         "x-ms-examples": {
           "Endpoints_Update_MaximumSet": {
+            "$ref": "./examples/Endpoints_Update_MaximumSet_Gen.json"
+          },
+          "Endpoints_Update_MaximumSet_Gen": {
             "$ref": "./examples/Endpoints_Update_MaximumSet_Gen.json"
           }
         },
@@ -1981,7 +2074,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -1989,7 +2082,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "endpointName",
@@ -1997,7 +2090,7 @@
             "description": "The name of the Endpoint",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -2017,11 +2110,14 @@
         "x-ms-examples": {
           "Endpoints_Delete_MaximumSet": {
             "$ref": "./examples/Endpoints_Delete_MaximumSet_Gen.json"
+          },
+          "Endpoints_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Endpoints_Delete_MaximumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonDatabases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neondatabases": {
       "get": {
         "operationId": "NeonDatabases_List",
         "tags": [
@@ -2054,7 +2150,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -2062,7 +2158,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -2082,6 +2178,9 @@
         "x-ms-examples": {
           "NeonDatabases_List_MaximumSet": {
             "$ref": "./examples/NeonDatabases_List_MaximumSet_Gen.json"
+          },
+          "NeonDatabases_List_MaximumSet_Gen": {
+            "$ref": "./examples/NeonDatabases_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2089,7 +2188,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonDatabases/{neonDatabaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neondatabases/{neonDatabaseName}": {
       "get": {
         "operationId": "NeonDatabases_Get",
         "tags": [
@@ -2122,7 +2221,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -2130,7 +2229,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "neonDatabaseName",
@@ -2138,14 +2237,14 @@
             "description": "The name of the NeonDatabase",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NeonDatabase"
+              "$ref": "#/definitions/Models.NeonDatabase"
             }
           },
           "default": {
@@ -2157,6 +2256,9 @@
         },
         "x-ms-examples": {
           "NeonDatabases_Get_MaximumSet": {
+            "$ref": "./examples/NeonDatabases_Get_MaximumSet_Gen.json"
+          },
+          "NeonDatabases_Get_MaximumSet_Gen": {
             "$ref": "./examples/NeonDatabases_Get_MaximumSet_Gen.json"
           }
         }
@@ -2193,7 +2295,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -2201,7 +2303,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "neonDatabaseName",
@@ -2209,7 +2311,7 @@
             "description": "The name of the NeonDatabase",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "resource",
@@ -2217,7 +2319,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NeonDatabase"
+              "$ref": "#/definitions/Models.NeonDatabase"
             }
           }
         ],
@@ -2225,13 +2327,13 @@
           "200": {
             "description": "Resource 'NeonDatabase' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NeonDatabase"
+              "$ref": "#/definitions/Models.NeonDatabase"
             }
           },
           "201": {
             "description": "Resource 'NeonDatabase' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NeonDatabase"
+              "$ref": "#/definitions/Models.NeonDatabase"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2254,6 +2356,9 @@
         },
         "x-ms-examples": {
           "NeonDatabases_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/NeonDatabases_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "NeonDatabases_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/NeonDatabases_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
@@ -2294,7 +2399,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -2302,7 +2407,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "neonDatabaseName",
@@ -2310,7 +2415,7 @@
             "description": "The name of the NeonDatabase",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "properties",
@@ -2318,7 +2423,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NeonDatabaseUpdate"
+              "$ref": "#/definitions/Models.NeonDatabaseUpdate"
             }
           }
         ],
@@ -2326,7 +2431,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NeonDatabase"
+              "$ref": "#/definitions/Models.NeonDatabase"
             }
           },
           "202": {
@@ -2352,6 +2457,9 @@
         },
         "x-ms-examples": {
           "NeonDatabases_Update_MaximumSet": {
+            "$ref": "./examples/NeonDatabases_Update_MaximumSet_Gen.json"
+          },
+          "NeonDatabases_Update_MaximumSet_Gen": {
             "$ref": "./examples/NeonDatabases_Update_MaximumSet_Gen.json"
           }
         },
@@ -2392,7 +2500,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -2400,7 +2508,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "neonDatabaseName",
@@ -2408,7 +2516,7 @@
             "description": "The name of the NeonDatabase",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -2428,11 +2536,14 @@
         "x-ms-examples": {
           "NeonDatabases_Delete_MaximumSet": {
             "$ref": "./examples/NeonDatabases_Delete_MaximumSet_Gen.json"
+          },
+          "NeonDatabases_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NeonDatabases_Delete_MaximumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonRoles": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonroles": {
       "get": {
         "operationId": "NeonRoles_List",
         "tags": [
@@ -2465,7 +2576,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -2473,7 +2584,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -2493,6 +2604,9 @@
         "x-ms-examples": {
           "NeonRoles_List_MaximumSet": {
             "$ref": "./examples/NeonRoles_List_MaximumSet_Gen.json"
+          },
+          "NeonRoles_List_MaximumSet_Gen": {
+            "$ref": "./examples/NeonRoles_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2500,7 +2614,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonRoles/{neonRoleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonroles/{neonRoleName}": {
       "get": {
         "operationId": "NeonRoles_Get",
         "tags": [
@@ -2533,7 +2647,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -2541,7 +2655,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "neonRoleName",
@@ -2549,14 +2663,14 @@
             "description": "The name of the NeonRole",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NeonRole"
+              "$ref": "#/definitions/Models.NeonRole"
             }
           },
           "default": {
@@ -2568,6 +2682,9 @@
         },
         "x-ms-examples": {
           "NeonRoles_Get_MaximumSet": {
+            "$ref": "./examples/NeonRoles_Get_MaximumSet_Gen.json"
+          },
+          "NeonRoles_Get_MaximumSet_Gen": {
             "$ref": "./examples/NeonRoles_Get_MaximumSet_Gen.json"
           }
         }
@@ -2604,7 +2721,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -2612,7 +2729,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "neonRoleName",
@@ -2620,7 +2737,7 @@
             "description": "The name of the NeonRole",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "resource",
@@ -2628,7 +2745,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NeonRole"
+              "$ref": "#/definitions/Models.NeonRole"
             }
           }
         ],
@@ -2636,13 +2753,13 @@
           "200": {
             "description": "Resource 'NeonRole' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NeonRole"
+              "$ref": "#/definitions/Models.NeonRole"
             }
           },
           "201": {
             "description": "Resource 'NeonRole' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NeonRole"
+              "$ref": "#/definitions/Models.NeonRole"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2665,6 +2782,9 @@
         },
         "x-ms-examples": {
           "NeonRoles_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/NeonRoles_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "NeonRoles_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/NeonRoles_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
@@ -2705,7 +2825,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -2713,7 +2833,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "neonRoleName",
@@ -2721,7 +2841,7 @@
             "description": "The name of the NeonRole",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "properties",
@@ -2729,7 +2849,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NeonRoleUpdate"
+              "$ref": "#/definitions/Models.NeonRoleUpdate"
             }
           }
         ],
@@ -2737,7 +2857,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NeonRole"
+              "$ref": "#/definitions/Models.NeonRole"
             }
           },
           "202": {
@@ -2763,6 +2883,9 @@
         },
         "x-ms-examples": {
           "NeonRoles_Update_MaximumSet": {
+            "$ref": "./examples/NeonRoles_Update_MaximumSet_Gen.json"
+          },
+          "NeonRoles_Update_MaximumSet_Gen": {
             "$ref": "./examples/NeonRoles_Update_MaximumSet_Gen.json"
           }
         },
@@ -2803,7 +2926,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "branchName",
@@ -2811,7 +2934,7 @@
             "description": "The name of the Branch",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "neonRoleName",
@@ -2819,7 +2942,7 @@
             "description": "The name of the NeonRole",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           }
         ],
         "responses": {
@@ -2838,6 +2961,9 @@
         },
         "x-ms-examples": {
           "NeonRoles_Delete_MaximumSet": {
+            "$ref": "./examples/NeonRoles_Delete_MaximumSet_Gen.json"
+          },
+          "NeonRoles_Delete_MaximumSet_Gen": {
             "$ref": "./examples/NeonRoles_Delete_MaximumSet_Gen.json"
           }
         }
@@ -2876,7 +3002,7 @@
             "description": "The name of the Project",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
           },
           {
             "name": "connectionUriParameters",
@@ -2904,6 +3030,9 @@
         },
         "x-ms-examples": {
           "Projects_GetConnectionUri_MaximumSet": {
+            "$ref": "./examples/Projects_GetConnectionUri_MaximumSet_Gen.json"
+          },
+          "Projects_GetConnectionUri_MaximumSet_Gen": {
             "$ref": "./examples/Projects_GetConnectionUri_MaximumSet_Gen.json"
           }
         }
@@ -2960,21 +3089,6 @@
       },
       "readOnly": true
     },
-    "Branch": {
-      "type": "object",
-      "description": "The Branch resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.BranchProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "BranchListResult": {
       "type": "object",
       "description": "The response of a Branch list operation.",
@@ -2983,7 +3097,7 @@
           "type": "array",
           "description": "The Branch items on this page",
           "items": {
-            "$ref": "#/definitions/Branch"
+            "$ref": "#/definitions/Models.Branch"
           }
         },
         "nextLink": {
@@ -2994,36 +3108,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "BranchUpdate": {
-      "type": "object",
-      "description": "The Branch resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.BranchProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "Compute": {
-      "type": "object",
-      "description": "The Compute resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.ComputeProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "ComputeListResult": {
@@ -3034,7 +3118,7 @@
           "type": "array",
           "description": "The Compute items on this page",
           "items": {
-            "$ref": "#/definitions/Compute"
+            "$ref": "#/definitions/Models.Compute"
           }
         },
         "nextLink": {
@@ -3045,36 +3129,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "ComputeUpdate": {
-      "type": "object",
-      "description": "The Compute resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.ComputeProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "Endpoint": {
-      "type": "object",
-      "description": "The Neon compute endpoint resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.EndpointProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "EndpointListResult": {
@@ -3085,7 +3139,7 @@
           "type": "array",
           "description": "The Endpoint items on this page",
           "items": {
-            "$ref": "#/definitions/Endpoint"
+            "$ref": "#/definitions/Models.Endpoint"
           }
         },
         "nextLink": {
@@ -3096,21 +3150,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "EndpointUpdate": {
-      "type": "object",
-      "description": "The Neon compute endpoint resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.EndpointProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "LiftrBase.CompanyDetails": {
@@ -3635,6 +3674,21 @@
         }
       }
     },
+    "Models.BranchUpdate": {
+      "type": "object",
+      "description": "The Branch resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Models.BranchProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "Models.Compute": {
       "type": "object",
       "description": "The Compute resource type.",
@@ -3702,6 +3756,21 @@
           "description": "Current status of the compute instance"
         }
       }
+    },
+    "Models.ComputeUpdate": {
+      "type": "object",
+      "description": "The Compute resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Models.ComputeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "Models.ConnectionUriProperties": {
       "type": "object",
@@ -3862,6 +3931,21 @@
         ]
       }
     },
+    "Models.EndpointUpdate": {
+      "type": "object",
+      "description": "The Neon compute endpoint resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Models.EndpointProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "Models.NeonDatabase": {
       "type": "object",
       "description": "The Neon Database resource type.",
@@ -3919,6 +4003,21 @@
           "description": "The name of the role that owns the database"
         }
       }
+    },
+    "Models.NeonDatabaseUpdate": {
+      "type": "object",
+      "description": "The Neon Database resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Models.NeonDatabaseProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "Models.NeonRole": {
       "type": "object",
@@ -3984,6 +4083,21 @@
           "description": "Indicates whether the role has superuser privileges"
         }
       }
+    },
+    "Models.NeonRoleUpdate": {
+      "type": "object",
+      "description": "The Neon Role resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Models.NeonRoleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "Models.PgVersion": {
       "type": "object",
@@ -4184,12 +4298,12 @@
         }
       }
     },
-    "NeonDatabase": {
+    "Models.ProjectUpdate": {
       "type": "object",
-      "description": "The Neon Database resource type.",
+      "description": "The Project resource type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Models.NeonDatabaseProperties",
+          "$ref": "#/definitions/Models.ProjectPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -4207,7 +4321,7 @@
           "type": "array",
           "description": "The NeonDatabase items on this page",
           "items": {
-            "$ref": "#/definitions/NeonDatabase"
+            "$ref": "#/definitions/Models.NeonDatabase"
           }
         },
         "nextLink": {
@@ -4218,36 +4332,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "NeonDatabaseUpdate": {
-      "type": "object",
-      "description": "The Neon Database resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.NeonDatabaseProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "NeonRole": {
-      "type": "object",
-      "description": "The Neon Role resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.NeonRoleProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "NeonRoleListResult": {
@@ -4258,7 +4342,7 @@
           "type": "array",
           "description": "The NeonRole items on this page",
           "items": {
-            "$ref": "#/definitions/NeonRole"
+            "$ref": "#/definitions/Models.NeonRole"
           }
         },
         "nextLink": {
@@ -4269,21 +4353,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "NeonRoleUpdate": {
-      "type": "object",
-      "description": "The Neon Role resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.NeonRoleProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "OrganizationResource": {
@@ -4337,21 +4406,6 @@
         }
       ]
     },
-    "Project": {
-      "type": "object",
-      "description": "The Project resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.ProjectProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "ProjectListResult": {
       "type": "object",
       "description": "The response of a Project list operation.",
@@ -4360,7 +4414,7 @@
           "type": "array",
           "description": "The Project items on this page",
           "items": {
-            "$ref": "#/definitions/Project"
+            "$ref": "#/definitions/Models.Project"
           }
         },
         "nextLink": {
@@ -4371,21 +4425,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "ProjectUpdate": {
-      "type": "object",
-      "description": "The Project resource type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Models.ProjectPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
       ]
     }
   },
