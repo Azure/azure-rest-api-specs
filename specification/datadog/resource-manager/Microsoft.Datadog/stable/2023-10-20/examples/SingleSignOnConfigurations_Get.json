@@ -1,10 +1,10 @@
 {
   "parameters": {
     "api-version": "2023-10-20",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
+    "configurationName": "default",
     "monitorName": "myMonitor",
-    "configurationName": "default"
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -12,11 +12,13 @@
         "name": "default",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/singleSignOnConfigurations/default",
         "properties": {
-          "singleSignOnState": "Enable",
           "enterpriseAppId": "00000000-0000-0000-0000-000000000000",
+          "singleSignOnState": "Enable",
           "singleSignOnUrl": "https://www.datadoghq.com/IAmSomeHash"
         }
       }
     }
-  }
+  },
+  "operationId": "SingleSignOnConfigurations_Get",
+  "title": "SingleSignOnConfigurations_Get"
 }

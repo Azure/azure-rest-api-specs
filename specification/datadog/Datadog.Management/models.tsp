@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.Datadog;
 
@@ -834,4 +835,56 @@ model MonitoredSubscription {
    * Definition of the properties for a TagRules resource.
    */
   tagRules?: MonitoringTagRulesProperties;
+}
+/**
+ * Represents the SKU of a resource.
+ */
+model ResourceSku {
+  /**
+   * The name of the SKU.
+   */
+  name: string;
+}
+
+/**
+ * Represents the display information for an operation.
+ */
+model OperationDisplay {
+  /**
+   * The service provider: Microsoft.Datadog.
+   */
+  provider?: string;
+
+  /**
+   * The resource on which the operation is performed.
+   */
+  resource?: string;
+
+  /**
+   * The type of operation: create, update, delete, etc.
+   */
+  operation?: string;
+
+  /**
+   * A localized description of the operation.
+   */
+  description?: string;
+}
+
+/**
+ * Represents a paginated list of operation results.
+ */
+@pagedResult
+model OperationListResult {
+  /**
+   * The list of operations.
+   */
+  @items
+  value: OperationResult[];
+
+  /**
+   * The URL to get the next set of results, if any.
+   */
+  @nextLink
+  nextLink?: string;
 }

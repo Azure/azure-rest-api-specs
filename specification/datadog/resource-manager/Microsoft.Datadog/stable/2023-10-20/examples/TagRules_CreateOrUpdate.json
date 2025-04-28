@@ -1,66 +1,68 @@
 {
   "parameters": {
     "api-version": "2023-10-20",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor",
-    "ruleSetName": "default",
     "body": {
       "properties": {
+        "automuting": true,
         "logRules": {
-          "sendAadLogs": false,
-          "sendSubscriptionLogs": true,
-          "sendResourceLogs": true,
           "filteringTags": [
             {
               "name": "Environment",
-              "value": "Prod",
-              "action": "Include"
+              "action": "Include",
+              "value": "Prod"
             },
             {
               "name": "Environment",
-              "value": "Dev",
-              "action": "Exclude"
+              "action": "Exclude",
+              "value": "Dev"
             }
-          ]
+          ],
+          "sendAadLogs": false,
+          "sendResourceLogs": true,
+          "sendSubscriptionLogs": true
         },
         "metricRules": {
           "filteringTags": []
-        },
-        "automuting": true
+        }
       }
-    }
+    },
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "ruleSetName": "default",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "name": "default",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/tagRules/default",
         "type": "Microsoft.Datadog/monitors/tagRules",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/tagRules/default",
         "properties": {
+          "automuting": true,
           "logRules": {
-            "sendAadLogs": false,
-            "sendSubscriptionLogs": true,
-            "sendResourceLogs": true,
             "filteringTags": [
               {
                 "name": "Environment",
-                "value": "Prod",
-                "action": "Include"
+                "action": "Include",
+                "value": "Prod"
               },
               {
                 "name": "Environment",
-                "value": "Dev",
-                "action": "Exclude"
+                "action": "Exclude",
+                "value": "Dev"
               }
-            ]
+            ],
+            "sendAadLogs": false,
+            "sendResourceLogs": true,
+            "sendSubscriptionLogs": true
           },
           "metricRules": {
             "filteringTags": []
-          },
-          "automuting": true
+          }
         }
       }
     }
-  }
+  },
+  "operationId": "TagRules_CreateOrUpdate",
+  "title": "TagRules_CreateOrUpdate"
 }

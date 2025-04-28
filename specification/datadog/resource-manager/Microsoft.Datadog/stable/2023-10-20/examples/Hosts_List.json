@@ -1,13 +1,14 @@
 {
   "parameters": {
     "api-version": "2023-10-20",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "monitorName": "myMonitor",
     "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": null,
         "value": [
           {
             "name": "vm1",
@@ -22,9 +23,9 @@
             "meta": {
               "agentVersion": "7.19.2",
               "installMethod": {
+                "installerVersion": "install_script-1.0.0",
                 "tool": "install_script",
-                "toolVersion": "install_script",
-                "installerVersion": "install_script-1.0.0"
+                "toolVersion": "install_script"
               },
               "logsAgent": {
                 "transport": ""
@@ -44,18 +45,19 @@
             "meta": {
               "agentVersion": "7.18.1",
               "installMethod": {
+                "installerVersion": "install_script-1.0.0",
                 "tool": "install_script",
-                "toolVersion": "install_script",
-                "installerVersion": "install_script-1.0.0"
+                "toolVersion": "install_script"
               },
               "logsAgent": {
                 "transport": "HTTP"
               }
             }
           }
-        ],
-        "nextLink": null
+        ]
       }
     }
-  }
+  },
+  "operationId": "Monitors_ListHosts",
+  "title": "Monitors_ListHosts"
 }

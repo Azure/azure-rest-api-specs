@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2023-10-20",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "monitorName": "myMonitor",
     "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -11,62 +11,62 @@
         "value": [
           {
             "name": "default",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/monitoredSubscriptions/default",
             "type": "Microsoft.Datadog/monitors/monitoredSubscriptions",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/monitoredSubscriptions/default",
             "properties": {
               "monitoredSubscriptionList": [
                 {
-                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
                   "status": "Active",
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
                   "tagRules": {
+                    "automuting": true,
                     "logRules": {
-                      "sendAadLogs": false,
-                      "sendSubscriptionLogs": true,
-                      "sendResourceLogs": true,
                       "filteringTags": [
                         {
                           "name": "Environment",
-                          "value": "Prod",
-                          "action": "Include"
+                          "action": "Include",
+                          "value": "Prod"
                         },
                         {
                           "name": "Environment",
-                          "value": "Dev",
-                          "action": "Exclude"
+                          "action": "Exclude",
+                          "value": "Dev"
                         }
-                      ]
+                      ],
+                      "sendAadLogs": false,
+                      "sendResourceLogs": true,
+                      "sendSubscriptionLogs": true
                     },
                     "metricRules": {
                       "filteringTags": []
-                    },
-                    "automuting": true
+                    }
                   }
                 },
                 {
-                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
                   "status": "Failed",
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
                   "tagRules": {
+                    "automuting": true,
                     "logRules": {
-                      "sendAadLogs": false,
-                      "sendSubscriptionLogs": true,
-                      "sendResourceLogs": true,
                       "filteringTags": [
                         {
                           "name": "Environment",
-                          "value": "Prod",
-                          "action": "Include"
+                          "action": "Include",
+                          "value": "Prod"
                         },
                         {
                           "name": "Environment",
-                          "value": "Dev",
-                          "action": "Exclude"
+                          "action": "Exclude",
+                          "value": "Dev"
                         }
-                      ]
+                      ],
+                      "sendAadLogs": false,
+                      "sendResourceLogs": true,
+                      "sendSubscriptionLogs": true
                     },
                     "metricRules": {
                       "filteringTags": []
-                    },
-                    "automuting": true
+                    }
                   }
                 }
               ]
@@ -75,5 +75,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "MonitoredSubscriptions_List",
+  "title": "Monitors_GetMonitoredSubscriptions"
 }
