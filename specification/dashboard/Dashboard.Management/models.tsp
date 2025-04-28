@@ -167,7 +167,7 @@ model ManagedGrafanaProperties {
   /**
    * Provisioning state of the resource.
    */
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
   provisioningState?: ProvisioningState;
 
   /**
@@ -271,7 +271,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
