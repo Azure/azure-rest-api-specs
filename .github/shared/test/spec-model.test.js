@@ -143,10 +143,11 @@ describe("getAffectedReadmeTags", () => {
     expect(actual).toEqual(expected);
   });
 
-  it.skipIf(isWindows)(
+  it.skipIf(isWindows())(
     "returns affected readme tags for multiple tags",
     async ({ expect }) => {
       const specModel = await getSpecModel("specification/1", {
+        // TODO: Cleanup
         repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
       });
       const actual = getAffectedReadmeTags(
@@ -163,7 +164,7 @@ describe("getAffectedReadmeTags", () => {
 });
 
 describe("getAffectedSwaggers", () => {
-  it.skipIf(isWindows)(
+  it.skipIf(isWindows())(
     "returns directly referenced swagger",
     async ({ expect }) => {
       const specModel = await getSpecModel("specification/1", {
@@ -194,7 +195,7 @@ describe("getAffectedSwaggers", () => {
     );
   });
 
-  it.skipIf(isWindows)(
+  it.skipIf(isWindows())(
     "returns correct swaggers for one layer of dependencies",
     async ({ expect }) => {
       const specModel = await getSpecModel("specification/1", {
@@ -214,7 +215,7 @@ describe("getAffectedSwaggers", () => {
     },
   );
 
-  it.skipIf(isWindows)(
+  it.skipIf(isWindows())(
     "returns correct swaggers for two layers of dependencies",
     async ({ expect }) => {
       const specModel = await getSpecModel("specification/1", {
@@ -234,7 +235,7 @@ describe("getAffectedSwaggers", () => {
     },
   );
 
-  it.skipIf(isWindows)(
+  it.skipIf(isWindows())(
     "returns correct swaggers for three layers of dependencies",
     async ({ expect }) => {
       const specModel = await getSpecModel("specification/1", {
@@ -255,7 +256,7 @@ describe("getAffectedSwaggers", () => {
     },
   );
 
-  it.skipIf(isWindows)(
+  it.skipIf(isWindows())(
     "returns correctly for multiple shared dependencies",
     async ({ expect }) => {
       const specModel = await getSpecModel("specification/1", {
