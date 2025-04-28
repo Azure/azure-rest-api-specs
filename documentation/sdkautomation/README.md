@@ -77,7 +77,7 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
 
 #### SpecRepoConfig Schema
 
-See [./SpecConfigSchema.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/SpecConfigSchema.json)
+See [SpecConfigSchema.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/SpecConfigSchema.json)
 
 ### SwaggerToSdkConfig
 This is type of file `./swagger_to_sdk_config.json` in sdk repo.
@@ -153,7 +153,7 @@ The working folder of all the scripts is the __root folder of sdk repo__.
 
 #### SwaggerToSdkConfig Schema
 
-See [./SwaggerToSdkConfigSchema.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/SwaggerToSdkConfigSchema.json)
+See [SwaggerToSdkConfigSchema.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/SwaggerToSdkConfigSchema.json)
 
 ### GenerateInput
 
@@ -185,7 +185,7 @@ Input file for generate script.
 
 #### GenerateInput Schema
 
-See [./GenerateInputSchema.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/GenerateInputSchema.json)
+See [GenerateInputSchema.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/GenerateInputSchema.json)
 
 ### GenerateOutput
 
@@ -224,7 +224,7 @@ Output file for generate script.
 
 #### GenerateOutput Schema
 
-See [./GenerateOutputSchema.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/GenerateOutputSchema.json)
+See [GenerateOutputSchema.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/GenerateOutputSchema.json)
 
 ### InstallInstructionScriptInput
 
@@ -246,7 +246,7 @@ Input of install instruction script.
 
 #### InstallInstructionScriptInput Schema
 
-See [./InstallInstructionScriptInput.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/InstallInstructionScriptInput.json)
+See [InstallInstructionScriptInput.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/InstallInstructionScriptInputSchema.json)
 
 ### InstallInstructionScriptOutput
 
@@ -262,22 +262,10 @@ Output of install instruction script.
 
 #### InstallInstructionScriptOutput Schema
 
-See [./InstallInstructionScriptOutput.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/InstallInstructionScriptOutput.json)
+See [InstallInstructionScriptOutput.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/InstallInstructionScriptOutputSchema.json)
 
 ### InitOutput
 
 #### InitOutput Schema
 
-```jsonc
-{
-  "type": "object",
-  "properties": {
-    "envs": {
-      // Environment variable to be set in following scripts.
-      "additionalProperties": {
-        "type": "string"
-      }
-    }
-  }
-}
-```
+See [InitOutputSchema.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/InitOutputSchema.json)
