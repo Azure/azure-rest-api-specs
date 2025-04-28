@@ -11,3 +11,7 @@ using Azure.ClientGenerator.Core;
   "SecretsStoreExtensionMgmtClient",
   "java"
 );
+@@clientName(Microsoft.SecretSyncController,
+  "SecretsStoreExtensionManagementClient",
+  "javascript"
+);
