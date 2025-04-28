@@ -2,11 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-
-using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
@@ -28,49 +24,49 @@ union RegistryEndpointAuthenticationMethod {
 
 @doc("System assigned identity authentication")
 @added(Versions.`2025-07-01-preview`)
-model SystemAssignedIdentityAuthentication
+model RegistryEndpointSystemAssignedIdentityAuthentication
   extends RegistryEndpointAuthentication {
   @doc("The authentication method.")
   method: SystemAssignedManagedIdentity;
 
   @doc("System assigned managed identity properties")
-  systemAssignedManagedIdentitySettings: SystemAssignedManagedIdentitySettings;
+  systemAssignedManagedIdentitySettings: RegistryEndpointSystemAssignedManagedIdentitySettings;
 }
 
 @doc("User assigned identity authentication")
 @added(Versions.`2025-07-01-preview`)
-model UserAssignedIdentityAuthentication
+model RegistryEndpointUserAssignedIdentityAuthentication
   extends RegistryEndpointAuthentication {
   @doc("The authentication method.")
   method: UserAssignedManagedIdentity;
 
   @doc("User assigned managed identity properties")
-  userAssignedManagedIdentitySettings: UserAssignedManagedIdentitySettings;
+  userAssignedManagedIdentitySettings: RegistryEndpointUserAssignedManagedIdentitySettings;
 }
 
 @doc("System assigned managed identity properties")
 @added(Versions.`2025-07-01-preview`)
-model SystemAssignedManagedIdentitySettings {
+model RegistryEndpointSystemAssignedManagedIdentitySettings {
   ...BaseSystemAssignedManagedIdentity;
 }
 
 @doc("User assigned managed identity properties")
 @added(Versions.`2025-07-01-preview`)
-model UserAssignedManagedIdentitySettings {
+model RegistryEndpointUserAssignedManagedIdentitySettings {
   ...BaseUserAssignedManagedIdentity;
 }
 
 @doc("Anonymous authentication")
 @added(Versions.`2025-07-01-preview`)
-model AnonymousAuthentication extends RegistryEndpointAuthentication {
+model RegistryEndpointAnonymousAuthentication extends RegistryEndpointAuthentication {
   @doc("The authentication method.")
   method: Anonymous;
 
   @doc("Anonymous authentication properties")
-  anonymousSettings: AnonymousSettings;
+  anonymousSettings: RegistryEndpointAnonymousSettings;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRD type is modeled as empty object"
-@doc("Anonymous authentication properties")
+@doc("RegistryEdnpoint Anonymous authentication properties")
 @added(Versions.`2025-07-01-preview`)
-model AnonymousSettings {}
+model RegistryEndpointAnonymousSettings {}

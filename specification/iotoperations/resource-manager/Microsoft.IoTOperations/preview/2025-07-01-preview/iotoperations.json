@@ -3662,25 +3662,6 @@
         }
       }
     },
-    "AnonymousAuthentication": {
-      "type": "object",
-      "description": "Anonymous authentication",
-      "properties": {
-        "anonymousSettings": {
-          "$ref": "#/definitions/AnonymousSettings",
-          "description": "Anonymous authentication properties"
-        }
-      },
-      "required": [
-        "anonymousSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegistryEndpointAuthentication"
-        }
-      ],
-      "x-ms-discriminator-value": "Anonymous"
-    },
     "AnonymousMethod": {
       "type": "string",
       "description": "x509 Certificate Method",
@@ -3698,10 +3679,6 @@
           }
         ]
       }
-    },
-    "AnonymousSettings": {
-      "type": "object",
-      "description": "Anonymous authentication properties"
     },
     "AuthorizationConfig": {
       "type": "object",
@@ -5257,7 +5234,7 @@
       "properties": {
         "requests": {
           "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaimResourceRequests",
-          "description": "Requests represents the minimum amount of compute resources required.\nIf Requests is omitted for any container, the Kubelet will enforce that the container has at least as much CPU/Memory as requested. \nIf it is omitted for all containers, the Kubelet will enforce that the Pod has at least as much CPU/Memory as requested. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+          "description": "Requests represents the minimum amount of compute resources required.\nIf Requests is omitted for any container, the Kubelet will enforce that the container has at least as much CPU/Memory as requested.\nIf it is omitted for all containers, the Kubelet will enforce that the Pod has at least as much CPU/Memory as requested. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
         }
       },
       "required": [
@@ -5298,11 +5275,11 @@
         },
         "dataSource": {
           "$ref": "#/definitions/LocalKubernetesReference",
-          "description": "This field can be used to specify either: \n- An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)\n- An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. \n\nIf the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field."
+          "description": "This field can be used to specify either:\n- An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)\n- An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source.\n\nIf the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field."
         },
         "dataSourceRef": {
           "$ref": "#/definitions/KubernetesReference",
-          "description": "Specifies the object from which to populate the volume with data, if a non-empty volume is desired. \nThis may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object. \nWhen this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. \nThis field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value. \nFor backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. \n\nThere are two important differences between DataSource and DataSourceRef:\n- While DataSource only allows two specific types of objects, DataSourceRef allows any non-core object, as well as PersistentVolumeClaim objects.\n- While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified."
+          "description": "Specifies the object from which to populate the volume with data, if a non-empty volume is desired.\nThis may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object.\nWhen this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner.\nThis field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value.\nFor backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty.\n\nThere are two important differences between DataSource and DataSourceRef:\n- While DataSource only allows two specific types of objects, DataSourceRef allows any non-core object, as well as PersistentVolumeClaim objects.\n- While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified."
         },
         "resources": {
           "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaimResourceRequirements",
@@ -8834,6 +8811,29 @@
       },
       "readOnly": true
     },
+    "RegistryEndpointAnonymousAuthentication": {
+      "type": "object",
+      "description": "Anonymous authentication",
+      "properties": {
+        "anonymousSettings": {
+          "$ref": "#/definitions/RegistryEndpointAnonymousSettings",
+          "description": "Anonymous authentication properties"
+        }
+      },
+      "required": [
+        "anonymousSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegistryEndpointAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "Anonymous"
+    },
+    "RegistryEndpointAnonymousSettings": {
+      "type": "object",
+      "description": "RegistryEdnpoint Anonymous authentication properties"
+    },
     "RegistryEndpointAuthentication": {
       "type": "object",
       "description": "Model for RegistryEndpointAuthentication",
@@ -8949,6 +8949,76 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "RegistryEndpointSystemAssignedIdentityAuthentication": {
+      "type": "object",
+      "description": "System assigned identity authentication",
+      "properties": {
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/RegistryEndpointSystemAssignedManagedIdentitySettings",
+          "description": "System assigned managed identity properties"
+        }
+      },
+      "required": [
+        "systemAssignedManagedIdentitySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegistryEndpointAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
+    },
+    "RegistryEndpointSystemAssignedManagedIdentitySettings": {
+      "type": "object",
+      "description": "System assigned managed identity properties",
+      "properties": {
+        "audience": {
+          "type": "string",
+          "description": "Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration."
+        }
+      }
+    },
+    "RegistryEndpointUserAssignedIdentityAuthentication": {
+      "type": "object",
+      "description": "User assigned identity authentication",
+      "properties": {
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/RegistryEndpointUserAssignedManagedIdentitySettings",
+          "description": "User assigned managed identity properties"
+        }
+      },
+      "required": [
+        "userAssignedManagedIdentitySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegistryEndpointAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "UserAssignedManagedIdentity"
+    },
+    "RegistryEndpointUserAssignedManagedIdentitySettings": {
+      "type": "object",
+      "description": "User assigned managed identity properties",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client ID for the user-assigned managed identity."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Resource identifier (application ID URI) of the resource, affixed with the .default suffix."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID."
+        }
+      },
+      "required": [
+        "clientId",
+        "tenantId"
       ]
     },
     "RetainmentPolicyMode": {
@@ -9459,35 +9529,6 @@
         }
       }
     },
-    "SystemAssignedIdentityAuthentication": {
-      "type": "object",
-      "description": "System assigned identity authentication",
-      "properties": {
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/SystemAssignedManagedIdentitySettings",
-          "description": "System assigned managed identity properties"
-        }
-      },
-      "required": [
-        "systemAssignedManagedIdentitySettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegistryEndpointAuthentication"
-        }
-      ],
-      "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
-    },
-    "SystemAssignedManagedIdentitySettings": {
-      "type": "object",
-      "description": "System assigned managed identity properties",
-      "properties": {
-        "audience": {
-          "type": "string",
-          "description": "Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration."
-        }
-      }
-    },
     "TlsCertMethod": {
       "type": "object",
       "description": "Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported",
@@ -9680,47 +9721,6 @@
           }
         ]
       }
-    },
-    "UserAssignedIdentityAuthentication": {
-      "type": "object",
-      "description": "User assigned identity authentication",
-      "properties": {
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/UserAssignedManagedIdentitySettings",
-          "description": "User assigned managed identity properties"
-        }
-      },
-      "required": [
-        "userAssignedManagedIdentitySettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegistryEndpointAuthentication"
-        }
-      ],
-      "x-ms-discriminator-value": "UserAssignedManagedIdentity"
-    },
-    "UserAssignedManagedIdentitySettings": {
-      "type": "object",
-      "description": "User assigned managed identity properties",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "Client ID for the user-assigned managed identity."
-        },
-        "scope": {
-          "type": "string",
-          "description": "Resource identifier (application ID URI) of the resource, affixed with the .default suffix."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant ID."
-        }
-      },
-      "required": [
-        "clientId",
-        "tenantId"
-      ]
     },
     "VolumeClaimResourceRequirements": {
       "type": "object",
