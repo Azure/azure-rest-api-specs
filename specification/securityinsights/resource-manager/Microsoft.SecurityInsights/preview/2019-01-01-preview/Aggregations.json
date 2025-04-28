@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/aggregations/{aggregationsName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/aggregations/{aggregationsName}": {
       "get": {
         "x-ms-examples": {
           "Get aggregative data for all cases under the defined workspace, between the time range if specified.": {
@@ -55,6 +55,9 @@
           },
           {
             "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
             "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
