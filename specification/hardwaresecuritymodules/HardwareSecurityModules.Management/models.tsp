@@ -408,7 +408,8 @@ model Resource {
  * Cloud HSM Cluster Resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model CloudHsmClusterResource extends TrackedResource {
+model CloudHsmClusterResource
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */

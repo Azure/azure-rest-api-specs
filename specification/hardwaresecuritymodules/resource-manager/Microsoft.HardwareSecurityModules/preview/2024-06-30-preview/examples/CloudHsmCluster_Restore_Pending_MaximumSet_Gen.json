@@ -1,25 +1,25 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rgcloudhsm",
-    "cloudHsmClusterName": "chsm1",
     "api-version": "2024-06-30-preview",
-    "jobId": "572a45927fc240e1ac075de27371680b"
+    "cloudHsmClusterName": "chsm1",
+    "jobId": "572a45927fc240e1ac075de27371680b",
+    "resourceGroupName": "rgcloudhsm",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
-      "headers": {
-        "Retry-After": 5,
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/chsm1?api-version=2022-03-31&operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9"
-      },
       "body": {
         "properties": {
-          "status": "InProgress",
-          "statusDetails": "Restore operation is in progress",
-          "startTime": "2022-09-12T12:00:00.0000000Z",
           "endTime": "2022-09-12T12:00:00.0000000Z",
-          "jobId": "572a45927fc240e1ac075de27371680b"
+          "jobId": "572a45927fc240e1ac075de27371680b",
+          "startTime": "2022-09-12T12:00:00.0000000Z",
+          "status": "InProgress",
+          "statusDetails": "Restore operation is in progress"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/chsm1?api-version=2022-03-31&operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9",
+        "Retry-After": 5
       }
     },
     "202": {
@@ -27,5 +27,7 @@
         "Location": "https://chsm-getrestorejob-polling-uri/"
       }
     }
-  }
+  },
+  "operationId": "CloudHsmClusterRestoreStatus_Get",
+  "title": "CloudHsmCluster_Get_Restore_Status_MaximumSet_Gen"
 }

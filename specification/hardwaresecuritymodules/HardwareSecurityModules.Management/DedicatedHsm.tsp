@@ -96,7 +96,8 @@ interface DedicatedHsms {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = DedicatedHsmError
   >;
 
   /**

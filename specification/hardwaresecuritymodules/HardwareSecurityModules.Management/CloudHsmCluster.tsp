@@ -149,48 +149,55 @@ interface CloudHsmClusters {
   listByCloudHsmCluster is ArmResourceActionSync<
     CloudHsmCluster,
     void,
-    ArmResponse<ResourceListResult<PrivateLinkResource>>
+    ArmResponse<ResourceListResult<Azure.ResourceManager.CommonTypes.PrivateLinkResource>>
   >;
 
   /**
    * Gets the backup operation status of the specified Cloud HSM Cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @get
-  @action("{jobId}")
   @operationId("CloudHsmClusterBackupStatus_Get")
-  cloudHsmClusterBackupStatusGet is ArmResourceActionSync<
-    CloudHsmCluster,
-    void,
-    ArmResponse<BackupResult> | AcceptedResponse,
-    Parameters = {
-      /**
-       * The id returned as part of the backup request
-       */
-      @path
-      jobId: string;
-    }
-  >;
+  @get
+  cloudHsmClusterBackupStatusGet(
+    ...ResourceInstanceParameters<
+      Resource,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<CloudHsmCluster>
+    >,
 
+    @path
+    @segment("cloudHsmClusters")
+    @minLength(3)
+    @maxLength(23)
+    @pattern("^[a-zA-Z0-9-]{3,23}$")
+    cloudHsmClusterName: string,
+
+    @path
+    @segment("backupOperationStatus")
+    jobId: string,
+  ): BackupResult | ArmAcceptedResponse | ErrorResponse;
   /**
    * Gets the restore operation status of the specified Cloud HSM Cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{jobId}")
   @operationId("CloudHsmClusterRestoreStatus_Get")
-  cloudHsmClusterRestoreStatusGet is ArmResourceActionSync<
-    CloudHsmCluster,
-    void,
-    ArmResponse<RestoreResult> | AcceptedResponse,
-    Parameters = {
-      /**
-       * The id returned as part of the backup request
-       */
-      @path
-      jobId: string;
-    }
-  >;
+  cloudHsmClusterRestoreStatusGet(
+    ...ResourceInstanceParameters<
+      Resource,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<CloudHsmCluster>
+    >,
+
+    @path
+    @segment("cloudHsmClusters")
+    @minLength(3)
+    @maxLength(23)
+    @pattern("^[a-zA-Z0-9-]{3,23}$")
+    cloudHsmClusterName: string,
+
+    @path
+    @segment("restoreOperationStatus")
+    jobId: string,
+  ): RestoreResult | ArmAcceptedResponse | ErrorResponse;
 }
 
 @@maxLength(CloudHsmCluster.name, 23);
