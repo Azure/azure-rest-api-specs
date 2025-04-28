@@ -301,7 +301,6 @@ export function getAffectedSwaggers(swaggerFile, specModel) {
   for (const [, readme] of specModel.readmes) {
     for (const [, swaggers] of readme.tags) {
       for (const swagger of swaggers) {
-
         // The readme.md file directly references the given swaggerFile
         if (swagger.path === swaggerFile) {
           affectedSwaggers.add(swaggerFile);
@@ -314,12 +313,12 @@ export function getAffectedSwaggers(swaggerFile, specModel) {
         }
 
         // Check the swagger file's refs and add any which depend on the given
-        // swaggerFile. 
-        // For example "->" means "depends on", given: 
-        // Tag 1 directly references a with a relationship of: 
+        // swaggerFile.
+        // For example "->" means "depends on", given:
+        // Tag 1 directly references a with a relationship of:
         // a -> b -> c
         // If c is changed, then a and b are affected, but since b is not
-        // directly referenced in the readme, it can only be discovered by 
+        // directly referenced in the readme, it can only be discovered by
         // evaluating a's dependencies.
         for (const [ref, dependsOn] of swagger.refs) {
           if (dependsOn.has(swaggerFile)) {
