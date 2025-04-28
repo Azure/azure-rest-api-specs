@@ -29,3 +29,14 @@ export type VsoLogs = Map<
     warnings?: string[];
   }
 >;
+
+/**
+ * Represents the result of the spec-gen-sdk generation process.
+ */
+export interface SpecGenSdkArtifactInfo {
+  managementPlane: boolean;
+  dataPlane: boolean;
+  language?: string;
+  labelAction?: boolean;
+  isSpecGenSdkCheckRequired?: boolean;
+}
