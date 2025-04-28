@@ -23,6 +23,7 @@ model DatadogSingleSignOnResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
 interface DatadogSingleSignOnResources {
   /**

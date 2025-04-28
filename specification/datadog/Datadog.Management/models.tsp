@@ -571,6 +571,7 @@ model IdentityProperties {
 /**
  * The parameters for a PATCH request to a monitor resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
 model DatadogMonitorResourceUpdateParameters {
   /**
    * The set of properties that can be update in a PATCH request to a monitor resource.
@@ -620,6 +621,7 @@ model BillingInfoResponse {
 /**
  * Marketplace SAAS Info of the resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MarketplaceSaaSInfo {
   /**
    * Marketplace Subscription Id. This is a GUID-formatted string.
@@ -809,6 +811,7 @@ model SubscriptionList {
   /**
    * List of subscriptions and the state of the monitoring.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   monitoredSubscriptionList?: MonitoredSubscription[];
 }
 
