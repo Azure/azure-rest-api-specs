@@ -11,9 +11,9 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-projects-1dp.json"
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
-    package-dir: "azure-ai-projects-onedp"
+    package-dir: "azure-ai-projects"
     package-name: "{package-dir}"
-    namespace: "azure.ai.projects.onedp"
+    namespace: "azure.ai.projects"
     api-version: "2025-05-15-preview"
     flavor: azure
     generate-test: true
@@ -35,8 +35,20 @@ options:
     generateTest: true
     generateMetadata: false
     packageDetails:
-      name: "@azure/ai-projects-1dp"
+    name: "@azure/ai-projects-1dp"
     flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-projects"
+    namespace: com.azure.ai.projects
+    partial-update: true
+    enable-sync-stack: true
+    generate-tests: false
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/ai/projects"
+    package-dir: "azaiprojects"
+    generate-fakes: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
