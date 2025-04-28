@@ -11,6 +11,8 @@ using Azure.Core;
 
 namespace Microsoft.HealthBot;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
 model UserAssignedIdentityMap is Record<UserAssignedIdentity>;
 /**
  * The type of identity that creates/modifies resources
@@ -241,13 +243,13 @@ model UserAssignedIdentity {
    * The principal ID of the user-assigned identity.
    */
   @visibility(Lifecycle.Read)
-  principalId: string;
+  principalId?: string;
 
   /**
    * The client ID of the user-assigned identity.
    */
   @visibility(Lifecycle.Read)
-  clientId: string;
+  clientId?: string;
 }
 
 /**
@@ -359,7 +361,7 @@ model OperationDetail {
    * Additional properties.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
-  properties?: Record<unknown>;
+  properties?: {};
 }
 
 /**
@@ -369,23 +371,19 @@ model OperationDisplay {
   /** 
   The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
    */
-  @visibility(Lifecycle.Read)
   provider?: string;
 
   /** 
     The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
      */
-  @visibility(Lifecycle.Read)
   resource?: string;
 
   /** 
     The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
      */
-  @visibility(Lifecycle.Read)
   operation?: string;
 
   /** The short, localized friendly description of the operation; suitable for tool tips and detailed views. */
-  @visibility(Lifecycle.Read)
   description?: string;
 }
 

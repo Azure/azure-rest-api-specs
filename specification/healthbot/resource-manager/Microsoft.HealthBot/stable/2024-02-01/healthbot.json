@@ -781,19 +781,23 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "The name of the key vault key."
+          "description": "The name of the key vault key.",
+          "x-ms-client-name": "KeyName"
         },
         "keyVersion": {
           "type": "string",
-          "description": "The version of the key vault key."
+          "description": "The version of the key vault key.",
+          "x-ms-client-name": "KeyVersion"
         },
         "keyVaultUri": {
           "type": "string",
-          "description": "The Uri of the key vault."
+          "description": "The Uri of the key vault.",
+          "x-ms-client-name": "KeyVaultUri"
         },
         "userIdentity": {
           "type": "string",
-          "description": "The user assigned identity (ARM resource id) that has access to the key."
+          "description": "The user assigned identity (ARM resource id) that has access to the key.",
+          "x-ms-client-name": "UserIdentity"
         }
       },
       "required": [
@@ -823,8 +827,7 @@
         },
         "properties": {
           "type": "object",
-          "description": "Additional properties.",
-          "additionalProperties": {}
+          "description": "Additional properties."
         }
       }
     },
@@ -834,23 +837,19 @@
       "properties": {
         "provider": {
           "type": "string",
-          "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
-          "readOnly": true
+          "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\"."
         },
         "resource": {
           "type": "string",
-          "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
-          "readOnly": true
+          "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\"."
         },
         "operation": {
           "type": "string",
-          "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
-          "readOnly": true
+          "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\"."
         },
         "description": {
           "type": "string",
-          "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
-          "readOnly": true
+          "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views."
         }
       }
     },
@@ -910,11 +909,7 @@
           "description": "The client ID of the user-assigned identity.",
           "readOnly": true
         }
-      },
-      "required": [
-        "principalId",
-        "clientId"
-      ]
+      }
     },
     "UserAssignedIdentityMap": {
       "type": "object",
