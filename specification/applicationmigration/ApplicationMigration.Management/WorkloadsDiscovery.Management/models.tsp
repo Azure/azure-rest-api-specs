@@ -822,6 +822,11 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   isDrEnabled?: BoolValue;
 
   /**
+   * Indicates whether the super user access is enabled on the instance.
+   */
+  isSuperUserAccessEnabled;
+
+  /**
    * Resource tags
    */
   @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
@@ -996,6 +1001,11 @@ model PgsqlInstanceResourcePatch {
   isDrEnabled?: BoolValue;
 
   /**
+   * Indicates whether the super user access is enabled on the instance.
+   */
+  isSuperUserAccessEnabled;
+
+  /**
    * Resource tags
    */
   @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
@@ -1158,6 +1168,26 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   hasSuperUserCreatedObjects?: BoolValue;
 
   /**
+   * Indicates whether the system has custom casts defined.
+   */
+  hasCustomCasts?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) parsers defined.
+   */
+  hasCustomFtsParsers?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) templates defined.
+   */
+  hasCustomFtsTemplates?: BoolValue;
+
+  /**
+   * Indicates whether the access to the machine's file system is enabled for the database objects.
+   */
+  fileSystemAccessEnabled? ?: BoolValue;
+
+  /**
    * The number of errors.
    */
   errorCount?: int64;
@@ -1246,6 +1276,26 @@ model PgsqlDatabaseResourcePatch {
    * Gets or sets hasSuperUserCreatedObjects of PGSQL database.
    */
   hasSuperUserCreatedObjects?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom casts defined.
+   */
+  hasCustomCasts?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) parsers defined.
+   */
+  hasCustomFtsParsers?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) templates defined.
+   */
+  hasCustomFtsTemplates?: BoolValue;
+
+  /**
+   * Indicates whether the access to the machine's file system is enabled for the database objects.
+   */
+  fileSystemAccessEnabled? ?: BoolValue;
 
   /**
    * The number of errors.
