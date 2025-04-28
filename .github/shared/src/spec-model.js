@@ -119,13 +119,13 @@ async function getReadme(readmePath, repoRoot, logger) {
       continue;
     }
 
-    // This heuristic assumes that a previous definition of the tag with no 
+    // This heuristic assumes that a previous definition of the tag with no
     // swaggers means that the previous definition did not have an input-file
     // key. It's possible that the previous defintion had an `input-file: []`
     // or something like it.
     if (tags.has(tagName) && tags.get(tagName).length > 0) {
       // The tag already exists and has a swagger file. This is an error as
-      // there should only be one definition of input-files per tag. 
+      // there should only be one definition of input-files per tag.
       const message = `Multiple input-file definitions for tag ${tagName} in ${readmePath}`;
       logger?.error(message);
       throw new Error(message);
@@ -135,11 +135,16 @@ async function getReadme(readmePath, repoRoot, logger) {
     const swaggers = [];
 
     // It's possible for input-file to be a string or an array
-    const inputFiles = Array.isArray(obj["input-file"]) 
+    const inputFiles = Array.isArray(obj["input-file"])
       ? obj["input-file"]
       : [obj["input-file"]];
     for (const swaggerPath of inputFiles) {
-      const swagger = await getSwagger(swaggerPath, dirname(readmePath), repoRoot, logger);
+      const swagger = await getSwagger(
+        swaggerPath,
+        dirname(readmePath),
+        repoRoot,
+        logger,
+      );
       swaggers.push(swagger);
     }
 
@@ -167,17 +172,18 @@ async function getSwagger(swaggerPath, readmeFolder, repoRoot, logger) {
   logger?.debug(`getSwagger: ${swaggerPath}, ${readmeFolder}, ${repoRoot}`);
 
   let normalizedSwaggerPath = swaggerPath;
-  // Ignore uses of "$(this-folder)" in the swagger path. It refers to the 
+  // Ignore uses of "$(this-folder)" in the swagger path. It refers to the
   // current folder anyway and can be substituted with "."
   if (swaggerPath.includes("$(this-folder)")) {
     normalizedSwaggerPath = swaggerPath.replaceAll("$(this-folder)", ".");
   }
 
-
-  // Some swagger paths contain backslashes. These should be normalized when 
+  // Some swagger paths contain backslashes. These should be normalized when
   // encountered though the expected format for input-files is forward slashes.
   if (normalizedSwaggerPath.includes("\\")) {
-    logger?.info(`Found backslash (\\) in swagger path ${swaggerPath}. Replacing with forward slash (/)`);
+    logger?.info(
+      `Found backslash (\\) in swagger path ${swaggerPath}. Replacing with forward slash (/)`,
+    );
     normalizedSwaggerPath = normalizedSwaggerPath.replaceAll("\\", "/");
   }
   const fullPath = resolve(repoRoot, readmeFolder, normalizedSwaggerPath);
@@ -186,13 +192,17 @@ async function getSwagger(swaggerPath, readmeFolder, repoRoot, logger) {
   return {
     path: join(readmeFolder, normalizedSwaggerPath),
     content,
-    refs: await getExternalFileRefs(normalizedSwaggerPath, readmeFolder, repoRoot),
+    refs: await getExternalFileRefs(
+      normalizedSwaggerPath,
+      readmeFolder,
+      repoRoot,
+    ),
   };
 }
 
 /**
- * Reads all levels of external file references in a swagger file and returns a 
- * map where the key is the referenced swagger file and the value is a set of 
+ * Reads all levels of external file references in a swagger file and returns a
+ * map where the key is the referenced swagger file and the value is a set of
  * all references that the file depends on, including transitive dependencies.
  * @param {string} swaggerPath,
  * @param {string} readmePath
@@ -206,7 +216,9 @@ async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
   const externalFileRefs = new Map();
 
   while (toVisit.size > 0) {
-    const currentSwagger = /** @type {string} */ (toVisit.values().next().value);
+    const currentSwagger = /** @type {string} */ (
+      toVisit.values().next().value
+    );
 
     toVisit.delete(currentSwagger);
     visited.add(currentSwagger);
@@ -217,11 +229,11 @@ async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
     );
     const currentRefs = currentSchema
       .paths("file")
-      .map(p => relative(repoRoot, p))
+      .map((p) => relative(repoRoot, p))
       .filter((p) => !visited.has(p) && !example(p));
 
     // Add the ref to the dependency map for the current path
-    if (currentSwagger !== initialSwagger) { 
+    if (currentSwagger !== initialSwagger) {
       if (!externalFileRefs.has(currentSwagger)) {
         externalFileRefs.set(currentSwagger, new Set());
       }
@@ -231,7 +243,7 @@ async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
       if (currentSwagger !== initialSwagger) {
         externalFileRefs.get(currentSwagger).add(ref);
       }
-      
+
       if (!visited.has(ref)) {
         toVisit.add(ref);
       }
@@ -242,13 +254,13 @@ async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
 }
 
 /**
- * Given a swagger file, return the readme files and tags that reference that 
+ * Given a swagger file, return the readme files and tags that reference that
  * swagger file.
- * @param {string} swaggerFile 
- * @param {SpecModel} specModel 
+ * @param {string} swaggerFile
+ * @param {SpecModel} specModel
  * @returns {Map<string, Set<string>>}
  */
-export function getAffectedReadmeTags(swaggerFile, specModel) { 
+export function getAffectedReadmeTags(swaggerFile, specModel) {
   const affectedReadmes = new Map();
 
   for (const [readmePath, readme] of specModel.readmes) {
@@ -263,7 +275,7 @@ export function getAffectedReadmeTags(swaggerFile, specModel) {
           continue;
         }
 
-        // Because refs contains the full set of transitive dependencies, only 
+        // Because refs contains the full set of transitive dependencies, only
         // check if the swagger file is in the map keys.
         if (swagger.refs.has(swaggerFile)) {
           if (!affectedReadmes.has(readmePath)) {
@@ -280,8 +292,8 @@ export function getAffectedReadmeTags(swaggerFile, specModel) {
 /**
  * Given a swagger file, return the swagger files that are affected by the
  * changes in the given swagger file.
- * @param {string} swaggerFile 
- * @param {SpecModel} specModel 
+ * @param {string} swaggerFile
+ * @param {SpecModel} specModel
  * @returns {Set<string>}
  */
 export function getAffectedSwaggers(swaggerFile, specModel) {
@@ -289,20 +301,19 @@ export function getAffectedSwaggers(swaggerFile, specModel) {
   for (const [, readme] of specModel.readmes) {
     for (const [, swaggers] of readme.tags) {
       for (const swagger of swaggers) {
-
         if (swagger.path === swaggerFile) {
           affectedSwaggers.add(swagger.path);
         }
-        
-        if (swagger.refs.has(swaggerFile)) { 
+
+        if (swagger.refs.has(swaggerFile)) {
           affectedSwaggers.add(swagger.path);
         }
 
-        // Check the swagger file's refs and add any which depend on the 
-        // swagger file. These potentially transitive dependencies may not be 
+        // Check the swagger file's refs and add any which depend on the
+        // swagger file. These potentially transitive dependencies may not be
         // referenced directly in a readme file.
-        for (const [ref, dependsOn] of swagger.refs) { 
-          if (dependsOn.has(swaggerFile)) { 
+        for (const [ref, dependsOn] of swagger.refs) {
+          if (dependsOn.has(swaggerFile)) {
             affectedSwaggers.add(ref);
           }
         }
@@ -312,7 +323,9 @@ export function getAffectedSwaggers(swaggerFile, specModel) {
 
   // The swagger file supplied does not exist in the given specModel
   if (affectedSwaggers.size === 0) {
-    throw new Error(`No affected swaggers found in specModel for ${swaggerFile}`);
+    throw new Error(
+      `No affected swaggers found in specModel for ${swaggerFile}`,
+    );
   }
 
   // Add the existing swagger file to the affected swagger file list
