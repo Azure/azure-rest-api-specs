@@ -21,6 +21,17 @@ model CloudHsmCluster
     SegmentName = "cloudHsmClusters",
     NamePattern = "^[a-zA-Z0-9-]{3,23}$"
   >;
+
+  /**
+   * Managed service identity (system assigned and/or user assigned identities)
+   */
+  identity?: ManagedServiceIdentity;
+
+  /**
+   * SKU details
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  sku?: CloudHsmClusterSku;
 }
 
 @armResourceOperations
@@ -149,7 +160,7 @@ interface CloudHsmClusters {
   listByCloudHsmCluster is ArmResourceActionSync<
     CloudHsmCluster,
     void,
-    ArmResponse<ResourceListResult<Azure.ResourceManager.CommonTypes.PrivateLinkResource>>
+    CommonTypes.PrivateLinkResourceListResult
   >;
 
   /**

@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./CloudHsmCluster.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./DedicatedHsm.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -28,7 +29,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Azure HSM Resource Provider" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.HardwareSecurityModules;
 
 /**

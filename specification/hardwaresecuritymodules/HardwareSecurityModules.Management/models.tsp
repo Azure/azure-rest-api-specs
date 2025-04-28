@@ -324,12 +324,12 @@ model PrivateEndpointConnectionProperties {
   /**
    * The private endpoint resource.
    */
-  privateEndpoint?: PrivateEndpoint;
+  privateEndpoint?: CommonTypes.PrivateEndpoint;
 
   /**
    * A collection of information about the state of the connection between service consumer and provider.
    */
-  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
+  privateLinkServiceConnectionState: CommonTypes.PrivateLinkServiceConnectionState;
 
   /**
    * The provisioning state of the private endpoint connection resource.
@@ -487,7 +487,7 @@ model CloudHsmClusterPatchParameters {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: ManagedServiceIdentity;
+  identity?: CommonTypes.ManagedServiceIdentity;
 }
 
 /**
