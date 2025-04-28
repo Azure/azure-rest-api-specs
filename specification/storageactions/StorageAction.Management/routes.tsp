@@ -28,7 +28,11 @@ interface StorageTasksOperationGroup {
     Request = StorageTaskPreviewAction,
     Response = StorageTaskPreviewAction,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = {
+      @path
+      @segment("locations")
+      location: string;
+    }
   >;
 }
 

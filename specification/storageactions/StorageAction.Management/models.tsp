@@ -569,15 +569,6 @@ model StorageTaskAssignment {
   id?: Azure.Core.armResourceIdentifier;
 }
 
-/** The default location parameter type. */
-model LocationParameter {
-  @path
-  @segment("locations")
-  @key
-  @doc("The location name.")
-  location: string;
-}
-
 /** The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only. */
 model StorageTaskNameParameter {
   @path

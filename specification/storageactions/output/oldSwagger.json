@@ -884,8 +884,52 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/StorageTaskProperties",
+          "$ref": "#/definitions/StorageTaskUpdateProperties",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StorageTaskUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "taskVersion": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 1,
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/StorageTaskAction"
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "ValidateSubscriptionQuotaBegin",
+            "ValidateSubscriptionQuotaEnd",
+            "Accepted",
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "creationTimeInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },
