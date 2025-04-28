@@ -24,10 +24,9 @@ options:
     package-dir: "arm-reviews"
     is-modular-library: true
     flavor: "azure"
-    experimental-extensible-enums: true
     experimentalExtensibleEnums: true
     generateMetadata: true
-    hierarchyClient: true
+    hierarchyClient: false
     enableOperationGroup: true
     packageDetails:
       name: "@azure/arm-reviews"
@@ -37,12 +36,13 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-samples: true
     generate-fakes: true
+    generate-examples: true
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-reviews"
+    package-name: "azure-mgmt-reviews"
     namespace: "azure.mgmt.reviews"
     generate-test: true
     generate-sample: true
