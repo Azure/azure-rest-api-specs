@@ -36,6 +36,15 @@ These settings apply only when `--tag=2025-07-01-preview` is specified on the co
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
   - Microsoft.LoadTestService/playwright/preview/2025-07-01-preview/playwright.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: playwright.json
+    reason: Seems like a tool bug, as the operations are generated automatically from the TrackedResourceOperations in the TypeSpec which should OmitDefaults for Patch. We want the default property values to be visible for other operations like Put and Get if they're not explicitly set by the end-user.
+  - code: DeleteResponseCodes
+    from: playwright.json
+    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/playwrightWorkspaces/{playwrightWorkspaceName}"].delete
 ```
 
 ### Tag: package-2024-12-01-preview
@@ -45,6 +54,34 @@ These settings apply only when `--tag=package-2024-12-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
   - Microsoft.LoadTestService/loadtesting/preview/2024-12-01-preview/loadtestservice.json
+directive:
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/limits/maxMonthlyVirtualUserHours"]
+    suppress: PathForNestedResource
+    reason: Load test resource limits API design.
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/limits/maxMonthlyVirtualUserHours"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/limits/maxMonthlyVirtualUserHours/set"]
+    suppress: ResourceNameRestriction
+    reason: The parent loadTests resource (existing API) does not have pattern restriction.
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/limits/maxMonthlyVirtualUserHours/set"]
+    suppress: PathForResourceAction
+    reason: API design for post action for the load testing resource limits.
+suppressions:
+  - code: ResourceNameRestriction
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.definitions["PagedOutboundEnvironmentEndpoint"]
 ```
 
 ### Tag: package-2023-12-01-preview
@@ -54,6 +91,20 @@ These settings apply only when `--tag=package-2023-12-01` is specified on the co
 ```yaml $(tag) == 'package-2023-12-01-preview'
 input-file:
   - Microsoft.LoadTestService/loadtesting/preview/2023-12-01-preview/loadtestservice.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.definitions["PagedOutboundEnvironmentEndpoint"]
 ```
 
 ### Tag: package-2022-12-01
@@ -63,4 +114,18 @@ These settings apply only when `--tag=package-2022-12-01` is specified on the co
 ```yaml $(tag) == 'package-2022-12-01'
 input-file:
   - Microsoft.LoadTestService/loadtesting/stable/2022-12-01/loadtestservice.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.definitions["PagedOutboundEnvironmentEndpoint"]
 ```
