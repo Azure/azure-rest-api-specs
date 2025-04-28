@@ -26,7 +26,7 @@ model ManagedGrafana
    * The Sku of the grafana resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  sku?: ResourceSkuProperty;
+  sku?: ResourceSku;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
