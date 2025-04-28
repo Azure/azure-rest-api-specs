@@ -7,7 +7,6 @@ using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
 
-
 alias AssetBase = {
   @doc("AssetId, a unique identifier for the asset")
   @visibility(Lifecycle.Read)
