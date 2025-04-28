@@ -96,7 +96,7 @@ model DiscoveryHandlerProperties {
  */
 @added(Versions.`2025-07-01-preview`)
 model DiscoveryHandlerAioMetadata {
-  ...AkriAioMetadata;  
+  ...AkriAioMetadata;
 }
 /**
  * DiscoveryHandlerDiagnostics properties
@@ -138,28 +138,26 @@ model DiscoveryHandlerDiscoverableDeviceEndpointType {
  */
 @added(Versions.`2025-07-01-preview`)
 model DiscoveryHandlerImageConfiguration {
-   /**
+  /**
    * The image of the managed configuration.
    */
-   image: string;
+  image: string;
 
+  /**
+   * The pull policy of the image
+   */
+  imagePullPolicy: ConnectorsImagePullPolicy;
 
-   /**
-    * The pull policy of the image
-    */
-   imagePullPolicy: ConnectorsImagePullPolicy;
- 
- 
-   /**
-    * Image pull secret for the image.
-    */
-   imagePullSecrets?: ConnectorsImagePullSecret[];
- 
-   /**
-    * The number of replicas for the managed configuration.
-    */
-   replicas?: int32;
-} 
+  /**
+   * Image pull secret for the image.
+   */
+  imagePullSecrets?: ConnectorsImagePullSecret[];
+
+  /**
+   * The number of replicas for the managed configuration.
+   */
+  replicas?: int32;
+}
 
 /**
  * DiscoveryHandlerSchedule properties
@@ -226,7 +224,7 @@ model DiscoveryHandlerScheduleRunOnce extends DiscoveryHandlerSchedule {
    * The time to run the discovery handler.
    */
   // Is this description correct?
-  runOnce?: string; // Should this be required? 
+  runOnce?: string; // Should this be required?
 }
 
 /**
@@ -243,5 +241,5 @@ model DiscoveryHandlerScheduleContinuous extends DiscoveryHandlerSchedule {
    * The time to run the discovery handler.
    */
   // Is this description correct?
-  continuous?: string; // Should this be required? 
+  continuous?: string; // Should this be required?
 }

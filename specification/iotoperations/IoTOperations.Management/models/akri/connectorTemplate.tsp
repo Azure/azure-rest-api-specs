@@ -78,7 +78,6 @@ model ConnectorTemplateProperties {
   version: string; // Probably not needed.
 }
 
-
 /**
  * ConnectorTemplateDeviceInboundEndpointType properties
  */
@@ -524,9 +523,6 @@ model ConnectorTemplatePersistentVolumeClaim {
    */
   mountPath: string;
 }
-
-
-
 
 /**
  * ConnectorTemplateHelmAdvancedConfiguration properties

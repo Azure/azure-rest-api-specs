@@ -11,17 +11,16 @@ using Azure.ResourceManager;
 namespace Microsoft.IoTOperations;
 
 alias AkriAioMetadata = {
-    /**
+  /**
    * The minimum version of AIO required for the connector.
    */
-    aioMinVersion?: string;
+  aioMinVersion?: string;
 
-    /**
-     * The maximum version of AIO required for the connector.
-     */
-    aioMaxVersion?: string;
+  /**
+   * The maximum version of AIO required for the connector.
+   */
+  aioMaxVersion?: string;
 };
-
 
 /**
  * ConnectorsMqttConnectionConfiguration properties
