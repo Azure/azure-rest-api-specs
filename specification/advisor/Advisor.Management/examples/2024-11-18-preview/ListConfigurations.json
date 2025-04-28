@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-11-18-preview",
+    "resourceGroup": "resourceGroup",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.Advisor/configurations",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
+            "properties": {
+              "digests": [
+                {
+                  "name": "digestConfigName",
+                  "actionGroupResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+                  "categories": [
+                    "HighAvailability",
+                    "Security",
+                    "Performance",
+                    "Cost",
+                    "OperationalExcellence"
+                  ],
+                  "frequency": 30,
+                  "state": "Active",
+                  "language": "en"
+                }
+              ],
+              "duration": "7",
+              "exclude": false,
+              "lowCpuThreshold": "5"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Configurations_ListByResourceGroup",
+  "title": "GetConfigurations"
+}
