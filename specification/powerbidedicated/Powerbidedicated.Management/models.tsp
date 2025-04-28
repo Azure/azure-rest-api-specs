@@ -335,10 +335,6 @@ model DedicatedCapacities {
    */
   @items
   value: DedicatedCapacity[];
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-  @nextLink
-  nextLink?: string;
 }
 
 /**
@@ -643,7 +639,8 @@ model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}.
    */
-  name: string;
+  @visibility(Lifecycle.Read)
+  name?: string;
 
   /**
    * The object that represents the operation.
@@ -652,16 +649,19 @@ model Operation {
     /**
      * Service provider: Microsoft.PowerBIDedicated.
      */
+    @visibility(Lifecycle.Read)
     provider?: string;
 
     /**
      * Resource on which the operation is performed: capacity, etc.
      */
+    @visibility(Lifecycle.Read)
     resource?: string;
 
     /**
      * Operation type: create, update, delete, etc.
      */
+    @visibility(Lifecycle.Read)
     operation?: string;
 
     /**
@@ -673,6 +673,7 @@ model Operation {
   /**
    * Origin of the operation.
    */
+  @visibility(Lifecycle.Read)
   origin?: string;
 
   /**

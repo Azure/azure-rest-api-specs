@@ -158,9 +158,6 @@
           "Get details of a capacity": {
             "$ref": "./examples/listCapacitiesInSubscription.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -528,9 +525,6 @@
           "List capacities in resource group": {
             "$ref": "./examples/listCapacitiesInResourceGroup.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1268,9 +1262,6 @@
           "items": {
             "$ref": "#/definitions/DedicatedCapacity"
           }
-        },
-        "nextLink": {
-          "type": "string"
         }
       },
       "required": [
@@ -1506,7 +1497,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Operation name: {provider}/{resource}/{operation}."
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "readOnly": true
         },
         "display": {
           "type": "object",
@@ -1514,15 +1506,18 @@
           "properties": {
             "provider": {
               "type": "string",
-              "description": "Service provider: Microsoft.PowerBIDedicated."
+              "description": "Service provider: Microsoft.PowerBIDedicated.",
+              "readOnly": true
             },
             "resource": {
               "type": "string",
-              "description": "Resource on which the operation is performed: capacity, etc."
+              "description": "Resource on which the operation is performed: capacity, etc.",
+              "readOnly": true
             },
             "operation": {
               "type": "string",
-              "description": "Operation type: create, update, delete, etc."
+              "description": "Operation type: create, update, delete, etc.",
+              "readOnly": true
             },
             "description": {
               "type": "string",
@@ -1532,7 +1527,8 @@
         },
         "origin": {
           "type": "string",
-          "description": "Origin of the operation."
+          "description": "Origin of the operation.",
+          "readOnly": true
         },
         "properties": {
           "type": "object",
@@ -1544,10 +1540,7 @@
             }
           }
         }
-      },
-      "required": [
-        "name"
-      ]
+      }
     },
     "OperationListResult": {
       "type": "object",
