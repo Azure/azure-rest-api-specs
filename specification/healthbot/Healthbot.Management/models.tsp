@@ -11,6 +11,7 @@ using Azure.Core;
 
 namespace Microsoft.HealthBot;
 
+model UserAssignedIdentityMap is Record<UserAssignedIdentity>;
 /**
  * The type of identity that creates/modifies resources
  */
@@ -85,8 +86,7 @@ model Identity {
    * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    *
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
+  userAssignedIdentities?: UserAssignedIdentityMap;
 }
 
 /**
