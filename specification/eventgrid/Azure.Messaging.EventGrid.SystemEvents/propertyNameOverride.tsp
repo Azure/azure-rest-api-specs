@@ -152,3 +152,7 @@ using Azure.ClientGenerator.Core;
   "listItemId",
   "autorest"
 );
+@@clientName(AcsCallEndedByProperties.type,
+  "kind",
+  "autorest"
+);
