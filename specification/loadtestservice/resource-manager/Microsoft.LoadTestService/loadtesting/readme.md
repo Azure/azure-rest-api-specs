@@ -51,6 +51,20 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/limits/maxMonthlyVirtualUserHours/set"]
     suppress: PathForResourceAction
     reason: API design for post action for the load testing resource limits.
+suppressions:
+  - code: ResourceNameRestriction
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.definitions["PagedOutboundEnvironmentEndpoint"]
 ```
 
 ### Tag: package-2023-12-01-preview
@@ -69,6 +83,11 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.definitions["PagedOutboundEnvironmentEndpoint"]
 ```
 
 ### Tag: package-2022-12-01
@@ -79,6 +98,14 @@ These settings apply only when `--tag=package-2022-12-01` is specified on the co
 input-file:
   - stable/2022-12-01/loadtestservice.json
 suppressions:
+  - code: ResourceNameRestriction
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints"]
   - code: RequiredPropertiesMissingInResourceModel
     from: loadtestservice.json
     reason: Existing API, will be a breaking change for this api-version.
