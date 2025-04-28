@@ -31,6 +31,7 @@ and followed the instructions by checking all the boxes:
   [ARM resource provider contract](https://aka.ms/azurerpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
   I understand this is required before I can proceed to the diagram Step 2, "ARM API changes review", for this PR.
+- [ ] A [release plan](https://aka.ms/azsdkdocs/release-plans) has been created. If not, please create one as it will help guide you through the REST API and SDK creation process. 
 
 ## Additional information
 
