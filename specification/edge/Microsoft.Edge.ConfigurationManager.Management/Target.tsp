@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./ProvisioningState.tsp";
 import "./SolutionVersion.tsp";
+import "./State.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -52,6 +53,21 @@ model SolutionVersionParameter {
 
   @doc("Review ID")
   reviewId: string;
+}
+
+@doc("Update External Validation Status Parameter")
+model UpdateExternalValidationStatusParameter {
+  @doc("Solution Version Id")
+  solutionVersionId: string;
+
+  @doc("Error Details if any failure is there")
+  errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("External validation id")
+  externalValidationId: string;
+
+  @doc("Validation Status of external validation")
+  validationStatus: ValidationStatus;
 }
 
 @doc("Solution Dependency Context")
@@ -224,6 +240,13 @@ interface Targets {
   publishSolutionVersion is ArmResourceActionAsync<
     Target,
     SolutionVersionParameter,
+    SolutionVersion
+  >;
+
+  @doc("Post request to update external validation status")
+  updateExternalValidationStatus is ArmResourceActionAsync<
+    Target,
+    UpdateExternalValidationStatusParameter,
     SolutionVersion
   >;
 }

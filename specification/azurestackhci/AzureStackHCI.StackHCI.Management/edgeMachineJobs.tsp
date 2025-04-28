@@ -488,11 +488,14 @@ model UserDetails {
   @doc("Name of the user.")
   userName: string;
 
-  @doc("Type of the secret used for authentication.")
+  @doc("Type of the secret used for authentication. Change it to enum in public preview")
   secretType: string;
 
   @doc("Location of the secret used for authentication.")
-  secretLocation: string;
+  secretLocation?: string;
+
+  @doc("Location of the secret used for authentication.")
+  sshPubKey?: string[];
 }
 
 @doc("Onboarding resource type.")

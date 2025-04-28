@@ -1,15 +1,15 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { sdkLabels } from "../../shared/src/sdk-types.js";
 import { LabelAction } from "../src/label.js";
-import {
-  createMockCore,
-  createMockGithub,
-  createMockContext,
-} from "./mocks.js";
 import {
   getLabelAndAction,
   getLabelAndActionImpl,
 } from "../src/sdk-breaking-change-labels.js";
-import { sdkLabels } from "../../src/sdk-types.js";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "./mocks.js";
 
 // Mock dependencies
 vi.mock("../src/context.js", () => ({
@@ -424,6 +424,8 @@ describe("sdk-breaking-change-labels", () => {
         head_sha: inputs.head_sha,
         github: mockGithub,
         core: mockCore,
+        // Change default retry delay from 1000ms to 1ms to reduce test time
+        retryOptions: { initialDelayMs: 1 },
       });
 
       // Now expect the promise to reject

@@ -1,0 +1,178 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlServerInstanceName": "testSqlServerInstance",
+    "databaseName": "testdb",
+    "api-version": "2025-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "southeastasia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/testdb",
+        "name": "testdb",
+        "type": "Microsoft.AzureArcData/sqlServerInstances/databases",
+        "properties": {
+          "collationName": "SQL_Latin1_General_CP1_CI_AS",
+          "databaseCreationDate": "2022-04-05T16:26:33.883Z",
+          "compatibilityLevel": 150,
+          "state": "Online",
+          "isReadOnly": true,
+          "recoveryMode": "Full",
+          "sizeMB": 150.00,
+          "spaceAvailableMB": 100.00,
+          "logFileSizeMB": 70.00,
+          "dataFileSizeMB": 80.00,
+          "databaseOptions": {
+            "isAutoCloseOn": true,
+            "isAutoShrinkOn": true,
+            "isAutoCreateStatsOn": true,
+            "isAutoUpdateStatsOn": true,
+            "isMemoryOptimizationEnabled": true,
+            "isRemoteDataArchiveEnabled": true,
+            "isEncrypted": true,
+            "isTrustworthyOn": true,
+            "isHekatonFilesOn": false
+          },
+          "backupInformation": {
+            "lastFullBackup": "2022-05-05T16:26:33.883Z",
+            "lastLogBackup": "2022-05-10T16:26:33.883Z"
+          },
+          "backupPolicy": {
+            "retentionPeriodDays": 1,
+            "fullBackupDays": 1,
+            "differentialBackupHours": 12,
+            "transactionLogBackupMinutes": 30
+          },
+          "migration": {
+            "assessment": {
+              "assessmentUploadTime": "2024-03-15T00:14:52.0000000Z",
+              "databaseAssessments": [
+                {
+                  "appliesToMigrationTargetPlatform": "AzureSqlDatabase",
+                  "featureId": "ServiceBroker",
+                  "issueCategory": "Issue",
+                  "moreInformation": ""
+                }
+              ],
+              "targetReadiness": {
+                "azureSqlDatabase": {
+                  "numOfBlockerIssues": 0,
+                  "recommendationStatus": "Ready",
+                  "impactedObjectsSummary": [
+                    {
+                      "featureId": "ServerCredential",
+                      "numberImpacted": 1,
+                      "issueCategory": "Warning"
+                    },
+                    {
+                      "featureId": "AgentJobs",
+                      "numberImpacted": 3,
+                      "issueCategory": "Warning"
+                    },
+                    {
+                      "featureId": "PowerShellJob",
+                      "numberImpacted": 1,
+                      "issueCategory": "Warning"
+                    }
+                  ],
+                  "targetSku": {
+                    "category": {
+                      "computeTier": "Provisioned",
+                      "hardwareType": "Gen5",
+                      "sqlPurchasingModel": "vCore",
+                      "sqlServiceTier": "General Purpose",
+                      "zoneRedundancyAvailable": false
+                    },
+                    "computeSize": 2,
+                    "storageMaxSizeInMb": 1024.0,
+                    "predictedDataSizeInMb": 21.94,
+                    "predictedLogSizeInMb": 2.0,
+                    "maxStorageIops": 0.44,
+                    "maxThroughputMBps": 0.0
+                  },
+                  "monthlyCost": {
+                    "computeCost": 245.13,
+                    "storageCost": 0.18,
+                    "sqlLicenseCost": 445.22,
+                    "windowsLicenseCost": 4444.44,
+                    "totalCost": 245.31
+                  },
+                  "monthlyCostOptions": [
+                    {
+                      "keyName": "With1YearASPAndDevTest",
+                      "keyValue": {
+                        "computeCost": 245.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    },
+                    {
+                      "keyName": "With3YearASPAndDevTest",
+                      "keyValue": {
+                        "computeCost": 24.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    },
+                    {
+                      "keyName": "With1YearASPAndProd",
+                      "keyValue": {
+                        "computeCost": 242.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    }
+                  ]
+                },
+                "azureSqlManagedInstance": {
+                  "numOfBlockerIssues": 0,
+                  "recommendationStatus": "Ready",
+                  "impactedObjectsSummary": [
+                    {
+                      "featureId": "ServerCredential",
+                      "numberImpacted": 1,
+                      "issueCategory": "Warning"
+                    },
+                    {
+                      "featureId": "AgentJobs",
+                      "numberImpacted": 3,
+                      "issueCategory": "Warning"
+                    },
+                    {
+                      "featureId": "PowerShellJob",
+                      "numberImpacted": 1,
+                      "issueCategory": "Warning"
+                    }
+                  ]
+                },
+                "azureSqlVirtualMachine": {
+                  "numOfBlockerIssues": 0,
+                  "recommendationStatus": "Ready"
+                }
+              }
+            }
+          },
+          "earliestRestoreDate": "2022-05-10T16:26:33.883Z",
+          "lastDatabaseUploadTime": "2023-03-29T14:13:12Z",
+          "createMode": "PointInTimeRestore",
+          "sourceDatabaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/MyDatabase",
+          "vmId": "12345678-1234-1234-1234-123456789123",
+          "restorePointInTime": "2022-05-05T16:26:33.883Z"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    }
+  }
+}

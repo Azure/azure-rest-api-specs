@@ -170,6 +170,12 @@ union ConnectorType {
   @doc("ManagedAzureMapsWeatherSource source connector.")
   ManagedAzureMapsWeatherSource: "ManagedAzureMapsWeatherSource",
 
+  @doc("EventHub source connector.")
+  EventHubSource: "EventHubSource",
+
+  @doc("Dataverse source connector.")
+  DataverseSource: "DataverseSource",
+
   string,
 }
 

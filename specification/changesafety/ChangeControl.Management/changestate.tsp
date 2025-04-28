@@ -5,11 +5,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./commonmodels.tsp";
 import "./stageprogression.tsp";
 import "./stagemap.tsp";
+import "@typespec/versioning";
 
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ChangeSafety;
 
@@ -74,19 +76,30 @@ model ChangeStateProperties {
   @doc("Schema of parameters that will be provided for each stageProgression.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   stageParameters: Record<Parameter>;
+
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
+  @added(Versions.v2025_03_01_preview)
+  @doc("Referenced stagemap snapshot.")
+  @visibility(Lifecycle.Read)
+  stageMapSnapshot?: Array<string | StageMap>;
 }
 
-@doc("RetrieveNextStage POST Action response.")
+@doc("RetrieveNextStages POST Action response.")
 model RetrieveNextStagesResponse {
   @doc("ChangeState resource Id.")
   changeStateResourceId: ChangeStateResourceId;
 
+  @removed(Versions.v2025_03_01_preview)
   @doc("Last stage sequence in the StageProgression.")
   lastStageSequence: int32;
 
+  @added(Versions.v2025_03_01_preview)
+  @doc("Sequence of last StageProgression completed within the ChangeState.")
+  lastStageProgressionSequence: int32;
+
   @doc("StageProgression resources that are ready to put in 'InProgress' state.")
   @Azure.ResourceManager.identifiers(#["stageReference"])
-  nextStages: RetrieveNextStagesResponseItem[];
+  nextStages: Array<RetrieveNextStagesResponseItem>;
 }
 
 @doc("StageProgression data comes from RetrieveNextStages API.")
@@ -226,19 +239,51 @@ model TemplateSpecChangeArtifact extends ChangeArtifact {
 /* Various content type definitions, based on the artifactType. */
 @doc("Artifact content model for Inline template or bicep content.")
 model InlineArtifactContent {
+  @removed(Versions.v2025_03_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Inline ArmTemplate string or Bicep content.")
   script: string;
+
+  @added(Versions.v2025_03_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Inline ArmTemplate string or Bicep content.")
+  inlineScript: string;
 }
 
 @doc("Artifact model when artifactType is ArmOperation.")
 model ArmOperationArtifactContent {
-  @doc("Arm Operation array.")
+  #suppress "deprecated" "back compat"
+  @removed(Versions.v2025_03_01_preview)
+  @doc("Arm Operation Array.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @renamedFrom(Versions.v2025_03_01_preview, "operations")
   @Azure.ResourceManager.identifiers(#["resourceId"])
-  operations: ArmOperationResource[];
+  operationsOld: ArmOperationResource[];
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("Arm Operation Array.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @Azure.ResourceManager.identifiers(#["uri"])
+  operations: ArmResourceOperation[];
 }
 
+@added(Versions.v2025_03_01_preview)
+@doc("Artifact content model for Inline ArmOperations.")
+model ArmResourceOperation {
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The uri of the operation.")
+  uri: url;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The http method of the operation.")
+  httpMethod: ArmOperation;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The resource operation content.")
+  content?: OperationContent;
+}
+
+@removed(Versions.v2025_03_01_preview)
 @doc("Artifact content model for Inline ArmOperations.")
 model ArmOperationResource {
   @doc("Target resource Id that needs to be changed.")
@@ -252,16 +297,70 @@ model ArmOperationResource {
 
 @doc("Artifact content model for External ArmTemplates or Bicep files.")
 model ExternalArtifactContent {
+  @removed(Versions.v2025_03_01_preview)
   @doc("URI for the external ARM template or Bicep file.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   uri: url;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("URI for the external ARM template or Bicep file.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  externalArtifactUri: url;
 }
 
 @doc("Artifact content model for TemplateSpec resource.")
 model TemplateSpecArtifactContent {
+  @removed(Versions.v2025_03_01_preview)
   @doc("TemplateSpec resource Id in ARM.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceId: armResourceIdentifier;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("TemplateSpec artifact resource Id in ARM.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  artifactResourceId: armResourceIdentifier;
+}
+
+@added(Versions.v2025_03_01_preview)
+@doc("VerifyChangeValidity POST Action request.")
+model VerifyChangeValidityRequest {
+  @doc("The resource operation.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  operation: ArmResourceOperation;
+
+  @doc("The stage progression Id.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  stageProgressionId?: armResourceIdentifier;
+}
+
+@added(Versions.v2025_03_01_preview)
+@doc("Resource operation content model.")
+model OperationContent {
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The name of the resource.")
+  name?: string;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The location of the resource.")
+  location?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The properties of the resource.")
+  properties: {};
+}
+
+@added(Versions.v2025_03_01_preview)
+@doc("VerifyChangeValidity POST Action response.")
+model VerifyChangeValidityResponse {
+  @doc("The outcome of the verification.")
+  outcome: ValidationOutcome;
+
+  @doc("The explanation message of the verification.")
+  message: string;
+
+  @doc("The time when the validation result expires.")
+  validUntil?: utcDateTime;
 }
 
 /* Different ChangeArtifact types */
@@ -297,6 +396,30 @@ union ArmOperation {
 
   @doc("DELETE ARM Operation.")
   DELETE: "DELETE",
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("PUT ARM Operation.")
+  PUT: "PUT",
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("PATCH ARM Operation.")
+  PATCH: "PATCH",
+}
+
+/* Supported validation outcome Enum string. */
+@added(Versions.v2025_03_01_preview)
+@doc("Supported validation outcomes.")
+union ValidationOutcome {
+  string,
+
+  @doc("Represents a Succeeded outcome.")
+  Succeeded: "Succeeded",
+
+  @doc("Represents a Failed outcome.")
+  Failed: "Failed",
+
+  @doc("Represents a Deferred outcome.")
+  Deferred: "Deferred",
 }
 
 @doc("Azure resource Id of a ChangeState.")
@@ -347,6 +470,9 @@ interface ChangeStates {
     }
   >;
 
+  list is ArmResourceListAtScope<ChangeState>;
+  listBySubscription is ArmListBySubscription<ChangeState>;
+
   @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a changestate resource.")
   @action("retrieveNextStages")
   retrieveNextStages is ArmResourceActionSync<
@@ -367,6 +493,25 @@ interface ChangeStates {
     }
   >;
 
-  list is ArmResourceListAtScope<ChangeState>;
-  listBySubscription is ArmListBySubscription<ChangeState>;
+  @doc("Verify the change validity.")
+  @action("verifyChangeValidity")
+  @added(Versions.v2025_03_01_preview)
+  verifyChangeValidity is ArmResourceActionSync<
+    ChangeState,
+    VerifyChangeValidityRequest,
+    VerifyChangeValidityResponse
+  >;
+
+  @doc("Verify the change validity at subscription level.")
+  @action("verifyChangeValidity")
+  @added(Versions.v2025_03_01_preview)
+  verifyChangeValidityAtSubscriptionLevel is ArmResourceActionSync<
+    ChangeState,
+    VerifyChangeValidityRequest,
+    VerifyChangeValidityResponse,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 }

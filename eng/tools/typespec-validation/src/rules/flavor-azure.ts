@@ -1,19 +1,19 @@
 import { parse as yamlParse } from "yaml";
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
-import { TsvHost } from "../tsv-host.js";
+import { Rule } from "../rule.js";
+import { readTspConfig } from "../utils.js";
 
 export class FlavorAzureRule implements Rule {
   readonly name = "FlavorAzure";
 
   readonly description = "Client emitters must set 'flavor:azure'";
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
 
-    const configText = await host.readTspConfig(folder);
+    const configText = await readTspConfig(folder);
     const config = yamlParse(configText);
 
     const options = config?.options;
