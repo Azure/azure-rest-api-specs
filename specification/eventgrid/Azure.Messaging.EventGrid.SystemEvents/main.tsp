@@ -8,6 +8,7 @@ import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.ContainerRegistry/ContainerRegistry.tsp";
 import "./Microsoft.ContainerService/ContainerService.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
+import "./Microsoft.Edge/Edge.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.Maps/Maps.tsp";
 import "./Microsoft.Devices/IotHub.tsp";
