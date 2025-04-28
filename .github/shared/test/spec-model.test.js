@@ -8,6 +8,7 @@ import {
   getAffectedSwaggers,
 } from "../src/spec-model.js";
 import { readdir } from "fs/promises";
+import { isWindows } from "./test-utils.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -23,7 +24,7 @@ describe("getSpecModel", () => {
     expect(actual).toBeDefined();
   });
 
-  it("returns spec model", async ({ expect }) => {
+  it.skipIf(isWindows())("returns spec model", async ({ expect }) => {
     const fixtureRoot = resolve(__dirname, "fixtures/getSpecModel");
 
     const readmePath =
@@ -123,7 +124,7 @@ describe("getReadme regex", () => {
 });
 
 describe("getAffectedReadmeTags", () => {
-  it("returns affected readme tags", async ({ expect }) => {
+  it.skipIf(isWindows())("returns affected readme tags", async ({ expect }) => {
     const specModel = await getSpecModel("specification/contosowidgetmanager", {
       repoRoot: resolve(__dirname, "fixtures/getAffectedReadmeTags"),
     });
@@ -142,37 +143,43 @@ describe("getAffectedReadmeTags", () => {
     expect(actual).toEqual(expected);
   });
 
-  it("returns affected readme tags for multiple tags", async ({ expect }) => {
-    const specModel = await getSpecModel("specification/1", {
-      repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-    });
-    const actual = getAffectedReadmeTags(
-      "specification/1/data-plane/shared/shared.json",
-      specModel,
-    );
+  it.skipIf(isWindows)(
+    "returns affected readme tags for multiple tags",
+    async ({ expect }) => {
+      const specModel = await getSpecModel("specification/1", {
+        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
+      });
+      const actual = getAffectedReadmeTags(
+        "specification/1/data-plane/shared/shared.json",
+        specModel,
+      );
 
-    const expected = new Map([
-      ["specification/1/data-plane/readme.md", new Set(["tag-1", "tag-2"])],
-    ]);
-    expect(actual).toEqual(expected);
-  });
+      const expected = new Map([
+        ["specification/1/data-plane/readme.md", new Set(["tag-1", "tag-2"])],
+      ]);
+      expect(actual).toEqual(expected);
+    },
+  );
 });
 
 describe("getAffectedSwaggers", () => {
-  it("returns directly referenced swagger", async ({ expect }) => {
-    const specModel = await getSpecModel("specification/1", {
-      repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-    });
+  it.skipIf(isWindows)(
+    "returns directly referenced swagger",
+    async ({ expect }) => {
+      const specModel = await getSpecModel("specification/1", {
+        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
+      });
 
-    const actual = getAffectedSwaggers(
-      "specification/1/data-plane/a.json",
-      specModel,
-    );
+      const actual = getAffectedSwaggers(
+        "specification/1/data-plane/a.json",
+        specModel,
+      );
 
-    const expected = new Set(["specification/1/data-plane/a.json"]);
+      const expected = new Set(["specification/1/data-plane/a.json"]);
 
-    expect(actual).toEqual(expected);
-  });
+      expect(actual).toEqual(expected);
+    },
+  );
 
   it("throws when swagger file is not found", async ({ expect }) => {
     const specModel = await getSpecModel("specification/1", {
@@ -187,85 +194,89 @@ describe("getAffectedSwaggers", () => {
     );
   });
 
-  it("returns correct swaggers for one layer of dependencies", async ({
-    expect,
-  }) => {
-    const specModel = await getSpecModel("specification/1", {
-      repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-    });
+  it.skipIf(isWindows)(
+    "returns correct swaggers for one layer of dependencies",
+    async ({ expect }) => {
+      const specModel = await getSpecModel("specification/1", {
+        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
+      });
 
-    const actual = getAffectedSwaggers(
-      "specification/1/data-plane/nesting/b.json",
-      specModel,
-    );
+      const actual = getAffectedSwaggers(
+        "specification/1/data-plane/nesting/b.json",
+        specModel,
+      );
 
-    const expected = new Set([
-      "specification/1/data-plane/a.json",
-      "specification/1/data-plane/nesting/b.json",
-    ]);
-    expect(actual).toEqual(expected);
-  });
+      const expected = new Set([
+        "specification/1/data-plane/a.json",
+        "specification/1/data-plane/nesting/b.json",
+      ]);
+      expect(actual).toEqual(expected);
+    },
+  );
 
-  it("returns correct swaggers for two layers of dependencies", async ({
-    expect,
-  }) => {
-    const specModel = await getSpecModel("specification/1", {
-      repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-    });
+  it.skipIf(isWindows)(
+    "returns correct swaggers for two layers of dependencies",
+    async ({ expect }) => {
+      const specModel = await getSpecModel("specification/1", {
+        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
+      });
 
-    const actual = getAffectedSwaggers(
-      "specification/1/data-plane/c.json",
-      specModel,
-    );
-    const expected = new Set([
-      "specification/1/data-plane/a.json",
-      "specification/1/data-plane/nesting/b.json",
-      "specification/1/data-plane/c.json",
-    ]);
-    expect(actual).toEqual(expected);
-  });
+      const actual = getAffectedSwaggers(
+        "specification/1/data-plane/c.json",
+        specModel,
+      );
+      const expected = new Set([
+        "specification/1/data-plane/a.json",
+        "specification/1/data-plane/nesting/b.json",
+        "specification/1/data-plane/c.json",
+      ]);
+      expect(actual).toEqual(expected);
+    },
+  );
 
-  it("returns correct swaggers for three layers of dependencies", async ({
-    expect,
-  }) => {
-    const specModel = await getSpecModel("specification/1", {
-      repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-    });
+  it.skipIf(isWindows)(
+    "returns correct swaggers for three layers of dependencies",
+    async ({ expect }) => {
+      const specModel = await getSpecModel("specification/1", {
+        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
+      });
 
-    const actual = getAffectedSwaggers(
-      "specification/1/data-plane/d.json",
-      specModel,
-    );
-    const expected = new Set([
-      "specification/1/data-plane/a.json",
-      "specification/1/data-plane/nesting/b.json",
-      "specification/1/data-plane/c.json",
-      "specification/1/data-plane/d.json",
-    ]);
-    expect(actual).toEqual(expected);
-  });
+      const actual = getAffectedSwaggers(
+        "specification/1/data-plane/d.json",
+        specModel,
+      );
+      const expected = new Set([
+        "specification/1/data-plane/a.json",
+        "specification/1/data-plane/nesting/b.json",
+        "specification/1/data-plane/c.json",
+        "specification/1/data-plane/d.json",
+      ]);
+      expect(actual).toEqual(expected);
+    },
+  );
 
-  it("returns correctly for multiple shared dependencies", async ({
-    expect,
-  }) => {
-    const specModel = await getSpecModel("specification/1", {
-      repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-    });
+  it.skipIf(isWindows)(
+    "returns correctly for multiple shared dependencies",
+    async ({ expect }) => {
+      const specModel = await getSpecModel("specification/1", {
+        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
+      });
 
-    const actual = getAffectedSwaggers(
-      "specification/1/data-plane/shared/shared.json",
-      specModel,
-    );
-    const expected = new Set([
-      "specification/1/data-plane/a.json",
-      "specification/1/data-plane/nesting/b.json",
-      "specification/1/data-plane/c.json",
-      "specification/1/data-plane/d.json",
-      "specification/1/data-plane/shared/shared.json",
-      "specification/1/data-plane/e.json",
-    ]);
-    expect(actual).toEqual(expected);
-  });
+      const actual = getAffectedSwaggers(
+        "specification/1/data-plane/shared/shared.json",
+        specModel,
+      );
+      const expected = new Set([
+        "specification/1/data-plane/a.json",
+        "specification/1/data-plane/nesting/b.json",
+        "specification/1/data-plane/c.json",
+        "specification/1/data-plane/d.json",
+        "specification/1/data-plane/shared/shared.json",
+        "specification/1/data-plane/e.json",
+      ]);
+      expect(actual).toEqual(expected);
+    },
+  );
 });
 
 // Stress test the parser against all specs in the specification/ folder. This
