@@ -562,7 +562,8 @@
           "description": "The HealthBot items on this page",
           "items": {
             "$ref": "#/definitions/HealthBot"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -579,14 +580,30 @@
       "description": "The resource management error response.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorError",
+          "$ref": "#/definitions/ErrorDetail",
           "description": "The error object."
         }
       }
     },
-    "ErrorError": {
+    "ErrorAdditionalInfo": {
       "type": "object",
-      "description": "The error object.",
+      "description": "Additional information about an error.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the additional error information.",
+          "readOnly": true
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional error information.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error object detail.",
       "properties": {
         "code": {
           "type": "string",
@@ -616,7 +633,7 @@
           "type": "array",
           "description": "The error additional info.",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+            "$ref": "#/definitions/ErrorAdditionalInfo"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -637,8 +654,7 @@
         },
         "properties": {
           "$ref": "#/definitions/HealthBotProperties",
-          "description": "The set of properties specific to Azure Health Bot resource.",
-          "x-ms-client-flatten": false
+          "description": "The set of properties specific to Azure Health Bot resource."
         }
       },
       "required": [
@@ -757,7 +773,7 @@
           "type": "object",
           "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
+            "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
       }
@@ -882,6 +898,26 @@
         "name": "SkuName",
         "modelAsString": false
       }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "Represents a user-assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of the user-assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the user-assigned identity.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "principalId",
+        "clientId"
+      ]
     }
   },
   "parameters": {}

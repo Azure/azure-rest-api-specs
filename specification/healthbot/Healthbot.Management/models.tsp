@@ -175,13 +175,13 @@ model Error {
    * The error object.
    */
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" ""
-  error?: ErrorError;
+  error?: ErrorDetail;
 }
 
 /**
- * The error object.
+ * The error object detail.
  */
-model ErrorError {
+model ErrorDetail {
   /**
    * The error code.
    */
@@ -213,6 +213,41 @@ model ErrorError {
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   additionalInfo?: ErrorAdditionalInfo[];
+}
+
+/**
+ * Additional information about an error.
+ */
+model ErrorAdditionalInfo {
+  /**
+   * The type of the additional error information.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The additional error information.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+  @visibility(Lifecycle.Read)
+  info?: {};
+}
+
+/**
+ * Represents a user-assigned identity.
+ */
+model UserAssignedIdentity {
+  /**
+   * The principal ID of the user-assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId: string;
+
+  /**
+   * The client ID of the user-assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  clientId: string;
 }
 
 /**
