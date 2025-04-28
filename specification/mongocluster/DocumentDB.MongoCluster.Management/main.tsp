@@ -16,9 +16,7 @@ using Azure.ResourceManager;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing resource provider namespace."
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Existing resource provider namespace."
 @armProviderNamespace
-@service({
-  title: "MongoClusterManagementClient",
-})
+@service(#{ title: "MongoClusterManagementClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DocumentDB;

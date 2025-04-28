@@ -9,9 +9,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @useAuth(AadOauth2Auth<["https://dynamicsessions.io/.default"]>)
-@service({
-  title: "Microsoft.App Dynamic Sessions service",
-})
+@service(#{ title: "Microsoft.App Dynamic Sessions service" })
 @server(
   "{endpoint}",
   "Session pool management endpoint.",

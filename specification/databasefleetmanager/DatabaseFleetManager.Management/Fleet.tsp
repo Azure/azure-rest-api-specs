@@ -38,7 +38,7 @@ interface Fleets {
   /**
    * Modifies a fleet resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
 
   /**

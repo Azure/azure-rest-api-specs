@@ -34,7 +34,7 @@ interface WorkloadNetworkPortMirroringProfiles {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdatePortMirroring")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     WorkloadNetworkPortMirroring,
     WorkloadNetworkPortMirroring
@@ -50,9 +50,7 @@ interface WorkloadNetworkPortMirroringProfiles {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
+    #{ `final-state-via`: "location" }
   )
   delete(
     ...Foundations.BaseParameters<WorkloadNetworkPortMirroring>,
@@ -139,11 +137,11 @@ model WorkloadNetworkPortMirroringProperties {
   destination?: string;
 
   @doc("Port Mirroring Status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: PortMirroringStatusEnum;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkPortMirroringProvisioningState;
 
   @doc("NSX revision number.")

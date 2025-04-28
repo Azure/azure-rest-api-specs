@@ -50,7 +50,7 @@ interface Vault {
   /**
    * Performs update on the vault.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<VaultModel, VaultModelUpdate>;
 
   /**

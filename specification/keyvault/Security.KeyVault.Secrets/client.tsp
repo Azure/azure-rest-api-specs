@@ -34,3 +34,32 @@ using KeyVault;
 
 @@clientName(SecretRestoreParameters.secretBundleBackup, "SecretBackup", "go");
 @@clientName(SecretBundle.kid, "KID", "go");
+
+// Rust configuration
+@@clientName(SecretProperties, "OmitSecretProperties", "rust");
+@@clientName(SecretItem, "SecretProperties", "rust");
+
+@@clientName(DeletedSecretBundle, "DeletedSecret", "rust");
+@@clientName(DeletedSecretItem, "DeletedSecretProperties", "rust");
+@@clientName(SecretBundle, "Secret", "rust");
+@@clientName(SecretRestoreParameters, "RestoreSecretParameters", "rust");
+@@clientName(SecretSetParameters, "SetSecretParameters", "rust");
+@@clientName(SecretUpdateParameters,
+  "UpdateSecretPropertiesParameters",
+  "rust"
+);
+@@clientName(DeletedSecretListResult,
+  "ListDeletedSecretPropertiesResult",
+  "rust"
+);
+@@clientName(SecretListResult, "ListSecretPropertiesResult", "rust");
+
+@@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "rust");
+@@clientName(getSecrets, "ListSecretProperties", "rust");
+@@clientName(getSecretVersions, "ListSecretPropertiesVersions", "rust");
+@@clientName(updateSecret, "UpdateSecretProperties", "rust");
+
+@@clientName(SecretRestoreParameters.secretBundleBackup,
+  "SecretBackup",
+  "rust"
+);

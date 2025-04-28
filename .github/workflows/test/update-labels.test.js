@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { PER_PAGE_MAX } from "../../src/github.js";
-import { createMockCore, createMockGithub } from "../../test/mocks.js";
+import { PER_PAGE_MAX } from "../src/github.js";
 import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
+import {
+  createMockCore,
+  createMockGithub,
+  createMockRequestError,
+} from "./mocks.js";
 
 describe("updateLabels", () => {
   it("loads inputs from env", async () => {
@@ -175,6 +179,49 @@ describe("updateLabelsImpl", () => {
     expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
   });
 
+  it("handles missing issue_number", async () => {
+    const github = createMockGithub();
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [],
+      },
+    });
+
+    // No labels to add/remove, so should no-op rather than throw, even if issue_number is missing
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        issue_number: NaN,
+        run_id: 456,
+        github: github,
+        core: createMockCore(),
+      }),
+    ).resolves.toBeUndefined();
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: "label-foo=true" }],
+      },
+    });
+
+    // Label to add/remove, but issue_number is missing, so throw
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        issue_number: NaN,
+        run_id: 456,
+        github: github,
+        core: createMockCore(),
+      }),
+    ).rejects.toThrow("issue_number");
+
+    expect(github.rest.issues.addLabels).toBeCalledTimes(0);
+    expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
+  });
+
   it("adds and removes labels for artifacts", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
@@ -273,7 +320,9 @@ describe("updateLabelsImpl", () => {
           artifacts: [{ name: "label-foo=false" }],
         },
       });
-      github.rest.issues.removeLabel.mockRejectedValue({ status: status });
+      github.rest.issues.removeLabel.mockRejectedValue(
+        createMockRequestError(status),
+      );
 
       const updateLabelsImplPromise = updateLabelsImpl({
         owner: "owner",

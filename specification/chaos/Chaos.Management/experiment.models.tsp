@@ -18,7 +18,7 @@ namespace Microsoft.Chaos;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required implementation to avoid breaking .NET SDK changes"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required implementation to avoid breaking .NET SDK changes"
 @Azure.ResourceManager.Private.armResourceInternal(ExperimentProperties)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model Experiment extends Azure.ResourceManager.Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = Experiment,
@@ -98,13 +98,13 @@ model ExperimentProperties {
   /**
    * Most recent provisioning state for the given experiment resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * List of steps.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   steps: ChaosExperimentStep[];
 
   /**
@@ -132,7 +132,7 @@ model ChaosExperimentStep {
   /**
    * List of branches.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   branches: ChaosExperimentBranch[];
 }
 
@@ -149,7 +149,7 @@ model ChaosExperimentBranch {
   /**
    * List of actions.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   actions: ChaosExperimentAction[];
 }
 
@@ -245,7 +245,7 @@ model ContinuousAction extends ChaosExperimentAction {
   /**
    * List of key value pairs.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key"])
+  @OpenAPI.extension("x-ms-identifiers", #["key"])
   parameters: KeyValuePair[];
 
   /**
@@ -299,7 +299,7 @@ model DiscreteAction extends ChaosExperimentAction {
   /**
    * List of key value pairs.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key"])
+  @OpenAPI.extension("x-ms-identifiers", #["key"])
   parameters: KeyValuePair[];
 
   /**

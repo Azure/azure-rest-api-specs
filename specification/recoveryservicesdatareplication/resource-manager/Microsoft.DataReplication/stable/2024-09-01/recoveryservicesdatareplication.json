@@ -299,6 +299,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/locations/{location}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "LocationBasedOperationResults_Get",
+        "summary": "Gets the location based operation result status.",
+        "description": "Gets the location based operation result.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the location based operation result status": {
+            "$ref": "./examples/LocationBasedOperationResults_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/operationResults/{operationId}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{operationId}": {
       "get": {
         "operationId": "OperationResults_Get",
@@ -3405,6 +3448,7 @@
       "properties": {
         "azStackHciSiteId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the AzStackHCI site.",
           "minLength": 1
         },
@@ -3432,11 +3476,13 @@
         },
         "migrationSolutionId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the Migration solution ARM Id.",
           "minLength": 1
         },
         "migrationHubUri": {
           "type": "string",
+          "format": "uri",
           "description": "Gets or sets the migration hub Uri.",
           "readOnly": true
         }
@@ -3991,6 +4037,7 @@
         },
         "serviceResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the service resource Id.",
           "readOnly": true
         },
@@ -4267,11 +4314,13 @@
       "properties": {
         "hyperVSiteId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the HyperV site.",
           "minLength": 1
         },
         "fabricResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the fabric resource Id.",
           "readOnly": true
         },
@@ -4282,11 +4331,13 @@
         },
         "migrationSolutionId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the migration solution ARM Id.",
           "minLength": 1
         },
         "migrationHubUri": {
           "type": "string",
+          "format": "uri",
           "description": "Gets or sets the migration hub Uri.",
           "readOnly": true
         }
@@ -4313,6 +4364,7 @@
         },
         "storageContainerId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the target storage account ARM Id."
         },
         "isDynamic": {
@@ -4498,6 +4550,7 @@
       "properties": {
         "storageContainerId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the storage container.",
           "readOnly": true
         },
@@ -4583,11 +4636,13 @@
         },
         "targetHciClusterId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the Target HCI Cluster ARM Id.",
           "minLength": 1
         },
         "targetArcClusterCustomLocationId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the Target Arc Cluster Custom Location ARM Id.",
           "minLength": 1
         },
@@ -4598,6 +4653,7 @@
         },
         "fabricDiscoveryMachineId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the discovered machine.",
           "minLength": 1
         },
@@ -4640,11 +4696,13 @@
         },
         "targetResourceGroupId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the target resource group ARM Id.",
           "minLength": 1
         },
         "storageContainerId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the target storage container ARM Id.",
           "minLength": 1
         },
@@ -4912,21 +4970,25 @@
       "properties": {
         "hyperVFabricArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the source HyperV fabric.",
           "minLength": 1
         },
         "hyperVSiteId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the HyperV site.",
           "readOnly": true
         },
         "azStackHciFabricArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the target AzStackHCI fabric.",
           "minLength": 1
         },
         "azStackHciSiteId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the AzStackHCI site.",
           "readOnly": true
         },
@@ -4940,16 +5002,19 @@
         },
         "asrServiceUri": {
           "type": "string",
+          "format": "uri",
           "description": "Gets or sets the Uri of ASR.",
           "readOnly": true
         },
         "rcmServiceUri": {
           "type": "string",
+          "format": "uri",
           "description": "Gets or sets the Uri of Rcm.",
           "readOnly": true
         },
         "gatewayServiceUri": {
           "type": "string",
+          "format": "uri",
           "description": "Gets or sets the Uri of Gateway.",
           "readOnly": true
         },
@@ -7149,11 +7214,13 @@
       "properties": {
         "vmwareSiteId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the VMware site.",
           "minLength": 1
         },
         "migrationSolutionId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the migration solution.",
           "minLength": 1
         }
@@ -7180,6 +7247,7 @@
         },
         "storageContainerId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the target storage account ARM Id."
         },
         "isDynamic": {
@@ -7371,6 +7439,7 @@
       "properties": {
         "storageContainerId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the storage container.",
           "readOnly": true
         },
@@ -7456,11 +7525,13 @@
         },
         "targetHciClusterId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the Target HCI Cluster ARM Id.",
           "minLength": 1
         },
         "targetArcClusterCustomLocationId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the Target Arc Cluster Custom Location ARM Id.",
           "minLength": 1
         },
@@ -7471,11 +7542,13 @@
         },
         "storageContainerId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the target storage container ARM Id.",
           "minLength": 1
         },
         "targetResourceGroupId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the target resource group ARM Id.",
           "minLength": 1
         },
@@ -7580,6 +7653,7 @@
         },
         "fabricDiscoveryMachineId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the discovered machine.",
           "minLength": 1
         },
@@ -7832,21 +7906,25 @@
       "properties": {
         "vmwareFabricArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the source VMware fabric.",
           "minLength": 1
         },
         "vmwareSiteId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the VMware site.",
           "readOnly": true
         },
         "azStackHciFabricArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the target AzStackHCI fabric.",
           "minLength": 1
         },
         "azStackHciSiteId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM Id of the AzStackHCI site.",
           "readOnly": true
         },
@@ -7860,16 +7938,19 @@
         },
         "asrServiceUri": {
           "type": "string",
+          "format": "uri",
           "description": "Gets or sets the Uri of ASR.",
           "readOnly": true
         },
         "rcmServiceUri": {
           "type": "string",
+          "format": "uri",
           "description": "Gets or sets the Uri of Rcm.",
           "readOnly": true
         },
         "gatewayServiceUri": {
           "type": "string",
+          "format": "uri",
           "description": "Gets or sets the Uri of Gateway.",
           "readOnly": true
         },
@@ -8054,6 +8135,7 @@
         },
         "serviceResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the service resource Id.",
           "readOnly": true
         },

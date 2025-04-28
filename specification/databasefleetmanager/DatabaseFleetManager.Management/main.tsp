@@ -27,9 +27,7 @@ using TypeSpec.Versioning;
  * Database Fleet Client
  */
 @armProviderNamespace
-@service({
-  title: "DatabaseFleetClient",
-})
+@service(#{ title: "DatabaseFleetClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DatabaseFleetManager;
