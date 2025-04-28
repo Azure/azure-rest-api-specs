@@ -53,13 +53,13 @@ model UserHasReviewProperties {
 @armResourceOperations
 interface RatingAndReviewsOperations {
   /**
-   * Get whether the user has a review.
+   * Create or check user review status.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi"
-  @get
-  @operationId("RatingAndReviews_GetUserHasReview")
+  @post
+  @operationId("RatingAndReviews_CreateUserHasReview")
   @action("reviews/userhasreview")
-  getUserHasReview is ArmProviderActionSync<
+  createUserHasReview is ArmProviderActionSync<
     Response = ArmResponse<UserHasReview>,
     Parameters = {
       /**
