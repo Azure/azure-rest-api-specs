@@ -1086,7 +1086,7 @@ model AcsCallRoomProperties {
   id?: string;
 }
 
-/** Schema of calling event endedby properties */
+/** Schema of calling event ended by properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallEndedByProperties {
   /** The communication identifier of the call ended by */
