@@ -53,6 +53,7 @@ model AcsCallEndedEventData
   reason?: AcsCallEndReasonProperties;
 
   /** Duration of the call in seconds. */
+  @encode(DurationKnownEncoding.seconds)
   callDurationInSeconds?: float64;
 }
 
