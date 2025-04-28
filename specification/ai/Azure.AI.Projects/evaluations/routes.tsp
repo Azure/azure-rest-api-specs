@@ -79,7 +79,7 @@ interface Evaluations {
       @path
       runId: string;
     },
-    ResourceCreatedResponse<AgentEvaluation>
+    OkResponse<AgentEvaluation>
   >;
 
   // Evaluation Private APIs
