@@ -70,6 +70,24 @@ interface EdgeMachines {
     EdgeMachineValidateRequest,
     EdgeMachineValidateResponse
   >;
+
+  /**
+   * A long-running resource action.
+   */
+  markFailedMachineState is ArmResourceActionAsync<
+    EdgeMachine,
+    MarkFailedMachineStateRequest,
+    EdgeMachine
+  >;
+
+  /**
+   * A long-running resource action.
+   */
+  resetFailedMachineState is ArmResourceActionAsync<
+    EdgeMachine,
+    void,
+    EdgeMachine
+  >;
 }
 
 @@doc(EdgeMachine.name, "Name of Device");
@@ -90,7 +108,7 @@ model EdgeMachineProperties {
   @visibility(Lifecycle.Read)
   cloudId?: string;
 
-  @doc("Resource group where the onboarding arc machine instance created.")
+  @doc("Resource group where the onboarding arc machine instance created. Will be deprecated before pub preview")
   onboardingMachineResourceGroupId?: Azure.Core.armResourceIdentifier;
 
   @doc("Optional property to create arc machine in custom resource group.")
@@ -185,6 +203,21 @@ model EdgeMachineValidateRequest {
   additionalInfo?: string;
 }
 
+@doc("The Mark Failed request for Edge Machine..")
+model MarkFailedMachineStateRequest {
+  @doc("Failure details to set why edge machine set to Failed state.")
+  failureDetails?: FailureDetails;
+}
+
+@doc("Failure details to set why edge machine set to Failed state.")
+model FailureDetails {
+  @doc("Operation name which caused edge machine set to Failed state.")
+  operation?: string;
+
+  @doc("description of failure why edge machine set to Failed state.")
+  description?: string;
+}
+
 /**
  * An Accepted response with an Operation-Location header.
  */
@@ -216,7 +249,6 @@ model SiteDetails {
   siteResourceId: Azure.Core.armResourceIdentifier;
 
   @doc("Edge Device configuration received from site common configuration.")
-  @visibility(Lifecycle.Read)
   deviceConfiguration?: DeviceConfiguration;
 }
 
