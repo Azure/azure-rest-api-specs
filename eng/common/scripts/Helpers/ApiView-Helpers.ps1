@@ -227,12 +227,3 @@ function Set-ApiViewCommentForPR {
     exit 1
   }
 }
-
-function Save-PackageProperties ($repoRoot, $serviceNames, $outPutDirectory) {
-  $scriptPath = $repoRoot + "/eng/common/scripts/Save-Package-Properties.ps1"
-  $serviceDirectories = $serviceNames -split ","
-
-  foreach ($serviceDirectory in $serviceDirectories) {
-    & $scriptPath -ServiceDirectory $serviceDirectory -OutDirectory $outPutDirectory
-  }
-}

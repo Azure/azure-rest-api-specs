@@ -145,8 +145,11 @@ export async function generateSdkForSpecPr(): Promise<number> {
       }
 
       for (const pkg of executionReport.packages) {
+        if (serviceNames.length > 0) {
+          serviceNames += ",";
+        }
         if (pkg.serviceName) {
-          serviceNames += `${pkg.serviceName},`;
+          serviceNames += `${pkg.serviceName}`;
         }
       }
       
