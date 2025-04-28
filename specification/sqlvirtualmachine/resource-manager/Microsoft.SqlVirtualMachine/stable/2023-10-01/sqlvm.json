@@ -1734,19 +1734,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmResponse<SqlVmTroubleshooting>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SqlVmTroubleshooting",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "BackupScheduleType": {
       "type": "string",
       "description": "Backup schedule type.",
@@ -2615,11 +2602,6 @@
       "type": "object",
       "description": "A SQL virtual machine.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SqlVirtualMachineProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        },
         "identity": {
           "$ref": "#/definitions/ResourceIdentity",
           "description": "DO NOT USE. This value will be deprecated. Azure Active Directory identity of the server.",
@@ -2627,6 +2609,11 @@
             "read",
             "create"
           ]
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlVirtualMachineProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2867,7 +2854,8 @@
         },
         "enableAutomaticUpgrade": {
           "type": "boolean",
-          "description": "Enable automatic upgrade of Sql IaaS extension Agent."
+          "description": "Enable automatic upgrade of Sql IaaS extension Agent.",
+          "default": false
         },
         "additionalVmPatch": {
           "$ref": "#/definitions/AdditionalOsPatch",
@@ -2935,8 +2923,22 @@
           "description": "End time in UTC timezone."
         },
         "troubleshootingScenario": {
-          "$ref": "#/definitions/TroubleshootingScenario",
-          "description": "SQL VM troubleshooting scenario."
+          "type": "string",
+          "description": "SQL VM troubleshooting scenario.",
+          "default": "UnhealthyReplica",
+          "enum": [
+            "UnhealthyReplica"
+          ],
+          "x-ms-enum": {
+            "name": "TroubleshootingScenario",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "UnhealthyReplica",
+                "value": "UnhealthyReplica"
+              }
+            ]
+          }
         },
         "properties": {
           "$ref": "#/definitions/TroubleshootingAdditionalProperties",
@@ -3025,6 +3027,7 @@
         "enableStorageConfigBlade": {
           "type": "boolean",
           "description": "Enable SQL IaaS Agent storage configuration blade in Azure Portal.",
+          "default": false,
           "x-ms-mutability": [
             "update",
             "create"
@@ -3069,23 +3072,6 @@
         }
       }
     },
-    "TroubleshootingScenario": {
-      "type": "string",
-      "description": "SQL VM troubleshooting scenario.",
-      "enum": [
-        "UnhealthyReplica"
-      ],
-      "x-ms-enum": {
-        "name": "TroubleshootingScenario",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UnhealthyReplica",
-            "value": "UnhealthyReplica"
-          }
-        ]
-      }
-    },
     "TroubleshootingStatus": {
       "type": "object",
       "description": "Status of last troubleshooting operation on this SQL VM",
@@ -3114,8 +3100,22 @@
           "readOnly": true
         },
         "troubleshootingScenario": {
-          "$ref": "#/definitions/TroubleshootingScenario",
+          "type": "string",
           "description": "SQL VM troubleshooting scenario.",
+          "default": "UnhealthyReplica",
+          "enum": [
+            "UnhealthyReplica"
+          ],
+          "x-ms-enum": {
+            "name": "TroubleshootingScenario",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "UnhealthyReplica",
+                "value": "UnhealthyReplica"
+              }
+            ]
+          },
           "readOnly": true
         },
         "properties": {

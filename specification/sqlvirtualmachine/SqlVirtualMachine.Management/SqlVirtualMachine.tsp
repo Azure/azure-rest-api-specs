@@ -4,7 +4,6 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -13,8 +12,9 @@ namespace Microsoft.SqlVirtualMachine;
 /**
  * A SQL virtual machine.
  */
-model SqlVirtualMachine
-  is Azure.ResourceManager.TrackedResource<SqlVirtualMachineProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SqlVirtualMachineProperties)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model SqlVirtualMachine extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = SqlVirtualMachine,
     KeyName = "sqlVirtualMachineName",
@@ -28,6 +28,11 @@ model SqlVirtualMachine
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   identity?: ResourceIdentity;
+
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  properties?: SqlVirtualMachineProperties;
 }
 
 @armResourceOperations
@@ -121,7 +126,7 @@ interface SqlVirtualMachines {
   troubleshoot is ArmResourceActionAsync<
     SqlVirtualMachine,
     SqlVmTroubleshooting,
-    ArmResponse<SqlVmTroubleshooting>
+    SqlVmTroubleshooting
   >;
 }
 

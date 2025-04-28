@@ -1,11 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
+using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.SqlVirtualMachine;
 
@@ -777,7 +777,7 @@ model SqlVirtualMachineProperties {
   /**
    * Enable automatic upgrade of Sql IaaS extension Agent.
    */
-  enableAutomaticUpgrade?: boolean;
+  enableAutomaticUpgrade?: boolean = false;
 
   /**
    * Additional VM Patching solution enabled on the Virtual Machine
@@ -1147,7 +1147,7 @@ model StorageConfigurationSettings {
    * Enable SQL IaaS Agent storage configuration blade in Azure Portal.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  enableStorageConfigBlade?: boolean;
+  enableStorageConfigBlade?: boolean = false;
 }
 
 /**
@@ -1260,7 +1260,7 @@ model TroubleshootingStatus {
    * SQL VM troubleshooting scenario.
    */
   @visibility(Lifecycle.Read)
-  troubleshootingScenario?: TroubleshootingScenario;
+  troubleshootingScenario?: TroubleshootingScenario = "UnhealthyReplica";
 
   /**
    * Troubleshooting properties
@@ -1394,7 +1394,7 @@ model SqlVmTroubleshooting {
   /**
    * SQL VM troubleshooting scenario.
    */
-  troubleshootingScenario?: TroubleshootingScenario;
+  troubleshootingScenario?: TroubleshootingScenario = "UnhealthyReplica";
 
   /**
    * Troubleshooting properties
