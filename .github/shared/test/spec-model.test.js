@@ -289,7 +289,7 @@ describe("getAffectedSwaggers", () => {
 // is a long-running test and should be run manually. To run this test, remove
 // the '.skip' from the describe block. Put '.skip' back in when done or this
 // test may fail unexpectedly in the future.
-describe("Parse readmes", () => {
+describe.skip("Parse readmes", () => {
   it(
     "Does not produce exceptions",
     { timeout: 30 * 60 * 1000 /* 30 minutes */ },
