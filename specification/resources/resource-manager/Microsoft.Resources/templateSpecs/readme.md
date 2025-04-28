@@ -28,43 +28,43 @@ These are the global settings for the TemplateSpecs client.
 title: TemplateSpecsClient
 description: TemplateSpecs Client
 openapi-type: arm
-tag: package-deployments-2022-02
+tag: package-2022-02
 ```
 
 ---
 
-### Tag: package-deployments-2019-06
+### Tag: package-2019-06
 
-These settings apply only when `--tag=package-deployments-2019-06` is specified on the command line.
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2019-06'
+``` yaml $(tag) == 'package-2019-06'
 input-file:
   - preview/2019-06-01-preview/templateSpecs.json
 ```
 
-### Tag: package-deployments-2021-03
+### Tag: package-2021-03
 
-These settings apply only when `--tag=package-deployments-2021-03` is specified on the command line.
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2021-03'
+``` yaml $(tag) == 'package-2021-03'
 input-file:
   - preview/2021-03-01-preview/templateSpecs.json
 ```
 
-### Tag: package-deployments-2021-05
+### Tag: package-2021-05
 
-These settings apply only when `--tag=package-deployments-2021-05` is specified on the command line.
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2021-05'
+``` yaml $(tag) == 'package-2021-05'
 input-file:
   - stable/2021-05-01/templateSpecs.json
 ```
 
-### Tag: package-deployments-2022-02
+### Tag: package-2022-02
 
-These settings apply only when `--tag=package-deployments-2022-02` is specified on the command line.
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2022-02'
+``` yaml $(tag) == 'package-2022-02'
 input-file:
   - stable/2022-02-01/templateSpecs.json
 ```

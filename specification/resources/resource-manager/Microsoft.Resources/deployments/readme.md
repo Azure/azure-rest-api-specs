@@ -28,232 +28,232 @@ These are the global settings for the Deployments client.
 title: DeploymentsClient
 description: Deployments Client
 openapi-type: arm
-tag: package-deployments-2025-04
+tag: package-2025-04
 ```
 
 ---
 
-### Tag: package-deployments-2015-11
+### Tag: package-2015-11
 
-These settings apply only when `--tag=package-deployments-2015-11` is specified on the command line.
+These settings apply only when `--tag=package-2015-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2015-11'
+``` yaml $(tag) == 'package-2015-11'
 input-file:
   - stable/2015-11-01/deployments.json
 ```
 
-### Tag: package-deployments-2016-02
+### Tag: package-2016-02
 
-These settings apply only when `--tag=package-deployments-2016-02` is specified on the command line.
+These settings apply only when `--tag=package-2016-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2016-02'
+``` yaml $(tag) == 'package-2016-02'
 input-file:
   - stable/2016-02-01/deployments.json
 ```
 
-### Tag: package-deployments-2016-07
+### Tag: package-2016-07
 
-These settings apply only when `--tag=package-deployments-2016-07` is specified on the command line.
+These settings apply only when `--tag=package-2016-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2016-07'
+``` yaml $(tag) == 'package-2016-07'
 input-file:
   - stable/2016-07-01/deployments.json
 ```
 
-### Tag: package-deployments-2016-09
+### Tag: package-2016-09
 
-These settings apply only when `--tag=package-deployments-2016-09` is specified on the command line.
+These settings apply only when `--tag=package-2016-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2016-09'
+``` yaml $(tag) == 'package-2016-09'
 input-file:
   - stable/2016-09-01/deployments.json
 ```
 
-### Tag: package-deployments-2017-0510
+### Tag: package-2017-0510
 
-These settings apply only when `--tag=package-deployments-2017-0510` is specified on the command line.
+These settings apply only when `--tag=package-2017-0510` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2017-0510'
+``` yaml $(tag) == 'package-2017-0510'
 input-file:
   - stable/2017-05-10/deployments.json
 ```
 
-### Tag: package-deployments-2018-02
+### Tag: package-2018-02
 
-These settings apply only when `--tag=package-deployments-2018-02` is specified on the command line.
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2018-02'
+``` yaml $(tag) == 'package-2018-02'
 input-file:
   - stable/2018-02-01/deployments.json
 ```
 
-### Tag: package-deployments-2018-05
+### Tag: package-2018-05
 
-These settings apply only when `--tag=package-deployments-2018-05` is specified on the command line.
+These settings apply only when `--tag=package-2018-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2018-05'
+``` yaml $(tag) == 'package-2018-05'
 input-file:
   - stable/2018-05-01/deployments.json
 ```
 
-### Tag: package-deployments-2019-03
+### Tag: package-2019-03
 
-These settings apply only when `--tag=package-deployments-2019-03` is specified on the command line.
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2019-03'
+``` yaml $(tag) == 'package-2019-03'
 input-file:
   - stable/2019-03-01/deployments.json
 ```
 
-### Tag: package-deployments-2019-05
+### Tag: package-2019-05
 
-These settings apply only when `--tag=package-deployments-2019-05` is specified on the command line.
+These settings apply only when `--tag=package-2019-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2019-05'
+``` yaml $(tag) == 'package-2019-05'
 input-file:
   - stable/2019-05-01/deployments.json
 ```
 
-### Tag: package-deployments-2019-0510
+### Tag: package-2019-0510
 
-These settings apply only when `--tag=package-deployments-2019-0510` is specified on the command line.
+These settings apply only when `--tag=package-2019-0510` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2019-0510'
+``` yaml $(tag) == 'package-2019-0510'
 input-file:
   - stable/2019-05-10/deployments.json
 ```
 
-### Tag: package-deployments-2019-07
+### Tag: package-2019-07
 
-These settings apply only when `--tag=package-deployments-2019-07` is specified on the command line.
+These settings apply only when `--tag=package-2019-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2019-07'
+``` yaml $(tag) == 'package-2019-07'
 input-file:
   - stable/2019-07-01/deployments.json
 ```
 
-### Tag: package-deployments-2019-08
+### Tag: package-2019-08
 
-These settings apply only when `--tag=package-deployments-2019-08` is specified on the command line.
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2019-08'
+``` yaml $(tag) == 'package-2019-08'
 input-file:
   - stable/2019-08-01/deployments.json
 ```
 
-### Tag: package-deployments-2019-10
+### Tag: package-2019-10
 
-These settings apply only when `--tag=package-deployments-2019-10` is specified on the command line.
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2019-10'
+``` yaml $(tag) == 'package-2019-10'
 input-file:
   - stable/2019-10-01/deployments.json
 ```
 
-### Tag: package-deployments-2020-06
+### Tag: package-2020-06
 
-These settings apply only when `--tag=package-deployments-2020-06` is specified on the command line.
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2020-06'
+``` yaml $(tag) == 'package-2020-06'
 input-file:
   - stable/2020-06-01/deployments.json
 ```
 
-### Tag: package-deployments-2020-08
+### Tag: package-2020-08
 
-These settings apply only when `--tag=package-deployments-2020-08` is specified on the command line.
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2020-08'
+``` yaml $(tag) == 'package-2020-08'
 input-file:
   - stable/2020-08-01/deployments.json
 ```
 
-### Tag: package-deployments-2020-10
+### Tag: package-2020-10
 
-These settings apply only when `--tag=package-deployments-2020-10` is specified on the command line.
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2020-10'
+``` yaml $(tag) == 'package-2020-10'
 input-file:
   - stable/2020-10-01/deployments.json
 ```
 
-### Tag: package-deployments-2021-01
+### Tag: package-2021-01
 
-These settings apply only when `--tag=package-deployments-2021-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2021-01'
+``` yaml $(tag) == 'package-2021-01'
 input-file:
   - stable/2021-01-01/deployments.json
 ```
 
-### Tag: package-deployments-2021-04
+### Tag: package-2021-04
 
-These settings apply only when `--tag=package-deployments-2021-04` is specified on the command line.
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2021-04'
+``` yaml $(tag) == 'package-2021-04'
 input-file:
   - stable/2021-04-01/deployments.json
 ```
 
-### Tag: package-deployments-2022-09
+### Tag: package-2022-09
 
-These settings apply only when `--tag=package-deployments-2022-09` is specified on the command line.
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2022-09'
+``` yaml $(tag) == 'package-2022-09'
 input-file:
   - stable/2022-09-01/deployments.json
 ```
 
-### Tag: package-deployments-2023-07
+### Tag: package-2023-07
 
-These settings apply only when `--tag=package-deployments-2023-07` is specified on the command line.
+These settings apply only when `--tag=package-2023-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2023-07'
+``` yaml $(tag) == 'package-2023-07'
 input-file:
   - stable/2023-07-01/deployments.json
 ```
 
-### Tag: package-deployments-2024-03
+### Tag: package-2024-03
 
-These settings apply only when `--tag=package-deployments-2024-03` is specified on the command line.
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2024-03'
+``` yaml $(tag) == 'package-2024-03'
 input-file:
   - stable/2024-03-01/deployments.json
 ```
 
-### Tag: package-deployments-2024-07
+### Tag: package-2024-07
 
-These settings apply only when `--tag=package-deployments-2024-07` is specified on the command line.
+These settings apply only when `--tag=package-2024-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2024-07'
+``` yaml $(tag) == 'package-2024-07'
 input-file:
   - stable/2024-07-01/deployments.json
 ```
 
-### Tag: package-deployments-2024-11
+### Tag: package-2024-11
 
-These settings apply only when `--tag=package-deployments-2024-11` is specified on the command line.
+These settings apply only when `--tag=package-2024-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2024-11'
+``` yaml $(tag) == 'package-2024-11'
 input-file:
   - stable/2024-11-01/deployments.json
 ```
 
-### Tag: package-deployments-2025-03
+### Tag: package-2025-03
 
-These settings apply only when `--tag=package-deployments-2025-03` is specified on the command line.
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2025-03'
+``` yaml $(tag) == 'package-2025-03'
 input-file:
   - stable/2025-03-01/deployments.json
 ```
 
-### Tag: package-deployments-2025-04
+### Tag: package-2025-04
 
-These settings apply only when `--tag=package-deployments-2025-04` is specified on the command line.
+These settings apply only when `--tag=package-2025-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2025-04'
+``` yaml $(tag) == 'package-2025-04'
 input-file:
   - stable/2025-04-01/deployments.json
 ```

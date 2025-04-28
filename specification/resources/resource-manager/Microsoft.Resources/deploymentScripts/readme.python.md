@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-deployments-deploymentscripts
 namespace: azure.mgmt.deployments.deploymentscripts
-package-version: 1.0.0b1
+package-version: 1.0.0
 clear-output-folder: true
 ```
 

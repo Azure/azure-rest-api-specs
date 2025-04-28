@@ -28,25 +28,25 @@ These are the global settings for the DeploymentStacks client.
 title: DeploymentStacksClient
 description: DeploymentStacks Client
 openapi-type: arm
-tag: package-deployments-2024-03
+tag: package-2024-03
 ```
 
 ---
 
-### Tag: package-deployments-2022-08
+### Tag: package-2022-08
 
-These settings apply only when `--tag=package-deployments-2022-08` is specified on the command line.
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2022-08'
+``` yaml $(tag) == 'package-2022-08'
 input-file:
   - preview/2022-08-01-preview/deploymentStacks.json
 ```
 
-### Tag: package-deployments-2024-03
+### Tag: package-2024-03
 
-These settings apply only when `--tag=package-deployments-2024-03` is specified on the command line.
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2024-03'
+``` yaml $(tag) == 'package-2024-03'
 input-file:
   - stable/2024-03-01/deploymentStacks.json
 ```

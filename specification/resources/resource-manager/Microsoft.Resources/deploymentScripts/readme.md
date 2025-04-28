@@ -28,34 +28,34 @@ These are the global settings for the DeploymentScripts client.
 title: DeploymentScriptsClient
 description: DeploymentScripts Client
 openapi-type: arm
-tag: package-deployments-2023-08
+tag: package-2023-08
 ```
 
 ---
 
-### Tag: package-deployments-2019-10
+### Tag: package-2019-10
 
-These settings apply only when `--tag=package-deployments-2019-10` is specified on the command line.
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2019-10'
+``` yaml $(tag) == 'package-2019-10'
 input-file:
   - preview/2019-10-01-preview/deploymentScripts.json
 ```
 
-### Tag: package-deployments-2020-10
+### Tag: package-2020-10
 
-These settings apply only when `--tag=package-deployments-2020-10` is specified on the command line.
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2020-10'
+``` yaml $(tag) == 'package-2020-10'
 input-file:
   - stable/2020-10-01/deploymentScripts.json
 ```
 
-### Tag: package-deployments-2023-08
+### Tag: package-2023-08
 
-These settings apply only when `--tag=package-deployments-2023-08` is specified on the command line.
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-deployments-2023-08'
+``` yaml $(tag) == 'package-2023-08'
 input-file:
   - stable/2023-08-01/deploymentScripts.json
 ```

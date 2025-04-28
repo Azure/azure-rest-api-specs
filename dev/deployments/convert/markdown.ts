@@ -124,7 +124,7 @@ function getPackageName(apiVersion: string) {
   const month = apiVersion.split('-')[1];
   const suffix = apiVersion.split('-')[2] === '01' ? '' : `${apiVersion.split('-')[2]}`;
 
-  return `package-deployments-${year}-${month}${suffix}`;
+  return `package-${year}-${month}${suffix}`;
 }
 
 function getApiVersionFromFilePath(filePath: string) {
@@ -284,12 +284,14 @@ Please also specify \`--azure-libraries-for-java-folder=<path to the root direct
 These settings apply only when \`--tag=${getPackageName(latestApiVersion)} --java\` is specified on the command line.
 Please also specify \`--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>\`.
 
-\`\`\` yaml $(tag) == '${getPackageName(latestApiVersion)}' && $(java)
+\`\`\` yaml $(java)
 java:
-  namespace: com.microsoft.azure.management.deployments.${componentName.toLowerCase()}.v${latestApiVersion.replace(/-/g, '_')}
-  output-folder: $(azure-libraries-for-java-folder)/sdk/deployments/mgmt-v${latestApiVersion.replace(/-/g, '_')}
-  regenerate-manager: true
-  generate-interface: true
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.deployments.${componentName.toLowerCase()}
+  output-folder: $(azure-libraries-for-java-folder)/sdk/deployments/${componentName.toLowerCase()}
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
 \`\`\`
 `;
 }
@@ -306,7 +308,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-deployments-${componentName.toLowerCase()}
 namespace: azure.mgmt.deployments.${componentName.toLowerCase()}
-package-version: 1.0.0b1
+package-version: 1.0.0
 clear-output-folder: true
 \`\`\`
 
