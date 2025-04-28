@@ -36,7 +36,6 @@ These settings apply only when `--tag=2025-07-01-preview` is specified on the co
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
   - Microsoft.LoadTestService/playwright/preview/2025-07-01-preview/playwright.json
-  - Microsoft.LoadTestService/operations/preview/2025-07-01-preview/operations.json
 suppressions:
   - code: PatchBodyParametersSchema
     from: playwright.json
