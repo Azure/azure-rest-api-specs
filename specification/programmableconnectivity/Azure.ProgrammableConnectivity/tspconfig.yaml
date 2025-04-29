@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/programmableconnectivity"
+  "service-directory-name":
+    default: "communication"
   "dependencies":
     default: ""
 emit:
@@ -32,8 +34,9 @@ options:
       name: "@azure-rest/programmableconnectivity"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-programmableconnectivity"
-    namespace: "com.azure.programmableconnectivity"
+    emitter-output-dir: "{project-root}/azure-sdk-for-java/sdk/{service-directory-name}/azure-communication-programmableconnectivity"
+    package-dir: "azure-communication-programmableconnectivity"
+    namespace: com.azure.communication.programmableconnectivity
     flavor: azure
 linter:
   extends:
