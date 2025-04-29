@@ -48,7 +48,7 @@ union UpdateAction {
 @doc("ExadataIormConfig for cloud vm cluster")
 model ExadataIormConfig {
   @doc("An array of IORM settings for all the database in the Exadata DB system.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dbPlans?: DbIormConfig[];
 
   @doc("Additional information about the current lifecycleState.")
@@ -353,7 +353,7 @@ model CloudVmClusterProperties {
 
   @doc("CIDR blocks for additional NSG ingress rules. The VNET CIDRs used to provision the VM Cluster will be added by default.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nsgCidrs?: NsgCidr[];
 
   @doc("Indicates user preferences for the various diagnostic collection options for the VM cluster/Cloud VM cluster/VMBM DBCS.")

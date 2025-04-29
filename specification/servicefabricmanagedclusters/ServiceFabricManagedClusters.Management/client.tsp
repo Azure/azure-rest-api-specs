@@ -66,6 +66,4 @@ using Microsoft.ServiceFabric;
 #suppress "deprecated" "@flattenProperty decorator for backwards compatibility with existing spec"
 @@flattenProperty(NodeType.properties);
 
-@@Azure.ResourceManager.identifiers(FaultSimulationListResult.value,
-  #["simulationId"]
-);
+@@Azure.ResourceManager.identifiers(FaultSimulationListResult.value, #["simulationId"]);
