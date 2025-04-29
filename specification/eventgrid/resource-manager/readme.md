@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2025-04-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2025-04-preview'
 input-file:
-- Microsoft.EventGrid/preview/2025-04-15-preview/EventGrid.json
+- Microsoft.EventGrid/preview/2025-04-01-preview/EventGrid.json
 
 suppressions:
   - code:  PatchBodyParametersSchema
