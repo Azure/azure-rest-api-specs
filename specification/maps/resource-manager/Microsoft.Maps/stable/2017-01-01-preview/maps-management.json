@@ -589,6 +589,11 @@
           "readOnly": true,
           "description": "The SKU of this account.",
           "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "readOnly": true,
+          "description": "The map account properties.",
+          "$ref": "#/definitions/MapsAccountProperties"
         }
       },
       "allOf": [
@@ -782,6 +787,15 @@
               }
             }
           }
+        }
+      }
+    },
+    "MapsAccountProperties": {
+      "description": "Additional Map account properties",
+      "properties": {
+        "x-ms-client-id": {
+          "description": "A unique identifier for the maps account",
+          "type": "string"
         }
       }
     }

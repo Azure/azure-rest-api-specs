@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "savingsPlanOrderAliasName": "spAlias123",
+    "api-version": "2024-11-01-preview",
+    "body": {
+      "sku": {
+        "name": "Compute_Savings_Plan"
+      },
+      "properties": {
+        "billingScopeId": "/providers/Microsoft.Billing/billingAccounts/1234567/billingSubscriptions/30000000-0000-0000-0000-000000000000",
+        "appliedScopeType": "Single",
+        "appliedScopeProperties": {
+          "subscriptionId": "/subscriptions/30000000-0000-0000-0000-000000000000"
+        },
+        "term": "P3Y",
+        "displayName": "Compute_SavingsPlan_10-28-2022_16-38",
+        "billingPlan": "P1M",
+        "commitment": {
+          "grain": "Hourly",
+          "currencyCode": "USD",
+          "amount": 0.001
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2021-07-01-privatepreview",
+        "Retry-After": 5
+      },
+      "body": {
+        "id": "/providers/microsoft.billingbenefits/savingsPlanOrderAliases/SavingsPlan_1667000324595",
+        "name": "SavingsPlan_1667000324595",
+        "type": "Microsoft.BillingBenefits/savingsPlanOrderAliases",
+        "kind": null,
+        "sku": {
+          "name": "Compute_Savings_Plan"
+        },
+        "properties": {
+          "savingsPlanOrderId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/30000000-0000-0000-0000-000000000023",
+          "billingPlan": "P1M",
+          "billingScopeId": "/providers/Microsoft.Billing/billingAccounts/1234567/billingSubscriptions/30000000-0000-0000-0000-000000000000",
+          "appliedScopeType": "Single",
+          "appliedScopeProperties": {
+            "subscriptionId": "/subscriptions/30000000-0000-0000-0000-000000000000"
+          },
+          "commitment": {
+            "grain": "Hourly",
+            "currencyCode": "USD",
+            "amount": 0.001
+          },
+          "displayName": "Compute_SavingsPlan_10-28-2022_16-38",
+          "provisioningState": "Created",
+          "term": "P3Y"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/providers/microsoft.billingbenefits/savingsPlanOrderAliases/SavingsPlan_1667000324595",
+        "name": "SavingsPlan_1667000324595",
+        "type": "Microsoft.BillingBenefits/savingsPlanOrderAliases",
+        "kind": null,
+        "sku": {
+          "name": "Compute_Savings_Plan"
+        },
+        "properties": {
+          "savingsPlanOrderId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/30000000-0000-0000-0000-000000000023",
+          "billingPlan": "P1M",
+          "billingScopeId": "/providers/Microsoft.Billing/billingAccounts/1234567/billingSubscriptions/30000000-0000-0000-0000-000000000000",
+          "appliedScopeType": "Single",
+          "appliedScopeProperties": {
+            "subscriptionId": "/subscriptions/30000000-0000-0000-0000-000000000000"
+          },
+          "commitment": {
+            "grain": "Hourly",
+            "currencyCode": "USD",
+            "amount": 0.001
+          },
+          "displayName": "Compute_SavingsPlan_10-28-2022_16-38",
+          "provisioningState": "Created",
+          "term": "P3Y"
+        }
+      }
+    }
+  }
+}

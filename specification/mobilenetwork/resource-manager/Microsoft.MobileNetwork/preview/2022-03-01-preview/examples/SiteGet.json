@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "mobileNetworkName": "testMobileNetwork",
+    "siteName": "testSite"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSite",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite",
+        "type": "Microsoft.MobileNetwork/mobileNetworks/sites",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "testLocation",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "networkFunctions": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/networkFunctions/testNf"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

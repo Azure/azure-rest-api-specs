@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRg",
+    "vaultName": "testVault",
+    "api-version": "2021-06-01",
+    "fabricName": "Azure",
+    "$filter": "backupManagementType eq 'AzureWorkload'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/172424a4-d65f-421e-a8de-197d98aabeba/resourcegroups/testrg/providers/microsoft.recoveryservices/vaults/suchandr-test-vault-wcus/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;testrg;suchandrtestsa125",
+            "name": "StorageContainer;Storage;testrg;suchandrtestsa125",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers",
+            "properties": {
+              "sourceResourceId": "/subscriptions/172424a4-d65f-421e-a8de-197d98aabeba/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/suchandrtestsa125",
+              "protectedItemCount": 2,
+              "friendlyName": "suchandrtestsa125",
+              "backupManagementType": "AzureStorage",
+              "registrationStatus": "Registered",
+              "healthStatus": "Healthy",
+              "containerType": "StorageContainer"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

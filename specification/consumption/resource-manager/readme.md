@@ -26,25 +26,116 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05
+tag: package-2024-08
 ```
 
+### Tag: package-2024-08
+
+These settings apply only when `--tag=package-2024-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08'
+input-file:
+  - Microsoft.Consumption/stable/2024-08-01/consumption_pricesheet.json
+  - Microsoft.Consumption/stable/2024-08-01/consumption.json
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.Consumption/stable/2023-11-01/consumption.json
+  - Microsoft.Consumption/stable/2023-11-01/consumption_pricesheet.json
+```
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.Consumption/stable/2023-05-01/consumption.json
+  - Microsoft.Consumption/stable/2023-05-01/consumption_pricesheet.json
+```
+
+### Tag: package-2023-03
+
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03'
+input-file:
+  - Microsoft.Consumption/stable/2023-03-01/consumption.json
+  - Microsoft.Consumption/stable/2023-03-01/consumption_pricesheet.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.Consumption/stable/2022-09-01/consumption.json
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.Consumption/stable/2021-10-01/consumption.json
+```
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.Consumption/stable/2021-05-01/consumption.json
+```
+
+### Tag: package-2019-11
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11'
+input-file:
+  - Microsoft.Consumption/stable/2019-11-01/consumption.json
+```
+
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10'
+input-file:
+  - Microsoft.Consumption/stable/2019-10-01/consumption.json
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.Consumption/stable/2019-06-01/consumption.json
+```
 
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-05'
+``` yaml $(tag) == 'package-2019-05'
 input-file:
   - Microsoft.Consumption/stable/2019-05-01/consumption.json
 ```
-
 
 ### Tag: package-preview-2019-05
 
 These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-05'
+``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
   - Microsoft.Consumption/preview/2019-05-01-preview/consumption.json
 ```
@@ -159,6 +250,12 @@ directive:
     from: consumption.json
     reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
     approved-by: "@fearthecowboy"
+
+  - suppress: ValidFormats
+    from: consumption.json
+    reason: Our APIs take decimal parameters and return decimal properties.
+    approved-by: "@jianyexi"
+    
 ```
 
 ---
@@ -203,20 +300,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_consumption']
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Consumption
-  output-folder: $(csharp-sdks-folder)/consumption/Microsoft.Azure.Management.Consumption/src/Generated
-  clear-output-folder: true
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Java
@@ -256,7 +341,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2017_04_24_preview
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_04_24_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2017_04_24_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -269,7 +354,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2017_11_30
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_11_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2017_11_30
 regenerate-manager: true
 generate-interface: true
 ```
@@ -282,7 +367,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_01_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_01_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_01_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -295,7 +380,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_03_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_03_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_03_31
 regenerate-manager: true
 generate-interface: true
 directive:
@@ -318,7 +403,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-12-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2017_12_30_preview
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_12_30_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2017_12_30_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -331,7 +416,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_05_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_05_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_05_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -344,7 +429,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_06_30
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_06_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_06_30
 regenerate-manager: true
 generate-interface: true
 ```
@@ -357,7 +442,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_08_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_08_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_08_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -370,7 +455,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_10_01
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -383,45 +468,27 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2019_01_01
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2019_01_01
 regenerate-manager: true
 generate-interface: true
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Suppression
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.Consumption/stable/2019-05-01/consumption.json
-  - $(this-folder)/Microsoft.Consumption/preview/2019-05-01-preview/consumption.json
-  - $(this-folder)/Microsoft.Consumption/preview/2019-04-01-preview/consumption.json
-  - $(this-folder)/Microsoft.Consumption/preview/2018-11-01-preview/consumption.json
-  - $(this-folder)/Microsoft.Consumption/stable/2019-01-01/consumption.json
-  - $(this-folder)/Microsoft.Consumption/stable/2017-11-30/consumption.json
-  - $(this-folder)/Microsoft.Consumption/stable/2018-01-31/consumption.json
-  - $(this-folder)/Microsoft.Consumption/stable/2018-03-31/consumption.json
-  - $(this-folder)/Microsoft.Consumption/stable/2018-05-31/consumption.json
-  - $(this-folder)/Microsoft.Consumption/stable/2018-06-30/consumption.json
-  - $(this-folder)/Microsoft.Consumption/stable/2018-08-31/consumption.json
-  - $(this-folder)/Microsoft.Consumption/stable/2018-10-01/consumption.json
-  - $(this-folder)/Microsoft.Consumption/preview/2017-04-24-preview/consumption.json
-  - $(this-folder)/Microsoft.Consumption/preview/2017-12-30-preview/consumption.json
-
+``` yaml
+directive:
+  - suppress: R4009
+    from: consumption.json
+    reason: SystemData properties does not fit into the consumption RP APIs as they dont really create any actual resources.
+  - suppress: GuidUsage
+    from: consumption.json
+    reason: Usage of Guid in the consumption RP APIs is signed off from the ARM team.
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
+## AzureResourceSchema
 
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)

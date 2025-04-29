@@ -1,0 +1,41 @@
+{
+  "operationId": "MeshNetwork_CreateOrUpdate",
+  "description": "This example shows how to create or update a network resource.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "networkResourceName": "sampleNetwork",
+    "networkResourceDescription": {
+      "name": "sampleNetwork",
+      "properties": {
+        "kind": "Local",
+        "description": "Service Fabric Mesh sample network.",
+        "networkAddressPrefix": "2.0.0.0/16"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleNetwork",
+        "properties": {
+          "kind": "Local",
+          "description": "Service Fabric Mesh sample network.",
+          "networkAddressPrefix": "2.0.0.0/16",
+          "status": "Ready"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sampleNetwork",
+        "properties": {
+          "kind": "Local",
+          "description": "Service Fabric Mesh sample network.",
+          "networkAddressPrefix": "2.0.0.0/16",
+          "status": "Creating"
+        }
+      }
+    },
+    "202": {}
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "title": "Post Azure Virtual Network Manager Commit",
+  "parameters": {
+    "api-version": "2022-02-01-preview",
+    "subscriptionId": "subscriptionC",
+    "resourceGroupName": "resoureGroupSample",
+    "networkManagerName": "testNetworkManager",
+    "parameters": {
+      "targetLocations": [
+        "useast"
+      ],
+      "configurationIds": [
+        "/subscriptions/subscriptionC/resourceGroups/resoureGroupSample/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/SampleSecurityAdminConfig"
+      ],
+      "commitType": "SecurityAdmin"
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "commitId": "testCommitId",
+        "targetLocations": [
+          "useast"
+        ],
+        "configurationIds": [
+          "/subscriptions/subscriptionC/resourceGroups/resoureGroupSample/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/SampleSecurityAdminConfig"
+        ],
+        "commitType": "SecurityAdmin"
+      }
+    }
+  }
+}

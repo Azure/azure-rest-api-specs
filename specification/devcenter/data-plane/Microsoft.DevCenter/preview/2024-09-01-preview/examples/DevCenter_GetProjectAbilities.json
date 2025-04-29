@@ -1,0 +1,37 @@
+{
+  "title": "Gets the signed-in user's permitted abilities in a project.",
+  "operationId": "DevCenter_GetProjectAbilities",
+  "parameters": {
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/",
+    "projectName": "myProject",
+    "userId": "me",
+    "api-version": "2024-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "abilitiesAsAdmin": [
+          "ReadDevBoxes",
+          "ReadEnvironments"
+        ],
+        "abilitiesAsDeveloper": [
+          "CustomizeDevBoxes",
+          "DeleteDevBoxes",
+          "DeleteEnvironments",
+          "ManageDevBoxActions",
+          "ManageEnvironmentActions",
+          "ReadDevBoxActions",
+          "ReadDevBoxes",
+          "ReadEnvironmentActions",
+          "ReadEnvironmentOutputs",
+          "ReadEnvironments",
+          "ReadRemoteConnections",
+          "StartDevBoxes",
+          "StopDevBoxes",
+          "WriteDevBoxes",
+          "WriteEnvironments"
+        ]
+      }
+    }
+  }
+}

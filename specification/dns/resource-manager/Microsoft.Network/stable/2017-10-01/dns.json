@@ -1381,6 +1381,12 @@
           "description": "The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.",
           "readOnly": true
         },
+        "maxNumberOfRecordsPerRecordSet": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of records per record set that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
         "numberOfRecordSets": {
           "type": "integer",
           "format": "int64",
@@ -1394,6 +1400,19 @@
           },
           "description": "The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored.",
           "readOnly": true
+        },
+        "zoneType": {
+          "type": "string",
+          "enum": [
+            "Public",
+            "Private"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneType",
+            "modelAsString": false
+          },
+          "default": "Public",
+          "description": "The type of this DNS zone (Public or Private)."
         }
       },
       "description": "Represents the properties of the zone."
@@ -1458,40 +1477,40 @@
     },
     "CloudError": {
       "type": "object",
+      "x-ms-external": true,
       "properties": {
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
-          "description": "The error message body"
+          "description": "Cloud error body."
         }
       },
-      "x-ms-external": true,
-      "description": "An error message"
+      "description": "An error response from the service."
     },
     "CloudErrorBody": {
       "type": "object",
+      "x-ms-external": true,
       "properties": {
         "code": {
           "type": "string",
-          "description": "The error code"
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
           "type": "string",
-          "description": "A description of what caused the error"
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
         },
         "target": {
           "type": "string",
-          "description": "The target resource of the error message"
+          "description": "The target of the particular error. For example, the name of the property in error."
         },
         "details": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
-          "description": "Extra error information"
+          "description": "A list of additional details about the error."
         }
       },
-      "x-ms-external": true,
-      "description": "The body of an error message"
+      "description": "An error response from the service."
     }
   },
   "parameters": {}

@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2020-07-31",
+    "storeType": "coldstore",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "continuationToken": "aXsic2tpcCI6MTAxYZwidGFrZSI6MTAwMH0=",
+    "parameters": {
+      "getSeries": {
+        "timeSeriesId": [
+          "006dfc2d-0324-4937-998c-d16f3b4f1952",
+          "T1"
+        ],
+        "searchSpan": {
+          "from": "2016-08-01T00:00:00Z",
+          "to": "2016-08-01T00:16:50Z"
+        },
+        "filter": null,
+        "inlineVariables": {
+          "temperatures": {
+            "kind": "numeric",
+            "value": {
+              "tsx": "$event.Temperature"
+            },
+            "filter": null,
+            "aggregation": {
+              "tsx": "avg($value)"
+            }
+          }
+        },
+        "projectedVariables": [
+          "temperatures"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timestamps": [
+          "2016-08-01T00:00:21Z"
+        ],
+        "properties": [
+          {
+            "name": "temperatures",
+            "type": "Double",
+            "values": [
+              67.825
+            ]
+          }
+        ],
+        "progress": 100.0
+      }
+    }
+  }
+}

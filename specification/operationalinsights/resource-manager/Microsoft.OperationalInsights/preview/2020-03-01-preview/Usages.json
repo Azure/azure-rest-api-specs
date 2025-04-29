@@ -1,0 +1,137 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2020-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/usages": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "x-ms-examples": {
+          "UsagesList": {
+            "$ref": "./examples/WorkspacesListUsages.json"
+          }
+        },
+        "operationId": "Usages_List",
+        "description": "Gets a list of usage metrics for a workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListUsagesResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MetricName": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The system name of the metric."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The localized name of the metric."
+        }
+      },
+      "description": "The name of a metric."
+    },
+    "UsageMetric": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "The name of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The units used for the metric."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "The current value of the metric."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "The quota limit for the metric."
+        },
+        "nextResetTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time that the metric's value will reset."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "description": "The quota period that determines the length of time between value resets."
+        }
+      },
+      "description": "A metric describing the usage of a resource."
+    },
+    "WorkspaceListUsagesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageMetric"
+          },
+          "description": "Gets or sets a list of usage metrics for a workspace."
+        }
+      },
+      "description": "The list workspace usages operation response."
+    }
+  },
+  "parameters": {}
+}

@@ -1558,6 +1558,55 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "WorkflowRuns"
+        ],
+        "operationId": "WorkflowRuns_Delete",
+        "description": "Deletes a workflow run.",
+        "x-ms-examples": {
+          "Delete a run for a workflow": {
+            "$ref": "./examples/WorkflowRuns_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/cancel": {
@@ -5244,7 +5293,7 @@
         },
         "definition": {
           "$ref": "#/definitions/Object",
-          "description": "The definition."
+          "description": "The definition. See [Schema reference for Workflow Definition Language in Azure Logic Apps](https://aka.ms/logic-apps-workflow-definition-language)."
         },
         "parameters": {
           "type": "object",

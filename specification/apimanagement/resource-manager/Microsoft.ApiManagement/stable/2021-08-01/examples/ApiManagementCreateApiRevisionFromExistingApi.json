@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-08-01",
+    "subscriptionId": "subid",
+    "apiId": "echo-api;rev=3",
+    "parameters": {
+      "properties": {
+        "path": "echo",
+        "serviceUrl": "http://echoapi.cloudapp.net/apiv3",
+        "sourceApiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api",
+        "apiRevisionDescription": "Creating a Revision of an existing API"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api;rev=3",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "echo-api;rev=3",
+        "properties": {
+          "displayName": "Echo API",
+          "apiRevision": "3",
+          "subscriptionRequired": true,
+          "serviceUrl": "http://echoapi.cloudapp.net/apiv3",
+          "path": "echo",
+          "protocols": [
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "apiRevisionDescription": "Creating a Revision of an existing API"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api;rev=3",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "echo-api;rev=3",
+        "properties": {
+          "displayName": "Echo API",
+          "apiRevision": "3",
+          "subscriptionRequired": true,
+          "serviceUrl": "http://echoapi.cloudapp.net/apiv3",
+          "path": "echo",
+          "protocols": [
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "apiRevisionDescription": "Creating a Revision of an existing API"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com",
+    "Content-Type": "application/json",
+    "Prediction-Key": "{API Key}",
+    "projectId": "64b822c5-8082-4b36-a426-27225f4aa18c",
+    "publishedName": "MyModel1",
+    "imageUrl": {
+      "url": "{Image URL}"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "64615ba1-b53f-e911-b05b-f8633f7a2ef1",
+        "project": "fb5bc587-b53f-e911-b05b-f8633f7a2ef1",
+        "iteration": "45c79472-7198-46e1-8ed7-bad2ca111957",
+        "created": "2019-03-10T06:10:28Z",
+        "predictions": [
+          {
+            "tagId": "7e703b80-3c7a-4c3c-bf48-9673c6891a75",
+            "tagName": "Tag 1",
+            "probability": 0.05149666,
+            "boundingBox": {
+              "left": 0.955476165,
+              "top": 0,
+              "width": 0.0412225723,
+              "height": 0.156851858
+            }
+          },
+          {
+            "tagId": "a0d06a54-18e4-4787-a9f9-27a9c13a91e8",
+            "tagName": "Tag 2",
+            "probability": 0.000193528482,
+            "boundingBox": {
+              "left": 0.062178582,
+              "top": 0,
+              "width": 0.9378114,
+              "height": 0.6830492
+            }
+          }
+        ]
+      }
+    }
+  }
+}

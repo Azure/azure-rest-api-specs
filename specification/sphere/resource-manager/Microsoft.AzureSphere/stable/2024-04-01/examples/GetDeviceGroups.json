@@ -1,0 +1,30 @@
+{
+  "operationId": "DeviceGroups_ListByProduct",
+  "title": "DeviceGroups_ListByProduct",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "productName": "MyProduct1",
+    "api-version": "2024-04-01"
+  },
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/MyProduct1/devicegroups/MyDeviceGroup1",
+            "name": "MyDeviceGroup1",
+            "type": "microsoft.azureSphere/catalogs/products/devicegroups"
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/Products/MyProduct2/devicegroups/MyDeviceGroup2",
+            "name": "MyDeviceGroup2",
+            "type": "microsoft.azureSphere/catalogs/products/devicegroups"
+          }
+        ]
+      }
+    }
+  }
+}

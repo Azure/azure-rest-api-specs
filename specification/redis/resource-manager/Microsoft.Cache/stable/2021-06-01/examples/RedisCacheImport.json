@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "name": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-06-01",
+    "subscriptionId": "subid",
+    "parameters": {
+      "format": "RDB",
+      "files": [
+        "http://fileuris.contoso.com/pathtofile1"
+      ]
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    },
+    "204": {}
+  }
+}

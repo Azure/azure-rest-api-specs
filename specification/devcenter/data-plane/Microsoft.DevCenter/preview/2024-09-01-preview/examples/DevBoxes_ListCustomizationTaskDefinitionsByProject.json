@@ -1,0 +1,53 @@
+{
+  "title": "Lists all customization tasks available to the project.",
+  "operationId": "DevBoxes_ListCustomizationTaskDefinitionsByProject",
+  "parameters": {
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/",
+    "projectName": "myProject",
+    "api-version": "2024-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myCatalog/choco",
+            "catalogName": "myCatalog",
+            "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/catalogs/myCatalog/customizationtasks/choco",
+            "description": "Install a package via chocolatey",
+            "parameters": {
+              "package": {
+                "description": "The package to install",
+                "type": "string",
+                "required": true
+              },
+              "version": {
+                "description": "The version of the package",
+                "type": "string",
+                "default": "latest"
+              },
+              "retryOnFail": {
+                "type": "boolean"
+              }
+            }
+          },
+          {
+            "name": "myCatalog/powershell",
+            "catalogName": "myCatalog",
+            "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/catalogs/myCatalog/customizationtasks/powershell",
+            "description": "Runs an arbitrary Powershell command",
+            "parameters": {
+              "command": {
+                "type": "string",
+                "required": true
+              },
+              "runAsAdmin": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

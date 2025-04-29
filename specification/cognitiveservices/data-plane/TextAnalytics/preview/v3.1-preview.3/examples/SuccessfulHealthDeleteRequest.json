@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/text/analytics/v3.1-preview.3/entities/healthcare/jobs/{jobId}"
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "NotFound",
+          "message": "Not Found",
+          "innererror": {
+            "code": "JobIdNotFound",
+            "message": "Job ID not found."
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error"
+        }
+      }
+    }
+  }
+}

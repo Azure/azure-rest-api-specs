@@ -3,7 +3,7 @@
   "info": {
     "title": "Content Moderator Client",
     "version": "1.0",
-    "description": "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue."
+    "description": "You use the API to scan your content as it's generated. Content Moderator then processes your content and sends the results, along with relevant information, either back to your systems or to the built-in review tool. You can use this information to make decisions, like taking it down or sending it to a human judge.\r\n\r\nWhen you're using the API, images need to have a minimum of 128 pixels and a maximum file size of 4 MB. \r\nText can be at most 1,024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs you about the issue."
   },
   "securityDefinitions": {
     "apim_key": {
@@ -49,7 +49,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of faces found.",
+            "description": "List of faces found.",
             "schema": {
               "$ref": "#/definitions/FoundFaces"
             }
@@ -72,7 +72,7 @@
           "ImageModeration"
         ],
         "operationId": "ImageModeration_OCR",
-        "description": "Returns any text found in the image for the language specified. If no language is specified in input then the detection defaults to English.",
+        "description": "Returns any text found in the image for the specified language. If no language is specified in the input, the detection defaults to English.",
         "parameters": [
           {
             "$ref": "#/parameters/language"
@@ -94,7 +94,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The text found and list of candidate text details.",
+            "description": "Text found and list of candidate text details.",
             "schema": {
               "$ref": "#/definitions/OCR"
             }
@@ -156,7 +156,7 @@
           "ImageModeration"
         ],
         "operationId": "ImageModeration_Match",
-        "description": "Fuzzily match an image against one of your custom Image Lists. You can create and manage your custom image lists using <a href=\"/docs/services/578ff44d2703741568569ab9/operations/578ff7b12703741568569abe\">this</a> API. \r\n\r\nReturns ID and tags of matching image.<br/>\r\n<br/>\r\nNote: Refresh Index must be run on the corresponding Image List before additions and removals are reflected in the response.",
+        "description": "Fuzzily match an image against one of your custom image lists. You can create and manage your custom image lists by using <a href=\"/docs/services/578ff44d2703741568569ab9/operations/578ff7b12703741568569abe\">this API</a>. \r\n\r\nReturns the ID and tags of a matching image.<br/>\r\n<br/>\r\nNote: You must refresh the index on the corresponding image list to ensure that additions and removals are reflected in the response.",
         "parameters": [
           {
             "$ref": "#/parameters/listIdQueryParameter"
@@ -197,8 +197,8 @@
         "tags": [
           "TextModeration"
         ],
-        "summary": "Detect profanity and match against custom and shared blacklists",
-        "description": "Detects profanity in more than 100 languages and match against custom and shared blacklists.",
+        "summary": "Detect profanity and match against custom and shared blocklists",
+        "description": "Detects profanity in more than 100 languages and matches against custom and shared blocklists.",
         "operationId": "TextModeration_ScreenText",
         "parameters": [
           {
@@ -218,7 +218,7 @@
           },
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "x-ms-client-name": "textContentType",
             "type": "string",
@@ -242,7 +242,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Status 200",
+            "description": "Status 200.",
             "schema": {
               "$ref": "#/definitions/Screen"
             }
@@ -270,11 +270,11 @@
           "TextModeration"
         ],
         "operationId": "TextModeration_DetectLanguage",
-        "description": "This operation will detect the language of given input content. Returns the <a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a> for the predominant language comprising the submitted text. Over 110 languages supported.",
+        "description": "This operation detects the language of input content. It returns the <a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a> for the predominant language in the submitted text. More than 110 languages are supported.",
         "parameters": [
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "x-ms-client-name": "textContentType",
             "type": "string",
@@ -298,7 +298,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The detected language result.",
+            "description": "Detected language result.",
             "schema": {
               "$ref": "#/definitions/DetectedLanguage"
             }
@@ -326,7 +326,7 @@
           "ListManagementImageLists"
         ],
         "operationId": "ListManagementImageLists_GetDetails",
-        "description": "Returns the details of the image list with list Id equal to list Id passed.",
+        "description": "Returns the details of the image list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -334,7 +334,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/ImageList"
             }
@@ -360,7 +360,7 @@
           "ListManagementImageLists"
         ],
         "operationId": "ListManagementImageLists_Delete",
-        "description": "Deletes image list with the list Id equal to list Id passed.",
+        "description": "Deletes the image list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -368,7 +368,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "type": "string"
             }
@@ -394,14 +394,14 @@
           "ListManagementImageLists"
         ],
         "operationId": "ListManagementImageLists_Update",
-        "description": "Updates an image list with list Id equal to list Id passed.",
+        "description": "Updates an image list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
           },
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -415,7 +415,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/ImageList"
             }
@@ -447,7 +447,7 @@
         "parameters": [
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -461,7 +461,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/ImageList"
             }
@@ -487,11 +487,11 @@
           "ListManagementImageLists"
         ],
         "operationId": "ListManagementImageLists_GetAllImageLists",
-        "description": "Gets all the Image Lists.",
+        "description": "Gets all the image lists.",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/ImageLists"
             }
@@ -519,7 +519,7 @@
           "ListManagementImageLists"
         ],
         "operationId": "ListManagementImageLists_RefreshIndex",
-        "description": "Refreshes the index of the list with list Id equal to list Id passed.",
+        "description": "Refreshes the index of the list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -530,7 +530,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/RefreshIndex"
             }
@@ -558,7 +558,7 @@
           "ListManagementTermLists"
         ],
         "operationId": "ListManagementTermLists_GetDetails",
-        "description": "Returns list Id details of the term list with list Id equal to list Id passed.",
+        "description": "Returns list ID details of the term list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -566,7 +566,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/TermList"
             }
@@ -592,7 +592,7 @@
           "ListManagementTermLists"
         ],
         "operationId": "ListManagementTermLists_Delete",
-        "description": "Deletes term list with the list Id equal to list Id passed.",
+        "description": "Deletes the term list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -600,7 +600,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "type": "string"
             }
@@ -626,14 +626,14 @@
           "ListManagementTermLists"
         ],
         "operationId": "ListManagementTermLists_Update",
-        "description": "Updates an Term List.",
+        "description": "Updates a term list.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
           },
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -647,7 +647,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/TermList"
             }
@@ -675,11 +675,11 @@
           "ListManagementTermLists"
         ],
         "operationId": "ListManagementTermLists_Create",
-        "description": "Creates a Term List",
+        "description": "Creates a term list.",
         "parameters": [
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -693,7 +693,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/TermList"
             }
@@ -719,11 +719,11 @@
           "ListManagementTermLists"
         ],
         "operationId": "ListManagementTermLists_GetAllTermLists",
-        "description": "gets all the Term Lists",
+        "description": "Gets all the term lists.",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/TermLists"
             }
@@ -751,7 +751,7 @@
           "ListManagementTermLists"
         ],
         "operationId": "ListManagementTermLists_RefreshIndex",
-        "description": "Refreshes the index of the list with list Id equal to list ID passed.",
+        "description": "Refreshes the index of the list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -765,7 +765,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/RefreshIndex"
             }
@@ -793,7 +793,7 @@
           "ListManagementImage"
         ],
         "operationId": "ListManagementImage_AddImage",
-        "description": "Add an image to the list with list Id equal to list Id passed.",
+        "description": "Add an image to the list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -815,7 +815,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Image"
             }
@@ -841,7 +841,7 @@
           "ListManagementImage"
         ],
         "operationId": "ListManagementImage_DeleteAllImages",
-        "description": "Deletes all images from the list with list Id equal to list Id passed.",
+        "description": "Deletes all images from the list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -849,7 +849,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "type": "string"
             }
@@ -875,7 +875,7 @@
           "ListManagementImage"
         ],
         "operationId": "ListManagementImage_GetAllImageIds",
-        "description": "Gets all image Ids from the list with list Id equal to list Id passed.",
+        "description": "Gets all image IDs from the list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -883,7 +883,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/ImageIds"
             }
@@ -911,7 +911,7 @@
           "ListManagementImage"
         ],
         "operationId": "ListManagementImage_DeleteImage",
-        "description": "Deletes an image from the list with list Id and image Id passed.",
+        "description": "Deletes an image from the list with the passed list ID and image ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -922,7 +922,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "type": "string"
             }
@@ -950,7 +950,7 @@
           "ListManagementTerm"
         ],
         "operationId": "ListManagementTerm_AddTerm",
-        "description": "Add a term to the term list with list Id equal to list Id passed.",
+        "description": "Adds a term to the term list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -967,7 +967,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created."
           },
           "default": {
             "description": "Error response.",
@@ -990,7 +990,7 @@
           "ListManagementTerm"
         ],
         "operationId": "ListManagementTerm_DeleteTerm",
-        "description": "Deletes a term from the list with list Id equal to the list Id passed.",
+        "description": "Deletes a term from the list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -1004,7 +1004,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content",
+            "description": "No content.",
             "schema": {
               "type": "string"
             }
@@ -1032,7 +1032,7 @@
           "ListManagementTerm"
         ],
         "operationId": "ListManagementTerm_GetAllTerms",
-        "description": "Gets all terms from the list with list Id equal to the list Id passed.",
+        "description": "Gets all terms from the list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -1043,21 +1043,21 @@
           {
             "name": "offset",
             "in": "query",
-            "description": "The pagination start index.",
+            "description": "Pagination start index.",
             "required": false,
             "type": "integer"
           },
           {
             "name": "limit",
             "in": "query",
-            "description": "The max limit.",
+            "description": "Maximum number.",
             "required": false,
             "type": "integer"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Terms"
             }
@@ -1083,7 +1083,7 @@
           "ListManagementTerm"
         ],
         "operationId": "ListManagementTerm_DeleteAllTerms",
-        "description": "Deletes all terms from the list with list Id equal to the list Id passed.",
+        "description": "Deletes all terms from the list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -1094,7 +1094,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content",
+            "description": "No content.",
             "schema": {
               "type": "string"
             }
@@ -1122,26 +1122,26 @@
           "Reviews"
         ],
         "operationId": "Reviews_GetReview",
-        "description": "Returns review details for the review Id passed.",
+        "description": "Returns review details for the passed review ID.",
         "parameters": [
           {
             "name": "teamName",
             "in": "path",
-            "description": "Your Team Name.",
+            "description": "Your team name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "reviewId",
             "in": "path",
-            "description": "Id of the review.",
+            "description": "ID of the review.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Review"
             }
@@ -1169,26 +1169,26 @@
           "Reviews"
         ],
         "operationId": "Reviews_GetJobDetails",
-        "description": "Get the Job Details for a Job Id.",
+        "description": "Get the job details for a job ID.",
         "parameters": [
           {
             "name": "teamName",
             "in": "path",
-            "description": "Your Team Name.",
+            "description": "Your team name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "JobId",
             "in": "path",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Job"
             }
@@ -1216,11 +1216,11 @@
           "Reviews"
         ],
         "operationId": "Reviews_CreateReviews",
-        "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
+        "description": "The created reviews appear for reviewers on your team. As reviewers finish reviewing, results of the reviews are posted (that is, HTTP POST) on the specified CallBackEndpoint value.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review ID>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<ContentId value that was specified on input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
         "parameters": [
           {
             "name": "UrlContentType",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -1233,7 +1233,7 @@
           },
           {
             "name": "createReviewBody",
-            "description": "Body for create reviews API",
+            "description": "Body of the API for creating reviews.",
             "in": "body",
             "required": true,
             "schema": {
@@ -1261,15 +1261,15 @@
                     "type": "string"
                   },
                   "ContentId": {
-                    "description": "Content Identifier.",
+                    "description": "Content identifier.",
                     "type": "string"
                   },
                   "CallbackEndpoint": {
-                    "description": "Optional CallbackEndpoint.",
+                    "description": "Callback endpoint.",
                     "type": "string"
                   },
                   "Metadata": {
-                    "description": "Optional metadata details.",
+                    "description": "Metadata details.",
                     "type": "array",
                     "items": {
                       "required": [
@@ -1299,7 +1299,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/ReviewList"
             }
@@ -1327,7 +1327,7 @@
           "Reviews"
         ],
         "operationId": "Reviews_CreateJob",
-        "description": "A job Id will be returned for the content posted on this endpoint. \r\n\r\nOnce the content is evaluated against the Workflow provided the review will be created or ignored based on the workflow expression.\r\n\r\n<h3>CallBack Schemas </h3>\r\n\r\n<p>\r\n<h4>Job Completion CallBack Sample</h4><br/>\r\n\r\n{<br/>\r\n  \"JobId\": \"<Job Id>,<br/>\r\n  \"ReviewId\": \"<Review Id, if the Job resulted in a Review to be created>\",<br/>\r\n  \"WorkFlowId\": \"default\",<br/>\r\n  \"Status\": \"<This will be one of Complete, InProgress, Error>\",<br/>\r\n  \"ContentType\": \"Image\",<br/>\r\n  \"ContentId\": \"<This is the ContentId that was specified on input>\",<br/>\r\n  \"CallBackType\": \"Job\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>\r\n<p>\r\n<h4>Review Completion CallBack Sample</h4><br/>\r\n\r\n{\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
+        "description": "A job ID will be returned for the content posted on this endpoint. \r\n\r\nAfter the content is evaluated against the provided workflow, the review will be created or ignored based on the workflow expression.\r\n\r\n<h3>CallBack Schemas </h3>\r\n\r\n<p>\r\n<h4>Job Completion CallBack Sample</h4><br/>\r\n\r\n{<br/>\r\n  \"JobId\": \"<Job ID>,<br/>\r\n  \"ReviewId\": \"<Review ID, if the job resulted in a review to be created>\",<br/>\r\n  \"WorkFlowId\": \"default\",<br/>\r\n  \"Status\": \"<One of Complete, InProgress, or Error>\",<br/>\r\n  \"ContentType\": \"Image\",<br/>\r\n  \"ContentId\": \"<ContentId value that was specified on input>\",<br/>\r\n  \"CallBackType\": \"Job\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>\r\n<p>\r\n<h4>Review Completion CallBack Sample</h4><br/>\r\n\r\n{\r\n  \"ReviewId\": \"<Review ID>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<ContentId value that was specified on input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
         "parameters": [
           {
             "$ref": "#/parameters/teamName"
@@ -1346,7 +1346,7 @@
           },
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "x-ms-client-name": "jobContentType",
             "type": "string",
@@ -1384,7 +1384,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/JobId"
             }
@@ -1413,21 +1413,21 @@
           "Reviews"
         ],
         "operationId": "Reviews_AddVideoFrame",
-        "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
+        "description": "The created reviews appear for reviewers on your team. As reviewers finish reviewing, results of the reviews are posted (that is, HTTP POST) on the specified CallBackEndpoint value.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review ID>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<ContentId value that was specified on input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
         "parameters": [
           {
             "$ref": "#/parameters/teamName"
           },
           {
             "name": "reviewId",
-            "description": "Id of the review.",
+            "description": "ID of the review.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "timescale",
-            "description": "Timescale of the video you are adding frames to.",
+            "description": "Timescale of the video that you're adding frames to.",
             "in": "query",
             "required": false,
             "type": "integer"
@@ -1439,7 +1439,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK."
           },
           "default": {
             "description": "Error response.",
@@ -1457,7 +1457,7 @@
           "Reviews"
         ],
         "operationId": "Reviews_GetVideoFrames",
-        "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
+        "description": "The created reviews appear for reviewers on your team. As reviewers finish reviewing, results of the reviews are posted (that is, HTTP POST) on the specified CallBackEndpoint value.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review ID>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<ContentId value that was specified on input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
         "parameters": [
           {
             "$ref": "#/parameters/teamName"
@@ -1489,7 +1489,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Frames"
             }
@@ -1517,7 +1517,7 @@
           "Reviews"
         ],
         "operationId": "Reviews_PublishVideoReview",
-        "description": "Publish video review to make it available for review.",
+        "description": "Publish a video review.",
         "parameters": [
           {
             "$ref": "#/parameters/teamName"
@@ -1531,7 +1531,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "default": {
             "description": "Error response.",
@@ -1556,11 +1556,11 @@
           "Reviews"
         ],
         "operationId": "Reviews_AddVideoTranscriptModerationResult",
-        "description": "This API adds a transcript screen text result file for a video review. Transcript screen text result file is a result of Screen Text API . In order to generate transcript screen text result file , a transcript file has to be screened for profanity using Screen Text API.",
+        "description": "This API adds a transcript screen text result file for a video review. The transcript screen text result file is a result of the Screen Text API. To generate a transcript screen text result file, you must screen a transcript file for profanity by using the Screen Text API.",
         "parameters": [
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "x-ms-client-name": "ContentType",
             "required": true,
             "type": "string",
@@ -1581,7 +1581,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "default": {
             "description": "Error response.",
@@ -1606,7 +1606,7 @@
           "Reviews"
         ],
         "operationId": "Reviews_AddVideoTranscript",
-        "description": "This API adds a transcript file (text version of all the words spoken in a video) to a video review. The file should be a valid WebVTT format.",
+        "description": "This API adds a transcript file (text version of all the words spoken in a video) to a video review. The file should be in a valid WebVTT format.",
         "parameters": [
           {
             "$ref": "#/parameters/teamName"
@@ -1616,7 +1616,7 @@
           },
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "x-ms-client-name": "ContentType",
             "type": "string",
@@ -1634,7 +1634,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "default": {
             "description": "Error response.",
@@ -1679,7 +1679,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of faces found.",
+            "description": "List of faces found.",
             "schema": {
               "$ref": "#/definitions/FoundFaces"
             }
@@ -1709,7 +1709,7 @@
           },
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -1723,7 +1723,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of faces found.",
+            "description": "List of faces found.",
             "schema": {
               "$ref": "#/definitions/FoundFaces"
             }
@@ -1751,7 +1751,7 @@
           "ImageModeration"
         ],
         "operationId": "ImageModeration_OCRUrlInput",
-        "description": "Returns any text found in the image for the language specified. If no language is specified in input then the detection defaults to English.",
+        "description": "Returns any text found in the image for the specified language. If no language is specified in the input, the detection defaults to English.",
         "parameters": [
           {
             "$ref": "#/parameters/language"
@@ -1764,7 +1764,7 @@
           },
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -1778,7 +1778,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The found text and list of candidate text.",
+            "description": "Found text and list of candidate text.",
             "schema": {
               "$ref": "#/definitions/OCR"
             }
@@ -1806,7 +1806,7 @@
           "ImageModeration"
         ],
         "operationId": "ImageModeration_OCRFileInput",
-        "description": "Returns any text found in the image for the language specified. If no language is specified in input then the detection defaults to English.",
+        "description": "Returns any text found in the image for the specified language. If no language is specified in the input, the detection defaults to English.",
         "parameters": [
           {
             "$ref": "#/parameters/language"
@@ -1830,7 +1830,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The found text and list of candidate text.",
+            "description": "Found text and list of candidate text.",
             "schema": {
               "$ref": "#/definitions/OCR"
             }
@@ -1901,7 +1901,7 @@
           },
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -1943,7 +1943,7 @@
           "ImageModeration"
         ],
         "operationId": "ImageModeration_MatchUrlInput",
-        "description": "Fuzzily match an image against one of your custom Image Lists. You can create and manage your custom image lists using <a href=\"/docs/services/578ff44d2703741568569ab9/operations/578ff7b12703741568569abe\">this</a> API. \r\n\r\nReturns ID and tags of matching image.<br/>\r\n<br/>\r\nNote: Refresh Index must be run on the corresponding Image List before additions and removals are reflected in the response.",
+        "description": "Fuzzily match an image against one of your custom image lists. You can create and manage your custom image lists by using <a href=\"/docs/services/578ff44d2703741568569ab9/operations/578ff7b12703741568569abe\">this API</a>. \r\n\r\nReturns the ID and tags of a matching image.<br/>\r\n<br/>\r\nNote: You must refresh the index on the corresponding image list to ensure that additions and removals are reflected in the response.",
         "parameters": [
           {
             "$ref": "#/parameters/listIdQueryParameter"
@@ -1953,7 +1953,7 @@
           },
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -1995,7 +1995,7 @@
           "ImageModeration"
         ],
         "operationId": "ImageModeration_MatchFileInput",
-        "description": "Fuzzily match an image against one of your custom Image Lists. You can create and manage your custom image lists using <a href=\"/docs/services/578ff44d2703741568569ab9/operations/578ff7b12703741568569abe\">this</a> API. \r\n\r\nReturns ID and tags of matching image.<br/>\r\n<br/>\r\nNote: Refresh Index must be run on the corresponding Image List before additions and removals are reflected in the response.",
+        "description": "Fuzzily match an image against one of your custom image lists. You can create and manage your custom image lists by using <a href=\"/docs/services/578ff44d2703741568569ab9/operations/578ff7b12703741568569abe\">this API</a>. \r\n\r\nReturns the ID and tags of a matching image.<br/>\r\n<br/>\r\nNote: You must refresh the index on the corresponding image list to ensure that additions and removals are reflected in the response.",
         "parameters": [
           {
             "$ref": "#/parameters/listIdQueryParameter"
@@ -2039,7 +2039,7 @@
           "ListManagementImage"
         ],
         "operationId": "ListManagementImage_AddImageUrlInput",
-        "description": "Add an image to the list with list Id equal to list Id passed.",
+        "description": "Add an image to the list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -2052,7 +2052,7 @@
           },
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -2066,7 +2066,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Image"
             }
@@ -2094,7 +2094,7 @@
           "ListManagementImage"
         ],
         "operationId": "ListManagementImage_AddImageFileInput",
-        "description": "Add an image to the list with list Id equal to list Id passed.",
+        "description": "Add an image to the list with listId equal to the passed list ID.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
@@ -2118,7 +2118,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Image"
             }
@@ -2141,11 +2141,11 @@
           "Reviews"
         ],
         "operationId": "Reviews_CreateVideoReviews",
-        "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
+        "description": "The created reviews appear for reviewers on your team. As reviewers finish reviewing, results of the reviews are posted (that is, HTTP POST) on the specified CallBackEndpoint value.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review ID>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<ContentId that was specified on input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
         "parameters": [
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -2165,7 +2165,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/ReviewList"
             }
@@ -2193,11 +2193,11 @@
           "Reviews"
         ],
         "operationId": "Reviews_AddVideoFrameUrl",
-        "description": "Use this method to add frames for a video review.Timescale: This parameter is a factor which is used to convert the timestamp on a frame into milliseconds. Timescale is provided in the output of the Content Moderator video media processor on the Azure Media Services platform.Timescale in the Video Moderation output is Ticks/Second.",
+        "description": "Use this method to add frames for a video review. The timescale parameter is a factor that's used to convert the time stamp on a frame into milliseconds. Timescale is provided in the output of the Content Moderator video media processor on the Azure Media Services platform. Timescale in the video moderation output is Ticks/Second.",
         "parameters": [
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -2220,7 +2220,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "default": {
             "description": "Error response.",
@@ -2245,11 +2245,11 @@
           "Reviews"
         ],
         "operationId": "Reviews_AddVideoFrameStream",
-        "description": "Use this method to add frames for a video review.Timescale: This parameter is a factor which is used to convert the timestamp on a frame into milliseconds. Timescale is provided in the output of the Content Moderator video media processor on the Azure Media Services platform.Timescale in the Video Moderation output is Ticks/Second.",
+        "description": "Use this method to add frames for a video review. The timescale parameter is a factor that's used to convert the timestamp on a frame into milliseconds. Timescale is provided in the output of the Content Moderator video media processor on the Azure Media Services platform. Timescale in the video moderation output is Ticks/Second.",
         "parameters": [
           {
             "name": "Content-Type",
-            "description": "The content type.",
+            "description": "Content type.",
             "required": true,
             "type": "string",
             "in": "header"
@@ -2263,21 +2263,21 @@
           },
           {
             "name": "reviewId",
-            "description": "Id of the review.",
+            "description": "ID of the review.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "timescale",
-            "description": "Timescale of the video .",
+            "description": "Timescale of the video.",
             "in": "query",
             "required": false,
             "type": "integer"
           },
           {
             "name": "frameImageZip",
-            "description": "Zip file containing frame images.",
+            "description": "Zip file that contains frame images.",
             "in": "formData",
             "required": true,
             "type": "file"
@@ -2295,7 +2295,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "default": {
             "description": "Error response.",
@@ -2312,10 +2312,10 @@
   },
   "definitions": {
     "Frames": {
-      "description": "The response for a Get Frames request.",
+      "description": "Response for a request to get frames.",
       "properties": {
         "ReviewId": {
-          "description": "Id of the review.",
+          "description": "ID of the review.",
           "type": "string"
         },
         "VideoFrames": {
@@ -2330,7 +2330,7 @@
       "description": "Video frame property details.",
       "properties": {
         "Timestamp": {
-          "description": "Timestamp of the frame.",
+          "description": "Time stamp of the frame.",
           "type": "string"
         },
         "FrameImage": {
@@ -2338,7 +2338,7 @@
           "type": "string"
         },
         "Metadata": {
-          "description": "Array of KeyValue.",
+          "description": "Array of key/value pairs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
@@ -2354,37 +2354,37 @@
       }
     },
     "Screen": {
-      "description": "The response for a Screen text request.",
+      "description": "Response for a screen text request.",
       "properties": {
         "OriginalText": {
-          "description": "The original text.",
+          "description": "Original text.",
           "type": "string"
         },
         "NormalizedText": {
-          "description": "The normalized text.",
+          "description": "Normalized text.",
           "type": "string"
         },
         "AutoCorrectedText": {
-          "description": "The autocorrected text",
+          "description": "Autocorrected text.",
           "type": "string"
         },
         "Misrepresentation": {
-          "description": "The misrepresentation text.",
+          "description": "Misrepresentation text.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "Classification": {
-          "description": "The classification details of the text.",
+          "description": "Classification details of the text.",
           "$ref": "#/definitions/Classification"
         },
         "Status": {
-          "description": "The evaluate status.",
+          "description": "Evaluation status.",
           "$ref": "#/definitions/Status"
         },
         "PII": {
-          "description": "Personal Identifier Information details.",
+          "description": "Details about personally identifiable information.",
           "$ref": "#/definitions/PII"
         },
         "Language": {
@@ -2398,49 +2398,49 @@
           }
         },
         "TrackingId": {
-          "description": "Unique Content Moderator transaction Id.",
+          "description": "Unique Content Moderator transaction ID.",
           "type": "string"
         }
       }
     },
     "Classification": {
-      "description": "The classification details of the text.",
+      "description": "Classification details of the text.",
       "properties": {
         "Category1": {
-          "description": "The category1 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+          "description": "Category1 score details of the text. For more details on category classification, see <a href=\"https://aka.ms/textClassifyCategories\">this article</a>.",
           "properties": {
             "Score": {
-              "description": "The category1 score.",
+              "description": "Category1 score.",
               "type": "number"
             }
           }
         },
         "Category2": {
-          "description": "The category2 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+          "description": "Category2 score details of the text. For more details on category classification, see <a href=\"https://aka.ms/textClassifyCategories\">this article</a>.",
           "properties": {
             "Score": {
-              "description": "The category2 score.",
+              "description": "Category2 score.",
               "type": "number"
             }
           }
         },
         "Category3": {
-          "description": "The category3 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+          "description": "Category3 score details of the text. For more details on category classification, see <a href=\"https://aka.ms/textClassifyCategories\">this article</a>.",
           "properties": {
             "Score": {
-              "description": "The category3 score.",
+              "description": "Category3 score.",
               "type": "number"
             }
           }
         },
         "ReviewRecommended": {
-          "description": "The review recommended flag.",
+          "description": "Review-recommended flag.",
           "type": "boolean"
         }
       }
     },
     "PII": {
-      "description": "Personal Identifier Information details.",
+      "description": "Details about personally identifiable information.",
       "properties": {
         "Email": {
           "type": "array",
@@ -2475,69 +2475,69 @@
       }
     },
     "Email": {
-      "description": "Email Address details.",
+      "description": "Email address details.",
       "properties": {
         "Detected": {
-          "description": "Detected Email Address from the input text content.",
+          "description": "Detected email address from the input text content.",
           "type": "string"
         },
         "SubType": {
-          "description": "Subtype of the detected Email Address.",
+          "description": "Subtype of the detected email address.",
           "type": "string"
         },
         "Text": {
-          "description": "Email Address in the input text content.",
+          "description": "Email address in the input text content.",
           "type": "string"
         },
         "Index": {
-          "description": "Index(Location) of the Email address in the input text content.",
+          "description": "Index (location) of the email address in the input text content.",
           "type": "integer"
         }
       }
     },
     "SSN": {
-      "description": "Detected SSN details.",
+      "description": "Details about a detected social security number.",
       "properties": {
         "Text": {
-          "description": "Detected SSN in the input text content.",
+          "description": "Detected social security number in the input text content.",
           "type": "string"
         },
         "Index": {
-          "description": "Index(Location) of the SSN in the input text content.",
+          "description": "Index (location) of the social security number in the input text content.",
           "type": "integer"
         }
       }
     },
     "IPA": {
-      "description": "IP Address details.",
+      "description": "IP address details.",
       "properties": {
         "SubType": {
-          "description": "Subtype of the detected IP Address.",
+          "description": "Subtype of the detected IP address.",
           "type": "string"
         },
         "Text": {
-          "description": "Detected IP Address.",
+          "description": "Detected IP address.",
           "type": "string"
         },
         "Index": {
-          "description": "Index(Location) of the IP Address in the input text content.",
+          "description": "Index (location) of the IP address in the input text content.",
           "type": "integer"
         }
       }
     },
     "Phone": {
-      "description": "Phone Property details.",
+      "description": "Phone property details.",
       "properties": {
         "CountryCode": {
-          "description": "CountryCode of the detected Phone number.",
+          "description": "Country/region code of the detected phone number.",
           "type": "string"
         },
         "Text": {
-          "description": "Detected Phone number.",
+          "description": "Detected phone number.",
           "type": "string"
         },
         "Index": {
-          "description": "Index(Location) of the Phone number in the input text content.",
+          "description": "Index (location) of the phone number in the input text content.",
           "type": "integer"
         }
       }
@@ -2546,28 +2546,28 @@
       "description": "Address details.",
       "properties": {
         "Text": {
-          "description": "Detected Address.",
+          "description": "Detected address.",
           "type": "string"
         },
         "Index": {
-          "description": "Index(Location) of the Address in the input text content.",
+          "description": "Index (location) of the address in the input text content.",
           "type": "integer"
         }
       }
     },
     "DetectedTerms": {
-      "description": "Detected Terms details.",
+      "description": "Detected term details.",
       "properties": {
         "Index": {
-          "description": "Index(Location) of the detected profanity term in the input text content.",
+          "description": "Index (location) of the detected profanity term in the input text content.",
           "type": "integer"
         },
         "OriginalIndex": {
-          "description": "Original Index(Location) of the detected profanity term in the input text content.",
+          "description": "Original index (location) of the detected profanity term in the input text content.",
           "type": "integer"
         },
         "ListId": {
-          "description": "Matched Terms list Id.",
+          "description": "Matched ID in the term list.",
           "type": "integer"
         },
         "Term": {
@@ -2577,22 +2577,22 @@
       }
     },
     "FoundFaces": {
-      "description": "Request object the contains found faces.",
+      "description": "Request object that contains found faces.",
       "properties": {
         "Status": {
-          "description": "The evaluate status",
+          "description": "Evaluation status.",
           "$ref": "#/definitions/Status"
         },
         "TrackingId": {
-          "description": "The tracking id.",
+          "description": "Tracking ID.",
           "type": "string"
         },
         "CacheId": {
-          "description": "The cache id.",
+          "description": "Cache ID.",
           "type": "string"
         },
         "Result": {
-          "description": "True if result was found.",
+          "description": "True if a result was found.",
           "type": "boolean"
         },
         "Count": {
@@ -2600,14 +2600,14 @@
           "type": "integer"
         },
         "AdvancedInfo": {
-          "description": "The advanced info.",
+          "description": "Advanced info.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
         "Faces": {
-          "description": "The list of faces.",
+          "description": "List of faces.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Face"
@@ -2619,55 +2619,55 @@
       "description": "Coordinates to the found face.",
       "properties": {
         "Bottom": {
-          "description": "The bottom coordinate.",
+          "description": "Bottom coordinate.",
           "type": "integer"
         },
         "Left": {
-          "description": "The left coordinate.",
+          "description": "Left coordinate.",
           "type": "integer"
         },
         "Right": {
-          "description": "The right coordinate.",
+          "description": "Right coordinate.",
           "type": "integer"
         },
         "Top": {
-          "description": "The top coordinate.",
+          "description": "Top coordinate.",
           "type": "integer"
         }
       }
     },
     "OCR": {
-      "description": "Contains the text found in image for the language specified.",
+      "description": "Contains the text found in an image for the specified language.",
       "properties": {
         "Status": {
-          "description": "The evaluate status",
+          "description": "Evaluation status.",
           "$ref": "#/definitions/Status"
         },
         "Metadata": {
-          "description": "Array of KeyValue.",
+          "description": "Array of key/value pairs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
         "TrackingId": {
-          "description": "The tracking id.",
+          "description": "Tracking ID.",
           "type": "string"
         },
         "CacheId": {
-          "description": "The cache id.",
+          "description": "Cache ID.",
           "type": "string"
         },
         "Language": {
-          "description": "The ISO 639-3 code.",
+          "description": "ISO 639-3 code.",
           "type": "string"
         },
         "Text": {
-          "description": "The found text.",
+          "description": "Found text.",
           "type": "string"
         },
         "Candidates": {
-          "description": "The list of candidate text.",
+          "description": "List of candidate text.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Candidate"
@@ -2676,48 +2676,48 @@
       }
     },
     "KeyValuePair": {
-      "description": "The key value pair object properties.",
+      "description": "Key/value pair object properties.",
       "properties": {
         "Key": {
-          "description": "The key parameter.",
+          "description": "Key parameter.",
           "type": "string"
         },
         "Value": {
-          "description": "The value parameter.",
+          "description": "Value parameter.",
           "type": "string"
         }
       }
     },
     "Candidate": {
-      "description": "OCR candidate text.",
+      "description": "Optical character recognition (OCR) candidate text.",
       "properties": {
         "Text": {
-          "description": "The text found.",
+          "description": "Text found.",
           "type": "string"
         },
         "Confidence": {
-          "description": "The confidence level.",
+          "description": "Confidence level.",
           "type": "number"
         }
       }
     },
     "Evaluate": {
-      "description": "Evaluate response object.",
+      "description": "Evaluation response object.",
       "properties": {
         "CacheID": {
-          "description": "The cache id.",
+          "description": "Cache ID.",
           "type": "string"
         },
         "Result": {
-          "description": "Evaluate result.",
+          "description": "Evaluation result.",
           "type": "boolean"
         },
         "TrackingId": {
-          "description": "The tracking id.",
+          "description": "Tracking ID.",
           "type": "string"
         },
         "AdultClassificationScore": {
-          "description": "The adult classification score.",
+          "description": "Adult classification score.",
           "type": "number"
         },
         "IsImageAdultClassified": {
@@ -2725,7 +2725,7 @@
           "type": "boolean"
         },
         "RacyClassificationScore": {
-          "description": "The racy classification score.",
+          "description": "Racy classification score.",
           "type": "number"
         },
         "IsImageRacyClassified": {
@@ -2733,27 +2733,27 @@
           "type": "boolean"
         },
         "AdvancedInfo": {
-          "description": "The advanced info.",
+          "description": "Advanced info.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
         "Status": {
-          "description": "The evaluate status",
+          "description": "Evaluation status.",
           "$ref": "#/definitions/Status"
         }
       }
     },
     "MatchResponse": {
-      "description": "The response for a Match request.",
+      "description": "Response for a match request.",
       "properties": {
         "TrackingId": {
-          "description": "The tracking id.",
+          "description": "Tracking ID.",
           "type": "string"
         },
         "CacheID": {
-          "description": "The cache id.",
+          "description": "Cache ID.",
           "type": "string"
         },
         "IsMatch": {
@@ -2761,42 +2761,42 @@
           "type": "boolean"
         },
         "Matches": {
-          "description": "The match details.",
+          "description": "Match details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Match"
           }
         },
         "Status": {
-          "description": "The evaluate status",
+          "description": "Evaluation status.",
           "$ref": "#/definitions/Status"
         }
       }
     },
     "Match": {
-      "description": "The match details.",
+      "description": "Match details.",
       "properties": {
         "Score": {
           "description": "Confidence score of the image match.",
           "type": "number"
         },
         "MatchId": {
-          "description": "The match id.",
+          "description": "Match ID.",
           "type": "integer"
         },
         "Source": {
-          "description": "The source.",
+          "description": "Source.",
           "type": "string"
         },
         "Tags": {
-          "description": "The tags for match details.",
+          "description": "Tags for match details.",
           "type": "array",
           "items": {
             "type": "integer"
           }
         },
         "Label": {
-          "description": "The label.",
+          "description": "Label.",
           "type": "string"
         }
       }
@@ -2805,49 +2805,49 @@
       "description": "Tag details.",
       "properties": {
         "Key": {
-          "description": "The key parameter.",
+          "description": "Key parameter.",
           "type": "string"
         },
         "Value": {
-          "description": "The value parameter.",
+          "description": "Value parameter.",
           "type": "string"
         }
       }
     },
     "DetectedLanguage": {
-      "description": "Detect language result.",
+      "description": "Detected language result.",
       "properties": {
         "DetectedLanguage": {
-          "description": "The detected language.",
+          "description": "Detected language.",
           "type": "string"
         },
         "Status": {
-          "description": "The detect language status",
+          "description": "Detected language status.",
           "$ref": "#/definitions/Status"
         },
         "TrackingId": {
-          "description": "The tracking id.",
+          "description": "Tracking ID.",
           "type": "string"
         }
       }
     },
     "ImageList": {
-      "description": "Image List Properties.",
+      "description": "Image list properties.",
       "properties": {
         "Id": {
-          "description": "Image List Id.",
+          "description": "Image list ID.",
           "type": "integer"
         },
         "Name": {
-          "description": "Image List Name.",
+          "description": "Image list name.",
           "type": "string"
         },
         "Description": {
-          "description": "Description for image list.",
+          "description": "Description for the image list.",
           "type": "string"
         },
         "Metadata": {
-          "description": "Image List Metadata.",
+          "description": "Image list metadata.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2856,10 +2856,10 @@
       }
     },
     "TermList": {
-      "description": "Term List  Properties.",
+      "description": "Term list properties.",
       "properties": {
         "Id": {
-          "description": "Term list Id.",
+          "description": "Term list ID.",
           "type": "integer"
         },
         "Name": {
@@ -2867,7 +2867,7 @@
           "type": "string"
         },
         "Description": {
-          "description": "Description for term list.",
+          "description": "Description for the term list.",
           "type": "string"
         },
         "Metadata": {
@@ -2892,10 +2892,10 @@
       }
     },
     "RefreshIndex": {
-      "description": "Refresh Index Response.",
+      "description": "Response after you refresh the index.",
       "properties": {
         "ContentSourceId": {
-          "description": "Content source Id.",
+          "description": "Content source ID.",
           "type": "string"
         },
         "IsUpdateSuccess": {
@@ -2913,20 +2913,20 @@
           }
         },
         "Status": {
-          "description": "Refresh index status.",
+          "description": "Status of refreshing the index.",
           "$ref": "#/definitions/Status"
         },
         "TrackingId": {
-          "description": "Tracking Id.",
+          "description": "Tracking ID.",
           "type": "string"
         }
       }
     },
     "Image": {
-      "description": "Image Properties.",
+      "description": "Image properties.",
       "properties": {
         "ContentId": {
-          "description": "Content Id.",
+          "description": "Content ID.",
           "type": "string"
         },
         "AdditionalInfo": {
@@ -2951,7 +2951,7 @@
           "$ref": "#/definitions/Status"
         },
         "TrackingId": {
-          "description": "Tracking Id.",
+          "description": "Tracking ID.",
           "type": "string"
         }
       }
@@ -2974,14 +2974,14 @@
       }
     },
     "ImageIds": {
-      "description": "Image Id properties.",
+      "description": "Image ID properties.",
       "properties": {
         "ContentSource": {
           "description": "Source of the content.",
           "type": "string"
         },
         "ContentIds": {
-          "description": "Id of the contents.",
+          "description": "ID of the content.",
           "type": "array",
           "items": {
             "type": "integer"
@@ -2993,13 +2993,13 @@
           "$ref": "#/definitions/Status"
         },
         "TrackingId": {
-          "description": "Tracking Id.",
+          "description": "Tracking ID.",
           "type": "string"
         }
       }
     },
     "Terms": {
-      "description": "Terms properties.",
+      "description": "Term properties.",
       "properties": {
         "Data": {
           "description": "Term data details.",
@@ -3029,7 +3029,7 @@
       }
     },
     "TermsData": {
-      "description": "All term Id response properties.",
+      "description": "All term ID response properties.",
       "properties": {
         "Language": {
           "description": "Language of the terms.",
@@ -3043,18 +3043,18 @@
           }
         },
         "Status": {
-          "description": "Term Status.",
+          "description": "Term status.",
           "type": "object",
           "$ref": "#/definitions/Status"
         },
         "TrackingId": {
-          "description": "Tracking Id.",
+          "description": "Tracking ID.",
           "type": "string"
         }
       }
     },
     "TermsInList": {
-      "description": "Terms in list Id passed.",
+      "description": "Terms in the passed list ID.",
       "properties": {
         "Term": {
           "description": "Added term details.",
@@ -3063,10 +3063,10 @@
       }
     },
     "Review": {
-      "description": "The Review object.",
+      "description": "Review object.",
       "properties": {
         "ReviewId": {
-          "description": "Id of the review.",
+          "description": "ID of the review.",
           "type": "string"
         },
         "SubTeam": {
@@ -3074,62 +3074,62 @@
           "type": "string"
         },
         "Status": {
-          "description": "The status string (<Pending, Complete>).",
+          "description": "Status string (<Pending, Complete>).",
           "type": "string"
         },
         "ReviewerResultTags": {
-          "description": "Array of KeyValue with Reviewer set Tags.",
+          "description": "Array of key/value pairs with reviewer-set tags.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
         "CreatedBy": {
-          "description": "The reviewer name.",
+          "description": "Reviewer name.",
           "type": "string"
         },
         "Metadata": {
-          "description": "Array of KeyValue.",
+          "description": "Array of key/value pairs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
         "Type": {
-          "description": "The type of content.",
+          "description": "Type of content.",
           "type": "string"
         },
         "Content": {
-          "description": "The content value.",
+          "description": "Content value.",
           "type": "string"
         },
         "ContentId": {
-          "description": "Id of the content.",
+          "description": "ID of the content.",
           "type": "string"
         },
         "CallbackEndpoint": {
-          "description": "The callback endpoint.",
+          "description": "Callback endpoint.",
           "type": "string"
         }
       }
     },
     "Job": {
-      "description": "The Job object.",
+      "description": "Job object.",
       "properties": {
         "Id": {
-          "description": "The job id.",
+          "description": "Job ID.",
           "type": "string"
         },
         "TeamName": {
-          "description": "The team name associated with the job.",
+          "description": "Team name associated with the job.",
           "type": "string"
         },
         "Status": {
-          "description": "The status string (<Pending, Failed, Completed>).",
+          "description": "Status string.",
           "type": "string"
         },
         "WorkflowId": {
-          "description": "The Id of the workflow.",
+          "description": "ID of the workflow.",
           "type": "string"
         },
         "Type": {
@@ -3137,22 +3137,22 @@
           "type": "string"
         },
         "CallBackEndpoint": {
-          "description": "The callback endpoint.",
+          "description": "Callback endpoint.",
           "type": "string"
         },
         "ReviewId": {
-          "description": "Review Id if one is created.",
+          "description": "Review ID if one is created.",
           "type": "string"
         },
         "ResultMetaData": {
-          "description": "Array of KeyValue pairs.",
+          "description": "Array of key/value pairs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
         "JobExecutionReport": {
-          "description": "Job execution report- Array of KeyValue pairs object.",
+          "description": "Array of key/value pair objects in the job execution report.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobExecutionReportDetails"
@@ -3161,7 +3161,7 @@
       }
     },
     "JobExecutionReportDetails": {
-      "description": "Job Execution Report Values.",
+      "description": "Values in the job execution report.",
       "properties": {
         "Ts": {
           "description": "Time details.",
@@ -3174,35 +3174,35 @@
       }
     },
     "ReviewList": {
-      "description": "The list of review ids.",
+      "description": "List of review IDs.",
       "type": "array",
       "items": {
         "type": "string"
       }
     },
     "JobListResult": {
-      "description": "The list of job ids.",
+      "description": "List of job IDs.",
       "properties": {
         "Value": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The job id."
+          "description": "Job ID."
         }
       }
     },
     "JobId": {
       "properties": {
         "JobId": {
-          "description": "Id of the created job.",
+          "description": "ID of the created job.",
           "type": "string"
         }
       }
     },
     "APIError": {
       "type": "object",
-      "description": "Error information returned by the API",
+      "description": "Error information that the API returns.",
       "properties": {
         "Error": {
           "$ref": "#/definitions/Error"
@@ -3241,14 +3241,14 @@
     "CallBackEndpoint": {
       "name": "CallBackEndpoint",
       "in": "query",
-      "description": "Callback endpoint for posting the create job result.",
+      "description": "Callback endpoint for posting the result of creating a job.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
     "WorkflowName": {
       "name": "WorkflowName",
       "in": "query",
-      "description": "Workflow Name that you want to invoke.",
+      "description": "Workflow name that you want to invoke.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -3256,7 +3256,7 @@
     "ContentType": {
       "name": "ContentType",
       "in": "query",
-      "description": "Image, Text or Video.",
+      "description": "Image, text or video.",
       "required": true,
       "type": "string",
       "enum": [
@@ -3269,14 +3269,14 @@
     "ContentId": {
       "name": "ContentId",
       "in": "query",
-      "description": "Id/Name to identify the content submitted.",
+      "description": "ID or name to identify the submitted content.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
     "subTeam": {
       "name": "subTeam",
-      "description": "SubTeam of your team, you want to assign the created review to.",
+      "description": "Subteam that you want to assign the created review to.",
       "in": "query",
       "required": false,
       "type": "string",
@@ -3303,7 +3303,7 @@
     },
     "reviewId": {
       "name": "reviewId",
-      "description": "Id of the review.",
+      "description": "ID of the review.",
       "in": "path",
       "required": true,
       "type": "string",
@@ -3312,14 +3312,14 @@
     "CacheImage": {
       "name": "CacheImage",
       "in": "query",
-      "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
+      "description": "Whether to retain the submitted image for future use. If it's omitted, the default is false.",
       "type": "boolean",
       "x-ms-parameter-location": "method"
     },
     "enhanced": {
       "name": "enhanced",
       "in": "query",
-      "description": "When set to True, the image goes through additional processing to come with additional candidates.\n\nimage/tiff is not supported when enhanced is set to true\n\nNote: This impacts the response time.",
+      "description": "When it's set to true, the image goes through additional processing to come with additional candidates.\n\nThe image or TIFF file is not supported when enhanced is set to true.\n\nNote: This affects the response time.",
       "type": "boolean",
       "default": false,
       "x-ms-parameter-location": "method"
@@ -3327,7 +3327,7 @@
     "ImageId": {
       "name": "ImageId",
       "in": "path",
-      "description": "Id of the image.",
+      "description": "Image ID.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -3335,7 +3335,7 @@
     "listIdQueryParameter": {
       "name": "listId",
       "in": "query",
-      "description": "The list Id.",
+      "description": "List ID.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -3388,7 +3388,7 @@
     "label": {
       "name": "label",
       "in": "query",
-      "description": "The image label.",
+      "description": "Image label.",
       "type": "string",
       "required": false,
       "x-ms-parameter-location": "method"
@@ -3403,7 +3403,7 @@
     },
     "transcriptModerationBody": {
       "name": "transcriptModerationBody",
-      "description": "Body for add video transcript moderation result API",
+      "description": "Body of the API for adding video transcript moderation results.",
       "in": "body",
       "required": true,
       "schema": {
@@ -3418,11 +3418,11 @@
           "description": "Schema items of the body.",
           "properties": {
             "Timestamp": {
-              "description": "Timestamp of the image.",
+              "description": "Time stamp of the image.",
               "type": "string"
             },
             "Terms": {
-              "description": "Optional metadata details.",
+              "description": "Metadata details.",
               "type": "array",
               "items": {
                 "required": [
@@ -3432,7 +3432,7 @@
                 "type": "object",
                 "properties": {
                   "Index": {
-                    "description": "Index of the word",
+                    "description": "Index of the word.",
                     "type": "integer"
                   },
                   "Term": {
@@ -3449,7 +3449,7 @@
     },
     "CreateVideoReviewsBody": {
       "name": "CreateVideoReviewsBody",
-      "description": "Body for create reviews API",
+      "description": "Body of the API for creating reviews.",
       "in": "body",
       "required": true,
       "schema": {
@@ -3466,7 +3466,7 @@
           "description": "Schema items of the body.",
           "properties": {
             "VideoFrames": {
-              "description": "Optional metadata details.",
+              "description": "Metadata details.",
               "type": "array",
               "items": {
                 "required": [
@@ -3477,15 +3477,15 @@
                 "type": "object",
                 "properties": {
                   "Id": {
-                    "description": "Id of the frame.",
+                    "description": "ID of the frame.",
                     "type": "string"
                   },
                   "Timestamp": {
-                    "description": "Timestamp of the frame.",
+                    "description": "Time stamp of the frame.",
                     "type": "integer"
                   },
                   "FrameImage": {
-                    "description": "Frame image Url.",
+                    "description": "Frame image URL.",
                     "type": "string"
                   },
                   "ReviewerResultTags": {
@@ -3509,7 +3509,7 @@
                     }
                   },
                   "Metadata": {
-                    "description": "Optional metadata details.",
+                    "description": "Metadata details.",
                     "type": "array",
                     "items": {
                       "required": [
@@ -3533,7 +3533,7 @@
               }
             },
             "Metadata": {
-              "description": "Optional metadata details.",
+              "description": "Metadata details.",
               "type": "array",
               "items": {
                 "required": [
@@ -3561,15 +3561,15 @@
               "type": "string"
             },
             "Content": {
-              "description": "Video content url to review.",
+              "description": "Video content URL to review.",
               "type": "string"
             },
             "ContentId": {
-              "description": "Content Identifier.",
+              "description": "Content identifier.",
               "type": "string"
             },
             "Status": {
-              "description": "Status of the video(Complete,Unpublished,Pending)",
+              "description": "Status of the video.",
               "type": "string",
               "enum": [
                 "Complete",
@@ -3582,7 +3582,7 @@
               "type": "integer"
             },
             "CallbackEndpoint": {
-              "description": "Optional CallbackEndpoint.",
+              "description": "Callback endpoint.",
               "type": "string"
             }
           }
@@ -3628,7 +3628,7 @@
     "listId": {
       "name": "listId",
       "in": "path",
-      "description": "List Id of the image list.",
+      "description": "List ID of the image list.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -3650,11 +3650,11 @@
         }
       },
       "x-ms-parameter-location": "method",
-      "description": "The image url."
+      "description": "Image URL."
     },
     "videoFrameBody": {
       "name": "videoFrameBody",
-      "description": "Body for add video frames API",
+      "description": "Body of the API for adding video frames.",
       "in": "body",
       "required": true,
       "schema": {
@@ -3669,7 +3669,7 @@
           "description": "Schema items of the body.",
           "properties": {
             "Timestamp": {
-              "description": "Timestamp of the frame.",
+              "description": "Time stamp of the frame.",
               "type": "string"
             },
             "FrameImage": {
@@ -3697,7 +3697,7 @@
               }
             },
             "Metadata": {
-              "description": "Optional metadata details.",
+              "description": "Metadata details.",
               "type": "array",
               "items": {
                 "required": [
@@ -3730,12 +3730,12 @@
         "type": "object",
         "format": "file"
       },
-      "description": "The image file.",
+      "description": "Image file.",
       "x-ms-parameter-location": "method"
     },
     "Endpoint": {
       "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "description": "Supported Azure Cognitive Services endpoints (protocol and host name, such as https://westus.api.cognitive.microsoft.com).",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",

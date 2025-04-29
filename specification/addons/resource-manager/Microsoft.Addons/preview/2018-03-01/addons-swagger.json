@@ -48,7 +48,7 @@
           "200": {
             "description": "List all the operations.",
             "schema": {
-              "$ref": "#/definitions/OperationList"
+              "$ref": "#/definitions/OperationListValue"
             }
           },
           "default": {
@@ -298,7 +298,8 @@
       "description": "The status of all Canonical support plans for a subscription.",
       "items": {
         "$ref": "#/definitions/CanonicalSupportPlanInfoDefinition"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "CanonicalSupportPlanInfoDefinition": {
       "type": "object",
@@ -336,12 +337,24 @@
         }
       }
     },
+    "OperationListValue": {
+      "type": "object",
+      "description": "List of supported operations.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/OperationList"
+        }
+      }
+    },
     "OperationList": {
       "type": "array",
       "description": "List of supported operations.",
       "items": {
         "$ref": "#/definitions/OperationsDefinition"
-      }
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
     },
     "OperationsDefinition": {
       "type": "object",
@@ -393,10 +406,8 @@
           "description": "Description of the error."
         },
         "code": {
-          "type": "integer",
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "minimum": 100,
-          "maximum": 600
+          "type": "string",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code."
         }
       }
     }

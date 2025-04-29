@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myVirtualMachineScaleSet",
+    "instanceId": "0",
+    "api-version": "2024-03-01",
+    "parameters": {
+      "commandId": "RunPowerShellScript",
+      "script": [
+        "Write-Host Hello World!"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "code": "ComponentStatus/StdOut/succeeded",
+            "level": "Info",
+            "displayStatus": "Provisioning succeeded",
+            "message": "Hello World!"
+          },
+          {
+            "code": "ComponentStatus/StdErr/succeeded",
+            "level": "Info",
+            "displayStatus": "Provisioning succeeded",
+            "message": ""
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/westus/operations/{operationId}&monitor=true&api-version=2024-03-01"
+      }
+    }
+  }
+}

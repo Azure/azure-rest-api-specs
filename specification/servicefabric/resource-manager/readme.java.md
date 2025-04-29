@@ -29,7 +29,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-02-only' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.servicefabric.v2018_02_01
-  output-folder: $(azure-libraries-for-java-folder)/servicefabric/resource-manager/v2018_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/servicefabric/mgmt-v2018_02_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -42,7 +42,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.servicefabric.v2017_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/servicefabric/resource-manager/v2017_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/servicefabric/mgmt-v2017_07_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -55,7 +55,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.servicefabric.v2016_09_01
-  output-folder: $(azure-libraries-for-java-folder)/servicefabric/resource-manager/v2016_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/servicefabric/mgmt-v2016_09_01
 regenerate-manager: true
 generate-interface: true
 ```

@@ -1,0 +1,359 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the network function publisher in a Hybrid Network resource provider.",
+    "version": "2024-04-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifacts": {
+      "get": {
+        "tags": [
+          "ProxyArtifact"
+        ],
+        "operationId": "ProxyArtifact_List",
+        "description": "Lists all the available artifacts in the parent Artifact Store.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of available artifacts.",
+            "schema": {
+              "$ref": "#/definitions/ProxyArtifactOverviewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List artifacts under an artifact store": {
+            "$ref": "./examples/PureProxyArtifact/ArtifactList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactVersions": {
+      "get": {
+        "tags": [
+          "ProxyArtifact"
+        ],
+        "operationId": "ProxyArtifact_Get",
+        "description": "Get a Artifact overview information.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a proxy artifact overview.",
+            "schema": {
+              "$ref": "#/definitions/ProxyArtifactVersionsOverviewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an artifact overview": {
+            "$ref": "./examples/PureProxyArtifact/ArtifactGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactVersions/{artifactVersionName}": {
+      "patch": {
+        "tags": [
+          "ProxyArtifact"
+        ],
+        "operationId": "ProxyArtifact_UpdateState",
+        "description": "Change artifact state defined in artifact store.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactChangeState"
+            },
+            "description": "Parameters supplied to update the state of artifact manifest."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. Artifact State updated successfully",
+            "schema": {
+              "$ref": "#/definitions/ProxyArtifactVersionsListOverview"
+            }
+          },
+          "202": {
+            "description": "Request of updating artifact state is accepted.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an artifact state": {
+            "$ref": "./examples/PureProxyArtifact/ArtifactChangeState.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProxyArtifactOverviewListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProxyArtifactListOverview"
+          },
+          "description": "A list of available proxy artifacts."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The proxy artifact list result."
+    },
+    "ProxyArtifactVersionsOverviewListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProxyArtifactVersionsListOverview"
+          },
+          "description": "A list of available proxy artifacts."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The proxy artifact list result."
+    },
+    "ProxyArtifactVersionsListOverview": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "readOnly": true,
+          "$ref": "#/definitions/ProxyArtifactOverviewPropertiesValue",
+          "description": "Proxy Artifact overview properties."
+        }
+      },
+      "readOnly": true,
+      "description": "The proxy artifact overview."
+    },
+    "ProxyArtifactListOverview": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "readOnly": true,
+      "description": "The proxy artifact overview."
+    },
+    "ProxyArtifactOverview": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "readOnly": true,
+          "$ref": "#/definitions/ProxyArtifactOverviewPropertiesFormat",
+          "description": "Proxy Artifact properties overview."
+        }
+      },
+      "readOnly": true,
+      "description": "The proxy artifact overview."
+    },
+    "ProxyArtifactOverviewPropertiesFormat": {
+      "description": "Proxy Artifact overview properties.",
+      "type": "object",
+      "properties": {
+        "artifactVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProxyArtifactOverviewPropertiesValue"
+          },
+          "description": "The proxy artifact overview properties.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProxyArtifactOverviewPropertiesValue": {
+      "type": "object",
+      "properties": {
+        "artifactType": {
+          "$ref": "./publisher.json#/definitions/ArtifactType",
+          "description": "The artifact type."
+        },
+        "artifactVersion": {
+          "type": "string",
+          "description": "The artifact version."
+        },
+        "artifactState": {
+          "$ref": "#/definitions/ArtifactState",
+          "description": "The artifact state"
+        }
+      }
+    },
+    "ArtifactChangeState": {
+      "description": "The artifact updating request payload.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArtifactChangeStateProperties",
+          "description": "Artifact update state properties."
+        }
+      }
+    },
+    "ArtifactChangeStateProperties": {
+      "description": "The artifact update state properties.",
+      "type": "object",
+      "properties": {
+        "artifactState": {
+          "$ref": "#/definitions/ArtifactState",
+          "description": "The artifact state"
+        }
+      }
+    },
+    "ArtifactState": {
+      "type": "string",
+      "description": "The artifact state.",
+      "enum": [
+        "Unknown",
+        "Preview",
+        "Active",
+        "Deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactState",
+        "modelAsString": true
+      }
+    }
+  }
+}

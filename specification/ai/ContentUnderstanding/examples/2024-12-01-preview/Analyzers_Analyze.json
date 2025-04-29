@@ -1,0 +1,22 @@
+{
+  "title": "Analyze URL",
+  "operationId": "Analyzers_Analyze",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "analyzerId": "myAnalyzer",
+    "body": {
+      "url": "https://host.com/doc.pdf"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://myendpoint.cognitiveservices.azure.com/contentunderstanding/analyzers/myAnalyzer/results/3b31320d-8bab-4f88-b19c-2322a7f11034?api-version=2024-12-01-preview"
+      },
+      "body": {
+        "id": "3b31320d-8bab-4f88-b19c-2322a7f11034",
+        "status": "NotStarted"
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "name": "myMachine",
+    "api-version": "2019-08-02",
+    "location": "eastus2euap",
+    "parameters": "string",
+    "properties": {
+      "physicalLocation": "newLocation"
+    },
+    "identity": {
+      "Type": "SystemAssigned"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "string",
+        "name": "string",
+        "location": "eastus2euap",
+        "tags": null,
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "string",
+          "tenantId": "string"
+        },
+        "type": "Microsoft.HybridCompute/machines",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "agentVersion": null,
+          "status": null,
+          "lastStatusChange": null,
+          "errorDetails": null,
+          "displayName": null,
+          "machineFqdn": null,
+          "osName": null,
+          "osVersion": null,
+          "osProfile": {
+            "computerName": null
+          },
+          "vmId": "string",
+          "physicalLocation": "string",
+          "clientPublicKey": "string"
+        }
+      }
+    }
+  }
+}

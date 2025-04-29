@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "endpoint": "https://myservice.search.windows.net",
+    "api-version": "2020-06-30",
+    "synonymMap": {
+      "name": "mysynonymmap",
+      "format": "solr",
+      "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "myApplicationSecret"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "mysynonymmap",
+        "format": "solr",
+        "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": null
+          }
+        }
+      }
+    }
+  }
+}

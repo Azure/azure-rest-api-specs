@@ -1,0 +1,169 @@
+{
+  "parameters": {
+    "subscriptionId": "subId",
+    "resourceGroupName": "rgName",
+    "peeringName": "peeringName",
+    "api-version": "2020-04-01",
+    "peering": {
+      "sku": {
+        "name": "Basic_Direct_Free"
+      },
+      "kind": "Direct",
+      "properties": {
+        "direct": {
+          "connections": [
+            {
+              "bandwidthInMbps": 10000,
+              "sessionAddressProvider": "Peer",
+              "useForPeeringService": false,
+              "peeringDBFacilityId": 99999,
+              "bgpSession": {
+                "sessionPrefixV4": "192.168.0.0/31",
+                "sessionPrefixV6": "fd00::0/127",
+                "maxPrefixesAdvertisedV4": 1000,
+                "maxPrefixesAdvertisedV6": 100,
+                "md5AuthenticationKey": "test-md5-auth-key"
+              },
+              "connectionIdentifier": "5F4CB5C7-6B43-4444-9338-9ABC72606C16"
+            },
+            {
+              "bandwidthInMbps": 10000,
+              "sessionAddressProvider": "Microsoft",
+              "useForPeeringService": true,
+              "peeringDBFacilityId": 99999,
+              "connectionIdentifier": "8AB00818-D533-4504-A25A-03A17F61201C"
+            }
+          ],
+          "peerAsn": {
+            "id": "/subscriptions/subId/providers/Microsoft.Peering/peerAsns/myAsn1"
+          },
+          "directPeeringType": "Edge"
+        },
+        "peeringLocation": "peeringLocation0"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Basic_Direct_Free",
+          "tier": "Basic",
+          "family": "Direct",
+          "size": "Free"
+        },
+        "kind": "Direct",
+        "properties": {
+          "direct": {
+            "connections": [
+              {
+                "bandwidthInMbps": 10000,
+                "provisionedBandwidthInMbps": 10000,
+                "sessionAddressProvider": "Peer",
+                "useForPeeringService": false,
+                "peeringDBFacilityId": 99999,
+                "connectionState": "ProvisioningFailed",
+                "bgpSession": {
+                  "sessionPrefixV4": "192.168.0.0/31",
+                  "sessionPrefixV6": "fd00::0/127",
+                  "sessionStateV4": "Established",
+                  "sessionStateV6": "Established",
+                  "maxPrefixesAdvertisedV4": 1000,
+                  "maxPrefixesAdvertisedV6": 100,
+                  "md5AuthenticationKey": "test-md5-auth-key"
+                },
+                "connectionIdentifier": "5F4CB5C7-6B43-4444-9338-9ABC72606C16",
+                "errorMessage": "IPv4 address is already configured with a different ASN"
+              },
+              {
+                "bandwidthInMbps": 10000,
+                "provisionedBandwidthInMbps": 10000,
+                "sessionAddressProvider": "Microsoft",
+                "useForPeeringService": true,
+                "peeringDBFacilityId": 99999,
+                "connectionState": "Active",
+                "bgpSession": {
+                  "sessionPrefixV4": "192.168.1.0/31",
+                  "sessionPrefixV6": "fd00::2/127",
+                  "sessionStateV4": "Established",
+                  "sessionStateV6": "Established",
+                  "maxPrefixesAdvertisedV4": 1000,
+                  "maxPrefixesAdvertisedV6": 100,
+                  "md5AuthenticationKey": "test-md5-auth-key"
+                },
+                "connectionIdentifier": "8AB00818-D533-4504-A25A-03A17F61201C"
+              }
+            ],
+            "useForPeeringService": true,
+            "peerAsn": {
+              "id": "/subscriptions/subId/providers/Microsoft.Peering/peerAsns/myAsn1"
+            },
+            "directPeeringType": "Edge"
+          },
+          "peeringLocation": "peeringLocation0",
+          "provisioningState": "Succeeded"
+        },
+        "location": "eastus",
+        "name": "peeringName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName",
+        "type": "Microsoft.Peering/peerings"
+      }
+    },
+    "201": {
+      "body": {
+        "sku": {
+          "name": "Basic_Direct_Free",
+          "tier": "Basic",
+          "family": "Direct",
+          "size": "Free"
+        },
+        "kind": "Direct",
+        "properties": {
+          "direct": {
+            "connections": [
+              {
+                "bandwidthInMbps": 10000,
+                "provisionedBandwidthInMbps": 0,
+                "sessionAddressProvider": "Peer",
+                "useForPeeringService": false,
+                "peeringDBFacilityId": 99999,
+                "connectionState": "PendingApproval",
+                "bgpSession": {
+                  "sessionPrefixV4": "192.168.0.0/31",
+                  "sessionPrefixV6": "fd00::0/127",
+                  "sessionStateV4": "PendingAdd",
+                  "sessionStateV6": "PendingAdd",
+                  "maxPrefixesAdvertisedV4": 1000,
+                  "maxPrefixesAdvertisedV6": 100,
+                  "md5AuthenticationKey": "test-md5-auth-key"
+                },
+                "connectionIdentifier": "5F4CB5C7-6B43-4444-9338-9ABC72606C16"
+              },
+              {
+                "bandwidthInMbps": 10000,
+                "provisionedBandwidthInMbps": 0,
+                "sessionAddressProvider": "Microsoft",
+                "useForPeeringService": true,
+                "peeringDBFacilityId": 99999,
+                "connectionState": "PendingApproval",
+                "connectionIdentifier": "8AB00818-D533-4504-A25A-03A17F61201C"
+              }
+            ],
+            "useForPeeringService": true,
+            "peerAsn": {
+              "id": "/subscriptions/subId/providers/Microsoft.Peering/peerAsns/myAsn1"
+            },
+            "directPeeringType": "Edge"
+          },
+          "peeringLocation": "peeringLocation0",
+          "provisioningState": "Succeeded"
+        },
+        "location": "eastus",
+        "name": "peeringName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName",
+        "type": "Microsoft.Peering/peerings"
+      }
+    }
+  }
+}

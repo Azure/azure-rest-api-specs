@@ -1,0 +1,569 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LUIS Runtime Client",
+    "version": "3.0"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/luis/prediction/v3.0",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "paths": {
+    "/apps/{appId}/versions/{versionId}/predict": {
+      "get": {
+        "description": "Gets the predictions for an application version.",
+        "operationId": "Prediction_GetVersionPredictionGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "appId",
+            "description": "The application ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "versionId",
+            "description": "The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "description": "The query to predict.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "verbose",
+            "description": "Indicates whether to get extra metadata for the entities predictions or not.",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "show-all-intents",
+            "description": "Indicates whether to return all the intents in the response or just the top intent.",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "log",
+            "description": "Indicates whether to log the endpoint query or not.",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The prediction for the supplied query.",
+            "schema": {
+              "$ref": "#/definitions/PredictionResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Version Predictions From Endpoint Via Get request": {
+            "$ref": "./examples/prediction/SuccessfulGetVersionPredictionsFromEndpointViaGetRequest.json"
+          }
+        }
+      },
+      "post": {
+        "description": "Gets the predictions for an application version.",
+        "operationId": "Prediction_GetVersionPrediction",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "appId",
+            "description": "The application ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "versionId",
+            "description": "The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "verbose",
+            "description": "Indicates whether to get extra metadata for the entities predictions or not.",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "show-all-intents",
+            "description": "Indicates whether to return all the intents in the response or just the top intent.",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "log",
+            "description": "Indicates whether to log the endpoint query or not.",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "predictionRequest",
+            "description": "The prediction request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PredictionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The prediction for the supplied query.",
+            "schema": {
+              "$ref": "#/definitions/PredictionResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Version Predictions From Endpoint Via Post request": {
+            "$ref": "./examples/prediction/SuccessfulGetVersionPredictionsFromEndpointViaPostRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/slots/{slotName}/predict": {
+      "get": {
+        "description": "Gets the predictions for an application slot.",
+        "operationId": "Prediction_GetSlotPredictionGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "appId",
+            "description": "The application ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "slotName",
+            "description": "The application slot name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "description": "The query to predict.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "verbose",
+            "description": "Indicates whether to get extra metadata for the entities predictions or not.",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "show-all-intents",
+            "description": "Indicates whether to return all the intents in the response or just the top intent.",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "log",
+            "description": "Indicates whether to log the endpoint query or not.",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The prediction for the supplied query.",
+            "schema": {
+              "$ref": "#/definitions/PredictionResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Slot Predictions From Endpoint Via Get request": {
+            "$ref": "./examples/prediction/SuccessfulGetSlotPredictionsFromEndpointViaGetRequest.json"
+          }
+        }
+      },
+      "post": {
+        "description": "Gets the predictions for an application slot.",
+        "operationId": "Prediction_GetSlotPrediction",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "appId",
+            "description": "The application ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "slotName",
+            "description": "The application slot name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "verbose",
+            "description": "Indicates whether to get extra metadata for the entities predictions or not.",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "show-all-intents",
+            "description": "Indicates whether to return all the intents in the response or just the top intent.",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "log",
+            "description": "Indicates whether to log the endpoint query or not.",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "predictionRequest",
+            "description": "The prediction request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PredictionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The prediction for the supplied query.",
+            "schema": {
+              "$ref": "#/definitions/PredictionResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Slot Predictions From Endpoint Via Post request": {
+            "$ref": "./examples/prediction/SuccessfulGetSlotPredictionsFromEndpointViaPostRequest.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PredictionResponse": {
+      "description": "Represents the prediction response.",
+      "required": [
+        "query",
+        "prediction"
+      ],
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "The query used in the prediction.",
+          "type": "string"
+        },
+        "prediction": {
+          "description": "The prediction of the requested query.",
+          "$ref": "#/definitions/Prediction"
+        }
+      }
+    },
+    "Prediction": {
+      "description": "Represents the prediction of a query.",
+      "required": [
+        "topIntent",
+        "intents",
+        "entities"
+      ],
+      "type": "object",
+      "properties": {
+        "alteredQuery": {
+          "description": "The query after spell checking. Only set if spell check was enabled and a spelling mistake was found.",
+          "type": "string"
+        },
+        "topIntent": {
+          "description": "The name of the top scoring intent.",
+          "type": "string"
+        },
+        "intents": {
+          "description": "A dictionary representing the intents that fired.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Intent"
+          }
+        },
+        "entities": {
+          "description": "A dictionary representing the entities that fired.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "sentiment": {
+          "description": "The result of the sentiment analysis.",
+          "$ref": "#/definitions/Sentiment"
+        }
+      }
+    },
+    "Intent": {
+      "description": "Represents an intent prediction.",
+      "type": "object",
+      "properties": {
+        "score": {
+          "format": "float",
+          "description": "The score of the fired intent.",
+          "type": "number"
+        },
+        "childApp": {
+          "description": "The prediction of the dispatched application.",
+          "$ref": "#/definitions/Prediction"
+        }
+      }
+    },
+    "Sentiment": {
+      "description": "The result of the sentiment analysis.",
+      "required": [
+        "score"
+      ],
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "The label of the sentiment analysis result.",
+          "type": "string"
+        },
+        "score": {
+          "format": "float",
+          "description": "The sentiment score of the query.",
+          "type": "number"
+        }
+      }
+    },
+    "Error": {
+      "description": "Represents the error that occurred.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorBody"
+        }
+      }
+    },
+    "ErrorBody": {
+      "description": "Represents the definition of the error that occurred.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        }
+      }
+    },
+    "PredictionRequest": {
+      "description": "Represents the prediction request parameters.",
+      "required": [
+        "query"
+      ],
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "The query to predict.",
+          "type": "string"
+        },
+        "options": {
+          "description": "The custom options defined for this request.",
+          "$ref": "#/definitions/PredictionRequestOptions"
+        },
+        "externalEntities": {
+          "description": "The externally predicted entities for this request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExternalEntity"
+          }
+        },
+        "dynamicLists": {
+          "description": "The dynamically created list entities for this request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DynamicList"
+          }
+        }
+      }
+    },
+    "PredictionRequestOptions": {
+      "description": "The custom options for the prediction request.",
+      "type": "object",
+      "properties": {
+        "datetimeReference": {
+          "format": "date-time",
+          "description": "The reference DateTime used for predicting datetime entities.",
+          "type": "string"
+        },
+        "preferExternalEntities": {
+          "description": "Whether to make the external entities resolution override the predictions if an overlap occurs.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ExternalEntity": {
+      "description": "Defines a user predicted entity that extends an already existing one.",
+      "required": [
+        "entityName",
+        "startIndex",
+        "entityLength"
+      ],
+      "type": "object",
+      "properties": {
+        "entityName": {
+          "description": "The name of the entity to extend.",
+          "type": "string"
+        },
+        "startIndex": {
+          "format": "int32",
+          "description": "The start character index of the predicted entity.",
+          "type": "integer"
+        },
+        "entityLength": {
+          "format": "int32",
+          "description": "The length of the predicted entity.",
+          "type": "integer"
+        },
+        "resolution": {
+          "description": "A user supplied custom resolution to return as the entity's prediction."
+        },
+        "score": {
+          "format": "float",
+          "description": "A user supplied score to return as the entity's prediction score.",
+          "type": "number"
+        }
+      }
+    },
+    "DynamicList": {
+      "description": "Defines an extension for a list entity.",
+      "required": [
+        "listEntityName",
+        "requestLists"
+      ],
+      "type": "object",
+      "properties": {
+        "listEntityName": {
+          "description": "The name of the list entity to extend.",
+          "type": "string"
+        },
+        "requestLists": {
+          "description": "The lists to append on the extended list entity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestList"
+          }
+        }
+      }
+    },
+    "RequestList": {
+      "description": "Defines a sub-list to append to an existing list entity.",
+      "required": [
+        "canonicalForm"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the sub-list.",
+          "type": "string"
+        },
+        "canonicalForm": {
+          "description": "The canonical form of the sub-list.",
+          "type": "string"
+        },
+        "synonyms": {
+          "description": "The synonyms of the canonical form.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

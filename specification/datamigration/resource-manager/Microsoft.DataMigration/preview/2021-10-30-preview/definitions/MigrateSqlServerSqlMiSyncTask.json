@@ -1,0 +1,214 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2021-10-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrateSqlServerSqlMISyncTaskInput": {
+      "type": "object",
+      "description": "Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.",
+      "allOf": [
+        {
+          "$ref": "TasksCommon.json#/definitions/SqlServerSqlMISyncTaskInput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlMISyncTaskOutput": {
+      "type": "object",
+      "description": "Output for task that migrates SQL Server databases to Azure SQL Database Managed Instance using Log Replay Service.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "MigrateSqlServerSqlMISyncTaskOutputMigrationLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "properties": {
+        "databaseCount": {
+          "type": "integer",
+          "description": "Count of databases",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "sourceServerName": {
+          "type": "string",
+          "description": "Source server name",
+          "readOnly": true
+        },
+        "sourceServerVersion": {
+          "type": "string",
+          "description": "Source server version",
+          "readOnly": true
+        },
+        "sourceServerBrandVersion": {
+          "type": "string",
+          "description": "Source server brand version",
+          "readOnly": true
+        },
+        "targetServerName": {
+          "type": "string",
+          "description": "Target server name",
+          "readOnly": true
+        },
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Target server version",
+          "readOnly": true
+        },
+        "targetServerBrandVersion": {
+          "type": "string",
+          "description": "Target server brand version",
+          "readOnly": true
+        },
+        "databaseErrorCount": {
+          "type": "integer",
+          "description": "Number of database level errors",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlMISyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlMISyncTaskOutputDatabaseLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "DatabaseLevelOutput",
+      "properties": {
+        "sourceDatabaseName": {
+          "type": "string",
+          "description": "Name of the database",
+          "readOnly": true
+        },
+        "migrationState": {
+          "$ref": "./TasksCommon.json#/definitions/DatabaseMigrationState",
+          "description": "Current state of database",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Database migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Database migration end time",
+          "readOnly": true
+        },
+        "fullBackupSetInfo": {
+          "type": "object",
+          "description": "Details of full backup set",
+          "$ref": "Common.json#/definitions/BackupSetInfo",
+          "readOnly": true
+        },
+        "lastRestoredBackupSetInfo": {
+          "type": "object",
+          "description": "Last applied backup set information",
+          "$ref": "Common.json#/definitions/BackupSetInfo",
+          "readOnly": true
+        },
+        "activeBackupSets": {
+          "description": "Backup sets that are currently active (Either being uploaded or getting restored)",
+          "type": "array",
+          "items": {
+            "$ref": "Common.json#/definitions/BackupSetInfo"
+          },
+          "readOnly": true
+        },
+        "containerName": {
+          "description": "Name of container created in the Azure Storage account where backups are copied to",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorPrefix": {
+          "description": "prefix string to use for querying errors for this database",
+          "type": "string",
+          "readOnly": true
+        },
+        "isFullBackupRestored": {
+          "description": "Whether full backup has been applied to the target database or not",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings",
+          "type": "array",
+          "items": {
+            "$ref": "Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlMISyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlMISyncTaskOutputError": {
+      "type": "object",
+      "x-ms-discriminator-value": "ErrorOutput",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the exception",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "Common.json#/definitions/ReportableException",
+          "description": "Migration error",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlMISyncTaskOutput"
+        }
+      ]
+    }
+  }
+}

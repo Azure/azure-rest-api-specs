@@ -1,0 +1,333 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}": {
+      "get": {
+        "tags": [
+          "LedgerDigestUploads"
+        ],
+        "description": "Gets the current ledger digest upload configuration for a database.",
+        "operationId": "LedgerDigestUploads_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "ledgerDigestUploads",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "LedgerDigestUploadsName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the ledger digest configuration.",
+            "schema": {
+              "$ref": "#/definitions/LedgerDigestUploads"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 LedgerInvalidDigestStorageTargetUpdateRequest - The database ledger digest storage upload request does not exist or has no properties object.\n\n * 400 InvalidDigestStorageEndpoint - The specified digestStorageEndpoint is invalid. It must be an Azure blob storage or Azure Confidential Ledger endpoint.\n\n * 400 MalformedDigestStorageEndpoint - The specified digest storage endpoint is a malformed URI.\n\n * 400 InvalidLedgerDigestUploadsName - The ledger digest upload name is not supported. Please use the key name “current”.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-examples": {
+          "Gets the current ledger digest upload configuration for a database.": {
+            "$ref": "./examples/LedgerDigestUploadsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LedgerDigestUploads"
+        ],
+        "description": "Enables upload ledger digests to an Azure Storage account or an Azure Confidential Ledger instance.",
+        "operationId": "LedgerDigestUploads_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "ledgerDigestUploads",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "LedgerDigestUploadsName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LedgerDigestUploads"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the ledger digest upload configuration",
+            "schema": {
+              "$ref": "#/definitions/LedgerDigestUploads"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 LedgerInvalidDigestStorageTargetUpdateRequest - The database ledger digest storage upload request does not exist or has no properties object.\n\n * 400 InvalidDigestStorageEndpoint - The specified digestStorageEndpoint is invalid. It must be an Azure blob storage or Azure Confidential Ledger endpoint.\n\n * 400 MalformedDigestStorageEndpoint - The specified digest storage endpoint is a malformed URI.\n\n * 400 InvalidLedgerDigestUploadsName - The ledger digest upload name is not supported. Please use the key name “current”.\n\n * 400 LedgerDigestUploadsNotSupportedOnGeoSecondary - The ledger digest storage cannot be configured on secondary databases.\n\n * 400 InsufficientStorageAccountPermissions - Read or write operations are not allowed on the storage account.\n\n * 400 StorageAccountIsDisabled - The storage account is disabled.\n\n * 400 InvalidStorageAccountName - The specified storage account is not valid or does not exist.\n\n * 400 PreviousOperationInProgress - Uploading ledger digests is being enabled or disabled for database. Please wait for the previous request to complete.\n\n * 400 NoServerIdentity - No identity is configured for specified server. For information on how to configure an identity for the server see https://go.microsoft.com/fwlink/?linkid=2156804\n\n * 400 SubscriptionDoesNotHaveServer - Subscription does not contain server.\n\n * 400 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered. The error message from Active Directory Authentication library (ADAL) is {0}.\n\n * 400 LedgerDigestUploadIsNotSupportedOnResourceType - Uploading ledger digests is currently not supported for this resource type.\n\n * 400 InvalidDigestStorageEndpoint - The specified digestStorageEndpoint is invalid. It must be an Azure blob storage or Azure Confidential Ledger endpoint.\n\n * 400 InvalidStorageAccountName - The specified storage account is not valid or does not exist.\n\n * 404 SourceDatabaseNotFound - Specified database does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          },
+          "202": {
+            "description": "Updating the ledger digest upload configuration is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Enables ledger digest upload configuration for a database": {
+            "$ref": "./examples/LedgerDigestUploadsEnable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads": {
+      "get": {
+        "tags": [
+          "LedgerDigestUploads"
+        ],
+        "description": "Gets all ledger digest upload settings on a database.",
+        "operationId": "LedgerDigestUploads_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved ledger upload settings.",
+            "schema": {
+              "$ref": "#/definitions/LedgerDigestUploadsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 LedgerInvalidDigestStorageTargetUpdateRequest - The database ledger digest storage upload request does not exist or has no properties object.\n\n * 400 InvalidDigestStorageEndpoint - The specified digestStorageEndpoint is invalid. It must be an Azure blob storage or Azure Confidential Ledger endpoint.\n\n * 400 MalformedDigestStorageEndpoint - The specified digest storage endpoint is a malformed URI.\n\n * 400 InvalidLedgerDigestUploadsName - The ledger digest upload name is not supported. Please use the key name “current”.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of ledger digest upload settings on a database.": {
+            "$ref": "./examples/LedgerDigestUploadsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}/disable": {
+      "post": {
+        "tags": [
+          "LedgerDigestUploads"
+        ],
+        "description": "Disables uploading ledger digests to an Azure Storage account or an Azure Confidential Ledger instance.",
+        "operationId": "LedgerDigestUploads_Disable",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "ledgerDigestUploads",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "LedgerDigestUploadsName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully disabled uploading ledger digests",
+            "schema": {
+              "$ref": "#/definitions/LedgerDigestUploads"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 LedgerInvalidDigestStorageTargetUpdateRequest - The database ledger digest storage upload request does not exist or has no properties object.\n\n * 400 InvalidDigestStorageEndpoint - The specified digestStorageEndpoint is invalid. It must be an Azure blob storage or Azure Confidential Ledger endpoint.\n\n * 400 MalformedDigestStorageEndpoint - The specified digest storage endpoint is a malformed URI.\n\n * 400 InvalidLedgerDigestUploadsName - The ledger digest upload name is not supported. Please use the key name “current”.\n\n * 400 LedgerDigestUploadsNotSupportedOnGeoSecondary - The ledger digest storage cannot be configured on secondary databases.\n\n * 400 InsufficientStorageAccountPermissions - Read or write operations are not allowed on the storage account.\n\n * 400 StorageAccountIsDisabled - The storage account is disabled.\n\n * 400 InvalidStorageAccountName - The specified storage account is not valid or does not exist.\n\n * 400 PreviousOperationInProgress - Uploading ledger digests is being enabled or disabled for database. Please wait for the previous request to complete.\n\n * 400 NoServerIdentity - No identity is configured for specified server. For information on how to configure an identity for the server see https://go.microsoft.com/fwlink/?linkid=2156804\n\n * 400 SubscriptionDoesNotHaveServer - Subscription does not contain server.\n\n * 400 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered. The error message from Active Directory Authentication library (ADAL) is {0}.\n\n * 400 LedgerDigestUploadIsNotSupportedOnResourceType - Uploading ledger digests is currently not supported for this resource type.\n\n * 400 InvalidDigestStorageEndpoint - The specified digestStorageEndpoint is invalid. It must be an Azure blob storage or Azure Confidential Ledger endpoint.\n\n * 400 InvalidStorageAccountName - The specified storage account is not valid or does not exist.\n\n * 404 SourceDatabaseNotFound - Specified database does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          },
+          "202": {
+            "description": "Disabling the ledger digest upload is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Disables uploading ledger digests for a database": {
+            "$ref": "./examples/LedgerDigestUploadsDisable.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LedgerDigestUploadsProperties": {
+      "description": "The properties of a database ledger digest upload settings.",
+      "type": "object",
+      "properties": {
+        "digestStorageEndpoint": {
+          "description": "The digest storage endpoint, which must be either an Azure blob storage endpoint or an URI for Azure Confidential Ledger.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Specifies the state of ledger digest upload.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "LedgerDigestUploadsState",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "LedgerDigestUploads": {
+      "description": "Azure SQL Database ledger digest upload settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LedgerDigestUploadsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LedgerDigestUploadsListResult": {
+      "description": "A list of ledger digest upload settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LedgerDigestUploads"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

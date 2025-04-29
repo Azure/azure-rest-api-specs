@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2020-09-21-preview2",
+    "body": {
+      "topic": "Lunch",
+      "members": [
+        {
+          "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10a",
+          "displayName": "Jane"
+        },
+        {
+          "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b",
+          "displayName": "Alex"
+        },
+        {
+          "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10c",
+          "displayName": "Bob"
+        },
+        {
+          "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10a",
+          "displayName": "Peter"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "207": {
+      "headers": {
+        "Location": "https://contoso.westus.communications.azure.com/chat/threads/19%3Auni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2"
+      },
+      "body": {
+        "multipleStatus": [
+          {
+            "id": "19:b355e41860604e7dacd072d586f47818@thread.v2",
+            "statusCode": 201
+          },
+          {
+            "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10a",
+            "statusCode": 201
+          },
+          {
+            "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b",
+            "statusCode": 201
+          },
+          {
+            "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10c",
+            "statusCode": 201
+          },
+          {
+            "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10a",
+            "statusCode": 403,
+            "message": "Permissions check failed"
+          }
+        ]
+      }
+    },
+    "401": {
+      "body": {
+        "code": "Unauthorized",
+        "message": "Request is not authorized."
+      }
+    },
+    "403": {
+      "body": {
+        "code": "Forbidden",
+        "message": "User is not allowed to perform specified action."
+      }
+    },
+    "429": {
+      "body": {
+        "code": "TooManyRequests",
+        "message": "Rate limit exceeded."
+      }
+    },
+    "503": {
+      "body": {
+        "code": "ServiceUnavailable",
+        "message": "The server is currently unable to handle the request."
+      }
+    }
+  }
+}

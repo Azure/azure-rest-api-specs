@@ -2,57 +2,30 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: sql
-  clear-output-folder: true
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/sql/armsql
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+modelerfour:
+  lenient-model-deduplication: true
+directive:
+- rename-model:
+    from: 'SqlVulnerabilityAssessmentScanRecord'
+    to: 'VulnerabilityAssessmentScanRecordForSql'
+- rename-model:
+    from: 'SqlVulnerabilityAssessmentScanRecordListResult'
+    to: 'VulnerabilityAssessmentScanRecordForSqlListResult'
+- rename-model:
+    from: 'SQLVulnerabilityAssessmentScanRecordProperties'
+    to: 'VulnerabilityAssessmentScanRecordForSqlProperties'
+- rename-model:
+    from: 'SqlVulnerabilityAssessmentScanRecordProperties'
+    to: 'VulnerabilityAssessmentScanRecordForSqlProperties'
+- rename-model:
+    from: 'SqlVulnerabilityAssessmentScanError'
+    to: 'VulnerabilityAssessmentScanForSqlError'
 ```
 
-#### Go multi-api
-
-From api-version 2017-10 and onwards, only pure package versions should be used. Composite package versions are used for earlier api-versions (2017-03 and earlier) in order to ensure backwards compatibility with previously released versions of Go SDK,
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-pure-2017-10-preview
-  - tag: package-2017-03-preview
-  - tag: package-2015-05-preview
-  - tag: package-2014-04
-```
-
-#### Tag: package-pure-2017-10-preview and go
-
-These settings apply only when `--tag=package-2017-10-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-pure-2017-10-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-10-01-preview/$(namespace)
-```
-
-#### Tag: package-2017-03-preview and go
-
-These settings apply only when `--tag=package-2017-03-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-03-01-preview/$(namespace)
-```
-
-#### Tag: package-2015-05-preview and go
-
-These settings apply only when `--tag=package-2015-05-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2015-05-01-preview/$(namespace)
-```
-
-#### Tag: package-2014-04 and go
-
-These settings apply only when `--tag=package-2014-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2014-04' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2014-04-01/$(namespace)
-```
+#

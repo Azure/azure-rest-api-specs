@@ -1,0 +1,116 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Azure Policy events published to Azure Event Grid",
+    "description": "Describes the schema of the Azure Policy events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "PolicyInsightsPolicyStateCreatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateCreated event.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The time that the resource was scanned by Azure Policy in the Universal ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "policyAssignmentId": {
+          "description": "The resource ID of the policy assignment.",
+          "type": "string"
+        },
+        "policyDefinitionId": {
+          "description": "The resource ID of the policy definition.",
+          "type": "string"
+        },
+        "policyDefinitionReferenceId": {
+          "description": "The reference ID for the policy definition inside the initiative definition, if the policy assignment is for an initiative. May be empty.",
+          "type": "string"
+        },
+        "complianceState": {
+          "description": "The compliance state of the resource with respect to the policy assignment.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The subscription ID of the resource.",
+          "type": "string"
+        },
+        "complianceReasonCode": {
+          "description": "The compliance reason code. May be empty.",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyInsightsPolicyStateChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateChanged event.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The time that the resource was scanned by Azure Policy in the Universal ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "policyAssignmentId": {
+          "description": "The resource ID of the policy assignment.",
+          "type": "string"
+        },
+        "policyDefinitionId": {
+          "description": "The resource ID of the policy definition.",
+          "type": "string"
+        },
+        "policyDefinitionReferenceId": {
+          "description": "The reference ID for the policy definition inside the initiative definition, if the policy assignment is for an initiative. May be empty.",
+          "type": "string"
+        },
+        "complianceState": {
+          "description": "The compliance state of the resource with respect to the policy assignment.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The subscription ID of the resource.",
+          "type": "string"
+        },
+        "complianceReasonCode": {
+          "description": "The compliance reason code. May be empty.",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyInsightsPolicyStateDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateDeleted event.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The time that the resource was scanned by Azure Policy in the Universal ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "policyAssignmentId": {
+          "description": "The resource ID of the policy assignment.",
+          "type": "string"
+        },
+        "policyDefinitionId": {
+          "description": "The resource ID of the policy definition.",
+          "type": "string"
+        },
+        "policyDefinitionReferenceId": {
+          "description": "The reference ID for the policy definition inside the initiative definition, if the policy assignment is for an initiative. May be empty.",
+          "type": "string"
+        },
+        "complianceState": {
+          "description": "The compliance state of the resource with respect to the policy assignment.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The subscription ID of the resource.",
+          "type": "string"
+        },
+        "complianceReasonCode": {
+          "description": "The compliance reason code. May be empty.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

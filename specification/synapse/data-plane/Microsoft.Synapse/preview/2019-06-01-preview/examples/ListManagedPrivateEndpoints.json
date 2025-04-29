@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "api-version": "2019-06-01-preview",
+    "managedVirtualNetworkName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.Synapse/workspaces/managedVirtualNetworks/managedPrivateEndpoints",
+            "name": "myPrivateEndpoint1",
+            "properties": {
+              "privateLinkResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/myStorageAccount1",
+              "groupId": "blob",
+              "provisioningState": "Succeeded",
+              "connectionState": {
+                "status": "Approved",
+                "description": "",
+                "actionsRequired": ""
+              }
+            }
+          },
+          {
+            "type": "Microsoft.Synapse/workspaces/managedVirtualNetworks/managedPrivateEndpoints",
+            "name": "myPrivateEndpoint2",
+            "properties": {
+              "privateLinkResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/myStorageAccount2",
+              "groupId": "blob",
+              "provisioningState": "Succeeded",
+              "connectionState": {
+                "status": "Pending",
+                "description": "",
+                "actionsRequired": ""
+              }
+            }
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}

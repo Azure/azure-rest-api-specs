@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b",
+    "resourceGroupName": "test-arcappliance-resgrp",
+    "storageSpacesName": "test-storage",
+    "api-version": "2022-05-01-preview",
+    "storageSpaces": {
+      "tags": {
+        "additionalProperties": "sample"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/storageSpaces/test-storage",
+        "name": "test-storage",
+        "type": "microsoft.hybridcontainerservice/storageSpaces",
+        "tags": {
+          "additionalProperties": "sample"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "hciStorageProfile": {
+            "mocStorageContainer": "WssdStorageContainer",
+            "mocGroup": "target-group",
+            "mocLocation": "MocLocation"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.HybridContainerService/locations/westus/operationStatuses/b36529b7-9451-4125-8b71-397bafd1ffb0*3A3D3C747?api-version=2022-05-01-preview"
+      },
+      "body": {
+        "location": "westus",
+        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/storageSpaces/test-storage",
+        "name": "test-storage",
+        "type": "microsoft.hybridcontainerservice/storageSpaces",
+        "tags": {
+          "additionalProperties": "sample"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "hciStorageProfile": {
+            "mocStorageContainer": "WssdStorageContainer",
+            "mocGroup": "target-group",
+            "mocLocation": "MocLocation"
+          }
+        }
+      }
+    }
+  }
+}

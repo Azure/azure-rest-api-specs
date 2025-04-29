@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "entityQueryId": "07da3cc8-c8ad-4710-a44e-334cdcb7882b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entityQueries/07da3cc8-c8ad-4710-a44e-334cdcb7882b",
+        "name": "07da3cc8-c8ad-4710-a44e-334cdcb7882b",
+        "type": "Microsoft.SecurityInsights/entityQueries",
+        "etag": null,
+        "kind": "Expansion",
+        "properties": {
+          "queryTemplate": "let GetParentProcessesOnHost = (v_Host_HostName:string){\r\n                            SecurityEvent \r\n                            | where EventID == 4688 \r\n                            | where isnotempty(ParentProcessName)\r\n                            | where NewProcessName !contains ':\\\\Windows\\\\System32\\\\conhost.exe' and ParentProcessName !contains ':\\\\Windows\\\\System32\\\\conhost.exe'\r\n                            and NewProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\csc.exe' and ParentProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\csc.exe'\r\n                            and NewProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\cvtres.exe' and ParentProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\cvtres.exe'\r\n                            and NewProcessName!contains ':\\\\Program Files\\\\Microsoft Monitoring Agent\\\\Agent\\\\MonitoringHost.exe' and ParentProcessName !contains ':\\\\Program Files\\\\Microsoft Monitoring Agent\\\\Agent\\\\MonitoringHost.exe'\r\n                            and ParentProcessName !contains ':\\\\Windows\\\\CCM\\\\CcmExec.exe'\r\n                            | where(ParentProcessName !contains ':\\\\Windows\\\\System32\\\\svchost.exe' and (NewProcessName !contains ':\\\\Windows\\\\System32\\\\wbem\\\\WmiPrvSE.exe' or NewProcessName !contains ':\\\\Windows\\\\SysWOW64\\\\wbem\\\\WmiPrvSE.exe'))\r\n                            | where(ParentProcessName !contains ':\\\\Windows\\\\System32\\\\services.exe' and NewProcessName !contains ':\\\\Windows\\\\servicing\\\\TrustedInstaller.exe')\r\n                            | where toupper(Computer) contains v_Host_HostName or toupper(WorkstationName) contains v_Host_HostName\r\n                            | summarize min(TimeGenerated), max(TimeGenerated) by Account, Computer, ParentProcessName, NewProcessName, CommandLine, ProcessId\r\n                            | project min_TimeGenerated, max_TimeGenerated, Account, Computer, ParentProcessName, NewProcessName, CommandLine, ProcessId\r\n                            | project-rename Process_Host_UnstructuredName=Computer, Process_Account_UnstructuredName=Account, Process_CommandLine=CommandLine, Process_ProcessId=ProcessId, Process_ImageFile_FullPath=NewProcessName, Process_ParentProcess_ImageFile_FullPath=ParentProcessName\r\n                            | top 10 by min_TimeGenerated asc};\r\n                            GetParentProcessesOnHost(toupper('<hostName>'))",
+          "inputFields": [
+            "hostName"
+          ],
+          "outputEntityTypes": [
+            "Process"
+          ],
+          "dataSources": [
+            "SecurityEvent"
+          ],
+          "inputEntityType": "Host",
+          "displayName": "Parent processes running on host"
+        }
+      }
+    }
+  }
+}

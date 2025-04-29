@@ -1,0 +1,1122 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used by vendors to on-board offerings and manage network functions.",
+    "version": "2021-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}": {
+      "delete": {
+        "tags": [
+          "Vendors"
+        ],
+        "operationId": "Vendors_Delete",
+        "description": "Deletes the specified vendor.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Request is successful."
+          },
+          "202": {
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request is successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete vendor resource": {
+            "$ref": "./examples/VendorDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "operationId": "Vendors_Get",
+        "description": "Gets information about the specified vendor.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting vendor resource.",
+            "schema": {
+              "$ref": "#/definitions/Vendor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vendor resource": {
+            "$ref": "./examples/VendorGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Vendors"
+        ],
+        "operationId": "Vendors_CreateOrUpdate",
+        "description": "Creates or updates a vendor.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Vendor"
+            },
+            "description": "Parameters supplied to the create vendor operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Request is successful.",
+            "schema": {
+              "$ref": "#/definitions/Vendor"
+            }
+          },
+          "201": {
+            "description": "Created. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/Vendor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Vendor resource": {
+            "$ref": "./examples/VendorCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors": {
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "operationId": "Vendors_ListBySubscription",
+        "description": "Lists all the vendors in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of vendor resources.",
+            "schema": {
+              "$ref": "#/definitions/VendorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all vendor resources in subscription": {
+            "$ref": "./examples/VendorListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/vendorSkus/{skuName}": {
+      "delete": {
+        "tags": [
+          "VendorSkus"
+        ],
+        "operationId": "VendorSkus_Delete",
+        "description": "Deletes the specified sku. This operation can take up to 2 hours to complete. This is expected service behavior.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sku."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Request is successful."
+          },
+          "202": {
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request is successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete the sku of vendor resource": {
+            "$ref": "./examples/VendorSkuDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "VendorSkus"
+        ],
+        "operationId": "VendorSkus_Get",
+        "description": "Gets information about the specified sku.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sku."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting vendor resource.",
+            "schema": {
+              "$ref": "#/definitions/VendorSku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the sku of vendor resource": {
+            "$ref": "./examples/VendorSkuGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VendorSkus"
+        ],
+        "operationId": "VendorSkus_CreateOrUpdate",
+        "description": "Creates or updates a sku. This operation can take up to 2 hours to complete. This is expected service behavior.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sku."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VendorSku"
+            },
+            "description": "Parameters supplied to the create or update sku operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creation or update is successful. The operation returns the resulting vendor sku sub resource.",
+            "schema": {
+              "$ref": "#/definitions/VendorSku"
+            }
+          },
+          "201": {
+            "description": "Created. The operation returns the resulting vendor sku sub resource.",
+            "schema": {
+              "$ref": "#/definitions/VendorSku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the sku of vendor resource": {
+            "$ref": "./examples/VendorSkuCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/vendorSkus": {
+      "get": {
+        "tags": [
+          "VendorSkus"
+        ],
+        "operationId": "VendorSkus_List",
+        "description": "Lists all the skus of a vendor.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of vendor sku resources.",
+            "schema": {
+              "$ref": "#/definitions/VendorSkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all the vendor skus of vendor resource": {
+            "$ref": "./examples/VendorSkuListByVendor.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/vendorSkus/{skuName}/previewSubscriptions": {
+      "get": {
+        "tags": [
+          "VendorSkuPreview"
+        ],
+        "operationId": "VendorSkuPreview_List",
+        "description": "Lists all the preview information of a vendor sku.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sku."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the preview information of the vendor sku sub resource.",
+            "schema": {
+              "$ref": "#/definitions/PreviewSubscriptionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all preview subscriptions of vendor sku sub resource": {
+            "$ref": "./examples/VendorSkuPreviewListBySku.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/vendorSkus/{skuName}/previewSubscriptions/{previewSubscription}": {
+      "put": {
+        "tags": [
+          "VendorSkuPreview"
+        ],
+        "operationId": "VendorSkuPreview_CreateOrUpdate",
+        "description": "Creates or updates preview information of a vendor sku.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor sku."
+          },
+          {
+            "name": "previewSubscription",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Preview subscription ID."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreviewSubscription"
+            },
+            "description": "Parameters supplied to the create or update vendor preview subscription operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request is accepted. The operation is updating or creating the preview information of the vendor sku sub resource.",
+            "schema": {
+              "$ref": "#/definitions/PreviewSubscription"
+            }
+          },
+          "200": {
+            "description": "Request is successful. The operation updated the preview information of the vendor sku sub resource.",
+            "schema": {
+              "$ref": "#/definitions/PreviewSubscription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or update preview subscription of vendor sku sub resource": {
+            "$ref": "./examples/VendorSkuPreviewCreate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VendorSkuPreview"
+        ],
+        "operationId": "VendorSkuPreview_Get",
+        "description": "Gets the preview information of a vendor sku.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor sku."
+          },
+          {
+            "name": "previewSubscription",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Preview subscription ID."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation updated the preview information of the vendor sku sub resource.",
+            "schema": {
+              "$ref": "#/definitions/PreviewSubscription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get preview subscription of vendor sku sub resource": {
+            "$ref": "./examples/VendorSkuPreviewGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VendorSkuPreview"
+        ],
+        "operationId": "VendorSkuPreview_Delete",
+        "description": "Deletes the preview information of a vendor sku.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor sku."
+          },
+          {
+            "name": "previewSubscription",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Preview subscription ID."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation deleted the vendor sku preview resource."
+          },
+          "202": {
+            "description": "Request is accepted. The operation is deleting the vendor sku preview resource."
+          },
+          "204": {
+            "description": "Request is successful. The vendor sku preview resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete preview subscription of vendor sku sub resource": {
+            "$ref": "./examples/VendorSkuPreviewDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Vendor": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VendorPropertiesFormat",
+          "description": "Vendor properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Vendor resource."
+    },
+    "VendorPropertiesFormat": {
+      "description": "Vendor properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the vendor resource."
+        },
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true,
+          "description": "A list of IDs of the vendor skus offered by the vendor."
+        }
+      }
+    },
+    "VendorSku": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VendorSkuPropertiesFormat",
+          "description": "Vendor sku details."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Sku sub resource."
+    },
+    "VendorSkuPropertiesFormat": {
+      "description": "Sku properties",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the vendor sku sub resource."
+        },
+        "skuType": {
+          "$ref": "./common.json#/definitions/SkuType",
+          "description": "The sku type."
+        },
+        "deploymentMode": {
+          "type": "string",
+          "description": "The sku deployment mode.",
+          "enum": [
+            "Unknown",
+            "Azure",
+            "PrivateEdgeZone"
+          ],
+          "x-ms-enum": {
+            "name": "SkuDeploymentMode",
+            "modelAsString": true
+          }
+        },
+        "networkFunctionType": {
+          "type": "string",
+          "description": "The network function type.",
+          "enum": [
+            "Unknown",
+            "VirtualNetworkFunction",
+            "ContainerizedNetworkFunction"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkFunctionType",
+            "modelAsString": true
+          }
+        },
+        "preview": {
+          "type": "boolean",
+          "description": "Indicates if the vendor sku is in preview mode."
+        },
+        "managedApplicationParameters": {
+          "$ref": "./common.json#/definitions/ManagedApplicationParameters",
+          "description": "The parameters for the managed application to be supplied by the vendor."
+        },
+        "managedApplicationTemplate": {
+          "type": "object",
+          "description": "The template for the managed application deployment."
+        },
+        "networkFunctionTemplate": {
+          "$ref": "#/definitions/NetworkFunctionTemplate",
+          "description": "The template definition of the network function."
+        }
+      }
+    },
+    "VendorSkuListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VendorSku"
+          },
+          "description": "A list of vendor skus offered by the vendor."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to get the next set of results."
+        }
+      },
+      "description": "Response for list vendor sku API service call."
+    },
+    "VendorListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Vendor"
+          },
+          "description": "A list of vendors."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for vendors API service call."
+    },
+    "NetworkFunctionTemplate": {
+      "properties": {
+        "networkFunctionRoleConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunctionRoleConfiguration"
+          },
+          "description": "An array of network function role definitions."
+        }
+      },
+      "description": "The network function template."
+    },
+    "NetworkFunctionRoleConfiguration": {
+      "description": "Network function role configuration.",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The name of the network function role."
+        },
+        "roleType": {
+          "type": "string",
+          "description": "Role type.",
+          "enum": [
+            "Unknown",
+            "VirtualMachine"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkFunctionRoleConfigurationType",
+            "modelAsString": true
+          }
+        },
+        "virtualMachineSize": {
+          "type": "string",
+          "description": "The size of the virtual machine.",
+          "enum": [
+            "Unknown",
+            "Standard_D1_v2",
+            "Standard_D2_v2",
+            "Standard_D3_v2",
+            "Standard_D4_v2",
+            "Standard_D5_v2",
+            "Standard_D11_v2",
+            "Standard_D12_v2",
+            "Standard_D13_v2",
+            "Standard_DS1_v2",
+            "Standard_DS2_v2",
+            "Standard_DS3_v2",
+            "Standard_DS4_v2",
+            "Standard_DS5_v2",
+            "Standard_DS11_v2",
+            "Standard_DS12_v2",
+            "Standard_DS13_v2",
+            "Standard_F1",
+            "Standard_F2",
+            "Standard_F4",
+            "Standard_F8",
+            "Standard_F16",
+            "Standard_F1s",
+            "Standard_F2s",
+            "Standard_F4s",
+            "Standard_F8s",
+            "Standard_F16s"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineSizeTypes",
+            "modelAsString": true
+          }
+        },
+        "osProfile": {
+          "description": "Specifies the operating system settings for the role instance. This value can be updated during the deployment of network function.",
+          "$ref": "./common.json#/definitions/OsProfile"
+        },
+        "userDataTemplate": {
+          "$ref": "./common.json#/definitions/UserDataTemplate",
+          "description": "The user data template for customers. This is a json schema template describing the format and data type of user data parameters."
+        },
+        "userDataParameters": {
+          "$ref": "./common.json#/definitions/UserDataParameters",
+          "description": "The user parameters for customers. The format of user data parameters has to be matched with the provided user data template."
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/NetworkInterface"
+          },
+          "description": "The network interface configurations."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Specifies the storage settings for the virtual machine disks."
+        },
+        "customProfile": {
+          "$ref": "#/definitions/CustomProfile",
+          "description": "Specifies the custom settings for the virtual machine."
+        }
+      }
+    },
+    "ImageReference": {
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The image publisher."
+        },
+        "offer": {
+          "type": "string",
+          "description": "Specifies the offer of the image used to create the virtual machine."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The image SKU."
+        },
+        "version": {
+          "type": "string",
+          "description": "Specifies the version of the image used to create the virtual machine. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor, and Build are decimal numbers. Specify 'latest' to use the latest version of an image available at deploy time. Even if you use 'latest', the VM image will not automatically update after deploy time even if a new version becomes available."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "Specifies in decimal numbers, the exact version of image used to create the virtual machine."
+        }
+      },
+      "description": "The image reference properties."
+    },
+    "StorageProfile": {
+      "properties": {
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "The image reference properties."
+        },
+        "osDisk": {
+          "$ref": "#/definitions/OsDisk",
+          "description": "Specifies information about the operating system disk used by the virtual machine."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataDisk"
+          },
+          "description": "Specifies the parameters that are used to add a data disk to a virtual machine."
+        }
+      },
+      "description": "Specifies the storage settings for the virtual machine disks."
+    },
+    "OsDisk": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "The OS type.",
+          "enum": [
+            "Unknown",
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The VHD name."
+        },
+        "vhd": {
+          "$ref": "#/definitions/VirtualHardDisk",
+          "description": "The virtual hard disk."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of os disk in gigabytes. This is the fully expanded disk size needed of the VHD image on the ASE. This disk size should be greater than the size of the VHD provided in vhdUri."
+        }
+      },
+      "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+    },
+    "VirtualHardDisk": {
+      "properties": {
+        "uri": {
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "Specifies the virtual hard disk's uri."
+        }
+      },
+      "description": "Describes the uri of a disk."
+    },
+    "DataDisk": {
+      "properties": {
+        "createOption": {
+          "type": "string",
+          "description": "Specifies how the virtual machine should be created.",
+          "enum": [
+            "Unknown",
+            "Empty"
+          ],
+          "x-ms-enum": {
+            "name": "DiskCreateOptionTypes",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of data disk."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of an empty disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image."
+        }
+      },
+      "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+    },
+    "CustomProfile": {
+      "properties": {
+        "metadataConfigurationPath": {
+          "type": "string",
+          "description": "Path for metadata configuration."
+        }
+      },
+      "description": "Specifies the custom settings for the virtual machine."
+    },
+    "PreviewSubscription": {
+      "x-ms-azure-resource": true,
+      "description": "Customer subscription which can use a sku.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The preview subscription ID."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ARM ID of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PreviewSubscriptionProperties",
+          "description": "The Preview Subscription properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "PreviewSubscriptionProperties": {
+      "description": "PreviewSubscription properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the PreviewSubscription resource."
+        }
+      }
+    },
+    "PreviewSubscriptionsList": {
+      "description": "A list of customer subscriptions which can use a sku.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PreviewSubscription"
+          },
+          "description": "A list of preview subscriptions."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    }
+  }
+}

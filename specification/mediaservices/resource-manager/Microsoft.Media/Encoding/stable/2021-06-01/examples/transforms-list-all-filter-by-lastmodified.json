@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoresources",
+    "accountName": "contosomedia",
+    "$filter": "properties/lastmodified gt 2021-06-01T00:00:00.0000000Z and properties/lastmodified le 2021-06-01T00:00:10.0000000Z",
+    "$orderby": "properties/lastmodified desc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sampleEncodeAndVideoIndex",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncodeAndVideoIndex",
+            "type": "Microsoft.Media/mediaservices/transforms",
+            "properties": {
+              "created": "2021-06-01T00:00:10Z",
+              "description": "A sample Transform using the Video Analyzer.",
+              "lastModified": "2021-06-01T00:00:10Z",
+              "outputs": [
+                {
+                  "onError": "StopProcessingJob",
+                  "relativePriority": "Normal",
+                  "preset": {
+                    "@odata.type": "#Microsoft.Media.VideoAnalyzerPreset",
+                    "mode": "Standard",
+                    "insightsToExtract": "AllInsights"
+                  }
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "contoso@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "2021-06-01T00:00:10Z",
+              "lastModifiedBy": "contoso@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-06-01T00:00:10Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@azure-tools/spec-gen-sdk-runner",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/index.js",
+  "version": "0.0.1",
+  "bin": {
+    "spec-gen-sdk-runner": "cmd/spec-gen-sdk-runner.js"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "lint": "eslint . -c eslint.config.js --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . -c eslint.config.js --fix",
+    "test": "vitest run",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitest/coverage-v8": "^3.0.7",
+    "typescript": "~5.8.2",
+    "vitest": "^3.0.7"
+  }
+}

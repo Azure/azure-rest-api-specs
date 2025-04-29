@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "billingAccountName": "{billingAccountName}",
+    "customerName": "{customerName}",
+    "$expand": "enabledAzurePlans,resellers"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
+        "name": "{customerName}",
+        "type": "Microsoft.Billing/billingAccounts/customers",
+        "properties": {
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+          "billingProfileDisplayName": "Contoso Operations Billing",
+          "displayName": "customerName1",
+          "enabledAzurePlans": [
+            {
+              "skuId": "0002",
+              "skuDescription": "Microsoft Azure Plan for DevTest"
+            }
+          ],
+          "resellers": [
+            {
+              "resellerId": "89e87bdf-a2a2-4687-925f-4c18b27bccfd",
+              "description": "Reseller1"
+            },
+            {
+              "resellerId": "3b65b5a8-bd4f-4084-90e9-e1bd667a2b19",
+              "description": "Reseller2"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

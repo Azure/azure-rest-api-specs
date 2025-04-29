@@ -18,17 +18,313 @@ To see additional help and options, run:
 
 ---
 
+## Suppression
+
+```yaml
+directive:
+  - from: service.json
+    suppress: OAV131
+    reason: Testing purpose.
+
+  - from: service.json
+    suppress: R4010
+    reason: Testing purpose
+
+  - from: service.json
+    suppress:
+      - R4009
+    reason: suppressing system data for 2021-02-10
+
+  - from: service.json
+    suppress:
+      - R4010
+    reason: suppressing default error response as ASR is an old service and implements error response in a different format.
+
+  - from: service.json
+    suppress:
+      - R4011
+    reason: service implements 204 for delete and DeleteOperationResponses error was falsely raised.
+
+  - from: service.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}"].put
+    suppress:
+      - PutResponseCodes
+    reason: suppressing as ASR is old service and for all APIs, the 202-async PUT convention is followed.
+
+  - from: service.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}"].put
+    suppress:
+      - ProvisioningStateSpecifiedForLROPut
+    reason: suppressing as ASR is old service and for all PUT APIs, same convention is followed.
+
+  - code: AvoidAdditionalProperties
+    from: service.json
+    reason: Getting flagged in new API versions while inheriting old models, these fields exist in ASR from before and are required.
+
+suppressions:
+  - from: service.json
+    code: AvoidAdditionalProperties
+    reason: Getting flagged in new API versions while inheriting old models, these fields exist in ASR from before and are required.
+```
+
 ## Configuration
 
 ### Basic Information
 
 These are the global settings for the RecoveryServicesSiteRecovery API.
 
-``` yaml
+```yaml
 openapi-type: arm
-tag: package-2018-07
+tag: package-2025-01-01
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - UniqueResourcePaths
 ```
 
+### Tag: package-2025-01-01
+
+These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2025-01-01/service.json
+```
+
+### Tag: package-2024-10
+
+These settings apply only when `--tag=package-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10'
+input-file:
+  - Microsoft.RecoveryServices/stable/2024-10-01/service.json
+```
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2024-04-01/service.json
+```
+
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2024-02-01/service.json
+```
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2024-01-01/service.json
+```
+
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-08-01/service.json
+```
+
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-06-01/service.json
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-04-01/service.json
+```
+
+### Tag: package-2023-02
+
+These settings apply only when `--tag=package-2023-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-02-01/service.json
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-01-01/service.json
+```
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-10-01/service.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-09-10/service.json
+```
+
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-08-01/service.json
+```
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-05-01/service.json
+```
+
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-04-01/service.json
+```
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-03-01/service.json
+```
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-02-01/service.json
+```
+
+### Tag: package-2022-01
+
+These settings apply only when `--tag=package-2022-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-01-01/service.json
+```
+
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-12'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-12-01/service.json
+```
+
+### Tag: package-2021-11
+
+These settings apply only when `--tag=package-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-11'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-11-01/service.json
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-10-01/service.json
+```
+
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-08-01/service.json
+```
+
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-07'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-07-01/service.json
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-06-01/service.json
+```
+
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-04-01/service.json
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-03-01/service.json
+```
+
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-02-10/service.json
+```
 
 ### Tag: package-2018-07
 
@@ -50,20 +346,11 @@ input-file:
 
 ### Tag: package-2016-08
 
-These settings apply only when `--tag=package-2018-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-01'
-input-file:
-- Microsoft.RecoveryServices/stable/2018-01-10/service.json
-```
-
-### Tag: package-2016-08
-
 These settings apply only when `--tag=package-2016-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-08'
+```yaml $(tag) == 'package-2016-08'
 input-file:
-- Microsoft.RecoveryServices/stable/2016-08-10/service.json
+  - Microsoft.RecoveryServices/stable/2016-08-10/service.json
 ```
 
 ---
@@ -75,7 +362,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
@@ -86,54 +373,18 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services_site_recovery']
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  payload-flattening-threshold: 0
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.RecoveryServices.SiteRecovery
-  output-folder: $(csharp-sdks-folder)/recoveryservices-siterecovery/Microsoft.Azure.Management.RecoveryServices.SiteRecovery/src/Generated
-  clear-output-folder: true
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.RecoveryServices/stable/2018-07-10/service.json
-  - $(this-folder)/Microsoft.RecoveryServices/stable/2018-01-10/service.json
-  - $(this-folder)/Microsoft.RecoveryServices/stable/2016-08-10/service.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-

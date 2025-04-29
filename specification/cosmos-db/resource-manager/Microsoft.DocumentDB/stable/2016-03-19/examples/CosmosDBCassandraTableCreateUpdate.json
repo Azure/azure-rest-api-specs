@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2016-03-19",
+    "subscriptionId": "subid",
+    "keyspaceName": "tableName",
+    "tableName": "tableName",
+    "createUpdateCassandraTableParameters": {
+      "properties": {
+        "resource": {
+          "id": "tableName",
+          "defaultTtl": 100,
+          "schema": {
+            "columns": [
+              {
+                "name": "columnA",
+                "type": "Ascii"
+              }
+            ],
+            "partitionKeys": [
+              {
+                "name": "columnA"
+              }
+            ],
+            "clusterKeys": [
+              {
+                "name": "columnA",
+                "orderBy": "Asc"
+              }
+            ]
+          }
+        },
+        "options": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "tableName",
+        "name": "tableName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/apis/keyspaces/tables",
+        "properties": {
+          "id": "tableName",
+          "defaultTtl": 100,
+          "schema": {
+            "columns": [
+              {
+                "name": "columnA",
+                "type": "Ascii"
+              }
+            ],
+            "partitionKeys": [
+              {
+                "name": "columnA"
+              }
+            ],
+            "clusterKeys": [
+              {
+                "name": "columnA",
+                "orderBy": "Asc"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

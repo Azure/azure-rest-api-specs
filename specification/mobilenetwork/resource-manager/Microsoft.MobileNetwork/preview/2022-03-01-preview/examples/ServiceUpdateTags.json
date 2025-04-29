@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "mobileNetworkName": "testMobileNetwork",
+    "serviceName": "TestService",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestService",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/services/TestService",
+        "type": "Microsoft.MobileNetwork/service",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "servicePrecedence": 255,
+          "serviceQosPolicy": {
+            "5qi": 9,
+            "allocationAndRetentionPriorityLevel": 9,
+            "preemptionCapability": "NotPreempt",
+            "preemptionVulnerability": "Preemptable",
+            "maximumBitRate": {
+              "uplink": "500 Mbps",
+              "downlink": "1 Gbps"
+            }
+          },
+          "pccRules": [
+            {
+              "ruleName": "default-rule",
+              "rulePrecedence": 255,
+              "ruleQosPolicy": {
+                "5qi": 9,
+                "allocationAndRetentionPriorityLevel": 9,
+                "preemptionCapability": "NotPreempt",
+                "preemptionVulnerability": "Preemptable",
+                "maximumBitRate": {
+                  "uplink": "500 Mbps",
+                  "downlink": "1 Gbps"
+                }
+              },
+              "trafficControl": "Enabled",
+              "serviceDataFlowTemplates": [
+                {
+                  "templateName": "IP-to-server",
+                  "direction": "Uplink",
+                  "protocol": [
+                    "ip"
+                  ],
+                  "remoteIpList": [
+                    "10.3.4.0/24"
+                  ],
+                  "ports": []
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

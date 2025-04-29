@@ -1,0 +1,144 @@
+{
+  "parameters": {
+    "serverName": "mysqltestserver",
+    "resourceGroupName": "testrg",
+    "api-version": "2021-05-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "value": "OFF",
+              "description": "Tell the server to enable or disable archive engine.",
+              "defaultValue": "OFF",
+              "dataType": "Enumeration",
+              "allowedValues": "ON,OFF",
+              "source": "system-default",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "False",
+              "isReadOnly": "True"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/archive",
+            "name": "archive",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+          },
+          {
+            "properties": {
+              "value": "OFF",
+              "description": "Allow to audit the log.",
+              "defaultValue": "OFF",
+              "dataType": "Enumeration",
+              "allowedValues": "ON,OFF",
+              "source": "system-default",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "True",
+              "isReadOnly": "False"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/audit_log_enabled",
+            "name": "audit_log_enabled",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+          },
+          {
+            "properties": {
+              "value": "CONNECTION",
+              "description": "Select the events to audit logs.",
+              "defaultValue": "CONNECTION",
+              "dataType": "Set",
+              "allowedValues": "DDL,DML_SELECT,DML_NONSELECT,DCL,ADMIN,DML,GENERAL,CONNECTION,TABLE_ACCESS",
+              "source": "system-default",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "True",
+              "isReadOnly": "False"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/audit_log_events",
+            "name": "audit_log_events",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+          },
+          {
+            "properties": {
+              "value": "azure_superuser",
+              "description": "The comma-separated user list whose commands will not be in the audit logs.",
+              "defaultValue": "azure_superuser",
+              "dataType": "String",
+              "allowedValues": "",
+              "source": "system-default",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "True",
+              "isReadOnly": "False"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/audit_log_exclude_users",
+            "name": "audit_log_exclude_users",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+          },
+          {
+            "properties": {
+              "value": "",
+              "description": "The comma-separated user list whose commands will be in the audit logs. It takes higher priority if the same user name is found in audit_log_exclude_users.",
+              "defaultValue": "",
+              "dataType": "String",
+              "allowedValues": "",
+              "source": "system-default",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "True",
+              "isReadOnly": "False"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/audit_log_include_users",
+            "name": "audit_log_include_users",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+          },
+          {
+            "properties": {
+              "value": "ON",
+              "description": "Allow to audit the slow log.",
+              "defaultValue": "ON",
+              "dataType": "Enumeration",
+              "allowedValues": "ON,OFF",
+              "source": "system-default",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "True",
+              "isReadOnly": "True"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/audit_slow_log_enabled",
+            "name": "audit_slow_log_enabled",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+          },
+          {
+            "properties": {
+              "value": "OFF",
+              "description": "Controls whether the server autogenerates SSL key and certificate files in the data directory, if they do not already exist.",
+              "defaultValue": "OFF",
+              "dataType": "Enumeration",
+              "allowedValues": "ON,OFF",
+              "source": "system-default",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "False",
+              "isReadOnly": "True"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/auto_generate_certs",
+            "name": "auto_generate_certs",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+          },
+          {
+            "properties": {
+              "value": "1",
+              "description": "The auto_increment_increment is intended for use with source-to-source replication, and can be used to control the operation of AUTO_INCREMENT columns.",
+              "defaultValue": "1",
+              "dataType": "Integer",
+              "allowedValues": "1-65535",
+              "source": "system-default",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "True",
+              "isReadOnly": "False"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/auto_increment_increment",
+            "name": "auto_increment_increment",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+          }
+        ]
+      }
+    }
+  }
+}

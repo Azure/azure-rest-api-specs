@@ -1,0 +1,42 @@
+{
+  "title": "Create data export ADX destination",
+  "description": "Create an ADX destination with an Id.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "destinationId": "destination1",
+    "api-version": "1.1-preview",
+    "body": {
+      "displayName": "Azure Data Explorer",
+      "type": "dataexplorer@v1",
+      "clusterUrl": "https://[clusterName].westus2.kusto.windows.net",
+      "database": "database1",
+      "table": "table1",
+      "authorization": {
+        "type": "servicePrincipal",
+        "clientId": "3b420743-2020-44c6-9b70-cc42f945db0x",
+        "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+        "clientSecret": "[Secret]"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "destination1",
+        "displayName": "Azure Data Explorer",
+        "type": "dataexplorer@v1",
+        "clusterUrl": "https://[clusterName].westus2.kusto.windows.net",
+        "database": "database1",
+        "table": "table1",
+        "authorization": {
+          "type": "servicePrincipal",
+          "clientId": "3b420743-2020-44c6-9b70-cc42f945db0x",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "clientSecret": "*****"
+        },
+        "status": "waiting"
+      }
+    }
+  }
+}

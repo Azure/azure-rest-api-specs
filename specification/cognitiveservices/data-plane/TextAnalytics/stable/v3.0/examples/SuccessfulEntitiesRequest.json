@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "language": "en",
+          "id": "1",
+          "text": "I had a wonderful trip to Seattle last week."
+        },
+        {
+          "language": "en",
+          "id": "2",
+          "text": "I work at Microsoft."
+        },
+        {
+          "language": "en",
+          "id": "3",
+          "text": "I visited Space Needle 2 times."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "id": "1",
+            "entities": [
+              {
+                "text": "Seattle",
+                "category": "Location",
+                "offset": 26,
+                "length": 7,
+                "confidenceScore": 0.80
+              },
+              {
+                "text": "last week",
+                "category": "DateTime",
+                "subcategory": "DateRange",
+                "offset": 34,
+                "length": 9,
+                "confidenceScore": 0.8
+              }
+            ],
+            "warnings": []
+          },
+          {
+            "id": "2",
+            "entities": [
+              {
+                "text": "Microsoft",
+                "category": "Organization",
+                "offset": 10,
+                "length": 9,
+                "confidenceScore": 0.99
+              }
+            ],
+            "warnings": []
+          },
+          {
+            "id": "3",
+            "entities": [
+              {
+                "text": "Space Needle",
+                "category": "Organization",
+                "offset": 10,
+                "length": 12,
+                "confidenceScore": 0.75
+              },
+              {
+                "text": "2",
+                "category": "Quantity",
+                "subcategory": "Number",
+                "offset": 23,
+                "length": 1,
+                "confidenceScore": 0.8
+              }
+            ],
+            "warnings": []
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2020-04-01"
+      }
+    }
+  }
+}

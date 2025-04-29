@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "serverName": "testserver",
+    "configurationName": "event_scheduler",
+    "resourceGroupName": "testrg",
+    "api-version": "2020-07-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "properties": {
+        "value": "on",
+        "source": "user-override"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "value": "ON",
+          "description": "Indicates the status of the Event Scheduler.",
+          "defaultValue": "OFF",
+          "dataType": "Enumeration",
+          "allowedValues": "ON,OFF,DISABLED",
+          "source": "user-override",
+          "isConfigPendingRestart": "False",
+          "isDynamicConfig": "True"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/testserver/configurations/event_scheduler",
+        "name": "event_scheduler",
+        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+      }
+    },
+    "202": {}
+  }
+}

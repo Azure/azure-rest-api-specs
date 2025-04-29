@@ -14,7 +14,7 @@ To build the SDK for ServiceBus, simply [Install AutoRest](https://aka.ms/autore
 
 To see additional help and options, run:
 
-> `autorest --help`
+> `autorest --help` 
 ---
 
 ## Configuration
@@ -26,7 +26,83 @@ These are the global settings for the ServiceBus API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2024-01
+```
+
+### Tag: package-2021-01-preview
+
+These settings apply only when `--tag=package-2021-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2021-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/operations.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/CheckNameAvailability.json
+```
+
+### Tag: package-2021-06-preview
+
+These settings apply only when `--tag=package-2021-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2021-06-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2021-06-01-preview/operations.json
+- Microsoft.ServiceBus/preview/2021-06-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2021-06-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2021-06-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2021-06-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2021-06-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2021-06-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2021-06-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2021-06-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2021-06-01-preview/CheckNameAvailability.json
+```
+
+### Tag: package-2022-01-preview
+
+These settings apply only when `--tag=package-2022-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2022-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/operations.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/CheckNameAvailability.json
+```
+
+### Tag: package-2022-10-preview
+
+These settings apply only when `--tag=package-2022-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2022-10-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2022-10-01-preview/operations.json
+- Microsoft.ServiceBus/preview/2022-10-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2022-10-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2022-10-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2022-10-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2022-10-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2022-10-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2022-10-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2022-10-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2022-10-01-preview/CheckNameAvailability.json
 ```
 
 ### Tag: package-2018-01-preview
@@ -35,7 +111,42 @@ These settings apply only when `--tag=package-2018-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-01-preview'
 input-file:
-- Microsoft.ServiceBus/preview/2018-01-01-preview/servicebus-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/IPFilterRules-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/VirtualNetworkRules-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/CheckNameAvailability.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/eventhubs.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/migrate.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/PremiumMessagingRegions.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/sku.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/operations.json
+```
+
+### Tag: package-2021-11
+
+These settings apply only when `--tag=package-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11'
+input-file:
+- Microsoft.ServiceBus/stable/2021-11-01/namespace-preview.json
+- Microsoft.ServiceBus/stable/2021-11-01/operations.json
+- Microsoft.ServiceBus/stable/2021-11-01/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/stable/2021-11-01/migrationconfigs.json
+- Microsoft.ServiceBus/stable/2021-11-01/networksets.json
+- Microsoft.ServiceBus/stable/2021-11-01/AuthorizationRules.json
+- Microsoft.ServiceBus/stable/2021-11-01/Queue.json
+- Microsoft.ServiceBus/stable/2021-11-01/topics.json
+- Microsoft.ServiceBus/stable/2021-11-01/Rules.json
+- Microsoft.ServiceBus/stable/2021-11-01/subscriptions.json
+- Microsoft.ServiceBus/stable/2021-11-01/CheckNameAvailability.json
 ```
 
 ### Tag: package-2017-04
@@ -45,7 +156,59 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.ServiceBus/stable/2017-04-01/servicebus.json
+- Microsoft.ServiceBus/stable/2017-04-01/AuthorizationRules.json
+- Microsoft.ServiceBus/stable/2017-04-01/CheckNameAvailability.json
+- Microsoft.ServiceBus/stable/2017-04-01/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/stable/2017-04-01/eventhubs.json
+- Microsoft.ServiceBus/stable/2017-04-01/migrate.json
+- Microsoft.ServiceBus/stable/2017-04-01/migrationconfigs.json
+- Microsoft.ServiceBus/stable/2017-04-01/namespaces.json
+- Microsoft.ServiceBus/stable/2017-04-01/networksets.json
+- Microsoft.ServiceBus/stable/2017-04-01/operations.json
+- Microsoft.ServiceBus/stable/2017-04-01/PremiumMessagingRegions.json
+- Microsoft.ServiceBus/stable/2017-04-01/Queue.json
+- Microsoft.ServiceBus/stable/2017-04-01/Rules.json
+- Microsoft.ServiceBus/stable/2017-04-01/sku.json
+- Microsoft.ServiceBus/stable/2017-04-01/subscriptions.json
+- Microsoft.ServiceBus/stable/2017-04-01/topics.json
+```
+
+### Tag: package-2023-01-preview
+
+These settings apply only when `--tag=package-2023-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2023-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/operations.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/CheckNameAvailability.json
+```
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01'
+input-file:
+- Microsoft.ServiceBus/stable/2024-01-01/namespace-preview.json
+- Microsoft.ServiceBus/stable/2024-01-01/operations.json
+- Microsoft.ServiceBus/stable/2024-01-01/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/stable/2024-01-01/migrationconfigs.json
+- Microsoft.ServiceBus/stable/2024-01-01/networksets.json
+- Microsoft.ServiceBus/stable/2024-01-01/AuthorizationRules.json
+- Microsoft.ServiceBus/stable/2024-01-01/Queue.json
+- Microsoft.ServiceBus/stable/2024-01-01/topics.json
+- Microsoft.ServiceBus/stable/2024-01-01/Rules.json
+- Microsoft.ServiceBus/stable/2024-01-01/subscriptions.json
+- Microsoft.ServiceBus/stable/2024-01-01/CheckNameAvailability.json
 ```
 
 Important notes:
@@ -82,50 +245,14 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_service_bus']
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ServiceBus
-  output-folder: $(csharp-sdks-folder)/servicebus/Microsoft.Azure.Management.ServiceBus/src/Generated
-  clear-output-folder: true
-```
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.servicebus
-  package-name: azure-mgmt-servicebus
-  package-version: 0.5.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -135,29 +262,23 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Suppression
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.ServiceBus/preview/2018-01-01-preview/servicebus-preview.json
-  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/servicebus.json
-  - $(this-folder)/Microsoft.ServiceBus/stable/2015-08-01/servicebus.json
-
+``` yaml
+directive:
+  - suppress: ResourceNameRestriction
+    from: namespace-preview.json
+    reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions.
+  
+  - suppress: ResourceNameRestriction
+    from: AuthorizationRules.json
+    reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions.
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: AuthorizationRules.json
+    reason: Authorization rules are not tracked resources.
+  - suppress: PutResponseCodes
+    from: AuthorizationRules.json
+    reason: Breaking change in order to change the API response code.
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
 

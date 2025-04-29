@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "vaultBaseUrl": "https://myvault.vault.azure.net/",
+    "issuer-name": "issuer01",
+    "api-version": "7.3",
+    "parameter": {
+      "provider": "Test",
+      "credentials": {
+        "account_id": "keyvaultuser",
+        "pwd": "password"
+      },
+      "org_details": {
+        "admin_details": [
+          {
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "admin@microsoft.com",
+            "phone": "4255555555"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "https://myvault.vault.azure.net/certificates/issuers/issuer01",
+        "provider": "Test",
+        "credentials": {
+          "account_id": "keyvaultuser"
+        },
+        "org_details": {
+          "admin_details": [
+            {
+              "first_name": "John",
+              "last_name": "Doe",
+              "email": "admin@microsoft.com",
+              "phone": "4255555555"
+            }
+          ]
+        },
+        "attributes": {
+          "enabled": true,
+          "created": 1482188806,
+          "updated": 1482189526
+        }
+      }
+    }
+  }
+}

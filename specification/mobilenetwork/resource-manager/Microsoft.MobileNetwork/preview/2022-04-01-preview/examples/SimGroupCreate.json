@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "simGroupName": "testSimGroup",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "encryptionKey": {
+          "keyUrl": "https://contosovault.vault.azure.net/keys/azureKey"
+        },
+        "mobileNetwork": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSimGroup",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simGroups/testSimGroup",
+        "type": "Microsoft.MobileNetwork/simGroups",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "encryptionKey": {
+            "keyUrl": "https://contosovault.vault.azure.net/keys/azureKey"
+          },
+          "mobileNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testSimGroup",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simGroups/testSimGroup",
+        "type": "Microsoft.MobileNetwork/simGroups",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "encryptionKey": {
+            "keyUrl": "https://contosovault.vault.azure.net/keys/azureKey"
+          },
+          "mobileNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+          }
+        }
+      }
+    }
+  }
+}
