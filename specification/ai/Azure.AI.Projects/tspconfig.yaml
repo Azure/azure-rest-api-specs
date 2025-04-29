@@ -20,7 +20,7 @@ options:
     generate-sample: true
   "@azure-tools/typespec-csharp":
     package-mode: "dataplane"
-    package-dir: "Azure.AI.Projects.1DP"
+    package-dir: "Azure.AI.Projects"
     namespace: "{package-dir}"
     package-name: "{package-dir}"
     api-version: "2025-05-15-preview"
@@ -30,12 +30,14 @@ options:
     generate-sample: false
     clear-output-folder: true
   "@azure-tools/typespec-ts":
-    package-dir: "ai-projects-1dp"
+    package-dir: "ai-projects"
     api-version: "2025-05-15-preview"
-    generateTest: true
-    generateMetadata: false
-    packageDetails:
-    name: "@azure/ai-projects-1dp"
+    is-modular-library: true
+    generate-test: true
+    generate-metadata: false
+    package-details:
+      name: "@azure/ai-projects"
+      description: "Azure AI Projects Client"
     flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-projects"
@@ -44,11 +46,6 @@ options:
     enable-sync-stack: true
     generate-tests: false
     flavor: azure
-  "@azure-tools/typespec-go":
-    service-dir: "sdk/ai/projects"
-    package-dir: "azaiprojects"
-    generate-fakes: true
-    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
