@@ -12,18 +12,20 @@ using Azure.ResourceManager;
 @versioned(Versions)
 namespace Microsoft.PhysicalNetwork;
 
+@Versioning.added(Versions.v2025_04_01_preview)
 @parentResource(TenantLocationResource)
-model NetworkDeviceResource is ProxyResource<NetworkDeviceProperties> {
+model TorRouterResource is ProxyResource<NetworkDeviceProperties> {
   /** The network device's name, same as Hostname. */
   @key("deviceName")
-  @segment("networkDevices")
+  @segment("torRouters")
   @path
   @pattern(resourceNameRegex)
   name: string;
 }
 
+@Versioning.added(Versions.v2025_04_01_preview)
 @armResourceOperations
-interface NetworkDevices {
-  get is ArmResourceRead<NetworkDeviceResource>;
-  list is ArmResourceListByParent<NetworkDeviceResource>;
+interface TorRouters {
+  get is ArmResourceRead<TorRouterResource>;
+  list is ArmResourceListByParent<TorRouterResource>;
 }
