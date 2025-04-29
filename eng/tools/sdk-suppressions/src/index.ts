@@ -20,7 +20,7 @@ function getArgsError(args: string[]): string {
 
 export async function main() {
   const args: string[] = process.argv.slice(2);
-  if (args.length === 4) {
+  if (args.length === 3) {
     const baseCommitHash: string = args[0];
     const headCommitHash: string = args[1];
     const lables: string = args[2];
