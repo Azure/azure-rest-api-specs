@@ -53,12 +53,7 @@ model BingGroundingToolDefinition extends ToolDefinition {
   type: "bing_grounding";
 
   @doc("The list of connections used by the bing grounding tool.")
-  bing_grounding: {
-    @removed(Versions.`2025-05-15-preview`)
-    connections: ToolConnectionList;
-    @added(Versions.`2025-05-15-preview`)
-    search_configurations: BingGroundingSearchConfiguration[];
-  }
+  bing_grounding: BingGroundingSearchConfigurationList;
 }
 
 @doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
@@ -530,10 +525,6 @@ model RunStepFunctionToolCallDetails {
 
   @doc("The arguments that the model requires are provided to the named function.")
   arguments: string;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The output of the function, only populated for function calls that have already have had their outputs submitted.")
-  output: string | null;
 }
 
 @doc("Search configuration for Bing Grounding")
@@ -657,6 +648,27 @@ model ToolConnectionList {
   @maxItems(1)
   @encodedName("application/json", "connections")
   connectionList?: ToolConnection[];
+}
+
+/**
+ * A list of search configurations currently used by the `bing_grounding` tool.
+ */
+model BingGroundingSearchConfigurationList {
+  /**
+   * The connections attached to this tool. There can be a maximum of 1 connection
+   * resource attached to the tool.
+   */
+  @removed(Versions.v2025_05_01)
+  connections: ToolConnectionList;
+
+  /**
+   * The search configurations attached to this tool. There can be a maximum of 1
+   * search configuration resource attached to the tool.
+   */
+  @added(Versions.v2025_05_01)
+  @maxItems(1)
+  @encodedName("application/json", "search_configurations")
+  searchConfigurations: BingGroundingSearchConfiguration[];
 }
 
 /**
