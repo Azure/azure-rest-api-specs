@@ -76,7 +76,8 @@ interface AssessmentResults {
        */
       @query("$skiptoken")
       $skiptoken?: string;
-    }
+    },
+    Response = ArmResponse<AssessmentListResult>
   >;
 }
 

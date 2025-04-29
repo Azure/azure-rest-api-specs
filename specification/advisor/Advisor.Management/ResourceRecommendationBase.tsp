@@ -34,19 +34,6 @@ interface ResourceRecommendationBases {
   get is ArmResourceRead<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The recommendation ID.
-       */
-      @path
-      recommendationId: string;
-    }
   >;
 
   /**
@@ -59,19 +46,6 @@ interface ResourceRecommendationBases {
     ResourceRecommendationBase,
     PatchModel = TrackedRecommendationPropertiesPayload,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource Manager identifier of the resource to which the tracked recommendation applies.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The RecommendationId ID.
-       */
-      @path
-      recommendationId: string;
-    }
   >;
 
   /**
@@ -81,10 +55,8 @@ interface ResourceRecommendationBases {
   @operationId("Recommendations_List")
   list is ArmResourceListByParent<
     ResourceRecommendationBase,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
-      ...SubscriptionIdParameter;
-
       /**
        * The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'
        */

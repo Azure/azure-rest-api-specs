@@ -36,25 +36,6 @@ interface SuppressionContracts {
   get is ArmResourceRead<
     SuppressionContract,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The recommendation ID.
-       */
-      @path
-      recommendationId: string;
-
-      /**
-       * The name of the suppression.
-       */
-      @path
-      name: string;
-    }
   >;
 
   /**
@@ -66,25 +47,6 @@ interface SuppressionContracts {
   create is ArmResourceCreateOrReplaceSync<
     SuppressionContract,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The recommendation ID.
-       */
-      @path
-      recommendationId: string;
-
-      /**
-       * The name of the suppression.
-       */
-      @path
-      name: string;
-    },
     Response = ArmResourceUpdatedResponse<SuppressionContract>
   >;
 
@@ -97,25 +59,6 @@ interface SuppressionContracts {
   delete is ArmResourceDeleteSync<
     SuppressionContract,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The recommendation ID.
-       */
-      @path
-      recommendationId: string;
-
-      /**
-       * The name of the suppression.
-       */
-      @path
-      name: string;
-    },
     Response = ArmDeletedNoContentResponse
   >;
 }

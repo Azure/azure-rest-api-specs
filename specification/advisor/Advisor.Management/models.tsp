@@ -347,7 +347,7 @@ model ArmErrorResponse {
  * The Advisor configuration data structure.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ConfigData extends Resource {
+model ConfigData extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The Advisor configuration data structure.
    */
@@ -1226,3 +1226,12 @@ model TriageResourceProperties {
  * Collection of Advisor triage resources.
  */
 model TriageResourceCollection is Azure.Core.Page<TriageResource>;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model AssessmentListResult is Azure.Core.Page<AssessmentResult>;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ConfigurationListResult is Azure.Core.Page<ConfigData>;
+
+@@doc(AdvisorScoreEntityProperties.lastRefreshedScore, "The details of latest available score.");
+@@doc(AdvisorScoreEntityProperties.timeSeries, "The historic Advisor score data.");

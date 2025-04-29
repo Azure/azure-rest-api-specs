@@ -6,26 +6,26 @@
   "responses": {
     "200": {
       "body": {
-        "id": "providers/Microsoft.Advisor/metadata/recommendationType",
         "name": "recommendationType",
         "type": "Microsoft.Advisor/metadata",
+        "id": "providers/Microsoft.Advisor/metadata/recommendationType",
         "properties": {
-          "displayName": "Recommendation Type",
+          "applicableScenarios": [
+            "Alerts"
+          ],
           "dependsOn": [
             "category",
             "impact"
           ],
-          "applicableScenarios": [
-            "Alerts"
-          ],
+          "displayName": "Recommendation Type",
           "supportedValues": [
             {
-              "id": "6a2b1e70-bd4c-4163-86de-5243d7ac05ee",
-              "displayName": "Upgrade your SKU or add more instances to ensure fault tolerance"
+              "displayName": "Upgrade your SKU or add more instances to ensure fault tolerance",
+              "id": "6a2b1e70-bd4c-4163-86de-5243d7ac05ee"
             },
             {
-              "id": "da6630fb-4286-4996-92a3-a43f5f26dd34",
-              "displayName": "Delete ExpressRoute circuits in the provider status of Not Provisioned"
+              "displayName": "Delete ExpressRoute circuits in the provider status of Not Provisioned",
+              "id": "da6630fb-4286-4996-92a3-a43f5f26dd34"
             }
           ]
         }
@@ -37,5 +37,7 @@
         "message": "Unknown metadata name"
       }
     }
-  }
+  },
+  "operationId": "RecommendationMetadata_Get",
+  "title": "GetMetadata"
 }

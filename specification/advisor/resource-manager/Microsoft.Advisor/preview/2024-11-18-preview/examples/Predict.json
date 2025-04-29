@@ -1,46 +1,48 @@
 {
   "parameters": {
-    "subscriptionId": "subscriptionId",
+    "api-version": "2024-11-18-preview",
     "predictionRequest": {
       "properties": {
-        "predictionType": "PredictiveRightsizing",
         "extendedProperties": {
-          "region": "CentralUS",
-          "deploymentType": "Linux_IaaS_Software_Store",
-          "sku": "Standard_Dv4",
           "type": "iaas",
-          "numberOfInstances": 10
-        }
+          "deploymentType": "Linux_IaaS_Software_Store",
+          "numberOfInstances": 10,
+          "region": "CentralUS",
+          "sku": "Standard_Dv4"
+        },
+        "predictionType": "PredictiveRightsizing"
       }
     },
-    "api-version": "2024-11-18-preview"
+    "subscriptionId": "subscriptionId"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "predictionType": "PredictiveRightsizing",
+          "category": "Cost",
           "extendedProperties": {
-            "region": "CentralUS",
-            "deploymentType": "Linux_IaaS_Software_Store",
-            "sku": "Standard_Dv4",
             "type": "iaas",
+            "deploymentType": "Linux_IaaS_Software_Store",
             "numberOfInstances": 10,
             "prediction": {
-              "recommendedSku": "Standard_Dv2",
+              "confidence": 0.9,
               "numberOfInstances": 8,
-              "confidence": 0.9
-            }
+              "recommendedSku": "Standard_Dv2"
+            },
+            "region": "CentralUS",
+            "sku": "Standard_Dv4"
           },
-          "category": "Cost",
           "impact": "Low",
           "impactedField": "Microsoft.Compute/virtualMachines",
           "lastUpdated": "2022-02-14T14:47:18.436Z",
+          "predictionType": "PredictiveRightsizing",
           "shortDescription": {
             "solution": "We recommend using 8 instances of type Standard_Dv2."
           }
         }
       }
     }
-  }
+  },
+  "operationId": "Predict",
+  "title": "Predict"
 }

@@ -34,9 +34,7 @@ These settings apply only when `--tag=package-2024-11-preview` is specified on t
 
 ```yaml $(tag) == 'package-2024-11-preview'
 input-file:
-  - Microsoft.Advisor/preview/2024-11-18-preview/advisor.json
-  - Microsoft.Advisor/preview/2024-11-18-preview/assessments.json
-  - Microsoft.Advisor/preview/2024-11-18-preview/resiliencyReviews.json
+  - Microsoft.Advisor/preview/2024-11-18-preview/openapi.json
 suppressions:
   - code: ArmResourcePropertiesBag
     reason: Suppressing for now to avoid breaking change.

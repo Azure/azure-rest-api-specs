@@ -28,7 +28,7 @@ interface ConfigurationsOperationGroup {
 @autoRoute
 @get
 @action("configurations")
-listBySubscription is ArmProviderActionSync<Response = ResourceListResult<ConfigData>,Scope = SubscriptionActionScope,Parameters = {}>
+listBySubscription is ArmProviderActionSync<Response = ArmResponse<ConfigurationListResult>,Scope = SubscriptionActionScope,Parameters = {}>;
 @summary("Create/Overwrite Azure Advisor configuration.")
 /**
 * Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.
@@ -112,7 +112,10 @@ interface RecommendationsOperationGroup {
 @operationId("Recommendations_Generate")
 @autoRoute
 @action("generateRecommendations")
-generate is ArmProviderActionSync<Scope = SubscriptionActionScope,Parameters = {}>
+generate is ArmProviderActionSync<
+Scope = SubscriptionActionScope,Parameters = {},
+Response = ArmAcceptedResponse
+>;
 /**
 * Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.
 */
@@ -129,7 +132,7 @@ generate is ArmProviderActionSync<Scope = SubscriptionActionScope,Parameters = {
 @format("uuid")
 @path
 "operationId": string
-        ): | ArmAcceptedResponse | ErrorResponse;
+        ): | ArmAcceptedResponse | NoContentResponse | ErrorResponse;
 
 
 
@@ -157,12 +160,15 @@ list is ArmProviderActionSync<Response = ResourceListResult<SuppressionContract>
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface PredictsOperationGroup {
 @summary("Predicts a recommendation.")
 /**
 * Predicts a recommendation.
 */
 @autoRoute
+@operationId("Predict")
 predict is ArmProviderActionSync<Request = PredictionRequest,Response = PredictionResponse,Scope = SubscriptionActionScope,Parameters = {}>
+}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface AssessmentTypesOperationGroup {

@@ -43,3 +43,5 @@ using Microsoft.Advisor;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(TriageResource.properties);
+
+@@clientName(SuppressionContracts.create::parameters.resource, "suppressionContract");

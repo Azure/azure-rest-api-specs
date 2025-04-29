@@ -1,18 +1,12 @@
 {
   "parameters": {
-    "subscriptionId": "subscriptionId",
-    "resourceGroup": "resourceGroup",
-    "configurationName": "default",
+    "api-version": "2024-11-18-preview",
     "configContract": {
       "properties": {
-        "lowCpuThreshold": "5",
-        "duration": "7",
-        "exclude": true,
         "digests": [
           {
             "name": "digestConfigName",
             "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
-            "frequency": 30,
             "categories": [
               "HighAvailability",
               "Security",
@@ -20,29 +14,31 @@
               "Cost",
               "OperationalExcellence"
             ],
-            "language": "en",
-            "state": "Active"
+            "frequency": 30,
+            "state": "Active",
+            "language": "en"
           }
-        ]
+        ],
+        "duration": "7",
+        "exclude": true,
+        "lowCpuThreshold": "5"
       }
     },
-    "api-version": "2024-11-18-preview"
+    "configurationName": "default",
+    "resourceGroup": "resourceGroup",
+    "subscriptionId": "subscriptionId"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
-        "type": "Microsoft.Advisor/configurations",
         "name": "default",
+        "type": "Microsoft.Advisor/configurations",
+        "id": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
         "properties": {
-          "lowCpuThreshold": "5",
-          "duration": "7",
-          "exclude": true,
           "digests": [
             {
               "name": "digestConfigName",
               "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
-              "frequency": 30,
               "categories": [
                 "HighAvailability",
                 "Security",
@@ -50,12 +46,18 @@
                 "Cost",
                 "OperationalExcellence"
               ],
-              "language": "en",
-              "state": "Active"
+              "frequency": 30,
+              "state": "Active",
+              "language": "en"
             }
-          ]
+          ],
+          "duration": "7",
+          "exclude": true,
+          "lowCpuThreshold": "5"
         }
       }
     }
-  }
+  },
+  "operationId": "Configurations_CreateInResourceGroup",
+  "title": "PutConfigurations"
 }

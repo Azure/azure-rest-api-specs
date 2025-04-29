@@ -8,72 +8,72 @@
         "nextLink": "string",
         "value": [
           {
-            "id": "providers/Microsoft.Advisor/metadata/recommendationType",
             "name": "recommendationType",
             "type": "Microsoft.Advisor/metadata",
+            "id": "providers/Microsoft.Advisor/metadata/recommendationType",
             "properties": {
-              "displayName": "Recommendation Type",
+              "applicableScenarios": [
+                "Alerts"
+              ],
               "dependsOn": [
                 "category",
                 "impact"
               ],
-              "applicableScenarios": [
-                "Alerts"
-              ],
+              "displayName": "Recommendation Type",
               "supportedValues": [
                 {
-                  "id": "6a2b1e70-bd4c-4163-86de-5243d7ac05ee",
-                  "displayName": "Upgrade your SKU or add more instances to ensure fault tolerance"
+                  "displayName": "Upgrade your SKU or add more instances to ensure fault tolerance",
+                  "id": "6a2b1e70-bd4c-4163-86de-5243d7ac05ee"
                 },
                 {
-                  "id": "da6630fb-4286-4996-92a3-a43f5f26dd34",
-                  "displayName": "Delete ExpressRoute circuits in the provider status of Not Provisioned"
+                  "displayName": "Delete ExpressRoute circuits in the provider status of Not Provisioned",
+                  "id": "da6630fb-4286-4996-92a3-a43f5f26dd34"
                 }
               ]
             }
           },
           {
-            "id": "providers/Microsoft.Advisor/metadata/recommendationCategory",
             "name": "recommendationCategory",
             "type": "Microsoft.Advisor/metadata",
+            "id": "providers/Microsoft.Advisor/metadata/recommendationCategory",
             "properties": {
-              "displayName": "Category",
-              "dependsOn": null,
               "applicableScenarios": [
                 "Alerts"
               ],
+              "dependsOn": null,
+              "displayName": "Category",
               "supportedValues": [
                 {
-                  "id": "Cost",
-                  "displayName": "Cost"
+                  "displayName": "Cost",
+                  "id": "Cost"
                 },
                 {
-                  "id": "Performance",
-                  "displayName": "Performance"
+                  "displayName": "Performance",
+                  "id": "Performance"
                 }
               ]
             }
           },
           {
-            "id": "providers/Microsoft.Advisor/metadata/recommendationImpact",
             "name": "recommendationImpact",
             "type": "Microsoft.Advisor/metadata",
+            "id": "providers/Microsoft.Advisor/metadata/recommendationImpact",
             "properties": {
-              "displayName": "Impact",
-              "dependsOn": null,
               "applicableScenarios": null,
+              "dependsOn": null,
+              "displayName": "Impact",
               "supportedValues": [
                 {
-                  "id": "High",
-                  "displayName": "High"
+                  "displayName": "High",
+                  "id": "High"
                 },
                 {
-                  "id": "Medium",
-                  "displayName": "Medium"
+                  "displayName": "Medium",
+                  "id": "Medium"
                 },
                 {
-                  "id": "Low",
-                  "displayName": "Low"
+                  "displayName": "Low",
+                  "id": "Low"
                 }
               ]
             }
@@ -81,5 +81,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "RecommendationMetadata_List",
+  "title": "GetMetadata"
 }
