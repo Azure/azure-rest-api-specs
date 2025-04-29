@@ -109,6 +109,10 @@ model TlsProperties {
 
   @doc("Trusted CA certificate config map.")
   trustedCaCertificateConfigMapRef?: string;
+
+  @doc("Azure device registry to validate TLS")
+  @added(Versions.`2025-07-01-preview`)
+  azureDeviceRegistry?: OperationalMode;
 }
 
 @doc("Broker Protocol types")
