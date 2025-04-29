@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "accountName": "MyAccount",
+    "api-version": "2021-03-01-preview",
+    "remoteRenderingAccount": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "eastus2euap",
+      "tags": {
+        "hero": "romeo",
+        "heroine": "juliet"
+      }
+    },
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MyAccount",
+        "type": "Microsoft.MixedReality/remoteRenderingAccounts",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/remoteRenderingAccounts/MyAccount",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "eastus2euap",
+        "properties": {
+          "accountDomain": "mixedreality.azure.com",
+          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        },
+        "tags": {
+          "hero": "romeo",
+          "heroine": "juliet"
+        }
+      }
+    }
+  },
+  "operationId": "RemoteRenderingAccounts_Update",
+  "title": "Update remote rendering account"
+}
