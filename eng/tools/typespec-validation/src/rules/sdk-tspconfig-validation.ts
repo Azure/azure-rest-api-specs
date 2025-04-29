@@ -111,6 +111,10 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     this.emitterName = emitterName;
   }
 
+  public getEmitterName() {
+    return this.emitterName;
+  }
+
   protected tryFindOption(config: any): Record<string, any> | undefined {
     let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
     for (const segment of this.keyToValidate.split(".")) {
@@ -503,7 +507,20 @@ export class SdkTspConfigValidationRule implements Rule {
       if (this.suppressedKeyPaths.has(subRule.getPathOfKeyToValidate())) continue;
       const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
-      success &&= result.success;
+
+      let isSubRuleSuccess = result.success;
+
+      // TODO: remove when @azure-tools/typespec-csharp is ready for validating tspconfig
+      if (subRule instanceof TspconfigEmitterOptionsSubRuleBase) {
+        const emitterOptionSubRule = subRule as TspconfigEmitterOptionsSubRuleBase;
+        const emitterName = emitterOptionSubRule.getEmitterName();
+        if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
+          console.warn(`Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed.`);
+          isSubRuleSuccess = true;
+        }
+      }
+
+      success &&= isSubRuleSuccess;
     }
 
     const stdOutputFailedResults =
@@ -511,8 +528,9 @@ export class SdkTspConfigValidationRule implements Rule {
         ? `${failedResults.map((r) => r.errorOutput).join("\n")}\nPlease see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\nFor additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation.`
         : "";
 
+    // NOTE: to avoid huge impact on existing PRs, we always return true with info/warning messages.
     return {
-      success: isManagementSdk(folder) ? success : true,
+      success: true,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
