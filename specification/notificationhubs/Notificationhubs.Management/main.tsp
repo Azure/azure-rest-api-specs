@@ -19,6 +19,7 @@ import "./PrivateEndpointConnectionResource.tsp";
 import "./PrivateLinkResource.tsp";
 import "./routes.tsp";
 import "./legacy.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
