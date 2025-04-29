@@ -1,0 +1,8 @@
+- tool: Swagger Avocado
+  paths:
+    - Microsoft.Network/stable/2024-07-01/vmssNetworkInterface.json
+    - Microsoft.Network/stable/2024-07-01/vmssPublicIpAddress.json
+  reason: These are the Microsoft.Compute resources & we can't update the version to match the networking release version.
+- tool: Swagger Avocado
+  path: Microsoft.Network/stable/2024-07-01/networkWatcher.json
+  reason: Suppressing violation for MISSING_APIS_IN_DEFAULT_TAG since the deprecated api's are removed from network watcher specs.
