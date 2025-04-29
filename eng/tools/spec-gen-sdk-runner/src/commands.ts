@@ -17,7 +17,13 @@ import {
   vsoAddAttachment,
   vsoLogIssue,
 } from "./log.js";
-import { SpecGenSdkCmdInput, VsoLogs } from "./types.js";
+import {
+  SdkName,
+  SpecGenSdkArtifactInfo,
+  SpecGenSdkCmdInput,
+  SpecGenSdkRequiredSettings,
+  VsoLogs,
+} from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 
 /**
@@ -83,10 +89,15 @@ export async function generateSdkForSpecPr(): Promise<number> {
 
   let statusCode = 0;
   let pushedSpecConfigCount;
-  let shouldLabelBreakingChange = false;
   let breakingChangeLabel = "";
   let executionReport;
   let changedSpecPathText = "";
+  let hasManagementPlaneSpecs = false;
+  let overallRunHasBreakingChange = false;
+  let currentRunHasBreakingChange = false;
+  let overallExecutionResult = "";
+  let currentExecutionResult = "";
+
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
@@ -98,11 +109,17 @@ export async function generateSdkForSpecPr(): Promise<number> {
       specGenSdkCommand.push("--tsp-config-relative-path", changedSpec.typespecProject);
       changedSpecPathText = changedSpec.typespecProject;
       pushedSpecConfigCount++;
+      if (changedSpec.typespecProject.includes(".Management")) {
+        hasManagementPlaneSpecs = true;
+      }
     }
     if (changedSpec.readmeMd) {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
       changedSpecPathText = changedSpecPathText + " " + changedSpec.readmeMd;
       pushedSpecConfigCount++;
+      if (changedSpec.readmeMd.includes("resource-manager")) {
+        hasManagementPlaneSpecs = true;
+      }
     }
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
@@ -121,24 +138,31 @@ export async function generateSdkForSpecPr(): Promise<number> {
     }
 
     try {
-      // Read the execution report to determine if the generation was successful
+      // Read the execution report to aggreate the generation results
       executionReport = getExecutionReport(commandInput);
-      const executionResult = executionReport.executionResult;
-      [shouldLabelBreakingChange, breakingChangeLabel] = getBreakingChangeInfo(executionReport);
-      logMessage(`Runner command execution result:${executionResult}`);
+      currentExecutionResult = executionReport.executionResult;
+      if (overallExecutionResult !== "failed") {
+        overallExecutionResult = currentExecutionResult;
+      }
+      [currentRunHasBreakingChange, breakingChangeLabel] = getBreakingChangeInfo(executionReport);
+      overallRunHasBreakingChange = overallRunHasBreakingChange || currentRunHasBreakingChange;
+      logMessage(`Runner command execution result:${currentExecutionResult}`);
     } catch (error) {
       logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
       statusCode = 1;
+      overallExecutionResult = "failed";
     }
     logMessage("ending group logging", LogLevel.EndGroup);
     logIssuesToPipeline(executionReport?.vsoLogPath, changedSpecPathText);
   }
-  // Process the breaking change label artifacts
+  // Process the spec-gen-sdk artifacts
   statusCode =
-    processBreakingChangeLabelArtifacts(
+    generateArtifact(
       commandInput,
-      shouldLabelBreakingChange,
+      overallExecutionResult,
       breakingChangeLabel,
+      overallRunHasBreakingChange,
+      hasManagementPlaneSpecs,
     ) || statusCode;
   return statusCode;
 }
@@ -455,42 +479,47 @@ function getBreakingChangeInfo(executionReport: any): [boolean, string] {
 }
 
 /**
- * Process the breaking change label artifacts.
+ * Generate the spec-gen-sdk artifacts.
  * @param commandInput - The command input.
- * @param shouldLabelBreakingChange - A flag indicating whether to label breaking changes.
+ * @param result - The spec-gen-sdk execution result.
+ * @param breakingChangeLabel - The breaking change label.
+ * @param hasBreakingChange - A flag indicating whether there are breaking changes.
+ * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
  * @returns the run status code.
  */
-function processBreakingChangeLabelArtifacts(
+function generateArtifact(
   commandInput: SpecGenSdkCmdInput,
-  shouldLabelBreakingChange: boolean,
+  result: string,
   breakingChangeLabel: string,
+  hasBreakingChange: boolean,
+  hasManagementPlaneSpecs: boolean,
 ): number {
-  const breakingChangeLabelArtifactName = "spec-gen-sdk-breaking-change-artifact";
-  const breakingChangeLabelArtifactFileName = breakingChangeLabelArtifactName + ".json";
-  const breakingChangeLabelArtifactPath = "out/breaking-change-label-artifact";
-  const breakingChangeLabelArtifactAbsoluteFolder = path.join(
+  const specGenSdkArtifactName = "spec-gen-sdk-artifact";
+  const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
+  const specGenSdkArtifactPath = "out/spec-gen-sdk-artifact";
+  const specGenSdkArtifactAbsoluteFolder = path.join(
     commandInput.workingFolder,
-    breakingChangeLabelArtifactPath,
+    specGenSdkArtifactPath,
   );
   try {
-    if (!fs.existsSync(breakingChangeLabelArtifactAbsoluteFolder)) {
-      fs.mkdirSync(breakingChangeLabelArtifactAbsoluteFolder, { recursive: true });
+    if (!fs.existsSync(specGenSdkArtifactAbsoluteFolder)) {
+      fs.mkdirSync(specGenSdkArtifactAbsoluteFolder, { recursive: true });
     }
-    // Write breaking change label artifact
+    // Write artifact
+    const artifactInfo: SpecGenSdkArtifactInfo = {
+      language: commandInput.sdkLanguage,
+      result,
+      labelAction: hasBreakingChange,
+      isSpecGenSdkCheckRequired:
+        hasManagementPlaneSpecs && SpecGenSdkRequiredSettings[commandInput.sdkLanguage as SdkName],
+    };
     fs.writeFileSync(
-      path.join(
-        commandInput.workingFolder,
-        breakingChangeLabelArtifactPath,
-        breakingChangeLabelArtifactFileName,
-      ),
-      JSON.stringify({
-        language: commandInput.sdkLanguage,
-        labelAction: shouldLabelBreakingChange,
-      }),
+      path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
+      JSON.stringify(artifactInfo, undefined, 2),
     );
-    setVsoVariable("BreakingChangeLabelArtifactName", breakingChangeLabelArtifactName);
-    setVsoVariable("BreakingChangeLabelArtifactPath", breakingChangeLabelArtifactPath);
-    setVsoVariable("BreakingChangeLabelAction", shouldLabelBreakingChange ? "add" : "remove");
+    setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
+    setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
+    setVsoVariable("BreakingChangeLabelAction", hasBreakingChange ? "add" : "remove");
     setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
   } catch (error) {
     logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
