@@ -183,8 +183,6 @@ async function getSwagger(swaggerPath, readmeFolder, repoRoot, logger) {
     );
     normalizedSwaggerPath = normalizedSwaggerPath.replaceAll("\\", "/");
   }
-  const fullPath = resolve(repoRoot, readmeFolder, normalizedSwaggerPath);
-  const content = await readFile(fullPath, { encoding: "utf8" });
 
   return {
     path: join(readmeFolder, normalizedSwaggerPath),
