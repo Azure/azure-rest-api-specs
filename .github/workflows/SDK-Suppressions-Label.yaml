@@ -24,15 +24,6 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Get GitHub PullRequest Changed Suppression Files
-        id: get-changedFiles
-        uses: actions/github-script@v7
-        with:
-          result-encoding: string
-          script: |
-            const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.js');
-            return (await getChangedFiles()).filter((f) => f.endsWith("sdk-suppressions.yaml"));
-
       - name: Get GitHub PullRequest Context
         uses: actions/github-script@v7
         id: fetch-pullRequest-context
@@ -50,10 +41,9 @@ jobs:
         id: run-suppressions-script
         env:
           OUTPUT_FILE: "output.json"
-          GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.result }}
           GITHUB_PULL_REQUEST_LABELS: ${{ steps.fetch-pullRequest-context.outputs.prLabels }}
         run: |
-          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js HEAD^ HEAD "$GITHUB_PULL_REQUEST_CHANGE_FILES" "$GITHUB_PULL_REQUEST_LABELS"
+          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js HEAD^ HEAD "$GITHUB_PULL_REQUEST_LABELS"
 
           OUTPUT=$(cat $OUTPUT_FILE)
           echo "Script output labels: $OUTPUT"

@@ -1,17 +1,10 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
     "outDir": "./dist",
-    "declaration": true
+    "allowJs": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "dist",
-    "src/test/*",
-    "node_modules"
+  "references": [
+    { "path": "../suppressions" }
   ]
 }

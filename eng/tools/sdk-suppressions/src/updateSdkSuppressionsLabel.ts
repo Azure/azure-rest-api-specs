@@ -10,7 +10,7 @@ import {
   SdkPackageSuppressionsEntry,
   validateSdkSuppressionsFile,
 } from "./sdkSuppressions.js";
-import { parseYamlContent } from "./common.js";
+import { getSDKSuppressionsChangedFiles, parseYamlContent } from "./common.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -186,10 +186,9 @@ export function getSdkNamesWithChangedSuppressions(
 
 /**
  *
- * @param prLabels
- * @param prChangeFiles
  * @param baseCommitHash
  * @param headCommitHash
+ * @param prLabels
  * @param outputFile
  * @returns { labelsToAdd: String[]; labelsToRemove: String[] }
  * This code performs two key functions:
@@ -197,10 +196,9 @@ export function getSdkNamesWithChangedSuppressions(
  * Second, it compares the SDKNames obtained in the previous step with the existing PR labels and processes the PR labels accordingly.
  */
 export async function updateSdkSuppressionsLabels(
-  prLabels: string,
-  prChangeFiles: string[],
   baseCommitHash: string,
   headCommitHash: string,
+  prLabels: string,
   outputFile?: string,
 ): Promise<{ labelsToAdd: String[]; labelsToRemove: String[] }> {
   try {
@@ -209,6 +207,8 @@ export async function updateSdkSuppressionsLabels(
   } catch (err) {
     console.error("Error running git command:", err);
   }
+
+  const prChangeFiles = await getSDKSuppressionsChangedFiles();
 
   const sdkNames = await getSdkSuppressionsSdkNames(prChangeFiles, baseCommitHash, headCommitHash);
 

@@ -9,13 +9,12 @@ function getArgsError(args: string[]): string {
     "Details: " +
     args.join(", ") +
     "\n" +
-    "Usage: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js baseCommitHash headCommitHash changeFiles prLabels\n" +
+    "Usage: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js baseCommitHash headCommitHash prLabels\n" +
     "Returns: {labelsToAdd: [label1, label2],labelsToRemove: [lable3, label4]}\n" +
     "Parameters:\n" +
     "  baseCommitHash: The base commit hash. Example: HEAD^ \n" +
     "  headCommitHash: The head commit hash. Example: HEAD \n" +
-    "  changeFiles: The changed files. Example: 'specification/workloads/Workloads.Operations.Management/sdk-suppressions.yaml specification/workloads/Workloads.Operations.Management/main.tsp'\n" +
-    "  prLabels: The PR has added labels. Example: '['BreakingChange-Go-Sdk-Suppression', 'BreakingChange-Python-Sdk-Suppression']'\n"
+    "  prLabels: All pull reqeuest labels have been added, including breaking-language-sdk-suppression. Example: '['BreakingChange-Go-Sdk-Suppression', 'BreakingChange-Python-Sdk-Suppression']'\n"
   );
 }
 
@@ -24,17 +23,10 @@ export async function main() {
   if (args.length === 4) {
     const baseCommitHash: string = args[0];
     const headCommitHash: string = args[1];
-    const changeFiles: string[] = args[2]?.split(",") ?? [];
-    const lables: string = args[3];
+    const lables: string = args[2];
     const outputFile = process.env.OUTPUT_FILE as string;
     const changedLabels: { labelsToAdd: String[]; labelsToRemove: String[] } =
-      await updateSdkSuppressionsLabels(
-        lables,
-        changeFiles,
-        baseCommitHash,
-        headCommitHash,
-        outputFile,
-      );
+      await updateSdkSuppressionsLabels(baseCommitHash, headCommitHash, lables, outputFile);
     console.log(JSON.stringify(changedLabels));
     exit(0);
   } else {

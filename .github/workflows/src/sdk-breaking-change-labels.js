@@ -65,6 +65,7 @@ export async function getLabelAndActionImpl({
 
   let issue_number = NaN;
   let labelAction;
+  /** @type {String | undefined} */
   let labelName = "";
   const artifactName = "spec-gen-sdk-artifact";
   const artifactFileName = artifactName + ".json";
