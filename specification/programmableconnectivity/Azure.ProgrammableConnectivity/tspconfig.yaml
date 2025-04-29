@@ -1,6 +1,10 @@
 parameters:
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
   "service-dir":
-    default: "sdk/programmableconnectivity"
+    default: "sdk/communication"
   "service-directory-name":
     default: "communication"
   "dependencies":
@@ -34,7 +38,7 @@ options:
       name: "@azure-rest/programmableconnectivity"
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{project-root}/azure-sdk-for-java/sdk/{service-directory-name}/azure-communication-programmableconnectivity"
+    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-communication-programmableconnectivity"
     package-dir: "azure-communication-programmableconnectivity"
     namespace: com.azure.communication.programmableconnectivity
     flavor: azure
