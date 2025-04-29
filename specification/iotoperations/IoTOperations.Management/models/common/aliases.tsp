@@ -4,6 +4,7 @@
 alias Sasl = "Sasl";
 alias Cron = "Cron";
 alias Mqtt = "Mqtt";
+alias None = "None";
 alias Block = "Block";
 alias Never = "Never";
 alias Always = "Always";
@@ -23,6 +24,7 @@ alias DiagnoseAndRepair = "DiagnoseAndRepair";
 alias HelmConfiguration = "HelmConfiguration";
 alias ImageConfiguration = "ImageConfiguration";
 alias OneToOneAllocation = "OneToOneAllocation";
+alias AzureDeviceRegistry = "AzureDeviceRegistry";
 alias ServiceAccountToken = "ServiceAccountToken";
 alias BucketizedAllocation = "BucketizedAllocation";
 alias ManagedConfiguration = "ManagedConfiguration";

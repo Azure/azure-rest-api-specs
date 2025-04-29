@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -114,6 +115,22 @@ model BrokerAuthenticatorMethodX509 {
 
   @doc("Name of the trusted client ca cert resource.")
   trustedClientCaCert?: string = "client-ca";
+
+  @doc("X509 authentication attributes properties.")
+  @added(Versions.`2025-07-01-preview`)
+  additionalValidation: BrokerAuthenticatorValidationMethods;
+}
+
+@doc("X509 authentication validation methods.")
+@added(Versions.`2025-07-01-preview`)
+union BrokerAuthenticatorValidationMethods {
+  string,
+
+  @doc("No addtional validation is performed")
+  None,
+
+  @doc("Additional validation is performed using the Azure Device Registry.")
+  AzureDeviceRegistry,
 }
 
 @doc("BrokerAuthenticatorMethodX509Attributes properties.")

@@ -4682,8 +4682,15 @@
           "type": "string",
           "description": "Name of the trusted client ca cert resource.",
           "default": "client-ca"
+        },
+        "additionalValidation": {
+          "$ref": "#/definitions/BrokerAuthenticatorValidationMethods",
+          "description": "X509 authentication attributes properties."
         }
-      }
+      },
+      "required": [
+        "additionalValidation"
+      ]
     },
     "BrokerAuthenticatorMethodX509Attributes": {
       "type": "object",
@@ -4730,6 +4737,30 @@
       "required": [
         "method"
       ]
+    },
+    "BrokerAuthenticatorValidationMethods": {
+      "type": "string",
+      "description": "X509 authentication validation methods.",
+      "enum": [
+        "None",
+        "AzureDeviceRegistry"
+      ],
+      "x-ms-enum": {
+        "name": "BrokerAuthenticatorValidationMethods",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No addtional validation is performed"
+          },
+          {
+            "name": "AzureDeviceRegistry",
+            "value": "AzureDeviceRegistry",
+            "description": "Additional validation is performed using the Azure Device Registry."
+          }
+        ]
+      }
     },
     "BrokerAuthorizationProperties": {
       "type": "object",
@@ -10667,10 +10698,6 @@
         "trustedCaCertificateConfigMapRef": {
           "type": "string",
           "description": "Trusted CA certificate config map."
-        },
-        "azureDeviceRegistry": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "Azure device registry to validate TLS"
         }
       }
     },
