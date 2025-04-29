@@ -63,3 +63,6 @@ using Microsoft.Help;
 @@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutions::parameters.body,
   "discoverSolutionRequest"
 );
+@@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription::parameters.body,
+  "discoverSolutionRequest"
+);
