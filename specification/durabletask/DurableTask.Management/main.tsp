@@ -158,7 +158,7 @@ union PurgeableOrchestrationState {
   @doc("The orchestration is terminated")
   Terminated: "Terminated",
 
-  @doc("The orchestration is terminated")
+  @doc("The orchestration is canceled")
   Canceled: "Canceled",
 }
 
