@@ -256,7 +256,8 @@ model Sku {
  * Description of a CheckAvailability resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model CheckAvailabilityResult extends ProxyResource {
+model CheckAvailabilityResult
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Gets or sets true if the name is available and can be used to
    * create new Namespace/NotificationHub. Otherwise false.
@@ -804,7 +805,8 @@ model NotificationHubPatchParameters {
  * Description of a NotificationHub Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model DebugSendResponse extends ProxyResource {
+model DebugSendResponse
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Result of DebugSend operations.
    */
@@ -929,7 +931,8 @@ model PolicyKeyResource {
  * PNS credentials.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PnsCredentialsResource extends ProxyResource {
+model PnsCredentialsResource
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Collection of Notification Hub or Notification Hub Namespace PNS credentials.
    */

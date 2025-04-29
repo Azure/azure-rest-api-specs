@@ -5,46 +5,48 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./NamespaceResource.tsp";
 
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-
 namespace Microsoft.NotificationHubs;
 /**
-* A Private Link Arm Resource.
-*/
+ * A Private Link Arm Resource.
+ */
 @parentResource(NamespaceResource)
-model PrivateLinkResource is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
-...ResourceNameParameter<Resource = PrivateLinkResource,KeyName = "subResourceName",SegmentName = "privateLinkResources",NamePattern = "^namespace$">
+model PrivateLinkResource
+  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = PrivateLinkResource,
+    KeyName = "subResourceName",
+    SegmentName = "privateLinkResources",
+    NamePattern = "^namespace$"
+  >;
 }
-
-
 
 @armResourceOperations
 interface PrivateLinkResources {
-/**
-* Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.
-* That's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.
-*/
-@operationId("PrivateEndpointConnections_GetGroupId")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-getGroupId is ArmResourceRead<PrivateLinkResource>;
+  /**
+   * Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.
+   * That's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PrivateEndpointConnections_GetGroupId")
+  getGroupId is ArmResourceRead<PrivateLinkResource>;
 
-
-/**
-* Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.
-* That's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.
-*/
-@operationId("PrivateEndpointConnections_ListGroupIds")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-listGroupIds is ArmResourceListByParent<PrivateLinkResource>;
-
-
+  /**
+   * Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.
+   * That's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PrivateEndpointConnections_ListGroupIds")
+  listGroupIds is ArmResourceListByParent<PrivateLinkResource>;
 }
 
-
-@@doc(PrivateLinkResource.name, "Name of the Private Link sub-resource. The only supported sub-resource is "namespace"")
-@@doc(PrivateLinkResource.properties, "Represents properties of Private Link Resource.")
+@@doc(PrivateLinkResource.name,
+  "Name of the Private Link sub-resource. The only supported sub-resource is \"namespace\""
+);
+@@doc(PrivateLinkResource.properties,
+  "Represents properties of Private Link Resource."
+);
