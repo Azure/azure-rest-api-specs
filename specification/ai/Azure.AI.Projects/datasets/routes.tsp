@@ -60,7 +60,7 @@ interface Datasets
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get download sas for dataset version.")
+  @doc("Get the SAS credential to access the storage account associated with a Dataset version.")
   @post
   @Rest.action("credentials")
   @Rest.actionSeparator("/")
