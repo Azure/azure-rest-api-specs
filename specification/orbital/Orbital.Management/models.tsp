@@ -799,29 +799,13 @@ model EndPoint {
 /**
  * Ground Stations available to schedule Contacts.
  */
-model AvailableGroundStation {
-  /**
-   * ID of groundStation.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
+model AvailableGroundStation
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   /**
    * Name of the ground station.
    */
   @visibility(Lifecycle.Read)
   name?: string;
-
-  /**
-   * Azure region.
-   */
-  location?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
 
   /**
    * The properties bag for this resource.
@@ -835,7 +819,7 @@ model AvailableGroundStation {
  * The properties bag for this resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AvailableGroundStationProperties
+model AvailableGroundStationPropertiesWrapper
   extends AvailableGroundStationProperties {}
 
 /**

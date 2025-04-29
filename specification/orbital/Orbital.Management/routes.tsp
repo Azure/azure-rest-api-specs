@@ -49,12 +49,7 @@ interface OperationsResultsOperationGroup {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationResourceParameter,
-
-    /**
-     * The ID of an ongoing async operation.
-     */
-    @minLength(1)
-    @path
-    operationId: string,
-  ): ArmResponse<OperationResult> | ArmAcceptedResponse | ErrorResponse;
+    ...CommonTypes.OperationIdParameter,
+  ): (ArmResponse<OperationResult> &
+    ArmLroLocationHeader) | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ErrorResponse;
 }
