@@ -224,7 +224,8 @@ model FileShareProperties {
 @doc("Azure Async Operation")
 model AzureAsyncOperation {
     @doc("The resource path from GET operation.")
-    id?: string;
+    /** Fully qualified ID for the async operation. */
+    id?: Azure.Core.armResourceIdentifier;
 
     @doc("The operation id.")
     name?: string;
@@ -239,16 +240,17 @@ model AzureAsyncOperation {
     endTime?: utcDateTime;
 
     @doc("The percentage completed of the operation.")
+    @minValue(0.0)
+    @maxValue(100.0)
     percentComplete?: float64;
 
-    @doc("Specific resource provider values for successful operations")
-    properties?: {};
-
+	#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+    #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Not all values are strings in this dictionary."
+    @doc("Custom operation properties, populated only for a successful operation.")
+    properties?: Record<unknown>;
+	
     @doc("Operation error.")
     error?: ErrorDetail;
-
-    // @doc("This type property is required for ArmResources. For AzureAsyncOperation, it's not required so it's here to satisfy cadl but never populated/used in code.")
-    // type?: string;
 }
 
 @doc("ARM create operation completed successfully.")
@@ -341,52 +343,23 @@ model OperationResultParameters {
     operationId: uuid;
 }
 
-// Customer model to satisfy lint. Lint required our PUT respose to contain the word Lifecycle.Update. Built In ArmCreateResponse does not contain the word Lifecycle.Update.
-@doc("ARM create or update operation completed successfully.")
-model ArmCreateUpdateResponse<T> {
-    ...OkResponse;
-    ...Body<T>;
-}
-
-/**
- * A long-running resource CreateOrUpdate (PUT)
- * @template TResource the resource being patched
- * @template TBaseParameters Optional. Allows overriding the operation parameters
- */
-@autoRoute
-@doc("Create a {name}", TResource)
-@extension("x-ms-long-running-operation", true)
-@extension(
-    "x-ms-long-running-operation-options",
-    #{
-        `final-state-via`: "azure-async-operation",
-    }
-)
-@armResourceCreateOrUpdate(TResource)
-@put
-op ArmResourceCustomCreateOrUpdateAsync<
-    TResource extends Azure.ResourceManager.Foundations.Resource,
-    TBaseParameters = BaseParameters<TResource>
->(
-    ...ResourceInstanceParameters<TResource, TBaseParameters>,
-
-    @doc("Resource create parameters.")
-    @bodyRoot
-    resource: TResource,
-): ArmCreateUpdateResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
-
-// CADL/TypeSpec folks advised to use the operation templates rather than the Azure.ResourceManager.ResourceOperations interface template, as these tend to version better as our API evolves.
-// Example of operation template is linked here: https://azure.github.io/typespec-azure/docs/getstarted/azure-resource-manager/step02#3-define-an-interface-with-operations-for-the-resource-type
-
-
 @armResourceOperations
 interface FileShares {
     get is ArmResourceRead<FileShare, BaseParameters<FileShare>>;
 
     @doc("Create or update a file share.")
-    createOrUpdate is ArmResourceCustomCreateOrUpdateAsync<FileShare, BaseParameters<FileShare>>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FileShare,
+    BaseParameters<FileShare>,
+    ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
-    update is ArmCustomPatchAsync<FileShare, ResourceUpdateModel<FileShare, FileShareProperties>, BaseParameters<FileShare>>;
+	/**
+	   * Update a FileShare
+	   */
+	  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+	  @patch(#{ implicitOptionality: false })
+    update is ArmCustomPatchAsync<FileShare, ResourceUpdateModel<FileShare, FileShareProperties>, BaseParameters<FileShare>>;	
 
     delete is ArmResourceDeleteWithoutOkAsync<FileShare, BaseParameters<FileShare>>;
 
@@ -396,62 +369,6 @@ interface FileShares {
 
     checkNameAvailability is checkLocalNameAvailability;
 
-    @autoRoute
-    @doc("Get an AzureAsyncOperation")
-    @get
-    @armResourceRead(AzureAsyncOperation)
-    getAzureAsyncOperation(
-        ...AzureAsyncOperationsParameters,
-        ...KeysOf<AzureAsyncOperation>
-    ): ArmResponse<AzureAsyncOperation> | ErrorResponse;
-
-    // TODO: Add an example
-    @autoRoute
-    @doc("Get an Operation Result")
-    @get
-    @armResourceRead(FileShare)
-    getOperationResult(
-        ...OperationResultParameters
-        
-    ): ArmResponse<unknown> | ArmNoContentResponse | ArmAcceptedLroResponse | ErrorResponse;
-
-    @autoRoute
-    @armResourceCollectionAction
-    @doc("Implements validate move resources")
-    @TypeSpec.Rest.action("validateMoveResources")
-    @extension("x-ms-long-running-operation", true)
-    @extension(
-    "x-ms-long-running-operation-options",
-    #{
-        `final-state-via`: "location",
-    }
-    )
-    @post
-    validateMoveResources (
-        ...ApiVersionParameter;
-        ...SubscriptionIdParameter;
-        ...ResourceGroupParameter;
-
-        @doc("The Move File Share request to be validated")
-        @body
-        body: MoveFileShareRequest,
-    ): OkResponse | ArmAcceptedLroResponse | ErrorResponse;
-
-    @autoRoute
-    @armResourceCollectionAction
-    @doc("Implements move resources")
-    @TypeSpec.Rest.action("moveResources")
-    @post
-    moveResources (
-        ...ApiVersionParameter;
-        ...SubscriptionIdParameter;
-        ...ResourceGroupParameter;
-
-        @doc("The Move File Share request")
-        @body
-        body: MoveFileShareRequest,
-    ): OkResponse | ArmAcceptedLroResponse | ErrorResponse;
-
     @added(Versions.v2024_01_01_preview)
     getFileShareSnapshot is ArmResourceRead<FileShareSnapshot, BaseParameters<FileShareSnapshot>>;
 
@@ -460,16 +377,20 @@ interface FileShares {
     createOrUpdateFileShareSnapshot is ArmResourceCreateOrReplaceSync<FileShareSnapshot, BaseParameters<FileShareSnapshot>>;
 
     @added(Versions.v2024_01_01_preview)
+	@doc("Update a FileShareSnapshot.")
     updateFileShareSnapshot is ArmCustomPatchAsync<FileShareSnapshot, ResourceUpdateModel<FileShareSnapshot, FileShareSnapshotProperties>, BaseParameters<FileShareSnapshot>>;
 
     @added(Versions.v2024_01_01_preview)
+	@doc("Delete a FileShareSnapshot.")
     deleteFileShareSnapshot is ArmResourceDeleteWithoutOkAsync<FileShareSnapshot, BaseParameters<FileShareSnapshot>>;
 
     @added(Versions.v2024_01_01_preview)
+	@doc("List FileShareSnapshot by FileShare.")
     listByFileShare is ArmResourceListByParent<FileShareSnapshot,BaseParameters<FileShareSnapshot>,"","">;
 }
 
 @added(Versions.v2024_01_01_preview)
+@doc("Extension Resource Action Scope")
 @armVirtualResource
 @extensionResource
 model ExtensionResourceActionScope {
@@ -585,15 +506,6 @@ model PreflightValidationError {
     details?: PreflightValidationError[];
 }
 
-@doc("The move fileshare request body.") 
-model MoveFileShareRequest {
-    @doc("The target resource group the file shares are being moved to.")
-    targetResourcegroup: string;
-
-    @doc("The list of names of the resources being moved. Ex: /subscriptions/{id}/resourceGroups/{source}/providers/{namespace}/{type}/{name}")
-    resources: string[];
-}
-
 @doc("State of the public network access.")
 union PublicNetworkAccess {
   string,
@@ -631,5 +543,19 @@ model FileShareSnapshotProperties {
     initiatorId?: string;
 
     @doc("The metadata")
-    metadata?: Record<string>;
+    metadata?: MetadataItem[];
+	
+	@visibility(Lifecycle.Read)
+    @doc("The status of the last operation.")
+    provisioningState?: FileShareProvisioningState;
+}
+
+@doc("FileShareSnapshot Metadata item")
+@added(Versions.v2024_01_01_preview)
+model MetadataItem {
+  @doc("The name of the metadata item.")
+  name: string;
+
+  @doc("The value of the metadata item.")
+  value: string;
 }
