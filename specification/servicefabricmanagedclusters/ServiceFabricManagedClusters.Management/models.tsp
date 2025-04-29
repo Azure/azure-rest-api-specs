@@ -377,7 +377,7 @@ model FaultSimulationDetails {
   /**
    * List of node type simulations associated with the cluster fault simulation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["nodeTypeName"])
+  @Azure.ResourceManager.identifiers(#["nodeTypeName"])
   nodeTypeFaultSimulation?: NodeTypeFaultSimulation[];
 
   /**
