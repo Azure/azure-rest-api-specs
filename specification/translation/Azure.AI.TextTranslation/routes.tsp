@@ -96,11 +96,11 @@ op lookupDictionaryEntries is CustomOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
-@removed(APIVersion.v2025_05_01_preview)
 @post
 @route("dictionary/examples")
 @summary("Lookup Dictionary Examples")
 @doc("Lookup Dictionary Examples")
+@removed(APIVersion.v2025_05_01_preview)
 op lookupDictionaryExamples is CustomOperation<
   DictionaryExampleTextItem[],
   DictionaryExamplesParameters,

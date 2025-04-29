@@ -9,6 +9,7 @@ using Azure.Core;
 
 namespace TextTranslation;
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("Request parameters for the dictionary lookup API.")
 model DictionaryLookupParameters {
   ...CommonParameters;
@@ -28,6 +29,7 @@ model DictionaryLookupParameters {
   to: string;
 }
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("Request parameters for the dictionary examples API.")
 model DictionaryExamplesParameters {
   ...CommonParameters;
@@ -68,6 +70,7 @@ model DictionaryExamplesResult {
 }
 
 @doc("Element containing the text with translation.")
+@removed(APIVersion.v2025_05_01_preview)
 model DictionaryExampleTextItem extends InputTextItem {
   @doc("""
     A string specifying the translated text previously returned by the Dictionary lookup operation. 
@@ -147,6 +150,7 @@ model DictionaryTranslation {
   backTranslations: BackTranslation[];
 }
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("Back Translation")
 model BackTranslation {
   @doc("""
