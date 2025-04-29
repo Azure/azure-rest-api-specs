@@ -12,7 +12,7 @@ import {
   prepareSpecGenSdkCommand,
   generateArtifact,
   setPipelineVariables,
-} from "../../src/commandUtils.js";
+} from "../../src/command-helpers.js";
 import { LogLevel } from "../../src/log.js";
 
 // Get the absolute path to the repo root
@@ -52,14 +52,18 @@ describe("commands.ts", () => {
     test("runMode is release when it has no batch-type and no pr-number", () => {
       const mockArgs = [
         "--scp",
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
         "--lang",
         "azure-sdk-for-go",
       ];
       vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", ...mockArgs]);
       const result = parseArguments();
       expect(result.localSpecRepoPath).toBe(
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-go");
       expect(result.prNumber).toBe("");
@@ -69,7 +73,9 @@ describe("commands.ts", () => {
     test("runMode is release when it has pr-number", () => {
       const mockArgs = [
         "--scp",
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
         "--pr-number",
         "1234",
       ];
@@ -78,7 +84,9 @@ describe("commands.ts", () => {
       const result = parseArguments();
 
       expect(result.localSpecRepoPath).toBe(
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-net");
       expect(result.prNumber).toBe("1234");
@@ -88,7 +96,9 @@ describe("commands.ts", () => {
     test("runMode is batch when it has batch-type", () => {
       const mockArgs = [
         "--scp",
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
         "--batch-type",
         "all-specs",
       ];
@@ -97,7 +107,9 @@ describe("commands.ts", () => {
       const result = parseArguments();
 
       expect(result.localSpecRepoPath).toBe(
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-net");
       expect(result.prNumber).toBe("");
@@ -260,17 +272,21 @@ describe("commands.ts", () => {
         specCommitSha: "",
         specRepoHttpsUrl: "",
       };
+      const mockResult = "succeeded";
+      const mockBreakingchangeLabel = "breaking-change";
+      const mockhasBreakingChange = false;
+      const mockhasManagementPlaneSpecs = false;
+      const result = generateArtifact(
+        mockCommandInput,
+        mockResult,
+        mockBreakingchangeLabel,
+        mockhasBreakingChange,
+        mockhasManagementPlaneSpecs,
+      );
 
-      const mockArtifactInfo = {
-        language: "",
-        labelAction: false,
-        managementPlane: true,
-        dataPlane: false,
-      };
-
-      const result = generateArtifact(mockCommandInput, mockArtifactInfo, true, "breaking-change");
-
-      const breakingChangeLabelArtifactPath = path.normalize("/working/folder/out/spec-gen-sdk-artifact");
+      const breakingChangeLabelArtifactPath = path.normalize(
+        "/working/folder/out/spec-gen-sdk-artifact",
+      );
       expect(result).toBe(0);
       expect(fs.mkdirSync).toHaveBeenCalledWith(breakingChangeLabelArtifactPath, {
         recursive: true,
@@ -280,9 +296,9 @@ describe("commands.ts", () => {
         JSON.stringify(
           {
             language: "javascript",
-            labelAction: true,
-            managementPlane: true,
-            dataPlane: false,
+            result: "succeeded",
+            labelAction: false,
+            isSpecGenSdkCheckRequired: false,
           },
           undefined,
           2,
@@ -296,7 +312,7 @@ describe("commands.ts", () => {
         "SpecGenSdkArtifactPath",
         "out/spec-gen-sdk-artifact",
       );
-      expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabelAction", "add");
+      expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabelAction", "remove");
       expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabel", "breaking-change");
     });
 
@@ -319,14 +335,17 @@ describe("commands.ts", () => {
         specRepoHttpsUrl: "",
       };
 
-      const mockArtifactInfo = {
-        language: "",
-        labelAction: false,
-        managementPlane: true,
-        dataPlane: false,
-      };
-
-      const result = generateArtifact(mockCommandInput, mockArtifactInfo, true, "breaking-change");
+      const mockResult = "failed";
+      const mockBreakingchangeLabel = "breaking-change";
+      const mockhasBreakingChange = false;
+      const mockhasManagementPlaneSpecs = false;
+      const result = generateArtifact(
+        mockCommandInput,
+        mockResult,
+        mockBreakingchangeLabel,
+        mockhasBreakingChange,
+        mockhasManagementPlaneSpecs,
+      );
 
       expect(result).toBe(1);
       expect(log.logMessage).toHaveBeenCalledWith("ending group logging", LogLevel.EndGroup);
