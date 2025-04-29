@@ -85,7 +85,7 @@ model PendingUploadResponse {
   @doc("Version of asset to be created if user did not specify version when initially creating upload")
   version?: string;
 
-  @doc("TemporaryBlobReference is the only supported type")
+  @doc("BlobReference is the only supported type")
   pendingUploadType: PendingUploadType.BlobReference;
 }
 
