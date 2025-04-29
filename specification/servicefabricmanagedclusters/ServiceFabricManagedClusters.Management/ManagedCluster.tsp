@@ -1,12 +1,15 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
@@ -215,6 +218,7 @@ model ManagedClusterProperties {
    * A service generated unique identifier for the cluster resource.
    */
   @visibility(Lifecycle.Read)
+  @deserializeEmptyStringAsNull
   clusterId?: string;
 
   /**
@@ -227,7 +231,8 @@ model ManagedClusterProperties {
    * List of thumbprints of the cluster certificates.
    */
   @visibility(Lifecycle.Read)
-  clusterCertificateThumbprints?: string[];
+  // TODO: Waiting for alternate type to support nonscalar values
+  clusterCertificateThumbprints?: unknown[];
 
   /**
    * The port used for client connections to the cluster.
@@ -644,6 +649,7 @@ model Subnet {
   /**
    * Subnet name.
    */
+  @deserializeEmptyStringAsNull
   name: string;
 
   /**
@@ -664,6 +670,7 @@ model Subnet {
   /**
    * Full resource id for the network security group.
    */
+  @deserializeEmptyStringAsNull
   networkSecurityGroupId?: string;
 }
 
@@ -679,7 +686,8 @@ model ServiceEndpoint {
   /**
    * A list of locations.
    */
-  locations?: string[];
+  // TODO: Waiting for alternate type to support nonscalar values
+  locations?: azureLocation[];
 }
 
 /**
@@ -793,16 +801,16 @@ model ClusterMonitoringPolicy {
   /**
    * The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-  @OpenAPI.extension("x-ms-format", "duration-constant")
-  healthCheckWaitDuration: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  healthCheckWaitDuration: duration;
 
   /**
    * The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-  @OpenAPI.extension("x-ms-format", "duration-constant")
-  healthCheckStableDuration: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  healthCheckStableDuration: duration;
 
   /**
    * The amount of time to retry health evaluation when the application or cluster is unhealthy before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
@@ -1188,7 +1196,8 @@ model ClientCertificate {
   /**
    * Certificate thumbprint.
    */
-  thumbprint?: string;
+  // TODO: Waiting for alternate type to support nonscalar values
+  thumbprint?: unknown;
 
   /**
    * Certificate common name.
@@ -1198,7 +1207,8 @@ model ClientCertificate {
   /**
    * Issuer thumbprint for the certificate. Only used together with CommonName.
    */
-  issuerThumbprint?: string;
+  // TODO: Waiting for alternate type to support nonscalar values
+  issuerThumbprint?: unknown;
 }
 
 /**

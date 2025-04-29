@@ -905,13 +905,15 @@ model VMSSExtensionProperties {
    * Json formatted public settings for the extension.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Day 0 property"
-  settings?: {};
+  // TODO: alternate type to support non-scalars
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Day 0 property"
-  protectedSettings?: {};
+  // TODO: alternate type to support non-scalar
+  protectedSettings?: unknown;
 
   /**
    * If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed.
@@ -948,7 +950,8 @@ model VmManagedIdentity {
   /**
    * The list of user identities associated with the virtual machine scale set under the node type. Each entry will be an ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  userAssignedIdentities?: string[];
+  // TODO: Used to be string, waiting for alternatetype to support non-scalars
+  userAssignedIdentities?: Azure.Core.armResourceIdentifier[];
 }
 
 /**
