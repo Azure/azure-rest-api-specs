@@ -1,22 +1,22 @@
 {
   "parameters": {
     "api-version": "2024-07-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "westus",
     "resourceGroupName": "test-rg",
-    "location": "westus"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ServiceLinker/linkers/linkName",
             "name": "linkName",
             "type": "Microsoft.ServiceLinker/devConnectors",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ServiceLinker/linkers/linkName",
             "properties": {
               "authInfo": {
-                "authType": "secret",
-                "name": "username"
+                "name": "username",
+                "authType": "secret"
               },
               "targetService": {
                 "type": "AzureResource",
@@ -30,5 +30,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "Connector_List",
+  "title": "ConnectorList"
 }

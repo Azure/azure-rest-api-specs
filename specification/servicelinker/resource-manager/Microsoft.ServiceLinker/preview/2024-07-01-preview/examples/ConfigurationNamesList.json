@@ -5,48 +5,50 @@
   "responses": {
     "200": {
       "body": {
+        "nextLink": null,
         "value": [
           {
             "properties": {
-              "targetService": "MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES",
-              "clientType": "none",
               "authType": "systemAssignedIdentity",
+              "clientType": "none",
               "names": [
                 {
-                  "value": "AZURE_APPCONFIGURATION_ENDPOINT",
-                  "description": "App configuration endpoint"
+                  "description": "App configuration endpoint",
+                  "value": "AZURE_APPCONFIGURATION_ENDPOINT"
                 },
                 {
-                  "value": "AZURE_APPCONFIGURATION_SCOPE",
-                  "description": "The scopes required for the token."
+                  "description": "The scopes required for the token.",
+                  "value": "AZURE_APPCONFIGURATION_SCOPE"
                 }
-              ]
+              ],
+              "targetService": "MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES"
             }
           },
           {
             "properties": {
-              "targetService": "MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES",
-              "clientType": "none",
               "authType": "userAssignedIdentity",
+              "clientType": "none",
               "names": [
                 {
-                  "value": "AZURE_APPCONFIGURATION_ENDPOINT",
-                  "description": "App configuration endpoint"
+                  "description": "App configuration endpoint",
+                  "value": "AZURE_APPCONFIGURATION_ENDPOINT"
                 },
                 {
-                  "value": "AZURE_APPCONFIGURATION_CLIENTID",
-                  "description": "The client(application) ID of the user identity."
+                  "description": "The client(application) ID of the user identity.",
+                  "value": "AZURE_APPCONFIGURATION_CLIENTID"
                 },
                 {
-                  "value": "AZURE_APPCONFIGURATION_SCOPE",
-                  "description": "The scopes required for getting token."
+                  "description": "The scopes required for getting token.",
+                  "value": "AZURE_APPCONFIGURATION_SCOPE"
                 }
-              ]
+              ],
+              "targetService": "MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES"
             }
           }
-        ],
-        "nextLink": null
+        ]
       }
     }
-  }
+  },
+  "operationId": "ConfigurationNames_List",
+  "title": "GetConfigurationNames"
 }

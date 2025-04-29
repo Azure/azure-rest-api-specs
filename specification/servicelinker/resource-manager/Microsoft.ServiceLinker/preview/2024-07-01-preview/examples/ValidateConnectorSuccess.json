@@ -1,19 +1,19 @@
 {
   "parameters": {
     "api-version": "2024-07-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "test-rg",
+    "connectorName": "connectorName",
     "location": "westus",
-    "connectorName": "connectorName"
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "isConnectionAvailable": true,
-          "reportStartTimeUtc": "2020-07-12T22:05:09Z",
-          "reportEndTimeUtc": "2020-07-12T22:06:09Z",
           "authType": "secret",
+          "isConnectionAvailable": true,
+          "reportEndTimeUtc": "2020-07-12T22:06:09Z",
+          "reportStartTimeUtc": "2020-07-12T22:05:09Z",
           "validationDetail": [
             {
               "name": "TargetExistence",
@@ -34,5 +34,7 @@
         "azure-AsyncOperation": "http://azure.async.operation/status"
       }
     }
-  }
+  },
+  "operationId": "Connector_Validate",
+  "title": "ValidateConnectorSuccess"
 }

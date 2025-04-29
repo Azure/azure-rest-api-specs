@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2024-07-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "westus",
     "resourceGroupName": "test-rg",
-    "location": "westus"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -16,8 +16,8 @@
               "parameters": {
                 "actionName": "createOrUpdate",
                 "authInfo": {
-                  "authType": "secret",
-                  "name": "username"
+                  "name": "username",
+                  "authType": "secret"
                 },
                 "targetService": {
                   "type": "AzureResource",
@@ -32,5 +32,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "Connector_ListDryrun",
+  "title": "ConnectorDryrunList"
 }

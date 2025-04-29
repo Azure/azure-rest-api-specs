@@ -1,44 +1,53 @@
 {
   "parameters": {
     "api-version": "2024-07-01-preview",
-    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app",
     "dryrunName": "dryrunName",
     "parameters": {
       "properties": {
         "parameters": {
           "actionName": "createOrUpdate",
-          "targetService": {
-            "type": "AzureResource",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
-          },
           "authInfo": {
-            "authType": "secret",
             "name": "name",
+            "authType": "secret",
             "secretInfo": {
               "secretType": "rawValue",
               "value": "secret"
             }
+          },
+          "targetService": {
+            "type": "AzureResource",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
           }
         }
       }
-    }
+    },
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app/providers/Microsoft.ServiceLinker/dryruns/dryrunName",
-        "type": "Microsoft.ServiceLinker/dryruns",
         "name": "dryrunName",
+        "type": "Microsoft.ServiceLinker/dryruns",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app/providers/Microsoft.ServiceLinker/dryruns/dryrunName",
         "properties": {
+          "operationPreviews": [
+            {
+              "name": "configFirewallRule",
+              "description": "Config firewall rule for target service to allow source service access",
+              "action": "Microsoft.DocumentDb/databaseAccounts/write",
+              "operationType": "configNetwork",
+              "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc"
+            }
+          ],
           "parameters": {
             "actionName": "createOrUpdate",
+            "authInfo": {
+              "name": "name",
+              "authType": "secret"
+            },
             "targetService": {
               "type": "AzureResource",
               "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
-            },
-            "authInfo": {
-              "authType": "secret",
-              "name": "name"
             }
           },
           "prerequisiteResults": [
@@ -49,18 +58,9 @@
             },
             {
               "type": "permissionsMissing",
-              "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc",
               "permissions": [
                 "Microsoft.DocumentDb/databaseAccounts/write"
-              ]
-            }
-          ],
-          "operationPreviews": [
-            {
-              "name": "configFirewallRule",
-              "operationType": "configNetwork",
-              "description": "Config firewall rule for target service to allow source service access",
-              "action": "Microsoft.DocumentDb/databaseAccounts/write",
+              ],
               "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc"
             }
           ],
@@ -73,5 +73,7 @@
         "azure-AsyncOperation": "http://azure.async.operation/status"
       }
     }
-  }
+  },
+  "operationId": "Linkers_UpdateDryrun",
+  "title": "PatchDryrun"
 }

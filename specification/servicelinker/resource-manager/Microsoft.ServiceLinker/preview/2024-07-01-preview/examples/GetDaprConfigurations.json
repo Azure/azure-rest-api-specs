@@ -9,25 +9,27 @@
         "value": [
           {
             "properties": {
-              "targetType": "MICROSOFT.STORAGE/STORAGEACCOUNTS/BLOBSERVICES",
               "authType": "secret",
               "daprProperties": {
-                "version": "v1",
-                "componentType": "bindings",
-                "runtimeVersion": "1.10",
                 "bindingComponentDirection": "input",
+                "componentType": "bindings",
                 "metadata": [
                   {
                     "name": "containerName",
                     "description": "The name of the container to be used for Dapr state.",
                     "required": "true"
                   }
-                ]
-              }
+                ],
+                "runtimeVersion": "1.10",
+                "version": "v1"
+              },
+              "targetType": "MICROSOFT.STORAGE/STORAGEACCOUNTS/BLOBSERVICES"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Linkers_ListDaprConfigurations",
+  "title": "GetDaprConfigurations"
 }

@@ -89,7 +89,7 @@ interface DryrunResources {
   >;
 }
 @armResourceOperations
-interface LinkerOps
+interface LinkersOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -110,7 +110,7 @@ interface Linkers {
   /**
    * get a dryrun job
    */
-  getDryrun is LinkerOps.Read<
+  getDryrun is LinkersOps.Read<
     DryrunResource,
     Parameters = {
       /**
@@ -130,7 +130,7 @@ interface Linkers {
   /**
    * create a dryrun job to do necessary check before actual creation
    */
-  createDryrun is LinkerOps.CreateOrUpdateAsync<
+  createDryrun is LinkersOps.CreateOrUpdateAsync<
     DryrunResource,
     Parameters = {
       /**
@@ -151,7 +151,7 @@ interface Linkers {
    * add a dryrun job to do necessary check before actual creation
    */
   @patch(#{ implicitOptionality: false })
-  updateDryrun is LinkerOps.CustomPatchAsync<
+  updateDryrun is LinkersOps.CustomPatchAsync<
     DryrunResource,
     PatchModel = DryrunPatch,
     Parameters = {
@@ -174,7 +174,7 @@ interface Linkers {
   /**
    * delete a dryrun job
    */
-  deleteDryrun is LinkerOps.DeleteSync<
+  deleteDryrun is LinkersOps.DeleteSync<
     DryrunResource,
     Parameters = {
       /**
@@ -194,7 +194,7 @@ interface Linkers {
   /**
    * list dryrun jobs
    */
-  listDryrun is LinkerOps.List<
+  listDryrun is LinkersOps.List<
     DryrunResource,
     Parameters = {
       /**
