@@ -47,6 +47,16 @@ input-file:
   - Microsoft.insights/preview/2024-03-01-preview/metricAlert_API.json
 ```
 
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.insights/preview/2024-03-01-preview/actionGroups_API.json
+  - Microsoft.insights/preview/2024-03-01-preview/metricAlert_API.json
+```
+
 ### Tag: package-2024-04
 
 These settings apply only when `--tag=package-2024-04` is specified on the command line.
