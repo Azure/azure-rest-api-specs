@@ -426,62 +426,7 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
-    },
-    "MetricAlertAction": {
-      "description": "An alert action.",
-      "properties": {
-        "actionGroupId": {
-          "type": "string",
-          "description": "the id of the action group to use."
-        },
-        "webHookProperties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
-          },
-          "description": "This field allows specifying custom properties, which would be appended to the alert payload sent as input to the webhook."
-        }
-      }
-    },
-    "MetricAlertProperties": {
+    "MetricAlertsMetricProperties": {
       "required": [
         "enabled",
         "severity",
@@ -633,24 +578,144 @@
       },
       "description": "An alert rule properties for patch."
     },
-    "MetricAlertResource": {
-      "type": "object",
+    "MetricAlertsQueryProperties": {
       "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
+          {
+          "$ref": "#/definitions/MetricAlertsPropertiesBase"
+          }
       ],
-      "required": [
-        "properties"
-      ],
+      "type": "object",
+      "required": ["criteria"],
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MetricAlertProperties",
-          "description": "The alert rule properties of the resource."
+          "resolveConfiguration": {
+              "$ref": "#/definitions/QueryResolveConfiguration"
+          },
+          "criteria": {
+              "$ref": "#/definitions/MetricQueryCriteria"
+          }
+      }
+    },
+    "MetricAlertPropertiesBase": {
+      "type": "object",
+      "discriminator": "type",
+      "description": "The base properties for a metric alert rule.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the alert rule: 'Metric' or 'Query'",
+          "enum": ["Metric", "Query"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the alert rule."
+        },
+        "severity": {
+          "type": "integer",
+          "description": "Alert severity (0-4).",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the alert rule is enabled."
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of resource IDs that this metric alert rule is scoped to."
         }
       },
-      "description": "The metric alert resource."
+      "required": [
+        "type",
+        "severity",
+        "enabled",
+        "scopes",
+        "evaluationFrequency",
+        "criteria"
+      ]
+    },
+    "MetricQueryCriteria": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query used to evaluate the alert rule"
+        }
+      }
+    },
+    "QueryResolveConfiguration": {
+      "type": "object",
+      "properties": {
+        "autoResolved": {
+          "type": "boolean",
+          "description": "Indicates whether the alert should be auto resolved"
+        },
+        "timeToResolve": {
+          "type": "string",
+          "description": "The time after which the alert should be auto resolved"
+        }
+      }
+    },
+    "MetricAlertResource": {
+      "type": "object",
+      "description": "A metric alert rule resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["Metric", "Query"],
+          "description": "Indicates the type of metric alert"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/MetricAlertsMetricProperties"
+            },
+            {
+              "$ref": "#/definitions/MetricAlertsQueryProperties"
+            }
+          ],
+          "discriminator": {
+            "propertyName": "kind",
+            "mapping": {
+              "Metric": "#/definitions/MetricAlertsMetricProperties",
+              "Query": "#/definitions/MetricAlertsQueryProperties"
+            }
+          }
+        },
+        "required": [
+          "location"
+        ]
+      },
+      "x-ms-azure-resource": true
     },
     "MetricAlertResourcePatch": {
       "properties": {
@@ -1033,6 +1098,60 @@
         }
       },
       "description": "The minimum number of violations required within the selected lookback time window required to raise an alert."
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of managed service identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "description": "Identity for the resource."
+    },
+    "UserIdentityProperties": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of resource identity."
+        }
+      },
+      "description": "Properties of the user assigned identity."
     }
   },
   "parameters": {
