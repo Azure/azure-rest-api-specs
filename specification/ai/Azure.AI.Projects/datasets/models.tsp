@@ -28,7 +28,7 @@ union DatasetType {
 @discriminator("type")
 @added(Versions.v2025_05_01)
 model DatasetVersion {
-  @doc("[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
+  @doc("URI of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
