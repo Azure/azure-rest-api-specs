@@ -10064,29 +10064,6 @@
             "$ref": "#/definitions/IstioEgressGateway"
           },
           "x-ms-identifiers": []
-        },
-        "proxyRedirectionMechanism": {
-          "type": "string",
-          "description": "Mode of traffic redirection.",
-          "default": "CNIChaining",
-          "enum": [
-            "InitContainers",
-            "CNIChaining"
-          ],
-          "x-ms-enum": {
-            "name": "ProxyRedirectionMechanism",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "InitContainers",
-                "description": "Istio will inject an init container into each pod to redirect traffic (requires NET_ADMIN and NET_RAW)."
-              },
-              {
-                "value": "CNIChaining",
-                "description": "Istio will created a chained CNI plugin to redirect traffic (recommended)."
-              }
-            ]
-          }
         }
       }
     },
