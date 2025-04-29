@@ -1,0 +1,2162 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HelpRP",
+    "version": "2024-03-01-preview",
+    "description": "Help RP provider"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.Help/checkNameAvailability": {
+      "post": {
+        "operationId": "CheckNameAvailability_CheckAvailability",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "CheckNameAvailabilityRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Example when name is available for a Diagnostic resource": {
+            "$ref": "./examples/CheckNameAvailabilityForDiagnosticWhenNameIsAvailable.json"
+          },
+          "Example when name is not available for a Diagnostic resource": {
+            "$ref": "./examples/CheckNameAvailabilityForDiagnosticWhenNameIsNotAvailable.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/diagnostics/{diagnosticsResourceName}": {
+      "get": {
+        "operationId": "Diagnostics_Get",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "diagnosticsResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9-+@()_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Diagnostic for a KeyVault resource": {
+            "$ref": "./examples/GetDiagnosticForKeyVaultResource.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Diagnostics_Create",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "diagnosticsResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9-+@()_]+$"
+          },
+          {
+            "name": "diagnosticResourceRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a Diagnostic for a KeyVault resource": {
+            "$ref": "./examples/CreateDiagnosticForKeyVaultResource.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/simplifiedSolutions/{simplifiedSolutionsResourceName}": {
+      "get": {
+        "operationId": "SimplifiedSolutions_Get",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "simplifiedSolutionsResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9-+@()_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SimplifiedSolutionsResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Get": {
+            "$ref": "./examples/SimplifiedSolutions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SimplifiedSolutions_Create",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "simplifiedSolutionsResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9-+@()_]+$"
+          },
+          {
+            "name": "simplifiedSolutionsRequestBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SimplifiedSolutionsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SimplifiedSolutionsResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SimplifiedSolutionsResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Create": {
+            "$ref": "./examples/SimplifiedSolutions_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/solutions/{solutionResourceName}": {
+      "get": {
+        "operationId": "Solution_Get",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "solutionResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9-+@()_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Get": {
+            "$ref": "./examples/Solution_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Solution_Create",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "solutionResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9-+@()_]+$"
+          },
+          {
+            "name": "solutionRequestBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Create": {
+            "$ref": "./examples/Solution_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Solution_Update",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "solutionResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9-+@()_]+$"
+          },
+          {
+            "name": "solutionPatchRequestBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SolutionPatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Update": {
+            "$ref": "./examples/Solution_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/solutions/{solutionResourceName}/warmup": {
+      "post": {
+        "operationId": "Solution_WarmUp",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "solutionResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9-+@()_]+$"
+          },
+          {
+            "name": "solutionWarmUpRequestBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SolutionWarmUpRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_WarmUp": {
+            "$ref": "./examples/Solution_WarmUp.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}": {
+      "get": {
+        "operationId": "Troubleshooters_Get",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "troubleshooterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "([A-Za-z0-9]+(-[A-Za-z0-9]+)+)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TroubleshooterResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooters_Get": {
+            "$ref": "./examples/Troubleshooter_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Troubleshooters_Create",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "troubleshooterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "([A-Za-z0-9]+(-[A-Za-z0-9]+)+)"
+          },
+          {
+            "name": "createTroubleshooterRequestBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TroubleshooterResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TroubleshooterResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TroubleshooterResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooters_Create": {
+            "$ref": "./examples/Troubleshooter_Create.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/continue": {
+      "post": {
+        "operationId": "Troubleshooters_Continue",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "troubleshooterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "([A-Za-z0-9]+(-[A-Za-z0-9]+)+)"
+          },
+          {
+            "name": "continueRequestBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ContinueRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooter_Continue": {
+            "$ref": "./examples/Troubleshooter_Continue.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/end": {
+      "post": {
+        "operationId": "Troubleshooters_End",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "troubleshooterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "([A-Za-z0-9]+(-[A-Za-z0-9]+)+)"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooters_End": {
+            "$ref": "./examples/Troubleshooter_End.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/restart": {
+      "post": {
+        "operationId": "Troubleshooters_Restart",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "troubleshooterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "([A-Za-z0-9]+(-[A-Za-z0-9]+)+)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RestartTroubleshooterResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooters_Restart": {
+            "$ref": "./examples/Troubleshooter_Restart.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Help/discoverSolutions": {
+      "post": {
+        "operationId": "DiscoverySolutionNLP_DiscoverSolutions",
+        "parameters": [
+          {
+            "name": "discoverSolutionRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryNlpRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryNlpResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Discovery Solutions using issue summary and service id.": {
+            "$ref": "./examples/DiscoverSolutionsAtTenantScope.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Help/discoverySolutions": {
+      "get": {
+        "operationId": "DiscoverySolution_List",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List DiscoverySolutions at resource scope": {
+            "$ref": "./examples/ListDiscoverySolutionsAtTenantScope.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Help/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "List All Operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Help/selfHelp/{solutionId}": {
+      "get": {
+        "operationId": "SolutionSelfHelp_Get",
+        "parameters": [
+          {
+            "name": "solutionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SolutionResourceSelfHelp"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Get": {
+            "$ref": "./examples/SelfHelpSolution_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Help/discoverSolutions": {
+      "post": {
+        "operationId": "DiscoverySolutionNLP_DiscoverSolutionsBySubscription",
+        "parameters": [
+          {
+            "name": "discoverSolutionRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryNlpRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryNlpResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Discovery Solutions using issue summary and service id.": {
+            "$ref": "./examples/DiscoverSolutionsAtSubscriptionScope.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutomatedCheckResult": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Success",
+            "Warning",
+            "Error",
+            "Information"
+          ],
+          "x-ms-enum": {
+            "name": "AutomatedCheckResultType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ClassificationService": {
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ContinueRequestBody": {
+      "type": "object",
+      "properties": {
+        "stepId": {
+          "type": "string"
+        },
+        "responses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TroubleshooterResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Diagnostic": {
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Failed",
+            "MissingInputs",
+            "Running",
+            "Succeeded",
+            "Timeout"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        },
+        "insights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insight"
+          },
+          "x-ms-identifiers": []
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "DiagnosticInvocation": {
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "type": "string"
+        },
+        "additionalParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DiagnosticResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiagnosticResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DiagnosticResourceProperties": {
+      "type": "object",
+      "properties": {
+        "globalParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "insights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticInvocation"
+          },
+          "x-ms-identifiers": [
+            "solutionId"
+          ]
+        },
+        "acceptedAt": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "PartialComplete",
+            "Failed",
+            "Running",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "DiagnosticProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Diagnostic"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "solutionId"
+          ]
+        }
+      }
+    },
+    "DiscoveryNlpRequest": {
+      "type": "object",
+      "properties": {
+        "issueSummary": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "serviceId": {
+          "type": "string"
+        },
+        "additionalContext": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "issueSummary"
+      ]
+    },
+    "DiscoveryNlpResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionNlpMetadataResource"
+          }
+        }
+      }
+    },
+    "DiscoveryResponse": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/SolutionMetadataResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "message"
+          ]
+        }
+      }
+    },
+    "Filter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "values": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        }
+      }
+    },
+    "FilterGroup": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Insight": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "results": {
+          "type": "string"
+        },
+        "importanceLevel": {
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Warning",
+            "Information"
+          ],
+          "x-ms-enum": {
+            "name": "ImportanceLevel",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MetricsBasedChart": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string",
+          "enum": [
+            "Sum",
+            "Avg",
+            "Count",
+            "Min",
+            "Max"
+          ],
+          "x-ms-enum": {
+            "name": "AggregationType",
+            "modelAsString": true
+          }
+        },
+        "timeSpanDuration": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "filterGroup": {
+          "$ref": "#/definitions/FilterGroup"
+        },
+        "replacementKey": {
+          "type": "string"
+        }
+      }
+    },
+    "NlpSolutions": {
+      "type": "object",
+      "properties": {
+        "problemTitle": {
+          "type": "string"
+        },
+        "problemDescription": {
+          "type": "string"
+        },
+        "serviceId": {
+          "type": "string"
+        },
+        "problemClassificationId": {
+          "type": "string"
+        },
+        "solutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionMetadataProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "relatedServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationService"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ReplacementMaps": {
+      "type": "object",
+      "properties": {
+        "webResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionsDiagnostic"
+          },
+          "x-ms-identifiers": [
+            "solutionId"
+          ]
+        },
+        "troubleshooters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionsTroubleshooters"
+          },
+          "x-ms-identifiers": [
+            "solutionId"
+          ]
+        },
+        "metricsBasedCharts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricsBasedChart"
+          },
+          "x-ms-identifiers": []
+        },
+        "videos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Video"
+          },
+          "x-ms-identifiers": []
+        },
+        "videoGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoGroup"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ReplacementMapsSelfHelp": {
+      "type": "object",
+      "properties": {
+        "webResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "videos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Video"
+          },
+          "x-ms-identifiers": []
+        },
+        "videoGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoGroup"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ResponseOption": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseValidationProperties": {
+      "type": "object",
+      "properties": {
+        "regex": {
+          "type": "string"
+        },
+        "validationScope": {
+          "type": "string",
+          "enum": [
+            "None",
+            "URLFormat",
+            "GuidFormat",
+            "IpAddressFormat",
+            "NumberOnlyFormat"
+          ],
+          "x-ms-enum": {
+            "name": "ValidationScope",
+            "modelAsString": true
+          }
+        },
+        "isRequired": {
+          "type": "boolean"
+        },
+        "validationErrorMessage": {
+          "type": "string"
+        },
+        "maxLength": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "RestartTroubleshooterResponse": {
+      "type": "object",
+      "properties": {
+        "troubleshooterResourceName": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SearchResult": {
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "Confidence",
+            "modelAsString": true
+          }
+        },
+        "source": {
+          "type": "string"
+        },
+        "resultType": {
+          "type": "string",
+          "enum": [
+            "Community",
+            "Documentation"
+          ],
+          "x-ms-enum": {
+            "name": "ResultType",
+            "modelAsString": true
+          }
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "link": {
+          "type": "string"
+        }
+      }
+    },
+    "Section": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "replacementMaps": {
+          "$ref": "#/definitions/ReplacementMaps"
+        }
+      }
+    },
+    "SectionSelfHelp": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "replacementMaps": {
+          "$ref": "#/definitions/ReplacementMapsSelfHelp"
+        }
+      }
+    },
+    "SimplifiedSolutionsResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SimplifiedSolutionsResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SimplifiedSolutionsResourceProperties": {
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string",
+          "readOnly": true
+        },
+        "appendix": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "content": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "PartialComplete",
+            "Failed",
+            "Running",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "SolutionProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SolutionMetadataProperties": {
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "type": "string"
+        },
+        "solutionType": {
+          "type": "string",
+          "enum": [
+            "Diagnostics",
+            "Solutions",
+            "Troubleshooters",
+            "SelfHelp"
+          ],
+          "x-ms-enum": {
+            "name": "SolutionType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredInputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SolutionMetadataResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Solutions",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionNlpMetadataResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NlpSolutions",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionPatchRequestBody": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SolutionResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionResourceProperties": {
+      "type": "object",
+      "properties": {
+        "triggerCriteria": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TriggerCriterion"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "solutionId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "PartialComplete",
+            "Failed",
+            "Running",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "SolutionProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "title": {
+          "type": "string",
+          "readOnly": true
+        },
+        "content": {
+          "type": "string",
+          "readOnly": true
+        },
+        "replacementMaps": {
+          "$ref": "#/definitions/ReplacementMaps",
+          "readOnly": true
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Section"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "title"
+          ]
+        }
+      }
+    },
+    "SolutionResourceSelfHelp": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionsResourcePropertiesSelfHelp",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionWarmUpRequestBody": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Solutions": {
+      "type": "object",
+      "properties": {
+        "solutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionMetadataProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SolutionsDiagnostic": {
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Failed",
+            "MissingInputs",
+            "Running",
+            "Succeeded",
+            "Timeout"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        },
+        "statusDetails": {
+          "type": "string"
+        },
+        "replacementKey": {
+          "type": "string"
+        },
+        "estimatedCompletionTime": {
+          "type": "string"
+        },
+        "requiredParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "insights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insight"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SolutionsResourcePropertiesSelfHelp": {
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "title": {
+          "type": "string",
+          "readOnly": true
+        },
+        "content": {
+          "type": "string",
+          "readOnly": true
+        },
+        "replacementMaps": {
+          "$ref": "#/definitions/ReplacementMapsSelfHelp",
+          "readOnly": true
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SectionSelfHelp"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "title"
+          ]
+        }
+      }
+    },
+    "SolutionsTroubleshooters": {
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "guidance": {
+          "type": "string"
+        },
+        "executionStatus": {
+          "type": "string",
+          "enum": [
+            "Success",
+            "Running",
+            "Failed",
+            "Warning"
+          ],
+          "x-ms-enum": {
+            "name": "ExecutionStatus",
+            "modelAsString": true
+          }
+        },
+        "executionStatusDescription": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Decision",
+            "Solution",
+            "Insight",
+            "AutomatedCheck",
+            "Input"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
+        },
+        "isLastStep": {
+          "type": "boolean"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StepInput"
+          },
+          "x-ms-identifiers": [
+            "questionId"
+          ]
+        },
+        "automatedCheckResults": {
+          "$ref": "#/definitions/AutomatedCheckResult"
+        },
+        "insights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insight"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "StepInput": {
+      "type": "object",
+      "properties": {
+        "questionId": {
+          "type": "string"
+        },
+        "questionType": {
+          "type": "string",
+          "enum": [
+            "RadioButton",
+            "Dropdown",
+            "TextInput",
+            "MultiLineInfoBox",
+            "DateTimePicker",
+            "MultiSelect"
+          ],
+          "x-ms-enum": {
+            "name": "QuestionType",
+            "modelAsString": true
+          }
+        },
+        "questionTitle": {
+          "type": "string"
+        },
+        "questionContent": {
+          "type": "string"
+        },
+        "questionContentType": {
+          "type": "string",
+          "enum": [
+            "Text",
+            "Html",
+            "Markdown"
+          ],
+          "x-ms-enum": {
+            "name": "QuestionContentType,",
+            "modelAsString": true
+          }
+        },
+        "responseHint": {
+          "type": "string"
+        },
+        "recommendedOption": {
+          "type": "string"
+        },
+        "selectedOptionValue": {
+          "type": "string"
+        },
+        "responseValidationProperties": {
+          "$ref": "#/definitions/ResponseValidationProperties"
+        },
+        "responseOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResponseOption"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        }
+      }
+    },
+    "TriggerCriterion": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "SolutionId",
+            "ProblemClassificationId",
+            "ReplacementKey"
+          ],
+          "x-ms-enum": {
+            "name": "Name",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "TroubleshooterInstanceProperties": {
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "required": [
+            "solutionId",
+            "parameters"
+          ],
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Running",
+            "AutoContinue"
+          ],
+          "x-ms-enum": {
+            "name": "TroubleshooterProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "TroubleshooterResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TroubleshooterInstanceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TroubleshooterResponse": {
+      "type": "object",
+      "properties": {
+        "questionId": {
+          "type": "string"
+        },
+        "questionType": {
+          "type": "string",
+          "enum": [
+            "RadioButton",
+            "Dropdown",
+            "TextInput",
+            "MultiLineInfoBox",
+            "DateTimePicker",
+            "MultiSelect"
+          ],
+          "x-ms-enum": {
+            "name": "QuestionType",
+            "modelAsString": true
+          }
+        },
+        "response": {
+          "type": "string"
+        }
+      }
+    },
+    "Video": {
+      "type": "object",
+      "properties": {
+        "replacementKey": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/VideoGroupVideo"
+        }
+      ]
+    },
+    "VideoGroup": {
+      "type": "object",
+      "properties": {
+        "videos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoGroupVideo"
+          },
+          "x-ms-identifiers": []
+        },
+        "replacementKey": {
+          "type": "string"
+        }
+      }
+    },
+    "VideoGroupVideo": {
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "WebResult": {
+      "type": "object",
+      "properties": {
+        "replacementKey": {
+          "type": "string"
+        },
+        "searchResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResult"
+          },
+          "x-ms-identifiers": [
+            "solutionId"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "DiagnosticsResourceNameParameter": {
+      "name": "diagnosticsResourceName",
+      "in": "path",
+      "description": "Unique resource name for insight resources",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z0-9-+@()_]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "'ProblemClassificationId' is a mandatory filter to get solutions ids. It also supports optional 'ResourceType' and 'SolutionType' filters. The [$filter](https://learn.microsoft.com/en-us/odata/webapi/first-odata-api#filter) supports only 'and', 'or' and 'eq' operators. Example: $filter=ProblemClassificationId eq '1ddda5b4-cf6c-4d4f-91ad-bc38ab0e811e'",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "description": "scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read ",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "SimplifiedSolutionsResourceNameParameter": {
+      "name": "simplifiedSolutionsResourceName",
+      "in": "path",
+      "description": "Simplified Solutions Resource Name.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z0-9-+@()_]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipTokenParameter": {
+      "name": "$skiptoken",
+      "in": "query",
+      "description": "Skiptoken is only used if a previous operation returned a partial result.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SolutionResourceNameParameter": {
+      "name": "solutionResourceName",
+      "in": "path",
+      "description": "Solution resource Name.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z0-9-+@()_]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "TroubleshooterNameParameter": {
+      "name": "troubleshooterName",
+      "in": "path",
+      "description": "Troubleshooter resource Name.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "([A-Za-z0-9]+(-[A-Za-z0-9]+)+)",
+      "x-ms-parameter-location": "method"
+    },
+    "solutionId": {
+      "name": "solutionId",
+      "in": "path",
+      "description": "SolutionId is a unique id to identify a solution. You can retrieve the solution id using the Discovery api - https://learn.microsoft.com/en-us/rest/api/help/discovery-solution/list?view=rest-help-2023-09-01-preview&tabs=HTTP",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

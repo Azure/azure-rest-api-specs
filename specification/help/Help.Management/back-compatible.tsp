@@ -1,4 +1,3 @@
-import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -42,3 +41,25 @@ using Microsoft.Help;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SolutionResourceSelfHelp.properties);
+
+@@clientName(DiagnosticResources.create::parameters.resource,
+  "diagnosticResourceRequest"
+);
+
+@@clientName(SimplifiedSolutionsResources.create::parameters.resource,
+  "simplifiedSolutionsRequestBody"
+);
+
+@@clientName(SolutionResources.create::parameters.resource,
+  "solutionRequestBody"
+);
+
+@@clientName(SolutionResources.update::parameters.properties,
+  "solutionPatchRequestBody"
+);
+@@clientName(TroubleshooterResources.create::parameters.resource,
+  "createTroubleshooterRequestBody"
+);
+@@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutions::parameters.body,
+  "discoverSolutionRequest"
+);

@@ -33,23 +33,7 @@ interface DiagnosticResources {
   @operationId("Diagnostics_Get")
   get is ArmResourceRead<
     DiagnosticResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Unique resource name for insight resources
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9-+@()_]+$")
-      @path
-      diagnosticsResourceName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -59,23 +43,7 @@ interface DiagnosticResources {
   @operationId("Diagnostics_Create")
   create is ArmResourceCreateOrReplaceAsync<
     DiagnosticResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Unique resource name for insight resources
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9-+@()_]+$")
-      @path
-      diagnosticsResourceName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 }
 

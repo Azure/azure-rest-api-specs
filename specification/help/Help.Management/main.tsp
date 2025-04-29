@@ -18,6 +18,7 @@ import "./SimplifiedSolutionsResource.tsp";
 import "./TroubleshooterResource.tsp";
 import "./SolutionResourceSelfHelp.tsp";
 import "./routes.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

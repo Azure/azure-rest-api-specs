@@ -2,6 +2,7 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/http";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
@@ -35,7 +36,7 @@ interface CheckNameAvailabilityOperationGroup {
      * The required parameters for availability check.
      */
     @bodyRoot
-    CheckNameAvailabilityRequest?: CheckNameAvailabilityRequest,
+    CheckNameAvailabilityRequest?: CommonTypes.CheckNameAvailabilityRequest,
   ): ArmResponse<CheckNameAvailabilityResponse> | ErrorResponse;
 }
 
@@ -93,3 +94,7 @@ interface DiscoverySolutionNLPOperationGroup {
     Parameters = {}
   >;
 }
+
+@@path(CheckNameAvailabilityOperationGroup.checkAvailability::parameters.scope,
+  #{ allowReserved: true }
+);

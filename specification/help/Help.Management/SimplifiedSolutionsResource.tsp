@@ -33,23 +33,7 @@ interface SimplifiedSolutionsResources {
   @operationId("SimplifiedSolutions_Get")
   get is ArmResourceRead<
     SimplifiedSolutionsResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Simplified Solutions Resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9-+@()_]+$")
-      @path
-      simplifiedSolutionsResourceName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -59,23 +43,7 @@ interface SimplifiedSolutionsResources {
   @operationId("SimplifiedSolutions_Create")
   create is ArmResourceCreateOrReplaceAsync<
     SimplifiedSolutionsResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Simplified Solutions Resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9-+@()_]+$")
-      @path
-      simplifiedSolutionsResourceName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 }
 

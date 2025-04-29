@@ -33,23 +33,7 @@ interface SolutionResources {
   @operationId("Solution_Get")
   get is ArmResourceRead<
     SolutionResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Solution resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9-+@()_]+$")
-      @path
-      solutionResourceName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -59,23 +43,7 @@ interface SolutionResources {
   @operationId("Solution_Create")
   create is ArmResourceCreateOrReplaceAsync<
     SolutionResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Solution resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9-+@()_]+$")
-      @path
-      solutionResourceName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -89,25 +57,10 @@ interface SolutionResources {
     SolutionResource,
     PatchModel = SolutionPatchRequestBody,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Solution resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9-+@()_]+$")
-      @path
-      solutionResourceName: string;
-    },
-    Response = ArmResponse<SolutionResource>,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<SolutionResource> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SolutionResource>> & {
+      @bodyRoot
+      _: SolutionResource;
+    })
   >;
 
   /**
@@ -126,23 +79,7 @@ interface SolutionResources {
       solutionWarmUpRequestBody?: SolutionWarmUpRequestBody;
     },
     NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Solution resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9-+@()_]+$")
-      @path
-      solutionResourceName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 }
 

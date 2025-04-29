@@ -33,23 +33,7 @@ interface TroubleshooterResources {
   @operationId("Troubleshooters_Get")
   get is ArmResourceRead<
     TroubleshooterResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Troubleshooter resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("([A-Za-z0-9]+(-[A-Za-z0-9]+)+)")
-      @path
-      troubleshooterName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -59,23 +43,7 @@ interface TroubleshooterResources {
   @operationId("Troubleshooters_Create")
   create is ArmResourceCreateOrReplaceSync<
     TroubleshooterResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Troubleshooter resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("([A-Za-z0-9]+(-[A-Za-z0-9]+)+)")
-      @path
-      troubleshooterName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -93,23 +61,7 @@ interface TroubleshooterResources {
       continueRequestBody?: ContinueRequestBody;
     },
     NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Troubleshooter resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("([A-Za-z0-9]+(-[A-Za-z0-9]+)+)")
-      @path
-      troubleshooterName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -121,23 +73,7 @@ interface TroubleshooterResources {
     TroubleshooterResource,
     void,
     NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Troubleshooter resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("([A-Za-z0-9]+(-[A-Za-z0-9]+)+)")
-      @path
-      troubleshooterName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -149,23 +85,7 @@ interface TroubleshooterResources {
     TroubleshooterResource,
     void,
     ArmResponse<RestartTroubleshooterResponse>,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-       */
-      @path
-      scope: string;
-
-      /**
-       * Troubleshooter resource Name.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("([A-Za-z0-9]+(-[A-Za-z0-9]+)+)")
-      @path
-      troubleshooterName: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 }
 
