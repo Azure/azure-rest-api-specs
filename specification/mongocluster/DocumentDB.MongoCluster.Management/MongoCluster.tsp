@@ -173,6 +173,10 @@ model MongoClusterProperties {
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   @visibility(Lifecycle.Read)
   infrastructureVersion?: string;
+
+  /** The authentication configuration for the cluster. */
+  @added(Versions.v2025_04_01_preview)
+  authConfig?: AuthConfigProperties;
 }
 
 /** The mode that the Mongo Cluster is created with. */
@@ -215,8 +219,32 @@ model ComputeProperties {
 /** The storage properties of the cluster. This includes the data storage size and scaling applied to servers in the cluster. */
 @added(Versions.v2024_07_01)
 model StorageProperties {
-  /** The size of the data disk assigned to each server. */
+  /** The size of the storage assigned to each server. */
   sizeGb?: int64;
+
+  /** The type of storage to provision the cluster servers with. */
+  @added(Versions.v2025_04_01_preview)
+  type?: StorageType;
+
+  /** The IOPs of the storage assigned to each server. Only applicable if the type is 'PremiumSSDv2'. */
+  @added(Versions.v2025_04_01_preview)
+  iops?: int64;
+
+  /** The througput of the storage assigned to each server. Only applicable if the type is 'PremiumSSDv2'. */
+  @added(Versions.v2025_04_01_preview)
+  throughput?: int64;
+}
+
+/** The type of storage that a mongo cluster can be provisioned with. */
+@added(Versions.v2025_04_01_preview)
+union StorageType {
+  string,
+
+  /** Premium SSD for high performance workloads. */
+  "PremiumSSD",
+
+  /** Premium SSD v2 for very IO-intensive workloads. This is a preview option and has additional limitations. */
+  "PremiumSSDv2",
 }
 
 /** The sharding properties of the cluster. This includes the shard count and scaling options for the cluster. */
@@ -484,4 +512,23 @@ union DataApiMode {
 
   /** Mongo Data API is disabled for the cluster. */
   "Disabled",
+}
+
+/* The authentication configuration for the Mongo cluster. */
+@added(Versions.v2025_04_01_preview)
+model AuthConfigProperties {
+  /** Allowed authentication modes for data access on the cluster. */
+  allowedModes?: AuthenticationMode[];
+}
+
+/** The authentication modes supporting on the Mongo cluster. */
+@added(Versions.v2025_04_01_preview)
+union AuthenticationMode {
+  string,
+
+  /** Native mongo authentication mode using username and password with auth mechanism 'SCRAM-SHA-256'. */
+  "NativeAuth",
+
+  /** Microsot Entra ID authentication mode using Entra users assigned to the cluster and auth mechanism 'MONGODB-OIDC'. */
+  "MicrosoftEntraID",
 }
