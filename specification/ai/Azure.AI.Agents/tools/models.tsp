@@ -53,7 +53,12 @@ model BingGroundingToolDefinition extends ToolDefinition {
   type: "bing_grounding";
 
   @doc("The list of connections used by the bing grounding tool.")
-  bing_grounding: ToolConnectionList;
+  bing_grounding: {
+    @removed(Versions.`2025-05-15-preview`)
+    connections: ToolConnectionList;
+    @added(Versions.`2025-05-15-preview`)
+    search_configurations: BingGroundingSearchConfiguration[];
+  }
 }
 
 @doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
@@ -96,7 +101,7 @@ model BingCustomSearchToolDefinition extends ToolDefinition {
 
   @doc("The list of search configurations used by the bing custom search tool.")
   @encodedName("application/json", "bing_custom_search")
-  bingCustomSearch: SearchConfigurationList;
+  bingCustomSearch: BingCustomSearchConfigurationList;
 }
 
 @doc("The input definition information for a connected agent tool which defines a domain specific sub-agent")
@@ -436,7 +441,7 @@ model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
   A record of a call to a bing custom search tool, issued by the model in evaluation of a defined tool, that represents
   executed search with bing custom search.
   """)
-model RunStepCustomSearchToolCall extends RunStepToolCall {
+model RunStepBingCustomSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'bing_custom_search'.")
   type: "bing_custom_search";
 
@@ -529,6 +534,26 @@ model RunStepFunctionToolCallDetails {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The output of the function, only populated for function calls that have already have had their outputs submitted.")
   output: string | null;
+}
+
+@doc("Search configuration for Bing Grounding")
+model BingGroundingSearchConfiguration {
+  @doc("Connection id for grounding with bing search")
+  @encodedName("application/json", "connection_id")
+  connectionId: string;
+
+  @doc("The market where the results come from.")
+  market?: string;
+
+  @doc("The language to use for user interface strings when calling Bing API.")
+  @encodedName("application/json", "set_lang")
+  setLang?: string;
+
+  @doc("The number of search results to return in the bing api response")
+  count?: int64;
+
+  @doc("Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters")
+  freshness?: string;
 }
 
 //
@@ -637,14 +662,14 @@ model ToolConnectionList {
 /**
  * A list of search configurations currently used by the `bing_custom_search` tool.
  */
-model SearchConfigurationList {
+model BingCustomSearchConfigurationList {
   /**
    * The connections attached to this tool. There can be a maximum of 1 connection
    * resource attached to the tool.
    */
   @maxItems(1)
   @encodedName("application/json", "search_configurations")
-  searchConfigurations: SearchConfiguration[];
+  searchConfigurations: BingCustomSearchConfiguration[];
 }
 
 /**
@@ -673,16 +698,31 @@ model ToolConnection {
 }
 
 /**
- * A custom search configuration.
+ * A bing custom search configuration.
  */
-model SearchConfiguration {
-  ...ToolConnection;
+model BingCustomSearchConfiguration {
+  @doc("Connection id for grounding with bing search")
+  @encodedName("application/json", "connection_id")
+  connectionId: string;
 
   /**
    * Name of the custom configuration instance given to config.
    */
   @encodedName("application/json", "instance_name")
   instanceName: string;
+
+  @doc("The market where the results come from.")
+  market?: string;
+
+  @doc("The language to use for user interface strings when calling Bing API.")
+  @encodedName("application/json", "set_lang")
+  setLang?: string;
+
+  @doc("The number of search results to return in the bing api response")
+  count?: int64;
+
+  @doc("Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters")
+  freshness?: string;
 }
 
 @doc("The structure for keeping storage queue name and URI.")
