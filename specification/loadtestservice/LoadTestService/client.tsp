@@ -169,14 +169,14 @@ interface AdministrationOperations {
   createOrUpdateTrigger is TriggerAdministration.createOrUpdateTrigger;
   deleteTrigger is TriggerAdministration.deleteTrigger;
   getTrigger is TriggerAdministration.getTrigger;
-  listTrigger is TriggerAdministration.listTrigger;
+  listTriggers is TriggerAdministration.listTrigger;
 
   createOrUpdateNotificationRule is NotificationRuleAdministration.createOrUpdateNotificationRule;
   deleteNotificationRule is NotificationRuleAdministration.deleteNotificationRule;
   getNotificationRule is NotificationRuleAdministration.getNotificationRule;
-  listNotificationRule is NotificationRuleAdministration.listNotificationRule;
+  listNotificationRules is NotificationRuleAdministration.listNotificationRule;
 
-  @clientName("begin_clone_test", "python")
+  @action("clone")
   cloneTest is LoadTestAdministration.cloneTest;
 
   getOperationStatus is Operations.getStatus;
