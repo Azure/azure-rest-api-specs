@@ -296,6 +296,40 @@ describe("compareLintDiffViolations", () => {
     const actual = compareLintDiffViolations(a, b);
     expect(actual).toEqual(1);
   });
+
+  test("returns -1 if a's level is fatal and b's level is not", () => {
+    const a: LintDiffViolation = {
+      level: "fatal",
+      code: "SomeCode1",
+      message: "Some Message",
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      details: {},
+    } as LintDiffViolation;
+    const b: LintDiffViolation = {
+      ...a,
+      level: "error",
+    };
+
+    const actual = compareLintDiffViolations(a, b);
+    expect(actual).toEqual(-1);
+  });
+
+  test("returns 1 if a's level is not fatal and b's level is", () => {
+    const a: LintDiffViolation = {
+      level: "error",
+      code: "SomeCode1",
+      message: "Some Message",
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      details: {},
+    } as LintDiffViolation;
+    const b: LintDiffViolation = {
+      ...a,
+      level: "fatal",
+    };
+
+    const actual = compareLintDiffViolations(a, b);
+    expect(actual).toEqual(1);
+  });
 });
 
 describe("generateLintDiffReport", () => {

@@ -147,6 +147,10 @@ export function compareLintDiffViolations(a: LintDiffViolation, b: LintDiffViola
     return -1;
   } else if (isWarning(a.level) && isFailure(b.level)) {
     return 1;
+  } else if (a.level === "fatal" && b.level !== "fatal") {
+    return -1;
+  } else if (a.level !== "fatal" && b.level === "fatal") {
+    return 1;
   }
 
   const fileA = getFile(a) || "";

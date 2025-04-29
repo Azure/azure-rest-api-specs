@@ -91,9 +91,13 @@ export function getViolations(
       : [];
     const afterViolations = getLintDiffViolations(after).filter(
       (v) =>
-        (isFailure(v.level) || isWarning(v.level)) &&
-        v.source?.length > 0 &&
-        affectedSwaggers.has(relativizePath(v.source[0].document).slice(1)),
+        // Fatal errors are always new
+        v.level.toLowerCase() === "fatal" ||
+        (
+          (isFailure(v.level) || isWarning(v.level)) &&
+          v.source?.length > 0 &&
+          affectedSwaggers.has(relativizePath(v.source[0].document).slice(1))
+        ),
     );
 
     const [newitems, existingItems] = getNewItems(beforeViolations, afterViolations);
