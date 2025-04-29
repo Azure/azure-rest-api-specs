@@ -80,6 +80,10 @@ namespace Azure.AI.Projects.ServicePatterns {
     createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
       TEntityType,
       {
+        @doc("The definition of the {name} to create or update", TEntityType)
+        @Http.bodyRoot
+        body: TEntityType;
+
         @doc(
           "The specific version id of the {name} to create or replace.",
           TEntityType
@@ -87,10 +91,6 @@ namespace Azure.AI.Projects.ServicePatterns {
         @Rest.segment("versions")
         @Http.path
         version: string;
-
-        @doc("The definition of the {name} to create or update", TEntityType)
-        @Http.bodyRoot
-        body: TEntityType;
       },
       Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>
     >;
@@ -104,14 +104,14 @@ namespace Azure.AI.Projects.ServicePatterns {
   > is Azure.Core.Foundations.ResourceOperation<
     TEntityType,
     {
+      @doc("Parameters for the action")
+      @Http.bodyRoot
+      body: TParams;
+
       @doc("The specific version id of the {name} to operate on.", TEntityType)
       @Rest.segment("versions")
       @Http.path
       version: string;
-
-      @doc("Parameters for the action")
-      @Http.bodyRoot
-      body: TParams;
     },
     TResponse
   >;
@@ -135,8 +135,10 @@ namespace Azure.AI.Projects.ServicePatterns {
 
   namespace BuildingBlocks {
     alias CoreOps = Azure.Core.StandardResourceOperations;
+    /*
     alias RepeatableCoreOps = Azure.Core.ResourceOperations<Azure.Core.Traits.SupportsRepeatableRequests &
       Azure.Core.Traits.SupportsClientRequestId &
       Azure.Core.Traits.NoConditionalRequests>;
+    */
   }
 }
