@@ -122,9 +122,9 @@ using Microsoft.Workloads;
 
 @@clientName(ErrorDefinition, "ErrorInformation", "csharp");
 
-@@clientName(StartRequest, "StartContent", "csharp");
+@@clientName(StartRequest, "StartSapInstanceContent", "csharp");
 
-@@clientName(StopRequest, "StopContent", "csharp");
+@@clientName(StopRequest, "StopSapInstanceContent", "csharp");
 
 @@clientName(SAPApplicationServerInstances,
   "SapApplicationServerInstances",
@@ -305,6 +305,7 @@ using Microsoft.Workloads;
   "ErsInactive",
   "csharp"
 );
+@@clientName(CentralServerVirtualMachineType.ERS, "Ers", "csharp");
 @@clientName(CentralServerVmDetails.type, "VirtualMachineType", "csharp");
 @@alternateType(CentralServerVmDetails.virtualMachineId,
   Azure.Core.armResourceIdentifier,
@@ -351,3 +352,46 @@ using Microsoft.Workloads;
   Azure.Core.azureLocation,
   "csharp"
 );
+@@clientName(SAPDatabaseType.HANA, "Hana", "csharp");
+@@clientName(SAPDiskConfigurationsRequest.dbVmSku, "DBVmSku", "csharp");
+@@alternateType(SAPDiskConfigurationsRequest.appLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(SAPInstallWithoutOSConfigSoftwareConfiguration.bomUrl,
+  url,
+  "csharp"
+);
+@@clientName(SAPProductType.ECC, "Ecc", "csharp");
+@@clientName(SAPProductType.S4HANA, "S4Hana", "csharp");
+@@alternateType(SAPSizingRecommendationRequest.appLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(SAPSizingRecommendationRequest.dbMemory, "DBMemory", "csharp");
+@@clientName(SAPSizingRecommendationRequest.dbScaleMethod,
+  "DBScaleMethod",
+  "csharp"
+);
+@@clientName(SAPSoftwareInstallationType.SAPInstallWithoutOSConfig,
+  "SapInstallWithoutOSConfig",
+  "csharp"
+);
+@@alternateType(SAPSupportedSkusRequest.appLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(SAPVirtualInstanceState.ACSSInstallationBlocked,
+  "AcssInstallationBlocked",
+  "csharp"
+);
+@@alternateType(ServiceInitiatedSoftwareConfiguration.bomUrl, url, "csharp");
+@@clientName(SingleServerConfiguration.dbDiskConfiguration,
+  "DBDiskConfiguration",
+  "csharp"
+);
+@@alternateType(SingleServerConfiguration.subnetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(ThreeTierRecommendationResult.dbVmSku, "DBVmSku", "csharp");
