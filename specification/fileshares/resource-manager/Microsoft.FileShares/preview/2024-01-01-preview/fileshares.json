@@ -44,9 +44,6 @@
     },
     {
       "name": "Operations"
-    },
-    {
-      "name": "Deployments"
     }
   ],
   "paths": {
@@ -78,53 +75,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.FileShares/deployments/{deploymentName}/preflight": {
-      "post": {
-        "operationId": "Deployments_Preflight",
-        "tags": [
-          "Deployments"
-        ],
-        "description": "Implements global Preflight Validation",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "Path to the deployment name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The Preflight request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PreflightValidationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PreflightValidationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
@@ -1377,122 +1327,6 @@
         "location",
         "partitionId",
         "operationId"
-      ]
-    },
-    "PreflightValidationError": {
-      "type": "object",
-      "description": "The Preflight validation error.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code. Ex: InvalidFileShareName"
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message. Ex: 'File share name must be all lowercase."
-        },
-        "target": {
-          "type": "string",
-          "description": "The error target. Ex: '/subscriptions/e6e9d15b736d4d6e95099c35cd42b795/resourceGroups/hello-world-rg/providers/Microsoft.FileShares/fileShares/myfileshare1'"
-        },
-        "details": {
-          "type": "array",
-          "description": "The error details.",
-          "items": {
-            "$ref": "#/definitions/PreflightValidationError"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "PreflightValidationRequest": {
-      "type": "object",
-      "description": "The Preflight validation request body.",
-      "properties": {
-        "resources": {
-          "type": "array",
-          "description": "The name of the resource for which availability needs to be checked.",
-          "items": {
-            "$ref": "#/definitions/PreflightValidationResource"
-          }
-        }
-      },
-      "required": [
-        "resources"
-      ]
-    },
-    "PreflightValidationResource": {
-      "type": "object",
-      "description": "The Preflight validation resource",
-      "properties": {
-        "apiVersion": {
-          "type": "string",
-          "description": "The api version of the resource. Ex: 2023-01-01-preview"
-        },
-        "dependsOn": {
-          "type": "array",
-          "description": "Present only when operation type is 'templateDeployment' to reflect resource dependencies in ARM template being deployed.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "The id of the resource. Ex: '/subscriptions/e6e9d15b736d4d6e95099c35cd42b795/resourceGroups/hello-world-rg/providers/Microsoft.FileShares/fileShares/myfileshare1'"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource. Ex: 'myfileshare1'"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. Ex: Microsoft.FileShares/fileShares"
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource. Ex: eastus2euap"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/FileShareProperties",
-          "description": "The properties of the file share."
-        }
-      },
-      "required": [
-        "apiVersion",
-        "dependsOn",
-        "id",
-        "name",
-        "type",
-        "location",
-        "properties"
-      ]
-    },
-    "PreflightValidationResponse": {
-      "type": "object",
-      "description": "The Preflight validation response body.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "The operation status result of the preflight validation. Can be 1 of the following 2 states: Succeeded | Failed"
-        },
-        "error": {
-          "$ref": "#/definitions/PreflightValidationError",
-          "description": "The validation errors associated with the request payload resources."
-        }
-      },
-      "required": [
-        "status"
       ]
     },
     "Protocol": {
