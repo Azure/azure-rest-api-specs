@@ -38,23 +38,36 @@ directive:
       - $.definitions.CustomRolloutStatus.properties.failedOrSkippedRegions
     reason: This version requires metadata to be defined as an additional property.
 
-  - suppress: RepeatedPathInfo
+  - suppress: PutGetPatchResponseSchema
     from: providerhub.json
     where:
-      - $.definitions.FrontloadPayloadProperties.properties.providerNamespace
-    reason: This version requires the provider namespace to be in the body.
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default"]
+    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers. The PUT contains the same properties as GET under the `contents` field.
+
+  - suppress: NestedResourcesMustHaveListOperation
+    from: providerhub.json
+    reason: The GET operation for path "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default" returns a list of operations.
 
   - suppress: RequiredPropertiesMissingInResourceModel
     from: providerhub.json
     where:
       - $.definitions.OperationsDefinitionArrayResponseWithContinuation
-    reason: Historically the operations definition response doesn't include ID property.
+    reason: Historically the operations definition response doesn't include ID property. This is a pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
 
   - suppress: PutRequestResponseSchemeArm
     from: providerhub.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}"].put.responses["200"]
-    reason: Pre-existing lint error not introduced in this API version.
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}"].put
+    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+
+  - suppress: RepeatedPathInfo
+    from: providerhub.json
+    reason: Pre-existing lint error not introduced in this version which required the provider namespace to be in the body.
+
+  - suppress: GuidUsage
+    from: providerhub.json
+    where: $.parameters.ApplicationIdParameter.format
+    reason: This references the First Party Application IDs which are GUIDs.
 ```
 
 ### Tag: package-2024-09-01
