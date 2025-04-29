@@ -1,9 +1,6 @@
 {
   "parameters": {
-    "provisioningServiceName": "myFirstProvisioningService",
-    "resourceGroupName": "myResourceGroup",
     "api-version": "2025-02-01-preview",
-    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
     "iotDpsDescription": {
       "location": "East US",
       "properties": {
@@ -14,62 +11,67 @@
         "capacity": 1
       },
       "tags": {}
-    }
+    },
+    "provisioningServiceName": "myFirstProvisioningService",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0"
   },
   "responses": {
     "200": {
       "body": {
-        "etag": "AAAAAAAADGk=",
         "name": "myFirstProvisioningService",
+        "type": "Microsoft.Devices/ProvisioningServices",
+        "etag": "AAAAAAAADGk=",
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups//providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService",
         "location": "eastus",
         "properties": {
-          "state": "Active",
           "allocationPolicy": "Hashed",
-          "serviceOperationsHostName": "myFirstProvisioningService.azure-devices-provisioning.net",
-          "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
-          "idScope": "0ne00000012",
           "authorizationPolicies": [],
+          "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
           "enableDataResidency": false,
-          "portalOperationsHostName": "myFirstProvisioningService.services.azure-devices-provisioning.net"
+          "idScope": "0ne00000012",
+          "portalOperationsHostName": "myFirstProvisioningService.services.azure-devices-provisioning.net",
+          "serviceOperationsHostName": "myFirstProvisioningService.azure-devices-provisioning.net",
+          "state": "Active"
         },
         "resourcegroup": "myResourceGroup",
-        "type": "Microsoft.Devices/ProvisioningServices",
-        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups//providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService",
-        "subscriptionid": "91d12660-3dec-467a-be2a-213b5544ddc0",
-        "tags": {},
         "sku": {
           "name": "S1",
-          "tier": "Standard",
-          "capacity": 1
-        }
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "subscriptionid": "91d12660-3dec-467a-be2a-213b5544ddc0",
+        "tags": {}
       }
     },
     "201": {
       "body": {
-        "etag": "AAAAAAAADGk=",
         "name": "myFirstProvisioningService",
+        "type": "Microsoft.Devices/ProvisioningServices",
+        "etag": "AAAAAAAADGk=",
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups//providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService",
         "location": "eastus",
         "properties": {
-          "state": "Active",
           "allocationPolicy": "Hashed",
-          "serviceOperationsHostName": "myFirstProvisioningService.azure-devices-provisioning.net",
-          "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
-          "idScope": "0ne00000012",
           "authorizationPolicies": [],
+          "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
           "enableDataResidency": false,
-          "portalOperationsHostName": "myFirstProvisioningService.services.azure-devices-provisioning.net"
+          "idScope": "0ne00000012",
+          "portalOperationsHostName": "myFirstProvisioningService.services.azure-devices-provisioning.net",
+          "serviceOperationsHostName": "myFirstProvisioningService.azure-devices-provisioning.net",
+          "state": "Active"
         },
         "resourcegroup": "myResourceGroup",
-        "type": "Microsoft.Devices/ProvisioningServices",
-        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups//providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService",
-        "subscriptionid": "91d12660-3dec-467a-be2a-213b5544ddc0",
-        "tags": {},
         "sku": {
           "name": "S1",
-          "tier": "Standard",
-          "capacity": 1
-        }
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "subscriptionid": "91d12660-3dec-467a-be2a-213b5544ddc0",
+        "tags": {}
       }
     }
-  }
+  },
+  "operationId": "IotDpsResource_CreateOrUpdate",
+  "title": "DPSCreate"
 }
