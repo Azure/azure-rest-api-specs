@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AI Model Inference",
-    "version": "2024-05-01-preview",
+    "version": "2025-05-15-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -131,13 +131,13 @@
           }
         },
         "x-ms-examples": {
-          "Audio modality chat completion": {
+          "Chat completion with audio content": {
             "$ref": "./examples/GetChatCompletions_AudioModality_Gen.json"
           },
-          "maximum set chat completion": {
+          "Chat completion with multiple parameters and chat history": {
             "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
           },
-          "minimum set chat completion": {
+          "Simple chat completion": {
             "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
           }
         }
@@ -216,11 +216,11 @@
           }
         },
         "x-ms-examples": {
-          "maximum set embeddings": {
-            "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
-          },
-          "minimum set embeddings": {
+          "Create text embeddings": {
             "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
+          },
+          "Create text embeddings with dimension, encoding, and input type": {
+            "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
           }
         }
       }
@@ -298,11 +298,92 @@
           }
         },
         "x-ms-examples": {
+          "Generate image embeddings": {
+            "$ref": "./examples/GetImageEmbeddings_MinimumSet_Gen.json"
+          },
           "maximum set image embeddings": {
             "$ref": "./examples/GetImageEmbeddings_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/images/generations": {
+      "post": {
+        "operationId": "GetImageGenerations",
+        "description": "Generates an image based on a text or image prompt.\nThe method makes a REST API call to the `/images/generations` route on the given endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
-          "minimum set image embeddings": {
-            "$ref": "./examples/GetImageEmbeddings_MinimumSet_Gen.json"
+          {
+            "name": "extra-parameters",
+            "in": "header",
+            "description": "Controls what happens if extra parameters, undefined by the REST API,\nare passed in the JSON request payload.\nThis sets the HTTP request header `extra-parameters`.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "error",
+              "drop",
+              "pass-through"
+            ],
+            "x-ms-enum": {
+              "name": "ExtraParameters",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "error",
+                  "value": "error",
+                  "description": "The service will error if it detected extra parameters in the request payload. This is the service default."
+                },
+                {
+                  "name": "drop",
+                  "value": "drop",
+                  "description": "The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+                },
+                {
+                  "name": "pass_through",
+                  "value": "pass-through",
+                  "description": "The service will pass extra parameters to the back-end AI model."
+                }
+              ]
+            },
+            "x-ms-client-name": "extra_params"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageGenerationsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageGenerationsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate a simple image based on a prompt": {
+            "$ref": "./examples/GetImageGenerations_MinimumSet_Gen.json"
+          },
+          "Generate an image based on a prompt, a negative prompt, and an image": {
+            "$ref": "./examples/GetImageGenerations_MaximumSet_Gen.json"
           }
         }
       }
@@ -314,6 +395,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "description": "The model deployment name you want information from.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -337,11 +425,11 @@
           }
         },
         "x-ms-examples": {
-          "maximum set model information": {
-            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
-          },
-          "minimum set model information": {
+          "Get model information": {
             "$ref": "./examples/GetModelInfo_MinimumSet_Gen.json"
+          },
+          "Get model information for a model deployment": {
+            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
           }
         }
       }
@@ -709,6 +797,10 @@
           "items": {
             "$ref": "#/definitions/ChatCompletionsModality"
           }
+        },
+        "user_security_context": {
+          "$ref": "#/definitions/UserSecurityContext",
+          "description": "User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. \nThese fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. \n[Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
         }
       },
       "required": [
@@ -1181,6 +1273,11 @@
           "x-nullable": true,
           "readOnly": true
         },
+        "reasoning_content": {
+          "type": "string",
+          "description": "The reasoning content the model used for generating the response",
+          "readOnly": true
+        },
         "tool_calls": {
           "type": "array",
           "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
@@ -1328,6 +1425,12 @@
           "description": "The number of tokens corresponding to audio input.",
           "readOnly": true
         },
+        "reasoning_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to reasoning.",
+          "readOnly": true
+        },
         "total_tokens": {
           "type": "integer",
           "format": "int32",
@@ -1337,6 +1440,7 @@
       },
       "required": [
         "audio_tokens",
+        "reasoning_tokens",
         "total_tokens"
       ]
     },
@@ -1681,6 +1785,332 @@
       ],
       "additionalProperties": {}
     },
+    "ImageGenerationItem": {
+      "type": "object",
+      "description": "Representation of a single image generation.",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The image generated, encoded in base64."
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The seed that can be used to generate the image."
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "ImageGenerationOutputFormat": {
+      "type": "string",
+      "description": "The image generation format to use in the output.",
+      "enum": [
+        "png",
+        "jpg"
+      ],
+      "x-ms-enum": {
+        "name": "ImageGenerationOutputFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "png",
+            "value": "png",
+            "description": "Generates images in PNG format."
+          },
+          {
+            "name": "jpg",
+            "value": "jpg",
+            "description": "Generates images in JPEG format."
+          }
+        ]
+      }
+    },
+    "ImageGenerationPreset": {
+      "type": "string",
+      "description": "The preset size of the image to generate.",
+      "enum": [
+        "672x1566",
+        "768x1366",
+        "836x1254",
+        "916x1145",
+        "1024x1024",
+        "1145x916",
+        "1254x836",
+        "1366x768",
+        "1566x672"
+      ],
+      "x-ms-enum": {
+        "name": "ImageGenerationPreset",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "nine_twenty_one",
+            "value": "672x1566",
+            "description": "The size of the image is 672x1566 pixels."
+          },
+          {
+            "name": "nine_sixteen",
+            "value": "768x1366",
+            "description": "The size of the image is 768x1366 pixels."
+          },
+          {
+            "name": "two_three",
+            "value": "836x1254",
+            "description": "The size of the image is 836x1254 pixels."
+          },
+          {
+            "name": "four_five",
+            "value": "916x1145",
+            "description": "The size of the image is 916x1145 pixels."
+          },
+          {
+            "name": "one_one",
+            "value": "1024x1024",
+            "description": "The size of the image is 1024x1024 pixels."
+          },
+          {
+            "name": "five_four",
+            "value": "1145x916",
+            "description": "The size of the image is 1145x916 pixels."
+          },
+          {
+            "name": "three_two",
+            "value": "1254x836",
+            "description": "The size of the image is 1254x836 pixels."
+          },
+          {
+            "name": "sixteen_nine",
+            "value": "1366x768",
+            "description": "The size of the image is 1366x768 pixels."
+          },
+          {
+            "name": "twenty_one_nine",
+            "value": "1566x672",
+            "description": "The size of the image is 1566x672 pixels."
+          }
+        ]
+      }
+    },
+    "ImageGenerationPrompt": {
+      "type": "object",
+      "description": "Represents an image to use for guidance during the generation.",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The input image encoded in base64 string as a data URL.\nExample: `data:image/{format};base64,{data}`.\""
+        },
+        "strength": {
+          "type": "number",
+          "format": "float",
+          "description": "The degree at which the generation process uses the image prompt as guidance. 1 indicates\na generation process that fully follows the input image. 0 a generation a process that doesn't\ntake into consideration the prompt image.",
+          "default": 1
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "ImageGenerationQuality": {
+      "type": "string",
+      "description": "The quality of the image to generate.",
+      "enum": [
+        "hd",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "ImageGenerationQuality",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "hd",
+            "value": "hd",
+            "description": "Generates images with the HD quality."
+          },
+          {
+            "name": "standard",
+            "value": "standard",
+            "description": "Generates images with standard quality."
+          }
+        ]
+      }
+    },
+    "ImageGenerationSize": {
+      "type": "object",
+      "description": "The size of the image to generate.",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The width of the image to generate, in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The height of the image to generate, in pixels."
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ]
+    },
+    "ImageGenerationUsage": {
+      "type": "object",
+      "description": "Usage counts for image generation API.",
+      "properties": {
+        "image_generations": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of image generations performed."
+        }
+      },
+      "required": [
+        "image_generations"
+      ]
+    },
+    "ImageGenerationsOptions": {
+      "type": "object",
+      "description": "The configuration information for an image generation request.",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "The prompt to use for the image geneartion. Read the model documentation to understand\nwhich language you should use to prompt the model and get specific results."
+        },
+        "negative_prompt": {
+          "type": "string",
+          "description": "Optional. The prompt to use for the negative image generation. Read the model documentation\nto understand to prompt the model and get specific results. If the model doesn't support\nnegative prompts, a 422 error is returned."
+        },
+        "image_prompt": {
+          "$ref": "#/definitions/ImageGenerationPrompt",
+          "description": "Optional. An image to use as guidance for the image generation process."
+        },
+        "size": {
+          "description": "The size of the image to generate."
+        },
+        "output_format": {
+          "type": "string",
+          "description": "Optional. The format in which to generate the image.\nReturns a 422 error if the model doesn't support the value or parameter.",
+          "default": "png",
+          "enum": [
+            "png",
+            "jpg"
+          ],
+          "x-ms-enum": {
+            "name": "ImageGenerationOutputFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "png",
+                "value": "png",
+                "description": "Generates images in PNG format."
+              },
+              {
+                "name": "jpg",
+                "value": "jpg",
+                "description": "Generates images in JPEG format."
+              }
+            ]
+          }
+        },
+        "quality": {
+          "type": "string",
+          "description": "Optional. The quality of the image to generate.\nReturns a 422 error if the model doesn't support the value or parameter.",
+          "default": "standard",
+          "enum": [
+            "hd",
+            "standard"
+          ],
+          "x-ms-enum": {
+            "name": "ImageGenerationQuality",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "hd",
+                "value": "hd",
+                "description": "Generates images with the HD quality."
+              },
+              {
+                "name": "standard",
+                "value": "standard",
+                "description": "Generates images with standard quality."
+              }
+            ]
+          }
+        },
+        "n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of images to generate. Defaults to 1.",
+          "default": 1
+        },
+        "model": {
+          "type": "string",
+          "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed."
+        }
+      },
+      "required": [
+        "prompt",
+        "size",
+        "n"
+      ],
+      "additionalProperties": {}
+    },
+    "ImageGenerationsResult": {
+      "type": "object",
+      "description": "The result of an image generation request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the generation result."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model used for the chat completion."
+        },
+        "data": {
+          "type": "array",
+          "description": "Embedding values for the prompts submitted in the request.",
+          "items": {
+            "$ref": "#/definitions/ImageGenerationItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/ImageGenerationUsage",
+          "description": "Usage counts for tokens input using the embeddings API."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type of the image generation result. Will always be `list`.",
+          "enum": [
+            "image.generation"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "model",
+        "data",
+        "usage",
+        "object"
+      ]
+    },
     "ModelInfo": {
       "type": "object",
       "description": "Represents some basic information about the AI model.",
@@ -1847,6 +2277,11 @@
           "description": "The content of the message.",
           "readOnly": true
         },
+        "reasoning_content": {
+          "type": "string",
+          "description": "The reasoning content the model used for generating the response",
+          "readOnly": true
+        },
         "tool_calls": {
           "type": "array",
           "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
@@ -1877,6 +2312,37 @@
         "id",
         "function"
       ]
+    },
+    "UserSecurityContext": {
+      "type": "object",
+      "description": "User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. \nThese fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. \n[Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.",
+      "properties": {
+        "application_name": {
+          "type": "string",
+          "description": "The name of the application. Sensitive personal information should not be included in this field.",
+          "maxLength": 100
+        },
+        "end_user_id": {
+          "type": "string",
+          "description": "This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "end_user_tenant_id": {
+          "type": "string",
+          "description": "The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multi tenant.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "source_ip": {
+          "type": "string",
+          "description": "Captures the original client's IP address, accepting both IPv4 and IPv6 formats.",
+          "minLength": 2,
+          "maxLength": 45
+        }
+      }
     }
   },
   "parameters": {

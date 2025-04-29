@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AI Model Inference",
-    "version": "2024-05-01-preview",
+    "version": "2025-05-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -131,13 +131,13 @@
           }
         },
         "x-ms-examples": {
-          "Audio modality chat completion": {
+          "Chat completion with audio content": {
             "$ref": "./examples/GetChatCompletions_AudioModality_Gen.json"
           },
-          "maximum set chat completion": {
+          "Chat completion with multiple parameters and chat history": {
             "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
           },
-          "minimum set chat completion": {
+          "Simple chat completion": {
             "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
           }
         }
@@ -216,11 +216,11 @@
           }
         },
         "x-ms-examples": {
-          "maximum set embeddings": {
-            "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
-          },
-          "minimum set embeddings": {
+          "Create text embeddings": {
             "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
+          },
+          "Create text embeddings with dimension, encoding, and input type": {
+            "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
           }
         }
       }
@@ -298,10 +298,10 @@
           }
         },
         "x-ms-examples": {
-          "maximum set image embeddings": {
+          "Create image embeddings from text and image pair, and encoding format": {
             "$ref": "./examples/GetImageEmbeddings_MaximumSet_Gen.json"
           },
-          "minimum set image embeddings": {
+          "Generate image embeddings": {
             "$ref": "./examples/GetImageEmbeddings_MinimumSet_Gen.json"
           }
         }
@@ -314,6 +314,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "description": "The model deployment name you want information from.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -337,11 +344,11 @@
           }
         },
         "x-ms-examples": {
-          "maximum set model information": {
-            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
-          },
-          "minimum set model information": {
+          "Get model information": {
             "$ref": "./examples/GetModelInfo_MinimumSet_Gen.json"
+          },
+          "Get model information for a model deployment": {
+            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
           }
         }
       }
@@ -709,6 +716,10 @@
           "items": {
             "$ref": "#/definitions/ChatCompletionsModality"
           }
+        },
+        "user_security_context": {
+          "$ref": "#/definitions/UserSecurityContext",
+          "description": "User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. \nThese fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. \n[Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
         }
       },
       "required": [
@@ -1181,6 +1192,11 @@
           "x-nullable": true,
           "readOnly": true
         },
+        "reasoning_content": {
+          "type": "string",
+          "description": "The reasoning content the model used for generating the response",
+          "readOnly": true
+        },
         "tool_calls": {
           "type": "array",
           "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
@@ -1328,6 +1344,12 @@
           "description": "The number of tokens corresponding to audio input.",
           "readOnly": true
         },
+        "reasoning_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to reasoning.",
+          "readOnly": true
+        },
         "total_tokens": {
           "type": "integer",
           "format": "int32",
@@ -1337,6 +1359,7 @@
       },
       "required": [
         "audio_tokens",
+        "reasoning_tokens",
         "total_tokens"
       ]
     },
@@ -1847,6 +1870,11 @@
           "description": "The content of the message.",
           "readOnly": true
         },
+        "reasoning_content": {
+          "type": "string",
+          "description": "The reasoning content the model used for generating the response",
+          "readOnly": true
+        },
         "tool_calls": {
           "type": "array",
           "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
@@ -1877,6 +1905,37 @@
         "id",
         "function"
       ]
+    },
+    "UserSecurityContext": {
+      "type": "object",
+      "description": "User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. \nThese fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. \n[Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.",
+      "properties": {
+        "application_name": {
+          "type": "string",
+          "description": "The name of the application. Sensitive personal information should not be included in this field.",
+          "maxLength": 100
+        },
+        "end_user_id": {
+          "type": "string",
+          "description": "This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "end_user_tenant_id": {
+          "type": "string",
+          "description": "The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multi tenant.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "source_ip": {
+          "type": "string",
+          "description": "Captures the original client's IP address, accepting both IPv4 and IPv6 formats.",
+          "minLength": 2,
+          "maxLength": 45
+        }
+      }
     }
   },
   "parameters": {
