@@ -1,6 +1,5 @@
 import debug from "debug";
-import fs from "fs";
-import { promisify } from "util";
+import fs from "fs/promises";
 import { globby } from "globby";
 import path from "path";
 import { simpleGit } from "simple-git";
@@ -8,9 +7,6 @@ import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { fileExists, normalizePath, readTspConfig } from "../utils.js";
-
-// Use promisify as a workaround for fs/promises compatibility
-const readFile = promisify(fs.readFile);
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -254,7 +250,7 @@ export class FolderStructureRule implements Rule {
       const tspResolved = path.resolve(teamFolderResolved, tsp);
 
       const pattern = /^\s*import\s+['"]([^'"]+)['"]\s*;\s*$/gm;
-      const text = await readFile(tspResolved, { encoding: "utf8" });
+      const text = await fs.readFile(tspResolved, { encoding: "utf8" });
       const matches: string[] = [];
       let match;
       while ((match = pattern.exec(text)) !== null) {
