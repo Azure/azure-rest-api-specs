@@ -9168,7 +9168,7 @@
           "description": "The reference to the Schema Registry for this AIO Instance."
         },
         "secretProviderClassRef": {
-          "$ref": "#/definitions/SecretProviderClassID",
+          "$ref": "#/definitions/SecretProviderClassRef",
           "description": "The reference to the AIO Secret provider class.",
           "readOnly": true
         },
@@ -10178,6 +10178,19 @@
           }
         ]
       }
+    },
+    "SecretProviderClassRef": {
+      "type": "object",
+      "description": "The reference to the AIO Secret provider class.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/SecretProviderClassID",
+          "description": "The resource ID of the AIO Secret provider class."
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
     },
     "SelfCheck": {
       "type": "object",
