@@ -9,4 +9,7 @@
     - options.@azure-tools/typespec-go.inject-spans
     - options.@azure-tools/typespec-go.service-dir
     - options.@azure-tools/typespec-go.package-dir
-  reason: 'We do not yet have a Go client library'
+    # Suppress JS package & dir names related to RLC, which require "rest" in the name. We do not use RLC.
+    - options.@azure-tools/typespec-ts.package-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+  reason: 'We do not yet have a Go client library. We do not use RLC for JS.'
