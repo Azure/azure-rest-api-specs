@@ -129,10 +129,7 @@ interface Computes {
 interface NeonDatabases {
   get is ArmResourceRead<NeonDatabase>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonDatabase>;
-  update is ArmResourcePatchAsync<
-    NeonDatabase,
-    NeonDatabaseProperties
-  >;
+  update is ArmResourcePatchAsync<NeonDatabase, NeonDatabaseProperties>;
   delete is ArmResourceDeleteSync<NeonDatabase>;
   list is ArmResourceListByParent<NeonDatabase>;
 }

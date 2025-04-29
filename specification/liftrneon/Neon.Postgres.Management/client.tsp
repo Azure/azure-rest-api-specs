@@ -31,10 +31,7 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(Neon.Postgres.Branch, "NeonBranch", "csharp");
-@@clientName(Neon.Postgres.BranchProperties,
-  "NeonBranchProperties",
-  "csharp"
-);
+@@clientName(Neon.Postgres.BranchProperties, "NeonBranchProperties", "csharp");
 
 @@clientName(Neon.Postgres.Endpoint, "NeonEndpoint", "csharp");
 @@clientName(Neon.Postgres.EndpointProperties,
@@ -53,7 +50,4 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-@@clientName(Neon.Postgres.ProjectProperties.attributes,
-  "attribute",
-  "csharp"
-);
+@@clientName(Neon.Postgres.ProjectProperties.attributes, "attribute", "csharp");
