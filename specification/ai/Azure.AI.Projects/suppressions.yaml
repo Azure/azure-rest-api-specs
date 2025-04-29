@@ -12,4 +12,6 @@
     # Suppress JS package & dir names related to RLC, which require "rest" in the name. We do not use RLC.
     - options.@azure-tools/typespec-ts.package-dir
     - options.@azure-tools/typespec-ts.package-details.name
-  reason: 'We do not yet have a Go client library. We do not use RLC for JS.'
+    # Do not force me to generate Python samples
+    - options.@azure-tools/typespec-python.generate-sample
+  reason: 'See above comments for details'
