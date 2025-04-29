@@ -16,6 +16,7 @@ import "./SpatialAnchorsAccount.tsp";
 import "./RemoteRenderingAccount.tsp";
 import "./ObjectAnchorsAccount.tsp";
 import "./routes.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

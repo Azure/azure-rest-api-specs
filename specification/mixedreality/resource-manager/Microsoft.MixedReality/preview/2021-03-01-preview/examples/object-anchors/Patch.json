@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "resourceGroupName": "MyResourceGroup",
     "accountName": "MyAccount",
     "api-version": "2021-03-01-preview",
     "objectAnchorsAccount": {
@@ -10,30 +8,34 @@
       },
       "location": "eastus2euap",
       "tags": {
-        "heroine": "juliet",
-        "hero": "romeo"
+        "hero": "romeo",
+        "heroine": "juliet"
       }
-    }
+    },
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "accountDomain": "mixedreality.azure.com"
-        },
-        "tags": {
-          "heroine": "juliet",
-          "hero": "romeo"
-        },
+        "name": "MyAccount",
+        "type": "Microsoft.MixedReality/objectAnchorsAccounts",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/objectAnchorsAccounts/MyAccount",
         "identity": {
           "type": "SystemAssigned"
         },
         "location": "eastus2euap",
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/objectAnchorsAccounts/MyAccount",
-        "name": "MyAccount",
-        "type": "Microsoft.MixedReality/objectAnchorsAccounts"
+        "properties": {
+          "accountDomain": "mixedreality.azure.com",
+          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        },
+        "tags": {
+          "hero": "romeo",
+          "heroine": "juliet"
+        }
       }
     }
-  }
+  },
+  "operationId": "ObjectAnchorsAccounts_Update",
+  "title": "Update object anchors account"
 }

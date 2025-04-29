@@ -1,20 +1,22 @@
 {
   "parameters": {
-    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "location": "eastus2euap",
+    "api-version": " 2021-03-01-preview",
     "checkNameAvailability": {
       "name": "MyAccount",
       "type": "Microsoft.MixedReality/spatialAnchorsAccounts"
     },
-    "api-version": " 2021-03-01-preview"
+    "location": "eastus2euap",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
   },
   "responses": {
     "200": {
       "body": {
+        "message": "...",
         "nameAvailable": false,
-        "reason": "AlreadyExists",
-        "message": "..."
+        "reason": "AlreadyExists"
       }
     }
-  }
+  },
+  "operationId": "CheckNameAvailabilityLocal",
+  "title": "CheckLocalNameAvailability"
 }

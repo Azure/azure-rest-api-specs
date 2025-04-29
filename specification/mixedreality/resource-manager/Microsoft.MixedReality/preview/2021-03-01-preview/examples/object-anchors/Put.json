@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "resourceGroupName": "MyResourceGroup",
     "accountName": "MyAccount",
     "api-version": "2021-03-01-preview",
     "objectAnchorsAccount": {
@@ -9,40 +7,44 @@
         "type": "SystemAssigned"
       },
       "location": "eastus2euap"
-    }
+    },
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
   },
   "responses": {
-    "201": {
-      "body": {
-        "properties": {
-          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "accountDomain": "mixedreality.azure.com"
-        },
-        "tags": {},
-        "identity": {
-          "type": "SystemAssigned"
-        },
-        "location": "eastus2euap",
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/objectAnchorsAccounts/MyAccount",
-        "name": "MyAccount",
-        "type": "Microsoft.MixedReality/objectAnchorsAccounts"
-      }
-    },
     "200": {
       "body": {
-        "properties": {
-          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "accountDomain": "mixedreality.azure.com"
-        },
-        "tags": {},
+        "name": "MyAccount",
+        "type": "Microsoft.MixedReality/objectAnchorsAccounts",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/objectAnchorsAccounts/MyAccount",
         "identity": {
           "type": "SystemAssigned"
         },
         "location": "eastus2euap",
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/objectAnchorsAccounts/MyAccount",
+        "properties": {
+          "accountDomain": "mixedreality.azure.com",
+          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
         "name": "MyAccount",
-        "type": "Microsoft.MixedReality/objectAnchorsAccounts"
+        "type": "Microsoft.MixedReality/objectAnchorsAccounts",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/objectAnchorsAccounts/MyAccount",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "eastus2euap",
+        "properties": {
+          "accountDomain": "mixedreality.azure.com",
+          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        },
+        "tags": {}
       }
     }
-  }
+  },
+  "operationId": "ObjectAnchorsAccounts_Create",
+  "title": "Create object anchors account"
 }

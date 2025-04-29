@@ -1,33 +1,35 @@
 {
   "parameters": {
-    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "resourceGroupName": "MyResourceGroup",
     "accountName": "MyAccount",
     "api-version": "2021-03-01-preview",
+    "resourceGroupName": "MyResourceGroup",
     "spatialAnchorsAccount": {
       "location": "eastus2euap",
       "tags": {
-        "heroine": "juliet",
-        "hero": "romeo"
+        "hero": "romeo",
+        "heroine": "juliet"
       }
-    }
+    },
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "MyAccount",
+        "type": "Microsoft.MixedReality/spatialAnchorsAccounts",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/spatialAnchorsAccounts/MyAccount",
+        "location": "eastus2euap",
         "properties": {
-          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "accountDomain": "mixedreality.azure.com"
+          "accountDomain": "mixedreality.azure.com",
+          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         },
         "tags": {
-          "heroine": "juliet",
-          "hero": "romeo"
-        },
-        "location": "eastus2euap",
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/spatialAnchorsAccounts/MyAccount",
-        "name": "MyAccount",
-        "type": "Microsoft.MixedReality/spatialAnchorsAccounts"
+          "hero": "romeo",
+          "heroine": "juliet"
+        }
       }
     }
-  }
+  },
+  "operationId": "SpatialAnchorsAccounts_Update",
+  "title": "Update spatial anchors account"
 }

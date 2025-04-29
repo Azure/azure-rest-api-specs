@@ -1,23 +1,25 @@
 {
   "parameters": {
-    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "resourceGroupName": "MyResourceGroup",
     "accountName": "MyAccount",
-    "api-version": "2021-03-01-preview"
+    "api-version": "2021-03-01-preview",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "accountDomain": "mixedreality.azure.com"
-        },
-        "tags": {},
-        "location": "eastus2euap",
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/spatialAnchorsAccounts/MyAccount",
         "name": "MyAccount",
-        "type": "Microsoft.MixedReality/spatialAnchorsAccounts"
+        "type": "Microsoft.MixedReality/spatialAnchorsAccounts",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/spatialAnchorsAccounts/MyAccount",
+        "location": "eastus2euap",
+        "properties": {
+          "accountDomain": "mixedreality.azure.com",
+          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        },
+        "tags": {}
       }
     }
-  }
+  },
+  "operationId": "SpatialAnchorsAccounts_Get",
+  "title": "Get spatial anchors account"
 }
