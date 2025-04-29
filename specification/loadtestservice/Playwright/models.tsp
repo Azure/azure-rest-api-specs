@@ -15,14 +15,15 @@ model AccessToken {
   @key("accessTokenId")
   @doc("The access-token id.")
   @minLength(3)
-  @maxLength(64)
+  @maxLength(32)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility(Lifecycle.Read)
   id: uuid;
 
+  // Standard Azure Resource Name parameter regex pattern - https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.ResourceNameParameter
   @minLength(3)
-  @maxLength(64)
-  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
+  @maxLength(24)
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @doc("The access-token name.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   name: string;
@@ -71,7 +72,8 @@ union OS {
 model Workspace {
   @key("workspaceId")
   @doc("The workspace id.")
-  @maxLength(64)
+  @maxLength(32)
+  @minLength(3)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility(Lifecycle.Read)
   id: uuid;
@@ -80,6 +82,9 @@ model Workspace {
   @visibility(Lifecycle.Read)
   resourceId: armResourceIdentifier;
 
+  @minLength(3)
+  @maxLength(24)
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @doc("The workspace name.")
   @visibility(Lifecycle.Read)
   name: string;

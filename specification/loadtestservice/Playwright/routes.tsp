@@ -33,12 +33,22 @@ interface AccessTokens {
 
 alias GetBrowsersParams = {
   @path
+  @maxLength(32)
+  @minLength(3)
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @doc("The workspace id.")
-  workspaceId: string;
+  workspaceId: uuid;
 
   @query
   @doc("The os provided by client for remote script runs.")
   os?: OS = OS.Linux;
+
+  @query
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @maxLength(24)
+  @minLength(3)
+  @doc("The runId provided by client to track remote script runs. It should match regex ^[a-zA-Z0-9-]{3,24}$")
+  runId?: string;
 };
 
 alias GetBrowsersResponse = {
@@ -52,10 +62,6 @@ alias GetBrowsersResponse = {
 
 interface Workspaces {
   // Workspaces Operations
-
-  @doc("Get details of the Azure resource mapped to a workspace for the given workspace id. Authorization required is Bearer JWT Access token provided by EntraID.")
-  get is Operations.ResourceRead<Workspace>;
-
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
   @doc("Gets remote browsers corresponding to given workspace id and redirects the client for executing Playwright scripts. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.")
   @route("/playwrightworkspaces/{workspaceId}/browsers")
