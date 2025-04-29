@@ -22,7 +22,7 @@ import { isWindows } from "./test-util.js";
 import { vol } from "memfs";
 
 vi.mock("node:fs/promises", async () => {
-  const memfs = await vi.importActual("memfs") as typeof import("memfs");
+  const memfs = (await vi.importActual("memfs")) as typeof import("memfs");
   return {
     ...memfs.fs.promises,
   };
@@ -41,6 +41,7 @@ vi.mock("../src/util.js", async () => {
 
 describe("iconFor", () => {
   test.each([
+    { input: "fatal", expected: ":x:" },
     { input: "error", expected: ":x:" },
     { input: "warning", expected: ":warning:" },
     { input: "info", expected: ":warning:" },
@@ -296,6 +297,40 @@ describe("compareLintDiffViolations", () => {
     const actual = compareLintDiffViolations(a, b);
     expect(actual).toEqual(1);
   });
+
+  test("returns -1 if a's level is fatal and b's level is not", () => {
+    const a: LintDiffViolation = {
+      level: "fatal",
+      code: "SomeCode1",
+      message: "Some Message",
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      details: {},
+    } as LintDiffViolation;
+    const b: LintDiffViolation = {
+      ...a,
+      level: "error",
+    };
+
+    const actual = compareLintDiffViolations(a, b);
+    expect(actual).toEqual(-1);
+  });
+
+  test("returns 1 if a's level is not fatal and b's level is", () => {
+    const a: LintDiffViolation = {
+      level: "error",
+      code: "SomeCode1",
+      message: "Some Message",
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      details: {},
+    } as LintDiffViolation;
+    const b: LintDiffViolation = {
+      ...a,
+      level: "fatal",
+    };
+
+    const actual = compareLintDiffViolations(a, b);
+    expect(actual).toEqual(1);
+  });
 });
 
 describe("generateLintDiffReport", () => {
@@ -369,6 +404,64 @@ describe("generateLintDiffReport", () => {
     `);
   });
 
+  test.skipIf(isWindows())("fails if new violation includes a fatal error", async ({ expect }) => {
+    const afterViolation = {
+      extensionName: "@microsoft.azure/openapi-validator",
+      level: "fatal",
+      code: "FATAL",
+      message: "A fatal error occurred",
+      source: [],
+      details: {},
+    };
+
+    const beforeResult = {
+      error: null,
+      stdout: "",
+      stderr: "",
+      rootPath: "",
+      readme: "file1.md",
+      tag: "",
+    } as AutorestRunResult;
+    const afterResult = {
+      error: null,
+      stdout: JSON.stringify(afterViolation),
+      stderr: "",
+      rootPath: "",
+      readme: "file1.md",
+      tag: "",
+    } as AutorestRunResult;
+
+    const runCorrelations = new Map<string, BeforeAfter>([
+      ["file1.md", { before: beforeResult, after: afterResult }],
+    ]);
+
+    const outFile = "test-output-fatal.md";
+    const actual = await generateLintDiffReport(
+      runCorrelations,
+      new Set<string>([
+        "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+      ]),
+      outFile,
+      "baseBranch",
+      "compareSha",
+    );
+    expect(actual).toBe(false);
+    expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
+      "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
+      | --- | --- | --- |
+      | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+
+
+      **[must fix]The following errors/warnings are intorduced by current PR:**
+
+      | Rule | Message | Related RPC [For API reviewers] |
+      | ---- | ------- | ------------------------------- |
+      | :x: FATAL | A fatal error occurred |  |
+
+      "
+    `);
+  });
+
   test.skipIf(isWindows())(
     "passes if new violations do not include an error (warnings only)",
     async ({ expect }) => {
@@ -419,7 +512,7 @@ describe("generateLintDiffReport", () => {
         "compareSha",
       );
       expect(actual).toBe(true);
-      
+
       expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
         "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
         | --- | --- | --- |
@@ -471,9 +564,7 @@ describe("generateAutoRestErrorReport", () => {
           stdout: "dummy stdout",
           stderr: "dummy stderr",
         },
-        errors: [
-          { level: "error", message: "Error message 2" } as AutoRestMessage,
-        ],
+        errors: [{ level: "error", message: "Error message 2" } as AutoRestMessage],
       },
     ];
 
@@ -490,7 +581,7 @@ describe("generateAutoRestErrorReport", () => {
       | Level | Message |
       | ----- | ------- |
       | :x: error | Error message 1 |
-      | :warning: fatal | Fatal error message |
+      | :x: fatal | Fatal error message |
 
 
       Readme: readme2.md
