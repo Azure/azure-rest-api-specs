@@ -1,28 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "77777777-b0c6-47a2-b37c-d8e65a629c18",
-    "resourceGroupName": "Default-RecoveryServices-ResourceGroup",
-    "vaultName": "swaggerExample",
     "api-version": "2025-02-01",
+    "resourceGroupName": "Default-RecoveryServices-ResourceGroup",
     "resourceResourceExtendedInfoDetails": {
       "properties": {
-        "integrityKey": "J99wzS27fmJ+Wjot7xO5wA==",
-        "algorithm": "None"
+        "algorithm": "None",
+        "integrityKey": "J99wzS27fmJ+Wjot7xO5wA=="
       }
-    }
+    },
+    "subscriptionId": "77777777-b0c6-47a2-b37c-d8e65a629c18",
+    "vaultName": "swaggerExample"
   },
   "responses": {
     "200": {
       "body": {
         "name": "vaultExtendedInfo",
+        "type": "Microsoft.RecoveryServices/vaults/extendedInformation",
         "etag": "f0d0260b-b92d-4458-ba0a-32c6cdabacb7",
-        "properties": {
-          "integrityKey": "J99wzS27fmJ+Wjot7xO5wA==",
-          "algorithm": "None"
-        },
         "id": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/vaults/swaggerExample/extendedInformation/vaultExtendedInfo",
-        "type": "Microsoft.RecoveryServices/vaults/extendedInformation"
+        "properties": {
+          "algorithm": "None",
+          "integrityKey": "J99wzS27fmJ+Wjot7xO5wA=="
+        }
       }
     }
-  }
+  },
+  "operationId": "VaultExtendedInfo_Update",
+  "title": "PATCH ExtendedInfo of Resource"
 }

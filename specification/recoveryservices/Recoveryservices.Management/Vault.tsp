@@ -93,7 +93,7 @@ interface Vaults {
   /**
    * Fetches all the resources of the specified type in the subscription.
    */
-  listBySubscriptionId is VaultOps.ListBySubscription<
+  listBySubscriptionId is VaultOps.List<
     Vault,
     Response = ArmResponse<VaultList>
   >;
