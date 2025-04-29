@@ -1,13 +1,12 @@
-import { readFileSync } from "fs";
+import { readdir } from "fs/promises";
 import { dirname, join, resolve } from "path";
 import { fileURLToPath } from "url";
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   getAffectedReadmeTags,
-  getSpecModel,
   getAffectedSwaggers,
+  getSpecModel,
 } from "../src/spec-model.js";
-import { readdir } from "fs/promises";
 import { isWindows } from "./test-utils.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -29,66 +28,40 @@ describe("getSpecModel", () => {
 
     const readmePath =
       "specification/contosowidgetmanager/resource-manager/readme.md";
-    const readmeContent = readFileSync(join(fixtureRoot, readmePath), {
-      encoding: "utf8",
-    });
 
     const swaggerPathPreview =
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
-    const swaggerContentPreview = readFileSync(
-      join(fixtureRoot, swaggerPathPreview),
-      {
-        encoding: "utf8",
-      },
-    );
 
     const swaggerPathStable =
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json";
-    const swaggerContentStable = readFileSync(
-      join(fixtureRoot, swaggerPathStable),
-      {
-        encoding: "utf8",
-      },
-    );
 
     const expected = {
       repoRoot: fixtureRoot,
-      readmes: new Map([
-        [
-          readmePath,
-          {
-            path: readmePath,
-            content: readmeContent,
-            globalConfig: {
-              "openapi-type": "arm",
-              "openapi-subtype": "rpaas",
-              tag: "package-2021-11-01",
-            },
-            tags: new Map([
-              [
-                "package-2021-11-01",
-                [
-                  {
-                    path: swaggerPathStable,
-                    content: swaggerContentStable,
-                    refs: expect.any(Map),
-                  },
-                ],
-              ],
-              [
-                "package-2021-10-01-preview",
-                [
-                  {
-                    path: swaggerPathPreview,
-                    content: swaggerContentPreview,
-                    refs: expect.any(Map),
-                  },
-                ],
-              ],
-            ]),
+      readmes: {
+        [readmePath]: {
+          path: readmePath,
+          globalConfig: {
+            "openapi-type": "arm",
+            "openapi-subtype": "rpaas",
+            tag: "package-2021-11-01",
           },
-        ],
-      ]),
+          tags: {
+            "package-2021-11-01": [
+              {
+                path: swaggerPathStable,
+                refs: expect.anything(),
+              },
+            ],
+
+            "package-2021-10-01-preview": [
+              {
+                path: swaggerPathPreview,
+                refs: expect.anything(),
+              },
+            ],
+          },
+        },
+      },
     };
 
     const specModel = await getSpecModel(
@@ -134,12 +107,11 @@ describe("getAffectedReadmeTags", () => {
       specModel,
     );
 
-    const expected = new Map([
-      [
-        "specification/contosowidgetmanager/resource-manager/readme.md",
-        new Set(["package-2021-11-01"]),
+    const expected = {
+      "specification/contosowidgetmanager/resource-manager/readme.md": [
+        "package-2021-11-01",
       ],
-    ]);
+    };
     expect(actual).toEqual(expected);
   });
 
@@ -155,9 +127,9 @@ describe("getAffectedReadmeTags", () => {
         specModel,
       );
 
-      const expected = new Map([
-        ["specification/1/data-plane/readme.md", new Set(["tag-1", "tag-2"])],
-      ]);
+      const expected = {
+        "specification/1/data-plane/readme.md": ["tag-1", "tag-2"],
+      };
       expect(actual).toEqual(expected);
     },
   );
@@ -176,7 +148,7 @@ describe("getAffectedSwaggers", () => {
         specModel,
       );
 
-      const expected = new Set(["specification/1/data-plane/a.json"]);
+      const expected = ["specification/1/data-plane/a.json"];
 
       expect(actual).toEqual(expected);
     },
@@ -207,10 +179,10 @@ describe("getAffectedSwaggers", () => {
         specModel,
       );
 
-      const expected = new Set([
+      const expected = [
         "specification/1/data-plane/a.json",
         "specification/1/data-plane/nesting/b.json",
-      ]);
+      ];
       expect(actual).toEqual(expected);
     },
   );
@@ -226,12 +198,13 @@ describe("getAffectedSwaggers", () => {
         "specification/1/data-plane/c.json",
         specModel,
       );
-      const expected = new Set([
+      const expected = [
         "specification/1/data-plane/a.json",
         "specification/1/data-plane/nesting/b.json",
         "specification/1/data-plane/c.json",
-      ]);
-      expect(actual).toEqual(expected);
+      ];
+
+      expect(actual.sort()).toEqual(expected.sort());
     },
   );
 
@@ -246,13 +219,13 @@ describe("getAffectedSwaggers", () => {
         "specification/1/data-plane/d.json",
         specModel,
       );
-      const expected = new Set([
+      const expected = [
         "specification/1/data-plane/a.json",
         "specification/1/data-plane/nesting/b.json",
         "specification/1/data-plane/c.json",
         "specification/1/data-plane/d.json",
-      ]);
-      expect(actual).toEqual(expected);
+      ];
+      expect(actual.sort()).toEqual(expected.sort());
     },
   );
 
@@ -267,15 +240,15 @@ describe("getAffectedSwaggers", () => {
         "specification/1/data-plane/shared/shared.json",
         specModel,
       );
-      const expected = new Set([
+      const expected = [
         "specification/1/data-plane/a.json",
         "specification/1/data-plane/nesting/b.json",
         "specification/1/data-plane/c.json",
         "specification/1/data-plane/d.json",
         "specification/1/data-plane/shared/shared.json",
         "specification/1/data-plane/e.json",
-      ]);
-      expect(actual).toEqual(expected);
+      ];
+      expect(actual.sort()).toEqual(expected.sort());
     },
   );
 });

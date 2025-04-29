@@ -3,10 +3,10 @@ import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { readFile, readdir } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
-import { dirname, join, resolve, relative } from "path";
+import { dirname, join, relative, resolve } from "path";
 import { fileURLToPath } from "url";
-import { example, readme } from "./changed-files.js";
 import { mapAsync } from "./array.js";
+import { example, readme } from "./changed-files.js";
 import { ConsoleLogger } from "./logger.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,22 +15,20 @@ const __dirname = dirname(__filename);
 /**
  * @typedef {Object} SpecModel
  * @prop {string} repoRoot
- * @prop {Map<string, Readme>} readmes
+ * @prop {Object<string, Readme>} readmes
  */
 
 /**
  * @typedef {Object} Readme
  * @prop {string} path
- * @prop {string} content
  * @prop {Object} globalConfig
- * @prop {Map<string, Swagger[]>} tags
+ * @prop {Object<string, Swagger[]>} tags
  */
 
 /**
  * @typedef {Object} Swagger
  * @prop {string} path
- * @prop {string} content
- * @prop {Map<string, Set<string>>} refs
+ * @prop {Object<string, string[]>} refs
  */
 
 /**
@@ -56,7 +54,7 @@ export async function getSpecModel(folder, options = {}) {
 
   return {
     repoRoot,
-    readmes: new Map(
+    readmes: Object.fromEntries(
       await mapAsync(readmes, async (r) => {
         const readmePath = join(folder, r);
         return [readmePath, await getReadme(readmePath, repoRoot, logger)];
@@ -96,8 +94,8 @@ async function getReadme(readmePath, repoRoot, logger) {
     {},
   );
 
-  /** @prop {Map<string, Swagger[]>} */
-  const tags = new Map();
+  /** @type {Object<string, Swagger[]>} */
+  const tags = {};
   for (const block of yamlBlocks) {
     const tagName =
       block.lang?.match(/yaml.*\$\(tag\) ?== ?'([^']*)'/)?.[1] || "default";
@@ -123,7 +121,7 @@ async function getReadme(readmePath, repoRoot, logger) {
     // swaggers means that the previous definition did not have an input-file
     // key. It's possible that the previous defintion had an `input-file: []`
     // or something like it.
-    if (tags.has(tagName) && tags.get(tagName).length > 0) {
+    if (tags[tagName]?.length > 0) {
       // The tag already exists and has a swagger file. This is an error as
       // there should only be one definition of input-files per tag.
       const message = `Multiple input-file definitions for tag ${tagName} in ${readmePath}`;
@@ -148,12 +146,11 @@ async function getReadme(readmePath, repoRoot, logger) {
       swaggers.push(swagger);
     }
 
-    tags.set(tagName, swaggers);
+    tags[tagName] = swaggers;
   }
 
   const readme = {
     path: readmePath,
-    content,
     globalConfig,
     tags,
   };
@@ -191,7 +188,6 @@ async function getSwagger(swaggerPath, readmeFolder, repoRoot, logger) {
 
   return {
     path: join(readmeFolder, normalizedSwaggerPath),
-    content,
     refs: await getExternalFileRefs(
       normalizedSwaggerPath,
       readmeFolder,
@@ -207,13 +203,15 @@ async function getSwagger(swaggerPath, readmeFolder, repoRoot, logger) {
  * @param {string} swaggerPath,
  * @param {string} readmePath
  * @param {string} repoRoot
- * @returns {Promise<Map<string, Set<string>>>}
+ * @returns {Promise<Object<string, string[]>>}
  */
 async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
   const initialSwagger = join(readmePath, swaggerPath);
   const visited = new Set();
   const toVisit = new Set([initialSwagger]);
-  const externalFileRefs = new Map();
+
+  /** @type {Object<string, Set<string>>} */
+  const externalFileRefs = {};
 
   while (toVisit.size > 0) {
     const currentSwagger = /** @type {string} */ (
@@ -234,14 +232,14 @@ async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
 
     // Add the ref to the dependency map for the current path
     if (currentSwagger !== initialSwagger) {
-      if (!externalFileRefs.has(currentSwagger)) {
-        externalFileRefs.set(currentSwagger, new Set());
+      if (!externalFileRefs[currentSwagger]) {
+        externalFileRefs[currentSwagger] = new Set();
       }
     }
 
     for (const ref of currentRefs) {
       if (currentSwagger !== initialSwagger) {
-        externalFileRefs.get(currentSwagger).add(ref);
+        externalFileRefs[currentSwagger].add(ref);
       }
 
       if (!visited.has(ref)) {
@@ -250,7 +248,9 @@ async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
     }
   }
 
-  return externalFileRefs;
+  return Object.fromEntries(
+    Object.entries(externalFileRefs).map((e) => [e[0], Array.from(e[1])]),
+  );
 }
 
 /**
@@ -258,35 +258,38 @@ async function getExternalFileRefs(swaggerPath, readmePath, repoRoot) {
  * swagger file.
  * @param {string} swaggerFile
  * @param {SpecModel} specModel
- * @returns {Map<string, Set<string>>}
+ * @returns {Object<string, string[]>}
  */
 export function getAffectedReadmeTags(swaggerFile, specModel) {
-  const affectedReadmes = new Map();
+  /** @type Object<string, Set<string>> */
+  const affectedReadmes = {};
 
-  for (const [readmePath, readme] of specModel.readmes) {
-    for (const [tag, swaggers] of readme.tags) {
+  for (const [readmePath, readme] of Object.entries(specModel.readmes)) {
+    for (const [tag, swaggers] of Object.entries(readme.tags)) {
       for (const swagger of swaggers) {
         if (swagger.path === swaggerFile) {
-          if (!affectedReadmes.has(readmePath)) {
-            affectedReadmes.set(readmePath, new Set());
+          if (!affectedReadmes[readmePath]) {
+            affectedReadmes[readmePath] = new Set();
           }
-          affectedReadmes.get(readmePath).add(tag);
+          affectedReadmes[readmePath].add(tag);
           // No need to check refs if the swagger file is directly referenced
           continue;
         }
 
         // Because refs contains the full set of transitive dependencies, only
         // check if the swagger file is in the map keys.
-        if (swagger.refs.has(swaggerFile)) {
-          if (!affectedReadmes.has(readmePath)) {
-            affectedReadmes.set(readmePath, new Set());
+        if (swagger.refs[swaggerFile]) {
+          if (!affectedReadmes[readmePath]) {
+            affectedReadmes[readmePath] = new Set();
           }
-          affectedReadmes.get(readmePath).add(tag);
+          affectedReadmes[readmePath].add(tag);
         }
       }
     }
   }
-  return affectedReadmes;
+  return Object.fromEntries(
+    Object.entries(affectedReadmes).map((e) => [e[0], Array.from(e[1])]),
+  );
 }
 
 /**
@@ -294,12 +297,12 @@ export function getAffectedReadmeTags(swaggerFile, specModel) {
  * changes in the given swagger file.
  * @param {string} swaggerFile
  * @param {SpecModel} specModel
- * @returns {Set<string>}
+ * @returns {string[]}
  */
 export function getAffectedSwaggers(swaggerFile, specModel) {
   const affectedSwaggers = new Set();
-  for (const [, readme] of specModel.readmes) {
-    for (const [, swaggers] of readme.tags) {
+  for (const [, readme] of Object.entries(specModel.readmes)) {
+    for (const [, swaggers] of Object.entries(readme.tags)) {
       for (const swagger of swaggers) {
         // The readme.md file directly references the given swaggerFile
         if (swagger.path === swaggerFile) {
@@ -307,7 +310,7 @@ export function getAffectedSwaggers(swaggerFile, specModel) {
         }
 
         // Some swagger file has a ref to the given swaggerFile.
-        if (swagger.refs.has(swaggerFile)) {
+        if (swagger.refs[swaggerFile]) {
           affectedSwaggers.add(swagger.path);
           affectedSwaggers.add(swaggerFile);
         }
@@ -320,8 +323,8 @@ export function getAffectedSwaggers(swaggerFile, specModel) {
         // If c is changed, then a and b are affected, but since b is not
         // directly referenced in the readme, it can only be discovered by
         // evaluating a's dependencies.
-        for (const [ref, dependsOn] of swagger.refs) {
-          if (dependsOn.has(swaggerFile)) {
+        for (const [ref, dependsOn] of Object.entries(swagger.refs)) {
+          if (dependsOn.includes(swaggerFile)) {
             affectedSwaggers.add(ref);
             affectedSwaggers.add(swaggerFile);
           }
@@ -337,5 +340,5 @@ export function getAffectedSwaggers(swaggerFile, specModel) {
     );
   }
 
-  return affectedSwaggers;
+  return Array.from(affectedSwaggers);
 }

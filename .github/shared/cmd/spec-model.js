@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { getSpecModel } from "../src/spec-model.js";
 import { existsSync, statSync } from "node:fs";
 import { join } from "node:path";
+import { getSpecModel } from "../src/spec-model.js";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
@@ -14,7 +14,7 @@ if (!process.argv[2]) {
   process.exit(1);
 }
 
-if (process.argv.length > 3) { 
+if (process.argv.length > 3) {
   console.error("ERROR: Too many arguments\n");
   console.error(USAGE);
   process.exit(1);
@@ -27,17 +27,6 @@ if (!existsSync(specPath) || !statSync(specPath).isDirectory()) {
   process.exit(1);
 }
 
-
-function replacer(key, value) {
-  if (value instanceof Map) {
-    return Object.fromEntries(value);
-  }
-  if (value instanceof Set) {
-    return Array.from(value);
-  }
-  return value;
-}
-
 const specModel = await getSpecModel(`specification/${process.argv[2]}`);
 
-console.log(JSON.stringify(specModel, replacer, 2));
+console.log(JSON.stringify(specModel, null, 2));
