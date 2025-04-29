@@ -2057,7 +2057,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -2619,7 +2619,8 @@
         "id": {
           "type": "string",
           "description": "Identifier of the evaluation.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "name"
         },
         "data": {
           "$ref": "#/definitions/InputData",
@@ -3131,7 +3132,8 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",

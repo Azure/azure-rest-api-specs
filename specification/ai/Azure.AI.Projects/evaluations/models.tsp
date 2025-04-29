@@ -14,7 +14,7 @@ namespace Azure.AI.Projects;
 
 @doc("Evaluator Configuration")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
+@removed(Versions.v1)
 model EvaluatorConfiguration {
   @doc("Identifier of the evaluator.")
   id: string;
@@ -30,7 +30,7 @@ model EvaluatorConfiguration {
 @doc("Abstract data class.")
 @discriminator("type")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
+@removed(Versions.v1)
 model InputData {
   @doc("Type of the data")
   type: string;
@@ -38,7 +38,7 @@ model InputData {
 
 @doc("Dataset as source for evaluation.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
+@removed(Versions.v1)
 model InputDataset extends InputData {
   type: "dataset";
 
@@ -49,12 +49,13 @@ model InputDataset extends InputData {
 @doc("Evaluation Definition")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
+@removed(Versions.v1)
 model Evaluation {
   @doc("Identifier of the evaluation.")
   @key("name")
+  @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
-  id: string;
+  name: string;
 
   @doc("Data for evaluation.")
   data: InputData;
@@ -81,7 +82,7 @@ model Evaluation {
 
 @doc("Definition for sampling strategy.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
+@removed(Versions.v1)
 model AgentEvaluationSamplingConfiguration {
   @doc("Name of the sampling strategy.")
   name: string;
@@ -95,7 +96,7 @@ model AgentEvaluationSamplingConfiguration {
 
 @doc("The redaction configuration will allow the user to control what is redacted.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
+@removed(Versions.v1)
 model AgentEvaluationRedactionConfiguration {
   @doc("Redact score properties. If not specified, the default is to redact in production.")
   redactScoreProperties?: boolean;
@@ -103,7 +104,7 @@ model AgentEvaluationRedactionConfiguration {
 
 @doc("Evaluation request for agent run.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
+@removed(Versions.v1)
 model AgentEvaluationRequest {
   @doc("Identifier of the agent run.")
   runId: string;
@@ -126,7 +127,7 @@ model AgentEvaluationRequest {
 
 @doc("Result for the agent evaluation evaluator run.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
+@removed(Versions.v1)
 model AgentEvaluationResult {
   @doc("Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion.")
   evaluator: string;
@@ -158,7 +159,7 @@ model AgentEvaluationResult {
 
 @doc("Evaluation response for agent evaluation run.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
+@removed(Versions.v1)
 model AgentEvaluation {
   @doc("Identifier of the agent evaluation run.")
   id: string;
