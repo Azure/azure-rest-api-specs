@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure AI",
-    "version": "v1",
+    "version": "2025-05-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -239,7 +239,7 @@
         }
       }
     },
-    "/connections/{name}/withCredentials": {
+    "/connections/{name}/getConnectionWithCredentials": {
       "post": {
         "operationId": "Connections_GetWithCredentials",
         "description": "Get a connection by name, with its connection credentials",
@@ -1542,7 +1542,7 @@
       "properties": {
         "dataUri": {
           "type": "string",
-          "description": "[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330",
+          "description": "URI of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "x-ms-mutability": [

@@ -25,7 +25,7 @@ interface Connections {
   @doc("Get a connection by name, with its connection credentials")
   @TypeSpec.Http.post
   @Rest.actionSeparator("/")
-  @Rest.action("withCredentials")
+  @Rest.action("getConnectionWithCredentials")
   getWithCredentials is ConnectionOperations.ResourceAction<
     Connection,
     {},
