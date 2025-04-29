@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "linkerName": "linkName",
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.App/containerApps/test-app"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "configurations": [
+          {
+            "name": "AZURE_POSTGRESQL_HOST",
+            "configType": "Default",
+            "value": "Host"
+          },
+          {
+            "name": "AZURE_POSTGRESQL_USER",
+            "configType": "Default",
+            "value": "Username"
+          },
+          {
+            "name": "AZURE_POSTGRESQL_DATABASE",
+            "configType": "Default",
+            "value": "DatabaseName"
+          },
+          {
+            "name": "AZURE_POSTGRESQL_PORT",
+            "configType": "Default",
+            "value": "Port"
+          },
+          {
+            "name": "AZURE_POSTGRESQL_PASSWORD",
+            "configType": "KeyVaultSecret",
+            "keyVaultReferenceIdentity": "system",
+            "value": "SecretUri"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Linker_ListConfigurations",
+  "title": "GetConfiguration"
+}
