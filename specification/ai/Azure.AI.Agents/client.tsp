@@ -17,10 +17,9 @@ using Azure.AI.Agents;
 @@access(Azure.AI.Agents.listAgents, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.listAgents, "InternalGetAgents", "csharp");
 @@access(Azure.AI.Agents.deleteAgent, Access.internal, "csharp");
-@@clientName(Azure.AI.Agents.deleteAgent,
-  "InternalDeleteAgent",
-  "csharp"
-);
+@@clientName(Azure.AI.Agents.deleteAgent, "InternalDeleteAgent", "csharp");
+
+@@access(Azure.AI.Agents.createThreadAndRun, Access.internal, "csharp");
 
 // --------------------------------------------------------------------------------
 // Files sub‐client (agent file operations)
@@ -164,15 +163,6 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
   "delete",
   "python"
-);
-
-@@access(Azure.AI.Agents.VectorStoreFiles.listVectorStoreFiles,
-  Access.internal,
-  "csharp"
-);
-@@clientName(Azure.AI.Agents.VectorStoreFiles.listVectorStoreFiles,
-  "InternalListFiles",
-  "csharp"
 );
 
 // --------------------------------------------------------------------------------
