@@ -111,6 +111,10 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     this.emitterName = emitterName;
   }
 
+  public getEmitterName() {
+    return this.emitterName;
+  }
+
   protected tryFindOption(config: any): Record<string, any> | undefined {
     let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
     for (const segment of this.keyToValidate.split(".")) {
@@ -487,6 +491,13 @@ export class SdkTspConfigValidationRule implements Rule {
   async execute(folder: string): Promise<RuleResult> {
     const tspConfigPath = join(folder, "tspconfig.yaml");
     const suppressions = await getSuppressions(tspConfigPath);
+
+    const shouldSuppressEntireRule = suppressions.some(
+      (s) => s.rules?.includes(this.name) === true && (!s.subRules || s.subRules.length === 0),
+    );
+    if (shouldSuppressEntireRule)
+      return { success: true, stdOutput: `[${this.name}]: validation skipped.` };
+
     this.setSuppressedKeyPaths(suppressions);
 
     const failedResults = [];
@@ -496,16 +507,30 @@ export class SdkTspConfigValidationRule implements Rule {
       if (this.suppressedKeyPaths.has(subRule.getPathOfKeyToValidate())) continue;
       const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
-      success &&= result.success;
+
+      let isSubRuleSuccess = result.success;
+
+      // TODO: remove when @azure-tools/typespec-csharp is ready for validating tspconfig
+      if (subRule instanceof TspconfigEmitterOptionsSubRuleBase) {
+        const emitterOptionSubRule = subRule as TspconfigEmitterOptionsSubRuleBase;
+        const emitterName = emitterOptionSubRule.getEmitterName();
+        if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
+          console.warn(`Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed.`);
+          isSubRuleSuccess = true;
+        }
+      }
+
+      success &&= isSubRuleSuccess;
     }
 
     const stdOutputFailedResults =
       failedResults.length > 0
-        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\n Please see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\n For additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation.`
+        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\nPlease see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\nFor additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation.`
         : "";
 
+    // NOTE: to avoid huge impact on existing PRs, we always return true with info/warning messages.
     return {
-      success: isManagementSdk(folder) ? success : true,
+      success: true,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
@@ -514,7 +539,10 @@ export class SdkTspConfigValidationRule implements Rule {
     this.suppressedKeyPaths = new Set<string>();
     for (const suppression of suppressions) {
       if (!suppression.rules?.includes(this.name)) continue;
-      for (const ignoredKey of suppression.subRules ?? []) this.suppressedKeyPaths.add(ignoredKey);
+      for (const ignoredKey of suppression.subRules ?? []) {
+        this.suppressedKeyPaths.add(ignoredKey);
+        console.warn(`Skip validation on ${ignoredKey}.`);
+      }
     }
   }
 }
