@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: Azure OpenAI Service API
   description: Azure OpenAI APIs for completions and search
-  version: 2025-03-01-preview
+  version: 2025-04-01-preview
 servers:
   - url: https://{endpoint}/openai
     variables:
@@ -30,7 +30,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -94,7 +94,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -203,7 +203,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -270,7 +270,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -313,7 +313,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -356,7 +356,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -377,7 +377,7 @@ paths:
           $ref: ./examples/audio_speech.yaml
   /deployments/{deployment-id}/images/generations:
     post:
-      summary: Generates a batch of images from a text caption on a given DALLE model deployment
+      summary: Generates a batch of images from a text caption on a given DALLE or gpt-image-1 model deployment
       operationId: ImageGenerations_Create
       requestBody:
         required: true
@@ -391,14 +391,14 @@ paths:
           required: true
           schema:
             type: string
-            example: dalle-deployment
-            description: Deployment id of the dalle model which was deployed.
+            example: gpt-image-1-deployment
+            description: Deployment id of the gpt-image-1 model which was deployed.
         - in: query
           name: api-version
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       responses:
         "200":
@@ -416,6 +416,47 @@ paths:
       x-ms-examples:
         Create an image.:
           $ref: ./examples/image_generation.yaml
+  /deployments/{deployment-id}/images/edits:
+    post:
+      summary: Edits an image from a text caption on a given gpt-image-1 model deployment
+      operationId: ImageGenerations_Edit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/imageEditsRequest'
+      parameters:
+      - in: path
+        name: deployment-id
+        required: true
+        schema:
+          type: string
+          example: gpt-image-1-deployment
+          description: Deployment id of the gpt-image-1 model which was deployed.
+      - in: query
+        name: api-version
+        required: true
+        schema:
+          type: string
+          example: 2025-04-01-preview
+          description: api version
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/generateImagesResponse'
+        default:
+          description: An error occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dalleErrorResponse'
+      x-ms-examples:
+        Create an image.:
+          $ref: ./examples/image_edits.json
   /assistants:
     get:
       operationId: List_Assistants
@@ -466,7 +507,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       responses:
         "200":
@@ -489,7 +530,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       requestBody:
         required: true
@@ -526,7 +567,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       responses:
         "200":
@@ -555,7 +596,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -590,7 +631,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       responses:
         "200":
@@ -614,7 +655,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -650,7 +691,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       responses:
         "200":
@@ -679,7 +720,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -714,7 +755,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       responses:
         "200":
@@ -787,7 +828,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       responses:
         "200":
@@ -816,7 +857,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -858,7 +899,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       responses:
         "200":
@@ -893,7 +934,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -923,7 +964,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -993,7 +1034,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       responses:
         "200":
@@ -1041,7 +1082,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -1083,7 +1124,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       responses:
         "200":
@@ -1118,7 +1159,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -1161,7 +1202,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
             description: api version
       requestBody:
         required: true
@@ -1203,7 +1244,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -1273,7 +1314,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
         - name: include[]
           in: query
@@ -1353,7 +1394,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -1407,7 +1448,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -1436,7 +1477,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -1467,7 +1508,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -1496,7 +1537,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       requestBody:
         required: true
@@ -1532,7 +1573,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -1607,7 +1648,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -1638,7 +1679,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       requestBody:
         required: true
@@ -1683,7 +1724,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -1718,7 +1759,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -1840,7 +1881,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       requestBody:
         required: true
@@ -1885,7 +1926,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -1922,7 +1963,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -2003,7 +2044,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2025-03-01-preview
+            example: 2025-04-01-preview
           description: api version
       responses:
         "200":
@@ -2015,7 +2056,68 @@ paths:
       x-ms-examples:
         List vector store files in a batch.:
           $ref: ./examples/list_vector_store_file_batch.yaml
+  /realtimeapi/sessions:
+    post:
+      summary: >
+        Create an ephemeral API token for use in client-side applications with
+        the Realtime API. Can be configured with the same session parameters as the
+        `session.update` client event.
 
+        It responds with a session object, plus a `client_secret` key which
+        contains a usable ephemeral API token that can be used to authenticate browser
+        clients for the Realtime API.
+      operationId: create_realtimeSession
+      tags:
+        - Realtime
+      requestBody:
+        description: Create an ephemeral API key with the given session configuration.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RealtimeSessionCreateRequest"
+      responses:
+        "200":
+          description: Session created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RealtimeSessionCreateResponse"
+      x-ms-examples:
+        Create an ephemeral token for a Realtime API session.:
+          $ref: ./examples/create_realtime_session.yaml
+  /realtimeapi/transcription_sessions:
+    post:
+      summary: >
+        Create an ephemeral API token for use in client-side applications with
+        the Realtime API specifically for realtime transcriptions. 
+
+        Can be configured with the same session parameters as the
+        `transcription_session.update` client event.
+
+        It responds with a session object, plus a `client_secret` key which
+        contains a usable ephemeral API token that can be used to authenticate browser
+        clients for the Realtime API.
+      operationId: create_transcriptionRealtimeSession
+      tags:
+        - Realtime
+      requestBody:
+        description: Create an ephemeral API key with the given session configuration.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RealtimeTranscriptionSessionCreateRequest"
+      responses:
+        "200":
+          description: Session created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RealtimeTranscriptionSessionCreateResponse"
+      x-ms-examples:
+        Create an ephemeral token for a Realtime API transcription session.:
+          $ref: ./examples/create_realtime_transcription_session.yaml
   /responses:
     post:
       summary: >
@@ -5223,19 +5325,29 @@ components:
       description: The quality of the image that will be generated.
       type: string
       enum:
-        - standard
+        - auto
+        - high
+        - medium
+        - low
         - hd
-      default: standard
+        - standard
+      default: auto
       x-ms-enum:
-        name: Quality
+        name: ImageQuality
         modelAsString: true
         values:
-          - value: standard
-            description: Standard quality creates images with standard quality.
-            name: Standard
+          - value: auto
+            description: Automatically selects the best quality for the given model.
+          - value: high
+            description: High quality. Supported for gpt-image-1.
+          - value: medium
+            description: Medium quality. Supported for gpt-image-1.
+          - value: low
+            description: Low quality. Supported for gpt-image-1.
           - value: hd
-            description: HD quality creates images with finer details and greater consistency across the image.
-            name: HD
+            description: HD quality. Supported for dall-e-3.
+          - value: standard
+            description: Standard quality. Supported for dall-e-3.
     imagesResponseFormat:
       description: The format in which the generated images are returned.
       type: string
@@ -5248,31 +5360,46 @@ components:
         modelAsString: true
         values:
           - value: url
-            description: The URL that provides temporary access to download the generated images.
+            description: The URL that provides temporary access to download the generated images. Only supported for dall-e-3.
             name: Url
           - value: b64_json
             description: The generated images are returned as base64 encoded string.
             name: Base64Json
+    imagesOutputFormat:
+      description: Specifies the file format for the generated images. Only supported for gpt-image-1.
+      type: string
+      enum:
+      - png
+      - jpeg
+      default: png
+      x-ms-enum:
+        name: imagesOutputFormat
+        modelAsString: true
+        values:
+        - value: png
+          description: The generated image is in png format.
+          name: png
+        - value: jpeg
+          description: The generated image is in jpeg format.
+          name: jpeg
     imageSize:
       description: The size of the generated images.
       type: string
       enum:
-        - 256x256
-        - 512x512
+        - auto
         - 1792x1024
         - 1024x1792
         - 1024x1024
-      default: 1024x1024
+        - 1024x1536
+        - 1536x1024
+      default: auto
       x-ms-enum:
         name: Size
         modelAsString: true
         values:
-          - value: 256x256
-            description: The desired size of the generated image is 256x256 pixels. Only supported for dall-e-2.
-            name: Size256x256
-          - value: 512x512
-            description: The desired size of the generated image is 512x512 pixels. Only supported for dall-e-2.
-            name: Size512x512
+          - value: auto
+            description: The size of the generated image is automatically selected based on the model. Only supported for gpt-image-1.
+            name: Auto
           - value: 1792x1024
             description: The desired size of the generated image is 1792x1024 pixels. Only supported for dall-e-3.
             name: Size1792x1024
@@ -5282,8 +5409,14 @@ components:
           - value: 1024x1024
             description: The desired size of the generated image is 1024x1024 pixels.
             name: Size1024x1024
+          - value: 1024x1536
+            description: The desired size of the generated image is 1024x1536 pixels. Only supported for gpt-image-1.
+            name: Size1024x1536
+          - value: 1536x1024
+            description: The desired size of the generated image is 1536x1024 pixels. Only supported for gpt-image-1.
+            name: Size1536x1024
     imageStyle:
-      description: The style of the generated images.
+      description: The style of the generated images. Only supported for dall-e-3.
       type: string
       enum:
         - vivid
@@ -5299,35 +5432,108 @@ components:
           - value: natural
             description: Natural creates images that are more natural and less hyper-realistic.
             name: Natural
+    imageBackground:
+      description: Allows to set transparency for the background of the generated image(s). This parameter is only supported for gpt-image-1.
+      type: string
+      enum:
+        - transparent
+        - opaque
+        - auto
+      default: auto
+      x-ms-enum:
+        name: Background
+        modelAsString: true
+        values:
+          - value: transparent
+            description: The background of the generated image will be transparent. The output format needs to support transparency (e.g., png).
+            name: Transparent
+          - value: opaque
+            description: The background of the generated image will be opaque.
+            name: Opaque
+          - value: auto
+            description: The background of the generated image will be opaque.
+            name: Auto
     imageGenerationsRequest:
       type: object
       properties:
         prompt:
-          description: A text description of the desired image(s). The maximum length is 4000 characters.
+          description: A text description of the desired image(s). The maximum length is 32000 characters for gpt-image-1 and 4000 characters for dall-e-3
           type: string
           format: string
           example: a corgi in a field
           minLength: 1
-        "n":
-          description: The number of images to generate.
+        background:
+          $ref: "#/components/schemas/imageBackground"
+        n:
+          description: The number of images to generate. For dall-e-3, only n=1 is supported.
           type: integer
           minimum: 1
-          maximum: 1
+          maximum: 10
           default: 1
-        size:
-          $ref: "#/components/schemas/imageSize"
+        output_compression:
+          type: integer
+          description: The compression level (0-100%) for the generated images. This parameter is only supported for gpt-image-1 with the jpeg output format.
+          minimum: 0
+          maximum: 100
+          default: 100
+        output_format:
+          $ref: "#/components/schemas/imagesOutputFormat"
+        quality:
+          $ref: "#/components/schemas/imageQuality"
         response_format:
           $ref: "#/components/schemas/imagesResponseFormat"
+        size:
+          $ref: "#/components/schemas/imageSize"
+        style:
+          $ref: "#/components/schemas/imageStyle"
         user:
           description: A unique identifier representing your end-user, which can help to monitor and detect abuse.
           type: string
           format: string
           example: user123456
+      required:
+        - prompt
+    imageEditsRequest:
+      type: object
+      properties:
+        image:
+          description: The image(s) to edit. Must be a supported image file or an array of images. Each image should be a png, or jpg file less than 25MB.
+          oneOf:
+            - type: string
+              format: binary
+            - type: array
+              items:
+                type: string
+                format: binary
+        prompt:
+          description: A text description of the desired image(s). The maximum length is 32000 characters.
+          type: string
+          format: string
+          example: a corgi in a field
+          minLength: 1
+        mask:
+          description: An additional image whose fully transparent areas (e.g., where alpha is zero) indicate where the image should be edited. If there are multiple images provided, the mask will be applied to the first image. Must be a valid PNG file, less than 4MB, and have the same dimensions as the image.
+          type: string
+          format: binary
+        n:
+          description: The number of images to generate.
+          type: integer
+          minimum: 1
+          maximum: 10
+          default: 1
         quality:
           $ref: "#/components/schemas/imageQuality"
-        style:
-          $ref: "#/components/schemas/imageStyle"
+        response_format:
+          $ref: "#/components/schemas/imagesResponseFormat"
+        size:
+          $ref: "#/components/schemas/imageSize"
+        user:
+          description: A unique identifier representing your end-user, which can help to monitor and detect abuse.
+          type: string
+          format: string
+          example: user123456
       required:
+        - image
         - prompt
     generateImagesResponse:
       type: object
@@ -5342,6 +5548,8 @@ components:
           description: The result data of the operation, if successful
           items:
             $ref: "#/components/schemas/imageResult"
+        usage:
+          $ref: "#/components/schemas/imageGenerationsUsage"
       required:
         - created
         - data
@@ -5363,6 +5571,34 @@ components:
           description: The prompt that was used to generate the image, if there was any revision to the prompt.
         prompt_filter_results:
           $ref: "#/components/schemas/dalleFilterResults"
+    imageGenerationsUsage:
+      type: object
+      description: Represents token usage details for image generation requests. Only for gpt-image-1.
+      properties:
+        total_tokens:
+          type: integer
+          description: The total number of tokens used.
+          example: 100
+        input_tokens:
+          type: integer
+          description: The number of input tokens.
+          example: 50
+        output_tokens:
+          type: integer
+          description: The number of output tokens.
+          example: 50
+        input_tokens_details:
+          type: object
+          description: A detailed breakdown of the input tokens.
+          properties:
+            text_tokens:
+              type: integer
+              description: The number of text tokens.
+              example: 10
+            image_tokens:
+              type: integer
+              description: The number of image tokens.
+              example: 40
     line:
       type: object
       description: A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.
@@ -10511,6 +10747,693 @@ components:
         - type
         - text
         - annotations
+    RealtimeSessionCreateRequest:
+      type: object
+      description: Realtime session object configuration.
+      properties:
+        modalities:
+          description: |
+            The set of modalities the model can respond with. To disable audio,
+            set this to ["text"].
+          items:
+            type: string
+            default:
+              - text
+              - audio
+            enum:
+              - text
+              - audio
+        model:
+          type: string
+          description: |
+            The name of the deployment used for this session.
+        instructions:
+          type: string
+          description: >
+            The default system instructions (i.e. system message) prepended to
+            model calls. This field allows the client to guide the model on
+            desired responses. The model can be instructed on response content
+            and format, (e.g. "be extremely succinct", "act friendly", "here
+            are examples of good  responses") and on audio behavior (e.g. "talk
+            quickly", "inject emotion into your voice", "laugh frequently").
+            The instructions are not guaranteed to be followed by the model,
+            but they provide guidance to the model on the desired behavior.
+
+
+            Note that the server sets default instructions which will be used if
+            this  field is not set and are visible in the `session.created`
+            event at the  start of the session.
+        voice:
+          $ref: "#/components/schemas/VoiceIdsShared"
+          description: >
+            The voice the model uses to respond. Voice cannot be changed during
+            the session once the model has responded with audio at least once.
+            Current voice options are `alloy`, `ash`, `ballad`, `coral`, `echo`,
+            `fable`, `onyx`, `nova`, `sage`, `shimmer`, and `verse`.
+        input_audio_format:
+          type: string
+          default: pcm16
+          enum:
+            - pcm16
+            - g711_ulaw
+            - g711_alaw
+          description: >
+            The format of input audio. Options are `pcm16`, `g711_ulaw`, or
+            `g711_alaw`.
+
+            For `pcm16`, input audio must be 16-bit PCM at a 24kHz sample rate, 
+            single channel (mono), and little-endian byte order.
+        output_audio_format:
+          type: string
+          default: pcm16
+          enum:
+            - pcm16
+            - g711_ulaw
+            - g711_alaw
+          description: >
+            The format of output audio. Options are `pcm16`, `g711_ulaw`, or
+            `g711_alaw`.
+
+            For `pcm16`, output audio is sampled at a rate of 24kHz.
+        input_audio_transcription:
+          type: object
+          description: >
+            Configuration for input audio transcription, defaults to off and can
+            be set to `null` to turn off once on. Input audio transcription is
+            not native to the model, since the model consumes audio directly.
+            Transcription runs asynchronously through [the Transcriptions
+            endpoint](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference-preview#transcriptions---create)
+            and should be treated as guidance of input audio content rather than
+            precisely what the model heard. The client can optionally set the
+            language and prompt for transcription, these offer additional
+            guidance to the transcription service.
+          properties:
+            model:
+              type: string
+              description: >
+                The model to use for transcription, current options are
+                `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, and `whisper-1`.
+            language:
+              type: string
+              description: >
+                The language of the input audio. Supplying the input language in
+
+                [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+                (e.g. `en`) format will improve accuracy and latency.
+            prompt:
+              type: string
+              description: >
+                An optional text to guide the model's style or continue a
+                previous audio segment.
+
+                For `whisper-1`, the [prompt is a list of
+                keywords](/docs/guides/speech-to-text#prompting).
+
+                For `gpt-4o-transcribe` models, the prompt is a free text
+                string, for example "expect words related to technology".
+        turn_detection:
+          type: object
+          description: >
+            Configuration for turn detection, ether Server VAD or Semantic VAD.
+            This can be set to `null` to turn off, in which case the client must
+            manually trigger model response.
+
+            Server VAD means that the model will detect the start and end of
+            speech based on audio volume and respond at the end of user speech.
+
+            Semantic VAD is more advanced and uses a turn detection model (in
+            conjunction with VAD) to semantically estimate whether the user has
+            finished speaking, then dynamically sets a timeout based on this
+            probability. For example, if user audio trails off with "uhhm", the
+            model will score a low probability of turn end and wait longer for
+            the user to continue speaking. This can be useful for more natural
+            conversations, but may have a higher latency.
+          properties:
+            type:
+              type: string
+              default: server_vad
+              enum:
+                - server_vad
+                - semantic_vad
+              description: |
+                Type of turn detection.
+            eagerness:
+              type: string
+              default: auto
+              enum:
+                - low
+                - medium
+                - high
+                - auto
+              description: >
+                Used only for `semantic_vad` mode. The eagerness of the model to
+                respond. `low` will wait longer for the user to continue
+                speaking, `high` will respond more quickly. `auto` is the
+                default and is equivalent to `medium`.
+            threshold:
+              type: number
+              description: >
+                Used only for `server_vad` mode. Activation threshold for VAD
+                (0.0 to 1.0), this defaults to 0.5. A higher threshold will require
+                louder audio to activate the model, and thus might perform better in
+                noisy environments.
+            prefix_padding_ms:
+              type: integer
+              description: >
+                Used only for `server_vad` mode. Amount of audio to include
+                before the VAD detected speech (in 
+
+                milliseconds). Defaults to 300ms.
+            silence_duration_ms:
+              type: integer
+              description: >
+                Used only for `server_vad` mode. Duration of silence to detect
+                speech stop (in milliseconds). Defaults 
+
+                to 500ms. With shorter values the model will respond more
+                quickly, 
+
+                but may jump in on short pauses from the user.
+            create_response:
+              type: boolean
+              default: true
+              description: >
+                Whether or not to automatically generate a response when a VAD
+                stop event occurs.
+            interrupt_response:
+              type: boolean
+              default: true
+              description: >
+                Whether or not to automatically interrupt any ongoing response
+                with output to the default
+
+                conversation (i.e. `conversation` of `auto`) when a VAD start
+                event occurs.
+        input_audio_noise_reduction:
+          type: object
+          default: null
+          description: >
+            Configuration for input audio noise reduction. This can be set to
+            `null` to turn off.
+
+            Noise reduction filters audio added to the input audio buffer before
+            it is sent to VAD and the model.
+
+            Filtering the audio can improve VAD and turn detection accuracy
+            (reducing false positives) and model performance by improving
+            perception of the input audio.
+          properties:
+            type:
+              type: string
+              enum:
+                - near_field
+                - far_field
+              description: >
+                Type of noise reduction. `near_field` is for close-talking
+                microphones such as headphones, `far_field` is for far-field
+                microphones such as laptop or conference room microphones.
+        tools:
+          type: array
+          description: Tools (functions) available to the model.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                  - function
+                description: The type of the tool, i.e. `function`.
+                x-stainless-const: true
+              name:
+                type: string
+                description: The name of the function.
+              description:
+                type: string
+                description: >
+                  The description of the function, including guidance on when
+                  and how 
+
+                  to call it, and guidance about what to tell the user when
+                  calling 
+
+                  (if anything).
+              parameters:
+                type: object
+                description: Parameters of the function in JSON Schema.
+        tool_choice:
+          type: string
+          default: auto
+          description: >
+            How the model chooses tools. Options are `auto`, `none`, `required`,
+            or 
+
+            specify a function.
+        temperature:
+          type: number
+          default: 0.8
+          description: >
+            Sampling temperature for the model, limited to [0.6, 1.2]. For audio
+            models a temperature of 0.8 is highly recommended for best
+            performance.
+        max_response_output_tokens:
+          oneOf:
+            - type: integer
+            - type: string
+              enum:
+                - inf
+              x-stainless-const: true
+          description: |
+            Maximum number of output tokens for a single assistant response,
+            inclusive of tool calls. Provide an integer between 1 and 4096 to
+            limit output tokens, or `inf` for the maximum available tokens for a
+            given model. Defaults to `inf`.
+    RealtimeSessionCreateResponse:
+      type: object
+      description: >
+        A new Realtime session configuration, with an ephemeral key. Default
+        TTL for keys is one minute.
+      properties:
+        client_secret:
+          type: object
+          description: Ephemeral key returned by the API.
+          properties:
+            value:
+              type: string
+              description: >
+                Ephemeral key usable in client environments to authenticate
+                connections to the Realtime API. Use this in client-side
+                environments rather than a standard API token, which should only
+                be used server-side.
+            expires_at:
+              type: integer
+              description: >
+                Timestamp for when the token expires. Currently, all tokens
+                expire after one minute.
+          required:
+            - value
+            - expires_at
+        modalities:
+          description: |
+            The set of modalities the model can respond with. To disable audio,
+            set this to ["text"].
+          items:
+            type: string
+            enum:
+              - text
+              - audio
+        instructions:
+          type: string
+          description: >
+            The default system instructions (i.e. system message) prepended to
+            model calls. This field allows the client to guide the model on desired 
+            responses. The model can be instructed on response content and
+            format, (e.g. "be extremely succinct", "act friendly", "here are examples of
+            good responses") and on audio behavior (e.g. "talk quickly", "inject
+            emotion into your voice", "laugh frequently"). The instructions are not
+            guaranteed to be followed by the model, but they provide guidance to the model
+            on the desired behavior.
+
+            Note that the server sets default instructions which will be used if
+            this field is not set and are visible in the `session.created` event at
+            the start of the session.
+        voice:
+          $ref: "#/components/schemas/VoiceIdsShared"
+          description: >
+            The voice the model uses to respond. Voice cannot be changed during
+            the session once the model has responded with audio at least once.
+            Current voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`, 
+            `shimmer` and `verse`.
+        input_audio_format:
+          type: string
+          description: >
+            The format of input audio. Options are `pcm16`, `g711_ulaw`, or
+            `g711_alaw`.
+        output_audio_format:
+          type: string
+          description: >
+            The format of output audio. Options are `pcm16`, `g711_ulaw`, or
+            `g711_alaw`.
+        input_audio_transcription:
+          type: object
+          description: >
+            Configuration for input audio transcription, defaults to off and can
+            be set to `null` to turn off once on. Input audio transcription is not
+            native to the model, since the model consumes audio directly. Transcription
+            runs asynchronously through Whisper and should be treated as rough
+            guidance rather than the representation understood by the model.
+          properties:
+            model:
+              type: string
+              description: >
+                The model to use for transcription, `whisper-1` is the only
+                currently supported model.
+        turn_detection:
+          type: object
+          description: >
+            Configuration for turn detection. Can be set to `null` to turn off.
+            Server VAD means that the model will detect the start and end of speech
+            based on audio volume and respond at the end of user speech.
+          properties:
+            type:
+              type: string
+              description: >
+                Type of turn detection, only `server_vad` is currently supported.
+            threshold:
+              type: number
+              description: >
+                Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5.
+                A higher threshold will require louder audio to activate the
+                model, and thus might perform better in noisy environments.
+            prefix_padding_ms:
+              type: integer
+              description: |
+                Amount of audio to include before the VAD detected speech (in 
+                milliseconds). Defaults to 300ms.
+            silence_duration_ms:
+              type: integer
+              description: >
+                Duration of silence to detect speech stop (in milliseconds).
+                Defaults to 500ms. With shorter values the model will respond more
+                quickly, but may jump in on short pauses from the user.
+        tools:
+          type: array
+          description: Tools (functions) available to the model.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                  - function
+                description: The type of the tool, i.e. `function`.
+                x-stainless-const: true
+              name:
+                type: string
+                description: The name of the function.
+              description:
+                type: string
+                description: >
+                  The description of the function, including guidance on when
+                  and how to call it, and guidance about what to tell the user when
+                  calling (if anything).
+              parameters:
+                type: object
+                description: Parameters of the function in JSON Schema.
+        tool_choice:
+          type: string
+          description: >
+            How the model chooses tools. Options are `auto`, `none`, `required`,
+            or specify a function.
+        temperature:
+          type: number
+          description: >
+            Sampling temperature for the model, limited to [0.6, 1.2]. Defaults
+            to 0.8.
+        max_response_output_tokens:
+          oneOf:
+            - type: integer
+            - type: string
+              enum:
+                - inf
+              x-stainless-const: true
+          description: |
+            Maximum number of output tokens for a single assistant response,
+            inclusive of tool calls. Provide an integer between 1 and 4096 to
+            limit output tokens, or `inf` for the maximum available tokens for a
+            given model. Defaults to `inf`.
+      required:
+        - client_secret
+    RealtimeTranscriptionSessionCreateRequest:
+      type: object
+      description: Realtime transcription session object configuration.
+      properties:
+        modalities:
+          description: |
+            The set of modalities the model can respond with. To disable audio,
+            set this to ["text"].
+          items:
+            type: string
+            default:
+              - text
+              - audio
+            enum:
+              - text
+              - audio
+        input_audio_format:
+          type: string
+          default: pcm16
+          enum:
+            - pcm16
+            - g711_ulaw
+            - g711_alaw
+          description: >
+            The format of input audio. Options are `pcm16`, `g711_ulaw`, or
+            `g711_alaw`.
+
+            For `pcm16`, input audio must be 16-bit PCM at a 24kHz sample rate, 
+            single channel (mono), and little-endian byte order.
+        input_audio_transcription:
+          type: object
+          description: >
+            Configuration for input audio transcription. The client can
+            optionally set the language and prompt for transcription, these
+            offer additional guidance to the transcription service.
+          properties:
+            model:
+              type: string
+              description: >
+                The model to use for transcription, current options are
+                `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, and `whisper-1`.
+              enum:
+                - gpt-4o-transcribe
+                - gpt-4o-mini-transcribe
+                - whisper-1
+            language:
+              type: string
+              description: >
+                The language of the input audio. Supplying the input language in
+
+                [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+                (e.g. `en`) format will improve accuracy and latency.
+            prompt:
+              type: string
+              description: >
+                An optional text to guide the model's style or continue a
+                previous audio segment.
+
+                For `whisper-1`, the prompt is a list of keywords.
+
+                For `gpt-4o-transcribe` models, the prompt is a free text
+                string, for example "expect words related to technology".
+        turn_detection:
+          type: object
+          description: >
+            Configuration for turn detection, ether Server VAD or Semantic VAD.
+            This can be set to `null` to turn off, in which case the client must
+            manually trigger model response.
+
+            Server VAD means that the model will detect the start and end of
+            speech based on audio volume and respond at the end of user speech.
+
+            Semantic VAD is more advanced and uses a turn detection model (in
+            conjunction with VAD) to semantically estimate whether the user has
+            finished speaking, then dynamically sets a timeout based on this
+            probability. For example, if user audio trails off with "uhhm", the
+            model will score a low probability of turn end and wait longer for
+            the user to continue speaking. This can be useful for more natural
+            conversations, but may have a higher latency.
+          properties:
+            type:
+              type: string
+              default: server_vad
+              enum:
+                - server_vad
+                - semantic_vad
+              description: |
+                Type of turn detection.
+            eagerness:
+              type: string
+              default: auto
+              enum:
+                - low
+                - medium
+                - high
+                - auto
+              description: >
+                Used only for `semantic_vad` mode. The eagerness of the model to
+                respond. `low` will wait longer for the user to continue
+                speaking, `high` will respond more quickly. `auto` is the
+                default and is equivalent to `medium`.
+            threshold:
+              type: number
+              description: >
+                Used only for `server_vad` mode. Activation threshold for VAD
+                (0.0 to 1.0), this defaults to 0.5. A 
+
+                higher threshold will require louder audio to activate the
+                model, and 
+
+                thus might perform better in noisy environments.
+            prefix_padding_ms:
+              type: integer
+              description: >
+                Used only for `server_vad` mode. Amount of audio to include
+                before the VAD detected speech (in 
+
+                milliseconds). Defaults to 300ms.
+            silence_duration_ms:
+              type: integer
+              description: >
+                Used only for `server_vad` mode. Duration of silence to detect
+                speech stop (in milliseconds). Defaults to 500ms. With shorter
+                values the model will respond more quickly, 
+                but may jump in on short pauses from the user.
+            create_response:
+              type: boolean
+              default: true
+              description: >
+                Whether or not to automatically generate a response when a VAD
+                stop event occurs. Not available for transcription sessions.
+            interrupt_response:
+              type: boolean
+              default: true
+              description: >
+                Whether or not to automatically interrupt any ongoing response
+                with output to the default conversation (i.e. `conversation`
+                of `auto`) when a VAD start event occurs. Not available for
+                transcription sessions.
+        input_audio_noise_reduction:
+          type: object
+          default: null
+          description: >
+            Configuration for input audio noise reduction. This can be set to
+            `null` to turn off.
+
+            Noise reduction filters audio added to the input audio buffer before
+            it is sent to VAD and the model.
+
+            Filtering the audio can improve VAD and turn detection accuracy
+            (reducing false positives) and model performance by improving
+            perception of the input audio.
+          properties:
+            type:
+              type: string
+              enum:
+                - near_field
+                - far_field
+              description: >
+                Type of noise reduction. `near_field` is for close-talking
+                microphones such as headphones, `far_field` is for far-field
+                microphones such as laptop or conference room microphones.
+        include:
+          type: array
+          items:
+            type: string
+          description: >
+            The set of items to include in the transcription. Current available
+            items are:
+
+            - `item.input_audio_transcription.logprobs`
+    RealtimeTranscriptionSessionCreateResponse:
+      type: object
+      description: >
+        A new Realtime transcription session configuration.
+
+
+        When a session is created on the server via REST API, the session object
+        also contains an ephemeral key. Default TTL for keys is one minute.
+        This property is not present when a session is updated via the WebSocket API.
+      properties:
+        client_secret:
+          type: object
+          description: |
+            Ephemeral key returned by the API. Only present when the session is
+            created on the server via REST API.
+          properties:
+            value:
+              type: string
+              description: >
+                Ephemeral key usable in client environments to authenticate
+                connections to the Realtime API. Use this in client-side environments rather
+                than a standard API token, which should only be used server-side.
+            expires_at:
+              type: integer
+              description: >
+                Timestamp for when the token expires. Currently, all tokens
+                expire after one minute.
+          required:
+            - value
+            - expires_at
+        modalities:
+          description: |
+            The set of modalities the model can respond with. To disable audio,
+            set this to ["text"].
+          items:
+            type: string
+            enum:
+              - text
+              - audio
+        input_audio_format:
+          type: string
+          description: >
+            The format of input audio. Options are `pcm16`, `g711_ulaw`, or
+            `g711_alaw`.
+        input_audio_transcription:
+          type: object
+          description: |
+            Configuration of the transcription model.
+          properties:
+            model:
+              type: string
+              description: >
+                The model to use for transcription. Can be `gpt-4o-transcribe`,
+                `gpt-4o-mini-transcribe`, or `whisper-1`.
+              enum:
+                - gpt-4o-transcribe
+                - gpt-4o-mini-transcribe
+                - whisper-1
+            language:
+              type: string
+              description: >
+                The language of the input audio. Supplying the input language in
+                [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+                (e.g. `en`) format will improve accuracy and latency.
+            prompt:
+              type: string
+              description: >
+                An optional text to guide the model's style or continue a
+                previous audio segment. The prompt
+                should match the audio language.
+        turn_detection:
+          type: object
+          description: >
+            Configuration for turn detection. Can be set to `null` to turn off.
+            Server VAD means that the model will detect the start and end of speech
+            based on audio volume and respond at the end of user speech.
+          properties:
+            type:
+              type: string
+              description: >
+                Type of turn detection, only `server_vad` is currently supported.
+            threshold:
+              type: number
+              description: >
+                Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5.
+                A higher threshold will require louder audio to activate the
+                model, and thus might perform better in noisy environments.
+            prefix_padding_ms:
+              type: integer
+              description: |
+                Amount of audio to include before the VAD detected speech (in 
+                milliseconds). Defaults to 300ms.
+            silence_duration_ms:
+              type: integer
+              description: >
+                Duration of silence to detect speech stop (in milliseconds).
+                Defaults to 500ms. With shorter values the model will respond more
+                quickly, but may jump in on short pauses from the user.
+      required:
+        - client_secret
     Reasoning:
       type: object
       description: |
@@ -12773,6 +13696,23 @@ components:
         - next_page
       x-oaiMeta:
         name: Vector store search results page
+    VoiceIdsShared:
+      example: ash
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - alloy
+            - ash
+            - ballad
+            - coral
+            - echo
+            - fable
+            - onyx
+            - nova
+            - sage
+            - shimmer
+            - verse
     Wait:
       type: object
       title: Wait
