@@ -106,6 +106,14 @@ model AddonHcxProperties extends AddonProperties {
 
   @doc("The type of private cloud addon")
   addonType: AddonType.HCX;
+
+  @doc("HCX management network.")
+  @added(Versions.v2024_09_01)
+  managementNetwork?: string;
+
+  @doc("HCX uplink network")
+  @added(Versions.v2024_09_01)
+  uplinkNetwork?: string;
 }
 
 @doc("The properties of an Arc addon")
