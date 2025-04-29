@@ -495,6 +495,7 @@ model SavingsPlanOrderModelProperties {
   @visibility(Lifecycle.Read)
   billingProfileId?: Azure.Core.armResourceIdentifier<[
     {
+      scoped: ["Tenant"];
       type: "Microsoft.Billing/billingAccounts";
     }
   ]>;
@@ -872,6 +873,11 @@ model UtilizationAggregates {
 model RenewProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   purchaseProperties?: PurchaseRequest;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ResourceSku {
+  name?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1646,6 +1652,7 @@ model DiscountTypeProperties {
   /**
    * Array of conditions for the discount. Validation: Optional. Maximum length is 1000.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   conditions?: ConditionsItem[];
 }
 
@@ -1744,6 +1751,8 @@ model DiscountTypeProductSku extends DiscountTypeProperties {
 /**
  * Discount type properties including product family name, product id, sku, and custom price properties. Allows a single entry in marketSetPrices.
  */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @discriminator("discountType")
 model DiscountTypeCustomPrice extends DiscountTypeProperties {
   /**
@@ -1784,6 +1793,7 @@ model CustomPriceProperties {
   /**
    * The set of BigCat claims. Validation: Required. Must contain AgreementType, NationalCloud, and PricingAudience claims. Additionally requires AccessPass claim when creating custom price with action == consume on the pricing instructions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   catalogClaims: CatalogClaimsItem[];
 
   /**
@@ -1804,6 +1814,7 @@ model CustomPriceProperties {
   /**
    * The set of market set prices of the priceable node. Validation: Required. Must contain at least one element.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   marketSetPrices: MarketSetPricesItems[];
 }
 
@@ -1838,6 +1849,7 @@ model MarketSetPricesItems {
 /**
  * Discount type properties including product family name, product id, sku, and custom price properties. Allows multiple entries in marketSetPrices.
  */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator"
 model DiscountTypeCustomPriceMultiCurrency extends DiscountTypeCustomPrice {
   /**
    * Defines the type of discount. Supported values are ProductFamily, Product, Sku, CustomPrice, and CustomPriceMultiCurrency.

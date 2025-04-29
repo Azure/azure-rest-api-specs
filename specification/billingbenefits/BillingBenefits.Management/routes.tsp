@@ -68,6 +68,7 @@ interface SavingsPlanOperationGroup {
    * Validate savings plan purchase.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @autoRoute
   @action("validate")
   @operationId("ValidatePurchase")
@@ -77,11 +78,13 @@ interface SavingsPlanOperationGroup {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface DiscountsOperationGroup {
   /**
    * List discounts that are applicable for a given scope. Currently supported scopes: billing accounts
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @operationId("Discounts_ScopeList")
   @route("/{scope}/providers/Microsoft.BillingBenefits/applicableDiscounts")
   @get

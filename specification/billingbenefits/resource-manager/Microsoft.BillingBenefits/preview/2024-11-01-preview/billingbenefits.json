@@ -240,7 +240,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1328,16 +1328,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.ResourceSkuProperty": {
-      "type": "object",
-      "description": "The SKU (Stock Keeping Unit) assigned to this resource.",
-      "properties": {
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        }
-      }
-    },
     "BillingPlan": {
       "type": "string",
       "description": "Represents the billing plan in ISO 8601 format. Required only for monthly billing plans.",
@@ -1509,8 +1499,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DiscountProperties",
-          "description": "Discount properties",
-          "x-ms-client-flatten": true
+          "description": "Discount properties"
         }
       },
       "allOf": [
@@ -1599,7 +1588,8 @@
           "description": "The Discount items on this page",
           "items": {
             "$ref": "#/definitions/Discount"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1773,8 +1763,7 @@
             "value": "Failed"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "DiscountRuleType": {
       "type": "string",
@@ -2205,8 +2194,7 @@
             "value": "Cancelled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "Price": {
       "type": "object",
@@ -2349,14 +2337,13 @@
             "value": "Failed"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PurchaseRequest": {
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty",
+          "$ref": "#/definitions/ResourceSku",
           "description": "The SKU to be applied for this resource"
         },
         "properties": {
@@ -2421,7 +2408,7 @@
       "description": "Reservation order alias",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty",
+          "$ref": "#/definitions/ResourceSku",
           "description": "Reservation order SKU"
         },
         "location": {
@@ -2516,7 +2503,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty",
+          "$ref": "#/definitions/ResourceSku",
           "description": "Reservation order SKU"
         },
         "location": {
@@ -2774,6 +2761,14 @@
         }
       }
     },
+    "ResourceSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "RoleAssignmentEntity": {
       "type": "object",
       "description": "Role assignment entity",
@@ -2821,7 +2816,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty",
+          "$ref": "#/definitions/ResourceSku",
           "description": "Savings plan SKU"
         }
       },
@@ -3021,7 +3016,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty",
+          "$ref": "#/definitions/ResourceSku",
           "description": "Savings plan SKU"
         },
         "kind": {
@@ -3096,7 +3091,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty",
+          "$ref": "#/definitions/ResourceSku",
           "description": "Savings plan SKU"
         }
       },
@@ -3155,6 +3150,9 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "scoped": [
+                  "Tenant"
+                ],
                 "type": "Microsoft.Billing/billingAccounts"
               }
             ]

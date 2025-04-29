@@ -36,6 +36,7 @@ model ReservationOrderAliasResponse
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 @armResourceOperations
 interface ReservationOrderAliasResponses {
   /**
@@ -62,7 +63,7 @@ interface ReservationOrderAliasResponses {
     ReservationOrderAliasRequest,
     ReservationOrderAliasResponse | ArmResourceCreatedResponse<
       ReservationOrderAliasResponse,
-      LroHeaders = ArmAsyncOperationHeader &
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = ReservationOrderAliasResponse> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
     ErrorResponse

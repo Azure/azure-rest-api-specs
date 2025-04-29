@@ -40,6 +40,7 @@ interface Discounts {
    * Update discounts
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   @patch(#{ implicitOptionality: false })
   @operationId("Discount_Update")
   update is ArmCustomPatchAsync<
@@ -78,6 +79,7 @@ interface Discounts {
   /**
    * Cancel discount. Stops applying the benefit.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   cancel is ArmResourceActionAsync<
     Discount,
     void,
