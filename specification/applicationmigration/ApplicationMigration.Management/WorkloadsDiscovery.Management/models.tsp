@@ -193,6 +193,11 @@ union Encoding {
   string,
 
   /**
+   * Unknown Encoding.
+   */
+  UNKNOWN: "UNKNOWN",
+
+  /**
    * Big Five character set for Traditional Chinese.
    */
   BIG5: "BIG5",
@@ -824,7 +829,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * Indicates whether the super user access is enabled on the instance.
    */
-  isSuperUserAccessEnabled;
+  isSuperUserAccessEnabled?: BoolValue;
 
   /**
    * Resource tags
@@ -1003,7 +1008,7 @@ model PgsqlInstanceResourcePatch {
   /**
    * Indicates whether the super user access is enabled on the instance.
    */
-  isSuperUserAccessEnabled;
+  isSuperUserAccessEnabled?: BoolValue;
 
   /**
    * Resource tags
@@ -1185,7 +1190,7 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * Indicates whether the access to the machine's file system is enabled for the database objects.
    */
-  fileSystemAccessEnabled? ?: BoolValue;
+  fileSystemAccessEnabled?: BoolValue;
 
   /**
    * The number of errors.
@@ -1295,7 +1300,7 @@ model PgsqlDatabaseResourcePatch {
   /**
    * Indicates whether the access to the machine's file system is enabled for the database objects.
    */
-  fileSystemAccessEnabled? ?: BoolValue;
+  fileSystemAccessEnabled?: BoolValue;
 
   /**
    * The number of errors.
