@@ -318,7 +318,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OnlineExperimentWorkspaceUpdate"
+              "$ref": "#/definitions/OnlineExperimentWorkspacePatch"
             }
           }
         ],
@@ -454,24 +454,6 @@
         }
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -605,6 +587,61 @@
         "value"
       ]
     },
+    "OnlineExperimentWorkspacePatch": {
+      "type": "object",
+      "description": "Partial update of an online experiment workspace resource.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/OnlineExperimentationWorkspaceSkuUpdate",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Updatable properties of the online experiment workspace resource.",
+          "properties": {
+            "logAnalyticsWorkspaceResourceId": {
+              "type": "string",
+              "format": "arm-id",
+              "description": "The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.OperationalInsights/workspaces"
+                  }
+                ]
+              }
+            },
+            "logsExporterStorageAccountResourceId": {
+              "type": "string",
+              "format": "arm-id",
+              "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.Storage/storageAccounts"
+                  }
+                ]
+              }
+            },
+            "encryption": {
+              "$ref": "#/definitions/ResourceEncryptionConfiguration",
+              "description": "The encryption configuration for the online experiment workspace resource."
+            }
+          }
+        }
+      }
+    },
     "OnlineExperimentWorkspaceProperties": {
       "type": "object",
       "description": "The properties of an online experiment workspace.",
@@ -674,63 +711,6 @@
         "logAnalyticsWorkspaceResourceId",
         "logsExporterStorageAccountResourceId",
         "appConfigurationResourceId"
-      ]
-    },
-    "OnlineExperimentWorkspacePropertiesUpdate": {
-      "type": "object",
-      "description": "The properties of an online experiment workspace.",
-      "properties": {
-        "logAnalyticsWorkspaceResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.OperationalInsights/workspaces"
-              }
-            ]
-          }
-        },
-        "logsExporterStorageAccountResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/storageAccounts"
-              }
-            ]
-          }
-        },
-        "encryption": {
-          "$ref": "#/definitions/ResourceEncryptionConfiguration",
-          "description": "The encryption configuration for the online experiment workspace resource."
-        }
-      }
-    },
-    "OnlineExperimentWorkspaceUpdate": {
-      "type": "object",
-      "description": "An online experiment workspace resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/OnlineExperimentWorkspacePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "sku": {
-          "$ref": "#/definitions/OnlineExperimentationWorkspaceSkuUpdate",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
       ]
     },
     "OnlineExperimentationWorkspaceSku": {

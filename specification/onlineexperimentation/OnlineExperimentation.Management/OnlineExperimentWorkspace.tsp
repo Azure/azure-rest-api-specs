@@ -9,7 +9,9 @@ using Azure.ResourceManager;
 
 namespace Microsoft.OnlineExperimentation;
 
-@doc("An online experiment workspace resource.")
+/**
+ * An online experiment workspace resource.
+ */
 model OnlineExperimentWorkspace
   is TrackedResource<OnlineExperimentWorkspaceProperties> {
   ...ResourceNameParameter<
@@ -20,9 +22,44 @@ model OnlineExperimentWorkspace
   >;
   ...ManagedServiceIdentityProperty;
 
+  /**
+   * The SKU (Stock Keeping Unit) assigned to this resource.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The common types sku doesn't support Developer tier."
-  @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
   sku?: OnlineExperimentationWorkspaceSku;
+}
+
+/**
+ * Partial update of an online experiment workspace resource.
+ */
+model OnlineExperimentWorkspacePatch {
+  ...ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.Foundations.TagsUpdateModel<OnlineExperimentWorkspace>;
+
+  /**
+   * The SKU (Stock Keeping Unit) assigned to this resource.
+   */
+  sku?: OnlineExperimentationWorkspaceSku;
+
+  /**
+   * Updatable properties of the online experiment workspace resource.
+   */
+  properties?: {
+    /**
+     * The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.
+     */
+    logAnalyticsWorkspaceResourceId?: LogAnalyticsWorkspaceArmResourceId;
+
+    /**
+     * The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.
+     */
+    logsExporterStorageAccountResourceId?: StorageAccountArmResourceId;
+
+    /**
+     * The encryption configuration for the online experiment workspace resource.
+     */
+    encryption?: ResourceEncryptionConfiguration;
+  };
 }
 
 @armResourceOperations
@@ -40,9 +77,9 @@ interface OnlineExperimentWorkspaces {
   /**
    * Patch an experiment workspace
    */
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     OnlineExperimentWorkspace,
-    OnlineExperimentWorkspaceProperties
+    OnlineExperimentWorkspacePatch
   >;
 
   /**

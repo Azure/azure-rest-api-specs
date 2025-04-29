@@ -7,6 +7,22 @@ using Azure.ResourceManager;
 
 namespace Microsoft.OnlineExperimentation;
 
+alias AppConfigurationArmResourceId = Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.AppConfiguration/configurationStores";
+  }
+]>;
+alias LogAnalyticsWorkspaceArmResourceId = Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.OperationalInsights/workspaces";
+  }
+]>;
+alias StorageAccountArmResourceId = Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.Storage/storageAccounts";
+  }
+]>;
+
 /**
  * The properties of an online experiment workspace.
  */
@@ -24,30 +40,18 @@ model OnlineExperimentWorkspaceProperties {
   /**
    * The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.
    */
-  logAnalyticsWorkspaceResourceId: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.OperationalInsights/workspaces";
-    }
-  ]>;
+  logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceArmResourceId;
 
   /**
    * The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.
    */
-  logsExporterStorageAccountResourceId: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Storage/storageAccounts";
-    }
-  ]>;
+  logsExporterStorageAccountResourceId: StorageAccountArmResourceId;
 
   /**
    * The resource identifier of App Configuration with which this online experiment workspace is tied for experimentation. This is a required field for creating an online experiment workspace.
    */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  appConfigurationResourceId: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.AppConfiguration/configurationStores";
-    }
-  ]>;
+  appConfigurationResourceId: AppConfigurationArmResourceId;
 
   /**
    * The encryption configuration for the online experiment workspace resource.
