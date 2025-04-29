@@ -347,6 +347,9 @@ interface BatchClient {
   "go"
 );
 @@clientName(Azure.Batch.DisableBatchJobOption, "DisableJobOption", "go");
-@@clientName(Azure.Batch.BatchAllTasksCompleteMode, "AllTasksCompleteMode", "go");
+@@clientName(Azure.Batch.BatchAllTasksCompleteMode,
+  "AllTasksCompleteMode",
+  "go"
+);
 @@clientName(Azure.Batch.BatchTaskFailureMode, "TaskFailureMode", "go");
 @@clientName(Azure.Batch.RecentBatchJob, "RecentJob", "go");
