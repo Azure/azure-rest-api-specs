@@ -57,7 +57,7 @@ model InstanceProperties {
   @doc("The reference to the AIO Secret provider class.")
   @visibility(Lifecycle.Read)
   @added(Versions.`2025-07-01-preview`)
-  secretProviderClassRef?: SecretProviderClassID;
+  secretProviderClassRef?: SecretProviderClassRef;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The features of the AIO Instance.")
@@ -68,6 +68,13 @@ model InstanceProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @added(Versions.`2025-07-01-preview`)
   adrNamespace?: string;
+}
+
+@doc("The reference to the AIO Secret provider class.")
+@added(Versions.`2025-07-01-preview`)
+model SecretProviderClassRef {
+  @doc("The resource ID of the AIO Secret provider class.")
+  resourceId: SecretProviderClassID;
 }
 
 @doc("The features of the AIO Instance.")
