@@ -25,6 +25,7 @@ model EmployeeProperties {
 
   /** State or province of employee */
   state?: string;
+
   /** Profile of employee */
   @encode("base64url")
   profile?: bytes;
