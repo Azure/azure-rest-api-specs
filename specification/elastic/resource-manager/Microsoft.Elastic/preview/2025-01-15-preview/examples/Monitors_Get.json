@@ -1,49 +1,51 @@
 {
   "parameters": {
     "api-version": "2025-01-15-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "monitorName": "myMonitor",
     "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
         "name": "myMonitor",
         "type": "Microsoft.Elastic/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
         "kind": "elastic-hosted-deployment",
+        "location": "West US 2",
         "properties": {
-          "provisioningState": "Succeeded",
-          "monitoringStatus": "Enabled",
           "elasticProperties": {
-            "elasticCloudUser": {
-              "emailAddress": "alice@microsoft.com",
-              "id": "myid123",
-              "elasticCloudSsoDefaultUrl": "https://examplessourl.com"
-            },
             "elasticCloudDeployment": {
               "name": "deploymentname",
-              "deploymentId": "deployment_id",
               "azureSubscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deploymentId": "deployment_id",
               "elasticsearchRegion": "azure-westus2",
               "elasticsearchServiceUrl": "https://elasticsearchendpoint.com",
               "kibanaServiceUrl": "https://kibanaserviceurl.com",
               "kibanaSsoUrl": "https://kibanssourl.com"
+            },
+            "elasticCloudUser": {
+              "elasticCloudSsoDefaultUrl": "https://examplessourl.com",
+              "emailAddress": "alice@microsoft.com",
+              "id": "myid123"
             }
           },
           "hostingType": "Hosted",
-          "projectDetails": {
-            "projectType": "NotApplicable",
-            "configurationType": "NotApplicable"
-          },
           "liftrResourceCategory": "MonitorLogs",
-          "liftrResourcePreference": 0
+          "liftrResourcePreference": 0,
+          "monitoringStatus": "Enabled",
+          "projectDetails": {
+            "configurationType": "NotApplicable",
+            "projectType": "NotApplicable"
+          },
+          "provisioningState": "Succeeded"
         },
         "tags": {
           "Environment": "Dev"
-        },
-        "location": "West US 2"
+        }
       }
     }
-  }
+  },
+  "operationId": "Monitors_Get",
+  "title": "Monitors_Get"
 }

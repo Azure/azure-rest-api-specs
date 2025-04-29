@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-01-15-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "monitorName": "myMonitor",
     "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -11,17 +11,19 @@
         "value": [
           {
             "name": "default",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor/openAIIntegration/default",
             "type": "Microsoft.Elastic/monitors/openAIIntegration",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor/openAIIntegration/default",
             "properties": {
-              "openAIResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myOpenAI",
-              "openAIResourceEndpoint": "https://myOpenAI.openai.azure.com/",
+              "lastRefreshAt": "2023-07-12T09:28:50.9579871Z",
               "openAIConnectorId": "0000000000000000",
-              "lastRefreshAt": "2023-07-12T09:28:50.9579871Z"
+              "openAIResourceEndpoint": "https://myOpenAI.openai.azure.com/",
+              "openAIResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myOpenAI"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "OpenAI_List",
+  "title": "OpenAI_List"
 }

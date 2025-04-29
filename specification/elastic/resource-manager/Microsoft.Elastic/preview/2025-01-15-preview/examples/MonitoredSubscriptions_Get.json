@@ -1,60 +1,62 @@
 {
   "parameters": {
     "api-version": "2025-01-15-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
+    "configurationName": "default",
     "monitorName": "myMonitor",
-    "configurationName": "default"
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "name": "default",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor/monitoredSubscriptions/default",
         "type": "Microsoft.Elastic/monitors/monitoredSubscriptions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor/monitoredSubscriptions/default",
         "properties": {
           "monitoredSubscriptionList": [
             {
-              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
               "status": "Active",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
               "tagRules": {
-                "provisioningState": "Accepted",
                 "logRules": {
-                  "sendAadLogs": true,
-                  "sendSubscriptionLogs": true,
-                  "sendActivityLogs": true,
                   "filteringTags": [
                     {
                       "name": "saokgpjvdlorciqbjmjxazpee",
-                      "value": "sarxrqsxouhdjwsrqqicbeirdb",
-                      "action": "Include"
+                      "action": "Include",
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
                     }
-                  ]
-                }
+                  ],
+                  "sendAadLogs": true,
+                  "sendActivityLogs": true,
+                  "sendSubscriptionLogs": true
+                },
+                "provisioningState": "Accepted"
               }
             },
             {
-              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
               "status": "Failed",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
               "tagRules": {
-                "provisioningState": "Accepted",
                 "logRules": {
-                  "sendAadLogs": true,
-                  "sendSubscriptionLogs": true,
-                  "sendActivityLogs": true,
                   "filteringTags": [
                     {
                       "name": "saokgpjvdlorciqbjmjxazpee",
-                      "value": "sarxrqsxouhdjwsrqqicbeirdb",
-                      "action": "Include"
+                      "action": "Include",
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
                     }
-                  ]
-                }
+                  ],
+                  "sendAadLogs": true,
+                  "sendActivityLogs": true,
+                  "sendSubscriptionLogs": true
+                },
+                "provisioningState": "Accepted"
               }
             }
           ]
         }
       }
     }
-  }
+  },
+  "operationId": "MonitoredSubscriptions_Get",
+  "title": "Monitors_GetMonitoredSubscriptions"
 }

@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-01-15-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "monitorName": "myMonitor",
     "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -11,15 +11,17 @@
         "value": [
           {
             "properties": {
-              "partnerDeploymentName": "deploymentname",
-              "partnerDeploymentUri": "https://examplessourl.com",
+              "type": "hostingType",
               "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
               "location": "West US 2",
-              "type": "hostingType"
+              "partnerDeploymentName": "deploymentname",
+              "partnerDeploymentUri": "https://examplessourl.com"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ConnectedPartnerResources_List",
+  "title": "ConnectedPartnerResources_List"
 }

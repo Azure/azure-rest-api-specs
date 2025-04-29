@@ -1,59 +1,61 @@
 {
   "parameters": {
     "api-version": "2025-01-15-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
     "monitorName": "myMonitor",
-    "ruleSetName": "default",
     "requestBody": {
       "properties": {
         "logRules": {
-          "sendAadLogs": false,
-          "sendSubscriptionLogs": true,
-          "sendActivityLogs": true,
           "filteringTags": [
             {
               "name": "Environment",
-              "value": "Prod",
-              "action": "Include"
+              "action": "Include",
+              "value": "Prod"
             },
             {
               "name": "Environment",
-              "value": "Dev",
-              "action": "Exclude"
+              "action": "Exclude",
+              "value": "Dev"
             }
-          ]
+          ],
+          "sendAadLogs": false,
+          "sendActivityLogs": true,
+          "sendSubscriptionLogs": true
         }
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "ruleSetName": "default",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "name": "default",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor/tagRules/default",
         "type": "Microsoft.Elastic/monitors/tagRules",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor/tagRules/default",
         "properties": {
-          "provisioningState": "Succeeded",
           "logRules": {
-            "sendAadLogs": false,
-            "sendSubscriptionLogs": true,
-            "sendActivityLogs": true,
             "filteringTags": [
               {
                 "name": "Environment",
-                "value": "Prod",
-                "action": "Include"
+                "action": "Include",
+                "value": "Prod"
               },
               {
                 "name": "Environment",
-                "value": "Dev",
-                "action": "Exclude"
+                "action": "Exclude",
+                "value": "Dev"
               }
-            ]
-          }
+            ],
+            "sendAadLogs": false,
+            "sendActivityLogs": true,
+            "sendSubscriptionLogs": true
+          },
+          "provisioningState": "Succeeded"
         }
       }
     }
-  }
+  },
+  "operationId": "TagRules_CreateOrUpdate",
+  "title": "TagRules_CreateOrUpdate"
 }

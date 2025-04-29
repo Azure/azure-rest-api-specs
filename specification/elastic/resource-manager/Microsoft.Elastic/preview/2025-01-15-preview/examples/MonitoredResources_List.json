@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-01-15-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "monitorName": "myMonitor",
     "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -11,11 +11,13 @@
         "value": [
           {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVault",
-            "sendingLogs": "True",
-            "reasonForLogsStatus": "CapturedByRules"
+            "reasonForLogsStatus": "CapturedByRules",
+            "sendingLogs": "True"
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "MonitoredResources_List",
+  "title": "MonitoredResources_List"
 }
