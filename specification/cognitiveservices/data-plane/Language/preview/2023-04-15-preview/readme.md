@@ -38,7 +38,6 @@ modelerfour:
 ``` yaml $(tag) == 'release_2022-10-01-preview'
 input-file:
   - analyzetext.json
-  - analyzetext-authoring.json
   - analyzeconversations.json
   - analyzeconversations-authoring.json
   - questionanswering.json
@@ -52,7 +51,6 @@ modelerfour:
 ``` yaml $(tag) == 'release_2022-07-01-preview'
 input-file:
   - analyzetext.json
-  - analyzetext-authoring.json
   - analyzeconversations.json
   - analyzeconversations-authoring.json
   - questionanswering.json
