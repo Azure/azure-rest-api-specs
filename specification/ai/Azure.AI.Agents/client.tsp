@@ -13,7 +13,7 @@ using Azure.AI.Agents;
 // Agents sub‐client
 // --------------------------------------------------------------------------------
 
-@@clientName(Azure.AI.Agents, "AgentsAdministrationClient", "csharp, java");
+@@clientName(Azure.AI.Agents, "PersistentAgentsAdministrationClient", "csharp, java");
 @@access(Azure.AI.Agents.listAgents, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.listAgents, "InternalGetAgents", "csharp");
 @@access(Azure.AI.Agents.deleteAgent, Access.internal, "csharp");
