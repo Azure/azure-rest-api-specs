@@ -31,7 +31,7 @@ interface PlacementPolicies {
   update is ArmCustomPatchAsync<
     PlacementPolicy,
     PlacementPolicyUpdate,
-    Response = ArmResponse<PlacementPolicy> | ArmAcceptedLroResponseWithResponseBody<PlacementPolicy> | ErrorResponse
+    Response = ArmResponse<PlacementPolicy> | ArmAcceptedLroResponseWithResponseBody<PlacementPolicy>
   >;
 
   #suppress "deprecated"
