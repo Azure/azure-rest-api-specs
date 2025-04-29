@@ -94,7 +94,3 @@ interface DiscoverySolutionNLPOperationGroup {
     Parameters = {}
   >;
 }
-
-@@path(CheckNameAvailabilityOperationGroup.checkAvailability::parameters.scope,
-  #{ allowReserved: true }
-);

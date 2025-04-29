@@ -108,7 +108,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Help/diagnostics/{diagnosticsResourceName}": {
+    "/{scope}/providers/Microsoft.Help/diagnostics/{diagnosticsResourceName}": {
       "get": {
         "operationId": "Diagnostics_Get",
         "tags": [
@@ -120,7 +120,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "diagnosticsResourceName",
@@ -164,7 +164,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "diagnosticsResourceName",
@@ -228,7 +228,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{resourceUri}/providers/Microsoft.Help/simplifiedSolutions/{simplifiedSolutionsResourceName}": {
+    "/{scope}/providers/Microsoft.Help/simplifiedSolutions/{simplifiedSolutionsResourceName}": {
       "get": {
         "operationId": "SimplifiedSolutions_Get",
         "tags": [
@@ -240,7 +240,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "simplifiedSolutionsResourceName",
@@ -284,7 +284,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "simplifiedSolutionsResourceName",
@@ -348,7 +348,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{resourceUri}/providers/Microsoft.Help/solutions/{solutionResourceName}": {
+    "/{scope}/providers/Microsoft.Help/solutions/{solutionResourceName}": {
       "get": {
         "operationId": "Solution_Get",
         "tags": [
@@ -360,7 +360,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "solutionResourceName",
@@ -404,7 +404,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "solutionResourceName",
@@ -478,7 +478,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "solutionResourceName",
@@ -537,7 +537,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{resourceUri}/providers/Microsoft.Help/solutions/{solutionResourceName}/warmup": {
+    "/{scope}/providers/Microsoft.Help/solutions/{solutionResourceName}/warmup": {
       "post": {
         "operationId": "Solution_WarmUp",
         "tags": [
@@ -549,7 +549,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "solutionResourceName",
@@ -589,7 +589,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}": {
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}": {
       "get": {
         "operationId": "Troubleshooters_Get",
         "tags": [
@@ -601,7 +601,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "troubleshooterName",
@@ -645,7 +645,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "troubleshooterName",
@@ -694,7 +694,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/continue": {
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/continue": {
       "post": {
         "operationId": "Troubleshooters_Continue",
         "tags": [
@@ -706,7 +706,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "troubleshooterName",
@@ -746,7 +746,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/end": {
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/end": {
       "post": {
         "operationId": "Troubleshooters_End",
         "tags": [
@@ -758,7 +758,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "troubleshooterName",
@@ -789,7 +789,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/restart": {
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/restart": {
       "post": {
         "operationId": "Troubleshooters_Restart",
         "tags": [
@@ -801,7 +801,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "name": "troubleshooterName",
@@ -2826,8 +2826,8 @@
     }
   },
   "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
+    "ScopeParameter": {
+      "name": "scope",
       "in": "path",
       "description": "The fully qualified Azure Resource manager identifier of the resource.",
       "required": true,

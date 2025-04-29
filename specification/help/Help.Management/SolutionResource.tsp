@@ -33,7 +33,7 @@ interface SolutionResources {
   @operationId("Solution_Get")
   get is ArmResourceRead<
     SolutionResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<SolutionResource>
   >;
 
   /**
@@ -43,7 +43,7 @@ interface SolutionResources {
   @operationId("Solution_Create")
   create is ArmResourceCreateOrReplaceAsync<
     SolutionResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<SolutionResource>
   >;
 
   /**
@@ -56,7 +56,7 @@ interface SolutionResources {
   update is ArmCustomPatchAsync<
     SolutionResource,
     PatchModel = SolutionPatchRequestBody,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = ScopeParameters<SolutionResource>,
     Response = ArmResourceUpdatedResponse<SolutionResource> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SolutionResource>> & {
       @bodyRoot
       _: SolutionResource;
@@ -79,7 +79,7 @@ interface SolutionResources {
       solutionWarmUpRequestBody?: SolutionWarmUpRequestBody;
     },
     NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<SolutionResource>
   >;
 }
 

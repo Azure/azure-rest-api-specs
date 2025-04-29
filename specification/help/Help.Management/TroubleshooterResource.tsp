@@ -33,7 +33,7 @@ interface TroubleshooterResources {
   @operationId("Troubleshooters_Get")
   get is ArmResourceRead<
     TroubleshooterResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<TroubleshooterResource>
   >;
 
   /**
@@ -43,7 +43,7 @@ interface TroubleshooterResources {
   @operationId("Troubleshooters_Create")
   create is ArmResourceCreateOrReplaceSync<
     TroubleshooterResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<TroubleshooterResource>
   >;
 
   /**
@@ -61,7 +61,7 @@ interface TroubleshooterResources {
       continueRequestBody?: ContinueRequestBody;
     },
     NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<TroubleshooterResource>
   >;
 
   /**
@@ -73,7 +73,7 @@ interface TroubleshooterResources {
     TroubleshooterResource,
     void,
     NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<TroubleshooterResource>
   >;
 
   /**
@@ -85,7 +85,7 @@ interface TroubleshooterResources {
     TroubleshooterResource,
     void,
     ArmResponse<RestartTroubleshooterResponse>,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<TroubleshooterResource>
   >;
 }
 

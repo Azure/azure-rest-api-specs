@@ -33,7 +33,7 @@ interface DiagnosticResources {
   @operationId("Diagnostics_Get")
   get is ArmResourceRead<
     DiagnosticResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<DiagnosticResource>
   >;
 
   /**
@@ -43,7 +43,7 @@ interface DiagnosticResources {
   @operationId("Diagnostics_Create")
   create is ArmResourceCreateOrReplaceAsync<
     DiagnosticResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<DiagnosticResource>
   >;
 }
 

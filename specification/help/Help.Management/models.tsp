@@ -11,6 +11,30 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Help;
 
 /**
+ * The default resourceUri parameter type.
+ */
+@doc("The default resourceUri parameter type.")
+model ScopeParameter {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "template"
+  @path(#{ allowReserved: true })
+  @doc("The fully qualified Azure Resource manager identifier of the resource.")
+  @Azure.ResourceManager.Private.resourceParameterBaseFor(
+    [Azure.ResourceManager.CommonTypes.ResourceHome.Extension]
+  )
+  scope: string;
+}
+
+/**
+ * Base parameters for a resource.
+ * @template Resource The type of the resource.
+ */
+@Azure.ResourceManager.Private.resourceBaseParametersOf(Resource)
+model ScopeParameters<Resource extends {}> {
+  ...ApiVersionParameter;
+  ...ScopeParameter;
+}
+
+/**
  * Status of diagnostic provisioning.
  */
 union DiagnosticProvisioningState {

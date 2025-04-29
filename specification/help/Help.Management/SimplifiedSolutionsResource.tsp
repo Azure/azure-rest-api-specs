@@ -33,7 +33,7 @@ interface SimplifiedSolutionsResources {
   @operationId("SimplifiedSolutions_Get")
   get is ArmResourceRead<
     SimplifiedSolutionsResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<SimplifiedSolutionsResource>
   >;
 
   /**
@@ -43,7 +43,7 @@ interface SimplifiedSolutionsResources {
   @operationId("SimplifiedSolutions_Create")
   create is ArmResourceCreateOrReplaceAsync<
     SimplifiedSolutionsResource,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = ScopeParameters<SimplifiedSolutionsResource>
   >;
 }
 
