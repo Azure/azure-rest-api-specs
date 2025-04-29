@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: AI Model Inference
-  version: '2025-04-01'
+  version: 2025-05-15-preview
 tags: []
 paths:
   /chat/completions:
@@ -135,6 +135,48 @@ paths:
             schema:
               $ref: '#/components/schemas/ImageEmbeddingsOptions'
         description: The parameters of the image embeddings request.
+  /images/generations:
+    post:
+      operationId: getImageGenerations
+      description: |-
+        Generates an image based on a text or image prompt.
+        The method makes a REST API call to the `/images/generations` route on the given endpoint.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: extra-parameters
+          in: header
+          required: false
+          description: |-
+            Controls what happens if extra parameters, undefined by the REST API,
+            are passed in the JSON request payload.
+            This sets the HTTP request header `extra-parameters`.
+          schema:
+            $ref: '#/components/schemas/ExtraParameters'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageGenerationsResult'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageGenerationsOptions'
   /info:
     get:
       operationId: getModelInfo
@@ -506,6 +548,13 @@ components:
           description: |-
             The modalities that the model is allowed to use for the chat completions response. The default modality
             is `text`. Indicating an unsupported modality combination results in an 422 error.
+        user_security_context:
+          allOf:
+            - $ref: '#/components/schemas/UserSecurityContext'
+          description: |-
+            User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
+            These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
+            [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
       additionalProperties: {}
       description: |-
         The configuration information for a chat completions request.
@@ -1248,6 +1297,188 @@ components:
           description: ID of the specific AI model to use, if more than one model is available on the endpoint.
       additionalProperties: {}
       description: The configuration information for an image embeddings request.
+    ImageGenerationItem:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          description: The image generated, encoded in base64.
+        seed:
+          type: integer
+          format: int64
+          description: The seed that can be used to generate the image.
+      description: Representation of a single image generation.
+    ImageGenerationOutputFormat:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - png
+            - jpg
+      description: The image generation format to use in the output.
+    ImageGenerationPreset:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - 672x1566
+            - 768x1366
+            - 836x1254
+            - 916x1145
+            - 1024x1024
+            - 1145x916
+            - 1254x836
+            - 1366x768
+            - 1566x672
+      description: The preset size of the image to generate.
+    ImageGenerationPrompt:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          description: |-
+            The input image encoded in base64 string as a data URL.
+            Example: `data:image/{format};base64,{data}`."
+        strength:
+          type: number
+          format: float
+          description: |-
+            The degree at which the generation process uses the image prompt as guidance. 1 indicates
+            a generation process that fully follows the input image. 0 a generation a process that doesn't
+            take into consideration the prompt image.
+          default: 1
+      description: Represents an image to use for guidance during the generation.
+    ImageGenerationQuality:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - hd
+            - standard
+      description: The quality of the image to generate.
+    ImageGenerationSize:
+      type: object
+      required:
+        - width
+        - height
+      properties:
+        width:
+          type: integer
+          format: int32
+          description: The width of the image to generate, in pixels.
+        height:
+          type: integer
+          format: int32
+          description: The height of the image to generate, in pixels.
+      description: The size of the image to generate.
+    ImageGenerationUsage:
+      type: object
+      required:
+        - image_generations
+      properties:
+        image_generations:
+          type: integer
+          format: int32
+          description: The number of image generations performed.
+      description: Usage counts for image generation API.
+    ImageGenerationsOptions:
+      type: object
+      required:
+        - prompt
+        - size
+        - 'n'
+      properties:
+        prompt:
+          type: string
+          description: |-
+            The prompt to use for the image geneartion. Read the model documentation to understand
+            which language you should use to prompt the model and get specific results.
+        negative_prompt:
+          type: string
+          description: |-
+            Optional. The prompt to use for the negative image generation. Read the model documentation
+            to understand to prompt the model and get specific results. If the model doesn't support
+            negative prompts, a 422 error is returned.
+        image_prompt:
+          allOf:
+            - $ref: '#/components/schemas/ImageGenerationPrompt'
+          description: Optional. An image to use as guidance for the image generation process.
+        size:
+          anyOf:
+            - $ref: '#/components/schemas/ImageGenerationPreset'
+            - $ref: '#/components/schemas/ImageGenerationSize'
+          description: The size of the image to generate.
+        output_format:
+          allOf:
+            - $ref: '#/components/schemas/ImageGenerationOutputFormat'
+          description: |-
+            Optional. The format in which to generate the image.
+            Returns a 422 error if the model doesn't support the value or parameter.
+          default: png
+        quality:
+          allOf:
+            - $ref: '#/components/schemas/ImageGenerationQuality'
+          description: |-
+            Optional. The quality of the image to generate.
+            Returns a 422 error if the model doesn't support the value or parameter.
+          default: standard
+        'n':
+          type: integer
+          format: int32
+          description: The number of images to generate. Defaults to 1.
+          default: 1
+        model:
+          type: string
+          description: ID of the specific AI model to use, if more than one model is available on the endpoint.
+        seed:
+          type: integer
+          format: int64
+          description: |-
+            If specified, the system will make a best effort to sample deterministically such that repeated requests with the
+            same seed and parameters should return the same result. Determinism is not guaranteed.
+      additionalProperties: {}
+      description: The configuration information for an image generation request.
+    ImageGenerationsResult:
+      type: object
+      required:
+        - id
+        - created
+        - model
+        - data
+        - usage
+        - object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the generation result.
+        created:
+          type: integer
+          format: unixtime
+          description: |-
+            The first timestamp associated with generation activity for this completions response,
+            represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
+        model:
+          type: string
+          description: The model used for the chat completion.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageGenerationItem'
+          description: Embedding values for the prompts submitted in the request.
+        usage:
+          allOf:
+            - $ref: '#/components/schemas/ImageGenerationUsage'
+          description: Usage counts for tokens input using the embeddings API.
+        object:
+          type: string
+          enum:
+            - image.generation
+          description: The object type of the image generation result. Will always be `list`.
+      description: The result of an image generation request.
     ModelInfo:
       type: object
       required:
@@ -1410,6 +1641,34 @@ components:
           description: Updates to the function call requested by the AI model.
           readOnly: true
       description: An update to the function tool call information requested by the AI model.
+    UserSecurityContext:
+      type: object
+      properties:
+        application_name:
+          type: string
+          maxLength: 100
+          description: The name of the application. Sensitive personal information should not be included in this field.
+        end_user_id:
+          type: string
+          minLength: 36
+          maxLength: 36
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          description: This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field.
+        end_user_tenant_id:
+          type: string
+          minLength: 36
+          maxLength: 36
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          description: The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multi tenant.
+        source_ip:
+          type: string
+          minLength: 2
+          maxLength: 45
+          description: Captures the original client's IP address, accepting both IPv4 and IPv6 formats.
+      description: |-
+        User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
+        These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
+        [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
     Versions:
       type: string
       enum:
