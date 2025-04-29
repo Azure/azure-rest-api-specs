@@ -24,7 +24,7 @@ describe("getSwaggerDependenciesMap", () => {
     expect(dependencyMap.size).toEqual(0);
   });
 
-  test.skipIf(isWindows)("d has no dependencies", async () => {
+  test.skipIf(isWindows())("d has no dependencies", async () => {
     const __dirname = dirname(fileURLToPath(import.meta.url));
     console.log("dirname", __dirname);
     const dependencyMap = await getSwaggerDependenciesMap(
@@ -38,7 +38,7 @@ describe("getSwaggerDependenciesMap", () => {
     expect(dependencyMap.get("specification/1/d.json")).toEqual(new Set<string>());
   });
 
-  test.skipIf(isWindows)("a depends on b and c (and d transitively)", async () => {
+  test.skipIf(isWindows())("a depends on b and c (and d transitively)", async () => {
     const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
@@ -58,7 +58,7 @@ describe("getSwaggerDependenciesMap", () => {
     );
   });
 
-  test.skipIf(isWindows)("b depends on c and d", async () => {
+  test.skipIf(isWindows())("b depends on c and d", async () => {
     const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
@@ -87,7 +87,7 @@ describe("getAffectedSwaggers", () => {
     expect(affectedSwaggers).toEqual(["specification/1/a.json"]);
   });
 
-  test.skipIf(isWindows)("b affects a and b", async () => {
+  test.skipIf(isWindows())("b affects a and b", async () => {
     const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
@@ -101,7 +101,7 @@ describe("getAffectedSwaggers", () => {
     expect(affectedSwaggers).toEqual(["specification/1/nesting/b.json", "specification/1/a.json"]);
   });
 
-  test.skipIf(isWindows)("c affects a, b, c", async () => {
+  test.skipIf(isWindows())("c affects a, b, c", async () => {
     const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
@@ -117,7 +117,7 @@ describe("getAffectedSwaggers", () => {
     ]);
   });
 
-  test.skipIf(isWindows)("d affects a, b, d", async () => {
+  test.skipIf(isWindows())("d affects a, b, d", async () => {
     const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
@@ -133,7 +133,7 @@ describe("getAffectedSwaggers", () => {
     ]);
   });
 
-  test.skipIf(isWindows)("d, c affects a, b, c, d", async () => {
+  test.skipIf(isWindows())("d, c affects a, b, c, d", async () => {
     const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
@@ -155,14 +155,14 @@ describe("getAffectedSwaggers", () => {
 });
 
 describe("getAffectedServices", () => {
-  test.skipIf(isWindows)("returns single service with multiple files", async () => {
+  test.skipIf(isWindows())("returns single service with multiple files", async () => {
     const changedFiles = ["specification/service1/file1.json", "specification/service1/file2.json"];
     const affectedServices = await getAffectedServices(changedFiles);
 
     expect(affectedServices).toEqual(new Set<string>(["specification/service1"]));
   });
 
-  test.skipIf(isWindows)("returns multiple services", async () => {
+  test.skipIf(isWindows())("returns multiple services", async () => {
     const changedFiles = [
       "specification/service1/file1.json",
       "specification/service1/file2.json",
@@ -177,14 +177,14 @@ describe("getAffectedServices", () => {
 });
 
 describe("getService", () => {
-  test.skipIf(isWindows)("returns service name from file path", async () => {
+  test.skipIf(isWindows())("returns service name from file path", async () => {
     const filePath = "specification/service1/file1.json";
     const serviceName = await getService(filePath);
 
     expect(serviceName).toEqual("specification/service1");
   });
 
-  test.skipIf(isWindows)("returns service name from file path with leading separator", async () => {
+  test.skipIf(isWindows())("returns service name from file path with leading separator", async () => {
     const filePath = "/specification/service1/file1.json";
     const serviceName = await getService(filePath);
 

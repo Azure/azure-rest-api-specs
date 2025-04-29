@@ -2,12 +2,18 @@ import { writeFile } from "node:fs/promises";
 import { kebabCase } from "change-case";
 import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
 import { getPathToDependency, getDependencyVersion, relativizePath } from "./util.js";
-import { getViolations, isFailure, isWarning } from "./correlateResults.js";
-import { AutorestRunResult, BeforeAfter, LintDiffViolation } from "./lintdiff-types.js";
+import { getViolations } from "./correlateResults.js";
+import { isFailure, isWarning } from "./util.js";
+import {
+  AutorestRunResult,
+  AutoRestMessage,
+  BeforeAfter,
+  LintDiffViolation,
+} from "./lintdiff-types.js";
 
 const LIMIT_50_MESSAGE = "Only 50 items are listed, please refer to log for more details.";
 
-export async function generateReport(
+export async function generateLintDiffReport(
   runCorrelations: Map<string, BeforeAfter>,
   affectedSwaggers: Set<string>,
   outFile: string,
@@ -15,13 +21,14 @@ export async function generateReport(
   compareSha: string,
 ): Promise<boolean> {
   let pass = true;
+  let outputMarkdown = "";
 
   // See unifiedPipelineHelper.ts:386
   // Compared specs (link to npm package: @microsoft.azure/openapi-validator/v/<version>)
   const dependencyVersion = await getDependencyVersion(
     await getPathToDependency("@microsoft.azure/openapi-validator"),
   );
-  let outputMarkdown = `| Compared specs ([v${dependencyVersion}](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/${dependencyVersion})) | new version | base version |\n`;
+  outputMarkdown += `| Compared specs ([v${dependencyVersion}](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/${dependencyVersion})) | new version | base version |\n`;
   outputMarkdown += `| --- | --- | --- |\n`;
 
   // Compared Specs | New Version | Base Version
@@ -66,8 +73,7 @@ export async function generateReport(
     outputMarkdown += "| ---- | ------- | ------------------------------- |\n";
 
     for (const violation of newViolations.slice(0, 50)) {
-      const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
+      outputMarkdown += getNewViolationReportRow(violation, compareSha);
     }
 
     outputMarkdown += "\n";
@@ -98,6 +104,36 @@ export async function generateReport(
   return pass;
 }
 
+export async function generateAutoRestErrorReport(
+  autoRestErrors: { result: AutorestRunResult; errors: AutoRestMessage[] }[],
+  outFile: string,
+) {
+  let outputMarkdown = "";
+
+  console.error("LintDiff detected AutoRest errors");
+  outputMarkdown += "**AutoRest errors:**\n\n";
+  for (const { result, errors } of autoRestErrors) {
+    console.log(`AutoRest errors for ${result.readme} (${result.tag})`);
+
+    outputMarkdown += "Readme: " + result.readme + "\n";
+    outputMarkdown += "Tag: " + result.tag + "\n";
+    outputMarkdown += "Errors:\n";
+    outputMarkdown += "| Level | Message |\n";
+    outputMarkdown += "| ----- | ------- |\n";
+    for (const error of errors) {
+      const { level, message } = error;
+      console.log(`  ${level}: ${message}`);
+
+      outputMarkdown += `| ${iconFor(level)} ${level} | ${message.replace(/\n/g, "<br />")} |\n`;
+    }
+
+    outputMarkdown += "\n\n";
+  }
+
+  console.log(`Writing output to ${outFile}`);
+  await writeFile(outFile, outputMarkdown);
+}
+
 /**
  * Compare two LintDiffViolation objects for sorting. First sort by level with
  * error being higher than warning. Then sort by file name and line number.
@@ -109,6 +145,10 @@ export function compareLintDiffViolations(a: LintDiffViolation, b: LintDiffViola
   if (isFailure(a.level) && isWarning(b.level)) {
     return -1;
   } else if (isWarning(a.level) && isFailure(b.level)) {
+    return 1;
+  } else if (a.level === "fatal" && b.level !== "fatal") {
+    return -1;
+  } else if (a.level !== "fatal" && b.level === "fatal") {
     return 1;
   }
 
@@ -177,8 +217,18 @@ export function getLine(lintDiffViolation: LintDiffViolation): number | undefine
   return undefined;
 }
 
+function getNewViolationReportRow(violation: LintDiffViolation, compareSha: string): string {
+  const { level, code, message } = violation;
+  if (level.toLowerCase() == "fatal") {
+    // Fatal errors have fewer details and don't need to be formatted
+    return `| ${iconFor(level)} ${code} | ${message} | ${violation.armRpcs?.join(", ")} |\n`;
+  }
+
+  return `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
+}
+
 export function iconFor(type: string) {
-  if (type.toLowerCase().includes("error")) {
+  if (type.toLowerCase().includes("error") || type.toLowerCase() === "fatal") {
     return ":x:";
   } else {
     return ":warning:";

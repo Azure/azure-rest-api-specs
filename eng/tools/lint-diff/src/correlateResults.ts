@@ -1,6 +1,6 @@
 import { basename, join } from "path";
 import { readFile } from "fs/promises";
-import { relativizePath, pathExists } from "./util.js";
+import { relativizePath, pathExists, isFailure, isWarning } from "./util.js";
 import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./lintdiff-types.js";
 import { getDefaultTag } from "./markdown-utils.js";
 
@@ -91,9 +91,11 @@ export function getViolations(
       : [];
     const afterViolations = getLintDiffViolations(after).filter(
       (v) =>
-        (isFailure(v.level) || isWarning(v.level)) &&
-        v.source?.length > 0 &&
-        affectedSwaggers.has(relativizePath(v.source[0].document).slice(1)),
+        // Fatal errors are always new
+        v.level.toLowerCase() === "fatal" ||
+        ((isFailure(v.level) || isWarning(v.level)) &&
+          v.source?.length > 0 &&
+          affectedSwaggers.has(relativizePath(v.source[0].document).slice(1))),
     );
 
     const [newitems, existingItems] = getNewItems(beforeViolations, afterViolations);
@@ -137,21 +139,14 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
 
     const result = JSON.parse(line.trim());
     if (result.code == undefined) {
-      // TODO: verify that things would blow up if this isn't set to FATAL
+      // Results without a code can be assumed to be fatal errors. Set the code 
+      // to "FATAL"
       result.code = "FATAL";
     }
     violations.push(result as LintDiffViolation);
   }
 
   return violations;
-}
-
-export function isFailure(level: string) {
-  return ["error", "fatal"].includes(level.toLowerCase());
-}
-
-export function isWarning(level: string) {
-  return level.toLowerCase() === "warning";
 }
 
 // This logic is duplicated from momentOfTruthPostProcessing.ts:140
