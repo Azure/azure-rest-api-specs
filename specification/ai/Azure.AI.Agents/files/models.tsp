@@ -6,7 +6,7 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @doc("Represents an agent that can call the model and use tools.")
-model OpenAIFile {
+model FileInfo {
   @doc("The object type, which is always 'file'.")
   object: "file";
 
@@ -108,7 +108,7 @@ model FileListResponse {
   object: "list";
 
   @doc("The files returned for the request.")
-  data: OpenAIFile[];
+  data: FileInfo[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"

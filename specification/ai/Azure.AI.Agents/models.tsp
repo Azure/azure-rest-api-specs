@@ -72,7 +72,7 @@ model Agent {
   /** The response format of the tool calls used by this agent. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AgentsResponseFormatOption | null;
 
   ...RequiredNullableMetadata;
 }
@@ -130,7 +130,7 @@ model CreateAgentOptions {
   /** The response format of the tool calls used by this agent. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AgentsResponseFormatOption | null;
 
   ...OptionalNullableMetadata;
 }
@@ -190,7 +190,7 @@ model UpdateAgentOptions {
   /** The response format of the tool calls used by this agent. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AgentsResponseFormatOption | null;
 
   ...OptionalNullableMetadata;
 }

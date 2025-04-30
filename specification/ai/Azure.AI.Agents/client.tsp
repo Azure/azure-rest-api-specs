@@ -13,7 +13,10 @@ using Azure.AI.Agents;
 // Agents sub‐client
 // --------------------------------------------------------------------------------
 
-@@clientName(Azure.AI.Agents, "PersistentAgentsAdministrationClient", "csharp, java");
+@@clientName(Azure.AI.Agents,
+  "PersistentAgentsAdministrationClient",
+  "csharp, java"
+);
 @@access(Azure.AI.Agents.listAgents, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.listAgents, "InternalGetAgents", "csharp");
 @@access(Azure.AI.Agents.deleteAgent, Access.internal, "csharp");
@@ -169,16 +172,16 @@ using Azure.AI.Agents;
 // Persistent & Model‐level renames (csharp, java)
 // --------------------------------------------------------------------------------
 @@clientName(Agent, "PersistentAgent", "csharp,java");
-@@clientName(AgentsApiResponseFormat,
-  "PersistentAgentsApiResponseFormat",
+@@clientName(AgentsResponseFormat,
+  "PersistentAgentsResponseFormat",
   "csharp,java"
 );
-@@clientName(AgentsApiResponseFormatMode,
-  "PersistentAgentsApiResponseFormatMode",
+@@clientName(AgentsResponseFormatMode,
+  "PersistentAgentsResponseFormatMode",
   "csharp,java"
 );
-@@clientName(AgentsApiToolChoiceOptionMode,
-  "PersistentAgentsApiToolChoiceOptionMode",
+@@clientName(AgentsToolChoiceOptionMode,
+  "PersistentAgentsToolChoiceOptionMode",
   "csharp,java"
 );
 @@clientName(AgentsNamedToolChoice,
@@ -364,9 +367,9 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // Additional C#-idiomatic renames
 // --------------------------------------------------------------------------------
-@@clientName(OpenAIFile, "OpenAIFile", "csharp");
-@@clientName(OpenAIFile.bytes, "Size", "csharp");
-@@clientName(FilePurpose, "OpenAIFilePurpose", "csharp");
+@@clientName(FileInfo, "PersistentAgentFileInfo", "csharp");
+@@clientName(FileInfo.bytes, "Size", "csharp");
+@@clientName(FilePurpose, "PersistentAgentFilePurpose", "csharp");
 @@clientName(ThreadMessage.content, "ContentItems", "csharp");
 @@clientName(MessageTextDetails.value, "Text", "csharp");
 @@clientName(CreateRunOptions.`model`, "OverrideModelName", "csharp");

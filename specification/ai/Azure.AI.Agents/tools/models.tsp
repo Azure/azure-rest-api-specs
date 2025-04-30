@@ -553,18 +553,18 @@ model ToolOutput {
  * forces the model to call that tool.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
-union AgentsApiToolChoiceOption {
+union AgentsToolChoiceOption {
   string,
 
   /** Specifies how the tool choice will be used */
-  AgentsApiToolChoiceOptionMode,
+  AgentsToolChoiceOptionMode,
 
   /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
   AgentsNamedToolChoice,
 }
 
 /** Specifies how the tool choice will be used */
-union AgentsApiToolChoiceOptionMode {
+union AgentsToolChoiceOptionMode {
   string,
 
   /** The model will not call a function and instead generates a message. */
