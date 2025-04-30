@@ -168,7 +168,7 @@ security:
   - ApiKeyAuth: []
   - BearerAuth: []
   - OAuth2Auth:
-      - https://ml.azure.com/.default
+      - https://cognitiveservices.azure.com/.default
 components:
   parameters:
     Azure.Core.Foundations.ApiVersionParameter:
@@ -1394,6 +1394,8 @@ components:
       enum:
         - 2024-05-01-preview
         - '2025-04-01'
+        - '2025-05-01'
+        - 2025-05-15-preview
       description: The AI.Model service versions.
   securitySchemes:
     ApiKeyAuth:
@@ -1409,7 +1411,7 @@ components:
         implicit:
           authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
           scopes:
-            https://ml.azure.com/.default: ''
+            https://cognitiveservices.azure.com/.default: ''
 servers:
   - url: https://{resource}.services.ai.azure.com/api/models
     description: AI Model Inference
