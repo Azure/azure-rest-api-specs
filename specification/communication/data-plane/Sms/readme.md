@@ -97,6 +97,18 @@ title:
 
 ---
 
+### Tag: package-sms-2025-05-29-preview
+
+These settings apply only when `--tag=package-sms-2025-05-29-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-sms-2025-05-29-preview'
+input-file:
+  - preview/2025-05-29-preview/communicationservicessms.json
+title:
+  Azure Communication Services
+```
+---
+
 # Code Generation
 
 ## Swagger to SDK
