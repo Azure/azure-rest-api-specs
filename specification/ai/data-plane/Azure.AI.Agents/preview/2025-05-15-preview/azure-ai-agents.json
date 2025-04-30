@@ -3636,12 +3636,69 @@
       ],
       "x-ms-discriminator-value": "azure_function"
     },
+    "BingCustomSearchConfiguration": {
+      "type": "object",
+      "description": "A bing custom search configuration.",
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "description": "Connection id for grounding with bing search",
+          "x-ms-client-name": "connectionId"
+        },
+        "instance_name": {
+          "type": "string",
+          "description": "Name of the custom configuration instance given to config.",
+          "x-ms-client-name": "instanceName"
+        },
+        "market": {
+          "type": "string",
+          "description": "The market where the results come from."
+        },
+        "set_lang": {
+          "type": "string",
+          "description": "The language to use for user interface strings when calling Bing API.",
+          "x-ms-client-name": "setLang"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of search results to return in the bing api response"
+        },
+        "freshness": {
+          "type": "string",
+          "description": "Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters"
+        }
+      },
+      "required": [
+        "connection_id",
+        "instance_name"
+      ]
+    },
+    "BingCustomSearchConfigurationList": {
+      "type": "object",
+      "description": "A list of search configurations currently used by the `bing_custom_search` tool.",
+      "properties": {
+        "search_configurations": {
+          "type": "array",
+          "description": "The connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/BingCustomSearchConfiguration"
+          },
+          "x-ms-client-name": "searchConfigurations",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "search_configurations"
+      ]
+    },
     "BingCustomSearchToolDefinition": {
       "type": "object",
       "description": "The input definition information for a Bing custom search tool as used to configure an agent.",
       "properties": {
         "bing_custom_search": {
-          "$ref": "#/definitions/SearchConfigurationList",
+          "$ref": "#/definitions/BingCustomSearchConfigurationList",
           "description": "The list of search configurations used by the bing custom search tool.",
           "x-ms-client-name": "bingCustomSearch"
         }
@@ -3656,13 +3713,64 @@
       ],
       "x-ms-discriminator-value": "bing_custom_search"
     },
+    "BingGroundingSearchConfiguration": {
+      "type": "object",
+      "description": "Search configuration for Bing Grounding",
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "description": "Connection id for grounding with bing search",
+          "x-ms-client-name": "connectionId"
+        },
+        "market": {
+          "type": "string",
+          "description": "The market where the results come from."
+        },
+        "set_lang": {
+          "type": "string",
+          "description": "The language to use for user interface strings when calling Bing API.",
+          "x-ms-client-name": "setLang"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of search results to return in the bing api response"
+        },
+        "freshness": {
+          "type": "string",
+          "description": "Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters"
+        }
+      },
+      "required": [
+        "connection_id"
+      ]
+    },
+    "BingGroundingSearchConfigurationList": {
+      "type": "object",
+      "description": "A list of search configurations currently used by the `bing_grounding` tool.",
+      "properties": {
+        "search_configurations": {
+          "type": "array",
+          "description": "The search configurations attached to this tool. There can be a maximum of 1\nsearch configuration resource attached to the tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/BingGroundingSearchConfiguration"
+          },
+          "x-ms-client-name": "searchConfigurations",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "search_configurations"
+      ]
+    },
     "BingGroundingToolDefinition": {
       "type": "object",
       "description": "The input definition information for a bing grounding search tool as used to configure an agent.",
       "properties": {
         "bing_grounding": {
-          "$ref": "#/definitions/ToolConnectionList",
-          "description": "The list of connections used by the bing grounding tool."
+          "$ref": "#/definitions/BingGroundingSearchConfigurationList",
+          "description": "The list of search configurations used by the bing grounding tool."
         }
       },
       "required": [
@@ -6131,6 +6239,29 @@
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
+    "RunStepBingCustomSearchToolCall": {
+      "type": "object",
+      "description": "A record of a call to a bing custom search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with bing custom search.",
+      "properties": {
+        "bing_custom_search": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bingCustomSearch"
+        }
+      },
+      "required": [
+        "bing_custom_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search"
+    },
     "RunStepBingGroundingToolCall": {
       "type": "object",
       "description": "A record of a call to a bing grounding tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with bing grounding.",
@@ -6290,29 +6421,6 @@
         "prompt_tokens",
         "total_tokens"
       ]
-    },
-    "RunStepCustomSearchToolCall": {
-      "type": "object",
-      "description": "A record of a call to a bing custom search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with bing custom search.",
-      "properties": {
-        "bing_custom_search": {
-          "type": "object",
-          "description": "Reserved for future use.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-client-name": "bingCustomSearch"
-        }
-      },
-      "required": [
-        "bing_custom_search"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "bing_custom_search"
     },
     "RunStepDelta": {
       "type": "object",
@@ -6760,17 +6868,11 @@
         "arguments": {
           "type": "string",
           "description": "The arguments that the model requires are provided to the named function."
-        },
-        "output": {
-          "type": "string",
-          "description": "The output of the function, only populated for function calls that have already have had their outputs submitted.",
-          "x-nullable": true
         }
       },
       "required": [
         "name",
-        "arguments",
-        "output"
+        "arguments"
       ]
     },
     "RunStepMessageCreationDetails": {
@@ -7109,45 +7211,6 @@
           }
         ]
       }
-    },
-    "SearchConfiguration": {
-      "type": "object",
-      "description": "A custom search configuration.",
-      "properties": {
-        "connection_id": {
-          "type": "string",
-          "description": "A connection in a ToolConnectionList attached to this tool.",
-          "x-ms-client-name": "connectionId"
-        },
-        "instance_name": {
-          "type": "string",
-          "description": "Name of the custom configuration instance given to config.",
-          "x-ms-client-name": "instanceName"
-        }
-      },
-      "required": [
-        "connection_id",
-        "instance_name"
-      ]
-    },
-    "SearchConfigurationList": {
-      "type": "object",
-      "description": "A list of search configurations currently used by the `bing_custom_search` tool.",
-      "properties": {
-        "search_configurations": {
-          "type": "array",
-          "description": "The connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
-          "maxItems": 1,
-          "items": {
-            "$ref": "#/definitions/SearchConfiguration"
-          },
-          "x-ms-client-name": "searchConfigurations",
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "search_configurations"
-      ]
     },
     "SharepointToolDefinition": {
       "type": "object",
