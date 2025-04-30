@@ -4514,13 +4514,6 @@
       "description": "Describes a virtual machine scale set storage profile."
     },
     "VirtualMachineScaleSetIPConfigurationProperties": {
-      "tags": {
-          "type": "object",
-          "description": "Specifies tags for the network interface.",
-          "additionalProperties": {
-          "type": "string",
-          "description": "A tag for the network interface."
-        },
       "properties": {
         "subnet": {
           "$ref": "./computeRPCommon.json#/definitions/ApiEntityReference",
@@ -4635,6 +4628,13 @@
       "description": "Describes a virtual machine scale set network profile's IP configuration properties."
     },
     "VirtualMachineScaleSetIPConfiguration": {
+      "tags": {
+        "type": "object",
+        "description": "Specifies tags for the network interface.",
+        "additionalProperties": {
+        "type": "string",
+        "description": "A tag for the network interface."
+        },
       "properties": {
         "name": {
           "type": "string",
@@ -4665,13 +4665,6 @@
       "x-ms-azure-resource": true
     },
     "VirtualMachineScaleSetNetworkConfigurationProperties": {
-      "tags": {
-        "type": "object",
-        "description": "Specifies tags for the network interface.",
-        "additionalProperties": {
-        "type": "string",
-        "description": "A tag for the network interface."
-        },
       "properties": {
         "primary": {
           "type": "boolean",
@@ -4841,6 +4834,13 @@
       "description": "Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration."
     },
     "VirtualMachineScaleSetNetworkConfiguration": {
+      "tags": {
+          "type": "object",
+          "description": "Specifies tags for the network interface.",
+          "additionalProperties": {
+          "type": "string",
+          "description": "A tag for the network interface."
+        },
       "properties": {
         "name": {
           "type": "string",
