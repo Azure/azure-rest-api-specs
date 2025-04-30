@@ -132,6 +132,15 @@ suppressions:
   - code: SystemDataDefinitionsCommonTypes
     from: network.json
     reason: False alarm.
+  - code: INCONSISTENT_API_VERSION
+    from: vmssNetworkInterface.json
+    reason: This a Microsoft.Compute resource & it's version can't be matched to Microsoft.Network release version.
+  - code: INCONSISTENT_API_VERSION
+    from: vmssPublicIpAddress.json
+    reason: False alarm.
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    from: networkWatcher.json
+    reason: Deprecated Api's.
 ```
 
 ### Tag: package-2024-06-preview
