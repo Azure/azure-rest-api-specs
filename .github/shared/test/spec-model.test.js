@@ -31,9 +31,9 @@ describe("getSpecModel", () => {
       repoRoot: fixtureRoot,
     });
 
-    const actualTag = actual.readmes.get(
-      "specification/yaml-date-parsing/readme.md",
-    ).globalConfig["tag"];
+    const actualTag = actual.readmes[
+      "specification/yaml-date-parsing/readme.md"
+    ].globalConfig["tag"];
 
     expect(actualTag).not.toBeTypeOf(Date);
     expect(actualTag).toBeTypeOf("string");
