@@ -6,7 +6,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.ServicePatterns {
-
   @Rest.autoRoute
   interface VersionedOperations<
     TEntityType extends Reflection.Model,
@@ -153,7 +152,7 @@ namespace Azure.AI.Projects.ServicePatterns {
     @doc("Document me")
     model InputParam<
       TEntityType extends Reflection.Model,
-      TBodyName extends valueof string = "body",
+      TBodyName extends valueof string = "body"
     > {
       @doc("The definition of the {name} to create or update", TEntityType)
       @Http.bodyRoot
