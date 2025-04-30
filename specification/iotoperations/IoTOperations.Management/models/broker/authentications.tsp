@@ -118,7 +118,7 @@ model BrokerAuthenticatorMethodX509 {
 
   @doc("X509 authentication attributes properties.")
   @added(Versions.`2025-07-01-preview`)
-  additionalValidation: BrokerAuthenticatorValidationMethods;
+  additionalValidation?: BrokerAuthenticatorValidationMethods;
 }
 
 @doc("X509 authentication validation methods.")
