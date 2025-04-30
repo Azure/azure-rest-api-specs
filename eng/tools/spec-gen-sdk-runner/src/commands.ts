@@ -86,6 +86,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let currentRunHasBreakingChange = false;
   let overallExecutionResult = "";
   let currentExecutionResult = "";
+  let packageName = "";
 
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
@@ -129,6 +130,11 @@ export async function generateSdkForSpecPr(): Promise<number> {
     try {
       // Read the execution report to aggreate the generation results
       executionReport = getExecutionReport(commandInput);
+      packageName =
+        packageName ??
+        executionReport.packages[0]?.packageName ??
+        commandInput.tspConfigPath ??
+        commandInput.readmePath;
       currentExecutionResult = executionReport.executionResult;
       if (overallExecutionResult !== "failed") {
         overallExecutionResult = currentExecutionResult;
@@ -144,6 +150,11 @@ export async function generateSdkForSpecPr(): Promise<number> {
     logMessage("ending group logging", LogLevel.EndGroup);
     logIssuesToPipeline(executionReport?.vsoLogPath, changedSpecPathText);
   }
+  // Set the pipeline variables which will be used to push code to remote repo if the spec repo is private repo
+  packageName = packageName ?? "missing-package-name";
+  packageName = packageName.replace("/", "-");
+  setPipelineVariables(packageName);
+
   // Process the spec-gen-sdk artifacts
   statusCode =
     generateArtifact(

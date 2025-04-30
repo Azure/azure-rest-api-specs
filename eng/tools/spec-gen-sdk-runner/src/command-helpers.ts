@@ -34,7 +34,7 @@ export function setPipelineVariables(
   packageName: string,
   installationInstructions: string = "",
 ): void {
-  const branchName = `sdkauto/${packageName?.replace("/", "_")}`;
+  const branchName = `sdkauto/${packageName?.replace("/", "-")}`;
   const prTitle = `[AutoPR ${packageName}]`;
   const prBody = installationInstructions;
   setVsoVariable("PrBranch", branchName);
