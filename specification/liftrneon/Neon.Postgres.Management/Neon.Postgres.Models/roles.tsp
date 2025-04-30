@@ -13,7 +13,7 @@ model NeonRole is ProxyResource<NeonRoleProperties> {
   ...ResourceNameParameter<
     Resource = NeonRole,
     KeyName = "neonRoleName",
-    SegmentName = "neonroles",
+    SegmentName = "neonRoles",
     NamePattern = "^\\S.{0,62}\\S$|^\\S$"
   >;
 }

@@ -13,7 +13,7 @@ model NeonDatabase is ProxyResource<NeonDatabaseProperties> {
   ...ResourceNameParameter<
     Resource = NeonDatabase,
     KeyName = "neonDatabaseName",
-    SegmentName = "neondatabases",
+    SegmentName = "neonDatabases",
     NamePattern = "^\\S.{0,62}\\S$|^\\S$"
   >;
 }
