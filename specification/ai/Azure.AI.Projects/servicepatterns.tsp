@@ -6,10 +6,11 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.ServicePatterns {
+
   @Rest.autoRoute
   interface VersionedOperations<
     TEntityType extends Reflection.Model,
-    TBodyName extends string,
+    TInputParam extends Reflection.Model,
     TListLatestParameters extends Reflection.Model = {},
     TListVersionsParameters extends Reflection.Model = {}
   > {
@@ -83,6 +84,8 @@ namespace Azure.AI.Projects.ServicePatterns {
     @Http.patch
     createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
       TEntityType,
+      TInputParam,
+      /*
       {
         @doc("The definition of the {name} to create or update", TEntityType)
         @Http.bodyRoot
@@ -97,6 +100,7 @@ namespace Azure.AI.Projects.ServicePatterns {
         @Http.path
         version: string;
       },
+      */
       Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>
     >;
   }
@@ -145,5 +149,24 @@ namespace Azure.AI.Projects.ServicePatterns {
       Azure.Core.Traits.SupportsClientRequestId &
       Azure.Core.Traits.NoConditionalRequests>;
     */
+
+    @doc("Document me")
+    model InputParam<
+      TEntityType extends Reflection.Model,
+      TBodyName extends valueof string = "body",
+    > {
+      @doc("The definition of the {name} to create or update", TEntityType)
+      @Http.bodyRoot
+      @clientName(TBodyName)
+      body: TEntityType;
+
+      @doc(
+        "The specific version id of the {name} to create or replace.",
+        TEntityType
+      )
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+    }
   }
 }

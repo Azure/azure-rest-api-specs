@@ -8,6 +8,7 @@ import "../common/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.AI.Projects.ServicePatterns.BuildingBlocks;
 
 namespace Azure.AI.Projects;
 
@@ -18,12 +19,15 @@ alias ListIndexVersionParameters = {
   continuationToken?: string;
 };
 
+@doc("Document me")
+model IndexesInputParam is InputParam<Index, "pendingUploadRequest">;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_01)
 interface Indexes
   extends ServicePatterns.VersionedOperations<
       Index,
-      "PendingUploadRequest",
+      IndexesInputParam,
       ListIndexVersionParameters,
       ListIndexVersionParameters
     > {}

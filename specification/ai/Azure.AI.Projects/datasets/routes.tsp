@@ -9,6 +9,7 @@ import "../servicepatterns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.AI.Projects.ServicePatterns.BuildingBlocks;
 
 namespace Azure.AI.Projects;
 
@@ -19,12 +20,15 @@ alias ListDatasetVersionsParameters = {
   continuationToken?: string;
 };
 
+@doc("Document me")
+model DatasetsInputParam is InputParam<DatasetVersion, "DatasetVersion">;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_01)
 interface Datasets
   extends ServicePatterns.VersionedOperations<
       DatasetVersion,
-      "DatasetVersion",
+      DatasetsInputParam,
       ListDatasetVersionsParameters,
       ListDatasetVersionsParameters
     > {
