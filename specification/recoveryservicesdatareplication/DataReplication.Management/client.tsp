@@ -331,4 +331,7 @@ using Microsoft.DataReplication;
   "csharp"
 );
 
-@@clientName(Microsoft.DataReplication, "RecoveryServicesDataReplicationMgmtClient", "python");
+@@clientName(Microsoft.DataReplication,
+  "RecoveryServicesDataReplicationMgmtClient",
+  "python"
+);
