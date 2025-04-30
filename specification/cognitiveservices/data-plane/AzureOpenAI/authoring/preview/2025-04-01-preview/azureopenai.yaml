@@ -317,42 +317,36 @@ paths:
           in: query
           name: after
           required: false
-          schema:
-            type: string
+          type: string
         - description: Number of evals to retrieve.
           in: query
           name: limit
           required: false
-          schema:
-            default: 20
-            type: integer
+          default: 20
+          type: integer
         - description: Sort order for evals by timestamp. Use `asc` for ascending order or `desc` for descending order.
           in: query
           name: order
           required: false
-          schema:
-            default: asc
-            enum:
-              - asc
-              - desc
-            type: string
+          default: asc
+          enum:
+            - asc
+            - desc
+          type: string
         - description: Evals can be ordered by creation time or last updated time. Use `created_at` for creation time or `updated_at` for last updated time.
           in: query
           name: order_by
           required: false
-          schema:
-            default: created_at
-            enum:
-              - created_at
-              - updated_at
-            type: string
+          default: created_at
+          enum:
+            - created_at
+            - updated_at
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/EvalList'
+          schema:
+            $ref: '#/definitions/EvalList'
           description: A list of evals
       x-ms-examples:
         Getting all the evaluations owned by this account.:
@@ -366,18 +360,10 @@ paths:
       operationId: Evaluation_Create
       parameters:
         - $ref: '#/parameters/apiVersionQueryParameter'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/definitions/CreateEvalRequest'
-        required: true
       responses:
         '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/Eval'
+          schema:
+            $ref: '#/definitions/Eval'
           description: OK
       x-ms-examples:
         The evaluation has been created successfully.:
@@ -393,35 +379,30 @@ paths:
           in: path
           name: eval_id
           required: true
-          schema:
-            type: string
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  deleted:
-                    example: true
-                    type: boolean
-                  eval_id:
-                    example: eval_abc123
-                    type: string
-                  object:
-                    example: eval.deleted
-                    type: string
-                required:
-                  - object
-                  - deleted
-                  - eval_id
-                type: object
+          schema:
+            properties:
+              deleted:
+                example: true
+                type: boolean
+              eval_id:
+                example: eval_abc123
+                type: string
+              object:
+                example: eval.deleted
+                type: string
+            required:
+              - object
+              - deleted
+              - eval_id
+            type: object
           description: Successfully deleted the evaluation.
         '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/Error'
+          schema:
+            $ref: '#/definitions/Error'
           description: Evaluation not found.
       x-ms-examples:
         Deletes an evaluation.:
@@ -436,15 +417,12 @@ paths:
           in: path
           name: eval_id
           required: true
-          schema:
-            type: string
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/Eval'
+          schema:
+            $ref: '#/definitions/Eval'
           description: The evaluation
       x-ms-examples:
         Getting the evaluation.:
@@ -459,28 +437,12 @@ paths:
           in: path
           name: eval_id
           required: true
-          schema:
-            type: string
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                metadata:
-                  $ref: '#/definitions/Metadata'
-                name:
-                  description: Rename the evaluation.
-                  type: string
-              type: object
-        description: Request to update an evaluation
-        required: true
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/Eval'
+          schema:
+            $ref: '#/definitions/Eval'
           description: The updated evaluation
       x-ms-examples:
         Deletes an evaluation.:
@@ -496,50 +458,43 @@ paths:
           in: path
           name: eval_id
           required: true
-          schema:
-            type: string
+          type: string
         - description: Identifier for the last run from the previous pagination request.
           in: query
           name: after
           required: false
-          schema:
-            type: string
+          type: string
         - description: Number of runs to retrieve.
           in: query
           name: limit
           required: false
-          schema:
-            default: 20
-            type: integer
+          default: 20
+          type: integer
         - description: Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.
           in: query
           name: order
           required: false
-          schema:
-            default: asc
-            enum:
-              - asc
-              - desc
-            type: string
+          default: asc
+          enum:
+            - asc
+            - desc
+          type: string
         - description: Filter runs by status. Use "queued" | "in_progress" | "failed"  | "completed" | "canceled".
           in: query
           name: status
           required: false
-          schema:
-            enum:
-              - queued
-              - in_progress
-              - completed
-              - canceled
-              - failed
-            type: string
+          enum:
+            - queued
+            - in_progress
+            - completed
+            - canceled
+            - failed
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/EvalRunList'
+          schema:
+            $ref: '#/definitions/EvalRunList'
           description: A list of runs for the evaluation
       x-ms-examples:
         Getting all evaluation runs under the given evaluation.:
@@ -554,27 +509,16 @@ paths:
           in: path
           name: eval_id
           required: true
-          schema:
-            type: string
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/definitions/CreateEvalRunRequest'
-        required: true
       responses:
         '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/EvalRun'
+          schema:
+            $ref: '#/definitions/EvalRun'
           description: Successfully created a run for the evaluation
         '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/Error'
+          schema:
+            $ref: '#/definitions/Error'
           description: Bad request (for example, missing eval object)
       x-ms-examples:
         Creating an evaluation run.:
@@ -590,37 +534,31 @@ paths:
           in: path
           name: eval_id
           required: true
-          schema:
-            type: string
+          type: string
         - description: The ID of the run to delete.
           in: path
           name: run_id
           required: true
-          schema:
-            type: string
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  deleted:
-                    example: true
-                    type: boolean
-                  object:
-                    example: eval.run.deleted
-                    type: string
-                  run_id:
-                    example: evalrun_677469f564d48190807532a852da3afb
-                    type: string
-                type: object
+          schema:
+            properties:
+              deleted:
+                example: true
+                type: boolean
+              object:
+                example: eval.run.deleted
+                type: string
+              run_id:
+                example: evalrun_677469f564d48190807532a852da3afb
+                type: string
+            type: object
           description: Successfully deleted the eval run
         '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/Error'
+          schema:
+            $ref: '#/definitions/Error'
           description: Run not found
       x-ms-examples:
         Deletes evaluation run.:
@@ -635,21 +573,17 @@ paths:
           in: path
           name: eval_id
           required: true
-          schema:
-            type: string
+          type: string
         - description: The ID of the run to retrieve.
           in: path
           name: run_id
           required: true
-          schema:
-            type: string
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/EvalRun'
+          schema:
+            $ref: '#/definitions/EvalRun'
           description: The evaluation run
       x-ms-examples:
         Getting an evaluation run.:
@@ -664,21 +598,17 @@ paths:
           in: path
           name: eval_id
           required: true
-          schema:
-            type: string
+          type: string
         - description: The ID of the run to cancel.
           in: path
           name: run_id
           required: true
-          schema:
-            type: string
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/EvalRun'
+          schema:
+            $ref: '#/definitions/EvalRun'
           description: The canceled eval run object
       x-ms-examples:
         Canceling evaluation run.:
@@ -694,53 +624,45 @@ paths:
           in: path
           name: eval_id
           required: true
-          schema:
-            type: string
+          type: string
         - description: The ID of the run to retrieve output items for.
           in: path
           name: run_id
           required: true
-          schema:
-            type: string
+          type: string
         - description: Identifier for the last output item from the previous pagination request.
           in: query
           name: after
           required: false
-          schema:
-            type: string
+          type: string
         - description: Number of output items to retrieve.
           in: query
           name: limit
           required: false
-          schema:
-            default: 20
-            type: integer
+          default: 20
+          type: integer
         - description: Filter output items by status. Use `failed` to filter by failed output items or `pass` to filter by passed output items.
           in: query
           name: status
           required: false
-          schema:
-            enum:
-              - fail
-              - pass
-            type: string
+          enum:
+            - fail
+            - pass
+          type: string
         - description: Sort order for output items by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.
           in: query
           name: order
           required: false
-          schema:
-            default: asc
-            enum:
-              - asc
-              - desc
-            type: string
+          default: asc
+          enum:
+            - asc
+            - desc
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/EvalRunOutputItemList'
+          schema:
+            $ref: '#/definitions/EvalRunOutputItemList'
           description: A list of output items for the evaluation run
       x-ms-examples:
         Getting data item outputs for this evaluation run.:
@@ -756,27 +678,22 @@ paths:
           in: path
           name: eval_id
           required: true
-          schema:
-            type: string
+          type: string
         - description: The ID of the run to retrieve.
           in: path
           name: run_id
           required: true
-          schema:
-            type: string
+          type: string
         - description: The ID of the output item to retrieve.
           in: path
           name: output_item_id
           required: true
-          schema:
-            type: string
+          type: string
         - $ref: '#/parameters/apiVersionQueryParameter'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/EvalRunOutputItem'
+          schema:
+            $ref: '#/definitions/EvalRunOutputItem'
           description: The evaluation run output item
       x-ms-examples:
         Getting single data item output for this evaluation run.:
@@ -2100,8 +2017,99 @@ definitions:
         type: integer
       maxFiles:
         type: integer
+  CreateEvalCompletionsRunDataSource:
+    description: 'A CompletionsRunDataSource object describing a model sampling configuration.'
+    properties:
+      input_messages:
+        allOf:
+          - properties:
+              template:
+                description: A list of chat messages forming the prompt or context.
+                  May include variable references to the "item" namespace, ie {{item.name}}.
+                items:
+                  allOf:
+                    - properties:
+                        content:
+                          description: The content of the message.
+                          type: string
+                        role:
+                          description: The role of the message (e.g. "system", "assistant",
+                            "user").
+                          type: string
+                      required:
+                      - role
+                      - content
+                      title: ChatMessage
+                      type: object
+                    - $ref: '#/definitions/EvalItem'
+                  type: array
+              type:
+                description: The type of input messages. Always `template`.
+                enum:
+                - template
+                type: string
+            required:
+            - type
+            - template
+            type: object
+          - properties:
+              item_reference:
+                description: A reference to a variable in the "item" namespace. Ie, "item.name"
+                type: string
+              type:
+                description: The type of input messages. Always `item_reference`.
+                enum:
+                - item_reference
+                type: string
+            required:
+            - type
+            - item_reference
+            type: object
+      model:
+        description: The name of the model to use for generating completions (e.g. "o3-mini").
+        type: string
+      sampling_params:
+        properties:
+          max_completion_tokens:
+            description: The maximum number of tokens in the generated output.
+            type: integer
+          seed:
+            default: 42
+            description: A seed value to initialize the randomness, during sampling.
+            type: integer
+          temperature:
+            default: 1.0
+            description: A higher temperature increases randomness in the outputs.
+            type: number
+          top_p:
+            default: 1.0
+            description: An alternative to temperature for nucleus sampling; 1.0 includes
+              all tokens.
+            type: number
+        type: object
+      source:
+        allOf:
+          - $ref: '#/definitions/EvalJsonlFileContentSource'
+          - $ref: '#/definitions/EvalJsonlFileIdSource'
+          - $ref: '#/definitions/EvalStoredCompletionsSource'
+      type:
+        default: completions
+        description: The type of run data source. Always `completions`.
+        enum:
+        - completions
+        type: string
+    required:
+    - type
+    - model
+    - source
+    - input_messages
+    title: CompletionsRunDataSource
+    type: object
   CreateEvalCustomDataSourceConfig:
-    description: 'A CustomDataSourceConfig object that defines the schema for the data source used for the evaluation runs. This schema is used to define the shape of the data that will be: - Used to define your testing criteria and - What data is required when creating a run '
+    description: 'A CustomDataSourceConfig object that defines the schema for the data source used for the evaluation runs.
+      This schema is used to define the shape of the data that will be:
+      - Used to define your testing criteria and 
+      - What data is required when creating a run '
     properties:
       include_sample_schema:
         default: false
@@ -2115,50 +2123,50 @@ definitions:
         default: custom
         description: The type of data source. Always `custom`.
         enum:
-          - custom
+        - custom
         type: string
     required:
-      - item_schema
-      - type
+    - item_schema
+    - type
     title: CustomDataSourceConfig
     type: object
   CreateEvalJsonlRunDataSource:
-    description: A JsonlRunDataSource object with that specifies a JSONL file that matches the eval.
+    description: "A JsonlRunDataSource object with that specifies a JSONL file that matches the eval."
     properties:
       source:
-        oneOf:
-          - $ref: '#/definitions/EvalJsonlFileContentSource'
-          - $ref: '#/definitions/EvalJsonlFileIdSource'
+        allOf:
+        - $ref: '#/definitions/EvalJsonlFileContentSource'
+        - $ref: '#/definitions/EvalJsonlFileIdSource'
       type:
         default: jsonl
         description: The type of data source. Always `jsonl`.
         enum:
-          - jsonl
+        - jsonl
         type: string
     required:
-      - type
-      - source
+    - type
+    - source
     title: JsonlRunDataSource
     type: object
   CreateEvalLabelModelGrader:
-    description: A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.
+    description: 'A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.'
     properties:
       input:
         items:
-          oneOf:
-            - properties:
-                content:
-                  description: The content of the message.
-                  type: string
-                role:
-                  description: The role of the message (e.g. "system", "assistant", "user").
-                  type: string
-              required:
-                - role
-                - content
-              title: SimpleInputMessage
-              type: object
-            - $ref: '#/definitions/EvalItem'
+          allOf:
+          - properties:
+              content:
+                description: The content of the message.
+                type: string
+              role:
+                description: The role of the message (e.g. "system", "assistant", "user").
+                type: string
+            required:
+            - role
+            - content
+            title: SimpleInputMessage
+            type: object
+          - $ref: '#/definitions/EvalItem'
         type: array
       labels:
         description: The labels to classify to each item in the evaluation.
@@ -2179,24 +2187,24 @@ definitions:
       type:
         description: The object type, which is always `label_model`.
         enum:
-          - label_model
+        - label_model
         type: string
     required:
-      - type
-      - model
-      - input
-      - passing_labels
-      - labels
-      - name
+    - type
+    - model
+    - input
+    - passing_labels
+    - labels
+    - name
     title: LabelModelGrader
     type: object
   CreateEvalRequest:
     properties:
       data_source_config:
         description: The configuration for the data source used for the evaluation runs.
-        oneOf:
-          - $ref: '#/definitions/CreateEvalCustomDataSourceConfig'
-          - $ref: '#/definitions/CreateEvalStoredCompletionsDataSourceConfig'
+        allOf:
+        - $ref: '#/definitions/CreateEvalCustomDataSourceConfig'
+        - $ref: '#/definitions/CreateEvalStoredCompletionsDataSourceConfig'
         type: object
       metadata:
         $ref: '#/definitions/Metadata'
@@ -2210,23 +2218,23 @@ definitions:
       testing_criteria:
         description: A list of graders for all eval runs in this group.
         items:
-          oneOf:
-            - $ref: '#/definitions/CreateEvalLabelModelGrader'
-            - $ref: '#/definitions/EvalStringCheckGrader'
-            - $ref: '#/definitions/EvalTextSimilarityGrader'
+          allOf:
+          - $ref: '#/definitions/CreateEvalLabelModelGrader'
+          - $ref: '#/definitions/EvalStringCheckGrader'
+          - $ref: '#/definitions/EvalTextSimilarityGrader'
         type: array
     required:
-      - data_source_config
-      - testing_criteria
+    - data_source_config
+    - testing_criteria
     title: CreateEvalRequest
     type: object
   CreateEvalRunRequest:
     properties:
       data_source:
         description: Details about the run's data source.
-        oneOf:
-          - $ref: '#/definitions/CreateEvalJsonlRunDataSource'
-          - $ref: '#/definitions/CreateEvalCompletionsRunDataSource'
+        allOf:
+        - $ref: '#/definitions/CreateEvalJsonlRunDataSource'
+        - $ref: '#/definitions/CreateEvalCompletionsRunDataSource'
         type: object
       metadata:
         $ref: '#/definitions/Metadata'
@@ -2234,11 +2242,12 @@ definitions:
         description: The name of the run.
         type: string
     required:
-      - data_source
+    - data_source
     title: CreateEvalRunRequest
     type: object
   CreateEvalStoredCompletionsDataSourceConfig:
-    description: 'A data source config which specifies the metadata property of your stored completions query. This is usually metadata like `usecase=chatbot` or `prompt-version=v2`, etc. '
+    description: 'A data source config which specifies the metadata property of your stored completions query.
+      This is usually metadata like `usecase=chatbot` or `prompt-version=v2`, etc. '
     properties:
       metadata:
         $ref: '#/definitions/Metadata'
@@ -2246,41 +2255,37 @@ definitions:
         default: stored_completions
         description: The type of data source. Always `stored_completions`.
         enum:
-          - stored_completions
+        - stored_completions
         type: string
     required:
-      - type
+    - type
     title: StoredCompletionsDataSourceConfig
     type: object
   CreateEvalStoredCompletionsRunDataSource:
-    description: A StoredCompletionsRunDataSource configuration describing a set of filters
+    description: 'A StoredCompletionsRunDataSource configuration describing a set of filters'
     properties:
       created_after:
         description: An optional Unix timestamp to filter items created after this time.
-        nullable: true
         type: integer
       created_before:
         description: An optional Unix timestamp to filter items created before this time.
-        nullable: true
         type: integer
       limit:
         description: An optional maximum number of items to return.
-        nullable: true
         type: integer
       metadata:
         $ref: '#/definitions/Metadata'
       model:
         description: An optional model to filter by (e.g., 'gpt-4o').
-        nullable: true
         type: string
       type:
         default: stored_completions
         description: The type of data source. Always `stored_completions`.
         enum:
-          - stored_completions
+        - stored_completions
         type: string
     required:
-      - type
+    - type
     title: StoredCompletionsRunDataSource
     type: object
   CustomCompute:
@@ -2490,17 +2495,36 @@ definitions:
     properties:
       error:
         $ref: '#/definitions/Error'
+  Error:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      param:
+        type: string
+      type:
+        type: string
+    required:
+      - type
+      - message
+      - param
+      - code
   Eval:
-    description: 'An Eval object with a data source config and testing criteria. An Eval represents a task to be done for your LLM integration. Like: - Improve the quality of my chatbot - See how well my chatbot handles customer support - Check if o3-mini is better at my usecase than gpt-4o'
+    description: "An Eval object with a data source config and testing criteria.
+      An Eval represents a task to be done for your LLM integration. Like: 
+      - Improve the quality of my chatbot
+      - See how well my chatbot handles customer support
+      - Check if o3-mini is better at my usecase than gpt-4o"
     properties:
       created_at:
         description: The Unix timestamp (in seconds) for when the eval was created.
         type: integer
       data_source_config:
         description: Configuration of data sources used in runs of the evaluation.
-        oneOf:
-          - $ref: '#/definitions/EvalCustomDataSourceConfig'
-          - $ref: '#/definitions/EvalStoredCompletionsDataSourceConfig'
+        allOf:
+        - $ref: '#/definitions/EvalCustomDataSourceConfig'
+        - $ref: '#/definitions/EvalStoredCompletionsDataSourceConfig'
         type: object
       id:
         description: Unique identifier for the evaluation.
@@ -2514,7 +2538,7 @@ definitions:
         default: eval
         description: The object type.
         enum:
-          - eval
+        - eval
         type: string
       share_with_openai:
         description: Indicates whether the evaluation is shared with OpenAI.
@@ -2523,24 +2547,24 @@ definitions:
         default: eval
         description: A list of testing criteria.
         items:
-          oneOf:
-            - $ref: '#/definitions/EvalLabelModelGrader'
-            - $ref: '#/definitions/EvalStringCheckGrader'
-            - $ref: '#/definitions/EvalTextSimilarityGrader'
+          allOf:
+          - $ref: '#/definitions/EvalLabelModelGrader'
+          - $ref: '#/definitions/EvalStringCheckGrader'
+          - $ref: '#/definitions/EvalTextSimilarityGrader'
         type: array
     required:
-      - id
-      - data_source_config
-      - object
-      - testing_criteria
-      - name
-      - created_at
-      - metadata
-      - share_with_openai
+    - id
+    - data_source_config
+    - object
+    - testing_criteria
+    - name
+    - created_at
+    - metadata
+    - share_with_openai
     title: Eval
     type: object
   EvalApiError:
-    description: An object representing an error response from the Eval API.
+    description: 'An object representing an error response from the Eval API.'
     properties:
       code:
         description: The error code.
@@ -2549,18 +2573,19 @@ definitions:
         description: The error message.
         type: string
     required:
-      - code
-      - message
+    - code
+    - message
     title: EvalApiError
     type: object
   EvalCompletionsRunDataSource:
-    description: A CompletionsRunDataSource object describing a model sampling configuration.
+    description: 'A CompletionsRunDataSource object describing a model sampling configuration.'
     properties:
       max_completion_tokens:
         description: The maximum number of tokens in the generated output.
         type: integer
       model:
-        description: The name of the model to use for generating completions (e.g. "gpt-3.5-turbo").
+        description: The name of the model to use for generating completions (e.g.
+          "gpt-3.5-turbo").
         type: string
       seed:
         description: A seed value to initialize the randomness, during sampling.
@@ -2574,44 +2599,48 @@ definitions:
           $ref: '#/definitions/EvalItem'
         type: array
       top_p:
-        description: An alternative to temperature for nucleus sampling; 1.0 includes all tokens.
+        description: An alternative to temperature for nucleus sampling; 1.0 includes
+          all tokens.
         type: number
       type:
         default: completions
         description: The type of run data source. Always `completions`.
         enum:
-          - completions
+        - completions
         type: string
     required:
-      - type
-      - template_messages
-      - model
-      - temperature
-      - max_completion_tokens
-      - top_p
-      - seed
+    - type
+    - template_messages
+    - model
+    - temperature
+    - max_completion_tokens
+    - top_p
+    - seed
     title: CompletionsRunDataSource
     type: object
   EvalCustomDataSourceConfig:
-    description: 'A CustomDataSourceConfig which specifies the schema of your `item` and optionally `sample` namespaces. The response schema defines the shape of the data that will be: - Used to define your testing criteria and - What data is required when creating a run '
+    description: 'A CustomDataSourceConfig which specifies the schema of your `item` and optionally `sample` namespaces.
+      The response schema defines the shape of the data that will be:
+      - Used to define your testing criteria and
+      - What data is required when creating a run '
     properties:
       schema:
         additionalProperties: true
-        description: The json schema for the run data source items. Learn how to build JSON schemas [here](https://json-schema.org/).
+        description: 'The json schema for the run data source items. Learn how to build JSON schemas [here](https://json-schema.org/).'
         type: object
       type:
         default: custom
         description: The type of data source. Always `custom`.
         enum:
-          - custom
+        - custom
         type: string
     required:
-      - type
-      - schema
+    - type
+    - schema
     title: CustomDataSourceConfig
     type: object
   EvalFileRunDataSource:
-    description: A FileRunDataSource configuration with a file id
+    description: 'A FileRunDataSource configuration with a file id'
     properties:
       file_id:
         description: The identifier of the file.
@@ -2620,82 +2649,81 @@ definitions:
         default: file
         description: The type of data source. Always `file`.
         enum:
-          - file
+        - file
         type: string
     required:
-      - type
-      - file_id
+    - type
+    - file_id
     title: FileRunDataSource
     type: object
   EvalItem:
     description: An item can either be an input message or an output message.
-    discriminator:
-      propertyName: role
-    oneOf:
-      - properties:
-          content:
-            properties:
-              text:
-                description: The text content.
-                type: string
-              type:
-                description: The type of content, which is always `input_text`.
-                enum:
-                  - input_text
-                type: string
-            required:
-              - type
-              - text
-            type: object
-          role:
-            description: The role of the message. One of `user`, `system`, or `developer`.
-            enum:
-              - user
-              - system
-              - developer
-            type: string
-          type:
-            description: The type of item, which is always `message`.
-            enum:
-              - message
-            type: string
-        required:
+    discriminator: role
+    allOf:
+    - properties:
+        content:
+          properties:
+            text:
+              description: The text content.
+              type: string
+            type:
+              description: The type of content, which is always `input_text`.
+              enum:
+              - input_text
+              type: string
+          required:
           - type
-          - role
-          - content
-        title: input_message
-        type: object
-      - properties:
-          content:
-            properties:
-              text:
-                description: The text content.
-                type: string
-              type:
-                description: The type of content, which is always `output_text`.
-                enum:
-                  - output_text
-                type: string
-            required:
-              - type
-              - text
-            type: object
-          role:
-            description: The role of the message. Must be `assistant` for output.
-            enum:
-              - assistant
-            type: string
-          type:
-            description: The type of item, which is always `message`.
-            enum:
-              - message
-            type: string
-        required:
+          - text
+          type: object
+        role:
+          description: The role of the message. One of `user`, `system`, or `developer`.
+          enum:
+          - user
+          - system
+          - developer
+          type: string
+        type:
+          description: The type of item, which is always `message`.
+          enum:
+          - message
+          type: string
+      required:
+      - type
+      - role
+      - content
+      title: input_message
+      type: object
+    - properties:
+        content:
+          properties:
+            text:
+              description: The text content.
+              type: string
+            type:
+              description: The type of content, which is always `output_text`.
+              enum:
+              - output_text
+              type: string
+          required:
           - type
-          - role
-          - content
-        title: output_message
-        type: object
+          - text
+          type: object
+        role:
+          description: The role of the message. Must be `assistant` for output.
+          enum:
+          - assistant
+          type: string
+        type:
+          description: The type of item, which is always `message`.
+          enum:
+          - message
+          type: string
+      required:
+      - type
+      - role
+      - content
+      title: output_message
+      type: object
     title: Item
   EvalJsonlFileContentSource:
     properties:
@@ -2710,18 +2738,18 @@ definitions:
               additionalProperties: true
               type: object
           required:
-            - item
+          - item
           type: object
         type: array
       type:
         default: file_content
         description: The type of jsonl source. Always `file_content`.
         enum:
-          - file_content
+        - file_content
         type: string
     required:
-      - type
-      - content
+    - type
+    - content
     title: EvalJsonlFileContentSource
     type: object
   EvalJsonlFileIdSource:
@@ -2733,15 +2761,15 @@ definitions:
         default: file_id
         description: The type of jsonl source. Always `file_id`.
         enum:
-          - file_id
+        - file_id
         type: string
     required:
-      - type
-      - id
+    - type
+    - id
     title: EvalJsonlFileIdSource
     type: object
   EvalLabelModelGrader:
-    description: A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.
+    description: 'A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.'
     properties:
       input:
         items:
@@ -2753,35 +2781,37 @@ definitions:
           type: string
         type: array
       model:
-        description: The model to use for the evaluation. Must support structured outputs.
+        description: The model to use for the evaluation. Must support structured
+          outputs.
         type: string
       name:
         description: The name of the grader.
         type: string
       passing_labels:
-        description: The labels that indicate a passing result. Must be a subset of labels.
+        description: The labels that indicate a passing result. Must be a subset of
+          labels.
         items:
           type: string
         type: array
       type:
         description: The object type, which is always `label_model`.
         enum:
-          - label_model
+        - label_model
         type: string
     required:
-      - type
-      - model
-      - input
-      - passing_labels
-      - labels
-      - name
+    - type
+    - model
+    - input
+    - passing_labels
+    - labels
+    - name
     title: LabelModelGrader
     type: object
   EvalList:
-    description: An object representing a list of evals.
+    description: 'An object representing a list of evals.'
     properties:
       data:
-        description: An array of eval objects.
+        description: 'An array of eval objects.'
         items:
           $ref: '#/definitions/Eval'
         type: array
@@ -2796,29 +2826,29 @@ definitions:
         type: string
       object:
         default: list
-        description: The type of this object. It is always set to "list".
+        description: 'The type of this object. It is always set to "list".'
         enum:
-          - list
+        - list
         type: string
     required:
-      - object
-      - data
-      - first_id
-      - last_id
-      - has_more
+    - object
+    - data
+    - first_id
+    - last_id
+    - has_more
     title: EvalList
     type: object
   EvalRun:
-    description: A schema representing an evaluation run.
+    description: 'A schema representing an evaluation run.'
     properties:
       created_at:
         description: Unix timestamp (in seconds) when the evaluation run was created.
         type: integer
       data_source:
         description: Information about the run's data source.
-        oneOf:
-          - $ref: '#/definitions/CreateEvalJsonlRunDataSource'
-          - $ref: '#/definitions/CreateEvalCompletionsRunDataSource'
+        allOf:
+        - $ref: '#/definitions/CreateEvalJsonlRunDataSource'
+        - $ref: '#/definitions/CreateEvalCompletionsRunDataSource'
         type: object
       error:
         $ref: '#/definitions/EvalApiError'
@@ -2840,7 +2870,7 @@ definitions:
         default: eval.run
         description: The type of the object. Always "eval.run".
         enum:
-          - eval.run
+        - eval.run
         type: string
       per_model_usage:
         description: Usage statistics for each model during the evaluation run.
@@ -2865,12 +2895,12 @@ definitions:
               description: The total number of tokens used.
               type: integer
           required:
-            - model_name
-            - invocation_count
-            - prompt_tokens
-            - completion_tokens
-            - total_tokens
-            - cached_tokens
+          - model_name
+          - invocation_count
+          - prompt_tokens
+          - completion_tokens
+          - total_tokens
+          - cached_tokens
           type: object
         type: array
       per_testing_criteria_results:
@@ -2887,9 +2917,9 @@ definitions:
               description: A description of the testing criteria.
               type: string
           required:
-            - testing_criteria
-            - passed
-            - failed
+          - testing_criteria
+          - passed
+          - failed
           type: object
         type: array
       report_url:
@@ -2911,36 +2941,36 @@ definitions:
             description: Total number of executed output items.
             type: integer
         required:
-          - total
-          - errored
-          - failed
-          - passed
+        - total
+        - errored
+        - failed
+        - passed
         type: object
       status:
         description: The status of the evaluation run.
         type: string
     required:
-      - object
-      - id
-      - eval_id
-      - status
-      - model
-      - name
-      - created_at
-      - report_url
-      - result_counts
-      - per_model_usage
-      - per_testing_criteria_results
-      - data_source
-      - metadata
-      - error
+    - object
+    - id
+    - eval_id
+    - status
+    - model
+    - name
+    - created_at
+    - report_url
+    - result_counts
+    - per_model_usage
+    - per_testing_criteria_results
+    - data_source
+    - metadata
+    - error
     title: EvalRun
     type: object
   EvalRunList:
-    description: An object representing a list of runs for an evaluation.
+    description: 'An object representing a list of runs for an evaluation.'
     properties:
       data:
-        description: An array of eval run objects.
+        description: 'An array of eval run objects.'
         items:
           $ref: '#/definitions/EvalRun'
         type: array
@@ -2955,20 +2985,20 @@ definitions:
         type: string
       object:
         default: list
-        description: The type of this object. It is always set to "list".
+        description: 'The type of this object. It is always set to "list".'
         enum:
-          - list
+        - list
         type: string
     required:
-      - object
-      - data
-      - first_id
-      - last_id
-      - has_more
+    - object
+    - data
+    - first_id
+    - last_id
+    - has_more
     title: EvalRunList
     type: object
   EvalRunOutputItem:
-    description: A schema representing an evaluation run output item.
+    description: 'A schema representing an evaluation run output item.'
     properties:
       created_at:
         description: Unix timestamp (in seconds) when the evaluation run was created.
@@ -2990,7 +3020,7 @@ definitions:
         default: eval.run.output_item
         description: The type of the object. Always "eval.run.output_item".
         enum:
-          - eval.run.output_item
+        - eval.run.output_item
         type: string
       results:
         description: A list of results from the evaluation run.
@@ -3000,7 +3030,8 @@ definitions:
           type: object
         type: array
       run_id:
-        description: The identifier of the evaluation run associated with this output item.
+        description: The identifier of the evaluation run associated with this output
+          item.
         type: string
       sample:
         description: A sample containing the input and output of the evaluation run.
@@ -3019,11 +3050,12 @@ definitions:
                   description: The content of the message.
                   type: string
                 role:
-                  description: The role of the message sender (e.g., system, user, developer).
+                  description: The role of the message sender (e.g., system, user,
+                    developer).
                   type: string
               required:
-                - role
-                - content
+              - role
+              - content
               type: object
             type: array
           max_completion_tokens:
@@ -3069,44 +3101,44 @@ definitions:
                 description: The total number of tokens used.
                 type: integer
             required:
-              - total_tokens
-              - completion_tokens
-              - prompt_tokens
-              - cached_tokens
+            - total_tokens
+            - completion_tokens
+            - prompt_tokens
+            - cached_tokens
             type: object
         required:
-          - input
-          - output
-          - finish_reason
-          - model
-          - usage
-          - error
-          - temperature
-          - max_completion_tokens
-          - top_p
-          - seed
+        - input
+        - output
+        - finish_reason
+        - model
+        - usage
+        - error
+        - temperature
+        - max_completion_tokens
+        - top_p
+        - seed
         type: object
       status:
         description: The status of the evaluation run.
         type: string
     required:
-      - object
-      - id
-      - run_id
-      - eval_id
-      - created_at
-      - status
-      - datasource_item_id
-      - datasource_item
-      - results
-      - sample
+    - object
+    - id
+    - run_id
+    - eval_id
+    - created_at
+    - status
+    - datasource_item_id
+    - datasource_item
+    - results
+    - sample
     title: EvalRunOutputItem
     type: object
   EvalRunOutputItemList:
-    description: An object representing a list of output items for an evaluation run.
+    description: 'An object representing a list of output items for an evaluation run.'
     properties:
       data:
-        description: An array of eval run output item objects.
+        description: 'An array of eval run output item objects.'
         items:
           $ref: '#/definitions/EvalRunOutputItem'
         type: array
@@ -3121,76 +3153,77 @@ definitions:
         type: string
       object:
         default: list
-        description: The type of this object. It is always set to "list".
+        description: 'The type of this object. It is always set to "list".'
         enum:
-          - list
+        - list
         type: string
     required:
-      - object
-      - data
-      - first_id
-      - last_id
-      - has_more
+    - object
+    - data
+    - first_id
+    - last_id
+    - has_more
     title: EvalRunOutputItemList
     type: object
   EvalStoredCompletionsDataSourceConfig:
-    description: A StoredCompletionsDataSourceConfig which specifies the metadata property of your stored completions query. This is usually metadata like `usecase=chatbot` or `prompt-version=v2`, etc. The schema returned by this data source config is used to defined what variables are available in your evals. `item` and `sample` are both defined when using this data source config.
+    description: 'A StoredCompletionsDataSourceConfig which specifies the metadata
+      property of your stored completions query.
+      This is usually metadata like `usecase=chatbot` or `prompt-version=v2`, etc.
+      The schema returned by this data source config is used to defined what variables
+      are available in your evals.
+      `item` and `sample` are both defined when using this data source config.'
     properties:
       metadata:
         $ref: '#/definitions/Metadata'
       schema:
         additionalProperties: true
-        description: The json schema for the run data source items. Learn how to build JSON schemas [here](https://json-schema.org/).
+        description: 'The json schema for the run data source items. Learn how to build JSON schemas [here](https://json-schema.org/).'
         type: object
       type:
         default: stored_completions
         description: The type of data source. Always `stored_completions`.
         enum:
-          - stored_completions
+        - stored_completions
         type: string
     required:
-      - type
-      - schema
+    - type
+    - schema
     title: StoredCompletionsDataSourceConfig
     type: object
   EvalStoredCompletionsSource:
-    description: A StoredCompletionsRunDataSource configuration describing a set of filters
+    description: 'A StoredCompletionsRunDataSource configuration describing a set of filters'
     properties:
       created_after:
         description: An optional Unix timestamp to filter items created after this time.
-        nullable: true
         type: integer
       created_before:
         description: An optional Unix timestamp to filter items created before this time.
-        nullable: true
         type: integer
       limit:
         description: An optional maximum number of items to return.
-        nullable: true
         type: integer
       metadata:
         $ref: '#/definitions/Metadata'
       model:
         description: An optional model to filter by (e.g., 'gpt-4o').
-        nullable: true
         type: string
       type:
         default: stored_completions
         description: The type of source. Always `stored_completions`.
         enum:
-          - stored_completions
+        - stored_completions
         type: string
     required:
-      - type
-      - metadata
-      - model
-      - created_after
-      - created_before
-      - limit
+    - type
+    - metadata
+    - model
+    - created_after
+    - created_before
+    - limit
     title: StoredCompletionsRunDataSource
     type: object
   EvalStringCheckGrader:
-    description: A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.
+    description: 'A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.'
     properties:
       input:
         description: The input text. This may include template strings.
@@ -3201,10 +3234,10 @@ definitions:
       operation:
         description: The string check operation to perform. One of `eq`, `ne`, `like`, or `ilike`.
         enum:
-          - eq
-          - ne
-          - like
-          - ilike
+        - eq
+        - ne
+        - like
+        - ilike
         type: string
       reference:
         description: The reference text. This may include template strings.
@@ -3212,33 +3245,35 @@ definitions:
       type:
         description: The object type, which is always `string_check`.
         enum:
-          - string_check
+        - string_check
         type: string
     required:
-      - type
-      - name
-      - input
-      - reference
-      - operation
+    - type
+    - name
+    - input
+    - reference
+    - operation
     title: StringCheckGrader
     type: object
   EvalTextSimilarityGrader:
-    description: A TextSimilarityGrader object which grades text based on similarity metrics.
+    description: 'A TextSimilarityGrader object which grades text based on similarity metrics.'
     properties:
       evaluation_metric:
-        description: The evaluation metric to use. One of `cosine`, `fuzzy_match`, `bleu`, `gleu`, `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`, or `rouge_l`.
+        description: The evaluation metric to use. One of `cosine`, `fuzzy_match`,
+          `bleu`, `gleu`, `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`,
+          or `rouge_l`.
         enum:
-          - fuzzy_match
-          - bleu
-          - gleu
-          - meteor
-          - rouge_1
-          - rouge_2
-          - rouge_3
-          - rouge_4
-          - rouge_5
-          - rouge_l
-          - cosine
+        - fuzzy_match
+        - bleu
+        - gleu
+        - meteor
+        - rouge_1
+        - rouge_2
+        - rouge_3
+        - rouge_4
+        - rouge_5
+        - rouge_l
+        - cosine
         type: string
       input:
         description: The text being graded.
@@ -3256,14 +3291,14 @@ definitions:
         default: text_similarity
         description: The type of grader.
         enum:
-          - text_similarity
+        - text_similarity
         type: string
     required:
-      - type
-      - input
-      - reference
-      - pass_threshold
-      - evaluation_metric
+    - type
+    - input
+    - reference
+    - pass_threshold
+    - evaluation_metric
     title: TextSimilarityGrader
     type: object
   EventType:
@@ -4090,10 +4125,13 @@ definitions:
         type: number
   Metadata:
     type: object
-    description: Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+    description: Set of 16 key-value pairs that can be attached to an object. This can be
+      useful for storing additional information about the object in a structured
+      format, and querying for objects via API or the dashboard. 
+      Keys are strings with a maximum length of 64 characters. Values are strings
+      with a maximum length of 512 characters.
     additionalProperties:
       type: string
-    nullable: true
   Model:
     title: Model
     description: A model is either a base model or the result of a successful fine tune job.
@@ -4875,7 +4913,7 @@ definitions:
         type: string
       modelName:
         type: string
-  CreateEvalCompletionsRunDataSource:
+  reateEvalCompletionsRunDataSource:
     description: A CompletionsRunDataSource object describing a model sampling configuration.
     properties:
       input_messages:

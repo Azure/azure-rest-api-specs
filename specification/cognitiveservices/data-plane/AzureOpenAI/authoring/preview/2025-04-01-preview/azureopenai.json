@@ -491,47 +491,39 @@
             "in": "query",
             "name": "after",
             "required": false,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "Number of evals to retrieve.",
             "in": "query",
             "name": "limit",
             "required": false,
-            "schema": {
-              "default": 20,
-              "type": "integer"
-            }
+            "default": 20,
+            "type": "integer"
           },
           {
             "description": "Sort order for evals by timestamp. Use `asc` for ascending order or `desc` for descending order.",
             "in": "query",
             "name": "order",
             "required": false,
-            "schema": {
-              "default": "asc",
-              "enum": [
-                "asc",
-                "desc"
-              ],
-              "type": "string"
-            }
+            "default": "asc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string"
           },
           {
             "description": "Evals can be ordered by creation time or last updated time. Use `created_at` for creation time or `updated_at` for last updated time.",
             "in": "query",
             "name": "order_by",
             "required": false,
-            "schema": {
-              "default": "created_at",
-              "enum": [
-                "created_at",
-                "updated_at"
-              ],
-              "type": "string"
-            }
+            "default": "created_at",
+            "enum": [
+              "created_at",
+              "updated_at"
+            ],
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -539,12 +531,8 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/EvalList"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/EvalList"
             },
             "description": "A list of evals"
           }
@@ -566,24 +554,10 @@
             "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/CreateEvalRequest"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Eval"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/Eval"
             },
             "description": "OK"
           }
@@ -608,9 +582,7 @@
             "in": "path",
             "name": "eval_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -618,41 +590,33 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "deleted": {
-                      "example": true,
-                      "type": "boolean"
-                    },
-                    "eval_id": {
-                      "example": "eval_abc123",
-                      "type": "string"
-                    },
-                    "object": {
-                      "example": "eval.deleted",
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "object",
-                    "deleted",
-                    "eval_id"
-                  ],
-                  "type": "object"
+            "schema": {
+              "properties": {
+                "deleted": {
+                  "example": true,
+                  "type": "boolean"
+                },
+                "eval_id": {
+                  "example": "eval_abc123",
+                  "type": "string"
+                },
+                "object": {
+                  "example": "eval.deleted",
+                  "type": "string"
                 }
-              }
+              },
+              "required": [
+                "object",
+                "deleted",
+                "eval_id"
+              ],
+              "type": "object"
             },
             "description": "Successfully deleted the evaluation."
           },
           "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Error"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/Error"
             },
             "description": "Evaluation not found."
           }
@@ -675,9 +639,7 @@
             "in": "path",
             "name": "eval_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -685,12 +647,8 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Eval"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/Eval"
             },
             "description": "The evaluation"
           }
@@ -713,42 +671,16 @@
             "in": "path",
             "name": "eval_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "metadata": {
-                    "$ref": "#/definitions/Metadata"
-                  },
-                  "name": {
-                    "description": "Rename the evaluation.",
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              }
-            }
-          },
-          "description": "Request to update an evaluation",
-          "required": true
-        },
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Eval"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/Eval"
             },
             "description": "The updated evaluation"
           }
@@ -773,58 +705,48 @@
             "in": "path",
             "name": "eval_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "Identifier for the last run from the previous pagination request.",
             "in": "query",
             "name": "after",
             "required": false,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "Number of runs to retrieve.",
             "in": "query",
             "name": "limit",
             "required": false,
-            "schema": {
-              "default": 20,
-              "type": "integer"
-            }
+            "default": 20,
+            "type": "integer"
           },
           {
             "description": "Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.",
             "in": "query",
             "name": "order",
             "required": false,
-            "schema": {
-              "default": "asc",
-              "enum": [
-                "asc",
-                "desc"
-              ],
-              "type": "string"
-            }
+            "default": "asc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string"
           },
           {
             "description": "Filter runs by status. Use \"queued\" | \"in_progress\" | \"failed\"  | \"completed\" | \"canceled\".",
             "in": "query",
             "name": "status",
             "required": false,
-            "schema": {
-              "enum": [
-                "queued",
-                "in_progress",
-                "completed",
-                "canceled",
-                "failed"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "queued",
+              "in_progress",
+              "completed",
+              "canceled",
+              "failed"
+            ],
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -832,12 +754,8 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/EvalRunList"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/EvalRunList"
             },
             "description": "A list of runs for the evaluation"
           }
@@ -860,42 +778,22 @@
             "in": "path",
             "name": "eval_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/CreateEvalRunRequest"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/EvalRun"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/EvalRun"
             },
             "description": "Successfully created a run for the evaluation"
           },
           "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Error"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/Error"
             },
             "description": "Bad request (for example, missing eval object)"
           }
@@ -920,18 +818,14 @@
             "in": "path",
             "name": "eval_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "The ID of the run to delete.",
             "in": "path",
             "name": "run_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -939,36 +833,28 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "deleted": {
-                      "example": true,
-                      "type": "boolean"
-                    },
-                    "object": {
-                      "example": "eval.run.deleted",
-                      "type": "string"
-                    },
-                    "run_id": {
-                      "example": "evalrun_677469f564d48190807532a852da3afb",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
+            "schema": {
+              "properties": {
+                "deleted": {
+                  "example": true,
+                  "type": "boolean"
+                },
+                "object": {
+                  "example": "eval.run.deleted",
+                  "type": "string"
+                },
+                "run_id": {
+                  "example": "evalrun_677469f564d48190807532a852da3afb",
+                  "type": "string"
                 }
-              }
+              },
+              "type": "object"
             },
             "description": "Successfully deleted the eval run"
           },
           "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Error"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/Error"
             },
             "description": "Run not found"
           }
@@ -991,18 +877,14 @@
             "in": "path",
             "name": "eval_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "The ID of the run to retrieve.",
             "in": "path",
             "name": "run_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -1010,12 +892,8 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/EvalRun"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/EvalRun"
             },
             "description": "The evaluation run"
           }
@@ -1038,18 +916,14 @@
             "in": "path",
             "name": "eval_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "The ID of the run to cancel.",
             "in": "path",
             "name": "run_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -1057,12 +931,8 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/EvalRun"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/EvalRun"
             },
             "description": "The canceled eval run object"
           }
@@ -1087,64 +957,52 @@
             "in": "path",
             "name": "eval_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "The ID of the run to retrieve output items for.",
             "in": "path",
             "name": "run_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "Identifier for the last output item from the previous pagination request.",
             "in": "query",
             "name": "after",
             "required": false,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "Number of output items to retrieve.",
             "in": "query",
             "name": "limit",
             "required": false,
-            "schema": {
-              "default": 20,
-              "type": "integer"
-            }
+            "default": 20,
+            "type": "integer"
           },
           {
             "description": "Filter output items by status. Use `failed` to filter by failed output items or `pass` to filter by passed output items.",
             "in": "query",
             "name": "status",
             "required": false,
-            "schema": {
-              "enum": [
-                "fail",
-                "pass"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "fail",
+              "pass"
+            ],
+            "type": "string"
           },
           {
             "description": "Sort order for output items by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.",
             "in": "query",
             "name": "order",
             "required": false,
-            "schema": {
-              "default": "asc",
-              "enum": [
-                "asc",
-                "desc"
-              ],
-              "type": "string"
-            }
+            "default": "asc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -1152,12 +1010,8 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/EvalRunOutputItemList"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/EvalRunOutputItemList"
             },
             "description": "A list of output items for the evaluation run"
           }
@@ -1182,27 +1036,21 @@
             "in": "path",
             "name": "eval_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "The ID of the run to retrieve.",
             "in": "path",
             "name": "run_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "description": "The ID of the output item to retrieve.",
             "in": "path",
             "name": "output_item_id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -1210,12 +1058,8 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/EvalRunOutputItem"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/EvalRunOutputItem"
             },
             "description": "The evaluation run output item"
           }
@@ -3240,13 +3084,13 @@
       "description": "A CompletionsRunDataSource object describing a model sampling configuration.",
       "properties": {
         "input_messages": {
-          "oneOf": [
+          "allOf": [
             {
               "properties": {
                 "template": {
                   "description": "A list of chat messages forming the prompt or context. May include variable references to the \"item\" namespace, ie {{item.name}}.",
                   "items": {
-                    "oneOf": [
+                    "allOf": [
                       {
                         "properties": {
                           "content": {
@@ -3268,9 +3112,9 @@
                       {
                         "$ref": "#/definitions/EvalItem"
                       }
-                    ]
-                  },
-                  "type": "array"
+                    ],
+                    "type": "array"
+                  }
                 },
                 "type": {
                   "description": "The type of input messages. Always `template`.",
@@ -3337,7 +3181,7 @@
           "type": "object"
         },
         "source": {
-          "oneOf": [
+          "allOf": [
             {
               "$ref": "#/definitions/EvalJsonlFileContentSource"
             },
@@ -3400,7 +3244,7 @@
       "description": "A JsonlRunDataSource object with that specifies a JSONL file that matches the eval.",
       "properties": {
         "source": {
-          "oneOf": [
+          "allOf": [
             {
               "$ref": "#/definitions/EvalJsonlFileContentSource"
             },
@@ -3430,7 +3274,7 @@
       "properties": {
         "input": {
           "items": {
-            "oneOf": [
+            "allOf": [
               {
                 "properties": {
                   "content": {
@@ -3501,7 +3345,7 @@
       "properties": {
         "data_source_config": {
           "description": "The configuration for the data source used for the evaluation runs.",
-          "oneOf": [
+          "allOf": [
             {
               "$ref": "#/definitions/CreateEvalCustomDataSourceConfig"
             },
@@ -3526,7 +3370,7 @@
         "testing_criteria": {
           "description": "A list of graders for all eval runs in this group.",
           "items": {
-            "oneOf": [
+            "allOf": [
               {
                 "$ref": "#/definitions/CreateEvalLabelModelGrader"
               },
@@ -3552,7 +3396,7 @@
       "properties": {
         "data_source": {
           "description": "Details about the run's data source.",
-          "oneOf": [
+          "allOf": [
             {
               "$ref": "#/definitions/CreateEvalJsonlRunDataSource"
             },
@@ -3602,17 +3446,14 @@
       "properties": {
         "created_after": {
           "description": "An optional Unix timestamp to filter items created after this time.",
-          "nullable": true,
           "type": "integer"
         },
         "created_before": {
           "description": "An optional Unix timestamp to filter items created before this time.",
-          "nullable": true,
           "type": "integer"
         },
         "limit": {
           "description": "An optional maximum number of items to return.",
-          "nullable": true,
           "type": "integer"
         },
         "metadata": {
@@ -3620,7 +3461,6 @@
         },
         "model": {
           "description": "An optional model to filter by (e.g., 'gpt-4o').",
-          "nullable": true,
           "type": "string"
         },
         "type": {
@@ -3963,7 +3803,7 @@
         },
         "data_source_config": {
           "description": "Configuration of data sources used in runs of the evaluation.",
-          "oneOf": [
+          "allOf": [
             {
               "$ref": "#/definitions/EvalCustomDataSourceConfig"
             },
@@ -4000,7 +3840,7 @@
           "default": "eval",
           "description": "A list of testing criteria.",
           "items": {
-            "oneOf": [
+            "allOf": [
               {
                 "$ref": "#/definitions/EvalLabelModelGrader"
               },
@@ -4147,10 +3987,8 @@
     },
     "EvalItem": {
       "description": "An item can either be an input message or an output message.",
-      "discriminator": {
-        "propertyName": "role"
-      },
-      "oneOf": [
+      "discriminator": "role",
+      "allOf": [
         {
           "properties": {
             "content": {
@@ -4406,7 +4244,7 @@
         },
         "data_source": {
           "description": "Information about the run's data source.",
-          "oneOf": [
+          "allOf": [
             {
               "$ref": "#/definitions/CreateEvalJsonlRunDataSource"
             },
@@ -4860,17 +4698,14 @@
       "properties": {
         "created_after": {
           "description": "An optional Unix timestamp to filter items created after this time.",
-          "nullable": true,
           "type": "integer"
         },
         "created_before": {
           "description": "An optional Unix timestamp to filter items created before this time.",
-          "nullable": true,
           "type": "integer"
         },
         "limit": {
           "description": "An optional maximum number of items to return.",
-          "nullable": true,
           "type": "integer"
         },
         "metadata": {
@@ -4878,7 +4713,6 @@
         },
         "model": {
           "description": "An optional model to filter by (e.g., 'gpt-4o').",
-          "nullable": true,
           "type": "string"
         },
         "type": {
@@ -6171,8 +6005,7 @@
       "description": "Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
       "additionalProperties": {
         "type": "string"
-      },
-      "nullable": true
+      }
     },
     "Model": {
       "title": "Model",
