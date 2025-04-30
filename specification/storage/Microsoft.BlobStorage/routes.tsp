@@ -1112,7 +1112,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       @put
-      @route("{blobName}?comp=copy")
+      @route("{blobName}")
       op startCopyFromUrl is StorageOperation<
         {
           ...ContainerNamePathParameter;
