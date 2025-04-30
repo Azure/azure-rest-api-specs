@@ -5823,11 +5823,10 @@
           "type": "array",
           "description": "The persistent volume claim templates for the managed configuration.",
           "items": {
-            "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaimTemplate"
+            "type": "object",
+            "additionalProperties": {}
           },
-          "x-ms-identifiers": [
-            "mountPath"
-          ]
+          "x-ms-identifiers": []
         }
       },
       "discriminator": "managedConfigurationType",
@@ -5876,106 +5875,6 @@
         "claimName",
         "mountPath"
       ]
-    },
-    "ConnectorTemplatePersistentVolumeClaimResourceRequests": {
-      "type": "object",
-      "description": "ConnectorTemplatePersistentVolumeClaimResourceRequests properties",
-      "properties": {
-        "storage": {
-          "type": "string",
-          "description": "The storage resource request for the PVC."
-        }
-      },
-      "required": [
-        "storage"
-      ]
-    },
-    "ConnectorTemplatePersistentVolumeClaimResourceRequirements": {
-      "type": "object",
-      "description": "ConnectorTemplatePersistentVolumeClaimResourceRequirements properties",
-      "properties": {
-        "requests": {
-          "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaimResourceRequests",
-          "description": "Requests represents the minimum amount of compute resources required.\nIf Requests is omitted for any container, the Kubelet will enforce that the container has at least as much CPU/Memory as requested.\nIf it is omitted for all containers, the Kubelet will enforce that the Pod has at least as much CPU/Memory as requested. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
-        }
-      },
-      "required": [
-        "requests"
-      ]
-    },
-    "ConnectorTemplatePersistentVolumeClaimTemplate": {
-      "type": "object",
-      "description": "ConnectorTemplatePersistentVolumeClaimTemplate properties",
-      "properties": {
-        "mountPath": {
-          "type": "string",
-          "description": "The mount path for the persistent volume claim."
-        },
-        "volumeName": {
-          "type": "string",
-          "description": "VolumeName is the binding reference to the PersistentVolume backing this claim."
-        },
-        "volumeMode": {
-          "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaimVolumeMode",
-          "description": "volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. This is a beta feature."
-        },
-        "volumeAttributesClassName": {
-          "type": "string",
-          "description": "A custom volume class name for specific volume attributes or configurations. This can be used to define custom settings for volume provisioning."
-        },
-        "storageClassName": {
-          "type": "string",
-          "description": "Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1"
-        },
-        "accessModes": {
-          "type": "array",
-          "description": "AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
-        },
-        "dataSource": {
-          "$ref": "#/definitions/LocalKubernetesReference",
-          "description": "This field can be used to specify either:\n- An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)\n- An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source.\n\nIf the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field."
-        },
-        "dataSourceRef": {
-          "$ref": "#/definitions/KubernetesReference",
-          "description": "Specifies the object from which to populate the volume with data, if a non-empty volume is desired.\nThis may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object.\nWhen this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner.\nThis field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value.\nFor backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty.\n\nThere are two important differences between DataSource and DataSourceRef:\n- While DataSource only allows two specific types of objects, DataSourceRef allows any non-core object, as well as PersistentVolumeClaim objects.\n- While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified."
-        },
-        "resources": {
-          "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaimResourceRequirements",
-          "description": "The resource requests for the PVC, such as storage size."
-        }
-      },
-      "required": [
-        "mountPath",
-        "resources"
-      ]
-    },
-    "ConnectorTemplatePersistentVolumeClaimVolumeMode": {
-      "type": "string",
-      "description": "Volume mode types.",
-      "enum": [
-        "Filesystem",
-        "Block"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectorTemplatePersistentVolumeClaimVolumeMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Filesystem",
-            "value": "Filesystem",
-            "description": "Filesystem volume mode"
-          },
-          {
-            "name": "Block",
-            "value": "Block",
-            "description": "Block volume mode"
-          }
-        ]
-      }
     },
     "ConnectorTemplateProperties": {
       "type": "object",

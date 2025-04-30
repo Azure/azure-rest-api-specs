@@ -7,6 +7,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 namespace Microsoft.IoTOperations;
 
 /**
@@ -258,123 +259,11 @@ model ConnectorTemplateManagedConfigurationSettings {
 
   /**
    * The persistent volume claim templates for the managed configuration.
+   * @see https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json
    */
-  @OpenAPI.extension("x-ms-identifiers", #["mountPath"])
-  persistentVolumeClaimTemplates?: ConnectorTemplatePersistentVolumeClaimTemplate[];
-}
-
-/**
- * ConnectorTemplatePersistentVolumeClaimTemplate properties
- */
-// This differs slightly from the VolumeClaimSpec used by Mq broker. Perhaps we should allign with that.
-// Some of the differences are:
-// 1. This doesn't have a `selector` property.
-// 2. This has a `volumeAttributesClassName` property.
-// 3. This has a `mountPath` property.
-// 4. This has a `volumeMode` property.
-// 5. This doesn't have a `resources.limits` and `resource.claims` property.
-// 6. `resource.requests` only has `storage` property but the Mq broker `resource.requests` is defined as `Record<string>`.
-@added(Versions.`2025-07-01-preview`)
-model ConnectorTemplatePersistentVolumeClaimTemplate {
-  /**
-   * The mount path for the persistent volume claim.
-   */
-  mountPath: string;
-
-  /**
-   * VolumeName is the binding reference to the PersistentVolume backing this claim.
-   */
-  volumeName?: string;
-
-  /**
-   * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. This is a beta feature.
-   */
-  volumeMode?: ConnectorTemplatePersistentVolumeClaimVolumeMode;
-
-  /**
-   * A custom volume class name for specific volume attributes or configurations. This can be used to define custom settings for volume provisioning.
-   */
-  volumeAttributesClassName?: string;
-
-  /**
-   * Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
-   */
-  storageClassName?: string;
-
-  /**
-   * AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
-   */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  accessModes?: string[];
-
-  /**
-   * This field can be used to specify either:
-   * - An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)
-   * - An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source.
-   *
-   * If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field.
-   */
-  dataSource?: LocalKubernetesReference;
-
-  /**
-   * Specifies the object from which to populate the volume with data, if a non-empty volume is desired.
-   * This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object.
-   * When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner.
-   * This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value.
-   * For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty.
-   *
-   * There are two important differences between DataSource and DataSourceRef:
-   * - While DataSource only allows two specific types of objects, DataSourceRef allows any non-core object, as well as PersistentVolumeClaim objects.
-   * - While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified.
-   */
-  dataSourceRef?: KubernetesReference;
-
-  /**
-   * The resource requests for the PVC, such as storage size.
-   */
-  resources: ConnectorTemplatePersistentVolumeClaimResourceRequirements;
-}
-
-/**
- * Volume mode types.
- */
-@added(Versions.`2025-07-01-preview`)
-union ConnectorTemplatePersistentVolumeClaimVolumeMode {
-  string,
-
-  /**
-   * Filesystem volume mode
-   */
-  Filesystem,
-
-  /**
-   * Block volume mode
-   */
-  Block,
-}
-
-/**
- * ConnectorTemplatePersistentVolumeClaimResourceRequirements properties
- */
-@added(Versions.`2025-07-01-preview`)
-model ConnectorTemplatePersistentVolumeClaimResourceRequirements {
-  /**
-   * Requests represents the minimum amount of compute resources required.
-   * If Requests is omitted for any container, the Kubelet will enforce that the container has at least as much CPU/Memory as requested.
-   * If it is omitted for all containers, the Kubelet will enforce that the Pod has at least as much CPU/Memory as requested. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-   */
-  requests: ConnectorTemplatePersistentVolumeClaimResourceRequests;
-}
-
-/**
- * ConnectorTemplatePersistentVolumeClaimResourceRequests properties
- */
-@added(Versions.`2025-07-01-preview`)
-model ConnectorTemplatePersistentVolumeClaimResourceRequests {
-  /**
-   * The storage resource request for the PVC.
-   */
-  storage: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kuberntes resource type"
+  @extension("x-ms-identifiers", #[])
+  persistentVolumeClaimTemplates?: Record<unknown>[];
 }
 
 /**
