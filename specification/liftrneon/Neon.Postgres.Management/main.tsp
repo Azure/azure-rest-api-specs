@@ -87,7 +87,6 @@ interface Organizations {
 interface Projects {
   get is ArmResourceRead<Project>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
-  update is ArmResourcePatchAsync<Project, ProjectProperties>;
   delete is ArmResourceDeleteSync<Project>;
   list is ArmResourceListByParent<Project>;
 
@@ -109,7 +108,6 @@ interface Projects {
 interface Branches {
   get is ArmResourceRead<Branch>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Branch>;
-  update is ArmResourcePatchAsync<Branch, BranchProperties>;
   delete is ArmResourceDeleteSync<Branch>;
   list is ArmResourceListByParent<Branch>;
 }
@@ -117,39 +115,23 @@ interface Branches {
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface Computes {
-  get is ArmResourceRead<Compute>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Compute>;
-  update is ArmResourcePatchAsync<Compute, ComputeProperties>;
-  delete is ArmResourceDeleteSync<Compute>;
   list is ArmResourceListByParent<Compute>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface NeonDatabases {
-  get is ArmResourceRead<NeonDatabase>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonDatabase>;
-  update is ArmResourcePatchAsync<NeonDatabase, NeonDatabaseProperties>;
-  delete is ArmResourceDeleteSync<NeonDatabase>;
   list is ArmResourceListByParent<NeonDatabase>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface NeonRoles {
-  get is ArmResourceRead<NeonRole>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonRole>;
-  update is ArmResourcePatchAsync<NeonRole, NeonRoleProperties>;
-  delete is ArmResourceDeleteSync<NeonRole>;
   list is ArmResourceListByParent<NeonRole>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface Endpoints {
-  get is ArmResourceRead<Endpoint>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Endpoint>;
-  update is ArmResourcePatchAsync<Endpoint, EndpointProperties>;
-  delete is ArmResourceDeleteSync<Endpoint>;
   list is ArmResourceListByParent<Endpoint>;
 }
