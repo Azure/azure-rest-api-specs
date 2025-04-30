@@ -90,7 +90,8 @@ async function getReadme(readmePath, repoRoot, logger) {
   );
 
   const globalConfig = globalConfigYamlBlocks.reduce(
-    (obj, token) => Object.assign(obj, yaml.load(token.text)),
+    (obj, token) =>
+      Object.assign(obj, yaml.load(token.text, { schema: yaml.JSON_SCHEMA })),
     {},
   );
 

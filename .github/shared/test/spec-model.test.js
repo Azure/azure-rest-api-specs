@@ -23,6 +23,23 @@ describe("getSpecModel", () => {
     expect(actual).toBeDefined();
   });
 
+  it("uses strings for tag names and doesn't parse Date object", async ({
+    expect,
+  }) => {
+    const fixtureRoot = resolve(__dirname, "fixtures/getSpecModel");
+    const actual = await getSpecModel("specification/yaml-date-parsing", {
+      repoRoot: fixtureRoot,
+    });
+
+    const actualTag = actual.readmes.get(
+      "specification/yaml-date-parsing/readme.md",
+    ).globalConfig["tag"];
+
+    expect(actualTag).not.toBeTypeOf(Date);
+    expect(actualTag).toBeTypeOf("string");
+    expect(actualTag).toBe("2022-12-01");
+  });
+
   it.skipIf(isWindows())("returns spec model", async ({ expect }) => {
     const fixtureRoot = resolve(__dirname, "fixtures/getSpecModel");
 
