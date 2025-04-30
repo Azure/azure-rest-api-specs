@@ -7,9 +7,14 @@
     // override "importHelpers:true" in root tsconfig.json
     "importHelpers": false,
 
-    // required to use project references
-    "composite": true,
+    // base isn't a build unit itself
+    "composite": false,
+
+    // required to reference @azure-tools/specs-shared which doesn't declare types
+    "allowJs": true,
   },
+  // don't compile anything here
+  "files": [],
   "references": [
     { "path": "./specs-model" },
     { "path": "./suppressions" },
