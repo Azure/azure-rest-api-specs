@@ -1822,6 +1822,116 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/listFlows": {
+      "post": {
+        "description": "Lists the flows in a pipeline.",
+        "x-ms-examples": {
+          "Lists flows for a pipeline": {
+            "$ref": "examples/listFlowsByPipeline.json"
+          }
+        },
+        "operationId": "ListFlowsByPipeline_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/pipelineNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "connections",
+            "description": "Connection(s) to retrieve flows of",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "description": "The connection ID's to retrieve the flows of",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List flows for a pipeline.",
+            "schema": {
+              "description": "The flows for this pipeline",
+              "$ref": "#/definitions/listFlowsByPipelineResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/executeAction": {
+      "post": {
+        "description": "Executes a privileged action for a pipeline.",
+        "x-ms-examples": {
+          "Executes action for a pipeline": {
+            "$ref": "examples/executeAction.json"
+          }
+        },
+        "operationId": "Pipelines_ExecuteAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/pipelineNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "action",
+            "description": "Action to execute",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/action"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Executed the action.",
+            "schema": {
+              "$ref": "#/definitions/pipeline"
+            }
+          },
+          "202": {
+            "description": "Started execution of the action.",
+            "schema": {
+              "$ref": "#/definitions/pipeline"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines": {
       "get": {
         "description": "Gets pipelines in a resource group.",
@@ -2053,6 +2163,14 @@
           },
           "description": "Status of the current flow"
         },
+        "forceDisabledStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forceDisabledStatus"
+          },
+          "description": "Force disablement status of the current flow",
+          "readOnly": true
+        },
         "storageAccountName": {
           "type": "string",
           "description": "Storage Account"
@@ -2075,6 +2193,10 @@
         "storageContainerName": {
           "type": "string",
           "description": "Storage Container Name"
+        },
+        "storageTableName": {
+          "type": "string",
+          "description": "Storage Table Name"
         },
         "serviceBusQueueId": {
           "type": "string",
@@ -2137,6 +2259,10 @@
           "$ref": "#/definitions/messagingOptions",
           "description": "The messaging options for this flow"
         },
+        "couplerOptions": {
+          "$ref": "#/definitions/couplerOptions",
+          "description": "The coupler configuration options for coupler flow type."
+        },
         "customerManagedKeyVaultUri": {
           "type": "string",
           "format": "url",
@@ -2186,6 +2312,25 @@
             "type": "integer",
             "format": "int64"
           }
+        },
+        "eventHubId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Event Hub ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "*"
+                ],
+                "type": "Microsoft.EventHub/namespaces/eventhubs"
+              }
+            ]
+          }
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "Event Hub Consumer Group"
         }
       },
       "description": "Properties of flow"
@@ -2312,6 +2457,14 @@
             "name": "status",
             "modelAsString": true
           },
+          "readOnly": true
+        },
+        "forceDisabledStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forceDisabledStatus"
+          },
+          "description": "Force disablement status of the current connection",
           "readOnly": true
         },
         "statusReason": {
@@ -2682,6 +2835,18 @@
         "flowTypes": {
           "$ref": "#/definitions/flowTypes",
           "description": "The flow types allowed for this pipeline"
+        },
+        "disabledFlowTypes": {
+          "$ref": "#/definitions/flowTypes",
+          "description": "The flow types that are disabled for this pipeline"
+        },
+        "quarantineDownloadStorageAccount": {
+          "type": "string",
+          "description": "Quarantine Download Storage Account"
+        },
+        "quarantineDownloadStorageContainer": {
+          "type": "string",
+          "description": "Quarantine Download Storage Container"
         }
       },
       "required": [
@@ -2887,7 +3052,8 @@
         "StreamingVideo",
         "Opaque",
         "MissionOpaqueXML",
-        "DiskImages"
+        "DiskImages",
+        "Coupler"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2895,6 +3061,29 @@
         "modelAsString": true
       },
       "description": "Flow type for the specified resource"
+    },
+    "forceDisabledStatus": {
+      "enum": [
+        "ConnectionForceDisabled",
+        "FlowTypeForceDisabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "forceDisabledStatus",
+        "modelAsString": true
+      },
+      "description": "Status of force disablement"
+    },
+    "listFlowsByPipelineResult": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "description": "The flow associated for a connection in a pipeline",
+        "items": {
+          "$ref": "#/definitions/flow"
+        }
+      },
+      "description": "Flows for a pipeline."
     },
     "resourceBody": {
       "type": "object",
@@ -2931,6 +3120,67 @@
         }
       },
       "description": "The option associated with messaging flows."
+    },
+    "couplerOptions": {
+      "type": "object",
+      "description": "Properties specific to Coupler Flow",
+      "properties": {
+        "remoteEndpoint": {
+          "type": "string",
+          "description": "Remote host to which communication needs to be made",
+          "example": "SDK - https://<hostname>:<port>/endpoint, EPC - https://<hostname>:<port>"
+        },
+        "cname": {
+          "type": "string",
+          "description": "Unique CNAME to represent the CTS Coupler Instance"
+        },
+        "apiMode": {
+          "enum": [
+            "SDK",
+            "Endpoint"
+          ],
+          "type": "string",
+          "description": "Coupler Remote Calling Mode in advanced option",
+          "x-ms-enum": {
+            "name": "couplerApiMode",
+            "modelAsString": true
+          }
+        },
+        "identityTranslation": {
+          "enum": [
+            "UserIdentity",
+            "ServiceIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CouplerIdentityTranslation",
+            "modelAsString": true
+          },
+          "description": "Flag for if Coupler should extract the user token"
+        },
+        "authTokenIssuerType": {
+          "enum": [
+            "None",
+            "dSTS",
+            "eSTS",
+            "torusSTS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "couplerAuthTokenIssuerType",
+            "modelAsString": true
+          },
+          "description": "Token provider for the flow"
+        },
+        "senderClientId": {
+          "type": "string",
+          "description": "Sender's app user assigned MI client ID"
+        },
+        "remoteCallingModeClientId": {
+          "type": "string",
+          "description": "Remote stub app registration Client ID. Only applicable when CustomerManaged mode is checked"
+        }
+      }
     },
     "streamSourceAddresses": {
       "type": "object",
@@ -3031,6 +3281,52 @@
           }
         }
       }
+    },
+    "action": {
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "enum": [
+            "AllowUpdates",
+            "ForceDisable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "actionType",
+            "modelAsString": true
+          },
+          "description": "Type of action to be executed"
+        },
+        "targetType": {
+          "enum": [
+            "Connection",
+            "FlowType"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "targetType",
+            "modelAsString": true
+          },
+          "description": "Type of target to execute the action on"
+        },
+        "targets": {
+          "type": "array",
+          "description": "Targets for the action",
+          "items": {
+            "type": "string"
+          }
+        },
+        "justification": {
+          "type": "string",
+          "description": "Business justification for the action"
+        }
+      },
+      "required": [
+        "actionType",
+        "targetType",
+        "targets"
+      ],
+      "description": "The action to be executed."
     }
   },
   "parameters": {
