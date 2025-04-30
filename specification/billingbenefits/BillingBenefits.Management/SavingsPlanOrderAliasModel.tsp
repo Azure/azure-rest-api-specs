@@ -54,6 +54,7 @@ interface SavingsPlanOrderAliasModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SavingsPlanOrderAlias_Create")
+  @OpenAPI.externalDocs("https://go.microsoft.com/fwlink/?linkid=2215851/")
   create is ArmResourceCreateOrReplaceAsync<
     SavingsPlanOrderAliasModel,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
