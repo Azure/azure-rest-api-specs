@@ -1735,6 +1735,7 @@
       "type": "string",
       "description": "Represents the supported character sets in PostgreSQL.",
       "enum": [
+        "UNKNOWN",
         "BIG5",
         "EUC_CN",
         "EUC_JP",
@@ -1782,6 +1783,11 @@
         "name": "Encoding",
         "modelAsString": true,
         "values": [
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "Unknown Encoding."
+          },
           {
             "name": "BIG5",
             "value": "BIG5",
@@ -2426,6 +2432,22 @@
           "$ref": "#/definitions/BoolValue",
           "description": "Gets or sets hasSuperUserCreatedObjects of PGSQL database."
         },
+        "hasCustomCasts": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom casts defined."
+        },
+        "hasCustomFtsParsers": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) parsers defined."
+        },
+        "hasCustomFtsTemplates": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) templates defined."
+        },
+        "fileSystemAccessEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the access to the machine's file system is enabled for the database objects."
+        },
         "errorCount": {
           "type": "integer",
           "format": "int64",
@@ -2522,6 +2544,22 @@
         "hasSuperUserCreatedObjects": {
           "$ref": "#/definitions/BoolValue",
           "description": "Gets or sets hasSuperUserCreatedObjects of PGSQL database."
+        },
+        "hasCustomCasts": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom casts defined."
+        },
+        "hasCustomFtsParsers": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) parsers defined."
+        },
+        "hasCustomFtsTemplates": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) templates defined."
+        },
+        "fileSystemAccessEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the access to the machine's file system is enabled for the database objects."
         },
         "errorCount": {
           "type": "integer",
@@ -2780,6 +2818,10 @@
           "$ref": "#/definitions/BoolValue",
           "description": "Indicates whether disaster recovery (DR) functionality is enabled."
         },
+        "isSuperUserAccessEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the super user access is enabled on the instance."
+        },
         "tags": {
           "type": "array",
           "description": "Resource tags",
@@ -2954,6 +2996,10 @@
         "isDrEnabled": {
           "$ref": "#/definitions/BoolValue",
           "description": "Indicates whether disaster recovery (DR) functionality is enabled."
+        },
+        "isSuperUserAccessEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the super user access is enabled on the instance."
         },
         "tags": {
           "type": "array",
