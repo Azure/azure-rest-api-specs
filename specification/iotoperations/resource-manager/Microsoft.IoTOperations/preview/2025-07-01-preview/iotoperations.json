@@ -4455,6 +4455,31 @@
         "principals"
       ]
     },
+    "AzureDeviceRegistryNamespaceID": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SchemaRegistry/namespaces"
+          }
+        ]
+      }
+    },
+    "AzureDeviceRegistryNamespaceRef": {
+      "type": "object",
+      "description": "Azure Device Registry Namespace reference.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/AzureDeviceRegistryNamespaceID",
+          "description": "The resource ID of the Azure Device Registry Namespace."
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
     "BackendChain": {
       "type": "object",
       "description": "Desired properties of the backend instances of the broker",
@@ -5821,7 +5846,7 @@
         },
         "persistentVolumeClaimTemplates": {
           "type": "array",
-          "description": "The persistent volume claim templates for the managed configuration.",
+          "description": "The persistent volume claim templates for the managed configuration.\nSee https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json",
           "items": {
             "type": "object",
             "additionalProperties": {}
@@ -9099,8 +9124,7 @@
         },
         "secretProviderClassRef": {
           "$ref": "#/definitions/SecretProviderClassRef",
-          "description": "The reference to the AIO Secret provider class.",
-          "readOnly": true
+          "description": "The reference to the AIO Secret provider class."
         },
         "features": {
           "type": "object",
@@ -9109,13 +9133,9 @@
             "$ref": "#/definitions/InstanceFeature"
           }
         },
-        "adrNamespace": {
-          "type": "string",
-          "description": "The Azure Device Registry Namespace used by Assets, Discovered Assets and devices",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+        "adrNamespaceRef": {
+          "$ref": "#/definitions/AzureDeviceRegistryNamespaceRef",
+          "description": "The Azure Device Registry Namespace used by Assets, Discovered Assets and devices"
         }
       },
       "required": [
@@ -9862,10 +9882,9 @@
       "properties": {
         "host": {
           "type": "string",
-          "description": "The Azure Container Registry endpoint hostname.",
+          "description": "The Container Registry endpoint hostname.",
           "minLength": 3,
-          "maxLength": 63,
-          "pattern": "^[a-z0-9]+\\.azurecr\\.io$"
+          "maxLength": 63
         },
         "authentication": {
           "$ref": "#/definitions/RegistryEndpointAuthentication",

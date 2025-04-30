@@ -54,7 +54,6 @@ model InstanceProperties {
   schemaRegistryRef: SchemaRegistryRef;
 
   @doc("The reference to the AIO Secret provider class.")
-  @visibility(Lifecycle.Read)
   @added(Versions.`2025-07-01-preview`)
   secretProviderClassRef?: SecretProviderClassRef;
 
@@ -64,9 +63,8 @@ model InstanceProperties {
   features?: Record<InstanceFeature>;
 
   @doc("The Azure Device Registry Namespace used by Assets, Discovered Assets and devices")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   @added(Versions.`2025-07-01-preview`)
-  adrNamespace?: string;
+  adrNamespaceRef?: AzureDeviceRegistryNamespaceRef;
 }
 
 @doc("The reference to the AIO Secret provider class.")
@@ -106,4 +104,11 @@ union InstanceFeatureMode {
 model SchemaRegistryRef {
   @doc("The resource ID of the Schema Registry.")
   resourceId: SchemaRegistryID;
+}
+
+@doc("Azure Device Registry Namespace reference.")
+@added(Versions.`2025-07-01-preview`)
+model AzureDeviceRegistryNamespaceRef {
+  @doc("The resource ID of the Azure Device Registry Namespace.")
+  resourceId: AzureDeviceRegistryNamespaceID;
 }

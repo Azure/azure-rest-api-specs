@@ -259,7 +259,7 @@ model ConnectorTemplateManagedConfigurationSettings {
 
   /**
    * The persistent volume claim templates for the managed configuration.
-   * @see https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json
+   * See https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kuberntes resource type"
   @extension("x-ms-identifiers", #[])

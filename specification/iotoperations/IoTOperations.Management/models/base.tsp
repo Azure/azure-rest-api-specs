@@ -230,3 +230,11 @@ scalar SecretProviderClassID
       type: "Microsoft.SecretSyncController/azureKeyVaultSecretProviderClasses",
     }
   ]>;
+
+@added(Versions.`2025-07-01-preview`)
+scalar AzureDeviceRegistryNamespaceID
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SchemaRegistry/namespaces",
+    }
+  ]>;

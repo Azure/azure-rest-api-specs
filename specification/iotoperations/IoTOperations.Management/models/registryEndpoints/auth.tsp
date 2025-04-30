@@ -25,7 +25,15 @@ model RegistryEndpointAuthentication {
 @added(Versions.`2025-07-01-preview`)
 union RegistryEndpointAuthenticationMethod {
   string,
+
+  /**
+   * System assigned identity authentication
+   */
   ManagedIdentityMethod,
+
+  /**
+   * User assigned identity authentication
+   */
   AnonymousMethod,
 }
 
