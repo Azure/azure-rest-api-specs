@@ -140,8 +140,9 @@ model TargetConfig {
 model RedTeam {
   @doc("Identifier of the red team.")
   @key("name")
+  @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
-  id: string;
+  name: string;
 
   @doc("Name of the red-team scan.")
   scanName?: string;

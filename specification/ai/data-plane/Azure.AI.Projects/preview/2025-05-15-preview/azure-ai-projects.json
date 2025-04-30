@@ -947,7 +947,7 @@
     },
     "/evaluations/runs:run": {
       "post": {
-        "operationId": "Evaluations_CreateRun",
+        "operationId": "Evaluations_Create",
         "description": "Creates an evaluation run.",
         "parameters": [
           {
@@ -981,14 +981,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_CreateRun_MaximumSet": {
-            "$ref": "./examples/Evaluations_CreateRun_MaximumSet_Gen.json"
-          },
-          "Evaluations_CreateRun_MinimumSet": {
-            "$ref": "./examples/Evaluations_CreateRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -1426,7 +1418,7 @@
     },
     "/redTeams/runs:run": {
       "post": {
-        "operationId": "RedTeams_CreateRun",
+        "operationId": "RedTeams_Create",
         "description": "Creates a redteam run.",
         "parameters": [
           {
@@ -1460,14 +1452,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "RedTeams_CreateRun_MaximumSet": {
-            "$ref": "./examples/RedTeams_CreateRun_MaximumSet_Gen.json"
-          },
-          "RedTeams_CreateRun_MinimumSet": {
-            "$ref": "./examples/RedTeams_CreateRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -1865,7 +1849,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -2878,7 +2862,8 @@
           "description": "The RedTeam items on this page",
           "items": {
             "$ref": "#/definitions/RedTeam"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -2999,7 +2984,8 @@
         "id": {
           "type": "string",
           "description": "Identifier of the red team.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "name"
         },
         "scanName": {
           "type": "string",

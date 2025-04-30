@@ -36,7 +36,7 @@ interface RedTeams {
   @doc("Creates a redteam run.")
   @route("runs:run")
   @post
-  createRun is Azure.Core.Foundations.Operation<
+  create is Azure.Core.Foundations.Operation<
     {
       @doc("Redteam to be run")
       @body
