@@ -52,7 +52,7 @@ model BingGroundingToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'bing_grounding'.")
   type: "bing_grounding";
 
-  @doc("The list of connections used by the bing grounding tool.")
+  @doc("The list of search configurations used by the bing grounding tool.")
   bing_grounding: BingGroundingSearchConfigurationList;
 }
 
