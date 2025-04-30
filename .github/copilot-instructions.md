@@ -49,7 +49,8 @@ linter:
 ```
 
 - DO ensure that you have a security definition (`@useAuth`) specified for your service. See: [Security definitions in TypeSpec][security-definitions]. The @useAuth decorator should only be defined ONCE in the entire specification above the @server definition.
-- Make sure that the `@typespec/versioning` library is imported and the `@versioned` decorator is specified over the namespace in main.tsp. Define a versions enum under the namespace you're decorating. Pass the versions enum to the `@versioned` decorator. The versions enum is defined once at the bottom of main.tsp file. Example:
+- AVOID adding new namespaces.
+- Make sure there's a versions enum defined in the spec under the namespace. Ensure the `@versioned` decorator is specified over the namespace in main.tsp. Pass the versions enum to the `@versioned` decorator. Example of a typical structure for versioning:
 
 ```tsp
 // this is the main.tsp file
@@ -93,7 +94,7 @@ union WidgetColor {
 ```
 
 - DO ensure that all models, properties, operations, parameters, enums, unions, and alias definitions have documentation over them.
-
+- DO define your visibility decorators with the appropriate value from the Lifecycle class.
 - Avoid suppressing warnings
 - Operation names should be camel case
 - DO use `union` instead of `enum` to define Azure enums. For more information about how to define enums for Azure services see the following documentation: [Defining enums for Azure services][no-enum].
