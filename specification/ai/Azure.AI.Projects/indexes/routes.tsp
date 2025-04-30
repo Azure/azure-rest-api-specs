@@ -22,6 +22,7 @@ alias ListIndexVersionParameters = {
 interface Indexes
   extends ServicePatterns.VersionedOperations<
       Index,
+      "PendingUploadRequest",
       ListIndexVersionParameters,
       ListIndexVersionParameters
     > {}

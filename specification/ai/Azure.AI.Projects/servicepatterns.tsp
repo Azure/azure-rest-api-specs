@@ -1,11 +1,15 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.ServicePatterns {
   @Rest.autoRoute
   interface VersionedOperations<
     TEntityType extends Reflection.Model,
+    TBodyName extends string,
     TListLatestParameters extends Reflection.Model = {},
     TListVersionsParameters extends Reflection.Model = {}
   > {
@@ -82,6 +86,7 @@ namespace Azure.AI.Projects.ServicePatterns {
       {
         @doc("The definition of the {name} to create or update", TEntityType)
         @Http.bodyRoot
+        @clientName(TBodyName)
         body: TEntityType;
 
         @doc(

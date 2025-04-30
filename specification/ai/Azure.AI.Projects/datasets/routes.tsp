@@ -23,6 +23,7 @@ alias ListDatasetVersionsParameters = {
 interface Datasets
   extends ServicePatterns.VersionedOperations<
       DatasetVersion,
+      "DatasetVersion",
       ListDatasetVersionsParameters,
       ListDatasetVersionsParameters
     > {
