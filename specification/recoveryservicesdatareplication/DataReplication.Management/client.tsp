@@ -330,3 +330,5 @@ using Microsoft.DataReplication;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+@@clientName(Microsoft.DataReplication, "RecoveryServicesDataReplicationMgmtClient", "python");
