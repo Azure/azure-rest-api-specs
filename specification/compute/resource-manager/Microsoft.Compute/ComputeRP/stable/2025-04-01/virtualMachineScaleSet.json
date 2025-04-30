@@ -4514,6 +4514,13 @@
       "description": "Describes a virtual machine scale set storage profile."
     },
     "VirtualMachineScaleSetIPConfigurationProperties": {
+      "tags": {
+          "type": "object",
+          "description": "Specifies tags for the network interface.",
+          "additionalProperties": {
+          "type": "string",
+          "description": "A tag for the network interface."
+        },
       "properties": {
         "subnet": {
           "$ref": "./computeRPCommon.json#/definitions/ApiEntityReference",
@@ -4658,6 +4665,13 @@
       "x-ms-azure-resource": true
     },
     "VirtualMachineScaleSetNetworkConfigurationProperties": {
+      "tags": {
+        "type": "object",
+        "description": "Specifies tags for the network interface.",
+        "additionalProperties": {
+        "type": "string",
+        "description": "A tag for the network interface."
+        },
       "properties": {
         "primary": {
           "type": "boolean",
