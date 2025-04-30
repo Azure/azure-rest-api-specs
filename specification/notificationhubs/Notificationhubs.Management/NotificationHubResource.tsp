@@ -84,7 +84,8 @@ interface NotificationHubResources {
        */
       @query("$top")
       $top?: int32 = 100;
-    }
+    },
+    Response = NotificationHubListResult
   >;
 
   /**

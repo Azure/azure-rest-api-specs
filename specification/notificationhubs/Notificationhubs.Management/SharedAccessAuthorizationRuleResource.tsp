@@ -82,7 +82,10 @@ interface SharedAccessAuthorizationRuleResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NotificationHubs_ListAuthorizationRules")
-  listAuthorizationRules is SharedAccessAuthorizationRuleResourceOps.List<SharedAccessAuthorizationRuleResource>;
+  listAuthorizationRules is SharedAccessAuthorizationRuleResourceOps.List<
+    SharedAccessAuthorizationRuleResource,
+    Response = SharedAccessAuthorizationRuleListResult
+  >;
 
   /**
    * Gets the Primary and Secondary ConnectionStrings to the NotificationHub
@@ -149,7 +152,10 @@ interface Namespaces {
   /**
    * Gets the authorization rules for a namespace.
    */
-  listAuthorizationRules is NamespaceOps.List<SharedAccessAuthorizationRuleResource>;
+  listAuthorizationRules is NamespaceOps.List<
+    SharedAccessAuthorizationRuleResource,
+    Response = SharedAccessAuthorizationRuleListResult
+  >;
 
   /**
    * Gets the Primary and Secondary ConnectionStrings to the namespace.

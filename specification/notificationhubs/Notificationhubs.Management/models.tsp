@@ -398,12 +398,14 @@ model SharedAccessAuthorizationRuleProperties {
    * Gets a base64-encoded 256-bit primary key for signing and
    * validating the SAS token.
    */
+  @secret
   primaryKey?: string;
 
   /**
    * Gets a base64-encoded 256-bit primary key for signing and
    * validating the SAS token.
    */
+  @secret
   secondaryKey?: string;
 
   /**
@@ -464,45 +466,53 @@ model ApnsCredentialProperties {
   /**
    * Gets or sets the APNS certificate.
    */
+  @secret
   apnsCertificate?: string;
 
   /**
    * Gets or sets the certificate key.
    */
+  @secret
   certificateKey?: string;
 
   /**
    * Gets or sets the endpoint of this credential.
    */
   @minLength(1)
+  @secret
   endpoint: string;
 
   /**
    * Gets or sets the APNS certificate Thumbprint
    */
+  @secret
   thumbprint?: string;
 
   /**
    * Gets or sets a 10-character key identifier (kid) key, obtained from
    * your developer account
    */
+  @secret
   keyId?: string;
 
   /**
    * Gets or sets the name of the application
    */
+  @secret
   appName?: string;
 
   /**
    * Gets or sets the issuer (iss) registered claim key, whose value is
    * your 10-character Team ID, obtained from your developer account
    */
+  @secret
   appId?: string;
 
   /**
    * Gets or sets provider Authentication Token, obtained through your
    * developer account
    */
+  @secret
   token?: string;
 }
 
@@ -525,26 +535,31 @@ model WnsCredentialProperties {
   /**
    * Gets or sets the package ID for this credential.
    */
+  @secret
   packageSid?: string;
 
   /**
    * Gets or sets the secret key.
    */
+  @secret
   secretKey?: string;
 
   /**
    * Gets or sets the Windows Live endpoint.
    */
+  @secret
   windowsLiveEndpoint?: string;
 
   /**
    * Ges or sets the WNS Certificate Key.
    */
+  @secret
   certificateKey?: string;
 
   /**
    * Gets or sets the WNS Certificate.
    */
+  @secret
   wnsCertificate?: string;
 }
 
@@ -567,12 +582,14 @@ model GcmCredentialProperties {
   /**
    * Gets or sets the GCM endpoint.
    */
+  @secret
   gcmEndpoint?: string;
 
   /**
    * Gets or sets the Google API key.
    */
   @minLength(1)
+  @secret
   googleApiKey: string;
 }
 
@@ -596,18 +613,21 @@ model MpnsCredentialProperties {
    * Gets or sets the MPNS certificate.
    */
   @minLength(1)
+  @secret
   mpnsCertificate: string;
 
   /**
    * Gets or sets the certificate key for this credential.
    */
   @minLength(1)
+  @secret
   certificateKey: string;
 
   /**
    * Gets or sets the MPNS certificate Thumbprint
    */
   @minLength(1)
+  @secret
   thumbprint: string;
 }
 
@@ -631,18 +651,21 @@ model AdmCredentialProperties {
    * Gets or sets the client identifier.
    */
   @minLength(1)
+  @secret
   clientId: string;
 
   /**
    * Gets or sets the credential secret access key.
    */
   @minLength(1)
+  @secret
   clientSecret: string;
 
   /**
    * Gets or sets the URL of the authorization token.
    */
   @minLength(1)
+  @secret
   authTokenUrl: string;
 }
 
@@ -666,18 +689,21 @@ model BaiduCredentialProperties {
    * Gets or sets baidu Api Key.
    */
   @minLength(1)
+  @secret
   baiduApiKey: string;
 
   /**
    * Gets or sets baidu Endpoint.
    */
   @minLength(1)
+  @secret
   baiduEndPoint: string;
 
   /**
    * Gets or sets baidu Secret Key
    */
   @minLength(1)
+  @secret
   baiduSecretKey: string;
 }
 
@@ -701,18 +727,21 @@ model BrowserCredentialProperties {
    * Gets or sets web push subject.
    */
   @minLength(1)
+  @secret
   subject: string;
 
   /**
    * Gets or sets VAPID private key.
    */
   @minLength(1)
+  @secret
   vapidPrivateKey: string;
 
   /**
    * Gets or sets VAPID public key.
    */
   @minLength(1)
+  @secret
   vapidPublicKey: string;
 }
 
@@ -735,11 +764,13 @@ model XiaomiCredentialProperties {
   /**
    * Gets or sets app secret.
    */
+  @secret
   appSecret?: string;
 
   /**
    * Gets or sets xiaomi service endpoint.
    */
+  @secret
   endpoint?: string;
 }
 
@@ -763,18 +794,21 @@ model FcmV1CredentialProperties {
    * Gets or sets client email.
    */
   @minLength(1)
+  @secret
   clientEmail: string;
 
   /**
    * Gets or sets private key.
    */
   @minLength(1)
+  @secret
   privateKey: string;
 
   /**
    * Gets or sets project id.
    */
   @minLength(1)
+  @secret
   projectId: string;
 }
 
@@ -888,6 +922,7 @@ model ResourceListKeys {
    * Gets or sets primaryConnectionString of the AuthorizationRule.
    */
   @visibility(Lifecycle.Read)
+  @secret
   primaryConnectionString?: string;
 
   /**
@@ -895,18 +930,21 @@ model ResourceListKeys {
    * AuthorizationRule
    */
   @visibility(Lifecycle.Read)
+  @secret
   secondaryConnectionString?: string;
 
   /**
    * Gets or sets primaryKey of the created AuthorizationRule.
    */
   @visibility(Lifecycle.Read)
+  @secret
   primaryKey?: string;
 
   /**
    * Gets or sets secondaryKey of the created AuthorizationRule
    */
   @visibility(Lifecycle.Read)
+  @secret
   secondaryKey?: string;
 
   /**
@@ -1082,6 +1120,7 @@ model NamespaceProperties {
   /**
    * Namespace SKU name.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   zoneRedundancy?: ZoneRedundancyPreference = ZoneRedundancyPreference.Disabled;
 
   /**
@@ -1505,3 +1544,61 @@ model PrivateLinkServiceConnection {
    */
   requestMessage?: string;
 }
+
+model OperationListResult is Azure.Core.Page<Operation>;
+
+model OperationDisplay {
+  /** 
+  The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
+   */
+  @visibility(Lifecycle.Read)
+  provider?: string;
+
+  /** 
+    The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
+     */
+  @visibility(Lifecycle.Read)
+  resource?: string;
+
+  /** 
+    The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
+     */
+  @visibility(Lifecycle.Read)
+  operation?: string;
+
+  /** The short, localized friendly description of the operation; suitable for tool tips and detailed views. */
+  @visibility(Lifecycle.Read)
+  description?: string;
+}
+
+/**
+ * Result of the request to list SQL operations.
+ */
+model Operation {
+  /** 
+    The name of the operation being performed on this particular object."
+     */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** he localized display information for this particular operation / action. */
+  display?: OperationDisplay;
+
+  /** 
+    The intended executor of the operation."
+     */
+  @visibility(Lifecycle.Read)
+  isDataAction?: boolean;
+
+  /** 
+    Additional descriptions for the operation.
+     */
+  properties?: OperationProperties;
+}
+
+model NamespaceListResult is Azure.Core.Page<NamespaceResource>;
+model SharedAccessAuthorizationRuleListResult
+  is Azure.Core.Page<SharedAccessAuthorizationRuleResource>;
+
+model NotificationHubListResult is Azure.Core.Page<NotificationHubResource>;
+@@visibility(Azure.Core.Page.value, Lifecycle.Read);

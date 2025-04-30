@@ -82,7 +82,8 @@ interface NamespaceResources {
        */
       @query("$top")
       $top?: int32 = 100;
-    }
+    },
+    Response = NamespaceListResult
   >;
 
   /**
@@ -104,7 +105,8 @@ interface NamespaceResources {
        */
       @query("$top")
       $top?: int32 = 100;
-    }
+    },
+    Response = NamespaceListResult
   >;
 
   /**
