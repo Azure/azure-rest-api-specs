@@ -15,6 +15,7 @@ namespace Azure.AI.Projects;
 alias ListDatasetVersionsParameters = {
   @doc("Continuation token for pagination.")
   @query
+  @continuationToken
   continuationToken?: string;
 };
 
