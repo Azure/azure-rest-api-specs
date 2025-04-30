@@ -120,9 +120,15 @@ model AISearchIndexResource {
   topK?: int32;
 
   /**
-   * Odata filter string for search resource.
+   *  filter string for search resource.
    */
   filter?: string;
+
+  /**
+   * Index asset id for search resource.
+   */
+  @encodedName("application/json", "index_asset_id")
+  indexAssetId?: string;
 }
 
 //
