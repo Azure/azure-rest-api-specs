@@ -38,3 +38,6 @@ using Azure.ClientGenerator.Core;
 );
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Microsoft.IoTFirmwareDefense.UsageMetric.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Microsoft.IoTFirmwareDefense.FirmwareUpdateDefinition.properties
+);
