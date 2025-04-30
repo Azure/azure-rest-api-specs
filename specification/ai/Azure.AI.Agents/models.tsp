@@ -5,13 +5,17 @@ import "./tools/tool_resources.tsp";
 import "./main.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.Agents;
 
 @doc("Represents an agent that can call the model and use tools.")
+@resource("assistants")
 model Agent {
   @doc("The identifier, which can be referenced in API endpoints.")
+  @key("id")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The object type, which is always assistant.")

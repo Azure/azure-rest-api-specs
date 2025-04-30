@@ -13,6 +13,12 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Agents;
 
+alias AgentTraits = SupportsClientRequestId &
+  NoRepeatableRequests &
+  NoConditionalRequests;
+
+alias AgentOperations = Azure.Core.ResourceOperations<AgentTraits>;
+
 /**
  * Creates a new agent.
  *
@@ -35,17 +41,12 @@ op createAgent is Azure.Core.Foundations.Operation<
  *
  * @returns The requested list of agents.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@get
-@route("/assistants")
-op listAgents is Azure.Core.Foundations.Operation<
-  {
+op listAgents is AgentOperations.ResourceList<
+  Agent,
+  ListQueryParametersTrait<{
     ...OpenAIListRequestOptions;
-  },
-  OpenAIPageableListOf<Agent>
+  }>
 >;
 
 /**

@@ -4,11 +4,15 @@ import "../tools/models.tsp";
 
 namespace Azure.AI.Agents;
 
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 @doc("Detailed information about a single step of an agent thread run.")
+@resource("steps")
 model RunStep {
   @doc("The identifier, which can be referenced in API endpoints.")
+  @key("id")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The object type, which is always 'thread.run.step'.")

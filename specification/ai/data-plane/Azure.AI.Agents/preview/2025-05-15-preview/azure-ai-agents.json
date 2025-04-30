@@ -110,55 +110,23 @@
             "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The requested list of agents.",
             "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/Agent"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
+              "$ref": "#/definitions/PagedAgent"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -173,6 +141,9 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -682,55 +653,23 @@
             "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The requested list of threads.",
             "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/AgentThread"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
+              "$ref": "#/definitions/PagedAgentThread"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -745,6 +684,9 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -899,144 +841,7 @@
         }
       }
     },
-    "/threads/{threadId}/messages": {
-      "get": {
-        "operationId": "Messages_ListMessages",
-        "description": "Gets a list of messages that exist on a thread.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "Identifier of the thread.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "run_id",
-            "in": "query",
-            "description": "Filter messages by the run ID that generated them.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "runId"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "x-ms-enum": {
-              "name": "ListSortOrder",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ascending",
-                  "value": "asc",
-                  "description": "Specifies an ascending sort order."
-                },
-                {
-                  "name": "descending",
-                  "value": "desc",
-                  "description": "Specifies a descending sort order."
-                }
-              ]
-            }
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested list of messages.",
-            "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/ThreadMessage"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
+    "/threads/{threadId}/messages/messages": {
       "post": {
         "operationId": "Messages_CreateMessage",
         "description": "Creates a new message on a specified thread.",
@@ -1082,7 +887,7 @@
         }
       }
     },
-    "/threads/{threadId}/messages/{messageId}": {
+    "/threads/{threadId}/messages/messages/{messageId}": {
       "get": {
         "operationId": "Messages_GetMessage",
         "description": "Retrieves an existing message.",
@@ -1188,20 +993,21 @@
         }
       }
     },
-    "/threads/{threadId}/runs": {
+    "/threads/{threadId}/messages/threads/{threadId}/messages": {
       "get": {
-        "operationId": "Runs_ListRuns",
-        "description": "Gets a list of runs for a specified thread.",
+        "operationId": "Messages_ListMessages",
+        "description": "Gets a list of messages that exist on a thread.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/MsgIdPathParameter"
           },
           {
-            "name": "threadId",
-            "in": "path",
-            "description": "Identifier of the thread.",
-            "required": true,
-            "type": "string"
+            "name": "run_id",
+            "in": "query",
+            "description": "Filter messages by the run ID that generated them.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "runId"
           },
           {
             "name": "limit",
@@ -1253,55 +1059,23 @@
             "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "The requested list of thread runs.",
+            "description": "The requested list of messages.",
             "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/ThreadRun"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
+              "$ref": "#/definitions/PagedThreadMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -1316,8 +1090,13 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
-      },
+      }
+    },
+    "/threads/{threadId}/runs": {
       "post": {
         "operationId": "Runs_CreateRun",
         "description": "Creates a new run for an agent thread.",
@@ -1540,170 +1319,6 @@
         }
       }
     },
-    "/threads/{threadId}/runs/{runId}/steps": {
-      "get": {
-        "operationId": "RunSteps_ListRunSteps",
-        "description": "Gets a list of run steps from a thread run.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "Identifier of the thread.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "description": "Identifier of the run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "include[]",
-            "in": "query",
-            "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "step_details.tool_calls[*].file_search.results[*].content"
-              ],
-              "x-ms-enum": {
-                "name": "RunAdditionalFieldList",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "FileSearchContents",
-                    "value": "step_details.tool_calls[*].file_search.results[*].content",
-                    "description": "File search result content."
-                  }
-                ]
-              }
-            },
-            "collectionFormat": "csv",
-            "x-ms-client-name": "include"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "x-ms-enum": {
-              "name": "ListSortOrder",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ascending",
-                  "value": "asc",
-                  "description": "Specifies an ascending sort order."
-                },
-                {
-                  "name": "descending",
-                  "value": "desc",
-                  "description": "Specifies a descending sort order."
-                }
-              ]
-            }
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested list of run steps.",
-            "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/RunStep"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/threads/{threadId}/runs/{runId}/steps/{stepId}": {
       "get": {
         "operationId": "RunSteps_GetRunStep",
@@ -1851,6 +1466,225 @@
               }
             }
           }
+        }
+      }
+    },
+    "/threads/{threadId}/runs/{runId}/threads/{threadId}/threads/{runId}/steps": {
+      "get": {
+        "operationId": "RunSteps_ListRunSteps",
+        "description": "Gets a list of run steps from a thread run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/IdPathParameter.threadId"
+          },
+          {
+            "$ref": "#/parameters/IdPathParameter.runId"
+          },
+          {
+            "name": "include[]",
+            "in": "query",
+            "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunAdditionalFieldList",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "FileSearchContents",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "File search result content."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "include"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "ListSortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ascending",
+                  "value": "asc",
+                  "description": "Specifies an ascending sort order."
+                },
+                {
+                  "name": "descending",
+                  "value": "desc",
+                  "description": "Specifies a descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested list of run steps.",
+            "schema": {
+              "$ref": "#/definitions/PagedRunStep"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/threads/{threadId}/threads/{threadId}/runs": {
+      "get": {
+        "operationId": "Runs_ListRuns",
+        "description": "Gets a list of runs for a specified thread.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ThreadIdPathParameter"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "ListSortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ascending",
+                  "value": "asc",
+                  "description": "Specifies an ascending sort order."
+                },
+                {
+                  "name": "descending",
+                  "value": "desc",
+                  "description": "Specifies a descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested list of thread runs.",
+            "schema": {
+              "$ref": "#/definitions/PagedThreadRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2875,7 +2709,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
+          "description": "The identifier, which can be referenced in API endpoints.",
+          "readOnly": true
         },
         "object": {
           "type": "string",
@@ -3174,7 +3009,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
+          "description": "The identifier, which can be referenced in API endpoints.",
+          "readOnly": true
         },
         "object": {
           "type": "string",
@@ -5715,6 +5551,111 @@
       ],
       "x-ms-discriminator-value": "openapi"
     },
+    "PagedAgent": {
+      "type": "object",
+      "description": "Paged collection of Agent items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Agent items on this page",
+          "items": {
+            "$ref": "#/definitions/Agent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedAgentThread": {
+      "type": "object",
+      "description": "Paged collection of AgentThread items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AgentThread items on this page",
+          "items": {
+            "$ref": "#/definitions/AgentThread"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedRunStep": {
+      "type": "object",
+      "description": "Paged collection of RunStep items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RunStep items on this page",
+          "items": {
+            "$ref": "#/definitions/RunStep"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedThreadMessage": {
+      "type": "object",
+      "description": "Paged collection of ThreadMessage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ThreadMessage items on this page",
+          "items": {
+            "$ref": "#/definitions/ThreadMessage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedThreadRun": {
+      "type": "object",
+      "description": "Paged collection of ThreadRun items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ThreadRun items on this page",
+          "items": {
+            "$ref": "#/definitions/ThreadRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "RequiredAction": {
       "type": "object",
       "description": "An abstract representation of a required action for an agent thread run to continue.",
@@ -5986,7 +5927,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
+          "description": "The identifier, which can be referenced in API endpoints.",
+          "readOnly": true
         },
         "object": {
           "type": "string",
@@ -7240,7 +7182,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
+          "description": "The identifier, which can be referenced in API endpoints.",
+          "readOnly": true
         },
         "object": {
           "type": "string",
@@ -7392,7 +7335,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
+          "description": "The identifier, which can be referenced in API endpoints.",
+          "readOnly": true
         },
         "object": {
           "type": "string",
@@ -8758,6 +8702,16 @@
     }
   },
   "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -8780,6 +8734,38 @@
       "name": "assistantId",
       "in": "path",
       "description": "Identifier of the agent.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IdPathParameter.runId": {
+      "name": "runId",
+      "in": "path",
+      "description": "Identifier of the run.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IdPathParameter.threadId": {
+      "name": "threadId",
+      "in": "path",
+      "description": "Identifier of the thread.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MsgIdPathParameter": {
+      "name": "threadId",
+      "in": "path",
+      "description": "Identifier of the thread.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ThreadIdPathParameter": {
+      "name": "threadId",
+      "in": "path",
+      "description": "Identifier of the thread.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
