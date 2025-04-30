@@ -40,6 +40,12 @@ model DataRangeLimit extends DataRangeBaseConfig {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+@doc("Request of DataPreview")
+model DataPreviewRequest {
+  @doc("DataPreview properties")
+  dataPreviewProperties: DataPreviewProperties;
+}
+
 @doc("Properties of one DataPreview")
 model DataPreviewProperties {
   @doc("Properties for the source")
@@ -48,6 +54,7 @@ model DataPreviewProperties {
   @doc("DataRange for DataPreview")
   dataRange: DataRangeBaseConfig;
 
+  @removed(Versions.v2025_03_01_preview)
   @doc("Type of the Connector.")
   converterConfig: ConverterConfig;
 
