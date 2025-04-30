@@ -91,7 +91,7 @@ async function getReadme(readmePath, repoRoot, logger) {
 
   const globalConfig = globalConfigYamlBlocks.reduce(
     (obj, token) =>
-      Object.assign(obj, yaml.load(token.text, { schema: yaml.JSON_SCHEMA })),
+      Object.assign(obj, yaml.load(token.text, { schema: yaml.FAILSAFE_SCHEMA })),
     {},
   );
 
@@ -106,7 +106,7 @@ async function getReadme(readmePath, repoRoot, logger) {
       continue;
     }
 
-    const obj = /** @type {any} */ (yaml.load(block.text));
+    const obj = /** @type {any} */ (yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA }));
 
     if (!obj) {
       logger?.debug(`No yaml object found for tag ${tagName} in ${readmePath}`);
