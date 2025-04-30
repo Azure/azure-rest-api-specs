@@ -5,7 +5,7 @@ import {
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
 } from "../../src/commands.js";
-import * as commandUtils from "../../src/commandUtils.js";
+import * as commandHelpers from "../../src/command-helpers.js";
 import * as log from "../../src/log.js";
 import * as changeFiles from "../../src/change-files.js";
 import fs from "node:fs";
@@ -49,11 +49,11 @@ describe("generateSdkForSingleSpec", () => {
       vsoLogPath: "path/to/log",
     };
 
-    vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockCommandInput);
-    vi.spyOn(commandUtils, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
-    vi.spyOn(commandUtils, "getExecutionReport").mockReturnValue(mockExecutionReport);
-    vi.spyOn(commandUtils, "setPipelineVariables").mockImplementation(() => {});
-    vi.spyOn(commandUtils, "logIssuesToPipeline").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
+    vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(log, "logMessage").mockImplementation(() => {});
 
@@ -73,11 +73,11 @@ describe("generateSdkForSingleSpec", () => {
       LogLevel.Group,
     );
     expect(log.logMessage).toHaveBeenCalledWith("Runner command executed successfully");
-    expect(commandUtils.setPipelineVariables).toHaveBeenCalledWith(
+    expect(commandHelpers.setPipelineVariables).toHaveBeenCalledWith(
       "test-package",
       "npm install test-package",
     );
-    expect(commandUtils.logIssuesToPipeline).toHaveBeenCalledWith(
+    expect(commandHelpers.logIssuesToPipeline).toHaveBeenCalledWith(
       mockExecutionReport.vsoLogPath,
       `${mockCommandInput.tspConfigPath} ${mockCommandInput.readmePath}`,
     );
@@ -97,10 +97,10 @@ describe("generateSdkForSingleSpec", () => {
       specRepoHttpsUrl: "",
     };
 
-    vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockCommandInput);
-    vi.spyOn(commandUtils, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
-    vi.spyOn(commandUtils, "logIssuesToPipeline").mockImplementation(() => {});
-    vi.spyOn(commandUtils, "setPipelineVariables").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {});
     vi.spyOn(utils, "runSpecGenSdkCommand").mockRejectedValue(new Error("Command failed"));
     vi.spyOn(log, "logMessage").mockImplementation(() => {});
 
@@ -113,7 +113,7 @@ describe("generateSdkForSingleSpec", () => {
       `Runner: error executing command:Error: Command failed`,
       LogLevel.Error,
     );
-    expect(commandUtils.setPipelineVariables).not.toHaveBeenCalled();
+    expect(commandHelpers.setPipelineVariables).not.toHaveBeenCalled();
   });
 
   test("should handle errors during execution report reading", async () => {
@@ -130,11 +130,11 @@ describe("generateSdkForSingleSpec", () => {
       specRepoHttpsUrl: "",
     };
 
-    vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockCommandInput);
-    vi.spyOn(commandUtils, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
-    vi.spyOn(commandUtils, "logIssuesToPipeline").mockImplementation(() => {});
-    vi.spyOn(commandUtils, "setPipelineVariables").mockImplementation(() => {});
-    vi.spyOn(commandUtils, "getExecutionReport").mockImplementation(() => {
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "getExecutionReport").mockImplementation(() => {
       throw new Error("Failed to read execution report");
     });
     vi.spyOn(log, "logMessage").mockImplementation(() => {});
@@ -179,15 +179,15 @@ describe("generateSdkForSpecPr", () => {
       vsoLogPath: "path/to/log",
     };
 
-    vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockCommandInput);
-    vi.spyOn(commandUtils, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
-    vi.spyOn(commandUtils, "getExecutionReport").mockReturnValue(mockExecutionReport);
-    vi.spyOn(commandUtils, "getBreakingChangeInfo").mockReturnValue([false, ""]);
-    vi.spyOn(commandUtils, "generateArtifact").mockReturnValue(0);
-    vi.spyOn(commandUtils, "logIssuesToPipeline").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue([false, ""]);
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
     vi.spyOn(log, "logMessage").mockImplementation(() => {});
 
     const statusCode = await generateSdkForSpecPr();
@@ -202,7 +202,7 @@ describe("generateSdkForSpecPr", () => {
       `Runner command execution result:${mockExecutionReport.executionResult}`,
     );
     expect(log.logMessage).toHaveBeenCalledWith("ending group logging", LogLevel.EndGroup);
-    expect(commandUtils.logIssuesToPipeline).toHaveBeenCalledWith(
+    expect(commandHelpers.logIssuesToPipeline).toHaveBeenCalledWith(
       mockExecutionReport.vsoLogPath,
       `${mockChangedSpecs[0].typespecProject} ${mockChangedSpecs[0].readmeMd}`,
     );
@@ -221,9 +221,9 @@ describe("generateSdkForSpecPr", () => {
     };
     const mockChangedSpecs = [{ specs: [] }];
 
-    vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
-    vi.spyOn(commandUtils, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
     vi.spyOn(log, "logMessage").mockImplementation(() => {});
 
     const statusCode = await generateSdkForSpecPr();
@@ -260,13 +260,13 @@ describe("generateSdkForSpecPr", () => {
       executionResult: "succeeded",
       vsoLogPath: "path/to/log",
     };
-    vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockCommandInput);
-    vi.spyOn(commandUtils, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockRejectedValue(new Error("Command failed"));
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
-    vi.spyOn(commandUtils, "getExecutionReport").mockReturnValue(mockExecutionReport);
-    vi.spyOn(commandUtils, "logIssuesToPipeline").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
     vi.spyOn(log, "logMessage").mockImplementation(() => {});
 
     const statusCode = await generateSdkForSpecPr();
@@ -299,14 +299,14 @@ describe("generateSdkForSpecPr", () => {
       },
     ];
 
-    vi.spyOn(commandUtils, "logIssuesToPipeline").mockImplementation(() => {});
-    vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockCommandInput);
-    vi.spyOn(commandUtils, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
     vi.spyOn(log, "logMessage").mockImplementation(() => {});
-    vi.spyOn(commandUtils, "getExecutionReport").mockImplementation(() => {
+    vi.spyOn(commandHelpers, "getExecutionReport").mockImplementation(() => {
       throw new Error("Failed to read execution report");
     });
 
@@ -338,8 +338,8 @@ describe("generateSdkForBatchSpecs", () => {
       specRepoHttpsUrl: "",
     };
 
-    vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockInput);
-    vi.spyOn(commandUtils, "getSpecPaths").mockReturnValue([]);
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue([]);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockImplementation(() => Promise.resolve());
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
     vi.spyOn(fs, "existsSync").mockReturnValue(false);
@@ -348,7 +348,7 @@ describe("generateSdkForBatchSpecs", () => {
     vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {});
 
     const code = await generateSdkForBatchSpecs(mockBatchType);
-    expect(commandUtils.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
+    expect(commandHelpers.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
     expect(code).toBe(0);
     expect(utils.runSpecGenSdkCommand).not.toHaveBeenCalled();
     expect(utils.resetGitRepo).not.toHaveBeenCalled();
@@ -382,8 +382,8 @@ describe("generateSdkForBatchSpecs", () => {
       specRepoHttpsUrl: "",
     };
 
-    vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockInput);
-    vi.spyOn(commandUtils, "getSpecPaths").mockReturnValue(mockSpecPaths);
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue(mockSpecPaths);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockExecutionReport));
@@ -394,7 +394,7 @@ describe("generateSdkForBatchSpecs", () => {
 
     const result = await generateSdkForBatchSpecs(mockBatchType);
     expect(result).toBe(0);
-    expect(commandUtils.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
+    expect(commandHelpers.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalledTimes(mockSpecPaths.length);
     const markdownFilePath = path.normalize(
       path.join(mockInput.workingFolder, "out/logs/generation-summary.md"),
@@ -425,9 +425,9 @@ describe("generateSdkForBatchSpecs", () => {
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
-    vi.spyOn(commandUtils, "parseArguments").mockReturnValue(mockInput);
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
 
-    vi.spyOn(commandUtils, "getSpecPaths").mockReturnValue(mockSpecPaths);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue(mockSpecPaths);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand")
       .mockRejectedValueOnce(new Error("Command failed"))

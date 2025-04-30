@@ -12,7 +12,7 @@ import {
   prepareSpecGenSdkCommand,
   generateArtifact,
   setPipelineVariables,
-} from "../../src/commandUtils.js";
+} from "../../src/command-helpers.js";
 import { LogLevel } from "../../src/log.js";
 
 // Get the absolute path to the repo root
@@ -260,17 +260,20 @@ describe("commands.ts", () => {
         specCommitSha: "",
         specRepoHttpsUrl: "",
       };
-
-      const mockArtifactInfo = {
-        language: "",
-        labelAction: false,
-        managementPlane: true,
-        dataPlane: false,
-      };
-
-      const result = generateArtifact(mockCommandInput, mockArtifactInfo, true, "breaking-change");
+      const mockResult = "succeeded";
+      const mockBreakingchangeLabel = "breaking-change";
+      const mockhasBreakingChange = false;
+      const mockhasManagementPlaneSpecs = false;
+      const result = generateArtifact(
+        mockCommandInput,
+        mockResult,
+        mockBreakingchangeLabel,
+        mockhasBreakingChange,
+        mockhasManagementPlaneSpecs,
+      );
 
       const breakingChangeLabelArtifactPath = path.normalize("/working/folder/out/spec-gen-sdk-artifact");
+
       expect(result).toBe(0);
       expect(fs.mkdirSync).toHaveBeenCalledWith(breakingChangeLabelArtifactPath, {
         recursive: true,
@@ -280,9 +283,9 @@ describe("commands.ts", () => {
         JSON.stringify(
           {
             language: "javascript",
-            labelAction: true,
-            managementPlane: true,
-            dataPlane: false,
+            result: "succeeded",
+            labelAction: false,
+            isSpecGenSdkCheckRequired: false,
           },
           undefined,
           2,
@@ -296,7 +299,7 @@ describe("commands.ts", () => {
         "SpecGenSdkArtifactPath",
         "out/spec-gen-sdk-artifact",
       );
-      expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabelAction", "add");
+      expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabelAction", "remove");
       expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabel", "breaking-change");
     });
 
@@ -308,7 +311,7 @@ describe("commands.ts", () => {
       vi.spyOn(log, "logMessage").mockImplementation(() => {});
       vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {});
 
-      const mockCommandInput = {
+       const mockCommandInput = {
         workingFolder: "/working/folder",
         sdkLanguage: "javascript",
         runMode: "",
@@ -319,14 +322,17 @@ describe("commands.ts", () => {
         specRepoHttpsUrl: "",
       };
 
-      const mockArtifactInfo = {
-        language: "",
-        labelAction: false,
-        managementPlane: true,
-        dataPlane: false,
-      };
-
-      const result = generateArtifact(mockCommandInput, mockArtifactInfo, true, "breaking-change");
+      const mockResult = "failed";
+      const mockBreakingchangeLabel = "breaking-change";
+      const mockhasBreakingChange = false;
+      const mockhasManagementPlaneSpecs = false;
+      const result = generateArtifact(
+        mockCommandInput,
+        mockResult,
+        mockBreakingchangeLabel,
+        mockhasBreakingChange,
+        mockhasManagementPlaneSpecs,
+      );
 
       expect(result).toBe(1);
       expect(log.logMessage).toHaveBeenCalledWith("ending group logging", LogLevel.EndGroup);
