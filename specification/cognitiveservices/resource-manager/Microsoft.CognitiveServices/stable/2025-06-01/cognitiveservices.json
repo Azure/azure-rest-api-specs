@@ -5227,14 +5227,14 @@
         },
         "defaultProject": {
           "type": "string",
-          "description": "Specifies the project that is targeted when data plane endpoints are called without a project parameter."
+          "description": "Specifies the project, by project name, that is targeted when data plane endpoints are called without a project parameter."
         },
         "associatedProjects": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Specifies the projects that are associated with this resource."
+          "description": "Specifies the projects, by project name, that are associated with this resource."
         }
       },
       "description": "Properties of Cognitive Services account."
@@ -8096,6 +8096,7 @@
           "readOnly": true
         },
         "error": {
+          "description": "Provides the error message if the connection fails",
           "type": "string"
         },
         "expiryTime": {
@@ -8118,9 +8119,11 @@
           }
         },
         "peRequirement": {
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'.",
           "$ref": "#/definitions/ManagedPERequirement"
         },
         "peStatus": {
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'.",
           "$ref": "#/definitions/ManagedPEStatus"
         },
         "sharedUserList": {
@@ -8130,6 +8133,7 @@
           }
         },
         "target": {
+          "description": "The connection URL to be used.",
           "type": "string"
         },
         "useWorkspaceManagedIdentity": {
@@ -8422,7 +8426,8 @@
       "type": "object",
       "properties": {
         "sas": {
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -8446,7 +8451,8 @@
       "type": "object",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -8525,7 +8531,8 @@
       "type": "object",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -8701,7 +8708,7 @@
           ]
         },
         "storageConnections": {
-          "description": "List of Storage connections.",
+          "description": "List of connection names from those available in the account or project to be used as a storage resource.",
           "type": "array",
           "items": {
             "type": "string"
@@ -8709,7 +8716,7 @@
           "x-nullable": true
         },
         "threadStorageConnections": {
-          "description": "List of Thread storage connections.",
+          "description": "List of connection names from those available in the account or project to be used for Thread storage.",
           "type": "array",
           "items": {
             "type": "string"
@@ -8717,7 +8724,7 @@
           "x-nullable": true
         },
         "vectorStoreConnections": {
-          "description": "List of VectorStore connections.",
+          "description": "List of connection names from those available in the account or project to be used for vector database (e.g. CosmosDB).",
           "type": "array",
           "items": {
             "type": "string"
