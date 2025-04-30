@@ -488,20 +488,11 @@ model FileShareSnapshotProperties {
   @doc("The initiator of the FileShareSnapshot")
   initiatorId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "only string value are expected."
   @doc("The metadata")
-  metadata?: MetadataItem[];
+  metadata?: Record<string>;
 
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: FileShareProvisioningState;
-}
-
-@doc("FileShareSnapshot Metadata item")
-@added(Versions.v2024_01_01_preview)
-model MetadataItem {
-  @doc("The name of the metadata item.")
-  name: string;
-
-  @doc("The value of the metadata item.")
-  value: string;
 }

@@ -1195,12 +1195,11 @@
           "readOnly": true
         },
         "metadata": {
-          "type": "array",
+          "type": "object",
           "description": "The metadata",
-          "items": {
-            "$ref": "#/definitions/MetadataItem"
-          },
-          "x-ms-identifiers": []
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/FileShareProvisioningState",
@@ -1224,12 +1223,11 @@
       "description": "The updatable properties of the FileShareSnapshot.",
       "properties": {
         "metadata": {
-          "type": "array",
+          "type": "object",
           "description": "The metadata",
-          "items": {
-            "$ref": "#/definitions/MetadataItem"
-          },
-          "x-ms-identifiers": []
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1322,24 +1320,6 @@
         "name": "MediaTier",
         "modelAsString": false
       }
-    },
-    "MetadataItem": {
-      "type": "object",
-      "description": "FileShareSnapshot Metadata item",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the metadata item."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the metadata item."
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ]
     },
     "NfsProtocolProperties": {
       "type": "object",
