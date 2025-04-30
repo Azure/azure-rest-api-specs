@@ -9,7 +9,7 @@
     "retrievalRequest": {
       "messages": [
         {
-          "role": "text",
+          "role": "user",
           "content": [
             {
               "text": "hello world",
@@ -22,7 +22,7 @@
         {
           "indexName": "preview-test",
           "filterAddOn": "foo eq bar",
-          "maxDocsForReranker": 50,
+          "maxDocsForReranker": 100,
           "rerankerThreshold": 2.5,
           "includeReferenceSourceData": true
         }
@@ -34,7 +34,7 @@
       "body": {
         "response": [
           {
-            "role": "tool",
+            "role": "assistant",
             "content": [
               {
                 "type": "text",
@@ -73,6 +73,11 @@
             "queryTime": "2025-01-01T00:08:45.045Z",
             "count": 2,
             "elapsedMs": 1234
+          },
+          {
+            "type": "AzureSearchSemanticRanker",
+            "id": 3,
+            "inputTokens": 74
           }
         ],
         "references": [
