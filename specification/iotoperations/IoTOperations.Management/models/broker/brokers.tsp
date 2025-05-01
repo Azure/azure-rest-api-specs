@@ -90,9 +90,7 @@ model Persistence {
     
     If unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class.
     """)
-  persistentVolumeClaimSpec?: VolumeClaimSpec = #{
-    accessModes: #["ReadWriteOncePod"],
-  };
+  persistentVolumeClaimSpec?: VolumeClaimSpec;
 
   @doc("Controls which topic's retained messages should be persisted to disk.")
   retain?: TopicRetainmentPolicy;
