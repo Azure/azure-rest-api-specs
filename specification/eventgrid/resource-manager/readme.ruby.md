@@ -40,7 +40,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2025-04-preview' && $(ruby)
 
-namespace: "Azure::EventGrid::Mgmt::V2025_04_15_preview"
+namespace: "Azure::EventGrid::Mgmt::V2025_04_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_event_grid/lib
 ```
 
