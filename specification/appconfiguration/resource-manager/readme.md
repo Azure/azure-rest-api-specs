@@ -36,8 +36,6 @@ These settings apply only when `--tag=package-preview-2024-06-15-preview` is spe
 ```yaml $(tag) == 'package-preview-2024-06-15-preview'
 input-file:
   - Microsoft.AppConfiguration/preview/2024-06-15-preview/appconfiguration.json
-
-tag: package-2024-06-01
 ```
 
 ### Tag: package-2024-06-01
