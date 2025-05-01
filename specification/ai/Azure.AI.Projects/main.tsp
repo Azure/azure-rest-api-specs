@@ -24,7 +24,7 @@ namespace Azure.AI {
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://cognitiveservices.azure.com/.default"], // TODO: Replace with ["https://ai.azure.com/.default"]
+      scopes: ["https://ai.azure.com/.default"],
     }
   ]>
 )
