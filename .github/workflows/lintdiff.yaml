@@ -61,9 +61,7 @@ jobs:
             --compare-sha ${{ github.event.pull_request.head.sha }} \
             --out-file $GITHUB_STEP_SUMMARY
 
-          if [ $? -ne 0 ]; then
-            echo "LintDiff failed. See the summary for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          fi
+          echo "See the summary for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
           echo "⚠️ This check is testing a new version of 'Swagger LintDiff'."
           echo "⚠️ Failures are expected, and should be completely ignored by spec authors and reviewers."
