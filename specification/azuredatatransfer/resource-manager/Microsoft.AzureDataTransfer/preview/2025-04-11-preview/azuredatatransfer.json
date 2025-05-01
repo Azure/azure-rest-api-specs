@@ -3074,10 +3074,15 @@
       "description": "Status of force disablement"
     },
     "connectionIdList": {
-      "type": "array",
-      "description": "List of connection IDs",
-      "items": {
-        "type": "string"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Connection ID to target"
+        }
       }
     },
     "listFlowsByPipelineResult": {
