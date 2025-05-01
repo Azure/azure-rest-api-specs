@@ -18,7 +18,7 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_3_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_3_0'
-input-file: stable/3.0/openapi.json
+input-file: stable/v3.0/openapi.json
 ```
 
 ### Release 2025-05-01-preview
