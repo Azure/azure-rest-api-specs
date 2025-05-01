@@ -78,10 +78,11 @@ export async function generateLintDiffReport(
       // New violations with level error or fatal fail the build. If all new
       // violations are warnings, the build passes.
       pass = false;
+    } else { 
+      console.log("\t✅ No new violations with error or fatal level. LintDiff will pass.");
     }
-    console.log('::group::New violations table');
-    console.table(newViolations.map((v) => ({ level: v.level, code: v.code, message: v.message, source: getFile(v) })), [ 'level', 'code', 'message', 'source' ]);
-    console.log('::endgroup::');
+    
+    LogViolations("New violations table", newViolations);
 
     outputMarkdown += "\n";
   }
@@ -101,9 +102,7 @@ export async function generateLintDiffReport(
       outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) |\n`;
     }
 
-    console.log("::group::Existing violations table");
-    console.table(existingViolations.map((v) => ({ level: v.level, code: v.code, message: v.message, source: getFile(v) })), [ 'level', 'code', 'message', 'source' ]);    
-    console.log("::endgroup::");
+    LogViolations("Existing violations table", existingViolations);
 
     outputMarkdown += `\n`;
   }
@@ -112,6 +111,19 @@ export async function generateLintDiffReport(
   await writeFile(outFile, outputMarkdown);
 
   return pass;
+}
+
+function LogViolations(heading: string, violations: LintDiffViolation[]) {
+  console.log(`::group::${heading}`);
+  for (const violation of violations) {
+    const source = getFile(violation);
+    const line = getLine(violation);
+    console.log(`Violation: ${source}${line ? `:${line}` : ""}`);
+    console.log(`  Level: ${violation.level}`);
+    console.log(`  Code: ${violation.code}`);
+    console.log(`  Message: ${violation.message}`);
+  }
+  console.log("::endgroup::");
 }
 
 export async function generateAutoRestErrorReport(
