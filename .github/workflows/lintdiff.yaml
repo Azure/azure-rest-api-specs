@@ -61,8 +61,6 @@ jobs:
             --compare-sha ${{ github.event.pull_request.head.sha }} \
             --out-file $GITHUB_STEP_SUMMARY
 
-          echo "See the summary for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-
           echo "⚠️ This check is testing a new version of 'Swagger LintDiff'."
           echo "⚠️ Failures are expected, and should be completely ignored by spec authors and reviewers."
           echo "⚠️ Meaningful results for this PR are are in required check 'Swagger LintDiff'."
