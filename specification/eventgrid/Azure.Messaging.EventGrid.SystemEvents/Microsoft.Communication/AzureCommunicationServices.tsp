@@ -3,7 +3,7 @@ using TypeSpec.Versioning;
 /** Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
-//  const MicrosoftCommunicationIncomingCallExample: AcsIncomingCallEventData = #{to: #{kind: "communicationUser", rawId: "{recipient-id}", communicationUser: #{id: "{recipient-id}"}}, from: #{kind: "communicationUser", rawId: "{caller-id}", communicationUser: #{id: "{caller-id}"}}, serverCallId: "{server-call-id}", callerDisplayName: "VOIP Caller", customContext: #{sipHeaders: #{userToUser: "616d617a6f6e5f6368696;encoding=hex", "X-MS-Custom-myheader1": "35567842", "X-MS-Custom-myheader2": "customsipheadervalue"}, voipHeaders: #{customHeader: "customValue"}, onBehalfOfCallee: #{kind: "communicationUser", rawId: "{caller-id}", communicationUser: #{id: "{caller-id}"}}}, incomingCallContext: "{incoming-call-contextValue}", correlationId: "correlationId"};
+//  const MicrosoftCommunicationIncomingCallExample: AcsIncomingCallEventData = #{to: #{kind: "communicationUser", rawId: "{recipient-id}", communicationUser: #{id: "{recipient-id}"}}, from: #{kind: "communicationUser", rawId: "{caller-id}", communicationUser: #{id: "{caller-id}"}}, serverCallId: "{server-call-id}", callerDisplayName: "VOIP Caller", customContext: #{sipHeaders: #{userToUser: "616d617a6f6e5f6368696;encoding=hex", "X-MS-Custom-my-header1": "35567842", "X-MS-Custom-my-header2": "customsipheadervalue"}, voipHeaders: #{customHeader: "customValue"}, onBehalfOfCallee: #{kind: "communicationUser", rawId: "{caller-id}", communicationUser: #{id: "{caller-id}"}}}, incomingCallContext: "{incoming-call-contextValue}", correlationId: "correlationId"};
 // @example(MicrosoftCommunicationIncomingCallExample)
 /** Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event */
 model AcsIncomingCallEventData {
@@ -104,7 +104,7 @@ model AcsChatMessageDeletedInThreadEventData
   deleteTime: utcDateTime;
 }
 
-//  const MicrosoftCommunicationChatThreadCreatedWithUserExample: AcsChatThreadCreatedWithUserEventData = #{createdBy: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9", createdByCommunicationIdentifier: #{rawId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9", communicationUser: #{id: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9"}}, properties: #{topic: "Chat about new commuication services"}, members: #[#{displayName: "Bob", memberId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9"}, #{displayName: "John", memberId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-289b-07fd-0848220015ea"}], participants: #[#{displayName: "Bob", participantCommunicationIdentifier: #{rawId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9", communicationUser: #{id: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9"}}, metadata: #{key: "value"}}, #{displayName: "John", participantCommunicationIdentifier: #{rawId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-289b-07fd-0848220015ea", communicationUser: #{id: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-289b-07fd-0848220015ea"}}, metadata: #{key: "value"}}], metadata: #{key: "value"}, createTime: "2021-02-18T23:47:26.91Z", version: 1613692046910, recipientId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286e-84f5-08482200181c", recipientCommunicationIdentifier: #{rawId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286e-84f5-08482200181c", communicationUser: #{id: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286e-84f5-08482200181c"}}, transactionId: "zbZt+9h/N0em+XCW2QvyIA.1.1.1.1.1737228330.0.1737490483.1.6", threadId: "19:1d594fb1eeb14566903cbc5decb5bf5b@thread.v2"};
+//  const MicrosoftCommunicationChatThreadCreatedWithUserExample: AcsChatThreadCreatedWithUserEventData = #{createdBy: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9", createdByCommunicationIdentifier: #{rawId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9", communicationUser: #{id: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9"}}, properties: #{topic: "Chat about new communication services"}, members: #[#{displayName: "Bob", memberId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9"}, #{displayName: "John", memberId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-289b-07fd-0848220015ea"}], participants: #[#{displayName: "Bob", participantCommunicationIdentifier: #{rawId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9", communicationUser: #{id: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286d-e1fe-0848220013b9"}}, metadata: #{key: "value"}}, #{displayName: "John", participantCommunicationIdentifier: #{rawId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-289b-07fd-0848220015ea", communicationUser: #{id: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-289b-07fd-0848220015ea"}}, metadata: #{key: "value"}}], metadata: #{key: "value"}, createTime: "2021-02-18T23:47:26.91Z", version: 1613692046910, recipientId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286e-84f5-08482200181c", recipientCommunicationIdentifier: #{rawId: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286e-84f5-08482200181c", communicationUser: #{id: "8:acs:3d703c91-9657-4b3f-b19c-ef9d53f99710_00000008-576c-286e-84f5-08482200181c"}}, transactionId: "zbZt+9h/N0em+XCW2QvyIA.1.1.1.1.1737228330.0.1737490483.1.6", threadId: "19:1d594fb1eeb14566903cbc5decb5bf5b@thread.v2"};
 // @example(MicrosoftCommunicationChatThreadCreatedWithUserExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
@@ -122,7 +122,7 @@ model AcsChatThreadCreatedWithUserEventData
 //     }
 //   },
 //   properties: #{
-//     topic: "Talk about new Thread Events in commuication services"
+//     topic: "Talk about new Thread Events in communication services"
 //   },
 //   participants: #[
 //     #{
@@ -240,7 +240,7 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
 //   },
 //   editTime: utcDateTime.fromISO("2021-02-19T16:04:07.7152073-08:00"),
 //   properties: #{
-//     topic: "Talk about new Thread Events in commuication services"
+//     topic: "Talk about new Thread Events in communication services"
 //   },
 //   metadata: #{
 //     key: "value"
