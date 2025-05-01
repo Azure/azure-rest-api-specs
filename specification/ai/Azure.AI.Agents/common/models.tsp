@@ -54,7 +54,6 @@ model OpenAIPageableListOf<T> {
   @doc("The object type, which is always list.")
   object: "list";
 
-  @pageItems
   @doc("The requested list of items.")
   data: T[];
 
@@ -63,7 +62,6 @@ model OpenAIPageableListOf<T> {
   firstId: string;
 
   @encodedName("application/json", "last_id")
-  @continuationToken
   @doc("The last ID represented in this list.")
   lastId: string;
 

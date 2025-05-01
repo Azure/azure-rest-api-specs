@@ -1,5 +1,6 @@
 import "../tools/models.tsp";
 import "@typespec/versioning";
+import "../common/models.tsp";
 
 namespace Azure.AI.Agents;
 
@@ -98,6 +99,37 @@ model MessageImageUrlParam {
 
   @doc("Optional detail level for the image (auto, low, or high). Defaults to 'auto' if not specified.")
   detail?: ImageDetailLevel;
+}
+
+/**
+ * A single page of messages that belong to a thread.
+ * This model follows the Azure-Core pageable pattern and is returned by
+ * the list-messages operation.  The shape exactly matches the OpenAI
+ * wire-format: each property keeps the same JSON name and semantics.
+ */
+model ThreadMessageList {
+  /** Discriminator for list payloads; always the literal string "list". */
+  object: "list";
+
+  @pageItems
+  /** The collection of messages contained in this page. */
+  data: ThreadMessage[];
+
+  @encodedName("application/json", "first_id")
+  /** Identifier of the first message represented in this page. */
+  firstId: string;
+
+  @encodedName("application/json", "last_id")
+  @continuationToken
+  /**
+   * Identifier of the last message represented in this page.
+   * Omitted on the final page.
+   */
+  lastId?: string;
+
+  @encodedName("application/json", "has_more")
+  /** true if additional pages are available beyond this one. */
+  hasMore: boolean;
 }
 
 /**

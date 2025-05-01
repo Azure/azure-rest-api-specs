@@ -54,17 +54,17 @@ namespace Azure.AI.Agents {
     @get
     listMessages is Azure.Core.Foundations.Operation<
       {
-        @doc("Identifier of the thread.")
+        /** Identifier of the thread whose messages are being listed. */
         @path
         threadId: string;
 
-        /** Filter messages by the run ID that generated them. */
+        /** Filter messages by the run-ID that generated them. */
         @query("run_id")
         runId?: string;
 
         ...OpenAIListRequestOptions;
       },
-      OpenAIPageableListOf<ThreadMessage>
+      ThreadMessageList
     >;
 
     /**
