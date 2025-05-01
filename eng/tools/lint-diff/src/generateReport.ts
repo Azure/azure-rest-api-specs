@@ -20,6 +20,9 @@ export async function generateLintDiffReport(
   baseBranch: string,
   compareSha: string,
 ): Promise<boolean> {
+  
+  console.log("Generating LintDiff report...");
+
   let pass = true;
   let outputMarkdown = "";
 
@@ -34,7 +37,7 @@ export async function generateLintDiffReport(
   // Compared Specs | New Version | Base Version
   // <tag name> | link: readme.md#tag-<tag-name> | link: readme.md#tag-<tag-name>
   // ... | ... | ...
-  for (const [_, { before, after }] of runCorrelations.entries()) {
+  for (const [, { before, after }] of runCorrelations.entries()) {
     const afterName = getName(after);
     const beforeName = before ? getName(before) : "default";
     const afterPath = getPath(after);
@@ -47,7 +50,6 @@ export async function generateLintDiffReport(
 
   const [newViolations, existingViolations] = getViolations(runCorrelations, affectedSwaggers);
 
-  console.log("Populating armRpcs for new violations");
   for (const newItem of newViolations) {
     // TODO: Potential performance issue, make parallel
     newItem.armRpcs = await getRelatedArmRpcFromDoc(newItem.code);
@@ -56,12 +58,7 @@ export async function generateLintDiffReport(
   newViolations.sort(compareLintDiffViolations);
   existingViolations.sort(compareLintDiffViolations);
 
-  if (newViolations.some((v) => isFailure(v.level))) {
-    // New violations with level error or fatal fail the build. If all new
-    // violations are warnings, the build passes.
-    pass = false;
-  }
-
+  console.log(`New violations: ${newViolations.length}`);
   if (newViolations.length > 0) {
     outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
     if (newViolations.length > 50) {
@@ -76,11 +73,20 @@ export async function generateLintDiffReport(
       outputMarkdown += getNewViolationReportRow(violation, compareSha);
     }
 
+    if (newViolations.some((v) => isFailure(v.level))) {
+      console.log("\t❌ At least one violation has error or fatal level. LintDiff will fail.");
+      // New violations with level error or fatal fail the build. If all new
+      // violations are warnings, the build passes.
+      pass = false;
+    }
+    console.log('::group::New violations table');
+    console.table(newViolations.map(({ level, code, message }) => ({ level, code, message })), [ 'level', 'code', 'message' ]);
+    console.log('::endgroup::');
+
     outputMarkdown += "\n";
   }
 
-  // The following errors/warnings exist before current PR submission
-  // Rule | Message | Location (link to file, line # at SHA)
+  console.log(`Existing violations: ${existingViolations.length}`);
   if (existingViolations.length > 0) {
     outputMarkdown += "**The following errors/warnings exist before current PR submission:**\n";
     if (existingViolations.length > 50) {
@@ -95,6 +101,10 @@ export async function generateLintDiffReport(
       outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) |\n`;
     }
 
+    console.log("::group::Existing violations table");
+    console.table(existingViolations.map(({ level, code, message }) => ({ level, code, message })), [ 'level', 'code', 'message' ]);
+    console.log("::endgroup::");
+    
     outputMarkdown += `\n`;
   }
 
