@@ -46,6 +46,7 @@ namespace Azure.AI.Agents {
      * @param threadId The ID of the thread to list messages from.
      * @returns The requested list of messages.
      */
+    @list
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"

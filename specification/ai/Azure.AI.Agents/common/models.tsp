@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -39,6 +40,7 @@ alias OpenAIListRequestOptions = {
 
   @doc("A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.")
   @query
+  @continuationToken
   after?: string;
 
   @doc("A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.")
@@ -52,6 +54,7 @@ model OpenAIPageableListOf<T> {
   @doc("The object type, which is always list.")
   object: "list";
 
+  @pageItems
   @doc("The requested list of items.")
   data: T[];
 
@@ -60,6 +63,7 @@ model OpenAIPageableListOf<T> {
   firstId: string;
 
   @encodedName("application/json", "last_id")
+  @continuationToken
   @doc("The last ID represented in this list.")
   lastId: string;
 
