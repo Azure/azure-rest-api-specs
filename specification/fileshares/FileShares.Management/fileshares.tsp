@@ -273,7 +273,7 @@ model PublicAccessProperties {
   @doc("The allowed set of subnets when access is restricted.")
   @renamedFrom(Versions.v2024_01_01_preview, "virtualNetworkRules")
   @typeChangedFrom(Versions.v2024_01_01_preview, VirtualNetworkRule[])
-  allowedSubnets: string[];
+  allowedSubnets?: string[];
 }
 
 @doc("Properties specific to the NFS protocol.")
@@ -281,7 +281,7 @@ model NfsProtocolProperties {
   // Unless the user has explicitly set the root squash property, the default
   // value is NoRootSquash.
   @doc("Root squash defines how root users on clients are mapped to the NFS share.")
-  rootSquash: ShareRootSquash;
+  rootSquash?: ShareRootSquash;
 }
 
 @lroStatus
