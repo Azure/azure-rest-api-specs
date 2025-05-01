@@ -5,7 +5,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@useDependency(Azure.AI.Inference.Versions.v2025_05_01)
+@versioned(Versions)
 namespace Customizations; // The actual name here doesn't matter and is here for organization purposes only
 
 // Are these needed?
@@ -193,4 +193,17 @@ interface Client2 {
 interface Client3 {
   embed is Azure.AI.Inference.getImageEmbeddings;
   getModelInfo is Azure.AI.Inference.getModelInfo;
+}
+
+@doc("The Azure.AI.Inference service versions.")
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.AI.Inference.Versions.v2024_05_01_Preview)
+  @doc("The 2024-05-01-preview version of the Azure.AI.Inference service.")
+  v2024_05_01_Preview: "2024-05-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.AI.Inference.Versions.v2025_05_01)
+  @doc("The 2025-05-01 version of the Azure.AI.Inference service.")
+  v2025_05_01: "2025-05-01",
 }
