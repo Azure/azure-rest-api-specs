@@ -1842,3 +1842,89 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
 >;
 
 @@override(Azure.Batch.Nodes.listNodeFiles, listNodeFilesCustomization, "java");
+
+// Client Name Overrides - Rename Parameter models to avoid conflicts with Options bag names
+@@clientName(Azure.Batch.BatchJobScheduleUpdateOptions,
+  "BatchJobScheduleUpdateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchJobScheduleCreateOptions,
+  "BatchJobScheduleCreateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchJobCreateOptions,
+  "BatchJobCreateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchJobUpdateOptions,
+  "BatchJobUpdateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchJobDisableOptions,
+  "BatchJobDisableContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchJobTerminateOptions,
+  "BatchJobTerminateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchPoolCreateOptions,
+  "BatchPoolCreateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchPoolReplaceOptions,
+  "BatchPoolReplaceContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchPoolUpdateOptions,
+  "BatchPoolUpdateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchPoolEnableAutoScaleOptions,
+  "BatchPoolEnableAutoScaleContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
+  "BatchPoolEvaluateAutoScaleContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchPoolResizeOptions,
+  "BatchPoolResizeContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchNodeRemoveOptions,
+  "BatchNodeRemoveContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchNodeDeallocateOptions,
+  "BatchNodeDeallocateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchTaskCreateOptions,
+  "BatchTaskCreateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchNodeUserCreateOptions,
+  "BatchNodeUserCreateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
+  "BatchNodeUserUpdateContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchNodeRebootKinds,
+  "BatchNodeRebootContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchNodeReimageOptions,
+  "BatchNodeReimageContent",
+  "java"
+);
+@@clientName(Azure.Batch.BatchNodeDisableSchedulingOptions,
+  "BatchNodeDisableSchedulingContent",
+  "java"
+);
+@@clientName(Azure.Batch.UploadBatchServiceLogsOptions,
+  "UploadBatchServiceLogsContent",
+  "java"
+);
