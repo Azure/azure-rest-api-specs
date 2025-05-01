@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
-@service(#{ title: "Informatica.DataManagement" })
+@service(#{ title: "Informatica.DataManagement.Test" })
 @versioned(Versions)
 @armCommonTypesVersion("v3")
 namespace Informatica.DataManagement;
