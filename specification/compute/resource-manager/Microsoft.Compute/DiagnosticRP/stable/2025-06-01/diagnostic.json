@@ -150,58 +150,6 @@
         }
       }
     },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
-        }
-      },
-      "description": "An error response from the Compute Diagnostic Resource Provider service."
-    },
-    "ErrorDetail": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "User friendly error message."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
-          },
-          "description": "The Api error details"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
-        }
-      },
-      "description": "Error Detail message."
-    },
-    "InnerError": {
-      "type": "object",
-      "properties": {
-        "exceptiontype": {
-          "type": "string",
-          "description": "The exception type."
-        },
-        "errordetail": {
-          "type": "string",
-          "description": "The internal error message or exception dump."
-        }
-      },
-      "description": "Inner error details."
-    },
     "SpotPlacementScoresInput": {
       "type": "object",
       "properties": {
@@ -217,7 +165,7 @@
           "items": {
             "$ref": "#/definitions/ResourceSize"
           },
-          "description": "The desired resource SKUs."
+          "description": "The desired virtual machine SKU sizes."
         },
         "desiredCount": {
           "type": "integer",
@@ -246,7 +194,7 @@
           "items": {
             "$ref": "#/definitions/ResourceSize"
           },
-          "description": "The desired resource SKUs."
+          "description": "The desired virtual machine SKU sizes."
         },
         "desiredCount": {
           "type": "integer",
@@ -262,7 +210,7 @@
           "items": {
             "$ref": "#/definitions/PlacementScore"
           },
-          "description": "The spot placement scores."
+          "description": "A High, Medium, or Low placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation."
         }
       },
       "description": "SpotPlacementScores API response."
