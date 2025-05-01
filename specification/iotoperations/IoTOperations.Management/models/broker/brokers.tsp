@@ -137,7 +137,7 @@ model BrokerRetainMessagesCustomPolicy extends BrokerRetainMessages {
   retainSettings: BrokerRetainMessagesSettings;
 }
 
-@doc("Retainment settings properties")
+@doc("Broker Retain Messages properties")
 @added(Versions.`2025-07-01-preview`)
 model BrokerRetainMessagesSettings {
   @doc("List of topics under which retained messages would be persisted to disk Wildcards # and + supported")
@@ -162,7 +162,7 @@ model BrokerSubscriberQueueDynamic
 model BrokerStateStoreDynamic
   is BrokerPersistencePolicyDynamicTpl<BrokerStateStoreCustomPolicy>;
 
-@doc("State Store Retainment Policy")
+@doc("Broker State Store Policy")
 @added(Versions.`2025-07-01-preview`)
 @discriminator("mode")
 model BrokerStateStorePolicy {
@@ -170,7 +170,7 @@ model BrokerStateStorePolicy {
   mode: BrokerPersistencePolicyMode;
 }
 
-@doc("Custom State Store Retainment Policy")
+@doc("Broker State Store Custom Policy")
 @added(Versions.`2025-07-01-preview`)
 model BrokerStateStoreCustomPolicy extends BrokerStateStorePolicy {
   @doc("The mode of the policy.")
@@ -180,7 +180,7 @@ model BrokerStateStoreCustomPolicy extends BrokerStateStorePolicy {
   stateStoreSettings: BrokerStateStorePolicySettings;
 }
 
-@doc("State Store Retainment settings properties")
+@doc("Broker State Store Custom Policy Settings")
 @added(Versions.`2025-07-01-preview`)
 model BrokerStateStorePolicySettings {
   @doc("List of key and key type to persist to disk")
@@ -191,7 +191,7 @@ model BrokerStateStorePolicySettings {
   dynamic?: BrokerStateStoreDynamic;
 }
 
-@doc("State Store Retainment resources properties")
+@doc("Broker State Store Policy Resources properties")
 @added(Versions.`2025-07-01-preview`)
 model BrokerStateStorePolicyResources {
   @doc("The key to persist to disk")
@@ -211,7 +211,7 @@ model BrokerPersistenceDynamicSettings {
   userPropertyValue?: string;
 }
 
-@doc("Subscriber Queue Retainment Policy")
+@doc("Broker Subscriber Queue Policy properties")
 @added(Versions.`2025-07-01-preview`)
 @discriminator("mode")
 model BrokerSubscriberQueuePolicy {
@@ -219,7 +219,7 @@ model BrokerSubscriberQueuePolicy {
   mode: BrokerPersistencePolicyMode;
 }
 
-@doc("Custom Subscriber Queue Retainment Policy")
+@doc("Custom Subscriber Queue Policy Properties")
 @added(Versions.`2025-07-01-preview`)
 model BrokerSubscriberQueueCustomPolicy extends BrokerSubscriberQueuePolicy {
   @doc("The mode of the policy.")
@@ -229,7 +229,7 @@ model BrokerSubscriberQueueCustomPolicy extends BrokerSubscriberQueuePolicy {
   subscriberQueueSettings: BrokerSubscriberQueueCustomPolicySettings;
 }
 
-@doc("Subscriber Queue Retainment settings properties")
+@doc("Broker Subscriber Queue Custom Policy properties")
 @added(Versions.`2025-07-01-preview`)
 model BrokerSubscriberQueueCustomPolicySettings {
   @doc("List of client IDs of the subscribers, wildcard * supported")
