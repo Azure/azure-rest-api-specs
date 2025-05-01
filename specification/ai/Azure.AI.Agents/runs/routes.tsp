@@ -73,28 +73,6 @@ namespace Azure.AI.Agents {
     >;
 
     /**
-     * Gets a list of runs for a specified thread.
-     *
-     * @param threadId The ID of the thread to list runs from.
-     * @returns The requested list of thread runs.
-     */
-    /*#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-    @get
-    listRuns is Azure.Core.Foundations.Operation<
-      {
-        @doc("Identifier of the thread.")
-        @path
-        threadId: string;
-
-        ...OpenAIListRequestOptions;
-      },
-      OpenAIPageableListOf<ThreadRun>
-    >;*/
-
-    /**
      * Gets an existing run from an existing thread.
      *
      * @param threadId The ID of the thread to retrieve run information from.

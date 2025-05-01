@@ -33,23 +33,6 @@ namespace Azure.AI.Agents {
     >;
 
     /**
-     * Gets a list of threads that were previously created.
-     *
-     * @returns The requested list of threads.
-     */
-    /*#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-    @get
-    listThreads is Azure.Core.Foundations.Operation<
-      {
-        ...OpenAIListRequestOptions;
-      },
-      OpenAIPageableListOf<AgentThread>
-    >;*/
-
-    /**
      * Gets information about an existing thread.
      *
      * @param threadId The ID of the thread to retrieve information about.
