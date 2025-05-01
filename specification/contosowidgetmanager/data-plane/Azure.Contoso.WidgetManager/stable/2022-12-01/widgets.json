@@ -40,43 +40,6 @@
   "tags": [],
   "paths": {
     "/widgets": {
-      "get": {
-        "operationId": "Widgets_ListWidgets",
-        "description": "List Widget resources",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedWidgetSuite"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Widgets_ListWidgets": {
-            "$ref": "./examples/Widgets_ListWidgetsSample.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     },
     "/widgets/{widgetName}": {
       "get": {
