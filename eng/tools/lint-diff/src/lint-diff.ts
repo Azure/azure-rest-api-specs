@@ -111,6 +111,11 @@ async function runLintDiff(
     changedFilesPath,
   );
 
+  if (beforeList.size === 0 && afterList.size === 0) {
+    console.log("No changes found. Exiting.");
+    return;
+  }
+
   // It may be possible to run these in parallel as they're running against
   // different directories.
   const beforeChecks = await runChecks(beforePath, beforeList);
