@@ -13,11 +13,11 @@ model MachineLearningServicesModelRegisteredEventData {
 
   /** The tags of the model that was registered. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Model tags is type object"
-  modelTags: Record<unknown>;
+  modelTags?: Record<unknown>;
 
   /** The properties of the model that was registered. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Model tags is type object"
-  modelProperties: Record<unknown>;
+  modelProperties?: Record<unknown>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event. */
@@ -33,11 +33,11 @@ model MachineLearningServicesModelDeployedEventData {
 
   /** The tags of the deployed service. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Service tags is type any"
-  serviceTags: Record<unknown>;
+  serviceTags?: Record<unknown>;
 
   /** The properties of the deployed service. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Service properties is type any"
-  serviceProperties: Record<unknown>;
+  serviceProperties?: Record<unknown>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event. */
