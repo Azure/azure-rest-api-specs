@@ -218,7 +218,7 @@ model CompletionsUsageDetails {
   audio_tokens: int32;
 
   @doc("The number of tokens corresponding to reasoning.")
-  @added(Azure.AI.Inference.Versions.v2025_04_01)
+  @added(Azure.AI.Inference.Versions.v2025_05_01)
   @visibility(Lifecycle.Read)
   reasoning_tokens: int32;
 
@@ -480,7 +480,7 @@ model StreamingChatResponseMessageUpdate {
   toolCalls?: StreamingChatResponseToolCallUpdate[];
 
   @doc("The reasoning content the model used for generating the response")
-  @added(Azure.AI.Inference.Versions.v2025_04_01)
+  @added(Azure.AI.Inference.Versions.v2025_05_01)
   @visibility(Lifecycle.Read)
   reasoning_content?: string;
 }
@@ -503,7 +503,7 @@ model ChatResponseMessage {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The reasoning content the model used for generating the response")
-  @added(Azure.AI.Inference.Versions.v2025_04_01)
+  @added(Azure.AI.Inference.Versions.v2025_05_01)
   @visibility(Lifecycle.Read)
   reasoning_content?: string;
 }

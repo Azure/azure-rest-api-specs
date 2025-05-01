@@ -86,7 +86,7 @@ op getModelInfo is Azure.Core.RpcOperation<
   {
     @doc("The model deployment name you want information from.")
     @query
-    @added(Azure.AI.Inference.Versions.v2025_04_01)
+    @added(Azure.AI.Inference.Versions.v2025_05_01)
     `model`?: string;
   },
   ModelInfo
