@@ -1849,11 +1849,7 @@
             "description": "Connection(s) to retrieve flows of",
             "in": "body",
             "schema": {
-              "type": "array",
-              "description": "The connection ID's to retrieve the flows of",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/connectionIdList"
             }
           }
         ],
@@ -1915,8 +1911,11 @@
           },
           "202": {
             "description": "Started execution of the action.",
-            "schema": {
-              "$ref": "#/definitions/pipeline"
+            "headers": {
+              "location": {
+                "description": "Location response header",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -3073,6 +3072,17 @@
         "modelAsString": true
       },
       "description": "Status of force disablement"
+    },
+    "connectionIdList": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "description": "List of connection IDs",
+        "items": {
+            "type": "string"
+          }
+      },
+      "description": "Flows for a pipeline."
     },
     "listFlowsByPipelineResult": {
       "type": "object",
