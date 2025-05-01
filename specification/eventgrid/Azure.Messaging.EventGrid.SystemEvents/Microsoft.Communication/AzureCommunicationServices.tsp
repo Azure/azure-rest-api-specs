@@ -492,8 +492,8 @@ model AcsRouterJobClassificationFailedEventData extends AcsRouterJobEventData {
 }
 
  
- const MicrosoftCommunicationRouterJobClassifiedExample: AcsRouterJobClassifiedEventData = #{queueDetails: #{id: "625fec06-ab81-4e60-b780-f364ed96ade1", name: "Queue 1", labels: #{language: "en", product: "Office", geo: "NA"}}, jobId: "7f1df17b-570b-4ae5-9cf5-fe6ff64cc712", channelReference: "test-abc", channelId: "FooVoiceChannelId", classificationPolicyId: "test-policy", queueId: "625fec06-ab81-4e60-b780-f364ed96ade1", priority: 5, labels: #{locale: "en-us", segment: "Enterprise", token: "FooToken"}, tags: #{locale: "en-us", segment: "Enterprise", token: "FooToken"}, attachedWorkerSelectors: #[#{key: "string", labelOperator: "equal", value: 5, ttlSeconds: "36"}]}; 
-@example(MicrosoftCommunicationRouterJobClassifiedExample) 
+//  const MicrosoftCommunicationRouterJobClassifiedExample: AcsRouterJobClassifiedEventData = #{queueDetails: #{id: "625fec06-ab81-4e60-b780-f364ed96ade1", name: "Queue 1", labels: #{language: "en", product: "Office", geo: "NA"}}, jobId: "7f1df17b-570b-4ae5-9cf5-fe6ff64cc712", channelReference: "test-abc", channelId: "FooVoiceChannelId", classificationPolicyId: "test-policy", queueId: "625fec06-ab81-4e60-b780-f364ed96ade1", priority: 5, labels: #{locale: "en-us", segment: "Enterprise", token: "FooToken"}, tags: #{locale: "en-us", segment: "Enterprise", token: "FooToken"}, attachedWorkerSelectors: #[#{key: "string", labelOperator: "equal", value: 5, ttlSeconds: "36"}]}; 
+// @example(MicrosoftCommunicationRouterJobClassifiedExample) 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassified event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
