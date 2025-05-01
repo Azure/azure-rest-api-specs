@@ -86,6 +86,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let currentRunHasBreakingChange = false;
   let overallExecutionResult = "";
   let currentExecutionResult = "";
+  let serviceNames = "";
 
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
@@ -130,6 +131,19 @@ export async function generateSdkForSpecPr(): Promise<number> {
       // Read the execution report to aggreate the generation results
       executionReport = getExecutionReport(commandInput);
       currentExecutionResult = executionReport.executionResult;
+      if (executionReport.stagedArtifactsFolder) {
+        commandInput.stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
+      }
+      
+      for (const pkg of executionReport.packages) {
+        if (serviceNames.length > 0) {
+          serviceNames += ",";
+        }
+        if (pkg.serviceName) {
+          serviceNames += `${pkg.serviceName}`;
+        }
+      }
+
       if (overallExecutionResult !== "failed") {
         overallExecutionResult = currentExecutionResult;
       }
@@ -144,6 +158,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
     logMessage("ending group logging", LogLevel.EndGroup);
     logIssuesToPipeline(executionReport?.vsoLogPath, changedSpecPathText);
   }
+  commandInput.serviceNames = serviceNames;
   // Process the spec-gen-sdk artifacts
   statusCode =
     generateArtifact(

@@ -70,6 +70,10 @@ extends:
           - pwsh: |
               $tspConfigPathPattern = '^specification\/([^\/]+\/)+tspconfig\.yaml$'
               $readmePathPattern = '^specification\/([^\/]+\/){2,}readme\.md$'
+              if ('$(Build.Reason)' -eq 'PullRequest') {
+                Write-Host "##vso[task.setvariable variable=SpecRepoCommit]$(System.PullRequest.SourceCommitId)"
+                Write-Host "SpecRepoCommit variable set to: $(System.PullRequest.SourceCommitId)"
+              }
               if (('${{ parameters.ConfigType }}' -eq 'TypeSpec') -and ('${{ parameters.ConfigPath }}' -notmatch $tspConfigPathPattern)) {
                 Write-Host "##vso[task.logissue type=error]'ConfigPath' must be a valid 'tspconfig.yaml' file path when 'ConfigType' is set to 'TypeSpec'. For example, 'specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml'"
                 Exit 1
@@ -197,16 +201,20 @@ extends:
                 $optional_params || true # return true always to suppress exit error logging
             displayName: 'Generate SDK'
 
-          - task: Powershell@2
-            inputs:
-              filePath: $(SdkRepoDirectory)/eng/common/scripts/Save-Package-Properties.ps1
-              arguments: >
-                -ServiceDirectory $(GeneratedSDK.ServiceName)
-                -OutDirectory $(GeneratedSDK.StagedArtifactsFolder)/PackageInfo
-              pwsh: true
-              workingDirectory: $(SdkRepoDirectory)
+          - pwsh: |
+              Write-Host "Service Names: $(SpecGenSdkServiceNames)"
+              Write-Host "Staged SDK Folder: $(SpecGenSdkArtifactPath)"
+            displayName: 'View SDK Generation Runtime Variables'
+
+          - pwsh: |
+              . $(SdkRepoDirectory)/eng/common/scripts/Helpers/ApiView-Helpers.ps1
+              Save-PackageProperties `
+                -repoRoot $(SdkRepoDirectory) `
+                -serviceNames $(SpecGenSdkServiceNames) `
+                -outPutDirectory $(SpecGenSdkArtifactPath)/PackageInfo
+            workingDirectory: $(SdkRepoDirectory)
             displayName: Dump Package properties
-            condition: and(succeeded(), ne(variables['GeneratedSDK.ServiceName'], ''), ne(variables['GeneratedSDK.StagedArtifactsFolder'], ''))
+            condition: and(succeeded(), ne(variables['SpecGenSdkServiceNames'], ''), ne(variables['SpecGenSdkArtifactPath'], ''))
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
@@ -217,8 +225,8 @@ extends:
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
               ArtifactName: $(PipelineArtifactsName)
-              ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
-              CustomCondition: and(succeeded(), ne(variables['GeneratedSDK.StagedArtifactsFolder'], ''))
+              ArtifactPath: $(SpecGenSdkArtifactPath)
+              CustomCondition: and(succeeded(), ne(variables['SpecGenSdkArtifactPath'], ''))
 
           - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
             - task: PowerShell@2
@@ -282,6 +290,6 @@ extends:
           - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
             - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
               parameters:
-                ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
+                ArtifactPath: $(SpecGenSdkArtifactPath)
                 ArtifactName: $(PipelineArtifactsName)
                 RepoRoot: $(SdkRepoDirectory)

@@ -243,7 +243,7 @@ export function generateArtifact(
 ): number {
   const specGenSdkArtifactName = "spec-gen-sdk-artifact";
   const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
-  const specGenSdkArtifactPath = "out/spec-gen-sdk-artifact";
+  const specGenSdkArtifactPath = commandInput.stagedArtifactsFolder!
   const specGenSdkArtifactAbsoluteFolder = path.join(
     commandInput.workingFolder,
     specGenSdkArtifactPath,
@@ -264,6 +264,7 @@ export function generateArtifact(
       path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
       JSON.stringify(artifactInfo, undefined, 2),
     );
+    setVsoVariable("SpecGenSdkServiceNames", commandInput.serviceNames!);
     setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
     setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
     setVsoVariable("BreakingChangeLabelAction", hasBreakingChange ? "add" : "remove");

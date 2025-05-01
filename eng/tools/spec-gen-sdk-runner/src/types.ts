@@ -17,6 +17,8 @@ export interface SpecGenSdkCmdInput {
   specRepoHttpsUrl: string;
   headRepoHttpsUrl?: string;
   headBranch?: string;
+  stagedArtifactsFolder?: string;
+  serviceNames?: string;
 }
 
 /*
