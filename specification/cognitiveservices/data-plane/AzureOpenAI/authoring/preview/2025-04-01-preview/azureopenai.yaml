@@ -2624,7 +2624,7 @@ definitions:
         - description: 'A text input to the model.'
           title: Text input
           type: string
-        - $ref: /api/responsesapi/openapi/public/components/schemas/InputTextContent.json
+        - $ref: '#/definitions/InputTextContent'
         - description: 'A text output from the model.'
           properties:
             text:
@@ -4034,6 +4034,23 @@ definitions:
       name:
         description: "An optional name for the participant.\r\nProvides the model information to differentiate between participants of the same role."
         type: string
+  InputTextContent:
+    description: "A text input to the model."
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - input_text
+        description: "The type of the input item. Always `input_text`."
+        default: input_text
+      text:
+        type: string
+        description: "The text input to the model."
+    required:
+      - type
+      - text
+    title: InputTextContent
   IntegrationTypes:
     title: IntegrationTypes
     description: List of Fine Tune integrations available.

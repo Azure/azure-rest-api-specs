@@ -3929,7 +3929,7 @@
               "type": "string"
             },
             {
-              "$ref": "/api/responsesapi/openapi/public/components/schemas/InputTextContent.json"
+              "$ref": "#/definitions/InputTextContent"
             },
             {
               "description": "A text output from the model.",
@@ -5841,6 +5841,24 @@
           "type": "string"
         }
       }
+    },
+    "InputTextContent": {
+      "title": "InputTextContent",
+      "description": "A text input to the model.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["input_text"],
+          "description": "The type of the input item. Always `input_text`.",
+          "default": "input_text"
+        },
+        "text": {
+          "type": "string",
+          "description": "The text input to the model."
+        }
+      },
+      "required": ["type", "text"]
     },
     "IntegrationTypes": {
       "title": "IntegrationTypes",
