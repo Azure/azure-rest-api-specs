@@ -51,11 +51,6 @@ model DataflowGraphProperties {
   requestDiskPersistence?: OperationalMode;
 
   /**
-   * Reference to the dataflow profile
-   */
-  profileRef: string; // should we leverage k8s-bridge translation here? https://armwiki.azurewebsites.net/rpaas/arc-rp/conversion/SchemaTranslation.html#kubernetes-bridge-custom-filters
-
-  /**
    * List of nodes in the dataflow graph.
    */
   @OpenAPI.extension("x-ms-identifiers", #["name"])

@@ -51,10 +51,6 @@ model DataflowProperties {
   @OpenAPI.extension("x-ms-identifiers", #[])
   operations: DataflowOperation[];
 
-  @doc("Reference to the DataflowProfile resource.")
-  @added(Versions.`2025-07-01-preview`)
-  profileRef?: string; // should this be added
-
   @doc("Connections between operations in the Dataflow.")
   @OpenAPI.extension("x-ms-identifiers", #[])
   @added(Versions.`2025-07-01-preview`)
