@@ -314,11 +314,11 @@ model AnswersOptions {
    */
   includeUnstructuredSources?: boolean;
 
-   /**
+  /**
    * To fine tune query results
    */
-   @added(Versions.v2025_05_15_preview)
-   queryPreferences?: QueryPreferences;
+  @added(Versions.v2025_05_15_preview)
+  queryPreferences?: QueryPreferences;
 }
 
 /**
