@@ -761,8 +761,8 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   /** Router Job Waiting For Activation Priority */
   priority?: int32;
 
-  @visibility(Lifecycle.Read)
   /** Router Job Waiting For Activation Worker Selector Expired */
+  @visibility(Lifecycle.Read)
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Waiting For Activation Requested Worker Selector Expired */
