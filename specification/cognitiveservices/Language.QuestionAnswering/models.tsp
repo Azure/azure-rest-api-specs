@@ -421,7 +421,7 @@ model QueryPreferences {
   scorer?: Scorer;
 
   /**
-   * Policy for controling exact query match behaviour
+   * Policy for controling exact query match behavior
    */
   matchingPolicy?: MatchingPolicy;
 }
