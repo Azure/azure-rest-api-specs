@@ -3,6 +3,7 @@ import "@typespec/versioning";
 
 namespace Azure.AI.Agents;
 
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of string | array is intentional (OpenAPI 3 can handle oneOf)."
@@ -131,8 +132,11 @@ model ThreadMessageOptions {
 }
 
 @doc("A single, existing message within an agent thread.")
+@resource("messages")
 model ThreadMessage {
   @doc("The identifier, which can be referenced in API endpoints.")
+  @key("id")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The object type, which is always 'thread.message'.")

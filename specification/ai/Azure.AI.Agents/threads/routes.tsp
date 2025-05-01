@@ -7,11 +7,19 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+using Azure.Core.Traits;
+
 namespace Azure.AI.Agents {
+
+  alias AgentThreadTraits = SupportsClientRequestId &
+    NoRepeatableRequests &
+    NoConditionalRequests;
+
+  alias AgentThreadOperations = Azure.Core.ResourceOperations<AgentThreadTraits>;
+
   /**
    * A collection of thread operations under `/threads`.
    */
-  @route("/threads")
   interface Threads {
     /**
      * Creates a new thread. Threads contain messages and can be run by agents.
@@ -22,6 +30,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
+    @route("/threads")
     createThread is Azure.Core.Foundations.Operation<
       {
         /**
@@ -37,16 +46,12 @@ namespace Azure.AI.Agents {
      *
      * @returns The requested list of threads.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-    @get
-    listThreads is Azure.Core.Foundations.Operation<
-      {
+    listThreads is AgentThreadOperations.ResourceList<
+      AgentThread,
+      ListQueryParametersTrait<{
         ...OpenAIListRequestOptions;
-      },
-      OpenAIPageableListOf<AgentThread>
+      }>
     >;
 
     /**
@@ -60,7 +65,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
-    @route("/{threadId}")
+    @route("/threads/{threadId}")
     getThread is Azure.Core.Foundations.Operation<
       {
         @doc("Identifier of the thread.")
@@ -80,7 +85,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    @route("/{threadId}")
+    @route("/threads/{threadId}")
     updateThread is Azure.Core.Foundations.Operation<
       {
         /**
@@ -101,7 +106,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @delete
-    @route("/{threadId}")
+    @route("/threads/{threadId}")
     deleteThread is Azure.Core.Foundations.Operation<
       {
         @doc("Identifier of the thread.")

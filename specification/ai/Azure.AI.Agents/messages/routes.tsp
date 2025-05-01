@@ -9,9 +9,27 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
+using Azure.Core.Traits;
 
 namespace Azure.AI.Agents {
+
+  alias MessagesTraits = SupportsClientRequestId &
+    NoRepeatableRequests &
+    NoConditionalRequests;
+
+  alias MessagesOperations = Azure.Core.ResourceOperations<MessagesTraits>;
+  
+  /**
+   * The override for path parameters
+   * @param threadId The ID of the thread that was run.
+   */
+  model MsgIdPathParameter {
+    @doc("Identifier of the thread.")
+    @segment("threads")
+    @path("threadId")
+    threadId: string;
+  }
+
   /**
    * A collection of message operations under `/threads/{threadId}/messages`.
    */
@@ -28,6 +46,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
+    @route("/messages")
     createMessage is Azure.Core.Foundations.Operation<
       {
         @doc("Identifier of the thread.")
@@ -43,27 +62,19 @@ namespace Azure.AI.Agents {
     /**
      * Gets a list of messages that exist on a thread.
      *
-     * @param threadId The ID of the thread to list messages from.
      * @returns The requested list of messages.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-    @get
-    listMessages is Azure.Core.Foundations.Operation<
-      {
-        @doc("Identifier of the thread.")
-        @path
-        threadId: string;
-
+    listMessages is MessagesOperations.ResourceList<
+      ThreadMessage,
+      ListQueryParametersTrait<{
         /** Filter messages by the run ID that generated them. */
         @query("run_id")
         runId?: string;
 
         ...OpenAIListRequestOptions;
-      },
-      OpenAIPageableListOf<ThreadMessage>
+      }> &
+      TraitOverride<VersionParameterTrait<MsgIdPathParameter>>
     >;
 
     /**
@@ -78,7 +89,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
-    @route("/{messageId}")
+    @route("/messages/{messageId}")
     getMessage is Azure.Core.Foundations.Operation<
       {
         @doc("Identifier of the thread.")
@@ -103,7 +114,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "not standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    @route("/{messageId}")
+    @route("/messages/{messageId}")
     updateMessage is Azure.Core.Foundations.Operation<
       {
         @doc("Identifier of the thread.")

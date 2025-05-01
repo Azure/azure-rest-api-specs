@@ -9,8 +9,27 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core.Traits;
 
 namespace Azure.AI.Agents {
+
+  alias RunsTraits = SupportsClientRequestId &
+    NoRepeatableRequests &
+    NoConditionalRequests;
+
+  alias RunsOperations = Azure.Core.ResourceOperations<RunsTraits>;
+
+  /**
+   * The override for path parameters
+   * @param threadId The ID of the thread that was run.
+   */
+  model ThreadIdPathParameter {
+	@doc("Identifier of the thread.")
+	@path("threadId")
+    @segment("threads")
+    threadId: string;
+  }
+
   /**
    * Creates a new thread and immediately starts a run of that thread.
    *
@@ -35,7 +54,7 @@ namespace Azure.AI.Agents {
   /**
    * A collection of run operations under `/threads/{threadId}/runs`.
    */
-  @route("/threads/{threadId}/runs")
+  @route("/threads/{threadId}")
   interface Runs {
     /**
      * Creates and starts a new run of the specified thread using the specified agent.
@@ -49,6 +68,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
+    @route("/runs")
     @doc("Creates a new run for an agent thread.")
     createRun is Azure.Core.Foundations.Operation<
       {
@@ -75,23 +95,16 @@ namespace Azure.AI.Agents {
     /**
      * Gets a list of runs for a specified thread.
      *
-     * @param threadId The ID of the thread to list runs from.
      * @returns The requested list of thread runs.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-    @get
-    listRuns is Azure.Core.Foundations.Operation<
-      {
-        @doc("Identifier of the thread.")
-        @path
-        threadId: string;
+    listRuns is RunsOperations.ResourceList<
+      ThreadRun,
+      ListQueryParametersTrait<{
 
         ...OpenAIListRequestOptions;
-      },
-      OpenAIPageableListOf<ThreadRun>
+      }> &
+      TraitOverride<VersionParameterTrait<ThreadIdPathParameter>>
     >;
 
     /**
@@ -106,7 +119,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
-    @route("/{runId}")
+    @route("/runs/{runId}")
     getRun is Azure.Core.Foundations.Operation<
       {
         @doc("Identifier of the thread.")
@@ -131,7 +144,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    @route("/{runId}")
+    @route("/runs/{runId}")
     updateRun is Azure.Core.Foundations.Operation<
       {
         @doc("Identifier of the thread.")
@@ -160,7 +173,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    @route("/{runId}/submit_tool_outputs")
+    @route("/runs/{runId}/submit_tool_outputs")
     submitToolOutputsToRun is Azure.Core.Foundations.Operation<
       {
         @doc("Identifier of the thread.")
@@ -193,7 +206,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    @route("/{runId}/cancel")
+    @route("/runs/{runId}/cancel")
     cancelRun is Azure.Core.Foundations.Operation<
       {
         @doc("Identifier of the thread.")

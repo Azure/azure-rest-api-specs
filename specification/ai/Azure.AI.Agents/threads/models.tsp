@@ -5,13 +5,17 @@ import "../common/models.tsp";
 import "../messages/models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.Agents;
 
 @doc("Information about a single thread associated with an agent.")
+@resource("threads")
 model AgentThread {
   @doc("The identifier, which can be referenced in API endpoints.")
+  @key("id")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The object type, which is always 'thread'.")
