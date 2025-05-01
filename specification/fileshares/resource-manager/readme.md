@@ -57,7 +57,7 @@ directive:
   - suppress: AvoidAdditionalProperties
     reason: 1. These are created as part of Record<string> and properties constructs.
   - suppress: OperationIdNounVerb
-    reason: FileShare is both in parent and child resource. example : FileShares_ListByFileShare FileShares_GetFileShareSnapshot , FileShares_CreateOrUpdateFileShareSnapshot FileShares_UpdateFileShareSnapshot FileShares_DeleteFileShareSnapshot
+    reason: FileShare is both in parent and child resource.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots"].get.operationId
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].put.operationId
