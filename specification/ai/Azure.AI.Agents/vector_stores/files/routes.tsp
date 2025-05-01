@@ -19,25 +19,25 @@ namespace Azure.AI.Agents {
     /**
      * Returns a list of vector store files.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+    /*#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     listVectorStoreFiles is Azure.Core.Foundations.Operation<
       {
-        /** The ID of the vector store that the files belong to. */
+        /** The ID of the vector store that the files belong to. *
         @doc("Identifier of the vector store.")
         @path
         vectorStoreId: string;
 
-        /** Filter by file status. */
+        /** Filter by file status. *
         @query
         filter?: VectorStoreFileStatusFilter;
 
         ...OpenAIListRequestOptions;
       },
       OpenAIPageableListOf<VectorStoreFile>
-    >;
+    >;*/
 
     /**
      * Create a vector store file by attaching a file to a vector store.

@@ -35,7 +35,7 @@ op createAgent is Azure.Core.Foundations.Operation<
  *
  * @returns The requested list of agents.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+/*#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
@@ -46,7 +46,7 @@ op listAgents is Azure.Core.Foundations.Operation<
     ...OpenAIListRequestOptions;
   },
   OpenAIPageableListOf<Agent>
->;
+>;*/
 
 /**
  * Retrieves an existing agent.

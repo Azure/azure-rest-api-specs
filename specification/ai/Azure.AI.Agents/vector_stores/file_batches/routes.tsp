@@ -100,29 +100,29 @@ namespace Azure.AI.Agents {
     /**
      * Returns a list of vector store files in a batch.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+    /*#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     @route("/{batchId}/files")
     listVectorStoreFileBatchFiles is Azure.Core.Foundations.Operation<
       {
-        /** The ID of the vector store that the file batch belongs to. */
+        /** The ID of the vector store that the file batch belongs to. *
         @doc("Identifier of the vector store.")
         @path
         vectorStoreId: string;
 
-        /** The ID of the file batch that the files belong to. */
+        /** The ID of the file batch that the files belong to. *
         @doc("Identifier of the file batch.")
         @path
         batchId: string;
 
-        /** Filter by file status. */
+        /** Filter by file status. *
         @query filter?: VectorStoreFileStatusFilter;
 
         ...OpenAIListRequestOptions;
       },
       OpenAIPageableListOf<VectorStoreFile>
-    >;
+    >;*/
   }
 }

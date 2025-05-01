@@ -18,7 +18,7 @@ namespace Azure.AI.Agents {
     /**
      * Returns a list of vector stores.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+    /*#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
@@ -28,7 +28,7 @@ namespace Azure.AI.Agents {
         ...OpenAIListRequestOptions;
       },
       OpenAIPageableListOf<VectorStore>
-    >;
+    >;*/
 
     /**
      * Creates a vector store.

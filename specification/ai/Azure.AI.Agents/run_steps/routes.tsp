@@ -62,7 +62,7 @@ namespace Azure.AI.Agents {
      * @param include A list of additional fields to include in the response.
      * @returns The requested list of run steps.
      */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+    /*#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
@@ -87,6 +87,6 @@ namespace Azure.AI.Agents {
         ...OpenAIListRequestOptions;
       },
       OpenAIPageableListOf<RunStep>
-    >;
+    >;*/
   }
 }
