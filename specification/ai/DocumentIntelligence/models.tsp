@@ -428,7 +428,6 @@ model DocumentIntelligenceError {
   innererror?: DocumentIntelligenceInnerError;
 }
 
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
 @doc("An object containing more specific information about the error.")
 model DocumentIntelligenceInnerError {
   @doc("One of a server-defined set of error codes.")
@@ -1321,7 +1320,7 @@ model ClassifierCopyAuthorization {
 model DocumentIntelligenceOperationDetails {
   @doc("Operation ID")
   @key
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   operationId: string;
 
   @doc("Operation status.  notStarted, running, completed, or failed")
@@ -1358,7 +1357,7 @@ model DocumentIntelligenceOperationDetails {
 @doc("Document model info.")
 model DocumentModelDetails {
   @key
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Unique document model name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   modelId: string;
@@ -1368,40 +1367,40 @@ model DocumentModelDetails {
   description?: string;
 
   @doc("Date and time (UTC) when the document model was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the document model will expire.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expirationDateTime?: utcDateTime;
 
   @doc("Date and time (UTC) when the document model was last modified.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modifiedDateTime?: utcDateTime;
 
   @doc("API version used to create this document model.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   apiVersion?: string;
 
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
 
   @doc("Custom document model build mode.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   buildMode?: DocumentBuildMode;
 
   @doc("""
     Azure Blob Storage location containing the training data.  Either
     azureBlobSource or azureBlobFileListSource must be specified.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
     Azure Blob Storage file list specifying the training data.  Either
     azureBlobSource or azureBlobFileListSource must be specified.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 
   @doc("For composed models, the custom classifier to split and classify the input file.")
@@ -1411,15 +1410,15 @@ model DocumentModelDetails {
   split?: SplitMode = SplitMode.none;
 
   @doc("Supported document types.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   docTypes?: Record<DocumentTypeDetails>;
 
   @doc("List of warnings encountered while building the model.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   warnings?: DocumentIntelligenceWarning[];
 
   @doc("Number of V100-equivalent GPU hours consumed for model training.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   trainingHours?: float32;
 }
 
@@ -1520,7 +1519,7 @@ model ClassifierDocumentTypeDetails {
 @resource("documentClassifiers")
 model DocumentClassifierDetails {
   @key
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Unique document classifier name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   @maxLength(64)
@@ -1537,7 +1536,7 @@ model DocumentClassifierDetails {
   expirationDateTime?: utcDateTime;
 
   @doc("Date and time (UTC) when the document model was last modified.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modifiedDateTime?: utcDateTime;
 
   @doc("API version used to create this document classifier.")

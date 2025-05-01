@@ -1,4 +1,4 @@
-import "../../../models/autonomousdatabase/autonomousDatabase.tsp";
+import "../../models/autonomousdatabase/autonomousDatabase.tsp";
 import "../commons.tsp";
 
 using Azure.ResourceManager;

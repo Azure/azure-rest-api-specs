@@ -4,6 +4,7 @@ import "@typespec/http";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 using Azure.ClientGenerator.Core;
 
@@ -130,6 +131,15 @@ model ChatCompletionsOptions {
     """)
   modalities?: ChatCompletionsModality[];
 
+  @doc("""
+    User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
+    These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
+    [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+    """)
+  @added(ModelInference.Versions.v2025_05_01)
+  @clientName("UserSecurityContext", "csharp")
+  user_security_context?: UserSecurityContext;
+
   ...Record<unknown>;
 }
 @doc("The modalities that the model is allowed to use for the chat completions response.")
@@ -156,9 +166,11 @@ alias ChatCompletionsCommon = {
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
   @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  @visibility(Lifecycle.Read)
   created: utcDateTime;
 
   @doc("The model used for the chat completion.")
+  @visibility(Lifecycle.Read)
   `model`: string;
 };
 
@@ -176,11 +188,13 @@ model ChatCompletions {
     Token limits and other settings may limit the number of choices generated.
     """)
   @minItems(1)
+  @visibility(Lifecycle.Read)
   choices: ChatChoice[];
 
   @doc("""
       Usage information for tokens processed and generated as part of this completions operation.
     """)
+  @visibility(Lifecycle.Read)
   usage: CompletionsUsage;
 }
 
@@ -199,11 +213,13 @@ model StreamingChatCompletionsUpdate {
     Token limits and other settings may limit the number of choices generated.
     """)
   @minItems(1)
+  @visibility(Lifecycle.Read)
   choices: StreamingChatChoiceUpdate[];
 
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
     """)
+  @visibility(Lifecycle.Read)
   usage?: CompletionsUsage;
 }
 
@@ -214,36 +230,50 @@ model StreamingChatCompletionsUpdate {
   """)
 model CompletionsUsage {
   @doc("The number of tokens generated across all completions emissions.")
+  @visibility(Lifecycle.Read)
   completion_tokens: int32;
 
   @doc("The number of tokens in the provided prompts for the completions request.")
+  @visibility(Lifecycle.Read)
   prompt_tokens: int32;
 
   @doc("The total number of tokens processed for the completions request and response.")
+  @visibility(Lifecycle.Read)
   total_tokens: int32;
 
   @doc("Breakdown of tokens used in a completion.")
+  @visibility(Lifecycle.Read)
   completion_tokens_details?: CompletionsUsageDetails;
 
   @doc("Breakdown of tokens used in the prompt/chat history.")
+  @visibility(Lifecycle.Read)
   prompt_tokens_details?: PromptUsageDetails;
 }
 
 @doc("A breakdown of tokens used in a completion.")
 model CompletionsUsageDetails {
   @doc("The number of tokens corresponding to audio input.")
+  @visibility(Lifecycle.Read)
   audio_tokens: int32;
 
+  @doc("The number of tokens corresponding to reasoning.")
+  @added(ModelInference.Versions.v2025_04_01)
+  @visibility(Lifecycle.Read)
+  reasoning_tokens: int32;
+
   @doc("The total number of tokens processed for the completions request and response.")
+  @visibility(Lifecycle.Read)
   total_tokens: int32;
 }
 
 @doc("A breakdown of tokens used in the prompt/chat history.")
 model PromptUsageDetails {
   @doc("The number of tokens corresponding to audio input.")
+  @visibility(Lifecycle.Read)
   audio_tokens: int32;
 
   @doc("The total number of tokens cached.")
+  @visibility(Lifecycle.Read)
   cached_tokens: int32;
 }
 
@@ -362,6 +392,7 @@ alias ChatChoiceCommon = {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The reason that this chat completions choice completed its generated.")
+  @visibility(Lifecycle.Read)
   finish_reason: CompletionsFinishReason | null;
 };
 
@@ -374,6 +405,7 @@ model ChatChoice {
   ...ChatChoiceCommon;
 
   @doc("The chat message for a given chat completions prompt.")
+  @visibility(Lifecycle.Read)
   message: ChatResponseMessage;
 }
 
@@ -387,6 +419,7 @@ model StreamingChatChoiceUpdate {
   ...ChatChoiceCommon;
 
   @doc("An update to the chat message for a given chat completions prompt.")
+  @visibility(Lifecycle.Read)
   delta: StreamingChatResponseMessageUpdate;
 }
 
@@ -466,39 +499,56 @@ model ChatRequestToolMessage extends ChatRequestMessage {
 @doc("A representation of a chat message update as received in a streaming response.")
 model StreamingChatResponseMessageUpdate {
   @doc("The chat role associated with the message. If present, should always be 'assistant'")
+  @visibility(Lifecycle.Read)
   role?: ChatRole;
 
-  //#suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
+  @visibility(Lifecycle.Read)
   content?: string;
+
+  @doc("The reasoning content the model used for generating the response")
+  @added(ModelInference.Versions.v2025_04_01)
+  @visibility(Lifecycle.Read)
+  reasoning_content?: string;
 
   @encodedName("application/json", "tool_calls")
   @doc("""
     The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
     completions request to resolve as configured.
     """)
+  @visibility(Lifecycle.Read)
   toolCalls?: StreamingChatResponseToolCallUpdate[];
 }
 
 @doc("A representation of a chat message as received in a response.")
 model ChatResponseMessage {
   @doc("The chat role associated with the message.")
+  @visibility(Lifecycle.Read)
   role: ChatRole;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
+  @visibility(Lifecycle.Read)
   content: string | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  @doc("The reasoning content the model used for generating the response")
+  @added(ModelInference.Versions.v2025_04_01)
+  @visibility(Lifecycle.Read)
+  reasoning_content?: string;
 
   @encodedName("application/json", "tool_calls")
   @doc("""
     The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
     completions request to resolve as configured.
     """)
+  @visibility(Lifecycle.Read)
   toolCalls?: ChatCompletionsToolCall[];
 
   @doc("""
       The audio generated by the model as a response to the messages if the model is configured to generate audio.
     """)
+  @visibility(Lifecycle.Read)
   audio?: ChatCompletionsAudio;
 }
 
@@ -576,9 +626,11 @@ model FunctionDefinition {
   """)
 model StreamingChatResponseToolCallUpdate {
   @doc("The ID of the tool call.")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Updates to the function call requested by the AI model.")
+  @visibility(Lifecycle.Read)
   function: FunctionCall;
 }
 
@@ -599,6 +651,7 @@ model ChatCompletionsToolCall {
 @doc("The name and arguments of a function that should be called, as generated by the model.")
 model FunctionCall {
   @doc("The name of the function to call.")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("""
@@ -607,6 +660,7 @@ model FunctionCall {
     not defined by your function schema. Validate the arguments in your code before calling
     your function.
     """)
+  @visibility(Lifecycle.Read)
   arguments: string;
 }
 
@@ -719,6 +773,7 @@ model ChatCompletionsAudio {
       Unique identifier for the audio response. This value can be used in chat history messages instead of passing 
       the full audio object.
     """)
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("""
@@ -727,17 +782,56 @@ model ChatCompletionsAudio {
     """)
   @encode(DateTimeKnownEncoding.unixTimestamp, int64)
   @encodedName("application/json", "expires_at")
+  @visibility(Lifecycle.Read)
   expiresAt: utcDateTime;
 
   @doc("Base64 encoded audio data")
+  @visibility(Lifecycle.Read)
   data: string;
 
   @doc("""
     The format of the audio content. If format is not provided, it will match the format used in the
     input audio request.
     """)
+  @visibility(Lifecycle.Read)
   format?: AudioContentFormat;
 
   @doc("The transcript of the audio file.")
+  @visibility(Lifecycle.Read)
   transcript: string;
+}
+
+@doc("""
+  User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
+  These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
+  [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+  """)
+@added(ModelInference.Versions.v2025_05_01)
+model UserSecurityContext {
+  @doc("The name of the application. Sensitive personal information should not be included in this field.")
+  @maxLength(100)
+  application_name?: string;
+
+  @doc("""
+    This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field.
+    """)
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  end_user_id?: string;
+
+  @doc("""
+    The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multi tenant.
+    """)
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  end_user_tenant_id?: string;
+
+  @doc("""
+    Captures the original client's IP address, accepting both IPv4 and IPv6 formats.
+    """)
+  @minLength(2)
+  @maxLength(45)
+  source_ip?: string;
 }

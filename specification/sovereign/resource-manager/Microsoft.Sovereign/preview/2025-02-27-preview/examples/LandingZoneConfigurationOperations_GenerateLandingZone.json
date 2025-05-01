@@ -4,34 +4,39 @@
   "parameters": {
     "api-version": "2025-02-27-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "ExampleResourceGroup",
-    "landingZoneAccountName": "SampleLZA",
-    "landingZoneConfigurationName": "ExampleLZC",
+    "resourceGroupName": "rg-RemApiExample",
+    "landingZoneAccountName": "lza-RemApiExample",
+    "landingZoneConfigurationName": "lzc-RemApiExample",
     "body": {
       "infrastructureAsCodeOutputOptions": "Bicep",
-      "deploymentPrefix": "mcfs",
-      "topLevelMgDisplayName": "TestMG",
+      "deploymentPrefix": "ex",
+      "topLevelMgDisplayName": "ExampleMG",
       "deploymentLocation": "eastus",
-      "existingManagementSubscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
-      "existingIdentitySubscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000002",
-      "existingConnectivitySubscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000003",
+      "existingManagementSubscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+      "existingIdentitySubscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+      "existingConnectivitySubscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
       "subscriptionBillingScope": null,
       "existingTopLevelMgParentId": null,
-      "deploymentSuffix": "test",
-      "organization": "test",
+      "deploymentSuffix": "ex",
+      "organization": "example",
       "environment": "QA"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "topLevelMgDisplayName": "MCFS",
-        "landingZoneConfigurationName": "ExampleLZC"
+        "topLevelMgDisplayName": "ExampleMG",
+        "landingZoneConfigurationName": "lzc-RemApiExample",
+        "generatedCodeUrl": "https://saremapiexample.blob.core.windows.net/",
+        "storageAccountName": "saremapiexample",
+        "containerName": "lza-remapiexample",
+        "blobName": "lzc-RemApiExample/exex-13-03-2025-23-07-31.zip",
+        "generatedArmTemplate": null
       }
     },
     "202": {
       "headers": {
-        "location": "https://contoso.com/operationstatus"
+        "location": "https://example.com/operationstatus"
       }
     }
   }

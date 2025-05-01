@@ -10,6 +10,6 @@ model CopilotSettingsProperties {
   accessControlEnabled: boolean;
 
   @doc("The status of the last provisioning operation performed on the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }

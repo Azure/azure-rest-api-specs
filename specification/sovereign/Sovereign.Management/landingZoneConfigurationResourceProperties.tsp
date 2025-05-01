@@ -7,12 +7,12 @@ namespace Microsoft.Sovereign;
 @added(Versions.Preview20250227)
 @doc("The properties of landing zone configuration resource type.")
 model LandingZoneConfigurationResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The state that reflects the current stage in the creation, updating, or deletion process of the landing zone configuration.")
   provisioningState?: provisioningState;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Handled in code."
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status that indicates the current phase of the configuration process for a deployment.")
   authoringStatus?: AuthoringStatus;
 
@@ -37,7 +37,7 @@ model LandingZoneConfigurationResourceProperties {
   ]>;
 
   @doc("Tags are key-value pairs that can be assigned to a resource to organize and manage it more effectively. Example: {'name': 'a tag name', 'value': 'a tag value'}")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tags[];
 
   @doc("Parameter used for deploying a Firewall: Select 'No' to skip deployment, 'Standard' to deploy the Standard SKU, or 'Premium' to deploy the Premium SKU.")
@@ -71,7 +71,7 @@ model LandingZoneConfigurationResourceProperties {
   azureBastionSubnetCidrBlock?: string;
 
   @doc("The child management groups of 'Landing Zones' management group and their assigned policies.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   landingZonesMgChildren?: LandingZoneManagementGroupProperties[];
 
   @doc("The assigned policies of the parent management group.")
@@ -102,14 +102,14 @@ model LandingZoneConfigurationResourceProperties {
   managedIdentity: ManagedIdentityProperties;
 
   @doc("The names of the 'Platform' child management groups and their assigned policies, excluding the default ones: 'Connectivity', 'Identity', and 'Management'")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   platformMgChildren?: PlatformManagementGroupProperties[];
 
   @doc("The default naming convention applied to all resources for this landing zone configuration. Example - {DeploymentPrefix}-Contoso-{ResourceTypeAbbreviation}{DeploymentSuffix}-{Environment}-testing")
   namingConventionFormula?: string;
 
   @doc("The custom naming convention applied to specific resource types for this landing zone configuration, which overrides the default naming convention for those resource types. Example - 'customNamingConvention': [{'resourceType': 'azureFirewalls', 'formula': '{DeploymentPrefix}-afwl-{DeploymentSuffix}'}]")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   customNamingConvention?: CustomNamingConvention[];
 }
 
@@ -160,7 +160,7 @@ model LandingZoneManagementGroupProperties {
 @doc("The properties of policy initiatives applied to the management group.")
 model ManagementGroupProperties {
   @doc("Array of policy initiatives applied to the management group.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   policyInitiativesAssignmentProperties: PolicyInitiativeAssignmentProperties[];
 }
 

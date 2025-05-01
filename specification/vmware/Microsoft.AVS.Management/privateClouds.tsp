@@ -5,7 +5,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 alias PrivateCloudList = ResourceList<PrivateCloud>;
 @armResourceOperations
@@ -31,36 +30,16 @@ interface PrivateClouds {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  // This could be modeled with ArmCustomPatchAsync if a 202 response with no body is used instead of a 201.
-  // update is ArmCustomPatchAsync<PrivateCloud, PrivateCloudUpdate>;
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  @doc("Update a PrivateCloud")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
-  )
-  @armResourceUpdate(PrivateCloud)
-  @patch
-  update(
-    ...ResourceInstanceParameters<PrivateCloud>,
-
-    @bodyRoot
-    @doc("The private cloud properties to be updated.")
-    privateCloudUpdate: PrivateCloudUpdate,
-  ): ArmResponse<PrivateCloud> | {
-    // @doc("Resource update request created.")
-    ...CreatedResponse;
-
-    ...Azure.Core.Foundations.RetryAfterHeader;
-    ...LocationHeader;
-
-    @bodyRoot
-    @doc("The updated private cloud.")
-    placementPolicy: PrivateCloud;
-  } | ErrorResponse;
+  @Azure.Core.useFinalStateVia("location")
+  update is ArmCustomPatchAsync<
+    PrivateCloud,
+    PrivateCloudUpdate,
+    Response = PrivateCloud | ArmResourceCreatedResponse<
+      PrivateCloud,
+      LroHeaders = ArmLroLocationHeader<FinalResult = PrivateCloud> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -82,6 +61,7 @@ interface PrivateClouds {
 }
 
 @@clientName(PrivateClouds.createOrUpdate::parameters.resource, "privateCloud");
+@@clientName(PrivateClouds.update::parameters.properties, "privateCloudUpdate");
 
 @doc("private cloud provisioning state")
 union PrivateCloudProvisioningState {
@@ -185,6 +165,7 @@ union EncryptionVersionType {
 model PrivateCloud is TrackedResource<PrivateCloudProperties> {
   ...ResourceSkuRequired;
   ...ManagedSystemAssignedIdentityProperty;
+  ...AvailabilityZones;
 
   @doc("Name of the private cloud")
   @pattern("^[-\\w\\._]+$")
@@ -227,7 +208,7 @@ model PrivateCloudUpdateProperties {
   identitySources?: IdentitySource[];
 
   @doc("Properties describing how the cloud is distributed across availability zones")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   availability?: AvailabilityProperties;
 
   @doc("Customer managed key encryption, can be enabled or disabled")
@@ -258,7 +239,7 @@ model PrivateCloudProperties {
   identitySources?: IdentitySource[];
 
   @doc("Properties describing how the cloud is distributed across availability zones")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   availability?: AvailabilityProperties;
 
   @doc("Customer managed key encryption, can be enabled or disabled")
@@ -273,14 +254,14 @@ model PrivateCloudProperties {
   extendedNetworkBlocks?: string[];
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PrivateCloudProvisioningState;
 
   @doc("An ExpressRoute Circuit")
   circuit?: Circuit;
 
   @doc("The endpoints")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endpoints?: Endpoints;
 
   @doc("""
@@ -291,35 +272,37 @@ model PrivateCloudProperties {
   networkBlock: string;
 
   @doc("Network used to access vCenter Server and NSX-T Manager")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managementNetwork?: string;
 
   @doc("Used for virtual machine cold migration, cloning, and snapshot migration")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningNetwork?: string;
 
   @doc("Used for live migration of virtual machines")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmotionNetwork?: string;
 
+  #deprecated "It is recommended to let the system generate the password when the private cloud is created."
   @doc("Optionally, set the vCenter admin password when the private cloud is created")
   @secret
   vcenterPassword?: string;
 
+  #deprecated "It is recommended to let the system generate the password when the private cloud is created."
   @doc("Optionally, set the NSX-T Manager password when the private cloud is created")
   @secret
   nsxtPassword?: string;
 
   @doc("Thumbprint of the vCenter Server SSL certificate")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vcenterCertificateThumbprint?: string;
 
   @doc("Thumbprint of the NSX-T Manager SSL certificate")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nsxtCertificateThumbprint?: string;
 
   @doc("Array of cloud link IDs from other clouds that connect to this one")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   externalCloudLinks?: string[];
 
   @doc("""
@@ -332,11 +315,11 @@ model PrivateCloudProperties {
     Flag to indicate whether the private cloud has the quota for provisioned NSX
     Public IP count raised from 64 to 1024
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nsxPublicIpQuotaRaised?: NsxPublicIpQuotaRaisedEnum;
 
   @doc("Azure resource ID of the virtual network")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   virtualNetworkId?: Azure.Core.armResourceIdentifier<[
     {
       type: "\\Microsoft.Network\\vnet";
@@ -350,48 +333,48 @@ model PrivateCloudProperties {
 @doc("An ExpressRoute Circuit")
 model Circuit {
   @doc("CIDR of primary subnet")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   primarySubnet?: string;
 
   @doc("CIDR of secondary subnet")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   secondarySubnet?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
   @doc("Identifier of the ExpressRoute Circuit (Microsoft Colo only)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expressRouteID?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
   @doc("ExpressRoute Circuit private peering identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expressRoutePrivatePeeringID?: string;
 }
 
 @doc("Endpoint addresses")
 model Endpoints {
   @doc("Endpoint FQDN for the NSX-T Data Center manager")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nsxtManager?: string;
 
   @doc("Endpoint FQDN for Virtual Center Server Appliance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vcsa?: string;
 
   @doc("Endpoint FQDN for the HCX Cloud Manager")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hcxCloudManager?: string;
 
   @doc("Endpoint IP for the NSX-T Data Center manager")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nsxtManagerIp?: string;
 
   @doc("Endpoint IP for Virtual Center Server Appliance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vcenterIp?: string;
 
   @doc("Endpoint IP for the HCX Cloud Manager")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hcxCloudManagerIp?: string;
 }
 
@@ -408,7 +391,7 @@ model IdentitySource {
   @doc("The domain's NetBIOS name")
   `alias`?: string;
 
-  @doc("The domain's dns name")
+  @doc("The domain's DNS name")
   domain?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
@@ -472,38 +455,38 @@ model EncryptionKeyVaultProperties {
   keyVersion?: string;
 
   @doc("The auto-detected version of the key if versionType is auto-detected.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoDetectedKeyVersion?: string;
 
   @doc("The URL of the vault.")
   keyVaultUrl?: string;
 
   @doc("The state of key provided")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keyState?: EncryptionKeyStatus;
 
   @doc("Property of the key if user provided or auto detected")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   versionType?: EncryptionVersionType;
 }
 
 @doc("Administrative credentials for accessing vCenter and NSX-T")
 model AdminCredentials {
   @doc("NSX-T Manager username")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nsxtUsername?: string;
 
   @doc("NSX-T Manager password")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @secret
   nsxtPassword?: string;
 
   @doc("vCenter admin username")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vcenterUsername?: string;
 
   @doc("vCenter admin password")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @secret
   vcenterPassword?: string;
 }

@@ -51,7 +51,7 @@ interface ServiceConfigurationResources {
    * Update the service details in the service configurations of the target resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("ServiceConfigurations_Update")
   update is ArmCustomPatchSync<
     ServiceConfigurationResource,

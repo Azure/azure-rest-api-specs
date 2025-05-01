@@ -3608,53 +3608,6 @@
             "nullable": true,
             "description": "How many completions to generate for each prompt.\n\n**Note:** Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.\n"
           },
-          "modalities": {
-            "$ref": "#/components/schemas/ChatCompletionModalities"
-          },
-          "prediction": {
-            "nullable": true,
-            "x-oaiExpandable": true,
-            "description": "Configuration for a [Predicted Output](/docs/guides/predicted-outputs), which can greatly improve response times when large parts of the model response are known ahead of time. This is most common when you are regenerating a file with only minor changes to most of the content.",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/PredictionContent"
-              }
-            ]
-          },
-          "audio": {
-            "type": "object",
-            "description": "Parameters for audio output. Required when audio output is requested with\n`modalities: [\"audio\"]`. [Learn more](/docs/guides/audio).\n",
-            "required": [
-              "voice",
-              "format"
-            ],
-            "x-oaiExpandable": true,
-            "properties": {
-              "voice": {
-                "type": "string",
-                "enum": [
-                  "alloy",
-                  "echo",
-                  "fable",
-                  "onyx",
-                  "nova",
-                  "shimmer"
-                ],
-                "description": "Specifies the voice type. Supported voices are `alloy`, `echo`, \n`fable`, `onyx`, `nova`, and `shimmer`.\n"
-              },
-              "format": {
-                "type": "string",
-                "enum": [
-                  "wav",
-                  "mp3",
-                  "flac",
-                  "opus",
-                  "pcm16"
-                ],
-                "description": "Specifies the output audio format. Must be one of `wav`, `mp3`, `flac`,\n`opus`, or `pcm16`. \n"
-              }
-            }
-          },
           "presence_penalty": {
             "type": "number",
             "default": 0,
@@ -3917,6 +3870,53 @@
                 "example": 1,
                 "nullable": true,
                 "description": "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep `n` as `1` to minimize costs."
+              },
+              "modalities": {
+                "$ref": "#/components/schemas/ChatCompletionModalities"
+              },
+              "prediction": {
+                "nullable": true,
+                "x-oaiExpandable": true,
+                "description": "Configuration for a [Predicted Output](/docs/guides/predicted-outputs), which can greatly improve response times when large parts of the model response are known ahead of time. This is most common when you are regenerating a file with only minor changes to most of the content.",
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/PredictionContent"
+                  }
+                ]
+              },
+              "audio": {
+                "type": "object",
+                "description": "Parameters for audio output. Required when audio output is requested with\n`modalities: [\"audio\"]`. [Learn more](/docs/guides/audio).\n",
+                "required": [
+                  "voice",
+                  "format"
+                ],
+                "x-oaiExpandable": true,
+                "properties": {
+                  "voice": {
+                    "type": "string",
+                    "enum": [
+                      "alloy",
+                      "echo",
+                      "fable",
+                      "onyx",
+                      "nova",
+                      "shimmer"
+                    ],
+                    "description": "Specifies the voice type. Supported voices are `alloy`, `echo`, \n`fable`, `onyx`, `nova`, and `shimmer`.\n"
+                  },
+                  "format": {
+                    "type": "string",
+                    "enum": [
+                      "wav",
+                      "mp3",
+                      "flac",
+                      "opus",
+                      "pcm16"
+                    ],
+                    "description": "Specifies the output audio format. Must be one of `wav`, `mp3`, `flac`,\n`opus`, or `pcm16`. \n"
+                  }
+                }
               },
               "presence_penalty": {
                 "type": "number",
