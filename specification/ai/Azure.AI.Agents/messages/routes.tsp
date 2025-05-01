@@ -52,20 +52,15 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
-    listMessages is Azure.Core.Foundations.Operation<
-      {
-        /** Identifier of the thread whose messages are being listed. */
-        @path
-        threadId: string;
+    op listMessages(
+      /** Identifier of the thread whose messages are being listed. */
+      @path threadId: string,
 
-        /** Filter messages by the run-ID that generated them. */
-        @query("run_id")
-        runId?: string;
+      /** Filter messages by the run-ID that generated them. */
+      @query("run_id") runId?: string,
 
-        ...OpenAIListRequestOptions;
-      },
-      ThreadMessageList
-    >;
+      ...OpenAIListRequestOptions
+    ): ThreadMessageList;
 
     /**
      * Retrieves an existing message.
