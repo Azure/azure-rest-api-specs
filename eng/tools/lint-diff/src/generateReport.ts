@@ -82,7 +82,7 @@ export async function generateLintDiffReport(
       console.log("\t✅ No new violations with error or fatal level. LintDiff will pass.");
     }
 
-    LogViolations("New violations", newViolations);
+    LogViolations("New violations list", newViolations);
 
     outputMarkdown += "\n";
   }
@@ -102,7 +102,7 @@ export async function generateLintDiffReport(
       outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) |\n`;
     }
 
-    LogViolations("Existing violations", existingViolations);
+    LogViolations("Existing violations list", existingViolations);
 
     outputMarkdown += `\n`;
   }
