@@ -80,7 +80,7 @@ export async function generateLintDiffReport(
       pass = false;
     }
     console.log('::group::New violations table');
-    console.table(newViolations.map(({ level, code, message }) => ({ level, code, message })), [ 'level', 'code', 'message' ]);
+    console.table(newViolations.map((v) => ({ level: v.level, code: v.code, message: v.message, source: getFile(v) })), [ 'level', 'code', 'message', 'source' ]);
     console.log('::endgroup::');
 
     outputMarkdown += "\n";
@@ -102,9 +102,9 @@ export async function generateLintDiffReport(
     }
 
     console.log("::group::Existing violations table");
-    console.table(existingViolations.map(({ level, code, message }) => ({ level, code, message })), [ 'level', 'code', 'message' ]);
+    console.table(existingViolations.map((v) => ({ level: v.level, code: v.code, message: v.message, source: getFile(v) })), [ 'level', 'code', 'message', 'source' ]);    
     console.log("::endgroup::");
-    
+
     outputMarkdown += `\n`;
   }
 
