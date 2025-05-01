@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Contoso Widget Manager with a trivial change to trigger LintDiff",
+    "title": "Contoso Widget Manager",
     "version": "2022-12-01",
     "x-typespec-generated": [
       {
@@ -40,8 +40,45 @@
   "tags": [],
   "paths": {
     "/widgets": {
+      "get": {
+        "operationId": "Widgets_ListWidgets",
+        "description": "List Widget resources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedWidgetSuite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Widgets_ListWidgets": {
+            "$ref": "./examples/Widgets_ListWidgetsSample.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     },
-    "/widget/{widgetName}": {
+    "/widgets/{widgetName}": {
       "get": {
         "operationId": "Widgets_GetWidget",
         "description": "Fetch a Widget by name.",
@@ -58,6 +95,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WidgetSuite"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -433,7 +476,7 @@
       }
     },
     "PagedWidgetSuite": {
-      "type": "autorest-exception",
+      "type": "object",
       "description": "Paged collection of WidgetSuite items",
       "properties": {
         "value": {
