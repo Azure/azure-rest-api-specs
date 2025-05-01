@@ -97,17 +97,17 @@ union DataflowGraphNodeType {
   /**
    * Dataflow source node.
    */
-  Source: "Source",
+  Source,
 
   /**
    * Dataflow graph node.
    */
-  Graph: "Graph",
+  Graph,
 
   /**
    * Dataflow destination node.
    */
-  Destination: "Destination",
+  Destination,
 }
 
 /**
@@ -118,7 +118,7 @@ model DataflowGraphSourceNode extends DataflowGraphNode {
   /**
    * Type of the source node.
    */
-  type: DataflowGraphNodeType.Source;
+  type: Source;
 
   /**
    * Source configuration.
@@ -150,7 +150,7 @@ model DataflowGraphGraphNode extends DataflowGraphNode {
   /**
    * Type of the graph node.
    */
-  type: DataflowGraphNodeType.Graph;
+  type: Graph;
 
   /**
    * Graph configuration.
@@ -205,7 +205,7 @@ model DatafloGraphDestinationNode extends DataflowGraphNode {
   /**
    * Type of the destination node.
    */
-  type: DataflowGraphNodeType.Destination;
+  type: Destination;
 
   /**
    * Destination configuration.
@@ -260,7 +260,7 @@ union DataflowGraphSerializationFormat { // Is this net new or should we just up
   /**
    * Avro serialization format.
    */
-  Avro: "Avro",
+  Avro,
 }
 
 /**
