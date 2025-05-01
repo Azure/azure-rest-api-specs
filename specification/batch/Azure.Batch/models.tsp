@@ -1346,7 +1346,6 @@ model BatchJobSchedule {
 @doc("""
   Parameters for updating an Azure Batch Job Schedule.
   """)
-@clientName("BatchJobScheduleUpdateContent", "java")
 model BatchJobScheduleUpdateOptions {
   @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time. If you do not specify this element, the existing schedule is left unchanged.")
   schedule?: BatchJobScheduleConfiguration;
@@ -1361,7 +1360,6 @@ model BatchJobScheduleUpdateOptions {
 @doc("""
   Parameters for creating an Azure Batch Job Schedule
   """)
-@clientName("BatchJobScheduleCreateContent", "java")
 model BatchJobScheduleCreateOptions {
   @doc("A string that uniquely identifies the schedule within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   id: string;
@@ -2646,7 +2644,6 @@ model BatchJob {
 }
 
 @doc("Parameters for creating an Azure Batch Job.")
-@clientName("BatchJobCreateContent", "java")
 model BatchJobCreateOptions {
   @doc("A string that uniquely identifies the Job within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   id: string;
@@ -2700,7 +2697,6 @@ model BatchJobCreateOptions {
 }
 
 @doc("Parameters for updating an Azure Batch Job.")
-@clientName("BatchJobUpdateContent", "java")
 model BatchJobUpdateOptions {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged.")
   priority?: int32;
@@ -2763,14 +2759,12 @@ model BatchJobSchedulingError {
 }
 
 @doc("Parameters for disabling an Azure Batch Job.")
-@clientName("BatchJobDisableContent", "java")
 model BatchJobDisableOptions {
   @doc("What to do with active Tasks associated with the Job.")
   disableTasks: DisableBatchJobOption;
 }
 
 @doc("Parameters for terminating an Azure Batch Job.")
-@clientName("BatchJobTerminateContent", "java")
 model BatchJobTerminateOptions {
   @doc("The text you want to appear as the Job's TerminationReason. The default is 'UserTerminate'.")
   @clientName("terminationReason")
@@ -3131,7 +3125,6 @@ model BatchPool {
 }
 
 @doc("Parameters for creating an Azure Batch Pool.")
-@clientName("BatchPoolCreateContent", "java")
 model BatchPoolCreateOptions {
   @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two Pool IDs within an Account that differ only by case).")
   id: string;
@@ -3209,7 +3202,6 @@ model BatchPoolCreateOptions {
 }
 
 @doc("Parameters for replacing properties on an Azure Batch Pool.")
-@clientName("BatchPoolReplaceContent", "java")
 model BatchPoolReplaceOptions {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool.")
   startTask?: BatchStartTask;
@@ -3235,7 +3227,6 @@ model BatchPoolReplaceOptions {
 }
 
 @doc("Parameters for updating an Azure Batch Pool.")
-@clientName("BatchPoolUpdateContent", "java")
 model BatchPoolUpdateOptions {
   @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024. This field can be updated only when the pool is empty.")
   displayName?: string;
@@ -3366,7 +3357,6 @@ model BatchPoolListResult {
 }
 
 @doc("Parameters for enabling automatic scaling on an Azure Batch Pool.")
-@clientName("BatchPoolEnableAutoScaleContent", "java")
 model BatchPoolEnableAutoScaleOptions {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued.")
   autoScaleFormula?: string;
@@ -3376,14 +3366,12 @@ model BatchPoolEnableAutoScaleOptions {
 }
 
 @doc("Parameters for evaluating an automatic scaling formula on an Azure Batch Pool.")
-@clientName("BatchPoolEvaluateAutoScaleContent", "java")
 model BatchPoolEvaluateAutoScaleOptions {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-automatic-scaling).")
   autoScaleFormula: string;
 }
 
 @doc("Parameters for changing the size of an Azure Batch Pool.")
-@clientName("BatchPoolResizeContent", "java")
 model BatchPoolResizeOptions {
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
   targetDedicatedNodes?: int32;
@@ -3399,7 +3387,6 @@ model BatchPoolResizeOptions {
 }
 
 @doc("Parameters for removing nodes from an Azure Batch Pool.")
-@clientName("BatchNodeRemoveContent", "java")
 model BatchNodeRemoveOptions {
   @doc("A list containing the IDs of the Compute Nodes to be removed from the specified Pool. A maximum of 100 nodes may be removed per request.")
   @clientName("nodeIds")
@@ -3413,7 +3400,6 @@ model BatchNodeRemoveOptions {
 }
 
 @doc("Options for deallocating a Compute Node.")
-@clientName("BatchNodeDeallocateContent", "java")
 model BatchNodeDeallocateOptions {
   @doc("When to deallocate the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeDeallocateOption?: BatchNodeDeallocateOption;
@@ -3544,7 +3530,6 @@ model BatchTask {
 @doc("""
   Parameters for creating an Azure Batch Task.
   """)
-@clientName("BatchTaskCreateContent", "java")
 model BatchTaskCreateOptions {
   @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within a Job that differ only by case).")
   id: string;
@@ -3966,7 +3951,6 @@ model RollingUpgradePolicy {
 }
 
 @doc("Parameters for creating a user account for RDP or SSH access on an Azure Batch Compute Node.")
-@clientName("BatchNodeUserCreateContent", "java")
 model BatchNodeUserCreateOptions {
   @doc("The user name of the Account.")
   name: string;
@@ -3986,7 +3970,6 @@ model BatchNodeUserCreateOptions {
 }
 
 @doc("Parameters for updating a user account for RDP or SSH access on an Azure Batch Compute Node.")
-@clientName("BatchNodeUserUpdateContent", "java")
 model BatchNodeUserUpdateOptions {
   @secret
   @doc("The password of the Account. The password is required for Windows Compute Nodes. For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.")
@@ -4192,7 +4175,6 @@ model VirtualMachineInfo {
 }
 
 @doc("Parameters for rebooting an Azure Batch Compute Node.")
-@clientName("BatchNodeRebootContent", "java")
 model BatchNodeRebootKinds {
   @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   @clientName("nodeRebootKind")
@@ -4200,14 +4182,12 @@ model BatchNodeRebootKinds {
 }
 
 @doc("Parameters for reimaging an Azure Batch Compute Node.")
-@clientName("BatchNodeReimageContent", "java")
 model BatchNodeReimageOptions {
   @doc("When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeReimageOption?: BatchNodeReimageOption;
 }
 
 @doc("Parameters for disabling scheduling on an Azure Batch Compute Node.")
-@clientName("BatchNodeDisableSchedulingContent", "java")
 model BatchNodeDisableSchedulingOptions {
   @doc("What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue.")
   nodeDisableSchedulingOption?: BatchNodeDisableSchedulingOption;
@@ -4225,7 +4205,6 @@ model BatchNodeRemoteLoginSettings {
 }
 
 @doc("The Azure Batch service log files upload parameters for a Compute Node.")
-@clientName("UploadBatchServiceLogsContent", "java")
 model UploadBatchServiceLogsOptions {
   @doc("The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s). If a user assigned managed identity is not being used, the URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified.")
   @clientName("containerUri", "csharp")
