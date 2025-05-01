@@ -29,23 +29,6 @@ openapi-type: arm
 openapi-subtype: providerHub
 tag: package-2024-01-01-preview
 ```
-### Suppression
-
-``` yaml
-directive:
-  - suppress: PreviewVersionOverOneYear
-    reason: We are still due to go public preview in next quarter.
-  - suppress: AvoidAdditionalProperties
-    reason: 1. These are created as part of Record<string> and properties constructs.
-- suppress: OperationIdNounVerb
-    reason: FileShare is both in parent and child resource. example : FileShares_ListByFileShare FileShares_GetFileShareSnapshot , FileShares_CreateOrUpdateFileShareSnapshot FileShares_UpdateFileShareSnapshot FileShares_DeleteFileShareSnapshot
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots"].get.operationId
-	  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].put.operationId
-	  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].get.operationId
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].delete.operationId
-	  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].patch.operationId
-```
 
 ### Tag: package-2024-01-01-preview
 
@@ -65,8 +48,25 @@ input-file:
   - Microsoft.FileShares/preview/2023-01-01-preview/fileshares.json
 ```
 
----
+### Suppression
 
+``` yaml
+directive:
+  - suppress: PreviewVersionOverOneYear
+    reason: We are still due to go public preview in next quarter.
+  - suppress: AvoidAdditionalProperties
+    reason: 1. These are created as part of Record<string> and properties constructs.
+- suppress: OperationIdNounVerb
+    reason: FileShare is both in parent and child resource. example : FileShares_ListByFileShare FileShares_GetFileShareSnapshot , FileShares_CreateOrUpdateFileShareSnapshot FileShares_UpdateFileShareSnapshot FileShares_DeleteFileShareSnapshot
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots"].get.operationId
+	  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].put.operationId
+	  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].get.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].delete.operationId
+	  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].patch.operationId
+```
+
+---
 
 # Code Generation
 
