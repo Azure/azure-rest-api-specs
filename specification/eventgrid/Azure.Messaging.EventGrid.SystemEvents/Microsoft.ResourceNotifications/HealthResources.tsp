@@ -7,11 +7,6 @@ Grid. This corresponds to the Data property of an EventGridEvent.
 */
 namespace Microsoft.EventGrid.SystemEvents;
 
-/**
-Schema of the Data property of an EventGridEvent for a
-Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged
-event.
-*/
 const MicrosoftResourceNotificationsHealthResourcesAvailabilityStatusChangedExample: ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData = #{
   resourceInfo: #{
     id: "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/virtualMachines/{vm-name}/providers/Microsoft.ResourceHealth/availabilityStatuses/{event-id}",
@@ -30,7 +25,11 @@ const MicrosoftResourceNotificationsHealthResourcesAvailabilityStatusChangedExam
   },
   apiVersion: "2023-12-01",
 };
-/** Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged event. */
+/**
+Schema of the Data property of an EventGridEvent for a
+Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged
+event.
+*/
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(
   MicrosoftResourceNotificationsHealthResourcesAvailabilityStatusChangedExample
@@ -38,10 +37,6 @@ const MicrosoftResourceNotificationsHealthResourcesAvailabilityStatusChangedExam
 model ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
 
-/**
-Schema of the Data property of an EventGridEvent for a
-Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event.
-*/
 const MicrosoftResourceNotificationsHealthResourcesResourceAnnotatedExample: ResourceNotificationsHealthResourcesAnnotatedEventData = #{
   resourceInfo: #{
     id: "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/virtualMachines/{vm-name}/providers/Microsoft.ResourceHealth/resourceAnnotations/{event-id}",
@@ -63,7 +58,11 @@ const MicrosoftResourceNotificationsHealthResourcesResourceAnnotatedExample: Res
   },
   apiVersion: "2022-08-01",
 };
-/** Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event. */
+
+/**
+Schema of the Data property of an EventGridEvent for a
+Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event.
+*/
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftResourceNotificationsHealthResourcesResourceAnnotatedExample)
 model ResourceNotificationsHealthResourcesAnnotatedEventData
