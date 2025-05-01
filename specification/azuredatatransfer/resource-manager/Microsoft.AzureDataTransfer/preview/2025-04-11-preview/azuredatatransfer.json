@@ -3074,26 +3074,42 @@
       "description": "Status of force disablement"
     },
     "connectionIdList": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "description": "List of connection IDs",
-        "items": {
-            "type": "string"
-          }
-      },
-      "description": "Flows for a pipeline."
+      "type": "array",
+      "description": "List of connection IDs",
+      "items": {
+        "type": "string"
+      }
     },
     "listFlowsByPipelineResult": {
       "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "description": "The flow associated for a connection in a pipeline",
-        "items": {
-          "$ref": "#/definitions/flow"
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/listFlowsByPipelineConnection"
+          },
+          "description": "List flows by pipeline result by connection",
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
-      },
-      "description": "Flows for a pipeline."
+      }
+    },
+    "listFlowsByPipelineConnection": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the connection."
+        },
+        "flows": {
+          "type": "array",
+          "description": "List of flows associated with the connection.",
+          "items": {
+            "$ref": "#/definitions/flow"
+          }
+        }
+      }
     },
     "resourceBody": {
       "type": "object",
