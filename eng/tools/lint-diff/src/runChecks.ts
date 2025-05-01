@@ -56,7 +56,6 @@ export async function runChecks(
       const executionResult = await executeCommand(autorestCommand);
       
       console.log(executionResult.stderr + executionResult.stdout);
-      console.log("::endgroup::");
 
       const lintDiffResult = {
         autorestCommand,
@@ -67,6 +66,8 @@ export async function runChecks(
         ...executionResult,
       };
       logAutorestExecutionErrors(lintDiffResult);
+      console.log("::endgroup::");
+
       result.push(lintDiffResult);
       console.log(`\tAutorest result length: ${lintDiffResult.stderr.length + lintDiffResult.stdout.length}\n`);
     }
