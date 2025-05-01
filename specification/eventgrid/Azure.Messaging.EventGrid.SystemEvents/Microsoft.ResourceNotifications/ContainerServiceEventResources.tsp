@@ -19,7 +19,7 @@ const MicrosoftResourceNotificationsContainerServiceEventResourcesScheduledEvent
     properties: #{
       description: "ScheduledEvents",
       eventId: "bbe82027-0444-4f73-897a-0bbfe3af66f1",
-      eventSource: "AutoUprader",
+      eventSource: "AutoUpgrader",
       eventStatus: "Started",
       eventDetails: "Start to upgrade security vhd",
       scheduledTime: utcDateTime.fromISO("2024-04-16T22:17:12.103268606Z"),

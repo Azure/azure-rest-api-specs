@@ -14,7 +14,7 @@ Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.
 const MicrosoftResourceNotificationsResourcesCreatedOrUpdatedExample: ResourceNotificationsResourceManagementCreatedOrUpdatedEventData = #{
   resourceInfo: #{
     tags: #{},
-    id: "/subscriptions/{subcription-id} /resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storageAccount-name}",
+    id: "/subscriptions/{subscription-id} /resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storageAccount-name}",
     name: "StorageAccount-name",
     type: "Microsoft.Storage/storageAccounts",
     location: "eastus",

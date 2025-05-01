@@ -56,7 +56,7 @@ model ApiManagementSubscriptionDeletedEventData {
 }
 
 const MicrosoftApiManagementProductCreatedExample: ApiManagementProductCreatedEventData = #{
-  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/products/myproduct",
+  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/products/my_product",
 };
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductCreated event. */
 @example(MicrosoftApiManagementProductCreatedExample)
@@ -65,7 +65,7 @@ model ApiManagementProductCreatedEventData {
 }
 
 const MicrosoftApiManagementProductUpdatedExample: ApiManagementProductUpdatedEventData = #{
-  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/products/myproduct",
+  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/products/my_product",
 };
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductUpdated event. */
 @example(MicrosoftApiManagementProductUpdatedExample)
@@ -74,7 +74,7 @@ model ApiManagementProductUpdatedEventData {
 }
 
 const MicrosoftApiManagementProductDeletedExample: ApiManagementProductDeletedEventData = #{
-  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/products/myproduct",
+  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/products/my_product",
 };
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductDeleted event. */
 @example(MicrosoftApiManagementProductDeletedExample)
@@ -83,7 +83,7 @@ model ApiManagementProductDeletedEventData {
 }
 
 const MicrosoftApiManagementAPICreatedExample: ApiManagementApiCreatedEventData = #{
-  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/apis/myapi",
+  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/apis/my_api",
 };
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APICreated event. */
 @example(MicrosoftApiManagementAPICreatedExample)
@@ -92,7 +92,7 @@ model ApiManagementApiCreatedEventData {
 }
 
 const MicrosoftApiManagementAPIUpdatedExample: ApiManagementApiUpdatedEventData = #{
-  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/apis/myapi;Rev=1",
+  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/apis/my_api;Rev=1",
 };
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIUpdated event. */
 @example(MicrosoftApiManagementAPIUpdatedExample)
@@ -101,7 +101,7 @@ model ApiManagementApiUpdatedEventData {
 }
 
 const MicrosoftApiManagementAPIDeletedExample: ApiManagementApiDeletedEventData = #{
-  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/apis/myapi;Rev=1",
+  resourceUri: "/subscriptions/{subscription-id}/resourceGroups/{your-rg}/providers/Microsoft.ApiManagement/service/{your-APIM-instance}/apis/my_api;Rev=1",
 };
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIDeleted event. */
 @example(MicrosoftApiManagementAPIDeletedExample)
