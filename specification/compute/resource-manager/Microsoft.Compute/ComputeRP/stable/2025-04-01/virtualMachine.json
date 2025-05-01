@@ -2894,17 +2894,18 @@
       "description": "Describes a virtual machines IP Configuration's PublicIPAddress configuration"
     },
     "VirtualMachinePublicIPAddressConfiguration": {
-      "tags": {
-        "type": "object",
-        "description": "Specifies tags for the network interface.",
-        "additionalProperties": {
-        "type": "string",
-        "description": "A tag for the network interface."
-        },
       "properties": {
         "name": {
           "type": "string",
           "description": "The publicIP address configuration name."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Specifies tags for the publicIP address configuration",
+          "additionalProperties": {
+            "type": "string",
+            "description": "A tag for the publicIP address configuration"
+          }
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3087,17 +3088,18 @@
       "description": "Describes a virtual machine network profile's IP configuration."
     },
     "VirtualMachineNetworkInterfaceConfiguration": {
-      "tags": {
-        "type": "object",
-        "description": "Specifies tags for the network interface.",
-        "additionalProperties": {
-        "type": "string",
-        "description": "A tag for the network interface."
-        },
       "properties": {
         "name": {
           "type": "string",
           "description": "The network interface configuration name."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Specifies tags for the network configuration.",
+          "additionalProperties": {
+            "type": "string",
+            "description": "A tag for the network configuration."
+          }
         },
         "properties": {
           "x-ms-client-flatten": true,
