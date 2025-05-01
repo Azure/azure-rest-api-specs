@@ -1,6 +1,7 @@
 // This file contains common aliases used across the IoT Operations Management API.
 // It should contain simple scalar aliases or aliases for objects with simple scalar properties.
 // Complex objects or models should be defined in their respective files.
+alias All = "All";
 alias Sasl = "Sasl";
 alias Cron = "Cron";
 alias Mqtt = "Mqtt";
@@ -8,6 +9,7 @@ alias None = "None";
 alias Block = "Block";
 alias Never = "Never";
 alias Always = "Always";
+alias Custom = "Custom";
 alias Expired = "Expired";
 alias RunOnce = "RunOnce";
 alias Enabled = "Enabled";

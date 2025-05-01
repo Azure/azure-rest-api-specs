@@ -5013,6 +5013,82 @@
         ]
       }
     },
+    "BrokerPersistence": {
+      "type": "object",
+      "description": "Disk persistence configuration.\n\nWhen persistence is enabled, certain items (non-performance-critical data) selected for persistence will reside only on disk. Below are the affected items: \n\n- Retained messages will be stored on disk only. \n- WILL messages will be stored on disk only. \n- DSS key/value pairs will be stored on disk only, except for performance-critical items like timed locks, which remain in both disk and memory for improved performance.\n\nOptional. Everything is in-memory if not set. \nNote: if configured, all MQTT session states are written to disk.",
+      "properties": {
+        "dynamicSettings": {
+          "$ref": "#/definitions/BrokerPersistenceDynamicSettings",
+          "description": "Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH \nOptional, default shown If customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property \"aio-persistence\""
+        },
+        "maxSize": {
+          "type": "string",
+          "description": "The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template If a PVC template isn't specified Then local-path provisioner is requested with this size limit Required."
+        },
+        "persistentVolumeClaimSpec": {
+          "$ref": "#/definitions/VolumeClaimSpec",
+          "description": "Use the specified persistent volume claim template to mount a persistent volume Same object as in diskBackedMessageBuffer, but with a limitation that access modes field must be set to `ReadWriteOncePod`.\n\nIf unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class."
+        },
+        "retain": {
+          "$ref": "#/definitions/BrokerRetainMessages",
+          "description": "Controls which topic's retained messages should be persisted to disk."
+        },
+        "stateStore": {
+          "$ref": "#/definitions/BrokerStateStorePolicy",
+          "description": "Controls which keys should be persisted to disk for the state store"
+        },
+        "subscriberQueue": {
+          "$ref": "#/definitions/BrokerSubscriberQueuePolicy",
+          "description": "Custom policy, required if mode is Custom Subscriber queues from all groups are persisted to disk (logical OR)"
+        }
+      },
+      "required": [
+        "maxSize"
+      ]
+    },
+    "BrokerPersistenceDynamicSettings": {
+      "type": "object",
+      "description": "Dynamic settings of the persistence.",
+      "properties": {
+        "userPropertyKey": {
+          "type": "string",
+          "description": "The user property key to enable persistence."
+        },
+        "userPropertyValue": {
+          "type": "string",
+          "description": "The user property value to enable persistence."
+        }
+      }
+    },
+    "BrokerPersistencePolicyMode": {
+      "type": "string",
+      "enum": [
+        "All",
+        "None",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "BrokerPersistencePolicyMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Persist all 'retain' messages."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Persist no messages."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Persist only the specified topics."
+          }
+        ]
+      }
+    },
     "BrokerProperties": {
       "type": "object",
       "description": "Broker Resource properties",
@@ -5095,7 +5171,7 @@
           ]
         },
         "persistence": {
-          "$ref": "#/definitions/Persistence",
+          "$ref": "#/definitions/BrokerPersistence",
           "description": "The persistence settings of the Broker.",
           "x-ms-mutability": [
             "read",
@@ -5237,6 +5313,225 @@
       },
       "required": [
         "method"
+      ]
+    },
+    "BrokerRetainMessages": {
+      "type": "object",
+      "description": "Broker Retain policy properties",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/BrokerPersistencePolicyMode",
+          "description": "The mode of the policy."
+        }
+      },
+      "discriminator": "mode",
+      "required": [
+        "mode"
+      ]
+    },
+    "BrokerRetainMessagesCustomPolicy": {
+      "type": "object",
+      "description": "Custom Broker Retain Message Policy",
+      "properties": {
+        "retainSettings": {
+          "$ref": "#/definitions/BrokerRetainMessagesSettings",
+          "description": "Settings for the policy."
+        }
+      },
+      "required": [
+        "retainSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BrokerRetainMessages"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
+    "BrokerRetainMessagesDynamic": {
+      "type": "object",
+      "description": "Dynamic settings of BrokerRetainMessagesCustomPolicy",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/OperationalMode",
+          "description": "Mode of the BrokerRetainMessagesCustomPolicy."
+        }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "BrokerRetainMessagesSettings": {
+      "type": "object",
+      "description": "Retainment settings properties",
+      "properties": {
+        "topics": {
+          "type": "array",
+          "description": "List of topics under which retained messages would be persisted to disk Wildcards # and + supported",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "dynamic": {
+          "$ref": "#/definitions/BrokerRetainMessagesDynamic",
+          "description": "Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)"
+        }
+      }
+    },
+    "BrokerStateStoreCustomPolicy": {
+      "type": "object",
+      "description": "Custom State Store Retainment Policy",
+      "properties": {
+        "stateStoreSettings": {
+          "$ref": "#/definitions/BrokerStateStorePolicySettings",
+          "description": "Settings for the policy."
+        }
+      },
+      "required": [
+        "stateStoreSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BrokerStateStorePolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
+    "BrokerStateStoreDynamic": {
+      "type": "object",
+      "description": "Dynamic settings of BrokerStateStoreCustomPolicy",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/OperationalMode",
+          "description": "Mode of the BrokerStateStoreCustomPolicy."
+        }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "BrokerStateStorePolicy": {
+      "type": "object",
+      "description": "State Store Retainment Policy",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/BrokerPersistencePolicyMode",
+          "description": "The mode of the policy."
+        }
+      },
+      "discriminator": "mode",
+      "required": [
+        "mode"
+      ]
+    },
+    "BrokerStateStorePolicyResources": {
+      "type": "object",
+      "description": "State Store Retainment resources properties",
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "The key to persist to disk"
+        },
+        "keys": {
+          "type": "array",
+          "description": "List of keys to persist to disk, required",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "keyType",
+        "keys"
+      ]
+    },
+    "BrokerStateStorePolicySettings": {
+      "type": "object",
+      "description": "State Store Retainment settings properties",
+      "properties": {
+        "stateStoreResources": {
+          "type": "array",
+          "description": "List of key and key type to persist to disk",
+          "items": {
+            "$ref": "#/definitions/BrokerStateStorePolicyResources"
+          },
+          "x-ms-identifiers": []
+        },
+        "dynamic": {
+          "$ref": "#/definitions/BrokerStateStoreDynamic",
+          "description": "Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)"
+        }
+      }
+    },
+    "BrokerSubscriberQueueCustomPolicy": {
+      "type": "object",
+      "description": "Custom Subscriber Queue Retainment Policy",
+      "properties": {
+        "subscriberQueueSettings": {
+          "$ref": "#/definitions/BrokerSubscriberQueueCustomPolicySettings",
+          "description": "Settings for the policy."
+        }
+      },
+      "required": [
+        "subscriberQueueSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BrokerSubscriberQueuePolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
+    "BrokerSubscriberQueueCustomPolicySettings": {
+      "type": "object",
+      "description": "Subscriber Queue Retainment settings properties",
+      "properties": {
+        "subscriberClientIds": {
+          "type": "array",
+          "description": "List of client IDs of the subscribers, wildcard * supported",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dynamic": {
+          "$ref": "#/definitions/BrokerSubscriberQueueDynamic",
+          "description": "Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)"
+        },
+        "topics": {
+          "type": "array",
+          "description": "List of topics under which messages would be persisted to disk for each subscriber Wildcards # and + supported",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BrokerSubscriberQueueDynamic": {
+      "type": "object",
+      "description": "Dynamic settings of BrokerSubscriberQueueCustomPolicy",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/OperationalMode",
+          "description": "Mode of the BrokerSubscriberQueueCustomPolicy."
+        }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "BrokerSubscriberQueuePolicy": {
+      "type": "object",
+      "description": "Subscriber Queue Retainment Policy",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/BrokerPersistencePolicyMode",
+          "description": "The mode of the policy."
+        }
+      },
+      "discriminator": "mode",
+      "required": [
+        "mode"
       ]
     },
     "Cardinality": {
@@ -6289,54 +6584,6 @@
       "required": [
         "audience"
       ]
-    },
-    "CustomStateStoreRetainmentPolicy": {
-      "type": "object",
-      "description": "Custom State Store Retainment Policy",
-      "properties": {
-        "stateStoreSettings": {
-          "$ref": "#/definitions/StateStoreRetainmentSettings",
-          "description": "Settings for the retainment policy."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/StateStoreRetainmentPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "Custom"
-    },
-    "CustomSubscriberQueueRetainmentPolicy": {
-      "type": "object",
-      "description": "Custom Subscriber Queue Retainment Policy",
-      "properties": {
-        "subscriberQueueSettings": {
-          "$ref": "#/definitions/SubscriberQueueRetainmentSettings",
-          "description": "Settings for the retainment policy."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubscriberQueueRetainmentPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "Custom"
-    },
-    "CustomTopicRetainmentPolicy": {
-      "type": "object",
-      "description": "Custom Retainment Policy",
-      "properties": {
-        "retainSettings": {
-          "$ref": "#/definitions/TopicRetainmentSettings",
-          "description": "Settings for the retainment policy."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TopicRetainmentPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "Custom"
     },
     "DataExplorerAuthMethod": {
       "$ref": "#/definitions/ManagedIdentityMethod",
@@ -8810,30 +9057,6 @@
         "maxSize"
       ]
     },
-    "DynamicPersistenceSettings": {
-      "type": "object",
-      "description": "Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH \nOptional, default shown If customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property \"aio-persistence\"",
-      "properties": {
-        "userPropertyKey": {
-          "type": "string",
-          "description": "The user property key to enable persistence."
-        },
-        "userPropertyValue": {
-          "type": "string",
-          "description": "The user property value to enable persistence."
-        }
-      }
-    },
-    "DynamicRetainmentSettings": {
-      "type": "object",
-      "description": "Dynamic settings of the persistence.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "The mode of the retainment policy."
-        }
-      }
-    },
     "EndpointType": {
       "type": "string",
       "description": "DataflowEndpoint Type properties",
@@ -9583,39 +9806,6 @@
         ]
       }
     },
-    "Persistence": {
-      "type": "object",
-      "description": "Disk persistence configuration.\n\nWhen persistence is enabled, certain items (non-performance-critical data) selected for persistence will reside only on disk. Below are the affected items: \n\n- Retained messages will be stored on disk only. \n- WILL messages will be stored on disk only. \n- DSS key/value pairs will be stored on disk only, except for performance-critical items like timed locks, which remain in both disk and memory for improved performance.\n\nOptional. Everything is in-memory if not set. \nNote: if configured, all MQTT session states are written to disk.",
-      "properties": {
-        "dynamicSettings": {
-          "$ref": "#/definitions/DynamicPersistenceSettings",
-          "description": "Dynamic settings of the persistence."
-        },
-        "maxSize": {
-          "type": "string",
-          "description": "The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template If a PVC template isn't specified Then local-path provisioner is requested with this size limit Required."
-        },
-        "persistentVolumeClaimSpec": {
-          "$ref": "#/definitions/VolumeClaimSpec",
-          "description": "Use the specified persistent volume claim template to mount a persistent volume Same object as in diskBackedMessageBuffer, but with a limitation that access modes field must be set to `ReadWriteOncePod`.\n\nIf unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class."
-        },
-        "retain": {
-          "$ref": "#/definitions/TopicRetainmentPolicy",
-          "description": "Controls which topic's retained messages should be persisted to disk."
-        },
-        "stateStore": {
-          "$ref": "#/definitions/StateStoreRetainmentPolicy",
-          "description": "Controls which keys should be persisted to disk for the state store"
-        },
-        "subscriberQueue": {
-          "$ref": "#/definitions/SubscriberQueueRetainmentPolicy",
-          "description": "Custom policy, required if mode is Custom Subscriber queues from all groups are persisted to disk (logical OR)"
-        }
-      },
-      "required": [
-        "maxSize"
-      ]
-    },
     "PrincipalDefinition": {
       "type": "object",
       "description": "PrincipalDefinition properties of Rule",
@@ -10007,35 +10197,6 @@
         "tenantId"
       ]
     },
-    "RetainmentPolicyMode": {
-      "type": "string",
-      "enum": [
-        "All",
-        "None",
-        "Custom"
-      ],
-      "x-ms-enum": {
-        "name": "RetainmentPolicyMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "All",
-            "value": "All",
-            "description": "Persist all 'retain' messages."
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "Persist no messages."
-          },
-          {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "Persist only the specified topics."
-          }
-        ]
-      }
-    },
     "SanForCert": {
       "type": "object",
       "description": "Subject Alternative Names (SANs) for certificate.",
@@ -10368,63 +10529,6 @@
         "method"
       ]
     },
-    "StateStoreRetainmentPolicy": {
-      "type": "object",
-      "description": "State Store Retainment Policy",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/RetainmentPolicyMode",
-          "description": "The mode of the retainment policy."
-        },
-        "stateStoreSettings": {
-          "$ref": "#/definitions/StateStoreRetainmentSettings",
-          "description": "Settings for the retainment policy."
-        }
-      },
-      "discriminator": "mode",
-      "required": [
-        "mode"
-      ]
-    },
-    "StateStoreRetainmentResources": {
-      "type": "object",
-      "description": "State Store Retainment resources properties",
-      "properties": {
-        "keyType": {
-          "type": "string",
-          "description": "The key to persist to disk"
-        },
-        "keys": {
-          "type": "array",
-          "description": "List of keys to persist to disk, required",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "keyType",
-        "keys"
-      ]
-    },
-    "StateStoreRetainmentSettings": {
-      "type": "object",
-      "description": "State Store Retainment settings properties",
-      "properties": {
-        "stateStoreResources": {
-          "type": "array",
-          "description": "List of key and key type to persist to disk",
-          "items": {
-            "$ref": "#/definitions/StateStoreRetainmentResources"
-          },
-          "x-ms-identifiers": []
-        },
-        "dynamic": {
-          "$ref": "#/definitions/DynamicRetainmentSettings",
-          "description": "Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)"
-        }
-      }
-    },
     "SubscriberMessageDropStrategy": {
       "type": "string",
       "description": "The enum defining strategies for dropping messages from the subscriber queue.",
@@ -10482,48 +10586,6 @@
                 "description": "The oldest message is dropped."
               }
             ]
-          }
-        }
-      }
-    },
-    "SubscriberQueueRetainmentPolicy": {
-      "type": "object",
-      "description": "Subscriber Queue Retainment Policy",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/RetainmentPolicyMode",
-          "description": "The mode of the retainment policy."
-        },
-        "subscriberQueueSettings": {
-          "$ref": "#/definitions/SubscriberQueueRetainmentSettings",
-          "description": "Settings for the retainment policy."
-        }
-      },
-      "discriminator": "mode",
-      "required": [
-        "mode"
-      ]
-    },
-    "SubscriberQueueRetainmentSettings": {
-      "type": "object",
-      "description": "Subscriber Queue Retainment settings properties",
-      "properties": {
-        "subscriberClientIds": {
-          "type": "array",
-          "description": "List of client IDs of the subscribers, wildcard * supported",
-          "items": {
-            "type": "string"
-          }
-        },
-        "dynamic": {
-          "$ref": "#/definitions/DynamicRetainmentSettings",
-          "description": "Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)"
-        },
-        "topics": {
-          "type": "array",
-          "description": "List of topics under which messages would be persisted to disk for each subscriber Wildcards # and + supported",
-          "items": {
-            "type": "string"
           }
         }
       }
@@ -10605,38 +10667,6 @@
         "trustedCaCertificateConfigMapRef": {
           "type": "string",
           "description": "Trusted CA certificate config map."
-        }
-      }
-    },
-    "TopicRetainmentPolicy": {
-      "type": "object",
-      "description": "Retainment policy properties",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/RetainmentPolicyMode",
-          "description": "The mode of the retainment policy."
-        }
-      },
-      "discriminator": "mode",
-      "required": [
-        "mode"
-      ]
-    },
-    "TopicRetainmentSettings": {
-      "type": "object",
-      "description": "Retainment settings properties",
-      "properties": {
-        "topics": {
-          "type": "array",
-          "description": "List of topics under which retained messages would be persisted to disk Wildcards # and + supported",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
-        },
-        "dynamic": {
-          "$ref": "#/definitions/DynamicRetainmentSettings",
-          "description": "Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)"
         }
       }
     },
