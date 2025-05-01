@@ -46,22 +46,26 @@ model FileShare is Azure.ResourceManager.TrackedResource<FileShareProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Already in previous protocol version"
 @renamedFrom(Versions.v2024_01_01_preview, "Tier")
+@doc("Media Tier enum.")
 enum MediaTier {
   SSD,
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Already in previous protocol version"
+@doc("Redundancy enum.")
 enum Redundancy {
   Local,
   Zone,
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Already in previous protocol version"
+@doc("Protocol enum.")
 enum Protocol {
   NFS,
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Already in previous protocol version"
+@doc("Share root squash enum.")
 enum ShareRootSquash {
   NoRootSquash,
   RootSquash,
@@ -301,46 +305,6 @@ union FileShareProvisioningState {
 
   @doc("The operation is accepted.")
   Accepted: "Accepted",
-}
-
-@doc("Parameters for Azure Async Operation status check")
-model AzureAsyncOperationsParameters {
-  // Note that the ordering of these parameters are important as they're used to autogenerate the path
-  ...ApiVersionParameter;
-
-  ...SubscriptionIdParameter;
-  ...ProviderNamespace<FileShare>;
-  ...LocationParameter;
-
-  @path
-  @doc("Path to the name of the partition.")
-  @segment("partitions")
-  partitionId: string;
-
-  @path
-  @doc("Path to the name of the operation.")
-  @segment("operations")
-  operationId: uuid;
-}
-
-@doc("Parameters for Operation Results")
-model OperationResultParameters {
-  // Note that the ordering of these parameters are important as they're used to autogenerate the path
-  ...ApiVersionParameter;
-
-  ...SubscriptionIdParameter;
-  ...ProviderNamespace<FileShare>;
-  ...LocationParameter;
-
-  @path
-  @doc("Path to the name of the partition.")
-  @segment("partitions")
-  partitionId: string;
-
-  @path
-  @doc("Path to the name of the operation.")
-  @segment("operationResults")
-  operationId: uuid;
 }
 
 @armResourceOperations

@@ -795,11 +795,6 @@
     }
   },
   "definitions": {
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "AzureAsyncOperation": {
       "type": "object",
       "description": "Azure Async Operation",
@@ -846,52 +841,6 @@
       },
       "required": [
         "status"
-      ]
-    },
-    "AzureAsyncOperationsParameters": {
-      "type": "object",
-      "description": "Parameters for Azure Async Operation status check",
-      "properties": {
-        "apiVersion": {
-          "type": "string",
-          "description": "The API version to use for this operation.",
-          "minLength": 1
-        },
-        "subscriptionId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The ID of the target subscription. The value must be an UUID."
-        },
-        "provider": {
-          "type": "string",
-          "description": "The provider namespace for the resource.",
-          "enum": [
-            "Microsoft.FileShares"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The location name.",
-          "minLength": 1
-        },
-        "partitionId": {
-          "type": "string",
-          "description": "Path to the name of the partition."
-        },
-        "operationId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Path to the name of the operation."
-        }
-      },
-      "required": [
-        "apiVersion",
-        "subscriptionId",
-        "provider",
-        "location",
-        "partitionId",
-        "operationId"
       ]
     },
     "ExtensionResourceActionScope": {
@@ -1313,6 +1262,7 @@
     },
     "MediaTier": {
       "type": "string",
+      "description": "Media Tier enum.",
       "enum": [
         "SSD"
       ],
@@ -1331,54 +1281,9 @@
         }
       }
     },
-    "OperationResultParameters": {
-      "type": "object",
-      "description": "Parameters for Operation Results",
-      "properties": {
-        "apiVersion": {
-          "type": "string",
-          "description": "The API version to use for this operation.",
-          "minLength": 1
-        },
-        "subscriptionId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The ID of the target subscription. The value must be an UUID."
-        },
-        "provider": {
-          "type": "string",
-          "description": "The provider namespace for the resource.",
-          "enum": [
-            "Microsoft.FileShares"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The location name.",
-          "minLength": 1
-        },
-        "partitionId": {
-          "type": "string",
-          "description": "Path to the name of the partition."
-        },
-        "operationId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Path to the name of the operation."
-        }
-      },
-      "required": [
-        "apiVersion",
-        "subscriptionId",
-        "provider",
-        "location",
-        "partitionId",
-        "operationId"
-      ]
-    },
     "Protocol": {
       "type": "string",
+      "description": "Protocol enum.",
       "enum": [
         "NFS"
       ],
@@ -1426,6 +1331,7 @@
     },
     "Redundancy": {
       "type": "string",
+      "description": "Redundancy enum.",
       "enum": [
         "Local",
         "Zone"
@@ -1437,6 +1343,7 @@
     },
     "ShareRootSquash": {
       "type": "string",
+      "description": "Share root squash enum.",
       "enum": [
         "NoRootSquash",
         "RootSquash",
