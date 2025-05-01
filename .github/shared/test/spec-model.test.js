@@ -1,7 +1,8 @@
 import { readdir } from "fs/promises";
-import { dirname, join, resolve } from "path";
+import { dirname, join, relative, resolve } from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
+import { ConsoleLogger } from "../src/logger.js";
 import {
   getAffectedReadmeTags,
   getAffectedSwaggers,
@@ -12,6 +13,8 @@ import { isWindows } from "./test-utils.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const repoRoot = join(__dirname, "..", "..", "..");
+
+const options = { logger: new ConsoleLogger(/*debug*/ true) };
 
 describe("getSpecModel", () => {
   // Skip this test as it checks a code path that is not available when running
@@ -27,13 +30,12 @@ describe("getSpecModel", () => {
     expect,
   }) => {
     const fixtureRoot = resolve(__dirname, "fixtures/getSpecModel");
-    const actual = await getSpecModel("specification/yaml-date-parsing", {
-      repoRoot: fixtureRoot,
-    });
+    const actual = await getSpecModel(
+      join(fixtureRoot, "specification/yaml-date-parsing"),
+      options,
+    );
 
-    const actualTag = actual.readmes[
-      "specification/yaml-date-parsing/readme.md"
-    ].globalConfig["tag"];
+    const actualTag = actual.readmes["readme.md"].globalConfig["tag"];
 
     expect(actualTag).not.toBeTypeOf(Date);
     expect(actualTag).toBeTypeOf("string");
@@ -42,48 +44,44 @@ describe("getSpecModel", () => {
 
   it.skipIf(isWindows())("returns spec model", async ({ expect }) => {
     const fixtureRoot = resolve(__dirname, "fixtures/getSpecModel");
-
-    const readmePath =
-      "specification/contosowidgetmanager/resource-manager/readme.md";
-
-    const swaggerPathPreview =
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
-
-    const swaggerPathStable =
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json";
+    const folderRelative = relative(
+      repoRoot,
+      join(fixtureRoot, "specification/contosowidgetmanager/resource-manager"),
+    );
 
     const expected = {
-      repoRoot: fixtureRoot,
+      repoRoot,
+      folder: folderRelative,
       readmes: {
-        [readmePath]: {
-          path: readmePath,
+        "readme.md": {
           globalConfig: {
             "openapi-type": "arm",
             "openapi-subtype": "rpaas",
             tag: "package-2021-11-01",
           },
           tags: {
-            "package-2021-11-01": [
-              {
-                path: swaggerPathStable,
-                refs: expect.anything(),
+            "package-2021-11-01": {
+              inputFiles: {
+                "Microsoft.Contoso/stable/2021-11-01/contoso.json": {
+                  refs: expect.anything(),
+                },
               },
-            ],
-
-            "package-2021-10-01-preview": [
-              {
-                path: swaggerPathPreview,
-                refs: expect.anything(),
+            },
+            "package-2021-10-01-preview": {
+              inputFiles: {
+                "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json": {
+                  refs: expect.anything(),
+                },
               },
-            ],
+            },
           },
         },
       },
     };
 
     const specModel = await getSpecModel(
-      "specification/contosowidgetmanager/resource-manager",
-      { repoRoot: fixtureRoot },
+      join(repoRoot, folderRelative),
+      options,
     );
 
     expect(specModel).toEqual(expected);
@@ -115,71 +113,92 @@ describe("getReadme regex", () => {
 
 describe("getAffectedReadmeTags", () => {
   it.skipIf(isWindows())("returns affected readme tags", async ({ expect }) => {
-    const specModel = await getSpecModel("specification/contosowidgetmanager", {
-      repoRoot: resolve(__dirname, "fixtures/getAffectedReadmeTags"),
-    });
-
-    const actual = getAffectedReadmeTags(
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
-      specModel,
+    const fixtureRoot = resolve(__dirname, "fixtures/getAffectedReadmeTags");
+    const folderRelative = relative(
+      repoRoot,
+      join(fixtureRoot, "specification/contosowidgetmanager"),
     );
 
+    const specModel = await getSpecModel(
+      join(repoRoot, folderRelative),
+      options,
+    );
+
+    const swaggerPath = join(
+      repoRoot,
+      folderRelative,
+      "resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
+    );
+
+    const actual = getAffectedReadmeTags(swaggerPath, specModel);
+
     const expected = {
-      "specification/contosowidgetmanager/resource-manager/readme.md": [
+      [join(folderRelative, "resource-manager/readme.md")]: [
         "package-2021-11-01",
       ],
     };
+
     expect(actual).toEqual(expected);
   });
 
   it.skipIf(isWindows())(
     "returns affected readme tags for multiple tags",
     async ({ expect }) => {
-      const specModel = await getSpecModel("specification/1", {
-        // TODO: Cleanup
-        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-      });
-      const actual = getAffectedReadmeTags(
-        "specification/1/data-plane/shared/shared.json",
-        specModel,
+      const fixtureRoot = resolve(__dirname, "fixtures/getAffectedSwaggers");
+      const folderRelative = relative(
+        repoRoot,
+        join(fixtureRoot, "specification/1"),
       );
 
+      const specModel = await getSpecModel(
+        join(repoRoot, folderRelative),
+        options,
+      );
+
+      const swaggerPath = join(
+        repoRoot,
+        folderRelative,
+        "data-plane/shared/shared.json",
+      );
+
+      const actual = getAffectedReadmeTags(swaggerPath, specModel);
+
       const expected = {
-        "specification/1/data-plane/readme.md": ["tag-1", "tag-2"],
+        [join(folderRelative, "data-plane/readme.md")]: ["tag-1", "tag-2"],
       };
       expect(actual).toEqual(expected);
     },
   );
 });
 
-describe("getAffectedSwaggers", () => {
+describe("getAffectedSwaggers", async () => {
+  const fixtureRoot = resolve(__dirname, "fixtures/getAffectedSwaggers");
+  const folderRelative = relative(
+    repoRoot,
+    join(fixtureRoot, "specification/1"),
+  );
+  const specModel = await getSpecModel(join(repoRoot, folderRelative), options);
+
   it.skipIf(isWindows())(
     "returns directly referenced swagger",
     async ({ expect }) => {
-      const specModel = await getSpecModel("specification/1", {
-        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-      });
-
-      const actual = getAffectedSwaggers(
-        "specification/1/data-plane/a.json",
-        specModel,
-      );
-
-      const expected = ["specification/1/data-plane/a.json"];
-
+      const swaggerPath = join(repoRoot, folderRelative, "data-plane/a.json");
+      const actual = getAffectedSwaggers(swaggerPath, specModel);
+      const expected = [join(folderRelative, "data-plane/a.json")];
       expect(actual).toEqual(expected);
     },
   );
 
   it("throws when swagger file is not found", async ({ expect }) => {
-    const specModel = await getSpecModel("specification/1", {
-      repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-    });
-    const swaggerFile = "specification/1/data-plane/not-found.json";
-    const actual = () => getAffectedSwaggers(swaggerFile, specModel);
+    const swaggerPath = join(
+      repoRoot,
+      folderRelative,
+      "data-plane/not-found.json",
+    );
+    const actual = () => getAffectedSwaggers(swaggerPath, specModel);
     expect(actual).toThrowError(
       expect.objectContaining({
-        message: expect.stringContaining(swaggerFile),
+        message: expect.stringContaining(swaggerPath),
       }),
     );
   });
@@ -187,39 +206,34 @@ describe("getAffectedSwaggers", () => {
   it.skipIf(isWindows())(
     "returns correct swaggers for one layer of dependencies",
     async ({ expect }) => {
-      const specModel = await getSpecModel("specification/1", {
-        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-      });
-
-      const actual = getAffectedSwaggers(
-        "specification/1/data-plane/nesting/b.json",
-        specModel,
+      const swaggerPath = join(
+        repoRoot,
+        folderRelative,
+        "data-plane/nesting/b.json",
       );
 
-      const expected = [
-        "specification/1/data-plane/a.json",
-        "specification/1/data-plane/nesting/b.json",
-      ];
-      expect(actual).toEqual(expected);
+      const actual = getAffectedSwaggers(swaggerPath, specModel);
+
+      const expected = ["data-plane/a.json", "data-plane/nesting/b.json"].map(
+        (f) => join(folderRelative, f),
+      );
+
+      expect(actual.sort()).toEqual(expected.sort());
     },
   );
 
   it.skipIf(isWindows())(
     "returns correct swaggers for two layers of dependencies",
     async ({ expect }) => {
-      const specModel = await getSpecModel("specification/1", {
-        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-      });
+      const swaggerPath = join(repoRoot, folderRelative, "data-plane/c.json");
 
-      const actual = getAffectedSwaggers(
-        "specification/1/data-plane/c.json",
-        specModel,
-      );
+      const actual = getAffectedSwaggers(swaggerPath, specModel);
+
       const expected = [
-        "specification/1/data-plane/a.json",
-        "specification/1/data-plane/nesting/b.json",
-        "specification/1/data-plane/c.json",
-      ];
+        "data-plane/a.json",
+        "data-plane/nesting/b.json",
+        "data-plane/c.json",
+      ].map((f) => join(folderRelative, f));
 
       expect(actual.sort()).toEqual(expected.sort());
     },
@@ -228,20 +242,17 @@ describe("getAffectedSwaggers", () => {
   it.skipIf(isWindows())(
     "returns correct swaggers for three layers of dependencies",
     async ({ expect }) => {
-      const specModel = await getSpecModel("specification/1", {
-        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-      });
+      const swaggerPath = join(repoRoot, folderRelative, "data-plane/d.json");
 
-      const actual = getAffectedSwaggers(
-        "specification/1/data-plane/d.json",
-        specModel,
-      );
+      const actual = getAffectedSwaggers(swaggerPath, specModel);
+
       const expected = [
-        "specification/1/data-plane/a.json",
-        "specification/1/data-plane/nesting/b.json",
-        "specification/1/data-plane/c.json",
-        "specification/1/data-plane/d.json",
-      ];
+        "data-plane/a.json",
+        "data-plane/nesting/b.json",
+        "data-plane/c.json",
+        "data-plane/d.json",
+      ].map((f) => join(folderRelative, f));
+
       expect(actual.sort()).toEqual(expected.sort());
     },
   );
@@ -249,22 +260,23 @@ describe("getAffectedSwaggers", () => {
   it.skipIf(isWindows())(
     "returns correctly for multiple shared dependencies",
     async ({ expect }) => {
-      const specModel = await getSpecModel("specification/1", {
-        repoRoot: resolve(__dirname, "fixtures/getAffectedSwaggers"),
-      });
-
-      const actual = getAffectedSwaggers(
-        "specification/1/data-plane/shared/shared.json",
-        specModel,
+      const swaggerPath = join(
+        repoRoot,
+        folderRelative,
+        "data-plane/shared/shared.json",
       );
+
+      const actual = getAffectedSwaggers(swaggerPath, specModel);
+
       const expected = [
-        "specification/1/data-plane/a.json",
-        "specification/1/data-plane/nesting/b.json",
-        "specification/1/data-plane/c.json",
-        "specification/1/data-plane/d.json",
-        "specification/1/data-plane/shared/shared.json",
-        "specification/1/data-plane/e.json",
-      ];
+        "data-plane/a.json",
+        "data-plane/nesting/b.json",
+        "data-plane/c.json",
+        "data-plane/d.json",
+        "data-plane/shared/shared.json",
+        "data-plane/e.json",
+      ].map((f) => join(folderRelative, f));
+
       expect(actual.sort()).toEqual(expected.sort());
     },
   );
