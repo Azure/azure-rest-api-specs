@@ -8,6 +8,7 @@ import "../common/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core.Foundations;
 
 namespace Azure.AI.Agents {
   /**
@@ -67,26 +68,27 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
-    listRunSteps is Azure.Core.Foundations.Operation<
-      {
-        @doc("Identifier of the thread.")
-        @path
-        threadId: string;
+    @list
+    listRunSteps(
+      @doc("Identifier of the thread.")
+      @path
+      threadId: string,
 
-        @doc("Identifier of the run.")
-        @path
-        runId: string;
+      @doc("Identifier of the run.")
+      @path
+      runId: string,
 
-        @doc("""
-          A list of additional fields to include in the response.
-          Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
-          """)
-        @query("include[]")
-        include?: RunAdditionalFieldList[];
+      @doc("""
+        A list of additional fields to include in the response.
+        Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
+        """)
+      @query("include[]")
+      include?: RunAdditionalFieldList[],
 
-        ...OpenAIListRequestOptions;
-      },
-      OpenAIPageableListOf<RunStep>
-    >;
+      ...ApiVersionParameter,
+      ...AgentsListOptions,
+    ): {
+      ...AgentsPagedResult<RunStep>;
+    };
   }
 }

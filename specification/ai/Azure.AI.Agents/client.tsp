@@ -17,8 +17,6 @@ using Azure.AI.Agents;
   "PersistentAgentsAdministrationClient",
   "csharp, java"
 );
-@@access(Azure.AI.Agents.listAgents, Access.internal, "csharp");
-@@clientName(Azure.AI.Agents.listAgents, "InternalGetAgents", "csharp");
 @@access(Azure.AI.Agents.deleteAgent, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.deleteAgent, "InternalDeleteAgent", "csharp");
 
@@ -49,12 +47,6 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Messages.getMessage, "get", "python");
 @@clientName(Azure.AI.Agents.Messages.updateMessage, "update", "python");
 
-@@access(Azure.AI.Agents.Messages.listMessages, Access.internal, "csharp");
-@@clientName(Azure.AI.Agents.Messages.listMessages,
-  "InternalGetMessages",
-  "csharp"
-);
-
 // --------------------------------------------------------------------------------
 // Threads sub-client
 // --------------------------------------------------------------------------------
@@ -64,11 +56,6 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Threads.updateThread, "update", "python");
 @@clientName(Azure.AI.Agents.Threads.deleteThread, "delete", "python");
 
-@@access(Azure.AI.Agents.Threads.listThreads, Access.internal, "csharp");
-@@clientName(Azure.AI.Agents.Threads.listThreads,
-  "InternalGetThreads",
-  "csharp"
-);
 @@access(Azure.AI.Agents.Threads.deleteThread, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.Threads.deleteThread,
   "InternalDeleteThread",
@@ -95,20 +82,11 @@ using Azure.AI.Agents;
 );
 @@clientName(Azure.AI.Agents.Runs.cancelRun, "cancel", "python");
 
-@@access(Azure.AI.Agents.Runs.listRuns, Access.internal, "csharp");
-@@clientName(Azure.AI.Agents.Runs.listRuns, "InternalGetRuns", "csharp");
-
 // --------------------------------------------------------------------------------
 // RunSteps sub‐client (/threads/{threadId}/runs/{runId}/steps)
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Agents.RunSteps.getRunStep, "get", "python");
 @@clientName(Azure.AI.Agents.RunSteps.listRunSteps, "list", "python");
-
-@@access(Azure.AI.Agents.RunSteps.listRunSteps, Access.internal, "csharp");
-@@clientName(Azure.AI.Agents.RunSteps.listRunSteps,
-  "InternalGetRunSteps",
-  "csharp"
-);
 
 // --------------------------------------------------------------------------------
 // VectorStores sub‐client

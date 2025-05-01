@@ -28,7 +28,7 @@ union ListSortOrder {
   descending: "desc",
 }
 
-alias OpenAIListRequestOptions = {
+alias AgentsListOptions = {
   @doc("A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.")
   @query
   limit?: int32 = 20;
@@ -39,6 +39,7 @@ alias OpenAIListRequestOptions = {
 
   @doc("A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.")
   @query
+  @continuationToken
   after?: string;
 
   @doc("A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.")
@@ -48,20 +49,15 @@ alias OpenAIListRequestOptions = {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @doc("The response data for a requested list of items.")
-model OpenAIPageableListOf<T> {
-  @doc("The object type, which is always list.")
-  object: "list";
-
+model AgentsPagedResult<T> {
   @doc("The requested list of items.")
+  @pageItems
   data: T[];
-
-  @encodedName("application/json", "first_id")
-  @doc("The first ID represented in this list.")
-  firstId: string;
 
   @encodedName("application/json", "last_id")
   @doc("The last ID represented in this list.")
-  lastId: string;
+  @continuationToken
+  lastId?: string;
 
   @encodedName("application/json", "has_more")
   @doc("A value indicating whether there are additional values available not captured in this list.")

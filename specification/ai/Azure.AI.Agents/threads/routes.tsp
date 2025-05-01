@@ -6,6 +6,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core.Foundations;
 
 namespace Azure.AI.Agents {
   /**
@@ -42,12 +43,10 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
-    listThreads is Azure.Core.Foundations.Operation<
-      {
-        ...OpenAIListRequestOptions;
-      },
-      OpenAIPageableListOf<AgentThread>
-    >;
+    @list
+    listThreads(...ApiVersionParameter, ...AgentsListOptions): {
+      ...AgentsPagedResult<AgentThread>;
+    };
 
     /**
      * Gets information about an existing thread.
