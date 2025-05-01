@@ -27,12 +27,12 @@ union RegistryEndpointAuthenticationMethod {
   string,
 
   /**
-   * System assigned identity authentication
+   * System and User assigned identity authentication
    */
   ManagedIdentityMethod,
 
   /**
-   * User assigned identity authentication
+   * Anonymous authentication
    */
   AnonymousMethod,
 }
