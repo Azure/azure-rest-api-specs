@@ -144,7 +144,9 @@ async function runLintDiff(
   if (!pass) {
     process.exitCode = 1;
     console.error(`Lint-diff failed. See workflow summary report in ${outFile} for details.`);
-    
+
+    console.log(`GITHUB_SERVER_URL: ${process.env.GITHUB_SERVER_URL}`);
+
     if (
       process.env.GITHUB_SERVER_URL &&
       process.env.GITHUB_REPOSITORY &&
