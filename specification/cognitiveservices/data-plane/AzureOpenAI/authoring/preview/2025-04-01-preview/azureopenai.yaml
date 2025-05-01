@@ -2019,105 +2019,96 @@ definitions:
         type: integer
   CreateEvalCompletionsRunDataSource:
     description: 'A CompletionsRunDataSource object describing a model sampling configuration.'
+    type: object
     properties:
       input_messages:
-        allOf:
-          - properties:
-              template:
-                description: A list of chat messages forming the prompt or context.
-                  May include variable references to the "item" namespace, ie {{item.name}}.
-                items:
-                  allOf:
-                    - properties:
-                        content:
-                          description: The content of the message.
-                          type: string
-                        role:
-                          description: The role of the message (e.g. "system", "assistant",
-                            "user").
-                          type: string
-                      required:
-                      - role
-                      - content
-                      title: ChatMessage
-                      type: object
-                    - $ref: '#/definitions/EvalItem'
-                  type: array
-              type:
-                description: The type of input messages. Always `template`.
-                enum:
-                - template
-                type: string
-            required:
-            - type
-            - template
-            type: object
-          - properties:
-              item_reference:
-                description: A reference to a variable in the "item" namespace. Ie, "item.name"
-                type: string
-              type:
-                description: The type of input messages. Always `item_reference`.
-                enum:
-                - item_reference
-                type: string
-            required:
-            - type
-            - item_reference
-            type: object
+        type: object
+        discriminator: type
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            description: "The type of input messages. Either `template` or `item_reference`."
+            enum:
+              - template
+              - item_reference
+          template:
+            type: array
+            description: "A list of chat messages forming the prompt or context. May include variable references to the 'item' namespace, e.g., {{item.name}}."
+            items:
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: "The content of the message."
+                role:
+                  type: string
+                  description: "The role of the message (e.g., 'system', 'assistant', 'user')."
+              required:
+                - role
+                - content
+          item_reference:
+            type: string
+            description: "A reference to a variable in the 'item' namespace, e.g., 'item.name'."
       model:
-        description: The name of the model to use for generating completions (e.g. "o3-mini").
         type: string
+        description: "The name of the model to use for generating completions (e.g., 'o3-mini')."
       sampling_params:
+        type: object
         properties:
           max_completion_tokens:
-            description: The maximum number of tokens in the generated output.
             type: integer
+            description: "The maximum number of tokens in the generated output."
           seed:
-            default: 42
-            description: A seed value to initialize the randomness, during sampling.
             type: integer
+            description: "A seed value to initialize the randomness, during sampling."
+            default: 42
           temperature:
-            default: 1.0
-            description: A higher temperature increases randomness in the outputs.
             type: number
+            description: "A higher temperature increases randomness in the outputs."
+            default: 1.0
           top_p:
-            default: 1.0
-            description: An alternative to temperature for nucleus sampling; 1.0 includes
-              all tokens.
             type: number
-        type: object
+            description: "An alternative to temperature for nucleus sampling; 1.0 includes all tokens."
+            default: 1.0
       source:
-        allOf:
-          - $ref: '#/definitions/EvalJsonlFileContentSource'
-          - $ref: '#/definitions/EvalJsonlFileIdSource'
-          - $ref: '#/definitions/EvalStoredCompletionsSource'
+        type: object
+        discriminator: type  # Using a discriminator for selecting the correct source
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            description: "The type of source. Can be one of `EvalJsonlFileContentSource`, `EvalJsonlFileIdSource`, or `EvalStoredCompletionsSource`."
+            enum:
+              - EvalJsonlFileContentSource
+              - EvalJsonlFileIdSource
+              - EvalStoredCompletionsSource
       type:
-        default: completions
-        description: The type of run data source. Always `completions`.
-        enum:
-        - completions
         type: string
+        description: "The type of run data source. Always `completions`."
+        enum:
+          - completions
+        default: completions
     required:
-    - type
-    - model
-    - source
-    - input_messages
-    title: CompletionsRunDataSource
-    type: object
+      - type
+      - source
   CreateEvalCustomDataSourceConfig:
-    description: 'A CustomDataSourceConfig object that defines the schema for the data source used for the evaluation runs.
+    description: 'A CustomDataSourceConfig object that defines the schema for the
+      data source used for the evaluation runs.
       This schema is used to define the shape of the data that will be:
-      - Used to define your testing criteria and 
-      - What data is required when creating a run '
+      - Used to define your testing criteria and
+      - What data is required when creating a run'
     properties:
       include_sample_schema:
         default: false
-        description: Whether to include the sample schema in the data source.
+        description: Whether the eval should expect you to populate the sample namespace
+          (ie, by generating responses off of your data source)
         type: boolean
       item_schema:
         additionalProperties: true
-        description: The json schema for the run data source items.
+        description: The json schema for each row in the data source.
         type: object
       type:
         default: custom
@@ -2130,8 +2121,27 @@ definitions:
     - type
     title: CustomDataSourceConfig
     type: object
+  CreateEvalItem:
+    description: A chat message that makes up the prompt or context. May include variable
+      references to the "item" namespace, ie {{item.name}}.
+    allOf:
+    - properties:
+        content:
+          description: The content of the message.
+          type: string
+        role:
+          description: The role of the message (e.g. "system", "assistant", "user").
+          type: string
+      required:
+      - role
+      - content
+      title: SimpleInputMessage
+      type: object
+    - $ref: '#/definitions/EvalItem'
+    title: CreateEvalItem
+    type: object
   CreateEvalJsonlRunDataSource:
-    description: "A JsonlRunDataSource object with that specifies a JSONL file that matches the eval."
+    description: "A JsonlRunDataSource object with that specifies a JSONL file that matches the eval"
     properties:
       source:
         allOf:
@@ -2149,24 +2159,14 @@ definitions:
     title: JsonlRunDataSource
     type: object
   CreateEvalLabelModelGrader:
-    description: 'A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.'
+    description: 'A LabelModelGrader object which uses a model to assign labels to
+      each item in the evaluation.'
     properties:
       input:
+        description: A list of chat messages forming the prompt or context. May include
+          variable references to the "item" namespace, ie {{item.name}}.
         items:
-          allOf:
-          - properties:
-              content:
-                description: The content of the message.
-                type: string
-              role:
-                description: The role of the message (e.g. "system", "assistant", "user").
-                type: string
-            required:
-            - role
-            - content
-            title: SimpleInputMessage
-            type: object
-          - $ref: '#/definitions/EvalItem'
+          $ref: '#/definitions/CreateEvalItem'
         type: array
       labels:
         description: The labels to classify to each item in the evaluation.
@@ -2174,13 +2174,15 @@ definitions:
           type: string
         type: array
       model:
-        description: The model to use for the evaluation. Must support structured outputs.
+        description: The model to use for the evaluation. Must support structured
+          outputs.
         type: string
       name:
         description: The name of the grader.
         type: string
       passing_labels:
-        description: The labels that indicate a passing result. Must be a subset of labels.
+        description: The labels that indicate a passing result. Must be a subset of
+          labels.
         items:
           type: string
         type: array
@@ -2198,23 +2200,40 @@ definitions:
     - name
     title: LabelModelGrader
     type: object
+  CreateEvalLogsDataSourceConfig:
+    description: 'A data source config which specifies the metadata property of your
+      stored completions query.
+      This is usually metadata like `usecase=chatbot` or `prompt-version=v2`, etc.'
+    properties:
+      metadata:
+        additionalProperties: true
+        description: Metadata filters for the logs data source.
+        example: "{\n  \"use_case\": \"customer_support_agent\"\n}\n"
+        type: object
+      type:
+        default: logs
+        description: The type of data source. Always `logs`.
+        enum:
+        - logs
+        type: string
+    required:
+    - type
+    title: LogsDataSourceConfig
+    type: object
   CreateEvalRequest:
     properties:
       data_source_config:
-        description: The configuration for the data source used for the evaluation runs.
+        description: The configuration for the data source used for the evaluation
+          runs.
         allOf:
         - $ref: '#/definitions/CreateEvalCustomDataSourceConfig'
-        - $ref: '#/definitions/CreateEvalStoredCompletionsDataSourceConfig'
+        - $ref: '#/definitions/CreateEvalLogsDataSourceConfig'
         type: object
       metadata:
         $ref: '#/definitions/Metadata'
       name:
         description: The name of the evaluation.
         type: string
-      share_with_openai:
-        default: false
-        description: Indicates whether the evaluation is shared with OpenAI.
-        type: boolean
       testing_criteria:
         description: A list of graders for all eval runs in this group.
         items:
@@ -2222,6 +2241,7 @@ definitions:
           - $ref: '#/definitions/CreateEvalLabelModelGrader'
           - $ref: '#/definitions/EvalStringCheckGrader'
           - $ref: '#/definitions/EvalTextSimilarityGrader'
+          - $ref: '#/definitions/EvalScoreModelGrader'
         type: array
     required:
     - data_source_config
@@ -2245,30 +2265,17 @@ definitions:
     - data_source
     title: CreateEvalRunRequest
     type: object
-  CreateEvalStoredCompletionsDataSourceConfig:
-    description: 'A data source config which specifies the metadata property of your stored completions query.
-      This is usually metadata like `usecase=chatbot` or `prompt-version=v2`, etc. '
-    properties:
-      metadata:
-        $ref: '#/definitions/Metadata'
-      type:
-        default: stored_completions
-        description: The type of data source. Always `stored_completions`.
-        enum:
-        - stored_completions
-        type: string
-    required:
-    - type
-    title: StoredCompletionsDataSourceConfig
-    type: object
   CreateEvalStoredCompletionsRunDataSource:
-    description: 'A StoredCompletionsRunDataSource configuration describing a set of filters'
+    description: 'A StoredCompletionsRunDataSource configuration describing a set
+      of filters'
     properties:
       created_after:
-        description: An optional Unix timestamp to filter items created after this time.
+        description: An optional Unix timestamp to filter items created after this
+          time.
         type: integer
       created_before:
-        description: An optional Unix timestamp to filter items created before this time.
+        description: An optional Unix timestamp to filter items created before this
+          time.
         type: integer
       limit:
         description: An optional maximum number of items to return.
@@ -2495,27 +2502,11 @@ definitions:
     properties:
       error:
         $ref: '#/definitions/Error'
-  Error:
-    properties:
-      code:
-        type: string
-      message:
-        type: string
-      param:
-        type: string
-      type:
-        type: string
-    required:
-      - type
-      - message
-      - param
-      - code
   Eval:
-    description: "An Eval object with a data source config and testing criteria.
-      An Eval represents a task to be done for your LLM integration. Like: 
-      - Improve the quality of my chatbot
-      - See how well my chatbot handles customer support
-      - Check if o3-mini is better at my usecase than gpt-4o"
+    description: "An Eval object with a data source config and testing criteria.\n\
+      An Eval represents a task to be done for your LLM integration.\nLike:\n - Improve\
+      \ the quality of my chatbot\n - See how well my chatbot handles customer support\n\
+      \ - Check if o3-mini is better at my usecase than gpt-4o\n"
     properties:
       created_at:
         description: The Unix timestamp (in seconds) for when the eval was created.
@@ -2533,6 +2524,7 @@ definitions:
         $ref: '#/definitions/Metadata'
       name:
         description: The name of the evaluation.
+        example: Chatbot effectiveness Evaluation
         type: string
       object:
         default: eval
@@ -2540,9 +2532,6 @@ definitions:
         enum:
         - eval
         type: string
-      share_with_openai:
-        description: Indicates whether the evaluation is shared with OpenAI.
-        type: boolean
       testing_criteria:
         default: eval
         description: A list of testing criteria.
@@ -2551,6 +2540,7 @@ definitions:
           - $ref: '#/definitions/EvalLabelModelGrader'
           - $ref: '#/definitions/EvalStringCheckGrader'
           - $ref: '#/definitions/EvalTextSimilarityGrader'
+          - $ref: '#/definitions/EvalScoreModelGrader'
         type: array
     required:
     - id
@@ -2560,7 +2550,6 @@ definitions:
     - name
     - created_at
     - metadata
-    - share_with_openai
     title: Eval
     type: object
   EvalApiError:
@@ -2577,56 +2566,21 @@ definitions:
     - message
     title: EvalApiError
     type: object
-  EvalCompletionsRunDataSource:
-    description: 'A CompletionsRunDataSource object describing a model sampling configuration.'
-    properties:
-      max_completion_tokens:
-        description: The maximum number of tokens in the generated output.
-        type: integer
-      model:
-        description: The name of the model to use for generating completions (e.g.
-          "gpt-3.5-turbo").
-        type: string
-      seed:
-        description: A seed value to initialize the randomness, during sampling.
-        type: integer
-      temperature:
-        description: A higher temperature increases randomness in the outputs.
-        type: number
-      template_messages:
-        description: A list of chat messages forming the prompt or context.
-        items:
-          $ref: '#/definitions/EvalItem'
-        type: array
-      top_p:
-        description: An alternative to temperature for nucleus sampling; 1.0 includes
-          all tokens.
-        type: number
-      type:
-        default: completions
-        description: The type of run data source. Always `completions`.
-        enum:
-        - completions
-        type: string
-    required:
-    - type
-    - template_messages
-    - model
-    - temperature
-    - max_completion_tokens
-    - top_p
-    - seed
-    title: CompletionsRunDataSource
-    type: object
   EvalCustomDataSourceConfig:
-    description: 'A CustomDataSourceConfig which specifies the schema of your `item` and optionally `sample` namespaces.
+    description: 'A CustomDataSourceConfig which specifies the schema of your `item`
+      and optionally `sample` namespaces.
       The response schema defines the shape of the data that will be:
       - Used to define your testing criteria and
-      - What data is required when creating a run '
+      - What data is required when creating a run'
     properties:
       schema:
         additionalProperties: true
-        description: 'The json schema for the run data source items. Learn how to build JSON schemas [here](https://json-schema.org/).'
+        description: 'The json schema for the run data source items.
+          Learn how to build JSON schemas [here](https://json-schema.org/).'
+        example: "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"item\": {\n\
+          \      \"type\": \"object\",\n      \"properties\": {\n        \"label\"\
+          : {\"type\": \"string\"},\n      },\n      \"required\": [\"label\"]\n \
+          \   }\n  },\n  \"required\": [\"item\"]\n}\n"
         type: object
       type:
         default: custom
@@ -2657,74 +2611,54 @@ definitions:
     title: FileRunDataSource
     type: object
   EvalItem:
-    description: An item can either be an input message or an output message.
-    discriminator: role
-    allOf:
-    - properties:
-        content:
+    description: 'A message input to the model with a role indicating instruction
+      following
+      hierarchy. Instructions given with the `developer` or `system` role take
+      precedence over instructions given with the `user` role. Messages with the
+      `assistant` role are presumed to have been generated by the model in previous
+      interactions.'
+    properties:
+      content:
+        description: 'Text inputs to the model - can contain template strings.'
+        allOf:
+        - description: 'A text input to the model.'
+          title: Text input
+          type: string
+        - $ref: /api/responsesapi/openapi/public/components/schemas/InputTextContent.json
+        - description: 'A text output from the model.'
           properties:
             text:
-              description: The text content.
+              description: 'The text output from the model.'
               type: string
             type:
-              description: The type of content, which is always `input_text`.
-              enum:
-              - input_text
-              type: string
-          required:
-          - type
-          - text
-          type: object
-        role:
-          description: The role of the message. One of `user`, `system`, or `developer`.
-          enum:
-          - user
-          - system
-          - developer
-          type: string
-        type:
-          description: The type of item, which is always `message`.
-          enum:
-          - message
-          type: string
-      required:
-      - type
-      - role
-      - content
-      title: input_message
-      type: object
-    - properties:
-        content:
-          properties:
-            text:
-              description: The text content.
-              type: string
-            type:
-              description: The type of content, which is always `output_text`.
+              description: 'The type of the output text. Always `output_text`.'
               enum:
               - output_text
               type: string
           required:
           - type
           - text
+          title: Output text
           type: object
-        role:
-          description: The role of the message. Must be `assistant` for output.
-          enum:
-          - assistant
-          type: string
-        type:
-          description: The type of item, which is always `message`.
-          enum:
-          - message
-          type: string
-      required:
-      - type
-      - role
-      - content
-      title: output_message
-      type: object
-    title: Item
+      role:
+        description: 'The role of the message input. One of `user`, `assistant`, `system`,
+          or `developer`.'
+        enum:
+        - user
+        - assistant
+        - system
+        - developer
+        type: string
+      type:
+        description: 'The type of the message input. Always `message`.'
+        enum:
+        - message
+        type: string
+    required:
+    - role
+    - content
+    title: Eval message object
+    type: object
   EvalJsonlFileContentSource:
     properties:
       content:
@@ -2769,7 +2703,8 @@ definitions:
     title: EvalJsonlFileIdSource
     type: object
   EvalLabelModelGrader:
-    description: 'A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.'
+    description: 'A LabelModelGrader object which uses a model to assign labels to
+      each item in the evaluation.'
     properties:
       input:
         items:
@@ -3072,7 +3007,8 @@ definitions:
                   description: The content of the message.
                   type: string
                 role:
-                  description: The role of the message (e.g. "system", "assistant", "user").
+                  description: The role of the message (e.g. "system", "assistant",
+                    "user").
                   type: string
               type: object
             type: array
@@ -3143,7 +3079,8 @@ definitions:
           $ref: '#/definitions/EvalRunOutputItem'
         type: array
       first_id:
-        description: The identifier of the first eval run output item in the data array.
+        description: The identifier of the first eval run output item in the data
+          array.
         type: string
       has_more:
         description: Indicates whether there are more eval run output items available.
@@ -3165,19 +3102,59 @@ definitions:
     - has_more
     title: EvalRunOutputItemList
     type: object
+  EvalScoreModelGrader:
+    description: 'A ScoreModelGrader object that uses a model to assign a score to
+      the input.'
+    properties:
+      input:
+        description: The input text. This may include template strings.
+        items:
+          $ref: '#/definitions/EvalItem'
+        type: array
+      model:
+        description: The model to use for the evaluation.
+        type: string
+      name:
+        description: The name of the grader.
+        type: string
+      pass_threshold:
+        description: The threshold for the score.
+        type: number
+      range:
+        description: The range of the score. Defaults to `[0, 1]`.
+        items:
+          type: number
+        type: array
+      sampling_params:
+        description: The sampling parameters for the model.
+        type: object
+      type:
+        description: The object type, which is always `score_model`.
+        enum:
+        - score_model
+        type: string
+    required:
+    - type
+    - name
+    - input
+    - model
+    title: ScoreModelGrader
+    type: object
   EvalStoredCompletionsDataSourceConfig:
     description: 'A StoredCompletionsDataSourceConfig which specifies the metadata
       property of your stored completions query.
       This is usually metadata like `usecase=chatbot` or `prompt-version=v2`, etc.
       The schema returned by this data source config is used to defined what variables
       are available in your evals.
-      `item` and `sample` are both defined when using this data source config.'
+      `item` and `sample` are both defined when using this data source config.
+      '
     properties:
       metadata:
         $ref: '#/definitions/Metadata'
       schema:
         additionalProperties: true
-        description: 'The json schema for the run data source items. Learn how to build JSON schemas [here](https://json-schema.org/).'
+        description: 'The json schema for the run data source items.
+          Learn how to build JSON schemas [here](https://json-schema.org/).'
         type: object
       type:
         default: stored_completions
@@ -3191,13 +3168,16 @@ definitions:
     title: StoredCompletionsDataSourceConfig
     type: object
   EvalStoredCompletionsSource:
-    description: 'A StoredCompletionsRunDataSource configuration describing a set of filters'
+    description: 'A StoredCompletionsRunDataSource configuration describing a set
+      of filters'
     properties:
       created_after:
-        description: An optional Unix timestamp to filter items created after this time.
+        description: An optional Unix timestamp to filter items created after this
+          time.
         type: integer
       created_before:
-        description: An optional Unix timestamp to filter items created before this time.
+        description: An optional Unix timestamp to filter items created before this
+          time.
         type: integer
       limit:
         description: An optional maximum number of items to return.
@@ -3215,15 +3195,11 @@ definitions:
         type: string
     required:
     - type
-    - metadata
-    - model
-    - created_after
-    - created_before
-    - limit
     title: StoredCompletionsRunDataSource
     type: object
   EvalStringCheckGrader:
-    description: 'A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.'
+    description: 'A StringCheckGrader object that performs a string comparison between
+      input and reference using a specified operation.'
     properties:
       input:
         description: The input text. This may include template strings.
@@ -3232,7 +3208,8 @@ definitions:
         description: The name of the grader.
         type: string
       operation:
-        description: The string check operation to perform. One of `eq`, `ne`, `like`, or `ilike`.
+        description: The string check operation to perform. One of `eq`, `ne`, `like`,
+          or `ilike`.
         enum:
         - eq
         - ne
@@ -3256,12 +3233,12 @@ definitions:
     title: StringCheckGrader
     type: object
   EvalTextSimilarityGrader:
-    description: 'A TextSimilarityGrader object which grades text based on similarity metrics.'
+    description: 'A TextSimilarityGrader object which grades text based on similarity
+      metrics.'
     properties:
       evaluation_metric:
-        description: The evaluation metric to use. One of `cosine`, `fuzzy_match`,
-          `bleu`, `gleu`, `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`,
-          or `rouge_l`.
+        description: The evaluation metric to use. One of `fuzzy_match`, `bleu`, `gleu`,
+          `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`, or `rouge_l`.
         enum:
         - fuzzy_match
         - bleu
@@ -3273,7 +3250,6 @@ definitions:
         - rouge_4
         - rouge_5
         - rouge_l
-        - cosine
         type: string
       input:
         description: The text being graded.
@@ -3282,7 +3258,8 @@ definitions:
         description: The name of the grader.
         type: string
       pass_threshold:
-        description: A float score where a value greater than or equal indicates a passing grade.
+        description: A float score where a value greater than or equal indicates a
+          passing grade.
         type: number
       reference:
         description: The text being graded against.
@@ -4913,91 +4890,6 @@ definitions:
         type: string
       modelName:
         type: string
-  reateEvalCompletionsRunDataSource:
-    description: A CompletionsRunDataSource object describing a model sampling configuration.
-    properties:
-      input_messages:
-        oneOf:
-          - properties:
-              template:
-                description: A list of chat messages forming the prompt or context. May include variable references to the "item" namespace, ie {{item.name}}.
-                items:
-                  oneOf:
-                    - properties:
-                        content:
-                          description: The content of the message.
-                          type: string
-                        role:
-                          description: The role of the message (e.g. "system", "assistant", "user").
-                          type: string
-                      required:
-                        - role
-                        - content
-                      title: ChatMessage
-                      type: object
-                    - $ref: '#/definitions/EvalItem'
-                type: array
-              type:
-                description: The type of input messages. Always `template`.
-                enum:
-                  - template
-                type: string
-            required:
-              - type
-              - template
-            type: object
-          - properties:
-              item_reference:
-                description: A reference to a variable in the "item" namespace. Ie, "item.name"
-                type: string
-              type:
-                description: The type of input messages. Always `item_reference`.
-                enum:
-                  - item_reference
-                type: string
-            required:
-              - type
-              - item_reference
-            type: object
-      model:
-        description: The name of the model to use for generating completions (e.g. "o3-mini").
-        type: string
-      sampling_params:
-        properties:
-          max_completion_tokens:
-            description: The maximum number of tokens in the generated output.
-            type: integer
-          seed:
-            default: 42
-            description: A seed value to initialize the randomness, during sampling.
-            type: integer
-          temperature:
-            default: 1.0
-            description: A higher temperature increases randomness in the outputs.
-            type: number
-          top_p:
-            default: 1.0
-            description: An alternative to temperature for nucleus sampling; 1.0 includes all tokens.
-            type: number
-        type: object
-      source:
-        oneOf:
-          - $ref: '#/definitions/EvalJsonlFileContentSource'
-          - $ref: '#/definitions/EvalJsonlFileIdSource'
-          - $ref: '#/definitions/EvalStoredCompletionsSource'
-      type:
-        default: completions
-        description: The type of run data source. Always `completions`.
-        enum:
-          - completions
-        type: string
-    required:
-      - type
-      - model
-      - source
-      - input_messages
-    title: CompletionsRunDataSource
-    type: object
 parameters:
   endpoint:
     in: path
