@@ -79,11 +79,10 @@ model BrokerProperties {
   """)
 @added(Versions.`2025-07-01-preview`)
 model BrokerPersistence {
-
   @doc("""
-  Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH 
-  Optional, default shown If customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property "aio-persistence"
-  """)
+    Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH 
+    Optional, default shown If customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property "aio-persistence"
+    """)
   dynamicSettings?: BrokerPersistenceDynamicSettings;
 
   @doc("The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template If a PVC template isn't specified Then local-path provisioner is requested with this size limit Required.")
@@ -149,7 +148,6 @@ model BrokerRetainMessagesSettings {
   dynamic?: BrokerRetainMessagesDynamic;
 }
 
-
 @doc("Dynamic settings of {name}", T)
 @added(Versions.`2025-07-01-preview`)
 model BrokerPersistencePolicyDynamicTpl<T extends {}> {
@@ -157,9 +155,12 @@ model BrokerPersistencePolicyDynamicTpl<T extends {}> {
   mode: OperationalMode;
 }
 
-model BrokerRetainMessagesDynamic is BrokerPersistencePolicyDynamicTpl<BrokerRetainMessagesCustomPolicy>;
-model BrokerSubscriberQueueDynamic is BrokerPersistencePolicyDynamicTpl<BrokerSubscriberQueueCustomPolicy>;
-model BrokerStateStoreDynamic is BrokerPersistencePolicyDynamicTpl<BrokerStateStoreCustomPolicy>;
+model BrokerRetainMessagesDynamic
+  is BrokerPersistencePolicyDynamicTpl<BrokerRetainMessagesCustomPolicy>;
+model BrokerSubscriberQueueDynamic
+  is BrokerPersistencePolicyDynamicTpl<BrokerSubscriberQueueCustomPolicy>;
+model BrokerStateStoreDynamic
+  is BrokerPersistencePolicyDynamicTpl<BrokerStateStoreCustomPolicy>;
 
 @doc("State Store Retainment Policy")
 @added(Versions.`2025-07-01-preview`)
@@ -189,7 +190,6 @@ model BrokerStateStorePolicySettings {
   @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)")
   dynamic?: BrokerStateStoreDynamic;
 }
-
 
 @doc("State Store Retainment resources properties")
 @added(Versions.`2025-07-01-preview`)
@@ -221,8 +221,7 @@ model BrokerSubscriberQueuePolicy {
 
 @doc("Custom Subscriber Queue Retainment Policy")
 @added(Versions.`2025-07-01-preview`)
-model BrokerSubscriberQueueCustomPolicy
-  extends BrokerSubscriberQueuePolicy {
+model BrokerSubscriberQueueCustomPolicy extends BrokerSubscriberQueuePolicy {
   @doc("The mode of the policy.")
   mode: Custom;
 
@@ -242,7 +241,6 @@ model BrokerSubscriberQueueCustomPolicySettings {
   @doc("List of topics under which messages would be persisted to disk for each subscriber Wildcards # and + supported")
   topics?: string[];
 }
-
 
 @doc("Broker Advanced Settings")
 model AdvancedSettings {
