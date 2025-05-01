@@ -55,7 +55,7 @@ model InstanceProperties {
 
   @doc("The reference to the AIO Secret provider class.")
   @added(Versions.`2025-07-01-preview`)
-  secretProviderClassRef?: SecretProviderClassRef;
+  defaultSecretProviderClassRef?: SecretProviderClassRef;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The features of the AIO Instance.")
