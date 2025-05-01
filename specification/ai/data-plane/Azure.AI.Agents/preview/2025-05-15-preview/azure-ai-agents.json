@@ -490,7 +490,7 @@
           "200": {
             "description": "A representation of the uploaded file.",
             "schema": {
-              "$ref": "#/definitions/OpenAIFile"
+              "$ref": "#/definitions/FileInfo"
             }
           },
           "default": {
@@ -528,7 +528,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OpenAIFile"
+              "$ref": "#/definitions/FileInfo"
             }
           },
           "default": {
@@ -2953,7 +2953,7 @@
           "x-ms-client-name": "topP"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/AgentsResponseFormatOption",
           "description": "The response format of the tool calls used by this agent.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -3258,87 +3258,6 @@
         }
       }
     },
-    "AgentsApiResponseFormat": {
-      "type": "object",
-      "description": "An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.\nIf `text` the model can return text or any value needed.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Must be one of `text` or `json_object`.",
-          "default": "text",
-          "enum": [
-            "text",
-            "json_object"
-          ],
-          "x-ms-enum": {
-            "name": "ResponseFormat",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "text",
-                "value": "text",
-                "description": "`text` format should be used for requests involving any sort of ToolCall."
-              },
-              {
-                "name": "jsonObject",
-                "value": "json_object",
-                "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
-              }
-            ]
-          }
-        }
-      }
-    },
-    "AgentsApiResponseFormatMode": {
-      "type": "string",
-      "description": "Represents the mode in which the model will handle the return format of a tool call.",
-      "enum": [
-        "auto",
-        "none"
-      ],
-      "x-ms-enum": {
-        "name": "AgentsApiResponseFormatMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "auto",
-            "value": "auto",
-            "description": "Default value. Let the model handle the return format."
-          },
-          {
-            "name": "none",
-            "value": "none",
-            "description": "Setting the value to `none`, will result in a 400 Bad request."
-          }
-        ]
-      }
-    },
-    "AgentsApiResponseFormatOption": {},
-    "AgentsApiToolChoiceOption": {},
-    "AgentsApiToolChoiceOptionMode": {
-      "type": "string",
-      "description": "Specifies how the tool choice will be used",
-      "enum": [
-        "none",
-        "auto"
-      ],
-      "x-ms-enum": {
-        "name": "AgentsApiToolChoiceOptionMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "none",
-            "value": "none",
-            "description": "The model will not call a function and instead generates a message."
-          },
-          {
-            "name": "auto",
-            "value": "auto",
-            "description": "The model can pick between generating a message or calling a function."
-          }
-        ]
-      }
-    },
     "AgentsNamedToolChoice": {
       "type": "object",
       "description": "Specifies a tool the model should use. Use to force the model to call a specific tool.",
@@ -3418,6 +3337,87 @@
             "name": "connectedAgent",
             "value": "connected_agent",
             "description": "Tool type `connected_agent`"
+          }
+        ]
+      }
+    },
+    "AgentsResponseFormat": {
+      "type": "object",
+      "description": "An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.\nIf `text` the model can return text or any value needed.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Must be one of `text` or `json_object`.",
+          "default": "text",
+          "enum": [
+            "text",
+            "json_object"
+          ],
+          "x-ms-enum": {
+            "name": "ResponseFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "text",
+                "value": "text",
+                "description": "`text` format should be used for requests involving any sort of ToolCall."
+              },
+              {
+                "name": "jsonObject",
+                "value": "json_object",
+                "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "AgentsResponseFormatMode": {
+      "type": "string",
+      "description": "Represents the mode in which the model will handle the return format of a tool call.",
+      "enum": [
+        "auto",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "AgentsResponseFormatMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Default value. Let the model handle the return format."
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "Setting the value to `none`, will result in a 400 Bad request."
+          }
+        ]
+      }
+    },
+    "AgentsResponseFormatOption": {},
+    "AgentsToolChoiceOption": {},
+    "AgentsToolChoiceOptionMode": {
+      "type": "string",
+      "description": "Specifies how the tool choice will be used",
+      "enum": [
+        "none",
+        "auto"
+      ],
+      "x-ms-enum": {
+        "name": "AgentsToolChoiceOptionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "The model will not call a function and instead generates a message."
+          },
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "The model can pick between generating a message or calling a function."
           }
         ]
       }
@@ -3926,7 +3926,7 @@
           "x-ms-client-name": "topP"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/AgentsResponseFormatOption",
           "description": "The response format of the tool calls used by this agent.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -4032,13 +4032,13 @@
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
-          "$ref": "#/definitions/AgentsApiToolChoiceOption",
+          "$ref": "#/definitions/AgentsToolChoiceOption",
           "description": "Controls whether or not and which tool is called by the model.",
           "x-nullable": true,
           "x-ms-client-name": "toolChoice"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/AgentsResponseFormatOption",
           "description": "Specifies the format that the model must output.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -4199,13 +4199,13 @@
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
-          "$ref": "#/definitions/AgentsApiToolChoiceOption",
+          "$ref": "#/definitions/AgentsToolChoiceOption",
           "description": "Controls whether or not and which tool is called by the model.",
           "x-nullable": true,
           "x-ms-client-name": "toolChoice"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/AgentsResponseFormatOption",
           "description": "Specifies the format that the model must output.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -4314,6 +4314,62 @@
         "object"
       ]
     },
+    "FileInfo": {
+      "type": "object",
+      "description": "Represents an agent that can call the model and use tools.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'file'.",
+          "enum": [
+            "file"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The identifier, which can be referenced in API endpoints."
+        },
+        "bytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the file, in bytes."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The name of the file."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp, in seconds, representing when this object was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "purpose": {
+          "$ref": "#/definitions/FilePurpose",
+          "description": "The intended purpose of a file."
+        },
+        "status": {
+          "$ref": "#/definitions/FileState",
+          "description": "The state of the file. This field is available in Azure OpenAI only."
+        },
+        "status_details": {
+          "type": "string",
+          "description": "The error message with details in case processing of this file failed. This field is available in Azure OpenAI only.",
+          "x-ms-client-name": "statusDetails"
+        }
+      },
+      "required": [
+        "object",
+        "id",
+        "bytes",
+        "filename",
+        "created_at",
+        "purpose"
+      ]
+    },
     "FileListResponse": {
       "type": "object",
       "description": "The response data from a file list operation.",
@@ -4332,7 +4388,7 @@
           "type": "array",
           "description": "The files returned for the request.",
           "items": {
-            "$ref": "#/definitions/OpenAIFile"
+            "$ref": "#/definitions/FileInfo"
           }
         }
       },
@@ -5603,62 +5659,6 @@
         }
       ],
       "x-ms-discriminator-value": "fabric_dataagent"
-    },
-    "OpenAIFile": {
-      "type": "object",
-      "description": "Represents an agent that can call the model and use tools.",
-      "properties": {
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always 'file'.",
-          "enum": [
-            "file"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
-        },
-        "bytes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The size of the file, in bytes."
-        },
-        "filename": {
-          "type": "string",
-          "description": "The name of the file."
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The Unix timestamp, in seconds, representing when this object was created.",
-          "x-ms-client-name": "createdAt"
-        },
-        "purpose": {
-          "$ref": "#/definitions/FilePurpose",
-          "description": "The intended purpose of a file."
-        },
-        "status": {
-          "$ref": "#/definitions/FileState",
-          "description": "The state of the file. This field is available in Azure OpenAI only."
-        },
-        "status_details": {
-          "type": "string",
-          "description": "The error message with details in case processing of this file failed. This field is available in Azure OpenAI only.",
-          "x-ms-client-name": "statusDetails"
-        }
-      },
-      "required": [
-        "object",
-        "id",
-        "bytes",
-        "filename",
-        "created_at",
-        "purpose"
-      ]
     },
     "OpenApiAnonymousAuthDetails": {
       "type": "object",
@@ -7626,13 +7626,13 @@
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
-          "$ref": "#/definitions/AgentsApiToolChoiceOption",
+          "$ref": "#/definitions/AgentsToolChoiceOption",
           "description": "Controls whether or not and which tool is called by the model.",
           "x-nullable": true,
           "x-ms-client-name": "toolChoice"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/AgentsResponseFormatOption",
           "description": "The response format of the tool calls used in this run.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -7905,7 +7905,7 @@
           "x-ms-client-name": "topP"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/AgentsResponseFormatOption",
           "description": "The response format of the tool calls used by this agent.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"

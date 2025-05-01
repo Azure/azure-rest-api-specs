@@ -75,7 +75,7 @@ namespace Azure.AI.Agents {
           filename?: HttpPart<string>;
         };
       },
-      OpenAIFile
+      FileInfo
     >;
 
     /**
@@ -118,7 +118,7 @@ namespace Azure.AI.Agents {
         @encodedName("application/json", "file_id")
         fileId: string;
       },
-      OpenAIFile
+      FileInfo
     >;
 
     /**

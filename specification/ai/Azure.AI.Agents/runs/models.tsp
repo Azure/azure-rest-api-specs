@@ -128,12 +128,12 @@ model ThreadRun {
   /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_choice")
-  toolChoice: AgentsApiToolChoiceOption | null;
+  toolChoice: AgentsToolChoiceOption | null;
 
   /** The response format of the tool calls used in this run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat: AgentsApiResponseFormatOption | null;
+  responseFormat: AgentsResponseFormatOption | null;
 
   ...RequiredNullableMetadata;
 
@@ -270,12 +270,12 @@ model CreateRunOptions {
   /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_choice")
-  toolChoice?: AgentsApiToolChoiceOption | null;
+  toolChoice?: AgentsToolChoiceOption | null;
 
   /** Specifies the format that the model must output. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AgentsResponseFormatOption | null;
 
   /** If `true` functions will run in parallel during tool use. */
   @encodedName("application/json", "parallel_tool_calls")
@@ -433,12 +433,12 @@ model CreateAndRunThreadOptions {
   /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_choice")
-  toolChoice?: AgentsApiToolChoiceOption | null;
+  toolChoice?: AgentsToolChoiceOption | null;
 
   /** Specifies the format that the model must output. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AgentsResponseFormatOption | null;
 
   /** If `true` functions will run in parallel during tool use. */
   @encodedName("application/json", "parallel_tool_calls")

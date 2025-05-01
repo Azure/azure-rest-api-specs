@@ -103,21 +103,21 @@ alias OptionalNullableMetadata = {
  * if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
-union AgentsApiResponseFormatOption {
+union AgentsResponseFormatOption {
   string,
 
   /** The model will handle the return format. */
-  AgentsApiResponseFormatMode,
+  AgentsResponseFormatMode,
 
   /** Sets the format of the output of the model when a ToolCall is returned. */
-  AgentsApiResponseFormat,
+  AgentsResponseFormat,
 
   /** Using `json_schema` format will provide a description of what the response format is for. */
   ResponseFormatJsonSchemaType,
 }
 
 /** Represents the mode in which the model will handle the return format of a tool call. */
-union AgentsApiResponseFormatMode {
+union AgentsResponseFormatMode {
   string,
 
   /** Default value. Let the model handle the return format. */
@@ -131,7 +131,7 @@ union AgentsApiResponseFormatMode {
  * An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.
  * If `text` the model can return text or any value needed.
  */
-model AgentsApiResponseFormat {
+model AgentsResponseFormat {
   /** Must be one of `text` or `json_object`. */
   type?: ResponseFormat = ResponseFormat.text;
 }
