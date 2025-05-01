@@ -21,15 +21,15 @@ namespace Microsoft.FileShares;
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("Version 2023-01-01-preview")
   v2023_01_01_preview: "2023-01-01-preview",
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("Version 2024-01-01-preview")
   v2024_01_01_preview: "2024-01-01-preview",
 }
@@ -482,7 +482,7 @@ model FileShareSnapshotProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @visibility(Lifecycle.Read)
   @doc("The FileShareSnapshot time in UTC in string representation")
-  SnapshotTime?: string;
+  snapshotTime?: string;
 
   @visibility(Lifecycle.Read)
   @doc("The initiator of the FileShareSnapshot")
