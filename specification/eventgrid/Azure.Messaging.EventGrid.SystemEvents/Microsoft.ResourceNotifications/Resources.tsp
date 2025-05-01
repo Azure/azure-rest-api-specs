@@ -7,10 +7,6 @@ Grid. This corresponds to the Data property of an EventGridEvent.
 */
 namespace Microsoft.EventGrid.SystemEvents;
 
-/**
-Schema of the Data property of an EventGridEvent for a
-Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.
-*/
 const MicrosoftResourceNotificationsResourcesCreatedOrUpdatedExample: ResourceNotificationsResourceManagementCreatedOrUpdatedEventData = #{
   resourceInfo: #{
     tags: #{},
@@ -75,16 +71,15 @@ const MicrosoftResourceNotificationsResourcesCreatedOrUpdatedExample: ResourceNo
   },
   apiVersion: "2019-06-01",
 };
-/** Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event. */
+/**
+Schema of the Data property of an EventGridEvent for a
+Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.
+*/
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftResourceNotificationsResourcesCreatedOrUpdatedExample)
 model ResourceNotificationsResourceManagementCreatedOrUpdatedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
 
-/**
-Schema of the Data property of an EventGridEvent for a
-Microsoft.ResourceNotifications.Resources.Deleted event.
-*/
 const MicrosoftResourceNotificationsResourcesDeletedExample: ResourceNotificationsResourceManagementDeletedEventData = #{
   resourceInfo: #{
     id: "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storageAccount-name}",
@@ -95,7 +90,10 @@ const MicrosoftResourceNotificationsResourcesDeletedExample: ResourceNotificatio
     resourceEventTime: utcDateTime.fromISO("2023-07-28T20:11:36.6347858Z"),
   },
 };
-/** Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.Deleted event. */
+/**
+Schema of the Data property of an EventGridEvent for a
+Microsoft.ResourceNotifications.Resources.Deleted event.
+*/
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftResourceNotificationsResourcesDeletedExample)
 model ResourceNotificationsResourceManagementDeletedEventData
