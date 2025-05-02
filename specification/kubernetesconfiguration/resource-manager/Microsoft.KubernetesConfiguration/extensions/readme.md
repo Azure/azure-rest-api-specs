@@ -52,7 +52,7 @@ suppressions:
     reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
   - code: LroLocationHeader
     from: extensions.json
-    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header. Tracking a work item to add Location header in the upcoming API version.
   - code: PatchIdentityProperty
     from: extensions.json
     reason: Existing service contract needs to be backward compatible, service does not use/allow identity.
