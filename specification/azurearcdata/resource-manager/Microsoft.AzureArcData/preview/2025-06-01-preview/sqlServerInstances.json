@@ -1741,6 +1741,10 @@
           "type": "string",
           "description": "The name of the availability group to be used for the database replication."
         },
+        "distributedAvailabilityGroupName": {
+          "type": "string",
+          "description": "The name of the DAG to be used for the database replication. Also referred to as Link Name."
+        },
         "assessmentCategories": {
           "type": "array",
           "items": {
@@ -1756,7 +1760,8 @@
       "required": [
         "azureManagedInstanceResourceId",
         "databaseNames",
-        "availabilityGroupName"
+        "availabilityGroupName",
+        "distirbutedAvailabilityGroupName"
       ]
     },
     "SqlServerInstanceManagedInstanceLinkAssessmentResponse": {
