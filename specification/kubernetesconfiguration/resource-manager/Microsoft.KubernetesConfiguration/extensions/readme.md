@@ -60,7 +60,7 @@ suppressions:
   - code: PatchIdentityProperty
     reason: Existing service contract needs to be backward compatible.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema
   - code: PatchResponseCodes
     reason: Existing service contract needs to be backward compatible.
     where:
@@ -68,16 +68,16 @@ suppressions:
   - code: PatchBodyParametersSchema
     reason: Existing service contract needs to be backward compatible.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties.properties.autoUpgradeMinorVersion
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties.properties.releaseTrain    
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties.properties.properties.autoUpgradeMinorVersion
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties.properties.properties.releaseTrain    
   - code: AvoidAdditionalProperties
     reason: Existing service contract needs to be backward compatible.
     where:
-      - $.definitions.Extension.properties.configurationSettings
-      - $.definitions.Extension.properties.configurationProtectedSettings
-      - $.definitions.Extension.properties.customLocationSettings
-      - $.definitions.patchExtension.properties.configurationSettings
-      - $.definitions.patchExtension.properties.configurationProtectedSettings
+      - $.definitions.Extension.properties.properties.properties.configurationSettings
+      - $.definitions.Extension.properties.properties.properties.configurationProtectedSettings
+      - $.definitions.Extension.properties.properties.properties.customLocationSettings
+      - $.definitions.patchExtension.properties.properties.properties.configurationSettings
+      - $.definitions.patchExtension.properties.properties.properties.configurationProtectedSettings
 ```
 
 ---
