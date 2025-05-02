@@ -40,6 +40,11 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 ``` yaml $(tag) == 'package-2025-03'
 input-file:
   - stable/2025-03-01/extensions.json
+directive:
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"] 
+    suppress: PatchIdentityProperty
+    reason: Existing service contract needs to be backward compatible.
 suppressions:
   - code: OperationsAPIImplementation
     from: extensions.json
@@ -52,12 +57,7 @@ suppressions:
     reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
   - code: LroLocationHeader
     from: extensions.json
-    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header. Tracking a work item to add Location header in the upcoming API version.
-  - code: PatchIdentityProperty
-    from: extensions.json
-    reason: Existing service contract needs to be backward compatible.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"]    
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header. Tracking a work item to add Location header in the upcoming API version.   
   - code: AvoidAdditionalProperties
     from: extensions.json
     reason: Existing service contract needs to be backward compatible.
