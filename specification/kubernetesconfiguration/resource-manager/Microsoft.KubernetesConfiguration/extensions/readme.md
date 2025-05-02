@@ -49,9 +49,6 @@ suppressions:
   - code: OperationsAPIImplementation
     from: extensions.json
     reason: Operations API is implemented as a separate service.
-  - code: ResourceNameRestriction
-    from: extensions.json
-    reason: Breaking change. Existing service contract needs to be backward compatible.
   - code: DeleteResponseCodes
     from: extensions.json
     reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
