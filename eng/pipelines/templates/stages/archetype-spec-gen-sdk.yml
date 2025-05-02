@@ -279,9 +279,9 @@ extends:
                     -PRBody "$(GeneratedSDKInformation)"
                     -OpenAsDraft $true
 
-          - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-            - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
-              parameters:
-                ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
-                ArtifactName: $(PipelineArtifactsName)
-                RepoRoot: $(SdkRepoDirectory)
+            - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+              - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
+                parameters:
+                  ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
+                  ArtifactName: $(PipelineArtifactsName)
+                  RepoRoot: $(SdkRepoDirectory)
