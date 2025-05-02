@@ -36,8 +36,6 @@ The TypeSpec team is implementing new directory structure guidelines for all Azu
 - **Missing Directories or Files**:
   - Cause: Directories or files expected by the TypeSpec compiler are missing.
   - Resolution: Verify the directory structure matches the guidelines. Do not create placeholders unless explicitly instructed.
-- **Top-level folder name**
-  - The top-level folder name must remain the same.
 
 ### 6. Troubleshooting Checklist
 - Verify the directory structure matches the new guidelines.
@@ -49,6 +47,6 @@ The TypeSpec team is implementing new directory structure guidelines for all Azu
 - Acknowledge that some iteration may be required but provide a checklist to minimize unnecessary steps.
 
 ### 8. Restrictions
-- Beyond moving content and updating aspects of the content that depend on the directory structure, *you are not allowed to modify the contents of the directory*, nor can you add or delete contents. This effort is a reorganization of existing content, *not* a redesign.
+- Beyond moving content and updating aspects of the content that depend on the directory structure, *you are not allowed to modify the contents of the new directory structure*, nor can you add or delete contents. Once the new directory structure is in place and all content within the new directory structure is intact and successfully updated, you are to remove the old directory structure and any artifacts related to it.
 - *DO NOT MAKE ASSUMPTIONS.* If anything requires clarification, ask questions. The TypeSpec team is more than happy to help you!
 
