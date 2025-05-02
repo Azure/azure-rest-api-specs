@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -93,7 +93,7 @@
             "$ref": "./examples/TuningIndex_GetFilteredRecommendations.json"
           }
         },
-        "description": "Retrieve the list of available tuning index recommendations.",
+        "description": "Retrieve the list of available tuning recommendations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -118,7 +118,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IndexRecommendationListResult"
+              "$ref": "#/definitions/ObjectRecommendationListResult"
             }
           },
           "default": {
@@ -516,7 +516,7 @@
       },
       "description": "Stores property that features impact on some metric if this recommended action is applied."
     },
-    "IndexRecommendationDetails": {
+    "ObjectRecommendationDetails": {
       "type": "object",
       "properties": {
         "databaseName": {
@@ -557,7 +557,7 @@
       "description": "Recommendation details for the recommended action.",
       "readOnly": true
     },
-    "IndexRecommendationResourceProperties": {
+    "ObjectRecommendationResourceProperties": {
       "type": "object",
       "properties": {
         "initialRecommendedTime": {
@@ -592,7 +592,8 @@
           "enum": [
             "CreateIndex",
             "DropIndex",
-            "ReIndex"
+            "ReIndex",
+            "AnalyzeTable"
           ],
           "x-ms-enum": {
             "name": "RecommendationTypeEnum",
@@ -647,20 +648,20 @@
           "description": "The estimated impact of this recommended action"
         },
         "details": {
-          "$ref": "#/definitions/IndexRecommendationDetails",
+          "$ref": "#/definitions/ObjectRecommendationDetails",
           "description": "Stores recommendation details for the recommended action."
         }
       },
-      "description": "Index recommendation properties.",
+      "description": "Object recommendation properties.",
       "readOnly": true
     },
-    "IndexRecommendationResource": {
+    "ObjectRecommendationResource": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/IndexRecommendationResourceProperties",
+          "$ref": "#/definitions/ObjectRecommendationResourceProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of IndexRecommendationResource."
+          "description": "Properties of ObjectRecommendationResource."
         }
       },
       "allOf": [
@@ -668,18 +669,18 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Index recommendation properties."
+      "description": "Object recommendation properties."
     },
-    "IndexRecommendationListResult": {
+    "ObjectRecommendationListResult": {
       "description": "A list of available index recommendations.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "A list of available index recommendations.",
+          "description": "A list of available recommendations.",
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IndexRecommendationResource"
+            "$ref": "#/definitions/ObjectRecommendationResource"
           },
           "x-ms-identifiers": [
             "name"
@@ -858,7 +859,8 @@
       "type": "string",
       "enum": [
         "index",
-        "configuration"
+        "configuration",
+        "table"
       ],
       "description": "The name of the tuning option.",
       "x-ms-enum": {
@@ -874,7 +876,8 @@
       "type": "string",
       "enum": [
         "CreateIndex",
-        "DropIndex"
+        "DropIndex",
+        "AnalyzeTable"
       ],
       "description": "Recommendations list filter. Retrieves recommendations based on type.",
       "x-ms-enum": {
