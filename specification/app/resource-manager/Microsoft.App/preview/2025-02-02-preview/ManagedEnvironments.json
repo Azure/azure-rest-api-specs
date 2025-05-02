@@ -1610,6 +1610,34 @@
         }
       }
     },
+    "DiskEncryptionConfiguration": {
+      "description": "Configuration properties for disk encryption",
+      "type": "object",
+      "properties": {
+        "keyVaultConfiguration": {
+          "description": "The Key Vault that contains your key to use for disk encryption. The Key Vault must be in the same region as the Managed Environment.",
+          "type": "object",
+          "properties": {
+            "keyUrl": {
+              "description": "Key URL pointing to a key in KeyVault. Version segment of the Url is required.",
+              "type": "string",
+              "format": "uri"
+            },
+            "auth": {
+              "description": "Configuration properties for the authentication to the Key Vault",
+              "type": "object",
+              "properties": {
+                "identity": {
+                  "description": "Resource ID of a user-assigned managed identity to authenticate to the Key Vault. The identity must be assigned to the managed environment, in the same tenant as the Key Vault, and it must have the following key permissions on the Key Vault: wrapkey, unwrapkey, get.",
+                  "type": "string",
+                  "format": "arm-id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "ManagedEnvironment": {
       "description": "An environment for hosting container apps",
       "type": "object",
@@ -1797,6 +1825,10 @@
                 "name": "PublicNetworkAccess",
                 "modelAsString": true
               }
+            },
+            "diskEncryptionConfiguration": {
+              "$ref": "#/definitions/DiskEncryptionConfiguration",
+              "description": "Disk encryption configuration for the Managed Environment."
             }
           },
           "x-ms-client-flatten": true
