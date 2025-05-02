@@ -3217,6 +3217,10 @@
     },
     "CreateEvalItem": {
       "description": "A chat message that makes up the prompt or context. May include variable references to the \"item\" namespace, ie {{item.name}}.",
+      "required": [
+        "type"
+      ],
+      "x-ms-discriminator-value": "type",
       "allOf": [
         {
           "properties": {
@@ -3247,6 +3251,10 @@
       "description": "A JsonlRunDataSource object with that specifies a JSONL file that matches the eval",
       "properties": {
         "source": {
+          "required": [
+            "type"
+          ],
+          "x-ms-discriminator-value": "type",
           "allOf": [
             {
               "$ref": "#/definitions/EvalJsonlFileContentSource"
@@ -3351,6 +3359,10 @@
       "properties": {
         "data_source_config": {
           "description": "The configuration for the data source used for the evaluation runs.",
+          "required": [
+            "type"
+          ],
+          "x-ms-discriminator-value": "type",
           "allOf": [
             {
               "$ref": "#/definitions/CreateEvalCustomDataSourceConfig"
@@ -3371,6 +3383,10 @@
         "testing_criteria": {
           "description": "A list of graders for all eval runs in this group.",
           "items": {
+            "required": [
+              "type"
+            ],
+            "x-ms-discriminator-value": "type",
             "allOf": [
               {
                 "$ref": "#/definitions/CreateEvalLabelModelGrader"
@@ -3400,6 +3416,10 @@
       "properties": {
         "data_source": {
           "description": "Details about the run's data source.",
+          "required": [
+            "type"
+          ],
+          "x-ms-discriminator-value": "type",
           "allOf": [
             {
               "$ref": "#/definitions/CreateEvalJsonlRunDataSource"
@@ -3786,6 +3806,10 @@
         },
         "data_source_config": {
           "description": "Configuration of data sources used in runs of the evaluation.",
+          "required": [
+            "type"
+          ],
+          "x-ms-discriminator-value": "type",
           "allOf": [
             {
               "$ref": "#/definitions/EvalCustomDataSourceConfig"
@@ -3820,6 +3844,10 @@
           "default": "eval",
           "description": "A list of testing criteria.",
           "items": {
+            "required": [
+              "type"
+            ],
+            "x-ms-discriminator-value": "type",
             "allOf": [
               {
                 "$ref": "#/definitions/EvalLabelModelGrader"
@@ -3922,6 +3950,10 @@
       "properties": {
         "content": {
           "description": "Text inputs to the model - can contain template strings.",
+          "required": [
+            "type"
+          ],
+          "x-ms-discriminator-value": "type",
           "allOf": [
             {
               "description": "A text input to the model.",
@@ -4140,6 +4172,10 @@
         },
         "data_source": {
           "description": "Information about the run's data source.",
+          "required": [
+            "type"
+          ],
+          "x-ms-discriminator-value": "type",
           "allOf": [
             {
               "$ref": "#/definitions/CreateEvalJsonlRunDataSource"
