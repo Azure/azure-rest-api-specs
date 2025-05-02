@@ -2,7 +2,7 @@
 
 import { existsSync, statSync } from "node:fs";
 import { ConsoleLogger } from "../src/logger.js";
-import { getSpecModel } from "../src/spec-model.js";
+import { SpecModel2 } from "../src/spec-model.js";
 
 const USAGE =
   "Usage: npx spec-model path/to/spec [--debug]\n" +
@@ -33,8 +33,8 @@ if (!existsSync(specPath) || !statSync(specPath).isDirectory()) {
   process.exit(1);
 }
 
-const specModel = await getSpecModel(specPath, {
+const specModel = new SpecModel2(specPath, {
   logger: new ConsoleLogger(debug),
 });
 
-console.log(JSON.stringify(specModel, null, 2));
+console.log(JSON.stringify(await specModel.toJSONAsync(), null, 2));

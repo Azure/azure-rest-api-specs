@@ -62,6 +62,23 @@ export class SpecModel2 {
   }
 
   /**
+   * @returns {Promise<Object>}
+   */
+  async toJSONAsync() {
+    const readmes = await mapAsync(
+      [...(await this.getReadmes())].sort((a, b) =>
+        a.path.localeCompare(b.path),
+      ),
+      async (r) => await r.toJSONAsync(),
+    );
+
+    return {
+      folder: this.#folder,
+      readmes,
+    };
+  }
+
+  /**
    * @returns {string}
    */
   toString() {
@@ -206,6 +223,22 @@ export class Readme2 {
   }
 
   /**
+   * @returns {Promise<Object>}
+   */
+  async toJSONAsync() {
+    const tags = await mapAsync(
+      [...(await this.getTags())].sort((a, b) => a.name.localeCompare(b.name)),
+      async (t) => await t.toJSONAsync(),
+    );
+
+    return {
+      path: this.#path,
+      globalConfig: await this.getGlobalConfig(),
+      tags,
+    };
+  }
+
+  /**
    * @returns {string}
    */
   toString() {
@@ -247,6 +280,19 @@ export class Tag2 {
    */
   get name() {
     return this.#name;
+  }
+
+  /**
+   * @returns {Promise<Object>}
+   */
+  async toJSONAsync() {
+    return {
+      name: this.#name,
+      inputFiles: await mapAsync(
+        [...this.#inputFiles].sort(),
+        async (s) => await s.toJSONAsync(),
+      ),
+    };
   }
 
   toString() {
@@ -301,6 +347,16 @@ export class Swagger2 {
    */
   get path() {
     return this.#path;
+  }
+
+  /**
+   * @returns {Promise<Object>}
+   */
+  async toJSONAsync() {
+    return {
+      path: this.#path,
+      refs: null,
+    };
   }
 
   toString() {
