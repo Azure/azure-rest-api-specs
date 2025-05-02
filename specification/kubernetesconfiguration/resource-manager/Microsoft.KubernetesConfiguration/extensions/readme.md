@@ -60,7 +60,7 @@ suppressions:
   - code: PatchIdentityProperty
     reason: Existing service contract needs to be backward compatible.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7]
   - code: PatchResponseCodes
     reason: Existing service contract needs to be backward compatible.
     where:
@@ -68,8 +68,8 @@ suppressions:
   - code: PatchBodyParametersSchema
     reason: Existing service contract needs to be backward compatible.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties.properties.properties.autoUpgradeMinorVersion
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties.properties.properties.releaseTrain    
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema
   - code: AvoidAdditionalProperties
     reason: Existing service contract needs to be backward compatible.
     where:
