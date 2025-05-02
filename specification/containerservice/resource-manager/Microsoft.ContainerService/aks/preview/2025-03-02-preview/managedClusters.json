@@ -6826,6 +6826,10 @@
           "$ref": "#/definitions/ManagedClusterBootstrapProfile",
           "description": "Profile of the cluster bootstrap configuration."
         },
+        "schedulerProfile": {
+          "$ref": "#/definitions/SchedulerProfile",
+          "description": "Profile of the pod scheduler configuration."
+        },
         "status": {
           "$ref": "#/definitions/ManagedClusterStatus",
           "description": "Contains read-only information about the Managed Cluster."
@@ -11103,6 +11107,50 @@
         }
       },
       "type": "object"
+    },
+    "SchedulerInstanceProfile": {
+      "description": "The scheduler profile for a single scheduler instance.",
+      "type": "object",
+      "properties": {
+        "schedulerConfigMode": {
+          "type": "string",
+          "description": "The config customization mode for this scheduler instance.",
+          "enum": [
+            "None",
+            "ManagedByCRD"
+          ],
+          "x-ms-enum": {
+            "name": "SchedulerConfigMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No config customization. Use default configuration."
+              },
+              {
+                "value": "ManagedByCRD",
+                "description": "Enable config customization. Customer can specify scheduler configuration via a CRD. See aka.ms/aks/scheduler-crd for details."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SchedulerProfile": {
+      "description": "The pod scheduler profile for the cluster.",
+      "type": "object",
+      "properties": {
+        "schedulerInstanceProfiles": {
+          "description": "Mapping of each scheduler instance to its profile.",
+          "type": "object",
+          "properties": {
+            "upstream": {
+              "$ref": "#/definitions/SchedulerInstanceProfile",
+              "description": "The scheduler profile for the upstream scheduler instance."
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
