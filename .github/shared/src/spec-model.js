@@ -73,8 +73,8 @@ export class Readme2 {
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
-  /** @type {Object | undefined} */
-  #globalConfig;
+  /** @type {{globalConfig: Object, tags: Set<Tag2>} | undefined} */
+  #data;
 
   /** @type {string} absolute path */
   #path;
@@ -89,8 +89,8 @@ export class Readme2 {
     this.#logger = options?.logger;
   }
 
-  async getGlobalConfig() {
-    if (!this.#globalConfig) {
+  async #getData() {
+    if (!this.#data) {
       const content = await readFile(this.#path, {
         encoding: "utf8",
       });
@@ -117,10 +117,87 @@ export class Readme2 {
         {},
       );
 
-      this.#globalConfig = globalConfig;
+      /** @type {Set<Tag2>} */
+      const tags = new Set();
+      for (const block of yamlBlocks) {
+        const tagName =
+          block.lang?.match(/yaml.*\$\(tag\) ?== ?'([^']*)'/)?.[1] || "default";
+
+        if (tagName === "default" || tagName === "all-api-versions") {
+          // Skip yaml blocks where this is no tag or tag is all-api-versions
+          continue;
+        }
+
+        const obj = /** @type {any} */ (
+          yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA })
+        );
+
+        if (!obj) {
+          this.#logger?.debug(
+            `No yaml object found for tag ${tagName} in ${this.#path}`,
+          );
+          continue;
+        }
+
+        if (!obj["input-file"]) {
+          // The yaml block does not contain an input-file key
+          continue;
+        }
+
+        // // This heuristic assumes that a previous definition of the tag with no
+        // // swaggers means that the previous definition did not have an input-file
+        // // key. It's possible that the previous defintion had an `input-file: []`
+        // // or something like it.
+        // if (
+        //   tags[tagName]?.inputFiles &&
+        //   Object.entries(tags[tagName]?.inputFiles).length > 0
+        // ) {
+        //   // The tag already exists and has a swagger file. This is an error as
+        //   // there should only be one definition of input-files per tag.
+        //   const message = `Multiple input-file definitions for tag ${tagName} in ${readmePath}`;
+        //   logger?.error(message);
+        //   throw new Error(message);
+        // }
+
+        /** @type Tag2 */
+        const tag = new Tag2(tagName);
+
+        tags.add(tag);
+
+        // It's possible for input-file to be a string or an array
+        // const inputFiles = Array.isArray(obj["input-file"])
+        //   ? obj["input-file"]
+        //   : [obj["input-file"]];
+        // for (const swaggerPath of inputFiles) {
+        //   const swaggerPathNormalized = normalizeSwaggerPath(swaggerPath);
+        //   const swagger = await getSwagger(
+        //     swaggerPathNormalized,
+        //     repoRoot,
+        //     folderRelative,
+        //     dirname(readmePath),
+        //     logger,
+        //   );
+        //   tag.inputFiles[swaggerPathNormalized] = swagger;
+        // }
+
+        // tags[tagName] = tag;
+      }
+
+      this.#data = { globalConfig, tags };
     }
 
-    return this.#globalConfig;
+    return this.#data;
+  }
+
+  /**
+   * @returns {Promise<Object>}
+   */
+  async getGlobalConfig() {
+    return (await this.#getData()).globalConfig;
+  }
+
+  async getTags() {
+    return (await this.#getData()).tags;
   }
 
   /**
@@ -135,6 +212,38 @@ export class Readme2 {
    */
   toString() {
     return `Readme2(${this.#path}, {logger: ${this.#logger}})`;
+  }
+}
+
+export class Tag2 {
+  /** @type {import('./logger.js').ILogger | undefined} */
+  #logger;
+
+  /** @type {string} */
+  #name;
+
+  /**
+   * @param {string} name
+   * @param {Object} [options]
+   * @param {import('./logger.js').ILogger} [options.logger]
+   */
+  constructor(name, options) {
+    this.#name = name;
+    this.#logger = options?.logger;
+  }
+
+  /**
+   * @returns {string}
+   */
+  get name() {
+    return this.#name;
+  }
+
+  /**
+   * @returns {string}
+   */
+  toString() {
+    return `Tag2(${this.#name}, {logger: ${this.#logger}})`;
   }
 }
 

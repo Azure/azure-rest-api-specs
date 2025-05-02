@@ -38,6 +38,14 @@ describe("SpecModel2", () => {
       "openapi-subtype": "rpaas",
       tag: "package-2021-11-01",
     });
+
+    const tags = [...(await readme.getTags())].sort((a, b) =>
+      a.name.localeCompare(b.name),
+    );
+    expect(tags.length).toBe(2);
+
+    expect(tags[0].name).toBe("package-2021-10-01-preview");
+    expect(tags[1].name).toBe("package-2021-11-01");
   });
 });
 
