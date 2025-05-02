@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+  OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
