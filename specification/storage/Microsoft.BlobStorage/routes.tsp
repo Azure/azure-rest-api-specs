@@ -50,7 +50,6 @@ namespace Storage.Blob {
 
       /** The storage service properties to set. */
       @body
-      @Xml.name("StorageServiceProperties")
       storageServiceProperties: StorageServiceProperties;
     },
     {
@@ -78,7 +77,6 @@ namespace Storage.Blob {
 
       /** Storage service statistics */
       @body
-      @Xml.name("StorageServiceStats")
       storageServiceStats: StorageServiceStats;
     }
   >;
@@ -110,7 +108,6 @@ namespace Storage.Blob {
     {
       /** Key information provided in the request */
       @body
-      @Xml.name("KeyInfo")
       keyInfo: KeyInfo;
 
       ...TimeoutParameter;
@@ -118,7 +115,6 @@ namespace Storage.Blob {
     {
       /** The user delegation key */
       @body
-      @Xml.name("UserDelegationKey")
       userDelegationKey: UserDelegationKey;
 
       ...DateResponseHeader;
@@ -187,7 +183,6 @@ namespace Storage.Blob {
 
       /** The filter blobs enumeration results */
       @body
-      @Xml.name("EnumerationResults")
       enumerationResults: FilterBlobSegment;
     }
   >;
@@ -439,7 +434,6 @@ namespace Storage.Blob {
 
         /** The container filter blob enumeration results */
         @body
-        @Xml.name("EnumerationResults")
         enumerationResults: FilterBlobSegment;
       }
     >;
@@ -577,7 +571,6 @@ namespace Storage.Blob {
 
         /** The list of blobs in the container */
         @body
-        @Xml.name("EnumerationResults")
         enumerationResults: ListBlobsFlatSegmentResponse;
       }
     >;
@@ -606,7 +599,6 @@ namespace Storage.Blob {
 
         /** The list of blobs in the container */
         @body
-        @Xml.name("EnumerationResults")
         enumerationResults: ListBlobsHierarchySegmentResponse;
       }
     >;
@@ -1341,7 +1333,6 @@ namespace Storage.Blob {
 
           /** The blob tags. */
           @body
-          @Xml.name("Tags")
           tags: BlobTags;
         }
       >;
@@ -2135,7 +2126,6 @@ namespace Storage.Blob {
           {
             /** Block list */
             @body
-            @Xml.name("BlockList")
             blockList: BlockList;
 
             ...LastModifiedResponseHeader;
