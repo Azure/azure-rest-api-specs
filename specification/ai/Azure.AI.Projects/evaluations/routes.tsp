@@ -34,7 +34,7 @@ interface Evaluations {
   @doc("Creates an evaluation run.")
   @route("runs:run")
   @post
-  createRun is Azure.Core.Foundations.Operation<
+  create is Azure.Core.Foundations.Operation<
     {
       @doc("Evaluation to be run")
       @body

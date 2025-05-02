@@ -947,7 +947,7 @@
     },
     "/evaluations/runs:run": {
       "post": {
-        "operationId": "Evaluations_CreateRun",
+        "operationId": "Evaluations_Create",
         "description": "Creates an evaluation run.",
         "parameters": [
           {
@@ -984,11 +984,11 @@
           }
         },
         "x-ms-examples": {
-          "Evaluations_CreateRun_MaximumSet": {
-            "$ref": "./examples/Evaluations_CreateRun_MaximumSet_Gen.json"
+          "Evaluations_Create_MaximumSet": {
+            "$ref": "./examples/Evaluations_Create_MaximumSet_Gen.json"
           },
-          "Evaluations_CreateRun_MinimumSet": {
-            "$ref": "./examples/Evaluations_CreateRun_MinimumSet_Gen.json"
+          "Evaluations_Create_MinimumSet": {
+            "$ref": "./examples/Evaluations_Create_MinimumSet_Gen.json"
           }
         }
       }
@@ -1426,7 +1426,7 @@
     },
     "/redTeams/runs:run": {
       "post": {
-        "operationId": "RedTeams_CreateRun",
+        "operationId": "RedTeams_Create",
         "description": "Creates a redteam run.",
         "parameters": [
           {
@@ -1463,11 +1463,11 @@
           }
         },
         "x-ms-examples": {
-          "RedTeams_CreateRun_MaximumSet": {
-            "$ref": "./examples/RedTeams_CreateRun_MaximumSet_Gen.json"
+          "RedTeams_Create_MaximumSet": {
+            "$ref": "./examples/RedTeams_Create_MaximumSet_Gen.json"
           },
-          "RedTeams_CreateRun_MinimumSet": {
-            "$ref": "./examples/RedTeams_CreateRun_MinimumSet_Gen.json"
+          "RedTeams_Create_MinimumSet": {
+            "$ref": "./examples/RedTeams_Create_MinimumSet_Gen.json"
           }
         }
       }
@@ -2878,7 +2878,8 @@
           "description": "The RedTeam items on this page",
           "items": {
             "$ref": "#/definitions/RedTeam"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -2999,7 +3000,8 @@
         "id": {
           "type": "string",
           "description": "Identifier of the red team.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "name"
         },
         "scanName": {
           "type": "string",
