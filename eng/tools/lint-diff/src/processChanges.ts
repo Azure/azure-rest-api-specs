@@ -41,9 +41,20 @@ export async function getRunList(
   const [beforeState, _] = await buildState(changedSpecFiles, beforePath);
   const [afterState, afterSwaggers] = await buildState(changedSpecFiles, afterPath);
   const affectedSwaggers = new Set<string>(afterSwaggers);
-
-  console.log(`affected swaggers: ${[...affectedSwaggers].join(", ")}`);
   const [beforeTagMap, afterTagMap] = reconcileChangedFilesAndTags(beforeState, afterState);
+
+
+  console.log("Before readme and tags:");
+  console.table([...beforeTagMap].map(([readme, tags]) => ({ readme, tags })), ['readme', 'tags']);
+  console.log("\n");
+
+  console.log("After readme and tags:");
+  console.table([...afterTagMap].map(([readme, tags]) => ({ readme, tags })), ['readme', 'tags']);
+  console.log("\n");
+
+  console.log("Affected swaggers:"); 
+  console.table([...affectedSwaggers].map((swagger) => ({ swagger })), ['swagger']);
+  console.log("\n");
 
   return [beforeTagMap, afterTagMap, affectedSwaggers];
 }
