@@ -45,7 +45,21 @@ describe("SpecModel2", () => {
     expect(tags.length).toBe(2);
 
     expect(tags[0].name).toBe("package-2021-10-01-preview");
+    const inputFiles0 = [...tags[0].inputFiles];
+    expect(inputFiles0.length).toBe(1);
+    expect(inputFiles0[0].path).toBe(
+      resolve(
+        folder,
+        "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+      ),
+    );
+
     expect(tags[1].name).toBe("package-2021-11-01");
+    const inputFiles1 = [...tags[1].inputFiles];
+    expect(inputFiles1.length).toBe(1);
+    expect(inputFiles1[0].path).toBe(
+      resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
+    );
   });
 });
 

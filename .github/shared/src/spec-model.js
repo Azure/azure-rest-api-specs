@@ -31,7 +31,7 @@ export class SpecModel2 {
   }
 
   /**
-   * @returns {string}
+   * @returns {string} absolute path
    */
   get folder() {
     return this.#folder;
@@ -159,28 +159,28 @@ export class Readme2 {
         //   throw new Error(message);
         // }
 
-        /** @type Tag2 */
-        const tag = new Tag2(tagName);
-
-        tags.add(tag);
+        /** @type {Set<Swagger2>} */
+        const inputFiles = new Set();
 
         // It's possible for input-file to be a string or an array
-        // const inputFiles = Array.isArray(obj["input-file"])
-        //   ? obj["input-file"]
-        //   : [obj["input-file"]];
-        // for (const swaggerPath of inputFiles) {
-        //   const swaggerPathNormalized = normalizeSwaggerPath(swaggerPath);
-        //   const swagger = await getSwagger(
-        //     swaggerPathNormalized,
-        //     repoRoot,
-        //     folderRelative,
-        //     dirname(readmePath),
-        //     logger,
-        //   );
-        //   tag.inputFiles[swaggerPathNormalized] = swagger;
-        // }
+        const inputFilePaths = Array.isArray(obj["input-file"])
+          ? obj["input-file"]
+          : [obj["input-file"]];
+        for (const swaggerPath of inputFilePaths) {
+          const swaggerPathNormalized = normalizeSwaggerPath(swaggerPath);
+          const swaggerPathResolved = resolve(
+            dirname(this.#path),
+            swaggerPathNormalized,
+          );
+          const swagger = new Swagger2(swaggerPathResolved, {
+            logger: this.#logger,
+          });
+          inputFiles.add(swagger);
+        }
 
-        // tags[tagName] = tag;
+        const tag = new Tag2(tagName, inputFiles, { logger: this.#logger });
+
+        tags.add(tag);
       }
 
       this.#data = { globalConfig, tags };
@@ -201,7 +201,7 @@ export class Readme2 {
   }
 
   /**
-   * @returns {string}
+   * @returns {string} absolute path
    */
   get path() {
     return this.#path;
@@ -216,6 +216,9 @@ export class Readme2 {
 }
 
 export class Tag2 {
+  /** @type {Set<Swagger2>} */
+  #inputFiles;
+
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
@@ -224,12 +227,21 @@ export class Tag2 {
 
   /**
    * @param {string} name
+   * @param {Set<Swagger2>} inputFiles
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    */
-  constructor(name, options) {
+  constructor(name, inputFiles, options) {
     this.#name = name;
+    this.#inputFiles = inputFiles;
     this.#logger = options?.logger;
+  }
+
+  /**
+   * @returns {Set<Swagger2>}
+   */
+  get inputFiles() {
+    return this.#inputFiles;
   }
 
   /**
@@ -239,11 +251,37 @@ export class Tag2 {
     return this.#name;
   }
 
-  /**
-   * @returns {string}
-   */
   toString() {
-    return `Tag2(${this.#name}, {logger: ${this.#logger}})`;
+    return `Tag2(${this.#name}, ${this.#inputFiles}, {logger: ${this.#logger}})`;
+  }
+}
+
+export class Swagger2 {
+  /** @type {import('./logger.js').ILogger | undefined} */
+  #logger;
+
+  /** @type {string} absolute path */
+  #path;
+
+  /**
+   * @param {string} path
+   * @param {Object} [options]
+   * @param {import('./logger.js').ILogger} [options.logger]
+   */
+  constructor(path, options) {
+    this.#path = resolveCheckAccess(path);
+    this.#logger = options?.logger;
+  }
+
+  /**
+   * @returns {string} absolute path
+   */
+  get path() {
+    return this.#path;
+  }
+
+  toString() {
+    return `Swagger2(${this.#path}, {logger: ${this.#logger}})`;
   }
 }
 
