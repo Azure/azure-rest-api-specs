@@ -2258,9 +2258,9 @@
           "$ref": "#/definitions/messagingOptions",
           "description": "The messaging options for this flow"
         },
-        "couplerOptions": {
-          "$ref": "#/definitions/couplerOptions",
-          "description": "The coupler configuration options for coupler flow type."
+        "apiFlowOptions": {
+          "$ref": "#/definitions/apiFlowOptions",
+          "description": "The API Flow configuration options for Azure Data Transfer API Flow type."
         },
         "customerManagedKeyVaultUri": {
           "type": "string",
@@ -3052,7 +3052,7 @@
         "Opaque",
         "MissionOpaqueXML",
         "DiskImages",
-        "Coupler"
+        "API"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -3152,9 +3152,9 @@
       },
       "description": "The option associated with messaging flows."
     },
-    "couplerOptions": {
+    "apiFlowOptions": {
       "type": "object",
-      "description": "Properties specific to Coupler Flow",
+      "description": "Properties specific to API Flow Type",
       "properties": {
         "remoteEndpoint": {
           "type": "string",
@@ -3163,7 +3163,7 @@
         },
         "cname": {
           "type": "string",
-          "description": "Unique CNAME to represent the CTS Coupler Instance"
+          "description": "Unique CNAME to represent the Azure Data Transfer API Flow instance"
         },
         "apiMode": {
           "enum": [
@@ -3171,9 +3171,9 @@
             "Endpoint"
           ],
           "type": "string",
-          "description": "Coupler Remote Calling Mode in advanced option",
+          "description": "Remote Calling Mode in the Azure Data Transfer API Flow, which describes how the API Flow will be invoked",
           "x-ms-enum": {
-            "name": "couplerApiMode",
+            "name": "ApiMode",
             "modelAsString": true
           }
         },
@@ -3184,32 +3184,25 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "CouplerIdentityTranslation",
+            "name": "IdentityTranslation",
             "modelAsString": true
           },
-          "description": "Flag for if Coupler should extract the user token"
-        },
-        "authTokenIssuerType": {
-          "enum": [
-            "None",
-            "dSTS",
-            "eSTS",
-            "torusSTS"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "couplerAuthTokenIssuerType",
-            "modelAsString": true
-          },
-          "description": "Token provider for the flow"
+          "description": "Flag for if Azure Data Transfer API Flow should extract the user token"
         },
         "senderClientId": {
           "type": "string",
-          "description": "Sender's app user assigned MI client ID"
+          "description": "Sender's app user assigned Manage Identity client ID",
+          "example": "99b05d1c-0b68-467a-a6b9-52f3c5fd4b68"
         },
         "remoteCallingModeClientId": {
           "type": "string",
-          "description": "Remote stub app registration Client ID. Only applicable when CustomerManaged mode is checked"
+          "description": "Remote stub app registration Client ID",
+          "example": "5232fefa-58c3-423d-8351-3b3bea745591"
+        },
+        "audienceOverride": {
+          "type": "string",
+          "description": "Optional field to override the audience of the remote endpoint",
+          "example": "api://98ce6d91-7df4-4daa-b4a0-c3e6a9d6b846"
         }
       }
     },
