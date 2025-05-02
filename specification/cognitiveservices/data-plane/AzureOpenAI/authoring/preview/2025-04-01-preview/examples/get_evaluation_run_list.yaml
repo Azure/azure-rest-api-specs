@@ -49,19 +49,16 @@ responses:
                 - type: message
                   role: system
                   content:
-                    type: input_text
                     text: "Answer the question's with A, B, C, or D."
                 - type: message
                   role: user
                   content:
-                    type: input_text
                     text: "Question: {{item.question}} A: {{item.A}} B: {{item.B}} C: {{item.C}} D: {{item.D}}."
             model: gpt-4o-mini
             sampling_params:
               seed: 42
               temperature: 1
               top_p: 1
-              max_completions_tokens: null
           error: null
           metadata: {}
       first_id: evalrun_68016a056f0481909b9774447bdd1aa3
