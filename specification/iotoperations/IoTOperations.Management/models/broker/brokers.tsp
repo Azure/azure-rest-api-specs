@@ -195,10 +195,25 @@ model BrokerStateStorePolicySettings {
 @added(Versions.`2025-07-01-preview`)
 model BrokerStateStorePolicyResources {
   @doc("The key to persist to disk")
-  keyType: string;
+  keyType: BrokerStateStoreKeyType;
 
   @doc("List of keys to persist to disk, required")
   keys: string[];
+}
+
+@doc("Broker State Store Key Type properties")
+@added(Versions.`2025-07-01-preview`)
+union BrokerStateStoreKeyType {
+  string,
+
+  @doc("Used for glob-style pattern matching.")
+  Pattern,
+
+  @doc("Used to do exact match, for example, when a key contains characters that might be otherwise matched as a pattern (*, ?, [0-9]).")
+  String,
+
+  @doc("Used to match a binary key.")
+  Binary,
 }
 
 @doc("Dynamic settings of the persistence.")

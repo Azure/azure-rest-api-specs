@@ -5411,6 +5411,36 @@
         "mode"
       ]
     },
+    "BrokerStateStoreKeyType": {
+      "type": "string",
+      "description": "Broker State Store Key Type properties",
+      "enum": [
+        "Pattern",
+        "String",
+        "Binary"
+      ],
+      "x-ms-enum": {
+        "name": "BrokerStateStoreKeyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pattern",
+            "value": "Pattern",
+            "description": "Pattern type indicates that the key is a regular expression pattern."
+          },
+          {
+            "name": "String",
+            "value": "String",
+            "description": "A regular string type indicates that the key is an exact match."
+          },
+          {
+            "name": "Binary",
+            "value": "Binary",
+            "description": "Binary"
+          }
+        ]
+      }
+    },
     "BrokerStateStorePolicy": {
       "type": "object",
       "description": "Broker State Store Policy",
@@ -5430,7 +5460,7 @@
       "description": "Broker State Store Policy Resources properties",
       "properties": {
         "keyType": {
-          "type": "string",
+          "$ref": "#/definitions/BrokerStateStoreKeyType",
           "description": "The key to persist to disk"
         },
         "keys": {
@@ -6821,152 +6851,6 @@
         }
       }
     },
-    "DataflowConnection": {
-      "type": "object",
-      "description": "Dataflow Connection properties",
-      "properties": {
-        "from": {
-          "$ref": "#/definitions/DataflowConnectionInput",
-          "description": "Connection input properties."
-        },
-        "to": {
-          "$ref": "#/definitions/DataflowConnectionOutput",
-          "description": "Connection output properties."
-        }
-      },
-      "required": [
-        "from",
-        "to"
-      ]
-    },
-    "DataflowConnectionInput": {
-      "type": "object",
-      "description": "Dataflow Connection Input properties",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the source operation."
-        },
-        "operator": {
-          "$ref": "#/definitions/DataflowConnectionInputOperator",
-          "description": "Operator type."
-        },
-        "moduleName": {
-          "type": "string",
-          "description": "The name of the module."
-        }
-      },
-      "required": [
-        "id",
-        "operator"
-      ]
-    },
-    "DataflowConnectionInputOperator": {
-      "type": "string",
-      "description": "Dataflow Connection Input Operator properties",
-      "enum": [
-        "Source",
-        "Map",
-        "Filter",
-        "Branch",
-        "Concatenate"
-      ],
-      "x-ms-enum": {
-        "name": "DataflowConnectionInputOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Source",
-            "value": "Source",
-            "description": "Source operator"
-          },
-          {
-            "name": "Map",
-            "value": "Map",
-            "description": "Map operator"
-          },
-          {
-            "name": "Filter",
-            "value": "Filter",
-            "description": "Filter operator"
-          },
-          {
-            "name": "Branch",
-            "value": "Branch",
-            "description": "Branch operator"
-          },
-          {
-            "name": "Concatenate",
-            "value": "Concatenate",
-            "description": "Concatenate operator"
-          }
-        ]
-      }
-    },
-    "DataflowConnectionOutput": {
-      "type": "object",
-      "description": "Dataflow Connection Output properties",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the destination operation."
-        },
-        "operator": {
-          "$ref": "#/definitions/DataflowConnectionOutputOperator",
-          "description": "Operator type."
-        },
-        "moduleName": {
-          "type": "string",
-          "description": "The name of the module."
-        }
-      },
-      "required": [
-        "id",
-        "operator"
-      ]
-    },
-    "DataflowConnectionOutputOperator": {
-      "type": "string",
-      "description": "Dataflow Connection Output Operator properties",
-      "enum": [
-        "Sink",
-        "Map",
-        "Filter",
-        "Branch",
-        "Concatenate"
-      ],
-      "x-ms-enum": {
-        "name": "DataflowConnectionOutputOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Sink",
-            "value": "Sink",
-            "description": "Sink operator"
-          },
-          {
-            "name": "Map",
-            "value": "Map",
-            "description": "Map operator"
-          },
-          {
-            "name": "Filter",
-            "value": "Filter",
-            "description": "Filter operator"
-          },
-          {
-            "name": "Branch",
-            "value": "Branch",
-            "description": "Branch operator"
-          },
-          {
-            "name": "Concatenate",
-            "value": "Concatenate",
-            "description": "Concatenate operator"
-          }
-        ]
-      }
-    },
     "DataflowDestinationOperationSettings": {
       "type": "object",
       "description": "Dataflow Destination Operation properties",
@@ -8351,10 +8235,6 @@
         "destinationSettings": {
           "$ref": "#/definitions/DataflowDestinationOperationSettings",
           "description": "Destination configuration."
-        },
-        "wasmSettings": {
-          "$ref": "#/definitions/DataflowWasmOperationSettings",
-          "description": "Wasm configuration."
         }
       },
       "required": [
@@ -8468,14 +8348,6 @@
           },
           "x-ms-identifiers": []
         },
-        "connections": {
-          "type": "array",
-          "description": "Connections between operations in the Dataflow.",
-          "items": {
-            "$ref": "#/definitions/DataflowConnection"
-          },
-          "x-ms-identifiers": []
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -8579,32 +8451,6 @@
       "required": [
         "endpointRef",
         "dataSources"
-      ]
-    },
-    "DataflowWasmOperationFunction": {
-      "type": "object",
-      "description": "Dataflow Wasm Operation Function properties",
-      "properties": {
-        "uri": {
-          "type": "string",
-          "description": "The URI of the function."
-        }
-      },
-      "required": [
-        "uri"
-      ]
-    },
-    "DataflowWasmOperationSettings": {
-      "type": "object",
-      "description": "Dataflow Wasm Operation properties",
-      "properties": {
-        "function": {
-          "$ref": "#/definitions/DataflowWasmOperationFunction",
-          "description": "The reference to the wasm function"
-        }
-      },
-      "required": [
-        "function"
       ]
     },
     "DiagnosticProperties": {
@@ -9698,11 +9544,7 @@
       "enum": [
         "Source",
         "Destination",
-        "BuiltInTransformation",
-        "Map",
-        "Filter",
-        "Branch",
-        "Concatenate"
+        "BuiltInTransformation"
       ],
       "x-ms-enum": {
         "name": "OperationType",
@@ -9722,26 +9564,6 @@
             "name": "BuiltInTransformation",
             "value": "BuiltInTransformation",
             "description": "Dataflow BuiltIn Transformation Operation"
-          },
-          {
-            "name": "Map",
-            "value": "Map",
-            "description": "Map Operation"
-          },
-          {
-            "name": "Filter",
-            "value": "Filter",
-            "description": "Filter Operation"
-          },
-          {
-            "name": "Branch",
-            "value": "Branch",
-            "description": "Branch Operation"
-          },
-          {
-            "name": "Concatenate",
-            "value": "Concatenate",
-            "description": "Concatenate Operation"
           }
         ]
       }
