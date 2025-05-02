@@ -261,6 +261,9 @@ export class Swagger2 {
   /** @type {string} absolute path */
   #path;
 
+  /** @type {Set<Swagger2> | undefined} */
+  #refs;
+
   /**
    * @param {string} path
    * @param {Object} [options]
@@ -269,6 +272,28 @@ export class Swagger2 {
   constructor(path, options) {
     this.#path = resolveCheckAccess(path);
     this.#logger = options?.logger;
+  }
+
+  /**
+   * @returns {Promise<Set<Swagger2>>}
+   */
+  async getRefs() {
+    if (!this.#refs) {
+      const schema = await $RefParser.resolve(this.#path, {
+        resolve: { http: false },
+      });
+
+      const refPaths = schema
+        .paths("file")
+        // Exclude examples
+        .filter((p) => !example(p))
+        // Exclude ourself
+        .filter((p) => resolve(p) !== resolve(this.#path));
+
+      this.#refs = new Set(refPaths.map((p) => new Swagger2(p)));
+    }
+
+    return this.#refs;
   }
 
   /**

@@ -54,6 +54,19 @@ describe("SpecModel2", () => {
       ),
     );
 
+    const refs0 = [...(await inputFiles0[0].getRefs())].sort((a, b) =>
+      a.path.localeCompare(b.path),
+    );
+
+    expect(refs0.length).toBe(1);
+
+    expect(refs0[0].path).toBe(
+      resolve(
+        dirname(inputFiles0[0].path),
+        "../../../../../common-types/resource-management/v5/types.json",
+      ),
+    );
+
     expect(tags[1].name).toBe("package-2021-11-01");
     const inputFiles1 = [...tags[1].inputFiles];
     expect(inputFiles1.length).toBe(1);
