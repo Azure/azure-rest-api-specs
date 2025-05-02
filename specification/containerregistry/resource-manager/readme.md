@@ -497,5 +497,5 @@ suppressions:
     reasons: Common property used for create and update. existing definitions and sdk already released. breaking change to fix.
     from: containerregistry.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}"].patch.parameters[6].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}"].patch.parameters[5].schema.properties.properties
 ```
