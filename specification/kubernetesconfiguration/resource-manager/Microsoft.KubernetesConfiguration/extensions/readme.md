@@ -53,6 +53,11 @@ suppressions:
   - code: LroLocationHeader
     from: extensions.json
     reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header. Tracking a work item to add Location header in the upcoming API version.
+  - code: PatchIdentityProperty
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"]    
   - code: AvoidAdditionalProperties
     from: extensions.json
     reason: Existing service contract needs to be backward compatible.
