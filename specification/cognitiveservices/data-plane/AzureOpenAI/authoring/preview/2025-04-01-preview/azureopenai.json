@@ -3244,35 +3244,33 @@
       "type": "object"
     },
     "CreateEvalJsonlRunDataSource": {
-      "title": "JsonlRunDataSource",
-      "description": "A JsonlRunDataSource object that specifies a JSONL file that matches the eval",
-      "type": "object",
+      "description": "A JsonlRunDataSource object with that specifies a JSONL file that matches the eval",
       "properties": {
         "source": {
-          "type": "object",
-          "discriminator": "type",
-          "description": "Defines the source of evaluation data.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The type of source.",
-              "enum": ["file_content", "file_id"]
-            }
-          },
-          "required": ["type"],
           "allOf": [
-            { "$ref": "#/definitions/EvalJsonlFileContentSource" },
-            { "$ref": "#/definitions/EvalJsonlFileIdSource" }
+            {
+              "$ref": "#/definitions/EvalJsonlFileContentSource"
+            },
+            {
+              "$ref": "#/definitions/EvalJsonlFileIdSource"
+            }
           ]
         },
         "type": {
-          "type": "string",
+          "default": "jsonl",
           "description": "The type of data source. Always `jsonl`.",
-          "enum": ["jsonl"],
-          "default": "jsonl"
+          "enum": [
+            "jsonl"
+          ],
+          "type": "string"
         }
       },
-      "required": ["type", "source"]
+      "required": [
+        "type",
+        "source"
+      ],
+      "title": "JsonlRunDataSource",
+      "type": "object"
     },
     "CreateEvalLabelModelGrader": {
       "description": "A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.",
@@ -3350,79 +3348,81 @@
       "type": "object"
     },
     "CreateEvalRequest": {
-      "title": "CreateEvalRequest",
-      "type": "object",
       "properties": {
         "data_source_config": {
-          "type": "object",
           "description": "The configuration for the data source used for the evaluation runs.",
           "allOf": [
-            { "$ref": "#/definitions/CreateEvalCustomDataSourceConfig" },
-            { "$ref": "#/definitions/CreateEvalLogsDataSourceConfig" }
-          ]
+            {
+              "$ref": "#/definitions/CreateEvalCustomDataSourceConfig"
+            },
+            {
+              "$ref": "#/definitions/CreateEvalLogsDataSourceConfig"
+            }
+          ],
+          "type": "object"
         },
         "metadata": {
           "$ref": "#/definitions/Metadata"
         },
         "name": {
-          "type": "string",
-          "description": "The name of the evaluation."
+          "description": "The name of the evaluation.",
+          "type": "string"
         },
         "testing_criteria": {
-          "type": "array",
           "description": "A list of graders for all eval runs in this group.",
           "items": {
-            "type": "object",
-            "discriminator": "type",
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "The type of testing_criteria object.",
-                "enum": ["string_check", "text_similarity", "score_model", "label_model"]
-              }
-            },
-            "required": ["type"],
             "allOf": [
-              { "$ref": "#/definitions/CreateEvalLabelModelGrader" },
-              { "$ref": "#/definitions/EvalStringCheckGrader" },
-              { "$ref": "#/definitions/EvalTextSimilarityGrader" },
-              { "$ref": "#/definitions/EvalScoreModelGrader" }
+              {
+                "$ref": "#/definitions/CreateEvalLabelModelGrader"
+              },
+              {
+                "$ref": "#/definitions/EvalStringCheckGrader"
+              },
+              {
+                "$ref": "#/definitions/EvalTextSimilarityGrader"
+              },
+              {
+                "$ref": "#/definitions/EvalScoreModelGrader"
+              }
             ]
-          }
+          },
+          "type": "array"
         }
       },
-      "required": ["data_source_config", "testing_criteria"]
+      "required": [
+        "data_source_config",
+        "testing_criteria"
+      ],
+      "title": "CreateEvalRequest",
+      "type": "object"
     },
     "CreateEvalRunRequest": {
-      "title": "CreateEvalRunRequest",
-      "type": "object",
       "properties": {
         "data_source": {
-          "type": "object",
-          "discriminator": "type",
           "description": "Details about the run's data source.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The type of data source.",
-              "enum": ["jsonl", "completions"]
-            }
-          },
-          "required": ["type"],
           "allOf": [
-            { "$ref": "#/definitions/CreateEvalJsonlRunDataSource" },
-            { "$ref": "#/definitions/CreateEvalCompletionsRunDataSource" }
-          ]
+            {
+              "$ref": "#/definitions/CreateEvalJsonlRunDataSource"
+            },
+            {
+              "$ref": "#/definitions/CreateEvalCompletionsRunDataSource"
+            }
+          ],
+          "type": "object"
         },
         "metadata": {
           "$ref": "#/definitions/Metadata"
         },
         "name": {
-          "type": "string",
-          "description": "The name of the run."
+          "description": "The name of the run.",
+          "type": "string"
         }
       },
-      "required": ["data_source"]
+      "required": [
+        "data_source"
+      ],
+      "title": "CreateEvalRunRequest",
+      "type": "object"
     },
     "CreateEvalStoredCompletionsRunDataSource": {
       "description": "A StoredCompletionsRunDataSource configuration describing a set of filters",
@@ -3785,21 +3785,16 @@
           "type": "integer"
         },
         "data_source_config": {
-          "type": "object",
-          "discriminator": "type",
           "description": "Configuration of data sources used in runs of the evaluation.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The type of data source configuration.",
-              "enum": ["custom", "stored_completions"]
-            }
-          },
-          "required": ["type"],
           "allOf": [
-            { "$ref": "#/definitions/EvalCustomDataSourceConfig" },
-            { "$ref": "#/definitions/EvalStoredCompletionsDataSourceConfig" }
-          ]
+            {
+              "$ref": "#/definitions/EvalCustomDataSourceConfig"
+            },
+            {
+              "$ref": "#/definitions/EvalStoredCompletionsDataSourceConfig"
+            }
+          ],
+          "type": "object"
         },
         "id": {
           "description": "Unique identifier for the evaluation.",
@@ -3822,26 +3817,25 @@
           "type": "string"
         },
         "testing_criteria": {
-          "type": "array",
+          "default": "eval",
           "description": "A list of testing criteria.",
           "items": {
-            "type": "object",
-            "discriminator": "type",
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "The type of testing criteria.",
-                "enum": ["label_model", "string_check", "text_similarity", "score_model"]
-              }
-            },
-            "required": ["type"],
             "allOf": [
-              { "$ref": "#/definitions/EvalLabelModelGrader" },
-              { "$ref": "#/definitions/EvalStringCheckGrader" },
-              { "$ref": "#/definitions/EvalTextSimilarityGrader" },
-              { "$ref": "#/definitions/EvalScoreModelGrader" }
+              {
+                "$ref": "#/definitions/EvalLabelModelGrader"
+              },
+              {
+                "$ref": "#/definitions/EvalStringCheckGrader"
+              },
+              {
+                "$ref": "#/definitions/EvalTextSimilarityGrader"
+              },
+              {
+                "$ref": "#/definitions/EvalScoreModelGrader"
+              }
             ]
-          }
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -4145,21 +4139,16 @@
           "type": "integer"
         },
         "data_source": {
-          "type": "object",
-          "discriminator": "type",
           "description": "Information about the run's data source.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The type of data source.",
-              "enum": ["jsonl", "completions"]
-            }
-          },
-          "required": ["type"],
           "allOf": [
-            { "$ref": "#/definitions/CreateEvalJsonlRunDataSource" },
-            { "$ref": "#/definitions/CreateEvalCompletionsRunDataSource" }
-          ]
+            {
+              "$ref": "#/definitions/CreateEvalJsonlRunDataSource"
+            },
+            {
+              "$ref": "#/definitions/CreateEvalCompletionsRunDataSource"
+            }
+          ],
+          "type": "object"
         },
         "error": {
           "$ref": "#/definitions/EvalApiError"
