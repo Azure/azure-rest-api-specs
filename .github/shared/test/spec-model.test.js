@@ -25,8 +25,13 @@ describe("SpecModel2", () => {
     );
 
     const specModel2 = new SpecModel2(folder, options);
-    console.log(`specModel2: '${specModel2}'`);
-    expect(specModel2).toBeDefined();
+
+    expect(specModel2.folder).toEqual(folder);
+
+    const readmes = await specModel2.getReadmes();
+
+    const readmePaths = [...readmes].map((r) => relative(folder, r.path));
+    expect(readmePaths.sort()).toEqual(["readme.md"]);
   });
 });
 

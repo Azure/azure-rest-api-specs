@@ -1,7 +1,6 @@
 // @ts-check
 
 import $RefParser from "@apidevtools/json-schema-ref-parser";
-import { accessSync, constants as fsConstants } from "fs";
 import { readdir, readFile } from "fs/promises";
 import * as yaml from "js-yaml";
 import { marked } from "marked";
@@ -9,13 +8,17 @@ import { dirname, join, normalize, relative, resolve } from "path";
 import { simpleGit } from "simple-git";
 import { mapAsync } from "./array.js";
 import { example, readme } from "./changed-files.js";
+import { resolveCheckAccess } from "./fs.js";
 
 export class SpecModel2 {
-  /** @type {string} */
+  /** @type {string} absolute path */
   #folder;
 
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
+
+  /** @type {Set<Readme2> | undefined} */
+  #readmes;
 
   /**
    * @param {string} folder
@@ -23,11 +26,39 @@ export class SpecModel2 {
    * @param {import('./logger.js').ILogger} [options.logger]
    */
   constructor(folder, options) {
-    // Throw immediately if folder cannot be read, to prevent confusing errors later
-    accessSync(folder, fsConstants.R_OK);
-
-    this.#folder = folder;
+    this.#folder = resolveCheckAccess(folder);
     this.#logger = options?.logger;
+  }
+
+  /**
+   * @returns {string}
+   */
+  get folder() {
+    return this.#folder;
+  }
+
+  /**
+   * @returns {Promise<Set<Readme2>>}
+   */
+  async getReadmes() {
+    if (!this.#readmes) {
+      const files = await readdir(this.#folder, {
+        recursive: true,
+      });
+
+      const readmePaths = files
+        // filter before resolve to (slightly) improve perf, since filter only needs filename
+        .filter(readme)
+        .map((p) => resolve(this.#folder, p));
+
+      this.#logger?.debug(`Found ${readmePaths.length} readme files`);
+
+      this.#readmes = new Set(
+        readmePaths.map((p) => new Readme2(p, { logger: this.#logger })),
+      );
+    }
+
+    return this.#readmes;
   }
 
   /**
@@ -35,6 +66,38 @@ export class SpecModel2 {
    */
   toString() {
     return `SpecModel2(${this.#folder}, {logger: ${this.#logger}})`;
+  }
+}
+
+export class Readme2 {
+  /** @type {string} absolute path */
+  #path;
+
+  /** @type {import('./logger.js').ILogger | undefined} */
+  #logger;
+
+  /**
+   * @param {string} path
+   * @param {Object} [options]
+   * @param {import('./logger.js').ILogger} [options.logger]
+   */
+  constructor(path, options) {
+    this.#path = resolveCheckAccess(path);
+    this.#logger = options?.logger;
+  }
+
+  /**
+   * @returns {string}
+   */
+  get path() {
+    return this.#path;
+  }
+
+  /**
+   * @returns {string}
+   */
+  toString() {
+    return `Readme2(${this.#path}, {logger: ${this.#logger}})`;
   }
 }
 
