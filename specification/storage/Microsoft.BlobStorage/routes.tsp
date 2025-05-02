@@ -48,6 +48,7 @@ namespace Storage.Blob {
     {
       ...TimeoutParameter;
 
+      /** The storage service properties to set. */
       @body
       @Xml.name("StorageServiceProperties")
       storageServiceProperties: StorageServiceProperties;
@@ -75,6 +76,7 @@ namespace Storage.Blob {
     {
       ...DateResponseHeader;
 
+      /** Storage service statistics */
       @body
       @Xml.name("StorageServiceStats")
       storageServiceStats: StorageServiceStats;
@@ -106,6 +108,7 @@ namespace Storage.Blob {
   @route("?restype=service&comp=userdelegationkey")
   op getUserDelegationKey is StorageOperation<
     {
+      /** Key information provided in the request */
       @body
       @Xml.name("KeyInfo")
       keyInfo: KeyInfo;
@@ -113,6 +116,7 @@ namespace Storage.Blob {
       ...TimeoutParameter;
     },
     {
+      /** The user delegation key */
       @body
       @Xml.name("UserDelegationKey")
       userDelegationKey: UserDelegationKey;
@@ -181,6 +185,7 @@ namespace Storage.Blob {
     {
       ...DateResponseHeader;
 
+      /** The filter blobs enumeration results */
       @body
       @Xml.name("EnumerationResults")
       enumerationResults: FilterBlobSegment;
@@ -298,7 +303,9 @@ namespace Storage.Blob {
         ...LeaseIdOptionalParameter;
       },
       {
+        /** Signed identifiers */
         @body body: SignedIdentifiers;
+
         ...BlobPublicAccess;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
@@ -430,6 +437,7 @@ namespace Storage.Blob {
       {
         ...DateResponseHeader;
 
+        /** The container filter blob enumeration results */
         @body
         @Xml.name("EnumerationResults")
         enumerationResults: FilterBlobSegment;
@@ -567,6 +575,7 @@ namespace Storage.Blob {
       {
         ...DateResponseHeader;
 
+        /** The list of blobs in the container */
         @body
         @Xml.name("EnumerationResults")
         enumerationResults: ListBlobsFlatSegmentResponse;
@@ -595,6 +604,7 @@ namespace Storage.Blob {
       {
         ...DateResponseHeader;
 
+        /** The list of blobs in the container */
         @body
         @Xml.name("EnumerationResults")
         enumerationResults: ListBlobsHierarchySegmentResponse;
@@ -1329,6 +1339,7 @@ namespace Storage.Blob {
         {
           ...DateResponseHeader;
 
+          /** The blob tags. */
           @body
           @Xml.name("Tags")
           tags: BlobTags;
@@ -2122,6 +2133,7 @@ namespace Storage.Blob {
             ...IfTagsParameter;
           },
           {
+            /** Block list */
             @body
             @Xml.name("BlockList")
             blockList: BlockList;
