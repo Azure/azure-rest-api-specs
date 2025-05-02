@@ -1,7 +1,14 @@
 /** Describes the schema of the Azure Kubernetes Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent */
 namespace Microsoft.EventGrid.SystemEvents;
 
+const MicrosoftContainerServiceNewKubernetesVersionAvailableExample: ContainerServiceNewKubernetesVersionAvailableEventData = #{
+  latestSupportedKubernetesVersion: "1.20.7",
+  latestStableKubernetesVersion: "1.19.11",
+  lowestMinorKubernetesVersion: "1.18.19",
+  latestPreviewKubernetesVersion: "1.21.1",
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event */
+@example(MicrosoftContainerServiceNewKubernetesVersionAvailableExample)
 model ContainerServiceNewKubernetesVersionAvailableEventData {
   /** The highest PATCH Kubernetes version for the highest MINOR version supported by ManagedCluster resource */
   latestSupportedKubernetesVersion: string;
@@ -16,28 +23,48 @@ model ContainerServiceNewKubernetesVersionAvailableEventData {
   latestPreviewKubernetesVersion?: string;
 }
 
+const MicrosoftContainerServiceClusterSupportEndedExample: ContainerServiceClusterSupportEndedEventData = #{
+  kubernetesVersion: "1.23.15",
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftContainerServiceClusterSupportEndedExample)
 model ContainerServiceClusterSupportEndedEventData
   extends ContainerServiceClusterSupportEventData {}
 
+const MicrosoftContainerServiceClusterSupportEndingExample: ContainerServiceClusterSupportEndingEventData = #{
+  kubernetesVersion: "1.24.10",
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftContainerServiceClusterSupportEndingExample)
 model ContainerServiceClusterSupportEndingEventData
   extends ContainerServiceClusterSupportEventData {}
 
+const MicrosoftContainerServiceNodePoolRollingStartedExample: ContainerServiceNodePoolRollingStartedEventData = #{
+  nodePoolName: "nodepool1",
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftContainerServiceNodePoolRollingStartedExample)
 model ContainerServiceNodePoolRollingStartedEventData
   extends ContainerServiceNodePoolRollingEventData {}
 
+const MicrosoftContainerServiceNodePoolRollingSucceededExample: ContainerServiceNodePoolRollingSucceededEventData = #{
+  nodePoolName: "nodepool1",
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftContainerServiceNodePoolRollingSucceededExample)
 model ContainerServiceNodePoolRollingSucceededEventData
   extends ContainerServiceNodePoolRollingEventData {}
 
+const MicrosoftContainerServiceNodePoolRollingFailedExample: ContainerServiceNodePoolRollingFailedEventData = #{
+  nodePoolName: "nodepool1",
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftContainerServiceNodePoolRollingFailedExample)
 model ContainerServiceNodePoolRollingFailedEventData
   extends ContainerServiceNodePoolRollingEventData {}
 
