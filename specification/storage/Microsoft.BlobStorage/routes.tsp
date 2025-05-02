@@ -45,7 +45,13 @@ namespace Storage.Blob {
   @put
   @route("?restype=service&comp=properties")
   op setProperties is StorageOperation<
-    TimeoutParameter & StorageServiceProperties,
+    {
+      ...TimeoutParameter;
+
+      @body
+      @Xml.name("StorageServiceProperties")
+      storageServiceProperties: StorageServiceProperties;
+    },
     {
       @statusCode statusCode: 202;
     }
@@ -66,7 +72,13 @@ namespace Storage.Blob {
   @route("?restype=service&comp=stats")
   op getStatistics is StorageOperation<
     TimeoutParameter,
-    DateResponseHeader & StorageServiceStats
+    {
+      ...DateResponseHeader;
+
+      @body
+      @Xml.name("StorageServiceStats")
+      storageServiceStats: StorageServiceStats;
+    }
   >;
 
   /** The List Containers Segment operation returns a list of the containers under the specified account */
@@ -93,8 +105,20 @@ namespace Storage.Blob {
   @post
   @route("?restype=service&comp=userdelegationkey")
   op getUserDelegationKey is StorageOperation<
-    KeyInfo & TimeoutParameter,
-    UserDelegationKey & DateResponseHeader
+    {
+      @body
+      @Xml.name("KeyInfo")
+      keyInfo: KeyInfo;
+
+      ...TimeoutParameter;
+    },
+    {
+      @body
+      @Xml.name("UserDelegationKey")
+      userDelegationKey: UserDelegationKey;
+
+      ...DateResponseHeader;
+    }
   >;
 
   /** Returns the sku name and account kind. */
@@ -154,7 +178,13 @@ namespace Storage.Blob {
       ...MaxResultsParameter;
       ...FilterBlobsIncludeParameter;
     },
-    DateResponseHeader & FilterBlobSegment
+    {
+      ...DateResponseHeader;
+
+      @body
+      @Xml.name("EnumerationResults")
+      enumerationResults: FilterBlobSegment;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -397,7 +427,13 @@ namespace Storage.Blob {
         ...MaxResultsParameter;
         ...FilterBlobsIncludeParameter;
       },
-      DateResponseHeader & FilterBlobSegment
+      {
+        ...DateResponseHeader;
+
+        @body
+        @Xml.name("EnumerationResults")
+        enumerationResults: FilterBlobSegment;
+      }
     >;
 
     /** The Acquire Lease operation requests a new lease on a container. The lease lock duration can be 15 to 60 seconds, or can be infinite. */
@@ -528,7 +564,13 @@ namespace Storage.Blob {
         ...ListBlobsIncludeParameter;
         ...TimeoutParameter;
       },
-      ListBlobsFlatSegmentResponse & DateResponseHeader
+      {
+        ...DateResponseHeader;
+
+        @body
+        @Xml.name("EnumerationResults")
+        enumerationResults: ListBlobsFlatSegmentResponse;
+      }
     >;
 
     /** The List Blobs operation returns a list of the blobs under the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
@@ -550,7 +592,13 @@ namespace Storage.Blob {
         ...ListBlobsIncludeParameter;
         ...TimeoutParameter;
       },
-      ListBlobsHierarchySegmentResponse & DateResponseHeader
+      {
+        ...DateResponseHeader;
+
+        @body
+        @Xml.name("EnumerationResults")
+        enumerationResults: ListBlobsHierarchySegmentResponse;
+      }
     >;
 
     /** Returns the sku name and account kind */
@@ -1278,7 +1326,13 @@ namespace Storage.Blob {
           ...LeaseIdOptionalParameter;
           ...IfTagsParameter;
         },
-        BlobTags & DateResponseHeader
+        {
+          ...DateResponseHeader;
+
+          @body
+          @Xml.name("Tags")
+          tags: BlobTags;
+        }
       >;
 
       /** The Set Tags operation enables users to set tags on a blob. */
@@ -2067,7 +2121,11 @@ namespace Storage.Blob {
             ...LeaseIdOptionalParameter;
             ...IfTagsParameter;
           },
-          BlockList & {
+          {
+            @body
+            @Xml.name("BlockList")
+            blockList: BlockList;
+
             ...LastModifiedResponseHeader;
             ...EtagResponseHeader;
             ...BlobContentLengthRequired;

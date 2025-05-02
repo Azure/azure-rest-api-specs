@@ -81,7 +81,6 @@ model SignedIdentifier {
 }
 
 /** The result of a Filter Blobs API call */
-@Xml.name("EnumerationResults")
 model FilterBlobSegment {
   /** The service endpoint. */
   @Xml.attribute
@@ -874,7 +873,6 @@ model RetentionPolicy {
 // List Blobs
 
 /** An enumeration of blobs. */
-@Xml.name("EnumerationResults")
 model ListBlobsFlatSegmentResponse {
   /** The service endpoint. */
   @Xml.attribute
@@ -1935,7 +1933,6 @@ model BlobHierarchyListSegment {
 }
 
 /** An enumeration of blobs */
-@Xml.name("EnumerationResults")
 model ListBlobsHierarchySegmentResponse {
   /** The service endpoint. */
   @Xml.attribute
