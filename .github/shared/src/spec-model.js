@@ -144,20 +144,18 @@ export class Readme2 {
           continue;
         }
 
-        // // This heuristic assumes that a previous definition of the tag with no
-        // // swaggers means that the previous definition did not have an input-file
-        // // key. It's possible that the previous defintion had an `input-file: []`
-        // // or something like it.
-        // if (
-        //   tags[tagName]?.inputFiles &&
-        //   Object.entries(tags[tagName]?.inputFiles).length > 0
-        // ) {
-        //   // The tag already exists and has a swagger file. This is an error as
-        //   // there should only be one definition of input-files per tag.
-        //   const message = `Multiple input-file definitions for tag ${tagName} in ${readmePath}`;
-        //   logger?.error(message);
-        //   throw new Error(message);
-        // }
+        // This heuristic assumes that a previous definition of the tag with no
+        // swaggers means that the previous definition did not have an input-file
+        // key. It's possible that the previous defintion had an `input-file: []`
+        // or something like it.
+        const existingTag = [...tags].find((t) => t.name == tagName);
+        if ((existingTag?.inputFiles?.size ?? 0) > 0) {
+          // The tag already exists and has a swagger file. This is an error as
+          // there should only be one definition of input-files per tag.
+          const message = `Multiple input-file definitions for tag ${tagName} in ${this.#path}`;
+          this.#logger?.error(message);
+          throw new Error(message);
+        }
 
         /** @type {Set<Swagger2>} */
         const inputFiles = new Set();
