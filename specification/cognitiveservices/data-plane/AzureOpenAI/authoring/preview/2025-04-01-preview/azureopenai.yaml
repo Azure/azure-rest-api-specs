@@ -2148,6 +2148,18 @@ definitions:
     description: "A JsonlRunDataSource object with that specifies a JSONL file that matches the eval"
     properties:
       source:
+        type: object
+        discriminator: type
+        description: "Defines the source of evaluation data."
+        properties:
+          type:
+            type: string
+            description: "The type of source."
+            enum:
+              - file_content
+              - file_id
+        required:
+          - type
         allOf:
           - $ref: "#/definitions/EvalJsonlFileContentSource"
           - $ref: "#/definitions/EvalJsonlFileIdSource"
@@ -2247,6 +2259,19 @@ definitions:
       testing_criteria:
         description: A list of graders for all eval runs in this group.
         items:
+          type: object
+          discriminator: type
+          properties:
+            type:
+              type: string
+              description: "The type of testing_criteria object."
+              enum:
+                - string_check
+                - text_similarity
+                - score_model
+                - label_model
+          required:
+            - type
           allOf:
             - $ref: "#/definitions/CreateEvalLabelModelGrader"
             - $ref: "#/definitions/EvalStringCheckGrader"
@@ -2261,11 +2286,21 @@ definitions:
   CreateEvalRunRequest:
     properties:
       data_source:
-        description: Details about the run's data source.
+        type: object
+        discriminator: type
+        description: "Details about the run's data source."
+        properties:
+          type:
+            type: string
+            description: "The type of data source."
+            enum:
+              - jsonl
+              - completions
+        required:
+          - type
         allOf:
           - $ref: "#/definitions/CreateEvalJsonlRunDataSource"
           - $ref: "#/definitions/CreateEvalCompletionsRunDataSource"
-        type: object
       metadata:
         $ref: "#/definitions/Metadata"
       name:
@@ -2526,11 +2561,21 @@ definitions:
         description: The Unix timestamp (in seconds) for when the eval was created.
         type: integer
       data_source_config:
-        description: Configuration of data sources used in runs of the evaluation.
+        type: object
+        discriminator: type
+        description: "Configuration of data sources used in runs of the evaluation."
+        properties:
+          type:
+            type: string
+            description: "The type of data source configuration."
+            enum:
+              - custom
+              - stored_completions
+        required:
+          - type
         allOf:
           - $ref: "#/definitions/EvalCustomDataSourceConfig"
           - $ref: "#/definitions/EvalStoredCompletionsDataSourceConfig"
-        type: object
       id:
         description: Unique identifier for the evaluation.
         type: string
@@ -2547,15 +2592,27 @@ definitions:
           - eval
         type: string
       testing_criteria:
-        default: eval
-        description: A list of testing criteria.
+        type: array
+        description: "A list of testing criteria."
         items:
+          type: object
+          discriminator: type
+          properties:
+            type:
+              type: string
+              description: "The type of testing criteria."
+              enum:
+                - label_model
+                - string_check
+                - text_similarity
+                - score_model
+          required:
+            - type
           allOf:
             - $ref: "#/definitions/EvalLabelModelGrader"
             - $ref: "#/definitions/EvalStringCheckGrader"
             - $ref: "#/definitions/EvalTextSimilarityGrader"
             - $ref: "#/definitions/EvalScoreModelGrader"
-        type: array
     required:
       - id
       - data_source_config
@@ -2801,11 +2858,21 @@ definitions:
         description: Unix timestamp (in seconds) when the evaluation run was created.
         type: integer
       data_source:
-        description: Information about the run's data source.
+        type: object
+        discriminator: type
+        description: "Information about the run's data source."
+        properties:
+          type:
+            type: string
+            description: "The type of data source."
+            enum:
+              - jsonl
+              - completions
+        required:
+          - type
         allOf:
           - $ref: "#/definitions/CreateEvalJsonlRunDataSource"
           - $ref: "#/definitions/CreateEvalCompletionsRunDataSource"
-        type: object
       error:
         $ref: "#/definitions/EvalApiError"
       eval_id:
