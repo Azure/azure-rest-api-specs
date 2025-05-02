@@ -40,11 +40,6 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 ``` yaml $(tag) == 'package-2025-03'
 input-file:
   - stable/2025-03-01/extensions.json
-directive:
-  - where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"] 
-    suppress: PatchIdentityProperty
-    reason: Existing service contract needs to be backward compatible.
 suppressions:
   - code: OperationsAPIImplementation
     from: extensions.json
@@ -55,6 +50,11 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}"]
+  - code: PatchIdentityProperty
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.
+    where:
+      - $.definitions.patchExtension
   - code: DeleteResponseCodes
     from: extensions.json
     reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
