@@ -1,0 +1,78 @@
+{
+  "title": "NetworkInterfaces_Create_MaximumSet_Gen",
+  "operationId": "NetworkInterfaces_Create",
+  "parameters": {
+    "api-version": "2024-06-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkDeviceName": "example-device",
+    "networkInterfaceName": "example-interface",
+    "resource": {
+      "properties": {
+        "annotation": "annotation",
+        "interfaceType": "Management",
+        "description": "device 1",
+        "additionalDescription": "device 1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "physicalIdentifier": "Id",
+          "connectedTo": "external-interface",
+          "interfaceType": "Management",
+          "ipv4Address": "10.2.2.8",
+          "ipv6Address": "10:2:0:0::",
+          "description": "device 1",
+          "additionalDescription": "device 1",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled"
+        },
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device/networkInterfaces/example-interface",
+        "name": "example-interface",
+        "type": "microsoft.managednetworkfabric/networkdevices/networkinterfaces",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "physicalIdentifier": "Id",
+          "connectedTo": "external-interface",
+          "description": "device 1",
+          "additionalDescription": "device 1",
+          "interfaceType": "Management",
+          "ipv4Address": "10.2.2.8",
+          "ipv6Address": "10:2:0:0::",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled"
+        },
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device/networkInterfaces/example-interface",
+        "name": "example-interface",
+        "type": "microsoft.managednetworkfabric/networkdevices/networkinterfaces",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    }
+  }
+}

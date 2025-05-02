@@ -24,12 +24,55 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Managed Network Fabric.
 
-``` yaml
+```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-06-15
+tag: package-2024-06-15-preview
 ```
 
+### Tag: package-2024-06-15-preview
+
+These settings apply only when `--tag=package-2024-06-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-15-preview'
+input-file:
+  - Microsoft.ManagedNetworkFabric/preview/2024-06-15-preview/managednetworkfabric.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    reason: This error is caused by typespec inbuilt managed identity model.
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Removed deprecated APIs in the new API version
+```
+
+### Tag: package-2024-02-15-preview
+
+These settings apply only when `--tag=package-2024-02-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-15-preview'
+input-file:
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/AccessControlLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/InternetGateways.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/InternetGatewayRules.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/IpCommunities.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/IpExtendedCommunities.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/IpPrefixes.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/L2IsolationDomains.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/L3IsolationDomains.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NeighborGroups.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkDeviceSkus.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkDevices.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkFabricControllers.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkFabricSkus.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkFabrics.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkPacketBrokers.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkRackSkus.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkRacks.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkTapRules.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkTaps.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/Operations.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/RoutePolicies.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/common.json
+```
 
 ### Tag: package-2023-06-15
 
@@ -59,11 +102,12 @@ input-file:
   - Microsoft.ManagedNetworkFabric/stable/2023-06-15/RoutePolicies.json
   - Microsoft.ManagedNetworkFabric/stable/2023-06-15/common.json
 ```
+
 ### Tag: package-2023-02-01-preview
 
 These settings apply only when `--tag=package-2023-02-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-02-01-preview'
+```yaml $(tag) == 'package-2023-02-01-preview'
 input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/AccessControlLists.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpCommunities.json
@@ -83,6 +127,29 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/common.json
 ```
 
+### Tag: package-2022-01-15-privatepreview
+
+These settings apply only when `--tag=package-2022-01-15-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-01-15-privatepreview'
+input-file:
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/common.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/Operations.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabricControllers.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabrics.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkDevices.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkRacks.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/L2IsolationDomains.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/L3IsolationDomains.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/RoutePolicies.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/AccessControlLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/IpCommunityLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/IpPrefixLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabricSkus.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkRackSkus.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkDeviceSkus.json
+```
+
 ---
 
 # Code Generation
@@ -97,7 +164,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
   - repo: azure-cli-extensions
     after_scripts:
