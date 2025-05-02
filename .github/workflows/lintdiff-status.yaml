@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger Avocado - Set Status"
+name: "[TEST-IGNORE] Swagger LintDiff - Set Status"
 
 on:
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
@@ -15,7 +15,7 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["\\[TEST-IGNORE\\] Swagger Avocado - Analyze Code"]
+    workflows: ["\\[TEST-IGNORE\\] Swagger LintDiff - Analyze Code"]
     types: [completed]
 
 permissions:
@@ -26,8 +26,8 @@ permissions:
   statuses: write
 
 jobs:
-  avocado-status:
-    name: "[TEST-IGNORE] Swagger Avocado - Set Status"
+  lintdiff-status:
+    name: "[TEST-IGNORE] Swagger LintDiff - Set Status"
 
     if: |
       github.event_name == 'workflow_run' ||
@@ -36,7 +36,7 @@ jobs:
          github.event.action == 'synchronize' ||
          github.event.action == 'reopened') ||
         ((github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
-         (github.event.label.name == 'Approved-Avocado'))))
+         (github.event.label.name == 'Approved-LintDiff'))))
 
     runs-on: ubuntu-24.04
 
@@ -55,7 +55,7 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: "Swagger Avocado - Set Status"
+      - name: "Swagger LintDiff - Set Status"
         uses: actions/github-script@v7
         with:
           script: |
@@ -64,7 +64,7 @@ jobs:
                 await import('${{ github.workspace }}/.github/workflows/src/set-status.js');
             return await setStatus(
               { github, context, core }, 
-              "[TEST IGNORE] Swagger Avocado", 
-              "[TEST-IGNORE] Swagger Avocado - Analyze Code", 
-              label.APPROVED_AVOCADO,
+              "[TEST IGNORE] Swagger LintDiff", 
+              "[TEST-IGNORE] Swagger LintDiff - Analyze Code", 
+              label.APPROVED_LINT_DIFF
             );

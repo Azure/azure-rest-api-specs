@@ -21,4 +21,9 @@ export const Label = {
    * @type {"Approved-Avocado"}
    */
   APPROVED_AVOCADO: "Approved-Avocado",
+
+  /**
+   * @type {"Approved-LintDiff"}
+   */
+  APPROVED_LINT_DIFF: "Approved-LintDiff",
 };

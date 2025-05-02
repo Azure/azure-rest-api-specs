@@ -7,7 +7,6 @@ import {
   CommitStatusState,
   PER_PAGE_MAX,
 } from "./github.js";
-import { Label } from "./label.js";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -15,7 +14,7 @@ import { Label } from "./label.js";
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
  */
-export default async function setStatus({ github, context, core }) {
+export default async function setStatus({ github, context, core }, wfName, statusName, labelName) {
   const { owner, repo, head_sha, issue_number } = await extractInputs(
     github,
     context,
@@ -35,6 +34,9 @@ export default async function setStatus({ github, context, core }) {
     target_url,
     github,
     core,
+    wfName,
+    statusName,
+    labelName,
   });
 }
 /* v8 ignore stop */
@@ -48,6 +50,9 @@ export default async function setStatus({ github, context, core }) {
  * @param {string} params.target_url
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
+ * @param {string} params.wfName
+ * @param {string} params.statusName
+ * @param {string} params.labelName
  * @returns {Promise<void>}
  */
 export async function setStatusImpl({
@@ -58,9 +63,10 @@ export async function setStatusImpl({
   target_url,
   github,
   core,
+  wfName,
+  statusName,
+  labelName,
 }) {
-  const statusName = "[TEST IGNORE] Swagger Avocado";
-
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
     owner: owner,
@@ -72,8 +78,8 @@ export async function setStatusImpl({
 
   core.info(`Labels: ${labelNames}`);
 
-  if (labelNames.includes(Label.APPROVED_AVOCADO)) {
-    const description = `Found label '${Label.APPROVED_AVOCADO}'`;
+  if (labelNames.includes(labelName)) {
+    const description = `Found label '${labelName}'`;
     core.info(description);
 
     const state = CheckConclusion.SUCCESS;
@@ -108,8 +114,7 @@ export async function setStatusImpl({
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
-  const wfName = "[TEST-IGNORE] Swagger Avocado - Analyze Code";
-  const avocadoCodeRuns = workflowRuns
+  const targetRuns = workflowRuns
     .filter((wf) => wf.name == wfName)
     // Sort by "updated_at" descending
     .sort(
@@ -118,9 +123,9 @@ export async function setStatusImpl({
     );
 
   // Sorted by "updated_at" descending, so most recent run is at index 0.
-  // If "avocadoCodeRuns.length === 0", run will be "undefined", which the following
+  // If "targetRuns.length === 0", run will be "undefined", which the following
   // code must handle.
-  const run = avocadoCodeRuns[0];
+  const run = targetRuns[0];
 
   if (run) {
     /**
