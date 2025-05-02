@@ -70,11 +70,14 @@ export class SpecModel2 {
 }
 
 export class Readme2 {
-  /** @type {string} absolute path */
-  #path;
-
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
+
+  /** @type {Object | undefined} */
+  #globalConfig;
+
+  /** @type {string} absolute path */
+  #path;
 
   /**
    * @param {string} path
@@ -84,6 +87,40 @@ export class Readme2 {
   constructor(path, options) {
     this.#path = resolveCheckAccess(path);
     this.#logger = options?.logger;
+  }
+
+  async getGlobalConfig() {
+    if (!this.#globalConfig) {
+      const content = await readFile(this.#path, {
+        encoding: "utf8",
+      });
+
+      const tokens = marked.lexer(content);
+
+      /** @type import("marked").Tokens.Code[] */
+      const yamlBlocks = tokens
+        .filter((token) => token.type === "code")
+        .map((token) => /** @type import("marked").Tokens.Code */ (token))
+        // Include default block and tagged blocks (```yaml $(tag) == 'package-2021-11-01')
+        .filter((token) => token.lang?.toLowerCase().startsWith("yaml"));
+
+      const globalConfigYamlBlocks = yamlBlocks.filter(
+        (token) => token.lang === "yaml",
+      );
+
+      const globalConfig = globalConfigYamlBlocks.reduce(
+        (obj, token) =>
+          Object.assign(
+            obj,
+            yaml.load(token.text, { schema: yaml.FAILSAFE_SCHEMA }),
+          ),
+        {},
+      );
+
+      this.#globalConfig = globalConfig;
+    }
+
+    return this.#globalConfig;
   }
 
   /**

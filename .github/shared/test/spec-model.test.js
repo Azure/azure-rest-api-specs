@@ -25,13 +25,19 @@ describe("SpecModel2", () => {
     );
 
     const specModel2 = new SpecModel2(folder, options);
+    expect(specModel2.folder).toBe(folder);
 
-    expect(specModel2.folder).toEqual(folder);
+    const readmes = [...(await specModel2.getReadmes())];
+    expect(readmes.length).toBe(1);
 
-    const readmes = await specModel2.getReadmes();
+    const readme = readmes[0];
+    expect(readme.path).toBe(resolve(folder, "readme.md"));
 
-    const readmePaths = [...readmes].map((r) => relative(folder, r.path));
-    expect(readmePaths.sort()).toEqual(["readme.md"]);
+    expect(readme.getGlobalConfig()).resolves.toEqual({
+      "openapi-type": "arm",
+      "openapi-subtype": "rpaas",
+      tag: "package-2021-11-01",
+    });
   });
 });
 
