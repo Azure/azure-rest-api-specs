@@ -145,13 +145,15 @@ extends:
 
           - task: NodeTool@0
             inputs:
-              versionSpec: '22.13.x'
+              versionSpec: '$(NodeVersion)'
             displayName: 'Install Node.js'
 
-          - task: UseNode@0
-            inputs:
-              version: '22.13.x'
-            displayName: 'Install Node.js'
+          - script: |
+              echo "Node version:"
+              node --version
+              echo "NPM version:"
+              npm --version
+            displayName: 'Display Node and NPM versions'
 
           - task: UsePythonVersion@0
             inputs:
