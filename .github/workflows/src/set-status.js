@@ -17,7 +17,12 @@ import {
  * @param {string} labelName
  * @returns {Promise<void>}
  */
-export default async function setStatus({ github, context, core }, wfName, statusName, labelName) {
+export default async function setStatus(
+  { github, context, core },
+  wfName,
+  statusName,
+  labelName,
+) {
   const { owner, repo, head_sha, issue_number } = await extractInputs(
     github,
     context,
