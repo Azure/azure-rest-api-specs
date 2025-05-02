@@ -41,9 +41,6 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 input-file:
   - stable/2025-03-01/extensions.json
 suppressions:
-  - code: OperationsAPIImplementation
-    from: extensions.json
-    reason: Operations API is implemented as a separate service.
   - code: ResourceNameRestriction
     from: extensions.json
     reason: Breaking change. Existing service contract needs to be backward compatible.
@@ -53,23 +50,6 @@ suppressions:
   - code: PatchIdentityProperty
     from: extensions.json
     reason: Existing service contract needs to be backward compatible.
-    where:
-      - $.definitions.patchExtension
-  - code: DeleteResponseCodes
-    from: extensions.json
-    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
-  - code: LroLocationHeader
-    from: extensions.json
-    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header. Tracking a work item to add Location header in the upcoming API version.   
-  - code: AvoidAdditionalProperties
-    from: extensions.json
-    reason: Existing service contract needs to be backward compatible.
-  - code: PatchResponseCodes
-    from: extensions.json
-    reason: Existing service contract needs to be backward compatible.  
-  - code: PatchBodyParametersSchema
-    from: extensions.json
-    reason: Existing service contract needs to be backward compatible.  
 ```
 
 ---
