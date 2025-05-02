@@ -12,6 +12,9 @@ import {
 /* v8 ignore start */
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {string} wfName
+ * @param {string} statusName
+ * @param {string} labelName
  * @returns {Promise<void>}
  */
 export default async function setStatus({ github, context, core }, wfName, statusName, labelName) {
