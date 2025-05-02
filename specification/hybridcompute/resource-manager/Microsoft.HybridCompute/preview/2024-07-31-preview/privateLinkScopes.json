@@ -1,0 +1,1931 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridComputeManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "HybridComputeManagementClient"
+    },
+    "description": "Azure Arc( Servers and K8s Clusters) API reference for Private Link's Scopes management.",
+    "version": "2024-07-31-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/privateLinkScopes": {
+      "get": {
+        "description": "Gets a list of all Azure Arc PrivateLinkScopes within a subscription.",
+        "operationId": "PrivateLinkScopes_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more Azure Arc PrivateLinkScope definitions.",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScopeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopesList.json": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes": {
+      "get": {
+        "description": "Gets a list of Azure Arc PrivateLinkScopes within a resource group.",
+        "operationId": "PrivateLinkScopes_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more Azure Arc PrivateLinkScope definitions.",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScopeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeListByResourceGroup": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}": {
+      "delete": {
+        "description": "Deletes a Azure Arc PrivateLinkScope.",
+        "operationId": "PrivateLinkScopes_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when deleting an Azure Arc PrivateLinkScope."
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The specified PrivateLinkScope does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PrivateLinkScopesDelete": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Returns a Azure Arc PrivateLinkScope.",
+        "operationId": "PrivateLinkScopes_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure Arc PrivateLinkScope definition.",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScope"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeGet": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates (or updates) a Azure Arc PrivateLinkScope. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
+        "operationId": "PrivateLinkScopes_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "name": "parameters",
+            "description": "Properties that need to be specified to create or update a Azure Arc for Servers and Clusters PrivateLinkScope.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScope"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when creating or updating a Azure Arc PrivateLinkScope. The updated PrivateLinkScope is returned.",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScope"
+            }
+          },
+          "201": {
+            "description": "Successful request when creating or updating a Azure Arc PrivateLinkScope. The updated PrivateLinkScope was created and is returned.",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScope"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeCreate": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_Create.json"
+          },
+          "PrivateLinkScopeUpdate": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_Update.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing PrivateLinkScope's tags. To update other fields use the CreateOrUpdate method.",
+        "operationId": "PrivateLinkScopes_UpdateTags",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "name": "PrivateLinkScopeTags",
+            "description": "Updated tag information to set into the PrivateLinkScope instance.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating the Azure Arc PrivateLinkScope's tags was successful. PrivateLinkScope tags are updated and returned with the rest of the PrivateLinkScope's object properties.",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScope"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeUpdateTagsOnly": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_UpdateTagsOnly.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.",
+        "operationId": "PrivateLinkResources_ListByPrivateLinkScope",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopePrivateLinkResource_ListGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateLinkResources/{groupName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.",
+        "operationId": "PrivateLinkResources_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private link resource.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopePrivateLinkResource_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/privateEndpoint/PrivateEndpointConnection_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully approved or rejected private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/privateEndpoint/PrivateEndpointConnection_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted private endpoint connection."
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/privateEndpoint/PrivateEndpointConnection_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets all private endpoint connections on a private link scope.",
+        "operationId": "PrivateEndpointConnections_ListByPrivateLinkScope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a private link scope.": {
+            "$ref": "./examples/privateEndpoint/PrivateEndpointConnection_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/privateLinkScopes/{privateLinkScopeId}": {
+      "get": {
+        "description": "Returns a Azure Arc PrivateLinkScope's validation details.",
+        "operationId": "PrivateLinkScopes_GetValidationDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure Arc PrivateLinkScope validation details definition.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkScopeValidationDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeGet": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_GetValidation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current": {
+      "get": {
+        "description": "Returns a Azure Arc PrivateLinkScope's validation details for a given machine.",
+        "operationId": "PrivateLinkScopes_GetValidationDetailsForMachine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure Arc PrivateLinkScope validation details definition.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkScopeValidationDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeGet": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_GetValidationForMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.HybridCompute/networkConfigurations/current": {
+      "get": {
+        "tags": [
+          "NetworkConfigurations"
+        ],
+        "description": "Returns a NetworkConfiguration for the target resource.",
+        "operationId": "NetworkConfigurations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkConfigurationsGet": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Configuration information for the target resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "NetworkConfigurations"
+        ],
+        "description": "Create or update the NetworkConfiguration of the target resource.",
+        "operationId": "NetworkConfigurations_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkConfigurationsCreate": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsCreate.json"
+          },
+          "NetworkConfigurationsUpdate": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineNameParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "Network Configuration details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when creating or updating a NetworkConfiguration. The updated NetworkConfiguration is returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "201": {
+            "description": "Successful request when creating or updating a NetworkConfiguration. The updated NetworkConfiguration was created and is returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkConfigurations"
+        ],
+        "description": "Update the endpoint to the target resource.",
+        "operationId": "NetworkConfigurations_Update",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkConfigurationsPatch": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsPatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineNameParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "Network Configuration details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Configuration information for the target resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfiguration"
+        ],
+        "description": "Gets the network security perimeter configuration for a private link scope.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_GetByPrivateLinkScope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "$ref": "#/parameters/PerimeterName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved network security perimeter configuration details.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the network security perimeter configuration of the private link scope.": {
+            "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfiguration"
+        ],
+        "description": "Lists the network security perimeter configurations for a private link scope.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved network security perimeter configuration details.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the list of network security perimeter configurations of the private link scope.": {
+            "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfiguration"
+        ],
+        "description": "Forces the network security perimeter configuration to refresh for a private link scope.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "$ref": "#/parameters/PerimeterName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationReconcileResult"
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reconciles the network security perimeter configuration of the private link scope.": {
+            "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationReconcile.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkConfigurationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkConfigurationProperties": {
+      "type": "object",
+      "description": "Network configuration properties",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource tenant Id"
+        },
+        "networkConfigurationScopeId": {
+          "type": "string",
+          "description": "Associated Network Configuration Scope Id (GUID)"
+        },
+        "networkConfigurationScopeResourceId": {
+          "type": "string",
+          "description": "Associated Network Configuration Scope Resource Id",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/privateLinkScopes"
+              }
+            ]
+          }
+        },
+        "keyProperties": {
+          "description": "Public key information for client authentication",
+          "readOnly": true,
+          "$ref": "#/definitions/KeyProperties"
+        }
+      }
+    },
+    "KeyProperties": {
+      "type": "object",
+      "description": "Public key information for client authentication",
+      "properties": {
+        "clientPublicKey": {
+          "description": "Current public key details",
+          "readOnly": true,
+          "$ref": "#/definitions/KeyDetails"
+        },
+        "candidatePublicKey": {
+          "description": "Candidate public key details",
+          "readOnly": true,
+          "$ref": "#/definitions/KeyDetails"
+        }
+      }
+    },
+    "KeyDetails": {
+      "type": "object",
+      "description": "Public key details",
+      "properties": {
+        "publicKey": {
+          "type": "string",
+          "description": "Public key",
+          "readOnly": true
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Key expiration date",
+          "readOnly": true
+        },
+        "renewAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Recommended key renewal date",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "type": "object",
+      "description": "Properties that define a Network Security Perimeter resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties that define a Network Security Perimeter resource.",
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "type": "object",
+      "description": "Properties that define a Network Security Perimeter resource.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of this NetworkSecurityPerimeter: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
+          "readOnly": true
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "description": "Provisioning issues.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ProvisioningIssue"
+          },
+          "x-ms-identifiers": []
+        },
+        "networkSecurityPerimeter": {
+          "description": "The Network Security Perimeter associated with this configuration.",
+          "$ref": "#/definitions/NetworkSecurityPerimeter"
+        },
+        "resourceAssociation": {
+          "description": "The Resource Association.",
+          "$ref": "#/definitions/ResourceAssociation"
+        },
+        "profile": {
+          "description": "Network Security Perimeter profile",
+          "$ref": "#/definitions/NetworkSecurityPerimeterProfile"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterProfile": {
+      "type": "object",
+      "description": "Network Security Perimeter profile",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource",
+          "readOnly": true
+        },
+        "accessRulesVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Access rules version number",
+          "readOnly": true
+        },
+        "accessRules": {
+          "type": "array",
+          "description": "Collection of access rules for the profile",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AccessRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "diagnosticSettingsVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Diagnostic settings version number",
+          "readOnly": true
+        },
+        "enabledLogCategories": {
+          "type": "array",
+          "description": "Collection of enabled log categories for the profile",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningIssue": {
+      "type": "object",
+      "description": "Details on issues that occurred during provisioning.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the provisioning issue.",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Provisioning issue properties",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningIssueProperties"
+        }
+      }
+    },
+    "ProvisioningIssueProperties": {
+      "type": "object",
+      "description": "Properties of a provisioning issue.",
+      "properties": {
+        "issueType": {
+          "description": "Issue type",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningIssueType"
+        },
+        "severity": {
+          "description": "Severity of the provisioning issue.",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningIssueSeverity"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the provisioning issue.",
+          "readOnly": true
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "description": "ARM Ids of the resources that can be associated to the same perimeter to remediate the issue",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "description": "Access rules that can be added to the perimeter to remediate the issue",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AccessRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisioningIssueType": {
+      "type": "string",
+      "description": "Type of provisioning issue.",
+      "enum": [
+        "MissingPerimeterConfiguration",
+        "MissingIdentityConfiguration",
+        "ConfigurationPropagationFailure",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningIssueType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "MissingPerimeterConfiguration",
+            "description": "Perimeter configuration is missing."
+          },
+          {
+            "value": "MissingIdentityConfiguration",
+            "description": "Identity configuration is missing."
+          },
+          {
+            "value": "ConfigurationPropagationFailure",
+            "description": "Configuration failed to propagate."
+          },
+          {
+            "value": "Other",
+            "description": "Other failure."
+          }
+        ]
+      }
+    },
+    "ProvisioningIssueSeverity": {
+      "type": "string",
+      "description": "Severity of the provisioning issue.",
+      "enum": [
+        "Warning",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningIssueSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Warning",
+            "description": "Warnings can cause connectivity issues after provisioning succeeds."
+          },
+          {
+            "value": "Error",
+            "description": "Errors will cause association provisioning to fail."
+          }
+        ]
+      }
+    },
+    "AccessMode": {
+      "type": "string",
+      "description": "Property that impacts a resource's logging behavior and its connectivity with other resources and public networks.",
+      "enum": [
+        "enforced",
+        "audit",
+        "learning"
+      ],
+      "x-ms-enum": {
+        "name": "AccessMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "enforced",
+            "description": "Indicates that resource access is controlled by the NSP definition."
+          },
+          {
+            "value": "audit",
+            "description": "Dry run mode, where traffic is evaluated against NSP Rules, logged but not enforced."
+          },
+          {
+            "value": "learning",
+            "description": "Enables traffic evaluation to fall back to resource-specific firewall configurations."
+          }
+        ]
+      }
+    },
+    "AccessRuleDirection": {
+      "type": "string",
+      "description": "Indicates direction of an access rule.",
+      "enum": [
+        "Inbound",
+        "Outbound"
+      ],
+      "x-ms-enum": {
+        "name": "AccessRuleDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Inbound",
+            "description": "Traffic originates outside of network."
+          },
+          {
+            "value": "Outbound",
+            "description": "Traffic originates inside the network"
+          }
+        ]
+      }
+    },
+    "AccessRule": {
+      "type": "object",
+      "description": "Access rule.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the access rule.",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Access rule properties",
+          "readOnly": true,
+          "$ref": "#/definitions/AccessRuleProperties"
+        }
+      }
+    },
+    "AccessRuleProperties": {
+      "type": "object",
+      "description": "Properties of an access rule.",
+      "properties": {
+        "direction": {
+          "description": "Direction of the access rule.",
+          "readOnly": true,
+          "$ref": "#/definitions/AccessRuleDirection"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "Address prefixes that are allowed access.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeter": {
+      "type": "object",
+      "description": "Properties that define a Network Security Perimeter resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "description": "Guid of the Network Security Perimeter",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Regional location of the perimeter"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "type": "object",
+      "description": "A list of network security perimeter configurations.",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationReconcileResult": {
+      "type": "object",
+      "description": "Result of network security perimeter configurations.",
+      "properties": {
+        "location": {
+          "description": "The URL of the resource used to check the status of the asynchronous operation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ResourceAssociation": {
+      "type": "object",
+      "description": "Properties that define a Resource Association.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the Resource Association"
+        },
+        "accessMode": {
+          "description": "The access mode",
+          "readOnly": true,
+          "$ref": "#/definitions/AccessMode"
+        }
+      }
+    },
+    "PrivateLinkScopesResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "TagsResource": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance."
+    },
+    "HybridComputePrivateLinkScope": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties that define a Azure Arc PrivateLinkScope resource.",
+          "$ref": "#/definitions/HybridComputePrivateLinkScopeProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateLinkScopesResource"
+        }
+      ],
+      "description": "An Azure Arc PrivateLinkScope definition."
+    },
+    "PrivateLinkScopeValidationDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "publicNetworkAccess": {
+          "description": "Indicates whether machines associated with the private link scope can also use public Azure Arc service endpoints.",
+          "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "connectionDetails": {
+          "type": "array",
+          "description": "List of Private Endpoint Connection details.",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetail"
+          }
+        }
+      }
+    },
+    "ConnectionDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The private endpoint connection private ip address"
+        },
+        "linkIdentifier": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The private endpoint connection link identifier"
+        },
+        "groupId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The private endpoint connection group id"
+        },
+        "memberName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The private endpoint connection member name"
+        }
+      }
+    },
+    "HybridComputePrivateLinkScopeProperties": {
+      "type": "object",
+      "description": "Properties that define a Azure Arc PrivateLinkScope resource.",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "Indicates whether machines associated with the private link scope can also use public Azure Arc service endpoints.",
+          "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
+          "readOnly": true
+        },
+        "privateLinkScopeId": {
+          "readOnly": true,
+          "description": "The Guid id of the private link scope.",
+          "type": "string"
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "description": "The collection of associated Private Endpoint Connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionDataModel"
+          }
+        }
+      }
+    },
+    "HybridComputePrivateLinkScopeListResult": {
+      "type": "object",
+      "description": "Describes the list of Azure Arc PrivateLinkScope resources.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Azure Arc PrivateLinkScope definitions.",
+          "items": {
+            "$ref": "#/definitions/HybridComputePrivateLinkScope"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to get the next set of Azure Arc PrivateLinkScope definitions if too many PrivateLinkScopes where returned in the result set."
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "A list of private link resources",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "Required DNS zone names of the the private link resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionDataModel": {
+      "type": "object",
+      "description": "The Data Model for a Private Endpoint Connection associated with a Private Link Scope",
+      "properties": {
+        "id": {
+          "description": "The ARM Resource Id of the Private Endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The Name of the Private Endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The Private Endpoint Connection properties."
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of a private endpoint connection.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupIds": {
+          "description": "List of group IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "description": "Private endpoint which the connection belongs to.",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "type": "object",
+      "description": "State of the private endpoint connection.",
+      "required": [
+        "status",
+        "description"
+      ],
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "A private endpoint connection",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "A list of private endpoint connections.",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PublicNetworkAccessType": {
+      "type": "string",
+      "description": "The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).",
+      "default": "Disabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Allows Azure Arc agents to communicate with Azure Arc services over both public (internet) and private endpoints."
+          },
+          {
+            "value": "Disabled",
+            "description": "Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link."
+          },
+          {
+            "value": "SecuredByPerimeter",
+            "description": "Azure Arc agent communication with Azure Arc services over public (internet) is enforced by Network Security Perimeter (NSP)"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "PrivateLinkScopeName": {
+      "name": "scopeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure Arc PrivateLinkScope resource.",
+      "x-ms-parameter-location": "method",
+      "pattern": "[a-zA-Z0-9-_\\.]+"
+    },
+    "PrivateLinkScopeId": {
+      "name": "privateLinkScopeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id (Guid) of the Azure Arc PrivateLinkScope resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "GroupNameParameter": {
+      "name": "groupName",
+      "in": "path",
+      "description": "The name of the private link resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The location of the target resource.",
+      "minLength": 1
+    },
+    "MachineNameParameter": {
+      "name": "machineName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the target machine to get the private link scope validation details for.",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkConfigurationScopeId": {
+      "name": "scopeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id (Guid) of the Azure Arc Network Configuration Scope resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "PerimeterName": {
+      "name": "perimeterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name, in the format {perimeterGuid}.{associationName}, of the Network Security Perimeter resource.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[.]{1}.+$"
+    }
+  }
+}

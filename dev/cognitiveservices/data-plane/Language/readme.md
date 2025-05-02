@@ -6,12 +6,12 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Language is 2022-07-01-preview.
+The current release of Language is 2023-11-11-preview.
 
-<!-- The current stable release of Language is 2022-05-01. -->
+<!-- The current stable release of Language is 2023-11-11-preview. -->
 
 ```yaml
-tag: release_2022-07-01-preview
+tag: release_2023-11-15-preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -22,8 +22,9 @@ directive:
 
 ### Release
 
-``` yaml $(tag) == 'release_2022-07-01-preview'
+``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
+  - analyzedocuments.json
   - analyzetext.json
   - analyzetext-authoring.json
   - analyzeconversations.json
@@ -45,12 +46,4 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
-```
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    reason: Not every service will ship new versions within the Language pillar.
 ```

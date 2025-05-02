@@ -23,6 +23,9 @@ directive:
   - rename-operation:
       from: InboundSecurityRule_CreateOrUpdate
       to: InboundSecurityRuleOperation_CreateOrUpdate
+  - rename-operation:
+      from: InboundSecurityRule_Get
+      to: InboundSecurityRuleOperation_Get
   - from: vmssNetworkInterface.json
     where: '$.info'
     transform: >
@@ -31,6 +34,10 @@ directive:
     where: '$.info'
     transform: >
       $["version"] = "2018-10-01";
+  - from: applicationGateway.json
+    where: '$.definitions.ApplicationGatewayFirewallExclusion'
+    transform: >
+      $["required"] = ["matchVariable"]
 ```
 
 ### Java multi-api

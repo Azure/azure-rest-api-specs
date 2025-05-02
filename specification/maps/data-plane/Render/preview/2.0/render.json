@@ -25,7 +25,7 @@
     },
     "SharedKey": {
       "type": "apiKey",
-      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
+      "description": "This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\n\n With this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\n\n For publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored.",
       "name": "subscription-key",
       "in": "query"
     },
@@ -62,7 +62,7 @@
     },
     "TilesetId_rv2": {
       "name": "tilesetId",
-      "description": "A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset  zoom levels. Every tileset has a **tilesetId** to use when making requests. The **tilesetId** for tilesets created using [Azure Maps Creator](https://aka.ms/amcreator) are generated through the  [Tileset Create API](https://docs.microsoft.com/en-us/rest/api/maps/tileset). The ready-to-use tilesets supplied  by Azure Maps are listed below. For example, microsoft.base.",
+      "description": "A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset  zoom levels. Every tileset has a **tilesetId** to use when making requests. The **tilesetId** for tilesets created using [Azure Maps Creator](https://aka.ms/amcreator) are generated through the  [Tileset Create API](https://docs.microsoft.com/rest/api/maps-creator/tileset). The ready-to-use tilesets supplied  by Azure Maps are listed below. For example, microsoft.base.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -138,7 +138,7 @@
           },
           {
             "value": "microsoft.imagery",
-            "description": "A combination of satellite and aerial imagery. Only available in S1 pricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (jpeg)."
+            "description": "A combination of satellite or aerial imagery. Only available in S1 and G2 pricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (png)."
           },
           {
             "value": "microsoft.weather.radar.main",
@@ -146,7 +146,7 @@
           },
           {
             "value": "microsoft.weather.infrared.main",
-            "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their temperature.  Please see [coverage information](https://aka.ms/AzureMapsWeatherCoverage) for Azure Maps Weather service. To learn more about the returned Satellite data, please see [Weather concepts](https://aka.ms/AzureMapsWeatherConcepts).<br>\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+            "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their temperature.  Please see [coverage information](https://aka.ms/AzureMapsWeatherCoverage) for Azure Maps Weather service. To learn more about the returned Satellite data, please see [Weather concepts](https://learn.microsoft.com/azure/azure-maps/weather-services-concepts#satellite-images).<br>\n\nSupports zoom levels 0 through 15. Format: raster (png)."
           },
           {
             "value": "microsoft.dem",

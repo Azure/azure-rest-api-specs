@@ -439,6 +439,7 @@
             },
             "delay": {
               "type": "object",
+              "x-ms-format": "dfe-string",
               "description": "Specifies how long the trigger waits past due time before triggering new run. It doesn't alter window start and end time. The default is 0. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
             },
             "maxConcurrency": {
@@ -491,6 +492,7 @@
       "properties": {
         "count": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Maximum ordinary retry attempts. Default is 0. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "intervalInSeconds": {

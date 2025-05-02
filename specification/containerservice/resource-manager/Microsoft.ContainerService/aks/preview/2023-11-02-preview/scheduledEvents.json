@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerServiceClient",
+    "description": "The Container Service Client.",
+    "version": "2023-11-02-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ScheduledEvent": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties for the event.",
+          "$ref": "#/definitions/ScheduledEventProperties"
+        }
+      },
+      "description": "Scheduled event."
+    },
+    "ScheduledEventProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the event."
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The event id of the event."
+        },
+        "eventSource": {
+          "type": "string",
+          "description": "The source of the event."
+        },
+        "eventStatus": {
+          "type": "string",
+          "enum": [
+            "Scheduled",
+            "Started",
+            "Completed",
+            "Cancelled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "eventStatus",
+            "modelAsString": true
+          },
+          "description": "The status of the event."
+        },
+        "eventDetails": {
+          "type": "string",
+          "description": "The details of the event."
+        },
+        "scheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the event is scheduled to start."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event actually started."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time the state of the event was updated."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ContainerService/managedClusters"
+                },
+                {
+                  "type": "Microsoft.ContainerService/managedClusters/agentPools"
+                }
+              ]
+            }
+          },
+          "description": "The list of resources impacted by the event."
+        },
+        "resourceType": {
+          "type": "string",
+          "enum": [
+            "ManagedCluster",
+            "AgentPool"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceType",
+            "modelAsString": true
+          },
+          "description": "The resource type of the event."
+        }
+      },
+      "description": "Properties for a scheduled event."
+    }
+  }
+}

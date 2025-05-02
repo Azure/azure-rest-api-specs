@@ -547,6 +547,9 @@
           },
           "Create a ticket to request Quota increase for services that do not require additional details in the quotaTicketDetails object": {
             "$ref": "./examples/CreateGenericQuotaTicket.json"
+          },
+          "Create a ticket to request Quota increase for Azure Lab Services for a subscription": {
+            "$ref": "./examples/CreateALSQuotaRequestForSubscription.json"
           }
         }
       }
@@ -1382,7 +1385,7 @@
           }
         },
         "phoneNumber": {
-          "description": "Phone number. This is required if preferred contact method is phone.",
+          "description": "Phone number. This is required if preferred contact method is phone. It is also required when submitting 'critical' or 'highestcriticalimpact' severity cases.",
           "type": "string"
         },
         "preferredTimeZone": {
@@ -1435,7 +1438,7 @@
           }
         },
         "phoneNumber": {
-          "description": "Phone number. This is required if preferred contact method is phone.",
+          "description": "Phone number. This is required if preferred contact method is phone. It is also required when submitting 'critical' or 'highestcriticalimpact' severity cases.",
           "type": "string"
         },
         "preferredTimeZone": {

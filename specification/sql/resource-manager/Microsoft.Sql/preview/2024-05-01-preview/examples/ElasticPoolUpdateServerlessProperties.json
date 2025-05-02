@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "sqlcrudtest-2369",
+    "serverName": "sqlcrudtest-8069",
+    "elasticPoolName": "sqlcrudtest-8102",
+    "api-version": "2024-05-01-preview",
+    "parameters": {
+      "sku": {
+        "name": "GP_S_Gen5_2",
+        "tier": "GeneralPurpose",
+        "capacity": 2
+      },
+      "properties": {
+        "minCapacity": 0.5,
+        "autoPauseDelay": 60,
+        "perDatabaseSettings": {
+          "minCapacity": 0,
+          "maxCapacity": 2.0,
+          "autoPauseDelay": 80
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102",
+        "name": "sqlcrudtest-8102",
+        "type": "Microsoft.Sql/servers/elasticPools",
+        "location": "Japan East",
+        "kind": null,
+        "sku": {
+          "name": "GP_S_Gen5_2",
+          "tier": "GeneralPurpose",
+          "capacity": 2
+        },
+        "properties": {
+          "creationDate": "2017-02-10T01:25:25.033Z",
+          "state": "Ready",
+          "maxSizeBytes": 102400,
+          "minCapacity": 0.5,
+          "autoPauseDelay": 60,
+          "perDatabaseSettings": {
+            "minCapacity": 0,
+            "maxCapacity": 2.0,
+            "autoPauseDelay": 80
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/locations/japaneast1/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2023-05-01"
+      }
+    }
+  }
+}

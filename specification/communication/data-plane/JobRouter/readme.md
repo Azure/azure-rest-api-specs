@@ -26,7 +26,35 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-jobrouter-2022-07-18-preview
+tag: package-jobrouter-2023-11-01
+```
+
+### Suppression
+``` yaml
+suppressions:
+  - code: ValidFormats
+    where: $.definitions["Azure.Core.eTag"].format
+    reason: eTag should be an allowed format
+directive:
+  - suppress: INVALID_TYPE
+```
+
+### Tag: package-jobrouter-2024-01-18-preview
+
+These settings apply only when `--tag=package-jobrouter-2024-01-18-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-jobrouter-2024-01-18-preview'
+input-file:
+  - preview/2024-01-18-preview/communicationservicejobrouter.json
+```
+
+### Tag: package-jobrouter-2023-11-01
+
+These settings apply only when `--tag=package-jobrouter-2023-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-jobrouter-2023-11-01'
+input-file:
+  - stable/2023-11-01/communicationservicejobrouter.json
 ```
 
 ### Tag: package-jobrouter-2022-07-18-preview
@@ -55,12 +83,6 @@ directive:
     transform: >
       $.type = "object";
       $.additionalProperties["$ref"] = "#/definitions/ExceptionAction";
-
-# Rename CommunicationError to JobRouterError
-  - from: swagger-document
-    where: '$.definitions.CommunicationError'
-    transform: >
-      $["x-ms-client-name"] = "JobRouterError";
 ```
 
 

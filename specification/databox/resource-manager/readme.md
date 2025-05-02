@@ -26,7 +26,80 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-02
+tag: package-2025-02
+```
+
+### Tag: package-2025-02
+
+These settings apply only when `--tag=package-2025-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-02'
+input-file:
+- Microsoft.DataBox/stable/2025-02-01/databox.json
+```
+
+### Tag: package-2024-03-preview
+
+These settings apply only when `--tag=package-2024-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-preview'
+input-file:
+- Microsoft.DataBox/preview/2024-03-01-preview/databox.json
+```
+
+### Tag: package-2024-02-preview
+
+These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02-preview'
+input-file:
+- Microsoft.DataBox/preview/2024-02-01-preview/databox.json
+```
+
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-12'
+input-file:
+- Microsoft.DataBox/stable/2023-12-01/databox.json
+```
+
+### Tag: package-2023-03
+
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03'
+input-file:
+- Microsoft.DataBox/stable/2023-03-01/databox.json
+```
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12'
+input-file:
+- Microsoft.DataBox/stable/2022-12-01/databox.json
+```
+
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+- Microsoft.DataBox/stable/2022-10-01/databox.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+- Microsoft.DataBox/stable/2022-09-01/databox.json
 ```
 
 ### Tag: package-2022-02
@@ -122,7 +195,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-go
@@ -133,27 +206,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.DataBox
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/databox/Microsoft.Azure.Management.DataBox/src/Generated
-  clear-output-folder: true
-  
-directive:
-- from: swagger-document
-  where: $.definitions.ShippingAddress
-  transform: >
-    $.required = [ "streetAddress1", "country", "postalCode" ];
 ```
 
 ## Python

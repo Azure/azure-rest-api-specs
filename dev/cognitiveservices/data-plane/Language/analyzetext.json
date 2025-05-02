@@ -2,10 +2,19 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
-    "version": "2022-07-01-preview"
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.",
+    "version": "2023-04-01"
   },
   "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
+      }
+    },
     "apim_key": {
       "type": "apiKey",
       "description": "A subscription key for a Language service resource.",
@@ -14,6 +23,11 @@
     }
   },
   "security": [
+    {
+      "AADToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    },
     {
       "apim_key": []
     }
@@ -44,7 +58,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "common.json#/parameters/ShowStats"
+            "$ref": "#/parameters/ShowStats"
           },
           {
             "description": "Collection of documents to analyze and a single task to execute.",
@@ -72,25 +86,22 @@
         },
         "x-ms-examples": {
           "Successful Entity Linking Request": {
-            "$ref": "./examples/text/SuccessfulEntityLinkingRequest.json"
+            "$ref": "./examples/SuccessfulEntityLinkingRequest.json"
           },
           "Successful Entity Recognition Request": {
-            "$ref": "./examples/text/SuccessfulEntityRecognitionRequest.json"
+            "$ref": "./examples/SuccessfulEntityRecognitionRequest.json"
           },
           "Successful Key Phrase Extraction Request": {
-            "$ref": "./examples/text/SuccessfulKeyPhraseExtractionRequest.json"
+            "$ref": "./examples/SuccessfulKeyPhraseExtractionRequest.json"
           },
           "Successful PII Entity Recognition Request": {
-            "$ref": "./examples/text/SuccessfulPiiEntityRecognitionRequest.json"
+            "$ref": "./examples/SuccessfulPiiEntityRecognitionRequest.json"
           },
           "Successful Language Detection Request": {
-            "$ref": "./examples/text/SuccessfulLanguageDetectionRequest.json"
+            "$ref": "./examples/SuccessfulLanguageDetectionRequest.json"
           },
           "Successful Sentiment Analysis Request": {
-            "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
-          },
-          "Succesful Healthcare Request": {
-            "$ref": "./examples/text/SuccessfulHealthcareRequest.json"
+            "$ref": "./examples/SuccessfulSentimentAnalysisRequest.json"
           }
         }
       }
@@ -138,7 +149,10 @@
         },
         "x-ms-examples": {
           "Successful Submit Analysis Job Request": {
-            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
+            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
+          },
+          "Successful Submit Abstractive Summarization Task": {
+            "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskSubmit.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -157,10 +171,10 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "common.json#/parameters/JobId"
+            "$ref": "#/parameters/JobId"
           },
           {
-            "$ref": "common.json#/parameters/ShowStats"
+            "$ref": "#/parameters/ShowStats"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -185,7 +199,10 @@
         },
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
-            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
+            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
+          },
+          "Successful Get Abstractive Summarization Result": {
+            "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskResult.json"
           }
         }
       }
@@ -203,7 +220,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "common.json#/parameters/JobId"
+            "$ref": "#/parameters/JobId"
           }
         ],
         "responses": {
@@ -224,7 +241,7 @@
         },
         "x-ms-examples": {
           "Successful Job Delete Request": {
-            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsCancelRequest.json"
+            "$ref": ".//examples//SuccessfulAnalyzeTextJobsCancelRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -261,7 +278,8 @@
         "ExtractiveSummarization",
         "CustomEntityRecognition",
         "CustomSingleLabelClassification",
-        "CustomMultiLabelClassification"
+        "CustomMultiLabelClassification",
+        "AbstractiveSummarization"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROTaskKind",
@@ -297,7 +315,8 @@
         "ExtractiveSummarizationLROResults",
         "CustomEntityRecognitionLROResults",
         "CustomSingleLabelClassificationLROResults",
-        "CustomMultiLabelClassificationLROResults"
+        "CustomMultiLabelClassificationLROResults",
+        "AbstractiveSummarizationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -305,6 +324,7 @@
       }
     },
     "MultiLanguageAnalysisInput": {
+      "type": "object",
       "properties": {
         "documents": {
           "type": "array",
@@ -315,6 +335,7 @@
       }
     },
     "LanguageDetectionAnalysisInput": {
+      "type": "object",
       "properties": {
         "documents": {
           "type": "array",
@@ -325,6 +346,7 @@
       }
     },
     "AnalyzeTextTask": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -336,6 +358,7 @@
       }
     },
     "AnalyzeTextLROTask": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -347,11 +370,12 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/TaskIdentifier"
+          "$ref": "#/definitions/TaskIdentifier"
         }
       ]
     },
     "AnalyzeTextTaskResult": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -363,6 +387,7 @@
       }
     },
     "AnalyzeTextEntityLinkingInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -379,6 +404,7 @@
       "x-ms-discriminator-value": "EntityLinking"
     },
     "AnalyzeTextEntityRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -395,6 +421,7 @@
       "x-ms-discriminator-value": "EntityRecognition"
     },
     "AnalyzeTextKeyPhraseExtractionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -411,6 +438,7 @@
       "x-ms-discriminator-value": "KeyPhraseExtraction"
     },
     "AnalyzeTextPiiEntitiesRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -427,6 +455,7 @@
       "x-ms-discriminator-value": "PiiEntityRecognition"
     },
     "AnalyzeTextLanguageDetectionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/LanguageDetectionAnalysisInput"
@@ -443,6 +472,7 @@
       "x-ms-discriminator-value": "LanguageDetection"
     },
     "AnalyzeTextSentimentAnalysisInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -459,13 +489,10 @@
       "x-ms-discriminator-value": "SentimentAnalysis"
     },
     "AnalyzeTextJobsInput": {
+      "type": "object",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
-          "type": "string"
-        },
-        "defaultLanguage": {
-          "description": "Default language to use for records requesting automatic language detection.",
           "type": "string"
         },
         "analysisInput": {
@@ -484,6 +511,40 @@
         "tasks"
       ]
     },
+    "TaskIdentifier": {
+      "type": "object",
+      "description": "Base task object.",
+      "properties": {
+        "taskName": {
+          "type": "string"
+        }
+      }
+    },
+    "TaskParameters": {
+      "type": "object",
+      "description": "Base parameters object for a text analysis task.",
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "PreBuiltTaskParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using pre-built models.",
+      "properties": {
+        "modelVersion": {
+          "type": "string",
+          "default": "latest"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ]
+    },
     "CustomTaskParameters": {
       "type": "object",
       "description": "Parameters object for a text analysis task using custom models.",
@@ -499,7 +560,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/TaskParameters"
+          "$ref": "#/definitions/TaskParameters"
         }
       ],
       "required": [
@@ -508,12 +569,13 @@
       ]
     },
     "CustomResult": {
+      "type": "object",
       "properties": {
         "errors": {
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/DocumentError"
+            "$ref": "common.json#/definitions/DocumentError"
           }
         },
         "statistics": {
@@ -573,9 +635,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -624,9 +683,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ClassificationDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -712,7 +768,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -796,32 +852,42 @@
           "type": "string",
           "description": "Healthcare Entity Category.",
           "enum": [
-            "BODY_STRUCTURE",
-            "AGE",
-            "GENDER",
-            "EXAMINATION_NAME",
-            "DATE",
-            "DIRECTION",
-            "FREQUENCY",
-            "MEASUREMENT_VALUE",
-            "MEASUREMENT_UNIT",
-            "RELATIONAL_OPERATOR",
-            "TIME",
-            "GENE_OR_PROTEIN",
-            "VARIANT",
-            "ADMINISTRATIVE_EVENT",
-            "CARE_ENVIRONMENT",
-            "HEALTHCARE_PROFESSION",
-            "DIAGNOSIS",
-            "SYMPTOM_OR_SIGN",
-            "CONDITION_QUALIFIER",
-            "MEDICATION_CLASS",
-            "MEDICATION_NAME",
-            "DOSAGE",
-            "MEDICATION_FORM",
-            "MEDICATION_ROUTE",
-            "FAMILY_RELATION",
-            "TREATMENT_NAME"
+            "BodyStructure",
+            "Age",
+            "Gender",
+            "Ethnicity",
+            "ExaminationName",
+            "Date",
+            "Direction",
+            "Frequency",
+            "MeasurementValue",
+            "MeasurementUnit",
+            "RelationalOperator",
+            "Time",
+            "Course",
+            "GeneOrProtein",
+            "Variant",
+            "Expression",
+            "MutationType",
+            "AdministrativeEvent",
+            "CareEnvironment",
+            "HealthcareProfession",
+            "Diagnosis",
+            "SymptomOrSign",
+            "ConditionQualifier",
+            "ConditionScale",
+            "MedicationClass",
+            "MedicationName",
+            "Dosage",
+            "MedicationForm",
+            "MedicationRoute",
+            "FamilyRelation",
+            "TreatmentName",
+            "Allergen",
+            "Employment",
+            "LivingStatus",
+            "SubstanceUse",
+            "SubstanceUseAmount"
           ]
         },
         "subcategory": {
@@ -880,17 +946,30 @@
           "type": "string",
           "enum": [
             "Abbreviation",
+            "BodySiteOfCondition",
+            "BodySiteOfTreatment",
+            "CourseOfCondition",
+            "CourseOfExamination",
+            "CourseOfMedication",
+            "CourseOfTreatment",
             "DirectionOfBodyStructure",
             "DirectionOfCondition",
             "DirectionOfExamination",
             "DirectionOfTreatment",
             "DosageOfMedication",
+            "ExaminationFindsCondition",
+            "ExpressionOfGene",
+            "ExpressionOfVariant",
             "FormOfMedication",
+            "FrequencyOfCondition",
             "FrequencyOfMedication",
             "FrequencyOfTreatment",
+            "MutationTypeOfGene",
+            "MutationTypeOfVariant",
             "QualifierOfCondition",
             "RelationOfExamination",
             "RouteOfMedication",
+            "ScaleOfCondition",
             "TimeOfCondition",
             "TimeOfEvent",
             "TimeOfExamination",
@@ -899,7 +978,8 @@
             "UnitOfCondition",
             "UnitOfExamination",
             "ValueOfCondition",
-            "ValueOfExamination"
+            "ValueOfExamination",
+            "VariantOfGene"
           ],
           "x-ms-enum": {
             "name": "relationType",
@@ -1012,7 +1092,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1041,9 +1121,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
-        },
-        {
-          "$ref": "#/definitions/DocumentDetectedLanguage"
         }
       ],
       "required": [
@@ -1352,7 +1429,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1398,9 +1475,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1484,7 +1558,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1530,9 +1604,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/LinkedEntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1656,7 +1727,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1702,9 +1773,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/PiiEntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1956,6 +2024,15 @@
       "type": "array",
       "uniqueItems": true
     },
+    "KeyPhraseTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Key Phrase Extraction task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
     "ExtractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Extractive Summarization task.",
@@ -1999,14 +2076,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ExtractedSummaryDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/ExtractedSummaryDocumentResult"
           }
         }
       },
@@ -2094,15 +2164,6 @@
         }
       }
     },
-    "KeyPhraseTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Key Phrase Extraction task.",
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
     "KeyPhraseLROTask": {
       "type": "object",
       "description": "An object representing the task definition for a Key Phrase Extraction task.",
@@ -2145,9 +2206,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/KeyPhrasesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2187,7 +2245,7 @@
       "description": "Supported parameters for a Language Detection task.",
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -2289,6 +2347,17 @@
       },
       "type": "object"
     },
+    "JobErrors": {
+      "properties": {
+        "errors": {
+          "items": {
+            "$ref": "common.json#/definitions/Error"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "AnalyzeTextJobStatistics": {
       "properties": {
         "statistics": {
@@ -2334,6 +2403,34 @@
       ],
       "type": "object"
     },
+    "TaskState": {
+      "properties": {
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "State"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "lastUpdateDateTime"
+      ],
+      "type": "object"
+    },
     "AnalyzeTextLROResult": {
       "type": "object",
       "discriminator": "kind",
@@ -2344,10 +2441,10 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/TaskState"
+          "$ref": "#/definitions/TaskState"
         },
         {
-          "$ref": "common.json#/definitions/TaskIdentifier"
+          "$ref": "#/definitions/TaskIdentifier"
         }
       ],
       "required": [
@@ -2552,33 +2649,6 @@
         }
       }
     },
-    "DocumentDetectedLanguage": {
-      "type": "object",
-      "properties": {
-        "detectedLanguage": {
-          "type": "string",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      }
-    },
-    "DocumentError": {
-      "type": "object",
-      "required": [
-        "id",
-        "error"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Document Id."
-        },
-        "error": {
-          "type": "object",
-          "description": "Document Error.",
-          "$ref": "common.json#/definitions/Error"
-        }
-      }
-    },
     "DocumentWarning": {
       "type": "object",
       "required": [
@@ -2628,37 +2698,6 @@
       },
       "description": "if showStats=true was specified in the request this field will contain information about the document payload."
     },
-    "DocumentRequestStatistics": {
-      "type": "object",
-      "required": [
-        "documentsCount",
-        "validDocumentsCount",
-        "erroneousDocumentsCount"
-      ],
-      "properties": {
-        "documentsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of documents submitted in the request."
-        },
-        "validDocumentsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
-        },
-        "erroneousDocumentsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/RequestStatistics"
-        }
-      ],
-      "description": "if showStats=true was specified in the request this field will contain information about the document request payload."
-    },
     "MultiLanguageInput": {
       "type": "object",
       "description": "Contains an input document to be analyzed by the service.",
@@ -2677,7 +2716,7 @@
         },
         "language": {
           "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. For Auto Language Detection, use \"auto\". If not set, use \"en\" for English as default."
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
         }
       }
     },
@@ -2699,7 +2738,145 @@
           "type": "string"
         }
       }
+    },
+    "AbstractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Abstractive Summarization task.",
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AbstractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarization"
+    },
+    "AbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for the pre-build Abstractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AbstractiveSummarizationLROResult": {
+      "type": "object",
+      "description": "An object representing the results for an Abstractive Summarization task.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/AbstractiveSummarizationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarizationLROResults"
+    },
+    "AbstractiveSummarizationResultBase": {
+      "type": "object",
+      "description": "An object representing the summarization results of each document.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ]
+    },
+    "AbstractiveSummarizationResult": {
+      "type": "object",
+      "description": "An object representing the pre-build summarization results of each document.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummarizationResultBase"
+        },
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "AbstractiveSummaryDocumentResult": {
+      "type": "object",
+      "description": "An object representing the summarization result of a single document.",
+      "properties": {
+        "summaries": {
+          "type": "array",
+          "description": "A list of abstractive summaries.",
+          "items": {
+            "$ref": "#/definitions/AbstractiveSummary"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "summaries"
+      ]
+    },
+    "AbstractiveSummary": {
+      "type": "object",
+      "description": "An object representing a single summary with context for given document.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the summary."
+        },
+        "contexts": {
+          "type": "array",
+          "description": "The context list of the summary.",
+          "items": {
+            "$ref": "common.json#/definitions/SummaryContext"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ShowStats": {
+      "name": "showStats",
+      "in": "query",
+      "description": "(Optional) if set to true, response will contain request and document level statistics.",
+      "type": "boolean",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "JobId": {
+      "description": "Job ID",
+      "format": "uuid",
+      "in": "path",
+      "name": "jobId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

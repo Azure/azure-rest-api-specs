@@ -28,7 +28,72 @@ These are the global settings for the Nginx API.
 title: NginxManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-05-01-preview
+tag: package-2024-11-01-preview
+```
+
+### Tag: package-2024-11-01-preview
+
+These settings apply only when `--tag=package-2024-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11-01-preview'
+input-file:
+  - NGINX.NGINXPLUS/preview/2024-11-01-preview/swagger.json
+```
+
+### Tag: package-2024-09-01-preview
+
+These settings apply only when `--tag=package-2024-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-01-preview'
+input-file:
+  - NGINX.NGINXPLUS/preview/2024-09-01-preview/swagger.json
+```
+
+### Tag: package-2024-06-01-preview
+
+These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-06-01-preview'
+input-file:
+- NGINX.NGINXPLUS/preview/2024-06-01-preview/swagger.json
+```
+
+
+### Tag: package-2024-01-01-preview
+
+These settings apply only when `--tag=package-2024-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01-01-preview'
+input-file:
+- NGINX.NGINXPLUS/preview/2024-01-01-preview/swagger.json
+```
+
+### Tag: package-2023-09-01
+
+These settings apply only when `--tag=package-2023-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09-01'
+input-file:
+- NGINX.NGINXPLUS/stable/2023-09-01/swagger.json
+```
+
+
+### Tag: package-2023-04-01
+
+These settings apply only when `--tag=package-2023-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-04-01'
+input-file:
+- NGINX.NGINXPLUS/stable/2023-04-01/swagger.json
+```
+
+### Tag: package-2022-08-01
+
+These settings apply only when `--tag=package-2022-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08-01'
+input-file:
+- NGINX.NGINXPLUS/stable/2022-08-01/swagger.json
 ```
 
 ### Tag: package-2021-05-01-preview
@@ -40,6 +105,15 @@ input-file:
 - NGINX.NGINXPLUS/preview/2021-05-01-preview/swagger.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: PutRequestResponseSchemeArm
+    from: swagger.json
+    reason: Temporary suppression needed to avoid delays for business needs and maintain production timelines. It's also approved before in previous PR in private repo.
+```    
+---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -49,13 +123,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
@@ -70,20 +143,12 @@ See configuration in [readme.python.md](./readme.python.md)
 
 ## C#
 
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Advisor
-  output-folder: $(csharp-sdks-folder)/nginx/Microsoft.Azure.Management.Nginx/src/Generated
-  clear-output-folder: true
-```
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)

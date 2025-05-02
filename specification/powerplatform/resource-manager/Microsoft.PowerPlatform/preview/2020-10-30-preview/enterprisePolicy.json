@@ -496,6 +496,10 @@
               "description": "Network injection configuration"
             }
           }
+        },
+        "healthStatus": {
+          "description": "The health status of the resource.",
+          "$ref": "#/definitions/HealthStatus"
         }
       }
     },
@@ -551,7 +555,8 @@
         "Lockbox",
         "PrivateEndpoint",
         "Encryption",
-        "NetworkInjection"
+        "NetworkInjection",
+        "Identity"
       ]
     },
     "KeyVaultProperties": {
@@ -583,20 +588,11 @@
       "description": "Url and version of the KeyVault Secret"
     },
     "VirtualNetworkPropertiesList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of virtual networks.",
-          "items": {
-            "$ref": "#/definitions/VirtualNetworkProperties"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "A list of private link resources"
+      "type": "array",
+      "description": "Array of virtual networks.",
+      "items": {
+        "$ref": "#/definitions/VirtualNetworkProperties"
+      }
     },
     "VirtualNetworkProperties": {
       "type": "object",
@@ -638,6 +634,20 @@
         }
       },
       "description": "The response of the list EnterprisePolicy operation."
+    },
+    "HealthStatus": {
+      "type": "string",
+      "description": "The health status of the resource.",
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": true
+      },
+      "enum": [
+        "Undetermined",
+        "Healthy",
+        "Warning",
+        "Unhealthy"
+      ]
     }
   },
   "parameters": {}

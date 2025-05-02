@@ -1,0 +1,138 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.SecurityInsights/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all operations.": {
+            "$ref": "./examples/operations/ListOperations.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "description": "Lists all operations available Azure Security Insights Resource Provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved operations list.",
+            "schema": {
+              "$ref": "#/definitions/OperationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationsList": {
+      "description": "Lists the operations available in the SecurityInsights RP.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of operations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Array of operations",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "Operation": {
+      "description": "Operation provided by provider",
+      "properties": {
+        "display": {
+          "description": "Properties of the operation",
+          "properties": {
+            "description": {
+              "description": "Description of the operation",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation name",
+              "type": "string"
+            },
+            "provider": {
+              "description": "Provider name",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource name",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "origin": {
+          "description": "The origin of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,42 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - adece
+  - amcs
+  - azns
+  - itsm
+  - milli
+  - ndjson
+  - nopri
+  - odatatype
+  - otlp
+  - resourceid
+  - rollupby
+  - syslogs
+  - uksouth
+  - ulaanbaatar
+  - unlocalized
+  - uucp
+  - viruela
+  - westcentralus
+overrides:
+  - filename: >-
+      **/specification/monitor/resource-manager/Microsoft.Insights/stable/2018-09-01/baseline_API.json
+    words:
+      - metdata
+  - filename: >-
+      **/specification/monitor/resource-manager/Microsoft.Insights/**/actionGroups_API.json
+    words:
+      - automitigationenabled
+      - correlationid
+      - monitorid
+      - occurringlocation
+      - routingid
+      - tsgid
+

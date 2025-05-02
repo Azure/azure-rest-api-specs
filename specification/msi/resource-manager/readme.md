@@ -26,9 +26,44 @@ These are the global settings for the Managed Service Identity API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-01
+tag: package-2024-11-30
 ```
 
+### Tag: package-2025-01-31-preview
+
+These settings apply only when `--tag=package-2025-01-31-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01-31-preview'
+input-file:
+- Microsoft.ManagedIdentity/preview/2025-01-31-preview/ManagedIdentity.json
+```
+
+### Tag: package-2024-11-30
+
+These settings apply only when `--tag=package-2024-11-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11-30'
+input-file:
+  - Microsoft.ManagedIdentity/stable/2024-11-30/ManagedIdentity.json
+```
+
+### Tag: package-2023-07-31-preview
+
+These settings apply only when `--tag=package-2023-07-31-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07-31-preview'
+input-file:
+- Microsoft.ManagedIdentity/preview/2023-07-31-preview/ManagedIdentity.json
+```
+
+### Tag: package-2023-01-31
+
+These settings apply only when `--tag=package-2023-01-31` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01-31'
+input-file:
+- Microsoft.ManagedIdentity/stable/2023-01-31/ManagedIdentity.json
+```
 
 ### Tag: package-preview-2022-01
 
@@ -90,7 +125,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-ruby
@@ -102,23 +137,9 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-## Pyhton
+## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ManagedServiceIdentity
-  output-folder: $(csharp-sdks-folder)/managedserviceidentity/Microsoft.Azure.Management.ManagedServiceIdentity/src/Generated
-  clear-output-folder: true
-```
 
 ## Go
 

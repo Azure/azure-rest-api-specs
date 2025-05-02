@@ -26,18 +26,90 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10
+tag: package-preview-2024-11
 ```
 
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - Microsoft.ContainerInstance/preview/2024-11-01-preview/containerInstance.json
+```
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - Microsoft.ContainerInstance/preview/2024-10-01-preview/containerInstance.json
+```
+
+### Tag: package-preview-2024-09
+
+These settings apply only when `--tag=package-preview-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-09'
+input-file:
+  - Microsoft.ContainerInstance/preview/2024-09-01-preview/containerInstance.json
+```
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.ContainerInstance/preview/2024-05-01-preview/containerInstance.json
+```
+
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.ContainerInstance/stable/2023-05-01/containerInstance.json
+```
+
+### Tag: package-preview-2023-02
+
+These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-02'
+input-file:
+  - Microsoft.ContainerInstance/preview/2023-02-01-preview/containerInstance.json
+```
+
+### Tag: package-preview-2022-10
+
+These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-10'
+input-file:
+  - Microsoft.ContainerInstance/preview/2022-10-01-preview/containerInstance.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.ContainerInstance/stable/2022-09-01/containerInstance.json
+```
 
 ### Tag: package-2021-10
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10'
+``` yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.ContainerInstance/stable/2021-10-01/containerInstance.json
 ```
+
 ### Tag: package-2021-09
 
 These settings apply only when `--tag=package-2021-09` is specified on the command line.
@@ -162,6 +234,26 @@ directive:
   - suppress: UniqueResourcePaths
     from: containerInstance.json
     reason: false positive, see https://github.com/Azure/azure-openapi-validator/issues/176
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Using additionalProperties type as the object is user-defined and not subject to any validations at RP level.
+    from:
+      - containerInstance.json
+    where:
+      - $.definitions.ConfigMap.properties.keyValuePairs
+  - code: AvoidAdditionalProperties
+    reason: additional feature addition to existing secretVolumes which is defined as a dictionary
+    from:
+      - containerInstance.json
+    where:
+      - $.definitions.SecretReferenceVolume
+  - code: GetCollectionResponseSchema
+    reason: We do not return the instanceView property in our List operation, we just return this 
+            property for our Get operations. This change has been part of our stable api versions for a couple of years
+    from:
+      - containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroups"]
 ```
 
 ---
@@ -176,7 +268,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "publisherName": "TestPublisher",
+    "networkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
+    "parameters": {
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestNetworkServiceDesignGroupName",
+        "id": "/subscriptions/subid/resourcegroups/rg/rgproviders/Microsoft.HybridNetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName",
+        "type": "Microsoft.HybridNetwork/publishers/networkServiceDesignGroups",
+        "location": "eastus",
+        "properties": {
+          "description": "Test NSD group"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestNetworkServiceDesignGroupName",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName",
+        "type": "Microsoft.HybridNetwork/publishers/networkServiceDesignGroups",
+        "location": "eastus",
+        "properties": {
+          "description": "Test NSD group"
+        }
+      }
+    }
+  }
+}

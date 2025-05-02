@@ -28,18 +28,70 @@ These are the global settings for the Kusto API.
 title: KustoManagementClient
 description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
 openapi-type: arm
-tag: package-2022-02
+tag: package-2024-04
 ```
+### Tag: package-2024-04
 
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.Kusto/stable/2024-04-13/kusto.json
+suppressions:
+  - code: PostResponseCodes
+    from: kusto.json
+    reason: Long-running POST operations have a 200 return code without a schema. Keeping internal consistency within the service APIs.
+```
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08'
+input-file:
+  - Microsoft.Kusto/stable/2023-08-15/kusto.json
+```
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.Kusto/stable/2023-05-02/kusto.json
+```
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.Kusto/stable/2022-12-29/kusto.json
+```
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11'
+input-file:
+  - Microsoft.Kusto/stable/2022-11-11/kusto.json
+```
+### Tag: package-2022-07
+
+These settings apply only when `--tag=package-2022-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-07'
+input-file:
+  - Microsoft.Kusto/stable/2022-07-07/kusto.json
+```
 
 ### Tag: package-2022-02
 
 These settings apply only when `--tag=package-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02'
+``` yaml $(tag) == 'package-2022-02'
 input-file:
   - Microsoft.Kusto/stable/2022-02-01/kusto.json
 ```
+
 ### Tag: package-2021-08-27
 
 These settings apply only when `--tag=package-2021-08-27` is specified on the command line.
@@ -204,27 +256,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Kusto
-  output-folder: $(csharp-sdks-folder)/Kusto/Management.Kusto/Generated
-  clear-output-folder: true
 ```
 
 ## Java

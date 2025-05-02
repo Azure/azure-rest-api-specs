@@ -26,15 +26,41 @@ These are the global settings for Azure Digital Twins.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2022-05-31
+tag: package-2023-10-31
 ```
 
+### Tag: package-2023-10-31
+
+These settings apply only when `--tag=package-2023-10-31` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-10-31'
+input-file:
+  - Microsoft.DigitalTwins/stable/2023-10-31/digitaltwins.json
+```
+
+### Tag: package-2023-06-30
+
+These settings apply only when `--tag=package-2023-06-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-30'
+input-file:
+  - Microsoft.DigitalTwins/stable/2023-06-30/digitaltwins.json
+```
+
+### Tag: package-preview-2023-02-27
+
+These settings apply only when `--tag=package-preview-2023-02-27` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-02-27'
+input-file:
+  - Microsoft.DigitalTwins/preview/2023-02-27-preview/digitaltwins.json
+```
 
 ### Tag: package-2022-05-31
 
 These settings apply only when `--tag=package-2022-05-31` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05-31'
+``` yaml $(tag) == 'package-2022-05-31'
 input-file:
   - Microsoft.DigitalTwins/stable/2022-05-31/digitaltwins.json
 ```
@@ -77,7 +103,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```
 
 ## Go

@@ -277,7 +277,7 @@
             "$ref": "#/parameters/alertId"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -395,7 +395,7 @@
       "in": "query",
       "required": true,
       "enum": [
-        "2018-05-05"
+        "2019-03-01"
       ],
       "x-ms-enum": {
         "name": "api-version",
@@ -522,7 +522,7 @@
       "x-ms-parameter-location": "method",
       "required": false,
       "schema": {
-        "type": "string"
+        "$ref": "#/definitions/comments"
       }
     },
     "alertState": {
@@ -887,6 +887,15 @@
         },
         "egressConfig": {
           "$ref": "#/definitions/egressConfig"
+        }
+      }
+    },
+    "comments": {
+      "type": "object",
+      "description": "Change alert state reason",
+      "properties": {
+        "comments": {
+          "type": "string"
         }
       }
     },

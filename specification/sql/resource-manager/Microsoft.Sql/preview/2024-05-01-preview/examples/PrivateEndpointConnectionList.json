@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default",
+    "serverName": "test-svr",
+    "api-version": "2024-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/test-svr/privateEndpointConnections/private-endpoint-connection-name-2",
+            "name": "private-endpoint-connection-name",
+            "type": "Microsoft.Sql/servers/privateEndpointConnections",
+            "properties": {
+              "provisioningState": "Ready",
+              "privateEndpoint": {
+                "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/test-svr/privateEndpointConnections/private-endpoint-connection-name-2",
+            "name": "private-endpoint-connection-name-2",
+            "type": "Microsoft.Sql/servers/privateEndpointConnections",
+            "properties": {
+              "provisioningState": "Ready",
+              "privateEndpoint": {
+                "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name-2"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -42,7 +42,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name for the new key. The system will generate the version name for the new key."
+            "description": "The name for the new key. The system will generate the version name for the new key. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information."
           },
           {
             "name": "parameters",
@@ -136,7 +136,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "Name for the imported key."
+            "description": "Name for the imported key. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information."
           },
           {
             "name": "parameters",
@@ -340,7 +340,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -387,7 +387,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -567,7 +567,7 @@
         ],
         "operationId": "decrypt",
         "summary": "Decrypts a single block of encrypted data.",
-        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission.",
+        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission. Microsoft recommends not to use CBC algorithms for decryption without first ensuring the integrity of the ciphertext using an HMAC, for example. See https://docs.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode for more information.",
         "parameters": [
           {
             "name": "key-name",
@@ -925,7 +925,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1663,7 +1663,7 @@
         "public_exponent": {
           "type": "integer",
           "format": "int32",
-          "description": "The public exponent for a RSA key."
+          "description": "The public exponent for a RSA key. This applies only to keys created in a Managed HSM."
         },
         "key_ops": {
           "type": "array",
@@ -1851,7 +1851,7 @@
         "iv": {
           "type": "string",
           "format": "base64url",
-          "description": "Initialization vector for symmetric algorithms."
+          "description": "Cryptographically random, non-repeating initialization vector for symmetric algorithms."
         },
         "aad": {
           "type": "string",
@@ -2194,22 +2194,22 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of the action.",
+          "description": "The type of the action. The value should be compared case-insensitively.",
           "enum": [
-            "rotate",
-            "notify"
+            "Rotate",
+            "Notify"
           ],
           "x-ms-enum": {
             "name": "ActionType",
             "modelAsString": false,
             "values": [
               {
-                "value": "rotate",
+                "value": "Rotate",
                 "description": "Rotate the key based on the key policy."
               },
               {
-                "value": "notify",
-                "description": "Trigger event grid events. For preview, the notification time is not configurable and it is default to 30 days before expiry."
+                "value": "Notify",
+                "description": "Trigger Event Grid events. Defaults to 30 days before expiry. Key Vault only."
               }
             ]
           }

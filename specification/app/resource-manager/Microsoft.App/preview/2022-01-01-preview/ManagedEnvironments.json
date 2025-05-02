@@ -594,11 +594,11 @@
       "type": "object",
       "properties": {
         "destination": {
-          "description": "Logs destination",
+          "description": "Logs destination, can be 'log-analytics', 'azure-monitor' or 'none'",
           "type": "string"
         },
         "logAnalyticsConfiguration": {
-          "description": "Log Analytics configuration",
+          "description": "Log Analytics configuration, must only be provided when destination is configured as 'log-analytics'",
           "$ref": "#/definitions/LogAnalyticsConfiguration"
         }
       }
@@ -625,7 +625,7 @@
         },
         "runtimeSubnetId": {
           "type": "string",
-          "description": "Resource ID of a subnet that Container App containers are injected into. This subnet must be in the same VNET as the subnet defined in infrastructureSubnetId. Must not overlap with any other provided IP ranges.",
+          "description": "This field is deprecated and not used. If you wish to provide your own subnet that Container App containers are injected into, then you should leverage the infrastructureSubnetId.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -693,11 +693,7 @@
             },
             "daprAIInstrumentationKey": {
               "type": "string",
-              "description": "Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
+              "description": "Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry"
             },
             "vnetConfiguration": {
               "description": "Vnet configuration for the environment",
@@ -720,7 +716,7 @@
             },
             "appLogsConfiguration": {
               "$ref": "#/definitions/AppLogsConfiguration",
-              "description": "Cluster configuration which enables the log daemon to export\napp logs to a destination. Currently only \"log-analytics\" is\nsupported"
+              "description": "Cluster configuration which enables the log daemon to export app logs to configured destination."
             }
           },
           "x-ms-client-flatten": true
@@ -762,7 +758,7 @@
       }
     },
     "LogAnalyticsConfiguration": {
-      "description": "Log analytics configuration",
+      "description": "Log Analytics configuration, must only be provided when destination is configured as 'log-analytics'",
       "type": "object",
       "properties": {
         "customerId": {

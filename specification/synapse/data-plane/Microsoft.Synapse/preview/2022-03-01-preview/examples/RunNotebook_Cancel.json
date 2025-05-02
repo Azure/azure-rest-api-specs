@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "api-version": "2022-03-01-preview",
+    "runId": "4b200abf-c90c-43cf-98ae-b9f2bcf90373"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 10 Mar 2021 07:24:29 GMT",
+        "Server": "Kestrel Microsoft-HTTPAPI/2.0",
+        "Transfer-Encoding": "chunked",
+        "Content-Type": "application/json; charset=utf-8",
+        "x-ms-request-id": "393b45f1-a176-4e74-accd-5f66d7f81ec6"
+      },
+      "body": {
+        "message": "Cancelled the notebook run - 4b200abf-c90c-43cf-98ae-b9f2bcf90373",
+        "result": {
+          "runId": "4b200abf-c90c-43cf-98ae-b9f2bcf90373",
+          "runStatus": "Cancelled",
+          "sessionId": "-1",
+          "sparkPool": "exampleSparkpool",
+          "lastCheckedOn": "0001-01-01T00:00:00"
+        }
+      }
+    },
+    "409": {
+      "headers": {
+        "Date": "Wed, 10 Mar 2021 07:24:29 GMT",
+        "Server": "Kestrel Microsoft-HTTPAPI/2.0",
+        "Transfer-Encoding": "chunked",
+        "Content-Type": "application/json; charset=utf-8",
+        "x-ms-request-id": "393b45f1-a176-4e74-accd-5f66d7f81ec6"
+      },
+      "body": {
+        "message": "Notebook execution is in SnapshotTaken state and cannot accept the cancel request. Retry after sometime.",
+        "result": {
+          "runId": "4b200abf-c90c-43cf-98ae-b9f2bcf90373",
+          "runStatus": "SnapshotTaken",
+          "sessionId": "-1",
+          "sparkPool": "exampleSparkpool"
+        }
+      }
+    }
+  }
+}

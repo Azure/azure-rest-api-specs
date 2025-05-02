@@ -160,6 +160,10 @@
           "x-ms-client-flatten": true,
           "description": "NetworkRuleSet properties",
           "properties": {
+            "trustedServiceAccessEnabled": {
+              "type": "boolean",
+              "description": "Value that indicates whether Trusted Service Access is Enabled or not."
+            },
             "defaultAction": {
               "type": "string",
               "description": "Default Action for Network Rule Set",
@@ -169,6 +173,19 @@
               ],
               "x-ms-enum": {
                 "name": "DefaultAction",
+                "modelAsString": true
+              }
+            },
+            "publicNetworkAccess": {
+              "type": "string",
+              "description": "This determines if traffic is allowed over public network. By default it is enabled",
+              "enum": [
+                "Disabled",
+                "Enabled",
+                "SecuredByPerimeter"
+              ],
+              "x-ms-enum": {
+                "name": "PublicNetworkAccess",
                 "modelAsString": true
               }
             },

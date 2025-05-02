@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "AzureKey": "[subscription-key]",
+    "reverseGeocodingBatchRequestBody": {
+      "batchItems": [
+        {
+          "coordinates": [
+            -122.128275,
+            47.639429
+          ],
+          "resultTypes": [
+            "Address",
+            "PopulatedPlace"
+          ],
+          "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B"
+        },
+        {
+          "coordinates": [
+            -122.341979399674,
+            47.6095253501216
+          ],
+          "optionalId": "6M9W39P12SNHGAIZ4JQ7F57NWJLV2BRYEQRD7OH7"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "successfulRequests": 1,
+          "totalRequests": 2
+        },
+        "batchItems": [
+          {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "properties": {
+                  "type": "Address",
+                  "confidence": "High",
+                  "matchCodes": [
+                    "Good"
+                  ],
+                  "address": {
+                    "locality": "Redmond",
+                    "adminDistricts": [
+                      {
+                        "shortName": "WA"
+                      },
+                      {
+                        "shortName": "King"
+                      }
+                    ],
+                    "countryRegion": {
+                      "ISO": "US",
+                      "name": "United States"
+                    },
+                    "postalCode": "98052",
+                    "formattedAddress": "1 Microsoft Way, Redmond, WA 98052",
+                    "addressLine": "1 Microsoft Way"
+                  },
+                  "geocodePoints": [
+                    {
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          -122.128275,
+                          47.639429
+                        ]
+                      },
+                      "calculationMethod": "Rooftop",
+                      "usageTypes": [
+                        "Display",
+                        "Route"
+                      ]
+                    },
+                    {
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          -122.127028,
+                          47.638545
+                        ]
+                      },
+                      "calculationMethod": "Rooftop",
+                      "usageTypes": [
+                        "Route"
+                      ]
+                    }
+                  ]
+                },
+                "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                    -122.128275,
+                    47.639429
+                  ]
+                },
+                "bbox": [
+                  -122.1359181505759,
+                  47.63556628242932,
+                  -122.1206318494241,
+                  47.643291717570676
+                ]
+              }
+            ]
+          },
+          {
+            "optionalId": "3K5O3Y832J2YV6D7XNGUSM4ECCUGDEFN172CJQNN",
+            "error": {
+              "code": "400 Bad Request",
+              "message": "The provided coordinates in query are invalid, out of range, or not in the expected format"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

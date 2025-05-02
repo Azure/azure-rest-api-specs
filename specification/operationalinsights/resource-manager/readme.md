@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for OperationalInsights.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for OperationalInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,28 +15,88 @@ To build the SDK for OperationalInsights, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the OperationalInsights API.
 
-```yaml !$(python) || !$(track2)
+``` yaml !$(python) || !$(track2)
 title: OperationalInsightsManagementClient
 ```
-```yaml $(python)
+
+``` yaml $(python)
 title: LogAnalyticsManagementClient
 ```
 
 ``` yaml
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2022-02
+tag: package-2025-02-01
 ```
 
+
+### Tag: package-2025-02-01
+
+These settings apply only when `--tag=package-2025-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01'
+input-file:
+  - Microsoft.OperationalInsights/stable/2025-02-01/AvailableServiceTiers.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Clusters.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/DataExports.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/DataSources.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Gateways.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/IntelligencePacks.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/LinkedServices.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/LinkedStorageAccounts.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/ManagementGroups.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Operations.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/OperationStatuses.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/QueryPackQueries.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/QueryPacks.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/SavedSearches.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Schema.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/SharedKeys.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/StorageInsightConfigs.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Tables.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Usages.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/WorkspacePurge.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Workspaces.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/WorkspacesFailover.json
+```
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.OperationalInsights/stable/2023-09-01/AvailableServiceTiers.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/QueryPacks.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/QueryPackQueries.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Clusters.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/DataExports.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/DataSources.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Gateways.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/IntelligencePacks.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/LinkedServices.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/LinkedStorageAccounts.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/ManagementGroups.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Operations.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/OperationStatuses.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/SavedSearches.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Schema.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/SharedKeys.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/StorageInsightConfigs.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Tables.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Usages.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/WorkspacePurge.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Workspaces.json
+```
 
 ### Tag: package-2015-11-preview
 
@@ -102,7 +162,6 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
 ```
@@ -130,7 +189,6 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
 ```
@@ -158,12 +216,12 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 ```
 
 ### Tag: package-2020-10-only
+
 These settings apply only when `--tag=package-2020-10-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-10-only'
@@ -194,7 +252,6 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
@@ -222,7 +279,6 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
@@ -252,16 +308,45 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
 - Microsoft.OperationalInsights/preview/2021-12-01-preview/Operations.json
 - Microsoft.OperationalInsights/preview/2021-12-01-preview/Workspaces.json
 - Microsoft.OperationalInsights/preview/2021-12-01-preview/Tables.json
 ```
----
-# Code Generation
 
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+- Microsoft.OperationalInsights/stable/2019-09-01/QueryPacks.json
+- Microsoft.OperationalInsights/stable/2019-09-01/QueryPackQueries.json
+- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/stable/2022-10-01/Clusters.json
+- Microsoft.OperationalInsights/stable/2022-10-01/Operations.json
+- Microsoft.OperationalInsights/stable/2022-10-01/Workspaces.json
+- Microsoft.OperationalInsights/stable/2022-10-01/Tables.json
+```
+
+---
+
+# Code Generation
 
 ## Swagger to SDK
 
@@ -272,7 +357,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -280,23 +365,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
-```
-
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-```yaml $(csharp)
-csharp:
-  # last generated using AutoRest.1.0.0-Nightly20170126
-  azure-arm: true
-  namespace: Microsoft.Azure.Management.OperationalInsights
-  payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/operationalinsights/Microsoft.Azure.Management.OperationalInsights/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python
@@ -311,7 +379,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-
 ## Suppression
 
 ``` yaml
@@ -319,7 +386,7 @@ directive:
   - from: OperationalInsights.json
     suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
     reason: properties etag defined as eTag in model
+  - suppress: GuidUsage
+    from: Clusters.json
+    reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
-
-
-

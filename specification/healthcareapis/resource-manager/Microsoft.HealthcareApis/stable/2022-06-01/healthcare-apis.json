@@ -2341,7 +2341,10 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/ServiceAccessPolicyEntry"
-      }
+      },
+      "x-ms-identifiers": [
+        "objectId"
+      ]
     },
     "ServiceAccessPolicyEntry": {
       "description": "An access policy entry.",
@@ -2364,8 +2367,7 @@
           "type": "integer",
           "description": "The provisioned throughput for the backing database.",
           "readOnly": false,
-          "minimum": 400,
-          "maximum": 10000
+          "minimum": 400
         },
         "keyVaultKeyUri": {
           "type": "string",
@@ -2819,7 +2821,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/OperationDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -3279,7 +3284,6 @@
           "x-ms-client-flatten": false,
           "type": "object",
           "description": "Workspaces resource specific properties.",
-          "x-ms-azure-resource": true,
           "properties": {
             "provisioningState": {
               "description": "The provisioning state.",
@@ -3828,7 +3832,10 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/FhirServiceAccessPolicyEntry"
-      }
+      },
+      "x-ms-identifiers": [
+        "objectId"
+      ]
     },
     "FhirServiceAccessPolicyEntry": {
       "type": "object",

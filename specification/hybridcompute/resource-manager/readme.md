@@ -26,25 +26,217 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-05
-
+tag: package-preview-2025-02-19
 directive:
+  - from: HybridCompute.json
+    where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
+    transform: '$[''format''] = ''duration'''
+  - from: HybridCompute.json
+    where: $.definitions.MachineUpdateProperties.properties.privateLinkScopeResourceId
+    transform: '$[''format''] = ''arm-id'''
+  - from: HybridCompute.json
+    where: $.definitions.MachineProperties.properties.privateLinkScopeResourceId
+    transform: '$[''format''] = ''arm-id'''
+  - from: HybridCompute.json
+    where: $.definitions.AgentUpgrade.properties.correlationId
+    transform: '$[''format''] = ''uuid'''
+  - from: HybridCompute.json
+    where: $.definitions.AgentUpgrade.properties.lastAttemptTimestamp
+    transform: '$[''format''] = ''date-time'''
+  - from: HybridCompute.json
+    where: $.definitions.MachineProperties.properties.vmUuid
+    transform: '$[''format''] = ''uuid'''
+  - from: HybridCompute.json
+    where: $.definitions.MachineProperties.properties.vmId
+    transform: '$[''format''] = ''uuid'''
+  - from: HybridCompute.json
+    where: $.definitions.MachineUpdateProperties.properties.parentClusterResourceId
+    transform: '$[''format''] = ''arm-id'''
+  - from: HybridCompute.json
+    where: $.definitions.MachineProperties.properties.parentClusterResourceId
+    transform: '$[''format''] = ''arm-id'''
+  - from: HybridCompute.json
+    where: $.definitions.MachineAssessPatchesResult.properties.assessmentActivityId
+    transform: '$[''format''] = ''uuid'''
   - where:
-      - $.definitions.Machine.properties
-    suppress:
-      - BodyTopLevelProperties
+      subject: NetworkProfile
+    remove: true
+
+
+  # internal operations
+  - remove-operation: AgentVersion_List
+  - remove-operation: AgentVersion_Get
+  # we don't use them, remove in the future
+  - remove-operation: HybridIdentityMetadata_Get
+  - remove-operation: HybridIdentityMetadata_ListByMachines
+  # we want to retire them and use setting operations instead
+  - remove-operation: NetworkConfigurations_Get
+  - remove-operation: NetworkConfigurations_Update
+  - remove-operation: NetworkConfigurations_CreateOrUpdate
+  # we don't want enable PATCH for run command
+  - remove-operation: MachineRunCommands_Update
+
 ```
 
+### Tag: package-preview-2025-02-19
+
+These settings apply only when `--tag=package-preview-2025-02-19` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-02-19'
+input-file:
+  - Microsoft.HybridCompute/preview/2025-02-19-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2025-02-19-preview/privateLinkScopes.json
+```
+
+### Tag: package-2025-01-13
+
+These settings apply only when `--tag=package-2025-01-13` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-13'
+input-file:
+  - Microsoft.HybridCompute/stable/2025-01-13/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2025-01-13/privateLinkScopes.json
+```
+
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-11-10-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-11-10-preview/privateLinkScopes.json
+```
+
+### Tag: package-preview-2024-09
+
+These settings apply only when `--tag=package-preview-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-09'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-09-10-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-09-10-preview/privateLinkScopes.json
+```
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-07-31-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-07-31-preview/privateLinkScopes.json
+```
+
+### Tag: package-2024-07
+
+These settings apply only when `--tag=package-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07'
+input-file:
+  - Microsoft.HybridCompute/stable/2024-07-10/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2024-07-10/privateLinkScopes.json
+```
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-05-20-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-05-20-preview/privateLinkScopes.json
+```
+
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-03-31-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-03-31-preview/privateLinkScopes.json
+```
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.HybridCompute/preview/2023-10-03-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2023-10-03-preview/privateLinkScopes.json
+```
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.HybridCompute/preview/2023-06-20-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2023-06-20-preview/privateLinkScopes.json
+```
+
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.HybridCompute/preview/2023-03-15-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2023-03-15-preview/privateLinkScopes.json
+```
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.HybridCompute/stable/2022-12-27/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2022-12-27/privateLinkScopes.json
+```
+
+### Tag: package-preview-2022-12
+
+These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-12'
+input-file:
+  - Microsoft.HybridCompute/preview/2022-12-27-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2022-12-27-preview/privateLinkScopes.json
+```
+
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11'
+input-file:
+  - Microsoft.HybridCompute/stable/2022-11-10/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2022-11-10/privateLinkScopes.json
+```
+
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.HybridCompute/preview/2022-08-11-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2022-08-11-preview/privateLinkScopes.json
+```
 
 ### Tag: package-preview-2022-05
 
 These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05'
+``` yaml $(tag) == 'package-preview-2022-05'
 input-file:
   - Microsoft.HybridCompute/preview/2022-05-10-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2022-05-10-preview/privateLinkScopes.json
 ```
+
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
@@ -192,7 +384,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -234,3 +426,22 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## TypeScript
 
 See configuration in [readme.typescript](./readme.typescript.md)
+
+## Suppress Warnings
+``` yaml
+suppressions:
+  - code: EvenSegmentedPathForPutOperation
+    from: privateLinkScopes.json
+    reason: False positive
+  - code: TagsAreNotAllowedForProxyResources
+    from: HybridCompute.json
+    reason: False positive
+  - code: BodyTopLevelProperties
+    from: HybridCompute.json
+    where: $.definitions.AgentVersion
+    reason: Previously approved and released, would require potentially breaking changes
+  - code: GetCollectionResponseSchema
+    from: HybridCompute.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions"]
+    reason: False positive. See https://github.com/Azure/azure-openapi-validator/issues/750
+```

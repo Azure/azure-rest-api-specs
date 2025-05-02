@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2023-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "udid": "f6495f62-94f8-0ec2-c252-45626f82fcb2",
+            "description": "Contoso Indoor Design",
+            "kind": "AzureBlob",
+            "azureBlob": {
+              "dataFormat": "zip",
+              "msiClientId": "3263cad5-ed8b-4829-b72b-3d1ba556e373",
+              "linkedResource": "my-storage-account",
+              "blobUrl": "https://mystorageaccount.blob.core.windows.net/my-container/my/blob/path1.zip",
+              "sizeInBytes": 29920,
+              "contentMD5": "CsFxZ2YSfxw3cRPlqokV0w=="
+            },
+            "status": "Completed"
+          },
+          {
+            "udid": "8b1288fa-1958-4a2b-b68e-13a7i5af7d7c",
+            "kind": "AzureBlob",
+            "azureBlob": {
+              "dataFormat": "geojson",
+              "msiClientId": "3263cad5-ed8b-4829-b72b-3d1ba556e373",
+              "linkedResource": "my-storage-account",
+              "blobUrl": "https://mystorageaccount.blob.core.windows.net/my-container/my/blob/path2.geojson",
+              "sizeInBytes": 1339
+            },
+            "status": "Running"
+          },
+          {
+            "udid": "7c1288fa-2058-4a1b-b68f-13a6h5af7d7c",
+            "description": "Contoso Geofence GeoJSON",
+            "kind": "AzureBlob",
+            "azureBlob": {
+              "dataFormat": "geojson",
+              "linkedResource": "my-storage-account",
+              "blobUrl": "https://mystorageaccount.blob.core.windows.net/my-container/my/blob/path3.geojson",
+              "sizeInBytes": 1650,
+              "contentMD5": "rYpEfIeLbWZPyaICGEGy3A=="
+            },
+            "status": "Failed",
+            "error": {
+              "code": "ContentMD5Mismatch",
+              "message": "Actual content MD5: sOJMJvFParkSxBsvvrPOMQ== doesn't match expected content MD5: CsFxZ2YSfxw3cRPlqokV0w==."
+            }
+          }
+        ]
+      }
+    }
+  }
+}

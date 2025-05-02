@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-09-15-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
+    "createUpdateMongoDBDatabaseParameters": {
+      "location": "West US",
+      "tags": {},
+      "properties": {
+        "resource": {
+          "id": "databaseName",
+          "createMode": "Restore",
+          "restoreParameters": {
+            "restoreTimestampInUtc": "2022-07-20T18:28:00Z",
+            "restoreSource": "/subscriptions/subid/providers/Microsoft.DocumentDB/locations/WestUS/restorableDatabaseAccounts/restorableDatabaseAccountId"
+          }
+        },
+        "options": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/mongodbDatabases/databaseName",
+        "name": "databaseName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/mongodbDatabases",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "resource": {
+            "id": "updatedDatabaseName"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2023-09-15-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2023-09-15-preview"
+      }
+    }
+  }
+}

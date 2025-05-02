@@ -3,19 +3,25 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go) && !$(track2)
-go:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: batch
-  clear-output-folder: true
-```
-
 ``` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/batch/armbatch
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+  - from: BatchManagement.json
+    where: $.definitions.CIFSMountConfiguration.properties.userName
+    transform:
+      $["x-ms-client-name"] = "username"
+  - from: BatchManagement.json
+    where: $.definitions.NetworkConfiguration.properties.dynamicVnetAssignmentScope
+    transform:
+      $["x-ms-client-name"] = "dynamicVNetAssignmentScope"
+  - from: BatchManagement.json
+    where: $.definitions.PrivateLinkServiceConnectionState.properties.actionsRequired
+    transform:
+      $["x-ms-client-name"] = "actionRequired"
 ```
 
 ## Go multi-api

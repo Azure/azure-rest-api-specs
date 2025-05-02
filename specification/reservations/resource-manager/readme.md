@@ -26,19 +26,29 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-03
+tag: package-2022-11
 ```
 
 
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11'
+input-file:
+  - Microsoft.Capacity/stable/2022-11-01/reservations.json
+  - Microsoft.Capacity/stable/2020-10-25/quota.json
+```
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.Capacity/stable/2022-03-01/reservations.json
   - Microsoft.Capacity/stable/2020-10-25/quota.json
 ```
+
 ### Tag: package-2021-07-01
 
 These settings apply only when `--tag=package-2021-07-01` is specified on the command line.
@@ -128,28 +138,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Reservations
-  output-folder: $(csharp-sdks-folder)/reservations/Microsoft.Azure.Management.Reservations/src/Generated
-  clear-output-folder: true
+  - repo: azure-sdk-for-java
 ```
 
 ## Python

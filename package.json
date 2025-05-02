@@ -1,45 +1,42 @@
 {
-  "name": "azure-rest-api-specs-tests",
-  "private": true,
-  "author": {
-    "name": "Microsoft Corporation",
-    "email": "azsdkteam@microsoft.com",
-    "url": "https://github.com/azure/azure-rest-api-specs"
-  },
-  "version": "0.1.0",
-  "description": "Tests for Azure REST API Specifications",
-  "license": "MIT",
+  "name": "azure-rest-api-specs",
   "devDependencies": {
-    "@azure/avocado": "^0.8.4",
-    "@ts-common/commonmark-to-markdown": "^2.0.2",
-    "@ts-common/fs": "0.2.0",
-    "@ts-common/iterator": "^0.3.6",
-    "@types/js-yaml": "^3.12.1",
-    "@types/mocha": "^9.0.0",
-    "@types/prettier": "^2.6.1",
-    "js-yaml": "^3.13.1",
-    "json-schema-ref-parser": "^6.1.0",
-    "mocha": "^9.1.2",
-    "prettier": "^2.6.2",
-    "ts-node": "^10.1.0",
-    "tslib": "^1.10.0",
-    "typescript": "^3.5.3"
+    "@azure-tools/spec-gen-sdk": "~0.4.2",
+    "@azure-tools/typespec-apiview": "0.7.0",
+    "@azure-tools/typespec-autorest": "0.55.0",
+    "@azure-tools/typespec-azure-core": "0.55.0",
+    "@azure-tools/typespec-azure-portal-core": "0.55.0",
+    "@azure-tools/typespec-azure-resource-manager": "0.55.0",
+    "@azure-tools/typespec-azure-rulesets": "0.55.0",
+    "@azure-tools/typespec-client-generator-cli": "0.21.0",
+    "@azure-tools/typespec-client-generator-core": "0.55.1",
+    "@azure-tools/typespec-liftr-base": "0.8.0",
+    "@autorest/openapi-to-typespec": "0.11.0",
+    "@azure/avocado": "^0.9.1",
+    "@typespec/compiler": "1.0.0-rc.1",
+    "@typespec/http": "1.0.0-rc.1",
+    "@typespec/sse": "0.69.0",
+    "@typespec/events": "0.69.0",
+    "@typespec/openapi": "1.0.0-rc.1",
+    "@typespec/openapi3": "1.0.0-rc.1",
+    "@typespec/prettier-plugin-typespec": "1.0.0-rc.1",
+    "@typespec/rest": "0.69.0",
+    "@typespec/streams": "0.69.0",
+    "@typespec/versioning": "0.69.0",
+    "@typespec/xml": "0.69.0",
+    "azure-rest-api-specs-eng-tools": "file:eng/tools",
+    "oav": "^3.5.1",
+    "prettier": "~3.5.3",
+    "typescript": "~5.8.2"
   },
-  "homepage": "https://github.com/azure/azure-rest-api-specs",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:azure/azure-rest-api-specs.git"
+  "overrides": {
+    "@typespec/compiler": "1.0.0-rc.1",
+    "@typespec/asset-emitter": "0.69.0",
+    "jsonpath-plus": "^10.3.0"
   },
-  "bugs": {
-    "url": "http://github.com/azure/azure-rest-api-specs/issues"
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
   },
-  "scripts": {
-    "postinstall": "tsc",
-    "test": "tsc && mocha -t 500000 --reporter min",
-    "prettier-check": "ts-node ./scripts/prettier-check.ts",
-    "prettier-fix": "prettier --write specification/**/*.json",
-    "prettier": "prettier",
-    "tsc": "tsc",
-    "multiapi": "ts-node ./scripts/multiapi.ts"
-  }
+  "private": true
 }

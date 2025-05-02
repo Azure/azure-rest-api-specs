@@ -1,0 +1,30 @@
+{
+  "title": "Gets an environment.",
+  "operationId": "Environments_GetEnvironmentByUser",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com",
+    "projectName": "myProject",
+    "userId": "me",
+    "environmentName": "mydevenv"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/cf849cb0-3a05-4059-84b4-40c16abb1e93/environments/mydevenv",
+        "name": "mydevenv",
+        "environmentType": "DevTest",
+        "catalogName": "main",
+        "environmentDefinitionName": "helloworld",
+        "parameters": {
+          "functionAppRuntime": "node",
+          "storageAccountType": "Standard_LRS"
+        },
+        "user": "b08e39b4-2ac6-4465-a35e-48322efb0f98",
+        "provisioningState": "Succeeded",
+        "resourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg028321",
+        "expirationDate": "2023-09-10T17:00:00Z"
+      }
+    }
+  }
+}

@@ -26,15 +26,51 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-07-02
+tag: package-2023-06
 ```
 
+
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.Devices/stable/2023-06-30/iothub.json
+```
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.Devices/preview/2023-06-30-preview/iothub.json
+```
+
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.Devices/preview/2022-11-15-preview/iothub.json
+```
+
+### Tag: package-preview-2022-04-30
+
+These settings apply only when `--tag=package-preview-2022-04-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04-30'
+input-file:
+  - Microsoft.Devices/preview/2022-04-30-preview/iothub.json
+```
 
 ### Tag: package-2021-07-02
 
 These settings apply only when `--tag=package-2021-07-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-07-02'
+``` yaml $(tag) == 'package-2021-07-02'
 input-file:
   - Microsoft.Devices/stable/2021-07-02/iothub.json
 ```
@@ -43,7 +79,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-07-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-07-02'
+``` yaml $(tag) == 'package-preview-2021-07-02'
 input-file:
   - Microsoft.Devices/preview/2021-07-02-preview/iothub.json
 ```
@@ -267,8 +303,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -278,20 +314,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.IotHub
-  output-folder: $(csharp-sdks-folder)/iothub/Microsoft.Azure.Management.IotHub/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python
@@ -305,3 +327,13 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.go.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: UniqueXmsEnumName
+    where: $.definitions.FallbackRouteProperties.properties.source
+    from: iothub.json
+    reason: Ensure non-breaking change.
+```

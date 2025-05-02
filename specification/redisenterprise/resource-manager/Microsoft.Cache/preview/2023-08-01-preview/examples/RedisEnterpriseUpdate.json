@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "sku": {
+        "name": "EnterpriseFlash_F300",
+        "capacity": 9
+      },
+      "properties": {
+        "minimumTlsVersion": "1.2"
+      },
+      "tags": {
+        "tag1": "value1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "location": "West US",
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 9
+        },
+        "identity": {
+          "type": "None"
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ],
+        "tags": {
+          "tag1": "value1"
+        },
+        "properties": {
+          "hostName": "cache1.westus.something.azure.com",
+          "provisioningState": "Updating",
+          "resourceState": "Updating",
+          "redisVersion": "5",
+          "minimumTlsVersion": "1.2",
+          "encryption": {}
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    }
+  }
+}

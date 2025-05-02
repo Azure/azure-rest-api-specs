@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "resourceGroupName": "examplerg",
+    "resourceType": "topics",
+    "resourceName": "exampleResourceName",
+    "perimeterGuid": "8f6b6269-84f2-4d09-9e31-1127efcd1e40perimeter",
+    "associationName": "someAssociation",
+    "api-version": "2024-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "networkSecurityPerimeter": {
+            "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/perimeterrg/providers/Microsoft.Network/networkSecurityPerimeters/somePerimeter",
+            "perimeterGuid": "8f6b6269-84f2-4d09-9e31-1127efcd1e40perimeter",
+            "location": "West US"
+          },
+          "resourceAssociation": {
+            "name": "someAssociation",
+            "accessMode": "Enforced"
+          },
+          "profile": {
+            "name": "someProfile",
+            "accessRulesVersion": "1",
+            "accessRules": [
+              {
+                "name": "ipRule",
+                "properties": {
+                  "direction": "Inbound",
+                  "addressPrefixes": [
+                    "148.0.0.0/8"
+                  ]
+                }
+              }
+            ],
+            "diagnosticSettingsVersion": "1",
+            "enabledLogCategories": [
+              "NspOutbound"
+            ]
+          }
+        },
+        "id": "/subscriptions//resourceGroups/paasrg/providers/Microsoft.EventGrid/topics/egtopic/networkSecurityPerimeterConfigurations/8f6b6269-84f2-4d09-9e31-1127efcd1e40perimeter.someAssociation",
+        "name": "8f6b6269-84f2-4d09-9e31-1127efcd1e40perimeter.someAssociation",
+        "type": "Microsoft.EventGrid/topics/networkSecurityPerimeterConfigurations"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.EventGrid/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2024-06-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.EventGrid/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2024-06-01-preview"
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  mongoClusterName:
+    type: string
+    prefix: mongoclu
+  administratorLoginPassword:
+    type: secureString
+  firewallRuleName:
+    type: string
+    prefix: firewall
+scenarios:
+  - scenario: basic
+    description: Basic scenario for creating, reading and deleting a Mongo Cluster.
+    steps:
+      - step: MongoClusters_NameAvailability
+        exampleFile: ../examples/MongoClusters_NameAvailability.json
+      - step: MongoClusters_CreateOrUpdate
+        exampleFile: ../examples/MongoClusters_Create.json
+        requestUpdate:
+          - replace: /resource/properties/administratorLoginPassword
+            value: $(administratorLoginPassword)
+      - step: MongoClusters_ListByResourceGroup
+        exampleFile: ../examples/MongoClusters_ListByResourceGroup.json
+      - step: MongoClusters_Get
+        exampleFile: ../examples/MongoClusters_Get.json
+      - step: FirewallRules_CreateOrUpdate
+        exampleFile: ../examples/MongoClusters_FirewallRuleCreate.json
+      - step: FirewallRules_ListByMongoCluster
+        exampleFile: ../examples/MongoClusters_FirewallRuleList.json
+      - step: FirewallRules_Get
+        exampleFile: ../examples/MongoClusters_FirewallRuleGet.json
+      - step: MongoClusters_ListConnectionStrings
+        exampleFile: ../examples/MongoClusters_ListConnectionStrings.json
+      - step: MongoClusters_Update
+        exampleFile: ../examples/MongoClusters_PatchDiskSize.json
+      - step: FirewallRules_Delete
+        exampleFile: ../examples/MongoClusters_FirewallRuleDelete.json
+      - step: MongoClusters_Delete
+        exampleFile: ../examples/MongoClusters_Delete.json

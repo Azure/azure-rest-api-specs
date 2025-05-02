@@ -1,0 +1,843 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComponentPolicyStatesClient",
+    "version": "2024-10-01",
+    "description": "Query component policy states at varying resource scopes for Resource Provider mode policies."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults": {
+      "post": {
+        "operationId": "ComponentPolicyStates_ListQueryResultsForSubscription",
+        "description": "Queries component policy states under subscription scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesResource"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/orderBy"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/from"
+          },
+          {
+            "$ref": "#/parameters/to"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/apply"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPolicyStatesQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2024-10-01/policyMetadata.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query latest component policy states at subscription scope": {
+            "$ref": "./examples/ComponentPolicyStates_QuerySubscriptionScope.json"
+          },
+          "Query latest component policy compliance state count grouped by component type at subscription scope filtered by given assignment.": {
+            "$ref": "./examples/ComponentPolicyStates_QuerySubscriptionScopeGroupByComponentTypeWithAggregate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults": {
+      "post": {
+        "operationId": "ComponentPolicyStates_ListQueryResultsForResourceGroup",
+        "description": "Queries component policy states under resource group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesResource"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/orderBy"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/from"
+          },
+          {
+            "$ref": "#/parameters/to"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/apply"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPolicyStatesQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2024-10-01/policyMetadata.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query latest component policy states at resource group scope": {
+            "$ref": "./examples/ComponentPolicyStates_QueryResourceGroupScope.json"
+          },
+          "Query latest component policy compliance state count grouped by component type at resource group scope filtered by given assignment.": {
+            "$ref": "./examples/ComponentPolicyStates_QueryResourceGroupScopeGroupByComponentTypeWithAggregate.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults": {
+      "post": {
+        "operationId": "ComponentPolicyStates_ListQueryResultsForResource",
+        "description": "Queries component policy states for the resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceId"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesResource"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/orderBy"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/from"
+          },
+          {
+            "$ref": "#/parameters/to"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/apply"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesExpand"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPolicyStatesQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2024-10-01/policyMetadata.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query latest component policy states at resource scope": {
+            "$ref": "./examples/ComponentPolicyStates_QueryResourceScope.json"
+          },
+          "Query latest component policy states at resource scope and expand policyEvaluationDetails": {
+            "$ref": "./examples/ComponentPolicyStates_QueryResourceScopeExpandPolicyEvaluationDetails.json"
+          },
+          "Query latest component policy compliance state count grouped by component type at resource scope filtered by given assignment.": {
+            "$ref": "./examples/ComponentPolicyStates_QueryResourceScopeGroupByComponentTypeWithAggregate.json"
+          },
+          "Query latest component policy states at nested resource scope": {
+            "$ref": "./examples/ComponentPolicyStates_QueryNestedResourceScope.json"
+          },
+          "Query latest component policy compliance state at resource scope filtered by given component id.": {
+            "$ref": "./examples/ComponentPolicyStates_QueryResourceScopeFilterByComponentId.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults": {
+      "post": {
+        "operationId": "ComponentPolicyStates_ListQueryResultsForPolicyDefinition",
+        "description": "Queries component policy states for the subscription level policy definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespace"
+          },
+          {
+            "$ref": "#/parameters/policyDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesResource"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/orderBy"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/from"
+          },
+          {
+            "$ref": "#/parameters/to"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/apply"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPolicyStatesQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2024-10-01/policyMetadata.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query latest component policy states at subscription level policy definition scope": {
+            "$ref": "./examples/ComponentPolicyStates_QuerySubscriptionLevelPolicyDefinitionScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults": {
+      "post": {
+        "operationId": "ComponentPolicyStates_ListQueryResultsForSubscriptionLevelPolicyAssignment",
+        "description": "Queries component policy states for the subscription level policy assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespace"
+          },
+          {
+            "$ref": "#/parameters/policyAssignmentName"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesResource"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/orderBy"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/from"
+          },
+          {
+            "$ref": "#/parameters/to"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/apply"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPolicyStatesQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2024-10-01/policyMetadata.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query latest at subscription level policy assignment scope": {
+            "$ref": "./examples/ComponentPolicyStates_QuerySubscriptionLevelPolicyAssignmentScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults": {
+      "post": {
+        "operationId": "ComponentPolicyStates_ListQueryResultsForResourceGroupLevelPolicyAssignment",
+        "description": "Queries component policy states for the resource group level policy assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespace"
+          },
+          {
+            "$ref": "#/parameters/policyAssignmentName"
+          },
+          {
+            "$ref": "#/parameters/componentPolicyStatesResource"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/orderBy"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/from"
+          },
+          {
+            "$ref": "#/parameters/to"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/apply"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPolicyStatesQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2024-10-01/policyMetadata.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query latest at resource group level policy assignment scope": {
+            "$ref": "./examples/ComponentPolicyStates_QueryResourceGroupLevelPolicyAssignmentScope.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ComponentPolicyStatesQueryResults": {
+      "type": "object",
+      "description": "Query results.",
+      "properties": {
+        "@odata.context": {
+          "description": "OData context string; used by OData clients to resolve type information based on metadata.",
+          "type": "string"
+        },
+        "@odata.count": {
+          "description": "OData entity count; represents the number of policy state records returned.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "value": {
+          "description": "Query results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentPolicyState"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ComponentPolicyState": {
+      "type": "object",
+      "description": "Component Policy State record.",
+      "properties": {
+        "@odata.id": {
+          "description": "OData entity ID; always set to null since component policy state records do not have an entity ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "@odata.context": {
+          "description": "OData context string; used by OData clients to resolve type information based on metadata.",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "description": "Timestamp for the component policy state record.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "componentId": {
+          "description": "Component Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentType": {
+          "description": "Component type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentName": {
+          "description": "Component name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceId": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyAssignmentId": {
+          "description": "Policy assignment ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyDefinitionId": {
+          "description": "Policy definition ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Subscription ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceType": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceLocation": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Resource group name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyAssignmentName": {
+          "description": "Policy assignment name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyAssignmentOwner": {
+          "description": "Policy assignment owner.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyAssignmentParameters": {
+          "description": "Policy assignment parameters.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyAssignmentScope": {
+          "description": "Policy assignment scope.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyDefinitionName": {
+          "description": "Policy definition name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyDefinitionAction": {
+          "description": "Policy definition action, i.e. effect.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyDefinitionCategory": {
+          "description": "Policy definition category.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policySetDefinitionId": {
+          "description": "Policy set definition ID, if the policy assignment is for a policy set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policySetDefinitionName": {
+          "description": "Policy set definition name, if the policy assignment is for a policy set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policySetDefinitionOwner": {
+          "description": "Policy set definition owner, if the policy assignment is for a policy set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policySetDefinitionCategory": {
+          "description": "Policy set definition category, if the policy assignment is for a policy set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policySetDefinitionParameters": {
+          "description": "Policy set definition parameters, if the policy assignment is for a policy set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyDefinitionReferenceId": {
+          "description": "Reference ID for the policy definition inside the policy set, if the policy assignment is for a policy set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "complianceState": {
+          "description": "Compliance state of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyEvaluationDetails": {
+          "description": "Policy evaluation details. This is only included in the response if the request contains $expand=PolicyEvaluationDetails.",
+          "type": "object",
+          "$ref": "#/definitions/ComponentPolicyEvaluationDetails"
+        },
+        "policyDefinitionGroupNames": {
+          "description": "Policy definition group names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "policyDefinitionVersion": {
+          "description": "Evaluated policy definition version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policySetDefinitionVersion": {
+          "description": "Evaluated policy set definition version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyAssignmentVersion": {
+          "description": "Evaluated policy assignment version.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
+      }
+    },
+    "ComponentPolicyEvaluationDetails": {
+      "type": "object",
+      "description": "Policy evaluation details.",
+      "properties": {
+        "evaluatedExpressions": {
+          "description": "Details of the evaluated expressions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ComponentExpressionEvaluationDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "reason": {
+          "description": "Additional textual reason for the evaluation outcome.",
+          "type": "string"
+        }
+      }
+    },
+    "ComponentExpressionEvaluationDetails": {
+      "type": "object",
+      "description": "Evaluation details of policy language expressions.",
+      "properties": {
+        "result": {
+          "description": "Evaluation result.",
+          "type": "string"
+        },
+        "expression": {
+          "description": "Expression evaluated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expressionKind": {
+          "description": "The kind of expression that was evaluated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "path": {
+          "description": "Property path if the expression is a field or an alias.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expressionValue": {
+          "description": "Value of the expression.",
+          "type": "object",
+          "readOnly": true
+        },
+        "targetValue": {
+          "description": "Target value to be compared with the expression value.",
+          "type": "object",
+          "readOnly": true
+        },
+        "operator": {
+          "description": "Operator to compare the expression value and the target value.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "componentPolicyStatesResource": {
+      "name": "componentPolicyStatesResource",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "latest"
+      ],
+      "x-ms-enum": {
+        "name": "ComponentPolicyStatesResource",
+        "modelAsString": true
+      },
+      "description": "The virtual resource under ComponentPolicyStates resource type. In a given time range, 'latest' represents the latest component policy state(s).",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Microsoft Azure subscription ID.",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Resource group name.",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceId": {
+      "name": "resourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Resource ID.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "authorizationNamespace": {
+      "name": "authorizationNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Microsoft.Authorization"
+      ],
+      "x-ms-enum": {
+        "name": "AuthorizationNamespaceType",
+        "modelAsString": false
+      },
+      "description": "The namespace for Microsoft Authorization resource provider; only \"Microsoft.Authorization\" is allowed.",
+      "x-ms-parameter-location": "method"
+    },
+    "policyDefinitionName": {
+      "name": "policyDefinitionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Policy definition name.",
+      "pattern": "^[^<>%&:\\\\?/#]*$",
+      "minLength": 1,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "policyAssignmentName": {
+      "name": "policyAssignmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Policy assignment name.",
+      "pattern": "^[^<>%&:\\\\?/#]*$",
+      "minLength": 1,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
+    },
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "Maximum number of records to return.",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "Top"
+    },
+    "orderBy": {
+      "name": "$orderby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Ordering expression using OData notation. One or more comma-separated column names with an optional \"desc\" (the default) or \"asc\", e.g. \"$orderby=PolicyAssignmentId, ResourceId asc\".",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "OrderBy"
+    },
+    "select": {
+      "name": "$select",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Select expression using OData notation. Limits the columns on each record to just those requested, e.g. \"$select=PolicyAssignmentId, ResourceId\".",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "Select"
+    },
+    "from": {
+      "name": "$from",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "From"
+    },
+    "to": {
+      "name": "$to",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "To"
+    },
+    "filter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData filter expression.",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "Filter"
+    },
+    "apply": {
+      "name": "$apply",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData apply expression for aggregations.",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "Apply"
+    },
+    "componentPolicyStatesExpand": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The $expand query parameter.",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "Expand"
+    }
+  }
+}

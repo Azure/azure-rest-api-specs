@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-12-01-preview-only
+tag: package-2024-09-01-preview
 ```
 
 ### Suppression
@@ -71,6 +71,17 @@ directive:
   - suppress: R1007
     from: authorization-AccessReviewCalls.json
     reason: Fixing warning would create a breaking change
+  - suppress: DeleteResponseBodyEmpty
+    from: authorization-RoleDefinitionsCalls.json
+    reason: Fixing error would create a S360 flag for us, because our service returns the role definition when deleted.
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: authorization-RoleDefinitionsCalls.json
+    reason: /{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} and /{scope}/providers/Microsoft.Authorization/roleDefinitions are two different APIs, they are not having the duplicate paths.
+  - suppress: TopLevelResourcesListBySubscription
+    from: authorization-RoleDefinitionsCalls.json
+    reason: The resource 'RoleDefinition' has scope parameter, which includes the subscription scope as well.
+  - suppress: PreviewVersionOverOneYear
+    reason: We are still due to go public preview in next quarter. We have also updated status in the ADO for the delay.
   - suppress: R2017
     from: authorization-AccessReviewCalls.json
     reason: Request body is a subset of response body. Additional properties in the response are not settable by the user
@@ -82,11 +93,108 @@ directive:
     reason: common-types doesn't need to reference api version.
 ```
 
+### Tag: package-2024-09-01-preview
+
+These settings apply only when `--tag=package-2024-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-01-preview'
+input-file:
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/common-types.json
+  - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
+```
+
+### Tag: package-2024-02-01-preview
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-01-preview'
+input-file:
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/common-types.json
+  - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
+```
+
+### Tag: package-2022-05-01-preview-only
+
+These settings apply only when `--package-2022-05-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-01-preview-only'
+input-file:
+  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2022-05-01-preview/common-types.json
+```
+### Tag: package-2022-05-01-preview
+
+These settings apply only when `--package-2022-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-01-preview'
+input-file:
+  
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2022-05-01-preview/common-types.json
+  - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
+```
 ### Tag: package-2021-12-01-preview-only
 
 These settings apply only when `--tag=package-2021-12-01-preview-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-12-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+- Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
+```
+
+### Tag: package-2021-12-01-preview-python-only
+
+These settings apply only when `--tag=package-2021-12-01-preview-python-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12-01-preview-python-only'
 input-file:
 - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
 ```
@@ -132,24 +240,71 @@ input-file:
 - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
+### Tag: package-2022-04-01
+
+These settings apply only when `--tag=package-2022-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04-01'
+input-file:
+- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/common-types.json
+- Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
+- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
+- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
+- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
+- Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
+- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
+- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
+- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
+- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
+```
+
+### Tag: package-2022-04-01-only
+
+These settings apply only when `--tag=package-2022-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04-01-only'
+input-file:
+- Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/common-types.json
+```
+
 ### Tag: package-2022-04-01-preview-only
 
 These settings apply only when `--tag=package-2022-04-01-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-04-01-preview-only'
+``` yaml $(tag) == 'package-2022-04-01-preview-only'
 input-file:
 - Microsoft.Authorization/preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
 - Microsoft.Authorization/preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
+```
+
+### Tag: package-2022-08-01-preview-only
+
+These settings apply only when `--tag=package-2022-08-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-11'
+``` yaml $(tag) == 'package-preview-2021-11'
 input-file:
   - Microsoft.Authorization/preview/2021-11-16-preview/authorization-AccessReviewCalls.json
 ```
+
 ### Tag: package-2021-07-01-preview-only
 
 These settings apply only when `--tag=package-2021-07-01-preview-only` is specified on the command line.
@@ -175,6 +330,47 @@ These settings apply only when `--tag=package-2021-01-01-preview-only` is specif
 ``` yaml $(tag) == 'package-2021-01-01-preview-only'
 input-file:
 - Microsoft.Authorization/preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
+```
+
+### Tag: package-2020-10-01
+
+These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01'
+input-file:
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/stable/2020-10-01/common-types.json
+- Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
+- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
+- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
+- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
+- Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
+- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
+- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
+- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
+- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
+```
+
+### Tag: package-2020-10-01-only
+
+These settings apply only when `--tag=package-2020-10-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01-only'
+input-file:
+- Microsoft.Authorization/stable/2020-10-01/common-types.json
+- Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
+- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
+- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
+- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
+- Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
+- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
+- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
+- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
+- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2020-10-01-preview
@@ -444,7 +640,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node

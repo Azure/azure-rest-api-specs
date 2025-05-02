@@ -647,6 +647,12 @@
             "$ref": "#/definitions/BillingSubscription"
           }
         },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
           "type": "string",
@@ -726,6 +732,11 @@
           "type": "string"
         },
         "customerDisplayName": {
+          "description": "The name of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing accounts.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerName": {
           "description": "The name of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing accounts.",
           "type": "string",
           "readOnly": true
