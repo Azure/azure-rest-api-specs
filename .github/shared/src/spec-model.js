@@ -1,6 +1,7 @@
 // @ts-check
 
 import $RefParser from "@apidevtools/json-schema-ref-parser";
+import { accessSync, constants as fsConstants } from "fs";
 import { readdir, readFile } from "fs/promises";
 import * as yaml from "js-yaml";
 import { marked } from "marked";
@@ -8,6 +9,34 @@ import { dirname, join, normalize, relative, resolve } from "path";
 import { simpleGit } from "simple-git";
 import { mapAsync } from "./array.js";
 import { example, readme } from "./changed-files.js";
+
+export class SpecModel2 {
+  /** @type {string} */
+  #folder;
+
+  /** @type {import('./logger.js').ILogger | undefined} */
+  #logger;
+
+  /**
+   * @param {string} folder
+   * @param {Object} [options]
+   * @param {import('./logger.js').ILogger} [options.logger]
+   */
+  constructor(folder, options) {
+    // Throw immediately if folder cannot be read, to prevent confusing errors later
+    accessSync(folder, fsConstants.R_OK);
+
+    this.#folder = folder;
+    this.#logger = options?.logger;
+  }
+
+  /**
+   * @returns {string}
+   */
+  toString() {
+    return `SpecModel2(${this.#folder}, {logger: ${this.#logger}})`;
+  }
+}
 
 /**
  * @typedef {Object} SpecModel
@@ -72,7 +101,7 @@ export async function getSpecModel(folder, options = {}) {
  * @param {string} readmePath
  * @param {string} repoRoot
  * @param {string} folderRelative
- * @param {import('./logger.js').ILogger} logger
+ * @param {import('./logger.js').ILogger} [logger]
  * @returns {Promise<Readme>}
  */
 async function getReadme(readmePath, repoRoot, folderRelative, logger) {

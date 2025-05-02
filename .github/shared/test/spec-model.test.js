@@ -7,6 +7,7 @@ import {
   getAffectedReadmeTags,
   getAffectedSwaggers,
   getSpecModel,
+  SpecModel2,
 } from "../src/spec-model.js";
 import { isWindows } from "./test-utils.js";
 
@@ -15,6 +16,19 @@ const __dirname = dirname(__filename);
 const repoRoot = join(__dirname, "..", "..", "..");
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
+
+describe("SpecModel2", () => {
+  it("returns spec model", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+
+    const specModel2 = new SpecModel2(folder, options);
+    console.log(`specModel2: '${specModel2}'`);
+    expect(specModel2).toBeDefined();
+  });
+});
 
 describe("getSpecModel", () => {
   // Skip this test as it checks a code path that is not available when running
