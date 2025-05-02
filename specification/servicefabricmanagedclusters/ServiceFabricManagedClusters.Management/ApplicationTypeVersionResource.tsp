@@ -103,6 +103,7 @@ model ApplicationTypeVersionResourceProperties {
   /**
    * The URL to the application package
    */
+  @secret
   appPackageUrl: string;
 }
 
