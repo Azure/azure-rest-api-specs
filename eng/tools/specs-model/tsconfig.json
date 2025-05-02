@@ -6,6 +6,7 @@
   ],
   "compilerOptions": {
     "outDir": "./dist",
+    "rootDir": ".",
     "target": "ES2022",
     "lib": ["ES2022"],
 
@@ -13,7 +14,12 @@
     // We don't need it anyway, as all sources are in .ts except the 3-line cmd entry-point.
     // https://www.typescriptlang.org/tsconfig/#checkJs
     "checkJs": false
-  }
+  },
+  "include": [
+    "*.ts",
+    "src/**/*.ts",
+    "test/**/*.ts",
+  ],
 }
 
 // [strictest]: https://www.npmjs.com/package/@tsconfig/strictest from [tsconfig bases]

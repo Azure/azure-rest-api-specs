@@ -249,7 +249,7 @@ extends:
                   -LabelName $(BreakingChangeLabel)
                   -AuthToken "$(azuresdk-github-pat)"
 
-            - ${{ if eq(parameters.SkipPullRequestCreation, false) }}:
+            - ${{ if and(eq(parameters.SkipPullRequestCreation, false), ne(variables['Build.Reason'], 'PullRequest')) }}:
               - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
                 parameters:
                   BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
@@ -279,9 +279,9 @@ extends:
                     -PRBody "$(GeneratedSDKInformation)"
                     -OpenAsDraft $true
 
-            - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-              - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
-                parameters:
-                  ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
-                  ArtifactName: $(PipelineArtifactsName)
-                  RepoRoot: $(SdkRepoDirectory)
+          - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+            - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
+              parameters:
+                ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
+                ArtifactName: $(PipelineArtifactsName)
+                RepoRoot: $(SdkRepoDirectory)
