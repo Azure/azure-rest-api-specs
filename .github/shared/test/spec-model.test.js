@@ -1,10 +1,10 @@
 import { readdir } from "fs/promises";
-import { dirname, join, relative, resolve } from "path";
+import { dirname, join, resolve } from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
+import { mapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
 import { getSpecModelOld, SpecModel } from "../src/spec-model.js";
-import { isWindows } from "./test-utils.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -68,6 +68,41 @@ describe("SpecModel", () => {
     expect(inputFiles1[0].path).toBe(
       resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
     );
+  });
+
+  it("uses strings for tag names and doesn't parse Date object", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/yaml-date-parsing",
+    );
+
+    const specModel = new SpecModel(folder, options);
+
+    const readme = [...(await specModel.getReadmes())][0];
+
+    const globalConfig = await readme.getGlobalConfig();
+
+    const tag = globalConfig["tag"];
+
+    expect(tag).not.toBeTypeOf(Date);
+    expect(tag).toBeTypeOf("string");
+    expect(tag).toBe("2022-12-01");
+  });
+
+  it("throws when a tag is defined more than once", async () => {
+    // data-plane/readme.md defines the `package-2022-12-01` tag twice.
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/data-plane",
+    );
+
+    const specModel = new SpecModel(folder, options);
+
+    const readmes = await specModel.getReadmes();
+
+    await expect(
+      mapAsync([...readmes], async (r) => await r.getTags()),
+    ).rejects.toThrowError(/multiple.*tag/i);
   });
 
   describe("getAffectedReadmeTags", () => {
@@ -233,89 +268,6 @@ describe("SpecModel", () => {
 
       expect(actual).toEqual(expected);
     });
-  });
-});
-
-describe("getSpecModel", () => {
-  // Skip this test as it checks a code path that is not available when running
-  // tests in CI.
-  it.skip("returns spec model given relative path", async ({ expect }) => {
-    const servicePath = "specification/contosowidgetmanager";
-
-    const actual = await getSpecModelOld(servicePath);
-    expect(actual).toBeDefined();
-  });
-
-  it("uses strings for tag names and doesn't parse Date object", async ({
-    expect,
-  }) => {
-    const fixtureRoot = resolve(__dirname, "fixtures/getSpecModel");
-    const actual = await getSpecModelOld(
-      join(fixtureRoot, "specification/yaml-date-parsing"),
-      options,
-    );
-
-    const actualTag = actual.readmes["readme.md"].globalConfig["tag"];
-
-    expect(actualTag).not.toBeTypeOf(Date);
-    expect(actualTag).toBeTypeOf("string");
-    expect(actualTag).toBe("2022-12-01");
-  });
-
-  it.skipIf(isWindows())("returns spec model", async ({ expect }) => {
-    const fixtureRoot = resolve(__dirname, "fixtures/getSpecModel");
-    const folderRelative = relative(
-      repoRoot,
-      join(fixtureRoot, "specification/contosowidgetmanager/resource-manager"),
-    );
-
-    const expected = {
-      repoRoot,
-      folder: folderRelative,
-      readmes: {
-        "readme.md": {
-          globalConfig: {
-            "openapi-type": "arm",
-            "openapi-subtype": "rpaas",
-            tag: "package-2021-11-01",
-          },
-          tags: {
-            "package-2021-11-01": {
-              inputFiles: {
-                "Microsoft.Contoso/stable/2021-11-01/contoso.json": {
-                  refs: expect.anything(),
-                },
-              },
-            },
-            "package-2021-10-01-preview": {
-              inputFiles: {
-                "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json": {
-                  refs: expect.anything(),
-                },
-              },
-            },
-          },
-        },
-      },
-    };
-
-    const specModel = await getSpecModelOld(
-      join(repoRoot, folderRelative),
-      options,
-    );
-
-    expect(specModel).toEqual(expected);
-  });
-
-  it("throws when a tag is defined more than once", async ({ expect }) => {
-    const fixtureRoot = resolve(__dirname, "fixtures/getSpecModel");
-
-    // data-plane/readme.md defines the `package-2022-12-01` tag twice.
-    const specRoot = "specification/contosowidgetmanager/data-plane";
-
-    await expect(
-      async () => await getSpecModelOld(specRoot, { repoRoot: fixtureRoot }),
-    ).rejects.toThrowError();
   });
 });
 
