@@ -3,11 +3,7 @@ import { dirname, join, relative, resolve } from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.js";
-import {
-  getAffectedSwaggersOld,
-  getSpecModelOld,
-  SpecModel,
-} from "../src/spec-model.js";
+import { getSpecModelOld, SpecModel } from "../src/spec-model.js";
 import { isWindows } from "./test-utils.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -16,7 +12,7 @@ const repoRoot = join(__dirname, "..", "..", "..");
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
 
-describe("SpecModel2", () => {
+describe("SpecModel", () => {
   it("returns spec model", async () => {
     const folder = resolve(
       __dirname,
@@ -133,6 +129,111 @@ describe("SpecModel2", () => {
       expect(tags[1].name).toBe("tag-2");
     });
   });
+
+  describe("getAffectedSwaggers", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/getAffectedSwaggers/specification/1",
+    );
+
+    const specModel = new SpecModel(folder, options);
+
+    it("returns directly referenced swagger", async () => {
+      const swaggerPath = resolve(folder, "data-plane/a.json");
+
+      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath))]
+        .map((s) => s.path)
+        .sort();
+
+      const expected = ["data-plane/a.json"]
+        .map((p) => resolve(folder, p))
+        .sort();
+
+      expect(actual).toEqual(expected);
+    });
+
+    it("throws when swagger file is not found", async ({ expect }) => {
+      const swaggerPath = resolve(folder, "data-plane/not-found.json");
+
+      expect(specModel.getAffectedSwaggers(swaggerPath)).rejects.toThrowError(
+        expect.objectContaining({
+          message: expect.stringContaining(swaggerPath),
+        }),
+      );
+    });
+
+    it("returns correct swaggers for one layer of dependencies", async () => {
+      const swaggerPath = resolve(folder, "data-plane/nesting/b.json");
+
+      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath))]
+        .map((s) => s.path)
+        .sort();
+
+      const expected = ["data-plane/a.json", "data-plane/nesting/b.json"]
+        .map((p) => resolve(folder, p))
+        .sort();
+
+      expect(actual).toEqual(expected);
+    });
+
+    it("returns correct swaggers for two layers of dependencies", async () => {
+      const swaggerPath = resolve(folder, "data-plane/c.json");
+
+      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath))]
+        .map((s) => s.path)
+        .sort();
+
+      const expected = [
+        "data-plane/a.json",
+        "data-plane/nesting/b.json",
+        "data-plane/c.json",
+      ]
+        .map((p) => resolve(folder, p))
+        .sort();
+
+      expect(actual).toEqual(expected);
+    });
+
+    it("returns correct swaggers for three layers of dependencies", async () => {
+      const swaggerPath = resolve(folder, "data-plane/d.json");
+
+      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath))]
+        .map((s) => s.path)
+        .sort();
+
+      const expected = [
+        "data-plane/a.json",
+        "data-plane/nesting/b.json",
+        "data-plane/c.json",
+        "data-plane/d.json",
+      ]
+        .map((p) => resolve(folder, p))
+        .sort();
+
+      expect(actual).toEqual(expected);
+    });
+
+    it("returns correctly for multiple shared dependencies", async () => {
+      const swaggerPath = resolve(folder, "data-plane/shared/shared.json");
+
+      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath))]
+        .map((s) => s.path)
+        .sort();
+
+      const expected = [
+        "data-plane/a.json",
+        "data-plane/nesting/b.json",
+        "data-plane/c.json",
+        "data-plane/d.json",
+        "data-plane/shared/shared.json",
+        "data-plane/e.json",
+      ]
+        .map((p) => resolve(folder, p))
+        .sort();
+
+      expect(actual).toEqual(expected);
+    });
+  });
 });
 
 describe("getSpecModel", () => {
@@ -228,120 +329,6 @@ describe("getReadme regex", () => {
     const regex = /yaml.*\$\(tag\) ?== ?'([^']*)'/;
     expect(regex.test(example)).toEqual(expected);
   });
-});
-
-describe("getAffectedSwaggers", async () => {
-  const fixtureRoot = resolve(__dirname, "fixtures/getAffectedSwaggers");
-  const folderRelative = relative(
-    repoRoot,
-    join(fixtureRoot, "specification/1"),
-  );
-  const specModel = await getSpecModelOld(
-    join(repoRoot, folderRelative),
-    options,
-  );
-
-  it.skipIf(isWindows())(
-    "returns directly referenced swagger",
-    async ({ expect }) => {
-      const swaggerPath = join(repoRoot, folderRelative, "data-plane/a.json");
-      const actual = getAffectedSwaggersOld(swaggerPath, specModel);
-      const expected = [join(folderRelative, "data-plane/a.json")];
-      expect(actual).toEqual(expected);
-    },
-  );
-
-  it("throws when swagger file is not found", async ({ expect }) => {
-    const swaggerPath = join(
-      repoRoot,
-      folderRelative,
-      "data-plane/not-found.json",
-    );
-    const actual = () => getAffectedSwaggersOld(swaggerPath, specModel);
-    expect(actual).toThrowError(
-      expect.objectContaining({
-        message: expect.stringContaining(swaggerPath),
-      }),
-    );
-  });
-
-  it.skipIf(isWindows())(
-    "returns correct swaggers for one layer of dependencies",
-    async ({ expect }) => {
-      const swaggerPath = join(
-        repoRoot,
-        folderRelative,
-        "data-plane/nesting/b.json",
-      );
-
-      const actual = getAffectedSwaggersOld(swaggerPath, specModel);
-
-      const expected = ["data-plane/a.json", "data-plane/nesting/b.json"].map(
-        (f) => join(folderRelative, f),
-      );
-
-      expect(actual.sort()).toEqual(expected.sort());
-    },
-  );
-
-  it.skipIf(isWindows())(
-    "returns correct swaggers for two layers of dependencies",
-    async ({ expect }) => {
-      const swaggerPath = join(repoRoot, folderRelative, "data-plane/c.json");
-
-      const actual = getAffectedSwaggersOld(swaggerPath, specModel);
-
-      const expected = [
-        "data-plane/a.json",
-        "data-plane/nesting/b.json",
-        "data-plane/c.json",
-      ].map((f) => join(folderRelative, f));
-
-      expect(actual.sort()).toEqual(expected.sort());
-    },
-  );
-
-  it.skipIf(isWindows())(
-    "returns correct swaggers for three layers of dependencies",
-    async ({ expect }) => {
-      const swaggerPath = join(repoRoot, folderRelative, "data-plane/d.json");
-
-      const actual = getAffectedSwaggersOld(swaggerPath, specModel);
-
-      const expected = [
-        "data-plane/a.json",
-        "data-plane/nesting/b.json",
-        "data-plane/c.json",
-        "data-plane/d.json",
-      ].map((f) => join(folderRelative, f));
-
-      expect(actual.sort()).toEqual(expected.sort());
-    },
-  );
-
-  it.skipIf(isWindows())(
-    "returns correctly for multiple shared dependencies",
-    async ({ expect }) => {
-      const swaggerPath = join(
-        repoRoot,
-        folderRelative,
-        "data-plane/shared/shared.json",
-      );
-
-      const actual = getAffectedSwaggersOld(swaggerPath, specModel);
-
-      const expected = [
-        "data-plane/a.json",
-        "data-plane/nesting/b.json",
-        "data-plane/c.json",
-        "data-plane/d.json",
-        "data-plane/shared/shared.json",
-        "data-plane/e.json",
-      ].map((f) => join(folderRelative, f));
-
-      expect(actual.sort()).toEqual(expected.sort());
-    },
-  );
 });
 
 // Stress test the parser against all specs in the specification/ folder. This

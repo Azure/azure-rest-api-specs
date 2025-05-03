@@ -89,7 +89,80 @@ export class SpecModel {
   async getAffectedSwaggers(swaggerPath) {
     const swaggerPathResolved = resolveCheckAccess(swaggerPath);
 
-    return new Set();
+    // Use Map instead of Set, to ensure exactly one Swagger object per path is returned
+    // SpecModel can include multiple Swagger objects pointing to the same path
+    /** @type {Map<string, Swagger>} */
+    const affectedSwaggers = new Map();
+
+    for (const readme of await this.getReadmes()) {
+      for (const tag of await readme.getTags()) {
+        for (const swagger of tag.inputFiles) {
+          // readme.md includes swaggerPath
+          if (swagger.path === swaggerPathResolved) {
+            affectedSwaggers.set(swagger.path, swagger);
+          }
+
+          const refs = await swagger.getRefs();
+
+          // readme.md includes a.json
+          //   a.json references swaggerPath
+          const refToSwaggerPath = [...refs].find(
+            (ref) => ref.path === swaggerPathResolved,
+          );
+          if (refToSwaggerPath) {
+            // Add the Swagger object for swaggerPath
+            affectedSwaggers.set(refToSwaggerPath.path, refToSwaggerPath);
+
+            // Add the Swagger object that references swaggerPath
+            //
+            // Example: a.json
+            affectedSwaggers.set(swagger.path, swagger);
+          }
+
+          // readme.md includes a.json
+          //   a.json references b.json
+          //     b.json references swaggerPath
+          for (const ref of refs) {
+            const refRefs = await ref.getRefs();
+            const refRefToSwaggerPath = [...refRefs].find(
+              (ref) => ref.path === swaggerPathResolved,
+            );
+            if (refRefToSwaggerPath) {
+              // Add the Swagger object for swaggerPath
+              affectedSwaggers.set(
+                refRefToSwaggerPath.path,
+                refRefToSwaggerPath,
+              );
+
+              // Add the Swagger object that references swaggerPath
+              //
+              // Example: b.json
+              affectedSwaggers.set(ref.path, ref);
+
+              // Add the Swagger object that references the Swagger object
+              // that references swaggerPath
+              //
+              // Example: a.json
+              //
+              // Note: This may not be strictly necessary, since getRefs() includes
+              // transitive references, so "a.json" should have already been added
+              // above.  However, it's safer to add it, in case somehow it wasn't added
+              // earlier, since we know it's in the dependency chain.
+              affectedSwaggers.set(swagger.path, swagger);
+            }
+          }
+        }
+      }
+    }
+
+    // The swagger file supplied does not exist in the given specModel
+    if (affectedSwaggers.size === 0) {
+      throw new Error(
+        `No affected swaggers found in specModel for ${swaggerPath}`,
+      );
+    }
+
+    return new Set(affectedSwaggers.values());
   }
 
   /**
@@ -762,85 +835,4 @@ async function getExternalFileRefs(
   return Object.fromEntries(
     Object.entries(externalFileRefs).map((e) => [e[0], Array.from(e[1])]),
   );
-}
-
-/**
- * Given a swagger file, return the swagger files that are affected by the
- * changes in the given swagger file.
- * @param {string} swaggerFile
- * @param {SpecModelOld} specModel
- * @returns {string[]}
- */
-export function getAffectedSwaggersOld(swaggerFile, specModel) {
-  const swaggerFileResolved = resolve(swaggerFile);
-  const swaggerFileRelative = relative(specModel.repoRoot, swaggerFileResolved);
-
-  /** @type {Set<string>} */
-  const affectedSwaggers = new Set();
-
-  for (const [readmePath, readme] of Object.entries(specModel.readmes)) {
-    const readmePathResolved = resolve(
-      specModel.repoRoot,
-      specModel.folder,
-      readmePath,
-    );
-
-    for (const [, tag] of Object.entries(readme.tags)) {
-      for (const [inputFile, swagger] of Object.entries(tag.inputFiles)) {
-        const inputFileResolved = resolve(
-          dirname(readmePathResolved),
-          inputFile,
-        );
-        const inputFileRelative = relative(
-          specModel.repoRoot,
-          inputFileResolved,
-        );
-
-        // The readme.md file directly references the given swaggerFile
-        if (inputFileResolved === swaggerFileResolved) {
-          affectedSwaggers.add(swaggerFileRelative);
-        }
-
-        // Some swagger file has a ref to the given swaggerFile.
-        if (
-          Object.keys(swagger.refs)
-            .map((ref) => resolve(dirname(inputFileResolved), ref))
-            .includes(swaggerFileResolved)
-        ) {
-          affectedSwaggers.add(swaggerFileRelative);
-          affectedSwaggers.add(inputFileRelative);
-        }
-
-        // Check the swagger file's refs and add any which depend on the given
-        // swaggerFile.
-        // For example "->" means "depends on", given:
-        // Tag 1 directly references a with a relationship of:
-        // a -> b -> c
-        // If c is changed, then a and b are affected, but since b is not
-        // directly referenced in the readme, it can only be discovered by
-        // evaluating a's dependencies.
-        for (const [ref, dependsOn] of Object.entries(swagger.refs)) {
-          const refResolved = resolve(dirname(inputFileResolved), ref);
-          const refRelative = relative(specModel.repoRoot, refResolved);
-          if (
-            dependsOn
-              .map((dep) => resolve(dirname(refResolved), dep))
-              .includes(swaggerFileResolved)
-          ) {
-            affectedSwaggers.add(swaggerFileRelative);
-            affectedSwaggers.add(refRelative);
-          }
-        }
-      }
-    }
-  }
-
-  // The swagger file supplied does not exist in the given specModel
-  if (affectedSwaggers.size === 0) {
-    throw new Error(
-      `No affected swaggers found in specModel for ${swaggerFile}`,
-    );
-  }
-
-  return Array.from(affectedSwaggers);
 }
