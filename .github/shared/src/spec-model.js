@@ -44,6 +44,43 @@ export class SpecModel2 {
   }
 
   /**
+   * @param {string} swaggerFile
+   * @returns {Promise<Map<Readme2, Set<Tag2>>>}
+   */
+  async getAffectedReadmeTags(swaggerFile) {
+    const swaggerFileResolved = resolveCheckAccess(swaggerFile);
+
+    /** @type {Map<Readme2, Set<Tag2>>} */
+    const affectedReadmeTags = new Map();
+
+    for (const readme of await this.getReadmes()) {
+      for (const tag of await readme.getTags()) {
+        for (const inputFile of tag.inputFiles) {
+          if (inputFile.path === swaggerFileResolved) {
+            /** @type {Set<Tag2>} */
+            const tags = affectedReadmeTags.get(readme) ?? new Set();
+            tags.add(tag);
+            affectedReadmeTags.set(readme, tags);
+
+            // No need to check refs if the swagger file is directly referenced
+            continue;
+          }
+
+          const refs = await inputFile.getRefs();
+          if ([...refs].find((r) => r.path === swaggerFileResolved)) {
+            /** @type {Set<Tag2>} */
+            const tags = affectedReadmeTags.get(readme) ?? new Set();
+            tags.add(tag);
+            affectedReadmeTags.set(readme, tags);
+          }
+        }
+      }
+    }
+
+    return affectedReadmeTags;
+  }
+
+  /**
    * @returns {Promise<Set<Readme2>>}
    */
   async getReadmes() {
@@ -116,6 +153,31 @@ export class Readme2 {
     this.#specModel = specModel;
     this.#path = resolveCheckAccess(path);
     this.#logger = options?.logger;
+  }
+
+  /**
+   * @param {string} swaggerPath
+   * @param {import('./logger.js').ILogger} [logger]
+   * @returns {string}
+   */
+  static #normalizeSwaggerPath(swaggerPath, logger) {
+    let swaggerPathNormalized = swaggerPath;
+    // Ignore uses of "$(this-folder)" in the swagger path. It refers to the
+    // current folder anyway and can be substituted with "."
+    if (swaggerPath.includes("$(this-folder)")) {
+      swaggerPathNormalized = swaggerPath.replaceAll("$(this-folder)", ".");
+    }
+
+    // Some swagger paths contain backslashes. These should be normalized when
+    // encountered though the expected format for input-files is forward slashes.
+    if (swaggerPathNormalized.includes("\\")) {
+      logger?.info(
+        `Found backslash (\\) in swagger path ${swaggerPath}. Replacing with forward slash (/)`,
+      );
+      swaggerPathNormalized = swaggerPathNormalized.replaceAll("\\", "/");
+    }
+
+    return normalize(swaggerPathNormalized);
   }
 
   async #getData() {
@@ -194,7 +256,8 @@ export class Readme2 {
           ? obj["input-file"]
           : [obj["input-file"]];
         for (const swaggerPath of inputFilePaths) {
-          const swaggerPathNormalized = normalizeSwaggerPath(swaggerPath);
+          const swaggerPathNormalized =
+            Readme2.#normalizeSwaggerPath(swaggerPath);
           const swaggerPathResolved = resolve(
             dirname(this.#path),
             swaggerPathNormalized,
