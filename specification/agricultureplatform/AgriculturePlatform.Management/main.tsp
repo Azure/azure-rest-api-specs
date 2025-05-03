@@ -67,7 +67,7 @@ union ProvisioningState {
   Accepted: "Accepted",
 
   /** Resource validation failed. */
-  VAlidationFailed: "Validation Failed"
+  VAlidationFailed: "Validation Failed",
 }
 
 @doc("Details of the Agriculture AgriDataManager.")
