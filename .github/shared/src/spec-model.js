@@ -16,14 +16,14 @@ import { resolveCheckAccess } from "./fs.js";
  * @prop {boolean} [relativePaths]
  */
 
-export class SpecModel2 {
+export class SpecModel {
   /** @type {string} absolute path */
   #folder;
 
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
-  /** @type {Set<Readme2> | undefined} */
+  /** @type {Set<Readme> | undefined} */
   #readmes;
 
   /**
@@ -45,19 +45,19 @@ export class SpecModel2 {
 
   /**
    * @param {string} swaggerFile
-   * @returns {Promise<Map<Readme2, Set<Tag2>>>}
+   * @returns {Promise<Map<Readme, Set<Tag>>>}
    */
   async getAffectedReadmeTags(swaggerFile) {
     const swaggerFileResolved = resolveCheckAccess(swaggerFile);
 
-    /** @type {Map<Readme2, Set<Tag2>>} */
+    /** @type {Map<Readme, Set<Tag>>} */
     const affectedReadmeTags = new Map();
 
     for (const readme of await this.getReadmes()) {
       for (const tag of await readme.getTags()) {
         for (const inputFile of tag.inputFiles) {
           if (inputFile.path === swaggerFileResolved) {
-            /** @type {Set<Tag2>} */
+            /** @type {Set<Tag>} */
             const tags = affectedReadmeTags.get(readme) ?? new Set();
             tags.add(tag);
             affectedReadmeTags.set(readme, tags);
@@ -68,7 +68,7 @@ export class SpecModel2 {
 
           const refs = await inputFile.getRefs();
           if ([...refs].find((r) => r.path === swaggerFileResolved)) {
-            /** @type {Set<Tag2>} */
+            /** @type {Set<Tag>} */
             const tags = affectedReadmeTags.get(readme) ?? new Set();
             tags.add(tag);
             affectedReadmeTags.set(readme, tags);
@@ -81,7 +81,7 @@ export class SpecModel2 {
   }
 
   /**
-   * @returns {Promise<Set<Readme2>>}
+   * @returns {Promise<Set<Readme>>}
    */
   async getReadmes() {
     if (!this.#readmes) {
@@ -97,7 +97,7 @@ export class SpecModel2 {
       this.#logger?.debug(`Found ${readmePaths.length} readme files`);
 
       this.#readmes = new Set(
-        readmePaths.map((p) => new Readme2(this, p, { logger: this.#logger })),
+        readmePaths.map((p) => new Readme(this, p, { logger: this.#logger })),
       );
     }
 
@@ -126,25 +126,25 @@ export class SpecModel2 {
    * @returns {string}
    */
   toString() {
-    return `SpecModel2(${this.#folder}, {logger: ${this.#logger}})`;
+    return `SpecModel(${this.#folder}, {logger: ${this.#logger}})`;
   }
 }
 
-export class Readme2 {
+export class Readme {
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
-  /** @type {{globalConfig: Object, tags: Set<Tag2>} | undefined} */
+  /** @type {{globalConfig: Object, tags: Set<Tag>} | undefined} */
   #data;
 
   /** @type {string} absolute path */
   #path;
 
-  /** @type {SpecModel2} backpointer to owning SpecModel */
+  /** @type {SpecModel} backpointer to owning SpecModel */
   #specModel;
 
   /**
-   * @param {SpecModel2} specModel
+   * @param {SpecModel} specModel
    * @param {string} path
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
@@ -208,7 +208,7 @@ export class Readme2 {
         {},
       );
 
-      /** @type {Set<Tag2>} */
+      /** @type {Set<Tag>} */
       const tags = new Set();
       for (const block of yamlBlocks) {
         const tagName =
@@ -248,7 +248,7 @@ export class Readme2 {
           throw new Error(message);
         }
 
-        /** @type {Set<Swagger2>} */
+        /** @type {Set<Swagger>} */
         const inputFiles = new Set();
 
         // It's possible for input-file to be a string or an array
@@ -257,18 +257,18 @@ export class Readme2 {
           : [obj["input-file"]];
         for (const swaggerPath of inputFilePaths) {
           const swaggerPathNormalized =
-            Readme2.#normalizeSwaggerPath(swaggerPath);
+            Readme.#normalizeSwaggerPath(swaggerPath);
           const swaggerPathResolved = resolve(
             dirname(this.#path),
             swaggerPathNormalized,
           );
-          const swagger = new Swagger2(this.#specModel, swaggerPathResolved, {
+          const swagger = new Swagger(this.#specModel, swaggerPathResolved, {
             logger: this.#logger,
           });
           inputFiles.add(swagger);
         }
 
-        const tag = new Tag2(tagName, inputFiles, { logger: this.#logger });
+        const tag = new Tag(tagName, inputFiles, { logger: this.#logger });
 
         tags.add(tag);
       }
@@ -320,12 +320,13 @@ export class Readme2 {
    * @returns {string}
    */
   toString() {
-    return `Readme2(${this.#path}, {logger: ${this.#logger}})`;
+    return `Readme
+    (${this.#path}, {logger: ${this.#logger}})`;
   }
 }
 
-export class Tag2 {
-  /** @type {Set<Swagger2>} */
+export class Tag {
+  /** @type {Set<Swagger>} */
   #inputFiles;
 
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -336,7 +337,7 @@ export class Tag2 {
 
   /**
    * @param {string} name
-   * @param {Set<Swagger2>} inputFiles
+   * @param {Set<Swagger>} inputFiles
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    */
@@ -347,7 +348,7 @@ export class Tag2 {
   }
 
   /**
-   * @returns {Set<Swagger2>}
+   * @returns {Set<Swagger>}
    */
   get inputFiles() {
     return this.#inputFiles;
@@ -375,25 +376,25 @@ export class Tag2 {
   }
 
   toString() {
-    return `Tag2(${this.#name}, ${this.#inputFiles}, {logger: ${this.#logger}})`;
+    return `Tag(${this.#name}, ${this.#inputFiles}, {logger: ${this.#logger}})`;
   }
 }
 
-export class Swagger2 {
+export class Swagger {
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
   /** @type {string} absolute path */
   #path;
 
-  /** @type {Set<Swagger2> | undefined} */
+  /** @type {Set<Swagger> | undefined} */
   #refs;
 
-  /** @type {SpecModel2} backpointer to owning SpecModel */
+  /** @type {SpecModel} backpointer to owning SpecModel */
   #specModel;
 
   /**
-   * @param {SpecModel2} specModel
+   * @param {SpecModel} specModel
    * @param {string} path
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
@@ -405,7 +406,7 @@ export class Swagger2 {
   }
 
   /**
-   * @returns {Promise<Set<Swagger2>>}
+   * @returns {Promise<Set<Swagger>>}
    */
   async getRefs() {
     if (!this.#refs) {
@@ -421,7 +422,7 @@ export class Swagger2 {
         .filter((p) => resolve(p) !== resolve(this.#path));
 
       this.#refs = new Set(
-        refPaths.map((p) => new Swagger2(this.#specModel, p)),
+        refPaths.map((p) => new Swagger(this.#specModel, p)),
       );
     }
 
@@ -458,30 +459,30 @@ export class Swagger2 {
   }
 
   toString() {
-    return `Swagger2(${this.#path}, {logger: ${this.#logger}})`;
+    return `Swagger(${this.#path}, {logger: ${this.#logger}})`;
   }
 }
 
 /**
- * @typedef {Object} SpecModel
+ * @typedef {Object} SpecModelOld
  * @prop {string} repoRoot
  * @prop {string} folder
- * @prop {Object<string, Readme>} readmes
+ * @prop {Object<string, ReadmeOld>} readmes
  */
 
 /**
- * @typedef {Object} Readme
+ * @typedef {Object} ReadmeOld
  * @prop {Object} globalConfig
- * @prop {Object<string, Tag>} tags
+ * @prop {Object<string, TagOld>} tags
  */
 
 /**
- * @typedef {Object} Tag
- * @prop {Object<string, Swagger>} inputFiles
+ * @typedef {Object} TagOld
+ * @prop {Object<string, SwaggerOld>} inputFiles
  */
 
 /**
- * @typedef {Object} Swagger
+ * @typedef {Object} SwaggerOld
  * @prop {Object<string, string[]>} refs
  */
 
@@ -489,9 +490,9 @@ export class Swagger2 {
  * @param {string} folder
  * @param {Object} [options]
  * @param {import('./logger.js').ILogger} [options.logger]
- * @returns {Promise<SpecModel>} All input files for all tags
+ * @returns {Promise<SpecModelOld>} All input files for all tags
  */
-export async function getSpecModel(folder, options = {}) {
+export async function getSpecModelOld(folder, options = {}) {
   const { logger } = options;
 
   const repoRoot = await simpleGit(folder).revparse("--show-toplevel");
@@ -526,7 +527,7 @@ export async function getSpecModel(folder, options = {}) {
  * @param {string} repoRoot
  * @param {string} folderRelative
  * @param {import('./logger.js').ILogger} [logger]
- * @returns {Promise<Readme>}
+ * @returns {Promise<ReadmeOld>}
  */
 async function getReadme(readmePath, repoRoot, folderRelative, logger) {
   logger?.debug(`getReadme(${readmePath}, ${repoRoot}, ${folderRelative})`);
@@ -557,7 +558,7 @@ async function getReadme(readmePath, repoRoot, folderRelative, logger) {
     {},
   );
 
-  /** @type {Object<string, Tag>} */
+  /** @type {Object<string, TagOld>} */
   const tags = {};
   for (const block of yamlBlocks) {
     const tagName =
@@ -597,7 +598,7 @@ async function getReadme(readmePath, repoRoot, folderRelative, logger) {
       throw new Error(message);
     }
 
-    /** @type Tag */
+    /** @type TagOld */
     const tag = { inputFiles: {} };
 
     // It's possible for input-file to be a string or an array
@@ -658,7 +659,7 @@ function normalizeSwaggerPath(swaggerPath, logger) {
  * @param {string} folderRelative
  * @param {string} readmeFolderRelative
  * @param {import('./logger.js').ILogger} [logger]
- * @returns {Promise<Swagger>}
+ * @returns {Promise<SwaggerOld>}
  */
 async function getSwagger(
   swaggerPath,
@@ -755,10 +756,10 @@ async function getExternalFileRefs(
  * Given a swagger file, return the readme files and tags that reference that
  * swagger file.
  * @param {string} swaggerFile
- * @param {SpecModel} specModel
+ * @param {SpecModelOld} specModel
  * @returns {Object<string, string[]>}
  */
-export function getAffectedReadmeTags(swaggerFile, specModel) {
+export function getAffectedReadmeTagsOld(swaggerFile, specModel) {
   const swaggerFileResolved = resolve(swaggerFile);
 
   /** @type Object<string, Set<string>> */
@@ -811,10 +812,10 @@ export function getAffectedReadmeTags(swaggerFile, specModel) {
  * Given a swagger file, return the swagger files that are affected by the
  * changes in the given swagger file.
  * @param {string} swaggerFile
- * @param {SpecModel} specModel
+ * @param {SpecModelOld} specModel
  * @returns {string[]}
  */
-export function getAffectedSwaggers(swaggerFile, specModel) {
+export function getAffectedSwaggersOld(swaggerFile, specModel) {
   const swaggerFileResolved = resolve(swaggerFile);
   const swaggerFileRelative = relative(specModel.repoRoot, swaggerFileResolved);
 

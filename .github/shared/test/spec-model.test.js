@@ -4,10 +4,10 @@ import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.js";
 import {
-  getAffectedReadmeTags,
-  getAffectedSwaggers,
-  getSpecModel,
-  SpecModel2,
+  getAffectedReadmeTagsOld,
+  getAffectedSwaggersOld,
+  getSpecModelOld,
+  SpecModel,
 } from "../src/spec-model.js";
 import { isWindows } from "./test-utils.js";
 
@@ -24,7 +24,7 @@ describe("SpecModel2", () => {
       "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
     );
 
-    const specModel2 = new SpecModel2(folder, options);
+    const specModel2 = new SpecModel(folder, options);
     expect(specModel2.folder).toBe(folder);
 
     const readmes = [...(await specModel2.getReadmes())];
@@ -82,7 +82,7 @@ describe("getSpecModel", () => {
   it.skip("returns spec model given relative path", async ({ expect }) => {
     const servicePath = "specification/contosowidgetmanager";
 
-    const actual = await getSpecModel(servicePath);
+    const actual = await getSpecModelOld(servicePath);
     expect(actual).toBeDefined();
   });
 
@@ -90,7 +90,7 @@ describe("getSpecModel", () => {
     expect,
   }) => {
     const fixtureRoot = resolve(__dirname, "fixtures/getSpecModel");
-    const actual = await getSpecModel(
+    const actual = await getSpecModelOld(
       join(fixtureRoot, "specification/yaml-date-parsing"),
       options,
     );
@@ -139,7 +139,7 @@ describe("getSpecModel", () => {
       },
     };
 
-    const specModel = await getSpecModel(
+    const specModel = await getSpecModelOld(
       join(repoRoot, folderRelative),
       options,
     );
@@ -154,7 +154,7 @@ describe("getSpecModel", () => {
     const specRoot = "specification/contosowidgetmanager/data-plane";
 
     await expect(
-      async () => await getSpecModel(specRoot, { repoRoot: fixtureRoot }),
+      async () => await getSpecModelOld(specRoot, { repoRoot: fixtureRoot }),
     ).rejects.toThrowError();
   });
 });
@@ -179,7 +179,7 @@ describe("getAffectedReadmeTags", () => {
       join(fixtureRoot, "specification/contosowidgetmanager"),
     );
 
-    const specModel = await getSpecModel(
+    const specModel = await getSpecModelOld(
       join(repoRoot, folderRelative),
       options,
     );
@@ -190,7 +190,7 @@ describe("getAffectedReadmeTags", () => {
       "resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     );
 
-    const actual = getAffectedReadmeTags(swaggerPath, specModel);
+    const actual = getAffectedReadmeTagsOld(swaggerPath, specModel);
 
     const expected = {
       [join(folderRelative, "resource-manager/readme.md")]: [
@@ -210,7 +210,7 @@ describe("getAffectedReadmeTags", () => {
         join(fixtureRoot, "specification/1"),
       );
 
-      const specModel = await getSpecModel(
+      const specModel = await getSpecModelOld(
         join(repoRoot, folderRelative),
         options,
       );
@@ -221,7 +221,7 @@ describe("getAffectedReadmeTags", () => {
         "data-plane/shared/shared.json",
       );
 
-      const actual = getAffectedReadmeTags(swaggerPath, specModel);
+      const actual = getAffectedReadmeTagsOld(swaggerPath, specModel);
 
       const expected = {
         [join(folderRelative, "data-plane/readme.md")]: ["tag-1", "tag-2"],
@@ -237,13 +237,16 @@ describe("getAffectedSwaggers", async () => {
     repoRoot,
     join(fixtureRoot, "specification/1"),
   );
-  const specModel = await getSpecModel(join(repoRoot, folderRelative), options);
+  const specModel = await getSpecModelOld(
+    join(repoRoot, folderRelative),
+    options,
+  );
 
   it.skipIf(isWindows())(
     "returns directly referenced swagger",
     async ({ expect }) => {
       const swaggerPath = join(repoRoot, folderRelative, "data-plane/a.json");
-      const actual = getAffectedSwaggers(swaggerPath, specModel);
+      const actual = getAffectedSwaggersOld(swaggerPath, specModel);
       const expected = [join(folderRelative, "data-plane/a.json")];
       expect(actual).toEqual(expected);
     },
@@ -255,7 +258,7 @@ describe("getAffectedSwaggers", async () => {
       folderRelative,
       "data-plane/not-found.json",
     );
-    const actual = () => getAffectedSwaggers(swaggerPath, specModel);
+    const actual = () => getAffectedSwaggersOld(swaggerPath, specModel);
     expect(actual).toThrowError(
       expect.objectContaining({
         message: expect.stringContaining(swaggerPath),
@@ -272,7 +275,7 @@ describe("getAffectedSwaggers", async () => {
         "data-plane/nesting/b.json",
       );
 
-      const actual = getAffectedSwaggers(swaggerPath, specModel);
+      const actual = getAffectedSwaggersOld(swaggerPath, specModel);
 
       const expected = ["data-plane/a.json", "data-plane/nesting/b.json"].map(
         (f) => join(folderRelative, f),
@@ -287,7 +290,7 @@ describe("getAffectedSwaggers", async () => {
     async ({ expect }) => {
       const swaggerPath = join(repoRoot, folderRelative, "data-plane/c.json");
 
-      const actual = getAffectedSwaggers(swaggerPath, specModel);
+      const actual = getAffectedSwaggersOld(swaggerPath, specModel);
 
       const expected = [
         "data-plane/a.json",
@@ -304,7 +307,7 @@ describe("getAffectedSwaggers", async () => {
     async ({ expect }) => {
       const swaggerPath = join(repoRoot, folderRelative, "data-plane/d.json");
 
-      const actual = getAffectedSwaggers(swaggerPath, specModel);
+      const actual = getAffectedSwaggersOld(swaggerPath, specModel);
 
       const expected = [
         "data-plane/a.json",
@@ -326,7 +329,7 @@ describe("getAffectedSwaggers", async () => {
         "data-plane/shared/shared.json",
       );
 
-      const actual = getAffectedSwaggers(swaggerPath, specModel);
+      const actual = getAffectedSwaggersOld(swaggerPath, specModel);
 
       const expected = [
         "data-plane/a.json",
@@ -383,7 +386,7 @@ describe.skip("Parse readmes", () => {
         }
 
         console.log(`Testing service: ${folder}`);
-        const specModel = await getSpecModel(`specification/${folder}`, {
+        const specModel = await getSpecModelOld(`specification/${folder}`, {
           debug: false,
         });
 
@@ -401,7 +404,7 @@ describe.skip("Parse readmes", () => {
       ];
       for (const folder of folders) {
         console.log(`Testing service: ${folder}`);
-        const specModel = await getSpecModel(`specification/${folder}`, {
+        const specModel = await getSpecModelOld(`specification/${folder}`, {
           debug: true,
         });
 
