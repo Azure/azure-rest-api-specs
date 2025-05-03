@@ -70,10 +70,7 @@ export function readme(file) {
  */
 export function specification(file) {
   // Folder name "specification" should match case, since it already exists in repo
-  return (
-    typeof file === "string" &&
-    (file.includes("/specification/") || file.startsWith("specification/"))
-  );
+  return typeof file === "string" && file.startsWith("specification/");
 }
 
 /**
