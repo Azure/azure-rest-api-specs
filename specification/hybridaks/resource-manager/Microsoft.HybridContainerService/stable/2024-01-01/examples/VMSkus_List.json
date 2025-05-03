@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "customLocationResourceUri": "subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "microsoft.hybridcontainerservice/skus",
+            "extendedLocation": {
+              "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation",
+              "type": "CustomLocation"
+            },
+            "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation/providers/Microsoft.HybridContainerService/skus/default",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "values": [
+                {
+                  "name": "Standard_A0",
+                  "capabilities": [
+                    {
+                      "name": "vCpu",
+                      "value": "2"
+                    },
+                    {
+                      "name": "MemoryMb",
+                      "value": "2345"
+                    },
+                    {
+                      "name": "DiskSizeGb",
+                      "value": "128"
+                    },
+                    {
+                      "name": "GpuCount",
+                      "value": "1"
+                    },
+                    {
+                      "name": "GpuNameType",
+                      "value": "NVIDIA Tesla T4"
+                    },
+                    {
+                      "name": "GpuAssignMode",
+                      "value": "1"
+                    },
+                    {
+                      "name": "Provider",
+                      "value": "HCI"
+                    }
+                  ],
+                  "resourceType": "VirtualMachines",
+                  "size": "A0",
+                  "tier": "Standard"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VMSkus_List",
+  "title": "ListVmSkus"
+}
