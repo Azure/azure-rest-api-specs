@@ -13,6 +13,7 @@ import { resolveCheckAccess } from "./fs.js";
 /**
  * @typedef {Object} ToJSONOptions
  * @prop {boolean} [includeRefs]
+ * @prop {boolean} [relativePaths]
  */
 
 export class SpecModel2 {
@@ -59,7 +60,7 @@ export class SpecModel2 {
       this.#logger?.debug(`Found ${readmePaths.length} readme files`);
 
       this.#readmes = new Set(
-        readmePaths.map((p) => new Readme2(p, { logger: this.#logger })),
+        readmePaths.map((p) => new Readme2(this, p, { logger: this.#logger })),
       );
     }
 
@@ -102,12 +103,17 @@ export class Readme2 {
   /** @type {string} absolute path */
   #path;
 
+  /** @type {SpecModel2} backpointer to owning SpecModel */
+  #specModel;
+
   /**
+   * @param {SpecModel2} specModel
    * @param {string} path
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    */
-  constructor(path, options) {
+  constructor(specModel, path, options) {
+    this.#specModel = specModel;
     this.#path = resolveCheckAccess(path);
     this.#logger = options?.logger;
   }
@@ -193,7 +199,7 @@ export class Readme2 {
             dirname(this.#path),
             swaggerPathNormalized,
           );
-          const swagger = new Swagger2(swaggerPathResolved, {
+          const swagger = new Swagger2(this.#specModel, swaggerPathResolved, {
             logger: this.#logger,
           });
           inputFiles.add(swagger);
@@ -239,7 +245,9 @@ export class Readme2 {
     );
 
     return {
-      path: this.#path,
+      path: options?.relativePaths
+        ? relative(this.#specModel.folder, this.#path)
+        : this.#path,
       globalConfig: await this.getGlobalConfig(),
       tags,
     };
@@ -318,12 +326,17 @@ export class Swagger2 {
   /** @type {Set<Swagger2> | undefined} */
   #refs;
 
+  /** @type {SpecModel2} backpointer to owning SpecModel */
+  #specModel;
+
   /**
+   * @param {SpecModel2} specModel
    * @param {string} path
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    */
-  constructor(path, options) {
+  constructor(specModel, path, options) {
+    this.#specModel = specModel;
     this.#path = resolveCheckAccess(path);
     this.#logger = options?.logger;
   }
@@ -344,7 +357,9 @@ export class Swagger2 {
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 
-      this.#refs = new Set(refPaths.map((p) => new Swagger2(p)));
+      this.#refs = new Set(
+        refPaths.map((p) => new Swagger2(this.#specModel, p)),
+      );
     }
 
     return this.#refs;
@@ -363,7 +378,9 @@ export class Swagger2 {
    */
   async toJSONAsync(options) {
     return {
-      path: this.#path,
+      path: options?.relativePaths
+        ? relative(this.#specModel.folder, this.#path)
+        : this.#path,
       refs: options?.includeRefs
         ? await mapAsync(
             [...(await this.getRefs())].sort((a, b) =>
