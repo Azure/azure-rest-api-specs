@@ -3,7 +3,6 @@
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { relative, resolve } from "path";
 import { mapAsync } from "./array.js";
-import { resolveCheckAccess } from "./fs.js";
 
 /**
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
@@ -31,7 +30,7 @@ export class Swagger {
    */
   constructor(specModel, path, options) {
     this.#specModel = specModel;
-    this.#path = resolveCheckAccess(path);
+    this.#path = resolve(path);
     this.#logger = options?.logger;
   }
 

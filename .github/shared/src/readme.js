@@ -5,7 +5,6 @@ import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
-import { resolveCheckAccess } from "./fs.js";
 import { Swagger } from "./swagger.js";
 import { Tag } from "./tag.js";
 
@@ -35,7 +34,7 @@ export class Readme {
    */
   constructor(specModel, path, options) {
     this.#specModel = specModel;
-    this.#path = resolveCheckAccess(path);
+    this.#path = resolve(path);
     this.#logger = options?.logger;
   }
 

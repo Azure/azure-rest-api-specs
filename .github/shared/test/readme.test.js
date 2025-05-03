@@ -1,8 +1,21 @@
+// @ts-check
+
+import { resolve } from "path";
 import { describe, expect, it } from "vitest";
-import { getInputFiles } from "../src/readme.js";
+import { getInputFiles, Readme } from "../src/readme.js";
+import { SpecModel } from "../src/spec-model.js";
 import { contosoReadme } from "./examples.js";
 
 describe("readme", () => {
+  it("can be created with mock path", async () => {
+    const readme = new Readme(new SpecModel("foo"), "bar");
+    expect(readme.path).toBe(resolve("bar"));
+
+    await expect(readme.getTags()).rejects.toThrowError(
+      /no such file or directory/i,
+    );
+  });
+
   it("getInputFiles", async () => {
     await expect(getInputFiles(contosoReadme)).resolves.toEqual(
       new Set([
