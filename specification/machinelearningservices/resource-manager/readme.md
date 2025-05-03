@@ -62,6 +62,10 @@ suppressions:
       - $.definitions.SparkJob.properties.environmentVariables
       - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
+  - code: GuidUsage
+    reason: Existing property in previous GA version.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
   - code: LroLocationHeader
     reason: Existing API behavior
     where:
@@ -74,10 +78,10 @@ suppressions:
     reason: Existing API behavior.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources"].get
-  - code: GuidUsage
-    reason: Existing property in previous GA version.
+  - code: PatchBodyParametersSchema
+    reason: The required part is within a property, the whole property itself is not required.
     where:
-      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema
 ```
 
 ### Tag: package-preview-2025-01
