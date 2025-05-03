@@ -3,12 +3,11 @@
 import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { getInputFiles, Readme } from "../src/readme.js";
-import { SpecModel } from "../src/spec-model.js";
 import { contosoReadme } from "./examples.js";
 
 describe("readme", () => {
   it("can be created with mock path", async () => {
-    const readme = new Readme(new SpecModel("foo"), "bar");
+    const readme = new Readme("bar");
     expect(readme.path).toBe(resolve("bar"));
 
     await expect(readme.getTags()).rejects.toThrowError(
