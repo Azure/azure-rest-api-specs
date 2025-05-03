@@ -68,8 +68,7 @@ suppressions:
   - code: PatchBodyParametersSchema
     reason: Existing service contract needs to be backward compatible.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties.properties.autoUpgradeMinorVersion
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties.properties.releaseTrain
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties.properties
   - code: AvoidAdditionalProperties
     reason: Existing service contract needs to be backward compatible.
     where:
