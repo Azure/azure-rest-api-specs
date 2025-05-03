@@ -210,7 +210,7 @@ export class SpecModel {
    * @returns {string}
    */
   toString() {
-    return `SpecModel(${this.#folder}})`;
+    return `SpecModel(${this.#folder}, {logger: ${this.#logger}}})`;
   }
 }
 

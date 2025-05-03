@@ -206,7 +206,7 @@ export class Readme {
    * @returns {string}
    */
   toString() {
-    return `Readme(${this.#path})`;
+    return `Readme(${this.#path}, {logger: ${this.#logger}})`;
   }
 }
 
