@@ -14,10 +14,14 @@ namespace Azure.AI.Projects;
 @resource("connections")
 @added(Versions.v2025_05_01)
 model Connection {
-  @doc("The name of the resource")
+  @doc("The name of the connection")
   @visibility(Lifecycle.Read)
   @key("name")
   name: string;
+
+  @doc("A unique identifier for the connection")
+  @visibility(Lifecycle.Read)
+  id: string;
 
   @doc("Category of the connection")
   @visibility(Lifecycle.Read)
