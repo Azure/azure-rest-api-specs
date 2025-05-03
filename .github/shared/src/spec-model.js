@@ -765,62 +765,6 @@ async function getExternalFileRefs(
 }
 
 /**
- * Given a swagger file, return the readme files and tags that reference that
- * swagger file.
- * @param {string} swaggerFile
- * @param {SpecModelOld} specModel
- * @returns {Object<string, string[]>}
- */
-export function getAffectedReadmeTagsOld(swaggerFile, specModel) {
-  const swaggerFileResolved = resolve(swaggerFile);
-
-  /** @type Object<string, Set<string>> */
-  const affectedReadmes = {};
-
-  for (const [readmePath, readme] of Object.entries(specModel.readmes)) {
-    const readmePathResolved = resolve(
-      specModel.repoRoot,
-      specModel.folder,
-      readmePath,
-    );
-    const readmePathRelative = relative(specModel.repoRoot, readmePathResolved);
-
-    for (const [tagName, tag] of Object.entries(readme.tags)) {
-      for (const [inputFile, swagger] of Object.entries(tag.inputFiles)) {
-        const inputFileResolved = resolve(
-          dirname(readmePathResolved),
-          inputFile,
-        );
-        if (inputFileResolved === swaggerFileResolved) {
-          if (!affectedReadmes[readmePathRelative]) {
-            affectedReadmes[readmePathRelative] = new Set();
-          }
-          affectedReadmes[readmePathRelative].add(tagName);
-          // No need to check refs if the swagger file is directly referenced
-          continue;
-        }
-
-        // Because refs contains the full set of transitive dependencies, only
-        // check if the swagger file is in the map keys.
-        if (
-          Object.keys(swagger.refs)
-            .map((ref) => resolve(dirname(inputFileResolved), ref))
-            .includes(swaggerFileResolved)
-        ) {
-          if (!affectedReadmes[readmePathRelative]) {
-            affectedReadmes[readmePathRelative] = new Set();
-          }
-          affectedReadmes[readmePathRelative].add(tagName);
-        }
-      }
-    }
-  }
-  return Object.fromEntries(
-    Object.entries(affectedReadmes).map((e) => [e[0], Array.from(e[1])]),
-  );
-}
-
-/**
  * Given a swagger file, return the swagger files that are affected by the
  * changes in the given swagger file.
  * @param {string} swaggerFile

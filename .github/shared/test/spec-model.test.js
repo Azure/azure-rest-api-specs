@@ -4,7 +4,6 @@ import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.js";
 import {
-  getAffectedReadmeTagsOld,
   getAffectedSwaggersOld,
   getSpecModelOld,
   SpecModel,
@@ -229,66 +228,6 @@ describe("getReadme regex", () => {
     const regex = /yaml.*\$\(tag\) ?== ?'([^']*)'/;
     expect(regex.test(example)).toEqual(expected);
   });
-});
-
-describe("getAffectedReadmeTags", () => {
-  it.skipIf(isWindows())("returns affected readme tags", async ({ expect }) => {
-    const fixtureRoot = resolve(__dirname, "fixtures/getAffectedReadmeTags");
-    const folderRelative = relative(
-      repoRoot,
-      join(fixtureRoot, "specification/contosowidgetmanager"),
-    );
-
-    const specModel = await getSpecModelOld(
-      join(repoRoot, folderRelative),
-      options,
-    );
-
-    const swaggerPath = join(
-      repoRoot,
-      folderRelative,
-      "resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
-    );
-
-    const actual = getAffectedReadmeTagsOld(swaggerPath, specModel);
-
-    const expected = {
-      [join(folderRelative, "resource-manager/readme.md")]: [
-        "package-2021-11-01",
-      ],
-    };
-
-    expect(actual).toEqual(expected);
-  });
-
-  it.skipIf(isWindows())(
-    "returns affected readme tags for multiple tags",
-    async ({ expect }) => {
-      const fixtureRoot = resolve(__dirname, "fixtures/getAffectedSwaggers");
-      const folderRelative = relative(
-        repoRoot,
-        join(fixtureRoot, "specification/1"),
-      );
-
-      const specModel = await getSpecModelOld(
-        join(repoRoot, folderRelative),
-        options,
-      );
-
-      const swaggerPath = join(
-        repoRoot,
-        folderRelative,
-        "data-plane/shared/shared.json",
-      );
-
-      const actual = getAffectedReadmeTagsOld(swaggerPath, specModel);
-
-      const expected = {
-        [join(folderRelative, "data-plane/readme.md")]: ["tag-1", "tag-2"],
-      };
-      expect(actual).toEqual(expected);
-    },
-  );
 });
 
 describe("getAffectedSwaggers", async () => {
