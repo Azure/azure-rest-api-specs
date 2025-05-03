@@ -30,7 +30,6 @@ responses:
                       type: string
                     answer:
                       type: string
-                sample:
                   type: object
                   properties:
                     model:
@@ -55,45 +54,6 @@ responses:
                                 type:
                                   - boolean
                                   - null
-                              tool_calls:
-                                type:
-                                  - array
-                                  - null
-                                items:
-                                  type: object
-                                  properties:
-                                    type:
-                                      type: string
-                                      enum:
-                                        - function
-                                    function:
-                                      type: object
-                                      properties:
-                                        name:
-                                          type: string
-                                        arguments:
-                                          type: string
-                                      required:
-                                        - name
-                                        - arguments
-                                    id:
-                                      type: string
-                                  required:
-                                    - type
-                                    - function
-                                    - id
-                              function_call:
-                                type:
-                                  - object
-                                  - null
-                                properties:
-                                  name:
-                                    type: string
-                                  arguments:
-                                    type: string
-                                required:
-                                  - name
-                                  - arguments
                             required:
                               - role
                           finish_reason:
@@ -118,7 +78,6 @@ responses:
                 - sample
           testing_criteria:
             - name: string check
-              id: string check-4e178578-84ff-45cd-9862-b88762678149
               type: string_check
               input: "{{sample.output_text}}"
               reference: "{{item.answer}}"
