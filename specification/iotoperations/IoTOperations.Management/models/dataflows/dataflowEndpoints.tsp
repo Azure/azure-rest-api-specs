@@ -86,21 +86,6 @@ union EndpointType {
   @doc("Broker Type")
   Mqtt: "Mqtt",
 
-  @added(Versions.`2025-07-01-preview`)
-  @doc("Eventhub Type")
-  Eventhub: "Eventhub",
-
-  @added(Versions.`2025-07-01-preview`)
-  @doc("EventGrid Type")
-  EventGrid: "EventGrid",
-
-  @added(Versions.`2025-07-01-preview`)
-  @doc("LocalMq Type")
-  LocalMq: "LocalMq",
-
-  @added(Versions.`2025-07-01-preview`)
-  @doc("FabricRT Type")
-  FabricRT: "FabricRT",
 
   @added(Versions.`2025-07-01-preview`)
   @doc("OpenTelemetry Type")
@@ -252,6 +237,24 @@ model DataflowEndpointKafka {
 
   @doc("Cloud event mapping config.")
   cloudEventAttributes?: CloudEventAttributeType;
+
+  @doc("The type of the Kafka host")
+  @added(Versions.`2025-07-01-preview`)
+  hostType?: DataflowEndpointKafkaHostType;
+}
+
+@doc("Kafka endpoint Host Type values")
+@added(Versions.`2025-07-01-preview`)
+union DataflowEndpointKafkaHostType {
+  string,
+
+  @added(Versions.`2025-07-01-preview`)
+  @doc("EventGrid Type")
+  EventGrid,
+
+  @added(Versions.`2025-07-01-preview`)
+  @doc("FabricRT Type")
+  FabricRT,
 }
 
 @doc("Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry")
@@ -390,6 +393,24 @@ model DataflowEndpointMqtt {
 
   @doc("Cloud event mapping config.")
   cloudEventAttributes?: CloudEventAttributeType;
+
+  @doc("The type of the MQTT host")
+  @added(Versions.`2025-07-01-preview`)
+  hostType?: DataflowEndpointMqttHostType;
+}
+
+@doc("Mqtt endpoint Host Type values")
+@added(Versions.`2025-07-01-preview`)
+union DataflowEndpointMqttHostType {
+  string,
+
+  @added(Versions.`2025-07-01-preview`)
+  @doc("Eventhub Type")
+  Eventhub,
+
+  @added(Versions.`2025-07-01-preview`)
+  @doc("LocalMq Type")
+  LocalMq,
 }
 
 @doc("Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry.")

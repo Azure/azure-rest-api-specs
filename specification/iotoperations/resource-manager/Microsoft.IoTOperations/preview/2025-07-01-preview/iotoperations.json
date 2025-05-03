@@ -5426,17 +5426,17 @@
           {
             "name": "Pattern",
             "value": "Pattern",
-            "description": "Pattern type indicates that the key is a regular expression pattern."
+            "description": "Used for glob-style pattern matching."
           },
           {
             "name": "String",
             "value": "String",
-            "description": "A regular string type indicates that the key is an exact match."
+            "description": "Used to do exact match, for example, when a key contains characters that might be otherwise matched as a pattern (*, ?, [0-9])."
           },
           {
             "name": "Binary",
             "value": "Binary",
-            "description": "Binary"
+            "description": "Used to match a binary key."
           }
         ]
       }
@@ -7338,6 +7338,10 @@
         "cloudEventAttributes": {
           "$ref": "#/definitions/CloudEventAttributeType",
           "description": "Cloud event mapping config."
+        },
+        "hostType": {
+          "$ref": "#/definitions/DataflowEndpointKafkaHostType",
+          "description": "The type of the Kafka host"
         }
       },
       "required": [
@@ -7495,6 +7499,30 @@
         ]
       }
     },
+    "DataflowEndpointKafkaHostType": {
+      "type": "string",
+      "description": "Kafka endpoint Host Type values",
+      "enum": [
+        "EventGrid",
+        "FabricRT"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowEndpointKafkaHostType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EventGrid",
+            "value": "EventGrid",
+            "description": "EventGrid Type"
+          },
+          {
+            "name": "FabricRT",
+            "value": "FabricRT",
+            "description": "FabricRT Type"
+          }
+        ]
+      }
+    },
     "DataflowEndpointKafkaPartitionStrategy": {
       "type": "string",
       "description": "DataflowEndpoint Kafka Partition Strategy properties",
@@ -7645,6 +7673,10 @@
         "cloudEventAttributes": {
           "$ref": "#/definitions/CloudEventAttributeType",
           "description": "Cloud event mapping config."
+        },
+        "hostType": {
+          "$ref": "#/definitions/DataflowEndpointMqttHostType",
+          "description": "The type of the MQTT host"
         }
       },
       "required": [
@@ -7679,6 +7711,30 @@
       "required": [
         "method"
       ]
+    },
+    "DataflowEndpointMqttHostType": {
+      "type": "string",
+      "description": "Mqtt endpoint Host Type values",
+      "enum": [
+        "Eventhub",
+        "LocalMq"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowEndpointMqttHostType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Eventhub",
+            "value": "Eventhub",
+            "description": "Eventhub Type"
+          },
+          {
+            "name": "LocalMq",
+            "value": "LocalMq",
+            "description": "LocalMq Type"
+          }
+        ]
+      }
     },
     "DataflowEndpointOpenTelemetry": {
       "type": "object",
@@ -8913,10 +8969,6 @@
         "Kafka",
         "LocalStorage",
         "Mqtt",
-        "Eventhub",
-        "EventGrid",
-        "LocalMq",
-        "FabricRT",
         "OpenTelemetry"
       ],
       "x-ms-enum": {
@@ -8952,26 +9004,6 @@
             "name": "Mqtt",
             "value": "Mqtt",
             "description": "Broker Type"
-          },
-          {
-            "name": "Eventhub",
-            "value": "Eventhub",
-            "description": "Eventhub Type"
-          },
-          {
-            "name": "EventGrid",
-            "value": "EventGrid",
-            "description": "EventGrid Type"
-          },
-          {
-            "name": "LocalMq",
-            "value": "LocalMq",
-            "description": "LocalMq Type"
-          },
-          {
-            "name": "FabricRT",
-            "value": "FabricRT",
-            "description": "FabricRT Type"
           },
           {
             "name": "OpenTelemetry",
