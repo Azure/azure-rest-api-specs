@@ -1,0 +1,173 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myresourcegroup",
+    "profileName": "parentprofile",
+    "api-version": "2024-04-01-preview",
+    "parameters": {
+      "properties": {
+        "profileStatus": "Enabled",
+        "trafficRoutingMethod": "Priority",
+        "dnsConfig": {
+          "relativeName": "parentprofile",
+          "ttl": 35
+        },
+        "monitorConfig": {
+          "protocol": "HTTP",
+          "port": 80,
+          "path": "/testpath.aspx",
+          "intervalInSeconds": 10,
+          "timeoutInSeconds": 5,
+          "toleratedNumberOfFailures": 2
+        },
+        "endpoints": [
+          {
+            "name": "MyFirstNestedEndpoint",
+            "type": "Microsoft.Network/trafficManagerProfiles/nestedEndpoints",
+            "properties": {
+              "target": "firstnestedprofile.tmpreview.watmtest.azure-test.net",
+              "endpointStatus": "Enabled",
+              "weight": 1,
+              "priority": 1,
+              "minChildEndpoints": 2,
+              "minChildEndpointsIPv4": 1,
+              "minChildEndpointsIPv6": 2
+            }
+          },
+          {
+            "name": "MySecondNestedEndpoint",
+            "type": "Microsoft.Network/trafficManagerProfiles/nestedEndpoints",
+            "properties": {
+              "target": "secondnestedprofile.tmpreview.watmtest.azure-test.net",
+              "endpointStatus": "Enabled",
+              "weight": 1,
+              "priority": 2,
+              "minChildEndpoints": 2,
+              "minChildEndpointsIPv4": 2,
+              "minChildEndpointsIPv6": 1
+            }
+          }
+        ]
+      },
+      "location": "global"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myresourcegroup/providers/Microsoft.Network/trafficManagerProfiles/parentprofile",
+        "name": "parentprofile",
+        "type": "Microsoft.Network/trafficManagerProfiles",
+        "location": "global",
+        "properties": {
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "Priority",
+          "dnsConfig": {
+            "relativeName": "parentprofile",
+            "fqdn": "parentprofile.tmpreview.watmtest.azure-test.net",
+            "ttl": 35
+          },
+          "monitorConfig": {
+            "profileMonitorStatus": "CheckingEndpoints",
+            "protocol": "HTTP",
+            "port": 80,
+            "path": "/testpath.aspx",
+            "intervalInSeconds": 10,
+            "toleratedNumberOfFailures": 2,
+            "timeoutInSeconds": 5
+          },
+          "endpoints": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myresourcegroup/providers/Microsoft.Network/trafficManagerProfiles/parentprofile/nestedEndpoints/MyFirstNestedEndpoint",
+              "name": "MyFirstNestedEndpoint",
+              "type": "Microsoft.Network/trafficManagerProfiles/nestedEndpoints",
+              "properties": {
+                "endpointStatus": "Enabled",
+                "endpointMonitorStatus": "CheckingEndpoint",
+                "target": "firstnestedprofile.tmpreview.watmtest.azure-test.net",
+                "weight": 1,
+                "priority": 1,
+                "minChildEndpoints": 2,
+                "minChildEndpointsIPv4": 1,
+                "minChildEndpointsIPv6": 2
+              }
+            },
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myresourcegroup/providers/Microsoft.Network/trafficManagerProfiles/parentprofile/nestedEndpoints/MySecondNestedEndpoint",
+              "name": "MySecondNestedEndpoint",
+              "type": "Microsoft.Network/trafficManagerProfiles/nestedEndpoints",
+              "properties": {
+                "endpointStatus": "Enabled",
+                "endpointMonitorStatus": "CheckingEndpoint",
+                "target": "secondnestedprofile.tmpreview.watmtest.azure-test.net",
+                "weight": 1,
+                "priority": 1,
+                "minChildEndpoints": 2,
+                "minChildEndpointsIPv4": 2,
+                "minChildEndpointsIPv6": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myresourcegroup/providers/Microsoft.Network/trafficManagerProfiles/parentprofile",
+        "name": "parentprofile",
+        "type": "Microsoft.Network/trafficManagerProfiles",
+        "location": "global",
+        "properties": {
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "Priority",
+          "dnsConfig": {
+            "relativeName": "parentprofile",
+            "fqdn": "parentprofile.tmpreview.watmtest.azure-test.net",
+            "ttl": 35
+          },
+          "monitorConfig": {
+            "profileMonitorStatus": "CheckingEndpoints",
+            "protocol": "HTTP",
+            "port": 80,
+            "path": "/testpath.aspx",
+            "intervalInSeconds": 10,
+            "toleratedNumberOfFailures": 2,
+            "timeoutInSeconds": 5
+          },
+          "endpoints": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myresourcegroup/providers/Microsoft.Network/trafficManagerProfiles/parentprofile/nestedEndpoints/MyFirstNestedEndpoint",
+              "name": "MyFirstNestedEndpoint",
+              "type": "Microsoft.Network/trafficManagerProfiles/nestedEndpoints",
+              "properties": {
+                "endpointStatus": "Enabled",
+                "endpointMonitorStatus": "CheckingEndpoint",
+                "target": "firstnestedprofile.tmpreview.watmtest.azure-test.net",
+                "weight": 1,
+                "priority": 1,
+                "minChildEndpoints": 2,
+                "minChildEndpointsIPv4": 1,
+                "minChildEndpointsIPv6": 2
+              }
+            },
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myresourcegroup/providers/Microsoft.Network/trafficManagerProfiles/parentprofile/nestedEndpoints/MySecondNestedEndpoint",
+              "name": "MySecondNestedEndpoint",
+              "type": "Microsoft.Network/trafficManagerProfiles/nestedEndpoints",
+              "properties": {
+                "endpointStatus": "Enabled",
+                "endpointMonitorStatus": "CheckingEndpoint",
+                "target": "secondnestedprofile.tmpreview.watmtest.azure-test.net",
+                "weight": 1,
+                "priority": 1,
+                "minChildEndpoints": 2,
+                "minChildEndpointsIPv4": 2,
+                "minChildEndpointsIPv6": 1
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
