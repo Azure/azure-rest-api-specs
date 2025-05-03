@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.Dsts Resource Provider management API. */
 @armProviderNamespace
-@service(#{
-  title: "Microsoft.Dsts management service",
-})
+@service(#{ title: "Microsoft.Dsts management service" })
 @versioned(Microsoft.Dsts.Versions)
 namespace Microsoft.Dsts;
 
