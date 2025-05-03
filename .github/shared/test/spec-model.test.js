@@ -1,5 +1,5 @@
 import { readdir } from "fs/promises";
-import { dirname, join, resolve } from "path";
+import { dirname, isAbsolute, join, resolve } from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
@@ -20,12 +20,15 @@ describe("SpecModel", () => {
     );
 
     const specModel = new SpecModel(folder, options);
+
+    expect(specModel.toString()).toContain("SpecModel");
     expect(specModel.folder).toBe(folder);
 
     const readmes = [...(await specModel.getReadmes())];
     expect(readmes.length).toBe(1);
 
     const readme = readmes[0];
+    expect(readme.toString()).toContain("Readme");
     expect(readme.path).toBe(resolve(folder, "readme.md"));
 
     expect(readme.getGlobalConfig()).resolves.toEqual({
@@ -39,9 +42,12 @@ describe("SpecModel", () => {
     );
     expect(tags.length).toBe(2);
 
+    expect(tags[0].toString()).toContain("Tag");
     expect(tags[0].name).toBe("package-2021-10-01-preview");
+
     const inputFiles0 = [...tags[0].inputFiles];
     expect(inputFiles0.length).toBe(1);
+    expect(inputFiles0[0].toString()).toContain("Swagger");
     expect(inputFiles0[0].path).toBe(
       resolve(
         folder,
@@ -68,6 +74,21 @@ describe("SpecModel", () => {
     expect(inputFiles1[0].path).toBe(
       resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
     );
+
+    const jsonDefault = await specModel.toJSONAsync();
+    const readmePathDefault = jsonDefault.readmes[0].path;
+    expect(isAbsolute(readmePathDefault)).toBe(true);
+    expect(jsonDefault.readmes[0].tags[0].inputFiles[0].refs).toBeUndefined();
+
+    const jsonRefsRelative = await specModel.toJSONAsync({
+      includeRefs: true,
+      relativePaths: true,
+    });
+    const readmePathRelative = jsonRefsRelative.readmes[0].path;
+    expect(isAbsolute(readmePathRelative)).toBe(false);
+    expect(
+      jsonRefsRelative.readmes[0].tags[0].inputFiles[0].refs,
+    ).toBeDefined();
   });
 
   it("uses strings for tag names and doesn't parse Date object", async () => {
@@ -106,7 +127,7 @@ describe("SpecModel", () => {
   });
 
   describe("getAffectedReadmeTags", () => {
-    it("returns affected readme tags", async ({ expect }) => {
+    it("returns affected readme tags", async () => {
       const folder = resolve(
         __dirname,
         "fixtures/getAffectedReadmeTags/specification/contosowidgetmanager",
@@ -136,7 +157,7 @@ describe("SpecModel", () => {
       expect(tags[0].name).toBe("package-2021-11-01");
     });
 
-    it("returns affected readme tags for multiple tags", async ({ expect }) => {
+    it("returns affected readme tags for multiple tags", async () => {
       const folder = resolve(
         __dirname,
         "fixtures/getAffectedSwaggers/specification/1",
@@ -187,14 +208,23 @@ describe("SpecModel", () => {
       expect(actual).toEqual(expected);
     });
 
-    it("throws when swagger file is not found", async ({ expect }) => {
+    it("throws when swagger file is not found", async () => {
       const swaggerPath = resolve(folder, "data-plane/not-found.json");
 
-      expect(specModel.getAffectedSwaggers(swaggerPath)).rejects.toThrowError(
-        expect.objectContaining({
-          message: expect.stringContaining(swaggerPath),
-        }),
+      await expect(
+        specModel.getAffectedSwaggers(swaggerPath),
+      ).rejects.toThrowError(/no such file or directory/i);
+    });
+
+    it("throws when swagger file does not exist in specModel", async () => {
+      const swaggerPath = resolve(
+        __dirname,
+        "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager/readme.md",
       );
+
+      await expect(
+        specModel.getAffectedSwaggers(swaggerPath),
+      ).rejects.toThrowError(/no affected swaggers/i);
     });
 
     it("returns correct swaggers for one layer of dependencies", async () => {
