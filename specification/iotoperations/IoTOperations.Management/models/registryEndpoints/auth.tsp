@@ -35,6 +35,11 @@ union RegistryEndpointAuthenticationMethod {
    * Anonymous authentication
    */
   AnonymousMethod,
+
+  /**
+   * Artifact Pull Secret authentication
+   */
+  ArtifactPullSecret,
 }
 
 /**
@@ -112,3 +117,31 @@ model RegistryEndpointAnonymousAuthentication
 @added(Versions.`2025-07-01-preview`)
 @extension("additionalProperties", false)
 model RegistryEndpointAnonymousSettings {}
+
+/**
+ * Artifact Pull Secret authentication
+ */
+@added(Versions.`2025-07-01-preview`)
+model RegistryEndpointArtifactPullSecretAuthentication
+  extends RegistryEndpointAuthentication {
+  /**
+   * The authentication method.
+   */
+  method: ArtifactPullSecret;
+
+  /**
+   * Artifact Pull Secret authentication properties
+   */
+  artifactPullSecretSettings: RegistryEndpointArtifactPullSecretSettings;
+}
+
+/**
+ * RegistryEndpoint Artifact Pull Secret authentication properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model RegistryEndpointArtifactPullSecretSettings {
+  /**
+   * The name of the kubernetes secret that contains the artifact pull secret.
+   */
+  secretRef: string;
+}

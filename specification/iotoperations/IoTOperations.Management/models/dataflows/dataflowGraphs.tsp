@@ -78,7 +78,6 @@ model DataflowGraphNode {
   /**
    * Name of the node.
    */
-  @maxLength(64)
   name: string;
 
   /**
@@ -162,11 +161,11 @@ model DataflowGraphGraphNode extends DataflowGraphNode {
  * DataflowGraph graph node settings.
  */
 @added(Versions.`2025-07-01-preview`)
-model DataflowGraphNodeGraphSettings { // Maybe this resource isn't needed?
+model DataflowGraphNodeGraphSettings {
   /**
    * Reference to the registry endpoint for pulling the artifact.
    */
-  registryEndpointRef: string; // should we leverage k8s-bridge translation here? https://armwiki.azurewebsites.net/rpaas/arc-rp/conversion/SchemaTranslation.html#kubernetes-bridge-custom-filters
+  registryEndpointRef: string;
 
   /**
    * The artifact name and version to pull.
@@ -188,7 +187,6 @@ model DataflowGraphGraphNodeConfiguration {
   /**
    * Key of the configuration.
    */
-  @maxLength(64)
   key: string;
 
   /**
@@ -221,7 +219,7 @@ model DataflowGraphDestinationNodeSettings {
   /**
    * The endpoint reference for the destination.
    */
-  endpointRef: string; // should we leverage k8s-bridge translation here? https://armwiki.azurewebsites.net/rpaas/arc-rp/conversion/SchemaTranslation.html#kubernetes-bridge-custom-filters
+  endpointRef: string;
 
   /**
    * Data destination at the endpoint.
@@ -287,7 +285,6 @@ model DataflowGraphConnectionInput {
   /**
    * Name of the source node.
    */
-  @maxLength(64)
   name: string;
 
   /**
@@ -304,6 +301,5 @@ model DataflowGraphConnectionOutput {
   /**
    * Name of the destination node.
    */
-  @maxLength(64)
   name: string;
 }

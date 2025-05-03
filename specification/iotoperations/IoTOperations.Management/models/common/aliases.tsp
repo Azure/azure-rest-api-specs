@@ -40,6 +40,7 @@ alias IfNotPresent = "IfNotPresent";
 alias X509Certificate = "X509Certificate";
 alias DiagnoseAndRepair = "DiagnoseAndRepair";
 alias HelmConfiguration = "HelmConfiguration";
+alias ArtifactPullSecret = "ArtifactPullSecret";
 alias ImageConfiguration = "ImageConfiguration";
 alias OneToOneAllocation = "OneToOneAllocation";
 alias AzureDeviceRegistry = "AzureDeviceRegistry";

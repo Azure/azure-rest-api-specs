@@ -7861,8 +7861,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the source node.",
-          "maxLength": 64
+          "description": "Name of the source node."
         },
         "schema": {
           "$ref": "#/definitions/DataflowGraphSchemaSettings",
@@ -7880,8 +7879,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the destination node.",
-          "maxLength": 64
+          "description": "Name of the destination node."
         }
       },
       "required": [
@@ -7935,8 +7933,7 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Key of the configuration.",
-          "maxLength": 64
+          "description": "Key of the configuration."
         },
         "value": {
           "type": "string",
@@ -7954,8 +7951,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the node.",
-          "maxLength": 64
+          "description": "Name of the node."
         },
         "type": {
           "$ref": "#/definitions/DataflowGraphNodeType",
@@ -9839,6 +9835,38 @@
       "description": "RegistryEndpoint Anonymous authentication properties",
       "additionalProperties": false
     },
+    "RegistryEndpointArtifactPullSecretAuthentication": {
+      "type": "object",
+      "description": "Artifact Pull Secret authentication",
+      "properties": {
+        "artifactPullSecretSettings": {
+          "$ref": "#/definitions/RegistryEndpointArtifactPullSecretSettings",
+          "description": "Artifact Pull Secret authentication properties"
+        }
+      },
+      "required": [
+        "artifactPullSecretSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegistryEndpointAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "ArtifactPullSecret"
+    },
+    "RegistryEndpointArtifactPullSecretSettings": {
+      "type": "object",
+      "description": "RegistryEndpoint Artifact Pull Secret authentication properties",
+      "properties": {
+        "secretRef": {
+          "type": "string",
+          "description": "The name of the kubernetes secret that contains the artifact pull secret."
+        }
+      },
+      "required": [
+        "secretRef"
+      ]
+    },
     "RegistryEndpointAuthentication": {
       "type": "object",
       "description": "Model for RegistryEndpointAuthentication",
@@ -9859,7 +9887,8 @@
       "enum": [
         "SystemAssignedManagedIdentity",
         "UserAssignedManagedIdentity",
-        "Anonymous"
+        "Anonymous",
+        "ArtifactPullSecret"
       ],
       "x-ms-enum": {
         "name": "RegistryEndpointAuthenticationMethod",
@@ -9879,6 +9908,11 @@
             "name": "Anonymous",
             "value": "Anonymous",
             "description": "Anonymous Option"
+          },
+          {
+            "name": "ArtifactPullSecret",
+            "value": "ArtifactPullSecret",
+            "description": "Artifact Pull Secret authentication"
           }
         ]
       }
