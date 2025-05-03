@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
-import { existsSync, statSync } from "node:fs";
 import { ConsoleLogger } from "../src/logger.js";
-import { SpecModel2 } from "../src/spec-model.js";
+import { SpecModel } from "../src/spec-model.js";
 
 const USAGE =
   "Usage: npx spec-model path/to/spec [--debug] [--include-refs] [--relative-paths]\n" +
@@ -33,13 +32,7 @@ if (args.length > 1) {
 
 const specPath = args[0];
 
-if (!existsSync(specPath) || !statSync(specPath).isDirectory()) {
-  console.error(`ERROR: Directory not found: ${specPath}\n`);
-  console.error(USAGE);
-  process.exit(1);
-}
-
-const specModel = new SpecModel2(specPath, {
+const specModel = new SpecModel(specPath, {
   logger: new ConsoleLogger(debug),
 });
 
