@@ -24,10 +24,10 @@ describe("SpecModel2", () => {
       "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
     );
 
-    const specModel2 = new SpecModel(folder, options);
-    expect(specModel2.folder).toBe(folder);
+    const specModel = new SpecModel(folder, options);
+    expect(specModel.folder).toBe(folder);
 
-    const readmes = [...(await specModel2.getReadmes())];
+    const readmes = [...(await specModel.getReadmes())];
     expect(readmes.length).toBe(1);
 
     const readme = readmes[0];
@@ -73,6 +73,66 @@ describe("SpecModel2", () => {
     expect(inputFiles1[0].path).toBe(
       resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
     );
+  });
+
+  describe("getAffectedReadmeTags", () => {
+    it("returns affected readme tags", async ({ expect }) => {
+      const folder = resolve(
+        __dirname,
+        "fixtures/getAffectedReadmeTags/specification/contosowidgetmanager",
+      );
+
+      const specModel = new SpecModel(folder, options);
+
+      const swaggerPath = resolve(
+        folder,
+        "resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
+      );
+
+      const actual = await specModel.getAffectedReadmeTags(swaggerPath);
+
+      const entries = [...actual];
+
+      expect(entries.length).toBe(1);
+
+      const readme = entries[0][0];
+      expect(readme.path).toBe(resolve(folder, "resource-manager/readme.md"));
+
+      const tags = [...entries[0][1]].sort((a, b) =>
+        a.name.localeCompare(b.name),
+      );
+      expect(tags.length).toBe(1);
+
+      expect(tags[0].name).toBe("package-2021-11-01");
+    });
+
+    it("returns affected readme tags for multiple tags", async ({ expect }) => {
+      const folder = resolve(
+        __dirname,
+        "fixtures/getAffectedSwaggers/specification/1",
+      );
+
+      const specModel = new SpecModel(folder, options);
+
+      const swaggerPath = resolve(folder, "data-plane/shared/shared.json");
+
+      const actual = await specModel.getAffectedReadmeTags(swaggerPath);
+
+      const entries = [...actual];
+
+      expect(entries.length).toBe(1);
+
+      const readme = entries[0][0];
+      expect(readme.path).toBe(resolve(folder, "data-plane/readme.md"));
+
+      const tags = [...entries[0][1]].sort((a, b) =>
+        a.name.localeCompare(b.name),
+      );
+
+      expect(tags.length).toBe(2);
+      expect(tags[0].name).toBe("tag-1");
+      expect(tags[1].name).toBe("tag-2");
+    });
   });
 });
 

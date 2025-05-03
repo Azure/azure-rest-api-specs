@@ -44,11 +44,11 @@ export class SpecModel {
   }
 
   /**
-   * @param {string} swaggerFile
+   * @param {string} swaggerPath
    * @returns {Promise<Map<Readme, Set<Tag>>>}
    */
-  async getAffectedReadmeTags(swaggerFile) {
-    const swaggerFileResolved = resolveCheckAccess(swaggerFile);
+  async getAffectedReadmeTags(swaggerPath) {
+    const swaggerPathResolved = resolveCheckAccess(swaggerPath);
 
     /** @type {Map<Readme, Set<Tag>>} */
     const affectedReadmeTags = new Map();
@@ -56,7 +56,7 @@ export class SpecModel {
     for (const readme of await this.getReadmes()) {
       for (const tag of await readme.getTags()) {
         for (const inputFile of tag.inputFiles) {
-          if (inputFile.path === swaggerFileResolved) {
+          if (inputFile.path === swaggerPathResolved) {
             /** @type {Set<Tag>} */
             const tags = affectedReadmeTags.get(readme) ?? new Set();
             tags.add(tag);
@@ -67,7 +67,7 @@ export class SpecModel {
           }
 
           const refs = await inputFile.getRefs();
-          if ([...refs].find((r) => r.path === swaggerFileResolved)) {
+          if ([...refs].find((r) => r.path === swaggerPathResolved)) {
             /** @type {Set<Tag>} */
             const tags = affectedReadmeTags.get(readme) ?? new Set();
             tags.add(tag);
@@ -78,6 +78,18 @@ export class SpecModel {
     }
 
     return affectedReadmeTags;
+  }
+
+  /**
+   * Given a swagger file, return the swagger files that are affected by the
+   * changes in the given swagger file.
+   * @param {string} swaggerPath
+   * @returns {Promise<Set<Swagger>>}
+   */
+  async getAffectedSwaggers(swaggerPath) {
+    const swaggerPathResolved = resolveCheckAccess(swaggerPath);
+
+    return new Set();
   }
 
   /**
