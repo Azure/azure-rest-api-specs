@@ -1,3 +1,5 @@
+// @ts-check
+
 import { readdir } from "fs/promises";
 import { dirname, isAbsolute, join, resolve } from "path";
 import { fileURLToPath } from "url";
@@ -13,6 +15,15 @@ const repoRoot = join(__dirname, "..", "..", "..");
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
 
 describe("SpecModel", () => {
+  it("can be created with mock folder", async () => {
+    const specModel = new SpecModel("foo");
+    expect(specModel.folder).toBe(resolve("foo"));
+
+    await expect(specModel.getReadmes()).rejects.toThrowError(
+      /no such file or directory/i,
+    );
+  });
+
   it("returns spec model", async () => {
     const folder = resolve(
       __dirname,
@@ -105,7 +116,9 @@ describe("SpecModel", () => {
 
     const tag = globalConfig["tag"];
 
+    // @ts-ignore
     expect(tag).not.toBeTypeOf(Date);
+
     expect(tag).toBeTypeOf("string");
     expect(tag).toBe("2022-12-01");
   });
@@ -210,17 +223,6 @@ describe("SpecModel", () => {
 
     it("throws when swagger file is not found", async () => {
       const swaggerPath = resolve(folder, "data-plane/not-found.json");
-
-      await expect(
-        specModel.getAffectedSwaggers(swaggerPath),
-      ).rejects.toThrowError(/no such file or directory/i);
-    });
-
-    it("throws when swagger file does not exist in specModel", async () => {
-      const swaggerPath = resolve(
-        __dirname,
-        "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager/readme.md",
-      );
 
       await expect(
         specModel.getAffectedSwaggers(swaggerPath),
@@ -356,9 +358,7 @@ describe.skip("Parse readmes", () => {
         }
 
         console.log(`Testing service: ${folder}`);
-        const specModel = new SpecModel(`specification/${folder}`, {
-          debug: false,
-        });
+        const specModel = new SpecModel(`specification/${folder}`, options);
 
         expect(specModel).toBeDefined();
       }
@@ -374,9 +374,7 @@ describe.skip("Parse readmes", () => {
       ];
       for (const folder of folders) {
         console.log(`Testing service: ${folder}`);
-        const specModel = new SpecModel(`specification/${folder}`, {
-          debug: true,
-        });
+        const specModel = new SpecModel(`specification/${folder}`, options);
 
         expect(specModel).toBeDefined();
       }
