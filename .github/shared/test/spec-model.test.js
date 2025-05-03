@@ -1,5 +1,5 @@
 import { readdir } from "fs/promises";
-import { dirname, join, resolve } from "path";
+import { dirname, isAbsolute, join, resolve } from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
@@ -74,15 +74,21 @@ describe("SpecModel", () => {
     expect(inputFiles1[0].path).toBe(
       resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
     );
-  });
 
-  it("toString", async () => {
-    const folder = resolve(
-      __dirname,
-      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
-    );
+    const jsonDefault = await specModel.toJSONAsync();
+    const readmePathDefault = jsonDefault.readmes[0].path;
+    expect(isAbsolute(readmePathDefault)).toBe(true);
+    expect(jsonDefault.readmes[0].tags[0].inputFiles[0].refs).toBeUndefined();
 
-    const specModel = new SpecModel(folder, options);
+    const jsonRefsRelative = await specModel.toJSONAsync({
+      includeRefs: true,
+      relativePaths: true,
+    });
+    const readmePathRelative = jsonRefsRelative.readmes[0].path;
+    expect(isAbsolute(readmePathRelative)).toBe(false);
+    expect(
+      jsonRefsRelative.readmes[0].tags[0].inputFiles[0].refs,
+    ).toBeDefined();
   });
 
   it("uses strings for tag names and doesn't parse Date object", async () => {
