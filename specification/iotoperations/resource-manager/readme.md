@@ -74,6 +74,10 @@ directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.ConnectorTemplateRuntimeImageConfigurationSettings.properties.additionalConfiguration
     reason: These are additional configuration settings with dynamic properties that are not known ahead of time.
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.ConnectorTemplateManagedConfigurationSettings.properties.persistentVolumeClaimTemplates.items
+    reason: These are additional configuration settings with dynamic properties that are not known ahead of time.
 ```
 
 ### Basic Information
