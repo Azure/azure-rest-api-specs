@@ -106,7 +106,7 @@ describe("SpecModel", () => {
   });
 
   describe("getAffectedReadmeTags", () => {
-    it("returns affected readme tags", async ({ expect }) => {
+    it("returns affected readme tags", async () => {
       const folder = resolve(
         __dirname,
         "fixtures/getAffectedReadmeTags/specification/contosowidgetmanager",
@@ -136,7 +136,7 @@ describe("SpecModel", () => {
       expect(tags[0].name).toBe("package-2021-11-01");
     });
 
-    it("returns affected readme tags for multiple tags", async ({ expect }) => {
+    it("returns affected readme tags for multiple tags", async () => {
       const folder = resolve(
         __dirname,
         "fixtures/getAffectedSwaggers/specification/1",
@@ -187,14 +187,23 @@ describe("SpecModel", () => {
       expect(actual).toEqual(expected);
     });
 
-    it("throws when swagger file is not found", async ({ expect }) => {
+    it("throws when swagger file is not found", async () => {
       const swaggerPath = resolve(folder, "data-plane/not-found.json");
 
-      expect(specModel.getAffectedSwaggers(swaggerPath)).rejects.toThrowError(
-        expect.objectContaining({
-          message: expect.stringContaining(swaggerPath),
-        }),
+      await expect(
+        specModel.getAffectedSwaggers(swaggerPath),
+      ).rejects.toThrowError(/no such file or directory/i);
+    });
+
+    it("throws when swagger file does not exist in specModel", async () => {
+      const swaggerPath = resolve(
+        __dirname,
+        "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager/readme.md",
       );
+
+      await expect(
+        specModel.getAffectedSwaggers(swaggerPath),
+      ).rejects.toThrowError(/no affected swaggers/i);
     });
 
     it("returns correct swaggers for one layer of dependencies", async () => {
