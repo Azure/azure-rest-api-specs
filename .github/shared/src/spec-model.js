@@ -6,7 +6,6 @@ import * as yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
-import { example, readme } from "./changed-files.js";
 import { resolveCheckAccess } from "./fs.js";
 
 /**
@@ -545,4 +544,33 @@ export class Swagger {
   toString() {
     return `Swagger(${this.#path}, {logger: ${this.#logger}})`;
   }
+}
+
+// TODO: Remove duplication with changed-files.js (which currently requires paths relative to repo root)
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+function example(file) {
+  // Folder name "examples" should match case for consistency across specs
+  return typeof file === "string" && json(file) && file.includes("/examples/");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+function json(file) {
+  // Extension "json" with any case is a valid JSON file
+  return typeof file === "string" && file.toLowerCase().endsWith(".json");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+function readme(file) {
+  // Filename "readme.md" with any case is a valid README file
+  return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
 }
