@@ -180,7 +180,9 @@ export class SpecModel {
       this.#logger?.debug(`Found ${readmePaths.length} readme files`);
 
       this.#readmes = new Set(
-        readmePaths.map((p) => new Readme(this, p, { logger: this.#logger })),
+        readmePaths.map(
+          (p) => new Readme(p, { logger: this.#logger, specModel: this }),
+        ),
       );
     }
 
