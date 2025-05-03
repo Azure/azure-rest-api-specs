@@ -1,5 +1,4 @@
 // @ts-check
-
 export const PER_PAGE_MAX = 100;
 
 /**
@@ -120,3 +119,17 @@ export const CommitStatusState = {
    */
   SUCCESS: "success",
 };
+
+/**
+ * Writes content to the GitHub Actions summary
+ * @param {string} content - Markdown content to add to the summary
+ * @param {typeof import("@actions/core")} core - GitHub Actions core library
+ */
+export async function writeToActionsSummary(content, core) {
+  try {
+    await core.summary.addRaw(content).write();
+    core.info("Successfully wrote to the GitHub Actions summary");
+  } catch (error) {
+    throw new Error(`Failed to write to the GitHub Actions summary: ${error}`);
+  }
+}
