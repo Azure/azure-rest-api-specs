@@ -6676,6 +6676,10 @@
           "$ref": "#/definitions/LivenessModel",
           "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
         },
+        "isAbuseMonitoringEnabled": {
+          "type": "boolean",
+          "description": "Denotes if the abuse monitoring feature was enabled during this session."
+        },
         "results": {
           "$ref": "#/definitions/LivenessWithVerifySessionResults",
           "description": "The results of the liveness with verify session."
@@ -6708,11 +6712,24 @@
         "error": {
           "$ref": "#/definitions/LivenessError",
           "description": "The error of the liveness with verify call, will be null if there is result."
+        },
+        "clientInformation": {
+          "type": "array",
+          "description": "The client information gathered during the liveness attempt.",
+          "items": {
+            "$ref": "#/definitions/ClientInformation"
+          },
+          "x-ms-identifiers": []
+        },
+        "abuseMonitoringResult": {
+          "$ref": "#/definitions/AbuseMonitoringResult",
+          "description": "The abuse monitoring result for the liveness attempt."
         }
       },
       "required": [
         "attemptId",
-        "attemptStatus"
+        "attemptStatus",
+        "clientInformation"
       ]
     },
     "LivenessWithVerifySessionResults": {
