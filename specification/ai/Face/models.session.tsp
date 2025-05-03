@@ -582,7 +582,7 @@ model CreateLivenessWithVerifySessionContent {
   authTokenTimeToLiveInSeconds?: HttpPart<authTokenLifetimeInSeconds>; // = 600;
 
   @added(Versions.v1_3_preview_1)
-  @doc("The number of times a client can attempt a liveness check using the same authToken. Default value is 1. Maxium value is 3.")
+  @doc("The number of times a client can attempt a liveness check using the same authToken. Default value is 1. Maximum value is 3.")
   numberOfClientAttemptsAllowed?: HttpPart<numberOfClientAttemptsAllowed>; // = 1;
 }
 
