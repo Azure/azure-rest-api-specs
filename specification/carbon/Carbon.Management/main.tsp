@@ -376,6 +376,9 @@ model CarbonEmissionTopItemMonthlySummaryData extends CarbonEmissionData {
   @doc("Item name, it can be resource name, resource type name, location, resource group name or subscriptionId. It depends on category type.")
   itemName: string;
 
+  @doc("Item type")
+  itemType: string;
+
   @doc("Item category, see supported type value defined in CategoryTypeEnum")
   categoryType: CategoryTypeEnum;
 

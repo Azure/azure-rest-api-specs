@@ -382,6 +382,10 @@
           "type": "string",
           "description": "Item name, it can be resource name, resource type name, location, resource group name or subscriptionId. It depends on category type."
         },
+        "itemType": {
+          "type": "string",
+          "description": "Item type"
+        },
         "categoryType": {
           "$ref": "#/definitions/CategoryTypeEnum",
           "description": "Item category, see supported type value defined in CategoryTypeEnum"
@@ -393,6 +397,7 @@
       },
       "required": [
         "itemName",
+        "itemType",
         "categoryType",
         "date"
       ],
