@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
-import { getSpecModelOld, SpecModel } from "../src/spec-model.js";
+import { SpecModel } from "../src/spec-model.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -283,6 +283,8 @@ describe("getReadme regex", () => {
   });
 });
 
+// TODO: Update tests for new object-oriented API
+
 // Stress test the parser against all specs in the specification/ folder. This
 // is a long-running test and should be run manually. To run this test, remove
 // the '.skip' from the describe block. Put '.skip' back in when done or this
@@ -324,7 +326,7 @@ describe.skip("Parse readmes", () => {
         }
 
         console.log(`Testing service: ${folder}`);
-        const specModel = await getSpecModelOld(`specification/${folder}`, {
+        const specModel = new SpecModel(`specification/${folder}`, {
           debug: false,
         });
 
@@ -342,7 +344,7 @@ describe.skip("Parse readmes", () => {
       ];
       for (const folder of folders) {
         console.log(`Testing service: ${folder}`);
-        const specModel = await getSpecModelOld(`specification/${folder}`, {
+        const specModel = new SpecModel(`specification/${folder}`, {
           debug: true,
         });
 
