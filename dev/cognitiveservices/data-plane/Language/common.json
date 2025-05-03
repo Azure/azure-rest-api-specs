@@ -808,9 +808,132 @@
           "format": "int32",
           "description": "It controls the approximate number of sentences in the output summaries."
         },
+        "summaryLength": {
+          "$ref": "#/definitions/SummaryLength",
+          "description": "It controls the approximate length of the summary by buckets. Use this parameter exclusively with sentenceCount parameter."
+        },
+        "phraseControls": {
+          "type": "array",
+          "description": "Control the phrases to be used in the summary.",
+          "items": {
+            "$ref": "#/definitions/PhraseControl"
+          }
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "The session id for interactive summarization experience. We cache the session state on service side and the session expires in 48 hours. The session state we cache includes but not limited to the previous document, parameters and generated summaries."
+        },
+        "phraseControlsRecommendationOption": {
+          "$ref": "#/definitions/PhraseControlsRecommendationOption"
+        },
+        "enableInteractiveSummarizationSession": {
+          "type": "boolean",
+          "description": "By enabling interactive summarization session, the service will cache the session state by session id."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "The prefix comes before the inserted summary text. Used for the insert in the middle summarization experience."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "The suffix comes after the inserted summary text. Used for the insert in the middle summarization experience."
+        },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
+      }
+    },
+    "PhraseControlsRecommendationOption":{
+      "enum": [
+        "SummaryAndPhraseControlsRecommendation",
+        "SummaryOnly",
+        "PhraseControlsRecommendationOnly"
+      ],
+      "type": "string",
+      "description": "The option of phrase controls recommendation. The default value is SummaryOnly.",
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "PhraseControlsRecommendationOption",
+        "values": [
+          {
+            "value": "SummaryAndPhraseControlsRecommendation",
+            "description": "Output both summary and phrase controls recommendation."
+          },
+          {
+            "value": "SummaryOnly",
+            "description": "Output summary only."
+          },
+          {
+            "value": "PhraseControlsRecommendationOnly",
+            "description": "Output phrase controls recommendation only."
+          }
+        ]
+      }
+    },
+    "PhraseControl": {
+      "type": "object",
+      "description": "Control the phrases to be used in the summary.",
+      "required": [
+        "targetPhrase",
+        "strategy"
+      ],
+      "properties": {
+        "targetPhrase": {
+          "type": "string",
+          "description": "The target phrase to control."
+        },
+        "strategy": {
+          "$ref": "#/definitions/PhraseControlStrategy"
+        }
+      }
+    },
+    "SummaryLength":{
+      "enum": [
+        "short",
+        "medium",
+        "long"
+      ],
+      "type": "string",
+      "description": "The length of the summary.",
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "SummaryLength",
+        "values": [
+          {
+            "value": "short",
+            "description": "Short summary"
+          },
+          {
+            "value": "medium",
+            "description": "Medium length summary"
+          },
+          {
+            "value": "long",
+            "description": "Long summary"
+          }
+        ]
+      }
+    },
+    "PhraseControlStrategy": {
+      "enum": [
+        "encourage",
+        "discourage"
+      ],
+      "type": "string",
+      "description": "The strategy to use in phrase control.",
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "PhraseControlStrategy",
+        "values": [
+          {
+            "value": "encourage",
+            "description": "The model will have higher probability to select the target phrase in the summary if there are multiple alternates."
+          },
+          {
+            "value": "discourage",
+            "description": "The model will have lower probability to select the target phrase in the summary if there are multiple alternates."
+          }
+        ]
       }
     },
     "SummaryContext": {
