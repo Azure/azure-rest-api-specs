@@ -19,19 +19,19 @@ export class Swagger {
   /** @type {Set<Swagger> | undefined} */
   #refs;
 
-  /** @type {SpecModel} backpointer to owning SpecModel */
+  /** @type {SpecModel | undefined} backpointer to owning SpecModel */
   #specModel;
 
   /**
-   * @param {SpecModel} specModel
    * @param {string} path
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
+   * @param {SpecModel} [options.specModel]
    */
-  constructor(specModel, path, options) {
-    this.#specModel = specModel;
+  constructor(path, options) {
     this.#path = resolve(path);
     this.#logger = options?.logger;
+    this.#specModel = options?.specModel;
   }
 
   /**
@@ -51,7 +51,13 @@ export class Swagger {
         .filter((p) => resolve(p) !== resolve(this.#path));
 
       this.#refs = new Set(
-        refPaths.map((p) => new Swagger(this.#specModel, p)),
+        refPaths.map(
+          (p) =>
+            new Swagger(p, {
+              logger: this.#logger,
+              specModel: this.#specModel,
+            }),
+        ),
       );
     }
 
@@ -71,9 +77,10 @@ export class Swagger {
    */
   async toJSONAsync(options) {
     return {
-      path: options?.relativePaths
-        ? relative(this.#specModel.folder, this.#path)
-        : this.#path,
+      path:
+        options?.relativePaths && this.#specModel
+          ? relative(this.#specModel.folder, this.#path)
+          : this.#path,
       refs: options?.includeRefs
         ? await mapAsync(
             [...(await this.getRefs())].sort((a, b) =>
