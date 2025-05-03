@@ -40,22 +40,7 @@ model DiagnosticResource is ProxyResource<DiagnosticProperties> {
  */
 @added(Versions.`2025-07-01-preview`)
 union DiagnosticsRemoteSupportActivationState {
-  string,
-
-  /**
-   * Remote Support is enabled.
-   */
-  Enabled,
-
-  /**
-   * Remote Support is disabled.
-   */
-  Disabled,
-
-  /**
-   * Remote Support has Expired.
-   */
-  Expired,
+  OperationalMode,
 }
 
 /**

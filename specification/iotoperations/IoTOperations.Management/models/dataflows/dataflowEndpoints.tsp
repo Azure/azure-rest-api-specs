@@ -86,7 +86,6 @@ union EndpointType {
   @doc("Broker Type")
   Mqtt: "Mqtt",
 
-
   @added(Versions.`2025-07-01-preview`)
   @doc("OpenTelemetry Type")
   OpenTelemetry: "OpenTelemetry",
