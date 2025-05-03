@@ -1115,7 +1115,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/VpnPacketCaptureStartParameters"
             },
@@ -1715,7 +1715,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/VpnPacketCaptureStartParameters"
             },
@@ -2811,7 +2811,8 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
           },
-          "description": "NatRules for virtual network gateway."
+          "description": "NatRules for virtual network gateway.",
+          "x-ms-identifiers": ["name"]
         },
         "enableBgpRouteTranslationForNat": {
           "type": "boolean",
@@ -2934,14 +2935,16 @@
           "items": {
             "$ref": "#/definitions/VpnClientRootCertificate"
           },
-          "description": "VpnClientRootCertificate for virtual network gateway."
+          "description": "VpnClientRootCertificate for virtual network gateway.",
+          "x-ms-identifiers": ["name"]
         },
         "vpnClientRevokedCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VpnClientRevokedCertificate"
           },
-          "description": "VpnClientRevokedCertificate for Virtual network gateway."
+          "description": "VpnClientRevokedCertificate for Virtual network gateway.",
+          "x-ms-identifiers": ["name"]
         },
         "vpnClientProtocols": {
           "type": "array",
