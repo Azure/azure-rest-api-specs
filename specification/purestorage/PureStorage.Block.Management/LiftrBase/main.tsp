@@ -20,6 +20,10 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2_preview: "2024-11-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v1_stable: "2024-11-01",
 }
 
 @doc("Marketplace subscription status")
