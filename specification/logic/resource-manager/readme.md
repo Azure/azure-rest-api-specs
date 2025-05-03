@@ -64,26 +64,26 @@ directive:
   - suppress: R3016
     reason: Existing properties, can't be changed without breaking API.
     #where:
-    #  - $.definitions.AS2ErrorSettings.properties.resendIfMDNNotReceived
-    #  - $.definitions.AS2MdnSettings.properties.needMDN
-    #  - $.definitions.AS2MdnSettings.properties.signMDN
-    #  - $.definitions.AS2MdnSettings.properties.sendMDNAsynchronously
-    #  - $.definitions.AS2MdnSettings.properties.signOutboundMDNIfOptional
-    #  - $.definitions.AS2MdnSettings.properties.sendInboundMDNToMessageBox
-    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForInboundEncodedMessages
-    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForInboundDecodedMessages
-    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForOutboundMDN
-    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForOutboundEncodedMessages
-    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForOutboundDecodedMessages
-    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForInboundMDN
-    #  - $.definitions.EdifactValidationSettings.properties.validateEDITypes
-    #  - $.definitions.EdifactValidationSettings.properties.validateXSDTypes
-    #  - $.definitions.EdifactValidationOverride.properties.validateEDITypes
-    #  - $.definitions.EdifactValidationOverride.properties.validateXSDTypes
-    #  - $.definitions.X12ValidationSettings.properties.validateEDITypes
-    #  - $.definitions.X12ValidationSettings.properties.validateXSDTypes
-    #  - $.definitions.X12ValidationOverride.properties.validateEDITypes
-    #  - $.definitions.X12ValidationOverride.properties.validateXSDTypes
+    #  - $.definitions.As2ErrorSettings.properties.resendIfMdnNotReceived
+    #  - $.definitions.As2MdnSettings.properties.needMdn
+    #  - $.definitions.As2MdnSettings.properties.signMdn
+    #  - $.definitions.As2MdnSettings.properties.sendMdnAsynchronously
+    #  - $.definitions.As2MdnSettings.properties.signOutboundMdnIfOptional
+    #  - $.definitions.As2MdnSettings.properties.sendInboundMdnToMessageBox
+    #  - $.definitions.As2SecuritySettings.properties.enableNrrForInboundEncodedMessages
+    #  - $.definitions.As2SecuritySettings.properties.enableNrrForInboundDecodedMessages
+    #  - $.definitions.As2SecuritySettings.properties.enableNrrForOutboundMdn
+    #  - $.definitions.As2SecuritySettings.properties.enableNrrForOutboundEncodedMessages
+    #  - $.definitions.As2SecuritySettings.properties.enableNrrForOutboundDecodedMessages
+    #  - $.definitions.As2SecuritySettings.properties.enableNrrForInboundMdn
+    #  - $.definitions.EdifactValidationSettings.properties.validateEdiTypes
+    #  - $.definitions.EdifactValidationSettings.properties.validateXsdTypes
+    #  - $.definitions.EdifactValidationOverride.properties.validateEdiTypes
+    #  - $.definitions.EdifactValidationOverride.properties.validateXsdTypes
+    #  - $.definitions.X12ValidationSettings.properties.validateEdiTypes
+    #  - $.definitions.X12ValidationSettings.properties.validateXsdTypes
+    #  - $.definitions.X12ValidationOverride.properties.validateEdiTypes
+    #  - $.definitions.X12ValidationOverride.properties.validateXsdTypes
 
 ```
 
