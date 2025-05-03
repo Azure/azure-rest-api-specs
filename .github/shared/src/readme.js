@@ -55,9 +55,11 @@ export class Readme {
     // Some swagger paths contain backslashes. These should be normalized when
     // encountered though the expected format for input-files is forward slashes.
     if (swaggerPathNormalized.includes("\\")) {
+      /* v8 ignore next */
       logger?.info(
         `Found backslash (\\) in swagger path ${swaggerPath}. Replacing with forward slash (/)`,
       );
+
       swaggerPathNormalized = swaggerPathNormalized.replaceAll("\\", "/");
     }
 
@@ -204,8 +206,7 @@ export class Readme {
    * @returns {string}
    */
   toString() {
-    return `Readme
-    (${this.#path}, {logger: ${this.#logger}})`;
+    return `Readme(${this.#path})`;
   }
 }
 
@@ -233,6 +234,7 @@ export async function getInputFiles(markdown, options = {}) {
     const obj = /** @type {any} */ (yaml.load(block.text));
     const blockFiles = /** @type string[] */ (obj["input-file"] || []);
 
+    /* v8 ignore next */
     logger?.info(`Input files for tag '${tag}': ${JSON.stringify(blockFiles)}`);
 
     return blockFiles;

@@ -89,7 +89,7 @@ export class Swagger {
   }
 
   toString() {
-    return `Swagger(${this.#path}, {logger: ${this.#logger}})`;
+    return `Swagger(${this.#path})`;
   }
 }
 

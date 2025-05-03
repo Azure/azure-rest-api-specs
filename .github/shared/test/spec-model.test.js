@@ -20,12 +20,15 @@ describe("SpecModel", () => {
     );
 
     const specModel = new SpecModel(folder, options);
+
+    expect(specModel.toString()).toContain("SpecModel");
     expect(specModel.folder).toBe(folder);
 
     const readmes = [...(await specModel.getReadmes())];
     expect(readmes.length).toBe(1);
 
     const readme = readmes[0];
+    expect(readme.toString()).toContain("Readme");
     expect(readme.path).toBe(resolve(folder, "readme.md"));
 
     expect(readme.getGlobalConfig()).resolves.toEqual({
@@ -39,9 +42,12 @@ describe("SpecModel", () => {
     );
     expect(tags.length).toBe(2);
 
+    expect(tags[0].toString()).toContain("Tag");
     expect(tags[0].name).toBe("package-2021-10-01-preview");
+
     const inputFiles0 = [...tags[0].inputFiles];
     expect(inputFiles0.length).toBe(1);
+    expect(inputFiles0[0].toString()).toContain("Swagger");
     expect(inputFiles0[0].path).toBe(
       resolve(
         folder,
@@ -68,6 +74,15 @@ describe("SpecModel", () => {
     expect(inputFiles1[0].path).toBe(
       resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
     );
+  });
+
+  it("toString", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+
+    const specModel = new SpecModel(folder, options);
   });
 
   it("uses strings for tag names and doesn't parse Date object", async () => {

@@ -58,6 +58,6 @@ export class Tag {
   }
 
   toString() {
-    return `Tag(${this.#name}, ${this.#inputFiles}, {logger: ${this.#logger}})`;
+    return `Tag(${this.#name})`;
   }
 }
