@@ -10,6 +10,11 @@ import { mapAsync } from "./array.js";
 import { example, readme } from "./changed-files.js";
 import { resolveCheckAccess } from "./fs.js";
 
+/**
+ * @typedef {Object} ToJSONOptions
+ * @prop {boolean} [includeRefs]
+ */
+
 export class SpecModel2 {
   /** @type {string} absolute path */
   #folder;
@@ -62,14 +67,15 @@ export class SpecModel2 {
   }
 
   /**
+   * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync() {
+  async toJSONAsync(options) {
     const readmes = await mapAsync(
       [...(await this.getReadmes())].sort((a, b) =>
         a.path.localeCompare(b.path),
       ),
-      async (r) => await r.toJSONAsync(),
+      async (r) => await r.toJSONAsync(options),
     );
 
     return {
@@ -223,12 +229,13 @@ export class Readme2 {
   }
 
   /**
+   * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync() {
+  async toJSONAsync(options) {
     const tags = await mapAsync(
       [...(await this.getTags())].sort((a, b) => a.name.localeCompare(b.name)),
-      async (t) => await t.toJSONAsync(),
+      async (t) => await t.toJSONAsync(options),
     );
 
     return {
@@ -283,14 +290,15 @@ export class Tag2 {
   }
 
   /**
+   * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync() {
+  async toJSONAsync(options) {
     return {
       name: this.#name,
       inputFiles: await mapAsync(
         [...this.#inputFiles].sort(),
-        async (s) => await s.toJSONAsync(),
+        async (s) => await s.toJSONAsync(options),
       ),
     };
   }
@@ -350,12 +358,22 @@ export class Swagger2 {
   }
 
   /**
+   * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync() {
+  async toJSONAsync(options) {
     return {
       path: this.#path,
-      refs: null,
+      refs: options?.includeRefs
+        ? await mapAsync(
+            [...(await this.getRefs())].sort((a, b) =>
+              a.path.localeCompare(b.path),
+            ),
+            async (s) =>
+              // Do not include swagger refs transitively, otherwise we could get in infinite loop
+              await s.toJSONAsync({ ...options, includeRefs: false }),
+          )
+        : undefined,
     };
   }
 
