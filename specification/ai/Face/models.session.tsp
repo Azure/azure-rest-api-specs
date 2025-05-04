@@ -421,7 +421,7 @@ model LivenessSessionAttempt {
 
   @added(Versions.v1_3_preview_1)
   @doc("The client information gathered during the liveness attempt.")
-  clientInformation: ClientInformation[];
+  clientInformation?: ClientInformation[];
 
   @added(Versions.v1_3_preview_1)
   @doc("The abuse monitoring result for the liveness attempt.")
@@ -445,7 +445,7 @@ model LivenessWithVerifySessionAttempt {
 
   @added(Versions.v1_3_preview_1)
   @doc("The client information gathered during the liveness attempt.")
-  clientInformation: ClientInformation[];
+  clientInformation?: ClientInformation[];
 
   @added(Versions.v1_3_preview_1)
   @doc("The abuse monitoring result for the liveness attempt.")
