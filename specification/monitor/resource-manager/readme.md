@@ -32,10 +32,18 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-01-01-preview
+tag: package-preview-2024-03-01-preview
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
+```
+
+### Tag: package-preview-2024-03-01-preview
+
+These settings apply only when `--tag=package-preview-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03-01-preview'
+input-file:
 ```
 
 ### Tag: package-2025-01-01-preview
