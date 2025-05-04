@@ -586,6 +586,23 @@ model CreateLivenessWithVerifySessionContent {
   numberOfClientAttemptsAllowed?: HttpPart<numberOfClientAttemptsAllowed>; // = 1;
 }
 
+@added(Versions.v1_3_preview_1)
+@doc("Use to query the liveness abuse monitoring setting.")
+model SettingLivenessAbuseMonitoring {
+  /** property name: "liveness-abuse-monitoring" */
+  name: "liveness-abuse-monitoring";
+
+  /** whether liveness abuse monitoring is enabled */
+  enabled: HttpPart<boolean>;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("Use to update the liveness abuse monitoring setting.")
+model SettingLivenessAbuseMonitoringUpdate {
+  /** enable or disable liveness abuse monitoring */
+  enabled: HttpPart<boolean>;
+}
+
 @minValue(60)
 @maxValue(86400)
 scalar authTokenLifetimeInSeconds extends int32;
