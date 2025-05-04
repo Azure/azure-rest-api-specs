@@ -3307,6 +3307,68 @@
         }
       }
     },
+    "/settings/liveness-abuse-monitoring": {
+      "get": {
+        "operationId": "LivenessSessionOperations_GetSettingLivenessAbuseMonitoring",
+        "description": "Get the liveness abuse monitoring setting.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SettingLivenessAbuseMonitoring"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/FaceErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "LivenessSessionOperations_PatchSettingLivenessAbuseMonitoring",
+        "description": "Update the liveness abuse monitoring setting.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SettingLivenessAbuseMonitoringUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SettingLivenessAbuseMonitoring"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/FaceErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/verify": {
       "post": {
         "operationId": "FaceRecognitionOperations_VerifyFaceToFace",
@@ -6660,6 +6722,40 @@
             "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
           }
         ]
+      }
+    },
+    "SettingLivenessAbuseMonitoring": {
+      "type": "object",
+      "description": "Use to query the liveness abuse monitoring setting.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "property name: \"liveness-abuse-monitoring\"",
+          "enum": [
+            "liveness-abuse-monitoring"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "enabled": {
+          "type": "object",
+          "description": "whether liveness abuse monitoring is enabled"
+        }
+      },
+      "required": [
+        "name",
+        "enabled"
+      ]
+    },
+    "SettingLivenessAbuseMonitoringUpdate": {
+      "type": "object",
+      "description": "Use to update the liveness abuse monitoring setting.",
+      "properties": {
+        "enabled": {
+          "type": "object",
+          "description": "enable or disable liveness abuse monitoring"
+        }
       }
     },
     "TrainingResult": {
