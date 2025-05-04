@@ -3641,6 +3641,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Setting Liveness Abuse Monitoring": {
+            "$ref": "./examples/LivenessSessionOperations_GetSettingLivenessAbuseMonitoring.json"
+          }
         }
       },
       "patch": {
@@ -3675,6 +3680,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Setting Liveness Abuse Monitoring": {
+            "$ref": "./examples/LivenessSessionOperations_PatchSettingLivenessAbuseMonitoring.json"
           }
         }
       }
@@ -5417,6 +5427,10 @@
           "default": 600,
           "minimum": 60,
           "maximum": 86400
+        },
+        "numberOfClientAttemptsAllowed": {
+          "type": "object",
+          "description": "The number of times a client can attempt a liveness check using the same authToken. Default value is 1. Maximum value is 3."
         }
       },
       "required": [
@@ -6741,11 +6755,24 @@
         "error": {
           "$ref": "#/definitions/LivenessError",
           "description": "The error of the liveness with verify call, will be null if there is result."
+        },
+        "clientInformation": {
+          "type": "array",
+          "description": "The client information gathered during the liveness attempt.",
+          "items": {
+            "$ref": "#/definitions/ClientInformation"
+          },
+          "x-ms-identifiers": []
+        },
+        "abuseMonitoringResult": {
+          "$ref": "#/definitions/AbuseMonitoringResult",
+          "description": "The abuse monitoring result for the liveness attempt."
         }
       },
       "required": [
         "attemptId",
-        "attemptStatus"
+        "attemptStatus",
+        "clientInformation"
       ]
     },
     "LivenessWithVerifySessionResults": {

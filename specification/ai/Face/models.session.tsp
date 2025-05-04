@@ -68,6 +68,10 @@ model LivenessSessionData {
   @minValue(60)
   @maxValue(86400)
   authTokenTimeToLiveInSeconds?: int32 = 600;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The number of times a client can attempt a liveness check using the same authToken. Default value is 1. Maximum value is 3.")
+  numberOfClientAttemptsAllowed?: HttpPart<numberOfClientAttemptsAllowed>; // = 1;
 }
 
 @doc("Session data returned for enumeration.")
@@ -438,6 +442,14 @@ model LivenessWithVerifySessionAttempt {
 
   @doc("The error of the liveness with verify call, will be null if there is result.")
   error?: LivenessError;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The client information gathered during the liveness attempt.")
+  clientInformation: ClientInformation[];
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The abuse monitoring result for the liveness attempt.")
+  abuseMonitoringResult?: AbuseMonitoringResult;
 }
 
 @added(Versions.v1_2)
