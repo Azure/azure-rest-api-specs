@@ -896,6 +896,7 @@ model ListBlobsFlatSegmentResponse {
   @Xml.name("MaxResults") maxResults?: int32;
 
   /** The blob segment. */
+  @Xml.name("Blobs")
   segment: BlobFlatListSegment;
 
   /** The next marker of the blobs. */
@@ -905,11 +906,11 @@ model ListBlobsFlatSegmentResponse {
 }
 
 /** The blob flat list segment. */
-@Xml.name("Blobs")
 model BlobFlatListSegment {
   /** The blob items. */
   @pageItems
-  @Xml.name("BlobItems")
+  @Xml.name("Blob")
+  @Xml.unwrapped
   blobItems: BlobItemInternal[];
 }
 
@@ -1923,15 +1924,17 @@ model BlobPrefix {
 }
 
 /** Represents an array of blobs. */
-@Xml.name("Blobs")
 model BlobHierarchyListSegment {
   /** The blob items */
   @pageItems
-  @Xml.name("BlobItems")
+  @Xml.name("Blob")
+  @Xml.unwrapped
   blobItems: BlobItemInternal[];
 
   /** The blob prefixes. */
-  @Xml.name("BlobPrefixes") blobPrefixes?: BlobPrefix[];
+  @Xml.name("BlobPrefix")
+  @Xml.unwrapped
+  blobPrefixes?: BlobPrefix[];
 }
 
 /** An enumeration of blobs */
@@ -1960,6 +1963,7 @@ model ListBlobsHierarchySegmentResponse {
   @Xml.name("MaxResults") maxResults?: int32;
 
   /** The blob segment. */
+  @Xml.name("Blobs")
   segment: BlobHierarchyListSegment;
 
   /** The next marker of the blobs. */
