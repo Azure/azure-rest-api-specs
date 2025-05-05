@@ -3,7 +3,6 @@
 import { readdir } from "fs/promises";
 import { resolve } from "path";
 import { mapAsync } from "./array.js";
-import { resolveCheckAccess } from "./fs.js";
 import { Readme } from "./readme.js";
 
 /**
@@ -31,7 +30,7 @@ export class SpecModel {
    * @param {import('./logger.js').ILogger} [options.logger]
    */
   constructor(folder, options) {
-    this.#folder = resolveCheckAccess(folder);
+    this.#folder = resolve(folder);
     this.#logger = options?.logger;
   }
 
@@ -47,7 +46,7 @@ export class SpecModel {
    * @returns {Promise<Map<Readme, Set<Tag>>>}
    */
   async getAffectedReadmeTags(swaggerPath) {
-    const swaggerPathResolved = resolveCheckAccess(swaggerPath);
+    const swaggerPathResolved = resolve(swaggerPath);
 
     /** @type {Map<Readme, Set<Tag>>} */
     const affectedReadmeTags = new Map();
@@ -86,7 +85,7 @@ export class SpecModel {
    * @returns {Promise<Set<Swagger>>}
    */
   async getAffectedSwaggers(swaggerPath) {
-    const swaggerPathResolved = resolveCheckAccess(swaggerPath);
+    const swaggerPathResolved = resolve(swaggerPath);
 
     // Use Map instead of Set, to ensure exactly one Swagger object per path is returned
     // SpecModel can include multiple Swagger objects pointing to the same path
@@ -181,7 +180,9 @@ export class SpecModel {
       this.#logger?.debug(`Found ${readmePaths.length} readme files`);
 
       this.#readmes = new Set(
-        readmePaths.map((p) => new Readme(this, p, { logger: this.#logger })),
+        readmePaths.map(
+          (p) => new Readme(p, { logger: this.#logger, specModel: this }),
+        ),
       );
     }
 

@@ -5,7 +5,6 @@ import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
-import { resolveCheckAccess } from "./fs.js";
 import { Swagger } from "./swagger.js";
 import { Tag } from "./tag.js";
 
@@ -24,19 +23,19 @@ export class Readme {
   /** @type {string} absolute path */
   #path;
 
-  /** @type {SpecModel} backpointer to owning SpecModel */
+  /** @type {SpecModel | undefined} backpointer to owning SpecModel */
   #specModel;
 
   /**
-   * @param {SpecModel} specModel
    * @param {string} path
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
+   * @param {SpecModel} [options.specModel]
    */
-  constructor(specModel, path, options) {
-    this.#specModel = specModel;
-    this.#path = resolveCheckAccess(path);
+  constructor(path, options) {
+    this.#path = resolve(path);
     this.#logger = options?.logger;
+    this.#specModel = options?.specModel;
   }
 
   /**
@@ -148,8 +147,9 @@ export class Readme {
             dirname(this.#path),
             swaggerPathNormalized,
           );
-          const swagger = new Swagger(this.#specModel, swaggerPathResolved, {
+          const swagger = new Swagger(swaggerPathResolved, {
             logger: this.#logger,
+            specModel: this.#specModel,
           });
           inputFiles.add(swagger);
         }
@@ -194,9 +194,10 @@ export class Readme {
     );
 
     return {
-      path: options?.relativePaths
-        ? relative(this.#specModel.folder, this.#path)
-        : this.#path,
+      path:
+        options?.relativePaths && this.#specModel
+          ? relative(this.#specModel.folder, this.#path)
+          : this.#path,
       globalConfig: await this.getGlobalConfig(),
       tags,
     };
