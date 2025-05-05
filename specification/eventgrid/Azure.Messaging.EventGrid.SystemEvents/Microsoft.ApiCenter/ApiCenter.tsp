@@ -28,7 +28,7 @@ model ApiCenterApiDefinitionUpdatedEventData {
 /** API specification details. */
 model ApiCenterApiSpecification {
   /** Specification name. */
-  name: string;
+  word: string;
 
   /** Specification version. */
   version?: string;
