@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
 
-@useDependency(APIVersions.v2024_05_01_preview)
+@useDependency(APIVersions.v2024_07_01_preview)
 namespace Customizations;
 
 // Client customizations should be kept in this file only and not in other files
