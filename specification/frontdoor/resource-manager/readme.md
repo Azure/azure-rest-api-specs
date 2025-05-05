@@ -40,7 +40,7 @@ input-file:
   - Microsoft.Network/stable/2025-05-01/network.json
   - Microsoft.Network/stable/2025-05-01/webapplicationfirewall.json
   - Microsoft.Network/stable/2021-06-01/frontdoor.json
-  - Micr
+  - Microsoft.Network/stable/2019-11-01/networkexperiment.json
 
 ### Tag: package-2025-03
 
