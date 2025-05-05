@@ -1,22 +1,21 @@
-name: "[TEST-IGNORE] Swagger Avocado - Set Status"
+# Prefix with "~" to sort last in Actions list
+name: ~Templates - Set Run Status
 
 on:
-  # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
-  # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
-  # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
-  # which simplifies implementation.
-  pull_request_target:
-    types:
-      # Run workflow on default types, to update status as quickly as possible.
-      - opened
-      - synchronize
-      - reopened
-      # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
-      - labeled
-      - unlabeled
-  workflow_run:
-    workflows: ["\\[TEST-IGNORE\\] Swagger Avocado - Analyze Code"]
-    types: [completed]
+  workflow_call:
+    inputs:
+      monitored_workflow_name:
+        description: Name of the workflow to monitor
+        required: true
+        type: string
+      required_check_name:
+        description: Name of the required check to update
+        required: true
+        type: string
+      overriding_label:
+        description: Name of the label that, when set, causes the check to always pass
+        required: true
+        type: string
 
 permissions:
   actions: read
@@ -26,8 +25,8 @@ permissions:
   statuses: write
 
 jobs:
-  avocado-status:
-    name: "[TEST-IGNORE] Swagger Avocado - Set Status"
+  set-status:
+    name: "${{ inputs.required_check_name }} - Set Status"
 
     if: |
       github.event_name == 'workflow_run' ||
@@ -36,7 +35,7 @@ jobs:
          github.event.action == 'synchronize' ||
          github.event.action == 'reopened') ||
         ((github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
-         (github.event.label.name == 'Approved-Avocado'))))
+         (github.event.label.name == inputs.overriding_label))))
 
     runs-on: ubuntu-24.04
 
@@ -55,10 +54,15 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: "Swagger Avocado - Set Status"
+      - name: "Set Status"
         uses: actions/github-script@v7
         with:
           script: |
             const { default: setStatus } =
-                await import('${{ github.workspace }}/.github/workflows/src/avocado-status.js');
-            return await setStatus({ github, context, core });
+                await import('${{ github.workspace }}/.github/workflows/src/set-status.js');
+            return await setStatus(
+              { github, context, core }, 
+              '${{ inputs.monitored_workflow_name }}',
+              '${{ inputs.required_check_name }}',
+              '${{ inputs.overriding_label }}'
+            );
