@@ -138,26 +138,23 @@ model TargetConfig {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model RedTeam {
-  @doc("Identifier of the red team.")
+  @doc("Identifier of the red team run.")
   @key("name")
   @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("Name of the red-team scan.")
-  scanName?: string;
-
   @doc("Number of simulation rounds.")
-  numTurns: int32;
+  numTurns?: int32;
 
   @doc("List of attack strategies or nested lists of attack strategies.")
-  attackStrategies: AttackStrategy[];
+  attackStrategies?: AttackStrategy[];
 
   @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
-  simulationOnly: boolean;
+  simulationOnly?: boolean = false;
 
   @doc("List of risk categories to generate attack objectives for.")
-  riskCategories: RiskCategory[];
+  riskCategories?: RiskCategory[];
 
   @doc("Application scenario for the red team operation, to generate scenario specific attacks.")
   applicationScenario?: string;
@@ -173,5 +170,5 @@ model RedTeam {
   status?: string;
 
   @doc("Target configuration for the red-team run.")
-  targetConfig: TargetConfig;
+  target: TargetConfig;
 }
