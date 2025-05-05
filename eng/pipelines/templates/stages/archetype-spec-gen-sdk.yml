@@ -249,7 +249,7 @@ extends:
                   -LabelName $(BreakingChangeLabel)
                   -AuthToken "$(azuresdk-github-pat)"
 
-            - ${{ if eq(parameters.SkipPullRequestCreation, false) }}:
+            - ${{ if and(eq(parameters.SkipPullRequestCreation, false), ne(variables['Build.Reason'], 'PullRequest')) }}:
               - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
                 parameters:
                   BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
