@@ -1382,7 +1382,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Identifier of the red team.",
+            "description": "Identifier of the red team run.",
             "required": true,
             "type": "string"
           },
@@ -1870,7 +1870,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -3004,13 +3004,9 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Identifier of the red team.",
+          "description": "Identifier of the red team run.",
           "readOnly": true,
           "x-ms-client-name": "name"
-        },
-        "scanName": {
-          "type": "string",
-          "description": "Name of the red-team scan."
         },
         "numTurns": {
           "type": "integer",
@@ -3026,7 +3022,8 @@
         },
         "simulationOnly": {
           "type": "boolean",
-          "description": "Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result."
+          "description": "Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.",
+          "default": false
         },
         "riskCategories": {
           "type": "array",
@@ -3058,18 +3055,14 @@
           "description": "Status of the red-team. It is set by service and is read-only.",
           "readOnly": true
         },
-        "targetConfig": {
+        "target": {
           "$ref": "#/definitions/TargetConfig",
           "description": "Target configuration for the red-team run."
         }
       },
       "required": [
         "id",
-        "numTurns",
-        "attackStrategies",
-        "simulationOnly",
-        "riskCategories",
-        "targetConfig"
+        "target"
       ]
     },
     "RiskCategory": {
