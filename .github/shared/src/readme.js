@@ -14,11 +14,15 @@ import { Tag } from "./tag.js";
  */
 
 export class Readme {
-  /** @type {import('./logger.js').ILogger | undefined} */
-  #logger;
+  /**
+   * @type {string | undefined } Content of readme.md, either loaded from #path or passed in via fromContent().  Reset to undefined after #data is loaded to save memory. */
+  #content;
 
   /** @type {{globalConfig: Object, tags: Set<Tag>} | undefined} */
   #data;
+
+  /** @type {import('./logger.js').ILogger | undefined} */
+  #logger;
 
   /** @type {string} absolute path */
   #path;
@@ -36,6 +40,20 @@ export class Readme {
     this.#path = resolve(path);
     this.#logger = options?.logger;
     this.#specModel = options?.specModel;
+  }
+
+  /**
+   * @param {string} content
+   * @param {Object} [options]
+   * @param {import('./logger.js').ILogger} [options.logger]
+   * @param {SpecModel} [options.specModel]
+   * @returns {Readme}
+   */
+  static fromContent(content, options) {
+    const fakePath = "/fake/from-content/readme.md";
+    const readme = new Readme(fakePath, options);
+    readme.#content = content;
+    return readme;
   }
 
   /**
@@ -67,11 +85,13 @@ export class Readme {
 
   async #getData() {
     if (!this.#data) {
-      const content = await readFile(this.#path, {
-        encoding: "utf8",
-      });
+      if (!this.#content) {
+        this.#content = await readFile(this.#path, {
+          encoding: "utf8",
+        });
+      }
 
-      const tokens = marked.lexer(content);
+      const tokens = marked.lexer(this.#content);
 
       /** @type import("marked").Tokens.Code[] */
       const yamlBlocks = tokens
@@ -160,9 +180,23 @@ export class Readme {
       }
 
       this.#data = { globalConfig, tags };
+
+      // Clear #content to save memory, since it's no longer needed after #data is loaded
+      this.#content = undefined;
     }
 
     return this.#data;
+  }
+
+  /**
+   * @returns {Promise<Set<string>>} Absolute paths of all input files (in all tags) directly referenced by the readme.
+   */
+  async getAllInputFiles() {
+    const tags = await this.getTags();
+
+    return new Set(
+      [...tags].flatMap((t) => [...t.inputFiles].map((s) => s.path)),
+    );
   }
 
   /**
@@ -172,6 +206,9 @@ export class Readme {
     return (await this.#getData()).globalConfig;
   }
 
+  /**
+   * @returns {Promise<Set<Tag>>}
+   */
   async getTags() {
     return (await this.#getData()).tags;
   }
