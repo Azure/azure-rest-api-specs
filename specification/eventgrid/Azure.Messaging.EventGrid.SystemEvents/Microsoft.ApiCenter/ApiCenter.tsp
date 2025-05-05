@@ -19,7 +19,7 @@ model ApiCenterApiDefinitionUpdatedEventData {
   title: string;
 
   /** API definition description. */
-  description?: string;
+  word?: int16;
 
   /** API definition specification. */
   specification?: ApiCenterApiSpecification;
