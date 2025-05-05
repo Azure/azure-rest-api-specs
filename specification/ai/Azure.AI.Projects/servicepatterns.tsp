@@ -84,6 +84,10 @@ namespace Azure.AI.Projects.ServicePatterns {
         @Http.bodyRoot
         body: TEntityType;
 
+        @doc("Content type for patch")
+        @Http.header("Content-Type")
+        contentType: "application/merge-patch+json";
+
         @doc(
           "The specific version id of the {name} to create or replace.",
           TEntityType
