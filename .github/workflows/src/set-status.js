@@ -7,15 +7,22 @@ import {
   CommitStatusState,
   PER_PAGE_MAX,
 } from "./github.js";
-import { Label } from "./label.js";
 
 // TODO: Add tests
 /* v8 ignore start */
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {string} monitoredWorkflowName
+ * @param {string} requiredStatusName
+ * @param {string} overridingLabel
  * @returns {Promise<void>}
  */
-export default async function setStatus({ github, context, core }) {
+export default async function setStatus(
+  { github, context, core },
+  monitoredWorkflowName,
+  requiredStatusName,
+  overridingLabel,
+) {
   const { owner, repo, head_sha, issue_number } = await extractInputs(
     github,
     context,
@@ -35,6 +42,9 @@ export default async function setStatus({ github, context, core }) {
     target_url,
     github,
     core,
+    monitoredWorkflowName,
+    requiredStatusName,
+    overridingLabel,
   });
 }
 /* v8 ignore stop */
@@ -48,6 +58,9 @@ export default async function setStatus({ github, context, core }) {
  * @param {string} params.target_url
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
+ * @param {string} params.monitoredWorkflowName
+ * @param {string} params.requiredStatusName
+ * @param {string} params.overridingLabel
  * @returns {Promise<void>}
  */
 export async function setStatusImpl({
@@ -58,9 +71,10 @@ export async function setStatusImpl({
   target_url,
   github,
   core,
+  monitoredWorkflowName,
+  requiredStatusName,
+  overridingLabel,
 }) {
-  const statusName = "[TEST IGNORE] Swagger Avocado";
-
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
     owner: owner,
@@ -68,23 +82,23 @@ export async function setStatusImpl({
     issue_number: issue_number,
     per_page: PER_PAGE_MAX,
   });
-  const labelNames = labels.map((label) => label.name);
+  const overridingLabels = labels.map((label) => label.name);
 
-  core.info(`Labels: ${labelNames}`);
+  core.info(`Labels: ${overridingLabels}`);
 
-  if (labelNames.includes(Label.APPROVED_AVOCADO)) {
-    const description = `Found label '${Label.APPROVED_AVOCADO}'`;
+  if (overridingLabels.includes(overridingLabel)) {
+    const description = `Found label '${overridingLabel}'`;
     core.info(description);
 
     const state = CheckConclusion.SUCCESS;
-    core.info(`Setting status to '${state}'`);
+    core.info(`Setting status to '${state}' for '${requiredStatusName}'`);
 
     await github.rest.repos.createCommitStatus({
       owner,
       repo,
       sha: head_sha,
       state,
-      context: statusName,
+      context: requiredStatusName,
       description,
       target_url,
     });
@@ -108,9 +122,8 @@ export async function setStatusImpl({
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
-  const wfName = "[TEST-IGNORE] Swagger Avocado - Analyze Code";
-  const avocadoCodeRuns = workflowRuns
-    .filter((wf) => wf.name == wfName)
+  const targetRuns = workflowRuns
+    .filter((wf) => wf.name == monitoredWorkflowName)
     // Sort by "updated_at" descending
     .sort(
       (a, b) =>
@@ -118,9 +131,13 @@ export async function setStatusImpl({
     );
 
   // Sorted by "updated_at" descending, so most recent run is at index 0.
-  // If "avocadoCodeRuns.length === 0", run will be "undefined", which the following
+  // If "targetRuns.length === 0", run will be "undefined", which the following
   // code must handle.
-  const run = avocadoCodeRuns[0];
+  const run = targetRuns[0];
+
+  if (!run) {
+    console.log(`No workflow runs found for '${monitoredWorkflowName}'.`);
+  }
 
   if (run) {
     /**
@@ -162,22 +179,26 @@ export async function setStatusImpl({
         ? CheckConclusion.SUCCESS
         : CheckConclusion.FAILURE;
 
+    core.info(`Setting status to '${state}' for '${requiredStatusName}'`);
     await github.rest.repos.createCommitStatus({
       owner,
       repo,
       sha: head_sha,
       state,
-      context: statusName,
+      context: requiredStatusName,
       target_url,
     });
   } else {
+    core.info(
+      `No workflow runs found for '${monitoredWorkflowName}'. Setting status to ${CommitStatusState.PENDING} for required status: ${requiredStatusName}.`,
+    );
     // Run was not found (not started), or not completed
     await github.rest.repos.createCommitStatus({
       owner,
       repo,
       sha: head_sha,
       state: CommitStatusState.PENDING,
-      context: statusName,
+      context: requiredStatusName,
       target_url,
     });
   }

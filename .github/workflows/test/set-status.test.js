@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { setStatusImpl } from "../src/avocado-status.js";
+import { setStatusImpl } from "../src/set-status.js";
 
 import {
   CheckConclusion,
@@ -35,6 +35,9 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
+        monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
+        requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
+        overridingLabel: "Approved-Avocado",
       }),
     ).resolves.toBeUndefined();
 
@@ -43,7 +46,7 @@ describe("setStatusImpl", () => {
       repo: "test-repo",
       sha: "test-head-sha",
       state: CommitStatusState.SUCCESS,
-      context: "[TEST IGNORE] Swagger Avocado",
+      context: "[TEST-IGNORE] Swagger Avocado",
       description: "Found label 'Approved-Avocado'",
       target_url: "https://test.com/set_status_url",
     });
@@ -109,6 +112,9 @@ describe("setStatusImpl", () => {
           target_url: "https://test.com/set_status_url",
           github,
           core,
+          monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
+          requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
+          overridingLabel: "Approved-Avocado",
         }),
       ).resolves.toBeUndefined();
 
@@ -117,7 +123,7 @@ describe("setStatusImpl", () => {
         repo: "test-repo",
         sha: "test-head-sha",
         state: commitStatusState,
-        context: "[TEST IGNORE] Swagger Avocado",
+        context: "[TEST-IGNORE] Swagger Avocado",
         target_url: targetUrl,
       });
     },
