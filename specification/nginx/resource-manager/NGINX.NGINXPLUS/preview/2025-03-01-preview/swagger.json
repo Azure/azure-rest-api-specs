@@ -373,7 +373,18 @@
         ],
         "responses": {
           "202": {
-            "description": "Certificate deletion accepted"
+            "description": "Certificate deletion accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Operation-Location": {
+                "description": "The URL to poll for the status of this asynchronous operation",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Successfully deleted the certificate"
@@ -631,7 +642,18 @@
         ],
         "responses": {
           "202": {
-            "description": "Configuration deletion accepted"
+            "description": "Configuration deletion accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Operation-Location": {
+                "description": "The URL to poll for the status of this asynchronous operation",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Configuration successfully deleted"
@@ -863,7 +885,18 @@
             }
           },
           "202": {
-            "description": "Deployment PATCH accepted"
+            "description": "Deployment PATCH accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Operation-Location": {
+                "description": "The URL to poll for the status of this asynchronous operation",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Default error response.",
@@ -910,7 +943,18 @@
         ],
         "responses": {
           "202": {
-            "description": "Deployment deletion accepted"
+            "description": "Deployment deletion accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Operation-Location": {
+                "description": "The URL to poll for the status of this asynchronous operation",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Deployment successfully deleted"
