@@ -1,11 +1,12 @@
 import { readFileContent, mergeFiles } from './helper.js';
-import { logHeader } from './log.js';
+import { logHeader, logWarning } from './log.js';
 import { sortOpenAPIDocument } from '@azure-tools/typespec-autorest';
 import fs from 'fs';
 import { processDocument } from './document.js';
 import yargs from 'yargs';
 import { hideBin } from "yargs/helpers";
-import { diffString } from 'json-diff';
+import { diff, diffString } from 'json-diff';
+import { suggestFix, suggestPrompt } from './troubleshooting.js';
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
@@ -77,8 +78,23 @@ export async function main() {
   if (outputFolder) {
     fs.writeFileSync(`${outputFolder}/oldSwagger.json`, JSON.stringify(sortedOldFile, null, 2));
     fs.writeFileSync(`${outputFolder}/newSwagger.json`, JSON.stringify(sortedNewFile, null, 2));
-    const diffForFile = diffString(sortedOldFile, sortedNewFile, { color: false });
-    fs.writeFileSync(`${outputFolder}/diff.md`, `\`\`\`diff\n${diffForFile}\n\`\`\`\n`);
+    const diffForFile = diff(sortedOldFile, sortedNewFile);
+    fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
+    const suggestedFixes = suggestFix(diffForFile);
+    if (suggestedFixes.length > 0) {
+      logWarning(`Considering these suggested fixes for the diff:`);
+      suggestedFixes.forEach(fix => {
+        console.log(fix);
+      });
+    }
+    const suggestedPrompt = suggestPrompt(diffForFile);
+    if (suggestedPrompt.length > 0) {
+      logWarning(`Considering these suggested prompts for the diff:`);
+      suggestedPrompt.forEach(prompt => {
+        console.log(prompt);
+      });
+    }
+    // fs.writeFileSync(`${outputFolder}/diff.md`, `\`\`\`diff\n${diffForFile}\n\`\`\`\n`);
   }
   else {
     const differences = diffString(sortedOldFile, sortedNewFile);
