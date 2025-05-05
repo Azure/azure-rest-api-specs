@@ -74,12 +74,14 @@ export async function main() {
   const sortedNewFile = sortOpenAPIDocument(processedNewFile);
 
   logHeader("Comparing old and new Swagger files...");
-  const differences = diffString(sortedOldFile, sortedNewFile);
-  console.log(differences);
-
   if (outputFolder) {
     fs.writeFileSync(`${outputFolder}/oldSwagger.json`, JSON.stringify(sortedOldFile, null, 2));
     fs.writeFileSync(`${outputFolder}/newSwagger.json`, JSON.stringify(sortedNewFile, null, 2));
-    fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(differences, null, 2));
+    const diffForFile = diffString(sortedOldFile, sortedNewFile, { color: false });
+    fs.writeFileSync(`${outputFolder}/diff.md`, `\`\`\`diff\n${diffForFile}\n\`\`\`\n`);
+  }
+  else {
+    const differences = diffString(sortedOldFile, sortedNewFile);
+    console.log(differences);
   }
 }
