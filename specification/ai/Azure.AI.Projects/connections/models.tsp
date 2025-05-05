@@ -50,7 +50,7 @@ model BaseCredentials {
 
 @doc("API Key Credential definition")
 model ApiKeyCredentials extends BaseCredentials {
-  @doc("The credentail type")
+  @doc("The credential type")
   @visibility(Lifecycle.Read)
   type: CredentialType.apiKey;
 
