@@ -394,14 +394,9 @@ model ConnectorTemplateRuntimeStatefulSetConfiguration
 @added(Versions.`2025-07-01-preview`)
 model ConnectorTemplateRuntimeImageConfigurationSettings {
   /**
-   * The image of the managed configuration.
+   * The image name without any registry reference, tag or digest.
    */
-  image: string;
-
-  /**
-   * The tag of the image
-   */
-  imageTag?: string;
+  imageName: string;
 
   /**
    * The pull policy of the image
@@ -409,20 +404,90 @@ model ConnectorTemplateRuntimeImageConfigurationSettings {
   imagePullPolicy?: ConnectorsImagePullPolicy;
 
   /**
-   * The digest of the image
-   */
-  imageDigest?: string;
-
-  /**
-   * Image pull secret for the image.
-   */
-  imagePullSecrets?: ConnectorsImagePullSecret[];
-
-  /**
    * The number of replicas for the managed configuration.
    */
   replicas?: int32;
 
+  /**
+   * The registry settings for the connector image. You can omit this field if using the default docker hub repository or using a local image.
+   */
+  registrySettings?: ConnectorTemplateRegistrySettings;
+}
+/**
+ * ConnectorTemplateRegistrySettings properties
+ */
+@added(Versions.`2025-07-01-preview`)
+@discriminator("registrySettingsType")
+model ConnectorTemplateRegistrySettings {
+  registrySettingsType: ConnectorTemplateRegistrySettingsType;
+}
+
+/**
+ * ConnectorTemplateRegistrySettings properties
+ */
+@added(Versions.`2025-07-01-preview`)
+union ConnectorTemplateRegistrySettingsType {
+  string,
+
+  /**
+   * A Regisgtry Endpoint reference
+   */
+  RegistryEndpointRef,
+
+  /**
+   * A Container Registry reference
+   */
+  ContainerRegistry,
+}
+
+/**
+ * ConnectorTemplateRegistryEndpointRef properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model ConnectorTemplateRegistryEndpointRef
+  extends ConnectorTemplateRegistrySettings {
+  /**
+   * The registry endpoint reference
+   */
+  registrySettingsType: RegistryEndpointRef;
+
+  /**
+   * The name of the registry endpoint
+   */
+  registryEndpointRef: string;
+}
+
+/**
+ * ConnectorTemplateContainerRegistry properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model ConnectorTemplateContainerRegistry
+  extends ConnectorTemplateRegistrySettings {
+  /**
+   * The registry settings type
+   */
+  registrySettingsType: ContainerRegistry;
+
+  /**
+   * The registry settings for the container registry
+   */
+  containerRegistrySettings: ConnectorTemplateContainerRegistrySettings;
+}
+
+/**
+ * ConnectorTemplateContainerRegistry properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model ConnectorTemplateContainerRegistrySettings {
+  /**
+   * The container registry to use for the connector image.
+   */
+  registry: string;
+
+  /**
+   * Optional list of references to secrets in the same namespace to use for pulling the connector image.
+   */
+  imagePullSecrets?: ConnectorsImagePullSecret[];
 }
 
 /**

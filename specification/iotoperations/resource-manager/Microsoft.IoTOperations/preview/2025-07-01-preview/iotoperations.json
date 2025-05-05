@@ -5883,6 +5883,46 @@
         ]
       }
     },
+    "ConnectorTemplateContainerRegistry": {
+      "type": "object",
+      "description": "ConnectorTemplateContainerRegistry properties",
+      "properties": {
+        "containerRegistrySettings": {
+          "$ref": "#/definitions/ConnectorTemplateContainerRegistrySettings",
+          "description": "The registry settings for the container registry"
+        }
+      },
+      "required": [
+        "containerRegistrySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorTemplateRegistrySettings"
+        }
+      ],
+      "x-ms-discriminator-value": "ContainerRegistry"
+    },
+    "ConnectorTemplateContainerRegistrySettings": {
+      "type": "object",
+      "description": "ConnectorTemplateContainerRegistry properties",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "The container registry to use for the connector image."
+        },
+        "imagePullSecrets": {
+          "type": "array",
+          "description": "Optional list of references to secrets in the same namespace to use for pulling the connector image.",
+          "items": {
+            "$ref": "#/definitions/ConnectorsImagePullSecret"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "registry"
+      ]
+    },
     "ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs": {
       "type": "object",
       "description": "ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties",
@@ -6298,6 +6338,62 @@
         "version"
       ]
     },
+    "ConnectorTemplateRegistryEndpointRef": {
+      "type": "object",
+      "description": "ConnectorTemplateRegistryEndpointRef properties",
+      "properties": {
+        "registryEndpointRef": {
+          "type": "string",
+          "description": "The name of the registry endpoint"
+        }
+      },
+      "required": [
+        "registryEndpointRef"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorTemplateRegistrySettings"
+        }
+      ],
+      "x-ms-discriminator-value": "RegistryEndpointRef"
+    },
+    "ConnectorTemplateRegistrySettings": {
+      "type": "object",
+      "description": "ConnectorTemplateRegistrySettings properties",
+      "properties": {
+        "registrySettingsType": {
+          "$ref": "#/definitions/ConnectorTemplateRegistrySettingsType"
+        }
+      },
+      "discriminator": "registrySettingsType",
+      "required": [
+        "registrySettingsType"
+      ]
+    },
+    "ConnectorTemplateRegistrySettingsType": {
+      "type": "string",
+      "description": "ConnectorTemplateRegistrySettings properties",
+      "enum": [
+        "RegistryEndpointRef",
+        "ContainerRegistry"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorTemplateRegistrySettingsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RegistryEndpointRef",
+            "value": "RegistryEndpointRef",
+            "description": "A Regisgtry Endpoint reference"
+          },
+          {
+            "name": "ContainerRegistry",
+            "value": "ContainerRegistry",
+            "description": "A Container Registry reference"
+          }
+        ]
+      }
+    },
     "ConnectorTemplateResource": {
       "type": "object",
       "description": "ConnectorTemplate resource",
@@ -6406,38 +6502,26 @@
       "type": "object",
       "description": "ConnectorTemplateRuntimeImageConfiguration properties",
       "properties": {
-        "image": {
+        "imageName": {
           "type": "string",
-          "description": "The image of the managed configuration."
-        },
-        "imageTag": {
-          "type": "string",
-          "description": "The tag of the image"
+          "description": "The image name without any registry reference, tag or digest."
         },
         "imagePullPolicy": {
           "$ref": "#/definitions/ConnectorsImagePullPolicy",
           "description": "The pull policy of the image"
         },
-        "imageDigest": {
-          "type": "string",
-          "description": "The digest of the image"
-        },
-        "imagePullSecrets": {
-          "type": "array",
-          "description": "Image pull secret for the image.",
-          "items": {
-            "$ref": "#/definitions/ConnectorsImagePullSecret"
-          },
-          "x-ms-identifiers": []
-        },
         "replicas": {
           "type": "integer",
           "format": "int32",
           "description": "The number of replicas for the managed configuration."
+        },
+        "registrySettings": {
+          "$ref": "#/definitions/ConnectorTemplateRegistrySettings",
+          "description": "The registry settings for the connector image. You can omit this field if using the default docker hub repository or using a local image."
         }
       },
       "required": [
-        "image"
+        "imageName"
       ]
     },
     "ConnectorTemplateRuntimeStatefulSetConfiguration": {
