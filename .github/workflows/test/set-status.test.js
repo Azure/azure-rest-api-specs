@@ -35,9 +35,9 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        wfName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
-        statusName: "[TEST-IGNORE] Swagger Avocado",
-        labelName: "Approved-Avocado",
+        monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
+        requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
+        overridingLabel: "Approved-Avocado",
       }),
     ).resolves.toBeUndefined();
 
@@ -112,9 +112,9 @@ describe("setStatusImpl", () => {
           target_url: "https://test.com/set_status_url",
           github,
           core,
-          wfName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
-          statusName: "[TEST-IGNORE] Swagger Avocado",
-          labelName: "Approved-Avocado",
+          monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
+          requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
+          overridingLabel: "Approved-Avocado",
         }),
       ).resolves.toBeUndefined();
 

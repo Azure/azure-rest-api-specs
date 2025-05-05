@@ -87,7 +87,7 @@ export async function setStatusImpl({
   core.info(`Labels: ${overridingLabels}`);
 
   if (overridingLabels.includes(overridingLabel)) {
-    const description = `Found overriding label: '${overridingLabel}'`;
+    const description = `Found label '${overridingLabel}'`;
     core.info(description);
 
     const state = CheckConclusion.SUCCESS;
