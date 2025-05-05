@@ -451,87 +451,23 @@
       }
     },
     "MetricAlertsMetricProperties": {
-      "x-ms-discriminator-value": "Metric",
-      "required": [
-        "enabled",
-        "severity",
-        "evaluationFrequency",
-        "windowSize",
-        "criteria",
-        "scopes"
-      ],
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "the description of the metric alert that will be included in the alert email."
-        },
-        "severity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Alert severity {0, 1, 2, 3, 4}"
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "the flag that indicates whether the metric alert is enabled."
-        },
-        "scopes": {
-          "type": "array",
-          "items": {
-            "type": "string"
+        "allOf": [
+          {
+            "$ref": "#/definitions/MetricAlertPropertiesBase"
+          }
+        ],
+        "type": "object",
+        "required": ["windowSize", "criteria"],
+        "properties": {
+          "windowSize": {
+            "type": "string",
+            "description": "The period of time that is used to monitor alert activity"
           },
-          "description": "the list of resource id's that this metric alert is scoped to. You cannot change the scope of a metric rule based on logs."
-        },
-        "evaluationFrequency": {
-          "type": "string",
-          "format": "duration",
-          "description": "how often the metric alert is evaluated represented in ISO 8601 duration format."
-        },
-        "windowSize": {
-          "type": "string",
-          "format": "duration",
-          "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold."
-        },
-        "targetResourceType": {
-          "type": "string",
-          "description": "the resource type of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource."
-        },
-        "targetResourceRegion": {
-          "type": "string",
-          "description": "the region of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource."
-        },
-        "criteria": {
-          "$ref": "#/definitions/MetricAlertCriteria",
-          "description": "defines the specific alert criteria information."
-        },
-        "autoMitigate": {
-          "type": "boolean",
-          "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
-        },
-        "actions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricAlertAction"
-          },
-          "x-ms-identifiers": [
-            "actionGroupId"
-          ],
-          "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
-        },
-        "lastUpdatedTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Last time the rule was updated in ISO8601 format."
-        },
-        "isMigrated": {
-          "type": "boolean",
-          "description": "the value indicating whether this alert rule is migrated.",
-          "readOnly": true
+          "criteria": {
+            "$ref": "#/components/schemas/MetricAlertRuleCriteria"
+          }
         }
       },
-      "description": "An alert rule."
-    },
     "MetricAlertsMetricPropertiesForPatch": {
       "x-ms-discriminator-value": "Metric",
       "type": "object",
@@ -610,7 +546,7 @@
       "x-ms-discriminator-value": "Query",
       "allOf": [
           {
-          "$ref": "#/definitions/MetricAlertsPropertiesBase"
+          "$ref": "#/definitions/MetricAlertPropertiesBase"
           }
       ],
       "type": "object",
@@ -774,25 +710,9 @@
           "description": "The identity of the resource."
         },
         "properties": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/MetricAlertsMetricProperties"
-            },
-            {
-              "$ref": "#/definitions/MetricAlertsQueryProperties"
-            }
-          ],
-          "discriminator": {
-            "type": "string",
-            "enum": [
-              "Metric",
-              "Query"
-            ],
-            "x-ms-enum": {
-              "name": "kind",
-              "modelAsString": true
-            }
-          }
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MetricAlertPropertiesBase",
+          "description": "The alert rule properties of the resource."
         },
         "required": [
           "location",
@@ -821,25 +741,9 @@
           "description": "Indicates the type of metric alert"
         },
         "properties": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/MetricAlertsMetricPropertiesForPatch"
-            },
-            {
-              "$ref": "#/definitions/MetricAlertsQueryPropertiesForPatch"
-            }
-          ],
-          "discriminator": {
-            "type": "string",
-            "enum": [
-              "Metric",
-              "Query"
-            ],
-            "x-ms-enum": {
-              "name": "kind",
-              "modelAsString": true
-            }
-          }
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MetricAlertPropertiesBaseForPatch",
+          "description": "The alert rule properties of the resource for patch."
         }
       },
       "description": "The scheduled query rule resource for patch operations."
