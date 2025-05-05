@@ -36,11 +36,11 @@ namespace Microsoft.Quantum;
  */
 enum Versions {
   /**
-   * The 2023-11-13-preview API version.
+   * The 2025-01-01-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_11_13_preview: "2023-11-13-preview",
+  v2025_01_01_preview: "2025-01-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
