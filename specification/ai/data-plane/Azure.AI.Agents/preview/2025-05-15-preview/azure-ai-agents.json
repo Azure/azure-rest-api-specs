@@ -36,7 +36,7 @@
   "security": [
     {
       "OAuth2Auth": [
-        "https://cognitiveservices.azure.com/.default"
+        "https://ai.azure.com/.default"
       ]
     }
   ],
@@ -46,7 +46,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
-        "https://cognitiveservices.azure.com/.default": ""
+        "https://ai.azure.com/.default": ""
       }
     }
   },
@@ -119,27 +119,12 @@
               "type": "object",
               "description": "The response data for a requested list of items.",
               "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
                 "data": {
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
                     "$ref": "#/definitions/Agent"
                   }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
                 },
                 "last_id": {
                   "type": "string",
@@ -153,24 +138,9 @@
                 }
               },
               "required": [
-                "object",
                 "data",
-                "first_id",
-                "last_id",
                 "has_more"
               ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
             }
           }
         }
@@ -691,27 +661,12 @@
               "type": "object",
               "description": "The response data for a requested list of items.",
               "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
                 "data": {
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
                     "$ref": "#/definitions/AgentThread"
                   }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
                 },
                 "last_id": {
                   "type": "string",
@@ -725,24 +680,9 @@
                 }
               },
               "required": [
-                "object",
                 "data",
-                "first_id",
-                "last_id",
                 "has_more"
               ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
             }
           }
         }
@@ -905,9 +845,6 @@
         "description": "Gets a list of messages that exist on a thread.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
             "name": "threadId",
             "in": "path",
             "description": "Identifier of the thread.",
@@ -921,6 +858,9 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "runId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "limit",
@@ -981,27 +921,12 @@
               "type": "object",
               "description": "The response data for a requested list of items.",
               "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
                 "data": {
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
                     "$ref": "#/definitions/ThreadMessage"
                   }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
                 },
                 "last_id": {
                   "type": "string",
@@ -1015,24 +940,9 @@
                 }
               },
               "required": [
-                "object",
                 "data",
-                "first_id",
-                "last_id",
                 "has_more"
               ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
             }
           }
         }
@@ -1194,14 +1104,14 @@
         "description": "Gets a list of runs for a specified thread.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
             "name": "threadId",
             "in": "path",
             "description": "Identifier of the thread.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "limit",
@@ -1262,27 +1172,12 @@
               "type": "object",
               "description": "The response data for a requested list of items.",
               "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
                 "data": {
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
                     "$ref": "#/definitions/ThreadRun"
                   }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
                 },
                 "last_id": {
                   "type": "string",
@@ -1296,24 +1191,9 @@
                 }
               },
               "required": [
-                "object",
                 "data",
-                "first_id",
-                "last_id",
                 "has_more"
               ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
             }
           }
         }
@@ -1546,9 +1426,6 @@
         "description": "Gets a list of run steps from a thread run.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
             "name": "threadId",
             "in": "path",
             "description": "Identifier of the thread.",
@@ -1587,6 +1464,9 @@
             },
             "collectionFormat": "csv",
             "x-ms-client-name": "include"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "limit",
@@ -1647,27 +1527,12 @@
               "type": "object",
               "description": "The response data for a requested list of items.",
               "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
                 "data": {
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
                     "$ref": "#/definitions/RunStep"
                   }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
                 },
                 "last_id": {
                   "type": "string",
@@ -1681,24 +1546,9 @@
                 }
               },
               "required": [
-                "object",
                 "data",
-                "first_id",
-                "last_id",
                 "has_more"
               ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
             }
           }
         }
@@ -1960,27 +1810,12 @@
               "type": "object",
               "description": "The response data for a requested list of items.",
               "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
                 "data": {
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
                     "$ref": "#/definitions/VectorStore"
                   }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
                 },
                 "last_id": {
                   "type": "string",
@@ -1994,24 +1829,9 @@
                 }
               },
               "required": [
-                "object",
                 "data",
-                "first_id",
-                "last_id",
                 "has_more"
               ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
             }
           }
         }
@@ -2342,9 +2162,6 @@
         "description": "Returns a list of vector store files in a batch.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
             "name": "vectorStoreId",
             "in": "path",
             "description": "Identifier of the vector store.",
@@ -2456,27 +2273,12 @@
               "type": "object",
               "description": "The response data for a requested list of items.",
               "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
                 "data": {
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
                     "$ref": "#/definitions/VectorStoreFile"
                   }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
                 },
                 "last_id": {
                   "type": "string",
@@ -2490,24 +2292,9 @@
                 }
               },
               "required": [
-                "object",
                 "data",
-                "first_id",
-                "last_id",
                 "has_more"
               ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
             }
           }
         }
@@ -2518,9 +2305,6 @@
         "operationId": "VectorStoreFiles_ListVectorStoreFiles",
         "description": "Returns a list of vector store files.",
         "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
           {
             "name": "vectorStoreId",
             "in": "path",
@@ -2566,6 +2350,9 @@
                 }
               ]
             }
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "limit",
@@ -2626,27 +2413,12 @@
               "type": "object",
               "description": "The response data for a requested list of items.",
               "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
                 "data": {
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
                     "$ref": "#/definitions/VectorStoreFile"
                   }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
                 },
                 "last_id": {
                   "type": "string",
@@ -2660,24 +2432,9 @@
                 }
               },
               "required": [
-                "object",
                 "data",
-                "first_id",
-                "last_id",
                 "has_more"
               ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
             }
           }
         }

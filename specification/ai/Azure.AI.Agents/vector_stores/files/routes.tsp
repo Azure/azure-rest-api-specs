@@ -8,6 +8,7 @@ import "../../common/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core.Foundations;
 
 namespace Azure.AI.Agents {
   /**
@@ -23,21 +24,22 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
-    listVectorStoreFiles is Azure.Core.Foundations.Operation<
-      {
-        /** The ID of the vector store that the files belong to. */
-        @doc("Identifier of the vector store.")
-        @path
-        vectorStoreId: string;
+    @list
+    listVectorStoreFiles(
+      /** The ID of the vector store that the files belong to. */
+      @doc("Identifier of the vector store.")
+      @path
+      vectorStoreId: string,
 
-        /** Filter by file status. */
-        @query
-        filter?: VectorStoreFileStatusFilter;
+      /** Filter by file status. */
+      @query
+      filter?: VectorStoreFileStatusFilter,
 
-        ...OpenAIListRequestOptions;
-      },
-      OpenAIPageableListOf<VectorStoreFile>
-    >;
+      ...ApiVersionParameter,
+      ...AgentsListOptions,
+    ): {
+      ...AgentsPagedResult<VectorStoreFile>;
+    };
 
     /**
      * Create a vector store file by attaching a file to a vector store.

@@ -41,12 +41,10 @@ op createAgent is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/assistants")
-op listAgents is Azure.Core.Foundations.Operation<
-  {
-    ...OpenAIListRequestOptions;
-  },
-  OpenAIPageableListOf<Agent>
->;
+@list
+op listAgents(...ApiVersionParameter, ...AgentsListOptions): {
+  ...AgentsPagedResult<Agent>;
+};
 
 /**
  * Retrieves an existing agent.

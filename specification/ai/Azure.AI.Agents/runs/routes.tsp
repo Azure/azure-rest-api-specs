@@ -9,6 +9,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core.Foundations;
 
 namespace Azure.AI.Agents {
   /**
@@ -83,16 +84,17 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
-    listRuns is Azure.Core.Foundations.Operation<
-      {
-        @doc("Identifier of the thread.")
-        @path
-        threadId: string;
+    @list
+    listRuns(
+      @doc("Identifier of the thread.")
+      @path
+      threadId: string,
 
-        ...OpenAIListRequestOptions;
-      },
-      OpenAIPageableListOf<ThreadRun>
-    >;
+      ...ApiVersionParameter,
+      ...AgentsListOptions,
+    ): {
+      ...AgentsPagedResult<ThreadRun>;
+    };
 
     /**
      * Gets an existing run from an existing thread.

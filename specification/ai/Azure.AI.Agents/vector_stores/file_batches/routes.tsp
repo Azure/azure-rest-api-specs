@@ -8,6 +8,7 @@ import "../../common/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core.Foundations;
 
 namespace Azure.AI.Agents {
   /**
@@ -105,24 +106,24 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     @route("/{batchId}/files")
-    listVectorStoreFileBatchFiles is Azure.Core.Foundations.Operation<
-      {
-        /** The ID of the vector store that the file batch belongs to. */
-        @doc("Identifier of the vector store.")
-        @path
-        vectorStoreId: string;
+    @list
+    listVectorStoreFileBatchFiles(
+      /** The ID of the vector store that the file batch belongs to. */
+      @doc("Identifier of the vector store.")
+      @path
+      vectorStoreId: string,
 
-        /** The ID of the file batch that the files belong to. */
-        @doc("Identifier of the file batch.")
-        @path
-        batchId: string;
+      /** The ID of the file batch that the files belong to. */
+      @doc("Identifier of the file batch.")
+      @path
+      batchId: string,
 
-        /** Filter by file status. */
-        @query filter?: VectorStoreFileStatusFilter;
+      /** Filter by file status. */
+      @query filter?: VectorStoreFileStatusFilter,
 
-        ...OpenAIListRequestOptions;
-      },
-      OpenAIPageableListOf<VectorStoreFile>
-    >;
+      ...AgentsListOptions,
+    ): {
+      ...AgentsPagedResult<VectorStoreFile>;
+    };
   }
 }
