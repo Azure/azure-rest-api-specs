@@ -143,9 +143,9 @@ extends:
               ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
                 TokenToUseForAuth: $(azuresdk-github-pat)
 
-          - task: NodeTool@0
+          - task: UseNode@1
             inputs:
-              versionSpec: $(NodeVersion)
+              version: '22.x'
             displayName: 'Install Node.js'
 
           - task: UsePythonVersion@0
