@@ -20,3 +20,14 @@ export async function filterAsync(array, asyncPredicate) {
 export async function mapAsync(array, asyncMapper) {
   return Promise.all(array.map(asyncMapper));
 }
+
+/**
+ * @template T,U
+ * @param {T[]} array
+ * @param {(item: T, index: number, array: T[]) => Promise<U[]>} asyncMapper
+ * @returns {Promise<U[]>}
+ */
+export async function flatMapAsync(array, asyncMapper) {
+  const mapped = await mapAsync(array, asyncMapper);
+  return mapped.flat();
+}
