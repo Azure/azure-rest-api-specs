@@ -71,7 +71,7 @@ model ConnectorTemplateProperties {
   /**
    * Mqtt connection configuration settings
    */
-  mqttConnectionConfiguration: ConnectorsMqttConnectionConfiguration;
+  mqttConnectionConfiguration?: ConnectorsMqttConnectionConfiguration;
 
   /**
    * The version of the Connector template.
