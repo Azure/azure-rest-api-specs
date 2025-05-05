@@ -20,13 +20,13 @@ namespace Azure.AI.Projects;
 @removed(Versions.v_latest)
 model EvaluationResult {
   @doc("Type of Evaluation result")
-  ResultType?: ResultType;
+  resultType?: ResultType;
 
   @doc("Aggregated metrics")
-  Metrics?: Record<float64>;
+  metrics?: Record<float64>;
 
   @doc("Blob URI")
-  BlobUri?: string;
+  blobUri?: string;
 
   ...AssetBase;
 }
