@@ -154,6 +154,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a query based alert rule": {
+            "$ref": "./examples/getMetricAlertQuery.json"
+          },
           "Get an alert rule for single resource": {
             "$ref": "./examples/getMetricAlertSingleResource.json"
           },
@@ -221,6 +224,9 @@
           }
         },
         "x-ms-examples": {
+          "Create or update a query based alert rule": {
+            "$ref": "./examples/createOrUpdateMetricAlertQuery.json"
+          },
           "Create or update an alert rule for Single Resource": {
             "$ref": "./examples/createOrUpdateMetricAlertSingleResource.json"
           },
@@ -445,6 +451,7 @@
       }
     },
     "MetricAlertsMetricProperties": {
+      "x-ms-discriminator-value": "Metric",
       "required": [
         "enabled",
         "severity",
@@ -599,6 +606,7 @@
       "description": "An alert rule properties for patch."
     },
     "MetricAlertsQueryProperties": {
+      "x-ms-discriminator-value": "Query",
       "allOf": [
           {
           "$ref": "#/definitions/MetricAlertsPropertiesBase"
@@ -622,7 +630,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Type of the alert rule: 'Metric' or 'Query'",
+          "description": "Type of the alert rule: 'Metric' or 'Query'. The default is Metric.",
           "enum": ["Metric", "Query"]
         },
         "description": {
@@ -724,10 +732,14 @@
             }
           ],
           "discriminator": {
-            "propertyName": "kind",
-            "mapping": {
-              "Metric": "#/definitions/MetricAlertsMetricProperties",
-              "Query": "#/definitions/MetricAlertsQueryProperties"
+            "type": "string",
+            "enum": [
+              "Metric",
+              "Query"
+            ],
+            "x-ms-enum": {
+              "name": "kind",
+              "modelAsString": true
             }
           }
         },
