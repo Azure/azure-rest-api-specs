@@ -1,12 +1,12 @@
 parameters:
   - name: NodeVersion
     type: string
-    default: '22.x'
+    default: $(NodeVersion)
 
 steps:
   - template: /eng/pipelines/templates/steps/use-node-version.yml
     parameters:
-      NodeVersion: '22.x'
+      NodeVersion: ${{ parameters.NodeVersion }}
 
   - script: npm ci
     displayName: npm ci
