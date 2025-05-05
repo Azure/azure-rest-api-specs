@@ -189,7 +189,9 @@ export async function setStatusImpl({
       target_url,
     });
   } else {
-    core.info(`No workflow runs found for '${monitoredWorkflowName}'. Setting status to ${CommitStatusState.PENDING} for required status: ${requiredStatusName}.`);
+    core.info(
+      `No workflow runs found for '${monitoredWorkflowName}'. Setting status to ${CommitStatusState.PENDING} for required status: ${requiredStatusName}.`,
+    );
     // Run was not found (not started), or not completed
     await github.rest.repos.createCommitStatus({
       owner,
