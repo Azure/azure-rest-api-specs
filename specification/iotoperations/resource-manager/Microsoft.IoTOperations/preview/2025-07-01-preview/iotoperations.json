@@ -6166,6 +6166,23 @@
           "$ref": "#/definitions/ConnectorTemplateAllocation",
           "description": "Allocation settings for the managed configuration."
         },
+        "persistentVolumeClaims": {
+          "type": "array",
+          "description": "The persistent volume claims for the managed configuration.",
+          "items": {
+            "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaim"
+          },
+          "x-ms-identifiers": [
+            "claimName"
+          ]
+        },
+        "additionalConfiguration": {
+          "type": "object",
+          "description": "Additional configuration for the image of the managed configuration.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "persistentVolumeClaimTemplates": {
           "type": "array",
           "description": "The persistent volume claim templates for the managed configuration.\nSee https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json",
@@ -6174,6 +6191,16 @@
             "additionalProperties": {}
           },
           "x-ms-identifiers": []
+        },
+        "secrets": {
+          "type": "array",
+          "description": "Connector secrets that will be mounted onto all connector instances.",
+          "items": {
+            "$ref": "#/definitions/ConnectorTemplateSecret"
+          },
+          "x-ms-identifiers": [
+            "secretAlias"
+          ]
         }
       },
       "discriminator": "managedConfigurationType",
@@ -6268,7 +6295,6 @@
       "required": [
         "runtimeConfiguration",
         "deviceInboundEndpointTypes",
-        "mqttConnectionConfiguration",
         "version"
       ]
     },
@@ -6380,13 +6406,6 @@
       "type": "object",
       "description": "ConnectorTemplateRuntimeImageConfiguration properties",
       "properties": {
-        "additionalConfiguration": {
-          "type": "object",
-          "description": "Additional configuration for the image of the managed configuration.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "image": {
           "type": "string",
           "description": "The image of the managed configuration."
@@ -6415,16 +6434,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of replicas for the managed configuration."
-        },
-        "persistentVolumeClaims": {
-          "type": "array",
-          "description": "The persistent volume claims for the managed configuration.",
-          "items": {
-            "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaim"
-          },
-          "x-ms-identifiers": [
-            "claimName"
-          ]
         }
       },
       "required": [
@@ -6449,6 +6458,29 @@
         }
       ],
       "x-ms-discriminator-value": "StatefulSetConfiguration"
+    },
+    "ConnectorTemplateSecret": {
+      "type": "object",
+      "description": "ConnectorTemplateSecret properties",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "description": "The key in the secret to be mounted"
+        },
+        "secretAlias": {
+          "type": "string",
+          "description": "The application-defined alias for the secret"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the secret to be mounted"
+        }
+      },
+      "required": [
+        "secretKey",
+        "secretAlias",
+        "name"
+      ]
     },
     "ConnectorsImagePullPolicy": {
       "type": "string",
@@ -8763,7 +8795,6 @@
       },
       "required": [
         "discoverableDeviceEndpointTypes",
-        "mqttConnectionConfiguration",
         "imageConfiguration",
         "schedule"
       ]

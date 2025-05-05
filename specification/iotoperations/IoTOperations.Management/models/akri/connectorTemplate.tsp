@@ -258,12 +258,51 @@ model ConnectorTemplateManagedConfigurationSettings {
   allocation?: ConnectorTemplateAllocation;
 
   /**
+   * The persistent volume claims for the managed configuration.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["claimName"])
+  persistentVolumeClaims?: ConnectorTemplatePersistentVolumeClaim[];
+
+  /**
+   * Additional configuration for the image of the managed configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "CRD type is modeled as record of strings"
+  additionalConfiguration?: Record<string>;
+  
+  /**
    * The persistent volume claim templates for the managed configuration.
    * See https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kuberntes resource type"
   @extension("x-ms-identifiers", #[])
   persistentVolumeClaimTemplates?: Record<unknown>[];
+  
+  /**
+   * Connector secrets that will be mounted onto all connector instances.
+   */
+  @extension("x-ms-identifiers", #["secretAlias"])
+  secrets?: ConnectorTemplateSecret[];
+}
+
+/**
+ * ConnectorTemplateSecret properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model ConnectorTemplateSecret {
+  /**
+   * The key in the secret to be mounted
+   */
+  secretKey: string;
+
+  /**
+   * The application-defined alias for the secret
+   */
+  secretAlias: string;
+
+  /**
+   * The name of the secret to be mounted
+   */
+  name: string;
 }
 
 /**
@@ -355,12 +394,6 @@ model ConnectorTemplateRuntimeStatefulSetConfiguration
 @added(Versions.`2025-07-01-preview`)
 model ConnectorTemplateRuntimeImageConfigurationSettings {
   /**
-   * Additional configuration for the image of the managed configuration.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "CRD type is modeled as record of strings"
-  additionalConfiguration?: Record<string>;
-
-  /**
    * The image of the managed configuration.
    */
   image: string;
@@ -390,11 +423,6 @@ model ConnectorTemplateRuntimeImageConfigurationSettings {
    */
   replicas?: int32;
 
-  /**
-   * The persistent volume claims for the managed configuration.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["claimName"])
-  persistentVolumeClaims?: ConnectorTemplatePersistentVolumeClaim[];
 }
 
 /**
