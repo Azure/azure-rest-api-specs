@@ -31,7 +31,6 @@ using Microsoft.Chaos;
   "ExecutionDetails",
   "csharp"
 );
-@@scope(Microsoft.Chaos.OperationStatuses.get, "!csharp");
 
 // typescript
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "javascript");

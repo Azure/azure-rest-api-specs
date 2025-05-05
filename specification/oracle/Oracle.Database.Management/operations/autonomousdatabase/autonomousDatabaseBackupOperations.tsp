@@ -1,4 +1,4 @@
-import "../../models/autonomousdatabase/autonomousDatabaseBackup.tsp";
+import "../../../models/autonomousdatabase/autonomousDatabaseBackup.tsp";
 import "../commons.tsp";
 
 using Azure.ResourceManager;
@@ -18,9 +18,12 @@ interface AutonomousDatabaseBackups
     "./examples/autonomousDatabaseBackup_patch.json",
     "Patch Autonomous Database Backup."
   )
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     AutonomousDatabaseBackup,
-    AutonomousDatabaseBackupProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AutonomousDatabaseBackup,
+      AutonomousDatabaseBackupProperties
+    >
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
@@ -28,7 +31,7 @@ interface AutonomousDatabaseBackups
     "./examples/autonomousDatabaseBackup_listByParent.json",
     "List Autonomous Database Backups by Autonomous Database."
   )
-  listByParent is ArmResourceListByParent<AutonomousDatabaseBackup>;
+  listByAutonomousDatabase is ArmResourceListByParent<AutonomousDatabaseBackup>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"

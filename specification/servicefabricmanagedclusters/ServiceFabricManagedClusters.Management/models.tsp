@@ -412,16 +412,6 @@ model NodeTypeFaultSimulation {
 }
 
 /**
- * Fault Simulation Request for Start action.
- */
-model FaultSimulationContentWrapper {
-  /**
-   * Parameters for Fault Simulation start action.
-   */
-  parameters: FaultSimulationContent;
-}
-
-/**
  * Parameters for Fault Simulation action.
  */
 @discriminator("faultKind")

@@ -3,7 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "./custom.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -101,9 +100,13 @@ interface VirtualMachineInstances {
   list is ArmResourceListByParent<VirtualMachineInstance>;
   /** The operation to power off (stop) a virtual machine instance. */
   @summary("Implements the operation to stop a virtual machine.")
-  stop is CustomizedArmResourceActionNoResponseContentAsync<
+  stop is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    StopVirtualMachineOptions
+    {
+      /** The content of the action request */
+      @body
+      body?: StopVirtualMachineOptions;
+    }
   >;
   /** The operation to start a virtual machine instance. */
   @summary("Implements the operation to start a virtual machine.")

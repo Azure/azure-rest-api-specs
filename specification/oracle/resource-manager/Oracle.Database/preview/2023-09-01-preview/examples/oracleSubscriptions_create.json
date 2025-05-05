@@ -1,0 +1,56 @@
+{
+  "operationId": "OracleSubscriptions_createOrUpdate",
+  "title": "OracleSubscriptions_createOrUpdate",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "properties": {},
+      "plan": {
+        "name": "plan1",
+        "publisher": "publisher1",
+        "product": "product1",
+        "promotionCode": "none",
+        "version": "alpha"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Oracle.Database/oracleSubscriptions/default",
+        "type": "Oracle.Database/oracleSubscriptions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "saasSubscriptionId": "saas1",
+          "cloudAccountId": "ocid1..aaaaaa",
+          "cloudAccountState": "Pending"
+        },
+        "plan": {
+          "name": "plan1",
+          "publisher": "publisher1",
+          "product": "product1",
+          "promotionCode": "none",
+          "version": "alpha"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Retry-After": 100000000
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Oracle.Database/oracleSubscriptions/default",
+        "type": "Oracle.Database/oracleSubscriptions",
+        "properties": {},
+        "plan": {
+          "name": "plan1",
+          "publisher": "publisher1",
+          "product": "product1",
+          "promotionCode": "none",
+          "version": "alpha"
+        }
+      }
+    }
+  }
+}

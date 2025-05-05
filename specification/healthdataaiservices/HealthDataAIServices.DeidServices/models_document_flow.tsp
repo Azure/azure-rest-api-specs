@@ -1,7 +1,9 @@
+import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 
@@ -17,11 +19,9 @@ model DeidentificationJob {
   @maxLength(36)
   @minLength(3) // Must be 3 to match regex
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
-  @clientName("jobName", "csharp,java")
   name: string;
 
   @doc("Operation to perform on the input documents.")
-  @clientName("operationType", "csharp,java")
   operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
 
   @doc("Storage location to perform the operation on.")
@@ -70,19 +70,19 @@ model DeidentificationJob {
 @doc("Summary metrics of a job.")
 model DeidentificationJobSummary {
   @doc("Number of documents that have completed.")
-  @clientName("successfulCount", "csharp,java")
+  @clientName("successfulCount", "java")
   successful: int32;
 
   @doc("Number of documents that have failed.")
-  @clientName("failedCount", "csharp,java")
+  @clientName("failedCount", "java")
   failed: int32;
 
   @doc("Number of documents that have been canceled.")
-  @clientName("canceledCount", "csharp,java")
+  @clientName("canceledCount", "java")
   canceled: int32;
 
   @doc("Number of documents total.")
-  @clientName("totalCount", "csharp,java")
+  @clientName("totalCount", "java")
   total: int32;
 
   @doc("Number of bytes processed.")
@@ -100,11 +100,9 @@ model DeidentificationDocumentDetails {
   id: string;
 
   @doc("Location for the input.")
-  @clientName("inputLocation", "csharp,java")
   input: DeidentificationDocumentLocation;
 
   @doc("Location for the output.")
-  @clientName("outputLocation", "csharp,java")
   output?: DeidentificationDocumentLocation;
 
   @doc("Status of the document.")

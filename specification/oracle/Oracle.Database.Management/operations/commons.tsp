@@ -14,10 +14,16 @@ interface OracleSubscriptionLevelResource<
   TProperties extends TypeSpec.Reflection.Model
 >
   extends ResourceListBySubscription<T>,
-    ResourceCreateAsync<T>,
     ResourceRead<T>,
     ResourceUpdateAsync<T, TProperties>,
-    ResourceDeleteWithoutOkAsync<T> {}
+    ResourceDeleteWithoutOkAsync<T> {
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "REMOVE THIS SUPPRESSION AT THE NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    T,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+}
 
 @armResourceOperations(T)
 interface OracleTrackedResource<
@@ -44,16 +50,19 @@ interface OracleLocationBasedResource<T extends Foundations.Resource>
 interface OracleChildResource<
   T extends Foundations.Resource,
   TProperties extends TypeSpec.Reflection.Model
->
-  extends ResourceCreateAsync<T>,
-    ResourceRead<T>,
-    ResourceDeleteWithoutOkAsync<T> {}
+> extends ResourceRead<T>, ResourceDeleteWithoutOkAsync<T> {
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "REMOVE THIS SUPPRESSION AT THE NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    T,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+}
 
 @armResourceOperations
 interface ListActions {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("Generic Async Get operation")
-  @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "location" }

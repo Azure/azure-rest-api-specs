@@ -5,6 +5,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 @armResourceOperations
 interface VirtualMachines {
@@ -17,18 +18,20 @@ interface VirtualMachines {
 
   get is ArmResourceRead<VirtualMachine>;
 
+  // restrictMovement should be a ArmResourceActionNoContentAsync, but does not respond with a 204.
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("Enable or disable DRS-driven VM movement restriction")
-  restrictMovement is ArmResourceActionAsyncBase<
-    VirtualMachine,
-    VirtualMachineRestrictMovement,
-    ArmAcceptedLroResponse,
-    Foundations.BaseParameters<VirtualMachine>
-  >;
-}
+  @armResourceAction(Location)
+  @post
+  @extension("x-ms-long-running-operation", true)
+  restrictMovement(
+    ...ResourceInstanceParameters<VirtualMachine>,
 
-@@clientName(VirtualMachines.restrictMovement::parameters.body,
-  "restrictMovement"
-);
+    @bodyRoot
+    @doc("The body type of the operation request.")
+    restrictMovement: VirtualMachineRestrictMovement,
+  ): ArmAcceptedLroResponse | ErrorResponse;
+}
 
 @doc("Virtual Machine Restrict Movement state")
 union VirtualMachineRestrictMovementState {
@@ -68,7 +71,7 @@ model VirtualMachineProperties {
   @visibility(Lifecycle.Read)
   displayName?: string;
 
-  @doc("vCenter managed object reference ID of the virtual machine")
+  @doc("Virtual machine managed object reference id")
   @visibility(Lifecycle.Read)
   moRefId?: string;
 

@@ -5,13 +5,13 @@
     "api-version": "2025-02-01-preview",
     "attributeBasedVMSizeRecommenderInput": {
       "regularPriorityProfile": {
-        "targetCapacity": 100,
+        "targetCapacity": 1,
         "capacityUnitType": "VMInstanceCount"
       },
       "spotPriorityProfile": {
         "targetCapacity": 1,
         "capacityUnitType": "VMInstanceCount",
-        "maxPricePerVM": 0.2
+        "maxPricePerVM": 0.200
       },
       "recommendationProperties": {
         "restrictionsFilter": "QuotaAndOfferRestrictions"
@@ -20,21 +20,18 @@
         "vmAttributes": {
           "vCpuCount": {
             "Min": 0,
-            "Max": 32
+            "Max": 0
           },
-          "memoryInGiB": {
+          "memoryInMiB": {
             "Min": 0,
-            "Max": 160
+            "Max": 0
           },
           "vmCategories": [
             "General Purpose"
           ],
           "architectureTypes": [
-            "x64",
-            "Arm64"
-          ],
-          "osTypes": [
-            "Linux"
+            "x86",
+            "arm64"
           ],
           "cpuManufacturers": [
             "Intel",
@@ -42,13 +39,13 @@
           ],
           "localStorageSupport": "included",
           "ultraSSDSupport": "included",
-          "localStorageDiskTypes": [
+          "localStorageTypes": [
             "SSD",
             "HDD"
           ],
-          "localStorageInGiB": {
+          "localStorageInMiB": {
             "Min": 0,
-            "Max": 100
+            "Max": 0
           },
           "dataDiskCount": {
             "Min": 0,
@@ -61,25 +58,39 @@
           ],
           "networkInterfaceCount": {
             "Min": 0,
-            "Max": 40
+            "Max": 4
           },
           "networkBandwidthInMbps": {
             "Min": 0,
-            "Max": 10000
+            "Max": 0
           },
           "confidentialVMSupport": "included",
           "burstableSupport": "included",
           "acceleratorSupport": "included",
+          "acceleratorTypes": [
+            "FPGA",
+            "GPU"
+          ],
+          "acceleratorManufacturers": [
+            "Intel",
+            "AMD",
+            "NVidia"
+          ],
+          "acceleratorCount": {
+            "Min": 0,
+            "Max": 0
+          },
           "acceleratedNetworkingSupport": "included",
           "rdmaSupport": "included",
           "rdmaNetworkInterfaceCount": {
             "Min": 0,
-            "Max": 10
+            "Max": 0
           },
-          "allowedVMSizes": [
-            "Standard_D2lds_v5",
-            "Standard_D2as_v4"
+          "osType": [
+            "Windows",
+            "Linux"
           ],
+          "allowedVMSizes": [],
           "excludeVMSizes": []
         }
       }
@@ -91,55 +102,44 @@
         "recommendedVMSizes": {
           "regularVMSizes": [
             {
-              "name": "Standard_D2lds_v5",
-              "size": "D2lds_v5",
-              "family": "D",
+              "name": "Standard_D4ds_v5",
+              "size": "D4ds_v5",
+              "family": "standardDDSv5Family",
               "attributes": {
-                "vCpu": 2,
-                "memoryInGiB": 4,
-                "cpuArchitecture": "x64",
-                "cpuManufacturer": [
-                  "Intel"
-                ],
-                "networkBandwidthInMbps": 2000,
-                "localStorageSupport": true,
+                "vCPUs": 4,
+                "memoryGB": 16,
+                "cpuArchitecture": "x86",
+                "cpuManufacturer": "Intel",
+                "networkBandwidthInMbps": "12500",
+                "localStorageSupport": "Included",
                 "localStorageType": "SSD",
-                "localStorageInGiB": 75,
+                "localStorageInGb": 150,
                 "dataDiskCount": 4,
-                "networkInterfaceCount": 2
+                "networkInterfaceCount": 4
               },
               "restrictions": {
-                "offerRestrictions": null,
-                "quotaRestrictions": [
+                "offerRestrictions": [
                   {
-                    "type": "VMFamilyVCpu"
+                    "type": "Location",
+                    "values": [
+                      "westus"
+                    ],
+                    "restrictionInfo": {
+                      "location": [
+                        "westus"
+                      ],
+                      "zones": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
+                    },
+                    "reasonCode": "NotAvailableForSubscription"
                   }
-                ]
-              }
-            },
-            {
-              "name": "Standard_D2as_v4",
-              "size": "D2as_v4",
-              "family": "D",
-              "attributes": {
-                "vCpu": 2,
-                "memoryInGiB": 8,
-                "cpuArchitecture": "x64",
-                "cpuManufacturer": [
-                  "AMD"
                 ],
-                "networkBandwidthInMbps": 2000,
-                "localStorageSupport": true,
-                "localStorageType": "SSD",
-                "localStorageInGiB": 16,
-                "dataDiskCount": 4,
-                "networkInterfaceCount": 2
-              },
-              "restrictions": {
-                "offerRestrictions": null,
                 "quotaRestrictions": [
                   {
-                    "type": "VMFamilyVCpu"
+                    "type": "RegionalVCpu"
                   }
                 ]
               }
@@ -147,49 +147,46 @@
           ],
           "spotVMSizes": [
             {
-              "name": "Standard_D2lds_v5",
-              "size": "D2lds_v5",
-              "family": "D",
+              "name": "Standard_D4ds_v6",
+              "size": "D4ds_v5",
+              "family": "standardDDSv6Family",
               "attributes": {
-                "vCpu": 2,
-                "memoryInGiB": 4,
-                "cpuArchitecture": "x64",
-                "cpuManufacturer": [
-                  "Intel"
-                ],
-                "networkBandwidthInMbps": 2000,
-                "localStorageSupport": true,
+                "vCPUs": 4,
+                "memoryGB": 16,
+                "cpuArchitecture": "x86",
+                "cpuManufacturer": "Intel",
+                "networkBandwidthInMbps": "12500",
+                "localStorageSupport": "Included",
                 "localStorageType": "SSD",
-                "localStorageInGiB": 75,
+                "localStorageInGb": 150,
                 "dataDiskCount": 4,
-                "networkInterfaceCount": 2
+                "networkInterfaceCount": 4
               },
               "restrictions": {
-                "offerRestrictions": null,
-                "quotaRestrictions": null
-              }
-            },
-            {
-              "name": "Standard_D2as_v4",
-              "size": "D2as_v4",
-              "family": "D",
-              "attributes": {
-                "vCpu": 2,
-                "memoryInGiB": 8,
-                "cpuArchitecture": "x64",
-                "cpuManufacturer": [
-                  "AMD"
+                "offerRestrictions": [
+                  {
+                    "type": "Location",
+                    "values": [
+                      "westus"
+                    ],
+                    "restrictionInfo": {
+                      "location": [
+                        "westus"
+                      ],
+                      "zones": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
+                    },
+                    "reasonCode": "NotAvailableForSubscription"
+                  }
                 ],
-                "networkBandwidthInMbps": 2000,
-                "localStorageSupport": true,
-                "localStorageType": "SSD",
-                "localStorageInGiB": 16,
-                "dataDiskCount": 4,
-                "networkInterfaceCount": 2
-              },
-              "restrictions": {
-                "offerRestrictions": null,
-                "quotaRestrictions": null
+                "quotaRestrictions": [
+                  {
+                    "type": "RegionalVCpu"
+                  }
+                ]
               }
             }
           ]

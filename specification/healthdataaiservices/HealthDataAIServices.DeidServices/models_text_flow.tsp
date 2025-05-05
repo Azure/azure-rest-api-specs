@@ -1,6 +1,11 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "./models.tsp";
 import "./models_tagger.tsp";
 
-using Azure.ClientGenerator.Core;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
@@ -12,7 +17,6 @@ model DeidentificationContent {
   inputText: string;
 
   @doc("Operation to perform on the input documents.")
-  @clientName("operationType", "csharp,java")
   operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
 
   @doc("Customization parameters to override default service behaviors.")

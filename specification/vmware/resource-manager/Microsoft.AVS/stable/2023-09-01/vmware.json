@@ -464,7 +464,7 @@
           {
             "name": "privateCloudUpdate",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "The private cloud properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PrivateCloudUpdate"
@@ -473,13 +473,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateCloud"
             }
           },
           "201": {
-            "description": "Resource 'PrivateCloud' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/PrivateCloud"
             },
@@ -1580,7 +1580,7 @@
           {
             "name": "clusterUpdate",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "The cluster properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClusterUpdate"
@@ -1589,13 +1589,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
           },
           "201": {
-            "description": "Resource 'Cluster' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             },
@@ -2295,7 +2295,7 @@
           {
             "name": "placementPolicyUpdate",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "The placement policy properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PlacementPolicyUpdate"
@@ -2310,7 +2310,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/PlacementPolicy"
             },
@@ -2588,7 +2588,7 @@
           {
             "name": "restrictMovement",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The body type of the operation request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VirtualMachineRestrictMovement"
@@ -8085,7 +8085,7 @@
         },
         "domain": {
           "type": "string",
-          "description": "The domain's DNS name"
+          "description": "The domain's dns name"
         },
         "baseUserDN": {
           "type": "string",
@@ -9812,7 +9812,7 @@
         },
         "moRefId": {
           "type": "string",
-          "description": "vCenter managed object reference ID of the virtual machine",
+          "description": "Virtual machine managed object reference id",
           "readOnly": true
         },
         "folderPath": {

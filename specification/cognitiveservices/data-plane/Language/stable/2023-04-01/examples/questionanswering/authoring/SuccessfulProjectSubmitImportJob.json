@@ -1,47 +1,12 @@
 {
   "parameters": {
-    "Content-Type": "application/json",
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
     "api-version": "2023-04-01",
+    "projectName": "proj1",
     "body": {
       "assets": {
-        "qnas": [
-          {
-            "answer": "ans1",
-            "dialog": {
-              "isContextOnly": false,
-              "prompts": [
-                {
-                  "displayOrder": 1,
-                  "displayText": "prompt 1.1",
-                  "qnaId": 2
-                }
-              ]
-            },
-            "id": 1,
-            "lastUpdatedDateTime": "2021-05-01T17:21:14Z",
-            "metadata": {
-              "k1": "v1",
-              "k2": "v2"
-            },
-            "questions": [
-              "question 1.1",
-              "question 1.2"
-            ],
-            "source": "source1"
-          },
-          {
-            "answer": "ans2",
-            "id": 2,
-            "lastUpdatedDateTime": "2021-05-01T17:21:14Z",
-            "questions": [
-              "question 2.1",
-              "question 2.2"
-            ],
-            "source": "source2"
-          }
-        ],
         "synonyms": [
           {
             "alterations": [
@@ -57,10 +22,45 @@
               "united states of america"
             ]
           }
+        ],
+        "qnas": [
+          {
+            "lastUpdatedDateTime": "2021-05-01T17:21:14Z",
+            "id": 1,
+            "answer": "ans1",
+            "source": "source1",
+            "questions": [
+              "question 1.1",
+              "question 1.2"
+            ],
+            "metadata": {
+              "k1": "v1",
+              "k2": "v2"
+            },
+            "dialog": {
+              "isContextOnly": false,
+              "prompts": [
+                {
+                  "displayOrder": 1,
+                  "qnaId": 2,
+                  "displayText": "prompt 1.1"
+                }
+              ]
+            }
+          },
+          {
+            "lastUpdatedDateTime": "2021-05-01T17:21:14Z",
+            "id": 2,
+            "answer": "ans2",
+            "source": "source2",
+            "questions": [
+              "question 2.1",
+              "question 2.2"
+            ]
+          }
         ]
       }
-    },
-    "projectName": "proj1"
+    }
   },
   "responses": {
     "202": {
@@ -69,7 +69,5 @@
         "Operation-Location": "https://<resource-endpoint>/language/authoring/query-knowledgebases/projects/proj1/import/jobs/job1?api-version=2023-04-01"
       }
     }
-  },
-  "operationId": "QuestionAnsweringProjects_Import",
-  "title": "Successful query"
+  }
 }

@@ -1,4 +1,9 @@
-using Azure.ClientGenerator.Core;
+import "@typespec/http";
+import "@typespec/rest";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
@@ -89,11 +94,9 @@ union PhiCategory {
   Hospital: "Hospital",
 
   @doc("Id Number, eg. passport number.")
-  @clientName("IdNum", "java")
   IDNum: "IDNum",
 
   @doc("IP Address.")
-  @clientName("IpAddress", "java")
   IPAddress: "IPAddress",
 
   @doc("License, eg. Driver's license or medical license.")

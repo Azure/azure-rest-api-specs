@@ -12,19 +12,6 @@
   "schemes": [
     "https"
   ],
-  "x-ms-parameterized-host": {
-    "hostTemplate": "https://{resource}.services.ai.azure.com/api/models",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "name": "resource",
-        "in": "path",
-        "description": "The Azure AI Services resource name, for example 'my-resource'",
-        "required": true,
-        "type": "string"
-      }
-    ]
-  },
   "produces": [
     "application/json"
   ],
@@ -37,7 +24,7 @@
     },
     {
       "OAuth2Auth": [
-        "https://cognitiveservices.azure.com/.default"
+        "https://ml.azure.com/.default"
       ]
     }
   ],
@@ -52,7 +39,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
-        "https://cognitiveservices.azure.com/.default": ""
+        "https://ml.azure.com/.default": ""
       }
     }
   },
@@ -310,7 +297,7 @@
     "/info": {
       "get": {
         "operationId": "GetModelInfo",
-        "description": "Returns information about the AI model deployed.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API, Managed Compute, or Model .\ninference endpoint. Azure OpenAI endpoints don't support i.",
+        "description": "Returns information about the AI model.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API or Managed Compute endpoint.\nIt will not work for GitHub Models endpoint or Azure OpenAI endpoint.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -421,7 +408,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -445,13 +432,11 @@
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
           "description": "The reason that this chat completions choice completed its generated.",
-          "x-nullable": true,
-          "readOnly": true
+          "x-nullable": true
         },
         "message": {
           "$ref": "#/definitions/ChatResponseMessage",
-          "description": "The chat message for a given chat completions prompt.",
-          "readOnly": true
+          "description": "The chat message for a given chat completions prompt."
         }
       },
       "required": [
@@ -481,13 +466,11 @@
         "created": {
           "type": "integer",
           "format": "unixtime",
-          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.",
-          "readOnly": true
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
         "model": {
           "type": "string",
-          "description": "The model used for the chat completion.",
-          "readOnly": true
+          "description": "The model used for the chat completion."
         },
         "choices": {
           "type": "array",
@@ -496,13 +479,11 @@
           "items": {
             "$ref": "#/definitions/ChatChoice"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
-          "description": "  Usage information for tokens processed and generated as part of this completions operation.",
-          "readOnly": true
+          "description": "  Usage information for tokens processed and generated as part of this completions operation."
         }
       },
       "required": [
@@ -520,30 +501,25 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "  Unique identifier for the audio response. This value can be used in chat history messages instead of passing \n  the full audio object.",
-          "readOnly": true
+          "description": "  Unique identifier for the audio response. This value can be used in chat history messages instead of passing \n  the full audio object."
         },
         "expires_at": {
           "type": "integer",
           "format": "unixtime",
           "description": "The Unix timestamp (in seconds) at which the audio piece expires and can't be any longer referenced by its ID in \nmulti-turn conversations.",
-          "readOnly": true,
           "x-ms-client-name": "expiresAt"
         },
         "data": {
           "type": "string",
-          "description": "Base64 encoded audio data",
-          "readOnly": true
+          "description": "Base64 encoded audio data"
         },
         "format": {
           "$ref": "#/definitions/AudioContentFormat",
-          "description": "The format of the audio content. If format is not provided, it will match the format used in the\ninput audio request.",
-          "readOnly": true
+          "description": "The format of the audio content. If format is not provided, it will match the format used in the\ninput audio request."
         },
         "transcript": {
           "type": "string",
-          "description": "The transcript of the audio file.",
-          "readOnly": true
+          "description": "The transcript of the audio file."
         }
       },
       "required": [
@@ -1172,14 +1148,12 @@
       "properties": {
         "role": {
           "$ref": "#/definitions/ChatRole",
-          "description": "The chat role associated with the message.",
-          "readOnly": true
+          "description": "The chat role associated with the message."
         },
         "content": {
           "type": "string",
           "description": "The content of the message.",
-          "x-nullable": true,
-          "readOnly": true
+          "x-nullable": true
         },
         "tool_calls": {
           "type": "array",
@@ -1187,13 +1161,11 @@
           "items": {
             "$ref": "#/definitions/ChatCompletionsToolCall"
           },
-          "readOnly": true,
           "x-ms-client-name": "toolCalls"
         },
         "audio": {
           "$ref": "#/definitions/ChatCompletionsAudio",
-          "description": "  The audio generated by the model as a response to the messages if the model is configured to generate audio.",
-          "readOnly": true
+          "description": "  The audio generated by the model as a response to the messages if the model is configured to generate audio."
         }
       },
       "required": [
@@ -1286,30 +1258,25 @@
         "completion_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of tokens generated across all completions emissions.",
-          "readOnly": true
+          "description": "The number of tokens generated across all completions emissions."
         },
         "prompt_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of tokens in the provided prompts for the completions request.",
-          "readOnly": true
+          "description": "The number of tokens in the provided prompts for the completions request."
         },
         "total_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The total number of tokens processed for the completions request and response.",
-          "readOnly": true
+          "description": "The total number of tokens processed for the completions request and response."
         },
         "completion_tokens_details": {
           "$ref": "#/definitions/CompletionsUsageDetails",
-          "description": "Breakdown of tokens used in a completion.",
-          "readOnly": true
+          "description": "Breakdown of tokens used in a completion."
         },
         "prompt_tokens_details": {
           "$ref": "#/definitions/PromptUsageDetails",
-          "description": "Breakdown of tokens used in the prompt/chat history.",
-          "readOnly": true
+          "description": "Breakdown of tokens used in the prompt/chat history."
         }
       },
       "required": [
@@ -1325,14 +1292,12 @@
         "audio_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of tokens corresponding to audio input.",
-          "readOnly": true
+          "description": "The number of tokens corresponding to audio input."
         },
         "total_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The total number of tokens processed for the completions request and response.",
-          "readOnly": true
+          "description": "The total number of tokens processed for the completions request and response."
         }
       },
       "required": [
@@ -1428,14 +1393,12 @@
           "items": {
             "type": "number",
             "format": "float"
-          },
-          "readOnly": true
+          }
         },
         "index": {
           "type": "integer",
           "format": "int32",
-          "description": "Index of the prompt to which the EmbeddingItem corresponds.",
-          "readOnly": true
+          "description": "Index of the prompt to which the EmbeddingItem corresponds."
         },
         "object": {
           "type": "string",
@@ -1494,8 +1457,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the embeddings result.",
-          "readOnly": true
+          "description": "Unique identifier for the embeddings result."
         },
         "data": {
           "type": "array",
@@ -1503,13 +1465,11 @@
           "items": {
             "$ref": "#/definitions/EmbeddingItem"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "usage": {
           "$ref": "#/definitions/EmbeddingsUsage",
-          "description": "Usage counts for tokens input using the embeddings API.",
-          "readOnly": true
+          "description": "Usage counts for tokens input using the embeddings API."
         },
         "object": {
           "type": "string",
@@ -1523,8 +1483,7 @@
         },
         "model": {
           "type": "string",
-          "description": "The model ID used to generate this result.",
-          "readOnly": true
+          "description": "The model ID used to generate this result."
         }
       },
       "required": [
@@ -1542,14 +1501,12 @@
         "prompt_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tokens in the request.",
-          "readOnly": true
+          "description": "Number of tokens in the request."
         },
         "total_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of tokens transacted in this request/response. Should equal the\nnumber of tokens in the request.",
-          "readOnly": true
+          "description": "Total number of tokens transacted in this request/response. Should equal the\nnumber of tokens in the request."
         }
       },
       "required": [
@@ -1593,13 +1550,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the function to call.",
-          "readOnly": true
+          "description": "The name of the function to call."
         },
         "arguments": {
           "type": "string",
-          "description": "The arguments to call the function with, as generated by the model in JSON format.\nNote that the model does not always generate valid JSON, and may hallucinate parameters\nnot defined by your function schema. Validate the arguments in your code before calling\nyour function.",
-          "readOnly": true
+          "description": "The arguments to call the function with, as generated by the model in JSON format.\nNote that the model does not always generate valid JSON, and may hallucinate parameters\nnot defined by your function schema. Validate the arguments in your code before calling\nyour function."
         }
       },
       "required": [
@@ -1687,18 +1642,15 @@
       "properties": {
         "model_name": {
           "type": "string",
-          "description": "The name of the AI model. For example: `Phi21`",
-          "readOnly": true
+          "description": "The name of the AI model. For example: `Phi21`"
         },
         "model_type": {
           "$ref": "#/definitions/ModelType",
-          "description": "The type of the AI model. A Unique identifier for the profile.",
-          "readOnly": true
+          "description": "The type of the AI model. A Unique identifier for the profile."
         },
         "model_provider_name": {
           "type": "string",
-          "description": "The model provider name. For example: `Microsoft`",
-          "readOnly": true
+          "description": "The model provider name. For example: `Microsoft Research`"
         }
       },
       "required": [
@@ -1738,14 +1690,12 @@
         "audio_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of tokens corresponding to audio input.",
-          "readOnly": true
+          "description": "The number of tokens corresponding to audio input."
         },
         "cached_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The total number of tokens cached.",
-          "readOnly": true
+          "description": "The total number of tokens cached."
         }
       },
       "required": [
@@ -1765,13 +1715,11 @@
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
           "description": "The reason that this chat completions choice completed its generated.",
-          "x-nullable": true,
-          "readOnly": true
+          "x-nullable": true
         },
         "delta": {
           "$ref": "#/definitions/StreamingChatResponseMessageUpdate",
-          "description": "An update to the chat message for a given chat completions prompt.",
-          "readOnly": true
+          "description": "An update to the chat message for a given chat completions prompt."
         }
       },
       "required": [
@@ -1801,13 +1749,11 @@
         "created": {
           "type": "integer",
           "format": "unixtime",
-          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.",
-          "readOnly": true
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
         "model": {
           "type": "string",
-          "description": "The model used for the chat completion.",
-          "readOnly": true
+          "description": "The model used for the chat completion."
         },
         "choices": {
           "type": "array",
@@ -1816,13 +1762,11 @@
           "items": {
             "$ref": "#/definitions/StreamingChatChoiceUpdate"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation.",
-          "readOnly": true
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
         }
       },
       "required": [
@@ -1839,13 +1783,11 @@
       "properties": {
         "role": {
           "$ref": "#/definitions/ChatRole",
-          "description": "The chat role associated with the message. If present, should always be 'assistant'",
-          "readOnly": true
+          "description": "The chat role associated with the message. If present, should always be 'assistant'"
         },
         "content": {
           "type": "string",
-          "description": "The content of the message.",
-          "readOnly": true
+          "description": "The content of the message."
         },
         "tool_calls": {
           "type": "array",
@@ -1853,7 +1795,6 @@
           "items": {
             "$ref": "#/definitions/StreamingChatResponseToolCallUpdate"
           },
-          "readOnly": true,
           "x-ms-client-name": "toolCalls"
         }
       }
@@ -1864,13 +1805,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the tool call.",
-          "readOnly": true
+          "description": "The ID of the tool call."
         },
         "function": {
           "$ref": "#/definitions/FunctionCall",
-          "description": "Updates to the function call requested by the AI model.",
-          "readOnly": true
+          "description": "Updates to the function call requested by the AI model."
         }
       },
       "required": [

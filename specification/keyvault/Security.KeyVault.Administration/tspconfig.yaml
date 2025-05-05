@@ -2,6 +2,11 @@ parameters:
   "service-dir":
     default: "sdk/keyvault"
   "dependencies":
+    # "additionalDirectories":
+    #   - "specification/keyvault/Security.KeyVault.BackupRestore/"
+    #   - "specification/keyvault/Security.KeyVault.Common/"
+    #   - "specification/keyvault/Security.KeyVault.RBAC/"
+    #   - "specification/keyvault/Security.KeyVault.Settings/"
     default: ""
 
 emit:
@@ -45,18 +50,12 @@ options:
     use-model-reader-writer: false
   "@azure-tools/typespec-ts":
     package-dir: "keyvault-admin"
-    generate-metadata: true
-    generate-test: false
+    generateMetadata: true
+    generateTest: false
     src-folder: "src/generated"
-    experimental-extensible-enums: true
-    is-modular-library: true
-    package-details:
+    experimentalExtensibleEnums: true
+    isModularLibrary: true
+    packageDetails:
       name: "@azure/keyvault-admin"
       description: "Azure Key Vault Administration"
     flavor: azure
-  "@azure-tools/typespec-client-generator-cli":
-    additionalDirectories:
-      - "specification/keyvault/Security.KeyVault.BackupRestore/"
-      - "specification/keyvault/Security.KeyVault.Common/"
-      - "specification/keyvault/Security.KeyVault.RBAC/"
-      - "specification/keyvault/Security.KeyVault.Settings/"

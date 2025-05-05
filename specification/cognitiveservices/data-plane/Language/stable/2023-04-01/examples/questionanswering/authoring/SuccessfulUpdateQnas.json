@@ -1,67 +1,67 @@
 {
   "parameters": {
-    "Content-Type": "application/json",
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
     "api-version": "2023-04-01",
+    "projectName": "proj1",
     "body": [
       {
         "op": "add",
         "value": {
+          "id": 3,
           "answer": "ans3",
+          "source": "source1",
+          "questions": [
+            "question 3.1",
+            "question 3.2"
+          ],
+          "metadata": {
+            "k1": "v1",
+            "k2": "v2"
+          },
           "dialog": {
             "isContextOnly": false,
             "prompts": [
               {
                 "displayOrder": 1,
-                "displayText": "prompt 3.1",
-                "qnaId": 11
+                "qnaId": 11,
+                "displayText": "prompt 3.1"
               },
               {
                 "displayOrder": 2,
-                "displayText": "prompt 3.2",
-                "qnaId": 21
+                "qnaId": 21,
+                "displayText": "prompt 3.2"
               }
             ]
-          },
-          "id": 3,
-          "metadata": {
-            "k1": "v1",
-            "k2": "v2"
-          },
-          "questions": [
-            "question 3.1",
-            "question 3.2"
-          ],
-          "source": "source1"
+          }
         }
       },
       {
         "op": "replace",
         "value": {
-          "answer": "ans4",
           "id": 1,
+          "answer": "ans4",
+          "source": "source1",
           "questions": [
             "question 4.1",
             "question 4.2"
-          ],
-          "source": "source1"
+          ]
         }
       },
       {
         "op": "delete",
         "value": {
-          "answer": "ans2",
           "id": 2,
+          "answer": "ans2",
+          "source": "source1",
           "questions": [
             "question 2.1",
             "question 2.2"
-          ],
-          "source": "source1"
+          ]
         }
       }
-    ],
-    "projectName": "proj1"
+    ]
   },
   "responses": {
     "202": {
@@ -70,7 +70,5 @@
         "Operation-Location": "https://<resource-endpoint>/language/authoring/query-knowledgebases/projects/proj1/qnas/jobs/job1?api-version=2023-04-01"
       }
     }
-  },
-  "operationId": "QuestionAnsweringProjects_UpdateQnas",
-  "title": "Successful query"
+  }
 }

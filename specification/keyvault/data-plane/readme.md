@@ -369,9 +369,6 @@ uncomment the  `exclude-file` section below and add the file paths.
 ``` yaml
 directive:
   - suppress: IntegerTypeMustHaveFormat
-    from: securitydomain.json
-    reason: KV uses format "unixtime", which is not supported by the linter at the moment.
-  - suppress: IntegerTypeMustHaveFormat
     from: certificates.json
     reason: KV uses format "unixtime", which is not supported by the linter at the moment.
   - suppress: IntegerTypeMustHaveFormat

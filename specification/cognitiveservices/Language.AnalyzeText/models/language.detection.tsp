@@ -9,7 +9,7 @@ namespace Language.Text;
 /** Contains the language detection document analysis input. */
 model LanguageDetectionAnalysisInput {
   /** List of documents to be analyzed. */
-  documents?: LanguageInput[];
+  documents?: Array<LanguageInput>;
 }
 
 /** Contains the language detection document analysis task input. */
@@ -39,7 +39,7 @@ model LanguageDetectionTaskResult extends AnalyzeTextTaskResult {
 /** Contains the language detection result for the request. */
 model LanguageDetectionResult is PreBuiltResult {
   /** Enumeration of language detection results for each input document. */
-  documents: LanguageDetectionDocumentResult[];
+  documents: Array<LanguageDetectionDocumentResult>;
 }
 
 /** Contains the language detection for a document. */
