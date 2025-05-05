@@ -78,7 +78,7 @@ model DiscoveryHandlerProperties {
   /**
    * Mqtt connection configuration settings
    */
-  mqttConnectionConfiguration: ConnectorsMqttConnectionConfiguration;
+  mqttConnectionConfiguration?: ConnectorsMqttConnectionConfiguration;
 
   /**
    * The image configuration for the DiscoveryHandler.
