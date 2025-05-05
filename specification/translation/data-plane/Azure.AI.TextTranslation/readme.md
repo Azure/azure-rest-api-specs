@@ -1,5 +1,16 @@
 # Cognitive Services Translation Text SDK
 
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file for Translation Text SDK.
+
+> `autorest`
+
+To see additional help and options, run:
+
+> `autorest --help`
+---
+
 The current release is `package-2025-05-01-preview`.
 
 ``` yaml
