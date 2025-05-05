@@ -36,6 +36,11 @@
   "paths": {
     "/providers/Microsoft.Security/operations": {
       "get": {
+        "x-ms-examples": {
+          "List the operations for the Microsoft.Security (Microsoft Defender for Cloud) resource provider": {
+            "$ref": "./examples/Operations/ListOperations_example.json"
+          }
+        },
         "tags": [
           "Operations"
         ],
@@ -98,6 +103,10 @@
           "readOnly": true,
           "type": "string",
           "description": "Where the operation is originated"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay"
