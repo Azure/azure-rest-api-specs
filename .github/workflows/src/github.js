@@ -6,6 +6,7 @@ import { byDate, invert } from "../../shared/src/sort.js";
  * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
  * @typedef {RestEndpointMethodTypes["checks"]["listForRef"]["response"]["data"]["check_runs"]} CheckRuns
  * @typedef {RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["response"]["data"]["workflow_runs"]} WorkflowRuns
+ * @typedef {RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"]} CommitStatuses
  */
 
 export const PER_PAGE_MAX = 100;
@@ -175,6 +176,38 @@ export async function getCheckRuns(github, context, checkRunName, ref) {
       }),
     ),
   );
+}
+
+/**
+ * Returns the check with the given checkRunName for the given ref.
+ * @param {import('github-script').AsyncFunctionArguments['github']} github
+ * @param {import('github-script').AsyncFunctionArguments['context']} context
+ * @param {string} commitStatusName
+ * @param {string} ref
+ * @returns {Promise<CommitStatuses>}
+ */
+export async function getCommitStatuses(
+  github,
+  context,
+  commitStatusName,
+  ref,
+) {
+  const result = await github.paginate(
+    github.rest.repos.listCommitStatusesForRef,
+    {
+      ...context.repo,
+      ref: ref,
+      per_page: PER_PAGE_MAX,
+    },
+  );
+
+  return result
+    .filter(
+      (status) =>
+        // Property "context" is case-insensitive
+        status.context.toLowerCase() === commitStatusName.toLowerCase(),
+    )
+    .sort(invert(byDate((status) => status.updated_at)));
 }
 
 /**
