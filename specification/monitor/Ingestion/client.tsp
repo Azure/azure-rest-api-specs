@@ -2,7 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using LogsIngestionClient;
+using LogsIngestion;
 
 namespace ClientCustomizations;
 
