@@ -1,34 +1,20 @@
 import "@typespec/versioning";
+import "./DataBoxExample.tsp";
 using TypeSpec.Versioning;
 /** EG DataBox Data Model */
 namespace Microsoft.EventGrid.SystemEvents {
-  const MicrosoftDataBoxCopyStartedExample: DataBoxCopyStartedEventData = #{
-    serialNumber: "SampleSerialNumber",
-    stageName: "CopyStarted",
-    stageTime: utcDateTime.fromISO("2022-10-12T19:38:08.0218897Z"),
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event. */
   @example(MicrosoftDataBoxCopyStartedExample)
   model DataBoxCopyStartedEventData {
     ...DataBoxBase;
   }
 
-  const MicrosoftDataBoxCopyCompletedExample: DataBoxCopyCompletedEventData = #{
-    serialNumber: "SampleSerialNumber",
-    stageName: "CopyCompleted",
-    stageTime: utcDateTime.fromISO("2022-10-12T19:38:08.0218897Z"),
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyCompleted event. */
   @example(MicrosoftDataBoxCopyCompletedExample)
   model DataBoxCopyCompletedEventData {
     ...DataBoxBase;
   }
 
-  const MicrosoftDataBoxOrderCompletedExample: DataBoxOrderCompletedEventData = #{
-    serialNumber: "SampleSerialNumber",
-    stageName: "OrderCompleted",
-    stageTime: utcDateTime.fromISO("2022-10-12T19:38:08.0218897Z"),
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.OrderCompleted event. */
   @example(MicrosoftDataBoxOrderCompletedExample)
   model DataBoxOrderCompletedEventData {

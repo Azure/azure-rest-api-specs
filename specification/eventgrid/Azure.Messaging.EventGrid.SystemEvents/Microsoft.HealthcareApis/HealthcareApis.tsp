@@ -1,16 +1,11 @@
 import "@typespec/versioning";
+import "./HealthcareApisExample.tsp";
 using TypeSpec.Versioning;
 
 /** Describes the schema of the Azure HealthcareApis events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   // model HealthcareFhirResourceType is string {}
 
-  const MicrosoftHealthcareApisFhirResourceCreatedExample: HealthcareFhirResourceCreatedEventData = #{
-    resourceType: "Patient",
-    resourceFhirAccount: "{fhir-account}.fhir.azurehealthcareapis.com",
-    resourceFhirId: "e0a1f743-1a70-451f-830e-e96477163902",
-    resourceVersionId: 1,
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event. */
   @example(MicrosoftHealthcareApisFhirResourceCreatedExample)
   model HealthcareFhirResourceCreatedEventData {
@@ -29,12 +24,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceVersionId: int64;
   }
 
-  const MicrosoftHealthcareApisFhirResourceUpdatedExample: HealthcareFhirResourceUpdatedEventData = #{
-    resourceType: "Patient",
-    resourceFhirAccount: "{fhir-account}.fhir.azurehealthcareapis.com",
-    resourceFhirId: "e0a1f743-1a70-451f-830e-e96477163902",
-    resourceVersionId: 2,
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event. */
   @example(MicrosoftHealthcareApisFhirResourceUpdatedExample)
   model HealthcareFhirResourceUpdatedEventData {
@@ -53,12 +42,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceVersionId: int64;
   }
 
-  const MicrosoftHealthcareApisFhirResourceDeletedExample: HealthcareFhirResourceDeletedEventData = #{
-    resourceType: "Patient",
-    resourceFhirAccount: "{fhir-account}.fhir.azurehealthcareapis.com",
-    resourceFhirId: "e0a1f743-1a70-451f-830e-e96477163902",
-    resourceVersionId: 3,
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event. */
   @example(MicrosoftHealthcareApisFhirResourceDeletedExample)
   model HealthcareFhirResourceDeletedEventData {
@@ -77,14 +60,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceVersionId: int64;
   }
 
-  const MicrosoftHealthcareApisDicomImageCreatedExample: HealthcareDicomImageCreatedEventData = #{
-    partitionName: "Microsoft.Default",
-    imageStudyInstanceUid: "1.2.3.4.3",
-    imageSeriesInstanceUid: "1.2.3.4.3.9423673",
-    imageSopInstanceUid: "1.3.6.1.4.1.45096.2.296485376.2210.1633373143.864442",
-    serviceHostName: "{dicom-account}.dicom.azurehealthcareapis.com",
-    sequenceNumber: 1,
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event. */
   @example(MicrosoftHealthcareApisDicomImageCreatedExample)
   model HealthcareDicomImageCreatedEventData {
@@ -108,14 +83,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     sequenceNumber: int64;
   }
 
-  const MicrosoftHealthcareApisDicomImageDeletedExample: HealthcareDicomImageDeletedEventData = #{
-    partitionName: "Microsoft.Default",
-    imageStudyInstanceUid: "1.2.3.4.3",
-    imageSeriesInstanceUid: "1.2.3.4.3.9423673",
-    imageSopInstanceUid: "1.3.6.1.4.1.45096.2.296485376.2210.1633373143.864442",
-    serviceHostName: "{dicom-account}.dicom.azurehealthcareapis.com",
-    sequenceNumber: 2,
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event. */
   @example(MicrosoftHealthcareApisDicomImageDeletedExample)
   model HealthcareDicomImageDeletedEventData {
@@ -139,14 +106,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     sequenceNumber: int64;
   }
 
-  const MicrosoftHealthcareApisDicomImageUpdatedExample: HealthcareDicomImageUpdatedEventData = #{
-    partitionName: "Microsoft.Default",
-    imageStudyInstanceUid: "1.2.3.4.3",
-    imageSeriesInstanceUid: "1.2.3.4.3.9423673",
-    imageSopInstanceUid: "1.3.6.1.4.1.45096.2.296485376.2210.1633373143.864442",
-    serviceHostName: "{dicom-account}.dicom.azurehealthcareapis.com",
-    sequenceNumber: 1,
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageUpdated event. */
   @example(MicrosoftHealthcareApisDicomImageUpdatedExample)
   model HealthcareDicomImageUpdatedEventData {
