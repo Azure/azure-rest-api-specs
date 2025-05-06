@@ -11,7 +11,14 @@ using TypeSpec.Versioning;
     name: "AvsClient",
     service: Microsoft.AVS,
   },
-  "java,csharp,javascript"
+  "csharp,java"
+)
+@client(
+  {
+    name: "AzureVMwareSolutionAPI",
+    service: Microsoft.AVS,
+  },
+  "javascript"
 )
 @client(
   {
@@ -22,9 +29,6 @@ using TypeSpec.Versioning;
 )
 @useDependency(Microsoft.AVS.Versions.v2024_09_01)
 namespace Customization;
-
-@@clientName(Microsoft.AVS, "AzureVMwareSolutionAPI", "javascript");
-@@clientName(Microsoft.AVS, "AVS", "python");
 
 @operationGroup
 @armResourceOperations
