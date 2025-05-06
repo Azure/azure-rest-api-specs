@@ -78,7 +78,7 @@ namespace Azure.ResourceManager.Legacy {
     @autoRoute
     @doc("Update a {name}", Resource)
     @armResourceUpdate(Resource)
-    @patch
+    @patch(#{ implicitOptionality: true })
     CustomPatchAsync<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       PatchModel extends {} = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,
@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Legacy {
     @autoRoute
     @doc("Update a {name}", Resource)
     @armResourceUpdate(Resource)
-    @patch
+    @patch(#{ implicitOptionality: true })
     CustomPatchSync<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       PatchModel extends {} = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,
