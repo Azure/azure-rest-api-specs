@@ -33,6 +33,10 @@ model AzureAISearchIndex extends Index {
   @doc("Name of index in Azure AI Search resource to attach")
   @visibility(Lifecycle.Create)
   indexName: string;
+
+  @doc("Field mapping configuration")
+  @visibility(Lifecycle.Create)
+  fieldMapping?: FieldMapping;
 }
 
 @doc("Managed Azure AI Search Index Definition")
@@ -67,6 +71,10 @@ model CosmosDBIndex extends Index {
   @doc("Embedding model configuration")
   @visibility(Lifecycle.Create)
   embeddingConfiguration: EmbeddingConfiguration;
+
+  @doc("Field mapping configuration")
+  @visibility(Lifecycle.Create)
+  fieldMapping: FieldMapping;
 }
 
 @doc("Embedding configuration class")
@@ -79,6 +87,34 @@ model EmbeddingConfiguration {
   @doc("Embedding field")
   @visibility(Lifecycle.Create)
   embeddingField: string;
+}
+
+@doc("Embedding configuration class")
+@added(Versions.v2025_05_01)
+model FieldMapping {
+  @doc("List of fields with text content")
+  @visibility(Lifecycle.Create)
+  contentFields: string[];
+
+  @doc("Path of file to be used as a source of text content")
+  @visibility(Lifecycle.Create)
+  filepathField?: string;
+
+  @doc("Field containing the title of the document")
+  @visibility(Lifecycle.Create)
+  titleField?: string;
+
+  @doc("Field containing the url of the document")
+  @visibility(Lifecycle.Create)
+  urlField?: string;
+
+  @doc("List of fields with vector content")
+  @visibility(Lifecycle.Create)
+  vectorFields?: string[];
+
+  @doc("List of fields with metadata content")
+  @visibility(Lifecycle.Create)
+  metadataFields?: string[];
 }
 
 @added(Versions.v2025_05_01)
