@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "7a587823-959d-4ad0-85bd-cf2a7cef436a",
+    "resourceGroupName": "DP-900",
+    "workspaceName": "synapse-workspace-name",
+    "kustoPoolName": "dataexplorerpool900",
+    "api-version": "2023-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/7a587823-959d-4ad0-85bd-cf2a7cef436a/resourceGroups/DP-900/providers/Microsoft.Synapse/workspaces/synapse-workspace-name/kustoPools/dataexplorerpool900/privateLinkResources",
+            "name": "synapse-workspace-name/dataexplorerpool900/privateLinkResources",
+            "type": "Microsoft.Synapse/Workspaces/KustoPools/privateLinkResources",
+            "properties": {
+              "groupId": "aaaaa",
+              "requiredMembers": [
+                "Engine",
+                "DataManagement",
+                "blob-ne3kstrldkustoCluster00",
+                "queue-ne3kstrldkustoCluster00",
+                "table-ne3kstrldkustoCluster00",
+                "blob-qmukstrldkustoCluster01",
+                "queue-qmukstrldkustoCluster01",
+                "table-qmukstrldkustoCluster01"
+              ],
+              "requiredZoneNames": [
+                "privatelink.westus2.kusto.windows.net",
+                "privatelink.blob.core.windows.net",
+                "privatelink.queue.core.windows.net",
+                "privatelink.table.core.windows.net"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
