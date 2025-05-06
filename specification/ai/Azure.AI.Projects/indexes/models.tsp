@@ -89,7 +89,7 @@ model EmbeddingConfiguration {
   embeddingField: string;
 }
 
-@doc("Embedding configuration class")
+@doc("Field mapping configuration class")
 @added(Versions.v2025_05_01)
 model FieldMapping {
   @doc("List of fields with text content")
