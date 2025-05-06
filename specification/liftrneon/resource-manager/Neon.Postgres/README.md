@@ -1,3 +1,7 @@
+## Directory Restructuring Notice
+
+This project has been restructured to align with the new TypeSpec guidelines. The contents have been moved to a new directory structure under `resource-manager/Neon.Postgres/`. Please ensure that all paths and references are updated accordingly.
+
 # Neon Postgres service typespec project
 
 ## Getting started
