@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { runSpecGenSdkCommand, resetGitRepo } from "./utils.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
-import { SpecGenSdkCmdInput } from "./types.js";
+import { APIViewRequestData, SpecGenSdkCmdInput } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 import {
   generateArtifact,
@@ -86,6 +86,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let currentRunHasBreakingChange = false;
   let overallExecutionResult = "";
   let currentExecutionResult = "";
+  let stagedArtifactsFolder = "";
+  let apiViewRequestData: APIViewRequestData [] = [];
 
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
@@ -130,6 +132,19 @@ export async function generateSdkForSpecPr(): Promise<number> {
       // Read the execution report to aggreate the generation results
       executionReport = getExecutionReport(commandInput);
       currentExecutionResult = executionReport.executionResult;
+
+      if (executionReport.stagedArtifactsFolder) {
+        stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
+      }
+      const apiViewArtifactRelPath = path.relative(executionReport.stagedArtifactsFolder, executionReport.sdkApiViewArtifactFolder);
+      for (const pkg of executionReport.packages) {
+        const fileName = path.basename(pkg.apiViewArtifact);
+        apiViewRequestData.push({
+          packageName: pkg.packageName,
+          filePath: path.join(apiViewArtifactRelPath, fileName),
+        });
+      }
+
       if (overallExecutionResult !== "failed") {
         overallExecutionResult = currentExecutionResult;
       }
@@ -152,6 +167,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
       breakingChangeLabel,
       overallRunHasBreakingChange,
       hasManagementPlaneSpecs,
+      stagedArtifactsFolder,
+      apiViewRequestData
     ) || statusCode;
   return statusCode;
 }
