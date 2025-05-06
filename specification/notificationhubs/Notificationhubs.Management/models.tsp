@@ -1602,3 +1602,4 @@ model SharedAccessAuthorizationRuleListResult
 
 model NotificationHubListResult is Azure.Core.Page<NotificationHubResource>;
 @@visibility(Azure.Core.Page.value, Lifecycle.Read);
+@@OpenAPI.extension(OperationListResult.value, "x-ms-identifiers", #["name"]);

@@ -3253,7 +3253,9 @@
             "$ref": "#/definitions/Operation"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -3320,8 +3322,7 @@
             "value": "Disabled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PnsCredentials": {
       "type": "object",
@@ -3515,8 +3516,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Private Endpoint Connection properties.",
-          "x-ms-client-flatten": true
+          "description": "Private Endpoint Connection properties."
         }
       },
       "allOf": [
@@ -3585,8 +3585,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Represents properties of Private Link Resource.",
-          "x-ms-client-flatten": true
+          "description": "Represents properties of Private Link Resource."
         }
       },
       "allOf": [
@@ -3928,11 +3927,24 @@
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
           "description": "SharedAccessAuthorizationRule properties.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

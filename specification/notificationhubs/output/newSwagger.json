@@ -2116,8 +2116,7 @@
           "x-ms-enum": {
             "name": "OperationProvisioningState",
             "modelAsString": true
-          },
-          "readOnly": true
+          }
         },
         "status": {
           "type": "string",
@@ -2447,7 +2446,9 @@
             "$ref": "#/definitions/Operation"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -2584,8 +2585,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
         }
       },
       "allOf": [
@@ -2620,8 +2620,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/PrivateLinkResourceProperties"
         }
       },
       "allOf": [
@@ -2883,11 +2882,24 @@
         "properties": {
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

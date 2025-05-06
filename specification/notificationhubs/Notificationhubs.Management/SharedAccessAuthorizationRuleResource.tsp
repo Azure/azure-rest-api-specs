@@ -16,13 +16,15 @@ namespace Microsoft.NotificationHubs;
  */
 @parentResource(NotificationHubResource)
 model SharedAccessAuthorizationRuleResource
-  is Azure.ResourceManager.TrackedResource<SharedAccessAuthorizationRuleProperties> {
+  is Azure.ResourceManager.ProxyResource<SharedAccessAuthorizationRuleProperties> {
   ...ResourceNameParameter<
     Resource = SharedAccessAuthorizationRuleResource,
     KeyName = "authorizationRuleName",
     SegmentName = "authorizationRules",
     NamePattern = "^[a-zA-Z0-9!()*-._]+$"
   >;
+  location?: string;
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -192,3 +194,7 @@ interface Namespaces {
   "Request content."
 );
 @@doc(Namespaces.regenerateKeys::parameters.body, "Request content.");
+@@visibility(SharedAccessAuthorizationRuleResource.location,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
