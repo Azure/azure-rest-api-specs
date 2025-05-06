@@ -14,7 +14,7 @@ namespace Microsoft.Orbital;
  * Customer creates a Contact Profile Resource, which will contain all of the configurations required for scheduling a contact.
  */
 model ContactProfile
-  is Azure.ResourceManager.TrackedResource<ContactProfileProperties, false> {
+  is Azure.ResourceManager.TrackedResource<ContactProfilesProperties, false> {
   ...ResourceNameParameter<
     Resource = ContactProfile,
     KeyName = "contactProfileName",

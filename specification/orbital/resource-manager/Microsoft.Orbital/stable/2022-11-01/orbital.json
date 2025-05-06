@@ -1274,7 +1274,7 @@
       "description": "Customer retrieves list of Available Contacts for a spacecraft resource. Later, one of the available contact can be selected to create a contact.",
       "properties": {
         "spacecraft": {
-          "$ref": "#/definitions/AvailableContactsSpacecraft",
+          "$ref": "#/definitions/ResourceReference",
           "description": "The reference to the spacecraft resource."
         },
         "groundStationName": {
@@ -1283,7 +1283,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/AvailableContactsProperties",
+          "$ref": "#/definitions/ContactInstanceProperties",
           "description": "Properties of Contact resource.",
           "x-ms-client-flatten": true
         }
@@ -1311,31 +1311,26 @@
         "value"
       ]
     },
-    "AvailableContactsProperties": {
-      "type": "object",
-      "description": "Properties of Contact resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ContactInstanceProperties"
-        }
-      ]
-    },
-    "AvailableContactsSpacecraft": {
-      "type": "object",
-      "description": "The reference to the spacecraft resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceReference"
-        }
-      ]
-    },
     "AvailableGroundStation": {
       "type": "object",
-      "description": "Ground Stations available to schedule Contacts.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of groundStation.",
+          "readOnly": true
+        },
         "name": {
           "type": "string",
           "description": "Name of the ground station.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure region."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
           "readOnly": true
         },
         "properties": {
@@ -1346,16 +1341,11 @@
       },
       "required": [
         "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
       ]
     },
     "AvailableGroundStationListResult": {
       "type": "object",
-      "description": "The response of a AvailableGroundStation list operation.",
+      "description": "Ground Stations available to schedule Contacts.",
       "properties": {
         "value": {
           "type": "array",
@@ -1406,15 +1396,6 @@
           "description": "Release Status of a ground station."
         }
       }
-    },
-    "AvailableGroundStationPropertiesWrapper": {
-      "type": "object",
-      "description": "The properties bag for this resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AvailableGroundStationProperties"
-        }
-      ]
     },
     "Azure.ResourceManager.ArmResponse<AvailableContactsListResult>": {
       "type": "object",
@@ -1534,7 +1515,7 @@
       "description": "Parameters that define the contact resource.",
       "properties": {
         "contactProfile": {
-          "$ref": "#/definitions/ContactParametersContactProfile",
+          "$ref": "#/definitions/ResourceReference",
           "description": "The reference to the contact profile resource."
         },
         "groundStationName": {
@@ -1559,21 +1540,12 @@
         "endTime"
       ]
     },
-    "ContactParametersContactProfile": {
-      "type": "object",
-      "description": "The reference to the contact profile resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceReference"
-        }
-      ]
-    },
     "ContactProfile": {
       "type": "object",
       "description": "Customer creates a Contact Profile Resource, which will contain all of the configurations required for scheduling a contact.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ContactProfileProperties",
+          "$ref": "#/definitions/ContactProfilesProperties",
           "description": "Properties of the contact profile resource.",
           "x-ms-client-flatten": true
         }
@@ -1698,15 +1670,6 @@
         "value"
       ]
     },
-    "ContactProfileProperties": {
-      "type": "object",
-      "description": "Properties of the contact profile resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ContactProfilesProperties"
-        }
-      ]
-    },
     "ContactProfileThirdPartyConfiguration": {
       "type": "object",
       "description": "Contact Profile third-party partner configuration.",
@@ -1730,7 +1693,7 @@
       "description": "List of Contact Profile Resource Properties.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ContactProfilesPropertiesProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The current state of the resource's creation, deletion, or modification."
         },
         "minimumViableContactDuration": {
@@ -1789,54 +1752,12 @@
         "subnetId"
       ]
     },
-    "ContactProfilesPropertiesProvisioningState": {
-      "type": "string",
-      "description": "The current state of the resource's creation, deletion, or modification.",
-      "enum": [
-        "creating",
-        "succeeded",
-        "failed",
-        "canceled",
-        "updating",
-        "deleting"
-      ],
-      "x-ms-enum": {
-        "name": "ContactProfilesPropertiesProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "creating",
-            "value": "creating"
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded"
-          },
-          {
-            "name": "failed",
-            "value": "failed"
-          },
-          {
-            "name": "canceled",
-            "value": "canceled"
-          },
-          {
-            "name": "updating",
-            "value": "updating"
-          },
-          {
-            "name": "deleting",
-            "value": "deleting"
-          }
-        ]
-      }
-    },
     "ContactsProperties": {
       "type": "object",
       "description": "Properties of the Contact Resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ContactsPropertiesProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The current state of the resource's creation, deletion, or modification."
         },
         "status": {
@@ -1935,7 +1856,7 @@
           "readOnly": true
         },
         "contactProfile": {
-          "$ref": "#/definitions/ContactsPropertiesContactProfile",
+          "$ref": "#/definitions/ResourceReference",
           "description": "The reference to the contact profile resource."
         }
       },
@@ -1961,57 +1882,6 @@
             "type": "string"
           }
         }
-      }
-    },
-    "ContactsPropertiesContactProfile": {
-      "type": "object",
-      "description": "The reference to the contact profile resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceReference"
-        }
-      ]
-    },
-    "ContactsPropertiesProvisioningState": {
-      "type": "string",
-      "description": "The current state of the resource's creation, deletion, or modification.",
-      "enum": [
-        "creating",
-        "succeeded",
-        "failed",
-        "canceled",
-        "updating",
-        "deleting"
-      ],
-      "x-ms-enum": {
-        "name": "ContactsPropertiesProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "creating",
-            "value": "creating"
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded"
-          },
-          {
-            "name": "failed",
-            "value": "failed"
-          },
-          {
-            "name": "canceled",
-            "value": "canceled"
-          },
-          {
-            "name": "updating",
-            "value": "updating"
-          },
-          {
-            "name": "deleting",
-            "value": "deleting"
-          }
-        ]
       }
     },
     "ContactsStatus": {
@@ -2136,6 +2006,7 @@
           "type": "number",
           "format": "double",
           "description": "Percentage completed.",
+          "minimum": 0,
           "maximum": 100,
           "readOnly": true
         },
@@ -2232,6 +2103,48 @@
           {
             "name": "UDP",
             "value": "UDP"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The current state of the resource's creation, deletion, or modification.",
+      "enum": [
+        "creating",
+        "succeeded",
+        "failed",
+        "canceled",
+        "updating",
+        "deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "creating",
+            "value": "creating"
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded"
+          },
+          {
+            "name": "failed",
+            "value": "failed"
+          },
+          {
+            "name": "canceled",
+            "value": "canceled"
+          },
+          {
+            "name": "updating",
+            "value": "updating"
+          },
+          {
+            "name": "deleting",
+            "value": "deleting"
           }
         ]
       }

@@ -340,7 +340,7 @@ model ContactsProperties {
   /**
    * The current state of the resource's creation, deletion, or modification.
    */
-  provisioningState?: ContactsPropertiesProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * Status of a contact.
@@ -441,7 +441,7 @@ model ContactsProperties {
   /**
    * The reference to the contact profile resource.
    */
-  contactProfile: ContactsPropertiesContactProfile;
+  contactProfile: ResourceReference;
 }
 
 /**
@@ -460,12 +460,6 @@ model ContactsPropertiesAntennaConfiguration {
 }
 
 /**
- * The reference to the contact profile resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ContactsPropertiesContactProfile extends ResourceReference {}
-
-/**
  * Resource Reference.
  */
 model ResourceReference {
@@ -482,7 +476,7 @@ model ContactParameters {
   /**
    * The reference to the contact profile resource.
    */
-  contactProfile: ContactParametersContactProfile;
+  contactProfile: ResourceReference;
 
   /**
    * Name of Azure Ground Station.
@@ -503,12 +497,6 @@ model ContactParameters {
 }
 
 /**
- * The reference to the contact profile resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ContactParametersContactProfile extends ResourceReference {}
-
-/**
  * Response for the ListAvailableContacts API service call.
  */
 model AvailableContactsListResult is Azure.Core.Page<AvailableContacts>;
@@ -520,7 +508,7 @@ model AvailableContacts {
   /**
    * The reference to the spacecraft resource.
    */
-  spacecraft?: AvailableContactsSpacecraft;
+  spacecraft?: ResourceReference;
 
   /**
    * Name of Azure Ground Station.
@@ -533,20 +521,8 @@ model AvailableContacts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: AvailableContactsProperties;
+  properties?: ContactInstanceProperties;
 }
-
-/**
- * The reference to the spacecraft resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AvailableContactsSpacecraft extends ResourceReference {}
-
-/**
- * Properties of Contact resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AvailableContactsProperties extends ContactInstanceProperties {}
 
 /**
  * Contact Instance Properties.
@@ -612,20 +588,13 @@ model ContactInstanceProperties {
 }
 
 /**
- * Properties of the contact profile resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-model ContactProfileProperties extends ContactProfilesProperties {}
-
-/**
  * List of Contact Profile Resource Properties.
  */
 model ContactProfilesProperties {
   /**
    * The current state of the resource's creation, deletion, or modification.
    */
-  provisioningState?: ContactProfilesPropertiesProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * Minimum viable contact duration in ISO 8601 format. Used for listing the available contacts with a spacecraft at a given ground station.
@@ -799,13 +768,32 @@ model EndPoint {
 /**
  * Ground Stations available to schedule Contacts.
  */
-model AvailableGroundStation
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+model AvailableGroundStationListResult
+  is Azure.Core.Page<AvailableGroundStation>;
+
+model AvailableGroundStation {
+  /**
+   * ID of groundStation.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
   /**
    * Name of the ground station.
    */
   @visibility(Lifecycle.Read)
   name?: string;
+
+  /**
+   * Azure region.
+   */
+  location?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
 
   /**
    * The properties bag for this resource.
@@ -814,13 +802,6 @@ model AvailableGroundStation
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: AvailableGroundStationProperties;
 }
-
-/**
- * The properties bag for this resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AvailableGroundStationPropertiesWrapper
-  extends AvailableGroundStationProperties {}
 
 /**
  * Properties object for Available groundstation.
@@ -898,6 +879,7 @@ model OperationResult {
    */
   @visibility(Lifecycle.Read)
   @maxValue(100)
+  @minValue(0)
   percentComplete?: float64;
 
   /**

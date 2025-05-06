@@ -24,7 +24,7 @@ interface AvailableGroundStationsOperationGroup {
   @get
   @action("availableGroundStations")
   listByCapability is ArmProviderActionSync<
-    Response = ResourceListResult<AvailableGroundStation>,
+    Response = AvailableGroundStationListResult,
     Scope = SubscriptionActionScope,
     Parameters = {
       /**
