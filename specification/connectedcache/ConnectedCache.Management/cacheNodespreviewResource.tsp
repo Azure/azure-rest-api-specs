@@ -5,10 +5,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ConnectedCache;
 
+@removed(Versions.v2024_11_30_preview)
 model CacheNodePreviewResource is TrackedResource<CacheNodeOldResponse> {
   @doc("Name of the Customer resource")
   @maxLength(90)
@@ -20,6 +22,7 @@ model CacheNodePreviewResource is TrackedResource<CacheNodeOldResponse> {
   name: string;
 }
 
+@removed(Versions.v2024_11_30_preview)
 @armResourceOperations
 interface CacheNodesOperations {
   @doc("Retrieves the properties of a cacheNodes")

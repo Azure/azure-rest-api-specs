@@ -5,10 +5,12 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ConnectedCache;
 
+@removed(Versions.v2024_11_30_preview)
 @doc("ConnectedCache Resource. Represents the high level Nodes needed to provision CacheNode and customer resources used in private preview")
 model EnterprisePreviewResource is TrackedResource<CacheNodeOldResponse> {
   @doc("Name of the Customer resource")
@@ -21,6 +23,7 @@ model EnterprisePreviewResource is TrackedResource<CacheNodeOldResponse> {
   name: string;
 }
 
+@removed(Versions.v2024_11_30_preview)
 @armResourceOperations
 interface EnterpriseCustomerOperations {
   @doc("Retrieves the properties of a Enterprise customer")
