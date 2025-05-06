@@ -1,0 +1,81 @@
+{
+  "title": "CreateOrUpdateMetric_EventCount",
+  "operationId": "CreateOrUpdateMetric",
+  "parameters": {
+    "experimentMetricId": "events_purchase_creditcard",
+    "api-version": "2025-05-31-preview",
+    "If-Match": "vxexdn",
+    "If-None-Match": "ijchzdh",
+    "If-Unmodified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
+    "If-Modified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "displayName": "Number of purchases (credit card)",
+      "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
+      "lifecycle": "Active",
+      "categories": [
+        "Monetization"
+      ],
+      "desiredDirection": "Increase",
+      "definition": {
+        "type": "EventCount",
+        "event": {
+          "eventName": "Transaction",
+          "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "events_purchase_creditcard",
+        "displayName": "Number of purchases (credit card)",
+        "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
+        "lifecycle": "Active",
+        "categories": [
+          "Monetization"
+        ],
+        "desiredDirection": "Increase",
+        "definition": {
+          "type": "EventCount",
+          "event": {
+            "eventName": "Transaction",
+            "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
+          }
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "events_purchase_creditcard",
+        "displayName": "Number of purchases (credit card)",
+        "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
+        "lifecycle": "Active",
+        "categories": [
+          "Monetization"
+        ],
+        "desiredDirection": "Increase",
+        "definition": {
+          "type": "EventCount",
+          "event": {
+            "eventName": "Transaction",
+            "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
+          }
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    }
+  }
+}
