@@ -1,6 +1,6 @@
 // @ts-check
 
-import { relative, resolve } from "path";
+import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.js";
 import { Readme } from "../src/readme.js";
@@ -35,11 +35,14 @@ describe("readme", () => {
     expect(tagNames).toEqual(expectedTagNames);
 
     const swaggers = [...tags].flatMap((t) => [...t.inputFiles]);
-    const swaggerPaths = new Set(swaggers.map((s) => relative(folder, s.path)));
+    const swaggerPaths = new Set(swaggers.map((s) => s.path));
 
     const expectedPaths = new Set([
-      "Microsoft.Contoso/stable/2021-11-01/contoso.json",
-      "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+      resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
+      resolve(
+        folder,
+        "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+      ),
     ]);
 
     expect(swaggerPaths).toEqual(expectedPaths);
