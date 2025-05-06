@@ -158,4 +158,28 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiRemovedEventData,
   Access.public
 );
+@@access(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerOpenedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerOpenedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerClosedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerClosedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenNearExpiryEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenNearExpiryEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpiredEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpiredEventData,
+  Usage.output
+);
 //Enums

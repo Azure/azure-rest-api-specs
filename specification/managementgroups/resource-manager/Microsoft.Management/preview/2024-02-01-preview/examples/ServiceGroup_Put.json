@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "serviceGroupName": "ServiceGroup1",
+    "createServiceGroupRequest": {
+      "properties": {
+        "displayName": "ServiceGroup 1 Name",
+        "parent": {
+          "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/serviceGroups/ServiceGroup1",
+        "type": "Microsoft.Management/serviceGroups",
+        "name": "ServiceGroup1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "ServiceGroup 1 Name",
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Management/serviceGroups/ServiceGroup1",
+        "type": "Microsoft.Management/serviceGroups",
+        "name": "ServiceGroup1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "ServiceGroup 1 Name",
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          }
+        }
+      }
+    }
+  }
+}

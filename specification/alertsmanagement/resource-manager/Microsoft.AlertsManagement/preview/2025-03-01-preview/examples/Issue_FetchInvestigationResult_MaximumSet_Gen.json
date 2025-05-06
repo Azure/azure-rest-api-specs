@@ -1,0 +1,348 @@
+{
+  "title": "Alert fired on VM CPU",
+  "operationId": "Issue_FetchInvestigationResult",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "resourceUri": "subscriptions/aceaa046-91f0-492a-96dc-45e10a9183dc/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+    "issueName": "3f29e1b2b05f8371595dc761fed8e8b3",
+    "body": {
+      "investigationId": "b7341c85-b2c7-46ea-9a7f-784823b71fbc"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "3a6aec82-1ae9-4b82-b865-a4c9df38efcf",
+        "entityType": "Investigation",
+        "origin": {
+          "addedBy": "0826c306-5547-4217-a91d-a303f3fb9363",
+          "addedByType": "Manual"
+        },
+        "createdAt": "2024-12-24T12:07:39.4090403+02:00",
+        "lastModifiedAt": "2024-12-24T12:37:39.4090362+02:00",
+        "execution": {
+          "runState": "Succeeded",
+          "completedAt": "2024-12-24T12:37:39.4090362+02:00"
+        },
+        "runParameters": {
+          "impactTime": "2024-12-18T12:07:39.4090403+02:00",
+          "alerts": [
+            {
+              "id": "/subscriptions/4b3bd59a-46ba-42c2-9a9b-4c6cebcd00d4/resourcegroups/aimon-rg/providers/microsoft.insights/components/draft-int/providers/Microsoft.AlertsManagement/alerts/3ae7c07d-116f-8a8e-c84d-aae01dd5000",
+              "relevance": "Relevant",
+              "origin": {
+                "addedBy": "2da7ca78-93c1-443c-afc3-fb96070f86bd",
+                "addedByType": "Manual"
+              }
+            }
+          ],
+          "resources": [
+            {
+              "id": "/subscriptions/4b3bd59a-46ba-42c2-9a9b-4c6cebcd00d4/resourcegroups/aimon-rg/providers/microsoft.insights/components/draft-int",
+              "relevance": "Relevant",
+              "origin": {
+                "addedBy": "2da7ca78-93c1-443c-afc3-fb96070f86bd",
+                "addedByType": "Manual"
+              }
+            }
+          ]
+        },
+        "children": [
+          {
+            "id": "9896925f-f734-4070-b5d6-61b07883089f",
+            "entityType": "Finding",
+            "relevance": "Relevant",
+            "healthState": "Unhealthy",
+            "origin": {
+              "addedBy": "Investigation",
+              "addedByType": "Automatic"
+            },
+            "createdAt": "2024-12-24T12:07:39.4090403+02:00",
+            "lastModifiedAt": "2024-12-24T12:37:39.4090362+02:00",
+            "execution": {
+              "runState": "Succeeded",
+              "completedAt": "2024-12-24T12:37:39.4090362+02:00"
+            },
+            "summary": {
+              "title": "Network connectivity issues and performance bottlenecks detected",
+              "whatHappened": "The investigation target resource 'Draft-INT' of type 'Application Insights' is experiencing multiple issues. In terms of performance, there are spikes in failed requests and server response times, indicating potential service degradation. Reliability concerns are highlighted by increased dependency call failures and durations, suggesting issues with external resource interactions. Additionally, abnormal events in logs point to failures in data retrieval from cache, issues with Managed Service Identity token retrieval, and network connectivity problems, including forcibly closed connections. These incidents impact the application's availability and could lead to a degraded user experience.\n",
+              "possibleExplanation": "1. The observed increase in 'Failed requests' along with 'Server response time' might indicate a degradation of the backend service or an infrastructure issue affecting the 'commoninfra-int-bl-0-eus' role instance. This could be corroborated by the logs mentioning 'GatewayTimeout' and 'ECONNRESET', which suggest problems with network connectivity or the upstream services, potentially resulting in timed-out or reset connections. Additionally, the reported issues with 'blobServiceInitializer' and 'MsiTokenHandler' point to difficulties with accessing or authentication within Azure Blob Storage, which may be contributing factors to the failed requests and slow server responses.\n\n2. The spikes in 'Dependency calls' and 'Dependency duration' accompanied by timeouts in 'Redis eval' and promises suggest that there could be performance bottlenecks or high latencies in external dependencies, such as Redis and the 'oiinteusnoop01.eastus.kusto.windows.net' service. These performance issues seem to stem from heavy load or inefficient caching mechanisms, as timeouts in data retrieval operations were indicated. Furthermore, the 'aggregateauthenticationerror' suggests widespread authentication failures, possibly due to configuration issues or unavailable endpoints, which could also result in failed external calls and increased latency application-wide.\n",
+              "whatCanBeDoneNext": "- Investigate the 'commoninfra-int-bl-0-eus' role instance for any infrastructure issues by checking the Azure Monitor for any alerts or notifications related to the role instance health, and review the activity logs for any recent changes or updates that could have impacted its performance.\n- Review the Azure Blob Storage access and authentication logs for 'blobServiceInitializer' and 'MsiTokenHandler' to identify any access issues or authentication failures, and verify the storage account configurations to ensure they are correct and the services are operational.\n- Analyze the dependency telemetry in Application Insights for 'Redis eval' and 'oiinteusnoop01.eastus.kusto.windows.net' to identify patterns or trends that could indicate performance bottlenecks or inefficiencies, and consider implementing or adjusting caching strategies to alleviate load.\n- Check for any recent changes in authentication configurations that might have caused the 'aggregateauthenticationerror', and validate the availability and correctness of endpoints that the application relies on for authentication.\n- Given the information about HTTP 502 and 503 responses, ensure that server-side monitoring is enabled and properly configured in Application Insights to capture these errors, and cross-reference with web server logs to confirm the occurrence and source of these errors.\n"
+            },
+            "children": [
+              {
+                "id": "df7974ec-56f1-4b4d-a73c-64e72a199c1d",
+                "entityType": "Evidence",
+                "relevance": "Relevant",
+                "healthState": "Unhealthy",
+                "origin": {
+                  "addedBy": "Investigation",
+                  "addedByType": "Automatic"
+                },
+                "createdAt": "2024-12-24T12:07:39.4090403+02:00",
+                "lastModifiedAt": "2024-12-24T12:37:39.4090362+02:00",
+                "execution": {
+                  "runState": "Succeeded",
+                  "completedAt": "2024-12-24T12:37:39.4090362+02:00"
+                },
+                "details": {
+                  "detailsType": "AzureMetric",
+                  "category": "Metric",
+                  "data": {
+                    "metricName": "Percentage CPU",
+                    "metricNamespace": "Microsoft.Compute/virtualMachines",
+                    "metricInterval": "PT15M",
+                    "metricAggregation": "Average",
+                    "scanRange": {
+                      "start": "2024-12-24T07:34:14+02:00",
+                      "end": "2024-12-24T09:34:14+02:00"
+                    },
+                    "dimensions": {}
+                  },
+                  "insight": {
+                    "anomalyScanRange": {
+                      "start": "2024-12-08T12:36:58+02:00",
+                      "end": "2024-12-24T09:34:14+02:00"
+                    },
+                    "thresholds": {
+                      "high": 201.53,
+                      "low": 169.41
+                    },
+                    "anomalyDirection": "Increase",
+                    "anomalyTime": "2024-12-18T12:07:39.4090403+02:00"
+                  },
+                  "resourceIds": [
+                    "/subscriptions/4b3bd59a-46ba-42c2-9a9b-4c6cebcd00d4/resourcegroups/aimon-rg/providers/microsoft.insights/components/draft-int"
+                  ]
+                },
+                "children": []
+              },
+              {
+                "id": "df7974ec-56f1-4b4d-a73c-64e72a199c1d",
+                "entityType": "Evidence",
+                "relevance": "Relevant",
+                "healthState": "Healthy",
+                "origin": {
+                  "addedBy": "Investigation",
+                  "addedByType": "Manual"
+                },
+                "createdAt": "2024-12-24T12:07:39.4090403+02:00",
+                "lastModifiedAt": "2024-12-24T12:37:39.4090362+02:00",
+                "execution": {
+                  "runState": "Succeeded",
+                  "completedAt": "2024-12-24T12:37:39.4090362+02:00"
+                },
+                "details": {
+                  "detailsType": "AzureMetric",
+                  "category": "Metric",
+                  "data": {
+                    "metricName": "Percentage CPU",
+                    "metricNamespace": "Microsoft.Compute/virtualMachines",
+                    "metricInterval": "PT15M",
+                    "metricAggregation": "Average",
+                    "scanRange": {
+                      "start": "2024-12-01T14:36:58+02:00",
+                      "end": "2024-12-24T09:34:14+02:00"
+                    },
+                    "dimensions": {}
+                  },
+                  "insight": {
+                    "anomalyScanRange": {
+                      "start": "2024-12-08T12:36:58+02:00",
+                      "end": "2024-12-24T09:34:14+02:00"
+                    },
+                    "thresholds": {
+                      "high": 201.53,
+                      "low": 169.41
+                    },
+                    "anomalyDirection": "Increase",
+                    "anomalyTime": "2024-12-18T12:07:39.4090403+02:00"
+                  },
+                  "resourceIds": [
+                    "/subscriptions/4b3bd59a-46ba-42c2-9a9b-4c6cebcd00d4/resourcegroups/aimon-rg/providers/microsoft.insights/components/draft-int"
+                  ]
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "537426a3-0dbb-472c-865c-5a6ca03aa71d",
+            "entityType": "Finding",
+            "relevance": "Relevant",
+            "healthState": "Unhealthy",
+            "origin": {
+              "addedBy": "Investigation",
+              "addedByType": "Automatic"
+            },
+            "createdAt": "2024-12-24T12:37:39.4090362+02:00",
+            "lastModifiedAt": "2024-12-24T12:37:39.4090362+02:00",
+            "execution": {
+              "runState": "Succeeded",
+              "completedAt": "2024-12-24T12:37:39.4090362+02:00"
+            },
+            "summary": {
+              "title": "Error in data retrieval from cache due to promise timeout",
+              "whatHappened": "The RefreshableCachedDAO.getFromCache operation for the KCM Data source locator failed due to a promise timeout.\n",
+              "possibleExplanation": "The error code indicates that the `RefreshableCachedDAO` service failed to retrieve data from the cache due to a promise timeout. This suggests that the data source locator for the KCM service was unable to fetch the required data within the expected time frame, resulting in a timeout error. This issue could be caused by network latency, cache misconfiguration, or data source unavailability, leading to a failure in the data retrieval process.\n",
+              "whatCanBeDoneNext": "1. Investigate the cache configuration and data source locator for the KCM service to identify any misconfigurations or issues that could be causing the promise timeout error. Check the cache settings, network connectivity, and data source availability to ensure that the data retrieval process is functioning as expected.\n2. Monitor the cache performance and data retrieval operations for the KCM service to identify any patterns or trends that could indicate potential issues with the cache or data source locator. Implement additional logging and monitoring to track the data retrieval process and identify any bottlenecks or failures that could be impacting the service's performance.\n"
+            },
+            "children": [
+              {
+                "id": "a457fae1-717f-43d9-b98e-5588545e4ce7",
+                "entityType": "Evidence",
+                "relevance": "Irrelevant",
+                "healthState": "Unhealthy",
+                "origin": {
+                  "addedBy": "Investigation",
+                  "addedByType": "Automatic"
+                },
+                "createdAt": "2024-12-24T12:07:39.4090403+02:00",
+                "lastModifiedAt": "2024-12-24T12:37:39.4090362+02:00",
+                "execution": {
+                  "runState": "Succeeded",
+                  "completedAt": "2024-12-24T12:37:39.4090362+02:00"
+                },
+                "details": {
+                  "detailsType": "RelatedAlert",
+                  "category": "Alert",
+                  "data": {
+                    "firedAlertId": "/subscriptions/4b3bd59a-46ba-42c2-9a9b-4c6cebcd00d4/resourcegroups/aimon-rg/providers/microsoft.insights/components/draft-int/providers/Microsoft.AlertsManagement/alerts/3ae7c07d-116f-8a8e-c84d-aae01dd5000"
+                  },
+                  "insight": {
+                    "firedTime": "2024-12-18T10:07:39.4092694+02:00",
+                    "anomalyTime": "2024-12-18T12:07:39.4092682+02:00"
+                  },
+                  "resourceIds": [
+                    "/subscriptions/4b3bd59a-46ba-42c2-9a9b-4c6cebcd00d4/resourcegroups/aimon-rg/providers/microsoft.insights/components/draft-int"
+                  ]
+                },
+                "children": []
+              },
+              {
+                "id": "9c610cb0-a37a-4d33-9829-31bcb12b25f2",
+                "entityType": "Evidence",
+                "relevance": "Relevant",
+                "healthState": "Unhealthy",
+                "origin": {
+                  "addedBy": "Investigation",
+                  "addedByType": "Automatic"
+                },
+                "createdAt": "2024-12-24T12:07:39.4090403+02:00",
+                "lastModifiedAt": "2024-12-24T12:37:39.4090362+02:00",
+                "execution": {
+                  "runState": "Succeeded",
+                  "completedAt": "2024-12-18T12:37:39.4093141+02:00"
+                },
+                "details": {
+                  "detailsType": "AbnormalEvent",
+                  "category": "Log",
+                  "data": {
+                    "kqlFilter": "| where tostring(tolower(name)) == 'post /v1/workspaces/7c5d0b6d-c7a6-4353-a5f3-e18d8758072e/query'"
+                  },
+                  "insight": {
+                    "cloudRoleName": "commoninfra-int-bl-0-eus",
+                    "analysisStartTime": "2024-12-14T09:39:14+02:00",
+                    "analysisEndTime": "2024-12-24T09:39:14+02:00",
+                    "target": "post /v1/workspaces/7c5d0b6d-c7a6-4353-a5f3-e18d8758072e/query",
+                    "description": "Spike of 0.1% of failures for this request `post /v1/workspaces/7c5d0b6d-c7a6-4353-a5f3-e18d8758072e/query` from `commoninfra-int-bl-0-eus`",
+                    "examples": [
+                      "de490037-c1bd-11ef-b8e3-6045bd2446b7",
+                      "f3a3b444-c1bd-11ef-b8e3-000d3afa3e5c",
+                      "f31bab27-c1bd-11ef-b8e3-000d3afab97d"
+                    ],
+                    "totalCount": 24388,
+                    "failedCount": 21,
+                    "abnormalEventType": "Request",
+                    "anomalyTime": "0001-01-01T02:00:00+02:00",
+                    "transactionPatternAnomalies": [
+                      {
+                        "name": "commoninfra-int-bl-0-eus -> oiinteusnoop01.eastus.kusto.windows.net",
+                        "generatedMessage": "This is the top failing transaction pattern from application `commoninfra-int-bl-0-eus` to `oiinteusnoop01.eastus.kusto.windows.net`, representing 100.0% of the failures",
+                        "targetNode": "commoninfra-int-bl-0-eus",
+                        "nodes": [
+                          {
+                            "id": "commoninfra-int-bl-0-eus",
+                            "metadata": {}
+                          },
+                          {
+                            "id": "oiinteusnoop02.eastus.kusto.windows.net",
+                            "metadata": {}
+                          },
+                          {
+                            "id": "oiinteusnoop01.eastus.kusto.windows.net",
+                            "metadata": {}
+                          }
+                        ],
+                        "edges": [
+                          {
+                            "start": "commoninfra-int-bl-0-eus",
+                            "end": "oiinteusnoop02.eastus.kusto.windows.net",
+                            "metadata": {
+                              "Calls": "18"
+                            }
+                          },
+                          {
+                            "start": "commoninfra-int-bl-0-eus",
+                            "end": "oiinteusnoop01.eastus.kusto.windows.net",
+                            "metadata": {
+                              "Calls": "18"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "tracePatternAnomalies": [
+                      {
+                        "generatedMessage": "The RefreshableCachedDAO.getFromCache operation for the KCM Data source locator failed due to a promise timeout.\n",
+                        "pattern": "RefreshableCachedDAO.getFromCache failed for * * * *.  Reason: Promise timed out",
+                        "sampleEvent": "RefreshableCachedDAO.getFromCache failed for KCM Data source locator.  Reason: Promise timed out",
+                        "count": 206
+                      }
+                    ],
+                    "exceptionPatternAnomalies": [
+                      {
+                        "problemId": "Error at TelemetryClient.trackException",
+                        "count": 8,
+                        "itemId": "d51ff520-c1ba-11ef-b8e3-6045bd2446ee",
+                        "generatedMessage": "The error code indicates that there was a failure in initializing the `blobServiceInitializer` due to an issue with the `MsiTokenHandler`. This suggests a problem with the Managed Service Identity (MSI) token retrieval or configuration, which is necessary for authenticating and accessing Azure Blob Storage.\n"
+                      },
+                      {
+                        "problemId": "Error at connResetException",
+                        "count": 11,
+                        "itemId": "c499ed21-c1ba-11ef-b8e3-6045bd244abe",
+                        "generatedMessage": "The error code \"socket hang up\" indicates that the connection was unexpectedly terminated, likely due to network issues or the remote server closing the connection. This typically results in a failure to establish or maintain a network communication session.\n"
+                      },
+                      {
+                        "problemId": "Error at GatewayTimeout.OneApiInnerError [as constructor]",
+                        "count": 8,
+                        "itemId": "c499ed22-c1ba-11ef-b8e3-6045bd244abe",
+                        "generatedMessage": "The exception trace indicates a `GatewayTimeout` error, which typically means that the server, acting as a gateway or proxy, did not receive a timely response from an upstream server. The inner error message \"Connection error\" suggests that the underlying issue is related to connectivity problems between services.\n"
+                      },
+                      {
+                        "problemId": "Error at WriteWrap.onWriteComplete [as oncomplete]",
+                        "count": 1,
+                        "itemId": "e0e497fa-c1bd-11ef-b8e3-6045bd2446ee",
+                        "generatedMessage": "The error code \"ECONNRESET\" indicates that the connection was forcibly closed by the remote host. This typically means that the server or network connection was unexpectedly terminated.\\n"
+                      },
+                      {
+                        "problemId": "Error at TCPConnectWrap.afterConnect [as oncomplete]",
+                        "count": 8,
+                        "itemId": "ff777fdc-c1bd-11ef-b8e3-6045bd2443a0",
+                        "generatedMessage": "\"The error code \\\"ECONNRESET\\\" indicates that the connection to the IP address 135.237.72.82 on port 443 was forcibly closed by the remote host. This typically suggests network issues or that the server reset the connection unexpectedly.\\n"
+                      }
+                    ]
+                  },
+                  "resourceIds": [
+                    "/subscriptions/3d622127-49e9-4114-b2cf-ebd79ec7e969/resourceGroups/SherlockDiagnostics_Dev_Eus_0/providers/microsoft.insights/components/appi-sherlockdiag-dev"
+                  ]
+                },
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

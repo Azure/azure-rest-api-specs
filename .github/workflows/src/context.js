@@ -32,7 +32,10 @@ export async function extractInputs(github, context, core) {
     context.eventName === "pull_request" ||
     (context.eventName === "pull_request_target" &&
       // "pull_request_target" is particularly dangerous, so only support actions as needed
-      (context.payload.action === "labeled" ||
+      (context.payload.action === "opened" ||
+        context.payload.action === "synchronize" ||
+        context.payload.action === "reopened" ||
+        context.payload.action === "labeled" ||
         context.payload.action === "unlabeled"))
   ) {
     // Most properties on payload should be the same for both pull_request and pull_request_target

@@ -1,13 +1,8 @@
-import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
 
 // Official Name: Azure Health Data Services de-identification service
 @useAuth(AadToken)

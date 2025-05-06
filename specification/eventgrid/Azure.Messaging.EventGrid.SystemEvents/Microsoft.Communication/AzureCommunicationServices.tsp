@@ -202,6 +202,7 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   deliveryStatusDetails?: string;
 
   /** List of details of delivery attempts made */
+  @visibility(Lifecycle.Read)
   deliveryAttempts: AcsSmsDeliveryAttemptProperties[];
 
   /** The time at which the SMS delivery report was received */
@@ -324,6 +325,7 @@ model AcsRouterJobClassificationFailedEventData extends AcsRouterJobEventData {
   classificationPolicyId?: string;
 
   /** Router Job Classification Failed Errors */
+  @visibility(Lifecycle.Read)
   errors: AcsRouterCommunicationError[];
 }
 
@@ -340,6 +342,7 @@ model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Attached Worker Selector */
+  @visibility(Lifecycle.Read)
   attachedWorkerSelectors: AcsRouterWorkerSelector[];
 }
 
@@ -387,9 +390,11 @@ model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Queued Attached Worker Selector */
+  @visibility(Lifecycle.Read)
   attachedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Queued Requested Worker Selector */
+  @visibility(Lifecycle.Read)
   requestedWorkerSelectors: AcsRouterWorkerSelector[];
 }
 
@@ -407,6 +412,7 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Received Requested Worker Selectors */
+  @visibility(Lifecycle.Read)
   requestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Received Scheduled Time in UTC */
@@ -465,9 +471,11 @@ model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Scheduling Failed Attached Worker Selector Expired */
+  @visibility(Lifecycle.Read)
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Scheduling Failed Requested Worker Selector Expired */
+  @visibility(Lifecycle.Read)
   expiredRequestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Scheduling Failed Scheduled Time in UTC */
@@ -496,9 +504,11 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Waiting For Activation Worker Selector Expired */
+  @visibility(Lifecycle.Read)
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Waiting For Activation Requested Worker Selector Expired */
+  @visibility(Lifecycle.Read)
   expiredRequestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Waiting For Activation Scheduled Time in UTC */
@@ -515,9 +525,11 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
 model AcsRouterJobWorkerSelectorsExpiredEventData
   extends AcsRouterJobEventData {
   /** Router Job Worker Selectors Expired Requested Worker Selectors */
+  @visibility(Lifecycle.Read)
   expiredRequestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Worker Selectors Expired Attached Worker Selectors */
+  @visibility(Lifecycle.Read)
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
 }
 
@@ -630,9 +642,11 @@ model AcsRouterWorkerRegisteredEventData {
   workerId?: string;
 
   /** Router Worker Registered Queue Info */
+  @visibility(Lifecycle.Read)
   queueAssignments: AcsRouterQueueDetails[];
 
   /** Router Worker Registered Channel Configuration */
+  @visibility(Lifecycle.Read)
   channelConfigurations: AcsRouterChannelConfiguration[];
 
   /** Router Worker Register Total Capacity */
@@ -717,7 +731,8 @@ model AcsRouterCommunicationError {
   innererror: AcsRouterCommunicationError;
 
   /** List of Router Communication Errors */
-  details: AcsRouterCommunicationError[];
+  @visibility(Lifecycle.Read)
+  errors: AcsRouterCommunicationError[];
 }
 
 /** Router Job Worker Selector */
@@ -765,6 +780,7 @@ alias AcsChatThreadBaseEventData = {
   metadata: Record<string>;
 
   /** The list of properties of participants who are part of the thread */
+  @visibility(Lifecycle.Read)
   participants: AcsChatThreadParticipantProperties[];
 };
 
@@ -1034,6 +1050,7 @@ model AcsSmsDeliveryAttemptProperties {
 /** Schema for all properties of Recording Storage Information. */
 model AcsRecordingStorageInfoProperties {
   /** List of details of recording chunks information */
+  @visibility(Lifecycle.Read)
   recordingChunks: AcsRecordingChunkInfoProperties[];
 }
 
@@ -1158,9 +1175,11 @@ model AcsRouterWorkerUpdatedEventData {
   workerId?: string;
 
   /** Router Worker Updated Queue Info */
+  @visibility(Lifecycle.Read)
   queueAssignments: AcsRouterQueueDetails[];
 
   /** Router Worker Updated Channel Configuration */
+  @visibility(Lifecycle.Read)
   channelConfigurations: AcsRouterChannelConfiguration[];
 
   /** Router Worker Updated Total Capacity */
@@ -1173,6 +1192,7 @@ model AcsRouterWorkerUpdatedEventData {
   tags: Record<string>;
 
   /** Router Worker Properties Updated */
+  @visibility(Lifecycle.Read)
   updatedWorkerProperties: AcsRouterUpdatedWorkerProperty[];
 }
 

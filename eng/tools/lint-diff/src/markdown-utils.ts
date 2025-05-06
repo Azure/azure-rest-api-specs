@@ -200,7 +200,7 @@ export function getDefaultTag(markdownContent: string): string {
 
   const lh = codeBlockMap[latestHeader];
   if (lh) {
-    const latestDefinition = YAML.load(lh.literal!) as undefined | { tag: string };
+    const latestDefinition = YAML.load(lh.literal!, { schema: YAML.FAILSAFE_SCHEMA }) as undefined | { tag: string };
     if (latestDefinition) {
       return latestDefinition.tag;
     }
@@ -210,7 +210,9 @@ export function getDefaultTag(markdownContent: string): string {
       if (!lh || !lh.info || lh.info.trim().toLocaleLowerCase() !== "yaml") {
         continue;
       }
-      const latestDefinition = YAML.load(lh.literal!) as undefined | { tag: string };
+      const latestDefinition = YAML.load(lh.literal!, { schema: YAML.FAILSAFE_SCHEMA }) as
+        | undefined
+        | { tag: string };
 
       if (latestDefinition) {
         return latestDefinition.tag;

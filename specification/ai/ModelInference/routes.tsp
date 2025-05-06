@@ -7,6 +7,7 @@ import "./models/common.tsp";
 import "./models/chat_completions.tsp";
 import "./models/embeddings.tsp";
 import "./models/image_embeddings.tsp";
+import "./models/image_generations.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -66,6 +67,21 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
+>;
+
+@doc("""
+  Generates an image based on a text or image prompt.
+  The method makes a REST API call to the `/images/generations` route on the given endpoint.
+  """)
+@actionSeparator("/")
+@route("images/generations")
+@added(ModelInference.Versions.v2025_05_15_Preview)
+op getImageGenerations is Azure.Core.RpcOperation<
+  {
+    ...ImageGenerationsOptions;
+    ...AdditionalRequestHeaders;
+  },
+  ImageGenerationsResult
 >;
 
 @doc("""

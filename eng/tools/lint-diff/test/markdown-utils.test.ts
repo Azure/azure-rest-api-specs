@@ -116,6 +116,36 @@ describe("getDefaultTag", () => {
 
     expect(defaultTag).toEqual("");
   });
+
+  test.each([
+    {
+      description: "without Basic Information header",
+      readmeContent: `# Some header
+This should be parsed as a string, not a Date object.
+\`\`\`yaml
+tag: 2025-01-01
+\`\`\`
+`,
+    },
+    {
+      description: "with Basic Information header",
+      readmeContent: `# Basic Information
+This should be parsed as a string, not a Date object.
+\`\`\`yaml
+tag: 2025-01-01
+\`\`\`
+`,
+    },
+  ])(
+    "returns a string for default tag even when the tag is formatted like a date ($description)",
+    ({ readmeContent }) => {
+      const defaultTag = getDefaultTag(readmeContent);
+
+      expect(defaultTag).not.toBeInstanceOf(Date);
+      expect(defaultTag).toBeTypeOf("string");
+      expect(defaultTag).toEqual("2025-01-01");
+    },
+  );
 });
 
 describe("getAllTags", () => {
@@ -156,7 +186,7 @@ describe("getOpenapiType", () => {
     expect(openapiType).toEqual("data-plane");
   });
 
-  test.skipIf(isWindows)("openapi-type found but not valid", async () => {
+  test.skipIf(isWindows())("openapi-type found but not valid", async () => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/data-plane/type-found-not-valid-readme.md",
@@ -166,7 +196,7 @@ describe("getOpenapiType", () => {
     expect(openapiType).toEqual("data-plane");
   });
 
-  test.skipIf(isWindows)("openapi-type not found, type arm", async () => {
+  test.skipIf(isWindows())("openapi-type not found, type arm", async () => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/resource-manager/inferred-resource-manager-readme.md",
@@ -174,7 +204,7 @@ describe("getOpenapiType", () => {
     const openApiType = await getOpenapiType(markdownFile);
     expect(openApiType).toEqual("arm");
   });
-  test.skipIf(isWindows)("openapi-type not found, type data-plane", async () => {
+  test.skipIf(isWindows())("openapi-type not found, type data-plane", async () => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/data-plane/inferred-data-plane-readme.md",

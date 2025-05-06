@@ -1,8 +1,8 @@
 // @ts-check
-import { sdkLabels } from "../../src/sdk-types.js";
-import { LabelAction } from "./label.js";
+import { sdkLabels } from "../../shared/src/sdk-types.js";
 import { extractInputs } from "./context.js";
 import { getIssueNumber } from "./issues.js";
+import { LabelAction } from "./label.js";
 import { fetchWithRetry } from "./retries.js";
 
 /**
@@ -43,8 +43,9 @@ export async function getLabelAndAction({ github, context, core }) {
  * @param {string} params.ado_build_id
  * @param {string} params.ado_project_url
  * @param {string} params.head_sha
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api)} params.github
  * @param {typeof import("@actions/core")} params.core
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api)} params.github
+ * @param {import('./retries.js').RetryOptions} [params.retryOptions]
  * @returns {Promise<{labelName: string, labelAction: LabelAction, issueNumber: number}>}
  */
 export async function getLabelAndActionImpl({
@@ -53,11 +54,15 @@ export async function getLabelAndActionImpl({
   head_sha,
   core,
   github,
+  retryOptions = {},
 }) {
+  // Override default logger from console.log to core.info
+  retryOptions = { logger: core.info, ...retryOptions };
+
   let issue_number = NaN;
   let labelAction;
   let labelName = "";
-  const artifactName = "spec-gen-sdk-breaking-change-artifact";
+  const artifactName = "spec-gen-sdk-artifact";
   const artifactFileName = artifactName + ".json";
   const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
@@ -71,7 +76,7 @@ export async function getLabelAndActionImpl({
         "Content-Type": "application/json",
       },
     },
-    { logger: core.info },
+    retryOptions,
   );
 
   if (response.status === 404) {

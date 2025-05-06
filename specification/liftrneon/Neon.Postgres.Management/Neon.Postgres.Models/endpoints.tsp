@@ -6,12 +6,12 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using LiftrBase.Data;
 
-namespace Neon.Postgres.Models;
+namespace Neon.Postgres;
 
 @doc("The Neon compute endpoint resource type.")
 @added(Neon.Postgres.Versions.v2_preview)
 @parentResource(Branch)
-model Endpoint is ProxyResource<Models.EndpointProperties> {
+model Endpoint is ProxyResource<EndpointProperties> {
   ...ResourceNameParameter<
     Resource = Endpoint,
     KeyName = "endpointName",
