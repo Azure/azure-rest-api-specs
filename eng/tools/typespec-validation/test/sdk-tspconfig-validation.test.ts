@@ -70,6 +70,11 @@ export function createEmitterOptionExample(
   return content;
 }
 
+// TODO: remove when @azure-tools/typespec-csharp is ready for validating tspconfig
+function shouldBeTrueOnFailSubRuleValidation(emitterName: string) {
+  return emitterName === "@azure-tools/typespec-csharp" ? true : false;
+}
+
 function createParameterTestCases(
   folder: string,
   key: string,
@@ -130,7 +135,7 @@ function createEmitterOptionTestCases(
       key: key,
       value: invalidValue,
     }),
-    success: false,
+    success: shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
 
@@ -138,7 +143,7 @@ function createEmitterOptionTestCases(
     description: `Validate ${language}'s option:${key} with undefined value`,
     folder,
     tspconfigContent: createEmitterOptionExample(emitterName),
-    success: allowUndefined ? true : false,
+    success: allowUndefined ? true : shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
 
@@ -150,7 +155,7 @@ function createEmitterOptionTestCases(
         key: key.split(".").slice(0, -1).join("."),
         value: validValue,
       }),
-      success: false,
+      success: shouldBeTrueOnFailSubRuleValidation(emitterName),
       subRules,
     });
   }
@@ -460,7 +465,7 @@ const csharpAzNamespaceWithPackageDirTestCases: Case[] = [
       { key: "namespace", value: "namespace" },
       { key: "package-dir", value: "Azure.AAA" },
     ),
-    success: false,
+    success: shouldBeTrueOnFailSubRuleValidation("@azure-tools/typespec-csharp"),
     subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
   },
 ];
@@ -592,7 +597,8 @@ describe("tspconfig", function () {
 
     const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(c.folder);
-    const returnSuccess = c.folder.includes(".Management") ? c.success : true;
+    // NOTE: to avoid huge impact on existing PRs, we always return true with info/warning messages.
+    const returnSuccess = true;
     strictEqual(result.success, returnSuccess);
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
