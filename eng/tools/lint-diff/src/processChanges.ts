@@ -3,12 +3,13 @@ import { readFile } from "fs/promises";
 import { pathExists } from "./util.js";
 import { specification, readme, swagger } from "@azure-tools/specs-shared/changed-files";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model"
+import deepEqual from "deep-eql"
 
 import {
   getTagsAndInputFiles,
   deduplicateTags,
 } from "./markdown-utils.js";
-import $RefParser, { FileInfo } from "@apidevtools/json-schema-ref-parser";
+import $RefParser from "@apidevtools/json-schema-ref-parser";
 
 export async function getRunList(
   beforePath: string,
@@ -222,10 +223,23 @@ export function getService(filePath: string): string {
   throw new Error(`Could not find service for file path: ${filePath}`);
 }
 
-const excludeExamples = (path: FileInfo) => { 
-  return !path.url.includes("/examples/");
-}
+/**
+ * Return true if the path contains "/examples/"
+ * @param path 
+ * @returns 
+ */
+const excludeExamples = (path: string) => path.includes("/examples/");
 
+/**
+ * Given a list of swagger files relatve to before and after root paths,
+ * return a set of swagger files that have changed. Changes can be directly in 
+ * the swagger file or in part of a referenced file that is included. Not all 
+ * changes to a file in a $ref will affect a given swagger file.
+ * @param beforeRoot 
+ * @param afterRoot 
+ * @param affectedSwaggerCandidates 
+ * @returns 
+ */
 export async function getChangedSwaggers(
   beforeRoot: string,
   afterRoot: string,
@@ -242,16 +256,18 @@ export async function getChangedSwaggers(
 
     const afterSwagger = join(afterRoot, swagger);
 
-    const bundleBefore = await $RefParser.bundle(
+    // Using dereference which supports excluding $ref paths (in this case, examples)
+    const derefBefore = await $RefParser.dereference(
       beforeSwagger, 
-      { resolve: { file: { canRead: excludeExamples}}},
+      { dereference: { excludedPathMatcher: excludeExamples}},
     );
-    const bundleAfter = await $RefParser.bundle(
+    const derefAfter = await $RefParser.dereference(
       afterSwagger, 
-      { resolve: { file: { canRead: excludeExamples}}},
+      { dereference: { excludedPathMatcher: excludeExamples}},
     );
 
-    if (JSON.stringify(bundleBefore) !== JSON.stringify(bundleAfter)) {
+    // Compare the dereferenced objects
+    if (!deepEqual(derefBefore, derefAfter)) {
       affectedSwaggers.add(swagger);
     }
   }
