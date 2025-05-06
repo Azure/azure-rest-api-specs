@@ -35,7 +35,7 @@ describe("commands.ts", () => {
 
       expect(log.setVsoVariable).toHaveBeenCalledWith(
         "PrBranch",
-        "sdkauto/sdk_security/keyvault/azcertificates",
+        "sdkauto/sdk-security/keyvault/azcertificates",
       );
       expect(log.setVsoVariable).toHaveBeenCalledWith(
         "PrTitle",
@@ -52,14 +52,18 @@ describe("commands.ts", () => {
     test("runMode is release when it has no batch-type and no pr-number", () => {
       const mockArgs = [
         "--scp",
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
         "--lang",
         "azure-sdk-for-go",
       ];
       vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", ...mockArgs]);
       const result = parseArguments();
       expect(result.localSpecRepoPath).toBe(
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-go");
       expect(result.prNumber).toBe("");
@@ -69,7 +73,9 @@ describe("commands.ts", () => {
     test("runMode is release when it has pr-number", () => {
       const mockArgs = [
         "--scp",
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
         "--pr-number",
         "1234",
       ];
@@ -78,7 +84,9 @@ describe("commands.ts", () => {
       const result = parseArguments();
 
       expect(result.localSpecRepoPath).toBe(
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-net");
       expect(result.prNumber).toBe("1234");
@@ -88,7 +96,9 @@ describe("commands.ts", () => {
     test("runMode is batch when it has batch-type", () => {
       const mockArgs = [
         "--scp",
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
         "--batch-type",
         "all-specs",
       ];
@@ -97,7 +107,9 @@ describe("commands.ts", () => {
       const result = parseArguments();
 
       expect(result.localSpecRepoPath).toBe(
-        path.normalize(`${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`),
+        path.normalize(
+          `${repoRoot}specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json"`,
+        ),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-net");
       expect(result.prNumber).toBe("");
@@ -272,7 +284,9 @@ describe("commands.ts", () => {
         mockhasManagementPlaneSpecs,
       );
 
-      const breakingChangeLabelArtifactPath = path.normalize("/working/folder/out/spec-gen-sdk-artifact");
+      const breakingChangeLabelArtifactPath = path.normalize(
+        "/working/folder/out/spec-gen-sdk-artifact",
+      );
 
       expect(result).toBe(0);
       expect(fs.mkdirSync).toHaveBeenCalledWith(breakingChangeLabelArtifactPath, {
@@ -311,7 +325,7 @@ describe("commands.ts", () => {
       vi.spyOn(log, "logMessage").mockImplementation(() => {});
       vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {});
 
-       const mockCommandInput = {
+      const mockCommandInput = {
         workingFolder: "/working/folder",
         sdkLanguage: "javascript",
         runMode: "",
