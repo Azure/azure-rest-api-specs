@@ -469,7 +469,6 @@
         }
       },
     "MetricAlertsMetricPropertiesForPatch": {
-      "x-ms-discriminator-value": "Metric",
       "type": "object",
       "allOf": [
         {
@@ -477,6 +476,11 @@
         }
       ],
       "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["Metric"],
+          "default": "Metric"
+        },
         "description": {
           "type": "string",
           "description": "the description of the metric alert that will be included in the alert email."
@@ -602,31 +606,30 @@
       ]
     },
     "MetricAlertsQueryPropertiesForPatch": {
-      "x-ms-discriminator-value": "Query",
-      "allOf": [
-          {
-          "$ref": "#/definitions/MetricAlertPropertiesBaseForPatch"
-          }
-      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricAlertPropertiesBaseForPatch"
+        }
+      ],
       "properties": {
-          "resolveConfiguration": {
-              "$ref": "#/definitions/QueryResolveConfiguration"
-          },
-          "criteria": {
-              "$ref": "#/definitions/MetricQueryCriteria"
-          }
+        "kind": {
+          "type": "string",
+          "enum": ["Query"],
+          "default": "Query"
+        },
+        "resolveConfiguration": {
+          "$ref": "#/definitions/QueryResolveConfiguration"
+        },
+        "criteria": {
+          "$ref": "#/definitions/MetricQueryCriteria"
+        }
       }
     },
     "MetricAlertPropertiesBaseForPatch": {
       "type": "object",
-      "discriminator": "kind",
       "description": "The base properties for a metric alert rule.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Indicates the type of metric alert"
-        },
         "description": {
           "type": "string",
           "description": "Description of the alert rule."
