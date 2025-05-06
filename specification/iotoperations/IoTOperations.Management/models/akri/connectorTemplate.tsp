@@ -125,6 +125,11 @@ model AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
    * The default configuration schema reference for streams.
    */
   defaultStreamsConfigSchemaRef?: string;
+
+  /**
+   * The default configuration schema reference for device additional configuration.
+   */
+  deviceAdditionalConfigurationSchemaRef?: string;
 }
 
 /**
@@ -316,14 +321,14 @@ model AkriConnectorTemplateAllocation {
    * The allocation policy type
    */
   policy: AkriConnectorTemplateAllocationPolicy;
-
 }
 
 /**
  * AkriConnectorTemplateBucketizedAllocation properties
-*/
+ */
 @added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateBucketizedAllocation extends AkriConnectorTemplateAllocation {
+model AkriConnectorTemplateBucketizedAllocation
+  extends AkriConnectorTemplateAllocation {
   /**
    * The allocation policy type
    */
