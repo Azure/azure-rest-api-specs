@@ -2128,7 +2128,6 @@ definitions:
     description:
       A chat message that makes up the prompt or context. May include variable
       references to the "item" namespace, ie {{item.name}}.
-    x-ms-discriminator-value: type
     allOf:
       - properties:
           content:
@@ -2149,7 +2148,6 @@ definitions:
     description: "A JsonlRunDataSource object with that specifies a JSONL file that matches the eval"
     properties:
       source:
-        x-ms-discriminator-value: type
         allOf:
           - $ref: "#/definitions/EvalJsonlFileContentSource"
           - $ref: "#/definitions/EvalJsonlFileIdSource"
@@ -2237,7 +2235,6 @@ definitions:
         description:
           The configuration for the data source used for the evaluation
           runs.
-        x-ms-discriminator-value: type
         allOf:
           - $ref: "#/definitions/CreateEvalCustomDataSourceConfig"
           - $ref: "#/definitions/CreateEvalLogsDataSourceConfig"
@@ -2250,7 +2247,6 @@ definitions:
       testing_criteria:
         description: A list of graders for all eval runs in this group.
         items:
-          x-ms-discriminator-value: type
           allOf:
             - $ref: "#/definitions/CreateEvalLabelModelGrader"
             - $ref: "#/definitions/EvalStringCheckGrader"
@@ -2266,7 +2262,6 @@ definitions:
     properties:
       data_source:
         description: Details about the run's data source.
-        x-ms-discriminator-value: type
         allOf:
           - $ref: "#/definitions/CreateEvalJsonlRunDataSource"
           - $ref: "#/definitions/CreateEvalCompletionsRunDataSource"
@@ -2532,7 +2527,6 @@ definitions:
         type: integer
       data_source_config:
         description: Configuration of data sources used in runs of the evaluation.
-        x-ms-discriminator-value: type
         allOf:
           - $ref: "#/definitions/EvalCustomDataSourceConfig"
           - $ref: "#/definitions/EvalStoredCompletionsDataSourceConfig"
@@ -2556,7 +2550,6 @@ definitions:
         default: eval
         description: A list of testing criteria.
         items:
-          x-ms-discriminator-value: type
           allOf:
             - $ref: "#/definitions/EvalLabelModelGrader"
             - $ref: "#/definitions/EvalStringCheckGrader"
@@ -2644,7 +2637,6 @@ definitions:
     properties:
       content:
         description: "Text inputs to the model - can contain template strings."
-        x-ms-discriminator-value: type
         allOf:
           - description: "A text input to the model."
             title: Text input
@@ -2810,7 +2802,6 @@ definitions:
         type: integer
       data_source:
         description: Information about the run's data source.
-        x-ms-discriminator-value: type
         allOf:
           - $ref: "#/definitions/CreateEvalJsonlRunDataSource"
           - $ref: "#/definitions/CreateEvalCompletionsRunDataSource"
