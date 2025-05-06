@@ -29,7 +29,7 @@ using TypeSpec.Versioning;
     endpoint: url,
   }
 )
-namespace LogsIngestionClient;
+namespace LogsIngestion;
 
 @doc("Service API versions")
 enum Versions {
