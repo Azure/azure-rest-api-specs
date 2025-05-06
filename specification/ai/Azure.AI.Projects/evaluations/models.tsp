@@ -200,6 +200,9 @@ model AgentEvaluationResult {
   @doc("Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion.")
   evaluator: string;
 
+  @doc("Identifier of the evaluator.")
+  evaluatorId: string;
+
   @doc("Score of the given evaluator. No restriction on range.")
   score: float32;
 
