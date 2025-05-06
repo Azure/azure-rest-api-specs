@@ -50,7 +50,7 @@ linter:
 
 - DO ensure that you have a security definition (`@useAuth`) specified for your service. See: [Security definitions in TypeSpec][security-definitions]. The @useAuth decorator should only be defined ONCE in the entire specification above the @server definition.
 - AVOID adding new namespaces.
-- Make sure there's a versions enum defined in the spec under the namespace. Ensure the `@versioned` decorator is specified over the namespace in main.tsp. Pass the versions enum to the `@versioned` decorator. Example of a typical structure for versioning:
+- Make sure the versions enum is declared under the existing namespace defined in main.tsp. Avoid adding it anywhere else. Ensure the `@versioned` decorator is specified over the namespace in main.tsp. Pass the versions enum to the `@versioned` decorator. Example of a typical structure for versioning:
 
 ```tsp
 // this is the main.tsp file
@@ -93,7 +93,16 @@ union WidgetColor {
 }
 ```
 
-- DO ensure that all models, properties, operations, parameters, enums, unions, and alias definitions have documentation over them.
+- DO ensure that all models, properties, operations, parameters, enums, unions, and alias definitions have documentation over them. TypeSpec convention recommends using the doc comment format `/** <docs go here> */` to add documentation, example:
+
+```tsp
+/** The color of a widget. */
+model Widget {
+  /** Widget name */
+  name: string
+}
+```
+
 - DO define your visibility decorators with the appropriate value from the Lifecycle class.
 - Avoid suppressing warnings
 - Operation names should be camel case
