@@ -179,6 +179,18 @@ interface ScriptExecutions extends Microsoft.AVS.ScriptExecutions {}
 @operationGroup
 interface IscsiPaths extends Microsoft.AVS.IscsiPaths {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface Hosts extends Microsoft.AVS.Hosts {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface ProvisionedNetworks extends Microsoft.AVS.ProvisionedNetworks {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface Skus extends Microsoft.AVS.Skus {}
+
 // model
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity"
