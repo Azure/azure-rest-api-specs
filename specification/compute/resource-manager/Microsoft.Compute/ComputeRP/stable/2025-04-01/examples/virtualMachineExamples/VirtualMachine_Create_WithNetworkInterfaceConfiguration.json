@@ -31,6 +31,9 @@
           "networkInterfaceConfigurations": [
             {
               "name": "{nic-config-name}",
+              "tags": {
+                  "nicTag": "tag"
+              },
               "properties": {
                 "primary": true,
                 "deleteOption": "Delete",
@@ -41,6 +44,9 @@
                       "primary": true,
                       "publicIPAddressConfiguration": {
                         "name": "{publicIP-config-name}",
+                        "tags": {
+                            "pipTag": "tag"
+                          },
                         "sku": {
                           "name": "Basic",
                           "tier": "Global"
