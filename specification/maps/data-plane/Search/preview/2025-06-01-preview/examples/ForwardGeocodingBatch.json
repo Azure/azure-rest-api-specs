@@ -1,0 +1,116 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "AzureKey": "[subscription-key]",
+    "geocodingBatchRequestBody": {
+      "batchItems": [
+        {
+          "addressLine": "15127 NE 24th Street, Redmond, WA 98052",
+          "top": 2,
+          "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B"
+        },
+        {
+          "query": "Pike Pl",
+          "locality": "Seattle",
+          "top": 3
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "successfulRequests": 1,
+          "totalRequests": 2
+        },
+        "batchItems": [
+          {
+            "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B",
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "properties": {
+                  "type": "Address",
+                  "confidence": "High",
+                  "matchCodes": [
+                    "Good"
+                  ],
+                  "address": {
+                    "locality": "Redmond",
+                    "adminDistricts": [
+                      {
+                        "shortName": "WA"
+                      },
+                      {
+                        "shortName": "King County"
+                      }
+                    ],
+                    "countryRegion": {
+                      "ISO": "US",
+                      "name": "United States"
+                    },
+                    "postalCode": "98052",
+                    "formattedAddress": "15127 NE 24th St, Redmond, WA 98052",
+                    "streetName": "NE 24th St",
+                    "streetNumber": "15127",
+                    "addressLine": "15127 NE 24th St"
+                  },
+                  "geocodePoints": [
+                    {
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          -122.138669,
+                          47.630359
+                        ]
+                      },
+                      "calculationMethod": "Rooftop",
+                      "usageTypes": [
+                        "Display",
+                        "Route"
+                      ]
+                    },
+                    {
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          -122.1387383,
+                          47.630563
+                        ]
+                      },
+                      "calculationMethod": "Rooftop",
+                      "usageTypes": [
+                        "Route"
+                      ]
+                    }
+                  ]
+                },
+                "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                    -122.138669,
+                    47.630359
+                  ]
+                },
+                "bbox": [
+                  -122.14631082421619,
+                  47.62649628242932,
+                  -122.1310271757838,
+                  47.634221717570675
+                ]
+              }
+            ]
+          },
+          {
+            "error": {
+              "code": "Conflicting Parameters",
+              "message": "When 'query' is present, only the following parameters are valid: 'bbox, location, view, top'. 'locality' was passed"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
