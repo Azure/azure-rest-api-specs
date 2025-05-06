@@ -12,13 +12,6 @@ vi.mock("node:fs/promises", async () => {
   };
 });
 
-vi.mock("fs", async () => {
-  const memfs = await vi.importActual("memfs") as typeof import("memfs");
-  return {
-    ...memfs.fs,
-  };
-});
-
 describe("readFileList", () => {
   afterEach(() => {
     vol.reset();
