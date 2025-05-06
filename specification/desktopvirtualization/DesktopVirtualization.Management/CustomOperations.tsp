@@ -28,7 +28,7 @@ alias OptionalBody<Body extends {}> = {
 @autoRoute
 @doc("Update a {name}", Resource)
 @armResourceUpdate(Resource)
-@patch
+@patch(#{ implicitOptionality: true })
 op ArmCustomPatchSync<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   PatchModel extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,
@@ -61,7 +61,7 @@ op ArmCustomPatchSync<
 @autoRoute
 @doc("Update a {name}", Resource)
 @armResourceUpdate(Resource)
-@patch
+@patch(#{ implicitOptionality: true })
 op ArmCustomPatchAsync<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   PatchModel extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,
