@@ -10,7 +10,7 @@ using Microsoft.AVS;
     name: "WorkloadNetworksClient",
     service: Microsoft.AVS,
   },
-  "csharp,go,java,javascript,python"
+  "csharp,java,javascript,python"
 )
 namespace Customizations;
 
