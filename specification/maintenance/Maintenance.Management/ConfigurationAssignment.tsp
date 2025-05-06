@@ -44,8 +44,6 @@ interface ConfigurationAssignmentOps
 
         /** {resourceType} */
         @path @segment("{resourceType}") resourceName: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = ConfigurationAssignment,
@@ -150,8 +148,6 @@ interface ConfigurationAssignmentOperationGroupOps
 
         /** {resourceType} */
         @path @segment("{resourceType}") resourceName: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = ConfigurationAssignment,

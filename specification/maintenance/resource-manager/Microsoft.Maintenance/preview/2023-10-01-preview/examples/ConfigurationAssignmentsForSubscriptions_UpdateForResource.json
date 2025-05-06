@@ -1,21 +1,23 @@
 {
   "parameters": {
-    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
-    "configurationAssignmentName": "workervmConfiguration",
     "api-version": "2023-10-01-preview",
     "configurationAssignment": {
       "properties": {
-        "maintenanceConfigurationId": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourcegroups/examplerg/providers/Microsoft.Maintenance/maintenanceConfigurations/configuration1",
         "filter": {
-          "resourceTypes": [
-            "Microsoft.HybridCompute/machines",
-            "Microsoft.Compute/virtualMachines"
+          "locations": [
+            "Japan East",
+            "UK South"
           ],
           "resourceGroups": [
             "RG1",
             "RG2"
           ],
+          "resourceTypes": [
+            "Microsoft.HybridCompute/machines",
+            "Microsoft.Compute/virtualMachines"
+          ],
           "tagSettings": {
+            "filterOperator": "Any",
             "tags": {
               "tag1": [
                 "tag1Value1",
@@ -27,36 +29,37 @@
                 "tag2Value2",
                 "tag2Value3"
               ]
-            },
-            "filterOperator": "Any"
-          },
-          "locations": [
-            "Japan East",
-            "UK South"
-          ]
-        }
+            }
+          }
+        },
+        "maintenanceConfigurationId": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourcegroups/examplerg/providers/Microsoft.Maintenance/maintenanceConfigurations/configuration1"
       }
-    }
+    },
+    "configurationAssignmentName": "workervmConfiguration",
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/providers/Microsoft.Maintenance/configurationAssignments/workervmConfiguration",
         "name": "workervmConfiguration",
         "type": "Microsoft.Maintenance/configurationAssignments",
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/providers/Microsoft.Maintenance/configurationAssignments/workervmConfiguration",
         "properties": {
-          "maintenanceConfigurationId": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourcegroups/examplerg/providers/Microsoft.Maintenance/maintenanceConfigurations/configuration1",
-          "resourceId": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
           "filter": {
-            "resourceTypes": [
-              "Microsoft.HybridCompute/machines",
-              "Microsoft.Compute/virtualMachines"
+            "locations": [
+              "Japan East",
+              "UK South"
             ],
             "resourceGroups": [
               "RG1",
               "RG2"
             ],
+            "resourceTypes": [
+              "Microsoft.HybridCompute/machines",
+              "Microsoft.Compute/virtualMachines"
+            ],
             "tagSettings": {
+              "filterOperator": "Any",
               "tags": {
                 "tag1": [
                   "tag1Value1",
@@ -68,16 +71,15 @@
                   "tag2Value2",
                   "tag2Value3"
                 ]
-              },
-              "filterOperator": "Any"
-            },
-            "locations": [
-              "Japan East",
-              "UK South"
-            ]
-          }
+              }
+            }
+          },
+          "maintenanceConfigurationId": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourcegroups/examplerg/providers/Microsoft.Maintenance/maintenanceConfigurations/configuration1",
+          "resourceId": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4"
         }
       }
     }
-  }
+  },
+  "operationId": "ConfigurationAssignmentsForSubscriptions_Update",
+  "title": "ConfigurationAssignmentsForSubscriptions_CreateOrUpdate"
 }

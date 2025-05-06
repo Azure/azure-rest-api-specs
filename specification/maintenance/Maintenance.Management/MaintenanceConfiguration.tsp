@@ -128,8 +128,15 @@ interface MaintenanceConfigurationOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_List")
-  maintenanceConfigurationsList is MaintenanceConfigurationOperationGroupOps.ListBySubscription<
+  maintenanceConfigurationsList is MaintenanceConfigurationOperationGroupOps.List<
     MaintenanceConfiguration,
+    Parameters = {
+      /**
+       * Resource type
+       */
+      @path
+      AAA: string;
+    },
     Response = ArmResponse<ListMaintenanceConfigurationsResult>
   >;
 }

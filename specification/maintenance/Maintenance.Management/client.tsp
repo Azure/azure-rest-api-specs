@@ -7,9 +7,9 @@ using Microsoft.Maintenance;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(MaintenanceConfigurationProperties.maintenanceWindow);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Update.properties);
+//@@flattenProperty(Update.properties);
 
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@clientName(MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
   "configuration"
 );

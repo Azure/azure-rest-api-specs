@@ -38,8 +38,6 @@ interface ApplyUpdateOps
 
         /** {resourceType} */
         @path @segment("{resourceType}") resourceName: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = ApplyUpdate,
@@ -82,8 +80,6 @@ interface ApplyUpdateOperationGroupOps
 
         /** {resourceType} */
         @path @segment("{resourceType}") resourceName: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = ApplyUpdate,
@@ -132,8 +128,15 @@ interface ApplyUpdateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplyUpdates_List")
-  list is ApplyUpdateOperationGroupOps.ListBySubscription<
+  list is ApplyUpdateOperationGroupOps.List<
     ApplyUpdate,
+    Parameters = {
+      /**
+       * Resource type
+       */
+      @path
+      resourceType: string;
+    },
     Response = ArmResponse<ListApplyUpdate>
   >;
 }

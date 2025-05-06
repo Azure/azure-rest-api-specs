@@ -1,22 +1,27 @@
 {
   "parameters": {
-    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
+    "api-version": "2023-10-01-preview",
     "configurationAssignmentName": "workervmConfiguration",
-    "api-version": "2023-10-01-preview"
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/providers/Microsoft.Maintenance/configurationAssignments/workervmConfiguration",
         "name": "workervmConfiguration",
         "type": "Microsoft.Maintenance/configurationAssignments",
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/providers/Microsoft.Maintenance/configurationAssignments/workervmConfiguration",
         "properties": {
           "filter": {
+            "locations": [
+              "Japan East",
+              "UK South"
+            ],
             "resourceTypes": [
               "Microsoft.HybridCompute/machines",
               "Microsoft.Compute/virtualMachines"
             ],
             "tagSettings": {
+              "filterOperator": "All",
               "tags": {
                 "tag1": [
                   "tag1Value1",
@@ -28,18 +33,15 @@
                   "tag2Value2",
                   "tag2Value3"
                 ]
-              },
-              "filterOperator": "All"
-            },
-            "locations": [
-              "Japan East",
-              "UK South"
-            ]
+              }
+            }
           },
           "maintenanceConfigurationId": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourcegroups/examplerg/providers/Microsoft.Maintenance/maintenanceConfigurations/configuration1",
           "resourceId": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4"
         }
       }
     }
-  }
+  },
+  "operationId": "ConfigurationAssignmentsForSubscriptions_Get",
+  "title": "ConfigurationAssignments_GetParent"
 }
