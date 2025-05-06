@@ -11,13 +11,13 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.IoTOperations;
 
 /**
- * ConnectorTemplate resource
+ * AkriConnectorTemplate resource
  */
 @parentResource(InstanceResource)
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateResource is ProxyResource<ConnectorTemplateProperties> {
+model AkriConnectorTemplateResource is ProxyResource<AkriConnectorTemplateProperties> {
   /**
-   * Name of ConnectorTemplate resource
+   * Name of AkriConnectorTemplate resource
    */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("connectorConfigInstanceName")
@@ -36,10 +36,10 @@ model ConnectorTemplateResource is ProxyResource<ConnectorTemplateProperties> {
 }
 
 /**
- * ConnectorTemplate properties
+ * AkriConnectorTemplate properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateProperties {
+model AkriConnectorTemplateProperties {
   /**
    * The status of the last operation.
    */
@@ -49,24 +49,24 @@ model ConnectorTemplateProperties {
   /**
    * Metadata about AIO.
    */
-  aioMetadata?: ConnectorTemplateAioMetadata;
+  aioMetadata?: AkriConnectorTemplateAioMetadata;
 
   /**
    * The runtime configuration for the Connector template.
    */
-  runtimeConfiguration: ConnectorTemplateRuntimeConfiguration;
+  runtimeConfiguration: AkriConnectorTemplateRuntimeConfiguration;
 
   /**
    * Diagnostics settings for the Connector template.
    */
-  diagnostics?: ConnectorTemplateDiagnostics;
+  diagnostics?: AkriConnectorTemplateDiagnostics;
 
   /**
    * Device inbound endpoint types
    */
   @OpenAPI.extension("x-ms-identifiers", #["endpointType", "version"])
   @minItems(1)
-  deviceInboundEndpointTypes: ConnectorTemplateDeviceInboundEndpointType[];
+  deviceInboundEndpointTypes: AkriConnectorTemplateDeviceInboundEndpointType[];
 
   /**
    * Mqtt connection configuration settings
@@ -80,10 +80,10 @@ model ConnectorTemplateProperties {
 }
 
 /**
- * ConnectorTemplateDeviceInboundEndpointType properties
+ * AkriConnectorTemplateDeviceInboundEndpointType properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateDeviceInboundEndpointType {
+model AkriConnectorTemplateDeviceInboundEndpointType {
   /**
    * The type of the device inbound endpoint.
    */
@@ -97,14 +97,14 @@ model ConnectorTemplateDeviceInboundEndpointType {
   /**
    * The configuration schema references for the device inbound endpoint.
    */
-  configurationSchemaRefs?: ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs;
+  configurationSchemaRefs?: AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs;
 }
 
 /**
- * ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties
+ * AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
+model AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
   /**
    * The default configuration schema reference for datasets.
    */
@@ -127,30 +127,30 @@ model ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
 }
 
 /**
- * ConnectorTemplateAioMetadata properties
+ * AkriConnectorTemplateAioMetadata properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateAioMetadata {
+model AkriConnectorTemplateAioMetadata {
   ...AkriAioMetadata;
 }
 
 /**
- * ConnectorTemplateRuntimeConfiguration properties
+ * AkriConnectorTemplateRuntimeConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("runtimeConfigurationType")
-model ConnectorTemplateRuntimeConfiguration {
+model AkriConnectorTemplateRuntimeConfiguration {
   /**
    * Runtime configuration type for the Connector template.
    */
-  runtimeConfigurationType: ConnectorTemplateRuntimeConfigurationType;
+  runtimeConfigurationType: AkriConnectorTemplateRuntimeConfigurationType;
 }
 
 /**
  * Runtime configuration types.
  */
 @added(Versions.`2025-07-01-preview`)
-union ConnectorTemplateRuntimeConfigurationType {
+union AkriConnectorTemplateRuntimeConfigurationType {
   string,
 
   /**
@@ -165,11 +165,11 @@ union ConnectorTemplateRuntimeConfigurationType {
 }
 
 /**
- * ConnectorTemplateHelmConfiguration properties
+ * AkriConnectorTemplateHelmConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateHelmConfiguration
-  extends ConnectorTemplateRuntimeConfiguration {
+model AkriConnectorTemplateHelmConfiguration
+  extends AkriConnectorTemplateRuntimeConfiguration {
   /**
    * The runtime configuration type for the Connector template.
    */
@@ -178,14 +178,14 @@ model ConnectorTemplateHelmConfiguration
   /**
    * The Helm configuration settings
    */
-  helmConfigurationSettings: ConnectorTemplateHelmConfigurationSettings;
+  helmConfigurationSettings: AkriConnectorTemplateHelmConfigurationSettings;
 }
 
 /**
- * ConnectorTemplateHelmConfiguration properties
+ * AkriConnectorTemplateHelmConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateHelmConfigurationSettings {
+model AkriConnectorTemplateHelmConfigurationSettings {
   /**
    * The registry of the Helm chart.
    */
@@ -209,13 +209,13 @@ model ConnectorTemplateHelmConfigurationSettings {
   /**
    * Authentication secret reference for the Helm chart.
    */
-  authSecretRef?: ConnectorTemplateHelmAuthSecretRef;
+  authSecretRef?: AkriConnectorTemplateHelmAuthSecretRef;
 
   /**
    * Advanced configuration for the Helm chart.
    * install, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`
    */
-  advancedConfiguration?: ConnectorTemplateHelmAdvancedConfiguration;
+  advancedConfiguration?: AkriConnectorTemplateHelmAdvancedConfiguration;
 
   /**
    * A map of values to pass to the helm chart
@@ -225,11 +225,11 @@ model ConnectorTemplateHelmConfigurationSettings {
 }
 
 /**
- * ConnectorTemplateManagedConfiguration properties
+ * AkriConnectorTemplateManagedConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateManagedConfiguration
-  extends ConnectorTemplateRuntimeConfiguration {
+model AkriConnectorTemplateManagedConfiguration
+  extends AkriConnectorTemplateRuntimeConfiguration {
   /**
    * The runtime configuration type for the Connector template.
    */
@@ -238,30 +238,30 @@ model ConnectorTemplateManagedConfiguration
   /**
    * The managed configuration settings
    */
-  managedConfigurationSettings: ConnectorTemplateManagedConfigurationSettings;
+  managedConfigurationSettings: AkriConnectorTemplateManagedConfigurationSettings;
 }
 
 /**
- * ConnectorTemplateManagedConfiguration properties
+ * AkriConnectorTemplateManagedConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("managedConfigurationType")
-model ConnectorTemplateManagedConfigurationSettings {
+model AkriConnectorTemplateManagedConfigurationSettings {
   /**
    * The type of the managed configuration.
    */
-  managedConfigurationType: ConnectorTemplateManagedConfigurationType; // Property could be called `type` instead of `managedConfigurationType`
+  managedConfigurationType: AkriConnectorTemplateManagedConfigurationType; // Property could be called `type` instead of `managedConfigurationType`
 
   /**
    * Allocation settings for the managed configuration.
    */
-  allocation?: ConnectorTemplateAllocation;
+  allocation?: AkriConnectorTemplateAllocation;
 
   /**
    * The persistent volume claims for the managed configuration.
    */
   @OpenAPI.extension("x-ms-identifiers", #["claimName"])
-  persistentVolumeClaims?: ConnectorTemplatePersistentVolumeClaim[];
+  persistentVolumeClaims?: AkriConnectorTemplatePersistentVolumeClaim[];
 
   /**
    * Additional configuration for the image of the managed configuration.
@@ -281,14 +281,14 @@ model ConnectorTemplateManagedConfigurationSettings {
    * Connector secrets that will be mounted onto all connector instances.
    */
   @extension("x-ms-identifiers", #["secretAlias"])
-  secrets?: ConnectorTemplateSecret[];
+  secrets?: AkriConnectorTemplateSecret[];
 }
 
 /**
- * ConnectorTemplateSecret properties
+ * AkriConnectorTemplateSecret properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateSecret {
+model AkriConnectorTemplateSecret {
   /**
    * The key in the secret to be mounted
    */
@@ -306,14 +306,14 @@ model ConnectorTemplateSecret {
 }
 
 /**
- * ConnectorTemplateAllocation properties
+ * AkriConnectorTemplateAllocation properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateAllocation {
+model AkriConnectorTemplateAllocation {
   /**
    * The allocation policy type
    */
-  policy: ConnectorTemplateAllocationPolicy;
+  policy: AkriConnectorTemplateAllocationPolicy;
 
   /**
    * TThe bucketized allocation of AEPs for connectors
@@ -324,10 +324,10 @@ model ConnectorTemplateAllocation {
 }
 
 /**
- * ConnectorTemplateAllocationPolicy properties
+ * AkriConnectorTemplateAllocationPolicy properties
  */
 @added(Versions.`2025-07-01-preview`)
-union ConnectorTemplateAllocationPolicy {
+union AkriConnectorTemplateAllocationPolicy {
   string,
 
   /**
@@ -340,7 +340,7 @@ union ConnectorTemplateAllocationPolicy {
  * Managed configuration types.
  */
 @added(Versions.`2025-07-01-preview`)
-union ConnectorTemplateManagedConfigurationType {
+union AkriConnectorTemplateManagedConfigurationType {
   string,
 
   /**
@@ -355,11 +355,11 @@ union ConnectorTemplateManagedConfigurationType {
 }
 
 /**
- * ConnectorTemplateRuntimeImageConfiguration properties
+ * AkriConnectorTemplateRuntimeImageConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateRuntimeImageConfiguration
-  extends ConnectorTemplateManagedConfigurationSettings {
+model AkriConnectorTemplateRuntimeImageConfiguration
+  extends AkriConnectorTemplateManagedConfigurationSettings {
   /**
    * The managed configuration type for the Connector template.
    */
@@ -368,15 +368,15 @@ model ConnectorTemplateRuntimeImageConfiguration
   /**
    * The image configuration settings
    */
-  imageConfigurationSettings: ConnectorTemplateRuntimeImageConfigurationSettings;
+  imageConfigurationSettings: AkriConnectorTemplateRuntimeImageConfigurationSettings;
 }
 
 /**
- * ConnectorTemplateRuntimeStatefulSetConfiguration properties
+ * AkriConnectorTemplateRuntimeStatefulSetConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateRuntimeStatefulSetConfiguration
-  extends ConnectorTemplateManagedConfigurationSettings {
+model AkriConnectorTemplateRuntimeStatefulSetConfiguration
+  extends AkriConnectorTemplateManagedConfigurationSettings {
   /**
    * The managed configuration type for the Connector template.
    */
@@ -389,10 +389,10 @@ model ConnectorTemplateRuntimeStatefulSetConfiguration
 }
 
 /**
- * ConnectorTemplateRuntimeImageConfiguration properties
+ * AkriConnectorTemplateRuntimeImageConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateRuntimeImageConfigurationSettings {
+model AkriConnectorTemplateRuntimeImageConfigurationSettings {
   /**
    * The image name without any registry reference, tag or digest.
    */
@@ -411,22 +411,22 @@ model ConnectorTemplateRuntimeImageConfigurationSettings {
   /**
    * The registry settings for the connector image. You can omit this field if using the default docker hub repository or using a local image.
    */
-  registrySettings?: ConnectorTemplateRegistrySettings;
+  registrySettings?: AkriConnectorTemplateRegistrySettings;
 }
 /**
- * ConnectorTemplateRegistrySettings properties
+ * AkriConnectorTemplateRegistrySettings properties
  */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("registrySettingsType")
-model ConnectorTemplateRegistrySettings {
-  registrySettingsType: ConnectorTemplateRegistrySettingsType;
+model AkriConnectorTemplateRegistrySettings {
+  registrySettingsType: AkriConnectorTemplateRegistrySettingsType;
 }
 
 /**
- * ConnectorTemplateRegistrySettings properties
+ * AkriConnectorTemplateRegistrySettings properties
  */
 @added(Versions.`2025-07-01-preview`)
-union ConnectorTemplateRegistrySettingsType {
+union AkriConnectorTemplateRegistrySettingsType {
   string,
 
   /**
@@ -441,11 +441,11 @@ union ConnectorTemplateRegistrySettingsType {
 }
 
 /**
- * ConnectorTemplateRegistryEndpointRef properties
+ * AkriConnectorTemplateRegistryEndpointRef properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateRegistryEndpointRef
-  extends ConnectorTemplateRegistrySettings {
+model AkriConnectorTemplateRegistryEndpointRef
+  extends AkriConnectorTemplateRegistrySettings {
   /**
    * The registry endpoint reference
    */
@@ -458,11 +458,11 @@ model ConnectorTemplateRegistryEndpointRef
 }
 
 /**
- * ConnectorTemplateContainerRegistry properties
+ * AkriConnectorTemplateContainerRegistry properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateContainerRegistry
-  extends ConnectorTemplateRegistrySettings {
+model AkriConnectorTemplateContainerRegistry
+  extends AkriConnectorTemplateRegistrySettings {
   /**
    * The registry settings type
    */
@@ -471,14 +471,14 @@ model ConnectorTemplateContainerRegistry
   /**
    * The registry settings for the container registry
    */
-  containerRegistrySettings: ConnectorTemplateContainerRegistrySettings;
+  containerRegistrySettings: AkriConnectorTemplateContainerRegistrySettings;
 }
 
 /**
- * ConnectorTemplateContainerRegistry properties
+ * AkriConnectorTemplateContainerRegistry properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateContainerRegistrySettings {
+model AkriConnectorTemplateContainerRegistrySettings {
   /**
    * The container registry to use for the connector image.
    */
@@ -491,10 +491,10 @@ model ConnectorTemplateContainerRegistrySettings {
 }
 
 /**
- * ConnectorTemplatePersistentVolumeClaim properties
+ * AkriConnectorTemplatePersistentVolumeClaim properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplatePersistentVolumeClaim {
+model AkriConnectorTemplatePersistentVolumeClaim {
   /**
    * The name of the persistent volume claim.
    */
@@ -507,24 +507,24 @@ model ConnectorTemplatePersistentVolumeClaim {
 }
 
 /**
- * ConnectorTemplateHelmAdvancedConfiguration properties
+ * AkriConnectorTemplateHelmAdvancedConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateHelmAdvancedConfiguration {
+model AkriConnectorTemplateHelmAdvancedConfiguration {
   /**
    * Delete operation configuration for the Helm chart.
    */
-  delete?: ConnectorTemplateHelmDeleteConfiguration;
+  delete?: AkriConnectorTemplateHelmDeleteConfiguration;
 
   /**
    * Install operation configuration for the Helm chart.
    */
-  install?: ConnectorTemplateHelmInstallConfiguration;
+  install?: AkriConnectorTemplateHelmInstallConfiguration;
 
   /**
    * Upgrade operation configuration for the Helm chart.
    */
-  upgrade?: ConnectorTemplateHelmUpgradeConfiguration;
+  upgrade?: AkriConnectorTemplateHelmUpgradeConfiguration;
 }
 
 alias HelmOperationConfiguration = {
@@ -555,34 +555,34 @@ alias HelmOperationConfiguration = {
 };
 
 /**
- * ConnectorTemplateHelmDeleteConfiguration properties
+ * AkriConnectorTemplateHelmDeleteConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateHelmDeleteConfiguration {
+model AkriConnectorTemplateHelmDeleteConfiguration {
   ...HelmOperationConfiguration;
 }
 
 /**
- * ConnectorTemplateHelmInstallConfiguration properties
+ * AkriConnectorTemplateHelmInstallConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateHelmInstallConfiguration {
+model AkriConnectorTemplateHelmInstallConfiguration {
   ...HelmOperationConfiguration;
 }
 
 /**
- * ConnectorTemplateHelmUpgradeConfiguration properties
+ * AkriConnectorTemplateHelmUpgradeConfiguration properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateHelmUpgradeConfiguration {
+model AkriConnectorTemplateHelmUpgradeConfiguration {
   ...HelmOperationConfiguration;
 }
 
 /**
- * ConnectorTemplateHelmAuthSecretRef properties
+ * AkriConnectorTemplateHelmAuthSecretRef properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateHelmAuthSecretRef {
+model AkriConnectorTemplateHelmAuthSecretRef {
   /**
    * The name of the secret.
    */
@@ -600,20 +600,20 @@ model ConnectorTemplateHelmAuthSecretRef {
 }
 
 /**
- * ConnectorTemplateDiagnostics properties
+ * AkriConnectorTemplateDiagnostics properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateDiagnostics {
+model AkriConnectorTemplateDiagnostics {
   /**
    * The log settings for the Connector template.
    */
-  logs: ConnectorTemplateLogSettings;
+  logs: AkriConnectorTemplateLogSettings;
 }
 
 /**
- * ConnectorTemplateLogSettings properties
+ * AkriConnectorTemplateLogSettings properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorTemplateLogSettings {
+model AkriConnectorTemplateLogSettings {
   ...DiagnosticsLogs;
 }

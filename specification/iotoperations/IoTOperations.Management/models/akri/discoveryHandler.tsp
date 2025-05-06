@@ -15,7 +15,7 @@ namespace Microsoft.IoTOperations;
  * DiscoveryHandler resource
  */
 @added(Versions.`2025-07-01-preview`)
-@parentResource(ConnectorTemplateResource)
+@parentResource(AkriConnectorTemplateResource)
 model DiscoveryHandlerResource is ProxyResource<DiscoveryHandlerProperties> {
   /**
    * Name of DiscoveryHandler resource

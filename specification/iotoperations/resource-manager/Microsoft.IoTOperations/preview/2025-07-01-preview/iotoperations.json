@@ -76,10 +76,10 @@
       "name": "Diagnostic"
     },
     {
-      "name": "ConnectorTemplate"
+      "name": "AkriConnectorTemplate"
     },
     {
-      "name": "ConnectorInstance"
+      "name": "AkriConnector"
     },
     {
       "name": "DiscoveryHandler"
@@ -1673,11 +1673,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances": {
       "get": {
-        "operationId": "ConnectorTemplate_ListByInstanceResource",
+        "operationId": "AkriConnectorTemplate_ListByInstanceResource",
         "tags": [
-          "ConnectorTemplate"
+          "AkriConnectorTemplate"
         ],
-        "description": "List ConnectorTemplateResource resources by InstanceResource",
+        "description": "List AkriConnectorTemplateResource resources by InstanceResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1703,7 +1703,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorTemplateResourceListResult"
+              "$ref": "#/definitions/AkriConnectorTemplateResourceListResult"
             }
           },
           "default": {
@@ -1711,11 +1711,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ConnectorTemplate_ListByInstanceResource_MaximumSet": {
-            "$ref": "./examples/ConnectorTemplate_ListByInstanceResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1725,11 +1720,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances/{connectorConfigInstanceName}": {
       "get": {
-        "operationId": "ConnectorTemplate_Get",
+        "operationId": "AkriConnectorTemplate_Get",
         "tags": [
-          "ConnectorTemplate"
+          "AkriConnectorTemplate"
         ],
-        "description": "Get a ConnectorTemplateResource",
+        "description": "Get a AkriConnectorTemplateResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1753,7 +1748,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1765,7 +1760,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorTemplateResource"
+              "$ref": "#/definitions/AkriConnectorTemplateResource"
             }
           },
           "default": {
@@ -1774,19 +1769,14 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ConnectorTemplate_Get_MaximumSet": {
-            "$ref": "./examples/ConnectorTemplate_Get_MaximumSet_Gen.json"
-          }
         }
       },
       "put": {
-        "operationId": "ConnectorTemplate_CreateOrUpdate",
+        "operationId": "AkriConnectorTemplate_CreateOrUpdate",
         "tags": [
-          "ConnectorTemplate"
+          "AkriConnectorTemplate"
         ],
-        "description": "Create a ConnectorTemplateResource",
+        "description": "Create a AkriConnectorTemplateResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1810,7 +1800,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1823,21 +1813,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectorTemplateResource"
+              "$ref": "#/definitions/AkriConnectorTemplateResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ConnectorTemplateResource' update operation succeeded",
+            "description": "Resource 'AkriConnectorTemplateResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectorTemplateResource"
+              "$ref": "#/definitions/AkriConnectorTemplateResource"
             }
           },
           "201": {
-            "description": "Resource 'ConnectorTemplateResource' create operation succeeded",
+            "description": "Resource 'AkriConnectorTemplateResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectorTemplateResource"
+              "$ref": "#/definitions/AkriConnectorTemplateResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1858,22 +1848,17 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ConnectorTemplate_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/ConnectorTemplate_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "ConnectorTemplate_Delete",
+        "operationId": "AkriConnectorTemplate_Delete",
         "tags": [
-          "ConnectorTemplate"
+          "AkriConnectorTemplate"
         ],
-        "description": "Delete a ConnectorTemplateResource",
+        "description": "Delete a AkriConnectorTemplateResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1897,7 +1882,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1928,11 +1913,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ConnectorTemplate_Delete_MaximumSet": {
-            "$ref": "./examples/ConnectorTemplate_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1941,13 +1921,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances/{connectorConfigInstanceName}/connectorInstances": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances/{connectorConfigInstanceName}/akriConnectors": {
       "get": {
-        "operationId": "ConnectorInstance_ListByConnectorTemplate",
+        "operationId": "AkriConnector_ListByAkriConnectorTemplate",
         "tags": [
-          "ConnectorInstance"
+          "AkriConnector"
         ],
-        "description": "List ConnectorInstanceResource resources by ConnectorTemplateResource",
+        "description": "List AkriConnectorResource resources by AkriConnectorTemplateResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1971,7 +1951,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1983,7 +1963,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorInstanceResourceListResult"
+              "$ref": "#/definitions/AkriConnectorResourceListResult"
             }
           },
           "default": {
@@ -1991,11 +1971,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ConnectorInstance_ListByConnectorTemplate_MaximumSet": {
-            "$ref": "./examples/ConnectorInstance_ListByConnectorTemplate_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2003,13 +1978,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances/{connectorConfigInstanceName}/connectorInstances/{connectorInstanceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances/{connectorConfigInstanceName}/akriConnectors/{akriConnectorName}": {
       "get": {
-        "operationId": "ConnectorInstance_Get",
+        "operationId": "AkriConnector_Get",
         "tags": [
-          "ConnectorInstance"
+          "AkriConnector"
         ],
-        "description": "Get a ConnectorInstanceResource",
+        "description": "Get a AkriConnectorResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2033,7 +2008,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2041,9 +2016,9 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "name": "connectorInstanceName",
+            "name": "akriConnectorName",
             "in": "path",
-            "description": "Name of ConnectorInstance resource",
+            "description": "Name of AkriConnector resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2055,7 +2030,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorInstanceResource"
+              "$ref": "#/definitions/AkriConnectorResource"
             }
           },
           "default": {
@@ -2064,19 +2039,14 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ConnectorInstance_Get_MaximumSet": {
-            "$ref": "./examples/ConnectorInstance_Get_MaximumSet_Gen.json"
-          }
         }
       },
       "put": {
-        "operationId": "ConnectorInstance_CreateOrUpdate",
+        "operationId": "AkriConnector_CreateOrUpdate",
         "tags": [
-          "ConnectorInstance"
+          "AkriConnector"
         ],
-        "description": "Create a ConnectorInstanceResource",
+        "description": "Create a AkriConnectorResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2100,7 +2070,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2108,9 +2078,9 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "name": "connectorInstanceName",
+            "name": "akriConnectorName",
             "in": "path",
-            "description": "Name of ConnectorInstance resource",
+            "description": "Name of AkriConnector resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2123,21 +2093,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectorInstanceResource"
+              "$ref": "#/definitions/AkriConnectorResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ConnectorInstanceResource' update operation succeeded",
+            "description": "Resource 'AkriConnectorResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectorInstanceResource"
+              "$ref": "#/definitions/AkriConnectorResource"
             }
           },
           "201": {
-            "description": "Resource 'ConnectorInstanceResource' create operation succeeded",
+            "description": "Resource 'AkriConnectorResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectorInstanceResource"
+              "$ref": "#/definitions/AkriConnectorResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2158,22 +2128,17 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ConnectorInstance_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/ConnectorInstance_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "ConnectorInstance_Delete",
+        "operationId": "AkriConnector_Delete",
         "tags": [
-          "ConnectorInstance"
+          "AkriConnector"
         ],
-        "description": "Delete a ConnectorInstanceResource",
+        "description": "Delete a AkriConnectorResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2197,7 +2162,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2205,9 +2170,9 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "name": "connectorInstanceName",
+            "name": "akriConnectorName",
             "in": "path",
-            "description": "Name of ConnectorInstance resource",
+            "description": "Name of AkriConnector resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2238,11 +2203,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ConnectorInstance_Delete_MaximumSet": {
-            "$ref": "./examples/ConnectorInstance_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2253,11 +2213,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances/{connectorConfigInstanceName}/discoveryHandlers": {
       "get": {
-        "operationId": "DiscoveryHandler_ListByConnectorTemplate",
+        "operationId": "DiscoveryHandler_ListByAkriConnectorTemplate",
         "tags": [
           "DiscoveryHandler"
         ],
-        "description": "List DiscoveryHandlerResource resources by ConnectorTemplateResource",
+        "description": "List DiscoveryHandlerResource resources by AkriConnectorTemplateResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2281,7 +2241,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2301,11 +2261,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryHandler_ListByConnectorTemplate_MaximumSet": {
-            "$ref": "./examples/DiscoveryHandler_ListByConnectorTemplate_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2343,7 +2298,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2410,7 +2365,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2507,7 +2462,7 @@
           {
             "name": "connectorConfigInstanceName",
             "in": "path",
-            "description": "Name of ConnectorTemplate resource",
+            "description": "Name of AkriConnectorTemplate resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -4368,6 +4323,799 @@
         }
       }
     },
+    "AkriConnectorProperties": {
+      "type": "object",
+      "description": "AkriConnector properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "AkriConnectorResource": {
+      "type": "object",
+      "description": "AkriConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AkriConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AkriConnectorResourceListResult": {
+      "type": "object",
+      "description": "The response of a AkriConnectorResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AkriConnectorResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AkriConnectorResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AkriConnectorTemplateAioMetadata": {
+      "type": "object",
+      "description": "AkriConnectorTemplateAioMetadata properties",
+      "properties": {
+        "aioMinVersion": {
+          "type": "string",
+          "description": "The minimum version of AIO required for the connector."
+        },
+        "aioMaxVersion": {
+          "type": "string",
+          "description": "The maximum version of AIO required for the connector."
+        }
+      }
+    },
+    "AkriConnectorTemplateAllocation": {
+      "type": "object",
+      "description": "AkriConnectorTemplateAllocation properties",
+      "properties": {
+        "policy": {
+          "$ref": "#/definitions/AkriConnectorTemplateAllocationPolicy",
+          "description": "The allocation policy type"
+        },
+        "bucketSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "TThe bucketized allocation of AEPs for connectors",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "policy"
+      ]
+    },
+    "AkriConnectorTemplateAllocationPolicy": {
+      "type": "string",
+      "description": "AkriConnectorTemplateAllocationPolicy properties",
+      "enum": [
+        "Bucketized"
+      ],
+      "x-ms-enum": {
+        "name": "AkriConnectorTemplateAllocationPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bucketized",
+            "value": "Bucketized",
+            "description": "Bucketized allocation policy"
+          }
+        ]
+      }
+    },
+    "AkriConnectorTemplateContainerRegistry": {
+      "type": "object",
+      "description": "AkriConnectorTemplateContainerRegistry properties",
+      "properties": {
+        "containerRegistrySettings": {
+          "$ref": "#/definitions/AkriConnectorTemplateContainerRegistrySettings",
+          "description": "The registry settings for the container registry"
+        }
+      },
+      "required": [
+        "containerRegistrySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateRegistrySettings"
+        }
+      ],
+      "x-ms-discriminator-value": "ContainerRegistry"
+    },
+    "AkriConnectorTemplateContainerRegistrySettings": {
+      "type": "object",
+      "description": "AkriConnectorTemplateContainerRegistry properties",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "The container registry to use for the connector image."
+        },
+        "imagePullSecrets": {
+          "type": "array",
+          "description": "Optional list of references to secrets in the same namespace to use for pulling the connector image.",
+          "items": {
+            "$ref": "#/definitions/ConnectorsImagePullSecret"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "registry"
+      ]
+    },
+    "AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs": {
+      "type": "object",
+      "description": "AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties",
+      "properties": {
+        "defaultDatasetConfigSchemaRef": {
+          "type": "string",
+          "description": "The default configuration schema reference for datasets."
+        },
+        "defaultEventsConfigSchemaRef": {
+          "type": "string",
+          "description": "The default configuration schema reference for events."
+        },
+        "defaultProcessControlConfigSchemaRef": {
+          "type": "string",
+          "description": "The default configuration schema reference for process control."
+        },
+        "defaultStreamsConfigSchemaRef": {
+          "type": "string",
+          "description": "The default configuration schema reference for streams."
+        }
+      }
+    },
+    "AkriConnectorTemplateDeviceInboundEndpointType": {
+      "type": "object",
+      "description": "AkriConnectorTemplateDeviceInboundEndpointType properties",
+      "properties": {
+        "endpointType": {
+          "$ref": "#/definitions/NonEmptyString",
+          "description": "The type of the device inbound endpoint."
+        },
+        "version": {
+          "$ref": "#/definitions/NonEmptyString",
+          "description": "The version of the device inbound endpoint."
+        },
+        "configurationSchemaRefs": {
+          "$ref": "#/definitions/AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs",
+          "description": "The configuration schema references for the device inbound endpoint."
+        }
+      },
+      "required": [
+        "endpointType",
+        "version"
+      ]
+    },
+    "AkriConnectorTemplateDiagnostics": {
+      "type": "object",
+      "description": "AkriConnectorTemplateDiagnostics properties",
+      "properties": {
+        "logs": {
+          "$ref": "#/definitions/AkriConnectorTemplateLogSettings",
+          "description": "The log settings for the Connector template."
+        }
+      },
+      "required": [
+        "logs"
+      ]
+    },
+    "AkriConnectorTemplateHelmAdvancedConfiguration": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmAdvancedConfiguration properties",
+      "properties": {
+        "delete": {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmDeleteConfiguration",
+          "description": "Delete operation configuration for the Helm chart."
+        },
+        "install": {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmInstallConfiguration",
+          "description": "Install operation configuration for the Helm chart."
+        },
+        "upgrade": {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmUpgradeConfiguration",
+          "description": "Upgrade operation configuration for the Helm chart."
+        }
+      }
+    },
+    "AkriConnectorTemplateHelmAuthSecretRef": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmAuthSecretRef properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the secret."
+        },
+        "passwordKey": {
+          "type": "string",
+          "description": "The key of the password in the secret."
+        },
+        "usernameKey": {
+          "type": "string",
+          "description": "The key of the username in the secret."
+        }
+      },
+      "required": [
+        "name",
+        "passwordKey",
+        "usernameKey"
+      ]
+    },
+    "AkriConnectorTemplateHelmConfiguration": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmConfiguration properties",
+      "properties": {
+        "helmConfigurationSettings": {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmConfigurationSettings",
+          "description": "The Helm configuration settings"
+        }
+      },
+      "required": [
+        "helmConfigurationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateRuntimeConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "HelmConfiguration"
+    },
+    "AkriConnectorTemplateHelmConfigurationSettings": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmConfiguration properties",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "The registry of the Helm chart."
+        },
+        "repository": {
+          "type": "string",
+          "description": "The repository of the Helm chart."
+        },
+        "releaseName": {
+          "type": "string",
+          "description": "The release name of the Helm chart."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the Helm chart."
+        },
+        "authSecretRef": {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmAuthSecretRef",
+          "description": "Authentication secret reference for the Helm chart."
+        },
+        "advancedConfiguration": {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmAdvancedConfiguration",
+          "description": "Advanced configuration for the Helm chart.\ninstall, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`"
+        },
+        "values": {
+          "type": "object",
+          "description": "A map of values to pass to the helm chart",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "releaseName",
+        "version"
+      ]
+    },
+    "AkriConnectorTemplateHelmDeleteConfiguration": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmDeleteConfiguration properties",
+      "properties": {
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout for the operation in seconds."
+        },
+        "waitForJobs": {
+          "type": "boolean",
+          "description": "The wait for jobs flag."
+        },
+        "atomic": {
+          "type": "boolean",
+          "description": "Atomic flag for the operation."
+        },
+        "disableHooks": {
+          "type": "boolean",
+          "description": "Disable hooks flag for the operation."
+        },
+        "wait": {
+          "type": "boolean",
+          "description": "The wait flag for the operation."
+        }
+      }
+    },
+    "AkriConnectorTemplateHelmInstallConfiguration": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmInstallConfiguration properties",
+      "properties": {
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout for the operation in seconds."
+        },
+        "waitForJobs": {
+          "type": "boolean",
+          "description": "The wait for jobs flag."
+        },
+        "atomic": {
+          "type": "boolean",
+          "description": "Atomic flag for the operation."
+        },
+        "disableHooks": {
+          "type": "boolean",
+          "description": "Disable hooks flag for the operation."
+        },
+        "wait": {
+          "type": "boolean",
+          "description": "The wait flag for the operation."
+        }
+      }
+    },
+    "AkriConnectorTemplateHelmUpgradeConfiguration": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmUpgradeConfiguration properties",
+      "properties": {
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout for the operation in seconds."
+        },
+        "waitForJobs": {
+          "type": "boolean",
+          "description": "The wait for jobs flag."
+        },
+        "atomic": {
+          "type": "boolean",
+          "description": "Atomic flag for the operation."
+        },
+        "disableHooks": {
+          "type": "boolean",
+          "description": "Disable hooks flag for the operation."
+        },
+        "wait": {
+          "type": "boolean",
+          "description": "The wait flag for the operation."
+        }
+      }
+    },
+    "AkriConnectorTemplateLogSettings": {
+      "type": "object",
+      "description": "AkriConnectorTemplateLogSettings properties",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
+          "default": "info"
+        }
+      }
+    },
+    "AkriConnectorTemplateManagedConfiguration": {
+      "type": "object",
+      "description": "AkriConnectorTemplateManagedConfiguration properties",
+      "properties": {
+        "managedConfigurationSettings": {
+          "$ref": "#/definitions/AkriConnectorTemplateManagedConfigurationSettings",
+          "description": "The managed configuration settings"
+        }
+      },
+      "required": [
+        "managedConfigurationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateRuntimeConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedConfiguration"
+    },
+    "AkriConnectorTemplateManagedConfigurationSettings": {
+      "type": "object",
+      "description": "AkriConnectorTemplateManagedConfiguration properties",
+      "properties": {
+        "managedConfigurationType": {
+          "$ref": "#/definitions/AkriConnectorTemplateManagedConfigurationType",
+          "description": "The type of the managed configuration."
+        },
+        "allocation": {
+          "$ref": "#/definitions/AkriConnectorTemplateAllocation",
+          "description": "Allocation settings for the managed configuration."
+        },
+        "persistentVolumeClaims": {
+          "type": "array",
+          "description": "The persistent volume claims for the managed configuration.",
+          "items": {
+            "$ref": "#/definitions/AkriConnectorTemplatePersistentVolumeClaim"
+          },
+          "x-ms-identifiers": [
+            "claimName"
+          ]
+        },
+        "additionalConfiguration": {
+          "type": "object",
+          "description": "Additional configuration for the image of the managed configuration.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "persistentVolumeClaimTemplates": {
+          "type": "array",
+          "description": "The persistent volume claim templates for the managed configuration.\nSee https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json",
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          },
+          "x-ms-identifiers": []
+        },
+        "secrets": {
+          "type": "array",
+          "description": "Connector secrets that will be mounted onto all connector instances.",
+          "items": {
+            "$ref": "#/definitions/AkriConnectorTemplateSecret"
+          },
+          "x-ms-identifiers": [
+            "secretAlias"
+          ]
+        }
+      },
+      "discriminator": "managedConfigurationType",
+      "required": [
+        "managedConfigurationType"
+      ]
+    },
+    "AkriConnectorTemplateManagedConfigurationType": {
+      "type": "string",
+      "description": "Managed configuration types.",
+      "enum": [
+        "ImageConfiguration",
+        "StatefulSetConfiguration"
+      ],
+      "x-ms-enum": {
+        "name": "AkriConnectorTemplateManagedConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ImageConfiguration",
+            "value": "ImageConfiguration",
+            "description": "Image Configuration Type"
+          },
+          {
+            "name": "StatefulSetConfiguration",
+            "value": "StatefulSetConfiguration",
+            "description": "StatefulSet Configuration Type"
+          }
+        ]
+      }
+    },
+    "AkriConnectorTemplatePersistentVolumeClaim": {
+      "type": "object",
+      "description": "AkriConnectorTemplatePersistentVolumeClaim properties",
+      "properties": {
+        "claimName": {
+          "type": "string",
+          "description": "The name of the persistent volume claim."
+        },
+        "mountPath": {
+          "type": "string",
+          "description": "The mount path for the persistent volume claim."
+        }
+      },
+      "required": [
+        "claimName",
+        "mountPath"
+      ]
+    },
+    "AkriConnectorTemplateProperties": {
+      "type": "object",
+      "description": "AkriConnectorTemplate properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "aioMetadata": {
+          "$ref": "#/definitions/AkriConnectorTemplateAioMetadata",
+          "description": "Metadata about AIO."
+        },
+        "runtimeConfiguration": {
+          "$ref": "#/definitions/AkriConnectorTemplateRuntimeConfiguration",
+          "description": "The runtime configuration for the Connector template."
+        },
+        "diagnostics": {
+          "$ref": "#/definitions/AkriConnectorTemplateDiagnostics",
+          "description": "Diagnostics settings for the Connector template."
+        },
+        "deviceInboundEndpointTypes": {
+          "type": "array",
+          "description": "Device inbound endpoint types",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/AkriConnectorTemplateDeviceInboundEndpointType"
+          },
+          "x-ms-identifiers": [
+            "endpointType",
+            "version"
+          ]
+        },
+        "mqttConnectionConfiguration": {
+          "$ref": "#/definitions/ConnectorsMqttConnectionConfiguration",
+          "description": "Mqtt connection configuration settings"
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the Connector template."
+        }
+      },
+      "required": [
+        "runtimeConfiguration",
+        "deviceInboundEndpointTypes",
+        "version"
+      ]
+    },
+    "AkriConnectorTemplateRegistryEndpointRef": {
+      "type": "object",
+      "description": "AkriConnectorTemplateRegistryEndpointRef properties",
+      "properties": {
+        "registryEndpointRef": {
+          "type": "string",
+          "description": "The name of the registry endpoint"
+        }
+      },
+      "required": [
+        "registryEndpointRef"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateRegistrySettings"
+        }
+      ],
+      "x-ms-discriminator-value": "RegistryEndpointRef"
+    },
+    "AkriConnectorTemplateRegistrySettings": {
+      "type": "object",
+      "description": "AkriConnectorTemplateRegistrySettings properties",
+      "properties": {
+        "registrySettingsType": {
+          "$ref": "#/definitions/AkriConnectorTemplateRegistrySettingsType"
+        }
+      },
+      "discriminator": "registrySettingsType",
+      "required": [
+        "registrySettingsType"
+      ]
+    },
+    "AkriConnectorTemplateRegistrySettingsType": {
+      "type": "string",
+      "description": "AkriConnectorTemplateRegistrySettings properties",
+      "enum": [
+        "RegistryEndpointRef",
+        "ContainerRegistry"
+      ],
+      "x-ms-enum": {
+        "name": "AkriConnectorTemplateRegistrySettingsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RegistryEndpointRef",
+            "value": "RegistryEndpointRef",
+            "description": "A Regisgtry Endpoint reference"
+          },
+          {
+            "name": "ContainerRegistry",
+            "value": "ContainerRegistry",
+            "description": "A Container Registry reference"
+          }
+        ]
+      }
+    },
+    "AkriConnectorTemplateResource": {
+      "type": "object",
+      "description": "AkriConnectorTemplate resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AkriConnectorTemplateProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AkriConnectorTemplateResourceListResult": {
+      "type": "object",
+      "description": "The response of a AkriConnectorTemplateResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AkriConnectorTemplateResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AkriConnectorTemplateResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AkriConnectorTemplateRuntimeConfiguration": {
+      "type": "object",
+      "description": "AkriConnectorTemplateRuntimeConfiguration properties",
+      "properties": {
+        "runtimeConfigurationType": {
+          "$ref": "#/definitions/AkriConnectorTemplateRuntimeConfigurationType",
+          "description": "Runtime configuration type for the Connector template."
+        }
+      },
+      "discriminator": "runtimeConfigurationType",
+      "required": [
+        "runtimeConfigurationType"
+      ]
+    },
+    "AkriConnectorTemplateRuntimeConfigurationType": {
+      "type": "string",
+      "description": "Runtime configuration types.",
+      "enum": [
+        "HelmConfiguration",
+        "ManagedConfiguration"
+      ],
+      "x-ms-enum": {
+        "name": "AkriConnectorTemplateRuntimeConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HelmConfiguration",
+            "value": "HelmConfiguration",
+            "description": "Helm Configuration Type"
+          },
+          {
+            "name": "ManagedConfiguration",
+            "value": "ManagedConfiguration",
+            "description": "Managed Configuration Type"
+          }
+        ]
+      }
+    },
+    "AkriConnectorTemplateRuntimeImageConfiguration": {
+      "type": "object",
+      "description": "AkriConnectorTemplateRuntimeImageConfiguration properties",
+      "properties": {
+        "imageConfigurationSettings": {
+          "$ref": "#/definitions/AkriConnectorTemplateRuntimeImageConfigurationSettings",
+          "description": "The image configuration settings"
+        }
+      },
+      "required": [
+        "imageConfigurationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateManagedConfigurationSettings"
+        }
+      ],
+      "x-ms-discriminator-value": "ImageConfiguration"
+    },
+    "AkriConnectorTemplateRuntimeImageConfigurationSettings": {
+      "type": "object",
+      "description": "AkriConnectorTemplateRuntimeImageConfiguration properties",
+      "properties": {
+        "imageName": {
+          "type": "string",
+          "description": "The image name without any registry reference, tag or digest."
+        },
+        "imagePullPolicy": {
+          "$ref": "#/definitions/ConnectorsImagePullPolicy",
+          "description": "The pull policy of the image"
+        },
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas for the managed configuration."
+        },
+        "registrySettings": {
+          "$ref": "#/definitions/AkriConnectorTemplateRegistrySettings",
+          "description": "The registry settings for the connector image. You can omit this field if using the default docker hub repository or using a local image."
+        }
+      },
+      "required": [
+        "imageName"
+      ]
+    },
+    "AkriConnectorTemplateRuntimeStatefulSetConfiguration": {
+      "type": "object",
+      "description": "AkriConnectorTemplateRuntimeStatefulSetConfiguration properties",
+      "properties": {
+        "statefulSetConfigurationSettings": {
+          "type": "string",
+          "description": "The stateful set configuration settings"
+        }
+      },
+      "required": [
+        "statefulSetConfigurationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateManagedConfigurationSettings"
+        }
+      ],
+      "x-ms-discriminator-value": "StatefulSetConfiguration"
+    },
+    "AkriConnectorTemplateSecret": {
+      "type": "object",
+      "description": "AkriConnectorTemplateSecret properties",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "description": "The key in the secret to be mounted"
+        },
+        "secretAlias": {
+          "type": "string",
+          "description": "The application-defined alias for the secret"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the secret to be mounted"
+        }
+      },
+      "required": [
+        "secretKey",
+        "secretAlias",
+        "name"
+      ]
+    },
     "AnonymousMethod": {
       "type": "string",
       "description": "x509 Certificate Method",
@@ -5772,799 +6520,6 @@
           }
         ]
       }
-    },
-    "ConnectorInstanceProperties": {
-      "type": "object",
-      "description": "ConnectorInstance properties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "ConnectorInstanceResource": {
-      "type": "object",
-      "description": "ConnectorInstance resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectorInstanceProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "Edge location of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "extendedLocation"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ConnectorInstanceResourceListResult": {
-      "type": "object",
-      "description": "The response of a ConnectorInstanceResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ConnectorInstanceResource items on this page",
-          "items": {
-            "$ref": "#/definitions/ConnectorInstanceResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ConnectorTemplateAioMetadata": {
-      "type": "object",
-      "description": "ConnectorTemplateAioMetadata properties",
-      "properties": {
-        "aioMinVersion": {
-          "type": "string",
-          "description": "The minimum version of AIO required for the connector."
-        },
-        "aioMaxVersion": {
-          "type": "string",
-          "description": "The maximum version of AIO required for the connector."
-        }
-      }
-    },
-    "ConnectorTemplateAllocation": {
-      "type": "object",
-      "description": "ConnectorTemplateAllocation properties",
-      "properties": {
-        "policy": {
-          "$ref": "#/definitions/ConnectorTemplateAllocationPolicy",
-          "description": "The allocation policy type"
-        },
-        "bucketSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "TThe bucketized allocation of AEPs for connectors",
-          "minimum": 1,
-          "maximum": 100
-        }
-      },
-      "required": [
-        "policy"
-      ]
-    },
-    "ConnectorTemplateAllocationPolicy": {
-      "type": "string",
-      "description": "ConnectorTemplateAllocationPolicy properties",
-      "enum": [
-        "Bucketized"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectorTemplateAllocationPolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Bucketized",
-            "value": "Bucketized",
-            "description": "Bucketized allocation policy"
-          }
-        ]
-      }
-    },
-    "ConnectorTemplateContainerRegistry": {
-      "type": "object",
-      "description": "ConnectorTemplateContainerRegistry properties",
-      "properties": {
-        "containerRegistrySettings": {
-          "$ref": "#/definitions/ConnectorTemplateContainerRegistrySettings",
-          "description": "The registry settings for the container registry"
-        }
-      },
-      "required": [
-        "containerRegistrySettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectorTemplateRegistrySettings"
-        }
-      ],
-      "x-ms-discriminator-value": "ContainerRegistry"
-    },
-    "ConnectorTemplateContainerRegistrySettings": {
-      "type": "object",
-      "description": "ConnectorTemplateContainerRegistry properties",
-      "properties": {
-        "registry": {
-          "type": "string",
-          "description": "The container registry to use for the connector image."
-        },
-        "imagePullSecrets": {
-          "type": "array",
-          "description": "Optional list of references to secrets in the same namespace to use for pulling the connector image.",
-          "items": {
-            "$ref": "#/definitions/ConnectorsImagePullSecret"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "registry"
-      ]
-    },
-    "ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs": {
-      "type": "object",
-      "description": "ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties",
-      "properties": {
-        "defaultDatasetConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for datasets."
-        },
-        "defaultEventsConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for events."
-        },
-        "defaultProcessControlConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for process control."
-        },
-        "defaultStreamsConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for streams."
-        }
-      }
-    },
-    "ConnectorTemplateDeviceInboundEndpointType": {
-      "type": "object",
-      "description": "ConnectorTemplateDeviceInboundEndpointType properties",
-      "properties": {
-        "endpointType": {
-          "$ref": "#/definitions/NonEmptyString",
-          "description": "The type of the device inbound endpoint."
-        },
-        "version": {
-          "$ref": "#/definitions/NonEmptyString",
-          "description": "The version of the device inbound endpoint."
-        },
-        "configurationSchemaRefs": {
-          "$ref": "#/definitions/ConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs",
-          "description": "The configuration schema references for the device inbound endpoint."
-        }
-      },
-      "required": [
-        "endpointType",
-        "version"
-      ]
-    },
-    "ConnectorTemplateDiagnostics": {
-      "type": "object",
-      "description": "ConnectorTemplateDiagnostics properties",
-      "properties": {
-        "logs": {
-          "$ref": "#/definitions/ConnectorTemplateLogSettings",
-          "description": "The log settings for the Connector template."
-        }
-      },
-      "required": [
-        "logs"
-      ]
-    },
-    "ConnectorTemplateHelmAdvancedConfiguration": {
-      "type": "object",
-      "description": "ConnectorTemplateHelmAdvancedConfiguration properties",
-      "properties": {
-        "delete": {
-          "$ref": "#/definitions/ConnectorTemplateHelmDeleteConfiguration",
-          "description": "Delete operation configuration for the Helm chart."
-        },
-        "install": {
-          "$ref": "#/definitions/ConnectorTemplateHelmInstallConfiguration",
-          "description": "Install operation configuration for the Helm chart."
-        },
-        "upgrade": {
-          "$ref": "#/definitions/ConnectorTemplateHelmUpgradeConfiguration",
-          "description": "Upgrade operation configuration for the Helm chart."
-        }
-      }
-    },
-    "ConnectorTemplateHelmAuthSecretRef": {
-      "type": "object",
-      "description": "ConnectorTemplateHelmAuthSecretRef properties",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the secret."
-        },
-        "passwordKey": {
-          "type": "string",
-          "description": "The key of the password in the secret."
-        },
-        "usernameKey": {
-          "type": "string",
-          "description": "The key of the username in the secret."
-        }
-      },
-      "required": [
-        "name",
-        "passwordKey",
-        "usernameKey"
-      ]
-    },
-    "ConnectorTemplateHelmConfiguration": {
-      "type": "object",
-      "description": "ConnectorTemplateHelmConfiguration properties",
-      "properties": {
-        "helmConfigurationSettings": {
-          "$ref": "#/definitions/ConnectorTemplateHelmConfigurationSettings",
-          "description": "The Helm configuration settings"
-        }
-      },
-      "required": [
-        "helmConfigurationSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectorTemplateRuntimeConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "HelmConfiguration"
-    },
-    "ConnectorTemplateHelmConfigurationSettings": {
-      "type": "object",
-      "description": "ConnectorTemplateHelmConfiguration properties",
-      "properties": {
-        "registry": {
-          "type": "string",
-          "description": "The registry of the Helm chart."
-        },
-        "repository": {
-          "type": "string",
-          "description": "The repository of the Helm chart."
-        },
-        "releaseName": {
-          "type": "string",
-          "description": "The release name of the Helm chart."
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the Helm chart."
-        },
-        "authSecretRef": {
-          "$ref": "#/definitions/ConnectorTemplateHelmAuthSecretRef",
-          "description": "Authentication secret reference for the Helm chart."
-        },
-        "advancedConfiguration": {
-          "$ref": "#/definitions/ConnectorTemplateHelmAdvancedConfiguration",
-          "description": "Advanced configuration for the Helm chart.\ninstall, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`"
-        },
-        "values": {
-          "type": "object",
-          "description": "A map of values to pass to the helm chart",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "registry",
-        "repository",
-        "releaseName",
-        "version"
-      ]
-    },
-    "ConnectorTemplateHelmDeleteConfiguration": {
-      "type": "object",
-      "description": "ConnectorTemplateHelmDeleteConfiguration properties",
-      "properties": {
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The timeout for the operation in seconds."
-        },
-        "waitForJobs": {
-          "type": "boolean",
-          "description": "The wait for jobs flag."
-        },
-        "atomic": {
-          "type": "boolean",
-          "description": "Atomic flag for the operation."
-        },
-        "disableHooks": {
-          "type": "boolean",
-          "description": "Disable hooks flag for the operation."
-        },
-        "wait": {
-          "type": "boolean",
-          "description": "The wait flag for the operation."
-        }
-      }
-    },
-    "ConnectorTemplateHelmInstallConfiguration": {
-      "type": "object",
-      "description": "ConnectorTemplateHelmInstallConfiguration properties",
-      "properties": {
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The timeout for the operation in seconds."
-        },
-        "waitForJobs": {
-          "type": "boolean",
-          "description": "The wait for jobs flag."
-        },
-        "atomic": {
-          "type": "boolean",
-          "description": "Atomic flag for the operation."
-        },
-        "disableHooks": {
-          "type": "boolean",
-          "description": "Disable hooks flag for the operation."
-        },
-        "wait": {
-          "type": "boolean",
-          "description": "The wait flag for the operation."
-        }
-      }
-    },
-    "ConnectorTemplateHelmUpgradeConfiguration": {
-      "type": "object",
-      "description": "ConnectorTemplateHelmUpgradeConfiguration properties",
-      "properties": {
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The timeout for the operation in seconds."
-        },
-        "waitForJobs": {
-          "type": "boolean",
-          "description": "The wait for jobs flag."
-        },
-        "atomic": {
-          "type": "boolean",
-          "description": "Atomic flag for the operation."
-        },
-        "disableHooks": {
-          "type": "boolean",
-          "description": "Disable hooks flag for the operation."
-        },
-        "wait": {
-          "type": "boolean",
-          "description": "The wait flag for the operation."
-        }
-      }
-    },
-    "ConnectorTemplateLogSettings": {
-      "type": "object",
-      "description": "ConnectorTemplateLogSettings properties",
-      "properties": {
-        "level": {
-          "type": "string",
-          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
-          "default": "info"
-        }
-      }
-    },
-    "ConnectorTemplateManagedConfiguration": {
-      "type": "object",
-      "description": "ConnectorTemplateManagedConfiguration properties",
-      "properties": {
-        "managedConfigurationSettings": {
-          "$ref": "#/definitions/ConnectorTemplateManagedConfigurationSettings",
-          "description": "The managed configuration settings"
-        }
-      },
-      "required": [
-        "managedConfigurationSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectorTemplateRuntimeConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "ManagedConfiguration"
-    },
-    "ConnectorTemplateManagedConfigurationSettings": {
-      "type": "object",
-      "description": "ConnectorTemplateManagedConfiguration properties",
-      "properties": {
-        "managedConfigurationType": {
-          "$ref": "#/definitions/ConnectorTemplateManagedConfigurationType",
-          "description": "The type of the managed configuration."
-        },
-        "allocation": {
-          "$ref": "#/definitions/ConnectorTemplateAllocation",
-          "description": "Allocation settings for the managed configuration."
-        },
-        "persistentVolumeClaims": {
-          "type": "array",
-          "description": "The persistent volume claims for the managed configuration.",
-          "items": {
-            "$ref": "#/definitions/ConnectorTemplatePersistentVolumeClaim"
-          },
-          "x-ms-identifiers": [
-            "claimName"
-          ]
-        },
-        "additionalConfiguration": {
-          "type": "object",
-          "description": "Additional configuration for the image of the managed configuration.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "persistentVolumeClaimTemplates": {
-          "type": "array",
-          "description": "The persistent volume claim templates for the managed configuration.\nSee https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json",
-          "items": {
-            "type": "object",
-            "additionalProperties": {}
-          },
-          "x-ms-identifiers": []
-        },
-        "secrets": {
-          "type": "array",
-          "description": "Connector secrets that will be mounted onto all connector instances.",
-          "items": {
-            "$ref": "#/definitions/ConnectorTemplateSecret"
-          },
-          "x-ms-identifiers": [
-            "secretAlias"
-          ]
-        }
-      },
-      "discriminator": "managedConfigurationType",
-      "required": [
-        "managedConfigurationType"
-      ]
-    },
-    "ConnectorTemplateManagedConfigurationType": {
-      "type": "string",
-      "description": "Managed configuration types.",
-      "enum": [
-        "ImageConfiguration",
-        "StatefulSetConfiguration"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectorTemplateManagedConfigurationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ImageConfiguration",
-            "value": "ImageConfiguration",
-            "description": "Image Configuration Type"
-          },
-          {
-            "name": "StatefulSetConfiguration",
-            "value": "StatefulSetConfiguration",
-            "description": "StatefulSet Configuration Type"
-          }
-        ]
-      }
-    },
-    "ConnectorTemplatePersistentVolumeClaim": {
-      "type": "object",
-      "description": "ConnectorTemplatePersistentVolumeClaim properties",
-      "properties": {
-        "claimName": {
-          "type": "string",
-          "description": "The name of the persistent volume claim."
-        },
-        "mountPath": {
-          "type": "string",
-          "description": "The mount path for the persistent volume claim."
-        }
-      },
-      "required": [
-        "claimName",
-        "mountPath"
-      ]
-    },
-    "ConnectorTemplateProperties": {
-      "type": "object",
-      "description": "ConnectorTemplate properties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "aioMetadata": {
-          "$ref": "#/definitions/ConnectorTemplateAioMetadata",
-          "description": "Metadata about AIO."
-        },
-        "runtimeConfiguration": {
-          "$ref": "#/definitions/ConnectorTemplateRuntimeConfiguration",
-          "description": "The runtime configuration for the Connector template."
-        },
-        "diagnostics": {
-          "$ref": "#/definitions/ConnectorTemplateDiagnostics",
-          "description": "Diagnostics settings for the Connector template."
-        },
-        "deviceInboundEndpointTypes": {
-          "type": "array",
-          "description": "Device inbound endpoint types",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/ConnectorTemplateDeviceInboundEndpointType"
-          },
-          "x-ms-identifiers": [
-            "endpointType",
-            "version"
-          ]
-        },
-        "mqttConnectionConfiguration": {
-          "$ref": "#/definitions/ConnectorsMqttConnectionConfiguration",
-          "description": "Mqtt connection configuration settings"
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the Connector template."
-        }
-      },
-      "required": [
-        "runtimeConfiguration",
-        "deviceInboundEndpointTypes",
-        "version"
-      ]
-    },
-    "ConnectorTemplateRegistryEndpointRef": {
-      "type": "object",
-      "description": "ConnectorTemplateRegistryEndpointRef properties",
-      "properties": {
-        "registryEndpointRef": {
-          "type": "string",
-          "description": "The name of the registry endpoint"
-        }
-      },
-      "required": [
-        "registryEndpointRef"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectorTemplateRegistrySettings"
-        }
-      ],
-      "x-ms-discriminator-value": "RegistryEndpointRef"
-    },
-    "ConnectorTemplateRegistrySettings": {
-      "type": "object",
-      "description": "ConnectorTemplateRegistrySettings properties",
-      "properties": {
-        "registrySettingsType": {
-          "$ref": "#/definitions/ConnectorTemplateRegistrySettingsType"
-        }
-      },
-      "discriminator": "registrySettingsType",
-      "required": [
-        "registrySettingsType"
-      ]
-    },
-    "ConnectorTemplateRegistrySettingsType": {
-      "type": "string",
-      "description": "ConnectorTemplateRegistrySettings properties",
-      "enum": [
-        "RegistryEndpointRef",
-        "ContainerRegistry"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectorTemplateRegistrySettingsType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RegistryEndpointRef",
-            "value": "RegistryEndpointRef",
-            "description": "A Regisgtry Endpoint reference"
-          },
-          {
-            "name": "ContainerRegistry",
-            "value": "ContainerRegistry",
-            "description": "A Container Registry reference"
-          }
-        ]
-      }
-    },
-    "ConnectorTemplateResource": {
-      "type": "object",
-      "description": "ConnectorTemplate resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectorTemplateProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "Edge location of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "extendedLocation"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ConnectorTemplateResourceListResult": {
-      "type": "object",
-      "description": "The response of a ConnectorTemplateResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ConnectorTemplateResource items on this page",
-          "items": {
-            "$ref": "#/definitions/ConnectorTemplateResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ConnectorTemplateRuntimeConfiguration": {
-      "type": "object",
-      "description": "ConnectorTemplateRuntimeConfiguration properties",
-      "properties": {
-        "runtimeConfigurationType": {
-          "$ref": "#/definitions/ConnectorTemplateRuntimeConfigurationType",
-          "description": "Runtime configuration type for the Connector template."
-        }
-      },
-      "discriminator": "runtimeConfigurationType",
-      "required": [
-        "runtimeConfigurationType"
-      ]
-    },
-    "ConnectorTemplateRuntimeConfigurationType": {
-      "type": "string",
-      "description": "Runtime configuration types.",
-      "enum": [
-        "HelmConfiguration",
-        "ManagedConfiguration"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectorTemplateRuntimeConfigurationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "HelmConfiguration",
-            "value": "HelmConfiguration",
-            "description": "Helm Configuration Type"
-          },
-          {
-            "name": "ManagedConfiguration",
-            "value": "ManagedConfiguration",
-            "description": "Managed Configuration Type"
-          }
-        ]
-      }
-    },
-    "ConnectorTemplateRuntimeImageConfiguration": {
-      "type": "object",
-      "description": "ConnectorTemplateRuntimeImageConfiguration properties",
-      "properties": {
-        "imageConfigurationSettings": {
-          "$ref": "#/definitions/ConnectorTemplateRuntimeImageConfigurationSettings",
-          "description": "The image configuration settings"
-        }
-      },
-      "required": [
-        "imageConfigurationSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectorTemplateManagedConfigurationSettings"
-        }
-      ],
-      "x-ms-discriminator-value": "ImageConfiguration"
-    },
-    "ConnectorTemplateRuntimeImageConfigurationSettings": {
-      "type": "object",
-      "description": "ConnectorTemplateRuntimeImageConfiguration properties",
-      "properties": {
-        "imageName": {
-          "type": "string",
-          "description": "The image name without any registry reference, tag or digest."
-        },
-        "imagePullPolicy": {
-          "$ref": "#/definitions/ConnectorsImagePullPolicy",
-          "description": "The pull policy of the image"
-        },
-        "replicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of replicas for the managed configuration."
-        },
-        "registrySettings": {
-          "$ref": "#/definitions/ConnectorTemplateRegistrySettings",
-          "description": "The registry settings for the connector image. You can omit this field if using the default docker hub repository or using a local image."
-        }
-      },
-      "required": [
-        "imageName"
-      ]
-    },
-    "ConnectorTemplateRuntimeStatefulSetConfiguration": {
-      "type": "object",
-      "description": "ConnectorTemplateRuntimeStatefulSetConfiguration properties",
-      "properties": {
-        "statefulSetConfigurationSettings": {
-          "type": "string",
-          "description": "The stateful set configuration settings"
-        }
-      },
-      "required": [
-        "statefulSetConfigurationSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectorTemplateManagedConfigurationSettings"
-        }
-      ],
-      "x-ms-discriminator-value": "StatefulSetConfiguration"
-    },
-    "ConnectorTemplateSecret": {
-      "type": "object",
-      "description": "ConnectorTemplateSecret properties",
-      "properties": {
-        "secretKey": {
-          "type": "string",
-          "description": "The key in the secret to be mounted"
-        },
-        "secretAlias": {
-          "type": "string",
-          "description": "The application-defined alias for the secret"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the secret to be mounted"
-        }
-      },
-      "required": [
-        "secretKey",
-        "secretAlias",
-        "name"
-      ]
     },
     "ConnectorsImagePullPolicy": {
       "type": "string",

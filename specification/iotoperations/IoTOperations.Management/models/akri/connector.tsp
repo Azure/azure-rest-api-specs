@@ -11,20 +11,20 @@ using Azure.ResourceManager;
 namespace Microsoft.IoTOperations;
 
 /**
- * ConnectorInstance resource
+ * AkriConnector resource
  */
 @added(Versions.`2025-07-01-preview`)
-@parentResource(ConnectorTemplateResource)
-model ConnectorInstanceResource is ProxyResource<ConnectorInstanceProperties> {
+@parentResource(AkriConnectorTemplateResource)
+model AkriConnectorResource is ProxyResource<AkriConnectorProperties> {
   /**
-   * Name of ConnectorInstance resource
+   * Name of AkriConnector resource
    */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
-  @key("connectorInstanceName")
+  @key("akriConnectorName")
   @path
   @minLength(3)
   @maxLength(63)
-  @segment("connectorInstances")
+  @segment("akriConnectors")
   name: string;
 
   /**
@@ -36,10 +36,10 @@ model ConnectorInstanceResource is ProxyResource<ConnectorInstanceProperties> {
 }
 
 /**
- * ConnectorInstance properties
+ * AkriConnector properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorInstanceProperties {
+model AkriConnectorProperties {
   /**
    * The status of the last operation.
    */

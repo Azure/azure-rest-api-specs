@@ -18,7 +18,7 @@ import "./models/dataflows/dataflowGraphs.tsp";
 import "./models/diagnostics/diagnostic.tsp";
 import "./models/registryEndpoints/registryEndpoint.tsp";
 import "./models/akri/connectorTemplate.tsp";
-import "./models/akri/connectorInstance.tsp";
+import "./models/akri/connector.tsp";
 import "./models/akri/discoveryHandler.tsp";
 
 using TypeSpec.Http;
@@ -160,32 +160,32 @@ interface Diagnostic {
   listByInstanceResource is ArmResourceListByParent<DiagnosticResource>;
 }
 
-// /instance/connectorTemplates resource Operations
+// /instance/akriConnectorTemplates resource Operations
 @armResourceOperations
 @added(Versions.`2025-07-01-preview`)
-interface ConnectorTemplate {
-  get is ArmResourceRead<ConnectorTemplateResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ConnectorTemplateResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<ConnectorTemplateResource>;
-  listByInstanceResource is ArmResourceListByParent<ConnectorTemplateResource>;
+interface AkriConnectorTemplate {
+  get is ArmResourceRead<AkriConnectorTemplateResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriConnectorTemplateResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<AkriConnectorTemplateResource>;
+  listByInstanceResource is ArmResourceListByParent<AkriConnectorTemplateResource>;
 }
 
-// /instance/connectorTemplates/connectorInstances resource Operations
+// /instance/akriConnectorTemplates/akriConnectors resource Operations
 @armResourceOperations
 @added(Versions.`2025-07-01-preview`)
-interface ConnectorInstance {
-  get is ArmResourceRead<ConnectorInstanceResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ConnectorInstanceResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<ConnectorInstanceResource>;
-  listByConnectorTemplate is ArmResourceListByParent<ConnectorInstanceResource>;
+interface AkriConnector {
+  get is ArmResourceRead<AkriConnectorResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriConnectorResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<AkriConnectorResource>;
+  listByAkriConnectorTemplate is ArmResourceListByParent<AkriConnectorResource>;
 }
 
-// /instance/connectorTemplates/discoveryHandlers resource Operations
+// /instance/akriConnectorTemplates/discoveryHandlers resource Operations
 @armResourceOperations
 @added(Versions.`2025-07-01-preview`)
 interface DiscoveryHandler {
   get is ArmResourceRead<DiscoveryHandlerResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DiscoveryHandlerResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoveryHandlerResource>;
-  listByConnectorTemplate is ArmResourceListByParent<DiscoveryHandlerResource>;
+  listByAkriConnectorTemplate is ArmResourceListByParent<DiscoveryHandlerResource>;
 }

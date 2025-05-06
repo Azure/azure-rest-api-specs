@@ -21,11 +21,8 @@ alias AkriAioMetadata = {
 /**
  * ConnectorsMqttConnectionConfiguration properties
  */
-//- This doesn't have the `cloudEventAttributes` property like DataflowEnpoints has
 //- This doesn't have the `retain` property like DataflowEnpoints has
 //- This doesn't have the `clientIdPrefix` property like DataflowEnpoints has
-//- This doesn't have the `retain` property like DataflowEnpoints has
-//- This doesn't have the `qos` property like DataflowEnpoints has
 //- The only supported protocol is `mqtt`
 //- `host` is a required property in DataflowEnpoints but optional here
 @added(Versions.`2025-07-01-preview`)
