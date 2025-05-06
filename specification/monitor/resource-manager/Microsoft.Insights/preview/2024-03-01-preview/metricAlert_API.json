@@ -471,6 +471,11 @@
     "MetricAlertsMetricPropertiesForPatch": {
       "x-ms-discriminator-value": "Metric",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricAlertPropertiesBaseForPatch"
+        }
+      ],
       "properties": {
         "description": {
           "type": "string",
@@ -562,7 +567,7 @@
     },
     "MetricAlertPropertiesBase": {
       "type": "object",
-      "discriminator": "type",
+      "discriminator": "kind",
       "description": "The base properties for a metric alert rule.",
       "properties": {
         "description": {
@@ -588,6 +593,7 @@
         }
       },
       "required": [
+        "kind",
         "severity",
         "enabled",
         "scopes",
@@ -614,9 +620,13 @@
     },
     "MetricAlertPropertiesBaseForPatch": {
       "type": "object",
-      "discriminator": "type",
+      "discriminator": "kind",
       "description": "The base properties for a metric alert rule.",
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Indicates the type of metric alert"
+        },
         "description": {
           "type": "string",
           "description": "Description of the alert rule."
@@ -715,6 +725,7 @@
     },
     "MetricAlertResourcePatch": {
       "type": "object",
+      "required": ["kind"],
       "properties": {
         "identity": {
           "$ref": "#/definitions/Identity",
