@@ -111,6 +111,11 @@ async function runLintDiff(
     changedFilesPath,
   );
 
+  if (beforeList.size === 0 && afterList.size === 0) {
+    console.log("No changes found. Exiting.");
+    return;
+  }
+
   // It may be possible to run these in parallel as they're running against
   // different directories.
   const beforeChecks = await runChecks(beforePath, beforeList);
@@ -144,5 +149,15 @@ async function runLintDiff(
   if (!pass) {
     process.exitCode = 1;
     console.error(`Lint-diff failed. See workflow summary report in ${outFile} for details.`);
+  }
+
+  if (
+    process.env.GITHUB_SERVER_URL &&
+    process.env.GITHUB_REPOSITORY &&
+    process.env.GITHUB_RUN_ID
+  ) {
+    console.log(
+    `See workflow summary at: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+    );
   }
 }
