@@ -480,7 +480,7 @@
           "type": "string",
           "enum": ["Metric"],
           "x-ms-enum": {
-            "name": "kind",
+            "name": "UniqueKindEnum",
             "modelAsString": true
           },
           "default": "Metric"
@@ -718,6 +718,10 @@
         "kind": {
           "type": "string",
           "enum": ["Metric", "Query"],
+          "x-ms-enum": {
+            "name": "Kinds",
+            "modelAsString": true
+          },
           "description": "Indicates the type of metric alert"
         },
         "identity": {
@@ -754,6 +758,10 @@
         "kind": {
           "type": "string",
           "enum": ["Metric", "Query"],
+          "x-ms-enum": {
+            "name": "KindsEnum",
+            "modelAsString": true
+          },
           "description": "Indicates the type of metric alert"
         },
         "properties": {
