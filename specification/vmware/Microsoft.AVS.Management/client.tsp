@@ -32,7 +32,7 @@ namespace Customization;
 
 @operationGroup
 @armResourceOperations
-interface WorkloadNetworksClient {
+interface WorkloadNetworks {
   list is Microsoft.AVS.WorkloadNetworks.list;
   get is Microsoft.AVS.WorkloadNetworks.get;
 
