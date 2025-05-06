@@ -15,7 +15,8 @@ namespace Microsoft.IoTOperations;
  */
 @parentResource(InstanceResource)
 @added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateResource is ProxyResource<AkriConnectorTemplateProperties> {
+model AkriConnectorTemplateResource
+  is ProxyResource<AkriConnectorTemplateProperties> {
   /**
    * Name of AkriConnectorTemplate resource
    */
@@ -268,7 +269,7 @@ model AkriConnectorTemplateManagedConfigurationSettings {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "CRD type is modeled as record of strings"
   additionalConfiguration?: Record<string>;
-  
+
   /**
    * The persistent volume claim templates for the managed configuration.
    * See https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json
@@ -276,7 +277,7 @@ model AkriConnectorTemplateManagedConfigurationSettings {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kuberntes resource type"
   @extension("x-ms-identifiers", #[])
   persistentVolumeClaimTemplates?: Record<unknown>[];
-  
+
   /**
    * Connector secrets that will be mounted onto all connector instances.
    */

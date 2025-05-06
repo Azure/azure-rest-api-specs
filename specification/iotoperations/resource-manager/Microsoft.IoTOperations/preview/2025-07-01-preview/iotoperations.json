@@ -82,7 +82,7 @@
       "name": "AkriConnector"
     },
     {
-      "name": "DiscoveryHandler"
+      "name": "AkriDiscoveryHandler"
     }
   ],
   "paths": {
@@ -439,6 +439,256 @@
         "x-ms-examples": {
           "Instance_Delete": {
             "$ref": "./examples/Instance_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/akriDiscoveryHandlers": {
+      "get": {
+        "operationId": "AkriDiscoveryHandler_ListByAkriConnectorTemplate",
+        "tags": [
+          "AkriDiscoveryHandler"
+        ],
+        "description": "List AkriDiscoveryHandlerResource resources by InstanceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AkriDiscoveryHandlerResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/akriDiscoveryHandlers/{akriDiscoveryHandlerName}": {
+      "get": {
+        "operationId": "AkriDiscoveryHandler_Get",
+        "tags": [
+          "AkriDiscoveryHandler"
+        ],
+        "description": "Get a AkriDiscoveryHandlerResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "akriDiscoveryHandlerName",
+            "in": "path",
+            "description": "Name of AkriDiscoveryHandler resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AkriDiscoveryHandlerResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "AkriDiscoveryHandler_CreateOrUpdate",
+        "tags": [
+          "AkriDiscoveryHandler"
+        ],
+        "description": "Create a AkriDiscoveryHandlerResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "akriDiscoveryHandlerName",
+            "in": "path",
+            "description": "Name of AkriDiscoveryHandler resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AkriDiscoveryHandlerResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AkriDiscoveryHandlerResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AkriDiscoveryHandlerResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AkriDiscoveryHandlerResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AkriDiscoveryHandlerResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AkriDiscoveryHandler_Delete",
+        "tags": [
+          "AkriDiscoveryHandler"
+        ],
+        "description": "Delete a AkriDiscoveryHandlerResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "akriDiscoveryHandlerName",
+            "in": "path",
+            "description": "Name of AkriDiscoveryHandler resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2203,311 +2453,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances/{connectorConfigInstanceName}/discoveryHandlers": {
-      "get": {
-        "operationId": "DiscoveryHandler_ListByAkriConnectorTemplate",
-        "tags": [
-          "DiscoveryHandler"
-        ],
-        "description": "List DiscoveryHandlerResource resources by AkriConnectorTemplateResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "connectorConfigInstanceName",
-            "in": "path",
-            "description": "Name of AkriConnectorTemplate resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DiscoveryHandlerResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/connectorConfigInstances/{connectorConfigInstanceName}/discoveryHandlers/{discoveryHandlerName}": {
-      "get": {
-        "operationId": "DiscoveryHandler_Get",
-        "tags": [
-          "DiscoveryHandler"
-        ],
-        "description": "Get a DiscoveryHandlerResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "connectorConfigInstanceName",
-            "in": "path",
-            "description": "Name of AkriConnectorTemplate resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "discoveryHandlerName",
-            "in": "path",
-            "description": "Name of DiscoveryHandler resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DiscoveryHandlerResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryHandler_Get_MaximumSet": {
-            "$ref": "./examples/DiscoveryHandler_Get_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "DiscoveryHandler_CreateOrUpdate",
-        "tags": [
-          "DiscoveryHandler"
-        ],
-        "description": "Create a DiscoveryHandlerResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "connectorConfigInstanceName",
-            "in": "path",
-            "description": "Name of AkriConnectorTemplate resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "discoveryHandlerName",
-            "in": "path",
-            "description": "Name of DiscoveryHandler resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DiscoveryHandlerResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'DiscoveryHandlerResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DiscoveryHandlerResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'DiscoveryHandlerResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DiscoveryHandlerResource"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryHandler_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/DiscoveryHandler_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "DiscoveryHandler_Delete",
-        "tags": [
-          "DiscoveryHandler"
-        ],
-        "description": "Delete a DiscoveryHandlerResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "connectorConfigInstanceName",
-            "in": "path",
-            "description": "Name of AkriConnectorTemplate resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "discoveryHandlerName",
-            "in": "path",
-            "description": "Name of DiscoveryHandler resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryHandler_Delete_MaximumSet": {
-            "$ref": "./examples/DiscoveryHandler_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5115,6 +5060,288 @@
         "secretAlias",
         "name"
       ]
+    },
+    "AkriDiscoveryHandlerAioMetadata": {
+      "type": "object",
+      "description": "Metadata about AIO.",
+      "properties": {
+        "aioMinVersion": {
+          "type": "string",
+          "description": "The minimum version of AIO required for the connector."
+        },
+        "aioMaxVersion": {
+          "type": "string",
+          "description": "The maximum version of AIO required for the connector."
+        }
+      }
+    },
+    "AkriDiscoveryHandlerDiagnostics": {
+      "type": "object",
+      "description": "AkriDiscoveryHandlerDiagnostics properties",
+      "properties": {
+        "logs": {
+          "$ref": "#/definitions/AkriDiscoveryHandlerLogSettings",
+          "description": "The log settings for the Connector template."
+        }
+      },
+      "required": [
+        "logs"
+      ]
+    },
+    "AkriDiscoveryHandlerDiscoverableDeviceEndpointType": {
+      "type": "object",
+      "description": "AkriDiscoveryHandlerDiscoverableDeviceEndpointType properties",
+      "properties": {
+        "endpointType": {
+          "$ref": "#/definitions/NonEmptyString",
+          "description": "The type of the endpoint."
+        },
+        "version": {
+          "$ref": "#/definitions/NonEmptyString",
+          "description": "The version of the endpoint."
+        }
+      },
+      "required": [
+        "endpointType",
+        "version"
+      ]
+    },
+    "AkriDiscoveryHandlerImageConfiguration": {
+      "type": "object",
+      "description": "AkriDiscoveryHandler Image configuration",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The image of the managed configuration."
+        },
+        "imagePullPolicy": {
+          "$ref": "#/definitions/ConnectorsImagePullPolicy",
+          "description": "The pull policy of the image"
+        },
+        "imagePullSecrets": {
+          "type": "array",
+          "description": "Image pull secret for the image.",
+          "items": {
+            "$ref": "#/definitions/ConnectorsImagePullSecret"
+          },
+          "x-ms-identifiers": []
+        },
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas for the managed configuration."
+        }
+      },
+      "required": [
+        "image",
+        "imagePullPolicy"
+      ]
+    },
+    "AkriDiscoveryHandlerLogSettings": {
+      "type": "object",
+      "description": "AkriDiscoveryHandlerLogSettings properties",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
+          "default": "info"
+        }
+      }
+    },
+    "AkriDiscoveryHandlerProperties": {
+      "type": "object",
+      "description": "AkriDiscoveryHandler properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "aioMetadata": {
+          "$ref": "#/definitions/AkriDiscoveryHandlerAioMetadata",
+          "description": "Metadata about AIO."
+        },
+        "additionalConfiguration": {
+          "type": "string",
+          "description": "Additional configuration for the AkriDiscoveryHandler."
+        },
+        "diagnostics": {
+          "$ref": "#/definitions/AkriDiscoveryHandlerDiagnostics",
+          "description": "Diagnostics settings for the AkriDiscoveryHandler."
+        },
+        "mode": {
+          "$ref": "#/definitions/OperationalMode",
+          "description": "Mode of the AkriDiscoveryHandler."
+        },
+        "discoverableDeviceEndpointTypes": {
+          "type": "array",
+          "description": "Device inbound endpoint types",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/AkriDiscoveryHandlerDiscoverableDeviceEndpointType"
+          },
+          "x-ms-identifiers": [
+            "endpointType",
+            "version"
+          ]
+        },
+        "mqttConnectionConfiguration": {
+          "$ref": "#/definitions/ConnectorsMqttConnectionConfiguration",
+          "description": "Mqtt connection configuration settings"
+        },
+        "imageConfiguration": {
+          "$ref": "#/definitions/AkriDiscoveryHandlerImageConfiguration",
+          "description": "The image configuration for the AkriDiscoveryHandler."
+        },
+        "schedule": {
+          "$ref": "#/definitions/AkriDiscoveryHandlerSchedule",
+          "description": "Schedule for the AkriDiscoveryHandler."
+        }
+      },
+      "required": [
+        "discoverableDeviceEndpointTypes",
+        "imageConfiguration",
+        "schedule"
+      ]
+    },
+    "AkriDiscoveryHandlerResource": {
+      "type": "object",
+      "description": "AkriDiscoveryHandler resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AkriDiscoveryHandlerProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AkriDiscoveryHandlerResourceListResult": {
+      "type": "object",
+      "description": "The response of a AkriDiscoveryHandlerResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AkriDiscoveryHandlerResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AkriDiscoveryHandlerResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AkriDiscoveryHandlerSchedule": {
+      "type": "object",
+      "description": "AkriDiscoveryHandlerSchedule properties",
+      "properties": {
+        "scheduleType": {
+          "$ref": "#/definitions/AkriDiscoveryHandlerScheduleType",
+          "description": "Schedule type"
+        }
+      },
+      "discriminator": "scheduleType",
+      "required": [
+        "scheduleType"
+      ]
+    },
+    "AkriDiscoveryHandlerScheduleContinuous": {
+      "type": "object",
+      "description": "AkriDiscoveryHandlerScheduleContinuous properties",
+      "properties": {
+        "continuous": {
+          "type": "string",
+          "description": "The time to run the discovery handler."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriDiscoveryHandlerSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "Continuous"
+    },
+    "AkriDiscoveryHandlerScheduleCron": {
+      "type": "object",
+      "description": "AkriDiscoveryHandlerScheduleCron properties",
+      "properties": {
+        "cron": {
+          "type": "string",
+          "description": "The cron expression for the schedule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriDiscoveryHandlerSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "Cron"
+    },
+    "AkriDiscoveryHandlerScheduleRunOnce": {
+      "type": "object",
+      "description": "AkriDiscoveryHandlerScheduleRunOnce properties",
+      "properties": {
+        "runOnce": {
+          "type": "string",
+          "description": "The time to run the discovery handler."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriDiscoveryHandlerSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "RunOnce"
+    },
+    "AkriDiscoveryHandlerScheduleType": {
+      "type": "string",
+      "description": "AkriDiscoveryHandlerScheduleType properties",
+      "enum": [
+        "Cron",
+        "RunOnce",
+        "Continuous"
+      ],
+      "x-ms-enum": {
+        "name": "AkriDiscoveryHandlerScheduleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cron",
+            "value": "Cron",
+            "description": "The schedule is a cron expression."
+          },
+          {
+            "name": "RunOnce",
+            "value": "RunOnce",
+            "description": "The discovery handler should run once."
+          },
+          {
+            "name": "Continuous",
+            "value": "Continuous",
+            "description": "The discovery handler should run continuously."
+          }
+        ]
+      }
     },
     "AnonymousMethod": {
       "type": "string",
@@ -8693,288 +8920,6 @@
           "type": "string",
           "description": "Expiration timestamp for Diagnostic."
         }
-      }
-    },
-    "DiscoveryHandlerAioMetadata": {
-      "type": "object",
-      "description": "Metadata about AIO.",
-      "properties": {
-        "aioMinVersion": {
-          "type": "string",
-          "description": "The minimum version of AIO required for the connector."
-        },
-        "aioMaxVersion": {
-          "type": "string",
-          "description": "The maximum version of AIO required for the connector."
-        }
-      }
-    },
-    "DiscoveryHandlerDiagnostics": {
-      "type": "object",
-      "description": "DiscoveryHandlerDiagnostics properties",
-      "properties": {
-        "logs": {
-          "$ref": "#/definitions/DiscoveryHandlerLogSettings",
-          "description": "The log settings for the Connector template."
-        }
-      },
-      "required": [
-        "logs"
-      ]
-    },
-    "DiscoveryHandlerDiscoverableDeviceEndpointType": {
-      "type": "object",
-      "description": "DiscoveryHandlerDiscoverableDeviceEndpointType properties",
-      "properties": {
-        "endpointType": {
-          "$ref": "#/definitions/NonEmptyString",
-          "description": "The type of the endpoint."
-        },
-        "version": {
-          "$ref": "#/definitions/NonEmptyString",
-          "description": "The version of the endpoint."
-        }
-      },
-      "required": [
-        "endpointType",
-        "version"
-      ]
-    },
-    "DiscoveryHandlerImageConfiguration": {
-      "type": "object",
-      "description": "DiscoveryHandler Image configuration",
-      "properties": {
-        "image": {
-          "type": "string",
-          "description": "The image of the managed configuration."
-        },
-        "imagePullPolicy": {
-          "$ref": "#/definitions/ConnectorsImagePullPolicy",
-          "description": "The pull policy of the image"
-        },
-        "imagePullSecrets": {
-          "type": "array",
-          "description": "Image pull secret for the image.",
-          "items": {
-            "$ref": "#/definitions/ConnectorsImagePullSecret"
-          },
-          "x-ms-identifiers": []
-        },
-        "replicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of replicas for the managed configuration."
-        }
-      },
-      "required": [
-        "image",
-        "imagePullPolicy"
-      ]
-    },
-    "DiscoveryHandlerLogSettings": {
-      "type": "object",
-      "description": "DiscoveryHandlerLogSettings properties",
-      "properties": {
-        "level": {
-          "type": "string",
-          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
-          "default": "info"
-        }
-      }
-    },
-    "DiscoveryHandlerProperties": {
-      "type": "object",
-      "description": "DiscoveryHandler properties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "aioMetadata": {
-          "$ref": "#/definitions/DiscoveryHandlerAioMetadata",
-          "description": "Metadata about AIO."
-        },
-        "additionalConfiguration": {
-          "type": "string",
-          "description": "Additional configuration for the DiscoveryHandler."
-        },
-        "diagnostics": {
-          "$ref": "#/definitions/DiscoveryHandlerDiagnostics",
-          "description": "Diagnostics settings for the DiscoveryHandler."
-        },
-        "mode": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "Mode of the DiscoveryHandler."
-        },
-        "discoverableDeviceEndpointTypes": {
-          "type": "array",
-          "description": "Device inbound endpoint types",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/DiscoveryHandlerDiscoverableDeviceEndpointType"
-          },
-          "x-ms-identifiers": [
-            "endpointType",
-            "version"
-          ]
-        },
-        "mqttConnectionConfiguration": {
-          "$ref": "#/definitions/ConnectorsMqttConnectionConfiguration",
-          "description": "Mqtt connection configuration settings"
-        },
-        "imageConfiguration": {
-          "$ref": "#/definitions/DiscoveryHandlerImageConfiguration",
-          "description": "The image configuration for the DiscoveryHandler."
-        },
-        "schedule": {
-          "$ref": "#/definitions/DiscoveryHandlerSchedule",
-          "description": "Schedule for the DiscoveryHandler."
-        }
-      },
-      "required": [
-        "discoverableDeviceEndpointTypes",
-        "imageConfiguration",
-        "schedule"
-      ]
-    },
-    "DiscoveryHandlerResource": {
-      "type": "object",
-      "description": "DiscoveryHandler resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DiscoveryHandlerProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "Edge location of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "extendedLocation"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "DiscoveryHandlerResourceListResult": {
-      "type": "object",
-      "description": "The response of a DiscoveryHandlerResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DiscoveryHandlerResource items on this page",
-          "items": {
-            "$ref": "#/definitions/DiscoveryHandlerResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "DiscoveryHandlerSchedule": {
-      "type": "object",
-      "description": "DiscoveryHandlerSchedule properties",
-      "properties": {
-        "scheduleType": {
-          "$ref": "#/definitions/DiscoveryHandlerScheduleType",
-          "description": "Schedule type"
-        }
-      },
-      "discriminator": "scheduleType",
-      "required": [
-        "scheduleType"
-      ]
-    },
-    "DiscoveryHandlerScheduleContinuous": {
-      "type": "object",
-      "description": "DiscoveryHandlerScheduleContinuous properties",
-      "properties": {
-        "continuous": {
-          "type": "string",
-          "description": "The time to run the discovery handler."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DiscoveryHandlerSchedule"
-        }
-      ],
-      "x-ms-discriminator-value": "Continuous"
-    },
-    "DiscoveryHandlerScheduleCron": {
-      "type": "object",
-      "description": "DiscoveryHandlerScheduleCron properties",
-      "properties": {
-        "cron": {
-          "type": "string",
-          "description": "The cron expression for the schedule."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DiscoveryHandlerSchedule"
-        }
-      ],
-      "x-ms-discriminator-value": "Cron"
-    },
-    "DiscoveryHandlerScheduleRunOnce": {
-      "type": "object",
-      "description": "DiscoveryHandlerScheduleRunOnce properties",
-      "properties": {
-        "runOnce": {
-          "type": "string",
-          "description": "The time to run the discovery handler."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DiscoveryHandlerSchedule"
-        }
-      ],
-      "x-ms-discriminator-value": "RunOnce"
-    },
-    "DiscoveryHandlerScheduleType": {
-      "type": "string",
-      "description": "DiscoveryHandlerScheduleType properties",
-      "enum": [
-        "Cron",
-        "RunOnce",
-        "Continuous"
-      ],
-      "x-ms-enum": {
-        "name": "DiscoveryHandlerScheduleType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Cron",
-            "value": "Cron",
-            "description": "The schedule is a cron expression."
-          },
-          {
-            "name": "RunOnce",
-            "value": "RunOnce",
-            "description": "The discovery handler should run once."
-          },
-          {
-            "name": "Continuous",
-            "value": "Continuous",
-            "description": "The discovery handler should run continuously."
-          }
-        ]
       }
     },
     "DiskBackedMessageBuffer": {

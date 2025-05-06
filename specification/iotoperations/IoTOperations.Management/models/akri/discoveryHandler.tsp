@@ -12,20 +12,20 @@ using Azure.ResourceManager;
 namespace Microsoft.IoTOperations;
 
 /**
- * DiscoveryHandler resource
+ * AkriDiscoveryHandler resource
  */
 @added(Versions.`2025-07-01-preview`)
-@parentResource(AkriConnectorTemplateResource)
-model DiscoveryHandlerResource is ProxyResource<DiscoveryHandlerProperties> {
+@parentResource(InstanceResource)
+model AkriDiscoveryHandlerResource is ProxyResource<AkriDiscoveryHandlerProperties> {
   /**
-   * Name of DiscoveryHandler resource
+   * Name of AkriDiscoveryHandler resource
    */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
-  @key("discoveryHandlerName")
+  @key("akriDiscoveryHandlerName")
   @path
   @minLength(3)
   @maxLength(63)
-  @segment("discoveryHandlers")
+  @segment("akriDiscoveryHandlers")
   name: string;
 
   /**
@@ -37,11 +37,11 @@ model DiscoveryHandlerResource is ProxyResource<DiscoveryHandlerProperties> {
 }
 
 /**
- * DiscoveryHandler properties
+ * AkriDiscoveryHandler properties
  */
 // At the moment, the CRD properties are defined in snake_case. We should change them to camelCase to be consistent with the rest of the API.
 @added(Versions.`2025-07-01-preview`)
-model DiscoveryHandlerProperties {
+model AkriDiscoveryHandlerProperties {
   /**
    * The status of the last operation.
    */
@@ -51,20 +51,20 @@ model DiscoveryHandlerProperties {
   /**
    * Metadata about AIO.
    */
-  aioMetadata?: DiscoveryHandlerAioMetadata;
+  aioMetadata?: AkriDiscoveryHandlerAioMetadata;
 
   /**
-   * Additional configuration for the DiscoveryHandler.
+   * Additional configuration for the AkriDiscoveryHandler.
    */
   additionalConfiguration?: string;
 
   /**
-   * Diagnostics settings for the DiscoveryHandler.
+   * Diagnostics settings for the AkriDiscoveryHandler.
    */
-  diagnostics?: DiscoveryHandlerDiagnostics;
+  diagnostics?: AkriDiscoveryHandlerDiagnostics;
 
   /**
-   * Mode of the DiscoveryHandler.
+   * Mode of the AkriDiscoveryHandler.
    */
   mode?: OperationalMode; // Right now in the CRD the property is called `enabled` but it should be `mode`. We should change it in the CRD to be consistent with the rest of the API.
 
@@ -73,7 +73,7 @@ model DiscoveryHandlerProperties {
    */
   @OpenAPI.extension("x-ms-identifiers", #["endpointType", "version"])
   @minItems(1)
-  discoverableDeviceEndpointTypes: DiscoveryHandlerDiscoverableDeviceEndpointType[];
+  discoverableDeviceEndpointTypes: AkriDiscoveryHandlerDiscoverableDeviceEndpointType[];
 
   /**
    * Mqtt connection configuration settings
@@ -81,47 +81,47 @@ model DiscoveryHandlerProperties {
   mqttConnectionConfiguration?: ConnectorsMqttConnectionConfiguration;
 
   /**
-   * The image configuration for the DiscoveryHandler.
+   * The image configuration for the AkriDiscoveryHandler.
    */
-  imageConfiguration: DiscoveryHandlerImageConfiguration;
+  imageConfiguration: AkriDiscoveryHandlerImageConfiguration;
 
   /**
-   * Schedule for the DiscoveryHandler.
+   * Schedule for the AkriDiscoveryHandler.
    */
-  schedule: DiscoveryHandlerSchedule;
+  schedule: AkriDiscoveryHandlerSchedule;
 }
 
 /**
  * Metadata about AIO.
  */
 @added(Versions.`2025-07-01-preview`)
-model DiscoveryHandlerAioMetadata {
+model AkriDiscoveryHandlerAioMetadata {
   ...AkriAioMetadata;
 }
 /**
- * DiscoveryHandlerDiagnostics properties
+ * AkriDiscoveryHandlerDiagnostics properties
  */
 @added(Versions.`2025-07-01-preview`)
-model DiscoveryHandlerDiagnostics {
+model AkriDiscoveryHandlerDiagnostics {
   /**
    * The log settings for the Connector template.
    */
-  logs: DiscoveryHandlerLogSettings;
+  logs: AkriDiscoveryHandlerLogSettings;
 }
 
 /**
- * DiscoveryHandlerLogSettings properties
+ * AkriDiscoveryHandlerLogSettings properties
  */
 @added(Versions.`2025-07-01-preview`)
-model DiscoveryHandlerLogSettings {
+model AkriDiscoveryHandlerLogSettings {
   ...DiagnosticsLogs;
 }
 
 /**
- * DiscoveryHandlerDiscoverableDeviceEndpointType properties
+ * AkriDiscoveryHandlerDiscoverableDeviceEndpointType properties
  */
 @added(Versions.`2025-07-01-preview`)
-model DiscoveryHandlerDiscoverableDeviceEndpointType {
+model AkriDiscoveryHandlerDiscoverableDeviceEndpointType {
   /**
    * The type of the endpoint.
    */
@@ -134,10 +134,10 @@ model DiscoveryHandlerDiscoverableDeviceEndpointType {
 }
 
 /**
- * DiscoveryHandler Image configuration
+ * AkriDiscoveryHandler Image configuration
  */
 @added(Versions.`2025-07-01-preview`)
-model DiscoveryHandlerImageConfiguration {
+model AkriDiscoveryHandlerImageConfiguration {
   /**
    * The image of the managed configuration.
    */
@@ -160,22 +160,22 @@ model DiscoveryHandlerImageConfiguration {
 }
 
 /**
- * DiscoveryHandlerSchedule properties
+ * AkriDiscoveryHandlerSchedule properties
  */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("scheduleType")
-model DiscoveryHandlerSchedule {
+model AkriDiscoveryHandlerSchedule {
   /**
    * Schedule type
    */
-  scheduleType: DiscoveryHandlerScheduleType;
+  scheduleType: AkriDiscoveryHandlerScheduleType;
 }
 
 /**
- * DiscoveryHandlerScheduleType properties
+ * AkriDiscoveryHandlerScheduleType properties
  */
 @added(Versions.`2025-07-01-preview`)
-union DiscoveryHandlerScheduleType {
+union AkriDiscoveryHandlerScheduleType {
   string,
 
   /**
@@ -195,10 +195,10 @@ union DiscoveryHandlerScheduleType {
 }
 
 /**
- * DiscoveryHandlerScheduleCron properties
+ * AkriDiscoveryHandlerScheduleCron properties
  */
 @added(Versions.`2025-07-01-preview`)
-model DiscoveryHandlerScheduleCron extends DiscoveryHandlerSchedule {
+model AkriDiscoveryHandlerScheduleCron extends AkriDiscoveryHandlerSchedule {
   /**
    * Schedule type
    */
@@ -211,10 +211,10 @@ model DiscoveryHandlerScheduleCron extends DiscoveryHandlerSchedule {
 }
 
 /**
- * DiscoveryHandlerScheduleRunOnce properties
+ * AkriDiscoveryHandlerScheduleRunOnce properties
  */
 @added(Versions.`2025-07-01-preview`)
-model DiscoveryHandlerScheduleRunOnce extends DiscoveryHandlerSchedule {
+model AkriDiscoveryHandlerScheduleRunOnce extends AkriDiscoveryHandlerSchedule {
   /**
    * Schedule type
    */
@@ -228,10 +228,10 @@ model DiscoveryHandlerScheduleRunOnce extends DiscoveryHandlerSchedule {
 }
 
 /**
- * DiscoveryHandlerScheduleContinuous properties
+ * AkriDiscoveryHandlerScheduleContinuous properties
  */
 @added(Versions.`2025-07-01-preview`)
-model DiscoveryHandlerScheduleContinuous extends DiscoveryHandlerSchedule {
+model AkriDiscoveryHandlerScheduleContinuous extends AkriDiscoveryHandlerSchedule {
   /**
    * Schedule type
    */

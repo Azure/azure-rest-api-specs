@@ -170,7 +170,7 @@ interface AkriConnectorTemplate {
   listByInstanceResource is ArmResourceListByParent<AkriConnectorTemplateResource>;
 }
 
-// /instance/akriConnectorTemplates/akriConnectors resource Operations
+// /instance/akriConnectorTemplates/connectors resource Operations
 @armResourceOperations
 @added(Versions.`2025-07-01-preview`)
 interface AkriConnector {
@@ -180,12 +180,12 @@ interface AkriConnector {
   listByAkriConnectorTemplate is ArmResourceListByParent<AkriConnectorResource>;
 }
 
-// /instance/akriConnectorTemplates/discoveryHandlers resource Operations
+// /instance/AkriDiscoveryHandlers resource Operations
 @armResourceOperations
 @added(Versions.`2025-07-01-preview`)
-interface DiscoveryHandler {
-  get is ArmResourceRead<DiscoveryHandlerResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiscoveryHandlerResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<DiscoveryHandlerResource>;
-  listByAkriConnectorTemplate is ArmResourceListByParent<DiscoveryHandlerResource>;
+interface AkriDiscoveryHandler {
+  get is ArmResourceRead<AkriDiscoveryHandlerResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriDiscoveryHandlerResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<AkriDiscoveryHandlerResource>;
+  listByAkriConnectorTemplate is ArmResourceListByParent<AkriDiscoveryHandlerResource>;
 }
