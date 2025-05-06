@@ -5,10 +5,9 @@ import "@typespec/rest";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
-namespace LogsIngestionClient;
+namespace LogsIngestion;
 
 /**
  * Ingestion API used to directly ingest data using Data Collection Rules.
