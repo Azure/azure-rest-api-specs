@@ -479,6 +479,10 @@
         "kind": {
           "type": "string",
           "enum": ["Metric"],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          },
           "default": "Metric"
         },
         "description": {
@@ -580,6 +584,7 @@
         },
         "severity": {
           "type": "integer",
+          "format": "int32",
           "description": "Alert severity (0-4).",
           "minimum": 0,
           "maximum": 4
@@ -616,6 +621,10 @@
         "kind": {
           "type": "string",
           "enum": ["Query"],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          },
           "default": "Query"
         },
         "resolveConfiguration": {
@@ -636,6 +645,7 @@
         },
         "severity": {
           "type": "integer",
+          "format": "int32",
           "description": "Alert severity (0-4).",
           "minimum": 0,
           "maximum": 4
@@ -1256,6 +1266,7 @@
       "description": "Identity for the resource."
     },
     "UserIdentityProperties": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
