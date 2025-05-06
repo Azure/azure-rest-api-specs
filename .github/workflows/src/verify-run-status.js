@@ -1,14 +1,7 @@
-import { byDate, invert } from "../../shared/src/sort.js";
 import { extractInputs } from "./context.js";
-import { PER_PAGE_MAX } from "./github.js";
+import { getCheckRuns, getWorkflowRuns } from "./github.js";
 
 const SUPPORTED_EVENTS = ["workflow_run", "check_run", "check_suite"];
-
-/**
- * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
- * @typedef {RestEndpointMethodTypes["checks"]["listForRef"]["response"]["data"]["check_runs"]} CheckRuns
- * @typedef {RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["response"]["data"]["workflow_runs"]} WorkflowRuns
- */
 
 /* v8 ignore start */
 /**
@@ -160,62 +153,4 @@ export async function verifyRunStatusImpl({
       `Conclusions match for check run ${checkRunName} and workflow run ${workflowName}`,
     );
   }
-}
-
-/**
- * Returns the check with the given checkRunName for the given ref.
- * @param {import('github-script').AsyncFunctionArguments['github']} github
- * @param {import('github-script').AsyncFunctionArguments['context']} context
- * @param {string} checkRunName
- * @param {string} ref
- * @returns {Promise<CheckRuns>}
- */
-export async function getCheckRuns(github, context, checkRunName, ref) {
-  const result = await github.paginate(github.rest.checks.listForRef, {
-    ...context.repo,
-    ref: ref,
-    check_name: checkRunName,
-    status: "completed",
-    per_page: PER_PAGE_MAX,
-  });
-
-  /* v8 ignore next */
-  return result.sort(
-    invert(
-      byDate((run) => {
-        if (run.completed_at === null) {
-          // completed_at should never be null because status is "completed"
-          throw new Error(
-            `Unexpected value of run.completed_at: '${run.completed_at}'`,
-          );
-        } else {
-          return run.completed_at;
-        }
-      }),
-    ),
-  );
-}
-
-/**
- * Returns the workflow run with the given workflowName for the given ref.
- * @param {import('github-script').AsyncFunctionArguments['github']} github
- * @param {import('github-script').AsyncFunctionArguments['context']} context
- * @param {string} workflowName
- * @param {string} ref
- * @returns {Promise<WorkflowRuns>}
- */
-export async function getWorkflowRuns(github, context, workflowName, ref) {
-  const result = await github.paginate(
-    github.rest.actions.listWorkflowRunsForRepo,
-    {
-      ...context.repo,
-      head_sha: ref,
-      status: "completed",
-      per_page: PER_PAGE_MAX,
-    },
-  );
-
-  return result
-    .filter((run) => run.name === workflowName)
-    .sort(invert(byDate((run) => run.updated_at)));
 }
