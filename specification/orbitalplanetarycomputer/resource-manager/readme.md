@@ -1,4 +1,4 @@
-# Azure Orbital Planetary Computer (AOPC)
+# Microsoft Planetary Computer Pro (MPC Pro)
 
 > see https://aka.ms/autorest
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the AOPC.
+These are the global settings for MPC Pro.
 
 ```yaml
 openapi-type: arm

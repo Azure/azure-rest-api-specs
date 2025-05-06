@@ -1,22 +1,22 @@
 # SDK Automation Customization
 
-This is the specification of the new SDK Automation customization configuration.
-Old customization that hardcoded in sdk automation will still work but this new
-approach is preferred.
+This is the specification of the SDK Automation customization configuration.
 
 ## SDK Automation workflow
 
-### Opened PR Validation Trigger
+### Spec Pull Request Trigger
 
-SDK Automation is launched with matrix in azure pipeline. For each language configured:
+SDK Automation is launched in azure pipeline. For each language configured:
 
-1. Get the PR merge commit and clone the spec repo on the merge commit.
+1. Clone the spec repo on the merge commit and clone the specified SDK language repo from the main branch.
 
-2. Get the PR changed file list. For each changed file, find the nearest readme.md in parent folder. Get list of related readme.md.
+2. Identify the TypeSpec project or the `readme.md` file based on the PR changed files.
 
-3. Filter which sdk will be generated:
+3. Trigger the `spec-gen-sdk` pipelines for five SDK languages.
 
-    1. For Swagger PR, filter the list of readme.md with: find the `swagger-to-sdk` section in the readme.md, and see if the specified language is configured for that readme.md. Example of `swagger-to-sdk` in SDK Automation:
+4. Validate SDK configuration in the `spec-gen-sdk` pipeline:
+
+    1. For `readme.md` file, validate the specified language is configured for in the `swagger-to-sdk` section. Example of `swagger-to-sdk` in SDK Automation:
         ```
         ```yaml $(swagger-to-sdk)
         swagger-to-sdk:
@@ -26,38 +26,29 @@ SDK Automation is launched with matrix in azure pipeline. For each language conf
           - repo: azure-sdk-for-js
         ``` <EOL>
         ```
-    2. For TypeSpec PR, filter the list of tspconfig.yaml: find the `options` config in tspconfig.yaml, and see if the specified language emitter is configured.
+    2. For TypeSpec project, validate if the specified language emitter is configured in the `options` config in the `tspconfig.yaml` file.
     
-    If the specific language is not configured here, generation for this typespec project will be skipped.
+    If SDK configuration is not configured here, the SDK generation will be skipped.
 
-4. Get `specificationRepositoryConfiguration.json` from spec repo default branch. See [SpecRepoConfig](#specrepoconfig). Get the repo and branch config in the file.
-
-5. Clone __mainRepository__ and checkout __mainBranch__. If __secondaryRepository__ is specified then checkout __secondaryRepository__ and __secondaryBranch__ instead.
+5. Load `specificationRepositoryConfiguration.json` from the merged PR commit. See [SpecRepoConfig](#specrepoconfig). Get the SDK repo config path.
 
 6. Get `swagger_to_sdk_config.json` from cloned SDK repository. The config file path could be customized by __configFilePath__ in spec config. For the definition of the config see [SwaggerToSdkConfig](#swaggertosdkconfig).
 
 7. Launch __initScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig). All the script's working directory is root folder of cloned SDK repository.
 
-8. Calculate __PR diff__ and related `readme.md`. If __generationCallMode__ is __one-for-all-configs__ then run ___one pass for the rest steps___, else (__one-per-config__) ___loop the rest steps___ with each `readme.md`.
+8. Launch __generateScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig) with [generateInput.json](#generateinput). The script should produce [generateOutput.json](#generateoutput) if __parseGenerateOutput__ is true.
 
-9. Launch __generateScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig) with [generateInput.json](#generateinput). The script should produce [generateOutput.json](#generateoutput) if __parseGenerateOutput__ is true. If dryRun is set to true then first run of __generateScript__ will be used to collect package information , then loop each package info and checkout package related branch and launch __generateScript__ with package related readmeMd and dryRun set to false.
+9. Get generated package. If __packageFolderFromFileSearch__ is defined with file search then package folder is detected based on git diff in SDK repository and algorithm described in [SwaggerToSdkConfig Schema](#swaggertosdkconfig-schema). Else package folder is from [generateOutput.json](#generateoutput). For each package ___loop the rest steps___.
 
-10. Get generated package. If __packageFolderFromFileSearch__ is defined with file search then package folder is detected based on git diff in SDK repository and algorithm described in [SwaggerToSdkConfig Schema](#swaggertosdkconfig-schema). Else package folder is from [generateOutput.json](#generateoutput). For each package ___loop the rest steps___.
+10. Launch __buildScript__ to build the package. Collect the artifacts by config __artifactPathFromFileSearch__. This step could be skipped if it's not defined in [SwaggerToSdkConfig](#swaggertosdkconfig) and it's covered by __generateScript__ and the result could be found in [generateOutput.json](#generateoutput).
 
-11. Launch __buildScript__ to build the package. Collect the artifacts by config __artifactPathFromFileSearch__. This step could be skipped if it's not defined in [SwaggerToSdkConfig](#swaggertosdkconfig) and it's covered by __generateScript__ and the result could be found in [generateOutput.json](#generateoutput).
+11. Launch __changelogScript__ to get changelog and detect breaking change. This step could be skipped if changelog and breaking change could be found in [generateOutput.json](#generateoutput). If breaking change is found, the spec PR will be labelled with `BreakingChange-<Lang>-Sdk`.
 
-12. Launch __changelogScript__ to get changelog and detect breaking change. This step could be skipped if changelog and breaking change could be found in [generateOutput.json](#generateoutput). If breaking change is found, the spec PR will be labelled with `BreakingChange-<Lang>-Sdk`.
+12. Launch __installInstructionScript__ to get install instruction for that package. This step could be skipped if install instruction could be found in [generateOutput.json](#generateoutput). The lite install instruction will be shown in spec PR comment, the full install instruction will be shown in generated SDK PR.
 
-13. Launch __installInstructionScript__ to get install instruction for that package. This step could be skipped if install instruction could be found in [generateOutput.json](#generateoutput). The lite install instruction will be shown in spec PR comment, the full install instruction will be shown in generated SDK PR.
+### Manual Trigger
 
-14. Commit the package related code in SDK repository. Force push to [GenerationBranch](#generationbranch) in __integrationRepository__. Create or update [GenerationPR](#generationpr) from [GenerationBranch](#generationbranch) to [MainBranch](#mainbranch) in __integrationRepository__. If __integrationRepository__ is a fork of __mainRepository__, its [MainBranch](#mainbranch) should be synced once a day.
-
-### Continuous Integration (PR Merged) Trigger
-
-Almost the same as opened PR trigger, with different on step 14:
-
-14. Commit the package related code in SDK repository. Close [GenerationPR](#generationpr) and delete [GenerationBranch](#generationbranch). Force push to [IntegrationBranch](#integrationbranch) in __integrationRepository__. Create or update [IntegrationPR](#integrationpr) from [IntegrationBranch](#integrationbranch) to [MainBranch](#mainbranch) in __mainRepository__. Close the [integrationPR](#integrationPR) if __closeIntegrationPR__ in [SwaggerToSdkConfig](#swaggertosdkconfig) is set to true.
-
+Almost the same as spec pull request trigger. The difference is users can specify the commitish for both of the spec repo and the SDK repo while triggering the pipeline. In addition, a SDK pull request will be created after the pipeline completes successfully. Refer to https://aka.ms/azsdk/spec-gen-sdk-pipeline-doc for more details.
 
 ## Definitions
 
@@ -68,27 +59,15 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
 ```json 
 {
   "sdkRepositoryMappings": {
-    "azure-sdk-for-js": {
-      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-js",
-      "mainRepository": "Azure/azure-sdk-for-js"
-    },
-    "azure-sdk-for-python": {
-      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-python",
-      "mainRepository": "Azure/azure-sdk-for-python",
-      "mainBranch": "release/v3"
+    "azure-sdk-for-go": {
+      "configFilePath": "eng/swagger_to_sdk_config.json"
     }
   },
   "overrides": {
     "Azure/azure-rest-api-specs-pr": {
       "sdkRepositoryMappings": {
-        "azure-sdk-for-js": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-js-pr",
-          "mainRepository": "Azure/azure-sdk-for-js-pr"
-        },
-        "azure-sdk-for-python": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
-          "mainRepository": "Azure/azure-sdk-for-python-pr",
-          "mainBranch": "release/v3"
+        "azure-sdk-for-net": {
+          "configFilePath": "eng/swagger_to_sdk_config.json"
         }
       }
     }
@@ -98,11 +77,11 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
 
 #### SpecRepoConfig Schema
 
-See [./SpecConfigSchema.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/SpecConfigSchema.json)
+See [SpecConfigSchema.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/SpecConfigSchema.json)
 
 ### SwaggerToSdkConfig
 This is type of file `./swagger_to_sdk_config.json` in sdk repo.
-The running environment of these scripts would be expected to be __Ubuntu 18.04__ on Azure Pipeline. This may change in the future. All the running script should be executable.
+The running environment of these scripts would be expected to be __Ubuntu 22__ on Azure Pipeline. This may change in the future. All the running script should be executable.
 The working folder of all the scripts is the __root folder of sdk repo__.
 
 #### SwaggerToSdkConfig Example
@@ -174,7 +153,7 @@ The working folder of all the scripts is the __root folder of sdk repo__.
 
 #### SwaggerToSdkConfig Schema
 
-See [./SwaggerToSdkConfigSchema.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/SwaggerToSdkConfigSchema.json)
+See [SwaggerToSdkConfigSchema.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/SwaggerToSdkConfigSchema.json)
 
 ### GenerateInput
 
@@ -184,29 +163,29 @@ Input file for generate script.
 
 ```jsonc
 {
-  "dryRun": false,
   "specFolder": "/z/work/azure-rest-api-specs",
   "headSha": "fce3400431eff281bddd04bed9727e63765b8da0",
-  "headRef": "refs/pull/1234/merge",
   "repoHttpsUrl": "https://github.com/Azure/azure-rest-api-specs.git",
-  "trigger": "pull_request",
-  "changedFiles": [
-    "specification/cdn/something/cdn.json"
-  ],
+  "runMode": "spec-pull-request",
+  "changedFiles": [],
+  "apiVersion": "",
+  "sdkReleaseType": "beta",
   "relatedReadmeMdFiles": [
     "specification/cdn/something/readme.md"
   ],
+  "relatedTypeSpecProjectFolder": [
+    "specification/contosowidgetmanager/Contoso.Management"
+  ],
   "installInstructionInput": {
     "isPublic": false,
-    "downloadCommandTemplate": "curl -L \"{URL}\" -o {FILENAME}",
-    "trigger": "pullRequest"
+    "downloadUrlPrefix": "prefix",
   }
 }
 ```
 
 #### GenerateInput Schema
 
-See [./GenerateInputSchema.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/GenerateInputSchema.json)
+See [GenerateInputSchema.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/GenerateInputSchema.json)
 
 ### GenerateOutput
 
@@ -245,7 +224,7 @@ Output file for generate script.
 
 #### GenerateOutput Schema
 
-See [./GenerateOutputSchema.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/GenerateOutputSchema.json)
+See [GenerateOutputSchema.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/GenerateOutputSchema.json)
 
 ### InstallInstructionScriptInput
 
@@ -261,14 +240,13 @@ Input of install instruction script.
     "sdk/cdn/cdn.snuget"
   ],
   "isPublic": true,
-  "downloadCommandTemplate": "curl -L \"{URL}\" -o {FILENAME}",
-  "trigger": "pullRequest",
+  "downloadUrlPrefix": "prefix"
 }
 ```
 
 #### InstallInstructionScriptInput Schema
 
-See [./InstallInstructionScriptInput.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/InstallInstructionScriptInput.json)
+See [InstallInstructionScriptInput.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/InstallInstructionScriptInputSchema.json)
 
 ### InstallInstructionScriptOutput
 
@@ -284,35 +262,10 @@ Output of install instruction script.
 
 #### InstallInstructionScriptOutput Schema
 
-See [./InstallInstructionScriptOutput.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/InstallInstructionScriptOutput.json)
-
-### TriggerType
-
-#### TriggerType Schema
-
-```jsonc
-{
-  // How this generation is triggered.
-  "$id": "TriggerType",
-  "type": "string",
-  "enum": ["pullRequest", "continuousIntegration"]
-}
-```
+See [InstallInstructionScriptOutput.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/InstallInstructionScriptOutputSchema.json)
 
 ### InitOutput
 
 #### InitOutput Schema
 
-```jsonc
-{
-  "type": "object",
-  "properties": {
-    "envs": {
-      // Environment variable to be set in following scripts.
-      "additionalProperties": {
-        "type": "string"
-      }
-    }
-  }
-}
-```
+See [InitOutputSchema.json](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/types/InitOutputSchema.json)
