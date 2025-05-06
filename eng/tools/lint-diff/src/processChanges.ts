@@ -8,8 +8,7 @@ import {
   getTagsAndInputFiles,
   deduplicateTags,
 } from "./markdown-utils.js";
-import $RefParser from "@apidevtools/json-schema-ref-parser";
-import deepEqual from "deep-eql";
+import $RefParser, { FileInfo } from "@apidevtools/json-schema-ref-parser";
 
 export async function getRunList(
   beforePath: string,
@@ -99,8 +98,6 @@ export async function buildState(
     }
   }
 
-  // TODO: Deduplicate inside or outside state building? It's possible that
-  // later processing like that in reconcileChangedFilesAndTags
   const changedFileAndTagsMap = new Map<string, string[]>();
   for (const [readmeFile, tags] of readmeTags.entries()) {
     const dedupedTags = deduplicateTags(
@@ -225,8 +222,8 @@ export function getService(filePath: string): string {
   throw new Error(`Could not find service for file path: ${filePath}`);
 }
 
-const excludeExamples = (path: string) => { 
-  return path.includes("/examples/");
+const excludeExamples = (path: FileInfo) => { 
+  return !path.url.includes("/examples/");
 }
 
 export async function getChangedSwaggers(
@@ -245,17 +242,16 @@ export async function getChangedSwaggers(
 
     const afterSwagger = join(afterRoot, swagger);
 
-    const derefBefore = await $RefParser.dereference(
+    const bundleBefore = await $RefParser.bundle(
       beforeSwagger, 
-      { dereference: { excludedPathMatcher: excludeExamples } }
+      { resolve: { file: { canRead: excludeExamples}}},
     );
-    const derefAfter = await $RefParser.dereference(
+    const bundleAfter = await $RefParser.bundle(
       afterSwagger, 
-      { dereference: { excludedPathMatcher: excludeExamples } }
+      { resolve: { file: { canRead: excludeExamples}}},
     );
 
-    // TODO: why not deref, "bundle", serialize, and string compare?
-    if (!deepEqual(derefBefore, derefAfter)) {
+    if (JSON.stringify(bundleBefore) !== JSON.stringify(bundleAfter)) {
       affectedSwaggers.add(swagger);
     }
   }

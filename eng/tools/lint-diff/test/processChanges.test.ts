@@ -4,6 +4,7 @@ import {
   getAffectedServices,
   getService,
   reconcileChangedFilesAndTags,
+  getChangedSwaggers,
 } from "../src/processChanges.js";
 
 import { isWindows } from "./test-util.js";
@@ -80,5 +81,50 @@ describe("reconcileChangedFilesAndTags", () => {
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(beforeFinal);
     expect(afterFinal).toEqual(after);
+  });
+});
+
+describe("getChangedSwaggers", () => { 
+  test("returns an empty set if no swaggers are changed", async () => { 
+    expect(getChangedSwaggers("test/fixtures/getChangedSwaggers/before", "test/fixtures/getChangedSwaggers/after", new Set<string>()))
+      .resolves.toEqual(new Set<string>());
+  })
+
+  test("excludes swaggers that are not changed", async () => {
+    const swaggers = await getChangedSwaggers(
+      "test/fixtures/getChangedSwaggers/before/",
+      "test/fixtures/getChangedSwaggers/after/",
+      new Set<string>(["specification/service1/file1.json"]),
+    );
+    expect(swaggers).toEqual(new Set<string>());
+  });
+
+  test("includes swaggers that don't exist in before", async () => {
+    const swaggers = await getChangedSwaggers(
+      "test/fixtures/getChangedSwaggers/before/",
+      "test/fixtures/getChangedSwaggers/after/",
+      new Set<string>(["specification/service1/new-file.json"]),
+    );
+    expect(swaggers).toEqual(new Set<string>(["specification/service1/new-file.json"]));
+  });
+
+  test("includes swagger that has been changed", async() => {
+    const swaggers = await getChangedSwaggers(
+      "test/fixtures/getChangedSwaggers/before/",
+      "test/fixtures/getChangedSwaggers/after/",
+      new Set<string>(["specification/service1/different.json"]),
+    );
+    expect(swaggers).toEqual(new Set<string>(["specification/service1/different.json"]));
+  });
+
+  test("includes swaggers that have a relevant changed dependency", async () => {
+    const swaggers = await getChangedSwaggers(
+      "test/fixtures/getChangedSwaggers/before/",
+      "test/fixtures/getChangedSwaggers/after/",
+      new Set<string>(["specification/service1/with-dependency.json", "specification/service1/changed-dependency.json"]),
+    );
+    expect(swaggers).toEqual(
+      new Set<string>(["specification/service1/with-dependency.json", "specification/service1/changed-dependency.json"])
+    );
   });
 });
