@@ -438,27 +438,6 @@
         "autoMitigate": {
           "type": "boolean",
           "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
-        },
-        "actions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricAlertAction"
-          },
-          "x-ms-identifiers": [
-            "actionGroupId"
-          ],
-          "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
-        },
-        "lastUpdatedTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Last time the rule was updated in ISO8601 format."
-        },
-        "isMigrated": {
-          "type": "boolean",
-          "description": "the value indicating whether this alert rule is migrated.",
-          "readOnly": true
         }
       },
       "description": "An alert rule properties for patch."
@@ -509,6 +488,43 @@
             "type": "string"
           },
           "description": "The list of resource IDs that this metric alert rule is scoped to."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAlertAction"
+          },
+          "x-ms-identifiers": [
+            "actionGroupId"
+          ],
+          "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+        },
+        "lastUpdatedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the rule was updated in ISO8601 format."
+        },
+        "isMigrated": {
+          "type": "boolean",
+          "description": "the value indicating whether this alert rule is migrated.",
+          "readOnly": true
+        },
+        "customProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "description": "Custom properties for the alert"
+        },
+        "actionProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "description": "Properties to customize alert actions"
         }
       },
       "required": [
@@ -561,17 +577,63 @@
             "type": "string"
           },
           "description": "The list of resource IDs that this metric alert rule is scoped to."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAlertAction"
+          },
+          "x-ms-identifiers": [
+            "actionGroupId"
+          ],
+          "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+        },
+        "lastUpdatedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the rule was updated in ISO8601 format."
+        },
+        "isMigrated": {
+          "type": "boolean",
+          "description": "the value indicating whether this alert rule is migrated.",
+          "readOnly": true
+        },
+        "customProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "description": "Custom properties for the alert"
+        },
+        "actionProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "description": "Properties to customize alert actions"
         }
       }
     },
-    "MetricQueryCriteria": {
+    "MetricQueryCriteria": 
+    {
       "type": "object",
+      "description": "Base class for metric query criterion.",
       "properties": {
-        "query": {
-          "type": "string",
-          "description": "The query used to evaluate the alert rule"
+        "allOf": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricQueryCriterionBase"
+          },
+          "description": "List of criteria that must all be met for the alert to fire."
+        },
+        "failingPeriods": {
+          "$ref": "#/definitions/QueryFailingPeriods"
         }
-      }
+      },
+      "required": ["allOf"]
     },
     "QueryResolveConfiguration": {
       "type": "object",
@@ -1136,6 +1198,32 @@
         }
       },
       "description": "Properties of the user assigned identity."
+    },
+    "MetricQueryCriterionBase": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query used to evaluate the alert rule"
+        },
+        "name": {
+          "type": "string"
+        },
+        "criterionType": {
+          "type": "string"
+        }
+      }
+    },
+    "QueryFailingPeriods": {
+      "type": "object",
+      "description": "Configuration for failing periods in query-based alerts.",
+      "properties": {
+        "for": {
+          "type": "string",
+          "description": "The minimum number of failing periods required to trigger an alert."
+        }
+      },
+      "required": ["for"]
     }
   },
   "parameters": {
