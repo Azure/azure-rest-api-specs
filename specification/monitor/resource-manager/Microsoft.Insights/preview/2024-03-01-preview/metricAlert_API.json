@@ -364,7 +364,6 @@
       }
     },
     "MetricAlertsMetricProperties": {
-      "x-ms-discriminator-value": "Metric",
       "allOf": [
         {
           "$ref": "#/definitions/MetricAlertPropertiesBase"
@@ -443,7 +442,6 @@
       "description": "An alert rule properties for patch."
     },
     "MetricAlertsQueryProperties": {
-      "x-ms-discriminator-value": "Query",
       "allOf": [
         {
           "$ref": "#/definitions/MetricAlertPropertiesBase"
@@ -464,7 +462,6 @@
     },
     "MetricAlertPropertiesBase": {
       "type": "object",
-      "discriminator": "kind",
       "description": "The base properties for a metric alert rule.",
       "properties": {
         "description": {
@@ -528,7 +525,6 @@
         }
       },
       "required": [
-        "kind",
         "severity",
         "enabled",
         "scopes",
