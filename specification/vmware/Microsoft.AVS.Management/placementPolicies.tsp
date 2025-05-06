@@ -39,7 +39,7 @@ interface PlacementPolicies {
     #{ `final-state-via`: "location" }
   )
   @armResourceUpdate(PlacementPolicy)
-  @patch
+  @patch(#{ implicitOptionality: true })
   update(
     ...ResourceInstanceParameters<PlacementPolicy>,
 

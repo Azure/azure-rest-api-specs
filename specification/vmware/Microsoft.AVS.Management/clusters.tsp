@@ -35,7 +35,7 @@ interface Clusters {
     #{ `final-state-via`: "location" }
   )
   @armResourceUpdate(Cluster)
-  @patch
+  @patch(#{ implicitOptionality: true })
   update(
     ...ResourceInstanceParameters<Cluster>,
 

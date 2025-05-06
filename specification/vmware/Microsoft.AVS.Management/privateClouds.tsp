@@ -41,7 +41,7 @@ interface PrivateClouds {
     #{ `final-state-via`: "location" }
   )
   @armResourceUpdate(PrivateCloud)
-  @patch
+  @patch(#{ implicitOptionality: true })
   update(
     ...ResourceInstanceParameters<PrivateCloud>,
 
