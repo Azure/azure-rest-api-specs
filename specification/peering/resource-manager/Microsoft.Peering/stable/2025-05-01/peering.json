@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-10-01",
+    "version": "2025-05-01",
     "title": "PeeringManagementClient",
     "description": "APIs to manage Peering resources through the Azure Resource Manager."
   },
@@ -163,7 +163,8 @@
               "Ix",
               "IxRs",
               "Voice",
-              "EdgeZoneForOperators"
+              "EdgeZoneForOperators",
+              "PeerProp"
             ],
             "x-ms-enum": {
               "name": "directPeeringType",
@@ -534,7 +535,8 @@
               "Ix",
               "IxRs",
               "Voice",
-              "EdgeZoneForOperators"
+              "EdgeZoneForOperators",
+              "PeerProp"
             ],
             "x-ms-enum": {
               "name": "PeeringLocationsDirectPeeringType",
@@ -2514,7 +2516,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CdnPeeringPrefix"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of CDN peering prefixes.",
@@ -2592,7 +2595,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Peering"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peerings.",
@@ -2714,6 +2718,15 @@
           "$ref": "#/definitions/PeeringPropertiesExchange",
           "description": "The properties that define an exchange peering."
         },
+        "connectivityProbes": {
+          "description": "The connectivity probes associated with the peering.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectivityProbe"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "peeringLocation": {
           "description": "The location of the peering.",
           "type": "string"
@@ -2766,7 +2779,8 @@
             "Ix",
             "IxRs",
             "Voice",
-            "EdgeZoneForOperators"
+            "EdgeZoneForOperators",
+            "PeerProp"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2791,6 +2805,50 @@
         "peerAsn": {
           "$ref": "#/definitions/SubResource",
           "description": "The reference of the peer ASN."
+        }
+      }
+    },
+    "ConnectivityProbe": {
+      "description": "Represents a connectivity probe, a configuration peers can add to direct and exchange peerings to create ping tests. These ping\r\ntests will allow us to generate availability, jitter, and latency data for traffic (using ICMP or TCP) from Azure to an endpoint\r\nIP address given by the customer. This data will be emitted such that the peer can view these metrics in the Azure portal in the\r\nConnectivity probe blade of their peering.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint IP address where traffic will be sent to from Azure.",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureRegion": {
+          "description": "The Azure region where traffic will originate from.",
+          "type": "string",
+          "readOnly": true
+        },
+        "protocol": {
+          "description": "The protocol of the traffic that will be sent.",
+          "enum": [
+            "None",
+            "ICMP",
+            "TCP"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "protocol",
+            "modelAsString": true
+          }
+        },
+        "prefixesToAccesslist": {
+          "description": "Set to contain the prefixes that agents in Azure will send traffic from. For peers to allow into their\r\nnetwork the connectivity probe traffic can reach their endpoint.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "createdTimeUtc": {
+          "format": "date-time",
+          "description": "Time when {Microsoft.Peering.PeeringContract.Public.Data.ConnectivityProbe} was created in UTC.",
+          "type": "string"
         }
       }
     },
@@ -2847,7 +2905,8 @@
             "Validating",
             "Active",
             "TypeChangeRequested",
-            "TypeChangeInProgress"
+            "TypeChangeInProgress",
+            "ExternalBlocker"
           ],
           "type": "string",
           "readOnly": true,
@@ -2860,6 +2919,31 @@
           "$ref": "#/definitions/BgpSession",
           "description": "The BGP session associated with the connection."
         },
+        "migrationWorkWindowBgpSessionSameDevice": {
+          "description": "The old V4 BGP session associated with the connection during migration on the same device. Will be used for Work-Window validation",
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "None",
+              "Idle",
+              "Connect",
+              "Active",
+              "OpenSent",
+              "OpenConfirm",
+              "OpenReceived",
+              "Established",
+              "PendingAdd",
+              "PendingUpdate",
+              "PendingRemove"
+            ],
+            "type": "string"
+          }
+        },
+        "lastFailureTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets the time corresponding to when the connection was last set to ProvisioningFailed.",
+          "type": "string"
+        },
         "connectionIdentifier": {
           "description": "The unique identifier (GUID) for the connection.",
           "type": "string"
@@ -2868,6 +2952,122 @@
           "description": "The error message related to the connection state, if any.",
           "type": "string",
           "readOnly": true
+        },
+        "previousConnectionProvisioningState": {
+          "description": "The previous connection provisioning state, used to resume provisioning after connection has been blocked.",
+          "enum": [
+            "None",
+            "InterconnectionPendingApproval",
+            "DeviceStateValidation",
+            "RocPendingApproval",
+            "AllocatePorts",
+            "PortExhaustion",
+            "CheckInterfaces",
+            "EnableInterfaces",
+            "PhysicalConnectionSetup",
+            "AwaitPairUpgrade",
+            "LightCheck",
+            "TestPing",
+            "PingTestDone",
+            "AwaitPeerIps",
+            "ValidateFltFirewall",
+            "LagSetup",
+            "AwaitLagCompletion",
+            "UpdateAddressesOnDevice",
+            "FetchPrefixLimitFromPeeringDb",
+            "BgpSessionConfiguration",
+            "NpmBgpSessionConfiguration",
+            "Md5AuthKeyConfiguration",
+            "FetchSessionState",
+            "RemoveNomonit",
+            "UpdateApipaPrefixInSitepro",
+            "ProvisioningCompleted",
+            "PendingMigration",
+            "MigrationRequestPortAllocationRequested",
+            "MigrationConfigValidation",
+            "PendingGlobalPolicyUpdate",
+            "MigrationSpecificConfigDrift",
+            "MigrationNpmError",
+            "PendingWorkWindow",
+            "StaticMacConfiguration",
+            "MigrationWorkWindow",
+            "PendingMigrationCompletion",
+            "MigrationCompletionRequested",
+            "DirectPeeringTypeUpdateApproved",
+            "DirectPeeringTypeUpdateRejected",
+            "DirectPeeringTypeUpdateIfDescription",
+            "DirectPeeringTypeUpdatePrefixPrecheck",
+            "DirectPeeringTypeUpdateApplyDenyAll",
+            "DirectPeeringTypeUpdateDeleteSession",
+            "DirectPeeringTypeUpdateLagAcl",
+            "DirectPeeringTypeUpdateBgpConfig",
+            "DirectPeeringTypeUpdateFetchSessionState",
+            "DirectPeeringTypeUpdateDeleteDenyAll",
+            "DirectPeeringTypeUpdatePrefixPostCheck",
+            "DecomRocPendingApproval",
+            "DecomAddDenyAll",
+            "DecomValidatePrefix",
+            "DecomValidateTraffic",
+            "DecomShutInterfaces",
+            "DecomShutdownBgp",
+            "DecomCabling",
+            "DecomRemoveBgpConfig",
+            "DecomRemoveInterfaceConfig",
+            "DecomGraphCleanup",
+            "DecomCompleted",
+            "DirectPeeringTypeUpdateMd5AuthKeyConfiguration",
+            "BfdConfiguration",
+            "DirectPeeringTypeUpdateBfdConfig",
+            "DirectPeeringTypeUpdateMd5AuthKeyRead",
+            "PrefixListConfiguration",
+            "WorkWindowCompleted",
+            "FacilityMapValidation",
+            "DirectPeeringTypeUpdateReadMaxPrefixLimit",
+            "DirectPeeringTypeUpdateUpdatePortWithNewIP",
+            "DirectPeeringTypeUpdateConfigureLagWithNewIP",
+            "DirectPeeringTypeUpdateCleanupOldIPsfromLAG",
+            "MapsToMapsVoiceUpdateIfDescription",
+            "MapsToMapsVoicePrefixPrecheck",
+            "MapsToMapsVoiceUpdateLAGAcl",
+            "MapsToMapsVoiceConfigureBFD",
+            "MapsToMapsVoiceFetchSessionState",
+            "MapsToMapsVoicePrefixPostCheck",
+            "BgpGroupChangeRocPendingApproval",
+            "BgpGroupChangeWorkWindow",
+            "IPChangeWorkWindow",
+            "PendingASNChangeApplyDenyALL",
+            "PendingASNChangeUpdateNeighborConfig",
+            "PendingASNChangeRemoveDenyALL",
+            "PendingASNChangeUpdateInterfaceDescription",
+            "UpdateGraphForASNChange",
+            "UpdatePeeringForASNChange",
+            "AddDenyAllRocPendingApproval",
+            "AwaitApplyDenyAll",
+            "IPChangeValidation",
+            "IPChangeCleanup",
+            "UndoMigrationGraphCleanup",
+            "ForcedIpChangeCleanup",
+            "ForcedIpChangeCleanupWithActiveSessions",
+            "IPChangeInitiate",
+            "IPChangeLag",
+            "IPChangeBgpUpdate",
+            "IPChangeMd5Configuration",
+            "IPChangeApplyDenyAll",
+            "IPChangeRemoveDenyAll",
+            "IPChangeValidateSessions",
+            "ExternalBlocker",
+            "ACLConfiguration",
+            "PendingSpecialWorkItem"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "previousConnectionProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "migrationWorkWindowTracker": {
+          "description": "Gets or sets the migration work window tracker. Format = \"DateTime String Format|WorkWindowInitiator Email ID\"",
+          "type": "string"
         }
       }
     },
@@ -2902,7 +3102,8 @@
             "Validating",
             "Active",
             "TypeChangeRequested",
-            "TypeChangeInProgress"
+            "TypeChangeInProgress",
+            "ExternalBlocker"
           ],
           "type": "string",
           "readOnly": true,
@@ -2915,6 +3116,31 @@
           "$ref": "#/definitions/BgpSession",
           "description": "The BGP session associated with the connection."
         },
+        "migrationWorkWindowBgpSessionSameDevice": {
+          "description": "The old V4 BGP session associated with the connection during migration on the same device. Will be used for Work-Window validation",
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "None",
+              "Idle",
+              "Connect",
+              "Active",
+              "OpenSent",
+              "OpenConfirm",
+              "OpenReceived",
+              "Established",
+              "PendingAdd",
+              "PendingUpdate",
+              "PendingRemove"
+            ],
+            "type": "string"
+          }
+        },
+        "lastFailureTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets the time corresponding to when the connection was last set to ProvisioningFailed.",
+          "type": "string"
+        },
         "connectionIdentifier": {
           "description": "The unique identifier (GUID) for the connection.",
           "type": "string"
@@ -2923,6 +3149,145 @@
           "description": "The error message related to the connection state, if any.",
           "type": "string",
           "readOnly": true
+        },
+        "previousConnectionProvisioningState": {
+          "description": "The previous connection provisioning state, used to resume provisioning after connection has been blocked.",
+          "enum": [
+            "None",
+            "InterconnectionPendingApproval",
+            "DeviceStateValidation",
+            "RocPendingApproval",
+            "AllocatePorts",
+            "PortExhaustion",
+            "CheckInterfaces",
+            "EnableInterfaces",
+            "PhysicalConnectionSetup",
+            "AwaitPairUpgrade",
+            "LightCheck",
+            "TestPing",
+            "PingTestDone",
+            "AwaitPeerIps",
+            "ValidateFltFirewall",
+            "LagSetup",
+            "AwaitLagCompletion",
+            "UpdateAddressesOnDevice",
+            "FetchPrefixLimitFromPeeringDb",
+            "BgpSessionConfiguration",
+            "NpmBgpSessionConfiguration",
+            "Md5AuthKeyConfiguration",
+            "FetchSessionState",
+            "RemoveNomonit",
+            "UpdateApipaPrefixInSitepro",
+            "ProvisioningCompleted",
+            "PendingMigration",
+            "MigrationRequestPortAllocationRequested",
+            "MigrationConfigValidation",
+            "PendingGlobalPolicyUpdate",
+            "MigrationSpecificConfigDrift",
+            "MigrationNpmError",
+            "PendingWorkWindow",
+            "StaticMacConfiguration",
+            "MigrationWorkWindow",
+            "PendingMigrationCompletion",
+            "MigrationCompletionRequested",
+            "DirectPeeringTypeUpdateApproved",
+            "DirectPeeringTypeUpdateRejected",
+            "DirectPeeringTypeUpdateIfDescription",
+            "DirectPeeringTypeUpdatePrefixPrecheck",
+            "DirectPeeringTypeUpdateApplyDenyAll",
+            "DirectPeeringTypeUpdateDeleteSession",
+            "DirectPeeringTypeUpdateLagAcl",
+            "DirectPeeringTypeUpdateBgpConfig",
+            "DirectPeeringTypeUpdateFetchSessionState",
+            "DirectPeeringTypeUpdateDeleteDenyAll",
+            "DirectPeeringTypeUpdatePrefixPostCheck",
+            "DecomRocPendingApproval",
+            "DecomAddDenyAll",
+            "DecomValidatePrefix",
+            "DecomValidateTraffic",
+            "DecomShutInterfaces",
+            "DecomShutdownBgp",
+            "DecomCabling",
+            "DecomRemoveBgpConfig",
+            "DecomRemoveInterfaceConfig",
+            "DecomGraphCleanup",
+            "DecomCompleted",
+            "DirectPeeringTypeUpdateMd5AuthKeyConfiguration",
+            "BfdConfiguration",
+            "DirectPeeringTypeUpdateBfdConfig",
+            "DirectPeeringTypeUpdateMd5AuthKeyRead",
+            "PrefixListConfiguration",
+            "WorkWindowCompleted",
+            "FacilityMapValidation",
+            "DirectPeeringTypeUpdateReadMaxPrefixLimit",
+            "DirectPeeringTypeUpdateUpdatePortWithNewIP",
+            "DirectPeeringTypeUpdateConfigureLagWithNewIP",
+            "DirectPeeringTypeUpdateCleanupOldIPsfromLAG",
+            "MapsToMapsVoiceUpdateIfDescription",
+            "MapsToMapsVoicePrefixPrecheck",
+            "MapsToMapsVoiceUpdateLAGAcl",
+            "MapsToMapsVoiceConfigureBFD",
+            "MapsToMapsVoiceFetchSessionState",
+            "MapsToMapsVoicePrefixPostCheck",
+            "BgpGroupChangeRocPendingApproval",
+            "BgpGroupChangeWorkWindow",
+            "IPChangeWorkWindow",
+            "PendingASNChangeApplyDenyALL",
+            "PendingASNChangeUpdateNeighborConfig",
+            "PendingASNChangeRemoveDenyALL",
+            "PendingASNChangeUpdateInterfaceDescription",
+            "UpdateGraphForASNChange",
+            "UpdatePeeringForASNChange",
+            "AddDenyAllRocPendingApproval",
+            "AwaitApplyDenyAll",
+            "IPChangeValidation",
+            "IPChangeCleanup",
+            "UndoMigrationGraphCleanup",
+            "ForcedIpChangeCleanup",
+            "ForcedIpChangeCleanupWithActiveSessions",
+            "IPChangeInitiate",
+            "IPChangeLag",
+            "IPChangeBgpUpdate",
+            "IPChangeMd5Configuration",
+            "IPChangeApplyDenyAll",
+            "IPChangeRemoveDenyAll",
+            "IPChangeValidateSessions",
+            "ExternalBlocker",
+            "ACLConfiguration",
+            "PendingSpecialWorkItem"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "previousConnectionProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "migrationWorkWindowTracker": {
+          "description": "Gets or sets the migration work window tracker. Format = \"DateTime String Format|WorkWindowInitiator Email ID\"",
+          "type": "string"
+        }
+      }
+    },
+    "AutomationSpecialRequest,StringListResult": {
+      "type": "object",
+      "properties": {
+        "item1": {
+          "enum": [
+            "None",
+            "BypassPhysicalLinkUpCheck",
+            "BypassLightLevelCheck",
+            "BypassTrafficCheck",
+            "BypassPrefixConflictCheck",
+            "RestartPortReservation"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "item1",
+            "modelAsString": true
+          }
+        },
+        "item2": {
+          "type": "string"
         }
       }
     },
@@ -3011,6 +3376,84 @@
         "md5AuthenticationKey": {
           "description": "The MD5 authentication key of the session.",
           "type": "string"
+        }
+      }
+    },
+    "BgpGroupConfiguration": {
+      "description": "Stores configuration information related to a BGP group.\r\nUsed for config diffing. Many configurations can be set at the neighbor or group level (or both).\r\nNeighbor level config takes precedence over group level config.",
+      "type": "object",
+      "properties": {
+        "bgpGroupName": {
+          "description": "The BGP group name.",
+          "type": "string"
+        },
+        "prefixLimitV4": {
+          "format": "int32",
+          "description": "The V4 prefix limit.\r\nAssume that tear down and idle-timeout are the same for all peers.",
+          "type": "integer"
+        },
+        "prefixLimitV6": {
+          "format": "int32",
+          "description": "The V6 prefix limit.",
+          "type": "integer"
+        },
+        "prefixLimitV4Line": {
+          "description": "The configuration line that sets the V4 prefix limit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "prefixLimitV6Line": {
+          "description": "The configuration line that sets the V6 prefix limit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "peerAsn": {
+          "format": "int32",
+          "description": "The peer ASN.",
+          "type": "integer"
+        },
+        "peerAsnLine": {
+          "description": "The configuration line that sets the peer ASN.",
+          "type": "string",
+          "readOnly": true
+        },
+        "descriptionLine": {
+          "description": "The line that sets the description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "importPolicies": {
+          "description": "All import policies configured on this group.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "exportPolicies": {
+          "description": "All export policies configured on the group.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "uncategorizedConfig": {
+          "description": "Uncategorized configuration lines.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "allConfiguration": {
+          "description": "Returns all the group configuration.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3129,8 +3572,8 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3169,7 +3612,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "dimensions": {
           "description": "Dimensions of the metric.",
@@ -3177,8 +3621,8 @@
           "items": {
             "$ref": "#/definitions/MetricDimension"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3296,7 +3740,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeerAsn"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peer ASNs.",
@@ -3313,7 +3758,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringLocation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering locations.",
@@ -3429,7 +3875,8 @@
             "Ix",
             "IxRs",
             "Voice",
-            "EdgeZoneForOperators"
+            "EdgeZoneForOperators",
+            "PeerProp"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3559,7 +4006,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringRegisteredAsn"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering registered ASNs.",
@@ -3645,7 +4093,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringRegisteredPrefix"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering registered prefixes.",
@@ -3774,7 +4223,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
@@ -3802,7 +4252,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorTest"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of Connection Monitor Tests.",
@@ -3819,7 +4270,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServiceCountry"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service countries.",
@@ -3846,7 +4298,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServiceLocation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service locations.",
@@ -3955,8 +4408,8 @@
           "items": {
             "$ref": "#/definitions/PeeringServicePrefixEvent"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "peeringServicePrefixKey": {
           "description": "The peering service prefix key",
@@ -4020,7 +4473,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServicePrefix"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service prefixes.",
@@ -4037,7 +4491,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServiceProvider"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service providers.",
@@ -4074,7 +4529,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4187,7 +4643,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4200,7 +4657,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringService"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering services.",
