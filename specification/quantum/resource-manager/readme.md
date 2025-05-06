@@ -120,6 +120,25 @@ directive:
 
 ```yaml
 suppressions:
+  - code: EnumInsteadOfBoolean
+    where:
+      - $.definitions.operation.properties.isDataAction
+      - $.definitions.ListKeysResult.properties.apiKeyEnabled
+      - $.definitions.WorkspaceResourceProperties.properties.apiKeyEnabled
+      - $.definitions.SkuDescription.properties.autoAdd
+    reason: 'These property are really booleans. There are no plans to have more than two values in the future.'
+  - code: AvoidNestedProperties
+    where:
+      - $.definitions.ProviderDescription.properties.properties
+    reason: We don't have end customers making direct API calls and this is a breaking change for our existing clients.
+  - code: PatchIdentityProperty
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}"].patch.parameters[4]
+    reason: We do not support updating the Identity property.
   - code: ProvisioningStateMustBeReadOnly
     reason: The provisioningState being flagged is not the ARM resource provisioningState, but the field for our ProviderStatus. Currently, this cannot be readOnly, or it will cause livesite issue and workspace does not behave correctly. We have on our roadmap to fix this issue, but this needs to be settable for control plane to work properly.
+  - code: AvoidAnonymousTypes
+    where: 
+      - $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties.userAssignedIdentities.additionalProperties
+    reason: Typespec generated definitions contain anonymous types.
 ```
