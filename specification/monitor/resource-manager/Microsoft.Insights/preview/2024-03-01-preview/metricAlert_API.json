@@ -364,23 +364,26 @@
       }
     },
     "MetricAlertsMetricProperties": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/MetricAlertPropertiesBase"
-          }
-        ],
-        "type": "object",
-        "required": ["windowSize", "criteria"],
-        "properties": {
-          "windowSize": {
-            "type": "string",
-            "description": "The period of time that is used to monitor alert activity"
-          },
-          "criteria": {
-            "$ref": "#/definitions/MetricAlertCriteria"
-          }
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricAlertPropertiesBase"
         }
-      },
+      ],
+      "type": "object",
+      "required": [
+        "windowSize",
+        "criteria"
+      ],
+      "properties": {
+        "windowSize": {
+          "type": "string",
+          "description": "The period of time that is used to monitor alert activity"
+        },
+        "criteria": {
+          "$ref": "#/definitions/MetricAlertCriteria"
+        }
+      }
+    },
     "MetricAlertsMetricPropertiesForPatch": {
       "type": "object",
       "allOf": [
@@ -391,7 +394,9 @@
       "properties": {
         "kind": {
           "type": "string",
-          "enum": ["Metric"],
+          "enum": [
+            "Metric"
+          ],
           "x-ms-enum": {
             "name": "UniqueKindEnum",
             "modelAsString": true
@@ -471,19 +476,21 @@
     "MetricAlertsQueryProperties": {
       "x-ms-discriminator-value": "Query",
       "allOf": [
-          {
+        {
           "$ref": "#/definitions/MetricAlertPropertiesBase"
-          }
+        }
       ],
       "type": "object",
-      "required": ["criteria"],
+      "required": [
+        "criteria"
+      ],
       "properties": {
-          "resolveConfiguration": {
-              "$ref": "#/definitions/QueryResolveConfiguration"
-          },
-          "criteria": {
-              "$ref": "#/definitions/MetricQueryCriteria"
-          }
+        "resolveConfiguration": {
+          "$ref": "#/definitions/QueryResolveConfiguration"
+        },
+        "criteria": {
+          "$ref": "#/definitions/MetricQueryCriteria"
+        }
       }
     },
     "MetricAlertPropertiesBase": {
@@ -533,7 +540,9 @@
       "properties": {
         "kind": {
           "type": "string",
-          "enum": ["Query"],
+          "enum": [
+            "Query"
+          ],
           "x-ms-enum": {
             "name": "kind",
             "modelAsString": true
@@ -630,7 +639,10 @@
         },
         "kind": {
           "type": "string",
-          "enum": ["Metric", "Query"],
+          "enum": [
+            "Metric",
+            "Query"
+          ],
           "x-ms-enum": {
             "name": "Kinds",
             "modelAsString": true
@@ -648,14 +660,16 @@
         }
       },
       "required": [
-          "location",
-          "properties"
+        "location",
+        "properties"
       ],
       "x-ms-azure-resource": true
     },
     "MetricAlertResourcePatch": {
       "type": "object",
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "properties": {
         "identity": {
           "$ref": "#/definitions/Identity",
@@ -670,7 +684,10 @@
         },
         "kind": {
           "type": "string",
-          "enum": ["Metric", "Query"],
+          "enum": [
+            "Metric",
+            "Query"
+          ],
           "x-ms-enum": {
             "name": "KindsEnum",
             "modelAsString": true
