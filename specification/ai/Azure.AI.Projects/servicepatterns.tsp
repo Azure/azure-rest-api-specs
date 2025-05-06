@@ -101,7 +101,7 @@ namespace Azure.AI.Projects.ServicePatterns {
   }
 
   @Rest.action
-  op VersionedResourceAction<
+  op VersionedResourceActionWithBody<
     TEntityType extends Reflection.Model,
     TParams,
     TResponse
@@ -112,6 +112,21 @@ namespace Azure.AI.Projects.ServicePatterns {
       @Http.bodyRoot
       body: TParams;
 
+      @doc("The specific version id of the {name} to operate on.", TEntityType)
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+    },
+    TResponse
+  >;
+
+  @Rest.action
+  op VersionedResourceActionNoBody<
+    TEntityType extends Reflection.Model,
+    TResponse
+  > is Azure.Core.Foundations.ResourceOperation<
+    TEntityType,
+    {
       @doc("The specific version id of the {name} to operate on.", TEntityType)
       @Rest.segment("versions")
       @Http.path

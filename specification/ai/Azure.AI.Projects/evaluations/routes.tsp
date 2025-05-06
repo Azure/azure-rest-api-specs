@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
 
@@ -25,10 +24,7 @@ interface Evaluations {
   get is EvaluationsOperations.ResourceRead<Evaluation>;
 
   @doc("List evaluation runs")
-  list is EvaluationsOperations.ResourceList<
-    Evaluation,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+  list is EvaluationsOperations.ResourceList<Evaluation>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an evaluation run.")

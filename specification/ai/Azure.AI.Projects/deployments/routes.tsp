@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
 
@@ -37,8 +36,6 @@ interface Deployments {
       @doc("Type of deployment to filter list by")
       @query("deploymentType")
       deploymentType?: DeploymentType;
-
-      ...StandardListQueryParameters;
     }>
   >;
 }

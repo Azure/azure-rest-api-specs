@@ -6,17 +6,11 @@ import "./models.tsp";
 import "../servicepatterns.tsp";
 import "../common/models.tsp";
 
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-alias ListIndexVersionParameters = {
-  @doc("Continuation token for pagination.")
-  @query
-  @continuationToken
-  continuationToken?: string;
-};
+alias ListIndexVersionParameters = {};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_01)
