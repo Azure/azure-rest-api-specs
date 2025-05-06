@@ -67,7 +67,7 @@ enum Versions {
 
 - All models, enums, unions, and operations should be added under the main namespace declared in the project.
 - Avoid having models, enums, unions, operations, and other types declared outside of a namespace.
-- If any files are using any of the versioning decorators, such as `@added`, `@removed`, `@changedType`, make sure to import the `@typespec/versioning` libray and add a using statement. Example:
+- If any files are using any of the versioning decorators, such as `@added`, `@removed`, `@changedType`, make sure to import the `@typespec/versioning` library and add a using statement. Example:
 
 ```tsp
 import "@typespec/versioning";
