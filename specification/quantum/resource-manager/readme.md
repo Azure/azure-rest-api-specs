@@ -27,7 +27,7 @@ These are the global settings for the quantum.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-11-13-preview
+tag: package-2025-01-01-preview
 ```
 
 ``` yaml
