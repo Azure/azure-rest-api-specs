@@ -1,0 +1,39 @@
+parameters:
+  "service-dir":
+    default: "sdk/sustainabilityservices"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":
+    flavor: azure
+    package-dir: "azure-sustainabilityservices"
+    package-name: "{package-dir}"
+    package-mode: dataplane
+    generateTest: true
+    generateSample: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.SustainabilityServices"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    package-dir: "sustainabilityservices-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/sustainabilityservices-rest"
+  "@azure-tools/typespec-java":
+    flavor: azure
+    package-dir: "azure-sustainabilityservices"
+    namespace: com.azure.sustainabilityservices
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"

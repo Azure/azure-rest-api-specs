@@ -1,0 +1,2270 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.SustainabilityServices",
+    "version": "2025-01-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "application",
+      "scopes": {},
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/sustainability/activities:calculateEmissions": {
+      "post": {
+        "operationId": "SustainabilityService_CalculateEmissions",
+        "description": "Calculate emissions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmissionCalculationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EmissionCalculationResult"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_CalculateEmissions_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_CalculateEmissions_MaximumSet_Gen.json"
+          },
+          "SustainabilityService_CalculateEmissions_MinimumSet": {
+            "$ref": "./examples/SustainabilityService_CalculateEmissions_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/sustainability/calculation-models": {
+      "get": {
+        "operationId": "SustainabilityService_ListCalculationModels",
+        "description": "Lists calculation models for the given activity source.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedCalculationModel"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_ListCalculationModels_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_ListCalculationModels_MaximumSet_Gen.json"
+          },
+          "SustainabilityService_ListCalculationModels_MinimumSet": {
+            "$ref": "./examples/SustainabilityService_ListCalculationModels_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sustainability/calculation-models/{calculationModelId}": {
+      "get": {
+        "operationId": "SustainabilityService_GetCalculationModel",
+        "description": "Gets calculation model by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "calculationModelId",
+            "in": "path",
+            "description": "Calculation model ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CalculationModel"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_GetCalculationModel_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_GetCalculationModel_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/sustainability/factor-libraries": {
+      "get": {
+        "operationId": "SustainabilityService_ListFactorLibraries",
+        "description": "Lists factor libraries.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedFactorLibrary"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_ListFactorLibraries_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_ListFactorLibraries_MaximumSet_Gen.json"
+          },
+          "SustainabilityService_ListFactorLibraries_MinimumSet": {
+            "$ref": "./examples/SustainabilityService_ListFactorLibraries_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sustainability/factor-libraries/{factorLibraryId}": {
+      "get": {
+        "operationId": "SustainabilityService_GetFactorLibrary",
+        "description": "Gets factor library by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "factorLibraryId",
+            "in": "path",
+            "description": "Factor library id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FactorLibrary"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_GetFactorLibrary_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_GetFactorLibrary_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/sustainability/factor-libraries/{factorLibraryId}/emission-factors": {
+      "get": {
+        "operationId": "SustainabilityService_ListEmissionFactorsByFactorLibrary",
+        "description": "Lists emission factors within the given factor library id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "factorLibraryId",
+            "in": "path",
+            "description": "Factor library id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEmissionFactor"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_ListEmissionFactorsByFactorLibrary_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_ListEmissionFactorsByFactorLibrary_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sustainability/factor-libraries/{factorLibraryId}/emission-factors/{emissionFactorId}": {
+      "get": {
+        "operationId": "SustainabilityService_GetEmissionFactor",
+        "description": "Gets emission factor by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "factorLibraryId",
+            "in": "path",
+            "description": "Factor library id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "emissionFactorId",
+            "in": "path",
+            "description": "Emission factor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EmissionFactor"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_GetEmissionFactor_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_GetEmissionFactor_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/sustainability/factor-libraries/{factorLibraryId}/estimation-factors": {
+      "get": {
+        "operationId": "SustainabilityService_ListEstimationFactorsByFactorLibrary",
+        "description": "Lists estimation factors within the given factor library id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "factorLibraryId",
+            "in": "path",
+            "description": "Factor library id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEstimationFactor"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_ListEstimationFactorsByFactorLibrary_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_ListEstimationFactorsByFactorLibrary_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sustainability/factor-libraries/{factorLibraryId}/estimation-factors/{estimationFactorId}": {
+      "get": {
+        "operationId": "SustainabilityService_GetEstimationFactor",
+        "description": "Gets estimation factor by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "factorLibraryId",
+            "in": "path",
+            "description": "Factor library id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "estimationFactorId",
+            "in": "path",
+            "description": "Estimation factor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EstimationFactor"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_GetEstimationFactor_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_GetEstimationFactor_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/sustainability/factor-libraries/{factorLibraryId}/factor-mappings": {
+      "get": {
+        "operationId": "SustainabilityService_ListFactorMappings",
+        "description": "Lists factor mappings belonging to the factor library.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "factorLibraryId",
+            "in": "path",
+            "description": "Factor library id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedFactorMapping"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_ListFactorMappings_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_ListFactorMappings_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sustainability/factor-libraries/{factorLibraryId}/factor-mappings/{factorMappingId}": {
+      "get": {
+        "operationId": "SustainabilityService_GetFactorMapping",
+        "description": "Gets factor mapping by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "factorLibraryId",
+            "in": "path",
+            "description": "Factor library id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "factorMappingId",
+            "in": "path",
+            "description": "Factor mapping id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FactorMapping"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_GetFactorMapping_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_GetFactorMapping_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/sustainability/reference-data": {
+      "get": {
+        "operationId": "SustainabilityService_ListReferenceEntities",
+        "description": "Lists reference data entities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedReferenceDataEntities"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_ListReferenceEntitiesMaximumSet_Gen": {
+            "$ref": "./examples/SustainabilityService_ListReferenceEntities_MaximumSet_Gen.json"
+          },
+          "SustainabilityService_ListReferenceEntities_MinimumSet_Gen": {
+            "$ref": "./examples/SustainabilityService_ListReferenceEntities_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sustainability/reference-data/{entityName}/entity-records": {
+      "get": {
+        "operationId": "SustainabilityService_ListReferenceEntityRecords",
+        "description": "Fetch records of the given reference data entity.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Logical name of the entity. Example: fueltype.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEntityRecord"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_ListReferenceEntityRecords_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_ListReferenceEntityRecords_MaximumSet_Gen.json"
+          },
+          "SustainabilityService_ListReferenceEntityRecords_MinimumSet": {
+            "$ref": "./examples/SustainabilityService_ListReferenceEntityRecords_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sustainability/reference-data/{entityName}/entity-records/{id}": {
+      "get": {
+        "operationId": "SustainabilityService_GetReferenceEntityRecord",
+        "description": "Gets reference data entity record by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Logical name of the entity. Example: fueltype.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Record ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntityRecord"
+            },
+            "headers": {
+              "api-supported-versions": {
+                "type": "array",
+                "description": "List of api supported versions.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "2025-01-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Versions",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "v2025_01_01_preview",
+                        "value": "2025-01-01-preview",
+                        "description": "The 2025-01-01-preview version of the Microsoft.SustainabilityServices."
+                      }
+                    ]
+                  }
+                },
+                "collectionFormat": "csv"
+              },
+              "correlation-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Correlation id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SustainabilityService_GetReferenceEntityRecord_MaximumSet": {
+            "$ref": "./examples/SustainabilityService_GetReferenceEntityRecord_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActivityEmissionOutput": {
+      "type": "object",
+      "description": "Output emission of the activity",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Activity ID.",
+          "minLength": 1
+        },
+        "emissions": {
+          "type": "array",
+          "description": "Activity emissions for the activity.",
+          "items": {
+            "$ref": "#/definitions/GhgEmissions"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "emissions"
+      ]
+    },
+    "ArVersions": {
+      "type": "string",
+      "description": "Assessment report version to be used in the calculation.",
+      "enum": [
+        "Custom",
+        "AR4",
+        "AR5",
+        "AR6"
+      ],
+      "x-ms-enum": {
+        "name": "ArVersions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom."
+          },
+          {
+            "name": "AR4",
+            "value": "AR4",
+            "description": "AR4 version."
+          },
+          {
+            "name": "AR5",
+            "value": "AR5",
+            "description": "AR5 version."
+          },
+          {
+            "name": "AR6",
+            "value": "AR6",
+            "description": "AR6 version."
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "CalculationErrorDetails": {
+      "type": "object",
+      "description": "Details of the error in calculation",
+      "properties": {
+        "activityId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Activity ID.",
+          "minLength": 1
+        },
+        "activityName": {
+          "type": "string",
+          "description": "Activity name."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        }
+      },
+      "required": [
+        "activityId",
+        "activityName",
+        "message",
+        "code"
+      ]
+    },
+    "CalculationModel": {
+      "type": "object",
+      "description": "Logical representation of the emission calculation that runs the calculation methodology bringing activity data and emission factors together.",
+      "properties": {
+        "entityName": {
+          "type": "string",
+          "description": "Entity name."
+        },
+        "calculationModelId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Calculation model ID.",
+          "readOnly": true
+        },
+        "calculationFlowJson": {
+          "type": "string",
+          "description": "Calculation flow json."
+        },
+        "calculationMethod": {
+          "type": "string",
+          "description": "Calculation method or model used to calculate emissions, as recommended by protocol."
+        },
+        "dataDefinitionId": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Data definition of source."
+        },
+        "documentationReference": {
+          "type": "string",
+          "description": "Document reference."
+        },
+        "emissionCalculationId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Emission calculation ID."
+        },
+        "emissionSource": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Emission source."
+        },
+        "modelJsonVersion": {
+          "type": "string",
+          "description": "Model JSON version."
+        },
+        "name": {
+          "type": "string",
+          "description": "Calculation model name."
+        },
+        "sustainabilitymodule": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Sustainability module."
+        },
+        "type": {
+          "type": "string",
+          "description": "Model type."
+        }
+      },
+      "required": [
+        "entityName",
+        "calculationModelId",
+        "emissionCalculationId",
+        "emissionSource",
+        "name",
+        "type"
+      ]
+    },
+    "CalculationStatusEnum": {
+      "type": "string",
+      "description": "Calculation status.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "CompletedWithErrors"
+      ],
+      "x-ms-enum": {
+        "name": "CalculationStatusEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed."
+          },
+          {
+            "name": "CompletedWithErrors",
+            "value": "CompletedWithErrors",
+            "description": "Calculation completed with errors."
+          }
+        ]
+      }
+    },
+    "CalculationSummary": {
+      "type": "object",
+      "description": "Describes the summary of the calculation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CalculationStatusEnum",
+          "description": "Calculation status."
+        },
+        "successfulActivities": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of successful activities."
+        },
+        "failedActivities": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of failed activities."
+        },
+        "excludedActivities": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of excluded activities."
+        },
+        "processedActivities": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of processed activities."
+        }
+      },
+      "required": [
+        "status",
+        "successfulActivities",
+        "failedActivities",
+        "excludedActivities",
+        "processedActivities"
+      ]
+    },
+    "EmissionActivity": {
+      "type": "object",
+      "description": "Activity.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Activity ID.",
+          "minLength": 1,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "activityData": {
+          "type": "object",
+          "description": "Activity data.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "id",
+        "activityData"
+      ]
+    },
+    "EmissionCalculationRequest": {
+      "type": "object",
+      "description": "Calculation request.",
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time stamp."
+        },
+        "calculationModelId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Calculation model id to be used. Use listCalculationModels API to get the list of all calculation models and choose the appropriate model based on the usecase."
+        },
+        "arVersion": {
+          "type": "string",
+          "description": "Assessment report version to be used in the calculation. If no arVersion is specified in the payload, AR4 version is the default version",
+          "default": "AR4",
+          "enum": [
+            "Custom",
+            "AR4",
+            "AR5",
+            "AR6"
+          ],
+          "x-ms-enum": {
+            "name": "ArVersions",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Custom",
+                "value": "Custom",
+                "description": "Custom."
+              },
+              {
+                "name": "AR4",
+                "value": "AR4",
+                "description": "AR4 version."
+              },
+              {
+                "name": "AR5",
+                "value": "AR5",
+                "description": "AR5 version."
+              },
+              {
+                "name": "AR6",
+                "value": "AR6",
+                "description": "AR6 version."
+              }
+            ]
+          }
+        },
+        "activities": {
+          "type": "array",
+          "description": "List of activities on which the calculation is to be performed.",
+          "items": {
+            "$ref": "#/definitions/EmissionActivity"
+          }
+        }
+      },
+      "required": [
+        "calculationModelId",
+        "activities"
+      ]
+    },
+    "EmissionCalculationResult": {
+      "type": "object",
+      "description": "The output of a calculation.",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/CalculationSummary",
+          "description": "Calculation summary."
+        },
+        "errorDetails": {
+          "type": "array",
+          "description": "Calculation error details.",
+          "items": {
+            "$ref": "#/definitions/CalculationErrorDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "activityEmissionOutput": {
+          "type": "array",
+          "description": "Calculated emissions from the activities.",
+          "items": {
+            "$ref": "#/definitions/ActivityEmissionOutput"
+          }
+        }
+      },
+      "required": [
+        "summary",
+        "errorDetails",
+        "activityEmissionOutput"
+      ]
+    },
+    "EmissionFactor": {
+      "type": "object",
+      "description": "Conversion factor to convert quantities in activity data into greenhouse gas emissions.",
+      "properties": {
+        "entityName": {
+          "type": "string",
+          "description": "Entity name."
+        },
+        "factorLibrary": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Factor library to which the emission factor belongs to."
+        },
+        "ch4": {
+          "type": "number",
+          "format": "double",
+          "description": "CH4 factor value."
+        },
+        "ch4Unit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit for CH4 factor value."
+        },
+        "co2": {
+          "type": "number",
+          "format": "double",
+          "description": "CO2 factor value."
+        },
+        "co2Unit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit for CO2 factor value."
+        },
+        "co2e": {
+          "type": "number",
+          "format": "double",
+          "description": "CO2e factor value."
+        },
+        "co2eUnit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit for CO2e factor value."
+        },
+        "documentationReference": {
+          "type": "string",
+          "description": "Documentation reference."
+        },
+        "emissionFactorId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Emission factor ID.",
+          "readOnly": true
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "ID."
+        },
+        "hfcs": {
+          "type": "number",
+          "format": "double",
+          "description": "HFCs factor value."
+        },
+        "hfcsUnit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit for HFCs factor value."
+        },
+        "isBiofuel": {
+          "type": "boolean",
+          "description": "Is biofuel."
+        },
+        "name": {
+          "type": "string",
+          "description": "Emission factor name."
+        },
+        "nf3": {
+          "type": "number",
+          "format": "double",
+          "description": "NF3 factor value."
+        },
+        "nf3Unit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit for NF3 factor value."
+        },
+        "n2o": {
+          "type": "number",
+          "format": "double",
+          "description": "NO2 factor value."
+        },
+        "n2oUnit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit for N2O factor value."
+        },
+        "otherGhgs": {
+          "type": "number",
+          "format": "double",
+          "description": "Other GHG factor value."
+        },
+        "otherGhgsUnit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit for other GHGs factor value."
+        },
+        "pfcs": {
+          "type": "number",
+          "format": "double",
+          "description": "PFCs factor value."
+        },
+        "pfcsUnit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit for PFCs factor value."
+        },
+        "sf6": {
+          "type": "number",
+          "format": "double",
+          "description": "SF6 factor value."
+        },
+        "sf6Unit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit for SF6 factor value."
+        },
+        "subtype": {
+          "type": "string",
+          "description": "Subtype."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type."
+        },
+        "unit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit."
+        }
+      },
+      "required": [
+        "entityName",
+        "factorLibrary",
+        "emissionFactorId",
+        "id",
+        "name"
+      ]
+    },
+    "EntityRecord": {
+      "type": "object",
+      "description": "Entity record.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Record ID.",
+          "readOnly": true
+        },
+        "data": {
+          "type": "object",
+          "description": "Entity data.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "id",
+        "data"
+      ]
+    },
+    "EstimationFactor": {
+      "type": "object",
+      "description": "Estimation factors are used to convert proxy data into activity data that can be used with an emission factor. Typical examples are square footage of real estate to convert to energy or refrigerants, and the number of nights of a hotel stay",
+      "properties": {
+        "entityName": {
+          "type": "string",
+          "description": "Entity name."
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "ID."
+        },
+        "documentationReference": {
+          "type": "string",
+          "description": "Document reference."
+        },
+        "estimationFactorId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Estimation factor ID.",
+          "readOnly": true
+        },
+        "factorLibrary": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Factor library which the estimation factor belongs to."
+        },
+        "factorValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Estimation factor value."
+        },
+        "factorValueUnit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit for factor value."
+        },
+        "name": {
+          "type": "string",
+          "description": "Estimation factor name."
+        },
+        "subtype": {
+          "type": "string",
+          "description": "Subtype."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type."
+        },
+        "unit": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Unit."
+        }
+      },
+      "required": [
+        "entityName",
+        "id",
+        "estimationFactorId",
+        "factorLibrary",
+        "factorValue",
+        "factorValueUnit",
+        "name",
+        "unit"
+      ]
+    },
+    "FactorLibrary": {
+      "type": "object",
+      "description": "Represents collection of emission and estimation factors.",
+      "properties": {
+        "factorLibraryId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Factor library id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Factor library name."
+        },
+        "libraryType": {
+          "type": "string",
+          "description": "Type of factor library: estimation or emission."
+        },
+        "attribution": {
+          "type": "string",
+          "description": "Appropriate acknowledgment to the original content creator when utilizing or distributing their work within the application."
+        },
+        "version": {
+          "type": "string",
+          "description": "Factor library version."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the library."
+        },
+        "datePublished": {
+          "type": "string",
+          "description": "Date published."
+        },
+        "documentationReference": {
+          "type": "string",
+          "description": "Documentation reference."
+        }
+      },
+      "required": [
+        "factorLibraryId",
+        "name",
+        "libraryType"
+      ]
+    },
+    "FactorMapping": {
+      "type": "object",
+      "description": "Factor mapping.",
+      "properties": {
+        "factorMappingId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Factor mapping id.",
+          "readOnly": true
+        },
+        "factorLibrary": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Factor library which this mapping belongs to."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "factor": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Factor associated with the factor mapping."
+        },
+        "referenceData1": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Reference data 1"
+        },
+        "referenceData2": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Reference data 2"
+        },
+        "referenceData3": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Reference data 3"
+        },
+        "referenceData4": {
+          "$ref": "#/definitions/LookupField",
+          "description": "Reference data 4"
+        }
+      },
+      "required": [
+        "factorMappingId",
+        "factorLibrary",
+        "name",
+        "factor",
+        "referenceData1"
+      ]
+    },
+    "GhgEmissions": {
+      "type": "object",
+      "description": "Emissions for the activity.",
+      "properties": {
+        "ch4": {
+          "type": "number",
+          "format": "float",
+          "description": "CH4 emission."
+        },
+        "ch4Unit": {
+          "type": "string",
+          "description": "CH4 emissions unit."
+        },
+        "co2": {
+          "type": "number",
+          "format": "float",
+          "description": "CO2 emissions."
+        },
+        "co2Unit": {
+          "type": "string",
+          "description": "CO2 emissions unit."
+        },
+        "co2e": {
+          "type": "number",
+          "format": "float",
+          "description": "CO2e emissions."
+        },
+        "co2eUnit": {
+          "type": "string",
+          "description": "CO2e emissions unit."
+        },
+        "co2emt": {
+          "type": "number",
+          "format": "float",
+          "description": "CO2emt emissions."
+        },
+        "hfcs": {
+          "type": "number",
+          "format": "float",
+          "description": "HFCs emissions."
+        },
+        "hfcsUnit": {
+          "type": "string",
+          "description": "HFCs emissions unit."
+        },
+        "n2o": {
+          "type": "number",
+          "format": "float",
+          "description": "N2O emissions."
+        },
+        "n2oUnit": {
+          "type": "string",
+          "description": "N2O emissions unit."
+        },
+        "nf3": {
+          "type": "number",
+          "format": "float",
+          "description": "NF3 emissions."
+        },
+        "nf3Unit": {
+          "type": "string",
+          "description": "NF3 emissions unit."
+        },
+        "pfcs": {
+          "type": "number",
+          "format": "float",
+          "description": "PFCs emissions."
+        },
+        "pfcsUnit": {
+          "type": "string",
+          "description": "PFCs emissions unit."
+        },
+        "otherGhgs": {
+          "type": "number",
+          "format": "float",
+          "description": "Other GHG emissions."
+        },
+        "otherGhgsUnit": {
+          "type": "string",
+          "description": "Other GHG emissions unit."
+        },
+        "sf6": {
+          "type": "number",
+          "format": "float",
+          "description": "SF6 emissions."
+        },
+        "sf6Unit": {
+          "type": "string",
+          "description": "SF6 emissions unit."
+        },
+        "isMarketBased": {
+          "type": "boolean",
+          "description": "Is market based."
+        },
+        "isBiogenic": {
+          "type": "boolean",
+          "description": "Is biogenic."
+        },
+        "emissionCalculationModel": {
+          "type": "string",
+          "description": "Emission calculation model used for the calculation."
+        },
+        "calculationLibrary": {
+          "type": "string",
+          "description": "Factor library used for the calculation."
+        },
+        "emissionFactor": {
+          "type": "string",
+          "description": "Emission factor used for the calculation."
+        },
+        "adjustedActualQuantity": {
+          "type": "string",
+          "description": "Actual quantity of the activity responsible for the emission. For example, the actual quantity for a business trip involving a hotel stay might be the number of nights stayed multiplied by the estimation factor."
+        },
+        "adjustedActualQuantityUnit": {
+          "type": "string",
+          "description": "Actual quantity unit."
+        }
+      }
+    },
+    "LookupField": {
+      "type": "object",
+      "description": "Lookup details.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Unique ID of the referenced field value."
+        },
+        "logicalName": {
+          "type": "string",
+          "description": "Schema name of the referenced table."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the referenced field value."
+        },
+        "keyAttributes": {
+          "type": "object",
+          "description": "Key attributes of the referenced field.",
+          "additionalProperties": {}
+        },
+        "rowVersion": {
+          "type": "string",
+          "description": "Row version."
+        }
+      },
+      "required": [
+        "id",
+        "logicalName",
+        "name",
+        "keyAttributes",
+        "rowVersion"
+      ]
+    },
+    "PagedCalculationModel": {
+      "type": "object",
+      "description": "Paged collection of CalculationModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CalculationModel items on this page",
+          "items": {
+            "$ref": "#/definitions/CalculationModel"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEmissionFactor": {
+      "type": "object",
+      "description": "Paged collection of EmissionFactor items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EmissionFactor items on this page",
+          "items": {
+            "$ref": "#/definitions/EmissionFactor"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEntityRecord": {
+      "type": "object",
+      "description": "Paged collection of EntityRecord items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EntityRecord items on this page",
+          "items": {
+            "$ref": "#/definitions/EntityRecord"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEstimationFactor": {
+      "type": "object",
+      "description": "Paged collection of EstimationFactor items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EstimationFactor items on this page",
+          "items": {
+            "$ref": "#/definitions/EstimationFactor"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedFactorLibrary": {
+      "type": "object",
+      "description": "Paged collection of FactorLibrary items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FactorLibrary items on this page",
+          "items": {
+            "$ref": "#/definitions/FactorLibrary"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedFactorMapping": {
+      "type": "object",
+      "description": "Paged collection of FactorMapping items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FactorMapping items on this page",
+          "items": {
+            "$ref": "#/definitions/FactorMapping"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedReferenceDataEntities": {
+      "type": "object",
+      "description": "Paged collection of ReferenceDataEntities items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ReferenceDataEntities items on this page",
+          "items": {
+            "$ref": "#/definitions/ReferenceDataEntities"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReferenceDataEntities": {
+      "type": "object",
+      "description": "Reference data.",
+      "properties": {
+        "entityName": {
+          "type": "string",
+          "description": "Logical name of the entity. Example: fueltype.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the entity. Example: Fuel Type."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Schema name of the entity."
+        }
+      },
+      "required": [
+        "entityName",
+        "displayName",
+        "schemaName"
+      ]
+    },
+    "ResponseHeaders": {
+      "type": "object",
+      "description": "Response headers."
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
