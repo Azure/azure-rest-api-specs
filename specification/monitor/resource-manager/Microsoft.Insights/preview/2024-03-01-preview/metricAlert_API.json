@@ -364,6 +364,7 @@
       }
     },
     "MetricAlertsMetricProperties": {
+      "x-ms-discriminator-value": "Metric",
       "allOf": [
         {
           "$ref": "#/definitions/MetricAlertPropertiesBase"
@@ -385,7 +386,6 @@
       }
     },
     "MetricAlertsMetricPropertiesForPatch": {
-      "x-ms-discriminator-value": "Metric",
       "type": "object",
       "allOf": [
         {
@@ -521,7 +521,6 @@
       ]
     },
     "MetricAlertsQueryPropertiesForPatch": {
-      "x-ms-discriminator-value": "Query",
       "type": "object",
       "allOf": [
         {
@@ -539,7 +538,6 @@
     },
     "MetricAlertPropertiesBaseForPatch": {
       "type": "object",
-      "discriminator": "kind",
       "description": "The base properties for a metric alert rule.",
       "properties": {
         "description": {
