@@ -5,7 +5,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-namespace Neon.Postgres.Models;
+namespace Neon.Postgres;
 
 @doc("The Project resource type.")
 @added(Neon.Postgres.Versions.v2_preview)
