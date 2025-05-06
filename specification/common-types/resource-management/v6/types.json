@@ -245,7 +245,7 @@
     },
     "OperationDisplay": {
       "type": "object",
-      "description": "Localized display information for and operation.",
+      "description": "Localized display information for an operation.",
       "properties": {
         "provider": {
           "type": "string",
@@ -275,7 +275,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Operation items on this page",
+          "description": "List of operations supported by the resource provider",
           "items": {
             "$ref": "#/definitions/Operation"
           },
@@ -428,7 +428,7 @@
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "description": "Fully qualified resource ID for the resource. E.g. - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
           "readOnly": true
         },
         "name": {
@@ -504,7 +504,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+          "description": "The name of the SKU. E.g. - P3. It is typically a letter+number code"
         },
         "tier": {
           "$ref": "#/definitions/SkuTier",
@@ -735,7 +735,7 @@
     "LocationParameter": {
       "name": "location",
       "in": "path",
-      "description": "The name of Azure region.",
+      "description": "The name of the Azure region.",
       "required": true,
       "type": "string",
       "minLength": 1,
