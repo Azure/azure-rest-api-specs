@@ -16,7 +16,8 @@ namespace Microsoft.IoTOperations;
  */
 @added(Versions.`2025-07-01-preview`)
 @parentResource(InstanceResource)
-model AkriDiscoveryHandlerResource is ProxyResource<AkriDiscoveryHandlerProperties> {
+model AkriDiscoveryHandlerResource
+  is ProxyResource<AkriDiscoveryHandlerProperties> {
   /**
    * Name of AkriDiscoveryHandler resource
    */
@@ -231,7 +232,8 @@ model AkriDiscoveryHandlerScheduleRunOnce extends AkriDiscoveryHandlerSchedule {
  * AkriDiscoveryHandlerScheduleContinuous properties
  */
 @added(Versions.`2025-07-01-preview`)
-model AkriDiscoveryHandlerScheduleContinuous extends AkriDiscoveryHandlerSchedule {
+model AkriDiscoveryHandlerScheduleContinuous
+  extends AkriDiscoveryHandlerSchedule {
   /**
    * Schedule type
    */

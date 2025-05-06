@@ -310,18 +310,31 @@ model AkriConnectorTemplateSecret {
  * AkriConnectorTemplateAllocation properties
  */
 @added(Versions.`2025-07-01-preview`)
+@discriminator("policy")
 model AkriConnectorTemplateAllocation {
   /**
    * The allocation policy type
    */
   policy: AkriConnectorTemplateAllocationPolicy;
 
+}
+
+/**
+ * AkriConnectorTemplateBucketizedAllocation properties
+*/
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorTemplateBucketizedAllocation extends AkriConnectorTemplateAllocation {
+  /**
+   * The allocation policy type
+   */
+  policy: Bucketized;
+
   /**
    * TThe bucketized allocation of AEPs for connectors
    */
   @minValue(1)
   @maxValue(100)
-  bucketSize?: int32;
+  bucketSize: int32;
 }
 
 /**

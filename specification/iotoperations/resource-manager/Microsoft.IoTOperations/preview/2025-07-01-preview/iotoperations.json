@@ -4347,15 +4347,9 @@
         "policy": {
           "$ref": "#/definitions/AkriConnectorTemplateAllocationPolicy",
           "description": "The allocation policy type"
-        },
-        "bucketSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "TThe bucketized allocation of AEPs for connectors",
-          "minimum": 1,
-          "maximum": 100
         }
       },
+      "discriminator": "policy",
       "required": [
         "policy"
       ]
@@ -4377,6 +4371,28 @@
           }
         ]
       }
+    },
+    "AkriConnectorTemplateBucketizedAllocation": {
+      "type": "object",
+      "description": "AkriConnectorTemplateBucketizedAllocation properties",
+      "properties": {
+        "bucketSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "TThe bucketized allocation of AEPs for connectors",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "bucketSize"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateAllocation"
+        }
+      ],
+      "x-ms-discriminator-value": "Bucketized"
     },
     "AkriConnectorTemplateContainerRegistry": {
       "type": "object",
