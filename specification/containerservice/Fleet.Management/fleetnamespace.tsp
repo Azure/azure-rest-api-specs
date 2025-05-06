@@ -12,14 +12,15 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 
-@doc("A fleet namespace.")
-@resource("namespaces")
+@doc("A fleet managed namespace.")
+@resource("managedNamespaces")
 @added(Versions.v2025_03_02_naar)
 @parentResource(Fleet)
-model FleetNamespace is TrackedResource<FleetNamespaceProperties> {
-  @doc("The name of the fleet namespace resource.")
-  @key("fleetNamespaceName")
-  @segment("fleetNamespaces")
+model FleetManagedNamespace
+  is TrackedResource<FleetManagedNamespaceProperties> {
+  @doc("The name of the fleet managed namespace resource.")
+  @key("fleetManagedNamespaceName")
+  @segment("fleetManagedNamespaces")
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
   @maxLength(63)
@@ -30,161 +31,161 @@ model FleetNamespace is TrackedResource<FleetNamespaceProperties> {
   ...EntityTagProperty;
 }
 
-@doc("Action if Kubernetes namespace with the same name already exists.")
+@doc("Action if Kubernetes managed namespace with the same name already exists.")
 union AdoptionPolicy {
-  @doc("If k8s namespace already exists, do not take over the existing namespace to be managed by ARM.")
+  @doc("If k8s managed namespace already exists, do not take over the existing managed namespace to be managed by ARM.")
   Never: "Never",
 
-  @doc("If there is an identical namespace, take over the existing namespace to be managed by ARM.")
+  @doc("If there is an identical managed namespace, take over the existing managed namespace to be managed by ARM.")
   IfIdentical: "IfIdentical",
 
-  @doc("Always take over the existing namespace to be managed by ARM, even if it is not identical.")
+  @doc("Always take over the existing managed namespace to be managed by ARM, even if it is not identical.")
   Always: "Always",
 
   string,
 }
 
-@doc("Delete options of a namespace.")
+@doc("Delete options of a managed namespace.")
 union DeletePolicy {
-  @doc("Delete ARM resource but keep k8s namespace.")
+  @doc("Delete ARM resource but keep k8s managed namespace.")
   Keep: "Keep",
 
-  @doc("Delete both ARM resource and k8s namespace.")
+  @doc("Delete both ARM resource and k8s managed namespace.")
   Delete: "Delete",
 
   string,
 }
 
-@doc("The provisioning state of the fleet namespace resource")
-union FleetNamespaceProvisioningState {
+@doc("The provisioning state of the fleet managed namespace resource")
+union FleetManagedNamespaceProvisioningState {
   string,
   ResourceProvisioningState,
 
-  @doc("The provisioning state of a fleet namespace being created.")
+  @doc("The provisioning state of a fleet managed namespace being created.")
   Creating: "Creating",
 
-  @doc("The provisioning state of a fleet namespace being updated.")
+  @doc("The provisioning state of a fleet managed namespace being updated.")
   Updating: "Updating",
 
-  @doc("The provisioning state of a fleet namespace being deleted.")
+  @doc("The provisioning state of a fleet managed namespace being deleted.")
   Deleting: "Deleting",
 }
 
-@doc("The resource quota for a namespace.")
+@doc("The resource quota for a managed namespace.")
 model ResourceQuota {
-  @doc("The CPU request for the namespace.")
+  @doc("The CPU request for the managed namespace.")
   cpuRequest?: string;
 
-  @doc("The CPU limit for the namespace.")
+  @doc("The CPU limit for the managed namespace.")
   cpuLimit?: string;
 
-  @doc("The memory request for the namespace.")
+  @doc("The memory request for the managed namespace.")
   memoryRequest?: string;
 
-  @doc("The memory limit for the namespace.")
+  @doc("The memory limit for the managed namespace.")
   memoryLimit?: string;
 }
 
-@doc("The network policy for a namespace.")
+@doc("The network policy for a managed namespace.")
 model NetworkPolicy {
-  @doc("The ingress policy for the namespace.")
+  @doc("The ingress policy for the managed namespace.")
   ingress?: IngressPolicy;
 
-  @doc("The egress policy for the namespace.")
+  @doc("The egress policy for the managed namespace.")
   egress?: EgressPolicy;
 }
 
-@doc("The ingress policy options for a namespace.")
+@doc("The ingress policy options for a managed namespace.")
 union IngressPolicy {
-  @doc("Allow all ingress traffic to the namespace.")
+  @doc("Allow all ingress traffic to the managed namespace.")
   AllowAll: "AllowAll",
 
-  @doc("Deny all ingress traffic to the namespace.")
+  @doc("Deny all ingress traffic to the managed namespace.")
   DenyAll: "DenyAll",
 
   string,
 }
 
-@doc("The egress policy options for a namespace.")
+@doc("The egress policy options for a managed namespace.")
 union EgressPolicy {
-  @doc("Allow all egress traffic from the namespace.")
+  @doc("Allow all egress traffic from the managed namespace.")
   AllowAll: "AllowAll",
 
-  @doc("Deny all egress traffic from the namespace")
+  @doc("Deny all egress traffic from the managed namespace")
   DenyAll: "DenyAll",
 
   string,
 }
 
-@doc("The profile of the fleet namespace.")
+@doc("The profile of the fleet managed namespace.")
 @added(Versions.v2025_03_02_naar)
-model FleetNamespaceProfile {
-  @doc("Action if Kubernetes namespace with the same name already exists.")
+model FleetManagedNamespaceProfile {
+  @doc("Action if Kubernetes managed namespace with the same name already exists.")
   adoptionPolicy?: AdoptionPolicy;
 
-  @doc("Delete options of a fleet namespace.")
+  @doc("Delete options of a fleet managed namespace.")
   deletePolicy?: DeletePolicy;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
-  @doc("The labels for the fleet namespace.")
+  @doc("The labels for the fleet managed namespace.")
   labels?: Record<string>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
-  @doc("The annotations for the fleet namespace.")
+  @doc("The annotations for the fleet managed namespace.")
   annotations?: Record<string>;
 
-  @doc("The default resource quota for the fleet namespace.")
+  @doc("The default resource quota for the fleet managed namespace.")
   defaultResourceQuota?: ResourceQuota;
 
-  @doc("The default network policy for the fleet namespace.")
+  @doc("The default network policy for the fleet managed namespace.")
   defaultNetworkPolicy?: NetworkPolicy;
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("Status information for the fleet namespace.")
-model FleetNamespaceStatus {
+@doc("Status information for the fleet managed namespace.")
+model FleetManagedNamespaceStatus {
   @visibility("read")
-  @doc("The last operation ID for the fleet namespace")
+  @doc("The last operation ID for the fleet managed namespace")
   lastOperationId?: string;
 
   @visibility("read")
-  @doc("The last operation error of the fleet namespace")
+  @doc("The last operation error of the fleet managed namespace")
   lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
-@doc("A fleet namespace.")
+@doc("A fleet managed namespace.")
 @added(Versions.v2025_03_02_naar)
-model FleetNamespaceProperties {
+model FleetManagedNamespaceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: FleetNamespaceProvisioningState;
+  provisioningState?: FleetManagedNamespaceProvisioningState;
 
   @visibility("read")
-  @doc("The profile of the fleet namespace.")
-  fleetNamespaceProfile?: FleetNamespaceProfile;
+  @doc("The profile of the fleet managed namespace.")
+  fleetManagedNamespaceProfile?: FleetManagedNamespaceProfile;
 
   @visibility("read")
-  @doc("Status information of the last operation for fleet namespace.")
-  status?: FleetNamespaceStatus;
+  @doc("Status information of the last operation for fleet managed namespace.")
+  status?: FleetManagedNamespaceStatus;
 }
 
 @added(Versions.v2025_03_02_naar)
 @armResourceOperations
-interface FleetNamespaces {
-  get is ArmResourceRead<FleetNamespace>;
+interface FleetManagedNamespaces {
+  get is ArmResourceRead<FleetManagedNamespace>;
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    FleetNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<FleetNamespace> &
-      IfMatchParameters<FleetNamespace> &
-      IfNoneMatchParameters<FleetNamespace>
+    FleetManagedNamespace,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
+      IfMatchParameters<FleetManagedNamespace> &
+      IfNoneMatchParameters<FleetManagedNamespace>
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<
-    FleetNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<FleetNamespace> &
-      IfMatchParameters<FleetNamespace>
+    FleetManagedNamespace,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
+      IfMatchParameters<FleetManagedNamespace>
   >;
 
-  listByFleet is ArmResourceListByParent<FleetNamespace>;
+  listByFleet is ArmResourceListByParent<FleetManagedNamespace>;
 }
