@@ -39,12 +39,15 @@ describe("getService", () => {
     expect(serviceName).toEqual("specification/service1");
   });
 
-  test.skipIf(isWindows())("returns service name from file path with leading separator", async () => {
-    const filePath = "/specification/service1/file1.json";
-    const serviceName = await getService(filePath);
+  test.skipIf(isWindows())(
+    "returns service name from file path with leading separator",
+    async () => {
+      const filePath = "/specification/service1/file1.json";
+      const serviceName = await getService(filePath);
 
-    expect(serviceName).toEqual("specification/service1");
-  });
+      expect(serviceName).toEqual("specification/service1");
+    },
+  );
 
   test("throws when file path does not contain enough pieces to assemble a service name", async () => {
     const filePath = "file1.json";
@@ -84,11 +87,16 @@ describe("reconcileChangedFilesAndTags", () => {
   });
 });
 
-describe("getChangedSwaggers", () => { 
-  test("returns an empty set if no swaggers are changed", async () => { 
-    expect(getChangedSwaggers("test/fixtures/getChangedSwaggers/before", "test/fixtures/getChangedSwaggers/after", new Set<string>()))
-      .resolves.toEqual(new Set<string>());
-  })
+describe("getChangedSwaggers", () => {
+  test("returns an empty set if no swaggers are changed", async () => {
+    expect(
+      getChangedSwaggers(
+        "test/fixtures/getChangedSwaggers/before",
+        "test/fixtures/getChangedSwaggers/after",
+        new Set<string>(),
+      ),
+    ).resolves.toEqual(new Set<string>());
+  });
 
   test("excludes swaggers that are not changed", async () => {
     const swaggers = await getChangedSwaggers(
@@ -108,7 +116,7 @@ describe("getChangedSwaggers", () => {
     expect(swaggers).toEqual(new Set<string>(["specification/service1/new-file.json"]));
   });
 
-  test("includes swagger that has been changed", async() => {
+  test("includes swagger that has been changed", async () => {
     const swaggers = await getChangedSwaggers(
       "test/fixtures/getChangedSwaggers/before/",
       "test/fixtures/getChangedSwaggers/after/",
@@ -121,10 +129,16 @@ describe("getChangedSwaggers", () => {
     const swaggers = await getChangedSwaggers(
       "test/fixtures/getChangedSwaggers/before/",
       "test/fixtures/getChangedSwaggers/after/",
-      new Set<string>(["specification/service1/with-dependency.json", "specification/service1/changed-dependency.json"]),
+      new Set<string>([
+        "specification/service1/with-dependency.json",
+        "specification/service1/changed-dependency.json",
+      ]),
     );
     expect(swaggers).toEqual(
-      new Set<string>(["specification/service1/with-dependency.json", "specification/service1/changed-dependency.json"])
+      new Set<string>([
+        "specification/service1/with-dependency.json",
+        "specification/service1/changed-dependency.json",
+      ]),
     );
   });
 });
