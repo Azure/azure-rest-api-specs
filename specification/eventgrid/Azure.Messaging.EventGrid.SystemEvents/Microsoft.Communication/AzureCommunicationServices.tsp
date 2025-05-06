@@ -293,6 +293,9 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   /** The Id of the email that has been sent */
   messageId?: string;
 
+  /** The Internet Message Id of the email that has been sent */
+  internetMessageId: string;
+
   /** The time at which the user interacted with the email */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   userActionTimestamp: utcDateTime;
