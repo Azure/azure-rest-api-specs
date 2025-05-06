@@ -6,7 +6,7 @@ import { processDocument } from './document.js';
 import yargs from 'yargs';
 import { hideBin } from "yargs/helpers";
 import { diff, diffString } from 'json-diff';
-import { suggestFix, suggestPrompt } from './troubleshooting.js';
+import { suggestFix, suggestPrompt } from './fix/troubleshooting.js';
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
