@@ -1,0 +1,2716 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceLinkerManagementClient",
+    "version": "2024-07-01-preview",
+    "description": "Microsoft.ServiceLinker provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/{resourceUri}/{providers}/{resourceUri}/connectors": {
+      "get": {
+        "operationId": "Linker_List",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ResourceList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkerList": {
+            "$ref": "./examples/LinkerList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/{providers}/{resourceUri}/dryruns": {
+      "get": {
+        "operationId": "Linkers_ListDryrun",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListDryrun": {
+            "$ref": "./examples/ListDryrun.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{dryruns}/{resourceUri}/{dryrunName}": {
+      "get": {
+        "operationId": "Linkers_GetDryrun",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryruns",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDryrun": {
+            "$ref": "./examples/GetDryrun.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Linkers_CreateDryrun",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryruns",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutDryrun": {
+            "$ref": "./examples/PutDryrun.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Linkers_UpdateDryrun",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryruns",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DryrunPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchDryrun": {
+            "$ref": "./examples/PatchDryrun.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Linkers_DeleteDryrun",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryruns",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteDryrun": {
+            "$ref": "./examples/DeleteDryrun.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}": {
+      "get": {
+        "operationId": "Linker_Get",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Linker": {
+            "$ref": "./examples/Linker.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Linker_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutLinker": {
+            "$ref": "./examples/PutLinker.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Linker_Update",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkerPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchLinker": {
+            "$ref": "./examples/PatchLinker.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Linker_Delete",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteLinker": {
+            "$ref": "./examples/DeleteLinker.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/generateConfigurations": {
+      "post": {
+        "operationId": "Linkers_GenerateConfigurations",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateConfiguration": {
+            "$ref": "./examples/LinkerGenerateConfigurations.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/listConfigurations": {
+      "post": {
+        "operationId": "Linker_ListConfigurations",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfiguration": {
+            "$ref": "./examples/GetConfigurations.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/validateLinker": {
+      "post": {
+        "operationId": "Linker_Validate",
+        "parameters": [
+          {
+            "name": "providers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationResult"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateLinkerSuccess": {
+            "$ref": "./examples/ValidateLinkerSuccess.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations": {
+      "get": {
+        "operationId": "Linkers_ListDaprConfigurations",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DaprConfigurationList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDaprConfigurations": {
+            "$ref": "./examples/GetDaprConfigurations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ServiceLinker/configurationNames": {
+      "get": {
+        "operationId": "ConfigurationNames_List",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationNameResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfigurationNames": {
+            "$ref": "./examples/ConfigurationNamesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ServiceLinker/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfiguration": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/connectors": {
+      "get": {
+        "operationId": "Connector_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ResourceList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectorList": {
+            "$ref": "./examples/ConnectorList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/connectors/{connectorName}": {
+      "get": {
+        "operationId": "Connector_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connector": {
+            "$ref": "./examples/Connectors.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Connector_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutConnector": {
+            "$ref": "./examples/PutConnector.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Connector_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkerPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchConnector": {
+            "$ref": "./examples/PatchConnector.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Connector_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteConnector": {
+            "$ref": "./examples/DeleteConnector.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/connectors/{connectorName}/generateConfigurations": {
+      "post": {
+        "operationId": "Connector_GenerateConfigurations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateConfiguration": {
+            "$ref": "./examples/GenerateConfigurations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/connectors/{connectorName}/validate": {
+      "post": {
+        "operationId": "Connector_Validate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationResult"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateConnectorSuccess": {
+            "$ref": "./examples/ValidateConnectorSuccess.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/dryruns": {
+      "get": {
+        "operationId": "Connector_ListDryrun",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectorDryrunList": {
+            "$ref": "./examples/ConnectorDryrunList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/dryruns/{dryrunName}": {
+      "get": {
+        "operationId": "Connector_GetDryrun",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectorDryrunGet": {
+            "$ref": "./examples/ConnectorDryrunGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Connector_CreateDryrun",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectorDryrunCreate": {
+            "$ref": "./examples/ConnectorDryrunCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Connector_UpdateDryrun",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DryrunPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectorDryrunUpdate": {
+            "$ref": "./examples/ConnectorDryrunUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Connector_DeleteDryrun",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectorDryrunDelete": {
+            "$ref": "./examples/ConnectorDryrunDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessKeyInfoBase": {
+      "type": "object",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessKeyPermissions"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "accessKey"
+    },
+    "AuthInfoBase": {
+      "type": "object",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "enum": [
+            "systemAssignedIdentity",
+            "userAssignedIdentity",
+            "servicePrincipalSecret",
+            "servicePrincipalCertificate",
+            "secret",
+            "accessKey",
+            "userAccount",
+            "easyAuthMicrosoftEntraID"
+          ],
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": true
+          }
+        },
+        "authMode": {
+          "type": "string",
+          "enum": [
+            "optInAllAuth",
+            "optOutAllAuth"
+          ],
+          "x-ms-enum": {
+            "name": "AuthMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "authType",
+      "required": [
+        "authType"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<DryrunResource>": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/DryrunResource"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<ValidateOperationResult>": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ValidateOperationResult"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "AzureAppConfigProperties": {
+      "type": "object",
+      "properties": {
+        "connectWithKubernetesExtension": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourcePropertiesBase"
+        }
+      ],
+      "x-ms-discriminator-value": "AppConfig"
+    },
+    "AzureKeyVaultProperties": {
+      "type": "object",
+      "properties": {
+        "connectAsKubernetesCsiDriver": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourcePropertiesBase"
+        }
+      ],
+      "x-ms-discriminator-value": "KeyVault"
+    },
+    "AzureResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "resourceProperties": {
+          "$ref": "#/definitions/AzureResourcePropertiesBase"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetServiceBase"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureResource"
+    },
+    "AzureResourcePropertiesBase": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "KeyVault",
+            "AppConfig"
+          ],
+          "x-ms-enum": {
+            "name": "AzureResourceType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "BasicErrorDryrunPrerequisiteResult": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DryrunPrerequisiteResult"
+        }
+      ],
+      "x-ms-discriminator-value": "basicError"
+    },
+    "ConfigurationInfo": {
+      "type": "object",
+      "properties": {
+        "deleteOrUpdateBehavior": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "ForcedCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOrUpdateBehavior",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
+        },
+        "customizedKeys": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "daprProperties": {
+          "$ref": "#/definitions/DaprProperties"
+        },
+        "additionalConfigurations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "additionalConnectionStringProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "configurationStore": {
+          "$ref": "#/definitions/ConfigurationStore"
+        }
+      }
+    },
+    "ConfigurationName": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ConfigurationNameItem": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationNames",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConfigurationNameResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ConfigurationNameItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConfigurationNames": {
+      "type": "object",
+      "properties": {
+        "targetService": {
+          "type": "string"
+        },
+        "clientType": {
+          "type": "string",
+          "enum": [
+            "none",
+            "dotnet",
+            "java",
+            "python",
+            "go",
+            "php",
+            "ruby",
+            "django",
+            "nodejs",
+            "springBoot",
+            "kafka-springBoot",
+            "jms-springBoot",
+            "dapr"
+          ],
+          "x-ms-enum": {
+            "name": "ClientType",
+            "modelAsString": true
+          }
+        },
+        "authType": {
+          "type": "string",
+          "enum": [
+            "systemAssignedIdentity",
+            "userAssignedIdentity",
+            "servicePrincipalSecret",
+            "servicePrincipalCertificate",
+            "secret",
+            "accessKey",
+            "userAccount",
+            "easyAuthMicrosoftEntraID"
+          ],
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": true
+          }
+        },
+        "secretType": {
+          "type": "string",
+          "enum": [
+            "rawValue",
+            "keyVaultSecret"
+          ],
+          "x-ms-enum": {
+            "name": "SecretSourceType",
+            "modelAsString": true
+          }
+        },
+        "daprProperties": {
+          "$ref": "#/definitions/DaprProperties"
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationName"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ConfigurationResult": {
+      "type": "object",
+      "properties": {
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceConfiguration"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ConfigurationStore": {
+      "type": "object",
+      "properties": {
+        "appConfigurationId": {
+          "type": "string"
+        }
+      }
+    },
+    "ConfluentBootstrapServer": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetServiceBase"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfluentBootstrapServer"
+    },
+    "ConfluentSchemaRegistry": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetServiceBase"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfluentSchemaRegistry"
+    },
+    "CreateOrUpdateDryrunParameters": {
+      "type": "object",
+      "properties": {
+        "targetService": {
+          "$ref": "#/definitions/TargetServiceBase"
+        },
+        "authInfo": {
+          "$ref": "#/definitions/AuthInfoBase"
+        },
+        "clientType": {
+          "type": "string",
+          "enum": [
+            "none",
+            "dotnet",
+            "java",
+            "python",
+            "go",
+            "php",
+            "ruby",
+            "django",
+            "nodejs",
+            "springBoot",
+            "kafka-springBoot",
+            "jms-springBoot",
+            "dapr"
+          ],
+          "x-ms-enum": {
+            "name": "ClientType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "vNetSolution": {
+          "$ref": "#/definitions/VNetSolution"
+        },
+        "secretStore": {
+          "$ref": "#/definitions/SecretStore"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "publicNetworkSolution": {
+          "$ref": "#/definitions/PublicNetworkSolution"
+        },
+        "configurationInfo": {
+          "$ref": "#/definitions/ConfigurationInfo"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DryrunParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "createOrUpdate"
+    },
+    "DaprConfigurationList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/DaprConfigurationResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DaprConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "targetType": {
+          "type": "string"
+        },
+        "authType": {
+          "type": "string",
+          "enum": [
+            "systemAssignedIdentity",
+            "userAssignedIdentity",
+            "servicePrincipalSecret",
+            "servicePrincipalCertificate",
+            "secret",
+            "accessKey",
+            "userAccount",
+            "easyAuthMicrosoftEntraID"
+          ],
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": true
+          }
+        },
+        "daprProperties": {
+          "$ref": "#/definitions/DaprProperties"
+        }
+      }
+    },
+    "DaprConfigurationResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DaprConfigurationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DaprMetadata": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "secretRef": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "required": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "DaprMetadataRequired",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DaprProperties": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "componentType": {
+          "type": "string"
+        },
+        "secretStoreComponent": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprMetadata"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "runtimeVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "bindingComponentDirection": {
+          "type": "string",
+          "enum": [
+            "input",
+            "output"
+          ],
+          "x-ms-enum": {
+            "name": "DaprBindingComponentDirection",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DryrunList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/DryrunResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DryrunOperationPreview": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "operationType": {
+          "type": "string",
+          "enum": [
+            "configConnection",
+            "configNetwork",
+            "configAuth"
+          ],
+          "x-ms-enum": {
+            "name": "DryrunPreviewOperationType",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        }
+      }
+    },
+    "DryrunParameters": {
+      "type": "object",
+      "properties": {
+        "actionName": {
+          "type": "string",
+          "enum": [
+            "createOrUpdate"
+          ],
+          "x-ms-enum": {
+            "name": "DryrunActionName",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "actionName",
+      "required": [
+        "actionName"
+      ]
+    },
+    "DryrunPatch": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DryrunProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DryrunPrerequisiteResult": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "basicError",
+            "permissionsMissing"
+          ],
+          "x-ms-enum": {
+            "name": "DryrunPrerequisiteResultType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "DryrunProperties": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/DryrunParameters"
+        },
+        "prerequisiteResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DryrunPrerequisiteResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "operationPreviews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DryrunOperationPreview"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DryrunResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DryrunProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EasyAuthMicrosoftEntraIDAuthInfo": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "deleteOrUpdateBehavior": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "ForcedCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOrUpdateBehavior",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "easyAuthMicrosoftEntraID"
+    },
+    "FabricPlatform": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetServiceBase"
+        }
+      ],
+      "x-ms-discriminator-value": "FabricPlatform"
+    },
+    "FirewallRules": {
+      "type": "object",
+      "properties": {
+        "ipRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureServices": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "AllowType",
+            "modelAsString": true
+          }
+        },
+        "callerClientIP": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "AllowType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KeyVaultSecretReferenceSecretInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "keyVaultSecretReference"
+    },
+    "KeyVaultSecretUriSecretInfo": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "keyVaultSecretUri"
+    },
+    "LinkerPatch": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LinkerProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LinkerProperties": {
+      "type": "object",
+      "properties": {
+        "targetService": {
+          "$ref": "#/definitions/TargetServiceBase"
+        },
+        "authInfo": {
+          "$ref": "#/definitions/AuthInfoBase"
+        },
+        "clientType": {
+          "type": "string",
+          "enum": [
+            "none",
+            "dotnet",
+            "java",
+            "python",
+            "go",
+            "php",
+            "ruby",
+            "django",
+            "nodejs",
+            "springBoot",
+            "kafka-springBoot",
+            "jms-springBoot",
+            "dapr"
+          ],
+          "x-ms-enum": {
+            "name": "ClientType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "vNetSolution": {
+          "$ref": "#/definitions/VNetSolution"
+        },
+        "secretStore": {
+          "$ref": "#/definitions/SecretStore"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "publicNetworkSolution": {
+          "$ref": "#/definitions/PublicNetworkSolution"
+        },
+        "configurationInfo": {
+          "$ref": "#/definitions/ConfigurationInfo"
+        }
+      }
+    },
+    "LinkerResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LinkerProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PermissionsMissingDryrunPrerequisiteResult": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recommendedRole": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DryrunPrerequisiteResult"
+        }
+      ],
+      "x-ms-discriminator-value": "permissionsMissing"
+    },
+    "PublicNetworkSolution": {
+      "type": "object",
+      "properties": {
+        "deleteOrUpdateBehavior": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "ForcedCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOrUpdateBehavior",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
+        },
+        "firewallRules": {
+          "$ref": "#/definitions/FirewallRules"
+        }
+      }
+    },
+    "ResourceList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/LinkerResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SecretAuthInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "secretInfo": {
+          "$ref": "#/definitions/SecretInfoBase"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "secret"
+    },
+    "SecretInfoBase": {
+      "type": "object",
+      "properties": {
+        "secretType": {
+          "type": "string",
+          "enum": [
+            "rawValue",
+            "keyVaultSecretUri",
+            "keyVaultSecretReference"
+          ],
+          "x-ms-enum": {
+            "name": "SecretType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "secretType",
+      "required": [
+        "secretType"
+      ]
+    },
+    "SecretStore": {
+      "type": "object",
+      "properties": {
+        "keyVaultId": {
+          "type": "string"
+        },
+        "keyVaultSecretName": {
+          "type": "string"
+        }
+      }
+    },
+    "SelfHostedServer": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetServiceBase"
+        }
+      ],
+      "x-ms-discriminator-value": "SelfHostedServer"
+    },
+    "ServicePrincipalCertificateAuthInfo": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        },
+        "certificate": {
+          "type": "string"
+        },
+        "deleteOrUpdateBehavior": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "ForcedCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOrUpdateBehavior",
+            "modelAsString": true
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "certificate",
+        "clientId",
+        "principalId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "servicePrincipalCertificate"
+    },
+    "ServicePrincipalSecretAuthInfo": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "deleteOrUpdateBehavior": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "ForcedCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOrUpdateBehavior",
+            "modelAsString": true
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "clientId",
+        "principalId",
+        "secret"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "servicePrincipalSecret"
+    },
+    "SourceConfiguration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "configType": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "KeyVaultSecret"
+          ],
+          "x-ms-enum": {
+            "name": "LinkerConfigurationType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "keyVaultReferenceIdentity": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "SystemAssignedIdentityAuthInfo": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        },
+        "deleteOrUpdateBehavior": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "ForcedCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOrUpdateBehavior",
+            "modelAsString": true
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "systemAssignedIdentity"
+    },
+    "TargetServiceBase": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "AzureResource",
+            "ConfluentBootstrapServer",
+            "ConfluentSchemaRegistry",
+            "SelfHostedServer",
+            "FabricPlatform"
+          ],
+          "x-ms-enum": {
+            "name": "TargetServiceType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "UserAccountAuthInfo": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        },
+        "deleteOrUpdateBehavior": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "ForcedCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOrUpdateBehavior",
+            "modelAsString": true
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "userAccount"
+    },
+    "UserAssignedIdentityAuthInfo": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        },
+        "deleteOrUpdateBehavior": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "ForcedCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOrUpdateBehavior",
+            "modelAsString": true
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "userAssignedIdentity"
+    },
+    "VNetSolution": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "serviceEndpoint",
+            "privateLink"
+          ],
+          "x-ms-enum": {
+            "name": "VNetSolutionType",
+            "modelAsString": true
+          }
+        },
+        "deleteOrUpdateBehavior": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "ForcedCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOrUpdateBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ValidateOperationResult": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ValidateResult",
+          "x-ms-client-flatten": true
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "ValidateResult": {
+      "type": "object",
+      "properties": {
+        "linkerName": {
+          "type": "string"
+        },
+        "isConnectionAvailable": {
+          "type": "boolean"
+        },
+        "reportStartTimeUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reportEndTimeUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "targetId": {
+          "type": "string"
+        },
+        "authType": {
+          "type": "string",
+          "enum": [
+            "systemAssignedIdentity",
+            "userAssignedIdentity",
+            "servicePrincipalSecret",
+            "servicePrincipalCertificate",
+            "secret",
+            "accessKey",
+            "userAccount",
+            "easyAuthMicrosoftEntraID"
+          ],
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": true
+          }
+        },
+        "validationDetail": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationResultItem"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ValidationResultItem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "success",
+            "failure",
+            "warning"
+          ],
+          "x-ms-enum": {
+            "name": "ValidationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        }
+      }
+    },
+    "ValueSecretInfo": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretInfoBase"
+        }
+      ],
+      "x-ms-discriminator-value": "rawValue"
+    }
+  },
+  "parameters": {}
+}
