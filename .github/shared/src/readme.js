@@ -15,7 +15,12 @@ import { Tag } from "./tag.js";
 
 export class Readme {
   /**
-   * @type {string | undefined } Content of readme.md, either loaded from #path or passed in via fromContent().  Reset to undefined after #data is loaded to save memory. */
+   * Content of `readme.md`, either loaded from `#path` or passed in via `options`.
+   *
+   * Reset to `undefined` after `#data` is loaded to save memory.
+   *
+   * @type {string | undefined}
+   */
   #content;
 
   /** @type {{globalConfig: Object, tags: Set<Tag>} | undefined} */
@@ -24,36 +29,30 @@ export class Readme {
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
-  /** @type {string} absolute path */
+  /**
+   * absolute path
+   * @type {string}
+   * */
   #path;
 
-  /** @type {SpecModel | undefined} backpointer to owning SpecModel */
+  /**
+   * backpointer to owning SpecModel
+   * @type {SpecModel | undefined}
+   */
   #specModel;
 
   /**
    * @param {string} path
    * @param {Object} [options]
+   * @param {string} [options.content]
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
    */
   constructor(path, options) {
     this.#path = resolve(path);
+    this.#content = options?.content;
     this.#logger = options?.logger;
     this.#specModel = options?.specModel;
-  }
-
-  /**
-   * @param {string} content
-   * @param {Object} [options]
-   * @param {import('./logger.js').ILogger} [options.logger]
-   * @param {SpecModel} [options.specModel]
-   * @returns {Readme}
-   */
-  static fromContent(content, options) {
-    const fakePath = "/fake/from-content/readme.md";
-    const readme = new Readme(fakePath, options);
-    readme.#content = content;
-    return readme;
   }
 
   /**
@@ -186,17 +185,6 @@ export class Readme {
     }
 
     return this.#data;
-  }
-
-  /**
-   * @returns {Promise<Set<string>>} Absolute paths of all input files (in all tags) directly referenced by the readme.
-   */
-  async getAllInputFiles() {
-    const tags = await this.getTags();
-
-    return new Set(
-      [...tags].flatMap((t) => [...t.inputFiles].map((s) => s.path)),
-    );
   }
 
   /**

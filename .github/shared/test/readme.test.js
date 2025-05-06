@@ -1,6 +1,6 @@
 // @ts-check
 
-import { dirname, relative, resolve } from "path";
+import { relative, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.js";
 import { getInputFiles, Readme } from "../src/readme.js";
@@ -28,13 +28,15 @@ describe("readme", () => {
 
     expect(inputFiles).toEqual(expected);
 
-    const readme = Readme.fromContent(contosoReadme, options);
+    const folder = "/fake";
+    const readme = new Readme(resolve(folder, "readme.md"), {
+      ...options,
+      content: contosoReadme,
+    });
 
-    inputFiles = new Set(
-      [...(await readme.getAllInputFiles())].map((p) =>
-        relative(dirname(readme.path), p),
-      ),
-    );
+    const tags = await readme.getTags();
+    const swaggers = [...tags].flatMap((t) => [...t.inputFiles]);
+    inputFiles = new Set(swaggers.map((s) => relative(folder, s.path)));
 
     expect(inputFiles).toEqual(expected);
   });
