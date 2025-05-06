@@ -27,10 +27,7 @@ interface RedTeams {
   get is RedTeamOperations.ResourceRead<RedTeam>;
 
   @doc("List a redteam by name.")
-  list is RedTeamOperations.ResourceList<
-    RedTeam,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+  list is RedTeamOperations.ResourceList<RedTeam>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates a redteam run.")

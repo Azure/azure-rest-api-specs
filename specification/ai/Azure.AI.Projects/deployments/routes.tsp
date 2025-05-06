@@ -37,8 +37,6 @@ interface Deployments {
       @doc("Type of deployment to filter list by")
       @query("deploymentType")
       deploymentType?: DeploymentType;
-
-      ...StandardListQueryParameters;
     }>
   >;
 }

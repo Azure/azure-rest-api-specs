@@ -25,10 +25,7 @@ interface Evaluations {
   get is EvaluationsOperations.ResourceRead<Evaluation>;
 
   @doc("List evaluation runs")
-  list is EvaluationsOperations.ResourceList<
-    Evaluation,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+  list is EvaluationsOperations.ResourceList<Evaluation>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an evaluation run.")
