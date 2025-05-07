@@ -43,8 +43,6 @@ interface Connections {
       @doc("List connections that are default connections")
       @query("defaultConnection")
       defaultConnection?: boolean;
-
-      ...StandardListQueryParameters;
     }>
   >;
 }
