@@ -208,7 +208,7 @@ model AkriDiscoveryHandlerScheduleCron extends AkriDiscoveryHandlerSchedule {
   /**
    * The cron expression for the schedule.
    */
-  cron?: string; // Should this be required?
+  cron: string; 
 }
 
 /**
@@ -224,8 +224,7 @@ model AkriDiscoveryHandlerScheduleRunOnce extends AkriDiscoveryHandlerSchedule {
   /**
    * The time to run the discovery handler.
    */
-  // Is this description correct?
-  runOnce?: string; // Should this be required?
+  runOnce: string; 
 }
 
 /**
@@ -242,6 +241,5 @@ model AkriDiscoveryHandlerScheduleContinuous
   /**
    * The time to run the discovery handler.
    */
-  // Is this description correct?
-  continuous?: string; // Should this be required?
+  continuous: string;
 }

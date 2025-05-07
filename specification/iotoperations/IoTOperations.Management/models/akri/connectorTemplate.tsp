@@ -431,6 +431,74 @@ model AkriConnectorTemplateRuntimeImageConfigurationSettings {
    * The registry settings for the connector image. You can omit this field if using the default docker hub repository or using a local image.
    */
   registrySettings?: AkriConnectorTemplateRegistrySettings;
+
+  /**
+   * Image tag or digest. If not specified, the default tag is `latest`.
+   */
+  tagDigestSettings?: AkriConnectorTemplateTagDigestSettings;
+}
+
+/**
+ * AkriConnectorTemplateTagDigestSettings properties
+ */
+@added(Versions.`2025-07-01-preview`)
+@discriminator("tagDigestType")
+model AkriConnectorTemplateTagDigestSettings {
+  /**
+   * The tag or digest type
+   */
+  tagDigestType: AkriConnectorTemplateTagDigestType;
+}
+/**
+ * AkriConnectorTemplateTagDigestType values
+ */
+@added(Versions.`2025-07-01-preview`)
+union AkriConnectorTemplateTagDigestType {
+  string,
+
+  /**
+   * Tag
+   */
+  Tag,
+
+  /**
+   * Digest
+   */
+  Digest,
+}
+
+/**
+ * AkriConnectorTemplateTag properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorTemplateTag
+  extends AkriConnectorTemplateTagDigestSettings {
+  /**
+   * The tag or digest type
+   */
+  tagDigestType: Tag;
+
+  /**
+   * The tag of the image.
+   */
+  tag: string;
+}
+
+/**
+ * AkriConnectorTemplateDigest properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorTemplateDigest
+  extends AkriConnectorTemplateTagDigestSettings {
+  /**
+   * The tag or digest type
+   */
+  tagDigestType: Digest;
+
+  /**
+   * The digest of the image.
+   */
+  digest: string;
 }
 /**
  * AkriConnectorTemplateRegistrySettings properties

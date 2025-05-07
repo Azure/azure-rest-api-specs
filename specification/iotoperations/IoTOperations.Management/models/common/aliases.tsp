@@ -2,6 +2,7 @@
 // It should contain simple scalar aliases or aliases for objects with simple scalar properties.
 // Complex objects or models should be defined in their respective files.
 alias All = "All";
+alias Tag = "Tag";
 alias Map = "Map";
 alias Avro = "Avro";
 alias Cron = "Cron";
@@ -14,6 +15,7 @@ alias Graph = "Graph";
 alias Never = "Never";
 alias Always = "Always";
 alias Binary = "Binary";
+alias Digest = "Digest";
 alias Branch = "Branch";
 alias Custom = "Custom";
 alias Filter = "Filter";
