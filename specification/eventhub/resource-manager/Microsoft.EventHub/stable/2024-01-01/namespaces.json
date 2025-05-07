@@ -672,8 +672,8 @@
         "tags": [
           "Namespaces NetworkSecurityPerimeterConfigurations"
         ],
-        "operationId": "NetworkSecurityPerimeterConfigurations_List",
-        "description": "Return a NetworkSecurityPerimeterConfigurations_List",
+        "operationId": "NetworkSecurityPerimeterConfigurations_associationProxyName",
+        "description": "Return a NetworkSecurityPerimeterConfigurations associationProxyName",
         "x-ms-examples": {
           "NetworkSecurityPerimeterConfigurationList": {
             "$ref": "./examples/NameSpaces/NetworkSecurityPerimeterConfigurationAssociationproxy.json"
@@ -698,7 +698,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Network Security Perimeter Configuration List"
+            "description": "Network Security Perimeter Configuration associationProxyName",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
