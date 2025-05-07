@@ -5,6 +5,10 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.CommonTypes;
 using Microsoft.Carbon;
 
+@@clientName(Microsoft.Carbon, "CarbonOptimizationMgmt", "python");
+@@clientName(Microsoft.Carbon, "CarbonOptimizationManagementClient", "java");
+
+// CSharp
 @@clientName(CarbonEmissionTopItemMonthlySummaryData,
   "CarbonEmissionTopItemMonthlySummary",
   "csharp"
@@ -50,5 +54,43 @@ using Microsoft.Carbon;
   "ResourceGroupCarbonEmissionTopItemMonthlySummary",
   "csharp"
 );
-@@clientName(Microsoft.Carbon, "CarbonOptimizationMgmt", "python");
-@@clientName(Microsoft.Carbon, "CarbonOptimizationManagementClient", "java");
+@@alternateType(CarbonEmissionDataAvailableDateRange.startDate,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(CarbonEmissionDataAvailableDateRange.endDate,
+  utcDateTime,
+  "csharp"
+);
+@@clientName(CarbonEmissionDataAvailableDateRange,
+  "CarbonEmissionAvailableDateRange",
+  "csharp"
+);
+@@clientName(CategoryTypeEnum,
+  "CarbonEmissionCategoryType",
+  "csharp"
+);
+@@clientName(EmissionScopeEnum,
+  "CarbonEmissionScope",
+  "csharp"
+);
+@@clientName(AccessDecisionEnum,
+  "CarbonEmissionAccessDecision",
+  "csharp"
+);
+@@clientName(ReportTypeEnum,
+  "CarbonEmissionReportType",
+  "csharp"
+);
+@@clientName(DateRange,
+  "CarbonEmissionQueryDateRange",
+  "csharp"
+);
+@@clientName(DateRange.start,
+  "StartOn",
+  "csharp"
+);
+@@clientName(DateRange.end,
+  "EndOn",
+  "csharp"
+);
