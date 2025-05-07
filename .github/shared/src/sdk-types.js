@@ -8,20 +8,20 @@
 
 /**
  * @typedef {{
-*   breakingChange: string | undefined,
-*   breakingChangeApproved: string | undefined,
-*   breakingChangeSuppression: string | undefined,
-*   breakingChangeSuppressionApproved: string | undefined
-* }} SdkLabelInfo
-*/
+ *   breakingChange: string | undefined,
+ *   breakingChangeApproved: string | undefined,
+ *   breakingChangeSuppression: string | undefined,
+ *   breakingChangeSuppressionApproved: string | undefined
+ * }} SdkLabelInfo
+ */
 
 /**
-* @typedef {Record<SdkName, SdkLabelInfo>} SdkLabels
-*/
+ * @typedef {Record<SdkName, SdkLabelInfo>} SdkLabels
+ */
 
-/** 
+/**
  * SDK labels mapping for breaking change labels
- * @type {SdkLabels} 
+ * @type {SdkLabels}
  * */
 export const sdkLabels = {
   "azure-sdk-for-go": {
