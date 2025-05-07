@@ -41,7 +41,7 @@ using Microsoft.Chaos;
 
 // java
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "java");
-@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+@@clientName(Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "ResourceIdentity",
   "java"
 );
