@@ -9,4 +9,3 @@ using Azure.ClientGenerator.Core;
   "IoTFirmwareDefenseMgmtClient",
   "java"
 );
-
