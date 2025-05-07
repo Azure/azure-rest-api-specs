@@ -381,6 +381,10 @@
         },
         "criteria": {
           "$ref": "#/definitions/MetricAlertCriteria"
+        },
+        "autoMitigate": {
+          "type": "boolean",
+          "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
         }
       }
     },
@@ -506,6 +510,19 @@
           "type": "boolean",
           "description": "the value indicating whether this alert rule is migrated.",
           "readOnly": true
+        },
+        "evaluationFrequency": {
+          "type": "string",
+          "format": "duration",
+          "description": "how often the metric alert is evaluated represented in ISO 8601 duration format."
+        },
+        "targetResourceType": {
+          "type": "string",
+          "description": "the resource type of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource."
+        },
+        "targetResourceRegion": {
+          "type": "string",
+          "description": "the region of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource."
         },
         "customProperties": {
           "type": "object",
