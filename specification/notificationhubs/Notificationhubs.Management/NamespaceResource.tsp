@@ -13,8 +13,9 @@ namespace Microsoft.NotificationHubs;
 /**
  * Notification Hubs Namespace Resource.
  */
-model NamespaceResource
-  is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(NamespaceProperties)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NamespaceResource extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = NamespaceResource,
     KeyName = "namespaceName",
@@ -27,6 +28,11 @@ model NamespaceResource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku: Sku;
+
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  properties?: NamespaceProperties;
 }
 
 @armResourceOperations
