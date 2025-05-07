@@ -221,10 +221,6 @@ model CommunityPropertiesDef {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
   communityRoleAssignments?: RoleAssignmentItem[];
-  
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
-  firewallSku?: FirewallSKU = FirewallSKU.Standard;
 }
 
 @doc("Community Resource Properties")
@@ -236,6 +232,10 @@ model CommunityProperties is CommunityPropertiesDef {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfiguration;
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
+  firewallSku?: FirewallSKU = FirewallSKU.Standard;
 }
 
 @doc("Community Resource Properties")
@@ -247,6 +247,10 @@ model CommunityPatchProperties is CommunityPropertiesDef {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatch;
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
+  firewallSku?: FirewallSKU;
 }
 
 @doc("Community Patch Resource")

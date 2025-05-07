@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Mission",
+    "title": "Microsoft.Mission",
     "version": "2025-05-01-preview",
     "description": "Microsoft Mission Resource Provider management API.",
     "x-typespec-generated": [
@@ -4568,6 +4568,14 @@
             "$ref": "#/definitions/RoleAssignmentItem"
           }
         },
+        "approvalSettings": {
+          "$ref": "#/definitions/ApprovalSettings",
+          "description": "Approval requirements for various actions on the community's resources."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfiguration",
+          "description": "Maintenance Mode configuration."
+        },
         "firewallSku": {
           "type": "string",
           "description": "SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default",
@@ -4598,14 +4606,6 @@
               }
             ]
           }
-        },
-        "approvalSettings": {
-          "$ref": "#/definitions/ApprovalSettings",
-          "description": "Approval requirements for various actions on the community's resources."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfiguration",
-          "description": "Maintenance Mode configuration."
         }
       }
     },
@@ -5275,6 +5275,36 @@
             "create"
           ]
         }
+      }
+    },
+    "FirewallSKU": {
+      "type": "string",
+      "description": "Azure Firewall SKU",
+      "enum": [
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallSKU",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "FirewallSKU Basic"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "FirwallSKU Standard"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "FirewallSKU Premium"
+          }
+        ]
       }
     },
     "GovernedServiceItem": {
@@ -6187,37 +6217,6 @@
             "$ref": "#/definitions/RoleAssignmentItem"
           }
         },
-        "firewallSku": {
-          "type": "string",
-          "description": "SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default",
-          "default": "Standard",
-          "enum": [
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallSKU",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Basic",
-                "value": "Basic",
-                "description": "FirewallSKU Basic"
-              },
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "FirwallSKU Standard"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "FirewallSKU Premium"
-              }
-            ]
-          }
-        },
         "approvalSettings": {
           "$ref": "#/definitions/ApprovalSettingsPatch",
           "description": "Approval requirements for various actions on the community's resources."
@@ -6225,6 +6224,10 @@
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationPatch",
           "description": "Maintenance Mode configuration."
+        },
+        "firewallSku": {
+          "$ref": "#/definitions/FirewallSKU",
+          "description": "SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default"
         }
       }
     },
