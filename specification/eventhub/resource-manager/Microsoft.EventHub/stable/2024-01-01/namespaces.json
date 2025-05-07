@@ -666,6 +666,48 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations/{associationProxyName}": {
+      "get": {
+        "tags": [
+          "Namespaces NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_List",
+        "description": "Return a NetworkSecurityPerimeterConfigurations_List",
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurationList": {
+            "$ref": "./examples/NameSpaces/NetworkSecurityPerimeterConfigurationAssociationproxy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceAssociationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Security Perimeter Configuration List"
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
