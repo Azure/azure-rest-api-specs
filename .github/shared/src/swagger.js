@@ -130,10 +130,8 @@ async function resolveEmptyExamples(
   /** @type import("@apidevtools/json-schema-ref-parser").FileInfo */ 
   file
 ) {
-  console.log("Resolving file:", file.url);
   const { url } = file;
   if (example(url)) {
-    console.log(`Skipping empty example file: ${url}`);
     return "{}";
   }
 
