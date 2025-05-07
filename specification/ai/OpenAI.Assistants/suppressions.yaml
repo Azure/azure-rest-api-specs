@@ -1,0 +1,12 @@
+- tool: TypeSpecValidation
+  paths:
+    # Specify the path to the tspconfig.yaml file where suppression should apply
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # Example: Suppress validation for a specific emitter option
+    - options.@azure-tools/typespec-ts.package-dir
+    # Example: Suppress validation for a nested emitter option
+    - options.@azure-tools/typespec-ts.package-details.name 
+  reason: the-reason-you-want-to-suppress # Explain why this suppression is necessary
