@@ -74,12 +74,12 @@ interface Organizations {
   @armResourceAction(OrganizationResource)
   @post
   getPostgresVersions(
-    ...ResourceInstanceParameters<Models.PgVersion>,
+    ...ResourceInstanceParameters<PgVersion>,
 
     @doc("Post Action to retrieve the PostgreSQL versions.")
     @body
-    parameters?: Models.PgVersion,
-  ): ArmResponse<Models.PgVersionsResult> | ErrorResponse;
+    parameters?: PgVersion,
+  ): ArmResponse<PgVersionsResult> | ErrorResponse;
 }
 
 @armResourceOperations
@@ -87,28 +87,20 @@ interface Organizations {
 interface Projects {
   get is ArmResourceRead<Project>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
-  update is ArmResourcePatchAsync<Project, Models.ProjectProperties>;
   delete is ArmResourceDeleteSync<Project>;
   list is ArmResourceListByParent<Project>;
 
   @doc("Action to retrieve the connection URI for the Neon Database.")
   @autoRoute
-  @armResourceAction(Models.ConnectionUriProperties)
+  @armResourceAction(ConnectionUriProperties)
   @post
   getConnectionUri(
     ...ResourceInstanceParameters<Project>,
 
     @doc("Additional parameters for retrieving the database connection URI.")
     @body
-    connectionUriParameters: Models.ConnectionUriProperties,
-  ): ArmResponse<Models.ConnectionUriProperties> | ErrorResponse;
-}
-
-@doc("The Project resource type.")
-@added(Neon.Postgres.Versions.v2_preview)
-@parentResource(OrganizationResource)
-model Project is ProxyResource<Models.ProjectProperties> {
-  ...ResourceNameParameter<Project>;
+    connectionUriParameters: ConnectionUriProperties,
+  ): ArmResponse<ConnectionUriProperties> | ErrorResponse;
 }
 
 @armResourceOperations
@@ -116,82 +108,30 @@ model Project is ProxyResource<Models.ProjectProperties> {
 interface Branches {
   get is ArmResourceRead<Branch>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Branch>;
-  update is ArmResourcePatchAsync<Branch, Models.BranchProperties>;
   delete is ArmResourceDeleteSync<Branch>;
   list is ArmResourceListByParent<Branch>;
-}
-
-@doc("The Branch resource type.")
-@added(Neon.Postgres.Versions.v2_preview)
-@parentResource(Project)
-model Branch is ProxyResource<Models.BranchProperties> {
-  ...ResourceNameParameter<Branch>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface Computes {
-  get is ArmResourceRead<Compute>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Compute>;
-  update is ArmResourcePatchAsync<Compute, Models.ComputeProperties>;
-  delete is ArmResourceDeleteSync<Compute>;
   list is ArmResourceListByParent<Compute>;
-}
-
-@doc("The Compute resource type.")
-@added(Neon.Postgres.Versions.v2_preview)
-@parentResource(Branch)
-model Compute is ProxyResource<Models.ComputeProperties> {
-  ...ResourceNameParameter<Compute>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface NeonDatabases {
-  get is ArmResourceRead<NeonDatabase>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonDatabase>;
-  update is ArmResourcePatchAsync<NeonDatabase, Models.NeonDatabaseProperties>;
-  delete is ArmResourceDeleteSync<NeonDatabase>;
   list is ArmResourceListByParent<NeonDatabase>;
-}
-
-@doc("The Neon Database resource type.")
-@added(Neon.Postgres.Versions.v2_preview)
-@parentResource(Branch)
-model NeonDatabase is ProxyResource<Models.NeonDatabaseProperties> {
-  ...ResourceNameParameter<NeonDatabase>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface NeonRoles {
-  get is ArmResourceRead<NeonRole>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonRole>;
-  update is ArmResourcePatchAsync<NeonRole, Models.NeonRoleProperties>;
-  delete is ArmResourceDeleteSync<NeonRole>;
   list is ArmResourceListByParent<NeonRole>;
-}
-
-@doc("The Neon Role resource type.")
-@added(Neon.Postgres.Versions.v2_preview)
-@parentResource(Branch)
-model NeonRole is ProxyResource<Models.NeonRoleProperties> {
-  ...ResourceNameParameter<NeonRole>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface Endpoints {
-  get is ArmResourceRead<Endpoint>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Endpoint>;
-  update is ArmResourcePatchAsync<Endpoint, Models.EndpointProperties>;
-  delete is ArmResourceDeleteSync<Endpoint>;
   list is ArmResourceListByParent<Endpoint>;
-}
-
-@doc("The Neon compute endpoint resource type.")
-@added(Neon.Postgres.Versions.v2_preview)
-@parentResource(Branch)
-model Endpoint is ProxyResource<Models.EndpointProperties> {
-  ...ResourceNameParameter<Endpoint>;
 }
