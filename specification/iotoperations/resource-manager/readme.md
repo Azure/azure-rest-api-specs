@@ -68,15 +68,19 @@ directive:
     reason: User defined feature flag settings that are not subject to any validations and can differ between the versions of AIO deployed on the customer's cluster.
     
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.ConnectorTemplateHelmConfigurationSettings.properties.values
+    where: $.definitions.AkriConnectorTemplateHelmConfigurationSettings.properties.values
     reason: There represent helm values to customer provided helm charts hence the properties are not known ahead of time.
 
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.ConnectorTemplateRuntimeImageConfigurationSettings.properties.additionalConfiguration
+    where: $.definitions.AkriConnectorTemplateRuntimeImageConfigurationSettings.properties.additionalConfiguration
     reason: These are additional configuration settings with dynamic properties that are not known ahead of time.
 
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.ConnectorTemplateManagedConfigurationSettings.properties.persistentVolumeClaimTemplates.items
+    where: $.definitions.AkriConnectorTemplateManagedConfigurationSettings.properties.persistentVolumeClaimTemplates.items
+    reason: These are additional configuration settings with dynamic properties that are not known ahead of time.
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.AkriConnectorTemplateRuntimeStatefulSetConfiguration.properties.statefulSetConfigurationSettings
     reason: These are additional configuration settings with dynamic properties that are not known ahead of time.
 ```
 

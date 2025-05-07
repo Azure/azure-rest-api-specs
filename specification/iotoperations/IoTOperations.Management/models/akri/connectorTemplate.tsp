@@ -404,7 +404,8 @@ model AkriConnectorTemplateRuntimeStatefulSetConfiguration
   /**
    * The stateful set configuration settings
    */
-  statefulSetConfigurationSettings: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kuberntes resource type"  
+  statefulSetConfigurationSettings: Record<unknown>;
 }
 
 /**
