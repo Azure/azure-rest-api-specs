@@ -356,12 +356,12 @@ model CveResult {
   effectiveCvssVersion?: int32;
 
   @doc("All known CVSS scores for the CVE.")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   cvssScores?: CvssScore[];
 
   @doc("The list of reference links for the CVE.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["href"])
+  @Azure.ResourceManager.identifiers(#["href"])
   links?: CveLink[];
 
   @doc("The CVE description.")
@@ -408,7 +408,7 @@ model FirmwareProperties {
   status?: Status;
 
   @doc("A list of errors or other messages generated during firmware analysis")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   statusMessages?: StatusMessage[];
 
   @doc("Provisioning state of the resource.")
