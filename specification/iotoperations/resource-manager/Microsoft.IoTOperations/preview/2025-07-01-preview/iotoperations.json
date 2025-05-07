@@ -5067,8 +5067,9 @@
       "description": "AkriConnectorTemplateRuntimeStatefulSetConfiguration properties",
       "properties": {
         "statefulSetConfigurationSettings": {
-          "type": "string",
-          "description": "The stateful set configuration settings"
+          "type": "object",
+          "description": "The stateful set configuration settings",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -5151,12 +5152,12 @@
           {
             "name": "Tag",
             "value": "Tag",
-            "description": "Tag"
+            "description": "Indicates that a tag should be specified"
           },
           {
             "name": "Digest",
             "value": "Digest",
-            "description": "Digest"
+            "description": "Indicates that a digest should be specified"
           }
         ]
       }

@@ -458,12 +458,12 @@ union AkriConnectorTemplateTagDigestType {
   string,
 
   /**
-   * Tag
+   * Indicates that a tag should be specified
    */
   Tag,
 
   /**
-   * Digest
+   * Indicates that a digest should be specified
    */
   Digest,
 }
