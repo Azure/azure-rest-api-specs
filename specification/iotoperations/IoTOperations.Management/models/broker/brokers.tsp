@@ -81,7 +81,7 @@ model BrokerProperties {
 model BrokerPersistence {
   @doc("""
     Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH. 
-    Optional, default shown if customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property "aio-persistence"
+    Optionally, if the customer specifies a configurable user property, it will work to enable persistence dynamically. The default user property key is 'aio-persistence' and value 'true'.
     """)
   dynamicSettings?: BrokerPersistenceDynamicSettings;
 
@@ -101,7 +101,7 @@ model BrokerPersistence {
   @doc("Controls which keys should be persisted to disk for the state store")
   stateStore?: BrokerStateStorePolicy;
 
-  @doc("Custom policy, required if mode is Custom Subscriber queues from all groups are persisted to disk (logical OR)")
+  @doc("Controls which subscriber message queues should be persisted to disk Important: to facilitate reconnection, session state metadata are ALWAYS written to disk If any persistence setting is specified, even if this section isn't set.")
   subscriberQueue?: BrokerSubscriberQueuePolicy;
 
   @doc("Controls settings related to encryption of the persistence database. Optional, defaults to enabling encryption.")
@@ -119,13 +119,13 @@ model BrokerPersistenceEncryption {
 union BrokerPersistencePolicyMode {
   string,
 
-  @doc("Persist all 'retain' messages.")
+  @doc("Policy mode for All")
   All,
 
-  @doc("Persist no messages.")
+  @doc("Policy mode for None.")
   None,
 
-  @doc("Persist only the specified topics.")
+  @doc("Indicates that the policy is a custom policy.")
   Custom,
 }
 
@@ -133,7 +133,7 @@ union BrokerPersistencePolicyMode {
 @added(Versions.`2025-07-01-preview`)
 @discriminator("mode")
 model BrokerRetainMessagesPolicy {
-  @doc("The mode of the policy.")
+  @doc("'All' to persist all retain messages, 'None' to not persist any, 'Custom' to persist only the specified topics.'")
   mode: BrokerPersistencePolicyMode;
 }
 
@@ -176,7 +176,7 @@ model BrokerStateStoreDynamic
 @added(Versions.`2025-07-01-preview`)
 @discriminator("mode")
 model BrokerStateStorePolicy {
-  @doc("The mode of the policy.")
+  @doc("'All' to persist all keys, 'None' to not persist any, 'Custom' to persist only the specified keys.'")
   mode: BrokerPersistencePolicyMode;
 }
 
@@ -240,7 +240,7 @@ model BrokerPersistenceDynamicSettings {
 @added(Versions.`2025-07-01-preview`)
 @discriminator("mode")
 model BrokerSubscriberQueuePolicy {
-  @doc("The mode of the policy.")
+  @doc("'All' to persist all subscriber queues, 'None' to not persist any, 'Custom' to persist only the specified queues.")
   mode: BrokerPersistencePolicyMode;
 }
 
@@ -250,7 +250,7 @@ model BrokerSubscriberQueueCustomPolicy extends BrokerSubscriberQueuePolicy {
   @doc("The mode of the policy.")
   mode: Custom;
 
-  @doc("Settings for the policy.")
+  @doc("Custom policy, required if mode is Custom. Subscriber queues from all groups are persisted to disk (logical OR).")
   subscriberQueueSettings: BrokerSubscriberQueueCustomPolicySettings;
 }
 
