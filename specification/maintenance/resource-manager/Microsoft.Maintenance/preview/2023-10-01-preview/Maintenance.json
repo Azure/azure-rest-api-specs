@@ -104,6 +104,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/applyUpdates": {
+      "get": {
+        "operationId": "ApplyUpdates_List",
+        "tags": [
+          "ApplyUpdateOperationGroup"
+        ],
+        "description": "Get Configuration records within a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_List": {
+            "$ref": "./examples/ApplyUpdates_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments": {
       "get": {
         "operationId": "ConfigurationAssignmentsWithinSubscription_List",
@@ -129,7 +168,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -137,6 +176,9 @@
           "ConfigurationAssignmentsResultWithinSubscription_List": {
             "$ref": "./examples/ConfigurationAssignmentsResultWithinSubscription_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -172,7 +214,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -228,7 +270,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -278,7 +320,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -322,7 +364,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -330,6 +372,45 @@
           "ConfigurationAssignmentsForSubscriptions_Delete": {
             "$ref": "./examples/ConfigurationAssignmentsForSubscriptions_Delete.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/maintenanceConfigurations": {
+      "get": {
+        "operationId": "MaintenanceConfigurations_List",
+        "tags": [
+          "MaintenanceConfigurationOperationGroup"
+        ],
+        "description": "Get Configuration records within a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListMaintenanceConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceConfigurations_List": {
+            "$ref": "./examples/MaintenanceConfigurations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -358,7 +439,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -366,6 +447,9 @@
           "PublicMaintenanceConfigurations_List": {
             "$ref": "./examples/PublicMaintenanceConfigurations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -401,7 +485,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -412,7 +496,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/{resourceParentType}/{resourceType}/configurationAssignments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/{resourceParentType}/{resourceType}/configurationAssignments": {
       "get": {
         "operationId": "ConfigurationAssignments_ListParent",
         "tags": [
@@ -428,6 +512,12 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "resourceParentName",
@@ -476,84 +566,13 @@
           "ConfigurationAssignments_ListParent": {
             "$ref": "./examples/ConfigurationAssignments_ListParent.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/applyUpdates/{applyUpdateName}/{resourceParentType}/{resourceType}": {
-      "get": {
-        "operationId": "ApplyUpdates_GetParent",
-        "tags": [
-          "ApplyUpdates"
-        ],
-        "description": "Track maintenance updates to resource with parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceParentName",
-            "in": "path",
-            "description": "{resourceParentType}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "{resourceType}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "applyUpdateName",
-            "in": "path",
-            "description": "The name of the ApplyUpdate",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceParentType",
-            "in": "path",
-            "description": "Resource parent type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "Resource type",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ApplyUpdate"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
         },
-        "x-ms-examples": {
-          "ApplyUpdates_GetParent": {
-            "$ref": "./examples/ApplyUpdates_GetParent.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/configurationAssignments/{configurationAssignmentName}/{resourceParentType}/{resourceType}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}/{resourceParentType}/{resourceType}": {
       "get": {
         "operationId": "ConfigurationAssignments_GetParent",
         "tags": [
@@ -569,6 +588,12 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "resourceParentName",
@@ -641,6 +666,12 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "resourceParentName",
@@ -730,6 +761,12 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "resourceParentName",
             "in": "path",
             "description": "{resourceParentType}",
@@ -789,13 +826,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/{resourceType}/{resourceName}/{resourceType}/applyUpdates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/applyUpdates/{applyUpdateName}/{resourceParentType}/{resourceType}": {
       "get": {
-        "operationId": "ApplyUpdates_List",
+        "operationId": "ApplyUpdates_GetParent",
         "tags": [
-          "ApplyUpdateOperationGroup"
+          "ApplyUpdates"
         ],
-        "description": "Get Configuration records within a subscription",
+        "description": "Track maintenance updates to resource with parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -807,9 +844,30 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "resourceParentName",
+            "in": "path",
+            "description": "{resourceParentType}",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "resourceName",
             "in": "path",
             "description": "{resourceType}",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applyUpdateName",
+            "in": "path",
+            "description": "The name of the ApplyUpdate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "description": "Resource parent type",
             "required": true,
             "type": "string"
           },
@@ -825,7 +883,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ListApplyUpdate"
+              "$ref": "#/definitions/ApplyUpdate"
             }
           },
           "default": {
@@ -836,8 +894,8 @@
           }
         },
         "x-ms-examples": {
-          "ApplyUpdates_List": {
-            "$ref": "./examples/ApplyUpdates_List.json"
+          "ApplyUpdates_GetParent": {
+            "$ref": "./examples/ApplyUpdates_GetParent.json"
           }
         }
       }
@@ -1172,52 +1230,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/{AAA}/publicMaintenanceConfigurations": {
-      "get": {
-        "operationId": "MaintenanceConfigurations_List",
-        "tags": [
-          "MaintenanceConfigurationOperationGroup"
-        ],
-        "description": "Get Configuration records within a subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "AAA",
-            "in": "path",
-            "description": "Resource type",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ListMaintenanceConfigurationsResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MaintenanceConfigurations_List": {
-            "$ref": "./examples/MaintenanceConfigurations_List.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/applyUpdates": {
       "get": {
         "operationId": "ApplyUpdateForResourceGroup_List",
@@ -1252,6 +1264,9 @@
           "ApplyUpdatesResourceGroup_List": {
             "$ref": "./examples/ApplyUpdatesResourceGroup_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1711,6 +1726,9 @@
           "MaintenanceConfigurationsResourceGroup_List": {
             "$ref": "./examples/MaintenanceConfigurationsResourceGroup_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2145,6 +2163,20 @@
         }
       }
     },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "An error response details received from the Azure Maintenance service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        }
+      }
+    },
     "ImpactType": {
       "type": "string",
       "description": "The impact type",
@@ -2291,6 +2323,11 @@
           "items": {
             "$ref": "#/definitions/ApplyUpdate"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       }
     },
@@ -2304,6 +2341,11 @@
           "items": {
             "$ref": "#/definitions/ConfigurationAssignment"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       }
     },
@@ -2317,6 +2359,11 @@
           "items": {
             "$ref": "#/definitions/MaintenanceConfiguration"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       }
     },
@@ -2381,6 +2428,16 @@
         "installPatches": {
           "$ref": "#/definitions/InputPatchConfiguration",
           "description": "The input parameters to be passed to the patch run operation."
+        }
+      }
+    },
+    "MaintenanceError": {
+      "type": "object",
+      "description": "An error response received from the Azure Maintenance service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "Details of the error"
         }
       }
     },

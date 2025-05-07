@@ -128,16 +128,10 @@ interface ApplyUpdateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplyUpdates_List")
-  list is ApplyUpdateOperationGroupOps.List<
+  list is ApplyUpdateOperationGroupOps.ListBySubscription<
     ApplyUpdate,
-    Parameters = {
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    },
-    Response = ArmResponse<ListApplyUpdate>
+    Response = ArmResponse<ListApplyUpdate>,
+    ErrorType = MaintenanceError
   >;
 }
 

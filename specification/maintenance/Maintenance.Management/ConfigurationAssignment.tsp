@@ -37,13 +37,15 @@ interface ConfigurationAssignmentOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        @path @segment("providers") providerName: string,
 
         /** {resourceParentType} */
         @path @segment("{resourceParentType}") resourceParentName: string,
 
         /** {resourceType} */
         @path @segment("{resourceType}") resourceName: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = ConfigurationAssignment,
@@ -229,12 +231,18 @@ interface ConfigurationAssignmentsForSubscriptions {
   /**
    * Get configuration assignment for resource.
    */
-  get is ConfigurationAssignmentsForSubscriptionOps.Read<ConfigurationAssignment>;
+  get is ConfigurationAssignmentsForSubscriptionOps.Read<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Register configuration for resource.
    */
-  createOrUpdate is ConfigurationAssignmentsForSubscriptionOps.CreateOrUpdateSync<ConfigurationAssignment>;
+  createOrUpdate is ConfigurationAssignmentsForSubscriptionOps.CreateOrUpdateSync<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Register configuration for resource.
@@ -242,7 +250,8 @@ interface ConfigurationAssignmentsForSubscriptions {
   @patch(#{ implicitOptionality: false })
   update is ConfigurationAssignmentsForSubscriptionOps.CustomPatchSync<
     ConfigurationAssignment,
-    PatchModel = ConfigurationAssignment
+    PatchModel = ConfigurationAssignment,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -250,7 +259,8 @@ interface ConfigurationAssignmentsForSubscriptions {
    */
   delete is ConfigurationAssignmentsForSubscriptionOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -260,7 +270,8 @@ interface ConfigurationAssignmentsForSubscriptions {
   @operationId("ConfigurationAssignmentsWithinSubscription_List")
   list is ConfigurationAssignmentsForSubscriptionOps.List<
     ConfigurationAssignment,
-    Response = ArmResponse<ListConfigurationAssignmentsResult>
+    Response = ArmResponse<ListConfigurationAssignmentsResult>,
+    ErrorType = MaintenanceError
   >;
 }
 @armResourceOperations

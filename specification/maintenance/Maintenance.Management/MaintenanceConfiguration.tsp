@@ -47,16 +47,21 @@ interface MaintenanceConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PublicMaintenanceConfigurations_Get")
-  get is MaintenanceConfigurationOps.Read<MaintenanceConfiguration>;
+  get is MaintenanceConfigurationOps.Read<
+    MaintenanceConfiguration,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Get Public Maintenance Configuration records
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @segment("publicMaintenanceConfigurations")
   @operationId("PublicMaintenanceConfigurations_List")
   list is MaintenanceConfigurationOps.List<
     MaintenanceConfiguration,
-    Response = ArmResponse<ListMaintenanceConfigurationsResult>
+    Response = ArmResponse<ListMaintenanceConfigurationsResult>,
+    ErrorType = MaintenanceError
   >;
 }
 @armResourceOperations
@@ -128,16 +133,11 @@ interface MaintenanceConfigurationOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_List")
-  maintenanceConfigurationsList is MaintenanceConfigurationOperationGroupOps.List<
+  @segment("maintenanceConfigurations")
+  maintenanceConfigurationsList is MaintenanceConfigurationOperationGroupOps.ListBySubscription<
     MaintenanceConfiguration,
-    Parameters = {
-      /**
-       * Resource type
-       */
-      @path
-      AAA: string;
-    },
-    Response = ArmResponse<ListMaintenanceConfigurationsResult>
+    Response = ArmResponse<ListMaintenanceConfigurationsResult>,
+    ErrorType = MaintenanceError
   >;
 }
 

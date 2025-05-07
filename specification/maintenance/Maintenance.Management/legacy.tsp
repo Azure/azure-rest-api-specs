@@ -62,7 +62,8 @@ namespace Azure.ResourceManager.Legacy {
     CreateOrUpdateSync<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>
+      Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>,
+      ErrorType extends {} = ErrorResponse
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -118,7 +119,8 @@ namespace Azure.ResourceManager.Legacy {
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       PatchModel extends {} = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,
       Parameters extends {} = {},
-      Response extends {} = ArmResponse<Resource>
+      Response extends {} = ArmResponse<Resource>,
+      ErrorType extends {} = ErrorResponse
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -166,7 +168,8 @@ namespace Azure.ResourceManager.Legacy {
     DeleteSync<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} = ArmDeletedResponse | ArmDeletedNoContentResponse
+      Response extends {} = ArmDeletedResponse | ArmDeletedNoContentResponse,
+      ErrorType extends {} = ErrorResponse
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -187,7 +190,8 @@ namespace Azure.ResourceManager.Legacy {
     Read<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} = ArmResponse<Resource>
+      Response extends {} = ArmResponse<Resource>,
+      ErrorType extends {} = ErrorResponse
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -229,7 +233,8 @@ namespace Azure.ResourceManager.Legacy {
     List<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} = ArmResponse<ResourceListResult<Resource>>
+      Response extends {} = ArmResponse<ResourceListResult<Resource>>,
+      ErrorType extends {} = ErrorResponse
     >(...ParentParameters, ...Parameters): Response | ErrorType;
 
     /**
@@ -247,6 +252,29 @@ namespace Azure.ResourceManager.Legacy {
       Parameters extends {} = {},
       Response extends {} = ArmResponse<ResourceListResult<Resource>>
     >(...ParentParameters, ...Parameters): Response | ErrorType;
+
+    /**
+     * @dev List a resource
+     * @template Resource The resource being listed
+     * @template Parameters Optional. Additional parameters after the path parameters
+     * @template Response Optional. The response returned by the list
+     * @template ErrorType Optional. The error type returned by the list
+     */
+    @doc("List {name} resources", Resource)
+    @get
+    @listsResource(Resource)
+    @armResourceList(Resource)
+    ListBySubscription<
+      Resource extends Azure.ResourceManager.CommonTypes.Resource,
+      Parameters extends {} = {},
+      Response extends {} = ArmResponse<ResourceListResult<Resource>>,
+      ErrorType extends {} = ErrorResponse
+    >(
+      ...SubscriptionIdParameter,
+      ...Parameters,
+      ...ApiVersionParameter,
+      ...Provider,
+    ): Response | ErrorType;
 
     /**
      * A synchronous resource action.

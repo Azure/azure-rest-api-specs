@@ -212,6 +212,12 @@ model ListMaintenanceConfigurationsResult {
    */
   @items
   value?: MaintenanceConfiguration[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: ResourceLocation<Resource>;
 }
 
 /**
@@ -476,6 +482,12 @@ model ListConfigurationAssignmentsResult {
    */
   @items
   value?: ConfigurationAssignment[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: ResourceLocation<Resource>;
 }
 
 /**
@@ -488,6 +500,12 @@ model ListApplyUpdate {
    */
   @items
   value?: ApplyUpdate[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: ResourceLocation<Resource>;
 }
 
 /**
