@@ -113,14 +113,14 @@ export async function buildState(
 
   // For readme files that have changed but there are no affected swaggers,
   // add them to the map with no tags
-  for (const changedReadme of changedSpecFiles.filter(readme)) {
+  for (const changedReadme of existingChangedFiles.filter(readme)) {
     if (!changedFileAndTagsMap.has(changedReadme)) {
       changedFileAndTagsMap.set(changedReadme, []);
     }
   }
 
   const affectedSwaggers = new Set<string>();
-  for (const changedSwagger of changedSpecFiles.filter(swagger)) {
+  for (const changedSwagger of existingChangedFiles.filter(swagger)) {
     const service = getService(changedSwagger);
     const swaggerSet = await specModels.get(service)!.getAffectedSwaggers(resolve(rootPath, changedSwagger));
     for (const swaggerEntry of swaggerSet) {

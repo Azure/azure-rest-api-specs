@@ -5,6 +5,7 @@ import {
   getService,
   reconcileChangedFilesAndTags,
   getChangedSwaggers,
+  buildState,
 } from "../src/processChanges.js";
 
 import { isWindows } from "./test-util.js";
@@ -140,5 +141,52 @@ describe("getChangedSwaggers", () => {
         "specification/service1/changed-dependency.json",
       ]),
     );
+  });
+});
+
+describe("buildState", () => {
+  test("returns output for a swagger edited in place", async () => {
+    const actual = await buildState(
+      ["specification/edit-in-place/data-plane/swagger.json"],
+      "test/fixtures/buildState/",
+    );
+
+    expect(actual).toMatchInlineSnapshot(`
+      [
+        Map {
+          "specification/edit-in-place/readme.md" => [
+            "package-2022-12-01",
+          ],
+        },
+        [
+          "specification/edit-in-place/data-plane/swagger.json",
+        ],
+      ]
+    `);
+  });
+
+  test("returns output for an edited readme", async () => {
+    const actual = await buildState(
+      ["specification/edit-in-place/readme.md"],
+      "test/fixtures/buildState/",
+    );
+
+    expect(actual).toMatchInlineSnapshot(`
+      [
+        Map {
+          "specification/edit-in-place/readme.md" => [],
+        },
+        [],
+      ]
+    `);
+  });
+
+  test("does not throw if a file is missing", async () => {
+    expect(() =>
+      buildState(
+        ["specification/edit-in-place/data-plane/does-not-exist.json"],
+        "test/fixtures/buildState/",
+      ),
+    ).not.toThrow();
   });
 });
