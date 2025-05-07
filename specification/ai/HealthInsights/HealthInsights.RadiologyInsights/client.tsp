@@ -159,4 +159,3 @@ interface RadiologyInsightsClient {
 @@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK_OBSERVED_AGE, "TenYearChdRiskObservedAge", "csharp");
 @@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK_ARTERIAL_AGE, "TenYearChdRiskArterialAge", "csharp");
 @@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.FRAX_SCORE, "FraxScore", "csharp");
-
