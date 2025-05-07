@@ -24,7 +24,7 @@ namespace Azure.AI {
 
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
 @useAuth(
-  BearerAuth | OAuth2Auth<[
+  OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
