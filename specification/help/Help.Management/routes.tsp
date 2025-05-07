@@ -21,7 +21,7 @@ interface CheckNameAvailabilityOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CheckNameAvailability_CheckAvailability")
-  @route("/{scope}/providers/Microsoft.Help/checkNameAvailability")
+  @route("/{+scope}/providers/Microsoft.Help/checkNameAvailability")
   @post
   checkAvailability(
     ...ApiVersionParameter,
@@ -29,8 +29,7 @@ interface CheckNameAvailabilityOperationGroup {
     /**
      * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
      */
-    @path
-    scope: string,
+    ...ScopeParameter,
 
     /**
      * The required parameters for availability check.
