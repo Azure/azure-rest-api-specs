@@ -1,0 +1,2150 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RecoveryServicesClient",
+    "version": "2025-02-01",
+    "description": "Recovery Services Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.RecoveryServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/capabilities": {
+      "post": {
+        "operationId": "RecoveryServices_Capabilities",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceCapabilities"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Capabilities for Microsoft.RecoveryServices/Vaults": {
+            "$ref": "./examples/Capabilities.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability": {
+      "post": {
+        "operationId": "RecoveryServices_CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Availability status of Resource Name when no resource with same name, type and subscription exists, nor has been deleted within last 24 hours": {
+            "$ref": "./examples/CheckNameAvailability_Available.json"
+          },
+          "Availability status of Resource Name when resource with same name, type and subscription exists": {
+            "$ref": "./examples/CheckNameAvailability_NotAvailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
+      "get": {
+        "operationId": "Vaults_ListBySubscriptionId",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VaultList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Recovery Services Resources in SubscriptionId": {
+            "$ref": "./examples/ListBySubscriptionIds.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}": {
+      "get": {
+        "operationId": "Vaults_Get",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Recovery Services Resource": {
+            "$ref": "./examples/GETVault.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Vaults_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-authorization-auxiliary",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "vault",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Recovery Services vault": {
+            "$ref": "./examples/PUTVault.json"
+          },
+          "Create or Update Vault With Monitoring Setting": {
+            "$ref": "./examples/PUTVault_WithMonitoringSettings.json"
+          },
+          "Create or Update Vault With Redundancy Setting": {
+            "$ref": "./examples/PUTVault_WithRedundancySettings.json"
+          },
+          "Create or Update Vault performing critical operation With MUA": {
+            "$ref": "./examples/PUTVault_ResourceGuardEnabled.json"
+          },
+          "Create or Update Vault with CustomerManagedKeys": {
+            "$ref": "./examples/PUTVault_WithCMK.json"
+          },
+          "Create or Update Vault with Source scan configuration": {
+            "$ref": "./examples/PUTVault_WithSourceScanConfiguration.json"
+          },
+          "Create or Update Vault with User Assigned Identity": {
+            "$ref": "./examples/PUTVault_WithUserAssignedIdentity.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Vaults_Update",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-authorization-auxiliary",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "vault",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchVault"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Resource": {
+            "$ref": "./examples/PATCHVault.json"
+          },
+          "Update Resource With CustomerManagedKeys": {
+            "$ref": "./examples/PATCHVault_WithCMK.json"
+          },
+          "Update Resource With CustomerManagedKeys2": {
+            "$ref": "./examples/PatchVault_WithCMK2.json"
+          },
+          "Update Resource With CustomerManagedKeys3": {
+            "$ref": "./examples/PATCHVault_WithCMK3.json"
+          },
+          "Update Resource With User Assigned Identity": {
+            "$ref": "./examples/PATCHVault_WithUserAssignedIdentity.json"
+          },
+          "Update Vault With Monitoring Setting": {
+            "$ref": "./examples/PATCHVault_WithMonitoringSettings.json"
+          },
+          "Update Vault With Redundancy Setting": {
+            "$ref": "./examples/PATCHVault_WithRedundancySettings.json"
+          },
+          "Update Vault With Source scan configuration": {
+            "$ref": "./examples/PATCHVault_WithSourceScanConfiguration.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Vaults_Delete",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Recovery Services Vault": {
+            "$ref": "./examples/DeleteVault.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/{certificateName}/{certificateName}": {
+      "put": {
+        "operationId": "VaultCertificates_Create",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VaultCertificateResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Download vault credential file": {
+            "$ref": "./examples/PUTVaultCred.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/{identityName}/{identityName}": {
+      "delete": {
+        "operationId": "RegisteredIdentities_Delete",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "identityName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete registered Identity": {
+            "$ref": "./examples/DeleteRegisteredIdentities.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/{operationId}/{operationId}": {
+      "get": {
+        "operationId": "GetOperationStatus",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation Status": {
+            "$ref": "./examples/GetOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/extendedInformation/vaultExtendedInfo": {
+      "get": {
+        "operationId": "VaultExtendedInfo_Get",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VaultExtendedInfoResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExtendedInfo of Resource": {
+            "$ref": "./examples/GETVaultExtendedInfo.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VaultExtendedInfo_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceResourceExtendedInfoDetails",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultExtendedInfoResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VaultExtendedInfoResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "VaultExtendedInfo_Update",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceResourceExtendedInfoDetails",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultExtendedInfoResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VaultExtendedInfoResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PATCH ExtendedInfo of Resource": {
+            "$ref": "./examples/UpdateVaultExtendedInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "GetOperationResult",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation Result": {
+            "$ref": "./examples/GetOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_List",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResources"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List PrivateLinkResources": {
+            "$ref": "./examples/ListPrivateLinkResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get PrivateLinkResource": {
+            "$ref": "./examples/GetPrivateLinkResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/replicationUsages": {
+      "get": {
+        "operationId": "ReplicationUsages_List",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ReplicationUsageList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets Replication usages of vault": {
+            "$ref": "./examples/ListReplicationUsages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/usages": {
+      "get": {
+        "operationId": "Usages_ListByVaults",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VaultUsageList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets vault usages": {
+            "$ref": "./examples/ListUsages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/vaults": {
+      "get": {
+        "operationId": "Vaults_ListByResourceGroup",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VaultList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Recovery Services Resources in ResourceGroup": {
+            "$ref": "./examples/ListResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AssociatedIdentity": {
+      "type": "object",
+      "properties": {
+        "operationIdentityType": {
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentity": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureMonitorAlertSettings": {
+      "type": "object",
+      "properties": {
+        "alertsForAllJobFailures": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
+        },
+        "alertsForAllReplicationIssues": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
+        },
+        "alertsForAllFailoverIssues": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CapabilitiesProperties": {
+      "type": "object",
+      "properties": {
+        "dnsZones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DNSZone"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CapabilitiesResponse": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilitiesResponseProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCapabilitiesBase"
+        }
+      ]
+    },
+    "CapabilitiesResponseProperties": {
+      "type": "object",
+      "properties": {
+        "dnsZones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DNSZoneResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CertificateRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawCertificateData"
+        }
+      }
+    },
+    "CheckNameAvailabilityParameters": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ClassicAlertSettings": {
+      "type": "object",
+      "properties": {
+        "alertsForCriticalOperations": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
+        },
+        "emailNotificationsForSiteRecovery": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CmkKekIdentity": {
+      "type": "object",
+      "properties": {
+        "useSystemAssignedIdentity": {
+          "type": "boolean"
+        },
+        "userAssignedIdentity": {
+          "type": "string"
+        }
+      }
+    },
+    "CmkKeyVaultProperties": {
+      "type": "object",
+      "properties": {
+        "keyUri": {
+          "type": "string"
+        }
+      }
+    },
+    "CrossSubscriptionRestoreSettings": {
+      "type": "object",
+      "properties": {
+        "crossSubscriptionRestoreState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "PermanentlyDisabled"
+          ],
+          "x-ms-enum": {
+            "name": "CrossSubscriptionRestoreState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DNSZone": {
+      "type": "object",
+      "properties": {
+        "subResource": {
+          "type": "string",
+          "enum": [
+            "AzureBackup",
+            "AzureBackup_secondary",
+            "AzureSiteRecovery"
+          ],
+          "x-ms-enum": {
+            "name": "VaultSubResourceType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DNSZoneResponse": {
+      "type": "object",
+      "properties": {
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DNSZone"
+        }
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "additionalInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "code": {
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IdentityData": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "None",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ImmutabilitySettings": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Unlocked",
+            "Locked"
+          ],
+          "x-ms-enum": {
+            "name": "ImmutabilityState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "JobsSummary": {
+      "type": "object",
+      "properties": {
+        "failedJobs": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "suspendedJobs": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "inProgressJobs": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "MonitoringSettings": {
+      "type": "object",
+      "properties": {
+        "azureMonitorAlertSettings": {
+          "$ref": "#/definitions/AzureMonitorAlertSettings"
+        },
+        "classicAlertSettings": {
+          "$ref": "#/definitions/ClassicAlertSettings"
+        }
+      }
+    },
+    "MonitoringSummary": {
+      "type": "object",
+      "properties": {
+        "unHealthyVmCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unHealthyProviderCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "deprecatedProviderCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "supportedProviderCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unsupportedProviderCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "NameInfo": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "localizedValue": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationResource": {
+      "type": "object",
+      "properties": {
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "PatchTrackedResource": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "PatchVault": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchTrackedResource"
+        }
+      ]
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Deleting",
+            "Failed",
+            "Pending"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "readOnly": true
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultSubResourceType"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionVaultProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnection",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResources": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateEndpointConnectionStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "actionsRequired": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RawCertificateData": {
+      "type": "object",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "ACS",
+            "AAD",
+            "AccessControlService",
+            "AzureActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": true
+          }
+        },
+        "certificate": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "ReplicationUsage": {
+      "type": "object",
+      "properties": {
+        "monitoringSummary": {
+          "$ref": "#/definitions/MonitoringSummary"
+        },
+        "jobsSummary": {
+          "$ref": "#/definitions/JobsSummary"
+        },
+        "protectedItemCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "recoveryPlanCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "registeredServersCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "recoveryServicesProviderAuthType": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ReplicationUsageList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationUsage"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceCapabilities": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilitiesProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCapabilitiesBase"
+        }
+      ]
+    },
+    "ResourceCapabilitiesBase": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ResourceCertificateAndAadDetails": {
+      "type": "object",
+      "properties": {
+        "aadAuthority": {
+          "type": "string"
+        },
+        "aadTenantId": {
+          "type": "string"
+        },
+        "servicePrincipalClientId": {
+          "type": "string"
+        },
+        "servicePrincipalObjectId": {
+          "type": "string"
+        },
+        "azureManagementEndpointAudience": {
+          "type": "string"
+        },
+        "serviceResourceId": {
+          "type": "string"
+        },
+        "aadAudience": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "aadAuthority",
+        "aadTenantId",
+        "azureManagementEndpointAudience",
+        "servicePrincipalClientId",
+        "servicePrincipalObjectId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCertificateDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureActiveDirectory"
+    },
+    "ResourceCertificateAndAcsDetails": {
+      "type": "object",
+      "properties": {
+        "globalAcsNamespace": {
+          "type": "string"
+        },
+        "globalAcsHostName": {
+          "type": "string"
+        },
+        "globalAcsRPRealm": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "globalAcsHostName",
+        "globalAcsNamespace",
+        "globalAcsRPRealm"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCertificateDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessControlService"
+    },
+    "ResourceCertificateDetails": {
+      "type": "object",
+      "properties": {
+        "authType": {
+          "type": "string"
+        },
+        "certificate": {
+          "type": "string",
+          "format": "byte"
+        },
+        "friendlyName": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "thumbprint": {
+          "type": "string"
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "validTo": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "discriminator": "authType",
+      "required": [
+        "authType"
+      ]
+    },
+    "RestoreSettings": {
+      "type": "object",
+      "properties": {
+        "crossSubscriptionRestoreSettings": {
+          "$ref": "#/definitions/CrossSubscriptionRestoreSettings"
+        }
+      }
+    },
+    "SecuritySettings": {
+      "type": "object",
+      "properties": {
+        "immutabilitySettings": {
+          "$ref": "#/definitions/ImmutabilitySettings"
+        },
+        "softDeleteSettings": {
+          "$ref": "#/definitions/SoftDeleteSettings"
+        },
+        "multiUserAuthorization": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "MultiUserAuthorization",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "sourceScanConfiguration": {
+          "$ref": "#/definitions/SourceScanConfiguration"
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "RS0"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string"
+        },
+        "family": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "capacity": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SoftDeleteSettings": {
+      "type": "object",
+      "properties": {
+        "softDeleteState": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled",
+            "AlwaysON"
+          ],
+          "x-ms-enum": {
+            "name": "SoftDeleteState",
+            "modelAsString": true
+          }
+        },
+        "softDeleteRetentionPeriodInDays": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enhancedSecurityState": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled",
+            "AlwaysON"
+          ],
+          "x-ms-enum": {
+            "name": "EnhancedSecurityState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SourceScanConfiguration": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          }
+        },
+        "sourceScanIdentity": {
+          "$ref": "#/definitions/AssociatedIdentity"
+        }
+      }
+    },
+    "UpgradeDetails": {
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastUpdatedTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Upgraded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "VaultUpgradeState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true
+        },
+        "triggerType": {
+          "type": "string",
+          "enum": [
+            "UserTriggered",
+            "ForcedUpgrade"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "upgradedResourceId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "previousResourceId": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UserIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Vault": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultProperties",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityData"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VaultCertificateResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ResourceCertificateDetails"
+        }
+      }
+    },
+    "VaultExtendedInfo": {
+      "type": "object",
+      "properties": {
+        "integrityKey": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "type": "string"
+        },
+        "encryptionKeyThumbprint": {
+          "type": "string"
+        },
+        "algorithm": {
+          "type": "string"
+        }
+      }
+    },
+    "VaultExtendedInfoResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultExtendedInfo",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VaultList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Vault"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VaultProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "upgradeDetails": {
+          "$ref": "#/definitions/UpgradeDetails"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionVaultProperties"
+          },
+          "readOnly": true
+        },
+        "privateEndpointStateForBackup": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "VaultPrivateEndpointState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "privateEndpointStateForSiteRecovery": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "VaultPrivateEndpointState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "encryption": {
+          "$ref": "#/definitions/VaultPropertiesEncryption"
+        },
+        "moveDetails": {
+          "$ref": "#/definitions/VaultPropertiesMoveDetails"
+        },
+        "moveState": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "PrepareFailed",
+            "CommitFailed",
+            "PrepareTimedout",
+            "CommitTimedout",
+            "MoveSucceeded",
+            "Failure",
+            "CriticalFailure",
+            "PartialSuccess"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceMoveState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "backupStorageVersion": {
+          "type": "string",
+          "enum": [
+            "V1",
+            "V2",
+            "Unassigned"
+          ],
+          "x-ms-enum": {
+            "name": "BackupStorageVersion",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "monitoringSettings": {
+          "$ref": "#/definitions/MonitoringSettings"
+        },
+        "restoreSettings": {
+          "$ref": "#/definitions/RestoreSettings"
+        },
+        "redundancySettings": {
+          "$ref": "#/definitions/VaultPropertiesRedundancySettings"
+        },
+        "securitySettings": {
+          "$ref": "#/definitions/SecuritySettings"
+        },
+        "secureScore": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Minimum",
+            "Adequate",
+            "Maximum"
+          ],
+          "x-ms-enum": {
+            "name": "SecureScoreLevel",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "bcdrSecurityLevel": {
+          "type": "string",
+          "enum": [
+            "Poor",
+            "Fair",
+            "Good",
+            "Excellent"
+          ],
+          "x-ms-enum": {
+            "name": "BcdrSecurityLevel",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VaultPropertiesEncryption": {
+      "type": "object",
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/CmkKeyVaultProperties"
+        },
+        "kekIdentity": {
+          "$ref": "#/definitions/CmkKekIdentity"
+        },
+        "infrastructureEncryption": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InfrastructureEncryptionState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VaultPropertiesMoveDetails": {
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "completionTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "targetResourceId": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VaultPropertiesRedundancySettings": {
+      "type": "object",
+      "properties": {
+        "standardTierStorageRedundancy": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "LocallyRedundant",
+            "GeoRedundant",
+            "ZoneRedundant"
+          ],
+          "x-ms-enum": {
+            "name": "StandardTierStorageRedundancy",
+            "modelAsString": true
+          }
+        },
+        "crossRegionRestore": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "CrossRegionRestore",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VaultUsage": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond"
+          ],
+          "x-ms-enum": {
+            "name": "UsagesUnit",
+            "modelAsString": true
+          }
+        },
+        "quotaPeriod": {
+          "type": "string"
+        },
+        "nextResetTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "$ref": "#/definitions/NameInfo"
+        }
+      }
+    },
+    "VaultUsageList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultUsage"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
