@@ -10,4 +10,3 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
-@@clientName(Versions.v2024_08_07, "V20250401Preview", "javascript");
