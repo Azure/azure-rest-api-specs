@@ -16,12 +16,12 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-
 ```yaml $(python)
 multiapi: true
 default-api-version: "2023-01-31"
 clear-output-folder: true
 batch:
+  - tag: package-preview-2025-01-31
   - tag: package-2023-01-31
   - tag: package-preview-2022-01
   - tag: package-preview-2021-09-30
@@ -32,6 +32,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/
 perform-load: false
+```
+
+### Tag: package-preview-2025-01-31 and python
+
+These settings apply only when `--tag=package-preview-2025-01-31 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2025-01-31'
+namespace: azure.mgmt.msi.v2025_01_31_preview
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-msi/azure/mgmt/msi/v2025_01_31_preview
 ```
 
 ### Tag: package-2023-01-31 and python
