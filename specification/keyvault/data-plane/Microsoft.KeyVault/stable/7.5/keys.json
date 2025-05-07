@@ -338,7 +338,7 @@
         }
       }
     },
-    "/keys/{key-name}/{key-version}": {
+    "/keys/{key-name}{key-version}": {
       "get": {
         "operationId": "GetKey",
         "summary": "Gets the public part of a stored key.",
@@ -359,7 +359,7 @@
             "name": "key-version",
             "in": "path",
             "description": "Adding the version parameter retrieves a specific version of a key. This URI fragment is optional. If not specified, the latest version of the key is returned.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "keyVersion"
           }
@@ -404,7 +404,7 @@
             "name": "key-version",
             "in": "path",
             "description": "The version of the key to update.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "keyVersion"
           },
@@ -435,398 +435,6 @@
         "x-ms-examples": {
           "Update key": {
             "$ref": "./examples/UpdateKey-example.json"
-          }
-        }
-      }
-    },
-    "/keys/{key-name}/{key-version}/decrypt": {
-      "post": {
-        "operationId": "decrypt",
-        "summary": "Decrypts a single block of encrypted data.",
-        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission. Microsoft recommends not to use CBC algorithms for decryption without first ensuring the integrity of the ciphertext using an HMAC, for example. See https://learn.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode for more information.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "key-name",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyName"
-          },
-          {
-            "name": "key-version",
-            "in": "path",
-            "description": "The version of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyVersion"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The parameters for the decryption operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyOperationsParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/KeyOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Decrypt example": {
-            "$ref": "./examples/decrypt-example.json"
-          }
-        }
-      }
-    },
-    "/keys/{key-name}/{key-version}/encrypt": {
-      "post": {
-        "operationId": "encrypt",
-        "summary": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.",
-        "description": "The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/encrypt permission.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "key-name",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyName"
-          },
-          {
-            "name": "key-version",
-            "in": "path",
-            "description": "The version of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyVersion"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The parameters for the encryption operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyOperationsParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/KeyOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Encrypt example": {
-            "$ref": "./examples/encrypt-example.json"
-          }
-        }
-      }
-    },
-    "/keys/{key-name}/{key-version}/release": {
-      "post": {
-        "operationId": "release",
-        "summary": "Releases a key.",
-        "description": "The release key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/release permission.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "key-name",
-            "in": "path",
-            "description": "The name of the key to get.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyName"
-          },
-          {
-            "name": "key-version",
-            "in": "path",
-            "description": "Adding the version parameter retrieves a specific version of a key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyVersion"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The parameters for the key release operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyReleaseParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/KeyReleaseResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Release": {
-            "$ref": "./examples/release-example.json"
-          }
-        }
-      }
-    },
-    "/keys/{key-name}/{key-version}/sign": {
-      "post": {
-        "operationId": "sign",
-        "summary": "Creates a signature from a digest using the specified key.",
-        "description": "The SIGN operation is applicable to asymmetric and symmetric keys stored in Azure Key Vault since this operation uses the private portion of the key. This operation requires the keys/sign permission.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "key-name",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyName"
-          },
-          {
-            "name": "key-version",
-            "in": "path",
-            "description": "The version of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyVersion"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The parameters for the signing operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeySignParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/KeyOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Sign": {
-            "$ref": "./examples/sign-example.json"
-          }
-        }
-      }
-    },
-    "/keys/{key-name}/{key-version}/unwrapkey": {
-      "post": {
-        "operationId": "unwrapKey",
-        "summary": "Unwraps a symmetric key using the specified key that was initially used for wrapping that key.",
-        "description": "The UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the WRAP operation. The UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "key-name",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyName"
-          },
-          {
-            "name": "key-version",
-            "in": "path",
-            "description": "The version of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyVersion"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The parameters for the key operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyOperationsParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/KeyOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Unwrapkey": {
-            "$ref": "./examples/unwrapKey-example.json"
-          }
-        }
-      }
-    },
-    "/keys/{key-name}/{key-version}/verify": {
-      "post": {
-        "operationId": "verify",
-        "summary": "Verifies a signature using a specified key.",
-        "description": "The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault. VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault since signature verification can be performed using the public portion of the key but this operation is supported as a convenience for callers that only have a key-reference and not the public portion of the key. This operation requires the keys/verify permission.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "key-name",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyName"
-          },
-          {
-            "name": "key-version",
-            "in": "path",
-            "description": "The version of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyVersion"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The parameters for verify operations.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyVerifyParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/KeyVerifyResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Verify": {
-            "$ref": "./examples/verify-example.json"
-          }
-        }
-      }
-    },
-    "/keys/{key-name}/{key-version}/wrapkey": {
-      "post": {
-        "operationId": "wrapKey",
-        "summary": "Wraps a symmetric key using a specified key.",
-        "description": "The WRAP operation supports encryption of a symmetric key using a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/wrapKey permission.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "key-name",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyName"
-          },
-          {
-            "name": "key-version",
-            "in": "path",
-            "description": "The version of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyVersion"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The parameters for wrap operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyOperationsParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/KeyOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Wrapkey": {
-            "$ref": "./examples/wrapKey-example.json"
           }
         }
       }
@@ -915,6 +523,174 @@
         "x-ms-examples": {
           "Create key": {
             "$ref": "./examples/CreateKey-example.json"
+          }
+        }
+      }
+    },
+    "/keys/{key-name}{key-version}/decrypt": {
+      "post": {
+        "operationId": "decrypt",
+        "summary": "Decrypts a single block of encrypted data.",
+        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission. Microsoft recommends not to use CBC algorithms for decryption without first ensuring the integrity of the ciphertext using an HMAC, for example. See https://learn.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode for more information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key-name",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyName"
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "description": "The version of the key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for the decryption operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyOperationsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KeyOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Decrypt example": {
+            "$ref": "./examples/decrypt-example.json"
+          }
+        }
+      }
+    },
+    "/keys/{key-name}{key-version}/encrypt": {
+      "post": {
+        "operationId": "encrypt",
+        "summary": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.",
+        "description": "The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/encrypt permission.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key-name",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyName"
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "description": "The version of the key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for the encryption operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyOperationsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KeyOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Encrypt example": {
+            "$ref": "./examples/encrypt-example.json"
+          }
+        }
+      }
+    },
+    "/keys/{key-name}{key-version}/release": {
+      "post": {
+        "operationId": "release",
+        "summary": "Releases a key.",
+        "description": "The release key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/release permission.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key-name",
+            "in": "path",
+            "description": "The name of the key to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyName"
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "description": "Adding the version parameter retrieves a specific version of a key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for the key release operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyReleaseParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KeyReleaseResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Release": {
+            "$ref": "./examples/release-example.json"
           }
         }
       }
@@ -1044,6 +820,174 @@
         }
       }
     },
+    "/keys/{key-name}{key-version}/sign": {
+      "post": {
+        "operationId": "sign",
+        "summary": "Creates a signature from a digest using the specified key.",
+        "description": "The SIGN operation is applicable to asymmetric and symmetric keys stored in Azure Key Vault since this operation uses the private portion of the key. This operation requires the keys/sign permission.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key-name",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyName"
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "description": "The version of the key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for the signing operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeySignParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KeyOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sign": {
+            "$ref": "./examples/sign-example.json"
+          }
+        }
+      }
+    },
+    "/keys/{key-name}{key-version}/unwrapkey": {
+      "post": {
+        "operationId": "unwrapKey",
+        "summary": "Unwraps a symmetric key using the specified key that was initially used for wrapping that key.",
+        "description": "The UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the WRAP operation. The UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key-name",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyName"
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "description": "The version of the key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for the key operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyOperationsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KeyOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unwrapkey": {
+            "$ref": "./examples/unwrapKey-example.json"
+          }
+        }
+      }
+    },
+    "/keys/{key-name}{key-version}/verify": {
+      "post": {
+        "operationId": "verify",
+        "summary": "Verifies a signature using a specified key.",
+        "description": "The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault. VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault since signature verification can be performed using the public portion of the key but this operation is supported as a convenience for callers that only have a key-reference and not the public portion of the key. This operation requires the keys/verify permission.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key-name",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyName"
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "description": "The version of the key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for verify operations.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyVerifyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KeyVerifyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Verify": {
+            "$ref": "./examples/verify-example.json"
+          }
+        }
+      }
+    },
     "/keys/{key-name}/versions": {
       "get": {
         "operationId": "GetKeyVersions",
@@ -1093,6 +1037,62 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/keys/{key-name}{key-version}/wrapkey": {
+      "post": {
+        "operationId": "wrapKey",
+        "summary": "Wraps a symmetric key using a specified key.",
+        "description": "The WRAP operation supports encryption of a symmetric key using a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/wrapKey permission.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key-name",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyName"
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "description": "The version of the key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for wrap operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyOperationsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KeyOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Wrapkey": {
+            "$ref": "./examples/wrapKey-example.json"
+          }
         }
       }
     },
@@ -1389,6 +1389,7 @@
     },
     "Error": {
       "type": "object",
+      "description": "The key vault server error.",
       "properties": {
         "code": {
           "type": "string",
@@ -1401,13 +1402,12 @@
           "readOnly": true
         },
         "innererror": {
-          "$ref": "#/definitions/Error",
+          "$ref": "#/definitions/NullableError",
           "description": "The key vault server error.",
           "readOnly": true,
           "x-ms-client-name": "innerError"
         }
-      },
-      "x-nullable": true
+      }
     },
     "GetRandomBytesRequest": {
       "type": "object",
@@ -2404,7 +2404,7 @@
       "description": "The key vault error exception.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error",
+          "$ref": "#/definitions/NullableError",
           "description": "The key vault server error.",
           "readOnly": true
         }
@@ -2485,6 +2485,15 @@
           "description": "The type of the action. The value should be compared case-insensitively."
         }
       }
+    },
+    "NullableError": {
+      "type": "object",
+      "x-nullable": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/Error"
+        }
+      ]
     },
     "RandomBytes": {
       "type": "object",

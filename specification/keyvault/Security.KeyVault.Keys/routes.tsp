@@ -115,7 +115,7 @@ op deleteKey is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.")
-@route("/keys/{key-name}/{key-version}")
+@route("/keys/{key-name}{/key-version}")
 @patch
 op updateKey is KeyVaultOperation<
   {
@@ -131,7 +131,7 @@ op updateKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters of the key to update.
@@ -149,7 +149,7 @@ op updateKey is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the public part of a stored key.")
-@route("/keys/{key-name}/{key-version}")
+@route("/keys/{key-name}{/key-version}")
 @get
 op getKey is KeyVaultOperation<
   {
@@ -165,7 +165,7 @@ op getKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
   },
   KeyBundle
 >;
@@ -263,7 +263,7 @@ op restoreKey is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("encrypt")
 @summary("Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.")
-@route("/keys/{key-name}/{key-version}/encrypt")
+@route("/keys/{key-name}{/key-version}/encrypt")
 @post
 op encrypt is KeyVaultOperation<
   {
@@ -279,7 +279,7 @@ op encrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the encryption operation.
@@ -299,7 +299,7 @@ op encrypt is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("decrypt")
 @summary("Decrypts a single block of encrypted data.")
-@route("/keys/{key-name}/{key-version}/decrypt")
+@route("/keys/{key-name}{/key-version}/decrypt")
 @post
 op decrypt is KeyVaultOperation<
   {
@@ -315,7 +315,7 @@ op decrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the decryption operation.
@@ -335,7 +335,7 @@ op decrypt is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("sign")
 @summary("Creates a signature from a digest using the specified key.")
-@route("/keys/{key-name}/{key-version}/sign")
+@route("/keys/{key-name}{/key-version}/sign")
 @post
 op sign is KeyVaultOperation<
   {
@@ -351,7 +351,7 @@ op sign is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the signing operation.
@@ -371,7 +371,7 @@ op sign is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("verify")
 @summary("Verifies a signature using a specified key.")
-@route("/keys/{key-name}/{key-version}/verify")
+@route("/keys/{key-name}{/key-version}/verify")
 @post
 op verify is KeyVaultOperation<
   {
@@ -387,7 +387,7 @@ op verify is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for verify operations.
@@ -407,7 +407,7 @@ op verify is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("wrapKey")
 @summary("Wraps a symmetric key using a specified key.")
-@route("/keys/{key-name}/{key-version}/wrapkey")
+@route("/keys/{key-name}{/key-version}/wrapkey")
 @post
 op wrapKey is KeyVaultOperation<
   {
@@ -423,7 +423,7 @@ op wrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for wrap operation.
@@ -443,7 +443,7 @@ op wrapKey is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("unwrapKey")
 @summary("Unwraps a symmetric key using the specified key that was initially used for wrapping that key.")
-@route("/keys/{key-name}/{key-version}/unwrapkey")
+@route("/keys/{key-name}{/key-version}/unwrapkey")
 @post
 op unwrapKey is KeyVaultOperation<
   {
@@ -459,7 +459,7 @@ op unwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the key operation.
@@ -479,7 +479,7 @@ op unwrapKey is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("release")
 @summary("Releases a key.")
-@route("/keys/{key-name}/{key-version}/release")
+@route("/keys/{key-name}{/key-version}/release")
 @post
 op release is KeyVaultOperation<
   {
@@ -495,7 +495,7 @@ op release is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the key release operation.
@@ -656,7 +656,7 @@ op getRandomBytes is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
 @summary("Gets the public part of a stored key along with its attestation blob.")
-@route("/keys/{key-name}/{key-version}/attestation")
+@route("/keys/{key-name}{/key-version}/attestation")
 @get
 op getKeyAttestation is KeyVaultOperation<
   {
@@ -672,7 +672,7 @@ op getKeyAttestation is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
   },
   /**
    * A key bundle containing the key, its attributes and attestation blob.
