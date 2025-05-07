@@ -17,7 +17,7 @@ vi.mock("../../src/utils.js", async () => {
 
 function normalizeResultItem(item: ChangedSpecs): ChangedSpecs {
   return {
-    specs: item.specs.map(normalizePath),
+    specs: item.specs.map(path => normalizePath(path)),
     ...(item.readmeMd ? { readmeMd: normalizePath(item.readmeMd) } : {}),
     ...(item.typespecProject ? { typespecProject: normalizePath(item.typespecProject) } : {}),
   };

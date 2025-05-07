@@ -26,7 +26,9 @@ describe("commands.ts", () => {
 
   describe("setPipelineVariables", () => {
     test("should set pipeline variables correctly", () => {
-      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {});
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
 
       setPipelineVariables(
         "sdk/security/keyvault/azcertificates",
@@ -188,8 +190,12 @@ describe("commands.ts", () => {
         key2: { errors: ["error2"], warnings: [] },
       };
       vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockLogContent));
-      vi.spyOn(log, "logMessage").mockImplementation(() => {});
-      vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {});
+      vi.spyOn(log, "logMessage").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+      vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
 
       logIssuesToPipeline("/log/path", "spec config");
 
@@ -206,12 +212,16 @@ describe("commands.ts", () => {
       const mockLogPath = "/log/path";
       const mockLogError = "ENOENT: no such file";
       vi.spyOn(fs, "readFileSync").mockImplementationOnce(() => {
-        throw new Error(`${mockLogError}`);
+        throw new Error(mockLogError);
       });
-      vi.spyOn(log, "logMessage").mockImplementation(() => {});
-      vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {});
+      vi.spyOn(log, "logMessage").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+      vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
 
-      expect(() => logIssuesToPipeline("/log/path", "spec config")).toThrow(
+      expect(() => { logIssuesToPipeline("/log/path", "spec config"); }).toThrow(
         `Runner: error reading log at ${mockLogPath}:Error: ${mockLogError}`,
       );
       expect(log.logMessage).not.toHaveBeenCalled();
@@ -259,8 +269,12 @@ describe("commands.ts", () => {
     test("should generate artifact successfully", () => {
       vi.spyOn(fs, "existsSync").mockReturnValue(false);
       vi.spyOn(fs, "mkdirSync").mockImplementation(() => undefined);
-      vi.spyOn(fs, "writeFileSync").mockImplementation(() => {});
-      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {});
+      vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
 
       const mockCommandInput = {
         workingFolder: "/working/folder",
@@ -322,8 +336,12 @@ describe("commands.ts", () => {
       vi.spyOn(fs, "mkdirSync").mockImplementation(() => {
         throw new Error("mkdir failed");
       });
-      vi.spyOn(log, "logMessage").mockImplementation(() => {});
-      vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {});
+      vi.spyOn(log, "logMessage").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+      vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
 
       const mockCommandInput = {
         workingFolder: "/working/folder",

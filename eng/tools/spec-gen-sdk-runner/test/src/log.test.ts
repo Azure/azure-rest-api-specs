@@ -8,11 +8,17 @@ import {
   setVsoVariable,
 } from "../../src/log.js";
 
-const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+const logSpy = vi.spyOn(console, "log").mockImplementation(() => {
+  // mock implementation intentionally left blank
+});
 
-const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {
+  // mock implementation intentionally left blank
+});
 
-const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {
+  // mock implementation intentionally left blank
+});
 
 describe("logMessage", () => {
   beforeEach(() => {

@@ -452,5 +452,5 @@ export function objectToMap<T>(obj: Record<string, T>): Map<string, T> {
  * @returns
  */
 export function normalizePath(p: string): string {
-  return p.replace(/\\/g, "/").replace(/\/+/g, "/");
+  return p.replaceAll('\\', "/").replaceAll(/\/+/g, "/");
 }

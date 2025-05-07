@@ -12,10 +12,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { LogLevel } from "../../src/log.js";
 
-function getNormalizedFsCalls(mockFn: Mock): any[][] {
-  return mockFn.mock.calls.map((args: any[]) => {
+function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
+  return mockFn.mock.calls.map((args: unknown[]) => {
     const [filePath, ...rest] = args
-    return [String(filePath).replace(/\\/g, '/'), ...rest]
+    return [String(filePath).replaceAll('\\', '/'), ...rest]
   })
 }
 
@@ -52,10 +52,16 @@ describe("generateSdkForSingleSpec", () => {
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
     vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
-    vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {});
-    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
-    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     vi.spyOn(fs, "readFileSync").mockReturnValue(
       JSON.stringify({
@@ -63,7 +69,9 @@ describe("generateSdkForSingleSpec", () => {
         packages: [{ packageName: "test-package", installationInstructions: "install" }],
       }),
     );
-    vi.spyOn(log, "setVsoVariable").mockImplementation(() => {});
+    vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValueOnce(undefined);
 
     const result = await generateSdkForSingleSpec();
@@ -99,10 +107,16 @@ describe("generateSdkForSingleSpec", () => {
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
-    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
-    vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
     vi.spyOn(utils, "runSpecGenSdkCommand").mockRejectedValue(new Error("Command failed"));
-    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     const result = await generateSdkForSingleSpec();
 
@@ -132,12 +146,18 @@ describe("generateSdkForSingleSpec", () => {
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
-    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
-    vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
     vi.spyOn(commandHelpers, "getExecutionReport").mockImplementation(() => {
       throw new Error("Failed to read execution report");
     });
-    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     const statusCode = await generateSdkForSingleSpec();
 
@@ -187,8 +207,12 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
     vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue([false, ""]);
     vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
-    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
-    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     const statusCode = await generateSdkForSpecPr();
 
@@ -224,7 +248,9 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
     vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
-    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     const statusCode = await generateSdkForSpecPr();
 
@@ -266,8 +292,12 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(utils, "runSpecGenSdkCommand").mockRejectedValue(new Error("Command failed"));
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
     vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
-    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
-    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     const statusCode = await generateSdkForSpecPr();
 
@@ -299,13 +329,17 @@ describe("generateSdkForSpecPr", () => {
       },
     ];
 
-    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {});
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
-    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
     vi.spyOn(commandHelpers, "getExecutionReport").mockImplementation(() => {
       throw new Error("Failed to read execution report");
     });
@@ -343,9 +377,15 @@ describe("generateSdkForBatchSpecs", () => {
     vi.spyOn(utils, "runSpecGenSdkCommand").mockImplementation(() => Promise.resolve());
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
     vi.spyOn(fs, "existsSync").mockReturnValue(false);
-    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {});
-    vi.spyOn(log, "logMessage").mockImplementation(() => {});
-    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {});
+    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     const code = await generateSdkForBatchSpecs(mockBatchType);
     expect(commandHelpers.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
@@ -388,9 +428,15 @@ describe("generateSdkForBatchSpecs", () => {
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockExecutionReport));
     vi.spyOn(fs, "existsSync").mockReturnValue(false);
-    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {});
-    vi.spyOn(log, "logMessage").mockImplementation(() => {});
-    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {});
+    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     const result = await generateSdkForBatchSpecs(mockBatchType);
     expect(result).toBe(0);
@@ -434,8 +480,12 @@ describe("generateSdkForBatchSpecs", () => {
       .mockResolvedValueOnce(undefined);
     vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockExecutionReport));
     vi.spyOn(fs, "existsSync").mockReturnValue(false);
-    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {});
-    const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {});
+    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     const result = await generateSdkForBatchSpecs(mockBatchType);
 
