@@ -1,0 +1,50 @@
+{
+  "title": "GoalResources_Create_MaximumSet",
+  "operationId": "GoalResources_Create",
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "goalAssignmentName": "ga1",
+    "goalResourceName": "gr1",
+    "properties": {
+      "properties": {
+        "resourceArmId": "ArmIdOfResource",
+        "excludedFromHighAvailabilityGoals": "Excluded",
+        "manuallyAttestedForHighAvailability": "ManuallyAttested",
+        "excludedFromDisasterRecoveryGoals": "Excluded",
+        "manuallyAttestedForDisasterRecovery": "ManuallyAttested"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "resourceArmId": "ArmIdOfResource",
+          "excludedFromHighAvailabilityGoals": "Excluded",
+          "manuallyAttestedForHighAvailability": "ManuallyAttested",
+          "excludedFromDisasterRecoveryGoals": "Excluded",
+          "manuallyAttestedForDisasterRecovery": "ManuallyAttested",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1/goalResources/gr1",
+        "name": "gr1",
+        "type": "lvbclp",
+        "systemData": {
+          "createdBy": "dvnfxbuyqhvivfjddjccdtlwajfht",
+          "createdByType": "User",
+          "createdAt": "2025-02-06T15:03:42.796Z",
+          "lastModifiedBy": "lndhhaimomorael",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-02-06T15:03:42.797Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus",
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Retry-After": 100
+      }
+    }
+  }
+}
