@@ -19,6 +19,20 @@ scalar VirtualEnclaveResourceId
     }
   ]>;
 
+scalar VirtualNetworkResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks",
+    }
+  ]>;
+
+scalar SubnetResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets",
+    }
+  ]>;
+
 scalar NsgResourceId
   extends armResourceIdentifier<[
     {

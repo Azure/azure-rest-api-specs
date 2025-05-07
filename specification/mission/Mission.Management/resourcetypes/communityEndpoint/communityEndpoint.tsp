@@ -63,29 +63,6 @@ union DestinationType {
   string,
 }
 
-#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-@removed(Microsoft.Mission.Versions.v2023_11_01_preview)
-@doc("Base type for destination rules.")
-model DestinationRule {
-  @doc("Destination Rule Name.")
-  name?: string;
-
-  @doc("Destination Type.")
-  destinationType?: DestinationType;
-
-  @doc("Destination must follow the format for FQDNs if it is selected as the destination type (no IP/CIDR or full web URLs).")
-  destination: string[];
-
-  @doc("Port. Can include multiple ports separated by commas or a range indicated by a hyphen.")
-  port?: string;
-
-  @doc("Protocol. Options specified by Endpoint Protocol Enum.")
-  protocol?: CommunityEndpointProtocol[];
-
-  @doc("Transit Hub Resource Id.")
-  transitHubResourceId?: TransitHubResourceId;
-}
-
 @doc("Base type for destination rules.")
 model CommunityEndpointDestinationRule is EndpointRuleBase {
   @doc("Destination Type.")
@@ -101,19 +78,14 @@ model CommunityEndpointDestinationRule is EndpointRuleBase {
 @doc("Community Endpoint Resource properties")
 model CommunityEndpointProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
-  @added(Microsoft.Mission.Versions.v2023_11_01_preview)
-  @Azure.ResourceManager.identifiers(#[])
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  @extension("x-ms-identifiers", #[])
   @doc("Community Endpoint Rule Collection.")
   ruleCollection: CommunityEndpointDestinationRule[];
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_11_01_preview)
-  @extension("x-ms-identifiers", #["name"])
-  @doc("Destination Rule Collection.")
-  destinationRuleCollection: DestinationRule[];
-
-  @added(Microsoft.Mission.Versions.v2024_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of resource ids created by community endpoint.")
+  @visibility(Lifecycle.Read)
   resourceCollection?: string[];
 
   @doc("Provisioning State.")
@@ -124,4 +96,15 @@ model CommunityEndpointProperties {
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Whether approval is needed for the connection (True or False).")
   approvalRequired?: boolean;
+}
+
+@doc("Community Endpoint Patch properties")
+model CommunityEndpointPatchProperties is CommunityEndpointProperties;
+
+@doc("Community Endpoint Patch Resource")
+model CommunityEndpointPatchResource {
+  @doc("Community Endpoint Patch properties")
+  properties?: Update<CommunityEndpointPatchProperties>;
+
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

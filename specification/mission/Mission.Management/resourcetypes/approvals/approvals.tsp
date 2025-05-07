@@ -8,6 +8,7 @@ import "../shared/provisioningstate.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 
 @doc("Microsoft Mission Resource Provider management API.")
@@ -25,11 +26,11 @@ union ApprovalStatus {
   @doc("ApprovalStatus Type Pending")
   Pending: "Pending",
 
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("ApprovalStatus Type Deleted")
   Deleted: "Deleted",
 
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("ApprovalStatus Type Expired")
   Expired: "Expired",
 
@@ -48,21 +49,31 @@ union ActionPerformed {
 }
 
 @doc("Request Metadata for approvals request.")
-model RequestMetadata {
+model RequestMetadataProperties {
   @doc("Resource Action of the item being approved or declined.")
   resourceAction: string;
 
-  @doc("Approval status.")
-  approvalStatus?: ApprovalStatus;
-
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
-  @madeOptional(Microsoft.Mission.Versions.v2024_12_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Route name for the approval callback")
   approvalCallbackRoute?: string;
 
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Payload to be sent upon any action on approval request")
   approvalCallbackPayload?: string;
+}
+
+@doc("Request Metadata for approvals request.")
+model RequestMetadata {
+  @doc("Status of the approval. Uses ApprovalStatus enum.")
+  approvalStatus?: ApprovalStatus = ApprovalStatus.Pending;
+  ...RequestMetadataProperties;
+}
+
+@doc("Request Metadata for approvals request without default values.")
+model RequestMetadataPatch {
+  @doc("Status of the approval. Uses ApprovalStatus enum.")
+  approvalStatus?: ApprovalStatus;
+  ...RequestMetadataProperties;
 }
 
 @renamedFrom(Microsoft.Mission.Versions.v2024_12_01_preview, "Approvers")
@@ -78,8 +89,8 @@ model Approver {
   lastUpdatedAt: utcDateTime;
 }
 
-@doc("Approvals Resource Properties")
-model ApprovalProperties {
+@doc("Approvals properties.")
+model ApprovalPropertiesDef {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -90,24 +101,10 @@ model ApprovalProperties {
   @doc("Parameter for optimizing query results")
   parent2?: string;
 
-  @doc("Request metadata for the approval request.")
-  requestMetadata: RequestMetadata;
-
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @Azure.ResourceManager.identifiers(#["approverEntraId"])
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
+  @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
   @doc("List of approvers for the approval request")
   approvers?: Approver[];
-
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @Azure.ResourceManager.identifiers(#["approverEntraId"])
-  @doc("List of mandatory approvers for the approval request")
-  mandatoryApprovers?: Approver[];
-
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("Minimum number of approvers required for the approval request")
-  minimumApproversRequired?: int64;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Ticket ID for the approval request")
@@ -120,4 +117,26 @@ model ApprovalProperties {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval request state change time, time at which approval request state changed from pending to approved or rejected.")
   stateChangedAt?: utcDateTime;
+}
+
+@doc("Approvals properties with default values.")
+model ApprovalProperties {
+  @doc("Request metadata for the approval request.")
+  requestMetadata: RequestMetadata;
+
+  ...ApprovalPropertiesDef;
+}
+
+@doc("Approvals Properties without default values.")
+model ApprovalPropertiesPatch {
+  @doc("Request metadata for the approval request without default values.")
+  requestMetadata: RequestMetadataPatch;
+
+  ...ApprovalPropertiesDef;
+}
+
+@doc("Approvals properties for patching")
+model ApprovalPatchResource {
+  @doc("Approval Patch properties")
+  properties?: Update<ApprovalPropertiesPatch>;
 }

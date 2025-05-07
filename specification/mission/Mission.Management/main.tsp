@@ -11,9 +11,6 @@ import "./resourcetypes/community/community.tsp";
 import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
 import "./resourcetypes/workload/workload.tsp";
 import "./resourcetypes/catalog/catalog.tsp";
-import "./resourcetypes/endpoint/endpoint.tsp";
-import "./resourcetypes/internalConnection/internalConnection.tsp";
-import "./resourcetypes/externalConnection/externalConnection.tsp";
 import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
 import "./resourcetypes/transitHub/transitHub.tsp";
 import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
@@ -21,16 +18,17 @@ import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
 import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
 import "./version.tsp";
 import "./model.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-@armProviderNamespace("Microsoft.Mission")
-@service(#{ title: "Microsoft Mission" })
+@armProviderNamespace("Private.Mission")
+@service(#{ title: "Private Mission" })
 @versioned(Microsoft.Mission.Versions)
-@doc("Microsoft Mission Resource Provider management API.")
+@doc("Private Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
 interface Operations extends Azure.ResourceManager.Operations {}

@@ -1,0 +1,48 @@
+{
+  "title": "EnclaveEndpoints_ListBySubscription",
+  "operationId": "EnclaveEndpoints_ListBySubscription",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "73CEECEF-2C30-488E-946F-D20F414D99BA",
+    "virtualEnclaveName": "TestMyEnclave"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "ruleCollection": [
+                {
+                  "name": "54CEECEF-2C30-488E-946F-D20F414D99BA",
+                  "destination": "10.0.0.0/24",
+                  "port": "443",
+                  "protocols": [
+                    "TCP"
+                  ]
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "sampletag": "samplevalue"
+            },
+            "location": "West US",
+            "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.Mission/virtualenclaves/TestMyEnclave/enclaveendpoints/TestMyEnclaveEndpoint",
+            "name": "TestMyEnclaveEndpoint",
+            "type": "Microsoft.Mission/virtualenclaves/enclaveendpoints",
+            "systemData": {
+              "createdBy": "myAlias",
+              "createdByType": "User",
+              "createdAt": "2023-03-17T20:43:17.760Z",
+              "lastModifiedBy": "myAlias",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-03-17T20:43:17.760Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

@@ -32,7 +32,7 @@ union ExternalConnectionState {
 @doc("Describes the properties of an External Connection.")
 model ExternalConnectionProperties {
   @doc("The status of the last operation.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   @doc("The state of the externalConnection.")

@@ -1,0 +1,51 @@
+{
+  "title": "CommunityEndpoints_ListByCommunityResource",
+  "operationId": "CommunityEndpoints_ListByCommunityResource",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "73CEECEF-2C30-488E-946F-D20F414D99BA",
+    "resourceGroupName": "rgopenapi",
+    "communityName": "TestMyCommunity",
+    "communityEndpointName": "TestMyCommunityEndpoint"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "ruleCollection": [
+                {
+                  "destinationType": "FQDN",
+                  "destination": "foo.example.com",
+                  "port": "443",
+                  "protocols": [
+                    "TCP"
+                  ],
+                  "transitHubResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/testrg/providers/Microsoft.Mission/communities/TestMyCommunity/transitHubs/TestThName"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "sampletag": "samplevalue"
+            },
+            "location": "West US",
+            "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.Mission/communities/TestMyCommunity/communityendpoints/TestMyCommunityEndpoint",
+            "name": "TestMyCommunityEndpoint",
+            "type": "Microsoft.Mission/communities/communityendpoints",
+            "systemData": {
+              "createdBy": "myAlias",
+              "createdByType": "User",
+              "createdAt": "2023-03-17T20:43:17.760Z",
+              "lastModifiedBy": "myAlias",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-03-17T20:43:17.760Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

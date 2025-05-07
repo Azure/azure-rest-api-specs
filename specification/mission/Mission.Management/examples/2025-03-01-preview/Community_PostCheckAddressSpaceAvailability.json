@@ -1,0 +1,33 @@
+{
+  "operationId": "Community_CheckAddressSpaceAvailability",
+  "title": "Community_CheckAddressSpaceAvailability",
+  "parameters": {
+    "subscriptionId": "CA1CB369-DD26-4DB2-9D43-9AFEF0F22093",
+    "resourceGroupName": "rgopenapi",
+    "communityName": "TestMyCommunity",
+    "checkAddressSpaceAvailabilityRequest": {
+      "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.Mission/communities/TestMyCommunity",
+      "enclaveVirtualNetwork": {
+        "networkSize": "small",
+        "customCidrRange": "10.0.0.0/24",
+        "subnetConfigurations": [
+          {
+            "name": "test",
+            "networkPrefixSize": 26
+          }
+        ],
+        "allowSubnetCommunication": true,
+        "connectToAzureServices": true
+      }
+    },
+    "api-version": "2025-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "value": true
+      }
+    }
+  }
+}
