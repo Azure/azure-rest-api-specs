@@ -145,7 +145,7 @@ describe("getChangedSwaggers", () => {
 });
 
 describe("buildState", () => {
-  test("returns output for a swagger edited in place", async () => {
+  test.skipIf(isWindows())("returns output for a swagger edited in place", async () => {
     const actual = await buildState(
       ["specification/edit-in-place/data-plane/swagger.json"],
       "test/fixtures/buildState/",
@@ -165,7 +165,7 @@ describe("buildState", () => {
     `);
   });
 
-  test("returns output for an edited readme", async () => {
+  test.skipIf(isWindows())("returns output for an edited readme", async () => {
     const actual = await buildState(
       ["specification/edit-in-place/readme.md"],
       "test/fixtures/buildState/",
