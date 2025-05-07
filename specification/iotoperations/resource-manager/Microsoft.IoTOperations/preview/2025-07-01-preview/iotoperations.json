@@ -6104,7 +6104,7 @@
       "properties": {
         "dynamicSettings": {
           "$ref": "#/definitions/BrokerPersistenceDynamicSettings",
-          "description": "Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH \nOptional, default shown If customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property \"aio-persistence\""
+          "description": "Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH. \nOptional, default shown if customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property \"aio-persistence\""
         },
         "maxSize": {
           "type": "string",
@@ -6115,7 +6115,7 @@
           "description": "Use the specified persistent volume claim template to mount a persistent volume Same object as in diskBackedMessageBuffer, but with a limitation that access modes field must be set to `ReadWriteOncePod`.\n\nIf unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class."
         },
         "retain": {
-          "$ref": "#/definitions/BrokerRetainMessages",
+          "$ref": "#/definitions/BrokerRetainMessagesPolicy",
           "description": "Controls which topic's retained messages should be persisted to disk."
         },
         "stateStore": {
@@ -6125,6 +6125,10 @@
         "subscriberQueue": {
           "$ref": "#/definitions/BrokerSubscriberQueuePolicy",
           "description": "Custom policy, required if mode is Custom Subscriber queues from all groups are persisted to disk (logical OR)"
+        },
+        "encryption": {
+          "$ref": "#/definitions/BrokerPersistenceEncryption",
+          "description": "Controls settings related to encryption of the persistence database. Optional, defaults to enabling encryption."
         }
       },
       "required": [
@@ -6144,6 +6148,19 @@
           "description": "The user property value to enable persistence."
         }
       }
+    },
+    "BrokerPersistenceEncryption": {
+      "type": "object",
+      "description": "Broker Persistence Encryption properties",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/OperationalMode",
+          "description": "Determines if encryption is enabled."
+        }
+      },
+      "required": [
+        "mode"
+      ]
     },
     "BrokerPersistencePolicyMode": {
       "type": "string",
@@ -6400,20 +6417,6 @@
         "method"
       ]
     },
-    "BrokerRetainMessages": {
-      "type": "object",
-      "description": "Broker Retain policy properties",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/BrokerPersistencePolicyMode",
-          "description": "The mode of the policy."
-        }
-      },
-      "discriminator": "mode",
-      "required": [
-        "mode"
-      ]
-    },
     "BrokerRetainMessagesCustomPolicy": {
       "type": "object",
       "description": "Custom Broker Retain Message Policy",
@@ -6428,7 +6431,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BrokerRetainMessages"
+          "$ref": "#/definitions/BrokerRetainMessagesPolicy"
         }
       ],
       "x-ms-discriminator-value": "Custom"
@@ -6442,6 +6445,20 @@
           "description": "Mode of the BrokerRetainMessagesCustomPolicy."
         }
       },
+      "required": [
+        "mode"
+      ]
+    },
+    "BrokerRetainMessagesPolicy": {
+      "type": "object",
+      "description": "Broker Retain policy properties",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/BrokerPersistencePolicyMode",
+          "description": "The mode of the policy."
+        }
+      },
+      "discriminator": "mode",
       "required": [
         "mode"
       ]

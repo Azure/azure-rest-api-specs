@@ -80,8 +80,8 @@ model BrokerProperties {
 @added(Versions.`2025-07-01-preview`)
 model BrokerPersistence {
   @doc("""
-    Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH 
-    Optional, default shown If customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property "aio-persistence"
+    Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH. 
+    Optional, default shown if customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property "aio-persistence"
     """)
   dynamicSettings?: BrokerPersistenceDynamicSettings;
 
@@ -96,13 +96,23 @@ model BrokerPersistence {
   persistentVolumeClaimSpec?: VolumeClaimSpec;
 
   @doc("Controls which topic's retained messages should be persisted to disk.")
-  retain?: BrokerRetainMessages;
+  retain?: BrokerRetainMessagesPolicy;
 
   @doc("Controls which keys should be persisted to disk for the state store")
   stateStore?: BrokerStateStorePolicy;
 
   @doc("Custom policy, required if mode is Custom Subscriber queues from all groups are persisted to disk (logical OR)")
   subscriberQueue?: BrokerSubscriberQueuePolicy;
+
+  @doc("Controls settings related to encryption of the persistence database. Optional, defaults to enabling encryption.")
+  encryption?: BrokerPersistenceEncryption;
+}
+
+@doc("Broker Persistence Encryption properties")
+@added(Versions.`2025-07-01-preview`)
+model BrokerPersistenceEncryption {
+  @doc("Determines if encryption is enabled.")
+  mode: OperationalMode;
 }
 
 @added(Versions.`2025-07-01-preview`)
@@ -122,14 +132,14 @@ union BrokerPersistencePolicyMode {
 @doc("Broker Retain policy properties")
 @added(Versions.`2025-07-01-preview`)
 @discriminator("mode")
-model BrokerRetainMessages {
+model BrokerRetainMessagesPolicy {
   @doc("The mode of the policy.")
   mode: BrokerPersistencePolicyMode;
 }
 
 @doc("Custom Broker Retain Message Policy")
 @added(Versions.`2025-07-01-preview`)
-model BrokerRetainMessagesCustomPolicy extends BrokerRetainMessages {
+model BrokerRetainMessagesCustomPolicy extends BrokerRetainMessagesPolicy {
   @doc("The mode of the policy.")
   mode: Custom;
 
