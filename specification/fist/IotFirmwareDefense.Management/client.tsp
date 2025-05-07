@@ -2,7 +2,6 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.IoTFirmwareDefense;
 
 @@clientName(Microsoft.IoTFirmwareDefense, "IoTFirmwareDefenseMgmt", "python");
 
