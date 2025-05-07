@@ -74,3 +74,6 @@ using Microsoft.NotificationHubs;
 @@clientName(PrivateEndpointConnectionResources.update::parameters.resource,
   "parameters"
 );
+@@clientName(NamespacesOperationGroup.checkAvailability::parameters.body,
+  "parameters"
+);

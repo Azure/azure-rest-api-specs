@@ -16,13 +16,15 @@ namespace Microsoft.NotificationHubs;
  */
 @parentResource(NotificationHubResource)
 model SharedAccessAuthorizationRuleResource
-  is Azure.ResourceManager.TrackedResource<SharedAccessAuthorizationRuleProperties> {
+  is Azure.ResourceManager.ProxyResource<SharedAccessAuthorizationRuleProperties> {
   ...ResourceNameParameter<
     Resource = SharedAccessAuthorizationRuleResource,
     KeyName = "authorizationRuleName",
     SegmentName = "authorizationRules",
     NamePattern = "^[a-zA-Z0-9!()*-._]+$"
   >;
+  location?: string;
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -82,7 +84,10 @@ interface SharedAccessAuthorizationRuleResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NotificationHubs_ListAuthorizationRules")
-  listAuthorizationRules is SharedAccessAuthorizationRuleResourceOps.List<SharedAccessAuthorizationRuleResource>;
+  listAuthorizationRules is SharedAccessAuthorizationRuleResourceOps.List<
+    SharedAccessAuthorizationRuleResource,
+    Response = SharedAccessAuthorizationRuleListResult
+  >;
 
   /**
    * Gets the Primary and Secondary ConnectionStrings to the NotificationHub
@@ -149,7 +154,10 @@ interface Namespaces {
   /**
    * Gets the authorization rules for a namespace.
    */
-  listAuthorizationRules is NamespaceOps.List<SharedAccessAuthorizationRuleResource>;
+  listAuthorizationRules is NamespaceOps.List<
+    SharedAccessAuthorizationRuleResource,
+    Response = SharedAccessAuthorizationRuleListResult
+  >;
 
   /**
    * Gets the Primary and Secondary ConnectionStrings to the namespace.
@@ -186,3 +194,7 @@ interface Namespaces {
   "Request content."
 );
 @@doc(Namespaces.regenerateKeys::parameters.body, "Request content.");
+@@visibility(SharedAccessAuthorizationRuleResource.location,
+  Lifecycle.Read,
+  Lifecycle.Create
+);

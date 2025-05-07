@@ -48,4 +48,20 @@ enum Versions {
   v2023_10_01_preview: "2023-10-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+  @tag("Operations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationListResult> | ErrorResponse;
+}

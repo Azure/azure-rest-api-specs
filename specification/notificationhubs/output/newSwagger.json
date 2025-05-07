@@ -10,79 +10,26 @@
       }
     ]
   },
-  "schemes": [
-    "https"
-  ],
-  "host": "management.azure.com",
   "produces": [
     "application/json"
   ],
   "consumes": [
     "application/json"
   ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "tags": [
-    {
-      "name": "Operations"
-    },
-    {
-      "name": "NotificationHubResources"
-    },
-    {
-      "name": "NamespaceResources"
-    },
-    {
-      "name": "SharedAccessAuthorizationRuleResources"
-    },
-    {
-      "name": "Namespaces"
-    },
-    {
-      "name": "PrivateEndpointConnectionResources"
-    },
-    {
-      "name": "PrivateLinkResources"
-    }
-  ],
   "paths": {
     "/providers/Microsoft.NotificationHubs/operations": {
       "get": {
         "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List the operations for the provider",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -101,19 +48,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/checkNamespaceAvailability": {
       "post": {
         "operationId": "Namespaces_CheckAvailability",
-        "summary": "Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
-        "description": "Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
           {
             "name": "parameters",
             "in": "body",
-            "description": "The request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CheckAvailabilityParameters"
@@ -122,13 +60,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/CheckAvailabilityResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -144,29 +82,15 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/namespaces": {
       "get": {
         "operationId": "Namespaces_ListAll",
-        "tags": [
-          "NamespaceResources"
-        ],
-        "description": "Lists all the available namespaces within the subscription.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
           {
             "name": "$skipToken",
             "in": "query",
-            "description": "Skip token for subsequent requests.",
-            "required": false,
             "type": "string"
           },
           {
             "name": "$top",
             "in": "query",
-            "description": "Maximum number of results to return.",
-            "required": false,
             "type": "integer",
             "format": "int32",
             "default": 100
@@ -174,13 +98,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NamespaceListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -199,32 +123,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces": {
       "get": {
         "operationId": "Namespaces_List",
-        "tags": [
-          "NamespaceResources"
-        ],
-        "description": "Lists the available namespaces within a resource group.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "$skipToken",
             "in": "query",
-            "description": "Skip token for subsequent requests.",
-            "required": false,
             "type": "string"
           },
           {
             "name": "$top",
             "in": "query",
-            "description": "Maximum number of results to return.",
-            "required": false,
             "type": "integer",
             "format": "int32",
             "default": 100
@@ -232,13 +139,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NamespaceListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -257,24 +164,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}": {
       "get": {
         "operationId": "Namespaces_Get",
-        "tags": [
-          "NamespaceResources"
-        ],
-        "description": "Returns the given namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -284,13 +177,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -304,24 +197,10 @@
       },
       "put": {
         "operationId": "Namespaces_CreateOrUpdate",
-        "tags": [
-          "NamespaceResources"
-        ],
-        "description": "Creates / Updates a Notification Hub namespace. This operation is idempotent.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -331,7 +210,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
@@ -340,30 +218,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NamespaceResource' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
           },
           "201": {
-            "description": "Resource 'NamespaceResource' create operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -381,24 +248,10 @@
       },
       "patch": {
         "operationId": "Namespaces_Update",
-        "tags": [
-          "NamespaceResources"
-        ],
-        "description": "Patches the existing namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -408,7 +261,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NamespacePatchParameters"
@@ -417,13 +269,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -437,24 +289,10 @@
       },
       "delete": {
         "operationId": "Namespaces_Delete",
-        "tags": [
-          "NamespaceResources"
-        ],
-        "description": "Deletes an existing namespace. This operation also removes all associated notificationHubs under the namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -464,13 +302,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -486,24 +324,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/authorizationRules": {
       "get": {
         "operationId": "Namespaces_ListAuthorizationRules",
-        "tags": [
-          "Namespaces"
-        ],
-        "description": "Gets the authorization rules for a namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -511,13 +335,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -536,24 +360,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}": {
       "get": {
         "operationId": "Namespaces_GetAuthorizationRule",
-        "tags": [
-          "Namespaces"
-        ],
-        "description": "Gets an authorization rule for a namespace by name.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -561,7 +371,6 @@
           {
             "name": "authorizationRuleName",
             "in": "path",
-            "description": "The name of the SharedAccessAuthorizationRuleResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9!()*-._]+$"
@@ -569,13 +378,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -589,24 +398,10 @@
       },
       "put": {
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
-        "tags": [
-          "Namespaces"
-        ],
-        "description": "Creates an authorization rule for a namespace",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -614,7 +409,6 @@
           {
             "name": "authorizationRuleName",
             "in": "path",
-            "description": "The name of the SharedAccessAuthorizationRuleResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9!()*-._]+$"
@@ -622,7 +416,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
@@ -631,19 +424,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'SharedAccessAuthorizationRuleResource' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
           "201": {
-            "description": "Resource 'SharedAccessAuthorizationRuleResource' create operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -657,24 +450,10 @@
       },
       "delete": {
         "operationId": "Namespaces_DeleteAuthorizationRule",
-        "tags": [
-          "Namespaces"
-        ],
-        "description": "Deletes a namespace authorization rule",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -682,7 +461,6 @@
           {
             "name": "authorizationRuleName",
             "in": "path",
-            "description": "The name of the SharedAccessAuthorizationRuleResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9!()*-._]+$"
@@ -690,13 +468,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -712,24 +490,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}/listKeys": {
       "post": {
         "operationId": "Namespaces_ListKeys",
-        "tags": [
-          "Namespaces"
-        ],
-        "description": "Gets the Primary and Secondary ConnectionStrings to the namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -737,7 +501,6 @@
           {
             "name": "authorizationRuleName",
             "in": "path",
-            "description": "The name of the SharedAccessAuthorizationRuleResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9!()*-._]+$"
@@ -745,13 +508,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -767,24 +530,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
       "post": {
         "operationId": "Namespaces_RegenerateKeys",
-        "tags": [
-          "Namespaces"
-        ],
-        "description": "Regenerates the Primary/Secondary Keys to the Namespace Authorization Rule",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -792,7 +541,6 @@
           {
             "name": "authorizationRuleName",
             "in": "path",
-            "description": "The name of the SharedAccessAuthorizationRuleResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9!()*-._]+$"
@@ -800,7 +548,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PolicyKeyResource"
@@ -809,13 +556,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -831,24 +578,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/checkNotificationHubAvailability": {
       "post": {
         "operationId": "NotificationHubs_CheckNotificationHubAvailability",
-        "tags": [
-          "NamespaceResources"
-        ],
-        "description": "Checks the availability of the given notificationHub in a namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -858,7 +591,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CheckAvailabilityParameters"
@@ -867,13 +599,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/CheckAvailabilityResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -889,24 +621,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs": {
       "get": {
         "operationId": "NotificationHubs_List",
-        "tags": [
-          "NotificationHubResources"
-        ],
-        "description": "Lists the notification hubs associated with a namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -916,15 +634,11 @@
           {
             "name": "$skipToken",
             "in": "query",
-            "description": "Continuation token.",
-            "required": false,
             "type": "string"
           },
           {
             "name": "$top",
             "in": "query",
-            "description": "Page size.",
-            "required": false,
             "type": "integer",
             "format": "int32",
             "default": 100
@@ -932,13 +646,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NotificationHubListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -957,24 +671,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}": {
       "get": {
         "operationId": "NotificationHubs_Get",
-        "tags": [
-          "NotificationHubResources"
-        ],
-        "description": "Gets the notification hub.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -984,7 +684,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "Notification Hub name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -994,13 +693,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1014,24 +713,10 @@
       },
       "put": {
         "operationId": "NotificationHubs_CreateOrUpdate",
-        "tags": [
-          "NotificationHubResources"
-        ],
-        "description": "Creates/Update a NotificationHub in a namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1041,7 +726,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "Notification Hub name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1051,7 +735,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
@@ -1060,19 +743,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NotificationHubResource' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
             }
           },
           "201": {
-            "description": "Resource 'NotificationHubResource' create operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1086,24 +769,10 @@
       },
       "patch": {
         "operationId": "NotificationHubs_Update",
-        "tags": [
-          "NotificationHubResources"
-        ],
-        "description": "Patch a NotificationHub in a namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1113,7 +782,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "Notification Hub name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1123,7 +791,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NotificationHubPatchParameters"
@@ -1132,13 +799,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1152,24 +819,10 @@
       },
       "delete": {
         "operationId": "NotificationHubs_Delete",
-        "tags": [
-          "NotificationHubResources"
-        ],
-        "description": "Deletes a notification hub associated with a namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1179,7 +832,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "Notification Hub name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1189,13 +841,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1211,24 +863,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/authorizationRules": {
       "get": {
         "operationId": "NotificationHubs_ListAuthorizationRules",
-        "tags": [
-          "SharedAccessAuthorizationRuleResources"
-        ],
-        "description": "Gets the authorization rules for a NotificationHub.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -1236,7 +874,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "The name of the NotificationHubResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-./_]*$"
@@ -1244,13 +881,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1269,24 +906,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/authorizationRules/{authorizationRuleName}": {
       "get": {
         "operationId": "NotificationHubs_GetAuthorizationRule",
-        "tags": [
-          "SharedAccessAuthorizationRuleResources"
-        ],
-        "description": "Gets an authorization rule for a NotificationHub by name.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -1294,7 +917,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "The name of the NotificationHubResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-./_]*$"
@@ -1302,7 +924,6 @@
           {
             "name": "authorizationRuleName",
             "in": "path",
-            "description": "The name of the SharedAccessAuthorizationRuleResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9!()*-._]+$"
@@ -1310,13 +931,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1330,24 +951,10 @@
       },
       "put": {
         "operationId": "NotificationHubs_CreateOrUpdateAuthorizationRule",
-        "tags": [
-          "SharedAccessAuthorizationRuleResources"
-        ],
-        "description": "Creates/Updates an authorization rule for a NotificationHub",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -1355,7 +962,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "The name of the NotificationHubResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-./_]*$"
@@ -1363,7 +969,6 @@
           {
             "name": "authorizationRuleName",
             "in": "path",
-            "description": "The name of the SharedAccessAuthorizationRuleResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9!()*-._]+$"
@@ -1371,7 +976,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
@@ -1380,19 +984,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'SharedAccessAuthorizationRuleResource' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
           "201": {
-            "description": "Resource 'SharedAccessAuthorizationRuleResource' create operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1406,24 +1010,10 @@
       },
       "delete": {
         "operationId": "NotificationHubs_DeleteAuthorizationRule",
-        "tags": [
-          "SharedAccessAuthorizationRuleResources"
-        ],
-        "description": "Deletes a notificationHub authorization rule",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -1431,7 +1021,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "The name of the NotificationHubResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-./_]*$"
@@ -1439,7 +1028,6 @@
           {
             "name": "authorizationRuleName",
             "in": "path",
-            "description": "The name of the SharedAccessAuthorizationRuleResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9!()*-._]+$"
@@ -1447,13 +1035,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1469,24 +1057,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/authorizationRules/{authorizationRuleName}/listKeys": {
       "post": {
         "operationId": "NotificationHubs_ListKeys",
-        "tags": [
-          "SharedAccessAuthorizationRuleResources"
-        ],
-        "description": "Gets the Primary and Secondary ConnectionStrings to the NotificationHub",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -1494,7 +1068,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "The name of the NotificationHubResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-./_]*$"
@@ -1502,7 +1075,6 @@
           {
             "name": "authorizationRuleName",
             "in": "path",
-            "description": "The name of the SharedAccessAuthorizationRuleResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9!()*-._]+$"
@@ -1510,13 +1082,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1532,24 +1104,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
       "post": {
         "operationId": "NotificationHubs_RegenerateKeys",
-        "tags": [
-          "SharedAccessAuthorizationRuleResources"
-        ],
-        "description": "Regenerates the Primary/Secondary Keys to the NotificationHub Authorization Rule",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the NamespaceResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
@@ -1557,7 +1115,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "The name of the NotificationHubResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-./_]*$"
@@ -1565,7 +1122,6 @@
           {
             "name": "authorizationRuleName",
             "in": "path",
-            "description": "The name of the SharedAccessAuthorizationRuleResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9!()*-._]+$"
@@ -1573,7 +1129,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PolicyKeyResource"
@@ -1582,13 +1137,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1604,24 +1159,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/debugsend": {
       "post": {
         "operationId": "NotificationHubs_DebugSend",
-        "tags": [
-          "NotificationHubResources"
-        ],
-        "description": "Test send a push notification.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1631,7 +1172,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "Notification Hub name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1641,13 +1181,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/DebugSendResponse"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1663,24 +1203,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/pnsCredentials": {
       "post": {
         "operationId": "NotificationHubs_GetPnsCredentials",
-        "tags": [
-          "NotificationHubResources"
-        ],
-        "description": "Lists the PNS Credentials associated with a notification hub.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1690,7 +1216,6 @@
           {
             "name": "notificationHubName",
             "in": "path",
-            "description": "Notification Hub name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1700,13 +1225,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PnsCredentialsResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1722,24 +1247,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/pnsCredentials": {
       "post": {
         "operationId": "Namespaces_GetPnsCredentials",
-        "tags": [
-          "NamespaceResources"
-        ],
-        "description": "Lists the PNS credentials associated with a namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1749,13 +1260,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PnsCredentialsResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1771,24 +1282,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_List",
-        "tags": [
-          "PrivateEndpointConnectionResources"
-        ],
-        "description": "Returns all Private Endpoint Connections that belong to the given Notification Hubs namespace.\nThis is a public API that can be called directly by Notification Hubs users.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1798,13 +1295,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionResourceListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1823,24 +1320,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "operationId": "PrivateEndpointConnections_Get",
-        "tags": [
-          "PrivateEndpointConnectionResources"
-        ],
-        "description": "Returns a Private Endpoint Connection with a given name.\nThis is a public API that can be called directly by Notification Hubs users.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1850,7 +1333,6 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "Private Endpoint Connection Name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1860,13 +1342,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1880,24 +1362,10 @@
       },
       "put": {
         "operationId": "PrivateEndpointConnections_Update",
-        "tags": [
-          "PrivateEndpointConnectionResources"
-        ],
-        "description": "Approves or rejects Private Endpoint Connection.\nThis is a public API that can be called directly by Notification Hubs users.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1907,7 +1375,6 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "Private Endpoint Connection Name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1917,7 +1384,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Description of the Private Endpoint Connection resource.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
@@ -1926,30 +1392,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnectionResource' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "201": {
-            "description": "Resource 'PrivateEndpointConnectionResource' create operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1967,24 +1422,10 @@
       },
       "delete": {
         "operationId": "PrivateEndpointConnections_Delete",
-        "tags": [
-          "PrivateEndpointConnectionResources"
-        ],
-        "description": "Deletes the Private Endpoint Connection.\nThis is a public API that can be called directly by Notification Hubs users.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1994,7 +1435,6 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "Private Endpoint Connection Name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2004,24 +1444,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -2032,33 +1461,16 @@
             "$ref": "./examples/Namespaces/PrivateEndpointConnectionDelete.json"
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateLinkResources": {
       "get": {
         "operationId": "PrivateEndpointConnections_ListGroupIds",
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "description": "Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.\nThat's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2068,13 +1480,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -2093,24 +1505,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateLinkResources/{subResourceName}": {
       "get": {
         "operationId": "PrivateEndpointConnections_GetGroupId",
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "description": "Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.\nThat's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "Namespace name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2120,7 +1518,6 @@
           {
             "name": "subResourceName",
             "in": "path",
-            "description": "Name of the Private Link sub-resource. The only supported sub-resource is \"namespace\"",
             "required": true,
             "type": "string",
             "pattern": "^namespace$"
@@ -2128,13 +1525,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -2149,40 +1546,11 @@
     }
   },
   "definitions": {
-    "AccessRights": {
-      "type": "string",
-      "description": "Defines values for AccessRights.",
-      "enum": [
-        "Manage",
-        "Send",
-        "Listen"
-      ],
-      "x-ms-enum": {
-        "name": "AccessRights",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Manage",
-            "value": "Manage"
-          },
-          {
-            "name": "Send",
-            "value": "Send"
-          },
-          {
-            "name": "Listen",
-            "value": "Listen"
-          }
-        ]
-      }
-    },
     "AdmCredential": {
       "type": "object",
-      "description": "Description of a NotificationHub AdmCredential.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AdmCredentialProperties",
-          "description": "Description of a NotificationHub AdmCredential.",
           "x-ms-client-flatten": true
         }
       },
@@ -2192,43 +1560,37 @@
     },
     "AdmCredentialProperties": {
       "type": "object",
-      "description": "Description of a NotificationHub AdmCredential.",
       "properties": {
         "clientId": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the client identifier.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "clientSecret": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the credential secret access key.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "authTokenUrl": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the URL of the authorization token.",
           "minLength": 1,
           "x-ms-secret": true
         }
       },
       "required": [
+        "authTokenUrl",
         "clientId",
-        "clientSecret",
-        "authTokenUrl"
+        "clientSecret"
       ]
     },
     "ApnsCredential": {
       "type": "object",
-      "description": "Description of a NotificationHub ApnsCredential.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ApnsCredentialProperties",
-          "description": "Description of a NotificationHub ApnsCredential.",
           "x-ms-client-flatten": true
         }
       },
@@ -2238,55 +1600,46 @@
     },
     "ApnsCredentialProperties": {
       "type": "object",
-      "description": "Description of a NotificationHub ApnsCredential.",
       "properties": {
         "apnsCertificate": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the APNS certificate.",
           "x-ms-secret": true
         },
         "certificateKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the certificate key.",
           "x-ms-secret": true
         },
         "endpoint": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the endpoint of this credential.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "thumbprint": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the APNS certificate Thumbprint",
           "x-ms-secret": true
         },
         "keyId": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets a 10-character key identifier (kid) key, obtained from\nyour developer account",
           "x-ms-secret": true
         },
         "appName": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the name of the application",
           "x-ms-secret": true
         },
         "appId": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the issuer (iss) registered claim key, whose value is\nyour 10-character Team ID, obtained from your developer account",
           "x-ms-secret": true
         },
         "token": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets provider Authentication Token, obtained through your\ndeveloper account",
           "x-ms-secret": true
         }
       },
@@ -2296,27 +1649,22 @@
     },
     "Availability": {
       "type": "object",
-      "description": "Represents metric availability (part of RP operation descriptions).",
       "properties": {
         "timeGrain": {
           "type": "string",
-          "description": "Time grain of the availability.",
           "readOnly": true
         },
         "blobDuration": {
           "type": "string",
-          "description": "Duration of the availability blob.",
           "readOnly": true
         }
       }
     },
     "BaiduCredential": {
       "type": "object",
-      "description": "Description of a NotificationHub BaiduCredential.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/BaiduCredentialProperties",
-          "description": "Description of a NotificationHub BaiduCredential.",
           "x-ms-client-flatten": true
         }
       },
@@ -2326,26 +1674,22 @@
     },
     "BaiduCredentialProperties": {
       "type": "object",
-      "description": "Description of a NotificationHub BaiduCredential.",
       "properties": {
         "baiduApiKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets baidu Api Key.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "baiduEndPoint": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets baidu Endpoint.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "baiduSecretKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets baidu Secret Key",
           "minLength": 1,
           "x-ms-secret": true
         }
@@ -2358,11 +1702,9 @@
     },
     "BrowserCredential": {
       "type": "object",
-      "description": "Description of a NotificationHub BrowserCredential.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/BrowserCredentialProperties",
-          "description": "Description of a NotificationHub BrowserCredential.",
           "x-ms-client-flatten": true
         }
       },
@@ -2372,26 +1714,22 @@
     },
     "BrowserCredentialProperties": {
       "type": "object",
-      "description": "Description of a NotificationHub BrowserCredential.",
       "properties": {
         "subject": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets web push subject.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "vapidPrivateKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets VAPID private key.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "vapidPublicKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets VAPID public key.",
           "minLength": 1,
           "x-ms-secret": true
         }
@@ -2404,41 +1742,33 @@
     },
     "CheckAvailabilityParameters": {
       "type": "object",
-      "description": "Parameters supplied to the Check Name Availability for Namespace and\nNotificationHubs.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets resource Id",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets resource name",
           "minLength": 1
         },
         "type": {
           "type": "string",
-          "description": "Gets resource type",
           "readOnly": true
         },
         "location": {
-          "type": "string",
-          "description": "Gets or sets resource location"
+          "type": "string"
         },
         "tags": {
           "type": "object",
-          "description": "Gets or sets resource tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "isAvailiable": {
-          "type": "boolean",
-          "description": "Not used and deprecated since API version 2023-01-01-preview"
+          "type": "boolean"
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The Sku description for a namespace"
+          "$ref": "#/definitions/Sku"
         }
       },
       "required": [
@@ -2447,30 +1777,25 @@
     },
     "CheckAvailabilityResult": {
       "type": "object",
-      "description": "Description of a CheckAvailability resource.",
       "properties": {
         "isAvailiable": {
-          "type": "boolean",
-          "description": "Gets or sets true if the name is available and can be used to\ncreate new Namespace/NotificationHub. Otherwise false."
+          "type": "boolean"
         },
         "location": {
           "type": "string",
-          "description": "Deprecated - only for compatibility.",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         },
         "tags": {
           "type": "object",
-          "description": "Deprecated - only for compatibility.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The Sku description for a namespace"
+          "$ref": "#/definitions/Sku"
         }
       },
       "allOf": [
@@ -2481,24 +1806,20 @@
     },
     "DebugSendResponse": {
       "type": "object",
-      "description": "Description of a NotificationHub Resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DebugSendResult",
-          "description": "Result of DebugSend operations.",
           "x-ms-client-flatten": true
         },
         "location": {
           "type": "string",
-          "description": "Deprecated - only for compatibility.",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         },
         "tags": {
           "type": "object",
-          "description": "Deprecated - only for compatibility.",
           "additionalProperties": {
             "type": "string"
           }
@@ -2512,23 +1833,19 @@
     },
     "DebugSendResult": {
       "type": "object",
-      "description": "Result of DebugSend operations.",
       "properties": {
         "success": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets successful send",
           "readOnly": true
         },
         "failure": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets send failure",
           "readOnly": true
         },
         "results": {
           "type": "array",
-          "description": "Gets or sets actual failure description",
           "items": {
             "$ref": "#/definitions/RegistrationResult"
           },
@@ -2539,11 +1856,9 @@
     },
     "FcmV1Credential": {
       "type": "object",
-      "description": "Description of a NotificationHub FcmV1Credential.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/FcmV1CredentialProperties",
-          "description": "Description of a NotificationHub FcmV1Credential.",
           "x-ms-client-flatten": true
         }
       },
@@ -2553,26 +1868,22 @@
     },
     "FcmV1CredentialProperties": {
       "type": "object",
-      "description": "Description of a NotificationHub FcmV1Credential.",
       "properties": {
         "clientEmail": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets client email.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "privateKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets private key.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "projectId": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets project id.",
           "minLength": 1,
           "x-ms-secret": true
         }
@@ -2585,11 +1896,9 @@
     },
     "GcmCredential": {
       "type": "object",
-      "description": "Description of a NotificationHub GcmCredential.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GcmCredentialProperties",
-          "description": "Description of a NotificationHub GcmCredential.",
           "x-ms-client-flatten": true
         }
       },
@@ -2599,18 +1908,15 @@
     },
     "GcmCredentialProperties": {
       "type": "object",
-      "description": "Description of a NotificationHub GcmCredential.",
       "properties": {
         "gcmEndpoint": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the GCM endpoint.",
           "x-ms-secret": true
         },
         "googleApiKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the Google API key.",
           "minLength": 1,
           "x-ms-secret": true
         }
@@ -2621,16 +1927,13 @@
     },
     "IpRule": {
       "type": "object",
-      "description": "A network authorization rule that filters traffic based on IP address.",
       "properties": {
         "ipMask": {
           "type": "string",
-          "description": "IP mask.",
           "minLength": 1
         },
         "rights": {
           "type": "array",
-          "description": "List of access rights.",
           "items": {
             "$ref": "#/definitions/AccessRights"
           }
@@ -2643,26 +1946,21 @@
     },
     "LogSpecification": {
       "type": "object",
-      "description": "A single log category specification.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the log category.",
           "readOnly": true
         },
         "displayName": {
           "type": "string",
-          "description": "Display name of the log category.",
           "readOnly": true
         },
         "blobDuration": {
           "type": "string",
-          "description": "Duration of data written to a single blob.",
           "readOnly": true
         },
         "categoryGroups": {
           "type": "array",
-          "description": "Category group for the log specification.",
           "items": {
             "type": "string"
           }
@@ -2671,36 +1969,29 @@
     },
     "MetricSpecification": {
       "type": "object",
-      "description": "A metric specification.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Metric name / id.",
           "readOnly": true
         },
         "displayName": {
           "type": "string",
-          "description": "User-visible metric name.",
           "readOnly": true
         },
         "displayDescription": {
           "type": "string",
-          "description": "Description of the metric.",
           "readOnly": true
         },
         "unit": {
           "type": "string",
-          "description": "Metric unit.",
           "readOnly": true
         },
         "aggregationType": {
           "type": "string",
-          "description": "Type of the aggregation (Average, Minimum, Maximum, Total or Count).",
           "readOnly": true
         },
         "availabilities": {
           "type": "array",
-          "description": "List of availabilities.",
           "items": {
             "$ref": "#/definitions/Availability"
           },
@@ -2709,7 +2000,6 @@
         },
         "supportedTimeGrainTypes": {
           "type": "array",
-          "description": "List of supported time grain types.",
           "items": {
             "type": "string"
           },
@@ -2718,23 +2008,19 @@
         },
         "metricFilterPattern": {
           "type": "string",
-          "description": "The matching regex pattern to be applied to the field pointed by the \"metricsFilterPathSelector\" flag in the ARM manifest.",
           "readOnly": true
         },
         "fillGapWithZero": {
           "type": "boolean",
-          "description": "Optional property. If set to true, then zero will be returned for time duration where no metric is emitted / published.",
           "readOnly": true
         }
       }
     },
     "MpnsCredential": {
       "type": "object",
-      "description": "Description of a NotificationHub MpnsCredential.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/MpnsCredentialProperties",
-          "description": "Description of a NotificationHub MpnsCredential.",
           "x-ms-client-flatten": true
         }
       },
@@ -2744,43 +2030,39 @@
     },
     "MpnsCredentialProperties": {
       "type": "object",
-      "description": "Description of a NotificationHub MpnsCredential.",
       "properties": {
         "mpnsCertificate": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the MPNS certificate.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "certificateKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the certificate key for this credential.",
           "minLength": 1,
           "x-ms-secret": true
         },
         "thumbprint": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the MPNS certificate Thumbprint",
           "minLength": 1,
           "x-ms-secret": true
         }
       },
       "required": [
-        "mpnsCertificate",
         "certificateKey",
+        "mpnsCertificate",
         "thumbprint"
       ]
     },
     "NamespaceListResult": {
       "type": "object",
-      "description": "Paged collection of NamespaceResource items",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The NamespaceResource items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/NamespaceResource"
           },
@@ -2789,7 +2071,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -2798,19 +2080,15 @@
     },
     "NamespacePatchParameters": {
       "type": "object",
-      "description": "Patch parameter for NamespaceResource.",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The Sku description for a namespace"
+          "$ref": "#/definitions/Sku"
         },
         "properties": {
-          "$ref": "#/definitions/NamespaceProperties",
-          "description": "Represents namespace properties."
+          "$ref": "#/definitions/NamespaceProperties"
         },
         "tags": {
           "type": "object",
-          "description": "Dictionary of <string>",
           "additionalProperties": {
             "type": "string"
           }
@@ -2819,69 +2097,100 @@
     },
     "NamespaceProperties": {
       "type": "object",
-      "description": "Represents namespace properties.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the Notification Hubs namespace. This is immutable property, set automatically\nby the service when the namespace is created.",
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/OperationProvisioningState",
-          "description": "Defines values for OperationProvisioningState."
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Pending",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "OperationProvisioningState",
+            "modelAsString": true
+          }
         },
         "status": {
-          "$ref": "#/definitions/NamespaceStatus",
-          "description": "Namespace status."
+          "type": "string",
+          "enum": [
+            "Created",
+            "Creating",
+            "Suspended",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "NamespaceStatus",
+            "modelAsString": true
+          }
         },
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets whether or not the namespace is currently enabled.",
           "readOnly": true
         },
         "critical": {
           "type": "boolean",
-          "description": "Gets or sets whether or not the namespace is set as Critical.",
           "readOnly": true
         },
         "subscriptionId": {
           "type": "string",
-          "description": "Namespace subscription id.",
           "readOnly": true
         },
         "region": {
           "type": "string",
-          "description": "Region. The value is always set to the same value as Namespace.Location, so we are deprecating\nthis property.",
           "readOnly": true
         },
         "metricId": {
           "type": "string",
-          "description": "Azure Insights Metrics id.",
           "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Time when the namespace was created.",
           "readOnly": true
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Time when the namespace was updated.",
           "readOnly": true
         },
         "namespaceType": {
-          "$ref": "#/definitions/NamespaceType",
-          "description": "Defines values for NamespaceType."
+          "type": "string",
+          "enum": [
+            "Messaging",
+            "NotificationHub"
+          ],
+          "x-ms-enum": {
+            "name": "NamespaceType",
+            "modelAsString": true
+          }
         },
         "replicationRegion": {
-          "$ref": "#/definitions/ReplicationRegion",
-          "description": "Allowed replication region"
+          "type": "string",
+          "enum": [
+            "Default",
+            "WestUs2",
+            "NorthEurope",
+            "AustraliaEast",
+            "BrazilSouth",
+            "SouthEastAsia",
+            "SouthAfricaNorth",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationRegion",
+            "modelAsString": true
+          }
         },
         "zoneRedundancy": {
           "type": "string",
-          "description": "Namespace SKU name.",
           "default": "Disabled",
           "enum": [
             "Disabled",
@@ -2889,39 +2198,25 @@
           ],
           "x-ms-enum": {
             "name": "ZoneRedundancyPreference",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Disabled",
-                "value": "Disabled"
-              },
-              {
-                "name": "Enabled",
-                "value": "Enabled"
-              }
-            ]
+            "modelAsString": true
           },
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         },
         "networkAcls": {
-          "$ref": "#/definitions/NetworkAcls",
-          "description": "A collection of network authorization rules."
+          "$ref": "#/definitions/NetworkAcls"
         },
         "pnsCredentials": {
-          "$ref": "#/definitions/PnsCredentials",
-          "description": "Collection of Notification Hub or Notification Hub Namespace PNS credentials."
+          "$ref": "#/definitions/PnsCredentials"
         },
         "serviceBusEndpoint": {
           "type": "string",
-          "description": "Gets or sets endpoint you can use to perform NotificationHub\noperations.",
           "readOnly": true
         },
         "privateEndpointConnections": {
           "type": "array",
-          "description": "Private Endpoint Connections for namespace",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnectionResource"
           },
@@ -2929,19 +2224,16 @@
         },
         "scaleUnit": {
           "type": "string",
-          "description": "Gets or sets scaleUnit where the namespace gets created",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         },
         "dataCenter": {
-          "type": "string",
-          "description": "Deprecated."
+          "type": "string"
         },
         "publicNetworkAccess": {
           "type": "string",
-          "description": "Type of public network access.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -2949,33 +2241,20 @@
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled"
-              }
-            ]
+            "modelAsString": true
           }
         }
       }
     },
     "NamespaceResource": {
       "type": "object",
-      "description": "Notification Hubs Namespace Resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NamespaceProperties",
-          "description": "Represents namespace properties.",
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The Sku description for a namespace"
+          "$ref": "#/definitions/Sku"
         }
       },
       "required": [
@@ -2987,85 +2266,28 @@
         }
       ]
     },
-    "NamespaceStatus": {
-      "type": "string",
-      "description": "Namespace status.",
-      "enum": [
-        "Created",
-        "Creating",
-        "Suspended",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "NamespaceStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Created",
-            "value": "Created"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating"
-          },
-          {
-            "name": "Suspended",
-            "value": "Suspended"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting"
-          }
-        ]
-      }
-    },
-    "NamespaceType": {
-      "type": "string",
-      "description": "Defines values for NamespaceType.",
-      "enum": [
-        "Messaging",
-        "NotificationHub"
-      ],
-      "x-ms-enum": {
-        "name": "NamespaceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Messaging",
-            "value": "Messaging"
-          },
-          {
-            "name": "NotificationHub",
-            "value": "NotificationHub"
-          }
-        ]
-      }
-    },
     "NetworkAcls": {
       "type": "object",
-      "description": "A collection of network authorization rules.",
       "properties": {
         "ipRules": {
           "type": "array",
-          "description": "List of IP rules.",
           "items": {
             "$ref": "#/definitions/IpRule"
           },
           "x-ms-identifiers": []
         },
         "publicNetworkRule": {
-          "$ref": "#/definitions/PublicInternetAuthorizationRule",
-          "description": "A default (public Internet) network authorization rule, which contains rights if no other network rule matches."
+          "$ref": "#/definitions/PublicInternetAuthorizationRule"
         }
       }
     },
     "NotificationHubListResult": {
       "type": "object",
-      "description": "Paged collection of NotificationHubResource items",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The NotificationHubResource items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/NotificationHubResource"
           },
@@ -3074,7 +2296,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -3083,20 +2305,16 @@
     },
     "NotificationHubPatchParameters": {
       "type": "object",
-      "description": "Patch parameter for NamespaceResource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NotificationHubProperties",
-          "description": "NotificationHub properties.",
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The Sku description for a namespace"
+          "$ref": "#/definitions/Sku"
         },
         "tags": {
           "type": "object",
-          "description": "Dictionary of <string>",
           "additionalProperties": {
             "type": "string"
           }
@@ -3105,23 +2323,19 @@
     },
     "NotificationHubProperties": {
       "type": "object",
-      "description": "NotificationHub properties.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the NotificationHub name.",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         },
         "registrationTtl": {
-          "type": "string",
-          "description": "Gets or sets the RegistrationTtl of the created NotificationHub"
+          "type": "string"
         },
         "authorizationRules": {
           "type": "array",
-          "description": "Gets or sets the AuthorizationRules of the created NotificationHub",
           "items": {
             "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
           },
@@ -3131,40 +2345,31 @@
           ]
         },
         "apnsCredential": {
-          "$ref": "#/definitions/ApnsCredential",
-          "description": "Description of a NotificationHub ApnsCredential."
+          "$ref": "#/definitions/ApnsCredential"
         },
         "wnsCredential": {
-          "$ref": "#/definitions/WnsCredential",
-          "description": "Description of a NotificationHub WnsCredential."
+          "$ref": "#/definitions/WnsCredential"
         },
         "gcmCredential": {
-          "$ref": "#/definitions/GcmCredential",
-          "description": "Description of a NotificationHub GcmCredential."
+          "$ref": "#/definitions/GcmCredential"
         },
         "mpnsCredential": {
-          "$ref": "#/definitions/MpnsCredential",
-          "description": "Description of a NotificationHub MpnsCredential."
+          "$ref": "#/definitions/MpnsCredential"
         },
         "admCredential": {
-          "$ref": "#/definitions/AdmCredential",
-          "description": "Description of a NotificationHub AdmCredential."
+          "$ref": "#/definitions/AdmCredential"
         },
         "baiduCredential": {
-          "$ref": "#/definitions/BaiduCredential",
-          "description": "Description of a NotificationHub BaiduCredential."
+          "$ref": "#/definitions/BaiduCredential"
         },
         "browserCredential": {
-          "$ref": "#/definitions/BrowserCredential",
-          "description": "Description of a NotificationHub BrowserCredential."
+          "$ref": "#/definitions/BrowserCredential"
         },
         "xiaomiCredential": {
-          "$ref": "#/definitions/XiaomiCredential",
-          "description": "Description of a NotificationHub XiaomiCredential."
+          "$ref": "#/definitions/XiaomiCredential"
         },
         "fcmV1Credential": {
-          "$ref": "#/definitions/FcmV1Credential",
-          "description": "Description of a NotificationHub FcmV1Credential."
+          "$ref": "#/definitions/FcmV1Credential"
         },
         "dailyMaxActiveDevices": {
           "type": "integer",
@@ -3175,16 +2380,13 @@
     },
     "NotificationHubResource": {
       "type": "object",
-      "description": "Notification Hub Resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NotificationHubProperties",
-          "description": "NotificationHub properties.",
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The Sku description for a namespace"
+          "$ref": "#/definitions/Sku"
         }
       },
       "allOf": [
@@ -3195,25 +2397,20 @@
     },
     "Operation": {
       "type": "object",
-      "description": "Result of the request to list SQL operations.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the operation being performed on this particular object.\"",
           "readOnly": true
         },
         "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "he localized display information for this particular operation / action."
+          "$ref": "#/definitions/OperationDisplay"
         },
         "isDataAction": {
           "type": "boolean",
-          "description": "The intended executor of the operation.\"",
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Additional descriptions for the operation."
+          "$ref": "#/definitions/OperationProperties"
         }
       }
     },
@@ -3222,33 +2419,29 @@
       "properties": {
         "provider": {
           "type": "string",
-          "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
           "readOnly": true
         },
         "resource": {
           "type": "string",
-          "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
           "readOnly": true
         },
         "operation": {
           "type": "string",
-          "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
           "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
           "readOnly": true
         }
       }
     },
     "OperationListResult": {
       "type": "object",
-      "description": "Paged collection of Operation items",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Operation items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Operation"
           },
@@ -3260,7 +2453,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -3269,123 +2462,60 @@
     },
     "OperationProperties": {
       "type": "object",
-      "description": "Optional operation properties.",
       "properties": {
         "serviceSpecification": {
-          "$ref": "#/definitions/ServiceSpecification",
-          "description": "Optional service specification used in Operations API."
+          "$ref": "#/definitions/ServiceSpecification"
         }
-      }
-    },
-    "OperationProvisioningState": {
-      "type": "string",
-      "description": "Defines values for OperationProvisioningState.",
-      "enum": [
-        "Unknown",
-        "InProgress",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Pending",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "OperationProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled"
-          },
-          {
-            "name": "Pending",
-            "value": "Pending"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled"
-          }
-        ]
       }
     },
     "PnsCredentials": {
       "type": "object",
-      "description": "Collection of Notification Hub or Notification Hub Namespace PNS credentials.",
       "properties": {
         "admCredential": {
-          "$ref": "#/definitions/AdmCredential",
-          "description": "Description of a NotificationHub AdmCredential."
+          "$ref": "#/definitions/AdmCredential"
         },
         "apnsCredential": {
-          "$ref": "#/definitions/ApnsCredential",
-          "description": "Description of a NotificationHub ApnsCredential."
+          "$ref": "#/definitions/ApnsCredential"
         },
         "baiduCredential": {
-          "$ref": "#/definitions/BaiduCredential",
-          "description": "Description of a NotificationHub BaiduCredential."
+          "$ref": "#/definitions/BaiduCredential"
         },
         "browserCredential": {
-          "$ref": "#/definitions/BrowserCredential",
-          "description": "Description of a NotificationHub BrowserCredential."
+          "$ref": "#/definitions/BrowserCredential"
         },
         "gcmCredential": {
-          "$ref": "#/definitions/GcmCredential",
-          "description": "Description of a NotificationHub GcmCredential."
+          "$ref": "#/definitions/GcmCredential"
         },
         "mpnsCredential": {
-          "$ref": "#/definitions/MpnsCredential",
-          "description": "Description of a NotificationHub MpnsCredential."
+          "$ref": "#/definitions/MpnsCredential"
         },
         "wnsCredential": {
-          "$ref": "#/definitions/WnsCredential",
-          "description": "Description of a NotificationHub WnsCredential."
+          "$ref": "#/definitions/WnsCredential"
         },
         "xiaomiCredential": {
-          "$ref": "#/definitions/XiaomiCredential",
-          "description": "Description of a NotificationHub XiaomiCredential."
+          "$ref": "#/definitions/XiaomiCredential"
         },
         "fcmV1Credential": {
-          "$ref": "#/definitions/FcmV1Credential",
-          "description": "Description of a NotificationHub FcmV1Credential."
+          "$ref": "#/definitions/FcmV1Credential"
         }
       }
     },
     "PnsCredentialsResource": {
       "type": "object",
-      "description": "Description of a NotificationHub PNS Credentials. This is a response of the POST requests that return namespace or hubs\nPNS credentials.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PnsCredentials",
-          "description": "Collection of Notification Hub or Notification Hub Namespace PNS credentials.",
           "x-ms-client-flatten": true
         },
         "location": {
           "type": "string",
-          "description": "Deprecated - only for compatibility.",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         },
         "tags": {
           "type": "object",
-          "description": "Deprecated - only for compatibility.",
           "additionalProperties": {
             "type": "string"
           }
@@ -3399,124 +2529,63 @@
     },
     "PolicyKeyResource": {
       "type": "object",
-      "description": "Namespace / NotificationHub Regenerate Keys request.",
       "properties": {
         "policyKey": {
-          "$ref": "#/definitions/PolicyKeyType",
-          "description": "Type of Shared Access Policy Key (primary or secondary)."
+          "type": "string",
+          "enum": [
+            "PrimaryKey",
+            "SecondaryKey"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyKeyType",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "policyKey"
       ]
     },
-    "PolicyKeyType": {
-      "type": "string",
-      "description": "Type of Shared Access Policy Key (primary or secondary).",
-      "enum": [
-        "PrimaryKey",
-        "SecondaryKey"
-      ],
-      "x-ms-enum": {
-        "name": "PolicyKeyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PrimaryKey",
-            "value": "PrimaryKey"
-          },
-          {
-            "name": "SecondaryKey",
-            "value": "SecondaryKey"
-          }
-        ]
-      }
-    },
     "PrivateEndpointConnectionProperties": {
       "type": "object",
-      "description": "Private Endpoint Connection properties.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "State of Private Endpoint Connection."
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Creating",
+            "Updating",
+            "UpdatingByProxy",
+            "Deleting",
+            "DeletingByProxy",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateEndpointConnectionProvisioningState",
+            "modelAsString": true
+          }
         },
         "privateEndpoint": {
-          "$ref": "#/definitions/RemotePrivateEndpointConnection",
-          "description": "Represents a Private Endpoint that is connected to Notification Hubs namespace using Private Endpoint Connection."
+          "$ref": "#/definitions/RemotePrivateEndpointConnection"
         },
         "groupIds": {
           "type": "array",
-          "description": "List of group ids. For Notification Hubs, it always contains a single \"namespace\" element.",
           "items": {
             "type": "string"
           },
           "readOnly": true
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/RemotePrivateLinkServiceConnectionState",
-          "description": "State of the Private Link Service connection."
+          "$ref": "#/definitions/RemotePrivateLinkServiceConnectionState"
         }
-      }
-    },
-    "PrivateEndpointConnectionProvisioningState": {
-      "type": "string",
-      "description": "State of Private Endpoint Connection.",
-      "enum": [
-        "Unknown",
-        "Succeeded",
-        "Creating",
-        "Updating",
-        "UpdatingByProxy",
-        "Deleting",
-        "DeletingByProxy",
-        "Deleted"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating"
-          },
-          {
-            "name": "UpdatingByProxy",
-            "value": "UpdatingByProxy"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting"
-          },
-          {
-            "name": "DeletingByProxy",
-            "value": "DeletingByProxy"
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted"
-          }
-        ]
       }
     },
     "PrivateEndpointConnectionResource": {
       "type": "object",
-      "description": "Represents a Private Endpoint Connection ARM resource - a sub-resource of Notification Hubs namespace.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Private Endpoint Connection properties."
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
         }
       },
       "allOf": [
@@ -3527,11 +2596,11 @@
     },
     "PrivateEndpointConnectionResourceListResult": {
       "type": "object",
-      "description": "The response of a PrivateEndpointConnectionResource list operation.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateEndpointConnectionResource items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnectionResource"
           },
@@ -3540,52 +2609,18 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
         "value"
       ]
     },
-    "PrivateLinkConnectionStatus": {
-      "type": "string",
-      "description": "State of Private Link Connection.",
-      "enum": [
-        "Disconnected",
-        "Pending",
-        "Approved",
-        "Rejected"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateLinkConnectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Disconnected",
-            "value": "Disconnected"
-          },
-          {
-            "name": "Pending",
-            "value": "Pending"
-          },
-          {
-            "name": "Approved",
-            "value": "Approved"
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected"
-          }
-        ]
-      }
-    },
     "PrivateLinkResource": {
       "type": "object",
-      "description": "A Private Link Arm Resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Represents properties of Private Link Resource."
+          "$ref": "#/definitions/PrivateLinkResourceProperties"
         }
       },
       "allOf": [
@@ -3596,11 +2631,11 @@
     },
     "PrivateLinkResourceListResult": {
       "type": "object",
-      "description": "The response of a PrivateLinkResource list operation.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateLinkResource items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           },
@@ -3609,7 +2644,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -3618,16 +2653,13 @@
     },
     "PrivateLinkResourceProperties": {
       "type": "object",
-      "description": "Represents properties of Private Link Resource.",
       "properties": {
         "groupId": {
           "type": "string",
-          "description": "A Group Id for Private Link. For Notification Hubs, it is always set to \"namespace\".",
           "readOnly": true
         },
         "requiredMembers": {
           "type": "array",
-          "description": "Required members. For Notification Hubs, it's always a collection with a single \"namespace\" item.",
           "items": {
             "type": "string"
           },
@@ -3635,7 +2667,6 @@
         },
         "requiredZoneNames": {
           "type": "array",
-          "description": "Required DNS zone names. For Notification Hubs, it contains two CNames for Service Bus and Notification Hubs zones.",
           "items": {
             "type": "string"
           },
@@ -3645,11 +2676,9 @@
     },
     "PublicInternetAuthorizationRule": {
       "type": "object",
-      "description": "A default (public Internet) network authorization rule, which contains rights if no other network rule matches.",
       "properties": {
         "rights": {
           "type": "array",
-          "description": "List of access rights.",
           "items": {
             "$ref": "#/definitions/AccessRights"
           }
@@ -3661,159 +2690,98 @@
     },
     "RegistrationResult": {
       "type": "object",
-      "description": "Notification result for a single registration.",
       "properties": {
         "applicationPlatform": {
           "type": "string",
-          "description": "PNS type.",
           "readOnly": true
         },
         "pnsHandle": {
           "type": "string",
-          "description": "PNS handle.",
           "readOnly": true
         },
         "registrationId": {
           "type": "string",
-          "description": "Registration id.",
           "readOnly": true
         },
         "outcome": {
           "type": "string",
-          "description": "Notification outcome.",
           "readOnly": true
         }
       }
     },
     "RemotePrivateEndpointConnection": {
       "type": "object",
-      "description": "Represents a Private Endpoint that is connected to Notification Hubs namespace using Private Endpoint Connection.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "ARM resource ID of the Private Endpoint. This may belong to different subscription and resource group than a Notification Hubs namespace.",
           "readOnly": true
         }
       }
     },
     "RemotePrivateLinkServiceConnectionState": {
       "type": "object",
-      "description": "State of the Private Link Service connection.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/PrivateLinkConnectionStatus",
-          "description": "State of Private Link Connection."
+          "type": "string",
+          "enum": [
+            "Disconnected",
+            "Pending",
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkConnectionStatus",
+            "modelAsString": true
+          }
         },
         "description": {
           "type": "string",
-          "description": "Human-friendly description.",
           "readOnly": true
         },
         "actionsRequired": {
           "type": "string",
-          "description": "Human-friendly description of required actions.",
           "readOnly": true
         }
       }
     },
-    "ReplicationRegion": {
-      "type": "string",
-      "description": "Allowed replication region",
-      "enum": [
-        "Default",
-        "WestUs2",
-        "NorthEurope",
-        "AustraliaEast",
-        "BrazilSouth",
-        "SouthEastAsia",
-        "SouthAfricaNorth",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "ReplicationRegion",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Default",
-            "value": "Default"
-          },
-          {
-            "name": "WestUs2",
-            "value": "WestUs2"
-          },
-          {
-            "name": "NorthEurope",
-            "value": "NorthEurope"
-          },
-          {
-            "name": "AustraliaEast",
-            "value": "AustraliaEast"
-          },
-          {
-            "name": "BrazilSouth",
-            "value": "BrazilSouth"
-          },
-          {
-            "name": "SouthEastAsia",
-            "value": "SouthEastAsia"
-          },
-          {
-            "name": "SouthAfricaNorth",
-            "value": "SouthAfricaNorth"
-          },
-          {
-            "name": "None",
-            "value": "None"
-          }
-        ]
-      }
-    },
     "ResourceListKeys": {
       "type": "object",
-      "description": "Response for the POST request that returns Namespace or NotificationHub access keys (connection strings).",
       "properties": {
         "primaryConnectionString": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets primaryConnectionString of the AuthorizationRule.",
           "readOnly": true,
           "x-ms-secret": true
         },
         "secondaryConnectionString": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets secondaryConnectionString of the created\nAuthorizationRule",
           "readOnly": true,
           "x-ms-secret": true
         },
         "primaryKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets primaryKey of the created AuthorizationRule.",
           "readOnly": true,
           "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets secondaryKey of the created AuthorizationRule",
           "readOnly": true,
           "x-ms-secret": true
         },
         "keyName": {
           "type": "string",
-          "description": "Gets or sets keyName of the created AuthorizationRule",
           "readOnly": true
         }
       }
     },
     "ServiceSpecification": {
       "type": "object",
-      "description": "Optional service specification used in Operations API.",
       "properties": {
         "logSpecifications": {
           "type": "array",
-          "description": "Log specifications.",
           "items": {
             "$ref": "#/definitions/LogSpecification"
           },
@@ -3824,7 +2792,6 @@
         },
         "metricSpecifications": {
           "type": "array",
-          "description": "Metric specification.",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           },
@@ -3838,11 +2805,11 @@
     },
     "SharedAccessAuthorizationRuleListResult": {
       "type": "object",
-      "description": "Paged collection of SharedAccessAuthorizationRuleResource items",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SharedAccessAuthorizationRuleResource items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
           },
@@ -3851,7 +2818,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -3860,11 +2827,9 @@
     },
     "SharedAccessAuthorizationRuleProperties": {
       "type": "object",
-      "description": "SharedAccessAuthorizationRule properties.",
       "properties": {
         "rights": {
           "type": "array",
-          "description": "Gets or sets the rights associated with the rule.",
           "items": {
             "$ref": "#/definitions/AccessRights"
           }
@@ -3872,46 +2837,38 @@
         "primaryKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets a base64-encoded 256-bit primary key for signing and\nvalidating the SAS token.",
           "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets a base64-encoded 256-bit primary key for signing and\nvalidating the SAS token.",
           "x-ms-secret": true
         },
         "keyName": {
           "type": "string",
-          "description": "Gets a string that describes the authorization rule.",
           "readOnly": true
         },
         "modifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets the last modified time for this rule",
           "readOnly": true
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets the created time for this rule",
           "readOnly": true
         },
         "claimType": {
           "type": "string",
-          "description": "Gets a string that describes the claim type",
           "readOnly": true
         },
         "claimValue": {
           "type": "string",
-          "description": "Gets a string that describes the claim value",
           "readOnly": true
         },
         "revision": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the revision number for the rule",
           "readOnly": true
         }
       },
@@ -3921,18 +2878,16 @@
     },
     "SharedAccessAuthorizationRuleResource": {
       "type": "object",
-      "description": "Response for POST requests that return single SharedAccessAuthorizationRule.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-          "description": "SharedAccessAuthorizationRule properties.",
           "x-ms-client-flatten": true
         },
         "location": {
           "type": "string",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         },
         "tags": {
@@ -3950,68 +2905,42 @@
     },
     "Sku": {
       "type": "object",
-      "description": "The Sku description for a namespace",
       "properties": {
         "name": {
-          "$ref": "#/definitions/SkuName",
-          "description": "Namespace SKU name."
+          "type": "string",
+          "enum": [
+            "Free",
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
         },
         "tier": {
-          "type": "string",
-          "description": "Gets or sets the tier of particular sku"
+          "type": "string"
         },
         "size": {
-          "type": "string",
-          "description": "Gets or sets the Sku size"
+          "type": "string"
         },
         "family": {
-          "type": "string",
-          "description": "Gets or sets the Sku Family"
+          "type": "string"
         },
         "capacity": {
           "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the capacity of the resource"
+          "format": "int32"
         }
       },
       "required": [
         "name"
       ]
     },
-    "SkuName": {
-      "type": "string",
-      "description": "Namespace SKU name.",
-      "enum": [
-        "Free",
-        "Basic",
-        "Standard"
-      ],
-      "x-ms-enum": {
-        "name": "SkuName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Free",
-            "value": "Free"
-          },
-          {
-            "name": "Basic",
-            "value": "Basic"
-          },
-          {
-            "name": "Standard",
-            "value": "Standard"
-          }
-        ]
-      }
-    },
     "WnsCredential": {
       "type": "object",
-      "description": "Description of a NotificationHub WnsCredential.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/WnsCredentialProperties",
-          "description": "Description of a NotificationHub WnsCredential.",
           "x-ms-client-flatten": true
         }
       },
@@ -4021,47 +2950,39 @@
     },
     "WnsCredentialProperties": {
       "type": "object",
-      "description": "Description of a NotificationHub WnsCredential.",
       "properties": {
         "packageSid": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the package ID for this credential.",
           "x-ms-secret": true
         },
         "secretKey": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the secret key.",
           "x-ms-secret": true
         },
         "windowsLiveEndpoint": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the Windows Live endpoint.",
           "x-ms-secret": true
         },
         "certificateKey": {
           "type": "string",
           "format": "password",
-          "description": "Ges or sets the WNS Certificate Key.",
           "x-ms-secret": true
         },
         "wnsCertificate": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets the WNS Certificate.",
           "x-ms-secret": true
         }
       }
     },
     "XiaomiCredential": {
       "type": "object",
-      "description": "Description of a NotificationHub XiaomiCredential.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/XiaomiCredentialProperties",
-          "description": "Description of a NotificationHub XiaomiCredentialProperties.",
           "x-ms-client-flatten": true
         }
       },
@@ -4071,18 +2992,15 @@
     },
     "XiaomiCredentialProperties": {
       "type": "object",
-      "description": "Description of a NotificationHub XiaomiCredentialProperties.",
       "properties": {
         "appSecret": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets app secret.",
           "x-ms-secret": true
         },
         "endpoint": {
           "type": "string",
           "format": "password",
-          "description": "Gets or sets xiaomi service endpoint.",
           "x-ms-secret": true
         }
       }
