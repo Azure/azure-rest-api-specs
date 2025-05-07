@@ -41,7 +41,10 @@ export class Swagger {
   async getRefs() {
     if (!this.#refs) {
       const schema = await $RefParser.resolve(this.#path, {
-        resolve: { http: false, file: { order: 1, canRead: true, read: resolveEmptyExamples } },
+        resolve: {
+          http: false,
+          file: { order: 1, canRead: true, read: resolveEmptyExamples },
+        },
       });
 
       const refPaths = schema
@@ -123,17 +126,17 @@ function json(file) {
 /**
  * Example files are not needed for spec model, so return an empty object.
  * Otherwise, read the file and return its contents.
- * @param {import("@apidevtools/json-schema-ref-parser").FileInfo} file 
+ * @param {import("@apidevtools/json-schema-ref-parser").FileInfo} file
  * @returns {Promise<string>} File contents or "{}" if the file is an example
  */
 async function resolveEmptyExamples(
-  /** @type import("@apidevtools/json-schema-ref-parser").FileInfo */ 
-  file
+  /** @type import("@apidevtools/json-schema-ref-parser").FileInfo */
+  file,
 ) {
   const { url } = file;
   if (example(url)) {
     return "{}";
   }
 
-  return (await readFile(url, { encoding: "utf8" }));
+  return await readFile(url, { encoding: "utf8" });
 }
