@@ -450,6 +450,9 @@
           },
           "Create or update resource with managed identity": {
             "$ref": "./examples/communicationServices/createOrUpdateWithSystemAssignedIdentity.json"
+          },
+          "Create resource with disableLocalAuth": {
+            "$ref": "./examples/communicationServices/createOrUpdateWithDisableLocalAuth.json"
           }
         }
       },
@@ -778,6 +781,15 @@
         },
         "linkedDomains": {
           "$ref": "#/definitions/DomainsResourceList"
+        },
+        "disableLocalAuth": {
+          "description": "Disable local authentication for the CommunicationService.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         }
       }
     },
