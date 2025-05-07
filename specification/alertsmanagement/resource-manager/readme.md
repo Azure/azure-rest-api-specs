@@ -76,7 +76,6 @@ These settings apply only when `--tag=package-preview-2025-03-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-03-01-preview'
 input-file:
   - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
-  - Microsoft.AlertsManagement/preview/2025-03-01-preview/PreviewAlertRule.json
 ```
 ### Tag: package-preview-2024-01
 
