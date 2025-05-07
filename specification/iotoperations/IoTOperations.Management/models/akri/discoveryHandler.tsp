@@ -208,7 +208,7 @@ model AkriDiscoveryHandlerScheduleCron extends AkriDiscoveryHandlerSchedule {
   /**
    * The cron expression for the schedule.
    */
-  cron: string; 
+  cron: string;
 }
 
 /**
@@ -224,7 +224,7 @@ model AkriDiscoveryHandlerScheduleRunOnce extends AkriDiscoveryHandlerSchedule {
   /**
    * The time to run the discovery handler.
    */
-  runOnce: string; 
+  runOnce: string;
 }
 
 /**

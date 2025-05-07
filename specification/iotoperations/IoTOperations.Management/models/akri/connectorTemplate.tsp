@@ -404,7 +404,7 @@ model AkriConnectorTemplateRuntimeStatefulSetConfiguration
   /**
    * The stateful set configuration settings
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kuberntes resource type"  
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kuberntes resource type"
   statefulSetConfigurationSettings: Record<unknown>;
 }
 
@@ -472,8 +472,7 @@ union AkriConnectorTemplateTagDigestType {
  * AkriConnectorTemplateTag properties
  */
 @added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateTag
-  extends AkriConnectorTemplateTagDigestSettings {
+model AkriConnectorTemplateTag extends AkriConnectorTemplateTagDigestSettings {
   /**
    * The tag or digest type
    */
