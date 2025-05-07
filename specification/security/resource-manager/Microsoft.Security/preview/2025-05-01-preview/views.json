@@ -1,0 +1,156 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Microsoft Defender for Cloud",
+        "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+        "version": "2025-05-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/providers/Microsoft.Security/views": {
+            "post": {
+                "tags": [
+                    "Views"
+                ],
+                "description": "Fetch Microsoft Defender for Cloud data over a specified view",
+                "operationId": "Views",
+                "parameters": [
+                    {
+                        "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+                    },
+                    {
+                        "name": "scenarioName",
+                        "in": "body",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the scenario for which the data is requested"
+                    },
+                    {
+                        "name": "scenarioParameters",
+                        "in": "body",
+                        "required": true,
+                        "type": "object",
+                        "description": "The parameters for the specified scenario and view"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result of the query operation",
+                        "schema": {
+                            "$ref": "#/definitions/ScenarioResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Basic query": {
+                        "$ref": "./examples/BasicQuery_example.json"
+                    },
+                    "Complex query": {
+                        "$ref": "./examples/ComplexQuery_example.json"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ScenarioResponse": {
+            "description": "Query result.",
+            "type": "object"
+        },
+        "ErrorResponse": {
+            "title": "Error response.",
+            "type": "object",
+            "description": "An error response from the API.",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/Error",
+                    "description": "Error information."
+                }
+            },
+            "required": [
+                "error"
+            ]
+        },
+        "Error": {
+            "title": "Error info.",
+            "type": "object",
+            "description": "Error details.",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "Error code identifying the specific error."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "A human readable error message."
+                },
+                "details": {
+                    "type": "array",
+                    "description": "Error details",
+                    "items": {
+                        "$ref": "#/definitions/ErrorDetails"
+                    },
+                    "x-ms-identifiers": []
+                }
+            },
+            "required": [
+                "code",
+                "message"
+            ]
+        },
+        "ErrorDetails": {
+            "title": "Error details.",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "Error code identifying the specific error."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "A human readable error message."
+                }
+            },
+            "additionalProperties": {
+                "type": "object"
+            },
+            "required": [
+                "code",
+                "message"
+            ]
+        }
+    }
+}
