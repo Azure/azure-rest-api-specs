@@ -6,9 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.ComputeSchedule;
@@ -71,6 +69,46 @@ interface ScheduledActions {
     ...Params,
     @body @doc("The request body") requestBody: ExecuteStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | ErrorResponse;
+
+  /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteCreate")
+  @post
+  virtualMachinesExecuteCreate(
+    ...Params,
+    @body @doc("The request body") requestBody: ExecuteCreateRequest,
+  ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
+
+  /** VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDelete")
+  @post
+  virtualMachinesExecuteDelete(
+    ...Params,
+    @body @doc("The request body") requestBody: ExecuteDeleteRequest,
+  ): ArmResponse<DeleteResourceOperationResponse> | ErrorResponse;
+
+  /** VirtualMachinesSubmitCreate: submit create operation for a batch of virtual machines, at datetime in future. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesSubmitCreate")
+  @post
+  virtualMachinesSubmitCreate(
+    ...Params,
+    @body @doc("The request body") requestBody: SubmitCreateRequest,
+  ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
+
+  /** VirtualMachinesSubmitDelete: submit delete operation for a batch of virtual machines, at datetime in future. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesSubmitDelete")
+  @post
+  virtualMachinesSubmitDelete(
+    ...Params,
+    @body @doc("The request body") requestBody: SubmitDeleteRequest,
+  ): ArmResponse<DeleteResourceOperationResponse> | ErrorResponse;
 
   /** VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"

@@ -15,7 +15,7 @@ namespace DevCenterService;
 @parentResource(Project)
 model OperationStatus {
   @doc("Fully qualified ID for the operation status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The operation id name.")
@@ -23,7 +23,7 @@ model OperationStatus {
   @minLength(36)
   @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
   @key("operationId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: Azure.Core.uuid;
 
   @doc("Provisioning state of the resource.")
@@ -43,9 +43,9 @@ model OperationStatus {
   @maxValue(100.0)
   percentComplete?: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "there is no build in type to describe object"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Not all values are strings in this dictionary."
   @doc("Custom operation properties, populated only for a successful operation.")
-  properties?: unknown;
+  properties?: Record<unknown>;
 
   @doc("Operation Error message.")
   error?: Azure.Core.Foundations.Error;
@@ -63,7 +63,7 @@ model Project {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Description of the project.")
@@ -90,7 +90,7 @@ model User {
   @minLength(2)
   @maxLength(36)
   @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userId: string;
 }
 
@@ -138,6 +138,18 @@ union ProjectAbilityAsAdmin {
 union ProjectAbilityAsDeveloper {
   @doc("User can customize their own dev boxes.")
   CustomizeDevBoxes: "CustomizeDevBoxes",
+
+  @added(APIVersions.v2025_04_01_preview)
+  @doc("User can perform connect using DevBox tunnels.")
+  ConnectWithDevBoxTunnels: "ConnectWithDevBoxTunnels",
+
+  @added(APIVersions.v2025_04_01_preview)
+  @doc("User can create DevBox tunnels.")
+  CreateDevBoxTunnels: "CreateDevBoxTunnels",
+
+  @added(APIVersions.v2025_04_01_preview)
+  @doc("User can delete DevBox tunnels.")
+  DeleteDevBoxTunnels: "DeleteDevBoxTunnels",
 
   @doc("User can delete their own dev boxes.")
   DeleteDevBoxes: "DeleteDevBoxes",

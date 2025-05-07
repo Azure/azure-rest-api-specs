@@ -26,11 +26,21 @@ These are the global settings for the StorageCache API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-03
+tag: package-2024-07
 add-credentials: true
 title: StorageCacheManagementClient
 ```
 
+
+### Tag: package-2024-07
+
+These settings apply only when `--tag=package-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07'
+input-file:
+  - Microsoft.StorageCache/stable/2024-07-01/amlfilesystem.json
+  - Microsoft.StorageCache/stable/2024-07-01/storagecache.json
+```
 
 ### Tag: package-2024-03
 
@@ -169,7 +179,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

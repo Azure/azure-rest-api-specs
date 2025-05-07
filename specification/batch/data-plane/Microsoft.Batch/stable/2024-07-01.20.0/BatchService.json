@@ -281,6 +281,7 @@
     },
     "/poolusagemetrics": {
       "get": {
+        "deprecated": true,
         "tags": [
           "Pools"
         ],
@@ -294,7 +295,7 @@
           }
         },
         "summary": "Lists the usage metrics, aggregated by Pool across individual time intervals, for the specified Account.",
-        "description": "If you do not specify a $filter clause including a poolId, the response includes all Pools that existed in the Account in the time range of the returned aggregation intervals. If you do not specify a $filter clause including a startTime or endTime these filters default to the start and end times of the last aggregation interval currently available; that is, only the last aggregation interval is returned.",
+        "description": "Warning: This operation has been deprecated and will be removed after September 30, 2024. Please see https://azure.microsoft.com/updates?id=azure-batch-pool-list-usage-metrics-api-will-be-retired-on-30-september-2024 for more information.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -326,7 +327,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -455,7 +456,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -583,7 +584,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -816,7 +817,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-certificates.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-certificates.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -2252,7 +2253,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -2402,7 +2403,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -3897,7 +3898,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -5278,7 +5279,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -5434,7 +5435,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -5591,7 +5592,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -5967,7 +5968,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -7871,7 +7872,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -10531,7 +10532,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -10945,7 +10946,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the Pool. All VMs in a Pool are the same size.",
-          "description": "For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes)."
+          "description": "For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes)."
         },
         "totalCoreHours": {
           "type": "number",
@@ -11664,10 +11665,10 @@
         "subnetId": {
           "type": "string",
           "title": "The ARM resource identifier of the virtual network subnet which Compute Nodes running Tasks from the Job will join for the duration of the Task.",
-          "description": "The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://docs.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
           "externalDocs": {
-            "url": "https://azure.microsoft.com/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
-            "description": "Setting up RBAC for Azure Batch VNETs"
+            "url": "https://learn.microsoft.com/azure/batch/batch-virtual-network",
+            "description": "Create an Azure Batch pool in a virtual network"
           }
         },
         "skipWithdrawFromVNet": {
@@ -12121,7 +12122,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the Job Manager Task.",
-          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
+          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -12186,7 +12187,7 @@
         },
         "authenticationTokenSettings": {
           "title": "The settings for an authentication token that the Task can use to perform Batch service operations.",
-          "description": "If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.",
+          "description": "Warning: This object is deprecated and will be removed after September 30, 2024. Please see https://azure.microsoft.com/updates?id=azure-batch-task-authentication-token-will-be-retired-on-30-september-2024 for more information",
           "$ref": "#/definitions/AuthenticationTokenSettings"
         },
         "allowLowPriorityNode": {
@@ -12213,7 +12214,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the Job Preparation Task.",
-          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
+          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -12272,7 +12273,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the Job Release Task.",
-          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
+          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -12355,7 +12356,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the StartTask.",
-          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
+          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -12513,7 +12514,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of the virtual machines in the Pool. All virtual machines in a Pool are the same size.",
-          "description": "For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes)."
+          "description": "For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes)."
         },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
@@ -13805,7 +13806,7 @@
         "virtualMachineImageId": {
           "type": "string",
           "title": "The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version.",
-          "description": "This property is mutually exclusive with other ImageReference properties. The Azure Compute Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/azure/batch/nodes-and-pools#virtual-network-vnet-and-firewall-configuration."
+          "description": "This property is mutually exclusive with other ImageReference properties. The Azure Compute Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://learn.microsoft.com/azure/batch/nodes-and-pools#virtual-network-vnet-and-firewall-configuration."
         },
         "exactVersion": {
           "type": "string",
@@ -14021,7 +14022,7 @@
             "$ref": "#/definitions/DataDisk"
           },
           "title": "The configuration for data disks attached to the Compute Nodes in the Pool.",
-          "description": "This property must be specified if the Compute Nodes in the Pool need to have empty data disks attached to them. This cannot be updated. Each Compute Node gets its own disk (the disk is not a file share). Existing disks cannot be attached, each attached disk is empty. When the Compute Node is removed from the Pool, the disk and all data associated with it is also deleted. The disk is not formatted after being attached, it must be formatted before use - for more information see https://docs.microsoft.com/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux and https://docs.microsoft.com/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine."
+          "description": "This property must be specified if the Compute Nodes in the Pool need to have empty data disks attached to them. This cannot be updated. Each Compute Node gets its own disk (the disk is not a file share). Existing disks cannot be attached, each attached disk is empty. When the Compute Node is removed from the Pool, the disk and all data associated with it is also deleted. The disk is not formatted after being attached, it must be formatted before use - for more information see https://learn.microsoft.com/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux and https://learn.microsoft.com/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine."
         },
         "licenseType": {
           "type": "string",
@@ -14375,7 +14376,7 @@
     "DiffDiskPlacement": {
       "type": "string",
       "title": "Specifies the ephemeral disk placement for operating system disk for all compute nodes (VMs) in the pool.",
-      "description": "This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements",
+      "description": "This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements",
       "enum": [
         "CacheDisk"
       ],
@@ -14397,7 +14398,7 @@
         "placement": {
           "$ref": "#/definitions/DiffDiskPlacement",
           "title": "Specifies the ephemeral disk placement for operating system disk for all VMs in the pool.",
-          "description": "This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements."
+          "description": "This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements."
         }
       },
       "title": "Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM)."
@@ -14484,10 +14485,10 @@
         "subnetId": {
           "type": "string",
           "title": "The ARM resource identifier of the virtual network subnet which the Compute Nodes of the Pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
-          "description": "The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. Only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication, including ports 29876 and 29877. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/azure/batch/nodes-and-pools#virtual-network-vnet-and-firewall-configuration",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. Only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication, including ports 29876 and 29877. Also enable outbound connections to Azure Storage on port 443. For more details see: https://learn.microsoft.com/azure/batch/nodes-and-pools#virtual-network-vnet-and-firewall-configuration",
           "externalDocs": {
-            "url": "https://azure.microsoft.com/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
-            "description": "Setting up RBAC for Azure Batch VNETs"
+            "url": "https://learn.microsoft.com/azure/batch/batch-virtual-network",
+            "description": "Create an Azure Batch pool in a virtual network"
           }
         },
         "dynamicVNetAssignmentScope": {
@@ -14654,7 +14655,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the Pool. All virtual machines in a Pool are the same size.",
-          "description": "For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes)."
+          "description": "For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes)."
         },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
@@ -14832,7 +14833,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the Pool. All virtual machines in a Pool are the same size.",
-          "description": "For information about available VM sizes, see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available VM sizes, see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
@@ -14865,7 +14866,7 @@
         "autoScaleFormula": {
           "type": "string",
           "title": "A formula for the desired number of Compute Nodes in the Pool.",
-          "description": "This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling/)."
+          "description": "This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://learn.microsoft.com/azure/batch/batch-automatic-scaling)."
         },
         "autoScaleEvaluationInterval": {
           "type": "string",
@@ -15333,7 +15334,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the Task.",
-          "description": "For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
+          "description": "For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -15413,7 +15414,7 @@
         },
         "authenticationTokenSettings": {
           "title": "The settings for an authentication token that the Task can use to perform Batch service operations.",
-          "description": "If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.",
+          "description": "Warning: This object is deprecated and will be removed after September 30, 2024. Please see https://azure.microsoft.com/updates?id=azure-batch-task-authentication-token-will-be-retired-on-30-september-2024 for more information",
           "$ref": "#/definitions/AuthenticationTokenSettings"
         }
       },
@@ -15436,7 +15437,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the Task.",
-          "description": "For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
+          "description": "For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -15509,7 +15510,7 @@
         },
         "authenticationTokenSettings": {
           "title": "The settings for an authentication token that the Task can use to perform Batch service operations.",
-          "description": "If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.",
+          "description": "Warning: This object is deprecated and will be removed after September 30, 2024. Please see https://azure.microsoft.com/updates?id=azure-batch-task-authentication-token-will-be-retired-on-30-september-2024 for more information",
           "$ref": "#/definitions/AuthenticationTokenSettings"
         }
       },
@@ -16003,7 +16004,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of the virtual machine hosting the Compute Node.",
-          "description": "For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes)."
+          "description": "For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes)."
         },
         "totalTasksRun": {
           "type": "integer",
@@ -16536,7 +16537,7 @@
         "autoScaleFormula": {
           "type": "string",
           "title": "The formula for the desired number of Compute Nodes in the Pool.",
-          "description": "The formula is checked for validity before it is applied to the Pool. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling)."
+          "description": "The formula is checked for validity before it is applied to the Pool. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://learn.microsoft.com/azure/batch/batch-automatic-scaling)."
         },
         "autoScaleEvaluationInterval": {
           "type": "string",
@@ -16553,7 +16554,7 @@
         "autoScaleFormula": {
           "type": "string",
           "title": "The formula for the desired number of Compute Nodes in the Pool.",
-          "description": "The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling)."
+          "description": "The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://learn.microsoft.com/azure/batch/batch-automatic-scaling)."
         }
       },
       "required": [
@@ -16678,7 +16679,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the Pool. All VMs in a Pool are the same size.",
-          "description": "For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).<br /><br />This field can be updated only when the pool is empty."
+          "description": "For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes).<br /><br />This field can be updated only when the pool is empty."
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -17017,7 +17018,7 @@
             "$ref": "#/definitions/HttpHeader"
           },
           "title": "A list of name-value pairs for headers to be used in uploading output files",
-          "description": "These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://docs.microsoft.com/rest/api/storageservices/put-blob#request-headers-all-blob-types"
+          "description": "These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://learn.microsoft.com/rest/api/storageservices/put-blob#request-headers-all-blob-types"
         }
       },
       "required": [

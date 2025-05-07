@@ -11,9 +11,15 @@ parameters:
   - name: TargetPath
     type: string
     default: $(Build.SourcesDirectory)
+  - name: WorkingDirectory
+    type: string
+    default: $(Build.SourcesDirectory)
   - name: ScriptDirectory
     type: string
     default: eng/common/scripts
+  - name: ExcludePaths
+    type: object
+    default: []
 
 steps:
   # There will be transitory period for every language repo where the <language> - pullrequest build definition will run
@@ -26,11 +32,14 @@ steps:
       - task: Powershell@2
         displayName: Generate PR Diff
         inputs:
-          filePath: ${{ parameters.ScriptDirectory }}/Generate-PR-Diff.ps1
-          arguments: >
+          targetType: inline
+          script: >
+            ${{ parameters.ScriptDirectory }}/Generate-PR-Diff.ps1
             -TargetPath '${{ parameters.TargetPath }}'
             -ArtifactPath '${{ parameters.DiffDirectory }}'
+            -ExcludePaths ('${{ convertToJson(parameters.ExcludePaths) }}' | ConvertFrom-Json)
           pwsh: true
+          WorkingDirectory: '${{ parameters.WorkingDirectory }}'
 
       # When running in PR mode, we want the detected changed services to be attached to the build as tags.
       # However, the public identity does not have the permissions to attach tags to the build.
@@ -44,6 +53,7 @@ steps:
             Write-Host '##vso[task.addattachment type=AdditionalTags;name=AdditionalTags;]$(System.DefaultWorkingDirectory)/tags.json'
           }
         displayName: Upload tags.json with changed services
+        WorkingDirectory: '${{ parameters.WorkingDirectory }}'
 
       - task: Powershell@2
         displayName: Save package properties filtered for PR
@@ -53,6 +63,7 @@ steps:
             -PrDiff '${{ parameters.DiffDirectory }}/diff.json'
             -OutDirectory '${{ parameters.PackageInfoDirectory }}'
           pwsh: true
+          WorkingDirectory: '${{ parameters.WorkingDirectory }}'
   - ${{ else }}:
       - task: Powershell@2
         displayName: Save package properties
@@ -61,5 +72,6 @@ steps:
           arguments: >
             -ServiceDirectory '${{parameters.ServiceDirectory}}'
             -OutDirectory '${{ parameters.PackageInfoDirectory }}'
-            -AddDevVersion:$${{ eq(variables['SetDevVersion'],'true') }}
+            -AddDevVersion:($env:SETDEVVERSION -eq 'true')
           pwsh: true
+          WorkingDirectory: '${{ parameters.WorkingDirectory }}'

@@ -26,7 +26,46 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-11-preview
+tag: package-2025-04
+```
+
+### Tag: package-2025-04-only
+
+These settings apply only when `--tag=package-2025-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04-only'
+input-file:
+  - Microsoft.ContainerRegistry/stable/2025-04-01/containerregistry.json
+```
+
+### Tag: package-2025-04
+
+These settings apply only when `--tag=package-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04'
+input-file:
+  - Microsoft.ContainerRegistry/stable/2025-04-01/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2025-03-preview-only
+
+These settings apply only when `--tag=package-2025-03-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2025-03-preview
+
+These settings apply only when `--tag=package-2025-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2024-11-preview-only
@@ -421,7 +460,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -453,4 +492,10 @@ suppressions:
   - code: TrackedResourcePatchOperation
     from: containerregistry.json
     reason: The following workitems will be implemented to improve the swagger for the next API verison. Workitems 24979281, 24778096, 24802955, 24802955. This is planned for 2023-11-01-preview
+
+  - code: PatchBodyParametersSchema
+    reasons: Common property used for create and update. existing definitions and sdk already released. breaking change to fix.
+    from: containerregistry.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}"].patch.parameters[5].schema.properties.properties
 ```

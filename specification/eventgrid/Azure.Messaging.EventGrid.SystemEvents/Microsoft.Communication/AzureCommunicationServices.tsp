@@ -1,4 +1,4 @@
-import "@typespec/versioning";
+﻿import "@typespec/versioning";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
@@ -202,6 +202,7 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   deliveryStatusDetails?: string;
 
   /** List of details of delivery attempts made */
+  @visibility(Lifecycle.Read)
   deliveryAttempts: AcsSmsDeliveryAttemptProperties[];
 
   /** The time at which the SMS delivery report was received */
@@ -221,6 +222,9 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   /** The time at which the SMS was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimestamp: utcDateTime;
+
+  /** Number of segments in the message */
+  segmentCount: int32;
 }
 
 //TODO: This might need some fixing
@@ -255,12 +259,15 @@ model AcsRecordingFileStatusUpdatedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event. */
 model AcsEmailDeliveryReportReceivedEventData {
   /** The Sender Email Address */
-  sender?: string;
+  sender: string;
 
   /** The recipient Email Address */
-  recipient?: string;
+  recipient: string;
 
-  /** The Id of the email been sent */
+  /** The Internet Message Id of the email that has been sent */
+  internetMessageId: string;
+
+  /** The Id of the email that has been sent */
   messageId?: string;
 
   /** The status of the email. Any value other than Delivered is considered failed. */
@@ -318,6 +325,7 @@ model AcsRouterJobClassificationFailedEventData extends AcsRouterJobEventData {
   classificationPolicyId?: string;
 
   /** Router Job Classification Failed Errors */
+  @visibility(Lifecycle.Read)
   errors: AcsRouterCommunicationError[];
 }
 
@@ -334,6 +342,7 @@ model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Attached Worker Selector */
+  @visibility(Lifecycle.Read)
   attachedWorkerSelectors: AcsRouterWorkerSelector[];
 }
 
@@ -381,9 +390,11 @@ model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Queued Attached Worker Selector */
+  @visibility(Lifecycle.Read)
   attachedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Queued Requested Worker Selector */
+  @visibility(Lifecycle.Read)
   requestedWorkerSelectors: AcsRouterWorkerSelector[];
 }
 
@@ -401,6 +412,7 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Received Requested Worker Selectors */
+  @visibility(Lifecycle.Read)
   requestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Received Scheduled Time in UTC */
@@ -459,9 +471,11 @@ model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Scheduling Failed Attached Worker Selector Expired */
+  @visibility(Lifecycle.Read)
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Scheduling Failed Requested Worker Selector Expired */
+  @visibility(Lifecycle.Read)
   expiredRequestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Scheduling Failed Scheduled Time in UTC */
@@ -490,9 +504,11 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Waiting For Activation Worker Selector Expired */
+  @visibility(Lifecycle.Read)
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Waiting For Activation Requested Worker Selector Expired */
+  @visibility(Lifecycle.Read)
   expiredRequestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Waiting For Activation Scheduled Time in UTC */
@@ -509,9 +525,11 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
 model AcsRouterJobWorkerSelectorsExpiredEventData
   extends AcsRouterJobEventData {
   /** Router Job Worker Selectors Expired Requested Worker Selectors */
+  @visibility(Lifecycle.Read)
   expiredRequestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Worker Selectors Expired Attached Worker Selectors */
+  @visibility(Lifecycle.Read)
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
 }
 
@@ -624,9 +642,11 @@ model AcsRouterWorkerRegisteredEventData {
   workerId?: string;
 
   /** Router Worker Registered Queue Info */
+  @visibility(Lifecycle.Read)
   queueAssignments: AcsRouterQueueDetails[];
 
   /** Router Worker Registered Channel Configuration */
+  @visibility(Lifecycle.Read)
   channelConfigurations: AcsRouterChannelConfiguration[];
 
   /** Router Worker Register Total Capacity */
@@ -711,7 +731,8 @@ model AcsRouterCommunicationError {
   innererror: AcsRouterCommunicationError;
 
   /** List of Router Communication Errors */
-  details: AcsRouterCommunicationError[];
+  @visibility(Lifecycle.Read)
+  errors: AcsRouterCommunicationError[];
 }
 
 /** Router Job Worker Selector */
@@ -759,6 +780,7 @@ alias AcsChatThreadBaseEventData = {
   metadata: Record<string>;
 
   /** The list of properties of participants who are part of the thread */
+  @visibility(Lifecycle.Read)
   participants: AcsChatThreadParticipantProperties[];
 };
 
@@ -896,6 +918,9 @@ union AcsEmailDeliveryReportStatus {
 model AcsEmailDeliveryReportStatusDetails {
   /** Detailed status message */
   statusMessage?: string;
+
+  /** Recipient mail server host name */
+  recipientMailServerHostName?: string;
 }
 
 /** Schema of common properties of all chat thread events */
@@ -1025,6 +1050,7 @@ model AcsSmsDeliveryAttemptProperties {
 /** Schema for all properties of Recording Storage Information. */
 model AcsRecordingStorageInfoProperties {
   /** List of details of recording chunks information */
+  @visibility(Lifecycle.Read)
   recordingChunks: AcsRecordingChunkInfoProperties[];
 }
 
@@ -1149,9 +1175,11 @@ model AcsRouterWorkerUpdatedEventData {
   workerId?: string;
 
   /** Router Worker Updated Queue Info */
+  @visibility(Lifecycle.Read)
   queueAssignments: AcsRouterQueueDetails[];
 
   /** Router Worker Updated Channel Configuration */
+  @visibility(Lifecycle.Read)
   channelConfigurations: AcsRouterChannelConfiguration[];
 
   /** Router Worker Updated Total Capacity */
@@ -1164,6 +1192,7 @@ model AcsRouterWorkerUpdatedEventData {
   tags: Record<string>;
 
   /** Router Worker Properties Updated */
+  @visibility(Lifecycle.Read)
   updatedWorkerProperties: AcsRouterUpdatedWorkerProperty[];
 }
 
@@ -1185,38 +1214,60 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsMessageReceivedEventData extends AcsMessageEventData {
-  /** The message content */
+  /** Optional. The message content */
   content?: string;
 
-  /** The message channel type */
+  /** Optional. Message ID. Format is Guid as string. */
+  messageId?: string;
+
+  /** Required. The message channel type */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   channelType: AcsMessageChannelKind;
 
-  /** The received message media content */
-  media: AcsMessageMediaContent;
+  /** Required. Whatsapp message type */
+  messageType: string;
 
-  /** The received message context */
-  context: AcsMessageContext;
+  /** Optional. The received message media content */
+  media?: AcsMessageMediaContent;
 
-  /** The received message button content */
-  button: AcsMessageButtonContent;
+  /** Optional. The received message reaction content */
+  reaction?: AcsMessageReactionContent;
 
-  /** The received message interactive content */
-  interactive: AcsMessageInteractiveContent;
+  /** Optional. The received message context */
+  context?: AcsMessageContext;
+
+  /** Optional. The received message button content */
+  button?: AcsMessageButtonContent;
+
+  /** Optional. The received message interactive content */
+  interactive?: AcsMessageInteractiveContent;
 }
 
 /** Message Media Content */
 model AcsMessageMediaContent {
-  /** The MIME type of the file this media represents */
-  mimeType?: string;
+  /** Required. The MIME type of the file this media represents */
+  mimeType: string;
 
-  /** The media identifier */
-  id?: string;
+  /** Required. The media identifier */
+  id: string;
 
-  /** The filename of the underlying media file as specified when uploaded */
+  /** Optional. The filename of the underlying media file as specified when uploaded */
   fileName?: string;
 
-  /** The caption for the media object, if supported and provided */
+  /** Optional. The caption for the media object, if supported and provided */
   caption?: string;
+
+  /** Optional. Set to true if the sticker is animated; false otherwise. */
+  animated?: boolean;
+}
+
+/** Message Reaction Content */
+model AcsMessageReactionContent {
+  /** Required. WhatsApp message ID of the message that the emoji is applied to */
+  messageId: string;
+
+  /** Optional. Unicode escape sequence of the emoji. */
+  emoji?: string;
 }
 
 /** Message Context */
@@ -1244,10 +1295,10 @@ model AcsMessageInteractiveContent {
   type: AcsInteractiveReplyKind;
 
   /** The Message Sent when a customer clicks a button */
-  buttonReply: AcsMessageInteractiveButtonReplyContent;
+  buttonReply?: AcsMessageInteractiveButtonReplyContent;
 
   /** The Message Sent when a customer selects an item from a list */
-  listReply: AcsMessageInteractiveListReplyContent;
+  listReply?: AcsMessageInteractiveListReplyContent;
 }
 
 /** Message Interactive button reply content for a user to business message */
@@ -1274,17 +1325,17 @@ model AcsMessageInteractiveListReplyContent {
 /** Schema of common properties of all chat thread events */
 model AcsMessageEventData {
   /** The message sender */
-  from?: string;
+  from: string;
 
   /** The message recipient */
-  to?: string;
+  to: string;
 
   /** The time message was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimeStamp: utcDateTime;
 
   /** The channel event error */
-  error: AcsMessageChannelEventError;
+  error?: AcsMessageChannelEventError;
 }
 
 /** Message Channel Event Error */

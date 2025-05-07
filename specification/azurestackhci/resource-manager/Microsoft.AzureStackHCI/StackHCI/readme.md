@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-09
+tag: package-preview-2025-02-01-preview
 
 directive:
   - from: edgeDevices.json
@@ -108,6 +108,7 @@ suppressions:
       - edgeDevices.json
       - securitySettings.json
       - edgeDeviceJobs.json
+      - validatedSolutionRecipes.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -235,6 +236,53 @@ suppressions:
     from: 
       - clusters.json
     reason: Making the body optional now would cause a breaking change in backward compatibility
+```
+
+### Tag: package-preview-2025-02-01-preview
+
+These settings apply only when `--tag=package-preview-2025-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-02-01-preview'
+input-file:
+  - preview/2025-02-01-preview/arcSettings.json
+  - preview/2025-02-01-preview/clusters.json
+  - preview/2025-02-01-preview/deploymentSettings.json
+  - preview/2025-02-01-preview/edgeDeviceJobs.json
+  - preview/2025-02-01-preview/edgeDevices.json
+  - preview/2025-02-01-preview/extensions.json
+  - preview/2025-02-01-preview/hciCommon.json
+  - preview/2025-02-01-preview/offers.json
+  - ../operations/preview/2025-02-01-preview/operations.json
+  - preview/2025-02-01-preview/publishers.json
+  - preview/2025-02-01-preview/securitySettings.json
+  - preview/2025-02-01-preview/skus.json
+  - preview/2025-02-01-preview/updateRuns.json
+  - preview/2025-02-01-preview/updates.json
+  - preview/2025-02-01-preview/updateSummaries.json
+  - preview/2025-02-01-preview/validatedSolutionRecipes.json
+```
+
+### Tag: package-preview-2024-12-01-preview
+
+These settings apply only when `--tag=package-preview-2024-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-12-01-preview'
+input-file:
+  - preview/2024-12-01-preview/arcSettings.json
+  - preview/2024-12-01-preview/clusters.json
+  - preview/2024-12-01-preview/deploymentSettings.json
+  - preview/2024-12-01-preview/edgeDeviceJobs.json
+  - preview/2024-12-01-preview/edgeDevices.json
+  - preview/2024-12-01-preview/extensions.json
+  - preview/2024-12-01-preview/hciCommon.json
+  - preview/2024-12-01-preview/offers.json
+  - ../operations/preview/2024-12-01-preview/operations.json
+  - preview/2024-12-01-preview/publishers.json
+  - preview/2024-12-01-preview/securitySettings.json
+  - preview/2024-12-01-preview/skus.json
+  - preview/2024-12-01-preview/updateRuns.json
+  - preview/2024-12-01-preview/updates.json
+  - preview/2024-12-01-preview/updateSummaries.json
 ```
 
 ### Tag: package-preview-2024-09

@@ -9,9 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@service({
-  title: "Azure.AI.DocumentTranslation",
-})
+@service(#{ title: "Azure.AI.DocumentTranslation" })
 @versioned(DocumentTranslation.Versions)
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[

@@ -42,7 +42,7 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2025-01-stable
+tag: package-policy-2025-03-stable
 ```
 
 ``` yaml $(package-databoundaries)
@@ -50,15 +50,7 @@ tag: package-databoundaries-2024-08
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2024-03
-```
-
-``` yaml $(package-resources)
-tag: package-resources-2024-07
-```
-
-``` yaml $(package-resources)
-tag: package-resources-2024-11
+tag: package-resources-2025-04
 ```
 
 ``` yaml $(package-subscriptions)
@@ -97,17 +89,50 @@ tag: package-snapshots-2022-11
 tag: package-bicep-2023-11
 ```
 
-### Tag: package-policy-2025-01-stable
+### Tag: package-policy-2025-03-stable
 
-These settings apply only when `--tag=package-policy-2025-01-stable` is specified on the command line.
+These settings apply only when `--tag=package-policy-2025-03-stable` is specified on the command line.
 
-```yaml $(tag) == 'package-policy-2025-01-stable'
+```yaml $(tag) == 'package-policy-2025-03-stable'
+input-file:
+  - Microsoft.Authorization/stable/2025-03-01/policyAssignments.json
+  - Microsoft.Authorization/stable/2025-03-01/policyDefinitions.json
+  - Microsoft.Authorization/stable/2025-03-01/policyDefinitionVersions.json
+  - Microsoft.Authorization/stable/2025-03-01/policySetDefinitions.json
+  - Microsoft.Authorization/stable/2025-03-01/policySetDefinitionVersions.json
+  - Microsoft.Authorization/stable/2025-03-01/policyTokens.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2025-01
+
+These settings apply only when `--tag=package-policy-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2025-01'
 input-file:
 - Microsoft.Authorization/stable/2025-01-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2025-01-01/policyDefinitionVersions.json
 - Microsoft.Authorization/stable/2025-01-01/policySetDefinitions.json
 - Microsoft.Authorization/stable/2025-01-01/policySetDefinitionVersions.json
 - Microsoft.Authorization/stable/2025-01-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2024-12-preview
+
+These settings apply only when `--tag=package-policy-2024-12-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2024-12-preview'
+input-file:
+- Microsoft.Authorization/preview/2024-12-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2024-12-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2024-12-01-preview/policyVariableValues.json
 
 # Needed when there is more than one input file
 override-info:
@@ -234,6 +259,24 @@ These settings apply only when `--tag=package-resources-2024-11` is specified on
 ``` yaml $(tag) == 'package-resources-2024-11'
 input-file:
   - Microsoft.Resources/stable/2024-11-01/resources.json
+```
+
+### Tag: package-resources-2025-03
+
+These settings apply only when `--tag=package-resources-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2025-03'
+input-file:
+  - Microsoft.Resources/stable/2025-03-01/resources.json
+```
+
+### Tag: package-resources-2025-04
+
+These settings apply only when `--tag=package-resources-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2025-04'
+input-file:
+  - Microsoft.Resources/stable/2025-04-01/resources.json
 ```
 
 ### Tag: package-2022-12
@@ -1109,15 +1152,12 @@ directive:
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyExemptions.json
-    where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyVariables.json
-    where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyVariableValues.json
-    where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: BodyTopLevelProperties
     from: policyAssignments.json
@@ -1314,7 +1354,7 @@ directive:
     reason: The resource is managed in a management group level (instead of inside a resource group)
   - suppress: TopLevelResourcesListBySubscription
     from: changes.json
-    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
   - from: changes.json
     suppress: OperationsAPIImplementation
     where: $.paths
@@ -1325,7 +1365,7 @@ directive:
     reason: 'Duplicate Operations API causes generation issues'
   - suppress: TopLevelResourcesListBySubscription
     from: snapshots.json
-    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
   - suppress: RequiredReadOnlySystemData
     from: changes.json
     reason: System Metadata from a change resource perspective is irrelevant
@@ -1468,6 +1508,15 @@ directive:
   - suppress: TenantLevelAPIsNotAllowed
     from: policyAssignments.json
     reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyExemptions.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyVariables.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyVariableValues.json
+    reason: Linter rule limitation. The API has always supported management group scope.
   - suppress: XmsPageableForListCalls
     from: resources.json
     reason: Shared swagger with other teams. We cannot make changes to the API as we don't own it.
@@ -1594,6 +1643,15 @@ directive:
   - suppress: ResourceNameRestriction
     from: policySetDefinitionVersions.json
     reason: Using common types for management group name
+  - suppress: ResourceNameRestriction
+    from: policyExemptions.json
+    reason: Using common types for management group name
+  - suppress: ResourceNameRestriction
+    from: policyVariables.json
+    reason: Using common types for management group name
+  - suppress: ResourceNameRestriction
+    from: policyVariableValues.json
+    reason: Using common types for management group name
   - suppress: TenantLevelAPIsNotAllowed
     from: dataBoundaries.json
     reason: "Have approval from the PAS team."
@@ -1615,6 +1673,38 @@ directive:
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: resources.json
     reason: "The deployments resource type is ProxyOnly."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.Provider
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.ProviderListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.ProviderResourceTypeListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.TagsListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.DeploymentOperation
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.DeploymentOperationsListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.OperationListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.ProviderPermissionListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
 ```
 
 ---
@@ -1628,7 +1718,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

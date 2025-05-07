@@ -1093,7 +1093,7 @@
       }
     },
     "LakeHouseReadSettings": {
-      "description": "Microsoft Fabric LakeHouse Files read settings.",
+      "description": "Microsoft Fabric Lakehouse Files read settings.",
       "type": "object",
       "allOf": [
         {
@@ -1109,12 +1109,12 @@
         "wildcardFolderPath": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Microsoft Fabric LakeHouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
+          "description": "Microsoft Fabric Lakehouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Microsoft Fabric LakeHouse Files wildcardFileName. Type: string (or Expression with resultType string)."
+          "description": "Microsoft Fabric Lakehouse Files wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
@@ -1257,7 +1257,7 @@
       ]
     },
     "LakeHouseWriteSettings": {
-      "description": "Microsoft Fabric LakeHouse Files write settings.",
+      "description": "Microsoft Fabric Lakehouse Files write settings.",
       "type": "object",
       "allOf": [
         {
@@ -3288,6 +3288,37 @@
         }
       }
     },
+    "TeradataSink": {
+      "description": "A copy activity Teradata sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "importSettings": {
+          "$ref": "#/definitions/TeradataImportCommand",
+          "description": "Teradata import settings."
+        }
+      }
+    },
+    "TeradataImportCommand": {
+      "description": "Teradata import command settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImportSettings"
+        }
+      ],
+      "properties": {
+        "additionalFormatOptions": {
+          "type": "object",
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "Additional format options for Teradata Copy Command. The format options only applies to direct copy from CSV source. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"timeFormat\": \"HHhMImSSs\" }"
+        }
+      }
+    },
     "TeradataPartitionSettings": {
       "description": "The settings that will be leveraged for teradata source partitioning.",
       "type": "object",
@@ -3638,7 +3669,7 @@
       }
     },
     "AzurePostgreSqlSource": {
-      "description": "A copy activity Azure PostgreSQL source.",
+      "description": "A copy activity Azure Database for PostgreSQL source.",
       "type": "object",
       "allOf": [
         {
@@ -3654,7 +3685,7 @@
       }
     },
     "AzurePostgreSqlSink": {
-      "description": "A copy activity Azure PostgreSQL sink.",
+      "description": "A copy activity Azure Database for PostgreSQL sink.",
       "type": "object",
       "allOf": [
         {
@@ -3666,6 +3697,30 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        },
+        "writeMethod": {
+          "description": "The write behavior for the operation. Default is Bulk Insert.",
+          "type": "string",
+          "enum": [
+            "BulkInsert",
+            "CopyCommand",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "AzurePostgreSqlWriteMethodEnum",
+            "modelAsString": true
+          }
+        },
+        "upsertSettings": {
+          "description": "Azure Database for PostgreSQL upsert option settings",
+          "type": "object",
+          "properties": {
+            "keys": {
+              "type": "object",
+              "x-ms-format": "dfe-list-string",
+              "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
+            }
+          }
         }
       }
     },
@@ -4269,7 +4324,7 @@
       }
     },
     "LakeHouseTableSource": {
-      "description": "A copy activity source for Microsoft Fabric LakeHouse Table.",
+      "description": "A copy activity source for Microsoft Fabric Lakehouse Table.",
       "type": "object",
       "allOf": [
         {
@@ -5725,6 +5780,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5753,6 +5818,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5781,6 +5856,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5928,7 +6013,7 @@
       }
     },
     "LakeHouseTableSink": {
-      "description": "A copy activity for Microsoft Fabric LakeHouse Table sink.",
+      "description": "A copy activity for Microsoft Fabric Lakehouse Table sink.",
       "type": "object",
       "allOf": [
         {
@@ -5939,7 +6024,7 @@
         "tableActionOption": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The type of table action for LakeHouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
+          "description": "The type of table action for Lakehouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
         },
         "partitionOption": {
           "type": "object",
@@ -6039,6 +6124,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The format for TimeSpan values. Type: string (or Expression with resultType string)."
+        },
+        "timeFormat": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The format for Time values. Type: string (or Expression with resultType string)."
+        },
+        "dateFormat": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The format for Date values. Type: string (or Expression with resultType string)."
         },
         "culture": {
           "type": "object",

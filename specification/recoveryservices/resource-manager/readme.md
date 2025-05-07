@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2024-10
+tag: package-2025-02-01
 ```
 
 ### Validations
@@ -42,6 +42,29 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-2025-02-01
+
+These settings apply only when `--tag=package-2025-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2025-02-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2025-02-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2025-02-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2025-02-01/vaultusages.json
+```
+
+### Tag: package-2025-01-01
+
+These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2025-01-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2025-01-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2025-01-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2025-01-01/vaultusages.json
+```
 
 ### Tag: package-2024-10
 
@@ -53,6 +76,18 @@ input-file:
   - Microsoft.RecoveryServices/stable/2024-10-01/replicationusages.json
   - Microsoft.RecoveryServices/stable/2024-10-01/vaults.json
   - Microsoft.RecoveryServices/stable/2024-10-01/vaultusages.json
+```
+
+### Tag: package-preview-2024-09
+
+These settings apply only when `--tag=package-preview-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-09'
+input-file:
+  - Microsoft.RecoveryServices/preview/2024-09-30-preview/registeredidentities.json
+  - Microsoft.RecoveryServices/preview/2024-09-30-preview/replicationusages.json
+  - Microsoft.RecoveryServices/preview/2024-09-30-preview/vaults.json
+  - Microsoft.RecoveryServices/preview/2024-09-30-preview/vaultusages.json
 ```
 
 ### Tag: package-preview-2024-04
@@ -78,6 +113,7 @@ input-file:
   - Microsoft.RecoveryServices/stable/2024-04-01/vaults.json
   - Microsoft.RecoveryServices/stable/2024-04-01/vaultusages.json
 ```
+
 ### Tag: package-2024-02
 
 These settings apply only when `--tag=package-2024-02` is specified on the command line.
@@ -437,7 +473,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

@@ -86,6 +86,31 @@ function Get-ResourceProviderFromReadMePath {
     return $null
 }
 
+function Get-ImpactedTypespecProjects {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$TypeSpecFile
+    )
+    $it = $TypeSpecFile
+    while ($it -and !$configFilesInTypeSpecProjects) {
+      $it = Split-Path -Parent $it
+      $configFilesInTypeSpecProjects = Get-ChildItem -Path $it -File "tspconfig.yaml"
+    }
+    
+    if ($configFilesInTypeSpecProjects) {
+      foreach($configFilesInTypeSpecProject in $configFilesInTypeSpecProjects) {
+        $entryPointFile = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "main.tsp"
+        if ($entryPointFile) {
+          Write-Host "Found $($configFilesInTypeSpecProject.Name) and $($entryPointFile.Name) in directory $($configFilesInTypeSpecProject.Directory.FullName)"
+          return $configFilesInTypeSpecProject.Directory.FullName
+        }
+        else {
+          Write-Host "Did not find main.tsp in directory $($configFilesInTypeSpecProject.Directory.FullName)"
+        }
+      }
+    }
+}
+
 <#
 .DESCRIPTION
   Invoke the swagger parset to generate APIView tokens.
@@ -285,6 +310,12 @@ function New-SwaggerAPIViewTokens {
     }
   }
 
+  if ($autoRestConfigInfo.Count -eq 0) {
+    LogWarning " No AutoRest configuration found for the changed swagger files in the current PR..."
+    Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
+    exit 0
+  }
+
   LogGroupStart " Swagger APIView Tokens will be generated for the following configuration files..."
   $autoRestConfigInfo.GetEnumerator() | ForEach-Object {
     LogInfo " - $($_.Key)"
@@ -330,9 +361,15 @@ function New-SwaggerAPIViewTokens {
   }
 
   git checkout $currentBranch
+  $generatedSwaggerArtifacts = Get-ChildItem -Path $swaggerAPIViewArtifactsDirectory -Recurse
+  if ($generatedSwaggerArtifacts.Count -eq 0) {
+    LogWarning " No Swagger APIView Tokens generated..."
+    Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
+    exit 0
+  }
 
   LogGroupStart " See all generated Swagger APIView Artifacts..."
-  Get-ChildItem -Path $swaggerAPIViewArtifactsDirectory -Recurse
+  $generatedSwaggerArtifacts
   LogGroupEnd
 }
 
@@ -363,15 +400,33 @@ function New-TypeSpecAPIViewTokens {
     [string]$APIViewArtifactsDirectoryName
   )
 
-  $SourceCommitId = $(git rev-parse HEAD^)
-  $TargetCommitId = $(git rev-parse HEAD)
+  $SourceCommitId = $(git rev-parse HEAD^2)
+  $TargetCommitId = $(git rev-parse HEAD^1)
 
-  $typeSpecProjects, $null = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
-    -IgnoreCoreFiles:$true `
-    -BaseCommitish:$SourceCommitId `
-    -TargetCommitish:$TargetCommitId
+  LogInfo " Getting changed TypeSpec files in PR, between $SourceCommitId and $TargetCommitId"
+  $changedFiles = Get-ChangedFiles
+  $changedTypeSpecFiles = Get-ChangedTypeSpecFiles -changedFiles $changedFiles
 
-  $typeSpecProjects = $typeSpecProjects | Where-Object {Test-Path -Path "$_/main.tsp"}
+  if ($changedTypeSpecFiles.Count -eq 0) {
+    LogWarning " There are no changes to TypeSpec files in the current PR..."
+    Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
+    exit 0
+  }
+
+  LogGroupStart " Pullrequest has changes in these TypeSpec files..."
+  $changedTypeSpecFiles | ForEach-Object {
+    LogInfo " - $_"
+  }
+  LogGroupEnd
+  
+  # Get impacted TypeSpec projects
+  $typeSpecProjects = [System.Collections.Generic.HashSet[string]]::new()
+  $changedTypeSpecFiles | ForEach-Object {
+    $tspProj = Get-ImpactedTypespecProjects -TypeSpecFile "$_"
+    if ($tspProj) {
+      $typeSpecProjects.Add($tspProj) | Out-Null
+    }
+  }
 
   LogGroupStart " TypeSpec APIView Tokens will be generated for the following configuration files..."
   $typeSpecProjects | ForEach-Object {
@@ -391,25 +446,30 @@ function New-TypeSpecAPIViewTokens {
     git checkout $SourceCommitId
     Write-Host "Installing required dependencies to generate New API review"
     npm ci
+    LogGroupStart "npm ls -a" 
     npm ls -a
+    LogGroupEnd 
     foreach ($typeSpecProject in $typeSpecProjects) {
-      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1])
+      $tokenDirectory = Join-Path $typeSpecAPIViewArtifactsDirectory $(Split-Path $typeSpecProject -Leaf)
       New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
-      Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
+      Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $(Split-Path $typeSpecProject -Leaf) -TokenDirectory $tokenDirectory
     }
 
     # Generate Baseline TypeSpec APIView Tokens 
     git checkout $TargetCommitId
     Write-Host "Installing required dependencies to generate Baseline API review"
     npm ci
+    LogGroupStart "npm ls -a" 
     npm ls -a
+    LogGroupEnd 
     foreach ($typeSpecProject in $typeSpecProjects) {
       # Skip Baseline APIView Token for new projects
       if (!(Test-Path -Path $typeSpecProject)) {
         Write-Host "TypeSpec project $typeSpecProject is not found in pull request target branch. API review will not have a baseline revision."
       }
       else {
-        Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory | Out-Null
+        $tokenDirectory = Join-Path $typeSpecAPIViewArtifactsDirectory $(Split-Path $typeSpecProject -Leaf)
+        Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $(Split-Path $typeSpecProject -Leaf) -TokenDirectory $tokenDirectory | Out-Null
       }
     }
   }
@@ -502,7 +562,7 @@ function New-RestSpecsAPIViewReviews {
     $query.Add('pullRequestNumber', $PullRequestNumber)
     $query.Add('packageName', $_.BaseName)
     $query.Add('language', $Language)
-    $query.Add('commentOnPR', $true)
+    $query.Add('commentOnPR', $false)
 
     $uri = [System.UriBuilder]$APIViewUri
     $uri.Query = $query.ToString()
