@@ -9,6 +9,8 @@ describe("Swagger", () => {
     const swagger = new Swagger("bar");
     expect(swagger.path).toBe(resolve("bar"));
 
-    await expect(swagger.getRefs()).rejects.toThrowError(/Error reading file/i);
+    await expect(swagger.getRefs()).rejects.toThrowError(
+      /no such file or directory/i,
+    );
   });
 });
