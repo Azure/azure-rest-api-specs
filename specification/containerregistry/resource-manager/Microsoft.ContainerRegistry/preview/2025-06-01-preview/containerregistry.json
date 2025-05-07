@@ -5241,14 +5241,19 @@
     },
     "ExportPipelineTargetProperties": {
       "description": "The properties of the export pipeline target.",
-      "required": [
-        "keyVaultUri"
-      ],
       "type": "object",
       "properties": {
         "type": {
           "description": "The type of target for the export pipeline.",
-          "type": "string"
+          "default": "AzureStorageBlobContainer",
+          "enum": [
+            "AzureStorageBlobContainer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PipelineTargetType",
+            "modelAsString": true
+          }
         },
         "uri": {
           "description": "The target uri of the export pipeline.\r\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\r\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\"",
@@ -5257,7 +5262,19 @@
         "keyVaultUri": {
           "description": "They key vault secret uri to obtain the target storage SAS token.",
           "type": "string"
-        }
+        },
+        "storageAccessMode": {
+          "description": "The storage access mode used for the customer storage account.  Options are:\r\n  - ManagedIdentity (for direct MI authentication to the storage account)\r\n  - SasToken (for SAS based authentication to the storage account)\r\n  - null (non specified, defaults to SasToken)",
+          "default": "SasToken",
+          "enum": [
+            "ManagedIdentity",
+            "SasToken"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageAccessMode",
+            "modelAsString": true
+          }
       }
     },
     "ImportImageParameters": {
@@ -5433,9 +5450,6 @@
     },
     "ImportPipelineSourceProperties": {
       "description": "The properties of the import pipeline source.",
-      "required": [
-        "keyVaultUri"
-      ],
       "type": "object",
       "properties": {
         "type": {
@@ -5457,7 +5471,19 @@
         "keyVaultUri": {
           "description": "They key vault secret uri to obtain the source storage SAS token.",
           "type": "string"
-        }
+        },
+        "storageAccessMode": {
+          "description": "The storage access mode used for the customer storage account.  Options are:\r\n  - ManagedIdentity (for direct MI authentication to the storage account)\r\n  - SasToken (for SAS based authentication to the storage account)\r\n  - null (non specified, defaults to SasToken)",
+          "default": "SasToken",
+          "enum": [
+            "ManagedIdentity",
+            "SasToken"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageAccessMode",
+            "modelAsString": true
+          }
       }
     },
     "PipelineTriggerProperties": {
