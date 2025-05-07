@@ -88,3 +88,82 @@ using KeyVault;
 
 @@clientName(JsonWebKeyCurveName, "CurveName", "go");
 @@clientName(JsonWebKeyType, "KeyType", "go");
+
+// Rust configuration
+@@clientName(setCertificateContacts, "SetContacts", "rust");
+
+@@clientName(CertificateCreateParameters,
+  "CreateCertificateParameters",
+  "rust"
+);
+@@clientName(CertificateImportParameters,
+  "ImportCertificateParameters",
+  "rust"
+);
+@@clientName(CertificateIssuerSetParameters, "SetIssuerParameters", "rust");
+@@clientName(CertificateIssuerUpdateParameters,
+  "UpdateIssuerParameters",
+  "rust"
+);
+@@clientName(CertificateMergeParameters, "MergeCertificateParameters", "rust");
+@@clientName(CertificateOperationUpdateParameter,
+  "UpdateCertificateOperationParameter",
+  "rust"
+);
+@@clientName(CertificateRestoreParameters,
+  "RestoreCertificateParameters",
+  "rust"
+);
+@@clientName(CertificateUpdateParameters,
+  "UpdateCertificatePropertiesParameters",
+  "rust"
+);
+@@clientName(DeletedCertificateListResult,
+  "ListDeletedCertificatePropertiesResult",
+  "rust"
+);
+@@clientName(CertificateListResult, "ListCertificatePropertiesResult", "rust");
+@@clientName(CertificateIssuerListResult, "ListIssuerPropertiesResult", "rust");
+
+@@clientName(getCertificates, "ListCertificateProperties", "rust");
+@@clientName(getCertificateIssuers, "ListIssuerProperties", "rust");
+@@clientName(getCertificateVersions,
+  "ListCertificatePropertiesVersions",
+  "rust"
+);
+@@clientName(getDeletedCertificates,
+  "ListDeletedCertificateProperties",
+  "rust"
+);
+@@clientName(updateCertificate, "UpdateCertificateProperties", "rust");
+
+@@clientName(getCertificateContacts, "GetContacts", "rust");
+@@clientName(deleteCertificateContacts, "DeleteContacts", "rust");
+@@clientName(setCertificateIssuer, "SetIssuer", "rust");
+@@clientName(updateCertificateIssuer, "UpdateIssuer", "rust");
+@@clientName(getCertificateIssuer, "GetIssuer", "rust");
+@@clientName(deleteCertificateIssuer, "DeleteIssuer", "rust");
+
+@@clientName(Action, "LifetimeActionType", "rust");
+@@clientName(Trigger, "LifetimeActionTrigger", "rust");
+@@clientName(CertificateBundle, "Certificate", "rust");
+@@clientName(CertificateItem, "CertificateProperties", "rust");
+@@clientName(DeletedCertificateBundle, "DeletedCertificate", "rust");
+@@clientName(DeletedCertificateItem, "DeletedCertificateProperties", "rust");
+@@clientName(IssuerBundle, "Issuer", "rust");
+@@clientName(CertificateIssuerItem, "IssuerProperties", "rust");
+@@clientName(CertificateRestoreParameters.certificateBundleBackup,
+  "CertificateBackup",
+  "rust"
+);
+
+@@clientName(AdministratorDetails, "AdministratorContact", "rust");
+@@clientName(OrganizationDetails.admin_details, "AdminContacts", "rust");
+@@clientName(Contact.EmailAddress, "Email", "rust");
+@@clientName(AdministratorDetails.EmailAddress, "Email", "rust");
+
+@@clientName(SubjectAlternativeNames.upns, "UserPrincipalNames", "rust");
+@@clientName(X509CertificateProperties.ekus, "EnhancedKeyUsage", "rust");
+
+@@clientName(JsonWebKeyCurveName, "CurveName", "rust");
+@@clientName(JsonWebKeyType, "KeyType", "rust");

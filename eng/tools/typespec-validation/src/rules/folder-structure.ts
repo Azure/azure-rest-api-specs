@@ -1,21 +1,28 @@
+import debug from "debug";
+import { readFile } from "fs/promises";
+import { globby } from "globby";
 import path from "path";
+import { simpleGit } from "simple-git";
 import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
-import { TsvHost } from "../tsv-host.js";
+import { fileExists, normalizePath, readTspConfig } from "../utils.js";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
-    const gitRoot = host.normalizePath(await host.gitOperation(folder).revparse("--show-toplevel"));
+    const gitRoot = normalizePath(await simpleGit(folder).revparse("--show-toplevel"));
     const relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
 
     stdOutput += `folder: ${folder}\n`;
-    if (!(await host.checkFileExists(folder))) {
+    if (!(await fileExists(folder))) {
       return {
         success: false,
         stdOutput: stdOutput,
@@ -23,7 +30,7 @@ export class FolderStructureRule implements Rule {
       };
     }
 
-    const tspConfigs = await host.globby([`${folder}/**tspconfig.*`]);
+    const tspConfigs = await globby([`${folder}/**tspconfig.*`]);
     stdOutput += `config files: ${JSON.stringify(tspConfigs)}\n`;
     tspConfigs.forEach((file: string) => {
       if (!file.endsWith("tspconfig.yaml")) {
@@ -62,16 +69,16 @@ export class FolderStructureRule implements Rule {
     }
 
     // Verify tspconfig, main.tsp, examples/
-    const mainExists = await host.checkFileExists(path.join(folder, "main.tsp"));
-    const clientExists = await host.checkFileExists(path.join(folder, "client.tsp"));
-    const tspConfigExists = await host.checkFileExists(path.join(folder, "tspconfig.yaml"));
+    const mainExists = await fileExists(path.join(folder, "main.tsp"));
+    const clientExists = await fileExists(path.join(folder, "client.tsp"));
+    const tspConfigExists = await fileExists(path.join(folder, "tspconfig.yaml"));
 
     if (!mainExists && !clientExists) {
       errorOutput += `Invalid folder structure: Spec folder must contain main.tsp or client.tsp.`;
       success = false;
     }
 
-    if (mainExists && !(await host.checkFileExists(path.join(folder, "examples")))) {
+    if (mainExists && !(await fileExists(path.join(folder, "examples")))) {
       errorOutput += `Invalid folder structure: Spec folder with main.tsp must contain examples folder.`;
       success = false;
     }
@@ -82,7 +89,7 @@ export class FolderStructureRule implements Rule {
     }
 
     if (tspConfigExists) {
-      const configText = await host.readTspConfig(folder);
+      const configText = await readTspConfig(folder);
       const config = yamlParse(configText);
       const rpFolder =
         config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
@@ -111,13 +118,13 @@ export class FolderStructureRule implements Rule {
 
     const teamFolderResolved = path.resolve(gitRoot, teamFolder);
 
-    const tsps = await host.globby("**/*.tsp", { cwd: teamFolderResolved });
+    const tsps = await globby("**/*.tsp", { cwd: teamFolderResolved });
 
     for (const tsp of tsps) {
       const tspResolved = path.resolve(teamFolderResolved, tsp);
 
       const pattern = /^\s*import\s+['"]([^'"]+)['"]\s*;\s*$/gm;
-      const text = await host.readFile(tspResolved);
+      const text = await readFile(tspResolved, { encoding: "utf8" });
       const imports = [...text.matchAll(pattern)].map((m) => m[1]);
 
       // The path specified in the import must either start with "./" or "../", or be an absolute path.
