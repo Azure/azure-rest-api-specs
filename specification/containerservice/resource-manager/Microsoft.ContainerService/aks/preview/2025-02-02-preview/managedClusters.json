@@ -1008,12 +1008,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/managedNamespaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/namespaces": {
       "get": {
         "tags": [
-          "ManagedNamespaces"
+          "Namespaces"
         ],
-        "operationId": "ManagedNamespaces_ListByManagedCluster",
+        "operationId": "Namespaces_ListByManagedCluster",
         "summary": "Gets a list of managed namespaces in the specified managed cluster.",
         "parameters": [
           {
@@ -1033,7 +1033,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedNamespaceListResult"
+              "$ref": "#/definitions/NamespaceListResult"
             }
           },
           "default": {
@@ -1048,17 +1048,17 @@
         },
         "x-ms-examples": {
           "List namespaces by Managed Cluster": {
-            "$ref": "./examples/ManagedNamespacesList.json"
+            "$ref": "./examples/NamespacesList.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/managedNamespaces/{managedNamespaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/namespaces/{namespaceName}": {
       "get": {
         "tags": [
-          "ManagedNamespaces"
+          "Namespaces"
         ],
-        "operationId": "ManagedNamespaces_Get",
+        "operationId": "Namespaces_Get",
         "summary": "Gets the specified namespace of a managed cluster.",
         "parameters": [
           {
@@ -1074,14 +1074,14 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ManagedNamespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedNamespace"
+              "$ref": "#/definitions/Namespace"
             }
           },
           "default": {
@@ -1092,17 +1092,17 @@
           }
         },
         "x-ms-examples": {
-          "Get Managed Namespace": {
-            "$ref": "./examples/ManagedNamespacesGet.json"
+          "Get Namespace": {
+            "$ref": "./examples/NamespacesGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "ManagedNamespaces"
+          "Namespaces"
         ],
-        "operationId": "ManagedNamespaces_CreateOrUpdate",
-        "summary": "Creates or updates a managed namespace in the specified managed cluster.",
+        "operationId": "Namespaces_CreateOrUpdate",
+        "summary": "Creates or updates a namespace in the specified managed cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1117,14 +1117,14 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ManagedNamespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedNamespace"
+              "$ref": "#/definitions/Namespace"
             },
             "description": "The namespace to create or update."
           }
@@ -1133,7 +1133,7 @@
           "200": {
             "description": "The existing namespace was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/ManagedNamespace"
+              "$ref": "#/definitions/Namespace"
             }
           },
           "default": {
@@ -1145,22 +1145,22 @@
           "201": {
             "description": "The new namespace was successfully created.",
             "schema": {
-              "$ref": "#/definitions/ManagedNamespace"
+              "$ref": "#/definitions/Namespace"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create/Update Managed Namespace": {
-            "$ref": "./examples/ManagedNamespacesCreate_Update.json"
+          "Create/Update Namespace": {
+            "$ref": "./examples/NamespacesCreate_Update.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "ManagedNamespaces"
+          "Namespaces"
         ],
-        "operationId": "ManagedNamespaces_Delete",
+        "operationId": "Namespaces_Delete",
         "summary": "Deletes a namespace.",
         "parameters": [
           {
@@ -1176,7 +1176,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ManagedNamespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           }
         ],
         "responses": {
@@ -1201,17 +1201,17 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete Managed Namespace": {
-            "$ref": "./examples/ManagedNamespacesDelete.json"
+          "Delete Namespace": {
+            "$ref": "./examples/NamespacesDelete.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "ManagedNamespaces"
+          "Namespaces"
         ],
-        "operationId": "ManagedNamespaces_Update",
-        "summary": "Updates tags on a managed namespace.",
+        "operationId": "Namespaces_Update",
+        "summary": "Updates tags on a namespace.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1226,7 +1226,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ManagedNamespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "name": "parameters",
@@ -1242,7 +1242,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedNamespace"
+              "$ref": "#/definitions/Namespace"
             }
           },
           "default": {
@@ -1253,18 +1253,18 @@
           }
         },
         "x-ms-examples": {
-          "Update Managed Namespace Tags": {
-            "$ref": "./examples/ManagedNamespacesUpdateTags.json"
+          "Update Namespace Tags": {
+            "$ref": "./examples/NamespacesUpdateTags.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/managedNamespaces/{managedNamespaceName}/listCredential": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/namespaces/{namespaceName}/listCredential": {
       "post": {
         "tags": [
-          "ManagedNamespaces"
+          "Namespaces"
         ],
-        "operationId": "ManagedNamespaces_ListCredential",
+        "operationId": "Namespaces_ListCredential",
         "summary": "Lists the credentials of a namespace.",
         "parameters": [
           {
@@ -1280,7 +1280,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ManagedNamespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           }
         ],
         "responses": {
@@ -1298,8 +1298,8 @@
           }
         },
         "x-ms-examples": {
-          "List managed namespace credentials": {
-            "$ref": "./examples/ManagedNamespacesListCredentialResult.json"
+          "List namespace credentials": {
+            "$ref": "./examples/NamespacesListCredentialResult.json"
           }
         }
       }
@@ -5106,13 +5106,13 @@
       },
       "description": "Agent Pool."
     },
-    "ManagedNamespaceListResult": {
+    "NamespaceListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedNamespace"
+            "$ref": "#/definitions/Namespace"
           },
           "description": "The list of namespaces."
         },
@@ -5123,7 +5123,7 @@
       },
       "description": "The result of a request to list namespaces in a managed cluster."
     },
-    "ManagedNamespace": {
+    "Namespace": {
       "type": "object",
       "allOf": [
         {
@@ -10856,15 +10856,15 @@
       "description": "The name of the load balancer.",
       "x-ms-parameter-location": "method"
     },
-    "ManagedNamespaceNameParameter": {
-      "name": "managedNamespaceName",
+    "NamespaceNameParameter": {
+      "name": "namespaceName",
       "in": "path",
       "required": true,
       "type": "string",
       "minLength": 1,
       "maxLength": 63,
       "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?",
-      "description": "The name of the managed namespace.",
+      "description": "The name of the namespace.",
       "x-ms-parameter-location": "method"
     },
     "ResourceNameParameter": {
