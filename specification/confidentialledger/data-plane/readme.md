@@ -18,7 +18,7 @@ Please look to the files `Microsoft.ConfidentialLedger/preview/2024-12-09-previe
 These are the global settings for Confidential Ledger.
 
 ``` yaml
-tag: package-preview-2024-12-09
+tag: package-2024-12-09-preview-ledger
 openapi-type: data-plane
 ```
 
