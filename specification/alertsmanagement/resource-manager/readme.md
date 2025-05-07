@@ -61,6 +61,14 @@ tag: package-2023-03
 ```
 
 =======
+### Tag: package-preview-2025-05-01-preview
+
+These settings apply only when `--tag=package-preview-2025-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-01-preview'
+input-file:
+  - Microsoft.AlertsManagement/preview/2025-05-01-preview/PreviewAlertRule.json
+```
 ### Tag: package-preview-2025-03-01-preview
 
 These settings apply only when `--tag=package-preview-2025-03-01-preview` is specified on the command line.
@@ -122,7 +130,7 @@ input-file:
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
   - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
   - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
-  - Microsoft.AlertsManagement/preview/2025-03-01-preview/PreviewAlertRule.json
+  - Microsoft.AlertsManagement/preview/2025-05-01-preview/PreviewAlertRule.json
 ```
 ### Tag: package-2021-08
 
