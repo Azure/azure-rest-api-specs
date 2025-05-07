@@ -6104,7 +6104,7 @@
       "properties": {
         "dynamicSettings": {
           "$ref": "#/definitions/BrokerPersistenceDynamicSettings",
-          "description": "Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH. \nOptional, default shown if customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property \"aio-persistence\""
+          "description": "Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH. \nOptionally, if the customer specifies a configurable user property, it will work to enable persistence dynamically. The default user property key is 'aio-persistence' and value 'true'."
         },
         "maxSize": {
           "type": "string",
@@ -6124,7 +6124,7 @@
         },
         "subscriberQueue": {
           "$ref": "#/definitions/BrokerSubscriberQueuePolicy",
-          "description": "Custom policy, required if mode is Custom Subscriber queues from all groups are persisted to disk (logical OR)"
+          "description": "Controls which subscriber message queues should be persisted to disk Important: to facilitate reconnection, session state metadata are ALWAYS written to disk If any persistence setting is specified, even if this section isn't set."
         },
         "encryption": {
           "$ref": "#/definitions/BrokerPersistenceEncryption",
@@ -6176,17 +6176,17 @@
           {
             "name": "All",
             "value": "All",
-            "description": "Persist all 'retain' messages."
+            "description": "Policy mode for All"
           },
           {
             "name": "None",
             "value": "None",
-            "description": "Persist no messages."
+            "description": "Policy mode for None."
           },
           {
             "name": "Custom",
             "value": "Custom",
-            "description": "Persist only the specified topics."
+            "description": "Indicates that the policy is a custom policy."
           }
         ]
       }
@@ -6455,7 +6455,7 @@
       "properties": {
         "mode": {
           "$ref": "#/definitions/BrokerPersistencePolicyMode",
-          "description": "The mode of the policy."
+          "description": "'All' to persist all retain messages, 'None' to not persist any, 'Custom' to persist only the specified topics.'"
         }
       },
       "discriminator": "mode",
@@ -6549,7 +6549,7 @@
       "properties": {
         "mode": {
           "$ref": "#/definitions/BrokerPersistencePolicyMode",
-          "description": "The mode of the policy."
+          "description": "'All' to persist all keys, 'None' to not persist any, 'Custom' to persist only the specified keys.'"
         }
       },
       "discriminator": "mode",
@@ -6602,7 +6602,7 @@
       "properties": {
         "subscriberQueueSettings": {
           "$ref": "#/definitions/BrokerSubscriberQueueCustomPolicySettings",
-          "description": "Settings for the policy."
+          "description": "Custom policy, required if mode is Custom. Subscriber queues from all groups are persisted to disk (logical OR)."
         }
       },
       "required": [
@@ -6658,7 +6658,7 @@
       "properties": {
         "mode": {
           "$ref": "#/definitions/BrokerPersistencePolicyMode",
-          "description": "The mode of the policy."
+          "description": "'All' to persist all subscriber queues, 'None' to not persist any, 'Custom' to persist only the specified queues."
         }
       },
       "discriminator": "mode",
@@ -7765,8 +7765,8 @@
           "description": "Cloud event mapping config."
         },
         "hostType": {
-          "$ref": "#/definitions/DataflowEndpointKafkaHostType",
-          "description": "The type of the Kafka host"
+          "type": "string",
+          "description": "The type of the Kafka host. E.g FabricRT, EventGrid."
         }
       },
       "required": [
@@ -7924,30 +7924,6 @@
         ]
       }
     },
-    "DataflowEndpointKafkaHostType": {
-      "type": "string",
-      "description": "Kafka endpoint Host Type values",
-      "enum": [
-        "EventGrid",
-        "FabricRT"
-      ],
-      "x-ms-enum": {
-        "name": "DataflowEndpointKafkaHostType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "EventGrid",
-            "value": "EventGrid",
-            "description": "EventGrid Type"
-          },
-          {
-            "name": "FabricRT",
-            "value": "FabricRT",
-            "description": "FabricRT Type"
-          }
-        ]
-      }
-    },
     "DataflowEndpointKafkaPartitionStrategy": {
       "type": "string",
       "description": "DataflowEndpoint Kafka Partition Strategy properties",
@@ -8100,8 +8076,8 @@
           "description": "Cloud event mapping config."
         },
         "hostType": {
-          "$ref": "#/definitions/DataflowEndpointMqttHostType",
-          "description": "The type of the MQTT host"
+          "type": "string",
+          "description": "The type of the MQTT host. E.g LocalMq, Eventhub."
         }
       },
       "required": [
@@ -8136,30 +8112,6 @@
       "required": [
         "method"
       ]
-    },
-    "DataflowEndpointMqttHostType": {
-      "type": "string",
-      "description": "Mqtt endpoint Host Type values",
-      "enum": [
-        "Eventhub",
-        "LocalMq"
-      ],
-      "x-ms-enum": {
-        "name": "DataflowEndpointMqttHostType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Eventhub",
-            "value": "Eventhub",
-            "description": "Eventhub Type"
-          },
-          {
-            "name": "LocalMq",
-            "value": "LocalMq",
-            "description": "LocalMq Type"
-          }
-        ]
-      }
     },
     "DataflowEndpointOpenTelemetry": {
       "type": "object",
