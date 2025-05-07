@@ -66,6 +66,7 @@ model RequestMetadataProperties {
 model RequestMetadata {
   @doc("Status of the approval. Uses ApprovalStatus enum.")
   approvalStatus?: ApprovalStatus = ApprovalStatus.Pending;
+
   ...RequestMetadataProperties;
 }
 
@@ -73,6 +74,7 @@ model RequestMetadata {
 model RequestMetadataPatch {
   @doc("Status of the approval. Uses ApprovalStatus enum.")
   approvalStatus?: ApprovalStatus;
+
   ...RequestMetadataProperties;
 }
 

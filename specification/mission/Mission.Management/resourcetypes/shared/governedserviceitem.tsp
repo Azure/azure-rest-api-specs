@@ -27,4 +27,3 @@ model GovernedServiceItem {
   @visibility(Lifecycle.Read)
   initiatives?: string[];
 }
-

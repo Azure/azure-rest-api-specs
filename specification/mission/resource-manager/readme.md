@@ -74,6 +74,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)

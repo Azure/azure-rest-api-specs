@@ -4268,17 +4268,34 @@
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
           "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            ],
-            "type": "object",
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
           }
         }
       }
     },
+<<<<<<< HEAD:specification/mission/resource-manager/Microsoft.Mission/preview/2025-05-01-preview/openapi.json
+=======
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+>>>>>>> 35c61b751aca2cc040773271640ee65cc629c206:specification/mission/resource-manager/Microsoft.Mission/preview/2024-10-01-preview/openapi.json
     "CheckAddressSpaceAvailabilityRequest": {
       "type": "object",
       "description": "Request to the action call to check address space availability.",

@@ -15,4 +15,5 @@ namespace Microsoft.Mission;
 
 @added(Microsoft.Mission.Versions.v2025_05_01_preview)
 @doc("Read only (common-type) property that shows the moboBroker resource that manages the MRG of our resource.")
-model ManagedOnBehalfOfConfiguration is Azure.ResourceManager.CommonTypes.ManagedOnBehalfOfConfiguration;
+model ManagedOnBehalfOfConfiguration
+  is Azure.ResourceManager.CommonTypes.ManagedOnBehalfOfConfiguration;

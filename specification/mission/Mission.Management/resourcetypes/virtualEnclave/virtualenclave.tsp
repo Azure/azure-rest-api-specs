@@ -214,7 +214,7 @@ model VirtualEnclaveProperties is VirtualEnclavePropertiesDef {
 model VirtualEnclavePatchProperties is VirtualEnclavePropertiesDef {
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatch;
-  
+
   @doc("Default Settings")
   enclaveDefaultSettings?: EnclaveDefaultSettingsPatch;
 }

@@ -24,10 +24,13 @@ namespace Microsoft.Mission;
 union FirewallSKU {
   @doc("FirewallSKU Basic")
   Basic: "Basic",
+
   @doc("FirwallSKU Standard")
   Standard: "Standard",
+
   @doc("FirewallSKU Premium")
   Premium: "Premium",
+
   string,
 }
 
@@ -224,7 +227,7 @@ model CommunityPropertiesDef {
 }
 
 @doc("Community Resource Properties")
-model CommunityProperties is CommunityPropertiesDef {  
+model CommunityProperties is CommunityPropertiesDef {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettings;
