@@ -20,6 +20,9 @@ export async function generateLintDiffReport(
   baseBranch: string,
   compareSha: string,
 ): Promise<boolean> {
+  
+  console.log("Generating LintDiff report...");
+
   let pass = true;
   let outputMarkdown = "";
 
@@ -34,7 +37,7 @@ export async function generateLintDiffReport(
   // Compared Specs | New Version | Base Version
   // <tag name> | link: readme.md#tag-<tag-name> | link: readme.md#tag-<tag-name>
   // ... | ... | ...
-  for (const [_, { before, after }] of runCorrelations.entries()) {
+  for (const [, { before, after }] of runCorrelations.entries()) {
     const afterName = getName(after);
     const beforeName = before ? getName(before) : "default";
     const afterPath = getPath(after);
@@ -47,7 +50,6 @@ export async function generateLintDiffReport(
 
   const [newViolations, existingViolations] = getViolations(runCorrelations, affectedSwaggers);
 
-  console.log("Populating armRpcs for new violations");
   for (const newItem of newViolations) {
     // TODO: Potential performance issue, make parallel
     newItem.armRpcs = await getRelatedArmRpcFromDoc(newItem.code);
@@ -56,12 +58,7 @@ export async function generateLintDiffReport(
   newViolations.sort(compareLintDiffViolations);
   existingViolations.sort(compareLintDiffViolations);
 
-  if (newViolations.some((v) => isFailure(v.level))) {
-    // New violations with level error or fatal fail the build. If all new
-    // violations are warnings, the build passes.
-    pass = false;
-  }
-
+  console.log(`New violations: ${newViolations.length}`);
   if (newViolations.length > 0) {
     outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
     if (newViolations.length > 50) {
@@ -73,15 +70,24 @@ export async function generateLintDiffReport(
     outputMarkdown += "| ---- | ------- | ------------------------------- |\n";
 
     for (const violation of newViolations.slice(0, 50)) {
-      const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
+      outputMarkdown += getNewViolationReportRow(violation, compareSha);
     }
+
+    if (newViolations.some((v) => isFailure(v.level))) {
+      console.log("\t❌ At least one violation has error or fatal level. LintDiff will fail.");
+      // New violations with level error or fatal fail the build. If all new
+      // violations are warnings, the build passes.
+      pass = false;
+    } else { 
+      console.log("\t✅ No new violations with error or fatal level. LintDiff will pass.");
+    }
+
+    LogViolations("New violations list", newViolations);
 
     outputMarkdown += "\n";
   }
 
-  // The following errors/warnings exist before current PR submission
-  // Rule | Message | Location (link to file, line # at SHA)
+  console.log(`Existing violations: ${existingViolations.length}`);
   if (existingViolations.length > 0) {
     outputMarkdown += "**The following errors/warnings exist before current PR submission:**\n";
     if (existingViolations.length > 50) {
@@ -96,6 +102,8 @@ export async function generateLintDiffReport(
       outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) |\n`;
     }
 
+    LogViolations("Existing violations list", existingViolations);
+
     outputMarkdown += `\n`;
   }
 
@@ -103,6 +111,19 @@ export async function generateLintDiffReport(
   await writeFile(outFile, outputMarkdown);
 
   return pass;
+}
+
+function LogViolations(heading: string, violations: LintDiffViolation[]) {
+  console.log(`::group::${heading}`);
+  for (const violation of violations) {
+    const source = getFile(violation);
+    const line = getLine(violation);
+    console.log(`Violation: ${source}${line ? `:${line}` : ""}`);
+    console.log(`  Level: ${violation.level}`);
+    console.log(`  Code: ${violation.code}`);
+    console.log(`  Message: ${violation.message}`);
+  }
+  console.log("::endgroup::");
 }
 
 export async function generateAutoRestErrorReport(
@@ -146,6 +167,10 @@ export function compareLintDiffViolations(a: LintDiffViolation, b: LintDiffViola
   if (isFailure(a.level) && isWarning(b.level)) {
     return -1;
   } else if (isWarning(a.level) && isFailure(b.level)) {
+    return 1;
+  } else if (a.level === "fatal" && b.level !== "fatal") {
+    return -1;
+  } else if (a.level !== "fatal" && b.level === "fatal") {
     return 1;
   }
 
@@ -214,8 +239,18 @@ export function getLine(lintDiffViolation: LintDiffViolation): number | undefine
   return undefined;
 }
 
+function getNewViolationReportRow(violation: LintDiffViolation, compareSha: string): string {
+  const { level, code, message } = violation;
+  if (level.toLowerCase() == "fatal") {
+    // Fatal errors have fewer details and don't need to be formatted
+    return `| ${iconFor(level)} ${code} | ${message} | ${violation.armRpcs?.join(", ")} |\n`;
+  }
+
+  return `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
+}
+
 export function iconFor(type: string) {
-  if (type.toLowerCase().includes("error")) {
+  if (type.toLowerCase().includes("error") || type.toLowerCase() === "fatal") {
     return ":x:";
   } else {
     return ":warning:";
