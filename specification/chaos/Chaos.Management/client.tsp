@@ -41,6 +41,19 @@ using Microsoft.Chaos;
 
 // java
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "java");
+@@clientName(Azure.ResourceManager.ManagedServiceIdentity,
+  "ResourceIdentity",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "ResourceIdentityType",
+  "java"
+);
+// this enum is not used, rename to avoid duplication with "ResourceIdentityType" above
+@@clientName(Azure.ResourceManager.CommonTypes.ResourceIdentityType,
+  "SystemAssignedResourceIdentityType",
+  "java"
+);
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Experiment.properties);
