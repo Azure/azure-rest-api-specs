@@ -16,7 +16,7 @@ describe("Tag", () => {
     expect(swagger.path).toBe(resolve("swagger"));
 
     await expect(swagger.getRefs()).rejects.toThrowError(
-      /no such file or directory/i,
+      /Error reading file/i,
     );
   });
 });
