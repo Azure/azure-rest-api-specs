@@ -4495,6 +4495,25 @@
         "logs"
       ]
     },
+    "AkriConnectorTemplateDigest": {
+      "type": "object",
+      "description": "AkriConnectorTemplateDigest properties",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "description": "The digest of the image."
+        }
+      },
+      "required": [
+        "digest"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateTagDigestSettings"
+        }
+      ],
+      "x-ms-discriminator-value": "Digest"
+    },
     "AkriConnectorTemplateHelmAdvancedConfiguration": {
       "type": "object",
       "description": "AkriConnectorTemplateHelmAdvancedConfiguration properties",
@@ -5033,6 +5052,10 @@
         "registrySettings": {
           "$ref": "#/definitions/AkriConnectorTemplateRegistrySettings",
           "description": "The registry settings for the connector image. You can omit this field if using the default docker hub repository or using a local image."
+        },
+        "tagDigestSettings": {
+          "$ref": "#/definitions/AkriConnectorTemplateTagDigestSettings",
+          "description": "Image tag or digest. If not specified, the default tag is `latest`."
         }
       },
       "required": [
@@ -5080,6 +5103,63 @@
         "secretAlias",
         "name"
       ]
+    },
+    "AkriConnectorTemplateTag": {
+      "type": "object",
+      "description": "AkriConnectorTemplateTag properties",
+      "properties": {
+        "tag": {
+          "type": "string",
+          "description": "The tag of the image."
+        }
+      },
+      "required": [
+        "tag"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateTagDigestSettings"
+        }
+      ],
+      "x-ms-discriminator-value": "Tag"
+    },
+    "AkriConnectorTemplateTagDigestSettings": {
+      "type": "object",
+      "description": "AkriConnectorTemplateTagDigestSettings properties",
+      "properties": {
+        "tagDigestType": {
+          "$ref": "#/definitions/AkriConnectorTemplateTagDigestType",
+          "description": "The tag or digest type"
+        }
+      },
+      "discriminator": "tagDigestType",
+      "required": [
+        "tagDigestType"
+      ]
+    },
+    "AkriConnectorTemplateTagDigestType": {
+      "type": "string",
+      "description": "AkriConnectorTemplateTagDigestType values",
+      "enum": [
+        "Tag",
+        "Digest"
+      ],
+      "x-ms-enum": {
+        "name": "AkriConnectorTemplateTagDigestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Tag",
+            "value": "Tag",
+            "description": "Tag"
+          },
+          {
+            "name": "Digest",
+            "value": "Digest",
+            "description": "Digest"
+          }
+        ]
+      }
     },
     "AkriDiscoveryHandlerAioMetadata": {
       "type": "object",
@@ -5294,6 +5374,9 @@
           "description": "The time to run the discovery handler."
         }
       },
+      "required": [
+        "continuous"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AkriDiscoveryHandlerSchedule"
@@ -5310,6 +5393,9 @@
           "description": "The cron expression for the schedule."
         }
       },
+      "required": [
+        "cron"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AkriDiscoveryHandlerSchedule"
@@ -5326,6 +5412,9 @@
           "description": "The time to run the discovery handler."
         }
       },
+      "required": [
+        "runOnce"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AkriDiscoveryHandlerSchedule"
