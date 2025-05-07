@@ -19,5 +19,5 @@ These settings apply only when `--tag=package-2023-06-01-preview-mccf` is specif
 
 ```yaml $(tag) == 'package-2023-06-01-preview-mccf'
 input-file:
-  - Microsoft.ManagedCcf/preview/2023-06-01-preview/mccfgov.json
+  - preview/2023-06-01-preview/mccfgov.json
 ```

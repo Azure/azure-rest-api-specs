@@ -23,7 +23,7 @@ These settings apply only when `--tag=package-2024-01-11-preview-codetransparenc
 
 ```yaml $(tag) == 'package-2024-01-11-preview-codetransparency'
 input-file:
-  - Microsoft.CodeTransparency/preview/2024-01-11-preview/cts.json
+  - preview/2024-01-11-preview/cts.json
 suppressions:
   - code: PageableOperation
     from: cts.json
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2025-01-31-preview-codetransparenc
 
 ```yaml $(tag) == 'package-2025-01-31-preview-codetransparency'
 input-file:
-  - Microsoft.CodeTransparency/preview/2025-01-31-preview/cts.json
+  - preview/2025-01-31-preview/cts.json
 suppressions:
   - code: LroExtension
     from: cts.json
