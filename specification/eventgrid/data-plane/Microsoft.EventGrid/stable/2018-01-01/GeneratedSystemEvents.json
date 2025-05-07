@@ -2453,6 +2453,8 @@
         }
       },
       "required": [
+        "deliveryStatus",
+        "deliveryStatusDetails",
         "deliveryAttempts"
       ],
       "allOf": [
@@ -2477,7 +2479,12 @@
           "type": "string",
           "description": "The identity of SMS message receiver"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "from",
+        "to"
+      ]
     },
     "AcsSmsReceivedEventData": {
       "type": "object",
@@ -2499,7 +2506,8 @@
         }
       },
       "required": [
-        "segmentCount"
+        "segmentCount",
+        "message"
       ],
       "allOf": [
         {
