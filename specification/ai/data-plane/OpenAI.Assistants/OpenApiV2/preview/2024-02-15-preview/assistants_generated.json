@@ -2464,14 +2464,9 @@
           "x-ms-client-name": "stepDetails"
         },
         "last_error": {
-          "type": "object",
+          "$ref": "#/definitions/RunStepError",
           "description": "If applicable, information about the last error encountered by this run step.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunStepError"
-            }
-          ],
           "x-ms-client-name": "lastError"
         },
         "created_at": {
@@ -2509,14 +2504,9 @@
           "x-ms-client-name": "failedAt"
         },
         "usage": {
-          "type": "object",
+          "$ref": "#/definitions/RunStepCompletionUsage",
           "description": "Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunStepCompletionUsage"
-            }
-          ]
+          "x-nullable": true
         },
         "metadata": {
           "type": "object",
@@ -3023,14 +3013,9 @@
           "description": "The status of the message."
         },
         "incomplete_details": {
-          "type": "object",
+          "$ref": "#/definitions/MessageIncompleteDetails",
           "description": "On an incomplete message, details about why the message is incomplete.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MessageIncompleteDetails"
-            }
-          ],
           "x-ms-client-name": "incompleteDetails"
         },
         "completed_at": {
@@ -3155,25 +3140,15 @@
           "description": "The status of the assistant thread run."
         },
         "required_action": {
-          "type": "object",
+          "$ref": "#/definitions/RequiredAction",
           "description": "The details of the action required for the assistant thread run to continue.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RequiredAction"
-            }
-          ],
           "x-ms-client-name": "requiredAction"
         },
         "last_error": {
-          "type": "object",
+          "$ref": "#/definitions/RunError",
           "description": "The last error, if any, encountered by this assistant thread run.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunError"
-            }
-          ],
           "x-ms-client-name": "lastError"
         },
         "model": {
@@ -3241,14 +3216,9 @@
           "x-ms-client-name": "incompleteDetails"
         },
         "usage": {
-          "type": "object",
+          "$ref": "#/definitions/RunCompletionUsage",
           "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunCompletionUsage"
-            }
-          ]
+          "x-nullable": true
         },
         "metadata": {
           "type": "object",
