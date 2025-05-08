@@ -4140,6 +4140,42 @@
       },
       "description": "Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes and an allocation strategy."
     },
+    "LifecycleHooksProfile": {
+      "properties": {
+        "lifecycleHooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LifecycleHook"
+          },
+          "description": "Specifies the lifecycle hooks for the virtual machine scale set."
+        }
+      },
+      "description": "Specifies the lifecycle hooks profile for the virtual machine scale set."
+    },
+    "LifecycleHook": {
+      "properties": {
+      "type": {
+        "type": "string",
+        "description": "Specifies the type of the lifecycle hook."
+      },
+      "waitDuration": {
+        "type": "string",
+        "description": "Specifies the wait duration for the lifecycle hook."
+      },
+      "defaultAction": {
+        "$ref": "#/definitions/LifecycleHookAction",
+        "description": "Specifies the default action for the lifecycle hook."
+      }
+    },
+      "description": "Describes a lifecycle hook."
+    },
+    "LifecycleHookAction": {
+      "type": "string",
+      "enum": [
+      "Approve"
+      ],
+      "description": "Specifies the action to approve a lifecycle hook."
+    },
     "SkuProfileVMSize": {
       "type": "object",
       "properties": {
