@@ -3988,6 +3988,9 @@ directive:
   - suppress: AvoidAdditionalProperties
     from: virtualNetworkGateway.json
     reason: We are using Dictionaries in the NRP APIs which are already rolled out. Suppress it since this is used by the Gateway Resiliency APIs.
+    where:
+    - $.definitions.GatewayRouteSet
+    - $.definitions.GatewayRouteSetsInformation
 ```
 
 ---
