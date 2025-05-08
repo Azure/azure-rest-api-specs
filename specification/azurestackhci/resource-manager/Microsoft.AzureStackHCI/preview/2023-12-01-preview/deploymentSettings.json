@@ -350,6 +350,54 @@
         "scaleUnits"
       ]
     },
+    "DeploymentSummary": {
+      "type": "object",
+      "description": "Summary of the deployment error.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title for the error summary"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the error"
+        },
+        "recommendation": {
+          "type": "string",
+          "description": "Recommendation for fixing for the error"
+        },
+        "references": {
+          "type": "array",
+          "description": "URL references related to the summary",
+          "items": {
+            "$ref": "#/definitions/DeploymentSummaryReference"
+          },
+          "x-ms-identifiers": []
+        },
+        "confidence": {
+          "type": "string",
+          "description": "Confidence rating for the error recommendation"
+        }
+      }
+    },
+    "DeploymentSummaryReference": {
+      "type": "object",
+      "description": "References from the AI Generated summary",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title for the reference"
+        },
+        "link": {
+          "type": "string",
+          "description": "Hyperlink to the reference"
+        }
+      },
+      "required": [
+        "title",
+        "link"
+      ]
+    },
     "DeploymentData": {
       "type": "object",
       "description": "The Deployment data of AzureStackHCI Cluster.",
@@ -542,6 +590,11 @@
         "reportedProperties": {
           "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
           "description": "Deployment Status reported from cluster.",
+          "readOnly": true
+        },
+        "deploymentSummary": {
+          "$ref": "#/definitions/DeploymentSummary",
+          "description": "Summary of the deployment.",
           "readOnly": true
         }
       },
