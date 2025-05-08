@@ -74,6 +74,8 @@ alias CreateLivenessWithVerifySessionSummary = "Create a new liveness session wi
 alias GetLivenessWithVerifySessionResultDescription = "Get session result of detectLivenessWithVerify/singleModal call.";
 alias ListLivenessWithVerifySessionsSummary = "Lists sessions for /detectLivenessWithVerify/SingleModal.";
 alias GetSessionImageDescription = "Get session image stored during the liveness session.";
+alias GetSettingLivenessAbuseMonitoringDescription = "Get the liveness abuse monitoring setting.";
+alias PatchSettingLivenessAbuseMonitoringDescription = "Update the liveness abuse monitoring setting.";
 alias SuccessfullyDeletedSession = "Successfully deleted session and all correlated data.";
 
 @get
@@ -255,6 +257,28 @@ interface LivenessSessionOperations {
       sessionImageId: string;
     },
     SessionImageStream,
+    ServiceTraits,
+    FaceErrorResponse
+  >;
+
+  @added(Versions.v1_3_preview_1)
+  @doc(GetSettingLivenessAbuseMonitoringDescription)
+  @get
+  @route("settings/liveness-abuse-monitoring")
+  getSettingLivenessAbuseMonitoring is Azure.Core.RpcOperation<
+    {},
+    SettingLivenessAbuseMonitoring,
+    ServiceTraits,
+    FaceErrorResponse
+  >;
+
+  @added(Versions.v1_3_preview_1)
+  @doc(PatchSettingLivenessAbuseMonitoringDescription)
+  @patch
+  @route("settings/liveness-abuse-monitoring")
+  patchSettingLivenessAbuseMonitoring is Azure.Core.RpcOperation<
+    BodyParameter<SettingLivenessAbuseMonitoringUpdate>,
+    SettingLivenessAbuseMonitoring,
     ServiceTraits,
     FaceErrorResponse
   >;
