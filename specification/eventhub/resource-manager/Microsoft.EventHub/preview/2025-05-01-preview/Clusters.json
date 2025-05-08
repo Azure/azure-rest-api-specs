@@ -425,18 +425,8 @@
               "type": "boolean",
               "description": "A value that indicates whether Scaling is Supported."
             },
-            "confidentialComputeMode": {
-              "description": "This determines if the cluster is backed by Confidential Compute infrastructure. Native: Backed by confidential compute infrastructure. Supports confidentiality and integrity. Preserving: Not backed by confidential compute infrastructure, but customer could build a solution to control encryption of data that the service processes at-rest using Customer managed keys",
-              "enum": [
-                "Native",
-                "Preserving"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "ConfidentialComputeMode",
-                "modelAsString": true
-              },
-              "default": "Preserving"
+            "platformCapabilities": {
+              "$ref": "#/definitions/platformCapabilities"
             }
           },
           "description": "Event Hubs Cluster properties supplied in responses in List or Get operations."
@@ -448,6 +438,32 @@
         }
       ],
       "description": "Single Event Hubs Cluster resource in List or Get operations."
+    },
+    "platformCapabilities":{
+      "x-ms-client-flatten": true,
+      "properties": {
+        "confidentialCompute": {
+        "$ref": "#/definitions/confidentialCompute"
+        }
+      }
+    },
+    "confidentialCompute": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "Mode": {
+          "description" : "Setting to Enable or Disable Confidential Compute",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "ClusterSku": {
       "type": "object",
