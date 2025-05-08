@@ -2079,7 +2079,7 @@
         "tags": [
           "HostPools"
         ],
-        "description": "Operation to list the RegistrationTokens associated with the HostPool",
+        "description": "Operation to list the RegistrationTokens associated with the HostPool.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -7784,8 +7784,9 @@
       "description": "Image configurations of session host in a HostPool",
       "properties": {
         "type": {
-          "$ref": "#/definitions/imagetype",
-          "description": "The type of image session hosts use in the hostpool."
+          "$ref": "#/definitions/type",
+          "description": "The type of image session hosts use in the hostpool.",
+          "x-ms-client-name": "imageType"
         },
         "marketplaceInfo": {
           "$ref": "#/definitions/MarketplaceInfoPatchProperties",
@@ -7802,8 +7803,9 @@
       "description": "Image configurations of session host in a HostPool",
       "properties": {
         "type": {
-          "$ref": "#/definitions/imagetype",
-          "description": "The type of image session hosts use in the hostpool."
+          "$ref": "#/definitions/type",
+          "description": "The type of image session hosts use in the hostpool.",
+          "x-ms-client-name": "imageType"
         },
         "marketplaceInfo": {
           "$ref": "#/definitions/MarketplaceInfoProperties",
@@ -11519,30 +11521,6 @@
         ]
       }
     },
-    "imagetype": {
-      "type": "string",
-      "description": "The type of image session hosts use in the hostpool.",
-      "enum": [
-        "Marketplace",
-        "Custom"
-      ],
-      "x-ms-enum": {
-        "name": "imagetype",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Marketplace",
-            "value": "Marketplace",
-            "description": "Using default marketplace images offered by Azure Marketplace."
-          },
-          {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "Using a custom image."
-          }
-        ]
-      }
-    },
     "packageTimestamped": {
       "type": "string",
       "description": "Is package timestamped so it can ignore the certificate expiry date",
@@ -11563,6 +11541,30 @@
             "name": "NotTimestamped",
             "value": "NotTimestamped",
             "description": "Package is not timestamped, use certificate expiry date"
+          }
+        ]
+      }
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of image session hosts use in the hostpool.",
+      "enum": [
+        "Marketplace",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Marketplace",
+            "value": "Marketplace",
+            "description": "Using default marketplace images offered by Azure Marketplace."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Using a custom image."
           }
         ]
       }

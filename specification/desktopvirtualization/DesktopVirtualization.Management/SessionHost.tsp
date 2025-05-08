@@ -102,6 +102,9 @@ interface SessionHosts {
     Response = SessionHostList
   >;
 
+  /**
+   * Retry provisioning on a SessionHost.
+   */
   retryProvisioning is ArmResourceActionSync<SessionHost, void, OkResponse>;
 }
 

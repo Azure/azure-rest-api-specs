@@ -3,8 +3,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ResourceManager.Foundations;
+using Azure.ClientGenerator.Core;
 using Versioning;
 
 namespace Microsoft.DesktopVirtualization;
@@ -127,7 +129,7 @@ union DomainJoinType {
 /**
  * The type of image session hosts use in the hostpool.
  */
-union imagetype {
+union type {
   string,
 
   /**
@@ -1668,7 +1670,8 @@ model ImageInfoProperties {
   /**
    * The type of image session hosts use in the hostpool.
    */
-  type: imagetype;
+  @clientName("imageType")
+  type: type;
 
   /**
    * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
@@ -1688,7 +1691,8 @@ model ImageInfoPatchProperties {
   /**
    * The type of image session hosts use in the hostpool.
    */
-  type?: imagetype;
+  @clientName("imageType")
+  type?: type;
 
   /**
    * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
