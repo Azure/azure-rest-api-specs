@@ -349,6 +349,12 @@ model QuestionAnsweringProjectMetadata {
    */
   @visibility(Lifecycle.Read)
   lastDeployedDateTime?: utcDateTime;
+
+  /**
+   * Represents if semantic ranking is configured.
+   */
+  @added(Versions.v2025_05_15_preview)
+  configureSemanticRanking?: boolean;
 }
 
 /**
