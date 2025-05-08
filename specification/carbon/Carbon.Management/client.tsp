@@ -2,7 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Azure.ResourceManager.CommonTypes;
+using Azure.Core;
 using Microsoft.Carbon;
 
 @@clientName(Microsoft.Carbon, "CarbonOptimizationMgmt", "python");
@@ -83,51 +83,51 @@ using Microsoft.Carbon;
   "ResourceGroupId",
   "csharp"
 );
+@@alternateType(ResourceGroupCarbonEmissionTopItemsSummaryData.resourceGroupUrl,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(ResourceGroupCarbonEmissionTopItemMonthlySummaryData.resourceGroupUrl,
   "ResourceGroupId",
+  "csharp"
+);
+@@alternateType(ResourceGroupCarbonEmissionTopItemMonthlySummaryData.resourceGroupUrl,
+  armResourceIdentifier,
   "csharp"
 );
 @@clientName(ResourceGroupCarbonEmissionItemDetailData.resourceGroupUrl,
   "ResourceGroupId",
   "csharp"
 );
+@@alternateType(ResourceGroupCarbonEmissionItemDetailData.resourceGroupUrl,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(ResponseDataTypeEnum, "CarbonEmissionDataType", "csharp");
 @@clientName(SortDirectionEnum, "CarbonEmissionQuerySortDirection", "csharp");
 @@alternateType(ResourceCarbonEmissionTopItemsSummaryData.resourceId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ResourceCarbonEmissionTopItemMonthlySummaryData.resourceId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ResourceCarbonEmissionItemDetailData.resourceId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ResourceCarbonEmissionItemDetailData.location,
-  Azure.Core.azureLocation,
+  azureLocation,
   "csharp"
 );
-@@alternateType(QueryFilter.locationList, Azure.Core.azureLocation[], "csharp");
+@@alternateType(QueryFilter.locationList, azureLocation[], "csharp");
 @@alternateType(ResourceCarbonEmissionItemDetailData.resourceType,
-  Azure.Core.armResourceType,
+  armResourceType,
   "csharp"
 );
 @@alternateType(QueryFilter.resourceTypeList,
-  Azure.Core.armResourceType[],
-  "csharp"
-);
-@@alternateType(ResourceGroupCarbonEmissionTopItemsSummaryData.resourceGroupUrl,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(ResourceGroupCarbonEmissionTopItemMonthlySummaryData.resourceGroupUrl,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(ResourceGroupCarbonEmissionItemDetailData.resourceGroupUrl,
-  Azure.Core.armResourceIdentifier,
+  armResourceType[],
   "csharp"
 );
 @@alternateType(CarbonEmissionDataAvailableDateRange.startDate,
