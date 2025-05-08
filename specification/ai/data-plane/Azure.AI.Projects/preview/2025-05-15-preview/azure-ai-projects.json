@@ -2211,8 +2211,7 @@
         },
         "isReference": {
           "type": "boolean",
-          "description": "Indicates if dataset is reference only or managed by dataset service. If true, the underlying data will be deleted when the dataset version is deleted",
-          "readOnly": true
+          "description": "Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted"
         },
         "id": {
           "type": "string",
@@ -2264,6 +2263,10 @@
         "type": {
           "$ref": "#/definitions/DatasetType",
           "description": "Dataset type"
+        },
+        "isReference": {
+          "type": "boolean",
+          "description": "Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted"
         },
         "description": {
           "type": "string",
