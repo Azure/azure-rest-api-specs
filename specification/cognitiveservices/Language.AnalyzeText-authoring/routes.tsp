@@ -69,7 +69,7 @@ op textAnalysisAuthoringListTrainedModels is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listDeploymentResources", "csharp")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 op textAnalysisAuthoringListDeploymentResources is languageOperations.ResourceList<
   TextAnalysisAuthoringAssignedDeploymentResource,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -90,7 +90,7 @@ op textAnalysisAuthoringListTrainingJobs is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listAssignedResourceDeployments", "csharp")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 op textAnalysisAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
   TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -370,7 +370,7 @@ interface TextAuthoringProject {
   @route("/authoring/analyze-text/projects/{projectName}/resources/:unassign")
   @post
   @pollingOperation(TextAuthoringProject.getUnassignDeploymentResourcesStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2025_05_01)
   unassignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -393,8 +393,28 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing unassign deployment resources job.
    */
-  @added(Versions.v2023_04_15_preview)
-  getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringUnassignDeploymentResourcesJobState>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}")
+  @get
+  @added(Versions.v2025_05_01)
+  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The new project name.
+       */
+      @path
+      projectName: string;
+
+      /**
+       * The job ID.
+       */
+      @path
+      jobId: string;
+    },
+    TextAnalysisAuthoringDeploymentResourcesJobState,
+    {},
+    Foundations.ErrorResponse
+  >;
 
   /**
    * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
@@ -403,7 +423,7 @@ interface TextAuthoringProject {
   @route("/authoring/analyze-text/projects/{projectName}/resources/:assign")
   @post
   @pollingOperation(TextAuthoringProject.getAssignDeploymentResourcesStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2025_05_01)
   assignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -426,8 +446,8 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing assign deployment resources job.
    */
-  @added(Versions.v2023_04_15_preview)
-  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringAssignDeploymentResourcesJobState>;
+  @added(Versions.v2025_05_01)
+  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentResourcesJobState>;
 
   /**
    * Swaps two existing deployments with each other.
@@ -502,7 +522,7 @@ interface TextAuthoringDeployment {
   @pollingOperation(
     TextAuthoringDeployment.getDeploymentDeleteFromResourcesStatus
   )
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2025_05_01)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
     {
       /**
@@ -531,7 +551,7 @@ interface TextAuthoringDeployment {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2025_05_01)
   getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
