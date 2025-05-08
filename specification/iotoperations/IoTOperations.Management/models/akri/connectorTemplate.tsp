@@ -21,11 +21,11 @@ model AkriConnectorTemplateResource
    * Name of AkriConnectorTemplate resource
    */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
-  @key("connectorConfigInstanceName")
+  @key("akriConnectorTemplateName")
   @path
   @minLength(3)
   @maxLength(63)
-  @segment("connectorConfigInstances")
+  @segment("akriConnectorTemplates")
   name: string;
 
   /**

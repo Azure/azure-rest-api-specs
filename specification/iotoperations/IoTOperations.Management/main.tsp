@@ -177,15 +177,15 @@ interface AkriConnector {
   get is ArmResourceRead<AkriConnectorResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriConnectorResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AkriConnectorResource>;
-  listByAkriConnectorTemplate is ArmResourceListByParent<AkriConnectorResource>;
+  listByTemplate is ArmResourceListByParent<AkriConnectorResource>;
 }
 
-// /instance/AkriDiscoveryHandlers resource Operations
+// /instance/akriDiscoveryHandlers resource Operations
 @armResourceOperations
 @added(Versions.`2025-07-01-preview`)
 interface AkriDiscoveryHandler {
   get is ArmResourceRead<AkriDiscoveryHandlerResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriDiscoveryHandlerResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AkriDiscoveryHandlerResource>;
-  listByAkriConnectorTemplate is ArmResourceListByParent<AkriDiscoveryHandlerResource>;
+  listByAioInstance is ArmResourceListByParent<AkriDiscoveryHandlerResource>;
 }
