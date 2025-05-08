@@ -9,4 +9,10 @@ namespace PureStorage.Block.Client {
   @@clientName(PureStorage.Block.ServiceInitializationData,
     "ServiceInitializationInfo"
   );
+
+  // Rename sddcResourceId field to avsClusterResourceId in all models
+  @@clientName(PureStorage.Block.AzureVmwareService.sddcResourceId, "clusterResourceId");
+  @@clientName(PureStorage.Block.ServiceInitializationHandle.sddcResourceId, "clusterResourceId");
+  @@clientName(PureStorage.Block.AvsStatus.sddcResourceId, "clusterResourceId");
+  @@clientName(PureStorage.Block.StoragePoolEnableAvsConnectionPost.sddcResourceId, "clusterResourceId");
 }
