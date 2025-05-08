@@ -605,43 +605,37 @@ const MicrosoftCommunicationAdvancedMessageReceivedExample: AcsMessageReceivedEv
 // };
 
 const AcsCallEndedExample: AcsCallEndedEventData = #{
-  reason: #{
-    code: 1,
-    subCode: 1,
-    phrase: "ReasonCode"
-  },
+  reason: #{ code: 1, subCode: 1, phrase: "ReasonCode" },
+
   // callDurationInSeconds: 10,
   endedBy: #{
     communicationIdentifier: #{
       kind: "communicationUser",
       rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
       communicationUser: #{
-        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475"
-      }
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
     },
     type: "TestCallEndedBy",
-    name: "TestCallEndedBy"
+    name: "TestCallEndedBy",
   },
+
   startedBy: #{
     communicationIdentifier: #{
       kind: "communicationUser",
       rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
       communicationUser: #{
-        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475"
-      }
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
     },
-    role: "UserRole"
+    role: "UserRole",
   },
   serverCallId: "Y3NVcmw",
-  group: #{
-    id: "055d13d6-8161-43c8-af88-2110373e1e4a"
-  },
-  room: #{
-    id: "055d13d6-8161-43c8-af88-2110373e1e4a"
-  },
-  isTwoParty: false, 
+  group: #{ id: "055d13d6-8161-43c8-af88-2110373e1e4a" },
+  room: #{ id: "055d13d6-8161-43c8-af88-2110373e1e4a" },
+  isTwoParty: false,
   correlationId: "CallIdGuid",
-  isRoomsCall: false
+  isRoomsCall: false,
 };
 
 const AcsCallParticipantAddedExample: AcsCallParticipantAddedEventData = #{
@@ -650,10 +644,10 @@ const AcsCallParticipantAddedExample: AcsCallParticipantAddedEventData = #{
       kind: "communicationUser",
       rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
       communicationUser: #{
-        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475"
-      }
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
     },
-    role: "UserRole"
+    role: "UserRole",
   },
   displayName: "displayName1",
   participantId: "participant1",
@@ -663,23 +657,18 @@ const AcsCallParticipantAddedExample: AcsCallParticipantAddedEventData = #{
       kind: "communicationUser",
       rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
       communicationUser: #{
-        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475"
-      }
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
     },
-    role: "UserRole"
+    role: "UserRole",
   },
   serverCallId: "Y3NVcmw",
-  group: #{
-    id: "6d16b954-0531-4262-9cdd-c4b85da5c5d8"
-  },
-  room: #{
-    id: "055d13d6-8161-43c8-af88-2110373e1e4a"
-  },
+  group: #{ id: "6d16b954-0531-4262-9cdd-c4b85da5c5d8" },
+  room: #{ id: "055d13d6-8161-43c8-af88-2110373e1e4a" },
   isTwoParty: false,
   correlationId: "CallIdGuid",
-  isRoomsCall: false
+  isRoomsCall: false,
 };
-
 
 const AcsCallParticipantRemovedExample: AcsCallParticipantRemovedEventData = #{
   user: #{
@@ -687,10 +676,10 @@ const AcsCallParticipantRemovedExample: AcsCallParticipantRemovedEventData = #{
       kind: "communicationUser",
       rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
       communicationUser: #{
-        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475"
-      }
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
     },
-    role: "UserRole"
+    role: "UserRole",
   },
   displayName: "displayName1",
   participantId: "participant1",
@@ -700,23 +689,18 @@ const AcsCallParticipantRemovedExample: AcsCallParticipantRemovedEventData = #{
       kind: "communicationUser",
       rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
       communicationUser: #{
-        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475"
-      }
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
     },
-    role: "UserRole"
+    role: "UserRole",
   },
   serverCallId: "Y3NVcmw",
-  group: #{
-    id: "51422183-029d-4750-9db5-c8e5a578f469"
-  },
-  room: #{
-    id: "055d13d6-8161-43c8-af88-2110373e1e4a"
-  },
+  group: #{ id: "51422183-029d-4750-9db5-c8e5a578f469" },
+  room: #{ id: "055d13d6-8161-43c8-af88-2110373e1e4a" },
   isTwoParty: false,
   correlationId: "CallIdGuid",
-  isRoomsCall: false
+  isRoomsCall: false,
 };
-
 
 const AcsCallStartedExample: AcsCallStartedEventData = #{
   startedBy: #{
@@ -724,21 +708,17 @@ const AcsCallStartedExample: AcsCallStartedEventData = #{
       kind: "communicationUser",
       rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
       communicationUser: #{
-        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475"
-      }
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
     },
-    role: "UserRole"
+    role: "UserRole",
   },
   serverCallId: "Y3NVcmw",
-  group: #{
-    id: "aca7bf5b-ff44-4f47-8385-cfd4e0232a6e"
-  },
-  room: #{
-    id: "055d13d6-8161-43c8-af88-2110373e1e4a"
-  },
+  group: #{ id: "aca7bf5b-ff44-4f47-8385-cfd4e0232a6e" },
+  room: #{ id: "055d13d6-8161-43c8-af88-2110373e1e4a" },
   isTwoParty: false,
   correlationId: "CallIdGuid",
-  isRoomsCall: false
+  isRoomsCall: false,
 };
 
 const AcsChatAzureBotCommandReceivedInThreadExample: AcsChatAzureBotCommandReceivedInThreadEventData = #{
@@ -747,17 +727,16 @@ const AcsChatAzureBotCommandReceivedInThreadExample: AcsChatAzureBotCommandRecei
   senderCommunicationIdentifier: #{
     rawId: "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
     communicationUser: #{
-      id: "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724"
-    }
+      id: "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
+    },
   },
   senderDisplayName: "John",
   composeTime: utcDateTime.fromISO("2021-02-19T00:25:58.927Z"),
   type: "Text",
   version: 1613694358927,
   transactionId: "oh+LGB2dUUadMcTAdRWQxQ.1.1.1.1.1827536918.1.7",
-  threadId: "19:6e5d6ca1d75044a49a36a7965ec4a906@thread.v2"
+  threadId: "19:6e5d6ca1d75044a49a36a7965ec4a906@thread.v2",
 };
-
 
 const AcsChatTypingIndicatorReceivedInThreadExample: AcsChatTypingIndicatorReceivedInThreadEventData = #{
   messageBody: "Welcome to Azure Communication Services",
@@ -765,8 +744,8 @@ const AcsChatTypingIndicatorReceivedInThreadExample: AcsChatTypingIndicatorRecei
   senderCommunicationIdentifier: #{
     rawId: "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
     communicationUser: #{
-      id: "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724"
-    }
+      id: "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
+    },
   },
   composeTime: utcDateTime.fromISO("2021-02-19T00:25:58.927Z"),
   senderDisplayName: "John",

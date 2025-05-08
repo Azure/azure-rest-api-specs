@@ -42,14 +42,11 @@ model AcsUserDisconnectedEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallStarted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallStartedEventData
-  extends AcsCallingEventProperties {
-}
+model AcsCallStartedEventData extends AcsCallingEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallEnded event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallEndedEventData
-  extends AcsCallingEventProperties {
+model AcsCallEndedEventData extends AcsCallingEventProperties {
   /** The communication identifier of the user who was disconnected */
   endedBy?: AcsCallEndedByProperties;
 
@@ -64,14 +61,12 @@ model AcsCallEndedEventData
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallParticipantAddedEventData
-  extends AcsCallParticipantEventProperties {
-}
+  extends AcsCallParticipantEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallParticipantRemovedEventData
-  extends AcsCallParticipantEventProperties {
-}
+  extends AcsCallParticipantEventProperties {}
 
 // @example(MicrosoftCommunicationChatMessageReceivedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
@@ -1122,14 +1117,14 @@ model AcsCallingEventProperties {
 /** Schema of calling event group properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallGroupProperties {
-  /** Group Id.*/
+  /** Group Id. */
   id?: string;
 }
 
 /** Schema of calling event room properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallRoomProperties {
-  /** Room Id.*/
+  /** Room Id. */
   id?: string;
 }
 
@@ -1290,7 +1285,7 @@ union AcsUserEngagement {
 
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
 model CommunicationIdentifierModel {
-  /** The identifier kind. Only required in responses. */  
+  /** The identifier kind. Only required in responses. */
   kind?: CommunicationIdentifierModelKind;
 
   /** Raw Id of the identifier. Optional in requests, required in responses. */
