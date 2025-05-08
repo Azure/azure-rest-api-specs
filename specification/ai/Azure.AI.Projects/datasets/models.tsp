@@ -41,7 +41,8 @@ model DatasetVersion {
   @visbility(Lifecycle.Read)
   isReference?: boolean;
 
-  @doc("The Azure Storage Account connection name. Required if isReference is true.")
+  @doc("The Azure Storage Account connection name. Required if pendingUpload was not called before creating dataset")
+  @visbility(Lifecycle.Read, Lifecycle.Write)
   connectionName?: string;
 
   ...AssetBase;
