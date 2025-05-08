@@ -1,5 +1,5 @@
 param(
-  [string]$swaggerPath
+  [string]$swaggerPath,
   [string]$callValidation = $false
 )
 
