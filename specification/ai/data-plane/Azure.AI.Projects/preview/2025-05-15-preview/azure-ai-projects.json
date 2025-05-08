@@ -2211,11 +2211,16 @@
         },
         "isReference": {
           "type": "boolean",
-          "description": "Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted"
+          "description": "Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted",
+          "readOnly": true
         },
         "connectionName": {
           "type": "string",
-          "description": "The Azure Storage Account connection name. Required if isReference is true."
+          "description": "The Azure Storage Account connection name. Required if startPendingUploadVersion was not called before creating the Dataset",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "id": {
           "type": "string",
@@ -2256,7 +2261,6 @@
       "required": [
         "dataUri",
         "type",
-        "isReference",
         "name",
         "version"
       ]
@@ -2268,14 +2272,6 @@
         "type": {
           "$ref": "#/definitions/DatasetType",
           "description": "Dataset type"
-        },
-        "isReference": {
-          "type": "boolean",
-          "description": "Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted"
-        },
-        "connectionName": {
-          "type": "string",
-          "description": "The Azure Storage Account connection name. Required if isReference is true."
         },
         "description": {
           "type": "string",

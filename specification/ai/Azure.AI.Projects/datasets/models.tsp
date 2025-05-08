@@ -38,11 +38,11 @@ model DatasetVersion {
   type: DatasetType;
 
   @doc("Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted")
-  @visbility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   isReference?: boolean;
 
-  @doc("The Azure Storage Account connection name. Required if pendingUpload was not called before creating dataset")
-  @visbility(Lifecycle.Read, Lifecycle.Write)
+  @doc("The Azure Storage Account connection name. Required if startPendingUploadVersion was not called before creating the Dataset")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   connectionName?: string;
 
   ...AssetBase;
