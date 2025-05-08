@@ -480,6 +480,9 @@ model ReplicationUsageList {
    */
   @items
   value?: ReplicationUsage[];
+
+  @nextLink
+  nextlink?: string;
 }
 
 /**
