@@ -32,36 +32,24 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData,
-  Usage.output
-);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData,
-  Access.public
-);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallingEventProperties,
   Usage.output
 );
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallingEventProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallGroupProperties,
-  Usage.output
-);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallGroupProperties, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallGroupProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallRoomProperties,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.AcsCallRoomProperties,
-  Access.public
-);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallRoomProperties, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallRoomProperties, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByProperties,
   Usage.output
 );
@@ -583,12 +571,8 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind,
-  Access.public
-);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
   Usage.output
 );
