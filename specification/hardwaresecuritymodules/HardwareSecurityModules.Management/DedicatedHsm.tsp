@@ -37,7 +37,7 @@ interface DedicatedHsms {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DedicatedHsm_Get")
-  get is ArmResourceRead<DedicatedHsm>;
+  get is ArmResourceRead<DedicatedHsm, Error = DedicatedHsmError>;
 
   /**
    * Create or Update a dedicated HSM in the specified subscription.
@@ -46,7 +46,9 @@ interface DedicatedHsms {
   @operationId("DedicatedHsm_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DedicatedHsm,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = DedicatedHsmError
   >;
 
   /**
@@ -57,7 +59,8 @@ interface DedicatedHsms {
   @operationId("DedicatedHsm_Update")
   update is ArmCustomPatchAsync<
     DedicatedHsm,
-    PatchModel = DedicatedHsmPatchParameters
+    PatchModel = DedicatedHsmPatchParameters,
+    Error = DedicatedHsmError
   >;
 
   /**
@@ -65,7 +68,10 @@ interface DedicatedHsms {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DedicatedHsm_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<DedicatedHsm>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DedicatedHsm,
+    Error = DedicatedHsmError
+  >;
 
   /**
    * The List operation gets information about the dedicated hsms associated with the subscription and within the specified resource group.
@@ -80,7 +86,8 @@ interface DedicatedHsms {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = DedicatedHsmError
   >;
 
   /**
@@ -110,7 +117,8 @@ interface DedicatedHsms {
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     DedicatedHsm,
     void,
-    ArmResponse<OutboundEnvironmentEndpointCollection>
+    ArmResponse<OutboundEnvironmentEndpointCollection>,
+    Error = DedicatedHsmError
   >;
 }
 
