@@ -183,7 +183,7 @@ model FleetCredentialResult {
 model FleetCredentialResults {
   @visibility(Lifecycle.Read)
   @doc("Array of base64-encoded Kubernetes configuration files.")
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   kubeconfigs?: FleetCredentialResult[];
 }
 

@@ -31,7 +31,7 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resou
 @autoRoute
 @doc("Update a {name}", TResource)
 @armResourceUpdate(TResource)
-@patch
+@patch(#{ implicitOptionality: true })
 op FleetCustomPatchSync<
   TResource extends Foundations.Resource,
   TPatchModel extends TypeSpec.Reflection.Model = TagsUpdateModel<TResource>,
