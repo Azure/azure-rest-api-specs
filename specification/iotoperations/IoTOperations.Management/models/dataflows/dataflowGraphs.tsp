@@ -290,7 +290,7 @@ model DataflowGraphConnectionInput {
   /**
    * Schema settings for the source node.
    */
-  schema: DataflowGraphSchemaSettings;
+  schema?: DataflowGraphSchemaSettings;
 }
 
 /**

@@ -230,10 +230,10 @@ union BrokerStateStoreKeyType {
 @added(Versions.`2025-07-01-preview`)
 model BrokerPersistenceDynamicSettings {
   @doc("The user property key to enable persistence.")
-  userPropertyKey?: string;
+  userPropertyKey: string;
 
   @doc("The user property value to enable persistence.")
-  userPropertyValue?: string;
+  userPropertyValue: string;
 }
 
 @doc("Broker Subscriber Queue Policy properties")

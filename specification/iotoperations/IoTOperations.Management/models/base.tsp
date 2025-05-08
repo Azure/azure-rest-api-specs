@@ -235,6 +235,6 @@ scalar SecretProviderClassID
 scalar AzureDeviceRegistryNamespaceID
   extends Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.SchemaRegistry/namespaces",
+      type: "Microsoft.DeviceRegistry/namespaces",
     }
   ]>;
