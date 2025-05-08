@@ -31,13 +31,12 @@ interface ApplyUpdateOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        @path @segment("providers") providerName: string,
+        @path resourceParentType: string,
+        @path resourceParentName: string,
+        @path resourceType: string,
+        @path resourceName: string,
         ...Azure.ResourceManager.Legacy.Provider,
-
-        /** {resourceParentType} */
-        @path @segment("{resourceParentType}") resourceParentName: string,
-
-        /** {resourceType} */
-        @path @segment("{resourceType}") resourceName: string,
       },
       KeysOf<ResourceNameParameter<
         Resource = ApplyUpdate,
@@ -53,20 +52,7 @@ interface ApplyUpdates {
    * Track maintenance updates to resource with parent
    */
   getParent is ApplyUpdateOps.Read<
-    ApplyUpdate,
-    Parameters = {
-      /**
-       * Resource parent type
-       */
-      @path
-      resourceParentType: string;
-
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    }
+    ApplyUpdate
   >;
 }
 @armResourceOperations
@@ -76,10 +62,10 @@ interface ApplyUpdateOperationGroupOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        @path @segment("providers") providerName: string,
+        @path resourceType: string,
+        @path resourceName: string,
         ...Azure.ResourceManager.Legacy.Provider,
-
-        /** {resourceType} */
-        @path @segment("{resourceType}") resourceName: string,
       },
       KeysOf<ResourceNameParameter<
         Resource = ApplyUpdate,
@@ -97,14 +83,7 @@ interface ApplyUpdateOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplyUpdates_Get")
   get is ApplyUpdateOperationGroupOps.Read<
-    ApplyUpdate,
-    Parameters = {
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    }
+    ApplyUpdate
   >;
 
   /**
@@ -113,14 +92,7 @@ interface ApplyUpdateOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplyUpdates_CreateOrUpdateOrCancel")
   createOrUpdateOrCancel is ApplyUpdateOperationGroupOps.CreateOrUpdateSync<
-    ApplyUpdate,
-    Parameters = {
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    }
+    ApplyUpdate
   >;
 
   /**
@@ -128,7 +100,7 @@ interface ApplyUpdateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplyUpdates_List")
-  list is ApplyUpdateOperationGroupOps.ListBySubscription<
+  list is ApplyUpdateOperationGroupOps.ResourceListByParent<
     ApplyUpdate,
     Response = ArmResponse<ListApplyUpdate>,
     ErrorType = MaintenanceError

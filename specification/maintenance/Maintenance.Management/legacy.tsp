@@ -254,27 +254,40 @@ namespace Azure.ResourceManager.Legacy {
     >(...ParentParameters, ...Parameters): Response | ErrorType;
 
     /**
-     * @dev List a resource
-     * @template Resource The resource being listed
+     * A resource list operation, at the scope of the resource's parent
+     * @template Resource the resource being patched
+     * @template BaseParameters Optional. Allows overriding the operation parameters
+     * @template ParentName Optional. The name of the parent resource
+     * @template ParentFriendlyName Optional. The friendly name of the parent resource
      * @template Parameters Optional. Additional parameters after the path parameters
-     * @template Response Optional. The response returned by the list
-     * @template ErrorType Optional. The error type returned by the list
+     * @template Response Optional. The success response for the list operation
+     * @template Error Optional. The error response, if non-standard.
      */
-    @doc("List {name} resources", Resource)
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
     @get
+    @autoRoute
     @listsResource(Resource)
+    @segmentOf(Resource)
+    @Private.armRenameListByOperation(
+      Resource,
+      ParentName,
+      ParentFriendlyName,
+      false
+    ) // This must come before @armResourceList!
     @armResourceList(Resource)
-    ListBySubscription<
-      Resource extends Azure.ResourceManager.CommonTypes.Resource,
+    ResourceListByParent<
+      Resource extends {},
+      BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+      ParentName extends valueof string = "",
+      ParentFriendlyName extends valueof string = "",
       Parameters extends {} = {},
       Response extends {} = ArmResponse<ResourceListResult<Resource>>,
       ErrorType extends {} = ErrorResponse
-    >(
-      ...SubscriptionIdParameter,
-      ...Parameters,
-      ...ApiVersionParameter,
-      ...Provider,
-    ): Response | ErrorType;
+    > is Azure.ResourceManager.Foundations.ArmReadOperation<
+      ResourceParentParameters<Resource, BaseParameters> & Parameters,
+      Response,
+      ErrorType
+    >;
 
     /**
      * A synchronous resource action.

@@ -38,12 +38,10 @@ interface ConfigurationAssignmentOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         @path @segment("providers") providerName: string,
-
-        /** {resourceParentType} */
-        @path @segment("{resourceParentType}") resourceParentName: string,
-
-        /** {resourceType} */
-        @path @segment("{resourceType}") resourceName: string,
+        @path resourceParentType: string,
+        @path resourceParentName: string,
+        @path resourceType: string,
+        @path resourceName: string,
 
         ...Azure.ResourceManager.Legacy.Provider,
       },
@@ -61,40 +59,14 @@ interface ConfigurationAssignments {
    * Get configuration assignment for resource..
    */
   getParent is ConfigurationAssignmentOps.Read<
-    ConfigurationAssignment,
-    Parameters = {
-      /**
-       * Resource parent type
-       */
-      @path
-      resourceParentType: string;
-
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    }
+    ConfigurationAssignment
   >;
 
   /**
    * Register configuration for resource.
    */
   createOrUpdateParent is ConfigurationAssignmentOps.CreateOrUpdateSync<
-    ConfigurationAssignment,
-    Parameters = {
-      /**
-       * Resource parent type
-       */
-      @path
-      resourceParentType: string;
-
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    }
+    ConfigurationAssignment
   >;
 
   /**
@@ -102,19 +74,6 @@ interface ConfigurationAssignments {
    */
   deleteParent is ConfigurationAssignmentOps.DeleteSync<
     ConfigurationAssignment,
-    Parameters = {
-      /**
-       * Resource parent type
-       */
-      @path
-      resourceParentType: string;
-
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    },
     Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
   >;
 
@@ -123,19 +82,6 @@ interface ConfigurationAssignments {
    */
   listParent is ConfigurationAssignmentOps.List<
     ConfigurationAssignment,
-    Parameters = {
-      /**
-       * Resource parent type
-       */
-      @path
-      resourceParentType: string;
-
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    },
     Response = ArmResponse<ListConfigurationAssignmentsResult>
   >;
 }
@@ -146,10 +92,10 @@ interface ConfigurationAssignmentOperationGroupOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        @path @segment("providers") providerName: string,
+        @path resourceType: string,
+        @path resourceName: string,
         ...Azure.ResourceManager.Legacy.Provider,
-
-        /** {resourceType} */
-        @path @segment("{resourceType}") resourceName: string,
       },
       KeysOf<ResourceNameParameter<
         Resource = ConfigurationAssignment,
@@ -167,14 +113,7 @@ interface ConfigurationAssignmentOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConfigurationAssignments_Get")
   get is ConfigurationAssignmentOperationGroupOps.Read<
-    ConfigurationAssignment,
-    Parameters = {
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    }
+    ConfigurationAssignment
   >;
 
   /**
@@ -183,14 +122,7 @@ interface ConfigurationAssignmentOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConfigurationAssignments_CreateOrUpdate")
   createOrUpdate is ConfigurationAssignmentOperationGroupOps.CreateOrUpdateSync<
-    ConfigurationAssignment,
-    Parameters = {
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    }
+    ConfigurationAssignment
   >;
 
   /**
@@ -200,13 +132,6 @@ interface ConfigurationAssignmentOperationGroup {
   @operationId("ConfigurationAssignments_Delete")
   delete is ConfigurationAssignmentOperationGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Parameters = {
-      /**
-       * Resource type
-       */
-      @path
-      resourceType: string;
-    },
     Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
   >;
 }

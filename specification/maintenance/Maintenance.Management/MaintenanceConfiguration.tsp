@@ -134,7 +134,7 @@ interface MaintenanceConfigurationOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_List")
   @segment("maintenanceConfigurations")
-  maintenanceConfigurationsList is MaintenanceConfigurationOperationGroupOps.ListBySubscription<
+  maintenanceConfigurationsList is MaintenanceConfigurationOperationGroupOps.ResourceListByParent<
     MaintenanceConfiguration,
     Response = ArmResponse<ListMaintenanceConfigurationsResult>,
     ErrorType = MaintenanceError

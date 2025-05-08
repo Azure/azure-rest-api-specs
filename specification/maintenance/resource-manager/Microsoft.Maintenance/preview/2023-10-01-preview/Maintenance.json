@@ -113,10 +113,10 @@
         "description": "Get Configuration records within a subscription",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -245,7 +245,7 @@
             "type": "string"
           },
           {
-            "name": "configurationAssignment",
+            "name": "resource",
             "in": "body",
             "description": "The configurationAssignment",
             "required": true,
@@ -301,7 +301,7 @@
             "type": "string"
           },
           {
-            "name": "configurationAssignment",
+            "name": "properties",
             "in": "body",
             "description": "The configurationAssignment",
             "required": true,
@@ -384,10 +384,10 @@
         "description": "Get Configuration records within a subscription",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -496,7 +496,83 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/{resourceParentType}/{resourceType}/configurationAssignments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}": {
+      "get": {
+        "operationId": "ApplyUpdates_GetParent",
+        "tags": [
+          "ApplyUpdates"
+        ],
+        "description": "Track maintenance updates to resource with parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applyUpdateName",
+            "in": "path",
+            "description": "The name of the ApplyUpdate",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_GetParent": {
+            "$ref": "./examples/ApplyUpdates_GetParent.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments": {
       "get": {
         "operationId": "ConfigurationAssignments_ListParent",
         "tags": [
@@ -520,30 +596,26 @@
             "type": "string"
           },
           {
-            "name": "resourceParentName",
-            "in": "path",
-            "description": "{resourceParentType}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "{resourceType}",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceParentType",
             "in": "path",
-            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceType",
             "in": "path",
-            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
             "required": true,
             "type": "string"
           }
@@ -572,7 +644,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}/{resourceParentType}/{resourceType}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
       "get": {
         "operationId": "ConfigurationAssignments_GetParent",
         "tags": [
@@ -596,16 +668,26 @@
             "type": "string"
           },
           {
+            "name": "resourceParentType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "resourceParentName",
             "in": "path",
-            "description": "{resourceParentType}",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceName",
             "in": "path",
-            "description": "{resourceType}",
             "required": true,
             "type": "string"
           },
@@ -613,20 +695,6 @@
             "name": "configurationAssignmentName",
             "in": "path",
             "description": "The name of the ConfigurationAssignment",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceParentType",
-            "in": "path",
-            "description": "Resource parent type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "Resource type",
             "required": true,
             "type": "string"
           }
@@ -674,16 +742,26 @@
             "type": "string"
           },
           {
+            "name": "resourceParentType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "resourceParentName",
             "in": "path",
-            "description": "{resourceParentType}",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceName",
             "in": "path",
-            "description": "{resourceType}",
             "required": true,
             "type": "string"
           },
@@ -695,21 +773,7 @@
             "type": "string"
           },
           {
-            "name": "resourceParentType",
-            "in": "path",
-            "description": "Resource parent type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "Resource type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "configurationAssignment",
+            "name": "resource",
             "in": "body",
             "description": "The configurationAssignment",
             "required": true,
@@ -767,16 +831,26 @@
             "type": "string"
           },
           {
+            "name": "resourceParentType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "resourceParentName",
             "in": "path",
-            "description": "{resourceParentType}",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceName",
             "in": "path",
-            "description": "{resourceType}",
             "required": true,
             "type": "string"
           },
@@ -784,20 +858,6 @@
             "name": "configurationAssignmentName",
             "in": "path",
             "description": "The name of the ConfigurationAssignment",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceParentType",
-            "in": "path",
-            "description": "Resource parent type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "Resource type",
             "required": true,
             "type": "string"
           }
@@ -826,81 +886,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/applyUpdates/{applyUpdateName}/{resourceParentType}/{resourceType}": {
-      "get": {
-        "operationId": "ApplyUpdates_GetParent",
-        "tags": [
-          "ApplyUpdates"
-        ],
-        "description": "Track maintenance updates to resource with parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceParentName",
-            "in": "path",
-            "description": "{resourceParentType}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "{resourceType}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "applyUpdateName",
-            "in": "path",
-            "description": "The name of the ApplyUpdate",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceParentType",
-            "in": "path",
-            "description": "Resource parent type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "Resource type",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ApplyUpdate"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ApplyUpdates_GetParent": {
-            "$ref": "./examples/ApplyUpdates_GetParent.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/{resourceType}/{resourceName}/applyUpdates/{applyUpdateName}/{resourceType}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}": {
       "get": {
         "operationId": "ApplyUpdates_Get",
         "tags": [
@@ -918,9 +904,20 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "resourceName",
             "in": "path",
-            "description": "{resourceType}",
             "required": true,
             "type": "string"
           },
@@ -928,13 +925,6 @@
             "name": "applyUpdateName",
             "in": "path",
             "description": "The name of the ApplyUpdate",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "Resource type",
             "required": true,
             "type": "string"
           }
@@ -976,9 +966,20 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "resourceName",
             "in": "path",
-            "description": "{resourceType}",
             "required": true,
             "type": "string"
           },
@@ -990,14 +991,7 @@
             "type": "string"
           },
           {
-            "name": "resourceType",
-            "in": "path",
-            "description": "Resource type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "applyUpdate",
+            "name": "resource",
             "in": "body",
             "description": "The ApplyUpdate",
             "required": true,
@@ -1036,7 +1030,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/{resourceType}/{resourceName}/configurationAssignments/{configurationAssignmentName}/{resourceType}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
       "get": {
         "operationId": "ConfigurationAssignments_Get",
         "tags": [
@@ -1054,9 +1048,20 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "resourceName",
             "in": "path",
-            "description": "{resourceType}",
             "required": true,
             "type": "string"
           },
@@ -1064,13 +1069,6 @@
             "name": "configurationAssignmentName",
             "in": "path",
             "description": "The name of the ConfigurationAssignment",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "Resource type",
             "required": true,
             "type": "string"
           }
@@ -1112,9 +1110,20 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "resourceName",
             "in": "path",
-            "description": "{resourceType}",
             "required": true,
             "type": "string"
           },
@@ -1126,14 +1135,7 @@
             "type": "string"
           },
           {
-            "name": "resourceType",
-            "in": "path",
-            "description": "Resource type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "configurationAssignment",
+            "name": "resource",
             "in": "body",
             "description": "The configurationAssignment",
             "required": true,
@@ -1185,9 +1187,20 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "resourceName",
             "in": "path",
-            "description": "{resourceType}",
             "required": true,
             "type": "string"
           },
@@ -1195,13 +1208,6 @@
             "name": "configurationAssignmentName",
             "in": "path",
             "description": "The name of the ConfigurationAssignment",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "Resource type",
             "required": true,
             "type": "string"
           }
@@ -1341,7 +1347,7 @@
             "pattern": "^.+$"
           },
           {
-            "name": "configurationAssignment",
+            "name": "resource",
             "in": "body",
             "description": "The configurationAssignment",
             "required": true,
@@ -1401,7 +1407,7 @@
             "pattern": "^.+$"
           },
           {
-            "name": "configurationAssignment",
+            "name": "properties",
             "in": "body",
             "description": "The configurationAssignment",
             "required": true,
@@ -1554,7 +1560,7 @@
             "type": "string"
           },
           {
-            "name": "configuration",
+            "name": "resource",
             "in": "body",
             "description": "The configuration",
             "required": true,
@@ -1613,7 +1619,7 @@
             "type": "string"
           },
           {
-            "name": "configuration",
+            "name": "properties",
             "in": "body",
             "description": "The configuration",
             "required": true,
