@@ -1,8 +1,8 @@
 param(
-  [Parameter(Mandatory = $true)]
   [string]$swaggerPath
 )
 
+. $PSScriptRoot/../../../scripts/ChangedFiles-Functions.ps1
 function Download-Swagger-InMain($swaggerFolder, $latestCommitId) {
   # sparce checkout its resource-manager swagger folder, later we also add the data-plane folder
   $repoUrl = "https://github.com/Azure/azure-rest-api-specs"
@@ -37,6 +37,39 @@ function Download-Swagger-InMain($swaggerFolder, $latestCommitId) {
   finally {
     Pop-Location
   }
+}
+
+if ($swaggerPath -eq "") {
+  # Get all changed swagger files
+  $changedSwaggers = Get-ChangedSwaggerFiles
+  if ($changedSwaggers.Count -eq 0) {
+    Write-Host "No swagger files changed."
+    exit 0
+  }
+
+  Write-Host "Processing changed swagger files:"
+  $changedSwaggers | ForEach-Object {
+    Write-Host "Processing $_"
+    try {
+      $content = Get-Content $_ -Raw
+      $jsonContent = $content | ConvertFrom-Json
+
+      # Check if the swagger is TypeSpec generated
+      if ($null -ne $jsonContent.info -and $jsonContent.info.'x-typespec-generated' -ne $null){
+        $swaggerPath = $_
+        Write-Host "Found TypeSpec generated swagger file: $swaggerPath"
+      }
+    }
+    catch {
+      Write-Warning "Failed to parse JSON from $_. Error: $($_.Exception.Message)"
+      continue
+    }
+  }
+}
+
+if ($swaggerPath -eq "") {
+  Write-Host "No TypeSpec generated swagger file found."
+  exit 1
 }
 
 # Get latest commit id from main branch
