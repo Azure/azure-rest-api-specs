@@ -13,6 +13,7 @@ namespace Microsoft.Help;
 /**
  * Troubleshooter response.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "For backward compatibility"
 @extensionResource
 model TroubleshooterResource
   is Azure.ResourceManager.ExtensionResource<TroubleshooterInstanceProperties> {

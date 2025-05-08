@@ -13,6 +13,7 @@ namespace Microsoft.Help;
 /**
  * Simplified Solutions response.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "For backward compatibility"
 @extensionResource
 model SimplifiedSolutionsResource
   is Azure.ResourceManager.ExtensionResource<SimplifiedSolutionsResourceProperties> {
