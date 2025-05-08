@@ -2,13 +2,10 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager.Foundations;
 
 @@clientName(Microsoft.FileShares, "FileSharesManagementClient", "java");
 
-interface FileSharesManagementClient {
-
 @@clientName(CheckNameAvailabilityResponse, "CheckNameAvailabilityResult", "csharp");
 
-@@clientName(Operation, "Info", "csharp");
-
-}
+@@clientName(Azure.ResourceManager.CommonTypes.Operation, "Info", "csharp");
