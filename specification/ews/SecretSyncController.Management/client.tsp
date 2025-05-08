@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.SecretSyncController;
 
 @@clientName(Microsoft.SecretSyncController,
   "SecretsStoreExtensionMgmt",
@@ -15,3 +16,18 @@ using Azure.ClientGenerator.Core;
   "SecretsStoreExtensionManagementClient",
   "javascript"
 );
+
+// CSharp
+@@clientName(AzureKeyVaultSecretProviderClass,
+  "KeyVaultSecretProviderClass",
+  "csharp"
+);
+@@clientName(AzureKeyVaultSecretProviderClassProperties,
+  "KeyVaultSecretProviderClassProperties",
+  "csharp"
+);
+@@clientName(ProvisioningState,
+  "SecretsStoreExtensionProvisioningState",
+  "csharp"
+);
+@@clientName(StatusConditionType, "SecretSyncConditionStatusType", "csharp");
