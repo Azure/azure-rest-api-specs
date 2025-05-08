@@ -57,7 +57,8 @@ model AkriDiscoveryHandlerProperties {
   /**
    * Additional configuration for the AkriDiscoveryHandler.
    */
-  additionalConfiguration?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The values are not known ahead of time."
+  additionalConfiguration?: Record<string>;
 
   /**
    * Diagnostics settings for the AkriDiscoveryHandler.
@@ -79,7 +80,7 @@ model AkriDiscoveryHandlerProperties {
   /**
    * Mqtt connection configuration settings
    */
-  mqttConnectionConfiguration?: ConnectorsMqttConnectionConfiguration;
+  mqttConnectionConfiguration?: AkriConnectorsMqttConnectionConfiguration;
 
   /**
    * The image configuration for the AkriDiscoveryHandler.
@@ -135,29 +136,34 @@ model AkriDiscoveryHandlerDiscoverableDeviceEndpointType {
 }
 
 /**
- * AkriDiscoveryHandler Image configuration
+ * AkriDiscoveryHandler Image configuration properties
  */
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerImageConfiguration {
   /**
-   * The image of the managed configuration.
+   * The image name without any registry reference, tag or digest.
    */
-  image: string;
+  imageName: string;
 
   /**
    * The pull policy of the image
    */
-  imagePullPolicy: ConnectorsImagePullPolicy;
+  imagePullPolicy?: AkriConnectorsImagePullPolicy;
 
   /**
-   * Image pull secret for the image.
-   */
-  imagePullSecrets?: ConnectorsImagePullSecret[];
-
-  /**
-   * The number of replicas for the managed configuration.
+   * The number of replicas to be set up.
    */
   replicas?: int32;
+
+  /**
+   * The registry settings for the image. You can omit this field if using the default docker hub repository or using a local image.
+   */
+  registrySettings?: AkriConnectorsRegistrySettings;
+
+  /**
+   * Optional image tag or digest. If not specified, the default tag is `latest`.
+   */
+  tagDigestSettings?: AkriConnectorsTagDigestSettings;
 }
 
 /**

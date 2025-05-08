@@ -4394,46 +4394,6 @@
       ],
       "x-ms-discriminator-value": "Bucketized"
     },
-    "AkriConnectorTemplateContainerRegistry": {
-      "type": "object",
-      "description": "AkriConnectorTemplateContainerRegistry properties",
-      "properties": {
-        "containerRegistrySettings": {
-          "$ref": "#/definitions/AkriConnectorTemplateContainerRegistrySettings",
-          "description": "The registry settings for the container registry"
-        }
-      },
-      "required": [
-        "containerRegistrySettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AkriConnectorTemplateRegistrySettings"
-        }
-      ],
-      "x-ms-discriminator-value": "ContainerRegistry"
-    },
-    "AkriConnectorTemplateContainerRegistrySettings": {
-      "type": "object",
-      "description": "AkriConnectorTemplateContainerRegistry properties",
-      "properties": {
-        "registry": {
-          "type": "string",
-          "description": "The container registry to use for the connector image."
-        },
-        "imagePullSecrets": {
-          "type": "array",
-          "description": "Optional list of references to secrets in the same namespace to use for pulling the connector image.",
-          "items": {
-            "$ref": "#/definitions/ConnectorsImagePullSecret"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "registry"
-      ]
-    },
     "AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs": {
       "type": "object",
       "description": "AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties",
@@ -4495,25 +4455,6 @@
         "logs"
       ]
     },
-    "AkriConnectorTemplateDigest": {
-      "type": "object",
-      "description": "AkriConnectorTemplateDigest properties",
-      "properties": {
-        "digest": {
-          "type": "string",
-          "description": "The digest of the image."
-        }
-      },
-      "required": [
-        "digest"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AkriConnectorTemplateTagDigestSettings"
-        }
-      ],
-      "x-ms-discriminator-value": "Digest"
-    },
     "AkriConnectorTemplateHelmAdvancedConfiguration": {
       "type": "object",
       "description": "AkriConnectorTemplateHelmAdvancedConfiguration properties",
@@ -4536,7 +4477,7 @@
       "type": "object",
       "description": "AkriConnectorTemplateHelmAuthSecretRef properties",
       "properties": {
-        "name": {
+        "secretRef": {
           "type": "string",
           "description": "The name of the secret."
         },
@@ -4550,7 +4491,7 @@
         }
       },
       "required": [
-        "name",
+        "secretRef",
         "passwordKey",
         "usernameKey"
       ]
@@ -4578,9 +4519,9 @@
       "type": "object",
       "description": "AkriConnectorTemplateHelmConfiguration properties",
       "properties": {
-        "registry": {
-          "type": "string",
-          "description": "The registry of the Helm chart."
+        "registrySettings": {
+          "$ref": "#/definitions/AkriConnectorsRegistrySettings",
+          "description": "The registry settings for the helm chart to be used."
         },
         "repository": {
           "type": "string",
@@ -4611,7 +4552,6 @@
         }
       },
       "required": [
-        "registry",
         "repository",
         "releaseName",
         "version"
@@ -4858,7 +4798,7 @@
           ]
         },
         "mqttConnectionConfiguration": {
-          "$ref": "#/definitions/ConnectorsMqttConnectionConfiguration",
+          "$ref": "#/definitions/AkriConnectorsMqttConnectionConfiguration",
           "description": "Mqtt connection configuration settings"
         },
         "version": {
@@ -4871,62 +4811,6 @@
         "deviceInboundEndpointTypes",
         "version"
       ]
-    },
-    "AkriConnectorTemplateRegistryEndpointRef": {
-      "type": "object",
-      "description": "AkriConnectorTemplateRegistryEndpointRef properties",
-      "properties": {
-        "registryEndpointRef": {
-          "type": "string",
-          "description": "The name of the registry endpoint"
-        }
-      },
-      "required": [
-        "registryEndpointRef"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AkriConnectorTemplateRegistrySettings"
-        }
-      ],
-      "x-ms-discriminator-value": "RegistryEndpointRef"
-    },
-    "AkriConnectorTemplateRegistrySettings": {
-      "type": "object",
-      "description": "AkriConnectorTemplateRegistrySettings properties",
-      "properties": {
-        "registrySettingsType": {
-          "$ref": "#/definitions/AkriConnectorTemplateRegistrySettingsType"
-        }
-      },
-      "discriminator": "registrySettingsType",
-      "required": [
-        "registrySettingsType"
-      ]
-    },
-    "AkriConnectorTemplateRegistrySettingsType": {
-      "type": "string",
-      "description": "AkriConnectorTemplateRegistrySettings properties",
-      "enum": [
-        "RegistryEndpointRef",
-        "ContainerRegistry"
-      ],
-      "x-ms-enum": {
-        "name": "AkriConnectorTemplateRegistrySettingsType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RegistryEndpointRef",
-            "value": "RegistryEndpointRef",
-            "description": "A Regisgtry Endpoint reference"
-          },
-          {
-            "name": "ContainerRegistry",
-            "value": "ContainerRegistry",
-            "description": "A Container Registry reference"
-          }
-        ]
-      }
     },
     "AkriConnectorTemplateResource": {
       "type": "object",
@@ -5041,21 +4925,21 @@
           "description": "The image name without any registry reference, tag or digest."
         },
         "imagePullPolicy": {
-          "$ref": "#/definitions/ConnectorsImagePullPolicy",
+          "$ref": "#/definitions/AkriConnectorsImagePullPolicy",
           "description": "The pull policy of the image"
         },
         "replicas": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of replicas for the managed configuration."
+          "description": "The number of replicas to be set up."
         },
         "registrySettings": {
-          "$ref": "#/definitions/AkriConnectorTemplateRegistrySettings",
-          "description": "The registry settings for the connector image. You can omit this field if using the default docker hub repository or using a local image."
+          "$ref": "#/definitions/AkriConnectorsRegistrySettings",
+          "description": "The registry settings for the image. You can omit this field if using the default docker hub repository or using a local image."
         },
         "tagDigestSettings": {
-          "$ref": "#/definitions/AkriConnectorTemplateTagDigestSettings",
-          "description": "Image tag or digest. If not specified, the default tag is `latest`."
+          "$ref": "#/definitions/AkriConnectorsTagDigestSettings",
+          "description": "Optional image tag or digest. If not specified, the default tag is `latest`."
         }
       },
       "required": [
@@ -5105,9 +4989,291 @@
         "name"
       ]
     },
-    "AkriConnectorTemplateTag": {
+    "AkriConnectorsContainerRegistry": {
       "type": "object",
-      "description": "AkriConnectorTemplateTag properties",
+      "description": "AkriConnectorsContainerRegistry properties",
+      "properties": {
+        "containerRegistrySettings": {
+          "$ref": "#/definitions/AkriConnectorsContainerRegistrySettings",
+          "description": "The registry settings for the container registry"
+        }
+      },
+      "required": [
+        "containerRegistrySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorsRegistrySettings"
+        }
+      ],
+      "x-ms-discriminator-value": "ContainerRegistry"
+    },
+    "AkriConnectorsContainerRegistrySettings": {
+      "type": "object",
+      "description": "AkriConnectorsContainerRegistry properties",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "The container registry to use for the artifact."
+        },
+        "imagePullSecrets": {
+          "type": "array",
+          "description": "Optional list of references to secrets in the same namespace to use for pulling the connector image.",
+          "items": {
+            "$ref": "#/definitions/AkriConnectorsImagePullSecret"
+          },
+          "x-ms-identifiers": [
+            "secretRef"
+          ]
+        }
+      },
+      "required": [
+        "registry"
+      ]
+    },
+    "AkriConnectorsDigest": {
+      "type": "object",
+      "description": "AkriConnectorsDigest properties",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "description": "The digest of the image."
+        }
+      },
+      "required": [
+        "digest"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorsTagDigestSettings"
+        }
+      ],
+      "x-ms-discriminator-value": "Digest"
+    },
+    "AkriConnectorsImagePullPolicy": {
+      "type": "string",
+      "description": "Image pull policy.",
+      "enum": [
+        "Always",
+        "IfNotPresent",
+        "Never"
+      ],
+      "x-ms-enum": {
+        "name": "AkriConnectorsImagePullPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Always pull the image."
+          },
+          {
+            "name": "IfNotPresent",
+            "value": "IfNotPresent",
+            "description": "IfNotPresent pull the image."
+          },
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "Never pull the image."
+          }
+        ]
+      }
+    },
+    "AkriConnectorsImagePullSecret": {
+      "type": "object",
+      "description": "AkriConnectorsImagePullSecret properties",
+      "properties": {
+        "secretRef": {
+          "type": "string",
+          "description": "The name of the image pull secret."
+        }
+      },
+      "required": [
+        "secretRef"
+      ]
+    },
+    "AkriConnectorsMqttAuthentication": {
+      "type": "object",
+      "description": "AkriConnectorsMqttAuthentication properties",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/AkriConnectorsMqttAuthenticationMethod",
+          "description": "The authentication method for the MQTT connection."
+        }
+      },
+      "discriminator": "method",
+      "required": [
+        "method"
+      ]
+    },
+    "AkriConnectorsMqttAuthenticationMethod": {
+      "type": "string",
+      "description": "AkriConnectorsMqttAuthenticationMethod properties",
+      "enum": [
+        "ServiceAccountToken"
+      ],
+      "x-ms-enum": {
+        "name": "AkriConnectorsMqttAuthenticationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceAccountToken",
+            "value": "ServiceAccountToken",
+            "description": "Service Account Token authentication"
+          }
+        ]
+      }
+    },
+    "AkriConnectorsMqttConnectionConfiguration": {
+      "type": "object",
+      "description": "AkriConnectorsMqttConnectionConfiguration properties",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/AkriConnectorsMqttAuthentication",
+          "description": "Authentication properties."
+        },
+        "host": {
+          "type": "string",
+          "description": "Host of the Broker in the form of <hostname>:<port>."
+        },
+        "protocol": {
+          "$ref": "#/definitions/AkriConnectorsMqttProtocolType",
+          "description": "The protocol to use for the connection. Currently only `mqtt` is supported."
+        },
+        "keepAliveSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "KeepAlive for connection in seconds.",
+          "minimum": 0
+        },
+        "maxInflightMessages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.",
+          "minimum": 0
+        },
+        "sessionExpirySeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Session expiry in seconds.",
+          "minimum": 0
+        },
+        "tls": {
+          "$ref": "#/definitions/TlsProperties",
+          "description": "TLS configuration."
+        }
+      }
+    },
+    "AkriConnectorsMqttProtocolType": {
+      "type": "string",
+      "description": "Mqtt protocol types.",
+      "enum": [
+        "Mqtt"
+      ],
+      "x-ms-enum": {
+        "name": "AkriConnectorsMqttProtocolType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mqtt",
+            "value": "Mqtt",
+            "description": "Mqtt protocol"
+          }
+        ]
+      }
+    },
+    "AkriConnectorsRegistryEndpointRef": {
+      "type": "object",
+      "description": "AkriConnectorsRegistryEndpointRef properties",
+      "properties": {
+        "registryEndpointRef": {
+          "type": "string",
+          "description": "The name of the registry endpoint"
+        }
+      },
+      "required": [
+        "registryEndpointRef"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorsRegistrySettings"
+        }
+      ],
+      "x-ms-discriminator-value": "RegistryEndpointRef"
+    },
+    "AkriConnectorsRegistrySettings": {
+      "type": "object",
+      "description": "AkriConnectorsRegistrySettings properties",
+      "properties": {
+        "registrySettingsType": {
+          "$ref": "#/definitions/AkriConnectorsRegistrySettingsType"
+        }
+      },
+      "discriminator": "registrySettingsType",
+      "required": [
+        "registrySettingsType"
+      ]
+    },
+    "AkriConnectorsRegistrySettingsType": {
+      "type": "string",
+      "description": "AkriConnectorsRegistrySettings properties",
+      "enum": [
+        "RegistryEndpointRef",
+        "ContainerRegistry"
+      ],
+      "x-ms-enum": {
+        "name": "AkriConnectorsRegistrySettingsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RegistryEndpointRef",
+            "value": "RegistryEndpointRef",
+            "description": "A Regisgtry Endpoint reference"
+          },
+          {
+            "name": "ContainerRegistry",
+            "value": "ContainerRegistry",
+            "description": "A Container Registry reference"
+          }
+        ]
+      }
+    },
+    "AkriConnectorsServiceAccountAuthentication": {
+      "type": "object",
+      "description": "AkriConnectorsServiceAccountAuthentication properties",
+      "properties": {
+        "serviceAccountTokenSettings": {
+          "$ref": "#/definitions/AkriConnectorsServiceAccountTokenSettings",
+          "description": "The service account token for the MQTT connection."
+        }
+      },
+      "required": [
+        "serviceAccountTokenSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorsMqttAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "ServiceAccountToken"
+    },
+    "AkriConnectorsServiceAccountTokenSettings": {
+      "type": "object",
+      "description": "AkriConnectorsServiceAccountTokenSettings properties",
+      "properties": {
+        "audience": {
+          "type": "string",
+          "description": "The audience for the service account token."
+        }
+      },
+      "required": [
+        "audience"
+      ]
+    },
+    "AkriConnectorsTag": {
+      "type": "object",
+      "description": "AkriConnectorsTag properties",
       "properties": {
         "tag": {
           "type": "string",
@@ -5119,17 +5285,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AkriConnectorTemplateTagDigestSettings"
+          "$ref": "#/definitions/AkriConnectorsTagDigestSettings"
         }
       ],
       "x-ms-discriminator-value": "Tag"
     },
-    "AkriConnectorTemplateTagDigestSettings": {
+    "AkriConnectorsTagDigestSettings": {
       "type": "object",
-      "description": "AkriConnectorTemplateTagDigestSettings properties",
+      "description": "AkriConnectorsTagDigestSettings properties",
       "properties": {
         "tagDigestType": {
-          "$ref": "#/definitions/AkriConnectorTemplateTagDigestType",
+          "$ref": "#/definitions/AkriConnectorsTagDigestType",
           "description": "The tag or digest type"
         }
       },
@@ -5138,15 +5304,15 @@
         "tagDigestType"
       ]
     },
-    "AkriConnectorTemplateTagDigestType": {
+    "AkriConnectorsTagDigestType": {
       "type": "string",
-      "description": "AkriConnectorTemplateTagDigestType values",
+      "description": "AkriConnectorsTagDigestType values",
       "enum": [
         "Tag",
         "Digest"
       ],
       "x-ms-enum": {
-        "name": "AkriConnectorTemplateTagDigestType",
+        "name": "AkriConnectorsTagDigestType",
         "modelAsString": true,
         "values": [
           {
@@ -5209,33 +5375,32 @@
     },
     "AkriDiscoveryHandlerImageConfiguration": {
       "type": "object",
-      "description": "AkriDiscoveryHandler Image configuration",
+      "description": "AkriDiscoveryHandler Image configuration properties",
       "properties": {
-        "image": {
+        "imageName": {
           "type": "string",
-          "description": "The image of the managed configuration."
+          "description": "The image name without any registry reference, tag or digest."
         },
         "imagePullPolicy": {
-          "$ref": "#/definitions/ConnectorsImagePullPolicy",
+          "$ref": "#/definitions/AkriConnectorsImagePullPolicy",
           "description": "The pull policy of the image"
-        },
-        "imagePullSecrets": {
-          "type": "array",
-          "description": "Image pull secret for the image.",
-          "items": {
-            "$ref": "#/definitions/ConnectorsImagePullSecret"
-          },
-          "x-ms-identifiers": []
         },
         "replicas": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of replicas for the managed configuration."
+          "description": "The number of replicas to be set up."
+        },
+        "registrySettings": {
+          "$ref": "#/definitions/AkriConnectorsRegistrySettings",
+          "description": "The registry settings for the image. You can omit this field if using the default docker hub repository or using a local image."
+        },
+        "tagDigestSettings": {
+          "$ref": "#/definitions/AkriConnectorsTagDigestSettings",
+          "description": "Optional image tag or digest. If not specified, the default tag is `latest`."
         }
       },
       "required": [
-        "image",
-        "imagePullPolicy"
+        "imageName"
       ]
     },
     "AkriDiscoveryHandlerLogSettings": {
@@ -5263,8 +5428,11 @@
           "description": "Metadata about AIO."
         },
         "additionalConfiguration": {
-          "type": "string",
-          "description": "Additional configuration for the AkriDiscoveryHandler."
+          "type": "object",
+          "description": "Additional configuration for the AkriDiscoveryHandler.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "diagnostics": {
           "$ref": "#/definitions/AkriDiscoveryHandlerDiagnostics",
@@ -5287,7 +5455,7 @@
           ]
         },
         "mqttConnectionConfiguration": {
-          "$ref": "#/definitions/ConnectorsMqttConnectionConfiguration",
+          "$ref": "#/definitions/AkriConnectorsMqttConnectionConfiguration",
           "description": "Mqtt connection configuration settings"
         },
         "imageConfiguration": {
@@ -6874,171 +7042,6 @@
           }
         ]
       }
-    },
-    "ConnectorsImagePullPolicy": {
-      "type": "string",
-      "description": "Image pull policy.",
-      "enum": [
-        "Always",
-        "IfNotPresent",
-        "Never"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectorsImagePullPolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Always",
-            "value": "Always",
-            "description": "Always pull the image."
-          },
-          {
-            "name": "IfNotPresent",
-            "value": "IfNotPresent",
-            "description": "IfNotPresent pull the image."
-          },
-          {
-            "name": "Never",
-            "value": "Never",
-            "description": "Never pull the image."
-          }
-        ]
-      }
-    },
-    "ConnectorsImagePullSecret": {
-      "type": "object",
-      "description": "ConnectorsImagePullSecret properties",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the image pull secret."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "ConnectorsMqttAuthentication": {
-      "type": "object",
-      "description": "ConnectorsMqttAuthentication properties",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/ConnectorsMqttAuthenticationMethod",
-          "description": "The authentication method for the MQTT connection."
-        }
-      },
-      "discriminator": "method",
-      "required": [
-        "method"
-      ]
-    },
-    "ConnectorsMqttAuthenticationMethod": {
-      "type": "string",
-      "description": "ConnectorsMqttAuthenticationMethod properties",
-      "enum": [
-        "ServiceAccountToken"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectorsMqttAuthenticationMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ServiceAccountToken",
-            "value": "ServiceAccountToken",
-            "description": "Service Account Token authentication"
-          }
-        ]
-      }
-    },
-    "ConnectorsMqttConnectionConfiguration": {
-      "type": "object",
-      "description": "ConnectorsMqttConnectionConfiguration properties",
-      "properties": {
-        "authentication": {
-          "$ref": "#/definitions/ConnectorsMqttAuthentication",
-          "description": "Authentication properties."
-        },
-        "host": {
-          "type": "string",
-          "description": "Host of the Broker in the form of <hostname>:<port>."
-        },
-        "protocol": {
-          "$ref": "#/definitions/ConnectorsMqttProtocolType",
-          "description": "The protocol to use for the connection. Currently only `mqtt` is supported."
-        },
-        "keepAliveSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "KeepAlive for connection in seconds.",
-          "minimum": 0
-        },
-        "maxInflightMessages": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The max number of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.",
-          "minimum": 0
-        },
-        "sessionExpirySeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Session expiry in seconds.",
-          "minimum": 0
-        },
-        "tls": {
-          "$ref": "#/definitions/TlsProperties",
-          "description": "TLS configuration."
-        }
-      }
-    },
-    "ConnectorsMqttProtocolType": {
-      "type": "string",
-      "description": "Mqtt protocol types.",
-      "enum": [
-        "Mqtt"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectorsMqttProtocolType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Mqtt",
-            "value": "Mqtt",
-            "description": "Mqtt protocol"
-          }
-        ]
-      }
-    },
-    "ConnectorsServiceAccountAuthentication": {
-      "type": "object",
-      "description": "ConnectorsServiceAccountAuthentication properties",
-      "properties": {
-        "serviceAccountTokenSettings": {
-          "$ref": "#/definitions/ConnectorsServiceAccountTokenSettings",
-          "description": "The service account token for the MQTT connection."
-        }
-      },
-      "required": [
-        "serviceAccountTokenSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectorsMqttAuthentication"
-        }
-      ],
-      "x-ms-discriminator-value": "ServiceAccountToken"
-    },
-    "ConnectorsServiceAccountTokenSettings": {
-      "type": "object",
-      "description": "ConnectorsServiceAccountTokenSettings properties",
-      "properties": {
-        "audience": {
-          "type": "string",
-          "description": "The audience for the service account token."
-        }
-      },
-      "required": [
-        "audience"
-      ]
     },
     "DataExplorerAuthMethod": {
       "$ref": "#/definitions/ManagedIdentityMethod",

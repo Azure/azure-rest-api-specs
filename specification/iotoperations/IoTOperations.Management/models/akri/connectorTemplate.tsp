@@ -72,7 +72,7 @@ model AkriConnectorTemplateProperties {
   /**
    * Mqtt connection configuration settings
    */
-  mqttConnectionConfiguration?: ConnectorsMqttConnectionConfiguration;
+  mqttConnectionConfiguration?: AkriConnectorsMqttConnectionConfiguration;
 
   /**
    * The version of the Connector template.
@@ -193,9 +193,10 @@ model AkriConnectorTemplateHelmConfiguration
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmConfigurationSettings {
   /**
-   * The registry of the Helm chart.
+   * The registry settings for the helm chart to be used.
    */
-  registry: string;
+  registrySettings?: AkriConnectorsRegistrySettings;
+
 
   /**
    * The repository of the Helm chart.
@@ -421,161 +422,24 @@ model AkriConnectorTemplateRuntimeImageConfigurationSettings {
   /**
    * The pull policy of the image
    */
-  imagePullPolicy?: ConnectorsImagePullPolicy;
+  imagePullPolicy?: AkriConnectorsImagePullPolicy;
 
   /**
-   * The number of replicas for the managed configuration.
+   * The number of replicas to be set up.
    */
   replicas?: int32;
 
   /**
-   * The registry settings for the connector image. You can omit this field if using the default docker hub repository or using a local image.
+   * The registry settings for the image. You can omit this field if using the default docker hub repository or using a local image.
    */
-  registrySettings?: AkriConnectorTemplateRegistrySettings;
+  registrySettings?: AkriConnectorsRegistrySettings;
 
   /**
-   * Image tag or digest. If not specified, the default tag is `latest`.
+   * Optional image tag or digest. If not specified, the default tag is `latest`.
    */
-  tagDigestSettings?: AkriConnectorTemplateTagDigestSettings;
+  tagDigestSettings?: AkriConnectorsTagDigestSettings;
 }
 
-/**
- * AkriConnectorTemplateTagDigestSettings properties
- */
-@added(Versions.`2025-07-01-preview`)
-@discriminator("tagDigestType")
-model AkriConnectorTemplateTagDigestSettings {
-  /**
-   * The tag or digest type
-   */
-  tagDigestType: AkriConnectorTemplateTagDigestType;
-}
-/**
- * AkriConnectorTemplateTagDigestType values
- */
-@added(Versions.`2025-07-01-preview`)
-union AkriConnectorTemplateTagDigestType {
-  string,
-
-  /**
-   * Indicates that a tag should be specified
-   */
-  Tag,
-
-  /**
-   * Indicates that a digest should be specified
-   */
-  Digest,
-}
-
-/**
- * AkriConnectorTemplateTag properties
- */
-@added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateTag extends AkriConnectorTemplateTagDigestSettings {
-  /**
-   * The tag or digest type
-   */
-  tagDigestType: Tag;
-
-  /**
-   * The tag of the image.
-   */
-  tag: string;
-}
-
-/**
- * AkriConnectorTemplateDigest properties
- */
-@added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateDigest
-  extends AkriConnectorTemplateTagDigestSettings {
-  /**
-   * The tag or digest type
-   */
-  tagDigestType: Digest;
-
-  /**
-   * The digest of the image.
-   */
-  digest: string;
-}
-/**
- * AkriConnectorTemplateRegistrySettings properties
- */
-@added(Versions.`2025-07-01-preview`)
-@discriminator("registrySettingsType")
-model AkriConnectorTemplateRegistrySettings {
-  registrySettingsType: AkriConnectorTemplateRegistrySettingsType;
-}
-
-/**
- * AkriConnectorTemplateRegistrySettings properties
- */
-@added(Versions.`2025-07-01-preview`)
-union AkriConnectorTemplateRegistrySettingsType {
-  string,
-
-  /**
-   * A Regisgtry Endpoint reference
-   */
-  RegistryEndpointRef,
-
-  /**
-   * A Container Registry reference
-   */
-  ContainerRegistry,
-}
-
-/**
- * AkriConnectorTemplateRegistryEndpointRef properties
- */
-@added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateRegistryEndpointRef
-  extends AkriConnectorTemplateRegistrySettings {
-  /**
-   * The registry endpoint reference
-   */
-  registrySettingsType: RegistryEndpointRef;
-
-  /**
-   * The name of the registry endpoint
-   */
-  registryEndpointRef: string;
-}
-
-/**
- * AkriConnectorTemplateContainerRegistry properties
- */
-@added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateContainerRegistry
-  extends AkriConnectorTemplateRegistrySettings {
-  /**
-   * The registry settings type
-   */
-  registrySettingsType: ContainerRegistry;
-
-  /**
-   * The registry settings for the container registry
-   */
-  containerRegistrySettings: AkriConnectorTemplateContainerRegistrySettings;
-}
-
-/**
- * AkriConnectorTemplateContainerRegistry properties
- */
-@added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateContainerRegistrySettings {
-  /**
-   * The container registry to use for the connector image.
-   */
-  registry: string;
-
-  /**
-   * Optional list of references to secrets in the same namespace to use for pulling the connector image.
-   */
-  imagePullSecrets?: ConnectorsImagePullSecret[];
-}
 
 /**
  * AkriConnectorTemplatePersistentVolumeClaim properties
@@ -673,7 +537,7 @@ model AkriConnectorTemplateHelmAuthSecretRef {
   /**
    * The name of the secret.
    */
-  name: string;
+  secretRef: string;
 
   /**
    * The key of the password in the secret.

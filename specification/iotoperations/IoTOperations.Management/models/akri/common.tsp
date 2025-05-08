@@ -19,18 +19,14 @@ alias AkriAioMetadata = {
 };
 
 /**
- * ConnectorsMqttConnectionConfiguration properties
+ * AkriConnectorsMqttConnectionConfiguration properties
  */
-//- This doesn't have the `retain` property like DataflowEnpoints has
-//- This doesn't have the `clientIdPrefix` property like DataflowEnpoints has
-//- The only supported protocol is `mqtt`
-//- `host` is a required property in DataflowEnpoints but optional here
 @added(Versions.`2025-07-01-preview`)
-model ConnectorsMqttConnectionConfiguration {
+model AkriConnectorsMqttConnectionConfiguration {
   /**
    * Authentication properties.
    */
-  authentication?: ConnectorsMqttAuthentication;
+  authentication?: AkriConnectorsMqttAuthentication;
 
   /**
    * Host of the Broker in the form of <hostname>:<port>.
@@ -40,7 +36,7 @@ model ConnectorsMqttConnectionConfiguration {
   /**
    * The protocol to use for the connection. Currently only `mqtt` is supported.
    */
-  protocol?: ConnectorsMqttProtocolType;
+  protocol?: AkriConnectorsMqttProtocolType;
 
   /**
    * KeepAlive for connection in seconds.
@@ -67,22 +63,22 @@ model ConnectorsMqttConnectionConfiguration {
 }
 
 /**
- * ConnectorsMqttAuthentication properties
+ * AkriConnectorsMqttAuthentication properties
  */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("method")
-model ConnectorsMqttAuthentication {
+model AkriConnectorsMqttAuthentication {
   /**
    * The authentication method for the MQTT connection.
    */
-  method: ConnectorsMqttAuthenticationMethod;
+  method: AkriConnectorsMqttAuthenticationMethod;
 }
 
 /**
- * ConnectorsMqttAuthenticationMethod properties
+ * AkriConnectorsMqttAuthenticationMethod properties
  */
 @added(Versions.`2025-07-01-preview`)
-union ConnectorsMqttAuthenticationMethod {
+union AkriConnectorsMqttAuthenticationMethod {
   string,
 
   /**
@@ -95,7 +91,7 @@ union ConnectorsMqttAuthenticationMethod {
  * Mqtt protocol types.
  */
 @added(Versions.`2025-07-01-preview`)
-union ConnectorsMqttProtocolType {
+union AkriConnectorsMqttProtocolType {
   string,
 
   /**
@@ -105,11 +101,11 @@ union ConnectorsMqttProtocolType {
 }
 
 /**
- * ConnectorsServiceAccountAuthentication properties
+ * AkriConnectorsServiceAccountAuthentication properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorsServiceAccountAuthentication
-  extends ConnectorsMqttAuthentication {
+model AkriConnectorsServiceAccountAuthentication
+  extends AkriConnectorsMqttAuthentication {
   /**
    * The authentication method for the MQTT connection.
    */
@@ -118,14 +114,14 @@ model ConnectorsServiceAccountAuthentication
   /**
    * The service account token for the MQTT connection.
    */
-  serviceAccountTokenSettings: ConnectorsServiceAccountTokenSettings;
+  serviceAccountTokenSettings: AkriConnectorsServiceAccountTokenSettings;
 }
 
 /**
- * ConnectorsServiceAccountTokenSettings properties
+ * AkriConnectorsServiceAccountTokenSettings properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorsServiceAccountTokenSettings {
+model AkriConnectorsServiceAccountTokenSettings {
   /**
    * The audience for the service account token.
    */
@@ -136,7 +132,7 @@ model ConnectorsServiceAccountTokenSettings {
  * Image pull policy.
  */
 @added(Versions.`2025-07-01-preview`)
-union ConnectorsImagePullPolicy {
+union AkriConnectorsImagePullPolicy {
   string,
 
   /**
@@ -156,12 +152,152 @@ union ConnectorsImagePullPolicy {
 }
 
 /**
- * ConnectorsImagePullSecret properties
+ * AkriConnectorsImagePullSecret properties
  */
 @added(Versions.`2025-07-01-preview`)
-model ConnectorsImagePullSecret {
+model AkriConnectorsImagePullSecret {
   /**
    * The name of the image pull secret.
    */
-  name: string;
+  secretRef: string;
+}
+
+
+/**
+ * AkriConnectorsTagDigestSettings properties
+ */
+@added(Versions.`2025-07-01-preview`)
+@discriminator("tagDigestType")
+model AkriConnectorsTagDigestSettings {
+  /**
+   * The tag or digest type
+   */
+  tagDigestType: AkriConnectorsTagDigestType;
+}
+/**
+ * AkriConnectorsTagDigestType values
+ */
+@added(Versions.`2025-07-01-preview`)
+union AkriConnectorsTagDigestType {
+  string,
+
+  /**
+   * Indicates that a tag should be specified
+   */
+  Tag,
+
+  /**
+   * Indicates that a digest should be specified
+   */
+  Digest,
+}
+
+/**
+ * AkriConnectorsTag properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorsTag extends AkriConnectorsTagDigestSettings {
+  /**
+   * The tag or digest type
+   */
+  tagDigestType: Tag;
+
+  /**
+   * The tag of the image.
+   */
+  tag: string;
+}
+
+/**
+ * AkriConnectorsDigest properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorsDigest
+  extends AkriConnectorsTagDigestSettings {
+  /**
+   * The tag or digest type
+   */
+  tagDigestType: Digest;
+
+  /**
+   * The digest of the image.
+   */
+  digest: string;
+}
+/**
+ * AkriConnectorsRegistrySettings properties
+ */
+@added(Versions.`2025-07-01-preview`)
+@discriminator("registrySettingsType")
+model AkriConnectorsRegistrySettings {
+  registrySettingsType: AkriConnectorsRegistrySettingsType;
+}
+
+/**
+ * AkriConnectorsRegistrySettings properties
+ */
+@added(Versions.`2025-07-01-preview`)
+union AkriConnectorsRegistrySettingsType {
+  string,
+
+  /**
+   * A Regisgtry Endpoint reference
+   */
+  RegistryEndpointRef,
+
+  /**
+   * A Container Registry reference
+   */
+  ContainerRegistry,
+}
+
+/**
+ * AkriConnectorsRegistryEndpointRef properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorsRegistryEndpointRef
+  extends AkriConnectorsRegistrySettings {
+  /**
+   * The registry endpoint reference
+   */
+  registrySettingsType: RegistryEndpointRef;
+
+  /**
+   * The name of the registry endpoint
+   */
+  registryEndpointRef: string;
+}
+
+/**
+ * AkriConnectorsContainerRegistry properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorsContainerRegistry
+  extends AkriConnectorsRegistrySettings {
+  /**
+   * The registry settings type
+   */
+  registrySettingsType: ContainerRegistry;
+
+  /**
+   * The registry settings for the container registry
+   */
+  containerRegistrySettings: AkriConnectorsContainerRegistrySettings;
+}
+
+/**
+ * AkriConnectorsContainerRegistry properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorsContainerRegistrySettings {
+  /**
+   * The container registry to use for the artifact.
+   */
+  registry: string;
+
+  /**
+   * Optional list of references to secrets in the same namespace to use for pulling the connector image.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["secretRef"])
+  imagePullSecrets?: AkriConnectorsImagePullSecret[];
 }
