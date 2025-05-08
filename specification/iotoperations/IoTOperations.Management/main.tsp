@@ -187,5 +187,5 @@ interface AkriDiscoveryHandler {
   get is ArmResourceRead<AkriDiscoveryHandlerResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriDiscoveryHandlerResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AkriDiscoveryHandlerResource>;
-  listByAioInstance is ArmResourceListByParent<AkriDiscoveryHandlerResource>;
+  listByInstanceResource is ArmResourceListByParent<AkriDiscoveryHandlerResource>;
 }
