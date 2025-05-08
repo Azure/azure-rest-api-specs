@@ -2846,6 +2846,18 @@
         "quarantineDownloadStorageContainer": {
           "type": "string",
           "description": "Quarantine Download Storage Container"
+        },
+        "status": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "pipelineStatus",
+            "modelAsString": true
+          },
+          "description": "Status of the current pipeline"
         }
       },
       "required": [
@@ -3323,6 +3335,7 @@
         },
         "targetType": {
           "enum": [
+            "Pipeline",
             "Connection",
             "FlowType"
           ],
