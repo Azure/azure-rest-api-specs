@@ -606,5 +606,3 @@ model StorageTasksListResult is Azure.Core.Page<StorageTask>;
 @@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
 @@visibility(StorageTaskPreviewBlobProperties.matchedBlock, Lifecycle.Read);
 @@visibility(StorageTaskReportProperties.runStatusEnum, Lifecycle.Read);
-@@alternateType(StorageTaskPreviewActionProperties.container, {});
-@@alternateType(StorageTaskPreviewActionProperties.action, {});
