@@ -454,6 +454,7 @@
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "succeededLockTokens": {
@@ -461,7 +462,8 @@
           "description": "Array of lock tokens for the successfully acknowledged cloud events.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -518,7 +520,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -652,6 +654,7 @@
           "items": {
             "$ref": "#/definitions/ReceiveDetails"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -669,6 +672,7 @@
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "succeededLockTokens": {
@@ -676,7 +680,8 @@
           "description": "Array of lock tokens for the successfully rejected cloud events.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -694,6 +699,7 @@
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "succeededLockTokens": {
@@ -701,7 +707,8 @@
           "description": "Array of lock tokens for the successfully released cloud events.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [

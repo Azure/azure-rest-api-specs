@@ -116,6 +116,36 @@ describe("getDefaultTag", () => {
 
     expect(defaultTag).toEqual("");
   });
+
+  test.each([
+    {
+      description: "without Basic Information header",
+      readmeContent: `# Some header
+This should be parsed as a string, not a Date object.
+\`\`\`yaml
+tag: 2025-01-01
+\`\`\`
+`,
+    },
+    {
+      description: "with Basic Information header",
+      readmeContent: `# Basic Information
+This should be parsed as a string, not a Date object.
+\`\`\`yaml
+tag: 2025-01-01
+\`\`\`
+`,
+    },
+  ])(
+    "returns a string for default tag even when the tag is formatted like a date ($description)",
+    ({ readmeContent }) => {
+      const defaultTag = getDefaultTag(readmeContent);
+
+      expect(defaultTag).not.toBeInstanceOf(Date);
+      expect(defaultTag).toBeTypeOf("string");
+      expect(defaultTag).toEqual("2025-01-01");
+    },
+  );
 });
 
 describe("getAllTags", () => {
