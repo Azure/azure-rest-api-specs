@@ -24,6 +24,10 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_01_31_preview: "2025-01-31-preview",
+  /** 2025-05-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_05_01_preview: "2025-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -183,10 +187,14 @@ model GetConnectionsForProcessOnFocusedMachineRequest {
 @doc("ExportDependencies request model")
 model ExportDependenciesRequest {
   @doc("Machine arm id")
-  focusedMachineId: string;
+  focusedMachineId?: string;
 
   @doc("Filters for ExportDependencies")
   filters?: DependencyMapVisualizationFilter;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Appliance Name")
+  applianceName?: string;
 }
 
 @doc("A Discovery Source resource")
