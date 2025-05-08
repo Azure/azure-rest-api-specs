@@ -76,6 +76,10 @@ directive:
     reason: These are additional configuration settings with dynamic properties that are not known ahead of time.
 
   - suppress: AvoidAdditionalProperties
+    where: $.definitions.AkriDiscoveryHandlerProperties.properties.additionalConfiguration
+    reason: These are additional configuration settings with dynamic properties that are not known ahead of time.
+
+  - suppress: AvoidAdditionalProperties
     where: $.definitions.AkriConnectorTemplateManagedConfigurationSettings.properties.persistentVolumeClaimTemplates.items
     reason: These are additional configuration settings with dynamic properties that are not known ahead of time.
 
