@@ -239,7 +239,7 @@ union AkriConnectorsRegistrySettingsType {
   string,
 
   /**
-   * A Regisgtry Endpoint reference
+   * A Registry Endpoint reference
    */
   RegistryEndpointRef,
 

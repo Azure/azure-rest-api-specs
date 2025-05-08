@@ -284,7 +284,7 @@ model AkriConnectorTemplateManagedConfigurationSettings {
    * The persistent volume claim templates for the managed configuration.
    * See https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kuberntes resource type"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kubernetes resource type"
   @extension("x-ms-identifiers", #[])
   persistentVolumeClaimTemplates?: Record<unknown>[];
 
@@ -404,7 +404,7 @@ model AkriConnectorTemplateRuntimeStatefulSetConfiguration
   /**
    * The stateful set configuration settings
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kuberntes resource type"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kubernetes resource type"
   statefulSetConfigurationSettings: Record<unknown>;
 }
 

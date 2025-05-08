@@ -126,7 +126,7 @@ model BrokerAuthenticatorMethodX509 {
 union BrokerAuthenticatorValidationMethods {
   string,
 
-  @doc("No addtional validation is performed")
+  @doc("No additional validation is performed")
   None,
 
   @doc("Additional validation is performed using the Azure Device Registry.")
