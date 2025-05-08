@@ -10,7 +10,11 @@
         "name": "Standard"
       },
       "properties": {
-        "disableLocalAuth": true
+        "disableLocalAuth": true,
+        "dataPlaneProxy": {
+          "authenticationMode": "Pass-through",
+          "privateLinkDelegation": "Disabled"
+        }
       }
     }
   },
@@ -31,9 +35,12 @@
           "disableLocalAuth": true,
           "privateEndpointConnections": [],
           "dataPlaneProxy": {
-            "authenticationMode": "Local",
+            "authenticationMode": "Pass-through",
             "privateLinkDelegation": "Disabled"
-          }
+          },
+          "softDeleteRetentionInDays": 30,
+          "defaultKeyValueRevisionRetentionPeriodInSeconds": 2592000,
+          "enablePurgeProtection": false
         },
         "systemData": {
           "createdBy": "foo@contoso.com",
@@ -57,7 +64,23 @@
         "type": "Microsoft.AppConfiguration/configurationStores",
         "properties": {
           "provisioningState": "Creating",
-          "creationDate": "2018-04-24T16:30:55+00:00"
+          "creationDate": "2018-04-24T16:30:55+00:00",
+          "endpoint": "https://contoso.azconfig.io",
+          "encryption": {
+            "keyVaultProperties": {
+              "keyIdentifier": null,
+              "identityClientId": null
+            }
+          },
+          "disableLocalAuth": true,
+          "privateEndpointConnections": [],
+          "dataPlaneProxy": {
+            "authenticationMode": "Pass-through",
+            "privateLinkDelegation": "Disabled"
+          },
+          "softDeleteRetentionInDays": 30,
+          "defaultKeyValueRevisionRetentionPeriodInSeconds": 2592000,
+          "enablePurgeProtection": false
         },
         "systemData": {
           "createdBy": "foo@contoso.com",

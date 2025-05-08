@@ -29,11 +29,14 @@
           },
           "disableLocalAuth": true,
           "privateEndpointConnections": [],
-          "publicNetworkAccess": "Disabled",
           "dataPlaneProxy": {
-            "authenticationMode": "Local",
+            "authenticationMode": "Pass-through",
             "privateLinkDelegation": "Disabled"
-          }
+          },
+          "softDeleteRetentionInDays": 30,
+          "defaultKeyValueRevisionRetentionPeriodInSeconds": 2592000,
+          "enablePurgeProtection": false,
+          "publicNetworkAccess": "Disabled"
         },
         "systemData": {
           "createdBy": "foo@contoso.com",
@@ -67,11 +70,7 @@
           },
           "disableLocalAuth": true,
           "privateEndpointConnections": [],
-          "publicNetworkAccess": "Disabled",
-          "dataPlaneProxy": {
-            "authenticationMode": "Local",
-            "privateLinkDelegation": "Disabled"
-          }
+          "publicNetworkAccess": "Disabled"
         },
         "systemData": {
           "createdBy": "foo@contoso.com",

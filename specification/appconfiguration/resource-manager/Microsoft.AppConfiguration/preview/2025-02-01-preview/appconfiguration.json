@@ -244,7 +244,22 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for the operation result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Indicates how long the client should wait before polling the URL in the Location or Azure-AsyncOperation header."
+              }
+            }
           },
           "204": {
             "description": "No Content - the specified resource was not found."
@@ -900,7 +915,7 @@
             "name": "keyValueParameters",
             "in": "body",
             "description": "The parameters for creating a key-value.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/KeyValue"
             }
@@ -1393,10 +1408,10 @@
         "operationId": "Snapshots_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigStoreNameParameter"
@@ -1405,7 +1420,7 @@
             "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1418,7 +1433,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1436,10 +1451,10 @@
         "operationId": "Snapshots_Create",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigStoreNameParameter"
@@ -1448,7 +1463,7 @@
             "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -1476,7 +1491,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1500,16 +1515,16 @@
         "operationId": "Experimentation_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigStoreNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1522,7 +1537,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1545,10 +1560,10 @@
         "operationId": "Experimentation_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigStoreNameParameter"
@@ -1557,7 +1572,7 @@
             "$ref": "#/parameters/ExperimentationNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1570,7 +1585,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1588,10 +1603,10 @@
         "operationId": "Experimentation_Create",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigStoreNameParameter"
@@ -1600,7 +1615,7 @@
             "$ref": "#/parameters/ExperimentationNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "experimentationCreationParameters",
@@ -1628,7 +1643,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1650,10 +1665,10 @@
         "operationId": "Experimentation_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigStoreNameParameter"
@@ -1662,7 +1677,7 @@
             "$ref": "#/parameters/ExperimentationNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1685,7 +1700,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1818,6 +1833,11 @@
           "default": 7,
           "description": "The amount of time in days that the configuration store will be retained when it is soft deleted."
         },
+        "defaultKeyValueRevisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
+        },
         "enablePurgeProtection": {
           "type": "boolean",
           "default": false,
@@ -1847,7 +1867,7 @@
           "description": "Property specifying the configuration of telemetry for this configuration store"
         },
         "managedOnBehalfOfConfiguration": {
-          "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
+          "$ref": "../../../../../common-types/resource-management/v6/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
           "description": "Managed On Behalf Of Configuration.",
           "readOnly": true
         }
@@ -2010,6 +2030,11 @@
         "dataPlaneProxy": {
           "$ref": "#/definitions/DataPlaneProxyProperties",
           "description": "Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM)."
+        },
+        "defaultKeyValueRevisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
         },
         "telemetry": {
           "$ref": "#/definitions/TelemetryProperties",
