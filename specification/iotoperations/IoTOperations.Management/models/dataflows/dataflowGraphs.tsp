@@ -240,12 +240,12 @@ model DataflowGraphSchemaSettings {
   /**
    * Output serialization format.
    */
-  serializationFormat: DataflowGraphSerializationFormat;
+  serializationFormat?: DataflowGraphSerializationFormat;
 
   /**
    * Reference to the schema that describes the output of the transformation.
    */
-  schemaRef?: string;
+  schemaRef: string;
 }
 
 /**
