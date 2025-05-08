@@ -1,4 +1,5 @@
 import "@typespec/versioning";
+import "./HealthResourcesExample.tsp";
 import "./common.tsp";
 using TypeSpec.Versioning;
 /**
@@ -13,6 +14,9 @@ Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged
 event.
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(
+  MicrosoftResourceNotificationsHealthResourcesAvailabilityStatusChangedExample
+)
 model ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
 
@@ -21,5 +25,6 @@ Schema of the Data property of an EventGridEvent for a
 Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event.
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftResourceNotificationsHealthResourcesResourceAnnotatedExample)
 model ResourceNotificationsHealthResourcesAnnotatedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
