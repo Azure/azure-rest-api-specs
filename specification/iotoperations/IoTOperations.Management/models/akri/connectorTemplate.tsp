@@ -293,6 +293,22 @@ model AkriConnectorTemplateManagedConfigurationSettings {
    */
   @extension("x-ms-identifiers", #["secretAlias"])
   secrets?: AkriConnectorsSecret[];
+
+  /**
+   * Trust list for the connector. This is used to specify the certificates that all connector instances should trust.
+   */
+  trustSettings?: AkriConnectorTemplateTrustList;
+}
+
+/**
+ * AkriConnectorTemplateTrustList properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorTemplateTrustList {
+  /**
+   * The secret reference for certificates to trust.
+   */
+  secretRef: string;
 }
 
 /**

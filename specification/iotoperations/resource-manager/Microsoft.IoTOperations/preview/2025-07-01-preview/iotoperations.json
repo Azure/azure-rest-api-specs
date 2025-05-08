@@ -4719,6 +4719,10 @@
           "x-ms-identifiers": [
             "secretAlias"
           ]
+        },
+        "trustSettings": {
+          "$ref": "#/definitions/AkriConnectorTemplateTrustList",
+          "description": "Trust list for the connector. This is used to specify the certificates that all connector instances should trust."
         }
       },
       "discriminator": "managedConfigurationType",
@@ -4969,6 +4973,19 @@
         }
       ],
       "x-ms-discriminator-value": "StatefulSetConfiguration"
+    },
+    "AkriConnectorTemplateTrustList": {
+      "type": "object",
+      "description": "AkriConnectorTemplateTrustList properties",
+      "properties": {
+        "secretRef": {
+          "type": "string",
+          "description": "The secret reference for certificates to trust."
+        }
+      },
+      "required": [
+        "secretRef"
+      ]
     },
     "AkriConnectorsContainerRegistry": {
       "type": "object",
@@ -8267,7 +8284,8 @@
         }
       },
       "required": [
-        "name"
+        "name",
+        "schema"
       ]
     },
     "DataflowGraphConnectionOutput": {
