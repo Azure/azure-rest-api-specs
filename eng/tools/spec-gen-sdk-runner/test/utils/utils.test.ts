@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, beforeEach, vi } from "vitest";
 import {
   findFilesRecursive,
   findReadmeFiles,
@@ -6,7 +6,7 @@ import {
   getArgumentValue,
   mapToObject,
   objectToMap,
-  normalizePath
+  normalizePath,
 } from "../../src/utils.js";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -66,12 +66,12 @@ describe("Utils", () => {
       expect(results).toEqual([]);
     });
   });
- 
+
   describe("getArgumentValue", () => {
-    test('return the argument value', () => {
-      const args = ['--batch-type', 'all-specs', '--pr-number', '9527'];
-      const result = getArgumentValue(args, '--batch-type', '');
-      expect(result).toBe('all-specs');
+    test("return the argument value", () => {
+      const args = ["--batch-type", "all-specs", "--pr-number", "9527"];
+      const result = getArgumentValue(args, "--batch-type", "");
+      expect(result).toBe("all-specs");
     });
   });
 
@@ -104,7 +104,10 @@ describe("Utils", () => {
 
   describe("mapToObject", () => {
     test("converts Map to Object correctly", () => {
-      const map = new Map([["key1", "value1"], ["key2", "value2"]]);
+      const map = new Map([
+        ["key1", "value1"],
+        ["key2", "value2"],
+      ]);
       const result = mapToObject(map);
       expect(result).toEqual({ key1: "value1", key2: "value2" });
     });
@@ -120,7 +123,12 @@ describe("Utils", () => {
     test("converts Object to Map correctly", () => {
       const obj = { key1: "value1", key2: "value2" };
       const result = objectToMap(obj);
-      expect(result).toEqual(new Map([["key1", "value1"], ["key2", "value2"]]));
+      expect(result).toEqual(
+        new Map([
+          ["key1", "value1"],
+          ["key2", "value2"],
+        ]),
+      );
     });
 
     test("handles empty Object", () => {
@@ -131,18 +139,25 @@ describe("Utils", () => {
   });
 
   describe("normalizePath", () => {
+    beforeEach(() => {
+      vi.clearAllMocks();
+    });
+
     test("normalizePath in Windows", () => {
-      const path = "specification//contosowidgetmanager//Contoso.WidgetManager.Shared//main.tsp";
-      const convertPath = "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";
+      vi.spyOn(process, "platform", "get").mockReturnValue("win32");
+      /* eslint-disable unicorn/prefer-string-raw */
+      const path = "specification\\contosowidgetmanager\\Contoso.WidgetManager.Shared\\main.tsp";
+      const convertPath =
+        "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";
       const result = normalizePath(path);
       expect(result).toEqual(convertPath);
     });
 
     test("normalizePath in Linux", () => {
+      vi.spyOn(process, "platform", "get").mockReturnValue("linux");
       const path = "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";
       const result = normalizePath(path);
       expect(result).toEqual(path);
     });
   });
-  
 });
