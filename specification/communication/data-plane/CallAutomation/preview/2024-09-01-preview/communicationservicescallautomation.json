@@ -2170,10 +2170,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "teamsPhoneCallDetails": {
-          "$ref": "#/definitions/TeamsPhoneCallDetails",
-          "description": "Custom calling context TeamsPhoneCallDetails"
         }
       }
     },
@@ -2282,6 +2278,18 @@
         "modelAsString": true
       }
     },
+    "PIIRedactionType": {
+      "description": "If not null, indicates PII redaction request and the type of redaction.",
+      "enum": [
+        "maskWithCharacter",
+        "maskWithEntityType"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PIIRedactionType",
+        "modelAsString": true
+      }
+    },
     "TranscriptionOptions": {
       "description": "Configuration of live transcription.",
       "required": [
@@ -2314,6 +2322,20 @@
         "enableIntermediateResults": {
           "description": "Enables intermediate results for the transcribed speech.",
           "type": "boolean"
+        },
+        "piiRedactionType": {
+          "$ref": "#/definitions/PIIRedactionType"
+        },
+        "enableSentimentAnalysis": {
+          "description": "Gets or sets a value indicating if sentiment analysis should be used.",
+          "type": "boolean"
+        },
+        "locales": {
+          "description": "Gets or sets a list of languages for Language Identification.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2322,120 +2344,6 @@
     },
     "TeamsExtensionUserIdentifierModel": {
       "$ref": "../../../Common/preview/2025-03-15-preview/common.json#/definitions/TeamsExtensionUserIdentifierModel"
-    },
-    "TeamsPhoneCallDetails": {
-      "description": "The call details which will be sent to the target",
-      "type": "object",
-      "properties": {
-        "teamsPhoneCallerDetails": {
-          "$ref": "#/definitions/TeamsPhoneCallerDetails",
-          "description": "Container for details relating to the original caller of the call"
-        },
-        "teamsPhoneSourceDetails": {
-          "$ref": "#/definitions/TeamsPhoneSourceDetails",
-          "description": "Container for details relating to the entity responsible for the creation of these call details"
-        },
-        "sessionId": {
-          "description": "Id to exclusively identify this call session. IVR will use this for their telemetry/reporting.",
-          "type": "string"
-        },
-        "intent": {
-          "description": "The intent of the call",
-          "type": "string"
-        },
-        "callTopic": {
-          "description": "A very short description (max 48 chars) of the reason for the call. To be displayed in Teams CallNotification",
-          "type": "string"
-        },
-        "callContext": {
-          "description": "A summary of the call thus far. It will be displayed on a side panel in the Teams UI",
-          "type": "string"
-        },
-        "transcriptUrl": {
-          "description": "Url for fetching the transcript of the call",
-          "type": "string"
-        },
-        "callSentiment": {
-          "description": "Sentiment of the call thus far",
-          "type": "string"
-        },
-        "suggestedActions": {
-          "description": "Recommendations for resolving the issue based on the customer’s intent and interaction history",
-          "type": "string"
-        }
-      }
-    },
-    "TeamsPhoneCallerDetails": {
-      "description": "Container for details relating to the original caller of the call",
-      "required": [
-        "caller",
-        "name",
-        "phoneNumber"
-      ],
-      "type": "object",
-      "properties": {
-        "caller": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "Caller's ID"
-        },
-        "name": {
-          "description": "Caller's name",
-          "type": "string"
-        },
-        "phoneNumber": {
-          "description": "Caller's phone number",
-          "type": "string"
-        },
-        "recordId": {
-          "description": "Caller's record ID (ex in CRM)",
-          "type": "string"
-        },
-        "screenPopUrl": {
-          "description": "Caller's screen pop URL",
-          "type": "string"
-        },
-        "isAuthenticated": {
-          "description": "Flag indicating whether the caller was authenticated",
-          "type": "boolean"
-        },
-        "additionalCallerInformation": {
-          "description": "A set of key value pairs (max 10, any additional entries would be ignored) which a bot author wants to pass to the Teams Client for display to the agent",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "TeamsPhoneSourceDetails": {
-      "description": "Container for details relating to the entity responsible for the creation of these call details",
-      "required": [
-        "source",
-        "language",
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "ID of the source entity passing along the call details (ex. Application Instance ID of - CQ/AA)"
-        },
-        "language": {
-          "description": "Language of the source entity passing along the call details, passed in the ISO-639 standard",
-          "type": "string"
-        },
-        "status": {
-          "description": "Status of the source entity passing along the call details",
-          "type": "string"
-        },
-        "intendedTargets": {
-          "description": "Intended targets of the source entity passing along the call details",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/CommunicationIdentifierModel"
-          }
-        }
-      }
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/preview/2025-03-15-preview/common.json#/definitions/CommunicationErrorResponse"
@@ -3081,6 +2989,17 @@
         "speechLanguage": {
           "description": "Speech language to be recognized, If not set default is en-US",
           "type": "string"
+        },
+        "speechLanguages": {
+          "description": "Gets or sets a list of languages for Language Identification.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableSentimentAnalysis": {
+          "description": "Gets or sets a value indicating if sentiment analysis should be used.",
+          "type": "boolean"
         },
         "speechRecognitionModelEndpointId": {
           "description": "Endpoint where the custom model was deployed.",
@@ -3894,7 +3813,7 @@
       "type": "object",
       "properties": {
         "cognitiveServicesEndpoint": {
-          "description": "The identifier of the Cognitive Service resource assigned to the post recording processing.\r\nThe Cognitive Service resource will be used by the summarization feature.",
+          "description": "The endpoint of the Cognitive Service resource assigned to the post recording processing.\r\nThe Cognitive Service resource will be used by the summarization feature.",
           "type": "string"
         },
         "transcription": {
@@ -4945,6 +4864,19 @@
         "recognizedPhrase": {
           "description": "Phrases are set to the value if choice is selected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
           "type": "string"
+        },
+        "languageIdentified": {
+          "description": "The identified language for a spoken phrase.",
+          "type": "string"
+        },
+        "sentimentAnalysisResult": {
+          "$ref": "#/definitions/SentimentAnalysisResult",
+          "description": "Gets or sets the sentiment analysis result."
+        },
+        "confidence": {
+          "format": "double",
+          "description": "The confidence level of the recognized speech, if available, ranges from 0.0 to 1.0",
+          "type": "number"
         }
       }
     },
@@ -4958,8 +4890,25 @@
         },
         "confidence": {
           "format": "double",
-          "description": "The confidence of the recognized speech.",
+          "description": "The confidence level of the recognized speech, if available, ranges from 0.0 to 1.0",
           "type": "number"
+        },
+        "languageIdentified": {
+          "description": "The identified language.",
+          "type": "string"
+        },
+        "sentimentAnalysisResult": {
+          "$ref": "#/definitions/SentimentAnalysisResult",
+          "description": "Gets or sets the sentiment analysis result."
+        }
+      }
+    },
+    "SentimentAnalysisResult": {
+      "type": "object",
+      "properties": {
+        "sentiment": {
+          "description": "Gets or sets the value of the sentiment detected (positive, negative, neutral, mixed).",
+          "type": "string"
         }
       }
     },
