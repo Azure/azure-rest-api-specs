@@ -1069,13 +1069,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "AkriDiscoveryHandler_ListByInstanceResource_MaximumSet_Gen": {
+          "AkriDiscoveryHandler_ListByInstanceResource_MaximumSet": {
             "$ref": "./examples/AkriDiscoveryHandler_ListByInstanceResource_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7853,10 +7853,6 @@
         "cloudEventAttributes": {
           "$ref": "#/definitions/CloudEventAttributeType",
           "description": "Cloud event mapping config."
-        },
-        "hostType": {
-          "type": "string",
-          "description": "The type of the Kafka host. E.g FabricRT, EventGrid."
         }
       },
       "required": [
@@ -8164,10 +8160,6 @@
         "cloudEventAttributes": {
           "$ref": "#/definitions/CloudEventAttributeType",
           "description": "Cloud event mapping config."
-        },
-        "hostType": {
-          "type": "string",
-          "description": "The type of the MQTT host. E.g LocalMq, Eventhub."
         }
       },
       "required": [
@@ -8236,6 +8228,10 @@
         "endpointType": {
           "$ref": "#/definitions/EndpointType",
           "description": "Endpoint Type."
+        },
+        "hostType": {
+          "$ref": "#/definitions/DataflowEnpointHostType",
+          "description": "The type of the Kafka host. E.g FabricRT, EventGrid."
         },
         "dataExplorerSettings": {
           "$ref": "#/definitions/DataflowEndpointDataExplorer",
@@ -8321,6 +8317,54 @@
       "required": [
         "value"
       ]
+    },
+    "DataflowEnpointHostType": {
+      "type": "string",
+      "description": "DataflowEndpoint Host Type properties",
+      "enum": [
+        "FabricRT",
+        "EventGrid",
+        "LocalMq",
+        "Eventhub",
+        "CustomMq",
+        "CustomKafka"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowEnpointHostType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FabricRT",
+            "value": "FabricRT",
+            "description": "Fabric Real-Time Type"
+          },
+          {
+            "name": "EventGrid",
+            "value": "EventGrid",
+            "description": "EventGrid Type"
+          },
+          {
+            "name": "LocalMq",
+            "value": "LocalMq",
+            "description": "Local MQTT Type"
+          },
+          {
+            "name": "Eventhub",
+            "value": "Eventhub",
+            "description": "EventHub Type"
+          },
+          {
+            "name": "CustomMq",
+            "value": "CustomMq",
+            "description": "Custom MQTT Type"
+          },
+          {
+            "name": "CustomKafka",
+            "value": "CustomKafka",
+            "description": "Custom Kafka Type"
+          }
+        ]
+      }
     },
     "DataflowGraphConnectionInput": {
       "type": "object",
