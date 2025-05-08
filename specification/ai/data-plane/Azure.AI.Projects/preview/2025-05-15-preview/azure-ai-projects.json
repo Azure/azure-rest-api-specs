@@ -456,7 +456,7 @@
             "description": "The definition of the DatasetVersion to create or update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatasetVersionUpdate"
+              "$ref": "#/definitions/DatasetVersion"
             }
           }
         ],
@@ -1167,7 +1167,7 @@
             "description": "The definition of the Index to create or update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IndexUpdate"
+              "$ref": "#/definitions/Index"
             }
           }
         ],
@@ -1852,16 +1852,6 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
-    "AzureAISearchIndexUpdate": {
-      "type": "object",
-      "description": "Azure AI Search Index Definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IndexUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureSearch"
-    },
     "AzureOpenAIModelConfiguration": {
       "type": "object",
       "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
@@ -2092,16 +2082,6 @@
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
     },
-    "CosmosDBIndexUpdate": {
-      "type": "object",
-      "description": "CosmosDB Vector Store Index Definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IndexUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
-    },
     "CredentialType": {
       "type": "string",
       "description": "The credential type used by the connection",
@@ -2263,39 +2243,6 @@
         "type",
         "name",
         "version"
-      ]
-    },
-    "DatasetVersionUpdate": {
-      "type": "object",
-      "description": "DatasetVersion Definition",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/DatasetType",
-          "description": "Dataset type"
-        },
-        "description": {
-          "type": "string",
-          "description": "The asset description text.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
       ]
     },
     "Deployment": {
@@ -2519,32 +2466,12 @@
       ],
       "x-ms-discriminator-value": "uri_file"
     },
-    "FileDatasetVersionUpdate": {
-      "type": "object",
-      "description": "FileDatasetVersion Definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetVersionUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "uri_file"
-    },
     "FolderDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
       "allOf": [
         {
           "$ref": "#/definitions/DatasetVersion"
-        }
-      ],
-      "x-ms-discriminator-value": "uri_folder"
-    },
-    "FolderDatasetVersionUpdate": {
-      "type": "object",
-      "description": "FileDatasetVersion Definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetVersionUpdate"
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
@@ -2628,39 +2555,6 @@
         ]
       }
     },
-    "IndexUpdate": {
-      "type": "object",
-      "description": "Index resource Definition",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/IndexType",
-          "description": "Type of index"
-        },
-        "description": {
-          "type": "string",
-          "description": "The asset description text.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
     "InputData": {
       "type": "object",
       "description": "Abstract data class.",
@@ -2712,16 +2606,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Index"
-        }
-      ],
-      "x-ms-discriminator-value": "ManagedAzureSearch"
-    },
-    "ManagedAzureAISearchIndexUpdate": {
-      "type": "object",
-      "description": "Managed Azure AI Search Index Definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IndexUpdate"
         }
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
