@@ -264,7 +264,6 @@ model DataflowEndpointKafka {
 
   @doc("Cloud event mapping config.")
   cloudEventAttributes?: CloudEventAttributeType;
-
 }
 
 @doc("Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry")
