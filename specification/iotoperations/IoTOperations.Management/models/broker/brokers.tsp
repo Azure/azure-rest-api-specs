@@ -55,7 +55,6 @@ model BrokerProperties {
   @doc("Memory profile of Broker.")
   memoryProfile?: BrokerMemoryProfile = BrokerMemoryProfile.Medium;
 
-  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The persistence settings of the Broker.")
   @added(Versions.`2025-07-01-preview`)
   persistence?: BrokerPersistence;
