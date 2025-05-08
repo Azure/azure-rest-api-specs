@@ -1152,7 +1152,7 @@ model ServiceSpecification {
   /**
    * Specifications of the Log for Azure Monitoring
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @Azure.ResourceManager.identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -1306,7 +1306,7 @@ model AppAttachPackageInfoProperties {
   /**
    * List of package dependencies.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   packageDependencies?: MsixPackageDependencies[];
 
   /**
@@ -1322,7 +1322,7 @@ model AppAttachPackageInfoProperties {
   /**
    * List of package applications.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   packageApplications?: MsixPackageApplications[];
 
   /**
@@ -2323,7 +2323,7 @@ model AgentUpdateProperties {
   /**
    * List of maintenance windows. Maintenance windows are 2 hours long.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   maintenanceWindows?: MaintenanceWindowProperties[];
 }
 
@@ -2456,13 +2456,13 @@ model ScalingPlanProperties {
   /**
    * List of ScalingPlanPooledSchedule definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @Azure.ResourceManager.identifiers(#["name"])
   schedules?: ScalingSchedule[];
 
   /**
    * List of ScalingHostPoolReference definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["hostPoolArmPath"])
+  @Azure.ResourceManager.identifiers(#["hostPoolArmPath"])
   hostPoolReferences?: ScalingHostPoolReference[];
 }
 
@@ -3252,7 +3252,7 @@ model AgentUpdatePatchProperties {
   /**
    * List of maintenance windows. Maintenance windows are 2 hours long.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   maintenanceWindows?: MaintenanceWindowPatchProperties[];
 }
 
@@ -3354,7 +3354,7 @@ model ExpandMsixImageProperties {
   /**
    * List of package dependencies.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["dependencyName"])
+  @Azure.ResourceManager.identifiers(#["dependencyName"])
   packageDependencies?: MsixPackageDependencies[];
 
   /**
@@ -3370,7 +3370,7 @@ model ExpandMsixImageProperties {
   /**
    * List of package applications.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["appId"])
+  @Azure.ResourceManager.identifiers(#["appId"])
   packageApplications?: MsixPackageApplications[];
 
   /**
@@ -3406,7 +3406,7 @@ model RegistrationTokenList {
   /**
    * List of RegistrationToken definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   value?: RegistrationTokenMinimal[];
 
   /**
@@ -3587,7 +3587,7 @@ model SessionHostProperties {
    * List of SessionHostHealthCheckReports
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["healthCheckName"])
+  @Azure.ResourceManager.identifiers(#["healthCheckName"])
   sessionHostHealthCheckResults?: SessionHostHealthCheckReport[];
 }
 
@@ -3769,13 +3769,13 @@ model ScalingPlanPatchProperties {
   /**
    * List of ScalingSchedule definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @Azure.ResourceManager.identifiers(#["name"])
   schedules?: ScalingSchedule[];
 
   /**
    * List of ScalingHostPoolReference definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["hostPoolArmPath"])
+  @Azure.ResourceManager.identifiers(#["hostPoolArmPath"])
   hostPoolReferences?: ScalingHostPoolReference[];
 }
 
@@ -4646,7 +4646,7 @@ model MSIXPackageProperties {
   /**
    * List of package dependencies.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["dependencyName"])
+  @Azure.ResourceManager.identifiers(#["dependencyName"])
   packageDependencies?: MsixPackageDependencies[];
 
   /**
@@ -4662,7 +4662,7 @@ model MSIXPackageProperties {
   /**
    * List of package applications.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["appId"])
+  @Azure.ResourceManager.identifiers(#["appId"])
   packageApplications?: MsixPackageApplications[];
 }
 
