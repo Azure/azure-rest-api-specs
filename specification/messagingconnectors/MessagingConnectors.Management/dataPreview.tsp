@@ -22,7 +22,7 @@ namespace Microsoft.MessagingConnectors;
 @singleton("default")
 @parentResource(SubscriptionLocationResource)
 @doc("A dataPreview resource Azure")
-model DataPreview is TrackedResource<DataPreviewProperties> {
+model DataPreview is TrackedResource<DataPreviewRequest> {
   @doc("The default data preview resource")
   @path
   @key("dataPreview")
@@ -37,7 +37,7 @@ interface DataPreviewOperations {
   @doc("create one dataPreview task")
   preview is ArmResourceActionAsync<
     DataPreview,
-    DataPreviewProperties,
+    DataPreviewRequest,
     DataPreviewResults
   >;
 }

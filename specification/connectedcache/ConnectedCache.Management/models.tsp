@@ -643,6 +643,11 @@ model AdditionalCacheNodeProperties {
   @visibility(Lifecycle.Read)
   currentTlsCertificate?: MccCacheNodeTlsCertificate;
 
+  @added(Versions.v2024_11_30_preview)
+  @doc("cache node last auto update information.")
+  @visibility(Lifecycle.Read)
+  lastAutoUpdateInfo?: MccCacheNodeAutoUpdateInfo;
+
   @doc("Cache node resource aggregated status details.")
   @visibility(Lifecycle.Read)
   aggregatedStatusDetails?: string;
@@ -837,6 +842,13 @@ model CacheNodeInstallProperties {
   @visibility(Lifecycle.Read)
   @secret
   registrationKey?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @visibility(Lifecycle.Read)
+  @secret
+  @added(Versions.v2024_11_30_preview)
+  @doc("Mcc Tls certificate provisioning key.")
+  tlsCertificateProvisioningKey?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @added(Versions.v2024_11_30_preview)

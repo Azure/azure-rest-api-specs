@@ -100,7 +100,6 @@ model NetworkFabricProperties {
   @Azure.ResourceManager.identifiers(#[])
   @added(Versions.v2024_06_15_preview)
   @visibility(Lifecycle.Read)
-  @minItems(1)
   featureFlags?: FeatureFlagProperties[];
 
   @doc("Trusted IP Prefixes ARM resource IDs.")

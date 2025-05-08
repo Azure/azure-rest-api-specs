@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./connectors.tsp";
 import "./dataPreview.tsp";
 import "./fetchCdcSchema.tsp";
+import "./validation.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -21,10 +22,10 @@ namespace Microsoft.MessagingConnectors;
 
 @doc("Microsoft.MessagingConnectors api versions.")
 enum Versions {
-  @doc("2025-02-01-preview version")
+  @doc("2025-03-01-preview version")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_02_01_preview: "2025-02-01-preview",
+  v2025_03_01_preview: "2025-03-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

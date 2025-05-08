@@ -73,8 +73,7 @@ export async function generateLintDiffReport(
     outputMarkdown += "| ---- | ------- | ------------------------------- |\n";
 
     for (const violation of newViolations.slice(0, 50)) {
-      const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
+      outputMarkdown += getNewViolationReportRow(violation, compareSha);
     }
 
     outputMarkdown += "\n";
@@ -147,6 +146,10 @@ export function compareLintDiffViolations(a: LintDiffViolation, b: LintDiffViola
     return -1;
   } else if (isWarning(a.level) && isFailure(b.level)) {
     return 1;
+  } else if (a.level === "fatal" && b.level !== "fatal") {
+    return -1;
+  } else if (a.level !== "fatal" && b.level === "fatal") {
+    return 1;
   }
 
   const fileA = getFile(a) || "";
@@ -214,8 +217,18 @@ export function getLine(lintDiffViolation: LintDiffViolation): number | undefine
   return undefined;
 }
 
+function getNewViolationReportRow(violation: LintDiffViolation, compareSha: string): string {
+  const { level, code, message } = violation;
+  if (level.toLowerCase() == "fatal") {
+    // Fatal errors have fewer details and don't need to be formatted
+    return `| ${iconFor(level)} ${code} | ${message} | ${violation.armRpcs?.join(", ")} |\n`;
+  }
+
+  return `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
+}
+
 export function iconFor(type: string) {
-  if (type.toLowerCase().includes("error")) {
+  if (type.toLowerCase().includes("error") || type.toLowerCase() === "fatal") {
     return ":x:";
   } else {
     return ":warning:";
