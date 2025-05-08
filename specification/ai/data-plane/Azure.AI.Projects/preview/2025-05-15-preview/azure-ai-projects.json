@@ -2213,6 +2213,10 @@
           "type": "boolean",
           "description": "Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted"
         },
+        "connectionName": {
+          "type": "string",
+          "description": "The Azure Storage Account connection name. Required if isReference is true."
+        },
         "id": {
           "type": "string",
           "description": "Asset ID, a unique identifier for the asset",
@@ -2252,6 +2256,7 @@
       "required": [
         "dataUri",
         "type",
+        "isReference",
         "name",
         "version"
       ]
@@ -2267,6 +2272,10 @@
         "isReference": {
           "type": "boolean",
           "description": "Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted"
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "The Azure Storage Account connection name. Required if isReference is true."
         },
         "description": {
           "type": "string",
@@ -2940,7 +2949,7 @@
         },
         "connectionName": {
           "type": "string",
-          "description": "Name of Azure blob storage connection to use for generating temporary SAS token"
+          "description": "Azure Storage Account connection name to use for generating temporary SAS token"
         },
         "pendingUploadType": {
           "type": "string",

@@ -67,7 +67,7 @@ model PendingUploadRequest {
   @doc("If PendingUploadId is not provided, a random GUID will be used.")
   pendingUploadId?: string;
 
-  @doc("Name of Azure blob storage connection to use for generating temporary SAS token")
+  @doc("Azure Storage Account connection name to use for generating temporary SAS token")
   connectionName?: string;
 
   @doc("BlobReference is the only supported type.")
