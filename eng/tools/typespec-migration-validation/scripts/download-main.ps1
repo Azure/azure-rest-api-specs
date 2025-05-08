@@ -1,5 +1,6 @@
 param(
   [string]$swaggerPath
+  [string]$callValidation = $false
 )
 
 . $PSScriptRoot/../../../scripts/ChangedFiles-Functions.ps1
@@ -89,5 +90,16 @@ else {
 
 $swaggerInMain = Download-Swagger-InMain $swaggerFolder $latestCommitId
 
-Write-Host "Your next command: npx tsmv $swaggerInMain $swaggerPath {outputFolder}"
+$repoRoot = git rev-parse --show-toplevel
+if ($swaggerPath.StartsWith("specification")) {
+  $swaggerPath = Join-Path $repoRoot $swaggerPath
+}
+
+if ($callValidation -eq $true) {
+  Write-Host "Executing TypeSpec migration validation..."
+  npx tsmv $swaggerInMain $swaggerPath
+}
+else {
+  Write-Host "Your next command: npx tsmv $swaggerInMain $swaggerPath {outputFolder}"
+}
 
