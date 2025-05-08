@@ -162,7 +162,6 @@ model AkriConnectorsImagePullSecret {
   secretRef: string;
 }
 
-
 /**
  * AkriConnectorsTagDigestSettings properties
  */
@@ -212,8 +211,7 @@ model AkriConnectorsTag extends AkriConnectorsTagDigestSettings {
  * AkriConnectorsDigest properties
  */
 @added(Versions.`2025-07-01-preview`)
-model AkriConnectorsDigest
-  extends AkriConnectorsTagDigestSettings {
+model AkriConnectorsDigest extends AkriConnectorsTagDigestSettings {
   /**
    * The tag or digest type
    */
@@ -255,8 +253,7 @@ union AkriConnectorsRegistrySettingsType {
  * AkriConnectorsRegistryEndpointRef properties
  */
 @added(Versions.`2025-07-01-preview`)
-model AkriConnectorsRegistryEndpointRef
-  extends AkriConnectorsRegistrySettings {
+model AkriConnectorsRegistryEndpointRef extends AkriConnectorsRegistrySettings {
   /**
    * The registry endpoint reference
    */
@@ -272,8 +269,7 @@ model AkriConnectorsRegistryEndpointRef
  * AkriConnectorsContainerRegistry properties
  */
 @added(Versions.`2025-07-01-preview`)
-model AkriConnectorsContainerRegistry
-  extends AkriConnectorsRegistrySettings {
+model AkriConnectorsContainerRegistry extends AkriConnectorsRegistrySettings {
   /**
    * The registry settings type
    */

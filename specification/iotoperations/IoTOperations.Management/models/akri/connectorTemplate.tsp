@@ -202,7 +202,6 @@ model AkriConnectorTemplateHelmConfigurationSettings {
    */
   registrySettings?: AkriConnectorsRegistrySettings;
 
-
   /**
    * The repository of the Helm chart.
    */
@@ -295,8 +294,6 @@ model AkriConnectorTemplateManagedConfigurationSettings {
   @extension("x-ms-identifiers", #["secretAlias"])
   secrets?: AkriConnectorsSecret[];
 }
-
-
 
 /**
  * AkriConnectorTemplateAllocation properties
@@ -425,7 +422,6 @@ model AkriConnectorTemplateRuntimeImageConfigurationSettings {
    */
   tagDigestSettings?: AkriConnectorsTagDigestSettings;
 }
-
 
 /**
  * AkriConnectorTemplatePersistentVolumeClaim properties
