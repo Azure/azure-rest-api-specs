@@ -1,6 +1,6 @@
 import semver from "semver";
 import { describe, expect, it } from "vitest";
-import { execFile, execNpm } from "../src/exec.js";
+import { execFile, execNpm, isExecError } from "../src/exec.js";
 import { consoleLogger } from "../src/logger.js";
 
 describe("execFile", () => {
@@ -53,5 +53,23 @@ describe("execNpm", () => {
         code: 1,
       }),
     );
+  });
+});
+
+describe("isExecError", () => {
+  it("isExecError", () => {
+    expect(isExecError("test")).toBe(false);
+
+    const error = new Error();
+    expect(isExecError(error)).toBe(false);
+
+    error.stdout = "test";
+    expect(isExecError(error)).toBe(true);
+
+    delete error.stdout;
+    expect(isExecError(error)).toBe(false);
+
+    error.stderr = "test";
+    expect(isExecError(error)).toBe(true);
   });
 });
