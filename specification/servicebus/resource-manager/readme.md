@@ -233,7 +233,7 @@ input-file:
 
 These settings apply only when `--tag=package-2025-05-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-05'
+``` yaml $(tag) == 'package-2025-05-preview'
 input-file:
 - Microsoft.ServiceBus/preview/2025-05-01-preview/namespace-preview.json
 - Microsoft.ServiceBus/preview/2025-05-01-preview/operations.json
