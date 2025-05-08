@@ -126,10 +126,7 @@ using Microsoft.Carbon;
   armResourceType,
   "csharp"
 );
-@@alternateType(QueryFilter.resourceTypeList,
-  armResourceType[],
-  "csharp"
-);
+@@alternateType(QueryFilter.resourceTypeList, armResourceType[], "csharp");
 @@alternateType(CarbonEmissionDataAvailableDateRange.startDate,
   utcDateTime,
   "csharp"
