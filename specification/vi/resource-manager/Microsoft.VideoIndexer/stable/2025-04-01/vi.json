@@ -61,7 +61,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -112,7 +112,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -148,7 +148,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -190,7 +190,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -230,7 +230,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -279,7 +279,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -337,7 +337,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -390,7 +390,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -461,7 +461,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -518,7 +518,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1511,40 +1511,6 @@
           "readOnly": true,
           "description": "URL to get the next set of operation list results if there are any.",
           "example": "https://management.azure.com/{operation}?api-version={version}&%24skiptoken={token}"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
         }
       }
     },
