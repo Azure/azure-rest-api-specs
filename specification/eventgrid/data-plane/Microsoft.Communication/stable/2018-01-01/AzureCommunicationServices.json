@@ -896,7 +896,16 @@
           "$ref": "#/definitions/AcsCallParticipantEventData"
         }
       ],
-      "type": "object"
+      "type": "object",
+      "properties": {},
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/call_participant_added.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/call_participant_added.json"
+        }
+      }
     },
     "AcsCallParticipantRemovedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event.",
@@ -906,7 +915,15 @@
         }
       ],
       "type": "object",
-      "properties": {}
+      "properties": {},
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/call_participant_removed.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/call_participant_removed.json"
+        }
+      }
     },
     "AcsCallStartedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallStarted event.",
@@ -915,7 +932,16 @@
           "$ref": "#/definitions/AcsCallingEventProperties"
         }
       ],
-      "type": "object"
+      "type": "object",
+      "properties": {},
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/call_started.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/call_started.json"
+        }
+      }
     },
     "AcsCallEndedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallEnded event.",
@@ -937,6 +963,14 @@
         "callDurationInSeconds": {
           "description": "Duration of the call in seconds.",
           "type": "number"
+        }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/call_ended.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/call_ended.json"
         }
       }
     },
@@ -985,7 +1019,15 @@
       },
       "required": [
         "messageBody"
-      ]
+      ],
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/chat_azure_bot_command_received_in_thread.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/chat_azure_bot_command_received_in_thread.json"
+        }
+      }
     },
     "AcsChatTypingIndicatorReceivedInThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorReceivedInThread event.",
@@ -1010,7 +1052,15 @@
       },
       "required": [
         "messageBody"
-      ]
+      ],
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/chat_typing_indicator_received_in_thread.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/chat_typing_indicator_received_in_thread.json"
+        }
+      }
     },
     "AcsChatMessageReceivedInThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
