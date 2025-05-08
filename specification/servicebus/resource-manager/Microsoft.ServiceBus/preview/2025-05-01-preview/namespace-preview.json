@@ -782,6 +782,9 @@
           "format": "int32",
           "type": "integer",
           "description": "The number of partitions of a Service Bus namespace. This property is only applicable to Premium SKU namespaces. The default value is 1 and possible values are 1, 2 and 4"
+        },
+        "platformCapabilities": {
+          "$ref": "#/definitions/PlatformCapabilities"
         }
       },
       "description": "Properties of the namespace."
@@ -954,7 +957,7 @@
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
-        "Mode": {
+        "mode": {
           "description" : "Setting to Enable or Disable Confidential Compute",
           "enum": [
             "Disabled",

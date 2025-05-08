@@ -235,17 +235,17 @@ These settings apply only when `--tag=package-2025-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2025-05'
 input-file:
-- Microsoft.ServiceBus/preview/2025-05-01/namespace-preview.json
-- Microsoft.ServiceBus/preview/2025-05-01/operations.json
-- Microsoft.ServiceBus/preview/2025-05-01/DisasterRecoveryConfig.json
-- Microsoft.ServiceBus/preview/2025-05-01/migrationconfigs.json
-- Microsoft.ServiceBus/preview/2025-05-01/networksets.json
-- Microsoft.ServiceBus/preview/2025-05-01/AuthorizationRules.json
-- Microsoft.ServiceBus/preview/2025-05-01/Queue.json
-- Microsoft.ServiceBus/preview/2025-05-01/topics.json
-- Microsoft.ServiceBus/preview/2025-05-01/Rules.json
-- Microsoft.ServiceBus/preview/2025-05-01/subscriptions.json
-- Microsoft.ServiceBus/preview/2025-05-01/CheckNameAvailability.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/operations.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2025-05-01-preview/CheckNameAvailability.json
 ```
 
 Important notes:
