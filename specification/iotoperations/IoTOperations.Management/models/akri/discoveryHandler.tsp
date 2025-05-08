@@ -91,6 +91,12 @@ model AkriDiscoveryHandlerProperties {
    * Schedule for the AkriDiscoveryHandler.
    */
   schedule: AkriDiscoveryHandlerSchedule;
+
+  /**
+   * Secrets that will be mounted onto discovery handler.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["secretAlias"])
+  secrets?: AkriConnectorsSecret[];
 }
 
 /**

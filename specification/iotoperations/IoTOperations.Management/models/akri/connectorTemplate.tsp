@@ -127,9 +127,14 @@ model AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
   defaultStreamsConfigSchemaRef?: string;
 
   /**
-   * The default configuration schema reference for device additional configuration.
+   * The additional configuration schema reference.
    */
-  deviceAdditionalConfigurationSchemaRef?: string;
+  additionalConfigSchemaRef?: string;
+
+  /**
+   * The device endpoint additional configuration schema reference.
+   */
+  deviceEndpointAdditionalConfigSchemaRef?: string;
 }
 
 /**
@@ -288,29 +293,10 @@ model AkriConnectorTemplateManagedConfigurationSettings {
    * Connector secrets that will be mounted onto all connector instances.
    */
   @extension("x-ms-identifiers", #["secretAlias"])
-  secrets?: AkriConnectorTemplateSecret[];
+  secrets?: AkriConnectorsSecret[];
 }
 
-/**
- * AkriConnectorTemplateSecret properties
- */
-@added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateSecret {
-  /**
-   * The key in the secret to be mounted
-   */
-  secretKey: string;
 
-  /**
-   * The application-defined alias for the secret
-   */
-  secretAlias: string;
-
-  /**
-   * The name of the secret to be mounted
-   */
-  name: string;
-}
 
 /**
  * AkriConnectorTemplateAllocation properties

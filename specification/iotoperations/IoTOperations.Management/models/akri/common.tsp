@@ -301,3 +301,24 @@ model AkriConnectorsContainerRegistrySettings {
   @OpenAPI.extension("x-ms-identifiers", #["secretRef"])
   imagePullSecrets?: AkriConnectorsImagePullSecret[];
 }
+
+/**
+ * AkriConnectorsSecret properties
+ */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorsSecret {
+  /**
+   * The key in the secret to be mounted
+   */
+  secretKey: string;
+
+  /**
+   * The application-defined alias for the secret
+   */
+  secretAlias: string;
+
+  /**
+   * The name of the secret to be mounted
+   */
+  secretRef: string;
+}

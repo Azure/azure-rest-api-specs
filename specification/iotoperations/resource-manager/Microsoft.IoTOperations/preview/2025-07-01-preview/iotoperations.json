@@ -4414,9 +4414,13 @@
           "type": "string",
           "description": "The default configuration schema reference for streams."
         },
-        "deviceAdditionalConfigurationSchemaRef": {
+        "additionalConfigSchemaRef": {
           "type": "string",
-          "description": "The default configuration schema reference for device additional configuration."
+          "description": "The additional configuration schema reference."
+        },
+        "deviceEndpointAdditionalConfigSchemaRef": {
+          "type": "string",
+          "description": "The device endpoint additional configuration schema reference."
         }
       }
     },
@@ -4710,7 +4714,7 @@
           "type": "array",
           "description": "Connector secrets that will be mounted onto all connector instances.",
           "items": {
-            "$ref": "#/definitions/AkriConnectorTemplateSecret"
+            "$ref": "#/definitions/AkriConnectorsSecret"
           },
           "x-ms-identifiers": [
             "secretAlias"
@@ -4966,29 +4970,6 @@
       ],
       "x-ms-discriminator-value": "StatefulSetConfiguration"
     },
-    "AkriConnectorTemplateSecret": {
-      "type": "object",
-      "description": "AkriConnectorTemplateSecret properties",
-      "properties": {
-        "secretKey": {
-          "type": "string",
-          "description": "The key in the secret to be mounted"
-        },
-        "secretAlias": {
-          "type": "string",
-          "description": "The application-defined alias for the secret"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the secret to be mounted"
-        }
-      },
-      "required": [
-        "secretKey",
-        "secretAlias",
-        "name"
-      ]
-    },
     "AkriConnectorsContainerRegistry": {
       "type": "object",
       "description": "AkriConnectorsContainerRegistry properties",
@@ -5239,6 +5220,29 @@
         ]
       }
     },
+    "AkriConnectorsSecret": {
+      "type": "object",
+      "description": "AkriConnectorsSecret properties",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "description": "The key in the secret to be mounted"
+        },
+        "secretAlias": {
+          "type": "string",
+          "description": "The application-defined alias for the secret"
+        },
+        "secretRef": {
+          "type": "string",
+          "description": "The name of the secret to be mounted"
+        }
+      },
+      "required": [
+        "secretKey",
+        "secretAlias",
+        "secretRef"
+      ]
+    },
     "AkriConnectorsServiceAccountAuthentication": {
       "type": "object",
       "description": "AkriConnectorsServiceAccountAuthentication properties",
@@ -5465,6 +5469,16 @@
         "schedule": {
           "$ref": "#/definitions/AkriDiscoveryHandlerSchedule",
           "description": "Schedule for the AkriDiscoveryHandler."
+        },
+        "secrets": {
+          "type": "array",
+          "description": "Secrets that will be mounted onto discovery handler.",
+          "items": {
+            "$ref": "#/definitions/AkriConnectorsSecret"
+          },
+          "x-ms-identifiers": [
+            "secretAlias"
+          ]
         }
       },
       "required": [
@@ -5715,7 +5729,7 @@
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
-            "type": "Microsoft.SchemaRegistry/namespaces"
+            "type": "Microsoft.DeviceRegistry/namespaces"
           }
         ]
       }
@@ -6315,7 +6329,11 @@
           "type": "string",
           "description": "The user property value to enable persistence."
         }
-      }
+      },
+      "required": [
+        "userPropertyKey",
+        "userPropertyValue"
+      ]
     },
     "BrokerPersistenceEncryption": {
       "type": "object",
@@ -8249,8 +8267,7 @@
         }
       },
       "required": [
-        "name",
-        "schema"
+        "name"
       ]
     },
     "DataflowGraphConnectionOutput": {
