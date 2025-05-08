@@ -1528,8 +1528,16 @@
         },
         "isReference": {
           "type": "boolean",
-          "description": "Indicates if dataset is reference only or managed by dataset service. If true, the underlying data will be deleted when the dataset version is deleted",
+          "description": "Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted",
           "readOnly": true
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "The Azure Storage Account connection name. Required if startPendingUploadVersion was not called before creating the Dataset",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "id": {
           "type": "string",
@@ -2097,7 +2105,7 @@
         },
         "connectionName": {
           "type": "string",
-          "description": "Name of Azure blob storage connection to use for generating temporary SAS token"
+          "description": "Azure Storage Account connection name to use for generating temporary SAS token"
         },
         "pendingUploadType": {
           "type": "string",
