@@ -81,7 +81,6 @@ model AcsChatMessageReceivedEventData
   ...AcsChatMessageBaseEventData;
 }
 
-
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommandReceivedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatAzureBotCommandReceivedInThreadEventData
@@ -625,7 +624,7 @@ model AcsRouterJobWorkerSelectorsExpiredEventData
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeleted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationRouterWorkerDeletedExample)
+// @example(MicrosoftCommunicationRouterWorkerDeletedExample)
 model AcsRouterWorkerDeletedEventData extends AcsRouterWorkerEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeregistered event */
