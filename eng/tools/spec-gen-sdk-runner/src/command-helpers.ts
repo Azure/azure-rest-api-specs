@@ -160,6 +160,18 @@ export function getSpecPaths(batchType: string, specRepoPath: string): string[] 
       specConfigPaths.push(...getAllTypeSpecPaths(specRepoPath));
       break;
     }
+    case "all-mgmtplane-typespecs": {
+      specConfigPaths.push(
+        ...getAllTypeSpecPaths(specRepoPath).filter((p) => p.includes(".Management")),
+      );
+      break;
+    }
+    case "all-dataplane-typespecs": {
+      specConfigPaths.push(
+        ...getAllTypeSpecPaths(specRepoPath).filter((p) => !p.includes(".Management")),
+      );
+      break;
+    }
     case "all-openapis": {
       specConfigPaths.push(...findReadmeFiles(path.join(specRepoPath, "specification")));
       break;
