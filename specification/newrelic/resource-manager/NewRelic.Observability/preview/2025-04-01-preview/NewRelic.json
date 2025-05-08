@@ -1421,12 +1421,12 @@
         }
       }
     },
-    "/providers/NewRelic.Observability/getSaaSInfo": {
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/validateAndActivateSaaS": {
       "get": {
         "tags": [
-          "GetSaaSInfo"
+          "vaidateAndActivateSaaS"
         ],
-        "operationId": "GetSaaSInfo",
+        "operationId": "validateAndActivateSaaS",
         "description": "Get the saas id from the marketplace token",
         "parameters": [
           {
@@ -1438,7 +1438,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get SaaSInfo completed successfully.",
+            "description": "Validation and Get SaaSInfo completed successfully.",
             "schema": {
               "$ref": "#/definitions/SaaSInfoListResponse"
             }
