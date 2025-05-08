@@ -38,7 +38,8 @@ model DatasetVersion {
   type: DatasetType;
 
   @doc("Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted")
-  isReference: boolean;
+  @visbility(Lifecycle.Read)
+  isReference?: boolean;
 
   @doc("The Azure Storage Account connection name. Required if isReference is true.")
   connectionName?: string;
