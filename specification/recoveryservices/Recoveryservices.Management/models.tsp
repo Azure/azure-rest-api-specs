@@ -1004,13 +1004,11 @@ model PrivateEndpointConnection {
   /**
    * The Private Endpoint network resource that is linked to the Private Endpoint connection.
    */
-  @visibility(Lifecycle.Read)
   privateEndpoint?: PrivateEndpoint;
 
   /**
    * Gets or sets private link service connection state.
    */
-  @visibility(Lifecycle.Read)
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
 
   /**
@@ -1664,3 +1662,17 @@ model ResourceCertificateAndAcsDetails extends ResourceCertificateDetails {
    */
   authType: "AccessControlService";
 }
+
+model ClientDiscoveryResponse
+  is Azure.Core.Page<ClientDiscoveryValueForSingleApi>;
+
+@@OpenAPI.extension(ClientDiscoveryForServiceSpecification.logSpecifications,
+  "x-ms-identifiers",
+  #[]
+);
+
+@@OpenAPI.extension(ClientDiscoveryResponse.value, "x-ms-identifiers", #[]);
+@@OpenAPI.extension(Error.additionalInfo, "x-ms-identifiers", #[]);
+@@OpenAPI.extension(Error.details, "x-ms-identifiers", #[]);
+@@OpenAPI.extension(ReplicationUsageList.value, "x-ms-identifiers", #[]);
+@@visibility(PrivateEndpointConnection.groupIds, Lifecycle.Read);

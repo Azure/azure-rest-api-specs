@@ -53,6 +53,11 @@ interface RecoveryServicesOperationGroup {
     Request = ResourceCapabilities,
     Response = CapabilitiesResponse,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = {
+      @path
+      @segment("locations")
+      @doc("The location of the resource.")
+      location: string;
+    }
   >;
 }

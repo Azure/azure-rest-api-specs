@@ -46,4 +46,19 @@ enum Versions {
   v2025_02_01: "2025-02-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  @tag("Operations")
+  @autoRoute
+  @Azure.ResourceManager.Private.armUpdateProviderNamespace
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<ClientDiscoveryResponse> | CloudError;
+}

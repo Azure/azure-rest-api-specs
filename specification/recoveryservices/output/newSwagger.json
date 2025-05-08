@@ -25,13 +25,13 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/ClientDiscoveryResponse"
             }
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -50,10 +50,13 @@
         "operationId": "RecoveryServices_Capabilities",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "body",
+            "name": "input",
             "in": "body",
             "required": true,
             "schema": {
@@ -943,6 +946,104 @@
         }
       }
     },
+    "ClientDiscoveryDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "ClientDiscoveryForLogSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "ClientDiscoveryForProperties": {
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification"
+        }
+      }
+    },
+    "ClientDiscoveryForServiceSpecification": {
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClientDiscoveryResponse": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClientDiscoveryValueForSingleApi": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/ClientDiscoveryDisplay"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ClientDiscoveryForProperties"
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
     "CmkKekIdentity": {
       "type": "object",
       "properties": {
@@ -1255,18 +1356,17 @@
           "readOnly": true
         },
         "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "readOnly": true
+          "$ref": "#/definitions/PrivateEndpoint"
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "readOnly": true
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
         },
         "groupIds": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VaultSubResourceType"
-          }
+          },
+          "readOnly": true
         }
       }
     },

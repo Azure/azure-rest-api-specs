@@ -72,13 +72,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/ClientDiscoveryResponse"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -105,10 +105,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "description": "The location of the resource.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "body",
+            "name": "input",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -1386,6 +1390,124 @@
         }
       }
     },
+    "ClientDiscoveryDisplay": {
+      "type": "object",
+      "description": "Localized display information of an operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Name of the provider for display purposes"
+        },
+        "resource": {
+          "type": "string",
+          "description": "ResourceType for which this Operation can be performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operations Name itself."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation having details of what operation is about."
+        }
+      }
+    },
+    "ClientDiscoveryForLogSpecification": {
+      "type": "object",
+      "description": "Class to represent shoebox log specification in json client discovery.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized display name"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blobs created in customer storage account per hour"
+        }
+      }
+    },
+    "ClientDiscoveryForProperties": {
+      "type": "object",
+      "description": "Class to represent shoebox properties in json client discovery.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification",
+          "description": "Operation properties."
+        }
+      }
+    },
+    "ClientDiscoveryForServiceSpecification": {
+      "type": "object",
+      "description": "Class to represent shoebox service specification in json client discovery.",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "description": "List of log specifications of this operation.",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClientDiscoveryResponse": {
+      "type": "object",
+      "description": "Paged collection of ClientDiscoveryValueForSingleApi items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClientDiscoveryValueForSingleApi items on this page",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClientDiscoveryValueForSingleApi": {
+      "type": "object",
+      "description": "Available operation details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Operation."
+        },
+        "display": {
+          "$ref": "#/definitions/ClientDiscoveryDisplay",
+          "description": "Contains the localized display information for this particular operation"
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation;governs the display of the operation in the RBAC UX and the audit logs UX"
+        },
+        "properties": {
+          "$ref": "#/definitions/ClientDiscoveryForProperties",
+          "description": "ShoeBox properties for the given operation."
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from Azure Backup.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The resource management error response."
+        }
+      }
+    },
     "CmkKekIdentity": {
       "type": "object",
       "description": "The details of the identity used for CMK",
@@ -1885,20 +2007,19 @@
         },
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The Private Endpoint network resource that is linked to the Private Endpoint connection.",
-          "readOnly": true
+          "description": "The Private Endpoint network resource that is linked to the Private Endpoint connection."
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "Gets or sets private link service connection state.",
-          "readOnly": true
+          "description": "Gets or sets private link service connection state."
         },
         "groupIds": {
           "type": "array",
           "description": "Group Ids for the Private Endpoint",
           "items": {
             "$ref": "#/definitions/VaultSubResourceType"
-          }
+          },
+          "readOnly": true
         }
       }
     },

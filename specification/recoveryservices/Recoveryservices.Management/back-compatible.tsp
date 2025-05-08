@@ -18,3 +18,6 @@ using Microsoft.RecoveryServices;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VaultExtendedInfoResource.properties);
+@@clientName(RecoveryServicesOperationGroup.capabilities::parameters.body,
+  "input"
+);
