@@ -4,6 +4,7 @@ import "./models-service.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Search;
 
@@ -19,6 +20,13 @@ interface DataSources {
     {
       ...matchingHeader;
       ...preferHeader;
+
+      /**
+       * Ignores cache reset requirements.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query("ignoreResetRequirements")
+      skipIndexerResetRequirementForCache?: boolean;
 
       /**
        * The definition of the datasource to create or update.
@@ -116,6 +124,40 @@ interface Indexers {
   >;
 
   /**
+   * Resets specific documents in the datasource to be selectively re-ingested by
+   * the indexer.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2024_11_01_preview)
+  @route("/indexers('{indexerName}')/search.resetdocs")
+  @post
+  resetDocs is SearchIndexerOperation<
+    {
+      /**
+       * If false, keys or ids will be appended to existing ones. If true, only the keys
+       * or ids in this payload will be queued to be re-ingested.
+       */
+      @query
+      overwrite?: boolean;
+
+      /**
+       * The keys or ids of the documents to be re-ingested. If keys are provided, the
+       * document key field must be specified in the indexer configuration. If ids are
+       * provided, the document key field is ignored.
+       */
+      @body
+      keysOrIds?: DocumentKeysOrIds;
+    },
+    {
+      /**
+       * A process exit code.
+       */
+      @statusCode
+      code: "204";
+    }
+  >;
+
+  /**
    * Runs an indexer on-demand.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -143,6 +185,20 @@ interface Indexers {
     {
       ...matchingHeader;
       ...preferHeader;
+
+      /**
+       * Ignores cache reset requirements.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query("ignoreResetRequirements")
+      skipIndexerResetRequirementForCache?: boolean;
+
+      /**
+       * Disables cache reprocessing change detection.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query("disableCacheReprocessingChangeDetection")
+      disableCacheReprocessingChangeDetection?: boolean;
 
       /**
        * The definition of the indexer to create or update.
@@ -246,6 +302,20 @@ interface Skillsets {
       ...preferHeader;
 
       /**
+       * Ignores cache reset requirements.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query("ignoreResetRequirements")
+      skipIndexerResetRequirementForCache?: boolean;
+
+      /**
+       * Disables cache reprocessing change detection.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query("disableCacheReprocessingChangeDetection")
+      disableCacheReprocessingChangeDetection?: boolean;
+
+      /**
        * The skillset containing one or more skills to create or update in a search
        * service.
        */
@@ -321,6 +391,25 @@ interface Skillsets {
       @statusCode
       code: "201";
     }
+  >;
+
+  /**
+   * Reset an existing skillset in a search service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2024_11_01_preview)
+  @route("/skillsets('{skillsetName}')/search.resetskills")
+  @post
+  resetSkills is SearchSkillsetOperation<
+    {
+      /**
+       * The names of the skills to reset. If not specified, all skills in the skillset
+       * will be reset.
+       */
+      @body
+      skillNames: SkillNames;
+    },
+    void
   >;
 }
 
@@ -543,6 +632,97 @@ interface Indexes {
     },
     AnalyzeResult
   >;
+}
+
+@added(Versions.v2024_11_01_preview)
+interface AliasesOperations {
+  /**
+   * Creates a new search alias.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/aliases")
+  @post
+  create is SearchOperation<
+    {
+      /**
+       * The definition of the alias to create.
+       */
+      @body
+      `alias`: SearchAlias;
+    },
+    SearchAlias & {
+      /**
+       * A process exit code.
+       */
+      @statusCode
+      code: "201";
+    }
+  >;
+  /**
+   * Lists all aliases available for a search service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/aliases")
+  @get
+  list is SearchOperation<{}, ListAliasesResult>;
+
+  /**
+   * Creates a new search alias or updates an alias if it already exists.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @route("/aliases('{aliasName}')")
+  @put
+  createOrUpdate is SearchAliasOperation<
+    {
+      ...matchingHeader;
+      ...preferHeader;
+
+      /**
+       * The definition of the alias to create or update.
+       */
+      @body
+      `alias`: SearchAlias;
+    },
+    SearchAlias & {
+      /**
+       * A process exit code.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @statusCode
+      code: "200" | "201";
+    }
+  >;
+
+  /**
+   * Deletes a search alias and its associated mapping to an index. This operation
+   * is permanent, with no recovery option. The mapped index is untouched by this
+   * operation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/aliases('{aliasName}')")
+  @delete
+  delete is SearchAliasOperation<
+    {
+      ...matchingHeader;
+    },
+    {
+      /**
+       * A process exit code.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @statusCode
+      code: "204" | "404";
+    }
+  >;
+
+  /**
+   * Retrieves an alias definition.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/aliases('{aliasName}')")
+  @get
+  get is SearchAliasOperation<{}, SearchAlias>;
 }
 
 /**

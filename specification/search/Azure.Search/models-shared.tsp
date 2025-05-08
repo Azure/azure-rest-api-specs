@@ -80,6 +80,14 @@ alias synonymMapNamePath = {
   synonymMapName: string;
 };
 
+alias aliasNamePath = {
+  /**
+   * The name of the alias.
+   */
+  @path
+  aliasName: string;
+};
+
 alias SearchOperation<
   TParams extends Reflection.Model,
   TResponse,
@@ -147,6 +155,18 @@ alias SearchSynonymMapOperation<
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
   TParams & ClientRequestIdHeader & synonymMapNamePath,
+  TResponse,
+  Traits,
+  TError
+>;
+
+alias SearchAliasOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader & aliasNamePath,
   TResponse,
   Traits,
   TError

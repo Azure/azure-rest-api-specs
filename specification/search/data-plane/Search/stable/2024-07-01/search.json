@@ -1224,7 +1224,7 @@
           {
             "name": "answers",
             "in": "query",
-            "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns answers extracted from key passages in the highest ranked documents.\nThe number of answers returned can be configured by appending the pipe\ncharacter `|` followed by the `count-<number of answers>` option after the\nanswers parameter value, such as `extractive|count-3`. Default count is 1. The\nconfidence threshold can be configured by appending the pipe character `|`\nfollowed by the `threshold-<confidence threshold>` option after the answers\nparameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.",
+            "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns answers extracted from key passages in the highest ranked documents.\nThe number of answers returned can be configured by appending the pipe\ncharacter `|` followed by the `count-<number of answers>` option after the\nanswers parameter value, such as `extractive|count-3`. Default count is 1. The\nconfidence threshold can be configured by appending the pipe character `|`\nfollowed by the `threshold-<confidence threshold>` option after the answers\nparameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.\nThe maximum character length of answers can be configured by appending the pipe\ncharacter '|' followed by the 'count-<number of maximum character length>',\nsuch as 'extractive|maxcharlength-600'.",
             "required": false,
             "type": "string",
             "enum": [
@@ -1251,7 +1251,7 @@
           {
             "name": "captions",
             "in": "query",
-            "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns captions extracted from key passages in the highest ranked documents.\nWhen Captions is set to `extractive`, highlighting is enabled by default, and\ncan be configured by appending the pipe character `|` followed by the\n`highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults\nto `None`.",
+            "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns captions extracted from key passages in the highest ranked documents.\nWhen Captions is set to `extractive`, highlighting is enabled by default, and\ncan be configured by appending the pipe character `|` followed by the\n`highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults\nto `None`. The maximum character length of captions can be configured by\nappending the pipe character '|' followed by the 'count-<number of maximum\ncharacter length>', such as 'extractive|maxcharlength-600'.",
             "required": false,
             "type": "string",
             "enum": [
@@ -3650,7 +3650,7 @@
         },
         "dataToExtract": {
           "type": "string",
-          "description": "The type of data to be extracted for the skill. Will be set to\n'contentAndMetadata' if not defined."
+          "description": "The type of data to be extracted for the skill. Will be set to 'contentAndMetadata' if not defined."
         },
         "configuration": {
           "type": "object",
@@ -8613,7 +8613,7 @@
     },
     "QueryAnswerType": {
       "type": "string",
-      "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns answers extracted from key passages in the highest ranked documents.\nThe number of answers returned can be configured by appending the pipe\ncharacter `|` followed by the `count-<number of answers>` option after the\nanswers parameter value, such as `extractive|count-3`. Default count is 1. The\nconfidence threshold can be configured by appending the pipe character `|`\nfollowed by the `threshold-<confidence threshold>` option after the answers\nparameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.",
+      "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns answers extracted from key passages in the highest ranked documents.\nThe number of answers returned can be configured by appending the pipe\ncharacter `|` followed by the `count-<number of answers>` option after the\nanswers parameter value, such as `extractive|count-3`. Default count is 1. The\nconfidence threshold can be configured by appending the pipe character `|`\nfollowed by the `threshold-<confidence threshold>` option after the answers\nparameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.\nThe maximum character length of answers can be configured by appending the pipe\ncharacter '|' followed by the 'count-<number of maximum character length>',\nsuch as 'extractive|maxcharlength-600'.",
       "enum": [
         "none",
         "extractive"
@@ -8652,7 +8652,7 @@
     },
     "QueryCaptionType": {
       "type": "string",
-      "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns captions extracted from key passages in the highest ranked documents.\nWhen Captions is set to `extractive`, highlighting is enabled by default, and\ncan be configured by appending the pipe character `|` followed by the\n`highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults\nto `None`.",
+      "description": "This parameter is only valid if the query type is `semantic`. If set, the query\nreturns captions extracted from key passages in the highest ranked documents.\nWhen Captions is set to `extractive`, highlighting is enabled by default, and\ncan be configured by appending the pipe character `|` followed by the\n`highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults\nto `None`. The maximum character length of captions can be configured by\nappending the pipe character '|' followed by the 'count-<number of maximum\ncharacter length>', such as 'extractive|maxcharlength-600'.",
       "enum": [
         "none",
         "extractive"
@@ -8676,7 +8676,7 @@
     },
     "QueryType": {
       "type": "string",
-      "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full'\nif your query uses the Lucene query syntax.",
+      "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full'\nif your query uses the Lucene query syntax and 'semantic' if query syntax is\nnot needed.",
       "enum": [
         "simple",
         "full",
@@ -10882,7 +10882,7 @@
         "maximumPagesToTake": {
           "type": "integer",
           "format": "int32",
-          "description": "Only applicable when textSplitMode is set to 'pages'. If specified, the\nSplitSkill will discontinue splitting after processing the first\n'maximumPagesToTake' pages, in order to improve performance when only a few\ninitial pages are needed from each document."
+          "description": "Only applicable when textSplitMode is set to 'pages'. If specified, the\nSplitSkill will discontinue splitting after processing the first 'maximumPagesToTake'\npages, in order to improve performance when only a few\ninitial pages are needed from each document."
         }
       },
       "allOf": [
