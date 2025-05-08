@@ -36,7 +36,6 @@ These settings apply only when `--tag=package-2025-06-preview-only` is specified
 ``` yaml $(tag) == 'package-2025-06-preview-only'
 input-file:
   - Microsoft.ContainerRegistry/preview/2025-06-01-preview/containerregistry.json
-  - Microsoft.ContainerRegistry/preview/2025-06-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2025-06-preview
@@ -46,7 +45,6 @@ These settings apply only when `--tag=package-2025-06-preview` is specified on t
 ``` yaml $(tag) == 'package-2025-06-preview'
 input-file:
   - Microsoft.ContainerRegistry/preview/2025-06-01-preview/containerregistry.json
-  - Microsoft.ContainerRegistry/preview/2025-06-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2025-04-only
