@@ -229,6 +229,25 @@ input-file:
 - Microsoft.ServiceBus/preview/2025-01-01/CheckNameAvailability.json
 ```
 
+### Tag: package-2025-05-preview
+
+These settings apply only when `--tag=package-2025-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05'
+input-file:
+- Microsoft.ServiceBus/preview/2025-05-01/namespace-preview.json
+- Microsoft.ServiceBus/preview/2025-05-01/operations.json
+- Microsoft.ServiceBus/preview/2025-05-01/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2025-05-01/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2025-05-01/networksets.json
+- Microsoft.ServiceBus/preview/2025-05-01/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2025-05-01/Queue.json
+- Microsoft.ServiceBus/preview/2025-05-01/topics.json
+- Microsoft.ServiceBus/preview/2025-05-01/Rules.json
+- Microsoft.ServiceBus/preview/2025-05-01/subscriptions.json
+- Microsoft.ServiceBus/preview/2025-05-01/CheckNameAvailability.json
+```
+
 Important notes:
 On the advice of @fearthecowboy, the  `EncodingCaptureDescription` enum previously contained two values [`Avro`,`AvroDeflate`] ; the service has been changed (on 2018-01-17) and will not ever return the `AvroDeflate` value,
  however, we have left the value in the enum (in servicebus.json) so that existing clients won't suffer a binary breaking change
