@@ -13,14 +13,14 @@ namespace Microsoft.MessagingConnectors;
 
 @doc("Type of SnapshotLockingMode")
 union SnapshotLockingModeForMysql {
+  @doc("None type")
+  None: "None",
+
   @doc("Minimal type")
   Minimal: "Minimal",
 
   @doc("Extended type")
   Extended: "Extended",
-
-  @doc("None type")
-  None: "None",
 
   string,
 }
@@ -52,28 +52,28 @@ model MySqlSourceConnectorProperties extends DataSourceProperties {
   @doc("Tables used as source.")
   tableNames: string;
 
-  @doc("Tables to be included, regex supported.")
-  tableIncludeList?: string;
-
-  @doc("Tables to be excluded, regex supported.")
-  tableExcludeList?: string;
-
   @doc("Snapshot Locking Mode.")
   snapshotLockingMode?: SnapshotLockingModeForMysql;
 
-  @doc("Columns to be included, regex supported.")
+  @doc("Tables used as source.")
+  tableIncludeList?: string;
+
+  @doc("Tables to be excluded.")
+  tableExcludeList?: string;
+
+  @doc("Columns to be included.")
   columnIncludeList?: string;
 
-  @doc("Columns to be excluded, regex supported.")
+  @doc("Columns to be excluded.")
   columnExcludeList?: string;
 
   @doc("Handling mode for DECIMAL and NUMERIC.")
-  decimalHandlingMode?: DecimalHandlingModes;
+  decimalHandlingMode?: DecimalHandlingMode;
 
   @Azure.ResourceManager.identifiers(#[])
   @doc("Select table rows to include in the snapshot.")
   snapshotSelectStatementOverrides?: SnapshotSelectStatementOverrideItem[];
 
   @doc("Operation types to be skipped.")
-  skippedOperations?: SkippedOperationsModes[];
+  skippedOperations?: SkippedOperationsMode[];
 }

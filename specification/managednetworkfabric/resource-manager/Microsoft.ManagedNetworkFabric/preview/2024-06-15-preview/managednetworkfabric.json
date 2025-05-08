@@ -6270,7 +6270,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CommonPostActionResponseForDeviceROCommands"
+              "$ref": "#/definitions/CommonPostActionResponseForDeviceROCommandsOperationStatusResult"
             }
           },
           "202": {
@@ -12800,10 +12800,6 @@
       "type": "object",
       "description": "Common response for device Ro Commands.",
       "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-          "description": "The error object."
-        },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
           "description": "Gets the configuration state.",
@@ -12812,8 +12808,68 @@
         "outputUrl": {
           "type": "string",
           "description": "Predefined link containing Device RO Command output."
+        },
+        "deviceConfigurationPreview": {
+          "type": "string",
+          "description": "Device RO command Response limited to 4000 characters."
         }
       }
+    },
+    "CommonPostActionResponseForDeviceROCommandsOperationStatusResult": {
+      "type": "object",
+      "description": "The current status of an async operation.",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "The error object."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Fully qualified ID for the async operation.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the async operation.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/CommonPostActionResponseForDeviceROCommands",
+          "description": "The additional properties of the operation status result."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ID of the resource against which the original async operation was started.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedNetworkFabric/networkDevices"
+              }
+            ]
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        }
+      },
+      "required": [
+        "status"
+      ]
     },
     "CommonPostActionResponseForDeviceRWCommands": {
       "type": "object",
@@ -16711,12 +16767,7 @@
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
           "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            ],
-            "type": "object",
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
           }
         }
@@ -18087,7 +18138,6 @@
         "featureFlags": {
           "type": "array",
           "description": "Feature flag status information",
-          "minItems": 1,
           "items": {
             "$ref": "#/definitions/FeatureFlagProperties"
           },

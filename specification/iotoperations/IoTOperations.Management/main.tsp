@@ -56,7 +56,7 @@ interface Broker {
   get is ArmResourceRead<BrokerResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerResource>;
+  listByInstanceResource is ArmResourceListByParent<BrokerResource>;
 }
 
 // /instances/brokers/listeners resource Operations
@@ -65,7 +65,7 @@ interface BrokerListener {
   get is ArmResourceRead<BrokerListenerResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerListenerResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerListenerResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerListenerResource>;
+  listByBrokerResource is ArmResourceListByParent<BrokerListenerResource>;
 }
 
 // /instances/brokers/authentications resource Operations
@@ -74,7 +74,7 @@ interface BrokerAuthentication {
   get is ArmResourceRead<BrokerAuthenticationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthenticationResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthenticationResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerAuthenticationResource>;
+  listByBrokerResource is ArmResourceListByParent<BrokerAuthenticationResource>;
 }
 
 // /instances/brokers/authorizations resource Operations
@@ -83,7 +83,7 @@ interface BrokerAuthorization {
   get is ArmResourceRead<BrokerAuthorizationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthorizationResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthorizationResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerAuthorizationResource>;
+  listByBrokerResource is ArmResourceListByParent<BrokerAuthorizationResource>;
 }
 // /instances/dataflowProfiles resource Operations
 @armResourceOperations
@@ -91,7 +91,7 @@ interface DataFlowProfile {
   get is ArmResourceRead<DataFlowProfileResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowProfileResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataFlowProfileResource>;
-  listByResourceGroup is ArmResourceListByParent<DataFlowProfileResource>;
+  listByInstanceResource is ArmResourceListByParent<DataFlowProfileResource>;
 }
 
 // /instance/dataflowProfiles/dataflows resource Operations
@@ -111,5 +111,5 @@ interface DataFlowEndpoint {
   get is ArmResourceRead<DataFlowEndpointResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowEndpointResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataFlowEndpointResource>;
-  listByResourceGroup is ArmResourceListByParent<DataFlowEndpointResource>;
+  listByInstanceResource is ArmResourceListByParent<DataFlowEndpointResource>;
 }

@@ -52,7 +52,7 @@ model CsvSourceDataFormat extends SourceDataFormat {
   @doc("Whether the CSV data has a header row.")
   dataWithHeader?: boolean;
 
-  @doc("JSON text charset. Default is UTF-8. Supported Encodings: https://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html")
+  @doc("Default is UTF-8. Supported Encodings: https://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html")
   textCharset?: string;
 
   @doc("The character used to separate columns in the CSV data.")
