@@ -130,11 +130,6 @@ model AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
    * The additional configuration schema reference.
    */
   additionalConfigSchemaRef?: string;
-
-  /**
-   * The device endpoint additional configuration schema reference.
-   */
-  deviceEndpointAdditionalConfigSchemaRef?: string;
 }
 
 /**
