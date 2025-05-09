@@ -332,8 +332,20 @@ union TestKind {
 @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
 union CreatedByType {
   string,
-  @doc("Entity was created by a user.") "User",
-  @doc("Entity was created by a scheduled trigger.") "ScheduledTrigger",
+
+  @doc("Entity was created by a user.")
+  "User",
+
+  @doc("Entity was created by a scheduled trigger.")
+  "ScheduledTrigger",
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Entity was created by Azure DevOps pipelines.")
+  "AzurePipelines",
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Entity was created by GitHub Workflows.")
+  "GitHubWorkflows",
 }
 
 @doc("Test file info.")
@@ -542,6 +554,10 @@ model AutoStopCriteria {
   @doc("Time window during which the error percentage should be evaluated in seconds.")
   @encode(DurationKnownEncoding.seconds, int32)
   errorRateTimeWindowInSeconds?: duration = duration.fromISO("PT60S");
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Maximum number of virtual users per load testing engine, at which the test run should be automatically stopped.")
+  maximumVirtualUsersPerEngine?: int32 = 5000;
 }
 
 @doc("Configurations for the load test.")
@@ -894,6 +910,11 @@ model TestRun {
   @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
   createdByType?: CreatedByType;
 
+  @visibility(Lifecycle.Read)
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("The URI pointing to the entity that created the test run.")
+  createdByUri?: url;
+
   ...SystemMetaData;
 }
 
@@ -1053,6 +1074,23 @@ model ArtifactsContainerInfo {
 
   @doc("Expiry time of the container (RFC 3339 literal format)")
   expireDateTime?: utcDateTime;
+}
+
+@doc("Request to clone an existing test into a new test.")
+@added(APIVersions.v2025_03_01_preview)
+model CloneTestRequest {
+  @doc("Unique identifier for the new test that will be created.")
+  @pattern("^[a-z0-9_-]*$")
+  newTestId: string;
+
+  @doc("Display Name override for the newly created test.")
+  @maxLength(50)
+  @minLength(2)
+  displayName?: string;
+
+  @doc("Description override for the newly created test.")
+  @maxLength(100)
+  description?: string;
 }
 
 @doc("Represents collection of metric namespaces.")
@@ -1385,6 +1423,41 @@ union RequestDataLevel {
 
   @doc("Request data will be collected in case of failed requests")
   ERRORS: "ERRORS",
+}
+
+// TODO(mitsha): Fix the structure of initial clone test return
+@added(APIVersions.v2025_03_01_preview)
+@doc("Operation Id Path Parameter.")
+model OperationIdPathParameter {
+  @doc("The unique ID of the operation.")
+  @key("operationId")
+  @visibility(Lifecycle.Read)
+  id: string;
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("Kind of the long running operation.")
+union OperationKind {
+  string,
+
+  @doc("Operation represents a clone test operation")
+  CloneTest: "CloneTest",
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("Status of a long running operation.")
+@resource("operations")
+model OperationStatus {
+  @doc("The state of the operation.")
+  status: Foundations.OperationState;
+
+  @doc("The kind of the operation.")
+  kind: OperationKind;
+
+  @doc("Error object that describes the error when status is \"Failed\".")
+  error?: Foundations.Error;
+
+  ...OperationIdPathParameter;
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
