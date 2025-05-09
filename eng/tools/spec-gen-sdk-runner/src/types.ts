@@ -29,3 +29,34 @@ export type VsoLogs = Map<
     warnings?: string[];
   }
 >;
+
+/**
+ * Represents the result of the spec-gen-sdk generation process.
+ */
+export interface SpecGenSdkArtifactInfo {
+  language: string;
+  result: string;
+  labelAction?: boolean;
+  isSpecGenSdkCheckRequired: boolean;
+}
+
+/**
+ * Represents supported SDK language identifiers.
+ */
+export type SdkName =
+  | "azure-sdk-for-go"
+  | "azure-sdk-for-java"
+  | "azure-sdk-for-js"
+  | "azure-sdk-for-net"
+  | "azure-sdk-for-python";
+
+/**
+ * Required check settings for all languages.
+ */
+export const SpecGenSdkRequiredSettings: Record<SdkName, boolean> = {
+  "azure-sdk-for-go": true,
+  "azure-sdk-for-java": false,
+  "azure-sdk-for-js": true,
+  "azure-sdk-for-net": false,
+  "azure-sdk-for-python": true,
+};
