@@ -78,5 +78,5 @@ using Microsoft.NotificationHubs;
   "parameters"
 );
 @@clientName(CheckAvailabilityParameters, "CheckAvailabilityContent", "csharp");
-@@clientName(DebugSendResponse, "DebugSendResult", "csharp");
+@@clientName(DebugSendResponse, "DebugSendResponseResult", "csharp");
 @@clientName(Operation, "Info", "csharp");
