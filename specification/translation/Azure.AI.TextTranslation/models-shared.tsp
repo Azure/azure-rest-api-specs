@@ -50,7 +50,6 @@ model InputTextItem {
     Translation target parameters.
     """)
   targets: TranslateTarget[];
-
 }
 
 alias CommonResultHeaders = {
