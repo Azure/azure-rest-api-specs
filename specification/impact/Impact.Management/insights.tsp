@@ -18,7 +18,7 @@ model Insight is ProxyResource<InsightProperties> {
   @key("insightName")
   @segment("insights")
   @doc("Name of the insight")
-  @visibility("Read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -30,7 +30,7 @@ model InsightUnderSubscription is ProxyResource<InsightProperties> {
   @key("insightName")
   @segment("insights")
   @doc("Name of the insight")
-  @visibility("Read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

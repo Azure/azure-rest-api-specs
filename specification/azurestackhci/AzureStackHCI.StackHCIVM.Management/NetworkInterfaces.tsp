@@ -23,7 +23,7 @@ model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
   @path
   @key("networkInterfaceName")
   @segment("networkInterfaces")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")
@@ -44,14 +44,14 @@ interface NetworkInterfaces {
   >;
 
   @doc("The operation to update a network interface.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @removed(Versions.v2025_02_01_preview)
   @sharedRoute
   @renamedFrom(Versions.v2025_02_01_preview, "update")
   updateOld is ArmCustomPatchAsync<NetworkInterface>;
 
   @doc("The operation to update a network interface.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @added(Versions.v2025_02_01_preview)
   @sharedRoute
   update is ArmCustomPatchAsync<
