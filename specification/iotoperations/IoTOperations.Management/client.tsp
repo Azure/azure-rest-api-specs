@@ -102,6 +102,12 @@ using Microsoft.IoTOperations;
 @@clientName(AkriConnectorTemplateHelmUpgradeConfiguration.wait,
   "waitForResources",
   "java"
-  );
-@@clientName(AkriDiscoveryHandlerProperties.diagnostics, "DiscoveryHandlerDiagnostics", "csharp");
-@@clientName(AkriConnectorTemplateProperties.diagnostics, "ConnectorTemplateDiagnostics", "csharp");
+);
+@@clientName(AkriDiscoveryHandlerProperties.diagnostics,
+  "DiscoveryHandlerDiagnostics",
+  "csharp"
+);
+@@clientName(AkriConnectorTemplateProperties.diagnostics,
+  "ConnectorTemplateDiagnostics",
+  "csharp"
+);
