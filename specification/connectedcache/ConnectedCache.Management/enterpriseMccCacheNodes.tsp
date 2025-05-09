@@ -7,6 +7,7 @@ import "./enterpriseMccCustomers.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ConnectedCache;
 
@@ -43,6 +44,27 @@ interface EnterpriseMccCacheNodesOperations {
     EnterpriseMccCacheNodeResource,
     void,
     MccCacheNodeInstallDetails
+  >;
+  @added(Versions.v2024_11_30_preview)
+  @doc("This api gets ispCacheNode resource auto update histrory information")
+  getCacheNodeAutoUpdateHistory is ArmResourceActionSync<
+    EnterpriseMccCacheNodeResource,
+    void,
+    MccCacheNodeAutoUpdateHistory
+  >;
+  @added(Versions.v2024_11_30_preview)
+  @doc("This api gets ispCacheNode resource issues details histrory information")
+  getCacheNodeMccIssueDetailsHistory is ArmResourceActionSync<
+    EnterpriseMccCacheNodeResource,
+    void,
+    MccCacheNodeIssueHistory
+  >;
+  @added(Versions.v2024_11_30_preview)
+  @doc("This api gets ispCacheNode resource tls certificate histrory information")
+  getCacheNodeTlsCertificateHistory is ArmResourceActionSync<
+    EnterpriseMccCacheNodeResource,
+    void,
+    MccCacheNodeTlsCertificateHistory
   >;
 }
 
