@@ -601,6 +601,7 @@
           {
             "name": "jobId",
             "in": "path",
+            "description": "Identifier for the backup operation",
             "required": true,
             "type": "string"
           }
@@ -1033,6 +1034,7 @@
           {
             "name": "cloudHsmClusterName",
             "in": "path",
+            "description": "Name of the Cloud HSM Cluster",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1042,6 +1044,7 @@
           {
             "name": "jobId",
             "in": "path",
+            "description": "Identifier for the restore operation",
             "required": true,
             "type": "string"
           }
@@ -2003,11 +2006,6 @@
       "type": "object",
       "description": "Resource information with extended details.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/DedicatedHsmProperties",
-          "description": "Properties of the dedicated HSM",
-          "x-ms-client-flatten": true
-        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "SKU details"
@@ -2018,11 +2016,16 @@
           "items": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/DedicatedHsmProperties",
+          "description": "Properties of the dedicated HSM",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
-        "properties",
-        "sku"
+        "sku",
+        "properties"
       ],
       "allOf": [
         {

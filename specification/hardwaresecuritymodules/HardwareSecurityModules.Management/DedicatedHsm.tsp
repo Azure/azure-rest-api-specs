@@ -13,8 +13,11 @@ namespace Microsoft.HardwareSecurityModules;
 /**
  * Resource information with extended details.
  */
-model DedicatedHsm
-  is Azure.ResourceManager.TrackedResource<DedicatedHsmProperties, false> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+@Azure.ResourceManager.Private.armResourceInternal(DedicatedHsmProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model DedicatedHsm extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = DedicatedHsm,
     KeyName = "name",
@@ -28,6 +31,14 @@ model DedicatedHsm
   sku: Sku;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
+
+  /**
+   * Properties of the dedicated HSM
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  properties: DedicatedHsmProperties;
 }
 
 @armResourceOperations

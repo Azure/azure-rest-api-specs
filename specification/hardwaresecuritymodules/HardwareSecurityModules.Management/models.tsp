@@ -10,7 +10,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.HardwareSecurityModules;
 
-
 @@nextLink(CommonTypes.PrivateLinkResourceListResult.nextLink);
 
 /**
@@ -430,6 +429,7 @@ model CloudHsmClusterSku {
 /**
  * Patchable properties of the Cloud HSM Cluster
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
 model CloudHsmClusterPatchParameters {
   /**
    * The Cloud HSM Cluster's tags
@@ -482,6 +482,7 @@ model PrivateLinkResourceProperties {
  * Backup properties
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 model BackupRequestProperties extends BackupRestoreRequestBaseProperties {}
 
 /**
@@ -558,6 +559,7 @@ model BackupRestoreBaseResultProperties {
   /**
    * The end time of the backup/restore operation in UTC
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
@@ -711,6 +713,7 @@ model Error {
 /**
  * Patchable properties of the dedicated HSM
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
 model DedicatedHsmPatchParameters {
   /**
    * Resource tags

@@ -13,6 +13,7 @@ namespace Microsoft.HardwareSecurityModules;
 /**
  * Resource information with extended details.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
 model CloudHsmCluster
   is Azure.ResourceManager.TrackedResource<CloudHsmClusterProperties> {
   ...ResourceNameParameter<
@@ -92,6 +93,7 @@ interface CloudHsmClusters {
   /**
    * Pre Backup operation to validate whether the customer can perform a backup on the Cloud HSM Cluster resource in the specified subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   validateBackupProperties is ArmResourceActionAsync<
     CloudHsmCluster,
     {
@@ -109,6 +111,7 @@ interface CloudHsmClusters {
   /**
    * Create a backup of the Cloud HSM Cluster in the specified subscription
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   backup is ArmResourceActionAsync<
     CloudHsmCluster,
     {
@@ -126,6 +129,7 @@ interface CloudHsmClusters {
   /**
    * Queued validating pre restore operation
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   validateRestoreProperties is ArmResourceActionAsync<
     CloudHsmCluster,
     {
@@ -143,6 +147,7 @@ interface CloudHsmClusters {
   /**
    * Restores all key materials of a specified Cloud HSM Cluster
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   restore is ArmResourceActionAsync<
     CloudHsmCluster,
     RestoreRequestProperties,
@@ -168,6 +173,8 @@ interface CloudHsmClusters {
    * Gets the backup operation status of the specified Cloud HSM Cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   @operationId("CloudHsmClusterBackupStatus_Get")
   @get
   cloudHsmClusterBackupStatusGet(
@@ -176,6 +183,7 @@ interface CloudHsmClusters {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<CloudHsmCluster>
     >,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     @path
     @segment("cloudHsmClusters")
     @minLength(3)
@@ -183,6 +191,9 @@ interface CloudHsmClusters {
     @pattern("^[a-zA-Z0-9-]{3,23}$")
     cloudHsmClusterName: string,
 
+    /**
+     * Identifier for the backup operation
+     */
     @path
     @segment("backupOperationStatus")
     jobId: string,
@@ -191,6 +202,8 @@ interface CloudHsmClusters {
    * Gets the restore operation status of the specified Cloud HSM Cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   @get
   @operationId("CloudHsmClusterRestoreStatus_Get")
   cloudHsmClusterRestoreStatusGet(
@@ -199,6 +212,9 @@ interface CloudHsmClusters {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<CloudHsmCluster>
     >,
 
+    /**
+     * Name of the Cloud HSM Cluster
+     */
     @path
     @segment("cloudHsmClusters")
     @minLength(3)
@@ -206,6 +222,9 @@ interface CloudHsmClusters {
     @pattern("^[a-zA-Z0-9-]{3,23}$")
     cloudHsmClusterName: string,
 
+    /**
+     * Identifier for the restore operation
+     */
     @path
     @segment("restoreOperationStatus")
     jobId: string,
