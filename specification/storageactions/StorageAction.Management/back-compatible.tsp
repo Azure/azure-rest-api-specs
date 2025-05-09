@@ -15,5 +15,6 @@ using Microsoft.StorageActions;
   "parameters"
 );
 @@clientName(StorageTasksOperationGroup.previewActions, "PreviewActions");
+@@clientName(StorageTaskOperation, "StorageTaskInfo", "csharp");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageTask.properties);
