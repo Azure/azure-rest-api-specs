@@ -37,6 +37,12 @@ options:
     flavor: azure
     package-dir: "azure-security-codetransparency"
     namespace: com.azure.security.codetransparency
+  "@azure-tools/typespec-go":
+    flavor: azure
+    service-dir: "sdk/confidentialledger"
+    package-dir: "codetransparency"
+    generate-fakes: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
