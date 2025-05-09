@@ -4,7 +4,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.IoTOperations;
 
-/** OpenTelemetry endpoint properties */
+/** OpenTelemetry endpoint properties. */
 @added(Versions.`2025-07-01-preview`)
 model DataflowEndpointOpenTelemetry {
   /** The number of seconds to wait before sending metrics to the Open telemetry collector. */

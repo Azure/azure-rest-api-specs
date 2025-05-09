@@ -10,11 +10,11 @@ using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
-/** Instance dataflowEndpoint resource */
+/** Instance dataflowEndpoint resource. */
 @added(Versions.`2025-07-01-preview`)
 @parentResource(DataflowProfileResource)
 model DataflowGraphResource is ProxyResource<DataflowGraphProperties> {
-  /** Name of Instance dataflowEndpoint resource */
+  /** Name of Instance dataflowEndpoint resource. */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("dataflowGraphName")
   @path
@@ -29,11 +29,11 @@ model DataflowGraphResource is ProxyResource<DataflowGraphProperties> {
   extendedLocation: ExtendedLocation;
 }
 
-/** DataflowGraph properties */
+/** DataflowGraph properties. */
 @added(Versions.`2025-07-01-preview`)
 model DataflowGraphProperties {
   /** The mode of the dataflow graph. */
-  mode?: OperationalMode; // Should this be optional?
+  mode?: OperationalMode;
 
   /** Disk persistence mode. */
   requestDiskPersistence?: OperationalMode;
@@ -91,7 +91,7 @@ model DataflowGraphSourceNode extends DataflowGraphNode {
 @added(Versions.`2025-07-01-preview`)
 model DataflowGraphSourceSettings {
   /** The endpoint reference for the source. */
-  endpointRef: string; // should we leverage k8s-bridge translation here? https://armwiki.azurewebsites.net/rpaas/arc-rp/conversion/SchemaTranslation.html#kubernetes-bridge-custom-filters
+  endpointRef: string;
 
   /** List of data sources. */
   dataSources: string[];
@@ -166,14 +166,14 @@ model DataflowGraphSchemaSettings {
 
 /** Serialization format for dataflow graph. */
 @added(Versions.`2025-07-01-preview`)
-union DataflowGraphSerializationFormat { // Is this net new or should we just update TransformationSerializationFormat with Avro?
+union DataflowGraphSerializationFormat {
   TransformationSerializationFormat,
 
   /** Avro serialization format. */
   Avro,
 }
 
-/** DataflowGraph DataflowGraphNode Connection */
+/** DataflowGraph DataflowGraphNode Connection. */
 @added(Versions.`2025-07-01-preview`)
 model DataflowGraphNodeConnection {
   /** Information about the source node. */
@@ -183,7 +183,7 @@ model DataflowGraphNodeConnection {
   to: DataflowGraphConnectionOutput;
 }
 
-/** DataflowGraph DataflowGraphNode Connection Input */
+/** DataflowGraph DataflowGraphNode Connection Input. */
 @added(Versions.`2025-07-01-preview`)
 model DataflowGraphConnectionInput {
   /** Name of the source node. */
@@ -193,7 +193,7 @@ model DataflowGraphConnectionInput {
   schema?: DataflowGraphSchemaSettings;
 }
 
-/** DataflowGraph DataflowGraphNode Connection Output */
+/** DataflowGraph DataflowGraphNode Connection Output. */
 @added(Versions.`2025-07-01-preview`)
 model DataflowGraphConnectionOutput {
   /** Name of the destination node. */

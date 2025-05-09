@@ -10,11 +10,11 @@ using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
-/** AkriConnector resource */
+/** AkriConnector resource. */
 @added(Versions.`2025-07-01-preview`)
 @parentResource(AkriConnectorTemplateResource)
 model AkriConnectorResource is ProxyResource<AkriConnectorProperties> {
-  /** Name of AkriConnector resource */
+  /** Name of AkriConnector resource. */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("akriConnectorName")
   @path
@@ -29,7 +29,7 @@ model AkriConnectorResource is ProxyResource<AkriConnectorProperties> {
   extendedLocation: ExtendedLocation;
 }
 
-/** AkriConnector properties */
+/** AkriConnector properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorProperties {
   /** The status of the last operation. */

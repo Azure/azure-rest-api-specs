@@ -8,14 +8,15 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
+
 namespace Microsoft.IoTOperations;
 
-/** AkriConnectorTemplate resource */
+/** AkriConnectorTemplate resource. */
 @parentResource(InstanceResource)
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateResource
   is ProxyResource<AkriConnectorTemplateProperties> {
-  /** Name of AkriConnectorTemplate resource */
+  /** Name of AkriConnectorTemplate resource. */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("akriConnectorTemplateName")
   @path
@@ -30,7 +31,7 @@ model AkriConnectorTemplateResource
   extendedLocation: ExtendedLocation;
 }
 
-/** AkriConnectorTemplate properties */
+/** AkriConnectorTemplate properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateProperties {
   /** The status of the last operation. */
@@ -46,19 +47,19 @@ model AkriConnectorTemplateProperties {
   /** Diagnostics settings for the Connector template. */
   diagnostics?: AkriConnectorTemplateDiagnostics;
 
-  /** Device inbound endpoint types */
+  /** Device inbound endpoint types. */
   @OpenAPI.extension("x-ms-identifiers", #["endpointType", "version"])
   @minItems(1)
   deviceInboundEndpointTypes: AkriConnectorTemplateDeviceInboundEndpointType[];
 
-  /** Mqtt connection configuration settings */
+  /** Mqtt connection configuration settings. */
   mqttConnectionConfiguration?: AkriConnectorsMqttConnectionConfiguration;
 
   /** The version of the Connector template. */
   version: string; // Probably not needed.
 }
 
-/** AkriConnectorTemplateDeviceInboundEndpointType properties */
+/** AkriConnectorTemplateDeviceInboundEndpointType properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateDeviceInboundEndpointType {
   /** The type of the device inbound endpoint. */
@@ -71,7 +72,7 @@ model AkriConnectorTemplateDeviceInboundEndpointType {
   configurationSchemaRefs?: AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs;
 }
 
-/** AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties */
+/** AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
   /** The default configuration schema reference for datasets. */
@@ -90,13 +91,13 @@ model AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
   additionalConfigSchemaRef?: string;
 }
 
-/** AkriConnectorTemplateAioMetadata properties */
+/** AkriConnectorTemplateAioMetadata properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateAioMetadata {
   ...AkriAioMetadata;
 }
 
-/** AkriConnectorTemplateRuntimeConfiguration properties */
+/** AkriConnectorTemplateRuntimeConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("runtimeConfigurationType")
 model AkriConnectorTemplateRuntimeConfiguration {
@@ -109,25 +110,25 @@ model AkriConnectorTemplateRuntimeConfiguration {
 union AkriConnectorTemplateRuntimeConfigurationType {
   string,
 
-  /** Helm Configuration Type */
+  /** Helm Configuration Type. */
   HelmConfiguration,
 
-  /** Managed Configuration Type */
+  /** Managed Configuration Type. */
   ManagedConfiguration,
 }
 
-/** AkriConnectorTemplateHelmConfiguration properties */
+/** AkriConnectorTemplateHelmConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmConfiguration
   extends AkriConnectorTemplateRuntimeConfiguration {
   /** The runtime configuration type for the Connector template. */
   runtimeConfigurationType: HelmConfiguration;
 
-  /** The Helm configuration settings */
+  /** The Helm configuration settings. */
   helmConfigurationSettings: AkriConnectorTemplateHelmConfigurationSettings;
 }
 
-/** AkriConnectorTemplateHelmConfiguration properties */
+/** AkriConnectorTemplateHelmConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmConfigurationSettings {
   /** The registry settings for the helm chart to be used. */
@@ -147,32 +148,32 @@ model AkriConnectorTemplateHelmConfigurationSettings {
 
   /**
    * Advanced configuration for the Helm chart.
-   * install, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`
+   * Install, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`.
    */
   advancedConfiguration?: AkriConnectorTemplateHelmAdvancedConfiguration;
 
-  /** A map of values to pass to the helm chart */
+  /** A map of values to pass to the helm chart. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Helm values are modeled as record of strings and are not known ahead of time"
   values?: Record<string>;
 }
 
-/** AkriConnectorTemplateManagedConfiguration properties */
+/** AkriConnectorTemplateManagedConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateManagedConfiguration
   extends AkriConnectorTemplateRuntimeConfiguration {
   /** The runtime configuration type for the Connector template. */
   runtimeConfigurationType: ManagedConfiguration;
 
-  /** The managed configuration settings */
+  /** The managed configuration settings. */
   managedConfigurationSettings: AkriConnectorTemplateManagedConfigurationSettings;
 }
 
-/** AkriConnectorTemplateManagedConfiguration properties */
+/** AkriConnectorTemplateManagedConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("managedConfigurationType")
 model AkriConnectorTemplateManagedConfigurationSettings {
   /** The type of the managed configuration. */
-  managedConfigurationType: AkriConnectorTemplateManagedConfigurationType; // Property could be called `type` instead of `managedConfigurationType`
+  managedConfigurationType: AkriConnectorTemplateManagedConfigurationType; // Property could be called `type` instead of `managedConfigurationType`.
 
   /** Allocation settings for the managed configuration. */
   allocation?: AkriConnectorTemplateAllocation;
@@ -187,7 +188,7 @@ model AkriConnectorTemplateManagedConfigurationSettings {
 
   /**
    * The persistent volume claim templates for the managed configuration.
-   * See https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json
+   * See https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kubernetes resource type"
   @extension("x-ms-identifiers", #[])
@@ -201,40 +202,40 @@ model AkriConnectorTemplateManagedConfigurationSettings {
   trustSettings?: AkriConnectorTemplateTrustList;
 }
 
-/** AkriConnectorTemplateTrustList properties */
+/** AkriConnectorTemplateTrustList properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateTrustList {
   /** The secret reference for certificates to trust. */
   secretRef: string;
 }
 
-/** AkriConnectorTemplateAllocation properties */
+/** AkriConnectorTemplateAllocation properties. */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("policy")
 model AkriConnectorTemplateAllocation {
-  /** The allocation policy type */
+  /** The allocation policy type. */
   policy: AkriConnectorTemplateAllocationPolicy;
 }
 
-/** AkriConnectorTemplateBucketizedAllocation properties */
+/** AkriConnectorTemplateBucketizedAllocation properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateBucketizedAllocation
   extends AkriConnectorTemplateAllocation {
-  /** The allocation policy type */
+  /** The allocation policy type. */
   policy: Bucketized;
 
-  /** TThe bucketized allocation of AEPs for connectors */
+  /** The bucketized allocation of AEPs for connectors. */
   @minValue(1)
   @maxValue(100)
   bucketSize: int32;
 }
 
-/** AkriConnectorTemplateAllocationPolicy properties */
+/** AkriConnectorTemplateAllocationPolicy properties. */
 @added(Versions.`2025-07-01-preview`)
 union AkriConnectorTemplateAllocationPolicy {
   string,
 
-  /** Bucketized allocation policy */
+  /** Bucketized allocation policy. */
   Bucketized,
 }
 
@@ -243,43 +244,43 @@ union AkriConnectorTemplateAllocationPolicy {
 union AkriConnectorTemplateManagedConfigurationType {
   string,
 
-  /** Image Configuration Type */
+  /** Image Configuration Type. */
   ImageConfiguration,
 
-  /** StatefulSet Configuration Type */
+  /** StatefulSet Configuration Type. */
   StatefulSetConfiguration,
 }
 
-/** AkriConnectorTemplateRuntimeImageConfiguration properties */
+/** AkriConnectorTemplateRuntimeImageConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateRuntimeImageConfiguration
   extends AkriConnectorTemplateManagedConfigurationSettings {
   /** The managed configuration type for the Connector template. */
   managedConfigurationType: ImageConfiguration;
 
-  /** The image configuration settings */
+  /** The image configuration settings. */
   imageConfigurationSettings: AkriConnectorTemplateRuntimeImageConfigurationSettings;
 }
 
-/** AkriConnectorTemplateRuntimeStatefulSetConfiguration properties */
+/** AkriConnectorTemplateRuntimeStatefulSetConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateRuntimeStatefulSetConfiguration
   extends AkriConnectorTemplateManagedConfigurationSettings {
   /** The managed configuration type for the Connector template. */
   managedConfigurationType: StatefulSetConfiguration;
 
-  /** The stateful set configuration settings */
+  /** The stateful set configuration settings. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kubernetes resource type"
   statefulSetConfigurationSettings: Record<unknown>;
 }
 
-/** AkriConnectorTemplateRuntimeImageConfiguration properties */
+/** AkriConnectorTemplateRuntimeImageConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateRuntimeImageConfigurationSettings {
   /** The image name without any registry reference, tag or digest. */
   imageName: string;
 
-  /** The pull policy of the image */
+  /** The pull policy of the image. */
   imagePullPolicy?: AkriConnectorsImagePullPolicy;
 
   /** The number of replicas to be set up. */
@@ -292,7 +293,7 @@ model AkriConnectorTemplateRuntimeImageConfigurationSettings {
   tagDigestSettings?: AkriConnectorsTagDigestSettings;
 }
 
-/** AkriConnectorTemplatePersistentVolumeClaim properties */
+/** AkriConnectorTemplatePersistentVolumeClaim properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplatePersistentVolumeClaim {
   /** The name of the persistent volume claim. */
@@ -302,7 +303,7 @@ model AkriConnectorTemplatePersistentVolumeClaim {
   mountPath: string;
 }
 
-/** AkriConnectorTemplateHelmAdvancedConfiguration properties */
+/** AkriConnectorTemplateHelmAdvancedConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmAdvancedConfiguration {
   /** Delete operation configuration for the Helm chart. */
@@ -332,25 +333,25 @@ alias HelmOperationConfiguration = {
   wait?: boolean;
 };
 
-/** AkriConnectorTemplateHelmDeleteConfiguration properties */
+/** AkriConnectorTemplateHelmDeleteConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmDeleteConfiguration {
   ...HelmOperationConfiguration;
 }
 
-/** AkriConnectorTemplateHelmInstallConfiguration properties */
+/** AkriConnectorTemplateHelmInstallConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmInstallConfiguration {
   ...HelmOperationConfiguration;
 }
 
-/** AkriConnectorTemplateHelmUpgradeConfiguration properties */
+/** AkriConnectorTemplateHelmUpgradeConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmUpgradeConfiguration {
   ...HelmOperationConfiguration;
 }
 
-/** AkriConnectorTemplateHelmAuthSecretRef properties */
+/** AkriConnectorTemplateHelmAuthSecretRef properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmAuthSecretRef {
   /** The name of the secret. */
@@ -363,14 +364,14 @@ model AkriConnectorTemplateHelmAuthSecretRef {
   usernameKey: string;
 }
 
-/** AkriConnectorTemplateDiagnostics properties */
+/** AkriConnectorTemplateDiagnostics properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateDiagnostics {
   /** The log settings for the Connector template. */
   logs: AkriConnectorTemplateLogSettings;
 }
 
-/** AkriConnectorTemplateLogSettings properties */
+/** AkriConnectorTemplateLogSettings properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateLogSettings {
   ...DiagnosticsLogs;

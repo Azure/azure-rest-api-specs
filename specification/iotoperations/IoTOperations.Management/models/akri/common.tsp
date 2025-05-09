@@ -14,7 +14,7 @@ alias AkriAioMetadata = {
   aioMaxVersion?: string;
 };
 
-/** AkriConnectorsMqttConnectionConfiguration properties */
+/** AkriConnectorsMqttConnectionConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsMqttConnectionConfiguration {
   /** Authentication properties. */
@@ -42,7 +42,7 @@ model AkriConnectorsMqttConnectionConfiguration {
   tls?: TlsProperties;
 }
 
-/** AkriConnectorsMqttAuthentication properties */
+/** AkriConnectorsMqttAuthentication properties. */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("method")
 model AkriConnectorsMqttAuthentication {
@@ -50,12 +50,12 @@ model AkriConnectorsMqttAuthentication {
   method: AkriConnectorsMqttAuthenticationMethod;
 }
 
-/** AkriConnectorsMqttAuthenticationMethod properties */
+/** AkriConnectorsMqttAuthenticationMethod properties. */
 @added(Versions.`2025-07-01-preview`)
 union AkriConnectorsMqttAuthenticationMethod {
   string,
 
-  /** Service Account Token authentication */
+  /** Service Account Token authentication. */
   ServiceAccountToken,
 }
 
@@ -64,11 +64,11 @@ union AkriConnectorsMqttAuthenticationMethod {
 union AkriConnectorsMqttProtocolType {
   string,
 
-  /** Mqtt protocol */
+  /** Mqtt protocol. */
   Mqtt,
 }
 
-/** AkriConnectorsServiceAccountAuthentication properties */
+/** AkriConnectorsServiceAccountAuthentication properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsServiceAccountAuthentication
   extends AkriConnectorsMqttAuthentication {
@@ -79,7 +79,7 @@ model AkriConnectorsServiceAccountAuthentication
   serviceAccountTokenSettings: AkriConnectorsServiceAccountTokenSettings;
 }
 
-/** AkriConnectorsServiceAccountTokenSettings properties */
+/** AkriConnectorsServiceAccountTokenSettings properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsServiceAccountTokenSettings {
   /** The audience for the service account token. */
@@ -101,91 +101,91 @@ union AkriConnectorsImagePullPolicy {
   Never,
 }
 
-/** AkriConnectorsImagePullSecret properties */
+/** AkriConnectorsImagePullSecret properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsImagePullSecret {
   /** The name of the image pull secret. */
   secretRef: string;
 }
 
-/** AkriConnectorsTagDigestSettings properties */
+/** AkriConnectorsTagDigestSettings properties. */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("tagDigestType")
 model AkriConnectorsTagDigestSettings {
-  /** The tag or digest type */
+  /** The tag or digest type. */
   tagDigestType: AkriConnectorsTagDigestType;
 }
-/** AkriConnectorsTagDigestType values */
+/** AkriConnectorsTagDigestType values. */
 @added(Versions.`2025-07-01-preview`)
 union AkriConnectorsTagDigestType {
   string,
 
-  /** Indicates that a tag should be specified */
+  /** Indicates that a tag should be specified. */
   Tag,
 
-  /** Indicates that a digest should be specified */
+  /** Indicates that a digest should be specified. */
   Digest,
 }
 
-/** AkriConnectorsTag properties */
+/** AkriConnectorsTag properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsTag extends AkriConnectorsTagDigestSettings {
-  /** The tag or digest type */
+  /** The tag or digest type. */
   tagDigestType: Tag;
 
   /** The tag of the image. */
   tag: string;
 }
 
-/** AkriConnectorsDigest properties */
+/** AkriConnectorsDigest properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsDigest extends AkriConnectorsTagDigestSettings {
-  /** The tag or digest type */
+  /** The tag or digest type. */
   tagDigestType: Digest;
 
   /** The digest of the image. */
   digest: string;
 }
-/** AkriConnectorsRegistrySettings properties */
+/** AkriConnectorsRegistrySettings properties. */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("registrySettingsType")
 model AkriConnectorsRegistrySettings {
   registrySettingsType: AkriConnectorsRegistrySettingsType;
 }
 
-/** AkriConnectorsRegistrySettings properties */
+/** AkriConnectorsRegistrySettings properties. */
 @added(Versions.`2025-07-01-preview`)
 union AkriConnectorsRegistrySettingsType {
   string,
 
-  /** A Registry Endpoint reference */
+  /** A Registry Endpoint reference. */
   RegistryEndpointRef,
 
-  /** A Container Registry reference */
+  /** A Container Registry reference. */
   ContainerRegistry,
 }
 
-/** AkriConnectorsRegistryEndpointRef properties */
+/** AkriConnectorsRegistryEndpointRef properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsRegistryEndpointRef extends AkriConnectorsRegistrySettings {
-  /** The registry endpoint reference */
+  /** The registry endpoint reference. */
   registrySettingsType: RegistryEndpointRef;
 
-  /** The name of the registry endpoint */
+  /** The name of the registry endpoint. */
   registryEndpointRef: string;
 }
 
-/** AkriConnectorsContainerRegistry properties */
+/** AkriConnectorsContainerRegistry properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsContainerRegistry extends AkriConnectorsRegistrySettings {
-  /** The registry settings type */
+  /** The registry settings type. */
   registrySettingsType: ContainerRegistry;
 
-  /** The registry settings for the container registry */
+  /** The registry settings for the container registry. */
   containerRegistrySettings: AkriConnectorsContainerRegistrySettings;
 }
 
-/** AkriConnectorsContainerRegistry properties */
+/** AkriConnectorsContainerRegistry properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsContainerRegistrySettings {
   /** The container registry to use for the artifact. */
@@ -196,15 +196,15 @@ model AkriConnectorsContainerRegistrySettings {
   imagePullSecrets?: AkriConnectorsImagePullSecret[];
 }
 
-/** AkriConnectorsSecret properties */
+/** AkriConnectorsSecret properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsSecret {
-  /** The key in the secret to be mounted */
+  /** The key in the secret to be mounted. */
   secretKey: string;
 
-  /** The application-defined alias for the secret */
+  /** The application-defined alias for the secret. */
   secretAlias: string;
 
-  /** The name of the secret to be mounted */
+  /** The name of the secret to be mounted. */
   secretRef: string;
 }
