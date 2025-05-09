@@ -129,7 +129,7 @@ model AkriConnectorTemplateHelmConfiguration
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmConfigurationSettings {
   /** The registry settings for the helm chart to be used. */
-  registrySettings?: AkriConnectorsRegistrySettings;
+  registrySettings?: AkriConnectorTemplateHelmRegistrySettings;
 
   /** The release name of the Helm chart. */
   releaseName: string;
@@ -146,6 +146,74 @@ model AkriConnectorTemplateHelmConfigurationSettings {
   /** A map of values to pass to the helm chart. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Helm values are modeled as record of strings and are not known ahead of time"
   values?: Record<string>;
+}
+
+/** AkriConnectorTemplateHelmRegistrySettings properties. */
+@added(Versions.`2025-07-01-preview`)
+@discriminator("registrySettingsType")
+model AkriConnectorTemplateHelmRegistrySettings {
+  registrySettingsType: AkriConnectorTemplateHelmRegistrySettingsType;
+}
+
+/** AkriConnectorTemplateHelmRegistrySettingsType values. */
+@added(Versions.`2025-07-01-preview`)
+union AkriConnectorTemplateHelmRegistrySettingsType {
+  string,
+
+  /** A Registry Endpoint reference. */
+  RegistryEndpointRef,
+  
+  /** A Container Registry reference. */
+  ContainerRegistry,
+}
+
+/** AkriConnectorTemplateHelmRegistryEndpointRef properties. */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorTemplateHelmRegistryEndpointRef
+  extends AkriConnectorTemplateHelmRegistrySettings {
+  /** The registry endpoint reference. */
+  registrySettingsType: RegistryEndpointRef;
+
+  /** The name of the registry endpoint. */
+  registryEndpointRef: string;
+}
+
+/** AkriConnectorTemplateHelmContainerRegistry properties. */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorTemplateHelmContainerRegistry
+  extends AkriConnectorTemplateHelmRegistrySettings {
+  /** The container registry reference. */
+  registrySettingsType: ContainerRegistry;
+
+  /** The registry settings for the container registry. */
+  containerRegistrySettings: AkriConnectorTemplateHelmContainerRegistrySettings;
+}
+
+/** AkriConnectorTemplateHelmContainerRegistrySettings properties. */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorTemplateHelmContainerRegistrySettings {
+  
+  /** The registry to use for the Helm chart. */
+  registry: string;
+
+  /** The repository to use for the Helm chart. */
+  repository: string;
+
+  /** Optional reference to a secret in the same namespace to use for pulling the Helm chart. */
+  authSecretRef?: AkriConnectorTemplateHelmAuthSecretRef;
+}
+
+/** AkriConnectorTemplateHelmAuthSecretRef properties. */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorTemplateHelmAuthSecretRef {
+  /** The name of the secret. */
+  secretRef: string;
+
+  /** The key of the password in the secret. */
+  passwordKey: string;
+
+  /** The key of the username in the secret. */
+  usernameKey: string;
 }
 
 /** AkriConnectorTemplateManagedConfiguration properties. */
@@ -340,19 +408,6 @@ model AkriConnectorTemplateHelmInstallConfiguration {
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmUpgradeConfiguration {
   ...HelmOperationConfiguration;
-}
-
-/** AkriConnectorTemplateHelmAuthSecretRef properties. */
-@added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateHelmAuthSecretRef {
-  /** The name of the secret. */
-  secretRef: string;
-
-  /** The key of the password in the secret. */
-  passwordKey: string;
-
-  /** The key of the username in the secret. */
-  usernameKey: string;
 }
 
 /** AkriConnectorTemplateDiagnostics properties. */

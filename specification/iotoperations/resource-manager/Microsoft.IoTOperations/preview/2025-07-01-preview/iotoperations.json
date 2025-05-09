@@ -4580,12 +4580,8 @@
       "description": "AkriConnectorTemplateHelmConfiguration properties.",
       "properties": {
         "registrySettings": {
-          "$ref": "#/definitions/AkriConnectorsRegistrySettings",
+          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettings",
           "description": "The registry settings for the helm chart to be used."
-        },
-        "repository": {
-          "type": "string",
-          "description": "The repository of the Helm chart."
         },
         "releaseName": {
           "type": "string",
@@ -4594,10 +4590,6 @@
         "version": {
           "type": "string",
           "description": "The version of the Helm chart."
-        },
-        "authSecretRef": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmAuthSecretRef",
-          "description": "Authentication secret reference for the Helm chart."
         },
         "advancedConfiguration": {
           "$ref": "#/definitions/AkriConnectorTemplateHelmAdvancedConfiguration",
@@ -4612,9 +4604,49 @@
         }
       },
       "required": [
-        "repository",
         "releaseName",
         "version"
+      ]
+    },
+    "AkriConnectorTemplateHelmContainerRegistry": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmContainerRegistry properties.",
+      "properties": {
+        "containerRegistrySettings": {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmContainerRegistrySettings",
+          "description": "The registry settings for the container registry."
+        }
+      },
+      "required": [
+        "containerRegistrySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettings"
+        }
+      ],
+      "x-ms-discriminator-value": "ContainerRegistry"
+    },
+    "AkriConnectorTemplateHelmContainerRegistrySettings": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmContainerRegistrySettings properties.",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "The registry to use for the Helm chart."
+        },
+        "repository": {
+          "type": "string",
+          "description": "The repository to use for the Helm chart."
+        },
+        "authSecretRef": {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmAuthSecretRef",
+          "description": "Optional reference to a secret in the same namespace to use for pulling the Helm chart."
+        }
+      },
+      "required": [
+        "registry",
+        "repository"
       ]
     },
     "AkriConnectorTemplateHelmDeleteConfiguration": {
@@ -4669,6 +4701,62 @@
           "type": "boolean",
           "description": "The wait flag for the operation."
         }
+      }
+    },
+    "AkriConnectorTemplateHelmRegistryEndpointRef": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmRegistryEndpointRef properties.",
+      "properties": {
+        "registryEndpointRef": {
+          "type": "string",
+          "description": "The name of the registry endpoint."
+        }
+      },
+      "required": [
+        "registryEndpointRef"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettings"
+        }
+      ],
+      "x-ms-discriminator-value": "RegistryEndpointRef"
+    },
+    "AkriConnectorTemplateHelmRegistrySettings": {
+      "type": "object",
+      "description": "AkriConnectorTemplateHelmRegistrySettings properties.",
+      "properties": {
+        "registrySettingsType": {
+          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettingsType"
+        }
+      },
+      "discriminator": "registrySettingsType",
+      "required": [
+        "registrySettingsType"
+      ]
+    },
+    "AkriConnectorTemplateHelmRegistrySettingsType": {
+      "type": "string",
+      "description": "AkriConnectorTemplateHelmRegistrySettingsType values.",
+      "enum": [
+        "RegistryEndpointRef",
+        "ContainerRegistry"
+      ],
+      "x-ms-enum": {
+        "name": "AkriConnectorTemplateHelmRegistrySettingsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RegistryEndpointRef",
+            "value": "RegistryEndpointRef",
+            "description": "A Registry Endpoint reference."
+          },
+          {
+            "name": "ContainerRegistry",
+            "value": "ContainerRegistry",
+            "description": "A Container Registry reference."
+          }
+        ]
       }
     },
     "AkriConnectorTemplateHelmUpgradeConfiguration": {
