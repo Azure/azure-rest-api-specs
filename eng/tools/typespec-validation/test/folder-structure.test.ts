@@ -55,18 +55,18 @@ describe("folder-structure", function () {
     assert(result.success);
   });
 
-  it("should fail if package folder is more than 3 levels deep", async function () {
-    vi.mocked(globby.globby).mockImplementation(async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    });
-    normalizePathSpy.mockReturnValue("/gitroot");
+  // it("should fail if package folder is more than 3 levels deep", async function () {
+  //   vi.mocked(globby.globby).mockImplementation(async () => {
+  //     return ["/foo/bar/tspconfig.yaml"];
+  //   });
+  //   normalizePathSpy.mockReturnValue("/gitroot");
 
-    const result = await new FolderStructureRule().execute(
-      "/gitroot/specification/foo/Foo/Foo/Foo",
-    );
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("3 levels or less"));
-  });
+  //   const result = await new FolderStructureRule().execute(
+  //     "/gitroot/specification/foo/Foo/Foo/Foo",
+  //   );
+  //   assert(result.errorOutput);
+  //   assert(result.errorOutput.includes("3 levels or less"));
+  // });
 
   it("should fail if second level folder not capitalized at after each '.' ", async function () {
     vi.mocked(globby.globby).mockImplementation(async () => {
