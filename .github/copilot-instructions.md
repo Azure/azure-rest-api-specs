@@ -137,6 +137,8 @@ changes in `.github` and `.vscode` folders.
         - SDK release type (beta for preview API versions, stable otherwise).
         - Language options: `Python`, `.NET`, `JavaScript`, `Java`, `Go`.
         - Release plan work item ID.
+    - Keep checking the status of SDK generation pipeline status every 2 minutes until pipeline succeeded or failed.
+    - Get SDK pull request link from pipeline and show all details once pipeline is in completed status.
     - Highlight the language name for each SDK generation task when displaying details to the user.
     - Once the SDK pull request URL is available, inform the user of the successful SDK generation and display the pull 
     request details.
