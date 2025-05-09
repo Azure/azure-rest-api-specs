@@ -1086,7 +1086,7 @@ model AcsCallParticipantProperties {
   communicationIdentifier?: CommunicationIdentifierModel;
 
   /** The role of the participant */
-  role?: string;
+  role?: AcsCallParticipantRoleKind;
 }
 
 /** Schema of common properties of all calling events */
@@ -1612,6 +1612,53 @@ union AcsCallEndedByKind {
 
   /** MicrosoftInternal */
   "MicrosoftInternal",
+
+  string,
+}
+
+/** Call participant role kind. */
+union AcsCallParticipantRoleKind {
+  /** Attendee */
+  "Attendee",
+
+  /** Presenter */
+  "Presenter",
+
+  /** Organizer */
+  "Organizer",
+
+  /** Interpreter */
+  "Interpreter",
+
+  /** AcsOrganizer */
+  "AcsOrganizer",
+
+  /** AcsPresenter */
+  "AcsPresenter",
+
+  /** AcsAttendee */
+  "AcsAttendee",
+
+  /** AcsConsumer */
+  "AcsConsumer",
+
+  /** AcsCollaborator */
+  "AcsCollaborator",
+
+  /** CoOrganizer */
+  "CoOrganizer",
+
+  /** Unknown */
+  "Unknown",
+
+  /** Producer */
+  "Producer",
+
+  /** Moderator */
+  "Moderator",
+
+  /** None */
+  "None",
 
   string,
 }

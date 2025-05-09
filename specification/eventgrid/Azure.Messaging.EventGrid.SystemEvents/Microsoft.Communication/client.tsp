@@ -573,6 +573,8 @@ using Azure.ClientGenerator.Core;
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRoleKind, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRoleKind, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
   Usage.output
 );

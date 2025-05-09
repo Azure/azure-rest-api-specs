@@ -66,6 +66,102 @@
         ]
       }
     },
+    "AcsCallParticipantRoleKind": {
+      "type": "string",
+      "description": "Call participant role kind.",
+      "enum": [
+        "Attendee",
+        "Presenter",
+        "Organizer",
+        "Interpreter",
+        "AcsOrganizer",
+        "AcsPresenter",
+        "AcsAttendee",
+        "AcsConsumer",
+        "AcsCollaborator",
+        "CoOrganizer",
+        "Moderator",
+        "Producer",
+        "Unknown",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "AcsCallParticipantRoleKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Attendee",
+            "value": "Attendee",
+            "description": "Attendee"
+          },
+          {
+            "name": "Presenter",
+            "value": "Presenter",
+            "description": "Presenter"
+          },
+          {
+            "name": "Organizer",
+            "value": "Organizer",
+            "description": "Organizer"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Interpreter",
+            "value": "Interpreter",
+            "description": "Interpreter"
+          },
+          {
+            "name": "AcsOrganizer",
+            "value": "AcsOrganizer",
+            "description": "AcsOrganizer"
+          },
+          {
+            "name": "AcsPresenter",
+            "value": "AcsPresenter",
+            "description": "AcsPresenter"
+          },
+          {
+            "name": "AcsAttendee",
+            "value": "AcsAttendee",
+            "description": "AcsAttendee"
+          },
+          {
+            "name": "AcsConsumer",
+            "value": "AcsConsumer",
+            "description": "AcsConsumer"
+          },
+          {
+            "name": "AcsCollaborator",
+            "value": "AcsCollaborator",
+            "description": "AcsCollaborator"
+          },
+          {
+            "name": "CoOrganizer",
+            "value": "CoOrganizer",
+            "description": "CoOrganizer"
+          },
+          {
+            "name": "Moderator",
+            "value": "Moderator",
+            "description": "Moderator"
+          },
+          {
+            "name": "Producer",
+            "value": "Producer",
+            "description": "Producer"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown"
+          }
+        ]
+      }
+    },
     "AcsCallEndedByProperties": {
       "type": "object",
       "description": "Schema of calling event ended by properties",
@@ -169,8 +265,9 @@
           "description": "The communication identifier of the participant user"
         },
         "role": {
-          "type": "string",
-          "description": "The role of the participant"
+          "$ref": "#/definitions/AcsCallParticipantRoleKind",
+          "description": "The role of the participant",
+          "x-ms-client-name": "roleKind"
         }
       }
     },
