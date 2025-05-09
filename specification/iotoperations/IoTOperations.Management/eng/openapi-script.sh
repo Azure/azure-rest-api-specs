@@ -18,7 +18,6 @@ echo "Generating the specs and the examples!"
 
 # Compile all the typespecs the iotoperations directory
 echo "Compiling the typespecs in the iotoperations directory..."
-npx tsp compile IoTOperations.Management/.
 
 # Generate examples for all the openapi specs
 # echo "Generating examples for all the openapi specs..."

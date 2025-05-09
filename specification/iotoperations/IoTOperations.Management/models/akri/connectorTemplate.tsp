@@ -131,17 +131,11 @@ model AkriConnectorTemplateHelmConfigurationSettings {
   /** The registry settings for the helm chart to be used. */
   registrySettings?: AkriConnectorsRegistrySettings;
 
-  /** The repository of the Helm chart. */
-  repository: string;
-
   /** The release name of the Helm chart. */
   releaseName: string;
 
   /** The version of the Helm chart. */
   version: string;
-
-  /** Authentication secret reference for the Helm chart. */
-  authSecretRef?: AkriConnectorTemplateHelmAuthSecretRef;
 
   /**
    * Advanced configuration for the Helm chart.
