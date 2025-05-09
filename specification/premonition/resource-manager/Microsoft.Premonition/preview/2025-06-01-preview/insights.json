@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Premonition Insights",
-    "version": "2025-04-01-preview",
+    "version": "2025-06-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1160,6 +1160,10 @@
             "create"
           ]
         },
+        "containerName": {
+          "type": "string",
+          "description": "Container name where the result is written to. Falls back to Library.containerName if not provided."
+        },
         "startedAt": {
           "type": "string",
           "format": "date-time",
@@ -1195,7 +1199,13 @@
     },
     "AnalysisPropertiesUpdate": {
       "type": "object",
-      "description": "The properties of Analysis"
+      "description": "The properties of Analysis",
+      "properties": {
+        "containerName": {
+          "type": "string",
+          "description": "Container name where the result is written to. Falls back to Library.containerName if not provided."
+        }
+      }
     },
     "AnalysisResult": {
       "type": "object",
@@ -1290,6 +1300,16 @@
         }
       ]
     },
+    "Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (either system assigned, or none)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        }
+      }
+    },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
       "title": "Tracked Resource",
@@ -1366,6 +1386,10 @@
         "properties": {
           "$ref": "#/definitions/LibraryProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -1414,8 +1438,7 @@
         }
       },
       "required": [
-        "storageAccount",
-        "containerName"
+        "storageAccount"
       ]
     },
     "LibraryPropertiesUpdate": {
@@ -1439,6 +1462,10 @@
         "properties": {
           "$ref": "#/definitions/LibraryPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -1451,19 +1478,48 @@
       "type": "object",
       "description": "Result for a metagenomic analysis",
       "properties": {
+        "totalNumberOfBasePairs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of base pairs in all samples"
+        },
+        "totalNumberOfReads": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sum of number of reads in all samples"
+        },
+        "readsType": {
+          "$ref": "#/definitions/ReadsType",
+          "description": "Type of the reads, either 'short' or 'long'"
+        },
+        "averageReadDuplicationFraction": {
+          "type": "number",
+          "format": "double",
+          "description": "Average fraction of duplicate reads in all samples"
+        },
+        "minReadLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum read length accross all samples"
+        },
+        "maxReadLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum read length accross all samples"
+        },
         "taxonomyVersion": {
           "$ref": "#/definitions/TaxonomyVersion",
           "description": "The version of taxonomy database used"
-        },
-        "totalReads": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of base pairs read"
         }
       },
       "required": [
-        "taxonomyVersion",
-        "totalReads"
+        "totalNumberOfBasePairs",
+        "totalNumberOfReads",
+        "readsType",
+        "averageReadDuplicationFraction",
+        "minReadLength",
+        "maxReadLength",
+        "taxonomyVersion"
       ],
       "allOf": [
         {
@@ -1487,6 +1543,30 @@
         }
       ],
       "x-ms-discriminator-value": "Metagenomics"
+    },
+    "ReadsType": {
+      "type": "string",
+      "description": "Valid reads types",
+      "enum": [
+        "short",
+        "long"
+      ],
+      "x-ms-enum": {
+        "name": "ReadsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "short",
+            "value": "short",
+            "description": "Short reads"
+          },
+          {
+            "name": "long",
+            "value": "long",
+            "description": "Long reads"
+          }
+        ]
+      }
     },
     "Sample": {
       "type": "object",
@@ -1532,6 +1612,10 @@
           "type": "string",
           "description": "Description of this sample, such as source, collection method, etc."
         },
+        "containerName": {
+          "type": "string",
+          "description": "Container name where the files are stored. Falls back to Library.containerName if not provided."
+        },
         "paths": {
           "type": "array",
           "description": "Path to the data files in the Library container. Supported formats: fa fasta fq fastq fa.gz fasta.gz fq.gz fastq.gz bam",
@@ -1571,6 +1655,10 @@
         "description": {
           "type": "string",
           "description": "Description of this sample, such as source, collection method, etc."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Container name where the files are stored. Falls back to Library.containerName if not provided."
         },
         "paths": {
           "type": "array",
