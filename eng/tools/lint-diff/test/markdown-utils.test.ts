@@ -7,7 +7,6 @@ import axios from "axios";
 import {
   deduplicateTags,
   getDocRawUrl,
-  getInputFiles,
   getDefaultTag,
   getOpenapiType,
   getRelatedArmRpcFromDoc,
@@ -34,28 +33,6 @@ describe("deduplicateTags", () => {
 
     const deduplicatedTags = deduplicateTags(tags);
     expect(deduplicatedTags).toEqual(["tag4", "tag1"]);
-  });
-});
-
-describe("getInputFiles", () => {
-  test("returns input files for a readme content's tag", async () => {
-    const readmeContent = await readFile(join(__dirname, "fixtures/getInputFiles/readme.md"), {
-      encoding: "utf-8",
-    });
-
-    const inputFiles = await getInputFiles(readmeContent, "package-2022-12-01");
-
-    expect(inputFiles).toEqual(["Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json"]);
-  });
-
-  test("returns empty array when no input files are found", async () => {
-    const readmeContent = await readFile(join(__dirname, "fixtures/getInputFiles/readme.md"), {
-      encoding: "utf-8",
-    });
-
-    const inputFiles = await getInputFiles(readmeContent, "TAG-NOT-FOUND");
-
-    expect(inputFiles).toEqual([]);
   });
 });
 

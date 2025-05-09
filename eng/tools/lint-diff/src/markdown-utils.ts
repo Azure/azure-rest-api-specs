@@ -66,12 +66,6 @@ export function deduplicateTags(tagInfo: TagInputFile[]) {
     .map((tag) => tag.tagName);
 }
 
-export function getInputFiles(readMeContent: string, tag: string): readonly string[] {
-  const cmd = parseMarkdown(readMeContent);
-  const inputFiles = amd.getInputFilesForTag(cmd.markDown, tag);
-  return inputFiles || [];
-}
-
 export function getDocRawUrl(code: string) {
   if (code == "FATAL") {
     return `N/A`;
