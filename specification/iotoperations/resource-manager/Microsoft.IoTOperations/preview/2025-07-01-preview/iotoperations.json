@@ -4507,7 +4507,7 @@
       "description": "AkriConnectorTemplateDiagnostics properties.",
       "properties": {
         "logs": {
-          "$ref": "#/definitions/AkriConnectorTemplateLogSettings",
+          "$ref": "#/definitions/AkriConnectorsDiagnosticsLogs",
           "description": "The log settings for the Connector template."
         }
       },
@@ -4695,17 +4695,6 @@
         "wait": {
           "type": "boolean",
           "description": "The wait flag for the operation."
-        }
-      }
-    },
-    "AkriConnectorTemplateLogSettings": {
-      "type": "object",
-      "description": "AkriConnectorTemplateLogSettings properties.",
-      "properties": {
-        "level": {
-          "type": "string",
-          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
-          "default": "info"
         }
       }
     },
@@ -5435,7 +5424,7 @@
       "description": "AkriDiscoveryHandlerDiagnostics properties.",
       "properties": {
         "logs": {
-          "$ref": "#/definitions/AkriDiscoveryHandlerLogSettings",
+          "$ref": "#/definitions/AkriConnectorsDiagnosticsLogs",
           "description": "The log settings for the Connector template."
         }
       },
@@ -5490,17 +5479,6 @@
       "required": [
         "imageName"
       ]
-    },
-    "AkriDiscoveryHandlerLogSettings": {
-      "type": "object",
-      "description": "AkriDiscoveryHandlerLogSettings properties.",
-      "properties": {
-        "level": {
-          "type": "string",
-          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
-          "default": "info"
-        }
-      }
     },
     "AkriDiscoveryHandlerProperties": {
       "type": "object",

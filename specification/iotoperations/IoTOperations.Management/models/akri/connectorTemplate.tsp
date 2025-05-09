@@ -368,11 +368,5 @@ model AkriConnectorTemplateHelmAuthSecretRef {
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateDiagnostics {
   /** The log settings for the Connector template. */
-  logs: AkriConnectorTemplateLogSettings;
-}
-
-/** AkriConnectorTemplateLogSettings properties. */
-@added(Versions.`2025-07-01-preview`)
-model AkriConnectorTemplateLogSettings {
-  ...AkriConnectorsDiagnosticsLogs;
+  logs: AkriConnectorsDiagnosticsLogs;
 }

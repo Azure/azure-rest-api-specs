@@ -81,13 +81,7 @@ model AkriDiscoveryHandlerAioMetadata {
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerDiagnostics {
   /** The log settings for the Connector template. */
-  logs: AkriDiscoveryHandlerLogSettings;
-}
-
-/** AkriDiscoveryHandlerLogSettings properties. */
-@added(Versions.`2025-07-01-preview`)
-model AkriDiscoveryHandlerLogSettings {
-  ...AkriConnectorsDiagnosticsLogs;
+  logs: AkriConnectorsDiagnosticsLogs;
 }
 
 /** AkriDiscoveryHandlerDiscoverableDeviceEndpointType properties. */
