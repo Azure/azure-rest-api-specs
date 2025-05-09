@@ -79,4 +79,3 @@ using Microsoft.NotificationHubs;
 );
 @@clientName(CheckAvailabilityParameters, "CheckAvailabilityContent", "csharp");
 @@clientName(Operation, "Info", "csharp");
-@@clientName(DebugSendResponse, "DebugSendResult", "csharp");
