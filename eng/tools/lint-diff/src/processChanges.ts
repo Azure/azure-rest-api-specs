@@ -1,4 +1,4 @@
-import { join, relative, resolve, sep } from "path";
+import { join, relative, resolve } from "path";
 import { readFile } from "fs/promises";
 import { pathExists } from "./util.js";
 import { specification, readme, swagger } from "@azure-tools/specs-shared/changed-files";
