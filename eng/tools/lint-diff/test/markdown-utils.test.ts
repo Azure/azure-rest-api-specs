@@ -9,10 +9,10 @@ import {
   getDocRawUrl,
   getInputFiles,
   getDefaultTag,
-  getAllTags,
   getOpenapiType,
   getRelatedArmRpcFromDoc,
 } from "../src/markdown-utils.js";
+import { Readme } from "@azure-tools/specs-shared/readme";
 
 vi.mock("axios");
 
@@ -147,40 +147,11 @@ tag: 2025-01-01
   );
 });
 
-describe("getAllTags", () => {
-  test("returns all tags", async () => {
-    const readmeContent = await readFile(join(__dirname, "fixtures/getAllTags/readme.md"), {
-      encoding: "utf-8",
-    });
-
-    const tags = getAllTags(readmeContent);
-
-    expect(tags).toEqual([
-      "package-preview-2024-01",
-      "package-preview-2023-08",
-      "package-preview-2023-07",
-      "package-preview-2023-04",
-      "package-preview-2023-01",
-      "package-2023-03",
-      "package-2021-08",
-      "package-preview-2021-08",
-      "package-preview-2021-07",
-      "package-2021-04-only",
-      "package-preview-2021-01",
-      "package-2019-06-preview",
-      "package-2019-06",
-      "package-2019-03",
-      "package-preview-2019-05",
-      "package-2018-05",
-      "package-2018-05-preview",
-    ]);
-  });
-});
-
 describe("getOpenapiType", () => {
   test("openapi-type found and valid", async () => {
     const markdownFile = join(__dirname, "fixtures/getOpenapiType/type-found-and-valid.md");
-    const openapiType = await getOpenapiType(markdownFile);
+    const readme = new Readme(markdownFile);
+    const openapiType = await getOpenapiType(readme);
 
     expect(openapiType).toEqual("data-plane");
   });
@@ -190,7 +161,8 @@ describe("getOpenapiType", () => {
       __dirname,
       "fixtures/getOpenapiType/specification/service1/data-plane/type-found-not-valid-readme.md",
     );
-    const openapiType = await getOpenapiType(markdownFile);
+    const readme = new Readme(markdownFile);
+    const openapiType = await getOpenapiType(readme);
 
     expect(openapiType).toEqual("data-plane");
   });
@@ -200,22 +172,25 @@ describe("getOpenapiType", () => {
       __dirname,
       "fixtures/getOpenapiType/specification/service1/resource-manager/inferred-resource-manager-readme.md",
     );
-    const openApiType = await getOpenapiType(markdownFile);
-    expect(openApiType).toEqual("arm");
+    const readme = new Readme(markdownFile);
+    const openapiType = await getOpenapiType(readme);
+    expect(openapiType).toEqual("arm");
   });
   test.skipIf(isWindows())("openapi-type not found, type data-plane", async () => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/data-plane/inferred-data-plane-readme.md",
     );
-    const openApiType = await getOpenapiType(markdownFile);
-    expect(openApiType).toEqual("data-plane");
+    const readme = new Readme(markdownFile);
+    const openapiType = await getOpenapiType(readme);
+    expect(openapiType).toEqual("data-plane");
   });
 
   test("openapi-type not found, type default", async () => {
     const markdownFile = join(__dirname, "fixtures/getOpenapiType/default.md");
-    const openApiType = await getOpenapiType(markdownFile);
-    expect(openApiType).toEqual("default");
+    const readme = new Readme(markdownFile);
+    const openapiType = await getOpenapiType(readme);
+    expect(openapiType).toEqual("default");
   });
 });
 

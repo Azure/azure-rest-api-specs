@@ -1,9 +1,9 @@
 import { join } from "path";
 import { exec, ExecException } from "node:child_process";
-
-import { getOpenapiType } from "./markdown-utils.js";
 import { getPathToDependency, isFailure } from "./util.js";
 import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
+import { ReadmeTags } from "./lintdiff-types.js";
+import { getOpenapiType } from "./markdown-utils.js";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
@@ -13,7 +13,7 @@ const AUTOREST_ERROR_PREFIX = '{"level":';
 
 export async function runChecks(
   path: string,
-  runList: Map<string, string[]>,
+  runList: Map<string, ReadmeTags>,
 ): Promise<AutorestRunResult[]> {
   const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
   const result: AutorestRunResult[] = [];
@@ -21,8 +21,7 @@ export async function runChecks(
   for (const [readme, tags] of runList.entries()) {
     const changedFilePath = join(path, readme);
 
-    // TODO: Move this into getRunList
-    let openApiType = await getOpenapiType(changedFilePath);
+    let openApiType = await getOpenapiType(tags.readme);
 
     // From momentOfTruth.ts:executeAutoRestWithLintDiff
     // This is a quick workaround for https://github.com/Azure/azure-sdk-tools/issues/6549
@@ -32,7 +31,7 @@ export async function runChecks(
     let openApiSubType = openApiType;
 
     // If the tags array is empty run the loop once but with a null tag
-    const coalescedTags = tags?.length ? tags : [null];
+    const coalescedTags = tags.tags?.size ? [...tags.tags] : [null];
     for (const tag of coalescedTags) {
       let tagArg = tag ? `--tag=${tag} ` : "";
 
