@@ -395,3 +395,23 @@ using Microsoft.Workloads;
   "csharp"
 );
 @@clientName(ThreeTierRecommendationResult.dbVmSku, "DBVmSku", "csharp");
+@@alternateType(MessageServerProperties.ipAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(EnqueueServerProperties.ipAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(EnqueueReplicationServerProperties.ipAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(SAPDatabaseProperties.ipAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(SAPApplicationServerProperties.ipAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);

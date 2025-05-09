@@ -492,4 +492,10 @@ suppressions:
   - code: TrackedResourcePatchOperation
     from: containerregistry.json
     reason: The following workitems will be implemented to improve the swagger for the next API verison. Workitems 24979281, 24778096, 24802955, 24802955. This is planned for 2023-11-01-preview
+
+  - code: PatchBodyParametersSchema
+    reasons: Common property used for create and update. existing definitions and sdk already released. breaking change to fix.
+    from: containerregistry.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}"].patch.parameters[5].schema.properties.properties
 ```
