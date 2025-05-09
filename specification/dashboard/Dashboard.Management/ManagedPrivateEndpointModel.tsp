@@ -38,6 +38,7 @@ interface ManagedPrivateEndpointModels {
    * Create or update a managed private endpoint for a grafana resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.Core.useFinalStateVia("original-uri")
   @operationId("ManagedPrivateEndpoints_Create")
   create is ArmResourceCreateOrReplaceAsync<
     ManagedPrivateEndpointModel,

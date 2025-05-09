@@ -168,6 +168,7 @@ model ManagedGrafanaProperties {
    * Provisioning state of the resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -387,6 +388,7 @@ model Smtp {
   /**
    * Password of SMTP auth. If the password contains # or ;, then you have to wrap it with triple quotes
    */
+  @secret
   password?: string;
 
   /**

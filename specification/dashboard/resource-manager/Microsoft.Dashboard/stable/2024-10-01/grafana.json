@@ -1032,7 +1032,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -1879,7 +1879,8 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the resource."
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
         },
         "grafanaVersion": {
           "type": "string",
@@ -2665,7 +2666,9 @@
         },
         "password": {
           "type": "string",
-          "description": "Password of SMTP auth. If the password contains # or ;, then you have to wrap it with triple quotes"
+          "format": "password",
+          "description": "Password of SMTP auth. If the password contains # or ;, then you have to wrap it with triple quotes",
+          "x-ms-secret": true
         },
         "fromAddress": {
           "type": "string",
