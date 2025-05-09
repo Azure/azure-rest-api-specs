@@ -26,5 +26,6 @@ using Microsoft.SqlVirtualMachine;
   "parameters"
 );
 @@clientName(SqlVirtualMachines.troubleshoot::parameters.body, "parameters");
+@@clientName(Operation, "Info", "csharp");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SqlVirtualMachine.properties);
