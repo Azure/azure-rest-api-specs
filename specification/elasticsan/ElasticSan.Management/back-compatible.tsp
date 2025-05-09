@@ -65,6 +65,6 @@ using Microsoft.ElasticSan;
   "CurrentVersionedKeyExpirationTimestamp"
 );
 @@clientName(ManagedByInfo.resourceId, "ResourceId");
-@@clientName(SnapshotCreationData, "SnapshotCreationParameters", "csharp");
+@@clientName(SnapshotCreationData, "SnapshotCreationContent", "csharp");
 @@clientName(PreValidationResponse, "PreValidationResult", "csharp");
-@@clientName(SourceCreationData, "SourceCreationParameters", "csharp");
+@@clientName(SourceCreationData, "SourceCreationContent", "csharp");
