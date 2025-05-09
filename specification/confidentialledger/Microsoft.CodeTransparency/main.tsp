@@ -29,6 +29,10 @@ enum Versions {
   // aligns with Feb 4 2025 SCRAPI spec https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/4fafe531c21a3d1241934330bb771f82c64e0827/draft-ietf-scitt-scrapi.md
   @doc("The 2025-01-31-preview version of the Microsoft.CodeTransparency service.")
   `2025-01-31-preview`,
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  // aligns with Feb 4 2025 SCRAPI spec https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/4fafe531c21a3d1241934330bb771f82c64e0827/draft-ietf-scitt-scrapi.md
+  @doc("The 2025-01-31-preview version of the Microsoft.CodeTransparency service.")
+  `2025-05-31-preview`,
 }
 
 // Additional supported traits by the API.
@@ -133,6 +137,10 @@ model CreateEntryPending {
   @doc("Response content is in CBOR format")
   @header("Content-Type")
   contentType: "application/cbor";
+
+  @doc("Content title")
+  @header("Content-Title")
+  contentTitle?: string;
 
   @doc("Location of the operation")
   @header("Location")
