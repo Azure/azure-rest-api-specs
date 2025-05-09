@@ -163,8 +163,22 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-msi
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2025-01-31-preview
   - tag: package-2018-11-30
   - tag: package-2015-08-31-preview
+```
+
+### Tag: package-2025-01-31-preview and java
+
+These settings apply only when `--tag=package-2025-01-31-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2025-01-31-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managedserviceidentity.v2025_01_31_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managedserviceidentity/mgmt-v2025_01_31_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-11-30 and java
