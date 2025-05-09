@@ -11,16 +11,12 @@ using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
-/**
- * AkriDiscoveryHandler resource
- */
+/** AkriDiscoveryHandler resource */
 @added(Versions.`2025-07-01-preview`)
 @parentResource(InstanceResource)
 model AkriDiscoveryHandlerResource
   is ProxyResource<AkriDiscoveryHandlerProperties> {
-  /**
-   * Name of AkriDiscoveryHandler resource
-   */
+  /** Name of AkriDiscoveryHandler resource */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("akriDiscoveryHandlerName")
   @path
@@ -29,229 +25,149 @@ model AkriDiscoveryHandlerResource
   @segment("akriDiscoveryHandlers")
   name: string;
 
-  /**
-   * Edge location of the resource.
-   */
+  /** Edge location of the resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
-/**
- * AkriDiscoveryHandler properties
- */
+/** AkriDiscoveryHandler properties */
 // At the moment, the CRD properties are defined in snake_case. We should change them to camelCase to be consistent with the rest of the API.
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerProperties {
-  /**
-   * The status of the last operation.
-   */
+  /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  /**
-   * Metadata about AIO.
-   */
+  /** Metadata about AIO. */
   aioMetadata?: AkriDiscoveryHandlerAioMetadata;
 
-  /**
-   * Additional configuration for the AkriDiscoveryHandler.
-   */
+  /** Additional configuration for the AkriDiscoveryHandler. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The values are not known ahead of time."
   additionalConfiguration?: Record<string>;
 
-  /**
-   * Diagnostics settings for the AkriDiscoveryHandler.
-   */
+  /** Diagnostics settings for the AkriDiscoveryHandler. */
   diagnostics?: AkriDiscoveryHandlerDiagnostics;
 
-  /**
-   * Mode of the AkriDiscoveryHandler.
-   */
+  /** Mode of the AkriDiscoveryHandler. */
   mode?: OperationalMode; // Right now in the CRD the property is called `enabled` but it should be `mode`. We should change it in the CRD to be consistent with the rest of the API.
 
-  /**
-   * Device inbound endpoint types
-   */
+  /** Device inbound endpoint types */
   @OpenAPI.extension("x-ms-identifiers", #["endpointType", "version"])
   @minItems(1)
   discoverableDeviceEndpointTypes: AkriDiscoveryHandlerDiscoverableDeviceEndpointType[];
 
-  /**
-   * Mqtt connection configuration settings
-   */
+  /** Mqtt connection configuration settings */
   mqttConnectionConfiguration?: AkriConnectorsMqttConnectionConfiguration;
 
-  /**
-   * The image configuration for the AkriDiscoveryHandler.
-   */
+  /** The image configuration for the AkriDiscoveryHandler. */
   imageConfiguration: AkriDiscoveryHandlerImageConfiguration;
 
-  /**
-   * Schedule for the AkriDiscoveryHandler.
-   */
+  /** Schedule for the AkriDiscoveryHandler. */
   schedule: AkriDiscoveryHandlerSchedule;
 
-  /**
-   * Secrets that will be mounted onto discovery handler.
-   */
+  /** Secrets that will be mounted onto discovery handler. */
   @OpenAPI.extension("x-ms-identifiers", #["secretAlias"])
   secrets?: AkriConnectorsSecret[];
 }
 
-/**
- * Metadata about AIO.
- */
+/** Metadata about AIO. */
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerAioMetadata {
   ...AkriAioMetadata;
 }
-/**
- * AkriDiscoveryHandlerDiagnostics properties
- */
+/** AkriDiscoveryHandlerDiagnostics properties */
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerDiagnostics {
-  /**
-   * The log settings for the Connector template.
-   */
+  /** The log settings for the Connector template. */
   logs: AkriDiscoveryHandlerLogSettings;
 }
 
-/**
- * AkriDiscoveryHandlerLogSettings properties
- */
+/** AkriDiscoveryHandlerLogSettings properties */
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerLogSettings {
   ...DiagnosticsLogs;
 }
 
-/**
- * AkriDiscoveryHandlerDiscoverableDeviceEndpointType properties
- */
+/** AkriDiscoveryHandlerDiscoverableDeviceEndpointType properties */
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerDiscoverableDeviceEndpointType {
-  /**
-   * The type of the endpoint.
-   */
+  /** The type of the endpoint. */
   endpointType: NonEmptyString;
 
-  /**
-   * The version of the endpoint.
-   */
+  /** The version of the endpoint. */
   version: NonEmptyString;
 }
 
-/**
- * AkriDiscoveryHandler Image configuration properties
- */
+/** AkriDiscoveryHandler Image configuration properties */
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerImageConfiguration {
-  /**
-   * The image name without any registry reference, tag or digest.
-   */
+  /** The image name without any registry reference, tag or digest. */
   imageName: string;
 
-  /**
-   * The pull policy of the image
-   */
+  /** The pull policy of the image */
   imagePullPolicy?: AkriConnectorsImagePullPolicy;
 
-  /**
-   * The number of replicas to be set up.
-   */
+  /** The number of replicas to be set up. */
   replicas?: int32;
 
-  /**
-   * The registry settings for the image. You can omit this field if using the default docker hub repository or using a local image.
-   */
+  /** The registry settings for the image. You can omit this field if using the default docker hub repository or using a local image. */
   registrySettings?: AkriConnectorsRegistrySettings;
 
-  /**
-   * Optional image tag or digest. If not specified, the default tag is `latest`.
-   */
+  /** Optional image tag or digest. If not specified, the default tag is `latest`. */
   tagDigestSettings?: AkriConnectorsTagDigestSettings;
 }
 
-/**
- * AkriDiscoveryHandlerSchedule properties
- */
+/** AkriDiscoveryHandlerSchedule properties */
 @added(Versions.`2025-07-01-preview`)
 @discriminator("scheduleType")
 model AkriDiscoveryHandlerSchedule {
-  /**
-   * Schedule type
-   */
+  /** Schedule type */
   scheduleType: AkriDiscoveryHandlerScheduleType;
 }
 
-/**
- * AkriDiscoveryHandlerScheduleType properties
- */
+/** AkriDiscoveryHandlerScheduleType properties */
 @added(Versions.`2025-07-01-preview`)
 union AkriDiscoveryHandlerScheduleType {
   string,
 
-  /**
-   * The schedule is a cron expression.
-   */
+  /** The schedule is a cron expression. */
   Cron,
 
-  /**
-   * The discovery handler should run once.
-   */
+  /** The discovery handler should run once. */
   RunOnce,
 
-  /**
-   * The discovery handler should run continuously.
-   */
+  /** The discovery handler should run continuously. */
   Continuous,
 }
 
-/**
- * AkriDiscoveryHandlerScheduleCron properties
- */
+/** AkriDiscoveryHandlerScheduleCron properties */
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerScheduleCron extends AkriDiscoveryHandlerSchedule {
-  /**
-   * Schedule type
-   */
+  /** Schedule type */
   scheduleType: Cron;
 
-  /**
-   * The cron expression for the schedule.
-   */
+  /** The cron expression for the schedule. */
   cron: string;
 }
 
-/**
- * AkriDiscoveryHandlerScheduleRunOnce properties
- */
+/** AkriDiscoveryHandlerScheduleRunOnce properties */
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerScheduleRunOnce extends AkriDiscoveryHandlerSchedule {
-  /**
-   * Schedule type
-   */
+  /** Schedule type */
   scheduleType: RunOnce;
 
-  /**
-   * The time to run the discovery handler.
-   */
+  /** The time to run the discovery handler. */
   runOnce: string;
 }
 
-/**
- * AkriDiscoveryHandlerScheduleContinuous properties
- */
+/** AkriDiscoveryHandlerScheduleContinuous properties */
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerScheduleContinuous
   extends AkriDiscoveryHandlerSchedule {
-  /**
-   * Schedule type
-   */
+  /** Schedule type */
   scheduleType: Continuous;
 
-  /**
-   * The time to run the discovery handler.
-   */
+  /** The time to run the discovery handler. */
   continuous: string;
 }

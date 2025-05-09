@@ -10,15 +10,11 @@ using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
-/**
- * AkriConnector resource
- */
+/** AkriConnector resource */
 @added(Versions.`2025-07-01-preview`)
 @parentResource(AkriConnectorTemplateResource)
 model AkriConnectorResource is ProxyResource<AkriConnectorProperties> {
-  /**
-   * Name of AkriConnector resource
-   */
+  /** Name of AkriConnector resource */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("akriConnectorName")
   @path
@@ -27,22 +23,16 @@ model AkriConnectorResource is ProxyResource<AkriConnectorProperties> {
   @segment("akriConnectors")
   name: string;
 
-  /**
-   * Edge location of the resource.
-   */
+  /** Edge location of the resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
-/**
- * AkriConnector properties
- */
+/** AkriConnector properties */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorProperties {
-  /**
-   * The status of the last operation.
-   */
+  /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
