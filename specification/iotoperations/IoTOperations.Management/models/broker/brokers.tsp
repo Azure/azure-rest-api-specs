@@ -114,6 +114,7 @@ model BrokerPersistenceEncryption {
   mode: OperationalMode;
 }
 
+@doc("Broker Persistence Policy Mode values.")
 @added(Versions.`2025-07-01-preview`)
 union BrokerPersistencePolicyMode {
   string,
