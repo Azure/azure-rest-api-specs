@@ -1,19 +1,31 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models-shared.tsp";
 import "./models-transliterate.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace TextTranslation;
+
+@doc("Request body parameters for the translate API.")
+@added(APIVersion.v2025_05_01_preview)
+model TranslateBodyParameters {
+  @doc("""
+    Details of the translate request
+    """)
+  @body
+  body: TranslateBodyDetails;
+}
 
 @doc("Request parameters for the translate API.")
 model TranslateParameters {
   ...CommonParameters;
 
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing Spec"
+  @removed(APIVersion.v2025_05_01_preview)
   @query(#{ explode: true })
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
@@ -23,6 +35,7 @@ model TranslateParameters {
     """)
   to: string[];
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     Specifies the language of the input text. Find which languages are available to translate from by 
@@ -34,6 +47,7 @@ model TranslateParameters {
     """)
   from?: string;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
@@ -41,6 +55,7 @@ model TranslateParameters {
     """)
   textType?: TextType = "Plain";
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     A string specifying the category (domain) of the translation. This parameter is used to get translations 
@@ -49,6 +64,7 @@ model TranslateParameters {
     """)
   category?: string = "general";
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     Specifies how profanities should be treated in translations.
@@ -56,6 +72,7 @@ model TranslateParameters {
     """)
   profanityAction?: ProfanityAction = ProfanityAction.NoAction;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     Specifies how profanities should be marked in translations.
@@ -63,6 +80,7 @@ model TranslateParameters {
     """)
   profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     Specifies whether to include alignment projection from source text to translated text.
@@ -70,6 +88,7 @@ model TranslateParameters {
     """)
   includeAlignment?: boolean = false;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     Specifies whether to include sentence boundaries for the input text and the translated text.
@@ -77,6 +96,7 @@ model TranslateParameters {
     """)
   includeSentenceLength?: boolean = false;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     Specifies a fallback language if the language of the input text can't be identified. 
@@ -85,18 +105,21 @@ model TranslateParameters {
     """)
   suggestedFrom?: string;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     Specifies the script of the input text.
     """)
   fromScript?: string;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     Specifies the script of the translated text.
     """)
   toScript?: string;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @query
   @doc("""
     Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
@@ -109,6 +132,133 @@ model TranslateParameters {
     specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
     """)
   allowFallback?: boolean = true;
+}
+
+@doc("Translate targets parameters")
+@added(APIVersion.v2025_05_01_preview)
+model TranslateTarget {
+  @doc("""
+    Specifies the language of the output text. The target language must be one of the supported languages included 
+    in the translation scope. It's possible to translate to multiple languages simultaneously by including 
+    multiple string values in the targetsLanguage array.
+    """)
+  language: string[];
+
+  @doc("""
+    Specifies the script of the translated text.
+    """)
+  script?: string;
+
+  @doc("""
+    Specifies how profanities should be treated in translations.
+    Possible values are: NoAction (default), Marked or Deleted.
+    """)
+  profanityAction?: ProfanityAction = ProfanityAction.NoAction;
+
+  @doc("""
+    Specifies how profanities should be marked in translations.
+    Possible values are: Asterisk (default) or Tag. 
+    """)
+  profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
+
+  @doc("""
+    Default is ‘general’, which uses NMT system.
+    ‘abc-inc-gpt-4o’, and ‘abc-inc-gpt-4o-mini’ are examples of deployment names which use GPT-4o uses or 
+    GPT-4o-mini model. ‘gpt-4o’ uses GPT-4o model. 
+    
+    ‘<custom model id>’ uses the custom NMT model tuned by customer.
+    ‘best’ system determines which is the best model to use for the request. This intelligence could be introduced
+    in future. Customer should have deployed it in their resource.
+    
+    """)
+  deploymentNameModel?: string = "general";
+
+  @doc("""
+    In the case where a custom system is being used, specifies that the service is allowed to fall back to a
+    general system when a custom system doesn't exist. 
+    In the case where a Large Language Model is being used, specifies that the service is allowed to fall
+    back to a Small Language Model if an error occurs.
+    Possible values are: true (default) or false.
+    
+    allowFallback=false specifies that the translation should only use systems trained for the category specified 
+    by the request. If a translation for language X to language Y requires chaining through a pivot language E, 
+    then all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. 
+    If no system is found with the specific category, the request will return a 400 status code. allowFallback=true 
+    specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
+    """)
+  allowFallback?: boolean = true;
+
+  @doc("""
+    Defines complexity of LLM prompts to provide high accuracy translation.
+    """)
+  grade?: string = "basic";
+
+  @doc("""
+    Desired tone of target translation.
+    """)
+  tone?: string;
+
+  @doc("""
+    Desired gender of target translation.
+    """)
+  gender?: string;
+
+  @doc("""
+    Reference dataset ID having sentence pair to generate adaptive customized translation.
+    """)
+  adaptiveDatasetId?: string;
+
+  @doc("""
+    Reference sentence pairs to generate adaptive results.
+    """)
+  @maxItems(5)
+  referenceTextPairs?: ReferenceSentencePair[];
+}
+
+@doc("Request body parameters for the translate API.")
+@added(APIVersion.v2025_05_01_preview)
+model TranslateBodyDetails {
+  @doc("""
+    Specifies the text string to be translated in the translate API.
+    """)
+  text: string;
+
+  @doc("""
+    Specifies the script of the input text.
+    """)
+  script?: string;
+
+  @doc("""
+    Specifies the language of the input text. Find which languages are available to translate by 
+    looking up supported languages using the translation scope. If the language parameter isn't 
+    specified, automatic language detection is applied to determine the source language.
+    
+    You must use the language parameter rather than autodetection when using the dynamic dictionary feature. 
+    Note: the dynamic dictionary feature is case-sensitive.
+    """)
+  language?: string;
+
+  @doc("""
+    Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
+    complete element. Possible values are: plain (default) or html.
+    """)
+  textType?: TextType = "Plain";
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("""
+    Translation target parameters.
+    """)
+  targets: TranslateTarget[];
+}
+
+@doc("Reference sentence pair.")
+@added(APIVersion.v2025_05_01_preview)
+model ReferenceSentencePair {
+  @doc("Source reference sentence.")
+  referenceTextPairsSource: string;
+
+  @doc("Target reference sentence.")
+  referenceTextPairsTarget: string;
 }
 
 @doc("Response for the translation API.")
@@ -221,17 +371,20 @@ model TranslationText {
     """)
   transliteration?: TransliteratedText;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @doc("""
     Alignment information.
     """)
   alignment?: TranslatedTextAlignment;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @doc("""
     Sentence boundaries in the input and output texts.
     """)
   sentLen?: SentenceBoundaries;
 }
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("Alignment information object.")
 model TranslatedTextAlignment {
   @doc("""
@@ -245,6 +398,7 @@ model TranslatedTextAlignment {
   proj: string;
 }
 
+@removed(APIVersion.v2025_05_01_preview)
 @doc("An object returning sentence boundaries in the input and output texts.")
 model SentenceBoundaries {
   @doc("""
