@@ -14,7 +14,7 @@ import {
   isSameSources,
 } from "../src/correlateResults.js";
 import { relativizePath } from "../src/util.js";
-import { isWindows } from "./test-util.js";
+import { Readme } from "@azure-tools/specs-shared/readme";
 
 describe("getViolations", () => {
   test("returns a result", () => {
@@ -32,14 +32,14 @@ describe("getViolations", () => {
         {
           before: {
             rootPath: "before",
-            readme: "specification/service1/resource-manager/readme.md",
+            readme: new Readme("specification/service1/resource-manager/readme.md"),
             tag: "tag1",
             stdout: existingErrorInBefore,
             stderr: "",
           },
           after: {
             rootPath: "after",
-            readme: "specification/service1/resource-manager/readme.md",
+            readme: new Readme("specification/service1/resource-manager/readme.md"),
             tag: "tag1",
             stdout: `${newError}\n${correlatedErrorInAfter}`,
             stderr: "",
@@ -73,14 +73,14 @@ describe("getViolations", () => {
         {
           before: {
             rootPath: "before",
-            readme: "specification/service1/resource-manager/readme.md",
+            readme: new Readme("specification/service1/resource-manager/readme.md"),
             tag: "tag1",
             stdout: beforeViolation,
             stderr: "",
           },
           after: {
             rootPath: "after",
-            readme: "specification/service1/resource-manager/readme.md",
+            readme: new Readme("specification/service1/resource-manager/readme.md"),
             tag: "tag1",
             stdout: afterViolation,
             stderr: "",
@@ -114,7 +114,7 @@ describe("getViolations", () => {
           before: null,
           after: {
             rootPath: "after",
-            readme: "specification/service1/resource-manager/readme.md",
+            readme: new Readme("specification/service1/resource-manager/readme.md"),
             tag: "tag1",
             stdout: afterViolation,
             stderr: "",
@@ -159,7 +159,7 @@ describe("getLintDiffViolations", async () => {
   function createRunResult(stdout: string, stderr: string = ""): AutorestRunResult {
     return {
       rootPath: "string",
-      readme: "string",
+      readme: new Readme("string"),
       tag: "string",
       error: null,
       stdout: stdout,
@@ -369,7 +369,7 @@ describe("getNewItems", () => {
 });
 
 describe("relativizePath", () => {
-  test.skipIf(isWindows()).sequential("relativizes path correctly", () => {
+  test("relativizes path correctly", () => {
     expect(relativizePath("/path/to/specification/service/file.json")).toEqual(
       "/specification/service/file.json",
     );
@@ -383,7 +383,7 @@ describe("relativizePath", () => {
     expect(relativizePath("")).toEqual("");
   });
 
-  test.skipIf(isWindows()).sequential("uses the last instance of from", () => {
+  test("uses the last instance of from", () => {
     expect(
       relativizePath("/path/to/specification/another/specification/service/file.json"),
     ).toEqual("/specification/service/file.json");

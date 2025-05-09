@@ -7,18 +7,19 @@ import {
   getChangedSwaggers,
   buildState,
 } from "../src/processChanges.js";
+import { ReadmeTags } from "../src/lintdiff-types.js";
 
-import { isWindows } from "./test-util.js";
+import { Readme } from "@azure-tools/specs-shared/readme";
 
 describe("getAffectedServices", () => {
-  test.skipIf(isWindows())("returns single service with multiple files", async () => {
+  test("returns single service with multiple files", async () => {
     const changedFiles = ["specification/service1/file1.json", "specification/service1/file2.json"];
     const affectedServices = await getAffectedServices(changedFiles);
 
     expect(affectedServices).toEqual(new Set<string>(["specification/service1"]));
   });
 
-  test.skipIf(isWindows())("returns multiple services", async () => {
+  test("returns multiple services", async () => {
     const changedFiles = [
       "specification/service1/file1.json",
       "specification/service1/file2.json",
@@ -33,16 +34,14 @@ describe("getAffectedServices", () => {
 });
 
 describe("getService", () => {
-  test.skipIf(isWindows())("returns service name from file path", async () => {
+  test("returns service name from file path", async () => {
     const filePath = "specification/service1/file1.json";
     const serviceName = await getService(filePath);
 
     expect(serviceName).toEqual("specification/service1");
   });
 
-  test.skipIf(isWindows())(
-    "returns service name from file path with leading separator",
-    async () => {
+  test("returns service name from file path with leading separator", async () => {
       const filePath = "/specification/service1/file1.json";
       const serviceName = await getService(filePath);
 
@@ -58,32 +57,63 @@ describe("getService", () => {
 
 describe("reconcileChangedFilesAndTags", () => {
   test("if a tag is deleted in after and exists in before, remove the tag from before", () => {
-    const before = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
-    const after = new Map<string, string[]>([["specification/1/readme.md", ["tag1"]]]);
+    const before = new Map<string, ReadmeTags>([
+      ["specification/1/readme.md", { 
+        readme: new Readme("specification/1/readme.md"), 
+        tags: new Set<string>(["tag1", "tag2"]) 
+      }]
+    ]);
+    const after = new Map<string, ReadmeTags>([
+      ["specification/1/readme.md", {
+        readme: new Readme("specification/1/readme.md"), 
+        tags: new Set<string>(["tag1"])
+      }],
+    ]);
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(
-      new Map<string, string[]>([["specification/1/readme.md", ["tag1"]]]),
+      new Map<string, string[]>([
+        [
+          "specification/1/readme.md", 
+          expect.objectContaining({
+            tags: new Set<string>(["tag1"])
+          })
+        ]
+      ]),
     );
     expect(afterFinal).toEqual(after);
   });
 
   test("does not change if there is no change", () => {
-    const before = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
-    const after = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
+    const before = new Map<string, ReadmeTags>([
+      ["specification/1/readme.md", { 
+        readme: new Readme("specification/1/readme.md"), 
+        tags: new Set<string>(["tag1", "tag2"]) 
+      }]
+    ]);
+    const after = new Map<string, ReadmeTags>([
+      ["specification/1/readme.md", { 
+        readme: new Readme("specification/1/readme.md"), 
+        tags: new Set<string>(["tag1", "tag2"]) 
+      }]
+    ]);
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(before);
     expect(afterFinal).toEqual(after);
   });
 
-  // TODO: Test this and ensure the behavior matches
   test("keeps a specification in before if it is deleted in after", () => {
-    const before = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
-    const after = new Map<string, string[]>();
+    const before = new Map<string, ReadmeTags>([
+      ["specification/1/readme.md", { 
+        readme: new Readme("specification/1/readme.md"), 
+        tags: new Set<string>(["tag1", "tag2"]) 
+      }]
+    ]);
+    const after = new Map<string, ReadmeTags>();
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
-    expect(beforeFinal).toEqual(beforeFinal);
+    expect(beforeFinal).toEqual(before);
     expect(afterFinal).toEqual(after);
   });
 });
@@ -145,7 +175,7 @@ describe("getChangedSwaggers", () => {
 });
 
 describe("buildState", () => {
-  test.skipIf(isWindows())("returns output for a swagger edited in place", async () => {
+  test("returns output for a swagger edited in place", async () => {
     const actual = await buildState(
       ["specification/edit-in-place/data-plane/swagger.json"],
       "test/fixtures/buildState/",
@@ -154,9 +184,12 @@ describe("buildState", () => {
     expect(actual).toMatchInlineSnapshot(`
       [
         Map {
-          "specification/edit-in-place/readme.md" => [
-            "package-2022-12-01",
-          ],
+          "specification/edit-in-place/readme.md" => {
+            "readme": Readme {},
+            "tags": Set {
+              "package-2022-12-01",
+            },
+          },
         },
         [
           "specification/edit-in-place/data-plane/swagger.json",
@@ -165,7 +198,7 @@ describe("buildState", () => {
     `);
   });
 
-  test.skipIf(isWindows())("returns output for an edited readme", async () => {
+  test("returns output for an edited readme", async () => {
     const actual = await buildState(
       ["specification/edit-in-place/readme.md"],
       "test/fixtures/buildState/",
@@ -174,7 +207,10 @@ describe("buildState", () => {
     expect(actual).toMatchInlineSnapshot(`
       [
         Map {
-          "specification/edit-in-place/readme.md" => [],
+          "specification/edit-in-place/readme.md" => {
+            "readme": Readme {},
+            "tags": Set {},
+          },
         },
         [],
       ]
