@@ -46,14 +46,10 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
     - Always use `Azure` as the repo owner in MCP tool calls.
     - Confirm with the user if they want to change the repo owner or target branch, and prompt for new values if needed.
 
-7. **Validation and SDK Generation**:
-    - Skip validation if a pull request exists and there are no uncommitted changes.
-    - Ensure all steps are followed before moving to SDK generation.
-
-8. **Exclusions**:
+7. **Exclusions**:
     - Exclude changes in `.github` and `.vscode` folders from API spec and SDK pull requests.
 
-9. **Working Branch Rule**:
+8. **Working Branch Rule**:
     - Ensure the TypeSpec project repository and the current working repository are not on the `main` branch:
         - Check the current branch name for the cloned GitHub repository:
             - If the current branch is `main`, prompt the user to create a new branch using 
@@ -66,7 +62,6 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
     - GitHub pull requests cannot be created from the `main` branch. Ensure all changes are made on a non-`main` branch.
 
 By following these rules, the SDK release process will remain clear, structured, and user-friendly.
-
 
 ## Steps to generate and release SDK from TypeSpec API specification
 
@@ -88,15 +83,12 @@ changes in `.github` and `.vscode` folders.
         - Prompt the user to commit the changes:
             - Run `git add <changed files>` to stage the changes.
             - Run `git commit -m "<commit message>"` to commit the changes.
-    - If the user does not confirm, prompt them to fix the changes and re-run validation.
+            - Push the changes to the GitHub remote, ensuring the branch name is not "main."
+                - Run `git push -u origin <branch name>` to push the changes.
+                - If the push fails due to authentication, prompt the user to run `gh auth login` and retry the push command.
+                - If the user does not confirm, prompt them to fix the changes and re-run validation.
 
-### Step 4: Push Changes to GitHub
-- Check for uncommitted changes in the repository, ignoring `.github` and `.vscode` folders.
-- Push the changes to the GitHub remote, ensuring the branch name is not "main."
-    - Run `git push -u origin <branch name>` to push the changes.
-    - If the push fails due to authentication, prompt the user to run `gh auth login` and retry the push command.
-
-### Step 5: Manage Pull Requests
+### Step 4: Manage Pull Requests
 - Check if a pull request exists for the current branch:
     - If a pull request exists, inform the user and display its details.
     - If no pull request exists:
@@ -110,7 +102,7 @@ changes in `.github` and `.vscode` folders.
 - Retrieve and display the pull request summary, including its status, checks, and comments. Highlight any action items.
     - Retrieve API review links and display their details. Inform the user to check APIView for generated SDK APIs.
 
-### Step 6: Prepare the Release Plan
+### Step 5: Prepare the Release Plan
 - Check if the API spec is ready to generate the SDK. Provide the TypeSpec project root path and pull request number.
 - Verify if a release plan exists for the API spec pull request:
     - If no release plan exists, create one. Prompt the user to provide the following details:
@@ -125,7 +117,7 @@ changes in `.github` and `.vscode` folders.
             - API version.
         - If the user lacks details, suggest using the release planner. More details are available [here](https://eng.ms/docs/products/azure-developer-experience/plan/release-plan-create).
 
-### Step 7: Generate SDKs
+### Step 6: Generate SDKs
 - Retrieve the release plan and check if SDK generation has already occurred or if an SDK pull request exists for a language:
     - If an SDK pull request exists, display its details.
     - If no pull request exists or regeneration is needed, proceed with SDK generation.
