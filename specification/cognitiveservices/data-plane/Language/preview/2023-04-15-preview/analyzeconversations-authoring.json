@@ -62,7 +62,7 @@
   "paths": {
     "/authoring/analyze-conversations/projects": {
       "get": {
-        "operationId": "ListProjects",
+        "operationId": "ConversationAuthoringListProjects",
         "description": "Lists the existing projects.",
         "parameters": [
           {
@@ -688,7 +688,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments": {
       "get": {
-        "operationId": "ListDeployments",
+        "operationId": "ConversationAuthoringListDeployments",
         "description": "Lists the deployments belonging to a project.",
         "parameters": [
           {
@@ -1304,7 +1304,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models": {
       "get": {
-        "operationId": "ListTrainedModels",
+        "operationId": "ConversationAuthoringListTrainedModels",
         "description": "Lists the trained models belonging to a project.",
         "parameters": [
           {
@@ -1811,7 +1811,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources": {
       "get": {
-        "operationId": "ListDeploymentResources",
+        "operationId": "ConversationAuthoringListDeploymentResources",
         "description": "Lists the deployments resources assigned to the project.",
         "parameters": [
           {
@@ -2085,7 +2085,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs": {
       "get": {
-        "operationId": "ListTrainingJobs",
+        "operationId": "ConversationAuthoringListTrainingJobs",
         "description": "Lists the non-expired training jobs created for a project.",
         "parameters": [
           {
@@ -2291,7 +2291,7 @@
     },
     "/authoring/analyze-conversations/projects/global/deployments/resources": {
       "get": {
-        "operationId": "ListAssignedResourceDeployments",
+        "operationId": "ConversationAuthoringListAssignedResourceDeployments",
         "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
         "parameters": [
           {
@@ -2339,7 +2339,7 @@
     },
     "/authoring/analyze-conversations/projects/global/languages": {
       "get": {
-        "operationId": "ListSupportedLanguages",
+        "operationId": "ConversationAuthoringListSupportedLanguages",
         "description": "Lists the supported languages for the given project type.",
         "parameters": [
           {
@@ -2390,7 +2390,7 @@
     },
     "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
       "get": {
-        "operationId": "ListSupportedPrebuiltEntities",
+        "operationId": "ConversationAuthoringListSupportedPrebuiltEntities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
         "parameters": [
           {
@@ -2444,7 +2444,7 @@
     },
     "/authoring/analyze-conversations/projects/global/training-config-versions": {
       "get": {
-        "operationId": "ListTrainingConfigVersions",
+        "operationId": "ConversationAuthoringListTrainingConfigVersions",
         "description": "Lists the support training config version for a given project type.",
         "parameters": [
           {
@@ -4667,7 +4667,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
