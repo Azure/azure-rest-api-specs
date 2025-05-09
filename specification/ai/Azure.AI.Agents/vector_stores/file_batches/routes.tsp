@@ -16,6 +16,7 @@ namespace Azure.AI.Agents {
    * `/vector_stores/{vectorStoreId}/file_batches`.
    */
   @route("/vector_stores/{vectorStoreId}/file_batches")
+  @added(Versions.v2025_05_01)
   interface VectorStoreFileBatches {
     /**
      * Create a vector store file batch.

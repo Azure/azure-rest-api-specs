@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure AI",
-    "version": "2025-05-15-preview",
+    "version": "2025-05-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -3041,9 +3041,6 @@
         "function",
         "code_interpreter",
         "file_search",
-        "bing_grounding",
-        "fabric_dataagent",
-        "sharepoint_grounding",
         "azure_ai_search",
         "bing_custom_search",
         "connected_agent"
@@ -3066,21 +3063,6 @@
             "name": "fileSearch",
             "value": "file_search",
             "description": "Tool type `file_search`"
-          },
-          {
-            "name": "bingGrounding",
-            "value": "bing_grounding",
-            "description": "Tool type `bing_grounding`"
-          },
-          {
-            "name": "microsoftFabric",
-            "value": "fabric_dataagent",
-            "description": "Tool type `fabric_dataagent`"
-          },
-          {
-            "name": "sharepoint",
-            "value": "sharepoint_grounding",
-            "description": "Tool type `sharepoint_grounding`"
           },
           {
             "name": "azureAISearch",
@@ -3456,26 +3438,6 @@
       "required": [
         "search_configurations"
       ]
-    },
-    "BingCustomSearchToolDefinition": {
-      "type": "object",
-      "description": "The input definition information for a Bing custom search tool as used to configure an agent.",
-      "properties": {
-        "bing_custom_search": {
-          "$ref": "#/definitions/BingCustomSearchConfigurationList",
-          "description": "The list of search configurations used by the bing custom search tool.",
-          "x-ms-client-name": "bingCustomSearch"
-        }
-      },
-      "required": [
-        "bing_custom_search"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "bing_custom_search"
     },
     "BingGroundingSearchConfiguration": {
       "type": "object",
@@ -5400,25 +5362,6 @@
         "url"
       ]
     },
-    "MicrosoftFabricToolDefinition": {
-      "type": "object",
-      "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
-      "properties": {
-        "fabric_dataagent": {
-          "$ref": "#/definitions/ToolConnectionList",
-          "description": "The list of connections used by the Microsoft Fabric tool."
-        }
-      },
-      "required": [
-        "fabric_dataagent"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "fabric_dataagent"
-    },
     "OpenApiAnonymousAuthDetails": {
       "type": "object",
       "description": "Security details for OpenApi anonymous authentication",
@@ -6002,29 +5945,6 @@
         }
       ],
       "x-ms-discriminator-value": "azure_ai_search"
-    },
-    "RunStepBingCustomSearchToolCall": {
-      "type": "object",
-      "description": "A record of a call to a bing custom search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with bing custom search.",
-      "properties": {
-        "bing_custom_search": {
-          "type": "object",
-          "description": "Reserved for future use.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-client-name": "bingCustomSearch"
-        }
-      },
-      "required": [
-        "bing_custom_search"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "bing_custom_search"
     },
     "RunStepBingGroundingToolCall": {
       "type": "object",
@@ -6673,29 +6593,6 @@
         "message_id"
       ]
     },
-    "RunStepMicrosoftFabricToolCall": {
-      "type": "object",
-      "description": "A record of a call to a Microsoft Fabric tool, issued by the model in evaluation of a defined tool, that represents\nexecuted Microsoft Fabric operations.",
-      "properties": {
-        "fabric_dataagent": {
-          "type": "object",
-          "description": "Reserved for future use.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-client-name": "microsoftFabric"
-        }
-      },
-      "required": [
-        "fabric_dataagent"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "fabric_dataagent"
-    },
     "RunStepOpenAPIToolCall": {
       "type": "object",
       "description": "A record of a call to an OpenAPI tool, issued by the model in evaluation of a defined tool, that represents\nexecuted OpenAPI operations.",
@@ -6718,29 +6615,6 @@
         }
       ],
       "x-ms-discriminator-value": "openapi"
-    },
-    "RunStepSharepointToolCall": {
-      "type": "object",
-      "description": "A record of a call to a SharePoint tool, issued by the model in evaluation of a defined tool, that represents\nexecuted SharePoint actions.",
-      "properties": {
-        "sharepoint_grounding": {
-          "type": "object",
-          "description": "Reserved for future use.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-client-name": "sharePoint"
-        }
-      },
-      "required": [
-        "sharepoint_grounding"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "sharepoint_grounding"
     },
     "RunStepStatus": {
       "type": "string",
@@ -6975,25 +6849,6 @@
           }
         ]
       }
-    },
-    "SharepointToolDefinition": {
-      "type": "object",
-      "description": "The input definition information for a sharepoint tool as used to configure an agent.",
-      "properties": {
-        "sharepoint_grounding": {
-          "$ref": "#/definitions/ToolConnectionList",
-          "description": "The list of connections used by the SharePoint tool."
-        }
-      },
-      "required": [
-        "sharepoint_grounding"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "sharepoint_grounding"
     },
     "SubmitToolOutputsAction": {
       "type": "object",

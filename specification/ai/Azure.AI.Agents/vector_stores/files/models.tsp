@@ -51,6 +51,7 @@ union VectorStoreFileErrorCode {
 }
 
 /** Details on the error that may have occurred while processing a file for this vector store */
+@added(Versions.v2025_05_01)
 model VectorStoreFileError {
   /** One of `server_error` or `rate_limit_exceeded`. */
   code: VectorStoreFileErrorCode;
@@ -60,6 +61,7 @@ model VectorStoreFileError {
 }
 
 /** Description of a file attached to a vector store. */
+@added(Versions.v2025_05_01)
 model VectorStoreFile {
   /** The identifier, which can be referenced in API endpoints. */
   id: string;
@@ -98,6 +100,7 @@ model VectorStoreFile {
 }
 
 /** Response object for deleting a vector store file relationship. */
+@added(Versions.v2025_05_01)
 model VectorStoreFileDeletionStatus {
   ...DeletionStatus;
 

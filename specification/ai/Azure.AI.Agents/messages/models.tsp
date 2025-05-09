@@ -32,12 +32,14 @@ union MessageBlockType {
 
 @doc("Defines a single content block when creating a message. The 'type' field determines whether it is text, an image file, or an external image URL, etc.")
 @discriminator("type")
+@added(Versions.v2025_05_01)
 model MessageInputContentBlock {
   @doc("Specifies which kind of content block this is (text, image_file, image_url, etc.).")
   type: MessageBlockType;
 }
 
 @doc("A text block in a new message, containing plain text content.")
+@added(Versions.v2025_05_01)
 model MessageInputTextBlock extends MessageInputContentBlock {
   @doc("Must be 'text' for a text block.")
   type: "text";
@@ -47,6 +49,7 @@ model MessageInputTextBlock extends MessageInputContentBlock {
 }
 
 @doc("An image-file block in a new message, referencing an internally uploaded image by file ID.")
+@added(Versions.v2025_05_01)
 model MessageInputImageFileBlock extends MessageInputContentBlock {
   @doc("Must be 'image_file' for an internally uploaded image block.")
   type: "image_file";
@@ -57,6 +60,7 @@ model MessageInputImageFileBlock extends MessageInputContentBlock {
 }
 
 @doc("An image-URL block in a new message, referencing an external image by URL.")
+@added(Versions.v2025_05_01)
 model MessageInputImageUrlBlock extends MessageInputContentBlock {
   @doc("Must be 'image_url' for an externally hosted image block.")
   type: "image_url";
@@ -82,6 +86,7 @@ union ImageDetailLevel {
 }
 
 @doc("Defines how an internally uploaded image file is referenced when creating an image-file block.")
+@added(Versions.v2025_05_01)
 model MessageImageFileParam {
   @doc("The ID of the previously uploaded image file.")
   @encodedName("application/json", "file_id")
@@ -92,6 +97,7 @@ model MessageImageFileParam {
 }
 
 @doc("Defines how an external image URL is referenced when creating an image-URL block.")
+@added(Versions.v2025_05_01)
 model MessageImageUrlParam {
   @doc("The publicly accessible URL of the external image.")
   url: string;
@@ -104,6 +110,7 @@ model MessageImageUrlParam {
  * A single message within an agent thread,
  * as provided during that thread's creation for its initial state.
  */
+@added(Versions.v2025_05_01)
 model ThreadMessageOptions {
   /**
    * The role of the entity that is creating the message. Allowed values include:
@@ -131,6 +138,7 @@ model ThreadMessageOptions {
 }
 
 @doc("A single, existing message within an agent thread.")
+@added(Versions.v2025_05_01)
 model ThreadMessage {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -191,6 +199,7 @@ model ThreadMessage {
 }
 
 /** This describes to which tools a file has been attached. */
+@added(Versions.v2025_05_01)
 model MessageAttachment {
   /** The ID of the file to attach to the message. */
   @encodedName("application/json", "file_id")
@@ -215,6 +224,7 @@ union MessageAttachmentToolDefinition {
 
 @discriminator("type")
 @doc("An abstract representation of a single item of thread message content.")
+@added(Versions.v2025_05_01)
 model MessageContent {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
@@ -222,6 +232,7 @@ model MessageContent {
 }
 
 @doc("A representation of a textual item of thread message content.")
+@added(Versions.v2025_05_01)
 model MessageTextContent extends MessageContent {
   @doc("The object type, which is always 'text'.")
   type: "text";
@@ -231,6 +242,7 @@ model MessageTextContent extends MessageContent {
 }
 
 @doc("A representation of image file content in a thread message.")
+@added(Versions.v2025_05_01)
 model MessageImageFileContent extends MessageContent {
   @doc("The object type, which is always 'image_file'.")
   type: "image_file";
@@ -243,6 +255,7 @@ model MessageImageFileContent extends MessageContent {
 // Text content details
 
 @doc("The text and associated annotations for a single item of agent thread message content.")
+@added(Versions.v2025_05_01)
 model MessageTextDetails {
   @doc("The text data.")
   value: string;
@@ -255,6 +268,7 @@ model MessageTextDetails {
 
 @discriminator("type")
 @doc("An abstract representation of an annotation to text thread message content.")
+@added(Versions.v2025_05_01)
 model MessageTextAnnotation {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
@@ -267,6 +281,7 @@ model MessageTextAnnotation {
 // URL citation annotation + details
 
 @doc("A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.")
+@added(Versions.v2025_05_01)
 model MessageTextUrlCitationAnnotation extends MessageTextAnnotation {
   @doc("The object type, which is always 'url_citation'.")
   type: "url_citation";
@@ -285,6 +300,7 @@ model MessageTextUrlCitationAnnotation extends MessageTextAnnotation {
 }
 
 @doc("A representation of a URL citation, as used in text thread message content.")
+@added(Versions.v2025_05_01)
 model MessageTextUrlCitationDetails {
   @doc("The URL associated with this citation.")
   url: string;
@@ -296,6 +312,7 @@ model MessageTextUrlCitationDetails {
 // File citation annotation + details
 
 @doc("A citation within the message that points to a specific quote from a specific File associated with the agent or the message. Generated when the agent uses the 'file_search' tool to search files.")
+@added(Versions.v2025_05_01)
 model MessageTextFileCitationAnnotation extends MessageTextAnnotation {
   @doc("The object type, which is always 'file_citation'.")
   type: "file_citation";
@@ -317,6 +334,7 @@ model MessageTextFileCitationAnnotation extends MessageTextAnnotation {
 }
 
 @doc("A representation of a file-based text citation, as used in a file-based annotation of text thread message content.")
+@added(Versions.v2025_05_01)
 model MessageTextFileCitationDetails {
   @encodedName("application/json", "file_id")
   @doc("The ID of the file associated with this citation.")
@@ -329,6 +347,7 @@ model MessageTextFileCitationDetails {
 // File path annotation + details
 
 @doc("A citation within the message that points to a file located at a specific path.")
+@added(Versions.v2025_05_01)
 model MessageTextFilePathAnnotation extends MessageTextAnnotation {
   @doc("The object type, which is always 'file_path'.")
   type: "file_path";
@@ -347,6 +366,7 @@ model MessageTextFilePathAnnotation extends MessageTextAnnotation {
 }
 
 @doc("An encapsulation of an image file ID, as used by message image content.")
+@added(Versions.v2025_05_01)
 model MessageTextFilePathDetails {
   @doc("The ID of the specific file that the citation is from.")
   @encodedName("application/json", "file_id")
@@ -356,6 +376,7 @@ model MessageTextFilePathDetails {
 // Image file content details
 
 @doc("An image reference, as represented in thread message content.")
+@added(Versions.v2025_05_01)
 model MessageImageFileDetails {
   @encodedName("application/json", "file_id")
   @doc("The ID for the file associated with this image.")
@@ -377,6 +398,7 @@ union MessageStatus {
 }
 
 /** Information providing additional detail about a message entering an incomplete status. */
+@added(Versions.v2025_05_01)
 model MessageIncompleteDetails {
   /** The provided reason describing why the message was marked as incomplete. */
   reason: MessageIncompleteDetailsReason;
@@ -407,6 +429,7 @@ union MessageIncompleteDetailsReason {
 //
 
 /** Represents a message delta i.e. any changed fields on a message during streaming. */
+@added(Versions.v2025_05_01)
 model MessageDeltaChunk {
   /** The identifier of the message, which can be referenced in API endpoints. */
   id: string;
@@ -419,6 +442,7 @@ model MessageDeltaChunk {
 }
 
 /** Represents the typed 'delta' payload within a streaming message delta chunk. */
+@added(Versions.v2025_05_01)
 model MessageDelta {
   /** The entity that produced the message. */
   role: MessageRole;
@@ -429,6 +453,7 @@ model MessageDelta {
 
 /** The abstract base representation of a partial streamed message content payload. */
 @discriminator("type")
+@added(Versions.v2025_05_01)
 model MessageDeltaContent {
   /** The index of the content part of the message. */
   index: int32;
@@ -439,6 +464,7 @@ model MessageDeltaContent {
 }
 
 /** Represents a streamed image file content part within a streaming message delta chunk. */
+@added(Versions.v2025_05_01)
 model MessageDeltaImageFileContent extends MessageDeltaContent {
   /** The type of content for this content part, which is always "image_file." */
   type: "image_file";
@@ -449,6 +475,7 @@ model MessageDeltaImageFileContent extends MessageDeltaContent {
 }
 
 /** Represents the 'image_file' payload within streaming image file content. */
+@added(Versions.v2025_05_01)
 model MessageDeltaImageFileContentObject {
   /** The file ID of the image in the message content. */
   @encodedName("application/json", "file_id")
@@ -456,6 +483,7 @@ model MessageDeltaImageFileContentObject {
 }
 
 /** Represents a streamed text content part within a streaming message delta chunk. */
+@added(Versions.v2025_05_01)
 model MessageDeltaTextContent extends MessageDeltaContent {
   /** The type of content for this content part, which is always "text." */
   type: "text";
@@ -465,6 +493,7 @@ model MessageDeltaTextContent extends MessageDeltaContent {
 }
 
 /** Represents the data of a streamed text content part within a streaming message delta chunk. */
+@added(Versions.v2025_05_01)
 model MessageDeltaTextContentObject {
   /** The data that makes up the text. */
   value?: string;
@@ -475,6 +504,7 @@ model MessageDeltaTextContentObject {
 
 /** The abstract base representation of a streamed text content part's text annotation. */
 @discriminator("type")
+@added(Versions.v2025_05_01)
 model MessageDeltaTextAnnotation {
   /** The index of the annotation within a text content part. */
   index: int32;
@@ -485,6 +515,7 @@ model MessageDeltaTextAnnotation {
 }
 
 @doc("A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.")
+@added(Versions.v2025_05_01)
 model MessageDeltaTextUrlCitationAnnotation extends MessageDeltaTextAnnotation {
   @doc("The object type, which is always 'url_citation'.")
   type: "url_citation";
@@ -503,6 +534,7 @@ model MessageDeltaTextUrlCitationAnnotation extends MessageDeltaTextAnnotation {
 }
 
 @doc("A representation of a URL citation, as used in text thread message content.")
+@added(Versions.v2025_05_01)
 model MessageDeltaTextUrlCitationDetails {
   @doc("The URL associated with this citation.")
   url: string;
@@ -512,6 +544,7 @@ model MessageDeltaTextUrlCitationDetails {
 }
 
 /** Represents a streamed file citation applied to a streaming text content part. */
+@added(Versions.v2025_05_01)
 model MessageDeltaTextFileCitationAnnotation
   extends MessageDeltaTextAnnotation {
   /** The type of the text content annotation, which is always "file_citation." */
@@ -534,6 +567,7 @@ model MessageDeltaTextFileCitationAnnotation
 }
 
 /** Represents the data of a streamed file citation as applied to a streaming text content part. */
+@added(Versions.v2025_05_01)
 model MessageDeltaTextFileCitationAnnotationObject {
   /** The ID of the specific file the citation is from. */
   @encodedName("application/json", "file_id")
@@ -544,6 +578,7 @@ model MessageDeltaTextFileCitationAnnotationObject {
 }
 
 /** Represents a streamed file path annotation applied to a streaming text content part. */
+@added(Versions.v2025_05_01)
 model MessageDeltaTextFilePathAnnotation extends MessageDeltaTextAnnotation {
   /** The type of the text content annotation, which is always "file_path." */
   type: "file_path";
@@ -565,6 +600,7 @@ model MessageDeltaTextFilePathAnnotation extends MessageDeltaTextAnnotation {
 }
 
 /** Represents the data of a streamed file path annotation as applied to a streaming text content part. */
+@added(Versions.v2025_05_01)
 model MessageDeltaTextFilePathAnnotationObject {
   /** The file ID for the annotation. */
   @encodedName("application/json", "file_id")

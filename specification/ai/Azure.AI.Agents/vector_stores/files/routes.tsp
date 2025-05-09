@@ -16,6 +16,7 @@ namespace Azure.AI.Agents {
    * `/vector_stores/{vectorStoreId}/files`.
    */
   @route("/vector_stores/{vectorStoreId}/files")
+  @added(Versions.v2025_05_01)
   interface VectorStoreFiles {
     /**
      * Returns a list of vector store files.

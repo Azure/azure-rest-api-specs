@@ -17,6 +17,7 @@ namespace Azure.AI.Agents {
    * A collection of message operations under `/threads/{threadId}/messages`.
    */
   @route("/threads/{threadId}/messages")
+  @added(Versions.v2025_05_01)
   interface Messages {
     /**
      * Creates a new message on a specified thread.

@@ -10,6 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 @doc("Data representing a single evaluation run of an agent thread.")
+@added(Versions.v2025_05_01)
 model ThreadRun {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -150,12 +151,14 @@ model ThreadRun {
 /**
  * Details on why the run is incomplete. Will be `null` if the run is not incomplete.
  */
+@added(Versions.v2025_05_01)
 model IncompleteRunDetails {
   @doc("The reason why the run is incomplete. This indicates which specific token limit was reached during the run.")
   reason: IncompleteDetailsReason;
 }
 
 /** The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run. */
+@added(Versions.v2025_05_01)
 union IncompleteDetailsReason {
   string,
 
@@ -169,6 +172,7 @@ union IncompleteDetailsReason {
 /**
  * Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
  */
+@added(Versions.v2025_05_01)
 model RunCompletionUsage {
   @doc("Number of completion tokens used over the course of the run.")
   @encodedName("application/json", "completion_tokens")
@@ -184,6 +188,7 @@ model RunCompletionUsage {
 }
 
 @doc("The details used when creating a new run of an agent thread.")
+@added(Versions.v2025_05_01)
 model CreateRunOptions {
   @doc("The ID of the agent that should run the thread.")
   @encodedName("application/json", "assistant_id")
@@ -285,6 +290,7 @@ model CreateRunOptions {
 }
 
 @doc("The details of an error as encountered by an agent thread run.")
+@added(Versions.v2025_05_01)
 model RunError {
   @doc("The status for the error.")
   code: string;
@@ -324,6 +330,7 @@ union RunStatus {
 
 @discriminator("type")
 @doc("An abstract representation of a required action for an agent thread run to continue.")
+@added(Versions.v2025_05_01)
 model RequiredAction {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
@@ -331,6 +338,7 @@ model RequiredAction {
 }
 
 @doc("The details for required tool calls that must be submitted for an agent thread run to continue.")
+@added(Versions.v2025_05_01)
 model SubmitToolOutputsAction extends RequiredAction {
   @doc("The object type, which is always 'submit_tool_outputs'.")
   type: "submit_tool_outputs";
@@ -341,6 +349,7 @@ model SubmitToolOutputsAction extends RequiredAction {
 }
 
 @doc("The details describing tools that should be called to submit tool outputs.")
+@added(Versions.v2025_05_01)
 model SubmitToolOutputsDetails {
   @encodedName("application/json", "tool_calls")
   @doc("The list of tool calls that must be resolved for the agent thread run to continue.")
@@ -348,6 +357,7 @@ model SubmitToolOutputsDetails {
 }
 
 @doc("The details used when creating and immediately running a new agent thread.")
+@added(Versions.v2025_05_01)
 model CreateAndRunThreadOptions {
   @encodedName("application/json", "assistant_id")
   @doc("The ID of the agent for which the thread should be created.")
@@ -451,6 +461,7 @@ model CreateAndRunThreadOptions {
  * Controls for how a thread will be truncated prior to the run. Use this to control the initial
  * context window of the run.
  */
+@added(Versions.v2025_05_01)
 model TruncationObject {
   /**
    * The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will

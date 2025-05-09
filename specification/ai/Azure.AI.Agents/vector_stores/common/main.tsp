@@ -7,6 +7,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Agents;
 
 /** Options to configure a vector store static chunking strategy. */
+@added(Versions.v2025_05_01)
 model VectorStoreStaticChunkingStrategyOptions {
   /** The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096. */
   @encodedName("application/json", "max_chunk_size_tokens")
@@ -31,6 +32,7 @@ union VectorStoreChunkingStrategyRequestType {
 
 /** An abstract representation of a vector store chunking strategy configuration. */
 @discriminator("type")
+@added(Versions.v2025_05_01)
 model VectorStoreChunkingStrategyRequest {
   /** The object type. */
   type: VectorStoreChunkingStrategyRequestType;
@@ -39,6 +41,7 @@ model VectorStoreChunkingStrategyRequest {
 /**
  * The default strategy. This strategy currently uses a max_chunk_size_tokens of 800 and chunk_overlap_tokens of 400.
  */
+@added(Versions.v2025_05_01)
 model VectorStoreAutoChunkingStrategyRequest
   extends VectorStoreChunkingStrategyRequest {
   /** The object type, which is always 'auto'. */
@@ -46,6 +49,7 @@ model VectorStoreAutoChunkingStrategyRequest
 }
 
 /** A statically configured chunking strategy. */
+@added(Versions.v2025_05_01)
 model VectorStoreStaticChunkingStrategyRequest
   extends VectorStoreChunkingStrategyRequest {
   /** The object type, which is always 'static'. */
@@ -64,6 +68,7 @@ union VectorStoreChunkingStrategyResponseType {
 
 /** An abstract representation of a vector store chunking strategy configuration. */
 @discriminator("type")
+@added(Versions.v2025_05_01)
 model VectorStoreChunkingStrategyResponse {
   /** The object type. */
   type: VectorStoreChunkingStrategyResponseType;
@@ -72,6 +77,7 @@ model VectorStoreChunkingStrategyResponse {
 /**
  * This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the chunking_strategy concept was introduced in the API.
  */
+@added(Versions.v2025_05_01)
 model VectorStoreAutoChunkingStrategyResponse
   extends VectorStoreChunkingStrategyResponse {
   /** The object type, which is always 'other'. */
@@ -79,6 +85,7 @@ model VectorStoreAutoChunkingStrategyResponse
 }
 
 /** A statically configured chunking strategy. */
+@added(Versions.v2025_05_01)
 model VectorStoreStaticChunkingStrategyResponse
   extends VectorStoreChunkingStrategyResponse {
   /** The object type, which is always 'static'. */
@@ -109,6 +116,7 @@ union VectorStoreDataSourceAssetType {
  * The structure, containing Azure asset URI path and the asset type of the file used as a data source
  * for the enterprise file search.
  */
+@added(Versions.v2025_05_01)
 model VectorStoreDataSource {
   /** Asset URI. */
   @encodedName("application/json", "uri")
@@ -123,6 +131,7 @@ model VectorStoreDataSource {
  * Vector storage configuration is the list of data sources, used when multiple
  * files can be used for the enterprise file search.
  */
+@added(Versions.v2025_05_01)
 model VectorStoreConfiguration {
   /** Data sources */
   @encodedName("application/json", "data_sources")
@@ -132,6 +141,7 @@ model VectorStoreConfiguration {
 /**
  * The structure, containing the list of vector storage configurations i.e. the list of azure asset IDs.
  */
+@added(Versions.v2025_05_01)
 model VectorStoreConfigurations {
   /** Name */
   @encodedName("application/json", "name")
