@@ -50,6 +50,22 @@ suppressions:
     reason: Dictionary is used only in the AssessmentOptions proxy resource, which is a singleton and immutable across the assessment Project.
 ```
 
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - stable/2024-01-15/migrate.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
+  - code: ProvisioningStateMustBeReadOnly
+    reason: The current swagger version only modifies the resources which do not have Provisioning states as readOnly and not introducing any new Resources, These are incorrectly flagged for previous versions.
+  - code: UnSupportedPatchProperties
+    reason: There is no patch operation that is introduced in this swagger version where it is not readOnly. This is incorrectly flagged for previous versions. 
+```
+
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
