@@ -26,6 +26,6 @@ interface IotDpsResourceOperationGroup {
     Request = OperationInputs,
     Response = NameAvailabilityInfo,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Error = ErrorDetails
   >;
 }

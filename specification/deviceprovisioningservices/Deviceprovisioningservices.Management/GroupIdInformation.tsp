@@ -13,6 +13,7 @@ namespace Microsoft.Devices;
 /**
  * The group information for creating a private endpoint on a provisioning service
  */
+@parentResource(ProvisioningServiceDescription)
 model GroupIdInformation
   is Azure.ResourceManager.ProxyResource<GroupIdInformationProperties, false> {
   ...ResourceNameParameter<
@@ -30,7 +31,10 @@ interface GroupIdInformations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IotDpsResource_GetPrivateLinkResources")
-  getPrivateLinkResources is ArmResourceRead<GroupIdInformation>;
+  getPrivateLinkResources is ArmResourceRead<
+    GroupIdInformation,
+    Error = ErrorDetails
+  >;
 
   /**
    * List private link resources for the given provisioning service
@@ -39,7 +43,8 @@ interface GroupIdInformations {
   @operationId("IotDpsResource_ListPrivateLinkResources")
   listPrivateLinkResources is ArmResourceListByParent<
     GroupIdInformation,
-    Response = ArmResponse<PrivateLinkResources>
+    Response = ArmResponse<PrivateLinkResources>,
+    Error = ErrorDetails
   >;
 }
 

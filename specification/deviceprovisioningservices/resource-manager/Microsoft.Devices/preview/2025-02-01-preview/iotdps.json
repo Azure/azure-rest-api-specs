@@ -65,20 +65,23 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -105,7 +108,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "arguments",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -124,7 +127,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -160,7 +163,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -171,321 +174,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/privateEndpointConnections": {
-      "get": {
-        "operationId": "IotDpsResource_ListPrivateEndpointConnections",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "List private endpoint connection properties",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PrivateEndpointConnection"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnections_List": {
-            "$ref": "./examples/DPSListPrivateEndpointConnections.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "get": {
-        "operationId": "IotDpsResource_GetPrivateEndpointConnection",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Get private endpoint connection properties",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnection_Get": {
-            "$ref": "./examples/DPSGetPrivateEndpointConnection.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "IotDpsResource_CreateOrUpdatePrivateEndpointConnection",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Create or update the status of a private endpoint connection with the specified name",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "privateEndpointConnection",
-            "in": "body",
-            "description": "The private endpoint connection with updated properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnection_CreateOrUpdate": {
-            "$ref": "./examples/DPSCreateOrUpdatePrivateEndpointConnection.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "IotDpsResource_DeletePrivateEndpointConnection",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Delete private endpoint connection with the specified name",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnection_Delete": {
-            "$ref": "./examples/DPSDeletePrivateEndpointConnection.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/privateLinkResources": {
-      "get": {
-        "operationId": "IotDpsResource_ListPrivateLinkResources",
-        "tags": [
-          "GroupIdInformations"
-        ],
-        "description": "List private link resources for the given provisioning service",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResources"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateLinkResources_List": {
-            "$ref": "./examples/DPSListPrivateLinkResources.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/privateLinkResources/{groupId}": {
-      "get": {
-        "operationId": "IotDpsResource_GetPrivateLinkResources",
-        "tags": [
-          "GroupIdInformations"
-        ],
-        "description": "Get the specified private link resource for the given provisioning service",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "groupId",
-            "in": "path",
-            "description": "The name of the private link resource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GroupIdInformation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateLinkResources_List": {
-            "$ref": "./examples/DPSGetPrivateLinkResources.json"
-          }
         }
       }
     },
@@ -517,7 +205,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -566,7 +254,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -636,7 +324,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -688,9 +376,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceDescription"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -704,7 +398,11 @@
           "DPSPatch": {
             "$ref": "./examples/DPSPatch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "IotDpsResource_Delete",
@@ -751,10 +449,13 @@
           "204": {
             "description": "Resource does not exist."
           },
+          "404": {
+            "description": "The Azure resource is not found"
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -767,120 +468,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/{operationId}/{operationId}": {
-      "get": {
-        "operationId": "IotDpsResource_GetOperationResult",
-        "tags": [
-          "ProvisioningServiceDescriptions"
-        ],
-        "description": "Gets the status of a long running operation, such as create, update or delete a provisioning service.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "description": "Name of the provisioning service to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Operation id corresponding to long running operation. Use this to poll for the status.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "asyncinfo",
-            "in": "query",
-            "description": "Async header used to poll on the status of the operation, obtained while creating the long running operation.",
-            "required": true,
-            "type": "string",
-            "default": "true"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AsyncOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DPSGetOperationResult": {
-            "$ref": "./examples/DPSGetOperationResult.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/{keyName}/listkeys": {
-      "post": {
-        "operationId": "IotDpsResource_ListKeysForKeyName",
-        "tags": [
-          "ProvisioningServiceDescriptions"
-        ],
-        "description": "List primary and secondary keys for a specific key name",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "description": "Name of the provisioning service to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "Logical key name to get key-values for.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessSignatureAuthorizationRuleAccessRightsDescription"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DPSGetKey": {
-            "$ref": "./examples/DPSGetKey.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates": {
@@ -918,7 +505,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -958,15 +545,15 @@
             "in": "path",
             "description": "Name of the certificate to retrieve.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
             "description": "ETag of the certificate.",
             "required": false,
-            "type": "string",
-            "x-ms-client-name": "If-Match"
+            "type": "string"
           }
         ],
         "responses": {
@@ -979,7 +566,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -1017,15 +604,15 @@
             "in": "path",
             "description": "Name of the certificate to retrieve.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
             "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate.",
             "required": false,
-            "type": "string",
-            "x-ms-client-name": "If-Match"
+            "type": "string"
           },
           {
             "name": "certificateDescription",
@@ -1047,7 +634,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -1085,15 +672,15 @@
             "in": "path",
             "description": "Name of the certificate to retrieve.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
             "description": "ETag of the certificate",
             "required": true,
-            "type": "string",
-            "x-ms-client-name": "If-Match"
+            "type": "string"
           },
           {
             "name": "certificate.name",
@@ -1183,7 +770,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -1223,15 +810,15 @@
             "in": "path",
             "description": "Name of the certificate to retrieve.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
             "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate.",
             "required": true,
-            "type": "string",
-            "x-ms-client-name": "If-Match"
+            "type": "string"
           },
           {
             "name": "certificate.name",
@@ -1321,7 +908,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -1361,15 +948,15 @@
             "in": "path",
             "description": "Name of the certificate to retrieve.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
             "description": "ETag of the certificate.",
             "required": true,
-            "type": "string",
-            "x-ms-client-name": "If-Match"
+            "type": "string"
           },
           {
             "name": "certificate.name",
@@ -1468,13 +1055,66 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
         "x-ms-examples": {
           "DPSVerifyCertificate": {
             "$ref": "./examples/DPSVerifyCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/keys/{keyName}/listkeys": {
+      "post": {
+        "operationId": "IotDpsResource_ListKeysForKeyName",
+        "tags": [
+          "ProvisioningServiceDescriptions"
+        ],
+        "description": "List primary and secondary keys for a specific key name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "Logical key name to get key-values for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessSignatureAuthorizationRuleAccessRightsDescription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSGetKey": {
+            "$ref": "./examples/DPSGetKey.json"
           }
         }
       }
@@ -1514,7 +1154,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -1525,6 +1165,421 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/operationresults/{operationId}/getOperationResult": {
+      "get": {
+        "operationId": "IotDpsResource_GetOperationResult",
+        "tags": [
+          "ProvisioningServiceDescriptions"
+        ],
+        "description": "Gets the status of a long running operation, such as create, update or delete a provisioning service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation id corresponding to long running operation. Use this to poll for the status.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "asyncinfo",
+            "in": "query",
+            "description": "Async header used to poll on the status of the operation, obtained while creating the long running operation.",
+            "required": true,
+            "type": "string",
+            "default": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSGetOperationResult": {
+            "$ref": "./examples/DPSGetOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "IotDpsResource_ListPrivateEndpointConnections",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List private endpoint connection properties",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/DPSListPrivateEndpointConnections.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "IotDpsResource_GetPrivateEndpointConnection",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get private endpoint connection properties",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_Get": {
+            "$ref": "./examples/DPSGetPrivateEndpointConnection.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IotDpsResource_CreateOrUpdatePrivateEndpointConnection",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Create or update the status of a private endpoint connection with the specified name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The private endpoint connection with updated properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_CreateOrUpdate": {
+            "$ref": "./examples/DPSCreateOrUpdatePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "IotDpsResource_DeletePrivateEndpointConnection",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete private endpoint connection with the specified name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_Delete": {
+            "$ref": "./examples/DPSDeletePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/privateLinkResources": {
+      "get": {
+        "operationId": "IotDpsResource_ListPrivateLinkResources",
+        "tags": [
+          "GroupIdInformations"
+        ],
+        "description": "List private link resources for the given provisioning service",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResources"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/DPSListPrivateLinkResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/privateLinkResources/{groupId}": {
+      "get": {
+        "operationId": "IotDpsResource_GetPrivateLinkResources",
+        "tags": [
+          "GroupIdInformations"
+        ],
+        "description": "Get the specified private link resource for the given provisioning service",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "The name of the private link resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupIdInformation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/DPSGetPrivateLinkResources.json"
+          }
         }
       }
     },
@@ -1563,7 +1618,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -1686,7 +1741,7 @@
         },
         "expiry": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "The certificate's expiration date and time.",
           "readOnly": true
         },
@@ -1706,13 +1761,13 @@
         },
         "created": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "The certificate's creation date and time.",
           "readOnly": true
         },
         "updated": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "The certificate's last update date and time.",
           "readOnly": true
         }
@@ -1724,8 +1779,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CertificateProperties",
-          "description": "properties of a certificate",
-          "x-ms-client-flatten": true
+          "description": "properties of a certificate"
         },
         "etag": {
           "type": "string",
@@ -1739,6 +1793,33 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "httpStatusCode": {
+          "type": "string",
+          "description": "The HTTP status code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "string",
+          "description": "The error details.",
+          "readOnly": true
+        }
+      }
     },
     "ErrorMessage": {
       "type": "object",
@@ -1764,8 +1845,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GroupIdInformationProperties",
-          "description": "The properties for a group information object",
-          "x-ms-client-flatten": true
+          "description": "The properties for a group information object"
         }
       },
       "required": [
@@ -2112,6 +2192,38 @@
         ]
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "Represents an operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation.",
+          "readOnly": true
+        },
+        "display": {
+          "type": "object",
+          "description": "The display information for the operation.",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft Devices.",
+              "readOnly": true
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource Type: ProvisioningServices.",
+              "readOnly": true
+            },
+            "operation": {
+              "type": "string",
+              "description": "Name of the operation.",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
     "OperationInputs": {
       "type": "object",
       "description": "Input values for operation results call.",
@@ -2123,6 +2235,27 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "OperationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "[Placeholder] Discription for nextLink property."
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PrivateEndpoint": {
@@ -2142,8 +2275,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The properties of a private endpoint connection",
-          "x-ms-client-flatten": true
+          "description": "The properties of a private endpoint connection"
         }
       },
       "required": [
@@ -2171,6 +2303,13 @@
       "required": [
         "privateLinkServiceConnectionState"
       ]
+    },
+    "PrivateEndpointConnectionsList": {
+      "type": "array",
+      "description": "Represents a list of private endpoint connections.",
+      "items": {
+        "$ref": "#/definitions/PrivateEndpointConnection"
+      }
     },
     "PrivateLinkResources": {
       "type": "object",
@@ -2245,8 +2384,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/IotDpsPropertiesDescription",
-          "description": "Service specific properties for a provisioning service",
-          "x-ms-client-flatten": true
+          "description": "Service specific properties for a provisioning service"
         },
         "etag": {
           "type": "string",

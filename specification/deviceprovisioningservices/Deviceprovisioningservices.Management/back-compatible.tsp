@@ -20,3 +20,7 @@ using Microsoft.Devices;
 @@clientName(PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection::parameters.resource,
   "privateEndpointConnection"
 );
+
+@@clientName(IotDpsResourceOperationGroup.checkProvisioningServiceNameAvailability::parameters.body,
+  "arguments"
+);

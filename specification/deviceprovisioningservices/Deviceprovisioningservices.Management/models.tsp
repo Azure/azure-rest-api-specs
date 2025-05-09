@@ -7,8 +7,66 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.Devices;
+
+/**
+ * Represents a list of private endpoint connections.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+model PrivateEndpointConnectionsList is PrivateEndpointConnection[];
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+@pagedResult
+model OperationListResult {
+  /**
+   * [Placeholder] Discription for value property
+   */
+  @items
+  @visibility(Lifecycle.Read)
+  value: Operation[];
+
+  /**
+   * [Placeholder] Discription for nextLink property.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Represents an operation.
+ */
+model Operation {
+  /**
+   * The name of the operation.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The display information for the operation.
+   */
+  display?: {
+    /**
+     * Service provider: Microsoft Devices.
+     */
+    @visibility(Lifecycle.Read)
+    provider?: string;
+
+    /**
+     * Resource Type: ProvisioningServices.
+     */
+    @visibility(Lifecycle.Read)
+    resource?: string;
+
+    /**
+     * Name of the operation.
+     */
+    @visibility(Lifecycle.Read)
+    operation?: string;
+  };
+}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union CertificatePurpose {
@@ -219,9 +277,10 @@ model CertificateProperties {
   /**
    * The certificate's expiration date and time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format" ""
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expiry?: utcDateTime;
+  @format("date-time-rfc1123")
+  expiry?: string;
 
   /**
    * The certificate's thumbprint.
@@ -242,16 +301,18 @@ model CertificateProperties {
   /**
    * The certificate's creation date and time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format" ""
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  created?: utcDateTime;
+  @format("date-time-rfc1123")
+  created?: string;
 
   /**
    * The certificate's last update date and time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format" ""
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  updated?: utcDateTime;
+  @format("date-time-rfc1123")
+  updated?: string;
 }
 
 /**
@@ -271,6 +332,7 @@ model IotDpsPropertiesDescription {
   /**
    * The IP filter rules.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   ipFilterRules?: IpFilterRule[];
 
   /**
@@ -315,6 +377,7 @@ model IotDpsPropertiesDescription {
   /**
    * List of authorization keys for a provisioning service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   authorizationPolicies?: SharedAccessSignatureAuthorizationRuleAccessRightsDescription[];
 
   /**
@@ -572,6 +635,7 @@ model Resource {
 /**
  * A container holding only the Tags for a resource, allowing the user to update the tags on a Provisioning Service instance.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
 model TagsResource {
   /**
    * Resource tags

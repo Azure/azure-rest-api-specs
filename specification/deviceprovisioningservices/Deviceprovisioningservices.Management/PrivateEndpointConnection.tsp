@@ -13,6 +13,7 @@ namespace Microsoft.Devices;
 /**
  * The private endpoint connection of a provisioning service
  */
+@parentResource(ProvisioningServiceDescription)
 model PrivateEndpointConnection
   is Azure.ResourceManager.ProxyResource<
     PrivateEndpointConnectionProperties,
@@ -33,7 +34,10 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IotDpsResource_GetPrivateEndpointConnection")
-  getPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection>;
+  getPrivateEndpointConnection is ArmResourceRead<
+    PrivateEndpointConnection,
+    Error = ErrorDetails
+  >;
 
   /**
    * Create or update the status of a private endpoint connection with the specified name
@@ -42,12 +46,15 @@ interface PrivateEndpointConnections {
   @operationId("IotDpsResource_CreateOrUpdatePrivateEndpointConnection")
   createOrUpdatePrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ErrorDetails
   >;
 
   /**
    * Delete private endpoint connection with the specified name
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("IotDpsResource_DeletePrivateEndpointConnection")
@@ -56,7 +63,8 @@ interface PrivateEndpointConnections {
     Response = ArmResponse<PrivateEndpointConnection> | (ArmDeleteAcceptedLroResponse & {
       @bodyRoot
       _: PrivateEndpointConnection;
-    }) | ArmDeletedNoContentResponse
+    }) | ArmDeletedNoContentResponse,
+    Error = ErrorDetails
   >;
 
   /**
@@ -66,7 +74,8 @@ interface PrivateEndpointConnections {
   @operationId("IotDpsResource_ListPrivateEndpointConnections")
   listPrivateEndpointConnections is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnection[]>
+    Response = ArmResponse<PrivateEndpointConnectionsList>,
+    Error = ErrorDetails
   >;
 }
 

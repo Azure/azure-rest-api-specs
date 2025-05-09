@@ -44,7 +44,7 @@ interface ProvisioningServiceDescriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IotDpsResource_Get")
-  get is ArmResourceRead<ProvisioningServiceDescription>;
+  get is ArmResourceRead<ProvisioningServiceDescription, Error = ErrorDetails>;
 
   /**
    * Create or update the metadata of the provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.
@@ -53,7 +53,9 @@ interface ProvisioningServiceDescriptions {
   @operationId("IotDpsResource_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ProvisioningServiceDescription,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ErrorDetails
   >;
 
   /**
@@ -65,7 +67,8 @@ interface ProvisioningServiceDescriptions {
   update is ArmCustomPatchAsync<
     ProvisioningServiceDescription,
     PatchModel = TagsResource,
-    Response = ArmResponse<ProvisioningServiceDescription>
+    Response = ArmResponse<ProvisioningServiceDescription> &
+      ArmLroLocationHeader
   >;
 
   /**
@@ -76,7 +79,12 @@ interface ProvisioningServiceDescriptions {
   @operationId("IotDpsResource_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ProvisioningServiceDescription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
+      | ArmResourceNotFoundResponse,
+    Error = ErrorDetails
   >;
 
   /**
@@ -84,21 +92,26 @@ interface ProvisioningServiceDescriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IotDpsResource_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<ProvisioningServiceDescription>;
+  listByResourceGroup is ArmResourceListByParent<
+    ProvisioningServiceDescription,
+    Error = ErrorDetails
+  >;
 
   /**
    * List all the provisioning services for a given subscription id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IotDpsResource_ListBySubscription")
-  listBySubscription is ArmListBySubscription<ProvisioningServiceDescription>;
+  listBySubscription is ArmListBySubscription<
+    ProvisioningServiceDescription,
+    Error = ErrorDetails
+  >;
 
   /**
    * Gets the status of a long running operation, such as create, update or delete a provisioning service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{operationId}")
   @operationId("IotDpsResource_GetOperationResult")
   getOperationResult is ArmResourceActionSync<
     ProvisioningServiceDescription,
@@ -109,6 +122,7 @@ interface ProvisioningServiceDescriptions {
        * Operation id corresponding to long running operation. Use this to poll for the status.
        */
       @path
+      @segment("operationresults")
       operationId: string;
 
       /**
@@ -116,7 +130,8 @@ interface ProvisioningServiceDescriptions {
        */
       @query("asyncinfo")
       asyncinfo: string = "true";
-    }
+    },
+    Error = ErrorDetails
   >;
 
   /**
@@ -129,7 +144,8 @@ interface ProvisioningServiceDescriptions {
   listValidSkus is ArmResourceActionSync<
     ProvisioningServiceDescription,
     void,
-    ArmResponse<IotDpsSkuDefinitionListResult>
+    ArmResponse<IotDpsSkuDefinitionListResult>,
+    Error = ErrorDetails
   >;
 
   /**
@@ -141,7 +157,8 @@ interface ProvisioningServiceDescriptions {
   listKeys is ArmResourceActionSync<
     ProvisioningServiceDescription,
     void,
-    ArmResponse<SharedAccessSignatureAuthorizationRuleListResult>
+    ArmResponse<SharedAccessSignatureAuthorizationRuleListResult>,
+    Error = ErrorDetails
   >;
 
   /**
@@ -159,8 +176,10 @@ interface ProvisioningServiceDescriptions {
        * Logical key name to get key-values for.
        */
       @path
+      @segment("keys")
       keyName: string;
-    }
+    },
+    Error = ErrorDetails
   >;
 }
 
