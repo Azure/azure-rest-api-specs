@@ -91,6 +91,11 @@ namespace Language.ConversationsClientCustomizations;
   "csharp"
 );
 
+@@clientName(ConversationalAIInputParameters,
+  "AIConversationLanguageUnderstandingActionContent",
+  "csharp"
+);
+
 @@clientName(ConversationSummarizationTaskParameters,
   "ConversationSummarizationActionContent",
   "csharp"
