@@ -91,17 +91,6 @@ export function getAllTags(readMeContent: string): string[] {
 
 type TagInputFile = { tagName: string; inputFiles: readonly string[] };
 
-export function getTagsAndInputFiles(tags: string[], readmeContent: string): TagInputFile[] {
-  const tagResults: TagInputFile[] = [];
-  for (const tag of tags) {
-    const inputFiles = getInputFiles(readmeContent, tag);
-    if (inputFiles.length > 0) {
-      tagResults.push({ tagName: tag, inputFiles });
-    }
-  }
-  return tagResults;
-}
-
 /**
  * Given a list of tags and the content of a readme file, remove tags that are
  * subsets of other tags (reduces number of times autorest is called).

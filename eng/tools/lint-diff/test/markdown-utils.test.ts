@@ -11,7 +11,6 @@ import {
   getDefaultTag,
   getAllTags,
   getOpenapiType,
-  getTagsAndInputFiles,
   getRelatedArmRpcFromDoc,
 } from "../src/markdown-utils.js";
 
@@ -217,24 +216,6 @@ describe("getOpenapiType", () => {
     const markdownFile = join(__dirname, "fixtures/getOpenapiType/default.md");
     const openApiType = await getOpenapiType(markdownFile);
     expect(openApiType).toEqual("default");
-  });
-});
-
-describe("getTagsAndInputFiles", () => {
-  test("gets accurate input files for tag", async () => {
-    const readmeContent = await readFile(
-      join(__dirname, "fixtures/getTagsAndInputFiles/readme.md"),
-      { encoding: "utf-8" },
-    );
-
-    const actual = await getTagsAndInputFiles(["package-preview-2019-05"], readmeContent);
-    expect(actual.length).toEqual(1);
-    expect(actual[0].tagName).toEqual("package-preview-2019-05");
-    expect(actual[0].inputFiles).toEqual([
-      "Microsoft.AlertsManagement/preview/2019-05-05-preview/ActionRules.json",
-      "Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json",
-      "Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json",
-    ]);
   });
 });
 

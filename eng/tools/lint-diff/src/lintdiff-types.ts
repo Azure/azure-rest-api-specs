@@ -1,3 +1,4 @@
+import { Readme } from "@azure-tools/specs-shared/readme";
 import { ExecException } from "node:child_process";
 
 // TODO: Reduce to minimal set of properties
@@ -56,3 +57,8 @@ export type LintDiffViolation = LintingResultMessage & {
   lineNumber?: number;
   armRpcs?: string[];
 };
+
+export type ReadmeTags = { 
+  readme: Readme;
+  tags: Set<string>;
+}

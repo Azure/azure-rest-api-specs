@@ -3,10 +3,10 @@ import { readFile } from "fs/promises";
 import { pathExists } from "./util.js";
 import { specification, readme, swagger } from "@azure-tools/specs-shared/changed-files";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model"
+import { ReadmeTags } from "./lintdiff-types.js";
 import deepEqual from "deep-eql"
 
 import {
-  getTagsAndInputFiles,
   deduplicateTags,
 } from "./markdown-utils.js";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
@@ -84,30 +84,32 @@ export async function buildState(
     specModels.set(serviceDir, specModel);
   }
 
-  const readmeTags = new Map<string, Set<string>>();
+  const readmeTags = new Map<string, ReadmeTags>();
   for (const changedSwagger of existingChangedFiles.filter(swagger)) {
     const readmeTagMapForChangedFile = 
       await specModels.get(getService(changedSwagger))!.getAffectedReadmeTags(resolve(rootPath, changedSwagger));
     
     for (const [readmeEntry, tags] of readmeTagMapForChangedFile) { 
       if (!readmeTags.has(readmeEntry.path)) { 
-        readmeTags.set(readmeEntry.path, new Set<string>());
+        readmeTags.set(readmeEntry.path, { readme: readmeEntry, tags: new Set<string>() });
       }
       for (const tag of tags) { 
-        readmeTags.get(readmeEntry.path)?.add(tag.name);
+        readmeTags.get(readmeEntry.path)?.tags.add(tag.name);
       }
     }
   }
 
   const changedFileAndTagsMap = new Map<string, string[]>();
   for (const [readmeFile, tags] of readmeTags.entries()) {
-    const dedupedTags = deduplicateTags(
-      await getTagsAndInputFiles(
-        [...tags],
-        await readFile(readmeFile, { encoding: "utf-8" }),
-      ),
-    );
-
+    const allReadmeTags = await tags.readme.getTags();
+    const tagsAndInputs = [...allReadmeTags]
+      .map((tag) => { 
+        return { 
+          tagName: tag.name,
+          inputFiles: [...tag.inputFiles].map((f) => f.path)
+        }
+      });
+    const dedupedTags = deduplicateTags(tagsAndInputs);
     changedFileAndTagsMap.set(relative(rootPath, readmeFile), dedupedTags);
   }
 
