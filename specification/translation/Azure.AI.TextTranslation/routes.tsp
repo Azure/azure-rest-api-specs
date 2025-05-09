@@ -51,7 +51,7 @@ op getSupportedLanguages is CustomGetOperation<
 @summary("Translate Text")
 @doc("Translate Text")
 op translate is CustomOperation<
-  InputTextItem[],
+  TranslateBody[],
   TranslateParameters,
   TranslationResult,
   ErrorResponse
