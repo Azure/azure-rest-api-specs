@@ -54,9 +54,6 @@ model AkriConnectorTemplateProperties {
 
   /** Mqtt connection configuration settings. */
   mqttConnectionConfiguration?: AkriConnectorsMqttConnectionConfiguration;
-
-  /** The version of the Connector template. */
-  version: string; // Probably not needed.
 }
 
 /** AkriConnectorTemplateDeviceInboundEndpointType properties. */
