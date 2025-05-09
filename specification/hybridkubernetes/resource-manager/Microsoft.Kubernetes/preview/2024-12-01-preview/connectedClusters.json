@@ -493,8 +493,7 @@
       "properties": {
         "enableAzureRBAC": {
           "type": "boolean",
-          "description": "Whether to enable Azure RBAC for Kubernetes authorization.",
-          "x-ms-client-name": "enableAzureRbac"
+          "description": "Whether to enable Azure RBAC for Kubernetes authorization."
         },
         "adminGroupObjectIDs": {
           "type": "array",
@@ -600,6 +599,7 @@
         "settings": {
           "type": "object",
           "description": "The configuration settings for the feature that do not contain any sensitive or secret information.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -607,6 +607,7 @@
         "protectedSettings": {
           "type": "object",
           "description": "The configuration settings for the feature that contain any sensitive or secret information.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -897,8 +898,32 @@
           "description": "This is populated only if privateLinkState is enabled. The resource id of the private link scope this connected cluster is assigned to, if any."
         },
         "azureHybridBenefit": {
-          "$ref": "#/definitions/AzureHybridBenefit",
-          "description": "Indicates whether Azure Hybrid Benefit is opted in"
+          "type": "string",
+          "description": "Indicates whether Azure Hybrid Benefit is opted in",
+          "default": "NotApplicable",
+          "enum": [
+            "True",
+            "False",
+            "NotApplicable"
+          ],
+          "x-ms-enum": {
+            "name": "AzureHybridBenefit",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "True",
+                "value": "True"
+              },
+              {
+                "name": "False",
+                "value": "False"
+              },
+              {
+                "name": "NotApplicable",
+                "value": "NotApplicable"
+              }
+            ]
+          }
         },
         "aadProfile": {
           "$ref": "#/definitions/AadProfile",
@@ -917,12 +942,19 @@
           "description": "Open ID Connect (OIDC) Issuer Profile for the connected cluster."
         },
         "gateway": {
-          "$ref": "#/definitions/Gateway",
-          "description": "Details of the gateway used by the Arc router for connectivity."
+          "type": "object",
+          "description": "Details of the gateway used by the Arc router for connectivity.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Gateway"
+            }
+          ]
         },
         "arcAgentryConfigurations": {
           "type": "array",
           "description": "Configuration settings for customizing the behavior of the connected cluster.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ArcAgentryConfigurations"
           },

@@ -243,7 +243,7 @@ model ConnectedClusterProperties {
   /**
    * Indicates whether Azure Hybrid Benefit is opted in
    */
-  azureHybridBenefit?: AzureHybridBenefit;
+  azureHybridBenefit?: AzureHybridBenefit = "NotApplicable";
 
   /**
    * AAD profile for the connected cluster.
@@ -268,12 +268,12 @@ model ConnectedClusterProperties {
   /**
    * Details of the gateway used by the Arc router for connectivity.
    */
-  gateway?: Gateway;
+  gateway?: Gateway | null;
 
   /**
    * Configuration settings for customizing the behavior of the connected cluster.
    */
-  arcAgentryConfigurations?: ArcAgentryConfigurations[];
+  arcAgentryConfigurations?: ArcAgentryConfigurations[] | null;
 
   /**
    * More properties related to the Connected Cluster
@@ -459,13 +459,13 @@ model ArcAgentryConfigurations {
    * The configuration settings for the feature that do not contain any sensitive or secret information.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  settings?: Record<string>;
+  settings?: Record<string> | null;
 
   /**
    * The configuration settings for the feature that contain any sensitive or secret information.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  protectedSettings?: Record<string>;
+  protectedSettings?: Record<string> | null;
 }
 
 /**
