@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure HSM Resource Provider",
+    "title": "HardwareSecurityModules",
     "version": "2024-06-30-preview",
-    "description": "The Azure management API provides a RESTful set of web services that interact with Azure HSM RP.",
+    "description": "The Azure management API provides a RESTful set of web services that interact with Hardware Security Modules.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -355,7 +355,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -931,6 +931,9 @@
           "CloudHsmClusterPrivateLinkResources_ListByResource_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmClusterPrivateLinkResource_ListByCloudHsmCluster_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1716,6 +1719,7 @@
           "type": "string",
           "format": "date-time",
           "description": "The end time of the backup/restore operation in UTC",
+          "x-nullable": true,
           "readOnly": true
         },
         "jobId": {
@@ -1816,7 +1820,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "sku": {
@@ -2214,70 +2218,6 @@
         ]
       },
       "readOnly": true
-    },
-    "ManagedServiceIdentity": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/ManagedServiceIdentityType",
-          "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed)."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "ManagedServiceIdentityType": {
-      "type": "string",
-      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned,UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None"
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned"
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned"
-          },
-          {
-            "name": "SystemAssigned,UserAssigned",
-            "value": "SystemAssigned,UserAssigned"
-          }
-        ]
-      }
     },
     "NetworkInterface": {
       "type": "object",

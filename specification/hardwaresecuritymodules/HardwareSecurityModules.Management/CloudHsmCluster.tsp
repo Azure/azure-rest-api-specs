@@ -25,7 +25,7 @@ model CloudHsmCluster
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * SKU details
@@ -44,6 +44,7 @@ interface CloudHsmClusters {
   /**
    * Create or Update a Cloud HSM Cluster in the specified subscription.
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<CloudHsmCluster>;
 
   /**

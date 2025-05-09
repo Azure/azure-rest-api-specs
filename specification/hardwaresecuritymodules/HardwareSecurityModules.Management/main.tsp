@@ -24,10 +24,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * The Azure management API provides a RESTful set of web services that interact with Azure HSM RP.
+ * The Azure management API provides a RESTful set of web services that interact with Hardware Security Modules.
  */
 @armProviderNamespace
-@service(#{ title: "Azure HSM Resource Provider" })
+@service(#{ title: "HardwareSecurityModules" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.HardwareSecurityModules;

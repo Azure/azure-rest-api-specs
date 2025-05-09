@@ -10,6 +10,9 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.HardwareSecurityModules;
 
+
+@@nextLink(CommonTypes.PrivateLinkResourceListResult.nextLink);
+
 /**
  * State of security domain activation
  */
@@ -405,56 +408,6 @@ model Resource {
 }
 
 /**
- * Cloud HSM Cluster Resource
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model CloudHsmClusterResource
-  extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
-  identity?: ManagedServiceIdentity;
-
-  /**
-   * SKU details
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  sku?: CloudHsmClusterSku;
-}
-
-/**
- * Managed service identity (system assigned and/or user assigned identities)
- */
-model ManagedServiceIdentity {
-  /**
-   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  principalId?: string;
-
-  /**
-   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  tenantId?: string;
-
-  /**
-   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
-   */
-  type: ManagedServiceIdentityType;
-
-  /**
-   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
-}
-
-/**
  * Cloud Hsm Cluster SKU information
  */
 model CloudHsmClusterSku {
@@ -606,7 +559,7 @@ model BackupRestoreBaseResultProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: utcDateTime | null;
 
   /**
    * Identifier for the backup/restore operation.
