@@ -205,7 +205,7 @@ model OpenApiFunctionDefinition {
   defaultParams?: string[];
 
   @doc("List of function definitions used by OpenApi tool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   functions?: FunctionDefinition[];
 }
 
