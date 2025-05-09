@@ -1,12 +1,6 @@
 import * as commonmark from "commonmark";
-
-// TODO: Can this be eliminated?
-import { parseMarkdown } from "@azure-tools/openapi-tools-common";
-// TODO: Can this be eliminated?
-import * as amd from "@azure/openapi-markdown";
 import { kebabCase } from "change-case";
 import axios from "axios";
-import * as YAML from "js-yaml";
 import { Readme } from "@azure-tools/specs-shared/readme";
 
 export enum MarkdownType {
@@ -126,33 +120,7 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
   return rpcRules;
 }
 
-export function getDefaultTag(markdownContent: string): string {
-  const parsed = parseMarkdown(markdownContent);
-  const startNode = parsed.markDown;
-  const codeBlockMap = amd.getCodeBlocksAndHeadings(startNode);
-
-  const latestHeader = "Basic Information";
-
-  const lh = codeBlockMap[latestHeader];
-  if (lh) {
-    const latestDefinition = YAML.load(lh.literal!, { schema: YAML.FAILSAFE_SCHEMA }) as undefined | { tag: string };
-    if (latestDefinition) {
-      return latestDefinition.tag;
-    }
-  } else {
-    for (let idx of Object.keys(codeBlockMap)) {
-      const lh = codeBlockMap[idx];
-      if (!lh || !lh.info || lh.info.trim().toLocaleLowerCase() !== "yaml") {
-        continue;
-      }
-      const latestDefinition = YAML.load(lh.literal!, { schema: YAML.FAILSAFE_SCHEMA }) as
-        | undefined
-        | { tag: string };
-
-      if (latestDefinition) {
-        return latestDefinition.tag;
-      }
-    }
-  }
-  return "";
+export async function getDefaultTag(readme: Readme): Promise<string> { 
+  const tag = (await readme.getGlobalConfig() as { tag?: string }).tag;
+  return tag ? tag : "";
 }

@@ -54,41 +54,25 @@ describe("getDocRawUrl", () => {
 
 describe("getDefaultTag", () => {
   test("returns default tag when there is a Basic Information header", async () => {
-    const readmeContent = await readFile(
-      join(__dirname, "fixtures/getDefaultTag/hasBasicInformation.md"),
-      {
-        encoding: "utf-8",
-      },
+    const defaultTag = await getDefaultTag(
+      new Readme(join(__dirname, "fixtures/getDefaultTag/hasBasicInformation.md"))
     );
-    6;
-
-    const defaultTag = getDefaultTag(readmeContent);
 
     expect(defaultTag).toEqual("package-2022-12-01");
   });
 
   test("returns default tag when there is no Basic Information header", async () => {
-    const readmeContent = await readFile(
-      join(__dirname, "fixtures/getDefaultTag/noBasicInformation.md"),
-      {
-        encoding: "utf-8",
-      },
+    const defaultTag = await getDefaultTag(
+      new Readme(join(__dirname, "fixtures/getDefaultTag/noBasicInformation.md"))
     );
-
-    const defaultTag = getDefaultTag(readmeContent);
 
     expect(defaultTag).toEqual("package-2023-07-preview");
   });
 
   test("returns empty string when there is no default tag", async () => {
-    const readmeContent = await readFile(
-      join(__dirname, "fixtures/getDefaultTag/noDefaultTag.md"),
-      {
-        encoding: "utf-8",
-      },
+    const defaultTag = await getDefaultTag(
+      new Readme(join(__dirname, "fixtures/getDefaultTag/noDefaultTag.md"))
     );
-
-    const defaultTag = getDefaultTag(readmeContent);
 
     expect(defaultTag).toEqual("");
   });
@@ -114,8 +98,8 @@ tag: 2025-01-01
     },
   ])(
     "returns a string for default tag even when the tag is formatted like a date ($description)",
-    ({ readmeContent }) => {
-      const defaultTag = getDefaultTag(readmeContent);
+    async ({ readmeContent }) => {
+      const defaultTag = await getDefaultTag(new Readme("readme", { content: readmeContent }));
 
       expect(defaultTag).not.toBeInstanceOf(Date);
       expect(defaultTag).toBeTypeOf("string");

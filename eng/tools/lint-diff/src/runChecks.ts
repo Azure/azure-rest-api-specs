@@ -59,7 +59,7 @@ export async function runChecks(
       const lintDiffResult = {
         autorestCommand,
         rootPath: path,
-        readme,
+        readme: tags.readme,
         tag: tag ? tag : "",
         openApiType,
         ...executionResult,

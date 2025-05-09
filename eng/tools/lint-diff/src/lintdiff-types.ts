@@ -4,8 +4,7 @@ import { ExecException } from "node:child_process";
 // TODO: Reduce to minimal set of properties
 export type AutorestRunResult = {
   rootPath: string;
-
-  readme: string;
+  readme: Readme;
   tag: string;
 
   error: ExecException | null;
