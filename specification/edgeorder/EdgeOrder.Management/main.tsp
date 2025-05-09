@@ -28,7 +28,7 @@ using TypeSpec.Versioning;
  * Edge Order API's
  */
 @armProviderNamespace
-@service(#{ title: "EdgeOrderManagementClient" })
+@service(#{ title: "Edge Ordering Service-Customer" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.EdgeOrder;

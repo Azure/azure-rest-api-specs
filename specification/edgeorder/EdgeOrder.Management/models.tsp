@@ -756,6 +756,7 @@ union OrderItemReturnEnum {
  * Address Resource Collection.
  */
 model AddressResourceList is Azure.Core.Page<AddressResource>;
+@@visibility(AddressResourceList.value, Lifecycle.Read);
 
 /**
  * Address Properties.
@@ -1040,6 +1041,7 @@ model CustomerSubscriptionRegisteredFeatures {
  * The list of configurations.
  */
 model Configurations is Azure.Core.Page<Configuration>;
+@@visibility(Configurations.value, Lifecycle.Read);
 
 /**
  * Configuration object.
@@ -1607,6 +1609,7 @@ model ProductFamiliesRequest {
  * The list of product families.
  */
 model ProductFamilies is Azure.Core.Page<ProductFamily>;
+@@visibility(ProductFamilies.value, Lifecycle.Read);
 
 /**
  * Product Family.
@@ -1707,6 +1710,7 @@ model ResourceProviderDetails {
  * List of order items.
  */
 model OrderItemResourceList is Azure.Core.Page<OrderItemResource>;
+@@visibility(OrderItemResourceList.value, Lifecycle.Read);
 
 /**
  * Represents order item properties.
@@ -1966,7 +1970,8 @@ model ProvisioningDetails {
   /**
    * Quantity of the devices.
    */
-  quantity?: int32;
+  @minValue(0)
+  quantity?: int32 = 0;
 
   /**
    * Provisioning Resource Arm ID.
@@ -2113,7 +2118,8 @@ model TermCommitmentInformation {
    * Number of Days Pending for Term Commitment
    */
   @visibility(Lifecycle.Read)
-  pendingDaysForTerm?: int32;
+  @minValue(0)
+  pendingDaysForTerm?: int32 = 0;
 }
 
 /**
@@ -2351,14 +2357,14 @@ model ResourceIdentity {
   /**
    * User Assigned Identities
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
+  userAssignedIdentities?: Azure.ResourceManager.CommonTypes.UserAssignedIdentities;
 }
 
 /**
  * List of orders.
  */
 model OrderResourceList is Azure.Core.Page<OrderResource>;
+@@visibility(OrderResourceList.value, Lifecycle.Read);
 
 /**
  * Represents order details.
@@ -2396,6 +2402,7 @@ model OrderProperties {
  */
 model ProductFamiliesMetadata
   is Azure.Core.Page<ProductFamiliesMetadataDetails>;
+@@visibility(ProductFamiliesMetadata.value, Lifecycle.Read);
 
 /**
  * Product families metadata details.
@@ -2548,7 +2555,7 @@ model ReturnOrderItemDetails {
   /**
    * Shipping Box required.
    */
-  shippingBoxRequired?: boolean;
+  shippingBoxRequired?: boolean = false;
 }
 
 /**
