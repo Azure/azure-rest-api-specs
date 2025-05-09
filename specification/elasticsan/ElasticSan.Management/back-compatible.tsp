@@ -11,7 +11,9 @@ using Microsoft.ElasticSan;
 
 @@clientName(EncryptionProperties.identity, "EncryptionIdentity");
 
-@@clientName(EncryptionIdentity.userAssignedIdentity, "EncryptionUserAssignedIdentity");
+@@clientName(EncryptionIdentity.userAssignedIdentity,
+  "EncryptionUserAssignedIdentity"
+);
 
 @@clientName(VirtualNetworkRule.id, "VirtualNetworkResourceId");
 
@@ -53,7 +55,16 @@ using Microsoft.ElasticSan;
 @@clientName(KeyVaultProperties.keyName, "KeyName");
 @@clientName(KeyVaultProperties.keyVersion, "KeyVersion");
 @@clientName(KeyVaultProperties.keyVaultUri, "KeyVaultUri");
-@@clientName(KeyVaultProperties.currentVersionedKeyIdentifier, "CurrentVersionedKeyIdentifier");
-@@clientName(KeyVaultProperties.lastKeyRotationTimestamp, "LastKeyRotationTimestamp");
-@@clientName(KeyVaultProperties.currentVersionedKeyExpirationTimestamp, "CurrentVersionedKeyExpirationTimestamp");
+@@clientName(KeyVaultProperties.currentVersionedKeyIdentifier,
+  "CurrentVersionedKeyIdentifier"
+);
+@@clientName(KeyVaultProperties.lastKeyRotationTimestamp,
+  "LastKeyRotationTimestamp"
+);
+@@clientName(KeyVaultProperties.currentVersionedKeyExpirationTimestamp,
+  "CurrentVersionedKeyExpirationTimestamp"
+);
 @@clientName(ManagedByInfo.resourceId, "ResourceId");
+@@clientName(SnapshotCreationData, "SnapshotCreationParameters", "csharp");
+@@clientName(PreValidationResponse, "PreValidationResult", "csharp");
+@@clientName(SourceCreationData, "SourceCreationParameters", "csharp");
