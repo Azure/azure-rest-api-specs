@@ -8,11 +8,12 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-
 namespace Microsoft.Datadog;
 
+@Azure.ResourceManager.Private.armResourceInternal(IdentityProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model DatadogMonitorResource
-  is Azure.ResourceManager.TrackedResource<MonitorProperties> {
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = DatadogMonitorResource,
     KeyName = "monitorName",
@@ -22,6 +23,11 @@ model DatadogMonitorResource
   #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: ResourceSku;
+
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  properties?: MonitorProperties;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: IdentityProperties;
@@ -52,11 +58,8 @@ interface DatadogMonitorResources {
   update is ArmCustomPatchAsync<
     DatadogMonitorResource,
     PatchModel = DatadogMonitorResourceUpdateParameters,
-    Response = ArmResponse<DatadogMonitorResource> | ArmResourceCreatedResponse<
-      DatadogMonitorResource,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = DatadogMonitorResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response = ArmResponse<DatadogMonitorResource> | (ArmResourceCreatedResponse<DatadogMonitorResource> &
+      ArmLroLocationHeader)
   >;
 
   /**

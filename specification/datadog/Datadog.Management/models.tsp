@@ -208,7 +208,6 @@ model DatadogAgreementProperties {
   /**
    * Date and time in UTC of when the terms were accepted. This is empty if Accepted is false.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   retrieveDatetime?: utcDateTime;
 
   /**

@@ -1,9 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Datadog Client",
+    "title": "Microsoft.Datadog",
     "version": "2023-10-20",
-    "description": "// FIXME: (missing-service-description) Add service description",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -498,14 +497,14 @@
             }
           },
           "201": {
-            "description": "Resource 'DatadogMonitorResource' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/DatadogMonitorResource"
             },
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -527,7 +526,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -1958,14 +1957,13 @@
     },
     "DatadogMonitorResource": {
       "type": "object",
-      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
         "properties": {
           "$ref": "#/definitions/MonitorProperties",
           "description": "Properties specific to the monitor resource."
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku"
         },
         "identity": {
           "$ref": "#/definitions/IdentityProperties"
