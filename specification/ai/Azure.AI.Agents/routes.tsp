@@ -23,6 +23,7 @@ namespace Azure.AI.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/assistants")
+@added(Versions.v2025_05_01)
 op createAgent is Azure.Core.Foundations.Operation<
   {
     ...CreateAgentOptions;
@@ -42,6 +43,7 @@ op createAgent is Azure.Core.Foundations.Operation<
 @get
 @route("/assistants")
 @list
+@added(Versions.v2025_05_01)
 op listAgents(...ApiVersionParameter, ...AgentsListOptions): {
   ...AgentsPagedResult<Agent>;
 };
@@ -58,6 +60,7 @@ op listAgents(...ApiVersionParameter, ...AgentsListOptions): {
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/assistants/{assistantId}")
+@added(Versions.v2025_05_01)
 op getAgent is Azure.Core.Foundations.Operation<
   {
     /**
@@ -79,6 +82,7 @@ op getAgent is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/assistants/{assistantId}")
+@added(Versions.v2025_05_01)
 op updateAgent is Azure.Core.Foundations.Operation<
   {
     /**
@@ -100,6 +104,7 @@ op updateAgent is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
 @route("/assistants/{assistantId}")
+@added(Versions.v2025_05_01)
 op deleteAgent is Azure.Core.Foundations.Operation<
   {
     /**

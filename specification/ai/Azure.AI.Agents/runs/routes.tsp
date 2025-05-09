@@ -23,6 +23,7 @@ namespace Azure.AI.Agents {
   @post
   @route("/threads/runs")
   @doc("Creates a new agent thread and immediately starts a run using that new thread.")
+  @added(Versions.v2025_05_01)
   op createThreadAndRun is Azure.Core.Foundations.Operation<
     {
       /**
@@ -37,6 +38,7 @@ namespace Azure.AI.Agents {
    * A collection of run operations under `/threads/{threadId}/runs`.
    */
   @route("/threads/{threadId}/runs")
+  @added(Versions.v2025_05_01)
   interface Runs {
     /**
      * Creates and starts a new run of the specified thread using the specified agent.

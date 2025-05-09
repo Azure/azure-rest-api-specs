@@ -14,6 +14,7 @@ namespace Azure.AI.Agents {
    * A collection of file‐related operations under `/files`.
    */
   @route("/files")
+  @added(Versions.v2025_05_01)
   interface Files {
     /**
      * Gets a list of previously uploaded files.

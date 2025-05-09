@@ -7,6 +7,7 @@ namespace Azure.AI.Agents;
 using TypeSpec.Versioning;
 
 @doc("Detailed information about a single step of an agent thread run.")
+@added(Versions.v2025_05_01)
 model RunStep {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -78,6 +79,7 @@ model RunStep {
 }
 
 @doc("Usage statistics related to the run step.")
+@added(Versions.v2025_05_01)
 model RunStepCompletionUsage {
   @doc("Number of completion tokens used over the course of the run step.")
   @encodedName("application/json", "completion_tokens")
@@ -93,6 +95,7 @@ model RunStepCompletionUsage {
 }
 
 @doc("The possible types of run steps.")
+@added(Versions.v2025_05_01)
 union RunStepType {
   string,
 
@@ -105,12 +108,14 @@ union RunStepType {
 
 @discriminator("type")
 @doc("An abstract representation of the details for a run step.")
+@added(Versions.v2025_05_01)
 model RunStepDetails {
   @doc("The object type.")
   type: RunStepType;
 }
 
 @doc("The detailed information associated with a message creation run step.")
+@added(Versions.v2025_05_01)
 model RunStepMessageCreationDetails extends RunStepDetails {
   @doc("The object type, which is always 'message_creation'.")
   type: RunStepType.messageCreation;
@@ -121,6 +126,7 @@ model RunStepMessageCreationDetails extends RunStepDetails {
 }
 
 @doc("The detailed information associated with a run step calling tools.")
+@added(Versions.v2025_05_01)
 model RunStepToolCallDetails extends RunStepDetails {
   @doc("The object type, which is always 'tool_calls'.")
   type: RunStepType.toolCalls;
@@ -131,6 +137,7 @@ model RunStepToolCallDetails extends RunStepDetails {
 }
 
 @doc("The details of a message created as a part of a run step.")
+@added(Versions.v2025_05_01)
 model RunStepMessageCreationReference {
   @encodedName("application/json", "message_id")
   @doc("The ID of the message created by this run step.")
@@ -138,6 +145,7 @@ model RunStepMessageCreationReference {
 }
 
 @doc("Possible values for the status of a run step.")
+@added(Versions.v2025_05_01)
 union RunStepStatus {
   string,
 
@@ -158,6 +166,7 @@ union RunStepStatus {
 }
 
 @doc("Possible error code values attributable to a failed run step.")
+@added(Versions.v2025_05_01)
 union RunStepErrorCode {
   string,
 
@@ -169,6 +178,7 @@ union RunStepErrorCode {
 }
 
 @doc("The error information associated with a failed run step.")
+@added(Versions.v2025_05_01)
 model RunStepError {
   @doc("The error code for this error.")
   code: RunStepErrorCode;
@@ -182,6 +192,7 @@ model RunStepError {
 //
 
 /** Represents a run step delta i.e. any changed fields on a run step during streaming. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaChunk {
   /** The identifier of the run step, which can be referenced in API endpoints. */
   id: string;
@@ -194,6 +205,7 @@ model RunStepDeltaChunk {
 }
 
 /** Represents the delta payload in a streaming run step delta chunk. */
+@added(Versions.v2025_05_01)
 model RunStepDelta {
   /** The details of the run step. */
   @encodedName("application/json", "step_details")
@@ -202,6 +214,7 @@ model RunStepDelta {
 
 /** Represents a single run step detail item in a streaming run step's delta payload. */
 @discriminator("type")
+@added(Versions.v2025_05_01)
 model RunStepDeltaDetail {
   /** The object type for the run step detail object. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -209,6 +222,7 @@ model RunStepDeltaDetail {
 }
 
 /** Represents a message creation within a streaming run step delta. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaMessageCreation extends RunStepDeltaDetail {
   /** The object type, which is always "message_creation." */
   type: "message_creation";
@@ -219,6 +233,7 @@ model RunStepDeltaMessageCreation extends RunStepDeltaDetail {
 }
 
 /** Represents the data within a streaming run step message creation response object. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaMessageCreationObject {
   /** The ID of the newly-created message. */
   @encodedName("application/json", "message_id")
@@ -226,6 +241,7 @@ model RunStepDeltaMessageCreationObject {
 }
 
 /** Represents an invocation of tool calls as part of a streaming run step. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaToolCallObject extends RunStepDeltaDetail {
   /** The object type, which is always "tool_calls." */
   type: "tool_calls";
@@ -237,6 +253,7 @@ model RunStepDeltaToolCallObject extends RunStepDeltaDetail {
 
 /** The abstract base representation of a single tool call within a streaming run step's delta tool call details. */
 @discriminator("type")
+@added(Versions.v2025_05_01)
 model RunStepDeltaToolCall {
   /** The index of the tool call detail in the run step's tool_calls array. */
   index: int32;
@@ -250,6 +267,7 @@ model RunStepDeltaToolCall {
 }
 
 /** Represents a function tool call within a streaming run step's tool call details. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaFunctionToolCall extends RunStepDeltaToolCall {
   /** The object type, which is always "function." */
   type: "function";
@@ -259,6 +277,7 @@ model RunStepDeltaFunctionToolCall extends RunStepDeltaToolCall {
 }
 
 /** Represents a file search tool call within a streaming run step's tool call details. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaFileSearchToolCall extends RunStepDeltaToolCall {
   /** The object type, which is always "file_search." */
   type: "file_search";
@@ -269,6 +288,7 @@ model RunStepDeltaFileSearchToolCall extends RunStepDeltaToolCall {
 }
 
 /** Represents a Code Interpreter tool call within a streaming run step's tool call details. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
   /** The object type, which is always "code_interpreter." */
   type: "code_interpreter";
@@ -279,6 +299,7 @@ model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
 }
 
 /** Represents the function data in a streaming run step delta's function tool call. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaFunction {
   /** The name of the function. */
   name?: string;
@@ -292,6 +313,7 @@ model RunStepDeltaFunction {
 }
 
 /** Represents the Code Interpreter tool call data in a streaming run step's tool calls. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaCodeInterpreterDetailItemObject {
   /** The input into the Code Interpreter tool call. */
   input?: string;
@@ -306,6 +328,7 @@ model RunStepDeltaCodeInterpreterDetailItemObject {
 
 /** The abstract base representation of a streaming run step tool call's Code Interpreter tool output. */
 @discriminator("type")
+@added(Versions.v2025_05_01)
 model RunStepDeltaCodeInterpreterOutput {
   /** The index of the output in the streaming run step tool call's Code Interpreter outputs array. */
   index: int32;
@@ -316,6 +339,7 @@ model RunStepDeltaCodeInterpreterOutput {
 }
 
 /** Represents a log output as produced by the Code Interpreter tool and as represented in a streaming run step's delta tool calls collection. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaCodeInterpreterLogOutput
   extends RunStepDeltaCodeInterpreterOutput {
   /** The type of the object, which is always "logs." */
@@ -326,6 +350,7 @@ model RunStepDeltaCodeInterpreterLogOutput
 }
 
 /** Represents an image output as produced the Code interpreter tool and as represented in a streaming run step's delta tool calls collection. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaCodeInterpreterImageOutput
   extends RunStepDeltaCodeInterpreterOutput {
   /** The object type, which is always "image." */
@@ -336,6 +361,7 @@ model RunStepDeltaCodeInterpreterImageOutput
 }
 
 /** Represents the data for a streaming run step's Code Interpreter tool call image output. */
+@added(Versions.v2025_05_01)
 model RunStepDeltaCodeInterpreterImageOutputObject {
   /** The file ID for the image. */
   @encodedName("application/json", "file_id")

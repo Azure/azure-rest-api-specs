@@ -20,6 +20,7 @@ union VectorStoreFileBatchStatus {
 }
 
 /** A batch of files attached to a vector store. */
+@added(Versions.v2025_05_01)
 model VectorStoreFileBatch {
   /** The identifier, which can be referenced in API endpoints. */
   id: string;

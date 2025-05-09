@@ -13,6 +13,7 @@ namespace Azure.AI.Agents {
    * A collection of thread operations under `/threads`.
    */
   @route("/threads")
+  @added(Versions.v2025_05_01)
   interface Threads {
     /**
      * Creates a new thread. Threads contain messages and can be run by agents.

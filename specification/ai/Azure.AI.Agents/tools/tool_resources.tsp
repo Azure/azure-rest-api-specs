@@ -17,6 +17,7 @@ namespace Azure.AI.Agents;
  * tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
  * tool requires a list of vector store IDs.
  */
+@added(Versions.v2025_05_01)
 model ToolResources {
   /** Resources to be used by the `code_interpreter` tool consisting of file IDs. */
   @encodedName("application/json", "code_interpreter")
@@ -34,6 +35,7 @@ model ToolResources {
 /**
  * A set of resources that are used by the `code_interpreter` tool.
  */
+@added(Versions.v2025_05_01)
 model CodeInterpreterToolResource {
   /**
    * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
@@ -52,6 +54,7 @@ model CodeInterpreterToolResource {
 /**
  * A set of resources that are used by the `file_search` tool.
  */
+@added(Versions.v2025_05_01)
 model FileSearchToolResource {
   /**
    * The ID of the vector store attached to this agent. There can be a maximum of 1 vector
@@ -74,6 +77,7 @@ model FileSearchToolResource {
 /**
  * A set of index resources used by the `azure_ai_search` tool.
  */
+@added(Versions.v2025_05_01)
 model AzureAISearchResource {
   /**
    * The indices attached to this agent. There can be a maximum of 1 index
@@ -87,6 +91,7 @@ model AzureAISearchResource {
 /**
  * A Index resource.
  */
+@added(Versions.v2025_05_01)
 model IndexResource {
   /**
    * An index connection id in an IndexResource attached to this agent.
@@ -104,6 +109,7 @@ model IndexResource {
 /**
  * A AI Search Index resource.
  */
+@added(Versions.v2025_05_01)
 model AISearchIndexResource {
   ...IndexResource;
 
@@ -124,6 +130,7 @@ model AISearchIndexResource {
    */
   filter?: string;
 
+  // TODO: Jose: Change to union type
   /**
    * Index asset id for search resource.
    */
@@ -140,6 +147,7 @@ model AISearchIndexResource {
  * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
  * tool requires a list of vector store IDs.
  */
+@added(Versions.v2025_05_01)
 model CreateToolResourcesOptions {
   /**
    * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
@@ -162,6 +170,7 @@ alias AzureAISearchToolResourceOptions = AzureAISearchResource;
 /**
  * A set of resources that will be used by the `code_interpreter` tool. Request object.
  */
+@added(Versions.v2025_05_01)
 model CreateCodeInterpreterToolResourceOptions {
   /** A list of file IDs made available to the `code_interpreter` tool. */
   @maxItems(20)
@@ -189,6 +198,7 @@ union CreateFileSearchToolResourceOptions {
 }
 
 /** File IDs associated to the vector store to be passed to the helper. */
+@added(Versions.v2025_05_01)
 model CreateFileSearchToolResourceVectorStoreOptions {
   /** A list of file IDs to add to the vector store. There can be a maximum of 10000 files in a vector store. */
   @encodedName("application/json", "file_ids")
@@ -216,6 +226,7 @@ model CreateFileSearchToolResourceVectorStoreOptions {
  * For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of
  * vector store IDs.
  */
+@added(Versions.v2025_05_01)
 model UpdateToolResourcesOptions {
   /**
    * Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
@@ -234,6 +245,7 @@ model UpdateToolResourcesOptions {
 }
 
 /** Request object to update `code_interpreted` tool resources. */
+@added(Versions.v2025_05_01)
 model UpdateCodeInterpreterToolResourceOptions {
   /** A list of file IDs to override the current list of the agent. */
   @encodedName("application/json", "file_ids")
@@ -242,6 +254,7 @@ model UpdateCodeInterpreterToolResourceOptions {
 }
 
 /** Request object to update `file_search` tool resources. */
+@added(Versions.v2025_05_01)
 model UpdateFileSearchToolResourceOptions {
   /** A list of vector store IDs to override the current list of the agent. */
   @maxItems(1)

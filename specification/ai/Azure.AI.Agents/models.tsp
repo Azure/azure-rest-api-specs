@@ -10,6 +10,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Agents;
 
 @doc("Represents an agent that can call the model and use tools.")
+@added(Versions.v2025_05_01)
 model Agent {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -78,6 +79,7 @@ model Agent {
 }
 
 @doc("The request details to use when creating a new agent.")
+@added(Versions.v2025_05_01)
 model CreateAgentOptions {
   @doc("The ID of the model to use.")
   `model`: string;
@@ -136,6 +138,7 @@ model CreateAgentOptions {
 }
 
 @doc("The request details to use when modifying an existing agent.")
+@added(Versions.v2025_05_01)
 model UpdateAgentOptions {
   @path
   @doc("The ID of the agent to modify.")
@@ -196,6 +199,7 @@ model UpdateAgentOptions {
 }
 
 @doc("The status of an agent deletion operation.")
+@added(Versions.v2025_05_01)
 model AgentDeletionStatus {
   ...DeletionStatus;
 
@@ -204,6 +208,7 @@ model AgentDeletionStatus {
 }
 
 @doc("The request details to use when retrieving an agent.")
+@added(Versions.v2025_05_01)
 model GetAgentOptions {
   @doc("Identifier of the agent.")
   @path
@@ -211,6 +216,7 @@ model GetAgentOptions {
 }
 
 @doc("The request details to use when deleting an agent.")
+@added(Versions.v2025_05_01)
 model DeleteAgentOptions {
   @doc("Identifier of the agent.")
   @path

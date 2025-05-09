@@ -10,6 +10,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Agents;
 
 @doc("Information about a single thread associated with an agent.")
+@added(Versions.v2025_05_01)
 model AgentThread {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -35,6 +36,7 @@ model AgentThread {
 }
 
 /** The details used to create a new agent thread. */
+@added(Versions.v2025_05_01)
 model AgentThreadCreationOptions {
   /** The initial messages to associate with the new thread. */
   messages?: ThreadMessageOptions[];
@@ -52,6 +54,7 @@ model AgentThreadCreationOptions {
 }
 
 /** The details used to update an existing agent thread */
+@added(Versions.v2025_05_01)
 model UpdateAgentThreadOptions {
   /** The ID of the thread to modify. */
   @path threadId: string;
@@ -70,6 +73,7 @@ model UpdateAgentThreadOptions {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"
 @doc("The status of a thread deletion operation.")
+@added(Versions.v2025_05_01)
 model ThreadDeletionStatus {
   ...DeletionStatus;
 
