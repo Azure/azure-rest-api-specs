@@ -496,6 +496,7 @@ model BackupRestoreRequestBaseProperties {
   /**
    * The SAS token pointing to an Azure blob storage container. This property is reserved for Azure Backup Service.
    */
+  @secret
   token?: string;
 }
 
