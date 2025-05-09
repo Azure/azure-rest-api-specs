@@ -106,6 +106,15 @@ using Azure.AI.Agents;
   "python"
 );
 
+@@access(Azure.AI.Agents.VectorStores.deleteVectorStore,
+  Access.internal,
+  "csharp"
+);
+@@clientName(Azure.AI.Agents.VectorStores.deleteVectorStore,
+  "InternalDeleteVectorStore",
+  "csharp"
+);
+
 // --------------------------------------------------------------------------------
 // VectorStoreFileBatches sub‐client
 // --------------------------------------------------------------------------------
@@ -146,6 +155,14 @@ using Azure.AI.Agents;
   "python"
 );
 
+@@access(Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
+  Access.internal,
+  "csharp"
+);
+@@clientName(Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
+  "InternalDeleteVectorStoreFile",
+  "csharp"
+);
 // --------------------------------------------------------------------------------
 // Persistent & Model‐level renames (csharp, java)
 // --------------------------------------------------------------------------------
@@ -185,6 +202,16 @@ using Azure.AI.Agents;
 @@clientName(FileListResponse, "InternalFileListResponse", "csharp");
 @@access(FileDeletionStatus, Access.internal, "csharp");
 @@clientName(FileDeletionStatus, "InternalFileDeletionStatus", "csharp");
+@@access(VectorStoreFileDeletionStatus, Access.internal, "csharp");
+@@clientName(VectorStoreFileDeletionStatus,
+  "InternalVectorStoreFileDeletionStatus",
+  "csharp"
+);
+@@access(VectorStoreDeletionStatus, Access.internal, "csharp");
+@@clientName(VectorStoreDeletionStatus,
+  "InternalVectorStoreDeletionStatus",
+  "csharp"
+);
 
 @@access(FunctionDefinition, Access.internal);
 @@clientName(FunctionDefinition, "InternalFunctionDefinition", "csharp");
@@ -359,6 +386,64 @@ using Azure.AI.Agents;
   "csharp"
 );
 @@clientName(CreateAndRunThreadOptions.tools, "OverrideTools", "csharp");
+@@clientName(FunctionName, "PersistentAgentsFunctionName", "csharp");
+@@clientName(VectorStore, "PersistentAgentsVectorStore", "csharp");
+@@clientName(ThreadMessage, "PersistentThreadMessage", "csharp");
+@@clientName(MessageDeltaTextUrlCitationAnnotation,
+  "MessageDeltaTextUriCitationAnnotation",
+  "csharp"
+);
+@@clientName(MessageDeltaTextUrlCitationAnnotation.urlCitation,
+  "UriCitation",
+  "csharp"
+);
+@@clientName(MessageDeltaTextUrlCitationDetails,
+  "MessageDeltaTextUriCitationDetails",
+  "csharp"
+);
+@@clientName(MessageDeltaTextUrlCitationDetails.url, "Uri", "csharp");
+
+@@clientName(MessageImageUrlParam, "MessageImageUriParam", "csharp");
+@@clientName(MessageImageUrlParam.url, "Uri", "csharp");
+@@clientName(MessageInputImageUrlBlock, "MessageInputImageUriBlock", "csharp");
+@@clientName(MessageInputImageUrlBlock.imageUrl, "ImageUrl", "csharp");
+@@clientName(MessageTextUrlCitationDetails,
+  "MessageTextUriCitationDetails",
+  "csharp"
+);
+@@clientName(MessageTextUrlCitationDetails.url, "Uri", "csharp");
+@@clientName(MessageTextUrlCitationAnnotation,
+  "MessageTextUriCitationAnnotation",
+  "csharp"
+);
+@@clientName(MessageTextUrlCitationAnnotation.urlCitation,
+  "UriCitation",
+  "csharp"
+);
+@@clientName(RunStepStreamEvent.ThreadRunStepCompleted, "Completed", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepCreated, "Created", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepDelta, "Delta", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepExpired,
+  "ThreadRunStepExpired",
+  "csharp"
+);
+@@clientName(RunStepStreamEvent.ThreadRunStepFailed,
+  "ThreadRunStepFailed",
+  "csharp"
+);
+@@clientName(RunStepStreamEvent.ThreadRunStepInProgress,
+  "InProgress",
+  "csharp"
+);
+@@clientName(TruncationObject, "Truncation", "csharp");
+@@clientName(VectorStoreAutoChunkingStrategyRequest,
+  "VectorStoreAutoChunkingStrategy",
+  "csharp"
+);
+@@clientName(VectorStoreChunkingStrategyRequest,
+  "VectorStoreChunkingStrategy",
+  "csharp"
+);
 
 // Python assistant vs agent renames
 @@clientName(ThreadMessage.assistantId, "agentId", "python");
