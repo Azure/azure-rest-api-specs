@@ -1,18 +1,23 @@
-import { Rule } from "../rule.js";
+import debug from "debug";
+import { simpleGit } from "simple-git";
 import { RuleResult } from "../rule-result.js";
-import { TsvHost } from "../tsv-host.js";
+import { Rule } from "../rule.js";
+import { normalizePath, runNpm } from "../utils.js";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 export class NpmPrefixRule implements Rule {
   readonly name = "NpmPrefix";
   readonly description = "Verify spec is using root level package.json";
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
-    const git = host.gitOperation(folder);
+  async execute(folder: string): Promise<RuleResult> {
+    const git = simpleGit(folder);
 
     let expected_npm_prefix: string | undefined;
     try {
       // If spec folder is inside a git repo, returns repo root
-      expected_npm_prefix = host.normalizePath(await git.revparse("--show-toplevel"));
+      expected_npm_prefix = normalizePath(await git.revparse("--show-toplevel"));
     } catch (err) {
       // If spec folder is outside git repo, or if problem running git, throws error
       return {
@@ -21,9 +26,7 @@ export class NpmPrefixRule implements Rule {
       };
     }
 
-    const actual_npm_prefix = host.normalizePath(
-      (await host.runCmd(`npm prefix`, folder))[1].trim(),
-    );
+    const actual_npm_prefix = normalizePath((await runNpm(["prefix"], folder))[1].trim());
 
     let success = true;
     let stdOutput =

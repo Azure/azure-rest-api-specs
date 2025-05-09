@@ -10,8 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
-using Language.Conversations.Authoring;
 
 namespace Language.Conversations.Authoring;
 
@@ -312,6 +310,12 @@ model AnalyzeConversationAuthoringTrainingJobOptions {
    * Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.
    */
   evaluationOptions?: AnalyzeConversationAuthoringEvaluationOptions;
+
+  /**
+   * For customers to populate if they wish to use data generation for their model training job.
+   */
+  @added(Versions.v2025_05_15_preview)
+  dataGenerationSettings?: AnalyzeConversationAuthoringDataGenerationSettings;
 }
 
 /**
@@ -471,6 +475,12 @@ model AnalyzeConversationAuthoringDeploymentResource {
    * Represents the resource region.
    */
   region: string;
+
+  /**
+   * Represents the AOAI resource assigned for data generation.
+   */
+  @added(Versions.v2025_05_15_preview)
+  assignedAoaiResource?: AnalyzeConversationAuthoringDataGenerationConnectionInfo;
 }
 
 /**
@@ -487,7 +497,14 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
    * Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
   @added(Versions.v2023_04_15_preview)
+  @removed(Versions.v2025_05_15_preview)
   assignedResourceIds?: string[];
+
+  /**
+   * Represents the resources to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
+   */
+  @added(Versions.v2025_05_15_preview)
+  assignedResources?: AnalyzeConversationAuthoringDeploymentResource[];
 }
 
 /**
@@ -1188,6 +1205,12 @@ model AnalyzeConversationAuthoringTrainingJobResult {
   trainingStatus: AnalyzeConversationAuthoringSubTrainingJobState;
 
   /**
+   * Represents the model data generation status.
+   */
+  @added(Versions.v2025_05_15_preview)
+  dataGenerationStatus: AnalyzeConversationAuthoringSubTrainingJobState;
+
+  /**
    * Represents model evaluation status.
    */
   evaluationStatus?: AnalyzeConversationAuthoringSubTrainingJobState;
@@ -1392,6 +1415,7 @@ model AnalyzeConversationAuthoringTrainingConfigVersions {
 /**
  * Represents a training config version.
  */
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "TODO: This client name renaming explicitly makes us run into the csharp issue. Please fix."
 @clientName("ConversationAuthoringTrainingConfigVersion", "csharp")
 @resource("authoring/analyze-conversations/projects/global/training-config-versions")
 model AnalyzeConversationAuthoringTrainingConfigVersion {
@@ -1417,6 +1441,12 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
    * The category of the entity.
    */
   category: string;
+
+  /**
+   * The entity description.
+   */
+  @added(Versions.v2025_05_15_preview)
+  description?: string;
 
   /**
    * The behavior to follow when the entity's components overlap with each other.
@@ -1538,6 +1568,30 @@ model AnalyzeConversationAuthoringExportedEntityRegexExpression {
 model AnalyzeConversationAuthoringConversationExportedIntent {
   /**
    * The intent category.
+   */
+  category: string;
+
+  /**
+   * The intent description.
+   */
+  @added(Versions.v2025_05_15_preview)
+  description?: string;
+
+  /**
+   * The list of associated entities.
+   */
+  @added(Versions.v2025_05_15_preview)
+  associatedEntities?: AnalyzeConversationExportedAssociatedEntityLabel[];
+}
+
+/**
+ * Represents an associated entity label for an intent.
+ */
+@clientName("ConversationExportedAssociatedEntityLabel", "csharp")
+@added(Versions.v2025_05_15_preview)
+model AnalyzeConversationExportedAssociatedEntityLabel {
+  /**
+   * The category of the entity label.
    */
   category: string;
 }
@@ -1793,6 +1847,12 @@ model AnalyzeConversationAuthoringOrchestrationExportedIntent {
    * The intent category.
    */
   category: string;
+
+  /**
+   * The intent description.
+   */
+  @added(Versions.v2025_05_15_preview)
+  description?: string;
 }
 
 /**
@@ -1921,4 +1981,52 @@ model ExportedModelOptions {
    * The trained model label.
    */
   trainedModelLabel: string;
+}
+
+/**
+ * Represents the connection kind for Azure OpenAI deployment.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2025_05_15_preview)
+union AnalyzeConversationAuthoringDataGenerationConnectionKind {
+  string,
+  AzureOpenAI: "AzureOpenAI",
+}
+
+/**
+ * Represents the connection info for the Azure resource to use during data generation.
+ */
+@added(Versions.v2025_05_15_preview)
+model AnalyzeConversationAuthoringDataGenerationConnectionInfo {
+  /**
+   * Connection type for data generation settings. Currently only supports Azure OpenAI.
+   */
+  kind: AnalyzeConversationAuthoringDataGenerationConnectionKind;
+
+  /**
+   * Deployment name of model to be used for synthetic data generation.
+   */
+  deploymentName: string;
+
+  /**
+   * Resource ID for the data generation resource. Looks something like
+   * "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}".
+   */
+  resourceId?: string;
+}
+
+/**
+ * Settings to enable data generation for training augmentation.
+ */
+@added(Versions.v2025_05_15_preview)
+model AnalyzeConversationAuthoringDataGenerationSettings {
+  /**
+   * Must be explicitly set to True to enable data generation to augment training data.
+   */
+  enableDataGeneration: boolean;
+
+  /**
+   * Must be filled out to enable data generation to augment training data.
+   */
+  dataGenerationConnectionInfo: AnalyzeConversationAuthoringDataGenerationConnectionInfo;
 }

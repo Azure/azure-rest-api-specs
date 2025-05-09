@@ -1,7 +1,9 @@
+import "./ApiCenterExample.tsp";
 /** Describes the schema of the Azure API Center events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event. */
+@example(ApiCenterApiDefinitionAddedExample)
 model ApiCenterApiDefinitionAddedEventData {
   /** API definition title. */
   title: string;
@@ -14,6 +16,7 @@ model ApiCenterApiDefinitionAddedEventData {
 }
 
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event. */
+@example(ApiCenterApiDefinitionUpdatedExample)
 model ApiCenterApiDefinitionUpdatedEventData {
   /** API definition title. */
   title: string;

@@ -63,7 +63,7 @@
   "paths": {
     "/authoring/analyze-text/projects": {
       "get": {
-        "operationId": "ListProjects",
+        "operationId": "TextAnalysisAuthoringListProjects",
         "description": "Lists the existing projects.",
         "parameters": [
           {
@@ -621,7 +621,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments": {
       "get": {
-        "operationId": "ListDeployments",
+        "operationId": "TextAnalysisAuthoringListDeployments",
         "description": "Lists the deployments belonging to a project.",
         "parameters": [
           {
@@ -1176,7 +1176,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/exported-models": {
       "get": {
-        "operationId": "ListExportedModels",
+        "operationId": "TextAnalysisAuthoringListExportedModels",
         "description": "Lists the exported models belonging to a project.",
         "parameters": [
           {
@@ -1553,7 +1553,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models": {
       "get": {
-        "operationId": "ListTrainedModels",
+        "operationId": "TextAnalysisAuthoringListTrainedModels",
         "description": "Lists the trained models belonging to a project.",
         "parameters": [
           {
@@ -2051,7 +2051,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/resources": {
       "get": {
-        "operationId": "ListDeploymentResources",
+        "operationId": "TextAnalysisAuthoringListDeploymentResources",
         "description": "Lists the deployments resources assigned to the project.",
         "parameters": [
           {
@@ -2320,7 +2320,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/train/jobs": {
       "get": {
-        "operationId": "ListTrainingJobs",
+        "operationId": "TextAnalysisAuthoringListTrainingJobs",
         "description": "Lists the non-expired training jobs created for a project.",
         "parameters": [
           {
@@ -2523,7 +2523,7 @@
     },
     "/authoring/analyze-text/projects/global/deployments/resources": {
       "get": {
-        "operationId": "ListAssignedResourceDeployments",
+        "operationId": "TextAnalysisAuthoringListAssignedResourceDeployments",
         "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
         "parameters": [
           {
@@ -2571,7 +2571,7 @@
     },
     "/authoring/analyze-text/projects/global/languages": {
       "get": {
-        "operationId": "GetSupportedLanguages",
+        "operationId": "TextAnalysisAuthoringGetSupportedLanguages",
         "description": "Lists the supported languages.",
         "parameters": [
           {
@@ -2622,7 +2622,7 @@
     },
     "/authoring/analyze-text/projects/global/prebuilt-entities": {
       "get": {
-        "operationId": "GetSupportedPrebuiltEntities",
+        "operationId": "TextAnalysisAuthoringGetSupportedPrebuiltEntities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
         "parameters": [
           {
@@ -2661,7 +2661,7 @@
     },
     "/authoring/analyze-text/projects/global/training-config-versions": {
       "get": {
-        "operationId": "ListTrainingConfigVersions",
+        "operationId": "TextAnalysisAuthoringListTrainingConfigVersions",
         "description": "Lists the support training config version for a given project type.",
         "parameters": [
           {
@@ -2761,7 +2761,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",

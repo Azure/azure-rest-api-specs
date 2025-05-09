@@ -25,11 +25,11 @@ model EntitiesTaskParameters is PreBuiltTaskParameters {
 
   /** (Optional) request parameter that limits the output to the requested entity types included in this list. We will apply inclusionList before exclusionList */
   @added(Versions.v2024_11_01)
-  inclusionList?: Array<EntityCategory>;
+  inclusionList?: EntityCategory[];
 
   /** (Optional) request parameter that filters out any entities that are included the excludeList. When a user specifies an excludeList, they cannot get a prediction returned with an entity in that list. We will apply inclusionList before exclusionList */
   @added(Versions.v2024_11_01)
-  exclusionList?: Array<EntityCategory>;
+  exclusionList?: EntityCategory[];
 
   /** (Optional) describes the type of overlap policy to apply to the ner output. */
   @added(Versions.v2024_11_01)
@@ -63,21 +63,21 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
 /** Contains the entity recognition task result. */
 model EntitiesResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2024_11_01, Array<EntitiesDocumentResult>)
-  documents: Array<EntitiesDocumentResultWithMetadata>;
+  @typeChangedFrom(Versions.v2024_11_01, EntitiesDocumentResult[])
+  documents: EntitiesDocumentResultWithMetadata[];
 }
 
 /** Contains the entity recognition task result. */
 @added(Versions.v2024_11_15_preview)
 model EntitiesWithMetadataAutoResult is PreBuiltResult {
   /** Response by document */
-  documents: Array<EntitiesDocumentResultWithMetadataDetectedLanguage>;
+  documents: EntitiesDocumentResultWithMetadataDetectedLanguage[];
 }
 
 /** Contains the entity recognition task result for the document. */
 model EntitiesDocumentResult is DocumentResult {
   /** Recognized entities in the document. */
-  entities: Array<Entity>;
+  entities: Entity[];
 }
 
 /** Contains the entity recognition task result for the document with metadata and detected language. */
@@ -325,7 +325,7 @@ model AllowOverlapEntityPolicyType extends BaseEntityOverlapPolicy {
 @added(Versions.v2024_11_01)
 model EntitiesDocumentResultWithMetadata is DocumentResult {
   /** Recognized entities in the document. */
-  entities: Array<EntityWithMetadata>;
+  entities: EntityWithMetadata[];
 }
 
 /** Entity tag object which contains the name of the tags abd any associated confidence score. Entity Tags are used to express some similarities/affinity between entities. */
@@ -345,7 +345,7 @@ model EntityWithTags is Entity {
   type?: string;
 
   /** List of entity tags. Tags are to express some similarities/affinity between entities. */
-  tags?: Array<EntityTag>;
+  tags?: EntityTag[];
 }
 
 /** Entity object with tags and metadata. */
@@ -1087,7 +1087,7 @@ model DateValue {
 @added(Versions.v2024_11_01)
 model BaseTemporalMetadata {
   /** List of date values. */
-  dateValues?: Array<DateValue>;
+  dateValues?: DateValue[];
 }
 
 /** A Metadata for date entity instances. */

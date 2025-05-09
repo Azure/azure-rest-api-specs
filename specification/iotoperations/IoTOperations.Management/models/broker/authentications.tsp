@@ -35,7 +35,7 @@ model BrokerAuthenticationResource
 @doc("BrokerAuthentication Resource properties")
 model BrokerAuthenticationProperties {
   @doc("Defines a set of Broker authentication methods to be used on `BrokerListeners`. For each array element one authenticator type supported.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   authenticationMethods: BrokerAuthenticatorMethods[];
 
   @visibility(Lifecycle.Read)

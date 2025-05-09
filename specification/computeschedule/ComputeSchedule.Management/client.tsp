@@ -127,3 +127,7 @@ using Microsoft.ComputeSchedule;
   "errorDetailsTimestamp",
   "csharp,javascript"
 );
+@@clientName(Versions.`2024-10-01`,
+  "$DO_NOT_NORMALIZE$V2024-10-01",
+  "javascript"
+);

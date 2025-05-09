@@ -19,7 +19,7 @@ options:
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-recoveryservicesdatareplication"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.recoveryservicesdatareplication"
     flavor: "azure"
     generate-test: true
     generate-sample: true
@@ -38,6 +38,12 @@ options:
     flavor: "azure"
     namespace: "com.azure.resourcemanager.recoveryservicesdatareplication"
     service-name: "Recovery Services Data Replication"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-recoveryservicesdatareplication"
+    flavor: "azure"
+    package-details:
+      name: "@azure/arm-recoveryservicesdatareplication"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -52,11 +52,26 @@ union DevBoxProvisioningState {
   @doc("Dev Box is stopping.") Stopping: "Stopping",
   @doc("Dev Box is provisioning.") Provisioning: "Provisioning",
 
+  @added(APIVersions.v2025_04_01_preview)
+  @doc("Dev Box is pending approval.")
+  PendingApproval: "PendingApproval",
+
   @doc("Dev Box was provisioned with warning.")
   ProvisionedWithWarning: "ProvisionedWithWarning",
 
   @doc("Dev Box is in grace period.") InGracePeriod: "InGracePeriod",
   @doc("Dev Box is not provisioned.") NotProvisioned: "NotProvisioned",
+  string,
+}
+
+@doc("Indicates the general provisioning state.")
+@added(APIVersions.v2025_04_01_preview)
+union ProvisioningState {
+  @doc("Resource is creating.") Creating: "Creating",
+  @doc("Resource is being updated.") Updating: "Updating",
+  @doc("Resource is being deleted.") Deleting: "Deleting",
+  @doc("Resource was successfully provisioned.") Succeeded: "Succeeded",
+  @doc("Resource failed to provision.") Failed: "Failed",
   string,
 }
 
@@ -172,6 +187,22 @@ union PoolHealthStatus {
   Unhealthy: "Unhealthy",
 
   string,
+}
+
+@doc("Possible values for the pool align target.")
+@added(APIVersions.v2025_04_01_preview)
+union PoolAlignTarget {
+  @doc("Network properties.")
+  NetworkProperties: "NetworkProperties",
+
+  string,
+}
+
+@doc("Indicates which pool properties to align on.")
+@added(APIVersions.v2025_04_01_preview)
+model PoolAlignBody {
+  @doc("The targets to align on.")
+  targets: Array<PoolAlignTarget>;
 }
 
 @doc("The type of the resource that this schedule belongs to.")
@@ -376,7 +407,7 @@ union DevBoxOperationKind {
   CaptureSnapshot: "CaptureSnapshot",
 
   @doc("The operation represents a Dev Box align to the current network connection.")
-  @added(APIVersions.v2025_03_01_preview)
+  @added(APIVersions.v2025_04_01_preview)
   Align: "Align",
 
   string,
@@ -467,7 +498,7 @@ model Pool {
   displayName?: string;
 
   @doc("The default active hours configuration for Dev Boxes created in this pool.")
-  @added(APIVersions.v2025_03_01_preview)
+  @added(APIVersions.v2025_04_01_preview)
   activeHoursConfiguration?: PoolActiveHoursConfiguration;
 }
 
@@ -553,7 +584,7 @@ model StopOnNoConnectConfiguration {
 }
 
 @doc("The default active hours configuration settings.")
-@added(APIVersions.v2025_03_01_preview)
+@added(APIVersions.v2025_04_01_preview)
 model PoolActiveHoursConfiguration {
   @doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
   keepAwakeEnableStatus: KeepAwakeEnableStatus;
@@ -572,7 +603,7 @@ model PoolActiveHoursConfiguration {
 }
 
 @doc("The active hours configuration for a Dev Box.")
-@added(APIVersions.v2025_03_01_preview)
+@added(APIVersions.v2025_04_01_preview)
 model ActiveHoursConfiguration {
   @doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
   keepAwakeEnableStatus: KeepAwakeEnableStatus;
@@ -584,7 +615,7 @@ model ActiveHoursConfiguration {
 }
 
 @doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
-@added(APIVersions.v2025_03_01_preview)
+@added(APIVersions.v2025_04_01_preview)
 union KeepAwakeEnableStatus {
   @doc("Keep awake is enabled.")
   Enabled: "Enabled",
@@ -596,7 +627,7 @@ union KeepAwakeEnableStatus {
 }
 
 @doc("Enables or disables whether the Dev Box should be automatically started at commencement of active hours.")
-@added(APIVersions.v2025_03_01_preview)
+@added(APIVersions.v2025_04_01_preview)
 union AutoStartEnableStatus {
   @doc("Auto start is enabled.")
   Enabled: "Enabled",
@@ -608,7 +639,7 @@ union AutoStartEnableStatus {
 }
 
 @doc("Manual user set active hours configuration.")
-@added(APIVersions.v2025_03_01_preview)
+@added(APIVersions.v2025_04_01_preview)
 model UserActiveHoursConfiguration {
   @doc("The timezone of the active hours.")
   timeZone?: string;
@@ -761,7 +792,7 @@ model DevBox {
   localAdministrator?: LocalAdminStatus;
 
   @doc("The active hours configuration for this Dev Box, if enabled.")
-  @added(APIVersions.v2025_03_01_preview)
+  @added(APIVersions.v2025_04_01_preview)
   @visibility(Lifecycle.Read)
   activeHoursConfiguration?: ActiveHoursConfiguration;
 }
@@ -887,7 +918,7 @@ model DevBoxStartOperation extends DevBoxOperation {
 }
 
 @doc("Information about an align operation on a Dev Box.")
-@added(APIVersions.v2025_03_01_preview)
+@added(APIVersions.v2025_04_01_preview)
 model DevBoxAlignOperation extends DevBoxOperation {
   @doc("The kind of operation that occurred.")
   kind: DevBoxOperationKind.Align;
@@ -1135,4 +1166,88 @@ model DevBoxSnapshot {
   @visibility(Lifecycle.Read)
   @added(APIVersions.v2024_10_01_preview)
   snapshotType: SnapshotType;
+}
+
+@doc("A Dev Box addon.")
+@resource("addons")
+@parentResource(DevBox)
+@discriminator("kind")
+@added(APIVersions.v2025_04_01_preview)
+model DevBoxAddOn {
+  @key("addOnName")
+  @doc("Name of the dev box addon.")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("The type of the Dev Box addon.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  kind: DevBoxAddOnKind;
+
+  @doc("""
+    The current action state of the Dev Box addon. This state is based on previous
+    action performed by user.
+    """)
+  @visibility(Lifecycle.Read)
+  actionState?: string;
+
+  @doc("Provisioning state of this addon.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  @doc("Creation, deletion or action error details. Populated only for error states.")
+  @visibility(Lifecycle.Read)
+  error?: Azure.Core.Foundations.Error;
+}
+
+@doc("The kind of Dev Box addon.")
+@added(APIVersions.v2025_04_01_preview)
+union DevBoxAddOnKind {
+  @doc("The Dev Box Tunnel addon.")
+  DevBoxTunnel: "DevBoxTunnel",
+
+  string,
+}
+
+@doc("The Dev Box Tunnel addon.")
+@added(APIVersions.v2025_04_01_preview)
+model DevBoxTunnel extends DevBoxAddOn {
+  @doc("The kind of Dev Box addon.")
+  kind: DevBoxAddOnKind.DevBoxTunnel;
+
+  @doc("The tunnel status.")
+  @visibility(Lifecycle.Read)
+  status: DevBoxTunnelStatus;
+
+  @doc("The code tunnel name.")
+  @visibility(Lifecycle.Read)
+  codeTunnelName: string;
+
+  @doc("The code tunnel's url.")
+  @visibility(Lifecycle.Read)
+  codeTunnelUrl: url;
+
+  @doc("""
+    The hosting resource name, either a DevBox or HyperV. 
+    Leaving it empty or `Default` if it's for DevBox.
+    """)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  hostingResourceName?: string;
+}
+
+@doc("The detailed status of Dev Box Tunnel addon.")
+@added(APIVersions.v2025_04_01_preview)
+union DevBoxTunnelStatus {
+  @doc("The tunnel is active and can be connected.")
+  Enabled: "Enabled",
+
+  @doc("The tunnel is inactive and can't be connected.")
+  Disabled: "Disabled",
+
+  @doc("The tunnel is suspended due to hibernation or other reasons.")
+  Suspended: "Suspended",
+
+  string,
 }
