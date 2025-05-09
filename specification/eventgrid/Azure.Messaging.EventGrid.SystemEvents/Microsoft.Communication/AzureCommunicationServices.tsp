@@ -1627,38 +1627,11 @@ union AcsCallParticipantRoleKind {
   /** Organizer */
   "Organizer",
 
-  /** Interpreter */
-  "Interpreter",
+  /** Consumer */
+  "Consumer",
 
-  /** AcsOrganizer */
-  "AcsOrganizer",
-
-  /** AcsPresenter */
-  "AcsPresenter",
-
-  /** AcsAttendee */
-  "AcsAttendee",
-
-  /** AcsConsumer */
-  "AcsConsumer",
-
-  /** AcsCollaborator */
-  "AcsCollaborator",
-
-  /** CoOrganizer */
-  "CoOrganizer",
-
-  /** Unknown */
-  "Unknown",
-
-  /** Producer */
-  "Producer",
-
-  /** Moderator */
-  "Moderator",
-
-  /** None */
-  "None",
+  /** Collaborator */
+  "Collaborator",
 
   string,
 }
