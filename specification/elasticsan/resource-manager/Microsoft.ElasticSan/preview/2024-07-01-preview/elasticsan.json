@@ -2383,35 +2383,10 @@
       "properties": {
         "scaleUpProperties": {
           "$ref": "#/definitions/ScaleUpProperties",
-          "description": "Scale up settings on Elastic San Appliance."
+          "description": "Scale up settings on Elastic San Appliance.",
+          "x-ms-client-name": "ScaleUpProperties"
         }
       }
-    },
-    "Azure.ResourceManager.ArmResponse<PreValidationResponse>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/PreValidationResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Volume>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Volume",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "DeleteRetentionPolicy": {
       "type": "object",
@@ -2423,7 +2398,8 @@
         "retentionPeriodDays": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of days to retain the resources after deletion."
+          "description": "The number of days to retain the resources after deletion.",
+          "minimum": 0
         }
       }
     },
@@ -2631,7 +2607,7 @@
         "userAssignedIdentity": {
           "type": "string",
           "description": "Resource identifier of the UserAssigned identity to be associated with server-side encryption on the volume group.",
-          "x-ms-client-name": "encryptionUserAssignedIdentity"
+          "x-ms-client-name": "EncryptionUserAssignedIdentity"
         }
       }
     },
@@ -2641,12 +2617,13 @@
       "properties": {
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
-          "description": "Properties provided by key vault."
+          "description": "Properties provided by key vault.",
+          "x-ms-client-name": "KeyVaultProperties"
         },
         "identity": {
           "$ref": "#/definitions/EncryptionIdentity",
           "description": "The identity to be used with service-side encryption at rest.",
-          "x-ms-client-name": "encryptionIdentity"
+          "x-ms-client-name": "EncryptionIdentity"
         }
       }
     },
@@ -2696,7 +2673,7 @@
           "type": "object",
           "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this volume group. The key is the ARM resource identifier of the identity.",
           "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
+            "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
       },
@@ -2768,33 +2745,39 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "The name of KeyVault key."
+          "description": "The name of KeyVault key.",
+          "x-ms-client-name": "KeyName"
         },
         "keyVersion": {
           "type": "string",
-          "description": "The version of KeyVault key."
+          "description": "The version of KeyVault key.",
+          "x-ms-client-name": "KeyVersion"
         },
         "keyVaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The Uri of KeyVault."
+          "description": "The Uri of KeyVault.",
+          "x-ms-client-name": "KeyVaultUri"
         },
         "currentVersionedKeyIdentifier": {
           "type": "string",
           "description": "The object identifier of the current versioned Key Vault Key in use.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "CurrentVersionedKeyIdentifier"
         },
         "lastKeyRotationTimestamp": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp of last rotation of the Key Vault Key.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "LastKeyRotationTimestamp"
         },
         "currentVersionedKeyExpirationTimestamp": {
           "type": "string",
           "format": "date-time",
           "description": "This is a read only property that represents the expiration time of the current version of the customer managed key used for encryption.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "CurrentVersionedKeyExpirationTimestamp"
         }
       }
     },
@@ -2804,7 +2787,8 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Resource ID of the resource managing the volume, this is a restricted field and can only be set for internal use."
+          "description": "Resource ID of the resource managing the volume, this is a restricted field and can only be set for internal use.",
+          "x-ms-client-name": "ResourceId"
         }
       }
     },
@@ -3236,7 +3220,7 @@
           "description": "The sku name."
         },
         "tier": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/SkuTier",
+          "$ref": "#/definitions/SkuTier",
           "description": "The sku tier."
         }
       },
@@ -3253,7 +3237,7 @@
           "description": "Sku Name"
         },
         "tier": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/SkuTier",
+          "$ref": "#/definitions/SkuTier",
           "description": "Sku Tier"
         },
         "resourceType": {
@@ -3302,6 +3286,7 @@
           "items": {
             "$ref": "#/definitions/SkuInformation"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "nextLink": {
@@ -3353,6 +3338,24 @@
             "name": "Premium_ZRS",
             "value": "Premium_ZRS",
             "description": "Premium zone redundant storage"
+          }
+        ]
+      }
+    },
+    "SkuTier": {
+      "type": "string",
+      "description": "The sku tier.",
+      "enum": [
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium Tier"
           }
         ]
       }
@@ -3475,6 +3478,22 @@
         ]
       }
     },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "UserAssignedIdentity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of the identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the identity.",
+          "readOnly": true
+        }
+      }
+    },
     "VirtualNetworkRule": {
       "type": "object",
       "description": "Virtual Network rule.",
@@ -3482,7 +3501,7 @@
         "id": {
           "type": "string",
           "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.",
-          "x-ms-client-name": "virtualNetworkResourceId"
+          "x-ms-client-name": "VirtualNetworkResourceId"
         },
         "action": {
           "type": "string",
@@ -3756,8 +3775,7 @@
         },
         "storageTarget": {
           "$ref": "#/definitions/IscsiTargetInfo",
-          "description": "Storage target information",
-          "readOnly": true
+          "description": "Storage target information"
         },
         "managedBy": {
           "$ref": "#/definitions/ManagedByInfo",

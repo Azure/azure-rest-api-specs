@@ -84,7 +84,7 @@ interface VolumeGroups {
   preBackup is ArmResourceActionAsync<
     VolumeGroup,
     VolumeNameList,
-    ArmResponse<PreValidationResponse>
+    PreValidationResponse
   >;
 
   /**
@@ -95,7 +95,7 @@ interface VolumeGroups {
   preRestore is ArmResourceActionAsync<
     VolumeGroup,
     DiskSnapshotList,
-    ArmResponse<PreValidationResponse>
+    PreValidationResponse
   >;
 }
 

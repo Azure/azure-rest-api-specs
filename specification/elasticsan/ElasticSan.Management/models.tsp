@@ -233,6 +233,7 @@ union DeleteType {
  * List of SKU Information objects
  */
 model SkuInformationList is Azure.Core.Page<SkuInformation>;
+@@visibility(SkuInformationList.value, Lifecycle.Read);
 
 /**
  * ElasticSAN SKU and its properties
@@ -579,6 +580,36 @@ model Identity {
 }
 
 /**
+ * UserAssignedIdentity for the resource.
+ */
+model UserAssignedIdentity {
+  /**
+   * The principal ID of the identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The client ID of the identity.
+   */
+  @visibility(Lifecycle.Read)
+  clientId?: string;
+}
+
+/**
+ * The sku tier.
+ */
+union SkuTier {
+  string,
+
+  /**
+   * Premium Tier
+   */
+  Premium: "Premium",
+}
+
+
+/**
  * VolumeGroup response properties.
  */
 model VolumeGroupProperties {
@@ -726,6 +757,7 @@ model DeleteRetentionPolicy {
   /**
    * The number of days to retain the resources after deletion.
    */
+  @minValue(0)
   retentionPeriodDays?: int32;
 }
 
@@ -805,7 +837,6 @@ model VolumeProperties {
   /**
    * Storage target information
    */
-  @visibility(Lifecycle.Read)
   storageTarget?: IscsiTargetInfo;
 
   /**

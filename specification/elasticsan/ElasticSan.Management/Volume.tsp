@@ -94,7 +94,7 @@ interface Volumes {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("restore")
   @operationId("RestoreVolume")
-  restoreVolume is ArmResourceActionAsync<Volume, void, ArmResponse<Volume>>;
+  restoreVolume is ArmResourceActionAsync<Volume, void, Volume>;
 }
 
 @@maxLength(Volume.name, 63);

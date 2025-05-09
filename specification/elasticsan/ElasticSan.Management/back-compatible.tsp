@@ -9,13 +9,11 @@ using Microsoft.ElasticSan;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateLinkResource.properties);
 
-@@clientName(EncryptionProperties.identity, "encryptionIdentity");
+@@clientName(EncryptionProperties.identity, "EncryptionIdentity");
 
-@@clientName(EncryptionIdentity.userAssignedIdentity,
-  "encryptionUserAssignedIdentity"
-);
+@@clientName(EncryptionIdentity.userAssignedIdentity, "EncryptionUserAssignedIdentity");
 
-@@clientName(VirtualNetworkRule.id, "virtualNetworkResourceId");
+@@clientName(VirtualNetworkRule.id, "VirtualNetworkResourceId");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VolumeGroupUpdate.properties);
@@ -49,3 +47,13 @@ using Microsoft.ElasticSan;
 @@clientName(Volumes.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Volume.properties);
+
+@@clientName(AutoScaleProperties.scaleUpProperties, "ScaleUpProperties");
+@@clientName(EncryptionProperties.keyVaultProperties, "KeyVaultProperties");
+@@clientName(KeyVaultProperties.keyName, "KeyName");
+@@clientName(KeyVaultProperties.keyVersion, "KeyVersion");
+@@clientName(KeyVaultProperties.keyVaultUri, "KeyVaultUri");
+@@clientName(KeyVaultProperties.currentVersionedKeyIdentifier, "CurrentVersionedKeyIdentifier");
+@@clientName(KeyVaultProperties.lastKeyRotationTimestamp, "LastKeyRotationTimestamp");
+@@clientName(KeyVaultProperties.currentVersionedKeyExpirationTimestamp, "CurrentVersionedKeyExpirationTimestamp");
+@@clientName(ManagedByInfo.resourceId, "ResourceId");
