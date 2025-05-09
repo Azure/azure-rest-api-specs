@@ -2036,7 +2036,24 @@
           "type": "boolean",
           "description": "Indicates whether scheduling is enabled."
         },
-        "cronExpression": {
+        "cronTrigger": {
+          "$ref": "#/definitions/CronTrigger"
+        }
+      }
+    },
+    "CronTrigger": {
+      "description": "The cron trigger configuration.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "Indicates the start time for the trigger. The default value is the time at which the trigger was created."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone in which the trigger is scheduled."
+        },
+        "expression": {
           "type": "string",
           "description": "A cron string representing a CronTab expression. A crontab expression is a very compact way to express a recurring schedule with the following format: '{minutes} {hours} {days} {months} {days-of-week}'."
         }
