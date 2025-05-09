@@ -698,12 +698,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Microsoft-managed keys (MMK)",
+            "name": "MicrosoftManagedKeysMMK",
             "value": "Microsoft-managed keys (MMK)",
             "description": "Microsoft managed keys (Default)"
           },
           {
-            "name": "Customer-managed keys (CMK)",
+            "name": "CustomerManagedKeysCMK",
             "value": "Customer-managed keys (CMK)",
             "description": "Customer managed keys\n(CMK) - Only UserAssigned identity is supported"
           }
@@ -862,7 +862,12 @@
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
           "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
             "x-nullable": true
           }
         }
