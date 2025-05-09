@@ -5143,7 +5143,11 @@
       "properties": {
         "location": {
           "description": "The location of the export pipeline.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
@@ -5349,7 +5353,11 @@
       "properties": {
         "location": {
           "description": "The location of the import pipeline.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
@@ -5453,6 +5461,7 @@
       }
     },
     "PipelineTriggerProperties": {
+      "description": "The trigger properties of the import pipeline",
       "type": "object",
       "properties": {
         "sourceTrigger": {
@@ -5465,6 +5474,7 @@
       "required": [
         "status"
       ],
+      "description": "The source trigger properties of the import pipeline",
       "type": "object",
       "properties": {
         "status": {
@@ -5857,6 +5867,7 @@
       }
     },
     "PipelineRunSourceProperties": {
+      "description": "The pipeline run source properties",
       "type": "object",
       "properties": {
         "type": {
@@ -5878,6 +5889,7 @@
       }
     },
     "PipelineRunTargetProperties": {
+      "description": "The pipeline run target properties",
       "type": "object",
       "properties": {
         "type": {
@@ -5899,6 +5911,7 @@
       }
     },
     "ProgressProperties": {
+      "description": "The progress properties.",
       "type": "object",
       "properties": {
         "percentage": {
@@ -5908,6 +5921,7 @@
       }
     },
     "PipelineTriggerDescriptor": {
+      "description": "The pipeline trigger descriptor",
       "type": "object",
       "properties": {
         "sourceTrigger": {
@@ -5917,6 +5931,7 @@
       }
     },
     "PipelineSourceTriggerDescriptor": {
+      "description": "The pipeline source trigger descriptor.",
       "type": "object",
       "properties": {
         "timestamp": {
@@ -6697,7 +6712,6 @@
         },
         "metadataSearch": {
           "description": "Determines whether registry artifacts are indexed for metadata search.",
-          "default": "Disabled",
           "enum": [
             "Enabled",
             "Disabled"
