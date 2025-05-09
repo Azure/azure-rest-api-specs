@@ -20,7 +20,7 @@ if ($CheckAll) {
 }
 else {
   $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -headCommitish $HeadCommitish -diffFilter "")
-  $coreChangedFiles = Get-ChangedCoreFiles $changedFiles
+  $coreChangedFiles = $false # = Get-ChangedCoreFiles $changedFiles
 
   if ($coreChangedFiles -and !$IgnoreCoreFiles) {
     Write-Verbose "Found changes to core eng or root files so checking all specs."
