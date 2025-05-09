@@ -487,12 +487,14 @@ model DatadogOrganizationProperties {
    * The auth code used to linking to an existing Datadog organization.
    */
   @visibility(Lifecycle.Create)
+  @secret
   linkingAuthCode?: string;
 
   /**
    * The client_id from an existing in exchange for an auth token to link organization.
    */
   @visibility(Lifecycle.Create)
+  @secret
   linkingClientId?: string;
 
   /**
@@ -505,12 +507,14 @@ model DatadogOrganizationProperties {
    * Api key associated to the Datadog organization.
    */
   @visibility(Lifecycle.Create)
+  @secret
   apiKey?: string;
 
   /**
    * Application key associated to the Datadog organization.
    */
   @visibility(Lifecycle.Create)
+  @secret
   applicationKey?: string;
 
   /**
