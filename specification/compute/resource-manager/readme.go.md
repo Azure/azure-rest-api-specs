@@ -42,4 +42,30 @@ directive:
     where: "$.definitions.PurchasePlan"
     transform: >
       $["x-ms-client-name"] = "DiskPurchasePlan";
+  - from: ComputeRP.json
+    where: $.definitions
+    transform: delete $["Expand"]
+    reason: https://github.com/Azure/typespec-azure/issues/2499
+  - from: ComputeRP.json            
+    where: $.definitions.VirtualMachineScaleSetVMExtension.properties.name
+    transform: delete $["x-ms-client-name"]
+    reason: https://github.com/Azure/typespec-azure/issues/2517
+  - from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetExtension.properties.name
+    transform: delete $["x-ms-client-name"]
+    reason: https://github.com/Azure/typespec-azure/issues/2517
+  - from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetStorageProfile.properties.diskControllerType
+    transform: >
+      delete $["$ref"];
+      $["type"] = "string";
+  - from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetUpdateStorageProfile.properties.diskControllerType
+    transform: >
+      delete $["$ref"];
+      $["type"] = "string";
+  - from: swagger-document
+    where: "$.definitions.Operation"
+    transform: >
+      $["x-ms-client-name"] = "OperationValue";
 ```
