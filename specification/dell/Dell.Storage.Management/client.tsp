@@ -29,11 +29,11 @@ using LiftrBase.Storage;
   "csharp"
 );
 @@clientName(EncryptionProperties,
-  "DellFileSystemEncryptionPropertiess",
+  "DellFileSystemEncryptionProperties",
   "csharp"
 );
 @@clientName(EncryptionUpdateProperties,
-  "DellFileSystemEncryptionPatchPropertiess",
+  "DellFileSystemEncryptionPatchProperties",
   "csharp"
 );
 @@clientName(MarketplaceDetails, "DellFileSystemMarketplaceDetails", "csharp");
