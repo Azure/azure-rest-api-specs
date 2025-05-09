@@ -847,6 +847,7 @@
       "type": "string",
       "description": "EventHub event kind.",
       "enum": [
+        "Ping",
         "TranslationCompletion",
         "IterationCompletion"
       ],
@@ -854,6 +855,11 @@
         "name": "EventHubVideoTranslationEventKind",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Ping",
+            "value": "Ping",
+            "description": "Send event to EventHub when ping API is requested."
+          },
           {
             "name": "TranslationCompletion",
             "value": "TranslationCompletion",

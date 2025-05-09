@@ -111,6 +111,9 @@ union WebvttFileKind {
 union EventHubVideoTranslationEventKind {
   string,
 
+  /** Send event to EventHub when ping API is requested. */
+  Ping: "Ping",
+
   /** Send event to EventHub when translation completed or failed. */
   TranslationCompletion: "TranslationCompletion",
 
