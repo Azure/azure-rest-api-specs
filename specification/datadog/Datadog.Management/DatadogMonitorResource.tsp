@@ -10,6 +10,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 namespace Microsoft.Datadog;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @Azure.ResourceManager.Private.armResourceInternal(IdentityProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model DatadogMonitorResource
@@ -24,6 +27,7 @@ model DatadogMonitorResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: ResourceSku;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: MonitorProperties;

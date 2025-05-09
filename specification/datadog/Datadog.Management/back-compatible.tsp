@@ -16,3 +16,9 @@ using Microsoft.Datadog;
   "body"
 );
 @@clientName(MonitoredSubscriptions.update::parameters.properties, "body");
+
+@@clientName(BillingInfoResponse, "BillingInfoResult", "csharp");
+@@clientName(CreateResourceSupportedResponse,
+  "CreateResourceSupportedResult",
+  "csharp"
+);
