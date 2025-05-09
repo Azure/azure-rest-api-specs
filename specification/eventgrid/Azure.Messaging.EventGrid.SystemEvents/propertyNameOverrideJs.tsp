@@ -152,7 +152,7 @@ using Microsoft.EventGrid.SystemEvents;
   "AcsCallRoom",
   "javascript"
 );
-@@clientName(AcsCallEndedBy,
+@@clientName(AcsCallEndedByProperties,
   "AcsCallEndedBy",
   "javascript"
 );
