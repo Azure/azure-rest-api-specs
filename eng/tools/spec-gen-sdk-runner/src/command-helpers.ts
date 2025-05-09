@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { findReadmeFiles, getArgumentValue, getAllTypeSpecPaths, objectToMap } from "./utils.js";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
 import {
+  APIViewRequestData,
   SdkName,
   SpecGenSdkArtifactInfo,
   SpecGenSdkCmdInput,
@@ -256,6 +257,8 @@ export function generateArtifact(
   breakingChangeLabel: string,
   hasBreakingChange: boolean,
   hasManagementPlaneSpecs: boolean,
+  stagedArtifactsFolder: string,
+  apiViewRequestData: APIViewRequestData []
 ): number {
   const specGenSdkArtifactName = "spec-gen-sdk-artifact";
   const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
@@ -275,6 +278,7 @@ export function generateArtifact(
       labelAction: hasBreakingChange,
       isSpecGenSdkCheckRequired:
         hasManagementPlaneSpecs && SpecGenSdkRequiredSettings[commandInput.sdkLanguage as SdkName],
+      apiViewRequestData: apiViewRequestData
     };
     fs.writeFileSync(
       path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
@@ -282,6 +286,7 @@ export function generateArtifact(
     );
     setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
     setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
+    setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
     setVsoVariable("BreakingChangeLabelAction", hasBreakingChange ? "add" : "remove");
     setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
   } catch (error) {
