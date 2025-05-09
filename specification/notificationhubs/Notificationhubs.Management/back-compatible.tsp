@@ -77,3 +77,6 @@ using Microsoft.NotificationHubs;
 @@clientName(NamespacesOperationGroup.checkAvailability::parameters.body,
   "parameters"
 );
+@@clientName(CheckAvailabilityParameters, "CheckAvailabilityContent", "csharp");
+@@clientName(Operation, "Info", "csharp");
+@@clientName(DebugSendResponse, "DebugSendResult", "csharp");
