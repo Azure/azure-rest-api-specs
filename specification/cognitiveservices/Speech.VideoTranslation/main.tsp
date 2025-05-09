@@ -181,6 +181,10 @@ model TranslationInput {
   @doc("Number of speakers in the video.")
   speakerCount?: int32;
 
+  @doc("Indicate whether enable lip sync.")
+  @added(ApiVersions.v2025_05_20)
+  enableLipSync?: boolean;
+
   @doc("Subtitle max display character count per segment.")
   subtitleMaxCharCountPerSegment?: int32;
 
