@@ -26,9 +26,8 @@ using Azure.ResourceManager.Private;
  * Azure Health Bot is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.
  */
 @armProviderNamespace
-@service(#{ title: "HealthbotClient" })
+@service(#{ title: "Azure Health Bot" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.HealthBot;
 
