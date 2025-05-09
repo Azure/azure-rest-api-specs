@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Contoso Widget Manager",
+    "title": "Contoso Widget Manager with change to trigger LintDiff.",
     "version": "2022-12-01",
     "x-typespec-generated": [
       {
@@ -49,24 +49,7 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedWidgetSuite"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
+
         },
         "x-ms-examples": {
           "Widgets_ListWidgets": {
