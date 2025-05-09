@@ -361,6 +361,7 @@ model OperationDetail {
    * Additional properties.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
   properties?: {};
 }
 
