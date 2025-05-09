@@ -57,8 +57,8 @@ export async function runChecks(
       if (tag) {
         autorestArgs.push(`--tag=${tag}`);
       }
-
       autorestArgs.push(changedFilePath);
+      
       const autorestCommand = `npm ${autorestArgs.join(" ")}`;
       console.log(`\tAutorest command: ${autorestCommand}`);
 
