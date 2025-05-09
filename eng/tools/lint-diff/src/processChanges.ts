@@ -48,11 +48,11 @@ export async function getRunList(
   const affectedSwaggers = await getChangedSwaggers(beforePath, afterPath, affectedSwaggerCandidates);
 
   console.log("Before readme and tags:");
-  console.table([...beforeTagMap].map(([readme, tags]) => ({ readme, tags })), ['readme', 'tags']);
+  console.table([...beforeTagMap].map(([readme, tags]) => ({ readme, tags: [...tags.tags] })), ['readme', 'tags']);
   console.log("\n");
 
   console.log("After readme and tags:");
-  console.table([...afterTagMap].map(([readme, tags]) => ({ readme, tags })), ['readme', 'tags']);
+  console.table([...afterTagMap].map(([readme, tags]) => ({ readme, tags: [...tags.tags] })), ['readme', 'tags']);
   console.log("\n");
 
   console.log("Affected swaggers:"); 
@@ -103,7 +103,8 @@ export async function buildState(
   const changedFileAndTagsMap = new Map<string, ReadmeTags>();
   for (const [readmeFile, tags] of readmeTags.entries()) {
     const allReadmeTags = await tags.readme.getTags();
-    const tagsAndInputs = [...allReadmeTags]
+    const interestingTags = [...allReadmeTags].filter((t) => tags.tags.has(t.name));
+    const tagsAndInputs = [...interestingTags]
       .map((tag) => { 
         return { 
           tagName: tag.name,

@@ -102,9 +102,13 @@ export function getViolations(
     );
 
     const [newItems, existingItems] = getNewItems(beforeViolations, afterViolations);
+
+    const beforeReadmePath = before ? relative(before?.rootPath, before?.readme.path) : "";
+    const afterReadmePath = relative(after.rootPath, after.readme.path);
+
     console.log("Correlation:");
-    console.log(`\tBefore: Readme: ${before?.readme} Tag: ${before?.tag}`);
-    console.log(`\tAfter: Readme : ${after.readme} Tag: ${after.tag}`);
+    console.log(`\tBefore: Readme: ${beforeReadmePath} Tag: ${before?.tag}`);
+    console.log(`\tAfter: Readme : ${afterReadmePath} Tag: ${after.tag}`);
 
     newViolations.push(...newItems);
     existingViolations.push(...existingItems);
