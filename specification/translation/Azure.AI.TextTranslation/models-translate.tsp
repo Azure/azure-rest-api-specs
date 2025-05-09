@@ -11,6 +11,7 @@ using Azure.Core;
 namespace TextTranslation;
 
 @doc("Request body parameters for the translate API.")
+@added(APIVersion.v2025_05_01_preview)
 model TranslateBodyParameters {
   @doc("""
     Details of the translate request
@@ -134,6 +135,7 @@ model TranslateParameters {
 }
 
 @doc("Translate targets parameters")
+@added(APIVersion.v2025_05_01_preview)
 model TranslateTarget {
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
@@ -214,6 +216,7 @@ model TranslateTarget {
 }
 
 @doc("Request body parameters for the translate API.")
+@added(APIVersion.v2025_05_01_preview)
 model TranslateBodyDetails {
   @doc("""
     Specifies the text string to be translated in the translate API.
@@ -249,6 +252,7 @@ model TranslateBodyDetails {
 }
 
 @doc("Reference sentence pair.")
+@added(APIVersion.v2025_05_01_preview)
 model ReferenceSentencePair {
   @doc("Source reference sentence.")
   referenceTextPairsSource: string;
