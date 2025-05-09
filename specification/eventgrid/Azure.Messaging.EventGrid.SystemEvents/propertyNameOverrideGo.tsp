@@ -610,5 +610,6 @@ using Microsoft.EventGrid.SystemEvents;
   "ACSChatTypingIndicatorReceivedInThreadEventData",
   "go"
 );
+@@clientName(AcsCallParticipantRoleKind, "ACSCallParticipantRoleKind", "go");
 
 // [END] ACS renames (and acronym casing)
