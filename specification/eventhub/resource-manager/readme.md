@@ -265,7 +265,7 @@ input-file:
 - Microsoft.EventHub/preview/2025-05-01-preview/namespaces.json
 - Microsoft.EventHub/preview/2025-05-01-preview/networkrulessets.json
 - Microsoft.EventHub/preview/2025-05-01-preview/operations.json
-- Microsoft.EventHub/preview/2025-05-01-preview/quotaConfiguration-preview.json
+- Microsoft.EventHub/preview/2025-05-01-preview/quotaConfiguration.json
 - Microsoft.EventHub/preview/2025-05-01-preview/SchemaRegistry.json
 ```
 
