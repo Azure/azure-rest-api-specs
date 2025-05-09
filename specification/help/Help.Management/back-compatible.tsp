@@ -66,3 +66,19 @@ using Microsoft.Help;
 @@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription::parameters.body,
   "discoverSolutionRequest"
 );
+@@clientName(DiscoveryNlpRequest, "DiscoveryNlpContent", "csharp");
+@@clientName(ResponseOption, "ResponseConfig", "csharp");
+@@clientName(RestartTroubleshooterResponse,
+  "RestartTroubleshooterResult",
+  "csharp"
+);
+@@clientName(TroubleshooterResponse, "TroubleshooterResult", "csharp");
+@@clientName(ResponseOption, "ResponseConfig", "csharp");
+@@clientName(CheckNameAvailabilityResponse,
+  "CheckNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(RestartTroubleshooterResponse,
+  "RestartTroubleshooterResult",
+  "csharp"
+);
