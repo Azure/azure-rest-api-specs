@@ -128,7 +128,7 @@ model KeyListResult {
 model Key {
   @doc("The name of the key.")
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -170,7 +170,7 @@ model KeyValueListResult {
 @resource("kv")
 model KeyValue {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The key of the key-value.")
   key: string;
 
@@ -216,11 +216,11 @@ model SnapshotListResult {
 model Snapshot {
   @key
   @doc("The name of the snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The current status of the snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: SnapshotStatus;
 
   @doc("A list of filters used to filter the key-values included in the snapshot.")
@@ -239,12 +239,12 @@ model Snapshot {
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Pre-existing API contract."
   @doc("The time that the snapshot was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   created?: offsetDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Pre-existing API contract."
   @doc("The time that the snapshot will expire.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expires?: offsetDateTime;
 
   @doc("""
@@ -259,11 +259,11 @@ model Snapshot {
   retentionPeriod?: int64;
 
   @doc("The size in bytes of the snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   size?: int64;
 
   @doc("The amount of key-values in the snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "items_count")
   itemsCount?: int64;
 
@@ -271,7 +271,7 @@ model Snapshot {
   tags?: Record<string>;
 
   @doc("A value representing the current state of the snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 

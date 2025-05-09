@@ -1,0 +1,312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyClient",
+    "version": "2025-03-01",
+    "description": "Allows resource operations to call external endpoints, issuing tokens upon validation."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/acquirePolicyToken": {
+      "post": {
+        "tags": [
+          "PolicyTokens"
+        ],
+        "operationId": "PolicyTokens_Acquire",
+        "summary": "Acquires a policy token.",
+        "description": "This operation acquires a policy token in the given subscription for the given request body.",
+        "x-ms-examples": {
+          "Acquire a policy token": {
+            "$ref": "./examples/acquirePolicyToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenRequest"
+            },
+            "description": "The policy token properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully acquired the policy token.",
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted and the request for acquiring the policy token is being processed asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PolicyTokenRequest": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "description": "The resource operation to acquire a token for.",
+          "$ref": "#/definitions/PolicyTokenOperation"
+        },
+        "changeReference": {
+          "type": "string",
+          "description": "The change reference."
+        }
+      },
+      "description": "The policy token request properties."
+    },
+    "PolicyTokenResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "The result of the completed token acquisition operation. Possible values are Succeeded and Failed.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "policyTokenResult",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Status message with additional details about the token acquisition operation result."
+        },
+        "retryAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time after which the client can try to acquire a token again in the case of retry-able failures."
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExternalEvaluationEndpointInvocationResult"
+          },
+          "description": "An array of external evaluation endpoint invocation results."
+        },
+        "changeReference": {
+          "type": "string",
+          "description": "The change reference associated with the operation for which the token is acquired."
+        },
+        "token": {
+          "type": "string",
+          "description": "The issued policy token."
+        },
+        "tokenId": {
+          "type": "string",
+          "description": "The unique Id assigned to the policy token."
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration of the policy token."
+        }
+      },
+      "description": "The policy token response properties."
+    },
+    "PolicyTokenOperation": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The request URI of the resource operation."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "The http method of the resource operation."
+        },
+        "content": {
+          "type": "object",
+          "description": "The payload of the resource operation."
+        }
+      },
+      "description": "The resource operation to acquire a token for."
+    },
+    "ExternalEvaluationEndpointInvocationResult": {
+      "type": "object",
+      "properties": {
+        "policyInfo": {
+          "description": "The details of the policy requiring the external endpoint invocation.",
+          "$ref": "#/definitions/PolicyLogInfo"
+        },
+        "result": {
+          "type": "string",
+          "description": "The result of the external endpoint. Possible values are Succeeded and Failed.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "externalEndpointResult",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "The status message with additional details about the invocation result."
+        },
+        "retryAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time after which a failed endpoint invocation can be retried."
+        },
+        "claims": {
+          "type": "object",
+          "description": "The set of claims that will be attached to the policy token as an attestation for the result of the endpoint invocation."
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration of the results."
+        }
+      },
+      "description": "The external evaluation endpoint invocation results."
+    },
+    "PolicyLogInfo": {
+      "type": "object",
+      "properties": {
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The policy definition Id."
+        },
+        "policySetDefinitionId": {
+          "type": "string",
+          "description": "The policy set definition Id."
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "The policy definition instance Id inside a policy set."
+        },
+        "policySetDefinitionName": {
+          "type": "string",
+          "description": "The policy set definition name."
+        },
+        "policySetDefinitionDisplayName": {
+          "type": "string",
+          "description": "The policy set definition display name."
+        },
+        "policySetDefinitionVersion": {
+          "type": "string",
+          "description": "The policy set definition version."
+        },
+        "policySetDefinitionCategory": {
+          "type": "string",
+          "description": "The policy set definition category."
+        },
+        "policyDefinitionName": {
+          "type": "string",
+          "description": "The policy definition name."
+        },
+        "policyDefinitionDisplayName": {
+          "type": "string",
+          "description": "The policy definition display name."
+        },
+        "policyDefinitionVersion": {
+          "type": "string",
+          "description": "The policy definition version."
+        },
+        "policyDefinitionEffect": {
+          "type": "string",
+          "description": "The policy definition action."
+        },
+        "policyDefinitionGroupNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of policy definition group names."
+        },
+        "policyAssignmentId": {
+          "type": "string",
+          "description": "The policy assignment Id."
+        },
+        "policyAssignmentName": {
+          "type": "string",
+          "description": "The policy assignment name."
+        },
+        "policyAssignmentDisplayName": {
+          "type": "string",
+          "description": "The policy assignment display name."
+        },
+        "policyAssignmentVersion": {
+          "type": "string",
+          "description": "The policy assignment version."
+        },
+        "policyAssignmentScope": {
+          "type": "string",
+          "description": "The policy assignment scope."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "ancestors": {
+          "type": "string",
+          "description": "The management group ancestors."
+        },
+        "complianceReasonCode": {
+          "type": "string",
+          "description": "The policy compliance reason code."
+        },
+        "policyExemptionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of policy exemption Ids."
+        }
+      },
+      "description": "The policy log info."
+    }
+  }
+}

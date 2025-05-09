@@ -42,7 +42,7 @@ model TargetProperties {
   @maxLength(200)
   connectionServerName: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the resource.")
   provisioningState?: ResourceProvisioningState;
 }

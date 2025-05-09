@@ -24,3 +24,20 @@ options:
     namespace: "com.azure.resourcemanager.containerservicefleet"
     service-name: "Container Service Fleet"
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/containerservicefleet"
+    package-dir: "armcontainerservicefleet"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/containerservice"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-dir: "arm-containerservicefleet"
+    package-details:
+      name: "@azure/arm-containerservicefleet"

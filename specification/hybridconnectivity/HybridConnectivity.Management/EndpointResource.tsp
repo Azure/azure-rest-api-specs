@@ -84,7 +84,7 @@ interface EndpointResources {
    * Update the endpoint to the target resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("Endpoints_Update")
   update is ArmCustomPatchSync<
     EndpointResource,

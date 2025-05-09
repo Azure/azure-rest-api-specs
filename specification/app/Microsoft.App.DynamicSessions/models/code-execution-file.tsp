@@ -16,7 +16,7 @@ model SessionResourceFile {
   @key("name")
   @segment("files")
   @doc("The name of the file.")
-  @visibility("read", "query", "create", "update", "delete")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: string;
 
   @doc("The type of the session resource file.")

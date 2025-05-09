@@ -15,7 +15,7 @@ model ProviderInstance is ProxyResource<ProviderInstanceProperties> {
   @path
   @key("providerInstanceName")
   @segment("providerInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

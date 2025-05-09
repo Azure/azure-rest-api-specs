@@ -7,14 +7,19 @@ import "./operations/exadata/systemVersionOperations.tsp";
 import "./operations/oraclesubscription/oracleSubscriptionOperations.tsp";
 import "./operations/exadata/dbNodesOperations.tsp";
 import "./operations/exadata/giVersionOperations.tsp";
+import "./operations/exadata/giMinorVersionOperations.tsp";
 import "./operations/exadata/dbSystemShapeOperations.tsp";
 import "./operations/exadata/dnsPrivateViewsOperations.tsp";
 import "./operations/exadata/dnsPrivateZonesOperations.tsp";
+import "./operations/exadata/flexComponentOperations.tsp";
 import "./operations/autonomousdatabase/autonomousDatabaseOperations.tsp";
 import "./operations/autonomousdatabase/autonomousDatabaseBackupOperations.tsp";
 import "./operations/autonomousdatabase/autonomousDatabaseCharacterSetOperations.tsp";
 import "./operations/autonomousdatabase/autonomousDatabaseNationalCharacterSetOperations.tsp";
 import "./operations/autonomousdatabase/autonomousDatabaseVersionOperations.tsp";
+import "./operations/exascale/exadbVmClusterOperations.tsp";
+import "./operations/exascale/exascaleDbNodesOperations.tsp";
+import "./operations/exascale/exascaleDbStorageVaultOperations.tsp";
 
 import "./versions.tsp";
 
@@ -26,9 +31,7 @@ using OpenAPI;
 using Autorest;
 
 @armProviderNamespace
-@service({
-  title: "Oracle Database Resource Manager",
-})
+@service(#{ title: "Oracle Database Resource Manager" })
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @versioned(Oracle.Database.Versions)
 namespace Oracle.Database;

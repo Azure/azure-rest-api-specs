@@ -26,7 +26,7 @@ model ConfigurationProperties {
   enforcePrivateMarkdownStorage?: boolean;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -42,18 +42,18 @@ model Violation {
   /**
    * Id of the item that violates tenant configuration.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Id of the user who owns violated item.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userId?: string;
 
   /**
    * Error message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorMessage?: string;
 }

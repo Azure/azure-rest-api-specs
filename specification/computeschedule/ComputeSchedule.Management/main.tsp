@@ -12,9 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.ComputeSchedule",
-})
+@service(#{ title: "Microsoft.ComputeSchedule" })
 @doc("Microsoft.ComputeSchedule Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.ComputeSchedule;
@@ -32,4 +30,10 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2024-10-01`,
+
+  /** 2025-05-01 version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2025-05-01`,
 }

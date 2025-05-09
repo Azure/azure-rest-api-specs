@@ -13,9 +13,9 @@ model PagedEnvironmentAll {
 @resource("environments")
 @parentResource(Workspace)
 model Environment {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "FIXME: misused @visibility to get around this warning"
   @doc("Environment identifier.")
   @key("environmentName")
-  @visibility
   @maxLength(50)
   name: string;
 

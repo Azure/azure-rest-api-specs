@@ -20,9 +20,7 @@ using TypeSpec.Versioning;
 
 @doc("The Azure Terraform management API provides a RESTful set of web services that used to manage your Azure Terraform resources.")
 @armProviderNamespace
-@service({
-  title: "AzureTerraformResourceProviderClient",
-})
+@service(#{ title: "AzureTerraformResourceProviderClient" })
 @versioned(Versions)
 namespace Microsoft.AzureTerraform;
 

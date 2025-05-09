@@ -13,9 +13,7 @@ using OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API was moved to its own service."
 @armProviderNamespace("Microsoft.Monitor")
-@service({
-  title: "Azure Monitor Pipelines Control Plane API",
-})
+@service(#{ title: "Azure Monitor Pipelines Control Plane API" })
 @doc("Provides operations for working with Azure Monitor Pipelines")
 @versioned(Microsoft.Monitor.Versions)
 namespace Microsoft.Monitor;

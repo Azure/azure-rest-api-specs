@@ -17,9 +17,7 @@ using Azure.ResourceManager;
 using Azure.Core;
 using OpenAPI;
 
-@service({
-  title: "Cloud for Sovereignty Resource Provider.",
-})
+@service(#{ title: "Cloud for Sovereignty Resource Provider." })
 @versioned(Versions)
 @armProviderNamespace
 @armCommonTypesVersion("v5")
@@ -36,7 +34,7 @@ model LandingZoneAccountResource
   @segment("landingZoneAccounts")
   @key("landingZoneAccountName")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 
@@ -71,7 +69,7 @@ model LandingZoneConfigurationResource
   @doc("The landing zone configuration name")
   @segment("landingZoneConfigurations")
   @key("landingZoneConfigurationName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-]{3,64}$")
   @path
   name: string;
@@ -91,10 +89,8 @@ interface LandingZoneConfigurationOperations {
   >;
   @doc("Delete a landing zone configuration.")
   delete is ArmResourceDeleteWithoutOkAsync<LandingZoneConfigurationResource>;
-  @doc("List the landing zone configurations within a resource group.")
-  listByResourceGroup is ArmResourceListByParent<LandingZoneConfigurationResource>;
-  @doc("List the landing zone configurations within a subscription.")
-  listBySubscription is ArmListBySubscription<LandingZoneConfigurationResource>;
+  @doc("List the landing zone configurations within a landing zone account.")
+  list is ArmResourceListByParent<LandingZoneConfigurationResource>;
 
   @action("generateLandingZone")
   @doc("Generate infrastructure as code (IaC) for a landing zone deployment.")
@@ -156,8 +152,6 @@ interface LandingZoneRegistrationOperations {
   >;
   @doc("Delete a landing zone registration.")
   delete is ArmResourceDeleteSync<LandingZoneRegistrationResource>;
-  @doc("List the landing zone registrations within a resource group.")
-  listByResourceGroup is ArmResourceListByParent<LandingZoneRegistrationResource>;
-  @doc("List the landing zone registrations within a subscription.")
-  listBySubscription is ArmListBySubscription<LandingZoneRegistrationResource>;
+  @doc("List the landing zone registrations within a landing zone account.")
+  list is ArmResourceListByParent<LandingZoneRegistrationResource>;
 }

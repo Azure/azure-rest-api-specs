@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -65,7 +63,7 @@ model ElasticLoadBalancingV2TargetGroup
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ElasticLoadBalancingV2TargetGroup")
 model ElasticLoadBalancingV2TargetGroupProperties {
   @doc("AWS Properties")
@@ -77,7 +75,7 @@ model ElasticLoadBalancingV2TargetGroupProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsElasticLoadBalancingV2TargetGroup")
 model AwsElasticLoadBalancingV2TargetGroupProperties {
   @doc("Indicates whether health checks are enabled. If the target type is lambda, health checks are disabled by default but can be enabled. If the target type is instance, ip, or alb, health checks are always enabled and cannot be disabled.")
@@ -105,7 +103,6 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   ipAddressType?: string;
 
   @doc("The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.")
-  @extension("x-ms-identifiers", [])
   loadBalancerArns?: string[];
 
   @doc("[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.")
@@ -124,14 +121,14 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   protocolVersion?: string;
 
   @doc("The tags.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The ARN of the Target Group")
   targetGroupArn?: string;
 
   @doc("The attributes.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   targetGroupAttributes?: TargetGroupAttribute[];
 
   @doc("The full name of the target group.")
@@ -144,7 +141,7 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   targetType?: string;
 
   @doc("The targets.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   targets?: TargetDescription[];
 
   @doc("The number of consecutive health check failures required before considering a target unhealthy.")
@@ -157,7 +154,7 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Matcher")
 model Matcher {
   @doc("You can specify values between 0 and 99. You can specify multiple values, or a range of values. The default value is 12.")
@@ -170,7 +167,7 @@ model Matcher {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
   @doc("The value for the tag.")
@@ -183,7 +180,7 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TargetGroupAttribute")
 model TargetGroupAttribute {
   @doc("The value of the attribute.")
@@ -196,7 +193,7 @@ model TargetGroupAttribute {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TargetDescription")
 model TargetDescription {
   @doc("An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer.")

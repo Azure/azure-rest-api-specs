@@ -2,8 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/keyvault"
   "dependencies":
-    "additionalDirectories":
-      - "specification/keyvault/Security.KeyVault.Common/"
     default: ""
 
 emit:
@@ -24,7 +22,7 @@ options:
     "basic-setup-py": true
     "package-version": "4.10.0b1"
     "package-dir": "azure-keyvault-keys"
-    "package-name": "azure-keyvault-keys"
+    "namespace": "azure.keyvault.keys"
     "output-path": "./azure/keyvault/keys/_generated"
   "@azure-tools/typespec-java":
     flavor: azure
@@ -42,12 +40,12 @@ options:
   # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":
     package-dir: "keyvault-keys"
-    generateMetadata: true
-    generateTest: false
+    generate-metadata: true
+    generate-test: false
     src-folder: "src/generated"
-    experimentalExtensibleEnums: true
-    isModularLibrary: true
-    packageDetails:
+    experimental-extensible-enums: true
+    is-modular-library: true
+    package-details:
       name: "@azure/keyvault-keys"
       description: "Azure Key Vault Keys"
     flavor: azure
@@ -59,9 +57,11 @@ options:
     emitter-output-dir: "{project-root}"
     override-client-name: "Client"
     single-client: true
-    api-version: "7.5"
     inject-spans: true
   "@azure-tools/typespec-rust":
     crate-name: "azure_security_keyvault_keys"
     crate-version: "0.0.1"
     emitter-output-dir: "{project-root}/generated"
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/keyvault/Security.KeyVault.Common/"

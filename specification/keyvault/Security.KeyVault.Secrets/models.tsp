@@ -85,13 +85,13 @@ model SecretAttributes {
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete enabled, otherwise 0.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoverableDays?: int32;
 
   /**
    * Reflects the deletion recovery level currently in effect for secrets in the current vault. If it contains 'Purgeable', the secret can be permanently deleted by a privileged user; otherwise, only the system can purge the secret, at the end of the retention interval.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryLevel?: DeletionRecoveryLevel;
 }
 
@@ -123,14 +123,14 @@ model Attributes {
   /**
    * Creation time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   updated?: utcDateTime;
 }
@@ -167,13 +167,13 @@ model SecretBundle {
   /**
    * If this is a secret backing a KV certificate, then this field specifies the corresponding key backing the KV certificate.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kid?: string;
 
   /**
    * True if the secret's lifetime is managed by key vault. If this is a secret backing a certificate, then managed will be true.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managed?: boolean;
 }
 
@@ -191,14 +191,14 @@ model DeletedSecretBundle {
   /**
    * The time when the secret is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the secret was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   deletedDate?: utcDateTime;
 }
@@ -233,14 +233,14 @@ model SecretListResult {
    * A response message containing a list of secrets in the key vault along with a link to the next page of secrets.
    */
   @items
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: SecretItem[];
 
   /**
    * The URL to get the next set of secrets.
    */
   @nextLink
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -271,7 +271,7 @@ model SecretItem {
   /**
    * True if the secret's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managed?: boolean;
 }
 
@@ -284,14 +284,14 @@ model DeletedSecretListResult {
    * A response message containing a list of deleted secrets in the key vault along with a link to the next page of deleted secrets.
    */
   @items
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: DeletedSecretItem[];
 
   /**
    * The URL to get the next set of deleted secrets.
    */
   @nextLink
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -309,14 +309,14 @@ model DeletedSecretItem {
   /**
    * The time when the secret is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the secret was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   deletedDate?: utcDateTime;
 }
@@ -328,7 +328,7 @@ model BackupSecretResult {
   /**
    * The backup blob containing the backed up secret.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("base64url")
   value?: bytes;
 }

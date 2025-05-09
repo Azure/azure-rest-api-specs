@@ -16,7 +16,7 @@ model SAPVirtualInstanceMetadata {
    * The default variable.
    */
   @path
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @segment("sapVirtualInstanceMetadata")
   @key
   default: "string";

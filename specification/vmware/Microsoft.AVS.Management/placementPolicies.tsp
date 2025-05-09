@@ -5,7 +5,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface PlacementPolicies {
@@ -28,35 +27,12 @@ interface PlacementPolicies {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  // 202 response has a body, but it should not to match ArmCustomPatchAsync.
-  // update is ArmCustomPatchAsync<PlacementPolicy, PlacementPolicyUpdate>;
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  @doc("Update a PlacementPolicy")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
-  )
-  @armResourceUpdate(PlacementPolicy)
-  @patch
-  update(
-    ...ResourceInstanceParameters<PlacementPolicy>,
-
-    @bodyRoot
-    @doc("The placement policy properties to be updated.")
-    placementPolicyUpdate: PlacementPolicyUpdate,
-  ): ArmResponse<PlacementPolicy> | {
-    ...AcceptedResponse;
-    ...Azure.Core.Foundations.RetryAfterHeader;
-    ...LocationHeader;
-
-    @bodyRoot
-    @doc("The updatd placement policy.")
-    placementPolicy: PlacementPolicy;
-  } | ErrorResponse;
+  update is ArmCustomPatchAsync<
+    PlacementPolicy,
+    PlacementPolicyUpdate,
+    Response = ArmResponse<PlacementPolicy> | ArmAcceptedLroResponseWithResponseBody<PlacementPolicy>
+  >;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -65,6 +41,10 @@ interface PlacementPolicies {
 
 @@clientName(PlacementPolicies.createOrUpdate::parameters.resource,
   "placementPolicy"
+);
+
+@@clientName(PlacementPolicies.update::parameters.properties,
+  "placementPolicyUpdate"
 );
 
 @doc("Placement Policy state")
@@ -149,7 +129,7 @@ model PlacementPolicyProperties {
   displayName?: string;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PlacementPolicyProvisioningState;
 }
 

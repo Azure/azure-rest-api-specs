@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "resourceGroupName": "rgcompute",
+    "vmScaleSetName": "azure-vmscaleset",
+    "instanceId": "0",
+    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}",
+    "parameters": {
+      "dataDisksToAttach": [
+        {
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d"
+        }
+      ],
+      "dataDisksToDetach": [
+        {
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_1_disk1_1a4e784bdafa49baa780eb2d128ff65x"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "imageReference": {
+          "publisher": "MicrosoftWindowsServer",
+          "offer": "WindowsServer",
+          "sku": "2016-Datacenter",
+          "version": "latest"
+        },
+        "osDisk": {
+          "osType": "Windows",
+          "name": "myOsDisk",
+          "createOption": "FromImage",
+          "caching": "ReadWrite",
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk"
+          },
+          "diskSizeGB": 30
+        },
+        "dataDisks": [
+          {
+            "lun": 0,
+            "name": "vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+            "createOption": "Attach",
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d"
+            },
+            "diskSizeGB": 30
+          }
+        ]
+      },
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  }
+}

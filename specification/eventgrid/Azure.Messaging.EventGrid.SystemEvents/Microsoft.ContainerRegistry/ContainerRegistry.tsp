@@ -1,25 +1,30 @@
 import "@typespec/versioning";
+import "./ContainerRegistryExample.tsp";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftContainerRegistryImagePushedExample)
 model ContainerRegistryImagePushedEventData
   extends ContainerRegistryEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftContainerRegistryImageDeletedExample)
 model ContainerRegistryImageDeletedEventData
   extends ContainerRegistryEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftContainerRegistryChartPushedExample)
 model ContainerRegistryChartPushedEventData
   extends ContainerRegistryArtifactEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftContainerRegistryChartDeletedExample)
 model ContainerRegistryChartDeletedEventData
   extends ContainerRegistryArtifactEventData {}
 

@@ -1,0 +1,10 @@
+parameters:
+  - name: NodeVersion
+    type: string
+    default: $(NodeVersion)
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: ${{ parameters.NodeVersion }}
+    displayName: "Use Node ${{ parameters.NodeVersion }}"

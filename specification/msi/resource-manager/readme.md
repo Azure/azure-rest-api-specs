@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2024-11-30
 ```
 
+### Tag: package-2025-01-31-preview
+
+These settings apply only when `--tag=package-2025-01-31-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01-31-preview'
+input-file:
+- Microsoft.ManagedIdentity/preview/2025-01-31-preview/ManagedIdentity.json
+```
+
 ### Tag: package-2024-11-30
 
 These settings apply only when `--tag=package-2024-11-30` is specified on the command line.

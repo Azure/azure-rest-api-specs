@@ -8,11 +8,19 @@ import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Quantum;
+
+/** Name of an Azure location. */
+@minLength(1)
+@maxLength(90)
+@pattern("[a-z][a-z0-9]+")
+scalar AzureLocationParameter extends azureLocation;
 
 @armResourceOperations
 interface Offerings {
@@ -31,7 +39,8 @@ interface Offerings {
        */
       @path
       @segment("locations")
-      locationName: string;
+      @typeChangedFrom(Versions.v2025_01_01_preview, string)
+      locationName: AzureLocationParameter;
     }
   >;
 }

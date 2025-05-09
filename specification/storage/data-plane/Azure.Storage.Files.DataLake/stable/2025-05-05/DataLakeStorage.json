@@ -193,7 +193,7 @@
       "patch": {
         "operationId": "FileSystem_SetProperties",
         "summary": "Set FileSystem Properties",
-        "description": "Set properties for the FileSystem.  This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "description": "Set properties for the FileSystem.  This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://learn.microsoft.com/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "tags": [
           "FileSystem Operations"
         ],
@@ -318,7 +318,7 @@
       "delete": {
         "operationId": "FileSystem_Delete",
         "summary": "Delete FileSystem",
-        "description": "Marks the FileSystem for deletion.  When a FileSystem is deleted, a FileSystem with the same identifier cannot be created for at least 30 seconds. While the filesystem is being deleted, attempts to create a filesystem with the same identifier will fail with status code 409 (Conflict), with the service returning additional error information indicating that the filesystem is being deleted. All other operations, including operations on any files or directories within the filesystem, will fail with status code 404 (Not Found) while the filesystem is being deleted. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "description": "Marks the FileSystem for deletion.  When a FileSystem is deleted, a FileSystem with the same identifier cannot be created for at least 30 seconds. While the filesystem is being deleted, attempts to create a filesystem with the same identifier will fail with status code 409 (Conflict), with the service returning additional error information indicating that the filesystem is being deleted. All other operations, including operations on any files or directories within the filesystem, will fail with status code 404 (Not Found) while the filesystem is being deleted. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://learn.microsoft.com/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "tags": [
           "FileSystem Operations"
         ],
@@ -603,7 +603,7 @@
       "put": {
         "operationId": "Path_Create",
         "summary": "Create File | Create Directory | Rename File | Rename Directory",
-        "description": "Create or rename a file or directory.    By default, the destination is overwritten and if the destination already exists and has a lease the lease is broken.  This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).  To fail if the destination already exists, use a conditional request with If-None-Match: \"*\".",
+        "description": "Create or rename a file or directory.    By default, the destination is overwritten and if the destination already exists and has a lease the lease is broken.  This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://learn.microsoft.com/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).  To fail if the destination already exists, use a conditional request with If-None-Match: \"*\".",
         "consumes": [
           "application/octet-stream"
         ],
@@ -803,7 +803,7 @@
       "patch": {
         "operationId": "Path_Update",
         "summary": "Append Data | Flush Data | Set Properties | Set Access Control",
-        "description": "Uploads data to be appended to a file, flushes (writes) previously uploaded data to a file, sets properties for a file or directory, or sets access control for a file or directory. Data can only be appended to a file. Concurrent writes to the same file using multiple clients are not supported. This operation supports conditional HTTP requests. For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "description": "Uploads data to be appended to a file, flushes (writes) previously uploaded data to a file, sets properties for a file or directory, or sets access control for a file or directory. Data can only be appended to a file. Concurrent writes to the same file using multiple clients are not supported. This operation supports conditional HTTP requests. For more information, see [Specifying Conditional Headers for Blob Service Operations](https://learn.microsoft.com/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "consumes": [
           "application/octet-stream"
         ],
@@ -1048,7 +1048,7 @@
       "post": {
         "operationId": "Path_Lease",
         "summary": "Lease Path",
-        "description": "Create and manage a lease to restrict write and delete access to the path. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "description": "Create and manage a lease to restrict write and delete access to the path. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://learn.microsoft.com/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "tags": [
           "File and Directory Operations"
         ],
@@ -1221,7 +1221,7 @@
       "get": {
         "operationId": "Path_Read",
         "summary": "Read File",
-        "description": "Read the contents of a file.  For read operations, range requests are supported. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "description": "Read the contents of a file.  For read operations, range requests are supported. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://learn.microsoft.com/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "tags": [
           "File and Directory Operations"
         ],
@@ -1499,7 +1499,7 @@
       "head": {
         "operationId": "Path_GetProperties",
         "summary": "Get Properties | Get Status | Get Access Control List",
-        "description": "Get Properties returns all system and user defined properties for a path. Get Status returns all system defined properties for a path. Get Access Control List returns the access control list for a path. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "description": "Get Properties returns all system and user defined properties for a path. Get Status returns all system defined properties for a path. Get Access Control List returns the access control list for a path. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://learn.microsoft.com/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "tags": [
           "File and Directory Operations"
         ],
@@ -1648,6 +1648,38 @@
                 "x-ms-client-name": "LeaseStatus",
                 "description": "The lease status of the resource.",
                 "type": "string"
+              },
+              "x-ms-server-encrypted": {
+                "x-ms-client-name": "IsServerEncrypted",
+                "type": "boolean",
+                "description": "The value of this header is set to true if the directory metadata is completely encrypted using the specified algorithm. Otherwise, the value is set to false."
+              },
+              "x-ms-encryption-key-sha256": {
+                "x-ms-client-name": "EncryptionKeySha256",
+                "type": "string",
+                "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
+              },
+              "x-ms-encryption-context": {
+                "x-ms-client-name": "EncryptionContext",
+                "type": "string",
+                "description": "The encryption context used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
+              },
+              "x-ms-encryption-scope": {
+                "x-ms-client-name": "EncryptionScope",
+                "type": "string",
+                "description": "Returns the name of the encryption scope used to encrypt the blob contents and application metadata.  Note that the absence of this header implies use of the default account encryption scope."
+              },
+              "x-ms-creation-time": {
+                "x-ms-client-name": "CreationTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the blob was created."
+              },
+              "x-ms-expiry-time": {
+                "x-ms-client-name": "ExpiresOn",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "The time this blob will expire."
               }
             }
           },
@@ -1668,7 +1700,7 @@
       "delete": {
         "operationId": "Path_Delete",
         "summary": "Delete File | Delete Directory",
-        "description": "Delete the file or directory. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "description": "Delete the file or directory. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://learn.microsoft.com/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "tags": [
           "File and Directory Operations"
         ],
@@ -2623,7 +2655,7 @@
       "type": "integer",
       "minimum": 0,
       "x-ms-parameter-location": "method",
-      "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>"
+      "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/rest/api/storageservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>"
     },
     "IfMatch": {
       "name": "If-Match",

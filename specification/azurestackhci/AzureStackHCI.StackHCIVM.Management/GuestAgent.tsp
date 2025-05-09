@@ -20,7 +20,7 @@ model GuestAgent is ProxyResource<GuestAgentProperties> {
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @key("guestAgent")
   @segment("guestAgents")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 using Azure.Core;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.DependencyMap management service",
-})
+@service(#{ title: "Microsoft.DependencyMap management service" })
 @doc("Microsoft.DependencyMap management service")
 @versioned(Microsoft.DependencyMap.Versions)
 @armCommonTypesVersion("v3")
@@ -36,7 +34,7 @@ model MapsResource is TrackedResource<MapsResourceProperties> {
   @key("mapName")
   @segment("maps")
   @doc("Maps resource name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -44,7 +42,7 @@ model MapsResource is TrackedResource<MapsResourceProperties> {
 @doc("The properties of Maps resource")
 model MapsResourceProperties {
   @doc("Provisioning state of Maps resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -199,7 +197,7 @@ model DiscoverySourceResource
   @key("sourceName")
   @segment("discoverySources")
   @doc("discovery source resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -208,15 +206,15 @@ model DiscoverySourceResource
 @discriminator("sourceType")
 model DiscoverySourceResourceProperties {
   @doc("Provisioning state of Discovery Source resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Source type of Discovery Source resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceType: SourceType;
 
   @doc("Source ArmId of Discovery Source resource")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceId: string;
 }
 

@@ -556,11 +556,62 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageTaskProperties",
+          "$ref": "#/definitions/StorageTaskUpdateProperties",
           "description": "Properties of the storage task."
         }
       },
       "description": "Parameters of the storage task update request"
+    },
+    "StorageTaskUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "taskVersion": {
+          "readOnly": true,
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1,
+          "format": "int64",
+          "description": "Storage task version."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Storage Task is enabled when set to true and disabled when set to false"
+        },
+        "description": {
+          "type": "string",
+          "description": "Text that describes the purpose of the storage task"
+        },
+        "action": {
+          "$ref": "#/definitions/StorageTaskAction",
+          "description": "The storage task action that is executed"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Represents the provisioning state of the storage task.",
+          "enum": [
+            "ValidateSubscriptionQuotaBegin",
+            "ValidateSubscriptionQuotaEnd",
+            "Accepted",
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "creationTimeInUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time of the storage task in UTC."
+        }
+      },
+      "description": "Properties of the storage task."
     },
     "StorageTaskProperties": {
       "type": "object",
@@ -592,6 +643,7 @@
           "enum": [
             "ValidateSubscriptionQuotaBegin",
             "ValidateSubscriptionQuotaEnd",
+            "Accepted",
             "Creating",
             "Succeeded",
             "Deleting",
@@ -600,7 +652,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "creationTimeInUtc": {
@@ -708,7 +760,7 @@
           ],
           "x-ms-enum": {
             "name": "onSuccess",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "onFailure": {
@@ -719,7 +771,7 @@
           ],
           "x-ms-enum": {
             "name": "onFailure",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },

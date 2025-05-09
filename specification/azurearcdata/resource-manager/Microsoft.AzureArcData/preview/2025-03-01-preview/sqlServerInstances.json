@@ -1,0 +1,1563 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-03-01-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "paths": {},
+  "definitions": {
+    "SqlServerInstance": {
+      "description": "A SqlServerInstance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerInstanceProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "SqlServerInstanceProperties": {
+      "description": "Properties of SqlServerInstance.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "SQL Server version.",
+          "enum": [
+            "SQL Server 2012",
+            "SQL Server 2014",
+            "SQL Server 2016",
+            "SQL Server 2017",
+            "SQL Server 2019",
+            "SQL Server 2022",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "sqlVersion",
+            "modelAsString": true
+          }
+        },
+        "edition": {
+          "type": "string",
+          "description": "SQL Server edition.",
+          "enum": [
+            "Evaluation",
+            "Enterprise",
+            "Standard",
+            "Web",
+            "Developer",
+            "Express",
+            "Business Intelligence"
+          ],
+          "x-ms-enum": {
+            "name": "editionType",
+            "modelAsString": true
+          }
+        },
+        "containerResourceId": {
+          "type": "string",
+          "description": "ARM Resource id of the container resource (Azure Arc for Servers).",
+          "readOnly": true
+        },
+        "vmId": {
+          "type": "string",
+          "description": "The unique ID of the hybrid machine that this resource belongs to.",
+          "readOnly": true
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The time when the resource was created.",
+          "readOnly": true
+        },
+        "vCore": {
+          "type": "string",
+          "description": "The number of logical processors used by the SQL Server instance.",
+          "readOnly": true
+        },
+        "cores": {
+          "type": "string",
+          "description": "The number of total cores of the Operating System Environment (OSE) hosting the SQL Server instance."
+        },
+        "status": {
+          "type": "string",
+          "description": "The cloud connectivity status.",
+          "readOnly": true,
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Registered",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "patchLevel": {
+          "type": "string",
+          "description": "SQL Server update level.",
+          "readOnly": true
+        },
+        "collation": {
+          "type": "string",
+          "description": "SQL Server collation.",
+          "readOnly": true
+        },
+        "dbMasterKeyExists": {
+          "type": "boolean",
+          "description": "Indicates whether database master key exists in SQL Server.",
+          "readOnly": true
+        },
+        "isHadrEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether always On availability groups is enabled in SQL Server.",
+          "readOnly": true
+        },
+        "traceFlags": {
+          "type": "array",
+          "description": "An array of integers, where each value represents the enabled trace flags in SQL Server.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readOnly": true
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "SQL Server current version.",
+          "readOnly": true
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "SQL Server instance name."
+        },
+        "tcpDynamicPorts": {
+          "type": "string",
+          "description": "Dynamic TCP ports used by SQL Server.",
+          "readOnly": true
+        },
+        "tcpStaticPorts": {
+          "type": "string",
+          "description": "Static TCP ports used by SQL Server.",
+          "readOnly": true
+        },
+        "productId": {
+          "type": "string",
+          "description": "SQL Server product ID.",
+          "readOnly": true
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "SQL Server license type.",
+          "readOnly": true,
+          "enum": [
+            "Undefined",
+            "Free",
+            "HADR",
+            "ServerCAL",
+            "LicenseOnly",
+            "PAYG",
+            "Paid"
+          ],
+          "x-ms-enum": {
+            "name": "arcSqlServerLicenseType",
+            "modelAsString": true
+          }
+        },
+        "azureDefenderStatusLastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last Azure Defender status update.",
+          "readOnly": true
+        },
+        "azureDefenderStatus": {
+          "type": "string",
+          "description": "Status of Azure Defender.",
+          "readOnly": true,
+          "enum": [
+            "Protected",
+            "Unprotected",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "defenderStatus",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the Arc-enabled SQL Server resource.",
+          "readOnly": true
+        },
+        "lastInventoryUploadTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when last successful inventory upload was performed.",
+          "readOnly": true
+        },
+        "lastUsageUploadTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when last successful usage upload was performed.",
+          "readOnly": true
+        },
+        "hostType": {
+          "type": "string",
+          "description": "Type of host for Azure Arc SQL Server",
+          "enum": [
+            "Azure Virtual Machine",
+            "Azure VMWare Virtual Machine",
+            "Azure Kubernetes Service",
+            "AWS VMWare Virtual Machine",
+            "AWS Kubernetes Service",
+            "GCP VMWare Virtual Machine",
+            "GCP Kubernetes Service",
+            "Container",
+            "Virtual Machine",
+            "Physical Server",
+            "AWS Virtual Machine",
+            "GCP Virtual Machine",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "hostType",
+            "modelAsString": true
+          }
+        },
+        "alwaysOnRole": {
+          "type": "string",
+          "description": "The role of the SQL Server, based on availability.",
+          "readOnly": true,
+          "enum": [
+            "None",
+            "FailoverClusterInstance",
+            "FailoverClusterNode",
+            "AvailabilityGroupReplica"
+          ],
+          "x-ms-enum": {
+            "name": "alwaysOnRole",
+            "modelAsString": true
+          }
+        },
+        "databaseMirroringEndpoint": {
+          "description": "Database mirroring endpoint related properties.",
+          "$ref": "#/definitions/DBMEndpoint"
+        },
+        "failoverCluster": {
+          "description": "Failover Cluster Instance properties.",
+          "$ref": "#/definitions/FailoverCluster"
+        },
+        "backupPolicy": {
+          "description": "The backup profile for the SQL server.",
+          "$ref": "#/definitions/BackupPolicy"
+        },
+        "upgradeLockedUntil": {
+          "description": "Upgrade Action for this resource is locked until it expires. The Expiration time indicated by this value. It is not locked when it is empty.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "monitoring": {
+          "description": "The monitoring configuration.",
+          "$ref": "#/definitions/Monitoring"
+        },
+        "migration": {
+          "description": "Migration related configuration.",
+          "$ref": "#/definitions/Migration"
+        },
+        "clientConnection": {
+          "description": "Client connection related configuration.",
+          "$ref": "#/definitions/ClientConnection"
+        },
+        "serviceType": {
+          "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
+          "$ref": "#/definitions/ServiceType"
+        },
+        "maxServerMemoryMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "max server memory (MB) value configured for this instance.",
+          "readOnly": true
+        },
+        "isMicrosoftPkiCertTrustConfigured": {
+          "type": "boolean",
+          "description": "Indicates whether Microsoft PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
+          "readOnly": true
+        },
+        "isDigiCertPkiCertTrustConfigured": {
+          "type": "boolean",
+          "description": "Indicates whether DigiCert PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
+          "readOnly": true
+        },
+        "authentication": {
+          "description": "Authentication related configuration for the SQL Server Instance.",
+          "$ref": "#/definitions/Authentication"
+        }
+      }
+    },
+    "SqlServerInstanceUpdateProperties": {
+      "description": "Properties of update SqlServerInstance.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "SQL Server version.",
+          "enum": [
+            "SQL Server 2012",
+            "SQL Server 2014",
+            "SQL Server 2016",
+            "SQL Server 2017",
+            "SQL Server 2019",
+            "SQL Server 2022",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "sqlVersion",
+            "modelAsString": true
+          }
+        },
+        "edition": {
+          "type": "string",
+          "description": "SQL Server edition.",
+          "enum": [
+            "Evaluation",
+            "Enterprise",
+            "Standard",
+            "Web",
+            "Developer",
+            "Express",
+            "Business Intelligence"
+          ],
+          "x-ms-enum": {
+            "name": "editionType",
+            "modelAsString": true
+          }
+        },
+        "containerResourceId": {
+          "type": "string",
+          "description": "ARM Resource id of the container resource (Azure Arc for Servers).",
+          "readOnly": true
+        },
+        "vmId": {
+          "type": "string",
+          "description": "The unique ID of the hybrid machine that this resource belongs to.",
+          "readOnly": true
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The time when the resource was created.",
+          "readOnly": true
+        },
+        "vCore": {
+          "type": "string",
+          "description": "The number of logical processors used by the SQL Server instance.",
+          "readOnly": true
+        },
+        "cores": {
+          "type": "string",
+          "description": "The number of total cores of the Operating System Environment (OSE) hosting the SQL Server instance."
+        },
+        "status": {
+          "type": "string",
+          "description": "The cloud connectivity status.",
+          "readOnly": true,
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Registered",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "patchLevel": {
+          "type": "string",
+          "description": "SQL Server update level.",
+          "readOnly": true
+        },
+        "collation": {
+          "type": "string",
+          "description": "SQL Server collation.",
+          "readOnly": true
+        },
+        "dbMasterKeyExists": {
+          "type": "boolean",
+          "description": "Indicates whether database master key exists in SQL Server.",
+          "readOnly": true
+        },
+        "isHadrEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether always On availability groups is enabled in SQL Server.",
+          "readOnly": true
+        },
+        "traceFlags": {
+          "type": "array",
+          "description": "An array of integers, where each value represents the enabled trace flags in SQL Server.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readOnly": true
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "SQL Server current version.",
+          "readOnly": true
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "SQL Server instance name."
+        },
+        "tcpDynamicPorts": {
+          "type": "string",
+          "description": "Dynamic TCP ports used by SQL Server.",
+          "readOnly": true
+        },
+        "tcpStaticPorts": {
+          "type": "string",
+          "description": "Static TCP ports used by SQL Server.",
+          "readOnly": true
+        },
+        "productId": {
+          "type": "string",
+          "description": "SQL Server product ID.",
+          "readOnly": true
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "SQL Server license type.",
+          "readOnly": true,
+          "enum": [
+            "Undefined",
+            "Free",
+            "HADR",
+            "ServerCAL",
+            "LicenseOnly",
+            "PAYG",
+            "Paid"
+          ],
+          "x-ms-enum": {
+            "name": "arcSqlServerLicenseType",
+            "modelAsString": true
+          }
+        },
+        "azureDefenderStatusLastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last Azure Defender status update.",
+          "readOnly": true
+        },
+        "azureDefenderStatus": {
+          "type": "string",
+          "description": "Status of Azure Defender.",
+          "readOnly": true,
+          "enum": [
+            "Protected",
+            "Unprotected",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "defenderStatus",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the Arc-enabled SQL Server resource.",
+          "readOnly": true
+        },
+        "lastInventoryUploadTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when last successful inventory upload was performed.",
+          "readOnly": true
+        },
+        "lastUsageUploadTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when last successful usage upload was performed.",
+          "readOnly": true
+        },
+        "hostType": {
+          "type": "string",
+          "description": "Type of host for Azure Arc SQL Server",
+          "enum": [
+            "Azure Virtual Machine",
+            "Azure VMWare Virtual Machine",
+            "Azure Kubernetes Service",
+            "AWS VMWare Virtual Machine",
+            "AWS Kubernetes Service",
+            "GCP VMWare Virtual Machine",
+            "GCP Kubernetes Service",
+            "Container",
+            "Virtual Machine",
+            "Physical Server",
+            "AWS Virtual Machine",
+            "GCP Virtual Machine",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "hostType",
+            "modelAsString": true
+          }
+        },
+        "alwaysOnRole": {
+          "type": "string",
+          "description": "The role of the SQL Server, based on availability.",
+          "readOnly": true,
+          "enum": [
+            "None",
+            "FailoverClusterInstance",
+            "FailoverClusterNode",
+            "AvailabilityGroupReplica"
+          ],
+          "x-ms-enum": {
+            "name": "alwaysOnRole",
+            "modelAsString": true
+          }
+        },
+        "failoverCluster": {
+          "description": "Failover Cluster Instance properties.",
+          "$ref": "#/definitions/FailoverCluster"
+        },
+        "backupPolicy": {
+          "description": "The backup profile for the SQL server.",
+          "$ref": "#/definitions/BackupPolicy"
+        },
+        "upgradeLockedUntil": {
+          "description": "Upgrade Action for this resource is locked until it expires. The Expiration time indicated by this value. It is not locked when it is empty.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "monitoring": {
+          "description": "The monitoring configuration.",
+          "$ref": "#/definitions/Monitoring"
+        },
+        "migration": {
+          "description": "Migration related configuration.",
+          "$ref": "#/definitions/Migration"
+        },
+        "clientConnection": {
+          "description": "Client connection related configuration.",
+          "$ref": "#/definitions/ClientConnection"
+        },
+        "serviceType": {
+          "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
+          "$ref": "#/definitions/ServiceType"
+        },
+        "authentication": {
+          "description": "Authentication related configuration for the SQL Server Instance.",
+          "$ref": "#/definitions/Authentication"
+        }
+      }
+    },
+    "DBMEndpoint": {
+      "type": "object",
+      "description": "Database mirroring endpoint related properties.",
+      "properties": {
+        "endpointName": {
+          "type": "string",
+          "description": "Name of the database mirroring endpoint.",
+          "readOnly": true
+        },
+        "role": {
+          "type": "string",
+          "description": "Mirroring Role",
+          "readOnly": true,
+          "enum": [
+            "NONE",
+            "PARTNER",
+            "WITNESS",
+            "ALL"
+          ],
+          "x-ms-enum": {
+            "name": "role",
+            "modelAsString": true
+          }
+        },
+        "isEncryptionEnabled": {
+          "type": "boolean",
+          "description": "Is Encryption enabled",
+          "readOnly": true
+        },
+        "encryptionAlgorithm": {
+          "description": "Encryption Algorithm",
+          "$ref": "./common.json#/definitions/EncryptionAlgorithm",
+          "readOnly": true
+        },
+        "connectionAuth": {
+          "description": "The type of connection authentication required for connections to this endpoint",
+          "$ref": "./common.json#/definitions/ConnectionAuth",
+          "readOnly": true
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number that the endpoint is listening on.",
+          "readOnly": true
+        },
+        "isDynamicPort": {
+          "type": "boolean",
+          "description": "Is the port number dynamically assigned.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Listener IP address.",
+          "readOnly": true
+        },
+        "certificateName": {
+          "type": "string",
+          "description": "Name of the certificate.",
+          "readOnly": true
+        }
+      }
+    },
+    "FailoverCluster": {
+      "type": "object",
+      "description": "Failover Cluster Instance properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The GUID of the SQL Server's underlying Failover Cluster.",
+          "readOnly": true
+        },
+        "networkName": {
+          "type": "string",
+          "description": "The network name to connect to the SQL FCI.",
+          "readOnly": true
+        },
+        "sqlInstanceIds": {
+          "type": "array",
+          "description": "The ARM IDs of the Arc SQL Server resources, belonging to the current server's Failover cluster.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "hostNames": {
+          "type": "array",
+          "description": "The host names which are part of the SQL FCI resource group.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "hostIPAddresses": {
+          "type": "array",
+          "description": "The IP addresses and subnet masks associated with the SQL Failover Cluster Instance on this host.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/hostIPAddressInformation"
+          }
+        }
+      }
+    },
+    "hostIPAddressInformation": {
+      "type": "object",
+      "description": "IP address and subnet mask.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet mask",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlServerInstanceUpdate": {
+      "description": "An update to a SQL Server Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlServerInstanceUpdateProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "SqlServerInstanceListResult": {
+      "description": "A list of SqlServerInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BackupPolicy": {
+      "description": "The backup profile for the SQL server.",
+      "type": "object",
+      "properties": {
+        "retentionPeriodDays": {
+          "type": "integer",
+          "description": "The retention period for all the databases in this managed instance.",
+          "minimum": 0,
+          "maximum": 35,
+          "format": "int32"
+        },
+        "fullBackupDays": {
+          "type": "integer",
+          "description": "The value indicating days between full backups.",
+          "minimum": 0,
+          "maximum": 7,
+          "format": "int32"
+        },
+        "differentialBackupHours": {
+          "description": "The differential backup interval in hours.",
+          "enum": [
+            12,
+            24
+          ],
+          "type": "integer",
+          "format": "int32",
+          "x-ms-enum": {
+            "name": "differentialBackupHours",
+            "modelAsString": false
+          }
+        },
+        "transactionLogBackupMinutes": {
+          "type": "integer",
+          "description": "The value indicating minutes between transaction log backups.",
+          "minimum": 0,
+          "maximum": 60,
+          "format": "int32"
+        }
+      }
+    },
+    "Monitoring": {
+      "description": "The monitoring configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if monitoring is enabled for this SQL Server instance."
+        }
+      }
+    },
+    "Migration": {
+      "description": "Migration related configuration.",
+      "type": "object",
+      "properties": {
+        "assessment": {
+          "description": "Migration assessments related configuration.",
+          "$ref": "#/definitions/MigrationAssessment"
+        }
+      }
+    },
+    "MigrationAssessment": {
+      "description": "The migration assessment related configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if migration assessment is enabled for this SQL Server instance."
+        },
+        "assessmentUploadTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when Migration Assessment Report upload was last performed.",
+          "readOnly": true
+        },
+        "serverAssessments": {
+          "$ref": "#/definitions/ServerAssessments"
+        },
+        "skuRecommendationResults": {
+          "$ref": "#/definitions/SkuRecommendationResults"
+        }
+      }
+    },
+    "ClientConnection": {
+      "description": "Client connection related configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if client connection is enabled for this SQL Server instance."
+        }
+      }
+    },
+    "ServiceType": {
+      "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
+      "type": "string",
+      "enum": [
+        "Engine",
+        "SSRS",
+        "SSAS",
+        "SSIS",
+        "PBIRS"
+      ],
+      "x-ms-enum": {
+        "name": "serviceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Engine",
+            "description": "SQL Server Database Services."
+          },
+          {
+            "value": "SSRS",
+            "description": "SQL Server Reporting Services."
+          },
+          {
+            "value": "SSAS",
+            "description": "SQL Server Analysis Services."
+          },
+          {
+            "value": "SSIS",
+            "description": "SQL Server Integration Services."
+          },
+          {
+            "value": "PBIRS",
+            "description": "Power BI Report Server."
+          }
+        ]
+      }
+    },
+    "ServerAssessments": {
+      "description": "Issues and warnings impacting the migration of SQL Server instance to particular Azure Migration Target.",
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "appliesToMigrationTargetPlatform": {
+            "type": "string"
+          },
+          "featureId": {
+            "type": "string"
+          },
+          "impactedObjects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "impactDetail": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "objectType": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "issueCategory": {
+            "type": "string"
+          },
+          "moreInformation": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SkuRecommendationResults": {
+      "description": "SKU Recommendation results for Azure migration targets for SQL Server.",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "azureSqlDatabase": {
+          "$ref": "#/definitions/SkuRecommendationResultsAzureSqlDatabase"
+        },
+        "azureSqlManagedInstance": {
+          "$ref": "#/definitions/SkuRecommendationResultsAzureSqlManagedInstance"
+        },
+        "azureSqlVirtualMachine": {
+          "$ref": "#/definitions/SkuRecommendationResultsAzureSqlVirtualMachine"
+        }
+      }
+    },
+    "SkuRecommendationResultsAzureSqlDatabase": {
+      "description": "SKU Recommendation results for Azure SQL Database.",
+      "type": "object",
+      "properties": {
+        "recommendationStatus": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsRecommendationStatus"
+        },
+        "numberOfServerBlockerIssues": {
+          "$ref": "#/definitions/SkuRecommendationResultsNumberOfServerBlockerIssues"
+        },
+        "monthlyCost": {
+          "$ref": "#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "targetSku": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "object",
+              "properties": {
+                "computeTier": {
+                  "type": "string",
+                  "description": "The compute tier of the target SKU."
+                },
+                "hardwareType": {
+                  "type": "string",
+                  "description": "The hardware type of the target SKU."
+                },
+                "sqlPurchasingModel": {
+                  "type": "string",
+                  "description": "The SQL purchasing model of the target SKU."
+                },
+                "sqlServiceTier": {
+                  "type": "string",
+                  "description": "The SQL service tier of the target SKU."
+                },
+                "zoneRedundancyAvailable": {
+                  "type": "boolean",
+                  "description": "Indicates if zone redundancy is available for the target SKU."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SkuRecommendationResultsAzureSqlManagedInstance": {
+      "description": "SKU Recommendation results for Azure SQL Managed Instance.",
+      "type": "object",
+      "properties": {
+        "recommendationStatus": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsRecommendationStatus"
+        },
+        "numberOfServerBlockerIssues": {
+          "$ref": "#/definitions/SkuRecommendationResultsNumberOfServerBlockerIssues"
+        },
+        "monthlyCost": {
+          "$ref": "#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "targetSku": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "object",
+              "properties": {
+                "computeTier": {
+                  "type": "string",
+                  "description": "The compute tier of the target SKU."
+                },
+                "hardwareType": {
+                  "type": "string",
+                  "description": "The hardware type of the target SKU."
+                },
+                "sqlPurchasingModel": {
+                  "type": "string",
+                  "description": "The SQL purchasing model of the target SKU."
+                },
+                "sqlServiceTier": {
+                  "type": "string",
+                  "description": "The SQL service tier of the target SKU."
+                },
+                "zoneRedundancyAvailable": {
+                  "type": "boolean",
+                  "description": "Indicates if zone redundancy is available for the target SKU."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SkuRecommendationResultsAzureSqlVirtualMachine": {
+      "description": "SKU Recommendation results for Azure SQL Virtual Machine.",
+      "type": "object",
+      "properties": {
+        "recommendationStatus": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsRecommendationStatus"
+        },
+        "numberOfServerBlockerIssues": {
+          "$ref": "#/definitions/SkuRecommendationResultsNumberOfServerBlockerIssues"
+        },
+        "monthlyCost": {
+          "$ref": "#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "targetSku": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "object",
+              "properties": {
+                "availableVmSkus": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Available VM SKUs for the Azure SQL Virtual Machine."
+                },
+                "virtualMachineFamily": {
+                  "type": "string",
+                  "description": "The virtual machine family of the target SKU."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SkuRecommendationResultsNumberOfServerBlockerIssues": {
+      "description": "Number of blocker issues to fix before migrating to the target platform.",
+      "type": "integer",
+      "format": "int32"
+    },
+    "SkuRecommendationResultsMonthlyCost": {
+      "description": "The Monthly cost of the particular SKU.",
+      "type": "object",
+      "properties": {
+        "computeCost": {
+          "format": "float",
+          "description": "Represents the Cost of Compute.",
+          "type": "number"
+        },
+        "storageCost": {
+          "format": "float",
+          "description": "Represents the Cost of Storage.",
+          "type": "number"
+        },
+        "totalCost": {
+          "format": "float",
+          "description": "Represents the Total Cost.",
+          "type": "number"
+        }
+      }
+    },
+    "SqlServerInstanceTelemetryRequest": {
+      "description": "The Arc SQL Server instance telemetry retrieval request.",
+      "type": "object",
+      "properties": {
+        "datasetName": {
+          "type": "string",
+          "description": "The name of the telemetry dataset to retrieve."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time for the time range to fetch telemetry for. If not specified, the current time minus 1 hour is used."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time for the time range to fetch telemetry for. If not specified, the current time is used."
+        },
+        "interval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time granularity to fetch telemetry for. This is an ISO8601 duration. Examples: PT15M, PT1H, P1D",
+          "default": "PT1H"
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The aggregation type to use for the numerical columns in the dataset.",
+          "enum": [
+            "Average",
+            "Minimum",
+            "Maximum",
+            "Sum",
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "aggregationType",
+            "modelAsString": true
+          },
+          "default": "Average"
+        },
+        "databaseNames": {
+          "type": "array",
+          "description": "The list of database names to return telemetry for. If not specified, telemetry for all databases will be aggregated and returned.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "datasetName"
+      ]
+    },
+    "SqlServerInstanceTelemetryColumn": {
+      "description": "The telemetry column for the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the telemetry column."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the telemetry column.",
+          "enum": [
+            "bool",
+            "datetime",
+            "int",
+            "long",
+            "double",
+            "string",
+            "guid",
+            "timespan"
+          ],
+          "x-ms-enum": {
+            "name": "SqlServerInstanceTelemetryColumnType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SqlServerInstanceTelemetryRow": {
+      "description": "An array of values representing a telemetry row for the SQL Server instance.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "x-ms-identifiers": []
+    },
+    "SqlServerInstanceTelemetryResponse": {
+      "description": "A section of the telemetry response for the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "columns": {
+          "description": "The columns of the result telemetry table for the SQL Server instance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceTelemetryColumn"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "rows": {
+          "description": "A list of rows from the result telemetry table for the SQL Server instance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceTelemetryRow"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next section of rows of the telemetry response for the SQL Server instance. Null if no more sections are available.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "columns",
+        "rows"
+      ]
+    },
+    "SqlServerInstanceRunMigrationAssessmentResponse": {
+      "description": "The response for running migration assessment on the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the job."
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "The name of the SQL Server instance."
+        },
+        "jobStatus": {
+          "type": "string",
+          "description": "The status of the job.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "jobStatus",
+            "modelAsString": true
+          }
+        },
+        "jobException": {
+          "type": "string",
+          "description": "The exception message if the job failed."
+        },
+        "backgroundJob": {
+          "type": "object",
+          "description": "The background job details.",
+          "$ref": "#/definitions/BackgroundJob"
+        },
+        "sequencerActions": {
+          "type": "array",
+          "description": "The list of sequencer actions.",
+          "items": {
+            "$ref": "#/definitions/SequencerAction"
+          },
+          "x-ms-identifiers": [
+            "actionId"
+          ]
+        }
+      }
+    },
+    "SqlServerInstanceJobsStatusRequest": {
+      "description": "The request for the status of the jobs running on the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The name of the feature to retrieve the job status for."
+        },
+        "jobType": {
+          "type": "string",
+          "description": "The type of the job to retrieve the status for."
+        }
+      }
+    },
+    "SqlServerInstanceJobsStatusResponse": {
+      "description": "The response for the status of the jobs running on the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "jobsStatus": {
+          "type": "array",
+          "description": "The list of jobs status running on the SQL Server instance.",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceJobStatus"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "SqlServerInstanceJobStatus": {
+      "description": "The status of the job running on the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the job."
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "The name of the SQL Server instance."
+        },
+        "jobStatus": {
+          "type": "string",
+          "description": "The status of the job.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "jobStatus",
+            "modelAsString": true
+          }
+        },
+        "jobException": {
+          "type": "string",
+          "description": "The exception message if the job failed."
+        },
+        "backgroundJob": {
+          "type": "object",
+          "description": "The background job details.",
+          "$ref": "#/definitions/BackgroundJob"
+        },
+        "sequencerActions": {
+          "type": "array",
+          "description": "The list of sequencer actions.",
+          "items": {
+            "$ref": "#/definitions/SequencerAction"
+          },
+          "x-ms-identifiers": [
+            "actionId"
+          ]
+        }
+      }
+    },
+    "BackgroundJob": {
+      "description": "The background job details.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the background job.",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "Deleted",
+            "Completed",
+            "Faulted",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        },
+        "executionState": {
+          "type": "string",
+          "description": "The execution state of the background job.",
+          "enum": [
+            "Waiting",
+            "Running"
+          ],
+          "x-ms-enum": {
+            "name": "executionState",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the background job."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the background job."
+        },
+        "lastExecutionStatus": {
+          "type": "string",
+          "description": "The last execution status of the background job.",
+          "enum": [
+            "Succeeded",
+            "Completed",
+            "Failed",
+            "Faulted",
+            "Postponed",
+            "Rescheduled"
+          ],
+          "x-ms-enum": {
+            "name": "lastExecutionStatus",
+            "modelAsString": true
+          }
+        },
+        "lastExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last execution time of the background job."
+        }
+      }
+    },
+    "SequencerAction": {
+      "description": "The sequencer action details.",
+      "type": "object",
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "description": "The unique identifier of the sequencer action."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the sequencer action.",
+          "enum": [
+            "NotStarted",
+            "WaitingPredecessors",
+            "ExecutingAction",
+            "CreatingSuccessors",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "sequencerState",
+            "modelAsString": true
+          }
+        },
+        "result": {
+          "type": "string",
+          "description": "The result of the sequencer action.",
+          "enum": [
+            "NotCompleted",
+            "Succeeded",
+            "Failed",
+            "TimedOut",
+            "Skipped"
+          ],
+          "x-ms-enum": {
+            "name": "result",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SqlServerInstanceManagedInstanceLinkAssessmentRequest": {
+      "description": "The MI Link assessment request for the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "azureManagedInstanceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure SQL Managed Instance resource ID to link with the SQL Server instance."
+        },
+        "azureManagedInstanceRole": {
+          "type": "string",
+          "description": "The role of managed instance in a distributed availability group, can be Primary or Secondary.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "azureManagedInstanceRole",
+            "modelAsString": true
+          }
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database to be replicated to the Azure SQL Managed Instance."
+        },
+        "availabilityGroupName": {
+          "type": "string",
+          "description": "The name of the availability group to be used for the database replication."
+        }
+      },
+      "required": [
+        "azureManagedInstanceResourceId",
+        "databaseName",
+        "availabilityGroupName"
+      ]
+    },
+    "SqlServerInstanceManagedInstanceLinkAssessmentResponse": {
+      "description": "The response containing the results of the MI Link assessment.",
+      "type": "object",
+      "properties": {
+        "assessments": {
+          "type": "array",
+          "description": "The list of the results for MI Link assessment.",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceManagedInstanceLinkAssessment"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "SqlServerInstanceManagedInstanceLinkAssessment": {
+      "description": "The status of an individual requirement for MI Link.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the requirement."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the requirement.",
+          "enum": [
+            "SQLServer",
+            "ManagedInstance",
+            "ManagedInstanceCrossValidation",
+            "Dag",
+            "Certificates"
+          ],
+          "x-ms-enum": {
+            "name": "assessmentCategory",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the requirement.",
+          "enum": [
+            "Success",
+            "Warning",
+            "Failure"
+          ],
+          "x-ms-enum": {
+            "name": "assessmentStatus",
+            "modelAsString": true
+          }
+        },
+        "information": {
+          "type": "string",
+          "description": "The information text about requirement."
+        },
+        "additionalInformation": {
+          "type": "string",
+          "description": "Additional details about the check, including any recommended actions."
+        }
+      }
+    },
+    "Authentication": {
+      "description": "Authentication related configuration for the SQL Server Instance.",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Mode of authentication in SqlServer.",
+          "enum": [
+            "Mixed",
+            "Windows",
+            "Undefined"
+          ],
+          "x-ms-enum": {
+            "name": "mode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Mixed",
+                "description": "Mixed mode authentication for SQL Server which includes windows and SQL Authentication."
+              },
+              {
+                "value": "Windows",
+                "description": "Windows Authentication for SQL Server."
+              },
+              {
+                "value": "Undefined",
+                "description": "Used for scenarios were the mode cannot be determined."
+              }
+            ]
+          }
+        },
+        "sqlServerEntraIdentity": {
+          "type": "array",
+          "description": "Entra Authentication configuration for the SQL Server Instance.",
+          "items": {
+            "$ref": "./common.json#/definitions/EntraAuthentication"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

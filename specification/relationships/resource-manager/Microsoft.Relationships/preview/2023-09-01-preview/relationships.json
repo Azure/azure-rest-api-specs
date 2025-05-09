@@ -1,0 +1,703 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Relationships Management Service",
+    "version": "2023-09-01-preview",
+    "description": "Microsoft.Relationships Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "DependencyOfRelationships"
+    },
+    {
+      "name": "ServiceGroupMemberRelationships"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Relationships/dependencyOf/{name}": {
+      "get": {
+        "operationId": "DependencyOfRelationships_Get",
+        "tags": [
+          "DependencyOfRelationships"
+        ],
+        "description": "Get a DependencyOfRelationship",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of dependencyOf relationship.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DependencyOfRelationship"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DependencyOfRelationships_Get": {
+            "$ref": "./examples/DependencyOfRelationships_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DependencyOfRelationships_CreateOrUpdate",
+        "tags": [
+          "DependencyOfRelationships"
+        ],
+        "description": "Create a DependencyOfRelationship",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of dependencyOf relationship.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DependencyOfRelationship"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DependencyOfRelationship' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DependencyOfRelationship"
+            }
+          },
+          "201": {
+            "description": "Resource 'DependencyOfRelationship' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DependencyOfRelationship"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DependencyOfRelationships_CreateOrUpdate": {
+            "$ref": "./examples/DependencyOfRelationships_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DependencyOfRelationships_Delete",
+        "tags": [
+          "DependencyOfRelationships"
+        ],
+        "description": "Delete a DependencyOfRelationship",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of dependencyOf relationship.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DependencyOfRelationships_Delete": {
+            "$ref": "./examples/DependencyOfRelationships_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Relationships/serviceGroupMember/{name}": {
+      "get": {
+        "operationId": "ServiceGroupMemberRelationships_Get",
+        "tags": [
+          "ServiceGroupMemberRelationships"
+        ],
+        "description": "Get a ServiceGroupMemberRelationship",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ServiceGroupMember relationship.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationship"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceGroupMemberRelationships_Get": {
+            "$ref": "./examples/ServiceGroupMemberRelationships_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServiceGroupMemberRelationships_CreateOrUpdate",
+        "tags": [
+          "ServiceGroupMemberRelationships"
+        ],
+        "description": "Create a ServiceGroupMemberRelationship",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ServiceGroupMember relationship.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationship"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ServiceGroupMemberRelationship' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationship"
+            }
+          },
+          "201": {
+            "description": "Resource 'ServiceGroupMemberRelationship' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationship"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceGroupMemberRelationships_CreateOrUpdate": {
+            "$ref": "./examples/ServiceGroupMemberRelationships_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ServiceGroupMemberRelationships_Delete",
+        "tags": [
+          "ServiceGroupMemberRelationships"
+        ],
+        "description": "Delete a ServiceGroupMemberRelationship",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ServiceGroupMember relationship.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceGroupMemberRelationships_Delete": {
+            "$ref": "./examples/ServiceGroupMemberRelationships_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Relationships/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DependencyOfRelationship": {
+      "type": "object",
+      "description": "Defines a dependencyOf relationship resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DependencyOfRelationshipProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DependencyOfRelationshipProperties": {
+      "type": "object",
+      "description": "dependencyOf relationship properties.",
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The relationship source resource id.",
+          "readOnly": true
+        },
+        "targetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The relationship target resource id."
+        },
+        "targetTenant": {
+          "type": "string",
+          "description": "The relationship target tenant id."
+        },
+        "originInformation": {
+          "$ref": "#/definitions/RelationshipOriginInformation",
+          "description": "Information about the origin of the relationship.",
+          "readOnly": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/RelationshipMetadata",
+          "description": "Metadata about the relationship.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the relationship.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceId",
+        "targetId",
+        "originInformation",
+        "metadata"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning request has been accepted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RelationshipMetadata": {
+      "type": "object",
+      "description": "Provides information about the relationship properties.",
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "description": "The type of the relationship source resource.",
+          "readOnly": true
+        },
+        "targetType": {
+          "type": "string",
+          "description": "The type of the relationship target resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceType",
+        "targetType"
+      ]
+    },
+    "RelationshipOriginInformation": {
+      "type": "object",
+      "description": "Provides information about the origin of a relationship.",
+      "properties": {
+        "relationshipOriginType": {
+          "$ref": "#/definitions/RelationshipOrigins",
+          "description": "Identifies the origin type of the relationship.",
+          "readOnly": true
+        },
+        "discoveryEngine": {
+          "type": "string",
+          "description": "The name of the discovery engine that created the relationship.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "relationshipOriginType"
+      ]
+    },
+    "RelationshipOrigins": {
+      "type": "string",
+      "description": "The possible origins of a relationship.",
+      "enum": [
+        "ServiceExplicitlyCreated",
+        "SystemDiscoveredByRule",
+        "UserExplicitlyCreated",
+        "UserDiscoveredByRule"
+      ],
+      "x-ms-enum": {
+        "name": "RelationshipOrigins",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceExplicitlyCreated",
+            "value": "ServiceExplicitlyCreated",
+            "description": "The relationship was explicitly created by a system."
+          },
+          {
+            "name": "SystemDiscoveredByRule",
+            "value": "SystemDiscoveredByRule",
+            "description": "The relationship was discovered by a system-created rule."
+          },
+          {
+            "name": "UserExplicitlyCreated",
+            "value": "UserExplicitlyCreated",
+            "description": "The relationship was explicitly created by a user."
+          },
+          {
+            "name": "UserDiscoveredByRule",
+            "value": "UserDiscoveredByRule",
+            "description": "The relationship was discovered by a user-created rule."
+          }
+        ]
+      }
+    },
+    "ServiceGroupMemberRelationship": {
+      "type": "object",
+      "description": "Defines a ServiceGroupMember relationship resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceGroupMemberRelationshipProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServiceGroupMemberRelationshipProperties": {
+      "type": "object",
+      "description": "ServiceGroupMember relationship properties.",
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The relationship source resource id.",
+          "readOnly": true
+        },
+        "targetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The relationship target resource id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Management/serviceGroups",
+                "scopes": [
+                  "tenant"
+                ]
+              }
+            ]
+          }
+        },
+        "targetTenant": {
+          "type": "string",
+          "description": "The relationship target tenant id."
+        },
+        "originInformation": {
+          "$ref": "#/definitions/RelationshipOriginInformation",
+          "description": "Information about the origin of the relationship.",
+          "readOnly": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/RelationshipMetadata",
+          "description": "Metadata about the relationship.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the relationship.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceId",
+        "targetId",
+        "originInformation",
+        "metadata"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

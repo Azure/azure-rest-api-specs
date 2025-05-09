@@ -400,9 +400,6 @@
                 ]
               }
             },
-            "default": [
-              "segment"
-            ],
             "x-ms-client-name": "timestampGranularities"
           },
           {
@@ -1003,6 +1000,9 @@
       "get": {
         "operationId": "GetFileContent",
         "description": "Returns information about a specific file. Does not retrieve file content.",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -1016,8 +1016,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           }
         },
@@ -1292,9 +1291,6 @@
                 ]
               }
             },
-            "default": [
-              "segment"
-            ],
             "x-ms-client-name": "timestampGranularities"
           },
           {
@@ -1462,20 +1458,6 @@
     }
   },
   "definitions": {
-    "AddUploadPartRequest": {
-      "type": "object",
-      "description": "The multipart/form-data request body of a data part addition request for an upload.",
-      "properties": {
-        "data": {
-          "type": "string",
-          "format": "byte",
-          "description": "The chunk of bytes for this Part."
-        }
-      },
-      "required": [
-        "data"
-      ]
-    },
     "AudioTaskLabel": {
       "type": "string",
       "description": "Defines the possible descriptors for available audio operation responses.",
@@ -1539,99 +1521,6 @@
       },
       "required": [
         "text"
-      ]
-    },
-    "AudioTranscriptionFormat": {
-      "type": "string",
-      "description": "Defines available options for the underlying response format of output transcription information.",
-      "enum": [
-        "json",
-        "verbose_json",
-        "text",
-        "srt",
-        "vtt"
-      ],
-      "x-ms-enum": {
-        "name": "AudioTranscriptionFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
-          }
-        ]
-      }
-    },
-    "AudioTranscriptionOptions": {
-      "type": "object",
-      "description": "The configuration information for an audio transcription request.",
-      "properties": {
-        "file": {
-          "type": "string",
-          "format": "byte",
-          "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
-        },
-        "filename": {
-          "type": "string",
-          "description": "The optional filename or descriptive identifier to associate with with the audio data."
-        },
-        "response_format": {
-          "$ref": "#/definitions/AudioTranscriptionFormat",
-          "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
-          "x-ms-client-name": "responseFormat"
-        },
-        "language": {
-          "type": "string",
-          "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription."
-        },
-        "prompt": {
-          "type": "string",
-          "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data."
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
-        },
-        "timestamp_granularities": {
-          "type": "array",
-          "description": "The timestamp granularities to populate for this transcription.\n`response_format` must be set `verbose_json` to use timestamp granularities.\nEither or both of these options are supported: `word`, or `segment`.\nNote: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.",
-          "default": [
-            "segment"
-          ],
-          "items": {
-            "$ref": "#/definitions/AudioTranscriptionTimestampGranularity"
-          },
-          "x-ms-client-name": "timestampGranularities"
-        },
-        "model": {
-          "type": "string",
-          "description": "The model to use for this transcription request."
-        }
-      },
-      "required": [
-        "file"
       ]
     },
     "AudioTranscriptionSegment": {
@@ -1707,30 +1596,6 @@
         "seek"
       ]
     },
-    "AudioTranscriptionTimestampGranularity": {
-      "type": "string",
-      "description": "Defines the timestamp granularities that can be requested on a verbose transcription response.",
-      "enum": [
-        "word",
-        "segment"
-      ],
-      "x-ms-enum": {
-        "name": "AudioTranscriptionTimestampGranularity",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "word",
-            "value": "word",
-            "description": "Indicates that responses should include timing information about each transcribed word. Note that generating word\ntimestamp information will incur additional response latency."
-          },
-          {
-            "name": "segment",
-            "value": "segment",
-            "description": "Indicates that responses should include timing and other information about each transcribed audio segment. Audio\nsegment timestamp information does not incur any additional latency."
-          }
-        ]
-      }
-    },
     "AudioTranscriptionWord": {
       "type": "object",
       "description": "Extended information about a single transcribed word, as provided on responses when the 'word' timestamp granularity is provided.",
@@ -1787,84 +1652,6 @@
       },
       "required": [
         "text"
-      ]
-    },
-    "AudioTranslationFormat": {
-      "type": "string",
-      "description": "Defines available options for the underlying response format of output translation information.",
-      "enum": [
-        "json",
-        "verbose_json",
-        "text",
-        "srt",
-        "vtt"
-      ],
-      "x-ms-enum": {
-        "name": "AudioTranslationFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Use a response body that is plain text containing the raw, unannotated translation."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
-          }
-        ]
-      }
-    },
-    "AudioTranslationOptions": {
-      "type": "object",
-      "description": "The configuration information for an audio translation request.",
-      "properties": {
-        "file": {
-          "type": "string",
-          "format": "byte",
-          "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
-        },
-        "filename": {
-          "type": "string",
-          "description": "The optional filename or descriptive identifier to associate with with the audio data."
-        },
-        "response_format": {
-          "$ref": "#/definitions/AudioTranslationFormat",
-          "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
-          "x-ms-client-name": "responseFormat"
-        },
-        "prompt": {
-          "type": "string",
-          "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data."
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
-        },
-        "model": {
-          "type": "string",
-          "description": "The model to use for this translation request."
-        }
-      },
-      "required": [
-        "file"
       ]
     },
     "AudioTranslationSegment": {
@@ -1989,7 +1776,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -2981,14 +2768,9 @@
           "description": "The chat message for a given chat completions prompt."
         },
         "logprobs": {
-          "type": "object",
+          "$ref": "#/definitions/ChatChoiceLogProbabilityInfo",
           "description": "The log probability information for this choice, as enabled via the 'logprobs' request option.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ChatChoiceLogProbabilityInfo"
-            }
-          ]
+          "x-nullable": true
         },
         "index": {
           "type": "integer",
@@ -3096,8 +2878,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "ChatCompletionsFunctionToolCall": {
@@ -3719,14 +3500,9 @@
           "x-ms-client-name": "contentFilterResults"
         },
         "logprobs": {
-          "type": "object",
+          "$ref": "#/definitions/CompletionsLogProbabilityModel",
           "description": "The log probabilities model for tokens associated with this completions choice.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CompletionsLogProbabilityModel"
-            }
-          ]
+          "x-nullable": true
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
@@ -3805,8 +3581,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "CompletionsFinishReason": {
@@ -6066,14 +5841,9 @@
           }
         },
         "file": {
-          "type": "object",
+          "$ref": "#/definitions/OpenAIFile",
           "description": "The ready File object after the Upload is completed.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/OpenAIFile"
-            }
-          ]
+          "x-nullable": true
         }
       },
       "required": [

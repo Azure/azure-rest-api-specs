@@ -24,18 +24,18 @@ model Connector is ProxyResource<ConnectorProperties> {
 
 @doc("Details of the Connector.")
 model ConnectorProperties is ResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("unique id of the connector.")
   connectorId: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("tenant id of this connector")
   tenantId: string;
 
   @doc("connector type")
   connectorType: Platform;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("last run time stamp of this connector in UTC time zone")
   lastRunTimeStamp: utcDateTime;
 }

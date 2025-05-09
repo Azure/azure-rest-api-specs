@@ -28,7 +28,7 @@ interface PrivateAccesses {
   /**
    * Patch a private access tags
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<PrivateAccess, PrivateAccessPatch>;
 
   /**
