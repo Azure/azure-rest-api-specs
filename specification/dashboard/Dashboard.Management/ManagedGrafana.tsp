@@ -13,8 +13,11 @@ namespace Microsoft.Dashboard;
 /**
  * The grafana resource type.
  */
-model ManagedGrafana
-  is Azure.ResourceManager.TrackedResource<ManagedGrafanaProperties> {
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+@Azure.ResourceManager.Private.armResourceInternal(ManagedGrafanaProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model ManagedGrafana extends Azure.ResourceManager.Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = ManagedGrafana,
     KeyName = "workspaceName",
@@ -27,6 +30,13 @@ model ManagedGrafana
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: ResourceSku;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  properties?: ManagedGrafanaProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }

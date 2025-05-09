@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DashboardManagementClient",
+    "title": "Microsoft.Dashboard",
     "version": "2024-10-01",
     "description": "The Microsoft.Dashboard Rest API spec.",
     "x-typespec-generated": [
@@ -1833,13 +1833,13 @@
       "type": "object",
       "description": "The grafana resource type.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ManagedGrafanaProperties",
-          "description": "Properties specific to the grafana resource."
-        },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The Sku of the grafana resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedGrafanaProperties",
+          "description": "Properties specific to the grafana resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",

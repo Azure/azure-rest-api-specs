@@ -29,7 +29,7 @@ using TypeSpec.Versioning;
  * The Microsoft.Dashboard Rest API spec.
  */
 @armProviderNamespace
-@service(#{ title: "DashboardManagementClient" })
+@service(#{ title: "Microsoft.Dashboard" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Dashboard;
