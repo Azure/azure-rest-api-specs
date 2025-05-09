@@ -13,9 +13,13 @@ namespace Microsoft.Maintenance;
 /**
  * Configuration Assignment
  */
-@subscriptionResource
-model ConfigurationAssignment
-  is Azure.ResourceManager.ProxyResource<ConfigurationAssignmentProperties> {
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@Azure.ResourceManager.Private.armResourceInternal(
+  ConfigurationAssignmentProperties
+)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model ConfigurationAssignment extends Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = ConfigurationAssignment,
     KeyName = "configurationAssignmentName",
@@ -28,6 +32,14 @@ model ConfigurationAssignment
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   location?: string;
+
+  /**
+   * Properties of the configuration assignment
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  properties?: ConfigurationAssignmentProperties;
 }
 
 @armResourceOperations
@@ -37,10 +49,30 @@ interface ConfigurationAssignmentOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+
+        /**
+         * Resource provider name
+         */
         @path @segment("providers") providerName: string,
+
+        /**
+         * Resource parent type
+         */
         @path resourceParentType: string,
+
+        /**
+         * Resource parent name
+         */
         @path resourceParentName: string,
+
+        /**
+         * Resource type
+         */
         @path resourceType: string,
+
+        /**
+         * Resource name
+         */
         @path resourceName: string,
 
         ...Azure.ResourceManager.Legacy.Provider,
@@ -59,14 +91,16 @@ interface ConfigurationAssignments {
    * Get configuration assignment for resource..
    */
   getParent is ConfigurationAssignmentOps.Read<
-    ConfigurationAssignment
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
   >;
 
   /**
    * Register configuration for resource.
    */
   createOrUpdateParent is ConfigurationAssignmentOps.CreateOrUpdateSync<
-    ConfigurationAssignment
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -74,7 +108,8 @@ interface ConfigurationAssignments {
    */
   deleteParent is ConfigurationAssignmentOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -82,7 +117,8 @@ interface ConfigurationAssignments {
    */
   listParent is ConfigurationAssignmentOps.List<
     ConfigurationAssignment,
-    Response = ArmResponse<ListConfigurationAssignmentsResult>
+    Response = ArmResponse<ListConfigurationAssignmentsResult>,
+    ErrorType = MaintenanceError
   >;
 }
 @armResourceOperations
@@ -92,9 +128,22 @@ interface ConfigurationAssignmentOperationGroupOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+
+        /**
+         * Resource provider name
+         */
         @path @segment("providers") providerName: string,
+
+        /**
+         * Resource parent type
+         */
         @path resourceType: string,
+
+        /**
+         * Resource parent name
+         */
         @path resourceName: string,
+
         ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
@@ -113,7 +162,8 @@ interface ConfigurationAssignmentOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConfigurationAssignments_Get")
   get is ConfigurationAssignmentOperationGroupOps.Read<
-    ConfigurationAssignment
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -122,7 +172,8 @@ interface ConfigurationAssignmentOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConfigurationAssignments_CreateOrUpdate")
   createOrUpdate is ConfigurationAssignmentOperationGroupOps.CreateOrUpdateSync<
-    ConfigurationAssignment
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -132,7 +183,8 @@ interface ConfigurationAssignmentOperationGroup {
   @operationId("ConfigurationAssignments_Delete")
   delete is ConfigurationAssignmentOperationGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    ErrorType = MaintenanceError
   >;
 }
 @armResourceOperations
@@ -221,12 +273,18 @@ interface ConfigurationAssignmentsForResourceGroup {
   /**
    * Get configuration assignment for resource..
    */
-  get is ConfigurationAssignmentsForResourceGroupOps.Read<ConfigurationAssignment>;
+  get is ConfigurationAssignmentsForResourceGroupOps.Read<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Register configuration for resource.
    */
-  createOrUpdate is ConfigurationAssignmentsForResourceGroupOps.CreateOrUpdateSync<ConfigurationAssignment>;
+  createOrUpdate is ConfigurationAssignmentsForResourceGroupOps.CreateOrUpdateSync<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Register configuration for resource.
@@ -234,7 +292,8 @@ interface ConfigurationAssignmentsForResourceGroup {
   @patch(#{ implicitOptionality: false })
   update is ConfigurationAssignmentsForResourceGroupOps.CustomPatchSync<
     ConfigurationAssignment,
-    PatchModel = ConfigurationAssignment
+    PatchModel = ConfigurationAssignment,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -242,7 +301,8 @@ interface ConfigurationAssignmentsForResourceGroup {
    */
   delete is ConfigurationAssignmentsForResourceGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    ErrorType = MaintenanceError
   >;
 }
 

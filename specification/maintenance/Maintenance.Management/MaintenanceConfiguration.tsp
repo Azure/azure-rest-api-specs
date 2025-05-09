@@ -88,14 +88,20 @@ interface MaintenanceConfigurationOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_Get")
-  get is MaintenanceConfigurationOperationGroupOps.Read<MaintenanceConfiguration>;
+  get is MaintenanceConfigurationOperationGroupOps.Read<
+    MaintenanceConfiguration,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Create or Update configuration record
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_CreateOrUpdate")
-  createOrUpdate is MaintenanceConfigurationOperationGroupOps.CreateOrUpdateSync<MaintenanceConfiguration>;
+  createOrUpdate is MaintenanceConfigurationOperationGroupOps.CreateOrUpdateSync<
+    MaintenanceConfiguration,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Patch configuration record
@@ -105,7 +111,8 @@ interface MaintenanceConfigurationOperationGroup {
   @operationId("MaintenanceConfigurations_Update")
   update is MaintenanceConfigurationOperationGroupOps.CustomPatchSync<
     MaintenanceConfiguration,
-    PatchModel = MaintenanceConfiguration
+    PatchModel = MaintenanceConfiguration,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -115,7 +122,8 @@ interface MaintenanceConfigurationOperationGroup {
   @operationId("MaintenanceConfigurations_Delete")
   delete is MaintenanceConfigurationOperationGroupOps.DeleteSync<
     MaintenanceConfiguration,
-    Response = ArmResponse<MaintenanceConfiguration> | ArmDeletedNoContentResponse
+    Response = ArmResponse<MaintenanceConfiguration> | ArmDeletedNoContentResponse,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -123,9 +131,11 @@ interface MaintenanceConfigurationOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurationsForResourceGroup_List")
+  @segment("maintenanceConfigurations")
   list is MaintenanceConfigurationOperationGroupOps.List<
     MaintenanceConfiguration,
-    Response = ArmResponse<ListMaintenanceConfigurationsResult>
+    Response = ArmResponse<ListMaintenanceConfigurationsResult>,
+    ErrorType = MaintenanceError
   >;
 
   /**

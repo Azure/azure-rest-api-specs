@@ -544,6 +544,12 @@ model ListUpdatesResult {
   @items
   @OpenAPI.extension("x-ms-identifiers", #[])
   value?: Update[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: ResourceLocation<Resource>;
 }
 
 /**

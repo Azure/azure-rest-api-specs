@@ -19,6 +19,7 @@ interface ScheduledEventOperationGroup {
    * Post Scheduled Event Acknowledgement
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @summary("Post Scheduled Event Acknowledgement")
   @operationId("ScheduledEvent_Acknowledge")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/acknowledge")
@@ -45,10 +46,11 @@ interface ScheduledEventOperationGroup {
      */
     @path
     scheduledEventId: string,
-  ): ArmResponse<ScheduledEventApproveResponse> | ErrorResponse;
+  ): ArmResponse<ScheduledEventApproveResponse> | MaintenanceError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
 interface ApplyUpdatesOperationGroup {
   /**
    * Apply maintenance updates to resource with parent
@@ -92,7 +94,7 @@ interface ApplyUpdatesOperationGroup {
      */
     @path
     resourceName: string,
-  ): ArmResponse<ApplyUpdate> | ErrorResponse;
+  ): ArmResponse<ApplyUpdate> | ArmCreatedResponse<ApplyUpdate> | MaintenanceError;
 
   /**
    * Apply maintenance updates to resource
@@ -124,7 +126,7 @@ interface ApplyUpdatesOperationGroup {
      */
     @path
     resourceName: string,
-  ): ArmResponse<ApplyUpdate> | ErrorResponse;
+  ): ArmResponse<ApplyUpdate> | ArmCreatedResponse<ApplyUpdate> | MaintenanceError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -133,6 +135,7 @@ interface ApplyUpdateForResourceGroupOperationGroup {
    * Get Configuration records within a subscription and resource group
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @summary("Get Configuration records within a subscription and resource group")
   @operationId("ApplyUpdateForResourceGroup_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/applyUpdates")
@@ -141,10 +144,47 @@ interface ApplyUpdateForResourceGroupOperationGroup {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
-  ): ArmResponse<ListApplyUpdate> | ErrorResponse;
+  ): ArmResponse<ListApplyUpdate> | MaintenanceError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+interface ConfigurationAssignmentForResourceGroupOperationGroup {
+  /**
+   * Get Configuration records within a subscription and resource group
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get Configuration records within a subscription and resource group")
+  @operationId("ConfigurationAssignments_List")
+  @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * Resource provider name
+     */
+    @path
+    providerName: string,
+
+    /**
+     * Resource type
+     */
+    @path
+    resourceType: string,
+
+    /**
+     * Resource identifier
+     */
+    @path
+    resourceName: string,
+  ): ArmResponse<ListConfigurationAssignmentsResult> | MaintenanceError;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
 interface UpdatesOperationGroup {
   /**
    * Get updates to resources.
@@ -188,7 +228,7 @@ interface UpdatesOperationGroup {
      */
     @path
     resourceName: string,
-  ): ArmResponse<ListUpdatesResult> | ErrorResponse;
+  ): ArmResponse<ListUpdatesResult> | MaintenanceError;
 
   /**
    * Get updates to resources.
@@ -220,5 +260,5 @@ interface UpdatesOperationGroup {
      */
     @path
     resourceName: string,
-  ): ArmResponse<ListUpdatesResult> | ErrorResponse;
+  ): ArmResponse<ListUpdatesResult> | MaintenanceError;
 }

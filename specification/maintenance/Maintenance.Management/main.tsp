@@ -17,6 +17,7 @@ import "./ApplyUpdate.tsp";
 import "./ConfigurationAssignment.tsp";
 import "./routes.tsp";
 import "./legacy.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

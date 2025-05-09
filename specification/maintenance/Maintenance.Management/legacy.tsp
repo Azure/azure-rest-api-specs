@@ -55,6 +55,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response Optional. The success response(s) for the PUT operation
      */
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+    #suppress "shadow"
     @autoRoute
     @doc("Create a {name}", Resource)
     @armResourceCreateOrUpdate(Resource)
@@ -111,6 +112,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The success response(s) for the PATCH operation
      */
+    #suppress "shadow"
     @autoRoute
     @doc("Update a {name}", Resource)
     @armResourceUpdate(Resource)
@@ -160,6 +162,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response Optional. The success response(s) for the delete operation
      */
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Valid"
+    #suppress "shadow"
     @autoRoute
     @doc("Delete a {name}", Resource)
     @delete
@@ -182,6 +185,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The success response for a get operation.
      */
+    #suppress "shadow"
     @autoRoute
     @doc("Get a {name}", Resource)
     @get
@@ -224,6 +228,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The response returned by the list
      */
+    #suppress "shadow"
     @autoRoute
     @doc("List {name} resources", Resource)
     @get
@@ -264,6 +269,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Error Optional. The error response, if non-standard.
      */
     #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+    #suppress "shadow"
     @get
     @autoRoute
     @listsResource(Resource)
