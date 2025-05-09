@@ -87,7 +87,7 @@ model AkriDiscoveryHandlerDiagnostics {
 /** AkriDiscoveryHandlerLogSettings properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerLogSettings {
-  ...DiagnosticsLogs;
+  ...AkriConnectorsDiagnosticsLogs;
 }
 
 /** AkriDiscoveryHandlerDiscoverableDeviceEndpointType properties. */

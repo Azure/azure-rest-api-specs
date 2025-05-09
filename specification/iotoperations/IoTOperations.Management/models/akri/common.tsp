@@ -208,3 +208,10 @@ model AkriConnectorsSecret {
   /** The name of the secret to be mounted. */
   secretRef: string;
 }
+
+/** AkriConnectorsDiagnostic Log properties. */
+@added(Versions.`2025-07-01-preview`)
+model AkriConnectorsDiagnosticsLogs {
+  /** The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'. */
+  level?: string = "info";
+}

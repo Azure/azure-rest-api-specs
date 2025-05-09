@@ -374,5 +374,5 @@ model AkriConnectorTemplateDiagnostics {
 /** AkriConnectorTemplateLogSettings properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateLogSettings {
-  ...DiagnosticsLogs;
+  ...AkriConnectorsDiagnosticsLogs;
 }
