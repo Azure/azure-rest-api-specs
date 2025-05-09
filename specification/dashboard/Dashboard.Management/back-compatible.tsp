@@ -32,3 +32,7 @@ using Microsoft.Dashboard;
 @@clientName(IntegrationFabrics.update::parameters.properties,
   "requestBodyParameters"
 );
+@@clientName(ManagedGrafanaPropertiesUpdateParameters,
+  "ManagedGrafanaPropertiesUpdateContent",
+  "csharp"
+);
