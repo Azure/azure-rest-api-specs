@@ -162,7 +162,7 @@ union AkriConnectorTemplateHelmRegistrySettingsType {
 
   /** A Registry Endpoint reference. */
   RegistryEndpointRef,
-  
+
   /** A Container Registry reference. */
   ContainerRegistry,
 }
@@ -192,7 +192,6 @@ model AkriConnectorTemplateHelmContainerRegistry
 /** AkriConnectorTemplateHelmContainerRegistrySettings properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateHelmContainerRegistrySettings {
-  
   /** The registry to use for the Helm chart. */
   registry: string;
 
