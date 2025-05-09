@@ -1,4 +1,4 @@
-import * as commonmark from "commonmark";
+import { marked } from "marked";
 import { kebabCase } from "change-case";
 import axios from "axios";
 import { Readme } from "@azure-tools/specs-shared/readme";
@@ -72,7 +72,6 @@ export function getDocRawUrl(code: string) {
 
 const rpcInfoCache = new Map<string, string[]>();
 
-// TODO: Tests
 export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[]> {
   if (ruleName == "FATAL") {
     return [];
@@ -93,29 +92,29 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
     return rpcRules;
   }
 
-  let walker = new commonmark.Parser().parse(response.data).walker();
-  let event;
-  while ((event = walker.next())) {
-    const node = event.node;
+  // Use marked to parse the markdown and extract the related ARM guideline codes
+  const tokens = marked.lexer(response.data);
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
     if (
-      event.entering &&
-      node.type === "heading" &&
-      node.firstChild?.literal?.toLowerCase() === "related arm guideline code"
+      token.type === "heading" &&
+      token.depth >= 1 &&
+      token.text.trim().toLowerCase() === "related arm guideline code"
     ) {
-      const next = node.next;
-      if (next?.type == "list") {
-        let currentItem = next.firstChild;
-        while (currentItem) {
-          const code = currentItem?.firstChild?.firstChild?.literal;
-          if (code) {
-            rpcRules.push(...code.split(",").map((c) => c.trim()));
+      // The next token should be a list
+      const next = tokens[i + 1];
+      if (next && next.type === "list" && Array.isArray(next.items)) {
+        for (const item of next.items) {
+          // item.text may contain comma-separated codes
+          if (typeof item.text === "string") {
+            rpcRules.push(...item.text.split(",").map((c: string) => c.trim()));
           }
-          currentItem = currentItem.next;
         }
       }
       break;
     }
   }
+
   rpcInfoCache.set(ruleName, rpcRules);
   return rpcRules;
 }
