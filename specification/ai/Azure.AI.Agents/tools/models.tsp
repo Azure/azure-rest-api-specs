@@ -203,6 +203,10 @@ model OpenApiFunctionDefinition {
   @doc("List of OpenAPI spec parameters that will use user-provided defaults")
   @encodedName("application/json", "default_params")
   defaultParams?: string[];
+
+  @doc("List of function definitions used by OpenApi tool")
+  @visibility("read")
+  functions?: FunctionDefinition[];
 }
 
 @doc("""
