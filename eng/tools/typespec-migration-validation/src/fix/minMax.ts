@@ -1,4 +1,4 @@
-import { checkPropertyAttributeDeleted } from "./helper.js";
+import { checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 
 const knownPropertyDecoratorMapping: { [key: string]: string } = {
   'minimum': 'minValue',
@@ -15,11 +15,8 @@ export function checkMinMax(jsonObj: any): string[] {
     if (deletedChanges.length > 0) {
       for (const change of deletedChanges) {
         const { path, value } = change;
-        const pathParts = path.split('.');
-        const definitionIndex = pathParts.findIndex(part => part === 'definitions');
-        if (definitionIndex !== -1 && definitionIndex + 3 < pathParts.length) {
-          const definitionName = pathParts[definitionIndex + 1];
-          const propertyName = pathParts[definitionIndex + 3];
+        if (getPropertyName(path)) {
+          const [definitionName, propertyName] = getPropertyName(path)!;
           suggestedFixes.push(`Find a model called "${definitionName}". Add \`@${decoratorName}(${value})\` onto its property "${propertyName}". If the property cannot access directly, add \`@@${decoratorName}(${definitionName}.${propertyName}, ${value})\` right after the model.`);
         }
       }

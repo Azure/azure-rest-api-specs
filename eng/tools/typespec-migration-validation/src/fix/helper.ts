@@ -66,3 +66,14 @@ export function checkPropertyAttributeChanged(checkKey: string, jsonObj: any, cu
 
   return results;
 }
+
+export function getPropertyName(jsonPath: string): [definitionName: string, propertyName: string] | undefined {
+  const pathParts = jsonPath.split('.');
+  const definitionIndex = pathParts.findIndex(part => part === 'definitions');
+  if (definitionIndex !== -1 && definitionIndex + 3 < pathParts.length) {
+    const definitionName = pathParts[definitionIndex + 1];
+    const propertyName = pathParts[definitionIndex + 3];
+    return [definitionName, propertyName];
+  }
+  return undefined;
+}

@@ -1,9 +1,9 @@
 import { checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 
-export function checkReadOnly(jsonObj: any): string[] {
+export function checkSecret(jsonObj: any): string[] {
   const suggestedFixes: string[] = [];
 
-  const deletedChanges = checkPropertyAttributeDeleted('readOnly', jsonObj);
+  const deletedChanges = checkPropertyAttributeDeleted('x-ms-secret', jsonObj);
   if (deletedChanges.length > 0) {
     for (const change of deletedChanges) {
       const { path, value } = change;
@@ -11,7 +11,7 @@ export function checkReadOnly(jsonObj: any): string[] {
 
       if (getPropertyName(path)) {
         const [definitionName, propertyName] = getPropertyName(path)!;
-        suggestedFixes.push(`Find a model called "${definitionName}". Add \`@visibility(Lifecycle.Read)\` onto its property "${propertyName}". If the property cannot access directly, add \`@@visibility(${definitionName}.${propertyName}, Lifecycle.Read)\` right after the model.`);
+        suggestedFixes.push(`Find a model called "${definitionName}". Add \`@secret\` onto its property "${propertyName}". If the property cannot access directly, add \`@@secret(${definitionName}.${propertyName})\` right after the model.`);
       }
     }
   }
