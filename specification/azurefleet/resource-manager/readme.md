@@ -38,15 +38,17 @@ suppressions:
       - $.definitions.VirtualMachineExtensionProperties.properties.settings
       - $.definitions.VirtualMachineScaleSetExtensionProperties.properties.protectedSettings
       - $.definitions.VirtualMachineScaleSetExtensionProperties.properties.settings
-    reason: Property "settings" and "protectedSettings" for VirtualMachineExtension 
-            and VirtualMachineScaleSetExtensionProperties were previously defined like an empty object.
+    reason:
+      Property "settings" and "protectedSettings" for VirtualMachineExtension
+      and VirtualMachineScaleSetExtensionProperties were previously defined like an empty object.
   - code: DefinitionsPropertiesNamesCamelCase
     from: azurefleet.json
     where:
       - $.definitions.VirtualMachineScaleSetDataDisk.properties.diskIOPSReadWrite
       - $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
-    reason: Property "diskIOPSReadWrite" does not follow Camel Case and can't be changed as it is being 
-            defined previously in Microsoft.Compute like this. ultraSSDEnabled - SSD doesn't follow camel case.
+    reason:
+      Property "diskIOPSReadWrite" does not follow Camel Case and can't be changed as it is being
+      defined previously in Microsoft.Compute like this. ultraSSDEnabled - SSD doesn't follow camel case.
 ```
 
 ### Tag: package-preview-2023-11
@@ -87,11 +89,6 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
