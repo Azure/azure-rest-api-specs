@@ -197,17 +197,6 @@ extends:
                 $optional_params || true # return true always to suppress exit error logging
             displayName: 'Generate SDK'
 
-          - task: Powershell@2
-            inputs:
-              filePath: $(SdkRepoDirectory)/eng/common/scripts/Save-Package-Properties.ps1
-              arguments: >
-                -ServiceDirectory $(GeneratedSDK.ServiceName)
-                -OutDirectory $(GeneratedSDK.StagedArtifactsFolder)/PackageInfo
-              pwsh: true
-              workingDirectory: $(SdkRepoDirectory)
-            displayName: Dump Package properties
-            condition: and(succeeded(), ne(variables['GeneratedSDK.ServiceName'], ''), ne(variables['GeneratedSDK.StagedArtifactsFolder'], ''))
-
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
               ArtifactName: $(SpecGenSdkArtifactName)
@@ -217,8 +206,8 @@ extends:
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
               ArtifactName: $(PipelineArtifactsName)
-              ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
-              CustomCondition: and(succeeded(), ne(variables['GeneratedSDK.StagedArtifactsFolder'], ''))
+              ArtifactPath: $(StagedArtifactsFolder)
+              CustomCondition: and(succeeded(), ne(variables['StagedArtifactsFolder'], ''))
 
           - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
             - task: PowerShell@2
@@ -279,9 +268,15 @@ extends:
                     -PRBody "$(GeneratedSDKInformation)"
                     -OpenAsDraft $true
 
-            - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-              - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
-                parameters:
-                  ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
-                  ArtifactName: $(PipelineArtifactsName)
-                  RepoRoot: $(SdkRepoDirectory)
+          - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+            - pwsh: |
+                . $(SpecRepoDirectory)/eng/common/scripts/Helpers/ApiView-Helpers.ps1
+                Create-API-Review `
+                  -specGenSDKArtifactPath "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)/$(SpecGenSdkArtifactName).json" `
+                  -apiviewArtifactName "$(PipelineArtifactsName)" `
+                  -buildId "$(Build.BuildId)" `
+                  -commitish "$(System.PullRequest.SourceCommitId)" `
+                  -repoName "$(SdkRepoOwner)/$(SpecRepoName)" `
+                  -pullRequestNumber "$(System.PullRequest.PullRequestNumber)" 
+              displayName: 'Detect API Change and Create API Review'
+              condition: and(succeeded(), ne(variables['SpecGenSdkArtifactPath'], ''), ne(variables['SpecGenSdkArtifactName'], ''))
