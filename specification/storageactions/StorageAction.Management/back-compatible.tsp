@@ -15,6 +15,13 @@ using Microsoft.StorageActions;
   "parameters"
 );
 @@clientName(StorageTasksOperationGroup.previewActions, "PreviewActions");
-@@clientName(StorageTaskOperation, "StorageTaskInfo", "csharp");
+@@clientName(StorageTaskOperation, "StorageTaskOperationInfo", "csharp");
+@@clientName(OnSuccess, "OnSuccessAction", "csharp");
+@@clientName(OnFailure, "OnFailureAction", "csharp");
+@@clientName(StorageTaskPreviewActionProperties,
+  "StorageTaskPreviewActionProperties",
+  "csharp"
+);
+@@clientName(StorageTaskProperties, "StorageTaskProperties", "csharp");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageTask.properties);
