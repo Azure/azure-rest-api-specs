@@ -612,13 +612,11 @@ model SubscriptionTerm {
   /**
    * The date and time in UTC of when the billing term starts.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDate?: utcDateTime;
 
   /**
    * The date and time in UTC of when the billing term ends.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDate?: utcDateTime;
 }
 
@@ -643,13 +641,11 @@ model MarketplaceTrialQuota {
   /**
    * The date and time in UTC of when the trial starts.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   trialStartAt?: utcDateTime;
 
   /**
    * The date and time in UTC of when the trial ends.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   trialEndAt?: utcDateTime;
 }
 
