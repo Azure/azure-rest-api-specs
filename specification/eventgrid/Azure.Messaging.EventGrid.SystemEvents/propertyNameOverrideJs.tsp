@@ -140,6 +140,26 @@ using Microsoft.EventGrid.SystemEvents;
   "AcsCallParticipantEvent",
   "javascript"
 );
+@@clientName(AcsCallParticipantProperties,
+  "AcsCallParticipant",
+  "javascript"
+);
+@@clientName(AcsCallGroupProperties,
+  "AcsCallGroup",
+  "javascript"
+);
+@@clientName(AcsCallRoomProperties,
+  "AcsCallRoom",
+  "javascript"
+);
+@@clientName(AcsCallEndedBy,
+  "AcsCallEndedBy",
+  "javascript"
+);
+@@clientName(AcsCallEndReasonProperties,
+  "AcsCallEndReason",
+  "javascript"
+);
 @@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
   "EventGridMqttClientCreatedOrUpdatedEventData",
   "javascript"
