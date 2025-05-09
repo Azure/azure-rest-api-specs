@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace TextTranslation;
@@ -19,6 +20,37 @@ alias CommonParameters = {
 model InputTextItem {
   @doc("Text to translate.")
   text: string;
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("""
+    Specifies the script of the input text.
+    """)
+  script?: string;
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("""
+    Specifies the language of the input text. Find which languages are available to translate by 
+    looking up supported languages using the translation scope. If the language parameter isn't 
+    specified, automatic language detection is applied to determine the source language.
+    
+    You must use the language parameter rather than autodetection when using the dynamic dictionary feature. 
+    Note: the dynamic dictionary feature is case-sensitive.
+    """)
+  language?: string;
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("""
+    Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
+    complete element. Possible values are: plain (default) or html.
+    """)
+  textType?: TextType = "Plain";
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("""
+    Translation target parameters.
+    """)
+  targets: TranslateTarget[];
+
 }
 
 alias CommonResultHeaders = {
