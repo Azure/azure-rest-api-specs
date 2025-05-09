@@ -1,6 +1,6 @@
 import { test, describe, vi, expect } from "vitest";
 import { vol } from "memfs";
-import { pathExists, isFailure, isWarning } from "../src/util.js";
+import { pathExists, isFailure, isWarning, normalizeSeparators } from "../src/util.js";
 import { beforeEach } from "node:test";
 
 vi.mock("fs/promises", () => {
@@ -60,5 +60,19 @@ describe("isWarning", () => {
     { level: "info", expected: false },
   ])(`isWarning($level) returns $expected`, ({ level, expected }) => {
     expect(isWarning(level)).toEqual(expected);
+  });
+});
+
+describe("normalizeSeparators", () => {
+  test("normalizes backslashes to forward slashes", () => {
+    const path = "foo\\bar\\baz";
+    const normalized = normalizeSeparators(path);
+    expect(normalized).toEqual("foo/bar/baz");
+  });
+
+  test("does not modify forward slashes", () => {
+    const path = "foo/bar/baz";
+    const normalized = normalizeSeparators(path);
+    expect(normalized).toEqual("foo/bar/baz");
   });
 });

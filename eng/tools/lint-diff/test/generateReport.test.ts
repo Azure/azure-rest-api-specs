@@ -17,7 +17,6 @@ import {
   AutorestRunResult,
   AutoRestMessage,
 } from "../src/lintdiff-types.js";
-import { isWindows } from "./test-util.js";
 
 import { vol } from "memfs";
 
@@ -341,7 +340,7 @@ describe("generateLintDiffReport", () => {
     // Seed current filesystem so that "." exists.
     vol.mkdirSync(".", { recursive: true });
   });
-  test.skipIf(isWindows())("fails if new violations include an error", async ({ expect }) => {
+  test("fails if new violations include an error", async ({ expect }) => {
     const afterViolation = {
       extensionName: "@microsoft.azure/openapi-validator",
       level: "error",
@@ -405,7 +404,7 @@ describe("generateLintDiffReport", () => {
     `);
   });
 
-  test.skipIf(isWindows())("fails if new violation includes a fatal error", async ({ expect }) => {
+  test("fails if new violation includes a fatal error", async ({ expect }) => {
     const afterViolation = {
       extensionName: "@microsoft.azure/openapi-validator",
       level: "fatal",
@@ -463,7 +462,7 @@ describe("generateLintDiffReport", () => {
     `);
   });
 
-  test.skipIf(isWindows())(
+  test(
     "passes if new violations do not include an error (warnings only)",
     async ({ expect }) => {
       const afterViolation = {
@@ -544,7 +543,7 @@ describe("generateAutoRestErrorReport", () => {
     const autoRestErrors = [
       {
         result: {
-          readme: new Readme("readme.md"),
+          readme: new Readme("dummy/rootPath/readme.md"),
           tag: "tag1",
           rootPath: "dummy/rootPath",
           error: null,
@@ -558,7 +557,7 @@ describe("generateAutoRestErrorReport", () => {
       },
       {
         result: {
-          readme: new Readme("readme2.md"),
+          readme: new Readme("dummy/rootPath/readme2.md"),
           tag: "tag2",
           rootPath: "dummy/rootPath",
           error: null,
@@ -576,7 +575,7 @@ describe("generateAutoRestErrorReport", () => {
     expect(actual).toMatchInlineSnapshot(`
       "**AutoRest errors:**
 
-      Readme: ../../readme.md
+      Readme: readme.md
       Tag: tag1
       Errors:
       | Level | Message |
@@ -585,7 +584,7 @@ describe("generateAutoRestErrorReport", () => {
       | :x: fatal | Fatal error message |
 
 
-      Readme: ../../readme2.md
+      Readme: readme2.md
       Tag: tag2
       Errors:
       | Level | Message |

@@ -11,6 +11,7 @@ import {
 } from "./markdown-utils.js";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { normalizeSeparators } from "./util.js";
 
 export async function getRunList(
   beforePath: string,
@@ -112,7 +113,7 @@ export async function buildState(
       });
     const dedupedTags = deduplicateTags(tagsAndInputs);
     changedFileAndTagsMap.set(
-      relative(rootPath, readmeFile), 
+      normalizeSeparators(relative(rootPath, readmeFile)),
       { readme: tags.readme, tags: new Set<string>(dedupedTags) }
     );
   }
@@ -133,7 +134,7 @@ export async function buildState(
     const service = getService(changedSwagger);
     const swaggerSet = await specModels.get(service)!.getAffectedSwaggers(resolve(rootPath, changedSwagger));
     for (const swaggerEntry of swaggerSet) {
-      affectedSwaggers.add(relative(rootPath, swaggerEntry.path));
+      affectedSwaggers.add(normalizeSeparators(relative(rootPath, swaggerEntry.path)));
     }
   }
 
@@ -209,7 +210,7 @@ export async function readFileList(changedFilesPath: string): Promise<string[]> 
 export async function getAffectedServices(changedFiles: string[]) {
   const affectedServices = new Set<string>();
   for (const file of changedFiles) {
-    const service = await getService(file);
+    const service = getService(file);
     if (service) {
       affectedServices.add(service);
     }
@@ -223,11 +224,10 @@ export async function getAffectedServices(changedFiles: string[]) {
  * @returns Service path of the form "specification/<service>"
  */
 export function getService(filePath: string): string {
-  // TODO: Ensure sep is used appropriately here
-  const splitPath = filePath.split(sep).filter((part) => part);
+  const normalizedPath = normalizeSeparators(filePath);
+  const splitPath = normalizedPath.split("/").filter((part) => part);
   if (splitPath.length >= 2) {
-    // TODO: Verify result is a directory or remove async
-    return splitPath.slice(0, 2).join(sep);
+    return splitPath.slice(0, 2).join("/");
   }
   throw new Error(`Could not find service for file path: ${filePath}`);
 }

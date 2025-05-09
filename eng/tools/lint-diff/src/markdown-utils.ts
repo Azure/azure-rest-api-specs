@@ -2,6 +2,7 @@ import { marked } from "marked";
 import { kebabCase } from "change-case";
 import axios from "axios";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { normalizeSeparators } from "./util.js";
 
 export enum MarkdownType {
   Arm = "arm",
@@ -21,13 +22,13 @@ export async function getOpenapiType(readme: Readme): Promise<MarkdownType> {
     return openapiType as MarkdownType;
   }
 
-
   // Fallback, no openapi-type found in the file. Look at path to determine type
   // resource-manager: Arm
   // data-plane: DataPlane
-  if (readme.path.match(/.*specification\/.*\/resource-manager\/.*readme.md$/g)) {
+  const resolvedPath = normalizeSeparators(readme.path);
+  if (resolvedPath.match(/.*specification\/.*\/resource-manager\/.*readme.md$/g)) {
     return MarkdownType.Arm;
-  } else if (readme.path.match(/.*specification\/.*\/data-plane\/.*readme.md$/g)) {
+  } else if (resolvedPath.match(/.*specification\/.*\/data-plane\/.*readme.md$/g)) {
     return MarkdownType.DataPlane;
   }
 

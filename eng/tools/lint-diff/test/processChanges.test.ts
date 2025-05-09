@@ -9,18 +9,17 @@ import {
 } from "../src/processChanges.js";
 import { ReadmeTags } from "../src/lintdiff-types.js";
 
-import { isWindows } from "./test-util.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
 
 describe("getAffectedServices", () => {
-  test.skipIf(isWindows())("returns single service with multiple files", async () => {
+  test("returns single service with multiple files", async () => {
     const changedFiles = ["specification/service1/file1.json", "specification/service1/file2.json"];
     const affectedServices = await getAffectedServices(changedFiles);
 
     expect(affectedServices).toEqual(new Set<string>(["specification/service1"]));
   });
 
-  test.skipIf(isWindows())("returns multiple services", async () => {
+  test("returns multiple services", async () => {
     const changedFiles = [
       "specification/service1/file1.json",
       "specification/service1/file2.json",
@@ -35,16 +34,14 @@ describe("getAffectedServices", () => {
 });
 
 describe("getService", () => {
-  test.skipIf(isWindows())("returns service name from file path", async () => {
+  test("returns service name from file path", async () => {
     const filePath = "specification/service1/file1.json";
     const serviceName = await getService(filePath);
 
     expect(serviceName).toEqual("specification/service1");
   });
 
-  test.skipIf(isWindows())(
-    "returns service name from file path with leading separator",
-    async () => {
+  test("returns service name from file path with leading separator", async () => {
       const filePath = "/specification/service1/file1.json";
       const serviceName = await getService(filePath);
 
@@ -178,7 +175,7 @@ describe("getChangedSwaggers", () => {
 });
 
 describe("buildState", () => {
-  test.skipIf(isWindows())("returns output for a swagger edited in place", async () => {
+  test("returns output for a swagger edited in place", async () => {
     const actual = await buildState(
       ["specification/edit-in-place/data-plane/swagger.json"],
       "test/fixtures/buildState/",
@@ -201,7 +198,7 @@ describe("buildState", () => {
     `);
   });
 
-  test.skipIf(isWindows())("returns output for an edited readme", async () => {
+  test("returns output for an edited readme", async () => {
     const actual = await buildState(
       ["specification/edit-in-place/readme.md"],
       "test/fixtures/buildState/",
