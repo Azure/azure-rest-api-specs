@@ -76,8 +76,8 @@ export async function main() {
 
   logHeader("Comparing old and new Swagger files...");
   if (outputFolder) {
-    fs.writeFileSync(`${outputFolder}/oldSwagger.json`, JSON.stringify(sortedOldFile, null, 2));
-    fs.writeFileSync(`${outputFolder}/newSwagger.json`, JSON.stringify(sortedNewFile, null, 2));
+    fs.writeFileSync(`${outputFolder}/oldNormalizedSwagger.json`, JSON.stringify(sortedOldFile, null, 2));
+    fs.writeFileSync(`${outputFolder}/newNormalizedSwagger.json`, JSON.stringify(sortedNewFile, null, 2));
     const diffForFile = diff(sortedOldFile, sortedNewFile);
     fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
     const suggestedFixes = suggestFix(diffForFile);
