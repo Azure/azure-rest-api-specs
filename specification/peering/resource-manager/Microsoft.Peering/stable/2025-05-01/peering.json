@@ -2988,7 +2988,9 @@
             "MigrationSpecificConfigDrift",
             "MigrationNpmError",
             "PendingWorkWindow",
+            "ExternalBlocker",
             "StaticMacConfiguration",
+            "UndoMigrationGraphCleanup",
             "MigrationWorkWindow",
             "PendingMigrationCompletion",
             "MigrationCompletionRequested",
@@ -3044,7 +3046,6 @@
             "AwaitApplyDenyAll",
             "IPChangeValidation",
             "IPChangeCleanup",
-            "UndoMigrationGraphCleanup",
             "ForcedIpChangeCleanup",
             "ForcedIpChangeCleanupWithActiveSessions",
             "IPChangeInitiate",
@@ -3054,7 +3055,6 @@
             "IPChangeApplyDenyAll",
             "IPChangeRemoveDenyAll",
             "IPChangeValidateSessions",
-            "ExternalBlocker",
             "ACLConfiguration",
             "PendingSpecialWorkItem"
           ],
@@ -3185,7 +3185,9 @@
             "MigrationSpecificConfigDrift",
             "MigrationNpmError",
             "PendingWorkWindow",
+            "ExternalBlocker",
             "StaticMacConfiguration",
+            "UndoMigrationGraphCleanup",
             "MigrationWorkWindow",
             "PendingMigrationCompletion",
             "MigrationCompletionRequested",
@@ -3241,7 +3243,6 @@
             "AwaitApplyDenyAll",
             "IPChangeValidation",
             "IPChangeCleanup",
-            "UndoMigrationGraphCleanup",
             "ForcedIpChangeCleanup",
             "ForcedIpChangeCleanupWithActiveSessions",
             "IPChangeInitiate",
@@ -3251,7 +3252,6 @@
             "IPChangeApplyDenyAll",
             "IPChangeRemoveDenyAll",
             "IPChangeValidateSessions",
-            "ExternalBlocker",
             "ACLConfiguration",
             "PendingSpecialWorkItem"
           ],
@@ -3263,29 +3263,6 @@
         },
         "migrationWorkWindowTracker": {
           "description": "Gets or sets the migration work window tracker. Format = \"DateTime String Format|WorkWindowInitiator Email ID\"",
-          "type": "string"
-        }
-      }
-    },
-    "AutomationSpecialRequest,StringListResult": {
-      "type": "object",
-      "properties": {
-        "item1": {
-          "enum": [
-            "None",
-            "BypassPhysicalLinkUpCheck",
-            "BypassLightLevelCheck",
-            "BypassTrafficCheck",
-            "BypassPrefixConflictCheck",
-            "RestartPortReservation"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "item1",
-            "modelAsString": true
-          }
-        },
-        "item2": {
           "type": "string"
         }
       }
@@ -3375,84 +3352,6 @@
         "md5AuthenticationKey": {
           "description": "The MD5 authentication key of the session.",
           "type": "string"
-        }
-      }
-    },
-    "BgpGroupConfiguration": {
-      "description": "Stores configuration information related to a BGP group.\r\nUsed for config diffing. Many configurations can be set at the neighbor or group level (or both).\r\nNeighbor level config takes precedence over group level config.",
-      "type": "object",
-      "properties": {
-        "bgpGroupName": {
-          "description": "The BGP group name.",
-          "type": "string"
-        },
-        "prefixLimitV4": {
-          "format": "int32",
-          "description": "The V4 prefix limit.\r\nAssume that tear down and idle-timeout are the same for all peers.",
-          "type": "integer"
-        },
-        "prefixLimitV6": {
-          "format": "int32",
-          "description": "The V6 prefix limit.",
-          "type": "integer"
-        },
-        "prefixLimitV4Line": {
-          "description": "The configuration line that sets the V4 prefix limit.",
-          "type": "string",
-          "readOnly": true
-        },
-        "prefixLimitV6Line": {
-          "description": "The configuration line that sets the V6 prefix limit.",
-          "type": "string",
-          "readOnly": true
-        },
-        "peerAsn": {
-          "format": "int32",
-          "description": "The peer ASN.",
-          "type": "integer"
-        },
-        "peerAsnLine": {
-          "description": "The configuration line that sets the peer ASN.",
-          "type": "string",
-          "readOnly": true
-        },
-        "descriptionLine": {
-          "description": "The line that sets the description.",
-          "type": "string",
-          "readOnly": true
-        },
-        "importPolicies": {
-          "description": "All import policies configured on this group.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
-        },
-        "exportPolicies": {
-          "description": "All export policies configured on the group.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
-        },
-        "uncategorizedConfig": {
-          "description": "Uncategorized configuration lines.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
-        },
-        "allConfiguration": {
-          "description": "Returns all the group configuration.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
         }
       }
     },
