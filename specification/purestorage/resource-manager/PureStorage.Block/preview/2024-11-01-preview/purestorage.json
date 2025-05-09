@@ -2305,7 +2305,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HealthResponse"
+              "$ref": "#/definitions/HealthResult"
             }
           },
           "default": {
@@ -3029,7 +3029,7 @@
         "estimatedMaxCapacity"
       ]
     },
-    "HealthResponse": {
+    "HealthResult": {
       "type": "object",
       "description": "Health information for a storage pool",
       "properties": {
@@ -3611,7 +3611,21 @@
         }
       }
     },
-    "ServiceInitializationData": {
+    "ServiceInitializationHandle": {
+      "type": "object",
+      "description": "Initialization handle used to configure the AVS SDDC to communicate with the storage pool",
+      "properties": {
+        "sddcResourceId": {
+          "type": "string",
+          "description": "Azure resource ID of the AVS SDDC the pool is connecting to"
+        },
+        "serviceAccountUsername": {
+          "type": "string",
+          "description": "Requested service account username"
+        }
+      }
+    },
+    "ServiceInitializationInfo": {
       "type": "object",
       "description": "Explicit service initialization data",
       "properties": {
@@ -3632,20 +3646,6 @@
         "vSphereCertificate": {
           "type": "string",
           "description": "AVS instance's vSphere certificate"
-        }
-      }
-    },
-    "ServiceInitializationHandle": {
-      "type": "object",
-      "description": "Initialization handle used to configure the AVS SDDC to communicate with the storage pool",
-      "properties": {
-        "sddcResourceId": {
-          "type": "string",
-          "description": "Azure resource ID of the AVS SDDC the pool is connecting to"
-        },
-        "serviceAccountUsername": {
-          "type": "string",
-          "description": "Requested service account username"
         }
       }
     },
@@ -3759,7 +3759,7 @@
           "description": "Encoded AVS connection information"
         },
         "serviceInitializationData": {
-          "$ref": "#/definitions/ServiceInitializationData",
+          "$ref": "#/definitions/ServiceInitializationInfo",
           "description": "Explicit AVS connection information"
         }
       }
