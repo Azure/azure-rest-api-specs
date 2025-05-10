@@ -3,19 +3,20 @@ import { readFile } from "fs/promises";
 import { pathExists } from "./util.js";
 import { specification, readme, swagger } from "@azure-tools/specs-shared/changed-files";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model"
+import { ReadmeTags } from "./lintdiff-types.js";
 import deepEqual from "deep-eql"
 
 import {
-  getTagsAndInputFiles,
   deduplicateTags,
 } from "./markdown-utils.js";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
+import { Readme } from "@azure-tools/specs-shared/readme";
 
 export async function getRunList(
   beforePath: string,
   afterPath: string,
   changedFilesPath: string,
-): Promise<[Map<string, string[]>, Map<string, string[]>, Set<string>]> {
+): Promise<[Map<string, ReadmeTags>, Map<string, ReadmeTags>, Set<string>]> {
   // Forward slashes are OK list coming from changedFilesPath is from git which
   // always uses forward slashes as path separators
 
@@ -47,11 +48,11 @@ export async function getRunList(
   const affectedSwaggers = await getChangedSwaggers(beforePath, afterPath, affectedSwaggerCandidates);
 
   console.log("Before readme and tags:");
-  console.table([...beforeTagMap].map(([readme, tags]) => ({ readme, tags })), ['readme', 'tags']);
+  console.table([...beforeTagMap].map(([readme, tags]) => ({ readme, tags: [...tags.tags] })), ['readme', 'tags']);
   console.log("\n");
 
   console.log("After readme and tags:");
-  console.table([...afterTagMap].map(([readme, tags]) => ({ readme, tags })), ['readme', 'tags']);
+  console.table([...afterTagMap].map(([readme, tags]) => ({ readme, tags: [...tags.tags] })), ['readme', 'tags']);
   console.log("\n");
 
   console.log("Affected swaggers:"); 
@@ -64,7 +65,7 @@ export async function getRunList(
 export async function buildState(
   changedSpecFiles: string[],
   rootPath: string,
-): Promise<[Map<string, string[]>, string[]]> {
+): Promise<[Map<string, ReadmeTags>, string[]]> {
   // Filter changed files to include only those that exist in the rootPath
   const existingChangedFiles = [];
   for (const file of changedSpecFiles) {
@@ -84,38 +85,47 @@ export async function buildState(
     specModels.set(serviceDir, specModel);
   }
 
-  const readmeTags = new Map<string, Set<string>>();
+  const readmeTags = new Map<string, ReadmeTags>();
   for (const changedSwagger of existingChangedFiles.filter(swagger)) {
     const readmeTagMapForChangedFile = 
       await specModels.get(getService(changedSwagger))!.getAffectedReadmeTags(resolve(rootPath, changedSwagger));
     
     for (const [readmeEntry, tags] of readmeTagMapForChangedFile) { 
       if (!readmeTags.has(readmeEntry.path)) { 
-        readmeTags.set(readmeEntry.path, new Set<string>());
+        readmeTags.set(readmeEntry.path, { readme: readmeEntry, tags: new Set<string>() });
       }
       for (const tag of tags) { 
-        readmeTags.get(readmeEntry.path)?.add(tag.name);
+        readmeTags.get(readmeEntry.path)?.tags.add(tag.name);
       }
     }
   }
 
-  const changedFileAndTagsMap = new Map<string, string[]>();
+  const changedFileAndTagsMap = new Map<string, ReadmeTags>();
   for (const [readmeFile, tags] of readmeTags.entries()) {
-    const dedupedTags = deduplicateTags(
-      await getTagsAndInputFiles(
-        [...tags],
-        await readFile(readmeFile, { encoding: "utf-8" }),
-      ),
+    const allReadmeTags = await tags.readme.getTags();
+    const interestingTags = [...allReadmeTags].filter((t) => tags.tags.has(t.name));
+    const tagsAndInputs = [...interestingTags]
+      .map((tag) => { 
+        return { 
+          tagName: tag.name,
+          inputFiles: [...tag.inputFiles].map((f) => f.path)
+        }
+      });
+    const dedupedTags = deduplicateTags(tagsAndInputs);
+    changedFileAndTagsMap.set(
+      relative(rootPath, readmeFile), 
+      { readme: tags.readme, tags: new Set<string>(dedupedTags) }
     );
-
-    changedFileAndTagsMap.set(relative(rootPath, readmeFile), dedupedTags);
   }
 
   // For readme files that have changed but there are no affected swaggers,
   // add them to the map with no tags
   for (const changedReadme of existingChangedFiles.filter(readme)) {
     if (!changedFileAndTagsMap.has(changedReadme)) {
-      changedFileAndTagsMap.set(changedReadme, []);
+      changedFileAndTagsMap.set(
+        changedReadme, 
+        { readme: new Readme(changedReadme), tags: new Set<string>() }
+      );
     }
   }
 
@@ -140,18 +150,18 @@ export async function buildState(
  * @returns maps of readme files and tags to scan
  */
 export function reconcileChangedFilesAndTags(
-  before: Map<string, string[]>,
-  after: Map<string, string[]>,
-): Map<string, string[]>[] {
-  const beforeFinal = new Map<string, string[]>();
-  const afterFinal = new Map<string, string[]>();
+  before: Map<string, ReadmeTags>,
+  after: Map<string, ReadmeTags>,
+): Map<string, ReadmeTags>[] {
+  const beforeFinal = new Map<string, ReadmeTags>();
+  const afterFinal = new Map<string, ReadmeTags>();
 
   // Clone the maps so that changes to maps do not affect original object
   for (const [readme, tags] of before.entries()) {
-    beforeFinal.set(readme, [...tags]);
+    beforeFinal.set(readme, tags);
   }
   for (const [readme, tags] of after.entries()) {
-    afterFinal.set(readme, [...tags]);
+    afterFinal.set(readme, tags);
   }
 
   // If a tag is deleted in after and exists in before, do NOT scan the tag
@@ -162,10 +172,10 @@ export function reconcileChangedFilesAndTags(
       continue;
     }
 
-    const afterTags = new Set(afterFinal.get(readme)!);
+    const afterTags = new Set([...afterFinal.get(readme)!.tags]);
     beforeFinal.set(
       readme,
-      tags.filter((tag) => afterTags.has(tag)),
+      { readme: tags.readme, tags: new Set([...tags.tags].filter((t) => afterTags.has(t))) },
     );
   }
 
