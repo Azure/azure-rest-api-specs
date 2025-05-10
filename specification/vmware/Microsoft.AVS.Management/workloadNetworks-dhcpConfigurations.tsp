@@ -23,6 +23,7 @@ interface WorkloadNetworkDhcpConfigurations {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}")
   @doc("Get a {name}", WorkloadNetworkDhcp)
   @get
+  @armResourceRead(WorkloadNetworkDhcp)
   get(
     ...Foundations.BaseParameters<WorkloadNetworkDhcp>,
     ...DhcpIdParameter,
