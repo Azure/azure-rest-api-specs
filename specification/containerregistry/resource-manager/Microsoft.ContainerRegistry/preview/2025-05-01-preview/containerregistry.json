@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-03-01-preview",
+    "version": "2025-05-01-preview",
     "title": "ContainerRegistryManagementClient"
   },
   "host": "management.azure.com",
@@ -791,54 +791,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries": {
-      "get": {
-        "tags": [
-          "ConnectedRegistries"
-        ],
-        "description": "Lists all connected registries for the specified container registry.",
-        "operationId": "ConnectedRegistries_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConnectedRegistryFilterParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ConnectedRegistryListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConnectedRegistryList": {
-            "$ref": "./examples/ConnectedRegistryList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}": {
       "get": {
         "tags": [
@@ -906,8 +858,8 @@
             "$ref": "#/parameters/ConnectedRegistryNameParameter"
           },
           {
-            "name": "connectedRegistryCreateParameters",
             "in": "body",
+            "name": "connectedRegistryCreateParameters",
             "description": "The parameters for creating a connectedRegistry.",
             "required": true,
             "schema": {
@@ -940,14 +892,81 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "ConnectedRegistryCreate": {
             "$ref": "./examples/ConnectedRegistryCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ConnectedRegistries"
+        ],
+        "description": "Updates a connected registry with the specified parameters.",
+        "operationId": "ConnectedRegistries_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectedRegistryNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "connectedRegistryUpdateParameters",
+            "description": "The parameters for updating a connectedRegistry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectedRegistryUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConnectedRegistry"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ConnectedRegistry"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConnectedRegistryUpdate": {
+            "$ref": "./examples/ConnectedRegistryUpdate.json"
+          }
         }
       },
       "delete": {
@@ -995,22 +1014,27 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "ConnectedRegistryDelete": {
             "$ref": "./examples/ConnectedRegistryDelete.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      },
-      "patch": {
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries": {
+      "get": {
         "tags": [
           "ConnectedRegistries"
         ],
-        "description": "Updates a connected registry with the specified parameters.",
-        "operationId": "ConnectedRegistries_Update",
+        "description": "Lists all connected registries for the specified container registry.",
+        "operationId": "ConnectedRegistries_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1025,51 +1049,30 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/ConnectedRegistryNameParameter"
-          },
-          {
-            "name": "connectedRegistryUpdateParameters",
-            "in": "body",
-            "description": "The parameters for updating a connectedRegistry.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConnectedRegistryUpdateParameters"
-            }
+            "$ref": "#/parameters/ConnectedRegistryFilterParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ConnectedRegistry"
-            }
-          },
-          "201": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ConnectedRegistry"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/ConnectedRegistryListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-examples": {
-          "ConnectedRegistryUpdate": {
-            "$ref": "./examples/ConnectedRegistryUpdate.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+        "x-ms-examples": {
+          "ConnectedRegistryList": {
+            "$ref": "./examples/ConnectedRegistryList.json"
+          }
         }
       }
     },
@@ -1116,14 +1119,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "ConnectedRegistryDeactivate": {
             "$ref": "./examples/ConnectedRegistryDeactivate.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -4083,6 +4086,44 @@
     }
   },
   "definitions": {
+    "ActivationProperties": {
+      "description": "The activation properties of the connected registry.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The activation status of the connected registry.",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ActivationStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureADAuthenticationAsArmPolicy": {
+      "description": "The policy for using ARM audience token for a container registry.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "enabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureADAuthenticationAsArmPolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ArchiveListResult": {
       "description": "The result of a request to list archives for a container registry.",
       "type": "object",
@@ -4351,6 +4392,22 @@
         }
       }
     },
+    "ConnectedRegistry": {
+      "description": "An object that represents a connected registry for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectedRegistryProperties",
+          "description": "The properties of the connected registry.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ConnectedRegistryListResult": {
       "description": "The result of a request to list connected registries for a container registry.",
       "type": "object",
@@ -4365,22 +4422,6 @@
         "nextLink": {
           "description": "The URI that can be used to request the next list of connected registries.",
           "type": "string"
-        }
-      }
-    },
-    "ConnectedRegistry": {
-      "description": "An object that represents a connected registry for a container registry.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectedRegistryProperties",
-          "description": "The properties of the connected registry.",
-          "x-ms-client-flatten": true
         }
       }
     },
@@ -4496,225 +4537,6 @@
         }
       }
     },
-    "ActivationProperties": {
-      "description": "The activation properties of the connected registry.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "The activation status of the connected registry.",
-          "enum": [
-            "Active",
-            "Inactive"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ActivationStatus",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ParentProperties": {
-      "description": "The properties of the connected registry parent.",
-      "required": [
-        "syncProperties"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The resource ID of the parent to which the connected registry will be associated.",
-          "type": "string"
-        },
-        "syncProperties": {
-          "$ref": "#/definitions/SyncProperties",
-          "description": "The sync properties of the connected registry with its parent."
-        }
-      }
-    },
-    "LoginServerProperties": {
-      "description": "The login server properties of the connected registry.",
-      "type": "object",
-      "properties": {
-        "host": {
-          "description": "The host of the connected registry. Can be FQDN or IP.",
-          "type": "string",
-          "readOnly": true
-        },
-        "tls": {
-          "$ref": "#/definitions/TlsProperties",
-          "description": "The TLS properties of the connected registry login server.",
-          "readOnly": true
-        }
-      }
-    },
-    "LoggingProperties": {
-      "description": "The logging properties of the connected registry.",
-      "type": "object",
-      "properties": {
-        "logLevel": {
-          "description": "The verbosity of logs persisted on the connected registry.",
-          "default": "Information",
-          "enum": [
-            "Debug",
-            "Information",
-            "Warning",
-            "Error",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "LogLevel",
-            "modelAsString": true
-          }
-        },
-        "auditLogStatus": {
-          "description": "Indicates whether audit logs are enabled on the connected registry.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AuditLogStatus",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "StatusDetailProperties": {
-      "description": "The status detail properties of the connected registry.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The component of the connected registry corresponding to the status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "code": {
-          "description": "The code of the status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "The description of the status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "timestamp": {
-          "format": "date-time",
-          "description": "The timestamp of the status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "correlationId": {
-          "description": "The correlation ID of the status.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SyncProperties": {
-      "description": "The sync properties of the connected registry with its parent.",
-      "required": [
-        "tokenId",
-        "messageTtl"
-      ],
-      "type": "object",
-      "properties": {
-        "tokenId": {
-          "description": "The resource ID of the ACR token used to authenticate the connected registry to its parent during sync.",
-          "type": "string"
-        },
-        "schedule": {
-          "description": "The cron expression indicating the schedule that the connected registry will sync with its parent.",
-          "type": "string"
-        },
-        "syncWindow": {
-          "format": "duration",
-          "description": "The time window during which sync is enabled for each schedule occurrence. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
-          "type": "string"
-        },
-        "messageTtl": {
-          "format": "duration",
-          "description": "The period of time for which a message is available to sync before it is expired. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
-          "type": "string"
-        },
-        "lastSyncTime": {
-          "format": "date-time",
-          "description": "The last time a sync occurred between the connected registry and its parent.",
-          "type": "string",
-          "readOnly": true
-        },
-        "gatewayEndpoint": {
-          "description": "The gateway endpoint used by the connected registry to communicate with its parent.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "TlsProperties": {
-      "description": "The TLS properties of the connected registry login server.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Indicates whether HTTPS is enabled for the login server.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "TlsStatus",
-            "modelAsString": true
-          }
-        },
-        "certificate": {
-          "$ref": "#/definitions/TlsCertificateProperties",
-          "description": "The certificate used to configure HTTPS for the login server.",
-          "readOnly": true
-        }
-      }
-    },
-    "TlsCertificateProperties": {
-      "description": "The TLS certificate properties of the connected registry login server.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of certificate location.",
-          "enum": [
-            "LocalDirectory"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "CertificateType",
-            "modelAsString": true
-          }
-        },
-        "location": {
-          "description": "Indicates the location of the certificates.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "GarbageCollectionProperties": {
-      "description": "The garbage collection properties of the connected registry.",
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "description": "Indicates whether garbage collection is enabled for the connected registry.",
-          "type": "boolean"
-        },
-        "schedule": {
-          "description": "The cron expression indicating the schedule that the connected registry will run garbage collection.",
-          "type": "string"
-        }
-      }
-    },
     "ConnectedRegistryUpdateParameters": {
       "description": "The parameters for updating a connected registry.",
       "type": "object",
@@ -4757,23 +4579,85 @@
         }
       }
     },
-    "SyncUpdateProperties": {
-      "description": "The parameters for updating the sync properties of the connected registry with its parent.",
+    "GarbageCollectionProperties": {
+      "description": "The garbage collection properties of the connected registry.",
       "type": "object",
       "properties": {
+        "enabled": {
+          "description": "Indicates whether garbage collection is enabled for the connected registry.",
+          "type": "boolean"
+        },
         "schedule": {
-          "description": "The cron expression indicating the schedule that the connected registry will sync with its parent.",
+          "description": "The cron expression indicating the schedule that the connected registry will run garbage collection.",
+          "type": "string"
+        }
+      }
+    },
+    "LoggingProperties": {
+      "description": "The logging properties of the connected registry.",
+      "type": "object",
+      "properties": {
+        "logLevel": {
+          "description": "The verbosity of logs persisted on the connected registry.",
+          "default": "Information",
+          "enum": [
+            "Debug",
+            "Information",
+            "Warning",
+            "Error",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LogLevel",
+            "modelAsString": true
+          }
+        },
+        "auditLogStatus": {
+          "description": "Indicates whether audit logs are enabled on the connected registry.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuditLogStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "LoginServerProperties": {
+      "description": "The login server properties of the connected registry.",
+      "type": "object",
+      "properties": {
+        "host": {
+          "description": "The host of the connected registry. Can be FQDN or IP.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tls": {
+          "$ref": "#/definitions/TlsProperties",
+          "description": "The TLS properties of the connected registry login server.",
+          "readOnly": true
+        }
+      }
+    },
+    "ParentProperties": {
+      "description": "The properties of the connected registry parent.",
+      "required": [
+        "syncProperties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID of the parent to which the connected registry will be associated.",
           "type": "string"
         },
-        "syncWindow": {
-          "format": "duration",
-          "description": "The time window during which sync is enabled for each schedule occurrence. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
-          "type": "string"
-        },
-        "messageTtl": {
-          "format": "duration",
-          "description": "The period of time for which a message is available to sync before it is expired. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
-          "type": "string"
+        "syncProperties": {
+          "$ref": "#/definitions/SyncProperties",
+          "description": "The sync properties of the connected registry with its parent."
         }
       }
     },
@@ -6226,6 +6110,11 @@
             "modelAsString": true
           }
         },
+        "networkRuleBypassAllowedForTasks": {
+          "description": "Whether or not Tasks allowed to bypass the network rules for this container registry.",
+          "default": false,
+          "type": "boolean"
+        },
         "zoneRedundancy": {
           "description": "Whether or not zone redundancy is enabled for this container registry",
           "default": "Disabled",
@@ -6310,6 +6199,38 @@
         }
       }
     },
+    "StatusDetailProperties": {
+      "description": "The status detail properties of the connected registry.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The component of the connected registry corresponding to the status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "code": {
+          "description": "The code of the status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "The timestamp of the status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "The correlation ID of the status.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "StorageAccountProperties": {
       "description": "The properties of a storage account for a container registry. Only applicable to Classic SKU.",
       "required": [
@@ -6319,6 +6240,65 @@
       "properties": {
         "id": {
           "description": "The resource ID of the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "SyncProperties": {
+      "description": "The sync properties of the connected registry with its parent.",
+      "required": [
+        "tokenId",
+        "messageTtl"
+      ],
+      "type": "object",
+      "properties": {
+        "tokenId": {
+          "description": "The resource ID of the ACR token used to authenticate the connected registry to its parent during sync.",
+          "type": "string"
+        },
+        "schedule": {
+          "description": "The cron expression indicating the schedule that the connected registry will sync with its parent.",
+          "type": "string"
+        },
+        "syncWindow": {
+          "format": "duration",
+          "description": "The time window during which sync is enabled for each schedule occurrence. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
+          "type": "string"
+        },
+        "messageTtl": {
+          "format": "duration",
+          "description": "The period of time for which a message is available to sync before it is expired. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
+          "type": "string"
+        },
+        "lastSyncTime": {
+          "format": "date-time",
+          "description": "The last time a sync occurred between the connected registry and its parent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "gatewayEndpoint": {
+          "description": "The gateway endpoint used by the connected registry to communicate with its parent.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncUpdateProperties": {
+      "description": "The parameters for updating the sync properties of the connected registry with its parent.",
+      "type": "object",
+      "properties": {
+        "schedule": {
+          "description": "The cron expression indicating the schedule that the connected registry will sync with its parent.",
+          "type": "string"
+        },
+        "syncWindow": {
+          "format": "duration",
+          "description": "The time window during which sync is enabled for each schedule occurrence. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
+          "type": "string"
+        },
+        "messageTtl": {
+          "format": "duration",
+          "description": "The period of time for which a message is available to sync before it is expired. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
           "type": "string"
         }
       }
@@ -6545,25 +6525,6 @@
         }
       }
     },
-    "AzureADAuthenticationAsArmPolicy": {
-      "description": "The policy for using ARM audience token for a container registry.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "The value that indicates whether the policy is enabled or not.",
-          "default": "enabled",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AzureADAuthenticationAsArmPolicyStatus",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "SoftDeletePolicy": {
       "description": "The soft delete policy for a container registry",
       "type": "object",
@@ -6698,6 +6659,10 @@
             "name": "NetworkRuleBypassOptions",
             "modelAsString": true
           }
+        },
+        "networkRuleBypassAllowedForTasks": {
+          "description": "Whether to allow ACR Tasks service to access a network restricted registry.",
+          "type": "boolean"
         },
         "anonymousPullEnabled": {
           "description": "Enables registry-wide pull from unauthenticated clients.",
@@ -7116,6 +7081,53 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "TlsCertificateProperties": {
+      "description": "The TLS certificate properties of the connected registry login server.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of certificate location.",
+          "enum": [
+            "LocalDirectory"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CertificateType",
+            "modelAsString": true
+          }
+        },
+        "location": {
+          "description": "Indicates the location of the certificates.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TlsProperties": {
+      "description": "The TLS properties of the connected registry login server.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Indicates whether HTTPS is enabled for the login server.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "TlsStatus",
+            "modelAsString": true
+          }
+        },
+        "certificate": {
+          "$ref": "#/definitions/TlsCertificateProperties",
+          "description": "The certificate used to configure HTTPS for the login server.",
+          "readOnly": true
         }
       }
     },
@@ -7988,8 +8000,8 @@
       "x-ms-parameter-location": "method"
     },
     "ConnectedRegistryNameParameter": {
-      "name": "connectedRegistryName",
       "in": "path",
+      "name": "connectedRegistryName",
       "description": "The name of the connected registry.",
       "required": true,
       "type": "string",
@@ -7999,8 +8011,8 @@
       "x-ms-parameter-location": "method"
     },
     "ConnectedRegistryFilterParameter": {
-      "name": "$filter",
       "in": "query",
+      "name": "$filter",
       "description": "An OData filter expression that describes a subset of connectedRegistries to return. The parameters that can be filtered are parent.id (the resource id of the connectedRegistry parent), mode, and connectionState. The supported operator is eq.",
       "required": false,
       "type": "string",
