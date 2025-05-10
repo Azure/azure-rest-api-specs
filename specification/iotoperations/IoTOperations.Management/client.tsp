@@ -103,11 +103,3 @@ using Microsoft.IoTOperations;
   "waitForResources",
   "java"
 );
-@@clientName(AkriDiscoveryHandlerProperties.diagnostics,
-  "DiscoveryHandlerDiagnostics",
-  "csharp"
-);
-@@clientName(AkriConnectorTemplateProperties.diagnostics,
-  "ConnectorTemplateDiagnostics",
-  "csharp"
-);
