@@ -1,10 +1,10 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
-
+import "./dataflowEndpointOpenTelemetry.tsp";
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -37,6 +37,10 @@ model DataflowEndpointProperties {
   @doc("Endpoint Type.")
   endpointType: EndpointType;
 
+  @doc("The type of the Kafka host. E.g FabricRT, EventGrid.")
+  @added(Versions.`2025-07-01-preview`)
+  hostType?: DataflowEnpointHostType;
+
   @doc("Azure Data Explorer endpoint.")
   dataExplorerSettings?: DataflowEndpointDataExplorer;
 
@@ -54,6 +58,10 @@ model DataflowEndpointProperties {
 
   @doc("Broker endpoint.")
   mqttSettings?: DataflowEndpointMqtt;
+
+  @doc("OpenTelemetry endpoint.")
+  @added(Versions.`2025-07-01-preview`)
+  openTelemetrySettings?: DataflowEndpointOpenTelemetry;
 
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
@@ -81,6 +89,34 @@ union EndpointType {
 
   @doc("Broker Type")
   Mqtt: "Mqtt",
+
+  @added(Versions.`2025-07-01-preview`)
+  @doc("OpenTelemetry Type")
+  OpenTelemetry: "OpenTelemetry",
+}
+
+@doc("DataflowEndpoint Host Type properties")
+@added(Versions.`2025-07-01-preview`)
+union DataflowEnpointHostType {
+  string,
+
+  @doc("Fabric Real-Time Type")
+  FabricRT: "FabricRT",
+
+  @doc("EventGrid Type")
+  EventGrid: "EventGrid",
+
+  @doc("Local MQTT Type")
+  LocalMq: "LocalMq",
+
+  @doc("EventHub Type")
+  Eventhub: "Eventhub",
+
+  @doc("Custom MQTT Type")
+  CustomMq: "CustomMq",
+
+  @doc("Custom Kafka Type")
+  CustomKafka: "CustomKafka",
 }
 
 @doc("Azure Data Explorer endpoint properties")
@@ -212,7 +248,7 @@ model DataflowEndpointKafka {
   batching?: DataflowEndpointKafkaBatching;
 
   @doc("Copy Broker properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an Broker source.")
-  copyMqttProperties?: OperationalMode = OperationalMode.Enabled;
+  copyMqttProperties?: OperationalMode = Enabled;
 
   @doc("Compression. Can be none, gzip, lz4, or snappy. No effect if the endpoint is used as a source.")
   compression?: DataflowEndpointKafkaCompression = DataflowEndpointKafkaCompression.None;
@@ -224,7 +260,7 @@ model DataflowEndpointKafka {
   partitionStrategy?: DataflowEndpointKafkaPartitionStrategy = DataflowEndpointKafkaPartitionStrategy.Default;
 
   @doc("TLS configuration.")
-  tls?: TlsProperties = #{ mode: OperationalMode.Enabled };
+  tls?: TlsProperties = #{ mode: Enabled };
 
   @doc("Cloud event mapping config.")
   cloudEventAttributes?: CloudEventAttributeType;
@@ -255,7 +291,7 @@ union KafkaAuthMethod {
 @doc("Kafka endpoint Batching properties")
 model DataflowEndpointKafkaBatching {
   @doc("Mode for batching.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("Batching latency in milliseconds.")
   @minValue(0)
@@ -362,7 +398,7 @@ model DataflowEndpointMqtt {
   sessionExpirySeconds?: int32;
 
   @doc("TLS configuration.")
-  tls?: TlsProperties = #{ mode: OperationalMode.Enabled };
+  tls?: TlsProperties = #{ mode: Enabled };
 
   @doc("Cloud event mapping config.")
   cloudEventAttributes?: CloudEventAttributeType;
@@ -410,4 +446,63 @@ union CloudEventAttributeType {
 
   @doc("CreateOrRemap type")
   CreateOrRemap: "CreateOrRemap",
+}
+
+@doc("System and Use Assigned Managed Identity properties")
+model ManagedIdentity {
+  @doc("System-assigned managed identity authentication.")
+  systemAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationSystemAssignedManagedIdentity;
+
+  @doc("User-assigned managed identity authentication.")
+  userAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationUserAssignedManagedIdentity;
+}
+@doc("DataflowEndpoint Authentication SystemAssignedManagedIdentity properties")
+model DataflowEndpointAuthenticationSystemAssignedManagedIdentity {
+  ...BaseSystemAssignedManagedIdentity;
+}
+
+@doc("DataflowEndpoint Authentication UserAssignedManagedIdentity properties")
+model DataflowEndpointAuthenticationUserAssignedManagedIdentity {
+  ...BaseUserAssignedManagedIdentity;
+}
+
+@doc("DataflowEndpoint Authentication Sasl properties")
+model DataflowEndpointAuthenticationSasl {
+  @doc("Type of SASL authentication. Can be PLAIN, SCRAM-SHA-256, or SCRAM-SHA-512.")
+  saslType: DataflowEndpointAuthenticationSaslType;
+
+  @doc("Token secret name.")
+  secretRef: string;
+}
+
+@doc("DataflowEndpoint Authentication Access Token properties")
+model DataflowEndpointAuthenticationAccessToken {
+  @doc("Token secret name.")
+  secretRef: string;
+}
+
+@doc("DataflowEndpoint Authentication Sasl Type properties")
+union DataflowEndpointAuthenticationSaslType {
+  string,
+
+  @doc("PLAIN Type")
+  Plain: "Plain",
+
+  @doc("SCRAM_SHA_256 Type")
+  ScramSha256: "ScramSha256",
+
+  @doc("SCRAM_SHA_512 Type")
+  ScramSha512: "ScramSha512",
+}
+
+@doc("Service Account Token for BrokerAuthentication")
+model DataflowEndpointAuthenticationServiceAccountToken {
+  @doc("Audience of the service account. Optional, defaults to the broker internal service account audience.")
+  audience: string;
+}
+
+@doc("DataflowEndpoint Authentication X509 properties")
+model DataflowEndpointAuthenticationX509 {
+  @doc("Secret reference of the X.509 certificate.")
+  secretRef: string;
 }
