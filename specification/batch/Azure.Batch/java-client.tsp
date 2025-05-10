@@ -1843,88 +1843,120 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
 
 @@override(Azure.Batch.Nodes.listNodeFiles, listNodeFilesCustomization, "java");
 
-// Client Name Overrides - Rename Parameter models to avoid conflicts with Options bag names
+// Client Name Overrides
+
+// Rename Parameter models to avoid conflicts with Options bag names
 @@clientName(Azure.Batch.BatchJobScheduleUpdateOptions,
-  "BatchJobScheduleUpdateContent",
+  "BatchJobScheduleUpdateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchJobScheduleCreateOptions,
-  "BatchJobScheduleCreateContent",
+  "BatchJobScheduleCreateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchJobCreateOptions,
-  "BatchJobCreateContent",
+  "BatchJobCreateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchJobUpdateOptions,
-  "BatchJobUpdateContent",
+  "BatchJobUpdateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchJobDisableOptions,
-  "BatchJobDisableContent",
+  "BatchJobDisableParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchJobTerminateOptions,
-  "BatchJobTerminateContent",
+  "BatchJobTerminateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchPoolCreateOptions,
-  "BatchPoolCreateContent",
+  "BatchPoolCreateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchPoolReplaceOptions,
-  "BatchPoolReplaceContent",
+  "BatchPoolReplaceParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchPoolUpdateOptions,
-  "BatchPoolUpdateContent",
+  "BatchPoolUpdateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchPoolEnableAutoScaleOptions,
-  "BatchPoolEnableAutoScaleContent",
+  "BatchPoolEnableAutoScaleParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
-  "BatchPoolEvaluateAutoScaleContent",
+  "BatchPoolEvaluateAutoScaleParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchPoolResizeOptions,
-  "BatchPoolResizeContent",
+  "BatchPoolResizeParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchNodeRemoveOptions,
-  "BatchNodeRemoveContent",
+  "BatchNodeRemoveParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchNodeDeallocateOptions,
-  "BatchNodeDeallocateContent",
+  "BatchNodeDeallocateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchTaskCreateOptions,
-  "BatchTaskCreateContent",
+  "BatchTaskCreateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchNodeUserCreateOptions,
-  "BatchNodeUserCreateContent",
+  "BatchNodeUserCreateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
-  "BatchNodeUserUpdateContent",
+  "BatchNodeUserUpdateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchNodeRebootKinds,
-  "BatchNodeRebootContent",
+  "BatchNodeRebootParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchNodeReimageOptions,
-  "BatchNodeReimageContent",
+  "BatchNodeReimageParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchNodeDisableSchedulingOptions,
-  "BatchNodeDisableSchedulingContent",
+  "BatchNodeDisableSchedulingParameters",
   "java"
 );
 @@clientName(Azure.Batch.UploadBatchServiceLogsOptions,
-  "UploadBatchServiceLogsContent",
+  "UploadBatchServiceLogsParameters",
+  "java"
+);
+
+// Rename options to parameters in Java to avoid having two 'options'
+@@clientName(Azure.Batch.EnablePoolAutoscaleRequiredParameters.enableAutoScaleOptions,
+  "parameters",
+  "java"
+);
+@@clientName(Azure.Batch.EvaluatePoolAutoScaleRequiredParameters.evaluateAutoScaleOptions,
+  "parameters",
+  "java"
+);
+@@clientName(Azure.Batch.ResizePoolRequiredParameters.resizeOptions,
+  "parameters",
+  "java"
+);
+@@clientName(Azure.Batch.RemoveNodesRequiredParameters.removeOptions,
+  "parameters",
+  "java"
+);
+@@clientName(Azure.Batch.DisableJobRequiredParameters.disableOptions,
+  "parameters",
+  "java"
+);
+@@clientName(Azure.Batch.ReplaceNodeUserRequiredParameters.updateOptions,
+  "parameters",
+  "java"
+);
+@@clientName(Azure.Batch.UploadNodeLogsRequiredParameters.uploadOptions,
+  "parameters",
   "java"
 );

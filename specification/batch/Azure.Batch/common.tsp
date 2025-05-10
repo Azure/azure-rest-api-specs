@@ -549,7 +549,7 @@ alias EnablePoolAutoscaleRequiredParameters = {
 
   @doc("The options to use for enabling automatic scaling.")
   @bodyRoot
-  content: BatchPoolEnableAutoScaleOptions;
+  enableAutoScaleOptions: BatchPoolEnableAutoScaleOptions;
 };
 
 alias EvaluatePoolAutoScaleRequiredParameters = {
@@ -559,7 +559,7 @@ alias EvaluatePoolAutoScaleRequiredParameters = {
 
   @doc("The options to use for evaluating the automatic scaling formula.")
   @bodyRoot
-  content: BatchPoolEvaluateAutoScaleOptions;
+  evaluateAutoScaleOptions: BatchPoolEvaluateAutoScaleOptions;
 };
 
 alias ResizePoolRequiredParameters = {
@@ -569,7 +569,7 @@ alias ResizePoolRequiredParameters = {
 
   @doc("The options to use for resizing the pool.")
   @bodyRoot
-  content: BatchPoolResizeOptions;
+  resizeOptions: BatchPoolResizeOptions;
 };
 
 alias StopPoolResizeRequiredParameters = {
@@ -601,7 +601,7 @@ alias RemoveNodesRequiredParameters = {
 
   @doc("The options to use for removing the node.")
   @bodyRoot
-  content: BatchNodeRemoveOptions;
+  removeOptions: BatchNodeRemoveOptions;
 };
 
 // Job Aliases
@@ -662,7 +662,7 @@ alias DisableJobRequiredParameters = {
 
   @doc("The options to use for disabling the Job.")
   @bodyRoot
-  content: BatchJobDisableOptions;
+  disableOptions: BatchJobDisableOptions;
 };
 
 alias EnableJobRequiredParameters = {
@@ -1188,7 +1188,7 @@ alias ReplaceNodeUserRequiredParameters = {
 
   @doc("The options to use for updating the user.")
   @bodyRoot
-  content: BatchNodeUserUpdateOptions;
+  updateOptions: BatchNodeUserUpdateOptions;
 };
 
 alias GetNodeRequiredParameters = {
@@ -1316,7 +1316,7 @@ alias UploadNodeLogsRequiredParameters = {
 
   @doc("The Azure Batch service log files upload options.")
   @bodyRoot
-  content: UploadBatchServiceLogsOptions;
+  uploadOptions: UploadBatchServiceLogsOptions;
 };
 
 alias ListNodesRequiredParameters = {
