@@ -56,6 +56,9 @@
     },
     {
       "name": "Replicas"
+    },
+    {
+      "name": "Users"
     }
   ],
   "paths": {
@@ -1250,6 +1253,272 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/users": {
+      "get": {
+        "operationId": "Users_ListByMongoCluster",
+        "tags": [
+          "Users"
+        ],
+        "description": "List all the users on a mongo cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mongoClusterName",
+            "in": "path",
+            "description": "The name of the mongo cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 40,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the users on a Mongo Cluster resource.": {
+            "$ref": "./examples/MongoClusters_UserList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/users/{userName}": {
+      "get": {
+        "operationId": "Users_Get",
+        "tags": [
+          "Users"
+        ],
+        "description": "Gets the defintion of a Mongo cluster user.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mongoClusterName",
+            "in": "path",
+            "description": "The name of the mongo cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 40,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "The name of the mongo cluster user.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9\\-]*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a user on a Mongo Cluster resource.": {
+            "$ref": "./examples/MongoClusters_UserGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Users_CreateOrUpdate",
+        "tags": [
+          "Users"
+        ],
+        "description": "Creates a new user or updates an existing user on a mongo cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mongoClusterName",
+            "in": "path",
+            "description": "The name of the mongo cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 40,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "The name of the mongo cluster user.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9\\-]*"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'User' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "201": {
+            "description": "Resource 'User' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a user on a Mongo Cluster resource.": {
+            "$ref": "./examples/MongoClusters_UserCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Users_Delete",
+        "tags": [
+          "Users"
+        ],
+        "description": "Deletes a mongo cluster user.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mongoClusterName",
+            "in": "path",
+            "description": "The name of the mongo cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 40,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "The name of the mongo cluster user.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9\\-]*"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a user on a Mongo Cluster resource.": {
+            "$ref": "./examples/MongoClusters_UserDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -1276,6 +1545,43 @@
           ],
           "x-ms-secret": true
         }
+      }
+    },
+    "AuthConfigProperties": {
+      "type": "object",
+      "description": "The authentication configuration for the Mongo cluster.",
+      "properties": {
+        "allowedModes": {
+          "type": "array",
+          "description": "Allowed authentication modes for data access on the cluster.",
+          "items": {
+            "$ref": "#/definitions/AuthenticationMode"
+          }
+        }
+      }
+    },
+    "AuthenticationMode": {
+      "type": "string",
+      "description": "The authentication modes supporting on the Mongo cluster.",
+      "enum": [
+        "NativeAuth",
+        "MicrosoftEntraID"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NativeAuth",
+            "value": "NativeAuth",
+            "description": "Native mongo authentication mode using username and password with auth mechanism 'SCRAM-SHA-256'."
+          },
+          {
+            "name": "MicrosoftEntraID",
+            "value": "MicrosoftEntraID",
+            "description": "Microsot Entra ID authentication mode using Entra users assigned to the cluster and auth mechanism 'MONGODB-OIDC'."
+          }
+        ]
       }
     },
     "Azure.Core.azureLocation": {
@@ -1394,6 +1700,80 @@
         }
       }
     },
+    "DatabaseRole": {
+      "type": "object",
+      "description": "Database role definition that is assigned to a user.",
+      "properties": {
+        "db": {
+          "type": "string",
+          "description": "Database scope that the role is assigned to."
+        },
+        "role": {
+          "$ref": "#/definitions/UserRole",
+          "description": "The role that is assigned to the user on the database scope."
+        }
+      },
+      "required": [
+        "db",
+        "role"
+      ]
+    },
+    "EntraIdentityProvider": {
+      "type": "object",
+      "description": "Defines a Microsot Entra ID Mongo user.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EntraIdentityProviderProperties",
+          "description": "The Entra identity properties for the user."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityProvider"
+        }
+      ],
+      "x-ms-discriminator-value": "MicrosoftEntraID"
+    },
+    "EntraIdentityProviderProperties": {
+      "type": "object",
+      "description": "Microsoft Entra ID provider properties.",
+      "properties": {
+        "principalType": {
+          "$ref": "#/definitions/EntraPrincipalType",
+          "description": "The principal type of the user."
+        }
+      },
+      "required": [
+        "principalType"
+      ]
+    },
+    "EntraPrincipalType": {
+      "type": "string",
+      "description": "Microsoft Entra ID principal types available for a Mongo user.",
+      "enum": [
+        "User",
+        "ServicePrincipal"
+      ],
+      "x-ms-enum": {
+        "name": "EntraPrincipalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Entra user type."
+          },
+          {
+            "name": "ServiePrincipal",
+            "value": "ServicePrincipal",
+            "description": "Entra service principal type."
+          }
+        ]
+      }
+    },
     "FirewallRule": {
       "type": "object",
       "description": "Represents a mongo cluster firewall rule.",
@@ -1492,6 +1872,56 @@
         "targetMode": {
           "$ref": "#/definitions/HighAvailabilityMode",
           "description": "The target high availability mode requested for the cluster."
+        }
+      }
+    },
+    "IdentityProvider": {
+      "type": "object",
+      "description": "Defines a user's identity provider definition.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IdentityProviderType",
+          "description": "The type of identity provider that the user belongs to."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "IdentityProviderType": {
+      "type": "string",
+      "description": "Identity provider types that a a user identity can belong to.",
+      "enum": [
+        "MicrosoftEntraID"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MicrosoftEntraID",
+            "value": "MicrosoftEntraID",
+            "description": "Microsoft Entra ID provider."
+          }
+        ]
+      }
+    },
+    "IdentityUserProperties": {
+      "type": "object",
+      "description": "Identity provider Mongo user properties.",
+      "properties": {
+        "identityProvider": {
+          "$ref": "#/definitions/IdentityProvider",
+          "description": "The user's identity provider definition."
+        },
+        "roles": {
+          "type": "array",
+          "description": "Database roles that are assigned to the user.",
+          "items": {
+            "$ref": "#/definitions/DatabaseRole"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1646,6 +2076,10 @@
           "type": "string",
           "description": "The infrastructure version the cluster is provisioned on.",
           "readOnly": true
+        },
+        "authConfig": {
+          "$ref": "#/definitions/AuthConfigProperties",
+          "description": "The authentication configuration for the cluster."
         }
       }
     },
@@ -1811,6 +2245,26 @@
           "items": {
             "$ref": "#/definitions/PreviewFeature"
           }
+        },
+        "authConfig": {
+          "$ref": "#/definitions/AuthConfigProperties",
+          "description": "The authentication configuration for the cluster."
+        }
+      }
+    },
+    "NativeUserProperties": {
+      "type": "object",
+      "description": "Native Mongo user properties.",
+      "properties": {
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "The password of the user.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -2184,7 +2638,132 @@
           "type": "integer",
           "format": "int64",
           "description": "The size of the data disk assigned to each server."
+        },
+        "type": {
+          "$ref": "#/definitions/StorageType",
+          "description": "The type of storage to provision the cluster servers with."
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The IOPs of the storage assigned to each server. Only applicable if the type is 'PremiumSSDv2'."
+        },
+        "throughput": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The througput of the storage assigned to each server. Only applicable if the type is 'PremiumSSDv2'."
         }
+      }
+    },
+    "StorageType": {
+      "type": "string",
+      "description": "The type of storage that a mongo cluster can be provisioned with.",
+      "enum": [
+        "PremiumSSD",
+        "PremiumSSDv2"
+      ],
+      "x-ms-enum": {
+        "name": "StorageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PremiumSSD",
+            "value": "PremiumSSD",
+            "description": "Premium SSD for high performance workloads."
+          },
+          {
+            "name": "PremiumSSDv2",
+            "value": "PremiumSSDv2",
+            "description": "Premium SSD v2 for very IO-intensive workloads. This is a preview option and has additional limitations."
+          }
+        ]
+      }
+    },
+    "User": {
+      "type": "object",
+      "description": "Represents a Mongo cluster user.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UserListResult": {
+      "type": "object",
+      "description": "The response of a User list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The User items on this page",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UserProperties": {
+      "type": "object",
+      "description": "Definition of Mongo user resource on a cluster.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the user.",
+          "readOnly": true
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "The password of the user.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "identityProvider": {
+          "$ref": "#/definitions/IdentityProvider",
+          "description": "The user's identity provider definition."
+        },
+        "roles": {
+          "type": "array",
+          "description": "Database roles that are assigned to the user.",
+          "items": {
+            "$ref": "#/definitions/DatabaseRole"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "UserRole": {
+      "type": "string",
+      "description": "Built-in database role that can be assigned to a user.",
+      "enum": [
+        "dbOwner"
+      ],
+      "x-ms-enum": {
+        "name": "UserRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DatabaseOwner",
+            "value": "dbOwner",
+            "description": "Datbase owner role permissions on the target sccope."
+          }
+        ]
       }
     }
   },

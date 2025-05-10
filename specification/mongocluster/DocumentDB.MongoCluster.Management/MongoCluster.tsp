@@ -219,7 +219,7 @@ model ComputeProperties {
 /** The storage properties of the cluster. This includes the data storage size and scaling applied to servers in the cluster. */
 @added(Versions.v2024_07_01)
 model StorageProperties {
-  /** The size of the storage assigned to each server. */
+  /** The size of the data disk assigned to each server. */
   sizeGb?: int64;
 
   /** The type of storage to provision the cluster servers with. */
@@ -514,7 +514,7 @@ union DataApiMode {
   "Disabled",
 }
 
-/* The authentication configuration for the Mongo cluster. */
+/** The authentication configuration for the Mongo cluster. */
 @added(Versions.v2025_04_01_preview)
 model AuthConfigProperties {
   /** Allowed authentication modes for data access on the cluster. */
