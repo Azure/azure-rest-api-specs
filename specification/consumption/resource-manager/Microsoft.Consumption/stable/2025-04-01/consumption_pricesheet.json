@@ -58,7 +58,7 @@
             "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingPeriodNameParameter"
@@ -125,14 +125,13 @@
         "downloadUrl": {
           "description": "The link (url) to download the pricesheet.",
           "type": "string",
-          "format": "uri",
           "readOnly": true
         },
-        "validUntil": {
-          "format": "date-time",
-          "description": "Download link validity in dd-mm-yyyy format. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+        "validTill": {
+          "description": "Download link validity.",
           "type": "string",
-          "example": "2020-09-08T15:55:41Z"
+          "format": "date-time",
+          "readOnly": true
         }
       }
     }
