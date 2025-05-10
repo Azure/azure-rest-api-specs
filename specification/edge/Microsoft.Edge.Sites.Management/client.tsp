@@ -5,3 +5,5 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Edge;
 
 @@clientName(Microsoft.Edge, "SiteManagerMgmt", "python");
+
+@@clientName(Microsoft.Edge, "SiteManagerManagementClient", "java");
