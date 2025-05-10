@@ -13,9 +13,12 @@ namespace Microsoft.BillingBenefits;
 /**
  * Savings plan order alias
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@Azure.ResourceManager.Private.armResourceInternal(SavingsPlanOrderAliasProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @tenantResource
-model SavingsPlanOrderAliasModel
-  is Azure.ResourceManager.ProxyResource<SavingsPlanOrderAliasProperties> {
+model SavingsPlanOrderAliasModel extends Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = SavingsPlanOrderAliasModel,
     KeyName = "savingsPlanOrderAliasName",
@@ -34,6 +37,12 @@ model SavingsPlanOrderAliasModel
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SavingsPlanOrderAliasProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"

@@ -24,7 +24,7 @@ interface SavingsPlanOperationGroup {
   @get
   @action("savingsPlans")
   listAll is ArmProviderActionSync<
-    Response = ResourceListResult<SavingsPlanModel>,
+    Response = SavingsPlanModelListResult,
     Parameters = {
       /**
        * May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'. Reservation properties include sku/name, properties/{appliedScopeType, archived, displayName, displayProvisioningState, effectiveDateTime, expiryDate, provisioningState, quantity, renew, reservedResourceType, term, userFriendlyAppliedScopeType, userFriendlyRenewState}

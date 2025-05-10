@@ -14,9 +14,12 @@ namespace Microsoft.BillingBenefits;
 /**
  * Savings plan
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@Azure.ResourceManager.Private.armResourceInternal(SavingsPlanModelProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(SavingsPlanOrderModel)
-model SavingsPlanModel
-  is Azure.ResourceManager.ProxyResource<SavingsPlanModelProperties> {
+model SavingsPlanModel extends Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = SavingsPlanModel,
     KeyName = "savingsPlanId",
@@ -29,6 +32,12 @@ model SavingsPlanModel
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku: ResourceSku;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SavingsPlanModelProperties;
 }
 
 @armResourceOperations

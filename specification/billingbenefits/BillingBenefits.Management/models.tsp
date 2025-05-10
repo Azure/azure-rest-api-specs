@@ -11,6 +11,32 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.BillingBenefits;
 
 /**
+ * Represents the result of listing savings plan models
+ */
+@Azure.Core.pagedResult
+model SavingsPlanModelListResult {
+  /**
+   * The list of savings plans.
+   */
+  @Azure.Core.items
+  @visibility(Lifecycle.Read)
+  value?: SavingsPlanModel[];
+
+  /**
+   * Url to get the next page.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The roll out count summary of the savings plans
+   */
+  @visibility(Lifecycle.Read)
+  additionalProperties?: SavingsPlanSummary[];
+}
+
+/**
  * Provisioning state
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -438,35 +464,6 @@ model Price {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   amount?: float64;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility(Lifecycle.Read)
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
 }
 
 /**
@@ -1105,7 +1102,7 @@ model SavingsPlanPurchaseValidateRequest {
  * Reservation order alias
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ReservationOrderAliasRequest extends Resource {
+model ReservationOrderAliasRequest extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Reservation order SKU
    */
@@ -1317,7 +1314,8 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Billing/billingAccounts";
+      type: "Microsoft.Billing/billingAccounts",
+      scopes: ["tenant"]
     }
   ]>;
 
@@ -1327,7 +1325,8 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   billingProfileResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Billing/billingAccounts";
+      type: "Microsoft.Billing/billingAccounts",
+      scopes: ["tenant"];
     }
   ]>;
 
@@ -1337,7 +1336,8 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   customerResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Billing/billingAccounts/customers";
+      type: "Microsoft.Billing/billingAccounts/customers",
+      scopes: ["tenant"]
     }
   ]>;
 
@@ -1358,7 +1358,8 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   benefitResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.BillingBenefits/discounts";
+      type: "Microsoft.BillingBenefits/discounts",
+      scopes: ["resourceGroup"]
     }
   ]>;
 

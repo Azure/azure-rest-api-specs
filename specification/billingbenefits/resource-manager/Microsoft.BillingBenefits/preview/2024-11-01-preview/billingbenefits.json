@@ -1591,8 +1591,7 @@
           "description": "The Discount items on this page",
           "items": {
             "$ref": "#/definitions/Discount"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1666,7 +1665,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Billing/billingAccounts"
+                "type": "Microsoft.Billing/billingAccounts",
+                "scopes": [
+                  "tenant"
+                ]
               }
             ]
           }
@@ -1679,7 +1681,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Billing/billingAccounts"
+                "type": "Microsoft.Billing/billingAccounts",
+                "scopes": [
+                  "tenant"
+                ]
               }
             ]
           }
@@ -1692,7 +1697,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Billing/billingAccounts/customers"
+                "type": "Microsoft.Billing/billingAccounts/customers",
+                "scopes": [
+                  "tenant"
+                ]
               }
             ]
           }
@@ -1714,7 +1722,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.BillingBenefits/discounts"
+                "type": "Microsoft.BillingBenefits/discounts",
+                "scopes": [
+                  "resourceGroup"
+                ]
               }
             ]
           }
@@ -2429,7 +2440,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -2500,11 +2511,6 @@
       "type": "object",
       "description": "Reservation order alias",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ReservationOrderAliasResponseProperties",
-          "description": "Reservation order alias response properties",
-          "x-ms-client-flatten": true
-        },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "Reservation order SKU"
@@ -2512,6 +2518,11 @@
         "location": {
           "type": "string",
           "description": "The Azure Region where the reserved resource lives."
+        },
+        "properties": {
+          "$ref": "#/definitions/ReservationOrderAliasResponseProperties",
+          "description": "Reservation order alias response properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -2737,33 +2748,6 @@
         ]
       }
     },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      }
-    },
     "ResourceSku": {
       "type": "object",
       "properties": {
@@ -2813,14 +2797,14 @@
       "type": "object",
       "description": "Savings plan",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Savings plan SKU"
+        },
         "properties": {
           "$ref": "#/definitions/SavingsPlanModelProperties",
           "description": "Savings plan properties",
           "x-ms-client-flatten": true
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "Savings plan SKU"
         }
       },
       "required": [
@@ -2855,24 +2839,31 @@
     },
     "SavingsPlanModelListResult": {
       "type": "object",
-      "description": "The response of a SavingsPlanModel list operation.",
+      "description": "Represents the result of listing savings plan models",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SavingsPlanModel items on this page",
+          "description": "The list of savings plans.",
           "items": {
             "$ref": "#/definitions/SavingsPlanModel"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Url to get the next page.",
+          "readOnly": true
+        },
+        "additionalProperties": {
+          "type": "array",
+          "description": "The roll out count summary of the savings plans",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanSummary"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "SavingsPlanModelProperties": {
       "type": "object",
@@ -3013,11 +3004,6 @@
       "type": "object",
       "description": "Savings plan order alias",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SavingsPlanOrderAliasProperties",
-          "description": "Savings plan order alias properties",
-          "x-ms-client-flatten": true
-        },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "Savings plan SKU"
@@ -3025,6 +3011,11 @@
         "kind": {
           "type": "string",
           "description": "Resource provider kind"
+        },
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanOrderAliasProperties",
+          "description": "Savings plan order alias properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -3088,14 +3079,14 @@
       "type": "object",
       "description": "Savings plan order",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Savings plan SKU"
+        },
         "properties": {
           "$ref": "#/definitions/SavingsPlanOrderModelProperties",
           "description": "Savings plan order properties",
           "x-ms-client-flatten": true
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "Savings plan SKU"
         }
       },
       "required": [
@@ -3230,6 +3221,81 @@
           "items": {
             "$ref": "#/definitions/SavingsPlanOrderAliasModel"
           }
+        }
+      }
+    },
+    "SavingsPlanSummary": {
+      "type": "object",
+      "description": "Savings plans list summary",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This property has value 'summary'",
+          "readOnly": true
+        },
+        "value": {
+          "$ref": "#/definitions/SavingsPlanSummaryCount",
+          "description": "The roll up count summary of savings plans in each state"
+        }
+      }
+    },
+    "SavingsPlanSummaryCount": {
+      "type": "object",
+      "description": "The roll up count summary of savings plans in each state",
+      "properties": {
+        "succeededCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Succeeded state",
+          "readOnly": true
+        },
+        "failedCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Failed state",
+          "readOnly": true
+        },
+        "expiringCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Expiring state",
+          "readOnly": true
+        },
+        "expiredCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Expired state",
+          "readOnly": true
+        },
+        "pendingCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Pending state",
+          "readOnly": true
+        },
+        "cancelledCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Cancelled state",
+          "readOnly": true
+        },
+        "processingCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Processing state",
+          "readOnly": true
+        },
+        "noBenefitCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in No Benefit state",
+          "readOnly": true
+        },
+        "warningCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Warning state",
+          "readOnly": true
         }
       }
     },
