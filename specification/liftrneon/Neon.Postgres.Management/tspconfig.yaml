@@ -29,6 +29,7 @@ options:
     generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-neonpostgres"
+    namespace: "com.azure.resourcemanager.neonpostgres"
     service-name: "Neon Postgres"
     flavor: "azure"
   "@azure-tools/typespec-go":
@@ -41,3 +42,9 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-neonpostgres"
+    flavor: "azure"
+    package-details:
+      name: "@azure/arm-neonpostgres"

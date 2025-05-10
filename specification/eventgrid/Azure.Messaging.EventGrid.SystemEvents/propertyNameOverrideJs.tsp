@@ -132,6 +132,16 @@ using Microsoft.EventGrid.SystemEvents;
   "AcsChatMessageEventInThreadBase",
   "javascript"
 );
+@@clientName(AcsCallingEventProperties, "AcsCallingEvent", "javascript");
+@@clientName(AcsCallParticipantEventProperties,
+  "AcsCallParticipantEvent",
+  "javascript"
+);
+@@clientName(AcsCallParticipantProperties, "AcsCallParticipant", "javascript");
+@@clientName(AcsCallGroupProperties, "AcsCallGroup", "javascript");
+@@clientName(AcsCallRoomProperties, "AcsCallRoom", "javascript");
+@@clientName(AcsCallEndedByProperties, "AcsCallEndedBy", "javascript");
+@@clientName(AcsCallEndReasonProperties, "AcsCallEndReason", "javascript");
 @@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
   "EventGridMqttClientCreatedOrUpdatedEventData",
   "javascript"

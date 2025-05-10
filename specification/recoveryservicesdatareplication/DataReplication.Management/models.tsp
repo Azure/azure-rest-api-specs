@@ -789,7 +789,7 @@ model EventModelProperties {
    * Gets or sets the errors associated with this event.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -821,7 +821,7 @@ model HealthErrorModel {
   /**
    * Gets or sets a list of child health errors associated with this error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   childErrors?: InnerHealthErrorModel[];
 
   /**
@@ -1004,7 +1004,7 @@ model FabricModelProperties {
    * Gets or sets the list of health errors.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -1122,7 +1122,7 @@ model FabricAgentModelProperties {
    * Gets or sets the list of health errors.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -1268,14 +1268,14 @@ model JobModelProperties {
    * Gets or sets the list of tasks.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tasks?: TaskModel[];
 
   /**
    * Gets or sets the list of errors.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: ErrorModel[];
 
   /**
@@ -1328,7 +1328,7 @@ model TaskModel {
   /**
    * Gets or sets the list of children job models.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   childrenJobs?: JobModel[];
 }
 
@@ -1512,25 +1512,25 @@ model RemotePrivateEndpoint {
   /**
    * Gets or sets the list of Private Link Service Connections and gets populated for Auto approval flow.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   privateLinkServiceConnections?: PrivateLinkServiceConnection[];
 
   /**
    * Gets or sets the list of Manual Private Link Service Connections and gets populated for Manual approval flow.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   manualPrivateLinkServiceConnections?: PrivateLinkServiceConnection[];
 
   /**
    * Gets or sets the list of private link service proxies.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   privateLinkServiceProxies?: PrivateLinkServiceProxy[];
 
   /**
    * Gets or sets the list of Connection Details. This is the connection details for private endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   connectionDetails?: ConnectionDetails[];
 }
 
@@ -1576,7 +1576,7 @@ model PrivateLinkServiceProxy {
   /**
    * Gets or sets group connectivity information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   groupConnectivityInformation?: GroupConnectivityInformation[];
 }
 
@@ -1854,7 +1854,7 @@ model ProtectedItemModelProperties {
    * Gets or sets the list of health errors.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -2101,7 +2101,7 @@ model DeploymentPreflightModel {
   /**
    * Gets or sets the list of resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resources?: DeploymentPreflightResource[];
 }
 
@@ -2282,7 +2282,7 @@ model AzStackHCIClusterProperties {
   /**
    * Gets or sets the list of AzStackHCICluster Storage Container.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageContainers: StorageContainerProperties[];
 }
 
@@ -2385,7 +2385,7 @@ model FailoverJobModelCustomProperties extends JobModelCustomProperties {
    * Gets or sets the failed over protected item details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedItemDetails?: FailoverProtectedItemProperties[];
 
   /**
@@ -2806,13 +2806,13 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the list of disks to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   disksToInclude: HyperVToAzStackHCIDiskInput[];
 
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nicsToInclude: HyperVToAzStackHCINicInput[];
 
   /**
@@ -2981,14 +2981,14 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the list of protected disks.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedDisks?: HyperVToAzStackHCIProtectedDiskProperties[];
 
   /**
    * Gets or sets the VM NIC details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedNics?: HyperVToAzStackHCIProtectedNicProperties[];
 
   /**
@@ -3081,7 +3081,7 @@ model HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nicsToInclude?: HyperVToAzStackHCINicInput[];
 
   /**
@@ -3296,7 +3296,7 @@ model OperationModelCollection {
   /**
    * Gets or sets the list of operations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: OperationModel[];
 
   /**
@@ -3367,7 +3367,7 @@ model TestFailoverJobModelCustomProperties extends JobModelCustomProperties {
    * Gets or sets the test VM details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedItemDetails?: FailoverProtectedItemProperties[];
 
   /**
@@ -3768,27 +3768,27 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the list of disks to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   disksToInclude: VMwareToAzStackHCIDiskInput[];
 
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nicsToInclude: VMwareToAzStackHCINicInput[];
 
   /**
    * Gets or sets the list of protected disks.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedDisks?: VMwareToAzStackHCIProtectedDiskProperties[];
 
   /**
    * Gets or sets the VM NIC details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedNics?: VMwareToAzStackHCIProtectedNicProperties[];
 
   /**
@@ -4058,7 +4058,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nicsToInclude?: VMwareToAzStackHCINicInput[];
 
   /**

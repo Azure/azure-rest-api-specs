@@ -36,7 +36,7 @@ model BrokerListenerProperties {
   serviceName?: string;
 
   @doc("Ports on which this listener accepts client connections.")
-  @OpenAPI.extension("x-ms-identifiers", #["port"])
+  @identifiers(#["port"])
   ports: ListenerPort[];
 
   @doc("Kubernetes Service type of this listener.")

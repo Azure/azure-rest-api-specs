@@ -1,12 +1,10 @@
 import "./commons.tsp"; // Import common types
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using LiftrBase.Data;
 
-namespace Neon.Postgres.Models;
+namespace Neon.Postgres;
 
 @doc("The Neon Database resource type.")
 @added(Neon.Postgres.Versions.v2_preview)
@@ -15,7 +13,7 @@ model NeonDatabase is ProxyResource<NeonDatabaseProperties> {
   ...ResourceNameParameter<
     Resource = NeonDatabase,
     KeyName = "neonDatabaseName",
-    SegmentName = "neondatabases",
+    SegmentName = "neonDatabases",
     NamePattern = "^\\S.{0,62}\\S$|^\\S$"
   >;
 }

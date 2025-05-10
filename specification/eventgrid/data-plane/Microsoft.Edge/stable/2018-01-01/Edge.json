@@ -1,0 +1,74 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Schema of Edge events published to Azure Event Grid",
+    "version": "2018-01-01",
+    "description": "Describes the schema of the Edge events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {},
+  "definitions": {
+    "EdgeSolutionVersionPublishedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Edge.SolutionVersionPublished event.",
+      "properties": {
+        "externalValidationId": {
+          "type": "string",
+          "description": "A GUID to uniquely track External Solution Validation"
+        },
+        "targetId": {
+          "type": "string",
+          "description": "ARM ID of the Target resource"
+        },
+        "solutionTemplateId": {
+          "type": "string",
+          "description": "ARM ID of the Solution Template resource"
+        },
+        "solutionTemplateVersionId": {
+          "type": "string",
+          "description": "ARM ID of the Solution Template Version resource"
+        },
+        "solutionVersionId": {
+          "type": "string",
+          "description": "ARM ID of the Solution Version resource"
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "API Version supported for the resources"
+        },
+        "callbackUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Direct URL to callback for updating validation status"
+        }
+      },
+      "required": [
+        "externalValidationId",
+        "targetId",
+        "solutionTemplateId",
+        "solutionTemplateVersionId",
+        "solutionVersionId",
+        "apiVersion",
+        "callbackUrl"
+      ],
+      "x-ms-examples": {
+        "EdgeSolutionVersionPublishedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/solution_version_published.json"
+        },
+        "EdgeSolutionVersionPublishedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/solution_version_published.json"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -79,7 +79,7 @@ op CreateOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@patch
+@patch(#{ implicitOptionality: true })
 op UpdateOperation<
   TResource extends TypeSpec.Reflection.Model,
   TResponse
@@ -393,7 +393,7 @@ alias CommonParameters = {
   @clientName("timeOutInSeconds", "java")
   @clientName("timeOutInSeconds", "csharp")
   @clientName("timeOutInSeconds", "javascript")
-  @clientName("timeout", "python")
+  @clientName("timeout", "go,python")
   timeOut?: int32 = 30;
 
   @doc("""

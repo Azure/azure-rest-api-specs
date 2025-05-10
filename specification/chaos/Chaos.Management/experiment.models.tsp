@@ -104,7 +104,7 @@ model ExperimentProperties {
   /**
    * List of steps.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   steps: ChaosExperimentStep[];
 
   /**
@@ -132,7 +132,7 @@ model ChaosExperimentStep {
   /**
    * List of branches.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   branches: ChaosExperimentBranch[];
 }
 
@@ -149,7 +149,7 @@ model ChaosExperimentBranch {
   /**
    * List of actions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   actions: ChaosExperimentAction[];
 }
 
@@ -245,7 +245,7 @@ model ContinuousAction extends ChaosExperimentAction {
   /**
    * List of key value pairs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   parameters: KeyValuePair[];
 
   /**
@@ -299,7 +299,7 @@ model DiscreteAction extends ChaosExperimentAction {
   /**
    * List of key value pairs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   parameters: KeyValuePair[];
 
   /**

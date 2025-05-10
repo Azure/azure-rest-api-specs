@@ -48,21 +48,21 @@ model AuthorizationConfig {
   cache?: OperationalMode = OperationalMode.Enabled;
 
   @doc("The authorization rules to follow. If no rule is set, but Authorization Resource is used that would mean DenyAll.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   rules?: AuthorizationRule[];
 }
 
 @doc("AuthorizationConfig Rule Properties")
 model AuthorizationRule {
   @doc("Give access to Broker methods and topics.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   brokerResources: BrokerResourceRule[];
 
   @doc("Give access to clients based on the following properties.")
   principals: PrincipalDefinition;
 
   @doc("Give access to state store resources.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   stateStoreResources?: StateStoreResourceRule[];
 }
 
@@ -70,7 +70,7 @@ model AuthorizationRule {
 model PrincipalDefinition {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   attributes?: Record<string>[] = #[];
 
   @doc("A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection.")
