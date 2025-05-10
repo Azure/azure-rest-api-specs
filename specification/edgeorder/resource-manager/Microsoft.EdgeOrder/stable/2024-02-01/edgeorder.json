@@ -3877,8 +3877,17 @@
           "readOnly": true
         },
         "userAssignedIdentities": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentities",
-          "description": "User Assigned Identities"
+          "type": "object",
+          "description": "User Assigned Identities",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
         }
       }
     },

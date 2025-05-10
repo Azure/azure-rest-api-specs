@@ -2357,7 +2357,7 @@ model ResourceIdentity {
   /**
    * User Assigned Identities
    */
-  userAssignedIdentities?: Azure.ResourceManager.CommonTypes.UserAssignedIdentities;
+  userAssignedIdentities?: Record<UserAssignedIdentity | null>;
 }
 
 /**
