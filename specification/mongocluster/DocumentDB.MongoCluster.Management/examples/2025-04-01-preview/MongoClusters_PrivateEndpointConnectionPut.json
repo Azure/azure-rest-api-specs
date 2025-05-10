@@ -1,0 +1,85 @@
+{
+  "operationId": "PrivateEndpointConnections_Create",
+  "title": "Approves a private endpoint connection on a Mongo Cluster resource.",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "mongoClusterName": "myMongoCluster",
+    "api-version": "2025-04-01-preview",
+    "privateEndpointConnectionName": "pecTest",
+    "resource": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Auto-Approved"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pecTest.5d393f64-ef64-46d0-9959-308321c44ac0",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster/privateEndpointConnections/pecTest.5d393f64-ef64-46d0-9959-308321c44ac0",
+        "type": "Microsoft.DocumentDB/mongoClusters/privateEndpointConnections",
+        "systemData": {
+          "createdAt": "2024-02-09T05:51:31.1386869Z",
+          "createdBy": "2df9eb86-36b5-49dc-86ae-9a63135bfa8c",
+          "createdByType": "Application",
+          "lastModifiedAt": "2024-02-09T05:51:31.1386869Z",
+          "lastModifiedBy": "2ff9eb86-36b5-49dc-86ae-9a63135bfa8c",
+          "lastModifiedByType": "Application"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/privateEndpoints/pecTest"
+          },
+          "groupIds": [
+            "MongoCluster"
+          ],
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by admin",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "pecTest.5d393f64-ef64-46d0-9959-308321c44ac0",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster/privateEndpointConnections/pecTest.5d393f64-ef64-46d0-9959-308321c44ac0",
+        "type": "Microsoft.DocumentDB/mongoClusters/privateEndpointConnections",
+        "systemData": {
+          "createdAt": "2024-02-09T05:51:31.1386869Z",
+          "createdBy": "2df9eb86-36b5-49dc-86ae-9a63135bfa8c",
+          "createdByType": "Application",
+          "lastModifiedAt": "2024-02-09T05:51:31.1386869Z",
+          "lastModifiedBy": "2ff9eb86-36b5-49dc-86ae-9a63135bfa8c",
+          "lastModifiedByType": "Application"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/privateEndpoints/pecTest"
+          },
+          "groupIds": [
+            "MongoCluster"
+          ],
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by admin",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/locations/westus2/mongoClusterOperationResults/f6a27306-3ee3-4e6b-997d-3ba2024b85e6?api-version=2024-06-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/locations/westus2/mongoClusterAzureAsyncOperation/f6a27306-3ee3-4e6b-997d-3ba2024b85e6?api-version=2024-06-01-preview"
+      }
+    }
+  }
+}
