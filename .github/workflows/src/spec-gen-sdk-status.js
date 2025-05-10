@@ -60,7 +60,7 @@ export async function setSpecGenSdkStatusImpl({
   github,
   core,
 }) {
-  const statusName = "[TEST IGNORE] spec-gen-sdk status";
+  const statusName = "spec-gen-sdk status";
   const checks = await github.paginate(github.rest.checks.listForRef, {
     owner,
     repo,
