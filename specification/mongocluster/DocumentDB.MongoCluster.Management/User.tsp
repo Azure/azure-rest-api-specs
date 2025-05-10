@@ -45,17 +45,7 @@ model UserProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  ...NativeUserProperties;
   ...IdentityUserProperties;
-}
-
-/** Native Mongo user properties. */
-@added(Versions.v2025_04_01_preview)
-model NativeUserProperties {
-  /** The password of the user. */
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  @secret
-  password?: string;
 }
 
 /** Identity provider Mongo user properties. */

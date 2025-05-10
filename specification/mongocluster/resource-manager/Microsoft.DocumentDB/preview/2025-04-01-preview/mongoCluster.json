@@ -2252,22 +2252,6 @@
         }
       }
     },
-    "NativeUserProperties": {
-      "type": "object",
-      "description": "Native Mongo user properties.",
-      "properties": {
-        "password": {
-          "type": "string",
-          "format": "password",
-          "description": "The password of the user.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        }
-      }
-    },
     "PreviewFeature": {
       "type": "string",
       "description": "Preview features that can be enabled on a mongo cluster.",
@@ -2723,16 +2707,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the user.",
           "readOnly": true
-        },
-        "password": {
-          "type": "string",
-          "format": "password",
-          "description": "The password of the user.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
         },
         "identityProvider": {
           "$ref": "#/definitions/IdentityProvider",
