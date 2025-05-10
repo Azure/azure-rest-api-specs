@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.IoTOperations;
 
@@ -413,5 +415,6 @@ model AkriConnectorTemplateHelmUpgradeConfiguration {
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateDiagnostics {
   /** The log settings for the Connector template. */
+  @flattenProperty("csharp")
   logs: AkriConnectorsDiagnosticsLogs;
 }

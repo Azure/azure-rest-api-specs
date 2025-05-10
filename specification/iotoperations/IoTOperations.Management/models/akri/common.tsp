@@ -1,7 +1,9 @@
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Microsoft.IoTOperations;

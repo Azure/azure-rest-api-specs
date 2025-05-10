@@ -1,11 +1,14 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
+
 
 using Azure.ResourceManager;
 
@@ -81,7 +84,8 @@ model AkriDiscoveryHandlerAioMetadata {
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerDiagnostics {
   /** The log settings for the Connector template. */
-  logs: AkriConnectorsDiagnosticsLogs;
+  @flattenProperty("csharp")
+  logs: AkriConnectorsDiagnosticsLogs; // Multiple levels of nested objects containing only 1 property don't play well with the dotent emmiter
 }
 
 /** AkriDiscoveryHandlerDiscoverableDeviceEndpointType properties. */
