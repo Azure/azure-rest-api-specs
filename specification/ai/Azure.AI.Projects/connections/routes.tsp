@@ -2,79 +2,46 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./model.tsp";
+import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.Core.Traits;
-using Azure.Core.Foundations;
+using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects.Connections;
+namespace Azure.AI.Projects;
 
-/*
- See https://learn.microsoft.com/en-us/rest/api/azureml/workspaces/get?view=rest-azureml-2024-07-01-preview
-*/
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Gets the properties of the specified machine learning workspace.")
-@get
-op getWorkspace is Azure.Core.Foundations.Operation<{}, GetWorkspaceResponse>;
+alias ConnectionServiceTraits = SupportsClientRequestId &
+  NoRepeatableRequests &
+  NoConditionalRequests;
 
-/*
- See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list?view=rest-azureml-2024-07-01-preview
-*/
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@doc("List the details of all the connections (not including their credentials)")
-@route("connections")
-@get
-op listConnections is Azure.Core.Foundations.Operation<
-  {
-    @query
-    @doc("Category of the workspace connection.")
-    category?: ConnectionType;
+alias ConnectionOperations = Azure.Core.ResourceOperations<ConnectionServiceTraits>;
 
-    @query
-    @doc("Indicates whether to list datastores. Service default: do not list datastores.")
-    includeAll?: boolean;
+@added(Versions.v2025_05_01)
+interface Connections {
+  @doc("Get a connection by name, without populating connection credentials")
+  get is ConnectionOperations.ResourceRead<Connection>;
 
-    @query
-    @doc("Target of the workspace connection.")
-    target?: string;
-  },
-  ListConnectionsResponse
->;
+  @doc("Get a connection by name, with its connection credentials")
+  @TypeSpec.Http.post
+  @Rest.actionSeparator("/")
+  @Rest.action("getConnectionWithCredentials")
+  getWithCredentials is ConnectionOperations.ResourceAction<
+    Connection,
+    {},
+    Connection
+  >;
 
-/*
- See https://learn.microsoft.com/en-us/rest/api/azureml/workspace-connections/get?view=rest-azureml-2024-07-01-preview
-*/
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Get the details of a single connection, without credentials.")
-@route("connections/{connectionName}")
-@get
-op getConnection is Azure.Core.Foundations.Operation<
-  {
-    @doc("Connection Name")
-    connectionName: string;
-  },
-  GetConnectionResponse
->;
+  @doc("List all connections in the project, without populating connection credentials")
+  list is ConnectionOperations.ResourceList<
+    Connection,
+    ListQueryParametersTrait<{
+      @doc("List connections of this specific type")
+      @query("connectionType")
+      connectionType?: ConnectionType;
 
-/*
- See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-07-01-preview
-*/
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Get the details of a single connection, including credentials (if available).")
-@route("connections/{connectionName}/listsecrets")
-@post
-op getConnectionWithSecrets is Azure.Core.Foundations.Operation<
-  {
-    @doc("Connection Name")
-    connectionName: string;
-
-    @doc("The body is ignored. TODO: Can we remove this?")
-    ignored: string;
-  },
-  GetConnectionResponse
->;
+      @doc("List connections that are default connections")
+      @query("defaultConnection")
+      defaultConnection?: boolean;
+    }>
+  >;
+}

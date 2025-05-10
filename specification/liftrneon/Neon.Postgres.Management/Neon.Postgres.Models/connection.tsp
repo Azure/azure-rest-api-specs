@@ -6,7 +6,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using LiftrBase.Data;
 
-namespace Neon.Postgres.Models;
+namespace Neon.Postgres;
 
 @doc("Connection uri parameters for the associated database")
 @added(Neon.Postgres.Versions.v2_preview)

@@ -2,74 +2,53 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./model.tsp";
+import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.Core.Traits;
-using Azure.Core.Foundations;
+using TypeSpec.Versioning;
 
-// namespace Azure.AI.Projects.Evaluations;
 namespace Azure.AI.Projects;
 
 alias ServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
-  NoConditionalRequests; // NoRetryRequests supresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
+  NoConditionalRequests;
 
 alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @route("evaluations")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 interface Evaluations {
+  @doc("Get an evaluation run by name.")
   get is EvaluationsOperations.ResourceRead<Evaluation>;
 
+  @doc("List evaluation runs")
+  list is EvaluationsOperations.ResourceList<Evaluation>;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  // create is Operations.ResourceCreateWithServiceProvidedName<Evaluation>;
-  // run is Operations.ResourceCollectionAction<Evaluation, {}, Evaluation>;
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  @doc("Creates an evaluation run.")
   @route("runs:run")
   @post
-  @doc("Run the evaluation.")
-  create(
-    @query
-    @doc("The API version to use for this operation.")
-    apiVersion: string,
-
-    @body
-    @doc("Evaluation to run.")
-    evaluation: Evaluation,
-  ): CreatedEvaluationResponse;
-
-  list is EvaluationsOperations.ResourceList<
-    Evaluation,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
-  update is EvaluationsOperations.ResourceUpdate<Evaluation>;
-
-  getSchedule is EvaluationsOperations.ResourceRead<EvaluationSchedule>;
-
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createOrReplaceSchedule is EvaluationsOperations.ResourceCreateOrReplace<EvaluationSchedule>;
-
-  listSchedule is EvaluationsOperations.ResourceList<
-    EvaluationSchedule,
-    ListQueryParametersTrait<StandardListQueryParameters>
+  create is Azure.Core.Foundations.Operation<
+    {
+      @doc("Evaluation to be run")
+      @body
+      evaluation: Evaluation;
+    },
+    ResourceCreatedResponse<Evaluation>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @route("schedules/{name}/disable")
-  @patch
-  @doc("Disable the evaluation schedule.")
-  disableSchedule(
-    @query
-    @doc("The API version to use for this operation.")
-    apiVersion: string,
-
-    @path
-    @doc("Name of the evaluation schedule.")
-    name: string,
-  ): NoContentResponse | ErrorResponse;
+  @doc("Creates an agent evaluation run.")
+  @route("runs:runAgent")
+  @post
+  createAgentEvaluation is Azure.Core.Foundations.Operation<
+    {
+      @doc("Agent evaluation to be run")
+      @body
+      evaluation: AgentEvaluationRequest;
+    },
+    ResourceCreatedResponse<AgentEvaluation>
+  >;
 }
