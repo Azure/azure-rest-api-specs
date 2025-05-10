@@ -10,16 +10,6 @@ using Azure.Core;
 
 namespace TextTranslation;
 
-@doc("Request body parameters for the translate API.")
-@added(APIVersion.v2025_05_01_preview)
-model TranslateBodyParameters {
-  @doc("""
-    Details of the translate request
-    """)
-  @body
-  body: TranslateBodyDetails;
-}
-
 @doc("Request parameters for the translate API.")
 model TranslateParameters {
   ...CommonParameters;

@@ -46,26 +46,12 @@ op getSupportedLanguages is CustomGetOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
-@removed(APIVersion.v2025_05_01_preview)
 @post
 @route("translate")
 @summary("Translate Text")
 @doc("Translate Text")
 op translate is CustomOperation<
-  InputTextItem[],
-  TranslateParameters,
-  TranslationResult,
-  ErrorResponse
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
-@added(APIVersion.v2025_05_01_preview)
-@post
-@route("translate2")
-@summary("Translate Text")
-@doc("Translate Text")
-op translate2 is CustomOperation<
-  TranslateBodyDetails[],
+  TranslateBody[],
   TranslateParameters,
   TranslationResult,
   ErrorResponse

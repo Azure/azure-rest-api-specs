@@ -108,9 +108,9 @@
         }
       }
     },
-    "/translate2": {
+    "/translate": {
       "post": {
-        "operationId": "Translate2",
+        "operationId": "Translate",
         "summary": "Translate Text",
         "description": "Translate Text",
         "parameters": [
@@ -138,7 +138,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/TranslateBodyDetails"
+                "$ref": "#/definitions/TranslateBody"
               },
               "x-ms-identifiers": []
             }
@@ -185,10 +185,10 @@
         },
         "x-ms-examples": {
           "Translate Text": {
-            "$ref": "./examples/Translate2_MaximumSet_Gen.json"
+            "$ref": "./examples/Translate_MaximumSet_Gen.json"
           },
           "Translate Text with minimum properties": {
-            "$ref": "./examples/Translate2_MinimumSet_Gen.json"
+            "$ref": "./examples/Translate_MinimumSet_Gen.json"
           }
         }
       }
@@ -592,6 +592,66 @@
         ]
       }
     },
+    "TranslateBody": {
+      "type": "object",
+      "description": "Element containing the text for translation.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to translate."
+        },
+        "script": {
+          "type": "string",
+          "description": "Specifies the script of the input text."
+        },
+        "language": {
+          "type": "string",
+          "description": "Specifies the language of the input text. Find which languages are available to translate by \nlooking up supported languages using the translation scope. If the language parameter isn't \nspecified, automatic language detection is applied to determine the source language.\n\nYou must use the language parameter rather than autodetection when using the dynamic dictionary feature. \nNote: the dynamic dictionary feature is case-sensitive."
+        },
+        "textType": {
+          "type": "string",
+          "description": "Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, \ncomplete element. Possible values are: plain (default) or html.",
+          "default": "Plain",
+          "enum": [
+            "Plain",
+            "Html"
+          ],
+          "x-ms-enum": {
+            "name": "TextType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Plain",
+                "value": "Plain",
+                "description": "Plain text."
+              },
+              {
+                "name": "Html",
+                "value": "Html",
+                "description": "HTML-encoded text."
+              }
+            ]
+          }
+        },
+        "targets": {
+          "type": "array",
+          "description": "Translation target parameters.",
+          "items": {
+            "$ref": "#/definitions/TranslateTarget"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text",
+        "targets"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputTextItem"
+        }
+      ]
+    },
     "TranslateBodyDetails": {
       "type": "object",
       "description": "Request body parameters for the translate API.",
@@ -645,19 +705,6 @@
       "required": [
         "text",
         "targets"
-      ]
-    },
-    "TranslateBodyParameters": {
-      "type": "object",
-      "description": "Request body parameters for the translate API.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/TranslateBodyDetails",
-          "description": "Details of the translate request"
-        }
-      },
-      "required": [
-        "body"
       ]
     },
     "TranslateParameters": {
