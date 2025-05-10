@@ -84,6 +84,9 @@ interface SessionResourceFiles {
     SessionResourceFilesTraits
   >;
 
+  // Azure standard operations require resource identifier (here session id) to be passed in the request path.
+  // But for sessions, session identifier needs to be passed as a query parameter for conformity with other operations.
+  // So we need to use custom operations instead of standard operations.
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "GET allowed on Action"
   @doc("Get the content of the file.")
   @get
@@ -98,6 +101,9 @@ interface SessionResourceFiles {
   >;
 }
 
+// Azure standard operations require resource identifier (here session id) to be passed in the request path.
+// But for sessions, session identifier needs to be passed as a query parameter for conformity with other operations.
+// So we need to use custom operations instead of standard operations.
 @route("/session")
 interface SessionManagement {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
@@ -114,6 +120,9 @@ interface SessionManagement {
   >;
 }
 
+// Azure standard operations require resource identifier (here session id) to be passed in the request path.
+// But for sessions, session identifier needs to be passed as a query parameter for conformity with other operations.
+// So we need to use custom operations instead of standard operations.
 @route("/listSessions")
 interface ListSessions {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
@@ -129,6 +138,9 @@ interface ListSessions {
   >;
 }
 
+// Azure standard operations require resource identifier (here session id) to be passed in the request path.
+// But for sessions, session identifier needs to be passed as a query parameter for conformity with other operations.
+// So we need to use custom operations instead of standard operations.
 interface SessionPoolMetadata {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @doc("Get the metadata information.")
