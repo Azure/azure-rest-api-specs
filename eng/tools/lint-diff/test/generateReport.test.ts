@@ -544,7 +544,7 @@ describe("generateAutoRestErrorReport", () => {
     const autoRestErrors = [
       {
         result: {
-          readme: new Readme("readme.md"),
+          readme: new Readme("dummy/rootPath/readme.md"),
           tag: "tag1",
           rootPath: "dummy/rootPath",
           error: null,
@@ -558,7 +558,7 @@ describe("generateAutoRestErrorReport", () => {
       },
       {
         result: {
-          readme: new Readme("readme2.md"),
+          readme: new Readme("dummy/rootPath/readme2.md"),
           tag: "tag2",
           rootPath: "dummy/rootPath",
           error: null,
@@ -576,7 +576,7 @@ describe("generateAutoRestErrorReport", () => {
     expect(actual).toMatchInlineSnapshot(`
       "**AutoRest errors:**
 
-      Readme: ../../readme.md
+      Readme: readme.md
       Tag: tag1
       Errors:
       | Level | Message |
@@ -585,7 +585,7 @@ describe("generateAutoRestErrorReport", () => {
       | :x: fatal | Fatal error message |
 
 
-      Readme: ../../readme2.md
+      Readme: readme2.md
       Tag: tag2
       Errors:
       | Level | Message |
