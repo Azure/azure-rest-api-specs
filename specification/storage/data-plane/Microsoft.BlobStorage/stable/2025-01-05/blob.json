@@ -35,20 +35,12 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
-    },
-    {
       "OAuth2Auth": [
         "https://storage.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "api-key",
-      "in": "header"
-    },
     "OAuth2Auth": {
       "type": "oauth2",
       "flow": "implicit",
@@ -60,7 +52,7 @@
   },
   "tags": [],
   "paths": {
-    "/": {
+    "": {
       "get": {
         "operationId": "GetProperties",
         "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
@@ -133,8 +125,9 @@
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "name": "body",
+            "name": "storageServiceProperties",
             "in": "body",
+            "description": "The storage service properties to set.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageServiceProperties"
@@ -185,8 +178,9 @@
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "name": "body",
+            "name": "keyInfo",
             "in": "body",
+            "description": "Key information provided in the request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyInfo"
@@ -5992,7 +5986,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=copy": {
+    "/{containerName}/{blobName}?_overload=startCopyFromUrl": {
       "put": {
         "operationId": "Blob_StartCopyFromUrl",
         "description": "The Start Copy From URL operation copies a blob or an internet resource to a new blob.",
