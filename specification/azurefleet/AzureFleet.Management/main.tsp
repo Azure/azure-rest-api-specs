@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AzureFleet")
-@service(#{ title: "Microsoft.AzureFleet" })
+@service(#{ title: "Microsoft.AzureFleet.Test" })
 @versioned(Versions)
 namespace Microsoft.AzureFleet;
 
