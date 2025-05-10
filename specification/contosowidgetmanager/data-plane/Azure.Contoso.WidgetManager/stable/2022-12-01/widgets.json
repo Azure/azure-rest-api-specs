@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Contoso Widget Manager. Simple change to trigger LintDiff with an error.",
+    "title": "Contoso Widget Manager. Simple change to trigger LintDiff with a fatal error.",
     "version": "2022-12-01",
     "x-typespec-generated": [
       {
@@ -48,20 +48,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
-        "responses": {
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
+        "responses": {},
         "x-ms-examples": {
           "Widgets_ListWidgets": {
             "$ref": "./examples/Widgets_ListWidgetsSample.json"
