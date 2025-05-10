@@ -35,3 +35,23 @@ These settings apply only when `--tag=2025-05-15-preview` is specified on the co
 input-file:
   - preview/2025-05-15-preview/azure-ai-agents.json
 ```
+
+# Suppressions
+``` yaml
+suppressions:
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/files"].get.operationId
+    reason: False alert. Files should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/files"].post.operationId
+    reason: False alert. Files should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/files/{fileId}"].get.operationId
+    reason: False alert. Files should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/files"].delete.operationId
+    reason: False alert. Files should appear after underscore for clarity's sake.
