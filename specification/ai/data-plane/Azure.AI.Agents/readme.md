@@ -53,5 +53,113 @@ suppressions:
     reason: False alert. Files should appear after underscore for clarity's sake.
   - code: OperationIdNounVerb
     from: azure-ai-agents.json
-    where: $.paths["/files"].delete.operationId
+    where: $.paths["/files/{fileId}"].delete.operationId
     reason: False alert. Files should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/files/{fileId}/content"].get.operationId
+    reason: False alert. Files should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads"].get.operationId
+    reason: False alert. Threads should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads"].post.operationId
+    reason: False alert. Threads should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}"].get.operationId
+    reason: False alert. Threads should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}"].post.operationId
+    reason: False alert. Threads should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}"].delete.operationId
+    reason: False alert. Threads should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/messages"].get.operationId
+    reason: False alert. Messages should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/messages"].post.operationId
+    reason: False alert. Messages should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/messages/{messageId}"].get.operationId
+    reason: False alert. Messages should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/messages/{messageId}"].post.operationId
+    reason: False alert. Messages should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/runs"].get.operationId
+    reason: False alert. Runs should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/runs"].post.operationId
+    reason: False alert. Runs should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/runs/{runId}"].get.operationId
+    reason: False alert. Runs should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/runs/{runId}"].post.operationId
+    reason: False alert. Runs should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/runs/{runId}/cancel"].post.operationId
+    reason: False alert. Runs should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/runs/{runId}/submit_tool_outputs"].post.operationId
+    reason: False alert. Runs should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/runs/{runId}/steps"].get.operationId
+    reason: False alert. RunSteps should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/threads/{threadId}/runs/{runId}/steps/{stepId}"].get.operationId
+    reason: False alert. RunSteps should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/vector_stores"].get.operationId
+    reason: False alert. VectorStores should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/vector_stores"].post.operationId
+    reason: False alert. VectorStores should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/vector_stores/{vectorStoreId}"].get.operationId
+    reason: False alert. VectorStores should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/vector_stores/{vectorStoreId}"].post.operationId
+    reason: False alert. VectorStores should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/vector_stores/{vectorStoreId}"].delete.operationId
+    reason: False alert. VectorStores should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/vector_stores/{vectorStoreId}/files"].get.operationId
+    reason: False alert. VectorStoreFiles should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/vector_stores/{vectorStoreId}/files"].post.operationId
+    reason: False alert. VectorStoreFiles should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/vector_stores/{vectorStoreId}/files/{fileId}"].get.operationId
+    reason: False alert. VectorStoreFiles should appear after underscore for clarity's sake.
+  - code: OperationIdNounVerb
+    from: azure-ai-agents.json
+    where: $.paths["/vector_stores/{vectorStoreId}/files/{fileId}"].delete.operationId
+    reason: False alert. VectorStoreFiles should appear after underscore for clarity's sake.
