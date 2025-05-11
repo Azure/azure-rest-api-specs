@@ -46,13 +46,29 @@
                         "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/ScopesParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ScenarioNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ScenarioParametersParameter"
+                        "name": "parameters",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "scopes": {
+                                    "$ref": "#/parameters/ScopesParameter/schema"
+                                },
+                                "scenarioName": {
+                                    "$ref": "#/parameters/ScenarioNameParameter/schema"
+                                },
+                                "scenarioParameters": {
+                                    "$ref": "#/parameters/ScenarioParametersParameter/schema"
+                                }
+                            },
+                            "required": [
+                                "scopes",
+                                "scenarioName",
+                                "scenarioParameters"
+                            ]
+                        },
+                        "description": "Additional parameters supplied to the operation."
                     }
                 ],
                 "responses": {
