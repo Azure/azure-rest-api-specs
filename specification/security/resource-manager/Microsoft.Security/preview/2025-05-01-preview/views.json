@@ -76,51 +76,25 @@
             }
         }
     },
-    "parameters": {
-        "ScopesParameter": {
-            "name": "scopes",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                }
-            },
-            "description": "The list of scopes for which the data is requested"
-        },
-        "ScenarioNameParameter": {
-            "name": "scenarioName",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "type": "string"
-            },
-            "description": "The name of the scenario for which the data is requested"
-        },
-        "ScenarioParametersParameter": {
-            "name": "scenarioParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "type": "object"
-            },
-            "description": "The parameters for the specified scenario and view"
-        }
-    },
     "definitions": {
         "ParametersSchema": {
             "description": "Schema for operation parameters.",
             "type": "object",
             "properties": {
                 "scopes": {
-                    "$ref": "#/parameters/ScopesParameter/schema"
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of scopes for which the data is requested"
                 },
                 "scenarioName": {
-                    "$ref": "#/parameters/ScenarioNameParameter/schema"
+                    "type": "string",
+                    "description": "The name of the scenario for which the data is requested"
                 },
                 "scenarioParameters": {
-                    "$ref": "#/parameters/ScenarioParametersParameter/schema"
+                    "type": "object",
+                    "description": "The parameters for the specified scenario and view"
                 }
             },
             "required": [
