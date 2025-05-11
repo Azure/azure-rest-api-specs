@@ -106,6 +106,15 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2025-05
+
+These settings apply only when `--tag=package-preview-2025-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05'
+input-file:
+  - Microsoft.Security/preview/2025-05-01-preview/views.json
+```
+
 ### Tag: package-2025-03
 These settings apply only when `--tag=package-2025-03` is specified on the command line.
 
@@ -124,14 +133,6 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
     reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
-```
-### Tag: package-preview-2025-05
-
-These settings apply only when `--tag=package-preview-2025-05` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-05'
-input-file:
-  - Microsoft.Security/preview/2025-05-01-preview/views.json
 ```
 
 ### Tag: package-2025-01
