@@ -389,14 +389,13 @@
           {
             "name": "file",
             "in": "formData",
-            "description": "The file data, in bytes.",
             "required": true,
             "type": "file"
           },
           {
             "name": "purpose",
             "in": "formData",
-            "description": "The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.",
+            "description": "The possible values denoting the intended usage of a file.",
             "required": true,
             "type": "string",
             "enum": [
@@ -453,7 +452,6 @@
           {
             "name": "filename",
             "in": "formData",
-            "description": "The name of the file.",
             "required": false,
             "type": "string"
           }
@@ -3212,7 +3210,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -5471,6 +5469,15 @@
             "type": "string"
           },
           "x-ms-client-name": "defaultParams"
+        },
+        "functions": {
+          "type": "array",
+          "description": "List of function definitions used by OpenApi tool",
+          "items": {
+            "$ref": "#/definitions/FunctionDefinition"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
