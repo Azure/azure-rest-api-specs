@@ -167,8 +167,10 @@ using Azure.AI.Agents;
 // Persistent & Model‐level renames (csharp, java)
 // --------------------------------------------------------------------------------
 @@clientName(Agent, "PersistentAgent", "csharp,java");
+
+@@access(AgentsResponseFormat, Access.internal, "csharp");
 @@clientName(AgentsResponseFormat,
-  "PersistentAgentsResponseFormat",
+  "InternalPersistentAgentsResponseFormat",
   "csharp,java"
 );
 @@clientName(AgentsResponseFormatMode,
@@ -423,18 +425,13 @@ using Azure.AI.Agents;
 @@clientName(RunStepStreamEvent.ThreadRunStepCompleted, "Completed", "csharp");
 @@clientName(RunStepStreamEvent.ThreadRunStepCreated, "Created", "csharp");
 @@clientName(RunStepStreamEvent.ThreadRunStepDelta, "Delta", "csharp");
-@@clientName(RunStepStreamEvent.ThreadRunStepExpired,
-  "ThreadRunStepExpired",
-  "csharp"
-);
-@@clientName(RunStepStreamEvent.ThreadRunStepFailed,
-  "ThreadRunStepFailed",
-  "csharp"
-);
+@@clientName(RunStepStreamEvent.ThreadRunStepExpired, "Expired", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepFailed, "Failed", "csharp");
 @@clientName(RunStepStreamEvent.ThreadRunStepInProgress,
   "InProgress",
   "csharp"
 );
+@@clientName(RunStepStreamEvent.ThreadRunStepCancelled, "Cancelled", "csharp");
 @@clientName(TruncationObject, "Truncation", "csharp");
 @@clientName(VectorStoreAutoChunkingStrategyRequest,
   "VectorStoreAutoChunkingStrategy",
