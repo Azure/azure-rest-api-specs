@@ -41,13 +41,9 @@ input-file:
 suppressions:
   - code: GetCollectionResponseSchema
     from: swagger.json
-    where: $.definitions.NginxDeploymentWafPolicyListResponse
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies"]
     reason: This is by design to avoid high bandwidth consumption
 
-  - code: GetCollectionResponseSchema
-    from: swagger.json
-    where: $.definitions.NginxDeploymentWafPolicy
-    reason: This is by design to avoid high bandwidth consumption
 ```
 
 ### Tag: package-2024-11-01-preview
