@@ -46,4 +46,24 @@ enum Versions {
   v2023_10_01_preview: "2023-10-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  /**
+   * List the available operations supported by the Microsoft.Maintenance resource provider
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  @tag("Operations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationsListResult> | MaintenanceError;
+}
+
+@@summary(Operations.list, "List available operations");

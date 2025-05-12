@@ -599,3 +599,22 @@ model UpdateProperties {
    */
   resourceId?: string;
 }
+
+/**
+ * Result of the List Operations operation
+ */
+@Azure.Core.pagedResult
+model OperationsListResult {
+  /**
+   * The link used to get the next page of operations.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * A collection of operations
+   */
+  @Azure.Core.items
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: Operation[];
+}
