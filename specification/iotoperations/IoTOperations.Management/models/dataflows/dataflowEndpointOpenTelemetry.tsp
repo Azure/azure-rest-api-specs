@@ -34,13 +34,13 @@ union DataflowOpenTelemetryAuthenticationMethod {
   string,
 
   /** Uses serviceaccount token. */
-  ServiceAccountTokenMethod,
+  ServiceAccountToken,
 
   /** Uses x509 certificate. */
-  x509CertificateMethod,
+  X509Certificate,
 
   /** Connects anonymously. */
-  AnonymousMethod,
+  Anonymous,
 }
 
 /** DataflowOpenTelemetryServiceAccountAuthentication properties. */
@@ -48,7 +48,7 @@ union DataflowOpenTelemetryAuthenticationMethod {
 model DataflowOpenTelemetryServiceAccountAuthentication
   extends DataflowOpenTelemetryAuthentication {
   /** The authentication method. */
-  method: ServiceAccountTokenMethod;
+  method: ServiceAccountToken;
 
   /** Kubernetes service account token authentication. */
   serviceAccountTokenSettings: DataflowEndpointAuthenticationServiceAccountToken;
@@ -59,7 +59,7 @@ model DataflowOpenTelemetryServiceAccountAuthentication
 model DataflowOpenTelemetryX509CertificateAuthentication
   extends DataflowOpenTelemetryAuthentication {
   /** The authentication method. */
-  method: x509CertificateMethod;
+  method: X509Certificate;
 
   /** X.509 certificate authentication settings. */
   x509CertificateSettings: DataflowEndpointAuthenticationX509;
@@ -71,7 +71,7 @@ model DataflowOpenTelemetryX509CertificateAuthentication
 model DataflowOpenTelemetryAnonymousAuthentication
   extends DataflowOpenTelemetryAuthentication {
   /** The authentication method. */
-  method: AnonymousMethod;
+  method: Anonymous;
   
   /** Settings for the anonymous connection */
   anonymousSettings?: DataflowEndpointAuthenticationAnonymous;

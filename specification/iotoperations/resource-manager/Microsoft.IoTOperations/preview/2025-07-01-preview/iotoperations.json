@@ -8281,7 +8281,8 @@
           "description": "TLS configuration."
         },
         "authentication": {
-          "$ref": "#/definitions/DataflowOpenTelemetryAuthentication"
+          "$ref": "#/definitions/DataflowOpenTelemetryAuthentication",
+          "description": "Authentication properties for OpenTelemetry endpoints"
         }
       },
       "required": [
@@ -8883,17 +8884,17 @@
           {
             "name": "ServiceAccountToken",
             "value": "ServiceAccountToken",
-            "description": "ServiceAccountToken Option"
+            "description": "Uses serviceaccount token."
           },
           {
             "name": "X509Certificate",
             "value": "X509Certificate",
-            "description": "x509Certificate Option"
+            "description": "Uses x509 certificate."
           },
           {
             "name": "Anonymous",
             "value": "Anonymous",
-            "description": "Anonymous Option"
+            "description": "Connects anonymously."
           }
         ]
       }
@@ -11118,8 +11119,7 @@
           "description": "AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "dataSource": {
           "$ref": "#/definitions/LocalKubernetesReference",
