@@ -133,7 +133,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": ".#/definitions/ProxyResource"
         }
       ]
     },
@@ -250,6 +250,27 @@
         }
       },
       "description": "The spot placement score for sku/region/zone combination."
+    },
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "description": "The resource model definition for an Azure Resource Manager proxy resource. It will not have tags and a location",
+      "x-ms-azure-resource": true
     }
   }
 }
