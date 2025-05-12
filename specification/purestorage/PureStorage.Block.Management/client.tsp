@@ -22,4 +22,5 @@ namespace PureStorage.Block.Client {
     "clusterResourceId"
   );
   @@clientName(PureStorage.Block, "PureStorageBlockMgmtClient", "python");
+  @@clientName(PureStorage.Block, "PureStorageBlockMgmtClient", "java");
 }
