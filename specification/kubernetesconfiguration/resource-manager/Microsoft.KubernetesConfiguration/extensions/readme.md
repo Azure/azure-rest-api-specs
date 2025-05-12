@@ -67,6 +67,176 @@ suppressions:
     reason: Existing service contract needs to be backward compatible.  
 ```
 
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensions.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensions.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: PatchIdentityProperty
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, service does not use/allow identity.
+  - code: AvoidAdditionalProperties
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: PatchBodyParametersSchema
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+```
+
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2022-11-01/extensions.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensions.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: PatchIdentityProperty
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, service does not use/allow identity.
+  - code: AvoidAdditionalProperties
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: PatchBodyParametersSchema
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+```
+
+### Tag: package-2022-07
+
+These settings apply only when `--tag=package-2022-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-07'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2022-07-01/extensions.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensions.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: PatchIdentityProperty
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, service does not use/allow identity.
+  - code: AvoidAdditionalProperties
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: PatchBodyParametersSchema
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+```
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/extensions.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensions.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: PatchIdentityProperty
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, service does not use/allow identity.
+  - code: AvoidAdditionalProperties
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: PatchBodyParametersSchema
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+```
+
+### Tag: package-2021-09
+
+These settings apply only when `--tag=package-2021-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensions.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: PatchIdentityProperty
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, service does not use/allow identity.
+  - code: AvoidAdditionalProperties
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: PatchBodyParametersSchema
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+```
+
 ---
 
 # Code Generation
