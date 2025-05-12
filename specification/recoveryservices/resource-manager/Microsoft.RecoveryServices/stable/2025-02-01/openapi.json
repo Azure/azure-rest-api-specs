@@ -142,6 +142,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults": {
+      "get": {
+        "operationId": "Vaults_ListBySubscriptionId",
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Fetches all the resources of the specified type in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VaultList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Recovery Services Resources in SubscriptionId": {
+            "$ref": "./examples/ListBySubscriptionIds.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability": {
       "post": {
         "operationId": "RecoveryServices_CheckNameAvailability",
@@ -196,11 +235,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
-        "operationId": "Vaults_ListBySubscriptionId",
+        "operationId": "Vaults_ListByResourceGroup",
         "tags": [
-          "Vaults"
+          "GetOperationResult"
         ],
-        "description": "Fetches all the resources of the specified type in the subscription.",
+        "description": "Retrieve a list of Vaults.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -227,8 +266,8 @@
           }
         },
         "x-ms-examples": {
-          "List of Recovery Services Resources in SubscriptionId": {
-            "$ref": "./examples/ListBySubscriptionIds.json"
+          "List of Recovery Services Resources in ResourceGroup": {
+            "$ref": "./examples/ListResources.json"
           }
         },
         "x-ms-pageable": {
@@ -1102,48 +1141,6 @@
         "x-ms-examples": {
           "Gets vault usages": {
             "$ref": "./examples/ListUsages.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
-      "get": {
-        "operationId": "Vaults_ListByResourceGroup",
-        "tags": [
-          "GetOperationResult"
-        ],
-        "description": "Retrieve a list of Vaults.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VaultList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List of Recovery Services Resources in ResourceGroup": {
-            "$ref": "./examples/ListResources.json"
           }
         },
         "x-ms-pageable": {
@@ -2968,17 +2965,13 @@
         },
         "properties": {
           "$ref": "#/definitions/VaultProperties",
-          "description": "Properties of the vault.",
-          "x-ms-client-flatten": true
+          "description": "Properties of the vault."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Identifies the unique system identifier for each Azure resource."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"

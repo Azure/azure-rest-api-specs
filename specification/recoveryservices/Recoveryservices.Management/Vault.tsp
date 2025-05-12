@@ -106,10 +106,10 @@ interface Vaults {
   /**
    * Fetches all the resources of the specified type in the subscription.
    */
-  listBySubscriptionId is VaultOps.List<
+  listBySubscriptionId is ArmListBySubscription<
     Vault,
     Response = ArmResponse<VaultList>,
-    ErrorType = CloudError
+    Error = CloudError
   >;
 
   /**
@@ -230,15 +230,11 @@ interface GetOperationResult {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Vaults_ListByResourceGroup")
-  @get
-  @action("vaults")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults")
-  listByResourceGroup(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<VaultList> | CloudError;
+  listByResourceGroup is ArmResourceListByParent<
+    Vault,
+    Response = ArmResponse<VaultList>,
+    Error = CloudError
+  >;
 }
 
 @@doc(Vault.name, "The name of the recovery services vault.");
