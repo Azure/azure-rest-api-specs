@@ -6892,17 +6892,25 @@
     },
     "ServicePatterns.AgentV1Error": {
       "type": "object",
-      "description": "Agent error response.",
+      "description": "Error payload returned by the agents API.",
       "properties": {
         "error": {
           "type": "object",
           "description": "Represents the error.",
           "properties": {
-            "code": {
+            "message": {
               "type": "string",
               "x-nullable": true
             },
-            "message": {
+            "type": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "param": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "code": {
               "type": "string",
               "x-nullable": true
             }
