@@ -35,6 +35,11 @@ suppressions:
     from: swagger.json
     where: $.definitions.NginxDeploymentWafPolicyListResponse
     reason: "This is by design to avoid high bandwidth consumption"
+
+  - code: LintDiff
+    from: swagger.json
+    where: $.definitions.NginxDeploymentWafPolicy
+    reason: "This is by design to avoid high bandwidth consumption"
 ```
 
 ### Tag: package-2025-03-01-preview
