@@ -59,13 +59,12 @@ model RegistryEndpointTrust {
 
 /** RegistryEndpointTrustType values */
 @added(Versions.`2025-07-01-preview`)
-union RegistryEndpointTrustType{
+union RegistryEndpointTrustType {
   string,
 
   /** Trust settings stored in a secret. */
   Secret,
 }
-
 
 /** Settings for RegistryEndpoint trust provided through a secret */
 @added(Versions.`2025-07-01-preview`)

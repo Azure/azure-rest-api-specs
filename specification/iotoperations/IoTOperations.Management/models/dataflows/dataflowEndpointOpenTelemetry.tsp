@@ -65,15 +65,13 @@ model DataflowOpenTelemetryX509CertificateAuthentication
   x509CertificateSettings: DataflowEndpointAuthenticationX509;
 }
 
-
 /** DataflowOpenTelemetryAnonymousAuthentication properties. */
 @added(Versions.`2025-07-01-preview`)
 model DataflowOpenTelemetryAnonymousAuthentication
   extends DataflowOpenTelemetryAuthentication {
   /** The authentication method. */
   method: Anonymous;
-  
+
   /** Settings for the anonymous connection */
   anonymousSettings: DataflowEndpointAuthenticationAnonymous;
 }
-

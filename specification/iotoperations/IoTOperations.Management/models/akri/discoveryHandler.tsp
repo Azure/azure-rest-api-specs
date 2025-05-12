@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
-
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
