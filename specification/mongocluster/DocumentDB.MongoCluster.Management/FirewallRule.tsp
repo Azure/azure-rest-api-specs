@@ -10,7 +10,7 @@ model FirewallRule is ProxyResource<FirewallRuleProperties> {
   /** The name of the mongo cluster firewall rule. */
   @maxLength(80)
   @minLength(1)
-  @pattern("^[a-zA-Z0-9][-_.a-zA-Z0-9]*")
+  @pattern("^[a-zA-Z0-9][-_a-zA-Z0-9]*")
   @key("firewallRuleName")
   @segment("firewallRules")
   @visibility(Lifecycle.Read)
