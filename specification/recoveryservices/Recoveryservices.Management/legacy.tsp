@@ -40,7 +40,8 @@ namespace Azure.ResourceManager.Legacy {
       Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
         Resource,
         LroHeaders
-      >
+      >,
+      ErrorType extends {} = ErrorResponse
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -95,7 +96,8 @@ namespace Azure.ResourceManager.Legacy {
       Response extends {} = ArmResponse<Resource> | ArmAcceptedLroResponse<
         "Resource update request accepted.",
         LroHeaders
-      >
+      >,
+      ErrorType extends {} = ErrorResponse
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -187,7 +189,8 @@ namespace Azure.ResourceManager.Legacy {
     Read<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} = ArmResponse<Resource>
+      Response extends {} = ArmResponse<Resource>,
+      ErrorType extends {} = ErrorResponse
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -229,7 +232,8 @@ namespace Azure.ResourceManager.Legacy {
     List<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} = ArmResponse<ResourceListResult<Resource>>
+      Response extends {} = ArmResponse<ResourceListResult<Resource>>,
+      ErrorType extends {} = ErrorResponse
     >(...ParentParameters, ...Parameters): Response | ErrorType;
 
     /**
@@ -265,7 +269,8 @@ namespace Azure.ResourceManager.Legacy {
       Resource extends Foundations.Resource,
       Request extends TypeSpec.Reflection.Model | void,
       Response extends TypeSpec.Reflection.Model | void,
-      Parameters extends {} = {}
+      Parameters extends {} = {},
+      ErrorType extends {} = ErrorResponse
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,

@@ -74,7 +74,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -111,7 +111,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -139,7 +139,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -174,7 +174,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -223,7 +223,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -288,7 +288,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -331,9 +331,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ignore"
-          },
           "202": {
             "description": "ignore"
           },
@@ -463,7 +460,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -495,7 +492,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -533,8 +530,13 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Put ExtendedInfo of Resource": {
+            "$ref": "./examples/UpdateVaultExtendedInfo_Put.json"
           }
         }
       },
@@ -566,7 +568,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -607,7 +609,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -639,7 +641,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -680,7 +682,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -722,7 +724,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextlink"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -755,20 +757,16 @@
           "Gets vault usages": {
             "$ref": "./examples/ListUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/vaults": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
         "operationId": "Vaults_ListByResourceGroup",
-        "parameters": [
-          {
-            "name": "vaultName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "ignore",
@@ -779,7 +777,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1535,18 +1533,25 @@
     },
     "ReplicationUsageList": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ReplicationUsage"
           },
           "x-ms-identifiers": []
         },
-        "nextlink": {
-          "type": "string"
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Resource": {
       "type": "object",
@@ -1817,6 +1822,28 @@
         }
       }
     },
+    "TrackedResource": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
     "UpgradeDetails": {
       "type": "object",
       "properties": {
@@ -1895,17 +1922,20 @@
     "Vault": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityData"
+        },
         "properties": {
           "$ref": "#/definitions/VaultProperties",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "#/definitions/IdentityData"
         },
         "sku": {
           "$ref": "#/definitions/Sku"
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -2110,7 +2140,7 @@
             "Excellent"
           ],
           "x-ms-enum": {
-            "name": "BcdrSecurityLevel",
+            "name": "BCDRSecurityLevel",
             "modelAsString": true
           },
           "readOnly": true
@@ -2241,15 +2271,25 @@
     },
     "VaultUsageList": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/VaultUsage"
           },
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {}

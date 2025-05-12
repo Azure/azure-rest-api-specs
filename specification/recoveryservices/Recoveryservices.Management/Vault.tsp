@@ -13,7 +13,9 @@ namespace Microsoft.RecoveryServices;
 /**
  * Resource information, as returned by the resource provider.
  */
-model Vault is Azure.ResourceManager.TrackedResource<VaultProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VaultProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model Vault extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = Vault,
     KeyName = "vaultName",
@@ -26,6 +28,11 @@ model Vault is Azure.ResourceManager.TrackedResource<VaultProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: IdentityData;
+
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  properties?: VaultProperties;
 
   /**
    * Identifies the unique system identifier for each Azure resource.
@@ -56,7 +63,7 @@ interface Vaults {
   /**
    * Get the Vault details.
    */
-  get is VaultOps.Read<Vault>;
+  get is VaultOps.Read<Vault, ErrorType = CloudError>;
 
   /**
    * Creates or updates a Recovery Services vault.
@@ -68,7 +75,9 @@ interface Vaults {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    ErrorType = CloudError
   >;
 
   /**
@@ -82,20 +91,25 @@ interface Vaults {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
-    }
+    },
+    ErrorType = CloudError
   >;
 
   /**
    * Deletes a vault.
    */
-  delete is VaultOps.DeleteWithoutOkAsync<Vault>;
+  delete is VaultOps.DeleteWithoutOkAsync<
+    Vault,
+    Response = ArmAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Fetches all the resources of the specified type in the subscription.
    */
   listBySubscriptionId is VaultOps.List<
     Vault,
-    Response = ArmResponse<VaultList>
+    Response = ArmResponse<VaultList>,
+    ErrorType = CloudError
   >;
 
   /**
@@ -162,7 +176,8 @@ interface Vaults {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @path
       operationId: string;
-    }
+    },
+    ErrorType = CloudError
   >;
 
   /**
@@ -206,7 +221,8 @@ interface GetOperationResult {
   @operationId("GetOperationResult")
   getOperationResult is GetOperationResultOps.Read<
     Vault,
-    Response = ArmResponse<Vault> | AcceptedResponse
+    Response = ArmResponse<Vault> | AcceptedResponse,
+    ErrorType = CloudError
   >;
 
   /**
@@ -214,10 +230,15 @@ interface GetOperationResult {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Vaults_ListByResourceGroup")
-  listByResourceGroup is GetOperationResultOps.List<
-    Vault,
-    Response = ArmResponse<VaultList>
-  >;
+  @get
+  @action("vaults")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults")
+  listByResourceGroup(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): ArmResponse<VaultList> | CloudError;
 }
 
 @@doc(Vault.name, "The name of the recovery services vault.");

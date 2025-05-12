@@ -131,7 +131,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -180,7 +180,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -222,7 +222,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -271,7 +271,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -347,7 +347,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -442,7 +442,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -502,11 +502,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -693,7 +690,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -739,7 +736,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -792,8 +789,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Put ExtendedInfo of Resource": {
+            "$ref": "./examples/UpdateVaultExtendedInfo_Put.json"
           }
         }
       },
@@ -840,7 +842,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -896,7 +898,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -942,7 +944,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -998,7 +1000,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1054,7 +1056,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextlink"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1101,10 +1103,13 @@
           "Gets vault usages": {
             "$ref": "./examples/ListUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/vaults": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
         "operationId": "Vaults_ListByResourceGroup",
         "tags": [
@@ -1120,13 +1125,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the Vault",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1139,7 +1137,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1242,6 +1240,38 @@
         }
       }
     },
+    "BCDRSecurityLevel": {
+      "type": "string",
+      "description": "Security levels of Recovery Services Vault for business continuity and disaster recovery",
+      "enum": [
+        "Poor",
+        "Fair",
+        "Good",
+        "Excellent"
+      ],
+      "x-ms-enum": {
+        "name": "BCDRSecurityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Poor",
+            "value": "Poor"
+          },
+          {
+            "name": "Fair",
+            "value": "Fair"
+          },
+          {
+            "name": "Good",
+            "value": "Good"
+          },
+          {
+            "name": "Excellent",
+            "value": "Excellent"
+          }
+        ]
+      }
+    },
     "BackupStorageVersion": {
       "type": "string",
       "description": "Backup storage version",
@@ -1265,38 +1295,6 @@
           {
             "name": "Unassigned",
             "value": "Unassigned"
-          }
-        ]
-      }
-    },
-    "BcdrSecurityLevel": {
-      "type": "string",
-      "description": "Security levels of Recovery Services Vault for business continuity and disaster recovery",
-      "enum": [
-        "Poor",
-        "Fair",
-        "Good",
-        "Excellent"
-      ],
-      "x-ms-enum": {
-        "name": "BcdrSecurityLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Poor",
-            "value": "Poor"
-          },
-          {
-            "name": "Fair",
-            "value": "Fair"
-          },
-          {
-            "name": "Good",
-            "value": "Good"
-          },
-          {
-            "name": "Excellent",
-            "value": "Excellent"
           }
         ]
       }
@@ -2289,7 +2287,7 @@
           },
           "x-ms-identifiers": []
         },
-        "nextlink": {
+        "nextLink": {
           "type": "string"
         }
       }
@@ -2802,6 +2800,30 @@
         ]
       }
     },
+    "TrackedResource": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
     "TriggerType": {
       "type": "string",
       "description": "The way the vault upgrade was triggered.",
@@ -2940,20 +2962,23 @@
       "type": "object",
       "description": "Resource information, as returned by the resource provider.",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityData",
+          "description": "Identity for the resource."
+        },
         "properties": {
           "$ref": "#/definitions/VaultProperties",
           "description": "Properties of the vault.",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "#/definitions/IdentityData",
-          "description": "Identity for the resource."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Identifies the unique system identifier for each Azure resource."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -3141,7 +3166,7 @@
           "readOnly": true
         },
         "bcdrSecurityLevel": {
-          "$ref": "#/definitions/BcdrSecurityLevel",
+          "$ref": "#/definitions/BCDRSecurityLevel",
           "description": "Security levels of Recovery Services Vault for business continuity and disaster recovery",
           "readOnly": true
         },
@@ -3322,6 +3347,9 @@
             "$ref": "#/definitions/VaultUsage"
           },
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     }

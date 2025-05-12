@@ -40,7 +40,7 @@ interface RecoveryServicesOperationGroup {
      */
     @bodyRoot
     input: CheckNameAvailabilityParameters,
-  ): ArmResponse<CheckNameAvailabilityResult> | ErrorResponse;
+  ): ArmResponse<CheckNameAvailabilityResult> | CloudError;
 
   /**
    * API to get details about capabilities provided by Microsoft.RecoveryServices RP
@@ -58,6 +58,7 @@ interface RecoveryServicesOperationGroup {
       @segment("locations")
       @doc("The location of the resource.")
       location: string;
-    }
+    },
+    Error = CloudError
   >;
 }

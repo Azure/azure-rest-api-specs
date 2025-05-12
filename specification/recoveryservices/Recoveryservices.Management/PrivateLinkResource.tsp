@@ -32,7 +32,7 @@ interface PrivateLinkResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinkResources_Get")
-  get is ArmResourceRead<PrivateLinkResource>;
+  get is ArmResourceRead<PrivateLinkResource, Error = CloudError>;
 
   /**
    * Returns the list of private link resources that need to be created for Backup and SiteRecovery
@@ -41,7 +41,8 @@ interface PrivateLinkResourceOperationGroup {
   @operationId("PrivateLinkResources_List")
   list is ArmResourceListByParent<
     PrivateLinkResource,
-    Response = ArmResponse<PrivateLinkResources>
+    Response = ArmResponse<PrivateLinkResources>,
+    Error = CloudError
   >;
 }
 

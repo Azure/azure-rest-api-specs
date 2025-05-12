@@ -322,7 +322,7 @@ union SecureScoreLevel {
 /**
  * Security levels of Recovery Services Vault for business continuity and disaster recovery
  */
-union BcdrSecurityLevel {
+union BCDRSecurityLevel {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Poor: "Poor",
@@ -482,7 +482,7 @@ model ReplicationUsageList {
   value?: ReplicationUsage[];
 
   @nextLink
-  nextlink?: string;
+  nextLink?: string;
 }
 
 /**
@@ -889,7 +889,7 @@ model VaultProperties {
    * Security levels of Recovery Services Vault for business continuity and disaster recovery
    */
   @visibility(Lifecycle.Read)
-  bcdrSecurityLevel?: BcdrSecurityLevel;
+  bcdrSecurityLevel?: BCDRSecurityLevel;
 
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed
@@ -1543,6 +1543,9 @@ model VaultUsageList {
    */
   @items
   value?: VaultUsage[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -1664,6 +1667,20 @@ model ResourceCertificateAndAcsDetails extends ResourceCertificateDetails {
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
   authType: "AccessControlService";
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model TrackedResource extends Resource {
+  /**
+   * Resource location.
+   */
+  location: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
 }
 
 model ClientDiscoveryResponse

@@ -33,7 +33,7 @@ interface VaultExtendedInfoResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VaultExtendedInfo_Get")
-  get is ArmResourceRead<VaultExtendedInfoResource>;
+  get is ArmResourceRead<VaultExtendedInfoResource, Error = CloudError>;
 
   /**
    * Create vault extended info.
@@ -43,7 +43,8 @@ interface VaultExtendedInfoResources {
   @operationId("VaultExtendedInfo_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     VaultExtendedInfoResource,
-    Response = ArmResourceUpdatedResponse<VaultExtendedInfoResource>
+    Response = ArmResourceUpdatedResponse<VaultExtendedInfoResource>,
+    Error = CloudError
   >;
 
   /**
@@ -54,7 +55,8 @@ interface VaultExtendedInfoResources {
   @operationId("VaultExtendedInfo_Update")
   update is ArmCustomPatchSync<
     VaultExtendedInfoResource,
-    PatchModel = VaultExtendedInfoResource
+    PatchModel = VaultExtendedInfoResource,
+    Error = CloudError
   >;
 }
 

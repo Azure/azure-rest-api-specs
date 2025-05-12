@@ -317,7 +317,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -359,7 +359,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextlink"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -392,20 +392,16 @@
           "Gets vault usages": {
             "$ref": "./examples/ListUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/vaults__added": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults__added": {
       "get": {
         "operationId": "Vaults_ListByResourceGroup",
-        "parameters": [
-          {
-            "name": "vaultName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "ignore",
@@ -416,7 +412,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -435,20 +431,6 @@
         "deprecated__deleted": false
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/capabilities": {
-      "post": {
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability": {
       "post": {
         "parameters": [
@@ -465,17 +447,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
@@ -484,16 +456,6 @@
         "operationId": {
           "__old": "Vaults_ListByResourceGroup",
           "__new": "Vaults_ListBySubscriptionId"
-        },
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
         },
         "x-ms-examples": {
           "List of Recovery Services Resources in ResourceGroup__deleted": {
@@ -507,17 +469,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}": {
       "get": {
-        "deprecated__deleted": false,
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "deprecated__deleted": false
       },
       "put": {
         "deprecated__deleted": false,
@@ -544,17 +496,7 @@
               "type": "string"
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       },
       "patch": {
         "deprecated__deleted": false,
@@ -581,115 +523,39 @@
               "type": "string"
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       },
       "delete": {
-        "deprecated__deleted": false,
-        "responses": {
-          "200__added": {
-            "description": "ignore"
-          }
-        }
+        "deprecated__deleted": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/extendedInformation/vaultExtendedInfo": {
       "get": {
-        "deprecated__deleted": false,
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "deprecated__deleted": false
       },
       "put": {
         "deprecated__deleted": false,
-        "x-ms-examples__deleted": {
+        "x-ms-examples": {
           "Put ExtendedInfo of Resource": {
-            "$ref": "./examples/UpdateVaultExtendedInfo.json"
-          }
-        },
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
+            "$ref": {
+              "__old": "./examples/UpdateVaultExtendedInfo.json",
+              "__new": "./examples/UpdateVaultExtendedInfo_Put.json"
             }
           }
         }
       },
       "patch": {
-        "deprecated__deleted": false,
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/operationResults/{operationId}": {
-      "get": {
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "deprecated__deleted": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources": {
       "get": {
-        "deprecated__deleted": false,
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "deprecated__deleted": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
-        "deprecated__deleted": false,
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "deprecated__deleted": false
       }
     }
   },
@@ -705,28 +571,6 @@
           "readOnly": true
         }
       }
-    },
-    "TrackedResource__deleted": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
     },
     "systemData__deleted": {
       "type": "object",
@@ -1028,11 +872,18 @@
       }
     },
     "ReplicationUsageList": {
+      "description__added": "[Placeholder] Discription for page model",
+      "required__added": [
+        "value"
+      ],
       "properties": {
-        "nextlink__added": {
-          "type": "string"
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         },
         "value": {
+          "description__added": "[Placeholder] Discription for value property",
           "x-ms-identifiers__added": []
         }
       }
@@ -1134,6 +985,9 @@
       ]
     },
     "Vault": {
+      "required__added": [
+        "properties"
+      ],
       "properties": {
         "systemData__deleted": {
           "$ref": "#/definitions/systemData"
@@ -1257,20 +1111,22 @@
             }
           },
           "$ref__added": "#/definitions/VaultPropertiesRedundancySettings"
-        },
-        "bcdrSecurityLevel": {
-          "x-ms-enum": {
-            "name": {
-              "__old": "BCDRSecurityLevel",
-              "__new": "BcdrSecurityLevel"
-            }
-          }
         }
       }
     },
     "VaultUsageList": {
+      "description__added": "[Placeholder] Discription for page model",
+      "required__added": [
+        "value"
+      ],
       "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
         "value": {
+          "description__added": "[Placeholder] Discription for value property",
           "x-ms-identifiers__added": []
         }
       }
