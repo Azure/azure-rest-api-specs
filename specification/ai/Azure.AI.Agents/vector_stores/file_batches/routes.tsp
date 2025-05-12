@@ -122,6 +122,7 @@ namespace Azure.AI.Agents {
       /** Filter by file status. */
       @query filter?: VectorStoreFileStatusFilter,
 
+      ...ApiVersionParameter,
       ...AgentsListOptions,
     ): {
       ...AgentsPagedResult<VectorStoreFile>;
