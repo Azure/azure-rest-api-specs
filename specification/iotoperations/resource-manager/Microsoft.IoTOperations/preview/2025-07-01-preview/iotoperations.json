@@ -10235,6 +10235,14 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "trustList": {
+          "type": "array",
+          "description": "Trust list for the registry endpoint",
+          "items": {
+            "$ref": "#/definitions/RegistryEndpointTrust"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -10289,6 +10297,25 @@
         "value"
       ]
     },
+    "RegistryEndpointSecretTrust": {
+      "type": "object",
+      "description": "RegistryEndpointSecretTrust",
+      "properties": {
+        "secretRef": {
+          "type": "string",
+          "description": "The name of the secret."
+        }
+      },
+      "required": [
+        "secretRef"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegistryEndpointTrust"
+        }
+      ],
+      "x-ms-discriminator-value": "Secret"
+    },
     "RegistryEndpointSystemAssignedIdentityAuthentication": {
       "type": "object",
       "description": "System assigned identity authentication",
@@ -10316,6 +10343,38 @@
           "type": "string",
           "description": "Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration."
         }
+      }
+    },
+    "RegistryEndpointTrust": {
+      "type": "object",
+      "description": "RegistryEndpoint Trust properties",
+      "properties": {
+        "trustType": {
+          "$ref": "#/definitions/RegistryEndpointTrustType",
+          "description": "The trust type for the registry endpoint."
+        }
+      },
+      "discriminator": "trustType",
+      "required": [
+        "trustType"
+      ]
+    },
+    "RegistryEndpointTrustType": {
+      "type": "string",
+      "description": "RegistryEndpointTrustType values",
+      "enum": [
+        "Secret"
+      ],
+      "x-ms-enum": {
+        "name": "RegistryEndpointTrustType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Secret",
+            "value": "Secret",
+            "description": "Trust settings stored in a secret."
+          }
+        ]
       }
     },
     "RegistryEndpointUserAssignedIdentityAuthentication": {

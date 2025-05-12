@@ -19,6 +19,7 @@ alias Digest = "Digest";
 alias Branch = "Branch";
 alias Custom = "Custom";
 alias Filter = "Filter";
+alias Secret = "Secret";
 alias String = "String";
 alias Source = "Source";
 alias Enabled = "Enabled";
