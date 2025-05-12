@@ -37,3 +37,5 @@ using Azure.ClientGenerator.Core;
 // For some reason for Python the emitter creates an empty ServicePatternsOperations operation
 // class. Mark it as internal here. Apply to all languages just in case.
 //@@access(Azure.AI.Projects.ServicePatterns, Access.internal);  <== this did not work. It makes all methods internal.
+
+@@clientName(Azure.AI.Projects.SASCredentials, "SasCredentials", "java");
