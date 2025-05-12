@@ -84,8 +84,9 @@ model AkriDiscoveryHandlerAioMetadata {
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerDiagnostics {
   /** The log settings for the Connector template. */
+  #suppress "deprecated" "Csharp emmitter has a bug with multiple levels of nested objects containing only 1 property"
   @flattenProperty("csharp")
-  logs: AkriConnectorsDiagnosticsLogs; // Multiple levels of nested objects containing only 1 property don't play well with the dotnet emitter.
+  logs: AkriConnectorsDiagnosticsLogs;
 }
 
 /** AkriDiscoveryHandlerDiscoverableDeviceEndpointType properties. */

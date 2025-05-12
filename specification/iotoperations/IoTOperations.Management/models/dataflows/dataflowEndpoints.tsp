@@ -509,6 +509,7 @@ model DataflowEndpointAuthenticationX509 {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRD type is modeled as empty object"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Prevents adding unwanted properties"
 @doc("DataflowEndpoint Anonymous Authentication properties")
 @added(Versions.`2025-07-01-preview`)
 @extension("additionalProperties", false)

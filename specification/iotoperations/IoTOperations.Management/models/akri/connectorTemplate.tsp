@@ -415,6 +415,7 @@ model AkriConnectorTemplateHelmUpgradeConfiguration {
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateDiagnostics {
   /** The log settings for the Connector template. */
+  #suppress "deprecated" "Csharp emmitter has a bug with multiple levels of nested objects containing only 1 property"
   @flattenProperty("csharp")
   logs: AkriConnectorsDiagnosticsLogs;
 }
