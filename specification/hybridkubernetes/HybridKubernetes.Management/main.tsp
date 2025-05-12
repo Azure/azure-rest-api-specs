@@ -21,6 +21,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 /**
  * Azure Connected Cluster Resource Provider API for onboarding a Kubernetes Cluster to Azure Arc
  */
@@ -43,4 +44,21 @@ enum Versions {
   v2024_12_01_preview: "2024-12-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  @tag("Operations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @operationId("Operations_Get")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationList> | ErrorResponse;
+}

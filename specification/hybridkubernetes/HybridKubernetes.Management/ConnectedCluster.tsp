@@ -13,9 +13,12 @@ namespace Microsoft.Kubernetes;
 /**
  * Represents a connected cluster.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@Azure.ResourceManager.Private.armResourceInternal(ConnectedClusterProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @subscriptionResource
-model ConnectedCluster
-  is Azure.ResourceManager.TrackedResource<ConnectedClusterProperties, false> {
+model ConnectedCluster extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = ConnectedCluster,
     KeyName = "clusterName",
@@ -34,6 +37,14 @@ model ConnectedCluster
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: ConnectedClusterKind;
+
+  /**
+   * Properties of the connected cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  properties: ConnectedClusterProperties;
 }
 
 @armResourceOperations
@@ -89,7 +100,8 @@ interface ConnectedClusters {
   @operationId("ConnectedCluster_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ConnectedCluster,
-    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
+    Response = ArmResponse<ConnectedClusterList>
   >;
 
   /**
@@ -97,7 +109,10 @@ interface ConnectedClusters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedCluster_ListBySubscription")
-  listBySubscription is ArmListBySubscription<ConnectedCluster>;
+  listBySubscription is ArmListBySubscription<
+    ConnectedCluster,
+    Response = ArmResponse<ConnectedClusterList>
+  >;
 
   /**
    * Gets cluster user credentials of the connected cluster with a specified resource group and name.

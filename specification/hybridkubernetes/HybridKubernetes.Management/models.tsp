@@ -187,6 +187,7 @@ model ConnectedClusterProperties {
   /**
    * Provisioning state of the connected cluster resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
   provisioningState?: ProvisioningState;
 
   /**
@@ -268,11 +269,13 @@ model ConnectedClusterProperties {
   /**
    * Details of the gateway used by the Arc router for connectivity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable"
   gateway?: Gateway | null;
 
   /**
    * Configuration settings for customizing the behavior of the connected cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable"
   arcAgentryConfigurations?: ArcAgentryConfigurations[] | null;
 
   /**
@@ -320,11 +323,13 @@ model ArcAgentProfile {
   /**
    * List of system extensions that are installed on the cluster resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   systemComponents?: SystemComponent[];
 
   /**
    * List of arc agentry and system components errors on the cluster resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   agentErrors?: AgentError[];
 
   /**
@@ -458,12 +463,14 @@ model ArcAgentryConfigurations {
   /**
    * The configuration settings for the feature that do not contain any sensitive or secret information.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   settings?: Record<string> | null;
 
   /**
    * The configuration settings for the feature that contain any sensitive or secret information.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   protectedSettings?: Record<string> | null;
 }
@@ -494,6 +501,7 @@ model Resource {
 /**
  * Object containing updates for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
 model ConnectedClusterPatch {
   /**
    * Resource tags.
@@ -622,3 +630,23 @@ model CredentialResult {
  * The paginated list of connected Clusters
  */
 model ConnectedClusterList is Azure.Core.Page<ConnectedCluster>;
+
+/**
+ * The list of bot service operation response.
+ */
+@Azure.Core.pagedResult
+model OperationList {
+  /**
+   * [Placeholder] Discription for page model
+   */
+  @Azure.Core.items
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value: Operation[];
+
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
+}

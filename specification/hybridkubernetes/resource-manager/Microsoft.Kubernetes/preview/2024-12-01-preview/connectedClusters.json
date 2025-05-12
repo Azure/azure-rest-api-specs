@@ -49,7 +49,7 @@
   "paths": {
     "/providers/Microsoft.Kubernetes/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "Operations_Get",
         "tags": [
           "Operations"
         ],
@@ -63,7 +63,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
@@ -103,7 +103,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectedClusterListResult"
+              "$ref": "#/definitions/ConnectedClusterList"
             }
           },
           "default": {
@@ -146,7 +146,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectedClusterListResult"
+              "$ref": "#/definitions/ConnectedClusterList"
             }
           },
           "default": {
@@ -667,11 +667,6 @@
       "type": "object",
       "description": "Represents a connected cluster.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectedClusterProperties",
-          "description": "Describes the connected cluster resource properties.",
-          "x-ms-client-flatten": true
-        },
         "identity": {
           "$ref": "#/definitions/ConnectedClusterIdentity",
           "description": "The identity of the connected cluster."
@@ -679,11 +674,16 @@
         "kind": {
           "$ref": "#/definitions/ConnectedClusterKind",
           "description": "The kind of connected cluster."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectedClusterProperties",
+          "description": "Describes the connected cluster resource properties.",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
-        "properties",
-        "identity"
+        "identity",
+        "properties"
       ],
       "allOf": [
         {
@@ -745,9 +745,9 @@
         ]
       }
     },
-    "ConnectedClusterListResult": {
+    "ConnectedClusterList": {
       "type": "object",
-      "description": "The response of a ConnectedCluster list operation.",
+      "description": "The paginated list of connected Clusters",
       "properties": {
         "value": {
           "type": "array",
@@ -1137,6 +1137,30 @@
           "description": "The issuer url for public cloud clusters - AKS, EKS, GKE - used for the workload identity feature."
         }
       }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "The list of bot service operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for page model",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Operation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ProvisioningState": {
       "type": "string",
