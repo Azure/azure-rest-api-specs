@@ -632,12 +632,12 @@ model CredentialResult {
 model ConnectedClusterList is Azure.Core.Page<ConnectedCluster>;
 
 /**
- * The list of bot service operation response.
+ * The paginated list of connected cluster API operations.
  */
 @Azure.Core.pagedResult
 model OperationList {
   /**
-   * [Placeholder] Discription for page model
+   * The list of connected cluster API operations.
    */
   @Azure.Core.items
   @visibility(Lifecycle.Read)
@@ -645,7 +645,7 @@ model OperationList {
   value: Operation[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * The link to fetch the next page of connected cluster API operations.
    */
   @nextLink
   nextLink?: string;
