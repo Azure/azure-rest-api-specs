@@ -73,11 +73,13 @@ union RegistryEndpointTrustedSigningKeyType {
   Secret,
 
   /** Trust settings stored in a Kubernetes ConfigMap. */
+  ConfigMap,
 }
 
 /** Settings for RegistryEndpoint trust provided through a secret. */
 @added(Versions.`2025-07-01-preview`)
-model RegistryEndpointTrustedSigningKeySecret extends RegistryEndpointTrustedSigningKey {
+model RegistryEndpointTrustedSigningKeySecret
+  extends RegistryEndpointTrustedSigningKey {
   /** The trust type for the registry endpoint. */
   type: Secret;
 
@@ -87,7 +89,8 @@ model RegistryEndpointTrustedSigningKeySecret extends RegistryEndpointTrustedSig
 
 /** Settings for RegistryEndpoint trust provided through a configmap. */
 @added(Versions.`2025-07-01-preview`)
-model RegistryEndpointTrustedSigningKeyConfigMap extends RegistryEndpointTrustedSigningKey {
+model RegistryEndpointTrustedSigningKeyConfigMap
+  extends RegistryEndpointTrustedSigningKey {
   /** The trust type for the registry endpoint. */
   type: ConfigMap;
 
