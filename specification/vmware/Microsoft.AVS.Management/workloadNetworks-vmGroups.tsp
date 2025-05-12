@@ -5,7 +5,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
@@ -37,18 +36,13 @@ interface WorkloadNetworkVmGroups {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<WorkloadNetworkVMGroup, WorkloadNetworkVMGroup>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Can not change existing response codes."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "VmGroupIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteVMGroup")
-  // delete is ArmResourceDeleteAsync<WorkloadNetworkVMGroup>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}")
   @doc("Delete a {name}", WorkloadNetworkVMGroup)
-  @delete
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
-  )
+  @armResourceDelete(WorkloadNetworkVMGroup)
   delete(
     ...Foundations.BaseParameters<WorkloadNetworkVMGroup>,
     ...VmGroupIdParameter,
