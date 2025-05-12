@@ -20,7 +20,6 @@ export async function runChecks(
 
   for (const [readme, tags] of runList.entries()) {
     const changedFilePath = join(path, readme);
-    console.log(`Linting ${changedFilePath}`);
 
     // TODO: Move this into getRunList
     let openApiType = await getOpenapiType(changedFilePath);
@@ -51,8 +50,13 @@ export async function runChecks(
         `${tagArg} ` +
         `${changedFilePath}`;
 
-      console.log(`autorest command: ${autorestCommand}`);
+      console.log(`::group::Autorest for type: ${openApiType} readme: ${readme} tag: ${tag}`);
+      console.log(`\tAutorest command: ${autorestCommand}`);
+
       const executionResult = await executeCommand(autorestCommand);
+      
+      console.log(executionResult.stderr + executionResult.stdout);
+
       const lintDiffResult = {
         autorestCommand,
         rootPath: path,
@@ -62,8 +66,10 @@ export async function runChecks(
         ...executionResult,
       };
       logAutorestExecutionErrors(lintDiffResult);
+      console.log("::endgroup::");
+
       result.push(lintDiffResult);
-      console.log("Lint diff result length:", lintDiffResult.stdout.length);
+      console.log(`\tAutorest result length: ${lintDiffResult.stderr.length + lintDiffResult.stdout.length}\n`);
     }
   }
 
@@ -109,19 +115,14 @@ export function logAutorestExecutionErrors(runResult: AutorestRunResult) {
     const stderrContainsLevelError = runResult.stderr.includes(`${autoRestPrefix}"level":"error"`);
     const stderrContainsLevelFatal = runResult.stderr.includes(`${autoRestPrefix}"level":"fatal"`);
 
-    // TODO: Clean up output formatting to be consistent with new output standards
     console.log(
-      `Execution of AutoRest with LintDiff done. ` +
-        `Error is not null: true, ` +
-        `stdout contains AutoRest 'error': ${stdoutContainsLevelError}, ` +
-        `stdout contains AutoRest 'fatal': ${stdoutContainsLevelFatal}, ` +
-        `stderr contains AutoRest 'error': ${stderrContainsLevelError}, ` +
-        `stderr contains AutoRest 'fatal': ${stderrContainsLevelFatal}`,
-    );
-  } else {
-    // TODO: Include markdown type?
-    console.log(
-      `::debug:: Execution completed with no errors for tag: ${runResult.tag}, markdown: ${runResult.readme}, rootPath: ${runResult.rootPath}`,
+      `\tAutorest completed with errors:
+\t\tExit code: ${runResult.error.code}
+\t\tError is not null: true, 
+\t\tstdout contains AutoRest 'error': ${stdoutContainsLevelError}
+\t\tstdout contains AutoRest 'fatal': ${stdoutContainsLevelFatal} 
+\t\tstderr contains AutoRest 'error': ${stderrContainsLevelError} 
+\t\tstderr contains AutoRest 'fatal': ${stderrContainsLevelFatal}`,
     );
   }
 }
