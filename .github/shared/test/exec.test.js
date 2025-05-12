@@ -57,7 +57,7 @@ describe("execNpm", () => {
 });
 
 describe("execNpmExec", () => {
-  it("runs npm --version", async() => {
+  it("runs npm --version", async () => {
     await expect(execNpmExec(["npm", "--version"])).resolves.toEqual({
       stdout: expect.toSatisfy((v) => semver.valid(v)),
       stderr: "",
