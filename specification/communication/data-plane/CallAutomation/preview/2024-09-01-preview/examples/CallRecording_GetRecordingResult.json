@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2024-09-01-preview",
+    "recordingId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI4YjlkYmFkMS0xOGFiLTRmODYtYWQ0Yy1jNzVmODA5ODA3NmUiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiI4YjlkYmFkMS0xOGFiLTRmODYtYWQ0Yy1jNzVmODA5ODA3NmUifQ=="
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "recordingStorageInfo": {
+          "recordingChunks": [
+            {
+              "documentId": "0-eus-d12-801b3f3fc462fe8a01e6810cbff729b8",
+              "index": 0,
+              "endReason": "sessionEnded",
+              "contentLocation": "https://storage/content/video",
+              "metadataLocation": "https://storage/content/acsmetadata",
+              "deleteLocation": "https://us-storage/"
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "ExportFailure",
+            "message": "Recording export to Azure Blob Storage failed.",
+            "innererror": {
+              "code": "managedIdentityNotEnabled",
+              "message": "Identity was missing or empty, please verify the ACS resource is configured for managed identity."
+            }
+          }
+        ],
+        "recordingStartTime": "2021-07-27T15:20:23.6089755Z",
+        "recordingDurationMs": 6620,
+        "sessionEndReason": "callEnded",
+        "recordingExpirationTime": "2021-07-27T15:20:23.6089755Z"
+      }
+    }
+  }
+}
