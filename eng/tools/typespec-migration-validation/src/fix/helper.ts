@@ -30,6 +30,32 @@ export function checkPropertyAttributeDeleted(checkKey: string, jsonObj: any, cu
   return results;
 }
 
+export function checkPropertyAttributeAdded(checkKey: string, jsonObj: any, currentPath: string = ''): Array<{path: string, value: string}> {
+  const results: Array<{path: string, value: string}> = [];
+  if (!jsonObj || typeof jsonObj !== 'object') {
+    return results;
+  }
+  for (const key in jsonObj) {
+    if (!Object.prototype.hasOwnProperty.call(jsonObj, key)) {
+      continue;
+    }
+    const newPath = currentPath ? `${currentPath}.${key}` : key;
+    if (key === `${checkKey}__added`) {
+      // Store both the path and the value
+      results.push({
+        path: currentPath, // Use parent path since we're interested in the property that has this extension
+        value: jsonObj[key]
+      });
+    }
+
+    if (jsonObj[key] && typeof jsonObj[key] === 'object') {
+      const nestedResults = checkPropertyAttributeAdded(checkKey, jsonObj[key], newPath);
+      results.push(...nestedResults);
+    }
+  }
+  return results;
+}
+
 export function checkPropertyAttributeChanged(checkKey: string, jsonObj: any, currentPath: string = ''): Array<{path: string, oldValue: string, newValue: string}> {
   const results: Array<{path: string, oldValue: string, newValue: string}> = [];
 
@@ -65,4 +91,15 @@ export function checkPropertyAttributeChanged(checkKey: string, jsonObj: any, cu
   }
 
   return results;
+}
+
+export function getPropertyName(jsonPath: string): [definitionName: string, propertyName: string] | undefined {
+  const pathParts = jsonPath.split('.');
+  const definitionIndex = pathParts.findIndex(part => part === 'definitions');
+  if (definitionIndex !== -1 && definitionIndex + 3 < pathParts.length) {
+    const definitionName = pathParts[definitionIndex + 1];
+    const propertyName = pathParts[definitionIndex + 3];
+    return [definitionName, propertyName];
+  }
+  return undefined;
 }
