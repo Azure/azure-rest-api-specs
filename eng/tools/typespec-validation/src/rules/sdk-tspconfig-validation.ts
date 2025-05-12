@@ -166,6 +166,18 @@ function skipForManagementPlane(folder: string): SkipResult {
   };
 }
 
+function skipForNonModularOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
+  const isModularClient =
+    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== true;
+  const shouldRun = isManagementSdk(folder) || isModularClient;
+  const result: SkipResult = {
+    shouldSkip: !shouldRun,
+  };
+  if (result.shouldSkip)
+    result.reason = "This rule is only applicable for data plane SDKs with modular client.";
+  return result;
+}
+
 function skipForModularOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
   const isModularClient =
     config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] === true;
@@ -255,11 +267,25 @@ export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspconfigEmitte
       new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/),
     );
   }
+
   protected skip(config: any, folder: string) {
     return skipForModularOrManagementPlaneInTsEmitter(config, folder);
   }
 }
 
+export class TspConfigTsModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-ts",
+      "package-details.name",
+      new RegExp(/^\@azure\/[a-z]+(?:-[a-z]+)*$/),
+    );
+  }
+
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrManagementPlaneInTsEmitter(config, folder);
+  }
+}
 // ----- Go data plane sub rules -----
 export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -469,6 +495,7 @@ export const defaultRules = [
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
   new TspConfigTsDpPackageDirectorySubRule(),
   new TspConfigTsDpPackageNameMatchPatternSubRule(),
+  new TspConfigTsModularPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
