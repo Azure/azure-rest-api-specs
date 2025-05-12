@@ -1586,6 +1586,14 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "The export pipeline does not exist in the subscription."
           },
@@ -1600,6 +1608,10 @@
           "ExportPipelineDelete": {
             "$ref": "./examples/ExportPipelineDelete.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1846,6 +1858,14 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "The import pipeline does not exist in the subscription."
           },
@@ -1860,7 +1880,11 @@
           "ImportPipelineDelete": {
             "$ref": "./examples/ImportPipelineDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }      
       }
     },
     "/providers/Microsoft.ContainerRegistry/operations": {
@@ -2121,6 +2145,14 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "The pipeline run does not exist in the subscription."
           },
@@ -2135,6 +2167,10 @@
           "PipelineRunDelete": {
             "$ref": "./examples/PipelineRunDelete.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -5213,15 +5249,7 @@
       "properties": {
         "type": {
           "description": "The type of target for the export pipeline.",
-          "default": "AzureStorageBlobContainer",
-          "enum": [
-            "AzureStorageBlobContainer"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PipelineTargetType",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "uri": {
           "description": "The target uri of the export pipeline.\r\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\r\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\"",
