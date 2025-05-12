@@ -641,6 +641,7 @@ model ElasticVersionListProperties {
 /**
  * Monitor resource update parameters.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
 model ElasticMonitorResourceUpdateParameters {
   /**
    * elastic monitor resource tags.
@@ -666,6 +667,7 @@ model SubscriptionList {
   /**
    * List of subscriptions and the state of the monitoring.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @OpenAPI.extension("x-ms-identifiers", #["properties/subscriptionId"])
   monitoredSubscriptionList?: MonitoredSubscription[];
 
