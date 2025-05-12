@@ -197,7 +197,21 @@ export class TspConfigJavaMgmtPackageDirFormatSubRule extends TspconfigEmitterOp
     super(
       "@azure-tools/typespec-java",
       "package-dir",
-      new RegExp(/^azure-resourcemanager-[a-z]+$/) // Matches "azure-resourcemanager-<service-name>"
+      new RegExp(/^azure-resourcemanager-[^\/]+$/) // Matches "azure-resourcemanager-<service-name>" with no restriction on characters after the hyphen
+    );
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder); // Ensures this rule only applies to management plane SDKs
+  }
+}
+
+export class TspConfigJavaMgmtNamespaceFormatSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-java",
+      "namespace",
+      new RegExp(/^com\.azure\.resourcemanager\.[^\.]+$/) // Matches "com.azure.resourcemanager.<service-name>" with no restriction on characters after the last dot
     );
   }
 
@@ -218,11 +232,15 @@ export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extend
 
 export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^arm-[a-z]+$/)); // Matches "arm-<service-name>"
+    super(
+      "@azure-tools/typespec-ts",
+      "package-dir",
+      new RegExp(/^arm-[^\/]+$/)
+    );
   }
 
   protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder); // Ensures this rule applies only to modular management plane SDKs
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder); 
   }
 }
 
@@ -299,6 +317,7 @@ export class TspConfigGoDpModuleMatchPatternSubRule extends TspconfigEmitterOpti
   }
 }
 
+// ----- Go Mgmt plane sub rules -----
 export class TspConfigGoMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "service-dir", new RegExp(/^sdk\/resourcemanager\/[^\/]*$/));
@@ -314,20 +333,6 @@ export class TspConfigGoMgmtPackageDirectorySubRule extends TspconfigEmitterOpti
   }
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
-  }
-}
-
-export class TspConfigGoMgmtPackageDirFormatSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super(
-      "@azure-tools/typespec-go",
-      "package-dir",
-      new RegExp(/^arm[a-z]+$/) // Matches "arm<service-name>"
-    );
-  }
-
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder); // Ensures this rule only applies to management plane SDKs
   }
 }
 
@@ -477,49 +482,11 @@ export class TspConfigCsharpMgmtPackageDirectorySubRule extends TspconfigEmitter
   }
 }
 
-// New rule for validating package-dir format
-export class TspConfigCsharpAzPackageDirFormatSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "package-dir", new RegExp(/^Azure\.ResourceManager\.[a-zA-Z0-9]+$/));
-  }
-
-  override validate(config: any): RuleResult {
-    const packageDir = config?.options?.[this.emitterName]?.["package-dir"];
-
-    if (packageDir === undefined) {
-      return this.createFailedResult(
-        `Failed to find "options.${this.emitterName}.package-dir"`,
-        `Please add "options.${this.emitterName}.package-dir" in the format "Azure.ResourceManager.{{parameters.ServiceNamespace}}"`,
-      );
-    }
-
-    // Validate package-dir format
-    const packageDirRegex = /^Azure\.ResourceManager\.[a-zA-Z0-9]+$/;
-    if (!packageDirRegex.test(packageDir)) {
-      return this.createFailedResult(
-        `The value of "package-dir" ("${packageDir}") does not match the required format "Azure.ResourceManager.{{parameters.ServiceNamespace}}"`,
-        `Please update "package-dir" to match the required format.`,
-      );
-    }
-
-    return { success: true };
-  }
-}
-
-export class TspConfigCsharpMgmtPackageDirFormatSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "package-dir", new RegExp(/^Azure\.ResourceManager\.[a-zA-Z0-9]+$/));
-  }
-
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder); // Ensures this rule only applies to management plane SDKs
-  }
-}
-
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzPackageDirectorySubRule(),
   new TspConfigJavaMgmtPackageDirFormatSubRule(),
+  new TspConfigJavaMgmtNamespaceFormatSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
@@ -536,7 +503,6 @@ export const defaultRules = [
   new TspConfigGoDpServiceDirMatchPatternSubRule(),
   new TspConfigGoDpPackageDirectoryMatchPatternSubRule(),
   new TspConfigGoDpModuleMatchPatternSubRule(),
-  new TspConfigGoMgmtPackageDirFormatSubRule(),
   new TspConfigPythonMgmtPackageDirectorySubRule(),
   new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpPackageDirectorySubRule(),
@@ -546,8 +512,6 @@ export const defaultRules = [
   new TspConfigCsharpAzNamespaceEqualStringSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
   new TspConfigCsharpMgmtPackageDirectorySubRule(),
-  new TspConfigCsharpAzPackageDirFormatSubRule(),
-  new TspConfigCsharpMgmtPackageDirFormatSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
