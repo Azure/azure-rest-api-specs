@@ -22,3 +22,5 @@ namespace PureStorage.Block.Client {
     "clusterResourceId"
   );
 }
+
+@@clientName(PureStorage.Block, "PureStorageBlockManagementClient", "java");
