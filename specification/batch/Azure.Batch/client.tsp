@@ -318,7 +318,7 @@ interface BatchClient {
   "go"
 );
 @@clientName(Azure.Batch.BatchTaskCreateOptions, "CreateTaskOptions", "go");
-@@clientName(Azure.Batch.BatchNodeRebootKinds, "RebootNodeKinds", "go");
+@@clientName(Azure.Batch.BatchNodeRebootOptions, "RebootNodeOptions", "go");
 @@clientName(Azure.Batch.BatchNodeReimageOptions, "ReimageNodeOptions", "go");
 @@clientName(Azure.Batch.BatchNodeRemoveOptions, "RemoveNodeOptions", "go");
 @@clientName(Azure.Batch.BatchNodeUserCreateOptions,

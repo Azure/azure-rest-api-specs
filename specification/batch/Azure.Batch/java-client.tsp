@@ -1914,7 +1914,7 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
   "BatchNodeUserUpdateParameters",
   "java"
 );
-@@clientName(Azure.Batch.BatchNodeRebootKinds,
+@@clientName(Azure.Batch.BatchNodeRebootOptions,
   "BatchNodeRebootParameters",
   "java"
 );

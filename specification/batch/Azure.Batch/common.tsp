@@ -1231,7 +1231,7 @@ alias RebootNodeRequiredParameters = {
 alias RebootNodeOptionalParameters = {
   @doc("The options to use for rebooting the Compute Node.")
   @bodyRoot
-  parameters?: BatchNodeRebootKinds;
+  parameters?: BatchNodeRebootOptions;
 };
 
 alias DeallocateNodeRequiredParameters = {

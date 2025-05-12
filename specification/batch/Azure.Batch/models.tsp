@@ -4175,7 +4175,7 @@ model VirtualMachineInfo {
 }
 
 @doc("Parameters for rebooting an Azure Batch Compute Node.")
-model BatchNodeRebootKinds {
+model BatchNodeRebootOptions {
   @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   @clientName("nodeRebootKind")
   nodeRebootOption?: BatchNodeRebootKind;
