@@ -108,13 +108,13 @@ union DataflowEnpointHostType {
   EventGrid: "EventGrid",
 
   @doc("Local MQTT Type")
-  LocalMq: "LocalMq",
+  LocalBroker: "LocalBroker",
 
   @doc("EventHub Type")
   Eventhub: "Eventhub",
 
   @doc("Custom MQTT Type")
-  CustomMq: "CustomMq",
+  CustomMqtt: "CustomMqtt",
 
   @doc("Custom Kafka Type")
   CustomKafka: "CustomKafka",
