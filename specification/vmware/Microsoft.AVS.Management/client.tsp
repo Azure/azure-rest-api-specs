@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
     name: "AvsClient",
     service: Microsoft.AVS,
   },
-  "csharp,java"
+  "csharp,java,go"
 )
 @client(
   {
