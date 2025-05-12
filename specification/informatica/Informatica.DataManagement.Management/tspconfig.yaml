@@ -13,12 +13,13 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-informaticadatamanagement"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.informaticadatamanagement"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-informaticadatamanagement"
+    namespace: "com.azure.resourcemanager.informaticadatamanagement"
     flavor: "azure"
     service-name: "Informatica DataManagement"
   "@azure-tools/typespec-csharp":
@@ -28,15 +29,11 @@ options:
     namespace: "Azure.ResourceManager.InformaticaDataManagement"
   "@azure-tools/typespec-ts":
     service-dir: "sdk/informatica"
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    is-modular-library: true
+    experimental-extensible-enums: true
     package-dir: "arm-informaticadatamanagement"
     flavor: "azure"
-    packageDetails:
+    package-details:
       name: "@azure/arm-informaticadatamanagement"
 linter:
   extends:

@@ -7,12 +7,13 @@ import "./models/common.tsp";
 import "./models/chat_completions.tsp";
 import "./models/embeddings.tsp";
 import "./models/image_embeddings.tsp";
+import "./models/image_generations.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
 
+@versioned(ModelInference.Versions)
 namespace ModelInference;
 
 @doc("""
@@ -69,12 +70,34 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
 >;
 
 @doc("""
-  Returns information about the AI model.
-  The method makes a REST API call to the `/info` route on the given endpoint.
-  This method will only work when using Serverless API or Managed Compute endpoint.
-  It will not work for GitHub Models endpoint or Azure OpenAI endpoint.
+  Generates an image based on a text or image prompt.
+  The method makes a REST API call to the `/images/generations` route on the given endpoint.
   """)
 @actionSeparator("/")
-@route("info")
+@route("images/generations")
+@added(ModelInference.Versions.v2025_05_15_Preview)
+op getImageGenerations is Azure.Core.RpcOperation<
+  {
+    ...ImageGenerationsOptions;
+    ...AdditionalRequestHeaders;
+  },
+  ImageGenerationsResult
+>;
+
+@doc("""
+  Returns information about the AI model deployed.
+  The method makes a REST API call to the `/info` route on the given endpoint.
+  This method will only work when using Serverless API, Managed Compute, or Model .
+  inference endpoint. Azure OpenAI endpoints don't support i.
+  """)
 @get
-op getModelInfo is Azure.Core.RpcOperation<{}, ModelInfo>;
+@route("/info")
+op getModelInfo is Azure.Core.RpcOperation<
+  {
+    @doc("The model deployment name you want information from.")
+    @query
+    @added(ModelInference.Versions.v2025_04_01)
+    `model`?: string;
+  },
+  ModelInfo
+>;

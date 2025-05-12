@@ -14,6 +14,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Azure.ResourceManager.EntityTagProperty.eTag, "etag", "java");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @@clientName(Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
   "ManagedServiceIdentity"
 );
@@ -27,4 +28,8 @@ using Azure.ClientGenerator.Core;
 );
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
+);
+@@clientName(Microsoft.ContainerService,
+  "ContainerServiceFleetClient",
+  "javascript"
 );
