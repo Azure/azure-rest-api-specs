@@ -6,7 +6,7 @@ const apiVersionAlias: string[] = [
 
 export function isApiVersionParameter(obj: Record<string, any>) {
   if (obj["$ref"] !== undefined) {
-    const commonTypePattern = /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[2-5]\/types.json#\/parameters\/ApiVersionParameter$/;
+    const commonTypePattern = /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[2-6]\/types.json#\/parameters\/ApiVersionParameter$/;
     if (commonTypePattern.test(obj["$ref"])) return true;
 
     if (apiVersionAlias.map(a => `#/parameters/${a}`.toLowerCase()).includes((obj["$ref"] as string).toLowerCase())) return true;
@@ -26,7 +26,7 @@ const subscriptionIdAlias: string[] = [
 
 export function isSubscriptionIdParameter(obj: Record<string, any>) {
   if (obj["$ref"] !== undefined) {
-    const commonTypePattern = /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[2-5]\/types\.json#\/parameters\/SubscriptionIdParameter$/;
+    const commonTypePattern = /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[2-6]\/types\.json#\/parameters\/SubscriptionIdParameter$/;
     if (commonTypePattern.test(obj["$ref"])) return true;
 
     if (subscriptionIdAlias.map(a => `#/parameters/${a}`.toLowerCase()).includes((obj["$ref"] as string).toLowerCase())) return true;
@@ -49,7 +49,7 @@ const resourceGroupNameAlias: string[] = [
 
 export function isResourceGroupNameParameter(obj: Record<string, any>) {
   if (obj["$ref"] !== undefined) {
-    const commonTypePattern = /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[2-5]\/types\.json#\/parameters\/ResourceGroupNameParameter$/;
+    const commonTypePattern = /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[2-6]\/types\.json#\/parameters\/ResourceGroupNameParameter$/;
     if (commonTypePattern.test(obj["$ref"])) return true;
 
     if (resourceGroupNameAlias.map(a => `#/parameters/${a}`.toLowerCase()).includes((obj["$ref"] as string).toLowerCase())) return true;

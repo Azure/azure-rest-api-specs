@@ -2768,14 +2768,9 @@
           "description": "The chat message for a given chat completions prompt."
         },
         "logprobs": {
-          "type": "object",
+          "$ref": "#/definitions/ChatChoiceLogProbabilityInfo",
           "description": "The log probability information for this choice, as enabled via the 'logprobs' request option.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ChatChoiceLogProbabilityInfo"
-            }
-          ]
+          "x-nullable": true
         },
         "index": {
           "type": "integer",
@@ -3092,14 +3087,9 @@
           "description": "A value indicating whether chat completions should be streamed for this request."
         },
         "stream_options": {
-          "type": "object",
+          "$ref": "#/definitions/ChatCompletionStreamOptions",
           "description": "Options for streaming response. Only set this when you set `stream: true`.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ChatCompletionStreamOptions"
-            }
-          ],
           "x-ms-client-name": "streamOptions"
         },
         "model": {
@@ -3539,14 +3529,9 @@
           "x-ms-client-name": "contentFilterResults"
         },
         "logprobs": {
-          "type": "object",
+          "$ref": "#/definitions/CompletionsLogProbabilityModel",
           "description": "The log probabilities model for tokens associated with this completions choice.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CompletionsLogProbabilityModel"
-            }
-          ]
+          "x-nullable": true
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
@@ -3811,14 +3796,9 @@
           "description": "A value indicating whether chat completions should be streamed for this request."
         },
         "stream_options": {
-          "type": "object",
+          "$ref": "#/definitions/ChatCompletionStreamOptions",
           "description": "Options for streaming response. Only set this when you set `stream: true`.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ChatCompletionStreamOptions"
-            }
-          ],
           "x-ms-client-name": "streamOptions"
         },
         "model": {
@@ -5909,14 +5889,9 @@
           }
         },
         "file": {
-          "type": "object",
+          "$ref": "#/definitions/OpenAIFile",
           "description": "The ready File object after the Upload is completed.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/OpenAIFile"
-            }
-          ]
+          "x-nullable": true
         }
       },
       "required": [
