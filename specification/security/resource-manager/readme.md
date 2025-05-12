@@ -112,7 +112,7 @@ These settings apply only when `--tag=package-preview-2025-05` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-05'
 input-file:
-  - Microsoft.Security/preview/2025-05-01-preview/views.json
+  - Microsoft.Security/preview/2025-05-01-preview/view.json
 ```
 
 ### Tag: package-2025-03
@@ -588,7 +588,7 @@ input-file:
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2024-10-01-preview/operations.json
-- Microsoft.Security/preview/2025-05-01-preview/views.json
+- Microsoft.Security/preview/2025-05-01-preview/view.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
