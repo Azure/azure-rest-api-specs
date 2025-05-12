@@ -32,7 +32,7 @@ model DiagnosticResource is ProxyResource<DiagnosticProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation: ExtendedLocation;
+  extendedLocation?: ExtendedLocation;
 }
 
 /**

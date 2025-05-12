@@ -31,7 +31,7 @@ model AkriDiscoveryHandlerResource
   /** Edge location of the resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation: ExtendedLocation;
+  extendedLocation?: ExtendedLocation;
 }
 
 /** AkriDiscoveryHandler properties. */
