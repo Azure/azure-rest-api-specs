@@ -789,7 +789,7 @@ model EventModelProperties {
    * Gets or sets the errors associated with this event.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -821,7 +821,7 @@ model HealthErrorModel {
   /**
    * Gets or sets a list of child health errors associated with this error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   childErrors?: InnerHealthErrorModel[];
 
   /**
@@ -992,7 +992,7 @@ model FabricModelProperties {
    * Gets or sets the service resource Id.
    */
   @visibility(Lifecycle.Read)
-  serviceResourceId?: string;
+  serviceResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the fabric health.
@@ -1004,7 +1004,7 @@ model FabricModelProperties {
    * Gets or sets the list of health errors.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -1122,7 +1122,7 @@ model FabricAgentModelProperties {
    * Gets or sets the list of health errors.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -1268,14 +1268,14 @@ model JobModelProperties {
    * Gets or sets the list of tasks.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tasks?: TaskModel[];
 
   /**
    * Gets or sets the list of errors.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: ErrorModel[];
 
   /**
@@ -1328,7 +1328,7 @@ model TaskModel {
   /**
    * Gets or sets the list of children job models.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   childrenJobs?: JobModel[];
 }
 
@@ -1512,25 +1512,25 @@ model RemotePrivateEndpoint {
   /**
    * Gets or sets the list of Private Link Service Connections and gets populated for Auto approval flow.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   privateLinkServiceConnections?: PrivateLinkServiceConnection[];
 
   /**
    * Gets or sets the list of Manual Private Link Service Connections and gets populated for Manual approval flow.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   manualPrivateLinkServiceConnections?: PrivateLinkServiceConnection[];
 
   /**
    * Gets or sets the list of private link service proxies.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   privateLinkServiceProxies?: PrivateLinkServiceProxy[];
 
   /**
    * Gets or sets the list of Connection Details. This is the connection details for private endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   connectionDetails?: ConnectionDetails[];
 }
 
@@ -1576,7 +1576,7 @@ model PrivateLinkServiceProxy {
   /**
    * Gets or sets group connectivity information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   groupConnectivityInformation?: GroupConnectivityInformation[];
 }
 
@@ -1854,7 +1854,7 @@ model ProtectedItemModelProperties {
    * Gets or sets the list of health errors.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -2101,7 +2101,7 @@ model DeploymentPreflightModel {
   /**
    * Gets or sets the list of resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resources?: DeploymentPreflightResource[];
 }
 
@@ -2181,7 +2181,7 @@ model VaultModelProperties {
    * Gets or sets the service resource Id.
    */
   @visibility(Lifecycle.Read)
-  serviceResourceId?: string;
+  serviceResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the type of vault.
@@ -2282,7 +2282,7 @@ model AzStackHCIClusterProperties {
   /**
    * Gets or sets the list of AzStackHCICluster Storage Container.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageContainers: StorageContainerProperties[];
 }
 
@@ -2313,7 +2313,7 @@ model AzStackHCIFabricModelCustomProperties
    * Gets or sets the ARM Id of the AzStackHCI site.
    */
   @minLength(1)
-  azStackHciSiteId: string;
+  azStackHciSiteId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the Appliance name.
@@ -2342,13 +2342,13 @@ model AzStackHCIFabricModelCustomProperties
    * Gets or sets the Migration solution ARM Id.
    */
   @minLength(1)
-  migrationSolutionId: string;
+  migrationSolutionId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the migration hub Uri.
    */
   @visibility(Lifecycle.Read)
-  migrationHubUri?: string;
+  migrationHubUri?: url;
 
   /**
    * Gets or sets the instance type.
@@ -2385,7 +2385,7 @@ model FailoverJobModelCustomProperties extends JobModelCustomProperties {
    * Gets or sets the failed over protected item details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedItemDetails?: FailoverProtectedItemProperties[];
 
   /**
@@ -2453,13 +2453,13 @@ model HyperVMigrateFabricModelCustomProperties
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @minLength(1)
-  hyperVSiteId: string;
+  hyperVSiteId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the fabric resource Id.
    */
   @visibility(Lifecycle.Read)
-  fabricResourceId?: string;
+  fabricResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the fabric container Id.
@@ -2471,13 +2471,13 @@ model HyperVMigrateFabricModelCustomProperties
    * Gets or sets the migration solution ARM Id.
    */
   @minLength(1)
-  migrationSolutionId: string;
+  migrationSolutionId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the migration hub Uri.
    */
   @visibility(Lifecycle.Read)
-  migrationHubUri?: string;
+  migrationHubUri?: url;
 
   /**
    * Gets or sets the instance type.
@@ -2499,7 +2499,7 @@ model HyperVToAzStackHCIDiskInput {
   /**
    * Gets or sets the target storage account ARM Id.
    */
-  storageContainerId?: string;
+  storageContainerId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard disk.
@@ -2686,7 +2686,7 @@ model HyperVToAzStackHCIProtectedDiskProperties {
    * Gets or sets the ARM Id of the storage container.
    */
   @visibility(Lifecycle.Read)
-  storageContainerId?: string;
+  storageContainerId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the local path of the storage container.
@@ -2783,13 +2783,13 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the Target HCI Cluster ARM Id.
    */
   @minLength(1)
-  targetHciClusterId: string;
+  targetHciClusterId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the Target Arc Cluster Custom Location ARM Id.
    */
   @minLength(1)
-  targetArcClusterCustomLocationId: string;
+  targetArcClusterCustomLocationId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the Target AzStackHCI cluster name.
@@ -2801,18 +2801,18 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the ARM Id of the discovered machine.
    */
   @minLength(1)
-  fabricDiscoveryMachineId: string;
+  fabricDiscoveryMachineId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the list of disks to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   disksToInclude: HyperVToAzStackHCIDiskInput[];
 
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nicsToInclude: HyperVToAzStackHCINicInput[];
 
   /**
@@ -2842,13 +2842,13 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the target resource group ARM Id.
    */
   @minLength(1)
-  targetResourceGroupId: string;
+  targetResourceGroupId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the target storage container ARM Id.
    */
   @minLength(1)
-  storageContainerId: string;
+  storageContainerId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the hypervisor generation of the virtual machine.
@@ -2981,14 +2981,14 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the list of protected disks.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedDisks?: HyperVToAzStackHCIProtectedDiskProperties[];
 
   /**
    * Gets or sets the VM NIC details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedNics?: HyperVToAzStackHCIProtectedNicProperties[];
 
   /**
@@ -3081,7 +3081,7 @@ model HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nicsToInclude?: HyperVToAzStackHCINicInput[];
 
   /**
@@ -3143,25 +3143,25 @@ model HyperVToAzStackHCIReplicationExtensionModelCustomProperties
    * Gets or sets the ARM Id of the source HyperV fabric.
    */
   @minLength(1)
-  hyperVFabricArmId: string;
+  hyperVFabricArmId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the HyperV site.
    */
   @visibility(Lifecycle.Read)
-  hyperVSiteId?: string;
+  hyperVSiteId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the target AzStackHCI fabric.
    */
   @minLength(1)
-  azStackHciFabricArmId: string;
+  azStackHciFabricArmId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the AzStackHCI site.
    */
   @visibility(Lifecycle.Read)
-  azStackHciSiteId?: string;
+  azStackHciSiteId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the storage account Id.
@@ -3177,19 +3177,19 @@ model HyperVToAzStackHCIReplicationExtensionModelCustomProperties
    * Gets or sets the Uri of ASR.
    */
   @visibility(Lifecycle.Read)
-  asrServiceUri?: string;
+  asrServiceUri?: url;
 
   /**
    * Gets or sets the Uri of Rcm.
    */
   @visibility(Lifecycle.Read)
-  rcmServiceUri?: string;
+  rcmServiceUri?: url;
 
   /**
    * Gets or sets the Uri of Gateway.
    */
   @visibility(Lifecycle.Read)
-  gatewayServiceUri?: string;
+  gatewayServiceUri?: url;
 
   /**
    * Gets or sets the gateway service Id of source.
@@ -3296,7 +3296,7 @@ model OperationModelCollection {
   /**
    * Gets or sets the list of operations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: OperationModel[];
 
   /**
@@ -3367,7 +3367,7 @@ model TestFailoverJobModelCustomProperties extends JobModelCustomProperties {
    * Gets or sets the test VM details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedItemDetails?: FailoverProtectedItemProperties[];
 
   /**
@@ -3409,13 +3409,13 @@ model VMwareMigrateFabricModelCustomProperties
    * Gets or sets the ARM Id of the VMware site.
    */
   @minLength(1)
-  vmwareSiteId: string;
+  vmwareSiteId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the migration solution.
    */
   @minLength(1)
-  migrationSolutionId: string;
+  migrationSolutionId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the instance type.
@@ -3437,7 +3437,7 @@ model VMwareToAzStackHCIDiskInput {
   /**
    * Gets or sets the target storage account ARM Id.
    */
-  storageContainerId?: string;
+  storageContainerId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard disk.
@@ -3630,7 +3630,7 @@ model VMwareToAzStackHCIProtectedDiskProperties {
    * Gets or sets the ARM Id of the storage container.
    */
   @visibility(Lifecycle.Read)
-  storageContainerId?: string;
+  storageContainerId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the local path of the storage container.
@@ -3727,13 +3727,13 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the Target HCI Cluster ARM Id.
    */
   @minLength(1)
-  targetHciClusterId: string;
+  targetHciClusterId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the Target Arc Cluster Custom Location ARM Id.
    */
   @minLength(1)
-  targetArcClusterCustomLocationId: string;
+  targetArcClusterCustomLocationId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the Target AzStackHCI cluster name.
@@ -3745,13 +3745,13 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the target storage container ARM Id.
    */
   @minLength(1)
-  storageContainerId: string;
+  storageContainerId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the target resource group ARM Id.
    */
   @minLength(1)
-  targetResourceGroupId: string;
+  targetResourceGroupId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the target location.
@@ -3768,27 +3768,27 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the list of disks to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   disksToInclude: VMwareToAzStackHCIDiskInput[];
 
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nicsToInclude: VMwareToAzStackHCINicInput[];
 
   /**
    * Gets or sets the list of protected disks.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedDisks?: VMwareToAzStackHCIProtectedDiskProperties[];
 
   /**
    * Gets or sets the VM NIC details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedNics?: VMwareToAzStackHCIProtectedNicProperties[];
 
   /**
@@ -3861,7 +3861,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the ARM Id of the discovered machine.
    */
   @minLength(1)
-  fabricDiscoveryMachineId: string;
+  fabricDiscoveryMachineId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the source VM display name.
@@ -4058,7 +4058,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nicsToInclude?: VMwareToAzStackHCINicInput[];
 
   /**
@@ -4120,25 +4120,25 @@ model VMwareToAzStackHCIReplicationExtensionModelCustomProperties
    * Gets or sets the ARM Id of the source VMware fabric.
    */
   @minLength(1)
-  vmwareFabricArmId: string;
+  vmwareFabricArmId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the VMware site.
    */
   @visibility(Lifecycle.Read)
-  vmwareSiteId?: string;
+  vmwareSiteId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the target AzStackHCI fabric.
    */
   @minLength(1)
-  azStackHciFabricArmId: string;
+  azStackHciFabricArmId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the AzStackHCI site.
    */
   @visibility(Lifecycle.Read)
-  azStackHciSiteId?: string;
+  azStackHciSiteId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the storage account Id.
@@ -4154,19 +4154,19 @@ model VMwareToAzStackHCIReplicationExtensionModelCustomProperties
    * Gets or sets the Uri of ASR.
    */
   @visibility(Lifecycle.Read)
-  asrServiceUri?: string;
+  asrServiceUri?: url;
 
   /**
    * Gets or sets the Uri of Rcm.
    */
   @visibility(Lifecycle.Read)
-  rcmServiceUri?: string;
+  rcmServiceUri?: url;
 
   /**
    * Gets or sets the Uri of Gateway.
    */
   @visibility(Lifecycle.Read)
-  gatewayServiceUri?: string;
+  gatewayServiceUri?: url;
 
   /**
    * Gets or sets the gateway service Id of source.

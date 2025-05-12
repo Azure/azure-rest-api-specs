@@ -75,6 +75,11 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}"].patch.parameters[4].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}"].patch.parameters[4].schema.properties.identity
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}"].patch.parameters[5].schema.properties.properties
+  
+  - code: BodyTopLevelProperties
+    reason: These properties have already shipped in the previous API version.
+    where:
+      - $.definitions.OperationStatus
 
 ```
 
