@@ -1,6 +1,8 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
+using TypeSpec.Versioning;
+
 using Azure.ClientGenerator.Core;
 using Azure.AI.Agents;
 
@@ -106,15 +108,6 @@ using Azure.AI.Agents;
   "python"
 );
 
-@@access(Azure.AI.Agents.VectorStores.deleteVectorStore,
-  Access.internal,
-  "csharp"
-);
-@@clientName(Azure.AI.Agents.VectorStores.deleteVectorStore,
-  "InternalDeleteVectorStore",
-  "csharp"
-);
-
 // --------------------------------------------------------------------------------
 // VectorStoreFileBatches sub‐client
 // --------------------------------------------------------------------------------
@@ -155,14 +148,63 @@ using Azure.AI.Agents;
   "python"
 );
 
-@@access(Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
+// --------------------------------------------------------------------------------
+// Join Vector store, Vector store file and Vector store file bath in one namespace
+// --------------------------------------------------------------------------------
+@versioned(Versions)
+namespace Azure.AI.Agents {
+  @client(
+    {
+      name: "VectorStoresClient",
+      service: Azure.AI.Agents,
+    },
+    "csharp"
+  )
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  interface VectorStoresClient {
+    // VectorStores
+    listVectorStores is VectorStores.listVectorStores;
+    createVectorStore is VectorStores.createVectorStore;
+    getVectorStore is VectorStores.getVectorStore;
+    modifyVectorStore is VectorStores.modifyVectorStore;
+    deleteVectorStore is VectorStores.deleteVectorStore;
+    
+    // VectorStoreFiles
+    listVectorStoreFiles is VectorStoreFiles.listVectorStoreFiles;
+    createVectorStoreFile is VectorStoreFiles.createVectorStoreFile;
+    getVectorStoreFile is VectorStoreFiles.getVectorStoreFile;
+    deleteVectorStoreFile is VectorStoreFiles.deleteVectorStoreFile;
+    
+    // VectorStoreFileBatches
+    createVectorStoreFileBatch is VectorStoreFileBatches.createVectorStoreFileBatch;
+    getVectorStoreFileBatch is VectorStoreFileBatches.getVectorStoreFileBatch;
+    cancelVectorStoreFileBatch is VectorStoreFileBatches.cancelVectorStoreFileBatch;
+    listVectorStoreFileBatchFiles is VectorStoreFileBatches.listVectorStoreFileBatchFiles;
+  }
+}
+
+
+// Vector store renamings for C#
+// Vector Store
+@@access(Azure.AI.Agents.VectorStoresClient.deleteVectorStore,
   Access.internal,
   "csharp"
 );
-@@clientName(Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
+@@clientName(Azure.AI.Agents.VectorStoresClient.deleteVectorStore,
+  "InternalDeleteVectorStore",
+  "csharp"
+);
+
+// File
+@@access(Azure.AI.Agents.VectorStoresClient.deleteVectorStoreFile,
+  Access.internal,
+  "csharp"
+);
+@@clientName(Azure.AI.Agents.VectorStoresClient.deleteVectorStoreFile,
   "InternalDeleteVectorStoreFile",
   "csharp"
 );
+
 // --------------------------------------------------------------------------------
 // Persistent & Model‐level renames (csharp, java)
 // --------------------------------------------------------------------------------
