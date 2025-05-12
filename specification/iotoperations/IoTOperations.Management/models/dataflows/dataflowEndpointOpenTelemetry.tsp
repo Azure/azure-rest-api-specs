@@ -74,6 +74,6 @@ model DataflowOpenTelemetryAnonymousAuthentication
   method: Anonymous;
   
   /** Settings for the anonymous connection */
-  anonymousSettings?: DataflowEndpointAuthenticationAnonymous;
+  anonymousSettings: DataflowEndpointAuthenticationAnonymous;
 }
 
