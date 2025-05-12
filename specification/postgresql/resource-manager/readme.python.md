@@ -10,15 +10,15 @@ no-namespace-folders: true
 clear-output-folder: true
 ```
 
-### Tag: package-flexibleserver-2024-11-01-preview and python
+### Tag: package-flexibleserver-2025-01-01-preview and python
 
-These settings apply only when `--tag=package-flexibleserver-2024-11-01-preview --python` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2025-01-01-preview --python` is specified on the command line.
 Please also specify `--python-sdk-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-flexibleserver-2024-11-01-preview' && $(python)
+``` yaml $(tag) == 'package-flexibleserver-2025-01-01-preview' && $(python)
 title: PostgreSQLManagementClient
 package-name: azure-mgmt-postgresqlflexibleservers
-package-version: 1.0.0b1
+package-version: 1.1.0b2
 namespace: azure.mgmt.postgresqlflexibleservers
 output-folder: $(python-sdks-folder)/postgresqlflexibleservers/azure-mgmt-postgresqlflexibleservers/azure/mgmt/postgresqlflexibleservers
 ```
