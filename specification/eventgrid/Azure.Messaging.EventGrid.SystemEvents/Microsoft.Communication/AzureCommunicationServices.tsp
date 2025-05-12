@@ -825,7 +825,7 @@ model AcsRouterCommunicationError {
 
   /** List of Router Communication Errors */
   @visibility(Lifecycle.Read)
-  errors: AcsRouterCommunicationError[];
+  details: AcsRouterCommunicationError[];
 }
 
 /** Router Job Worker Selector */
