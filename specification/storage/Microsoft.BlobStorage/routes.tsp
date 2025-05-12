@@ -95,7 +95,7 @@ namespace Storage.Blob {
       ...TimeoutParameter;
 
       /** Include this parameter to specify that the container's metadata be returned as part of the response body. */
-      @query include?: Array<ListContainersIncludeType>;
+      @query include?: ListContainersIncludeType[];
     },
     ListContainersSegmentResponse
   >;
@@ -2106,7 +2106,10 @@ namespace Storage.Blob {
             ...IfTagsParameter;
 
             /** Blob Blocks. */
-            @body blocks: BlockLookupList;
+            @body
+            @Xml.name("BlockList")
+            @Xml.unwrapped
+            blocks: BlockLookupList;
 
             ...BlobTagsHeaderParameter;
             ...ImmutabilityPolicyExpiryParameter;
@@ -2147,7 +2150,10 @@ namespace Storage.Blob {
           },
           {
             /** Block list */
+            // TODO how does this affect the xml schema? would it end up being <blocklist><Blocklist>...</Blocklist></blocklist>?
             @body
+            @Xml.name("BlockList")
+            @Xml.unwrapped
             blockList: BlockList;
 
             ...LastModifiedResponseHeader;

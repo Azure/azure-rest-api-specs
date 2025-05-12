@@ -48,7 +48,6 @@ model BlockList {
 }
 
 /** The Block lookup list. */
-@Xml.name("BlockList")
 model BlockLookupList {
   /** The committed blocks */
   @Xml.unwrapped
@@ -509,7 +508,6 @@ union ArchiveStatus {
 }
 
 /** An Azure Storage Blob */
-@Xml.name("Blob")
 model BlobItemInternal {
   /** The name of the blob. */
   @Xml.name("Name") name: BlobName;
@@ -533,6 +531,7 @@ model BlobItemInternal {
   @Xml.name("Metadata") metadata?: BlobMetadata;
 
   /** The tags of the blob. */
+  // TODO: the swagger did specify this property as BlobTags but cant find any example responses in rest api docs that match this schema.
   @Xml.name("BlobTags") blobTags?: BlobTags;
 
   /** The object replication metadata of the blob. */
