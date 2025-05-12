@@ -25,6 +25,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
+    @sharedRoute
     createVectorStoreFileBatch is Azure.Core.Foundations.Operation<
       {
         /** The ID of the vector store for which to create a File Batch. */
@@ -122,6 +123,7 @@ namespace Azure.AI.Agents {
       /** Filter by file status. */
       @query filter?: VectorStoreFileStatusFilter,
 
+      ...ApiVersionParameter,
       ...AgentsListOptions,
     ): {
       ...AgentsPagedResult<VectorStoreFile>;

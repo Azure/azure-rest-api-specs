@@ -54,6 +54,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
+    @sharedRoute
     @route("/{vectorStoreId}")
     getVectorStore is Azure.Core.Foundations.Operation<
       {
@@ -72,6 +73,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
+    @sharedRoute
     @route("/{vectorStoreId}")
     modifyVectorStore is Azure.Core.Foundations.Operation<
       {
