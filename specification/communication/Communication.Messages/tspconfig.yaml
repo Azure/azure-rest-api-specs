@@ -58,3 +58,12 @@ options:
       name: "@azure-rest/communication-messages"
       description: "Azure client library for Azure Communication Messages services"
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir": "sdk/resourcemanager/communication"
+    package-dir: "armcommunication"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
