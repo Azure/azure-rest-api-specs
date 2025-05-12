@@ -39,3 +39,5 @@ using Azure.ClientGenerator.Core;
 //@@access(Azure.AI.Projects.ServicePatterns, Access.internal);  <== this did not work. It makes all methods internal.
 
 @@clientName(Azure.AI.Projects.SASCredentials, "SasCredentials", "java");
+@@clientName(Azure.AI.Projects.ConnectionType.AzureAISearch, "AZURE_AI_SEARCH", "java");
+@@clientName(Azure.AI.Projects.AssetCredentialResponse, "AssetCredentialResult", "java");
