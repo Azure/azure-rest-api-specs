@@ -30,7 +30,10 @@ interface TagRules {
   /**
    * Get a tag rule set for a given monitor resource.
    */
-  get is ArmResourceRead<MonitoringTagRules>;
+  get is ArmResourceRead<
+    MonitoringTagRules,
+    Error = ResourceProviderDefaultErrorResponse
+  >;
 
   /**
    * Create or update a tag rule set for a given monitor resource.
@@ -38,7 +41,8 @@ interface TagRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MonitoringTagRules,
-    Response = ArmResourceUpdatedResponse<MonitoringTagRules>
+    Response = ArmResourceUpdatedResponse<MonitoringTagRules>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -47,7 +51,8 @@ interface TagRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     MonitoringTagRules,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -55,7 +60,8 @@ interface TagRules {
    */
   list is ArmResourceListByParent<
     MonitoringTagRules,
-    Response = ArmResponse<MonitoringTagRulesListResponse>
+    Response = ArmResponse<MonitoringTagRulesListResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 }
 

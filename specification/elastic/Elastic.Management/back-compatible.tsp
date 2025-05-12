@@ -16,3 +16,8 @@ using Microsoft.Elastic;
 );
 
 @@clientName(TagRules.createOrUpdate::parameters.resource, "body");
+
+@@OpenAPI.extension(ElasticVersionsListResponse.value,
+  "x-ms-identifiers",
+  #["properties/version"]
+);

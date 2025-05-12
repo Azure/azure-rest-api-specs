@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/elastic"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -7,7 +10,41 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/elastic.json"
     examples-dir: "{project-root}/examples"
-    arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.Elastic"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-elastic"
+    namespace: "azure.mgmt.elastic"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-elastic"
+    namespace: "com.microsoft.azure.management.elastic"
+    service-name: "Elastic" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/elastic
+    package-dir: "arm-elastic"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-elastic"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/elastic"
+    package-dir: "armelastic"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

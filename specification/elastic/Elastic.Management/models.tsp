@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-
+using Azure.Core;
 namespace Microsoft.Elastic;
 
 /**
@@ -193,6 +193,50 @@ union Type {
 }
 
 /**
+ * Represents a paginated list of operations.
+ */
+@pagedResult
+model OperationListResult {
+  /**
+   * The list of operations.
+   */
+  @items
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  value: OperationResult[];
+
+  /**
+   * The URL to get the next set of results, if any.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Represents the display information for an operation.
+ */
+model OperationDisplay {
+  /**
+   * The service provider of the operation.
+   */
+  provider?: string;
+
+  /**
+   * The resource type of the operation.
+   */
+  resource?: string;
+
+  /**
+   * The name of the operation.
+   */
+  operation?: string;
+
+  /**
+   * A description of the operation.
+   */
+  description?: string;
+}
+
+/**
  * A Microsoft.Elastic REST API operation.
  */
 model OperationResult {
@@ -305,6 +349,7 @@ model MonitorProperties {
   /**
    * Status of Azure Subscription where Marketplace SaaS is located.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   saaSAzureSubscriptionStatus?: string;
 
   /**
@@ -504,21 +549,25 @@ model PlanDetails {
   /**
    * Offer ID of the plan
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   offerID?: string;
 
   /**
    * Publisher ID of the plan
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   publisherID?: string;
 
   /**
    * Term ID of the plan
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   termID?: string;
 
   /**
    * Plan ID
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   planID?: string;
 
   /**
@@ -634,7 +683,7 @@ model MonitoredSubscription {
   /**
    * The subscriptionId to be monitored.
    */
-  subscriptionId?: string;
+  subscriptionId: string;
 
   /**
    * The state of monitoring.
@@ -801,6 +850,7 @@ model DeploymentInfoResponse {
 /**
  * Marketplace SAAS Info of the resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MarketplaceSaaSInfo {
   /**
    * Marketplace Subscription
@@ -836,6 +886,7 @@ model MarketplaceSaaSInfo {
 /**
  * Marketplace Subscription
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MarketplaceSaaSInfoMarketplaceSubscription {
   /**
    * Marketplace Subscription Id. This is a GUID-formatted string.
@@ -870,6 +921,7 @@ model ExternalUserInfo {
   /**
    * Password of the user to be created or updated
    */
+  @secret
   password?: string;
 
   /**
@@ -979,12 +1031,14 @@ model ConnectedPartnerResourceProperties {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model OpenAIIntegrationRPModelListResponse
   is Azure.Core.Page<OpenAIIntegrationRPModel>;
 
 /**
  * Open AI Integration details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model OpenAIIntegrationProperties {
   /**
@@ -1005,19 +1059,20 @@ model OpenAIIntegrationProperties {
   /**
    * Value of API key for Open AI resource
    */
+  @secret
   key?: string;
 
   /**
    * Last Update Timestamp for key updation
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRefreshAt?: utcDateTime;
 }
 
 /**
  * Status of the OpenAI Integration
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model OpenAIIntegrationStatusResponse {
   /**
    * Status of the OpenAI Integration
@@ -1028,6 +1083,7 @@ model OpenAIIntegrationStatusResponse {
 /**
  * Status of the OpenAI Integration
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model OpenAIIntegrationStatusResponseProperties {
   /**
    * Status of the OpenAI Integration
@@ -1043,6 +1099,7 @@ model MonitoringTagRulesListResponse is Azure.Core.Page<MonitoringTagRules>;
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VMHostListResponse is Azure.Core.Page<VMResources>;
 
 /**
@@ -1058,6 +1115,7 @@ model VMResources {
 /**
  * The vm ingestion details to install an agent.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VMIngestionDetailsResponse {
   /**
    * The cloudId of given Elastic monitor resource.
@@ -1067,12 +1125,14 @@ model VMIngestionDetailsResponse {
   /**
    * Ingestion details to install agent on given VM.
    */
+  @secret
   ingestionKey?: string;
 }
 
 /**
  * Update VM resource collection.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VMCollectionUpdate {
   /**
    * ARM id of the VM resource.
@@ -1215,6 +1275,7 @@ model UserApiKeyResponseProperties {
   /**
    * The User Api Key Generated based on GenerateApiKey flag. This is applicable for non-Portal clients only.
    */
+  @secret
   apiKey?: string;
 }
 

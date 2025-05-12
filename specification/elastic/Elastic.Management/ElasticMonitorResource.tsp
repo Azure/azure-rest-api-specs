@@ -41,6 +41,16 @@ model ElasticMonitorResource
   identity?: IdentityProperties;
 }
 
+/**
+ * Represents the SKU of a resource.
+ */
+model ResourceSku {
+  /**
+   * The name of the SKU.
+   */
+  name: string;
+}
+
 @armResourceOperations
 interface ElasticMonitorResources {
   /**
@@ -48,14 +58,20 @@ interface ElasticMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_Get")
-  get is ArmResourceRead<ElasticMonitorResource>;
+  get is ArmResourceRead<
+    ElasticMonitorResource,
+    Error = ResourceProviderDefaultErrorResponse
+  >;
 
   /**
    * Create a monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_Create")
-  create is ArmResourceCreateOrReplaceAsync<ElasticMonitorResource>;
+  create is ArmResourceCreateOrReplaceAsync<
+    ElasticMonitorResource,
+    Error = ResourceProviderDefaultErrorResponse
+  >;
 
   /**
    * Update a monitor resource.
@@ -81,7 +97,8 @@ interface ElasticMonitorResources {
   @operationId("Monitors_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ElasticMonitorResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -91,7 +108,8 @@ interface ElasticMonitorResources {
   @operationId("Monitors_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ElasticMonitorResource,
-    Response = ArmResponse<ElasticMonitorResourceListResponse>
+    Response = ArmResponse<ElasticMonitorResourceListResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -101,7 +119,8 @@ interface ElasticMonitorResources {
   @operationId("Monitors_List")
   list is ArmListBySubscription<
     ElasticMonitorResource,
-    Response = ArmResponse<ElasticMonitorResourceListResponse>
+    Response = ArmResponse<ElasticMonitorResourceListResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -113,7 +132,8 @@ interface ElasticMonitorResources {
   monitoredResourcesList is ArmResourceActionSync<
     ElasticMonitorResource,
     void,
-    ArmResponse<MonitoredResourceListResponse>
+    ArmResponse<MonitoredResourceListResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -125,7 +145,8 @@ interface ElasticMonitorResources {
   deploymentInfoList is ArmResourceActionSync<
     ElasticMonitorResource,
     void,
-    ArmResponse<DeploymentInfoResponse>
+    ArmResponse<DeploymentInfoResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -143,7 +164,8 @@ interface ElasticMonitorResources {
       @bodyRoot
       body?: ExternalUserInfo;
     },
-    ArmResponse<ExternalUserCreationResponse>
+    ArmResponse<ExternalUserCreationResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -155,7 +177,8 @@ interface ElasticMonitorResources {
   billingInfoGet is ArmResourceActionSync<
     ElasticMonitorResource,
     void,
-    ArmResponse<BillingInfoResponse>
+    ArmResponse<BillingInfoResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -167,19 +190,22 @@ interface ElasticMonitorResources {
   connectedPartnerResourcesList is ArmResourceActionSync<
     ElasticMonitorResource,
     void,
-    ArmResponse<ConnectedPartnerResourcesListResponse>
+    ArmResponse<ConnectedPartnerResourcesListResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
    * List the vm resources currently being monitored by the Elastic monitor resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("listVMHost")
   @operationId("VMHost_List")
   vMHostList is ArmResourceActionSync<
     ElasticMonitorResource,
     void,
-    ArmResponse<VMHostListResponse>
+    ArmResponse<VMHostListResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -191,12 +217,14 @@ interface ElasticMonitorResources {
   details is ArmResourceActionSync<
     ElasticMonitorResource,
     void,
-    ArmResponse<VMIngestionDetailsResponse>
+    ArmResponse<VMIngestionDetailsResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
    * Update the vm details that will be monitored by the Elastic monitor resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("vmCollectionUpdate")
   @operationId("VMCollection_Update")
@@ -209,7 +237,8 @@ interface ElasticMonitorResources {
       @bodyRoot
       body?: VMCollectionUpdate;
     },
-    OkResponse
+    OkResponse,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -221,7 +250,8 @@ interface ElasticMonitorResources {
   upgradableVersionsDetails is ArmResourceActionSync<
     ElasticMonitorResource,
     void,
-    ArmResponse<UpgradableVersionsList>
+    ArmResponse<UpgradableVersionsList>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -239,7 +269,8 @@ interface ElasticMonitorResources {
       body?: ElasticMonitorUpgrade;
     },
     ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ElasticMonitorResource>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ElasticMonitorResource>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -251,7 +282,8 @@ interface ElasticMonitorResources {
   allTrafficFiltersList is ArmResourceActionSync<
     ElasticMonitorResource,
     void,
-    ArmResponse<ElasticTrafficFilterResponse>
+    ArmResponse<ElasticTrafficFilterResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -263,12 +295,14 @@ interface ElasticMonitorResources {
   listAssociatedTrafficFiltersList is ArmResourceActionSync<
     ElasticMonitorResource,
     void,
-    ArmResponse<ElasticTrafficFilterResponse>
+    ArmResponse<ElasticTrafficFilterResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
    * Create and Associate IP traffic filter for the given deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("createAndAssociateIPFilter")
   @operationId("createAndAssociateIPFilter_Create")
@@ -288,12 +322,14 @@ interface ElasticMonitorResources {
        */
       @query("name")
       name?: string;
-    }
+    },
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
    * Create and Associate private link traffic filter for the given deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("createAndAssociatePLFilter")
   @operationId("createAndAssociatePLFilter_Create")
@@ -319,7 +355,8 @@ interface ElasticMonitorResources {
        */
       @query("privateEndpointName")
       privateEndpointName?: string;
-    }
+    },
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -339,7 +376,8 @@ interface ElasticMonitorResources {
        */
       @query("rulesetId")
       rulesetId?: string;
-    }
+    },
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -358,7 +396,8 @@ interface ElasticMonitorResources {
        */
       @query("rulesetId")
       rulesetId?: string;
-    }
+    },
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -378,7 +417,8 @@ interface ElasticMonitorResources {
        */
       @query("rulesetId")
       rulesetId?: string;
-    }
+    },
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -397,7 +437,8 @@ interface ElasticMonitorResources {
        */
       @query("rulesetId")
       rulesetId?: string;
-    }
+    },
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**

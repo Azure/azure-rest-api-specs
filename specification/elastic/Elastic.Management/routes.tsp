@@ -1,5 +1,3 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
-
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
@@ -33,7 +31,8 @@ interface ElasticVersionsOperationGroup {
        */
       @query("region")
       region: string;
-    }
+    },
+    Error = ResourceProviderDefaultErrorResponse
   >;
 }
 
@@ -51,7 +50,10 @@ interface OrganizationsOperationGroup {
     Request = UserEmailId,
     Response = UserApiKeyResponse,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = ResourceProviderDefaultErrorResponse
+  >;
+  /**
   >;
   /**
    * Get Elastic Organization To Azure Subscription Mapping details for the logged-in user.
@@ -64,6 +66,7 @@ interface OrganizationsOperationGroup {
   getElasticToAzureSubscriptionMapping is ArmProviderActionSync<
     Response = ElasticOrganizationToAzureSubscriptionMappingResponse,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = ResourceProviderDefaultErrorResponse
   >;
 }

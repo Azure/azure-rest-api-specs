@@ -14,6 +14,7 @@ namespace Microsoft.Elastic;
 /**
  * Capture properties of Open AI resource Integration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(ElasticMonitorResource)
 model OpenAIIntegrationRPModel
   is Azure.ResourceManager.ProxyResource<OpenAIIntegrationProperties> {
@@ -25,6 +26,7 @@ model OpenAIIntegrationRPModel
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface OpenAIIntegrationRPModels {
   /**
@@ -32,21 +34,24 @@ interface OpenAIIntegrationRPModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OpenAI_Get")
-  get is ArmResourceRead<OpenAIIntegrationRPModel>;
+  get is ArmResourceRead<
+    OpenAIIntegrationRPModel,
+    Error = ResourceProviderDefaultErrorResponse
+  >;
 
   /**
    * Create or update a OpenAI integration rule for a given monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OpenAI_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<OpenAIIntegrationRPModel>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<OpenAIIntegrationRPModel,Error = ResourceProviderDefaultErrorResponse>;
 
   /**
    * Delete OpenAI integration rule for a given monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OpenAI_Delete")
-  delete is ArmResourceDeleteSync<OpenAIIntegrationRPModel>;
+  delete is ArmResourceDeleteSync<OpenAIIntegrationRPModel,Error = ResourceProviderDefaultErrorResponse>;
 
   /**
    * List OpenAI integration rule for a given monitor resource.
@@ -55,7 +60,8 @@ interface OpenAIIntegrationRPModels {
   @operationId("OpenAI_List")
   list is ArmResourceListByParent<
     OpenAIIntegrationRPModel,
-    Response = ArmResponse<OpenAIIntegrationRPModelListResponse>
+    Response = ArmResponse<OpenAIIntegrationRPModelListResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 
   /**
@@ -66,7 +72,8 @@ interface OpenAIIntegrationRPModels {
   getStatus is ArmResourceActionSync<
     OpenAIIntegrationRPModel,
     void,
-    ArmResponse<OpenAIIntegrationStatusResponse>
+    ArmResponse<OpenAIIntegrationStatusResponse>,
+    Error = ResourceProviderDefaultErrorResponse
   >;
 }
 
