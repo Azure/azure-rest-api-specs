@@ -942,14 +942,9 @@
           "description": "Open ID Connect (OIDC) Issuer Profile for the connected cluster."
         },
         "gateway": {
-          "type": "object",
+          "$ref": "#/definitions/Gateway",
           "description": "Details of the gateway used by the Arc router for connectivity.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/Gateway"
-            }
-          ]
+          "x-nullable": true
         },
         "arcAgentryConfigurations": {
           "type": "array",
