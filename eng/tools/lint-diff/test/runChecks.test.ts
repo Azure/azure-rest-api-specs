@@ -1,6 +1,6 @@
 import { vi, test, describe, beforeEach, expect, Mock } from "vitest";
 
-vi.mock("@azure-tools/specs-shared/exec", () => ({ execNpm: vi.fn() }));
+vi.mock("@azure-tools/specs-shared/exec", () => ({ execNpmExec: vi.fn() }));
 vi.mock(import("../src/util.js"), async (importOriginal) => {
   const actual = await importOriginal();
   return {
@@ -18,7 +18,7 @@ vi.mock(import("../src/markdown-utils.js"), async (importOriginal) => {
 
 import { runChecks, getAutorestErrors } from "../src/runChecks.js";
 import { AutorestRunResult } from "../src/lintdiff-types.js";
-import { execNpm } from "@azure-tools/specs-shared/exec";
+import { execNpmExec } from "@azure-tools/specs-shared/exec";
 
 describe("runChecks", () => {
   beforeEach(() => { 
@@ -26,7 +26,7 @@ describe("runChecks", () => {
   });
 
   test("sets outputs properly on tag", async () => {
-    (execNpm as Mock).mockResolvedValue({ stdout: "out", stderr: "err" });
+    (execNpmExec as Mock).mockResolvedValue({ stdout: "out", stderr: "err" });
     const runList = new Map([["readme.md", ["tag1"]]]);
 
     const actual = await runChecks("root", runList);
@@ -35,7 +35,7 @@ describe("runChecks", () => {
     expect(actual[0].stdout).toBe("out");
     expect(actual[0].stderr).toBe("err");
     
-    expect(execNpm).toHaveBeenCalledWith(
+    expect(execNpmExec).toHaveBeenCalledWith(
       expect.arrayContaining([
         expect.stringContaining("--tag=tag1"),
       ]),
@@ -44,12 +44,12 @@ describe("runChecks", () => {
   });
 
   test("coalesces null tag when no tags specified", async () => {
-    (execNpm as Mock).mockResolvedValue({ stdout: "", stderr: "" });
+    (execNpmExec as Mock).mockResolvedValue({ stdout: "", stderr: "" });
     const runList = new Map([["readme.md", []]]);
 
     const actual = await runChecks("root", runList);
     expect(actual).toHaveLength(1);
-    expect(execNpm).toHaveBeenCalledWith(
+    expect(execNpmExec).toHaveBeenCalledWith(
       expect.not.arrayContaining([expect.stringContaining("--tag")]), 
       expect.anything()
     );
@@ -57,7 +57,7 @@ describe("runChecks", () => {
 
   test("error path populates error, stdout, stderr", async () => {
     const err = { code: 1, stdout: "s", stderr: "e" };
-    (execNpm as Mock).mockRejectedValue(err);
+    (execNpmExec as Mock).mockRejectedValue(err);
     const runList = new Map([["readme.md", ["tag1", "tag2"]]]);
 
     const actual = await runChecks("root", runList);
