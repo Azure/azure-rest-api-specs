@@ -29,6 +29,13 @@ title: NginxManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-03-01-preview
+
+
+directive:
+  - suppress: LintDiff
+    reason: "This is by design to avoid high bandwidth consumption"
+    where: $.definitions.NginxDeploymentWafPolicyListResponse
+
 ```
 
 ### Tag: package-2025-03-01-preview
