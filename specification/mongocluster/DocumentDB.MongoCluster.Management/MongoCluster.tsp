@@ -78,15 +78,36 @@ scalar MongoClusterResourceId
 model MongoClusterProperties {
   /** The mode to create a mongo cluster. */
   @visibility(Lifecycle.Create)
-  createMode?: CreateMode;
+  @removed(Versions.v2025_04_01_preview)
+  @renamedFrom(Versions.v2025_04_01_preview, "createMode")
+  oldCreateMode?: CreateMode;
 
   /** The parameters to create a point-in-time restore mongo cluster. */
   @visibility(Lifecycle.Create)
-  restoreParameters?: MongoClusterRestoreParameters;
+  @removed(Versions.v2025_04_01_preview)
+  @renamedFrom(Versions.v2025_04_01_preview, "restoreParameters")
+  oldRestoreParameters?: MongoClusterRestoreParameters;
 
   /** The parameters to create a replica mongo cluster. */
   @visibility(Lifecycle.Create)
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  @removed(Versions.v2025_04_01_preview)
+  @renamedFrom(Versions.v2025_04_01_preview, "replicaParameters")
+  oldReplicaParameters?: MongoClusterReplicaParameters;
+
+  /** The mode to create a mongo cluster. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_04_01_preview)
+  createMode?: CreateMode;
+
+  /** The parameters to create a point-in-time restore mongo cluster. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_04_01_preview)
+  restoreParameters?: MongoClusterRestoreParameters;
+
+  /** The parameters to create a replica mongo cluster. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_04_01_preview)
   replicaParameters?: MongoClusterReplicaParameters;
 
   /** The administrator's login for the mongo cluster. */
