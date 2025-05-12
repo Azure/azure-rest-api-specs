@@ -52,7 +52,7 @@ model UserProperties {
 @added(Versions.v2025_04_01_preview)
 model IdentityUserProperties {
   /** The user's identity provider definition. */
-  identityProvider?: IdentityProvider,
+  identityProvider?: IdentityProvider;
 
   /** Database roles that are assigned to the user. */
   @identifiers(#[])
@@ -111,7 +111,7 @@ union EntraPrincipalType {
   /** Entra user type. */
   User: "User",
 
-  /** Entra service principal type.  */
+  /** Entra service principal type. */
   ServiePrincipal: "ServicePrincipal",
 }
 
