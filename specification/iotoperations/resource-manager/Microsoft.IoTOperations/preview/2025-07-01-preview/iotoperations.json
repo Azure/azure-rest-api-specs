@@ -10327,12 +10327,9 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "trustList": {
-          "type": "array",
-          "description": "Trust list for the registry endpoint",
-          "items": {
-            "$ref": "#/definitions/RegistryEndpointTrust"
-          },
+        "trustSettings": {
+          "$ref": "#/definitions/RegistryEndpointTrustedSettings",
+          "description": "Trust settings for the registry endpoint",
           "x-ms-identifiers": []
         }
       },
@@ -10385,25 +10382,6 @@
         "value"
       ]
     },
-    "RegistryEndpointSecretTrust": {
-      "type": "object",
-      "description": "Settings for RegistryEndpoint trust provided through a secret",
-      "properties": {
-        "secretRef": {
-          "type": "string",
-          "description": "The name of the secret."
-        }
-      },
-      "required": [
-        "secretRef"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegistryEndpointTrust"
-        }
-      ],
-      "x-ms-discriminator-value": "Secret"
-    },
     "RegistryEndpointSystemAssignedIdentityAuthentication": {
       "type": "object",
       "description": "System assigned identity authentication",
@@ -10433,34 +10411,85 @@
         }
       }
     },
-    "RegistryEndpointTrust": {
+    "RegistryEndpointTrustedSettings": {
+      "type": "object",
+      "description": "RegistryEndpointTrustedSettings properties",
+      "properties": {
+        "trustedSigningKeys": {
+          "$ref": "#/definitions/RegistryEndpointTrustedSigningKey",
+          "description": "The trust properties for the registry endpoint."
+        }
+      },
+      "required": [
+        "trustedSigningKeys"
+      ]
+    },
+    "RegistryEndpointTrustedSigningKey": {
       "type": "object",
       "description": "RegistryEndpoint Trust properties",
       "properties": {
-        "trustType": {
-          "$ref": "#/definitions/RegistryEndpointTrustType",
+        "type": {
+          "$ref": "#/definitions/RegistryEndpointTrustedSigningKeyType",
           "description": "The trust type for the registry endpoint."
         }
       },
-      "discriminator": "trustType",
+      "discriminator": "type",
       "required": [
-        "trustType"
+        "type"
       ]
     },
-    "RegistryEndpointTrustType": {
+    "RegistryEndpointTrustedSigningKeyConfigMap": {
+      "type": "object",
+      "description": "Settings for RegistryEndpoint trust provided through a configmap.",
+      "properties": {
+        "configMapRef": {
+          "type": "string",
+          "description": "The name of the configmap."
+        }
+      },
+      "required": [
+        "configMapRef"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegistryEndpointTrustedSigningKey"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigMap"
+    },
+    "RegistryEndpointTrustedSigningKeySecret": {
+      "type": "object",
+      "description": "Settings for RegistryEndpoint trust provided through a secret.",
+      "properties": {
+        "secretRef": {
+          "type": "string",
+          "description": "The name of the secret."
+        }
+      },
+      "required": [
+        "secretRef"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegistryEndpointTrustedSigningKey"
+        }
+      ],
+      "x-ms-discriminator-value": "Secret"
+    },
+    "RegistryEndpointTrustedSigningKeyType": {
       "type": "string",
-      "description": "RegistryEndpointTrustType values",
+      "description": "RegistryEndpointTrustedSigningKeyType values",
       "enum": [
         "Secret"
       ],
       "x-ms-enum": {
-        "name": "RegistryEndpointTrustType",
+        "name": "RegistryEndpointTrustedSigningKeyType",
         "modelAsString": true,
         "values": [
           {
             "name": "Secret",
             "value": "Secret",
-            "description": "Trust settings stored in a secret."
+            "description": "Trust settings stored in a Kubernetes Secret."
           }
         ]
       }

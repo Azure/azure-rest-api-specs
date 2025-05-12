@@ -44,34 +44,53 @@ model RegistryEndpointProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  /** Trust list for the registry endpoint */
+  /** Trust settings for the registry endpoint */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  trustList?: RegistryEndpointTrust[];
+  trustSettings?: RegistryEndpointTrustedSettings;
+}
+
+/** RegistryEndpointTrustedSettings properties */
+@added(Versions.`2025-07-01-preview`)
+model RegistryEndpointTrustedSettings {
+  /** The trust properties for the registry endpoint. */
+  trustedSigningKeys: RegistryEndpointTrustedSigningKey;
 }
 
 /** RegistryEndpoint Trust properties */
 @added(Versions.`2025-07-01-preview`)
-@discriminator("trustType")
-model RegistryEndpointTrust {
+@discriminator("type")
+model RegistryEndpointTrustedSigningKey {
   /** The trust type for the registry endpoint. */
-  trustType: RegistryEndpointTrustType;
+  type: RegistryEndpointTrustedSigningKeyType;
 }
 
-/** RegistryEndpointTrustType values */
+/** RegistryEndpointTrustedSigningKeyType values */
 @added(Versions.`2025-07-01-preview`)
-union RegistryEndpointTrustType {
+union RegistryEndpointTrustedSigningKeyType {
   string,
 
-  /** Trust settings stored in a secret. */
+  /** Trust settings stored in a Kubernetes Secret. */
   Secret,
+
+  /** Trust settings stored in a Kubernetes ConfigMap. */
 }
 
-/** Settings for RegistryEndpoint trust provided through a secret */
+/** Settings for RegistryEndpoint trust provided through a secret. */
 @added(Versions.`2025-07-01-preview`)
-model RegistryEndpointSecretTrust extends RegistryEndpointTrust {
+model RegistryEndpointTrustedSigningKeySecret extends RegistryEndpointTrustedSigningKey {
   /** The trust type for the registry endpoint. */
-  trustType: Secret;
+  type: Secret;
 
   /** The name of the secret. */
   secretRef: string;
+}
+
+/** Settings for RegistryEndpoint trust provided through a configmap. */
+@added(Versions.`2025-07-01-preview`)
+model RegistryEndpointTrustedSigningKeyConfigMap extends RegistryEndpointTrustedSigningKey {
+  /** The trust type for the registry endpoint. */
+  type: ConfigMap;
+
+  /** The name of the configmap. */
+  configMapRef: string;
 }
