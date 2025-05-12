@@ -67,7 +67,7 @@ union RegistryEndpointTrustType{
 }
 
 
-/** RegistryEndpointSecretTrust */
+/** Settings for RegistryEndpoint trust provided through a secret */
 @added(Versions.`2025-07-01-preview`)
 model RegistryEndpointSecretTrust extends RegistryEndpointTrust {
   /** The trust type for the registry endpoint. */
