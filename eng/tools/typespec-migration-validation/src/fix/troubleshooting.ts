@@ -1,5 +1,5 @@
 import { checkDefault } from "./default.js";
-import { checkPropertyAttributeChanged, checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
+import { checkPropertyAttributeAdded, checkPropertyAttributeChanged, checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 import { checkMinMax } from "./minMax.js";
 import { checkNullable } from "./nullable.js";
 import { checkReadOnly } from "./readonly.js";
@@ -38,11 +38,20 @@ export function suggestPrompt(jsonObj: any): string[] {
   const suggestedFixes: string[] = [];
 
   const clientNameChanges = checkPropertyAttributeChanged('x-ms-client-name', jsonObj);
-  if (clientNameChanges.length > 0) {
-    for (const change of clientNameChanges) {
-      const { path, oldValue, newValue } = change;
-      const realPath = path.split('.').filter(part => !['definitions', 'properties', 'x-ms-client-name'].includes(part)).join('.');
-      suggestedFixes.push(`Find this TypeSpec statement @@clientName(${realPath}, "${newValue}") in file back-compatible.tsp or client.tsp. Change it to @@clientName(${realPath}, "${oldValue})"`);
+  for (const change of clientNameChanges) {
+    const { path, oldValue, newValue } = change;
+    if (getPropertyName(path)) {
+      const [definitionName, propertyName] = getPropertyName(path)!; 
+      suggestedFixes.push(`Find this TypeSpec statement @@clientName(${definitionName}.${propertyName}, "${newValue}") in file back-compatible.tsp or client.tsp. Change it to @@clientName(${definitionName}.${propertyName}, "${oldValue})"`);
+    }
+  }
+
+  const clientNameAdded = checkPropertyAttributeAdded('x-ms-client-name', jsonObj);
+  for (const change of clientNameAdded) {
+    const { path, value } = change;
+    if (getPropertyName(path)) {
+      const [definitionName, propertyName] = getPropertyName(path)!; 
+      suggestedFixes.push(`Find this TypeSpec statement @@clientName(${definitionName}.${propertyName}, "${value}") in file back-compatible.tsp or client.tsp. Delete this statement`);
     }
   }
 
