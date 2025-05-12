@@ -4,11 +4,11 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
+using OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 

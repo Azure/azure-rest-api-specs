@@ -24,6 +24,9 @@ interface DrillRuns {
   @route(ServiceGroupRoute)
   get is ArmResourceRead<DrillRun, ServiceGroupParameters>;
 
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<DrillRun, ServiceGroupParameters>;
+
   /**
   POST Actions
   */
@@ -124,3 +127,24 @@ interface DrillRuns {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
+
+@armResourceOperations
+@doc("Operations for managing Drill Run child jobs.")
+interface DrillRunChildJobs {
+  @route(ServiceGroupRoute)
+  get is ArmResourceRead<DrillRunChildJob, ServiceGroupParameters>;
+
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<DrillRunChildJob, ServiceGroupParameters>;
+}
+
+@armResourceOperations
+@doc("Operations for managing Drill Run resources.")
+interface DrillRunResources {
+  @route(ServiceGroupRoute)
+  get is ArmResourceRead<DrillRunResource, ServiceGroupParameters>;
+
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<DrillRunResource, ServiceGroupParameters>;
+}
+

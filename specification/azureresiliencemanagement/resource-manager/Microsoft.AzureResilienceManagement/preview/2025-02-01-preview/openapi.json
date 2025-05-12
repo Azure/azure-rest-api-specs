@@ -76,6 +76,12 @@
     },
     {
       "name": "DrillRuns"
+    },
+    {
+      "name": "DrillRunChildJobs"
+    },
+    {
+      "name": "DrillRunResources"
     }
   ],
   "paths": {
@@ -588,6 +594,53 @@
         }
       }
     },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns": {
+      "get": {
+        "operationId": "DrillRuns_List",
+        "tags": [
+          "DrillRuns"
+        ],
+        "description": "List DrillRun resources by Drill",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRuns_List_MaximumSet": {
+            "$ref": "./examples/DrillRuns_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}": {
       "get": {
         "operationId": "DrillRuns_Get",
@@ -636,6 +689,121 @@
         "x-ms-examples": {
           "DrillRuns_Get_MaximumSet": {
             "$ref": "./examples/DrillRuns_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/drillRunChildJobs": {
+      "get": {
+        "operationId": "DrillRunChildJobs_List",
+        "tags": [
+          "DrillRunChildJobs"
+        ],
+        "description": "List DrillRunChildJob resources by DrillRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunChildJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRunChildJobs_List_MaximumSet": {
+            "$ref": "./examples/DrillRunChildJobs_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/drillRunChildJobs/{drillRunChildJobName}": {
+      "get": {
+        "operationId": "DrillRunChildJobs_Get",
+        "tags": [
+          "DrillRunChildJobs"
+        ],
+        "description": "Get a DrillRunChildJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunChildJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the recovery child job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunChildJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRunChildJobs_Get_MaximumSet": {
+            "$ref": "./examples/DrillRunChildJobs_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -810,6 +978,121 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/recoveryJobResources": {
+      "get": {
+        "operationId": "DrillRunResources_List",
+        "tags": [
+          "DrillRunResources"
+        ],
+        "description": "List DrillRunResource resources by DrillRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRunResources_List_MaximumSet": {
+            "$ref": "./examples/DrillRunResources_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/recoveryJobResources/{recoveryJobResourceName}": {
+      "get": {
+        "operationId": "DrillRunResources_Get",
+        "tags": [
+          "DrillRunResources"
+        ],
+        "description": "Get a DrillRunResource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "recoveryJobResourceName",
+            "in": "path",
+            "description": "The unique name (GUID) of the recovery job resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRunResources_Get_MaximumSet": {
+            "$ref": "./examples/DrillRunResources_Get_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/reprotect": {
@@ -4877,7 +5160,6 @@
       "discriminator": "drillType",
       "required": [
         "sgId",
-        "metricsProperties",
         "roPlanProperties",
         "chaosExperimentProperties",
         "executionState",
@@ -5019,11 +5301,13 @@
         },
         "roInclusionState": {
           "$ref": "#/definitions/ResourceInclusionState",
-          "description": "Inclusion State of the Drill resource in RO"
+          "description": "Inclusion State of the Drill resource in RO",
+          "readOnly": true
         },
         "roExclusionReason": {
           "$ref": "#/definitions/RoExclusionReason",
-          "description": "Inclusion State of the Drill resource in RO"
+          "description": "Exclusion reason of the Drill resource in RO",
+          "readOnly": true
         },
         "resourceProtectionSolutionType": {
           "$ref": "#/definitions/ResourceProtectionSolutionType",
@@ -5032,28 +5316,34 @@
         },
         "readinessState": {
           "$ref": "#/definitions/DrillResourceReadinessState",
-          "description": "Readiness State of the Drill resource"
+          "description": "Readiness State of the Drill resource",
+          "readOnly": true
         },
         "faultState": {
           "$ref": "#/definitions/DrillResourceFaultState",
-          "description": "Fault State of the Drill resource"
+          "description": "Fault State of the Drill resource",
+          "readOnly": true
         },
         "faultProperties": {
           "$ref": "#/definitions/FaultProperties",
-          "description": "Fault Properties"
+          "description": "Fault Properties",
+          "readOnly": true
         },
         "haStatus": {
           "$ref": "#/definitions/HAStatus",
-          "description": "HA status of the Drill resource"
+          "description": "HA status of the Drill resource",
+          "readOnly": true
         },
         "attentionReason": {
           "$ref": "#/definitions/DrillResourceAttentionReason",
-          "description": "Attention reason if the Status is 'NeedsAttention'."
+          "description": "Attention reason if the Status is 'NeedsAttention'.",
+          "readOnly": true
         },
         "advisorHaRecommendationId": {
           "type": "string",
           "format": "arm-id",
           "description": "Associated Advisor Recommendation link, if HA is not enabled on this resource.",
+          "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -5086,9 +5376,7 @@
         "readinessState",
         "faultState",
         "faultProperties",
-        "haStatus",
-        "tAndcAssignmentError",
-        "rbacAssignmentError"
+        "haStatus"
       ]
     },
     "DrillResourceReadinessState": {
@@ -5214,6 +5502,59 @@
         "author"
       ]
     },
+    "DrillRunChildJob": {
+      "type": "object",
+      "description": "DrillRun Child Job a AzureResilienceProviderHub resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DrillRunChildJobProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DrillRunChildJobListResult": {
+      "type": "object",
+      "description": "The response of a DrillRunChildJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DrillRunChildJob items on this page",
+          "items": {
+            "$ref": "#/definitions/DrillRunChildJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DrillRunChildJobProperties": {
+      "type": "object",
+      "description": "Definition of Drill Run child job properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the recovery child job.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChildJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DrillRunChild"
+    },
     "DrillRunFailoverRequest": {
       "type": "object",
       "description": "Request body for Failover API.",
@@ -5225,6 +5566,27 @@
       },
       "required": [
         "failoverProperties"
+      ]
+    },
+    "DrillRunListResult": {
+      "type": "object",
+      "description": "The response of a DrillRun list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DrillRun items on this page",
+          "items": {
+            "$ref": "#/definitions/DrillRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DrillRunOperationVerbs": {
@@ -5281,7 +5643,8 @@
         },
         "drillMode": {
           "$ref": "#/definitions/DrillMode",
-          "description": "Drill mode."
+          "description": "Drill mode.",
+          "readOnly": true
         }
       },
       "required": [
@@ -5295,6 +5658,59 @@
         }
       ],
       "x-ms-discriminator-value": "DrillOober"
+    },
+    "DrillRunResource": {
+      "type": "object",
+      "description": "Represents a Drill Run job resource in the Azure Resilience Management provider namespace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DrillRunResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DrillRunResourceListResult": {
+      "type": "object",
+      "description": "The response of a DrillRunResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DrillRunResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DrillRunResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DrillRunResourceProperties": {
+      "type": "object",
+      "description": "Properties of a Drill Run resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Drill Run Resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DrillRunChild"
     },
     "DrillRunStages": {
       "type": "string",
@@ -5558,7 +5974,7 @@
         },
         "tAndcAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
-          "description": "T&C assignment error.",
+          "description": "T and C assignment error.",
           "readOnly": true
         },
         "rbacAssignmentError": {
@@ -6319,7 +6735,8 @@
         "Invalid",
         "RecoveryPlan",
         "RecoveryPlanChild",
-        "ValidationOober",
+        "DrillRunChild",
+        "DrillOober",
         "ChaosExperiment"
       ],
       "x-ms-enum": {
@@ -6334,17 +6751,22 @@
           {
             "name": "RecoveryPlan",
             "value": "RecoveryPlan",
-            "description": "Recovery Orchestration Plan created job."
+            "description": "Recovery Orchestration Plan created job resource."
           },
           {
             "name": "RecoveryPlanChild",
             "value": "RecoveryPlanChild",
-            "description": "Recovery Orchestration Plan child created job."
+            "description": "Recovery Orchestration Plan child created job resource."
           },
           {
-            "name": "ValidationOober",
-            "value": "ValidationOober",
-            "description": "Validation Oober job resource which represents a given instance of Validation."
+            "name": "DrillRunChild",
+            "value": "DrillRunChild",
+            "description": "Drill Run child job resource."
+          },
+          {
+            "name": "DrillOober",
+            "value": "DrillOober",
+            "description": "Drill Oober job resource which represents a given instance of Drill."
           },
           {
             "name": "ChaosExperiment",
@@ -6520,6 +6942,7 @@
         "RecoveryPlan",
         "RecoveryPlanChild",
         "DrillOober",
+        "DrillRunChild",
         "ChaosExperiment"
       ],
       "x-ms-enum": {
@@ -6545,6 +6968,11 @@
             "name": "DrillOober",
             "value": "DrillOober",
             "description": "Drill Oober job which represents a given instance of Drill."
+          },
+          {
+            "name": "DrillRunChild",
+            "value": "DrillRunChild",
+            "description": "Drill Run child job."
           },
           {
             "name": "ChaosExperiment",
@@ -6605,21 +7033,18 @@
       "type": "object",
       "description": "Response body for MarkAsComplete API.",
       "properties": {
-        "supportedActions": {
+        "supportedVerbsForStage": {
           "type": "array",
           "description": "Matrix of Actions supported on Operations.",
           "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "$ref": "#/definitions/SupportedVerbsForStage"
           },
           "readOnly": true,
           "x-ms-identifiers": []
         }
       },
       "required": [
-        "supportedActions"
+        "supportedVerbsForStage"
       ]
     },
     "MetricsProperties": {
@@ -8308,6 +8733,28 @@
       "required": [
         "serviceLevelIndicatorResourceId",
         "serviceLevelObjectiveResourceId"
+      ]
+    },
+    "SupportedVerbsForStage": {
+      "type": "object",
+      "description": "Model for supported verbs for stage.",
+      "properties": {
+        "drillRunStage": {
+          "$ref": "#/definitions/DrillRunStages",
+          "description": "Name of stage."
+        },
+        "supportedVerbs": {
+          "type": "array",
+          "description": "Supported Verbs for stage.",
+          "items": {
+            "$ref": "#/definitions/DrillRunOperationVerbs"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "drillRunStage",
+        "supportedVerbs"
       ]
     },
     "SystemMetadata": {
