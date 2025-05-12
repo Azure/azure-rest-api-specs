@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -27,7 +28,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
-    listFiles is Azure.Core.Foundations.Operation<
+    listFiles is ServicePatterns.AgentOperation<
       {
         @doc("The purpose of the file.")
         @query
@@ -50,7 +51,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
     @post
-    uploadFile is Azure.Core.Foundations.Operation<
+    uploadFile is ServicePatterns.AgentOperation<
       {
         @doc("The name of the file to upload.")
         @header
@@ -91,7 +92,7 @@ namespace Azure.AI.Agents {
     @delete
     @doc("Delete a previously uploaded file.")
     @route("/{fileId}")
-    deleteFile is Azure.Core.Foundations.Operation<
+    deleteFile is ServicePatterns.AgentOperation<
       {
         @doc("The ID of the file to delete.")
         @encodedName("application/json", "file_id")
@@ -112,7 +113,7 @@ namespace Azure.AI.Agents {
     @get
     @route("/{fileId}")
     @doc("Returns information about a specific file. Does not retrieve file content.")
-    getFile is Azure.Core.Foundations.Operation<
+    getFile is ServicePatterns.AgentOperation<
       {
         @doc("The ID of the file to retrieve.")
         @path
@@ -130,7 +131,7 @@ namespace Azure.AI.Agents {
     @get
     @route("/{fileId}/content")
     @doc("Retrieves the raw content of a specific file.")
-    getFileContent is Azure.Core.Foundations.Operation<
+    getFileContent is ServicePatterns.AgentOperation<
       {
         @doc("The ID of the file to retrieve.")
         @path

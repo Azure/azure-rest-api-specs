@@ -5,6 +5,7 @@ import "@typespec/versioning";
 
 import "../common/models.tsp";
 import "./models.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -30,7 +31,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    createMessage is Azure.Core.Foundations.Operation<
+    createMessage is ServicePatterns.AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -82,7 +83,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
     @route("/{messageId}")
-    getMessage is Azure.Core.Foundations.Operation<
+    getMessage is ServicePatterns.AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -107,7 +108,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{messageId}")
-    updateMessage is Azure.Core.Foundations.Operation<
+    updateMessage is ServicePatterns.AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path

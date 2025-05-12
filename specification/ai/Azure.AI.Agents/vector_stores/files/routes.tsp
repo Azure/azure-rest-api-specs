@@ -4,6 +4,7 @@ import "@typespec/versioning";
 
 import "./models.tsp";
 import "../../common/models.tsp";
+import "../../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -40,7 +41,7 @@ namespace Azure.AI.Agents {
       ...AgentsListOptions,
     ): {
       ...AgentsPagedResult<VectorStoreFile>;
-    };
+    } | ServicePatterns.AgentV1Error;
 
     /**
      * Create a vector store file by attaching a file to a vector store.
@@ -49,7 +50,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    createVectorStoreFile is Azure.Core.Foundations.Operation<
+    createVectorStoreFile is ServicePatterns.AgentOperation<
       {
         /** The ID of the vector store for which to create a File. */
         @doc("Identifier of the vector store.")
@@ -81,7 +82,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     @route("/{fileId}")
-    getVectorStoreFile is Azure.Core.Foundations.Operation<
+    getVectorStoreFile is ServicePatterns.AgentOperation<
       {
         /** The ID of the vector store that the file belongs to. */
         @doc("Identifier of the vector store.")
@@ -104,7 +105,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @delete
     @route("/{fileId}")
-    deleteVectorStoreFile is Azure.Core.Foundations.Operation<
+    deleteVectorStoreFile is ServicePatterns.AgentOperation<
       {
         /** The ID of the vector store that the file belongs to. */
         @doc("Identifier of the vector store.")

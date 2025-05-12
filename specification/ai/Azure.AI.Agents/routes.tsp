@@ -3,6 +3,8 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "./servicepatterns.tsp";
+
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -24,7 +26,7 @@ namespace Azure.AI.Agents;
 @post
 @route("/assistants")
 @added(Versions.v2025_05_01)
-op createAgent is Azure.Core.Foundations.Operation<
+op createAgent is ServicePatterns.AgentOperation<
   {
     ...CreateAgentOptions;
   },
@@ -46,7 +48,7 @@ op createAgent is Azure.Core.Foundations.Operation<
 @added(Versions.v2025_05_01)
 op listAgents(...ApiVersionParameter, ...AgentsListOptions): {
   ...AgentsPagedResult<Agent>;
-};
+} | ServicePatterns.AgentV1Error;
 
 /**
  * Retrieves an existing agent.
@@ -61,7 +63,7 @@ op listAgents(...ApiVersionParameter, ...AgentsListOptions): {
 @get
 @route("/assistants/{assistantId}")
 @added(Versions.v2025_05_01)
-op getAgent is Azure.Core.Foundations.Operation<
+op getAgent is ServicePatterns.AgentOperation<
   {
     /**
      * The request details to use when retrieving an agent.
@@ -83,7 +85,7 @@ op getAgent is Azure.Core.Foundations.Operation<
 @post
 @route("/assistants/{assistantId}")
 @added(Versions.v2025_05_01)
-op updateAgent is Azure.Core.Foundations.Operation<
+op updateAgent is ServicePatterns.AgentOperation<
   {
     /**
      * The request details to use when modifying an existing agent.
@@ -105,7 +107,7 @@ op updateAgent is Azure.Core.Foundations.Operation<
 @delete
 @route("/assistants/{assistantId}")
 @added(Versions.v2025_05_01)
-op deleteAgent is Azure.Core.Foundations.Operation<
+op deleteAgent is ServicePatterns.AgentOperation<
   {
     /**
      * The request details to use when deleting an agent.

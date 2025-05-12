@@ -4,6 +4,7 @@ import "@typespec/versioning";
 
 import "./models.tsp";
 import "../common/models.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -27,7 +28,7 @@ namespace Azure.AI.Agents {
     @list
     listVectorStores(...ApiVersionParameter, ...AgentsListOptions): {
       ...AgentsPagedResult<VectorStore>;
-    };
+    } | ServicePatterns.AgentV1Error;
 
     /**
      * Creates a vector store.
@@ -36,7 +37,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    createVectorStore is Azure.Core.Foundations.Operation<
+    createVectorStore is ServicePatterns.AgentOperation<
       {
         /**
          * Request object for creating a vector store.
@@ -55,7 +56,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     @route("/{vectorStoreId}")
-    getVectorStore is Azure.Core.Foundations.Operation<
+    getVectorStore is ServicePatterns.AgentOperation<
       {
         /** The ID of the vector store to retrieve. */
         @doc("Identifier of the vector store.")
@@ -73,7 +74,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{vectorStoreId}")
-    modifyVectorStore is Azure.Core.Foundations.Operation<
+    modifyVectorStore is ServicePatterns.AgentOperation<
       {
         /** The ID of the vector store to modify. */
         @doc("Identifier of the vector store.")
@@ -97,7 +98,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @delete
     @route("/{vectorStoreId}")
-    deleteVectorStore is Azure.Core.Foundations.Operation<
+    deleteVectorStore is ServicePatterns.AgentOperation<
       {
         /** The ID of the vector store to delete. */
         @doc("Identifier of the vector store.")
