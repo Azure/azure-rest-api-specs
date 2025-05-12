@@ -4,7 +4,7 @@ import { ExecException } from "node:child_process";
 import { getOpenapiType } from "./markdown-utils.js";
 import { getPathToDependency, isFailure } from "./util.js";
 import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
-import { execNpm } from "@azure-tools/specs-shared/exec";
+import { execNpmExec } from "@azure-tools/specs-shared/exec";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
@@ -37,11 +37,7 @@ export async function runChecks(
     for (const tag of coalescedTags) {
       console.log(`::group::Autorest for type: ${openApiType} readme: ${readme} tag: ${tag}`);
 
-      // Modify the command to use 'exec' instead of 'exec --no'
       const autorestArgs = [
-        "exec",
-        "--no",
-        "--",
         "autorest",
         "--v3",
         "--spectral",
@@ -58,13 +54,13 @@ export async function runChecks(
         autorestArgs.push(`--tag=${tag}`);
       }
       autorestArgs.push(changedFilePath);
-      
+
       const autorestCommand = `npm ${autorestArgs.join(" ")}`;
       console.log(`\tAutorest command: ${autorestCommand}`);
 
       let lintDiffResult: AutorestRunResult;
       try {
-        const executionResult = await execNpm(autorestArgs, { maxBuffer: MAX_EXEC_BUFFER });
+        const executionResult = await execNpmExec(autorestArgs, { maxBuffer: MAX_EXEC_BUFFER });
 
         lintDiffResult = {
           autorestCommand,
