@@ -18,4 +18,4 @@ using Microsoft.Kubernetes;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ConnectedCluster.properties);
 
-@@scope(Operations, "!csharp");
+@@scope(Operations.list, "!csharp");
