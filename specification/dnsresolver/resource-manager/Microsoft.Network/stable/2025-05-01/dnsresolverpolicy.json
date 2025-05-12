@@ -64,14 +64,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The DNS resolver policy has been created.",
+          "200": {
+            "description": "The DNS resolver policy has been updated.",
             "schema": {
               "$ref": "#/definitions/DnsResolverPolicy"
             }
           },
-          "200": {
-            "description": "The DNS resolver policy has been updated.",
+          "201": {
+            "description": "The DNS resolver policy has been created.",
             "schema": {
               "$ref": "#/definitions/DnsResolverPolicy"
             }
@@ -368,14 +368,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The DNS security rule has been created.",
+          "200": {
+            "description": "The DNS security rule has been updated.",
             "schema": {
               "$ref": "#/definitions/DnsSecurityRule"
             }
           },
-          "200": {
-            "description": "The DNS security rule has been updated.",
+          "201": {
+            "description": "The DNS security rule has been created.",
             "schema": {
               "$ref": "#/definitions/DnsSecurityRule"
             }
@@ -642,14 +642,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The DNS resolver policy virtual network link has been created.",
+          "200": {
+            "description": "The DNS resolver policy virtual network link has been updated.",
             "schema": {
               "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
             }
           },
-          "200": {
-            "description": "The DNS resolver policy virtual network link has been updated.",
+          "201": {
+            "description": "The DNS resolver policy virtual network link has been created.",
             "schema": {
               "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
             }
@@ -913,14 +913,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The DNS resolver domain list has been created.",
+          "200": {
+            "description": "The DNS resolver domain list has been updated.",
             "schema": {
               "$ref": "#/definitions/DnsResolverDomainList"
             }
           },
-          "200": {
-            "description": "The DNS resolver domain list has been updated.",
+          "201": {
+            "description": "The DNS resolver domain list has been created.",
             "schema": {
               "$ref": "#/definitions/DnsResolverDomainList"
             }
@@ -934,8 +934,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Upsert DNS resolver domain list": {
+          "Upsert DNS resolver domain list with less than 1000 domains": {
             "$ref": "./examples/DnsResolverDomainList_Put.json"
+          },
+          "Upsert DNS resolver domain list with bulk number of domains": {
+            "$ref": "./examples/DnsResolverDomainList_BulkDomains_Put.json"
           }
         }
       },
@@ -1084,8 +1087,11 @@
           }
         },
         "x-ms-examples": {
-          "Retrieve DNS resolver domain list": {
+          "Retrieve DNS resolver domain list with less than 1000 domains": {
             "$ref": "./examples/DnsResolverDomainList_Get.json"
+          },
+          "Retrieve DNS resolver domain list with bulk number of domains": {
+            "$ref": "./examples/DnsResolverDomainList_BulkDomains_Get.json"
           }
         }
       }
@@ -1173,6 +1179,75 @@
         "x-ms-examples": {
           "List DNS resolver domain lists by subscription": {
             "$ref": "./examples/DnsResolverDomainList_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverDomainLists/{dnsResolverDomainListName}/bulk": {
+      "post": {
+        "tags": [
+          "DnsResolverDomainLists"
+        ],
+        "operationId": "DnsResolverDomainLists_Bulk",
+        "description": "Uploads or downloads the list of domains for a DNS Resolver Domain List from a storage link.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverDomainListNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainListBulk"
+            },
+            "description": "Parameters supplied to the bulk domain list operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver domain list bulk request was successful.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainList"
+            }
+          },
+          "202": {
+            "description": "The operation to upload/download domains to the DNS Resolver Domain List has been accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Upload DNS resolver domain list domains": {
+            "$ref": "./examples/DnsResolverDomainList_BulkUpload.json"
+          },
+          "Download DNS resolver domain list domains": {
+            "$ref": "./examples/DnsResolverDomainList_BulkDownload.json"
           }
         }
       }
@@ -1307,8 +1382,8 @@
       "type": "object",
       "required": [
         "priority",
-        "action",
-        "dnsResolverDomainLists"
+        "dnsResolverDomainLists",
+        "action"
       ],
       "properties": {
         "priority": {
@@ -1478,17 +1553,6 @@
             "name": "actionType",
             "modelAsString": true
           }
-        },
-        "blockResponseCode": {
-          "type": "string",
-          "description": "The response code for block actions.",
-          "enum": [
-            "SERVFAIL"
-          ],
-          "x-ms-enum": {
-            "name": "BlockResponseCode",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -1582,9 +1646,6 @@
     "DnsResolverDomainListProperties": {
       "description": "Represents the properties of a DNS resolver domain list.",
       "type": "object",
-      "required": [
-        "domains"
-      ],
       "properties": {
         "domains": {
           "description": "The domains in the domain list.",
@@ -1592,6 +1653,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "domainsUrl": {
+          "description": "The URL for bulk upload or download for domain lists containing larger set of domains.",
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
           "description": "The current provisioning state of the DNS resolver domain list. This is a read-only property and any attempt to set this value will be ignored.",
@@ -1608,9 +1674,6 @@
     "DnsResolverDomainList": {
       "description": "Describes a DNS resolver domain list.",
       "type": "object",
-      "required": [
-        "properties"
-      ],
       "properties": {
         "etag": {
           "description": "ETag of the DNS resolver domain list.",
@@ -1652,7 +1715,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Updatable properties of the DNS resolver policy virtual network link.",
+          "description": "Updatable properties of the DNS resolver domain list.",
           "$ref": "#/definitions/DnsResolverDomainListPatchProperties",
           "x-ms-client-flatten": true
         },
@@ -1688,6 +1751,38 @@
         }
       }
     },
+    "DnsResolverDomainListBulkProperties": {
+      "description": "Describes DNS resolver domain list properties for bulk UPLOAD or DOWNLOAD operations.",
+      "type": "object",
+      "required": [
+        "storageUrl",
+        "action"
+      ],
+      "properties": {
+        "storageUrl": {
+          "description": "The storage account blob file URL to be used in the bulk upload or download request of DNS resolver domain list.",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action to take in the request, Upload or Download.",
+          "$ref": "#/definitions/DnsResolverDomainListBulkActionType"
+        }
+      }
+    },
+    "DnsResolverDomainListBulk": {
+      "description": "Describes a DNS resolver domain list for bulk UPLOAD or DOWNLOAD operations.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of the DNS resolver domain list upload or download request.",
+          "$ref": "#/definitions/DnsResolverDomainListBulkProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ProvisioningState": {
       "description": "The current provisioning state of the resource.",
       "type": "string",
@@ -1702,6 +1797,18 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "DnsResolverDomainListBulkActionType": {
+      "description": "The action type in requests for bulk upload or download of a DNS resolver domain list.",
+      "type": "string",
+      "enum": [
+        "Upload",
+        "Download"
+      ],
+      "x-ms-enum": {
+        "name": "Action",
         "modelAsString": true
       }
     },
