@@ -36,6 +36,17 @@ These settings apply only when `--tag=package-preview-2025-03-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-03-01-preview'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2025-03-01-preview/desktopvirtualization.json
+suppressions:
+  - code: BodyTopLevelProperties
+    from: desktopvirtualization.json
+    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostProvisioningStatuses/default'].*
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostProvisioningStatuses/default'].*
 ```
 
 ### Tag: package-preview-2024-11-01-preview
