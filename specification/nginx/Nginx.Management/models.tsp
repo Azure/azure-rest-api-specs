@@ -106,7 +106,6 @@ model NginxDeploymentApiKeyRequestProperties {
   /**
    * The time after which this Dataplane API Key is no longer valid.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 }
 
@@ -122,7 +121,6 @@ model NginxDeploymentApiKeyResponseProperties {
   /**
    * The time after which this Dataplane API Key is no longer valid.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 }
 
@@ -153,7 +151,6 @@ model NginxCertificateProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   keyVaultSecretCreated?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -675,7 +672,6 @@ model WebApplicationFirewallPackage {
   /**
    * The date and time of the package revision.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   revisionDatetime: utcDateTime;
 }
 
