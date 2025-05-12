@@ -206,6 +206,14 @@ directive:
     from: Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
     where: $.definitions.CloudEventEvent.properties.data_base64
     reason: This parameter name is defined by the Cloud Events 1.0 specification
+  - suppress: AvoidAnonymousTypes
+    from: Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
+    where: $.definitions.ApiManagementCircuitBreakerProperties.properties.additionalProperties
+    reason: Using proper TypeSpec for this type generates some extra metadata that's not an error
+  - suppress: AvoidAnonymousTypes
+    from: Microsoft.EventGrid/stable/2024-01-01/GeneratedSystemEvents.json
+    where: $.definitions.ApiManagementCircuitBreakerProperties.properties.additionalProperties
+    reason: Using proper TypeSpec for this type generates some extra metadata that's not an error
 ```
 
 ---
