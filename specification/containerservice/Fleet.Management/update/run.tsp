@@ -43,6 +43,13 @@ scalar FleetUpdateStrategyResourceId
     }
   ]>;
 
+scalar AutoUpgradeProfileId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/fleets/updateRuns",
+    }
+  ]>;
+
 @doc("The properties of the UpdateRun.")
 model UpdateRunProperties {
   @visibility(Lifecycle.Read)
@@ -79,6 +86,11 @@ model UpdateRunProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the UpdateRun.")
   status?: UpdateRunStatus;
+
+  @visibility(Lifecycle.Read)
+  @doc("AutoUpgradeProfileId is the id of an auto upgrade profile resource.")
+  @added(Versions.v2025_03_01)
+  autoUpgradeProfileId?: AutoUpgradeProfileId;
 }
 
 @doc("The update to be applied to the ManagedClusters.")
@@ -200,7 +212,7 @@ model UpdateRunStatus {
   status?: UpdateStatus;
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @doc("The stages composing an update run. Stages are run sequentially withing an UpdateRun.")
   stages?: UpdateStageStatus[];
 
@@ -238,7 +250,7 @@ model UpdateStageStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @doc("The list of groups to be updated as part of this UpdateStage.")
   groups?: UpdateGroupStatus[];
 
@@ -258,7 +270,7 @@ model UpdateGroupStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @doc("The list of member this UpdateGroup updates.")
   members?: MemberUpdateStatus[];
 }
