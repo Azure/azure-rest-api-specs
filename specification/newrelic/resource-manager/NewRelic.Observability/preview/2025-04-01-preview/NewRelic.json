@@ -280,6 +280,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/validateAndActivateSaaS": {
+      "get": {
+        "tags": [
+          "SaaS"
+        ],
+        "operationId": "SaaS_List",
+        "description": "List and Activate the saas",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PublisherIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List and Activate SaaS completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaaSInfoListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ValidateAndActivateSaaS": {
+            "$ref": "./examples/GetSaaSInfo.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors": {
       "get": {
         "tags": [
@@ -1417,48 +1459,6 @@
         "x-ms-examples": {
           "Monitors_GetMonitoredSubscriptions": {
             "$ref": "./examples/MonitoredSubscriptions_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/validateAndActivateSaaS": {
-      "get": {
-        "tags": [
-          "validateAndActivateSaaS"
-        ],
-        "operationId": "validateAndActivateSaaS",
-        "description": "Get the saas id from the marketplace token",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PublisherIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Validation and Activate SaaS completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SaaSInfoListResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "GetSaaSInfo": {
-            "$ref": "./examples/GetSaaSInfo.json"
           }
         }
       }
