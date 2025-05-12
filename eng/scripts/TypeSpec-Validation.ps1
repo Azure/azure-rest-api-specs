@@ -20,7 +20,8 @@ if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) {
 $typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -BaseCommitish:$BaseCommitish `
   -HeadCommitish:$HeadCommitish `
-  -CheckAll:$CheckAll
+  -CheckAll:$CheckAll `
+  -IgnoreCoreFiles:$true
 
 if ($TotalShards -gt 1 -and $TotalShards -le $typespecFolders.Count) { 
   $typespecFolders = shardArray $typespecFolders $Shard $TotalShards
