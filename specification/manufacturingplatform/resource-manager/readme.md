@@ -27,16 +27,16 @@ These are the global settings for the manufacturingplatform.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2025-03-01
+tag: package-2024-02-01-preview
 ```
 
-### Tag: package-2025-03-01
+### Tag: package-2024-02-01-preview
 
-These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-02-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-03-01'
+```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
-  - Microsoft.ManufacturingPlatform/stable/2025-03-01/manufacturingplatform.json
+  - Microsoft.ManufacturingPlatform/preview/2024-02-01-preview/manufacturingplatform.json
 suppressions:
   - code: AvoidAnonymousTypes
     from: manufacturingplatform.json
