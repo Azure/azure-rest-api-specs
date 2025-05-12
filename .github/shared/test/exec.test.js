@@ -1,6 +1,6 @@
 import semver from "semver";
 import { describe, expect, it } from "vitest";
-import { execFile, execNpm, isExecError } from "../src/exec.js";
+import { execFile, execNpm, execNpmExec, isExecError } from "../src/exec.js";
 import { consoleLogger } from "../src/logger.js";
 
 describe("execFile", () => {
@@ -53,6 +53,15 @@ describe("execNpm", () => {
         code: 1,
       }),
     );
+  });
+});
+
+describe("execNpmExec", () => {
+  it("runs npm --version", async() => {
+    await expect(execNpmExec(["npm", "--version"])).resolves.toEqual({
+      stdout: expect.toSatisfy((v) => semver.valid(v)),
+      stderr: "",
+    });
   });
 });
 
