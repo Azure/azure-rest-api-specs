@@ -306,6 +306,7 @@ model HealthBotKey {
   /**
    * The value of the key.
    */
+  @secret
   value?: string;
 }
 
