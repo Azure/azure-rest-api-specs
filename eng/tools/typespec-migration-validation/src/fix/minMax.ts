@@ -17,7 +17,7 @@ export function checkMinMax(jsonObj: any): string[] {
         const { path, value } = change;
         if (getPropertyName(path)) {
           const [definitionName, propertyName] = getPropertyName(path)!;
-          suggestedFixes.push(`Find a model called "${definitionName}". Add \`@${decoratorName}(${value})\` onto its property "${propertyName}". If the property cannot access directly, add \`@@${decoratorName}(${definitionName}.${propertyName}, ${value})\` right after the model.`);
+          suggestedFixes.push(`Find a model called "${definitionName}". Add \`@${decoratorName}(${value})\` onto its property "${propertyName}". If the property cannot access directly, add \`@@${decoratorName}(${definitionName}.${propertyName}, ${value});\` right after the model.`);
         }
       }
     }
