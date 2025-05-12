@@ -208,6 +208,14 @@ directive:
     reason: This parameter name is defined by the Cloud Events 1.0 specification
 ```
 
+```yaml
+suppressions:
+  - code: AvoidAnonymousTypes
+    where: $.definitions.ApiManagementCircuitBreakerProperties.properties.rules.additionalProperties
+  - code: AdditionalPropertiesObject
+    where: $.definitions.ApiManagementCircuitBreakerProperties.properties.rules.additionalProperties
+```
+
 ---
 # Code Generation
 
