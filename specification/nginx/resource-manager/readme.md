@@ -39,12 +39,12 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 input-file:
   - NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json
 suppressions:
-  - code: LintDiff
+  - code: GetCollectionResponseSchema
     from: swagger.json
     where: $.definitions.NginxDeploymentWafPolicyListResponse
     reason: This is by design to avoid high bandwidth consumption
 
-  - code: LintDiff
+  - code: GetCollectionResponseSchema
     from: swagger.json
     where: $.definitions.NginxDeploymentWafPolicy
     reason: This is by design to avoid high bandwidth consumption
