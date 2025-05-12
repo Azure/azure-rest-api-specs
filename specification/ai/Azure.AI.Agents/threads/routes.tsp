@@ -108,7 +108,7 @@ namespace Azure.AI.Agents {
         @path
         threadId: string;
       },
-      ThreadDeletionStatus
+      void
     >;
   }
 }

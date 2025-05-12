@@ -116,7 +116,7 @@ namespace Azure.AI.Agents {
         @path
         fileId: string;
       },
-      VectorStoreFileDeletionStatus
+      void
     >;
   }
 }

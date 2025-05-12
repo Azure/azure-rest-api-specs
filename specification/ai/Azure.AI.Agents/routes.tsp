@@ -112,5 +112,5 @@ op deleteAgent is Azure.Core.Foundations.Operation<
      */
     ...DeleteAgentOptions;
   },
-  AgentDeletionStatus
+  void
 >;

@@ -60,7 +60,7 @@ namespace Azure.AI.Agents {
         @multipartBody body: {
           @doc("The file data, in bytes.")
           @clientName("Data", "csharp")
-          file: HttpPart<File>;
+          file: HttpPart<bytes>;
 
           @doc("The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.")
           purpose: HttpPart<FilePurpose>;
@@ -98,7 +98,7 @@ namespace Azure.AI.Agents {
         @path
         fileId: string;
       },
-      FileDeletionStatus
+      void
     >;
 
     /**
