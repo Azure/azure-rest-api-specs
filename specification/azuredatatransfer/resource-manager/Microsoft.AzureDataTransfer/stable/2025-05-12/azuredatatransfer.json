@@ -356,13 +356,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Enables a flow.",
+            "description": "Enabled the flow.",
             "schema": {
               "$ref": "#/definitions/flow"
             }
           },
           "202": {
-            "description": "Enables a flow.",
+            "description": "Enabled the flow.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -411,13 +411,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Disables a flow.",
+            "description": "Disabled the flow.",
             "schema": {
               "$ref": "#/definitions/flow"
             }
           },
           "202": {
-            "description": "Disables a flow.",
+            "description": "Disabled the flow.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -475,13 +475,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Links a flow.",
+            "description": "Linked the flows.",
             "schema": {
               "$ref": "#/definitions/flow"
             }
           },
           "202": {
-            "description": "Links a flow.",
+            "description": "Linked the flows.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -539,13 +539,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Sets a flow passphrase.",
+            "description": "Successfully set the flow passphrase.",
             "schema": {
               "$ref": "#/definitions/flow"
             }
           },
           "202": {
-            "description": "Sets a flow passphrase.",
+            "description": "Accepted request to set the flow passphrase.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -594,13 +594,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Generate and set the flow passphrase.",
+            "description": "Generated and set the flow passphrase.",
             "schema": {
               "$ref": "#/definitions/flow"
             }
           },
           "202": {
-            "description": "Generate and set the flow passphrase.",
+            "description": "Accepted request to generate and set the flow passphrase.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -700,13 +700,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The source addresses of the flow.",
+            "description": "Successfully set the source addresses of the flow.",
             "schema": {
               "$ref": "#/definitions/flow"
             }
           },
           "202": {
-            "description": "The source addresses of the flow.",
+            "description": "Accepted request to set the source addresses of the flow.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -729,7 +729,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getDestinationEndpoints": {
       "post": {
-        "description": "Get the destination endpoints for the specified flow and stream ID.",
+        "description": "Get the destination endpoints for the specified flow.",
         "x-ms-examples": {
           "Get the flow stream destination endpoints": {
             "$ref": "examples/getFlowDestinationEndpoints.json"
@@ -755,7 +755,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The destination endpoints of the stream ID on this flow.",
+            "description": "The destination endpoints of this flow.",
             "schema": {
               "$ref": "#/definitions/getDestinationEndpointsResult"
             }
@@ -771,7 +771,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setDestinationEndpoints": {
       "post": {
-        "description": "Set the destination endpoints for the specified flow and stream ID.",
+        "description": "Set the destination endpoints for the specified flow.",
         "x-ms-examples": {
           "Set the flow stream destination endpoints": {
             "$ref": "examples/setFlowDestinationEndpoints.json"
@@ -796,7 +796,7 @@
           },
           {
             "name": "streamDestinationEndpoints",
-            "description": "Stream ID destination endpoints wanted",
+            "description": "Destination endpoints wanted",
             "in": "body",
             "required": true,
             "schema": {
@@ -806,13 +806,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The destination endpoint of the stream ID on this flow.",
+            "description": "Set the destination endpoints of this flow.",
             "schema": {
               "$ref": "#/definitions/flow"
             }
           },
           "202": {
-            "description": "The destination endpoint of the stream ID on this flow.",
+            "description": "Accepted request to set the destination endpoints of this flow.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -835,7 +835,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getDestinationEndpointPorts": {
       "post": {
-        "description": "Get the destination endpoint ports for the specified flow and stream ID.",
+        "description": "Get the destination endpoint ports for the specified flow.",
         "x-ms-examples": {
           "Get the flow stream destination endpoint ports": {
             "$ref": "examples/getFlowDestinationEndpointPorts.json"
@@ -861,7 +861,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The destination endpoint ports of the stream ID on this flow.",
+            "description": "The destination endpoint ports of this flow.",
             "schema": {
               "$ref": "#/definitions/getDestinationEndpointPortsResult"
             }
@@ -877,7 +877,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setDestinationEndpointPorts": {
       "post": {
-        "description": "Set the destination endpoint ports for the specified flow and stream ID.",
+        "description": "Set the destination endpoint ports for the specified flow.",
         "x-ms-examples": {
           "Set the flow stream destination endpoint ports": {
             "$ref": "examples/setFlowDestinationEndpointPorts.json"
@@ -902,7 +902,7 @@
           },
           {
             "name": "streamDestinationEndpointPorts",
-            "description": "Stream ID destination endpoint ports wanted",
+            "description": "The destination endpoint ports wanted",
             "in": "body",
             "required": true,
             "schema": {
@@ -912,13 +912,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The destination endpoint ports of the stream ID on this flow.",
+            "description": "Set the destination endpoint ports of this flow.",
             "schema": {
               "$ref": "#/definitions/flow"
             }
           },
           "202": {
-            "description": "The destination endpoint ports of the stream ID on this flow.",
+            "description": "Accepted request to set the destination endpoint ports of this flow.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -967,7 +967,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get the connection string for the specified flow.",
+            "description": "The connection string for the specified flow.",
             "schema": {
               "$ref": "#/definitions/getStreamConnectionStringResult"
             }
@@ -1006,7 +1006,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Listed all flows under the resource group.",
+            "description": "Listed all flows under the connection.",
             "schema": {
               "$ref": "#/definitions/flowsListResult"
             }
@@ -1261,13 +1261,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Links a connection.",
+            "description": "Linked the connections.",
             "schema": {
               "$ref": "#/definitions/connection"
             }
           },
           "202": {
-            "description": "Links a connection.",
+            "description": "Accepted request to link the connections.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -1290,7 +1290,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/listPendingConnections": {
       "post": {
-        "description": "Lists all pending connections for a connection.",
+        "description": "Lists all pending remote connections that are linkable to this connection.",
         "x-ms-examples": {
           "Lists a list of pending connections": {
             "$ref": "examples/listPendingConnections.json"
@@ -1313,7 +1313,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Listed all pending connections.",
+            "description": "Listed all pending remote connections that are linkable to this connection.",
             "schema": {
               "$ref": "#/definitions/pendingConnectionsListResult"
             }
@@ -1332,7 +1332,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/listPendingFlows": {
       "post": {
-        "description": "Lists all pending flows for a connection.",
+        "description": "Lists all remote flows that have not yet been linked to local flows.",
         "x-ms-examples": {
           "Lists a list of pending flows": {
             "$ref": "examples/listPendingFlows.json"
@@ -1355,7 +1355,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Listed all connections under the resource group.",
+            "description": "Listed all remote flows that have not yet been linked to local flows.",
             "schema": {
               "$ref": "#/definitions/pendingFlowsListResult"
             }
@@ -1653,7 +1653,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/approveConnection": {
       "post": {
-        "description": "Approves the specified connection in a pipeline.",
+        "description": "Approves the specified connection request in a pipeline.",
         "x-ms-examples": {
           "Approves the specified connection in a pipeline": {
             "$ref": "examples/approveOrRejectConnection.json"
@@ -1685,13 +1685,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Approves a connection.",
+            "description": "Approved the connection request.",
             "schema": {
               "$ref": "#/definitions/connection"
             }
           },
           "202": {
-            "description": "Approves a connection.",
+            "description": "Request to Approve the connection has been accepted for processing.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -1714,7 +1714,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/rejectConnection": {
       "post": {
-        "description": "Rejects the specified connection in a pipeline.",
+        "description": "Rejects the specified connection request in a pipeline.",
         "x-ms-examples": {
           "Rejects the specified connection in a pipeline": {
             "$ref": "examples/approveOrRejectConnection.json"
@@ -1746,13 +1746,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Rejects a connection.",
+            "description": "Rejected the connection request.",
             "schema": {
               "$ref": "#/definitions/connection"
             }
           },
           "202": {
-            "description": "Rejects a connection.",
+            "description": "Request to Reject the connection has been accepted for processing.",
             "headers": {
               "location": {
                 "description": "Location response header",
@@ -1807,7 +1807,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Approves a connection.",
+            "description": "Listed the schemas.",
             "schema": {
               "description": "The schemas for this connection",
               "$ref": "#/definitions/schemasListResult"
@@ -2021,7 +2021,7 @@
         },
         "keyVaultUri": {
           "type": "string",
-          "description": "AME, PME, or TORUS only! AKV Chain Containing SAS Token"
+          "description": "URI to a Key Vault Secret containing a SAS token"
         },
         "linkStatus": {
           "enum": [
@@ -2105,7 +2105,7 @@
             "name": "dataType",
             "modelAsString": true
           },
-          "description": "Transfer Storage Blobs or Tables"
+          "description": "Type of data to transfer via the flow"
         },
         "provisioningState": {
           "description": "Provisioning state of the flow",
@@ -2503,7 +2503,7 @@
           "type": "string"
         }
       },
-      "description": "The connections list result."
+      "description": "The pending connections list result."
     },
     "pendingFlowsListResult": {
       "type": "object",
@@ -2523,7 +2523,7 @@
           "type": "string"
         }
       },
-      "description": "The connections list result."
+      "description": "The pending flows list result."
     },
     "operationStatusProperties": {
       "type": "object",
@@ -2977,7 +2977,7 @@
     },
     "setSourceAddresses": {
       "type": "object",
-      "description": "Set the source addresses for the specified stream ID",
+      "description": "Set the source addresses for the specified flow",
       "properties": {
         "values": {
           "type": "array",
@@ -2990,11 +2990,11 @@
     },
     "setDestinationEndpoints": {
       "type": "object",
-      "description": "Set the destination endpoints for the specified stream ID",
+      "description": "Set the destination endpoints for the specified flow",
       "properties": {
         "endpoints": {
           "type": "array",
-          "description": "The specified stream ID destination endpoints",
+          "description": "The specified flow destination endpoints",
           "items": {
             "type": "string"
           }
@@ -3003,11 +3003,11 @@
     },
     "setDestinationEndpointPorts": {
       "type": "object",
-      "description": "Set the destination endpoint ports for the specified stream ID",
+      "description": "Set the destination endpoint ports for the specified flow",
       "properties": {
         "ports": {
           "type": "array",
-          "description": "The specified stream ID destination endpoint ports",
+          "description": "The specified flow destination endpoint ports",
           "items": {
             "type": "integer",
             "format": "int64"
@@ -3026,7 +3026,7 @@
       "pattern": "^[a-zA-Z0-9-]{3,64}$",
       "maxLength": 64,
       "minLength": 3,
-      "description": "The name for the flow that is to be onboarded."
+      "description": "The name for the flow to perform the operation on."
     },
     "connectionNameParameter": {
       "x-ms-parameter-location": "method",
@@ -3037,7 +3037,7 @@
       "pattern": "^[a-zA-Z0-9-]{3,64}$",
       "maxLength": 64,
       "minLength": 3,
-      "description": "The name for the connection that is to be requested."
+      "description": "The name for the connection to perform the operation on."
     },
     "pipelineNameParameter": {
       "x-ms-parameter-location": "method",
@@ -3048,7 +3048,7 @@
       "pattern": "^[a-zA-Z0-9-]{3,64}$",
       "maxLength": 64,
       "minLength": 3,
-      "description": "The name for the pipeline that is to be requested."
+      "description": "The name for the pipeline to perform the operation on."
     }
   }
 }
