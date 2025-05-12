@@ -85,7 +85,7 @@ model AkriDiscoveryHandlerAioMetadata {
 model AkriDiscoveryHandlerDiagnostics {
   /** The log settings for the Connector template. */
   @flattenProperty("csharp")
-  logs: AkriConnectorsDiagnosticsLogs; // Multiple levels of nested objects containing only 1 property don't play well with the dotent emmiter
+  logs: AkriConnectorsDiagnosticsLogs; // Multiple levels of nested objects containing only 1 property don't play well with the dotnet emitter.
 }
 
 /** AkriDiscoveryHandlerDiscoverableDeviceEndpointType properties. */
