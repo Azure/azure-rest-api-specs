@@ -37,5 +37,3 @@ model DrillRunChildJobProperties extends ChildJobProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
-
-

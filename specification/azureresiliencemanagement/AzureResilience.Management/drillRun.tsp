@@ -147,4 +147,3 @@ interface DrillRunResources {
   @route(ServiceGroupRoute)
   list is ArmResourceListByParent<DrillRunResource, ServiceGroupParameters>;
 }
-
