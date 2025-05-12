@@ -10102,7 +10102,8 @@
       "type": "string",
       "description": "RegistryEndpointTrustedSigningKeyType values",
       "enum": [
-        "Secret"
+        "Secret",
+        "ConfigMap"
       ],
       "x-ms-enum": {
         "name": "RegistryEndpointTrustedSigningKeyType",
@@ -10112,6 +10113,11 @@
             "name": "Secret",
             "value": "Secret",
             "description": "Trust settings stored in a Kubernetes Secret."
+          },
+          {
+            "name": "ConfigMap",
+            "value": "ConfigMap",
+            "description": "Trust settings stored in a Kubernetes ConfigMap."
           }
         ]
       }
