@@ -7461,6 +7461,11 @@
         "secretRef"
       ]
     },
+    "DataflowEndpointAuthenticationAnonymous": {
+      "type": "object",
+      "description": "DataflowEndpoint Anonymous Authentication properties",
+      "additionalProperties": false
+    },
     "DataflowEndpointAuthenticationSasl": {
       "type": "object",
       "description": "DataflowEndpoint Authentication Sasl properties",
@@ -8263,11 +8268,6 @@
       "type": "object",
       "description": "OpenTelemetry endpoint properties.",
       "properties": {
-        "metricIntervalSec": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of seconds to wait before sending metrics to the Open telemetry collector."
-        },
         "host": {
           "type": "string",
           "description": "Host of the OpenTelemetry in the form of <host>:<port>."
@@ -8279,10 +8279,14 @@
         "tls": {
           "$ref": "#/definitions/TlsProperties",
           "description": "TLS configuration."
+        },
+        "authentication": {
+          "$ref": "#/definitions/DataflowOpenTelemetryAuthentication"
         }
       },
       "required": [
-        "host"
+        "host",
+        "authentication"
       ]
     },
     "DataflowEndpointProperties": {
@@ -8833,6 +8837,104 @@
           }
         ]
       }
+    },
+    "DataflowOpenTelemetryAnonymousAuthentication": {
+      "type": "object",
+      "description": "DataflowOpenTelemetryAnonymousAuthentication properties.",
+      "properties": {
+        "anonymousSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationAnonymous",
+          "description": "Settings for the anonymous connection"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowOpenTelemetryAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "Anonymous"
+    },
+    "DataflowOpenTelemetryAuthentication": {
+      "type": "object",
+      "description": "Dataflow OpenTelemetry authentication properties.",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/DataflowOpenTelemetryAuthenticationMethod",
+          "description": "The authentication method."
+        }
+      },
+      "discriminator": "method",
+      "required": [
+        "method"
+      ]
+    },
+    "DataflowOpenTelemetryAuthenticationMethod": {
+      "type": "string",
+      "description": "Dataflow OpenTelemetry authentication method values.",
+      "enum": [
+        "ServiceAccountToken",
+        "X509Certificate",
+        "Anonymous"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowOpenTelemetryAuthenticationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceAccountToken",
+            "value": "ServiceAccountToken",
+            "description": "ServiceAccountToken Option"
+          },
+          {
+            "name": "X509Certificate",
+            "value": "X509Certificate",
+            "description": "x509Certificate Option"
+          },
+          {
+            "name": "Anonymous",
+            "value": "Anonymous",
+            "description": "Anonymous Option"
+          }
+        ]
+      }
+    },
+    "DataflowOpenTelemetryServiceAccountAuthentication": {
+      "type": "object",
+      "description": "DataflowOpenTelemetryServiceAccountAuthentication properties.",
+      "properties": {
+        "serviceAccountTokenSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationServiceAccountToken",
+          "description": "Kubernetes service account token authentication."
+        }
+      },
+      "required": [
+        "serviceAccountTokenSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowOpenTelemetryAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "ServiceAccountToken"
+    },
+    "DataflowOpenTelemetryX509CertificateAuthentication": {
+      "type": "object",
+      "description": "DataflowOpenTelemetryX509CertificateAuthentication properties.",
+      "properties": {
+        "x509CertificateSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
+          "description": "X.509 certificate authentication settings."
+        }
+      },
+      "required": [
+        "x509CertificateSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowOpenTelemetryAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "X509Certificate"
     },
     "DataflowOperation": {
       "type": "object",
@@ -10281,7 +10383,7 @@
     },
     "RegistryEndpointSecretTrust": {
       "type": "object",
-      "description": "RegistryEndpointSecretTrust",
+      "description": "Settings for RegistryEndpoint trust provided through a secret",
       "properties": {
         "secretRef": {
           "type": "string",

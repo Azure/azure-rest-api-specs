@@ -5,6 +5,7 @@ import "./dataflowEndpointOpenTelemetry.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
+using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -506,3 +507,9 @@ model DataflowEndpointAuthenticationX509 {
   @doc("Secret reference of the X.509 certificate.")
   secretRef: string;
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRD type is modeled as empty object"
+@doc("DataflowEndpoint Anonymous Authentication properties")
+@added(Versions.`2025-07-01-preview`)
+@extension("additionalProperties", false)
+model DataflowEndpointAuthenticationAnonymous {}
