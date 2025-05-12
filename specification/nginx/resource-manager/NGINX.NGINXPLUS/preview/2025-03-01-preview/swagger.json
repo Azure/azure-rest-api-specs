@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Nginx.NginxPlus",
-    "version": "2025-03-01-preview"
+    "version": "2024-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,10 +41,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
@@ -61,7 +61,7 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -80,7 +80,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -101,10 +101,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
@@ -113,7 +113,7 @@
             "$ref": "#/parameters/ApiKeyNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -126,7 +126,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -147,10 +147,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
@@ -159,12 +159,12 @@
             "$ref": "#/parameters/ApiKeyNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the API Key",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
             }
@@ -172,7 +172,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -195,21 +195,21 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully listed the Deployment's API Keys",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentApiKeyListResponse"
             }
@@ -217,7 +217,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -243,24 +243,28 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "#/parameters/CertificateNameParameter"
+            "in": "path",
+            "name": "certificateName",
+            "description": "The name of certificate",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the Certificate",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxCertificate"
             }
@@ -268,7 +272,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -292,19 +296,23 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "#/parameters/CertificateNameParameter"
+            "in": "path",
+            "name": "certificateName",
+            "description": "The name of certificate",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -317,13 +325,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully Created or Updated the Certificate",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxCertificate"
             }
           },
           "201": {
-            "description": "Certificate upsert accepted for provisioning",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxCertificate"
             }
@@ -331,7 +339,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -356,47 +364,39 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "#/parameters/CertificateNameParameter"
+            "in": "path",
+            "name": "certificateName",
+            "description": "The name of certificate",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success"
+          },
           "202": {
-            "description": "Certificate deletion accepted",
-            "headers": {
-              "Retry-After": {
-                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Operation-Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              }
-            }
+            "description": "Success"
           },
           "204": {
-            "description": "Successfully deleted the certificate"
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -420,21 +420,21 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully listed the deployment's certificates",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxCertificateListResponse"
             }
@@ -442,7 +442,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -468,21 +468,21 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the deployment's configurations",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxConfigurationListResponse"
             }
@@ -490,7 +490,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -516,24 +516,28 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "#/parameters/ConfigurationNameParameter"
+            "in": "path",
+            "name": "configurationName",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the deployment's configuration",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxConfigurationResponse"
             }
@@ -541,7 +545,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -565,19 +569,23 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "#/parameters/ConfigurationNameParameter"
+            "in": "path",
+            "name": "configurationName",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -590,13 +598,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully Created or Updated the configuration",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxConfigurationResponse"
             }
           },
           "201": {
-            "description": "Configuration upsert accepted for provisioning",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxConfigurationResponse"
             }
@@ -604,7 +612,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -629,47 +637,39 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "#/parameters/ConfigurationNameParameter"
+            "in": "path",
+            "name": "configurationName",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success"
+          },
           "202": {
-            "description": "Configuration deletion accepted",
-            "headers": {
-              "Retry-After": {
-                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Operation-Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              }
-            }
+            "description": "Success"
           },
           "204": {
-            "description": "Configuration successfully deleted"
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -696,19 +696,24 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "#/parameters/ConfigurationNameParameter"
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -721,7 +726,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully completed configuration analysis",
+            "description": "Analysis complete",
             "schema": {
               "$ref": "#/definitions/AnalysisResult"
             }
@@ -729,7 +734,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -752,21 +757,21 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the deployment",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
@@ -774,7 +779,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -801,21 +806,20 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "The Nginx deployment",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
@@ -823,13 +827,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully Created or Updated the deployment",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
           },
           "201": {
-            "description": "Deployment upsert accepted for provisioning",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
@@ -837,7 +841,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -865,21 +869,20 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "The Nginx deployment update parameters",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentUpdateParameters"
             }
@@ -887,33 +890,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Deployment PATCH successful",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
           },
-          "202": {
-            "description": "Deployment PATCH accepted",
-            "headers": {
-              "Retry-After": {
-                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Operation-Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              }
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeployment"
             }
           },
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -925,10 +916,7 @@
             "$ref": "./examples/Deployments_UpdateSubnet.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -941,44 +929,32 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success"
+          },
           "202": {
-            "description": "Deployment deletion accepted",
-            "headers": {
-              "Retry-After": {
-                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Operation-Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              }
-            }
+            "description": "Success"
           },
           "204": {
-            "description": "Deployment successfully deleted"
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1002,15 +978,15 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully listed all deployments under the subscription",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentListResponse"
             }
@@ -1018,7 +994,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1044,18 +1020,18 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully listed all deployments under the resource group",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentListResponse"
             }
@@ -1063,7 +1039,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1073,287 +1049,6 @@
         "x-ms-examples": {
           "Deployments_ListByResourceGroup": {
             "$ref": "./examples/Deployments_ListByResourceGroup.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies/{wafPolicyName}": {
-      "get": {
-        "tags": [
-          "NginxWafPolicy"
-        ],
-        "summary": "Get the Nginx Waf Policy of given Nginx deployment",
-        "operationId": "WafPolicy_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DeploymentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WafPolicyNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the custom Waf Policy",
-            "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicy"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WafPolicy_Get": {
-            "$ref": "./examples/WafPolicy_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "NginxWafPolicy"
-        ],
-        "summary": "Create or update the Nginx Waf Policy for given Nginx deployment",
-        "operationId": "WafPolicy_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DeploymentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WafPolicyNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The Nginx Deployment Waf Policy",
-            "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully Created or Updated the custom Waf Policy",
-            "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicy"
-            }
-          },
-          "201": {
-            "description": "Custom Waf Policy upsert accepted for provisioning",
-            "headers": {
-              "Retry-After": {
-                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Operation-Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicy"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "WafPolicy_Create": {
-            "$ref": "./examples/WafPolicy_Create.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "NginxWafPolicy"
-        ],
-        "summary": "Reset the Nginx Waf Policy of given Nginx deployment to default",
-        "operationId": "WafPolicy_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DeploymentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WafPolicyNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Custom Waf Policy deletion accepted",
-            "headers": {
-              "Retry-After": {
-                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Operation-Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to poll for the status of this asynchronous operation",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Successfully deleted the custom Waf Policy"
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "WafPolicy_Delete": {
-            "$ref": "./examples/WafPolicy_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/listDefaultWafPolicies": {
-      "post": {
-        "tags": [
-          "NginxWafPolicy"
-        ],
-        "summary": "Get the Nginx Waf Policy of given Nginx deployment",
-        "operationId": "DefaultWafPolicy_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DeploymentNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully listed the deployment's default Waf policies",
-            "schema": {
-              "$ref": "#/definitions/NginxDeploymentDefaultWafPolicyListResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DefaultWafPolicy_List": {
-            "$ref": "./examples/DefaultWafPolicy_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies": {
-      "get": {
-        "tags": [
-          "NginxWafPolicy"
-        ],
-        "summary": "List Waf Policies of given Nginx deployment",
-        "operationId": "WafPolicy_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DeploymentNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully listed all deployment's custom Waf policies",
-            "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicyListResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "WafPolicy_List": {
-            "$ref": "./examples/WafPolicy_List.json"
           }
         }
       }
@@ -1370,20 +1065,20 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1406,6 +1101,7 @@
         "name",
         "capacity"
       ],
+      "x-ms-client-flatten": true,
       "properties": {
         "name": {
           "type": "string",
@@ -1418,7 +1114,6 @@
             "max"
           ],
           "description": "The capacity parameters of the profile.",
-          "x-ms-client-flatten": true,
           "properties": {
             "min": {
               "type": "integer",
@@ -1463,7 +1158,6 @@
         "NotSpecified"
       ],
       "type": "string",
-      "title": "Provisioning State",
       "readOnly": true,
       "x-ms-enum": {
         "modelAsString": true,
@@ -1472,7 +1166,6 @@
     },
     "NginxCertificateProperties": {
       "type": "object",
-      "title": "Nginx Certificate Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -1509,7 +1202,6 @@
     },
     "NginxCertificateErrorResponseBody": {
       "type": "object",
-      "title": "Nginx Certificate Error Response Body",
       "properties": {
         "code": {
           "type": "string"
@@ -1522,7 +1214,6 @@
     "NginxCertificate": {
       "type": "object",
       "x-ms-azure-resource": true,
-      "title": "Nginx Certificate",
       "properties": {
         "id": {
           "type": "string",
@@ -1539,15 +1230,17 @@
         "properties": {
           "$ref": "#/definitions/NginxCertificateProperties"
         },
+        "location": {
+          "type": "string"
+        },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
     },
     "NginxCertificateListResponse": {
       "type": "object",
-      "title": "Nginx Certificate List Response",
       "properties": {
         "value": {
           "type": "array",
@@ -1562,7 +1255,6 @@
     },
     "NginxConfigurationFile": {
       "type": "object",
-      "title": "Nginx Configuration File",
       "properties": {
         "content": {
           "type": "string"
@@ -1574,7 +1266,6 @@
     },
     "NginxConfigurationProtectedFileRequest": {
       "type": "object",
-      "title": "Nginx Configuration Protected File Request",
       "properties": {
         "content": {
           "type": "string",
@@ -1595,7 +1286,6 @@
     },
     "NginxConfigurationProtectedFileResponse": {
       "type": "object",
-      "title": "Nginx Configuration Protected File Response",
       "properties": {
         "virtualPath": {
           "type": "string",
@@ -1611,7 +1301,6 @@
     },
     "NginxConfigurationPackage": {
       "type": "object",
-      "title": "Nginx Configuration Package",
       "properties": {
         "data": {
           "type": "string"
@@ -1627,7 +1316,6 @@
     },
     "NginxConfigurationResponseProperties": {
       "type": "object",
-      "title": "Nginx Configuration Response Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -1656,7 +1344,6 @@
     },
     "NginxConfigurationRequestProperties": {
       "type": "object",
-      "title": "Nginx Configuration Request Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -1686,7 +1373,6 @@
     "NginxConfigurationResponse": {
       "type": "object",
       "x-ms-azure-resource": true,
-      "title": "Nginx Configuration Response",
       "properties": {
         "id": {
           "type": "string",
@@ -1704,7 +1390,7 @@
           "$ref": "#/definitions/NginxConfigurationResponseProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1712,7 +1398,6 @@
     "NginxConfigurationRequest": {
       "type": "object",
       "x-ms-azure-resource": true,
-      "title": "Nginx Configuration Request",
       "properties": {
         "id": {
           "type": "string",
@@ -1730,7 +1415,7 @@
           "$ref": "#/definitions/NginxConfigurationRequestProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1738,7 +1423,6 @@
     "NginxConfigurationListResponse": {
       "description": "Response of a list operation.",
       "type": "object",
-      "title": "Nginx Configuration List Response",
       "properties": {
         "value": {
           "description": "Results of a list operation.",
@@ -1761,7 +1445,6 @@
         "None"
       ],
       "type": "string",
-      "title": "Identity Type",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "IdentityType"
@@ -1769,7 +1452,6 @@
     },
     "UserIdentityProperties": {
       "type": "object",
-      "title": "User Identity Properties",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1786,7 +1468,6 @@
         "name"
       ],
       "type": "object",
-      "title": "Resource Sku",
       "properties": {
         "name": {
           "description": "Name of the SKU.",
@@ -1796,7 +1477,6 @@
     },
     "IdentityProperties": {
       "type": "object",
-      "title": "Identity Properties",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1823,7 +1503,6 @@
         "Dynamic"
       ],
       "type": "string",
-      "title": "Nginx Private IP Allocation Method",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "NginxPrivateIPAllocationMethod"
@@ -1831,7 +1510,6 @@
     },
     "NginxPrivateIPAddress": {
       "type": "object",
-      "title": "Nginx Private IP Address",
       "properties": {
         "privateIPAddress": {
           "type": "string"
@@ -1846,7 +1524,6 @@
     },
     "NginxPublicIPAddress": {
       "type": "object",
-      "title": "Nginx Public IP Address",
       "properties": {
         "id": {
           "type": "string"
@@ -1855,7 +1532,6 @@
     },
     "NginxFrontendIPConfiguration": {
       "type": "object",
-      "title": "Nginx Frontend IP Configuration",
       "properties": {
         "publicIPAddresses": {
           "type": "array",
@@ -1875,7 +1551,6 @@
     },
     "NginxNetworkInterfaceConfiguration": {
       "type": "object",
-      "title": "Nginx Network Interface Configuration",
       "properties": {
         "subnetId": {
           "type": "string"
@@ -1883,7 +1558,6 @@
       }
     },
     "NginxNetworkProfile": {
-      "title": "Nginx Network Profile",
       "type": "object",
       "properties": {
         "frontEndIPConfiguration": {
@@ -1896,7 +1570,6 @@
     },
     "NginxStorageAccount": {
       "type": "object",
-      "title": "Nginx Storage Account",
       "properties": {
         "accountName": {
           "type": "string"
@@ -1908,7 +1581,6 @@
     },
     "NginxLogging": {
       "type": "object",
-      "title": "Nginx Logging",
       "properties": {
         "storageAccount": {
           "$ref": "#/definitions/NginxStorageAccount"
@@ -1945,7 +1617,6 @@
     },
     "NginxDeploymentUserProfile": {
       "type": "object",
-      "title": "Nginx Deployment User Profile",
       "properties": {
         "preferredEmail": {
           "type": "string",
@@ -1962,7 +1633,6 @@
     },
     "NginxDeploymentProperties": {
       "type": "object",
-      "title": "Nginx Deployment Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -2000,7 +1670,6 @@
           "required": [
             "webApplicationFirewallSettings"
           ],
-          "x-ms-client-flatten": true,
           "properties": {
             "webApplicationFirewallSettings": {
               "$ref": "#/definitions/WebApplicationFirewallSettings"
@@ -2021,7 +1690,6 @@
     "NginxDeployment": {
       "type": "object",
       "x-ms-azure-resource": true,
-      "title": "Nginx Deployment",
       "properties": {
         "id": {
           "type": "string",
@@ -2051,22 +1719,16 @@
           "$ref": "#/definitions/ResourceSku"
         },
         "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
+          "type": "string"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
     },
     "NginxDeploymentUpdateProperties": {
       "type": "object",
-      "title": "Nginx Deployment Update Properties",
       "properties": {
         "enableDiagnosticsSupport": {
           "type": "boolean"
@@ -2089,7 +1751,6 @@
         "nginxAppProtect": {
           "type": "object",
           "description": "Update settings for NGINX App Protect (NAP)",
-          "x-ms-client-flatten": true,
           "properties": {
             "webApplicationFirewallSettings": {
               "$ref": "#/definitions/WebApplicationFirewallSettings"
@@ -2100,7 +1761,6 @@
     },
     "NginxDeploymentUpdateParameters": {
       "type": "object",
-      "title": "Nginx Deployment Update Parameters",
       "properties": {
         "identity": {
           "$ref": "#/definitions/IdentityProperties"
@@ -2115,12 +1775,7 @@
           "$ref": "#/definitions/ResourceSku"
         },
         "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
+          "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/NginxDeploymentUpdateProperties"
@@ -2129,7 +1784,6 @@
     },
     "NginxDeploymentListResponse": {
       "type": "object",
-      "title": "Nginx Deployment List Response",
       "properties": {
         "value": {
           "type": "array",
@@ -2144,7 +1798,6 @@
     },
     "NginxDeploymentApiKeyRequestProperties": {
       "type": "object",
-      "title": "Nginx Deployment Api Key Request Properties",
       "properties": {
         "secretText": {
           "type": "string",
@@ -2161,7 +1814,6 @@
     },
     "NginxDeploymentApiKeyResponseProperties": {
       "type": "object",
-      "title": "Nginx Deployment Api Key Response Properties",
       "properties": {
         "hint": {
           "type": "string",
@@ -2178,7 +1830,6 @@
     "NginxDeploymentApiKeyRequest": {
       "type": "object",
       "x-ms-azure-resource": true,
-      "title": "Nginx Deployment Api Key Request",
       "properties": {
         "id": {
           "type": "string",
@@ -2194,17 +1845,12 @@
         },
         "properties": {
           "$ref": "#/definitions/NginxDeploymentApiKeyRequestProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "readOnly": true
         }
       }
     },
     "NginxDeploymentApiKeyResponse": {
       "type": "object",
       "x-ms-azure-resource": true,
-      "title": "Nginx Deployment Api Key Response",
       "properties": {
         "id": {
           "type": "string",
@@ -2220,16 +1866,11 @@
         },
         "properties": {
           "$ref": "#/definitions/NginxDeploymentApiKeyResponseProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "readOnly": true
         }
       }
     },
     "NginxDeploymentApiKeyListResponse": {
       "type": "object",
-      "title": "Nginx Deployment Api Key List Response",
       "properties": {
         "value": {
           "type": "array",
@@ -2306,7 +1947,6 @@
       "properties": {
         "config": {
           "type": "object",
-          "x-ms-client-flatten": true,
           "properties": {
             "rootFile": {
               "type": "string",
@@ -2349,7 +1989,6 @@
         },
         "data": {
           "type": "object",
-          "x-ms-client-flatten": true,
           "properties": {
             "errors": {
               "type": "array",
@@ -2494,11 +2133,6 @@
       "type": "object",
       "description": "The status of the NGINX App Protect Web Application Firewall",
       "properties": {
-        "wafRelease": {
-          "type": "string",
-          "example": "5.3.0",
-          "description": "NGINX App Protect WAF release version"
-        },
         "attackSignaturesPackage": {
           "$ref": "#/definitions/WebApplicationFirewallPackage",
           "readOnly": true,
@@ -2562,260 +2196,6 @@
           "description": "The version of the NGINX App Protect Web Application Firewall (WAF) module for NGINX."
         }
       }
-    },
-    "NginxDeploymentWafPolicy": {
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "title": "Nginx Deployment Waf Policy",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyMetadata": {
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "title": "Nginx Deployment Waf Policy Metadata",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyMetadataProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyApplyingStatus": {
-      "type": "object",
-      "title": "Nginx Deployment Waf Policy Applying Status",
-      "readOnly": true,
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyApplyingStatusCode"
-        },
-        "displayStatus": {
-          "type": "string",
-          "readOnly": true,
-          "description": "A readable string of the current status, and sometimes have the reason for the current state."
-        },
-        "time": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The date and time in UTC the current applying status was set."
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyApplyingStatusCode": {
-      "type": "string",
-      "example": "Applying",
-      "readOnly": true,
-      "description": "Machine readable code indicating the applying status code of a WAF Policy.",
-      "enum": [
-        "NotApplied",
-        "Applying",
-        "Succeeded",
-        "Failed",
-        "Removing"
-      ],
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "NginxDeploymentWafPolicyApplyingStatusCode",
-        "values": [
-          {
-            "value": "NotApplied",
-            "description": "The policy is not referenced in the nginx config and not applied."
-          },
-          {
-            "value": "Applying",
-            "description": "The policy is referenced in the nginx config and is applying."
-          },
-          {
-            "value": "Succeeded",
-            "description": "The policy is referenced in the nginx config and that config has been successfully applied."
-          },
-          {
-            "value": "Failed",
-            "description": "The policy is referenced in the nginx config and that config failed to apply."
-          },
-          {
-            "value": "Removing",
-            "description": "The policy is now not referenced in the nginx config and its being removed from the applied nginx config."
-          }
-        ]
-      }
-    },
-    "NginxDeploymentWafPolicyCompilingStatus": {
-      "type": "object",
-      "title": "Nginx Deployment Waf Policy Compiling Status",
-      "readOnly": true,
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatusCode"
-        },
-        "displayStatus": {
-          "type": "string",
-          "readOnly": true,
-          "description": "A readable string of the current status, and sometimes have the reason for the current state. If the CompilingStatus is Failed the Display Status will be The waf Policy failed to compile."
-        },
-        "time": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The date and time the policy was compiled in UTC."
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyCompilingStatusCode": {
-      "type": "string",
-      "example": "InProgress",
-      "readOnly": true,
-      "description": "Machine readable code indicating the compilation status of a WAF Policy.",
-      "enum": [
-        "NotStarted",
-        "InProgress",
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "NginxDeploymentWafPolicyCompilingStatusCode",
-        "values": [
-          {
-            "value": "NotStarted",
-            "description": "The compilation of the custom waf policy has not started"
-          },
-          {
-            "value": "InProgress",
-            "description": "The compilation of the custom waf policy is in progress"
-          },
-          {
-            "value": "Succeeded",
-            "description": "The compilation of the custom waf policy is completed successfully and can now be referenced in the nginx config."
-          },
-          {
-            "value": "Failed",
-            "description": "The compilation of the custom waf policy failed."
-          }
-        ]
-      }
-    },
-    "NginxDeploymentDefaultWafPolicyListResponse": {
-      "type": "object",
-      "title": "Nginx Deployment Default Waf Policy List Response",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NginxDeploymentDefaultWafPolicyProperties"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyListResponse": {
-      "type": "object",
-      "title": "Nginx Deployment Waf Policy List Response",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NginxDeploymentWafPolicyMetadata"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyProperties": {
-      "type": "object",
-      "title": "Nginx Deployment Waf Policy Properties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
-        },
-        "content": {
-          "format": "byte",
-          "type": "string",
-          "description": "The byte content of the Policy"
-        },
-        "filepath": {
-          "type": "string",
-          "description": "The file path where the Policy is to be saved"
-        },
-        "compilingState": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatus"
-        },
-        "applyingState": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyApplyingStatus"
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyMetadataProperties": {
-      "type": "object",
-      "title": "Nginx Deployment Waf Policy Metadata Properties",
-      "properties": {
-        "filepath": {
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
-        },
-        "compilingState": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatus"
-        },
-        "applyingState": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyApplyingStatus"
-        }
-      }
-    },
-    "NginxDeploymentDefaultWafPolicyProperties": {
-      "type": "object",
-      "title": "Nginx Deployment Default Waf Policy Properties",
-      "properties": {
-        "content": {
-          "format": "byte",
-          "type": "string",
-          "readOnly": true
-        },
-        "filepath": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
@@ -2832,33 +2212,6 @@
       "in": "path",
       "name": "apiKeyName",
       "description": "The resource name of the API key",
-      "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "CertificateNameParameter": {
-      "in": "path",
-      "name": "certificateName",
-      "description": "The name of certificate",
-      "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ConfigurationNameParameter": {
-      "in": "path",
-      "name": "configurationName",
-      "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
-      "pattern": "^[a-z][a-z0-9]*$",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "WafPolicyNameParameter": {
-      "in": "path",
-      "name": "wafPolicyName",
-      "description": "The name of Waf Policy",
       "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
       "required": true,
       "type": "string",
