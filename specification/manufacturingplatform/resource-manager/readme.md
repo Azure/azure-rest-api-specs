@@ -37,7 +37,6 @@ These settings apply only when `--tag=package-2024-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
   - Microsoft.ManufacturingPlatform/preview/2024-02-01-preview/manufacturingplatform.json
-  - Microsoft.ManufacturingPlatform/preview/2023-02-01-preview/manufacturingplatform.json
 suppressions:
   - code: AvoidAnonymousTypes
     from: manufacturingplatform.json
