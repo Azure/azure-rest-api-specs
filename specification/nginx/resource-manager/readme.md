@@ -29,17 +29,6 @@ title: NginxManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-03-01-preview
-
-suppressions:
-  - code: LintDiff
-    from: swagger.json
-    where: $.definitions.NginxDeploymentWafPolicyListResponse
-    reason: "This is by design to avoid high bandwidth consumption"
-
-  - code: LintDiff
-    from: swagger.json
-    where: $.definitions.NginxDeploymentWafPolicy
-    reason: "This is by design to avoid high bandwidth consumption"
 ```
 
 ### Tag: package-2025-03-01-preview
@@ -49,6 +38,16 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
   - NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json
+suppressions:
+  - code: LintDiff
+    from: swagger.json
+    where: $.definitions.NginxDeploymentWafPolicyListResponse
+    reason: This is by design to avoid high bandwidth consumption
+
+  - code: LintDiff
+    from: swagger.json
+    where: $.definitions.NginxDeploymentWafPolicy
+    reason: This is by design to avoid high bandwidth consumption
 ```
 
 ### Tag: package-2024-11-01-preview
