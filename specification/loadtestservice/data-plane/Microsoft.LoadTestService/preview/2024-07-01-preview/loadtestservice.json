@@ -607,6 +607,9 @@
           },
           {
             "$ref": "#/parameters/ListTestRunQueryParams.maxpagesize"
+          },
+          {
+            "$ref": "#/parameters/ListTestRunQueryParams.createdByTypes"
           }
         ],
         "responses": {
@@ -6382,6 +6385,18 @@
       "description": "Prefix based, case sensitive search on searchable fields - displayName,\ncreatedBy. For example, to search for a test, with display name is Login Test,\nthe search parameter can be Login.",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestRunQueryParams.createdByTypes": {
+      "name": "createdByTypes",
+      "in": "query",
+      "description": "Comma separated list of type of entities that have created the test run.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestRunQueryParams.executionFrom": {
