@@ -4,6 +4,7 @@ import "@typespec/versioning";
 
 import "./models.tsp";
 import "../common/models.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -31,7 +32,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
     @route("/{stepId}")
-    getRunStep is Azure.Core.Foundations.Operation<
+    getRunStep is ServicePatterns.AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -89,6 +90,6 @@ namespace Azure.AI.Agents {
       ...AgentsListOptions,
     ): {
       ...AgentsPagedResult<RunStep>;
-    };
+    } | ServicePatterns.AgentV1Error;
   }
 }

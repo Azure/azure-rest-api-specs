@@ -4,6 +4,7 @@ import "@typespec/versioning";
 
 import "./models.tsp";
 import "../../common/models.tsp";
+import "../../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -25,7 +26,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    createVectorStoreFileBatch is Azure.Core.Foundations.Operation<
+    createVectorStoreFileBatch is ServicePatterns.AgentOperation<
       {
         /** The ID of the vector store for which to create a File Batch. */
         @doc("Identifier of the vector store.")
@@ -61,7 +62,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     @route("/{batchId}")
-    getVectorStoreFileBatch is Azure.Core.Foundations.Operation<
+    getVectorStoreFileBatch is ServicePatterns.AgentOperation<
       {
         /** The ID of the vector store that the file batch belongs to. */
         @doc("Identifier of the vector store.")
@@ -84,7 +85,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{batchId}/cancel")
-    cancelVectorStoreFileBatch is Azure.Core.Foundations.Operation<
+    cancelVectorStoreFileBatch is ServicePatterns.AgentOperation<
       {
         /** The ID of the vector store that the file batch belongs to. */
         @doc("Identifier of the vector store.")
@@ -126,6 +127,6 @@ namespace Azure.AI.Agents {
       ...AgentsListOptions,
     ): {
       ...AgentsPagedResult<VectorStoreFile>;
-    };
+    } | ServicePatterns.AgentV1Error;
   }
 }

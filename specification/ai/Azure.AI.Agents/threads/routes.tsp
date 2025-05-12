@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "./models.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -24,7 +25,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    createThread is Azure.Core.Foundations.Operation<
+    createThread is ServicePatterns.AgentOperation<
       {
         /**
          * The details used to create a new agent thread.
@@ -47,7 +48,7 @@ namespace Azure.AI.Agents {
     @list
     listThreads(...ApiVersionParameter, ...AgentsListOptions): {
       ...AgentsPagedResult<AgentThread>;
-    };
+    } | ServicePatterns.AgentV1Error;
 
     /**
      * Gets information about an existing thread.
@@ -61,7 +62,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
     @route("/{threadId}")
-    getThread is Azure.Core.Foundations.Operation<
+    getThread is ServicePatterns.AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -81,7 +82,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{threadId}")
-    updateThread is Azure.Core.Foundations.Operation<
+    updateThread is ServicePatterns.AgentOperation<
       {
         /**
          * The details used to update an existing agent thread.
@@ -102,7 +103,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @delete
     @route("/{threadId}")
-    deleteThread is Azure.Core.Foundations.Operation<
+    deleteThread is ServicePatterns.AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
