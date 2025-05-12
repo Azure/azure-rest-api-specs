@@ -44,14 +44,20 @@ interface OpenAIIntegrationRPModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OpenAI_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<OpenAIIntegrationRPModel,Error = ResourceProviderDefaultErrorResponse>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    OpenAIIntegrationRPModel,
+    Error = ResourceProviderDefaultErrorResponse
+  >;
 
   /**
    * Delete OpenAI integration rule for a given monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OpenAI_Delete")
-  delete is ArmResourceDeleteSync<OpenAIIntegrationRPModel,Error = ResourceProviderDefaultErrorResponse>;
+  delete is ArmResourceDeleteSync<
+    OpenAIIntegrationRPModel,
+    Error = ResourceProviderDefaultErrorResponse
+  >;
 
   /**
    * List OpenAI integration rule for a given monitor resource.
