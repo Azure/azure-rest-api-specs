@@ -167,6 +167,9 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: extensions.json
     reason: Existing service contract needs to be backward compatible.  
+  - code: LroResponseHeader
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible. 
 ```
 
 ### Tag: package-2022-03
@@ -201,6 +204,9 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: extensions.json
     reason: Existing service contract needs to be backward compatible.  
+  - code: LroResponseHeader
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible. 
 ```
 
 ### Tag: package-2021-09
