@@ -608,7 +608,6 @@ union SkuTier {
   Premium: "Premium",
 }
 
-
 /**
  * VolumeGroup response properties.
  */
