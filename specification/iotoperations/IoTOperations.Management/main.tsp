@@ -15,7 +15,6 @@ import "./models/dataflows/dataflowEndpoints.tsp";
 import "./models/dataflows/dataflowProfiles.tsp";
 import "./models/dataflows/dataflows.tsp";
 import "./models/dataflows/dataflowGraphs.tsp";
-import "./models/diagnostics/diagnostic.tsp";
 import "./models/registryEndpoints/registryEndpoint.tsp";
 import "./models/akri/connectorTemplate.tsp";
 import "./models/akri/connector.tsp";
@@ -148,16 +147,6 @@ interface RegistryEndpoint {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<RegistryEndpointResource>;
   delete is ArmResourceDeleteWithoutOkAsync<RegistryEndpointResource>;
   listByInstanceResource is ArmResourceListByParent<RegistryEndpointResource>;
-}
-
-// /instance/diagnostics resource Operations
-@armResourceOperations
-@added(Versions.`2025-07-01-preview`)
-interface Diagnostic {
-  get is ArmResourceRead<DiagnosticResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiagnosticResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<DiagnosticResource>;
-  listByInstanceResource is ArmResourceListByParent<DiagnosticResource>;
 }
 
 // /instance/akriConnectorTemplates resource Operations
