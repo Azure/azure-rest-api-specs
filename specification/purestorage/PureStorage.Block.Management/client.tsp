@@ -21,4 +21,5 @@ namespace PureStorage.Block.Client {
   @@clientName(PureStorage.Block.StoragePoolEnableAvsConnectionPost.sddcResourceId,
     "clusterResourceId"
   );
+  @@clientName(PureStorage.Block, "PureStorageBlockMgmtClient", "python");
 }
