@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.ManufacturingPlatform",
-    "version": "2025-03-01",
+    "version": "2023-02-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -72,14 +72,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -112,11 +104,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ManufacturingDataServices_ListBySubscription_MaximumSet": {
-            "$ref": "./examples/ManufacturingDataServices_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -154,11 +141,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ManufacturingDataServices_ListByResourceGroup_MaximumSet": {
-            "$ref": "./examples/ManufacturingDataServices_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -204,11 +186,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ManufacturingDataServices_Get_MaximumSet": {
-            "$ref": "./examples/ManufacturingDataServices_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -275,11 +252,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ManufacturingDataServices_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -349,11 +321,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ManufacturingDataServices_Update_MaximumSet": {
-            "$ref": "./examples/ManufacturingDataServices_Update_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -409,11 +376,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ManufacturingDataServices_Delete_MaximumSet": {
-            "$ref": "./examples/ManufacturingDataServices_Delete_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -459,16 +421,27 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ManufacturingDataServices_ListAvailableVersions_MaximumSet": {
-            "$ref": "./examples/ManufacturingDataServices_ListAvailableVersions_MaximumSet_Gen.json"
-          }
         }
       }
     }
   },
   "definitions": {
+    "AdtProfile": {
+      "type": "object",
+      "description": "The properties related to Azure Digital Twin (Adt) Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Adt Resource",
+          "readOnly": true
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Host Name",
+          "readOnly": true
+        }
+      }
+    },
     "AdxProfile": {
       "type": "object",
       "description": "The properties related to Azure Data Explorer (Adx) Resource",
@@ -497,6 +470,17 @@
         "id": {
           "type": "string",
           "description": "Resource Id of AKS Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "AkvProfile": {
+      "type": "object",
+      "description": "The properties related to Azure Key Vault (Akv) Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Akv Resource",
           "readOnly": true
         }
       }
@@ -564,50 +548,6 @@
         }
       }
     },
-    "Azure.ResourceManager.CommonTypes.SkuUpdate": {
-      "type": "object",
-      "description": "The resource model definition representing SKU",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
-        },
-        "tier": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/SkuTier",
-          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
-        },
-        "size": {
-          "type": "string",
-          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
-        },
-        "family": {
-          "type": "string",
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
-        }
-      }
-    },
-    "CmkProfile": {
-      "type": "object",
-      "description": "The properties related to CMK",
-      "properties": {
-        "keyUri": {
-          "type": "string",
-          "description": "URI of Key in AKV",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "keyUri"
-      ]
-    },
     "DatabaseProfile": {
       "type": "object",
       "description": "The properties related to Database Resource",
@@ -619,116 +559,24 @@
         }
       }
     },
-    "DenyAssignmentExclusion": {
-      "type": "object",
-      "description": "The properties related to Deny Assignment Exclusions",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Object Id of Identity",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of Identity",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
-    },
     "EventHubProfile": {
       "type": "object",
       "description": "The properties related to EventHub Resource",
       "properties": {
-        "adxInstanceId": {
+        "ingestionInstanceId": {
           "type": "string",
-          "description": "Resource Id of Adx Instance",
+          "description": "Resource Id of Ingestion Instance EventHub Resource",
+          "readOnly": true
+        },
+        "dhInstanceId": {
+          "type": "string",
+          "description": "Resource Id of Data History Instance EventHub Resource",
           "readOnly": true
         },
         "hostName": {
           "type": "string",
           "description": "Host Name",
           "readOnly": true
-        }
-      }
-    },
-    "FabricProfile": {
-      "type": "object",
-      "description": "The properties related to Fabric",
-      "properties": {
-        "keyUri": {
-          "type": "string",
-          "description": "Azure Key Vault Uri",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "oneLakeUri": {
-          "type": "string",
-          "description": "URI of One Lake",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "oneLakePath": {
-          "type": "string",
-          "description": "One Lake Path",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "keyUri",
-        "oneLakeUri",
-        "oneLakePath"
-      ]
-    },
-    "FabricProfileUpdate": {
-      "type": "object",
-      "description": "The properties related to Fabric",
-      "properties": {
-        "keyUri": {
-          "type": "string",
-          "description": "Azure Key Vault Uri",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "oneLakeUri": {
-          "type": "string",
-          "description": "URI of One Lake",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "oneLakePath": {
-          "type": "string",
-          "description": "One Lake Path",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       }
     },
@@ -742,23 +590,6 @@
           "readOnly": true
         }
       }
-    },
-    "ManagedOnBehalfOfConfiguration": {
-      "type": "object",
-      "description": "Configuration of the managed on behalf of resource.",
-      "properties": {
-        "moboBrokerResources": {
-          "type": "array",
-          "description": "Associated MoboBrokerResources.",
-          "items": {
-            "$ref": "#/definitions/MoboBrokerResource"
-          },
-          "readOnly": true
-        }
-      },
-      "required": [
-        "moboBrokerResources"
-      ]
     },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
@@ -789,10 +620,6 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
@@ -840,18 +667,18 @@
             "create"
           ]
         },
-        "enableCopilot": {
+        "enableTeamsNotification": {
           "type": "boolean",
-          "description": "Enable Copilot.",
+          "description": "Enable Teams Notification.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
         },
-        "enableDiagnosticSettings": {
+        "enableCopilot": {
           "type": "boolean",
-          "description": "Enable Diagnostic Settings.",
+          "description": "Enable Copilot.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -872,6 +699,16 @@
           "description": "AKS Admin Group Id.",
           "default": "00000000-0000-0000-0000-000000000000",
           "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "continuousExportPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Continuous Export Period.",
+          "default": 0,
           "x-ms-mutability": [
             "read",
             "create"
@@ -902,9 +739,24 @@
           "description": "Profile of Adx Created.",
           "readOnly": true
         },
+        "akvProfile": {
+          "$ref": "#/definitions/AkvProfile",
+          "description": "Profile of Akv Created.",
+          "readOnly": true
+        },
         "redisProfile": {
           "$ref": "#/definitions/RedisProfile",
           "description": "Profile of Azure Redis Created.",
+          "readOnly": true
+        },
+        "adtProfile": {
+          "$ref": "#/definitions/AdtProfile",
+          "description": "Profile of Adt Created.",
+          "readOnly": true
+        },
+        "synapseProfile": {
+          "$ref": "#/definitions/SynapseProfile",
+          "description": "Profile of Synapse Created.",
           "readOnly": true
         },
         "monitoringProfile": {
@@ -935,68 +787,12 @@
           "$ref": "#/definitions/ManagedResourceGroupConfiguration",
           "description": "Configuration of the managed resource group associated with the resource.",
           "readOnly": true
-        },
-        "managedOnBehalfOfConfiguration": {
-          "$ref": "#/definitions/ManagedOnBehalfOfConfiguration",
-          "description": "Managed On Behalf Of Configuration.",
-          "readOnly": true
-        },
-        "cmkProfile": {
-          "$ref": "#/definitions/CmkProfile",
-          "description": "Profile of CMK Settings.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "fabricProfile": {
-          "$ref": "#/definitions/FabricProfile",
-          "description": "Profile of Fabric resources.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "userManagedOpenAIProfile": {
-          "$ref": "#/definitions/UserManagedOpenAIProfile",
-          "description": "Profile of User Managed OpenAI Resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "denyAssignmentExclusions": {
-          "type": "array",
-          "description": "Deny Assignments exclusion list.",
-          "items": {
-            "$ref": "#/definitions/DenyAssignmentExclusion"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "resourceState": {
-          "$ref": "#/definitions/ResourceState",
-          "description": "State of the resource",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "redundancyState": {
-          "$ref": "#/definitions/RedundancyState",
-          "description": "Zone redundancy state for resources",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
       "required": [
-        "aadApplicationId"
+        "aadApplicationId",
+        "aksAdminGroupId",
+        "continuousExportPeriod"
       ]
     },
     "MdsResourceUpdate": {
@@ -1006,10 +802,6 @@
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
-        },
-        "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuUpdate",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         },
         "tags": {
           "type": "object",
@@ -1037,18 +829,18 @@
             "create"
           ]
         },
-        "enableCopilot": {
+        "enableTeamsNotification": {
           "type": "boolean",
-          "description": "Enable Copilot.",
+          "description": "Enable Teams Notification.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
         },
-        "enableDiagnosticSettings": {
+        "enableCopilot": {
           "type": "boolean",
-          "description": "Enable Diagnostic Settings.",
+          "description": "Enable Copilot.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1063,59 +855,8 @@
             "update",
             "create"
           ]
-        },
-        "fabricProfile": {
-          "$ref": "#/definitions/FabricProfileUpdate",
-          "description": "Profile of Fabric resources.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "userManagedOpenAIProfile": {
-          "$ref": "#/definitions/UserManagedOpenAIProfileUpdate",
-          "description": "Profile of User Managed OpenAI Resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "denyAssignmentExclusions": {
-          "type": "array",
-          "description": "Deny Assignments exclusion list.",
-          "items": {
-            "$ref": "#/definitions/DenyAssignmentExclusion"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "resourceState": {
-          "$ref": "#/definitions/ResourceState",
-          "description": "State of the resource",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
         }
       }
-    },
-    "MoboBrokerResource": {
-      "type": "object",
-      "description": "MoboBroker resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id of MoboBrokerResource",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id"
-      ]
     },
     "MonitoringProfile": {
       "type": "object",
@@ -1136,78 +877,6 @@
           "type": "string",
           "description": "Resource Id of OpenAI Resource",
           "readOnly": true
-        },
-        "gptModelName": {
-          "type": "string",
-          "description": "GPT Model Name",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "gptModelVersion": {
-          "type": "string",
-          "description": "GPT Model Version",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "gptModelCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "GPT Model Capacity",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "gptModelSkuName": {
-          "type": "string",
-          "description": "GPT Model SKU Name",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "embeddingModelName": {
-          "type": "string",
-          "description": "Embedding Model Name",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "embeddingModelVersion": {
-          "type": "string",
-          "description": "Embedding Model Version",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "embeddingModelSkuName": {
-          "type": "string",
-          "description": "Embedding Model SKU Name",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "embeddingModelCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Embedding Model Capacity",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       }
     },
@@ -1277,54 +946,6 @@
         }
       }
     },
-    "RedundancyState": {
-      "type": "string",
-      "description": "The redundancy state of the resource",
-      "enum": [
-        "Zonal",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "RedundancyState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Zonal",
-            "value": "Zonal",
-            "description": "Resource is zone redundant"
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "Resource is not redundant"
-          }
-        ]
-      }
-    },
-    "ResourceState": {
-      "type": "string",
-      "description": "The current state of the resource",
-      "enum": [
-        "Active",
-        "Inactive"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "Resource is in active state"
-          },
-          {
-            "name": "Inactive",
-            "value": "Inactive",
-            "description": "Resource is in inactive state"
-          }
-        ]
-      }
-    },
     "StorageProfile": {
       "type": "object",
       "description": "The properties related to Storage Resource",
@@ -1336,79 +957,19 @@
         }
       }
     },
-    "UserManagedOpenAIProfile": {
+    "SynapseProfile": {
       "type": "object",
-      "description": "The properties related to User Managed OpenAI Resource",
+      "description": "The properties related to Synapse Resource",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource Id of OpenAI Resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "gptModelDeploymentName": {
-          "type": "string",
-          "description": "GPT Model Deployment Name",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "embeddingModelDeploymentName": {
-          "type": "string",
-          "description": "Embedding Model Deployment Name",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "embeddingModelType": {
-          "type": "string",
-          "description": "Embedding Model Type",
+          "description": "Resource Id of Synapse Resource",
           "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "gptModelDeploymentName",
-        "embeddingModelDeploymentName"
-      ]
-    },
-    "UserManagedOpenAIProfileUpdate": {
-      "type": "object",
-      "description": "The properties related to User Managed OpenAI Resource",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id of OpenAI Resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         },
-        "gptModelDeploymentName": {
+        "devEndpoint": {
           "type": "string",
-          "description": "GPT Model Deployment Name",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "embeddingModelDeploymentName": {
-          "type": "string",
-          "description": "Embedding Model Deployment Name",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Synapse Development Endpoint",
+          "readOnly": true
         }
       }
     }
