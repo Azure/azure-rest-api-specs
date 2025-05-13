@@ -36,6 +36,21 @@ These settings apply only when `--tag=package-2025-05-preview-only` is specified
 ``` yaml $(tag) == 'package-2025-05-preview-only'
 input-file:
   - Microsoft.ContainerRegistry/preview/2025-05-01-preview/containerregistry.json
+suppressions:
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: containerregistry.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].put
+    reason: Not a tracked resource
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: containerregistry.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].put
+    reason: Not a tracked resource
+  - code: DeleteResponseCodes
+    from: containerregistry.json
+    reason: Existing service contract needs to be backward compatible, synchronous delete returns 200
+  - code: PatchBodyParametersSchema
+    from: containerregistry.json
+    reason: Existing service contract needs to be backward compatible
 ```
 
 ### Tag: package-2025-05-preview
@@ -46,6 +61,21 @@ These settings apply only when `--tag=package-2025-03-preview` is specified on t
 input-file:
   - Microsoft.ContainerRegistry/preview/2025-05-01-preview/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry_build.json
+suppressions:
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: containerregistry.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].put
+    reason: Not a tracked resource
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: containerregistry.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].put
+    reason: Not a tracked resource
+  - code: DeleteResponseCodes
+    from: containerregistry.json
+    reason: Existing service contract needs to be backward compatible, synchronous delete returns 200
+  - code: PatchBodyParametersSchema
+    from: containerregistry.json
+    reason: Existing service contract needs to be backward compatible
 ```
 
 ### Tag: package-2025-04-only
