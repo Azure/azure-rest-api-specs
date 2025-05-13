@@ -65,6 +65,24 @@ union WorkloadComplianceState {
 }
 
 /**
+ * Defines the link type applicable for the linked resources.
+ */
+@added(Versions.v2025_06_01_preview)
+union LinkType {
+  string,
+
+  /**
+   * Indicates the Dependency link type.
+   */
+  Dependency: "Dependency",
+
+  /**
+   * Indicates the Disaster Recovery link type.
+   */
+  DisasterRecovery: "DisasterRecovery",
+}
+
+/**
  * Defines the resource provisioning states.
  */
 union ResourceProvisioningState {
@@ -114,8 +132,16 @@ scalar WorkloadResourceId
 model VirtualInstanceProperties {
   /**
    * The ID corresponding to the deployment architecture of the system.
+   * The workload specific information including the workload type, definition ID and version.
    */
+  @removed(Versions.v2025_06_01_preview)
   architectureId: string;
+
+  /**
+   * The workload specific information including the workload type, definition ID and version.
+   */
+  @added(Versions.v2025_06_01_preview)
+  workloadInfo: WorkloadInfo;
 
   /**
    * The type of environment in which the workload system is deployed - Production / Non Production.
@@ -142,13 +168,21 @@ model VirtualInstanceProperties {
   /**
    * Metadata pertaining to the workload system.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this field are dynamic and vary based on the type of the workload (kind of the virtual instance). We cannot use tags here as this field is supposed to be understood by the service and is not for customer usage. Values will always be strings."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this field are dynamic and vary based on the type of the workload. We cannot use tags here as this field is supposed to be understood by the service and is not for customer usage. Values will always be strings."
   metadata?: Record<string>;
 
   /**
    * The list of ARM IDs of the virtual instances that the system is dependent on. The ARM IDs must belong to the resources of type 'Microsoft.Workloads/virtualInstances'.
    */
+  @removed(Versions.v2025_06_01_preview)
   dependencies?: WorkloadResourceId[];
+
+  /**
+   * The list of the linked resource objects.
+   */
+  @Azure.ResourceManager.identifiers(#[])
+  @added(Versions.v2025_06_01_preview)
+  linkedResources?: LinkedResource[];
 
   /**
    * Defines the compliance state of the virtual instance, as per the corresponding workload definition and architecture.
@@ -167,6 +201,49 @@ model VirtualInstanceProperties {
    */
   @visibility(Lifecycle.Read)
   errors?: CommonTypes.ErrorDetail;
+}
+
+/**
+ * Defines the workload information object.
+ */
+@added(Versions.v2025_06_01_preview)
+model WorkloadInfo {
+  /**
+   * The type of the workload.
+   */
+  workloadType: string;
+
+  /**
+   * The ID of the corresponding workload definition.
+   */
+  workloadDefinitionId: string;
+
+  /**
+   * The version selected for the corresponding workload definition.
+   */
+  workloadDefinitionVersion?: string;
+
+  /**
+   * Defines the workload component provisioning state.
+   */
+  @visibility(Lifecycle.Read)
+  workloadDefinitionExactVersion?: string;
+}
+
+/**
+ * Defines the linked Resource class.
+ */
+@added(Versions.v2025_06_01_preview)
+model LinkedResource {
+  /**
+   * ARM ID of the linked resource. The ARM IDs must belong to the resources of type 'Microsoft.Workloads/virtualInstances'.
+   */
+  resourceId: WorkloadResourceId;
+
+  /**
+   * The type of the link.
+   */
+  linkType: LinkType;
 }
 
 /**
@@ -195,6 +272,18 @@ model UpdateVirtualInstanceRequest {
  */
 model UpdateVirtualInstanceProperties {
   /**
+   * The workload specific information including the workload type, definition ID and version.
+   */
+  @added(Versions.v2025_06_01_preview)
+  workloadInfo?: WorkloadInfo;
+
+  /**
+   * The type of environment in which the workload system is deployed - Production / Non Production.
+   */
+  @added(Versions.v2025_06_01_preview)
+  environmentType?: EnvironmentType;
+
+  /**
    * The user defined label indicating the sub category of the environment in which the workload system is deployed.
    */
   environmentLabel?: string;
@@ -212,8 +301,15 @@ model UpdateVirtualInstanceProperties {
   /**
    * Metadata pertaining to the workload system.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this field are dynamic and vary based on the type of the workload (kind of the virtual instance). We cannot use tags here as this field is supposed to be understood by the service and is not for customer usage. Values will always be strings."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this field are dynamic and vary based on the type of the workload. We cannot use tags here as this field is supposed to be understood by the service and is not for customer usage. Values will always be strings."
   metadata?: Record<string>;
+
+  /**
+   * The list of the linked resource objects.
+   */
+  @Azure.ResourceManager.identifiers(#[])
+  @added(Versions.v2025_06_01_preview)
+  linkedResources?: LinkedResource[];
 }
 
 /**
@@ -239,7 +335,7 @@ model WorkloadComponentProperties {
   /**
    * Metadata pertaining to the component.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this field are dynamic and vary based on the component, which itself would vary based on the type of the workload (kind of the virtual instance). We cannot use tags here as this field is supposed to be understood by the service and is not for customer usage. Values will always be strings."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this field are dynamic and vary based on the component, which itself would vary based on the type of the workload. We cannot use tags here as this field is supposed to be understood by the service and is not for customer usage. Values will always be strings."
   metadata?: Record<string>;
 
   /**
@@ -300,6 +396,6 @@ model UpdateWorkloadComponentProperties {
   /**
    * Metadata pertaining to the component.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this field are dynamic and vary based on the component, which itself would vary based on the type of the workload (kind of the virtual instance). We cannot use tags here as this field is supposed to be understood by the service and is not for customer usage. Values will always be strings."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this field are dynamic and vary based on the component, which itself would vary based on the type of the workload. We cannot use tags here as this field is supposed to be understood by the service and is not for customer usage. Values will always be strings."
   metadata?: Record<string>;
 }

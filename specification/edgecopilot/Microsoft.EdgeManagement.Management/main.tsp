@@ -5,12 +5,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.Versioning;
+using Azure.ResourceManager.Foundations;
 /**
  * The Azure Edge Copilot API.
  */
@@ -33,4 +33,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_03_01_preview: "2025-03-01-preview",
+
+  /**
+   * The 2025-06-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_06_01_preview: "2025-06-01-preview",
 }
