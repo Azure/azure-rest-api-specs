@@ -508,3 +508,5 @@ union FaultSimulationStatus {
    */
   StopFailed: "StopFailed",
 }
+
+@@Azure.ResourceManager.identifiers(OperationListResult.value, #[]);
