@@ -148,6 +148,11 @@ extends:
               versionSpec: $(NodeVersion)
             displayName: 'Install Node.js'
 
+          - task: UseNode@0
+            inputs:
+              version: $(NodeVersion)
+            displayName: 'Install Node.js'
+
           - task: UsePythonVersion@0
             inputs:
               versionSpec: $(PythonVersion)
