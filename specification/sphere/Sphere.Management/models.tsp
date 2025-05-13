@@ -866,3 +866,5 @@ model CustomMaxPageSizeQueryParameter {
   @query("$maxpagesize")
   maxpagesize?: int32;
 }
+
+@@identifiers(PagedDeviceInsight.value, #[]);
