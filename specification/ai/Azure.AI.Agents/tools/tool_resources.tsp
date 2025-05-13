@@ -97,13 +97,13 @@ model IndexResource {
    * An index connection id in an IndexResource attached to this agent.
    */
   @encodedName("application/json", "index_connection_id")
-  indexConnectionId: string;
+  indexConnectionId?: string;
 
   /**
    * The name of an index in an IndexResource attached to this agent.
    */
   @encodedName("application/json", "index_name")
-  indexName: string;
+  indexName?: string;
 }
 
 /**
@@ -129,6 +129,12 @@ model AISearchIndexResource {
    *  filter string for search resource.
    */
   filter?: string;
+
+  /**
+   * Index asset id for search resource.
+   */
+  @encodedName("application/json", "index_asset_id")
+  indexAssetId?: string;
 }
 
 /** Available query types for Azure AI Search tool. */

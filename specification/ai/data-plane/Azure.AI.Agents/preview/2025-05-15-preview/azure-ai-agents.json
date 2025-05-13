@@ -2758,12 +2758,13 @@
         "filter": {
           "type": "string",
           "description": "filter string for search resource."
+        },
+        "index_asset_id": {
+          "type": "string",
+          "description": "Index asset id for search resource.",
+          "x-ms-client-name": "indexAssetId"
         }
-      },
-      "required": [
-        "index_connection_id",
-        "index_name"
-      ]
+      }
     },
     "Agent": {
       "type": "object",
@@ -4469,11 +4470,7 @@
           "description": "The name of an index in an IndexResource attached to this agent.",
           "x-ms-client-name": "indexName"
         }
-      },
-      "required": [
-        "index_connection_id",
-        "index_name"
-      ]
+      }
     },
     "ListSortOrder": {
       "type": "string",
