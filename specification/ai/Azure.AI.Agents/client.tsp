@@ -17,7 +17,7 @@ using Azure.AI.Agents;
   "PersistentAgentsAdministrationClient",
   "csharp, java"
 );
-@@access(Azure.AI.Agents.deleteAgent, Access.internal, "csharp");
+@@access(Azure.AI.Agents.deleteAgent, Access.internal, "csharp, python");
 @@clientName(Azure.AI.Agents.deleteAgent, "InternalDeleteAgent", "csharp");
 
 @@access(Azure.AI.Agents.createThreadAndRun, Access.internal, "csharp");
@@ -30,13 +30,12 @@ using Azure.AI.Agents;
   Access.internal,
   "python, java, javascript"
 );
-@@clientName(Azure.AI.Agents.Files.deleteFile, "delete", "python");
 @@clientName(Azure.AI.Agents.Files.getFile, "get", "python");
 @@access(Azure.AI.Agents.Files.getFileContent, Access.internal, "python");
 
 @@access(Azure.AI.Agents.Files.listFiles, Access.internal, "csharp");
 @@clientName(Azure.AI.Agents.Files.listFiles, "InternalListFiles", "csharp");
-@@access(Azure.AI.Agents.Files.deleteFile, Access.internal, "csharp");
+@@access(Azure.AI.Agents.Files.deleteFile, Access.internal, "csharp, python");
 @@clientName(Azure.AI.Agents.Files.deleteFile, "InternalDeleteFile", "csharp");
 
 // --------------------------------------------------------------------------------
@@ -54,9 +53,11 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Threads.listThreads, "list", "python");
 @@clientName(Azure.AI.Agents.Threads.getThread, "get", "python");
 @@clientName(Azure.AI.Agents.Threads.updateThread, "update", "python");
-@@clientName(Azure.AI.Agents.Threads.deleteThread, "delete", "python");
 
-@@access(Azure.AI.Agents.Threads.deleteThread, Access.internal, "csharp");
+@@access(Azure.AI.Agents.Threads.deleteThread,
+  Access.internal,
+  "csharp, python"
+);
 @@clientName(Azure.AI.Agents.Threads.deleteThread,
   "InternalDeleteThread",
   "csharp"
@@ -101,14 +102,10 @@ using Azure.AI.Agents;
   "modify",
   "python"
 );
-@@clientName(Azure.AI.Agents.VectorStores.deleteVectorStore,
-  "delete",
-  "python"
-);
 
 @@access(Azure.AI.Agents.VectorStores.deleteVectorStore,
   Access.internal,
-  "csharp"
+  "csharp, python"
 );
 @@clientName(Azure.AI.Agents.VectorStores.deleteVectorStore,
   "InternalDeleteVectorStore",
@@ -150,14 +147,10 @@ using Azure.AI.Agents;
   "get",
   "python"
 );
-@@clientName(Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
-  "delete",
-  "python"
-);
 
 @@access(Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
   Access.internal,
-  "csharp"
+  "csharp, python"
 );
 @@clientName(Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
   "InternalDeleteVectorStoreFile",
