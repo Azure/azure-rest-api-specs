@@ -166,12 +166,12 @@ function skipForManagementPlane(folder: string): SkipResult {
   };
 }
 
-function skipForNonModularOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
-  const isModularClient =
+function skipForRLCOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
+  const isRLCClient =
     config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== true;
-  const shouldRun = isManagementSdk(folder) || isModularClient;
+  const shouldRun = isManagementSdk(folder) || isRLCClient;
   const result: SkipResult = {
-    shouldSkip: !shouldRun,
+    shouldSkip: shouldRun,
   };
   if (result.shouldSkip)
     result.reason = "This rule is only applicable for data plane SDKs with modular client.";
@@ -283,7 +283,7 @@ export class TspConfigTsModularPackageNameMatchPatternSubRule extends TspconfigE
   }
 
   protected skip(config: any, folder: string) {
-    return skipForNonModularOrManagementPlaneInTsEmitter(config, folder);
+    return skipForRLCOrManagementPlaneInTsEmitter(config, folder);
   }
 }
 // ----- Go data plane sub rules -----
