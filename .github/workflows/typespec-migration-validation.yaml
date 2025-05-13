@@ -1,13 +1,16 @@
 name: TypeSpec Migration Validation
 
-on: pull_request
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
 
 permissions:
   contents: read
 
 jobs:
-  typespec-validation:
-    name: TypeSpec Validation
+  typespec-migration-validation:
+    name: TypeSpec Migration Validation
+    if: contains(fromJSON('["true"]'), contains(toJSON(github.event.pull_request.labels.*.name), 'typespec-migration-'))
     runs-on: ubuntu-24.04
 
     steps:
