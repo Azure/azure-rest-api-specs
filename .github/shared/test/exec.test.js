@@ -62,7 +62,7 @@ describe("execNpmExec", () => {
   // so it is used.
   it("runs spec-model", async () => {
     await expect(
-      execNpmExec(["spec-model", "../../specification/contosowidgetmanager"]),
+      execNpmExec(["spec-model", "test/fixtures/execNpmExec/"]),
     ).resolves.toEqual({
       stdout: expect.toSatisfy((v) => v.includes("readme")),
       stderr: "",
