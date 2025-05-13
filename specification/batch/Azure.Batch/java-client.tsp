@@ -1960,3 +1960,23 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
   "parameters",
   "java"
 );
+@@clientName(Azure.Batch.TerminateJobOptionalParameters.options,
+  "parameters",
+  "java"
+);
+@@clientName(Azure.Batch.RebootNodeOptionalParameters.options,
+  "parameters",
+  "java"
+);
+@@clientName(Azure.Batch.DeallocateNodeOptionalParameters.options,
+  "parameters",
+  "java"
+);
+@@clientName(Azure.Batch.ReimageNodeOptionalParameters.options,
+  "parameters",
+  "java"
+);
+@@clientName(Azure.Batch.DisableNodeSchedulingOptionalParameters.options,
+  "parameters",
+  "java"
+);

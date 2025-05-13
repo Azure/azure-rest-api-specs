@@ -680,7 +680,7 @@ alias TerminateJobRequiredParameters = {
 alias TerminateJobOptionalParameters = {
   @doc("The options to use for terminating the Job.")
   @bodyRoot
-  parameters?: BatchJobTerminateOptions;
+  options?: BatchJobTerminateOptions;
 
   @doc("If true, the server will terminate the Job even if the corresponding nodes have not fully processed the termination. The default value is false.")
   @query
@@ -1231,7 +1231,7 @@ alias RebootNodeRequiredParameters = {
 alias RebootNodeOptionalParameters = {
   @doc("The options to use for rebooting the Compute Node.")
   @bodyRoot
-  parameters?: BatchNodeRebootOptions;
+  options?: BatchNodeRebootOptions;
 };
 
 alias DeallocateNodeRequiredParameters = {
@@ -1247,7 +1247,7 @@ alias DeallocateNodeRequiredParameters = {
 alias DeallocateNodeOptionalParameters = {
   @doc("The options to use for deallocating the Compute Node.")
   @bodyRoot
-  parameters?: BatchNodeDeallocateOptions;
+  options?: BatchNodeDeallocateOptions;
 };
 
 alias ReimageNodeRequiredParameters = {
@@ -1263,7 +1263,7 @@ alias ReimageNodeRequiredParameters = {
 alias ReimageNodeOptionalParameters = {
   @doc("The options to use for reimaging the Compute Node.")
   @body
-  parameters?: BatchNodeReimageOptions;
+  options?: BatchNodeReimageOptions;
 };
 
 alias DisableNodeSchedulingRequiredParameters = {
@@ -1279,7 +1279,7 @@ alias DisableNodeSchedulingRequiredParameters = {
 alias DisableNodeSchedulingOptionalParameters = {
   @doc("The options to use for disabling scheduling on the Compute Node.")
   @bodyRoot
-  parameters?: BatchNodeDisableSchedulingOptions;
+  options?: BatchNodeDisableSchedulingOptions;
 };
 
 alias EnableNodeSchedulingRequiredParameters = {
