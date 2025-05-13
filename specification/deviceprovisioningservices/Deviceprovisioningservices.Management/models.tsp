@@ -21,14 +21,14 @@ model PrivateEndpointConnectionsList is PrivateEndpointConnection[];
 @pagedResult
 model OperationListResult {
   /**
-   * [Placeholder] Discription for value property
+   * [Placeholder] Description for value property
    */
   @items
   @visibility(Lifecycle.Read)
   value: Operation[];
 
   /**
-   * [Placeholder] Discription for nextLink property.
+   * [Placeholder] Description for nextLink property.
    */
   @nextLink
   nextLink?: string;
