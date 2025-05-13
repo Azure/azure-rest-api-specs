@@ -40,6 +40,12 @@ using PureStorage.Block;
 @@clientName(VolumeProperties, "PureStorageVolumeProperties", "csharp");
 @@clientName(AvsVm, "PureStorageAvsVm", "csharp");
 @@clientName(AvsVmProperties, "PureStorageAvsVmProperties", "csharp");
+@@alternateType(AvsVmProperties.storagePoolResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(AvsVmProperties.createdTimestamp, "CreatedOn", "csharp");
+@@alternateType(AvsVmProperties.createdTimestamp, utcDateTime, "csharp");
 @@clientName(AvsVmVolume, "PureStorageAvsVmVolume", "csharp");
 @@clientName(LiftrBase.Address, "PureStorageAddressDetails", "csharp");
 @@clientName(Alert, "PureStorageHealthAlert", "csharp");
