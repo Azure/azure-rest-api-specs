@@ -141,7 +141,7 @@ directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.Resource"
     transform: >
-      $["x-ms-client-name"] = "SecurityPerimeterResouce"
+      $["x-ms-client-name"] = "SecurityPerimeterResource"
 
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.systemData"
