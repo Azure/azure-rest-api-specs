@@ -30,7 +30,8 @@ model DataflowEndpointResource is ProxyResource<DataflowEndpointProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation: ExtendedLocation;
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")

@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
@@ -29,7 +30,8 @@ model BrokerAuthorizationResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation: ExtendedLocation;
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("BrokerAuthorization Resource properties")
