@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 
 @Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace Azure.AI.Agents;
+namespace Azure.AI.ServicePatterns;
 
 @doc("Error payload returned by the agents API.")
 @error
