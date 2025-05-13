@@ -61,9 +61,9 @@ describe("execNpmExec", () => {
   // something referenced in dependencies or npm itself (which can be assumed
   // to be present). In this case, "npm --version" works.
 
-  // Timeout of 10s because Windows can sometimes take a while to run npm exec
+  // Timeout of 15s because Windows can sometimes take a while to run npm exec
   // in CI.
-  it("runs npm --version", { timeout: 10_000 }, async () => {
+  it("runs npm --version", { timeout: 15_000 }, async () => {
     await expect(execNpmExec(["npm", "--version"])).resolves.toEqual({
       stdout: expect.toSatisfy((v) => semver.valid(v)),
       stderr: "",
