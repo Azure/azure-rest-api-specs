@@ -422,16 +422,30 @@ using Azure.AI.Agents;
   "UriCitation",
   "csharp"
 );
-@@clientName(RunStepStreamEvent.ThreadRunStepCompleted, "Completed", "csharp");
-@@clientName(RunStepStreamEvent.ThreadRunStepCreated, "Created", "csharp");
-@@clientName(RunStepStreamEvent.ThreadRunStepDelta, "Delta", "csharp");
-@@clientName(RunStepStreamEvent.ThreadRunStepExpired, "Expired", "csharp");
-@@clientName(RunStepStreamEvent.ThreadRunStepFailed, "Failed", "csharp");
+// Run stream events
+@@clientName(RunStepStreamEvent.ThreadRunStepCompleted, "RunStepCompleted", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepCreated, "RunStepCreated", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepDelta, "RunStepDelta", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepExpired, "RunStepExpired", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepFailed, "RunStepFailed", "csharp");
 @@clientName(RunStepStreamEvent.ThreadRunStepInProgress,
-  "InProgress",
+  "RunStepInProgress",
   "csharp"
 );
-@@clientName(RunStepStreamEvent.ThreadRunStepCancelled, "Cancelled", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepCancelled, "RunStepCancelled", "csharp");
+// Message stream events
+@@clientName(MessageStreamEvent.ThreadMessageCompleted, "MessageCompleted", "csharp");
+@@clientName(MessageStreamEvent.ThreadMessageCreated, "MessageCreated", "csharp");
+@@clientName(MessageStreamEvent.ThreadMessageDelta, "MessageDelta", "csharp");
+@@clientName(MessageStreamEvent.ThreadMessageIncomplete,
+  "MessageIncomplete",
+  "csharp"
+);
+@@clientName(MessageStreamEvent.ThreadMessageInProgress,
+  "MessageInProgress",
+  "csharp"
+);
+
 @@clientName(TruncationObject, "Truncation", "csharp");
 @@clientName(VectorStoreAutoChunkingStrategyRequest,
   "VectorStoreAutoChunkingStrategy",
