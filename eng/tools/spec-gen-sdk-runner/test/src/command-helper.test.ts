@@ -201,11 +201,11 @@ describe("commands.ts", () => {
       logIssuesToPipeline("/log/path", "spec config");
 
       expect(log.logMessage).toHaveBeenCalledWith(
-        "Errors occurred while generating SDK from spec config",
+        "Errors occurred while generating SDK from spec config. Follow the steps at https://aka.ms/azsdk/sdk-automation-faq#how-to-view-the-detailed-sdk-generation-errors to view detailed errors.",
         LogLevel.Group,
       );
       expect(log.vsoLogIssue).toHaveBeenCalledWith(
-        "Errors occurred while generating SDK from spec config%0D%0Aerror1%0D%0Aerror2",
+        "Errors occurred while generating SDK from spec config. Follow the steps at https://aka.ms/azsdk/sdk-automation-faq#how-to-view-the-detailed-sdk-generation-errors to view detailed errors.%0D%0Aerror1%0D%0Aerror2",
       );
     });
 
@@ -222,9 +222,9 @@ describe("commands.ts", () => {
         // mock implementation intentionally left blank
       });
 
-      expect(() => { logIssuesToPipeline("/log/path", "spec config"); }).toThrow(
-        `Runner: error reading log at ${mockLogPath}:Error: ${mockLogError}`,
-      );
+      expect(() => {
+        logIssuesToPipeline("/log/path", "spec config");
+      }).toThrow(`Runner: error reading log at ${mockLogPath}:Error: ${mockLogError}`);
       expect(log.logMessage).not.toHaveBeenCalled();
       expect(log.vsoLogIssue).not.toHaveBeenCalled();
     });

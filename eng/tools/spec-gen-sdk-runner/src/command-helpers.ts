@@ -161,6 +161,18 @@ export function getSpecPaths(batchType: string, specRepoPath: string): string[] 
       specConfigPaths.push(...getAllTypeSpecPaths(specRepoPath));
       break;
     }
+    case "all-mgmtplane-typespecs": {
+      specConfigPaths.push(
+        ...getAllTypeSpecPaths(specRepoPath).filter((p) => p.includes(".Management")),
+      );
+      break;
+    }
+    case "all-dataplane-typespecs": {
+      specConfigPaths.push(
+        ...getAllTypeSpecPaths(specRepoPath).filter((p) => !p.includes(".Management")),
+      );
+      break;
+    }
     case "all-openapis": {
       specConfigPaths.push(...findReadmeFiles(path.join(specRepoPath, "specification")));
       break;
@@ -193,14 +205,18 @@ export function logIssuesToPipeline(logPath: string, specConfigDisplayText: stri
     const errors = [...vsoLogs.values()].flatMap((entry) => entry.errors ?? []);
     const warnings = [...vsoLogs.values()].flatMap((entry) => entry.warnings ?? []);
     if (errors.length > 0) {
-      const errorTitle = `Errors occurred while generating SDK from ${specConfigDisplayText}`;
+      const errorTitle =
+        `Errors occurred while generating SDK from ${specConfigDisplayText}. ` +
+        `Follow the steps at https://aka.ms/azsdk/sdk-automation-faq#how-to-view-the-detailed-sdk-generation-errors to view detailed errors.`;
       logMessage(errorTitle, LogLevel.Group);
       const errorsWithTitle = [errorTitle, ...errors];
       vsoLogIssue(errorsWithTitle.join("%0D%0A"));
       logMessage("ending group logging", LogLevel.EndGroup);
     }
     if (warnings.length > 0) {
-      const warningTitle = `Warnings occurred while generating SDK from ${specConfigDisplayText}`;
+      const warningTitle =
+        `Warnings occurred while generating SDK from ${specConfigDisplayText}. ` +
+        `Follow the steps at https://aka.ms/azsdk/sdk-automation-faq#how-to-view-the-detailed-sdk-generation-errors to view detailed warnings.`;
       logMessage(warningTitle, LogLevel.Group);
       const warningsWithTitle = [warningTitle, ...warnings];
       vsoLogIssue(warningsWithTitle.join("%0D%0A"), LogIssueType.Warning);
