@@ -9,6 +9,7 @@
     - [Steps to Download Artifacts](#steps-to-download-artifacts)
   - [How to View the Html Report of `spec-gen-sdk` Checks Result](#how-to-view-the-html-report-of-spec-gen-sdk-checks-result)
   - [How to View the Detailed SDK Generation Errors](#how-to-view-the-detailed-sdk-generation-errors)
+  - [Locating an Automatically Generated SDK Pull Request from Your API Specs](#locating-an-automatically-generated-sdk-pull-request-from-your-api-specs)
   - [.NET SDK Generation Error Fix Guidance](#net-sdk-generation-error-fix-guidance)
     - [How to Fix Naming Violations for Management Plane SDK](#how-to-fix-naming-violations-for-management-plane-sdk)
 
@@ -25,7 +26,8 @@ Let's take Python as an example.
 1. Navigate to `Checks` page: click on the **Checks** tab in the navigation pane of the pull request.
    ![image](https://github.com/user-attachments/assets/109f7d90-52f6-45ed-ac12-ce2ae3e49af8)
 
-2. View the **spec-gen-sdk - python - pullrequest** check result: click on the `spec-gen-sdk - python - pullrequest` item in the left CI check list.
+2. View the **spec-gen-sdk - python - pullrequest** check result: click on the `spec-gen-sdk - python - pullrequest` item
+ in the left CI check list.
    ![image](https://github.com/user-attachments/assets/72fb239d-d36a-45ae-8d56-50a25c37239a)
 
 3. View Azure DevOps Build Pipeline Run: click on the `Pipeline result` link.
@@ -57,6 +59,10 @@ Let's take Python as an example.
 3. Review Detailed Log Information: expand the log group immediately above the error summary group.
    ![Image](https://github.com/user-attachments/assets/d9ea22f3-bdd1-42a0-9610-c9cd0339b8e5)
 
+## Locating an Automatically Generated SDK Pull Request from Your API Specs
+
+For detailed instructions, please refer to [Using the SDK Generation Pipelines](https://aka.ms/azsdk/spec-gen-sdk-pipeline-doc).
+
 ## .NET SDK Generation Error Fix Guidance
 
 ### How to Fix Naming Violations for Management Plane SDK
@@ -67,10 +73,12 @@ If your pipeline run logs already outline the naming violations, simply locate t
    Identify the naming violations highlighted in the log output.
 
 2. **Consult Naming Conventions:**
-   Familiarize yourself with the [Naming Conventions](https://github.com/Azure/azure-sdk-for-net/blob/main/doc/dev/Mgmt-Naming-Conventions.md) guidelines to understand the expected naming rules.
+   Familiarize yourself with the [Naming Conventions](https://github.com/Azure/azure-sdk-for-net/blob/main/doc/dev/Mgmt-Naming-Conventions.md)
+    guidelines to understand the expected naming rules.
 
 3. **Apply Polishing Configurations:**
-   Use the [Polishing Configurations](https://github.com/Azure/azure-sdk-for-net/blob/main/doc/dev/Mgmt-Polishing-Configurations.md) as a reference to adjust your SDK naming as per the conventions.
+   Use the [Polishing Configurations](https://github.com/Azure/azure-sdk-for-net/blob/main/doc/dev/Mgmt-Polishing-Configurations.md)
+    as a reference to adjust your SDK naming as per the conventions.
 
 4. **Update and Validate:**
    Modify the specs to correct the naming issues and run the CI checks again to confirm that all violations have been resolved.
