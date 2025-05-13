@@ -1278,80 +1278,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/markFailedMachineState": {
-      "post": {
-        "operationId": "EdgeMachines_MarkFailedMachineState",
-        "tags": [
-          "EdgeMachines"
-        ],
-        "description": "A long-running resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "edgeMachineName",
-            "in": "path",
-            "description": "Name of Device",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MarkFailedMachineStateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeMachine"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EdgeMachines_MarkFailedMachineState": {
-            "$ref": "./examples/EdgeMachines_MarkFailedMachineState.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/resetFailedMachineState": {
       "post": {
         "operationId": "EdgeMachines_ResetFailedMachineState",
@@ -1409,6 +1335,80 @@
         "x-ms-examples": {
           "EdgeMachines_ResetFailedMachineState": {
             "$ref": "./examples/EdgeMachines_ResetFailedMachineState.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/setFailedMachineState": {
+      "post": {
+        "operationId": "EdgeMachines_SetFailedMachineState",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetFailedMachineStateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachine"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachines_SetFailedMachineState": {
+            "$ref": "./examples/EdgeMachines_SetFailedMachineState.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2181,7 +2181,7 @@
         },
         "claimedBy": {
           "type": "string",
-          "description": "Tracks the ID of the consuming resource, marking the machine as in-use.",
+          "description": "Tracks the ID of the consuming resource, Settingthe machine as in-use.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -2761,16 +2761,6 @@
         }
       }
     },
-    "MarkFailedMachineStateRequest": {
-      "type": "object",
-      "description": "The Mark Failed request for Edge Machine..",
-      "properties": {
-        "failureDetails": {
-          "$ref": "#/definitions/FailureDetails",
-          "description": "Failure details to set why edge machine set to Failed state."
-        }
-      }
-    },
     "NetworkAdapter": {
       "type": "object",
       "description": "Network adapter configuration.",
@@ -2782,6 +2772,14 @@
         "ipAddress": {
           "type": "string",
           "description": "IP address."
+        },
+        "adapterName": {
+          "type": "string",
+          "description": "Adapter Name."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "MAC address."
         },
         "ipAddressRange": {
           "$ref": "#/definitions/IpAddressRange",
@@ -3599,6 +3597,16 @@
           "type": "string",
           "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
           "readOnly": true
+        }
+      }
+    },
+    "SetFailedMachineStateRequest": {
+      "type": "object",
+      "description": "The Set Failed request for Edge Machine..",
+      "properties": {
+        "failureDetails": {
+          "$ref": "#/definitions/FailureDetails",
+          "description": "Failure details to set why edge machine set to Failed state."
         }
       }
     },

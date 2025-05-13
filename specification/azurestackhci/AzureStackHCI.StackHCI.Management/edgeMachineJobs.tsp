@@ -555,6 +555,12 @@ model NetworkAdapter {
   @doc("IP address.")
   ipAddress?: string;
 
+  @doc("Adapter Name.")
+  adapterName?: string;
+
+  @doc("MAC address.")
+  macAddress?: string;
+
   @doc("IP address range.")
   ipAddressRange?: IpAddressRange;
 

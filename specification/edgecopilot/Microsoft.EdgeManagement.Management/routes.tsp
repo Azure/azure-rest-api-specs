@@ -6,10 +6,11 @@ import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager;
+using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
 
 namespace Microsoft.EdgeManagement;
 
@@ -20,9 +21,20 @@ interface Edge {
    */
   @autoRoute
   chat is ArmProviderActionSync<
-    Request = ChatRequest,
+    Request = ChatRequestContent,
     Response = ChatResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
+  >;
+
+  /**
+   * Trigger a troubleshooting action
+   */
+  @added(Versions.v2025_06_01_preview)
+  @autoRoute
+  troubleshoot is ArmResourceActionSync<
+    Resource = ExtensionResource<{}>,
+    Request = ChatRequestContent,
+    Response = ChatResult
   >;
 }

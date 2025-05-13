@@ -1,4 +1,6 @@
+import { relative, resolve } from "path";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { repoRoot } from "../../shared/test/repo.js";
 
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
@@ -266,7 +268,7 @@ describe("incrementalTypeSpec", () => {
       "-r",
       "--name-only",
       "HEAD^",
-      specDir,
+      relative(repoRoot, resolve(repoRoot, specDir)),
     ]);
   });
 
