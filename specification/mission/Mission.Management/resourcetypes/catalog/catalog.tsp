@@ -38,6 +38,8 @@ model BlobCatalog is CatalogBase {
 union Catalog {
   @doc("Blob Catalog")
   blob: BlobCatalog,
+
+  string,
 }
 
 @doc("Package Properties")
