@@ -138,10 +138,10 @@ model Resources {
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
   @doc("baseProfile, Resource properties that common across all resources ")
-  baseProfile?: string;
+  baseProfile?: bytes;
 
   @doc("resourceOverrides, properties per resource that needs to be overwritted from baseProfile")
-  resourceOverrides?: Array<string>;
+  resourceOverrides?: Array<bytes>;
 
   @doc("Number of resources to be created")
   resourceCount: int32;
