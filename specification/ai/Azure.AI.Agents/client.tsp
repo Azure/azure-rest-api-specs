@@ -416,19 +416,37 @@ using Azure.AI.Agents;
   "csharp"
 );
 // Run stream events
-@@clientName(RunStepStreamEvent.ThreadRunStepCompleted, "RunStepCompleted", "csharp");
-@@clientName(RunStepStreamEvent.ThreadRunStepCreated, "RunStepCreated", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepCompleted,
+  "RunStepCompleted",
+  "csharp"
+);
+@@clientName(RunStepStreamEvent.ThreadRunStepCreated,
+  "RunStepCreated",
+  "csharp"
+);
 @@clientName(RunStepStreamEvent.ThreadRunStepDelta, "RunStepDelta", "csharp");
-@@clientName(RunStepStreamEvent.ThreadRunStepExpired, "RunStepExpired", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepExpired,
+  "RunStepExpired",
+  "csharp"
+);
 @@clientName(RunStepStreamEvent.ThreadRunStepFailed, "RunStepFailed", "csharp");
 @@clientName(RunStepStreamEvent.ThreadRunStepInProgress,
   "RunStepInProgress",
   "csharp"
 );
-@@clientName(RunStepStreamEvent.ThreadRunStepCancelled, "RunStepCancelled", "csharp");
+@@clientName(RunStepStreamEvent.ThreadRunStepCancelled,
+  "RunStepCancelled",
+  "csharp"
+);
 // Message stream events
-@@clientName(MessageStreamEvent.ThreadMessageCompleted, "MessageCompleted", "csharp");
-@@clientName(MessageStreamEvent.ThreadMessageCreated, "MessageCreated", "csharp");
+@@clientName(MessageStreamEvent.ThreadMessageCompleted,
+  "MessageCompleted",
+  "csharp"
+);
+@@clientName(MessageStreamEvent.ThreadMessageCreated,
+  "MessageCreated",
+  "csharp"
+);
 @@clientName(MessageStreamEvent.ThreadMessageDelta, "MessageDelta", "csharp");
 @@clientName(MessageStreamEvent.ThreadMessageIncomplete,
   "MessageIncomplete",
@@ -448,7 +466,7 @@ using Azure.AI.Agents;
   "VectorStoreChunkingStrategy",
   "csharp"
 );
-
+@@clientName(OpenApiFunctionDefinition.auth, "OpenApiAuthentication", "csharp");
 // Python assistant vs agent renames
 @@clientName(ThreadMessage.assistantId, "agentId", "python");
 @@clientName(GetAgentOptions.assistantId, "agentId", "python");
