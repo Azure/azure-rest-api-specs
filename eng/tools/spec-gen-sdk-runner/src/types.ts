@@ -19,6 +19,14 @@ export interface SpecGenSdkCmdInput {
   headBranch?: string;
 }
 
+/**
+ * Data for the API view request.
+ */
+export interface APIViewRequestData {
+  packageName: string;
+  filePath: string;
+}
+
 /*
  * VsoLogs is a map of task names to log entries. Each log entry contains an array of errors and warnings.
  */
@@ -38,6 +46,7 @@ export interface SpecGenSdkArtifactInfo {
   result: string;
   labelAction?: boolean;
   isSpecGenSdkCheckRequired: boolean;
+  apiViewRequestData: APIViewRequestData [];
 }
 
 /**
@@ -55,8 +64,8 @@ export type SdkName =
  */
 export const SpecGenSdkRequiredSettings: Record<SdkName, boolean> = {
   "azure-sdk-for-go": true,
-  "azure-sdk-for-java": false,
-  "azure-sdk-for-js": true,
+  "azure-sdk-for-java": true,
+  "azure-sdk-for-js": false,
   "azure-sdk-for-net": false,
   "azure-sdk-for-python": true,
 };

@@ -33,7 +33,41 @@ Adding `@usage` and `@access` to `client.tsp`:
 @@access(EventGrid.AcsChatMessageReceivedEventData, Access.public)
 ~~~
 
+### Add Examples
 
+Using the `@example` decorator in TypeSpec, add an example for your event. A sample valid example is show below:
+
+~~~ typespec
+const MicrosoftCachePatchingCompletedExample: RedisPatchingCompletedEventData = #{
+  name: "PatchingCompleted",
+  timestamp: utcDateTime.fromISO("2020-12-09T13:50:19.9995668-08:00"),
+  status: "Succeeded",
+  propertyList: #[],
+  exampleIndicatorWrapping: #{
+    `dash-value`: "myString";
+    `https://something.com` : "myUrl"
+  }
+
+};
+
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Cache.PatchingCompleted event. */
+
+@example(MicrosoftCachePatchingCompletedExample)
+model RedisPatchingCompletedEventData {
+  ...RedisBaseEventData;
+
+  propertyList: string[];
+  exampleIndicatorWrapping: Record<string>;
+}
+~~~
+
+A few things to keep in mind when formatting a TypeSpec example:
+
+1. As shown above, for scalar types such as `utcDateTime` you will need to wrap the value with the scalar constructor.
+2. When defining a dictionary or an array you must preface it with a `#`.
+3. For properties and keys that have a wording style that TypeSpec does not agree with, for example `iothub-encoding-value`, you can surround the key with ` indicators. 
+
+More on `@example` can be found [here](https://typespec.io/docs/standard-library/examples/#define-typed-examples-using-const)
 
 # For Service System Events PR Approval
 
