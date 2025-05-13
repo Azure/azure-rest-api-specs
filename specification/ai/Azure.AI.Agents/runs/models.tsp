@@ -141,7 +141,7 @@ model ThreadRun {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis")
   @encodedName("application/json", "tool_resources")
-  toolResources?: UpdateToolResourcesOptions | null;
+  toolResources?: ToolResources | null;
 
   @doc("Determines if tools can be executed in parallel within the run.")
   @encodedName("application/json", "parallel_tool_calls")
@@ -385,7 +385,7 @@ model CreateAndRunThreadOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis")
   @encodedName("application/json", "tool_resources")
-  toolResources?: UpdateToolResourcesOptions | null;
+  toolResources?: ToolResources | null;
 
   /**
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
