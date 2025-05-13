@@ -50,12 +50,21 @@ using PureStorage.Block;
   "csharp"
 );
 @@clientName(AvsDiskDetails, "PureStorageAvsDiskDetails", "csharp");
-
 @@alternateType(AvsDiskDetails.avsVmResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(AvsDiskDetails.avsStorageContainerResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(AvsStatus, "PureStorageAvsStatus", "csharp");
+@@clientName(AvsStatus.avsEnabled, "IsAvsEnabled", "csharp");
+@@alternateType(AvsStatus.sddcResourceId, armResourceIdentifier, "csharp");
+@@clientName(AvsVmDetails, "PureStorageAvsVmDetails", "csharp");
+@@clientName(AzureVmwareService, "PureStorageAvs", "csharp");
+@@clientName(AzureVmwareService.avsEnabled, "IsAvsEnabled", "csharp");
+@@alternateType(AzureVmwareService.sddcResourceId,
   armResourceIdentifier,
   "csharp"
 );
