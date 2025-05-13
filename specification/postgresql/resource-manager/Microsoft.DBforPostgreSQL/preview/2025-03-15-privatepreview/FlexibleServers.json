@@ -978,6 +978,14 @@
           "type": "string",
           "description": "Resource Id for the User assigned identity to be used for data encryption for geo-backup of server."
         },
+        "primaryDelegatedIdentityClientId": {
+          "type": "string",
+          "description": "Client Id for the User assigned identity to be used for data encryption of the primary server."
+        },
+        "geoBackupDelegatedIdentityClientId": {
+          "type": "string",
+          "description": "Client Id for the User assigned identity to be used for data encryption for geo-backup of server."
+        },
         "type": {
           "type": "string",
           "description": "Data encryption type to depict if it is System Managed vs Azure Key vault.",
@@ -1023,6 +1031,28 @@
       },
       "description": "Data encryption properties of a server"
     },
+    "DelegatedResources": {
+      "type": "object",
+      "description": "Defines delegated resources.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "the resource id of the delegated resource."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "the tenant id of the delegated resource."
+        },
+        "referralResource": {
+          "type": "string",
+          "description": "the referral resource of the delegated resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "the location of the delegated resource."
+        }
+      }
+    },
     "UserIdentity": {
       "description": "Describes a single user-assigned identity associated with the application.",
       "type": "object",
@@ -1042,6 +1072,13 @@
       "description": "Defines a map that contains user assigned identities.",
       "additionalProperties": {
         "$ref": "#/definitions/UserIdentity"
+      }
+    },
+    "DelegatedResourcesMap": {
+      "type": "object",
+      "description": "Defines a map that contains delegated resources.",
+      "additionalProperties": {
+        "$ref": "#/definitions/DelegatedResources"
       }
     },
     "UserAssignedIdentity": {
@@ -1068,6 +1105,10 @@
             "name": "IdentityType",
             "modelAsString": true
           }
+        },
+        "delegatedResources": {
+          "$ref": "#/definitions/DelegatedResourcesMap",
+          "description": "represents delegated resources."
         },
         "tenantId": {
           "type": "string",

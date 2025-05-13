@@ -28,11 +28,74 @@ These are the global settings for the PostgreSQL API.
 title: PostgreSQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2025-01-01-preview
+tag: package-flexibleserver-2025-03-15-privatepreview
 ```
 
 ``` yaml $(package-singleservers)
 tag: package-2020-01-01
+```
+
+### Tag: package-flexibleserver-2025-03-preview
+
+These settings apply only when `--tag=package-flexibleserver-2025-03-15-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2025-03-15-privatepreview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/Administrators.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/Backups.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/Capabilities.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/CheckNameAvailability.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/Configuration.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/FlexibleServers.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/LongTermRetentionOperation.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/Migrations.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/Operations.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/PrivateEndpointConnections.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/PrivateLinkResources.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/QuotaUsages.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/Replicas.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/ServerLogs.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/ServerStartStopRestart.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/ThreatProtection.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/TuningOptions.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/VirtualEndpoints.json
+  - Microsoft.DBforPostgreSQL/preview/2025-03-15-privatepreview/VirtualNetwork.json
+suppressions:
+  - code: PutResponseCodes
+    from: PrivateEndpointConnections.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: ThreatProtection.json
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: PutResponseCodes
+    from: ThreatProtection.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: VirtualEndpoints.json
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: ProvisioningStateSpecifiedForLROPatch
+    from: VirtualEndpoints.json
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: PutResponseCodes
+    from: VirtualEndpoints.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: PutResponseCodes
+    from: Backups.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: Backups.json
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: TuningOptions.json
+    where: $.definitions.SessionsListResult
+    reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: TuningOptions.json
+    where: $.definitions.SessionDetailsListResult
+    reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
 ```
 
 ### Tag: package-flexibleserver-2025-01-preview
