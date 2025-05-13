@@ -5466,6 +5466,36 @@
         "message"
       ]
     },
+    "ExclusionReason": {
+      "type": "string",
+      "description": "Enum for the reason why a resource is excluded.",
+      "enum": [
+        "UserSelectedExclusion",
+        "FailedOverResource",
+        "UnsupportedResource"
+      ],
+      "x-ms-enum": {
+        "name": "ExclusionReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserSelectedExclusion",
+            "value": "UserSelectedExclusion",
+            "description": "The resource was excluded by user selection."
+          },
+          {
+            "name": "FailedOverResource",
+            "value": "FailedOverResource",
+            "description": "The resource failed over and is excluded."
+          },
+          {
+            "name": "UnsupportedResource",
+            "value": "UnsupportedResource",
+            "description": "The resource is unsupported and excluded."
+          }
+        ]
+      }
+    },
     "ExclusionState": {
       "type": "string",
       "description": "Enum for the status of the resource in the goal.",
@@ -5740,6 +5770,10 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Details of any errors encountered during the operation."
         }
       },
       "required": [
@@ -5768,6 +5802,10 @@
             "$ref": "#/definitions/ServiceLevelResource"
           },
           "x-ms-identifiers": []
+        },
+        "errorDetails": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Details of any errors encountered during the operation."
         }
       }
     },
@@ -5869,6 +5907,14 @@
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation."
         },
+        "exclusionReasonForHighAvailabilityGoals": {
+          "$ref": "#/definitions/ExclusionReason",
+          "description": "Reason for exclusion from high availability goals."
+        },
+        "exclusionReasonForDisasterRecoveryGoals": {
+          "$ref": "#/definitions/ExclusionReason",
+          "description": "Reason for exclusion from disaster recovery goals."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
@@ -5880,7 +5926,9 @@
         "excludedFromHighAvailabilityGoals",
         "manuallyAttestedForHighAvailability",
         "excludedFromDisasterRecoveryGoals",
-        "manuallyAttestedForDisasterRecovery"
+        "manuallyAttestedForDisasterRecovery",
+        "exclusionReasonForHighAvailabilityGoals",
+        "exclusionReasonForDisasterRecoveryGoals"
       ]
     },
     "GoalTemplate": {

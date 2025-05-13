@@ -37,6 +37,9 @@ model GoalAssignmentProperties {
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+  
+  @doc("Details of any errors encountered during the operation.")
+  errorDetails?: CommonTypes.ErrorDetail;
 }
 
 @tenantResource
