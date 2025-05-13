@@ -64,8 +64,8 @@ export type SdkName =
  */
 export const SpecGenSdkRequiredSettings: Record<SdkName, boolean> = {
   "azure-sdk-for-go": true,
-  "azure-sdk-for-java": false,
-  "azure-sdk-for-js": true,
+  "azure-sdk-for-java": true,
+  "azure-sdk-for-js": false,
   "azure-sdk-for-net": false,
   "azure-sdk-for-python": true,
 };

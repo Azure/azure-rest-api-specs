@@ -198,7 +198,7 @@ model ApiManagementGatewayTokenExpiredEventData {
 model ApiManagementCircuitBreakerProperties {
   /** Overview of all configured rules and respective details. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Type is Object in swagger, we cannot define full schema given customer owns the rule names"
-  rules: Record<{}>;
+  rules: Record<Record<unknown>>;
 }
 
 /** Information related to a gateway token that has expired for a self-hosted gateway deployment. */
