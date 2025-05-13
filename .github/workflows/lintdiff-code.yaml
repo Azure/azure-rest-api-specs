@@ -64,3 +64,7 @@ jobs:
           echo "⚠️ This check is testing a new version of 'Swagger LintDiff'."
           echo "⚠️ Failures are expected, and should be completely ignored by spec authors and reviewers."
           echo "⚠️ Meaningful results for this PR are are in required check 'Swagger LintDiff'."
+        env:
+          # Some LintDiff runs are memory intensive and require more than the
+          # default.
+          NODE_OPTIONS: '--max-old-space-size=8192'
