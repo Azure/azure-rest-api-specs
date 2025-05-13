@@ -27,7 +27,7 @@ namespace SkillContext
 		properties: Record<string>;
 
 		@doc("TODO")
-		startTime: utcDateTime;
+		startTime: offsetDateTime;
 
 		@doc("Tenant id of tenant in which skill invocation occured")
 		tenantId: string;
@@ -302,6 +302,48 @@ namespace SkillContext
 
 		@doc("Preview state of the execution context.")
 		PreviewState: SkillPreviewState;
+
+		@doc("ID of the agent")
+		AgentId: string;
+
+		@doc("Actual Fidelis workspace ID. This workspace ID is a GUID generated and provided by Fidelis.")
+		actualWorkspaceId: string;
+
+		@doc("Agent scope")
+		agentScope: AgentScope;
+
+		@doc("The agent trigger name identified for each agent evaluation execution")
+		selectedAgentTrigger: string;
+
+		@doc("The agent definition name identified for each agent evaluation execution")
+		agentDefinitionName: string;
+
+		@doc("Indicates Fallback options when no skill is chosen.")
+		fallbackOptions?: FallbackOptions;
+
+		@doc("This contains the time at which the evaluation started")
+		EvaluationStartTime: offsetDateTime;
+
+		@doc("The time when the prompt for the evaluation was created, except for during retries")
+		EvaluationPromptCreationStartedAt: offsetDateTime;
+
+		@doc("The time when the evaluation starts running after waiting in the processing queue.")
+		EvaluationRunStartedAt: offsetDateTime;
+
+		@doc("A snapshot of requests for sleeping attached to the evaluation in this context.")
+		SleepRequests?: Record<duration>;
+
+		@doc("Represents the amount of time the current prompt would like to sleep.")
+		PromptSleepDuration?: duration;
+
+		@doc("Represents the number of prompt executions that have occurred.")
+		EvaluationExecutionCount: uint32;
+
+		@doc("Determines the node visibility in the end user node map.")
+		HideEvaluationNode: boolean;
+
+		@doc("Is agent trial condition met")
+		IsAgentTrialConditionMet: boolean;
 	}
 
 	
@@ -715,7 +757,7 @@ namespace SkillContext
 	  Object: string;
 
 	  @doc("The creation timestamp.")
-	  Created: utcDateTime; 
+	  Created: offsetDateTime; 
 
 	  @doc("The model used for completion.")
 	  Model: string;
@@ -898,110 +940,129 @@ namespace SkillContext
 	  }
 	
 	model DynamicPromptsBaseRequest {
-	@doc("The scenario name for the request.")
-	scenarioName: string;
-	@doc("The index name for the request.")
-	indexName: string;
-	@doc("The version of the index.")
-	version: string;
+		@doc("The scenario name for the request.")
+		scenarioName: string;
+		@doc("The index name for the request.")
+		indexName: string;
+		@doc("The version of the index.")
+		version: string;
 	}
 
 	model DynamicPromptsIndexFilterRequest {
-	@doc("The scenario name for the index filter request.")
-	scenarioName: string;
-	@doc("The index name for the index filter request.")
-	indexName: string;
-	@doc("The version of the index.")
-	version: string;
-	@doc("The selected columns for filtering.")
-	selectedColumns?: string[];
-	@doc("The filter string.")
-	filter?: string;
+		@doc("The scenario name for the index filter request.")
+		scenarioName: string;
+		@doc("The index name for the index filter request.")
+		indexName: string;
+		@doc("The version of the index.")
+		version: string;
+		@doc("The selected columns for filtering.")
+		selectedColumns?: string[];
+		@doc("The filter string.")
+		filter?: string;
 	}
 
 	model DynamicPromptsSuggestedPromptsRequest {
-	@doc("The skillset name for the suggested prompts request.")
-	skillsetName: string;
-	@doc("The skill name for the suggested prompts request.")
-	skillName: string;
-	@doc("The prompt string.")
-	prompt: string;
-	@doc("The response string.")
-	response: string;
+		@doc("The skillset name for the suggested prompts request.")
+		skillsetName: string;
+		@doc("The skill name for the suggested prompts request.")
+		skillName: string;
+		@doc("The prompt string.")
+		prompt: string;
+		@doc("The response string.")
+		response: string;
 	}
 
 	model DynamicPromptingSemanticIndexDocument {
-	@doc("The document ID.")
-	id: string;
-	@doc("The document RowId.")
-	rowId: int32;
-	@doc("The document UpdatedAt.")
-	updatedAt: utcDateTime;
-	@doc("The document IndexId.")
-	indexId: string;
-	@doc("The document Filter1.")
-	filter1: string;
-	@doc("The document Filter2.")
-	filter2: string;
-	@doc("The document Filter3.")
-	filter3: string;
-	@doc("The document Filter4.")
-	filter4: string;
-	@doc("The document Filter5.")
-	filter5: string;
-	@doc("The document Filter6.")
-	filter6: string;
-	@doc("The document Filter7.")
-	filter7: string;
-	@doc("The document Filter8.")
-	filter8: string;
-	@doc("The document Filter9.")
-	filter9: string;
-	@doc("The document Filter10.")
-	filter10: string;
-	@doc("The document Content.")
-	content: string;
-	@doc("The document Description.")
-	description: string;
-	@doc("The document Embedding array.")
-	embedding: Array<float32>;
-
+		@doc("The document ID.")
+		id: string;
+		@doc("The document RowId.")
+		rowId: int32;
+		@doc("The document UpdatedAt.")
+		updatedAt: offsetDateTime;
+		@doc("The document IndexId.")
+		indexId: string;
+		@doc("The document Filter1.")
+		filter1: string;
+		@doc("The document Filter2.")
+		filter2: string;
+		@doc("The document Filter3.")
+		filter3: string;
+		@doc("The document Filter4.")
+		filter4: string;
+		@doc("The document Filter5.")
+		filter5: string;
+		@doc("The document Filter6.")
+		filter6: string;
+		@doc("The document Filter7.")
+		filter7: string;
+		@doc("The document Filter8.")
+		filter8: string;
+		@doc("The document Filter9.")
+		filter9: string;
+		@doc("The document Filter10.")
+		filter10: string;
+		@doc("The document Content.")
+		content: string;
+		@doc("The document Description.")
+		description: string;
+		@doc("The document Embedding array.")
+		embedding: Array<float32>;
 	}
 
 	model DynamicPromptsSearchResponse {
-	@doc("The search results.")
-	results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
+		@doc("The search results.")
+		results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
 	}
 
 	model DynamicPromptsFilterResponse {
-	@doc("The filter results.")
-	results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
+		@doc("The filter results.")
+		results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
 	}
 
 	model DocumentCountResponse {
-	@doc("The document count.")
-	count: int64;
+		@doc("The document count.")
+		count: int64;
 	}
 
 	model DynamicPromptsIndexFilterResponse {
-	@doc("The index filter results.")
-	results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
+		@doc("The index filter results.")
+		results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
 	}
 
 	model PhysicalIndexExistsResponse {
-	@doc("Indicates whether the physical index exists.")
-	exists: boolean;
+		@doc("Indicates whether the physical index exists.")
+		exists: boolean;
 	}
 
 	model SuggestedPromptsResponse {
-	@doc("The suggested prompts.")
-	prompts: SuggestedPrompt[];
+		@doc("The suggested prompts.")
+		prompts: SuggestedPrompt[];
 	}
 
 	model ScoredDoc<T> {
-	@doc("The score of the document.")
-	score: float32;
-	@doc("The document.")
-	document: T;
+		@doc("The score of the document.")
+		score: float32;
+		@doc("The document.")
+		document: T;
+	}
+
+	@doc("Used to configure the preview state of a skill.")
+	enum SkillPreviewState {
+		GA,
+		Public,
+		Private
+	}
+
+	@doc("Defines the scope of an agent instance.")
+	enum AgentScope {
+		None,
+		User,
+		Workspace
+	}
+
+	@doc("Indicates Fallback options when no skill is chosen. When it is set to null, it's configured to KnowledgeBase fallback as default option.")
+	model FallbackOptions {
+		Fallback?: string;
+		Product?: string;
 	}
 }
