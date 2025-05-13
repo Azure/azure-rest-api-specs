@@ -34,7 +34,34 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-01
+tag: package-2025-03
+```
+
+### Tag: package-2025-03
+
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03'
+input-file:
+  - stable/2025-03-01/managedClusters.json
+```
+
+### Tag: package-2025-02
+
+These settings apply only when `--tag=package-2025-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-02'
+input-file:
+  - stable/2025-02-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-02
+
+These settings apply only when `--tag=package-preview-2025-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-02'
+input-file:
+  - preview/2025-02-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2025-01
@@ -1273,4 +1300,12 @@ directive:
     from: managedClusters.json
     where: $.definitions.NodeImageVersionsListResult
     reason: The tool compared the stable API version and mistakenly scanned out that this model was not newly added, more details see https://github.com/Azure/azure-openapi-validator/issues/773
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.NamespaceProperties.properties.labels
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.NamespaceProperties.properties.annotations
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
 ```

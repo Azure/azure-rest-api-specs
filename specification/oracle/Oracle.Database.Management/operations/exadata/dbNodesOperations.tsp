@@ -1,5 +1,5 @@
 import "@azure-tools/typespec-azure-resource-manager";
-import "../../../models/exadata/dbNodes.tsp";
+import "../../models/exadata/dbNodes.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
@@ -15,7 +15,7 @@ interface DbNodes extends OracleReadOnlyResource<DbNode> {
     "./examples/dbNodes_listByParent.json",
     "List DbNodes by VM Cluster"
   )
-  listByCloudVmCluster is ArmResourceListByParent<DbNode>;
+  listByParent is ArmResourceListByParent<DbNode>;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("VM actions on DbNode of VM Cluster by the provided filter")
