@@ -73,6 +73,9 @@
           },
           "PutFileServices_EnableSecureSmbFeatures": {
             "$ref": "./examples/FileServicesPut_EnableSecureSmbFeatures.json"
+          },
+          "PutFileServices_EncryptionInTransitRequired": {
+            "$ref": "./examples/FileServicesPut_EncryptionInTransitRequired.json"
           }
         },
         "description": "Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. ",
@@ -776,6 +779,10 @@
         "smb": {
           "$ref": "#/definitions/SmbSetting",
           "description": "Setting for SMB protocol"
+        },
+        "nfs": {
+          "$ref": "#/definitions/NfsSetting",
+          "description": "Setting for NFS protocol"
         }
       },
       "description": "Protocol settings for file service"
@@ -801,9 +808,22 @@
         "channelEncryption": {
           "type": "string",
           "description": "SMB channel encryption supported by server. Valid values are AES-128-CCM, AES-128-GCM, AES-256-GCM. Should be passed as a string with delimiter ';'."
+        },
+        "encryptionInTransit": {
+          "ref": "#/defintions/EncryptionInTransit",
+          "description": "Encryption in transit setting."
         }
       },
       "description": "Setting for SMB protocol"
+    },
+    "NfsSetting": {
+      "properties": {
+        "encryptionInTransit": {
+          "ref": "#/defintions/EncryptionInTransit",
+          "description": "Encryption in transit setting."
+        }
+      },
+      "description": "Setting for NFS protocol"
     },
     "Multichannel": {
       "properties": {
@@ -813,6 +833,15 @@
         }
       },
       "description": "Multichannel setting. Applies to Premium FileStorage only."
+    },
+    "EncryptionInTransit": {
+      "properties": {
+        "required": {
+          "type": "boolean",
+          "description": "Indicates whether encryption in transit is required"
+        }
+      },
+      "description": "Encryption in transit setting."
     },
     "FileServiceUsages": {
       "type": "object",
