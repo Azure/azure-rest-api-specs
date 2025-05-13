@@ -188,9 +188,11 @@ async function processResult({ checkRuns, core }) {
         ? "✅"
         : executionResult === "failed"
           ? "❌"
-          : executionResult === "pending"
-            ? "⏳"
-            : "❓";
+          : executionResult === "warning"
+            ? "⚠️"
+            : executionResult === "pending"
+              ? "⏳"
+              : "❓";
 
     summaryContent += `| ${shortLanguageName} | ${statusEmoji} ${executionResult} | ${isSpecGenSdkCheckRequired} |\n`;
   }
