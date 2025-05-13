@@ -61,7 +61,9 @@ describe("execNpmExec", () => {
   // something referenced in package.json. In this case, spec-model is present
   // so it is used.
   it("runs spec-model", async () => {
-    await expect(execNpmExec(["spec-model", "../../specification/contosowidgetmanager"])).resolves.toEqual({
+    await expect(
+      execNpmExec(["spec-model", "../../specification/contosowidgetmanager"]),
+    ).resolves.toEqual({
       stdout: expect.toSatisfy((v) => v.includes("readme")),
       stderr: "",
       error: undefined,
