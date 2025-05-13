@@ -80,10 +80,6 @@ model BulkDeployTargetDetails {
   @doc("Name of the solution instance")
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   solutionInstanceName?: string;
-  
-  @doc("Solution dependencies")
-  @Azure.ResourceManager.identifiers(#[])
-  solutionDependencies?: SolutionDependencyParameter[];
 }
 
 @armResourceOperations
