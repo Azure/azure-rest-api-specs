@@ -51,6 +51,6 @@ using Microsoft.DependencyMap;
   "csharp"
 );
 @@alternateType(DiscoverySourceResourceProperties.sourceId,
-    armResourceIdentifier,
-    "csharp"
-  );
+  armResourceIdentifier,
+  "csharp"
+);
