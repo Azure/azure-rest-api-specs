@@ -393,8 +393,28 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing unassign deployment resources job.
    */
-  @added(Versions.v2023_04_15_preview)
-  getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringUnassignDeploymentResourcesJobState>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}")
+  @get
+  @added(Versions.v2025_05_15_preview)
+  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The new project name.
+       */
+      @path
+      projectName: string;
+
+      /**
+       * The job ID.
+       */
+      @path
+      jobId: string;
+    },
+    TextAnalysisAuthoringDeploymentResourcesJobState,
+    {},
+    Foundations.ErrorResponse
+  >;
 
   /**
    * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
@@ -426,8 +446,8 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing assign deployment resources job.
    */
-  @added(Versions.v2023_04_15_preview)
-  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringAssignDeploymentResourcesJobState>;
+  @added(Versions.v2025_05_15_preview)
+  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentResourcesJobState>;
 
   /**
    * Swaps two existing deployments with each other.
