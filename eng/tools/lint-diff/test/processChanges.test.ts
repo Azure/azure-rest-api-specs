@@ -1,158 +1,14 @@
 import { test, describe, expect } from "vitest";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 
 import {
-  getSwaggerDependenciesMap,
-  getAffectedSwaggers,
   getAffectedServices,
   getService,
   reconcileChangedFilesAndTags,
+  getChangedSwaggers,
+  buildState,
 } from "../src/processChanges.js";
 
 import { isWindows } from "./test-util.js";
-
-describe("getSwaggerDependenciesMap", () => {
-  test("empty set on no .json files", async () => {
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    console.log("dirname", __dirname);
-    const dependencyMap = await getSwaggerDependenciesMap(
-      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
-      "specification/empty",
-    );
-
-    expect(dependencyMap.size).toEqual(0);
-  });
-
-  test.skipIf(isWindows())("d has no dependencies", async () => {
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    console.log("dirname", __dirname);
-    const dependencyMap = await getSwaggerDependenciesMap(
-      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
-      "specification/1",
-    );
-
-    console.log(dependencyMap);
-
-    expect(dependencyMap.has("specification/1/d.json")).toEqual(true);
-    expect(dependencyMap.get("specification/1/d.json")).toEqual(new Set<string>());
-  });
-
-  test.skipIf(isWindows())("a depends on b and c (and d transitively)", async () => {
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    const dependencyMap = await getSwaggerDependenciesMap(
-      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
-      "specification/1",
-    );
-
-    console.log(dependencyMap);
-
-    expect(dependencyMap.has("specification/1/a.json")).toEqual(true);
-    expect(dependencyMap.get("specification/1/a.json")).toEqual(
-      new Set<string>([
-        "specification/1/nesting/b.json",
-        "specification/1/c.json",
-        // d.json is a dependency of a.json through b.json
-        "specification/1/d.json",
-      ]),
-    );
-  });
-
-  test.skipIf(isWindows())("b depends on c and d", async () => {
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    const dependencyMap = await getSwaggerDependenciesMap(
-      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
-      "specification/1",
-    );
-
-    console.log(dependencyMap);
-
-    expect(dependencyMap.has("specification/1/nesting/b.json")).toEqual(true);
-    expect(dependencyMap.get("specification/1/nesting/b.json")).toEqual(
-      new Set<string>(["specification/1/c.json", "specification/1/d.json"]),
-    );
-  });
-});
-
-describe("getAffectedSwaggers", () => {
-  test("a affects only a", async () => {
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    const dependencyMap = await getSwaggerDependenciesMap(
-      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
-      "specification/1",
-    );
-
-    const affectedSwaggers = getAffectedSwaggers(["specification/1/a.json"], dependencyMap);
-
-    expect(affectedSwaggers).toEqual(["specification/1/a.json"]);
-  });
-
-  test.skipIf(isWindows())("b affects a and b", async () => {
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    const dependencyMap = await getSwaggerDependenciesMap(
-      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
-      "specification/1",
-    );
-
-    console.log(dependencyMap);
-
-    const affectedSwaggers = getAffectedSwaggers(["specification/1/nesting/b.json"], dependencyMap);
-
-    expect(affectedSwaggers).toEqual(["specification/1/nesting/b.json", "specification/1/a.json"]);
-  });
-
-  test.skipIf(isWindows())("c affects a, b, c", async () => {
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    const dependencyMap = await getSwaggerDependenciesMap(
-      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
-      "specification/1",
-    );
-
-    const affectedSwaggers = getAffectedSwaggers(["specification/1/c.json"], dependencyMap);
-
-    expect(affectedSwaggers).toEqual([
-      "specification/1/c.json",
-      "specification/1/a.json",
-      "specification/1/nesting/b.json",
-    ]);
-  });
-
-  test.skipIf(isWindows())("d affects a, b, d", async () => {
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    const dependencyMap = await getSwaggerDependenciesMap(
-      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
-      "specification/1",
-    );
-
-    const affectedSwaggers = getAffectedSwaggers(["specification/1/d.json"], dependencyMap);
-
-    expect(affectedSwaggers).toEqual([
-      "specification/1/d.json",
-      "specification/1/a.json",
-      "specification/1/nesting/b.json",
-    ]);
-  });
-
-  test.skipIf(isWindows())("d, c affects a, b, c, d", async () => {
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    const dependencyMap = await getSwaggerDependenciesMap(
-      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
-      "specification/1",
-    );
-
-    const affectedSwaggers = getAffectedSwaggers(
-      ["specification/1/d.json", "specification/1/c.json"],
-      dependencyMap,
-    );
-
-    expect(affectedSwaggers).toEqual([
-      "specification/1/d.json",
-      "specification/1/c.json",
-      "specification/1/a.json",
-      "specification/1/nesting/b.json",
-    ]);
-  });
-});
 
 describe("getAffectedServices", () => {
   test.skipIf(isWindows())("returns single service with multiple files", async () => {
@@ -184,12 +40,15 @@ describe("getService", () => {
     expect(serviceName).toEqual("specification/service1");
   });
 
-  test.skipIf(isWindows())("returns service name from file path with leading separator", async () => {
-    const filePath = "/specification/service1/file1.json";
-    const serviceName = await getService(filePath);
+  test.skipIf(isWindows())(
+    "returns service name from file path with leading separator",
+    async () => {
+      const filePath = "/specification/service1/file1.json";
+      const serviceName = await getService(filePath);
 
-    expect(serviceName).toEqual("specification/service1");
-  });
+      expect(serviceName).toEqual("specification/service1");
+    },
+  );
 
   test("throws when file path does not contain enough pieces to assemble a service name", async () => {
     const filePath = "file1.json";
@@ -226,5 +85,108 @@ describe("reconcileChangedFilesAndTags", () => {
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(beforeFinal);
     expect(afterFinal).toEqual(after);
+  });
+});
+
+describe("getChangedSwaggers", () => {
+  test("returns an empty set if no swaggers are changed", async () => {
+    expect(
+      getChangedSwaggers(
+        "test/fixtures/getChangedSwaggers/before",
+        "test/fixtures/getChangedSwaggers/after",
+        new Set<string>(),
+      ),
+    ).resolves.toEqual(new Set<string>());
+  });
+
+  test("excludes swaggers that are not changed", async () => {
+    const swaggers = await getChangedSwaggers(
+      "test/fixtures/getChangedSwaggers/before/",
+      "test/fixtures/getChangedSwaggers/after/",
+      new Set<string>(["specification/service1/file1.json"]),
+    );
+    expect(swaggers).toEqual(new Set<string>());
+  });
+
+  test("includes swaggers that don't exist in before", async () => {
+    const swaggers = await getChangedSwaggers(
+      "test/fixtures/getChangedSwaggers/before/",
+      "test/fixtures/getChangedSwaggers/after/",
+      new Set<string>(["specification/service1/new-file.json"]),
+    );
+    expect(swaggers).toEqual(new Set<string>(["specification/service1/new-file.json"]));
+  });
+
+  test("includes swagger that has been changed", async () => {
+    const swaggers = await getChangedSwaggers(
+      "test/fixtures/getChangedSwaggers/before/",
+      "test/fixtures/getChangedSwaggers/after/",
+      new Set<string>(["specification/service1/different.json"]),
+    );
+    expect(swaggers).toEqual(new Set<string>(["specification/service1/different.json"]));
+  });
+
+  test("includes swaggers that have a relevant changed dependency", async () => {
+    const swaggers = await getChangedSwaggers(
+      "test/fixtures/getChangedSwaggers/before/",
+      "test/fixtures/getChangedSwaggers/after/",
+      new Set<string>([
+        "specification/service1/with-dependency.json",
+        "specification/service1/changed-dependency.json",
+      ]),
+    );
+    expect(swaggers).toEqual(
+      new Set<string>([
+        "specification/service1/with-dependency.json",
+        "specification/service1/changed-dependency.json",
+      ]),
+    );
+  });
+});
+
+describe("buildState", () => {
+  test.skipIf(isWindows())("returns output for a swagger edited in place", async () => {
+    const actual = await buildState(
+      ["specification/edit-in-place/data-plane/swagger.json"],
+      "test/fixtures/buildState/",
+    );
+
+    expect(actual).toMatchInlineSnapshot(`
+      [
+        Map {
+          "specification/edit-in-place/readme.md" => [
+            "package-2022-12-01",
+          ],
+        },
+        [
+          "specification/edit-in-place/data-plane/swagger.json",
+        ],
+      ]
+    `);
+  });
+
+  test.skipIf(isWindows())("returns output for an edited readme", async () => {
+    const actual = await buildState(
+      ["specification/edit-in-place/readme.md"],
+      "test/fixtures/buildState/",
+    );
+
+    expect(actual).toMatchInlineSnapshot(`
+      [
+        Map {
+          "specification/edit-in-place/readme.md" => [],
+        },
+        [],
+      ]
+    `);
+  });
+
+  test("does not throw if a file is missing", async () => {
+    expect(() =>
+      buildState(
+        ["specification/edit-in-place/data-plane/does-not-exist.json"],
+        "test/fixtures/buildState/",
+      ),
+    ).not.toThrow();
   });
 });

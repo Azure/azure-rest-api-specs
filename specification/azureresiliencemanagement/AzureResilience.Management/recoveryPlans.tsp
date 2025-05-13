@@ -55,8 +55,15 @@ interface RecoveryPlans {
   >;
 
   @route(ServiceGroupRoute)
-  list is ArmResourceListByParent<RecoveryPlan, ServiceGroupTenantParameters>;
+  list is ArmResourceListByParent<
+    RecoveryPlan,
+    ServiceGroupTenantParameters,
+    Response = ArmResponse<RecoveryPlanListResult>
+  >;
 }
+
+model RecoveryPlanListResult is ResourceListResult<RecoveryPlan>;
+@@identifiers(RecoveryPlanListResult.value, #["id"]);
 
 @armResourceOperations
 @doc("Actions for managing Recovery Orchestration Plans.")
