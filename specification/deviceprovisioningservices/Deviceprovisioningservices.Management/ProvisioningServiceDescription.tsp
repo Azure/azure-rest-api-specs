@@ -8,13 +8,17 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-
+using Azure.ResourceManager.Private;
 namespace Microsoft.Devices;
 /**
  * The description of the provisioning service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+@Azure.ResourceManager.Private.armResourceInternal(IotDpsPropertiesDescription)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model ProvisioningServiceDescription
-  is Azure.ResourceManager.TrackedResource<IotDpsPropertiesDescription, false> {
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = ProvisioningServiceDescription,
     KeyName = "provisioningServiceName",
@@ -27,6 +31,12 @@ model ProvisioningServiceDescription
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   etag?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  properties: IotDpsPropertiesDescription;
 
   /**
    * Sku info for a provisioning Service.

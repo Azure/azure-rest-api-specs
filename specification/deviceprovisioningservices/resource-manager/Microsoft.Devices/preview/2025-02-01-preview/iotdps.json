@@ -1781,11 +1781,10 @@
           "$ref": "#/definitions/CertificateProperties",
           "description": "properties of a certificate"
         },
-        "etag": {
+        "eTag": {
           "type": "string",
           "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true,
-          "x-ms-client-name": "eTag"
+          "readOnly": true
         }
       },
       "allOf": [
@@ -2382,13 +2381,13 @@
       "type": "object",
       "description": "The description of the provisioning service.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/IotDpsPropertiesDescription",
-          "description": "Service specific properties for a provisioning service"
-        },
         "etag": {
           "type": "string",
           "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention."
+        },
+        "properties": {
+          "$ref": "#/definitions/IotDpsPropertiesDescription",
+          "description": "Service specific properties for a provisioning service"
         },
         "sku": {
           "$ref": "#/definitions/IotDpsSkuInfo",
