@@ -291,9 +291,6 @@ namespace SkillContext
 		@doc("Indicates whether the evaluation is from a Prompt or a Promptbook")
 		InvocationCategory: EvaluationInvocationCategory;
 
-		@doc("The encrypted token used to authenticate the user.")
-		EncryptedUserAccessToken: string;
-
 		@doc("Compliance flags for logging.")
 		ComplianceFlags: ComplianceFlags;
 
