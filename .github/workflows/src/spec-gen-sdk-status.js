@@ -188,9 +188,11 @@ async function processResult({ checkRuns, core }) {
         ? "✅"
         : executionResult === "failed"
           ? "❌"
-          : executionResult === "pending"
-            ? "⏳"
-            : "❓";
+          : executionResult === "warning"
+            ? "⚠️"
+            : executionResult === "pending"
+              ? "⏳"
+              : "❓";
 
     summaryContent += `| ${shortLanguageName} | ${statusEmoji} ${executionResult} | ${isSpecGenSdkCheckRequired} |\n`;
   }
@@ -207,6 +209,13 @@ async function processResult({ checkRuns, core }) {
     state === CommitStatusState.SUCCESS
       ? "✅ All required spec-gen-sdk checks passed successfully!"
       : `❌ spec-gen-sdk checks failed for: ${specGenSdkFailedRequiredLanguages}`;
+
+  // Add next steps
+  if (state === CommitStatusState.FAILURE) {
+    summaryContent +=
+      "\n### Next Steps\n\n" +
+      `Please fix any issues in the the spec-gen-sdk checks for languages: ${specGenSdkFailedRequiredLanguages}.`;
+  }
 
   // Write to the summary page
   await writeToActionsSummary(summaryContent, core);

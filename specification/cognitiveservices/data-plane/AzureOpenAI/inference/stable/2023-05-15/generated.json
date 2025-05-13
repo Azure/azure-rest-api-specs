@@ -555,14 +555,9 @@
           "description": "The ordered index associated with this completions choice."
         },
         "logprobs": {
-          "type": "object",
+          "$ref": "#/definitions/CompletionsLogProbabilityModel",
           "description": "The log probabilities model for tokens associated with this completions choice.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CompletionsLogProbabilityModel"
-            }
-          ]
+          "x-nullable": true
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",

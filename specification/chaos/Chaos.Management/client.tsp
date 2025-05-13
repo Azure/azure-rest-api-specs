@@ -41,6 +41,10 @@ using Microsoft.Chaos;
 
 // java
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "java");
+@@clientName(Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "ResourceIdentity",
+  "java"
+);
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Experiment.properties);
