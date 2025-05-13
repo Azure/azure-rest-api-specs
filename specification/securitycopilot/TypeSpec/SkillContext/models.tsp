@@ -1046,13 +1046,6 @@ namespace SkillContext
 		document: T;
 	}
 
-	@doc("Used to configure the preview state of a skill.")
-	enum SkillPreviewState {
-		GA,
-		Public,
-		Private
-	}
-
 	@doc("Defines the scope of an agent instance.")
 	enum AgentScope {
 		None,
