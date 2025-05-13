@@ -466,7 +466,7 @@ using Azure.AI.Agents;
   "VectorStoreChunkingStrategy",
   "csharp"
 );
-
+@@clientName(OpenApiFunctionDefinition.auth, "OpenApiAuthentication", "csharp");
 // Python assistant vs agent renames
 @@clientName(ThreadMessage.assistantId, "agentId", "python");
 @@clientName(GetAgentOptions.assistantId, "agentId", "python");
