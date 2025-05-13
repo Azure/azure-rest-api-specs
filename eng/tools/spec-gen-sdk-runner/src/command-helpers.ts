@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { findReadmeFiles, getArgumentValue, getAllTypeSpecPaths, objectToMap } from "./utils.js";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
 import {
+  APIViewRequestData,
   SdkName,
   SpecGenSdkArtifactInfo,
   SpecGenSdkCmdInput,
@@ -160,6 +161,18 @@ export function getSpecPaths(batchType: string, specRepoPath: string): string[] 
       specConfigPaths.push(...getAllTypeSpecPaths(specRepoPath));
       break;
     }
+    case "all-mgmtplane-typespecs": {
+      specConfigPaths.push(
+        ...getAllTypeSpecPaths(specRepoPath).filter((p) => p.includes(".Management")),
+      );
+      break;
+    }
+    case "all-dataplane-typespecs": {
+      specConfigPaths.push(
+        ...getAllTypeSpecPaths(specRepoPath).filter((p) => !p.includes(".Management")),
+      );
+      break;
+    }
     case "all-openapis": {
       specConfigPaths.push(...findReadmeFiles(path.join(specRepoPath, "specification")));
       break;
@@ -192,14 +205,18 @@ export function logIssuesToPipeline(logPath: string, specConfigDisplayText: stri
     const errors = [...vsoLogs.values()].flatMap((entry) => entry.errors ?? []);
     const warnings = [...vsoLogs.values()].flatMap((entry) => entry.warnings ?? []);
     if (errors.length > 0) {
-      const errorTitle = `Errors occurred while generating SDK from ${specConfigDisplayText}`;
+      const errorTitle =
+        `Errors occurred while generating SDK from ${specConfigDisplayText}. ` +
+        `Follow the steps at https://aka.ms/azsdk/sdk-automation-faq#how-to-view-the-detailed-sdk-generation-errors to view detailed errors.`;
       logMessage(errorTitle, LogLevel.Group);
       const errorsWithTitle = [errorTitle, ...errors];
       vsoLogIssue(errorsWithTitle.join("%0D%0A"));
       logMessage("ending group logging", LogLevel.EndGroup);
     }
     if (warnings.length > 0) {
-      const warningTitle = `Warnings occurred while generating SDK from ${specConfigDisplayText}`;
+      const warningTitle =
+        `Warnings occurred while generating SDK from ${specConfigDisplayText}. ` +
+        `Follow the steps at https://aka.ms/azsdk/sdk-automation-faq#how-to-view-the-detailed-sdk-generation-errors to view detailed warnings.`;
       logMessage(warningTitle, LogLevel.Group);
       const warningsWithTitle = [warningTitle, ...warnings];
       vsoLogIssue(warningsWithTitle.join("%0D%0A"), LogIssueType.Warning);
@@ -240,6 +257,8 @@ export function generateArtifact(
   breakingChangeLabel: string,
   hasBreakingChange: boolean,
   hasManagementPlaneSpecs: boolean,
+  stagedArtifactsFolder: string,
+  apiViewRequestData: APIViewRequestData []
 ): number {
   const specGenSdkArtifactName = "spec-gen-sdk-artifact";
   const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
@@ -259,6 +278,7 @@ export function generateArtifact(
       labelAction: hasBreakingChange,
       isSpecGenSdkCheckRequired:
         hasManagementPlaneSpecs && SpecGenSdkRequiredSettings[commandInput.sdkLanguage as SdkName],
+      apiViewRequestData: apiViewRequestData
     };
     fs.writeFileSync(
       path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
@@ -266,6 +286,7 @@ export function generateArtifact(
     );
     setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
     setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
+    setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
     setVsoVariable("BreakingChangeLabelAction", hasBreakingChange ? "add" : "remove");
     setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
   } catch (error) {
