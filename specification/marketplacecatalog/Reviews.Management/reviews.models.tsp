@@ -58,7 +58,7 @@ interface RatingAndReviewsOperations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @post
   @operationId("RatingAndReviews_CheckUserHasReview")
-  @action("userhasreview")
+  @action("checkUserHasReview ")
   checkUserHasReview is ArmProviderActionSync<
     Response = ArmResponse<UserHasReview>,
     Parameters = {
