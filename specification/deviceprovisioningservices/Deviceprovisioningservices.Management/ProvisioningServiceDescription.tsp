@@ -73,7 +73,7 @@ interface ProvisioningServiceDescriptionOperationOps
     > {}
 
 interface ProvisioningServiceDescriptionOperations {
-/**
+  /**
    * Gets the status of a long running operation, such as create, update or delete a provisioning service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
