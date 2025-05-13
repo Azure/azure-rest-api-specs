@@ -78,6 +78,8 @@ interface Connections {
    * Lists all pending connections for a connection.
    */
   @action("listPendingConnections")
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
+  @operationId("ListPendingConnections_List")
   list is ArmResourceActionSync<
     Connection,
     void,
@@ -88,6 +90,8 @@ interface Connections {
    * Lists all pending flows for a connection.
    */
   @action("listPendingFlows")
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
+  @operationId("ListPendingFlows_List")
   listPendingFlowsList is ArmResourceActionSync<
     Connection,
     void,

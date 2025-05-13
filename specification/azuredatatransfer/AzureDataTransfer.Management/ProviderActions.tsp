@@ -5,6 +5,7 @@ import "@typespec/openapi";
 import "./action_models.tsp";
 import "./versions.tsp";
 
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 
@@ -16,6 +17,8 @@ interface AzureDataTransfer {
    * Lists approved schemas for Azure Data Transfer.
    */
   @autoRoute
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
+  @operationId("AzureDataTransfer_ValidateSchema")
   listApprovedSchemas is ArmProviderActionSync<
     Request = ListApprovedSchemasRequest,
     Response = SchemasListResult
@@ -25,6 +28,8 @@ interface AzureDataTransfer {
    * Validates a schema for Azure Data Transfer.
    */
   @autoRoute
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
+  @operationId("AzureDataTransfer_ValidateSchema")
   validateSchema is ArmProviderActionSync<
     Request = Schema,
     Response = ValidateSchemaResult
