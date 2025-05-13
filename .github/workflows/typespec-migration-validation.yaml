@@ -2,7 +2,7 @@ name: TypeSpec Migration Validation
 
 on:
   pull_request:
-    types: [opened, labeled, unlabeled, synchronize]
+    types: [opened, labeled, unlabeled]
 
 permissions:
   contents: read
@@ -10,7 +10,7 @@ permissions:
 jobs:
   typespec-migration-validation:
     name: TypeSpec Migration Validation
-    if: contains(fromJSON('["true"]'), contains(toJSON(github.event.pull_request.labels.*.name), 'typespec-conversion-'))
+    if: contains(github.event.pull_request.labels.*.name, 'typespec-conversion-w1')
     runs-on: ubuntu-24.04
 
     steps:
