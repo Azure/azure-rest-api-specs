@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 
-namespace Azure.AI.Agents.ServicePatterns;
+namespace Azure.AI.Agents;
 
 @doc("Error payload returned by the agents API.")
 @error

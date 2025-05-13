@@ -25,7 +25,7 @@ namespace Azure.AI.Agents {
   @route("/threads/runs")
   @doc("Creates a new agent thread and immediately starts a run using that new thread.")
   @added(Versions.v2025_05_01)
-  op createThreadAndRun is ServicePatterns.AgentOperation<
+  op createThreadAndRun is AgentOperation<
     {
       /**
        * The details used when creating and immediately running a new agent thread.
@@ -54,7 +54,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @doc("Creates a new run for an agent thread.")
-    createRun is ServicePatterns.AgentOperation<
+    createRun is AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -97,7 +97,7 @@ namespace Azure.AI.Agents {
       ...AgentsListOptions,
     ): {
       ...AgentsPagedResult<ThreadRun>;
-    } | ServicePatterns.AgentV1Error;
+    } | AgentV1Error;
 
     /**
      * Gets an existing run from an existing thread.
@@ -112,7 +112,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
     @route("/{runId}")
-    getRun is ServicePatterns.AgentOperation<
+    getRun is AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -137,7 +137,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{runId}")
-    updateRun is ServicePatterns.AgentOperation<
+    updateRun is AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -166,7 +166,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{runId}/submit_tool_outputs")
-    submitToolOutputsToRun is ServicePatterns.AgentOperation<
+    submitToolOutputsToRun is AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -199,7 +199,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{runId}/cancel")
-    cancelRun is ServicePatterns.AgentOperation<
+    cancelRun is AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path

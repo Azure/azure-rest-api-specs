@@ -32,7 +32,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
     @route("/{stepId}")
-    getRunStep is ServicePatterns.AgentOperation<
+    getRunStep is AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -90,6 +90,6 @@ namespace Azure.AI.Agents {
       ...AgentsListOptions,
     ): {
       ...AgentsPagedResult<RunStep>;
-    } | ServicePatterns.AgentV1Error;
+    } | AgentV1Error;
   }
 }

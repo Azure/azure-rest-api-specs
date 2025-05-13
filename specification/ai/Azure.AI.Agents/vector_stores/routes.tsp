@@ -28,7 +28,7 @@ namespace Azure.AI.Agents {
     @list
     listVectorStores(...ApiVersionParameter, ...AgentsListOptions): {
       ...AgentsPagedResult<VectorStore>;
-    } | ServicePatterns.AgentV1Error;
+    } | AgentV1Error;
 
     /**
      * Creates a vector store.
@@ -37,7 +37,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    createVectorStore is ServicePatterns.AgentOperation<
+    createVectorStore is AgentOperation<
       {
         /**
          * Request object for creating a vector store.
@@ -56,7 +56,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     @route("/{vectorStoreId}")
-    getVectorStore is ServicePatterns.AgentOperation<
+    getVectorStore is AgentOperation<
       {
         /** The ID of the vector store to retrieve. */
         @doc("Identifier of the vector store.")
@@ -74,7 +74,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{vectorStoreId}")
-    modifyVectorStore is ServicePatterns.AgentOperation<
+    modifyVectorStore is AgentOperation<
       {
         /** The ID of the vector store to modify. */
         @doc("Identifier of the vector store.")
@@ -98,7 +98,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @delete
     @route("/{vectorStoreId}")
-    deleteVectorStore is ServicePatterns.AgentOperation<
+    deleteVectorStore is AgentOperation<
       {
         /** The ID of the vector store to delete. */
         @doc("Identifier of the vector store.")

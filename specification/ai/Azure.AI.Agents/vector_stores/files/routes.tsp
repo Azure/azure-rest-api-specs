@@ -41,7 +41,7 @@ namespace Azure.AI.Agents {
       ...AgentsListOptions,
     ): {
       ...AgentsPagedResult<VectorStoreFile>;
-    } | ServicePatterns.AgentV1Error;
+    } | AgentV1Error;
 
     /**
      * Create a vector store file by attaching a file to a vector store.
@@ -50,7 +50,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    createVectorStoreFile is ServicePatterns.AgentOperation<
+    createVectorStoreFile is AgentOperation<
       {
         /** The ID of the vector store for which to create a File. */
         @doc("Identifier of the vector store.")
@@ -82,7 +82,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     @route("/{fileId}")
-    getVectorStoreFile is ServicePatterns.AgentOperation<
+    getVectorStoreFile is AgentOperation<
       {
         /** The ID of the vector store that the file belongs to. */
         @doc("Identifier of the vector store.")
@@ -105,7 +105,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @delete
     @route("/{fileId}")
-    deleteVectorStoreFile is ServicePatterns.AgentOperation<
+    deleteVectorStoreFile is AgentOperation<
       {
         /** The ID of the vector store that the file belongs to. */
         @doc("Identifier of the vector store.")

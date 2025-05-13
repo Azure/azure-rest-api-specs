@@ -25,7 +25,7 @@ namespace Azure.AI.Agents;
 @post
 @route("/assistants")
 @added(Versions.v2025_05_01)
-op createAgent is ServicePatterns.AgentOperation<
+op createAgent is AgentOperation<
   {
     ...CreateAgentOptions;
   },
@@ -47,7 +47,7 @@ op createAgent is ServicePatterns.AgentOperation<
 @added(Versions.v2025_05_01)
 op listAgents(...ApiVersionParameter, ...AgentsListOptions): {
   ...AgentsPagedResult<Agent>;
-} | ServicePatterns.AgentV1Error;
+} | AgentV1Error;
 
 /**
  * Retrieves an existing agent.
@@ -62,7 +62,7 @@ op listAgents(...ApiVersionParameter, ...AgentsListOptions): {
 @get
 @route("/assistants/{assistantId}")
 @added(Versions.v2025_05_01)
-op getAgent is ServicePatterns.AgentOperation<
+op getAgent is AgentOperation<
   {
     /**
      * The request details to use when retrieving an agent.
@@ -84,7 +84,7 @@ op getAgent is ServicePatterns.AgentOperation<
 @post
 @route("/assistants/{assistantId}")
 @added(Versions.v2025_05_01)
-op updateAgent is ServicePatterns.AgentOperation<
+op updateAgent is AgentOperation<
   {
     /**
      * The request details to use when modifying an existing agent.
@@ -106,7 +106,7 @@ op updateAgent is ServicePatterns.AgentOperation<
 @delete
 @route("/assistants/{assistantId}")
 @added(Versions.v2025_05_01)
-op deleteAgent is ServicePatterns.AgentOperation<
+op deleteAgent is AgentOperation<
   {
     /**
      * The request details to use when deleting an agent.
