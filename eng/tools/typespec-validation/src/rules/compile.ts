@@ -1,24 +1,33 @@
+import { filterAsync } from "@azure-tools/specs-shared/array";
+import { readFile } from "fs/promises";
+import { globby } from "globby";
 import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
-import { TsvHost } from "../tsv-host.js";
-import { filterAsync } from "../utils.js";
+import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
   readonly description = "Compile TypeSpec";
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
 
-    if (await host.checkFileExists(path.join(folder, "main.tsp"))) {
-      let [err, stdout, stderr] = await host.runNpm(
-        ["exec", "--no", "--", "tsp", "compile", "--list-files", "--warn-as-error", folder],
-      );
+    if (await fileExists(path.join(folder, "main.tsp"))) {
+      let [err, stdout, stderr] = await runNpm([
+        "exec",
+        "--no",
+        "--",
+        "tsp",
+        "compile",
+        "--list-files",
+        "--warn-as-error",
+        folder,
+      ]);
 
       stdOutput += stdout;
 
@@ -85,7 +94,7 @@ export class CompileRule implements Rule {
             "**",
             outputFilename,
           );
-          const allSwaggers = (await host.globby(pattern, { ignore: ["**/examples/**"] })).map(
+          const allSwaggers = (await globby(pattern, { ignore: ["**/examples/**"] })).map(
             // Globby always returns posix paths
             (p) => normalize(p),
           );
@@ -94,7 +103,7 @@ export class CompileRule implements Rule {
           const tspGeneratedSwaggers = await filterAsync(
             allSwaggers,
             async (swaggerPath: string) => {
-              const swaggerText = await host.readFile(swaggerPath);
+              const swaggerText = await readFile(swaggerPath, { encoding: "utf8" });
               const swaggerObj = JSON.parse(swaggerText);
               return (
                 swaggerObj["info"]?.["x-typespec-generated"] ||
@@ -109,7 +118,7 @@ export class CompileRule implements Rule {
           const suppressedSwaggers = await filterAsync(
             tspGeneratedSwaggers,
             async (swaggerPath: string) => {
-              const suppressions = await host.getSuppressions(swaggerPath);
+              const suppressions = await getSuppressions(swaggerPath);
 
               const extraSwaggerSuppressions = suppressions.filter(
                 (s) => s.rules?.includes(this.name) && s.subRules?.includes("ExtraSwagger"),
@@ -168,10 +177,17 @@ export class CompileRule implements Rule {
     }
 
     const clientTsp = path.join(folder, "client.tsp");
-    if (await host.checkFileExists(clientTsp)) {
-      let [err, stdout, stderr] = await host.runNpm(
-        ["exec", "--no", "--", "tsp", "compile", "--no-emit", "--warn-as-error", clientTsp]
-      );
+    if (await fileExists(clientTsp)) {
+      let [err, stdout, stderr] = await runNpm([
+        "exec",
+        "--no",
+        "--",
+        "tsp",
+        "compile",
+        "--no-emit",
+        "--warn-as-error",
+        clientTsp,
+      ]);
       if (err) {
         success = false;
         errorOutput += err.message;
@@ -181,7 +197,7 @@ export class CompileRule implements Rule {
     }
 
     if (success) {
-      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
+      const gitDiffResult = await gitDiffTopSpecFolder(folder);
       stdOutput += gitDiffResult.stdOutput;
       if (!gitDiffResult.success) {
         success = false;
