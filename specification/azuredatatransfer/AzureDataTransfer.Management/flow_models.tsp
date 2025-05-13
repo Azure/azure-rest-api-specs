@@ -371,6 +371,7 @@ model SelectedResource {
 /**
  * The flows resource patch definition.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Supressing rule to match prior OpenAPI v2 JSON specification, consideration is given on adding the ResourcePlanProperty in future updates."
 model FlowsPatch {
   ...ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
