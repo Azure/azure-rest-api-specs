@@ -4,9 +4,6 @@ parameters:
   "service-name":
     default: "HealthInsights"
   "dependencies":
-    "additionalDirectories":
-      - "specification/ai/HealthInsights/HealthInsights.Common/"
-      - "specification/ai/HealthInsights/HealthInsights.OpenAPI/"
     default: ""
   "python-sdk-folder":
     default: "{project-root}/azure-sdk-for-python/"
@@ -27,24 +24,24 @@ options:
   "@azure-tools/typespec-python":
     package-pprint-name: '"Azure Health Insights - Radiology Insights"'
     package-mode: "dataplane"
-    package-version: 1.0.0
+    package-version: 2.0.0
     package-dir: "azure-healthinsights-radiologyinsights"
-    package-name: "{package-dir}"
-    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    namespace: "azure.healthinsights.radiologyinsights"
     flavor: azure
     generate-test: true
     generate-sample: true
-    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
     package-dir: "azure-health-insights-radiologyinsights"
     namespace: com.azure.health.insights.radiologyinsights
     service-name: "RadiologyInsights"
     partial-update: true
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-health-insights-radiologyinsights"
-    flavor: azure
+    use-object-for-unknown: true
     polling:
       inferRadiologyInsights:
         final-type: com.azure.health.insights.radiologyinsights.models.RadiologyInsightsInferenceResult
+    flavor: azure
+    api-version: 2024-10-01
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true
@@ -53,10 +50,14 @@ options:
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "azurehealthinsightsradiologyinsights-rest"
+    package-dir: "health-insights-radiologyinsights-rest"
     emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/health-insights-cancerprofiling-rest"
-    generateMetadata: true
-    generateTest: true
-    packageDetails:
+    generate-metadata: true
+    generate-test: true
+    package-details:
       name: "@azure-rest/health-insights-radiologyinsights"
     flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/ai/HealthInsights/HealthInsights.Common/"
+      - "specification/ai/HealthInsights/HealthInsights.OpenAPI/"

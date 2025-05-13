@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/translation"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -24,12 +23,11 @@ options:
     namespace: Azure.AI.Translation.Text
     flavor: azure
   "@azure-tools/typespec-python":
-    package-name: "azure-ai-translation-text"
+    namespace: "azure.ai.translation.text"
     package-dir: "azure-ai-translation-text"
     flavor: azure
     generate-test: true
     generate-sample: true
-    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-translation-text"
     namespace: com.azure.ai.translation.text
@@ -39,9 +37,9 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "ai-translation-text-rest"
-    generateMetadata: false
-    generateTest: false
-    packageDetails:
+    generate-metadata: false
+    generate-test: false
+    package-details:
       name: "@azure-rest/ai-translation-text"
       description: "Microsoft Translation Text"
     flavor: azure

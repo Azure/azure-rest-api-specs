@@ -8653,15 +8653,18 @@
         },
         "clusterServicePrincipal": {
           "$ref": "#/definitions/ServicePrincipalInformation",
-          "description": "The service principal to be used by the cluster during Arc Appliance installation."
+          "description": "The service principal to be used by the cluster during Arc Appliance installation.",
+          "x-nullable": true
         },
         "commandOutputSettings": {
           "$ref": "#/definitions/CommandOutputSettings",
-          "description": "The settings for commands run in this cluster, such as bare metal machine run read only commands and data extracts."
+          "description": "The settings for commands run in this cluster, such as bare metal machine run read only commands and data extracts.",
+          "x-nullable": true
         },
         "computeDeploymentThreshold": {
           "$ref": "#/definitions/ValidationThreshold",
-          "description": "The validation threshold indicating the allowable failures of compute machines during environment validation and deployment."
+          "description": "The validation threshold indicating the allowable failures of compute machines during environment validation and deployment.",
+          "x-nullable": true
         },
         "computeRackDefinitions": {
           "description": "The list of rack definitions for the compute racks in a multi-rack\ncluster, or an empty list in a single-rack cluster.",
@@ -8675,15 +8678,18 @@
         },
         "runtimeProtectionConfiguration": {
           "$ref": "#/definitions/RuntimeProtectionConfiguration",
-          "description": "The settings for cluster runtime protection."
+          "description": "The settings for cluster runtime protection.",
+          "x-nullable": true
         },
         "secretArchive": {
           "$ref": "#/definitions/ClusterSecretArchive",
-          "description": "The configuration for use of a key vault to store secrets for later retrieval by the operator."
+          "description": "The configuration for use of a key vault to store secrets for later retrieval by the operator.",
+          "x-nullable": true
         },
         "updateStrategy": {
           "$ref": "#/definitions/ClusterUpdateStrategy",
-          "description": "The strategy for updating the cluster."
+          "description": "The strategy for updating the cluster.",
+          "x-nullable": true
         }
       }
     },
@@ -9495,6 +9501,7 @@
         "userAssignedIdentityResourceId": {
           "description": "The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.",
           "type": "string",
+          "x-nullable": true,
           "format": "arm-id"
         }
       }

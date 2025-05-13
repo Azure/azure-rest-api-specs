@@ -16,8 +16,6 @@
 # PRLabel: %Cognitive Services
 /dev/cognitiveservices/data-plane/Language/ @assafi @rokulka @ChongTang @annatisch @heaths @deyaaeldeen @kristapratico @mssfang @joseharriaga @minhanh-phan @Azure/api-stewardship-board
 
-/specification/adp/ @Azure/adp
-
 # PRLabel: %FarmBeats
 /specification/agrifood/data-plane @Azure/api-stewardship-board
 
@@ -37,7 +35,7 @@
 /specification/applicationinsights/data-plane/Monitor.Exporters/ @ramthi @trask @hectorhdzg @lzchen @Azure/api-stewardship-board
 
 # PRLabel: %Container Apps
-/specification/app/ @Juliehzl
+/specification/app/ @jijohn14 @Juliehzl
 
 # PRLabel: %Code Signing
 /specification/codesigning/data-plane @Azure/api-stewardship-board
@@ -87,6 +85,12 @@
 # PRLabel: %Container Service
 /specification/containerservice/ @palma21 @weinong @seguler @alvinli222 @justindavies @matthchr @robbiezhang @paulgmiller @yizhang4321 @circy9 @qike-ms
 
+# PRLabel: %Container Service Fleet
+/specification/containerservice/**/fleet/ @circy9 @serbrech @jim-minter @matthchr
+
+# PRLabel: %Container Service Fleet
+/specification/containerservice/Fleet.Management/ @circy9 @serbrech @jim-minter @matthchr
+
 # PRLabel: %Cosmos
 /specification/cosmos-db/ @pjohari-ms @MehaKaushik
 
@@ -94,7 +98,7 @@
 /specification/customer-insights/ @tjlvtao
 
 # PRLabel: %Data Factory
-/specification/datafactory/ @Frey-Wang @zhangyd2015 @davidzhaoyue
+/specification/datafactory/ @Frey-Wang @ruowan @davidzhaoyue
 
 # PRLabel: %Data Lake Analytics
 /specification/datalake-analytics/ @ro-joowan
@@ -111,14 +115,14 @@
 /specification/deviceregistry/ @marcodalessandro @rohankhandelwal @riteshrao
 
 # PRLabel: %Device Update
-/specification/deviceupdate/data-plane/ @mikekistler @Azure/api-stewardship-board
+/specification/deviceupdate/data-plane/ @Azure/api-stewardship-board
 
 /specification/documentdb/ @dmakwana
 
 /specification/domainservices/ @jihochang
 
 # PRLabel: %Event Grid
-/specification/eventgrid/ @Kishp01 @ahamad-MS
+/specification/eventgrid/ @lmazuel @jsquire @JoshLove-msft @l0lawrence
 
 # PRLabel: %Event Hubs
 /specification/eventhub/ @v-ajnava @dsouzaarun @damodaravadhani
@@ -139,10 +143,16 @@
 /specification/iothub/ @rkmanda
 
 # PRLabel: %KeyVault
-/specification/keyvault/ @heaths @randallilama @jlichwa
+/specification/keyvault/resource-manager/ @vickm @chen-karen @cheathamb36 @lgonsoulin
+
+# PRLabel: %KeyVault
+/specification/keyvault/Security.*/ @vickm @chen-karen @cheathamb36 @lgonsoulin @heaths @chlowell
+
+# PRLabel: %KeyVault
+/specification/keyvault/data-plane/ @vickm @chen-karen @cheathamb36 @lgonsoulin @heaths
 
 # PRLabel: %Load Test Service
-/specification/loadtestservice/data-plane/ @mikekistler @Azure/api-stewardship-board
+/specification/loadtestservice/data-plane/ @Azure/api-stewardship-board
 
 # PRLabel: %Logic App
 /specification/logic/ @pankajsn @tonytang-microsoft-com
@@ -170,6 +180,9 @@
 # PRLabel: %Monitor - Operational Insights
 /specification/operationalinsights/ @sw47
 
+# PRLabel: %Online Experimentation
+/specification/onlineexperimentation/ @Azure/azure-sdk-write-onlineexperimentation
+
 # PRLabel: %Operations Management
 /specification/operationsmanagement/ @dashimi16
 
@@ -182,7 +195,7 @@
 /specification/powerbidedicated/ @tarostok
 
 # PRLabel: %Purview
-/specification/purview/data-plane @mikekistler @Azure/api-stewardship-board
+/specification/purview/data-plane @Azure/api-stewardship-board
 
 # PRLabel: %PostgreSQL
 /specification/postgresql/** @Azure/azure-sdk-write-postgresql
@@ -249,7 +262,7 @@
 /specification/subscriptions/ @navysingla
 
 # PRLabel: %Synapses
-/specification/synapse/ @wonner @yanjungao718
+/specification/synapse/ @wanyang7 @yanjungao718
 
 # PRLabel: %TimeseriesInsights
 /specification/timeseriesinsights/ @sandshadow
@@ -270,10 +283,12 @@
 /profile/ @shahabhijeet
 
 /specification/**/resource-manager/**/readme.typescript.md @qiaozha
-/specification/**/resource-manager/**/readme.az.md @jsntcy @qiaozha
-/specification/**/resource-manager/**/readme.cli.md @jsntcy @qiaozha
+/specification/**/resource-manager/**/readme.az.md @jsntcy
+/specification/**/resource-manager/**/readme.cli.md @jsntcy
 /specification/**/resource-manager/**/readme.go.md @tadelesh
 /specification/**/resource-manager/**/readme.python.md @msyyc
+
+/specification/contosowidgetmanager/ @mikeharder @raych1 @maririos
 
 ###########
 # Eng Sys
@@ -287,5 +302,7 @@
 /.azure-pipelines/  @weshaggard @mikeharder @benbp
 /.github/           @weshaggard @mikeharder @benbp
 /eng/               @weshaggard @mikeharder @benbp
+/eng/common/        @Azure/azure-sdk-eng
+/eng/tools/typespec-migration-validation @pshao25 @live1206
 /scripts/           @weshaggard @mikeharder
 /.github/CODEOWNERS @Azure/azure-sdk-eng

@@ -2,19 +2,45 @@ import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
 import "./Microsoft.Devices/IotHub.tsp";
-import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
+import "./Microsoft.ResourceNotifications/HealthResources.tsp";
+import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
 import "./propertyNameOverrideGo.tsp";
 import "./propertyNameOverrideCsharp.tsp";
 import "./propertyNameOverrideJs.tsp";
+import "./propertyNameOverrideJava.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
 
 using Microsoft.EventGrid.SystemEvents;
 using Azure.ClientGenerator.Core;
 
+@@clientName(ApiManagementNearExpiryGatewayTokenProperties.expiredAtUtc,
+  "expiresOn",
+  "autorest"
+);
+@@clientName(ApiManagementExpiredGatewayTokenProperties.expiredAtUtc,
+  "expiresOn",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenNearExpiryEventData.gatewayInfo,
+  "gateway",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenNearExpiryEventData.tokenInfo,
+  "token",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenExpiredEventData.gatewayInfo,
+  "gateway",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenExpiredEventData.tokenInfo,
+  "token",
+  "autorest"
+);
 @@clientName(AcsIncomingCallEventData.to,
   "toCommunicationIdentifier",
   "autorest"
@@ -150,3 +176,4 @@ using Azure.ClientGenerator.Core;
   "listItemId",
   "autorest"
 );
+@@clientName(AcsCallEndedByProperties.type, "kind", "autorest");

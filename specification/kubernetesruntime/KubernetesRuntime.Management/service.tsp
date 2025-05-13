@@ -3,6 +3,7 @@ import "./common.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.KubernetesRuntime;
@@ -10,11 +11,11 @@ namespace Microsoft.KubernetesRuntime;
 @doc("Properties for the service resource")
 model ServiceProperties {
   @doc("The object id of the service principal of the RP provisioned in the tenant")
-  @visibility("read")
-  rpObjectId?: string;
+  @visibility(Lifecycle.Read)
+  rpObjectId?: uuid;
 
   @doc("Resource provision state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

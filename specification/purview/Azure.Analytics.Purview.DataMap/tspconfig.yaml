@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/purview"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -15,12 +14,11 @@ options:
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-purview-datamap"
-    package-name: "{package-dir}"
+    namespace: "azure.purview.datamap"
     package-mode: dataplane
     flavor: azure
     generate-test: true
     generate-sample: true
-    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Analytics.Purview.DataMap"
     namespace: "{package-dir}"
@@ -29,9 +27,9 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "purview-datamap-rest"
-    generateMetadata: true
-    generateTest: true
-    packageDetails:
+    generate-metadata: true
+    generate-test: true
+    package-details:
       name: "@azure-rest/purview-datamap"
       description: Purview DataMap Service"
     flavor: azure
@@ -42,3 +40,5 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/use-standard-names": "Mapping to atlas API"

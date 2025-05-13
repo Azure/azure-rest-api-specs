@@ -20,26 +20,30 @@ options:
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-fabric"
     flavor: "azure"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.fabric"
     generate-test: true
     generate-sample: true
-    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    is-modular-library: true
+    experimental-extensible-enums: true
     package-dir: "arm-fabric"
-    emitter-output-dir: "{project-root}/{service-dir}/{package-dir}"
     flavor: "azure"
-    packageDetails:
+    package-details:
       name: "@azure/arm-fabric"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-fabric"
     flavor: azure
     namespace: "com.azure.resourcemanager.fabric"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/fabric"
+    package-dir: "armfabric"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

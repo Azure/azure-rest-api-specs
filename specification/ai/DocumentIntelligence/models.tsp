@@ -34,7 +34,7 @@ union StringIndexType {
 }
 
 @doc("Format of the content in analyzed result.")
-union ContentFormat {
+union DocumentContentFormat {
   string,
 
   @doc("Plain text representation of the document content without any formatting.")
@@ -52,25 +52,25 @@ union DocumentAnalysisFeature {
   string,
 
   @doc("Perform OCR at a higher resolution to handle documents with fine print.")
-  "ocrHighResolution",
+  ocrHighResolution: "ocrHighResolution",
 
   @doc("Enable the detection of the text content language.")
-  "languages",
+  languages: "languages",
 
   @doc("Enable the detection of barcodes in the document.")
-  "barcodes",
+  barcodes: "barcodes",
 
   @doc("Enable the detection of mathematical expressions in the document.")
-  "formulas",
+  formulas: "formulas",
 
   @doc("Enable the detection of general key value pairs (form fields) in the document.")
-  "keyValuePairs",
+  keyValuePairs: "keyValuePairs",
 
   @doc("Enable the recognition of various font styles.")
-  "styleFont",
+  styleFont: "styleFont",
 
   @doc("Enable the extraction of additional fields via the queryFields query parameter.")
-  "queryFields",
+  queryFields: "queryFields",
 }
 
 @doc("The unit used by the width, height, and polygon properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".")
@@ -190,14 +190,14 @@ union DocumentTableCellKind {
 }
 
 @doc("Font style.")
-union FontStyle {
+union DocumentFontStyle {
   string,
   @doc("Characters are represented normally.") "normal",
   @doc("Characters are visually slanted to the right.") "italic",
 }
 
 @doc("Font weight.")
-union FontWeight {
+union DocumentFontWeight {
   string,
   @doc("Characters are represented normally.") "normal",
   @doc("Characters are represented with thicker strokes.") "bold",
@@ -269,10 +269,6 @@ union DocumentBuildMode {
 
   @doc("Support documents with diverse visual templates.")
   "neural",
-
-  @added(Versions.v2024_07_31_preview)
-  @doc("Enable documents of all types using generative AI techniques.")
-  "generative",
 }
 
 @doc("Type of operation.")
@@ -291,7 +287,6 @@ union OperationKind {
     """)
   documentModelCopyTo: "documentModelCopyTo",
 
-  @added(Versions.v2024_07_31_preview)
   @doc("""
     Copy an existing document classifier to potentially a different resource, region, or
     subscription.
@@ -318,7 +313,7 @@ union SplitMode {
 
 @lroStatus
 @doc("Operation status.")
-union OperationStatus {
+union DocumentIntelligenceOperationStatus {
   string,
 
   @doc("The operation has not started yet.")
@@ -335,13 +330,13 @@ union OperationStatus {
   @lroSucceeded
   succeeded: "succeeded",
 
-  @doc("The operation has completed.")
-  @lroSucceeded
-  completed: "completed",
-
   @doc("The operation has been canceled.")
   @lroCanceled
   canceled: "canceled",
+
+  @doc("The operation has been skipped.")
+  @lroCanceled
+  skipped: "skipped",
 }
 
 @doc("Type of content source.")
@@ -349,19 +344,18 @@ union ContentSourceKind {
   string,
 
   @doc("Content at a specific URL.")
-  "url",
+  url: "url",
 
   @doc("Content represented via Base64 encoding.")
-  "base64",
+  base64: "base64",
 
   @doc("Files in a path within an Azure Blob Storage container.")
-  "azureBlob",
+  azureBlob: "azureBlob",
 
   @doc("A file list specifying individual files in an Azure Blob Storage container.")
-  "azureBlobFileList",
+  azureBlobFileList: "azureBlobFileList",
 }
 
-@added(Versions.v2024_07_31_preview)
 @doc("Additional output to generate during analysis.")
 union AnalyzeOutputOption {
   string,
@@ -385,7 +379,6 @@ model AnalyzeDocumentRequest {
   base64Source?: bytes;
 }
 
-@added(Versions.v2024_07_31_preview)
 @doc("Batch document analysis parameters.")
 model AnalyzeBatchDocumentsRequest {
   @doc("""
@@ -412,14 +405,13 @@ model AnalyzeBatchDocumentsRequest {
 
 @doc("Error response object.")
 @error
-model ErrorResponse {
+model DocumentIntelligenceErrorResponse {
   @doc("Error info.")
-  error: Error;
+  error: DocumentIntelligenceError;
 }
 
 @doc("The error object.")
-@clientName("DocumentIntelligenceError", "csharp")
-model Error {
+model DocumentIntelligenceError {
   @doc("One of a server-defined set of error codes.")
   code: string;
 
@@ -430,29 +422,26 @@ model Error {
   target?: string;
 
   @doc("An array of details about specific errors that led to this reported error.")
-  details?: Error[];
+  details?: DocumentIntelligenceError[];
 
   @doc("An object containing more specific information than the current object about the error.")
-  innererror?: InnerError;
+  innererror?: DocumentIntelligenceInnerError;
 }
 
 @doc("An object containing more specific information about the error.")
-model InnerError {
+model DocumentIntelligenceInnerError {
   @doc("One of a server-defined set of error codes.")
   code?: string;
 
   @doc("A human-readable representation of the error.")
   message?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Inner error.")
-  @clientName("InnerErrorObject", "csharp")
-  innererror?: InnerError;
+  innererror?: DocumentIntelligenceInnerError;
 }
 
 @doc("The error object.")
-@clientName("DocumentIntelligenceWarning", "csharp")
-model Warning {
+model DocumentIntelligenceWarning {
   @doc("One of a server-defined set of warning codes.")
   code: string;
 
@@ -464,9 +453,9 @@ model Warning {
 }
 
 @doc("Status and result of the analyze operation.")
-model AnalyzeResultOperation {
+model AnalyzeOperation {
   @doc("Operation status.  notStarted, running, succeeded, or failed")
-  status: OperationStatus;
+  status: DocumentIntelligenceOperationStatus;
 
   @doc("Date and time (UTC) when the analyze operation was submitted.")
   createdDateTime: utcDateTime;
@@ -475,18 +464,20 @@ model AnalyzeResultOperation {
   lastUpdatedDateTime: utcDateTime;
 
   @doc("Encountered error during document analysis.")
-  error?: Error;
+  error?: DocumentIntelligenceError;
 
   @lroResult
   @doc("Document analysis result.")
   analyzeResult?: AnalyzeResult;
 }
 
-@added(Versions.v2024_07_31_preview)
 @doc("Status and result of the analyze batch operation.")
-model AnalyzeBatchResultOperation {
-  @doc("Operation status.  notStarted, running, completed, or failed")
-  status: OperationStatus;
+model AnalyzeBatchOperation {
+  @doc("Analyze batch operation result ID.")
+  resultId?: uuid;
+
+  @doc("Operation status.  notStarted, running, succeeded, or failed")
+  status: DocumentIntelligenceOperationStatus;
 
   @doc("Date and time (UTC) when the operation was submitted.")
   createdDateTime: utcDateTime;
@@ -500,14 +491,13 @@ model AnalyzeBatchResultOperation {
   percentCompleted?: int32;
 
   @doc("Encountered error during batch document analysis.")
-  error?: Error;
+  error?: DocumentIntelligenceError;
 
   @lroResult
   @doc("Batch document analysis result.")
   result?: AnalyzeBatchResult;
 }
 
-@added(Versions.v2024_07_31_preview)
 @doc("Batch document analysis result.")
 model AnalyzeBatchResult {
   @doc("Number of documents that completed with status succeeded.")
@@ -520,14 +510,13 @@ model AnalyzeBatchResult {
   skippedCount: int32;
 
   @doc("Operation detail for each document in the batch.")
-  details: AnalyzeBatchOperationDetail[];
+  details?: AnalyzeBatchOperationDetail[];
 }
 
-@added(Versions.v2024_07_31_preview)
 @doc("Operation detail for a document in a batch analysis.")
 model AnalyzeBatchOperationDetail {
   @doc("Analyze status.  succeeded, failed, or skipped")
-  status: OperationStatus;
+  status: DocumentIntelligenceOperationStatus;
 
   @doc("URL of the source document.")
   sourceUrl: url;
@@ -536,7 +525,7 @@ model AnalyzeBatchOperationDetail {
   resultUrl?: url;
 
   @doc("Encountered error.")
-  error?: Error;
+  error?: DocumentIntelligenceError;
 }
 
 @doc("Document analysis result.")
@@ -552,7 +541,7 @@ model AnalyzeResult {
   stringIndexType: StringIndexType;
 
   @doc("Format of the analyze result top-level content.")
-  contentFormat?: ContentFormat;
+  contentFormat?: DocumentContentFormat;
 
   @doc("""
     Concatenate string representation of all textual and visual elements in reading
@@ -585,10 +574,10 @@ model AnalyzeResult {
   languages?: DocumentLanguage[];
 
   @doc("Extracted documents.")
-  documents?: Document[];
+  documents?: AnalyzedDocument[];
 
   @doc("List of warnings encountered.")
-  warnings?: Warning[];
+  warnings?: DocumentIntelligenceWarning[];
 }
 
 @doc("Content and layout elements extracted from a page from the input.")
@@ -886,7 +875,6 @@ model DocumentFigure {
   @doc("List of footnotes associated with the figure.")
   footnotes?: DocumentFootnote[];
 
-  @added(Versions.v2024_07_31_preview)
   @doc("Figure ID.")
   id?: string;
 }
@@ -977,10 +965,10 @@ model DocumentStyle {
   similarFontFamily?: string;
 
   @doc("Font style.")
-  fontStyle?: FontStyle;
+  fontStyle?: DocumentFontStyle;
 
   @doc("Font weight.")
-  fontWeight?: FontWeight;
+  fontWeight?: DocumentFontWeight;
 
   @doc("Foreground color in #rrggbb hexadecimal format.")
   @pattern("^#[0-9a-f]{6}$")
@@ -1020,8 +1008,7 @@ model DocumentLanguage {
 }
 
 @doc("An object describing the location and semantic content of a document.")
-@clientName("AnalyzedDocument", "csharp")
-model Document {
+model AnalyzedDocument {
   @doc("Document type.")
   @minLength(2)
   @maxLength(64)
@@ -1195,11 +1182,9 @@ model BuildDocumentModelRequest {
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
 
-  @added(Versions.v2024_07_31_preview)
   @doc("Max number of V100-equivalent GPU hours to use for model training.  Default=0.5.")
   maxTrainingHours?: float32 = 0.5;
 
-  @added(Versions.v2024_07_31_preview)
   @doc("Allow overwriting an existing model with the same name.")
   allowOverwrite?: boolean = false;
 }
@@ -1263,7 +1248,7 @@ model AuthorizeCopyRequest {
   Authorization to copy a document model to the specified target resource and
   modelId.
   """)
-model CopyAuthorization {
+model ModelCopyAuthorization {
   @doc("ID of the target Azure resource where the document model should be copied to.")
   targetResourceId: string;
 
@@ -1287,7 +1272,6 @@ model CopyAuthorization {
   expirationDateTime: utcDateTime;
 }
 
-@added(Versions.v2024_07_31_preview)
 @doc("Request body to authorize document classifier copy.")
 model AuthorizeClassifierCopyRequest {
   @doc("Unique document classifier name.")
@@ -1302,7 +1286,6 @@ model AuthorizeClassifierCopyRequest {
   tags?: Record<string>;
 }
 
-@added(Versions.v2024_07_31_preview)
 @doc("""
   Authorization to copy a document classifier to the specified target resource and
   classifierId.
@@ -1334,14 +1317,14 @@ model ClassifierCopyAuthorization {
 @doc("Operation info.")
 @resource("operations")
 @discriminator("kind")
-model OperationDetails {
+model DocumentIntelligenceOperationDetails {
   @doc("Operation ID")
   @key
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   operationId: string;
 
   @doc("Operation status.  notStarted, running, completed, or failed")
-  status: OperationStatus;
+  status: DocumentIntelligenceOperationStatus;
 
   @doc("Operation progress (0-100).")
   @minValue(0)
@@ -1367,14 +1350,14 @@ model OperationDetails {
   tags?: Record<string>;
 
   @doc("Encountered error.")
-  error?: Error;
+  error?: DocumentIntelligenceError;
 }
 
 @resource("documentModels")
 @doc("Document model info.")
 model DocumentModelDetails {
   @key
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Unique document model name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   modelId: string;
@@ -1384,36 +1367,40 @@ model DocumentModelDetails {
   description?: string;
 
   @doc("Date and time (UTC) when the document model was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the document model will expire.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expirationDateTime?: utcDateTime;
 
+  @doc("Date and time (UTC) when the document model was last modified.")
+  @visibility(Lifecycle.Read)
+  modifiedDateTime?: utcDateTime;
+
   @doc("API version used to create this document model.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   apiVersion?: string;
 
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
 
   @doc("Custom document model build mode.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   buildMode?: DocumentBuildMode;
 
   @doc("""
     Azure Blob Storage location containing the training data.  Either
     azureBlobSource or azureBlobFileListSource must be specified.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
     Azure Blob Storage file list specifying the training data.  Either
     azureBlobSource or azureBlobFileListSource must be specified.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 
   @doc("For composed models, the custom classifier to split and classify the input file.")
@@ -1423,16 +1410,15 @@ model DocumentModelDetails {
   split?: SplitMode = SplitMode.none;
 
   @doc("Supported document types.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   docTypes?: Record<DocumentTypeDetails>;
 
   @doc("List of warnings encountered while building the model.")
-  @visibility("read")
-  warnings?: Warning[];
+  @visibility(Lifecycle.Read)
+  warnings?: DocumentIntelligenceWarning[];
 
-  @added(Versions.v2024_07_31_preview)
   @doc("Number of V100-equivalent GPU hours consumed for model training.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   trainingHours?: float32;
 }
 
@@ -1505,7 +1491,6 @@ model BuildDocumentClassifierRequest {
   @doc("List of document types to classify against.")
   docTypes: Record<ClassifierDocumentTypeDetails>;
 
-  @added(Versions.v2024_07_31_preview)
   @doc("Allow overwriting an existing classifier with the same name.")
   allowOverwrite?: boolean = false;
 }
@@ -1534,7 +1519,7 @@ model ClassifierDocumentTypeDetails {
 @resource("documentClassifiers")
 model DocumentClassifierDetails {
   @key
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Unique document classifier name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   @maxLength(64)
@@ -1550,6 +1535,10 @@ model DocumentClassifierDetails {
   @doc("Date and time (UTC) when the document classifier will expire.")
   expirationDateTime?: utcDateTime;
 
+  @doc("Date and time (UTC) when the document model was last modified.")
+  @visibility(Lifecycle.Read)
+  modifiedDateTime?: utcDateTime;
+
   @doc("API version used to create this document classifier.")
   apiVersion: string;
 
@@ -1561,7 +1550,7 @@ model DocumentClassifierDetails {
   docTypes: Record<ClassifierDocumentTypeDetails>;
 
   @doc("List of warnings encountered while building the classifier.")
-  warnings?: Warning[];
+  warnings?: DocumentIntelligenceWarning[];
 }
 
 @doc("Document classification parameters.")
@@ -1577,7 +1566,7 @@ model ClassifyDocumentRequest {
 }
 
 @doc("General information regarding the current resource.")
-model ResourceDetails {
+model DocumentIntelligenceResourceDetails {
   @doc("Details regarding custom document models.")
   customDocumentModels: CustomDocumentModelsDetails;
 }
@@ -1592,7 +1581,8 @@ model CustomDocumentModelsDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentModelBuildOperationDetails extends OperationDetails {
+model DocumentModelBuildOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentModelDetails;
@@ -1602,7 +1592,8 @@ model DocumentModelBuildOperationDetails extends OperationDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentModelComposeOperationDetails extends OperationDetails {
+model DocumentModelComposeOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentModelDetails;
@@ -1612,7 +1603,8 @@ model DocumentModelComposeOperationDetails extends OperationDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentModelCopyToOperationDetails extends OperationDetails {
+model DocumentModelCopyToOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentModelDetails;
@@ -1621,9 +1613,9 @@ model DocumentModelCopyToOperationDetails extends OperationDetails {
   kind: OperationKind.documentModelCopyTo;
 }
 
-@added(Versions.v2024_07_31_preview)
 @doc("Get Operation response object.")
-model DocumentClassifierCopyToOperationDetails extends OperationDetails {
+model DocumentClassifierCopyToOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentClassifierDetails;
@@ -1633,7 +1625,8 @@ model DocumentClassifierCopyToOperationDetails extends OperationDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentClassifierBuildOperationDetails extends OperationDetails {
+model DocumentClassifierBuildOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentClassifierDetails;

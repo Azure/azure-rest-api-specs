@@ -583,7 +583,7 @@
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessions",
         "summary": "Lists sessions for /detectLivenessWithVerify/SingleModal.",
-        "description": "List sessions from the last sessionId greater than the \"start\".\n\nThe result should be ordered by sessionId in ascending order.",
+        "description": "List sessions from the last sessionId greater than the 'start'.\n\nThe result should be ordered by sessionId in ascending order.",
         "parameters": [
           {
             "name": "start",
@@ -6647,25 +6647,6 @@
       },
       "required": [
         "livenessOperationMode"
-      ]
-    },
-    "CreateLivenessWithVerifySessionMultipartContent": {
-      "type": "object",
-      "description": "Request of liveness with verify session creation.",
-      "properties": {
-        "Parameters": {
-          "$ref": "#/definitions/CreateLivenessWithVerifySessionJsonContent",
-          "description": "The parameters for creating session."
-        },
-        "VerifyImage": {
-          "type": "string",
-          "format": "byte",
-          "description": "The image stream for verify. Content-Disposition header field for this part must have filename."
-        }
-      },
-      "required": [
-        "Parameters",
-        "VerifyImage"
       ]
     },
     "CreateLivenessWithVerifySessionResult": {

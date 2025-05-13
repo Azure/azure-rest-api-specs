@@ -2,7 +2,8 @@ import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
 import "./Microsoft.Devices/IotHub.tsp";
-import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
+import "./Microsoft.ResourceNotifications/HealthResources.tsp";
+import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
@@ -131,6 +132,16 @@ using Microsoft.EventGrid.SystemEvents;
   "AcsChatMessageEventInThreadBase",
   "javascript"
 );
+@@clientName(AcsCallingEventProperties, "AcsCallingEvent", "javascript");
+@@clientName(AcsCallParticipantEventProperties,
+  "AcsCallParticipantEvent",
+  "javascript"
+);
+@@clientName(AcsCallParticipantProperties, "AcsCallParticipant", "javascript");
+@@clientName(AcsCallGroupProperties, "AcsCallGroup", "javascript");
+@@clientName(AcsCallRoomProperties, "AcsCallRoom", "javascript");
+@@clientName(AcsCallEndedByProperties, "AcsCallEndedBy", "javascript");
+@@clientName(AcsCallEndReasonProperties, "AcsCallEndReason", "javascript");
 @@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
   "EventGridMqttClientCreatedOrUpdatedEventData",
   "javascript"

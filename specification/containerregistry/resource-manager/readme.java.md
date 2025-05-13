@@ -35,6 +35,9 @@ directive:
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2025-04
+  - tag: package-2025-03-preview
+  - tag: package-2024-11-preview
   - tag: package-2023-11-preview
   - tag: package-2023-08-preview
   - tag: package-2023-07
@@ -54,6 +57,44 @@ batch:
   - tag: package-2017-10
   - tag: package-2017-03
 ```
+
+### Tag: package-2025-04 and java
+
+These settings apply only when `--tag=package-2025-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2025-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerregistry.v2025_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerregistry/mgmt-v2025_04_01
+```
+
+### Tag: package-2025-03-preview and java
+
+These settings apply only when `--tag=package-2025-03-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2025-03-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerregistry.v2025_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerregistry/mgmt-v2025_03_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2024-11-preview and java
+
+These settings apply only when `--tag=package-2024-11-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2024-11-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerregistry.v2024_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerregistry/mgmt-v2024_11_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-2023-11-preview and java
 
 These settings apply only when `--tag=package-2023-11-preview --java` is specified on the command line.

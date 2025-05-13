@@ -1,16 +1,18 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
 namespace AzureAppConfiguration;
 
-alias appConfigOperation<
-  TParams extends Reflection.Model,
+alias AppConfigOperation<
+  TParams,
   TResponse,
   Traits extends Reflection.Model = {},
   TError = Error
@@ -21,62 +23,28 @@ alias appConfigOperation<
   TError
 >;
 
-alias standardOps = ResourceOperations<
-  SupportsClientRequestId & NoRepeatableRequests & NoConditionalRequests,
+alias StandardOps = ResourceOperations<
+  NoClientRequestId & NoRepeatableRequests & NoConditionalRequests,
   Error
 >;
 
-alias syncTokenHeader = {
-  @doc("Used to guarantee real-time consistency between requests.")
-  @header("Sync-Token")
-  syncToken?: string;
-};
-
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
-alias contentTypeHeader<T extends string> = {
-  @doc("Content-Type header")
-  @header("Content-Type")
-  contentType?: T | "application/problem+json";
-};
-
-alias AppConfigResponseHeaders = {
-  ...syncTokenHeader;
-
-  @doc("A value representing the current state of the resource.")
-  @header("ETag")
-  etagHeader?: string;
+alias KeysRequestParams = {
+  ...NameQueryParam<"A filter for the name of the returned keys.">;
+  ...AfterHeader;
+  ...SyncTokenHeader;
+  ...AcceptDatetimeHeader;
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Gets a list of keys.")
 @doc("Gets a list of keys.")
 op getKeys is Foundations.ResourceList<
   Key,
-  {
-    @doc("A filter for the name of the returned keys.")
-    @query("name")
-    name?: string;
-
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
-  },
-  KeyListResult & {
-    ...syncTokenHeader;
-    ...contentTypeHeader<"application/vnd.microsoft.appconfig.keyset+json">;
-  },
+  KeysRequestParams,
+  KeyListResult &
+    SyncTokenHeader &
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.keyset+json">,
   {},
   Error
 >;
@@ -86,105 +54,46 @@ op getKeys is Foundations.ResourceList<
 @doc("Requests the headers and status of the given resource.")
 @route("/keys")
 @head
-op checkKeys is appConfigOperation<
-  {
-    @doc("A filter for the name of the returned keys.")
-    @query("name")
-    name?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
-
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
-  },
-  OkResponse & {
-    ...syncTokenHeader;
-  }
+op checkKeys is AppConfigOperation<
+  KeysRequestParams,
+  OkResponse & SyncTokenHeader
 >;
 
+alias KeyValuesRequestParams = {
+  ...KeyQueryParam<"""
+    A filter used to match keys. Syntax reference:
+    https://aka.ms/azconfig/docs/keyvaluefiltering
+    """>;
+  ...LabelQueryParam<"""
+    A filter used to match labels. Syntax reference:
+    https://aka.ms/azconfig/docs/keyvaluefiltering
+    """>;
+  ...SyncTokenHeader;
+  ...AfterHeader;
+  ...AcceptDatetimeHeader;
+  ...SelectQueryParam<KeyValueFields>;
+  ...SnapshotOptionalQueryParam<"""
+    A filter used get key-values for a snapshot. The value should be the name of
+    the snapshot. Not valid when used with 'key' and 'label' filters.
+    """>;
+  ...IfMatchHeader;
+  ...IfNoneMatchHeader;
+  ...TagsQueryParam<"""
+    A filter used to query by tags. Syntax reference:
+    https://aka.ms/azconfig/docs/keyvaluefiltering
+    """>;
+};
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Gets a list of key-values.")
 @doc("Gets a list of key-values.")
 op getKeyValues is Foundations.ResourceList<
   KeyValue,
-  {
-    @doc("""
-      A filter used to match keys. Syntax reference:
-      https://aka.ms/azconfig/docs/keyvaluefiltering
-      """)
-    @query("key")
-    key?: string;
-
-    @doc("""
-      A filter used to match labels. Syntax reference:
-      https://aka.ms/azconfig/docs/keyvaluefiltering
-      """)
-    @query("label")
-    label?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
-
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
-
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
-
-    @doc("""
-      A filter used get key-values for a snapshot. The value should be the name of
-      the snapshot. Not valid when used with 'key' and 'label' filters.
-      """)
-    @query("snapshot")
-    snapshot?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag matches the
-      value provided.
-      """)
-    @header("If-Match")
-    ifMatch?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag does not
-      match the value provided.
-      """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
-
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
-    @doc("""
-      A filter used to query by tags. Syntax reference:
-      https://aka.ms/azconfig/docs/keyvaluefiltering
-      """)
-    @query(#{ name: "tags", explode: true })
-    tags?: string[];
-  },
+  KeyValuesRequestParams,
   KeyValueListResult &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
   {},
   Error
 >;
@@ -194,68 +103,8 @@ op getKeyValues is Foundations.ResourceList<
 @doc("Requests the headers and status of the given resource.")
 @route("/kv")
 @head
-op checkKeyValues is appConfigOperation<
-  {
-    @doc("""
-      A filter used to match keys. Syntax reference:
-      https://aka.ms/azconfig/docs/keyvaluefiltering
-      """)
-    @query("key")
-    key?: string;
-
-    @doc("""
-      A filter used to match labels. Syntax reference:
-      https://aka.ms/azconfig/docs/keyvaluefiltering
-      """)
-    @query("label")
-    label?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
-
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
-
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
-
-    @doc("A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.")
-    @query("snapshot")
-    snapshot?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag matches the
-      value provided.
-      """)
-    @header("If-Match")
-    ifMatch?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag does not
-      match the value provided.
-      """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
-
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
-    @doc("""
-      A filter used to query by tags. Syntax reference:
-      https://aka.ms/azconfig/docs/keyvaluefiltering
-      """)
-    @query(#{ name: "tags", explode: true })
-    tags?: string[];
-  },
+op checkKeyValues is AppConfigOperation<
+  KeyValuesRequestParams,
   OkResponse & AppConfigResponseHeaders
 >;
 
@@ -264,56 +113,37 @@ op checkKeyValues is appConfigOperation<
 @doc("Gets a single key-value.")
 @get
 op getKeyValue is Foundations.ResourceOperation<
-  Resource = KeyValue,
-  Parameters = {
-    @doc("The label of the key-value to retrieve.")
-    @query("label")
-    label?: string;
-
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
-  } & {
-    ...syncTokenHeader;
-
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag matches the
-      value provided.
-      """)
-    @header("If-Match")
-    ifMatch?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag does not
-      match the value provided.
-      """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
-
+  KeyValue,
+  {
+    ...LabelQueryParam<"The label of the key-value to retrieve.">;
+    ...SelectQueryParam<KeyValueFields>;
+    ...SyncTokenHeader;
+    ...AcceptDatetimeHeader;
+    ...IfMatchHeader;
+    ...IfNoneMatchHeader;
     ...ClientRequestIdHeader;
+
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract."
+    @added(Versions.v2024_09_01)
+    @doc("A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering")
+    @query(#{ name: "tags", explode: true })
+    tags?: string[];
   },
-  Response = Body<KeyValue> & {
-    ...ClientRequestIdHeader;
-    ...AppConfigResponseHeaders;
-    ...contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
-  },
-  Traits = {},
-  ErrorResponse = Error
+  Body<KeyValue> &
+    RequestIdResponseHeader &
+    AppConfigResponseHeaders &
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">,
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Creates a key-value.")
 @doc("Creates a key-value.")
 @route("/kv/{key}")
 @put
-op putKeyValue is appConfigOperation<
+op putKeyValue is AppConfigOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
@@ -326,29 +156,11 @@ op putKeyValue is appConfigOperation<
       | "application/*+json"
       | "application/json-patch+json";
 
-    @doc("The key of the key-value to create.")
-    @path
-    key: string;
-
-    @doc("The label of the key-value to create.")
-    @query("label")
-    label?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag matches the
-      value provided.
-      """)
-    @header("If-Match")
-    ifMatch?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag does not
-      match the value provided.
-      """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
+    ...KeyPathParam<"The key of the key-value to create.">;
+    ...LabelQueryParam<"The label of the key-value to create.">;
+    ...SyncTokenHeader;
+    ...IfMatchHeader;
+    ...IfNoneMatchHeader;
 
     @doc("The key-value to create.")
     @body
@@ -356,7 +168,7 @@ op putKeyValue is appConfigOperation<
   },
   Body<KeyValue> &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -364,32 +176,20 @@ op putKeyValue is appConfigOperation<
 @doc("Deletes a key-value.")
 @route("/kv/{key}")
 @delete
-op deleteKeyValue is appConfigOperation<
+op deleteKeyValue is AppConfigOperation<
   {
-    @doc("The key of the key-value to delete.")
-    @path
-    key: string;
-
-    @doc("The label of the key-value to delete.")
-    @query("label")
-    label?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag matches the
-      value provided.
-      """)
-    @header("If-Match")
-    ifMatch?: string;
+    ...KeyPathParam<"The key of the key-value to delete.">;
+    ...LabelQueryParam<"The label of the key-value to delete.">;
+    ...SyncTokenHeader;
+    ...IfMatchHeader;
   },
   (Body<KeyValue> &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
     @statusCode
     statusCode: 204;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
   }
 >;
 
@@ -398,77 +198,45 @@ op deleteKeyValue is appConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/kv/{key}")
 @head
-op checkKeyValue is appConfigOperation<
+op checkKeyValue is AppConfigOperation<
   {
-    @doc("The key of the key-value to retrieve.")
-    @path
-    key: string;
+    ...KeyPathParam<"The key of the key-value to retrieve.">;
+    ...LabelQueryParam<"The label of the key-value to retrieve.">;
+    ...SyncTokenHeader;
+    ...AcceptDatetimeHeader;
+    ...IfMatchHeader;
+    ...IfNoneMatchHeader;
+    ...SelectQueryParam<KeyValueFields>;
 
-    @doc("The label of the key-value to retrieve.")
-    @query("label")
-    label?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag matches the
-      value provided.
-      """)
-    @header("If-Match")
-    ifMatch?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag does not
-      match the value provided.
-      """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
-
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract."
+    @added(Versions.v2024_09_01)
+    @doc("A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering")
+    @query(#{ name: "tags", explode: true })
+    tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of key-value snapshots.")
 @doc("Gets a list of key-value snapshots.")
 op getSnapshots is Foundations.ResourceList<
   Snapshot,
   {
-    @doc("A filter for the name of the returned snapshots.")
-    @query("name")
-    name?: string;
-
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
-
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: SnapshotFields[];
+    ...NameQueryParam<"A filter for the name of the returned snapshots.">;
+    ...AfterHeader;
+    ...SelectQueryParam<SnapshotFields>;
 
     @doc("Used to filter returned snapshots by their status property.")
     @query("status")
     status?: SnapshotStatus[];
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
   },
-  SnapshotListResult & {
-    ...syncTokenHeader;
-    ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
-  },
+  SnapshotListResult &
+    SyncTokenHeader &
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshotset+json">,
   {},
   Error
 >;
@@ -478,55 +246,26 @@ op getSnapshots is Foundations.ResourceList<
 @doc("Requests the headers and status of the given resource.")
 @route("/snapshots")
 @head
-op checkSnapshots is appConfigOperation<
-  {
-    ...syncTokenHeader;
-
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
-  },
-  OkResponse & {
-    ...syncTokenHeader;
-  }
+op checkSnapshots is AppConfigOperation<
+  SyncTokenHeader & AfterHeader,
+  OkResponse & SyncTokenHeader
 >;
 
 @summary("Gets a single key-value snapshot.")
 @doc("Gets a single key-value snapshot.")
-op getSnapshot is standardOps.ResourceRead<
+op getSnapshot is StandardOps.ResourceRead<
   Snapshot,
-  QueryParametersTrait<{
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: SnapshotFields[];
-  }> &
+  QueryParametersTrait<SelectQueryParam<SnapshotFields>> &
     RequestHeadersTrait<{
-      ...syncTokenHeader;
-
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag matches the
-        value provided.
-        """)
-      @header("If-Match")
-      ifMatch?: string;
-
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag does not
-        match the value provided.
-        """)
-      @header("If-None-Match")
-      ifNoneMatch?: string;
+      ...SyncTokenHeader;
+      ...IfMatchHeader;
+      ...IfNoneMatchHeader;
+      ...ClientRequestIdHeader;
     }> &
-    ResponseHeadersTrait<AppConfigResponseHeaders & {
-      @doc("Includes links to related resources.")
-      @header("Link")
-      link?: string;
-
-      ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-    }>
+    ResponseHeadersTrait<AppConfigResponseHeaders &
+      LinkHeader &
+      ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json"> &
+      RequestIdResponseHeader>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -543,27 +282,18 @@ op createSnapshot is Foundations.LongRunningOperation<
     @header("Content-Type")
     contentType: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
 
-    @doc("The name of the key-value snapshot to create.")
-    @maxLength(256)
-    @path
-    name: string;
-
-    ...syncTokenHeader;
+    ...NamePathParam<"The name of the key-value snapshot to create.">;
+    ...SyncTokenHeader;
 
     @doc("The key-value snapshot to create.")
     @body
     entity: Snapshot;
   },
   CreatedResponse &
-    Snapshot & {
-      ...AppConfigResponseHeaders;
-
-      @doc("Includes links to related resources.")
-      @header("Link")
-      link?: string;
-
-      ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-    },
+    Snapshot &
+    AppConfigResponseHeaders &
+    LinkHeader &
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">,
   {},
   Error
 >;
@@ -572,47 +302,27 @@ op createSnapshot is Foundations.LongRunningOperation<
 @summary("Updates the state of a key-value snapshot.")
 @doc("Updates the state of a key-value snapshot.")
 @route("/snapshots/{name}")
-@patch
-op updateSnapshot is appConfigOperation<
+@patch(#{ implicitOptionality: true })
+op updateSnapshot is AppConfigOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
     contentType: "application/merge-patch+json" | "application/json";
 
-    @doc("The name of the key-value snapshot to update.")
-    @path
-    name: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag matches the
-      value provided.
-      """)
-    @header("If-Match")
-    ifMatch?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag does not
-      match the value provided.
-      """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
+    ...NamePathParam<"The name of the key-value snapshot to update.">;
+    ...SyncTokenHeader;
+    ...IfMatchHeader;
+    ...IfNoneMatchHeader;
 
     @doc("The parameters used to update the snapshot.")
     @body
     entity: SnapshotUpdateParameters;
   },
-  Snapshot & {
-    ...AppConfigResponseHeaders;
-
-    @doc("Includes links to related resources.")
-    @header("Link")
-    link?: string;
-
-    ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-  }
+  Snapshot &
+    AppConfigResponseHeaders &
+    LinkHeader &
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -620,71 +330,34 @@ op updateSnapshot is appConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/snapshots/{name}")
 @head
-op checkSnapshot is appConfigOperation<
+op checkSnapshot is AppConfigOperation<
   {
-    @doc("The name of the key-value snapshot to check.")
-    @path
-    name: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag matches the
-      value provided.
-      """)
-    @header("If-Match")
-    ifMatch?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag does not
-      match the value provided.
-      """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
+    ...NamePathParam<"The name of the key-value snapshot to check.">;
+    ...SyncTokenHeader;
+    ...IfMatchHeader;
+    ...IfNoneMatchHeader;
   },
-  OkResponse & {
-    ...AppConfigResponseHeaders;
-
-    @doc("Includes links to related resources.")
-    @header("Link")
-    link?: string;
-  }
+  OkResponse & AppConfigResponseHeaders & LinkHeader
 >;
 
+alias LabelsRequestParams = {
+  ...NameQueryParam<"A filter for the name of the returned labels.">;
+  ...SyncTokenHeader;
+  ...AfterHeader;
+  ...AcceptDatetimeHeader;
+  ...SelectQueryParam<LabelFields>;
+};
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of labels.")
 @doc("Gets a list of labels.")
 @route("/labels")
-op getLabels is appConfigOperation<
-  {
-    @doc("A filter for the name of the returned labels.")
-    @query("name")
-    name?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
-
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
-
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: LabelFields[];
-  },
-  LabelListResult & {
-    ...syncTokenHeader;
-    ...contentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">;
-  }
+op getLabels is AppConfigOperation<
+  LabelsRequestParams,
+  LabelListResult &
+    SyncTokenHeader &
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -692,71 +365,28 @@ op getLabels is appConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/labels")
 @head
-op checkLabels is appConfigOperation<
-  {
-    @doc("A filter for the name of the returned labels.")
-    @query("name")
-    name?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
-
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
-
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: LabelFields[];
-  },
-  OkResponse & {
-    ...syncTokenHeader;
-  }
+op checkLabels is AppConfigOperation<
+  LabelsRequestParams,
+  OkResponse & SyncTokenHeader
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Locks a key-value.")
 @doc("Locks a key-value.")
 @route("/locks/{key}")
 @put
-op putLock is appConfigOperation<
+op putLock is AppConfigOperation<
   {
-    @doc("The key of the key-value to lock.")
-    @path
-    key: string;
-
-    @doc("The label, if any, of the key-value to lock.")
-    @query("label")
-    label?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag matches the
-      value provided.
-      """)
-    @header("If-Match")
-    ifMatch?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag does not
-      match the value provided.
-      """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
+    ...KeyPathParam<"The key of the key-value to lock.">;
+    ...LabelQueryParam<"The label, if any, of the key-value to lock.">;
+    ...SyncTokenHeader;
+    ...IfMatchHeader;
+    ...IfNoneMatchHeader;
   },
   Body<KeyValue> &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -764,89 +394,49 @@ op putLock is appConfigOperation<
 @doc("Unlocks a key-value.")
 @route("/locks/{key}")
 @delete
-op deleteLock is appConfigOperation<
+op deleteLock is AppConfigOperation<
   {
-    @doc("The key of the key-value to unlock.")
-    @path
-    key: string;
-
-    @doc("The label, if any, of the key-value to unlock.")
-    @query("label")
-    label?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag matches the
-      value provided.
-      """)
-    @header("If-Match")
-    ifMatch?: string;
-
-    @doc("""
-      Used to perform an operation only if the targeted resource's etag does not
-      match the value provided.
-      """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
+    ...KeyPathParam<"The key of the key-value to unlock.">;
+    ...LabelQueryParam<"The label, if any, of the key-value to unlock.">;
+    ...SyncTokenHeader;
+    ...IfMatchHeader;
+    ...IfNoneMatchHeader;
   },
   Body<KeyValue> &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
+alias RevisionsRequestParams = {
+  ...KeyQueryParam<"""
+    A filter used to match keys. Syntax reference:
+    https://aka.ms/azconfig/docs/restapirevisions
+    """>;
+  ...LabelQueryParam<"""
+    A filter used to match labels. Syntax reference:
+    https://aka.ms/azconfig/docs/restapirevisions
+    """>;
+  ...SyncTokenHeader;
+  ...AfterHeader;
+  ...AcceptDatetimeHeader;
+  ...SelectQueryParam<KeyValueFields>;
+  ...TagsQueryParam<"""
+    A filter used to query by tags. Syntax reference:
+    https://aka.ms/azconfig/docs/restapirevisions
+    """>;
+};
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of key-value revisions.")
 @doc("Gets a list of key-value revisions.")
 @route("/revisions")
 @get
-op getRevisions is appConfigOperation<
-  {
-    @doc("""
-      A filter used to match keys. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """)
-    @query("key")
-    key?: string;
-
-    @doc("""
-      A filter used to match labels. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """)
-    @query("label")
-    label?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
-
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
-
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
-
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
-    @doc("""
-      A filter used to query by tags. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """)
-    @query(#{ name: "tags", explode: true })
-    tags?: string[];
-  },
+op getRevisions is AppConfigOperation<
+  RevisionsRequestParams,
   KeyValueListResult &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -854,50 +444,8 @@ op getRevisions is appConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/revisions")
 @head
-op checkRevisions is appConfigOperation<
-  {
-    @doc("""
-      A filter used to match keys. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """)
-    @query("key")
-    key?: string;
-
-    @doc("""
-      A filter used to match labels. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """)
-    @query("label")
-    label?: string;
-
-    ...syncTokenHeader;
-
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
-
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
-
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
-
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
-    @doc("""
-      A filter used to query by tags. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """)
-    @query(#{ name: "tags", explode: true })
-    tags?: string[];
-  },
+op checkRevisions is AppConfigOperation<
+  RevisionsRequestParams,
   OkResponse & AppConfigResponseHeaders
 >;
 
@@ -906,7 +454,7 @@ op checkRevisions is appConfigOperation<
 @doc("Gets the state of a long running operation.")
 @route("/operations")
 @get
-op getOperationDetails is appConfigOperation<
+op getOperationDetails is AppConfigOperation<
   {
     @doc("Snapshot identifier for the long running operation.")
     @query("snapshot")

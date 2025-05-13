@@ -5,7 +5,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface ScriptExecutions {
@@ -125,19 +124,19 @@ model ScriptExecutionProperties {
   retention?: string;
 
   @doc("Time the script execution was submitted")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   submittedAt?: utcDateTime;
 
   @doc("Time the script execution was started")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startedAt?: utcDateTime;
 
   @doc("Time the script execution was finished")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   finishedAt?: utcDateTime;
 
   @doc("The state of the script execution resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ScriptExecutionProvisioningState;
 
   @doc("Standard output stream from the powershell execution")
@@ -145,19 +144,20 @@ model ScriptExecutionProperties {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "It is unknown."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "It is unknown."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   @doc("User-defined dictionary.")
   namedOutputs?: Record<{}>;
 
   @doc("Standard information out stream from the powershell execution")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   information?: string[];
 
   @doc("Standard warning out stream from the powershell execution")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   warnings?: string[];
 
   @doc("Standard error output stream from the powershell execution")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: string[];
 }
 

@@ -16,16 +16,18 @@ using Azure.Core.Traits;
 
 /** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.
  * The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering.
- * Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
+ * Further documentation can be found in <a href=\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
 @useAuth(
-  TypeSpec.Http.ApiKeyAuth<
-    TypeSpec.Http.ApiKeyLocation.header,
-    "Ocp-Apim-Subscription-Key"
-  >
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.authorizationCode,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
 )
-@service({
-  title: "Microsoft Cognitive Language Service - Document Analysis",
-})
+@service(#{ title: "Microsoft Cognitive Language Service - Document Analysis" })
 @server(
   "{Endpoint}/language",
   "Single server endpoint",
@@ -39,9 +41,9 @@ namespace Language.AnalyzeDocuments;
 
 /** Analyze Documents Service Versions */
 enum Versions {
-  /** Version 2023-11-15-preview */
+  /** Version 2024-11-15-preview */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_11_15_preview: "2023-11-15-preview",
+  v2024_11_15_preview: "2024-11-15-preview",
 }
 
 alias ServiceTraits = NoRepeatableRequests &
@@ -52,6 +54,7 @@ alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
 /** Get the status of a document analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @summary("Get analysis status and results")
 op analyzeDocumentsJobStatus is languageOperations.ResourceRead<
   AnalyzeDocumentsJobState,

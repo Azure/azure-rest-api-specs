@@ -46,21 +46,18 @@ model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
 /** Entity linking result. */
 model EntityLinkingResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(
-    Versions.v2023_11_15_preview,
-    Array<LinkedEntitiesDocumentResult>
-  )
-  documents: Array<EntityLinkingResultWithDetectedLanguage>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, LinkedEntitiesDocumentResult[])
+  documents: EntityLinkingResultWithDetectedLanguage[];
 }
 
 /** Entity linking document result. */
 model LinkedEntitiesDocumentResult is DocumentResult {
   /** Recognized well known entities in the document. */
-  entities: Array<LinkedEntity>;
+  entities: LinkedEntity[];
 }
 
 /** Entity linking document result with auto language detection. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model EntityLinkingResultWithDetectedLanguage {
   ...LinkedEntitiesDocumentResult;
   ...DocumentDetectedLanguage;
@@ -72,7 +69,7 @@ model LinkedEntity {
   name: string;
 
   /** List of instances this entity appears in the text. */
-  matches: Array<Match>;
+  matches: Match[];
 
   /** Language used in the data source. */
   language: string;

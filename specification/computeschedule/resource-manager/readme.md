@@ -27,16 +27,30 @@ These are the global settings for the computeschedule.
 ```yaml
 openapi-subtype: rpaas
 openapi-type: arm
-tag: package-2024-08-15-preview
+tag: package-2025-05-01
 ```
- 
-### Tag: package-2024-08-15-preview
 
-These settings apply only when `--tag=package-2024-08-15-preview` is specified on the command line.
+### Tag: package-2025-05-01
 
-```yaml $(tag) == 'package-2024-08-15-preview'
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
 input-file:
-  - Microsoft.ComputeSchedule/preview/2024-08-15-preview/computeschedule.json
+  - Microsoft.ComputeSchedule/stable/2025-05-01/computeschedule.json
+suppressions:  
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we don't want copy VMextensionProperties type here and update when dependency changes
+    from: computeschedule.json
+    where: $.definitions.VirtualMachineExtensionData.properties.properties
+```
+
+### Tag: package-2024-10-01
+
+These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10-01'
+input-file:
+  - Microsoft.ComputeSchedule/stable/2024-10-01/computeschedule.json
 ```
 
 ---
@@ -50,7 +64,6 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -65,10 +78,6 @@ See configuration in [readme.az.md](./readme.az.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
 
 ## TypeScript
 

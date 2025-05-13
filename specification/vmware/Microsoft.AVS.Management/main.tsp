@@ -14,13 +14,17 @@ import "./clusters.tsp";
 import "./datastores.tsp";
 import "./globalReachConnections.tsp";
 import "./hcxEnterpriseSites.tsp";
+import "./hosts.tsp";
 import "./iscsiPaths.tsp";
 import "./locations.tsp";
 import "./placementPolicies.tsp";
 import "./privateClouds.tsp";
+import "./provisionedNetworks.tsp";
+import "./pureStoragePolicies.tsp";
 import "./scriptCmdlets.tsp";
 import "./scriptExecutions.tsp";
 import "./scriptPackages.tsp";
+import "./skus.tsp";
 import "./virtualMachines.tsp";
 import "./workloadNetworks-dhcpConfigurations.tsp";
 import "./workloadNetworks-dnsServices.tsp";
@@ -39,9 +43,7 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
 @armProviderNamespace("Microsoft.AVS")
-@service({
-  title: "Azure VMware Solution API",
-})
+@service(#{ title: "Azure VMware Solution API" })
 @doc("Azure VMware Solution API")
 @versioned(Versions)
 namespace Microsoft.AVS;
@@ -53,6 +55,12 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2023_09_01: "2023-09-01",
+
+  @doc("Azure VMware Solution API version 2024-09-01.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_09_01: "2024-09-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

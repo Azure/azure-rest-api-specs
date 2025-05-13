@@ -12,6 +12,7 @@ import "./Workspace.tsp";
 import "./Api.tsp";
 import "./ApiVersion.tsp";
 import "./ApiDefinition.tsp";
+import "./ApiSource.tsp";
 import "./Deployment.tsp";
 import "./Environment.tsp";
 
@@ -22,9 +23,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 @armProviderNamespace
-@service({
-  title: "Azure API Center",
-})
+@service(#{ title: "Azure API Center" })
 @versioned(Versions)
 @doc("Azure API Center Resource Provider.")
 @Azure.ResourceManager.armCommonTypesVersion("v5")
@@ -41,6 +40,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_15_preview: "2024-03-15-preview",
+
+  @doc("Azure API Center 2024-06-01-preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_06_01_preview: "2024-06-01-preview",
 }
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
@@ -105,8 +109,6 @@ enum Versions {
   "payload"
 );
 
-@@clientName(ApiDefinitions.importSpecification::parameters.body, "payload");
-
 @@encodedName(ApiDefinitions.exportSpecification::parameters.body,
   "application/json",
   "payload"
@@ -122,8 +124,8 @@ enum Versions {
 
 @@clientName(Services.exportMetadataSchema::parameters.body, "payload");
 
-@@visibility(Azure.Core.Page.nextLink, "read");
-@@visibility(Azure.Core.Page.value, "read");
+@@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
+@@visibility(Azure.Core.Page.value, Lifecycle.Read);
 /**
  * A resource list operation, at the scope of the resource's parent
  * @template TResource the resource being patched
@@ -204,4 +206,18 @@ model ArmResponseWithEtag<T> {
   ...OkResponse;
   ...Azure.Core.EtagResponseEnvelope;
   ...Body<T>;
+}
+
+model IfMatchParameters<T> {
+  @added(Versions.v2024_06_01_preview)
+  @doc("The request should only proceed if an entity matches this string.")
+  @header("If-Match")
+  ifMatch?: string;
+}
+
+model IfNoneMatchParameters<T> {
+  @added(Versions.v2024_06_01_preview)
+  @header("If-None-Match")
+  @doc("The request should only proceed if no entity matches this string.")
+  ifNoneMatch?: string;
 }

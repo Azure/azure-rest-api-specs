@@ -4,10 +4,10 @@
 
 Configuration for generating EASM SDK.
 
-The current release is `2024-03-01-preview`.
+The current release is `2024-10-01-preview`.
 
 ```yaml
-tag: 2024-03-01-preview
+tag: 2024-10-01-preview
 add-credentials: true
 openapi-type: data-plane
 openapi-subtype: providerHub
@@ -61,6 +61,15 @@ These settings apply only when `--tag=2024-03-01-preview` is specified on the co
 ```yaml $(tag) == '2024-03-01-preview'
 input-file:
   - Microsoft.Easm/preview/2024-03-01-preview/easm.json
+```
+
+### Release 2024-10-01-preview
+
+These settings apply only when `--tag=2024-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == '2024-10-01-preview'
+input-file:
+  - Microsoft.Easm/preview/2024-10-01-preview/easm.json
 ```
 
 ## Python

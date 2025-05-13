@@ -19,11 +19,10 @@ options:
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-devopsinfrastructure"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.devopsinfrastructure"
     flavor: "azure"
     generate-test: true
     generate-sample: true
-    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-devopsinfrastructure"
     flavor: "azure"
@@ -39,3 +38,20 @@ options:
     clear-output-folder: true
     package-dir: "Azure.ResourceManager.DevOpsInfrastructure"
     namespace: "{package-dir}"
+  "@azure-tools/typespec-ts":
+    is-modular-library: true
+    experimental-extensible-enums: true
+    package-dir: "arm-devopsinfrastructure"
+    flavor: "azure"
+    package-details:
+      name: "@azure/arm-devopsinfrastructure"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/devopsinfrastructure"
+    package-dir: "armdevopsinfrastructure"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true

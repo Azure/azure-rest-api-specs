@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2023-04
 ```
 
+### Tag: package-2024-02-preview
+
+These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-preview'
+input-file:
+  - Microsoft.Management/preview/2024-02-01-preview/management.json
+  - Microsoft.Management/preview/2024-02-01-preview/serviceGroups.json
+```
 
 ### Tag: package-2023-04
 
@@ -118,7 +127,17 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 input-file:
   - Microsoft.Management/preview/2017-08-31-preview/management.json
 ```
+---
 
+# Suppression
+
+``` yaml
+suppressions:
+  - code: TenantLevelAPIsNotAllowed
+    reason: These are tenant level APIs and resource types by design.
+    from: serviceGroups.json
+    where: $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}"]
+```
 ---
 
 # Code Generation
@@ -130,7 +149,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -139,20 +157,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ManagementGroups
-  output-folder: $(csharp-sdks-folder)/managementgroups/Microsoft.Azure.Management.ManagementGroups/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python

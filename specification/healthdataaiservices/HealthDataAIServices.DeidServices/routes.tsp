@@ -3,18 +3,15 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
+import "./models_document_flow.tsp";
+import "./models_text_flow.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
-@client({
-  name: "DeidentificationClient",
-})
 namespace HealthDataAIServices.DeidServices;
 
 alias ServiceTraits = NoRepeatableRequests &
@@ -28,9 +25,10 @@ alias DeidentifyOperations = ResourceOperations<
 
 // Text-Deidentification Operations
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @summary("Create a de-identification job.")
 @pollingOperation(getJob)
-op createJob is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentificationJob>;
+op deidentifyDocuments is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentificationJob>;
 
 @summary("Get a de-identification job.")
 op getJob is DeidentifyOperations.ResourceRead<DeidentificationJob>;
@@ -43,9 +41,18 @@ op listJobs is DeidentifyOperations.ResourceList<
 
 @summary("List processed documents within a job.")
 op listJobDocuments is DeidentifyOperations.ResourceList<
-  DocumentDetails,
+  DeidentificationDocumentDetails,
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
+
+@doc("Query parameters for list operation.")
+model PaginationByTokenQueryParameters {
+  ...MaxPageSizeQueryParameter;
+
+  @query
+  @doc("Token to continue a previous query.")
+  continuationToken?: string;
+}
 
 #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" ""
 @summary("Cancel a de-identification job.")
@@ -67,14 +74,17 @@ op cancelJob is DeidentifyOperations.ResourceAction<
 @doc("Removes the record of the job from the service. Does not delete any documents.")
 op deleteJob is DeidentifyOperations.ResourceDelete<DeidentificationJob>;
 
+alias DeidentifyTextRequest = {
+  @doc("Request body for de-identification operation.")
+  @body
+  body: DeidentificationContent;
+};
+
 @summary("De-identify text.")
 @route("/deid")
 @post
-op deidentify is Azure.Core.RpcOperation<
-  {
-    @doc("Request body for de-identification operation.")
-    @body
-    body: DeidentificationContent;
-  },
-  DeidentificationResult
+op deidentifyText is Azure.Core.RpcOperation<
+  DeidentifyTextRequest,
+  DeidentificationResult,
+  ServiceTraits
 >;

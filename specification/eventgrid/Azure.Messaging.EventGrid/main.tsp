@@ -16,9 +16,7 @@ import "@azure-tools/typespec-azure-core";
     }
   ]>
 )
-@service({
-  title: "Azure.Messaging.EventGridClient",
-})
+@service(#{ title: "Azure.Messaging.EventGridClient" })
 
 //
 // Supported operations.
@@ -47,12 +45,6 @@ namespace Microsoft.EventGrid {
   using Azure;
 
   enum ServiceApiVersions {
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2023_06_01_preview: "2023-06-01-preview",
-
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2023_10_01_preview: "2023-10-01-preview",
-
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_11_01: "2023-11-01",
 
@@ -118,6 +110,7 @@ namespace Microsoft.EventGrid {
   @doc("Details of the Receive operation response.")
   model ReceiveResult {
     @doc("Array of receive responses, one per cloud event.")
+    @visibility(Lifecycle.Read)
     value: ReceiveDetails[];
   }
 
@@ -156,36 +149,44 @@ namespace Microsoft.EventGrid {
   @doc("The result of the Acknowledge operation.")
   model AcknowledgeResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    @visibility(Lifecycle.Read)
     failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully acknowledged cloud events.")
+    @visibility(Lifecycle.Read)
     succeededLockTokens: string[];
   }
 
   @doc("The result of the Release operation.")
   model ReleaseResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    @visibility(Lifecycle.Read)
     failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully released cloud events.")
+    @visibility(Lifecycle.Read)
     succeededLockTokens: string[];
   }
 
   @doc("The result of the Reject operation.")
   model RejectResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    @visibility(Lifecycle.Read)
     failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully rejected cloud events.")
+    @visibility(Lifecycle.Read)
     succeededLockTokens: string[];
   }
 
   @doc("The result of the RenewLock operation.")
   model RenewCloudEventLocksResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    @visibility(Lifecycle.Read)
     failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully renewed locks.")
+    @visibility(Lifecycle.Read)
     succeededLockTokens: string[];
   }
 
@@ -214,7 +215,7 @@ namespace Microsoft.EventGrid {
   model Topic {
     @key
     @doc("Topic Name.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     topicName: string;
   }
 
@@ -224,7 +225,7 @@ namespace Microsoft.EventGrid {
   model EventSubscription {
     @key
     @doc("Event Subscription Name.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     eventSubscriptionName: string;
   }
 
@@ -315,8 +316,6 @@ namespace Microsoft.EventGrid {
     {
       ...ReleaseOptions;
 
-      @added(ServiceApiVersions.v2023_10_01_preview)
-      @removed(ServiceApiVersions.v2023_11_01)
       @added(ServiceApiVersions.v2024_06_01)
       @doc("Release cloud events with the specified delay in seconds.")
       @query
@@ -340,8 +339,6 @@ namespace Microsoft.EventGrid {
 
   // RenewLock Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock?api-version={apiVersion}
-  @added(ServiceApiVersions.v2023_10_01_preview)
-  @removed(ServiceApiVersions.v2023_11_01)
   @added(ServiceApiVersions.v2024_06_01)
   @doc("Renew locks for a batch of Cloud Events. The response will include the set of successfully renewed lock tokens, along with other failed lock tokens with their corresponding error information. Successfully renewed locks will ensure that the associated event is only available to the consumer that holds the renewed lock.")
   @action("renewLock")

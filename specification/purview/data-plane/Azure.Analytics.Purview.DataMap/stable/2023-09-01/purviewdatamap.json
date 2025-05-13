@@ -21,7 +21,9 @@
         "name": "endpoint",
         "in": "path",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -6844,20 +6846,6 @@
         }
       }
     },
-    "BusinessMetadataOptions": {
-      "type": "object",
-      "description": "Business metadata to send to the service",
-      "properties": {
-        "file": {
-          "type": "string",
-          "format": "byte",
-          "description": "InputStream of file"
-        }
-      },
-      "required": [
-        "file"
-      ]
-    },
     "CardinalityValue": {
       "type": "string",
       "description": "Cardinality",
@@ -7674,8 +7662,11 @@
           "description": "The description of the asset."
         },
         "endorsement": {
-          "type": "string",
-          "description": "The endorsement of the asset."
+          "type": "array",
+          "description": "The endorsement of the asset.",
+          "items": {
+            "type": "string"
+          }
         },
         "owner": {
           "type": "string",
@@ -7918,8 +7909,11 @@
           "description": "The description of the asset."
         },
         "endorsement": {
-          "type": "string",
-          "description": "The endorsement of the asset."
+          "type": "array",
+          "description": "The endorsement of the asset.",
+          "items": {
+            "type": "string"
+          }
         },
         "owner": {
           "type": "string",

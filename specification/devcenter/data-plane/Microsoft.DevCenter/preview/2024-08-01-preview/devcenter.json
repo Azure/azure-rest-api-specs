@@ -2132,7 +2132,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationGroups": {
       "get": {
         "operationId": "DevBoxes_ListCustomizationGroups",
-        "description": "  Lists customization groups on the Dev Box. Listed customization groups exclude \n  task information unless specified via the include parameter.",
+        "description": "  Lists customization groups on the Dev Box. Listed customization groups exclude\n  task information unless specified via the include parameter.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2810,7 +2810,7 @@
             "description": "Represents an environment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnvironmentUpdate"
+              "$ref": "#/definitions/EnvironmentPatchProperties"
             }
           }
         ],
@@ -3541,7 +3541,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -3981,7 +3981,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -4212,10 +4214,7 @@
         "localAdministrator": {
           "$ref": "#/definitions/LocalAdminStatus",
           "description": "Indicates whether the owner of the Dev Box is a local administrator.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         }
       },
       "required": [
@@ -5080,6 +5079,17 @@
         }
       }
     },
+    "EnvironmentPatchProperties": {
+      "type": "object",
+      "description": "Properties of an environment. These properties can be updated via PATCH after the resource has been created.",
+      "properties": {
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
+        }
+      }
+    },
     "EnvironmentProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the environment.",
@@ -5351,22 +5361,6 @@
         ]
       }
     },
-    "EnvironmentUpdate": {
-      "type": "object",
-      "description": "Properties of an environment.",
-      "properties": {
-        "expirationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Parameters object for the environment.",
-          "additionalProperties": {}
-        }
-      }
-    },
     "HardwareProfile": {
       "type": "object",
       "description": "Hardware specifications for the Dev Box.",
@@ -5519,7 +5513,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",

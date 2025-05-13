@@ -1722,6 +1722,19 @@
     }
   },
   "definitions": {
+    "Kind": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Distinguishes the kind of cluster. Read-only.",
+      "enum": [
+        "v1",
+        "v2"
+      ],
+      "x-ms-enum": {
+        "name": "Kind",
+        "modelAsString": true
+      }
+    },
     "Sku": {
       "description": "SKU parameters supplied to the create Redis Enterprise cluster operation.",
       "type": "object",
@@ -1847,6 +1860,9 @@
       "description": "Describes the Redis Enterprise cluster",
       "type": "object",
       "properties": {
+        "kind": {
+          "$ref": "#/definitions/Kind"
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU to create, which affects price, performance, and features."
@@ -2539,19 +2555,32 @@
       "type": "object",
       "description": "Parameters for reconfiguring active geo-replication, of an existing database that was previously unlinked from a replication group.",
       "required": [
-        "groupNickname",
-        "linkedDatabases"
+        "geoReplication"
       ],
       "properties": {
-        "groupNickname": {
-          "type": "string",
-          "description": "The name of the group of linked database resources. This should match the existing replication group name."
-        },
-        "linkedDatabases": {
-          "type": "array",
-          "description": "The resource IDs of the databases that are expected to be linked and included in the replication group. This parameter is used to validate that the linking is to the expected (unlinked) part of the replication group, if it is splintered.",
-          "items": {
-            "$ref": "#/definitions/LinkedDatabase"
+        "geoReplication": {
+          "type": "object",
+          "description": "Properties to configure geo replication for this database.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "properties": {
+            "groupNickname": {
+              "type": "string",
+              "description": "The name of the group of linked database resources. This should match the existing replication group name.",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "linkedDatabases": {
+              "type": "array",
+              "description": "The resource IDs of the databases that are expected to be linked and included in the replication group. This parameter is used to validate that the linking is to the expected (unlinked) part of the replication group, if it is splintered.",
+              "items": {
+                "$ref": "#/definitions/LinkedDatabase"
+              }
+            }
           }
         }
       }

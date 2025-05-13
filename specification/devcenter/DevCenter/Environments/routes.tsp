@@ -74,7 +74,7 @@ interface Environments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong operation definition"
   @doc("Partially updates an environment.")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
-  @patch
+  @patch(#{ implicitOptionality: true })
   @added(APIVersions.v2024_02_01)
   patchEnvironment is Azure.Core.Foundations.Operation<
     {
@@ -88,7 +88,7 @@ interface Environments {
 
       @doc("Represents an environment.")
       @body
-      body: Environment;
+      body: EnvironmentPatchProperties;
     },
     Environment
   >;

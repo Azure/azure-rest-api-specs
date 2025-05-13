@@ -17,6 +17,7 @@ namespace Microsoft.DeviceRegistry;
 
 @doc("Discovered Asset definition.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
   @doc("Discovered Asset name parameter.")
   @key("discoveredAssetName")
@@ -30,15 +31,16 @@ model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The extended location.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
 @doc("Defines the discovered asset properties.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredAssetProperties {
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   assetEndpointProfileRef: string;
 
   @doc("Identifier used to detect changes in the asset.")
@@ -81,20 +83,21 @@ model DiscoveredAssetProperties {
   defaultTopic?: Topic;
 
   @doc("Array of datasets that are part of the asset. Each dataset spec describes the data points that make up the set.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   datasets?: DiscoveredDataset[];
 
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   events?: DiscoveredEvent[];
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
 @doc("Defines the dataset properties.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredDataset {
   @doc("Name of the dataset.")
   name: string;
@@ -106,12 +109,13 @@ model DiscoveredDataset {
   topic?: Topic;
 
   @doc("Array of data points that are part of the dataset. Each data point can have per-data point configuration.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   dataPoints?: DiscoveredDataPoint[];
 }
 
 @doc("Defines the data point properties.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredDataPoint {
   @doc("The name of the data point.")
   name: string;
@@ -128,6 +132,7 @@ model DiscoveredDataPoint {
 
 @doc("Defines the event properties.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredEvent {
   @doc("The name of the event.")
   name: string;
@@ -145,15 +150,9 @@ model DiscoveredEvent {
   lastUpdatedOn?: utcDateTime;
 }
 
-// The updateable properties of the Discovered Asset.
-// This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-// since otherwise it extends the ARM TrackedResource type.
-alias DiscoveredAssetPropertiesUpdate = {
-  ...OptionalProperties<UpdateableProperties<DiscoveredAssetProperties>>;
-};
-
 @armResourceOperations
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 interface DiscoveredAssets {
   get is ArmResourceRead<DiscoveredAsset>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<DiscoveredAsset>;
@@ -164,7 +163,7 @@ interface DiscoveredAssets {
     DiscoveredAsset,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       DiscoveredAsset,
-      DiscoveredAssetPropertiesUpdate
+      DiscoveredAssetProperties
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoveredAsset>;

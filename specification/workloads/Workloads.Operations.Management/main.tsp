@@ -11,9 +11,7 @@ using TypeSpec.Versioning;
  * Workloads client provides access to various workload operations.
  */
 @armProviderNamespace
-@service({
-  title: "Workloads Client",
-})
+@service(#{ title: "Workloads Client" })
 @versioned(Versions)
 namespace Microsoft.Workloads;
 
@@ -36,6 +34,14 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2023_10_01_preview: "2023-10-01-preview",
+
+  /**
+   * The 2024-02-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_02_01_preview: "2024-02-01-preview",
 
   /**
    * The 2024-09-01 API version.
