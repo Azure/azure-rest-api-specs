@@ -1,0 +1,455 @@
+{
+  "Resources": {
+    "Connection": [
+      {
+        "Name": "Connection",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}",
+          "Method": "GET",
+          "OperationID": "Connections_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets connection resource."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}",
+          "Method": "PUT",
+          "OperationID": "Connections_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates the connection resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}",
+          "Method": "PATCH",
+          "OperationID": "Connections_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates the connection resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}",
+          "Method": "DELETE",
+          "OperationID": "Connections_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the connection resource."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections",
+            "Method": "GET",
+            "OperationID": "Connections_ListByResourceGroup",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByResourceGroup",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets connections in a resource group."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [
+          {
+            "Name": "_",
+            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzureDataTransfer/connections",
+            "Method": "GET",
+            "OperationID": "Connections_ListBySubscription",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListBySubscription",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets connections in a subscription."
+          }
+        ],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "Link",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/link",
+            "Method": "POST",
+            "OperationID": "Connections_Link",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Links the connection to its pending connection."
+          },
+          {
+            "Name": "List",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/listPendingConnections",
+            "Method": "POST",
+            "OperationID": "ListPendingConnections_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists all pending connections for a connection."
+          },
+          {
+            "Name": "List",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/listPendingFlows",
+            "Method": "POST",
+            "OperationID": "ListPendingFlows_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists all pending flows for a connection."
+          }
+        ],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "Connection",
+        "ResourceType": "Microsoft.AzureDataTransfer/connections",
+        "ResourceKey": "connectionName",
+        "ResourceKeySegment": "connections",
+        "IsTrackedResource": true,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ],
+    "Pipeline": [
+      {
+        "Name": "Pipeline",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}",
+          "Method": "GET",
+          "OperationID": "Pipelines_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets pipeline resource."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}",
+          "Method": "PUT",
+          "OperationID": "Pipelines_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates the pipeline resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}",
+          "Method": "PATCH",
+          "OperationID": "Pipelines_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates the pipeline resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}",
+          "Method": "DELETE",
+          "OperationID": "Pipelines_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the pipeline resource."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines",
+            "Method": "GET",
+            "OperationID": "Pipelines_ListByResourceGroup",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByResourceGroup",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets pipelines in a resource group."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [
+          {
+            "Name": "_",
+            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzureDataTransfer/pipelines",
+            "Method": "GET",
+            "OperationID": "Pipelines_ListBySubscription",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListBySubscription",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets pipelines in a subscription."
+          }
+        ],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "ApproveConnection",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/approveConnection",
+            "Method": "POST",
+            "OperationID": "Pipelines_ApproveConnection",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Approves the specified connection in a pipeline."
+          },
+          {
+            "Name": "ExecuteAction",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/executeAction",
+            "Method": "POST",
+            "OperationID": "Pipelines_ExecuteAction",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Executes a privileged action for a pipeline."
+          },
+          {
+            "Name": "RejectConnection",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/rejectConnection",
+            "Method": "POST",
+            "OperationID": "Pipelines_RejectConnection",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Rejects the specified connection in a pipeline."
+          },
+          {
+            "Name": "List",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/listFlows",
+            "Method": "POST",
+            "OperationID": "ListFlowsByPipeline_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists the flows in a pipeline."
+          },
+          {
+            "Name": "List",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/listSchemas",
+            "Method": "POST",
+            "OperationID": "ListSchemas_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists the schemas for the specified connection in a pipeline."
+          }
+        ],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "Pipeline",
+        "ResourceType": "Microsoft.AzureDataTransfer/pipelines",
+        "ResourceKey": "pipelineName",
+        "ResourceKeySegment": "pipelines",
+        "IsTrackedResource": true,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ],
+    "Flow": [
+      {
+        "Name": "Flow",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}",
+          "Method": "GET",
+          "OperationID": "Flows_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets flow resource."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}",
+          "Method": "PUT",
+          "OperationID": "Flows_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates the flow resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}",
+          "Method": "PATCH",
+          "OperationID": "Flows_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates the flow resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}",
+          "Method": "DELETE",
+          "OperationID": "Flows_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the flow resource."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows",
+            "Method": "GET",
+            "OperationID": "Flows_ListByConnection",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByConnection",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets flows in a connection."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "Disable",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/disable",
+            "Method": "POST",
+            "OperationID": "Flows_Disable",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Disables the specified flow"
+          },
+          {
+            "Name": "Enable",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/enable",
+            "Method": "POST",
+            "OperationID": "Flows_Enable",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Enables the specified flow."
+          },
+          {
+            "Name": "GeneratePassphrase",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/generatePassphrase",
+            "Method": "POST",
+            "OperationID": "Flows_GeneratePassphrase",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Generate a compliant passphrase for the specified flow."
+          },
+          {
+            "Name": "GetDestinationEndpointPorts",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getDestinationEndpointPorts",
+            "Method": "POST",
+            "OperationID": "Flows_GetDestinationEndpointPorts",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get the destination endpoint ports for the specified flow and stream ID."
+          },
+          {
+            "Name": "GetDestinationEndpoints",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getDestinationEndpoints",
+            "Method": "POST",
+            "OperationID": "Flows_GetDestinationEndpoints",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get the destination endpoints for the specified flow and stream ID."
+          },
+          {
+            "Name": "GetSourceAddresses",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getSourceAddresses",
+            "Method": "POST",
+            "OperationID": "Flows_GetSourceAddresses",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get the source addresses for the specified flow."
+          },
+          {
+            "Name": "GetStreamConnectionString",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getStreamConnectionString",
+            "Method": "POST",
+            "OperationID": "Flows_GetStreamConnectionString",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get the connection string for the specified flow."
+          },
+          {
+            "Name": "Link",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/link",
+            "Method": "POST",
+            "OperationID": "Flows_Link",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Links the specified flow."
+          },
+          {
+            "Name": "SetDestinationEndpointPorts",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setDestinationEndpointPorts",
+            "Method": "POST",
+            "OperationID": "Flows_SetDestinationEndpointPorts",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Set the destination endpoint ports for the specified flow and stream ID."
+          },
+          {
+            "Name": "SetDestinationEndpoints",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setDestinationEndpoints",
+            "Method": "POST",
+            "OperationID": "Flows_SetDestinationEndpoints",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Set the destination endpoints for the specified flow and stream ID."
+          },
+          {
+            "Name": "SetPassphrase",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setPassphrase",
+            "Method": "POST",
+            "OperationID": "Flows_SetPassphrase",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Sets the passphrase of the specified flow."
+          },
+          {
+            "Name": "SetSourceAddresses",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setSourceAddresses",
+            "Method": "POST",
+            "OperationID": "Flows_SetSourceAddresses",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Set the source addresses for the specified flow."
+          }
+        ],
+        "Parents": [
+          "Connection"
+        ],
+        "SwaggerModelName": "Flow",
+        "ResourceType": "Microsoft.AzureDataTransfer/connections/flows",
+        "ResourceKey": "flowName",
+        "ResourceKeySegment": "flows",
+        "IsTrackedResource": true,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ]
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
+}
