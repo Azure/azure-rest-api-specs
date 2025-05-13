@@ -307,7 +307,6 @@ interface CertificateResponses {
 }
 
 @@doc(CertificateResponse.name, "Name of the certificate to retrieve.");
-@@encodedName(CertificateResponse.eTag, "application/json", "etag");
 @@doc(CertificateResponse.properties, "properties of a certificate");
 @@doc(CertificateResponses.createOrUpdate::parameters.resource,
   "The certificate body."
