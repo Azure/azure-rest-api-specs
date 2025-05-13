@@ -10,8 +10,11 @@ import "./drill.tsp";
 import "./drillResource.tsp";
 import "./drillRun.tsp";
 
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 @versioned(Microsoft.AzureResilienceManagement.Versions)
@@ -27,3 +30,22 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@armResourceOperations
+interface OperationStatus {
+  @doc("Returns the current status of an async operation.")
+  @autoRoute
+  get(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace.")
+    provider: "Microsoft.AzureResilienceManagement",
+
+    ...LocationParameter,
+    ...Azure.ResourceManager.Foundations.OperationIdParameter,
+  ): ArmResponse<OperationStatusResult> | ErrorResponse;
+}
+
+@@segment(OperationStatus.get::parameters.operationId, "operationStatuses");

@@ -42,6 +42,9 @@
       "name": "Operations"
     },
     {
+      "name": "OperationStatus"
+    },
+    {
       "name": "GoalAssignments"
     },
     {
@@ -79,6 +82,45 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.AzureResilienceManagement/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatus_Get",
+        "tags": [
+          "OperationStatus"
+        ],
+        "description": "Returns the current status of an async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationStatus_Get_MaximumSet": {
+            "$ref": "./examples/OperationStatus_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AzureResilienceManagement/operations": {
       "get": {
         "operationId": "Operations_List",
