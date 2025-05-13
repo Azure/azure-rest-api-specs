@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-03-01",
+    "subscriptionId": "c1be1141-a7c9-4aac-9608-3c2e2f1152c3",
+    "resourceGroupName": "rg1",
+    "$skipToken": "opaqueString"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "connection1",
+            "id": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/rg1/providers/Microsoft.Orbital/l2Connections/connection1",
+            "type": "Microsoft.Orbital/l2Connections",
+            "location": "westus",
+            "tags": {
+              "tag1": "value1",
+              "tag2": "value2"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "circuitId": "12345",
+              "edgeSite": {
+                "id": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/rg1/providers/Microsoft.Orbital/edgeSites/oep1"
+              },
+              "edgeSitePartnerRouter": {
+                "name": "customerName-SiteName-01"
+              },
+              "groundStation": {
+                "id": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/rg1/providers/Microsoft.Orbital/groundStations/oep1"
+              },
+              "groundStationPartnerRouter": {
+                "name": "customerName-SiteName-01"
+              },
+              "vlanId": 200
+            }
+          }
+        ],
+        "nextLink": "https://example.com"
+      }
+    }
+  }
+}

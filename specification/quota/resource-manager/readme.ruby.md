@@ -4,7 +4,7 @@ These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
 package-name: azure_mgmt_quota
-package-version: 2021-03-15
+package-version: 2025-03-15-preview
 azure-arm: true
 ```
 
@@ -18,19 +18,39 @@ namespace: Microsoft.Quota
 output-folder: $(ruby-sdks-folder)/quota
 ```
 
-### Tag: package-2021-03-15-preview and ruby
+### Tag: package-2023-06-01-preview and ruby
 
-These settings apply only when `--tag=package-2021-03-15-preview --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2023-06-01-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2021-03-15-preview' && $(ruby)
+```yaml $(tag) == 'package-2023-06-01-preview' && $(ruby)
 namespace: Microsoft.Quota
 output-folder: $(ruby-sdks-folder)/quota-preview
 ```
 
-### Tag: package-2023-06-01-preview and ruby
+### Tag: package-2024-10-15-preview and ruby
 
-These settings apply only when `--tag=package-2023-06-01-preview --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2024-10-15-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+```yaml $(tag) == 'package-2024-10-15-preview' && $(ruby)
+namespace: Microsoft.Quota
+output-folder: $(ruby-sdks-folder)/quota-preview
+```
+
+### Tag: package-2025-03-15-preview and ruby
+
+These settings apply only when `--tag=package-2025-03-15-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+```yaml $(tag) == 'package-2025-03-15-preview' && $(ruby)
+namespace: Microsoft.Quota
+output-folder: $(ruby-sdks-folder)/quota-preview
+```
+
+### Tag: package-2021-03-15-preview and ruby
+
+These settings apply only when `--tag=package-2021-03-15-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ```yaml $(tag) == 'package-2021-03-15-preview' && $(ruby)

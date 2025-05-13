@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlServerEsuLicenseName": "testsqlServerEsuLicense",
+    "api-version": "2024-05-01-preview",
+    "parameters": {
+      "properties": {
+        "billingPlan": "Paid",
+        "physicalCores": 28,
+        "activationState": "Active"
+      },
+      "tags": {
+        "mytag": "myval"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "billingPlan": "Paid",
+          "version": "SQL Server 2012",
+          "physicalCores": 28,
+          "activationState": "Active",
+          "scopeType": "Subscription",
+          "activatedAt": "2020-01-01T17:18:19.1234567Z",
+          "terminatedAt": "2020-01-01T17:18:19.1234567Z",
+          "tenantId": "89fdfcc3-4c62-41c3-93c4-16bae3bcf5ea"
+        },
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlServerEsuLicenses/testsqlServerEsuLicense",
+        "name": "testsqlServerEsuLicense",
+        "type": "Microsoft.AzureArcData/sqlServerEsuLicenses"
+      }
+    }
+  }
+}

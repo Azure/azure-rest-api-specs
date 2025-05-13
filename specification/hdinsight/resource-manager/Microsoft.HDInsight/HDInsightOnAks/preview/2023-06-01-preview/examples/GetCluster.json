@@ -14,24 +14,33 @@
         "type": "Microsoft.HDInsight/clusterPools/clusters",
         "properties": {
           "provisioningState": "Succeeded",
-          "clusterType": "kafka",
+          "clusterType": "Trino",
           "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
           "computeProfile": {
             "nodes": [
               {
-                "type": "worker",
-                "vmSize": "Standard_D3_v2",
-                "count": 4
+                "type": "Head",
+                "vmSize": "Standard_E8as_v5",
+                "count": 2
+              },
+              {
+                "type": "Worker",
+                "vmSize": "Standard_E8as_v5",
+                "count": 3
               }
             ]
           },
           "clusterProfile": {
-            "clusterVersion": "1.0.1",
-            "ossVersion": "2.4.1",
+            "clusterVersion": "1.0.6",
+            "ossVersion": "0.410.0",
             "components": [
               {
-                "name": "Hive",
-                "version": "2.4.1"
+                "name": "Trino",
+                "version": "410"
+              },
+              {
+                "name": "Hive metastore",
+                "version": "3.1.2"
               }
             ],
             "identityProfile": {
@@ -58,7 +67,7 @@
                 }
               ]
             },
-            "kafkaProfile": {},
+            "trinoProfile": {},
             "sshProfile": {
               "count": 2,
               "podPrefix": "sshnode"

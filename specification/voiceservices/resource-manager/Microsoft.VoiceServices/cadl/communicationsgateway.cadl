@@ -197,7 +197,7 @@ model CommunicationsGatewayProperties is ResourceProperties {
   status?: Status;
 
   @doc("The regions in which to deploy the resources needed for Teams Calling")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", ["name"])
   @visibility("read", "update", "create")
   serviceLocations: ServiceRegionProperties[];
 

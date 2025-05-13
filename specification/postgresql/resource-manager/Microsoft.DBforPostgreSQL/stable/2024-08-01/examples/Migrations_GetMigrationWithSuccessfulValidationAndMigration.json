@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testrg",
+    "targetDbServerName": "testtarget",
+    "migrationMode": "Offline",
+    "migrationName": "testmigrationwithsuccessfulvalidationandmigration"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "f2354e72-2828-4a19-ad20-b4cd9e2673c1",
+          "currentStatus": {
+            "state": "Succeeded",
+            "currentSubStateDetails": {
+              "currentSubState": "Completed",
+              "dbDetails": {
+                "testdb3": {
+                  "databaseName": "testdb3",
+                  "migrationState": "Succeeded",
+                  "startedOn": "2023-10-12T05:55:28.9955656Z",
+                  "endedOn": "2023-10-12T05:55:49.6813037Z",
+                  "fullLoadErroredTables": 0,
+                  "fullLoadQueuedTables": 0,
+                  "fullLoadLoadingTables": 0,
+                  "fullLoadCompletedTables": 10,
+                  "cdcUpdateCounter": 0,
+                  "cdcDeleteCounter": 0,
+                  "cdcInsertCounter": 0,
+                  "appliedChanges": 0,
+                  "incomingChanges": 0,
+                  "latency": 0
+                }
+              },
+              "validationDetails": {
+                "status": "Succeeded",
+                "validationStartTimeInUtc": "2023-10-12T05:54:28.0774816Z",
+                "validationEndTimeInUtc": "2023-10-12T05:55:00.4998326Z",
+                "serverLevelValidationDetails": [
+                  {
+                    "type": "AuthenticationAndConnectivityValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "SourceVersionValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "ServerParametersValidation",
+                    "state": "Succeeded"
+                  }
+                ],
+                "dbLevelValidationDetails": [
+                  {
+                    "databaseName": "testdb3",
+                    "startedOn": "2023-10-12T05:54:29.5531609Z",
+                    "endedOn": "2023-10-12T05:54:29.8948914Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "migrationMode": "Offline",
+          "migrationWindowEndTimeInUtc": "2023-10-12T05:57:30.7364856Z",
+          "sourceDbServerResourceId": "20.228.214.65:5432@postgres",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "dbsToMigrate": [
+            "testdb3"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2023-10-12T05:54:15.9991596Z",
+          "triggerCutover": "True",
+          "migrateRoles": "False",
+          "migrationOption": "ValidateAndMigrate"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigrationwithsuccessfulvalidationandmigration",
+        "name": "testmigrationwithsuccessfulvalidationandmigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}

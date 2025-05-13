@@ -1,0 +1,960 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RoutingConfiguration",
+    "version": "2024-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkManagerRoutingConfigurations"
+        ],
+        "operationId": "NetworkManagerRoutingConfigurations_List",
+        "description": "Lists all the network manager routing configurations in a network manager, in a paginated format.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns all routing configuration resources in the specified network manager, in a paginated format",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerRoutingConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List routing configurations in a network manager": {
+            "$ref": "./examples/NetworkManagerRoutingConfigurationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkManagerRoutingConfigurations"
+        ],
+        "description": "Retrieves a network manager routing configuration.",
+        "operationId": "NetworkManagerRoutingConfigurations_Get",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get routing configurations": {
+            "$ref": "./examples/NetworkManagerRoutingConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkManagerRoutingConfigurations"
+        ],
+        "description": "Creates or updates a network manager routing configuration.",
+        "operationId": "NetworkManagerRoutingConfigurations_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "routingConfiguration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+            },
+            "description": "The routing configuration to create or update"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Routing Configuration",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created Routing Configuration",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create network manager routing configuration": {
+            "$ref": "./examples/NetworkManagerRoutingConfigurationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkManagerRoutingConfigurations"
+        ],
+        "description": "Deletes a network manager routing configuration.",
+        "operationId": "NetworkManagerRoutingConfigurations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ForceDeleteParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete network manager routing configuration": {
+            "$ref": "./examples/NetworkManagerRoutingConfigurationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections": {
+      "get": {
+        "tags": [
+          "RoutingRuleCollections"
+        ],
+        "operationId": "RoutingRuleCollections_List",
+        "description": "Lists all the rule collections in a routing configuration, in a paginated format.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns all ruleCollections in the specified routing configuration, in a paginated format",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List routing rule collections": {
+            "$ref": "./examples/NetworkManagerRoutingRuleCollectionList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "RoutingRuleCollections"
+        ],
+        "description": "Gets a network manager routing configuration rule collection.",
+        "operationId": "RoutingRuleCollections_Get",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets routing rule collection": {
+            "$ref": "./examples/NetworkManagerRoutingRuleCollectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RoutingRuleCollections"
+        ],
+        "description": "Creates or updates a routing rule collection.",
+        "operationId": "RoutingRuleCollections_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "ruleCollection",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleCollection"
+            },
+            "description": "The Rule Collection to create or update"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Rule Collection",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleCollection"
+            }
+          },
+          "201": {
+            "description": "Created Rule Collection",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a routing rule collection": {
+            "$ref": "./examples/NetworkManagerRoutingRuleCollectionPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RoutingRuleCollections"
+        ],
+        "description": "Deletes an routing rule collection.",
+        "operationId": "RoutingRuleCollections_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ForceDeleteParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Deletes an routing rule collection": {
+            "$ref": "./examples/NetworkManagerRoutingRuleCollectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
+        },
+        {
+          "$ref": "#/parameters/ListSkipTokenParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "RoutingRules"
+        ],
+        "description": "List all network manager routing configuration routing rules.",
+        "operationId": "RoutingRules_List",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List routing rules": {
+            "$ref": "./examples/NetworkManagerRoutingRuleList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerRoutingConfigurationsRuleParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "RoutingRules"
+        ],
+        "description": "Gets a network manager routing configuration routing rule.",
+        "operationId": "RoutingRules_Get",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets routing rule": {
+            "$ref": "./examples/NetworkManagerRoutingRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RoutingRules"
+        ],
+        "description": "Creates or updates an routing rule.",
+        "operationId": "RoutingRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "routingRule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            },
+            "description": "The routing rule to create or update"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated rule",
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          "201": {
+            "description": "Created rule",
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an routing rule": {
+            "$ref": "./examples/NetworkManagerRoutingRulePut.json"
+          },
+          "Create a default routing rule": {
+            "$ref": "./examples/NetworkManagerRoutingRulePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RoutingRules"
+        ],
+        "description": "Deletes a routing rule.",
+        "operationId": "RoutingRules_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ForceDeleteParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Deletes a routing rule": {
+            "$ref": "./examples/NetworkManagerRoutingRuleDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkManagerRoutingConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkManagerRoutingConfigurationPropertiesFormat",
+          "description": "Indicates the properties for the network manager routing configuration."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ],
+      "description": "Defines the routing configuration"
+    },
+    "NetworkManagerRoutingConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the routing configuration."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique identifier for this resource."
+        }
+      },
+      "description": "Defines the routing configuration properties."
+    },
+    "NetworkManagerRoutingConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+          },
+          "description": "Gets a page of routing configurations"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "A list of network manager routing configurations"
+    },
+    "RoutingRuleCollection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoutingRuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager routing rule collection."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ],
+      "description": "Defines the routing rule collection."
+    },
+    "RoutingRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the routing rule collection."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique identifier for this resource."
+        },
+        "appliesTo": {
+          "type": "array",
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ],
+          "items": {
+            "$ref": "#/definitions/NetworkManagerRoutingGroupItem"
+          },
+          "description": "Groups for configuration"
+        },
+        "disableBgpRoutePropagation": {
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "DisableBgpRoutePropagation",
+            "modelAsString": true
+          },
+          "description": "Determines whether BGP route propagation is enabled. Defaults to true."
+        }
+      },
+      "required": [
+        "appliesTo"
+      ],
+      "description": "Defines the routing rule collection properties."
+    },
+    "NetworkManagerRoutingGroupItem": {
+      "type": "object",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network manager group Id."
+        }
+      },
+      "required": [
+        "networkGroupId"
+      ],
+      "description": "Network manager routing group item."
+    },
+    "RoutingRuleCollectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoutingRuleCollection"
+          },
+          "description": "A list of network manager routing configuration rule collections"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Routing configuration rule collection list result."
+    },
+    "RoutingRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingRulePropertiesFormat",
+          "x-ms-client-flatten": true,
+          "description": "Indicates the properties of the routing rule"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ],
+      "description": "Network routing rule."
+    },
+    "RoutingRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for this rule."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique identifier for this resource."
+        },
+        "destination": {
+          "$ref": "#/definitions/RoutingRuleRouteDestination",
+          "description": "Indicates the destination for this particular rule."
+        },
+        "nextHop": {
+          "$ref": "#/definitions/RoutingRuleNextHop",
+          "description": "Indicates the next hop for this particular rule."
+        }
+      },
+      "required": [
+        "destination",
+        "nextHop"
+      ],
+      "description": "Routing rule resource."
+    },
+    "RoutingRuleRouteDestination": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RoutingRuleDestinationType",
+          "description": "Destination type."
+        },
+        "destinationAddress": {
+          "type": "string",
+          "description": "Destination address."
+        }
+      },
+      "required": [
+        "type",
+        "destinationAddress"
+      ],
+      "description": "Route destination."
+    },
+    "RoutingRuleNextHop": {
+      "type": "object",
+      "properties": {
+        "nextHopType": {
+          "$ref": "#/definitions/RoutingRuleNextHopType",
+          "description": "Next hop type."
+        },
+        "nextHopAddress": {
+          "type": "string",
+          "description": "Next hop address. Only required if the next hop type is VirtualAppliance."
+        }
+      },
+      "required": [
+        "nextHopType"
+      ],
+      "description": "Next hop."
+    },
+    "RoutingRuleNextHopType": {
+      "type": "string",
+      "description": "Routing rule next hop type.",
+      "enum": [
+        "Internet",
+        "NoNextHop",
+        "VirtualAppliance",
+        "VirtualNetworkGateway",
+        "VnetLocal"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingRuleNextHopType",
+        "modelAsString": true
+      }
+    },
+    "RoutingRuleDestinationType": {
+      "type": "string",
+      "description": "Routing rule destination type.",
+      "enum": [
+        "AddressPrefix",
+        "ServiceTag"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingRuleDestinationType",
+        "modelAsString": true
+      }
+    },
+    "RoutingRuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoutingRule"
+          },
+          "description": "A list of routing rules."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Routing configuration rule list result."
+    }
+  },
+  "parameters": {
+    "NetworkManagerRoutingConfigurationParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "description": "The name of the network manager Routing Configuration.",
+      "pattern": "^[a-zA-Z0-9_.-]*$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RuleCollectionParameter": {
+      "name": "ruleCollectionName",
+      "in": "path",
+      "description": "The name of the network manager routing Configuration rule collection.",
+      "pattern": "^[a-zA-Z0-9_.-]*$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkManagerRoutingConfigurationsRuleParameter": {
+      "name": "ruleName",
+      "in": "path",
+      "description": "The name of the rule.",
+      "pattern": "^[a-zA-Z0-9_.-]*$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkManagerNameParameter": {
+      "name": "networkManagerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network manager.",
+      "pattern": "^[a-zA-Z0-9_.-]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTopParameter": {
+      "name": "$top",
+      "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 20,
+      "x-ms-parameter-location": "method"
+    },
+    "ListSkipTokenParameter": {
+      "name": "$skipToken",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ForceDeleteParameter": {
+      "name": "force",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

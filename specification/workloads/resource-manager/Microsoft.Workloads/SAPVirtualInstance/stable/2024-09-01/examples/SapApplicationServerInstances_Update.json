@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01",
+    "applicationInstanceName": "app01",
+    "properties": {
+      "tags": {
+        "tag1": "value1"
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "sapVirtualInstanceName": "X00",
+    "subscriptionId": "6d875e77-e412-4d7d-9af4-8895278b4443"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "app01",
+        "type": "Microsoft.Workloads/sapVirtualInstances/applicationInstances",
+        "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Workloads/sapVirtualInstances/X00/applicationInstances/app01",
+        "location": "westcentralus",
+        "properties": {
+          "dispatcherStatus": "Running",
+          "errors": null,
+          "gatewayPort": 3300,
+          "health": "Healthy",
+          "hostname": "vh-nw1",
+          "icmHttpPort": 3312,
+          "icmHttpsPort": 3313,
+          "instanceNo": "01",
+          "ipAddress": "10.0.0.5",
+          "kernelPatch": "patch 300",
+          "kernelVersion": "777",
+          "provisioningState": "Succeeded",
+          "status": "Running",
+          "subnet": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/SAP-E2ETest-rg/providers/Microsoft.Network/virtualNetworks/loop-test-vnet/subnets/loopsubnet",
+          "vmDetails": [
+            {
+              "type": "Active",
+              "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/app01-vm"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "SapApplicationServerInstances_Update",
+  "title": "SAPApplicationServerInstances_Update"
+}

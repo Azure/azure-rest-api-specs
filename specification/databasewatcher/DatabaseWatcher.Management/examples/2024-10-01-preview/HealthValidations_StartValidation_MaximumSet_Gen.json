@@ -1,0 +1,40 @@
+{
+  "title": "HealthValidations_StartValidation",
+  "operationId": "HealthValidations_StartValidation",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "49e0fbd3-75e8-44e7-96fd-5b64d9ad818d",
+    "resourceGroupName": "rgWatcher",
+    "watcherName": "testWatcher",
+    "healthValidationName": "testHealthValidation"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "startTime": "2024-10-07T19:42:55.594Z",
+          "endTime": "2024-10-07T19:42:55.594Z",
+          "status": "Running",
+          "issues": [],
+          "provisioningState": "Accepted"
+        },
+        "id": "/subscriptions/469DD77C-C8DB-47B7-B9E1-72D29F8C878Be/resourceGroups/rgWatcher/providers/microsoft.databasewatcher/watchers/testWatcher/healthValidations/testHealthValidation",
+        "name": "testHealthValidation",
+        "type": "microsoft.databasewatcher/watchers/healthValidations",
+        "systemData": {
+          "createdBy": "enbpvlpqbwd",
+          "createdByType": "User",
+          "createdAt": "2024-07-25T15:38:47.092Z",
+          "lastModifiedBy": "mxp",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-07-25T15:38:47.092Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

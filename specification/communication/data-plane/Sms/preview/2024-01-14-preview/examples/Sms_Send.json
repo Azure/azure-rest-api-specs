@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2024-01-14-preview",
+    "endpoint": "https://resourcename.communication.azure.com/",
+    "SendMessageRequest": {
+      "from": "+18003145821",
+      "smsRecipients": [
+        {
+          "to": "+11234567890"
+        },
+        {
+          "to": "+11234567891"
+        },
+        {
+          "to": "+112345678910"
+        }
+      ],
+      "message": "Hey, Let's go for Dinner",
+      "smsSendOptions": {
+        "enableDeliveryReport": true
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "to": "+11234567890",
+            "messageId": "Outgoing_20200610203725bfd4ba70-70bf-4f77-925d-c0bdb5161bb3_noam",
+            "httpStatusCode": 202,
+            "successful": true
+          },
+          {
+            "to": "+11234567891",
+            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822_noam",
+            "httpStatusCode": 202,
+            "successful": true
+          },
+          {
+            "to": "+112345678910",
+            "httpStatusCode": 400,
+            "errorMessage": "Invalid To phone number format.",
+            "successful": false
+          }
+        ]
+      }
+    }
+  }
+}

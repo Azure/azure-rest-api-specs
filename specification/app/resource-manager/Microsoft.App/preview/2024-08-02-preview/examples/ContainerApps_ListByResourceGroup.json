@@ -1,0 +1,200 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
+            "name": "testcontainerApp0",
+            "type": "Microsoft.App/containerApps",
+            "location": "East US",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+              "workloadProfileName": "My-GP-01",
+              "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
+              "configuration": {
+                "ingress": {
+                  "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+                  "external": true,
+                  "targetPort": 3000,
+                  "transport": "auto",
+                  "customDomains": [
+                    {
+                      "name": "www.my-name.com",
+                      "bindingType": "SniEnabled",
+                      "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+                    },
+                    {
+                      "name": "www.my--other-name.com",
+                      "bindingType": "SniEnabled",
+                      "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+                    }
+                  ],
+                  "traffic": [
+                    {
+                      "weight": 80,
+                      "revisionName": "testcontainerApp0-ab1234"
+                    },
+                    {
+                      "weight": 20,
+                      "revisionName": "testcontainerApp0-ab4321",
+                      "label": "staging"
+                    }
+                  ],
+                  "ipSecurityRestrictions": [
+                    {
+                      "name": "Allow work IP A subnet",
+                      "description": "Allowing all IP's within the subnet below to access containerapp",
+                      "ipAddressRange": "192.168.1.1/32",
+                      "action": "Allow"
+                    },
+                    {
+                      "name": "Allow work IP B subnet",
+                      "description": "Allowing all IP's within the subnet below to access containerapp",
+                      "ipAddressRange": "192.168.1.1/8",
+                      "action": "Allow"
+                    }
+                  ],
+                  "stickySessions": {
+                    "affinity": "sticky"
+                  },
+                  "targetPortHttpScheme": "http"
+                },
+                "dapr": {
+                  "enabled": true,
+                  "appPort": 3000,
+                  "appProtocol": "http",
+                  "httpReadBufferSize": 30,
+                  "httpMaxRequestSize": 10,
+                  "logLevel": "debug",
+                  "enableApiLogging": true
+                },
+                "runtime": {
+                  "java": {
+                    "enableMetrics": true,
+                    "javaAgent": {
+                      "enabled": true,
+                      "logging": {
+                        "loggerSettings": [
+                          {
+                            "logger": "org.springframework.boot",
+                            "level": "debug"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "dotnet": {
+                    "autoConfigureDataProtection": true
+                  }
+                },
+                "maxInactiveRevisions": 10
+              },
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerApp0:v4",
+                    "name": "testcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "initContainers": [
+                  {
+                    "image": "repo/testcontainerApp0:v4",
+                    "name": "testinitcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "scale": {
+                  "minReplicas": 1,
+                  "maxReplicas": 5,
+                  "cooldownPeriod": 350,
+                  "pollingInterval": 35,
+                  "rules": [
+                    {
+                      "name": "httpscalingrule",
+                      "http": {
+                        "metadata": {
+                          "concurrentRequests": "50"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "eventStreamEndpoint": "testEndpoint"
+            }
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp1",
+            "name": "testcontainerApp1",
+            "type": "Microsoft.App/containerApps",
+            "location": "East US",
+            "properties": {
+              "provisioningState": "Failed",
+              "deploymentErrors": "Code: ContainerAppImagePullProvisionError, Message: Error pulling the container image. Please check the image name or any registry credentials to access if required.",
+              "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+              "workloadProfileName": "Consumption",
+              "latestRevisionFqdn": "testcontainerApp1-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
+              "configuration": {
+                "ingress": {
+                  "fqdn": "testcontainerApp1.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+                  "external": true,
+                  "targetPort": 3000,
+                  "transport": "auto",
+                  "targetPortHttpScheme": "http"
+                },
+                "maxInactiveRevisions": 10
+              },
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerApp1:v4",
+                    "name": "testcontainerApp1",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "initContainers": [
+                  {
+                    "image": "repo/testcontainerApp1:v4",
+                    "name": "testcontainerApp1",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "scale": {
+                  "minReplicas": 1,
+                  "maxReplicas": 5,
+                  "cooldownPeriod": 350,
+                  "pollingInterval": 35
+                }
+              },
+              "eventStreamEndpoint": "testEndpoint"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

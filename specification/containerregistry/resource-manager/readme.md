@@ -26,7 +26,103 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-07
+tag: package-2025-04
+```
+
+### Tag: package-2025-04-only
+
+These settings apply only when `--tag=package-2025-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04-only'
+input-file:
+  - Microsoft.ContainerRegistry/stable/2025-04-01/containerregistry.json
+```
+
+### Tag: package-2025-04
+
+These settings apply only when `--tag=package-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04'
+input-file:
+  - Microsoft.ContainerRegistry/stable/2025-04-01/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2025-03-preview-only
+
+These settings apply only when `--tag=package-2025-03-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2025-03-preview
+
+These settings apply only when `--tag=package-2025-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2024-11-preview-only
+
+These settings apply only when `--tag=package-2024-11-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2024-11-01-preview/containerregistry.json
+```
+
+### Tag: package-2024-11-preview
+
+These settings apply only when `--tag=package-2024-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2024-11-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2023-11-preview-only
+
+These settings apply only when `--tag=package-2023-11-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2023-11-01-preview/containerregistry.json
+```
+
+### Tag: package-2023-11-preview
+
+These settings apply only when `--tag=package-2023-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2023-11-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2023-08-preview-only
+
+These settings apply only when `--tag=package-2023-08-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-08-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2023-08-01-preview/containerregistry.json
+```
+
+### Tag: package-2023-08-preview
+
+These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-08-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2023-08-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2023-07-only
@@ -335,25 +431,6 @@ input-file:
 - Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
 ```
 
-### Tag: package-2018-02-preview-only
-
-These settings apply only when `--tag=package-2018-02-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-02-preview-only'
-input-file:
-- Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
-```
-
-### Tag: package-2018-02-preview
-
-These settings apply only when `--tag=package-2018-02-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-02-preview'
-input-file:
-- Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
-- Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
-```
-
 ### Tag: package-2017-10
 
 These settings apply only when `--tag=package-2017-10` is specified on the command line.
@@ -363,15 +440,6 @@ input-file:
 - Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
 ```
 
-### Tag: package-2017-06-preview
-
-These settings apply only when `--tag=package-2017-06-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-06-preview'
-input-file:
-- Microsoft.ContainerRegistry/preview/2017-06-01-preview/containerregistry.json
-```
-
 ### Tag: package-2017-03
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
@@ -379,15 +447,6 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
 - Microsoft.ContainerRegistry/stable/2017-03-01/containerregistry.json
-```
-
-### Tag: package-2016-06-preview
-
-These settings apply only when `--tag=package-2016-06-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-06-preview'
-input-file:
-- Microsoft.ContainerRegistry/preview/2016-06-27-preview/containerregistry.json
 ```
 
 ---
@@ -401,8 +460,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -412,25 +471,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_registry']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # stop the simplifier from making Task conflict:
-  skip-simplifier-on-namespace:
-    - System.Threading.Tasks
-  # last generated using AutoRest.1.0.0-Nightly20170212 with commit 3b0b26b4b6e3bc5e7cf3610b0866d310abb5b814
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ContainerRegistry
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/containerregistry/Microsoft.Azure.Management.ContainerRegistry/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python
@@ -444,3 +484,18 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+### Suppress rules to be fixed
+
+``` yaml
+suppressions:
+  - code: TrackedResourcePatchOperation
+    from: containerregistry.json
+    reason: The following workitems will be implemented to improve the swagger for the next API verison. Workitems 24979281, 24778096, 24802955, 24802955. This is planned for 2023-11-01-preview
+
+  - code: PatchBodyParametersSchema
+    reasons: Common property used for create and update. existing definitions and sdk already released. breaking change to fix.
+    from: containerregistry.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}"].patch.parameters[5].schema.properties.properties
+```

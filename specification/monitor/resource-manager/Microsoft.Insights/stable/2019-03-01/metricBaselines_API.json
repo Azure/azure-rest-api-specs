@@ -110,17 +110,88 @@
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Unlocalized string which can be used to programmatically identify the error.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language.",
+              "type": "string"
+            },
+            "target": {
+              "description": "The target of the particular error (for example, the name of the property in error).",
+              "type": "string"
+            },
+            "details": {
+              "description": "An array of additional nested error response info objects, as described by this contract.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorDetail"
+              }
+            },
+            "additionalInfo": {
+              "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "description": "The type of additional information.",
+                    "type": "string"
+                  },
+                  "info": {
+                    "description": "The additional information specific to the type.",
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "description": "Describes details of an error response.",
+      "type": "object",
+      "properties": {
         "code": {
-          "description": "Error code",
+          "description": "Unlocalized string which can be used to programmatically identify the error.",
           "type": "string"
         },
         "message": {
-          "description": "Error message indicating why the operation failed.",
+          "description": "Describes the error in detail and provides debugging information.",
           "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error (for example, the name of the property in error).",
+          "type": "string"
+        },
+        "additionalInfo": {
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of additional information.",
+                "type": "string"
+              },
+              "info": {
+                "description": "The additional information specific to the type.",
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
         }
       }
     },
     "MetricBaselinesResponse": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -133,6 +204,7 @@
       "description": "A list of metric baselines."
     },
     "SingleMetricBaseline": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -193,6 +265,7 @@
       "description": "The response to a metric baselines query."
     },
     "TimeSeriesBaseline": {
+      "type": "object",
       "properties": {
         "aggregation": {
           "type": "string",
@@ -304,6 +377,7 @@
       "description": "The baseline values for a single sensitivity value."
     },
     "BaselineMetadata": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -361,7 +435,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "Metric namespace to query metric definitions for.",
+      "description": "Metric namespace that contains the requested metric names.",
       "x-ms-parameter-location": "method"
     },
     "AggregationsParameter": {

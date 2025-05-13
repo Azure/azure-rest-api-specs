@@ -67,7 +67,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -106,7 +106,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FleetListResult"
             }
@@ -148,7 +148,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FleetListResult"
             }
@@ -200,7 +200,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Fleet"
             }
@@ -353,7 +353,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Fleet"
             }
@@ -413,19 +413,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -475,7 +475,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FleetCredentialResults"
             }
@@ -524,7 +524,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FleetMemberListResult"
             }
@@ -586,7 +586,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FleetMember"
             }
@@ -759,7 +759,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FleetMember"
             }
@@ -829,19 +829,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -891,7 +891,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/UpdateRunListResult"
             }
@@ -953,7 +953,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/UpdateRun"
             }
@@ -1120,21 +1120,21 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1202,22 +1202,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/UpdateRun"
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1287,22 +1287,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/UpdateRun"
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1329,7 +1329,7 @@
     "ClusterResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -1345,11 +1345,7 @@
         "properties": {
           "$ref": "#/definitions/FleetProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -1452,11 +1448,7 @@
         "properties": {
           "$ref": "#/definitions/FleetMemberProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -1552,18 +1544,22 @@
           },
           {
             "name": "Joining",
-            "value": "Joining"
+            "value": "Joining",
+            "description": "The provisioning state of a member joining a fleet."
           },
           {
             "name": "Leaving",
-            "value": "Leaving"
+            "value": "Leaving",
+            "description": "The provisioning state of a member leaving a fleet."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The provisioning state of a member being updated."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "FleetMemberUpdate": {
       "type": "object",
@@ -1571,6 +1567,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FleetMemberUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -1648,18 +1645,22 @@
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "The provisioning state of a fleet being created."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The provisioning state of a fleet being updated."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "The provisioning state of a fleet being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "KubernetesVersion": {
       "type": "string"
@@ -1683,7 +1684,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/ManagedClusterUpgradeType",
-          "description": "The upgrade type.\nFull requires the KubernetesVersion property to be set.\nNodeImageOnly requires the KubernetesVersion property not to be set."
+          "description": "ManagedClusterUpgradeType is the type of upgrade to be applied."
         },
         "kubernetesVersion": {
           "$ref": "#/definitions/KubernetesVersion",
@@ -1708,12 +1709,12 @@
           {
             "name": "Full",
             "value": "Full",
-            "description": "Full upgrades the control plane and all agent pools of the target ManagedClusters."
+            "description": "Full upgrades the control plane and all agent pools of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set."
           },
           {
             "name": "NodeImageOnly",
             "value": "NodeImageOnly",
-            "description": "NodeImageOnly upgrades only the node images of the target ManagedClusters."
+            "description": "NodeImageOnly upgrades only the node images of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to NOT be set."
           }
         ]
       }
@@ -1750,7 +1751,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the Fleet member group to update. \nIt should match the name of an existing FleetMember group.\nA group can only appear once across all UpdateStages in the UpdateRun.",
+          "description": "Name of the group.\nIt must match a group name of an existing fleet member. ",
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
@@ -1789,16 +1790,12 @@
     },
     "UpdateRun": {
       "type": "object",
-      "description": "An UpdateRun is a multi-stage process to perform update operations across members of a Fleet.",
+      "description": "A multi-stage process to perform update operations across members of a Fleet.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateRunProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -1844,7 +1841,7 @@
         },
         "strategy": {
           "$ref": "#/definitions/UpdateRunStrategy",
-          "description": "The strategy defines the order in which the clusters will be updated. \nIf not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.\nThe strategy of the UpdateRun can be modified until the run is started."
+          "description": "The strategy defines the order in which the clusters will be updated.\nIf not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.\nThe strategy of the UpdateRun can be modified until the run is started."
         },
         "managedClusterUpdate": {
           "$ref": "#/definitions/ManagedClusterUpdate",
@@ -1888,7 +1885,8 @@
             "description": "Resource creation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "UpdateRunStatus": {
       "type": "object",
@@ -1914,11 +1912,11 @@
     },
     "UpdateRunStrategy": {
       "type": "object",
-      "description": "The UpdateRunStrategy configures the sequence of Stages and Groups in which the clusters will be updated.",
+      "description": "Defines the update sequence of the clusters via stages and groups.\n\nStages within a run are executed sequentially one after another.\nGroups within a stage are executed in parallel.\nMember clusters within a group are updated sequentially one after another.\n\nA valid strategy contains no duplicate groups within or across stages.",
       "properties": {
         "stages": {
           "type": "array",
-          "description": "The list of stages that compose this update run.",
+          "description": "The list of stages that compose this update run. Min size: 1.",
           "items": {
             "$ref": "#/definitions/UpdateStage"
           },
@@ -1933,7 +1931,7 @@
     },
     "UpdateStage": {
       "type": "object",
-      "description": "Contains the groups to be updated by an UpdateRun.\nUpdate order:\n- Sequential between stages: Stages run sequentially. The previous stage must complete before the next one starts.\n- Parallel within a stage: Groups within a stage run in parallel.\n- Sequential within a group: Clusters within a group are updated sequentially.",
+      "description": "Defines a stage which contains the groups to update and the steps to take (e.g., wait for a time period) before starting the next stage.",
       "properties": {
         "name": {
           "type": "string",
@@ -1944,7 +1942,7 @@
         },
         "groups": {
           "type": "array",
-          "description": "A list of group names that compose the stage.\nThe groups will be updated in parallel. Each group name can only appear once in the UpdateRun.",
+          "description": "Defines the groups to be executed in parallel in this stage. Duplicate groups are not allowed. Min size: 1.",
           "items": {
             "$ref": "#/definitions/UpdateGroup"
           },
@@ -2007,7 +2005,39 @@
       ],
       "x-ms-enum": {
         "name": "UpdateState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has not been started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is running."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is being stopped."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has stopped."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has failed."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed."
+          }
+        ]
       }
     },
     "UpdateStatus": {

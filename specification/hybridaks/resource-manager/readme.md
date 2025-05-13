@@ -27,20 +27,56 @@ These are the global settings for the hybridaks.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2022-09
+tag: package-2024-01
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - Microsoft.HybridContainerService/stable/2024-01-01/provisionedClusterInstances.json
+  - Microsoft.HybridContainerService/stable/2024-01-01/virtualNetworks.json
+```
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.HybridContainerService/preview/2023-11-15-preview/provisionedClusterInstances.json
+  - Microsoft.HybridContainerService/preview/2023-11-15-preview/virtualNetworks.json
+suppressions:
+  - code: TopLevelResourcesListBySubscription
+    where: $.definitions.KubernetesVersionProfile
+    reason: Since kubernetesVersions/default resource is defined as an extension resource to the custom location, this rule does not apply. The kubernetesVersions can vary from one custom location to another and we can't really have a ListBySubscription operation for kubernetesVersions.
+  - code: TopLevelResourcesListBySubscription
+    where: $.definitions.VmSkuProfile
+    reason: Since skus/default resource is defined as an extension resource to the custom location, this rule does not apply. The skus can vary from one custom location to another and we can't really have a ListBySubscription operation for skus.
+  - code: TopLevelResourcesListBySubscription
+    where: $.definitions.provisionedClusters
+    reason: Since provisionedClusters/default resource is defined as an extension resource to the connected cluster resource, we can't really list by subscription and this rule does not apply.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: This is a false alarm for the /default APIs, as they return a singleton resource and not a collection of resources
+```
 
 ### Tag: package-preview-2022-09
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.HybridContainerService/preview/2022-09-01-preview/provisionedClusters.json
   - Microsoft.HybridContainerService/preview/2022-09-01-preview/storageSpaces.json
   - Microsoft.HybridContainerService/preview/2022-09-01-preview/virtualNetworks.json
 ```
+
 ### Tag: package-2022-05-01-preview
 
 These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.
@@ -63,7 +99,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

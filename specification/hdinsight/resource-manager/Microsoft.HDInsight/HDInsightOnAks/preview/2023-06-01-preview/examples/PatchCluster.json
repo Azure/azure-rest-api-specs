@@ -124,20 +124,25 @@
         "type": "Microsoft.HDInsight/clusterPools/clusters",
         "properties": {
           "provisioningState": "Succeeded",
-          "clusterType": "kafka",
+          "clusterType": "Trino",
           "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
           "computeProfile": {
             "nodes": [
               {
-                "type": "worker",
-                "vmSize": "Standard_D3_v2",
-                "count": 4
+                "type": "Head",
+                "vmSize": "Standard_E8as_v5",
+                "count": 2
+              },
+              {
+                "type": "Worker",
+                "vmSize": "Standard_E8as_v5",
+                "count": 3
               }
             ]
           },
           "clusterProfile": {
-            "clusterVersion": "1.0.1",
-            "ossVersion": "2.4.1",
+            "clusterVersion": "1.0.6",
+            "ossVersion": "0.410.0",
             "identityProfile": {
               "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
               "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
@@ -256,7 +261,7 @@
                 }
               ]
             },
-            "kafkaProfile": {},
+            "trinoProfile": {},
             "sshProfile": {
               "count": 2,
               "podPrefix": "sshnode"
@@ -288,20 +293,25 @@
         "type": "Microsoft.HDInsight/clusterPools/clusters",
         "properties": {
           "provisioningState": "Succeeded",
-          "clusterType": "kafka",
+          "clusterType": "Trino",
           "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
           "computeProfile": {
             "nodes": [
               {
-                "type": "worker",
-                "vmSize": "Standard_D3_v2",
-                "count": 4
+                "type": "Head",
+                "vmSize": "Standard_E8as_v5",
+                "count": 2
+              },
+              {
+                "type": "Worker",
+                "vmSize": "Standard_E8as_v5",
+                "count": 3
               }
             ]
           },
           "clusterProfile": {
-            "clusterVersion": "1.0.1",
-            "ossVersion": "2.4.1",
+            "clusterVersion": "1.0.6",
+            "ossVersion": "0.410.0",
             "identityProfile": {
               "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
               "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
@@ -420,7 +430,7 @@
                 }
               ]
             },
-            "kafkaProfile": {},
+            "trinoProfile": {},
             "sshProfile": {
               "count": 2,
               "podPrefix": "sshnode"

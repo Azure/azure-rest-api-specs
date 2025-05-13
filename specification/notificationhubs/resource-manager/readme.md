@@ -42,7 +42,7 @@ suppress:
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-01
+tag: package-preview-2023-10
 directive:
   - where:
       - $.definitions.NamespaceCreateOrUpdateParameters
@@ -52,11 +52,28 @@ directive:
 ```
 
 
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.NotificationHubs/preview/2023-10-01-preview/notificationhubs.json
+```
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.NotificationHubs/stable/2023-09-01/notificationhubs.json
+```
+
 ### Tag: package-preview-2023-01
 
 These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-01'
+``` yaml $(tag) == 'package-preview-2023-01'
 input-file:
   - Microsoft.NotificationHubs/preview/2023-01-01-preview/notificationhubs.json
 
@@ -64,6 +81,7 @@ suppressions:
  - code: RepeatedPathInfo
    reason: We cannot remove the subscriptionId parameter without introducing a breaking change.
 ```
+
 ### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
@@ -102,8 +120,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -113,20 +131,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_notification_hubs']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.NotificationHubs
-  output-folder: $(csharp-sdks-folder)/notificationhubs/Microsoft.Azure.Management.NotificationHubs/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python

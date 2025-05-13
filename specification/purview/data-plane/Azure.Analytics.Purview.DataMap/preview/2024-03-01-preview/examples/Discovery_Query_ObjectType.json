@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "keywords": null,
+      "limit": 10,
+      "filter": {
+        "or": [
+          {
+            "objectType": "Dashboards"
+          },
+          {
+            "objectType": "Data pipelines"
+          },
+          {
+            "objectType": "Files"
+          },
+          {
+            "objectType": "Folders"
+          },
+          {
+            "objectType": "Glossary terms"
+          },
+          {
+            "objectType": "Reports"
+          },
+          {
+            "objectType": "Stored procedures"
+          },
+          {
+            "objectType": "Tables"
+          }
+        ]
+      }
+    },
+    "api-version": "2024-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 2,
+        "@search.count.approximate": false,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "objectType": "Tables",
+            "id": "24c16e53-1bfd-4d6c-b4ce-b1f6f6f60000",
+            "entityType": "azure_sql_mi_table",
+            "name": "exampledata1",
+            "qualifiedName": "mssql://exampleaccount.database.windows.net:3342/examplesqlmidb/dbo/exampledata1",
+            "assetType": [
+              "Azure SQL Managed Instance"
+            ]
+          },
+          {
+            "@search.score": 1.0,
+            "objectType": "Glossary terms",
+            "id": "b1e51cc4-9249-4c81-bbc7-e2f3117706f3",
+            "glossaryType": "AtlasGlossaryTerm",
+            "name": "termSample1",
+            "glossary": "DefaultGlossary",
+            "longDescription": "it is the definition of the term",
+            "termStatus": "Approved",
+            "termTemplate": [
+              "termTemplateSample"
+            ],
+            "qualifiedName": "termSample1@DefaultGlossary"
+          }
+        ]
+      }
+    }
+  },
+  "title": "Discovery_Query_ObjectType",
+  "operationId": "Discovery_Query"
+}

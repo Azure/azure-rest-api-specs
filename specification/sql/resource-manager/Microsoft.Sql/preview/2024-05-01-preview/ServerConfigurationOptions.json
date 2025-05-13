@@ -1,0 +1,277 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverConfigurationOptions": {
+      "get": {
+        "tags": [
+          "ServerConfigurationOptions"
+        ],
+        "description": "Gets a list of managed instance server configuration options.",
+        "operationId": "ServerConfigurationOptions_ListByManagedInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved managed instance server configuration options.",
+            "schema": {
+              "$ref": "#/definitions/ServerConfigurationOptionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 EmptySubscriptionId - Subscription ID is empty.\n\n * 400 ServerConfigurationOptionFeatureDisabled - User tried to interact with Azure SQL Managed Instance Server Configuration Option but feature is currently not supported.\n\n * 404 SubscriptionDoesNotHaveServer - Specified server does not exist in the specified subscription.\n\n * 404 ResourceNotFound - Resource was not found.\n\n * 404 SubscriptionDoesNotHaveServerInResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of managed instance server configuration options.": {
+            "$ref": "./examples/ServerConfigurationOptionList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverConfigurationOptions/{serverConfigurationOptionName}": {
+      "get": {
+        "tags": [
+          "ServerConfigurationOptions"
+        ],
+        "description": "Gets managed instance server configuration option.",
+        "operationId": "ServerConfigurationOptions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "serverConfigurationOptionName",
+            "in": "path",
+            "description": "The name of the server configuration option.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "allowPolybaseExport"
+            ],
+            "x-ms-enum": {
+              "name": "ServerConfigurationOptionName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified managed instance server configuration option.",
+            "schema": {
+              "$ref": "#/definitions/ServerConfigurationOption"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerConfigurationOptionName - User specified server configuration option name that is not supported.\n\n * 400 InvalidServerConfigurationOptionValue - Server configuration option value \"{0}\" is not supported for server configuration option \"{1}\".\n\n * 400 InvalidServerConfigurationOptionProperties - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 EmptySubscriptionId - Subscription ID is empty.\n\n * 400 ServerConfigurationOptionFeatureDisabled - User tried to interact with Azure SQL Managed Instance Server Configuration Option but feature is currently not supported.\n\n * 404 SubscriptionDoesNotHaveServer - Specified server does not exist in the specified subscription.\n\n * 404 ResourceNotFound - Resource was not found.\n\n * 404 SubscriptionDoesNotHaveServerInResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets managed instance server configuration option.": {
+            "$ref": "./examples/ServerConfigurationOptionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerConfigurationOptions"
+        ],
+        "description": "Updates managed instance server configuration option.",
+        "operationId": "ServerConfigurationOptions_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "serverConfigurationOptionName",
+            "in": "path",
+            "description": "The name of the server configuration option.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "allowPolybaseExport"
+            ],
+            "x-ms-enum": {
+              "name": "ServerConfigurationOptionName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Server configuration option parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerConfigurationOption"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating managed instance server configuration option is in progress",
+            "schema": {
+              "$ref": "#/definitions/ServerConfigurationOption"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerConfigurationOptionName - User specified server configuration option name that is not supported.\n\n * 400 InvalidServerConfigurationOptionValue - Server configuration option value \"{0}\" is not supported for server configuration option \"{1}\".\n\n * 400 InvalidServerConfigurationOptionProperties - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 UpdateWithUnsupportedServerConfigurationOptionName - User specified server configuration option name that is not supported.\n\n * 400 UpdateWithUnsupportedServerConfigurationOptionValue - User specified server configuration option value that is not supported.\n\n * 400 EmptySubscriptionId - Subscription ID is empty.\n\n * 400 ServerConfigurationOptionFeatureDisabled - User tried to interact with Azure SQL Managed Instance Server Configuration Option but feature is currently not supported.\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state.\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 404 ResourceNotFound - Resource was not found.\n\n * 404 SubscriptionDoesNotHaveServerInResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - Specified server does not exist in the specified subscription.\n\n * 404 ServerNotFound - The requested server was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ServerBusy - Operation cannot be executed as server is busy with another operation.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates managed instance server configuration option.": {
+            "$ref": "./examples/ServerConfigurationOptionUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerConfigurationOption": {
+      "description": "A server configuration option",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerConfigurationOptionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerConfigurationOptionListResult": {
+      "description": "A list of server configuration options.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerConfigurationOption"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerConfigurationOptionProperties": {
+      "description": "The properties of server configuration option.",
+      "required": [
+        "serverConfigurationOptionValue"
+      ],
+      "type": "object",
+      "properties": {
+        "serverConfigurationOptionValue": {
+          "format": "int32",
+          "description": "Value of the server configuration option.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "provisioningState": {
+          "description": "Provisioning state of server configuration option.",
+          "enum": [
+            "Created",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

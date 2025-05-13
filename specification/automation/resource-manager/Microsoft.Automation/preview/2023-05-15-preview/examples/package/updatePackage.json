@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "MyAutomationAccount",
+    "runtimeEnvironmentName": "runtimeEnvironmentName",
+    "packageName": "OmsCompositeResources",
+    "api-version": "2023-05-15-preview",
+    "parameters": {
+      "properties": {
+        "contentLink": {
+          "uri": "https://teststorage.blob.core.windows.net/mycontainer/MyModule.zip",
+          "contentHash": {
+            "algorithm": "sha265",
+            "value": "07E108A962B81DD9C9BAA89BB47C0F6EE52B29E83758B07795E408D258B2B87A"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyAutomationAccount/runtimeEnvironments/runtimeEnvironmentName/packages/OmsCompositeResources",
+        "name": "OmsCompositeResources",
+        "type": "Microsoft.Automation/automationAccounts/runtimeEnvironments/packages",
+        "location": "East US 2",
+        "tags": {},
+        "properties": {
+          "default": false,
+          "version": null,
+          "sizeInBytes": 0,
+          "error": {
+            "code": null,
+            "message": null
+          },
+          "provisioningState": "Creating"
+        },
+        "systemData": {
+          "createdAt": "2023-07-05T07:32:41.4389914+00:00",
+          "lastModifiedAt": "2023-07-05T07:33:07.5597465+00:00"
+        }
+      }
+    }
+  }
+}

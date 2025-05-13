@@ -28,14 +28,13 @@ op MultivariateServiceAction<TParams, TResponse>(
 @route("/multivariate/detect-batch/{resultId}")
 @summary("Get Multivariate Anomaly Detection Result")
 @doc("""
-For asynchronous inference, get a multivariate anomaly detection result based on the
-resultId value that the BatchDetectAnomaly API returns.
-""")
+  For asynchronous inference, get a multivariate anomaly detection result based on the
+  resultId value that the BatchDetectAnomaly API returns.
+  """)
 op getMultivariateBatchDetectionResult(
-  @format("uuid")
   @doc("ID of a batch detection result.")
   @path
-  resultId: string,
+  resultId: uuid,
 ): MultivariateDetectionResult | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
@@ -43,22 +42,22 @@ op getMultivariateBatchDetectionResult(
 @route("/multivariate/models")
 @summary("Train a Multivariate Anomaly Detection Model")
 @doc("""
-Create and train a multivariate anomaly detection model. The request must
-include a source parameter to indicate an Azure Blob
-Storage URI that's accessible to the service. There are two types of data input. The Blob Storage URI can point to an Azure Blob
-Storage folder that contains multiple CSV files, where each CSV file has
-two columns, time stamp and variable. Or the Blob Storage URI can point to a single blob that contains a CSV file that has all the variables and a
-time stamp column.
-The model object will be created and returned in the response, but the
-training process happens asynchronously. To check the training status, call
-GetMultivariateModel with the modelId value and check the status field in the
-modelInfo object.
-""")
+  Create and train a multivariate anomaly detection model. The request must
+  include a source parameter to indicate an Azure Blob
+  Storage URI that's accessible to the service. There are two types of data input. The Blob Storage URI can point to an Azure Blob
+  Storage folder that contains multiple CSV files, where each CSV file has
+  two columns, time stamp and variable. Or the Blob Storage URI can point to a single blob that contains a CSV file that has all the variables and a
+  time stamp column.
+  The model object will be created and returned in the response, but the
+  training process happens asynchronously. To check the training status, call
+  GetMultivariateModel with the modelId value and check the status field in the
+  modelInfo object.
+  """)
 op trainMultivariateModel is MultivariateServiceAction<
   // TParams
   {
     @doc("Model information.")
-    @body
+    @bodyRoot
     modelInfo: ModelInfo;
   },
   // TResponse
@@ -69,7 +68,7 @@ op trainMultivariateModel is MultivariateServiceAction<
     @header
     location: string;
 
-    @body result: AnomalyDetectionModel;
+    @bodyRoot result: AnomalyDetectionModel;
   }
 >;
 
@@ -112,9 +111,9 @@ op deleteMultivariateModel(
 // it does not support an api-version in the path defined in the @server decorator.
 @summary("Get Multivariate Model")
 @doc("""
-Get detailed information about the multivariate model, including the training status
-and variables used in the model.
-""")
+  Get detailed information about the multivariate model, including the training status
+  and variables used in the model.
+  """)
 @get
 @route("/multivariate/models/{modelId}")
 op getMultivariateModel(
@@ -131,20 +130,20 @@ op getMultivariateModel(
 @route("/multivariate/models/{modelId}:detect-batch")
 @summary("Detect Multivariate Anomaly")
 @doc("""
-Submit a multivariate anomaly detection task with the modelId value of a trained model
-and inference data. The input schema should be the same with the training
-request. The request will finish asynchronously and return a resultId value to
-query the detection result. The request should be a source link to indicate an
-externally accessible Azure Storage URI that either points to an Azure Blob
-Storage folder or points to a CSV file in Azure Blob Storage.
-""")
+  Submit a multivariate anomaly detection task with the modelId value of a trained model
+  and inference data. The input schema should be the same with the training
+  request. The request will finish asynchronously and return a resultId value to
+  query the detection result. The request should be a source link to indicate an
+  externally accessible Azure Storage URI that either points to an Azure Blob
+  Storage folder or points to a CSV file in Azure Blob Storage.
+  """)
 op detectMultivariateBatchAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
 
   @doc("Request of multivariate anomaly detection.")
-  @body
+  @bodyRoot
   options: MultivariateBatchDetectionOptions,
 ): {
   @statusCode statusCode: 202;
@@ -157,7 +156,7 @@ op detectMultivariateBatchAnomaly(
   @header("Operation-Location")
   operationLocation: string;
 
-  @body result: MultivariateDetectionResult;
+  @bodyRoot result: MultivariateDetectionResult;
 } | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
@@ -167,17 +166,17 @@ op detectMultivariateBatchAnomaly(
 @route("/multivariate/models/{modelId}:detect-last")
 @summary("Detect anomalies in the last point of the request body")
 @doc("""
-Submit a multivariate anomaly detection task with the modelId value of a trained model
-and inference data. The inference data should be put into the request body in
-JSON format. The request will finish synchronously and return the detection
-immediately in the response body.
-""")
+  Submit a multivariate anomaly detection task with the modelId value of a trained model
+  and inference data. The inference data should be put into the request body in
+  JSON format. The request will finish synchronously and return the detection
+  immediately in the response body.
+  """)
 op detectMultivariateLastAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
 
   @doc("Request of the last detection.")
-  @body
+  @bodyRoot
   options: MultivariateLastDetectionOptions,
 ): MultivariateLastDetectionResult | ResponseError;

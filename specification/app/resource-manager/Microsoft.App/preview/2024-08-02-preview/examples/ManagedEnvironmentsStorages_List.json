@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "managedEnv",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/storages/jlaw-demo1",
+            "name": "jlaw-demo1",
+            "type": "Microsoft.App/managedEnvironments/storages",
+            "properties": {
+              "azureFile": {
+                "accountName": "account1",
+                "shareName": "share1",
+                "accessMode": "ReadOnly"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/storages/jlaw-demo2",
+            "name": "jlaw-demo2",
+            "type": "Microsoft.App/managedEnvironments/storages",
+            "properties": {
+              "nfsAzureFile": {
+                "server": "server1",
+                "shareName": "share1",
+                "accessMode": "ReadOnly"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

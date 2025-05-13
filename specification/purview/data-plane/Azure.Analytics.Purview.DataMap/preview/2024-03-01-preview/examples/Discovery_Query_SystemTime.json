@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "keywords": null,
+      "limit": 10,
+      "filter": {
+        "or": [
+          {
+            "createTime": {
+              "operator": "lt",
+              "timeThreshold": 1545580800000
+            }
+          },
+          {
+            "updateTime": "LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D"
+          }
+        ]
+      }
+    },
+    "api-version": "2024-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 2,
+        "@search.count.approximate": false,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "55ceaddf-30ac-40f3-b656-71f6f6f60000",
+            "entityType": "azure_sql_mi_table",
+            "name": "exampleData_v1",
+            "qualifiedName": "mssql://exampleaccount.database.windows.net:3342/examplesqlmidb/dbo/exampleData_v1",
+            "assetType": [
+              "Azure SQL Managed Instance"
+            ]
+          },
+          {
+            "@search.score": 1.0,
+            "id": "89416661-5269-4f3d-ba35-e0f6f6f60000",
+            "entityType": "azure_sql_mi_table",
+            "name": "exampleData_v2",
+            "qualifiedName": "mssql://exampleaccount.database.windows.net:3342/examplesqlmidb/dbo/exampleData_v2",
+            "assetType": [
+              "Azure SQL Managed Instance"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "title": "Discovery_Query_SystemTime",
+  "operationId": "Discovery_Query"
+}

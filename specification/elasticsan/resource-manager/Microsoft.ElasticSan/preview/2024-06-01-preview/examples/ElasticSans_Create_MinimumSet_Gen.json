@@ -1,0 +1,53 @@
+{
+  "title": "ElasticSans_Create",
+  "operationId": "ElasticSans_Create",
+  "parameters": {
+    "subscriptionId": "subscriptionid",
+    "resourceGroupName": "resourcegroupname",
+    "elasticSanName": "elasticsanname",
+    "parameters": {
+      "properties": {
+        "sku": {
+          "name": "Premium_LRS"
+        },
+        "baseSizeTiB": 1,
+        "extendedCapacitySizeTiB": 3
+      },
+      "location": "France Central"
+    },
+    "api-version": "2024-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sku": {
+            "name": "Premium_LRS"
+          },
+          "baseSizeTiB": 1,
+          "extendedCapacitySizeTiB": 3,
+          "provisioningState": "Succeeded"
+        },
+        "location": "eupkimcjwiphitotibv",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}"
+      }
+    },
+    "201": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "sku": {
+            "name": "Premium_LRS"
+          },
+          "baseSizeTiB": 1,
+          "extendedCapacitySizeTiB": 3,
+          "provisioningState": "Creating"
+        },
+        "location": "eupkimcjwiphitotibv",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}"
+      }
+    }
+  }
+}

@@ -1,0 +1,459 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/billing/armbilling
+      breaking-changes:
+        - Function `*AccountsClient.BeginUpdate` parameter(s) have been changed from `(context.Context, string, AccountUpdateRequest, *AccountsClientBeginUpdateOptions)` to `(context.Context, string, AccountPatch, *AccountsClientBeginUpdateOptions)`
+        - Function `*CustomersClient.Get` parameter(s) have been changed from `(context.Context, string, string, *CustomersClientGetOptions)` to `(context.Context, string, string, string, *CustomersClientGetOptions)`
+        - Function `*EnrollmentAccountsClient.Get` parameter(s) have been changed from `(context.Context, string, *EnrollmentAccountsClientGetOptions)` to `(context.Context, string, string, *EnrollmentAccountsClientGetOptions)`
+        - Function `*InvoicesClient.Get` parameter(s) have been changed from `(context.Context, string, string, *InvoicesClientGetOptions)` to `(context.Context, string, *InvoicesClientGetOptions)`
+        - Function `*InvoicesClient.NewListByBillingAccountPager` parameter(s) have been changed from `(string, string, string, *InvoicesClientListByBillingAccountOptions)` to `(string, *InvoicesClientListByBillingAccountOptions)`
+        - Function `*InvoicesClient.NewListByBillingProfilePager` parameter(s) have been changed from `(string, string, string, string, *InvoicesClientListByBillingProfileOptions)` to `(string, string, *InvoicesClientListByBillingProfileOptions)`
+        - Function `*InvoicesClient.NewListByBillingSubscriptionPager` parameter(s) have been changed from `(string, string, *InvoicesClientListByBillingSubscriptionOptions)` to `(*InvoicesClientListByBillingSubscriptionOptions)`
+        - Function `*PermissionsClient.NewListByCustomerPager` parameter(s) have been changed from `(string, string, *PermissionsClientListByCustomerOptions)` to `(string, string, string, *PermissionsClientListByCustomerOptions)`
+        - Function `*PoliciesClient.GetByCustomer` parameter(s) have been changed from `(context.Context, string, string, *PoliciesClientGetByCustomerOptions)` to `(context.Context, string, string, string, ServiceDefinedResourceName, *PoliciesClientGetByCustomerOptions)`
+        - Function `*ProductsClient.Update` parameter(s) have been changed from `(context.Context, string, string, Product, *ProductsClientUpdateOptions)` to `(context.Context, string, string, ProductPatch, *ProductsClientUpdateOptions)`
+        - Function `*SubscriptionsClient.BeginMove` parameter(s) have been changed from `(context.Context, string, TransferBillingSubscriptionRequestProperties, *SubscriptionsClientBeginMoveOptions)` to `(context.Context, string, string, MoveBillingSubscriptionRequest, *SubscriptionsClientBeginMoveOptions)`
+        - Function `*SubscriptionsClient.Get` parameter(s) have been changed from `(context.Context, string, *SubscriptionsClientGetOptions)` to `(context.Context, string, string, *SubscriptionsClientGetOptions)`
+        - Function `*SubscriptionsClient.NewListByCustomerPager` parameter(s) have been changed from `(string, string, *SubscriptionsClientListByCustomerOptions)` to `(string, string, string, *SubscriptionsClientListByCustomerOptions)`
+        - Type of `AccountProperties.EnrollmentDetails` has been changed from `*Enrollment` to `*AccountPropertiesEnrollmentDetails`
+        - Type of `AccountProperties.SoldTo` has been changed from `*AddressDetails` to `*AccountPropertiesSoldTo`
+        - Type of `AgreementProperties.BillingProfileInfo` has been changed from `*ProfileInfo` to `[]*ProfileInfo`
+        - Type of `AgreementProperties.Participants` has been changed from `[]*Participants` to `[]*Participant`
+        - Type of `AvailableBalanceProperties.Amount` has been changed from `*Amount` to `*AvailableBalancePropertiesAmount`
+        - Type of `CustomerPolicyProperties.ViewCharges` has been changed from `*ViewCharges` to `*ViewChargesPolicy`
+        - Type of `EnrollmentAccountListResult.Value` has been changed from `[]*EnrollmentAccountSummary` to `[]*EnrollmentAccount`
+        - Type of `ErrorResponse.Error` has been changed from `*ErrorDetails` to `*ErrorDetail`
+        - Type of `InvoiceProperties.AmountDue` has been changed from `*Amount` to `*InvoicePropertiesAmountDue`
+        - Type of `InvoiceProperties.AzurePrepaymentApplied` has been changed from `*Amount` to `*InvoicePropertiesAzurePrepaymentApplied`
+        - Type of `InvoiceProperties.BilledAmount` has been changed from `*Amount` to `*InvoicePropertiesBilledAmount`
+        - Type of `InvoiceProperties.CreditAmount` has been changed from `*Amount` to `*InvoicePropertiesCreditAmount`
+        - Type of `InvoiceProperties.Documents` has been changed from `[]*Document` to `[]*InvoiceDocument`
+        - Type of `InvoiceProperties.FreeAzureCreditApplied` has been changed from `*Amount` to `*InvoicePropertiesFreeAzureCreditApplied`
+        - Type of `InvoiceProperties.Payments` has been changed from `[]*PaymentProperties` to `[]*Payment`
+        - Type of `InvoiceProperties.RebillDetails` has been changed from `map[string]*RebillDetails` to `*InvoicePropertiesRebillDetails`
+        - Type of `InvoiceProperties.SubTotal` has been changed from `*Amount` to `*InvoicePropertiesSubTotal`
+        - Type of `InvoiceProperties.TaxAmount` has been changed from `*Amount` to `*InvoicePropertiesTaxAmount`
+        - Type of `InvoiceProperties.TotalAmount` has been changed from `*Amount` to `*InvoicePropertiesTotalAmount`
+        - Type of `InvoiceSectionWithCreateSubPermission.BillingProfileSpendingLimit` has been changed from `*SpendingLimitForBillingProfile` to `*SpendingLimit`
+        - Type of `InvoiceSectionWithCreateSubPermission.BillingProfileStatusReasonCode` has been changed from `*StatusReasonCodeForBillingProfile` to `*BillingProfileStatusReasonCode`
+        - Type of `ProductProperties.BillingFrequency` has been changed from `*BillingFrequency` to `*string`
+        - Type of `ProductProperties.EndDate` has been changed from `*time.Time` to `*string`
+        - Type of `ProductProperties.LastCharge` has been changed from `*Amount` to `*ProductPropertiesLastCharge`
+        - Type of `ProductProperties.LastChargeDate` has been changed from `*time.Time` to `*string`
+        - Type of `ProductProperties.PurchaseDate` has been changed from `*time.Time` to `*string`
+        - Type of `ProductProperties.Quantity` has been changed from `*float32` to `*int64`
+        - Type of `ProductProperties.Reseller` has been changed from `*Reseller` to `*ProductPropertiesReseller`
+        - Type of `ProductProperties.Status` has been changed from `*ProductStatusType` to `*ProductStatus`
+        - Type of `ProfileProperties.BillTo` has been changed from `*AddressDetails` to `*ProfilePropertiesBillTo`
+        - Type of `ProfileProperties.IndirectRelationshipInfo` has been changed from `*IndirectRelationshipInfo` to `*ProfilePropertiesIndirectRelationshipInfo`
+        - Type of `ProfileProperties.StatusReasonCode` has been changed from `*StatusReasonCode` to `*BillingProfileStatusReasonCode`
+        - Type of `PropertyProperties.BillingProfileSpendingLimit` has been changed from `*BillingProfileSpendingLimit` to `*SpendingLimit`
+        - Type of `RebillDetails.RebillDetails` has been changed from `map[string]*RebillDetails` to `*RebillDetails`
+        - Type of `ReservationProperty.EffectiveDateTime` has been changed from `*string` to `*time.Time`
+        - Type of `RoleAssignmentProperties.CreatedOn` has been changed from `*string` to `*time.Time`
+        - Type of `RoleDefinitionProperties.Permissions` has been changed from `[]*PermissionsProperties` to `[]*Permission`
+        - Type of `TransactionProperties.AzureCreditApplied` has been changed from `*Amount` to `*TransactionPropertiesAzureCreditApplied`
+        - Type of `TransactionProperties.EffectivePrice` has been changed from `*Amount` to `*TransactionPropertiesEffectivePrice`
+        - Type of `TransactionProperties.Kind` has been changed from `*TransactionTypeKind` to `*TransactionKind`
+        - Type of `TransactionProperties.MarketPrice` has been changed from `*Amount` to `*TransactionPropertiesMarketPrice`
+        - Type of `TransactionProperties.SubTotal` has been changed from `*Amount` to `*TransactionPropertiesSubTotal`
+        - Type of `TransactionProperties.Tax` has been changed from `*Amount` to `*TransactionPropertiesTax`
+        - Type of `TransactionProperties.TransactionAmount` has been changed from `*Amount` to `*TransactionPropertiesTransactionAmount`
+        - Type of `TransactionProperties.TransactionType` has been changed from `*ReservationType` to `*string`
+        - "`InvoiceTypeAzureService` from enum `InvoiceType` has been removed"
+        - "`SubscriptionTransferValidationErrorCodeNotAvailableForDestinationMarket` from enum `SubscriptionTransferValidationErrorCode` has been removed"
+        - Enum `BillingFrequency` has been removed
+        - Enum `BillingProfileSpendingLimit` has been removed
+        - Enum `BillingSubscriptionStatusType` has been removed
+        - Enum `DocumentType` has been removed
+        - Enum `ProductStatusType` has been removed
+        - Enum `ProductTransferValidationErrorCode` has been removed
+        - Enum `ReservationType` has been removed
+        - Enum `SpendingLimitForBillingProfile` has been removed
+        - Enum `StatusReasonCode` has been removed
+        - Enum `StatusReasonCodeForBillingProfile` has been removed
+        - Enum `TransactionTypeKind` has been removed
+        - Enum `ViewCharges` has been removed
+        - Function `*AvailableBalancesClient.Get` has been removed
+        - Function `*ClientFactory.NewInstructionsClient` has been removed
+        - Function `*ClientFactory.NewPeriodsClient` has been removed
+        - Function `*ClientFactory.NewRoleDefinitionsClient` has been removed
+        - Function `*EnrollmentAccountsClient.NewListPager` has been removed
+        - Function `NewInstructionsClient` has been removed
+        - Function `*InstructionsClient.Get` has been removed
+        - Function `*InstructionsClient.NewListByBillingProfilePager` has been removed
+        - Function `*InstructionsClient.Put` has been removed
+        - Function `*InvoicesClient.BeginDownloadBillingSubscriptionInvoice` has been removed
+        - Function `*InvoicesClient.BeginDownloadInvoice` has been removed
+        - Function `*InvoicesClient.BeginDownloadMultipleBillingProfileInvoices` has been removed
+        - Function `*InvoicesClient.BeginDownloadMultipleBillingSubscriptionInvoices` has been removed
+        - Function `*InvoicesClient.GetByID` has been removed
+        - Function `*InvoicesClient.GetBySubscriptionAndInvoiceID` has been removed
+        - Function `NewPeriodsClient` has been removed
+        - Function `*PeriodsClient.Get` has been removed
+        - Function `*PeriodsClient.NewListPager` has been removed
+        - Function `*PermissionsClient.NewListByInvoiceSectionsPager` has been removed
+        - Function `*PoliciesClient.Update` has been removed
+        - Function `*PoliciesClient.UpdateCustomer` has been removed
+        - Function `PossibleStatusReasonCodeValues` has been removed
+        - Function `*ProductsClient.ValidateMove` has been removed
+        - Function `NewRoleDefinitionsClient` has been removed
+        - Function `*RoleDefinitionsClient.GetByBillingAccount` has been removed
+        - Function `*RoleDefinitionsClient.GetByBillingProfile` has been removed
+        - Function `*RoleDefinitionsClient.GetByInvoiceSection` has been removed
+        - Function `*RoleDefinitionsClient.NewListByBillingAccountPager` has been removed
+        - Function `*RoleDefinitionsClient.NewListByBillingProfilePager` has been removed
+        - Function `*RoleDefinitionsClient.NewListByInvoiceSectionPager` has been removed
+        - Function `*SubscriptionsClient.ValidateMove` has been removed
+        - Operation `*ProductsClient.Move` has been changed to LRO, use `*ProductsClient.BeginMove` instead.
+        - Operation `*SubscriptionsClient.Update` has been changed to LRO, use `*SubscriptionsClient.BeginUpdate` instead.
+        - Struct `AccountUpdateRequest` has been removed
+        - Struct `Document` has been removed
+        - Struct `DownloadURL` has been removed
+        - Struct `Enrollment` has been removed
+        - Struct `EnrollmentAccountContext` has been removed
+        - Struct `EnrollmentAccountSummary` has been removed
+        - Struct `EnrollmentAccountSummaryProperties` has been removed
+        - Struct `EnrollmentPolicies` has been removed
+        - Struct `ErrorDetails` has been removed
+        - Struct `ErrorSubDetailsItem` has been removed
+        - Struct `Instruction` has been removed
+        - Struct `InstructionListResult` has been removed
+        - Struct `InstructionProperties` has been removed
+        - Struct `InvoiceSectionCreationRequest` has been removed
+        - Struct `InvoiceSectionListWithCreateSubPermissionResult` has been removed
+        - Struct `InvoiceSectionsOnExpand` has been removed
+        - Struct `OperationsErrorDetails` has been removed
+        - Struct `OperationsErrorResponse` has been removed
+        - Struct `Participants` has been removed
+        - Struct `PaymentProperties` has been removed
+        - Struct `Period` has been removed
+        - Struct `PeriodProperties` has been removed
+        - Struct `PeriodsListResult` has been removed
+        - Struct `PermissionsListResult` has been removed
+        - Struct `PermissionsProperties` has been removed
+        - Struct `Policy` has been removed
+        - Struct `PolicyProperties` has been removed
+        - Struct `ProductsListResult` has been removed
+        - Struct `ProfileCreationRequest` has been removed
+        - Struct `ProfilesOnExpand` has been removed
+        - Struct `SubscriptionsListResult` has been removed
+        - Struct `TransferBillingSubscriptionRequestProperties` has been removed
+        - Struct `TransferProductRequestProperties` has been removed
+        - Struct `ValidateAddressResponse` has been removed
+        - Struct `ValidateProductTransferEligibilityError` has been removed
+        - Struct `ValidateProductTransferEligibilityResult` has been removed
+        - Struct `ValidateSubscriptionTransferEligibilityError` has been removed
+        - Struct `ValidateSubscriptionTransferEligibilityResult` has been removed
+        - Field `BillingProfiles`, `Departments`, `EnrollmentAccounts` of struct `AccountProperties` has been removed
+        - Field `Expand` of struct `AccountsClientGetOptions` has been removed
+        - Field `InvoiceSectionListWithCreateSubPermissionResult` of struct `AccountsClientListInvoiceSectionsByCreateSubscriptionPermissionResponse` has been removed
+        - Field `ValidateAddressResponse` of struct `AddressClientValidateResponse` has been removed
+        - Field `Expand` of struct `AgreementsClientGetOptions` has been removed
+        - Field `TotalCount` of struct `CustomerListResult` has been removed
+        - Field `Expand` of struct `CustomersClientGetOptions` has been removed
+        - Field `DepartmentName`, `EnrollmentAccounts` of struct `DepartmentProperties` has been removed
+        - Field `AccountName`, `AccountOwnerEmail`, `Department` of struct `EnrollmentAccountProperties` has been removed
+        - Field `EnrollmentAccountSummary` of struct `EnrollmentAccountsClientGetResponse` has been removed
+        - Field `TotalCount` of struct `InvoiceListResult` has been removed
+        - Field `TotalCount` of struct `InvoiceSectionListResult` has been removed
+        - Field `Labels` of struct `InvoiceSectionProperties` has been removed
+        - Field `PermissionsListResult` of struct `PermissionsClientListByBillingAccountResponse` has been removed
+        - Field `PermissionsListResult` of struct `PermissionsClientListByBillingProfileResponse` has been removed
+        - Field `PermissionsListResult` of struct `PermissionsClientListByCustomerResponse` has been removed
+        - Field `Policy` of struct `PoliciesClientGetByBillingProfileResponse` has been removed
+        - Field `ProductsListResult` of struct `ProductsClientListByBillingAccountResponse` has been removed
+        - Field `ProductsListResult` of struct `ProductsClientListByBillingProfileResponse` has been removed
+        - Field `ProductsListResult` of struct `ProductsClientListByCustomerResponse` has been removed
+        - Field `ProductsListResult` of struct `ProductsClientListByInvoiceSectionResponse` has been removed
+        - Field `TotalCount` of struct `ProfileListResult` has been removed
+        - Field `InvoiceSections` of struct `ProfileProperties` has been removed
+        - Field `Expand` of struct `ProfilesClientGetOptions` has been removed
+        - Field `Expand` of struct `ProfilesClientListByBillingAccountOptions` has been removed
+        - Field `Orderby` of struct `ReservationsClientListByBillingAccountOptions` has been removed
+        - Field `Orderby` of struct `ReservationsClientListByBillingProfileOptions` has been removed
+        - Field `RoleAssignment` of struct `RoleAssignmentsClientDeleteByBillingAccountResponse` has been removed
+        - Field `RoleAssignment` of struct `RoleAssignmentsClientDeleteByBillingProfileResponse` has been removed
+        - Field `RoleAssignment` of struct `RoleAssignmentsClientDeleteByInvoiceSectionResponse` has been removed
+        - Field `CostCenter`, `SubscriptionBillingStatus` of struct `SubscriptionProperties` has been removed
+        - Field `SubscriptionsListResult` of struct `SubscriptionsClientListByBillingAccountResponse` has been removed
+        - Field `SubscriptionsListResult` of struct `SubscriptionsClientListByBillingProfileResponse` has been removed
+        - Field `SubscriptionsListResult` of struct `SubscriptionsClientListByCustomerResponse` has been removed
+        - Field `SubscriptionsListResult` of struct `SubscriptionsClientListByInvoiceSectionResponse` has been removed
+        - Field `TotalCount` of struct `TransactionListResult` has been removed
+        - Field `OrderID`, `OrderName`, `SubscriptionID`, `SubscriptionName` of struct `TransactionProperties` has been removed
+        - Enum `TargetCloud` has been removed
+        - Type of `InvoiceSectionProperties.TargetCloud` has been changed from `*TargetCloud` to `*string`
+        - Type of `ProfileProperties.TargetClouds` has been changed from `[]*TargetCloud` to `[]*string`
+  azure-sdk-for-js:
+    - package: "@azure/arm-billing"
+      breaking-changes:
+        - Removed operation group BillingPeriods
+        - Removed operation group BillingRoleDefinitions
+        - Removed operation group Instructions
+        - Removed operation AvailableBalances.get
+        - Removed operation BillingPermissions.listByInvoiceSections
+        - Removed operation BillingSubscriptions.update
+        - Removed operation BillingSubscriptions.validateMove
+        - Removed operation EnrollmentAccounts.list
+        - Removed operation Invoices.beginDownloadBillingSubscriptionInvoice
+        - Removed operation Invoices.beginDownloadBillingSubscriptionInvoiceAndWait
+        - Removed operation Invoices.beginDownloadInvoice
+        - Removed operation Invoices.beginDownloadInvoiceAndWait
+        - Removed operation Invoices.beginDownloadMultipleBillingProfileInvoices
+        - Removed operation Invoices.beginDownloadMultipleBillingProfileInvoicesAndWait
+        - Removed operation Invoices.beginDownloadMultipleBillingSubscriptionInvoices
+        - Removed operation Invoices.beginDownloadMultipleBillingSubscriptionInvoicesAndWait
+        - Removed operation Invoices.getById
+        - Removed operation Invoices.getBySubscriptionAndInvoiceId
+        - Removed operation Policies.update
+        - Removed operation Policies.updateCustomer
+        - Removed operation Products.move
+        - Removed operation Products.validateMove
+        - Operation BillingAccounts.beginUpdate has a new signature
+        - Operation BillingAccounts.beginUpdateAndWait has a new signature
+        - Operation BillingPermissions.listByCustomer has a new signature
+        - Operation BillingSubscriptions.beginMove has a new signature
+        - Operation BillingSubscriptions.beginMoveAndWait has a new signature
+        - Operation BillingSubscriptions.get has a new signature
+        - Operation BillingSubscriptions.listByCustomer has a new signature
+        - Operation Customers.get has a new signature
+        - Operation EnrollmentAccounts.get has a new signature
+        - Operation Invoices.get has a new signature
+        - Operation Invoices.listByBillingAccount has a new signature
+        - Operation Invoices.listByBillingProfile has a new signature
+        - Operation Invoices.listByBillingSubscription has a new signature
+        - Operation Policies.getByCustomer has a new signature
+        - Operation Products.update has a new signature
+        - Class BillingManagementClient has a new signature
+        - Interface Agreement no longer has parameter acceptanceMode
+        - Interface Agreement no longer has parameter agreementLink
+        - Interface Agreement no longer has parameter category
+        - Interface Agreement no longer has parameter effectiveDate
+        - Interface Agreement no longer has parameter expirationDate
+        - Interface Agreement no longer has parameter participants
+        - Interface Agreement no longer has parameter status
+        - Interface AgreementsGetOptionalParams no longer has parameter expand
+        - Interface AgreementsListByBillingAccountNextOptionalParams no longer has parameter expand
+        - Interface AvailableBalance no longer has parameter amount
+        - Interface BillingAccount no longer has parameter accountStatus
+        - Interface BillingAccount no longer has parameter accountType
+        - Interface BillingAccount no longer has parameter agreementType
+        - Interface BillingAccount no longer has parameter billingProfiles
+        - Interface BillingAccount no longer has parameter departments
+        - Interface BillingAccount no longer has parameter displayName
+        - Interface BillingAccount no longer has parameter enrollmentAccounts
+        - Interface BillingAccount no longer has parameter enrollmentDetails
+        - Interface BillingAccount no longer has parameter hasReadAccess
+        - Interface BillingAccount no longer has parameter notificationEmailAddress
+        - Interface BillingAccount no longer has parameter soldTo
+        - Interface BillingAccountsGetOptionalParams no longer has parameter expand
+        - Interface BillingAccountsListNextOptionalParams no longer has parameter expand
+        - Interface BillingProfile no longer has parameter billingRelationshipType
+        - Interface BillingProfile no longer has parameter billTo
+        - Interface BillingProfile no longer has parameter currency
+        - Interface BillingProfile no longer has parameter displayName
+        - Interface BillingProfile no longer has parameter enabledAzurePlans
+        - Interface BillingProfile no longer has parameter hasReadAccess
+        - Interface BillingProfile no longer has parameter indirectRelationshipInfo
+        - Interface BillingProfile no longer has parameter invoiceDay
+        - Interface BillingProfile no longer has parameter invoiceEmailOptIn
+        - Interface BillingProfile no longer has parameter invoiceSections
+        - Interface BillingProfile no longer has parameter poNumber
+        - Interface BillingProfile no longer has parameter spendingLimit
+        - Interface BillingProfile no longer has parameter status
+        - Interface BillingProfile no longer has parameter statusReasonCode
+        - Interface BillingProfile no longer has parameter systemId
+        - Interface BillingProfile no longer has parameter targetClouds
+        - Interface BillingProfilesGetOptionalParams no longer has parameter expand
+        - Interface BillingProfilesListByBillingAccountNextOptionalParams no longer has parameter expand
+        - Interface BillingProfilesListByBillingAccountOptionalParams no longer has parameter expand
+        - Interface BillingProperty no longer has parameter accountAdminNotificationEmailAddress
+        - Interface BillingProperty no longer has parameter billingAccountDisplayName
+        - Interface BillingProperty no longer has parameter billingAccountId
+        - Interface BillingProperty no longer has parameter billingProfileDisplayName
+        - Interface BillingProperty no longer has parameter billingProfileId
+        - Interface BillingProperty no longer has parameter billingProfileSpendingLimit
+        - Interface BillingProperty no longer has parameter billingProfileStatus
+        - Interface BillingProperty no longer has parameter billingProfileStatusReasonCode
+        - Interface BillingProperty no longer has parameter billingTenantId
+        - Interface BillingProperty no longer has parameter costCenter
+        - Interface BillingProperty no longer has parameter invoiceSectionDisplayName
+        - Interface BillingProperty no longer has parameter invoiceSectionId
+        - Interface BillingProperty no longer has parameter isAccountAdmin
+        - Interface BillingProperty no longer has parameter productId
+        - Interface BillingProperty no longer has parameter productName
+        - Interface BillingProperty no longer has parameter skuDescription
+        - Interface BillingProperty no longer has parameter skuId
+        - Interface BillingRoleAssignment no longer has parameter createdByPrincipalId
+        - Interface BillingRoleAssignment no longer has parameter createdByPrincipalTenantId
+        - Interface BillingRoleAssignment no longer has parameter createdByUserEmailAddress
+        - Interface BillingRoleAssignment no longer has parameter createdOn
+        - Interface BillingRoleAssignment no longer has parameter principalId
+        - Interface BillingRoleAssignment no longer has parameter principalTenantId
+        - Interface BillingRoleAssignment no longer has parameter roleDefinitionId
+        - Interface BillingRoleAssignment no longer has parameter scope
+        - Interface BillingRoleAssignment no longer has parameter userAuthenticationType
+        - Interface BillingRoleAssignment no longer has parameter userEmailAddress
+        - Interface BillingRoleDefinition no longer has parameter description
+        - Interface BillingRoleDefinition no longer has parameter permissions
+        - Interface BillingRoleDefinition no longer has parameter roleName
+        - Interface BillingSubscription no longer has parameter costCenter
+        - Interface BillingSubscription no longer has parameter subscriptionBillingStatus
+        - Interface Customer no longer has parameter billingProfileDisplayName
+        - Interface Customer no longer has parameter billingProfileId
+        - Interface Customer no longer has parameter displayName
+        - Interface Customer no longer has parameter enabledAzurePlans
+        - Interface Customer no longer has parameter resellers
+        - Interface CustomerListResult no longer has parameter totalCount
+        - Interface CustomerPolicy no longer has parameter viewCharges
+        - Interface CustomersGetOptionalParams no longer has parameter expand
+        - Interface CustomersListByBillingAccountNextOptionalParams no longer has parameter filter
+        - Interface CustomersListByBillingAccountNextOptionalParams no longer has parameter search
+        - Interface CustomersListByBillingProfileNextOptionalParams no longer has parameter filter
+        - Interface CustomersListByBillingProfileNextOptionalParams no longer has parameter search
+        - Interface Department no longer has parameter costCenter
+        - Interface Department no longer has parameter departmentName
+        - Interface Department no longer has parameter enrollmentAccounts
+        - Interface Department no longer has parameter status
+        - Interface EnrollmentAccount no longer has parameter accountName
+        - Interface EnrollmentAccount no longer has parameter accountOwner
+        - Interface EnrollmentAccount no longer has parameter accountOwnerEmail
+        - Interface EnrollmentAccount no longer has parameter costCenter
+        - Interface EnrollmentAccount no longer has parameter department
+        - Interface EnrollmentAccount no longer has parameter endDate
+        - Interface EnrollmentAccount no longer has parameter startDate
+        - Interface EnrollmentAccount no longer has parameter status
+        - Interface Invoice no longer has parameter amountDue
+        - Interface Invoice no longer has parameter azurePrepaymentApplied
+        - Interface Invoice no longer has parameter billedAmount
+        - Interface Invoice no longer has parameter billedDocumentId
+        - Interface Invoice no longer has parameter billingProfileDisplayName
+        - Interface Invoice no longer has parameter billingProfileId
+        - Interface Invoice no longer has parameter creditAmount
+        - Interface Invoice no longer has parameter creditForDocumentId
+        - Interface Invoice no longer has parameter documents
+        - Interface Invoice no longer has parameter documentType
+        - Interface Invoice no longer has parameter dueDate
+        - Interface Invoice no longer has parameter freeAzureCreditApplied
+        - Interface Invoice no longer has parameter invoiceDate
+        - Interface Invoice no longer has parameter invoicePeriodEndDate
+        - Interface Invoice no longer has parameter invoicePeriodStartDate
+        - Interface Invoice no longer has parameter invoiceType
+        - Interface Invoice no longer has parameter isMonthlyInvoice
+        - Interface Invoice no longer has parameter payments
+        - Interface Invoice no longer has parameter purchaseOrderNumber
+        - Interface Invoice no longer has parameter rebillDetails
+        - Interface Invoice no longer has parameter status
+        - Interface Invoice no longer has parameter subscriptionId
+        - Interface Invoice no longer has parameter subTotal
+        - Interface Invoice no longer has parameter taxAmount
+        - Interface Invoice no longer has parameter totalAmount
+        - Interface InvoiceListResult no longer has parameter totalCount
+        - Interface InvoiceSection no longer has parameter displayName
+        - Interface InvoiceSection no longer has parameter labels
+        - Interface InvoiceSection no longer has parameter state
+        - Interface InvoiceSection no longer has parameter systemId
+        - Interface InvoiceSection no longer has parameter targetCloud
+        - Interface InvoiceSectionListResult no longer has parameter totalCount
+        - Interface Product no longer has parameter autoRenew
+        - Interface Product no longer has parameter availabilityId
+        - Interface Product no longer has parameter billingFrequency
+        - Interface Product no longer has parameter billingProfileDisplayName
+        - Interface Product no longer has parameter billingProfileId
+        - Interface Product no longer has parameter customerDisplayName
+        - Interface Product no longer has parameter customerId
+        - Interface Product no longer has parameter displayName
+        - Interface Product no longer has parameter endDate
+        - Interface Product no longer has parameter invoiceSectionDisplayName
+        - Interface Product no longer has parameter invoiceSectionId
+        - Interface Product no longer has parameter lastCharge
+        - Interface Product no longer has parameter lastChargeDate
+        - Interface Product no longer has parameter productType
+        - Interface Product no longer has parameter productTypeId
+        - Interface Product no longer has parameter purchaseDate
+        - Interface Product no longer has parameter quantity
+        - Interface Product no longer has parameter reseller
+        - Interface Product no longer has parameter skuDescription
+        - Interface Product no longer has parameter skuId
+        - Interface Product no longer has parameter status
+        - Interface Product no longer has parameter tenantId
+        - Interface ProductsListByBillingAccountNextOptionalParams no longer has parameter filter
+        - Interface ProductsListByBillingProfileNextOptionalParams no longer has parameter filter
+        - Interface ProductsListByInvoiceSectionNextOptionalParams no longer has parameter filter
+        - Interface Reservation no longer has parameter id
+        - Interface Reservation no longer has parameter name
+        - Interface Reservation no longer has parameter type
+        - Interface Reservation no longer has parameter utilization
+        - Interface ReservationsListByBillingAccountNextOptionalParams no longer has parameter filter
+        - Interface ReservationsListByBillingAccountNextOptionalParams no longer has parameter orderby
+        - Interface ReservationsListByBillingAccountNextOptionalParams no longer has parameter refreshSummary
+        - Interface ReservationsListByBillingAccountNextOptionalParams no longer has parameter selectedState
+        - Interface ReservationsListByBillingAccountOptionalParams no longer has parameter orderby
+        - Interface ReservationsListByBillingProfileNextOptionalParams no longer has parameter filter
+        - Interface ReservationsListByBillingProfileNextOptionalParams no longer has parameter orderby
+        - Interface ReservationsListByBillingProfileNextOptionalParams no longer has parameter refreshSummary
+        - Interface ReservationsListByBillingProfileNextOptionalParams no longer has parameter selectedState
+        - Interface ReservationsListByBillingProfileOptionalParams no longer has parameter orderby
+        - Interface Transaction no longer has parameter azureCreditApplied
+        - Interface Transaction no longer has parameter azurePlan
+        - Interface Transaction no longer has parameter billingCurrency
+        - Interface Transaction no longer has parameter billingProfileDisplayName
+        - Interface Transaction no longer has parameter billingProfileId
+        - Interface Transaction no longer has parameter customerDisplayName
+        - Interface Transaction no longer has parameter customerId
+        - Interface Transaction no longer has parameter date
+        - Interface Transaction no longer has parameter discount
+        - Interface Transaction no longer has parameter effectivePrice
+        - Interface Transaction no longer has parameter exchangeRate
+        - Interface Transaction no longer has parameter invoice
+        - Interface Transaction no longer has parameter invoiceId
+        - Interface Transaction no longer has parameter invoiceSectionDisplayName
+        - Interface Transaction no longer has parameter invoiceSectionId
+        - Interface Transaction no longer has parameter kind
+        - Interface Transaction no longer has parameter marketPrice
+        - Interface Transaction no longer has parameter orderId
+        - Interface Transaction no longer has parameter orderName
+        - Interface Transaction no longer has parameter pricingCurrency
+        - Interface Transaction no longer has parameter productDescription
+        - Interface Transaction no longer has parameter productFamily
+        - Interface Transaction no longer has parameter productType
+        - Interface Transaction no longer has parameter productTypeId
+        - Interface Transaction no longer has parameter quantity
+        - Interface Transaction no longer has parameter servicePeriodEndDate
+        - Interface Transaction no longer has parameter servicePeriodStartDate
+        - Interface Transaction no longer has parameter subscriptionId
+        - Interface Transaction no longer has parameter subscriptionName
+        - Interface Transaction no longer has parameter subTotal
+        - Interface Transaction no longer has parameter tax
+        - Interface Transaction no longer has parameter transactionAmount
+        - Interface Transaction no longer has parameter transactionType
+        - Interface Transaction no longer has parameter unitOfMeasure
+        - Interface Transaction no longer has parameter units
+        - Interface Transaction no longer has parameter unitType
+        - Interface TransactionListResult no longer has parameter totalCount
+        - Type of parameter value of interface EnrollmentAccountListResult is changed from EnrollmentAccountSummary[] to EnrollmentAccount[]
+        - Type of parameter error of interface ErrorResponse is changed from ErrorDetails to ErrorDetail
+        - Type of parameter billingProfileSpendingLimit of interface InvoiceSectionWithCreateSubPermission is changed from SpendingLimitForBillingProfile to SpendingLimit
+        - Type of parameter billingProfileStatusReasonCode of interface InvoiceSectionWithCreateSubPermission is changed from StatusReasonCodeForBillingProfile to BillingProfileStatusReasonCode
+        - "Type of parameter rebillDetails of interface RebillDetails is changed from {\n        [propertyName: string]: RebillDetails;\n    } to RebillDetails"
+        - Type of parameter effectiveDateTime of interface Reservation is changed from string to Date
+        - Class BillingManagementClient no longer has parameter billingPeriods
+        - Class BillingManagementClient no longer has parameter billingRoleDefinitions
+        - Class BillingManagementClient no longer has parameter instructions
+        - Removed Enum KnownBillingFrequency
+        - Removed Enum KnownBillingProfileSpendingLimit
+        - Removed Enum KnownBillingSubscriptionStatusType
+        - Removed Enum KnownDocumentType
+        - Removed Enum KnownProductStatusType
+        - Removed Enum KnownProductTransferValidationErrorCode
+        - Removed Enum KnownReservationType
+        - Removed Enum KnownSpendingLimitForBillingProfile
+        - Removed Enum KnownStatusReasonCode
+        - Removed Enum KnownStatusReasonCodeForBillingProfile
+        - Removed Enum KnownTargetCloud
+        - Removed Enum KnownTransactionTypeKind
+        - Removed Enum KnownViewCharges
+        - Enum KnownInvoiceType no longer has value AzureService
+        - Enum KnownSubscriptionTransferValidationErrorCode no longer has value NotAvailableForDestinationMarket
+
