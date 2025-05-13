@@ -2758,11 +2758,6 @@
         "filter": {
           "type": "string",
           "description": "filter string for search resource."
-        },
-        "index_asset_id": {
-          "type": "string",
-          "description": "Index asset id for search resource.",
-          "x-ms-client-name": "indexAssetId"
         }
       },
       "required": [
@@ -3327,7 +3322,17 @@
         ]
       }
     },
-    "AzureAISearchResource": {
+    "AzureAISearchToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for an Azure AI search tool as used to configure an agent.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_search"
+    },
+    "AzureAISearchToolResource": {
       "type": "object",
       "description": "A set of index resources used by the `azure_ai_search` tool.",
       "properties": {
@@ -3342,16 +3347,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "AzureAISearchToolDefinition": {
-      "type": "object",
-      "description": "The input definition information for an Azure AI search tool as used to configure an agent.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "azure_ai_search"
     },
     "AzureFunctionBinding": {
       "type": "object",
@@ -3754,7 +3749,7 @@
           "x-ms-identifiers": []
         },
         "tool_resources": {
-          "$ref": "#/definitions/UpdateToolResourcesOptions",
+          "$ref": "#/definitions/ToolResources",
           "description": "Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis",
           "x-nullable": true,
           "x-ms-client-name": "toolResources"
@@ -3826,55 +3821,6 @@
       },
       "required": [
         "assistant_id"
-      ]
-    },
-    "CreateCodeInterpreterToolResourceOptions": {
-      "type": "object",
-      "description": "A set of resources that will be used by the `code_interpreter` tool. Request object.",
-      "properties": {
-        "file_ids": {
-          "type": "array",
-          "description": "A list of file IDs made available to the `code_interpreter` tool.",
-          "default": [],
-          "maxItems": 20,
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        }
-      }
-    },
-    "CreateFileSearchToolResourceOptions": {},
-    "CreateFileSearchToolResourceVectorStoreOptions": {
-      "type": "object",
-      "description": "File IDs associated to the vector store to be passed to the helper.",
-      "properties": {
-        "file_ids": {
-          "type": "array",
-          "description": "A list of file IDs to add to the vector store. There can be a maximum of 10000 files in a vector store.",
-          "maxItems": 10000,
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        },
-        "chunking_strategy": {
-          "$ref": "#/definitions/VectorStoreChunkingStrategyRequest",
-          "description": "The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.",
-          "x-ms-client-name": "chunkingStrategy"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "file_ids",
-        "chunking_strategy"
       ]
     },
     "CreateRunOptions": {
@@ -3989,27 +3935,6 @@
       "required": [
         "assistant_id"
       ]
-    },
-    "CreateToolResourcesOptions": {
-      "type": "object",
-      "description": "Request object. A set of resources that are used by the agent's tools. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
-      "properties": {
-        "code_interpreter": {
-          "$ref": "#/definitions/CreateCodeInterpreterToolResourceOptions",
-          "description": "A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files\nassociated with the tool.",
-          "x-ms-client-name": "codeInterpreter"
-        },
-        "file_search": {
-          "$ref": "#/definitions/CreateFileSearchToolResourceOptions",
-          "description": "A list of vector stores or their IDs made available to the `file_search` tool.",
-          "x-ms-client-name": "fileSearch"
-        },
-        "azure_ai_search": {
-          "$ref": "#/definitions/AzureAISearchResource",
-          "description": "Resources to be used by the `azure_ai_search` tool consisting of index IDs and names.",
-          "x-ms-client-name": "azureAISearch"
-        }
-      }
     },
     "DoneEvent": {
       "type": "string",
@@ -7301,7 +7226,7 @@
           }
         },
         "tool_resources": {
-          "$ref": "#/definitions/UpdateToolResourcesOptions",
+          "$ref": "#/definitions/ToolResources",
           "description": "Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis",
           "x-nullable": true,
           "x-ms-client-name": "toolResources"
@@ -7431,7 +7356,7 @@
           "x-ms-client-name": "fileSearch"
         },
         "azure_ai_search": {
-          "$ref": "#/definitions/AzureAISearchResource",
+          "$ref": "#/definitions/AzureAISearchToolResource",
           "description": "Resources to be used by the `azure_ai_search` tool consisting of index IDs and names.",
           "x-ms-client-name": "azureAISearch"
         }
@@ -7587,57 +7512,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "UpdateCodeInterpreterToolResourceOptions": {
-      "type": "object",
-      "description": "Request object to update `code_interpreted` tool resources.",
-      "properties": {
-        "file_ids": {
-          "type": "array",
-          "description": "A list of file IDs to override the current list of the agent.",
-          "maxItems": 20,
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        }
-      }
-    },
-    "UpdateFileSearchToolResourceOptions": {
-      "type": "object",
-      "description": "Request object to update `file_search` tool resources.",
-      "properties": {
-        "vector_store_ids": {
-          "type": "array",
-          "description": "A list of vector store IDs to override the current list of the agent.",
-          "maxItems": 1,
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "vectorStoreIds"
-        }
-      }
-    },
-    "UpdateToolResourcesOptions": {
-      "type": "object",
-      "description": "Request object. A set of resources that are used by the agent's tools. The resources are specific to the type of tool.\nFor example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of\nvector store IDs.",
-      "properties": {
-        "code_interpreter": {
-          "$ref": "#/definitions/UpdateCodeInterpreterToolResourceOptions",
-          "description": "Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files\nassociated with the tool.",
-          "x-ms-client-name": "codeInterpreter"
-        },
-        "file_search": {
-          "$ref": "#/definitions/UpdateFileSearchToolResourceOptions",
-          "description": "Overrides the vector store attached to this agent. There can be a maximum of 1 vector store attached to the agent.",
-          "x-ms-client-name": "fileSearch"
-        },
-        "azure_ai_search": {
-          "$ref": "#/definitions/AzureAISearchResource",
-          "description": "Overrides the resources to be used by the `azure_ai_search` tool consisting of index IDs and names.",
-          "x-ms-client-name": "azureAISearch"
         }
       }
     },
