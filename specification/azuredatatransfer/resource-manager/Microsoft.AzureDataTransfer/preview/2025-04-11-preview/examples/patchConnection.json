@@ -1,47 +1,49 @@
 {
   "parameters": {
+    "api-version": "2025-04-11-preview",
+    "connection": {},
     "connectionName": "testConnection",
     "resourceGroupName": "testRG",
-    "api-version": "2025-04-11-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "connection": {},
     "tags": {
       "tag": "value"
     }
   },
   "responses": {
-    "202": {
-      "headers": {
-        "location": "http://management.azure.com/subscriptions/12345/providers/Microsoft.AzureDataTransfer/locations/eastUS?api-version=2025-04-11-preview"
-      },
+    "200": {
       "body": {
-        "tags": {
-          "tag": "value"
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
         "type": "Microsoft.AzureDataTransfer/connections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
         "location": "East US",
         "properties": {
-          "pipeline": "testdc",
           "justification": "justification",
+          "pipeline": "testdc",
           "requirementId": "id"
+        },
+        "tags": {
+          "tag": "value"
         }
       }
     },
-    "200": {
+    "202": {
       "body": {
-        "tags": {
-          "tag": "value"
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
         "type": "Microsoft.AzureDataTransfer/connections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
         "location": "East US",
         "properties": {
-          "pipeline": "testdc",
           "justification": "justification",
+          "pipeline": "testdc",
           "requirementId": "id"
+        },
+        "tags": {
+          "tag": "value"
         }
+      },
+      "headers": {
+        "location": "http://management.azure.com/subscriptions/12345/providers/Microsoft.AzureDataTransfer/locations/eastUS?api-version=2025-04-11-preview"
       }
     }
-  }
+  },
+  "operationId": "Connections_Update",
+  "title": "Updates the connection resource"
 }

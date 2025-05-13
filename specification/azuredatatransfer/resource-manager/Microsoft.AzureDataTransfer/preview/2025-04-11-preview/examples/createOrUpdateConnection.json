@@ -1,42 +1,44 @@
 {
   "parameters": {
+    "api-version": "2025-04-11-preview",
+    "connection": {
+      "location": "East US",
+      "properties": {
+        "justification": "justification",
+        "pipeline": "testdc",
+        "requirementId": "id"
+      }
+    },
     "connectionName": "testConnection",
     "resourceGroupName": "testRG",
-    "api-version": "2025-04-11-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "connection": {
-      "properties": {
-        "pipeline": "testdc",
-        "justification": "justification",
-        "requirementId": "id"
-      },
-      "location": "East US"
-    }
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
         "type": "Microsoft.AzureDataTransfer/connections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
         "location": "East US",
         "properties": {
-          "pipeline": "testdc",
           "justification": "justification",
+          "pipeline": "testdc",
           "requirementId": "id"
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
         "type": "Microsoft.AzureDataTransfer/connections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
         "location": "East US",
         "properties": {
-          "pipeline": "testdc",
           "justification": "justification",
+          "pipeline": "testdc",
           "requirementId": "id"
         }
       }
     }
-  }
+  },
+  "operationId": "Connections_CreateOrUpdate",
+  "title": "Creates or updates the connection resource"
 }

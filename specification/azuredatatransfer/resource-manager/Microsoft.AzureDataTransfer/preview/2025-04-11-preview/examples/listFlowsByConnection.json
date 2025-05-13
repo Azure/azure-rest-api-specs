@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "resourceGroupName": "testRG",
-    "connectionName": "testConnection",
     "api-version": "2025-04-11-preview",
+    "connectionName": "testConnection",
+    "resourceGroupName": "testRG",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -11,34 +11,36 @@
         "value": [
           {
             "name": "testConnection",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
             "type": "Microsoft.AzureDataTransfer/connections/flows",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
             "location": "East US",
             "properties": {
-              "storageAccountName": "testsa",
-              "storageContainerName": "testcontainer",
-              "flowType": "Standard",
               "connection": {
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testFlow"
-              }
+              },
+              "flowType": "Standard",
+              "storageAccountName": "testsa",
+              "storageContainerName": "testcontainer"
             }
           },
           {
             "name": "testConnection2",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection2/flows/testFlow",
             "type": "Microsoft.AzureDataTransfer/connections/flows",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection2/flows/testFlow",
             "location": "East US",
             "properties": {
-              "storageAccountName": "testsa",
-              "storageContainerName": "testcontainer",
-              "flowType": "Standard",
               "connection": {
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testFlow"
-              }
+              },
+              "flowType": "Standard",
+              "storageAccountName": "testsa",
+              "storageContainerName": "testcontainer"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Flows_ListByConnection",
+  "title": "Gets flows in a connection"
 }
