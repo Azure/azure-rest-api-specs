@@ -142,35 +142,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults__deleted": {
-      "get": {
-        "operationId": "Vaults_ListBySubscriptionId",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/VaultList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "List of Recovery Services Resources in SubscriptionId": {
-            "$ref": "./examples/ListBySubscriptionIds.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/operationStatus/{operationId}__deleted": {
       "get": {
         "operationId": "GetOperationStatus",
@@ -398,35 +369,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults__added": {
+    "/providers/Microsoft.RecoveryServices/operations": {
       "get": {
-        "operationId": "Vaults_ListByResourceGroup",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/VaultList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List of Recovery Services Resources in ResourceGroup": {
-            "$ref": "./examples/ListResources.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "deprecated__deleted": false
       }
     },
-    "/providers/Microsoft.RecoveryServices/operations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
         "deprecated__deleted": false
       }
@@ -452,19 +400,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
-        "deprecated__deleted": false,
-        "operationId": {
-          "__old": "Vaults_ListByResourceGroup",
-          "__new": "Vaults_ListBySubscriptionId"
-        },
-        "x-ms-examples": {
-          "List of Recovery Services Resources in ResourceGroup__deleted": {
-            "$ref": "./examples/ListResources.json"
-          },
-          "List of Recovery Services Resources in SubscriptionId__added": {
-            "$ref": "./examples/ListBySubscriptionIds.json"
-          }
-        }
+        "deprecated__deleted": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}": {
@@ -985,15 +921,9 @@
       ]
     },
     "Vault": {
-      "required__added": [
-        "properties"
-      ],
       "properties": {
         "systemData__deleted": {
           "$ref": "#/definitions/systemData"
-        },
-        "properties": {
-          "x-ms-client-flatten__added": true
         }
       },
       "allOf": [

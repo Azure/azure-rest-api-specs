@@ -85,6 +85,34 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults": {
+      "get": {
+        "operationId": "Vaults_ListBySubscriptionId",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VaultList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Recovery Services Resources in SubscriptionId": {
+            "$ref": "./examples/ListBySubscriptionIds.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability": {
       "post": {
         "operationId": "RecoveryServices_CheckNameAvailability",
@@ -127,7 +155,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
-        "operationId": "Vaults_ListBySubscriptionId",
+        "operationId": "Vaults_ListByResourceGroup",
         "parameters": [],
         "responses": {
           "200": {
@@ -144,8 +172,8 @@
           }
         },
         "x-ms-examples": {
-          "List of Recovery Services Resources in SubscriptionId": {
-            "$ref": "./examples/ListBySubscriptionIds.json"
+          "List of Recovery Services Resources in ResourceGroup": {
+            "$ref": "./examples/ListResources.json"
           }
         },
         "x-ms-pageable": {
@@ -756,34 +784,6 @@
         "x-ms-examples": {
           "Gets vault usages": {
             "$ref": "./examples/ListUsages.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
-      "get": {
-        "operationId": "Vaults_ListByResourceGroup",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/VaultList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List of Recovery Services Resources in ResourceGroup": {
-            "$ref": "./examples/ListResources.json"
           }
         },
         "x-ms-pageable": {
@@ -1926,16 +1926,12 @@
           "$ref": "#/definitions/IdentityData"
         },
         "properties": {
-          "$ref": "#/definitions/VaultProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/VaultProperties"
         },
         "sku": {
           "$ref": "#/definitions/Sku"
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
