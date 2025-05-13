@@ -58,15 +58,13 @@ describe("execNpm", () => {
 
 describe("execNpmExec", () => {
   // A command run in the context of "npm exec --no -- ___" needs to call
-  // something referenced in dependencies or npm itself (which can be assumed
-  // to be present). In this case, "npm --version" works.
-
-  // Timeout of 30s because Windows can sometimes take a while to run npm exec
-  // in CI.
-  it("runs npm --version", { timeout: 30_000 }, async () => {
-    await expect(execNpmExec(["npm", "--version"])).resolves.toEqual({
-      stdout: expect.toSatisfy((v) => semver.valid(v)),
+  // something referenced in package.json. In this case, spec-model is present
+  // so it is used.
+  it("runs spec-model", async () => {
+    await expect(execNpmExec(["spec-model", "../../specification/contosowidgetmanager"])).resolves.toEqual({
+      stdout: expect.toSatisfy((v) => v.includes("readme")),
       stderr: "",
+      error: undefined,
     });
   });
 });
