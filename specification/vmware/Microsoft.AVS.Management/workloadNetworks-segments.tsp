@@ -91,6 +91,7 @@ model WorkloadNetworkSegmentProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Port Vif which segment is associated with.")
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   portVif?: WorkloadNetworkSegmentPortVif[];
 
   @doc("Segment status.")

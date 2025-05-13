@@ -1273,3 +1273,5 @@ union NodeTypeSkuScaleType {
    */
   Automatic: "Automatic",
 }
+
+@@identifiers(NodeTypeListSkuResult.value, #[]);

@@ -1709,6 +1709,7 @@ model GuestAgentInstallStatus {
   agentVersion?: string;
 
   @doc("Details about the error state.")
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail[];
 }
