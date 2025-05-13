@@ -59,69 +59,6 @@
     }
   ],
   "paths": {
-    "/{subscriptionId}/{resourceGroupName}/{provider}/{organizationName}/{apiKeyId}": {
-      "delete": {
-        "operationId": "Organization_DeleteClusterAPIKey",
-        "description": "Deletes API key of a kafka or schema registry cluster",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "provider",
-            "in": "path",
-            "description": "The provider namespace for the resource.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Microsoft.Confluent"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Organization resource name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "apiKeyId",
-            "in": "path",
-            "description": "Confluent API Key id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Organization_DeleteClusterAPIKey": {
-            "$ref": "./examples/Organization_DeleteClusterAPIKey.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Confluent/operations": {
       "get": {
         "operationId": "OrganizationOperations_List",
@@ -609,70 +546,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}/{provider}": {
-      "get": {
-        "operationId": "Organization_GetClusterAPIKey",
-        "description": "Get API key details of a kafka or schema registry cluster",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "provider",
-            "in": "path",
-            "description": "The provider namespace for the resource.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Microsoft.Confluent"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Organization resource name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "apiKeyId",
-            "in": "path",
-            "description": "Confluent API Key id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/APIKeyRecord"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Organization_GetClusterAPIKey": {
-            "$ref": "./examples/Organization_GetClusterAPIKey.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/createRoleBinding": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/createRoleBinding": {
       "post": {
         "operationId": "Access_CreateRoleBinding",
         "tags": [
@@ -727,7 +601,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/deleteRoleBinding/{roleBindingId}/{provider}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/deleteRoleBinding/{roleBindingId}": {
       "delete": {
         "operationId": "Access_DeleteRoleBinding",
         "description": "Organization role bindings",
@@ -740,19 +614,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "provider",
-            "in": "path",
-            "description": "The provider namespace for the resource.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Microsoft.Confluent"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
           },
           {
             "name": "organizationName",
@@ -786,6 +647,489 @@
         "x-ms-examples": {
           "Access_DeleteRoleBinding": {
             "$ref": "./examples/Access_DeleteRoleBinding.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listClusters": {
+      "post": {
+        "operationId": "Access_ListClusters",
+        "tags": [
+          "OrganizationResources"
+        ],
+        "description": "Cluster details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List Access Request Model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessListClusterSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_ClusterList": {
+            "$ref": "./examples/Access_ClusterList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listEnvironments": {
+      "post": {
+        "operationId": "Access_ListEnvironments",
+        "tags": [
+          "OrganizationResources"
+        ],
+        "description": "Environment list of an organization",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List Access Request Model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessListEnvironmentsSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_EnvironmentList": {
+            "$ref": "./examples/Access_EnvironmentList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listInvitations": {
+      "post": {
+        "operationId": "Access_ListInvitations",
+        "tags": [
+          "OrganizationResources"
+        ],
+        "description": "Organization accounts invitation details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List Access Request Model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessListInvitationsSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_InvitationsList": {
+            "$ref": "./examples/Access_InvitationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listRoleBindingNameList": {
+      "post": {
+        "operationId": "Access_ListRoleBindingNameList",
+        "tags": [
+          "OrganizationResources"
+        ],
+        "description": "Organization role bindings",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List Access Request Model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessRoleBindingNameListSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_RoleBindingNameList": {
+            "$ref": "./examples/Access_RoleBindingNameList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listRoleBindings": {
+      "post": {
+        "operationId": "Access_ListRoleBindings",
+        "tags": [
+          "OrganizationResources"
+        ],
+        "description": "Organization role bindings",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List Access Request Model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessListRoleBindingsSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_RoleBindingList": {
+            "$ref": "./examples/Access_RoleBindingList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listServiceAccounts": {
+      "post": {
+        "operationId": "Access_ListServiceAccounts",
+        "tags": [
+          "OrganizationResources"
+        ],
+        "description": "Organization service accounts details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List Access Request Model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessListServiceAccountsSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_ServiceAccountsList": {
+            "$ref": "./examples/Access_ServiceAccountsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listUsers": {
+      "post": {
+        "operationId": "Access_ListUsers",
+        "tags": [
+          "OrganizationResources"
+        ],
+        "description": "Organization users details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List Access Request Model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessListUsersSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_UsersList": {
+            "$ref": "./examples/Access_UsersList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}": {
+      "get": {
+        "operationId": "Organization_GetClusterAPIKey",
+        "description": "Get API key details of a kafka or schema registry cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiKeyId",
+            "in": "path",
+            "description": "Confluent API Key id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/APIKeyRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_GetClusterAPIKey": {
+            "$ref": "./examples/Organization_GetClusterAPIKey.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Organization_DeleteClusterAPIKey",
+        "description": "Deletes API key of a kafka or schema registry cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiKeyId",
+            "in": "path",
+            "description": "Confluent API Key id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_DeleteClusterAPIKey": {
+            "$ref": "./examples/Organization_DeleteClusterAPIKey.json"
           }
         }
       }
@@ -1024,7 +1368,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1037,66 +1381,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/{clusterId}/{clusterId}": {
-      "get": {
-        "operationId": "Organization_GetSchemaRegistryClusterById",
-        "tags": [
-          "SCEnvironmentRecords"
-        ],
-        "description": "Get schema registry cluster by Id",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Organization resource name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "environmentId",
-            "in": "path",
-            "description": "Confluent environment id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "clusterId",
-            "in": "path",
-            "description": "Confluent kafka or schema registry cluster id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SchemaRegistryClusterRecord"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Organization_GetSchemaRegistryClusterById": {
-            "$ref": "./examples/Organization_GetSchemaRegistryClusterById.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/clusters": {
@@ -2040,7 +2324,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2112,7 +2396,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
         },
@@ -2126,13 +2410,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/listClusters": {
-      "post": {
-        "operationId": "Access_ListClusters",
-        "tags": [
-          "OrganizationResources"
-        ],
-        "description": "Cluster details",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/schemaRegistryClusters/{clusterId}": {
+      "get": {
+        "operationId": "Organization_GetSchemaRegistryClusterById",
+        "description": "Get schema registry cluster by Id",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2151,130 +2432,25 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "List Access Request Model",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ListAccessRequestModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AccessListClusterSuccessResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Access_ClusterList": {
-            "$ref": "./examples/Access_ClusterList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/listEnvironments": {
-      "post": {
-        "operationId": "Access_ListEnvironments",
-        "tags": [
-          "OrganizationResources"
-        ],
-        "description": "Environment list of an organization",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
+            "name": "environmentId",
             "in": "path",
-            "description": "Organization resource name",
+            "description": "Confluent environment id",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "List Access Request Model",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ListAccessRequestModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AccessListEnvironmentsSuccessResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Access_EnvironmentList": {
-            "$ref": "./examples/Access_EnvironmentList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/listInvitations": {
-      "post": {
-        "operationId": "Access_ListInvitations",
-        "tags": [
-          "OrganizationResources"
-        ],
-        "description": "Organization accounts invitation details",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
+            "name": "clusterId",
             "in": "path",
-            "description": "Organization resource name",
+            "description": "Confluent connector name",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "List Access Request Model",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ListAccessRequestModel"
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AccessListInvitationsSuccessResponse"
+              "$ref": "#/definitions/SchemaRegistryClusterRecord"
             }
           },
           "default": {
@@ -2285,8 +2461,8 @@
           }
         },
         "x-ms-examples": {
-          "Access_InvitationsList": {
-            "$ref": "./examples/Access_InvitationsList.json"
+          "Organization_GetSchemaRegistryClusterById": {
+            "$ref": "./examples/Organization_GetSchemaRegistryClusterById.json"
           }
         }
       }
@@ -2342,226 +2518,6 @@
         "x-ms-examples": {
           "Organization_ListRegions": {
             "$ref": "./examples/Organization_ListRegions.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/listRoleBindingNameList": {
-      "post": {
-        "operationId": "Access_ListRoleBindingNameList",
-        "tags": [
-          "OrganizationResources"
-        ],
-        "description": "Organization role bindings",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Organization resource name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "List Access Request Model",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ListAccessRequestModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AccessRoleBindingNameListSuccessResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Access_RoleBindingNameList": {
-            "$ref": "./examples/Access_RoleBindingNameList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/listRoleBindings": {
-      "post": {
-        "operationId": "Access_ListRoleBindings",
-        "tags": [
-          "OrganizationResources"
-        ],
-        "description": "Organization role bindings",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Organization resource name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "List Access Request Model",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ListAccessRequestModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AccessListRoleBindingsSuccessResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Access_RoleBindingList": {
-            "$ref": "./examples/Access_RoleBindingList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/listServiceAccounts": {
-      "post": {
-        "operationId": "Access_ListServiceAccounts",
-        "tags": [
-          "OrganizationResources"
-        ],
-        "description": "Organization service accounts details",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Organization resource name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "List Access Request Model",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ListAccessRequestModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AccessListServiceAccountsSuccessResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Access_ServiceAccountsList": {
-            "$ref": "./examples/Access_ServiceAccountsList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/listUsers": {
-      "post": {
-        "operationId": "Access_ListUsers",
-        "tags": [
-          "OrganizationResources"
-        ],
-        "description": "Organization users details",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Organization resource name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "List Access Request Model",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ListAccessRequestModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AccessListUsersSuccessResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Access_UsersList": {
-            "$ref": "./examples/Access_UsersList.json"
           }
         }
       }
@@ -2769,10 +2725,12 @@
         },
         "secret": {
           "type": "string",
+          "format": "password",
           "description": "API Key Secret",
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "resource": {
           "$ref": "#/definitions/APIKeyResourceEntity",
@@ -2794,13 +2752,11 @@
         },
         "role_name": {
           "type": "string",
-          "description": "The name of the role to bind to the principal",
-          "x-ms-client-name": "roleName"
+          "description": "The name of the role to bind to the principal"
         },
         "crn_pattern": {
           "type": "string",
-          "description": "A CRN that specifies the scope and resource patterns necessary for the role to bind",
-          "x-ms-client-name": "crnPattern"
+          "description": "A CRN that specifies the scope and resource patterns necessary for the role to bind"
         }
       }
     },
@@ -2836,8 +2792,7 @@
         },
         "auth_type": {
           "type": "string",
-          "description": "Auth type of the user",
-          "x-ms-client-name": "authType"
+          "description": "Auth type of the user"
         }
       }
     },
@@ -3044,7 +2999,9 @@
         },
         "storageAccountKey": {
           "type": "string",
-          "description": "Azure Blob Storage Account Key"
+          "format": "password",
+          "description": "Azure Blob Storage Account Key",
+          "x-ms-secret": true
         },
         "storageContainerName": {
           "type": "string",
@@ -3168,8 +3125,7 @@
         },
         "resource_name": {
           "type": "string",
-          "description": "CRN reference to the referred resource",
-          "x-ms-client-name": "resourceName"
+          "description": "CRN reference to the referred resource"
         }
       }
     },
@@ -3201,8 +3157,7 @@
         },
         "resource_name": {
           "type": "string",
-          "description": "CRN reference to the referred resource",
-          "x-ms-client-name": "resourceName"
+          "description": "CRN reference to the referred resource"
         }
       }
     },
@@ -3224,8 +3179,7 @@
         },
         "resource_name": {
           "type": "string",
-          "description": "CRN reference to the referred resource",
-          "x-ms-client-name": "resourceName"
+          "description": "CRN reference to the referred resource"
         }
       }
     },
@@ -3265,8 +3219,7 @@
         },
         "display_name": {
           "type": "string",
-          "description": "Display name of the cluster",
-          "x-ms-client-name": "displayName"
+          "description": "Display name of the cluster"
         },
         "spec": {
           "$ref": "#/definitions/ClusterSpecEntity",
@@ -3284,8 +3237,7 @@
       "properties": {
         "display_name": {
           "type": "string",
-          "description": "The name of the cluster",
-          "x-ms-client-name": "displayName"
+          "description": "The name of the cluster"
         },
         "availability": {
           "type": "string",
@@ -3305,18 +3257,15 @@
         },
         "kafka_bootstrap_endpoint": {
           "type": "string",
-          "description": "The bootstrap endpoint used by Kafka clients to connect to the cluster",
-          "x-ms-client-name": "kafkaBootstrapEndpoint"
+          "description": "The bootstrap endpoint used by Kafka clients to connect to the cluster"
         },
         "http_endpoint": {
           "type": "string",
-          "description": "The cluster HTTP request URL.",
-          "x-ms-client-name": "httpEndpoint"
+          "description": "The cluster HTTP request URL."
         },
         "api_endpoint": {
           "type": "string",
-          "description": "The Kafka API cluster endpoint",
-          "x-ms-client-name": "apiEndpoint"
+          "description": "The Kafka API cluster endpoint"
         },
         "config": {
           "$ref": "#/definitions/ClusterConfigEntity",
@@ -3465,8 +3414,7 @@
         "total_size": {
           "type": "integer",
           "format": "int32",
-          "description": "Total size of the list",
-          "x-ms-client-name": "totalSize"
+          "description": "Total size of the list"
         }
       }
     },
@@ -3743,8 +3691,7 @@
         },
         "display_name": {
           "type": "string",
-          "description": "Display name of the user",
-          "x-ms-client-name": "displayName"
+          "description": "Display name of the user"
         }
       }
     },
@@ -3821,8 +3768,7 @@
         },
         "auth_type": {
           "type": "string",
-          "description": "Auth type of the user",
-          "x-ms-client-name": "authType"
+          "description": "Auth type of the user"
         },
         "status": {
           "type": "string",
@@ -3830,13 +3776,11 @@
         },
         "accepted_at": {
           "type": "string",
-          "description": "Accepted date time of the invitation",
-          "x-ms-client-name": "acceptedAt"
+          "description": "Accepted date time of the invitation"
         },
         "expires_at": {
           "type": "string",
-          "description": "Expiration date time of the invitation",
-          "x-ms-client-name": "expiresAt"
+          "description": "Expiration date time of the invitation"
         }
       }
     },
@@ -3921,7 +3865,9 @@
         },
         "apiSecret": {
           "type": "string",
-          "description": "Kafka API Secret"
+          "format": "password",
+          "description": "Kafka API Secret",
+          "x-ms-secret": true
         },
         "serviceAccountId": {
           "type": "string",
@@ -4028,7 +3974,9 @@
         },
         "apiSecret": {
           "type": "string",
-          "description": "Kafka API Secret"
+          "format": "password",
+          "description": "Kafka API Secret",
+          "x-ms-secret": true
         },
         "serviceAccountId": {
           "type": "string",
@@ -4076,7 +4024,9 @@
         },
         "apiSecret": {
           "type": "string",
-          "description": "Kafka API Key Secret"
+          "format": "password",
+          "description": "Kafka API Key Secret",
+          "x-ms-secret": true
         },
         "serviceAccountId": {
           "type": "string",
@@ -4119,10 +4069,12 @@
       "properties": {
         "token": {
           "type": "string",
+          "format": "password",
           "description": "User auth token",
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -4250,23 +4202,19 @@
         },
         "resource_name": {
           "type": "string",
-          "description": "Resource name of the record",
-          "x-ms-client-name": "resourceName"
+          "description": "Resource name of the record"
         },
         "created_at": {
           "type": "string",
-          "description": "Created Date Time",
-          "x-ms-client-name": "createdAt"
+          "description": "Created Date Time"
         },
         "updated_at": {
           "type": "string",
-          "description": "Updated Date time",
-          "x-ms-client-name": "updatedAt"
+          "description": "Updated Date time"
         },
         "deleted_at": {
           "type": "string",
-          "description": "Deleted Date time",
-          "x-ms-client-name": "deletedAt"
+          "description": "Deleted Date time"
         }
       }
     },
@@ -4706,13 +4654,11 @@
         },
         "role_name": {
           "type": "string",
-          "description": "The name of the role to bind to the principal",
-          "x-ms-client-name": "roleName"
+          "description": "The name of the role to bind to the principal"
         },
         "crn_pattern": {
           "type": "string",
-          "description": "A CRN that specifies the scope and resource patterns necessary for the role to bind",
-          "x-ms-client-name": "crnPattern"
+          "description": "A CRN that specifies the scope and resource patterns necessary for the role to bind"
         }
       }
     },
@@ -5055,8 +5001,7 @@
         },
         "display_name": {
           "type": "string",
-          "description": "Name of the service account",
-          "x-ms-client-name": "displayName"
+          "description": "Name of the service account"
         },
         "description": {
           "type": "string",
@@ -5228,13 +5173,11 @@
         },
         "full_name": {
           "type": "string",
-          "description": "Name of the user",
-          "x-ms-client-name": "fullName"
+          "description": "Name of the user"
         },
         "auth_type": {
           "type": "string",
-          "description": "Auth type of the user",
-          "x-ms-client-name": "authType"
+          "description": "Auth type of the user"
         }
       }
     },

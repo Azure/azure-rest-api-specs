@@ -58,10 +58,7 @@ interface SCEnvironmentRecords {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Environment_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    SCEnvironmentRecord,
-    Error = ResourceProviderDefaultErrorResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<SCEnvironmentRecord>;
 
   /**
    * Lists of all the environments in a organization
@@ -110,27 +107,50 @@ interface SCEnvironmentRecords {
        */
       @query("pageToken")
       pageToken?: string;
-    }
+    },
+    Error = ResourceProviderDefaultErrorResponse
   >;
+}
 
+interface SCEnvironmentRecordClusterOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+
+        /**
+         * Organization resource name
+         */
+        @path @segment("organizations") organizationName: string,
+
+        /**
+         * Confluent environment id
+         */
+        @path @segment("environments") environmentId: string,
+      },
+      {
+        /**
+         * Confluent connector name
+         */
+        @path @segment("schemaRegistryClusters") clusterId: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface SCEnvironmentRecordCluster {
   /**
    * Get schema registry cluster by Id
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{clusterId}")
   @operationId("Organization_GetSchemaRegistryClusterById")
-  getSchemaRegistryClusterById is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/schemaRegistryClusters/{clusterId}")
+  getSchemaRegistryClusterById is SCEnvironmentRecordClusterOps.ActionSync<
     SCEnvironmentRecord,
     void,
-    ArmResponse<SchemaRegistryClusterRecord>,
-    Parameters = {
-      /**
-       * Confluent kafka or schema registry cluster id
-       */
-      @path
-      clusterId: string;
-    }
+    ArmResponse<SchemaRegistryClusterRecord>
   >;
 }
 

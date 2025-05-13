@@ -26,27 +26,26 @@ model OrganizationResource
   >;
 }
 
-alias OrganizationResourcePath = {
-  ...ApiVersionParameter;
-  ...SubscriptionIdParameter;
-  ...ResourceGroupParameter;
-  ...Azure.ResourceManager.Legacy.Provider;
-  /**
-   * Organization resource name
-   */
-  @path @segment("organizations") organizationName: string;
-};
+interface OrganizationResourceAPIKeyOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
 
-interface OrganizationResourceAPIKeyOps extends Azure.ResourceManager.Legacy.LegacyOperations<
-  OrganizationResourcePath,
-  {
-    /**
-     * Confluent API Key id
-     */
-    @path @segment("apiKeys") apiKeyId: string,
-  },
-  ResourceProviderDefaultErrorResponse
-> {}
+        /**
+         * Organization resource name
+         */
+        @path @segment("organizations") organizationName: string,
+      },
+      {
+        /**
+         * Confluent API Key id
+         */
+        @path @segment("apiKeys") apiKeyId: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface OrganizationResourceAPIKeyActions {
@@ -69,6 +68,7 @@ interface OrganizationResourceAPIKeyActions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
   @operationId("Organization_DeleteClusterAPIKey")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
   deleteClusterAPIKey is OrganizationResourceAPIKeyOps.ActionSync<
     OrganizationResource,
     void,
@@ -76,16 +76,26 @@ interface OrganizationResourceAPIKeyActions {
   >;
 }
 
-interface OrganizationResourceRoleBindingIdOps extends Azure.ResourceManager.Legacy.LegacyOperations<
-  OrganizationResourcePath,
-  {
-    /**
-     * Confluent Role binding id
-     */
-    @path @segment("deleteRoleBinding") roleBindingId: string,
-  },
-  ResourceProviderDefaultErrorResponse
-> {}
+interface OrganizationResourceRoleBindingIdOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+
+        /**
+         * Organization resource name
+         */
+        @path @segment("organizations") organizationName: string,
+      },
+      {
+        /**
+         * Confluent Role binding id
+         */
+        @path @segment("deleteRoleBinding") roleBindingId: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
 
 interface OrganizationResourceRoleBindingIdActions {
   /**
@@ -180,13 +190,12 @@ interface OrganizationResources {
     Error = ResourceProviderDefaultErrorResponse
   >;
 
-  
-
   /**
    * Organization users details
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Access_ListUsers")
+  @action("access/default/listUsers")
   listUsers is ArmResourceActionSync<
     OrganizationResource,
     ListAccessRequestModel,
@@ -199,6 +208,7 @@ interface OrganizationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Access_ListServiceAccounts")
+  @action("access/default/listServiceAccounts")
   listServiceAccounts is ArmResourceActionSync<
     OrganizationResource,
     ListAccessRequestModel,
@@ -211,6 +221,7 @@ interface OrganizationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Access_ListInvitations")
+  @action("access/default/listInvitations")
   listInvitations is ArmResourceActionSync<
     OrganizationResource,
     ListAccessRequestModel,
@@ -236,6 +247,7 @@ interface OrganizationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Access_ListEnvironments")
+  @action("access/default/listEnvironments")
   listEnvironments is ArmResourceActionSync<
     OrganizationResource,
     ListAccessRequestModel,
@@ -248,6 +260,7 @@ interface OrganizationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Access_ListClusters")
+  @action("access/default/listClusters")
   listClusters is ArmResourceActionSync<
     OrganizationResource,
     ListAccessRequestModel,
@@ -260,6 +273,7 @@ interface OrganizationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Access_ListRoleBindings")
+  @action("access/default/listRoleBindings")
   listRoleBindings is ArmResourceActionSync<
     OrganizationResource,
     ListAccessRequestModel,
@@ -271,6 +285,7 @@ interface OrganizationResources {
    * Organization role bindings
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("access/default/createRoleBinding")
   @operationId("Access_CreateRoleBinding")
   createRoleBinding is ArmResourceActionSync<
     OrganizationResource,
@@ -279,13 +294,12 @@ interface OrganizationResources {
     Error = ResourceProviderDefaultErrorResponse
   >;
 
-  
-
   /**
    * Organization role bindings
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Access_ListRoleBindingNameList")
+  @action("access/default/listRoleBindingNameList")
   listRoleBindingNameList is ArmResourceActionSync<
     OrganizationResource,
     ListAccessRequestModel,

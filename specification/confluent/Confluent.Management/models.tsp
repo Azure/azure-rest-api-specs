@@ -523,6 +523,7 @@ model LinkOrganization {
    * User auth token
    */
   @visibility(Lifecycle.Create)
+  @secret
   token: string;
 }
 
@@ -1640,6 +1641,7 @@ model APIKeySpecEntity {
    * API Key Secret
    */
   @visibility(Lifecycle.Create)
+  @secret
   secret?: string;
 
   /**
@@ -1951,6 +1953,7 @@ model AzureBlobStorageSourceConnectorServiceInfo
   /**
    * Azure Blob Storage Account Key
    */
+  @secret
   storageAccountKey?: string;
 
   /**
@@ -2164,6 +2167,7 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Secret
    */
+  @secret
   apiSecret?: string;
 
   /**
@@ -2284,6 +2288,7 @@ model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Secret
    */
+  @secret
   apiSecret?: string;
 
   /**
@@ -2339,6 +2344,7 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key Secret
    */
+  @secret
   apiSecret?: string;
 
   /**

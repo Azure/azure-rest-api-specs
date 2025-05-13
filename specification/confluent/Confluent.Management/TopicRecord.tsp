@@ -52,8 +52,7 @@ interface TopicRecords {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Topics_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
-    TopicRecord,
-    Error = ResourceProviderDefaultErrorResponse
+    TopicRecord
   >;
 
   /**

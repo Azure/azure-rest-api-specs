@@ -60,6 +60,7 @@ interface Operations {
   @get
   list(
     ...ApiVersionParameter,
+
     @path
     @segment("providers")
     @doc("The provider namespace (this parameter will not show up in operations).")
