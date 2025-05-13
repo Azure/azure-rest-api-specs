@@ -53,6 +53,39 @@ model SolutionTemplateVersion
   ...EntityTagProperty;
 }
 
+@doc("Bulk deploy solution parameter")
+model BulkDeploySolutionParameter {
+  @doc("Targets")
+  @Azure.ResourceManager.identifiers(#[])
+  targets: BulkDeployTargetDetails[];
+
+  @doc("Solution instance name")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+  
+  @doc("Solution dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  solutionDependencies?: SolutionDependencyParameter[];
+}
+
+@doc("Bulk deploy target details")
+model BulkDeployTargetDetails {
+  @doc("ArmId of Target")
+  targetId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/Targets";
+    }
+  ]>;
+
+  @doc("Solution instance name")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+  
+  @doc("Solution dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  solutionDependencies?: SolutionDependencyParameter[];
+}
+
 @armResourceOperations
 interface SolutionTemplateVersions {
   @doc("Get a Solution Template Version Resource")
@@ -60,4 +93,10 @@ interface SolutionTemplateVersions {
 
   @doc("List Solution Template Version Resources")
   listBySolutionTemplate is ArmResourceListByParent<SolutionTemplateVersion>;
+  
+  @doc("Post request to bulk deploy")
+  bulkDeploySolution is ArmResourceActionNoResponseContentAsync<
+    SolutionTemplateVersion,
+    BulkDeploySolutionParameter
+  >;
 }
