@@ -40,6 +40,7 @@ interface Flows {
   /**
    * Updates the flow resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Prior OpenAPI2 Json spec provides the resource back in the LRO response."
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Flow,
