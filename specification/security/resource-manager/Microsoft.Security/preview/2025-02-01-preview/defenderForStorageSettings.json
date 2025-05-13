@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2024-10-01-preview"
+    "version": "2025-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -294,6 +294,28 @@
           "type": "string",
           "description": "Optional. Resource id of an Event Grid Topic to send scan results to."
         },
+        "blobScanResultsOptions": {
+          "type": "string",
+          "description": "Optional. Write scan result on blobIndexTags by default.",
+          "enum": [
+            "blobIndexTags",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "blobScanResultsOptions",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "blobIndexTags",
+                "description": "Write scan results on the blobs index tags."
+              },
+              {
+                "value": "None",
+                "description": "Do not write scan results on the blobs index tags."
+              }
+            ]
+          }
+        },
         "operationStatus": {
           "type": "object",
           "$ref": "#/definitions/OperationStatus",
@@ -314,9 +336,41 @@
           "type": "integer",
           "format": "int32",
           "description": "Defines the max GB to be scanned per Month. Set to -1 if no capping is needed."
+        },
+        "filters": {
+          "$ref": "#/definitions/OnUploadFilters",
+          "x-nullable": true,
+          "description": "Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type."
         }
       },
       "description": "Properties of On Upload malware scanning."
+    },
+    "OnUploadFilters": {
+      "type": "object",
+      "properties": {
+        "excludeBlobsWithPrefix": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional. A list of prefixes to exclude from on-upload malware scanning.\nFormat: `container-name/blob-name` (start with the container name; do not include the storage account name).\nExclude entire containers: Use prefix of container names you want to exclude without a trailing `/`.\nExclude a single container: Add a trailing slash `/` after the container name to avoid excluding other containers with similar prefixes."
+        },
+        "excludeBlobsWithSuffix": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional. A list of suffixes to exclude from on-upload malware scanning. Suffixes match only the end of blob names, and should be used for file extensions or blob name endings only."
+        },
+        "excludeBlobsLargerThan": {
+          "format": "int64",
+          "x-nullable": true,
+          "description": "Optional. Specifies the maximum size in bytes for blobs to be scanned. This parameter accepts a single positive integer value. Blobs larger than this value will be excluded from scanning."
+        }
+      },
+      "description": "Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type."
     },
     "SensitiveDataDiscoveryProperties": {
       "type": "object",
