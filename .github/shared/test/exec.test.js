@@ -2,6 +2,8 @@ import semver from "semver";
 import { describe, expect, it } from "vitest";
 import { execFile, execNpm, execNpmExec, isExecError } from "../src/exec.js";
 import { consoleLogger } from "../src/logger.js";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 describe("execFile", () => {
   const file = "node";
@@ -61,8 +63,9 @@ describe("execNpmExec", () => {
   // something referenced in package.json. In this case, spec-model is present
   // so it is used.
   it("runs spec-model", async () => {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     await expect(
-      execNpmExec(["spec-model", "test/fixtures/execNpmExec/"]),
+      execNpmExec(["spec-model", `${__dirname}/fixtures/execNpmExec/`]),
     ).resolves.toEqual({
       stdout: expect.toSatisfy((v) => v.includes("readme")),
       stderr: "",
