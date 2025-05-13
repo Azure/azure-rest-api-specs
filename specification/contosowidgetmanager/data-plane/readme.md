@@ -14,7 +14,16 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2022-12-01
+tag: package-2022-12-01-v1
+```
+
+### Tag: package-2022-12-01-v1
+
+These settings apply only when `--tag=package-2022-12-01-v1` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12-01-v1'
+input-file:
+  - Azure.Contoso.WidgetManager/stable/2022-12-01-v1/widgets.json
 ```
 
 ### Tag: package-2022-12-01
