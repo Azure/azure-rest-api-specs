@@ -189,7 +189,15 @@ model StreamSourceAddresses {
  */
 union ForceDisabledStatus {
   string,
+
+  /**
+   * This Flow has been disabled as the connection has been disabled.
+   */
   ConnectionForceDisabled: "ConnectionForceDisabled",
+
+  /**
+   * This Flow has been disabled as the flow type this flow uses has been disabled.
+   */
   FlowTypeForceDisabled: "FlowTypeForceDisabled",
 }
 
@@ -198,8 +206,33 @@ union ForceDisabledStatus {
  */
 union DataType {
   string,
+
+  /**
+   * The flow uses Azure Storage blobs to send or receive data.
+   */
   Blob: "Blob",
+
+  /**
+   * The flow uses Azure Storage tables to send or receive data.
+   */
   Table: "Table",
+}
+
+/**
+ * Status of the current flow.
+ */
+union FlowStatus {
+  string,
+
+  /**
+   * The flow is currently enabled and able to send or receive data.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * The flow is currently disabled and cannot send or receive data.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -253,12 +286,24 @@ model ApiFlowOptions {
 }
 
 /**
- * Billing tier for this messaging flow
+ * Billing tier for this messaging flow.
  */
 union FlowBillingTier {
   string,
+
+  /**
+   * Billing tier for messaging processing that charges based on how much data is transferred.
+   */
   BlobTransport: "BlobTransport",
+
+  /**
+   * Billing tier for standard messaging processing that charges based on having the messaging resource allocated.
+   */
   Standard: "Standard",
+
+  /**
+   * Billing tier for premium messaging processing that charges based on having the messaging resource allocated.
+   */
   Premium: "Premium",
 }
 
@@ -267,7 +312,15 @@ union FlowBillingTier {
  */
 union ApiMode {
   string,
+
+  /**
+   * The API flow will forward calls to a custom Software Development Kit implementation.
+   */
   SDK: "SDK",
+
+  /**
+   * The API flow will forward calls to a specified endpoint.
+   */
   Endpoint: "Endpoint",
 }
 
@@ -276,7 +329,16 @@ union ApiMode {
  */
 union IdentityTranslation {
   string,
+
+  /**
+   * The API flow will make use of the user identity that called this API flow, and pass that token
+   * through the boundary.
+   */
   UserIdentity: "UserIdentity",
+
+  /**
+   * The API flow will make use of the Azure Data Transfer Flow managed identity on the other side of the boundary.
+   */
   ServiceIdentity: "ServiceIdentity",
 }
 
@@ -389,7 +451,19 @@ model SetSourceAddresses {
  */
 union StreamProtocol {
   string,
+
+  /**
+   * This Flow is using User Datagram Protocol for the video stream.
+   */
   UDP: "UDP",
+
+  /**
+   * This Flow is using Secure Reliable Transfer for the video stream.
+   */
   SRT: "SRT",
+
+  /**
+   * This Flow is using Real-time Transport Protocol for the video stream.
+   */
   RTP: "RTP",
 }

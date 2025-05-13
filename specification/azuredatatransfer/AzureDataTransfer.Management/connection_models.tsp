@@ -31,7 +31,7 @@ model ConnectionProperties {
    * Status of the connection
    */
   @visibility(Lifecycle.Read)
-  status?: Status;
+  status?: ConnectionStatus;
 
   /**
    * Force disablement status of the current connection
@@ -166,10 +166,26 @@ model PendingFlow {
 /**
  * Status of the connection
  */
-union Status {
+union ConnectionStatus {
   string,
+
+  /**
+   * This connection has been created but is under review by the pipeline owner.
+   */
   InReview: "InReview",
+
+  /**
+   * This connection has been approved by the pipeline owner and is ready for use.
+   */
   Approved: "Approved",
+
+  /**
+   * This connection has been rejected by the pipeline owner and cannot be used.
+   */
   Rejected: "Rejected",
+
+  /**
+   * Creation of the connection has been accepted.
+   */
   Accepted: "Accepted",
 }

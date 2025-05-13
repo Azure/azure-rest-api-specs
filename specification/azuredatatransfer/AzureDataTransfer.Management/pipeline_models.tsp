@@ -72,6 +72,26 @@ model PipelineProperties {
   status?: PipelineStatus;
 }
 
+/**
+ * Status of the current pipeline
+ */
+union PipelineStatus {
+  string,
+
+  /**
+   * The pipeline is currently enabled and all child connection and flow resources below able to send or receive data.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * The pipeline is currently disabled and all child connection and flow resources below are unable to send or receive data.
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * An individual that would like to subscribe to events that occur on a pipeline.
+ */
 model Subscriber {
   /**
    * Email of the subscriber
@@ -218,7 +238,15 @@ model OperationStatusProperties {
  */
 union OperationStatusEnum {
   string,
+
+  /**
+   * The last patch request for this connection completed with an error.
+   */
   Failed: "Failed",
+
+  /**
+   * The last patch request for this connection completed.
+   */
   Succeeded: "Succeeded",
 }
 
@@ -247,6 +275,9 @@ model Action {
   justification?: string;
 }
 
+/**
+ * An array of connection id resources.
+ */
 model ConnectionIdList {
   /**
    * Connection ID to target
@@ -254,6 +285,9 @@ model ConnectionIdList {
   value?: string[];
 }
 
+/**
+ * An array of flow resources.
+ */
 model ListFlowsByPipelineResult {
   /**
    * List flows by pipeline result by connection
@@ -262,6 +296,9 @@ model ListFlowsByPipelineResult {
   value?: ListFlowsByPipelineConnection[];
 }
 
+/**
+ * A connection resource id in addition to all child flow resources under this connection.
+ */
 model ListFlowsByPipelineConnection {
   /**
    * ID of the connection.
@@ -279,7 +316,19 @@ model ListFlowsByPipelineConnection {
  */
 union TargetType {
   string,
+
+  /**
+   * The action executing is targeting a pipeline.
+   */
   Pipeline: "Pipeline",
+
+  /**
+   * The action executing is targeting a connection.
+   */
   Connection: "Connection",
+
+  /**
+   * The action executing is targeting a flow type.
+   */
   FlowType: "FlowType",
 }
