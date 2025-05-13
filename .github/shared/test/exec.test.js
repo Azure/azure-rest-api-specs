@@ -56,7 +56,7 @@ describe("execNpm", () => {
   });
 });
 
-describe("execNpmExec",  () => {
+describe("execNpmExec", () => {
   // A command run in the context of "npm exec --no -- ___" needs to call
   // something referenced in dependencies or npm itself (which can be assumed
   // to be present). In this case, "npm --version" works.
