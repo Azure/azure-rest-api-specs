@@ -8,7 +8,6 @@ import "./Connection.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureDataTransfer;
 /**
@@ -36,7 +35,7 @@ interface Flows {
   /**
    * Creates or updates the flow resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Flow>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Flow>;
 
   /**
    * Updates the flow resource.

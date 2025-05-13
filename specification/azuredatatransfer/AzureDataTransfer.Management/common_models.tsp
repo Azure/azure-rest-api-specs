@@ -87,3 +87,48 @@ union Direction {
   Send: "Send",
   Receive: "Receive",
 }
+
+/**
+ * The schema object.
+ */
+model Schema {
+  /**
+   * ID associated with this schema
+   */
+  id?: string;
+
+  /**
+   * Connection ID associated with this schema
+   */
+  connectionId?: string;
+
+  /**
+   * Status of the schema
+   */
+  status?: SchemaStatus;
+
+  /**
+   * Name of the schema
+   */
+  name?: string;
+
+  /**
+   * Content of the schema
+   */
+  content?: string;
+
+  /**
+   * The direction of the schema.
+   */
+  direction?: SchemaDirection;
+
+  /**
+   * Uri containing SAS token for the zipped schema
+   */
+  schemaUri?: url;
+
+  /**
+   * The Schema Type
+   */
+  schemaType?: SchemaType;
+}

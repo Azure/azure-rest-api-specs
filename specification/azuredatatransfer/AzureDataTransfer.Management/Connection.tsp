@@ -34,7 +34,7 @@ interface Connections {
   /**
    * Creates or updates the connection resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Connection>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Connection>;
 
   /**
    * Updates the connection resource.
