@@ -85,6 +85,7 @@ model BrokerPersistence {
   dynamicSettings?: BrokerPersistenceDynamicSettings;
 
   @doc("The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template. If a PVC template isn't specified Then local-path provisioner is requested with this size limit. Required.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   maxSize: string;
 
   @doc("""
@@ -92,6 +93,7 @@ model BrokerPersistence {
     
     If unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class.
     """)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   persistentVolumeClaimSpec?: VolumeClaimSpec;
 
   @doc("Controls which topic's retained messages should be persisted to disk.")

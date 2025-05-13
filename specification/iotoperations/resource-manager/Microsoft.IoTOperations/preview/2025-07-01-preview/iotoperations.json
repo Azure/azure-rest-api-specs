@@ -6153,11 +6153,19 @@
         },
         "maxSize": {
           "type": "string",
-          "description": "The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template. If a PVC template isn't specified Then local-path provisioner is requested with this size limit. Required."
+          "description": "The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template. If a PVC template isn't specified Then local-path provisioner is requested with this size limit. Required.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "persistentVolumeClaimSpec": {
           "$ref": "#/definitions/VolumeClaimSpec",
-          "description": "Use the specified persistent volume claim template to mount a persistent volume. Same object as in diskBackedMessageBuffer, but with a limitation that access modes field must be set to `ReadWriteOncePod`.\n\nIf unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class."
+          "description": "Use the specified persistent volume claim template to mount a persistent volume. Same object as in diskBackedMessageBuffer, but with a limitation that access modes field must be set to `ReadWriteOncePod`.\n\nIf unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "retain": {
           "$ref": "#/definitions/BrokerRetainMessagesPolicy",
