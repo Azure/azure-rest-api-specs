@@ -498,7 +498,7 @@ model UserInfo {
   /**
    * Email of the user used by Elastic for contacting them if needed
    */
-  // @pattern("^([^<>()\\[\\]\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\.,;:\\s@"]+)*)@(([a-zA-Z-_0-9]+\\.)+[a-zA-Z]{2,})$")
+  @pattern("^([^<>()\\[\\]\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\.,;:\\s@\"]+)*)@(([a-zA-Z-_0-9]+\\.)+[a-zA-Z]{2,})$")
   emailAddress?: string;
 
   /**
