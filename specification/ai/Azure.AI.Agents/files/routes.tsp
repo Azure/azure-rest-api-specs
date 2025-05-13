@@ -28,7 +28,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
-    listFiles is ServicePatterns.AgentOperation<
+    listFiles is AgentOperation<
       {
         @doc("The purpose of the file.")
         @query
@@ -51,7 +51,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
     @post
-    uploadFile is ServicePatterns.AgentOperation<
+    uploadFile is AgentOperation<
       {
         @doc("The name of the file to upload.")
         @header
@@ -92,7 +92,7 @@ namespace Azure.AI.Agents {
     @delete
     @doc("Delete a previously uploaded file.")
     @route("/{fileId}")
-    deleteFile is ServicePatterns.AgentOperation<
+    deleteFile is AgentOperation<
       {
         @doc("The ID of the file to delete.")
         @encodedName("application/json", "file_id")
@@ -113,7 +113,7 @@ namespace Azure.AI.Agents {
     @get
     @route("/{fileId}")
     @doc("Returns information about a specific file. Does not retrieve file content.")
-    getFile is ServicePatterns.AgentOperation<
+    getFile is AgentOperation<
       {
         @doc("The ID of the file to retrieve.")
         @path
@@ -131,7 +131,7 @@ namespace Azure.AI.Agents {
     @get
     @route("/{fileId}/content")
     @doc("Retrieves the raw content of a specific file.")
-    getFileContent is ServicePatterns.AgentOperation<
+    getFileContent is AgentOperation<
       {
         @doc("The ID of the file to retrieve.")
         @path

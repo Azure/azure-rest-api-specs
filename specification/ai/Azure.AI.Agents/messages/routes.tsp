@@ -31,7 +31,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
-    createMessage is ServicePatterns.AgentOperation<
+    createMessage is AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -83,7 +83,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
     @get
     @route("/{messageId}")
-    getMessage is ServicePatterns.AgentOperation<
+    getMessage is AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
@@ -108,7 +108,7 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @post
     @route("/{messageId}")
-    updateMessage is ServicePatterns.AgentOperation<
+    updateMessage is AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path
