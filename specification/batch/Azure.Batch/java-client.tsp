@@ -1882,12 +1882,12 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
   "BatchPoolUpdateParameters",
   "java"
 );
-@@clientName(Azure.Batch.BatchPoolEnableAutoScaleOptions,
-  "BatchPoolEnableAutoScaleParameters",
+@@clientName(Azure.Batch.BatchPoolAutoScaleEnableOptions,
+  "BatchPoolAutoScaleEnableParameters",
   "java"
 );
-@@clientName(Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
-  "BatchPoolEvaluateAutoScaleParameters",
+@@clientName(Azure.Batch.BatchPoolAutoScaleEvaluateOptions,
+  "BatchPoolAutoScaleEvaluateParameters",
   "java"
 );
 @@clientName(Azure.Batch.BatchPoolResizeOptions,

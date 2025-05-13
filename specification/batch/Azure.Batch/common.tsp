@@ -549,7 +549,7 @@ alias EnablePoolAutoscaleRequiredParameters = {
 
   @doc("The options to use for enabling automatic scaling.")
   @bodyRoot
-  enableAutoScaleOptions: BatchPoolEnableAutoScaleOptions;
+  enableAutoScaleOptions: BatchPoolAutoScaleEnableOptions;
 };
 
 alias EvaluatePoolAutoScaleRequiredParameters = {
@@ -559,7 +559,7 @@ alias EvaluatePoolAutoScaleRequiredParameters = {
 
   @doc("The options to use for evaluating the automatic scaling formula.")
   @bodyRoot
-  evaluateAutoScaleOptions: BatchPoolEvaluateAutoScaleOptions;
+  evaluateAutoScaleOptions: BatchPoolAutoScaleEvaluateOptions;
 };
 
 alias ResizePoolRequiredParameters = {

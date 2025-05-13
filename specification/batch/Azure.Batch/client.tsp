@@ -294,11 +294,11 @@ interface BatchClient {
   "go"
 );
 @@clientName(Azure.Batch.BatchPoolCreateOptions, "CreatePoolOptions", "go");
-@@clientName(Azure.Batch.BatchPoolEnableAutoScaleOptions,
+@@clientName(Azure.Batch.BatchPoolAutoScaleEnableOptions,
   "EnablePoolAutoScaleOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
+@@clientName(Azure.Batch.BatchPoolAutoScaleEvaluateOptions,
   "EvaluatePoolAutoScaleOptions",
   "go"
 );
@@ -329,7 +329,7 @@ interface BatchClient {
   "UpdateNodeUserOptions",
   "go"
 );
-@@clientName(Azure.Batch.DeleteBatchCertificateError,
+@@clientName(Azure.Batch.BatchCertificateDeleteError,
   "DeleteCertificateError",
   "go"
 );
