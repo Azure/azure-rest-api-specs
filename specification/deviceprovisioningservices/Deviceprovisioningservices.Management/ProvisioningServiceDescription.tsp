@@ -47,6 +47,53 @@ model ProvisioningServiceDescription
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+interface ProvisioningServiceDescriptionOperationOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+
+        /**
+         * Name of the provisioning service to retrieve.
+         */
+        @path
+        @segment("provisioningServices")
+        provisioningServiceName: string,
+      },
+      {
+        /**
+         * Operation id corresponding to long running operation. Use this to poll for the status.
+         */
+        @path
+        @segment("operationresults")
+        operationId: string,
+      },
+      ErrorDetails
+    > {}
+
+interface ProvisioningServiceDescriptionOperations {
+/**
+   * Gets the status of a long running operation, such as create, update or delete a provisioning service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @operationId("IotDpsResource_GetOperationResult")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/operationresults/{operationId}")
+  getOperationResult is ProvisioningServiceDescriptionOperationOps.ActionSync<
+    ProvisioningServiceDescription,
+    void,
+    ArmResponse<AsyncOperationResult>,
+    Parameters = {
+      /**
+       * Async header used to poll on the status of the operation, obtained while creating the long running operation.
+       */
+      @query("asyncinfo")
+      asyncinfo: string = "true";
+    }
+  >;
+}
+
 @armResourceOperations
 interface ProvisioningServiceDescriptions {
   /**
@@ -114,33 +161,6 @@ interface ProvisioningServiceDescriptions {
   @operationId("IotDpsResource_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     ProvisioningServiceDescription,
-    Error = ErrorDetails
-  >;
-
-  /**
-   * Gets the status of a long running operation, such as create, update or delete a provisioning service.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @get
-  @operationId("IotDpsResource_GetOperationResult")
-  getOperationResult is ArmResourceActionSync<
-    ProvisioningServiceDescription,
-    void,
-    ArmResponse<AsyncOperationResult>,
-    Parameters = {
-      /**
-       * Operation id corresponding to long running operation. Use this to poll for the status.
-       */
-      @path
-      @segment("operationresults")
-      operationId: string;
-
-      /**
-       * Async header used to poll on the status of the operation, obtained while creating the long running operation.
-       */
-      @query("asyncinfo")
-      asyncinfo: string = "true";
-    },
     Error = ErrorDetails
   >;
 

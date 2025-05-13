@@ -18,6 +18,7 @@ import "./ProvisioningServiceDescription.tsp";
 import "./GroupIdInformation.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./routes.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
