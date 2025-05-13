@@ -47,6 +47,7 @@ model ProvisioningServiceDescription
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 interface ProvisioningServiceDescriptionOperationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -72,6 +73,7 @@ interface ProvisioningServiceDescriptionOperationOps
       ErrorDetails
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 interface ProvisioningServiceDescriptionOperations {
   /**
    * Gets the status of a long running operation, such as create, update or delete a provisioning service.
