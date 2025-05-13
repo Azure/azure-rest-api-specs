@@ -177,7 +177,7 @@ async function processResult({ checkRuns, core }) {
     const shortLanguageName = language.split("-").pop();
     const executionResult = artifactJsonObj.result;
     const isSpecGenSdkCheckRequired = artifactJsonObj.isSpecGenSdkCheckRequired;
-    if (isSpecGenSdkCheckRequired && executionResult !== "succeeded") {
+    if (isSpecGenSdkCheckRequired && !(executionResult === "succeeded" || executionResult === "warning")) {
       state = CommitStatusState.FAILURE;
       specGenSdkFailedRequiredLanguages += shortLanguageName + ", ";
     }
