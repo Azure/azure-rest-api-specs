@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "serverName": "arm3",
+    "resourceGroupName": "s0403mllorentpimmy",
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "929287ae-832a-4946-8006-a6cc2a3f7244",
+    "tuningOption": "table",
+    "recommendationType": "AnalyzeTable"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "value": [
+              {
+                "kind": "",
+                "properties": {
+                  "initialRecommendedTime": "2025-04-11T22:36:02.861509Z",
+                  "lastRecommendedTime": "2025-04-11T22:36:02.861509Z",
+                  "timesRecommended": 1,
+                  "improvedQueryIds": [
+                    2071439792137543700,
+                    7860150533486302000,
+                    6411979446509506000,
+                    3219604056681277400,
+                    -360410933364310600,
+                    6171467644166225000,
+                    3548728559597612500,
+                    -4753875211349607000,
+                    -8711548294430095000
+                  ],
+                  "recommendationReason": "Table \"nation\" in schema \"public\" is unanalyzed and appears in the following queries: 2071439792137543669, 7860150533486301820, 6411979446509505239, 3219604056681277471, -360410933364310591, 6171467644166224729, 3548728559597612316, -4753875211349607298, -8711548294430094920",
+                  "recommendationType": "Analyze",
+                  "implementationDetails": {
+                    "method": "SQL",
+                    "script": "analyze table public.nation"
+                  },
+                  "analyzedWorkload": {
+                    "startTime": "2025-04-11T06:35:51.6076203Z",
+                    "endTime": "2025-04-11T18:35:51.6075453Z",
+                    "queryCount": 22
+                  },
+                  "estimatedImpact": [],
+                  "details": {
+                    "databaseName": "postgres",
+                    "schema": "public",
+                    "table": "nation"
+                  }
+                },
+                "id": "/subscriptions/929287ae-832a-4946-8006-a6cc2a3f7244/resourceGroups/s0403mllorentpimmy/providers/Microsoft.DBforPostgreSQL/flexibleServers/arm3/tuningOptions/table/recommendations/11",
+                "name": "Analyze_postgres_public_nation",
+                "type": "Microsoft.DBforPostgreSQL/flexibleServers/tuningOptions/table"
+              },
+              {
+                "kind": "",
+                "properties": {
+                  "initialRecommendedTime": "2025-04-11T22:36:02.865255Z",
+                  "lastRecommendedTime": "2025-04-11T22:36:02.865255Z",
+                  "timesRecommended": 1,
+                  "improvedQueryIds": [
+                    3219604056681277400,
+                    6171467644166225000,
+                    -4753875211349607000
+                  ],
+                  "recommendationReason": "Table \"region\" in schema \"public\" is unanalyzed and appears in the following queries: 3219604056681277471, 6171467644166224729, -4753875211349607298",
+                  "recommendationType": "Analyze",
+                  "implementationDetails": {
+                    "method": "SQL",
+                    "script": "analyze table public.region"
+                  },
+                  "analyzedWorkload": {
+                    "startTime": "2025-04-11T06:35:51.6076203Z",
+                    "endTime": "2025-04-11T18:35:51.6075453Z",
+                    "queryCount": 22
+                  },
+                  "estimatedImpact": [],
+                  "details": {
+                    "databaseName": "postgres",
+                    "schema": "public",
+                    "table": "region"
+                  }
+                },
+                "id": "/subscriptions/929287ae-832a-4946-8006-a6cc2a3f7244/resourceGroups/s0403mllorentpimmy/providers/Microsoft.DBforPostgreSQL/flexibleServers/arm3/tuningOptions/table/recommendations/12",
+                "name": "Analyze_postgres_public_region",
+                "type": "Microsoft.DBforPostgreSQL/flexibleServers/tuningOptions/table"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
