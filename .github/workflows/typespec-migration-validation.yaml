@@ -10,7 +10,7 @@ permissions:
 jobs:
   typespec-migration-validation:
     name: TypeSpec Migration Validation
-    if: contains(fromJSON('["true"]'), contains(toJSON(github.event.pull_request.labels.*.name), 'typespec-migration-'))
+    if: contains(fromJSON('["true"]'), contains(toJSON(github.event.pull_request.labels.*.name), 'typespec-conversion-'))
     runs-on: ubuntu-24.04
 
     steps:
