@@ -274,6 +274,10 @@
           "description": "Migration related configuration.",
           "$ref": "#/definitions/Migration"
         },
+        "bestPracticesAssessment": {
+          "description": "The configuration related to SQL best practices assessment.",
+          "$ref": "#/definitions/BestPracticesAssessment"
+        },
         "clientConnection": {
           "description": "Client connection related configuration.",
           "$ref": "#/definitions/ClientConnection"
@@ -550,6 +554,10 @@
         "migration": {
           "description": "Migration related configuration.",
           "$ref": "#/definitions/Migration"
+        },
+        "bestPracticesAssessment": {
+          "description": "The configuration related to SQL best practices assessment.",
+          "$ref": "#/definitions/BestPracticesAssessment"
         },
         "clientConnection": {
           "description": "Client connection related configuration.",
@@ -870,6 +878,19 @@
         },
         "impactedObjectsSummary": {
           "$ref": "./common.json#/definitions/ImpactedObjectsSuitabilitySummary"
+        }
+      }
+    },
+    "BestPracticesAssessment": {
+      "description": "The configuration related to SQL best practices assessment.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if SQL best practices assessment is enabled for the SQL Server instance."
+        },
+        "schedule": {
+          "$ref": "#/definitions/Schedule"
         }
       }
     },
@@ -1485,8 +1506,149 @@
         "rows"
       ]
     },
+    "SqlServerInstanceBpaRequest": {
+      "description": "The request for retrieving SQL best practices assessment results.",
+      "type": "object",
+      "properties": {
+        "reportType": {
+          "type": "string",
+          "description": "The report type that needs to be fetched. If not specified, the default is AssessmentSummary.",
+          "enum": [
+            "AssessmentDataPoint",
+            "AssessmentSummary"
+          ],
+          "x-ms-enum": {
+            "name": "SqlServerInstanceBpaReportType",
+            "modelAsString": true
+          }
+        },
+        "reportId": {
+          "type": "string",
+          "description": "The reportID to return best practices assessment results for. If not specified, the assessment summaries for all reports will be returned."
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "The opaque token to use to skip to a specific page of the report. If not specified, the first page will be returned."
+        }
+      }
+    },
+    "SqlServerInstanceBpaColumn": {
+      "description": "The SQL best practices assessment result column.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the result column."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the result column.",
+          "enum": [
+            "bool",
+            "datetime",
+            "int",
+            "long",
+            "double",
+            "string",
+            "guid",
+            "timespan"
+          ],
+          "x-ms-enum": {
+            "name": "SqlServerInstanceBpaColumnType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SqlServerInstanceBpaRow": {
+      "description": "An array of values representing a row in the SQL best practices assessment results.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "x-ms-identifiers": []
+    },
+    "SqlServerInstanceBpaResponse": {
+      "description": "A section of the SQL best practices assessment response.",
+      "type": "object",
+      "properties": {
+        "columns": {
+          "description": "The SQL best practices assessment response columns.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceBpaColumn"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "rows": {
+          "description": "An array of results of the SQL best practices assessment response.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceBpaRow"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of the best practices assessment response for the SQL Server instance. Null, if no more pages are available."
+        }
+      },
+      "required": [
+        "columns",
+        "rows"
+      ]
+    },
     "SqlServerInstanceRunMigrationAssessmentResponse": {
       "description": "The response for running migration assessment on the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the job."
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "The name of the SQL Server instance."
+        },
+        "jobStatus": {
+          "type": "string",
+          "description": "The status of the job.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "jobStatus",
+            "modelAsString": true
+          }
+        },
+        "jobException": {
+          "type": "string",
+          "description": "The exception message if the job failed."
+        },
+        "backgroundJob": {
+          "type": "object",
+          "description": "The background job details.",
+          "$ref": "#/definitions/BackgroundJob"
+        },
+        "sequencerActions": {
+          "type": "array",
+          "description": "The list of sequencer actions.",
+          "items": {
+            "$ref": "#/definitions/SequencerAction"
+          },
+          "x-ms-identifiers": [
+            "actionId"
+          ]
+        }
+      }
+    },
+    "SqlServerInstanceRunBestPracticesAssessmentResponse": {
+      "description": "The response object for the request to run SQL best practices assessment.",
       "type": "object",
       "properties": {
         "id": {
@@ -1863,6 +2025,37 @@
           "items": {
             "$ref": "./common.json#/definitions/EntraAuthentication"
           }
+        }
+      }
+    },
+    "Schedule": {
+      "description": "The scheduling configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether scheduling is enabled."
+        },
+        "cronTrigger": {
+          "$ref": "#/definitions/CronTrigger"
+        }
+      }
+    },
+    "CronTrigger": {
+      "description": "The cron trigger configuration.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "Indicates the start time for the trigger. The default value is the time at which the trigger was created."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone in which the trigger is scheduled."
+        },
+        "expression": {
+          "type": "string",
+          "description": "A cron string representing a CronTab expression. A crontab expression is a very compact way to express a recurring schedule with the following format: '{minutes} {hours} {days} {months} {days-of-week}'."
         }
       }
     }
