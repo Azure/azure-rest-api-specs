@@ -136,7 +136,7 @@ directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
     transform: >
-      $["x-ms-client-name"] = "SecurityPerimeterProxyResouce"
+      $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
       
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.Resource"
