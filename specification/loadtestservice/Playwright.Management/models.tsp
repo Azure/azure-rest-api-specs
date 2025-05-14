@@ -87,7 +87,7 @@ union QuotaNames {
 model FreeTrialProperties {
   @doc("The Playwright service workspace id.")
   @visibility(Lifecycle.Read)
-  workspaceId: string;
+  workspaceId: uuid;
 
   @doc("The free-trial state.")
   @visibility(Lifecycle.Read)
