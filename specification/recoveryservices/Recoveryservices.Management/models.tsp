@@ -1685,3 +1685,28 @@ model TrackedResource extends Resource {
 
 model ClientDiscoveryResponse
   is Azure.Core.Page<ClientDiscoveryValueForSingleApi>;
+
+@@doc(VaultPropertiesEncryption.infrastructureEncryption,
+  "Enabling/Disabling the Double Encryption state"
+);
+@@doc(VaultPropertiesMoveDetails.operationId,
+  "OperationId of the Resource Move Operation"
+);
+@@doc(VaultPropertiesMoveDetails.startTimeUtc,
+  "Start Time of the Resource Move Operation"
+);
+@@doc(VaultPropertiesMoveDetails.completionTimeUtc,
+  "End Time of the Resource Move Operation"
+);
+@@doc(VaultPropertiesMoveDetails.sourceResourceId,
+  "Source Resource of the Resource Move Operation"
+);
+@@doc(VaultPropertiesMoveDetails.targetResourceId,
+  "Target Resource of the Resource Move Operation"
+);
+@@doc(VaultPropertiesRedundancySettings.standardTierStorageRedundancy,
+  "The storage redundancy setting of a vault"
+);
+@@doc(VaultPropertiesRedundancySettings.crossRegionRestore,
+  "Flag to show if Cross Region Restore is enabled on the Vault or not"
+);

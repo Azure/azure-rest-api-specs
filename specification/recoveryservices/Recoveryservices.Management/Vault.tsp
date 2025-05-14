@@ -63,7 +63,80 @@ interface VaultOps
         NamePattern = ""
       >>
     > {}
+@armResourceOperations
+interface VaultOperationOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         *The name of the recovery services vault.
+         */
+        @segment("vaults")
+        @path
+        vaultName: string,
 
+        /**
+         * Certificate friendly name.
+         */
+        @path
+        @segment("certificates")
+        certificateName: string,
+      }
+    > {}
+
+@armResourceOperations
+interface VaultStatusOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         *The name of the recovery services vault.
+         */
+        @segment("vaults")
+        @path
+        vaultName: string,
+
+        @path
+        @segment("operationStatus")
+        operationId: string,
+      }
+    > {}
+
+@armResourceOperations
+interface VaultDeleteOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         *The name of the recovery services vault.
+         */
+        @segment("vaults")
+        @path
+        vaultName: string,
+
+        /**
+         * Name of the protection container to unregister.
+         */
+        @path
+        @segment("registeredIdentities")
+        identityName: string,
+      }
+    > {}
 @armResourceOperations
 interface Vaults {
   /**
@@ -123,19 +196,11 @@ interface Vaults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
-  @action("{certificateName}")
   @operationId("VaultCertificates_Create")
-  create is VaultOps.ActionSync<
+  create is VaultOperationOps.ActionNoAutoSync<
     Vault,
     CertificateRequest,
-    ArmResponse<VaultCertificateResponse>,
-    Parameters = {
-      /**
-       * Certificate friendly name.
-       */
-      @path
-      certificateName: string;
-    }
+    ArmResponse<VaultCertificateResponse>
   >;
 
   /**
@@ -143,19 +208,11 @@ interface Vaults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
-  @action("{identityName}")
   @operationId("RegisteredIdentities_Delete")
-  registeredIdentitiesDelete is VaultOps.ActionSync<
+  registeredIdentitiesDelete is VaultDeleteOps.ActionNoAutoSync<
     Vault,
     void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * Name of the protection container to unregister.
-       */
-      @path
-      identityName: string;
-    }
+    NoContentResponse
   >;
 
   /**
@@ -172,17 +229,11 @@ interface Vaults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{operationId}")
   @operationId("GetOperationStatus")
-  getOperationStatus is VaultOps.ActionSync<
+  getOperationStatus is VaultStatusOps.ActionNoAutoSync<
     Vault,
     void,
     ArmResponse<OperationResource>,
-    Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      @path
-      operationId: string;
-    },
     ErrorType = CloudError
   >;
 
@@ -251,6 +302,7 @@ interface GetOperationResult {
 @@doc(Vaults.update::parameters.properties,
   "Recovery Services Vault to be created."
 );
+
 @@doc(Vaults.create::parameters.body,
   "Input parameters for uploading the vault certificate."
 );

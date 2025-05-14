@@ -25,7 +25,6 @@ namespace Azure.ResourceManager.Legacy {
      */
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
     #suppress "shadow"
-    @autoRoute
     @doc("Create a {name}", Resource)
     @armResourceCreateOrUpdate(Resource)
     @Azure.Core.Foundations.Private.defaultFinalStateVia(#[
@@ -49,7 +48,6 @@ namespace Azure.ResourceManager.Legacy {
       ...Parameters,
       @doc("Resource create parameters.") @bodyRoot resource: Resource,
     ): Response | ErrorType;
-
     /**
      * @dev A synchronous resource CreateOrUpdate (PUT)
      * @template Resource the resource being created or updated
@@ -316,6 +314,34 @@ namespace Azure.ResourceManager.Legacy {
         "Resource operation accepted.",
         LroHeaders
       > | Result
+    >(
+      ...ParentParameters,
+      ...ResourceTypeParameter,
+      ...Parameters,
+
+      @doc("The content of the action request")
+      @bodyRoot
+      body: Request,
+    ): Response | ErrorType;
+
+    /**
+     * A synchronous resource action.
+     * @template Resource The resource being acted upon
+     * @template Request The request model for the action
+     * @template Response The response model for the action
+     * @template Parameters Optional. Additional parameters after the path parameters
+     */
+    #suppress "shadow"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+    @Private.enforceConstraint(Resource, Foundations.Resource)
+    @post
+    @returnsDoc("Azure operation completed successfully.")
+    ActionNoAutoSync<
+      Resource extends Foundations.Resource,
+      Request extends TypeSpec.Reflection.Model | void,
+      Response extends TypeSpec.Reflection.Model | void,
+      Parameters extends {} = {},
+      ErrorType extends {} = ErrorResponse
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
