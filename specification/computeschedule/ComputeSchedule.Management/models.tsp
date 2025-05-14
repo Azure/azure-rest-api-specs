@@ -137,11 +137,13 @@ model Resources {
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("baseProfile, Resource properties that common across all resources ")
-  baseProfile?: bytes;
+  baseProfile?: Record<unknown>;
 
-  @doc("resourceOverrides, properties per resource that needs to be overwritted from baseProfile")
-  resourceOverrides?: Array<bytes>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
+  @doc("resourceOverrides, properties per resource that needs to be overwritten from baseProfile")
+  resourceOverrides?: Record<unknown>[];
 
   @doc("Number of resources to be created")
   resourceCount: int32;
