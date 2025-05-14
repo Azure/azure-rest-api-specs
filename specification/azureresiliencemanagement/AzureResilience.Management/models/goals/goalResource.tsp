@@ -32,6 +32,12 @@ model GoalResourceProperties {
   @doc("Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation.")
   manuallyAttestedForDisasterRecovery: AttestationState;
 
+  @doc("Reason for exclusion from high availability goals.")
+  exclusionReasonForHighAvailabilityGoals: ExclusionReason;
+
+  @doc("Reason for exclusion from disaster recovery goals.")
+  exclusionReasonForDisasterRecoveryGoals: ExclusionReason;
+
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
