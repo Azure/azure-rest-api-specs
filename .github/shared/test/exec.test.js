@@ -60,14 +60,13 @@ describe("execNpm", () => {
 
 describe("execNpmExec", () => {
   // A command run in the context of "npm exec --no -- ___" needs to call
-  // something referenced in package.json. In this case, spec-model is present
+  // something referenced in package.json. In this case, js-yaml is present
   // so it is used.
-  it("runs spec-model", async () => {
-    const __dirname = dirname(fileURLToPath(import.meta.url));
+  it("runs js-yaml", async () => {
     await expect(
-      execNpmExec(["spec-model", `${__dirname}/fixtures/execNpmExec/`]),
+      execNpmExec(["js-yaml", "--version"]),
     ).resolves.toEqual({
-      stdout: expect.toSatisfy((v) => v.includes("readme")),
+      stdout: expect.toSatisfy((v) => semver.valid(v)),
       stderr: "",
       error: undefined,
     });
