@@ -192,7 +192,7 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // Internal overrides for operations & models
 // --------------------------------------------------------------------------------
-@@access(AgentV1Error, Access.internal);
+@@access(AgentV1Error, Access.internal, "python");
 @@clientName(AgentDeletionStatus, "InternalAgentDeletionStatus", "csharp");
 @@access(FileListResponse, Access.internal, "csharp");
 @@clientName(FileListResponse, "InternalFileListResponse", "csharp");
