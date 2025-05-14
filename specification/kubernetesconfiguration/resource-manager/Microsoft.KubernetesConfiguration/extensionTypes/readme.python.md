@@ -18,7 +18,7 @@ no-namespace-folders: true
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration-extensiontypes/azure/mgmt/kubernetesconfiguration/extensiontypes
 ```
 
-``` yaml !$(python)
+``` yaml $(python)
 modelerfour:
   flatten-models: false
 ```
