@@ -180,7 +180,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/{certificateName}/{certificateName}__added": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}__added": {
       "put": {
         "operationId": "VaultCertificates_Create",
         "parameters": [
@@ -201,7 +201,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CertificateRequest"
+              "$ref": "#/definitions/Vault"
             }
           }
         ],
@@ -226,7 +226,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/{identityName}/{identityName}__added": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/identityName/{identityName}__added": {
       "delete": {
         "operationId": "RegisteredIdentities_Delete",
         "parameters": [
@@ -261,7 +261,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/{operationId}/{operationId}__added": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/operationId/{operationId}__added": {
       "get": {
         "operationId": "GetOperationStatus",
         "parameters": [
@@ -496,6 +496,14 @@
     }
   },
   "definitions": {
+    "CertificateRequest__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawCertificateData"
+        }
+      }
+    },
     "ErrorAdditionalInfo__deleted": {
       "properties": {
         "info": {
@@ -505,6 +513,29 @@
         "type": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "RawCertificateData__deleted": {
+      "type": "object",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "ACS",
+            "AAD",
+            "AccessControlService",
+            "AzureActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": true
+          }
+        },
+        "certificate": {
+          "type": "string",
+          "format": "byte"
         }
       }
     },

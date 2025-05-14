@@ -323,6 +323,56 @@ namespace Azure.ResourceManager.Legacy {
       @bodyRoot
       body: Request,
     ): Response | ErrorType;
+
+    /**
+     * A synchronous resource action.
+     * @template Resource The resource being acted upon
+     * @template Request The request model for the action
+     * @template Response The response model for the action
+     * @template Parameters Optional. Additional parameters after the path parameters
+     */
+    #suppress "shadow"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+    @Private.enforceConstraint(Resource, Foundations.Resource)
+    @post
+    @returnsDoc("Azure operation completed successfully.")
+    ActionNoAutoSync<
+      Resource extends Foundations.Resource,
+      Request extends TypeSpec.Reflection.Model | void,
+      Response extends TypeSpec.Reflection.Model | void,
+      Parameters extends {} = {},
+      ErrorType extends {} = ErrorResponse
+    >(
+      ...ParentParameters,
+      ...ResourceTypeParameter,
+      ...Parameters,
+
+      @doc("The content of the action request")
+      @bodyRoot
+      body: Request,
+    ): Response | ErrorType;
+
+    /**
+     * @dev Delete a resource synchronously
+     * @template Resource The resource being deleted
+     * @template Parameters Optional. Additional parameters after the path parameters
+     * @template Response Optional. The success response(s) for the delete operation
+     */
+    #suppress "@azure-tools/typespec-azure-core/no-response-body" "Valid"
+    @autoRoute
+    @doc("Delete a {name}", Resource)
+    @delete
+    @deletesResource(Resource)
+    @armResourceDelete(Resource)
+    DeleteNoAutoSync<
+      Resource extends Azure.ResourceManager.CommonTypes.Resource,
+      Parameters extends {} = {},
+      Response extends {} = ArmDeletedResponse | ArmDeletedNoContentResponse
+    >(
+      ...ParentParameters,
+      ...ResourceTypeParameter,
+      ...Parameters,
+    ): Response | ErrorType;
   }
   /**
    * @dev Get the provider namespace key-value pair
