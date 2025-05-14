@@ -488,6 +488,9 @@ model ExecuteDeleteRequest {
 
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
+
+  @doc("Microsoft.Compute API version to target when calling delete endpoint.")
+  armApiVersion?: string;
 }
 
 // ----------- GetOperationStatus ---------
