@@ -65,7 +65,7 @@ model BaseExportModel {
   @doc("Mask sensitive attributes in the Terraform configuration")
   maskSensitive?: boolean = true;
 
-  @doc("Exclude resources from being exported based on the Azure resource ID pattern (case-insensitve regexp)")
+  @doc("Exclude resources from being exported based on the Azure resource ID pattern (case-insensitive regexp)")
   excludeAzureResource?: string[];
 
   @doc("Exclude resources from being exported based on the Terraform resource type")
