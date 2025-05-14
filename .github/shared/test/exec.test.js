@@ -2,8 +2,6 @@ import semver from "semver";
 import { describe, expect, it } from "vitest";
 import { execFile, execNpm, execNpmExec, isExecError } from "../src/exec.js";
 import { consoleLogger } from "../src/logger.js";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 
 describe("execFile", () => {
   const file = "node";
