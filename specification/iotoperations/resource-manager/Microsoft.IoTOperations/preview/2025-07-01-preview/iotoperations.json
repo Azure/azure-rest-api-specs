@@ -5309,8 +5309,29 @@
           "description": "Diagnostics settings for the AkriDiscoveryHandler."
         },
         "mode": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "Mode of the AkriDiscoveryHandler."
+          "type": "string",
+          "description": "Mode of the AkriDiscoveryHandler.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "OperationalMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled is equivalent to True"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled is equivalent to False."
+              }
+            ]
+          }
         },
         "discoverableDeviceEndpointTypes": {
           "type": "array",
@@ -8344,8 +8365,29 @@
       "description": "DataflowGraph properties.",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "The mode of the dataflow graph."
+          "type": "string",
+          "description": "The mode of the dataflow graph.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "OperationalMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled is equivalent to True"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled is equivalent to False."
+              }
+            ]
+          }
         },
         "requestDiskPersistence": {
           "$ref": "#/definitions/OperationalMode",

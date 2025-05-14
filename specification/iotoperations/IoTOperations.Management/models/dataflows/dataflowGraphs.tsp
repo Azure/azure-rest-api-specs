@@ -33,7 +33,7 @@ model DataflowGraphResource is ProxyResource<DataflowGraphProperties> {
 @added(Versions.`2025-07-01-preview`)
 model DataflowGraphProperties {
   /** The mode of the dataflow graph. */
-  mode?: OperationalMode;
+  mode?: OperationalMode = Enabled;
 
   /** Disk persistence mode. */
   requestDiskPersistence?: OperationalMode;

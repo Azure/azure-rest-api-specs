@@ -233,7 +233,7 @@ model AkriConnectorTemplateManagedConfiguration
 @discriminator("managedConfigurationType")
 model AkriConnectorTemplateManagedConfigurationSettings {
   /** The type of the managed configuration. */
-  managedConfigurationType: AkriConnectorTemplateManagedConfigurationType; // Property could be called `type` instead of `managedConfigurationType`.
+  managedConfigurationType: AkriConnectorTemplateManagedConfigurationType;
 
   /** Allocation settings for the managed configuration. */
   allocation?: AkriConnectorTemplateAllocation;

@@ -34,7 +34,6 @@ model AkriDiscoveryHandlerResource
 }
 
 /** AkriDiscoveryHandler properties. */
-// At the moment, the CRD properties are defined in snake_case. We should change them to camelCase to be consistent with the rest of the API.
 @added(Versions.`2025-07-01-preview`)
 model AkriDiscoveryHandlerProperties {
   /** The status of the last operation. */
@@ -52,7 +51,7 @@ model AkriDiscoveryHandlerProperties {
   diagnostics?: AkriDiscoveryHandlerDiagnostics;
 
   /** Mode of the AkriDiscoveryHandler. */
-  mode?: OperationalMode; // Right now in the CRD the property is called `enabled` but it should be `mode`. We should change it in the CRD to be consistent with the rest of the API.
+  mode?: OperationalMode = Enabled;
 
   /** Device inbound endpoint types. */
   @OpenAPI.extension("x-ms-identifiers", #["endpointType", "version"])
