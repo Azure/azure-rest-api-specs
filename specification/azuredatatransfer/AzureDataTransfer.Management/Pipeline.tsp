@@ -103,7 +103,9 @@ interface Pipelines {
   /**
    * Lists the schemas for the specified connection in a pipeline.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listSchemas")
+  @operationId("ListSchemas_List")
   listSchemasList is ArmResourceActionSync<
     Pipeline,
     Schema,
