@@ -62,7 +62,8 @@ model BingGroundingToolDefinition extends ToolDefinition {
 }
 
 @doc("The fabric data agent tool parameters.")
-@added(Versions.v2025_05_01)
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model FabricDataAgentToolParameters {
   /**
    * The connections attached to this tool. There can be a maximum of 1 connection
@@ -85,7 +86,8 @@ model MicrosoftFabricToolDefinition extends ToolDefinition {
 }
 
 @doc("The sharepoint grounding tool parameters.")
-@added(Versions.v2025_05_01)
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model SharepointGroundingToolParameters {
   /**
    * The connections attached to this tool. There can be a maximum of 1 connection
@@ -765,7 +767,8 @@ model BingGroundingSearchToolParameters {
 /**
  * The bing custom search tool parameters.
  */
-@added(Versions.v2025_05_01)
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model BingCustomSearchToolParameters {
   /**
    * The connections attached to this tool. There can be a maximum of 1 connection
