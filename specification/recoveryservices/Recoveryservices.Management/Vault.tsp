@@ -197,7 +197,7 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
   @operationId("VaultCertificates_Create")
-  create is VaultOperationOps.ActionNoErrorSync<
+  create is VaultOperationOps.ActionNoAutoSync<
     Vault,
     CertificateRequest,
     ArmResponse<VaultCertificateResponse>
@@ -209,7 +209,7 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
   @operationId("RegisteredIdentities_Delete")
-  registeredIdentitiesDelete is VaultDeleteOps.ActionNoErrorSync<
+  registeredIdentitiesDelete is VaultDeleteOps.ActionNoAutoSync<
     Vault,
     void,
     NoContentResponse
