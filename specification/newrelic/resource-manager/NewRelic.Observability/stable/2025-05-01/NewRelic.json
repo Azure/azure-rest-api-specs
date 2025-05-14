@@ -280,6 +280,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/validateAndActivateSaaS": {
+      "get": {
+        "tags": [
+          "SaaS"
+        ],
+        "operationId": "SaaS_List",
+        "description": "List and Activate the saas",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PublisherIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List and Activate SaaS completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaaSInfoListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ValidateAndActivateSaaS": {
+            "$ref": "./examples/ValidateAndActivateSaaS.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors": {
       "get": {
         "tags": [
@@ -1816,6 +1858,120 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/latestLinkedSaaS": {
+      "post": {
+        "tags": [
+          "LatestLinkedSaaS"
+        ],
+        "operationId": "Monitors_LatestLinkedSaaS",
+        "description": "Returns the latest SaaS linked to the newrelic organization of the underlying monitor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LatestLinkedSaaSResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_LatestLinkedSaaS_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_LatestLinkedSaaS_MaximumSet_Gen.json"
+          },
+          "Monitors_LatestLinkedSaaS_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_LatestLinkedSaaS_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/linkSaaS": {
+      "post": {
+        "tags": [
+          "LinkSaaS"
+        ],
+        "summary": "Links a new SaaS to the newrelic organization of the underlying monitor.",
+        "operationId": "Monitors_LinkSaaS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Link SaaS body parameter",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaaSData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResource"
+            }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Monitors_LinkSaaS": {
+            "$ref": "./examples/Monitors_LinkSaaS.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/resubscribe": {
       "post": {
         "tags": [
@@ -2317,6 +2473,11 @@
       "properties": {},
       "description": "Location for NewRelic resource"
     },
+    "PublisherIdParameter": {
+      "type": "object",
+      "properties": {},
+      "description": "Publisher Id for NewRelic resource"
+    },
     "LogRules": {
       "type": "object",
       "properties": {
@@ -2499,6 +2660,10 @@
         "planData": {
           "$ref": "#/definitions/PlanData",
           "description": "Plan details"
+        },
+        "saaSData": {
+          "$ref": "#/definitions/SaaSData",
+          "description": "SaaS details"
         },
         "liftrResourceCategory": {
           "$ref": "#/definitions/LiftrResourceCategories",
@@ -2731,6 +2896,10 @@
           "$ref": "#/definitions/PlanData",
           "description": "Plan details"
         },
+        "saaSData": {
+          "$ref": "#/definitions/SaaSData",
+          "description": "SaaS details"
+        },
         "orgCreationSource": {
           "$ref": "#/definitions/OrgCreationSource",
           "description": "Source of org creation"
@@ -2886,6 +3055,54 @@
         }
       },
       "description": "Plan data of NewRelic Monitor resource"
+    },
+    "SaaSData": {
+      "type": "object",
+      "properties": {
+        "saaSResourceId": {
+          "type": "string",
+          "description": "saas resource id"
+        }
+      },
+      "description": "SaaS details"
+    },
+    "SaaSInfo": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SaaSData",
+          "description": "The saas-resource properties"
+        }
+      },
+      "description": "Response of get SaaSInfo Operation.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SaaSInfoListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SaaSInfo"
+          },
+          "x-cadl-name": "SaaSInfo[]",
+          "description": "The SaaSInfo items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Response of get SaaS info operation.",
+      "required": [
+        "value"
+      ]
     },
     "PlanDataResource": {
       "type": "object",
@@ -3419,6 +3636,20 @@
       },
       "description": "User Info of NewRelic Monitor resource"
     },
+    "LatestLinkedSaaSResponse": {
+      "type": "object",
+      "properties": {
+        "saaSResourceId": {
+          "type": "string",
+          "description": "SaaS resource id"
+        },
+        "isHiddenSaaS": {
+          "type": "boolean",
+          "description": "Flag indicating if the SaaS resource is hidden"
+        }
+      },
+      "description": "Response of get latest linked SaaS resource operation"
+    },
     "VMExtensionPayload": {
       "type": "object",
       "properties": {
@@ -3530,6 +3761,14 @@
       "in": "query",
       "required": true,
       "description": "Location for NewRelic.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PublisherIdParameter": {
+      "name": "publisherId",
+      "in": "query",
+      "required": true,
+      "description": "PublisherId for NewRelic resource.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
