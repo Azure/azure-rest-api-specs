@@ -194,8 +194,8 @@ model ExportDependenciesRequest {
   filters?: DependencyMapVisualizationFilter;
 
   @added(Versions.v2025_05_01_preview)
-  @doc("Appliance Name")
-  applianceName?: string;
+  @doc("List of Appliance Names")
+  applianceNameList?: Array<string>;
 }
 
 @doc("A Discovery Source resource")
