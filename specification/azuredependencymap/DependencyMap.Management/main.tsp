@@ -195,7 +195,7 @@ model ExportDependenciesRequest {
 
   @added(Versions.v2025_05_01_preview)
   @doc("List of Appliance Names")
-  applianceNameList?: Array<string>;
+  applianceNameList?: string[];
 }
 
 @doc("A Discovery Source resource")
