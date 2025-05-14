@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -106,3 +107,7 @@ interface Connections {
 @@doc(Connections.createOrUpdate::parameters.resource, "Connection body");
 @@doc(Connections.update::parameters.properties, "Connection body");
 @@doc(Connections.link::parameters.body, "Connection body");
+
+@@clientName(Connections.createOrUpdate::parameters.resource, "connection");
+@@clientName(Connections.update::parameters.properties, "connection");
+@@clientName(Connections.link::parameters.body, "connection");

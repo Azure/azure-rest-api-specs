@@ -62,7 +62,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "pipeline",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -137,7 +137,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "schema",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -362,7 +362,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "resource",
+            "name": "connection",
             "in": "body",
             "description": "Connection body",
             "required": true,
@@ -424,7 +424,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "properties",
+            "name": "connection",
             "in": "body",
             "description": "Connection body",
             "required": true,
@@ -684,7 +684,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "resource",
+            "name": "flow",
             "in": "body",
             "description": "Flow body",
             "required": true,
@@ -756,7 +756,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "properties",
+            "name": "flow",
             "in": "body",
             "description": "Flow body",
             "required": true,
@@ -1379,7 +1379,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "body",
+            "name": "flow",
             "in": "body",
             "description": "Flow body",
             "required": true,
@@ -1465,7 +1465,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "body",
+            "name": "streamDestinationEndpointPorts",
             "in": "body",
             "description": "Stream ID destination endpoint ports wanted",
             "required": true,
@@ -1551,7 +1551,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "body",
+            "name": "streamDestinationEndpoints",
             "in": "body",
             "description": "Stream ID destination endpoints wanted",
             "required": true,
@@ -1637,7 +1637,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "body",
+            "name": "passphrase",
             "in": "body",
             "description": "Passphrase to set",
             "required": true,
@@ -1723,7 +1723,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "body",
+            "name": "sourceAddresses",
             "in": "body",
             "description": "Source addresses wanted",
             "required": true,
@@ -1799,7 +1799,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "body",
+            "name": "connection",
             "in": "body",
             "description": "Connection body",
             "required": true,
@@ -2068,7 +2068,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "resource",
+            "name": "pipeline",
             "in": "body",
             "description": "Pipeline body",
             "required": true,
@@ -2145,7 +2145,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "properties",
+            "name": "pipeline",
             "in": "body",
             "description": "Pipeline body",
             "required": true,
@@ -2286,7 +2286,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "body",
+            "name": "connection",
             "in": "body",
             "description": "Connection body",
             "required": true,
@@ -2357,7 +2357,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "body",
+            "name": "action",
             "in": "body",
             "description": "Action to execute",
             "required": true,
@@ -2491,7 +2491,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "body",
+            "name": "schema",
             "in": "body",
             "description": "Schema(s) to retrieve",
             "required": true,
@@ -2549,7 +2549,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
-            "name": "body",
+            "name": "connection",
             "in": "body",
             "description": "Connection body",
             "required": true,
@@ -3596,7 +3596,8 @@
             "description": "The last patch request for this connection completed."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "OperationStatusProperties": {
       "type": "object",
@@ -4319,7 +4320,8 @@
             "description": "Resource has been accepted for creation."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ResourceBody": {
       "type": "object",
@@ -4641,7 +4643,8 @@
             "description": "The schema failed validation, whether due to error or an invalid schema."
           }
         ]
-      }
+      },
+      "readOnly": true
     }
   },
   "parameters": {}

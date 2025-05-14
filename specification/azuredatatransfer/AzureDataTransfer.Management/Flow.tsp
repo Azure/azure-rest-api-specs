@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Connection.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -170,3 +172,14 @@ interface Flows {
 );
 @@doc(Flows.setPassphrase::parameters.body, "Passphrase to set");
 @@doc(Flows.setSourceAddresses::parameters.body, "Source addresses wanted");
+@@clientName(Flows.createOrUpdate::parameters.resource, "flow");
+@@clientName(Flows.update::parameters.properties, "flow");
+@@clientName(Flows.link::parameters.body, "flow");
+@@clientName(Flows.setDestinationEndpointPorts::parameters.body,
+  "streamDestinationEndpointPorts"
+);
+@@clientName(Flows.setDestinationEndpoints::parameters.body,
+  "streamDestinationEndpoints"
+);
+@@clientName(Flows.setPassphrase::parameters.body, "passphrase");
+@@clientName(Flows.setSourceAddresses::parameters.body, "sourceAddresses");

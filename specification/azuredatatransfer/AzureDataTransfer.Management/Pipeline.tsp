@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -132,3 +134,10 @@ interface Pipelines {
 @@doc(Pipelines.executeAction::parameters.body, "Action to execute");
 @@doc(Pipelines.listSchemasList::parameters.body, "Schema(s) to retrieve");
 @@doc(Pipelines.rejectConnection::parameters.body, "Connection body");
+
+@@clientName(Pipelines.createOrUpdate::parameters.resource, "pipeline");
+@@clientName(Pipelines.update::parameters.properties, "pipeline");
+@@clientName(Pipelines.approveConnection::parameters.body, "connection");
+@@clientName(Pipelines.rejectConnection::parameters.body, "connection");
+@@clientName(Pipelines.executeAction::parameters.body, "action");
+@@clientName(Pipelines.listSchemasList::parameters.body, "schema");

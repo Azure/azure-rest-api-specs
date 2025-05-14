@@ -4,11 +4,13 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureDataTransfer;
@@ -36,3 +38,8 @@ interface AzureDataTransfer {
     Response = ValidateSchemaResult
   >;
 }
+
+@@clientName(AzureDataTransfer.listApprovedSchemas::parameters.body,
+  "pipeline"
+);
+@@clientName(AzureDataTransfer.validateSchema::parameters.body, "schema");
