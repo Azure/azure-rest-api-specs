@@ -83,7 +83,7 @@ interface Connections {
   list is ArmResourceActionSync<
     Connection,
     void,
-    ArmResponse<ResourceListResult<PendingConnection>>
+    ArmResponse<ResourceListCustomResult<PendingConnection>>
   >;
 
   /**
@@ -95,7 +95,7 @@ interface Connections {
   listPendingFlowsList is ArmResourceActionSync<
     Connection,
     void,
-    ArmResponse<ResourceListResult<PendingFlow>>
+    ArmResponse<ResourceListCustomResult<PendingFlow>>
   >;
 }
 

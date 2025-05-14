@@ -15,7 +15,7 @@ import "./models.tsp";
 import "./Connection.tsp";
 import "./Pipeline.tsp";
 import "./Flow.tsp";
-import "./routes.tsp";
+import "./ProviderActions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

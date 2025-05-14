@@ -245,17 +245,6 @@ union ProvisioningState {
 }
 
 /**
- * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
- */
-union ManagedServiceIdentityType {
-  string,
-  None: "None",
-  SystemAssigned: "SystemAssigned",
-  UserAssigned: "UserAssigned",
-  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
-}
-
-/**
  * Operation status for the last patch request for this connection.
  */
 union OperationStatusEnum {
@@ -624,64 +613,6 @@ model ConnectionProperties {
 }
 
 /**
- * Managed service identity (system assigned and/or user assigned identities)
- */
-model ManagedServiceIdentity {
-  /**
-   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  principalId?: string;
-
-  /**
-   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  tenantId?: string;
-
-  /**
-   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
-   */
-  type: ManagedServiceIdentityType;
-
-  /**
-   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
-   */
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility(Lifecycle.Read)
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
-}
-
-/**
  * Properties of pipeline
  */
 model PipelineProperties {
@@ -864,15 +795,8 @@ model Subscriber {
  * The connections resource patch definition.
  */
 model ConnectionsPatch {
-  /**
-   * The managed service identities assigned to this resource.
-   */
-  identity?: ManagedServiceIdentity;
-
-  /**
-   * Resource tags.
-   */
-  tags?: Record<string>;
+  ...ManagedServiceIdentityProperty;
+  ...ArmTagsProperty;
 }
 
 /**
@@ -1161,16 +1085,10 @@ model Plan {
 /**
  * The flows resource patch definition.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Supressing rule to match prior OpenAPI v2 JSON specification, consideration is given on adding the ResourcePlanProperty in future updates."
 model FlowsPatch {
-  /**
-   * The managed service identities assigned to this resource.
-   */
-  identity?: ManagedServiceIdentity;
-
-  /**
-   * Resource tags.
-   */
-  tags?: Record<string>;
+  ...ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 /**
@@ -1261,6 +1179,8 @@ model SetSourceAddresses {
 /**
  * Pending connection object
  */
+// TODO: Next version can spread ...ConnectionProperties, cannot spread in this version due to "BreakingChange" in models.
+// TODO: Next version can possibly spread ...Azure.ResourceManager.TrackedResource<Connection>, cannot spread in this version due to "BreakingChange" in models.
 model PendingConnection {
   /**
    * Pipeline to use to transfer data
@@ -1337,7 +1257,6 @@ model PendingConnection {
    * The timestamp that this connection request was submitted at
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   dateSubmitted?: utcDateTime;
 
   /**
@@ -1376,10 +1295,7 @@ model PendingConnection {
    */
   properties?: Connection;
 
-  /**
-   * Resource tags.
-   */
-  tags?: Record<string>;
+  ...ArmTagsProperty;
 
   /**
    * The geo-location where the resource lives
@@ -1421,6 +1337,8 @@ model PendingConnection {
 /**
  * Pending flow object
  */
+// TODO: Next version can spread ...ConnectionProperties, cannot spread in this version due to "BreakingChange" in models.
+// TODO: Next version can possibly spread ...Azure.ResourceManager.TrackedResource<Flow>, cannot spread in this version due to "BreakingChange" in models.
 model PendingFlow {
   /**
    * The connection associated with this flow
@@ -1589,10 +1507,7 @@ model PendingFlow {
    */
   properties?: Flow;
 
-  /**
-   * Resource tags.
-   */
-  tags?: Record<string>;
+  ...ArmTagsProperty;
 
   /**
    * The geo-location where the resource lives
@@ -1646,15 +1561,8 @@ model PipelinesPatch {
    */
   properties?: PipelinesPatchProperties;
 
-  /**
-   * Resource tags.
-   */
-  tags?: Record<string>;
-
-  /**
-   * The managed service identities assigned to this resource.
-   */
-  identity?: ManagedServiceIdentity;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...ManagedServiceIdentityProperty;
 }
 
 /**
