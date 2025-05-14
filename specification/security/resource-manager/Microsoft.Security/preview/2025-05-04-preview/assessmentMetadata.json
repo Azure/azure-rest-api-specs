@@ -656,7 +656,12 @@
         "partnerData": {
           "$ref": "#/definitions/SecurityAssessmentMetadataPartnerData"
         }
-      }
+      },
+      "required": [
+        "displayName",
+        "severity",
+        "assessmentType"
+      ]
     },
     "SecurityAssessmentMetadataPartnerData": {
       "type": "object",
@@ -1212,61 +1217,56 @@
             }
           ]
         }
-      },
-      "riskFactors": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "description": "The factors of the risk adding base factor"
-      },
-      "level": {
-        "$ref": "#/definitions/RiskLevel",
-        "description": "The risk level"
-      },
-      "attackPathsReferences": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "description": "The attack paths references of the risk"
-      },
-      "paths": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/Path"
-        },
-        "description": "The paths that compose the risk"
-      },
-      "isContextualRisk": {
-        "type": "boolean",
-        "description": "Indicates if the risk is contextual or static"
       }
     },
-    "required": [
-      "displayName",
-      "severity",
-      "assessmentType"
-    ]
-  },
-  "parameters": {
-    "AssessmentsMetadataName": {
-      "name": "assessmentMetadataName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Assessment Key - Unique key for the assessment type",
-      "x-ms-parameter-location": "method"
-    },
-    "SecurityAssessmentMetadata": {
-      "name": "assessmentMetadata",
-      "in": "body",
-      "required": true,
-      "description": "AssessmentMetadata object",
-      "schema": {
-        "$ref": "#/definitions/SecurityAssessmentMetadata"
+    "riskFactors": {
+      "type": "array",
+      "items": {
+        "type": "string"
       },
-      "x-ms-parameter-location": "method"
+      "description": "The factors of the risk adding base factor"
+    },
+    "level": {
+      "$ref": "#/definitions/RiskLevel",
+      "description": "The risk level"
+    },
+    "attackPathsReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The attack paths references of the risk"
+    },
+    "paths": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Path"
+      },
+      "description": "The paths that compose the risk"
+    },
+    "isContextualRisk": {
+      "type": "boolean",
+      "description": "Indicates if the risk is contextual or static"
+    }
+  },
+    "parameters": {
+      "AssessmentsMetadataName": {
+        "name": "assessmentMetadataName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The Assessment Key - Unique key for the assessment type",
+        "x-ms-parameter-location": "method"
+      },
+      "SecurityAssessmentMetadata": {
+        "name": "assessmentMetadata",
+        "in": "body",
+        "required": true,
+        "description": "AssessmentMetadata object",
+        "schema": {
+          "$ref": "#/definitions/SecurityAssessmentMetadata"
+        },
+        "x-ms-parameter-location": "method"
+      }
     }
   }
-}
