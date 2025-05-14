@@ -107,7 +107,7 @@ interface VaultStatusOps
         vaultName: string,
 
         @path
-        @segment("operationId")
+        @segment("operationStatus")
         operationId: string,
       }
     > {}
@@ -133,7 +133,7 @@ interface VaultDeleteOps
          * Name of the protection container to unregister.
          */
         @path
-        @segment("identityName")
+        @segment("registeredIdentities")
         identityName: string,
       }
     > {}
@@ -197,9 +197,10 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
   @operationId("VaultCertificates_Create")
-  create is VaultOperationOps.CreateOrUpdateAsync<
+  create is VaultOperationOps.ActionNoErrorSync<
     Vault,
-    Response = ArmResponse<VaultCertificateResponse>
+    CertificateRequest,
+    ArmResponse<VaultCertificateResponse>
   >;
 
   /**
@@ -208,7 +209,7 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
   @operationId("RegisteredIdentities_Delete")
-  registeredIdentitiesDelete is VaultDeleteOps.ActionNoAutoSync<
+  registeredIdentitiesDelete is VaultDeleteOps.ActionNoErrorSync<
     Vault,
     void,
     NoContentResponse
@@ -302,6 +303,6 @@ interface GetOperationResult {
   "Recovery Services Vault to be created."
 );
 
-@@doc(Vaults.create::parameters.resource,
+@@doc(Vaults.create::parameters.body,
   "Input parameters for uploading the vault certificate."
 );

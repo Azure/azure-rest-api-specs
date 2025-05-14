@@ -142,44 +142,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/operationStatus/{operationId}__deleted": {
-      "get": {
-        "operationId": "GetOperationStatus",
-        "parameters": [
-          {
-            "name": "vaultName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OperationResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Operation Status": {
-            "$ref": "./examples/GetOperationStatus.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}__added": {
       "put": {
         "operationId": "VaultCertificates_Create",
@@ -201,7 +163,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Vault"
+              "$ref": "#/definitions/CertificateRequest"
             }
           }
         ],
@@ -210,12 +172,6 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/VaultCertificateResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -226,7 +182,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/identityName/{identityName}__added": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/registeredIdentities/{identityName}__added": {
       "delete": {
         "operationId": "RegisteredIdentities_Delete",
         "parameters": [
@@ -246,55 +202,11 @@
         "responses": {
           "204": {
             "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
           "Delete registered Identity": {
             "$ref": "./examples/DeleteRegisteredIdentities.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/operationId/{operationId}__added": {
-      "get": {
-        "operationId": "GetOperationStatus",
-        "parameters": [
-          {
-            "name": "vaultName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OperationResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Operation Status": {
-            "$ref": "./examples/GetOperationStatus.json"
           }
         }
       }
@@ -496,14 +408,6 @@
     }
   },
   "definitions": {
-    "CertificateRequest__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RawCertificateData"
-        }
-      }
-    },
     "ErrorAdditionalInfo__deleted": {
       "properties": {
         "info": {
@@ -513,29 +417,6 @@
         "type": {
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "RawCertificateData__deleted": {
-      "type": "object",
-      "properties": {
-        "authType": {
-          "type": "string",
-          "enum": [
-            "Invalid",
-            "ACS",
-            "AAD",
-            "AccessControlService",
-            "AzureActiveDirectory"
-          ],
-          "x-ms-enum": {
-            "name": "AuthType",
-            "modelAsString": true
-          }
-        },
-        "certificate": {
-          "type": "string",
-          "format": "byte"
         }
       }
     },
