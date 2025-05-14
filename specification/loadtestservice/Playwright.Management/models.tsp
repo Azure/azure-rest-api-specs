@@ -1,10 +1,14 @@
+import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Rest;
 
 namespace Playwright.Management;
+
+// Tracked Resource PlaywrightWorkspace Models ////////////////////
 
 @doc("Playwright workspace resource.")
 model PlaywrightWorkspace is TrackedResource<PlaywrightWorkspaceProperties> {
@@ -52,4 +56,104 @@ union EnablementStatus {
 
   @doc("The feature is Disabled.")
   Disabled: "Disabled",
+}
+
+// Proxy Resource Playwright Quota Models ////////////////////
+
+@doc("Subscription-level location-based Playwright quota resource.")
+@parentResource(ArmLocationResource)
+model PlaywrightQuota is ProxyResource<PlaywrightQuotaProperties> {
+  ...ResourceNameParameter<PlaywrightQuota, Type = QuotaName>;
+}
+
+@doc("Subscription-level location-based Playwright quota resource properties.")
+model PlaywrightQuotaProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The subscription-level location-based Playwright quota resource free-trial properties.")
+  freeTrial?: FreeTrialProperties;
+
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last resource operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Subscription-level location-based Playwright quota resource free-trial properties.")
+model FreeTrialProperties {
+  @visibility(Lifecycle.Read)
+  @doc("Playwright workspace-id that has free-trial in the subscription.")
+  workspaceId: uuid;
+
+  @visibility(Lifecycle.Read)
+  @doc("The free-trial state.")
+  state: FreeTrialState;
+}
+
+@doc("Playwright workspace quota resource.")
+@parentResource(PlaywrightWorkspace)
+model PlaywrightWorkspaceQuota
+  is ProxyResource<PlaywrightWorkspaceQuotaProperties> {
+  ...ResourceNameParameter<
+    PlaywrightWorkspaceQuota,
+    KeyName = "quotaName",
+    SegmentName = "quotas",
+    Type = QuotaName
+  >;
+}
+
+@doc("Playwright workspace quota resource properties.")
+model PlaywrightWorkspaceQuotaProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The Playwright workspace quota resource free-trial properties.")
+  freeTrial?: PlaywrightWorkspaceFreeTrialProperties;
+
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last resource operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Playwright workspace quota resource resource free-trial properties.")
+model PlaywrightWorkspaceFreeTrialProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The free-trial createdAt utcDateTime.")
+  createdAt: utcDateTime;
+
+  @visibility(Lifecycle.Read)
+  @doc("The free-trial expiryAt utcDateTime.")
+  expiryAt: utcDateTime;
+
+  @visibility(Lifecycle.Read)
+  @doc("The free-trial allocated limit value eg. allocated free execution minutes.")
+  allocatedValue: int32;
+
+  @visibility(Lifecycle.Read)
+  @doc("The free-trial used value eg. used free execution minutes.")
+  usedValue: int32;
+
+  @visibility(Lifecycle.Read)
+  @doc("The free-trial percentage used.")
+  @minValue(0)
+  @maxValue(100)
+  percentageUsed: float32;
+}
+
+@doc("Playwright quota names.")
+union QuotaName {
+  string,
+
+  @doc("Quota for execution duration in minutes.")
+  ExecutionMinutes: "ExecutionMinutes",
+}
+
+@doc("The free-trial state.")
+union FreeTrialState {
+  string,
+
+  @doc("The free-trial is Active.")
+  Active: "Active",
+
+  @doc("The free-trial is Expired.")
+  Expired: "Expired",
+
+  @doc("The free-trial is Not Applicable.")
+  NotApplicable: "NotApplicable",
 }
