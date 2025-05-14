@@ -676,7 +676,7 @@ namespace SkillContext
 	  description: string;
 
 	  @doc("The list of enums.")
-	  enum: Array<string>;
+	  `enum`: Array<string>;
 	}
 
 	@doc("Represents the result of a function.")
@@ -757,7 +757,7 @@ namespace SkillContext
 	  created: offsetDateTime; 
 
 	  @doc("The model used for completion.")
-	  model: string;
+	  `model`: string;
 
 	  @doc("The usage statistics for the response.")
 	  usage: unknown;
