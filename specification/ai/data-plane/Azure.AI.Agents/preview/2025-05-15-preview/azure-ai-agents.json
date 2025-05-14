@@ -3526,9 +3526,29 @@
         "instance_name"
       ]
     },
-    "BingCustomSearchConfigurationList": {
+    "BingCustomSearchToolDefinition": {
       "type": "object",
-      "description": "A list of search configurations currently used by the `bing_custom_search` tool.",
+      "description": "The input definition information for a Bing custom search tool as used to configure an agent.",
+      "properties": {
+        "bing_custom_search": {
+          "$ref": "#/definitions/BingCustomSearchToolParameters",
+          "description": "The bing custom search tool parameters.",
+          "x-ms-client-name": "bingCustomSearch"
+        }
+      },
+      "required": [
+        "bing_custom_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search"
+    },
+    "BingCustomSearchToolParameters": {
+      "type": "object",
+      "description": "The bing custom search tool parameters.",
       "properties": {
         "search_configurations": {
           "type": "array",
@@ -3544,26 +3564,6 @@
       "required": [
         "search_configurations"
       ]
-    },
-    "BingCustomSearchToolDefinition": {
-      "type": "object",
-      "description": "The input definition information for a Bing custom search tool as used to configure an agent.",
-      "properties": {
-        "bing_custom_search": {
-          "$ref": "#/definitions/BingCustomSearchConfigurationList",
-          "description": "The list of search configurations used by the bing custom search tool.",
-          "x-ms-client-name": "bingCustomSearch"
-        }
-      },
-      "required": [
-        "bing_custom_search"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "bing_custom_search"
     },
     "BingGroundingSearchConfiguration": {
       "type": "object",
@@ -3597,9 +3597,9 @@
         "connection_id"
       ]
     },
-    "BingGroundingSearchConfigurationList": {
+    "BingGroundingSearchToolParameters": {
       "type": "object",
-      "description": "A list of search configurations currently used by the `bing_grounding` tool.",
+      "description": "The bing grounding search tool parameters.",
       "properties": {
         "search_configurations": {
           "type": "array",
@@ -3621,8 +3621,8 @@
       "description": "The input definition information for a bing grounding search tool as used to configure an agent.",
       "properties": {
         "bing_grounding": {
-          "$ref": "#/definitions/BingGroundingSearchConfigurationList",
-          "description": "The list of search configurations used by the bing grounding tool."
+          "$ref": "#/definitions/BingGroundingSearchToolParameters",
+          "description": "The bing grounding search tool parameters."
         }
       },
       "required": [
@@ -4040,6 +4040,22 @@
             "description": "Event sent when an error occurs, such as an internal server error or a timeout."
           }
         ]
+      }
+    },
+    "FabricDataAgentToolParameters": {
+      "type": "object",
+      "description": "The fabric data agent tool parameters.",
+      "properties": {
+        "connections": {
+          "type": "array",
+          "description": "The connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ToolConnection"
+          },
+          "x-ms-client-name": "connectionList",
+          "x-ms-identifiers": []
+        }
       }
     },
     "FileDeletionStatus": {
@@ -5399,8 +5415,8 @@
       "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
       "properties": {
         "fabric_dataagent": {
-          "$ref": "#/definitions/ToolConnectionList",
-          "description": "The list of connections used by the Microsoft Fabric tool."
+          "$ref": "#/definitions/FabricDataAgentToolParameters",
+          "description": "The fabric data agent tool parameters."
         }
       },
       "required": [
@@ -6969,13 +6985,29 @@
         ]
       }
     },
+    "SharepointGroundingToolParameters": {
+      "type": "object",
+      "description": "The sharepoint grounding tool parameters.",
+      "properties": {
+        "connections": {
+          "type": "array",
+          "description": "The connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ToolConnection"
+          },
+          "x-ms-client-name": "connectionList",
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "SharepointToolDefinition": {
       "type": "object",
       "description": "The input definition information for a sharepoint tool as used to configure an agent.",
       "properties": {
         "sharepoint_grounding": {
-          "$ref": "#/definitions/ToolConnectionList",
-          "description": "The list of connections used by the SharePoint tool."
+          "$ref": "#/definitions/SharepointGroundingToolParameters",
+          "description": "The sharepoint grounding tool parameters."
         }
       },
       "required": [

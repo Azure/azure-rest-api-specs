@@ -3190,8 +3190,8 @@
         "function",
         "code_interpreter",
         "file_search",
+        "bing_grounding",
         "azure_ai_search",
-        "bing_custom_search",
         "connected_agent"
       ],
       "x-ms-enum": {
@@ -3214,14 +3214,14 @@
             "description": "Tool type `file_search`"
           },
           {
+            "name": "bingGrounding",
+            "value": "bing_grounding",
+            "description": "Tool type `bing_grounding`"
+          },
+          {
             "name": "azureAISearch",
             "value": "azure_ai_search",
             "description": "Tool type `azure_ai_search`"
-          },
-          {
-            "name": "bingCustomSearch",
-            "value": "bing_custom_search",
-            "description": "Tool type `bing_custom_search`"
           },
           {
             "name": "connectedAgent",
@@ -3508,9 +3508,9 @@
         "instance_name"
       ]
     },
-    "BingCustomSearchConfigurationList": {
+    "BingCustomSearchToolParameters": {
       "type": "object",
-      "description": "A list of search configurations currently used by the `bing_custom_search` tool.",
+      "description": "The bing custom search tool parameters.",
       "properties": {
         "search_configurations": {
           "type": "array",
@@ -3559,9 +3559,9 @@
         "connection_id"
       ]
     },
-    "BingGroundingSearchConfigurationList": {
+    "BingGroundingSearchToolParameters": {
       "type": "object",
-      "description": "A list of search configurations currently used by the `bing_grounding` tool.",
+      "description": "The bing grounding search tool parameters.",
       "properties": {
         "search_configurations": {
           "type": "array",
@@ -3583,8 +3583,8 @@
       "description": "The input definition information for a bing grounding search tool as used to configure an agent.",
       "properties": {
         "bing_grounding": {
-          "$ref": "#/definitions/BingGroundingSearchConfigurationList",
-          "description": "The list of search configurations used by the bing grounding tool."
+          "$ref": "#/definitions/BingGroundingSearchToolParameters",
+          "description": "The bing grounding search tool parameters."
         }
       },
       "required": [
@@ -4002,6 +4002,22 @@
             "description": "Event sent when an error occurs, such as an internal server error or a timeout."
           }
         ]
+      }
+    },
+    "FabricDataAgentToolParameters": {
+      "type": "object",
+      "description": "The fabric data agent tool parameters.",
+      "properties": {
+        "connections": {
+          "type": "array",
+          "description": "The connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ToolConnection"
+          },
+          "x-ms-client-name": "connectionList",
+          "x-ms-identifiers": []
+        }
       }
     },
     "FileDeletionStatus": {
@@ -6841,6 +6857,22 @@
             "description": "Event sent when a run is expired. The data of this event is of type ThreadRun"
           }
         ]
+      }
+    },
+    "SharepointGroundingToolParameters": {
+      "type": "object",
+      "description": "The sharepoint grounding tool parameters.",
+      "properties": {
+        "connections": {
+          "type": "array",
+          "description": "The connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ToolConnection"
+          },
+          "x-ms-client-name": "connectionList",
+          "x-ms-identifiers": []
+        }
       }
     },
     "SubmitToolOutputsAction": {

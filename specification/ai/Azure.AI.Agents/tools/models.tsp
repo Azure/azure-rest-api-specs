@@ -57,8 +57,20 @@ model BingGroundingToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'bing_grounding'.")
   type: "bing_grounding";
 
-  @doc("The list of search configurations used by the bing grounding tool.")
-  bing_grounding: BingGroundingSearchConfigurationList;
+  @doc("The bing grounding search tool parameters.")
+  bing_grounding: BingGroundingSearchToolParameters;
+}
+
+@doc("The fabric data agent tool parameters.")
+@added(Versions.v2025_05_01)
+model FabricDataAgentToolParameters {
+  /**
+   * The connections attached to this tool. There can be a maximum of 1 connection
+   * resource attached to the tool.
+   */
+  @maxItems(1)
+  @encodedName("application/json", "connections")
+  connectionList?: ToolConnection[];
 }
 
 @doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
@@ -68,8 +80,21 @@ model MicrosoftFabricToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'fabric_dataagent'.")
   type: "fabric_dataagent";
 
-  @doc("The list of connections used by the Microsoft Fabric tool.")
-  fabric_dataagent: ToolConnectionList;
+  @doc("The fabric data agent tool parameters.")
+  fabric_dataagent: FabricDataAgentToolParameters;
+}
+
+
+@doc("The sharepoint grounding tool parameters.")
+@added(Versions.v2025_05_01)
+model SharepointGroundingToolParameters {
+  /**
+   * The connections attached to this tool. There can be a maximum of 1 connection
+   * resource attached to the tool.
+   */
+  @maxItems(1)
+  @encodedName("application/json", "connections")
+  connectionList?: ToolConnection[];
 }
 
 @doc("The input definition information for a sharepoint tool as used to configure an agent.")
@@ -79,8 +104,8 @@ model SharepointToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'sharepoint_grounding'.")
   type: "sharepoint_grounding";
 
-  @doc("The list of connections used by the SharePoint tool.")
-  sharepoint_grounding: ToolConnectionList;
+  @doc("The sharepoint grounding tool parameters.")
+  sharepoint_grounding: SharepointGroundingToolParameters;
 }
 
 @doc("The input definition information for an Azure AI search tool as used to configure an agent.")
@@ -107,9 +132,9 @@ model BingCustomSearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'bing_custom_search'.")
   type: "bing_custom_search";
 
-  @doc("The list of search configurations used by the bing custom search tool.")
+  @doc("The bing custom search tool parameters.")
   @encodedName("application/json", "bing_custom_search")
-  bingCustomSearch: BingCustomSearchConfigurationList;
+  bingCustomSearch: BingCustomSearchToolParameters;
 }
 
 @doc("The input definition information for a connected agent tool which defines a domain specific sub-agent")
@@ -671,8 +696,6 @@ union AgentsNamedToolChoiceType {
   fileSearch: "file_search",
 
   /** Tool type `bing_grounding` */
-  @added(Versions.v2025_05_15_preview)
-  @removed(Versions.v1)
   bingGrounding: "bing_grounding",
 
   /** Tool type `fabric_dataagent` */
@@ -689,6 +712,8 @@ union AgentsNamedToolChoiceType {
   azureAISearch: "azure_ai_search",
 
   /** Tool type `bing_custom_search` */
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v1)
   bingCustomSearch: "bing_custom_search",
 
   /** Tool type `connected_agent` */
@@ -717,10 +742,10 @@ model ToolConnectionList {
 }
 
 /**
- * A list of search configurations currently used by the `bing_grounding` tool.
+ * The bing grounding search tool parameters.
  */
 @added(Versions.v2025_05_01)
-model BingGroundingSearchConfigurationList {
+model BingGroundingSearchToolParameters {
   /**
    * The connections attached to this tool. There can be a maximum of 1 connection
    * resource attached to the tool.
@@ -739,10 +764,10 @@ model BingGroundingSearchConfigurationList {
 }
 
 /**
- * A list of search configurations currently used by the `bing_custom_search` tool.
+ * The bing custom search tool parameters.
  */
 @added(Versions.v2025_05_01)
-model BingCustomSearchConfigurationList {
+model BingCustomSearchToolParameters {
   /**
    * The connections attached to this tool. There can be a maximum of 1 connection
    * resource attached to the tool.
