@@ -294,11 +294,11 @@ interface BatchClient {
   "go"
 );
 @@clientName(Azure.Batch.BatchPoolCreateOptions, "CreatePoolOptions", "go");
-@@clientName(Azure.Batch.BatchPoolAutoScaleEnableOptions,
+@@clientName(Azure.Batch.BatchPoolEnableAutoScaleOptions,
   "EnablePoolAutoScaleOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolAutoScaleEvaluateOptions,
+@@clientName(Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
   "EvaluatePoolAutoScaleOptions",
   "go"
 );
