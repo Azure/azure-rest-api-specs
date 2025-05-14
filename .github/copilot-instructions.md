@@ -14,22 +14,13 @@ npm ci
 
 2. `tsp-client` is installed as part of the dependencies specified at the root of this repository. To convert a swagger to typespec, run the following command: `npx tsp-client convert --swagger-readme <path to your readme>`
 3. Now that you have a newly converted typespec project, you should go through all files to verify the accuracy of the converted spec when compared to the original swagger definitions.
-4. You should update the implementation according to the information provided under the [Data-plane: Initial migration checklist](#data-plane-initial-migration-checklist) section.
+4. For both data plane and management plane specifications, you should update the implementation according to the information provided under the [Initial migration checklist](#initial-migration-checklist) section.
 
-### Data-plane: Initial migration checklist
+### Initial migration checklist
 
 The swagger converter will not be able to accurately represent every part of every API in TypeSpec. This document outlines some common changes you may need to make to a converted TypeSpec to make it conform to your existing service API, pass validation checks, and follow best practices.
 
 - Avoid extensive refactoring of the converted spec. The goal is to get a working spec that can compile successfully and then iteratively improve it.
-- A good example of a well structured data-plane spec is the [Contoso Widget Manager][contoso-widget-manager] spec. Use this as a reference for your own spec.
-- DO configure your tspconfig.yaml. Example of a well configured tspconfig.yaml file: [example tspconfig.yaml][tspconfig]
-- DO extend the `@azure-tools/typespec-azure-rulesets/data-plane` linter rule set in your tspconfig.yaml. Example:
-
-```yaml title=tspconfig.yaml
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
-```
 
 - DO ensure your `@service` and `@server` definitions are correct in main.tsp
 - DO use the built-in [url][url-type] for endpoint specification. Example:
@@ -107,7 +98,6 @@ model Widget {
 - Avoid suppressing warnings
 - Operation names should be camel case
 - DO use `union` instead of `enum` to define Azure enums. For more information about how to define enums for Azure services see the following documentation: [Defining enums for Azure services][no-enum].
-- Avoid importing or using templates from the `@azure-tools/typespec-azure-resource-manager` library in a data-plane specification
 - DO make client customizations in a `client.tsp` file
 - Avoid importing or using `@azure-tools/typespec-client-generator-core` in other files aside from client.tsp.
 - DO run `tsp compile .` on your specification and make one attempt to address all warnings. Do not attempt to address warnings more than once even if they aren't resolved.
