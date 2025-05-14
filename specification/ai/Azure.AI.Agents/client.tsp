@@ -190,8 +190,9 @@ using Azure.AI.Agents;
 );
 
 // --------------------------------------------------------------------------------
-// Internal C# overrides for operations & models
+// Internal overrides for operations & models
 // --------------------------------------------------------------------------------
+@@access(AgentV1Error, Access.internal);
 @@clientName(AgentDeletionStatus, "InternalAgentDeletionStatus", "csharp");
 @@access(FileListResponse, Access.internal, "csharp");
 @@clientName(FileListResponse, "InternalFileListResponse", "csharp");
