@@ -2848,6 +2848,32 @@
         "object"
       ]
     },
+    "AgentErrorDetail": {
+      "type": "object",
+      "description": "Describes the error information returned by the agents API.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Human-readable description of the error.",
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Error type identifier (e.g. `invalid_request_error`).",
+          "x-nullable": true
+        },
+        "param": {
+          "type": "string",
+          "description": "Name of the parameter that caused the error, if applicable.",
+          "x-nullable": true
+        },
+        "code": {
+          "type": "string",
+          "description": "Machine-readable error code.",
+          "x-nullable": true
+        }
+      }
+    },
     "AgentStreamEvent": {
       "type": "string",
       "description": "Each event in a server-sent events stream has an `event` and `data` property:\n\n```\nevent: thread.created\ndata: {\"id\": \"thread_123\", \"object\": \"thread\", ...}\n```\n\nWe emit events whenever a new object is created, transitions to a new state, or is being\nstreamed in parts (deltas). For example, we emit `thread.run.created` when a new run\nis created, `thread.run.completed` when a run completes, and so on. When an Agent chooses\nto create a message during a run, we emit a `thread.message.created event`, a\n`thread.message.in_progress` event, many `thread.message.delta` events, and finally a\n`thread.message.completed` event.\n\nWe may add additional events over time, so we recommend handling unknown events gracefully\nin your code.",
@@ -3090,26 +3116,8 @@
       "description": "Error payload returned by the agents API.",
       "properties": {
         "error": {
-          "type": "object",
-          "description": "Represents the error.",
-          "properties": {
-            "message": {
-              "type": "string",
-              "x-nullable": true
-            },
-            "type": {
-              "type": "string",
-              "x-nullable": true
-            },
-            "param": {
-              "type": "string",
-              "x-nullable": true
-            },
-            "code": {
-              "type": "string",
-              "x-nullable": true
-            }
-          }
+          "$ref": "#/definitions/AgentErrorDetail",
+          "description": "Represents the error."
         }
       },
       "required": [
