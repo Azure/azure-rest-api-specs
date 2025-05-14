@@ -1239,7 +1239,7 @@ model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
 /**
  * Represents the state of a deployment resources job.
  */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2023_04_15_preview)
 @clientName("TextAuthoringDeploymentResourcesState", "csharp")
 @resource("resources/assign/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)

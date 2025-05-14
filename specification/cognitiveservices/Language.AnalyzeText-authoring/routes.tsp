@@ -396,7 +396,7 @@ interface TextAuthoringProject {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2023_04_15_preview)
   getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -446,7 +446,7 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing assign deployment resources job.
    */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2023_04_15_preview)
   getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentResourcesJobState>;
 
   /**
