@@ -27,30 +27,6 @@ These are the global settings for the OnlineExperimentWorkspace.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-05-31-preview
-suppressions:
-  - code: AvoidAnonymousTypes
-    where:
-      - $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties["userAssignedIdentities"].additionalProperties
-    reason: Issue with common-types
-  - code: GuidUsage
-    where:
-      - $.definitions["Azure.Core.uuid"].format
-    reason: federatedClientId and delegatedIdentityClientId are common types and defined as guid.
-```
-
-### Tag: package-2025-05-31-preview
-
-These settings apply only when `--tag=package-2025-05-31-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-05-31-preview'
-input-file:
-  - Microsoft.OnlineExperimentation/preview/2025-05-31-preview/OnlineExperimentWorkspace.json
-```
-
-```yaml
-openapi-type: arm
-openapi-subtype: rpaas
 tag: package-2025-08-01-preview
 suppressions:
   - code: AvoidAnonymousTypes
@@ -70,6 +46,15 @@ These settings apply only when `--tag=package-2025-08-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-08-01-preview'
 input-file:
   - Microsoft.OnlineExperimentation/preview/2025-08-01-preview/OnlineExperimentWorkspace.json
+```
+
+### Tag: package-2025-05-31-preview
+
+These settings apply only when `--tag=package-2025-05-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-31-preview'
+input-file:
+  - Microsoft.OnlineExperimentation/preview/2025-05-31-preview/OnlineExperimentWorkspace.json
 ```
 
 ---
