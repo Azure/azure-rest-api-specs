@@ -219,7 +219,7 @@ op updatePoolCustomization is Azure.Batch.UpdateOperation<
 
 // Disable Pool Autoscale Operation
 @doc("Optional parameters for Disable Pool AutoScale operation.")
-model BatchPoolAutoScaleDisableOptions {
+model BatchPoolDisableAutoScaleOptions {
   ...Azure.Batch.CommonParameters;
 }
 
@@ -231,7 +231,7 @@ op disablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.DisablePoolAutoscaleRequiredParameters;
 
     @doc("Optional parameters for Disable Pool AutoScale operation.")
-    options?: BatchPoolAutoScaleDisableOptions;
+    options?: BatchPoolDisableAutoScaleOptions;
   },
   Azure.Batch.RequestSuccessResponseHeaders
 >;
