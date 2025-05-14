@@ -82,6 +82,12 @@
     },
     {
       "name": "DrillRunResources"
+    },
+    {
+      "name": "ChaosJobs"
+    },
+    {
+      "name": "ChaosJobResources"
     }
   ],
   "paths": {
@@ -693,6 +699,252 @@
         }
       }
     },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/chaosJobs": {
+      "get": {
+        "operationId": "ChaosJobs_List",
+        "tags": [
+          "ChaosJobs"
+        ],
+        "description": "List ChaosJob resources by DrillRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChaosJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChaosJobs_List_MaximumSet": {
+            "$ref": "./examples/ChaosJobs_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/chaosJobs/{chaosJobName}": {
+      "get": {
+        "operationId": "ChaosJobs_Get",
+        "tags": [
+          "ChaosJobs"
+        ],
+        "description": "Get a ChaosJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "chaosJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the chaos job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChaosJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChaosJobs_Get_MaximumSet": {
+            "$ref": "./examples/ChaosJobs_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/chaosJobs/{chaosJobName}/chaosJobResources": {
+      "get": {
+        "operationId": "ChaosJobResources_List",
+        "tags": [
+          "ChaosJobResources"
+        ],
+        "description": "List ChaosJobResource resources by ChaosJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "chaosJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the chaos job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChaosJobResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChaosJobResources_List_MaximumSet": {
+            "$ref": "./examples/ChaosJobResources_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/chaosJobs/{chaosJobName}/chaosJobResources/{chaosJobResourceName}": {
+      "get": {
+        "operationId": "ChaosJobResources_Get",
+        "tags": [
+          "ChaosJobResources"
+        ],
+        "description": "Get a ChaosJobResource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "chaosJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the chaos job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "chaosJobResourceName",
+            "in": "path",
+            "description": "The unique name (GUID) of the chaos job resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChaosJobResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChaosJobResources_Get_MaximumSet": {
+            "$ref": "./examples/ChaosJobResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/drillRunChildJobs": {
       "get": {
         "operationId": "DrillRunChildJobs_List",
@@ -781,7 +1033,7 @@
           {
             "name": "drillRunChildJobName",
             "in": "path",
-            "description": "The unique name (Guid) of the recovery child job",
+            "description": "The unique name (Guid) of the DrillRun child job",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
@@ -804,6 +1056,121 @@
         "x-ms-examples": {
           "DrillRunChildJobs_Get_MaximumSet": {
             "$ref": "./examples/DrillRunChildJobs_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/drillRunResources": {
+      "get": {
+        "operationId": "DrillRunResources_List",
+        "tags": [
+          "DrillRunResources"
+        ],
+        "description": "List DrillRunResource resources by DrillRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRunResources_List_MaximumSet": {
+            "$ref": "./examples/DrillRunResources_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/drillRunResources/{drillRunResourceName}": {
+      "get": {
+        "operationId": "DrillRunResources_Get",
+        "tags": [
+          "DrillRunResources"
+        ],
+        "description": "Get a DrillRunResource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunResourceName",
+            "in": "path",
+            "description": "The unique name (GUID) of the recovery job resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRunResources_Get_MaximumSet": {
+            "$ref": "./examples/DrillRunResources_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -978,121 +1345,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/recoveryJobResources": {
-      "get": {
-        "operationId": "DrillRunResources_List",
-        "tags": [
-          "DrillRunResources"
-        ],
-        "description": "List DrillRunResource resources by DrillRun",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ServiceGroupBaseParameters"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "drillName",
-            "in": "path",
-            "description": "The name of the Drill",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "drillRunName",
-            "in": "path",
-            "description": "The name of the DrillRun",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DrillRunResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DrillRunResources_List_MaximumSet": {
-            "$ref": "./examples/DrillRunResources_List_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/recoveryJobResources/{recoveryJobResourceName}": {
-      "get": {
-        "operationId": "DrillRunResources_Get",
-        "tags": [
-          "DrillRunResources"
-        ],
-        "description": "Get a DrillRunResource",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ServiceGroupBaseParameters"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "drillName",
-            "in": "path",
-            "description": "The name of the Drill",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "drillRunName",
-            "in": "path",
-            "description": "The name of the DrillRun",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "recoveryJobResourceName",
-            "in": "path",
-            "description": "The unique name (GUID) of the recovery job resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DrillRunResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DrillRunResources_Get_MaximumSet": {
-            "$ref": "./examples/DrillRunResources_Get_MaximumSet_Gen.json"
-          }
-        }
       }
     },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/reprotect": {
@@ -4768,6 +5020,112 @@
           "description": "Identity to be used by the Chaos Experiment for invoking faults on resources."
         }
       }
+    },
+    "ChaosJob": {
+      "type": "object",
+      "description": "ChaosJob a AzureResilienceProviderHub resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChaosJobProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChaosJobListResult": {
+      "type": "object",
+      "description": "The response of a ChaosJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChaosJob items on this page",
+          "items": {
+            "$ref": "#/definitions/ChaosJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChaosJobProperties": {
+      "type": "object",
+      "description": "Definition of Chaos job properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the recovery child job.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ChaosExperiment"
+    },
+    "ChaosJobResource": {
+      "type": "object",
+      "description": "Represents a chaos job resource in the Azure Resilience Management provider namespace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChaosJobResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChaosJobResourceListResult": {
+      "type": "object",
+      "description": "The response of a ChaosJobResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChaosJobResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ChaosJobResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChaosJobResourceProperties": {
+      "type": "object",
+      "description": "Properties of a Chaos job resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Drill Run Resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ChaosExperiment"
     },
     "ChildJobProperties": {
       "type": "object",

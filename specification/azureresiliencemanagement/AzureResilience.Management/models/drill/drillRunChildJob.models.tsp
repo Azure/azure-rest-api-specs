@@ -16,11 +16,14 @@ using OpenAPI;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
-// Define the main model
+/**
+ * Resource definition for the DrillRunChildJob resource.
+ * This resource represents a child job of a Drill Run in the Azure Resilience Management provider namespace.
+ */
 @parentResource(DrillRun)
 @doc("DrillRun Child Job a AzureResilienceProviderHub resource")
 model DrillRunChildJob is ProxyResource<DrillRunChildJobProperties> {
-  @doc("The unique name (Guid) of the recovery child job")
+  @doc("The unique name (Guid) of the DrillRun child job")
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   @key("drillRunChildJobName")
   @segment("drillRunChildJobs")

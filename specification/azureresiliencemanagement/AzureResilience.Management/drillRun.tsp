@@ -147,3 +147,23 @@ interface DrillRunResources {
   @route(ServiceGroupRoute)
   list is ArmResourceListByParent<DrillRunResource, ServiceGroupParameters>;
 }
+
+@armResourceOperations
+@doc("Operations for managing Chaos jobs.")
+interface ChaosJobs {
+  @route(ServiceGroupRoute)
+  get is ArmResourceRead<ChaosJob, ServiceGroupParameters>;
+
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<ChaosJob, ServiceGroupParameters>;
+}
+
+@armResourceOperations
+@doc("Operations for managing Chaos job resources.")
+interface ChaosJobResources {
+  @route(ServiceGroupRoute)
+  get is ArmResourceRead<ChaosJobResource, ServiceGroupParameters>;
+
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<ChaosJobResource, ServiceGroupParameters>;
+}

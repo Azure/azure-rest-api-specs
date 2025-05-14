@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../common/common.tsp";
 import "../common/Job.tsp";
-import "../common/JobResource.tsp";
+import "../common/ChildJob.tsp";
 import "./drillRun.models.tsp";
 
 using Azure.Core;
@@ -17,26 +17,26 @@ using OpenAPI;
 namespace Microsoft.AzureResilienceManagement;
 
 /**
- * Resource definition for the DrillRun Resources.
+ * Resource definition for the DrillRun Chaos job resource.
+ * This resource represents a child job of a Drill Run, corresponding to the Chaos stage.
  */
-@doc("Represents a Drill Run job resource in the Azure Resilience Management provider namespace.")
 @parentResource(DrillRun)
-model DrillRunResource is ProxyResource<DrillRunResourceProperties> {
-  @doc("The unique name (GUID) of the recovery job resource.")
+@doc("ChaosJob a AzureResilienceProviderHub resource")
+model ChaosJob is ProxyResource<ChaosJobProperties> {
+  @doc("The unique name (Guid) of the chaos job")
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  @key("drillRunResourceName")
-  @segment("drillRunResources")
+  @key("chaosJobName")
+  @segment("chaosJobs")
   @path
   name: string;
 }
 
-@doc("Properties of a Drill Run resource.")
-model DrillRunResourceProperties extends JobResourceProperties {
-  @doc("Discriminator for the Job object hierarchy.")
-  jobResourceType: JobResourceType.DrillRunChild;
+@doc("Definition of Chaos job properties.")
+model ChaosJobProperties extends JobProperties {
+  @doc("Discriminator for the Job Type hierarchy.")
+  jobType: JobType.ChaosExperiment;
 
-  @doc("The provisioning state of the Drill Run Resource.")
+  @doc("The provisioning state of the recovery child job.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
-

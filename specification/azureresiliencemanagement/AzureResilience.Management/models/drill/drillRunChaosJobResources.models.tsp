@@ -16,27 +16,27 @@ using OpenAPI;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
+
 /**
- * Resource definition for the DrillRun Resources.
+ * Resource definition for the Chaos job Resources.
  */
-@doc("Represents a Drill Run job resource in the Azure Resilience Management provider namespace.")
-@parentResource(DrillRun)
-model DrillRunResource is ProxyResource<DrillRunResourceProperties> {
-  @doc("The unique name (GUID) of the recovery job resource.")
+@doc("Represents a chaos job resource in the Azure Resilience Management provider namespace.")
+@parentResource(ChaosJob)
+model ChaosJobResource is ProxyResource<ChaosJobResourceProperties> {
+  @doc("The unique name (GUID) of the chaos job resource.")
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  @key("drillRunResourceName")
-  @segment("drillRunResources")
+  @key("chaosJobResourceName")
+  @segment("chaosJobResources")
   @path
   name: string;
 }
 
-@doc("Properties of a Drill Run resource.")
-model DrillRunResourceProperties extends JobResourceProperties {
+@doc("Properties of a Chaos job resource.")
+model ChaosJobResourceProperties extends JobResourceProperties {
   @doc("Discriminator for the Job object hierarchy.")
-  jobResourceType: JobResourceType.DrillRunChild;
+  jobResourceType: JobResourceType.ChaosExperiment;
 
   @doc("The provisioning state of the Drill Run Resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
-

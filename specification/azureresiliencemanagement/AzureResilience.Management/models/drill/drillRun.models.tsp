@@ -7,6 +7,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./enums.tsp";
 import "./drillRunChildJob.models.tsp";
 import "./drillRunResources.models.tsp";
+import "./drillRunChaosJob.models.tsp";
+import "./drillRunChaosJobResources.models.tsp";
 
 using Azure.Core;
 using TypeSpec.Http;
