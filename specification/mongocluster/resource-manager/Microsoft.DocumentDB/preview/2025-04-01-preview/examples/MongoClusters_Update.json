@@ -11,9 +11,13 @@
         "administrator": {
           "userName": "mongoAdmin"
         },
+        "authConfig": {
+          "allowedModes": ["NativeAuth"]
+        },
         "serverVersion": "5.0",
         "storage": {
-          "sizeGb": 256
+          "sizeGb": 256,
+          "type": "PremiumSSD"
         },
         "compute": {
           "tier": "M50"
@@ -25,7 +29,10 @@
           "targetMode": "SameZone"
         },
         "previewFeatures": [],
-        "publicNetworkAccess": "Enabled"
+        "publicNetworkAccess": "Enabled",
+        "dataApi": {
+          "mode": "Disabled"
+        }
       }
     }
   },
@@ -48,9 +55,13 @@
           "administrator": {
             "userName": "mongoAdmin"
           },
+          "authConfig": {
+            "allowedModes": ["NativeAuth"]
+          },
           "serverVersion": "5.0",
           "storage": {
-            "sizeGb": 256
+            "sizeGb": 256,
+            "type": "PremiumSSD"
           },
           "compute": {
             "tier": "M50"

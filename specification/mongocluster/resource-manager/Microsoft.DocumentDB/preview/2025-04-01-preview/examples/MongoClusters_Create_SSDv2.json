@@ -1,6 +1,6 @@
 {
   "operationId": "MongoClusters_CreateOrUpdate",
-  "title": "Creates a new Mongo Cluster resource.",
+  "title": "Creates a new Mongo Cluster resource with Premium SSDv2 storage.",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "TestResourceGroup",
@@ -18,7 +18,10 @@
         },
         "serverVersion": "5.0",
         "storage": {
-          "sizeGb": 128
+          "sizeGb": 32,
+          "type": "PremiumSSDv2",
+          "iops": 3000,
+          "throughput": 125
         },
         "compute": {
           "tier": "M30"
@@ -56,8 +59,10 @@
           },
           "serverVersion": "5.0",
           "storage": {
-            "sizeGb": 128,
-            "type": "PremiumSSD"
+            "sizeGb": 32,
+            "type": "PremiumSSDv2",
+            "iops": 3000,
+            "throughput": 125
           },
           "compute": {
             "tier": "M30"
@@ -108,8 +113,10 @@
           },
           "serverVersion": "5.0",
           "storage": {
-            "sizeGb": 128,
-            "type": "PremiumSSD"
+            "sizeGb": 32,
+            "type": "PremiumSSDv2",
+            "iops": 3000,
+            "throughput": 125
           },
           "compute": {
             "tier": "M30"
