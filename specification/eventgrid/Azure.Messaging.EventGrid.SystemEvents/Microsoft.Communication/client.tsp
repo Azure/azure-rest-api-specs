@@ -14,10 +14,76 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsUserDisconnectedEventData,
   Access.public
 );
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantAddedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantAddedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallingEventProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallingEventProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallGroupProperties, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallGroupProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallRoomProperties, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallRoomProperties, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedByProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndReasonProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndReasonProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantProperties,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedEventData,
   Usage.output
 );
 @@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatAzureBotCommandReceivedInThreadEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatAzureBotCommandReceivedInThreadEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatTypingIndicatorReceivedInThreadEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatTypingIndicatorReceivedInThreadEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedInThreadEventData,
@@ -503,6 +569,14 @@ using Azure.ClientGenerator.Core;
   Usage.output
 );
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRoleKind,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRoleKind,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
