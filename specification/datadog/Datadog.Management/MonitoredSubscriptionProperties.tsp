@@ -40,7 +40,8 @@ interface MonitoredSubscriptions {
     MonitoredSubscriptionProperties,
     Response = ArmResourceUpdatedResponse<MonitoredSubscriptionProperties> | ArmResourceCreatedResponse<
       MonitoredSubscriptionProperties,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 
