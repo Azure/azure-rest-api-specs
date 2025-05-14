@@ -224,6 +224,20 @@
           "type": "boolean",
           "description": "Mask sensitive attributes in the Terraform configuration",
           "default": true
+        },
+        "excludeAzureResource": {
+          "type": "array",
+          "description": "Exclude resources from being exported based on the Azure resource ID pattern (case-insensitive regexp)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeTerraformResource": {
+          "type": "array",
+          "description": "Exclude resources from being exported based on the Terraform resource type",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "discriminator": "type",
