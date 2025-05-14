@@ -291,7 +291,7 @@ model ErrorResponse {
    */
   error?: {
     /**
-     * Error code.
+     * Error code
      */
     code?: string;
 
@@ -335,6 +335,12 @@ model DedicatedCapacities {
    */
   @items
   value: DedicatedCapacity[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**

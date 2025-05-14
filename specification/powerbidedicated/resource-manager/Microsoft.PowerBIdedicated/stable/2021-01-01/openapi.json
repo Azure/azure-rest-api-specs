@@ -158,6 +158,9 @@
           "Get details of a capacity": {
             "$ref": "./examples/listCapacitiesInSubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -525,6 +528,9 @@
           "List capacities in resource group": {
             "$ref": "./examples/listCapacitiesInResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1262,6 +1268,10 @@
           "items": {
             "$ref": "#/definitions/DedicatedCapacity"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1381,7 +1391,7 @@
           "properties": {
             "code": {
               "type": "string",
-              "description": "Error code."
+              "description": "Error code"
             },
             "message": {
               "type": "string",
