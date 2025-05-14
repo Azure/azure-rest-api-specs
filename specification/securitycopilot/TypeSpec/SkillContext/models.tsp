@@ -247,61 +247,61 @@ namespace SkillContext
 	@doc("Represents the execution context for the current session.")
 	model MedeinaExecutionContext {
 		@doc("The session id.")
-		SessionId: string;
+		sessionId: string;
 
 		@doc("The prompt id.")
-		PromptId: string;
+		promptId: string;
 
 		@doc("The evaluation id.")
-		EvaluationId: string;
+		evaluationId: string;
 
 		@doc("The tenant id.")
-		TenantId: string;
+		tenantId: string;
 
 		@doc("The account id.")
-		AccountId: string;
+		accountId: string;
 
 		@doc("The workspace id.")
-		WorkspaceId: string;
+		workspaceId: string;
 
 		@doc("The display name of the user.")
-		UserName: string;
+		userName: string;
 
 		@doc("The Application Id that created the Session.")
-		ApplicationId?: string;
+		applicationId?: string;
 
 		@doc("The Source tag i.e. 'immersive'.")
-		Source: string;
+		source: string;
 
 		@doc("The source application ID.")
-		UnauthenticatedSourceApplicationId: string;
+		unauthenticatedSourceApplicationId: string;
 
 		@doc("The selected skills.")
-		SelectedSkills: string;
+		selectedSkills: string;
 
 		@doc("The skillsets identified for execution during the evaluation process post skill selection.")
-		SelectedSkillsets: Array<string>;
+		selectedSkillsets: Array<string>;
 
 		@doc("Indicates whether the context is for a user onboarded to Fidelis.")
-		IsFidelisUser: boolean;
+		isFidelisUser: boolean;
 
 		@doc("Indicates whether the evaluation is manually generated or user driven.")
-		InvocationType: EvaluationInvocationType;
+		invocationType: EvaluationInvocationType;
 
 		@doc("Indicates whether the evaluation is from a Prompt or a Promptbook")
-		InvocationCategory: EvaluationInvocationCategory;
+		invocationCategory: EvaluationInvocationCategory;
 
 		@doc("Compliance flags for logging.")
-		ComplianceFlags: ComplianceFlags;
+		complianceFlags: ComplianceFlags;
 
 		@doc("Contains the context for the Azure OpenAI requests such as the deployment id.")
-		AzureOpenAIExecutionContext: AzureOpenAIExecutionContext;
+		azureOpenAIExecutionContext: AzureOpenAIExecutionContext;
 
 		@doc("Preview state of the execution context.")
-		PreviewState: SkillPreviewState;
+		previewState: SkillPreviewState;
 
 		@doc("ID of the agent")
-		AgentId: string;
+		agentId: string;
 
 		@doc("Actual Fidelis workspace ID. This workspace ID is a GUID generated and provided by Fidelis.")
 		actualWorkspaceId: string;
@@ -319,28 +319,28 @@ namespace SkillContext
 		fallbackOptions?: FallbackOptions;
 
 		@doc("This contains the time at which the evaluation started")
-		EvaluationStartTime: offsetDateTime;
+		evaluationStartTime: offsetDateTime;
 
 		@doc("The time when the prompt for the evaluation was created, except for during retries")
-		EvaluationPromptCreationStartedAt: offsetDateTime;
+		evaluationPromptCreationStartedAt: offsetDateTime;
 
 		@doc("The time when the evaluation starts running after waiting in the processing queue.")
-		EvaluationRunStartedAt: offsetDateTime;
+		evaluationRunStartedAt: offsetDateTime;
 
 		@doc("A snapshot of requests for sleeping attached to the evaluation in this context.")
-		SleepRequests?: Record<duration>;
+		sleepRequests?: Record<duration>;
 
 		@doc("Represents the amount of time the current prompt would like to sleep.")
-		PromptSleepDuration?: duration;
+		promptSleepDuration?: duration;
 
 		@doc("Represents the number of prompt executions that have occurred.")
-		EvaluationExecutionCount: uint32;
+		evaluationExecutionCount: uint32;
 
 		@doc("Determines the node visibility in the end user node map.")
-		HideEvaluationNode: boolean;
+		hideEvaluationNode: boolean;
 
 		@doc("Is agent trial condition met")
-		IsAgentTrialConditionMet: boolean;
+		isAgentTrialConditionMet: boolean;
 	}
 
 	
@@ -456,7 +456,7 @@ namespace SkillContext
 	@doc("AddSourceRequest")
 	model AddSourceRequest {
 		@doc("SkillSource")
-		SkillSource: SkillSource;
+		skillSource: SkillSource;
 	}
 
 	@doc("AddSuggestedPromptsRequest")
@@ -529,208 +529,208 @@ namespace SkillContext
 	@doc("Represents a chat completion request.")
 	model ChatCompletionRequest extends BaseCompletionRequest {
 	  @doc("The messages associated with the request.")
-	  Messages: Array<Message>;
+	  messages: Array<Message>;
 
 	  @doc("The functions associated with the request.")
-	  Functions: Array<GPTFunction>;
+	  functions: Array<GPTFunction>;
 
 	  @doc("Specifies the function to call.")
-	  FunctionCall: string;
+	  functionCall: string;
 
 	  @doc("The tools available for this request.")
-	  Tools?: Array<Tools>;
+	  tools?: Array<Tools>;
 
 	  @doc("The selected tool for execution.")
-	  ToolChoice?: string;
+	  toolChoice?: string;
 
 	  @doc("Indicates whether tools can be called in parallel.")
-	  ParallelToolCalls?: boolean;
+	  parallelToolCalls?: boolean;
 	}
 
 	@doc("Represents the base completion request with common parameters.")
 	model BaseCompletionRequest {
 	  @doc("The maximum number of tokens to generate.")
-	  MaxTokens?: int32;
+	  maxTokens?: int32;
 
 	  @doc("The sampling temperature to use.")
-	  Temperature?: float64;
+	  temperature?: float64;
 
 	  @doc("The nucleus sampling parameter.")
-	  TopP?: float64;
+	  topP?: float64;
 
 	  @doc("The number of completions to generate.")
-	  N?: int32;
+	  n?: int32;
 
 	  @doc("Specifies whether to stream the response.")
-	  Stream?: boolean;
+	  stream?: boolean;
 
 	  @doc("The number of log probabilities to include.")
-	  Logprobs?: int32;
+	  logprobs?: int32;
 
 	  @doc("Whether to include the prompt in the output.")
-	  Echo?: boolean;
+	  echo?: boolean;
 
 	  @doc("Stop sequences to terminate generation.")
-	  Stop: Array<string>;
+	  stop: Array<string>;
 
 	  @doc("The penalty for repeating words in the presence.")
-	  PresencePenalty?: float64;
+	  presencePenalty?: float64;
 
 	  @doc("The penalty for repeating tokens.")
-	  FrequencyPenalty?: float64;
+	  frequencyPenalty?: float64;
 
 	  @doc("The number of completions to choose the best from.")
-	  BestOf?: int32;
+	  bestOf?: int32;
 
 	  @doc("Adjusts likelihood of specific tokens.")
-	  LogitBias: Record<int32>;
+	  logitBias: Record<int32>;
 
 	  @doc("The response format specification.")
-	  ResponseFormat: unknown;
+	  responseFormat: unknown;
 	}
 
 	@doc("Represents a message in the chat.")
 	model Message {
 	  @doc("The content of the message.")
-	  Content?: string;
+	  content?: string;
 
 	  @doc("The role of the message sender.")
-	  Role: string;
+	  role: string;
 
 	  @doc("The name of the message sender.")
-	  Name?: string;
+	  name?: string;
 
 	  @doc("The function call information.")
-	  FunctionCall?: FunctionCall;
+	  functionCall?: FunctionCall;
 
 	  @doc("The tool calls associated with the message.")
-	  ToolCalls?: Array<ToolCall>;
+	  toolCalls?: Array<ToolCall>;
 
 	  @doc("The identifier for the tool call.")
-	  ToolCallId?: string;
+	  toolCallId?: string;
 	}
 
 	@doc("Represents a function call.")
 	model FunctionCall {
 	  @doc("The name of the function.")
-	  Name: string;
+	  name: string;
 
 	  @doc("The arguments passed to the function.")
-	  Arguments?: Record<string>;
+	  arguments?: Record<string>;
 	}
 
 	@doc("Represents a tool call.")
 	model ToolCall {
 	  @doc("The id of the tool call.")
-	  Id: string;
+	  id: string;
 
 	  @doc("The type of the tool call.")
-	  Type: string;
+	  type: string;
 
 	  @doc("The function for the tool call.")
-	  Function: ToolFunctionCall;
+	  function: ToolFunctionCall;
 	}
 
 	@doc("Represents a tool function call.")
 	model ToolFunctionCall {
 	  @doc("The name of the tool function.")
-	  Name: string;
+	  name: string;
 
 	  @doc("The arguments for the tool function.")
-	  Arguments: string;
+	  arguments: string;
 	}
 
 	@doc("Represents a GPT function definition.")
 	model GPTFunction {
 	  @doc("The name of the GPT function.")
-	  Name: string;
+	  name: string;
 
 	  @doc("The description of the GPT function.")
-	  Description: string;
+	  description: string;
 
 	  @doc("The parameters required by the GPT function.")
-	  Parameters: FunctionParameter;
+	  parameters: FunctionParameter;
 
 	  @doc("The result of the GPT function.")
-	  Result: FunctionResult;
+	  result: FunctionResult;
 	}
 
 	@doc("Represents parameters for a function.")
 	model FunctionParameter {
 	  @doc("The type of the parameter.")
-	  Type: string;
+	  type: string;
 
 	  @doc("The properties of the parameter.")
-	  Properties: Record<FunctionParameterProperty>;
+	  properties: Record<FunctionParameterProperty>;
 
 	  @doc("The list of required properties.")
-	  Required: Array<string>;
+	  required: Array<string>;
 	}
 
 	@doc("Represents parameters properties for a function.")
 	model FunctionParameterProperty {
 	  @doc("The type of the parameter property.")
-	  Type: string;
+	  type: string;
 
 	  @doc("The description of property of the parameter.")
-	  Description: string;
+	  description: string;
 
 	  @doc("The list of enums.")
-	  Enum: Array<string>;
+	  enum: Array<string>;
 	}
 
 	@doc("Represents the result of a function.")
 	model FunctionResult {
 	  @doc("The type of the result.")
-	  Type: string;
+	  type: string;
 	}
 
 	@doc("Represents a tool.")
 	model Tools {
 	  @doc("The type of the tool.")
-	  Type: string;
+	  type: string;
 
 	  @doc("The function definition for the tool.")
-	  Function: FunctionDefinition;
+	  function: FunctionDefinition;
 	}
 
 	@doc("Represents the definition of a function.")
 	model FunctionDefinition {
 	  @doc("The description of the function.")
-	  Description: string;
+	  description: string;
 
 	  @doc("The name of the function.")
-	  Name: string;
+	  name: string;
 
 	  @doc("The parameters for the function.")
-	  Parameters: unknown;
+	  parameters: unknown;
 	}
 
 	@doc("Represents the Azure OpenAI execution context.")
 	model AzureOpenAIExecutionContext {
 	  @doc("The API version.")
-	  ApiVersion: string = "2024-06-01";
+	  apiVersion: string = "2024-06-01";
 
 	  @doc("The environment where the request is being made.")
-	  Environment: string;
+	  environment: string;
 
 	  @doc("Determines if the GPU proxy is enabled.")
-	  IsGPUProxyEnabled: boolean = false;
+	  isGPUProxyEnabled: boolean = false;
 
 	  @doc("The geographic location where the GPU processing is being done.")
-	  GpuProcessingGeo?: string;
+	  gpuProcessingGeo?: string;
 
 	  @doc("Whether the customer allows cross-geo compute in their workspace capacity.")
-	  CustomerAllowCrossGeoCompute: boolean = false;
+	  customerAllowCrossGeoCompute: boolean = false;
 
 	  @doc("ECS controlled flag to allow cross-geo compute.")
-	  EcsAllowCrossGeoCompute: boolean = false;
+	  ecsAllowCrossGeoCompute: boolean = false;
 
 	  @doc("Properties used to add content prompt and content filter details from the response.")
-	  ContentFilterProperties?: Record<string>;
+	  contentFilterProperties?: Record<string>;
 
 	  @doc("Properties used to report information about the skill invocation. Must not contain customer content.")
-	  ReportingProperties?: Record<string>;
+	  reportingProperties?: Record<string>;
 	}
 
 	@doc("Represents a request to create a chat completion.")
@@ -748,22 +748,22 @@ namespace SkillContext
 	@doc("Represents the base completion response.")
 	model BaseCompletionResponse {
 	  @doc("The unique identifier for the response.")
-	  Id: string;
+	  id: string;
 
 	  @doc("The object type.")
-	  Object: string;
+	  object: string;
 
 	  @doc("The creation timestamp.")
-	  Created: offsetDateTime; 
+	  created: offsetDateTime; 
 
 	  @doc("The model used for completion.")
-	  Model: string;
+	  model: string;
 
 	  @doc("The usage statistics for the response.")
-	  Usage: unknown;
+	  usage: unknown;
 
 	  @doc("The results of prompt filtering.")
-	  PromptFilterResults: Array<unknown>;
+	  promptFilterResults: Array<unknown>;
 	}
 
 
@@ -778,35 +778,35 @@ namespace SkillContext
 	@doc("Represents details of a code citation.")
 	model CodeCitation {
 	  @doc("The URL of the cited source.")
-	  Url: string;
+	  url: string;
 
 	  @doc("The license of the cited content.")
-	  License: string;
+	  license: string;
 	}
 
 	model BaseChoice {
-	  Index: int32;
+	  index: int32;
 	  @doc("Log probabilities for this choice.")
-	  LogProbs: unknown;
+	  logProbs: unknown;
 
 	  @doc("The reason why the operation finished.")
-	  FinishReason: string;
+	  finishReason: string;
 
 	  @doc("This object contains the list of content filter annotations.")
-	  ContentFilterResults?: unknown;
+	  contentFilterResults?: unknown;
 
 	  @doc("This indicates when the content filtering system does not run on the chat completion.")
-	  ContentFilterError?: unknown;
+	  contentFilterError?: unknown;
 	}
 
 	model ChatChoice extends BaseChoice {
 	  @doc("The message associated with the chat choice.")
-	  Message: Message;
+	  message: Message;
 	}
 
 	model ChatCompletionResponse extends BaseCompletionResponse {
 	  @doc("List of choices in the chat completion response.")
-	  Choices: Array<ChatChoice>;
+	  choices: Array<ChatChoice>;
 	}
 
 	@doc("Represents a request to create embedding.")
@@ -823,7 +823,7 @@ namespace SkillContext
 
 	model EmbeddingRequest {
 	  @doc("The object to embed.")
-	  Input: unknown;
+	  input: unknown;
 	}
 
 	model EmbeddingData {
@@ -833,10 +833,10 @@ namespace SkillContext
 	}
 
 	model EmbeddingResponse {
-		Data: Array<EmbeddingData>;
-		Model: string;
-		Object: string;
-		Usage: unknown;
+		data: Array<EmbeddingData>;
+		model: string;
+		object: string;
+		usage: unknown;
 	}
 
 	@doc("Represents a request to create a chat completion.")
@@ -853,15 +853,15 @@ namespace SkillContext
 
 	model CompletionRequest extends BaseCompletionRequest {
   
-		Prompt: string;
+		prompt: string;
 	}
 
 	model CompletionResponse extends BaseCompletionResponse {
-		Choices: Array<Choice>;
+		choices: Array<Choice>;
 	}
 
 	model Choice extends BaseChoice {
-		Text: string;
+		text: string;
 	}
 
 	
@@ -911,21 +911,21 @@ namespace SkillContext
 	// The following models are used for Dynamic Prompts controller
 	model DynamicPromptsSearchRequest {
 		@doc("The scenario name for the search.")
-		ScenarioName: string;
+		scenarioName: string;
 		@doc("The index name for the search.")
-		IndexName: string;
+		indexName: string;
 		@doc("The version of the index.")
-		Version: string;
+		version: string;
 		@doc("The query string for the search.")
-		Query: string;
+		query: string;
 		@doc("The search filter.")
-		SearchFilter?: string;
+		searchFilter?: string;
 		@doc("The number of top results to return.")
-		TopK: int32;
+		topK: int32;
 		@doc("The score threshold for the search.")
-		ScoreThreshold: float32;
+		scoreThreshold: float32;
 		@doc("The number of nearest neighbors to consider.")
-		KNearestNeighborsCount: int32;
+		kNearestNeighborsCount: int32;
 	}
 
 	
@@ -1052,7 +1052,7 @@ namespace SkillContext
 
 	@doc("Indicates Fallback options when no skill is chosen. When it is set to null, it's configured to KnowledgeBase fallback as default option.")
 	model FallbackOptions {
-		Fallback?: string;
-		Product?: string;
+		fallback?: string;
+		product?: string;
 	}
 }
