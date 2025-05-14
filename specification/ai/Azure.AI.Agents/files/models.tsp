@@ -81,23 +81,11 @@ union FileState {
 union FilePurpose {
   string,
 
-  /** Indicates a file is used for fine tuning input. */
-  fineTune: "fine-tune",
-
-  /** Indicates a file is used for fine tuning results. */
-  fineTuneResults: "fine-tune-results",
-
   /** Indicates a file is used as input to agents. */
   agents: "assistants",
 
   /** Indicates a file is used as output by agents. */
   agentsOutput: "assistants_output",
-
-  /** Indicates a file is used as input to . */
-  batch: "batch",
-
-  /** Indicates a file is used as output by a vector store batch operation. */
-  batchOutput: "batch_output",
 
   /** Indicates a file is used as input to a vision operation. */
   vision: "vision",
