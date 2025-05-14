@@ -61,7 +61,7 @@ union EnablementStatus {
 // Proxy Resource Playwright Quota Models ////////////////////
 
 @doc("Subscription-level location-based Playwright quota resource.")
-@parentResource(ArmLocationResource)
+@parentResource(SubscriptionLocationResource)
 model PlaywrightQuota is ProxyResource<PlaywrightQuotaProperties> {
   ...ResourceNameParameter<PlaywrightQuota, Type = QuotaName>;
 }
@@ -81,7 +81,7 @@ model PlaywrightQuotaProperties {
 model FreeTrialProperties {
   @visibility(Lifecycle.Read)
   @doc("Playwright workspace-id that has free-trial in the subscription.")
-  workspaceId: uuid;
+  workspaceId: string;
 
   @visibility(Lifecycle.Read)
   @doc("The free-trial state.")
