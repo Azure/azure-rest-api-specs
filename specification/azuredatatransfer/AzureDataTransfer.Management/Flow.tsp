@@ -2,12 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./flow_models.tsp";
+import "./models.tsp";
 import "./Connection.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureDataTransfer;
 /**

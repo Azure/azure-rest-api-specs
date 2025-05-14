@@ -1,13 +1,15 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
-import "./action_models.tsp";
-import "./versions.tsp";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureDataTransfer;
 
@@ -16,20 +18,19 @@ interface AzureDataTransfer {
   /**
    * Lists approved schemas for Azure Data Transfer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
+  @operationId("AzureDataTransfer_ListApprovedSchemas")
   @autoRoute
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
-  @operationId("AzureDataTransfer_ValidateSchema")
   listApprovedSchemas is ArmProviderActionSync<
     Request = ListApprovedSchemasRequest,
     Response = SchemasListResult
   >;
-
   /**
    * Validates a schema for Azure Data Transfer.
    */
-  @autoRoute
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @operationId("AzureDataTransfer_ValidateSchema")
+  @autoRoute
   validateSchema is ArmProviderActionSync<
     Request = Schema,
     Response = ValidateSchemaResult

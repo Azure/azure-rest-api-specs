@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./connection_models.tsp";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -77,8 +77,8 @@ interface Connections {
   /**
    * Lists all pending connections for a connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listPendingConnections")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @operationId("ListPendingConnections_List")
   list is ArmResourceActionSync<
     Connection,
@@ -89,8 +89,8 @@ interface Connections {
   /**
    * Lists all pending flows for a connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listPendingFlows")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @operationId("ListPendingFlows_List")
   listPendingFlowsList is ArmResourceActionSync<
     Connection,

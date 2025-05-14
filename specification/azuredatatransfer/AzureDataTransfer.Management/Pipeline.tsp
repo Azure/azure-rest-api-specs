@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./pipeline_models.tsp";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -83,19 +83,10 @@ interface Pipelines {
   >;
 
   /**
-   * Rejects the specified connection in a pipeline.
-   */
-  rejectConnection is ArmResourceActionAsync<
-    Pipeline,
-    ResourceBody,
-    ArmResponse<Connection>
-  >;
-
-  /**
    * Lists the flows in a pipeline.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listFlows")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @operationId("ListFlowsByPipeline_List")
   list is ArmResourceActionSync<
     Pipeline,
@@ -118,6 +109,15 @@ interface Pipelines {
     Schema,
     ArmResponse<SchemasListResult>
   >;
+
+  /**
+   * Rejects the specified connection in a pipeline.
+   */
+  rejectConnection is ArmResourceActionAsync<
+    Pipeline,
+    ResourceBody,
+    ArmResponse<Connection>
+  >;
 }
 
 @@maxLength(Pipeline.name, 64);
@@ -128,5 +128,5 @@ interface Pipelines {
 @@doc(Pipelines.update::parameters.properties, "Pipeline body");
 @@doc(Pipelines.approveConnection::parameters.body, "Connection body");
 @@doc(Pipelines.executeAction::parameters.body, "Action to execute");
-@@doc(Pipelines.rejectConnection::parameters.body, "Connection body");
 @@doc(Pipelines.listSchemasList::parameters.body, "Schema(s) to retrieve");
+@@doc(Pipelines.rejectConnection::parameters.body, "Connection body");
