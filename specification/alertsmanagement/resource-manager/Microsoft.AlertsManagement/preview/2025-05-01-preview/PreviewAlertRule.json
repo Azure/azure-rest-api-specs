@@ -570,11 +570,20 @@
           "properties": {
             "lookbackPeriod": {
               "type": "string",
-              "description": "Specifies the lookback of the preview."
+              "format": "duration",
+              "description": "Specifies the lookback of the preview in ISO 8601 duration format."
             },
             "alertRuleType": {
               "type": "string",
-              "description": "The type of the alert rule to be previewed."
+              "description": "The type of the alert rule to be previewed.",
+              "enum": [
+                "ScheduledQueryRule",
+                "MetricAlerts"
+              ],
+              "x-ms-enum": {
+                "name": "alertRuleType",
+                "modelAsString": true
+              }
             },
             "alertRuleProperties": {
               "$ref": "#/definitions/LogAlertRuleResource",
