@@ -4024,9 +4024,7 @@
         },
         "apiSecret": {
           "type": "string",
-          "format": "password",
-          "description": "Kafka API Key Secret",
-          "x-ms-secret": true
+          "description": "Kafka API Key Secret"
         },
         "serviceAccountId": {
           "type": "string",
@@ -4706,14 +4704,14 @@
       "type": "object",
       "description": "Details of cluster record",
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Type of cluster"
+        },
         "properties": {
           "$ref": "#/definitions/ClusterProperties",
           "description": "Cluster Properties",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Type of cluster"
         }
       },
       "allOf": [
@@ -4784,14 +4782,14 @@
       "type": "object",
       "description": "Details about environment name, metadata and environment id of an environment",
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Type of environment"
+        },
         "properties": {
           "$ref": "#/definitions/EnvironmentProperties",
           "description": "Environment properties",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Type of environment"
         }
       },
       "allOf": [

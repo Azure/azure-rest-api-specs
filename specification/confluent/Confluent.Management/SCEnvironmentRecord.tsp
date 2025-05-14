@@ -14,9 +14,10 @@ namespace Microsoft.Confluent;
 /**
  * Details about environment name, metadata and environment id of an environment
  */
+@Azure.ResourceManager.Private.armResourceInternal(EnvironmentProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(OrganizationResource)
-model SCEnvironmentRecord
-  is Azure.ResourceManager.ProxyResource<EnvironmentProperties> {
+model SCEnvironmentRecord extends Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = SCEnvironmentRecord,
     KeyName = "environmentId",
@@ -29,6 +30,10 @@ model SCEnvironmentRecord
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
+
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: EnvironmentProperties;
 }
 
 @armResourceOperations

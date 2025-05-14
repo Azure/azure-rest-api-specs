@@ -14,9 +14,10 @@ namespace Microsoft.Confluent;
 /**
  * Details of cluster record
  */
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(SCEnvironmentRecord)
-model SCClusterRecord
-  is Azure.ResourceManager.ProxyResource<ClusterProperties> {
+model SCClusterRecord extends Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = SCClusterRecord,
     KeyName = "clusterId",
@@ -29,6 +30,10 @@ model SCClusterRecord
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
+
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: ClusterProperties;
 }
 
 @armResourceOperations

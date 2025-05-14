@@ -2344,7 +2344,6 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key Secret
    */
-  @secret
   apiSecret?: string;
 
   /**
