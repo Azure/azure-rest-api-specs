@@ -14,8 +14,11 @@ namespace Microsoft.PowerBIDedicated;
  * Represents an instance of an auto scale v-core resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-model AutoScaleVCore
-  is Azure.ResourceManager.TrackedResource<AutoScaleVCoreProperties> {
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+@Azure.ResourceManager.Private.armResourceInternal(AutoScaleVCoreProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model AutoScaleVCore extends Azure.ResourceManager.Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = AutoScaleVCore,
     KeyName = "vcoreName",
@@ -28,6 +31,12 @@ model AutoScaleVCore
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku: AutoScaleVCoreSku;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  properties: AutoScaleVCoreProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""

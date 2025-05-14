@@ -14,8 +14,12 @@ namespace Microsoft.PowerBIDedicated;
 /**
  * Represents an instance of a Dedicated Capacity resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+@Azure.ResourceManager.Private.armResourceInternal(DedicatedCapacityProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model DedicatedCapacity
-  is Azure.ResourceManager.TrackedResource<DedicatedCapacityProperties> {
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = DedicatedCapacity,
     KeyName = "dedicatedCapacityName",
@@ -28,6 +32,12 @@ model DedicatedCapacity
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku: CapacitySku;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  properties: DedicatedCapacityProperties;
 }
 
 @armResourceOperations
