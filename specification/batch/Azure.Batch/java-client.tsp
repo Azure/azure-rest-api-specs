@@ -243,7 +243,7 @@ op disablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
 
 // Enable Pool Autoscale Operation
 @doc("Optional parameters for Enable Pool AutoScale operation.")
-model BatchPoolAutoScaleEnableOptions {
+model BatchPoolEnableAutoScaleOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
 
@@ -255,7 +255,7 @@ op enablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.EnablePoolAutoscaleRequiredParameters;
 
     @doc("Optional parameters for Enable Pool AutoScale operation.")
-    options?: BatchPoolAutoScaleEnableOptions;
+    options?: BatchPoolEnableAutoScaleOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
   },
@@ -269,7 +269,7 @@ op enablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
 
 // Evaluate Pool Autoscale Operation
 @doc("Optional parameters for Evaluate Pool AutoScale operation.")
-model BatchPoolAutoScaleEvaluateOptions {
+model BatchPoolEvaluateAutoScaleOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
 
@@ -281,7 +281,7 @@ op evaluatePoolAutoScaleCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.EvaluatePoolAutoScaleRequiredParameters;
 
     @doc("Optional parameters for Evaluate Pool AutoScale operation.")
-    options?: BatchPoolAutoScaleEvaluateOptions;
+    options?: BatchPoolEvaluateAutoScaleOptions;
   },
   Azure.Batch.AutoScaleRun & Azure.Batch.RequestSuccessResponseHeaders
 >;
