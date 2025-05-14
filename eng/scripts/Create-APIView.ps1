@@ -567,11 +567,19 @@ function New-RestSpecsAPIViewReviews {
     $uri = [System.UriBuilder]$APIViewUri
     $uri.Query = $query.ToString()
 
+    $correlationId = [System.Guid]::NewGuid().ToString()
+    $headers = @{
+      "Content-Type"  = "application/json"
+      "x-correlation-id" = $correlationId
+    }
+
     LogInfo "Create APIView for resource provider '$($_.BaseName)'"
-    LogInfo "APIView Uri: $($uri.Uri)"
+    LogInfo "Request URI: $($uri.Uri.OriginalString)"
+    LogInfo "Correlation ID: $correlationId"
 
     try {
-      Invoke-WebRequest -Method 'GET' -Uri $uri.Uri -MaximumRetryCount 3
+      $Response = Invoke-WebRequest -Method 'GET' -Uri $uri.Uri -Headers $headers -MaximumRetryCount 3
+      LogSuccess $Response.Content
     }
     catch {
       LogError "Failed to create APIView for resource provider '$($_.BaseName)'. Error: $($_.Exception.Response)"
