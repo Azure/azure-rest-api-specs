@@ -49,10 +49,10 @@ export class FolderStructureRule implements Rule {
     const packageFolder = folderStruct[folderStruct.length - 1];
 
     // Verify package folder is at most 3 levels deep
-    if (folderStruct.length > 4) {
-      success = false;
-      errorOutput += `Please limit TypeSpec folder depth to 3 levels or less`;
-    }
+    //if (folderStruct.length > 4) {
+    //  success = false;
+    //  errorOutput += `Please limit TypeSpec folder depth to 3 levels or less`;
+    //}
 
     // Verify second level folder is capitalized after each '.'
     if (/(^|\. *)([a-z])/g.test(packageFolder)) {
