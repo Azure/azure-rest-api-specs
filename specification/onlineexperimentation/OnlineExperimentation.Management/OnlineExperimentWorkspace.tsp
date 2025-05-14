@@ -6,6 +6,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.OnlineExperimentation;
 
@@ -59,6 +60,14 @@ model OnlineExperimentWorkspacePatch {
      * The encryption configuration for the online experiment workspace resource.
      */
     encryption?: ResourceEncryptionConfiguration;
+
+    /**
+     * Public Network Access Control for the online experimentation resource. Defaults to Enabled if set to null.
+     * - Enabled: The resource can be accessed from the public internet.
+     * - Disabled: The resource can only be accessed from a private endpoint.
+     */
+    @added(Microsoft.OnlineExperimentation.Versions.v2025_08_01_preview)
+    publicNetworkAccess?: PublicNetworkAccessType;
   };
 }
 
