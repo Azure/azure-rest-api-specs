@@ -37,14 +37,14 @@ model BranchProperties {
   databaseName?: string;
 
   @doc("Roles associated with the branch")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   roles?: NeonRoleProperties[];
 
   @doc("Neon Databases associated with the branch")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   databases?: NeonDatabaseProperties[];
 
   @doc("Endpoints associated with the branch")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   endpoints?: EndpointProperties[];
 }
