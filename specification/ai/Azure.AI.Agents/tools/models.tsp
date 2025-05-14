@@ -84,7 +84,6 @@ model MicrosoftFabricToolDefinition extends ToolDefinition {
   fabric_dataagent: FabricDataAgentToolParameters;
 }
 
-
 @doc("The sharepoint grounding tool parameters.")
 @added(Versions.v2025_05_01)
 model SharepointGroundingToolParameters {
