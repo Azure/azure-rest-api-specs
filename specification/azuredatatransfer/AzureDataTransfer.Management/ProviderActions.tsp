@@ -25,7 +25,7 @@ interface AzureDataTransfer {
   @autoRoute
   listApprovedSchemas is ArmProviderActionSync<
     Request = ListApprovedSchemasRequest,
-    Response = SchemasListResult
+    Response = SchemasListResponse
   >;
   /**
    * Validates a schema for Azure Data Transfer.
@@ -34,7 +34,7 @@ interface AzureDataTransfer {
   @operationId("AzureDataTransfer_validateSchema")
   @autoRoute
   validateSchema is ArmProviderActionSync<
-    Request = Schema,
+    Request = SchemasListResponse,
     Response = ValidateSchemaResult
   >;
 }

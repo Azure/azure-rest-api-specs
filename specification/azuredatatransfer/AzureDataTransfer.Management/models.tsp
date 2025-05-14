@@ -433,7 +433,7 @@ model ListApprovedSchemasRequest {
 /**
  * The schemas list result.
  */
-model SchemasListResult {
+model SchemasListResponse {
   /**
    * Schemas array.
    */
@@ -1702,8 +1702,9 @@ model AzureResourceManagerArmResponsePipeline {
 @@clientName(PipelineProperties, "pipelineProperties");
 @@clientName(Pipeline, "pipeline");
 @@clientName(PipelinesPatch, "pipelinesPatch");
-@@clientName(SchemasListResult, "schemas");
+@@clientName(SchemasListResponse, "schemas");
 @@clientName(Schema, "schema");
+// @@clientName(FlowType[], "flowTypes");
 @@clientName(FlowType, "flowType");
 @@clientName(ConnectionIdList, "connectionIdList");
 @@clientName(ResourceBody, "resourceBody");
