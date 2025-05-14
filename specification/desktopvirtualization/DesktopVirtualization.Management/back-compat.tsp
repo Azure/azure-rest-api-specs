@@ -39,10 +39,6 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "workspace");
 
-@@clientName(ControlSessionHostUpdate.post::parameters.body,
-  "hostPoolUpdateControlParameter"
-);
-
 @@clientName(SessionHostManagements.createOrUpdate::parameters.resource,
   "sessionHostManagement"
 );

@@ -54,7 +54,12 @@ interface ControlSessionHostUpdate {
   @action("controlSessionHostUpdate")
   post is ArmResourceActionNoResponseContentAsync<
     SessionHostManagement,
-    HostPoolUpdateControlParameter
+    HostPoolUpdateControlParameter,
+    BodyParameter = {
+      @doc("The content of the action request")
+      @bodyRoot
+      hostPoolUpdateControlParameter: HostPoolUpdateControlParameter;
+    }
   >;
 }
 

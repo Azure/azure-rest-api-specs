@@ -103,27 +103,6 @@ enum Versions {
 );
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(ApiDefinitions.importSpecification::parameters.body,
-  "application/json",
-  "payload"
-);
-
-@@encodedName(ApiDefinitions.exportSpecification::parameters.body,
-  "application/json",
-  "payload"
-);
-
-@@clientName(ApiDefinitions.exportSpecification::parameters.body, "payload");
-
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(Services.exportMetadataSchema::parameters.body,
-  "application/json",
-  "payload"
-);
-
-@@clientName(Services.exportMetadataSchema::parameters.body, "payload");
-
 @@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
 @@visibility(Azure.Core.Page.value, Lifecycle.Read);
 /**

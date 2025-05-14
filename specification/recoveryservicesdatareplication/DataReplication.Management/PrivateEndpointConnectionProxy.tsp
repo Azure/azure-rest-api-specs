@@ -65,7 +65,12 @@ interface PrivateEndpointConnectionProxies {
   validate is ArmResourceActionSync<
     PrivateEndpointConnectionProxy,
     PrivateEndpointConnectionProxy,
-    PrivateEndpointConnectionProxy
+    PrivateEndpointConnectionProxy,
+    BodyParameter = {
+      @doc("The private endpoint connection proxy input.")
+      @bodyRoot
+      body: PrivateEndpointConnectionProxy;
+    }
   >;
 }
 
@@ -74,7 +79,4 @@ interface PrivateEndpointConnectionProxies {
 );
 @@doc(PrivateEndpointConnectionProxies.create::parameters.resource,
   "Private endpoint connection creation input."
-);
-@@doc(PrivateEndpointConnectionProxies.validate::parameters.body,
-  "The private endpoint connection proxy input."
 );

@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.ResourceManager;
 using OpenAPI;
 using TypeSpec.Versioning;
+using Http;
 
 namespace Microsoft.LoadTestService;
 
@@ -21,11 +22,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @@encodedName(LoadTests.update::parameters.properties,
   "application/json",
   "LoadTestResourcePatchRequestBody"
-);
-#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Quotas.checkAvailability::parameters.body,
-  "application/json",
-  "QuotaBucketRequest"
 );
 
 @armResourceOperations
@@ -78,7 +74,13 @@ interface Quotas {
   checkAvailability is ArmResourceActionSync<
     QuotaResource,
     QuotaBucketRequest,
-    CheckQuotaAvailabilityResponse
+    CheckQuotaAvailabilityResponse,
+    BodyParameter = {
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy"
+      @doc("The content of the action request")
+      @bodyRoot
+      body: QuotaBucketRequest;
+    }
   >;
 }
 

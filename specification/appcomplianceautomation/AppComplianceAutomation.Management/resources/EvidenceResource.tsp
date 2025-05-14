@@ -9,7 +9,6 @@ import "./ReportResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using OpenAPI;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AppComplianceAutomation;
@@ -47,8 +46,6 @@ interface Evidence {
   /**
    * Get the evidence metadata
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_Get")
   get is ArmResourceRead<
     EvidenceResource,
     {
@@ -59,8 +56,6 @@ interface Evidence {
   /**
    * Create or Update an evidence a specified report
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EvidenceResource,
     {
@@ -72,15 +67,11 @@ interface Evidence {
   /**
    *  Delete an existent evidence from a specified report
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_Delete")
   delete is ArmResourceDeleteSync<EvidenceResource>;
 
   /**
    * Returns a paginated list of evidences for a specified report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_ListByReport")
   listByReport is ArmResourceListByParent<
     EvidenceResource,
     {
@@ -92,23 +83,21 @@ interface Evidence {
   /**
    * Download evidence file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_Download")
   download is ArmResourceActionSync<
     EvidenceResource,
     EvidenceFileDownloadRequest,
-    EvidenceFileDownloadResponse
+    EvidenceFileDownloadResponse,
+    BodyParameter = {
+      @doc("Parameters for the query operation")
+      @bodyRoot
+      body: EvidenceFileDownloadRequest;
+    }
   >;
 }
 
 @@doc(Evidence.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@encodedName(Evidence.download::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@doc(Evidence.download::parameters.body, "Parameters for the query operation");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Evidence.createOrUpdate::parameters.resource,

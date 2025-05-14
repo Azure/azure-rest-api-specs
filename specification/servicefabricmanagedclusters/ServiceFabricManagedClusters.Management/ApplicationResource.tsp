@@ -100,7 +100,12 @@ interface Applications {
     ApplicationResource,
     RuntimeResumeApplicationUpgradeParameters,
     never,
-    LroHeaders = ArmCombinedLroHeaders
+    LroHeaders = ArmCombinedLroHeaders,
+    BodyParameter = {
+      @doc("The parameters for resuming an application upgrade.")
+      @bodyRoot
+      parameters: RuntimeResumeApplicationUpgradeParameters;
+    }
   >;
 
   /**
@@ -121,9 +126,6 @@ interface Applications {
 );
 @@doc(Applications.update::parameters.properties,
   "The application resource updated tags."
-);
-@@doc(Applications.resumeUpgrade::parameters.body,
-  "The parameters for resuming an application upgrade."
 );
 
 /**

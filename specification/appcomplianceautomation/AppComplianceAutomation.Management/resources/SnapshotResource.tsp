@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "../models/models.tsp";
 import "./ReportResource.tsp";
@@ -8,7 +7,6 @@ import "./ReportResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using OpenAPI;
 
 namespace Microsoft.AppComplianceAutomation;
 /**
@@ -45,15 +43,11 @@ interface Snapshot {
   /**
    * Get the AppComplianceAutomation snapshot and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Snapshot_Get")
   get is ArmResourceRead<SnapshotResource>;
 
   /**
    * Get the AppComplianceAutomation snapshot list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Snapshot_List")
   list is ArmResourceListByParent<
     SnapshotResource,
     {
@@ -65,14 +59,15 @@ interface Snapshot {
   /**
    * Download compliance needs from snapshot, like: Compliance Report, Resource List.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Snapshot_Download")
   download is ArmResourceActionAsync<
     SnapshotResource,
     SnapshotDownloadRequest,
     DownloadResponse,
-    Azure.ResourceManager.Foundations.BaseParameters<SnapshotResource>
+    Azure.ResourceManager.Foundations.BaseParameters<SnapshotResource>,
+    BodyParameter = {
+      @doc("Parameters for the query operation")
+      @bodyRoot
+      body: SnapshotDownloadRequest;
+    }
   >;
 }
-
-@@doc(Snapshot.download::parameters.body, "Parameters for the query operation");

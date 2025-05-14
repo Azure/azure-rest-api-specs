@@ -79,7 +79,12 @@ interface Fleetspaces {
    */
   registerServer is ArmResourceActionNoResponseContentAsync<
     Fleetspace,
-    RegisterServerDefinition
+    RegisterServerDefinition,
+    BodyParameter = {
+      @doc("The details of the register server operation.")
+      @bodyRoot
+      body: RegisterServerDefinition;
+    }
   >;
 
   /**
@@ -92,7 +97,4 @@ interface Fleetspaces {
 @@doc(Fleetspace.properties, "A Fleetspace properties.");
 @@doc(Fleetspaces.createOrUpdate::parameters.resource,
   "The fleet object to create or update."
-);
-@@doc(Fleetspaces.registerServer::parameters.body,
-  "The details of the register server operation."
 );

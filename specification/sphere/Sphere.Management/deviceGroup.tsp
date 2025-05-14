@@ -72,7 +72,12 @@ interface DeviceGroups {
    */
   claimDevices is ArmResourceActionNoResponseContentAsync<
     DeviceGroup,
-    ClaimDevicesRequest
+    ClaimDevicesRequest,
+    BodyParameter = {
+      @doc("Bulk claim devices request body.")
+      @bodyRoot
+      claimDevicesRequest: ClaimDevicesRequest;
+    }
   >;
 
   /**
@@ -84,8 +89,3 @@ interface DeviceGroups {
     CountDevicesResponse
   >;
 }
-
-@@doc(DeviceGroups.claimDevices::parameters.body,
-  "Bulk claim devices request body."
-);
-@@clientName(DeviceGroups.claimDevices::parameters.body, "claimDevicesRequest");

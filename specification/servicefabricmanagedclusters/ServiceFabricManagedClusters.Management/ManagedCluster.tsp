@@ -93,7 +93,12 @@ interface ManagedClusters {
   getFaultSimulation is ArmResourceActionSync<
     ManagedCluster,
     FaultSimulationIdContent,
-    ArmResponse<FaultSimulation>
+    ArmResponse<FaultSimulation>,
+    BodyParameter = {
+      @doc("parameter with fault simulation id.")
+      @bodyRoot
+      parameters: FaultSimulationIdContent;
+    }
   >;
 
   /**
@@ -115,7 +120,12 @@ interface ManagedClusters {
     FaultSimulationContentWrapper,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
-      ArmAsyncOperationHeader
+      ArmAsyncOperationHeader,
+    BodyParameter = {
+      @doc("parameters describing the fault simulation.")
+      @bodyRoot
+      parameters: FaultSimulationContentWrapper;
+    }
   >;
 
   /**
@@ -127,7 +137,12 @@ interface ManagedClusters {
     FaultSimulationIdContent,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
-      ArmAsyncOperationHeader
+      ArmAsyncOperationHeader,
+    BodyParameter = {
+      @doc("parameter with fault simulation id.")
+      @bodyRoot
+      parameters: FaultSimulationIdContent;
+    }
   >;
 }
 
@@ -179,15 +194,6 @@ interface ManagedMaintenanceWindowStatus {
 );
 @@doc(ManagedClusters.update::parameters.properties,
   "The managed cluster resource updated tags."
-);
-@@doc(ManagedClusters.getFaultSimulation::parameters.body,
-  "parameter with fault simulation id."
-);
-@@doc(ManagedClusters.startFaultSimulation::parameters.body,
-  "parameters describing the fault simulation."
-);
-@@doc(ManagedClusters.stopFaultSimulation::parameters.body,
-  "parameter with fault simulation id."
 );
 
 /**

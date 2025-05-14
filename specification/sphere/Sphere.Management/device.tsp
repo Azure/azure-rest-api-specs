@@ -68,13 +68,11 @@ interface Devices {
   generateCapabilityImage is ArmResourceActionAsync<
     Device,
     GenerateCapabilityImageRequest,
-    SignedCapabilityImageResponse
+    SignedCapabilityImageResponse,
+    BodyParameter = {
+      @doc("Generate capability image request body.")
+      @bodyRoot
+      generateDeviceCapabilityRequest: GenerateCapabilityImageRequest;
+    }
   >;
 }
-
-@@doc(Devices.generateCapabilityImage::parameters.body,
-  "Generate capability image request body."
-);
-@@clientName(Devices.generateCapabilityImage::parameters.body,
-  "generateDeviceCapabilityRequest"
-);

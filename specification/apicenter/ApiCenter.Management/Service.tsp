@@ -47,6 +47,11 @@ interface Services {
   exportMetadataSchema is ArmResourceActionAsync<
     Service,
     MetadataSchemaExportRequest,
-    MetadataSchemaExportResult
+    MetadataSchemaExportResult,
+    BodyParameter = {
+      @doc("The content of the action request")
+      @bodyRoot
+      body: MetadataSchemaExportRequest;
+    }
   >;
 }

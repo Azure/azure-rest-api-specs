@@ -44,7 +44,12 @@ interface ApiDefinitions {
   importSpecification is ArmResourceActionAsync<
     ApiDefinition,
     ApiSpecImportRequest,
-    ApiImportSuccess
+    ApiImportSuccess,
+    BodyParameter = {
+      @doc("The content of the action request")
+      @bodyRoot
+      body: ApiSpecImportRequest;
+    }
   >;
   @doc("Exports the API specification.")
   exportSpecification is ArmResourceActionAsync<

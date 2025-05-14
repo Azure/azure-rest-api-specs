@@ -104,13 +104,15 @@ interface ProtectedItem {
   plannedFailover is ArmResourceActionAsync<
     ProtectedItemModel,
     PlannedFailoverModel,
-    PlannedFailoverModel
+    PlannedFailoverModel,
+    BodyParameter = {
+      @doc("Planned failover model.")
+      @bodyRoot
+      body: PlannedFailoverModel;
+    }
   >;
 }
 
 @@doc(ProtectedItemModel.name, "The protected item name.");
 @@doc(ProtectedItem.create::parameters.resource, "Protected item model.");
 @@doc(ProtectedItem.update::parameters.properties, "Protected item model.");
-@@doc(ProtectedItem.plannedFailover::parameters.body,
-  "Planned failover model."
-);
