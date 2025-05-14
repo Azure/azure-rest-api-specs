@@ -70,7 +70,7 @@ model JobTaskDetail {
   @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Identifiers of linked jobs to this task.")
   @visibility(Lifecycle.Read)
-  linkedJobIds: armResourceIdentifier[];
+  linkedJobIds?: armResourceIdentifier[];
 }
 
 @doc("Additional information for job.")
