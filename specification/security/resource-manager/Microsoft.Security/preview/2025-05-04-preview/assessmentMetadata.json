@@ -403,6 +403,35 @@
         "type"
       ]
     },
+    "riskFactors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The factors of the risk adding base factor"
+    },
+    "level": {
+      "$ref": "#/definitions/RiskLevel",
+      "description": "The risk level"
+    },
+    "attackPathsReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The attack paths references of the risk"
+    },
+    "paths": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Path"
+      },
+      "description": "The paths that compose the risk"
+    },
+    "isContextualRisk": {
+      "type": "boolean",
+      "description": "Indicates if the risk is contextual or static"
+    },
     "SecurityAssessmentMetadataProperties": {
       "type": "object",
       "description": "Describes properties of an assessment metadata.",
@@ -1210,43 +1239,14 @@
                 }
               ]
             }
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
-            }
-          ]
+          }
         }
-      }
-    },
-    "riskFactors": {
-      "type": "array",
-      "items": {
-        "type": "string"
       },
-      "description": "The factors of the risk adding base factor"
-    },
-    "level": {
-      "$ref": "#/definitions/RiskLevel",
-      "description": "The risk level"
-    },
-    "attackPathsReferences": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "The attack paths references of the risk"
-    },
-    "paths": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Path"
-      },
-      "description": "The paths that compose the risk"
-    },
-    "isContextualRisk": {
-      "type": "boolean",
-      "description": "Indicates if the risk is contextual or static"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
+        }
+      ]
     }
   },
     "parameters": {
@@ -1264,7 +1264,7 @@
         "required": true,
         "description": "AssessmentMetadata object",
         "schema": {
-          "$ref": "#/definitions/SecurityAssessmentMetadata"
+          "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
         },
         "x-ms-parameter-location": "method"
       }
