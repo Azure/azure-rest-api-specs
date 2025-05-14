@@ -127,7 +127,7 @@ model PlaywrightWorkspaceFreeTrialProperties {
 
   @visibility(Lifecycle.Read)
   @doc("The free-trial used value eg. used free execution minutes.")
-  usedValue: int32;
+  usedValue: float32;
 
   @visibility(Lifecycle.Read)
   @doc("The free-trial percentage used.")
