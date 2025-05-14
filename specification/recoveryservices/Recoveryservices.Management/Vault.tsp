@@ -63,7 +63,31 @@ interface VaultOps
         NamePattern = ""
       >>
     > {}
+@armResourceOperations
+interface VaultOperationOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         *The name of the recovery services vault.
+         */
+        @segment("vaults")
+        @path
+        vaultName: string,
 
+        /**
+         * Certificate friendly name.
+         */
+        @path
+        @segment("certificateName")
+        certificateName: string,
+      }
+    > {}
 @armResourceOperations
 interface Vaults {
   /**
@@ -123,19 +147,10 @@ interface Vaults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
-  @action("{certificateName}")
   @operationId("VaultCertificates_Create")
-  create is VaultOps.ActionSync<
+  create is VaultOperationOps.CreateOrUpdateAsync<
     Vault,
-    CertificateRequest,
-    ArmResponse<VaultCertificateResponse>,
-    Parameters = {
-      /**
-       * Certificate friendly name.
-       */
-      @path
-      certificateName: string;
-    }
+    Response = ArmResponse<VaultCertificateResponse>
   >;
 
   /**
@@ -251,6 +266,7 @@ interface GetOperationResult {
 @@doc(Vaults.update::parameters.properties,
   "Recovery Services Vault to be created."
 );
-@@doc(Vaults.create::parameters.body,
+
+@@doc(Vaults.create::parameters.resource,
   "Input parameters for uploading the vault certificate."
 );

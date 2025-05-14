@@ -25,7 +25,6 @@ namespace Azure.ResourceManager.Legacy {
      */
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
     #suppress "shadow"
-    @autoRoute
     @doc("Create a {name}", Resource)
     @armResourceCreateOrUpdate(Resource)
     @Azure.Core.Foundations.Private.defaultFinalStateVia(#[
@@ -49,7 +48,6 @@ namespace Azure.ResourceManager.Legacy {
       ...Parameters,
       @doc("Resource create parameters.") @bodyRoot resource: Resource,
     ): Response | ErrorType;
-
     /**
      * @dev A synchronous resource CreateOrUpdate (PUT)
      * @template Resource the resource being created or updated

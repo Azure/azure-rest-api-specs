@@ -576,68 +576,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/{certificateName}/{certificateName}": {
-      "put": {
-        "operationId": "VaultCertificates_Create",
-        "tags": [
-          "Vaults"
-        ],
-        "description": "Uploads a certificate for a resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the Vault",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "certificateName",
-            "in": "path",
-            "description": "Certificate friendly name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "certificateRequest",
-            "in": "body",
-            "description": "Input parameters for uploading the vault certificate.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CertificateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VaultCertificateResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Download vault credential file": {
-            "$ref": "./examples/PUTVaultCred.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/{identityName}/{identityName}": {
       "delete": {
         "operationId": "RegisteredIdentities_Delete",
@@ -736,6 +674,68 @@
         "x-ms-examples": {
           "Get Operation Status": {
             "$ref": "./examples/GetOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificateName/{certificateName}": {
+      "put": {
+        "operationId": "VaultCertificates_Create",
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Uploads a certificate for a resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Certificate friendly name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateRequest",
+            "in": "body",
+            "description": "Input parameters for uploading the vault certificate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VaultCertificateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Download vault credential file": {
+            "$ref": "./examples/PUTVaultCred.json"
           }
         }
       }
@@ -1185,43 +1185,6 @@
         }
       }
     },
-    "AuthType": {
-      "type": "string",
-      "description": "Specifies the authentication type.",
-      "enum": [
-        "Invalid",
-        "ACS",
-        "AAD",
-        "AccessControlService",
-        "AzureActiveDirectory"
-      ],
-      "x-ms-enum": {
-        "name": "AuthType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Invalid",
-            "value": "Invalid"
-          },
-          {
-            "name": "ACS",
-            "value": "ACS"
-          },
-          {
-            "name": "AAD",
-            "value": "AAD"
-          },
-          {
-            "name": "AccessControlService",
-            "value": "AccessControlService"
-          },
-          {
-            "name": "AzureActiveDirectory",
-            "value": "AzureActiveDirectory"
-          }
-        ]
-      }
-    },
     "AzureMonitorAlertSettings": {
       "type": "object",
       "description": "Settings for Azure Monitor based alerts",
@@ -1334,16 +1297,6 @@
             "$ref": "#/definitions/DNSZoneResponse"
           },
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "CertificateRequest": {
-      "type": "object",
-      "description": "Details of the certificate to be uploaded to the vault.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RawCertificateData",
-          "description": "Raw certificate data."
         }
       }
     },
@@ -2220,21 +2173,6 @@
             "value": "Disabled"
           }
         ]
-      }
-    },
-    "RawCertificateData": {
-      "type": "object",
-      "description": "Raw certificate data.",
-      "properties": {
-        "authType": {
-          "$ref": "#/definitions/AuthType",
-          "description": "Specifies the authentication type."
-        },
-        "certificate": {
-          "type": "string",
-          "format": "byte",
-          "description": "The base64 encoded certificate raw data string"
-        }
       }
     },
     "ReplicationUsage": {
