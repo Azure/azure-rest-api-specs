@@ -60,3 +60,17 @@ union GoalType {
   @doc("Resiliency goal type.")
   Resiliency: "Resiliency",
 }
+
+@doc("Enum for the reason why a resource is excluded.")
+union ExclusionReason {
+  string,
+
+  @doc("The resource was excluded by user selection.")
+  UserSelectedExclusion: "UserSelectedExclusion",
+
+  @doc("The resource failed over and is excluded.")
+  FailedOverResource: "FailedOverResource",
+
+  @doc("The resource is unsupported and excluded.")
+  UnsupportedResource: "UnsupportedResource",
+}
