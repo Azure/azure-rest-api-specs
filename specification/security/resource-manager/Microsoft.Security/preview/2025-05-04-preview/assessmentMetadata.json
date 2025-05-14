@@ -260,54 +260,6 @@
     }
   },
   "definitions": {
-    "SecurityAssessmentMetadataResponseList": {
-      "type": "object",
-      "description": "List of security assessment metadata",
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page."
-        }
-      }
-    },
-    "SecurityAssessmentMetadata": {
-      "type": "object",
-      "description": "Security assessment metadata",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/Resource"
-        }
-      ]
-    },
-    "SecurityAssessmentMetadataResponse": {
-      "type": "object",
-      "description": "Security assessment metadata response",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SecurityAssessmentMetadataPropertiesResponse"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "RiskLevel": {
       "type": "string",
       "description": "The risk level",
@@ -431,6 +383,54 @@
     "isContextualRisk": {
       "type": "boolean",
       "description": "Indicates if the risk is contextual or static"
+    },
+    "SecurityAssessmentMetadataResponseList": {
+      "type": "object",
+      "description": "List of security assessment metadata",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "SecurityAssessmentMetadata": {
+      "type": "object",
+      "description": "Security assessment metadata",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SecurityAssessmentMetadataResponse": {
+      "type": "object",
+      "description": "Security assessment metadata response",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityAssessmentMetadataPropertiesResponse"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "SecurityAssessmentMetadataProperties": {
       "type": "object",
@@ -1249,24 +1249,24 @@
       ]
     }
   },
-    "parameters": {
-      "AssessmentsMetadataName": {
-        "name": "assessmentMetadataName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The Assessment Key - Unique key for the assessment type",
-        "x-ms-parameter-location": "method"
+  "parameters": {
+    "AssessmentsMetadataName": {
+      "name": "assessmentMetadataName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Assessment Key - Unique key for the assessment type",
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityAssessmentMetadataResponse": {
+      "name": "assessmentMetadata",
+      "in": "body",
+      "required": true,
+      "description": "AssessmentMetadata object",
+      "schema": {
+        "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
       },
-      "SecurityAssessmentMetadata": {
-        "name": "assessmentMetadata",
-        "in": "body",
-        "required": true,
-        "description": "AssessmentMetadata object",
-        "schema": {
-          "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
-        },
-        "x-ms-parameter-location": "method"
-      }
+      "x-ms-parameter-location": "method"
     }
   }
+}
