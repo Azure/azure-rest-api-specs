@@ -55,7 +55,8 @@ interface VolumeGroups {
    */
   create is ArmResourceCreateOrReplaceAsync<
     VolumeGroup,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VolumeGroup> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -36,7 +36,8 @@ interface Volumes {
    */
   create is ArmResourceCreateOrReplaceAsync<
     Volume,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Volume> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

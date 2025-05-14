@@ -35,7 +35,8 @@ interface ElasticSans {
    */
   create is ArmResourceCreateOrReplaceAsync<
     ElasticSan,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = ElasticSan> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
