@@ -1,6 +1,6 @@
 {
-  "operationId": "OnlineExperimentWorkspaces_Update",
-  "title": "Update an Online Experiment Workspace.",
+  "operationId": "OnlineExperimentationWorkspaces_Update",
+  "title": "Update an Online Experimentation Workspace with customer managed encryption key.",
   "parameters": {
     "subscriptionId": "fa5fc227-a624-475e-b696-cdd604c735bc",
     "resourceGroupName": "res9871",
@@ -15,6 +15,19 @@
         "userAssignedIdentities": {
           "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {},
           "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {}
+        }
+      },
+      "properties": {
+        "logAnalyticsWorkspaceResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.OperationalInsights/workspaces/log9871",
+        "logsExporterStorageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871",
+        "encryption": {
+          "customerManagedKeyEncryption": {
+            "keyEncryptionKeyIdentity": {
+              "identityType": "UserAssignedIdentity",
+              "userAssignedIdentityResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
+            },
+            "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokek"
+          }
         }
       }
     }
@@ -36,6 +49,15 @@
           "logAnalyticsWorkspaceResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.OperationalInsights/workspaces/log9871",
           "logsExporterStorageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871",
           "appConfigurationResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.AppConfiguration/configurationStores/appconfig9871",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "UserAssignedIdentity",
+                "userAssignedIdentityResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
+              },
+              "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokek"
+            }
+          },
           "endpoint": "https://expworkspace3.westus2.exp.azure.net"
         },
         "identity": {
