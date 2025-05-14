@@ -834,7 +834,7 @@ namespace SkillContext
 
 	model EmbeddingResponse {
 		data: Array<EmbeddingData>;
-		model: string;
+		`model`: string;
 		object: string;
 		usage: unknown;
 	}
