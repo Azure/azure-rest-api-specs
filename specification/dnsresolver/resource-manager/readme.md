@@ -35,7 +35,7 @@ tag: package-2025-05
 
 These settings apply only when `--tag=package-2025-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-01'
+```yaml $(tag) == 'package-2025-05'
 input-file:
   - Microsoft.Network/stable/2025-05-01/dnsresolver.json
   - Microsoft.Network/stable/2025-05-01/dnsresolverpolicy.json
