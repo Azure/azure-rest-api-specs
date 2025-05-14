@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureDataTransfer;
@@ -1607,6 +1609,23 @@ model Action {
 }
 
 /**
+ * The type of action to be executed.
+ */
+union ActionType {
+  string,
+
+  /**
+   * Allow a pipeline, connection, or flow to be updated.
+   */
+  AllowUpdates: "AllowUpdates",
+
+  /**
+   * Force disable a pipeline, connection, or flow.
+   */
+  ForceDisable: "ForceDisable",
+}
+
+/**
  * An array of connection id resources.
  */
 model ConnectionIdList {
@@ -1671,3 +1690,28 @@ model AzureResourceManagerArmResponsePipeline {
    */
   body: Pipeline;
 }
+
+@@clientName(ListApprovedSchemasRequest, "listApprovedSchemasRequest");
+@@clientName(SelectedResource, "selectedResource");
+@@clientName(FlowProperties, "flowProperties");
+@@clientName(Flow, "flow");
+@@clientName(FlowsPatch, "flowsPatch");
+@@clientName(ConnectionProperties, "connectionProperties");
+@@clientName(Connection, "connection");
+@@clientName(ConnectionsPatch, "connectionsPatch");
+@@clientName(PipelineProperties, "pipelineProperties");
+@@clientName(Pipeline, "pipeline");
+@@clientName(PipelinesPatch, "pipelinesPatch");
+@@clientName(SchemasListResult, "schemas");
+@@clientName(Schema, "schema");
+@@clientName(FlowType, "flowType");
+@@clientName(ConnectionIdList, "connectionIdList");
+@@clientName(ResourceBody, "resourceBody");
+@@clientName(MessagingOptions, "messagingOptions");
+@@clientName(ApiFlowOptions, "apiFlowOptions");
+@@clientName(StreamSourceAddresses, "streamSourceAddresses");
+@@clientName(SetStreamPassphrase, "setStreamPassphrase");
+@@clientName(SetSourceAddresses, "setSourceAddresses");
+@@clientName(SetDestinationEndpoints, "setDestinationEndpoints");
+@@clientName(SetDestinationEndpointPorts, "setDestinationEndpointPorts");
+@@clientName(Action, "action");
