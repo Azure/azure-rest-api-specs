@@ -1,4 +1,4 @@
-name: SDK Breaking Change Labels (Preview)
+name: SDK Breaking Change Labels
 
 on:
   check_run:
@@ -14,7 +14,7 @@ jobs:
       github.event.check_run.check_suite.app.name == 'Azure Pipelines' &&
       contains(github.event.check_run.name, 'SDK Generation') &&
       endsWith(github.event.check_run.external_id, '29ec6040-b234-4e31-b139-33dc4287b756')
-    name: SDK Breaking Change Labels (Preview)
+    name: SDK Breaking Change Labels
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
