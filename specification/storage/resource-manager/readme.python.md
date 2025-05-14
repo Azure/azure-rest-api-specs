@@ -17,3 +17,10 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage
 ```
+
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $.definitions.LeaseContainerRequest
+    transform: $['properties']['action']['x-ms-enum']['name'] = 'LeaseContainerRequestEnum'
+```
