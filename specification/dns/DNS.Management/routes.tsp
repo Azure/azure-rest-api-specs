@@ -26,6 +26,7 @@ interface DnsResourceReferenceOperationGroup {
     Request = DnsResourceReferenceRequest,
     Response = DnsResourceReferenceResult,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = CloudError
   >;
 }

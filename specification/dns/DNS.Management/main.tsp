@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.10.14
- * Date: 2025-04-17T07:02:54.312Z
+ * Date: 2025-05-12T07:59:35.317Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -16,6 +16,7 @@ import "./DnssecConfig.tsp";
 import "./RecordSet.tsp";
 import "./Zone.tsp";
 import "./routes.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -26,6 +27,7 @@ using TypeSpec.Versioning;
 /**
  * The DNS Management Client.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 @armProviderNamespace
 @service(#{ title: "DnsManagementClient" })
 @versioned(Versions)

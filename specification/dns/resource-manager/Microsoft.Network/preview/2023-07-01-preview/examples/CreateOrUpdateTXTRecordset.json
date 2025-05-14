@@ -1,16 +1,8 @@
 {
   "parameters": {
-    "zoneName": "zone1",
-    "resourceGroupName": "rg1",
     "api-version": "2023-07-01-preview",
-    "subscriptionId": "subid",
-    "relativeRecordSetName": "record1",
-    "recordType": "TXT",
     "parameters": {
       "properties": {
-        "metadata": {
-          "key1": "value1"
-        },
         "TTL": 3600,
         "TXTRecords": [
           {
@@ -19,23 +11,27 @@
               "string2"
             ]
           }
-        ]
+        ],
+        "metadata": {
+          "key1": "value1"
+        }
       }
-    }
+    },
+    "recordType": "TXT",
+    "relativeRecordSetName": "record1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/TXT/record1",
-        "etag": "00000000-0000-0000-0000-000000000000",
         "name": "record1",
         "type": "Microsoft.Network/dnsZones/TXT",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/TXT/record1",
         "properties": {
-          "metadata": {
-            "key1": "value1"
-          },
           "TTL": 3600,
-          "fqdn": "record1.zone1",
           "TXTRecords": [
             {
               "value": [
@@ -43,22 +39,22 @@
                 "string2"
               ]
             }
-          ]
+          ],
+          "fqdn": "record1.zone1",
+          "metadata": {
+            "key1": "value1"
+          }
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/TXT/record1",
-        "etag": "00000000-0000-0000-0000-000000000000",
         "name": "record1",
         "type": "Microsoft.Network/dnsZones/TXT",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/TXT/record1",
         "properties": {
-          "metadata": {
-            "key1": "value1"
-          },
           "TTL": 3600,
-          "fqdn": "record1.zone1",
           "TXTRecords": [
             {
               "value": [
@@ -66,9 +62,15 @@
                 "string2"
               ]
             }
-          ]
+          ],
+          "fqdn": "record1.zone1",
+          "metadata": {
+            "key1": "value1"
+          }
         }
       }
     }
-  }
+  },
+  "operationId": "RecordSets_CreateOrUpdate",
+  "title": "Create TXT recordset"
 }

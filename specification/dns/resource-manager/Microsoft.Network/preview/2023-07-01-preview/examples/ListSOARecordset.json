@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "zoneName": "zone1",
-    "resourceGroupName": "rg1",
     "api-version": "2023-07-01-preview",
+    "recordType": "SOA",
+    "resourceGroupName": "rg1",
     "subscriptionId": "subid",
-    "recordType": "SOA"
+    "zoneName": "zone1"
   },
   "responses": {
     "200": {
@@ -12,29 +12,31 @@
         "nextLink": "https://servicehost/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/SOA?api-version=2023-07-01-preview&$skipToken=skipToken",
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/SOA/@",
-            "etag": "00000000-0000-0000-0000-000000000000",
             "name": "@",
             "type": "Microsoft.Network/dnsZones/SOA",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/SOA/@",
             "properties": {
-              "metadata": {
-                "key1": "value1"
+              "SOARecord": {
+                "email": "hostmaster.contoso.com",
+                "expireTime": 2419200,
+                "host": "ns1.contoso.com",
+                "minimumTTL": 300,
+                "refreshTime": 3600,
+                "retryTime": 300,
+                "serialNumber": 1
               },
               "TTL": 3600,
               "fqdn": "zone1",
-              "SOARecord": {
-                "host": "ns1.contoso.com",
-                "email": "hostmaster.contoso.com",
-                "serialNumber": 1,
-                "refreshTime": 3600,
-                "retryTime": 300,
-                "expireTime": 2419200,
-                "minimumTTL": 300
+              "metadata": {
+                "key1": "value1"
               }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "RecordSets_ListByType",
+  "title": "List SOA recordsets"
 }

@@ -1,22 +1,21 @@
-import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Network;
 
-@@clientName(RecordSetProperties.ARecords, "aRecords");
-@@clientName(RecordSetProperties.AAAARecords, "aaaaRecords");
-@@clientName(RecordSetProperties.MXRecords, "mxRecords");
+@@clientName(RecordSetProperties.ARecords, "ARecords");
+@@clientName(RecordSetProperties.AAAARecords, "AaaaRecords");
+@@clientName(RecordSetProperties.MXRecords, "MxRecords");
 @@clientName(RecordSetProperties.NSRecords, "NsRecords");
-@@clientName(RecordSetProperties.PTRRecords, "ptrRecords");
-@@clientName(RecordSetProperties.SRVRecords, "srvRecords");
-@@clientName(RecordSetProperties.TXTRecords, "txtRecords");
-@@clientName(RecordSetProperties.CNAMERecord, "cnameRecord");
-@@clientName(RecordSetProperties.SOARecord, "soaRecord");
+@@clientName(RecordSetProperties.PTRRecords, "PtrRecords");
+@@clientName(RecordSetProperties.SRVRecords, "SrvRecords");
+@@clientName(RecordSetProperties.TXTRecords, "TxtRecords");
+@@clientName(RecordSetProperties.CNAMERecord, "CnameRecord");
+@@clientName(RecordSetProperties.SOARecord, "SoaRecord");
 @@clientName(RecordSetProperties.DSRecords, "DsRecords");
-@@clientName(RecordSetProperties.TLSARecords, "tlsaRecords");
-@@clientName(RecordSetProperties.NAPTRRecords, "naptrRecords");
-
+@@clientName(RecordSetProperties.TLSARecords, "TlsaRecords");
+@@clientName(RecordSetProperties.NAPTRRecords, "NaptrRecords");
+@@clientName(RecordSetProperties.caaRecords, "CaaRecords");
 @@clientName(SoaRecord.minimumTTL, "minimumTtl");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -39,3 +38,7 @@ using Microsoft.Network;
 @@clientName(Zones.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Zone.properties);
+@@visibility(DnssecConfig.properties, Lifecycle.Read);
+@@clientName(DnsResourceReferenceOperationGroup.getByTargetResources::parameters.body,
+  "parameters"
+);

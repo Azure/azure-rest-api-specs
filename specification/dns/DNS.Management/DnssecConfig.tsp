@@ -36,7 +36,7 @@ interface DnssecConfigs {
   /**
    * Gets the DNSSEC configuration.
    */
-  get is ArmResourceRead<DnssecConfig>;
+  get is ArmResourceRead<DnssecConfig, Error = CloudError>;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
@@ -48,16 +48,18 @@ interface DnssecConfigs {
       /**
        * The etag of the DNSSEC configuration. Omit this value to always overwrite the DNSSEC configuration. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow this DNSSEC configuration to be created, but to prevent updating existing DNSSEC configuration. Other values will be ignored.
        */
-      @header
+      @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -70,16 +72,17 @@ interface DnssecConfigs {
       /**
        * The etag of this DNSSEC configuration. Omit this value to always delete the DNSSEC configuration. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
    * Lists the DNSSEC configurations in a DNS zone.
    */
-  listByDnsZone is ArmResourceListByParent<DnssecConfig>;
+  listByDnsZone is ArmResourceListByParent<DnssecConfig, Error = CloudError>;
 }
 
 @@doc(DnssecConfig.name, "");

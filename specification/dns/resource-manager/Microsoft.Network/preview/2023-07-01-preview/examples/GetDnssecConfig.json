@@ -1,17 +1,17 @@
 {
   "parameters": {
-    "zoneName": "zone1",
-    "resourceGroupName": "rg1",
     "api-version": "2023-07-01-preview",
-    "subscriptionId": "subid"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnszones/zone1/dnssecConfigs/default",
         "name": "default",
         "type": "Microsoft.Network/dnszones/dnssecConfigs",
         "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnszones/zone1/dnssecConfigs/default",
         "properties": {
           "provisioningState": "Succeeded",
           "signingKeys": [
@@ -19,9 +19,9 @@
               "delegationSignerInfo": [],
               "flags": 256,
               "keyTag": 37721,
-              "protocol": 3,
               "publicKey": "publicKey1",
-              "securityAlgorithmType": 13
+              "securityAlgorithmType": 13,
+              "protocol": 3
             },
             {
               "delegationSignerInfo": [
@@ -33,13 +33,15 @@
               ],
               "flags": 257,
               "keyTag": 11920,
-              "protocol": 3,
               "publicKey": "publicKey2",
-              "securityAlgorithmType": 13
+              "securityAlgorithmType": 13,
+              "protocol": 3
             }
           ]
         }
       }
     }
-  }
+  },
+  "operationId": "DnssecConfigs_Get",
+  "title": "Get DnssecConfig"
 }

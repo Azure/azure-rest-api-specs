@@ -13,7 +13,11 @@ namespace Microsoft.Network;
 /**
  * Describes a DNS zone.
  */
-model Zone is Azure.ResourceManager.TrackedResource<ZoneProperties> {
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@Azure.ResourceManager.Private.armResourceInternal(ZoneProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model Zone extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = Zone,
     KeyName = "zoneName",
@@ -26,6 +30,14 @@ model Zone is Azure.ResourceManager.TrackedResource<ZoneProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   etag?: string;
+
+  /*
+   *aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  properties?: ZoneProperties;
 }
 
 @armResourceOperations
@@ -33,7 +45,7 @@ interface Zones {
   /**
    * Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.
    */
-  get is ArmResourceRead<Zone>;
+  get is ArmResourceRead<Zone, Error = CloudError>;
 
   /**
    * Creates or updates a DNS zone. Does not modify DNS records within the zone.
@@ -44,15 +56,16 @@ interface Zones {
       /**
        * The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored.
        */
-      @header
+      @header("If-None-Match")
       IfNoneMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -66,9 +79,10 @@ interface Zones {
       /**
        * The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -81,10 +95,11 @@ interface Zones {
       /**
        * The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -98,12 +113,14 @@ interface Zones {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Lists the DNS zones in all resource groups in a subscription.
    */
+  @segment("dnszones")
   list is ArmListBySubscription<
     Zone,
     Parameters = {
@@ -112,7 +129,8 @@ interface Zones {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -138,7 +156,8 @@ interface Zones {
        */
       @query("$recordsetnamesuffix")
       $recordsetnamesuffix?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -164,7 +183,8 @@ interface Zones {
        */
       @query("$recordsetnamesuffix")
       recordSetNameSuffix?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 
