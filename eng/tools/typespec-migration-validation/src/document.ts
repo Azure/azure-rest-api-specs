@@ -27,7 +27,14 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
   for (const route in document.paths) {
     const path = document.paths[route] as OpenAPI2PathItem;
     const processedPath = processPath(path);
-    newDocument.paths[route] = processedPath;
+    if (configuration.ignorePathCase) {
+      const normalizedRoute = route.replace(/\/resourcegroups\//i, '/resourceGroups/');
+      delete newDocument.paths[route];  
+      newDocument.paths[normalizedRoute] = processedPath;
+    }
+    else {
+      newDocument.paths[route] = processedPath;
+    }
   }
 
   for (const definitionName in document.definitions) {
