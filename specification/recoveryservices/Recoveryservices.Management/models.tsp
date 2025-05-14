@@ -1007,11 +1007,13 @@ model PrivateEndpointConnection {
   /**
    * The Private Endpoint network resource that is linked to the Private Endpoint connection.
    */
+  @visibility(Lifecycle.Read)
   privateEndpoint?: PrivateEndpoint;
 
   /**
    * Gets or sets private link service connection state.
    */
+  @visibility(Lifecycle.Read)
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
 
   /**
