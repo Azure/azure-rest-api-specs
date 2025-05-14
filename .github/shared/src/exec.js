@@ -66,7 +66,9 @@ export async function execFile(file, args, options = {}) {
 
     return result;
   } catch (error) {
+    /* v8 ignore next */
     logger?.debug(`error: '${JSON.stringify(error)}'`);
+
     throw error;
   }
 }
@@ -80,6 +82,8 @@ export async function execFile(file, args, options = {}) {
  * @throws {ExecError}
  */
 export async function execNpm(args, options = {}) {
+  // Exclude platform-specific code from coverage
+  /* v8 ignore start */
   const { file, defaultArgs } =
     process.platform === "win32"
       ? {
@@ -107,6 +111,7 @@ export async function execNpm(args, options = {}) {
           ],
         }
       : { file: "npm", defaultArgs: [] };
+  /* v8 ignore stop */
 
   return await execFile(file, [...defaultArgs, ...args], options);
 }
