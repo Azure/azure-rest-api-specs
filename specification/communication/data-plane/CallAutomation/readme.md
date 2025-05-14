@@ -26,7 +26,7 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2025-05-15
+tag: package-2025-03-30-preview
 ```
 
 ### Tag: package-2022-04-07-preview
@@ -128,13 +128,13 @@ suppressions:
     reason: Our LRO behavior does not fit the default behavior
 ```
 
-### Tag: package-2025-03-30-preview
+### Tag: package-2025-05-15
 
-These settings apply only when `--tag=package-2025-03-30-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-05-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-03-30-preview'
+```yaml $(tag) == 'package-2025-05-15'
 input-file:
-  - preview/2025-03-30-preview/communicationservicescallautomation.json
+  - stable/2025-05-15/communicationservicescallautomation.json
 title:
   Azure Communication Services
 suppressions:
@@ -143,13 +143,13 @@ suppressions:
     reason: Our LRO behavior does not fit the default behavior
 ```
 
-### Tag: package-2025-05-15
+### Tag: package-2025-03-30-preview
 
-These settings apply only when `--tag=package-2025-05-15` is specified on the command line.
+These settings apply only when `--tag=package-2025-03-30-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-05-15'
+```yaml $(tag) == 'package-2025-03-30-preview'
 input-file:
-  - stable/2025-05-15/communicationservicescallautomation.json
+  - preview/2025-03-30-preview/communicationservicescallautomation.json
 title:
   Azure Communication Services
 suppressions:
