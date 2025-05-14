@@ -50,7 +50,7 @@ interface StorageTasks {
     StorageTask,
     Response = ArmResourceUpdatedResponse<StorageTask> | ArmResourceCreatedResponse<
       StorageTask,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = StorageTask> & Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 
