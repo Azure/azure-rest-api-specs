@@ -6972,12 +6972,12 @@
         ]
       }
     },
-    "DatafloGraphDestinationNode": {
+    "DatafloGraphNodeDestination": {
       "type": "object",
       "description": "DataflowGraph destination node properties.",
       "properties": {
         "destinationSettings": {
-          "$ref": "#/definitions/DataflowGraphDestinationNodeSettings",
+          "$ref": "#/definitions/DataflowGraphNodeDestinationSettings",
           "description": "Destination configuration."
         }
       },
@@ -8206,65 +8206,6 @@
         "name"
       ]
     },
-    "DataflowGraphDestinationNodeSettings": {
-      "type": "object",
-      "description": "DataflowGraph destination node settings.",
-      "properties": {
-        "endpointRef": {
-          "type": "string",
-          "description": "The endpoint reference for the destination."
-        },
-        "dataDestination": {
-          "type": "string",
-          "description": "Data destination at the endpoint."
-        },
-        "outputSchemaSettings": {
-          "$ref": "#/definitions/DataflowGraphSchemaSettings",
-          "description": "Output schema settings."
-        }
-      },
-      "required": [
-        "endpointRef",
-        "dataDestination"
-      ]
-    },
-    "DataflowGraphGraphNode": {
-      "type": "object",
-      "description": "DataflowGraph graph node properties.",
-      "properties": {
-        "graphSettings": {
-          "$ref": "#/definitions/DataflowGraphNodeGraphSettings",
-          "description": "Graph configuration."
-        }
-      },
-      "required": [
-        "graphSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataflowGraphNode"
-        }
-      ],
-      "x-ms-discriminator-value": "Graph"
-    },
-    "DataflowGraphGraphNodeConfiguration": {
-      "type": "object",
-      "description": "DataflowGraph graph node configuration.",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Key of the configuration."
-        },
-        "value": {
-          "type": "string",
-          "description": "Value of the configuration."
-        }
-      },
-      "required": [
-        "key",
-        "value"
-      ]
-    },
     "DataflowGraphNode": {
       "type": "object",
       "description": "DataflowGraph node properties.",
@@ -8302,6 +8243,65 @@
         "to"
       ]
     },
+    "DataflowGraphNodeDestinationSettings": {
+      "type": "object",
+      "description": "DataflowGraph destination node settings.",
+      "properties": {
+        "endpointRef": {
+          "type": "string",
+          "description": "The endpoint reference for the destination."
+        },
+        "dataDestination": {
+          "type": "string",
+          "description": "Data destination at the endpoint."
+        },
+        "outputSchemaSettings": {
+          "$ref": "#/definitions/DataflowGraphSchemaSettings",
+          "description": "Output schema settings."
+        }
+      },
+      "required": [
+        "endpointRef",
+        "dataDestination"
+      ]
+    },
+    "DataflowGraphNodeGraph": {
+      "type": "object",
+      "description": "DataflowGraph graph node properties.",
+      "properties": {
+        "graphSettings": {
+          "$ref": "#/definitions/DataflowGraphNodeGraphSettings",
+          "description": "Graph configuration."
+        }
+      },
+      "required": [
+        "graphSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphNode"
+        }
+      ],
+      "x-ms-discriminator-value": "Graph"
+    },
+    "DataflowGraphNodeGraphConfiguration": {
+      "type": "object",
+      "description": "DataflowGraph graph node configuration.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key of the configuration."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the configuration."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
     "DataflowGraphNodeGraphSettings": {
       "type": "object",
       "description": "DataflowGraph graph node settings.",
@@ -8318,7 +8318,7 @@
           "type": "array",
           "description": "Configuration key-value pairs.",
           "items": {
-            "$ref": "#/definitions/DataflowGraphGraphNodeConfiguration"
+            "$ref": "#/definitions/DataflowGraphNodeGraphConfiguration"
           },
           "x-ms-identifiers": [
             "key"
@@ -8328,6 +8328,46 @@
       "required": [
         "registryEndpointRef",
         "artifact"
+      ]
+    },
+    "DataflowGraphNodeSource": {
+      "type": "object",
+      "description": "DataflowGraph source node properties.",
+      "properties": {
+        "sourceSettings": {
+          "$ref": "#/definitions/DataflowGraphNodeSourceSettings",
+          "description": "Source configuration."
+        }
+      },
+      "required": [
+        "sourceSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphNode"
+        }
+      ],
+      "x-ms-discriminator-value": "Source"
+    },
+    "DataflowGraphNodeSourceSettings": {
+      "type": "object",
+      "description": "DataflowGraph source node settings.",
+      "properties": {
+        "endpointRef": {
+          "type": "string",
+          "description": "The endpoint reference for the source."
+        },
+        "dataSources": {
+          "type": "array",
+          "description": "List of data sources.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "endpointRef",
+        "dataSources"
       ]
     },
     "DataflowGraphNodeType": {
@@ -8518,46 +8558,6 @@
           }
         ]
       }
-    },
-    "DataflowGraphSourceNode": {
-      "type": "object",
-      "description": "DataflowGraph source node properties.",
-      "properties": {
-        "sourceSettings": {
-          "$ref": "#/definitions/DataflowGraphSourceSettings",
-          "description": "Source configuration."
-        }
-      },
-      "required": [
-        "sourceSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataflowGraphNode"
-        }
-      ],
-      "x-ms-discriminator-value": "Source"
-    },
-    "DataflowGraphSourceSettings": {
-      "type": "object",
-      "description": "DataflowGraph source node settings.",
-      "properties": {
-        "endpointRef": {
-          "type": "string",
-          "description": "The endpoint reference for the source."
-        },
-        "dataSources": {
-          "type": "array",
-          "description": "List of data sources.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "endpointRef",
-        "dataSources"
-      ]
     },
     "DataflowMappingType": {
       "type": "string",

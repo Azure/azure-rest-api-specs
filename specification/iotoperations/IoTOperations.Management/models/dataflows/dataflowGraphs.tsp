@@ -144,7 +144,7 @@ model DatafloGraphDestinationNode extends DataflowGraphNode {
 /** DataflowGraph destination node settings. */
 @added(Versions.`2025-07-01-preview`)
 model DataflowGraphDestinationNodeSettings {
-  /** The endpoint reference for the destination. */
+  /** The name of the DataflowEndpoint resource . */
   endpointRef: string;
 
   /** Data destination at the endpoint. */

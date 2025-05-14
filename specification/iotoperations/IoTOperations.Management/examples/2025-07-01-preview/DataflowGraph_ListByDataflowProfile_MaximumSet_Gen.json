@@ -18,8 +18,27 @@
               "requestDiskPersistence": "Enabled",
               "nodes": [
                 {
-                  "name": "gjbjgii",
-                  "type": "DataflowGraphNode"
+                  "type": "Source",
+                  "sourceSettings": {
+                    "endpointRef": "my-endpoint",
+                    "dataSources": [
+                      "source1"
+                    ]
+                  }
+                },
+                {
+                  "type": "Graph",
+                  "graphSettings": {
+                    "registryEndpointRef": "my-registry-endpoint",
+                    "artifact": "my-wasm-module:1.4.3"
+                  }
+                },
+                {
+                  "type": "Destination",
+                  "destinationSettings": {
+                    "endpointRef": "my-endpoint",
+                    "dataDestinations": "destination1"
+                  }
                 }
               ],
               "nodeConnections": [
