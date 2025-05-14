@@ -33,7 +33,8 @@ interface MetadataEntities {
   @operationId("RecommendationMetadata_Get")
   get is ArmResourceRead<
     MetadataEntity,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ArmErrorResponse
   >;
 
   /**
@@ -43,7 +44,8 @@ interface MetadataEntities {
   @operationId("RecommendationMetadata_List")
   list is ArmResourceListByParent<
     MetadataEntity,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ArmErrorResponse
   >;
 }
 

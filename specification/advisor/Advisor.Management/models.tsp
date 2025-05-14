@@ -863,7 +863,7 @@ model AdvisorScoreEntityProperties {
   /**
    * The historic Advisor score data.
    */
-  timeSeries?: TimeSeriesEntityItem[];
+  timeSeries?: TimeSeriesEntity[];
 }
 
 /**
@@ -905,7 +905,7 @@ model ScoreEntity {
 /**
  * The data from different aggregation levels.
  */
-model TimeSeriesEntityItem {
+model TimeSeriesEntity {
   /**
    * The aggregation level of the score.
    */
@@ -1233,5 +1233,11 @@ model AssessmentListResult is Azure.Core.Page<AssessmentResult>;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ConfigurationListResult is Azure.Core.Page<ConfigData>;
 
-@@doc(AdvisorScoreEntityProperties.lastRefreshedScore, "The details of latest available score.");
-@@doc(AdvisorScoreEntityProperties.timeSeries, "The historic Advisor score data.");
+model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
+
+@@doc(AdvisorScoreEntityProperties.lastRefreshedScore,
+  "The details of latest available score."
+);
+@@doc(AdvisorScoreEntityProperties.timeSeries,
+  "The historic Advisor score data."
+);

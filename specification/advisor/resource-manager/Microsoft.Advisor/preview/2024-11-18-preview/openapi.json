@@ -100,7 +100,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -150,7 +150,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -200,7 +200,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -254,10 +254,13 @@
               "$ref": "#/definitions/SuppressionContract"
             }
           },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -302,7 +305,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -335,7 +338,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -378,7 +381,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -405,13 +408,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationEntityListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -450,7 +453,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -493,7 +496,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -764,6 +767,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/ListConfigurations_ListBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -821,8 +829,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutConfigurations": {
+            "$ref": "./examples/CreateConfiguration_CreateInSubscription.json"
           }
         }
       }
@@ -853,7 +866,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -925,7 +938,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "predictionRequest",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -944,7 +957,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -1002,7 +1015,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -1530,7 +1543,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -1611,7 +1624,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -1684,7 +1697,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -1697,6 +1710,20 @@
     }
   },
   "definitions": {
+    "ARMErrorResponseBody": {
+      "type": "object",
+      "description": "ARM error response body.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the string that describes the error in detail and provides debugging information."
+        },
+        "code": {
+          "type": "string",
+          "description": "Gets or sets the string that can be used to programmatically identify the error."
+        }
+      }
+    },
     "AdvisorScoreEntity": {
       "type": "object",
       "description": "The details of Advisor score for a single category.",
@@ -1725,7 +1752,7 @@
           "type": "array",
           "description": "The historic Advisor score data.",
           "items": {
-            "$ref": "#/definitions/TimeSeriesEntityItem"
+            "$ref": "#/definitions/TimeSeriesEntity"
           },
           "x-ms-identifiers": []
         }
@@ -1768,6 +1795,15 @@
             "value": "month"
           }
         ]
+      }
+    },
+    "ArmErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ARMErrorResponseBody",
+          "description": "ARM error response body."
+        }
       }
     },
     "AssessmentListResult": {
@@ -2268,6 +2304,64 @@
           "description": "The display name."
         }
       }
+    },
+    "OperationDisplayInfo": {
+      "type": "object",
+      "description": "The operation supported by Advisor.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The action that users can perform, based on their permission level."
+        },
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft Advisor."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        }
+      }
+    },
+    "OperationEntity": {
+      "type": "object",
+      "description": "The operation supported by Advisor.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by Advisor."
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "type": "object",
+      "description": "Paged collection of OperationEntity items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OperationEntity items on this page",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PredictionRequest": {
       "type": "object",
@@ -3067,7 +3161,7 @@
         }
       }
     },
-    "TimeSeriesEntityItem": {
+    "TimeSeriesEntity": {
       "type": "object",
       "description": "The data from different aggregation levels.",
       "properties": {

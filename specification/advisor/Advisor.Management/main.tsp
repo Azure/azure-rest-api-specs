@@ -21,6 +21,7 @@ import "./ResiliencyReview.tsp";
 import "./TriageRecommendation.tsp";
 import "./TriageResource.tsp";
 import "./routes.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -49,4 +50,19 @@ enum Versions {
   v2024_11_18_preview: "2024-11-18-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  @tag("Operations")
+  @autoRoute
+  @Azure.ResourceManager.Private.armUpdateProviderNamespace
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationEntityListResult> | ArmErrorResponse;
+}

@@ -36,6 +36,7 @@ interface SuppressionContracts {
   get is ArmResourceRead<
     SuppressionContract,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Error = ArmErrorResponse
   >;
 
   /**
@@ -47,7 +48,8 @@ interface SuppressionContracts {
   create is ArmResourceCreateOrReplaceSync<
     SuppressionContract,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Response = ArmResourceUpdatedResponse<SuppressionContract>
+    Response = ArmResourceUpdatedResponse<SuppressionContract> | NotFoundResponse,
+    Error = ArmErrorResponse
   >;
 
   /**
@@ -59,7 +61,8 @@ interface SuppressionContracts {
   delete is ArmResourceDeleteSync<
     SuppressionContract,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse,
+    Error = ArmErrorResponse
   >;
 }
 

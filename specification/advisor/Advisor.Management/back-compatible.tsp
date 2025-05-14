@@ -1,4 +1,3 @@
-import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -44,4 +43,9 @@ using Microsoft.Advisor;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(TriageResource.properties);
 
-@@clientName(SuppressionContracts.create::parameters.resource, "suppressionContract");
+@@clientName(SuppressionContracts.create::parameters.resource,
+  "suppressionContract"
+);
+@@clientName(PredictsOperationGroup.predict::parameters.body,
+  "predictionRequest"
+);

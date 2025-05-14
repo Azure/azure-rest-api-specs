@@ -6,194 +6,220 @@ import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-
 namespace Microsoft.Advisor;
-
-
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ConfigurationsOperationGroup {
-@summary("Retrieve Azure Advisor configurations.")
-/**
-* Retrieve Azure Advisor configurations and also retrieve configurations of contained resource groups.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Configurations_ListBySubscription")
-@autoRoute
-@get
-@action("configurations")
-listBySubscription is ArmProviderActionSync<Response = ArmResponse<ConfigurationListResult>,Scope = SubscriptionActionScope,Parameters = {}>;
-@summary("Create/Overwrite Azure Advisor configuration.")
-/**
-* Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Configurations_CreateInSubscription")
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/{configurationName}")
-@put op `createInSubscription`(
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-/**
-* Advisor configuration name. Value must be 'default'
-*/
-@path
-"configurationName": ConfigurationName,
-/**
-* The Azure Advisor configuration data structure.
-*/
-@bodyRoot
-"configContract": ConfigData
-        ): ArmResponse<ConfigData> | ErrorResponse;
+  /**
+   * Retrieve Azure Advisor configurations and also retrieve configurations of contained resource groups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Retrieve Azure Advisor configurations.")
+  @operationId("Configurations_ListBySubscription")
+  @autoRoute
+  @get
+  @action("configurations")
+  listBySubscription is ArmProviderActionSync<
+    Response = ArmResponse<ConfigurationListResult>,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
+  /**
+   * Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Create/Overwrite Azure Advisor configuration.")
+  @operationId("Configurations_CreateInSubscription")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/{configurationName}")
+  @put
+  createInSubscription(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
+    /**
+     * Advisor configuration name. Value must be 'default'
+     */
+    @path
+    configurationName: ConfigurationName,
 
+    /**
+     * The Azure Advisor configuration data structure.
+     */
+    @bodyRoot
+    configContract: ConfigData,
+  ): ArmResponse<ConfigData> | ArmErrorResponse;
 
-@summary("Retrieve Azure Advisor configurations.")
-/**
-* Retrieve Azure Advisor configurations.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Configurations_ListByResourceGroup")
-@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations")
-@get op `listByResourceGroup`(
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-/**
-* The name of the Azure resource group.
-*/
-@path
-"resourceGroup": string
-        ): ArmResponse<ResourceListResult<ConfigData>> | ErrorResponse;
+  /**
+   * Retrieve Azure Advisor configurations.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Retrieve Azure Advisor configurations.")
+  @operationId("Configurations_ListByResourceGroup")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations")
+  @get
+  listByResourceGroup(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
+    /**
+     * The name of the Azure resource group.
+     */
+    @path
+    resourceGroup: string,
+  ): ArmResponse<ResourceListResult<ConfigData>> | ArmErrorResponse;
 
+  /**
+   * Create/Overwrite Azure Advisor configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Create/Overwrite Azure Advisor configuration.")
+  @operationId("Configurations_CreateInResourceGroup")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}")
+  @put
+  createInResourceGroup(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-@summary("Create/Overwrite Azure Advisor configuration.")
-/**
-* Create/Overwrite Azure Advisor configuration.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Configurations_CreateInResourceGroup")
-@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}")
-@put op `createInResourceGroup`(
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-/**
-* Advisor configuration name. Value must be 'default'
-*/
-@path
-"configurationName": ConfigurationName,
-/**
-* The name of the Azure resource group.
-*/
-@path
-"resourceGroup": string,
-/**
-* The Azure Advisor configuration data structure.
-*/
-@bodyRoot
-"configContract": ConfigData
-        ): ArmResponse<ConfigData> | ErrorResponse;
+    /**
+     * Advisor configuration name. Value must be 'default'
+     */
+    @path
+    configurationName: ConfigurationName,
 
+    /**
+     * The name of the Azure resource group.
+     */
+    @path
+    resourceGroup: string,
 
-
+    /**
+     * The Azure Advisor configuration data structure.
+     */
+    @bodyRoot
+    configContract: ConfigData,
+  ): ArmResponse<ConfigData> | ArmErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface RecommendationsOperationGroup {
-/**
-* Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Recommendations_Generate")
-@autoRoute
-@action("generateRecommendations")
-generate is ArmProviderActionSync<
-Scope = SubscriptionActionScope,Parameters = {},
-Response = ArmAcceptedResponse
->;
-/**
-* Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Recommendations_GetGenerateStatus")
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}")
-@get op `getGenerateStatus`(
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-/**
-* The operation ID, which can be found from the Location field in the generate recommendation response header.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-format"
-@format("uuid")
-@path
-"operationId": string
-        ): | ArmAcceptedResponse | NoContentResponse | ErrorResponse;
+  /**
+   * Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Recommendations_Generate")
+  @autoRoute
+  @action("generateRecommendations")
+  generate is ArmProviderActionSync<
+    Scope = SubscriptionActionScope,
+    Parameters = {},
+    Response = ArmAcceptedResponse,
+    Error = ArmErrorResponse
+  >;
+  /**
+   * Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Recommendations_GetGenerateStatus")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}")
+  @get
+  getGenerateStatus(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-
-
+    /**
+     * The operation ID, which can be found from the Location field in the generate recommendation response header.
+     */
+    #suppress "@azure-tools/typespec-azure-core/no-format"
+    @format("uuid")
+    @path
+    operationId: string,
+  ): ArmAcceptedResponse | NoContentResponse | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface SuppressionsOperationGroup {
-/**
-* Retrieves the list of snoozed or dismissed suppressions for a subscription. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Suppressions_List")
-@autoRoute
-@get
-@action("suppressions")
-list is ArmProviderActionSync<Response = ResourceListResult<SuppressionContract>,Scope = SubscriptionActionScope,Parameters = {/**
-* The number of suppressions per page if a paged version of this API is being used.
-*/
-@query("$top")
-"$top"?: int32,/**
-* The page-continuation token to use with a paged version of this API.
-*/
-@query("$skipToken")
-"$skipToken"?: string}>
+  /**
+   * Retrieves the list of snoozed or dismissed suppressions for a subscription. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Suppressions_List")
+  @autoRoute
+  @get
+  @action("suppressions")
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<SuppressionContract>,
+    Scope = SubscriptionActionScope,
+    Parameters = {
+      /**
+       * The number of suppressions per page if a paged version of this API is being used.
+       */
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * The page-continuation token to use with a paged version of this API.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    },
+    Error = ArmErrorResponse
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface PredictsOperationGroup {
-@summary("Predicts a recommendation.")
-/**
-* Predicts a recommendation.
-*/
-@autoRoute
-@operationId("Predict")
-predict is ArmProviderActionSync<Request = PredictionRequest,Response = PredictionResponse,Scope = SubscriptionActionScope,Parameters = {}>
+  /**
+   * Predicts a recommendation.
+   */
+  @summary("Predicts a recommendation.")
+  @autoRoute
+  @operationId("Predict")
+  predict is ArmProviderActionSync<
+    Request = PredictionRequest,
+    Response = PredictionResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = {},
+    Error = ArmErrorResponse
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface AssessmentTypesOperationGroup {
-@summary("Get assessment types list.")
-/**
-* Get list of Azure Advisor assessment types.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("AssessmentTypes_List")
-@autoRoute
-@get
-@action("assessmentTypes")
-list is ArmProviderActionSync<Response = AssessmentTypeListResult,Scope = SubscriptionActionScope,Parameters = {}>
+  /**
+   * Get list of Azure Advisor assessment types.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get assessment types list.")
+  @operationId("AssessmentTypes_List")
+  @autoRoute
+  @get
+  @action("assessmentTypes")
+  list is ArmProviderActionSync<
+    Response = AssessmentTypeListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface WorkloadsOperationGroup {
-@summary("Get Workloads list.")
-/**
-* Get list of Workloads.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Workloads_List")
-@autoRoute
-@get
-@action("workloads")
-list is ArmProviderActionSync<Response = WorkloadListResult,Scope = SubscriptionActionScope,Parameters = {}>
+  /**
+   * Get list of Workloads.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get Workloads list.")
+  @operationId("Workloads_List")
+  @autoRoute
+  @get
+  @action("workloads")
+  list is ArmProviderActionSync<
+    Response = WorkloadListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
 }

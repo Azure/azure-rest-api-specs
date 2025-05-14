@@ -34,6 +34,7 @@ interface ResourceRecommendationBases {
   get is ArmResourceRead<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Error = ArmErrorResponse
   >;
 
   /**
@@ -46,6 +47,7 @@ interface ResourceRecommendationBases {
     ResourceRecommendationBase,
     PatchModel = TrackedRecommendationPropertiesPayload,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Error = ArmErrorResponse
   >;
 
   /**
@@ -74,7 +76,8 @@ interface ResourceRecommendationBases {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    Error = ArmErrorResponse
   >;
 }
 
