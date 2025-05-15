@@ -28,7 +28,7 @@ These are the global settings for the adp.
 title: FluidRelayManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-03-10-preview
+tag: package-2025-05-14-preview
 ```
 
 ### Tag: package-2025-02-07-preview
