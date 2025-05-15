@@ -4,6 +4,7 @@ import { getOpenapiType } from "./markdown-utils.js";
 import { getPathToDependency, isFailure } from "./util.js";
 import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
 import { execNpmExec, isExecError, ExecError } from "@azure-tools/specs-shared/exec";
+import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
@@ -53,13 +54,15 @@ export async function runChecks(
         autorestArgs.push(`--tag=${tag}`);
       }
       autorestArgs.push(changedFilePath);
-
-      const autorestCommand = `npm ${autorestArgs.join(" ")}`;
+      const autorestCommand = `npm exec -- ${autorestArgs.join(" ")}`;
       console.log(`\tAutorest command: ${autorestCommand}`);
 
       let lintDiffResult: AutorestRunResult;
       try {
-        const executionResult = await execNpmExec(autorestArgs, { maxBuffer: MAX_EXEC_BUFFER });
+        const executionResult = await execNpmExec(
+          autorestArgs, 
+          { maxBuffer: MAX_EXEC_BUFFER, logger: new ConsoleLogger(true) }
+        );
 
         lintDiffResult = {
           autorestCommand,
