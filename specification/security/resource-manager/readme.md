@@ -612,8 +612,6 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
-- Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
-- Microsoft.Security/stable/2021-06-01/assessments.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
