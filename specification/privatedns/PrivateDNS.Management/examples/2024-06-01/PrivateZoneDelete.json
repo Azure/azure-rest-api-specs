@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "privateZoneName": "privatezone1.com",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationStatuses/asyncOperationId?api-version=2024-06-01",
+        "Location": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationResults/asyncOperationId?api-version=2024-06-01",
+        "Retry-After": "60"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "PrivateZones_Delete",
+  "title": "DELETE Private DNS Zone"
+}
