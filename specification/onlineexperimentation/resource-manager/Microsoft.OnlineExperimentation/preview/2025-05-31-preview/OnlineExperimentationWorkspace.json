@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "OnlineExperimentWorkspaces"
+      "name": "OnlineExperimentationWorkspaces"
     }
   ],
   "paths": {
@@ -74,8 +74,8 @@
           }
         },
         "x-ms-examples": {
-          "List Online Experiment Workspaces operations.": {
-            "$ref": "./examples/OnlineExperimentWorkspaces_OperationsList.json"
+          "List Online Experimentation Workspaces operations.": {
+            "$ref": "./examples/OnlineExperimentationWorkspaces_OperationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -85,11 +85,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.OnlineExperimentation/workspaces": {
       "get": {
-        "operationId": "OnlineExperimentWorkspaces_ListBySubscription",
+        "operationId": "OnlineExperimentationWorkspaces_ListBySubscription",
         "tags": [
-          "OnlineExperimentWorkspaces"
+          "OnlineExperimentationWorkspaces"
         ],
-        "description": "Gets all experiment workspaces in the specified subscription.",
+        "description": "Gets all online experimentation workspaces in the specified subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -102,7 +102,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OnlineExperimentWorkspaceListResult"
+              "$ref": "#/definitions/OnlineExperimentationWorkspaceListResult"
             }
           },
           "default": {
@@ -113,8 +113,8 @@
           }
         },
         "x-ms-examples": {
-          "List Online Experiment Workspaces in a subscription.": {
-            "$ref": "./examples/OnlineExperimentWorkspaces_ListBySubscription.json"
+          "List Online Experimentation Workspaces in a subscription.": {
+            "$ref": "./examples/OnlineExperimentationWorkspaces_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -124,11 +124,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OnlineExperimentation/workspaces": {
       "get": {
-        "operationId": "OnlineExperimentWorkspaces_ListByResourceGroup",
+        "operationId": "OnlineExperimentationWorkspaces_ListByResourceGroup",
         "tags": [
-          "OnlineExperimentWorkspaces"
+          "OnlineExperimentationWorkspaces"
         ],
-        "description": "Gets all experiment workspaces in a resource group.",
+        "description": "Gets all online experimentation workspaces in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OnlineExperimentWorkspaceListResult"
+              "$ref": "#/definitions/OnlineExperimentationWorkspaceListResult"
             }
           },
           "default": {
@@ -155,8 +155,8 @@
           }
         },
         "x-ms-examples": {
-          "List OnlineExperimentWorkspaces in a resource group.": {
-            "$ref": "./examples/OnlineExperimentWorkspaces_ListByResourceGroup.json"
+          "List OnlineExperimentationWorkspaces in a resource group.": {
+            "$ref": "./examples/OnlineExperimentationWorkspaces_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -166,11 +166,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OnlineExperimentation/workspaces/{workspaceName}": {
       "get": {
-        "operationId": "OnlineExperimentWorkspaces_Get",
+        "operationId": "OnlineExperimentationWorkspaces_Get",
         "tags": [
-          "OnlineExperimentWorkspaces"
+          "OnlineExperimentationWorkspaces"
         ],
-        "description": "Gets an experiment workspace",
+        "description": "Gets an online experimentation workspace.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -184,7 +184,7 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "The name of the OnlineExperimentWorkspace",
+            "description": "The name of the OnlineExperimentationWorkspace",
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
@@ -194,7 +194,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OnlineExperimentWorkspace"
+              "$ref": "#/definitions/OnlineExperimentationWorkspace"
             }
           },
           "default": {
@@ -205,17 +205,17 @@
           }
         },
         "x-ms-examples": {
-          "Get a single OnlineExperimentWorkspace.": {
-            "$ref": "./examples/OnlineExperimentWorkspaces_Get.json"
+          "Get a single OnlineExperimentationWorkspace.": {
+            "$ref": "./examples/OnlineExperimentationWorkspaces_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "OnlineExperimentWorkspaces_CreateOrUpdate",
+        "operationId": "OnlineExperimentationWorkspaces_CreateOrUpdate",
         "tags": [
-          "OnlineExperimentWorkspaces"
+          "OnlineExperimentationWorkspaces"
         ],
-        "description": "Create an experiment workspace, or update an existing workspace",
+        "description": "Create an online experimentation workspace, or update an existing workspace.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -229,7 +229,7 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "The name of the OnlineExperimentWorkspace",
+            "description": "The name of the OnlineExperimentationWorkspace",
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
@@ -240,21 +240,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OnlineExperimentWorkspace"
+              "$ref": "#/definitions/OnlineExperimentationWorkspace"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OnlineExperimentWorkspace' update operation succeeded",
+            "description": "Resource 'OnlineExperimentationWorkspace' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/OnlineExperimentWorkspace"
+              "$ref": "#/definitions/OnlineExperimentationWorkspace"
             }
           },
           "201": {
-            "description": "Resource 'OnlineExperimentWorkspace' create operation succeeded",
+            "description": "Resource 'OnlineExperimentationWorkspace' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/OnlineExperimentWorkspace"
+              "$ref": "#/definitions/OnlineExperimentationWorkspace"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -276,11 +276,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update an OnlineExperimentWorkspace with Free sku and customer managed key.": {
-            "$ref": "./examples/OnlineExperimentWorkspaces_CreateOrUpdateWithEncryption.json"
+          "Create or update an OnlineExperimentationWorkspace with Free sku and customer managed key.": {
+            "$ref": "./examples/OnlineExperimentationWorkspaces_CreateOrUpdateWithEncryption.json"
           },
-          "Create or update an OnlineExperimentWorkspace with Free sku.": {
-            "$ref": "./examples/OnlineExperimentWorkspaces_CreateOrUpdate.json"
+          "Create or update an OnlineExperimentationWorkspace with Free sku.": {
+            "$ref": "./examples/OnlineExperimentationWorkspaces_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -289,11 +289,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "OnlineExperimentWorkspaces_Update",
+        "operationId": "OnlineExperimentationWorkspaces_Update",
         "tags": [
-          "OnlineExperimentWorkspaces"
+          "OnlineExperimentationWorkspaces"
         ],
-        "description": "Patch an experiment workspace",
+        "description": "Patch an online experimentation workspace.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -307,7 +307,7 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "The name of the OnlineExperimentWorkspace",
+            "description": "The name of the OnlineExperimentationWorkspace",
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
@@ -318,7 +318,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OnlineExperimentWorkspacePatch"
+              "$ref": "#/definitions/OnlineExperimentationWorkspacePatch"
             }
           }
         ],
@@ -326,7 +326,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OnlineExperimentWorkspace"
+              "$ref": "#/definitions/OnlineExperimentationWorkspace"
             }
           },
           "202": {
@@ -351,11 +351,11 @@
           }
         },
         "x-ms-examples": {
-          "Update an Online Experiment Workspace with customer managed encryption key.": {
-            "$ref": "./examples/OnlineExperimentWorkspaces_UpdateWithEncryption.json"
+          "Update an Online Experimentation Workspace with customer managed encryption key.": {
+            "$ref": "./examples/OnlineExperimentationWorkspaces_UpdateWithEncryption.json"
           },
-          "Update an Online Experiment Workspace.": {
-            "$ref": "./examples/OnlineExperimentWorkspaces_Update.json"
+          "Update an Online Experimentation Workspace.": {
+            "$ref": "./examples/OnlineExperimentationWorkspaces_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -364,11 +364,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "OnlineExperimentWorkspaces_Delete",
+        "operationId": "OnlineExperimentationWorkspaces_Delete",
         "tags": [
-          "OnlineExperimentWorkspaces"
+          "OnlineExperimentationWorkspaces"
         ],
-        "description": "Deletes an experiment workspace",
+        "description": "Deletes an online experimentation workspace.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -382,7 +382,7 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "The name of the OnlineExperimentWorkspace",
+            "description": "The name of the OnlineExperimentationWorkspace",
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
@@ -414,8 +414,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete an Online Experiment Workspace": {
-            "$ref": "./examples/OnlineExperimentWorkspaces_Delete.json"
+          "Delete an Online Experimentation Workspace": {
+            "$ref": "./examples/OnlineExperimentationWorkspaces_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -538,12 +538,12 @@
         ]
       }
     },
-    "OnlineExperimentWorkspace": {
+    "OnlineExperimentationWorkspace": {
       "type": "object",
-      "description": "An online experiment workspace resource.",
+      "description": "An online experimentation workspace resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OnlineExperimentWorkspaceProperties",
+          "$ref": "#/definitions/OnlineExperimentationWorkspaceProperties",
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
@@ -561,15 +561,15 @@
         }
       ]
     },
-    "OnlineExperimentWorkspaceListResult": {
+    "OnlineExperimentationWorkspaceListResult": {
       "type": "object",
-      "description": "The response of a OnlineExperimentWorkspace list operation.",
+      "description": "The response of a OnlineExperimentationWorkspace list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The OnlineExperimentWorkspace items on this page",
+          "description": "The OnlineExperimentationWorkspace items on this page",
           "items": {
-            "$ref": "#/definitions/OnlineExperimentWorkspace"
+            "$ref": "#/definitions/OnlineExperimentationWorkspace"
           }
         },
         "nextLink": {
@@ -582,9 +582,9 @@
         "value"
       ]
     },
-    "OnlineExperimentWorkspacePatch": {
+    "OnlineExperimentationWorkspacePatch": {
       "type": "object",
-      "description": "Partial update of an online experiment workspace resource.",
+      "description": "Partial update of an online experimentation workspace resource.",
       "properties": {
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
@@ -603,12 +603,12 @@
         },
         "properties": {
           "type": "object",
-          "description": "Updatable properties of the online experiment workspace resource.",
+          "description": "Updatable properties of the online experimentation workspace resource.",
           "properties": {
             "logAnalyticsWorkspaceResourceId": {
               "type": "string",
               "format": "arm-id",
-              "description": "The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.",
+              "description": "The resource identifier of the Log Analytics workspace which online experimentation workspace uses for generating experiment analysis results.",
               "x-ms-arm-id-details": {
                 "allowedResources": [
                   {
@@ -620,7 +620,7 @@
             "logsExporterStorageAccountResourceId": {
               "type": "string",
               "format": "arm-id",
-              "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.",
+              "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. online experimentation workspace uses it generating experiment analysis results.",
               "x-ms-arm-id-details": {
                 "allowedResources": [
                   {
@@ -631,15 +631,15 @@
             },
             "encryption": {
               "$ref": "#/definitions/ResourceEncryptionConfiguration",
-              "description": "The encryption configuration for the online experiment workspace resource."
+              "description": "The encryption configuration for the online experimentation workspace resource."
             }
           }
         }
       }
     },
-    "OnlineExperimentWorkspaceProperties": {
+    "OnlineExperimentationWorkspaceProperties": {
       "type": "object",
-      "description": "The properties of an online experiment workspace.",
+      "description": "The properties of an online experimentation workspace.",
       "properties": {
         "workspaceId": {
           "type": "string",
@@ -654,7 +654,7 @@
         "logAnalyticsWorkspaceResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.",
+          "description": "The resource identifier of the Log Analytics workspace which online experimentation workspace uses for generating experiment analysis results.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -666,7 +666,7 @@
         "logsExporterStorageAccountResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.",
+          "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. online experimentation workspace uses it generating experiment analysis results.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -678,7 +678,7 @@
         "appConfigurationResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource identifier of App Configuration with which this online experiment workspace is tied for experimentation. This is a required field for creating an online experiment workspace.",
+          "description": "The resource identifier of App Configuration with which this online experimentation workspace is tied for experimentation. This is a required field for creating an online experimentation workspace.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -693,12 +693,12 @@
         },
         "encryption": {
           "$ref": "#/definitions/ResourceEncryptionConfiguration",
-          "description": "The encryption configuration for the online experiment workspace resource."
+          "description": "The encryption configuration for the online experimentation workspace resource."
         },
         "endpoint": {
           "type": "string",
           "format": "uri",
-          "description": "The data plane endpoint for the online experiment workspace resource.",
+          "description": "The data plane endpoint for the online experimentation workspace resource.",
           "readOnly": true
         }
       },
@@ -810,7 +810,7 @@
     },
     "ResourceEncryptionConfiguration": {
       "type": "object",
-      "description": "The encryption configuration for the online experiment workspace resource.",
+      "description": "The encryption configuration for the online experimentation workspace resource.",
       "properties": {
         "customerManagedKeyEncryption": {
           "$ref": "#/definitions/CustomerManagedKeyEncryption",
