@@ -45,6 +45,13 @@ op getSkillsetDescriptors(
 ): SkillsetDescriptor[];
 
 @get
+@route("/skillContext/executionContext")
+@doc("Get execution context")
+op getExecutionContext(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+): MedeinaExecutionContext;
+
+@get
 @route("/skillContext/promptHistory")
 @doc("Get prompt history")
 op getPromptHistory(
