@@ -39,6 +39,10 @@ model DataflowProperties {
   @doc("Mode for Dataflow. Optional; defaults to Enabled.")
   mode?: OperationalMode = Enabled;
 
+  @doc("Disk persistence mode.")
+  @added(Versions.`2025-07-01-preview`)
+  requestDiskPersistence?: OperationalMode;
+
   @doc("List of operations including source and destination references as well as transformation.")
   @identifiers(#[])
   operations: DataflowOperation[];
