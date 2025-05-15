@@ -1,5 +1,5 @@
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { pathExists } from "./util.js";
+import { pathExists, getDependencyVersion, getPathToDependency } from "./util.js";
 import { getRunList } from "./processChanges.js";
 import { runChecks, getAutorestErrors } from "./runChecks.js";
 import { correlateRuns } from "./correlateResults.js";
@@ -87,6 +87,12 @@ export async function main() {
   // console.log("Autorest version:");
   // console.log(versionResult.stdout);
 
+  // TODO: This is duplicated in runChecks.ts. Extract.
+  const validatorVersion = await getDependencyVersion(
+    await getPathToDependency("@microsoft.azure/openapi-validator"),
+  );
+  console.log(`Using @microsoft.azure/openapi-validator version: ${validatorVersion}\n`);
+
   await runLintDiff(
     beforeArg as string,
     afterArg as string,
@@ -151,13 +157,9 @@ async function runLintDiff(
     console.error(`Lint-diff failed. See workflow summary report in ${outFile} for details.`);
   }
 
-  if (
-    process.env.GITHUB_SERVER_URL &&
-    process.env.GITHUB_REPOSITORY &&
-    process.env.GITHUB_RUN_ID
-  ) {
+  if (process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID) {
     console.log(
-    `See workflow summary at: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+      `See workflow summary at: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`,
     );
   }
 }
