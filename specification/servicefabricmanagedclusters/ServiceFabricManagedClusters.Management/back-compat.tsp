@@ -73,11 +73,6 @@ using Microsoft.ServiceFabric;
   "IsRdpAccessAllowed",
   "csharp"
 );
-// TODO: Waiting on alternateType to support non-scalers, list of binary data
-// @@clientName(ManagedClusterProperties.clusterCertificateThumbprints,
-//   "-|any",
-//   "csharp"
-// );
 @@clientName(ManagedClusterProperties.enableAutoOSUpgrade,
   "IsAutoOSUpgradeEnabled",
   "csharp"
@@ -169,8 +164,6 @@ using Microsoft.ServiceFabric;
 @@clientName(VaultCertificate, "NodeTypeVaultCertificate", "csharp");
 @@clientName(DiskType, "ServiceFabricManagedDataDiskType", "csharp");
 @@clientName(FrontendConfiguration, "NodeTypeFrontendConfiguration", "csharp");
-// TODO: Waiting on alternateType to support non-scalers, list of arm ids
-//@@clientName(VmManagedIdentity.userAssignedIdentities, "-|arm-id", "csharp");
 @@clientName(NodeTypeActionParameters, "NodeTypeActionContent", "csharp");
 @@clientName(NodeTypeActionParameters.force, "IsForced", "csharp");
 @@clientName(ServiceResource, "ServiceFabricManagedService", "csharp");
@@ -338,5 +331,16 @@ using Microsoft.ServiceFabric;
 );
 @@alternateType(AzureActiveDirectory.tenantId, uuid, "csharp");
 @@alternateType(VaultCertificate.certificateUrl, url, "csharp");
-// TODO: waiting on alternateType to support non-scalers
-// @@alternateType(ServiceEndpoint.locations, azureLocation[], "csharp");
+@@alternateType(ServiceEndpoint.locations, azureLocation[], "csharp");
+@@alternateType(ManagedClusterProperties.clusterCertificateThumbprints,
+  unknown,
+  "csharp"
+);
+@@alternateType(ClientCertificate.thumbprint, unknown, "csharp");
+@@alternateType(ClientCertificate.issuerThumbprint, unknown, "csharp");
+@@alternateType(VMSSExtensionProperties.settings, unknown, "csharp");
+@@alternateType(VMSSExtensionProperties.protectedSettings, unknown, "csharp");
+@@alternateType(VmManagedIdentity.userAssignedIdentities,
+  armResourceIdentifier[],
+  "csharp"
+);

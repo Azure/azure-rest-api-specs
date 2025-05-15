@@ -231,8 +231,7 @@ model ManagedClusterProperties {
    * List of thumbprints of the cluster certificates.
    */
   @visibility(Lifecycle.Read)
-  // TODO: Waiting for alternate type to support nonscalar values
-  clusterCertificateThumbprints?: unknown[];
+  clusterCertificateThumbprints?: string[];
 
   /**
    * The port used for client connections to the cluster.
@@ -686,8 +685,7 @@ model ServiceEndpoint {
   /**
    * A list of locations.
    */
-  // TODO: Waiting for alternate type to support nonscalar values
-  locations?: azureLocation[];
+  locations?: string[];
 }
 
 /**
@@ -1196,8 +1194,7 @@ model ClientCertificate {
   /**
    * Certificate thumbprint.
    */
-  // TODO: Waiting for alternate type to support nonscalar values
-  thumbprint?: unknown;
+  thumbprint?: string;
 
   /**
    * Certificate common name.
@@ -1207,8 +1204,7 @@ model ClientCertificate {
   /**
    * Issuer thumbprint for the certificate. Only used together with CommonName.
    */
-  // TODO: Waiting for alternate type to support nonscalar values
-  issuerThumbprint?: unknown;
+  issuerThumbprint?: string;
 }
 
 /**
