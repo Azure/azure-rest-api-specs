@@ -536,6 +536,93 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityblocks": {
+      "get": {
+        "tags": [
+          "capacityBlocks"
+        ],
+        "operationId": "Capacity Blocks_Get",
+        "description": "Get available capacity blocks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Azure region for which the block is requested"
+          },
+          {
+            "name": "sku",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Sku for which block is requested"
+          },
+          {
+            "name": "capacity",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "description": "Instance count for the specified sku"
+          },
+          {
+            "name": "durationhours",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "description": "The duration in hours for which block is needed"
+          },
+          {
+            "name": "start-date-range",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "Start datetime range in UTC"
+          },
+          {
+            "name": "end-date-range",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "End datetime range in UTC"
+          },
+          {
+            "name": "zone",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Zone in which the block needs to be made available"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CapacityBlocks"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns list of capacity block objects.": {
+            "$ref": "./examples/GetCapacityBlocks.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1722,6 +1809,76 @@
         }
       },
       "description": "The quota restrictions on recommended VMSize."
+    },
+    "CapacityBlocks": {
+      "type": "array",
+      "description": "Capacity blocks.",
+      "items": {
+        "$ref": "#/definitions/CapacityBlock"
+      },
+      "nextLink": {
+        "description": "The URI used to fetch the next page of capacity blocks. When there are no more pages, this is null.",
+        "type": "string"
+      }
+    },
+    "CapacityBlock": {
+      "type": "object",
+      "description": "Capacity block.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "zone": {
+          "description": "Logical Zone in which the block needs to be made available",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location.",
+          "type": "string"
+        },
+        "sku": {
+          "description": "SKU for Capacity Block.",
+          "$ref": "#/definitions/Sku"
+        },
+        "schedule": {
+          "description": "Schedule of Capacity Block Reservation.",
+          "$ref": "#/definitions/Schedule"
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "SKU for Capacity Block.",
+      "properties": {
+        "name": {
+          "description": "Sku name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capacity": {
+          "description": "Requested Instance count.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "Schedule of Capacity Block Reservation.",
+      "properties": {
+        "startTime": {
+          "description": "Start DateTime of Capacity Block reservation.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End DateTime of Capacity Block Reservation.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
     }
   }
 }
