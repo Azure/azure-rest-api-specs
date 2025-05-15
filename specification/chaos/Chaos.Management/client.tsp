@@ -24,6 +24,9 @@ interface Experiments {
   update is Microsoft.Chaos.Experiments.update;
   delete is Microsoft.Chaos.Experiments.delete;
   list is Microsoft.Chaos.Experiments.list;
+  listAll is Microsoft.Chaos.Experiments.listAll;
+  cancel is Microsoft.Chaos.Experiments.cancel;
+  start is Microsoft.Chaos.Experiments.start;
 
   getExecution is Microsoft.Chaos.ExperimentExecutions.getExecution;
   listAllExecutions is Microsoft.Chaos.ExperimentExecutions.listAllExecutions;
