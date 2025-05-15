@@ -1370,47 +1370,6 @@ model DiscountProperties {
 }
 
 /**
- * The resource model definition containing the full set of allowed properties for a resource. Except properties bag, there cannot be a top level property outside of this set.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ResourceModelWithAllowedPropertySet
-  extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  managedBy?: string;
-
-  /**
-   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. E.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  @pattern("^[-\\w\\._,\\(\\)]+$")
-  kind?: string;
-
-  /**
-   * The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
-  identity?: ManagedServiceIdentity;
-
-  /**
-   * The resource model definition representing SKU
-   */
-  sku?: Sku;
-
-  /**
-   * Plan for the resource.
-   */
-  plan?: Plan;
-}
-
-/**
  * Managed service identity (system assigned and/or user assigned identities)
  */
 model ManagedServiceIdentity {
