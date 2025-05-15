@@ -333,7 +333,7 @@ using Microsoft.ServiceFabric;
 @@alternateType(VaultCertificate.certificateUrl, url, "csharp");
 @@alternateType(ServiceEndpoint.locations, azureLocation[], "csharp");
 @@alternateType(ManagedClusterProperties.clusterCertificateThumbprints,
-  unknown,
+  unknown[],
   "csharp"
 );
 @@alternateType(ClientCertificate.thumbprint, unknown, "csharp");
