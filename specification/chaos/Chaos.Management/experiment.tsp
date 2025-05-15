@@ -26,7 +26,7 @@ interface Experiments {
   /**
    * The operation to update an experiment.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Experiment, ExperimentUpdate>;
 
   /**

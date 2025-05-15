@@ -34,9 +34,7 @@ using TypeSpec.Versioning;
  * A first party Azure service enabling the data replication.
  */
 @armProviderNamespace
-@service({
-  title: "Azure Site Recovery Management Service API",
-})
+@service(#{ title: "Azure Site Recovery Management Service API" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.DataReplication;

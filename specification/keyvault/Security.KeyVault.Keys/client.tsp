@@ -63,6 +63,8 @@ using KeyVault;
 @@clientName(JsonWebKey.dq, "DQ", "go");
 @@clientName(JsonWebKey.qi, "QI", "go");
 
+@@clientName(KeyAttestation.certificatePemFile, "CertificatePEMFile", "go");
+
 // JS configuration
 @@clientName(JsonWebKeyCurveName.P256_K, "P256K", "javascript");
 @@clientName(JsonWebKeySignatureAlgorithm.RSNULL, "Rsnull", "javascript");
@@ -118,3 +120,47 @@ using KeyVault;
   "RsaAesKeyWrap384",
   "javascript"
 );
+
+// Rust configuration
+@@clientName(KeyCreateParameters, "CreateKeyParameters", "rust");
+@@clientName(KeyExportParameters, "ExportKeyParameters", "rust");
+@@clientName(KeyImportParameters, "ImportKeyParameters", "rust");
+@@clientName(KeyReleaseParameters, "ReleaseParameters", "rust");
+@@clientName(KeyRestoreParameters, "RestoreKeyParameters", "rust");
+@@clientName(KeySignParameters, "SignParameters", "rust");
+@@clientName(KeyUpdateParameters, "UpdateKeyPropertiesParameters", "rust");
+@@clientName(KeyVerifyParameters, "VerifyParameters", "rust");
+@@clientName(GetRandomBytesRequest, "GetRandomBytesParameters", "rust");
+@@clientName(getDeletedKeys, "ListDeletedKeyProperties", "rust");
+@@clientName(getKeys, "ListKeyProperties", "rust");
+@@clientName(getKeyVersions, "ListKeyPropertiesVersions", "rust");
+@@clientName(DeletedKeyBundle, "DeletedKey", "rust");
+@@clientName(KeyBundle, "Key", "rust");
+@@clientName(KeyProperties, "OmitKeyProperties", "rust");
+@@clientName(KeyItem, "KeyProperties", "rust");
+@@clientName(DeletedKeyItem, "DeletedKeyProperties", "rust");
+@@clientName(DeletedKeyListResult, "ListDeletedKeyPropertiesResult", "rust");
+@@clientName(KeyListResult, "ListKeyPropertiesResult", "rust");
+@@clientName(LifetimeActions, "LifetimeAction", "rust");
+@@clientName(LifetimeActionsType, "LifetimeActionType", "rust");
+@@clientName(LifetimeActionsTrigger, "LifetimeActionTrigger", "rust");
+@@clientName(KeyRestoreParameters.keyBundleBackup, "KeyBackup", "rust");
+@@clientName(KeyOperationsParameters, "KeyOperationParameters", "rust");
+
+@@clientName(getDeletedKeys, "ListDeletedKeyProperties", "rust");
+@@clientName(getKeys, "ListKeyProperties", "rust");
+@@clientName(getKeyVersions, "ListKeyPropertiesVersions", "rust");
+@@clientName(updateKey, "UpdateKeyProperties", "rust");
+
+@@clientName(KeyReleaseParameters.enc, "algorithm", "rust");
+@@clientName(KeyOperationsParameters.aad,
+  "AdditionalAuthenticatedData",
+  "rust"
+);
+@@clientName(KeyOperationsParameters.tag, "AuthenticationTag", "rust");
+
+@@clientName(JsonWebKeyType, "KeyType", "rust");
+@@clientName(JsonWebKeyOperation, "KeyOperation", "rust");
+@@clientName(JsonWebKeyEncryptionAlgorithm, "EncryptionAlgorithm", "rust");
+@@clientName(JsonWebKeyCurveName, "CurveName", "rust");
+@@clientName(JsonWebKeySignatureAlgorithm, "SignatureAlgorithm", "rust");

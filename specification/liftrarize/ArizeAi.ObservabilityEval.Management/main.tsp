@@ -14,9 +14,7 @@ using LiftrBase;
 
 /* ArizeAi.ObservabilityEval Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "ArizeAi.ObservabilityEval management service",
-})
+@service(#{ title: "ArizeAi.ObservabilityEval management service" })
 @versioned(ArizeAi.ObservabilityEval.Versions)
 namespace ArizeAi.ObservabilityEval;
 
@@ -30,6 +28,12 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_10_01_preview: "2024-10-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v2_preview)
+  v2024_10_01: "2024-10-01",
 }
 
 @doc("Partner's specific Properties")
@@ -44,8 +48,9 @@ model PartnerProperties {
  * BaseResourceProperties contains Marketplace, useDetail related properties*/
 @doc("Properties specific to Organization")
 model OrganizationProperties is BaseResourceProperties {
+  @madeRequired(Versions.v2024_10_01)
   @doc("partner properties")
-  partnerProperties?: PartnerProperties;
+  partnerProperties: PartnerProperties;
 
   @doc("Single sign-on properties")
   singleSignOnProperties?: SingleSignOnPropertiesV2;
