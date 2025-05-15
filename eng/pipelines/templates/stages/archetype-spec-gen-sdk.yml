@@ -165,12 +165,12 @@ extends:
                 sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
               fi
 
-              $updatedSpecRepoCommit = "$(SpecRepoCommit)"
+              updatedSpecRepoCommit="$(SpecRepoCommit)"
               if [ "$(Build.Reason)" = "PullRequest" ]; then
                 optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
                 specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
                 sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
-                $updatedSpecRepoCommit="$(System.PullRequest.SourceCommitId)"
+                updatedSpecRepoCommit="$(System.PullRequest.SourceCommitId)"
               fi
 
               if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
