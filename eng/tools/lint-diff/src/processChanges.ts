@@ -129,6 +129,7 @@ export async function buildState(
     const tagsAndInputs = [...tags.changedTags].map((changedTag) => {
       return {
         tagName: changedTag,
+        // For the given changedTag, get input files that are associated with it
         inputFiles: [...tagsFromReadme]
           .filter((t) => t.name === changedTag)
           .flatMap((f) => [...f.inputFiles].map((i) => i.path)),
