@@ -34,11 +34,11 @@ model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
 @doc("Defines the schema registry properties.")
 model SchemaRegistryProperties {
   @doc("Globally unique, immutable, non-reusable id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uuid?: string;
 
   @doc("Schema registry namespace. Uniquely identifies a schema registry within a tenant.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @maxLength(32)
   `namespace`: string;
@@ -50,11 +50,11 @@ model SchemaRegistryProperties {
   description?: string;
 
   @doc("The Storage Account's Container URL where schemas will be stored.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   storageAccountContainerUrl: string;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -78,7 +78,7 @@ model Schema is ProxyResource<SchemaProperties> {
 @doc("Defines the schema properties.")
 model SchemaProperties {
   @doc("Globally unique, immutable, non-reusable id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uuid?: string;
 
   @doc("Human-readable display name.")
@@ -88,15 +88,15 @@ model SchemaProperties {
   description?: string;
 
   @doc("Format of the schema.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   format: Format;
 
   @doc("Type of the schema.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   schemaType: SchemaType;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
@@ -148,22 +148,22 @@ model SchemaVersion is ProxyResource<SchemaVersionProperties> {
 @doc("Defines the schema version properties.")
 model SchemaVersionProperties {
   @doc("Globally unique, immutable, non-reusable id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uuid?: string;
 
   @doc("Human-readable description of the schema.")
   description?: string;
 
   @doc("Schema content.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   schemaContent: string;
 
   @doc("Hash of the schema content.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hash?: string;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

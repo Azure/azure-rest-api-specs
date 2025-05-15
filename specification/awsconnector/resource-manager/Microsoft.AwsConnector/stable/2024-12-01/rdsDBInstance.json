@@ -480,8 +480,7 @@
           "description": "A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.  If you set DBSecurityGroups, you must not set VPCSecurityGroups, and vice versa. Also, note that the DBSecurityGroups property exists only for backwards compatibility with older regions and is no longer recommended for providing security information to an RDS DB instance. Instead, use VPCSecurityGroups.  If you specify this property, AWS CloudFormation sends only the following properties (if specified) to Amazon RDS during create operations:  +   ``AllocatedStorage``   +   ``AutoMinorVersionUpgrade``   +   ``AvailabilityZone``   +   ``BackupRetentionPeriod``   +   ``CharacterSetName``   +   ``DBInstanceClass``   +   ``DBName``   +   ``DBParameterGroupName``   +   ``DBSecurityGroups``   +   ``DBSubnetGroupName``   +   ``Engine``   +   ``EngineVersion``   +   ``Iops``   +   ``LicenseModel``   +   ``MasterUsername``   +   ``MasterUserPassword``   +   ``MultiAZ``   +   ``OptionGroupName``   +   ``PreferredBackupWindow``   +   ``PreferredMaintenanceWindow``    All other properties are ignored. Specify a virtual private cloud (VPC) security group if you want to submit other properties, such as ``StorageType``, ``StorageEncrypted``, or ``KmsKeyId``. If you're already using the ``DBSecurityGroups`` property, you can't use these other properties by updating your DB instance to use a VPC security group. You must recreate the DB instance.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "dbSnapshotIdentifier": {
           "type": "string",
@@ -524,8 +523,7 @@
           "description": "The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers. Constraints:  +  Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.   Example: ``123.124.125.126,234.235.236.237``",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "domainFqdn": {
           "type": "string",
@@ -544,8 +542,7 @@
           "description": "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see [Publishing Database Logs to Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch) in the *Amazon Relational Database Service User Guide*.  *Amazon Aurora*  Not applicable. CloudWatch Logs exports are managed by the DB cluster.   *Db2*  Valid values: ``diag.log``, ``notify.log``   *MariaDB*  Valid values: ``audit``, ``error``, ``general``, ``slowquery``   *Microsoft SQL Server*  Valid values: ``agent``, ``error``   *MySQL*  Valid values: ``audit``, ``error``, ``general``, ``slowquery``   *Oracle*  Valid values: ``alert``, ``audit``, ``listener``, ``trace``, ``oemagent``   *PostgreSQL*  Valid values: ``postgresql``, ``upgrade``",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "enableIAMDatabaseAuthentication": {
           "type": "boolean",
@@ -739,8 +736,7 @@
           "description": "A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to [AWS::EC2::SecurityGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html) resources created in the template. If you plan to update the resource, don't specify VPC security groups in a shared VPC.  If you set ``VPCSecurityGroups``, you must not set [DBSecurityGroups](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups), and vice versa.  You can migrate a DB instance in your stack from an RDS DB security group to a VPC security group, but keep the following in mind:  +  You can't revert to using an RDS security group after you establish a VPC security group membership.  +  When you migrate your DB instance to VPC security groups, if your stack update rolls back because the DB instance update fails or because an update fails in another AWS CloudFormation resource, the rollback fails because it can't revert to an RDS security group.  +  To use the properties that are available when you use a VPC security group, you must recreate the DB instance. If you don't, AWS CloudFormation submits only the property values that are listed in the [DBSecurityGroups](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups) property.    To avoid this situation, migrate your DB instance to using VPC security groups only when that is the only change in your stack template.   *Amazon Aurora*  Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. If specified, the setting must match the DB cluster setting.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },

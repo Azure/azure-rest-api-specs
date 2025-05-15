@@ -16,9 +16,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 @armProviderNamespace
-@service({
-  title: "ConnectedCache",
-})
+@service(#{ title: "ConnectedCache" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @doc("Microsoft Connected Cache Rest Api version 2023-05-01-preview")

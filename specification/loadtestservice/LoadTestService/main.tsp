@@ -10,9 +10,7 @@ using Azure.Core;
 
 @versioned(APIVersions)
 @useAuth(Oauth2)
-@service({
-  title: "Azure Load Testing",
-})
+@service(#{ title: "Azure Load Testing" })
 @server(
   "https://{endpoint}",
   "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",

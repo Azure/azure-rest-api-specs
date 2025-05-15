@@ -36,7 +36,7 @@ model CreateUploadRequest {
 @added(ServiceApiVersions.v2024_08_01_Preview)
 model AddUploadPartRequest {
   /** The chunk of bytes for this Part. */
-  data: bytes;
+  data: Http.HttpPart<bytes>;
 }
 
 /** The request body of an upload completion request. */
