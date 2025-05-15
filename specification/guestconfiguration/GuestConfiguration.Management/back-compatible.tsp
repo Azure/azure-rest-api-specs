@@ -15,3 +15,6 @@ using Microsoft.GuestConfiguration;
 @@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
+@@clientName(VmssvmInfo, "VMSSVMInfo");
+#suppress "deprecated" ""
+@@flattenProperty(Operation.properties);

@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Legacy {
   interface LegacyOperations<
     ParentParameters extends {},
     ResourceTypeParameter extends {},
-    ErrorType extends {} = ErrorResponse
+    ErrorType extends {} = Microsoft.GuestConfiguration.ErrorResponse
   > {
     /**
      * @dev A long-running resource CreateOrUpdate (PUT)
@@ -55,7 +55,6 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response Optional. The success response(s) for the PUT operation
      */
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
-    @autoRoute
     @doc("Create a {name}", Resource)
     @armResourceCreateOrUpdate(Resource)
     @put
@@ -158,7 +157,6 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response Optional. The success response(s) for the delete operation
      */
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Valid"
-    @autoRoute
     @doc("Delete a {name}", Resource)
     @delete
     @deletesResource(Resource)
@@ -179,7 +177,6 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The success response for a get operation.
      */
-    @autoRoute
     @doc("Get a {name}", Resource)
     @get
     @readsResource(Resource)
@@ -220,7 +217,6 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The response returned by the list
      */
-    @autoRoute
     @doc("List {name} resources", Resource)
     @get
     @listsResource(Resource)
@@ -256,7 +252,6 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      */
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
-    @autoRoute
     @armResourceAction(Resource)
     @Private.enforceConstraint(Resource, Foundations.Resource)
     @post

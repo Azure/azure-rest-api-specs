@@ -12,6 +12,27 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.GuestConfiguration;
 
 /**
+ * Error response of an operation failure.
+ */
+@error
+model ErrorResponse {
+  /**
+   * The error details.
+   */
+  error?: {
+    /**
+     * Error code.
+     */
+    code?: string;
+
+    /**
+     * Detail error message indicating why the operation failed.
+     */
+    message?: string;
+  };
+}
+
+/**
  * Kind of the guest configuration. For example:DSC
  */
 union Kind {
@@ -105,8 +126,9 @@ model GuestConfigurationAssignmentProperties {
   /**
    * VM resource Id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  targetResourceId?: string;
+  targetResourceId?: string | null;
 
   /**
    * The guest configuration to assign.
@@ -122,21 +144,23 @@ model GuestConfigurationAssignmentProperties {
   /**
    * Date and time when last compliance status was checked.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastComplianceStatusChecked?: utcDateTime;
+  lastComplianceStatusChecked?: utcDateTime | null;
 
   /**
    * Id of the latest report for the guest configuration assignment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  latestReportId?: string;
+  latestReportId?: string | null;
 
   /**
    * parameter hash for the guest configuration assignment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  parameterHash?: string;
+  parameterHash?: string | null;
 
   /**
    * Last reported guest configuration assignment report.
@@ -151,24 +175,28 @@ model GuestConfigurationAssignmentProperties {
   /**
    * Combined hash of the configuration package and parameters.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  assignmentHash?: string;
+  assignmentHash?: string | null;
 
   /**
    * The provisioning state, which only appears in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningState | null;
 
   /**
    * Type of the resource - VMSS / VM
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  resourceType?: string;
+  resourceType?: string | null;
 
   /**
    * The list of VM Compliance data for VMSS
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @OpenAPI.extension("x-ms-identifiers", #["vmId"])
   vmssVMList?: VmssvmInfo[];
 }
@@ -215,14 +243,16 @@ model GuestConfigurationNavigation {
   /**
    * Specifies the origin of the configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  assignmentSource?: string;
+  assignmentSource?: string | null;
 
   /**
    * Specifies the content type of the configuration. Possible values could be Builtin or Custom.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  contentType?: string;
+  contentType?: string | null;
 
   /**
    * The configuration parameters for the guest configuration.
@@ -327,14 +357,12 @@ model AssignmentReport {
    * Start date and time of the guest configuration assignment compliance status check.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * End date and time of the guest configuration assignment compliance status check.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -431,8 +459,9 @@ model AssignmentReportResource {
   /**
    * Properties of a guest configuration assignment resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
   @visibility(Lifecycle.Read)
-  properties?: Record<unknown>;
+  properties?: {};
 }
 
 /**
@@ -477,15 +506,16 @@ model VmssvmInfo {
   /**
    * Id of the latest report for the guest configuration assignment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  latestReportId?: string;
+  latestReportId?: string | null;
 
   /**
    * Date and time when last compliance status was checked.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastComplianceChecked?: utcDateTime;
+  lastComplianceChecked?: utcDateTime | null;
 }
 
 /**
@@ -538,6 +568,10 @@ model GuestConfigurationAssignmentList {
    */
   @items
   value?: GuestConfigurationAssignment[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -604,20 +638,19 @@ model GuestConfigurationAssignmentReportProperties {
    * Start date and time of the guest configuration assignment compliance status check.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * End date and time of the guest configuration assignment compliance status check.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
    * Details of the assignment report.
    */
-  details?: AssignmentReportDetails;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  details?: AssignmentReportDetails | null;
 
   /**
    * Azure resource Id of the VMSS.
@@ -640,14 +673,12 @@ model AssignmentReportDetails {
    * Start date and time of the guest configuration assignment compliance status check.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * End date and time of the guest configuration assignment compliance status check.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -667,6 +698,68 @@ model AssignmentReportDetails {
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
   resources?: AssignmentReportResource[];
+}
+
+/**
+ * The response model for the list of Automation operations.
+ */
+@pagedResult
+model OperationList {
+  /**
+   * List of Automation operations supported by the Automation resource provider.
+   */
+  @items
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value: Operation[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * GuestConfiguration REST API operation.
+ */
+model Operation {
+  /**
+   * Operation name: For example, providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/write or read.
+   */
+  name?: string;
+
+  /**
+   * Provider, Resource, Operation, and description values.
+   */
+  display?: OperationDisplay;
+
+  /**
+   * Additional properties of the operation.
+   */
+  properties?: OperationProperties;
+}
+
+/**
+ * Provider, Resource, Operation, and description values.
+ */
+model OperationDisplay {
+  /**
+   * Service provider: Microsoft.GuestConfiguration.
+   */
+  provider?: string;
+
+  /**
+   * Resource on which the operation is performed.
+   */
+  resource?: string;
+
+  /**
+   * Operation type: Read, write, delete, etc.
+   */
+  operation?: string;
+
+  /**
+   * Description about the operation.
+   */
+  description?: string;
 }
 
 /**

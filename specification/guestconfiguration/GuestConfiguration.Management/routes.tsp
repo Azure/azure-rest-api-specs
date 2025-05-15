@@ -1,5 +1,3 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
-
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
@@ -18,6 +16,7 @@ interface GuestConfigurationAssignmentsOperationGroup {
   /**
    * List all guest configuration assignments for a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GuestConfigurationAssignments_RGList")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")

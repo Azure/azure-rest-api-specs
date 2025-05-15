@@ -23,17 +23,19 @@ model GuestConfigurationAssignment
   >;
 }
 
-@armResourceOperations
 interface GuestConfigurationAssignmentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
 
         /** virtualMachines */
-        @path @segment("virtualMachines") vmName: string,
+        @path
+        // @segment("providers/Microsoft.Compute/virtualMachines")
+        vmName: string,
+
+        // ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = GuestConfigurationAssignment,
@@ -43,22 +45,40 @@ interface GuestConfigurationAssignmentOps
       >>
     > {}
 
-@armResourceOperations
+interface GuestConfigurationAssignmentOpsList
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        // ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = GuestConfigurationAssignment,
+        KeyName = "guestConfigurationAssignmentName",
+        SegmentName = "guestConfigurationAssignments",
+        NamePattern = ""
+      >>
+    > {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 interface GuestConfigurationAssignments {
   /**
    * Get information about a guest configuration assignment
    */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}")
   get is GuestConfigurationAssignmentOps.Read<GuestConfigurationAssignment>;
 
   /**
    * Creates an association between a VM and guest configuration
    */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}")
   createOrUpdate is GuestConfigurationAssignmentOps.CreateOrUpdateSync<GuestConfigurationAssignment>;
 
   /**
    * Delete a guest configuration assignment
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}")
   delete is GuestConfigurationAssignmentOps.DeleteSync<
     GuestConfigurationAssignment,
     Response = ArmDeletedResponse
@@ -67,9 +87,20 @@ interface GuestConfigurationAssignments {
   /**
    * List all guest configuration assignments for a virtual machine.
    */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")
   list is GuestConfigurationAssignmentOps.List<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList>
+  >;
+
+  /**
+   * List all guest configuration assignments for a subscripotion.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")
+  SubscriptionList is GuestConfigurationAssignmentOpsList.List<
+    GuestConfigurationAssignment,
+    Response = ArmResponse<GuestConfigurationAssignmentList> | NoContentResponse
   >;
 
   /**
@@ -77,7 +108,7 @@ interface GuestConfigurationAssignments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("reports")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports")
   @operationId("GuestConfigurationAssignmentReports_List")
   guestConfigurationAssignmentReportsList is GuestConfigurationAssignmentOps.ActionSync<
     GuestConfigurationAssignment,
@@ -90,7 +121,7 @@ interface GuestConfigurationAssignments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{reportId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}")
   @operationId("GuestConfigurationAssignmentReports_Get")
   guestConfigurationAssignmentReportsGet is GuestConfigurationAssignmentOps.ActionSync<
     GuestConfigurationAssignment,
@@ -105,17 +136,21 @@ interface GuestConfigurationAssignments {
     }
   >;
 }
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+// @armResourceOperations
 interface GuestConfigurationHCRPAssignmentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
 
         /** machines */
-        @path @segment("machines") machineName: string,
+        @path
+        // @segment("providers/Microsoft.HybridCompute/machines")
+        machineName: string,
+
+        // ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = GuestConfigurationAssignment,
@@ -125,13 +160,15 @@ interface GuestConfigurationHCRPAssignmentOps
       >>
     > {}
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+// @armResourceOperations
 interface GuestConfigurationHCRPAssignments {
   /**
    * Get information about a guest configuration assignment
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GuestConfigurationHCRPAssignments_Get")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}")
   get is GuestConfigurationHCRPAssignmentOps.Read<GuestConfigurationAssignment>;
 
   /**
@@ -139,6 +176,7 @@ interface GuestConfigurationHCRPAssignments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GuestConfigurationHCRPAssignments_CreateOrUpdate")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}")
   createOrUpdate is GuestConfigurationHCRPAssignmentOps.CreateOrUpdateSync<GuestConfigurationAssignment>;
 
   /**
@@ -147,6 +185,7 @@ interface GuestConfigurationHCRPAssignments {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("GuestConfigurationHCRPAssignments_Delete")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}")
   delete is GuestConfigurationHCRPAssignmentOps.DeleteSync<
     GuestConfigurationAssignment,
     Response = ArmDeletedResponse
@@ -157,6 +196,7 @@ interface GuestConfigurationHCRPAssignments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GuestConfigurationHCRPAssignments_List")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")
   list is GuestConfigurationHCRPAssignmentOps.List<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList>
@@ -165,10 +205,12 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("reports")
   @operationId("GuestConfigurationHCRPAssignmentReports_List")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports")
   guestConfigurationHCRPAssignmentReportsList is GuestConfigurationHCRPAssignmentOps.ActionSync<
     GuestConfigurationAssignment,
     void,
@@ -178,10 +220,11 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * Get a report for the guest configuration assignment, by reportId.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{reportId}")
   @operationId("GuestConfigurationHCRPAssignmentReports_Get")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}")
   guestConfigurationHCRPAssignmentReportsGet is GuestConfigurationHCRPAssignmentOps.ActionSync<
     GuestConfigurationAssignment,
     void,
@@ -191,21 +234,26 @@ interface GuestConfigurationHCRPAssignments {
        * The GUID for the guest configuration assignment report.
        */
       @path
+      // @segment("reports")
       reportId: string;
     }
   >;
 }
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+// @armResourceOperations
 interface GuestConfigurationAssignmentsVMSSOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
 
         /** virtualMachineScaleSets */
-        @path @segment("virtualMachineScaleSets") vmssName: string,
+        @path
+        // @segment("providers/Microsoft.Compute/virtualMachineScaleSets")
+        vmssName: string,
+
+        // ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = GuestConfigurationAssignment,
@@ -215,13 +263,15 @@ interface GuestConfigurationAssignmentsVMSSOps
       >>
     > {}
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+// @armResourceOperations
 interface GuestConfigurationAssignmentsVMSS {
   /**
    * Get information about a guest configuration assignment for VMSS
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GuestConfigurationAssignmentsVMSS_Get")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}")
   get is GuestConfigurationAssignmentsVMSSOps.Read<GuestConfigurationAssignment>;
 
   /**
@@ -229,6 +279,7 @@ interface GuestConfigurationAssignmentsVMSS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GuestConfigurationAssignmentsVMSS_CreateOrUpdate")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}")
   createOrUpdate is GuestConfigurationAssignmentsVMSSOps.CreateOrUpdateSync<GuestConfigurationAssignment>;
 
   /**
@@ -236,6 +287,7 @@ interface GuestConfigurationAssignmentsVMSS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GuestConfigurationAssignmentsVMSS_Delete")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}")
   delete is GuestConfigurationAssignmentsVMSSOps.DeleteSync<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignment> | ArmDeletedNoContentResponse
@@ -246,6 +298,7 @@ interface GuestConfigurationAssignmentsVMSS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GuestConfigurationAssignmentsVMSS_List")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")
   list is GuestConfigurationAssignmentsVMSSOps.List<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList>
@@ -254,9 +307,11 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * List all reports for the VMSS guest configuration assignment, latest report first.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("reports")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports")
   @operationId("GuestConfigurationAssignmentReportsVMSS_List")
   guestConfigurationAssignmentReportsVMSSList is GuestConfigurationAssignmentsVMSSOps.ActionSync<
     GuestConfigurationAssignment,
@@ -267,10 +322,11 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Get a report for the VMSS guest configuration assignment, by reportId.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{id}")
   @operationId("GuestConfigurationAssignmentReportsVMSS_Get")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports/{id}")
   guestConfigurationAssignmentReportsVMSSGet is GuestConfigurationAssignmentsVMSSOps.ActionSync<
     GuestConfigurationAssignment,
     void,
@@ -280,21 +336,26 @@ interface GuestConfigurationAssignmentsVMSS {
        * The GUID for the guest configuration assignment report.
        */
       @path
+      @segment("reports")
       id: string;
     }
   >;
 }
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" "" s
+// @armResourceOperations
 interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
 
         /** virtualmachines */
-        @path @segment("virtualmachines") vmName: string,
+        @path
+        // @segment("providers/Microsoft.ConnectedVMwarevSphere/virtualmachines")
+        vmName: string,
+
+        // ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = GuestConfigurationAssignment,
@@ -304,26 +365,31 @@ interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
       >>
     > {}
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+// @armResourceOperations
 interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * Get information about a guest configuration assignment
    */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}")
   get is GuestConfigurationConnectedVMwarevSphereAssignmentOps.Read<GuestConfigurationAssignment>;
 
   /**
    * Creates an association between a Connected VM Sphere machine and guest configuration
    */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}")
   createOrUpdate is GuestConfigurationConnectedVMwarevSphereAssignmentOps.CreateOrUpdateSync<GuestConfigurationAssignment>;
 
   /**
    * Delete a guest configuration assignment
    */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}")
   delete is GuestConfigurationConnectedVMwarevSphereAssignmentOps.DeleteSync<GuestConfigurationAssignment>;
 
   /**
    * List all guest configuration assignments for an ARC machine.
    */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")
   list is GuestConfigurationConnectedVMwarevSphereAssignmentOps.List<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList>
@@ -332,10 +398,12 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("reports")
   @operationId("GuestConfigurationConnectedVMwarevSphereAssignmentsReports_List")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports")
   guestConfigurationConnectedVMwarevSphereAssignmentsReportsList is GuestConfigurationConnectedVMwarevSphereAssignmentOps.ActionSync<
     GuestConfigurationAssignment,
     void,
@@ -345,10 +413,11 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * Get a report for the guest configuration assignment, by reportId.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{reportId}")
   @operationId("GuestConfigurationConnectedVMwarevSphereAssignmentsReports_Get")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}")
   guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet is GuestConfigurationConnectedVMwarevSphereAssignmentOps.ActionSync<
     GuestConfigurationAssignment,
     void,
@@ -358,6 +427,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
        * The GUID for the guest configuration assignment report.
        */
       @path
+      // @segment("reports")
       reportId: string;
     }
   >;
