@@ -576,8 +576,8 @@ describe("generateAutoRestErrorReport", () => {
     expect(actual).toMatchInlineSnapshot(`
       "**AutoRest errors:**
 
-      Readme: readme.md
-      Tag: tag1
+      Readme: \`readme.md\`
+      Tag: \`tag1\`
       Errors:
       | Level | Message |
       | ----- | ------- |
@@ -585,8 +585,8 @@ describe("generateAutoRestErrorReport", () => {
       | :x: fatal | Fatal error message |
 
 
-      Readme: readme2.md
-      Tag: tag2
+      Readme: \`readme2.md\`
+      Tag: \`tag2\`
       Errors:
       | Level | Message |
       | ----- | ------- |

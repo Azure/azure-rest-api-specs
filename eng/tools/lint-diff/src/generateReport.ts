@@ -21,7 +21,6 @@ export async function generateLintDiffReport(
   baseBranch: string,
   compareSha: string,
 ): Promise<boolean> {
-  
   console.log("Generating LintDiff report...");
 
   let pass = true;
@@ -79,7 +78,7 @@ export async function generateLintDiffReport(
       // New violations with level error or fatal fail the build. If all new
       // violations are warnings, the build passes.
       pass = false;
-    } else { 
+    } else {
       console.log("\t✅ No new violations with error or fatal level. LintDiff will pass.");
     }
 
@@ -140,8 +139,8 @@ export async function generateAutoRestErrorReport(
 
     const readmePath = relative(result.rootPath, result.readme.path);
 
-    outputMarkdown += "Readme: " + readmePath + "\n";
-    outputMarkdown += "Tag: " + result.tag + "\n";
+    outputMarkdown += `Readme: \`${readmePath}\`\n`;
+    outputMarkdown += `Tag: \`${result.tag}\`\n`;
     outputMarkdown += "Errors:\n";
     outputMarkdown += "| Level | Message |\n";
     outputMarkdown += "| ----- | ------- |\n";
