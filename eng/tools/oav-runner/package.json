@@ -1,0 +1,28 @@
+{
+  "name": "@azure-tools/oav-runner",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest"
+  },
+  "bin": {
+    "invoke-oav": "dist/main.js"
+  },
+  "dependencies": {
+    "oav": "3.5.1",
+    "@azure-tools/specs-shared": "file:../../../.github/shared",
+    "js-yaml": "^4.1.0",
+    "simple-git": "^3.27.0"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.7",
+    "typescript": "~5.8.2",
+    "@types/node": "~20.11.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}
