@@ -1,7 +1,9 @@
 import semver from "semver";
 import { describe, expect, it } from "vitest";
 import { execFile, execNpm, execNpmExec, isExecError } from "../src/exec.js";
-import { consoleLogger } from "../src/logger.js";
+import { ConsoleLogger, consoleLogger } from "../src/logger.js";
+
+const options = { logger: new ConsoleLogger(/*debug*/ true) };
 
 describe("execFile", () => {
   const file = "node";
@@ -20,13 +22,13 @@ describe("execFile", () => {
 
   it("exec succeeds with exact-sized buffer", async () => {
     await expect(
-      execFile(file, args, { maxBuffer: expected.length }),
+      execFile(file, args, { maxBuffer: expected.length, ...options }),
     ).resolves.toEqual({ stdout: expected, stderr: "" });
   });
 
   it("exec fails with too-small buffer", async () => {
     await expect(
-      execFile(file, args, { maxBuffer: expected.length - 1 }),
+      execFile(file, args, { maxBuffer: expected.length - 1, ...options }),
     ).rejects.toThrowError(
       expect.objectContaining({
         stdout: "test",
@@ -39,14 +41,14 @@ describe("execFile", () => {
 
 describe("execNpm", () => {
   it("succeeds with --version", async () => {
-    await expect(execNpm(["--version"])).resolves.toEqual({
+    await expect(execNpm(["--version"], options)).resolves.toEqual({
       stdout: expect.toSatisfy((v) => semver.valid(v)),
       stderr: "",
     });
   });
 
   it("fails with --help", async () => {
-    await expect(execNpm(["--help"])).rejects.toThrowError(
+    await expect(execNpm(["--help"], options)).rejects.toThrowError(
       expect.objectContaining({
         stdout: expect.stringMatching(/usage/i),
         stderr: "",
@@ -62,7 +64,7 @@ describe("execNpmExec", () => {
   // so it is used.
   it("runs js-yaml", async () => {
     await expect(
-      execNpmExec(["js-yaml", "--version"]),
+      execNpmExec(["js-yaml", "--version"], options),
     ).resolves.toEqual({
       stdout: expect.toSatisfy((v) => semver.valid(v)),
       stderr: "",
