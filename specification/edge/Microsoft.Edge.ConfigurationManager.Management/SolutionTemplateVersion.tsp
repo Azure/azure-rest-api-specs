@@ -62,7 +62,7 @@ model BulkDeploySolutionParameter {
   @doc("Name of the solution instance")
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   solutionInstanceName?: string;
-  
+
   @doc("Solution dependencies")
   @Azure.ResourceManager.identifiers(#[])
   solutionDependencies?: SolutionDependencyParameter[];
@@ -89,7 +89,7 @@ interface SolutionTemplateVersions {
 
   @doc("List Solution Template Version Resources")
   listBySolutionTemplate is ArmResourceListByParent<SolutionTemplateVersion>;
-  
+
   @doc("Post request for bulk deploy")
   bulkDeploySolution is ArmResourceActionNoResponseContentAsync<
     SolutionTemplateVersion,
