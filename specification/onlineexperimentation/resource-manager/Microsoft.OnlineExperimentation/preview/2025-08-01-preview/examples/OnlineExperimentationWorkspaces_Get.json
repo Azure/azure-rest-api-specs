@@ -1,23 +1,11 @@
 {
-  "operationId": "OnlineExperimentWorkspaces_Update",
-  "title": "Update an Online Experiment Workspace.",
+  "operationId": "OnlineExperimentationWorkspaces_Get",
+  "title": "Get a single OnlineExperimentationWorkspace.",
   "parameters": {
     "subscriptionId": "fa5fc227-a624-475e-b696-cdd604c735bc",
     "resourceGroupName": "res9871",
     "workspaceName": "expworkspace3",
-    "api-version": "2025-08-01-preview",
-    "properties": {
-      "tags": {
-        "newKey": "newVal"
-      },
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {},
-          "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {}
-        }
-      }
-    }
+    "api-version": "2025-08-01-preview"
   },
   "responses": {
     "200": {
@@ -26,10 +14,6 @@
         "name": "expworkspace3",
         "type": "Microsoft.OnlineExperimentation/workspaces",
         "location": "westus2",
-        "tags": {
-          "supportTeam": "someteam@microsoft.com",
-          "newKey": "newVal"
-        },
         "properties": {
           "workspaceId": "02270d43-f68a-401b-b526-86942525c350",
           "provisioningState": "Succeeded",
@@ -56,12 +40,6 @@
           "name": "F0",
           "tier": "Free"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/providers/Microsoft.OnlineExperimentation/locations/WestUS2/operationStatuses/02270d43-f68a-401b-b526-86942525c350?api-version=2025-08-01-preview",
-        "location": "https://management.azure.com/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/providers/Microsoft.OnlineExperimentation/workspaces/expworkspace3?api-version=2025-08-01-preview"
       }
     }
   }

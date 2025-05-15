@@ -1,14 +1,21 @@
 {
-  "operationId": "OnlineExperimentWorkspaces_Update",
-  "title": "Update an Online Experiment Workspace with public network access.",
+  "operationId": "OnlineExperimentationWorkspaces_Update",
+  "title": "Update an Online Experiment Workspace.",
   "parameters": {
     "subscriptionId": "fa5fc227-a624-475e-b696-cdd604c735bc",
     "resourceGroupName": "res9871",
     "workspaceName": "expworkspace3",
     "api-version": "2025-08-01-preview",
     "properties": {
-      "properties": {
-        "publicNetworkAccess": "Enabled"
+      "tags": {
+        "newKey": "newVal"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {},
+          "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {}
+        }
       }
     }
   },

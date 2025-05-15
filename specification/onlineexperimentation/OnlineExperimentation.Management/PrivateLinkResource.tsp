@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./OnlineExperimentWorkspace.tsp";
+import "./OnlineExperimentationWorkspace.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Rest;
@@ -14,7 +14,7 @@ namespace Microsoft.OnlineExperimentation;
 /**
  * A private link resource.
  */
-@parentResource(OnlineExperimentWorkspace)
+@parentResource(OnlineExperimentationWorkspace)
 @added(Microsoft.OnlineExperimentation.Versions.v2025_08_01_preview)
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   ...ResourceNameParameter<
