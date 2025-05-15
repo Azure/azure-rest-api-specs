@@ -32,10 +32,7 @@ interface GuestConfigurationAssignmentOps
 
         /** virtualMachines */
         @path
-        // @segment("providers/Microsoft.Compute/virtualMachines")
         vmName: string,
-
-        // ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = GuestConfigurationAssignment,
@@ -50,7 +47,6 @@ interface GuestConfigurationAssignmentOpsList
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-        // ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = GuestConfigurationAssignment,
@@ -137,7 +133,6 @@ interface GuestConfigurationAssignments {
   >;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-// @armResourceOperations
 interface GuestConfigurationHCRPAssignmentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -147,10 +142,7 @@ interface GuestConfigurationHCRPAssignmentOps
 
         /** machines */
         @path
-        // @segment("providers/Microsoft.HybridCompute/machines")
         machineName: string,
-
-        // ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = GuestConfigurationAssignment,
@@ -161,7 +153,6 @@ interface GuestConfigurationHCRPAssignmentOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-// @armResourceOperations
 interface GuestConfigurationHCRPAssignments {
   /**
    * Get information about a guest configuration assignment
@@ -234,13 +225,11 @@ interface GuestConfigurationHCRPAssignments {
        * The GUID for the guest configuration assignment report.
        */
       @path
-      // @segment("reports")
       reportId: string;
     }
   >;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-// @armResourceOperations
 interface GuestConfigurationAssignmentsVMSSOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -250,10 +239,7 @@ interface GuestConfigurationAssignmentsVMSSOps
 
         /** virtualMachineScaleSets */
         @path
-        // @segment("providers/Microsoft.Compute/virtualMachineScaleSets")
         vmssName: string,
-
-        // ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = GuestConfigurationAssignment,
@@ -264,7 +250,6 @@ interface GuestConfigurationAssignmentsVMSSOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-// @armResourceOperations
 interface GuestConfigurationAssignmentsVMSS {
   /**
    * Get information about a guest configuration assignment for VMSS
@@ -342,7 +327,6 @@ interface GuestConfigurationAssignmentsVMSS {
   >;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "" s
-// @armResourceOperations
 interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -352,10 +336,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
 
         /** virtualmachines */
         @path
-        // @segment("providers/Microsoft.ConnectedVMwarevSphere/virtualmachines")
         vmName: string,
-
-        // ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = GuestConfigurationAssignment,
@@ -366,7 +347,6 @@ interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-// @armResourceOperations
 interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * Get information about a guest configuration assignment
@@ -427,7 +407,6 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
        * The GUID for the guest configuration assignment report.
        */
       @path
-      // @segment("reports")
       reportId: string;
     }
   >;
