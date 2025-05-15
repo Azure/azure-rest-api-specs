@@ -21,8 +21,20 @@ using PureStorage.Block;
 );
 
 // CSharp
+@@alternateType(ServiceInitializationHandle.sddcResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(StoragePoolEnableAvsConnectionPost.sddcResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(StoragePool, "PureStoragePool", "csharp");
 @@clientName(StoragePoolProperties, "PureStoragePoolProperties", "csharp");
+@@alternateType(StoragePoolProperties.reservationResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(LiftrBase.Storage.Reservation, "PureStorageReservation", "csharp");
 @@clientName(LiftrBase.Storage.ReservationProperties,
   "PureStorageReservationProperties",
@@ -38,6 +50,10 @@ using PureStorage.Block;
   "csharp"
 );
 @@clientName(VolumeProperties, "PureStorageVolumeProperties", "csharp");
+@@alternateType(VolumeProperties.storagePoolResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(AvsVm, "PureStorageAvsVm", "csharp");
 @@clientName(AvsVmProperties, "PureStorageAvsVmProperties", "csharp");
 @@alternateType(AvsVmProperties.storagePoolResourceId,
@@ -74,3 +90,47 @@ using PureStorage.Block;
   armResourceIdentifier,
   "csharp"
 );
+@@clientName(BandwidthUsage, "PureStorageBandwidthUsage", "csharp");
+@@clientName(BillingUsageProperty, "PureStorageBillingUsageProperty", "csharp");
+@@clientName(UsageSeverity, "PureStorageBillingUsageSeverity", "csharp");
+@@clientName(HealthDetails, "PureStorageHealthDetails", "csharp");
+@@clientName(LiftrBase.CompanyDetails, "PureStorageCompanyDetails", "csharp");
+@@clientName(IopsUsage, "PureStorageIopsUsage", "csharp");
+@@clientName(LimitDetails, "PureStorageResourceLimitDetails", "csharp");
+@@clientName(LiftrBase.MarketplaceDetails,
+  "PureStorageMarketplaceDetails",
+  "csharp"
+);
+@@clientName(LiftrBase.MarketplaceSubscriptionStatus,
+  "PureStorageMarketplaceSubscriptionStatus",
+  "csharp"
+);
+@@clientName(LiftrBase.OfferDetails, "PureStorageOfferDetails", "csharp");
+@@clientName(LiftrBase.ProvisioningState,
+  "PureStorageProvisioningState",
+  "csharp"
+);
+@@clientName(RangeLimits, "PropertyValueRangeLimits", "csharp");
+@@clientName(SoftDeletion, "PureStorageSoftDeletionState", "csharp");
+@@clientName(SoftDeletion.destroyed, "IsDestroyed", "csharp");
+@@clientName(SoftDeletion.eradicationTimestamp, "EradicatedOn", "csharp");
+@@alternateType(SoftDeletion.eradicationTimestamp, utcDateTime, "csharp");
+@@clientName(Space, "PureStorageSpaceUsage", "csharp");
+@@clientName(StoragePoolEnableAvsConnectionPost,
+  "StoragePoolEnableAvsConnectionContent",
+  "csharp"
+);
+@@clientName(StoragePoolFinalizeAvsConnectionPost,
+  "StoragePoolFinalizeAvsConnectionContent",
+  "csharp"
+);
+@@clientName(LiftrBase.UserDetails, "PureStorageUserDetails", "csharp");
+@@clientName(VmType, "PureStorageAvsVmType", "csharp");
+@@clientName(VnetInjection, "PureStoragePoolVnetInjection", "csharp");
+@@alternateType(VnetInjection.subnetId, armResourceIdentifier, "csharp");
+@@alternateType(VnetInjection.vnetId, armResourceIdentifier, "csharp");
+@@clientName(VolumeContainerType,
+  "PureStorageAvsVmVolumeContainerType",
+  "csharp"
+);
+@@clientName(VolumeType, "PureStorageAvsVmVolumeType", "csharp");
