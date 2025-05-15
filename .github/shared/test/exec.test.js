@@ -22,13 +22,13 @@ describe("execFile", () => {
 
   it("exec succeeds with exact-sized buffer", async () => {
     await expect(
-      execFile(file, args, { maxBuffer: expected.length, ...options }),
+      execFile(file, args, { ...options, maxBuffer: expected.length }),
     ).resolves.toEqual({ stdout: expected, stderr: "" });
   });
 
   it("exec fails with too-small buffer", async () => {
     await expect(
-      execFile(file, args, { maxBuffer: expected.length - 1, ...options }),
+      execFile(file, args, { ...options, maxBuffer: expected.length - 1 }),
     ).rejects.toThrowError(
       expect.objectContaining({
         stdout: "test",
