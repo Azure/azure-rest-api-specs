@@ -140,6 +140,7 @@ extends:
                   Commitish: ${{ parameters.SdkRepoCommit }}
                   WorkingDirectory: $(SdkRepoDirectory)
               SkipCheckoutNone: true
+              PreserveAuthToken: true
               ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
                 TokenToUseForAuth: $(azuresdk-github-pat)
 
