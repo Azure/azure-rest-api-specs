@@ -5304,6 +5304,18 @@
       },
       "x-ms-discriminator-value": "ManagedIdentity"
     },
+    "ManagedNetworkKind": {
+      "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedNetworkKind",
+        "modelAsString": true
+      }
+    },
     "ManagedNetworkProvisionOptions": {
       "description": "Managed Network Provisioning options for managed network of a machine learning workspace.",
       "type": "object",
@@ -5339,6 +5351,10 @@
         "firewallSku": {
           "description": "Firewall Sku used for FQDN Rules",
           "$ref": "#/definitions/FirewallSku"
+        },
+        "managedNetworkKind": {
+          "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
+          "$ref": "#/definitions/ManagedNetworkKind"
         },
         "isolationMode": {
           "description": "Isolation mode for the managed network of a machine learning workspace.",
@@ -6302,7 +6318,10 @@
       "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "Inactive",
-        "Active"
+        "Active",
+        "Provisioning",
+        "Deleting",
+        "Failed"
       ],
       "type": "string",
       "x-ms-enum": {
