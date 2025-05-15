@@ -132,6 +132,12 @@
               "$ref": "#/definitions/SuppressionContract"
             }
           },
+          "404": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          },
           "default": {
             "description": "ignore",
             "schema": {
@@ -284,6 +290,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MetadataEntity"
+            }
+          },
+          "404": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           },
           "default": {
@@ -1207,7 +1219,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ConfigDataListResult"
+              "$ref": "#/definitions/ConfigurationListResult"
             }
           },
           "default": {
@@ -1465,27 +1477,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
-      ]
-    },
-    "ConfigDataListResult": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ConfigData"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ConfigDataProperties": {

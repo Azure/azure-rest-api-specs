@@ -635,12 +635,8 @@
           ]
         ],
         "responses": {
-          "404__deleted": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponse"
-            },
-            "x-ms-error-response": true
+          "404": {
+            "x-ms-error-response__deleted": true
           }
         }
       },
@@ -693,12 +689,14 @@
     "/providers/Microsoft.Advisor/metadata/{name}": {
       "get": {
         "responses": {
-          "404__deleted": {
-            "description": "ignore",
+          "404": {
+            "x-ms-error-response__deleted": true,
             "schema": {
-              "$ref": "#/definitions/ARMErrorResponseBody"
-            },
-            "x-ms-error-response": true
+              "$ref": {
+                "__old": "#/definitions/ARMErrorResponseBody",
+                "__new": "#/definitions/ArmErrorResponse"
+              }
+            }
           }
         }
       }
@@ -995,17 +993,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations": {
       "get": {
-        "deprecated__deleted": false,
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ConfigurationListResult",
-                "__new": "#/definitions/ConfigDataListResult"
-              }
-            }
-          }
-        }
+        "deprecated__deleted": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}": {
@@ -1441,27 +1429,6 @@
           }
         }
       }
-    },
-    "ConfigDataListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ConfigData"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "RecommendationPropertiesResourceWorkload__added": {
       "type": "object",
