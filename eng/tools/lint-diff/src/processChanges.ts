@@ -113,18 +113,6 @@ export async function buildState(
 
   const changedFileAndTagsMap = new Map<string, ReadmeAffectedTags>();
   for (const [readmeFile, tags] of readmeTags.entries()) {
-    // From the readme file, get tags that have changed
-    //
-    // const changedTags = [...tagsFromReadme].filter((t) => tags.changedTags.has(t.name));
-
-    // // Create a list of changed tags and associated input files
-    // const tagsAndInputs = [...changedTags].map((tag) => {
-    //   return {
-    //     tagName: tag.name,
-    //     inputFiles: [...tag.inputFiles].map((f) => f.path),
-    //   };
-    // });
-
     const tagsFromReadme = await tags.readme.getTags();
     const tagsAndInputs = [...tags.changedTags].map((changedTag) => {
       return {
