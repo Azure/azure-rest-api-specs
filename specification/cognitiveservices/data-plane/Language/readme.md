@@ -51,7 +51,6 @@ These settings apply only when `--tag=release_2024_11_15_preview` is specified o
 input-file:
   - preview/2024-11-15-preview/analyzeconversations.json
   - preview/2024-11-15-preview/analyzetext.json
-  - preview/2024-11-15-preview/analyzetext-authoring.json
   - preview/2024-11-15-preview/analyzeconversations-authoring.json
   - preview/2024-11-15-preview/analyzedocuments.json
 title:
@@ -107,7 +106,6 @@ These settings apply only when `--tag=release_2023_11_15_preview` is specified o
 ``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
   - preview/2023-11-15-preview/analyzetext.json
-  - preview/2023-11-15-preview/analyzetext-authoring.json
   - preview/2023-11-15-preview/analyzeconversations.json
   - preview/2023-11-15-preview/analyzeconversations-authoring.json
   - preview/2023-11-15-preview/analyzedocuments.json
@@ -126,7 +124,6 @@ These settings apply only when `--tag=release_2023_04_15_preview` is specified o
 ``` yaml $(tag) == 'release_2023-04-15-preview'
 input-file:
   - preview/2023-04-15-preview/analyzetext.json
-  - preview/2023-04-15-preview/analyzetext-authoring.json
   - preview/2023-04-15-preview/analyzeconversations.json
   - preview/2023-04-15-preview/analyzeconversations-authoring.json
   - preview/2023-04-15-preview/questionanswering.json
