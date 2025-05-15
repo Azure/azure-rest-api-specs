@@ -78,7 +78,7 @@ interface Quotas {
     BodyParameter = {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy"
       #suppress "deprecated" "Avoid ModelValidation issues"
-      @encodedName("application/json", "QuoteBucketRequest")
+      @encodedName("application/json", "QuotaBucketRequest")
       @doc("The content of the action request")
       @bodyRoot
       body: QuotaBucketRequest;
