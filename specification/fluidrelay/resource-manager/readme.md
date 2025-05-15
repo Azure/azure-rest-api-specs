@@ -180,6 +180,10 @@ These settings apply only when `--tag=package-2025-05-14-preview` is specified o
 ```yaml $(tag) == 'package-2025-05-14-preview'
 input-file:
   - Microsoft.FluidRelay/preview/2025-05-14-preview/fluidrelay.json
+suppressions:
+  - code: PathContainsResourceGroup
+    from: fluidrelay.json
+    reason: Keep the `resourceGroup` parameter as `{resourceGroup}`
 ```
 
 ---
