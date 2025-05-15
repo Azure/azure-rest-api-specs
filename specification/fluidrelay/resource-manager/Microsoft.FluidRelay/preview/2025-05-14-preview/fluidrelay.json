@@ -1360,6 +1360,10 @@
             "name": "StorageSKU",
             "modelAsString": true
           }
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccessProperty",
+          "description": "Indicates if public network access is enabled."
         }
       },
       "description": "The properties of a Fluid Relay Service resource."
@@ -1468,6 +1472,19 @@
           "type": "string",
           "description": "A link to the next page of results, if any."
         }
+      }
+    },
+    "PublicNetworkAccessProperty": {
+      "description": "Indicates if public network access is enabled for this resource.",
+      "default": "Enabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
       }
     }
   },
