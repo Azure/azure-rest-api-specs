@@ -1,8 +1,58 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
 using Microsoft.Chaos;
+
+@client(
+  {
+    name: "ChaosManagementClient",
+    service: Microsoft.Chaos,
+  },
+  "java"
+)
+@useDependency(Microsoft.Chaos.Versions.v2025_01_01)
+namespace Customization;
+
+@operationGroup("java")
+@armResourceOperations
+interface Experiments {
+  get is Microsoft.Chaos.Experiments.get;
+  createOrUpdate is Microsoft.Chaos.Experiments.createOrUpdate;
+  update is Microsoft.Chaos.Experiments.update;
+  delete is Microsoft.Chaos.Experiments.delete;
+  list is Microsoft.Chaos.Experiments.list;
+
+  getExecution is Microsoft.Chaos.ExperimentExecutions.getExecution;
+  listAllExecutions is Microsoft.Chaos.ExperimentExecutions.listAllExecutions;
+  executionDetails is Microsoft.Chaos.ExperimentExecutions.getExecutionDetails;
+}
+
+@operationGroup("java")
+@armResourceOperations
+interface Capabilities extends Microsoft.Chaos.Capabilities {}
+
+@operationGroup("java")
+@armResourceOperations
+interface CapabilityTypes extends Microsoft.Chaos.CapabilityTypes {}
+
+@operationGroup("java")
+@armResourceOperations
+interface Operations extends Microsoft.Chaos.Operations {}
+
+@operationGroup("java")
+@armResourceOperations
+interface OperationStatuses extends Microsoft.Chaos.OperationStatuses {}
+
+@operationGroup("java")
+@armResourceOperations
+interface Targets extends Microsoft.Chaos.Targets {}
+
+@operationGroup("java")
+@armResourceOperations
+interface TargetTypes extends Microsoft.Chaos.TargetTypes {}
 
 // csharp
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
@@ -43,6 +93,10 @@ using Microsoft.Chaos;
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "java");
 @@clientName(Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "ResourceIdentity",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.OperationStatusResult,
+  "OperationStatus",
   "java"
 );
 
