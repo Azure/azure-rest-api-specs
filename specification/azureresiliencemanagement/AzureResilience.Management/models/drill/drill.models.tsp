@@ -366,7 +366,7 @@ model IncludeOrUpdateResource {
   resourceId: armResourceIdentifier<[]>;
 
   @doc("Fault properties.")
-  faultProperties: FaultProperties;
+  faultProperties?: FaultProperties;
 }
 
 @doc("Response body of the AddOrUpdateResources API.")
