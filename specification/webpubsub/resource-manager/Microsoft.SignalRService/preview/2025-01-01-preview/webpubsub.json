@@ -3,7 +3,7 @@
   "info": {
     "title": "WebPubSubManagementClient",
     "description": "REST API for Azure WebPubSub Service",
-    "version": "2024-10-01-preview"
+    "version": "2025-01-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -2384,6 +2384,13 @@
             "$ref": "#/definitions/ClientTrafficControlRule"
           },
           "x-ms-identifiers": []
+        },
+        "maxClientConnectionLifetimeInSeconds": {
+          "format": "int64",
+          "description": "Config to control the client connection lifetime in seconds, can be set to 0 to disable the config",
+          "maximum": 604800,
+          "minimum": 0,
+          "type": "integer"
         }
       }
     },
