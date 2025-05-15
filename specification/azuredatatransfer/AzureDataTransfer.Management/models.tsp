@@ -1381,3 +1381,7 @@ model AzureResourceManagerArmResponsePipeline {
 @@clientName(ProvisioningState, "provisioningState");
 @@clientName(DataType, "dataType");
 @@clientName(StreamProtocol, "streamProtocol");
+@@clientName(ConnectionStatus, "status");
+@@clientName(ForceDisabledStatus, "forceDisabledStatus");
+@@clientName(FlowStatus, "flowStatus");
+@@clientName(TargetType, "targetType");

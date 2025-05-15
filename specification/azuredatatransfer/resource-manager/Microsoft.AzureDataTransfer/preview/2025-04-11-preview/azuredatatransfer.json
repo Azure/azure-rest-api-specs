@@ -2732,42 +2732,6 @@
         "value"
       ]
     },
-    "ConnectionStatus": {
-      "type": "string",
-      "description": "Status of the connection",
-      "enum": [
-        "InReview",
-        "Approved",
-        "Rejected",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InReview",
-            "value": "InReview",
-            "description": "This connection has been created but is under review by the pipeline owner."
-          },
-          {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "This connection has been approved by the pipeline owner and is ready for use."
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected",
-            "description": "This connection has been rejected by the pipeline owner and cannot be used."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Creation of the connection has been accepted."
-          }
-        ]
-      }
-    },
     "FlowBillingTier": {
       "type": "string",
       "description": "Billing tier for this messaging flow.",
@@ -2818,54 +2782,6 @@
       "required": [
         "value"
       ]
-    },
-    "FlowStatus": {
-      "type": "string",
-      "description": "Status of the current flow.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "FlowStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The flow is currently enabled and able to send or receive data."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The flow is currently disabled and cannot send or receive data."
-          }
-        ]
-      }
-    },
-    "ForceDisabledStatus": {
-      "type": "string",
-      "description": "Status of force disablement",
-      "enum": [
-        "ConnectionForceDisabled",
-        "FlowTypeForceDisabled"
-      ],
-      "x-ms-enum": {
-        "name": "ForceDisabledStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ConnectionForceDisabled",
-            "value": "ConnectionForceDisabled",
-            "description": "This Flow has been disabled as the connection has been disabled."
-          },
-          {
-            "name": "FlowTypeForceDisabled",
-            "value": "FlowTypeForceDisabled",
-            "description": "This Flow has been disabled as the flow type this flow uses has been disabled."
-          }
-        ]
-      }
     },
     "GetDestinationEndpointPortsResult": {
       "type": "object",
@@ -3020,7 +2936,7 @@
           "description": "Justification for the connection request"
         },
         "status": {
-          "$ref": "#/definitions/ConnectionStatus",
+          "$ref": "#/definitions/status",
           "description": "Status of the connection",
           "readOnly": true
         },
@@ -3028,7 +2944,7 @@
           "type": "array",
           "description": "Force disablement status of the current connection",
           "items": {
-            "$ref": "#/definitions/ForceDisabledStatus"
+            "$ref": "#/definitions/forceDisabledStatus"
           },
           "readOnly": true
         },
@@ -3215,14 +3131,14 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/FlowStatus",
+          "$ref": "#/definitions/flowStatus",
           "description": "Status of the current flow"
         },
         "forceDisabledStatus": {
           "type": "array",
           "description": "Force disablement status of the current flow",
           "items": {
-            "$ref": "#/definitions/ForceDisabledStatus"
+            "$ref": "#/definitions/forceDisabledStatus"
           },
           "readOnly": true
         },
@@ -3597,36 +3513,6 @@
         }
       }
     },
-    "TargetType": {
-      "type": "string",
-      "description": "Type of target to execute the action on",
-      "enum": [
-        "Pipeline",
-        "Connection",
-        "FlowType"
-      ],
-      "x-ms-enum": {
-        "name": "TargetType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pipeline",
-            "value": "Pipeline",
-            "description": "The action executing is targeting a pipeline."
-          },
-          {
-            "name": "Connection",
-            "value": "Connection",
-            "description": "The action executing is targeting a connection."
-          },
-          {
-            "name": "FlowType",
-            "value": "FlowType",
-            "description": "The action executing is targeting a flow type."
-          }
-        ]
-      }
-    },
     "ValidateSchemaStatus": {
       "type": "string",
       "description": "Validation status of the schema",
@@ -3661,7 +3547,7 @@
           "description": "Type of action to be executed"
         },
         "targetType": {
-          "$ref": "#/definitions/TargetType",
+          "$ref": "#/definitions/targetType",
           "description": "Type of target to execute the action on"
         },
         "targets": {
@@ -3789,7 +3675,7 @@
           "description": "Justification for the connection request"
         },
         "status": {
-          "$ref": "#/definitions/ConnectionStatus",
+          "$ref": "#/definitions/status",
           "description": "Status of the connection",
           "readOnly": true
         },
@@ -3797,7 +3683,7 @@
           "type": "array",
           "description": "Force disablement status of the current connection",
           "items": {
-            "$ref": "#/definitions/ForceDisabledStatus"
+            "$ref": "#/definitions/forceDisabledStatus"
           },
           "readOnly": true
         },
@@ -4005,14 +3891,14 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/FlowStatus",
+          "$ref": "#/definitions/flowStatus",
           "description": "Status of the current flow"
         },
         "forceDisabledStatus": {
           "type": "array",
           "description": "Force disablement status of the current flow",
           "items": {
-            "$ref": "#/definitions/ForceDisabledStatus"
+            "$ref": "#/definitions/forceDisabledStatus"
           },
           "readOnly": true
         },
@@ -4143,6 +4029,30 @@
         }
       }
     },
+    "flowStatus": {
+      "type": "string",
+      "description": "Status of the current flow.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "flowStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The flow is currently enabled and able to send or receive data."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The flow is currently disabled and cannot send or receive data."
+          }
+        ]
+      }
+    },
     "flowType": {
       "type": "string",
       "description": "Flow type for the specified resource",
@@ -4254,6 +4164,30 @@
             "type": "string"
           }
         }
+      }
+    },
+    "forceDisabledStatus": {
+      "type": "string",
+      "description": "Status of force disablement",
+      "enum": [
+        "ConnectionForceDisabled",
+        "FlowTypeForceDisabled"
+      ],
+      "x-ms-enum": {
+        "name": "forceDisabledStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ConnectionForceDisabled",
+            "value": "ConnectionForceDisabled",
+            "description": "This Flow has been disabled as the connection has been disabled."
+          },
+          {
+            "name": "FlowTypeForceDisabled",
+            "value": "FlowTypeForceDisabled",
+            "description": "This Flow has been disabled as the flow type this flow uses has been disabled."
+          }
+        ]
       }
     },
     "linkStatus": {
@@ -4628,6 +4562,42 @@
         }
       }
     },
+    "status": {
+      "type": "string",
+      "description": "Status of the connection",
+      "enum": [
+        "InReview",
+        "Approved",
+        "Rejected",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InReview",
+            "value": "InReview",
+            "description": "This connection has been created but is under review by the pipeline owner."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "This connection has been approved by the pipeline owner and is ready for use."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "This connection has been rejected by the pipeline owner and cannot be used."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Creation of the connection has been accepted."
+          }
+        ]
+      }
+    },
     "streamProtocol": {
       "type": "string",
       "description": "The protocol of the stream",
@@ -4669,6 +4639,36 @@
             "type": "string"
           }
         }
+      }
+    },
+    "targetType": {
+      "type": "string",
+      "description": "Type of target to execute the action on",
+      "enum": [
+        "Pipeline",
+        "Connection",
+        "FlowType"
+      ],
+      "x-ms-enum": {
+        "name": "targetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pipeline",
+            "value": "Pipeline",
+            "description": "The action executing is targeting a pipeline."
+          },
+          {
+            "name": "Connection",
+            "value": "Connection",
+            "description": "The action executing is targeting a connection."
+          },
+          {
+            "name": "FlowType",
+            "value": "FlowType",
+            "description": "The action executing is targeting a flow type."
+          }
+        ]
       }
     },
     "validateSchemaResult": {
