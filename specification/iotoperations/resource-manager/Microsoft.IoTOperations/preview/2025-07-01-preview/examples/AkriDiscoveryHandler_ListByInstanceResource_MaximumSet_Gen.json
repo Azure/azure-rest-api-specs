@@ -32,7 +32,10 @@
               ],
               "mqttConnectionConfiguration": {
                 "authentication": {
-                  "method": "AkriConnectorsMqttAuthentication"
+                  "method": "ServiceAccountToken",
+                  "serviceAccountTokenSettings": {
+                    "audience": "MQ-SAT"
+                  }
                 },
                 "host": "mfxhevl",
                 "protocol": "Mqtt",
@@ -49,14 +52,17 @@
                 "imagePullPolicy": "Always",
                 "replicas": 4,
                 "registrySettings": {
-                  "registrySettingsType": "AkriConnectorsRegistrySettings"
+                  "registrySettingsType": "RegistryEndpointRef",
+                  "registryEndpointRef": "my-endpoint"
                 },
                 "tagDigestSettings": {
-                  "tagDigestType": "AkriConnectorsTagDigestSettings"
+                  "tagDigestType": "Tag",
+                  "tag": "1.2.1"
                 }
               },
               "schedule": {
-                "scheduleType": "AkriDiscoveryHandlerSchedule"
+                "scheduleType": "Cron",
+                "cron": "* * * * *"
               },
               "secrets": [
                 {

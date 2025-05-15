@@ -18,7 +18,11 @@
             "aioMaxVersion": "qibjqbpxplxclqm"
           },
           "runtimeConfiguration": {
-            "runtimeConfigurationType": "AkriConnectorTemplateRuntimeConfiguration"
+            "runtimeConfigurationType": "HelmConfiguration",
+            "helmConfigurationSettings": {
+              "releaseName": "my-install",
+              "version": "1.0.0"
+            }
           },
           "diagnostics": {
             "logs": {
@@ -40,7 +44,10 @@
           ],
           "mqttConnectionConfiguration": {
             "authentication": {
-              "method": "AkriConnectorsMqttAuthentication"
+              "method": "ServiceAccountToken",
+              "serviceAccountTokenSettings": {
+                "audience": "MQ-SAT"
+              }
             },
             "host": "mzlqeirtmppsgvc",
             "protocol": "Mqtt",
