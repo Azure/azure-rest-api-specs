@@ -37,10 +37,7 @@ interface SuppressionContracts {
     SuppressionContract,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Error = ArmErrorResponse,
-    Response = ArmResponse<SuppressionContract> | (NotFoundResponse & {
-      @bodyRoot
-      _: ArmErrorResponse;
-    })
+    Response = ArmResponse<SuppressionContract> | ArmNotFoundResponse
   >;
 
   /**
@@ -52,10 +49,7 @@ interface SuppressionContracts {
   create is ArmResourceCreateOrReplaceSync<
     SuppressionContract,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Response = ArmResourceUpdatedResponse<SuppressionContract> | (NotFoundResponse & {
-      @bodyRoot
-      _: ArmErrorResponse;
-    }),
+    Response = ArmResourceUpdatedResponse<SuppressionContract> | ArmNotFoundResponse,
     Error = ArmErrorResponse
   >;
 

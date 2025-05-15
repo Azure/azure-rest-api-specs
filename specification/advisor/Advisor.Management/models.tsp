@@ -343,6 +343,14 @@ model ArmErrorResponse {
   error?: ARMErrorResponseBody;
 }
 
+model ArmNotFoundResponse {
+  @statusCode
+  _: 404;
+
+  @body
+  body: ArmErrorResponse;
+}
+
 /**
  * The Advisor configuration data structure.
  */
