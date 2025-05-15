@@ -197,6 +197,12 @@
               "$ref": "#/definitions/SuppressionContract"
             }
           },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -376,6 +382,12 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MetadataEntity"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           },
           "default": {
@@ -1618,7 +1630,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfigDataListResult"
+              "$ref": "#/definitions/ConfigurationListResult"
             }
           },
           "default": {
@@ -1994,27 +2006,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
-      ]
-    },
-    "ConfigDataListResult": {
-      "type": "object",
-      "description": "The response of a ConfigData list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ConfigData items on this page",
-          "items": {
-            "$ref": "#/definitions/ConfigData"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ConfigDataProperties": {

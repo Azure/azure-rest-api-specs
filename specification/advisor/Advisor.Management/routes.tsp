@@ -71,7 +71,7 @@ interface ConfigurationsOperationGroup {
      */
     @path
     resourceGroup: string,
-  ): ArmResponse<ResourceListResult<ConfigData>> | ArmErrorResponse;
+  ): ArmResponse<ConfigurationListResult> | ArmErrorResponse;
 
   /**
    * Create/Overwrite Azure Advisor configuration.

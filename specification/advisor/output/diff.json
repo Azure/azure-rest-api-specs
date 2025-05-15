@@ -1438,8 +1438,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TimeSeriesEntity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1625,8 +1624,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScoreEntity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1820,6 +1818,11 @@
         }
       }
     },
+    "AssessmentListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "AssessmentResult": {
       "allOf__added": [
         {
@@ -1844,6 +1847,16 @@
           "readOnly": true
         }
       }
+    },
+    "AssessmentTypeListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ConfigurationListResult": {
+      "required__added": [
+        "value"
+      ]
     },
     "DigestConfig": {
       "properties": {
@@ -1884,6 +1897,11 @@
         }
       }
     },
+    "MetadataEntityListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "MetadataEntityProperties": {
       "properties": {
         "applicableScenarios": {
@@ -1902,13 +1920,13 @@
       }
     },
     "OperationEntityListResult": {
+      "required__added": [
+        "value"
+      ],
       "properties": {
         "value": {
-          "x-ms-identifiers": [
-            [
-              "-",
-              "name"
-            ]
+          "x-ms-identifiers__deleted": [
+            "name"
           ]
         }
       }
@@ -2008,6 +2026,11 @@
         ]
       ]
     },
+    "ResourceRecommendationBaseListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "SuppressionContract": {
       "allOf": [
         [
@@ -2019,6 +2042,11 @@
             }
           }
         ]
+      ]
+    },
+    "SuppressionContractListResult": {
+      "required__added": [
+        "value"
       ]
     },
     "TrackedRecommendationPropertiesPayload": {
@@ -2033,6 +2061,11 @@
           "$ref__added": "#/definitions/TrackedRecommendationPropertiesPayloadProperties"
         }
       }
+    },
+    "WorkloadListResult": {
+      "required__added": [
+        "value"
+      ]
     }
   }
 }

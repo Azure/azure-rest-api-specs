@@ -36,7 +36,11 @@ interface SuppressionContracts {
   get is ArmResourceRead<
     SuppressionContract,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Error = ArmErrorResponse
+    Error = ArmErrorResponse,
+    Response = ArmResponse<SuppressionContract> | (NotFoundResponse & {
+      @bodyRoot
+      _: ArmErrorResponse;
+    })
   >;
 
   /**
