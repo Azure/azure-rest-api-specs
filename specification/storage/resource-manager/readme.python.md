@@ -19,6 +19,8 @@ output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/stora
 ```
 
 ``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
 directive:
   - from: swagger-document
     where: $.definitions.LeaseContainerRequest
