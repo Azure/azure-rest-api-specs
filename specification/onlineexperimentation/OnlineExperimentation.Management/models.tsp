@@ -25,9 +25,9 @@ alias StorageAccountArmResourceId = Azure.Core.armResourceIdentifier<[
 ]>;
 
 /**
- * The properties of an online experiment workspace.
+ * The properties of an online experimentation workspace.
  */
-model OnlineExperimentWorkspaceProperties {
+model OnlineExperimentationWorkspaceProperties {
   /** The Id of the workspace. */
   @visibility(Lifecycle.Read)
   workspaceId?: string;
@@ -39,28 +39,28 @@ model OnlineExperimentWorkspaceProperties {
   provisioningState?: ResourceProvisioningState;
 
   /**
-   * The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.
+   * The resource identifier of the Log Analytics workspace which online experimentation workspace uses for generating experiment analysis results.
    */
   logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceArmResourceId;
 
   /**
-   * The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.
+   * The resource identifier of storage account where logs are exported from Log Analytics workspace. online experimentation workspace uses it generating experiment analysis results.
    */
   logsExporterStorageAccountResourceId: StorageAccountArmResourceId;
 
   /**
-   * The resource identifier of App Configuration with which this online experiment workspace is tied for experimentation. This is a required field for creating an online experiment workspace.
+   * The resource identifier of App Configuration with which this online experimentation workspace is tied for experimentation. This is a required field for creating an online experimentation workspace.
    */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   appConfigurationResourceId: AppConfigurationArmResourceId;
 
   /**
-   * The encryption configuration for the online experiment workspace resource.
+   * The encryption configuration for the online experimentation workspace resource.
    */
   encryption?: ResourceEncryptionConfiguration;
 
   /**
-   * The data plane endpoint for the online experiment workspace resource.
+   * The data plane endpoint for the online experimentation workspace resource.
    */
   @visibility(Lifecycle.Read)
   endpoint?: url;
@@ -96,7 +96,7 @@ union PublicNetworkAccessType {
 }
 
 /**
- * The encryption configuration for the online experiment workspace resource.
+ * The encryption configuration for the online experimentation workspace resource.
  */
 model ResourceEncryptionConfiguration {
   /** All Customer-managed key encryption properties for the resource. */

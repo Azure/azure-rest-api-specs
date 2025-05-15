@@ -2,7 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./OnlineExperimentWorkspace.tsp";
+import "./OnlineExperimentationWorkspace.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
 
