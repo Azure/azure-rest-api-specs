@@ -2102,6 +2102,127 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/pendingUpdates": {
+      "get": {
+        "operationId": "HypervMachinesController_ListMachinePendingUpdate",
+        "tags": [
+          "HypervMachinesController"
+        ],
+        "description": "Method to get list of pending updates for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " HypervMachine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedHypervMachinePendingUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HypervMachinesController_ListMachinePendingUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/HypervMachinesController_ListMachinePendingUpdate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/pendingUpdates/{updateId}": {
+      "get": {
+        "operationId": "HypervMachinesController_GetMachinePendingUpdate",
+        "tags": [
+          "HypervMachinesController"
+        ],
+        "description": "Method to get pending update for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " HypervMachine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "updateId",
+            "in": "path",
+            "description": "Pending Update Id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HypervMachinePendingUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervMachinesController_GetMachinePendingUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/HypervMachinesController_GetMachinePendingUpdate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
       "get": {
         "operationId": "HypervSoftwareInventoriesController_GetMachineSoftwareInventory",
@@ -2178,6 +2299,343 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software": {
+      "get": {
+        "operationId": "HypervSoftwareInventoriesController_ListMachineSoftwareInventorySoftware",
+        "tags": [
+          "HypervSoftwareInventoriesController"
+        ],
+        "description": "Method to get list of software from a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " HypervMachine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedHypervVmSoftware"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HypervSoftwareInventoriesController_ListMachineSoftwareInventorySoftware_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_ListMachineSoftwareInventorySoftware_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software/{softwareId}": {
+      "get": {
+        "operationId": "HypervSoftwareInventoriesController_GetMachineSoftwareInventorySoftware",
+        "tags": [
+          "HypervSoftwareInventoriesController"
+        ],
+        "description": "Method to get a specific software from a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " HypervMachine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          },
+          {
+            "name": "softwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HypervVmSoftware"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervSoftwareInventoriesController_GetMachineSoftwareInventorySoftware_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_GetMachineSoftwareInventorySoftware_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software/{softwareId}/vulnerabilities": {
+      "get": {
+        "operationId": "HypervSoftwareInventoriesController_ListMachineSoftwareInventorySoftwareVulnerability",
+        "tags": [
+          "HypervSoftwareInventoriesController"
+        ],
+        "description": "Method to get list of vulnerabilities associated with an software in a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " HypervMachine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          },
+          {
+            "name": "softwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedHypervVmSoftwareVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HypervSoftwareInventoriesController_ListMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_ListMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software/{softwareId}/vulnerabilities/{vulnerabilityId}": {
+      "get": {
+        "operationId": "HypervSoftwareInventoriesController_GetMachineSoftwareInventorySoftwareVulnerability",
+        "tags": [
+          "HypervSoftwareInventoriesController"
+        ],
+        "description": "Method to get vulnerability associated with an software in a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " HypervMachine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          },
+          {
+            "name": "softwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "vulnerabilityId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HypervVmSoftwareVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervSoftwareInventoriesController_GetMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_GetMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareinventories": {
       "get": {
         "operationId": "HypervSoftwareInventoriesController_ListByHypervMachine",
@@ -2232,6 +2690,126 @@
         "x-ms-examples": {
           "HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen": {
             "$ref": "./examples/HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/vulnerabilities": {
+      "get": {
+        "operationId": "HypervMachinesController_ListMachineVulnerabilities",
+        "tags": [
+          "HypervMachinesController"
+        ],
+        "description": "Method to get list of vulnerabilities for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " HypervMachine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedHypervMachineVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HypervMachinesController_ListMachineVulnerabilities_MaximumSet_Gen": {
+            "$ref": "./examples/HypervMachinesController_ListMachineVulnerabilities_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/vulnerabilities/{vulnerabilityId}": {
+      "get": {
+        "operationId": "HypervMachinesController_GetMachineVulnerability",
+        "tags": [
+          "HypervMachinesController"
+        ],
+        "description": "Method to get vulnerability for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " HypervMachine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "vulnerabilityId",
+            "in": "path",
+            "description": "Vulnerability Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HypervMachineVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervMachinesController_GetMachineVulnerability_MaximumSet_Gen": {
+            "$ref": "./examples/HypervMachinesController_GetMachineVulnerability_MaximumSet_Gen.json"
           }
         }
       }
@@ -9969,6 +10547,127 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/pendingUpdates": {
+      "get": {
+        "operationId": "ServersController_ListMachinePendingUpdate",
+        "tags": [
+          "ServersController"
+        ],
+        "description": "Method to get list of pending updates for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " A server machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedServerPendingUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ServersController_ListMachinePendingUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/ServersController_ListMachinePendingUpdate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/pendingUpdates/{updateId}": {
+      "get": {
+        "operationId": "ServersController_GetMachinePendingUpdate",
+        "tags": [
+          "ServersController"
+        ],
+        "description": "Method to get pending update for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " A server machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "updateId",
+            "in": "path",
+            "description": "Pending Update Id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerPendingUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServersController_GetMachinePendingUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/ServersController_GetMachinePendingUpdate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
       "get": {
         "operationId": "ServerSoftwareInventoriesController_GetMachineSoftwareInventory",
@@ -10045,6 +10744,343 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software": {
+      "get": {
+        "operationId": "ServerSoftwareInventoriesController_ListMachineSoftwareInventorySoftware",
+        "tags": [
+          "ServerSoftwareInventoriesController"
+        ],
+        "description": "Method to get list of software from a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " A server machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedServerSoftware"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ServerSoftwareInventoriesController_ListMachineSoftwareInventorySoftware_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_ListMachineSoftwareInventorySoftware_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software/{softwareId}": {
+      "get": {
+        "operationId": "ServerSoftwareInventoriesController_GetMachineSoftwareInventorySoftware",
+        "tags": [
+          "ServerSoftwareInventoriesController"
+        ],
+        "description": "Method to get a specific software from a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " A server machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          },
+          {
+            "name": "softwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerSoftware"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerSoftwareInventoriesController_GetMachineSoftwareInventorySoftware_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_GetMachineSoftwareInventorySoftware_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software/{softwareId}/vulnerabilities": {
+      "get": {
+        "operationId": "ServerSoftwareInventoriesController_ListMachineSoftwareInventorySoftwareVulnerability",
+        "tags": [
+          "ServerSoftwareInventoriesController"
+        ],
+        "description": "Method to get list of vulnerabilities associated with an software in a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " A server machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          },
+          {
+            "name": "softwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedServerSoftwareVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ServerSoftwareInventoriesController_ListMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_ListMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software/{softwareId}/vulnerabilities/{vulnerabilityId}": {
+      "get": {
+        "operationId": "ServerSoftwareInventoriesController_GetMachineSoftwareInventorySoftwareVulnerability",
+        "tags": [
+          "ServerSoftwareInventoriesController"
+        ],
+        "description": "Method to get vulnerability associated with an software in a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " A server machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          },
+          {
+            "name": "softwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "vulnerabilityId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerSoftwareVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerSoftwareInventoriesController_GetMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_GetMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareinventories": {
       "get": {
         "operationId": "ServerSoftwareInventoriesController_ListByServer",
@@ -10099,6 +11135,126 @@
         "x-ms-examples": {
           "ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen": {
             "$ref": "./examples/ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/vulnerabilities": {
+      "get": {
+        "operationId": "ServersController_ListMachineVulnerabilities",
+        "tags": [
+          "ServersController"
+        ],
+        "description": "Method to get list of vulnerabilities for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " A server machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedServerVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ServersController_ListMachineVulnerabilities_MaximumSet_Gen": {
+            "$ref": "./examples/ServersController_ListMachineVulnerabilities_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/vulnerabilities/{vulnerabilityId}": {
+      "get": {
+        "operationId": "ServersController_GetMachineVulnerability",
+        "tags": [
+          "ServersController"
+        ],
+        "description": "Method to get vulnerability for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": " A server machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "vulnerabilityId",
+            "in": "path",
+            "description": "Vulnerability Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServersController_GetMachineVulnerability_MaximumSet_Gen": {
+            "$ref": "./examples/ServersController_GetMachineVulnerability_MaximumSet_Gen.json"
           }
         }
       }
@@ -11937,6 +13093,127 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/pendingUpdates": {
+      "get": {
+        "operationId": "MachinesController_ListMachinePendingUpdate",
+        "tags": [
+          "MachinesController"
+        ],
+        "description": "Method to get list of pending updates for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedVmwareMachinePendingUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MachinesController_ListMachinePendingUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/MachinesController_ListMachinePendingUpdate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/pendingUpdates/{updateId}": {
+      "get": {
+        "operationId": "MachinesController_GetMachinePendingUpdate",
+        "tags": [
+          "MachinesController"
+        ],
+        "description": "Method to get pending update for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "updateId",
+            "in": "path",
+            "description": "Pending Update Id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmwareMachinePendingUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MachinesController_GetMachinePendingUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/MachinesController_GetMachinePendingUpdate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
       "get": {
         "operationId": "VmwareSoftwareInventoriesController_GetMachineSoftwareInventory",
@@ -12009,6 +13286,343 @@
         "x-ms-examples": {
           "VmwareSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
             "$ref": "./examples/VmwareSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software": {
+      "get": {
+        "operationId": "VmwareSoftwareInventoriesController_ListMachineSoftwareInventorySoftware",
+        "tags": [
+          "VmwareSoftwareInventoriesController"
+        ],
+        "description": "Method to get list of software from a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedVmwareMachineSoftware"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VmwareSoftwareInventoriesController_ListMachineSoftwareInventorySoftware_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_ListMachineSoftwareInventorySoftware_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software/{softwareId}": {
+      "get": {
+        "operationId": "VmwareSoftwareInventoriesController_GetMachineSoftwareInventorySoftware",
+        "tags": [
+          "VmwareSoftwareInventoriesController"
+        ],
+        "description": "Method to get a specific software from a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          },
+          {
+            "name": "softwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmwareMachineSoftware"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareSoftwareInventoriesController_GetMachineSoftwareInventorySoftware_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_GetMachineSoftwareInventorySoftware_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software/{softwareId}/vulnerabilities": {
+      "get": {
+        "operationId": "VmwareSoftwareInventoriesController_ListMachineSoftwareInventorySoftwareVulnerability",
+        "tags": [
+          "VmwareSoftwareInventoriesController"
+        ],
+        "description": "Method to get list of vulnerabilities associated with an software in a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          },
+          {
+            "name": "softwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedVmwareMachineSoftwareVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VmwareSoftwareInventoriesController_ListMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_ListMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories/{default}/software/{softwareId}/vulnerabilities/{vulnerabilityId}": {
+      "get": {
+        "operationId": "VmwareSoftwareInventoriesController_GetMachineSoftwareInventorySoftwareVulnerability",
+        "tags": [
+          "VmwareSoftwareInventoriesController"
+        ],
+        "description": "Method to get vulnerability associated with an software in a machine's software inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default value.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "Default",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default value."
+                }
+              ]
+            }
+          },
+          {
+            "name": "softwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "vulnerabilityId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmwareMachineSoftwareVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareSoftwareInventoriesController_GetMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_GetMachineSoftwareInventorySoftwareVulnerability_MaximumSet_Gen.json"
           }
         }
       }
@@ -12213,6 +13827,126 @@
         "x-ms-examples": {
           "MachinesController_Stop_MaximumSet_Gen": {
             "$ref": "./examples/MachinesController_Stop_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/vulnerabilities": {
+      "get": {
+        "operationId": "MachinesController_ListMachineVulnerabilities",
+        "tags": [
+          "MachinesController"
+        ],
+        "description": "Method to get list of vulnerabilities for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedVmwareMachineVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MachinesController_ListMachineVulnerabilities_MaximumSet_Gen": {
+            "$ref": "./examples/MachinesController_ListMachineVulnerabilities_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/vulnerabilities/{vulnerabilityId}": {
+      "get": {
+        "operationId": "MachinesController_GetMachineVulnerability",
+        "tags": [
+          "MachinesController"
+        ],
+        "description": "Method to get vulnerability for a machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "vulnerabilityId",
+            "in": "path",
+            "description": "Vulnerability Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmwareMachineVulnerability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MachinesController_GetMachineVulnerability_MaximumSet_Gen": {
+            "$ref": "./examples/MachinesController_GetMachineVulnerability_MaximumSet_Gen.json"
           }
         }
       }
@@ -15003,6 +16737,26 @@
         "value"
       ]
     },
+    "HypervMachinePendingUpdate": {
+      "type": "object",
+      "description": "A pending update resource belonging to a HyperV VM resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PendingUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "HypervMachineProperties": {
       "type": "object",
       "description": "The properties of AddressResource",
@@ -15155,6 +16909,52 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of applications installed in the guest VM.",
+          "readOnly": true
+        },
+        "numberOfVulnerabilities": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of vulnerabilities present in the guest VM.",
+          "readOnly": true
+        },
+        "numberOfCriticalVulnerabilities": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of critical vulnerabilities present in the guest VM.",
+          "readOnly": true
+        },
+        "numberOfPendingUpdates": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of updates pending on the guest VM.",
+          "readOnly": true
+        },
+        "numberOfEndOfSupportSoftware": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of end of support software present in the guest VM.",
+          "readOnly": true
+        },
+        "hasSecuritySoftware": {
+          "type": "boolean",
+          "description": "Whether the guest VM has any security software installed.",
+          "readOnly": true
+        },
+        "hasPatchingSoftware": {
+          "type": "boolean",
+          "description": "Whether the guest VM has any patching software installed.",
+          "readOnly": true
+        },
+        "lastVulnerabilityAssessmentTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the timestamp when the vulnerability assessment was last performed.",
+          "readOnly": true
+        },
+        "lastSoftwareCategorizationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the timestamp when the software categorization was last performed.",
           "readOnly": true
         },
         "guestDetailsDiscoveryTimestamp": {
@@ -15375,6 +17175,26 @@
           }
         }
       }
+    },
+    "HypervMachineVulnerability": {
+      "type": "object",
+      "description": "A Vulnerability resource belonging to a HyperV VM resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Vulnerability",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "HypervNetworkAdapter": {
       "type": "object",
@@ -15597,6 +17417,26 @@
         }
       }
     },
+    "HypervVmSoftware": {
+      "type": "object",
+      "description": "A Software resource belonging to a HyperV VM's software inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Software",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "HypervVmSoftwareInventory": {
       "type": "object",
       "description": "HyperV VM software inventory REST resource.",
@@ -15636,6 +17476,26 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "HypervVmSoftwareVulnerability": {
+      "type": "object",
+      "description": "A Vulnerability resource belonging to an software in a HyperV VM's software inventory.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Vulnerability",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "IisApplicationUnit": {
@@ -17293,6 +19153,86 @@
         }
       }
     },
+    "PagedHypervMachinePendingUpdate": {
+      "type": "object",
+      "description": "Paged collection of HypervMachinePendingUpdate items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HypervMachinePendingUpdate items on this page",
+          "items": {
+            "$ref": "#/definitions/HypervMachinePendingUpdate"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedHypervMachineVulnerability": {
+      "type": "object",
+      "description": "Paged collection of HypervMachineVulnerability items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HypervMachineVulnerability items on this page",
+          "items": {
+            "$ref": "#/definitions/HypervMachineVulnerability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedHypervVmSoftware": {
+      "type": "object",
+      "description": "Paged collection of HypervVmSoftware items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HypervVmSoftware items on this page",
+          "items": {
+            "$ref": "#/definitions/HypervVmSoftware"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedHypervVmSoftwareVulnerability": {
+      "type": "object",
+      "description": "Paged collection of HypervVmSoftwareVulnerability items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HypervVmSoftwareVulnerability items on this page",
+          "items": {
+            "$ref": "#/definitions/HypervVmSoftwareVulnerability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
     "PagedImportMachinesJob": {
       "type": "object",
       "description": "Paged collection of ImportMachinesJob items",
@@ -17329,6 +19269,198 @@
         "nextLink": {
           "type": "string",
           "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedServerPendingUpdate": {
+      "type": "object",
+      "description": "Paged collection of ServerPendingUpdate items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerPendingUpdate items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerPendingUpdate"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedServerSoftware": {
+      "type": "object",
+      "description": "Paged collection of ServerSoftware items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerSoftware items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerSoftware"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedServerSoftwareVulnerability": {
+      "type": "object",
+      "description": "Paged collection of ServerSoftwareVulnerability items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerSoftwareVulnerability items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerSoftwareVulnerability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedServerVulnerability": {
+      "type": "object",
+      "description": "Paged collection of ServerVulnerability items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerVulnerability items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerVulnerability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedVmwareMachinePendingUpdate": {
+      "type": "object",
+      "description": "Paged collection of VmwareMachinePendingUpdate items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VmwareMachinePendingUpdate items on this page",
+          "items": {
+            "$ref": "#/definitions/VmwareMachinePendingUpdate"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedVmwareMachineSoftware": {
+      "type": "object",
+      "description": "Paged collection of VmwareMachineSoftware items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VmwareMachineSoftware items on this page",
+          "items": {
+            "$ref": "#/definitions/VmwareMachineSoftware"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedVmwareMachineSoftwareVulnerability": {
+      "type": "object",
+      "description": "Paged collection of VmwareMachineSoftwareVulnerability items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VmwareMachineSoftwareVulnerability items on this page",
+          "items": {
+            "$ref": "#/definitions/VmwareMachineSoftwareVulnerability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedVmwareMachineVulnerability": {
+      "type": "object",
+      "description": "Paged collection of VmwareMachineVulnerability items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VmwareMachineVulnerability items on this page",
+          "items": {
+            "$ref": "#/definitions/VmwareMachineVulnerability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PendingUpdate": {
+      "type": "object",
+      "description": "Pending update in the guest virtual machine.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the unique id for the pending update.",
+          "readOnly": true
+        },
+        "updateVersion": {
+          "type": "string",
+          "description": "Gets or sets version of the update.",
+          "readOnly": true
+        },
+        "title": {
+          "type": "string",
+          "description": "Gets or sets title of the update.",
+          "readOnly": true
+        },
+        "severity": {
+          "type": "string",
+          "description": "Gets or sets Severity of the update.",
+          "readOnly": true
+        },
+        "publishedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the timestamp when the update was published.",
           "readOnly": true
         }
       }
@@ -17961,6 +20093,26 @@
         }
       }
     },
+    "ServerPendingUpdate": {
+      "type": "object",
+      "description": "A pending update resource belonging to a server resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PendingUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "ServerProperties": {
       "type": "object",
       "description": "Server REST resource.",
@@ -18015,6 +20167,52 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of applications installed in the guest VM.",
+          "readOnly": true
+        },
+        "numberOfVulnerabilities": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of vulnerabilities present in the guest VM.",
+          "readOnly": true
+        },
+        "numberOfCriticalVulnerabilities": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of critical vulnerabilities present in the guest VM.",
+          "readOnly": true
+        },
+        "numberOfPendingUpdates": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of updates pending on the guest VM.",
+          "readOnly": true
+        },
+        "numberOfEndOfSupportSoftware": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of end of support software present in the guest VM.",
+          "readOnly": true
+        },
+        "hasSecuritySoftware": {
+          "type": "boolean",
+          "description": "Whether the guest VM has any security software installed.",
+          "readOnly": true
+        },
+        "hasPatchingSoftware": {
+          "type": "boolean",
+          "description": "Whether the guest VM has any patching software installed.",
+          "readOnly": true
+        },
+        "lastVulnerabilityAssessmentTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the timestamp when the vulnerability assessment was last performed.",
+          "readOnly": true
+        },
+        "lastSoftwareCategorizationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the timestamp when the software categorization was last performed.",
           "readOnly": true
         },
         "guestDetailsDiscoveryTimestamp": {
@@ -18350,6 +20548,26 @@
         "serverCount"
       ]
     },
+    "ServerSoftware": {
+      "type": "object",
+      "description": "A Software resource belonging to a server's software inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Software",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "ServerSoftwareInventory": {
       "type": "object",
       "description": "An software inventory resource belonging to a server resource.",
@@ -18389,6 +20607,26 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "ServerSoftwareVulnerability": {
+      "type": "object",
+      "description": "A Vulnerability resource belonging to an software in a server's software inventory.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Vulnerability",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "ServerUpdate": {
@@ -18478,6 +20716,26 @@
           "description": "Provisioning state of the server resource."
         }
       }
+    },
+    "ServerVulnerability": {
+      "type": "object",
+      "description": "A Vulnerability resource belonging to a server resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Vulnerability",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ShallowDiscoveryStatus": {
       "type": "string",
@@ -18901,6 +21159,55 @@
         "arcScope": {
           "$ref": "#/definitions/ArcScopeProperties",
           "description": "Gets or sets the Arc scope properties for the server site."
+        }
+      }
+    },
+    "Software": {
+      "type": "object",
+      "description": "Software in the guest virtual machine.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the unique id for the Software.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets Name of the Software.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets Version of the Software.",
+          "readOnly": true
+        },
+        "provider": {
+          "type": "string",
+          "description": "Gets or sets Provider of the Software.",
+          "readOnly": true
+        },
+        "category": {
+          "type": "string",
+          "description": "Gets or sets Category of the Software.",
+          "readOnly": true
+        },
+        "subCategories": {
+          "type": "array",
+          "description": "Gets or sets the subcategories associated with the Software.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the Type of the Software.",
+          "readOnly": true
+        },
+        "supportStatus": {
+          "type": "string",
+          "description": "Gets or sets Support status of the Software.",
+          "readOnly": true
         }
       }
     },
@@ -21606,6 +23913,26 @@
         "value"
       ]
     },
+    "VmwareMachinePendingUpdate": {
+      "type": "object",
+      "description": "A pending update resource belonging to a machine resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PendingUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "VmwareMachineProperties": {
       "type": "object",
       "description": "Class for machine properties.",
@@ -21743,6 +24070,52 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of applications installed in the guest VM.",
+          "readOnly": true
+        },
+        "numberOfVulnerabilities": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of vulnerabilities present in the guest VM.",
+          "readOnly": true
+        },
+        "numberOfCriticalVulnerabilities": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of critical vulnerabilities present in the guest VM.",
+          "readOnly": true
+        },
+        "numberOfPendingUpdates": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of updates pending on the guest VM.",
+          "readOnly": true
+        },
+        "numberOfEndOfSupportSoftware": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of end of support software present in the guest VM.",
+          "readOnly": true
+        },
+        "hasSecuritySoftware": {
+          "type": "boolean",
+          "description": "Whether the guest VM has any security software installed.",
+          "readOnly": true
+        },
+        "hasPatchingSoftware": {
+          "type": "boolean",
+          "description": "Whether the guest VM has any patching software installed.",
+          "readOnly": true
+        },
+        "lastVulnerabilityAssessmentTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the timestamp when the vulnerability assessment was last performed.",
+          "readOnly": true
+        },
+        "lastSoftwareCategorizationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the timestamp when the software categorization was last performed.",
           "readOnly": true
         },
         "guestDetailsDiscoveryTimestamp": {
@@ -21907,6 +24280,26 @@
         }
       }
     },
+    "VmwareMachineSoftware": {
+      "type": "object",
+      "description": "A Software resource belonging to a machine's software inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Software",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "VmwareMachineSoftwareInventory": {
       "type": "object",
       "description": "An software inventory resource belonging to a machine resource.",
@@ -21946,6 +24339,46 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "VmwareMachineSoftwareVulnerability": {
+      "type": "object",
+      "description": "A Vulnerability resource belonging to an software in a machine's software inventory.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Vulnerability",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VmwareMachineVulnerability": {
+      "type": "object",
+      "description": "A Vulnerability resource belonging to a machine resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Vulnerability",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "VmwareNetworkAdapter": {
@@ -22137,6 +24570,63 @@
           "format": "int32",
           "description": "Gets or sets the number of vCenters part of the site."
         }
+      }
+    },
+    "Vulnerability": {
+      "type": "object",
+      "description": "Vulnerability in a Software on the guest virtual machine.",
+      "properties": {
+        "cveId": {
+          "type": "string",
+          "description": "Gets or Sets the cve id of the vulnerability.",
+          "readOnly": true
+        },
+        "baseScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or Sets the security score of the vulnerability.",
+          "readOnly": true
+        },
+        "baseSeverity": {
+          "type": "string",
+          "description": "Gets or Sets the severity of the vulnerability.",
+          "readOnly": true
+        },
+        "publishedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or Sets the timestamp when the vulnerability was published.",
+          "readOnly": true
+        },
+        "vulnerabilityScope": {
+          "$ref": "#/definitions/VulnerabilityScope",
+          "description": "Gets or sets the scope of the vulnerability.",
+          "readOnly": true
+        }
+      }
+    },
+    "VulnerabilityScope": {
+      "type": "string",
+      "description": "Vulnerability Scope",
+      "enum": [
+        "OperatingSystem",
+        "Software"
+      ],
+      "x-ms-enum": {
+        "name": "VulnerabilityScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OperatingSystem",
+            "value": "OperatingSystem",
+            "description": "OperatingSystem value."
+          },
+          {
+            "name": "Software",
+            "value": "Software",
+            "description": "Software value."
+          }
+        ]
       }
     },
     "WebAppDiscovery": {
