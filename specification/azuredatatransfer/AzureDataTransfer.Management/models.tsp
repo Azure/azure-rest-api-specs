@@ -1208,7 +1208,7 @@ model PendingFlow {
   @visibility(Lifecycle.Read)
   connectionId?: string;
 
-  ...ConnectionProperties;
+  ...FlowProperties;
   ...Azure.ResourceManager.CommonTypes.TrackedResource;
 }
 

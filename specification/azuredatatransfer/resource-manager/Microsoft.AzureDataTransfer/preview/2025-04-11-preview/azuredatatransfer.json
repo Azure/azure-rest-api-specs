@@ -3312,113 +3312,165 @@
           "description": "Connection ID of the pending flow.",
           "readOnly": true
         },
-        "pipeline": {
-          "type": "string",
-          "description": "Pipeline to use to transfer data"
+        "connection": {
+          "$ref": "#/definitions/selectedResource",
+          "description": "The connection associated with this flow"
         },
-        "direction": {
-          "$ref": "#/definitions/Direction",
-          "description": "Direction of data movement"
-        },
-        "justification": {
+        "flowId": {
           "type": "string",
-          "description": "Justification for the connection request"
+          "description": "Dataflow GUID associated with this flow",
+          "readOnly": true
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "AME, PME, or TORUS only! AKV Chain Containing SAS Token"
+        },
+        "linkStatus": {
+          "$ref": "#/definitions/LinkStatus",
+          "description": "Link status of the current flow",
+          "readOnly": true
+        },
+        "linkedFlowId": {
+          "type": "string",
+          "description": "Resource ID of the linked flow",
+          "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/ConnectionStatus",
-          "description": "Status of the connection",
-          "readOnly": true
+          "$ref": "#/definitions/FlowStatus",
+          "description": "Status of the current flow"
         },
         "forceDisabledStatus": {
           "type": "array",
-          "description": "Force disablement status of the current connection",
+          "description": "Force disablement status of the current flow",
           "items": {
             "$ref": "#/definitions/ForceDisabledStatus"
           },
           "readOnly": true
         },
-        "statusReason": {
+        "storageAccountName": {
           "type": "string",
-          "description": "Reason for status",
-          "readOnly": true
+          "description": "Storage Account"
         },
-        "linkStatus": {
-          "$ref": "#/definitions/LinkStatus",
-          "description": "Link status of the current connection",
-          "readOnly": true
-        },
-        "linkedConnectionId": {
+        "storageAccountId": {
           "type": "string",
-          "description": "Resource ID of the linked connection",
-          "readOnly": true
-        },
-        "flowTypes": {
-          "type": "array",
-          "description": "The flow types being requested for this connection",
-          "items": {
-            "$ref": "#/definitions/flowType"
+          "format": "arm-id",
+          "description": "Storage Account ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
           }
         },
-        "requirementId": {
+        "storageContainerName": {
           "type": "string",
-          "description": "Requirement ID of the connection"
+          "description": "Storage Container Name"
         },
-        "remoteSubscriptionId": {
+        "storageTableName": {
           "type": "string",
-          "description": "Subscription ID to link cloud subscriptions together"
+          "description": "Storage Table Name"
         },
-        "approver": {
+        "serviceBusQueueId": {
           "type": "string",
-          "description": "Approver of this connection request",
-          "readOnly": true
-        },
-        "pin": {
-          "type": "string",
-          "description": "PIN to link requests together"
-        },
-        "dateSubmitted": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp that this connection request was submitted at",
-          "readOnly": true
-        },
-        "primaryContact": {
-          "type": "string",
-          "description": "The primary contact for this connection request"
-        },
-        "secondaryContacts": {
-          "type": "array",
-          "description": "The secondary contacts for this connection request",
-          "items": {
-            "type": "string"
+          "format": "arm-id",
+          "description": "Service Bus Queue ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/namespaces/queues"
+              }
+            ]
           }
+        },
+        "flowType": {
+          "$ref": "#/definitions/flowType",
+          "description": "The flow type for this flow"
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType",
+          "description": "Transfer Storage Blobs or Tables"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the connection",
+          "description": "Provisioning state of the flow",
           "readOnly": true
         },
         "policies": {
           "type": "array",
-          "description": "The policies for this connection",
+          "description": "The policies for this flow",
           "items": {
             "type": "string"
           }
         },
-        "schemas": {
+        "schema": {
+          "$ref": "#/definitions/schema",
+          "description": "The selected schema for this flow"
+        },
+        "messagingOptions": {
+          "$ref": "#/definitions/messagingOptions",
+          "description": "The messaging options for this flow"
+        },
+        "apiFlowOptions": {
+          "$ref": "#/definitions/apiFlowOptions",
+          "description": "The API Flow configuration options for Azure Data Transfer API Flow type."
+        },
+        "customerManagedKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI to the customer managed key for this flow"
+        },
+        "streamId": {
+          "type": "string",
+          "description": "The flow stream identifier"
+        },
+        "streamProtocol": {
+          "$ref": "#/definitions/StreamProtocol",
+          "description": "The protocol of the stream"
+        },
+        "streamLatency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The latency of the stream in milliseconds"
+        },
+        "passphrase": {
+          "type": "string",
+          "description": "The passphrase used for SRT streams"
+        },
+        "sourceAddresses": {
+          "$ref": "#/definitions/streamSourceAddresses",
+          "description": "The source IP address and CIDR ranges of the stream"
+        },
+        "destinationEndpoints": {
           "type": "array",
-          "description": "The schemas for this connection",
+          "description": "The destination endpoints of the stream",
           "items": {
-            "$ref": "#/definitions/schema"
+            "type": "string"
           }
         },
-        "schemaUris": {
+        "destinationEndpointPorts": {
           "type": "array",
-          "description": "The schema URIs for this connection",
+          "description": "The destination endpoint ports of the stream",
           "items": {
-            "type": "string",
-            "format": "uri"
+            "type": "integer",
+            "format": "int64"
           }
+        },
+        "eventHubId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Event Hub ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.EventHub/namespaces/eventhubs"
+              }
+            ]
+          }
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "Event Hub Consumer Group"
         },
         "tags": {
           "type": "object",
@@ -3458,7 +3510,6 @@
         }
       },
       "required": [
-        "pipeline",
         "location"
       ]
     },
