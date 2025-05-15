@@ -4,7 +4,7 @@ import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 
 import { getPathToDependency, isFailure } from "./util.js";
 import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
-import { ReadmeTags } from "./lintdiff-types.js";
+import { ReadmeAffectedTags } from "./lintdiff-types.js";
 import { getOpenapiType } from "./markdown-utils.js";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
@@ -15,7 +15,7 @@ const AUTOREST_ERROR_PREFIX = '{"level":';
 
 export async function runChecks(
   path: string,
-  runList: Map<string, ReadmeTags>,
+  runList: Map<string, ReadmeAffectedTags>,
 ): Promise<AutorestRunResult[]> {
   const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
   const result: AutorestRunResult[] = [];
@@ -33,7 +33,7 @@ export async function runChecks(
     let openApiSubType = openApiType;
 
     // If the tags array is empty run the loop once but with a null tag
-    const coalescedTags = tags.tags?.size ? [...tags.tags] : [null];
+    const coalescedTags = tags.changedTags?.size ? [...tags.changedTags] : [null];
     for (const tag of coalescedTags) {
       console.log(`::group::Autorest for type: ${openApiType} readme: ${readme} tag: ${tag}`);
 

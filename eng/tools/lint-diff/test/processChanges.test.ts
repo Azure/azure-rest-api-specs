@@ -7,7 +7,7 @@ import {
   getChangedSwaggers,
   buildState,
 } from "../src/processChanges.js";
-import { ReadmeTags } from "../src/lintdiff-types.js";
+import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
 
 import { isWindows } from "./test-util.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
@@ -60,45 +60,57 @@ describe("getService", () => {
 
 describe("reconcileChangedFilesAndTags", () => {
   test("if a tag is deleted in after and exists in before, remove the tag from before", () => {
-    const before = new Map<string, ReadmeTags>([
-      ["specification/1/readme.md", { 
-        readme: new Readme("specification/1/readme.md"), 
-        tags: new Set<string>(["tag1", "tag2"]) 
-      }]
+    const before = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1", "tag2"]),
+        },
+      ],
     ]);
-    const after = new Map<string, ReadmeTags>([
-      ["specification/1/readme.md", {
-        readme: new Readme("specification/1/readme.md"), 
-        tags: new Set<string>(["tag1"])
-      }],
+    const after = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1"]),
+        },
+      ],
     ]);
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(
       new Map<string, string[]>([
         [
-          "specification/1/readme.md", 
+          "specification/1/readme.md",
           expect.objectContaining({
-            tags: new Set<string>(["tag1"])
-          })
-        ]
+            tags: new Set<string>(["tag1"]),
+          }),
+        ],
       ]),
     );
     expect(afterFinal).toEqual(after);
   });
 
   test("does not change if there is no change", () => {
-    const before = new Map<string, ReadmeTags>([
-      ["specification/1/readme.md", { 
-        readme: new Readme("specification/1/readme.md"), 
-        tags: new Set<string>(["tag1", "tag2"]) 
-      }]
+    const before = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1", "tag2"]),
+        },
+      ],
     ]);
-    const after = new Map<string, ReadmeTags>([
-      ["specification/1/readme.md", { 
-        readme: new Readme("specification/1/readme.md"), 
-        tags: new Set<string>(["tag1", "tag2"]) 
-      }]
+    const after = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1", "tag2"]),
+        },
+      ],
     ]);
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
@@ -107,13 +119,16 @@ describe("reconcileChangedFilesAndTags", () => {
   });
 
   test("keeps a specification in before if it is deleted in after", () => {
-    const before = new Map<string, ReadmeTags>([
-      ["specification/1/readme.md", { 
-        readme: new Readme("specification/1/readme.md"), 
-        tags: new Set<string>(["tag1", "tag2"]) 
-      }]
+    const before = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1", "tag2"]),
+        },
+      ],
     ]);
-    const after = new Map<string, ReadmeTags>();
+    const after = new Map<string, ReadmeAffectedTags>();
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(before);

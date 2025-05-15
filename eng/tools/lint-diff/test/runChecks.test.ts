@@ -27,7 +27,7 @@ vi.mock(import("../src/markdown-utils.js"), async (importOriginal) => {
 import { runChecks, getAutorestErrors } from "../src/runChecks.js";
 import { AutorestRunResult } from "../src/lintdiff-types.js";
 import { execNpmExec } from "@azure-tools/specs-shared/exec";
-import { ReadmeTags } from "../src/lintdiff-types.js";
+import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
 
 describe("runChecks", () => {
@@ -37,8 +37,8 @@ describe("runChecks", () => {
 
   test("sets outputs properly on tag", async () => {
     (execNpmExec as Mock).mockResolvedValue({ stdout: "out", stderr: "err" });
-    const runList = new Map<string, ReadmeTags>([
-      ["readme.md", { readme: new Readme(""), tags: new Set<string>(["tag1"]) }],
+    const runList = new Map<string, ReadmeAffectedTags>([
+      ["readme.md", { readme: new Readme(""), changedTags: new Set<string>(["tag1"]) }],
     ]);
 
     const actual = await runChecks("root", runList);
@@ -55,8 +55,8 @@ describe("runChecks", () => {
 
   test("coalesces null tag when no tags specified", async () => {
     (execNpmExec as Mock).mockResolvedValue({ stdout: "", stderr: "" });
-    const runList = new Map<string, ReadmeTags>([
-      ["readme.md", { readme: new Readme(""), tags: new Set<string>() }],
+    const runList = new Map<string, ReadmeAffectedTags>([
+      ["readme.md", { readme: new Readme(""), changedTags: new Set<string>() }],
     ]);
 
     const actual = await runChecks("root", runList);
@@ -75,11 +75,8 @@ describe("runChecks", () => {
     (err as any).code = 1;
 
     (execNpmExec as Mock).mockRejectedValue(err);
-    const runList = new Map<string, ReadmeTags>([
-      [
-      "readme.md",
-      { readme: new Readme(""), tags: new Set<string>(["tag1", "tag2"]) },
-      ],
+    const runList = new Map<string, ReadmeAffectedTags>([
+      ["readme.md", { readme: new Readme(""), changedTags: new Set<string>(["tag1", "tag2"]) }],
     ]);
 
     const actual = await runChecks("root", runList);
@@ -95,8 +92,8 @@ describe("runChecks", () => {
     (execNpmExec as Mock).mockRejectedValue({
       message: "some error for which isExecError returns false",
     });
-    const runList = new Map<string, ReadmeTags>([
-      ["readme.md", { readme: new Readme(""), tags: new Set<string>(["tag1", "tag2"]) }],
+    const runList = new Map<string, ReadmeAffectedTags>([
+      ["readme.md", { readme: new Readme(""), changedTags: new Set<string>(["tag1", "tag2"]) }],
     ]);
     expect(runChecks("root", runList)).rejects.toThrow();
   });

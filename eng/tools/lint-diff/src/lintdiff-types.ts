@@ -57,7 +57,7 @@ export type LintDiffViolation = LintingResultMessage & {
   armRpcs?: string[];
 };
 
-export type ReadmeTags = { 
+export type ReadmeAffectedTags = {
   readme: Readme;
-  tags: Set<string>;
-}
+  changedTags: Set<string>;
+};
