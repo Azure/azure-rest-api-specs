@@ -6375,8 +6375,25 @@
           "type": "string"
         },
         "status": {
-          "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled",
-          "type": "string"
+          "description": "Operation status",
+          "enum": [
+            "Error",
+            "Scheduled",
+            "UpdatingSessionHosts",
+            "ValidatingSessionHostUpdate",
+            "Paused",
+            "Pausing",
+            "Cancelling",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         },
         "percentComplete": {
           "description": "Percent of the operation that is complete.",
@@ -6407,7 +6424,7 @@
       }
     },
     "SessionHostManagementUpdateStatusProperties": {
-      "description": "Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.",
+      "description": "Properties bag for sessionHostManagement Update Statuses.",
       "type": "object",
       "properties": {
         "correlationId": {
@@ -6445,8 +6462,22 @@
           "type": "string"
         },
         "status": {
-          "description": "Operation status. Current defined values are < Scheduled | ValidatingSessionHostProvisioning | Cancelling | ProvisioningSessionHosts > | Succeeded | Failed | Canceled",
-          "type": "string"
+          "description": "Operation status.",
+          "enum": [
+            "Scheduled",
+            "ValidatingSessionHostProvisioning",
+            "Cancelling",
+            "ProvisioningSessionHosts",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         },
         "percentComplete": {
           "description": "Percent of the operation that is complete.",
@@ -6476,7 +6507,7 @@
       }
     },
     "SessionHostManagementProvisioningStatusProperties": {
-      "description": "Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.",
+      "description": "Properties bag for sessionHostManagement Provisioning Statuses.",
       "type": "object",
       "properties": {
         "correlationId": {
