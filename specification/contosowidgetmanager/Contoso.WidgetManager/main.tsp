@@ -44,7 +44,7 @@ model WidgetSuite {
   sharedModel?: FakedSharedModel;
 
   @doc("The empty model.")
-  emptyModel?: EmptyModel;
+  emptyModel: EmptyModel;
 }
 
 interface Widgets {
