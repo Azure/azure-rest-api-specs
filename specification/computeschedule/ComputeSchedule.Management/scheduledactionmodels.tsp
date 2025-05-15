@@ -174,6 +174,8 @@ model ScheduledAction is TrackedResource<ScheduledActionProperties> {
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The scheduled action extension")
 model ScheduledActionResources is ExtensionResource<ScheduledActionProperties> {
-  ...ResourceNameParameter<ScheduledActionResources,
-  SegmentName = "scheduledActions">;
+  ...ResourceNameParameter<
+    ScheduledActionResources,
+    SegmentName = "scheduledActions"
+  >;
 }

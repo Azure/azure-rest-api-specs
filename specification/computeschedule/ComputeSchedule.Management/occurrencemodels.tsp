@@ -135,14 +135,15 @@ scalar ScheduledActionsId
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The properties of the occurrence extension")
 model OccurrenceExtensionProperties {
-    ... OccurrenceProperties;
-    @doc("The arm identifier of the scheduled action the occurrence belongs to")
-    scheduledActionId : ScheduledActionsId;
+  ...OccurrenceProperties;
+
+  @doc("The arm identifier of the scheduled action the occurrence belongs to")
+  scheduledActionId: ScheduledActionsId;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The scheduled action extension")
-model OccurrenceExtensionResource is ExtensionResource<OccurrenceExtensionProperties> {
-  ...ResourceNameParameter<OccurrenceProperties,
-  SegmentName="occurrences">;
+model OccurrenceExtensionResource
+  is ExtensionResource<OccurrenceExtensionProperties> {
+  ...ResourceNameParameter<OccurrenceProperties, SegmentName = "occurrences">;
 }
