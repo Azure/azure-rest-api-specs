@@ -382,6 +382,17 @@
             "description": "Resource 'Connection' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/connection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -395,7 +406,12 @@
           "Creates or updates the connection resource": {
             "$ref": "./examples/createOrUpdateConnection.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/connection"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Connections_Update",
@@ -946,7 +962,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -1023,7 +1040,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -1100,7 +1118,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -1422,7 +1441,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -1508,7 +1528,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -1594,7 +1615,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -1680,7 +1702,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -1766,7 +1789,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -1842,7 +1866,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CConnection%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -2114,7 +2139,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/pipeline"
         },
         "x-ms-long-running-operation": true
       },
@@ -2324,7 +2350,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CConnection%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -2400,7 +2427,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CPipeline%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -2592,7 +2620,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CConnection%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -2646,6 +2675,10 @@
           }
         ]
       }
+    },
+    "Azure.Core.armResourceType": {
+      "type": "string",
+      "description": "Represents an Azure Resource Type."
     },
     "Azure.ResourceManager.ArmResponse<Connection>": {
       "type": "object",
@@ -3074,6 +3107,11 @@
       "type": "object",
       "description": "Pending connection object",
       "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID of the pending connection.",
+          "readOnly": true
+        },
         "pipeline": {
           "type": "string",
           "description": "Pipeline to use to transfer data"
@@ -3182,10 +3220,6 @@
             "format": "uri"
           }
         },
-        "properties": {
-          "$ref": "#/definitions/connection",
-          "description": "The resource-specific properties for this resource."
-        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -3213,18 +3247,13 @@
           "readOnly": true
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.armResourceType",
           "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
           "readOnly": true
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription ID of the pending connection.",
           "readOnly": true
         }
       },
@@ -3242,11 +3271,7 @@
           "description": "The items on this page",
           "items": {
             "$ref": "#/definitions/PendingConnection"
-          },
-          "x-ms-identifiers": [
-            "properties/name",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
@@ -3261,169 +3286,123 @@
       "type": "object",
       "description": "Pending flow object",
       "properties": {
-        "connection": {
-          "$ref": "#/definitions/selectedResource",
-          "description": "The connection associated with this flow"
-        },
-        "flowId": {
+        "subscriptionId": {
           "type": "string",
-          "description": "Dataflow GUID associated with this flow",
+          "description": "Subscription ID of the pending flow.",
           "readOnly": true
         },
-        "keyVaultUri": {
+        "connectionId": {
           "type": "string",
-          "description": "AME, PME, or TORUS only! AKV Chain Containing SAS Token"
-        },
-        "linkStatus": {
-          "$ref": "#/definitions/LinkStatus",
-          "description": "Link status of the current flow",
+          "description": "Connection ID of the pending flow.",
           "readOnly": true
         },
-        "linkedFlowId": {
+        "pipeline": {
           "type": "string",
-          "description": "Resource ID of the linked flow",
-          "readOnly": true
+          "description": "Pipeline to use to transfer data"
+        },
+        "direction": {
+          "$ref": "#/definitions/Direction",
+          "description": "Direction of data movement"
+        },
+        "justification": {
+          "type": "string",
+          "description": "Justification for the connection request"
         },
         "status": {
-          "$ref": "#/definitions/FlowStatus",
-          "description": "Status of the current flow"
+          "$ref": "#/definitions/ConnectionStatus",
+          "description": "Status of the connection",
+          "readOnly": true
         },
         "forceDisabledStatus": {
           "type": "array",
-          "description": "Force disablement status of the current flow",
+          "description": "Force disablement status of the current connection",
           "items": {
             "$ref": "#/definitions/ForceDisabledStatus"
           },
           "readOnly": true
         },
-        "storageAccountName": {
+        "statusReason": {
           "type": "string",
-          "description": "Storage Account"
+          "description": "Reason for status",
+          "readOnly": true
         },
-        "storageAccountId": {
+        "linkStatus": {
+          "$ref": "#/definitions/LinkStatus",
+          "description": "Link status of the current connection",
+          "readOnly": true
+        },
+        "linkedConnectionId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Storage Account ID",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/storageAccounts"
-              }
-            ]
+          "description": "Resource ID of the linked connection",
+          "readOnly": true
+        },
+        "flowTypes": {
+          "type": "array",
+          "description": "The flow types being requested for this connection",
+          "items": {
+            "$ref": "#/definitions/flowType"
           }
         },
-        "storageContainerName": {
+        "requirementId": {
           "type": "string",
-          "description": "Storage Container Name"
+          "description": "Requirement ID of the connection"
         },
-        "storageTableName": {
+        "remoteSubscriptionId": {
           "type": "string",
-          "description": "Storage Table Name"
+          "description": "Subscription ID to link cloud subscriptions together"
         },
-        "serviceBusQueueId": {
+        "approver": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Service Bus Queue ID",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/namespaces/queues"
-              }
-            ]
+          "description": "Approver of this connection request",
+          "readOnly": true
+        },
+        "pin": {
+          "type": "string",
+          "description": "PIN to link requests together"
+        },
+        "dateSubmitted": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp that this connection request was submitted at",
+          "readOnly": true
+        },
+        "primaryContact": {
+          "type": "string",
+          "description": "The primary contact for this connection request"
+        },
+        "secondaryContacts": {
+          "type": "array",
+          "description": "The secondary contacts for this connection request",
+          "items": {
+            "type": "string"
           }
-        },
-        "flowType": {
-          "$ref": "#/definitions/flowType",
-          "description": "The flow type for this flow"
-        },
-        "dataType": {
-          "$ref": "#/definitions/DataType",
-          "description": "Transfer Storage Blobs or Tables"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the flow",
+          "description": "Provisioning state of the connection",
           "readOnly": true
         },
         "policies": {
           "type": "array",
-          "description": "The policies for this flow",
+          "description": "The policies for this connection",
           "items": {
             "type": "string"
           }
         },
-        "schema": {
-          "$ref": "#/definitions/schema",
-          "description": "The selected schema for this flow"
-        },
-        "messagingOptions": {
-          "$ref": "#/definitions/messagingOptions",
-          "description": "The messaging options for this flow"
-        },
-        "apiFlowOptions": {
-          "$ref": "#/definitions/apiFlowOptions",
-          "description": "The API Flow configuration options for Azure Data Transfer API Flow type."
-        },
-        "customerManagedKeyVaultUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URI to the customer managed key for this flow"
-        },
-        "streamId": {
-          "type": "string",
-          "description": "The flow stream identifier"
-        },
-        "streamProtocol": {
-          "$ref": "#/definitions/StreamProtocol",
-          "description": "The protocol of the stream"
-        },
-        "streamLatency": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The latency of the stream in milliseconds"
-        },
-        "passphrase": {
-          "type": "string",
-          "description": "The passphrase used for SRT streams"
-        },
-        "sourceAddresses": {
-          "$ref": "#/definitions/streamSourceAddresses",
-          "description": "The source IP address and CIDR ranges of the stream"
-        },
-        "destinationEndpoints": {
+        "schemas": {
           "type": "array",
-          "description": "The destination endpoints of the stream",
+          "description": "The schemas for this connection",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/schema"
           }
         },
-        "destinationEndpointPorts": {
+        "schemaUris": {
           "type": "array",
-          "description": "The destination endpoint ports of the stream",
+          "description": "The schema URIs for this connection",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "format": "uri"
           }
-        },
-        "eventHubId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Event Hub ID",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.EventHub/namespaces/eventhubs"
-              }
-            ]
-          }
-        },
-        "consumerGroup": {
-          "type": "string",
-          "description": "Event Hub Consumer Group"
-        },
-        "properties": {
-          "$ref": "#/definitions/flow",
-          "description": "The resource-specific properties for this resource."
         },
         "tags": {
           "type": "object",
@@ -3452,7 +3431,7 @@
           "readOnly": true
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.armResourceType",
           "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
           "readOnly": true
         },
@@ -3460,19 +3439,10 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription ID of the pending flow.",
-          "readOnly": true
-        },
-        "connectionId": {
-          "type": "string",
-          "description": "Connection ID of the pending flow.",
-          "readOnly": true
         }
       },
       "required": [
+        "pipeline",
         "location"
       ]
     },
@@ -3485,11 +3455,7 @@
           "description": "The items on this page",
           "items": {
             "$ref": "#/definitions/PendingFlow"
-          },
-          "x-ms-identifiers": [
-            "properties/name",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",

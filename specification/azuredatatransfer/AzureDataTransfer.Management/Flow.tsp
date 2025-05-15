@@ -38,7 +38,7 @@ interface Flows {
   /**
    * Creates or updates the flow resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Flow>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Flow>;
 
   /**
    * Updates the flow resource.
