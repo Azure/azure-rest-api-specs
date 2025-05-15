@@ -886,36 +886,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "privateEndpointUpdateParameters",
-            "in": "body",
-            "description": "The parameters to update the private endpoint of the private endpoint connection proxy.",
-            "required": true,
-            "schema": {
-              "description": "Parameters to update the remote private endpoint",
-              "type": "object",
-              "properties": {
-                "id": {
-                  "description": "The remote private endpoint id.",
-                  "type": "string"
-                },
-                "location": {
-                  "description": "The remote private endpoint location.",
-                  "type": "string"
-                },
-                "immutableSubscriptionId": {
-                  "description": "The remote private endpoint immutable subscription id.",
-                  "type": "string"
-                },
-                "immutableResourceId": {
-                  "description": "The remote private endpoint immutable resource id.",
-                  "type": "string"
-                },
-                "vnetTrafficTag": {
-                  "description": "The remote private endpoint virtual network traffic tag.",
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/parameters/PrivateEndpointUpdateParameters"
           }
         ],
         "responses": {
@@ -1522,6 +1493,38 @@
       "required": true,
       "description": "The Fluid Relay container resource name.",
       "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointUpdateParameters":           {
+      "name": "privateEndpointUpdateParameters",
+      "in": "body",
+      "description": "The parameters to update the private endpoint of the private endpoint connection proxy.",
+      "required": true,
+      "schema": {
+        "description": "Parameters to update the remote private endpoint",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The remote private endpoint id.",
+            "type": "string"
+          },
+          "location": {
+            "description": "The remote private endpoint location.",
+            "type": "string"
+          },
+          "immutableSubscriptionId": {
+            "description": "The remote private endpoint immutable subscription id.",
+            "type": "string"
+          },
+          "immutableResourceId": {
+            "description": "The remote private endpoint immutable resource id.",
+            "type": "string"
+          },
+          "vnetTrafficTag": {
+            "description": "The remote private endpoint virtual network traffic tag.",
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }
