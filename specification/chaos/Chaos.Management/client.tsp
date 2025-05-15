@@ -11,12 +11,12 @@ using Microsoft.Chaos;
     name: "ChaosManagementClient",
     service: Microsoft.Chaos,
   },
-  "java"
+  "java,go"
 )
 @useDependency(Microsoft.Chaos.Versions.v2025_01_01)
 namespace Customization;
 
-@operationGroup("java")
+@operationGroup("java,go")
 @armResourceOperations
 interface Experiments {
   get is Microsoft.Chaos.Experiments.get;
@@ -33,27 +33,27 @@ interface Experiments {
   executionDetails is Microsoft.Chaos.ExperimentExecutions.getExecutionDetails;
 }
 
-@operationGroup("java")
+@operationGroup("java,go")
 @armResourceOperations
 interface Capabilities extends Microsoft.Chaos.Capabilities {}
 
-@operationGroup("java")
+@operationGroup("java,go")
 @armResourceOperations
 interface CapabilityTypes extends Microsoft.Chaos.CapabilityTypes {}
 
-@operationGroup("java")
+@operationGroup("java,go")
 @armResourceOperations
 interface Operations extends Microsoft.Chaos.Operations {}
 
-@operationGroup("java")
+@operationGroup("java,go")
 @armResourceOperations
 interface OperationStatuses extends Microsoft.Chaos.OperationStatuses {}
 
-@operationGroup("java")
+@operationGroup("java,go")
 @armResourceOperations
 interface Targets extends Microsoft.Chaos.Targets {}
 
-@operationGroup("java")
+@operationGroup("java,go")
 @armResourceOperations
 interface TargetTypes extends Microsoft.Chaos.TargetTypes {}
 
