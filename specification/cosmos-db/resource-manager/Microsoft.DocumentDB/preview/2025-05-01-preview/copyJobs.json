@@ -1,0 +1,967 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Database Copy Job Resource Provider REST API",
+    "version": "2025-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/copyJobs/{jobName}": {
+      "put": {
+        "operationId": "CopyJobs_Create",
+        "description": "Creates a Copy Job.",
+        "x-ms-examples": {
+          "CosmosDBCopyJobCreate": {
+            "$ref": "./examples/copy-jobs/CosmosDBCopyJobCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "name": "jobCreateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyJobGetResults"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful CreateJob response",
+            "schema": {
+              "$ref": "#/definitions/CopyJobGetResults"
+            }
+          },
+          "201": {
+            "description": "Successful CreateJob response",
+            "schema": {
+              "$ref": "#/definitions/CopyJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "CopyJobs_Get",
+        "description": "Get a Copy Job.",
+        "x-ms-examples": {
+          "CosmosDBCopyJobGet": {
+            "$ref": "./examples/copy-jobs/CosmosDBCopyJobGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Copy Job Properties retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/CopyJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/copyJobs/{jobName}/pause": {
+      "post": {
+        "operationId": "CopyJobs_Pause",
+        "description": "Pause a Copy Job.",
+        "x-ms-examples": {
+          "CosmosDBCopyJobPause": {
+            "$ref": "./examples/copy-jobs/CosmosDBCopyJobPause.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Pause Job response",
+            "schema": {
+              "$ref": "#/definitions/CopyJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/copyJobs/{jobName}/resume": {
+      "post": {
+        "operationId": "CopyJobs_Resume",
+        "description": "Resumes a Copy Job.",
+        "x-ms-examples": {
+          "CosmosDBCopyJobResume": {
+            "$ref": "./examples/copy-jobs/CosmosDBCopyJobResume.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Resume Job response",
+            "schema": {
+              "$ref": "#/definitions/CopyJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/copyJobs/{jobName}/cancel": {
+      "post": {
+        "operationId": "CopyJobs_Cancel",
+        "description": "Cancels a Copy Job.",
+        "x-ms-examples": {
+          "CosmosDBCopyJobCancel": {
+            "$ref": "./examples/copy-jobs/CosmosDBCopyJobCancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Cancel Job response",
+            "schema": {
+              "$ref": "#/definitions/CopyJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/copyJobs/{jobName}/complete": {
+      "post": {
+        "operationId": "CopyJobs_Complete",
+        "description": "Completes an Online Copy Job.",
+        "x-ms-examples": {
+          "CosmosDBCopyJobComplete": {
+            "$ref": "./examples/copy-jobs/CosmosDBCopyJobComplete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Complete Job response",
+            "schema": {
+              "$ref": "#/definitions/CopyJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/copyJobs": {
+      "get": {
+        "operationId": "CopyJobs_ListByDatabaseAccount",
+        "description": "Get a list of Copy jobs.",
+        "x-ms-examples": {
+          "CosmosDBCopyJobFeed": {
+            "$ref": "./examples/copy-jobs/CosmosDBCopyJobFeed.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All Copy Jobs retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/CopyJobFeedResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CosmosDBSourceSinkDetails": {
+      "type": "object",
+      "description": "A CosmosDB data source/sink details",
+      "properties": {
+        "remoteAccountName": {
+          "type": "string",
+          "description": "Name of remote account in case of cross-account data transfer."
+        }
+      }
+    },
+    "MongoVCoreSourceSinkDetails": {
+      "type": "object",
+      "description": "A CosmosDB Mongo vCore data source/sink details",
+      "properties": {
+        "hostName": {
+          "type": "string"
+        },
+        "connectionStringKeyVaultUri": {
+          "type": "string",
+          "description": "URI of Azure KeyVault secret containing connection string.",
+          "pattern": "^https?://[^/$.?# ]+.[^ ]*$"
+        }
+      }
+    },
+    "AzureBlobSourceSinkDetails": {
+      "type": "object",
+      "description": "An Azure Blob Storage data source/sink",
+      "properties": {
+        "endpointUrl": {
+          "type": "string",
+          "description": "Azure Blob container endpoint.",
+          "pattern": "^https?://[^/$.?# ]+.[^ ]*$"
+        }
+      },
+      "required": [
+        "endpointUrl"
+      ]
+    },
+    "CosmosDBCassandraTable": {
+      "type": "object",
+      "description": "A CosmosDB Cassandra table",
+      "properties": {
+        "keyspaceName": {
+          "type": "string",
+          "description": "Azure Cosmos DB for Apache Cassandra keyspace."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "Azure Cosmos DB for Apache Cassandra table."
+        }
+      },
+      "required": [
+        "keyspaceName",
+        "tableName"
+      ]
+    },
+    "CosmosDBMongoCollection": {
+      "type": "object",
+      "description": "A CosmosDB Mongo collection",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Azure Cosmos DB for MongoDB (RU) database."
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "Azure Cosmos DB for MongoDB (RU) collection."
+        }
+      },
+      "required": [
+        "databaseName",
+        "collectionName"
+      ]
+    },
+    "CosmosDBMongoVCoreCollection": {
+      "type": "object",
+      "description": "A CosmosDB Mongo vCore collection",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Azure Cosmos DB for MongoDB (vCore) database."
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "Azure Cosmos DB for MongoDB (vCore) collection."
+        }
+      },
+      "required": [
+        "databaseName",
+        "collectionName"
+      ]
+    },
+    "CosmosDBNoSqlContainer": {
+      "type": "object",
+      "description": "A CosmosDB NoSQL container",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Azure Cosmos DB for NoSQL database."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Azure Cosmos DB for NoSQL container."
+        }
+      },
+      "required": [
+        "databaseName",
+        "containerName"
+      ]
+    },
+    "AzureBlobContainer": {
+      "type": "object",
+      "description": "An Azure Blob container",
+      "properties": {
+        "containerName": {
+          "type": "string",
+          "description": "Azure Blob container."
+        }
+      },
+      "required": [
+        "containerName"
+      ]
+    },
+    "BaseCopyJobTask": {
+      "type": "object",
+      "description": "The properties of a Copy Job Task",
+      "properties": {
+        "totalCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Task level Total Count.",
+          "format": "int64"
+        },
+        "processedCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Task level Processed Count.",
+          "format": "int64"
+        }
+      }
+    },
+    "BlobToCassandraRUCopyJobTask": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobTask"
+        }
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/AzureBlobContainer",
+          "description": "Source Azure Blob container"
+        },
+        "destination": {
+          "$ref": "#/definitions/CosmosDBCassandraTable",
+          "description": "Destination Cassandra table"
+        }
+      },
+      "required": [
+        "source",
+        "destination"
+      ]
+    },
+    "CassandraRUToBlobCopyJobTask": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobTask"
+        }
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/CosmosDBCassandraTable",
+          "description": "Source Cassandra table"
+        },
+        "destination": {
+          "$ref": "#/definitions/AzureBlobContainer",
+          "description": "Destination Azure Blob container"
+        }
+      },
+      "required": [
+        "source",
+        "destination"
+      ]
+    },
+    "CassandraRUToCassandraRUCopyJobTask": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobTask"
+        }
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/CosmosDBCassandraTable",
+          "description": "Source Cassandra table"
+        },
+        "destination": {
+          "$ref": "#/definitions/CosmosDBCassandraTable",
+          "description": "Destination Cassandra table"
+        }
+      },
+      "required": [
+        "source",
+        "destination"
+      ]
+    },
+    "MongoRUToMongoRUCopyJobTask": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobTask"
+        }
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/CosmosDBMongoCollection",
+          "description": "Source Mongo (RU) collection"
+        },
+        "destination": {
+          "$ref": "#/definitions/CosmosDBMongoCollection",
+          "description": "Destination Mongo (RU) collection"
+        }
+      },
+      "required": [
+        "source",
+        "destination"
+      ]
+    },
+    "MongoRUToMongoVCoreCopyJobTask": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobTask"
+        }
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/CosmosDBMongoCollection",
+          "description": "Source Mongo (RU) collection"
+        },
+        "destination": {
+          "$ref": "#/definitions/CosmosDBMongoVCoreCollection",
+          "description": "Destination Mongo (vCore) collection"
+        }
+      },
+      "required": [
+        "source",
+        "destination"
+      ]
+    },
+    "NoSqlRUToNoSqlRUCopyJobTask": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobTask"
+        }
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/CosmosDBNoSqlContainer",
+          "description": "Source SQL container"
+        },
+        "destination": {
+          "$ref": "#/definitions/CosmosDBNoSqlContainer",
+          "description": "Destination SQL container"
+        }
+      },
+      "required": [
+        "source",
+        "destination"
+      ]
+    },
+    "BaseCopyJobProperties": {
+      "type": "object",
+      "description": "Base copy job properties",
+      "properties": {
+        "jobType": {
+          "type": "string",
+          "enum": [
+            "CassandraRUToCassandraRU",
+            "CassandraRUToAzureBlobStorage",
+            "AzureBlobStorageToCassandraRU",
+            "MongoRUToMongoRU",
+            "MongoRUToMongoVCore",
+            "NoSqlRUToNoSqlRU"
+          ],
+          "x-ms-enum": {
+            "name": "CopyJobType",
+            "modelAsString": true
+          },
+          "default": "NoSqlRUToNoSqlRU",
+          "description": "Copy Job Type"
+        }
+      },
+      "required": [
+        "jobType"
+      ],
+      "discriminator": "jobType"
+    },
+    "CassandraRUToCassandraRUCopyJobProperties": {
+      "description": "Source Cassandra to Destination Cassandra copy job properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sourceDetails": {
+              "$ref": "#/definitions/CosmosDBSourceSinkDetails",
+              "description": "Source Cassandra DataStore details"
+            },
+            "destinationDetails": {
+              "$ref": "#/definitions/CosmosDBSourceSinkDetails",
+              "description": "Destination Cassandra DataStore details"
+            },
+            "tasks": {
+              "type": "array",
+              "description": "Copy Job tasks.",
+              "items": {
+                "$ref": "#/definitions/CassandraRUToCassandraRUCopyJobTask"
+              }
+            }
+          },
+          "required": [
+            "tasks"
+          ]
+        }
+      ],
+      "x-ms-discriminator-value": "CassandraRUToCassandraRU"
+    },
+    "BlobToCassandraRUCopyJobProperties": {
+      "description": "Source Azure Blob Storage to Destination Cassandra copy job properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sourceDetails": {
+              "$ref": "#/definitions/AzureBlobSourceSinkDetails",
+              "description": "Azure Storage container DataStore details"
+            },
+            "destinationDetails": {
+              "$ref": "#/definitions/CosmosDBSourceSinkDetails",
+              "description": "Destination Cassandra DataStore details"
+            },
+            "tasks": {
+              "type": "array",
+              "description": "Copy Job tasks.",
+              "items": {
+                "$ref": "#/definitions/BlobToCassandraRUCopyJobTask"
+              }
+            }
+          },
+          "required": [
+            "sourceDetails",
+            "tasks"
+          ]
+        }
+      ],
+      "x-ms-discriminator-value": "AzureBlobStorageToCassandraRU"
+    },
+    "CassandraRUToBlobCopyJobProperties": {
+      "description": "Source Cassandra to Destination Azure Blob Storage copy job properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sourceDetails": {
+              "$ref": "#/definitions/CosmosDBSourceSinkDetails",
+              "description": "Source Cassandra DataStore details"
+            },
+            "destinationDetails": {
+              "$ref": "#/definitions/AzureBlobSourceSinkDetails",
+              "description": "Destination Cassandra DataStore details"
+            },
+            "tasks": {
+              "type": "array",
+              "description": "Copy Job tasks.",
+              "items": {
+                "$ref": "#/definitions/CassandraRUToBlobCopyJobTask"
+              }
+            }
+          },
+          "required": [
+            "destinationDetails",
+            "tasks"
+          ]
+        }
+      ],
+      "x-ms-discriminator-value": "CassandraRUToAzureBlobStorage"
+    },
+    "MongoRUToMongoRUCopyJobProperties": {
+      "description": "Source Mongo to Destination Mongo copy job properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sourceDetails": {
+              "$ref": "#/definitions/CosmosDBSourceSinkDetails",
+              "description": "Source Mongo DataStore details"
+            },
+            "destinationDetails": {
+              "$ref": "#/definitions/CosmosDBSourceSinkDetails",
+              "description": "Destination Mongo DataStore details"
+            },
+            "tasks": {
+              "type": "array",
+              "description": "Copy Job tasks.",
+              "items": {
+                "$ref": "#/definitions/MongoRUToMongoRUCopyJobTask"
+              }
+            }
+          },
+          "required": [
+            "tasks"
+          ]
+        }
+      ],
+      "x-ms-discriminator-value": "MongoRUToMongoRU"
+    },
+    "MongoRUToMongoVCoreCopyJobProperties": {
+      "description": "Source Mongo to Destination Mongo vCore copy job properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sourceDetails": {
+              "$ref": "#/definitions/CosmosDBSourceSinkDetails",
+              "description": "Source Mongo (RU) DataStore details"
+            },
+            "destinationDetails": {
+              "$ref": "#/definitions/MongoVCoreSourceSinkDetails",
+              "description": "Destination Mongo (vCore) DataStore details"
+            },
+            "tasks": {
+              "type": "array",
+              "description": "Copy Job tasks.",
+              "items": {
+                "$ref": "#/definitions/MongoRUToMongoVCoreCopyJobTask"
+              }
+            }
+          },
+          "required": [
+            "destinationDetails",
+            "tasks"
+          ]
+        }
+      ],
+      "x-ms-discriminator-value": "MongoRUToMongoVCore"
+    },
+    "NoSqlRUToNoSqlRUCopyJobProperties": {
+      "description": "Source SQL to Destination SQL copy job properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCopyJobProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sourceDetails": {
+              "$ref": "#/definitions/CosmosDBSourceSinkDetails",
+              "description": "Source SQL DataStore details"
+            },
+            "destinationDetails": {
+              "$ref": "#/definitions/CosmosDBSourceSinkDetails",
+              "description": "Destination SQL DataStore details"
+            },
+            "tasks": {
+              "type": "array",
+              "description": "Copy Job tasks.",
+              "items": {
+                "$ref": "#/definitions/NoSqlRUToNoSqlRUCopyJobTask"
+              }
+            }
+          },
+          "required": [
+            "tasks"
+          ]
+        }
+      ],
+      "x-ms-discriminator-value": "NoSqlRUToNoSqlRU"
+    },
+    "CopyJobProperties": {
+      "description": "The properties of a Copy Job",
+      "type": "object",
+      "properties": {
+        "jobProperties": {
+          "$ref": "#/definitions/BaseCopyJobProperties",
+          "description": "Job Properties"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Job Status",
+          "enum": [
+            "Pending",
+            "Partitioning",
+            "Running",
+            "Paused",
+            "Completed",
+            "Faulted",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "CopyJobStatus",
+            "modelAsString": true
+          }
+        },
+        "processedCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Processed Count",
+          "format": "int64"
+        },
+        "totalCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Total Count",
+          "format": "int64"
+        },
+        "lastUpdatedUtcTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last Updated Time (ISO-8601 format)"
+        },
+        "workerCount": {
+          "description": "Worker count",
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "./cosmos-db.json#/definitions/ErrorResponse",
+          "description": "Error response for Faulted job"
+        },
+        "duration": {
+          "x-ms-format": "duration-constant",
+          "description": "Total Duration of Job",
+          "type": "string",
+          "readOnly": true
+        },
+        "mode": {
+          "description": "Mode of job execution",
+          "type": "string",
+          "enum": [
+            "Offline",
+            "Online"
+          ],
+          "x-ms-enum": {
+            "name": "CopyJobMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "jobProperties"
+      ]
+    },
+    "CopyJobGetResults": {
+      "description": "A Cosmos DB Copy Job",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/CopyJobProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "./cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ]
+    },
+    "CopyJobFeedResults": {
+      "description": "The List operation response, that contains the Copy Jobs and their properties.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CopyJobGetResults"
+          },
+          "description": "List of Copy Jobs and their properties."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URL to get the next set of Copy Job list results if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "JobNameParameter": {
+      "name": "jobName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Copy Job",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+    }
+  }
+}
