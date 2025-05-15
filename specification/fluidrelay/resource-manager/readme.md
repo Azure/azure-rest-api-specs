@@ -184,6 +184,9 @@ suppressions:
   - code: PathContainsResourceGroup
     from: fluidrelay.json
     reason: Keep the `resourceGroup` parameter as `{resourceGroup}`
+  - code: ResourceNameRestriction
+    from: fluidrelay.json
+    reason: Keep existing fluidRelayServerName in the APIs the same (this was not changed with this version)
 ```
 
 ---
