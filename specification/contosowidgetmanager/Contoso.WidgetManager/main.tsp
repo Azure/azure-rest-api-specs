@@ -25,6 +25,10 @@ enum Versions {
   v2022_12_01: "2022-12-01",
 }
 
+@doc("Empty model.")
+model EmptyModel {
+}
+
 @doc("A widget.")
 @resource("widgets")
 model WidgetSuite {
@@ -38,6 +42,9 @@ model WidgetSuite {
 
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
+
+  @doc("The empty model.")
+  emptyModel?: EmptyModel;
 }
 
 interface Widgets {
