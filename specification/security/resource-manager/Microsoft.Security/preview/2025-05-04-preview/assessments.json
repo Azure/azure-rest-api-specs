@@ -106,7 +106,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessment"
+              "$ref": "#/definitions/SecurityAssessmentResponse"
             }
           },
           "default": {
@@ -146,13 +146,13 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessment"
+              "$ref": "#/definitions/SecurityAssessmentResponse"
             }
           },
           "200": {
             "description": "OK - Updated",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessment"
+              "$ref": "#/definitions/SecurityAssessmentResponse"
             }
           },
           "default": {
@@ -212,7 +212,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityAssessment"
+            "$ref": "#/definitions/SecurityAssessmentResponse"
           }
         },
         "nextLink": {
@@ -237,7 +237,56 @@
         }
       ]
     },
+    "SecurityAssessmentResponse": {
+      "type": "object",
+      "description": "Security assessment on a resource - response format",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityAssessmentPropertiesResponse"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "SecurityAssessmentProperties": {
+      "type": "object",
+      "description": "Describes properties of an assessment.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AssessmentStatus"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityAssessmentPropertiesBase"
+        }
+      ],
+      "required": [
+        "status"
+      ]
+    },
+    "SecurityAssessmentPropertiesResponse": {
+      "type": "object",
+      "description": "Describes properties of an assessment.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AssessmentStatusResponse"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityAssessmentPropertiesBase"
+        }
+      ],
+      "required": [
+        "status"
+      ]
+    },
+    "SecurityAssessmentPropertiesBase": {
       "type": "object",
       "description": "Describes properties of an assessment.",
       "properties": {
@@ -261,11 +310,35 @@
         },
         "links": {
           "$ref": "#/definitions/AssessmentLinks"
+        },
+        "metadata": {
+          "$ref": "./assessmentMetadata.json#/definitions/SecurityAssessmentMetadataProperties"
+        },
+        "partnersData": {
+          "$ref": "#/definitions/SecurityAssessmentPartnerData"
         }
       },
       "required": [
-        "resourceDetails",
-        "status"
+        "resourceDetails"
+      ]
+    },
+    "SecurityAssessmentPartnerData": {
+      "type": "object",
+      "description": "Data regarding 3rd party partner integration",
+      "properties": {
+        "partnerName": {
+          "type": "string",
+          "description": "Name of the company of the partner"
+        },
+        "secret": {
+          "type": "string",
+          "description": "secret to authenticate the partner - write only",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "partnerName",
+        "secret"
       ]
     },
     "AssessmentLinks": {
@@ -279,6 +352,29 @@
           "readOnly": true
         }
       }
+    },
+    "AssessmentStatusResponse": {
+      "type": "object",
+      "description": "The result of the assessment",
+      "properties": {
+        "firstEvaluationDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time that the assessment was created and first evaluated. Returned as UTC time in ISO 8601 format"
+        },
+        "statusChangeDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time that the status of the assessment last changed. Returned as UTC time in ISO 8601 format"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssessmentStatus"
+        }
+      ]
     },
     "AssessmentStatus": {
       "type": "object",
