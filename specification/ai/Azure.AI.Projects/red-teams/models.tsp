@@ -372,3 +372,183 @@ model LongRunningResponse {
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
 alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<202> &
   T;
+
+alias ChatChoiceCommon = {
+  @doc("The ordered index associated with this chat completions choice.")
+  index: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  @doc("The reason that this chat completions choice completed its generated.")
+  @visibility(Lifecycle.Read)
+  finish_reason: CompletionsFinishReason | null;
+};
+
+@doc("A description of the intended purpose of a message within a chat completions interaction.")
+union ChatRole {
+  string,
+
+  @doc("The role that instructs or sets the behavior of the assistant.")
+  system: "system",
+
+  @doc("The role that provides instructions to the model prioritized ahead of user messages.")
+  developer: "developer",
+
+  @doc("The role that provides input for chat completions.")
+  user: "user",
+
+  @doc("The role that provides responses to system-instructed, user-prompted input.")
+  assistant: "assistant",
+
+  @doc("The role that represents extension tool activity within a chat completions operation.")
+  tool: "tool",
+}
+
+@doc("""
+  Representation of the manner in which a completions response concluded.
+  """)
+union CompletionsFinishReason {
+  string,
+
+  @doc("Completions ended normally and reached its end of token generation.")
+  stopped: "stop",
+
+  @doc("Completions exhausted available token limits before generation could complete.")
+  tokenLimitReached: "length",
+
+  @doc("""
+    Completions generated a response that was identified as potentially sensitive per content
+    moderation policies.
+    """)
+  contentFiltered: "content_filter",
+
+  @doc("Completion ended with the model calling a provided tool for output.")
+  toolCalls: "tool_calls",
+}
+
+@doc("A representation of a chat message as received in a response.")
+model ChatResponseMessage {
+  @doc("The chat role associated with the message.")
+  @visibility(Lifecycle.Read)
+  role: ChatRole;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  @doc("The content of the message.")
+  @visibility(Lifecycle.Read)
+  content: string | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  @doc("The reasoning content the model used for generating the response")
+  @visibility(Lifecycle.Read)
+  reasoning_content?: string;
+}
+
+@doc("""
+  The representation of a single prompt completion as part of an overall chat completions request.
+  Generally, `n` choices are generated per provided prompt with a default value of 1.
+  Token limits and other settings may limit the number of choices generated.
+  """)
+model ChatChoice {
+  ...ChatChoiceCommon;
+
+  @doc("The chat message for a given chat completions prompt.")
+  @visibility(Lifecycle.Read)
+  message: ChatResponseMessage;
+}
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+alias ChatCompletionsCommon = {
+  @doc("A unique identifier associated with this chat completions response.")
+  id: string;
+
+  @doc("The response object type")
+  object: string;
+
+  #suppress "@microsoft/azure-openapi-validator/IntegerTypeMustHaveFormat" "Format is present but rule only allow int32 or int64."
+  @doc("""
+    The first timestamp associated with generation activity for this completions response,
+    represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
+    """)
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  @visibility(Lifecycle.Read)
+  created: utcDateTime;
+
+  @doc("The model used for the chat completion.")
+  @visibility(Lifecycle.Read)
+  `model`: string;
+};
+
+@doc("""
+  Representation of the response data from a chat completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
+model ChatCompletions {
+  ...ChatCompletionsCommon;
+
+  @doc("""
+    The collection of completions choices associated with this completions response.
+    Generally, `n` choices are generated per provided prompt with a default value of 1.
+    Token limits and other settings may limit the number of choices generated.
+    """)
+  @visibility(Lifecycle.Read)
+  choices: ChatChoice[];
+
+  @doc("""
+      Usage information for tokens processed and generated as part of this completions operation.
+    """)
+  @visibility(Lifecycle.Read)
+  usage: CompletionsUsage;
+}
+
+@doc("""
+  Representation of the token counts processed for a completions request.
+  Counts consider all tokens across prompts, choices, choice alternates, best_of generations, and
+  other consumers.
+  """)
+model CompletionsUsage {
+  @doc("The number of tokens generated across all completions emissions.")
+  @visibility(Lifecycle.Read)
+  completion_tokens: int32;
+
+  @doc("The number of tokens in the provided prompts for the completions request.")
+  @visibility(Lifecycle.Read)
+  prompt_tokens: int32;
+
+  @doc("The total number of tokens processed for the completions request and response.")
+  @visibility(Lifecycle.Read)
+  total_tokens: int32;
+
+  @doc("Breakdown of tokens used in a completion.")
+  @visibility(Lifecycle.Read)
+  completion_tokens_details?: CompletionsUsageDetails;
+
+  @doc("Breakdown of tokens used in the prompt/chat history.")
+  @visibility(Lifecycle.Read)
+  prompt_tokens_details?: PromptUsageDetails;
+}
+
+@doc("A breakdown of tokens used in a completion.")
+model CompletionsUsageDetails {
+  @doc("The number of tokens corresponding to audio input.")
+  @visibility(Lifecycle.Read)
+  audio_tokens: int32;
+
+  @doc("The number of tokens corresponding to reasoning.")
+  @visibility(Lifecycle.Read)
+  reasoning_tokens: int32;
+
+  @doc("The total number of tokens processed for the completions request and response.")
+  @visibility(Lifecycle.Read)
+  total_tokens: int32;
+}
+
+@doc("A breakdown of tokens used in the prompt/chat history.")
+model PromptUsageDetails {
+  @doc("The number of tokens corresponding to audio input.")
+  @visibility(Lifecycle.Read)
+  audio_tokens: int32;
+
+  @doc("The total number of tokens cached.")
+  @visibility(Lifecycle.Read)
+  cached_tokens: int32;
+}
