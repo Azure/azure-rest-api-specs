@@ -81,6 +81,7 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@parentResource(Occurrence)
 model OccurrenceResource is ScheduledActionResource {
   @doc("The time the occurrence is scheduled for the resource.")
   @visibility(Lifecycle.Read)
@@ -121,4 +122,27 @@ model DelayRequest {
 
   @doc("The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence occurrence.")
   resourceIds: Array<ValidScheduledActionResourceId>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+scalar ScheduledActionsId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.ComputeSchedule/scheduledActions",
+    }
+  ]>;
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("The properties of the occurrence extension")
+model OccurrenceExtensionProperties {
+    ... OccurrenceProperties;
+    @doc("The arm identifier of the scheduled action the occurrence belongs to")
+    scheduledActionId : ScheduledActionsId;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("The scheduled action extension")
+model OccurrenceExtensionResource is ExtensionResource<OccurrenceExtensionProperties> {
+  ...ResourceNameParameter<OccurrenceProperties,
+  SegmentName="occurrences">;
 }

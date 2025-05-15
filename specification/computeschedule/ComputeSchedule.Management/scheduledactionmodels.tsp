@@ -54,6 +54,7 @@ scalar ValidScheduledActionResourceId
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @parentResource(ScheduledAction)
+@segment("resources")
 @doc("Represents an scheduled action resource metadata.")
 model ScheduledActionResource {
   @doc("The ARM Id of the resource.")
@@ -173,5 +174,6 @@ model ScheduledAction is TrackedResource<ScheduledActionProperties> {
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The scheduled action extension")
 model ScheduledActionResources is ExtensionResource<ScheduledActionProperties> {
-  ...ResourceNameParameter<ScheduledActionResources>;
+  ...ResourceNameParameter<ScheduledActionResources,
+  SegmentName = "scheduledActions">;
 }
