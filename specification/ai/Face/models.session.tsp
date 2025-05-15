@@ -72,6 +72,14 @@ model LivenessSessionData {
   @added(Versions.v1_3_preview_1)
   @doc("The number of times a client can attempt a liveness check using the same authToken. Default value is 1. Maximum value is 3.")
   numberOfClientAttemptsAllowed?: HttpPart<numberOfClientAttemptsAllowed>; // = 1;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Unique Guid per each end-user. This is to provide rate limiting and anti-hammering. If 'userCorrelationIdSetInClient' is true in this request, this 'userCorrelationId' must be null.")
+  userCorrelationId?: string;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Whether or not to allow client to set their own 'userCorrelationId' via the Vision SDK. Default is false, and 'userCorrelationId' must be set in this request body.")
+  userCorrelationIdSetInClient?: boolean;
 }
 
 @doc("Session data returned for enumeration.")
@@ -599,20 +607,17 @@ model CreateLivenessWithVerifySessionContent {
 }
 
 @added(Versions.v1_3_preview_1)
-@doc("Use to query the liveness abuse monitoring setting.")
-model SettingLivenessAbuseMonitoring {
-  /** property name: "liveness-abuse-monitoring" */
-  name: "liveness-abuse-monitoring";
-
-  /** whether liveness abuse monitoring is enabled */
+@doc("Settings for liveness abuse monitoring.")
+model LivenessAbuseMonitoringSetting {
+  /** Whether liveness abuse monitoring is enabled */
   enabled: HttpPart<boolean>;
 }
 
 @added(Versions.v1_3_preview_1)
-@doc("Use to update the liveness abuse monitoring setting.")
-model SettingLivenessAbuseMonitoringUpdate {
-  /** enable or disable liveness abuse monitoring */
-  enabled: HttpPart<boolean>;
+@doc("Response model for settings.")
+model Settings {
+  /** Liveness abuse monitoring settings */
+  livenessAbuseMonitoring: LivenessAbuseMonitoringSetting;
 }
 
 @minValue(60)
