@@ -17,8 +17,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration-fluxconfigurations/azure/mgmt/kubernetesconfiguration/fluxconfigurations
 ```
-
-``` yaml $(python)
-modelerfour:
-  flatten-models: false
-```
