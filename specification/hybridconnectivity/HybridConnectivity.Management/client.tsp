@@ -22,9 +22,6 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(EndpointResources.createOrUpdate::parameters.resource,
   "EndpointResource"
 );
-@@clientName(EndpointResources.listManagedProxyDetails::parameters.body,
-  "ManagedProxyRequest"
-);
 @@clientName(ServiceConfigurationResources.update::parameters.properties,
   "ServiceConfigurationResource"
 );

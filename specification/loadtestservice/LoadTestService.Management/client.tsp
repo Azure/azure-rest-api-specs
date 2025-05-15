@@ -14,7 +14,6 @@ namespace Customizations;
 @@clientName(LoadTests.updateLoadtest::parameters.properties,
   "LoadTestResourcePatchRequestBody"
 );
-@@clientName(Quotas.checkAvailability::parameters.body, "QuotaBucketRequest");
 @@clientName(LoadTests.createOrUpdateLoadtest::parameters.resource,
   "LoadTestResource"
 );
