@@ -1,0 +1,75 @@
+{
+  "title": "PlaywrightWorkspaces_CreateOrUpdate",
+  "operationId": "PlaywrightWorkspaces_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "playwrightWorkspaceName": "myWorkspace",
+    "resource": {
+      "location": "westus3",
+      "tags": {
+        "Team": "Dev Exp"
+      },
+      "properties": {
+        "regionalAffinity": "Enabled",
+        "localAuth": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus3",
+        "properties": {
+          "dataplaneUri": "https://api.dataplane.00000000-0000-0000-0000-000000000000.domain.com",
+          "regionalAffinity": "Enabled",
+          "localAuth": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/PlaywrightWorkspaces/myWorkspace",
+        "name": "myWorkspace",
+        "type": "Microsoft.LoadTestService/PlaywrightWorkspaces",
+        "tags": {
+          "Team": "Dev Exp"
+        },
+        "systemData": {
+          "createdBy": "userId1001",
+          "createdByType": "User",
+          "createdAt": "2021-09-28T12:32:33Z",
+          "lastModifiedBy": "userId1001",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-09-28T12:32:33Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/locations/westus3/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-07-01-preview"
+      },
+      "body": {
+        "location": "westus3",
+        "properties": {
+          "dataplaneUri": "https://api.dataplane.00000000-0000-0000-0000-000000000000.domain.com",
+          "regionalAffinity": "Enabled",
+          "localAuth": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/PlaywrightWorkspaces/myWorkspace",
+        "name": "myWorkspace",
+        "type": "Microsoft.LoadTestService/PlaywrightWorkspaces",
+        "tags": {
+          "Team": "Dev Exp"
+        },
+        "systemData": {
+          "createdBy": "userId1001",
+          "createdByType": "User",
+          "createdAt": "2021-09-28T12:32:33Z",
+          "lastModifiedBy": "userId1001",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-09-28T12:32:33Z"
+        }
+      }
+    }
+  }
+}

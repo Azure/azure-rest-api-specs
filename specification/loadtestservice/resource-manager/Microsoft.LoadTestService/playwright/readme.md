@@ -1,0 +1,56 @@
+# Microsoft Playwright Service
+
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file for Microsoft Playwright Service.
+
+## Getting Started
+
+To build the SDKs for Microsoft Playwright Service API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+
+> `autorest readme.md`
+
+To see additional help and options, run:
+
+> `autorest --help`
+
+For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
+
+---
+
+## Configuration
+
+### Basic Information
+
+These are the global settings for Microsoft Playwright Service.
+
+```yaml
+title: PlaywrightServiceClient
+description: Microsoft Playwright Service Client
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2025-07-01-preview
+```
+
+### Tag: package-2025-07-01-preview
+These settings apply only when `--tag=2025-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01-preview'
+input-file:
+  - preview/2025-07-01-preview/playwright.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: playwright.json
+    reason: Seems like a tool bug, as the operations are generated automatically from the TrackedResourceOperations in the TypeSpec which should OmitDefaults for Patch. We want the default property values to be visible for other operations like Put and Get if they're not explicitly set by the end-user.
+  - code: DeleteResponseCodes
+    from: playwright.json
+    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/playwrightWorkspaces/{playwrightWorkspaceName}"].delete
+```
+
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+---
