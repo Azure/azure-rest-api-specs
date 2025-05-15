@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.SecretSyncController;
 
 @@clientName(Microsoft.SecretSyncController,
@@ -31,3 +32,11 @@ using Microsoft.SecretSyncController;
   "csharp"
 );
 @@clientName(StatusConditionType, "SecretSyncConditionStatusType", "csharp");
+@@alternateType(AzureKeyVaultSecretProviderClassProperties.clientId,
+  uuid,
+  "csharp"
+);
+@@alternateType(AzureKeyVaultSecretProviderClassProperties.tenantId,
+  uuid,
+  "csharp"
+);
