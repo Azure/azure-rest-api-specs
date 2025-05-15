@@ -46,6 +46,9 @@ model FaultDetails {
   @minLength(1)
   @maxLength(100)
   faultName: string;
+
+  @doc("ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource and not the actual resource which is to be simulated for faulting.")
+  targetResourceId: armResourceIdentifier;
 }
 
 /**

@@ -162,6 +162,9 @@ union DrillResourceState {
 
   @doc("Resource is in Drill but not part of the ROPlan")
   InDrillNotInRO: "InDrillNotInRO",
+
+  @doc("Resource is not in a state where it can be faulted.")
+  ResourceStateIncompatibleWithFault: "ResourceStateIncompatibleWithFault",
 }
 
 /**

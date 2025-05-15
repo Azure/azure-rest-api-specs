@@ -4924,7 +4924,12 @@
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
           "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
             "x-nullable": true
           }
         }
@@ -5805,7 +5810,8 @@
         "InSGNotInDrill",
         "InDrillNotInSG",
         "InRONotInDrill",
-        "InDrillNotInRO"
+        "InDrillNotInRO",
+        "ResourceStateIncompatibleWithFault"
       ],
       "x-ms-enum": {
         "name": "DrillResourceState",
@@ -5830,6 +5836,11 @@
             "name": "InDrillNotInRO",
             "value": "InDrillNotInRO",
             "description": "Resource is in Drill but not part of the ROPlan"
+          },
+          {
+            "name": "ResourceStateIncompatibleWithFault",
+            "value": "ResourceStateIncompatibleWithFault",
+            "description": "Resource is not in a state where it can be faulted."
           }
         ]
       }
@@ -6480,11 +6491,17 @@
           "description": "fault name",
           "minLength": 1,
           "maxLength": 100
+        },
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource and not the actual resource which is to be simulated for faulting."
         }
       },
       "required": [
         "faultUrn",
-        "faultName"
+        "faultName",
+        "targetResourceId"
       ]
     },
     "FaultProperties": {
@@ -7349,8 +7366,7 @@
       "required": [
         "taskId",
         "taskName",
-        "duration",
-        "linkedJobIds"
+        "duration"
       ]
     },
     "JobTriggeredBy": {
@@ -8319,10 +8335,7 @@
           "description": "The RecoveryPlan items on this page",
           "items": {
             "$ref": "#/definitions/RecoveryPlan"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
