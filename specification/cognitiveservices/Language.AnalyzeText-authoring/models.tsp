@@ -1237,24 +1237,13 @@ model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
 }
 
 /**
- * Represents the state of a assign deployment resources job.
+ * Represents the state of a deployment resources job.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("TextAuthoringAssignDeploymentResourcesState", "csharp")
+@clientName("TextAuthoringDeploymentResourcesState", "csharp")
 @resource("resources/assign/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
-model TextAnalysisAuthoringAssignDeploymentResourcesJobState {
-  ...TextAnalysisAuthoringJobState;
-}
-
-/**
- * Represents the state of a unassign deployment resources job.
- */
-@added(Versions.v2023_04_15_preview)
-@clientName("TextAuthoringUnassignDeploymentResourcesState", "csharp")
-@resource("resources/unassign/jobs")
-@parentResource(TextAnalysisAuthoringProjectMetadata)
-model TextAnalysisAuthoringUnassignDeploymentResourcesJobState {
+model TextAnalysisAuthoringDeploymentResourcesJobState {
   ...TextAnalysisAuthoringJobState;
 }
 
