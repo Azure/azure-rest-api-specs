@@ -720,6 +720,17 @@
             "description": "Resource 'Flow' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/flow"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -733,7 +744,12 @@
           "Creates or updates the flow resource": {
             "$ref": "./examples/createOrUpdateFlow.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/flow"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Flows_Update",
