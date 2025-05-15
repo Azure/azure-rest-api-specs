@@ -9,5 +9,4 @@ typescript:
   package-name: "@azure/arm-advisor"
   output-folder: "$(typescript-sdks-folder)/sdk/advisor/arm-advisor"
   generate-metadata: true
-  should-use-pnpm-dep: true
 ```
