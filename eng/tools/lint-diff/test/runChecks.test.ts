@@ -1,6 +1,13 @@
 import { vi, test, describe, beforeEach, expect, Mock } from "vitest";
 
-vi.mock("@azure-tools/specs-shared/exec", () => ({ execNpmExec: vi.fn() }));
+vi.mock(import("@azure-tools/specs-shared/exec"), async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    execNpmExec: vi.fn(),
+  };
+});
+
 vi.mock(import("../src/util.js"), async (importOriginal) => {
   const actual = await importOriginal();
   return {
@@ -8,6 +15,7 @@ vi.mock(import("../src/util.js"), async (importOriginal) => {
     getPathToDependency: vi.fn(),
   };
 });
+
 vi.mock(import("../src/markdown-utils.js"), async (importOriginal) => { 
   const actual = await importOriginal();
   return {
@@ -56,7 +64,12 @@ describe("runChecks", () => {
   });
 
   test("error path populates error, stdout, stderr", async () => {
-    const err = { code: 1, stdout: "s", stderr: "e" };
+    // Consturct an error object that will return true when passed to isExecError
+    const err = new Error(); 
+    (err as any).stdout = "s"; 
+    (err as any).stderr = "e";
+    (err as any).code = 1;
+    
     (execNpmExec as Mock).mockRejectedValue(err);
     const runList = new Map([["readme.md", ["tag1", "tag2"]]]);
 
@@ -67,6 +80,14 @@ describe("runChecks", () => {
       expect(r.stdout).toBe("s");
       expect(r.stderr).toBe("e");
     });
+  });
+
+  test("error path throws an error that isn't an ExecError", async () => {
+    (execNpmExec as Mock).mockRejectedValue({ 
+      message: "some error for which isExecError returns false" 
+    });
+    const runList = new Map([["readme.md", ["tag1", "tag2"]]]);
+    expect(runChecks("root", runList)).rejects.toThrow();
   });
 });
 
