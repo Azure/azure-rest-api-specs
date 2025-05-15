@@ -258,7 +258,7 @@ model ManagedClusterProperties {
   /**
    * Load balancing rules that are applied to the public load balancer of the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   loadBalancingRules?: LoadBalancingRule[];
 
   /**
@@ -269,13 +269,13 @@ model ManagedClusterProperties {
   /**
    * Custom Network Security Rules that are applied to the Virtual Network of the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkSecurityRules?: NetworkSecurityRule[];
 
   /**
    * Client certificates that are allowed to manage the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   clients?: ClientCertificate[];
 
   /**
@@ -286,7 +286,7 @@ model ManagedClusterProperties {
   /**
    * The list of custom fabric settings to configure the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   fabricSettings?: SettingsSectionDescription[];
 
   /**
@@ -345,7 +345,7 @@ model ManagedClusterProperties {
   /**
    * The list of IP tags associated with the default public IP address of the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipTags?: IpTag[];
 
   /**
@@ -363,13 +363,13 @@ model ManagedClusterProperties {
   /**
    * Auxiliary subnets for the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   auxiliarySubnets?: Subnet[];
 
   /**
    * Service endpoints for subnets in the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   serviceEndpoints?: ServiceEndpoint[];
 
   /**
@@ -1030,7 +1030,7 @@ model ManagedAzResiliencyStatusContent {
   /**
    * List of Managed VM Sizes for Service Fabric Managed Clusters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   baseResourceStatus?: ResourceAzStatus[];
 
   /**
@@ -1243,7 +1243,7 @@ model SettingsSectionDescription {
   /**
    * The collection of parameters in the section.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters: SettingsParameterDescription[];
 }
 

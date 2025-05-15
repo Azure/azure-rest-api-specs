@@ -10,6 +10,7 @@ export async function correlateRuns(
   afterChecks: AutorestRunResult[],
 ): Promise<Map<string, BeforeAfter>> {
   const runCorrelations = new Map<string, BeforeAfter>();
+  console.log("\nCorrelating runs...");
   for (const results of afterChecks) {
     const { readme, tag } = results;
     const key = tag ? `${readme}#${tag}` : readme;
@@ -83,7 +84,7 @@ export function getViolations(
   const newViolations: LintDiffViolation[] = [];
   const existingViolations: LintDiffViolation[] = [];
 
-  for (const [runKey, { before, after }] of runCorrelations.entries()) {
+  for (const [, { before, after }] of runCorrelations.entries()) {
     const beforeViolations = before
       ? getLintDiffViolations(before).filter(
           (v) => (isFailure(v.level) || isWarning(v.level)) && v.source?.length > 0,
@@ -91,17 +92,19 @@ export function getViolations(
       : [];
     const afterViolations = getLintDiffViolations(after).filter(
       (v) =>
-        (isFailure(v.level) || isWarning(v.level)) &&
-        v.source?.length > 0 &&
-        affectedSwaggers.has(relativizePath(v.source[0].document).slice(1)),
+        // Fatal errors are always new
+        v.level.toLowerCase() === "fatal" ||
+        ((isFailure(v.level) || isWarning(v.level)) &&
+          v.source?.length > 0 &&
+          affectedSwaggers.has(relativizePath(v.source[0].document).slice(1))),
     );
 
-    const [newitems, existingItems] = getNewItems(beforeViolations, afterViolations);
-    console.log(`Correlated Run: ${runKey}`);
-    console.log(`New violations: ${newitems.length}`);
-    console.log(`Existing violations: ${existingItems.length}`);
+    const [newItems, existingItems] = getNewItems(beforeViolations, afterViolations);
+    console.log("Correlation:");
+    console.log(`\tBefore: Readme: ${before?.readme} Tag: ${before?.tag}`);
+    console.log(`\tAfter: Readme : ${after.readme} Tag: ${after.tag}`);
 
-    newViolations.push(...newitems);
+    newViolations.push(...newItems);
     existingViolations.push(...existingItems);
   }
 
@@ -137,7 +140,8 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
 
     const result = JSON.parse(line.trim());
     if (result.code == undefined) {
-      // TODO: verify that things would blow up if this isn't set to FATAL
+      // Results without a code can be assumed to be fatal errors. Set the code 
+      // to "FATAL"
       result.code = "FATAL";
     }
     violations.push(result as LintDiffViolation);
