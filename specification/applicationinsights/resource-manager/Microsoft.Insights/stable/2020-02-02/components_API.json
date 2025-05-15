@@ -632,6 +632,10 @@
         "ForceCustomerStorageForProfiler": {
           "type": "boolean",
           "description": "Force users to create their own storage account for profiler and debugger."
+        },
+        "LinkedStorages": {
+          "$ref": "#/definitions/LinkedStorages",
+          "description": "Linked storage accounts for Application Insights component."
         }
       },
       "required": [
@@ -764,6 +768,17 @@
             "description": "Disables public connectivity to Application Insights through public DNS."
           }
         ]
+      }
+    },
+    "LinkedStorages": {
+      "type": "object",
+      "description": "Linked storage accounts for Application Insights component.",
+      "properties": {
+        "ServiceProfilerLinkedStorage": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the linked storage account for Service Profiler."
+        }
       }
     }
   },
