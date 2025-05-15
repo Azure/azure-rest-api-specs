@@ -53,5 +53,6 @@ export class ConsoleLogger {
   }
 }
 
-// Singleton logger with isDebug=false
-export const consoleLogger = new ConsoleLogger();
+// Singleton loggers
+export const debugLogger = new ConsoleLogger(/*isDebug*/ true);
+export const defaultLogger = new ConsoleLogger();
