@@ -2732,36 +2732,6 @@
         "value"
       ]
     },
-    "FlowBillingTier": {
-      "type": "string",
-      "description": "Billing tier for this messaging flow.",
-      "enum": [
-        "BlobTransport",
-        "Standard",
-        "Premium"
-      ],
-      "x-ms-enum": {
-        "name": "FlowBillingTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BlobTransport",
-            "value": "BlobTransport",
-            "description": "Billing tier for messaging processing that charges based on how much data is transferred."
-          },
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Billing tier for standard messaging processing that charges based on having the messaging resource allocated."
-          },
-          {
-            "name": "Premium",
-            "value": "Premium",
-            "description": "Billing tier for premium messaging processing that charges based on having the messaging resource allocated."
-          }
-        ]
-      }
-    },
     "FlowListResult": {
       "type": "object",
       "description": "The response of a Flow list operation.",
@@ -3403,30 +3373,6 @@
         "value"
       ]
     },
-    "PipelineStatus": {
-      "type": "string",
-      "description": "Status of the current pipeline",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "PipelineStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The pipeline is currently enabled and all child connection and flow resources below able to send or receive data."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The pipeline is currently disabled and all child connection and flow resources below are unable to send or receive data."
-          }
-        ]
-      }
-    },
     "PipelinesPatchProperties": {
       "type": "object",
       "description": "Properties of pipelines patch body.",
@@ -3448,30 +3394,6 @@
             "$ref": "#/definitions/flowType"
           }
         }
-      }
-    },
-    "SchemaStatus": {
-      "type": "string",
-      "description": "Status of the schema.",
-      "enum": [
-        "New",
-        "Approved"
-      ],
-      "x-ms-enum": {
-        "name": "SchemaStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "New",
-            "value": "New",
-            "description": "A schema that has not been approved and is awaiting review."
-          },
-          {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "A schema that has been approved and is ready for use."
-          }
-        ]
       }
     },
     "SchemaType": {
@@ -3512,31 +3434,6 @@
           "description": "Number specifying what notifications to receive"
         }
       }
-    },
-    "ValidateSchemaStatus": {
-      "type": "string",
-      "description": "Validation status of the schema",
-      "enum": [
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "ValidateSchemaStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Validation of the schema was successful."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The schema failed validation, whether due to error or an invalid schema."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "action": {
       "type": "object",
@@ -3862,6 +3759,36 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "flowBillingTier": {
+      "type": "string",
+      "description": "Billing tier for this messaging flow.",
+      "enum": [
+        "BlobTransport",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "flowBillingTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BlobTransport",
+            "value": "BlobTransport",
+            "description": "Billing tier for messaging processing that charges based on how much data is transferred."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Billing tier for standard messaging processing that charges based on having the messaging resource allocated."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Billing tier for premium messaging processing that charges based on having the messaging resource allocated."
+          }
+        ]
+      }
     },
     "flowProperties": {
       "type": "object",
@@ -4233,7 +4160,7 @@
       "description": "The option associated with messaging flows.",
       "properties": {
         "billingTier": {
-          "$ref": "#/definitions/FlowBillingTier",
+          "$ref": "#/definitions/flowBillingTier",
           "description": "Billing tier for this messaging flow"
         }
       }
@@ -4348,13 +4275,37 @@
           "description": "Quarantine Download Storage Container"
         },
         "status": {
-          "$ref": "#/definitions/PipelineStatus",
+          "$ref": "#/definitions/pipelineStatus",
           "description": "Status of the current pipeline"
         }
       },
       "required": [
         "remoteCloud"
       ]
+    },
+    "pipelineStatus": {
+      "type": "string",
+      "description": "Status of the current pipeline",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "pipelineStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The pipeline is currently enabled and all child connection and flow resources below able to send or receive data."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The pipeline is currently disabled and all child connection and flow resources below are unable to send or receive data."
+          }
+        ]
+      }
     },
     "pipelinesPatch": {
       "type": "object",
@@ -4444,7 +4395,7 @@
           "description": "Connection ID associated with this schema"
         },
         "status": {
-          "$ref": "#/definitions/SchemaStatus",
+          "$ref": "#/definitions/schemaStatus",
           "description": "Status of the schema"
         },
         "name": {
@@ -4468,6 +4419,30 @@
           "$ref": "#/definitions/SchemaType",
           "description": "The Schema Type"
         }
+      }
+    },
+    "schemaStatus": {
+      "type": "string",
+      "description": "Status of the schema.",
+      "enum": [
+        "New",
+        "Approved"
+      ],
+      "x-ms-enum": {
+        "name": "schemaStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "New",
+            "value": "New",
+            "description": "A schema that has not been approved and is awaiting review."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "A schema that has been approved and is ready for use."
+          }
+        ]
       }
     },
     "schemasListResult": {
@@ -4676,7 +4651,7 @@
       "description": "Result of the schema validation.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/ValidateSchemaStatus",
+          "$ref": "#/definitions/validateSchemaStatus",
           "description": "Validation status of the schema"
         },
         "message": {
@@ -4684,6 +4659,31 @@
           "description": "Message describing the schema validation"
         }
       }
+    },
+    "validateSchemaStatus": {
+      "type": "string",
+      "description": "Validation status of the schema",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "validateSchemaStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Validation of the schema was successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The schema failed validation, whether due to error or an invalid schema."
+          }
+        ]
+      },
+      "readOnly": true
     }
   },
   "parameters": {}

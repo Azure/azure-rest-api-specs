@@ -1385,3 +1385,7 @@ model AzureResourceManagerArmResponsePipeline {
 @@clientName(ForceDisabledStatus, "forceDisabledStatus");
 @@clientName(FlowStatus, "flowStatus");
 @@clientName(TargetType, "targetType");
+@@clientName(FlowBillingTier, "flowBillingTier");
+@@clientName(PipelineStatus, "pipelineStatus");
+@@clientName(SchemaStatus, "schemaStatus");
+@@clientName(ValidateSchemaStatus, "validateSchemaStatus");
