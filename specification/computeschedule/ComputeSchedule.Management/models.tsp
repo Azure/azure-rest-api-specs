@@ -137,11 +137,13 @@ model Resources {
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("baseProfile, Resource properties that common across all resources ")
-  baseProfile?: string;
+  baseProfile?: Record<unknown>;
 
-  @doc("resourceOverrides, properties per resource that needs to be overwritted from baseProfile")
-  resourceOverrides?: Array<string>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
+  @doc("resourceOverrides, properties per resource that needs to be overwritten from baseProfile")
+  resourceOverrides?: Record<unknown>[];
 
   @doc("Number of resources to be created")
   resourceCount: int32;
@@ -369,41 +371,6 @@ model SubmitHibernateRequest {
   correlationid: string;
 }
 
-@doc("The SubmitCreateRequest request for create operations")
-@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-model SubmitCreateRequest {
-  @doc("The schedule for the request")
-  schedule: Schedule;
-
-  @doc("resource creation payload")
-  resourceConfigParameters: ResourceProvisionPayload;
-
-  @doc("The execution parameters for the request")
-  executionParameters?: ExecutionParameters;
-
-  @doc("CorrelationId item")
-  correlationid?: string;
-}
-
-@doc("The SubmitDeleteRequest request for delete operations")
-@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-model SubmitDeleteRequest {
-  @doc("The schedule for the request")
-  schedule: Schedule;
-
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid?: string;
-
-  @doc("Forced delete resource item")
-  forceDeletion?: boolean;
-}
-
 @doc("The response from a Hibernate request")
 model HibernateResourceOperationResponse {
   @doc("The description of the operation response")
@@ -521,6 +488,9 @@ model ExecuteDeleteRequest {
 
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
+
+  @doc("Microsoft.Compute API version to target when calling delete endpoint.")
+  armApiVersion?: string;
 }
 
 // ----------- GetOperationStatus ---------
