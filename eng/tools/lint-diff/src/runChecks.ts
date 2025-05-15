@@ -1,10 +1,9 @@
 import { join } from "path";
-import { ExecException } from "node:child_process";
 
 import { getOpenapiType } from "./markdown-utils.js";
 import { getPathToDependency, isFailure } from "./util.js";
 import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
-import { execNpmExec } from "@azure-tools/specs-shared/exec";
+import { execNpmExec, isExecError, ExecError } from "@azure-tools/specs-shared/exec";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
@@ -72,7 +71,11 @@ export async function runChecks(
           ...executionResult,
         } as AutorestRunResult;
       } catch (error) {
-        const execError = error as ExecException & { stdout?: string; stderr?: string };
+        if (!isExecError(error)) { 
+          throw error;
+        }
+
+        const execError = error as ExecError;
         lintDiffResult = {
           autorestCommand,
           rootPath: path,
