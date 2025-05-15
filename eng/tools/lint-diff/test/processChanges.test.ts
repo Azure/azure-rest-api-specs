@@ -85,7 +85,7 @@ describe("reconcileChangedFilesAndTags", () => {
         [
           "specification/1/readme.md",
           expect.objectContaining({
-            tags: new Set<string>(["tag1"]),
+            changedTags: new Set<string>(["tag1"]),
           }),
         ],
       ]),
@@ -203,10 +203,10 @@ describe("buildState", () => {
       [
         Map {
           "specification/edit-in-place/readme.md" => {
-            "readme": Readme {},
-            "tags": Set {
+            "changedTags": Set {
               "package-2022-12-01",
             },
+            "readme": Readme {},
           },
         },
         [
@@ -226,8 +226,8 @@ describe("buildState", () => {
       [
         Map {
           "specification/edit-in-place/readme.md" => {
+            "changedTags": Set {},
             "readme": Readme {},
-            "tags": Set {},
           },
         },
         [],
