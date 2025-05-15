@@ -173,6 +173,15 @@ suppressions:
     reason: Keep existing APIs the same (they were not changed with this version)
 ```
 
+### Tag: package-2025-05-14-preview
+
+These settings apply only when `--tag=package-2025-05-14-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-14-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2025-05-14-preview/fluidrelay.json
+```
+
 ---
 
 # Code Generation
