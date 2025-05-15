@@ -5,8 +5,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Quantum;
 
@@ -388,7 +390,8 @@ model WorkspaceResourceProperties {
   /**
    * ARM Resource Id of the storage account associated with this workspace.
    */
-  storageAccount?: string;
+  @typeChangedFrom(Versions.v2025_01_01_preview, string)
+  storageAccount?: StorageAccountResourceId;
 
   /**
    * The URI of the workspace endpoint.
@@ -400,7 +403,32 @@ model WorkspaceResourceProperties {
    * Indicator of enablement of the Quantum workspace Api keys.
    */
   apiKeyEnabled?: boolean;
+
+  /**
+   * Managed On Behalf Of configuration.
+   */
+  @added(Versions.v2025_01_01_preview)
+  @visibility(Lifecycle.Read)
+  managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
+
+  /**
+   * ARM Resource Id of the managed storage account associated with this workspace.
+   */
+  @added(Versions.v2025_01_01_preview)
+  @visibility(Lifecycle.Read)
+  managedStorageAccount?: StorageAccountResourceId;
 }
+
+/**
+ * ARM Resource Id of a storage account.
+ */
+@added(Versions.v2025_01_01_preview)
+scalar StorageAccountResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts",
+    }
+  ]>;
 
 /**
  * Information about a Provider. A Provider is an entity that offers Targets to run Azure Quantum Jobs.

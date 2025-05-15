@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/programmableconnectivity"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,30 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     emit-common-types-schema: never
     arm-resource-flattening: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-programmableconnectivity"
+    namespace: "azure.mgmt.programmableconnectivity"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+    package-name: "azure-mgmt-programmableconnectivity"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-programmableconnectivity"
+    namespace: "com.azure.resourcemanager.programmableconnectivity"
+    flavor: "azure"
+    service-name: "Programmable Connectivity"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.ProgrammableConnectivity"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    experimental-extensible-enums: true
+    package-dir: "arm-programmableconnectivity"
+    package-details:
+      name: "@azure/arm-programmableconnectivity"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
