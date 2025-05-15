@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 @Azure.ResourceManager.Private.armResourceInternal(RecordSetProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(Zone)
-model RecordSet extends Foundations.TrackedResource {
+model RecordSet extends Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = RecordSet,
     KeyName = "relativeRecordSetName",
