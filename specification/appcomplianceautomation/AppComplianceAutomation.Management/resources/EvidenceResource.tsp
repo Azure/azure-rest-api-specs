@@ -88,6 +88,8 @@ interface Evidence {
     EvidenceFileDownloadRequest,
     EvidenceFileDownloadResponse,
     BodyParameter = {
+      #suppress "deprecated" "Avoid ModelValidation issues"
+      @encodedName("application/json", "parameters")
       @doc("Parameters for the query operation")
       @bodyRoot
       body: EvidenceFileDownloadRequest;

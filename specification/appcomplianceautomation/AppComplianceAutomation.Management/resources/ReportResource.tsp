@@ -96,6 +96,8 @@ interface Report {
     SyncCertRecordResponse,
     Azure.ResourceManager.Foundations.BaseParameters<ReportResource>,
     BodyParameter = {
+      #suppress "deprecated" "Avoid ModelValidation issues"
+      @encodedName("application/json", "parameters")
       @doc("Parameters for synchronize certification record operation")
       @bodyRoot
       body: SyncCertRecordRequest;
@@ -111,6 +113,8 @@ interface Report {
     Azure.ResourceManager.Foundations.CheckNameAvailabilityRequest,
     Azure.ResourceManager.Foundations.CheckNameAvailabilityResponse,
     BodyParameter = {
+      #suppress "deprecated" "Avoid ModelValidation issues"
+      @encodedName("application/json", "parameters")
       @doc("NameAvailabilityRequest object.")
       @bodyRoot
       body: Azure.ResourceManager.Foundations.CheckNameAvailabilityRequest;

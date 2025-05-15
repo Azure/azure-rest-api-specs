@@ -49,6 +49,8 @@ interface Services {
     MetadataSchemaExportRequest,
     MetadataSchemaExportResult,
     BodyParameter = {
+      #suppress "deprecated" "Avoid ModelValidation issues"
+      @encodedName("application/json", "payload")
       @doc("The content of the action request")
       @bodyRoot
       body: MetadataSchemaExportRequest;

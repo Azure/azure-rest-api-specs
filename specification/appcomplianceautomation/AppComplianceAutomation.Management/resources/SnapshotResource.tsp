@@ -65,6 +65,8 @@ interface Snapshot {
     DownloadResponse,
     Azure.ResourceManager.Foundations.BaseParameters<SnapshotResource>,
     BodyParameter = {
+      #suppress "deprecated" "Avoid ModelValidation issues"
+      @encodedName("application/json", "parameters")
       @doc("Parameters for the query operation")
       @bodyRoot
       body: SnapshotDownloadRequest;

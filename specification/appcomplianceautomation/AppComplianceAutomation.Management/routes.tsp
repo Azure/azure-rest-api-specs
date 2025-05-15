@@ -27,6 +27,8 @@ alias ArmProviderActionAsync<
   Parameters = Parameters,
   LroHeaders = ArmLroLocationHeader<Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>>,
   BodyParameter = {
+    #suppress "deprecated" "Avoid ModelValidation issues"
+    @encodedName("application/json", "parameters")
     @doc("The content of the action request")
     @body
     body: Request;
@@ -44,6 +46,8 @@ alias ArmProviderActionSync<
   BaseParameters = ApiVersionParameter,
   Parameters = Parameters,
   BodyParameter = {
+    #suppress "deprecated" "Avoid ModelValidation issues"
+    @encodedName("application/json", "parameters")
     @doc("The content of the action request")
     @body
     body: Request;
