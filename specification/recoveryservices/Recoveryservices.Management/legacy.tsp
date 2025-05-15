@@ -333,6 +333,7 @@ namespace Azure.ResourceManager.Legacy {
      */
     #suppress "shadow"
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+    @armResourceAction(Resource)
     @Private.enforceConstraint(Resource, Foundations.Resource)
     @post
     @returnsDoc("Azure operation completed successfully.")

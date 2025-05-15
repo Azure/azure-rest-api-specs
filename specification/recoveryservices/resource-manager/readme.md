@@ -48,10 +48,7 @@ These settings apply only when `--tag=package-2025-02-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-02-01'
 input-file:
-  - Microsoft.RecoveryServices/stable/2025-02-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2025-02-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2025-02-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2025-02-01/vaultusages.json
+  - Microsoft.RecoveryServices/stable/2025-02-01/openapi.json
 ```
 
 ### Tag: package-2025-01-01

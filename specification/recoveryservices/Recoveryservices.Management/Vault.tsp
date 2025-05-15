@@ -63,14 +63,28 @@ interface VaultOps
         NamePattern = ""
       >>
     > {}
-@armResourceOperations
+
+interface VaultCreateOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Vault,
+        KeyName = "vaultName",
+        SegmentName = "vaults",
+        NamePattern = ""
+      >>
+    > {}
+
 interface VaultOperationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
       },
       {
         /**
@@ -89,14 +103,12 @@ interface VaultOperationOps
       }
     > {}
 
-@armResourceOperations
 interface VaultStatusOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
       },
       {
         /**
@@ -112,14 +124,12 @@ interface VaultStatusOps
       }
     > {}
 
-@armResourceOperations
 interface VaultDeleteOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
       },
       {
         /**
@@ -137,7 +147,6 @@ interface VaultDeleteOps
         identityName: string,
       }
     > {}
-@armResourceOperations
 interface Vaults {
   /**
    * Get the Vault details.
@@ -147,7 +156,8 @@ interface Vaults {
   /**
    * Creates or updates a Recovery Services vault.
    */
-  createOrUpdate is VaultOps.CreateOrUpdateAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}")
+  createOrUpdate is VaultCreateOps.CreateOrUpdateAsync<
     Vault,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -197,6 +207,7 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
   @operationId("VaultCertificates_Create")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}")
   create is VaultOperationOps.ActionNoAutoSync<
     Vault,
     CertificateRequest,
@@ -209,6 +220,7 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
   @operationId("RegisteredIdentities_Delete")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/registeredIdentities/{identityName}")
   registeredIdentitiesDelete is VaultDeleteOps.ActionNoAutoSync<
     Vault,
     void,
@@ -230,6 +242,7 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @operationId("GetOperationStatus")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/operationStatus/{operationId}")
   getOperationStatus is VaultStatusOps.ActionNoAutoSync<
     Vault,
     void,
