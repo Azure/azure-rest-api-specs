@@ -46,6 +46,81 @@ suppressions:
     reason: Operations API is implemented as a separate service.
 ```
 
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2023-05-01-preview/extensionTypes.json
+  - Microsoft.KubernetesConfiguration/common/2023-05-01-preview/definitions.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensionTypes.json
+    reason: Operations API is implemented as a separate service.
+```
+
+### Tag: package-preview-2022-01-15
+
+These settings apply only when `--tag=package-preview-2022-01-15` is specified on the command line..
+
+``` yaml $(tag) == 'package-preview-2022-01-15'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionTypes.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensionTypes.json
+    reason: Operations API is implemented as a separate service.
+```
+
+``` yaml $(tag) == 'package-preview-2022-01-15-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionTypes.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensionTypes.json
+    reason: Operations API is implemented as a separate service.
+```
+
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensionTypes.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensionTypes.json
+    reason: Operations API is implemented as a separate service.
+```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensionTypes.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensionTypes.json
+    reason: Operations API is implemented as a separate service.
+```
+
+### Tag: package-preview-2021-05
+
+These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-05'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensionTypes.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensionTypes.json
+    reason: Operations API is implemented as a separate service.
+```
+
 ---
 
 # Code Generation

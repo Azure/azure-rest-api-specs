@@ -67,6 +67,70 @@ suppressions:
     reason: Existing service contract needs to be backward compatible. 
 ```
 
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/privateLinkScopes.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: privateLinkScopes.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: XmsPageableForListCalls
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PutResponseCodes
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible. 
+```
+
+``` yaml $(tag) == 'package-preview-2022-04-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/privateLinkScopes.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: privateLinkScopes.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: XmsPageableForListCalls
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PutResponseCodes
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible. 
+```
+
 # Code Generation
 
 ## Swagger to SDK
