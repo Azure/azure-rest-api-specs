@@ -17,7 +17,6 @@ import {
   AutorestRunResult,
   AutoRestMessage,
 } from "../src/lintdiff-types.js";
-import { isWindows } from "./test-util.js";
 
 import { vol } from "memfs";
 
@@ -29,6 +28,7 @@ vi.mock("node:fs/promises", async () => {
 });
 
 import { readFile } from "fs/promises";
+import { Readme } from "@azure-tools/specs-shared/readme";
 
 vi.mock("../src/util.js", async () => {
   const original = await vi.importActual("../src/util.js");
@@ -340,7 +340,7 @@ describe("generateLintDiffReport", () => {
     // Seed current filesystem so that "." exists.
     vol.mkdirSync(".", { recursive: true });
   });
-  test.skipIf(isWindows())("fails if new violations include an error", async ({ expect }) => {
+  test("fails if new violations include an error", async ({ expect }) => {
     const afterViolation = {
       extensionName: "@microsoft.azure/openapi-validator",
       level: "error",
@@ -361,7 +361,7 @@ describe("generateLintDiffReport", () => {
       stdout: "",
       stderr: "",
       rootPath: "",
-      readme: "file1.md",
+      readme: new Readme("file1.md"),
       tag: "",
     } as AutorestRunResult;
     const afterResult = {
@@ -369,7 +369,7 @@ describe("generateLintDiffReport", () => {
       stdout: JSON.stringify(afterViolation),
       stderr: "",
       rootPath: "",
-      readme: "file1.md",
+      readme: new Readme("file1.md"),
       tag: "",
     } as AutorestRunResult;
 
@@ -404,7 +404,7 @@ describe("generateLintDiffReport", () => {
     `);
   });
 
-  test.skipIf(isWindows())("fails if new violation includes a fatal error", async ({ expect }) => {
+  test("fails if new violation includes a fatal error", async ({ expect }) => {
     const afterViolation = {
       extensionName: "@microsoft.azure/openapi-validator",
       level: "fatal",
@@ -419,7 +419,7 @@ describe("generateLintDiffReport", () => {
       stdout: "",
       stderr: "",
       rootPath: "",
-      readme: "file1.md",
+      readme: new Readme("file1.md"),
       tag: "",
     } as AutorestRunResult;
     const afterResult = {
@@ -427,7 +427,7 @@ describe("generateLintDiffReport", () => {
       stdout: JSON.stringify(afterViolation),
       stderr: "",
       rootPath: "",
-      readme: "file1.md",
+      readme: new Readme("file1.md"),
       tag: "",
     } as AutorestRunResult;
 
@@ -462,7 +462,7 @@ describe("generateLintDiffReport", () => {
     `);
   });
 
-  test.skipIf(isWindows())(
+  test(
     "passes if new violations do not include an error (warnings only)",
     async ({ expect }) => {
       const afterViolation = {
@@ -485,7 +485,7 @@ describe("generateLintDiffReport", () => {
         stdout: "",
         stderr: "",
         rootPath: "",
-        readme: "file1.md",
+        readme: new Readme("file1.md"),
         tag: "",
       } as AutorestRunResult;
       const afterResult = {
@@ -493,7 +493,7 @@ describe("generateLintDiffReport", () => {
         stdout: JSON.stringify(afterViolation),
         stderr: "",
         rootPath: "",
-        readme: "file1.md",
+        readme: new Readme("file1.md"),
         tag: "",
       } as AutorestRunResult;
 
@@ -543,7 +543,7 @@ describe("generateAutoRestErrorReport", () => {
     const autoRestErrors = [
       {
         result: {
-          readme: "readme.md",
+          readme: new Readme("dummy/rootPath/readme.md"),
           tag: "tag1",
           rootPath: "dummy/rootPath",
           error: null,
@@ -557,7 +557,7 @@ describe("generateAutoRestErrorReport", () => {
       },
       {
         result: {
-          readme: "readme2.md",
+          readme: new Readme("dummy/rootPath/readme2.md"),
           tag: "tag2",
           rootPath: "dummy/rootPath",
           error: null,

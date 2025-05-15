@@ -87,3 +87,7 @@ export function isFailure(level: string) {
 export function isWarning(level: string) {
   return level.toLowerCase() === "warning";
 }
+
+export function normalizeSeparators(path: string) {
+  return path.replaceAll("\\", "/");
+}
