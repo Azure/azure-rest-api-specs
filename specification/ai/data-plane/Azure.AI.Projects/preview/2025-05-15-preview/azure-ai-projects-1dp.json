@@ -2125,7 +2125,7 @@
         }
       }
     },
-    "/redTeams/runs": {
+    "/redteams/runs": {
       "get": {
         "operationId": "RedTeams_List",
         "description": "List a redteam by name.",
@@ -2178,7 +2178,7 @@
         }
       }
     },
-    "/redTeams/runs/{name}": {
+    "/redteams/runs/{name}": {
       "get": {
         "operationId": "RedTeams_Get",
         "description": "Get a redteam by name.",
@@ -2226,7 +2226,7 @@
         }
       }
     },
-    "/redTeams/runs:run": {
+    "/redteams/runs:run": {
       "post": {
         "operationId": "RedTeams_CreateRun",
         "description": "Creates a redteam run.",
@@ -2266,7 +2266,7 @@
         }
       }
     },
-    "/redTeams/runs:updateUpload/{name}": {
+    "/redteams/runs:updateUpload/{name}": {
       "patch": {
         "operationId": "RedTeams_UploadUpdateRun",
         "description": "Update the uploaded the result to an redteam run.",
@@ -2313,7 +2313,7 @@
         }
       }
     },
-    "/redTeams/runs:upload": {
+    "/redteams/runs:upload": {
       "post": {
         "operationId": "RedTeams_UploadRun",
         "description": "Upload the result to a redteam run.",
@@ -2353,7 +2353,7 @@
         }
       }
     },
-    "/redTeams/simulation/attackobjectives": {
+    "/redteams/simulation/attackobjectives": {
       "get": {
         "operationId": "RedTeams_GetAttackObjectives",
         "description": "Get the attack objectives.",
@@ -2413,7 +2413,7 @@
         }
       }
     },
-    "/redTeams/simulation/chat/completions/submit": {
+    "/redteams/simulation/chat/completions/submit": {
       "post": {
         "operationId": "RedTeams_SubmitSimulation",
         "description": "Submit a request for simulation.",
@@ -2453,7 +2453,38 @@
         }
       }
     },
-    "/redTeams/simulation/jailbreak/{type}": {
+    "/redteams/operations/{operationId}": {
+      "get": {
+        "operationId": "RedTeams_OperationResults",
+        "description": "Poll for the operation results.",
+        "parameters": [
+          {
+            "name": "apiVersion",
+            "in": "query",
+            "description": "Api Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID for the polling operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        }
+      }
+    },
+    "/redteams/simulation/jailbreak/{type}": {
       "get": {
         "operationId": "RedTeams_GetJailBreakDatasetWithType",
         "description": "Get the jailbreak dataset with type.",
@@ -2494,7 +2525,7 @@
         }
       }
     },
-    "/redTeams/simulation/jailbreak/": {
+    "/redteams/simulation/jailbreak/": {
       "get": {
         "operationId": "RedTeams_GetJailBreakDataset",
         "description": "Get the jailbreak dataset.",
@@ -2528,7 +2559,7 @@
         }
       }
     },
-    "/redTeams/simulation/template/parameters/{type}": {
+    "/redteams/simulation/template/parameters/{type}": {
       "get": {
         "operationId": "RedTeams_GetTemplateParametersWithType",
         "description": "Get template parameters with type.",
@@ -2570,7 +2601,7 @@
         }
       }
     },
-    "/redTeams/simulation/template/parameters/": {
+    "/redteams/simulation/template/parameters/": {
       "get": {
         "operationId": "RedTeams_GetTemplateParameters",
         "description": "Get template parameters.",
@@ -2605,7 +2636,7 @@
         }
       }
     },
-    "/redTeams/simulation/template/parameters/image": {
+    "/redteams/simulation/template/parameters/image": {
       "get": {
         "operationId": "RedTeams_GetTemplateParametersImage",
         "description": "Get the template parameters image.",

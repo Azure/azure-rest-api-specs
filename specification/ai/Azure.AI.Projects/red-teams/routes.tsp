@@ -169,3 +169,24 @@ interface RedTeams {
     ResourceCreatedOrOkResponse<LongRunningResponse>
   >;
 }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Poll for the operation results.")
+  @route("/operations/{operationId}")
+  @get
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v_latest)
+  operationResults(
+    ...Azure.Core.Foundations.ApiVersionParameter,
+
+    @doc("Operation ID for the polling operation.")
+    @path
+    operationId: string,
+  ): {
+    @statusCode statusCode: 200;
+
+    @doc("The operation results.")
+    @body
+    operationResults: Json;
+  };
