@@ -1,6 +1,6 @@
 import { join } from "path";
 import { execNpmExec, isExecError, ExecError } from "@azure-tools/specs-shared/exec";
-import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import { debugLogger } from "@azure-tools/specs-shared/logger";
 
 import { getPathToDependency, isFailure } from "./util.js";
 import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
@@ -61,7 +61,7 @@ export async function runChecks(
       try {
         const executionResult = await execNpmExec(autorestArgs, {
           maxBuffer: MAX_EXEC_BUFFER,
-          logger: new ConsoleLogger(true),
+          logger: debugLogger,
         });
 
         lintDiffResult = {
