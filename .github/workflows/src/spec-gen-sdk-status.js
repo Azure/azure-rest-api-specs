@@ -60,7 +60,7 @@ export async function setSpecGenSdkStatusImpl({
   github,
   core,
 }) {
-  const statusName = "[TEST IGNORE] spec-gen-sdk status";
+  const statusName = "spec-gen-sdk status";
   const checks = await github.paginate(github.rest.checks.listForRef, {
     owner,
     repo,
@@ -177,7 +177,7 @@ async function processResult({ checkRuns, core }) {
     const shortLanguageName = language.split("-").pop();
     const executionResult = artifactJsonObj.result;
     const isSpecGenSdkCheckRequired = artifactJsonObj.isSpecGenSdkCheckRequired;
-    if (isSpecGenSdkCheckRequired && executionResult !== "succeeded") {
+    if (isSpecGenSdkCheckRequired && executionResult === "failed") {
       state = CommitStatusState.FAILURE;
       specGenSdkFailedRequiredLanguages += shortLanguageName + ", ";
     }
