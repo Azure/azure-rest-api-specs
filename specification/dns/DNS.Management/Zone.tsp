@@ -36,7 +36,6 @@ model Zone extends Foundations.TrackedResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties?: ZoneProperties;
 }
 
