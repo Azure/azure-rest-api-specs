@@ -1,7 +1,7 @@
 import semver from "semver";
 import { describe, expect, it } from "vitest";
 import { execFile, execNpm, execNpmExec, isExecError } from "../src/exec.js";
-import { ConsoleLogger, consoleLogger } from "../src/logger.js";
+import { ConsoleLogger } from "../src/logger.js";
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
 
@@ -10,7 +10,7 @@ describe("execFile", () => {
   const args = ["-e", `console.log("test")`];
   const expected = "test\n";
 
-  it.each([{}, { logger: consoleLogger }])(
+  it.each([{}, options])(
     "exec succeeds with default buffer (options: %o)",
     async (options) => {
       await expect(execFile(file, args, options)).resolves.toEqual({
