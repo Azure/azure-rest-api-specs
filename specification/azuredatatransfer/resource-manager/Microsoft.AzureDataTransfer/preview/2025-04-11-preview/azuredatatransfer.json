@@ -2644,30 +2644,6 @@
     }
   },
   "definitions": {
-    "ActionType": {
-      "type": "string",
-      "description": "The type of action to be executed.",
-      "enum": [
-        "AllowUpdates",
-        "ForceDisable"
-      ],
-      "x-ms-enum": {
-        "name": "ActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AllowUpdates",
-            "value": "AllowUpdates",
-            "description": "Allow a pipeline, connection, or flow to be updated."
-          },
-          {
-            "name": "ForceDisable",
-            "value": "ForceDisable",
-            "description": "Force disable a pipeline, connection, or flow."
-          }
-        ]
-      }
-    },
     "ApiMode": {
       "type": "string",
       "description": "Remote Calling Mode in the Azure Data Transfer API Flow, which describes how the API Flow will be invoked",
@@ -2788,54 +2764,6 @@
             "name": "Accepted",
             "value": "Accepted",
             "description": "Creation of the connection has been accepted."
-          }
-        ]
-      }
-    },
-    "DataType": {
-      "type": "string",
-      "description": "Transfer Storage Blobs or Tables",
-      "enum": [
-        "Blob",
-        "Table"
-      ],
-      "x-ms-enum": {
-        "name": "DataType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Blob",
-            "value": "Blob",
-            "description": "The flow uses Azure Storage blobs to send or receive data."
-          },
-          {
-            "name": "Table",
-            "value": "Table",
-            "description": "The flow uses Azure Storage tables to send or receive data."
-          }
-        ]
-      }
-    },
-    "Direction": {
-      "type": "string",
-      "description": "Direction of data movement",
-      "enum": [
-        "Send",
-        "Receive"
-      ],
-      "x-ms-enum": {
-        "name": "Direction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Send",
-            "value": "Send",
-            "description": "The direction is on the sending side of a pipeline, connection, or flow."
-          },
-          {
-            "name": "Receive",
-            "value": "Receive",
-            "description": "The direction is on the receiving side side of a pipeline, connection, or flow."
           }
         ]
       }
@@ -3016,30 +2944,6 @@
       },
       "additionalProperties": {}
     },
-    "LinkStatus": {
-      "type": "string",
-      "description": "Link status of the current pipeline, connection, flow.",
-      "enum": [
-        "Linked",
-        "Unlinked"
-      ],
-      "x-ms-enum": {
-        "name": "LinkStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Linked",
-            "value": "Linked",
-            "description": "The pipeline, connection, or flow is currently linked with another corresponding pipeline,\nconnection, or flow, and can be used."
-          },
-          {
-            "name": "Unlinked",
-            "value": "Unlinked",
-            "description": "The pipeline, connection, or flow is not linked with another corresponding pipeline,\nconnection, or flow, and cannot be used."
-          }
-        ]
-      }
-    },
     "ListFlowsByPipelineConnection": {
       "type": "object",
       "description": "A connection resource id in addition to all child flow resources under this connection.",
@@ -3073,37 +2977,12 @@
         }
       }
     },
-    "OperationStatusEnum": {
-      "type": "string",
-      "description": "Operation status for the last patch request for this connection.",
-      "enum": [
-        "Failed",
-        "Succeeded"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatusEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The last patch request for this connection completed with an error."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The last patch request for this connection completed."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "OperationStatusProperties": {
       "type": "object",
       "description": "Operation status associated with the last patch request",
       "properties": {
         "status": {
-          "$ref": "#/definitions/OperationStatusEnum",
+          "$ref": "#/definitions/operationStatusEnum",
           "description": "Operation status for the last patch request for this connection.",
           "readOnly": true
         },
@@ -3133,7 +3012,7 @@
           "description": "Pipeline to use to transfer data"
         },
         "direction": {
-          "$ref": "#/definitions/Direction",
+          "$ref": "#/definitions/direction",
           "description": "Direction of data movement"
         },
         "justification": {
@@ -3159,7 +3038,7 @@
           "readOnly": true
         },
         "linkStatus": {
-          "$ref": "#/definitions/LinkStatus",
+          "$ref": "#/definitions/linkStatus",
           "description": "Link status of the current connection",
           "readOnly": true
         },
@@ -3210,7 +3089,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/provisioningState",
           "description": "Provisioning state of the connection",
           "readOnly": true
         },
@@ -3326,7 +3205,7 @@
           "description": "AME, PME, or TORUS only! AKV Chain Containing SAS Token"
         },
         "linkStatus": {
-          "$ref": "#/definitions/LinkStatus",
+          "$ref": "#/definitions/linkStatus",
           "description": "Link status of the current flow",
           "readOnly": true
         },
@@ -3388,11 +3267,11 @@
           "description": "The flow type for this flow"
         },
         "dataType": {
-          "$ref": "#/definitions/DataType",
+          "$ref": "#/definitions/dataType",
           "description": "Transfer Storage Blobs or Tables"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/provisioningState",
           "description": "Provisioning state of the flow",
           "readOnly": true
         },
@@ -3425,7 +3304,7 @@
           "description": "The flow stream identifier"
         },
         "streamProtocol": {
-          "$ref": "#/definitions/StreamProtocol",
+          "$ref": "#/definitions/streamProtocol",
           "description": "The protocol of the stream"
         },
         "streamLatency": {
@@ -3655,43 +3534,6 @@
         }
       }
     },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "Provisioning state of the pipeline, connection, flow.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Resource has been accepted for creation."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "SchemaStatus": {
       "type": "string",
       "description": "Status of the schema.",
@@ -3736,36 +3578,6 @@
             "name": "Zip",
             "value": "Zip",
             "description": "The schema represents a ZIP file with multiple XML schema definition files within it."
-          }
-        ]
-      }
-    },
-    "StreamProtocol": {
-      "type": "string",
-      "description": "The protocol of the stream",
-      "enum": [
-        "UDP",
-        "SRT",
-        "RTP"
-      ],
-      "x-ms-enum": {
-        "name": "StreamProtocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UDP",
-            "value": "UDP",
-            "description": "This Flow is using User Datagram Protocol for the video stream."
-          },
-          {
-            "name": "SRT",
-            "value": "SRT",
-            "description": "This Flow is using Secure Reliable Transfer for the video stream."
-          },
-          {
-            "name": "RTP",
-            "value": "RTP",
-            "description": "This Flow is using Real-time Transport Protocol for the video stream."
           }
         ]
       }
@@ -3845,7 +3657,7 @@
       "description": "The action to be executed.",
       "properties": {
         "actionType": {
-          "$ref": "#/definitions/ActionType",
+          "$ref": "#/definitions/actionType",
           "description": "Type of action to be executed"
         },
         "targetType": {
@@ -3869,6 +3681,30 @@
         "targetType",
         "targets"
       ]
+    },
+    "actionType": {
+      "type": "string",
+      "description": "The type of action to be executed.",
+      "enum": [
+        "AllowUpdates",
+        "ForceDisable"
+      ],
+      "x-ms-enum": {
+        "name": "actionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllowUpdates",
+            "value": "AllowUpdates",
+            "description": "Allow a pipeline, connection, or flow to be updated."
+          },
+          {
+            "name": "ForceDisable",
+            "value": "ForceDisable",
+            "description": "Force disable a pipeline, connection, or flow."
+          }
+        ]
+      }
     },
     "apiFlowOptions": {
       "type": "object",
@@ -3945,7 +3781,7 @@
           "description": "Pipeline to use to transfer data"
         },
         "direction": {
-          "$ref": "#/definitions/Direction",
+          "$ref": "#/definitions/direction",
           "description": "Direction of data movement"
         },
         "justification": {
@@ -3971,7 +3807,7 @@
           "readOnly": true
         },
         "linkStatus": {
-          "$ref": "#/definitions/LinkStatus",
+          "$ref": "#/definitions/linkStatus",
           "description": "Link status of the current connection",
           "readOnly": true
         },
@@ -4022,7 +3858,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/provisioningState",
           "description": "Provisioning state of the connection",
           "readOnly": true
         },
@@ -4070,6 +3906,54 @@
         }
       }
     },
+    "dataType": {
+      "type": "string",
+      "description": "Transfer Storage Blobs or Tables",
+      "enum": [
+        "Blob",
+        "Table"
+      ],
+      "x-ms-enum": {
+        "name": "dataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Blob",
+            "value": "Blob",
+            "description": "The flow uses Azure Storage blobs to send or receive data."
+          },
+          {
+            "name": "Table",
+            "value": "Table",
+            "description": "The flow uses Azure Storage tables to send or receive data."
+          }
+        ]
+      }
+    },
+    "direction": {
+      "type": "string",
+      "description": "Direction of data movement",
+      "enum": [
+        "Send",
+        "Receive"
+      ],
+      "x-ms-enum": {
+        "name": "direction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Send",
+            "value": "Send",
+            "description": "The direction is on the sending side of a pipeline, connection, or flow."
+          },
+          {
+            "name": "Receive",
+            "value": "Receive",
+            "description": "The direction is on the receiving side side of a pipeline, connection, or flow."
+          }
+        ]
+      }
+    },
     "flow": {
       "type": "object",
       "description": "The flow resource definition.",
@@ -4111,7 +3995,7 @@
           "description": "AME, PME, or TORUS only! AKV Chain Containing SAS Token"
         },
         "linkStatus": {
-          "$ref": "#/definitions/LinkStatus",
+          "$ref": "#/definitions/linkStatus",
           "description": "Link status of the current flow",
           "readOnly": true
         },
@@ -4173,11 +4057,11 @@
           "description": "The flow type for this flow"
         },
         "dataType": {
-          "$ref": "#/definitions/DataType",
+          "$ref": "#/definitions/dataType",
           "description": "Transfer Storage Blobs or Tables"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/provisioningState",
           "description": "Provisioning state of the flow",
           "readOnly": true
         },
@@ -4210,7 +4094,7 @@
           "description": "The flow stream identifier"
         },
         "streamProtocol": {
-          "$ref": "#/definitions/StreamProtocol",
+          "$ref": "#/definitions/streamProtocol",
           "description": "The protocol of the stream"
         },
         "streamLatency": {
@@ -4372,6 +4256,30 @@
         }
       }
     },
+    "linkStatus": {
+      "type": "string",
+      "description": "Link status of the current pipeline, connection, flow.",
+      "enum": [
+        "Linked",
+        "Unlinked"
+      ],
+      "x-ms-enum": {
+        "name": "linkStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Linked",
+            "value": "Linked",
+            "description": "The pipeline, connection, or flow is currently linked with another corresponding pipeline,\nconnection, or flow, and can be used."
+          },
+          {
+            "name": "Unlinked",
+            "value": "Unlinked",
+            "description": "The pipeline, connection, or flow is not linked with another corresponding pipeline,\nconnection, or flow, and cannot be used."
+          }
+        ]
+      }
+    },
     "listApprovedSchemasRequest": {
       "type": "object",
       "description": "The request used to list approved schemas within the resource provider.",
@@ -4381,7 +4289,7 @@
           "description": "The name of the pipeline to filter approved schemas."
         },
         "direction": {
-          "$ref": "#/definitions/Direction",
+          "$ref": "#/definitions/direction",
           "description": "The direction pipeline to filter approved schemas."
         }
       }
@@ -4395,6 +4303,31 @@
           "description": "Billing tier for this messaging flow"
         }
       }
+    },
+    "operationStatusEnum": {
+      "type": "string",
+      "description": "Operation status for the last patch request for this connection.",
+      "enum": [
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "operationStatusEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The last patch request for this connection completed with an error."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The last patch request for this connection completed."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "pipeline": {
       "type": "object",
@@ -4447,7 +4380,7 @@
           "x-ms-identifiers": []
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/provisioningState",
           "description": "Provisioning state of the pipeline",
           "readOnly": true
         },
@@ -4510,6 +4443,43 @@
         }
       }
     },
+    "provisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the pipeline, connection, flow.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "provisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted for creation."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "resourceBody": {
       "type": "object",
       "description": "The resource to reference.",
@@ -4552,7 +4522,7 @@
           "description": "Content of the schema"
         },
         "direction": {
-          "$ref": "#/definitions/Direction",
+          "$ref": "#/definitions/direction",
           "description": "The direction of the schema."
         },
         "schemaUri": {
@@ -4656,6 +4626,36 @@
           "type": "string",
           "description": "The passphrase used for SRT streams"
         }
+      }
+    },
+    "streamProtocol": {
+      "type": "string",
+      "description": "The protocol of the stream",
+      "enum": [
+        "UDP",
+        "SRT",
+        "RTP"
+      ],
+      "x-ms-enum": {
+        "name": "streamProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UDP",
+            "value": "UDP",
+            "description": "This Flow is using User Datagram Protocol for the video stream."
+          },
+          {
+            "name": "SRT",
+            "value": "SRT",
+            "description": "This Flow is using Secure Reliable Transfer for the video stream."
+          },
+          {
+            "name": "RTP",
+            "value": "RTP",
+            "description": "This Flow is using Real-time Transport Protocol for the video stream."
+          }
+        ]
       }
     },
     "streamSourceAddresses": {

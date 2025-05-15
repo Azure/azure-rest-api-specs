@@ -1374,3 +1374,10 @@ model AzureResourceManagerArmResponsePipeline {
 @@clientName(SetDestinationEndpoints, "setDestinationEndpoints");
 @@clientName(SetDestinationEndpointPorts, "setDestinationEndpointPorts");
 @@clientName(Action, "action");
+@@clientName(OperationStatusEnum, "operationStatusEnum");
+@@clientName(Direction, "direction");
+@@clientName(ActionType, "actionType");
+@@clientName(LinkStatus, "linkStatus");
+@@clientName(ProvisioningState, "provisioningState");
+@@clientName(DataType, "dataType");
+@@clientName(StreamProtocol, "streamProtocol");
