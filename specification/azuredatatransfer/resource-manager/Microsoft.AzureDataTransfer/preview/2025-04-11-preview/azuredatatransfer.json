@@ -75,7 +75,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/schemas"
+              "$ref": "#/definitions/schemasListResult"
             }
           },
           "default": {
@@ -142,7 +142,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/schemas"
+              "$ref": "#/definitions/schema"
             }
           }
         ],
@@ -150,7 +150,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ValidateSchemaResult"
+              "$ref": "#/definitions/validateSchemaResult"
             }
           },
           "default": {
@@ -2504,7 +2504,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/schemas"
+              "$ref": "#/definitions/schemasListResult"
             }
           },
           "default": {
@@ -3782,20 +3782,6 @@
         ]
       }
     },
-    "ValidateSchemaResult": {
-      "type": "object",
-      "description": "Result of the schema validation.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/ValidateSchemaStatus",
-          "description": "Validation status of the schema"
-        },
-        "message": {
-          "type": "string",
-          "description": "Message describing the schema validation"
-        }
-      }
-    },
     "ValidateSchemaStatus": {
       "type": "string",
       "description": "Validation status of the schema",
@@ -4547,7 +4533,7 @@
         }
       }
     },
-    "schemas": {
+    "schemasListResult": {
       "type": "object",
       "description": "The schemas list result.",
       "properties": {
@@ -4649,6 +4635,20 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "validateSchemaResult": {
+      "type": "object",
+      "description": "Result of the schema validation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ValidateSchemaStatus",
+          "description": "Validation status of the schema"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message describing the schema validation"
         }
       }
     }

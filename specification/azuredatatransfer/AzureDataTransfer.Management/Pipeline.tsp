@@ -111,7 +111,7 @@ interface Pipelines {
   listSchemasList is ArmResourceActionSync<
     Pipeline,
     Schema,
-    ArmResponse<SchemasListResponse>
+    ArmResponse<SchemasListResult>
   >;
 
   /**

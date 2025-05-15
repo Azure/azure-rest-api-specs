@@ -8,7 +8,6 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using TypeSpec.OpenAPI;
@@ -25,7 +24,7 @@ interface AzureDataTransfer {
   @autoRoute
   listApprovedSchemas is ArmProviderActionSync<
     Request = ListApprovedSchemasRequest,
-    Response = SchemasListResponse
+    Response = SchemasListResult
   >;
   /**
    * Validates a schema for Azure Data Transfer.
@@ -34,7 +33,7 @@ interface AzureDataTransfer {
   @operationId("AzureDataTransfer_validateSchema")
   @autoRoute
   validateSchema is ArmProviderActionSync<
-    Request = SchemasListResponse,
+    Request = Schema,
     Response = ValidateSchemaResult
   >;
 }
