@@ -61,6 +61,21 @@ namespace SkillContext
 
 		@doc("Username of the user that invoked the skill")
 		userName: string;
+
+		@doc("ID of the agent")
+		agentId: string;
+
+		@doc("Agent scope")
+		agentScope: AgentScope;
+
+		@doc("The agent trigger name identified for each agent evaluation execution")
+		selectedAgentTrigger: string;
+
+		@doc("Indicates Fallback options when no skill is chosen.")
+		fallbackOptions?: FallbackOptions;
+
+		@doc("Represents the number of prompt executions that have occurred.")
+		evaluationExecutionCount: uint32;
 	}
 
 	@doc("Evaluation Invocation Type")
