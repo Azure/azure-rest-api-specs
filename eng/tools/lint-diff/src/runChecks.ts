@@ -92,7 +92,6 @@ export async function runChecks(
 
         logAutorestExecutionErrors(lintDiffResult);
       }
-      console.log(lintDiffResult.stderr + lintDiffResult.stdout);
       console.log("::endgroup::");
 
       result.push(lintDiffResult);
