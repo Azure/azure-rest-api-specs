@@ -3,7 +3,7 @@
   "info": {
     "title": "CommunicationIdentityClient",
     "description": "Azure Communication Identity Service",
-    "version": "2023-10-01"
+    "version": "2025-06-30"
   },
   "paths": {
     "/identities": {
@@ -36,7 +36,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "201": {
@@ -79,7 +79,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -91,7 +91,7 @@
             "$ref": "./examples/DeleteIdentity.json"
           }
         }
-      }
+      },
     },
     "/identities/{id}/:revokeAccessTokens": {
       "post": {
@@ -119,7 +119,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -138,7 +138,7 @@
         "tags": [
           "TeamsUser"
         ],
-        "summary": "Exchange an Azure Active Directory (Azure AD) access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
+        "summary": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
         "operationId": "CommunicationIdentity_ExchangeTeamsUserAccessToken",
         "consumes": [
           "application/json"
@@ -164,7 +164,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -219,7 +219,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -235,7 +235,216 @@
           }
         }
       }
-    }
+    },
+    "/access/teamsExtension/:exchangeAccessToken": {
+      "post": {
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Exchanges a Teams Phone token for an ACS user access token.",
+        "operationId": "TeamsExtensionToken_Exchange",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload for the token exchange.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionExchangeTokenRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Exchange a Teams Phone token": {
+            "$ref": "./examples/ExchangeTeamsPhoneToken.json"
+          }
+        }
+      }
+    },
+    "/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}": {
+      "get": {
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Get Teams Phone access assignment by object id.",
+        "operationId": "TeamsExtensionAssignment_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant Id we want to get the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object Id we want to get the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assignment": {
+            "$ref": "./examples/GetTeamsExtensionAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Creates or replaces a Teams Phone access assignment.",
+        "operationId": "TeamsExtensionAssignment_Upsert",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant Id we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object Id we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Values we want to set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentCreateOrUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Assignment": {
+            "$ref": "./examples/CreateOrReplaceTeamsExtensionAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Removes a Teams Phone access assignment.",
+        "operationId": "TeamsExtensionAssignment_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant Id we want to remove the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object Id we want to remove the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Assignment": {
+            "$ref": "./examples/DeleteTeamsExtensionAssignment.json"
+          }
+        }
+      }
+    },
   },
   "definitions": {
     "CommunicationIdentity": {
@@ -245,6 +454,15 @@
       ],
       "type": "object",
       "properties": {
+        "customId": {
+          "description": "The custom Id if one has been associated with the identity.",
+          "type": "string"
+        },
+        "lastTokenIssuedAt": {
+          "format": "date-time",
+          "description": "Last time a token has been issued for the identity.",
+          "type": "string"
+        },
         "id": {
           "description": "Identifier of the identity.",
           "type": "string"
@@ -311,6 +529,11 @@
     "CommunicationIdentityCreateRequest": {
       "type": "object",
       "properties": {
+        "customId": {
+          "description": "Set to tag the identity with your own id, Maximum length is 256 characters.",
+          "type": "string",
+          "minLength": 1
+        },
         "createTokenWithScopes": {
           "description": "Also create access token for the created identity.",
           "type": "array",
@@ -366,6 +589,7 @@
       }
     },
     "TeamsUserExchangeTokenRequest": {
+      "description": "A request to create or update a Teams Phone assignment.",
       "required": [
         "appId",
         "token",
@@ -374,22 +598,81 @@
       "type": "object",
       "properties": {
         "token": {
-          "description": "Azure AD access token of a Teams User to acquire a new Communication Identity access token.",
+          "description": "Entra ID access token of a Teams User to acquire a new Communication Identity access token.",
           "type": "string"
         },
         "appId": {
-          "description": "Client ID of an Azure AD application to be verified against the appid claim in the Azure AD access token.",
+          "description": "Client ID of an Entra ID application to be verified against the appid claim in the Entra ID access token.",
           "type": "string"
         },
         "userId": {
-          "description": "Object ID of an Azure AD user (Teams User) to be verified against the oid claim in the Azure AD access token.",
+          "description": "Object ID of an Entra ID user (Teams User) to be verified against the oid claim in the Entra ID access token.",
           "type": "string"
         }
       }
-    }
+    },
+    "TeamsExtensionExchangeTokenRequest": {
+      "type": "object",
+      "properties": {}
+    },
+    "TeamsExtensionAssignmentCreateOrUpdateRequest": {
+      "required": [
+        "principalType"
+      ],
+      "type": "object",
+      "properties": {
+        "principalType": {
+          "$ref": "#/definitions/TeamsExtensionPrincipalType"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TeamsExtensionAssignmentResponse": {
+      "required": [
+        "objectId",
+        "principalType",
+        "tenantId"
+      ],
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "principalType": {
+          "$ref": "#/definitions/TeamsExtensionPrincipalType"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TeamsExtensionPrincipalType": {
+      "description": "The type of principal the assignment is for.",
+      "enum": [
+        "resourceAccount",
+        "user"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TeamsExtensionPrincipalType",
+        "modelAsString": true
+      }
+    },
   },
   "parameters": {
     "ApiVersionParameter": {
+      "x-ms-parameter-location": "client",
       "in": "query",
       "name": "api-version",
       "description": "Version of API to invoke.",
@@ -416,6 +699,7 @@
         "description": "The communication resource, for example https://my-resource.communication.azure.com",
         "required": true,
         "type": "string",
+        "format": "url",
         "in": "path",
         "x-ms-skip-url-encoding": true,
         "x-ms-parameter-location": "client"
