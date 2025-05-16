@@ -39,4 +39,3 @@ model DrillRunResourceProperties extends JobResourceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
-

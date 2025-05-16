@@ -16,7 +16,6 @@ using OpenAPI;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
-
 /**
  * Resource definition for the Chaos job Resources.
  */

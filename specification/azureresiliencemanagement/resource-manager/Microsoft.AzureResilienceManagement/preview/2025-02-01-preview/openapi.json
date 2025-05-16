@@ -4924,12 +4924,7 @@
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
           "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            ],
-            "type": "object",
+            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
           }
         }
@@ -4939,32 +4934,21 @@
       "type": "object",
       "description": "Definition of a job, including its type, status, timing, and additional details.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that this job is intended to perform.",
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/JobStatus",
-          "description": "The current status of the job.",
+          "description": "The current status of the job execution.",
           "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the job.",
+          "description": "The start time of the job execution.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the job.",
+          "description": "The end time of the job execution.",
           "readOnly": true
         },
         "duration": {
@@ -4976,6 +4960,17 @@
         "errorDetails": {
           "$ref": "#/definitions/JobErrorInfo",
           "description": "Details of any errors that occurred during the execution of this job."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that this job is intended to perform.",
+          "readOnly": true
         },
         "retryDetails": {
           "type": "array",
@@ -4991,12 +4986,12 @@
         }
       },
       "required": [
-        "resourceId",
-        "operation",
         "status",
         "startTime",
         "endTime",
-        "duration"
+        "duration",
+        "resourceId",
+        "operation"
       ]
     },
     "ChaosExperimentProperties": {
@@ -5173,32 +5168,21 @@
       "type": "object",
       "description": "Represents the properties of a child job within the Resiliency Hub.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that this job is intended to perform.",
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/JobStatus",
-          "description": "The current status of the job.",
+          "description": "The current status of the job execution.",
           "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the job.",
+          "description": "The start time of the job execution.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the job.",
+          "description": "The end time of the job execution.",
           "readOnly": true
         },
         "duration": {
@@ -5210,6 +5194,17 @@
         "errorDetails": {
           "$ref": "#/definitions/JobErrorInfo",
           "description": "Details of any errors that occurred during the execution of this job."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that this job is intended to perform.",
+          "readOnly": true
         },
         "retryDetails": {
           "type": "array",
@@ -5258,12 +5253,12 @@
       },
       "discriminator": "jobType",
       "required": [
-        "resourceId",
-        "operation",
         "status",
         "startTime",
         "endTime",
         "duration",
+        "resourceId",
+        "operation",
         "parentJobId",
         "parentJobTaskId",
         "parentJobTaskName",
@@ -6477,6 +6472,42 @@
         "sourceLocations"
       ]
     },
+    "FailoverState": {
+      "type": "string",
+      "description": "A state specific to the resource that helps identify its Failover state.",
+      "enum": [
+        "None",
+        "FailedOver",
+        "FailedOverCommitPending",
+        "FailedOverReprotectPending"
+      ],
+      "x-ms-enum": {
+        "name": "FailoverState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The resource is Not in failedOver state."
+          },
+          {
+            "name": "FailedOver",
+            "value": "FailedOver",
+            "description": "The resource is in failed-over state."
+          },
+          {
+            "name": "FailedOverCommitPending",
+            "value": "FailedOverCommitPending",
+            "description": "The resource is in failover commit pending state."
+          },
+          {
+            "name": "FailedOverReprotectPending",
+            "value": "FailedOverReprotectPending",
+            "description": "The resource is in reprotect pending state."
+          }
+        ]
+      }
+    },
     "FaultDetails": {
       "type": "object",
       "description": "Fault Details",
@@ -6998,6 +7029,45 @@
         "errorCode"
       ]
     },
+    "JobExecutionDetails": {
+      "type": "object",
+      "description": "Job Execution Details.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The current status of the job execution.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the job execution.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the job execution.",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time elapsed during the execution of this job.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/JobErrorInfo",
+          "description": "Details of any errors that occurred during the execution of this job."
+        }
+      },
+      "required": [
+        "status",
+        "startTime",
+        "endTime",
+        "duration"
+      ]
+    },
     "JobExtendedInfo": {
       "type": "object",
       "description": "Additional information for job.",
@@ -7026,32 +7096,21 @@
       "type": "object",
       "description": "Definition of a job, including its type, status, timing, and additional details.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that this job is intended to perform.",
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/JobStatus",
-          "description": "The current status of the job.",
+          "description": "The current status of the job execution.",
           "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the job.",
+          "description": "The start time of the job execution.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the job.",
+          "description": "The end time of the job execution.",
           "readOnly": true
         },
         "duration": {
@@ -7063,6 +7122,17 @@
         "errorDetails": {
           "$ref": "#/definitions/JobErrorInfo",
           "description": "Details of any errors that occurred during the execution of this job."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that this job is intended to perform.",
+          "readOnly": true
         },
         "retryDetails": {
           "type": "array",
@@ -7089,12 +7159,12 @@
       },
       "discriminator": "jobType",
       "required": [
-        "resourceId",
-        "operation",
         "status",
         "startTime",
         "endTime",
         "duration",
+        "resourceId",
+        "operation",
         "jobType",
         "triggeredBy"
       ]
@@ -7103,32 +7173,21 @@
       "type": "object",
       "description": "Definition of job-resource.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that this job is intended to perform.",
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/JobStatus",
-          "description": "The current status of the job.",
+          "description": "The current status of the job execution.",
           "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the job.",
+          "description": "The start time of the job execution.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the job.",
+          "description": "The end time of the job execution.",
           "readOnly": true
         },
         "duration": {
@@ -7140,6 +7199,17 @@
         "errorDetails": {
           "$ref": "#/definitions/JobErrorInfo",
           "description": "Details of any errors that occurred during the execution of this job."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that this job is intended to perform.",
+          "readOnly": true
         },
         "retryDetails": {
           "type": "array",
@@ -7175,12 +7245,12 @@
       },
       "discriminator": "jobResourceType",
       "required": [
-        "resourceId",
-        "operation",
         "status",
         "startTime",
         "endTime",
         "duration",
+        "resourceId",
+        "operation",
         "jobId",
         "taskId",
         "taskName",
@@ -7239,35 +7309,45 @@
       "type": "object",
       "description": "Job Retry Details.",
       "properties": {
-        "retryAttempt": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The retry attempt number of the job."
-        },
         "status": {
           "$ref": "#/definitions/JobStatus",
-          "description": "The status of the job at the specific retry."
+          "description": "The current status of the job execution.",
+          "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the job for the specific retry."
+          "description": "The start time of the job execution.",
+          "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the job for the specific retry."
+          "description": "The end time of the job execution.",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time elapsed during the execution of this job.",
+          "readOnly": true
         },
         "errorDetails": {
           "$ref": "#/definitions/JobErrorInfo",
-          "description": "Details of any errors that occurred during the execution of this job for the specific retry."
+          "description": "Details of any errors that occurred during the execution of this job."
+        },
+        "retryAttempt": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The retry attempt number of the job."
         }
       },
       "required": [
-        "retryAttempt",
         "status",
         "startTime",
-        "endTime"
+        "endTime",
+        "duration",
+        "retryAttempt"
       ]
     },
     "JobStatus": {
@@ -7334,6 +7414,33 @@
       "type": "object",
       "description": "Job task details.",
       "properties": {
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The current status of the job execution.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the job execution.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the job execution.",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time elapsed during the execution of this job.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/JobErrorInfo",
+          "description": "Details of any errors that occurred during the execution of this job."
+        },
         "taskId": {
           "type": "string",
           "description": "Identifier of the task.",
@@ -7342,12 +7449,6 @@
         "taskName": {
           "type": "string",
           "description": "Friendly name of the task.",
-          "readOnly": true
-        },
-        "duration": {
-          "type": "string",
-          "format": "duration",
-          "description": "Task duration.",
           "readOnly": true
         },
         "linkedJobIds": {
@@ -7360,12 +7461,34 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "userComments": {
+          "type": "array",
+          "description": "List of sub-tasks associated with this job.",
+          "items": {
+            "$ref": "#/definitions/JobUserComment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "subTasksList": {
+          "type": "array",
+          "description": "List of sub-tasks associated with this job.",
+          "items": {
+            "$ref": "#/definitions/JobTaskDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
+        "status",
+        "startTime",
+        "endTime",
+        "duration",
         "taskId",
         "taskName",
-        "duration"
+        "subTasksList"
       ]
     },
     "JobTriggeredBy": {
@@ -7439,6 +7562,26 @@
           }
         ]
       }
+    },
+    "JobUserComment": {
+      "type": "object",
+      "description": "Job User's Comment.",
+      "properties": {
+        "commentTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of user comment.",
+          "readOnly": true
+        },
+        "comments": {
+          "type": "string",
+          "description": "User Comment",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "commentTime"
+      ]
     },
     "LastRunProperties": {
       "type": "object",
@@ -8334,7 +8477,10 @@
           "description": "The RecoveryPlan items on this page",
           "items": {
             "$ref": "#/definitions/RecoveryPlan"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -8563,24 +8709,6 @@
           "description": "Original location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
           "readOnly": true
         },
-        "recoveryLocations": {
-          "type": "array",
-          "description": "List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "protectionStatus": {
-          "$ref": "#/definitions/ResourceProtectionStatus",
-          "description": "A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.",
-          "readOnly": true
-        },
-        "replicationRole": {
-          "$ref": "#/definitions/ResourceReplicationRole",
-          "description": "Specifies the role of the resource in the replication process.",
-          "readOnly": true
-        },
         "inclusionState": {
           "$ref": "#/definitions/ResourceInclusionState",
           "description": "A state that indicates the resource status with respect to the recovery orchestration plan."
@@ -8599,9 +8727,27 @@
           },
           "readOnly": true
         },
-        "protectionSolutionSetting": {
+        "protectionStatus": {
+          "$ref": "#/definitions/ResourceProtectionStatus",
+          "description": "A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.",
+          "readOnly": true
+        },
+        "resourceProtectionSolutions": {
+          "type": "array",
+          "description": "A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.",
+          "items": {
+            "$ref": "#/definitions/ResourceProtectionSolutionSettings"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "selectedProtectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the protection solution selected."
+        },
+        "selectedProtectionSolutionSetting": {
           "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting",
-          "description": "Resource protection solution settings associated with the recovery orchestration resource."
+          "description": "Resource protection solution settings of the protection solutions recovery orchestration resource is protected with."
         },
         "recoveryGroupId": {
           "type": "string",
@@ -8620,8 +8766,10 @@
       },
       "required": [
         "resourceId",
+        "needsAttention",
         "protectionStatus",
-        "needsAttention"
+        "resourceProtectionSolutions",
+        "selectedProtectionSolutionType"
       ]
     },
     "RecoveryResourceQualification": {
@@ -8866,6 +9014,84 @@
         }
       ],
       "x-ms-discriminator-value": "AzureNative"
+    },
+    "ResourceProtectionSolutionSettings": {
+      "type": "object",
+      "description": "Definition of recovery resource resource protection solution settings.",
+      "properties": {
+        "protectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the resource protected with which recovery solution."
+        },
+        "protectionStatus": {
+          "$ref": "#/definitions/ResourceProtectionStatus",
+          "description": "A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
+          "readOnly": true
+        },
+        "activeLocation": {
+          "type": "string",
+          "description": "Active location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
+          "readOnly": true
+        },
+        "recoveryLocations": {
+          "type": "array",
+          "description": "List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "replicationRole": {
+          "$ref": "#/definitions/ResourceReplicationRole",
+          "description": "Specifies the role of the resource in the replication process.",
+          "readOnly": true
+        },
+        "primaryResource": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Primary resource which is getting replicated.",
+          "readOnly": true
+        },
+        "replicaResources": {
+          "type": "array",
+          "description": "List of Replica resources to which replication is happening.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          },
+          "readOnly": true
+        },
+        "isAutoFailover": {
+          "type": "boolean",
+          "description": "Is AutoFailover configured for the resource replication.",
+          "default": false,
+          "readOnly": true
+        },
+        "failoverState": {
+          "$ref": "#/definitions/FailoverState",
+          "description": "Failover state of the recovery orchestration resource.",
+          "readOnly": true
+        },
+        "testFailoverState": {
+          "$ref": "#/definitions/TestFailoverState",
+          "description": "TestFailover state of the recovery orchestration resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "protectionSolutionType",
+        "protectionStatus",
+        "resourceId",
+        "activeLocation",
+        "isAutoFailover"
+      ]
     },
     "ResourceProtectionSolutionType": {
       "type": "string",
@@ -9237,6 +9463,30 @@
           "description": "Comments for test failover cleanup.",
           "maxLength": 1024
         }
+      }
+    },
+    "TestFailoverState": {
+      "type": "string",
+      "description": "A state specific to the resource that helps identify its TestFailover state.",
+      "enum": [
+        "None",
+        "TestFailoverCleanupPending"
+      ],
+      "x-ms-enum": {
+        "name": "TestFailoverState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The resource is Not in TestFailedOver state (No test failover cleanup pending)."
+          },
+          {
+            "name": "TestFailoverCleanupPending",
+            "value": "TestFailoverCleanupPending",
+            "description": "he resource is in test failover cleanup pending state."
+          }
+        ]
       }
     },
     "UpdateGoalResourceRequest": {
