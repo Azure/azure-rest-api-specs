@@ -666,6 +666,51 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations/{resourceAssociationName}": {
+      "get": {
+        "tags": [
+          "Namespaces NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_resourceAssociationName",
+        "description": "Return a NetworkSecurityPerimeterConfigurations resourceAssociationName",
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurationassociationProxyName": {
+            "$ref": "./examples/NameSpaces/NetworkSecurityPerimeterConfigurationAssociationproxy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceAssociationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Security Perimeter Configuration associationProxyName",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {

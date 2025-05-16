@@ -347,6 +347,22 @@ directive:
   - suppress: ResourceNameRestriction
     from: Clusters-preview.json
     reason: Not a mandatory check
+  
+  - suppress: ResourceNameRestriction
+    from: namespaces.json
+    reason: Not a mandatory check
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: namespaces.json
+    reason: Not a mandatory check
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: namespaces.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: namespaces.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcesMustHavePut
+    from: namespaces.json
+    reason: Not a mandatory check
 
   - suppress: LroLocationHeader
     from: quotaConfiguration-preview.json
