@@ -80,7 +80,7 @@ export class SpecModel {
   }
 
   /**
-   * Given a swagger file, return the swagger files that are affected by
+   * Given a swagger file, return the swagger files that are affected by the
    * changes in the given swagger file.
    * @param {string} swaggerPath
    * @returns {Promise<Map<string, Swagger>>} map of swagger paths to Swagger objects
