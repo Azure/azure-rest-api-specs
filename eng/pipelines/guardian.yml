@@ -15,11 +15,11 @@ extends:
   template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
   parameters:
     pool:
-      name: $(WINDOWSPOOL)
-      image: $(WINDOWSVMIMAGE)
-      os: windows
+      name: $(LINUXPOOL)
+      image: $(LINUXVMIMAGE)
     
     sdl:
+      enableAllTools: false
       credscan:
         enabled: true
         # This uses the Credscan Supression file from .config/CredScanSuppressions.json which is the default location for Credscan Suppression Files
