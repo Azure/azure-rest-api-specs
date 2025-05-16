@@ -81,6 +81,18 @@
       "name": "DrillRuns"
     },
     {
+      "name": "DrillRunChildJobs"
+    },
+    {
+      "name": "DrillRunResources"
+    },
+    {
+      "name": "ChaosJobs"
+    },
+    {
+      "name": "ChaosJobResources"
+    },
+    {
       "name": "UnifiedResiliencyItems"
     }
   ],
@@ -9694,6 +9706,30 @@
           "description": "Comments for test failover cleanup.",
           "maxLength": 1024
         }
+      }
+    },
+    "TestFailoverState": {
+      "type": "string",
+      "description": "A state specific to the resource that helps identify its TestFailover state.",
+      "enum": [
+        "None",
+        "TestFailoverCleanupPending"
+      ],
+      "x-ms-enum": {
+        "name": "TestFailoverState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The resource is Not in TestFailedOver state (No test failover cleanup pending)."
+          },
+          {
+            "name": "TestFailoverCleanupPending",
+            "value": "TestFailoverCleanupPending",
+            "description": "he resource is in test failover cleanup pending state."
+          }
+        ]
       }
     },
     "UnifiedResiliencyItem": {
