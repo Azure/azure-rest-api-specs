@@ -1394,3 +1394,5 @@ model AzureResourceManagerArmResponsePipeline {
 @@clientName(OperationStatusProperties, "operationStatusProperties");
 @@clientName(PendingFlow, "pendingFlow");
 @@clientName(PendingConnection, "pendingConnection");
+@@clientName(Subscriber, "subscriber");
+@@clientName(PipelineConnection, "pipelineConnection");

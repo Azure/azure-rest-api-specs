@@ -2880,49 +2880,6 @@
         "value"
       ]
     },
-    "PipelineConnection": {
-      "type": "object",
-      "description": "Connection body inside a pipeline",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Connection id inside pipeline"
-        },
-        "name": {
-          "type": "string",
-          "description": "Connection name inside pipeline",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Connection type inside pipeline",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Connection location inside pipeline",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Connection etag inside pipeline",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/PipelineConnectionProperties",
-          "description": "Connection properties inside pipeline"
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "additionalProperties": {}
-    },
     "PipelineConnectionProperties": {
       "type": "object",
       "description": "Connection properties inside pipeline",
@@ -2963,7 +2920,7 @@
           "type": "array",
           "description": "Connections associated with pipeline",
           "items": {
-            "$ref": "#/definitions/PipelineConnection"
+            "$ref": "#/definitions/pipelineConnection"
           },
           "x-ms-identifiers": [
             "id"
@@ -3000,21 +2957,6 @@
             "description": "The schema represents a ZIP file with multiple XML schema definition files within it."
           }
         ]
-      }
-    },
-    "Subscriber": {
-      "type": "object",
-      "description": "An individual that would like to subscribe to events that occur on a pipeline.",
-      "properties": {
-        "email": {
-          "type": "string",
-          "description": "Email of the subscriber"
-        },
-        "notifications": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number specifying what notifications to receive"
-        }
       }
     },
     "action": {
@@ -4219,6 +4161,49 @@
         }
       ]
     },
+    "pipelineConnection": {
+      "type": "object",
+      "description": "Connection body inside a pipeline",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Connection id inside pipeline"
+        },
+        "name": {
+          "type": "string",
+          "description": "Connection name inside pipeline",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Connection type inside pipeline",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Connection location inside pipeline",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Connection etag inside pipeline",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PipelineConnectionProperties",
+          "description": "Connection properties inside pipeline"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": {}
+    },
     "pipelineProperties": {
       "type": "object",
       "description": "Properties of pipeline",
@@ -4235,7 +4220,7 @@
           "type": "array",
           "description": "Connections associated with pipeline",
           "items": {
-            "$ref": "#/definitions/PipelineConnection"
+            "$ref": "#/definitions/pipelineConnection"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -4246,7 +4231,7 @@
           "type": "array",
           "description": "Subscribers of this resource",
           "items": {
-            "$ref": "#/definitions/Subscriber"
+            "$ref": "#/definitions/subscriber"
           },
           "x-ms-identifiers": []
         },
@@ -4623,6 +4608,21 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "subscriber": {
+      "type": "object",
+      "description": "An individual that would like to subscribe to events that occur on a pipeline.",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email of the subscriber"
+        },
+        "notifications": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number specifying what notifications to receive"
         }
       }
     },
