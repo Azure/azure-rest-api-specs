@@ -1,10 +1,11 @@
 import { join } from "path";
-
-import { getOpenapiType } from "./markdown-utils.js";
-import { getPathToDependency, isFailure } from "./util.js";
-import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
 import { execNpmExec, isExecError, ExecError } from "@azure-tools/specs-shared/exec";
 import { debugLogger } from "@azure-tools/specs-shared/logger";
+
+import { getPathToDependency, isFailure } from "./util.js";
+import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
+import { ReadmeAffectedTags } from "./lintdiff-types.js";
+import { getOpenapiType } from "./markdown-utils.js";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
@@ -14,7 +15,7 @@ const AUTOREST_ERROR_PREFIX = '{"level":';
 
 export async function runChecks(
   path: string,
-  runList: Map<string, string[]>,
+  runList: Map<string, ReadmeAffectedTags>,
 ): Promise<AutorestRunResult[]> {
   const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
   const result: AutorestRunResult[] = [];
@@ -22,8 +23,7 @@ export async function runChecks(
   for (const [readme, tags] of runList.entries()) {
     const changedFilePath = join(path, readme);
 
-    // TODO: Move this into getRunList
-    let openApiType = await getOpenapiType(changedFilePath);
+    let openApiType = await getOpenapiType(tags.readme);
 
     // From momentOfTruth.ts:executeAutoRestWithLintDiff
     // This is a quick workaround for https://github.com/Azure/azure-sdk-tools/issues/6549
@@ -33,7 +33,7 @@ export async function runChecks(
     let openApiSubType = openApiType;
 
     // If the tags array is empty run the loop once but with a null tag
-    const coalescedTags = tags?.length ? tags : [null];
+    const coalescedTags = tags.changedTags?.size ? [...tags.changedTags] : [null];
     for (const tag of coalescedTags) {
       console.log(`::group::Autorest for type: ${openApiType} readme: ${readme} tag: ${tag}`);
 
@@ -67,14 +67,14 @@ export async function runChecks(
         lintDiffResult = {
           autorestCommand,
           rootPath: path,
-          readme,
+          readme: tags.readme,
           tag: tag ? tag : "",
           openApiType,
           error: null,
           ...executionResult,
         } as AutorestRunResult;
       } catch (error) {
-        if (!isExecError(error)) { 
+        if (!isExecError(error)) {
           throw error;
         }
 
@@ -82,7 +82,7 @@ export async function runChecks(
         lintDiffResult = {
           autorestCommand,
           rootPath: path,
-          readme,
+          readme: tags.readme,
           tag: tag ? tag : "",
           openApiType,
           error: execError,
