@@ -454,15 +454,6 @@
       ],
       "type": "object",
       "properties": {
-        "customId": {
-          "description": "The custom Id if one has been associated with the identity.",
-          "type": "string"
-        },
-        "lastTokenIssuedAt": {
-          "format": "date-time",
-          "description": "Last time a token has been issued for the identity.",
-          "type": "string"
-        },
         "id": {
           "description": "Identifier of the identity.",
           "type": "string"
@@ -529,11 +520,6 @@
     "CommunicationIdentityCreateRequest": {
       "type": "object",
       "properties": {
-        "customId": {
-          "description": "Set to tag the identity with your own id, Maximum length is 256 characters.",
-          "type": "string",
-          "minLength": 1
-        },
         "createTokenWithScopes": {
           "description": "Also create access token for the created identity.",
           "type": "array",
