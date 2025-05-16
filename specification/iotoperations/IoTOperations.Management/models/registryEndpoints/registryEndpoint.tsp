@@ -45,7 +45,6 @@ model RegistryEndpointProperties {
   provisioningState?: ProvisioningState;
 
   /** Trust settings for the registry endpoint */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   trustSettings?: RegistryEndpointTrustedSettings;
 }
 
