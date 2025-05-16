@@ -772,7 +772,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -923,7 +923,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -2317,7 +2317,9 @@
           "items": {
             "$ref": "#/definitions/OperationEntity"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",

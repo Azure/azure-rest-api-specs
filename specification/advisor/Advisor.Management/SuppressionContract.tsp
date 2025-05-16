@@ -16,6 +16,7 @@ namespace Microsoft.Advisor;
  */
 @extensionResource
 @parentResource(ResourceRecommendationBase)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter"
 model SuppressionContract
   is Azure.ResourceManager.ExtensionResource<SuppressionProperties> {
   ...ResourceNameParameter<

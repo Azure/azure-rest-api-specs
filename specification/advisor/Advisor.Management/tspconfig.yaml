@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/advisor"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,50 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.Advisor"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-advisor"
+    namespace: "azure.mgmt.advisor"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-advisor"
+    namespace: "com.azure.resourcemanager.advisor"
+    service-name: "Advisor" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-advisor"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-advisor"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/advisor"
+    package-dir: "armadvisor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation": "backward-compatibility"
+    "@azure-tools/typespec-azure-core/casing-style": "backward-compatibility"
+    "@azure-tools/typespec-azure-core/documentation-required": "backward-compatibility"
+    "@azure-tools/typespec-azure-resource-manager/arm-no-record": "backward-compatibility"
+    "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers": "backward-compatibility"
+    "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property": "backward-compatibility"
+    "@azure-tools/typespec-azure-core/no-private-usage": "backward-compatibility"
+    "@azure-tools/typespec-azure-resource-manager/arm-resource-operation": "backward-compatibility"
+    "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator": "backward-compatibility"
+    "@azure-tools/typespec-azure-resource-manager/lro-location-header": "backward-compatibility"
