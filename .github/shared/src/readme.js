@@ -172,12 +172,12 @@ export class Readme {
             logger: this.#logger,
             specModel: this.#specModel,
           });
-          inputFiles.set(swaggerPathResolved, swagger);
+          inputFiles.set(swagger.path, swagger);
         }
 
         const tag = new Tag(tagName, inputFiles, { logger: this.#logger });
 
-        tags.set(tagName, tag);
+        tags.set(tag.name, tag);
       }
 
       this.#data = { globalConfig, tags };

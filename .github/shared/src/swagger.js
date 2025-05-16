@@ -51,13 +51,13 @@ export class Swagger {
         .filter((p) => resolve(p) !== resolve(this.#path));
 
       this.#refs = new Map(
-        refPaths.map((p) => [
-          p,
-          new Swagger(p, {
+        refPaths.map((p) => {
+          const swagger = new Swagger(p, {
             logger: this.#logger,
             specModel: this.#specModel,
-          }),
-        ]),
+          });
+          return [swagger.path, swagger];
+        }),
       );
     }
 
