@@ -99,10 +99,10 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: azuredatatransfer.json
-    where: $.definitions.PipelineConnectionProperties
+    where: $.definitions.PipelineConnectionProperties.additionalProperties
     reason:
-        This was inherited from a new model being created in typespec, the old OpenAPI v2 JSON spec had this mode
-        (just it was an inline model).
+        This was inherited from a new model being created in typespec, the old OpenAPI v2 JSON spec had this
+        property in the original model (just it was an inline model).
 ```
 
 ---
