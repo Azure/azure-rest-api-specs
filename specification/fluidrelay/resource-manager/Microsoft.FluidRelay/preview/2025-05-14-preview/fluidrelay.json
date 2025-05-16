@@ -859,53 +859,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{fluidRelayServerName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/updatePrivateEndpointProperties": {
-      "post": {
-        "description": "Updates the private endpoint of the private endpoint connection proxy.",
-        "operationId": "FluidRelayPrivateEndpoint_UpdatePrivateEndpointProperties",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/FluidRelayServerName"
-          },
-          {
-            "name": "privateEndpointConnectionProxyId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The ID of the private endpoint connection proxy.",
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointUpdateParameters"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": "Error in operation."
-          }
-        },
-        "x-ms-examples": {
-          "Update Private Endpoint in Private Endpoint Connection Proxy": {
-            "$ref": "./examples/FluidRelayPrivateEndpoint_PrivateEndpointConnectionProxy_UpdatePrivateEndpoint.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1493,38 +1446,6 @@
       "required": true,
       "description": "The Fluid Relay container resource name.",
       "x-ms-parameter-location": "method"
-    },
-    "PrivateEndpointUpdateParameters": {
-      "name": "privateEndpointUpdateParameters",
-      "in": "body",
-      "description": "The parameters to update the private endpoint of the private endpoint connection proxy.",
-      "required": true,
-      "schema": {
-        "description": "Parameters to update the remote private endpoint",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The remote private endpoint id.",
-            "type": "string"
-          },
-          "location": {
-            "description": "The remote private endpoint location.",
-            "type": "string"
-          },
-          "immutableSubscriptionId": {
-            "description": "The remote private endpoint immutable subscription id.",
-            "type": "string"
-          },
-          "immutableResourceId": {
-            "description": "The remote private endpoint immutable resource id.",
-            "type": "string"
-          },
-          "vnetTrafficTag": {
-            "description": "The remote private endpoint virtual network traffic tag.",
-            "type": "string"
-          }
-        }
-      }
     }
   }
 }
