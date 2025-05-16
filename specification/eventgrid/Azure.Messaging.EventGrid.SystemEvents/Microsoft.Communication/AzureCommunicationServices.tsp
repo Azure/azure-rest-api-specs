@@ -146,6 +146,9 @@ model AcsChatMessageDeletedInThreadEventData
 model AcsChatThreadCreatedWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   ...AcsChatThreadBaseEventData;
+
+  /** The chat thread retention policy */
+  retentionPolicy?: AcsChatThreadRetentionPolicyModel;
 }
 
 // @example(MicrosoftCommunicationChatThreadCreatedExample)
@@ -154,6 +157,9 @@ model AcsChatThreadCreatedWithUserEventData
 model AcsChatThreadCreatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadBaseEventData;
+
+  /** The chat thread retention policy */
+  retentionPolicy?: AcsChatThreadRetentionPolicyModel;
 }
 
 // @example(MicrosoftCommunicationChatThreadWithUserDeletedExample)
@@ -170,6 +176,9 @@ model AcsChatThreadWithUserDeletedEventData
 model AcsChatThreadDeletedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadDeletedBaseEventData;
+  
+  /** The chat thread retention policy reason. */
+  reason?: AcsChatThreadRetentionPolicyReason;
 }
 
 // @example(MicrosoftCommunicationChatThreadPropertiesUpdatedPerUserExample)
@@ -190,6 +199,9 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
   /** The updated thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
   properties: Record<unknown>;
+
+  /** The chat thread retention policy */
+  retentionPolicy?: AcsChatThreadRetentionPolicyModel;
 }
 
 // @example(AcsChatThreadPropertiesUpdatedExample)
@@ -198,6 +210,9 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
 model AcsChatThreadPropertiesUpdatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadPropertiesBaseEventData;
+
+  /** The chat thread retention policy */
+  retentionPolicy?: AcsChatThreadRetentionPolicyModel;
 }
 
 // @example(MicrosoftCommunicationChatParticipantAddedToThreadWithUserExample)
@@ -1284,6 +1299,26 @@ union AcsUserEngagement {
 }
 
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
+model AcsChatThreadRetentionPolicyModel {
+  /** The retenton policy kind. */
+  kind?: AcsChatThreadRetentionPolicyKind;
+
+  /** After how many days chat thread should be deleted. */
+  deleteThreadAfterDays?: int32;
+}
+
+/** Chat thread retention policy model identifier kind */
+union AcsChatThreadRetentionPolicyKind {
+  /** ThreadCreationDate */
+  "ThreadCreationDate",
+
+  /** None */
+  "None",
+
+  string,
+}
+
+/** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
 model CommunicationIdentifierModel {
   /** The identifier kind. Only required in responses. */
   kind?: CommunicationIdentifierModelKind;
@@ -1632,6 +1667,17 @@ union AcsCallParticipantRoleKind {
 
   /** Collaborator */
   "Collaborator",
+
+  string,
+}
+
+/** Chat thread retention policy reason. */
+union AcsChatThreadRetentionPolicyReason {
+  /** DeletedByUser */
+  "DeletedByUser",
+
+  /** DeletedByPolicy */
+  "DeletedByPolicy",
 
   string,
 }

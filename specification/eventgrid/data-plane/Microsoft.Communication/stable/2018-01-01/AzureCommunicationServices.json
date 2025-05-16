@@ -1212,6 +1212,10 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
+        },
+        "retentionPolicy": {
+          "description": "The chat thread retention policy",
+          "$ref": "#/definitions/AcsChatThreadRetentionPolicyModel"
         }
       },
       "required": [
@@ -1253,6 +1257,10 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
+        },
+        "retentionPolicy": {
+          "description": "The chat thread retention policy",
+          "$ref": "#/definitions/AcsChatThreadRetentionPolicyModel"
         }
       },
       "required": [
@@ -1301,6 +1309,28 @@
           "description": "The deletion time of the thread",
           "format": "date-time",
           "type": "string"
+        },
+        "reason": {
+          "description": "The chat thread retention policy reason.",
+          "type": "string",
+          "enum": [
+            "DeletedByUser",
+            "DeletedByPolicy"
+          ],
+          "x-ms-enum": {
+            "name": "AcsChatThreadRetentionPolicyReason",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "DeletedByUser",
+                "description": "Chat thread deleted by user."
+              },
+              {
+                "value": "DeletedByPolicy",
+                "description": "Chat thread deleted by policy."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -1338,6 +1368,10 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "retentionPolicy": {
+          "description": "The chat thread retention policy",
+          "$ref": "#/definitions/AcsChatThreadRetentionPolicyModel"
         }
       },
       "required": [
@@ -1376,6 +1410,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "retentionPolicy": {
+          "description": "The chat thread retention policy",
+          "$ref": "#/definitions/AcsChatThreadRetentionPolicyModel"
         }
       },
       "required": [
@@ -2176,6 +2214,39 @@
         "phrase": {
           "description": "Reason for ending the call.",
           "type": "string"
+        }
+      }
+    },
+    "AcsChatThreadRetentionPolicyModel": {
+      "description": "Schema of chat thread retention policy",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The retenton policy kind.",
+          "type": "string",
+          "enum": [
+            "ThreadCreationDate",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "AcsChatThreadRetentionPolicyKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ThreadCreationDate",
+                "description": "Retention policy kind as thread creation date."
+              },
+              {
+                "value": "None",
+                "description": "Retention policy kind as none."
+              }
+            ]
+          }
+        },
+        "deleteThreadAfterDays": {
+          "description": "After how many days chat thread should be deleted.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
