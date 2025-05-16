@@ -93,6 +93,18 @@ input-file:
   - Microsoft.AzureDataTransfer/preview/2023-10-11-preview/azuredatatransfer.json
 ```
 
+## Suppressions
+
+```yaml
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: azuredatatransfer.json
+    where: $.definitions.PipelineConnectionProperties
+    reason:
+        This was inherited from a new model being created in typespec, the old OpenAPI v2 JSON spec had this
+        property in the original model (just it was an inline model).
+```
+
 ---
 
 # Code Generation

@@ -1,21 +1,27 @@
 {
-  "operationId": "Connections_Link",
+  "operationId": "Pipelines_ApproveConnection",
   "parameters": {
     "api-version": "2025-04-11-preview",
     "connection": {
-      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection"
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
+      "statusReason": "Example reason"
     },
-    "connectionName": "testConnection",
+    "pipelineName": "testPipeline",
     "resourceGroupName": "testRG",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
-  "title": "Links the specified connection",
+  "title": "Approves the specified connection in a pipeline",
   "responses": {
     "200": {
       "body": {
-        "type": "Microsoft.AzureDataTransfer/connection",
+        "type": "Microsoft.AzureDataTransfer/connections",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
-        "location": "East US"
+        "location": "East US",
+        "properties": {
+          "justification": "justification",
+          "pipeline": "testdc",
+          "requirementId": "id"
+        }
       }
     },
     "202": {
