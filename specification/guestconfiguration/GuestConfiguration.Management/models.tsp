@@ -16,9 +16,7 @@ namespace Microsoft.GuestConfiguration;
  */
 @error
 model ErrorResponse {
-  /**
-   * The error details.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   error?: {
     /**
      * Error code.

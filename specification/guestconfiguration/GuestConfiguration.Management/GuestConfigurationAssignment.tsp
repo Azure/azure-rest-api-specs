@@ -23,6 +23,7 @@ model GuestConfigurationAssignment
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 interface GuestConfigurationAssignmentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -42,6 +43,7 @@ interface GuestConfigurationAssignmentOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 interface GuestConfigurationAssignmentOpsList
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -132,6 +134,7 @@ interface GuestConfigurationAssignments {
     }
   >;
 }
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
 interface GuestConfigurationHCRPAssignmentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -152,6 +155,7 @@ interface GuestConfigurationHCRPAssignmentOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
 interface GuestConfigurationHCRPAssignments {
   /**
@@ -229,6 +233,7 @@ interface GuestConfigurationHCRPAssignments {
     }
   >;
 }
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
 interface GuestConfigurationAssignmentsVMSSOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -249,6 +254,7 @@ interface GuestConfigurationAssignmentsVMSSOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
 interface GuestConfigurationAssignmentsVMSS {
   /**
@@ -326,6 +332,7 @@ interface GuestConfigurationAssignmentsVMSS {
     }
   >;
 }
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" "" s
 interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -346,6 +353,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
 interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**

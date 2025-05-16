@@ -16,6 +16,7 @@ interface GuestConfigurationAssignmentsOperationGroup {
   /**
    * List all guest configuration assignments for a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GuestConfigurationAssignments_RGList")
@@ -25,5 +26,5 @@ interface GuestConfigurationAssignmentsOperationGroup {
     ...ApiVersionParameter,
     ...ResourceGroupParameter,
     ...SubscriptionIdParameter,
-  ): ArmResponse<GuestConfigurationAssignmentList> | ErrorResponse;
+  ): ArmResponse<GuestConfigurationAssignmentList> | NoContentResponse | ErrorResponse;
 }
