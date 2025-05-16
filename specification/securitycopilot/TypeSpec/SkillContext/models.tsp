@@ -495,6 +495,325 @@ namespace SkillContext
 		finalResponseFallback?: string;
 	}
 
+	@doc("Request model for creating new memory")
+	model CreateMemoryRequest extends BaseMemoryRequest{
+		@doc("Content")
+		content: string;
+
+		@doc("Name")
+		name: string;
+
+		@doc("Category")
+		category: string;
+
+		@doc("AssociatedFeedbackContent")
+		associatedFeedbackContent: string;
+
+		@doc("AssociatedFeedbackProperties")
+		associatedFeedbackProperties: Record<string, string>;
+
+		@doc("Properties")
+		properties: Record<string, string>;
+
+		@doc("AssociatedFeedbackMetadata")
+		associatedFeedbackMetadata: FeedbackMetadata;
+
+		@doc("Tags")
+		tags: string[];
+
+		@doc("Metadata")
+		metadata: MemoryMetadataRequestOptions;
+
+		@doc("SummarizationOptions")
+		summarizationOptions: MemorySummarizationRequestOptions;
+
+		@doc("EmbeddingOptions")
+		embeddingOptions: MemoryEmbeddingRequestOptions;
+
+		@doc("Type")
+		type: MemoryType;
+
+		@doc("EmbeddingTarget")
+		embeddingTarget?: MemoryEmbeddingTarget;
+
+		@doc("ActivationMode")
+		activationMode?: MemoryActivationRequirementsMode;
+	}
+
+	@doc("UpdateMemoryRequest")
+	model UpdateMemoryRequest extends BaseMemoryRequest {
+		@doc("Content")
+		content: string;
+
+		@doc("SummarizedContent")
+		summarizedContent: string;
+
+		@doc("Category")
+		category: string;
+
+		@doc("Name")
+		name: string;
+
+		@doc("AssociatedFeedbackContent")
+		associatedFeedbackContent: string;
+
+		@doc("Properties")
+		properties: Record<string, string>;
+
+		@doc("AssociatedFeedbackProperties")
+		associatedFeedbackProperties: Record<string, string>;
+
+		@doc("AssociatedFeedbackMetadata")
+		associatedFeedbackMetadata: FeedbackMetadata;
+
+		@doc("Tags")
+		tags: string[];
+
+		@doc("State")
+		state?: MemoryState;
+	}
+
+	@doc("FeedbackMetadata")
+	model FeedbackMetadata {
+		@doc("FeedbackSessionId")
+		feedbackSessionId: string;
+
+		@doc("FeedbackPromptId")
+		feedbackPromptId: string;
+
+		@doc("FeedbackEvaluationId")
+		feedbackEvaluationId: string;
+
+		@doc("FeedbackTargetSessionId")
+		feedbackTargetSessionId: string;
+
+		@doc("FeedbackTargetPromptId")
+		feedbackTargetPromptId: string;
+
+		@doc("FeedbackTargetEvaluationId")
+		feedbackTargetEvaluationId: string;
+	}
+
+	@doc("MemoryState")
+	enum MemoryState {
+		@doc("Unknown")
+		Unknown: "Unknown";
+
+		@doc("Active")
+		Active: "Active";
+
+		@doc("Created")
+		Created: "Created";
+
+		@doc("Processing")
+		Processing: "Processing";
+
+		@doc("Disabled")
+		Disabled: "Disabled";
+
+		@doc("Deleted")
+		Deleted: "Deleted";
+
+		@doc("FailedSubProcessing")
+		FailedSubProcessing: "FailedSubProcessing";
+	}
+
+	@doc("BaseMemoryRequest")
+	model BaseMemoryRequest {
+		@doc("SubScopeId")
+		subScopeId: string;
+
+		@doc("Scope")
+		scope: MemoryScope;
+
+		@doc("SubScope")
+		subScope?: MemorySubScope;
+	}
+
+	@doc("MemoryScope")
+	enum MemoryScope {
+		@doc("Unknown")
+		Unknown: "Unknown";
+
+		@doc("Session")
+		Session: "Session";
+
+		@doc("User")
+		User: "User";
+
+		@doc("Workspace")
+		Workspace: "Workspace";
+	}
+
+	@doc("MemorySubScope")
+	enum MemorySubScope {
+		@doc("Unknown")
+		Unknown: "Unknown";
+
+		@doc("Skillset")
+		Skillset: "Skillset";
+
+		@doc("Skill")
+		Skill: "Skill";
+
+		@doc("Agent")
+		Agent: "Agent";
+	}
+
+	@doc("FeedbackMetadata")
+	model FeedbackMetadata {
+		@doc("FeedbackSessionId")
+		feedbackSessionId: string;
+
+		@doc("FeedbackPromptId")
+		feedbackPromptId: string;
+
+		@doc("FeedbackEvaluationId")
+		feedbackEvaluationId: string;
+
+		@doc("FeedbackTargetSessionId")
+		feedbackTargetSessionId: string;
+
+		@doc("FeedbackTargetPromptId")
+		feedbackTargetPromptId: string;
+
+		@doc("FeedbackTargetEvaluationId")
+		feedbackTargetEvaluationId: string;
+	}
+
+	@doc("MemoryMetadataRequestOptions")
+	model MemoryMetadataRequestOptions {
+		@doc("AdditionalInformation")
+		additionalInformation: Record<string, string>;
+
+		@doc("InternalInformation")
+		internalInformation: Record<string, string>;
+	}
+
+	@doc("MemorySummarizationRequestOptions")
+	model MemorySummarizationRequestOptions {
+		@doc("SummarizationEnabled")
+		summarizationEnabled: boolean;
+	}
+
+	@doc("MemoryType")
+	enum MemoryType {
+		@doc("Unknown")
+		Unknown: "Unknown";
+
+		@doc("Semantic")
+		Semantic: "Semantic";
+
+		@doc("Episodic")
+		Episodic: "Episodic";
+	}
+
+	@doc("MemoryEmbeddingTarget")
+	enum MemoryEmbeddingTarget {
+		@doc("Unknown")
+		Unknown: "Unknown";
+
+		@doc("Value")
+		Value: "Value";
+
+		@doc("SummarizedValue")
+		SummarizedValue: "SummarizedValue";
+	}
+
+	@doc("MemoryActivationRequirementsMode")
+	enum MemoryActivationRequirementsMode {
+		@doc("Unknown")
+		Unknown: "Unknown";
+
+		@doc("None")
+		None: "None";
+
+		@doc("AllOperations")
+		AllOperations: "AllOperations";
+
+		@doc("AnyOperation")
+		AnyOperation: "AnyOperation";
+
+		@doc("EmbeddingsRequired")
+		EmbeddingsRequired: "EmbeddingsRequired";
+
+		@doc("SummarizationRequired")
+		SummarizationRequired: "SummarizationRequired";
+	}
+
+	@doc("MemoryDtoResponse")
+	model MemoryDtoResponse {
+		id: string;
+		metadata: MemoryMetadataDto;
+		scope: MemoryScope;
+		scopeId: string;
+		subScope?: MemorySubScope;
+		subScopeId: string;
+		createdAt: utcDateTime;
+		updatedAt: utcDateTime;
+		lastUpdatedBy: string;
+		state: MemoryState;
+		content: string;
+		name: string;
+		category: string;
+		associatedFeedbackContent: string;
+		associatedFeedbackProperties: Record<string, string>;
+		properties: Record<string, string>;
+		associatedFeedbackMetadata: FeedbackMetadata;
+		activationMode: MemoryActivationRequirementsMode;
+		tags: string[];
+		additionalContent: AdditionalMemoryContent;
+		summarizationOptions: MemorySummarizationOptionsDto;
+		embeddingOptions: MemoryEmbeddingOptionsDto;
+		type: MemoryType;
+	}
+
+	model MemoryMetadataDto {
+		userId: string;
+		tenantId: string;
+		accountId: string;
+		workspaceId: string;
+		additionalInformation: Record<string, string>;
+	}
+
+	model AdditionalMemoryContent {
+		summarizedValue: string;
+		originalFeedbackValue: string;
+		originalFeedbackProperties: Record<string, string>;
+	}
+
+	model MemorySummarizationOptionsDto {
+		summarizationEnabled: boolean;
+		summarizationState: MemorySummarizationState;
+	}
+
+	model MemoryEmbeddingOptionsDto {
+		embeddingEnabled: boolean;
+		embeddingState: MemoryEmbeddingState;
+	}
+
+	enum MemorySummarizationState {
+		Unknown: "Unknown";
+		NotSummarized: "NotSummarized";
+		Processing: "Processing";
+		Summarized: "Summarized";
+		FailedToSummarize: "FailedToSummarize";
+	}
+
+	enum MemoryEmbeddingState {
+		Unknown: "Unknown";
+		NotEmbedded: "NotEmbedded";
+		Processing: "Processing";
+		Embedded: "Embedded";
+		FailedToEmbed: "FailedToEmbed";
+	}
+
+	enum MemoryType {
+		Unknown: "Unknown";
+		Semantic: "Semantic";
+		Episodic: "Episodic";
+	}
+
 	@doc("PromptBuilder")
 	model PromptBuilder {
 		@doc("SkillName")

@@ -159,6 +159,32 @@ op setFinalResponseSettings(
 ): NoContentResponse;
 
 @post
+@route("/skillContext/createMemoryAsync")
+@doc("Create a memory")
+op createMemory(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body createMemoryRequest : CreateMemoryRequest,
+): MemoryDtoResponse;
+
+@put
+@route("/skillContext/updateMemoryAsync")
+@doc("Update memory")
+op updateMemory(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body updateMemoryRequest : UpdateMemoryRequest,
+): MemoryDtoResponse;
+
+@get
+@route("/skillContext/getMemoryAsync")
+@doc("Get memory")
+op getMemory(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@query memoryId : string,
+@query subScopeId? : string,
+@query scope? : MemoryScope,
+): MemoryDtoResponse;
+
+@post
 @route("/medeinaOpenAI/createChatCompletion")
 @doc("Executes an Open AI Chat completion request")
 op createChatCompletion(
