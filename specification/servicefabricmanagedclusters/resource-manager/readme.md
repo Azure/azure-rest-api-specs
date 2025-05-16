@@ -417,17 +417,17 @@ suppressions:
   - code: ValidFormats
     reason: duration-constant is an expected format to the .NET SDK generator
     where:
-      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckWaitDuration
-      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckStableDuration
-      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckWaitDuration
-      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckStableDuration
-      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckRetryTimeout
-      - $.definitions.RollingUpgradeMonitoringPolicy.properties.upgradeTimeout
-      - $.definitions.RollingUpgradeMonitoringPolicy.properties.upgradeDomainTimeout
-      - $.definitions.StatefulServiceProperties.properties.replicaRestartWaitDuration
-      - $.definitions.StatefulServiceProperties.properties.quorumLossWaitDuration
-      - $.definitions.StatefulServiceProperties.properties.standByReplicaKeepDuration
-      - $.definitions.StatefulServiceProperties.properties.servicePlacementTimeLimit
+      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckWaitDuration.format
+      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckStableDuration.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckWaitDuration.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckStableDuration.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckRetryTimeout.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.upgradeTimeout.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.upgradeDomainTimeout.format
+      - $.definitions.StatefulServiceProperties.properties.replicaRestartWaitDuration.format
+      - $.definitions.StatefulServiceProperties.properties.quorumLossWaitDuration.format
+      - $.definitions.StatefulServiceProperties.properties.standByReplicaKeepDuration.format
+      - $.definitions.StatefulServiceProperties.properties.servicePlacementTimeLimit.format
 ```
 
 ---
