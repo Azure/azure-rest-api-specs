@@ -22,13 +22,14 @@ interface VirtualMachines {
     VirtualMachine,
     VirtualMachineRestrictMovement,
     ArmAcceptedLroResponse,
-    Foundations.BaseParameters<VirtualMachine>
+    Foundations.BaseParameters<VirtualMachine>,
+    BodyParameter = {
+      @doc("The content of the action request")
+      @bodyRoot
+      restrictMovement: VirtualMachineRestrictMovement;
+    }
   >;
 }
-
-@@clientName(VirtualMachines.restrictMovement::parameters.body,
-  "restrictMovement"
-);
 
 @doc("Virtual Machine Restrict Movement state")
 union VirtualMachineRestrictMovementState {

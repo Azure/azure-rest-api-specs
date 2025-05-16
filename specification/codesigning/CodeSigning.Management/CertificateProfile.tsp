@@ -44,13 +44,15 @@ interface CertificateProfiles {
   @doc("Revoke a certificate under a certificate profile.")
   revokeCertificate is ArmResourceActionNoContentSync<
     CertificateProfile,
-    RevokeCertificate
+    RevokeCertificate,
+    BodyParameter = {
+      @doc("Parameters to revoke the certificate profile")
+      @bodyRoot
+      body: RevokeCertificate;
+    }
   >;
 }
 
 @@doc(CertificateProfiles.create::parameters.resource,
   "Parameters to create the certificate profile"
-);
-@@doc(CertificateProfiles.revokeCertificate::parameters.body,
-  "Parameters to revoke the certificate profile"
 );

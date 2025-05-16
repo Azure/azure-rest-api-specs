@@ -77,7 +77,12 @@ interface Workspaces {
   regenerateKeys is ArmResourceActionSync<
     QuantumWorkspace,
     ApiKeys,
-    NoContentResponse
+    NoContentResponse,
+    BodyParameter = {
+      @doc("Which key to regenerate:  primary or secondary.")
+      @bodyRoot
+      body: ApiKeys;
+    }
   >;
 }
 
@@ -88,7 +93,4 @@ interface Workspaces {
 @@doc(Workspaces.createOrUpdate::parameters.resource, "Workspace details.");
 @@doc(Workspaces.updateTags::parameters.properties,
   "Parameters supplied to update tags."
-);
-@@doc(Workspaces.regenerateKeys::parameters.body,
-  "Which key to regenerate:  primary or secondary."
 );

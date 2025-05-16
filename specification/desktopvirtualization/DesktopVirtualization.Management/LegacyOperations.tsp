@@ -7,7 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Http;
 using Rest;
 
-namespace Azure.ResourceManager.Legacy {
+namespace Azure.ResourceManager.OldLegacy {
   interface LegacyOperations<
     ParentParameters extends {},
     ResourceTypeParameter extends {},

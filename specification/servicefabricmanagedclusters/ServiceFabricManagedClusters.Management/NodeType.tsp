@@ -83,7 +83,14 @@ interface NodeTypes {
     NodeType,
     NodeTypeActionParameters,
     never,
-    LroHeaders = ArmCombinedLroHeaders
+    LroHeaders = ArmCombinedLroHeaders,
+    BodyParameter = {
+      /**
+       * parameters for deallocate action.
+       */
+      @bodyRoot
+      parameters: NodeTypeActionParameters;
+    }
   >;
 
   /**
@@ -93,7 +100,14 @@ interface NodeTypes {
     NodeType,
     NodeTypeActionParameters,
     never,
-    LroHeaders = ArmCombinedLroHeaders
+    LroHeaders = ArmCombinedLroHeaders,
+    BodyParameter = {
+      /**
+       * parameters for delete action.
+       */
+      @bodyRoot
+      parameters: NodeTypeActionParameters;
+    }
   >;
 
   /**
@@ -103,7 +117,14 @@ interface NodeTypes {
     NodeType,
     NodeTypeActionParameters,
     never,
-    LroHeaders = ArmCombinedLroHeaders
+    LroHeaders = ArmCombinedLroHeaders,
+    BodyParameter = {
+      /**
+       * parameters for redeploy action.
+       */
+      @bodyRoot
+      parameters: NodeTypeActionParameters;
+    }
   >;
 
   /**
@@ -113,7 +134,14 @@ interface NodeTypes {
     NodeType,
     NodeTypeActionParameters,
     never,
-    LroHeaders = ArmCombinedLroHeaders
+    LroHeaders = ArmCombinedLroHeaders,
+    BodyParameter = {
+      /**
+       * parameters for reimage action.
+       */
+      @bodyRoot
+      parameters: NodeTypeActionParameters;
+    }
   >;
 
   /**
@@ -123,7 +151,14 @@ interface NodeTypes {
     NodeType,
     NodeTypeActionParameters,
     never,
-    LroHeaders = ArmCombinedLroHeaders
+    LroHeaders = ArmCombinedLroHeaders,
+    BodyParameter = {
+      /**
+       * parameters for restart action.
+       */
+      @bodyRoot
+      parameters: NodeTypeActionParameters;
+    }
   >;
 
   /**
@@ -133,7 +168,14 @@ interface NodeTypes {
     NodeType,
     NodeTypeActionParameters,
     never,
-    LroHeaders = ArmCombinedLroHeaders
+    LroHeaders = ArmCombinedLroHeaders,
+    BodyParameter = {
+      /**
+       * parameters for start action.
+       */
+      @bodyRoot
+      parameters: NodeTypeActionParameters;
+    }
   >;
 
   /**
@@ -145,7 +187,14 @@ interface NodeTypes {
     FaultSimulationContentWrapper,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
-      ArmAsyncOperationHeader
+      ArmAsyncOperationHeader,
+    BodyParameter = {
+      /**
+       * parameters describing the fault simulation.
+       */
+      @bodyRoot
+      parameters: FaultSimulationContentWrapper;
+    }
   >;
 
   /**
@@ -157,7 +206,14 @@ interface NodeTypes {
     FaultSimulationIdContent,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
-      ArmAsyncOperationHeader
+      ArmAsyncOperationHeader,
+    BodyParameter = {
+      /**
+       * parameter with fault simulation id.
+       */
+      @bodyRoot
+      parameters: FaultSimulationIdContent;
+    }
   >;
 
   /**
@@ -167,7 +223,14 @@ interface NodeTypes {
   getFaultSimulation is ArmResourceActionSync<
     NodeType,
     FaultSimulationIdContent,
-    ArmResponse<FaultSimulation>
+    ArmResponse<FaultSimulation>,
+    BodyParameter = {
+      /**
+       * parameter with fault simulation id.
+       */
+      @bodyRoot
+      parameters: FaultSimulationIdContent;
+    }
   >;
 
   /**
@@ -202,23 +265,6 @@ interface NodeTypeSkus {
 @@doc(NodeTypes.createOrUpdate::parameters.resource, "The node type resource.");
 @@doc(NodeTypes.update::parameters.properties,
   "The parameters to update the node type configuration."
-);
-@@doc(NodeTypes.deallocate::parameters.body,
-  "parameters for deallocate action."
-);
-@@doc(NodeTypes.deleteNode::parameters.body, "parameters for delete action.");
-@@doc(NodeTypes.getFaultSimulation::parameters.body,
-  "parameter with fault simulation id."
-);
-@@doc(NodeTypes.redeploy::parameters.body, "parameters for redeploy action.");
-@@doc(NodeTypes.reimage::parameters.body, "parameters for reimage action.");
-@@doc(NodeTypes.restart::parameters.body, "parameters for restart action.");
-@@doc(NodeTypes.start::parameters.body, "parameters for start action.");
-@@doc(NodeTypes.startFaultSimulation::parameters.body,
-  "parameters describing the fault simulation."
-);
-@@doc(NodeTypes.stopFaultSimulation::parameters.body,
-  "parameter with fault simulation id."
 );
 
 /**

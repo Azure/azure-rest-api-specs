@@ -96,6 +96,11 @@ interface Catalogs {
       ...CustomTopQueryParameter;
       ...CustomSkipQueryParameter;
       ...CustomMaxPageSizeQueryParameter;
+    },
+    BodyParameter = {
+      @doc("List device groups for catalog.")
+      @bodyRoot
+      listDeviceGroupsRequest: ListDeviceGroupsRequest;
     }
   >;
 
@@ -134,14 +139,13 @@ interface Catalogs {
   /**
    * Creates an image. Use this action when the image ID is unknown.
    */
-  uploadImage is ArmResourceActionNoResponseContentAsync<Catalog, Image>;
+  uploadImage is ArmResourceActionNoResponseContentAsync<
+    Catalog,
+    Image,
+    BodyParameter = {
+      @doc("Image upload request body.")
+      @bodyRoot
+      uploadImageRequest: Image;
+    }
+  >;
 }
-
-@@doc(Catalogs.listDeviceGroups::parameters.body,
-  "List device groups for catalog."
-);
-@@clientName(Catalogs.listDeviceGroups::parameters.body,
-  "listDeviceGroupsRequest"
-);
-@@doc(Catalogs.uploadImage::parameters.body, "Image upload request body.");
-@@clientName(Catalogs.uploadImage::parameters.body, "uploadImageRequest");

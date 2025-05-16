@@ -85,7 +85,12 @@ interface FleetDatabases {
    */
   changeTier is ArmResourceActionNoResponseContentAsync<
     FleetDatabase,
-    DatabaseChangeTierDefinition
+    DatabaseChangeTierDefinition,
+    BodyParameter = {
+      @doc("The details of the change tier operation.")
+      @bodyRoot
+      body: DatabaseChangeTierDefinition;
+    }
   >;
 
   /**
@@ -93,7 +98,12 @@ interface FleetDatabases {
    */
   rename is ArmResourceActionNoResponseContentAsync<
     FleetDatabase,
-    DatabaseRenameDefinition
+    DatabaseRenameDefinition,
+    BodyParameter = {
+      @doc("The details of the rename operation.")
+      @bodyRoot
+      body: DatabaseRenameDefinition;
+    }
   >;
 
   /**
@@ -109,10 +119,4 @@ interface FleetDatabases {
 );
 @@doc(FleetDatabases.update::parameters.properties,
   "The database object to patch."
-);
-@@doc(FleetDatabases.changeTier::parameters.body,
-  "The details of the change tier operation."
-);
-@@doc(FleetDatabases.rename::parameters.body,
-  "The details of the rename operation."
 );

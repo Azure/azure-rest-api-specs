@@ -59,13 +59,11 @@ interface Certificates {
   retrieveProofOfPossessionNonce is ArmResourceActionSync<
     Certificate,
     ProofOfPossessionNonceRequest,
-    ProofOfPossessionNonceResponse
+    ProofOfPossessionNonceResponse,
+    BodyParameter = {
+      @doc("Proof of possession nonce request body ")
+      @bodyRoot
+      proofOfPossessionNonceRequest: ProofOfPossessionNonceRequest;
+    }
   >;
 }
-
-@@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
-  "Proof of possession nonce request body "
-);
-@@clientName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
-  "proofOfPossessionNonceRequest"
-);

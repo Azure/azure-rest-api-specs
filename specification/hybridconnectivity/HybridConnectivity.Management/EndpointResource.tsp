@@ -180,7 +180,13 @@ interface EndpointResources {
     EndpointResource,
     ManagedProxyRequest,
     ManagedProxyResource,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BodyParameter = {
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy"
+      @doc("Object of type ManagedProxyRequest")
+      @bodyRoot
+      ManagedProxyRequest: ManagedProxyRequest;
+    }
   >;
 }
 
@@ -190,9 +196,6 @@ interface EndpointResources {
   "Endpoint details"
 );
 @@doc(EndpointResources.update::parameters.properties, "Endpoint details");
-@@doc(EndpointResources.listManagedProxyDetails::parameters.body,
-  "Object of type ManagedProxyRequest"
-);
 @@doc(EndpointResources.listIngressGatewayCredentials,
   "Gets the ingress gateway endpoint credentials "
 );

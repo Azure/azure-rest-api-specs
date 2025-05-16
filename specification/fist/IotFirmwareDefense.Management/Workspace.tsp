@@ -70,7 +70,12 @@ interface Workspaces {
   generateUploadUrl is ArmResourceActionSync<
     Workspace,
     GenerateUploadUrlRequest,
-    UrlToken
+    UrlToken,
+    BodyParameter = {
+      @doc("Parameters when requesting a URL to upload firmware.")
+      @bodyRoot
+      body: GenerateUploadUrlRequest;
+    }
   >;
 }
 
@@ -79,7 +84,4 @@ interface Workspaces {
 );
 @@doc(Workspaces.update::parameters.properties,
   "Parameters when updating a firmware analysis workspace."
-);
-@@doc(Workspaces.generateUploadUrl::parameters.body,
-  "Parameters when requesting a URL to upload firmware."
 );
