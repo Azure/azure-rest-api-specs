@@ -510,10 +510,10 @@ namespace SkillContext
 		associatedFeedbackContent: string;
 
 		@doc("AssociatedFeedbackProperties")
-		associatedFeedbackProperties: Record<string, string>;
+		associatedFeedbackProperties: Record<string>;
 
 		@doc("Properties")
-		properties: Record<string, string>;
+		properties: Record<string>;
 
 		@doc("AssociatedFeedbackMetadata")
 		associatedFeedbackMetadata: FeedbackMetadata;
@@ -558,10 +558,10 @@ namespace SkillContext
 		associatedFeedbackContent: string;
 
 		@doc("Properties")
-		properties: Record<string, string>;
+		properties: Record<string>;
 
 		@doc("AssociatedFeedbackProperties")
-		associatedFeedbackProperties: Record<string, string>;
+		associatedFeedbackProperties: Record<string>;
 
 		@doc("AssociatedFeedbackMetadata")
 		associatedFeedbackMetadata: FeedbackMetadata;
@@ -573,49 +573,28 @@ namespace SkillContext
 		state?: MemoryState;
 	}
 
-	@doc("FeedbackMetadata")
-	model FeedbackMetadata {
-		@doc("FeedbackSessionId")
-		feedbackSessionId: string;
-
-		@doc("FeedbackPromptId")
-		feedbackPromptId: string;
-
-		@doc("FeedbackEvaluationId")
-		feedbackEvaluationId: string;
-
-		@doc("FeedbackTargetSessionId")
-		feedbackTargetSessionId: string;
-
-		@doc("FeedbackTargetPromptId")
-		feedbackTargetPromptId: string;
-
-		@doc("FeedbackTargetEvaluationId")
-		feedbackTargetEvaluationId: string;
-	}
-
 	@doc("MemoryState")
 	enum MemoryState {
 		@doc("Unknown")
-		Unknown: "Unknown";
+		Unknown: "Unknown",
 
 		@doc("Active")
-		Active: "Active";
+		Active: "Active",
 
 		@doc("Created")
-		Created: "Created";
+		Created: "Created",
 
 		@doc("Processing")
-		Processing: "Processing";
+		Processing: "Processing",
 
 		@doc("Disabled")
-		Disabled: "Disabled";
+		Disabled: "Disabled",
 
 		@doc("Deleted")
-		Deleted: "Deleted";
+		Deleted: "Deleted",
 
 		@doc("FailedSubProcessing")
-		FailedSubProcessing: "FailedSubProcessing";
+		FailedSubProcessing: "FailedSubProcessing",
 	}
 
 	@doc("BaseMemoryRequest")
@@ -633,31 +612,31 @@ namespace SkillContext
 	@doc("MemoryScope")
 	enum MemoryScope {
 		@doc("Unknown")
-		Unknown: "Unknown";
+		Unknown: "Unknown",
 
 		@doc("Session")
-		Session: "Session";
+		Session: "Session",
 
 		@doc("User")
-		User: "User";
+		User: "User",
 
 		@doc("Workspace")
-		Workspace: "Workspace";
+		Workspace: "Workspace",
 	}
 
 	@doc("MemorySubScope")
 	enum MemorySubScope {
 		@doc("Unknown")
-		Unknown: "Unknown";
+		Unknown: "Unknown",
 
 		@doc("Skillset")
-		Skillset: "Skillset";
+		Skillset: "Skillset",
 
 		@doc("Skill")
-		Skill: "Skill";
+		Skill: "Skill",
 
 		@doc("Agent")
-		Agent: "Agent";
+		Agent: "Agent",
 	}
 
 	@doc("FeedbackMetadata")
@@ -684,10 +663,10 @@ namespace SkillContext
 	@doc("MemoryMetadataRequestOptions")
 	model MemoryMetadataRequestOptions {
 		@doc("AdditionalInformation")
-		additionalInformation: Record<string, string>;
+		additionalInformation: Record<string>;
 
 		@doc("InternalInformation")
-		internalInformation: Record<string, string>;
+		internalInformation: Record<string>;
 	}
 
 	@doc("MemorySummarizationRequestOptions")
@@ -696,49 +675,37 @@ namespace SkillContext
 		summarizationEnabled: boolean;
 	}
 
-	@doc("MemoryType")
-	enum MemoryType {
-		@doc("Unknown")
-		Unknown: "Unknown";
-
-		@doc("Semantic")
-		Semantic: "Semantic";
-
-		@doc("Episodic")
-		Episodic: "Episodic";
-	}
-
 	@doc("MemoryEmbeddingTarget")
 	enum MemoryEmbeddingTarget {
 		@doc("Unknown")
-		Unknown: "Unknown";
+		Unknown: "Unknown",
 
 		@doc("Value")
-		Value: "Value";
+		Value: "Value",
 
 		@doc("SummarizedValue")
-		SummarizedValue: "SummarizedValue";
+		SummarizedValue: "SummarizedValue",
 	}
 
 	@doc("MemoryActivationRequirementsMode")
 	enum MemoryActivationRequirementsMode {
 		@doc("Unknown")
-		Unknown: "Unknown";
+		Unknown: "Unknown",
 
 		@doc("None")
-		None: "None";
+		None: "None",
 
 		@doc("AllOperations")
-		AllOperations: "AllOperations";
+		AllOperations: "AllOperations",
 
 		@doc("AnyOperation")
-		AnyOperation: "AnyOperation";
+		AnyOperation: "AnyOperation",
 
 		@doc("EmbeddingsRequired")
-		EmbeddingsRequired: "EmbeddingsRequired";
+		EmbeddingsRequired: "EmbeddingsRequired",
 
 		@doc("SummarizationRequired")
-		SummarizationRequired: "SummarizationRequired";
+		SummarizationRequired: "SummarizationRequired",
 	}
 
 	@doc("MemoryDtoResponse")
@@ -757,8 +724,8 @@ namespace SkillContext
 		name: string;
 		category: string;
 		associatedFeedbackContent: string;
-		associatedFeedbackProperties: Record<string, string>;
-		properties: Record<string, string>;
+		associatedFeedbackProperties: Record<string>;
+		properties: Record<string>;
 		associatedFeedbackMetadata: FeedbackMetadata;
 		activationMode: MemoryActivationRequirementsMode;
 		tags: string[];
@@ -773,13 +740,13 @@ namespace SkillContext
 		tenantId: string;
 		accountId: string;
 		workspaceId: string;
-		additionalInformation: Record<string, string>;
+		additionalInformation: Record<string>;
 	}
 
 	model AdditionalMemoryContent {
 		summarizedValue: string;
 		originalFeedbackValue: string;
-		originalFeedbackProperties: Record<string, string>;
+		originalFeedbackProperties: Record<string>;
 	}
 
 	model MemorySummarizationOptionsDto {
@@ -793,25 +760,25 @@ namespace SkillContext
 	}
 
 	enum MemorySummarizationState {
-		Unknown: "Unknown";
-		NotSummarized: "NotSummarized";
-		Processing: "Processing";
-		Summarized: "Summarized";
-		FailedToSummarize: "FailedToSummarize";
+		Unknown: "Unknown",
+		NotSummarized: "NotSummarized",
+		Processing: "Processing",
+		Summarized: "Summarized",
+		FailedToSummarize: "FailedToSummarize",
 	}
 
 	enum MemoryEmbeddingState {
-		Unknown: "Unknown";
-		NotEmbedded: "NotEmbedded";
-		Processing: "Processing";
-		Embedded: "Embedded";
-		FailedToEmbed: "FailedToEmbed";
+		Unknown: "Unknown",
+		NotEmbedded: "NotEmbedded",
+		Processing: "Processing",
+		Embedded: "Embedded",
+		FailedToEmbed: "FailedToEmbed",
 	}
 
 	enum MemoryType {
-		Unknown: "Unknown";
-		Semantic: "Semantic";
-		Episodic: "Episodic";
+		Unknown: "Unknown",
+		Semantic: "Semantic",
+		Episodic: "Episodic",
 	}
 
 	@doc("PromptBuilder")
