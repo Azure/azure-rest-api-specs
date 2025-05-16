@@ -126,6 +126,14 @@ suppressions:
     reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
 ```
 
+### Tag: package-preview-2025-02
+These settings apply only when `--tag=package-preview-2025-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-02'
+input-file:
+  - Microsoft.Security/preview/2025-02-01-preview/defenderForStorageSettings.json
+```
+
 ### Tag: package-2025-01
 
 These settings apply only when `--tag=package-2025-01` is specified on the command line.
@@ -579,6 +587,7 @@ input-file:
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2024-10-01-preview/operations.json
+- Microsoft.Security/preview/2025-02-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
@@ -603,7 +612,6 @@ input-file:
 - Microsoft.Security/stable/2024-08-01/securityStandards.json
 - Microsoft.Security/stable/2024-08-01/standardAssignments.json
 - Microsoft.Security/stable/2024-08-01/customRecommedations.json
-- Microsoft.Security/stable/2025-01-01/defenderForStorageSettings.json
 - Microsoft.Security/stable/2025-03-01/securityConnectorsDevOps.json
 
 # Autorest suppressions
