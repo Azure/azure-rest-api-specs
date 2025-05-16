@@ -17,17 +17,6 @@ To see additional help and options, run:
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
 ---
-## Suppression
-
-### AutoRest v3 Suppressions
-
-```yaml
-suppressions:
-  - code: AvoidAdditionalProperties
-    from: swagger-document
-    where: $.definitions.PipelineConnectionProperties
-    reason: This was inherited from a new model being created in typespec, the old OpenAPI v2 JSON spec had this model (just it was an inline model).
-```
 
 ## Configuration
 
@@ -102,6 +91,18 @@ These settings apply only when `--tag=package-2023-10-11-preview` is specified o
 ``` yaml $(tag) == 'package-2023-10-11-preview'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2023-10-11-preview/azuredatatransfer.json
+```
+
+## Suppressions
+
+```yaml
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: azuredatatransfer.json
+    where: $.definitions.PipelineConnectionProperties
+    reason:
+        This was inherited from a new model being created in typespec, the old OpenAPI v2 JSON spec had this mode
+        (just it was an inline model).
 ```
 
 ---
