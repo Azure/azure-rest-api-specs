@@ -17,6 +17,17 @@ To see additional help and options, run:
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
 ---
+## Suppression
+
+### AutoRest v3 Suppressions
+
+```yaml
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: swagger-document
+    where: $.definitions.PipelineConnectionProperties
+    reason: This was inherited from a new model being created in typespec, the old OpenAPI v2 JSON spec had this model (just it was an inline model).
+```
 
 ## Configuration
 
@@ -132,3 +143,4 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
