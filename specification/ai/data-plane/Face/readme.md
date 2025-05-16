@@ -73,3 +73,14 @@ suppressions:
     from: Face.json
     reason: Use anonymous parameter to provide interface with flatten parameters
 ```
+
+### Release v1.3-preview.1
+These settings apply only when `--tag=v1.3-preview.1` is specified on the command line.
+``` yaml $(tag) == 'v1.3-preview.1'
+input-file:
+  - preview/v1.3-preview.1/Face.json
+suppressions:
+  - code: AvoidAnonymousParameter
+    from: Face.json
+    reason: Use anonymous parameter to provide interface with flatten parameters
+```
