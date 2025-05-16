@@ -79,6 +79,9 @@
     },
     {
       "name": "DrillRuns"
+    },
+    {
+      "name": "UnifiedResiliencyItems"
     }
   ],
   "paths": {
@@ -4055,6 +4058,95 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResiliencyItems": {
+      "get": {
+        "operationId": "UnifiedResiliencyItems_List",
+        "tags": [
+          "UnifiedResiliencyItems"
+        ],
+        "description": "List UnifiedResiliencyItem resources by tenant",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.skipToken"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.top"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnifiedResiliencyItemListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnifiedResiliencyItems_List_MaximumSet": {
+            "$ref": "./examples/UnifiedResiliencyItems_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResiliencyItems/{unifiedResiliencyItemName}": {
+      "get": {
+        "operationId": "UnifiedResiliencyItems_Get",
+        "tags": [
+          "UnifiedResiliencyItems"
+        ],
+        "description": "Get a UnifiedResiliencyItem",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "unifiedResiliencyItemName",
+            "in": "path",
+            "description": "The name of the unified resiliency item.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnifiedResiliencyItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnifiedResiliencyItems_Get_MaximumSet": {
+            "$ref": "./examples/UnifiedResiliencyItems_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/addNotes": {
       "post": {
         "operationId": "DrillRuns_AddNotes",
@@ -6110,6 +6202,52 @@
         ]
       }
     },
+    "GoalsData": {
+      "type": "object",
+      "description": "Definition of goals data in unified resiliency item.",
+      "properties": {
+        "goalTemplateId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arm id of the goal template."
+        },
+        "goalAssignmentId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arm id of the goal assignment."
+        },
+        "regionalRpoInMinutes": {
+          "$ref": "#/definitions/IsoDuration",
+          "description": "Regional RPO set in resiliency goal in minutes."
+        },
+        "regionalRpaInMinutes": {
+          "$ref": "#/definitions/IsoDuration",
+          "description": "Computed RPA for the service group in minutes."
+        },
+        "regionalRpoStatus": {
+          "$ref": "#/definitions/ResiliencyHealthStatus",
+          "description": "Regional RPO status of the service group."
+        },
+        "regionalRtoInMinutes": {
+          "$ref": "#/definitions/IsoDuration",
+          "description": "Regional RTO set in resiliency goal in minutes."
+        },
+        "regionalRtaInMinutes": {
+          "$ref": "#/definitions/IsoDuration",
+          "description": "Computed RTA for the service group in minutes."
+        },
+        "regionalRtoStatus": {
+          "$ref": "#/definitions/ResiliencyHealthStatus",
+          "description": "Regional RPO status of the service group."
+        }
+      },
+      "required": [
+        "goalTemplateId",
+        "goalAssignmentId",
+        "regionalRpoStatus",
+        "regionalRtoStatus"
+      ]
+    },
     "HAStatus": {
       "type": "string",
       "description": "HA Status",
@@ -6176,6 +6314,42 @@
             "name": "Complete",
             "value": "Complete",
             "description": "Initial config complete."
+          }
+        ]
+      }
+    },
+    "IsoDuration": {
+      "type": "string",
+      "description": "ISO 8601 duration formats.",
+      "enum": [
+        "PT15M",
+        "PT1H",
+        "PT4H",
+        "PT24H"
+      ],
+      "x-ms-enum": {
+        "name": "IsoDuration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PT15M",
+            "value": "PT15M",
+            "description": "15 minutes."
+          },
+          {
+            "name": "PT1H",
+            "value": "PT1H",
+            "description": "1 hour."
+          },
+          {
+            "name": "PT4H",
+            "value": "PT4H",
+            "description": "4 hours."
+          },
+          {
+            "name": "PT24H",
+            "value": "PT24H",
+            "description": "24 hours."
           }
         ]
       }
@@ -7011,6 +7185,45 @@
             "description": "Drill is not ready to run. Details captured in AttentionReason field."
           }
         ]
+      }
+    },
+    "RecommendationsData": {
+      "type": "object",
+      "description": "Definition of recommendations data in unified resiliency item.",
+      "properties": {
+        "highAvailability": {
+          "$ref": "#/definitions/RecommendationsHighAvailabilityData",
+          "description": "The high availability section of resiliency recommendation."
+        }
+      },
+      "required": [
+        "highAvailability"
+      ]
+    },
+    "RecommendationsHighAvailabilityData": {
+      "type": "object",
+      "description": "Definition of recommendation data related to high availability in unified resiliency item.",
+      "properties": {
+        "includedResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Included resources count for high availability recommendations."
+        },
+        "notIncludedResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Excluded resources count for high availability recommendations."
+        },
+        "notEvaluatedResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Not evaluated resources count for high availability recommendations."
+        },
+        "evaluationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last evaluation date time of high availability recommendation."
+        }
       }
     },
     "RecoveryChildJob": {
@@ -7924,6 +8137,36 @@
         ]
       }
     },
+    "ResiliencyHealthStatus": {
+      "type": "string",
+      "description": "enum for Resiliency health status.",
+      "enum": [
+        "NotEvaluated",
+        "Unhealthy",
+        "Healthy"
+      ],
+      "x-ms-enum": {
+        "name": "ResiliencyHealthStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotEvaluated",
+            "value": "NotEvaluated",
+            "description": "Resource is not evaluated."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Resource is Unhealthy."
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Resource is Healthy."
+          }
+        ]
+      }
+    },
     "ResourceBaseProtectionSolutionSetting": {
       "type": "object",
       "description": "Definition of recovery orchestration resource protection solution setting with recovery orchestration plan.",
@@ -8421,6 +8664,65 @@
           "maxLength": 1024
         }
       }
+    },
+    "UnifiedResiliencyItem": {
+      "type": "object",
+      "description": "A unified resiliency item represents a computed and aggregated resilience information of Azure Applications.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UnifiedResiliencyItemProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UnifiedResiliencyItemListResult": {
+      "type": "object",
+      "description": "The response of a UnifiedResiliencyItem list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UnifiedResiliencyItem items on this page",
+          "items": {
+            "$ref": "#/definitions/UnifiedResiliencyItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UnifiedResiliencyItemProperties": {
+      "type": "object",
+      "description": "Definition of unified resiliency item property.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "goals": {
+          "$ref": "#/definitions/GoalsData",
+          "description": "Computed and copied data of resiliency goals."
+        },
+        "recommendations": {
+          "$ref": "#/definitions/RecommendationsData",
+          "description": "Computed and copied data of Azure recommendations."
+        }
+      },
+      "required": [
+        "goals",
+        "recommendations"
+      ]
     },
     "UpdateGoalResourceRequest": {
       "type": "object",
