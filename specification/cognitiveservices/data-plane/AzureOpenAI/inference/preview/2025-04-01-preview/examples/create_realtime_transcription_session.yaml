@@ -1,0 +1,23 @@
+title: Create an ephemeral token for a Realtime API transcription session.
+parameters:
+  endpoint: "{endpoint}"
+  api-version: 2025-04-01-preview
+responses:
+  "200":
+    body:
+      id: sess_001
+      object: realtime.transcription_session
+      modalities:
+        - audio
+        - text
+      turn_detection:
+        type: server_vad
+        threshold: 0.5
+        prefix_padding_ms: 300
+        silence_duration_ms: 200
+      input_audio_format: pcm16
+      input_audio_transcription:
+        model: gpt-4o-transcribe
+        language: null
+        prompt: ""
+      client_secret: null
