@@ -154,7 +154,6 @@ model BrokerRetainMessagesCustomPolicy extends BrokerRetainMessagesPolicy {
 @added(Versions.`2025-07-01-preview`)
 model BrokerRetainMessagesSettings {
   @doc("List of topics under which retained messages would be persisted to disk. Wildcards # and + supported.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   topics?: string[];
 
   @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property. Works in addition to other groups (logical OR).")
@@ -197,7 +196,7 @@ model BrokerStateStoreCustomPolicy extends BrokerStateStorePolicy {
 @added(Versions.`2025-07-01-preview`)
 model BrokerStateStorePolicySettings {
   @doc("List of key and key type to persist to disk.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   stateStoreResources?: BrokerStateStorePolicyResources[];
 
   @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property. Works in addition to other groups (logical OR).")
@@ -425,7 +424,7 @@ model VolumeClaimResourceRequirements {
     
     This field is immutable. It can only be set for containers.
     """)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @added(Versions.`2025-07-01-preview`)
   claims?: VolumeClaimResourceRequirementsClaims[];
 }

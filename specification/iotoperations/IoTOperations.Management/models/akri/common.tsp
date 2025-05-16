@@ -3,8 +3,9 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.IoTOperations;
 
@@ -194,7 +195,7 @@ model AkriConnectorsContainerRegistrySettings {
   registry: string;
 
   /** Optional list of references to secrets in the same namespace to use for pulling the connector image. */
-  @OpenAPI.extension("x-ms-identifiers", #["secretRef"])
+  @identifiers(#["secretRef"])
   imagePullSecrets?: AkriConnectorsImagePullSecret[];
 }
 

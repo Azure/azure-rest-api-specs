@@ -39,11 +39,11 @@ model DataflowGraphProperties {
   requestDiskPersistence?: OperationalMode;
 
   /** List of nodes in the dataflow graph. */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   nodes: DataflowGraphNode[];
 
   /** List of connections between nodes in the dataflow graph. */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nodeConnections: DataflowGraphNodeConnection[];
 
   /** The provisioning state of the dataflow graph. */
@@ -117,7 +117,7 @@ model DataflowGraphNodeGraphSettings {
   artifact: string;
 
   /** Configuration key-value pairs. */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   configuration?: DataflowGraphGraphNodeConfiguration[];
 }
 
