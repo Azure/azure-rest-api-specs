@@ -3,6 +3,7 @@
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { relative, resolve } from "path";
 import { mapAsync } from "./array.js";
+import { readFile } from "fs/promises";
 
 /**
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
@@ -22,16 +23,53 @@ export class Swagger {
   /** @type {SpecModel | undefined} backpointer to owning SpecModel */
   #specModel;
 
+  /** @type {boolean} ignore examples */
+  #ignoreSwaggerExamples = false;
+
   /**
    * @param {string} path
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
+   * @param {boolean} [options.ignoreSwaggerExamples]
    */
   constructor(path, options) {
     this.#path = resolve(path);
     this.#logger = options?.logger;
     this.#specModel = options?.specModel;
+    this.#ignoreSwaggerExamples = !!options?.ignoreSwaggerExamples;
+  }
+
+  /**
+   * @returns import('@apidevtools/json-schema-ref-parser').$RefParserOptions 
+   */
+  #getRefParserResolver() {
+    if (!this.#ignoreSwaggerExamples) {
+      // Use default resolver if examples are not ignored
+      return { http: false };
+    }
+
+    return {
+      http: false,
+      file: {
+        order: 1,
+        read: async (/** @type import('@apidevtools/json-schema-ref-parser').FileInfo */ file) => {
+          if(example(file.url)) {
+            return "";
+          }
+          return await readFile(file.url, { encoding: "utf8" });
+        }
+      }
+     }
+  }
+
+  /**
+   * @param {string} path
+   * @returns {boolean}
+   */
+  #filterRefPaths(/** @type string */path) {
+    // Always return true if not ignoring examples
+    return this.#ignoreSwaggerExamples ? !example(path) : true;
   }
 
   /**
@@ -40,13 +78,13 @@ export class Swagger {
   async getRefs() {
     if (!this.#refs) {
       const schema = await $RefParser.resolve(this.#path, {
-        resolve: { http: false },
+        resolve: this.#getRefParserResolver(),
       });
 
       const refPaths = schema
         .paths("file")
         // Exclude examples
-        .filter((p) => !example(p))
+        .filter(p => this.#filterRefPaths(p))
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 

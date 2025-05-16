@@ -24,14 +24,19 @@ export class SpecModel {
   /** @type {Set<Readme> | undefined} */
   #readmes;
 
+  /** @type {boolean} */
+  #ignoreSwaggerExamples = false;
+
   /**
    * @param {string} folder
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
+   * @param {boolean} [options.ignoreSwaggerExamples]
    */
   constructor(folder, options) {
     this.#folder = resolve(folder);
     this.#logger = options?.logger;
+    this.#ignoreSwaggerExamples = !!options?.ignoreSwaggerExamples;
   }
 
   /**
@@ -181,7 +186,7 @@ export class SpecModel {
 
       this.#readmes = new Set(
         readmePaths.map(
-          (p) => new Readme(p, { logger: this.#logger, specModel: this }),
+          (p) => new Readme(p, { logger: this.#logger, specModel: this, ignoreSwaggerExamples: this.#ignoreSwaggerExamples }),
         ),
       );
     }

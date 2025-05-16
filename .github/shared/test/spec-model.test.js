@@ -3,12 +3,12 @@
 import { readdir } from "fs/promises";
 import { dirname, isAbsolute, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
-import { mapAsync } from "../src/array.js";
+import { mapAsync, flatMapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
 import { repoRoot } from "./repo.js";
 
-const options = { logger: new ConsoleLogger(/*debug*/ true) };
+const options = { logger: new ConsoleLogger(/*debug*/ true), ignoreSwaggerExamples: true };
 
 describe("SpecModel", () => {
   it("can be created with mock folder", async () => {
@@ -317,8 +317,8 @@ describe("getReadme regex", () => {
 // is a long-running test and should be run manually. To run this test, remove
 // the '.skip' from the describe block. Put '.skip' back in when done or this
 // test may fail unexpectedly in the future.
-describe.skip("Parse readmes", () => {
-  it(
+describe("Parse readmes", () => {
+  it.skip(
     "Does not produce exceptions",
     { timeout: 30 * 60 * 1000 /* 30 minutes */ },
     async ({ expect }) => {
@@ -367,13 +367,39 @@ describe.skip("Parse readmes", () => {
     async ({ expect }) => {
       const folders = [
         // Fill in services to test here
+        "network",
       ];
+
+      const startTime = new Date();
+      console.log(`Start time: ${startTime}`);
+
       for (const folder of folders) {
         console.log(`Testing service: ${folder}`);
-        const specModel = new SpecModel(`specification/${folder}`, options);
+        const specModel = new SpecModel(resolve(`../../specification/${folder}`), { ignoreSwaggerExamples: false });
+        // Resolve everything in parallel
+        const readmes = await specModel.getReadmes();
+        const refs = await flatMapAsync([...readmes], async (readme) => {
+          const tags = await readme.getTags();
+          const result = await flatMapAsync([...tags], async (tag) => {
+            const inputFiles = [...tag.inputFiles];
+            const refs = await flatMapAsync(inputFiles, async (swagger) => [...(await swagger.getRefs())]);
+            return refs;
+          });
+          return result;
+        });
 
+        console.log(`Total refs: ${refs.length}`);
         expect(specModel).toBeDefined();
       }
+
+      const endTime = new Date();
+      console.log(`End time: ${endTime}`);
+      const duration = endTime.getTime() - startTime.getTime();
+      console.log(
+        `Duration: ${Math.floor(duration / 1000 / 60)} minutes and ${Math.floor(
+          (duration % (1000 * 60 * 60)) / 1000,
+        )} seconds`,
+      );
     },
   );
 });
