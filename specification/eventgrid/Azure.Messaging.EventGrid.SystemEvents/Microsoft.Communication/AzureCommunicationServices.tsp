@@ -176,7 +176,7 @@ model AcsChatThreadWithUserDeletedEventData
 model AcsChatThreadDeletedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadDeletedBaseEventData;
-  
+
   /** The chat thread retention policy reason. */
   reason?: AcsChatThreadRetentionPolicyReason;
 }
