@@ -4,6 +4,8 @@ import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { Swagger } from "../src/swagger.js";
 
+const __dirname = resolve(new URL(".", import.meta.url).pathname);
+
 describe("Swagger", () => {
   it("can be created with mock path", async () => {
     const swagger = new Swagger("bar");
@@ -18,7 +20,7 @@ describe("Swagger", () => {
 describe("Ignore examples", () => {
   it("includes example files by default", async () => {
     const swagger = new Swagger(
-      "test/fixtures/Swagger/ignoreExamples/swagger.json",
+      resolve(__dirname, "fixtures/Swagger/ignoreExamples/swagger.json"),
     );
     const refs = await swagger.getRefs();
 
@@ -38,7 +40,7 @@ describe("Ignore examples", () => {
 
   it("excludes example files when ignoreExamples is set", async () => {
     const swagger = new Swagger(
-      "test/fixtures/Swagger/ignoreExamples/swagger.json",
+      resolve(__dirname, "fixtures/Swagger/ignoreExamples/swagger.json"),
       { ignoreSwaggerExamples: true },
     );
     const refs = await swagger.getRefs();
