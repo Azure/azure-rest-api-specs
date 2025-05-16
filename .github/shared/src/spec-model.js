@@ -175,10 +175,13 @@ export class SpecModel {
       this.#logger?.debug(`Found ${readmePaths.length} readme files`);
 
       this.#readmes = new Map(
-        readmePaths.map((p) => [
-          p,
-          new Readme(p, { logger: this.#logger, specModel: this }),
-        ]),
+        readmePaths.map((p) => {
+          const readme = new Readme(p, {
+            logger: this.#logger,
+            specModel: this,
+          });
+          return [readme.path, readme];
+        }),
       );
     }
 
