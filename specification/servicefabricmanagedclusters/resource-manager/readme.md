@@ -414,7 +414,6 @@ suppressions:
       - $.definitions.LongRunningOperationResult
       - $.definitions.NodeTypeListSkuResult
   
-
   - code: ValidFormats
     reason: duration-constant is an expected format to the .NET SDK generator
     where:
