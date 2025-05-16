@@ -8,7 +8,10 @@ import { ConsoleLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
 import { repoRoot } from "./repo.js";
 
-const options = { logger: new ConsoleLogger(/*debug*/ true) };
+const options = {
+  logger: new ConsoleLogger(/*debug*/ true),
+  ignoreSwaggerExamples: true,
+};
 
 describe("SpecModel", () => {
   it("can be created with mock folder", async () => {
