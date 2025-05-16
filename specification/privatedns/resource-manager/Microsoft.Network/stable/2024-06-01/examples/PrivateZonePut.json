@@ -1,30 +1,30 @@
 {
   "parameters": {
-    "resourceGroupName": "resourceGroup1",
-    "privateZoneName": "privatezone1.com",
     "api-version": "2024-06-01",
-    "subscriptionId": "subscriptionId",
     "parameters": {
       "location": "Global",
       "tags": {
         "key1": "value1"
       }
-    }
+    },
+    "privateZoneName": "privatezone1.com",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com",
         "name": "privatezone1.com",
         "type": "Microsoft.Network/privateDnsZones",
-        "location": "global",
         "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com",
+        "location": "global",
         "properties": {
           "maxNumberOfRecordSets": 5000,
-          "numberOfRecordSets": 1,
           "maxNumberOfVirtualNetworkLinks": 100,
-          "numberOfVirtualNetworkLinks": 0,
           "maxNumberOfVirtualNetworkLinksWithRegistration": 50,
+          "numberOfRecordSets": 1,
+          "numberOfVirtualNetworkLinks": 0,
           "numberOfVirtualNetworkLinksWithRegistration": 0,
           "provisioningState": "Succeeded"
         },
@@ -33,19 +33,19 @@
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com",
         "name": "privatezone1.com",
         "type": "Microsoft.Network/privateDnsZones",
-        "location": "global",
         "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com",
+        "location": "global",
         "properties": {
           "maxNumberOfRecordSets": 5000,
-          "numberOfRecordSets": 1,
           "maxNumberOfVirtualNetworkLinks": 100,
-          "numberOfVirtualNetworkLinks": 0,
           "maxNumberOfVirtualNetworkLinksWithRegistration": 50,
+          "numberOfRecordSets": 1,
+          "numberOfVirtualNetworkLinks": 0,
           "numberOfVirtualNetworkLinksWithRegistration": 0,
           "provisioningState": "Succeeded"
         },
@@ -56,10 +56,12 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationResults/asyncOperationId?api-version=2024-06-01",
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationStatuses/asyncOperationId?api-version=2024-06-01",
+        "Location": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationResults/asyncOperationId?api-version=2024-06-01",
         "Retry-After": "60"
       }
     }
-  }
+  },
+  "operationId": "PrivateZones_CreateOrUpdate",
+  "title": "PUT Private DNS Zone"
 }

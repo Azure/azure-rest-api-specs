@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "resourceGroupName": "resourceGroup1",
+    "api-version": "2024-06-01",
     "privateZoneName": "privatezone1.com",
     "recordType": "TXT",
-    "api-version": "2024-06-01",
+    "resourceGroupName": "resourceGroup1",
     "subscriptionId": "subscriptionId"
   },
   "responses": {
@@ -12,17 +12,17 @@
         "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/TXT?api-version=2024-06-01&$skipToken=skipToken",
         "value": [
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/TXT/recordtxt",
-            "etag": "00000000-0000-0000-0000-000000000000",
             "name": "recordtxt",
             "type": "Microsoft.Network/privateDnsZones/TXT",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/TXT/recordtxt",
             "properties": {
+              "fqdn": "recordtxt.privatezone1.com.",
+              "isAutoRegistered": false,
               "metadata": {
                 "key1": "value1"
               },
               "ttl": 3600,
-              "fqdn": "recordtxt.privatezone1.com.",
-              "isAutoRegistered": false,
               "txtRecords": [
                 {
                   "value": [
@@ -36,5 +36,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "RecordSets_ListByType",
+  "title": "GET Private DNS Zone TXT Record Sets"
 }

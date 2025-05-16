@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./PrivateZone.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,8 +15,12 @@ namespace Microsoft.Network;
 /**
  * Describes a DNS record set (a collection of DNS records with the same name and type) in a Private DNS zone.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @parentResource(PrivateZone)
-model RecordSet is Azure.ResourceManager.ProxyResource<RecordSetProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RecordSetProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model RecordSet extends Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = RecordSet,
     KeyName = "relativeRecordSetName",
@@ -28,46 +33,96 @@ model RecordSet is Azure.ResourceManager.ProxyResource<RecordSetProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   etag?: string;
+
+  /**
+   * The properties of the record set.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: RecordSetProperties;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface RecordSetOperationOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+
+        /**
+         * The name of the DNS zone (without a terminating dot).
+         */
+        @path
+        @segment("privateDnsZones")
+        privateZoneName: string,
+      },
+      {
+        /**
+         * The type of DNS record in this record set.
+         */
+        @path
+        recordType: RecordType,
+      },
+      CloudError
+    > {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface RecordSetOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+
+        /**
+         * The name of the DNS zone (without a terminating dot).
+         */
+        @path
+        @segment("privateDnsZones")
+        privateZoneName: string,
+      },
+      {
+        /**
+         * The type of DNS record in this record set.
+         */
+        @path
+        recordType: RecordType,
+
+        /**
+         * The name of the record set, relative to the name of the zone.
+         */
+        @path
+        relativeRecordSetName: string,
+      },
+      CloudError
+    > {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface RecordSets {
   /**
    * Gets a record set.
    */
-  get is ArmResourceRead<
-    RecordSet,
-    Parameters = {
-      /**
-       * The type of DNS record in this record set.
-       */
-      @path
-      recordType: RecordType;
-    }
-  >;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
+  get is RecordSetOps.Read<RecordSet>;
 
   /**
    * Creates or updates a record set within a Private DNS zone.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
+  createOrUpdate is RecordSetOps.CreateOrUpdateSync<
     RecordSet,
     Parameters = {
       /**
-       * The type of DNS record in this record set. Record sets of type SOA can be updated but not created (they are created when the Private DNS zone is created).
-       */
-      @path
-      recordType: RecordType;
-
-      /**
        * The ETag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored.
        */
-      @header
+      @header("If-None-Match")
       IfNoneMatch?: string;
     }
   >;
@@ -75,41 +130,32 @@ interface RecordSets {
   /**
    * Updates a record set within a Private DNS zone.
    */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is RecordSetOps.CustomPatchAsync<
     RecordSet,
     PatchModel = RecordSet,
     Parameters = {
       /**
-       * The type of DNS record in this record set.
-       */
-      @path
-      recordType: RecordType;
-
-      /**
        * The ETag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
-    }
+    },
+    Response = ArmResponse<RecordSet>
   >;
 
   /**
    * Deletes a record set from a Private DNS zone. This operation cannot be undone.
    */
-  delete is ArmResourceDeleteSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
+  delete is RecordSetOps.DeleteSync<
     RecordSet,
     Parameters = {
       /**
-       * The type of DNS record in this record set. Record sets of type SOA cannot be deleted (they are deleted when the Private DNS zone is deleted).
-       */
-      @path
-      recordType: RecordType;
-
-      /**
        * The ETag of the record set. Omit this value to always delete the current record set. Specify the last-seen ETag value to prevent accidentally deleting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
     }
   >;
@@ -117,15 +163,10 @@ interface RecordSets {
   /**
    * Lists the record sets of a specified type in a Private DNS zone.
    */
-  listByType is ArmResourceListByParent<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}")
+  listByType is RecordSetOperationOps.Read<
     RecordSet,
     Parameters = {
-      /**
-       * The type of record sets to enumerate.
-       */
-      @path
-      recordType: RecordType;
-
       /**
        * The maximum number of record sets to return. If not specified, returns up to 100 record sets.
        */
@@ -137,7 +178,8 @@ interface RecordSets {
        */
       @query("$recordsetnamesuffix")
       $recordsetnamesuffix?: string;
-    }
+    },
+    Response = ArmResponse<ResourceListResult<RecordSet>>
   >;
 }
 

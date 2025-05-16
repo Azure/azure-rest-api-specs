@@ -1,79 +1,81 @@
 {
   "parameters": {
-    "resourceGroupName": "resourceGroup1",
-    "privateZoneName": "privatezone1.com",
-    "recordType": "SOA",
-    "relativeRecordSetName": "@",
     "api-version": "2024-06-01",
-    "subscriptionId": "subscriptionId",
     "parameters": {
       "properties": {
         "metadata": {
           "key1": "value1"
         },
-        "ttl": 3600,
         "soaRecord": {
-          "host": "azureprivatedns.net",
           "email": "azureprivatedns-hostmaster.microsoft.com",
-          "serialNumber": 1,
+          "expireTime": 2419200,
+          "host": "azureprivatedns.net",
+          "minimumTtl": 300,
           "refreshTime": 3600,
           "retryTime": 300,
-          "expireTime": 2419200,
-          "minimumTtl": 300
-        }
+          "serialNumber": 1
+        },
+        "ttl": 3600
       }
-    }
+    },
+    "privateZoneName": "privatezone1.com",
+    "recordType": "SOA",
+    "relativeRecordSetName": "@",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/SOA/@",
-        "etag": "00000000-0000-0000-0000-000000000000",
         "name": "@",
         "type": "Microsoft.Network/privateDnsZones/SOA",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/SOA/@",
         "properties": {
+          "fqdn": "privatezone1.com.",
+          "isAutoRegistered": false,
           "metadata": {
             "key1": "value1"
           },
-          "ttl": 3600,
-          "fqdn": "privatezone1.com.",
-          "isAutoRegistered": false,
           "soaRecord": {
-            "host": "azureprivatedns.net",
             "email": "azureprivatedns-hostmaster.microsoft.com",
-            "serialNumber": 1,
+            "expireTime": 2419200,
+            "host": "azureprivatedns.net",
+            "minimumTtl": 300,
             "refreshTime": 3600,
             "retryTime": 300,
-            "expireTime": 2419200,
-            "minimumTtl": 300
-          }
+            "serialNumber": 1
+          },
+          "ttl": 3600
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/SOA/@",
-        "etag": "00000000-0000-0000-0000-000000000000",
         "name": "@",
         "type": "Microsoft.Network/privateDnsZones/SOA",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/SOA/@",
         "properties": {
+          "fqdn": "privatezone1.com.",
+          "isAutoRegistered": false,
           "metadata": {
             "key1": "value1"
           },
-          "ttl": 3600,
-          "fqdn": "privatezone1.com.",
-          "isAutoRegistered": false,
           "soaRecord": {
-            "host": "azureprivatedns.net",
             "email": "azureprivatedns-hostmaster.microsoft.com",
-            "serialNumber": 1,
+            "expireTime": 2419200,
+            "host": "azureprivatedns.net",
+            "minimumTtl": 300,
             "refreshTime": 3600,
             "retryTime": 300,
-            "expireTime": 2419200,
-            "minimumTtl": 300
-          }
+            "serialNumber": 1
+          },
+          "ttl": 3600
         }
       }
     }
-  }
+  },
+  "operationId": "RecordSets_CreateOrUpdate",
+  "title": "PUT Private DNS Zone SOA Record Set"
 }

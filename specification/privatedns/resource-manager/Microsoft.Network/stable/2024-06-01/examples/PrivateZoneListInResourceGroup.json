@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "resourceGroupName": "resourceGroup1",
     "api-version": "2024-06-01",
+    "resourceGroupName": "resourceGroup1",
     "subscriptionId": "subscriptionId"
   },
   "responses": {
@@ -10,17 +10,17 @@
         "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones?api-version=2024-06-01&$skipToken=skipToken",
         "value": [
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com",
             "name": "privatezone1.com",
             "type": "Microsoft.Network/privateDnsZones",
-            "location": "global",
             "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com",
+            "location": "global",
             "properties": {
               "maxNumberOfRecordSets": 5000,
-              "numberOfRecordSets": 1,
               "maxNumberOfVirtualNetworkLinks": 100,
-              "numberOfVirtualNetworkLinks": 0,
               "maxNumberOfVirtualNetworkLinksWithRegistration": 50,
+              "numberOfRecordSets": 1,
+              "numberOfVirtualNetworkLinks": 0,
               "numberOfVirtualNetworkLinksWithRegistration": 0,
               "provisioningState": "Succeeded"
             },
@@ -29,17 +29,17 @@
             }
           },
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone2.com",
             "name": "privatezone2.com",
             "type": "Microsoft.Network/privateDnsZones",
-            "location": "global",
             "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone2.com",
+            "location": "global",
             "properties": {
               "maxNumberOfRecordSets": 5000,
-              "numberOfRecordSets": 1,
               "maxNumberOfVirtualNetworkLinks": 100,
-              "numberOfVirtualNetworkLinks": 0,
               "maxNumberOfVirtualNetworkLinksWithRegistration": 50,
+              "numberOfRecordSets": 1,
+              "numberOfVirtualNetworkLinks": 0,
               "numberOfVirtualNetworkLinksWithRegistration": 0,
               "provisioningState": "Succeeded"
             }
@@ -47,5 +47,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "PrivateZones_ListByResourceGroup",
+  "title": "GET Private DNS Zone by Resource Group"
 }

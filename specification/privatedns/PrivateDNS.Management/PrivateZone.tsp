@@ -13,8 +13,11 @@ namespace Microsoft.Network;
 /**
  * Describes a Private DNS zone.
  */
-model PrivateZone
-  is Azure.ResourceManager.TrackedResource<PrivateZoneProperties> {
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@Azure.ResourceManager.Private.armResourceInternal(PrivateZoneProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model PrivateZone extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = PrivateZone,
     KeyName = "privateZoneName",
@@ -27,6 +30,13 @@ model PrivateZone
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   etag?: string;
+
+  /**
+   * Properties of the Private DNS zone.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: PrivateZoneProperties;
 }
 
 @armResourceOperations
@@ -34,7 +44,7 @@ interface PrivateZones {
   /**
    * Gets a Private DNS zone. Retrieves the zone properties, but not the virtual networks links or the record sets within the zone.
    */
-  get is ArmResourceRead<PrivateZone>;
+  get is ArmResourceRead<PrivateZone, Error = CloudError>;
 
   /**
    * Creates or updates a Private DNS zone. Does not modify Links to virtual networks or DNS records within the zone.
@@ -46,19 +56,20 @@ interface PrivateZones {
       /**
        * The ETag of the Private DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new Private DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored.
        */
-      @header
+      @header("If-None-Match")
       IfNoneMatch?: string;
     },
     Response = ArmResourceUpdatedResponse<PrivateZone> | ArmResourceCreatedResponse<
       PrivateZone,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -72,9 +83,10 @@ interface PrivateZones {
       /**
        * The ETag of the Private DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -87,10 +99,11 @@ interface PrivateZones {
       /**
        * The ETag of the Private DNS zone. Omit this value to always delete the current zone. Specify the last-seen ETag value to prevent accidentally deleting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -104,7 +117,8 @@ interface PrivateZones {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -118,7 +132,8 @@ interface PrivateZones {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -144,7 +159,8 @@ interface PrivateZones {
        */
       @query("$recordsetnamesuffix")
       $recordsetnamesuffix?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

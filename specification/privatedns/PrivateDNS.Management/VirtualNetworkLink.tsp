@@ -14,9 +14,12 @@ namespace Microsoft.Network;
 /**
  * Describes a link to virtual network for a Private DNS zone.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @parentResource(PrivateZone)
-model VirtualNetworkLink
-  is Azure.ResourceManager.TrackedResource<VirtualNetworkLinkProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkLinkProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualNetworkLink extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = VirtualNetworkLink,
     KeyName = "virtualNetworkLinkName",
@@ -29,6 +32,13 @@ model VirtualNetworkLink
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   etag?: string;
+
+  /**
+   * Properties of the virtual network link to the Private DNS zone.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: VirtualNetworkLinkProperties;
 }
 
 @armResourceOperations
@@ -36,7 +46,7 @@ interface VirtualNetworkLinks {
   /**
    * Gets a virtual network link to the specified Private DNS zone.
    */
-  get is ArmResourceRead<VirtualNetworkLink>;
+  get is ArmResourceRead<VirtualNetworkLink, Error = CloudError>;
 
   /**
    * Creates or updates a virtual network link to the specified Private DNS zone.
@@ -48,19 +58,20 @@ interface VirtualNetworkLinks {
       /**
        * The ETag of the virtual network link to the Private DNS zone. Omit this value to always overwrite the current virtual network link. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new virtual network link to the Private DNS zone to be created, but to prevent updating an existing link. Other values will be ignored.
        */
-      @header
+      @header("If-None-Match")
       IfNoneMatch?: string;
     },
     Response = ArmResourceUpdatedResponse<VirtualNetworkLink> | ArmResourceCreatedResponse<
       VirtualNetworkLink,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -74,9 +85,10 @@ interface VirtualNetworkLinks {
       /**
        * The ETag of the virtual network link to the Private DNS zone. Omit this value to always overwrite the current virtual network link. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -89,10 +101,11 @@ interface VirtualNetworkLinks {
       /**
        * The ETag of the virtual network link to the Private DNS zone. Omit this value to always delete the current zone. Specify the last-seen ETag value to prevent accidentally deleting any concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -106,7 +119,8 @@ interface VirtualNetworkLinks {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 

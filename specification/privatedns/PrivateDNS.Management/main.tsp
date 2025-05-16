@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./PrivateZone.tsp";
 import "./VirtualNetworkLink.tsp";
 import "./RecordSet.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -25,6 +26,7 @@ using TypeSpec.Versioning;
 /**
  * The Private DNS Management Client.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 @armProviderNamespace
 @service(#{ title: "PrivateDnsManagementClient" })
 @versioned(Versions)

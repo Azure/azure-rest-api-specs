@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "resourceGroupName": "resourceGroup1",
+    "api-version": "2024-06-01",
     "privateZoneName": "privatezone1.com",
     "recordType": "MX",
-    "api-version": "2024-06-01",
+    "resourceGroupName": "resourceGroup1",
     "subscriptionId": "subscriptionId"
   },
   "responses": {
@@ -12,44 +12,46 @@
         "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/MX?api-version=2024-06-01&$skipToken=skipToken",
         "value": [
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx1",
-            "etag": "00000000-0000-0000-0000-000000000000",
             "name": "recordmx1",
             "type": "Microsoft.Network/privateDnsZones/MX",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx1",
             "properties": {
+              "fqdn": "recordmx1.privatezone1.com.",
+              "isAutoRegistered": false,
               "metadata": {
                 "key1": "value1"
               },
-              "ttl": 3600,
-              "fqdn": "recordmx1.privatezone1.com.",
-              "isAutoRegistered": false,
               "mxRecords": [
                 {
-                  "preference": 0,
-                  "exchange": "mail.contoso1.com"
+                  "exchange": "mail.contoso1.com",
+                  "preference": 0
                 }
-              ]
+              ],
+              "ttl": 3600
             }
           },
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx2",
-            "etag": "00000000-0000-0000-0000-000000000000",
             "name": "recordmx2",
             "type": "Microsoft.Network/privateDnsZones/MX",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx2",
             "properties": {
-              "ttl": 3600,
               "fqdn": "recordmx2.privatezone1.com.",
               "isAutoRegistered": false,
               "mxRecords": [
                 {
-                  "preference": 0,
-                  "exchange": "mail.contoso2.com"
+                  "exchange": "mail.contoso2.com",
+                  "preference": 0
                 }
-              ]
+              ],
+              "ttl": 3600
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "RecordSets_ListByType",
+  "title": "GET Private DNS Zone MX Record Sets"
 }
