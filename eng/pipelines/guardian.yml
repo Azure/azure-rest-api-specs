@@ -12,7 +12,9 @@ variables:
 
 extends:
   template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
-  parameters:    
+  parameters:
+    featureFlags:
+      incrementalSDLSourceAnalysis: true
     sdl:
       enableAllTools: false
       sourceAnalysisPool: 
@@ -22,3 +24,5 @@ extends:
       credscan:
         enabled: true
         # This uses the Credscan Supression file from .config/CredScanSuppressions.json which is the default location for Credscan Suppression Files
+      policheck:
+        enable: true
