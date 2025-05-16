@@ -1,4 +1,3 @@
-name: Guardian
 trigger: none
 
 resources:
@@ -13,13 +12,13 @@ variables:
 
 extends:
   template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
-  parameters:
-    pool:
-      name: $(LINUXPOOL)
-      image: $(LINUXVMIMAGE)
-    
+  parameters:    
     sdl:
       enableAllTools: false
+      sourceAnalysisPool: 
+        name: $(LINUXPOOL)
+        image: $(LINUXVMIMAGE)
+        os: linux
       credscan:
         enabled: true
         # This uses the Credscan Supression file from .config/CredScanSuppressions.json which is the default location for Credscan Suppression Files
