@@ -190,7 +190,10 @@
             }
           },
           "404": {
-            "description": "ignore"
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           },
           "default": {
             "description": "ignore",
@@ -860,7 +863,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations": {
       "get": {
         "operationId": "triageRecommendations_List",
         "parameters": [
@@ -907,7 +910,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}": {
       "get": {
         "operationId": "triageRecommendations_Get",
         "parameters": [
@@ -945,7 +948,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}/approve": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/approve": {
       "post": {
         "operationId": "triageRecommendations_ApproveTriageRecommendation",
         "parameters": [
@@ -980,7 +983,92 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}/reject": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources": {
+      "get": {
+        "operationId": "triageResources_List",
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TriageResourceCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTriageResources": {
+            "$ref": "./examples/TriageResourcesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}": {
+      "get": {
+        "operationId": "triageResources_Get",
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendationResourceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TriageResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTriageResource": {
+            "$ref": "./examples/TriageResourcesGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reject": {
       "post": {
         "operationId": "triageRecommendations_RejectTriageRecommendation",
         "parameters": [
@@ -1023,7 +1111,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}/reset": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reset": {
       "post": {
         "operationId": "triageRecommendations_ResetTriageRecommendation",
         "parameters": [
@@ -1054,91 +1142,6 @@
         "x-ms-examples": {
           "Reset a triage recommendation": {
             "$ref": "./examples/TriageRecommendationsReset.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}/triageResources": {
-      "get": {
-        "operationId": "triageResources_List",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/TriageResourceCollection"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListTriageResources": {
-            "$ref": "./examples/TriageResourcesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}/triageResources/{recommendationResourceId}": {
-      "get": {
-        "operationId": "triageResources_Get",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationResourceId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/TriageResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTriageResource": {
-            "$ref": "./examples/TriageResourcesGet.json"
           }
         }
       }

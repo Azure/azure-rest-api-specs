@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ResiliencyReview.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -25,21 +26,42 @@ model TriageRecommendation
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+interface TriageRecommendationOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+
+        /** Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000). */
+        @path
+        @segment("resiliencyReviews")
+        reviewId: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = TriageRecommendation,
+        KeyName = "recommendationId",
+        SegmentName = "triageRecommendations",
+        NamePattern = ""
+      >>
+    > {}
+
 interface TriageRecommendations {
   /**
    * Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}")
   @operationId("triageRecommendations_Get")
-  get is ArmResourceRead<TriageRecommendation>;
+  get is TriageRecommendationOps.Read<TriageRecommendation>;
 
   /**
    * Get list of recommendations for an existing Azure Advisor Resiliency Review Id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations")
   @operationId("triageRecommendations_List")
-  list is ArmResourceListByParent<
+  list is TriageRecommendationOps.List<
     TriageRecommendation,
     Parameters = {
       /**
@@ -61,9 +83,9 @@ interface TriageRecommendations {
    * Approve a triage recommendation for a given id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @action("approve")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/approve")
   @operationId("triageRecommendations_ApproveTriageRecommendation")
-  approveTriageRecommendation is ArmResourceActionSync<
+  approveTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     void,
     OkResponse
@@ -73,9 +95,9 @@ interface TriageRecommendations {
    * Reject an existing triage recommendation for a given id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @action("reject")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reject")
   @operationId("triageRecommendations_RejectTriageRecommendation")
-  rejectTriageRecommendation is ArmResourceActionSync<
+  rejectTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     RecommendationRejectBody,
     OkResponse
@@ -85,9 +107,9 @@ interface TriageRecommendations {
    * Reset an existing triage recommendation for a given id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @action("reset")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reset")
   @operationId("triageRecommendations_ResetTriageRecommendation")
-  resetTriageRecommendation is ArmResourceActionSync<
+  resetTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     void,
     OkResponse

@@ -27,7 +27,8 @@ interface ConfigurationsOperationGroup {
   listBySubscription is ArmProviderActionSync<
     Response = ArmResponse<ConfigurationListResult>,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = ArmErrorResponse
   >;
   /**
    * Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.
@@ -138,7 +139,7 @@ interface RecommendationsOperationGroup {
     @format("uuid")
     @path
     operationId: string,
-  ): ArmAcceptedResponse | NoContentResponse | ErrorResponse;
+  ): ArmAcceptedResponse | NoContentResponse | ArmErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"

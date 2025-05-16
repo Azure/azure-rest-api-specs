@@ -11,579 +11,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations__deleted": {
-      "get": {
-        "operationId": "triageRecommendations_List",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/triageRecommendationCollection"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "ListTriageRecommendations": {
-            "$ref": "./examples/TriageRecommendationsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}__deleted": {
-      "get": {
-        "operationId": "triageRecommendations_Get",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/triageRecommendation"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "GetTriageRecommendation": {
-            "$ref": "./examples/TriageRecommendationsGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/approve__deleted": {
-      "post": {
-        "operationId": "triageRecommendations_ApproveTriageRecommendation",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "Approve a triage recommendation": {
-            "$ref": "./examples/TriageRecommendationsApprove.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources__deleted": {
-      "get": {
-        "operationId": "triageResources_List",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/triageResourceCollection"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "ListTriageResources": {
-            "$ref": "./examples/TriageResourcesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}__deleted": {
-      "get": {
-        "operationId": "triageResources_Get",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationResourceId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/triageResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "GetTriageResource": {
-            "$ref": "./examples/TriageResourcesGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reject__deleted": {
-      "post": {
-        "operationId": "triageRecommendations_RejectTriageRecommendation",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationRejectBody",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/recommendationRejectBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "Reject a triage recommendation": {
-            "$ref": "./examples/TriageRecommendationsReject.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reset__deleted": {
-      "post": {
-        "operationId": "triageRecommendations_ResetTriageRecommendation",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "Reset a triage recommendation": {
-            "$ref": "./examples/TriageRecommendationsReset.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations__added": {
-      "get": {
-        "operationId": "triageRecommendations_List",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/TriageRecommendationCollection"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListTriageRecommendations": {
-            "$ref": "./examples/TriageRecommendationsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}__added": {
-      "get": {
-        "operationId": "triageRecommendations_Get",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/TriageRecommendation"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTriageRecommendation": {
-            "$ref": "./examples/TriageRecommendationsGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}/approve__added": {
-      "post": {
-        "operationId": "triageRecommendations_ApproveTriageRecommendation",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Approve a triage recommendation": {
-            "$ref": "./examples/TriageRecommendationsApprove.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}/reject__added": {
-      "post": {
-        "operationId": "triageRecommendations_RejectTriageRecommendation",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationRejectBody",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RecommendationRejectBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reject a triage recommendation": {
-            "$ref": "./examples/TriageRecommendationsReject.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}/reset__added": {
-      "post": {
-        "operationId": "triageRecommendations_ResetTriageRecommendation",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reset a triage recommendation": {
-            "$ref": "./examples/TriageRecommendationsReset.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}/triageResources__added": {
-      "get": {
-        "operationId": "triageResources_List",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/TriageResourceCollection"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListTriageResources": {
-            "$ref": "./examples/TriageResourcesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/{recommendationId}/triageResources/{recommendationResourceId}__added": {
-      "get": {
-        "operationId": "triageResources_Get",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationResourceId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/TriageResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTriageResource": {
-            "$ref": "./examples/TriageResourcesGet.json"
-          }
-        }
-      }
-    },
     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
       "get": {
         "deprecated__deleted": false,
@@ -661,9 +88,6 @@
         ],
         "responses": {
           "404": {
-            "schema__deleted": {
-              "$ref": "#/definitions/ArmErrorResponse"
-            },
             "x-ms-error-response__deleted": true
           }
         }
@@ -960,6 +384,162 @@
               }
             }
           },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations": {
+      "get": {
+        "deprecated__deleted": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/triageRecommendationCollection",
+                "__new": "#/definitions/TriageRecommendationCollection"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}": {
+      "get": {
+        "deprecated__deleted": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/triageRecommendation",
+                "__new": "#/definitions/TriageRecommendation"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/approve": {
+      "post": {
+        "deprecated__deleted": false,
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources": {
+      "get": {
+        "deprecated__deleted": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/triageResourceCollection",
+                "__new": "#/definitions/TriageResourceCollection"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}": {
+      "get": {
+        "deprecated__deleted": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/triageResource",
+                "__new": "#/definitions/TriageResource"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reject": {
+      "post": {
+        "deprecated__deleted": false,
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/recommendationRejectBody",
+                  "__new": "#/definitions/RecommendationRejectBody"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reset": {
+      "post": {
+        "deprecated__deleted": false,
+        "responses": {
           "default": {
             "schema": {
               "$ref": {

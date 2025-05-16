@@ -1249,3 +1249,7 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 @@doc(AdvisorScoreEntityProperties.timeSeries,
   "The historic Advisor score data."
 );
+@@OpenAPI.extension(OperationEntityListResult.value,
+  "x-ms-identifiers",
+  #["name"]
+);
