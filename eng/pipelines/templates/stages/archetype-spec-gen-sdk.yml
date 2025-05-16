@@ -52,14 +52,6 @@ stages:
       vmImage: $(LINUXVMIMAGE)
       os: linux
 
-    templateContext:
-      outputParentDirectory: $(System.DefaultWorkingDirectory)/out
-      outputs:
-        - output: pipelineArtifact
-          displayName: Publish logs to Pipeline Artifacts
-          artifactName: "spec-gen-sdk-logs"
-          targetPath: "$(System.DefaultWorkingDirectory)/out/logs"
-
     steps:
       - checkout: none
 
@@ -196,13 +188,13 @@ stages:
             $optional_params || true # return true always to suppress exit error logging
         displayName: 'Generate SDK'
 
-      - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
+      - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
           ArtifactName: $(SpecGenSdkArtifactName)
           ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)"
           CustomCondition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
 
-      - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
+      - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
           ArtifactName: $(PipelineArtifactsName)
           ArtifactPath: $(StagedArtifactsFolder)
@@ -279,3 +271,9 @@ stages:
               -pullRequestNumber "$(System.PullRequest.PullRequestNumber)" 
           displayName: 'Detect API Change and Create API Review'
           condition: and(succeeded(), ne(variables['SpecGenSdkArtifactPath'], ''), ne(variables['SpecGenSdkArtifactName'], ''))
+
+      - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
+        parameters:
+          ArtifactName: "spec-gen-sdk-logs"
+          ArtifactPath: "$(System.DefaultWorkingDirectory)/out/logs"
+          CustomCondition: and(succeeded(), ne(variables['SpecGenSdkArtifactPath'], ''), ne(variables['SpecGenSdkArtifactName'], ''))
