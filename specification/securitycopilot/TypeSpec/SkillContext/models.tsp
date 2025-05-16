@@ -675,6 +675,13 @@ namespace SkillContext
 		summarizationEnabled: boolean;
 	}
 
+	@doc("MemoryEmbeddingRequestOptions")
+	model MemoryEmbeddingRequestOptions {
+		@doc("EmbeddingEnabled")
+		embeddingEnabled: boolean;
+	}
+
+
 	@doc("MemoryEmbeddingTarget")
 	enum MemoryEmbeddingTarget {
 		@doc("Unknown")
