@@ -42,17 +42,24 @@ export class Readme {
   #specModel;
 
   /**
+   * @type {boolean} ignore examples
+   */
+  #ignoreSwaggerExamples = false;
+
+  /**
    * @param {string} path
    * @param {Object} [options]
    * @param {string} [options.content]
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
+   * @param {boolean} [options.ignoreSwaggerExamples]
    */
   constructor(path, options) {
     this.#path = resolve(path);
     this.#content = options?.content;
     this.#logger = options?.logger;
     this.#specModel = options?.specModel;
+    this.#ignoreSwaggerExamples = !!options?.ignoreSwaggerExamples;
   }
 
   /**
@@ -171,6 +178,7 @@ export class Readme {
           const swagger = new Swagger(swaggerPathResolved, {
             logger: this.#logger,
             specModel: this.#specModel,
+            ignoreSwaggerExamples: this.#ignoreSwaggerExamples,
           });
           inputFiles.add(swagger);
         }

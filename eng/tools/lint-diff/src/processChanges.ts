@@ -80,7 +80,7 @@ export async function buildState(
   // Build service models of affected services
   const specModels = new Map<string, SpecModel>();
   for (const serviceDir of affectedServiceDirectories) {
-    const specModel = new SpecModel(resolve(rootPath, serviceDir));
+    const specModel = new SpecModel(resolve(rootPath, serviceDir), { ignoreSwaggerExamples: true});
     specModels.set(serviceDir, specModel);
   }
 
