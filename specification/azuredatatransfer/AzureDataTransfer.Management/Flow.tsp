@@ -80,7 +80,7 @@ interface Flows {
   generatePassphrase is ArmResourceActionAsync<Flow, void, ArmResponse<Flow>>;
 
   /**
-   * Get the destination endpoint ports for the specified flow and stream ID.
+   * Get the destination endpoint ports for the specified flow.
    */
   getDestinationEndpointPorts is ArmResourceActionSync<
     Flow,
@@ -89,7 +89,7 @@ interface Flows {
   >;
 
   /**
-   * Get the destination endpoints for the specified flow and stream ID.
+   * Get the destination endpoints for the specified flow.
    */
   getDestinationEndpoints is ArmResourceActionSync<
     Flow,
@@ -121,7 +121,7 @@ interface Flows {
   link is ArmResourceActionAsync<Flow, ResourceBody, ArmResponse<Flow>>;
 
   /**
-   * Set the destination endpoint ports for the specified flow and stream ID.
+   * Set the destination endpoint ports for the specified flow.
    */
   setDestinationEndpointPorts is ArmResourceActionAsync<
     Flow,
@@ -130,7 +130,7 @@ interface Flows {
   >;
 
   /**
-   * Set the destination endpoints for the specified flow and stream ID.
+   * Set the destination endpoints for the specified flow.
    */
   setDestinationEndpoints is ArmResourceActionAsync<
     Flow,
@@ -159,16 +159,16 @@ interface Flows {
 
 @@maxLength(Flow.name, 64);
 @@minLength(Flow.name, 3);
-@@doc(Flow.name, "The name for the flow that is to be onboarded.");
+@@doc(Flow.name, "The name for the flow to perform the operation on.");
 @@doc(Flow.properties, "Properties of flow");
 @@doc(Flows.createOrUpdate::parameters.resource, "Flow body");
 @@doc(Flows.update::parameters.properties, "Flow body");
 @@doc(Flows.link::parameters.body, "Flow body");
 @@doc(Flows.setDestinationEndpointPorts::parameters.body,
-  "Stream ID destination endpoint ports wanted"
+  "The destination endpoint ports wanted"
 );
 @@doc(Flows.setDestinationEndpoints::parameters.body,
-  "Stream ID destination endpoints wanted"
+  "Destination endpoints wanted."
 );
 @@doc(Flows.setPassphrase::parameters.body, "Passphrase to set");
 @@doc(Flows.setSourceAddresses::parameters.body, "Source addresses wanted");

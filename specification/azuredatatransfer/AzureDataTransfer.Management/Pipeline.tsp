@@ -67,7 +67,7 @@ interface Pipelines {
   listBySubscription is ArmListBySubscription<Pipeline>;
 
   /**
-   * Approves the specified connection in a pipeline.
+   * Approves the specified connection request in a pipeline.
    */
   approveConnection is ArmResourceActionAsync<
     Pipeline,
@@ -115,7 +115,7 @@ interface Pipelines {
   >;
 
   /**
-   * Rejects the specified connection in a pipeline.
+   * Rejects the specified connection request in a pipeline.
    */
   rejectConnection is ArmResourceActionAsync<
     Pipeline,
@@ -126,7 +126,7 @@ interface Pipelines {
 
 @@maxLength(Pipeline.name, 64);
 @@minLength(Pipeline.name, 3);
-@@doc(Pipeline.name, "The name for the pipeline that is to be requested.");
+@@doc(Pipeline.name, "The name for the pipeline to perform the operation on.");
 @@doc(Pipeline.properties, "Properties of pipeline");
 @@doc(Pipelines.createOrUpdate::parameters.resource, "Pipeline body");
 @@doc(Pipelines.update::parameters.properties, "Pipeline body");

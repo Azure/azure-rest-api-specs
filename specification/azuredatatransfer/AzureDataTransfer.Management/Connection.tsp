@@ -76,7 +76,7 @@ interface Connections {
   >;
 
   /**
-   * Lists all pending connections for a connection.
+   * Lists all pending remote connections that are linkable to this connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listPendingConnections")
@@ -88,7 +88,7 @@ interface Connections {
   >;
 
   /**
-   * Lists all pending flows for a connection.
+   * Lists all remote flows that have not yet been linked to local flows
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listPendingFlows")
@@ -102,7 +102,9 @@ interface Connections {
 
 @@maxLength(Connection.name, 64);
 @@minLength(Connection.name, 3);
-@@doc(Connection.name, "The name for the connection that is to be requested.");
+@@doc(Connection.name,
+  "The name for the connection to perform the operation on."
+);
 @@doc(Connection.properties, "Properties of connection");
 @@doc(Connections.createOrUpdate::parameters.resource, "Connection body");
 @@doc(Connections.update::parameters.properties, "Connection body");

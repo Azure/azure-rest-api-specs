@@ -817,7 +817,7 @@ model FlowProperties {
   flowId?: string;
 
   /**
-   * AME, PME, or TORUS only! AKV Chain Containing SAS Token
+   * URI to a Key Vault Secret containing a SAS token.
    */
   keyVaultUri?: string;
 
@@ -883,7 +883,7 @@ model FlowProperties {
   flowType?: FlowType;
 
   /**
-   * Transfer Storage Blobs or Tables
+   * Type of data to transfer via the flow.
    */
   dataType?: DataType;
 
@@ -1139,21 +1139,21 @@ model ResourceBody {
 }
 
 /**
- * Set the destination endpoint ports for the specified stream ID
+ * Set the destination endpoint ports for the specified flow.
  */
 model SetDestinationEndpointPorts {
   /**
-   * The specified stream ID destination endpoint ports
+   * The specified flow destination endpoint ports
    */
   ports?: int64[];
 }
 
 /**
- * Set the destination endpoints for the specified stream ID
+ * Set the destination endpoints for the specified flow.
  */
 model SetDestinationEndpoints {
   /**
-   * The specified stream ID destination endpoints
+   * The specified flow destination endpoints.
    */
   endpoints?: string[];
 }
@@ -1169,7 +1169,7 @@ model SetStreamPassphrase {
 }
 
 /**
- * Set the source addresses for the specified stream ID
+ * Set the source addresses for the specified flow.
  */
 model SetSourceAddresses {
   /**
@@ -1389,3 +1389,4 @@ model AzureResourceManagerArmResponsePipeline {
 @@clientName(PipelineStatus, "pipelineStatus");
 @@clientName(SchemaStatus, "schemaStatus");
 @@clientName(ValidateSchemaStatus, "validateSchemaStatus");
+@@clientName(ListFlowsByPipelineConnection, "listFlowsByPipelineConnection");
