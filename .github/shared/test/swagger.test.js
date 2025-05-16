@@ -20,7 +20,10 @@ describe("Swagger", () => {
 
 describe("Ignore examples", () => {
   it("includes example files by default", async () => {
-    const swaggerFile = join(__dirname, "fixtures/Swagger/ignoreExamples/swagger.json");
+    const swaggerFile = join(
+      __dirname,
+      "fixtures/Swagger/ignoreExamples/swagger.json",
+    );
     const swagger = new Swagger(swaggerFile);
 
     const refs = await swagger.getRefs();
@@ -34,7 +37,10 @@ describe("Ignore examples", () => {
         }),
         expect.objectContaining({
           path: expect.stringContaining(
-            resolve(__dirname, "fixtures/Swagger/ignoreExamples/examples/example.json"),
+            resolve(
+              __dirname,
+              "fixtures/Swagger/ignoreExamples/examples/example.json",
+            ),
           ),
         }),
       ]),
