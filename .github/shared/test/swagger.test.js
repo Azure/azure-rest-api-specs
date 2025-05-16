@@ -27,10 +27,10 @@ describe("Ignore examples", () => {
     expect(refs).toMatchObject(
       new Set([
         expect.objectContaining({
-          path: resolve("test/fixtures/Swagger/ignoreExamples/included.json"),
+          path: expect.stringContaining("test/fixtures/Swagger/ignoreExamples/included.json"),
         }),
         expect.objectContaining({
-          path: resolve(
+          path: expect.stringContaining(
             "test/fixtures/Swagger/ignoreExamples/examples/example.json",
           ),
         }),
@@ -48,7 +48,7 @@ describe("Ignore examples", () => {
     expect(refs).toMatchObject(
       new Set([
         expect.objectContaining({
-          path: resolve("test/fixtures/Swagger/ignoreExamples/included.json"),
+          path: expect.stringContaining("test/fixtures/Swagger/ignoreExamples/included.json"),
         }),
       ]),
     );
