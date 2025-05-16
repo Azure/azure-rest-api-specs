@@ -509,7 +509,7 @@ model RecommendationProperties {
   /**
    * The list of snoozed and dismissed rules for the recommendation.
    */
-  suppressionIds?: string[];
+  suppressionIds?: Azure.Core.uuid[];
 
   /**
    * Extended properties

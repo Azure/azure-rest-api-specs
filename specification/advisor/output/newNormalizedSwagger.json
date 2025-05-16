@@ -590,7 +590,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -695,7 +695,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -1468,6 +1468,10 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
     "ConfigData": {
       "type": "object",
       "properties": {
@@ -1692,7 +1696,10 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/OperationEntity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -1863,7 +1870,7 @@
         "suppressionIds": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         },
         "extendedProperties": {

@@ -249,16 +249,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations": {
       "get": {
         "deprecated__deleted": false,
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ArmErrorResponse",
-                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        },
         "x-ms-examples": {
           "GetConfigurations": {
             "$ref": {
@@ -326,17 +316,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}": {
       "get": {
-        "deprecated__deleted": false,
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ArmErrorResponse",
-                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "deprecated__deleted": false
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/predict": {
@@ -1010,6 +990,10 @@
         }
       }
     },
+    "Azure.Core.uuid__added": {
+      "type": "string",
+      "format": "uuid"
+    },
     "RecommendationPropertiesResourceWorkload__added": {
       "type": "object",
       "properties": {
@@ -1469,14 +1453,7 @@
     "OperationEntityListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "x-ms-identifiers__deleted": [
-            "name"
-          ]
-        }
-      }
+      ]
     },
     "PredictionRequestProperties": {
       "properties": {
@@ -1501,7 +1478,9 @@
         },
         "suppressionIds": {
           "items": {
-            "format__deleted": "uuid"
+            "type__deleted": "string",
+            "format__deleted": "uuid",
+            "$ref__added": "#/definitions/Azure.Core.uuid"
           }
         },
         "actions": {

@@ -1931,6 +1931,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Category": {
       "type": "string",
       "enum": [
@@ -2603,7 +2608,7 @@
           "type": "array",
           "description": "The list of snoozed and dismissed rules for the recommendation.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         },
         "extendedProperties": {
