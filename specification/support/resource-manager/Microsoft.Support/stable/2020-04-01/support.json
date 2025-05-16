@@ -554,6 +554,49 @@
         }
       }
     },
+    "/providers/Microsoft.Support/supportTickets/resourceIdLookUp": {
+      "post": {
+        "tags": [
+          "SupportTickets"
+        ],
+        "summary": "This operation fetches ARM resource id of support ticket",
+        "operationId": "SupportTicketResourceIdLookUp",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "supportTicketResourceIdLookupRequest",
+            "in": "body",
+            "description": "Support ticket resource id request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportTicketResourceIdLookupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully obtained resource id of support ticket.",
+            "schema": {
+              "$ref": "#/definitions/SupportTicketResourceIdLookUpResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "SupportTicketResourceIdLookUp": {
+            "$ref": "./examples/SupportTicketResourceIdLookUp.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Support/supportTickets/{supportTicketName}/checkNameAvailability": {
       "post": {
         "tags": [
@@ -1398,6 +1441,26 @@
         },
         "preferredSupportLanguage": {
           "description": "Preferred language of support from Azure. Support languages vary based on the severity you choose for your support ticket. Learn more at [Azure Severity and responsiveness](https://azure.microsoft.com/support/plans/response). Use the standard language-country code. Valid values are 'en-us' for English, 'zh-hans' for Chinese, 'es-es' for Spanish, 'fr-fr' for French, 'ja-jp' for Japanese, 'ko-kr' for Korean, 'ru-ru' for Russian, 'pt-br' for Portuguese, 'it-it' for Italian, 'zh-tw' for Chinese and 'de-de' for German.",
+          "type": "string"
+        }
+      }
+    },
+    "SupportTicketResourceIdLookupRequest": {
+      "description": "The Support ticket resource Id look up request",
+      "type": "object",
+      "properties": {
+        "supportTicketId": {
+          "description": "The Support Ticket Id",
+          "type": "string"
+        }
+      }
+    },
+    "SupportTicketResourceIdLookUpResponse": {
+      "description": "The Support ticket resource id look up response",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The ARM resource Id of support ticket",
           "type": "string"
         }
       }
