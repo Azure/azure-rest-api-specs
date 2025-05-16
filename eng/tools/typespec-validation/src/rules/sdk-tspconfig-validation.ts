@@ -166,9 +166,34 @@ function skipForManagementPlane(folder: string): SkipResult {
   };
 }
 
+function skipForRLCOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
+  const isRLCClient =
+    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== true;
+  const shouldSkip = isManagementSdk(folder) || isRLCClient;
+  const result: SkipResult = {
+    shouldSkip: shouldSkip,
+  };
+  if (result.shouldSkip)
+    result.reason = "This rule is only applicable for data plane SDKs with modular client.";
+  return result;
+}
+
+function skipForModularOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
+  const isModularClient =
+    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] === true;
+  const shouldSkip = isManagementSdk(folder) || isModularClient;
+  const result: SkipResult = {
+    shouldSkip: shouldSkip,
+  };
+  if (result.shouldSkip)
+    result.reason = "This rule is only applicable for data plane SDKs with rlc client.";
+  return result;
+}
+
 function skipForNonModularOrDataPlaneInTsEmitter(config: any, folder: string): SkipResult {
-  // isModularLibrary is true by default
-  const isModularClient = config?.options?.["@azure-tools/typespec-ts"]?.isModularLibrary !== false;
+  // is-modular-library is true by default
+  const isModularClient =
+    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== false;
   const shouldRun = isManagementSdk(folder) && isModularClient;
   const result: SkipResult = {
     shouldSkip: !shouldRun,
@@ -262,8 +287,8 @@ export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOption
   constructor() {
     super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+-)*rest$/));
   }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
+  protected skip(config: any, folder: string) {
+    return skipForModularOrManagementPlaneInTsEmitter(config, folder);
   }
 }
 
@@ -275,11 +300,25 @@ export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspconfigEmitte
       new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/),
     );
   }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
+
+  protected skip(config: any, folder: string) {
+    return skipForModularOrManagementPlaneInTsEmitter(config, folder);
   }
 }
 
+export class TspConfigTsModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-ts",
+      "package-details.name",
+      new RegExp(/^\@azure\/[a-z]+(?:-[a-z]+)*$/),
+    );
+  }
+
+  protected skip(config: any, folder: string) {
+    return skipForRLCOrManagementPlaneInTsEmitter(config, folder);
+  }
+}
 // ----- Go data plane sub rules -----
 export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -492,6 +531,7 @@ export const defaultRules = [
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
   new TspConfigTsDpPackageDirectorySubRule(),
   new TspConfigTsDpPackageNameMatchPatternSubRule(),
+  new TspConfigTsModularPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
@@ -551,7 +591,9 @@ export class SdkTspConfigValidationRule implements Rule {
         const emitterOptionSubRule = subRule as TspconfigEmitterOptionsSubRuleBase;
         const emitterName = emitterOptionSubRule.getEmitterName();
         if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
-          console.warn(`Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed.`);
+          console.warn(
+            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed.`,
+          );
           isSubRuleSuccess = true;
         }
       }

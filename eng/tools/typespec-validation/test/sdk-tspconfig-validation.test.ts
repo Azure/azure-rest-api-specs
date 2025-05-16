@@ -30,6 +30,7 @@ import {
   TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
+  TspConfigTsModularPackageNameMatchPatternSubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { join } from "path";
@@ -225,6 +226,31 @@ const tsDpPackageNameTestCases = createEmitterOptionTestCases(
   "@azure/aaa-bbb",
   [new TspConfigTsDpPackageNameMatchPatternSubRule()],
 );
+
+const tsDpModularPackageNameTestCases = [
+  {
+    description: `Validate ts's option: package-details.name starts with "@azure" for modular clients (valid case)`,
+    folder: "",
+    tspconfigContent: createEmitterOptionExample(
+      "@azure-tools/typespec-ts",
+      { key: "is-modular-library", value: true },
+      { key: "package-details.name", value: "@azure/aaa-bbb" },
+    ),
+    success: true,
+    subRules: [new TspConfigTsModularPackageNameMatchPatternSubRule()],
+  },
+  {
+    description: `Validate ts's option: package-details.name does not start with "@azure" for modular clients (invalid case)`,
+    folder: "",
+    tspconfigContent: createEmitterOptionExample(
+      "@azure-tools/typespec-ts",
+      { key: "is-modular-library", value: true },
+      { key: "package-details.name", value: "azure/aaa-bbb" },
+    ),
+    success: false,
+    subRules: [new TspConfigTsModularPackageNameMatchPatternSubRule()],
+  },
+];
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
@@ -549,6 +575,7 @@ describe("tspconfig", function () {
     ...tsManagementPackageNameTestCases,
     ...tsDpPackageDirTestCases,
     ...tsDpPackageNameTestCases,
+    ...tsDpModularPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
