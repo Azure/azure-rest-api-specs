@@ -42,8 +42,9 @@ export class SpecModel {
   }
 
   /**
+   * Given a swagger file, return all the tags inside readme files that reference the file (directly or indirectly).
    * @param {string} swaggerPath
-   * @returns {Promise<Map<string, Map<string, Tag>>>}
+   * @returns {Promise<Map<string, Map<string, Tag>>>} map of readme paths to (map of tag names to Tag objects)
    */
   async getAffectedReadmeTags(swaggerPath) {
     const swaggerPathResolved = resolve(swaggerPath);
@@ -79,16 +80,14 @@ export class SpecModel {
   }
 
   /**
-   * Given a swagger file, return the swagger files that are affected by the
+   * Given a swagger file, return the swagger files that are affected by
    * changes in the given swagger file.
    * @param {string} swaggerPath
-   * @returns {Promise<Map<string, Swagger>>}
+   * @returns {Promise<Map<string, Swagger>>} map of swagger paths to Swagger objects
    */
   async getAffectedSwaggers(swaggerPath) {
     const swaggerPathResolved = resolve(swaggerPath);
 
-    // Use Map instead of Set, to ensure exactly one Swagger object per path is returned
-    // SpecModel can include multiple Swagger objects pointing to the same path
     /** @type {Map<string, Swagger>} */
     const affectedSwaggers = new Map();
 
@@ -160,7 +159,7 @@ export class SpecModel {
   }
 
   /**
-   * @returns {Promise<Map<string, Readme>>}
+   * @returns {Promise<Map<string, Readme>>} map of readme paths to readme Objects
    */
   async getReadmes() {
     if (!this.#readmes) {
