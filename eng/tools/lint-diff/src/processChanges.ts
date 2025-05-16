@@ -89,12 +89,12 @@ export async function buildState(
     const readmeTagMapForChangedFile = 
       await specModels.get(getService(changedSwagger))!.getAffectedReadmeTags(resolve(rootPath, changedSwagger));
     
-    for (const [readmeEntry, tags] of readmeTagMapForChangedFile) { 
-      if (!readmeTags.has(readmeEntry.path)) { 
-        readmeTags.set(readmeEntry.path, new Set<string>());
+    for (const [readmePath, tags] of readmeTagMapForChangedFile) {
+      if (!readmeTags.has(readmePath)) {
+        readmeTags.set(readmePath, new Set<string>());
       }
-      for (const tag of tags) { 
-        readmeTags.get(readmeEntry.path)?.add(tag.name);
+      for (const tagName of tags.keys()) {
+        readmeTags.get(readmePath)?.add(tagName);
       }
     }
   }
@@ -123,8 +123,8 @@ export async function buildState(
   for (const changedSwagger of existingChangedFiles.filter(swagger)) {
     const service = getService(changedSwagger);
     const swaggerSet = await specModels.get(service)!.getAffectedSwaggers(resolve(rootPath, changedSwagger));
-    for (const swaggerEntry of swaggerSet) {
-      affectedSwaggers.add(relative(rootPath, swaggerEntry.path));
+    for (const swaggerPath of swaggerSet.keys()) {
+      affectedSwaggers.add(relative(rootPath, swaggerPath));
     }
   }
 

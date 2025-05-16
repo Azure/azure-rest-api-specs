@@ -26,26 +26,27 @@ describe("readme", () => {
     });
 
     const tags = await readme.getTags();
-    const tagNames = new Set([...tags].map((t) => t.name));
-    const expectedTagNames = new Set([
+    const tagNames = [...tags.keys()];
+    const expectedTagNames = [
       "package-2021-11-01",
       "package-2021-10-01-preview",
+    ];
+
+    expect(tagNames.sort()).toEqual(expectedTagNames.sort());
+
+    const swaggerPaths = [...tags.values()].flatMap((t) => [
+      ...t.inputFiles.keys(),
     ]);
 
-    expect(tagNames).toEqual(expectedTagNames);
-
-    const swaggers = [...tags].flatMap((t) => [...t.inputFiles]);
-    const swaggerPaths = new Set(swaggers.map((s) => s.path));
-
-    const expectedPaths = new Set([
+    const expectedPaths = [
       resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
       resolve(
         folder,
         "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
       ),
-    ]);
+    ];
 
-    expect(swaggerPaths).toEqual(expectedPaths);
+    expect(swaggerPaths.sort()).toEqual(expectedPaths.sort());
   });
 
   it("can be created with empty content", async () => {
