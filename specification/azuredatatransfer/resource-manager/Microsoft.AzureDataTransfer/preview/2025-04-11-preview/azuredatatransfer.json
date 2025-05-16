@@ -2824,22 +2824,6 @@
         ]
       }
     },
-    "InternalMetadataProperties": {
-      "type": "object",
-      "description": "Internal metadata of the connection inside pipeline.",
-      "properties": {
-        "operationStatus": {
-          "$ref": "#/definitions/OperationStatusProperties",
-          "description": "Operation status associated with the last patch request"
-        },
-        "statusSetBy": {
-          "type": "string",
-          "description": "User that last set the approved status for this connection",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": {}
-    },
     "ListFlowsByPipelineResult": {
       "type": "object",
       "description": "An array of flow resources.",
@@ -2856,186 +2840,6 @@
         }
       }
     },
-    "OperationStatusProperties": {
-      "type": "object",
-      "description": "Operation status associated with the last patch request",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/operationStatusEnum",
-          "description": "Operation status for the last patch request for this connection.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "Operation status ID of the last patch request for this connection.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Message for the operation for the last patch request for this connection.",
-          "readOnly": true
-        }
-      }
-    },
-    "PendingConnection": {
-      "type": "object",
-      "description": "Pending connection object",
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription ID of the pending connection.",
-          "readOnly": true
-        },
-        "pipeline": {
-          "type": "string",
-          "description": "Pipeline to use to transfer data"
-        },
-        "direction": {
-          "$ref": "#/definitions/direction",
-          "description": "Direction of data movement"
-        },
-        "justification": {
-          "type": "string",
-          "description": "Justification for the connection request"
-        },
-        "status": {
-          "$ref": "#/definitions/status",
-          "description": "Status of the connection",
-          "readOnly": true
-        },
-        "forceDisabledStatus": {
-          "type": "array",
-          "description": "Force disablement status of the current connection",
-          "items": {
-            "$ref": "#/definitions/forceDisabledStatus"
-          },
-          "readOnly": true
-        },
-        "statusReason": {
-          "type": "string",
-          "description": "Reason for status",
-          "readOnly": true
-        },
-        "linkStatus": {
-          "$ref": "#/definitions/linkStatus",
-          "description": "Link status of the current connection",
-          "readOnly": true
-        },
-        "linkedConnectionId": {
-          "type": "string",
-          "description": "Resource ID of the linked connection",
-          "readOnly": true
-        },
-        "flowTypes": {
-          "type": "array",
-          "description": "The flow types being requested for this connection",
-          "items": {
-            "$ref": "#/definitions/flowType"
-          }
-        },
-        "requirementId": {
-          "type": "string",
-          "description": "Requirement ID of the connection"
-        },
-        "remoteSubscriptionId": {
-          "type": "string",
-          "description": "Subscription ID to link cloud subscriptions together"
-        },
-        "approver": {
-          "type": "string",
-          "description": "Approver of this connection request",
-          "readOnly": true
-        },
-        "pin": {
-          "type": "string",
-          "description": "PIN to link requests together"
-        },
-        "dateSubmitted": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp that this connection request was submitted at",
-          "readOnly": true
-        },
-        "primaryContact": {
-          "type": "string",
-          "description": "The primary contact for this connection request"
-        },
-        "secondaryContacts": {
-          "type": "array",
-          "description": "The secondary contacts for this connection request",
-          "items": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/provisioningState",
-          "description": "Provisioning state of the connection",
-          "readOnly": true
-        },
-        "policies": {
-          "type": "array",
-          "description": "The policies for this connection",
-          "items": {
-            "type": "string"
-          }
-        },
-        "schemas": {
-          "type": "array",
-          "description": "The schemas for this connection",
-          "items": {
-            "$ref": "#/definitions/schema"
-          }
-        },
-        "schemaUris": {
-          "type": "array",
-          "description": "The schema URIs for this connection",
-          "items": {
-            "type": "string",
-            "format": "uri"
-          }
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "pipeline",
-        "location"
-      ]
-    },
     "PendingConnectionListResult": {
       "type": "object",
       "description": "The custom response of a list operation.",
@@ -3044,7 +2848,7 @@
           "type": "array",
           "description": "The items on this page",
           "items": {
-            "$ref": "#/definitions/PendingConnection"
+            "$ref": "#/definitions/pendingConnection"
           }
         },
         "nextLink": {
@@ -3056,221 +2860,6 @@
         "value"
       ]
     },
-    "PendingFlow": {
-      "type": "object",
-      "description": "Pending flow object",
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription ID of the pending flow.",
-          "readOnly": true
-        },
-        "connectionId": {
-          "type": "string",
-          "description": "Connection ID of the pending flow.",
-          "readOnly": true
-        },
-        "connection": {
-          "$ref": "#/definitions/selectedResource",
-          "description": "The connection associated with this flow"
-        },
-        "flowId": {
-          "type": "string",
-          "description": "Dataflow GUID associated with this flow",
-          "readOnly": true
-        },
-        "keyVaultUri": {
-          "type": "string",
-          "description": "URI to a Key Vault Secret containing a SAS token."
-        },
-        "linkStatus": {
-          "$ref": "#/definitions/linkStatus",
-          "description": "Link status of the current flow",
-          "readOnly": true
-        },
-        "linkedFlowId": {
-          "type": "string",
-          "description": "Resource ID of the linked flow",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/flowStatus",
-          "description": "Status of the current flow"
-        },
-        "forceDisabledStatus": {
-          "type": "array",
-          "description": "Force disablement status of the current flow",
-          "items": {
-            "$ref": "#/definitions/forceDisabledStatus"
-          },
-          "readOnly": true
-        },
-        "storageAccountName": {
-          "type": "string",
-          "description": "Storage Account"
-        },
-        "storageAccountId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Storage Account ID",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/storageAccounts"
-              }
-            ]
-          }
-        },
-        "storageContainerName": {
-          "type": "string",
-          "description": "Storage Container Name"
-        },
-        "storageTableName": {
-          "type": "string",
-          "description": "Storage Table Name"
-        },
-        "serviceBusQueueId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Service Bus Queue ID",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/namespaces/queues"
-              }
-            ]
-          }
-        },
-        "flowType": {
-          "$ref": "#/definitions/flowType",
-          "description": "The flow type for this flow"
-        },
-        "dataType": {
-          "$ref": "#/definitions/dataType",
-          "description": "Type of data to transfer via the flow."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/provisioningState",
-          "description": "Provisioning state of the flow",
-          "readOnly": true
-        },
-        "policies": {
-          "type": "array",
-          "description": "The policies for this flow",
-          "items": {
-            "type": "string"
-          }
-        },
-        "schema": {
-          "$ref": "#/definitions/schema",
-          "description": "The selected schema for this flow"
-        },
-        "messagingOptions": {
-          "$ref": "#/definitions/messagingOptions",
-          "description": "The messaging options for this flow"
-        },
-        "apiFlowOptions": {
-          "$ref": "#/definitions/apiFlowOptions",
-          "description": "The API Flow configuration options for Azure Data Transfer API Flow type."
-        },
-        "customerManagedKeyVaultUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URI to the customer managed key for this flow"
-        },
-        "streamId": {
-          "type": "string",
-          "description": "The flow stream identifier"
-        },
-        "streamProtocol": {
-          "$ref": "#/definitions/streamProtocol",
-          "description": "The protocol of the stream"
-        },
-        "streamLatency": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The latency of the stream in milliseconds"
-        },
-        "passphrase": {
-          "type": "string",
-          "description": "The passphrase used for SRT streams"
-        },
-        "sourceAddresses": {
-          "$ref": "#/definitions/streamSourceAddresses",
-          "description": "The source IP address and CIDR ranges of the stream"
-        },
-        "destinationEndpoints": {
-          "type": "array",
-          "description": "The destination endpoints of the stream",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationEndpointPorts": {
-          "type": "array",
-          "description": "The destination endpoint ports of the stream",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          }
-        },
-        "eventHubId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Event Hub ID",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.EventHub/namespaces/eventhubs"
-              }
-            ]
-          }
-        },
-        "consumerGroup": {
-          "type": "string",
-          "description": "Event Hub Consumer Group"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "location"
-      ]
-    },
     "PendingFlowListResult": {
       "type": "object",
       "description": "The custom response of a list operation.",
@@ -3279,7 +2868,7 @@
           "type": "array",
           "description": "The items on this page",
           "items": {
-            "$ref": "#/definitions/PendingFlow"
+            "$ref": "#/definitions/pendingFlow"
           }
         },
         "nextLink": {
@@ -3339,7 +2928,7 @@
       "description": "Connection properties inside pipeline",
       "properties": {
         "internalMetadata": {
-          "$ref": "#/definitions/InternalMetadataProperties",
+          "$ref": "#/definitions/internalMetadataProperties",
           "description": "Internal metadata of the connection inside pipeline."
         }
       },
@@ -4110,6 +3699,22 @@
         ]
       }
     },
+    "internalMetadataProperties": {
+      "type": "object",
+      "description": "Internal metadata of the connection inside pipeline.",
+      "properties": {
+        "operationStatus": {
+          "$ref": "#/definitions/operationStatusProperties",
+          "description": "Operation status associated with the last patch request"
+        },
+        "statusSetBy": {
+          "type": "string",
+          "description": "User that last set the approved status for this connection",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {}
+    },
     "linkStatus": {
       "type": "string",
       "description": "Link status of the current pipeline, connection, flow.",
@@ -4199,6 +3804,401 @@
         ]
       },
       "readOnly": true
+    },
+    "operationStatusProperties": {
+      "type": "object",
+      "description": "Operation status associated with the last patch request",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/operationStatusEnum",
+          "description": "Operation status for the last patch request for this connection.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Operation status ID of the last patch request for this connection.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Message for the operation for the last patch request for this connection.",
+          "readOnly": true
+        }
+      }
+    },
+    "pendingConnection": {
+      "type": "object",
+      "description": "Pending connection object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID of the pending connection.",
+          "readOnly": true
+        },
+        "pipeline": {
+          "type": "string",
+          "description": "Pipeline to use to transfer data"
+        },
+        "direction": {
+          "$ref": "#/definitions/direction",
+          "description": "Direction of data movement"
+        },
+        "justification": {
+          "type": "string",
+          "description": "Justification for the connection request"
+        },
+        "status": {
+          "$ref": "#/definitions/status",
+          "description": "Status of the connection",
+          "readOnly": true
+        },
+        "forceDisabledStatus": {
+          "type": "array",
+          "description": "Force disablement status of the current connection",
+          "items": {
+            "$ref": "#/definitions/forceDisabledStatus"
+          },
+          "readOnly": true
+        },
+        "statusReason": {
+          "type": "string",
+          "description": "Reason for status",
+          "readOnly": true
+        },
+        "linkStatus": {
+          "$ref": "#/definitions/linkStatus",
+          "description": "Link status of the current connection",
+          "readOnly": true
+        },
+        "linkedConnectionId": {
+          "type": "string",
+          "description": "Resource ID of the linked connection",
+          "readOnly": true
+        },
+        "flowTypes": {
+          "type": "array",
+          "description": "The flow types being requested for this connection",
+          "items": {
+            "$ref": "#/definitions/flowType"
+          }
+        },
+        "requirementId": {
+          "type": "string",
+          "description": "Requirement ID of the connection"
+        },
+        "remoteSubscriptionId": {
+          "type": "string",
+          "description": "Subscription ID to link cloud subscriptions together"
+        },
+        "approver": {
+          "type": "string",
+          "description": "Approver of this connection request",
+          "readOnly": true
+        },
+        "pin": {
+          "type": "string",
+          "description": "PIN to link requests together"
+        },
+        "dateSubmitted": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp that this connection request was submitted at",
+          "readOnly": true
+        },
+        "primaryContact": {
+          "type": "string",
+          "description": "The primary contact for this connection request"
+        },
+        "secondaryContacts": {
+          "type": "array",
+          "description": "The secondary contacts for this connection request",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/provisioningState",
+          "description": "Provisioning state of the connection",
+          "readOnly": true
+        },
+        "policies": {
+          "type": "array",
+          "description": "The policies for this connection",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schemas": {
+          "type": "array",
+          "description": "The schemas for this connection",
+          "items": {
+            "$ref": "#/definitions/schema"
+          }
+        },
+        "schemaUris": {
+          "type": "array",
+          "description": "The schema URIs for this connection",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "pipeline",
+        "location"
+      ]
+    },
+    "pendingFlow": {
+      "type": "object",
+      "description": "Pending flow object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID of the pending flow.",
+          "readOnly": true
+        },
+        "connectionId": {
+          "type": "string",
+          "description": "Connection ID of the pending flow.",
+          "readOnly": true
+        },
+        "connection": {
+          "$ref": "#/definitions/selectedResource",
+          "description": "The connection associated with this flow"
+        },
+        "flowId": {
+          "type": "string",
+          "description": "Dataflow GUID associated with this flow",
+          "readOnly": true
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "URI to a Key Vault Secret containing a SAS token."
+        },
+        "linkStatus": {
+          "$ref": "#/definitions/linkStatus",
+          "description": "Link status of the current flow",
+          "readOnly": true
+        },
+        "linkedFlowId": {
+          "type": "string",
+          "description": "Resource ID of the linked flow",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/flowStatus",
+          "description": "Status of the current flow"
+        },
+        "forceDisabledStatus": {
+          "type": "array",
+          "description": "Force disablement status of the current flow",
+          "items": {
+            "$ref": "#/definitions/forceDisabledStatus"
+          },
+          "readOnly": true
+        },
+        "storageAccountName": {
+          "type": "string",
+          "description": "Storage Account"
+        },
+        "storageAccountId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Storage Account ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "storageContainerName": {
+          "type": "string",
+          "description": "Storage Container Name"
+        },
+        "storageTableName": {
+          "type": "string",
+          "description": "Storage Table Name"
+        },
+        "serviceBusQueueId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Service Bus Queue ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/namespaces/queues"
+              }
+            ]
+          }
+        },
+        "flowType": {
+          "$ref": "#/definitions/flowType",
+          "description": "The flow type for this flow"
+        },
+        "dataType": {
+          "$ref": "#/definitions/dataType",
+          "description": "Type of data to transfer via the flow."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/provisioningState",
+          "description": "Provisioning state of the flow",
+          "readOnly": true
+        },
+        "policies": {
+          "type": "array",
+          "description": "The policies for this flow",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/schema",
+          "description": "The selected schema for this flow"
+        },
+        "messagingOptions": {
+          "$ref": "#/definitions/messagingOptions",
+          "description": "The messaging options for this flow"
+        },
+        "apiFlowOptions": {
+          "$ref": "#/definitions/apiFlowOptions",
+          "description": "The API Flow configuration options for Azure Data Transfer API Flow type."
+        },
+        "customerManagedKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI to the customer managed key for this flow"
+        },
+        "streamId": {
+          "type": "string",
+          "description": "The flow stream identifier"
+        },
+        "streamProtocol": {
+          "$ref": "#/definitions/streamProtocol",
+          "description": "The protocol of the stream"
+        },
+        "streamLatency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The latency of the stream in milliseconds"
+        },
+        "passphrase": {
+          "type": "string",
+          "description": "The passphrase used for SRT streams"
+        },
+        "sourceAddresses": {
+          "$ref": "#/definitions/streamSourceAddresses",
+          "description": "The source IP address and CIDR ranges of the stream"
+        },
+        "destinationEndpoints": {
+          "type": "array",
+          "description": "The destination endpoints of the stream",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationEndpointPorts": {
+          "type": "array",
+          "description": "The destination endpoint ports of the stream",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "eventHubId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Event Hub ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.EventHub/namespaces/eventhubs"
+              }
+            ]
+          }
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "Event Hub Consumer Group"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location"
+      ]
     },
     "pipeline": {
       "type": "object",

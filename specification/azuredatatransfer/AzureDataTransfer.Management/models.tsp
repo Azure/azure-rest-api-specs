@@ -1390,3 +1390,7 @@ model AzureResourceManagerArmResponsePipeline {
 @@clientName(SchemaStatus, "schemaStatus");
 @@clientName(ValidateSchemaStatus, "validateSchemaStatus");
 @@clientName(ListFlowsByPipelineConnection, "listFlowsByPipelineConnection");
+@@clientName(InternalMetadataProperties, "internalMetadataProperties");
+@@clientName(OperationStatusProperties, "operationStatusProperties");
+@@clientName(PendingFlow, "pendingFlow");
+@@clientName(PendingConnection, "pendingConnection");
