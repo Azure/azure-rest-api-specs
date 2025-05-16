@@ -1300,7 +1300,7 @@ union AcsUserEngagement {
 
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
 model AcsChatThreadRetentionPolicyModel {
-  /** The retenton policy kind. */
+  /** The retention policy kind. */
   kind?: AcsChatThreadRetentionPolicyKind;
 
   /** After how many days chat thread should be deleted. */
