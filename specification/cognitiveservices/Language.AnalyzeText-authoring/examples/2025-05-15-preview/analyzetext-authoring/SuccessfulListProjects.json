@@ -1,0 +1,43 @@
+{
+  "operationId": "TextAnalysisAuthoringListProjects",
+  "title": "SuccessfulListProjects",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2025-05-15-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "createdDateTime": "2022-04-18T13:53:03Z",
+            "lastModifiedDateTime": "2022-04-18T13:53:03Z",
+            "lastTrainedDateTime": "2022-04-18T14:14:28Z",
+            "lastDeployedDateTime": "2022-04-18T14:49:01Z",
+            "projectKind": "CustomEntityRecognition",
+            "storageAccountResourceId": "/subscriptions/e54a2925-af7f-4b05-9ba1-2155c5fe8a8e/resourceGroups/gokulkarni-clu/providers/Microsoft.CognitiveServices/accounts/gokulk",
+            "storageInputContainerName": "loanagreements",
+            "projectName": "LoanAgreements",
+            "multilingual": false,
+            "description": "This is a sample dataset provided by the Azure Language service team to help users get started with [Custom named entity recognition](https://aka.ms/ct-docs). The provided sample dataset contains 20 loan agreements drawn up between two entities.",
+            "language": "en"
+          },
+          {
+            "createdDateTime": "2022-04-18T14:03:12Z",
+            "lastModifiedDateTime": "2022-04-18T14:03:12Z",
+            "projectKind": "CustomMultiLabelClassification",
+            "storageAccountResourceId": "/subscriptions/e54a2925-af7f-4b05-9ba1-2155c5fe8a8e/resourceGroups/gokulkarni-clu/providers/Microsoft.CognitiveServices/accounts/gokulk",
+            "storageInputContainerName": "loanagreements",
+            "projectName": "MoviesSummary",
+            "multilingual": false,
+            "description": "This is a sample dataset adapted from the CMU Movie Summary public dataset. This was prepared by Microsoft Azure Language Services product team to prepare this dataset to be used as a sample for getting started with Custom text classification. This sample dataset consists of 210 files each of them is a movie summary. Each movie can be classified into one or more of the following classes: \"Mystery\", \"Drama\", \"Thriller\", \"Comedy\", \"Action\".",
+            "language": "en"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

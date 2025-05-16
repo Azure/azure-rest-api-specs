@@ -27,7 +27,7 @@ options:
     use-model-reader-writer: true
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-computefleet"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.computefleet"
     generate-test: true
     generate-sample: true
     flavor: "azure"
@@ -42,18 +42,13 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    experimental-extensible-enums: true
     package-dir: "arm-computefleet"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-computefleet"

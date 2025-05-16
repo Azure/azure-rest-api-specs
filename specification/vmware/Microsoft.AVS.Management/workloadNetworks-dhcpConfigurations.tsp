@@ -5,7 +5,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 // @armResourceOperations
@@ -41,7 +40,7 @@ interface WorkloadNetworkDhcpConfigurations {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDhcp")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcp>;
 
   #suppress "deprecated"
@@ -107,11 +106,11 @@ model WorkloadNetworkDhcpEntity {
   displayName?: string;
 
   @doc("NSX Segments consuming DHCP.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   segments?: string[];
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkDhcpProvisioningState;
 
   @doc("NSX revision number.")

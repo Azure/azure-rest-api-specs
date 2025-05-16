@@ -17,21 +17,41 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/vmware.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
-  "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    clear-output-folder: true
-    package-dir: "arm-avs"
-    flavor: "azure"
-    packageDetails:
-      name: "@azure/arm-avs"
-  "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-avs"
-    package-name: "{package-dir}"
-    flavor: "azure"
-    generate-test: true
-    generate-sample: true
+
+  # "@azure-tools/typespec-csharp":
+  #   flavor: azure
+  #   package-dir: "Azure.ResourceManager.Avs"
+  #   clear-output-folder: true
+  #   model-namespace: true
+  #   namespace: "{package-dir}"
+
+  # "@azure-tools/typespec-go":
+  #   service-dir: "sdk/resourcemanager/avs"
+  #   package-dir: "armavs"
+  #   module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+  #   fix-const-stuttering: true
+  #   flavor: "azure"
+  #   generate-samples: true
+  #   generate-fakes: true
+  #   head-as-boolean: true
+  #   inject-spans: true
+
+  # "@azure-tools/typespec-java":
+  #   package-dir: "azure-resourcemanager-avs"
+  #   namespace: "com.azure.resourcemanager.avs"
+  #   service-name: "avs"
+  #   flavor: azure
+
+  # "@azure-tools/typespec-python":
+  #   package-dir: "azure-mgmt-avs"
+  #   namespace: "azure.mgmt.avs"
+  #   flavor: "azure"
+  #   generate-test: true
+  #   generate-sample: true
+
+  # "@azure-tools/typespec-ts":
+  #   experimental-extensible-enums: true
+  #   package-dir: "arm-avs"
+  #   flavor: azure
+  #   package-details:
+  #     name: "@azure/arm-avs"

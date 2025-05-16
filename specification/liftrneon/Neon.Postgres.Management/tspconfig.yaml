@@ -23,12 +23,13 @@ options:
     generate-sample-project: false
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-neonpostgres"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.neonpostgres"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-neonpostgres"
+    namespace: "com.azure.resourcemanager.neonpostgres"
     service-name: "Neon Postgres"
     flavor: "azure"
   "@azure-tools/typespec-go":
@@ -37,7 +38,13 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-neonpostgres"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-neonpostgres"

@@ -15,9 +15,7 @@ using TypeSpec.Versioning;
 
 @doc("GitHub.Network Resource Provider REST API")
 @armProviderNamespace
-@service({
-  title: "GitHub.Network client",
-})
+@service(#{ title: "GitHub.Network client" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace GitHub.Network;

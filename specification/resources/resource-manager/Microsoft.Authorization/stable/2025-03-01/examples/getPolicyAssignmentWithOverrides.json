@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "policyAssignmentName": "CostManagement",
+    "api-version": "2025-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "properties": {
+          "displayName": "Limit the resource location and resource SKU",
+          "description": "Limit the resource location and resource SKU",
+          "metadata": {
+            "assignedBy": "Special Someone"
+          },
+          "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/CostManagement",
+          "definitionVersion": "1.*.*",
+          "notScopes": [],
+          "enforcementMode": "Default",
+          "scope": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+          "overrides": [
+            {
+              "kind": "policyEffect",
+              "value": "Audit",
+              "selectors": [
+                {
+                  "kind": "policyDefinitionReferenceId",
+                  "in": [
+                    "Limit_Skus",
+                    "Limit_Locations"
+                  ]
+                }
+              ]
+            }
+          ],
+          "instanceId": "d2f3a4b5-c6d7-8e9f-0a1b-2c3d4e5f6a7b"
+        },
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/CostManagement",
+        "type": "Microsoft.Authorization/policyAssignments",
+        "name": "CostManagement"
+      }
+    }
+  }
+}
