@@ -2,15 +2,11 @@
 
 import { readdir } from "fs/promises";
 import { dirname, isAbsolute, join, resolve } from "path";
-import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const repoRoot = join(__dirname, "..", "..", "..");
+import { repoRoot } from "./repo.js";
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
 
