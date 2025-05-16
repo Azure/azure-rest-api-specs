@@ -8,13 +8,16 @@ resources:
       name: 1ESPipelineTemplates/1ESPipelineTemplates
       ref: refs/tags/release
 
+variables:
+  - template: /eng/pipelines/templates/variables/image.yml
+
 extends:
   template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
   parameters:
     pool:
-      name: azsdk-pool
-      image: ubuntu-24.04
-      os: linux
+      name: $(WINDOWSPOOL)
+      image: $(WINDOWSVMIMAGE)
+      os: windows
     
     sdl:
       credscan:
