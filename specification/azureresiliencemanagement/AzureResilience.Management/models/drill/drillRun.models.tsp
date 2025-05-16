@@ -36,7 +36,7 @@ model DrillRun is ProxyResource<DrillRunProperties> {
 @doc("Properties of the Resiliency DrillRun.")
 model DrillRunProperties extends JobProperties {
   @doc("Discriminator for the Job object hierarchy.")
-  jobType: JobType.DrillOober;
+  jobType: JobType.DrillRun;
 
   @doc("Parent Drill resource.")
   @visibility(Lifecycle.Read)
@@ -53,6 +53,15 @@ model DrillRunProperties extends JobProperties {
   @doc("Drill mode.")
   @visibility(Lifecycle.Read)
   drillMode: DrillMode;
+
+  @doc("Attestation of this Drill Run.")
+  @visibility(Lifecycle.Read)
+  attestation: DrillAttestation;
+
+  @doc("Notes for this Drill.")
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  notes: string[];
 }
 
 @doc("Request body for AddNotes API.")

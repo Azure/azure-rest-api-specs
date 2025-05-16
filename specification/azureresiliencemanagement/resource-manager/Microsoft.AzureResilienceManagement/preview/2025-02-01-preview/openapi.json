@@ -6138,19 +6138,35 @@
           "$ref": "#/definitions/DrillMode",
           "description": "Drill mode.",
           "readOnly": true
+        },
+        "attestation": {
+          "$ref": "#/definitions/DrillAttestation",
+          "description": "Attestation of this Drill Run.",
+          "readOnly": true
+        },
+        "notes": {
+          "type": "array",
+          "description": "Notes for this Drill.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
         "drillUrl",
         "metricValue",
-        "drillMode"
+        "drillMode",
+        "attestation",
+        "notes"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/JobProperties"
         }
       ],
-      "x-ms-discriminator-value": "DrillOober"
+      "x-ms-discriminator-value": "DrillRun"
     },
     "DrillRunResource": {
       "type": "object",
@@ -7438,9 +7454,10 @@
         "Invalid",
         "RecoveryPlan",
         "RecoveryPlanChild",
+        "DrillRun",
         "DrillRunChild",
-        "DrillOober",
-        "ChaosExperiment"
+        "ChaosExperiment",
+        "ChaosExperimentChild"
       ],
       "x-ms-enum": {
         "name": "JobResourceType",
@@ -7462,19 +7479,24 @@
             "description": "Recovery Orchestration Plan child created job resource."
           },
           {
+            "name": "DrillRun",
+            "value": "DrillRun",
+            "description": "Drill Run job resource."
+          },
+          {
             "name": "DrillRunChild",
             "value": "DrillRunChild",
             "description": "Drill Run child job resource."
           },
           {
-            "name": "DrillOober",
-            "value": "DrillOober",
-            "description": "Drill Oober job resource which represents a given instance of Drill."
-          },
-          {
             "name": "ChaosExperiment",
             "value": "ChaosExperiment",
-            "description": "Chaos job resource created by Validation to represent a Experiment Run."
+            "description": "Chaos job resource created by Drill to represent a Experiment Run."
+          },
+          {
+            "name": "ChaosExperimentChild",
+            "value": "ChaosExperimentChild",
+            "description": "Chaos job's child job resource."
           }
         ]
       }
@@ -7696,9 +7718,10 @@
         "Invalid",
         "RecoveryPlan",
         "RecoveryPlanChild",
-        "DrillOober",
+        "DrillRun",
         "DrillRunChild",
-        "ChaosExperiment"
+        "ChaosExperiment",
+        "ChaosExperimentChild"
       ],
       "x-ms-enum": {
         "name": "JobType",
@@ -7720,8 +7743,8 @@
             "description": "Recovery Orchestration Plan child created job."
           },
           {
-            "name": "DrillOober",
-            "value": "DrillOober",
+            "name": "DrillRun",
+            "value": "DrillRun",
             "description": "Drill Oober job which represents a given instance of Drill."
           },
           {
@@ -7733,6 +7756,11 @@
             "name": "ChaosExperiment",
             "value": "ChaosExperiment",
             "description": "Chaos job created by Drill to represent a Experiment Run."
+          },
+          {
+            "name": "ChaosExperimentChild",
+            "value": "ChaosExperimentChild",
+            "description": "Chaos job's child job."
           }
         ]
       }

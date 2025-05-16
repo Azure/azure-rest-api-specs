@@ -160,7 +160,7 @@ union JobType {
   RecoveryPlanChild: "RecoveryPlanChild",
 
   @doc("Drill Oober job which represents a given instance of Drill.")
-  DrillOober: "DrillOober",
+  DrillRun: "DrillRun",
 
   @doc("Drill Run child job.")
   DrillRunChild: "DrillRunChild",
@@ -168,12 +168,15 @@ union JobType {
   @doc("Chaos job created by Drill to represent a Experiment Run.")
   ChaosExperiment: "ChaosExperiment",
 
+  @doc("Chaos job's child job.")
+  ChaosExperimentChild: "ChaosExperimentChild",
+
   string,
 }
 
 @doc("A job resource type indicates the kind of jobresource.")
 union JobResourceType {
-  @doc("Abstract job resource - invalid.")
+ @doc("Abstract job resource - invalid.")
   Invalid: "Invalid",
 
   @doc("Recovery Orchestration Plan created job resource.")
@@ -182,14 +185,17 @@ union JobResourceType {
   @doc("Recovery Orchestration Plan child created job resource.")
   RecoveryPlanChild: "RecoveryPlanChild",
 
+  @doc("Drill Run job resource.")
+  DrillRun: "DrillRun",
+
   @doc("Drill Run child job resource.")
   DrillRunChild: "DrillRunChild",
 
-  @doc("Drill Oober job resource which represents a given instance of Drill.")
-  DrillOober: "DrillOober",
-
-  @doc("Chaos job resource created by Validation to represent a Experiment Run.")
+  @doc("Chaos job resource created by Drill to represent a Experiment Run.")
   ChaosExperiment: "ChaosExperiment",
+
+  @doc("Chaos job's child job resource.")
+  ChaosExperimentChild: "ChaosExperimentChild",
 
   string,
 }
