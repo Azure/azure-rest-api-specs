@@ -41,7 +41,7 @@ export class Swagger {
   }
 
   /**
-   * @returns import('@apidevtools/json-schema-ref-parser').$RefParserOptions 
+   * @returns import('@apidevtools/json-schema-ref-parser').$RefParserOptions
    */
   #getRefParserResolver() {
     if (!this.#ignoreSwaggerExamples) {
@@ -53,21 +53,23 @@ export class Swagger {
       http: false,
       file: {
         order: 1,
-        read: async (/** @type import('@apidevtools/json-schema-ref-parser').FileInfo */ file) => {
-          if(example(file.url)) {
+        read: async (
+          /** @type import('@apidevtools/json-schema-ref-parser').FileInfo */ file,
+        ) => {
+          if (example(file.url)) {
             return "";
           }
           return await readFile(file.url, { encoding: "utf8" });
-        }
-      }
-     }
+        },
+      },
+    };
   }
 
   /**
    * @param {string} path
    * @returns {boolean}
    */
-  #filterRefPaths(/** @type string */path) {
+  #filterRefPaths(/** @type string */ path) {
     // Always return true if not ignoring examples
     return this.#ignoreSwaggerExamples ? !example(path) : true;
   }
@@ -84,7 +86,7 @@ export class Swagger {
       const refPaths = schema
         .paths("file")
         // Exclude examples
-        .filter(p => this.#filterRefPaths(p))
+        .filter((p) => this.#filterRefPaths(p))
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 

@@ -15,30 +15,40 @@ describe("Swagger", () => {
   });
 });
 
-describe("Ignore examples", () => { 
-  it("includes example files by default", async () => { 
-    const swagger = new Swagger("test/fixtures/Swagger/ignoreExamples/swagger.json");
+describe("Ignore examples", () => {
+  it("includes example files by default", async () => {
+    const swagger = new Swagger(
+      "test/fixtures/Swagger/ignoreExamples/swagger.json",
+    );
     const refs = await swagger.getRefs();
 
-    expect(refs).toMatchObject(new Set([
-      expect.objectContaining({ 
-        path: resolve("test/fixtures/Swagger/ignoreExamples/included.json"),
-      }),
-      expect.objectContaining({ 
-        path: resolve("test/fixtures/Swagger/ignoreExamples/examples/example.json"),
-      }),
-    ]))
+    expect(refs).toMatchObject(
+      new Set([
+        expect.objectContaining({
+          path: resolve("test/fixtures/Swagger/ignoreExamples/included.json"),
+        }),
+        expect.objectContaining({
+          path: resolve(
+            "test/fixtures/Swagger/ignoreExamples/examples/example.json",
+          ),
+        }),
+      ]),
+    );
   });
 
   it("excludes example files when ignoreExamples is set", async () => {
-    const swagger = new Swagger("test/fixtures/Swagger/ignoreExamples/swagger.json", {ignoreSwaggerExamples: true});
+    const swagger = new Swagger(
+      "test/fixtures/Swagger/ignoreExamples/swagger.json",
+      { ignoreSwaggerExamples: true },
+    );
     const refs = await swagger.getRefs();
 
-    expect(refs).toMatchObject(new Set([
-      expect.objectContaining({ 
-        path: resolve("test/fixtures/Swagger/ignoreExamples/included.json"),
-      }),
-    ]))
+    expect(refs).toMatchObject(
+      new Set([
+        expect.objectContaining({
+          path: resolve("test/fixtures/Swagger/ignoreExamples/included.json"),
+        }),
+      ]),
+    );
   });
-})
-
+});

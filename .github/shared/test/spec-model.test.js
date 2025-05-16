@@ -8,7 +8,10 @@ import { ConsoleLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
 import { repoRoot } from "./repo.js";
 
-const options = { logger: new ConsoleLogger(/*debug*/ true), ignoreSwaggerExamples: true };
+const options = {
+  logger: new ConsoleLogger(/*debug*/ true),
+  ignoreSwaggerExamples: true,
+};
 
 describe("SpecModel", () => {
   it("can be created with mock folder", async () => {
@@ -375,14 +378,19 @@ describe("Parse readmes", () => {
 
       for (const folder of folders) {
         console.log(`Testing service: ${folder}`);
-        const specModel = new SpecModel(resolve(`../../specification/${folder}`), { ignoreSwaggerExamples: false });
+        const specModel = new SpecModel(
+          resolve(`../../specification/${folder}`),
+          { ignoreSwaggerExamples: false },
+        );
         // Resolve everything in parallel
         const readmes = await specModel.getReadmes();
         const refs = await flatMapAsync([...readmes], async (readme) => {
           const tags = await readme.getTags();
           const result = await flatMapAsync([...tags], async (tag) => {
             const inputFiles = [...tag.inputFiles];
-            const refs = await flatMapAsync(inputFiles, async (swagger) => [...(await swagger.getRefs())]);
+            const refs = await flatMapAsync(inputFiles, async (swagger) => [
+              ...(await swagger.getRefs()),
+            ]);
             return refs;
           });
           return result;

@@ -186,7 +186,12 @@ export class SpecModel {
 
       this.#readmes = new Set(
         readmePaths.map(
-          (p) => new Readme(p, { logger: this.#logger, specModel: this, ignoreSwaggerExamples: this.#ignoreSwaggerExamples }),
+          (p) =>
+            new Readme(p, {
+              logger: this.#logger,
+              specModel: this,
+              ignoreSwaggerExamples: this.#ignoreSwaggerExamples,
+            }),
         ),
       );
     }
