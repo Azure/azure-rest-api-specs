@@ -338,7 +338,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -505,8 +505,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "ChatCompletionsOptions": {
@@ -744,14 +743,9 @@
           "x-ms-client-name": "contentFilterResults"
         },
         "logprobs": {
-          "type": "object",
+          "$ref": "#/definitions/CompletionsLogProbabilityModel",
           "description": "The log probabilities model for tokens associated with this completions choice.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CompletionsLogProbabilityModel"
-            }
-          ]
+          "x-nullable": true
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
@@ -805,8 +799,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "CompletionsFinishReason": {

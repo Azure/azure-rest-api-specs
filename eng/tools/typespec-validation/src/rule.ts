@@ -1,5 +1,4 @@
 import { RuleResult } from "./rule-result.js";
-import { TsvHost } from "./tsv-host.js";
 
 export interface Rule {
   readonly name: string;
@@ -8,5 +7,5 @@ export interface Rule {
   readonly action?: string;
   // TODO: required when all rules apply it
   readonly link?: string;
-  execute(host?: TsvHost, folder?: string): Promise<RuleResult>;
+  execute(folder: string): Promise<RuleResult>;
 }

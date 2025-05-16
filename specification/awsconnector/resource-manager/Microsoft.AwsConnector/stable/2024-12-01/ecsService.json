@@ -531,16 +531,14 @@
           "description": "The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``AwsVpcConfiguration``.  All specified security groups must be from the same VPC.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "subnets": {
           "type": "array",
           "description": "The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``AwsVpcConfiguration``.  All specified subnets must be from the same VPC.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -597,8 +595,7 @@
           "description": "One or more CloudWatch alarm names. Use a ',' to separate the alarms.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "enable": {
           "type": "boolean",
@@ -694,7 +691,7 @@
       "properties": {
         "propagateTags": {
           "$ref": "#/definitions/EBSTagSpecificationPropagateTags",
-          "description": "Determines whether to propagate the tags from the task definition to  the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in  ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't  propagated."
+          "description": "Determines whether to propagate the tags from the task definition to the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't propagated."
         },
         "resourceType": {
           "type": "string",
@@ -1226,7 +1223,7 @@
         },
         "filesystemType": {
           "type": "string",
-          "description": "The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start. The available filesystem types are  ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default."
+          "description": "The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start. The available filesystem types are ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default."
         },
         "iops": {
           "type": "integer",

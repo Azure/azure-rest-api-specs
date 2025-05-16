@@ -62,40 +62,42 @@ model AudioTranscriptionOptions {
      flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
     """)
   @clientName("AudioData", "csharp")
-  file: bytes;
+  file: HttpPart<bytes>;
 
   @doc("""
     The optional filename or descriptive identifier to associate with with the audio data.
     """)
   // Note: although this isn't explicitly part of the request schema per documentation, it is present via the encoded
   // content-disposition header for the binary section of the multipart/form-data content.
-  filename?: string;
+  filename?: HttpPart<string>;
 
   @doc("""
     The requested format of the transcription response data, which will influence the content and detail of the result.
     """)
-  @encodedName("application/json", "response_format")
-  responseFormat?: AudioTranscriptionFormat;
+  responseFormat?: HttpPart<
+    AudioTranscriptionFormat,
+    #{ name: "response_format" }
+  >;
 
   @doc("""
     The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code
     such as 'en' or 'fr'.
     Providing this known input language is optional but may improve the accuracy and/or latency of transcription.
     """)
-  language?: string;
+  language?: HttpPart<string>;
 
   @doc("""
     An optional hint to guide the model's style or continue from a prior audio segment. The written language of the
     prompt should match the primary spoken language of the audio data.
     """)
-  prompt?: string;
+  prompt?: HttpPart<string>;
 
   @doc("""
     The sampling temperature, between 0 and 1.
     Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
     If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
     """)
-  temperature?: float32;
+  temperature?: HttpPart<float32>;
 
   @doc("""
     The timestamp granularities to populate for this transcription.
@@ -104,10 +106,15 @@ model AudioTranscriptionOptions {
     Note: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.
     """)
   @added(ServiceApiVersions.v2024_04_01_Preview)
-  @encodedName("application/json", "timestamp_granularities")
-  timestampGranularities?: AudioTranscriptionTimestampGranularity[] = #[
-    AudioTranscriptionTimestampGranularity.segment
-  ];
+  timestampGranularities?: HttpPart<
+    AudioTranscriptionTimestampGranularity[],
+    #{ name: "timestamp_granularities" }
+  >;
+
+  // Gap in 1.0-rc
+  // = #[
+  //   AudioTranscriptionTimestampGranularity.segment
+  // ];
 
   @doc("""
     The model to use for this transcription request.
@@ -116,7 +123,7 @@ model AudioTranscriptionOptions {
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
   @clientName("DeploymentName", "csharp")
-  `model`?: string;
+  `model`?: HttpPart<string>;
 }
 
 @doc("""
@@ -225,6 +232,6 @@ model GetAudioTranscriptionBody {
   /**
    * The configuration information for an audio transcription request.
    */
-  @body
+  @multipartBody
   body: AudioTranscriptionOptions;
 }

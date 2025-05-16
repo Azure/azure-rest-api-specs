@@ -129,7 +129,7 @@ model Node {
 @doc("Constitution used to make governance decisions on the service. All governance changes are presented as proposals which must be validated, approved, and applied by the code in this constitution.")
 model ConstitutionResponse {
   @doc("Singleton key for accessing constitution")
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   @key
   id: "constitution";
 
@@ -195,7 +195,7 @@ model JsOperations extends Record<JsEndpointInfo> {}
 @doc("Describes the currently installed JavaScript application.")
 model JsApp {
   @doc("Singleton key for accessing javascript-app.")
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   @key
   id: "javascript-app";
 
@@ -233,7 +233,7 @@ model SnpJoinPolicy {
 @doc("Collection of all policies which determine currently acceptable nodes, across multiple platforms.")
 model JoinPolicies {
   @doc("Singleton key for accessing join-policy")
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   @key
   id: "join-policy";
 
@@ -278,7 +278,7 @@ scalar caCertBundle extends string;
 @doc("Describes what Javascript Web Tokens (JWTs) are accepted by the service, and how they will be validated.")
 model JwkInfo {
   @doc("Singleton key for accessing jwk")
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   @key
   id: "jwk";
 
@@ -311,7 +311,7 @@ union ServiceStatus {
 @TypeSpec.Rest.resource("service")
 model ServiceInfo {
   @doc("Singleton key for accessing info.")
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   @key
   id: "info";
 

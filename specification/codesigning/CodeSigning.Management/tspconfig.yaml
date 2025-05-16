@@ -19,20 +19,15 @@ options:
     service-name: "Trusted Signing"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-trustedsigning"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.trustedsigning"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    experimental-extensible-enums: true
     package-dir: "arm-trustedsigning"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-trustedsigning"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/trustedsigning"
@@ -40,7 +35,7 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true

@@ -979,7 +979,29 @@
           ],
           "x-ms-enum": {
             "name": "RestrictionsFilterType",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "QuotaAndOfferRestrictions",
+                "value": "QuotaAndOfferRestrictions",
+                "description": "Apply both quota and offer restrictions on VMSize recommendations."
+              },
+              {
+                "name": "QuotaRestrictions",
+                "value": "QuotaRestrictions",
+                "description": "Apply quota restrictions on VMSize recommendations."
+              },
+              {
+                "name": "OfferRestrictions",
+                "value": "OfferRestrictions",
+                "description": "Apply offer restrictions on VMSize recommendations."
+              },
+              {
+                "name": "None",
+                "value": "None",
+                "description": "Do not apply any restrictions on VMSize recommendations."
+              }
+            ]
           }
         }
       },
@@ -1025,21 +1047,53 @@
         "vmCategories": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "General Purpose",
+              "Compute Optimized",
+              "Memory Optimized",
+              "Storage Optimized",
+              "GPU Accelerated",
+              "FPGA Accelerated",
+              "High Performance Compute",
+              "Confidential Compute"
+            ],
+            "x-ms-enum": {
+              "name": "VmCategories",
+              "modelAsString": false
+            }
           },
           "description": "The vm categories."
         },
         "architectureTypes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "x64",
+              "Arm64"
+            ],
+            "x-ms-enum": {
+              "name": "ArchitectureTypes",
+              "modelAsString": false
+            }
           },
           "description": "The cpu architecture types."
         },
         "cpuManufacturers": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Intel",
+              "AMD",
+              "Microsoft",
+              "Ampere"
+            ],
+            "x-ms-enum": {
+              "name": "CpuManufacturers",
+              "modelAsString": false
+            }
           },
           "description": "The cpu manufacturers."
         },
@@ -1053,13 +1107,39 @@
           ],
           "x-ms-enum": {
             "name": "FilterType",
-            "modelAsString": false
-          }
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Included",
+                "value": "Included",
+                "description": "To include vm size with selected attribute, specify included."
+              },
+              {
+                "name": "Required",
+                "value": "Required",
+                "description": "To require only vm size with selected attribute, specify required."
+              },
+              {
+                "name": "Excluded",
+                "value": "Excluded",
+                "description": "To exclude vm size with selected attribute, specify excluded"
+              }
+            ]
+          },
+          "default": "Included"
         },
         "localStorageDiskTypes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "SSD",
+              "HDD"
+            ],
+            "x-ms-enum": {
+              "name": "LocalStorageDiskTypes",
+              "modelAsString": false
+            }
           },
           "description": "The local storage disk types."
         },
@@ -1087,8 +1167,26 @@
           ],
           "x-ms-enum": {
             "name": "FilterType",
-            "modelAsString": false
-          }
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Included",
+                "value": "Included",
+                "description": "To include vm size with selected attribute, specify included."
+              },
+              {
+                "name": "Required",
+                "value": "Required",
+                "description": "To require only vm size with selected attribute, specify required."
+              },
+              {
+                "name": "Excluded",
+                "value": "Excluded",
+                "description": "To exclude vm size with selected attribute, specify excluded"
+              }
+            ]
+          },
+          "default": "Included"
         },
         "hibernationSupport": {
           "type": "string",
@@ -1100,13 +1198,39 @@
           ],
           "x-ms-enum": {
             "name": "FilterType",
-            "modelAsString": false
-          }
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Included",
+                "value": "Included",
+                "description": "To include vm size with selected attribute, specify included."
+              },
+              {
+                "name": "Required",
+                "value": "Required",
+                "description": "To require only vm size with selected attribute, specify required."
+              },
+              {
+                "name": "Excluded",
+                "value": "Excluded",
+                "description": "To exclude vm size with selected attribute, specify excluded"
+              }
+            ]
+          },
+          "default": "Included"
         },
         "hyperVGenerations": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Gen1",
+              "Gen2"
+            ],
+            "x-ms-enum": {
+              "name": "HyperVGenerations",
+              "modelAsString": false
+            }
           },
           "description": "The Hyper-V Generations."
         },
@@ -1134,8 +1258,26 @@
           ],
           "x-ms-enum": {
             "name": "FilterType",
-            "modelAsString": false
-          }
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Included",
+                "value": "Included",
+                "description": "To include vm size with selected attribute, specify included."
+              },
+              {
+                "name": "Required",
+                "value": "Required",
+                "description": "To require only vm size with selected attribute, specify required."
+              },
+              {
+                "name": "Excluded",
+                "value": "Excluded",
+                "description": "To exclude vm size with selected attribute, specify excluded"
+              }
+            ]
+          },
+          "default": "Included"
         },
         "acceleratorSupport": {
           "type": "string",
@@ -1147,20 +1289,55 @@
           ],
           "x-ms-enum": {
             "name": "FilterType",
-            "modelAsString": false
-          }
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Included",
+                "value": "Included",
+                "description": "To include vm size with selected attribute, specify included."
+              },
+              {
+                "name": "Required",
+                "value": "Required",
+                "description": "To require only vm size with selected attribute, specify required."
+              },
+              {
+                "name": "Excluded",
+                "value": "Excluded",
+                "description": "To exclude vm size with selected attribute, specify excluded"
+              }
+            ]
+          },
+          "default": "Included"
         },
         "acceleratorTypes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "GPU",
+              "FPGA"
+            ],
+            "x-ms-enum": {
+              "name": "AcceleratorTypes",
+              "modelAsString": false
+            }
           },
           "description": "The accelerator types."
         },
         "acceleratorManufacturers": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "AMD",
+              "Xilinx",
+              "Nvidia"
+            ],
+            "x-ms-enum": {
+              "name": "AcceleratorManufacturers",
+              "modelAsString": false
+            }
           },
           "description": "The accelerator manufacturers."
         },
@@ -1181,8 +1358,26 @@
           ],
           "x-ms-enum": {
             "name": "FilterType",
-            "modelAsString": false
-          }
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Included",
+                "value": "Included",
+                "description": "To include vm size with selected attribute, specify included."
+              },
+              {
+                "name": "Required",
+                "value": "Required",
+                "description": "To require only vm size with selected attribute, specify required."
+              },
+              {
+                "name": "Excluded",
+                "value": "Excluded",
+                "description": "To exclude vm size with selected attribute, specify excluded"
+              }
+            ]
+          },
+          "default": "Included"
         },
         "rdmaNetworkInterfaceCount": {
           "type": "object",
@@ -1201,8 +1396,26 @@
           ],
           "x-ms-enum": {
             "name": "FilterType",
-            "modelAsString": false
-          }
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Included",
+                "value": "Included",
+                "description": "To include vm size with selected attribute, specify included."
+              },
+              {
+                "name": "Required",
+                "value": "Required",
+                "description": "To require only vm size with selected attribute, specify required."
+              },
+              {
+                "name": "Excluded",
+                "value": "Excluded",
+                "description": "To exclude vm size with selected attribute, specify excluded"
+              }
+            ]
+          },
+          "default": "Included"
         },
         "confidentialVMSupport": {
           "type": "string",
@@ -1214,13 +1427,39 @@
           ],
           "x-ms-enum": {
             "name": "FilterType",
-            "modelAsString": false
-          }
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Included",
+                "value": "Included",
+                "description": "To include vm size with selected attribute, specify included."
+              },
+              {
+                "name": "Required",
+                "value": "Required",
+                "description": "To require only vm size with selected attribute, specify required."
+              },
+              {
+                "name": "Excluded",
+                "value": "Excluded",
+                "description": "To exclude vm size with selected attribute, specify excluded"
+              }
+            ]
+          },
+          "default": "Included"
         },
         "osTypes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Linux",
+              "Windows"
+            ],
+            "x-ms-enum": {
+              "name": "OsTypes",
+              "modelAsString": false
+            }
           },
           "description": "The list of Operation Systems."
         },

@@ -1,13 +1,16 @@
 import "@typespec/versioning";
+import "./PolicyInsightsExample.tsp";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Policy events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateCreated event. */
+  @example(MicrosoftPolicyInsightsPolicyStateCreatedExample)
   model PolicyInsightsPolicyStateCreatedEventData {
     ...PolicyInsightsBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateChanged event. */
+  @example(MicrosoftPolicyInsightsPolicyStateChangedExample)
   model PolicyInsightsPolicyStateChangedEventData {
     ...PolicyInsightsBaseEventData;
   }

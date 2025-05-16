@@ -5,10 +5,7 @@
 
 import "./common.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Rest.Resource;
-using OpenAPI;
+namespace Quantum.Workspace;
 
 /** The operation to be performed. */
 union JsonPatchOperation {
@@ -36,20 +33,20 @@ union JsonPatchOperation {
 /** A JSONPatch object as defined by RFC 6902. */
 model JsonPatchObject {
   /** The operation to be performed. */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @encodedName("application/json", "op")
   operation: JsonPatchOperation;
 
   /** A JSON-Pointer. */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   path: string;
 
   /** A value to be used in the operation on the path. */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   value?: {};
 
   /** Optional field used in copy and move operations. */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   from?: string;
 }
 

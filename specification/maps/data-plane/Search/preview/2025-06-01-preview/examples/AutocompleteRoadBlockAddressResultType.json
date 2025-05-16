@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "query": "Muir Woods",
+    "coordinates": "-113.301894,49.201888",
+    "resultTypeGroups": "Address",
+    "resultTypes": "RoadBlock",
+    "AzureKey": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+              "typeGroup": "Address",
+              "type": "RoadBlock",
+              "address": {
+                "streetName": "Muir St",
+                "addressLine": " Muir St",
+                "locality": "Grosse Pointe Farms",
+                "adminDistricts": [
+                  {
+                    "name": "Michigan"
+                  },
+                  {
+                    "name": "Wayne County"
+                  }
+                ],
+                "countryRegion": {
+                  "ISO": "US",
+                  "name": "United States"
+                },
+                "postalCode": "48236",
+                "formattedAddress": "Muir St, Grosse Pointe Farms, Michigan 48236, United States"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

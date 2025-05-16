@@ -62,3 +62,7 @@ using Microsoft.AzurePlaywrightService;
 );
 @@clientName(FreeTrialState, "PlaywrightTestingFreeTrialState", "csharp");
 @@clientName(OfferingType, "PlaywrightTestingOfferingType", "csharp");
+@@clientName(Versions.`2024-12-01`,
+  "$DO_NOT_NORMALIZE$V2024-12-01",
+  "javascript"
+);

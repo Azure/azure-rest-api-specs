@@ -1,0 +1,41 @@
+{
+  "title": "Generate an image based on a prompt, a negative prompt, and an image",
+  "operationId": "GetImageGenerations",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "extra-parameters": "error",
+    "body": {
+      "prompt": "An image of a cat",
+      "negative_prompt": "a dog",
+      "image_prompt": {
+        "image": "<base64 encoded image data>",
+        "strength": 0.7
+      },
+      "size": "1024x1024",
+      "output_format": "png",
+      "quality": "standard",
+      "n": 1,
+      "model": "Stable-Image-Ultra",
+      "seed": 42
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "cknxthfa",
+        "created": 18,
+        "data": [
+          {
+            "image": "<base64 encoded image data>",
+            "seed": 42
+          }
+        ],
+        "object": "image.generation",
+        "model": "Stable-Image-Ultra",
+        "usage": {
+          "image_generations": 1
+        }
+      }
+    }
+  }
+}

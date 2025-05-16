@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/kubernetesruntime"
+    default: "sdk/containerorchestratorruntime"
   swagger-repo-dir:
     default: "{project-root}/swagger"
 
@@ -18,24 +18,19 @@ options:
     package-dir: "Azure.ResourceManager.ContainerOrchestratorRuntime"
     flavor: azure
     clear-output-folder: true
-    use-write-core: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-containerorchestratorruntime"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.containerorchestratorruntime"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    "service-dir": "sdk/kubernetesruntime"
+    experimental-extensible-enums: true
     package-dir: "arm-containerorchestratorruntime"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-containerorchestratorruntime"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-containerorchestratorruntime"

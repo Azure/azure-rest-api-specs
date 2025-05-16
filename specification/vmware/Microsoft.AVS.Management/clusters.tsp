@@ -5,7 +5,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface Clusters {
@@ -25,36 +24,16 @@ interface Clusters {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  // This could be modeled with ArmCustomPatchAsync if a 202 response with no body is used instead of a 201.
-  // update is ArmCustomPatchAsync<Cluster, ClusterUpdate>;
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  @doc("Update a Cluster")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
-  )
-  @armResourceUpdate(Cluster)
-  @patch
-  update(
-    ...ResourceInstanceParameters<Cluster>,
-
-    @bodyRoot
-    @doc("The cluster properties to be updated.")
-    clusterUpdate: ClusterUpdate,
-  ): ArmResponse<Cluster> | {
-    // @doc("Resource update request created.")
-    ...CreatedResponse;
-
-    ...Azure.Core.Foundations.RetryAfterHeader;
-    ...LocationHeader;
-
-    @bodyRoot
-    @doc("The updated cluster.")
-    cluster: Cluster;
-  } | ErrorResponse;
+  @Azure.Core.useFinalStateVia("location")
+  update is ArmCustomPatchAsync<
+    Cluster,
+    ClusterUpdate,
+    Response = Cluster | ArmResourceCreatedResponse<
+      Cluster,
+      LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -65,6 +44,7 @@ interface Clusters {
 }
 
 @@clientName(Clusters.createOrUpdate::parameters.resource, "cluster");
+@@clientName(Clusters.update::parameters.properties, "clusterUpdate");
 
 @doc("Cluster provisioning state")
 union ClusterProvisioningState {
@@ -87,11 +67,11 @@ model CommonClusterProperties {
   clusterSize?: int32;
 
   @doc("The state of the cluster provisioning")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ClusterProvisioningState;
 
   @doc("The identity")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterId?: int32;
 
   @doc("The hosts")
@@ -148,10 +128,10 @@ model ClusterZoneList {
 @doc("Zone and associated hosts info")
 model ClusterZone {
   @doc("List of hosts belonging to the availability zone in a cluster")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hosts?: string[];
 
   @doc("Availability zone identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   zone?: string;
 }

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "reservationOrderAliasName": "reservationOrderAlias123",
+    "api-version": "2024-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/microsoft.billingbenefits/reservationOrderAliases/reservationOrderAlias123",
+        "type": "Microsoft.BillingBenefits/reservationOrderAliases",
+        "name": "reservationOrderAlias123",
+        "sku": {
+          "name": "Standard_M64s_v2"
+        },
+        "location": "eastus",
+        "properties": {
+          "displayName": "ReservationOrder_2022-06-02",
+          "reservationOrderId": "/providers/Microsoft.Capacity/reservationOrders/30000000-0000-0000-0000-000000000000",
+          "reservedResourceType": "VirtualMachines",
+          "provisioningState": "Created",
+          "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
+          "term": "P1Y",
+          "appliedScopeType": "Single",
+          "appliedScopeProperties": {
+            "resourceGroupId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/testrg"
+          },
+          "quantity": 5,
+          "renew": true,
+          "billingPlan": "P1M",
+          "reservedResourceProperties": {
+            "instanceFlexibility": "On"
+          }
+        }
+      }
+    }
+  }
+}

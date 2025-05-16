@@ -3,7 +3,16 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
+@@clientNamespace(Informatica.DataManagement,
+  "com.azure.resourcemanager.informaticadatamanagement",
+  "java"
+);
+
 @@clientName(Informatica.DataManagement, "InformaticaDataMgmt", "python");
+@@clientName(Informatica.DataManagement,
+  "InformaticaDataManagementClient",
+  "java"
+);
 
 namespace Informatica.DataManagement {
   @@access(Operations.list, Access.internal);

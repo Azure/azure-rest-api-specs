@@ -1,0 +1,39 @@
+{
+  "title": "StacQueryables_GetAllByCollection",
+  "operationId": "StacQueryables_GetAllByCollection",
+  "parameters": {
+    "collectionId": "c1007ec2-3ddc-4335-9edd-b1c26b1b4c92",
+    "api-version": "2025-04-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "$id": "https://sample.cmbtazhseqhgeudd.uksouth.geocatalog.spatio.azure.com/stac/collections/test-collection-b1f05cde62c6/queryables?api-version=2025-04-30-preview",
+        "type": "object",
+        "title": "STAC Queryables.",
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "properties": {
+          "id": {
+            "ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/definitions/core/allOf/2/properties/id",
+            "title": "Item ID",
+            "description": "Item identifier"
+          },
+          "datetime": {
+            "type": "string",
+            "title": "Acquired",
+            "format": "date-time",
+            "pattern": "(\\\\+00:00|Z)$",
+            "description": "Datetime"
+          },
+          "geometry": {
+            "ref": "https://geojson.org/schema/Feature.json",
+            "title": "Item Geometry",
+            "description": "Item Geometry"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "204": {}
+  }
+}

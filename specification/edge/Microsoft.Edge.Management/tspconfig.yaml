@@ -1,3 +1,4 @@
+output-dir: "{project-root}/"
 parameters:
   "service-dir":
     default: "sdk/commonedgesitemanageroperations"
@@ -23,21 +24,15 @@ options:
     flavor: azure
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-commonedgesitemanageroperations"
-    package-name: "{package-dir}"
-    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    namespace: "azure.mgmt.commonedgesitemanageroperations"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    experimental-extensible-enums: true
     flavor: azure
     package-dir: "arm-commonedgesitemanageroperations"
-    packageDetails:
+    package-details:
       name: "@azure/arm-commonedgesitemanageroperations"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.ResourceManager.CommonEdgeSiteManagerOperations"
@@ -51,7 +46,7 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true

@@ -18,9 +18,7 @@ using TypeSpec.Versioning;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations Swagger is common for all RTs and is created as a separate file having it's own folder."
 @armProviderNamespace
-@service({
-  title: "Workloads Client",
-})
+@service(#{ title: "Workloads Client" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Workloads;

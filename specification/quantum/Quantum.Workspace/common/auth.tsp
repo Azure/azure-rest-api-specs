@@ -6,6 +6,9 @@
 import "./common.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+
+namespace Quantum.Workspace;
 
 /** Azure Entra OAuth2 Authentication */
 model AzureEntraAuth
