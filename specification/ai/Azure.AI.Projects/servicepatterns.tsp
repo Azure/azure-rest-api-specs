@@ -2,7 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 
-namespace Azure.AI.Projects.ServicePatterns {
+namespace Azure.AI.Projects {
   @Rest.autoRoute
   interface VersionedOperations<
     TEntityType extends Reflection.Model,
