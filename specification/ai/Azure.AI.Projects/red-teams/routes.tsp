@@ -168,7 +168,6 @@ interface RedTeams {
     },
     ResourceCreatedOrOkResponse<LongRunningResponse>
   >;
-}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Poll for the operation results.")
@@ -188,5 +187,6 @@ interface RedTeams {
 
     @doc("The operation results.")
     @body
-    operationResults: Json;
+    operationResults: ChatCompletions;
   };
+}
