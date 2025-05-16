@@ -585,3 +585,4 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
   Access.public
 );
+@@clientName(getCallDurationInSeconds, "getCallDuration", "java");
