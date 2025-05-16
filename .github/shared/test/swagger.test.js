@@ -1,6 +1,6 @@
 // @ts-check
 
-import { dirname, join, resolve, sep } from "path";
+import { dirname, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { Swagger } from "../src/swagger.js";
 
