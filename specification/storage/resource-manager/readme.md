@@ -27,7 +27,24 @@ These are the global settings for the Storage API.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01
+tag: package-2025-01
+```
+
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01'
+input-file:
+  - Microsoft.Storage/stable/2025-01-01/blob.json
+  - Microsoft.Storage/stable/2025-01-01/common.json
+  - Microsoft.Storage/stable/2025-01-01/file.json
+  - Microsoft.Storage/stable/2025-01-01/privatelinks.json
+  - Microsoft.Storage/stable/2025-01-01/queue.json
+  - Microsoft.Storage/stable/2025-01-01/storage.json
+  - Microsoft.Storage/stable/2025-01-01/table.json
+  - Microsoft.Storage/stable/2025-01-01/networkSecurityPerimeter.json
+  - Microsoft.Storage/stable/2025-01-01/storageTaskAssignments.json
 ```
 
 ### Tag: package-2024-01
