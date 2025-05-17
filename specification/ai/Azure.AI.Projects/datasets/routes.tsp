@@ -17,14 +17,14 @@ alias ListDatasetVersionsParameters = {};
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_01)
 interface Datasets
-  extends ServicePatterns.VersionedOperations<
+  extends VersionedOperations<
       DatasetVersion,
       ListDatasetVersionsParameters,
       ListDatasetVersionsParameters
     > {
   @doc("Start a new or get an existing pending upload of a dataset for a specific version.")
   @Rest.action("startPendingUpload")
-  startPendingUploadVersion is ServicePatterns.VersionedResourceActionWithBody<
+  startPendingUploadVersion is VersionedResourceActionWithBody<
     DatasetVersion,
     PendingUploadRequest,
     PendingUploadResponse
@@ -35,7 +35,7 @@ interface Datasets
   @Rest.actionSeparator("/")
   @Rest.action("startPendingUpload")
   @Http.post
-  startPendingUpload is ServicePatterns.UnversionedResourceAction<
+  startPendingUpload is UnversionedResourceAction<
     DatasetVersion,
     PendingUploadRequest,
     PendingUploadResponse
@@ -48,7 +48,7 @@ interface Datasets
   @post
   @Rest.action("credentials")
   @Rest.actionSeparator("/")
-  getCredentials is ServicePatterns.VersionedResourceActionNoBody<
+  getCredentials is VersionedResourceActionNoBody<
     DatasetVersion,
     AssetCredentialResponse
   >;
