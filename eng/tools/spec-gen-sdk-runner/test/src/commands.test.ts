@@ -7,16 +7,16 @@ import {
 } from "../../src/commands.js";
 import * as commandHelpers from "../../src/command-helpers.js";
 import * as log from "../../src/log.js";
-import * as changeFiles from "../../src/change-files.js";
+import * as changeFiles from "../../src/spec-helpers.js";
 import fs from "node:fs";
 import path from "node:path";
 import { LogLevel } from "../../src/log.js";
 
 function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
   return mockFn.mock.calls.map((args: unknown[]) => {
-    const [filePath, ...rest] = args
-    return [String(filePath).replaceAll('\\', '/'), ...rest]
-  })
+    const [filePath, ...rest] = args;
+    return [String(filePath).replaceAll("\\", "/"), ...rest];
+  });
 }
 
 describe("generateSdkForSingleSpec", () => {
@@ -399,8 +399,8 @@ describe("generateSdkForBatchSpecs", () => {
       `Runner: markdown file written to ${markdownFilePath}`,
     );
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
-    
-    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();
   });
 
@@ -450,7 +450,7 @@ describe("generateSdkForBatchSpecs", () => {
     );
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
 
-    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();
   });
 
@@ -506,7 +506,7 @@ describe("generateSdkForBatchSpecs", () => {
     expect(logSpy).toHaveBeenCalledWith(`Runner: markdown file written to ${markdownFilePath}`);
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
 
-    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();
     logSpy.mockRestore();
   });

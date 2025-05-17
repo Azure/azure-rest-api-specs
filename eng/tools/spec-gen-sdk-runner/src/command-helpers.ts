@@ -1,7 +1,7 @@
-import fs from "node:fs";
+import fs, { read } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { findReadmeFiles, getArgumentValue, getAllTypeSpecPaths, objectToMap } from "./utils.js";
+import { findReadmeFiles, getArgumentValue, getAllTypeSpecPaths, objectToMap, SpecConfigs } from "./utils.js";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
 import {
   APIViewRequestData,
@@ -11,6 +11,8 @@ import {
   SpecGenSdkRequiredSettings,
   VsoLogs,
 } from "./types.js";
+import { group } from "node:console";
+import { groupSpecConfigPaths } from "./spec-helpers.js";
 
 /**
  * Load execution-report.json.
@@ -145,46 +147,41 @@ export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): stri
  * Get the spec paths based on the batch run type.
  * @param batchType The batch run type.
  * @param specRepoPath The specification repository path.
- * @returns The spec paths.
+ * @returns The specConfigs array.
  */
-export function getSpecPaths(batchType: string, specRepoPath: string): string[] {
-  const specConfigPaths: string[] = [];
+export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfigs[] {
+  let tspconfigs: string[] = [];
+  let readmes: string[] = [];
   switch (batchType) {
-    case "all-specs": {
-      specConfigPaths.push(
-        ...getAllTypeSpecPaths(specRepoPath),
-        ...findReadmeFiles(path.join(specRepoPath, "specification")),
-      );
-      break;
-    }
+    case "all-specs":
     case "all-typespecs": {
-      specConfigPaths.push(...getAllTypeSpecPaths(specRepoPath));
+      tspconfigs = getAllTypeSpecPaths(specRepoPath);
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification"));      
       break;
     }
     case "all-mgmtplane-typespecs": {
-      specConfigPaths.push(
-        ...getAllTypeSpecPaths(specRepoPath).filter((p) => p.includes(".Management")),
-      );
+      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => p.includes(".Management"));
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) => p.includes("resource-manager"));
       break;
     }
     case "all-dataplane-typespecs": {
-      specConfigPaths.push(
-        ...getAllTypeSpecPaths(specRepoPath).filter((p) => !p.includes(".Management")),
-      );
+      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => !p.includes(".Management"));
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) => p.includes("data-plane"));
       break;
     }
     case "all-openapis": {
-      specConfigPaths.push(...findReadmeFiles(path.join(specRepoPath, "specification")));
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
       break;
     }
     case "sample-typespecs": {
-      specConfigPaths.push(
+      tspconfigs = [
         "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
         "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
-      );
+      ];
     }
   }
-  return specConfigPaths;
+
+  return groupSpecConfigPaths(tspconfigs, readmes);
 }
 
 /**

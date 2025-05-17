@@ -1,5 +1,5 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { detectChangedSpecConfigFiles } from "../../src/change-files.js";
+import { detectChangedSpecConfigFiles, groupSpecConfigPaths } from "../../src/spec-helpers.js";
 import * as utils from "../../src/utils.js";
 import { SpecGenSdkCmdInput } from "../../src/types.js";
 import { fileURLToPath } from "node:url";
@@ -17,7 +17,7 @@ vi.mock("../../src/utils.js", async () => {
 
 function normalizeResultItem(item: ChangedSpecs): ChangedSpecs {
   return {
-    specs: item.specs.map(path => normalizePath(path)),
+    specs: item.specs.map((path) => normalizePath(path)),
     ...(item.readmeMd ? { readmeMd: normalizePath(item.readmeMd) } : {}),
     ...(item.typespecProject ? { typespecProject: normalizePath(item.typespecProject) } : {}),
   };
@@ -146,5 +146,134 @@ describe("detectChangedSpecConfigFiles", () => {
       readmeMd: "specification/contosowidgetmanager/data-plane/readme.md",
       typespecProject: "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
     });
+  });
+});
+
+describe("groupSpecConfigPaths", () => {
+  test("should group TypeSpec configs and readme files by service", () => {
+    const tspconfigs = [
+      "specification/storage/Storage.Management/tspconfig.yaml",
+      "specification/storage/StorageClient/tspconfig.yaml",
+      "specification/compute/Compute.Management/tspconfig.yaml",
+    ];
+
+    const readmes = [
+      "specification/storage/resource-manager/readme.md",
+      "specification/compute/resource-manager/readme.md",
+    ];
+
+    const result = groupSpecConfigPaths(tspconfigs, readmes);
+
+    expect(result).toHaveLength(3); // 2 from storage, 2 from compute
+
+    // Verify the results contain both readme and tspconfig paths as expected
+    const storageManagementResult = result.find(
+      (r) =>
+        r.tspconfigPath === "specification/storage/Storage.Management/tspconfig.yaml" &&
+        r.readmePath === "specification/storage/resource-manager/readme.md",
+    );
+    expect(storageManagementResult).toBeDefined();
+
+    const storageClientResult = result.find(
+      (r) => r.tspconfigPath === "specification/storage/StorageClient/tspconfig.yaml",
+    );
+    expect(storageClientResult).toBeDefined();
+
+    const computeManagementResult = result.find(
+      (r) =>
+        r.tspconfigPath === "specification/compute/Compute.Management/tspconfig.yaml" &&
+        r.readmePath === "specification/compute/resource-manager/readme.md",
+    );
+    expect(computeManagementResult).toBeDefined();
+  });
+
+  test("should handle empty inputs", () => {
+    const result = groupSpecConfigPaths([], []);
+    expect(result).toHaveLength(0);
+  });
+
+  test("should handle undefined inputs", () => {
+    const result = groupSpecConfigPaths(undefined, undefined);
+    expect(result).toHaveLength(0);
+
+    const resultUndefinedReadmes = groupSpecConfigPaths([], undefined);
+    expect(resultUndefinedReadmes).toHaveLength(0);
+
+    const resultUndefinedConfigs = groupSpecConfigPaths(undefined, []);
+    expect(resultUndefinedConfigs).toHaveLength(0);
+  });
+
+  test("should handle only TypeSpec configs", () => {
+    const tspconfigs = [
+      "specification/storage/Storage.Management/tspconfig.yaml",
+      "specification/storage/StorageClient/tspconfig.yaml",
+    ];
+
+    const result = groupSpecConfigPaths(tspconfigs, []);
+
+    expect(result).toHaveLength(2);
+    for (const item of result) {
+      expect(item.tspconfigPath).toBeDefined();
+      expect(item.readmePath).toBeUndefined();
+    }
+  });
+
+  test("should handle only readme files", () => {
+    const readmes = [
+      "specification/storage/resource-manager/readme.md",
+      "specification/compute/resource-manager/readme.md",
+    ];
+
+    const result = groupSpecConfigPaths([], readmes);
+
+    expect(result).toHaveLength(2);
+    for (const item of result) {
+      expect(item.readmePath).toBeDefined();
+      expect(item.tspconfigPath).toBeUndefined();
+    }
+  });
+
+  test("should handle data plane and mgmt path together", () => {
+    const tspconfigs = [
+      "specification/storage/Storage.Management/tspconfig.yaml",
+      "specification/storage/StorageClient/tspconfig.yaml",
+      "specification/compute/Compute.Management/tspconfig.yaml",
+    ];
+
+    const readmes = [
+      "specification/storage/resource-manager/readme.md",
+      "specification/storage/data-plane/readme.md",
+      "specification/compute/data-plane/readme.md",
+    ];
+
+    const result = groupSpecConfigPaths(tspconfigs, readmes);
+    expect(result).toHaveLength(4);
+
+    // Configs should be correctly matched
+    const storageMgmtResult = result.find(
+      (r) =>
+        r.tspconfigPath === "specification/storage/Storage.Management/tspconfig.yaml" &&
+        r.readmePath === "specification/storage/resource-manager/readme.md",
+    );
+    expect(storageMgmtResult).toBeDefined();
+
+    const storageDpResult = result.find(
+      (r) =>
+        r.tspconfigPath === "specification/storage/StorageClient/tspconfig.yaml" &&
+        r.readmePath === "specification/storage/data-plane/readme.md",
+    );
+    expect(storageDpResult).toBeDefined();
+
+    const computeMgmtResult = result.find(
+      (r) =>
+        r.tspconfigPath === "specification/compute/Compute.Management/tspconfig.yaml"
+    );
+    expect(computeMgmtResult).toBeDefined();
+
+    const computeDpResult = result.find(
+      (r) =>
+        r.readmePath === "specification/compute/data-plane/readme.md",
+    );
+    expect(computeDpResult).toBeDefined();
   });
 });
