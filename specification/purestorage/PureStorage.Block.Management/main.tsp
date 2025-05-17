@@ -614,7 +614,7 @@ model AvsStorageContainerProperties {
   @removed(Versions.v1_preview)
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @armResourceOperations
@@ -686,7 +686,7 @@ model VolumeProperties {
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Soft-deletion state")
@@ -799,7 +799,7 @@ model AvsVmProperties {
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Storage space usage")
