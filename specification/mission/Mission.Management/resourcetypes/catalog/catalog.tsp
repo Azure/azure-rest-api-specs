@@ -5,12 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 import "../shared/provisioningstate.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
-
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
@@ -59,7 +53,7 @@ model Package {
 model CatalogProperties {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("Owning Resource of the Catalog.")
   ownedBy?: string;
@@ -81,7 +75,7 @@ model CatalogProperties {
 model CatalogPatchProperties is CatalogProperties;
 
 @doc("Catalog Patch Resource")
-model CatalogPatchResource {
+model CatalogPatchModel {
   @doc("Catalog Patch properties")
   properties?: Update<CatalogPatchProperties>;
 

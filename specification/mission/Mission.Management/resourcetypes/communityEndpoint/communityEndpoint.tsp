@@ -18,29 +18,29 @@ using OpenAPI;
 namespace Microsoft.Mission;
 
 @doc("Community Endpoint Protocol Enum")
-union CommunityEndpointProtocol {
-  @doc("CommunityEndpointProtocol Type ANY")
+union CommunityEndpointProtocolEnum {
+  @doc("CommunityEndpointProtocolEnum Type ANY")
   ANY: "ANY",
 
-  @doc("CommunityEndpointProtocol Type TCP")
+  @doc("CommunityEndpointProtocolEnum Type TCP")
   TCP: "TCP",
 
-  @doc("CommunityEndpointProtocol Type UDP")
+  @doc("CommunityEndpointProtocolEnum Type UDP")
   UDP: "UDP",
 
-  @doc("CommunityEndpointProtocol Type ICMP")
+  @doc("CommunityEndpointProtocolEnum Type ICMP")
   ICMP: "ICMP",
 
-  @doc("CommunityEndpointProtocol Type ESP")
+  @doc("CommunityEndpointProtocolEnum Type ESP")
   ESP: "ESP",
 
-  @doc("CommunityEndpointProtocol Type AH")
+  @doc("CommunityEndpointProtocolEnum Type AH")
   AH: "AH",
 
-  @doc("CommunityEndpointProtocol Type HTTPS")
+  @doc("CommunityEndpointProtocolEnum Type HTTPS")
   HTTPS: "HTTPS",
 
-  @doc("CommunityEndpointProtocol Type HTTP")
+  @doc("CommunityEndpointProtocolEnum Type HTTP")
   HTTP: "HTTP",
 
   string,
@@ -69,7 +69,7 @@ model CommunityEndpointDestinationRule is EndpointRuleBase {
   destinationType?: DestinationType;
 
   @doc("Protocols. Options specified by Endpoint Protocol Enum.")
-  protocols?: CommunityEndpointProtocol[];
+  protocols?: CommunityEndpointProtocolEnum[];
 
   @doc("Transit Hub Resource Id.")
   transitHubResourceId?: TransitHubResourceId;
@@ -78,7 +78,6 @@ model CommunityEndpointDestinationRule is EndpointRuleBase {
 @doc("Community Endpoint Resource properties")
 model CommunityEndpointProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @extension("x-ms-identifiers", #[])
   @doc("Community Endpoint Rule Collection.")
   ruleCollection: CommunityEndpointDestinationRule[];
@@ -90,7 +89,7 @@ model CommunityEndpointProperties {
 
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -102,7 +101,7 @@ model CommunityEndpointProperties {
 model CommunityEndpointPatchProperties is CommunityEndpointProperties;
 
 @doc("Community Endpoint Patch Resource")
-model CommunityEndpointPatchResource {
+model CommunityEndpointPatchModel {
   @doc("Community Endpoint Patch properties")
   properties?: Update<CommunityEndpointPatchProperties>;
 

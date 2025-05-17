@@ -68,7 +68,7 @@ model EnclaveConnectionProperties {
 
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("List of resource ids modified by enclave Connections.")
   @visibility(Lifecycle.Read)
@@ -79,7 +79,7 @@ model EnclaveConnectionProperties {
 model EnclaveConnectionPatchProperties is EnclaveConnectionProperties;
 
 @doc("Enclave Connection Patch Resource")
-model EnclaveConnectionPatchResource {
+model EnclaveConnectionPatchModel {
   @doc("Enclave Connection Patch properties")
   properties?: Update<EnclaveConnectionPatchProperties>;
 

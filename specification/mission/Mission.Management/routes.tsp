@@ -7,21 +7,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
-import "./resourcetypes/community/community.tsp";
-import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
-import "./resourcetypes/workload/workload.tsp";
-import "./resourcetypes/catalog/catalog.tsp";
-import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
-import "./resourcetypes/transitHub/transitHub.tsp";
-import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
-import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
-import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
-import "./resourcetypes/postActions/approvalcallback.tsp";
-import "./resourcetypes/approvals/approvals.tsp";
-import "./resourcetypes/postActions/initiatorcallback.tsp";
-import "./resourcetypes/postActions/approvaldeletioncallback.tsp";
-
-import "./model.tsp";
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
@@ -31,9 +18,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-
-@doc("Microsoft Mission Resource Provider management API.")
-namespace Microsoft.Mission;
 
 @doc("Workload Interface")
 @armResourceOperations
@@ -47,7 +31,7 @@ interface Workload {
   >;
   update is ArmCustomPatchAsync<
     WorkloadResource,
-    PatchModel = WorkloadPatchResource
+    PatchModel = WorkloadPatchModel
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -68,7 +52,7 @@ interface VirtualEnclave {
   >;
   update is ArmCustomPatchAsync<
     EnclaveResource,
-    PatchModel = VirtualEnclavePatchResource
+    PatchModel = VirtualEnclavePatchModel
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -106,7 +90,7 @@ interface Community {
   >;
   update is ArmCustomPatchAsync<
     CommunityResource,
-    PatchModel = CommunityPatchResource
+    PatchModel = CommunityPatchModel
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -141,7 +125,7 @@ interface TransitHub {
   >;
   update is ArmCustomPatchAsync<
     TransitHubResource,
-    PatchModel = TransitHubPatchResource
+    PatchModel = TransitHubPatchModel
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -163,7 +147,7 @@ interface EnclaveConnection {
   >;
   update is ArmCustomPatchAsync<
     EnclaveConnectionResource,
-    PatchModel = EnclaveConnectionPatchResource
+    PatchModel = EnclaveConnectionPatchModel
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -202,7 +186,7 @@ interface EnclaveEndpoints {
   >;
   update is ArmCustomPatchAsync<
     EnclaveEndpointResource,
-    PatchModel = EnclaveEndpointPatchResource
+    PatchModel = EnclaveEndpointPatchModel
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -241,7 +225,7 @@ interface CommunityEndpoints {
   >;
   update is ArmCustomPatchAsync<
     CommunityEndpointResource,
-    PatchModel = CommunityEndpointPatchResource
+    PatchModel = CommunityEndpointPatchModel
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -281,7 +265,7 @@ interface Approval {
   listByParent is ArmResourceListByParent<ApprovalResource>;
   update is ArmCustomPatchAsync<
     ApprovalResource,
-    PatchModel = ApprovalPatchResource
+    PatchModel = ApprovalPatchModel
   >;
   delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;
   @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")

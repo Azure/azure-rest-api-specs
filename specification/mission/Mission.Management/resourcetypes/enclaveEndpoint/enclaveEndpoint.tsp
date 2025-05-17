@@ -49,7 +49,6 @@ model EnclaveEndpointDestinationRule is EndpointRuleBase {
 @doc("Enclave Endpoint Resource properties")
 model EnclaveEndpointProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @extension("x-ms-identifiers", #[])
   @doc("Enclave Endpoint Rule Collection.")
   ruleCollection: EnclaveEndpointDestinationRule[];
@@ -61,7 +60,7 @@ model EnclaveEndpointProperties {
 
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -69,13 +68,10 @@ model EnclaveEndpointProperties {
   approvalRequired?: boolean;
 }
 
-@doc("Enclave Endpoint Patch properties")
-model EnclaveEndpointPatchProperties is EnclaveEndpointProperties;
-
 @doc("Enclave Endpoint Patch Resource")
-model EnclaveEndpointPatchResource {
+model EnclaveEndpointPatchModel {
   @doc("Enclave Endpoint Patch properties")
-  properties?: Update<EnclaveEndpointPatchProperties>;
+  properties?: Update<EnclaveEndpointProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

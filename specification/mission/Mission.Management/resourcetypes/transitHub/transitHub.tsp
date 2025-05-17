@@ -70,7 +70,7 @@ model TransitOption {
 model TransitHubProperties {
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("The state of the transitHub.")
   state?: TransitHubState;
@@ -87,7 +87,7 @@ model TransitHubProperties {
 model TransitHubPatchProperties is TransitHubProperties;
 
 @doc("TH Patch Resource")
-model TransitHubPatchResource {
+model TransitHubPatchModel {
   @doc("The TransitHub resource.")
   properties?: Update<TransitHubPatchProperties>;
 

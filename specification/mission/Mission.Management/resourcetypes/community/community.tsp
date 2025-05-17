@@ -187,7 +187,7 @@ model ApprovalSettingsPatch is ApprovalSettingsDef {
 }
 
 @doc("Community Resource Properties")
-model CommunityPropertiesDef {
+model CommunityPropertiesBase {
   @doc("Address Space.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   addressSpace?: string;
@@ -197,7 +197,7 @@ model CommunityPropertiesDef {
 
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("List of resource ids created by communities.")
   @visibility(Lifecycle.Read)
@@ -227,7 +227,7 @@ model CommunityPropertiesDef {
 }
 
 @doc("Community Resource Properties")
-model CommunityProperties is CommunityPropertiesDef {
+model CommunityProperties is CommunityPropertiesBase {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettings;
@@ -242,7 +242,7 @@ model CommunityProperties is CommunityPropertiesDef {
 }
 
 @doc("Community Resource Properties")
-model CommunityPatchProperties is CommunityPropertiesDef {
+model CommunityPatchProperties is CommunityPropertiesBase {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettingsPatch;
@@ -257,7 +257,7 @@ model CommunityPatchProperties is CommunityPropertiesDef {
 }
 
 @doc("Community Patch Resource")
-model CommunityPatchResource {
+model CommunityPatchModel {
   @doc("Community Patch properties")
   properties?: Update<CommunityPatchProperties>;
 

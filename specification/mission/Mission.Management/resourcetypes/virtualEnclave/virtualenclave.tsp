@@ -155,10 +155,10 @@ model MaintenanceModeConfigurationPatch {
 }
 
 @doc("Virtual Enclave Resource properties")
-model VirtualEnclavePropertiesDef {
+model VirtualEnclavePropertiesBase {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("Virtual Network.")
   enclaveVirtualNetwork: EnclaveVirtualNetwork;
@@ -202,7 +202,7 @@ model VirtualEnclavePropertiesDef {
 }
 
 @doc("Virtual Enclave Resource properties")
-model VirtualEnclaveProperties is VirtualEnclavePropertiesDef {
+model VirtualEnclaveProperties is VirtualEnclavePropertiesBase {
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfiguration;
 
@@ -211,7 +211,7 @@ model VirtualEnclaveProperties is VirtualEnclavePropertiesDef {
 }
 
 @doc("Virtual Enclave Patch properties")
-model VirtualEnclavePatchProperties is VirtualEnclavePropertiesDef {
+model VirtualEnclavePatchProperties is VirtualEnclavePropertiesBase {
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatch;
 
@@ -220,7 +220,7 @@ model VirtualEnclavePatchProperties is VirtualEnclavePropertiesDef {
 }
 
 @doc("Virtual Enclave Patch Resource")
-model VirtualEnclavePatchResource {
+model VirtualEnclavePatchModel {
   @doc("Virtual Enclave Patch properties")
   properties?: Update<VirtualEnclavePatchProperties>;
 

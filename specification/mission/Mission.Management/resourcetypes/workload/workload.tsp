@@ -23,7 +23,7 @@ namespace Microsoft.Mission;
 model WorkloadProperties {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
@@ -46,7 +46,7 @@ model WorkloadProperties {
 model WorkloadPatchProperties is WorkloadProperties;
 
 @doc("Workload Patch Resource")
-model WorkloadPatchResource {
+model WorkloadPatchModel {
   @doc("Workload Patch properties")
   properties?: Update<WorkloadPatchProperties>;
 

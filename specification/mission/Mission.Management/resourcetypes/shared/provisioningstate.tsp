@@ -12,10 +12,7 @@ namespace Microsoft.Mission;
 
 @lroStatus
 @doc("The provisioning status of the resource.")
-union ProvisioningState {
-  string,
-  Azure.ResourceManager.ResourceProvisioningState,
-
+union ProvisioningStateEnum {
   @doc("Provisioning State Type Accepted")
   Accepted: "Accepted",
 
@@ -43,5 +40,5 @@ union ProvisioningState {
   @doc("Provisioning State Type Updating")
   Updating: "Updating",
 
-  string,
+  Azure.ResourceManager.ResourceProvisioningState,
 }

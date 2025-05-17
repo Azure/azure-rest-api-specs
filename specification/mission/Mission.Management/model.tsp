@@ -7,26 +7,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
-import "./resourcetypes/community/community.tsp";
-import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
-import "./resourcetypes/workload/workload.tsp";
-import "./resourcetypes/catalog/catalog.tsp";
-import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
-import "./resourcetypes/transitHub/transitHub.tsp";
-import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
-import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
-import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
-import "./resourcetypes/postActions/approvalcallback.tsp";
-import "./resourcetypes/approvals/approvals.tsp";
-import "./resourcetypes/postActions/initiatorcallback.tsp";
-import "./resourcetypes/postActions/approvaldeletioncallback.tsp";
-
-using Azure.ClientGenerator.Core;
-using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -50,10 +32,6 @@ model CommunityResource is TrackedResource<CommunityProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
-@@added(CommunityResource.identity,
-  Microsoft.Mission.Versions.v2024_06_01_preview
-);
-
 @doc("Virtual Enclave Model Resource")
 model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   @key("virtualEnclaveName")
@@ -67,10 +45,6 @@ model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
-@@added(EnclaveResource.identity,
-  Microsoft.Mission.Versions.v2024_06_01_preview
-);
-
 @doc("Workload Model Resource")
 @parentResource(EnclaveResource)
 model WorkloadResource is TrackedResource<WorkloadProperties> {
@@ -82,7 +56,6 @@ model WorkloadResource is TrackedResource<WorkloadProperties> {
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("TransitHub Model Resource")
 @parentResource(CommunityResource)
 model TransitHubResource is TrackedResource<TransitHubProperties> {
@@ -94,7 +67,6 @@ model TransitHubResource is TrackedResource<TransitHubProperties> {
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("EnclaveConnection Model Resource")
 model EnclaveConnectionResource
   is TrackedResource<EnclaveConnectionProperties> {
@@ -106,7 +78,6 @@ model EnclaveConnectionResource
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("EnclaveEndpoint Model Resource")
 @parentResource(EnclaveResource)
 model EnclaveEndpointResource is TrackedResource<EnclaveEndpointProperties> {
@@ -118,7 +89,6 @@ model EnclaveEndpointResource is TrackedResource<EnclaveEndpointProperties> {
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("CommunityEndpoint Model Resource")
 @parentResource(CommunityResource)
 model CommunityEndpointResource
@@ -131,7 +101,6 @@ model CommunityEndpointResource
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Approval Model Resource")
 model ApprovalResource is ExtensionResource<ApprovalProperties> {
   @key("approvalName")
