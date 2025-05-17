@@ -16,22 +16,22 @@ namespace Microsoft.Mission;
 
 #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
 @doc("Approval Status Enum")
-union ApprovalStatusEnum {
-  @doc("ApprovalStatusEnum Type Approved")
+union ApprovalStatus {
+  @doc("ApprovalStatus Type Approved")
   Approved: "Approved",
 
-  @doc("ApprovalStatusEnum Type Rejected")
+  @doc("ApprovalStatus Type Rejected")
   Rejected: "Rejected",
 
-  @doc("ApprovalStatusEnum Type Pending")
+  @doc("ApprovalStatus Type Pending")
   Pending: "Pending",
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("ApprovalStatusEnum Type Deleted")
+  @doc("ApprovalStatus Type Deleted")
   Deleted: "Deleted",
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("ApprovalStatusEnum Type Expired")
+  @doc("ApprovalStatus Type Expired")
   Expired: "Expired",
 
   string,
@@ -49,7 +49,7 @@ union ActionPerformedEnum {
 }
 
 @doc("Request Metadata for approvals request.")
-model RequestMetadataProperties {
+model RequestMetadata {
   @doc("Resource Action of the item being approved or declined.")
   resourceAction: string;
 
@@ -60,26 +60,14 @@ model RequestMetadataProperties {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Payload to be sent upon any action on approval request")
   approvalCallbackPayload?: string;
-}
 
-@doc("Request Metadata for approvals request.")
-model RequestMetadata {
-  @doc("Status of the approval. Uses ApprovalStatusEnum enum.")
-  approvalStatus?: ApprovalStatusEnum = ApprovalStatusEnum.Pending;
-
-  ...RequestMetadataProperties;
-}
-
-@doc("Request Metadata for approvals request without default values.")
-model RequestMetadataPatch {
-  @doc("Status of the approval. Uses ApprovalStatusEnum enum.")
-  approvalStatus?: ApprovalStatusEnum;
-
-  ...RequestMetadataProperties;
+  @doc("Status of the approval. Uses ApprovalStatus enum.")
+  approvalStatus?: ApprovalStatus = ApprovalStatus.Pending;
 }
 
 @renamedFrom(Microsoft.Mission.Versions.v2024_12_01_preview, "Approvers")
 @doc("Approver Metadata for approvals request.")
+@discriminator("actionPerformed")
 model Approver {
   @doc("EntraId of the approver")
   approverEntraId: string;
@@ -92,10 +80,10 @@ model Approver {
 }
 
 @doc("Approvals properties.")
-model ApprovalPropertiesBase {
+model ApprovalModel {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("Parameter for optimizing query results")
   parent1?: string;
@@ -121,20 +109,9 @@ model ApprovalPropertiesBase {
   stateChangedAt?: utcDateTime;
 }
 
-@doc("Approvals properties with default values.")
-model ApprovalProperties is ApprovalPropertiesBase {
-  @doc("Request metadata for the approval request.")
-  requestMetadata: RequestMetadata;
-}
-
-@doc("Approvals Properties without default values.")
-model ApprovalPropertiesPatch is ApprovalPropertiesBase {
-  @doc("Request metadata for the approval request without default values.")
-  requestMetadata: RequestMetadataPatch;
-}
-
 @doc("Approvals properties for patching")
+@withoutDefaultValues
 model ApprovalPatchModel {
   @doc("Approval Patch properties")
-  properties?: Update<ApprovalPropertiesPatch>;
+  properties?: Update<ApprovalModel>;
 }

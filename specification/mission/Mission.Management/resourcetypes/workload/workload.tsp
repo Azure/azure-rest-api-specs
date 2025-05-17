@@ -23,16 +23,14 @@ namespace Microsoft.Mission;
 model WorkloadProperties {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Managed resource group configuration.")
   managedResourceGroupConfiguration: ManagedResourceGroupConfiguration;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of resource group ids.")
   resourceGroupCollection?: string[];
 
@@ -42,13 +40,10 @@ model WorkloadProperties {
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 }
 
-@doc("Workload Patch properties")
-model WorkloadPatchProperties is WorkloadProperties;
-
 @doc("Workload Patch Resource")
 model WorkloadPatchModel {
   @doc("Workload Patch properties")
-  properties?: Update<WorkloadPatchProperties>;
+  properties?: Update<WorkloadProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

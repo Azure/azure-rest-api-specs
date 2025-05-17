@@ -105,7 +105,7 @@ model MandatoryApprover {
 
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
 @doc("ApprovalSettings Properties")
-model ApprovalSettingsDef {
+model ApprovalSettings {
   @doc("Approval required for endpoint creation (Required or NotRequired).")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpointCreation?: ApprovalPolicy;
@@ -170,24 +170,13 @@ model ApprovalSettingsDef {
   @doc("Minimum number of approvers required for the approval request")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   minimumApproversRequired?: int64;
-}
 
-@added(Microsoft.Mission.Versions.v2024_12_01_preview)
-@doc("ApprovalSettings Properties")
-model ApprovalSettings is ApprovalSettingsDef {
   @doc("Behavior of enclave connection update workflow after endpoint update is approved (Automatic or Manual).")
   connectionUpdateMode?: "Automatic" | "Manual" | string = "Automatic";
 }
 
-@added(Microsoft.Mission.Versions.v2024_12_01_preview)
-@doc("ApprovalSettings Properties")
-model ApprovalSettingsPatch is ApprovalSettingsDef {
-  @doc("Behavior of enclave connection update workflow after endpoint update is approved (Automatic or Manual).")
-  connectionUpdateMode?: "Automatic" | "Manual" | string;
-}
-
 @doc("Community Resource Properties")
-model CommunityPropertiesBase {
+model CommunityModel {
   @doc("Address Space.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   addressSpace?: string;
@@ -197,13 +186,12 @@ model CommunityPropertiesBase {
 
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("List of resource ids created by communities.")
   @visibility(Lifecycle.Read)
   resourceCollection?: string[];
 
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Managed resource group configuration.")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
@@ -213,7 +201,6 @@ model CommunityPropertiesBase {
   @doc("Managed On Behalf Of Configuration.")
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of services governed by a community.")
   governedServiceList?: GovernedServiceItem[];
 
@@ -224,42 +211,25 @@ model CommunityPropertiesBase {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
   communityRoleAssignments?: RoleAssignmentItem[];
-}
 
-@doc("Community Resource Properties")
-model CommunityProperties is CommunityPropertiesBase {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettings;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
-  maintenanceModeConfiguration?: MaintenanceModeConfiguration;
+  maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
   firewallSku?: FirewallSKU = FirewallSKU.Standard;
 }
 
-@doc("Community Resource Properties")
-model CommunityPatchProperties is CommunityPropertiesBase {
-  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("Approval requirements for various actions on the community's resources.")
-  approvalSettings?: ApprovalSettingsPatch;
-
-  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("Maintenance Mode configuration.")
-  maintenanceModeConfiguration?: MaintenanceModeConfigurationPatch;
-
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
-  firewallSku?: FirewallSKU;
-}
-
 @doc("Community Patch Resource")
+@withoutDefaultValues
 model CommunityPatchModel {
   @doc("Community Patch properties")
-  properties?: Update<CommunityPatchProperties>;
+  properties?: Update<CommunityModel>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...ManagedServiceIdentityProperty;

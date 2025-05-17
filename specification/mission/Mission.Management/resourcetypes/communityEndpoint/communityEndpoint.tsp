@@ -18,29 +18,29 @@ using OpenAPI;
 namespace Microsoft.Mission;
 
 @doc("Community Endpoint Protocol Enum")
-union CommunityEndpointProtocolEnum {
-  @doc("CommunityEndpointProtocolEnum Type ANY")
+union CommunityEndpointProtocol {
+  @doc("CommunityEndpointProtocol Type ANY")
   ANY: "ANY",
 
-  @doc("CommunityEndpointProtocolEnum Type TCP")
+  @doc("CommunityEndpointProtocol Type TCP")
   TCP: "TCP",
 
-  @doc("CommunityEndpointProtocolEnum Type UDP")
+  @doc("CommunityEndpointProtocol Type UDP")
   UDP: "UDP",
 
-  @doc("CommunityEndpointProtocolEnum Type ICMP")
+  @doc("CommunityEndpointProtocol Type ICMP")
   ICMP: "ICMP",
 
-  @doc("CommunityEndpointProtocolEnum Type ESP")
+  @doc("CommunityEndpointProtocol Type ESP")
   ESP: "ESP",
 
-  @doc("CommunityEndpointProtocolEnum Type AH")
+  @doc("CommunityEndpointProtocol Type AH")
   AH: "AH",
 
-  @doc("CommunityEndpointProtocolEnum Type HTTPS")
+  @doc("CommunityEndpointProtocol Type HTTPS")
   HTTPS: "HTTPS",
 
-  @doc("CommunityEndpointProtocolEnum Type HTTP")
+  @doc("CommunityEndpointProtocol Type HTTP")
   HTTP: "HTTP",
 
   string,
@@ -64,15 +64,17 @@ union DestinationType {
 }
 
 @doc("Base type for destination rules.")
-model CommunityEndpointDestinationRule is EndpointRuleBase {
+model CommunityEndpointDestinationRule {
   @doc("Destination Type.")
   destinationType?: DestinationType;
 
   @doc("Protocols. Options specified by Endpoint Protocol Enum.")
-  protocols?: CommunityEndpointProtocolEnum[];
+  protocols?: CommunityEndpointProtocol[];
 
   @doc("Transit Hub Resource Id.")
   transitHubResourceId?: TransitHubResourceId;
+
+  ...EndpointRuleBase;
 }
 
 @doc("Community Endpoint Resource properties")
@@ -82,28 +84,23 @@ model CommunityEndpointProperties {
   @doc("Community Endpoint Rule Collection.")
   ruleCollection: CommunityEndpointDestinationRule[];
 
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of resource ids created by community endpoint.")
   @visibility(Lifecycle.Read)
   resourceCollection?: string[];
 
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Whether approval is needed for the connection (True or False).")
   approvalRequired?: boolean;
 }
 
-@doc("Community Endpoint Patch properties")
-model CommunityEndpointPatchProperties is CommunityEndpointProperties;
-
 @doc("Community Endpoint Patch Resource")
 model CommunityEndpointPatchModel {
   @doc("Community Endpoint Patch properties")
-  properties?: Update<CommunityEndpointPatchProperties>;
+  properties?: Update<CommunityEndpointProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

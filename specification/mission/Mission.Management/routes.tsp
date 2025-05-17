@@ -7,8 +7,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
-@doc("Microsoft Mission Resource Provider management API.")
-namespace Microsoft.Mission;
+import "./model.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
@@ -18,6 +17,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
 
 @doc("Workload Interface")
 @armResourceOperations
@@ -102,7 +104,6 @@ interface Community {
   @doc("Checks that the IP Address Space to be allocated for this Community is available.")
   @armResourceAction(CommunityResource)
   @post
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   checkAddressSpaceAvailability(
     ...ResourceInstanceParameters<CommunityResource>,
 
@@ -112,7 +113,6 @@ interface Community {
   ): ArmResponse<CheckAddressSpaceAvailabilityResponse> | ErrorResponse;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("TransitHub Interface")
 @armResourceOperations
 interface TransitHub {
@@ -134,7 +134,6 @@ interface TransitHub {
   listBySubscription is ArmListBySubscription<TransitHubResource>;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Enclave Connection Interface")
 @armResourceOperations
 interface EnclaveConnection {
@@ -157,7 +156,6 @@ interface EnclaveConnection {
 
   @doc("Callback that triggers on approval state change.")
   @armResourceAction(EnclaveConnectionResource)
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   approvalCallback is ArmResourceActionAsync<
     EnclaveConnectionResource,
     ApprovalCallbackRequest,
@@ -165,7 +163,6 @@ interface EnclaveConnection {
   >;
   @doc("Callback that triggers on approval deletion state change.")
   @armResourceAction(EnclaveConnectionResource)
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   approvalDeletionCallback is ArmResourceActionAsync<
     EnclaveConnectionResource,
     ApprovalDeletionCallbackRequest,
@@ -173,7 +170,6 @@ interface EnclaveConnection {
   >;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Enclave Endpoint Interface")
 @armResourceOperations
 interface EnclaveEndpoints {
@@ -212,7 +208,6 @@ interface EnclaveEndpoints {
   >;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Community Endpoint Interface")
 @armResourceOperations
 interface CommunityEndpoints {
@@ -251,7 +246,6 @@ interface CommunityEndpoints {
   >;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Approval Interface")
 @armResourceOperations
 interface Approval {

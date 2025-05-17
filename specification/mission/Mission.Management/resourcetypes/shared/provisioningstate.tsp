@@ -12,7 +12,7 @@ namespace Microsoft.Mission;
 
 @lroStatus
 @doc("The provisioning status of the resource.")
-union ProvisioningStateEnum {
+union ProvisioningState {
   @doc("Provisioning State Type Accepted")
   Accepted: "Accepted",
 

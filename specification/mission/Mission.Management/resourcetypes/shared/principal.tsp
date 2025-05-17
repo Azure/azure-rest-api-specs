@@ -5,7 +5,6 @@ using TypeSpec.Versioning;
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Principal for maintenance mode or role assignments")
 model Principal {
   @doc("The object id associated with the principal")

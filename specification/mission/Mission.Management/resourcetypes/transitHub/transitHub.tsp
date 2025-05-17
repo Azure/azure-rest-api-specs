@@ -70,7 +70,7 @@ model TransitOption {
 model TransitHubProperties {
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("The state of the transitHub.")
   state?: TransitHubState;
@@ -83,13 +83,10 @@ model TransitHubProperties {
   resourceCollection?: string[];
 }
 
-@doc("Describes the properties of an Transit Hub.")
-model TransitHubPatchProperties is TransitHubProperties;
-
 @doc("TH Patch Resource")
 model TransitHubPatchModel {
   @doc("The TransitHub resource.")
-  properties?: Update<TransitHubPatchProperties>;
+  properties?: Update<TransitHubProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

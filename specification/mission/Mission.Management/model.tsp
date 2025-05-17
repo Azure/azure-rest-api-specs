@@ -7,8 +7,26 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
+import "./resourcetypes/community/community.tsp";
+import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
+import "./resourcetypes/workload/workload.tsp";
+import "./resourcetypes/catalog/catalog.tsp";
+import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
+import "./resourcetypes/transitHub/transitHub.tsp";
+import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
+import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
+import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
+import "./resourcetypes/postActions/approvalcallback.tsp";
+import "./resourcetypes/approvals/approvals.tsp";
+import "./resourcetypes/postActions/initiatorcallback.tsp";
+import "./resourcetypes/postActions/approvaldeletioncallback.tsp";
+
+using Azure.ClientGenerator.Core;
+using Azure.Core;
+using Azure.Core.Traits;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -20,7 +38,7 @@ model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.Res
   is ArmResponse<TResource>;
 
 @doc("Community Model Resource")
-model CommunityResource is TrackedResource<CommunityProperties> {
+model CommunityResource is TrackedResource<CommunityModel> {
   @key("communityName")
   @segment("communities")
   @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
@@ -32,8 +50,12 @@ model CommunityResource is TrackedResource<CommunityProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
+@@added(CommunityResource.identity,
+  Microsoft.Mission.Versions.v2024_06_01_preview
+);
+
 @doc("Virtual Enclave Model Resource")
-model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
+model EnclaveResource is TrackedResource<VirtualEnclaveModel> {
   @key("virtualEnclaveName")
   @segment("virtualEnclaves")
   @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
@@ -44,6 +66,10 @@ model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   /** The managed service identity for this resource */
   ...ManagedServiceIdentityProperty;
 }
+
+@@added(EnclaveResource.identity,
+  Microsoft.Mission.Versions.v2024_06_01_preview
+);
 
 @doc("Workload Model Resource")
 @parentResource(EnclaveResource)
@@ -102,7 +128,7 @@ model CommunityEndpointResource
 }
 
 @doc("Approval Model Resource")
-model ApprovalResource is ExtensionResource<ApprovalProperties> {
+model ApprovalResource is ExtensionResource<ApprovalModel> {
   @key("approvalName")
   @segment("approvals")
   @path

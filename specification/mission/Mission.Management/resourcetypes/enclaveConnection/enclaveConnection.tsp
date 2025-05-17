@@ -49,7 +49,7 @@ model EnclaveConnectionProperties {
 
   @doc("Community Resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  communityResourceId: CommunityResourceId;
+  communityResourceId: CommunityResourceIdScalar;
 
   @doc("Source Resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -68,20 +68,17 @@ model EnclaveConnectionProperties {
 
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("List of resource ids modified by enclave Connections.")
   @visibility(Lifecycle.Read)
   resourceCollection?: string[];
 }
 
-@doc("Enclave Connection Patch properties")
-model EnclaveConnectionPatchProperties is EnclaveConnectionProperties;
-
 @doc("Enclave Connection Patch Resource")
 model EnclaveConnectionPatchModel {
   @doc("Enclave Connection Patch properties")
-  properties?: Update<EnclaveConnectionPatchProperties>;
+  properties?: Update<EnclaveConnectionProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
