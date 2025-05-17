@@ -131,7 +131,7 @@ op updateKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters of the key to update.
@@ -165,7 +165,7 @@ op getKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
   },
   KeyBundle
 >;
@@ -279,7 +279,7 @@ op encrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the encryption operation.
@@ -315,7 +315,7 @@ op decrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the decryption operation.
@@ -351,7 +351,7 @@ op sign is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the signing operation.
@@ -387,7 +387,7 @@ op verify is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for verify operations.
@@ -423,7 +423,7 @@ op wrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for wrap operation.
@@ -459,7 +459,7 @@ op unwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the key operation.
@@ -495,7 +495,7 @@ op release is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the key release operation.
@@ -672,7 +672,7 @@ op getKeyAttestation is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
   },
   /**
    * A key bundle containing the key, its attributes and attestation blob.
