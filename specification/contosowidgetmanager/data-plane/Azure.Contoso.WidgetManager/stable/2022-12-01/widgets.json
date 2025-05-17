@@ -441,6 +441,10 @@
         ]
       }
     },
+    "EmptyModel": {
+      "type": "object",
+      "description": "Empty model."
+    },
     "FakedSharedModel": {
       "type": "object",
       "description": "Faked shared model",
@@ -477,25 +481,7 @@
     },
     "PagedWidgetSuite": {
       "type": "object",
-      "description": "Paged collection of WidgetSuite items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The WidgetSuite items on this page",
-          "items": {
-            "$ref": "#/definitions/WidgetSuite"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
+      "description": "Paged collection of WidgetSuite items"
     },
     "WidgetSuite": {
       "type": "object",
@@ -513,11 +499,16 @@
         "sharedModel": {
           "$ref": "#/definitions/FakedSharedModel",
           "description": "The faked shared model."
+        },
+        "emptyModel": {
+          "$ref": "#/definitions/EmptyModel",
+          "description": "The empty model."
         }
       },
       "required": [
         "name",
-        "manufacturerId"
+        "manufacturerId",
+        "emptyModel"
       ]
     },
     "WidgetSuiteCreateOrUpdate": {
@@ -531,6 +522,10 @@
         "sharedModel": {
           "$ref": "#/definitions/FakedSharedModelCreateOrUpdate",
           "description": "The faked shared model."
+        },
+        "emptyModel": {
+          "$ref": "#/definitions/EmptyModel",
+          "description": "The empty model."
         }
       }
     }
