@@ -1,5 +1,3 @@
-# Copilot instructions
-
 ## Converting a specification from swagger to typespec
 
 Users can convert a specification from swagger to typespec by using `tsp-client` a CLI designed to help developers throughout various stages of typespec development.
