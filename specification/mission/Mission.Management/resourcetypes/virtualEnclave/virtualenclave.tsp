@@ -173,7 +173,7 @@ model VirtualEnclavePatchProperties is VirtualEnclaveBaseModel {
   @doc("Enclave Maintenance Mode configuration Patch Model.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
 
-  @doc("Encalve Default Settings Patch Model")
+  @doc("Enclave Default Settings Patch Model")
   enclaveDefaultSettings?: EnclaveDefaultSettingsPatchModel;
 }
 
