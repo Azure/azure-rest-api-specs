@@ -158,14 +158,6 @@
           "format": "duration",
           "description": "Mute actions for the chosen period of time (in ISO 8601 duration format) after the alert is fired. Relevant only for rules of the kind LogAlert."
         },
-        "checkWorkspaceAlertsStorageConfigured": {
-          "type": "boolean",
-          "description": "The flag which indicates whether this scheduled query rule should be stored in the customer's storage. The default is false. Relevant only for rules of the kind LogAlert."
-        },
-        "skipQueryValidation": {
-          "type": "boolean",
-          "description": "The flag which indicates whether the provided query should be validated or not. The default is false. Relevant only for rules of the kind LogAlert."
-        },
         "autoMitigate": {
           "type": "boolean",
           "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is true. Relevant only for rules of the kind LogAlert."
@@ -264,7 +256,7 @@
         },
         "query": {
           "type": "string",
-          "description": "Log query alert"
+          "description": "KQL log query alert"
         },
         "timeAggregation": {
           "type": "string",
@@ -517,25 +509,13 @@
               "format": "duration",
               "description": "Specifies the lookback of the preview in ISO 8601 duration format."
             },
-            "alertRuleType": {
-              "type": "string",
-              "description": "The type of the alert rule to be previewed.",
-              "enum": [
-                "scheduledQueryRules"
-              ],
-              "x-ms-enum": {
-                "name": "alertRuleType",
-                "modelAsString": true
-              }
-            },
-            "alertRuleProperties": {
+            "scheduledQueryRuleProperties": {
               "$ref": "#/definitions/LogAlertRuleResource",
               "description": "The properties of the alert rule to preview."
             }
           },
           "required": [
             "lookbackPeriod",
-            "alertRuleType",
             "alertRuleProperties"
           ]
         }
