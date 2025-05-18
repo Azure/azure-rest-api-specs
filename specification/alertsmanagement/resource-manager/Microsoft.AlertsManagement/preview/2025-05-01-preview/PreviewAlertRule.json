@@ -92,16 +92,6 @@
     "LogAlertRuleProperties": {
       "type": "object",
       "properties": {
-        "createdWithApiVersion": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The api-version used when creating this alert rule"
-        },
-        "isLegacyLogAnalyticsRule": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "True if alert rule is legacy Log Analytic rule"
-        },
         "description": {
           "type": "string",
           "description": "The description of the scheduled query rule."
@@ -168,11 +158,6 @@
           "format": "duration",
           "description": "Mute actions for the chosen period of time (in ISO 8601 duration format) after the alert is fired. Relevant only for rules of the kind LogAlert."
         },
-        "isWorkspaceAlertsStorageConfigured": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "The flag which indicates whether this scheduled query rule has been configured to be stored in the customer's storage. The default is false."
-        },
         "checkWorkspaceAlertsStorageConfigured": {
           "type": "boolean",
           "description": "The flag which indicates whether this scheduled query rule should be stored in the customer's storage. The default is false. Relevant only for rules of the kind LogAlert."
@@ -200,21 +185,6 @@
         "location"
       ],
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -247,16 +217,6 @@
             "name": "Kind",
             "modelAsString": true
           }
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. "
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "SystemData of ScheduledQueryRule.",
-          "readOnly": true
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -425,22 +385,6 @@
         "values"
       ]
     },
-    "LogAlertRuleUserIdentityProperties": {
-      "type": "object",
-      "description": "User assigned identity properties.",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "description": "The principal id of user assigned identity.",
-          "type": "string"
-        },
-        "clientId": {
-          "readOnly": true,
-          "description": "The client id of user assigned identity.",
-          "type": "string"
-        }
-      }
-    },
     "PreviewAlertRuleResponse": {
       "type": "object",
       "properties": {
@@ -577,7 +521,7 @@
               "type": "string",
               "description": "The type of the alert rule to be previewed.",
               "enum": [
-                "scheduledqueryrules"
+                "scheduledQueryRules"
               ],
               "x-ms-enum": {
                 "name": "alertRuleType",
