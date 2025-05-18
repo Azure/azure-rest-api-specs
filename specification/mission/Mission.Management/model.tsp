@@ -1,25 +1,34 @@
-import "@typespec/rest";
-import "@typespec/http";
-import "@typespec/openapi";
-import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "@typespec/versioning";
 
-import "./resourcetypes/community/community.tsp";
-import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
-import "./resourcetypes/workload/workload.tsp";
+import "./resourcetypes/approvals/approvals.tsp";
 import "./resourcetypes/catalog/catalog.tsp";
-import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
-import "./resourcetypes/transitHub/transitHub.tsp";
-import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
+import "./resourcetypes/community/community.tsp";
 import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
+import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
 import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
 import "./resourcetypes/postActions/approvalcallback.tsp";
-import "./resourcetypes/approvals/approvals.tsp";
-import "./resourcetypes/postActions/initiatorcallback.tsp";
 import "./resourcetypes/postActions/approvaldeletioncallback.tsp";
+import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
+import "./resourcetypes/postActions/initiatorcallback.tsp";
+import "./resourcetypes/transitHub/transitHub.tsp";
+import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
+import "./resourcetypes/workload/workload.tsp";
+
+import "./resourcetypes/shared/endpointrulebase.tsp";
+import "./resourcetypes/shared/governedserviceitem.tsp";
+import "./resourcetypes/shared/maintenancemodeconfiguration.tsp";
+import "./resourcetypes/shared/managedresourcegroupconfiguration.tsp";
+import "./resourcetypes/shared/principal.tsp";
+import "./resourcetypes/shared/provisioningstate.tsp";
+import "./resourcetypes/shared/resourceid.tsp";
+import "./resourcetypes/shared/roleassignmentitem.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;

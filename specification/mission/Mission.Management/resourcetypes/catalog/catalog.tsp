@@ -3,45 +3,32 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "../shared/provisioningstate.tsp";
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
-
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
 @doc("List of storage types support by catalog")
 union CatalogStorageType {
+  string,
+
   @doc("Blob Storage Catalog Type")
   BlobCatalog: "BlobCatalog",
-
-  string,
-}
-
-@doc("Base type for catalog.")
-model CatalogBase {
-  @doc("Catalog's storage type.")
-  catalogStorageType?: CatalogStorageType;
 }
 
 @doc("Blob Catalog type.")
 model BlobCatalog {
+  @doc("Catalog's storage type.")
+  catalogStorageType?: CatalogStorageType;
+
   @doc("Catalog Storage's URI.")
   uri?: string;
-
-  ...CatalogBase;
 }
 
 @doc("Catalog Types.")
 union Catalog {
+  string,
+
   @doc("Blob Catalog")
   blob: BlobCatalog,
-
-  string,
 }
 
 @doc("Package Properties")

@@ -1,27 +1,21 @@
 // cspell:enableCompoundWords
 // cspell:words managedonbehalfofconfiguration
 
+import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-resource-manager";
+import "../shared/maintenancemodeconfiguration.tsp";
 
-import "../shared/governedserviceitem.tsp";
-import "../shared/provisioningstate.tsp";
-import "../shared/resourceid.tsp";
-import "../shared/managedresourcegroupconfiguration.tsp";
-import "../shared/roleassignmentitem.tsp";
-import "../shared/managedonbehalfofconfiguration.tsp";
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
 @doc("Azure Firewall SKU")
 union FirewallSKU {
+  string,
+
   @doc("FirewallSKU Basic")
   Basic: "Basic",
 
@@ -30,58 +24,6 @@ union FirewallSKU {
 
   @doc("FirewallSKU Premium")
   Premium: "Premium",
-
-  string,
-}
-
-@doc("Identifier for governed services.")
-union ServiceIdentifier {
-  @doc("Service identifier for AKS")
-  AKS: "AKS",
-
-  @doc("Service identifier for App Service")
-  AppService: "AppService",
-
-  @doc("Service identifier for Azure Firewalls")
-  AzureFirewalls: "AzureFirewalls",
-
-  @doc("Service identifier for Container Registry")
-  ContainerRegistry: "ContainerRegistry",
-
-  @doc("Service identifier for CosmosDB")
-  CosmosDB: "CosmosDB",
-
-  @doc("Service identifier for Data Connectors")
-  DataConnectors: "DataConnectors",
-
-  @doc("Service identifier for Insights")
-  Insights: "Insights",
-
-  @doc("Service identifier for Key Vault")
-  KeyVault: "KeyVault",
-
-  @doc("Service identifier for Logic")
-  Logic: "Logic",
-
-  @doc("Service identifier for Microsoft SQL")
-  MicrosoftSql: "MicrosoftSQL",
-
-  @doc("Service identifier for Monitoring")
-  Monitoring: "Monitoring",
-
-  @doc("Service identifier for PostgreSQL")
-  PostgreSql: "PostgreSQL",
-
-  @doc("Service identifier for Private DNS Zones")
-  PrivateDNSZones: "PrivateDNSZones",
-
-  @doc("Service identifier for Service Bus")
-  ServiceBus: "ServiceBus",
-
-  @doc("Service identifier for Storage")
-  Storage: "Storage",
-
-  string,
 }
 
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -175,13 +117,18 @@ model ApprovalSettings {
   connectionUpdateMode?: "Automatic" | "Manual" | string = "Automatic";
 }
 
+@added(Microsoft.Mission.Versions.v2024_12_01_preview)
+@doc("ApprovalSettings Properties")
+@withoutDefaultValues
+model ApprovalSettingsPatchModel is ApprovalSettings;
+
 @doc("Community Resource Properties")
-model CommunityModel {
+model CommunityBaseModel {
   @doc("Address Space.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   addressSpace?: string;
 
-  @doc("Dns Servers.")
+  @doc("DNS Servers.")
   dnsServers?: string[];
 
   @doc("Provisioning State.")
@@ -192,14 +139,14 @@ model CommunityModel {
   @visibility(Lifecycle.Read)
   resourceCollection?: string[];
 
-  @visibility(Lifecycle.Read)
   @doc("Managed resource group configuration.")
+  @visibility(Lifecycle.Read)
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @visibility(Lifecycle.Read)
   @doc("Managed On Behalf Of Configuration.")
-  managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
+  @visibility(Lifecycle.Read)
+  managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 
   @doc("List of services governed by a community.")
   governedServiceList?: GovernedServiceItem[];
@@ -212,6 +159,13 @@ model CommunityModel {
   @doc("Community role assignments")
   communityRoleAssignments?: RoleAssignmentItem[];
 
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
+  firewallSku?: FirewallSKU = FirewallSKU.Standard;
+}
+
+@doc("Community Resource Properties")
+model CommunityModel is CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettings;
@@ -219,17 +173,24 @@ model CommunityModel {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
+}
 
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
-  firewallSku?: FirewallSKU = FirewallSKU.Standard;
+@doc("Community Resource Properties without default values")
+@withoutDefaultValues
+model CommunityPatchProperties is CommunityBaseModel {
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
+  @doc("Approval requirements for various actions on the community's resources.")
+  approvalSettings?: ApprovalSettingsPatchModel;
+
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
+  @doc("Maintenance Mode configuration.")
+  maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
 }
 
 @doc("Community Patch Resource")
-@withoutDefaultValues
 model CommunityPatchModel {
   @doc("Community Patch properties")
-  properties?: Update<CommunityModel>;
+  properties?: Update<CommunityPatchProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...ManagedServiceIdentityProperty;

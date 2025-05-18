@@ -1,22 +1,15 @@
-import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
-import "../shared/provisioningstate.tsp";
-import "../shared/resourceid.tsp";
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
+import "@typespec/rest";
+import "@typespec/versioning";
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
 @doc("Specifies the state of the enclave connection.")
 union EnclaveConnectionState {
+  string,
+
   @doc("EnclaveConnectionState Type Pending Approval")
   PendingApproval: "PendingApproval",
 
@@ -37,8 +30,6 @@ union EnclaveConnectionState {
 
   @doc("EnclaveConnectionState Type Disconnected")
   Disconnected: "Disconnected",
-
-  string,
 }
 
 @doc("Enclave Connection Resource properties")
@@ -49,7 +40,7 @@ model EnclaveConnectionProperties {
 
   @doc("Community Resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  communityResourceId: CommunityResourceIdScalar;
+  communityResourceId: CommunityResourceId;
 
   @doc("Source Resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create)

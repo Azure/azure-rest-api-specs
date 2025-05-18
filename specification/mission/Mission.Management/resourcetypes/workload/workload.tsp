@@ -1,20 +1,13 @@
 // cspell:enableCompoundWords
 // cspell:words managedonbehalfofconfiguration
 
-import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/versioning";
 
-import "../shared/provisioningstate.tsp";
-import "../shared/resourceid.tsp";
-import "../shared/managedonbehalfofconfiguration.tsp";
-import "../virtualEnclave/virtualenclave.tsp";
-
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
@@ -26,21 +19,17 @@ model WorkloadProperties {
   provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @doc("Managed resource group configuration.")
-  managedResourceGroupConfiguration: ManagedResourceGroupConfiguration;
-
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   @doc("List of resource group ids.")
   resourceGroupCollection?: string[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @visibility(Lifecycle.Read)
   @doc("Managed On Behalf Of Configuration.")
-  managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
+  @visibility(Lifecycle.Read)
+  managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 }
 
 @doc("Workload Patch Resource")
+@withoutDefaultValues
 model WorkloadPatchModel {
   @doc("Workload Patch properties")
   properties?: Update<WorkloadProperties>;

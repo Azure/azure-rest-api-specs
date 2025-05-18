@@ -1,24 +1,18 @@
-import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/versioning";
 
-import "../shared/provisioningstate.tsp";
-import "../shared/resourceid.tsp";
-import "../shared/endpointrulebase.tsp";
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
 using OpenAPI;
+using TypeSpec.Versioning;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
 @doc("Community Endpoint Protocol Enum")
 union CommunityEndpointProtocol {
+  string,
+
   @doc("CommunityEndpointProtocol Type ANY")
   ANY: "ANY",
 
@@ -42,12 +36,12 @@ union CommunityEndpointProtocol {
 
   @doc("CommunityEndpointProtocol Type HTTP")
   HTTP: "HTTP",
-
-  string,
 }
 
 @doc("Destination Type Enum")
 union DestinationType {
+  string,
+
   @doc("DestinationType Type FQDN")
   FQDN: "FQDN",
 
@@ -59,8 +53,6 @@ union DestinationType {
 
   @doc("DestinationType Type PrivateNetwork")
   PrivateNetwork: "PrivateNetwork",
-
-  string,
 }
 
 @doc("Base type for destination rules.")

@@ -3,19 +3,13 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "../shared/provisioningstate.tsp";
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
-
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
 @doc("Specifies the state of the transitHub.")
 union TransitHubState {
+  string,
+
   @doc("TransitHubState Type PendingApproval")
   PendingApproval: "PendingApproval",
 
@@ -30,12 +24,12 @@ union TransitHubState {
 
   @doc("TransitHubState Type Failed")
   Failed: "Failed",
-
-  string,
 }
 
 @doc("Specifies the type of the transitOption.")
 union TransitOptionType {
+  string,
+
   @doc("TransitOptionType ExpressRoute")
   ExpressRoute: "ExpressRoute",
 
@@ -44,8 +38,6 @@ union TransitOptionType {
 
   @doc("TransitOptionType Peering")
   Peering: "Peering",
-
-  string,
 }
 
 @doc("TransitOptionParams Properties")
