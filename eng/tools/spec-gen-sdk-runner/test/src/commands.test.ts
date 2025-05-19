@@ -196,6 +196,7 @@ describe("generateSdkForSpecPr", () => {
     ];
     const mockExecutionReport = {
       executionResult: "succeeded",
+      packages: [],
       vsoLogPath: "path/to/log",
     };
 
