@@ -135,16 +135,11 @@ export async function generateSdkForSpecPr(): Promise<number> {
 
       if (executionReport.stagedArtifactsFolder) {
         stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
-      }
-
-      if (executionReport.stagedArtifactsFolder && executionReport.sdkApiViewArtifactFolder) {
-        const apiViewArtifactRelPath = path.relative(executionReport.stagedArtifactsFolder, executionReport.sdkApiViewArtifactFolder);
         for (const pkg of executionReport.packages) {
           if (pkg.apiViewArtifact) {
-            const fileName = path.basename(pkg.apiViewArtifact);
             apiViewRequestData.push({
               packageName: pkg.packageName,
-              filePath: path.join(apiViewArtifactRelPath, fileName),
+              filePath: path.relative(stagedArtifactsFolder, pkg.apiViewArtifact),
             });
           }
         }
