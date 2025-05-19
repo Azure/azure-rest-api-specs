@@ -79,16 +79,6 @@ export async function main() {
     process.exit(1);
   }
 
-  // const versionResult = await executeCommand("npm exec -- autorest --version");
-  // if (versionResult.error) {
-  //   console.error("Error running autorest --version", versionResult.error);
-  //   process.exit(1);
-  // }
-
-  // console.log("Autorest version:");
-  // console.log(versionResult.stdout);
-
-  // TODO: This is duplicated in runChecks.ts. Extract.
   const validatorVersion = await getDependencyVersion(
     await getPathToDependency("@microsoft.azure/openapi-validator"),
   );
