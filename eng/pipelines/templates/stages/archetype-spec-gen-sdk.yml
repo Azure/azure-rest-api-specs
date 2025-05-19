@@ -35,7 +35,7 @@ extends:
     Use1ESOfficial: false
     stages:
     - stage: Build
-      displayName: 'SDK Generation Preview'
+      displayName: 'SDK Generation'
       jobs:
       - job:
         timeoutInMinutes: 2400
@@ -142,6 +142,7 @@ extends:
               SkipCheckoutNone: true
               ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
                 TokenToUseForAuth: $(azuresdk-github-pat)
+                PreserveAuthToken: true
 
           - task: NodeTool@0
             inputs:
@@ -164,10 +165,12 @@ extends:
                 sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
               fi
 
+              updatedSpecRepoCommit="$(SpecRepoCommit)"
               if [ "$(Build.Reason)" = "PullRequest" ]; then
                 optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
                 specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
                 sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
+                updatedSpecRepoCommit="$(System.PullRequest.SourceCommitId)"
               fi
 
               if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
@@ -179,7 +182,7 @@ extends:
                 optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
                 sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
               fi
-              sdk_gen_info="$sdk_gen_info and CommitSHA: '$(SpecRepoCommit)' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
+              sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
               echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
               echo "$sdk_gen_info"
 
@@ -192,7 +195,7 @@ extends:
                 --sdp $(SdkRepoDirectory) \
                 --wf $(System.DefaultWorkingDirectory) \
                 --lang $(SdkRepoName) \
-                --commit $(SpecRepoCommit) \
+                --commit $updatedSpecRepoCommit \
                 --spec-repo-url ${{ parameters.SpecRepoUrl }} \
                 $optional_params || true # return true always to suppress exit error logging
             displayName: 'Generate SDK'
