@@ -97,9 +97,8 @@ export default async function incrementalTypeSpec({ core }) {
       logger: options.logger,
     });
     const tags = await readme.getTags();
-    const swaggers = [...tags].flatMap((t) => [...t.inputFiles]);
-    const inputFiles = swaggers.map((s) =>
-      relative(dirname(readme.path), s.path),
+    const inputFiles = [...tags.values()].flatMap((t) =>
+      [...t.inputFiles.keys()].map((p) => relative(dirname(readme.path), p)),
     );
 
     inputFiles.forEach((f) => {
