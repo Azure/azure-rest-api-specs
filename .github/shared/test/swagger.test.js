@@ -28,21 +28,29 @@ describe("Ignore examples", () => {
 
     const refs = await swagger.getRefs();
 
+    const expectedIncludedPath = resolve(
+      __dirname,
+      "fixtures/Swagger/ignoreExamples/included.json",
+    );
+    const expectedExamplePath = resolve(
+      __dirname,
+      "fixtures/Swagger/ignoreExamples/examples/example.json",
+    );
+
     expect(refs).toMatchObject(
-      new Set([
-        expect.objectContaining({
-          path: expect.stringContaining(
-            resolve(__dirname, "fixtures/Swagger/ignoreExamples/included.json"),
-          ),
-        }),
-        expect.objectContaining({
-          path: expect.stringContaining(
-            resolve(
-              __dirname,
-              "fixtures/Swagger/ignoreExamples/examples/example.json",
-            ),
-          ),
-        }),
+      new Map([
+        [
+          expectedIncludedPath,
+          expect.objectContaining({
+            path: expect.stringContaining(expectedIncludedPath),
+          }),
+        ],
+        [
+          expectedExamplePath,
+          expect.objectContaining({
+            path: expect.stringContaining(expectedExamplePath),
+          }),
+        ],
       ]),
     );
   });
@@ -54,13 +62,18 @@ describe("Ignore examples", () => {
     );
     const refs = await swagger.getRefs();
 
+    const expectedIncludedPath = resolve(
+      __dirname,
+      "fixtures/Swagger/ignoreExamples/included.json",
+    );
     expect(refs).toMatchObject(
-      new Set([
-        expect.objectContaining({
-          path: expect.stringContaining(
-            resolve(__dirname, "fixtures/Swagger/ignoreExamples/included.json"),
-          ),
-        }),
+      new Map([
+        [
+          expectedIncludedPath,
+          expect.objectContaining({
+            path: expect.stringContaining(expectedIncludedPath),
+          }),
+        ],
       ]),
     );
   });
