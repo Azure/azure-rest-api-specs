@@ -118,14 +118,15 @@ export async function buildState(
 
   const changedFileAndTagsMap = new Map<string, ReadmeAffectedTags>();
   for (const [readmeFile, tags] of readmeTags.entries()) {
-    const allTagsForReadme = (await tags.readme.getTags()).values();
-    const tagsAndInputs = [...allTagsForReadme].map((tag) => {
-      return {
-        tagName: tag.name,
-        inputFiles: [...tag.inputFiles.keys()],
-      };
-    });
-    const dedupedTags = deduplicateTags(tagsAndInputs);
+    const tagMap = await tags.readme.getTags();
+    const tagsAndInputFiles = [...tags.changedTags].map(changedTag => {
+      return { 
+        tagName: changedTag,
+        inputFiles: [...tagMap.get(changedTag)!.inputFiles.keys()],
+      }
+    }); 
+
+    const dedupedTags = deduplicateTags(tagsAndInputFiles);
     changedFileAndTagsMap.set(relative(rootPath, readmeFile), {
       readme: tags.readme,
       changedTags: new Set<string>(dedupedTags),
