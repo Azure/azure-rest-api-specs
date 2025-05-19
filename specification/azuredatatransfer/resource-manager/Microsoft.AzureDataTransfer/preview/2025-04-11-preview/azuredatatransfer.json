@@ -3542,22 +3542,6 @@
         ]
       }
     },
-    "InternalMetadataProperties": {
-      "type": "object",
-      "description": "Internal metadata of the connection inside pipeline.",
-      "properties": {
-        "operationStatus": {
-          "$ref": "#/definitions/OperationStatusProperties",
-          "description": "Operation status associated with the last patch request"
-        },
-        "statusSetBy": {
-          "type": "string",
-          "description": "User that last set the approved status for this connection",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": {}
-    },
     "LinkStatus": {
       "type": "string",
       "description": "Link status of the current pipeline, connection, flow.",
@@ -3663,27 +3647,6 @@
         ]
       },
       "readOnly": true
-    },
-    "OperationStatusProperties": {
-      "type": "object",
-      "description": "Operation status associated with the last patch request",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/OperationStatusEnum",
-          "description": "Operation status for the last patch request for this connection.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "Operation status ID of the last patch request for this connection.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Message for the operation for the last patch request for this connection.",
-          "readOnly": true
-        }
-      }
     },
     "PendingConnection": {
       "type": "object",
@@ -4118,60 +4081,6 @@
         }
       ]
     },
-    "PipelineConnection": {
-      "type": "object",
-      "description": "Connection body inside a pipeline",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Connection id inside pipeline"
-        },
-        "name": {
-          "type": "string",
-          "description": "Connection name inside pipeline",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Connection type inside pipeline",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Connection location inside pipeline",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Connection etag inside pipeline",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/PipelineConnectionProperties",
-          "description": "Connection properties inside pipeline"
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "additionalProperties": {}
-    },
-    "PipelineConnectionProperties": {
-      "type": "object",
-      "description": "Connection properties inside pipeline",
-      "properties": {
-        "internalMetadata": {
-          "$ref": "#/definitions/InternalMetadataProperties",
-          "description": "Internal metadata of the connection inside pipeline."
-        }
-      },
-      "additionalProperties": {}
-    },
     "PipelineListResult": {
       "type": "object",
       "description": "The response of a Pipeline list operation.",
@@ -4209,7 +4118,7 @@
           "type": "array",
           "description": "Connections associated with pipeline",
           "items": {
-            "$ref": "#/definitions/PipelineConnection"
+            "$ref": "#/definitions/ReadPipelineConnection"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -4316,16 +4225,6 @@
       "type": "object",
       "description": "Properties of pipelines patch body.",
       "properties": {
-        "connections": {
-          "type": "array",
-          "description": "Connections associated with pipeline",
-          "items": {
-            "$ref": "#/definitions/PipelineConnection"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
-        },
         "flowTypes": {
           "type": "array",
           "description": "The flow types allowed for this pipeline",
@@ -4371,6 +4270,88 @@
         ]
       },
       "readOnly": true
+    },
+    "ReadPipelineConnection": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Connection id inside pipeline"
+        },
+        "name": {
+          "type": "string",
+          "description": "Connection name inside pipeline"
+        },
+        "type": {
+          "type": "string",
+          "description": "Connection type inside pipeline"
+        },
+        "location": {
+          "type": "string",
+          "description": "Connection location inside pipeline"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Connection etag inside pipeline"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/ReadReadPipelineConnectionProperties",
+          "description": "Connection properties inside pipeline"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": {}
+    },
+    "ReadReadInternalMetadataProperties": {
+      "type": "object",
+      "description": "Internal metadata of the connection inside pipeline.",
+      "properties": {
+        "operationStatus": {
+          "$ref": "#/definitions/ReadReadOperationStatusProperties",
+          "description": "Operation status associated with the last patch request"
+        },
+        "statusSetBy": {
+          "type": "string",
+          "description": "User that last set the approved status for this connection"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ReadReadOperationStatusProperties": {
+      "type": "object",
+      "description": "Operation status associated with the last patch request",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatusEnum",
+          "description": "Operation status for the last patch request for this connection."
+        },
+        "id": {
+          "type": "string",
+          "description": "Operation status ID of the last patch request for this connection."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message for the operation for the last patch request for this connection."
+        }
+      }
+    },
+    "ReadReadPipelineConnectionProperties": {
+      "type": "object",
+      "description": "Connection properties inside pipeline",
+      "properties": {
+        "internalMetadata": {
+          "$ref": "#/definitions/ReadReadInternalMetadataProperties",
+          "description": "Internal metadata of the connection inside pipeline."
+        }
+      },
+      "additionalProperties": {}
     },
     "ResourceBody": {
       "type": "object",

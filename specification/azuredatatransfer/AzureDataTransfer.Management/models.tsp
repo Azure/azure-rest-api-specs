@@ -579,7 +579,6 @@ model ConnectionProperties {
    * The timestamp that this connection request was submitted at
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   dateSubmitted?: utcDateTime;
 
   /**
@@ -633,7 +632,7 @@ model PipelineProperties {
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["id"])
-  connections?: PipelineConnection[];
+  connections?: Read<PipelineConnection>[];
 
   /**
    * Subscribers of this resource
@@ -687,6 +686,7 @@ model PipelineConnection {
   /**
    * Connection id inside pipeline
    */
+  @visibility(Lifecycle.Read)
   id: string;
 
   /**
@@ -722,6 +722,7 @@ model PipelineConnection {
   /**
    * Connection properties inside pipeline
    */
+  @visibility(Lifecycle.Read)
   properties?: PipelineConnectionProperties;
 }
 
@@ -734,6 +735,7 @@ model PipelineConnectionProperties {
   /**
    * Internal metadata of the connection inside pipeline.
    */
+  @visibility(Lifecycle.Read)
   internalMetadata?: InternalMetadataProperties;
 }
 
@@ -746,6 +748,7 @@ model InternalMetadataProperties {
   /**
    * Operation status associated with the last patch request
    */
+  @visibility(Lifecycle.Read)
   operationStatus?: OperationStatusProperties;
 
   /**
@@ -1229,12 +1232,6 @@ model PipelinesPatch {
  * Properties of pipelines patch body.
  */
 model PipelinesPatchProperties {
-  /**
-   * Connections associated with pipeline
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
-  connections?: PipelineConnection[];
-
   /**
    * The flow types allowed for this pipeline
    */
