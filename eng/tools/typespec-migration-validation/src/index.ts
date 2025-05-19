@@ -7,6 +7,7 @@ import yargs from 'yargs';
 import { hideBin } from "yargs/helpers";
 import { diff, diffString } from 'json-diff';
 import { suggestFix, suggestPrompt } from './fix/troubleshooting.js';
+import { configuration } from './configuration.js';
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
@@ -27,6 +28,16 @@ function parseArguments() {
       alias: 'out',
       describe: 'Output folder for analysis results',
       type: 'string',
+    })
+    .option('ignoreDescription', {
+      description: 'Ignore description differences',
+      type: 'boolean',
+      default: true,
+    })
+    .option('ignorePathCase', {
+      description: 'Set case insensitive for the segments before provider, e.g. resourceGroups',
+      type: 'boolean',
+      default: false,
     })
     .check((argv) => {
       const positional = argv._;
@@ -62,7 +73,9 @@ function parseArguments() {
 
 export async function main() {
   const args = parseArguments();
-  const { oldPath, newPath, outputFolder } = args;
+  const { oldPath, newPath, outputFolder, ignoreDescription, ignorePathCase } = args;
+  configuration.ignoreDescription = ignoreDescription;
+  configuration.ignorePathCase = ignorePathCase;
 
   logHeader(`Processing old swagger from: ${oldPath}...`);
   const mergedOldfile = mergeFiles(oldPath!);
