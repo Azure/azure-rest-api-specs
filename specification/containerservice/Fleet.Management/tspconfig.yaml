@@ -34,18 +34,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    generate-examples: true
   "@azure-tools/typespec-ts":
-    experimentalExtensibleEnums: true
-    package-dir: "azure-resourcemanager-containerservicefleet"
-    packageDetails:
-      name: "azure-resourcemanager-containerservicefleet"
-  "@azure-tools/typespec-python":
-    package-dir: "azure_mgmt_containerservicefleet"
-    package-name: "azure-mgmt-containerservicefleet"
-    generate-test: true
-    generate-sample: true
-  "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.ContainerServiceFleet"
-    namespace: "Azure.ResourceManager.ContainerServiceFleet"
-    clear-output-folder: true
+    service-dir: "sdk/containerservice"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-dir: "arm-containerservicefleet"
+    package-details:
+      name: "@azure/arm-containerservicefleet"
