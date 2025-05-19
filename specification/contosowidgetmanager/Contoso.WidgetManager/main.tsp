@@ -63,3 +63,7 @@ interface Widgets {
     }
   >;
 }
+
+model Foo {
+  bar: string;
+}
