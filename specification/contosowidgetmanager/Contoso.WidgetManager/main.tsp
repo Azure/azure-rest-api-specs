@@ -64,6 +64,8 @@ interface Widgets {
   >;
 }
 
+/** Example model for demonstration. */
 model Foo {
+  /** Example property. */
   bar: string;
 }
