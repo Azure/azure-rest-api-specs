@@ -1,0 +1,474 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ContainerNetworking",
+    "version": "2025-03-31-preview",
+    "description": "Microsoft.ContainerNetworking Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "NetworkContainers"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ContainerNetworking/locations/{location}/networkContainers": {
+      "get": {
+        "operationId": "NetworkContainers_List",
+        "tags": [
+          "NetworkContainers"
+        ],
+        "description": "List all network containers in the location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkContainerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Containers by locations": {
+            "$ref": "./examples/NetworkContainer_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ContainerNetworking/locations/{location}/networkContainers/{networkContainerId}": {
+      "get": {
+        "operationId": "NetworkContainers_Get",
+        "tags": [
+          "NetworkContainers"
+        ],
+        "description": "Get the specified network container",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "networkContainerId",
+            "in": "path",
+            "description": "The ID of the network container.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9\\-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkContainer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Network Container Info": {
+            "$ref": "./examples/NetworkContainer_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ContainerNetworking/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "NICType": {
+      "type": "string",
+      "description": "Represents the type of NIC associated with the network container.\nThis is an open enum allowing additional string values.",
+      "enum": [
+        "Default",
+        "SwiftV2"
+      ],
+      "x-ms-enum": {
+        "name": "NICType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NICTypeDefault",
+            "value": "Default",
+            "description": "Default NIC type."
+          },
+          {
+            "name": "NICTypeSwiftV2",
+            "value": "SwiftV2",
+            "description": "SwiftV2 NIC type."
+          }
+        ]
+      }
+    },
+    "NetworkContainer": {
+      "type": "object",
+      "description": "A network container resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkContainerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkContainerListResult": {
+      "type": "object",
+      "description": "The response of a NetworkContainer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkContainer items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkContainer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkContainerProperties": {
+      "type": "object",
+      "description": "Network Container properties.",
+      "properties": {
+        "networkContainerId": {
+          "type": "string",
+          "description": "The ID of the network container."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the network container schema or definition."
+        },
+        "networkId": {
+          "type": "string",
+          "description": "Resource ID of the network."
+        },
+        "baseSubnetName": {
+          "type": "string",
+          "description": "Name of the base subnet associated with the NC."
+        },
+        "associatedNodeId": {
+          "type": "string",
+          "description": "ID of the associated node."
+        },
+        "associatedInterfaceId": {
+          "type": "string",
+          "description": "ID of the associated interface."
+        },
+        "containerType": {
+          "type": "string",
+          "description": "Type of the container."
+        },
+        "orchestratorContext": {
+          "$ref": "#/definitions/OrchContext",
+          "description": "OrchestratorContext represents the DNC orchestrator context which is passed to the NCRequestV1 as a serialized json message."
+        },
+        "infraNetworkId": {
+          "type": "string",
+          "description": "Resource ID of the infrastructure network."
+        },
+        "allocatedIpSubnet": {
+          "type": "string",
+          "description": "Allocated IPv4 subnet for the NC."
+        },
+        "secondaryIps": {
+          "type": "array",
+          "description": "List of secondary IP addresses associated with the NC.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "baseSubnet": {
+          "type": "string",
+          "description": "Base subnet information."
+        },
+        "nodeInterfaceId": {
+          "type": "string",
+          "description": "ID of the node interface."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "VLAN identifier associated with the NC."
+        },
+        "vnetVersion": {
+          "type": "string",
+          "description": "Version of the virtual network."
+        },
+        "localIp": {
+          "type": "string",
+          "description": "Local IP address associated with the NC."
+        },
+        "greKey": {
+          "type": "integer",
+          "format": "int64",
+          "description": "GRE key for tunneling associated with the NC."
+        },
+        "orchestratorType": {
+          "type": "string",
+          "description": "Type of orchestrator managing the NC."
+        },
+        "routingDomainId": {
+          "type": "string",
+          "description": "Routing domain identifier."
+        },
+        "nodeInterfaceIpv6": {
+          "type": "string",
+          "description": "IPv6 address of the node interface."
+        },
+        "subnetType": {
+          "$ref": "#/definitions/SubnetType",
+          "description": "Type of subnet associated with the NC."
+        },
+        "nicType": {
+          "$ref": "#/definitions/NICType",
+          "description": "Type of NIC associated with the NC."
+        },
+        "networkInterfaceId": {
+          "type": "string",
+          "description": "Resource ID of the network interface."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "Resource ID of the subnet."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "MAC address associated with the NC."
+        },
+        "subnetAuthStrategy": {
+          "$ref": "#/definitions/SubnetAuthStrategy",
+          "description": "Authentication strategy for the subnet."
+        },
+        "azrEnabled": {
+          "type": "boolean",
+          "description": "Whether Availability Zone Redundancy (AZR) is enabled for the NC."
+        },
+        "azrHomeAzId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Home Availability Zone ID for AZR."
+        },
+        "disableSnat": {
+          "type": "boolean",
+          "description": "Indicates if SNAT (Source Network Address Translation) is disabled."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Current provisioning state of the NCs Managed by Azure.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "networkContainerId",
+        "version",
+        "networkId",
+        "baseSubnetName",
+        "associatedNodeId",
+        "associatedInterfaceId",
+        "containerType"
+      ]
+    },
+    "OrchContext": {
+      "type": "object",
+      "description": "Orchestrator context for the network container.",
+      "properties": {
+        "podName": {
+          "type": "string",
+          "description": "The name of the pod."
+        },
+        "podNamespace": {
+          "type": "string",
+          "description": "The namespace of the pod."
+        }
+      }
+    },
+    "SubnetAuthStrategy": {
+      "type": "string",
+      "description": "Represents the authentication strategy for the subnet.\nThis is an open enum allowing additional string values.",
+      "enum": [
+        "token matching",
+        "service matching"
+      ],
+      "x-ms-enum": {
+        "name": "SubnetAuthStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SubnetAuthStrategyTokenMatching",
+            "value": "token matching",
+            "description": "TokenMatching strategy: DNC will match the provided auth token with the token in pubsub to ensure this orchestrator can use the customer subnet."
+          },
+          {
+            "name": "SubnetAuthStrategyServiceMatching",
+            "value": "service matching",
+            "description": "ServiceMatching strategy: DNC will match the infra vnet's service name with the subnet's delegation to authenticate that the infra vnet can use this subnet."
+          }
+        ]
+      }
+    },
+    "SubnetType": {
+      "type": "string",
+      "description": "Represents the type of subnet associated with the network container.\nThis is an open enum allowing additional string values.",
+      "enum": [
+        "AzVnet",
+        "AzOverlay",
+        "AzVnetBlock"
+      ],
+      "x-ms-enum": {
+        "name": "SubnetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SubnetTypeVnet",
+            "value": "AzVnet",
+            "description": "Azure Virtual Network"
+          },
+          {
+            "name": "SubnetTypeOverlay",
+            "value": "AzOverlay",
+            "description": "Azure Overlay Network"
+          },
+          {
+            "name": "SubnetTypeVnetBlock",
+            "value": "AzVnetBlock",
+            "description": "Azure Virtual Network Block"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,157 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-05-01-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "paths": {},
+  "definitions": {
+    "FailoverGroupListResult": {
+      "description": "A list of failover groups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of failover group results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FailoverGroupResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FailoverGroupResource": {
+      "type": "object",
+      "description": "A failover group resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FailoverGroupProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "FailoverGroupProperties": {
+      "type": "object",
+      "description": "The properties of a failover group resource.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
+          "description": "The provisioning state of the failover group resource.",
+          "readOnly": true
+        },
+        "partnerManagedInstanceId": {
+          "type": "string",
+          "description": "The resource ID of the partner SQL managed instance."
+        },
+        "spec": {
+          "$ref": "#/definitions/FailoverGroupSpec",
+          "description": "The specifications of the failover group resource.",
+          "x-ms-client-flatten": false
+        },
+        "status": {
+          "type": "object",
+          "description": "The status of the failover group custom resource."
+        }
+      },
+      "additionalProperties": {},
+      "required": [
+        "partnerManagedInstanceId",
+        "spec"
+      ]
+    },
+    "FailoverGroupSpec": {
+      "description": "The specifications of the failover group resource.",
+      "type": "object",
+      "properties": {
+        "sharedName": {
+          "type": "string",
+          "description": "The shared name of the failover group for this SQL managed instance. Both SQL managed instance and its partner have to use the same shared name."
+        },
+        "sourceMI": {
+          "type": "string",
+          "description": "The name of the SQL managed instance with this failover group role."
+        },
+        "partnerMI": {
+          "type": "string",
+          "description": "The name of the partner SQL managed instance."
+        },
+        "partnerMirroringURL": {
+          "type": "string",
+          "description": "The mirroring endpoint URL of the partner SQL managed instance."
+        },
+        "partnerMirroringCert": {
+          "type": "string",
+          "description": "The mirroring endpoint public certificate for the partner SQL managed instance. Only PEM format is supported."
+        },
+        "partnerSyncMode": {
+          "type": "string",
+          "enum": [
+            "async",
+            "sync"
+          ],
+          "x-ms-enum": {
+            "name": "failoverGroupPartnerSyncMode",
+            "modelAsString": true
+          },
+          "default": "async",
+          "description": "The partner sync mode of the SQL managed instance."
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "secondary",
+            "force-primary-allow-data-loss",
+            "force-secondary"
+          ],
+          "x-ms-enum": {
+            "name": "instanceFailoverGroupRole",
+            "modelAsString": true
+          },
+          "default": "primary",
+          "description": "The role of the SQL managed instance in this failover group."
+        }
+      },
+      "additionalProperties": {},
+      "required": [
+        "role"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

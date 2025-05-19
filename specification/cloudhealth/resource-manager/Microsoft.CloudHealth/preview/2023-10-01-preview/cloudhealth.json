@@ -1776,7 +1776,9 @@
           "items": {
             "$ref": "#/definitions/SignalAssignment"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "signalDefinitions"
+          ]
         },
         "authenticationSetting": {
           "$ref": "#/definitions/stringResourceName",
@@ -1803,7 +1805,9 @@
           "items": {
             "$ref": "#/definitions/SignalAssignment"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "signalDefinitions"
+          ]
         },
         "authenticationSetting": {
           "$ref": "#/definitions/stringResourceName",
@@ -2334,6 +2338,10 @@
           "$ref": "#/definitions/HealthModelProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "discovery": {
+          "$ref": "#/definitions/ModelDiscoverySettings",
+          "description": "Configure to automatically discover entities from a given scope, such as a Service Group. The discovered entities will be linked to the root entity of the health model."
         }
       }
     },
@@ -2392,6 +2400,20 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/HealthModelUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "HealthModelUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the HealthModel.",
+      "properties": {
+        "discovery": {
+          "$ref": "#/definitions/ModelDiscoverySettingsUpdate",
+          "description": "Configure to automatically discover entities from a given scope, such as a Service Group. The discovered entities will be linked to the root entity of the health model."
         }
       }
     },
@@ -2502,7 +2524,9 @@
           "items": {
             "$ref": "#/definitions/SignalAssignment"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "signalDefinitions"
+          ]
         },
         "authenticationSetting": {
           "$ref": "#/definitions/stringResourceName",
@@ -2591,6 +2615,46 @@
             "value": "Total"
           }
         ]
+      }
+    },
+    "ModelDiscoverySettings": {
+      "type": "object",
+      "description": "Settings for automatically discovering entities for the health model.",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/string4096",
+          "description": "The scope from which entities should be automatically discovered. For example, the resource id of a Service Group."
+        },
+        "addRecommendedSignals": {
+          "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
+          "description": "Whether to add all recommended signals to the discovered entities."
+        },
+        "identity": {
+          "$ref": "#/definitions/string4096",
+          "description": "Which Managed Identity of the health model to use for discovery. Defaults to SystemAssigned, if not set. Can be set to 'SystemAssigned' or to the resource id of a user-assigned managed identity which is linked to the health model."
+        }
+      },
+      "required": [
+        "scope",
+        "addRecommendedSignals"
+      ]
+    },
+    "ModelDiscoverySettingsUpdate": {
+      "type": "object",
+      "description": "Settings for automatically discovering entities for the health model.",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/string4096",
+          "description": "The scope from which entities should be automatically discovered. For example, the resource id of a Service Group."
+        },
+        "addRecommendedSignals": {
+          "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
+          "description": "Whether to add all recommended signals to the discovered entities."
+        },
+        "identity": {
+          "$ref": "#/definitions/string4096",
+          "description": "Which Managed Identity of the health model to use for discovery. Defaults to SystemAssigned, if not set. Can be set to 'SystemAssigned' or to the resource id of a user-assigned managed identity which is linked to the health model."
+        }
       }
     },
     "PrometheusMetricsSignalDefinitionProperties": {

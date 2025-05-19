@@ -20,7 +20,8 @@ import "./operations/autonomousdatabase/autonomousDatabaseVersionOperations.tsp"
 import "./operations/exascale/exadbVmClusterOperations.tsp";
 import "./operations/exascale/exascaleDbNodesOperations.tsp";
 import "./operations/exascale/exascaleDbStorageVaultOperations.tsp";
-
+import "./operations/anchors/networkAnchorOperations.tsp";
+import "./operations/anchors/resourceAnchorOperations.tsp";
 import "./versions.tsp";
 
 using TypeSpec.Http;

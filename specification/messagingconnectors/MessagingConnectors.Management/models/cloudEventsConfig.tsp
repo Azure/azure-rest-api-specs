@@ -16,6 +16,9 @@ union CloudEventsType {
   @doc("CatalogCloudEventsConfig")
   Catalog: "Catalog",
 
+  @doc("EventSchemaSetCloudEventsConfig")
+  EventSchemaSet: "EventSchemaSet",
+
   string,
 }
 
@@ -50,7 +53,21 @@ model CatalogCloudEventsConfig extends CloudEventsConfig {
   @Azure.ResourceManager.identifiers(#[])
   catalogSchemaIds: CatalogSchemaId[];
 
-  @doc("access token.")
-  @secret
-  accessToken: string;
+  @doc("Auth of Catalog")
+  authentication: Authentication;
+}
+
+@doc("EventSchemaSet cloud events transform config.")
+model EventSchemaSetCloudEventsConfig extends CloudEventsConfig {
+  @doc("Type of EventSchemaSetCloudEventsConfig.")
+  type: CloudEventsType.EventSchemaSet;
+
+  @doc("Endpoint of EventSchemaSet.")
+  endpoint: string;
+
+  @doc("Id list of MessagingGroup.")
+  messageGroupIds: string[];
+
+  @doc("Auth of EventSchemaSet")
+  authentication: Authentication;
 }

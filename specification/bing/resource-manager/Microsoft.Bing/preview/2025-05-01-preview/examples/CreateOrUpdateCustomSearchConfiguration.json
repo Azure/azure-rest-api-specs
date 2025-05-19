@@ -1,0 +1,115 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup",
+    "accountName": "MyAccount",
+    "customSearchConfigurationName": "MyCustomSearchConfiguration",
+    "customSearchConfiguration": {
+      "properties": {
+        "allowedDomains": [
+          {
+            "domain": "www.example.com",
+            "includeSubPages": true,
+            "boostLevel": "Default"
+          }
+        ],
+        "blockedDomains": [
+          {
+            "domain": "www.blockedexample.com",
+            "includeSubPages": true
+          }
+        ],
+        "pinnedDomains": [
+          {
+            "domain": "www.pinnedexample.com",
+            "query": "example query",
+            "condition": "Contains"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount/customSearchConfigurations/MyCustomSearchConfiguration",
+        "name": "MyCustomSearchConfiguration",
+        "type": "Microsoft.Bing/accounts/customSearchConfigurations",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "allowedDomains": [
+            {
+              "domain": "www.example.com",
+              "includeSubPages": true,
+              "boostLevel": "Default"
+            }
+          ],
+          "blockedDomains": [
+            {
+              "domain": "www.blockedexample.com",
+              "includeSubPages": true
+            }
+          ],
+          "pinnedDomains": [
+            {
+              "domain": "www.pinnedexample.com",
+              "query": "example query",
+              "condition": "Contains"
+            }
+          ]
+        }
+      },
+      "systemData": {
+        "createdBy": "user@domain.com",
+        "createdByType": "User",
+        "createdAt": "2023-05-05T13:54:37.8072169Z",
+        "lastModifiedBy": "user@domain.com",
+        "lastModifiedByType": "User",
+        "lastModifiedAt": "2023-05-05T13:54:37.8072169Z"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "http://azure.async.operation/status",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount/customSearchConfigurations/MyConfiguration",
+        "name": "MyConfiguration",
+        "type": "Microsoft.Bing/accounts/customSearchConfigurations",
+        "properties": {
+          "provisioningState": "Creating",
+          "allowedDomains": [
+            {
+              "domain": "www.example.com",
+              "includeSubPages": true,
+              "boostLevel": "Default"
+            }
+          ],
+          "blockedDomains": [
+            {
+              "domain": "www.blockedexample.com",
+              "includeSubPages": true
+            }
+          ],
+          "pinnedDomains": [
+            {
+              "domain": "www.pinnedexample.com",
+              "query": "example query",
+              "condition": "Contains"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user@domain.com",
+          "createdByType": "User",
+          "createdAt": "2023-05-05T13:54:37.8072169Z",
+          "lastModifiedBy": "user@domain.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-05T13:54:37.8072169Z"
+        }
+      }
+    }
+  }
+}

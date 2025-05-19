@@ -91,6 +91,9 @@ union EdgeMachineJobType {
 
   @doc("Job to provision operating system in the device.")
   ProvisionOs: "ProvisionOs",
+
+  @doc("Job to debug machine issues using AI.")
+  MachineAssistant: "MachineAssistant",
 }
 
 @doc("Represents the various statuses a job can have throughout its lifecycle.")
@@ -153,6 +156,19 @@ model RemoteSupportJobProperties extends EdgeMachineJobProperties {
   reportedProperties?: RemoteSupportReportedProperties;
 }
 
+@doc("Properties for running Machine Assistant Job Properties.")
+model MachineAssistantJobProperties extends EdgeMachineJobProperties {
+  @doc("Job Type to support polymorphic resource.")
+  jobType: EdgeMachineJobType.MachineAssistant;
+
+  @doc("The user intent to be checked on the device.")
+  intent: string;
+
+  @doc("Machine Assistant job reported properties.")
+  @visibility(Lifecycle.Read)
+  reportedProperties?: MachineAssistantReportedProperties;
+}
+
 @doc("Represents the properties of an Azure Linux restricted operating environment Provision Os job.")
 model ProvisionOsJobProperties extends EdgeMachineJobProperties {
   @doc("Job Type to support polymorphic resource.")
@@ -181,25 +197,16 @@ model ProvisioningRequest {
 
   @doc("User configuration.")
   @Azure.ResourceManager.identifiers(#["userName"])
-  userDetails: UserDetails[];
+  userDetails?: UserDetails[];
 
   @doc("Onboarding configuration.")
-  onboardingConfiguration: OnboardingConfiguration;
+  onboardingConfiguration?: OnboardingConfiguration;
 
   @doc("Device configuration.")
   deviceConfiguration: DeviceConfiguration;
 
-  @doc("User and Network data provided by CAPI for machine configuration.")
-  cloudInit?: CloudInit;
-}
-
-@doc("User and Network data provided by CAPI for machine configuration.")
-model CloudInit {
-  @doc("Base64 encoded string for CAPI use – needs to accept/store what is provided by CAPI for machine configuration.")
-  userData?: string;
-
-  @doc("Base64 encoded string for CAPI use – needs to accept/store what is provided by CAPI for machine configuration.")
-  networkData?: string;
+  @doc("Base64 encoded custom configuration for CAPI to use")
+  customConfiguration?: string;
 }
 
 @doc("Represents the provisioning operating system type.")
@@ -225,6 +232,15 @@ model RemoteSupportReportedProperties {
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["sessionId"])
   sessionDetails?: RemoteSupportSession[];
+}
+
+@doc("Represents the reported properties of machine assistant job.")
+model MachineAssistantReportedProperties {
+  ...JobReportedProperties;
+
+  @doc("The result obtained after checking the intent on the machine.")
+  @visibility(Lifecycle.Read)
+  summary?: string;
 }
 
 @doc("Represents the settings of a remote support node.")
@@ -472,11 +488,14 @@ model UserDetails {
   @doc("Name of the user.")
   userName: string;
 
-  @doc("Type of the secret used for authentication.")
+  @doc("Type of the secret used for authentication. Change it to enum in public preview")
   secretType: string;
 
   @doc("Location of the secret used for authentication.")
-  secretLocation: string;
+  secretLocation?: string;
+
+  @doc("Location of the secret used for authentication.")
+  sshPubKey?: string[];
 }
 
 @doc("Onboarding resource type.")
@@ -491,19 +510,19 @@ union OnboardingResourceType {
 model OnboardingConfiguration {
   @doc("Type of the onboarding resource to support polymorphic resource.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  type: OnboardingResourceType;
+  type?: OnboardingResourceType;
 
   @doc("Resource ID.")
-  resourceId: string;
+  resourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Location of the resource.")
-  location: string;
+  location?: string;
 
   @doc("Tenant ID of the resource.")
   tenantId?: string;
 
   @doc("Azure Arc virtual machine ID.")
-  arcVirtualMachineId: string;
+  arcVirtualMachineId?: string;
 }
 
 @doc("Device configuration.")
@@ -525,7 +544,7 @@ model DeviceConfiguration {
 model NetworkConfiguration {
   @Azure.ResourceManager.identifiers(#[])
   @doc("List of network adapters.")
-  networkAdapters: NetworkAdapter[];
+  networkAdapters?: NetworkAdapter[];
 }
 
 @doc("Network adapter configuration.")
@@ -535,6 +554,12 @@ model NetworkAdapter {
 
   @doc("IP address.")
   ipAddress?: string;
+
+  @doc("Adapter Name.")
+  adapterName?: string;
+
+  @doc("MAC address.")
+  macAddress?: string;
 
   @doc("IP address range.")
   ipAddressRange?: IpAddressRange;

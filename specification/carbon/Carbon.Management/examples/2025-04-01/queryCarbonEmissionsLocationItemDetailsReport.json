@@ -1,0 +1,126 @@
+{
+  "operationId": "CarbonService_QueryCarbonEmissionReports",
+  "title": "QueryCarbonEmission Location item details Report",
+  "parameters": {
+    "api-version": "2025-04-01",
+    "queryParameters": {
+      "reportType": "ItemDetailsReport",
+      "subscriptionList": [
+        "00000000-0000-0000-0000-000000000000",
+        "00000000-0000-0000-0000-000000000001,",
+        "00000000-0000-0000-0000-000000000002",
+        "00000000-0000-0000-0000-000000000003",
+        "00000000-0000-0000-0000-000000000004",
+        "00000000-0000-0000-0000-000000000005",
+        "00000000-0000-0000-0000-000000000006",
+        "00000000-0000-0000-0000-000000000007",
+        "00000000-0000-0000-0000-000000000008"
+      ],
+      "carbonScopeList": [
+        "Scope1",
+        "Scope3"
+      ],
+      "dateRange": {
+        "start": "2024-05-01",
+        "end": "2024-05-01"
+      },
+      "categoryType": "Location",
+      "orderBy": "LatestMonthEmissions",
+      "sortDirection": "Desc",
+      "pageSize": 100
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for location item details report.",
+      "body": {
+        "subscriptionAccessDecisionList": [
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000001",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000002",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000003",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000004",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000005",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000006",
+            "decision": "Denied"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000007",
+            "decision": "Denied"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000008",
+            "decision": "Denied",
+            "denialReason": "Carbon Optimization Reader permisison required"
+          }
+        ],
+        "value": [
+          {
+            "dataType": "ItemDetailsData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "east us",
+            "categoryType": "Location"
+          },
+          {
+            "dataType": "ItemDetailsData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "west us",
+            "categoryType": "Location"
+          },
+          {
+            "dataType": "ItemDetailsData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "west us 2",
+            "categoryType": "Location"
+          },
+          {
+            "dataType": "ItemDetailsData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "west us 3",
+            "categoryType": "Location"
+          },
+          {
+            "dataType": "ItemDetailsData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "east us 2",
+            "categoryType": "Location"
+          }
+        ]
+      }
+    }
+  }
+}

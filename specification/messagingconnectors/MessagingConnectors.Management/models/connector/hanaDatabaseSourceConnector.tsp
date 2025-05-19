@@ -11,38 +11,38 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
-@doc("Type of HanaQueryMode")
+@doc("Specify the mode in which data should be fetched from SAP DB table")
+union HanaMode {
+  @doc("Bulk mode to fetch from SAP table.")
+  Bulk: "Bulk",
+
+  @doc("Incrementing mode to fetch from SAP table.")
+  Incrementing: "Incrementing",
+
+  string,
+}
+
+@doc("Specify the query mode in which data should be fetched from SAP DB table")
 union HanaQueryMode {
-  @doc("Table type")
+  @doc("Query HANA by Schema and Table.")
   Table: "Table",
 
-  @doc("Query type")
+  @doc("Query HANA by specific SQL query.")
   Query: "Query",
 
   string,
 }
 
-@doc("Type of HanaNumericMapping")
+@doc("Control whether the DECIMAL column types are mapped to the default decimal type or one of the primitive types.")
 union HanaNumericMapping {
-  @doc("Table type.")
+  @doc("HanaNumericMapping of none.")
   None: "None",
 
-  @doc("Query type.")
+  @doc("HanaNumericMapping of best_fit.")
   BestFit: "BestFit",
 
-  @doc("BestFitEagerDouble type.")
+  @doc("HanaNumericMapping of best_fit_eager_double.")
   BestFitEagerDouble: "BestFitEagerDouble",
-
-  string,
-}
-
-@doc("Type of HanaNumericMapping")
-union HanaMode {
-  @doc("Bulk mode")
-  Bulk: "Bulk",
-
-  @doc("Incrementing mode")
-  Incrementing: "Incrementing",
 
   string,
 }
@@ -52,23 +52,29 @@ model HanaDatabaseSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of HanaDatabaseSourceConnector")
   connectorType: ConnectorType.HanaDatabaseSource;
 
-  @doc("Url of HANA database.")
+  @doc("HANA JDBC connection URI, e.g. jdbc:sap://127.0.0.1:30015.")
   connectionUrl: string;
 
-  @doc("User for HANA database.")
+  @doc("HANA JDBC connection username.")
   userName: string;
 
-  @doc("Password for HANA database.")
+  @doc("HANA JDBC connection password.")
   @secret
   password: string;
+
+  @doc("HANA schema to source data from.")
+  schema?: string;
+
+  @doc("The mode in which data should be fetched from SAP DB table. Default is bulk. And supported values are bulk, incrementing. ")
+  mode?: HanaMode;
+
+  @doc("In order to fetch data from a SAP DB table when mode is set to incrementing, an incremental (or auto-incremental) column needs to be provided.")
+  incrementingColumn?: string;
 
   @doc("The query mode in which data should be fetched from SAP DB table.")
   queryMode?: HanaQueryMode;
 
-  @doc("HANA schema to source data from, default as the HANA username..")
-  schema?: string;
-
-  @doc("Table name for HANA database.")
+  @doc("the SAP DB table name where the data needs to be read from.")
   table?: string;
 
   @doc("The query statement when queryMode is set to query.")
@@ -85,10 +91,4 @@ model HanaDatabaseSourceConnectorProperties extends DataSourceProperties {
 
   @doc("Whether the DECIMAL column types are mapped to the default decimal type or one of the primitive types.")
   numericMapping?: HanaNumericMapping;
-
-  @doc("The mode in which data should be fetched from SAP DB table.")
-  mode?: HanaMode;
-
-  @doc("In order to fetch data from a SAP DB table when mode is set to incrementing, an incremental (or auto-incremental) column needs to be provided.")
-  incrementingColumn?: string;
 }

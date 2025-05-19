@@ -45,16 +45,16 @@ union ComplianceCalculationType {
 @doc("Defines comparison operators for evaluating an SLI against an SLO target.")
 union TargetComparator {
   @doc("Less than the target value.")
-  "lt",
+  `<`: "lt",
 
   @doc("Greater than the target value.")
-  "gt",
+  `>`: "gt",
 
   @doc("Less than or equal to the target value.")
-  "lte",
+  `<=`: "lte",
 
   @doc("Greater than or equal to the target value.")
-  "gte",
+  `>=`: "gte",
 
   string,
 }

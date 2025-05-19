@@ -68,6 +68,9 @@ model HealthModelProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
+
+  @doc("Configure to automatically discover entities from a given scope, such as a Service Group. The discovered entities will be linked to the root entity of the health model.")
+  discovery?: ModelDiscoverySettings;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
@@ -77,6 +80,18 @@ union HealthModelProvisioningState {
   ResourceProvisioningState, // include standard provisioning states
   Creating: "Creating",
   Deleting: "Deleting",
+}
+
+@doc("Settings for automatically discovering entities for the health model.")
+model ModelDiscoverySettings {
+  @doc("The scope from which entities should be automatically discovered. For example, the resource id of a Service Group.")
+  scope: string4096;
+
+  @doc("Whether to add all recommended signals to the discovered entities.")
+  addRecommendedSignals: DiscoveryRuleRecommendedSignalsBehavior;
+
+  @doc("Which Managed Identity of the health model to use for discovery. Defaults to SystemAssigned, if not set. Can be set to 'SystemAssigned' or to the resource id of a user-assigned managed identity which is linked to the health model.")
+  identity?: string4096;
 }
 
 @doc("A signal definition in a health model")
@@ -536,8 +551,8 @@ union DependenciesAggregationType {
 @doc("A grouping of signal assignments and link to a data source")
 model SignalAssignmentGroup {
   @doc("Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.")
-  @Azure.ResourceManager.identifiers(#[])
   @maxItems(50)
+  @OpenAPI.extension("x-ms-identifiers", #["signalDefinitions"])
   signalAssignments?: SignalAssignment[];
 
   @doc("Reference to the name of the authentication setting which is used for querying the data source")

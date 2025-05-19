@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "workspaceName": "myWorkspace",
+    "integrationFabricName": "sampleIntegration",
+    "requestBodyParameters": {
+      "tags": {
+        "Environment": "Dev 2"
+      },
+      "properties": {
+        "scenarios": [
+          "scenario1"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Dashboard/grafana/myWorkspace/integrationFabrics/myIntegrationFabricName",
+        "name": "sampleIntegration",
+        "type": "Microsoft.Dashboard/grafana/integrationFabrics",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myAks",
+          "dataSourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAmw",
+          "scenarios": [
+            "scenario1"
+          ]
+        },
+        "location": "West US",
+        "tags": {
+          "Environment": "Dev 2"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Dashboard/locations/eastus2/operationStatuses/sample-op-status?api-version=2025-04-01-preview"
+      }
+    }
+  }
+}

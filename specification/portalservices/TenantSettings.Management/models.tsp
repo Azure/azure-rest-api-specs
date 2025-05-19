@@ -4,11 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using TypeSpec.Http;
 
 namespace Microsoft.PortalServices;
 
@@ -52,6 +49,14 @@ model MultiFactorAuthenticationSettings {
 
   @doc("The date and time when the enforcement setting in portalEnforcement should be applied.")
   portalEnforcementDate?: utcDateTime;
+
+  @added(Versions.v2025_04_01_preview)
+  @doc("The UTC date and time in ISO8601 format when multi-factor authentication will be required to use ARM APIs in the tenant.")
+  armEnforcementDate?: utcDateTime;
+
+  @added(Versions.v2025_04_01_preview)
+  @doc("Optional justification for the date and time set in armEnforcementDate. Maximum length is 500 characters.")
+  armJustification?: string;
 }
 
 @doc("Settings related to feedback control policies.")

@@ -110,4 +110,7 @@ model ApplicationProperties {
 model ApplicationPatchProperties {
   @doc("The description of the resource.")
   description?: string;
+
+  @doc("The identifier of the log analytics workspace.")
+  logAnalyticsWorkspaceId?: string;
 }

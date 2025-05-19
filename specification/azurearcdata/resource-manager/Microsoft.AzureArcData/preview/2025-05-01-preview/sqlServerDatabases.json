@@ -1,0 +1,772 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-05-01-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/databases/{databaseName}": {
+      "put": {
+        "tags": [
+          "SqlServerDatabases"
+        ],
+        "operationId": "SqlServerDatabases_Create",
+        "description": "Creates or replaces an Arc Sql Server Database.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerDatabaseResource",
+            "description": "The request body for database resource.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SqlServerDatabaseResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "#/parameters/databaseName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerDatabaseResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlServerDatabaseResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Arc Sql Server database.": {
+            "$ref": "./examples/CreateOrUpdateArcSqlServerDatabase.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlServerDatabases"
+        ],
+        "operationId": "SqlServerDatabases_Delete",
+        "description": "Deletes an Arc Sql Server database resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "#/parameters/databaseName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The specified database does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a database resource": {
+            "$ref": "./examples/DeleteArcSqlServerDatabase.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "SqlServerDatabases"
+        ],
+        "operationId": "SqlServerDatabases_Get",
+        "description": "Retrieves an Arc Sql Server database.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "#/parameters/databaseName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerDatabaseResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves an Arc Sql Server database resource.": {
+            "$ref": "./examples/GetArcSqlServerDatabase.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlServerDatabases"
+        ],
+        "description": "Updates an existing database.",
+        "operationId": "SqlServerDatabases_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "#/parameters/databaseName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "sqlServerDatabaseUpdate",
+            "in": "body",
+            "description": "The requested database resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerDatabaseUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerDatabaseResource"
+            }
+          },
+          "202": {
+            "description": "Resource update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a database.": {
+            "$ref": "./examples/UpdateSqlServerDatabase.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/databases": {
+      "get": {
+        "tags": [
+          "SqlServerDatabases"
+        ],
+        "operationId": "SqlServerDatabases_List",
+        "summary": "List the databases associated with the given Arc Sql Server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSqlServerDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all databases associated with an Arc Enabled Sql server.": {
+            "$ref": "./examples/ListBySqlServerInstanceDatabase.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArcSqlServerDatabaseListResult": {
+      "description": "A list of Arc Sql Server database.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of  Arc Sql Server database.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerDatabaseResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlServerDatabaseResource": {
+      "type": "object",
+      "description": "Arc Sql Server database",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerDatabaseResourceProperties",
+          "description": "Properties of Arc Sql Server database",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlServerDatabaseResourceProperties": {
+      "type": "object",
+      "description": "The properties of Arc Sql Server database resource",
+      "properties": {
+        "collationName": {
+          "description": "Collation of the database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "databaseCreationDate": {
+          "format": "date-time",
+          "description": "Creation date of the database.",
+          "type": "string"
+        },
+        "compatibilityLevel": {
+          "type": "integer",
+          "minimum": 80,
+          "maximum": 200,
+          "format": "int32",
+          "description": "Compatibility level of the database"
+        },
+        "sizeMB": {
+          "type": "number",
+          "format": "float",
+          "description": "Size of the database."
+        },
+        "logFileSizeMB": {
+          "type": "number",
+          "format": "float",
+          "description": "Total size in MB for the log (ldf) files for this database."
+        },
+        "dataFileSizeMB": {
+          "type": "number",
+          "format": "float",
+          "description": "Total size in MB for the data (mdf and ndf) files for this database."
+        },
+        "spaceAvailableMB": {
+          "type": "number",
+          "format": "float",
+          "description": "Space left of the database."
+        },
+        "state": {
+          "description": "State of the database.",
+          "enum": [
+            "Online",
+            "Restoring",
+            "Recovering",
+            "RecoveryPending",
+            "Suspect",
+            "Emergency",
+            "Offline",
+            "Copying",
+            "OfflineSecondary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DatabaseState",
+            "modelAsString": true
+          }
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "description": "Whether the database is read only or not."
+        },
+        "recoveryMode": {
+          "description": "Status of the database.",
+          "enum": [
+            "Full",
+            "Bulk-logged",
+            "Simple"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "databaseOptions": {
+          "type": "object",
+          "description": "List of features that are enabled for the database",
+          "properties": {
+            "isAutoCloseOn": {
+              "type": "boolean"
+            },
+            "isAutoShrinkOn": {
+              "type": "boolean"
+            },
+            "isAutoCreateStatsOn": {
+              "type": "boolean"
+            },
+            "isAutoUpdateStatsOn": {
+              "type": "boolean"
+            },
+            "isRemoteDataArchiveEnabled": {
+              "type": "boolean"
+            },
+            "isMemoryOptimizationEnabled": {
+              "type": "boolean"
+            },
+            "isEncrypted": {
+              "type": "boolean"
+            },
+            "isTrustworthyOn": {
+              "type": "boolean"
+            },
+            "isHekatonFilesOn": {
+              "type": "boolean",
+              "description": "Whether the database uses the In-Memory OLTP feature for storing in-memory objects."
+            }
+          }
+        },
+        "backupInformation": {
+          "type": "object",
+          "properties": {
+            "lastFullBackup": {
+              "format": "date-time",
+              "description": "Date time of last full backup.",
+              "type": "string"
+            },
+            "lastLogBackup": {
+              "format": "date-time",
+              "description": "Date time of last log backup.",
+              "type": "string"
+            }
+          }
+        },
+        "backupPolicy": {
+          "description": "The backup profile for the SQL server.",
+          "$ref": "#/definitions/BackupPolicy"
+        },
+        "earliestRestoreDate": {
+          "format": "date-time",
+          "description": "This records the earliest start date and time that restore is available for this database (ISO8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createMode": {
+          "description": "Database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. sourceDatabaseId and restorePointInTime must be specified.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DatabaseCreateMode",
+            "modelAsString": true
+          }
+        },
+        "sourceDatabaseId": {
+          "description": "The name of the source database associated with create operation of this database.",
+          "type": "string"
+        },
+        "vmId": {
+          "type": "string",
+          "description": "The unique ID of the hybrid machine that this resource belongs to.",
+          "readOnly": true
+        },
+        "restorePointInTime": {
+          "format": "date-time",
+          "description": "Conditional. If createMode is PointInTimeRestore, this value is required. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the Arc-enabled SQL Server database resource.",
+          "readOnly": true
+        },
+        "lastDatabaseUploadTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when last successful database upload was performed.",
+          "readOnly": true
+        },
+        "migration": {
+          "$ref": "#/definitions/DataBaseMigration"
+        }
+      }
+    },
+    "DataBaseMigration": {
+      "description": "Migration related configuration.",
+      "type": "object",
+      "properties": {
+        "assessment": {
+          "description": "Migration assessments related configuration.",
+          "$ref": "#/definitions/DataBaseMigrationAssessment"
+        }
+      }
+    },
+    "DataBaseMigrationAssessment": {
+      "description": "The migration assessment related configuration.",
+      "type": "object",
+      "properties": {
+        "assessmentUploadTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when Migration Assessment Report upload was last performed.",
+          "readOnly": true
+        },
+        "databaseAssessments": {
+          "$ref": "#/definitions/DatabaseAssessments"
+        },
+        "targetReadiness": {
+          "$ref": "#/definitions/TargetReadiness"
+        }
+      }
+    },
+    "DatabaseAssessments": {
+      "description": "Issues and warnings impacting the migration of Database to particular Azure Migration Target.",
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "appliesToMigrationTargetPlatform": {
+            "type": "string"
+          },
+          "featureId": {
+            "type": "string"
+          },
+          "issueCategory": {
+            "type": "string"
+          },
+          "moreInformation": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TargetReadiness": {
+      "description": "The target readiness for migration for this database.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "azureSqlDatabase": {
+          "$ref": "#/definitions/SkuRecommendationSummary"
+        },
+        "azureSqlManagedInstance": {
+          "$ref": "#/definitions/SkuRecommendationSummary"
+        },
+        "azureSqlVirtualMachine": {
+          "$ref": "#/definitions/SkuRecommendationSummary"
+        }
+      }
+    },
+    "SkuRecommendationSummary": {
+      "description": "The SKU recommendation summary.",
+      "type": "object",
+      "properties": {
+        "numOfBlockerIssues": {
+          "$ref": "#/definitions/SkuRecommendationResultsNumberOfBlockerIssues"
+        },
+        "recommendationStatus": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsRecommendationStatus"
+        },
+        "impactedObjectsSummary": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./common.json#/definitions/ImpactedObjectsInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "monthlyCost": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "monthlyCostOptions": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsMonthlyCostOptions"
+        },
+        "targetSku": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "object",
+              "properties": {
+                "computeTier": {
+                  "type": "string",
+                  "description": "The compute tier of the target SKU."
+                },
+                "hardwareType": {
+                  "type": "string",
+                  "description": "The hardware type of the target SKU."
+                },
+                "sqlPurchasingModel": {
+                  "type": "string",
+                  "description": "The SQL purchasing model of the target SKU."
+                },
+                "sqlServiceTier": {
+                  "type": "string",
+                  "description": "The SQL service tier of the target SKU."
+                },
+                "zoneRedundancyAvailable": {
+                  "type": "boolean",
+                  "description": "Indicates if zone redundancy is available for the target SKU."
+                }
+              }
+            },
+            "computeSize": {
+              "type": "number",
+              "format": "int32",
+              "description": "Compute Size in vCores."
+            },
+            "storageMaxSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "max storage for this particular SKU, in MB."
+            },
+            "predictedDataSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "The predicted data size in MB in Azure SQL, will impact the billing cost."
+            },
+            "predictedLogSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "The predicted log size in MB in Azure SQL, will impact the billing cost."
+            },
+            "maxStorageIops": {
+              "type": "number",
+              "format": "float",
+              "description": "The max storage IOPS in Azure SQL, will impact the billing cost."
+            },
+            "maxThroughputMBps": {
+              "type": "number",
+              "format": "float",
+              "description": "The max throughput in Azure SQL, will impact the billing cost."
+            }
+          }
+        }
+      }
+    },
+    "SkuRecommendationResultsNumberOfBlockerIssues": {
+      "description": "Number of blocker issues to fix before migrating this database to the target platform.",
+      "type": "integer",
+      "format": "int32"
+    },
+    "SqlServerDatabaseUpdate": {
+      "description": "An update to database resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlServerDatabaseResourceProperties",
+          "description": "The data controller's properties",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "BackupPolicy": {
+      "description": "The backup profile for the SQL server.",
+      "type": "object",
+      "properties": {
+        "retentionPeriodDays": {
+          "type": "integer",
+          "description": "The retention period for all the databases in this managed instance.",
+          "minimum": 0,
+          "maximum": 35,
+          "format": "int32"
+        },
+        "fullBackupDays": {
+          "type": "integer",
+          "description": "The value indicating days between full backups.",
+          "minimum": 0,
+          "maximum": 7,
+          "format": "int32"
+        },
+        "differentialBackupHours": {
+          "description": "The differential backup interval in hours.",
+          "enum": [
+            12,
+            24
+          ],
+          "type": "integer",
+          "format": "int32",
+          "x-ms-enum": {
+            "name": "differentialBackupHours",
+            "modelAsString": false
+          }
+        },
+        "transactionLogBackupMinutes": {
+          "type": "integer",
+          "description": "The value indicating minutes between transaction log backups.",
+          "minimum": 0,
+          "maximum": 60,
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the Azure subscription",
+      "x-ms-parameter-location": "client"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure resource group",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request",
+      "x-ms-parameter-location": "client"
+    },
+    "sqlServerInstanceName": {
+      "name": "sqlServerInstanceName",
+      "description": "Name of SQL Server Instance",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "databaseName": {
+      "name": "databaseName",
+      "description": "Name of the database",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

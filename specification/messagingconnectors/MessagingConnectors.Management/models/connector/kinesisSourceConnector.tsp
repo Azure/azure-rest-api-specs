@@ -11,7 +11,7 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
-@doc("StartPosition types for Kinesis")
+@doc("StartPosition types for Kinesis, https://docs.aws.amazon.com/kinesis/latest/APIReference/API_StartingPosition.html")
 union KinesisStartPositionType {
   @doc("TrimHorizon type")
   TrimHorizon: "TrimHorizon",

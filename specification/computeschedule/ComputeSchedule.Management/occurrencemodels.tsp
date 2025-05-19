@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./autoactionmodels.tsp";
+import "./scheduledactionmodels.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -55,8 +56,13 @@ model OccurrenceProperties {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@renamedFrom(
+  Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`,
+  "Occurrence"
+)
 @parentResource(AutoAction)
-model Occurrence is ProxyResource<OccurrenceProperties> {
+model OccurrenceOld is ProxyResource<OccurrenceProperties> {
   ...ResourceNameParameter<
     Occurrence,
     KeyName = "occurrenceId",
@@ -64,8 +70,18 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
   >;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@parentResource(ScheduledAction)
+model Occurrence is ProxyResource<OccurrenceProperties> {
+  ...ResourceNameParameter<
+    Occurrence,
+    KeyName = "occurrenceId",
+    NamePattern = "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}"
+  >;
+}
+
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-model OccurrenceResource is AutoActionResource {
+model OccurrenceResource is ScheduledActionResource {
   @doc("The time the occurrence is scheduled for the resource.")
   @visibility(Lifecycle.Read)
   scheduledTime: utcDateTime;
@@ -83,11 +99,26 @@ model OccurrenceResource is AutoActionResource {
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@renamedFrom(
+  Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`,
+  "DelayRequest"
+)
+@doc("Request to ask for a delay in an occurrence")
+model DelayRequestOld {
+  @doc("The amount of delay the occurrence should apply")
+  delay: duration;
+
+  @doc("The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence occurrence.")
+  resourceIds: Array<ValidAutoActionResourceId>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Request to ask for a delay in an occurrence")
 model DelayRequest {
   @doc("The amount of delay the occurrence should apply")
   delay: duration;
 
   @doc("The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence occurrence.")
-  resourceIds: Array<ValidAutoActionResourceId>;
+  resourceIds: Array<ValidScheduledActionResourceId>;
 }

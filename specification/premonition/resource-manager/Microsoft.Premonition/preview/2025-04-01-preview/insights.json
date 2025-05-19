@@ -1111,7 +1111,7 @@
           {
             "name": "Metagenomics",
             "value": "Metagenomics",
-            "description": "Metagenomics analysis: identify the sources of genetic material in a sample"
+            "description": "Metagenomic analysis: identify the sources of genetic material in a sample"
           }
         ]
       }
@@ -1292,6 +1292,7 @@
     },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
+      "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
@@ -1350,7 +1351,7 @@
         },
         "settings": {
           "$ref": "#/definitions/MetagenomicsAnalysisSettings",
-          "description": "The settings for Metagenomics analysis"
+          "description": "The settings for metagenomic analysis"
         }
       },
       "required": [
@@ -1404,7 +1405,7 @@
         },
         "containerName": {
           "type": "string",
-          "description": "Container name where all samples/analyses data will be stored"
+          "description": "Default container name where all samples/analyses data will be stored"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1427,7 +1428,7 @@
         },
         "containerName": {
           "type": "string",
-          "description": "Container name where all samples/analyses data will be stored"
+          "description": "Default container name where all samples/analyses data will be stored"
         }
       }
     },
@@ -1448,7 +1449,7 @@
     },
     "MetagenomicsAnalysisResult": {
       "type": "object",
-      "description": "Result for a Metagenomics analysis",
+      "description": "Result for a metagenomic analysis",
       "properties": {
         "taxonomyVersion": {
           "$ref": "#/definitions/TaxonomyVersion",
@@ -1473,7 +1474,7 @@
     },
     "MetagenomicsAnalysisSettings": {
       "type": "object",
-      "description": "Settings for a Metagenomics analysis",
+      "description": "Settings for a metagenomic analysis",
       "properties": {
         "taxonomyVersion": {
           "$ref": "#/definitions/TaxonomyVersion",

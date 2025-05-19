@@ -16,8 +16,22 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-bing
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2025-05-01-preview
   - tag: package-2020-06-10
   - tag: package-2020-06-10-preview
+```
+
+### Tag: package-2025-05-01-preview and java
+
+These settings apply only when `--tag=package-2025-05-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == '2025-05-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.bing.v2025_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/bing/mgmt-v2025_05_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2020-06-10 and java

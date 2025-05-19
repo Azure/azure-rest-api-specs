@@ -43,7 +43,7 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Monitor/slis": {
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/slis": {
       "get": {
         "operationId": "Slis_ListByParent",
         "tags": [
@@ -52,10 +52,10 @@
         "description": "Lists all SLI resources under a parent resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -82,22 +82,22 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Monitor/slis/{name}": {
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/slis/{sliName}": {
       "get": {
         "operationId": "Slis_Get",
         "tags": [
           "Slis"
         ],
-        "description": "Gets an SLI resources",
+        "description": "Gets an SLI resource.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "name",
+            "name": "sliName",
             "in": "path",
             "description": "Name of the SLI that is given by the user.",
             "required": true,
@@ -133,13 +133,13 @@
         "description": "Creates or updates an SLI resource.",
         "parameters": [
           {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "name",
+            "name": "sliName",
             "in": "path",
             "description": "Name of the SLI that is given by the user.",
             "required": true,
@@ -190,13 +190,13 @@
         "description": "Deletes an SLI resource.",
         "parameters": [
           {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "name",
+            "name": "sliName",
             "in": "path",
             "description": "Name of the SLI that is given by the user.",
             "required": true,
@@ -221,6 +221,56 @@
         "x-ms-examples": {
           "DeleteSli": {
             "$ref": "./examples/Slis_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/slis/{sliName}/signalPreview": {
+      "post": {
+        "operationId": "Slis_SignalPreview",
+        "tags": [
+          "Slis"
+        ],
+        "description": "Returns preview data for the signal.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "sliName",
+            "in": "path",
+            "description": "Name of the SLI that is given by the user.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_()~]{3,64}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Signal"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalPreview": {
+            "$ref": "./examples/Slis_SignalPreview.json"
           }
         }
       }
@@ -418,32 +468,32 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "eq",
+            "name": "==",
             "value": "eq",
             "description": "Equal to."
           },
           {
-            "name": "ne",
+            "name": "!=",
             "value": "ne",
             "description": "Not equal to."
           },
           {
-            "name": "lt",
+            "name": "<",
             "value": "lt",
             "description": "Less than."
           },
           {
-            "name": "lte",
+            "name": "<=",
             "value": "lte",
             "description": "Less than or equal to."
           },
           {
-            "name": "gt",
+            "name": ">",
             "value": "gt",
             "description": "Greater than."
           },
           {
-            "name": "gte",
+            "name": ">=",
             "value": "gte",
             "description": "Greater than or equal to."
           },
@@ -521,56 +571,6 @@
         "state",
         "message"
       ]
-    },
-    "Filter": {
-      "type": "object",
-      "description": "Defines a filter model for signals.",
-      "properties": {
-        "logic": {
-          "$ref": "#/definitions/Logic",
-          "description": "Logical operator for filtering."
-        },
-        "conditions": {
-          "type": "array",
-          "description": "Conditions applied to the filter.",
-          "items": {
-            "$ref": "#/definitions/Condition"
-          },
-          "x-ms-identifiers": [
-            "dimensionName",
-            "value",
-            "operator"
-          ]
-        }
-      },
-      "required": [
-        "logic",
-        "conditions"
-      ]
-    },
-    "Logic": {
-      "type": "string",
-      "description": "Defines logical operators used in filtering.",
-      "enum": [
-        "AND",
-        "OR"
-      ],
-      "x-ms-enum": {
-        "name": "Logic",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AND",
-            "value": "AND",
-            "description": "Logical AND operation."
-          },
-          {
-            "name": "OR",
-            "value": "OR",
-            "description": "Logical OR operation."
-          }
-        ]
-      }
     },
     "Metric": {
       "type": "object",
@@ -666,6 +666,26 @@
         ]
       }
     },
+    "ServiceGroupParameters": {
+      "type": "object",
+      "description": "ServiceGroup as parameter",
+      "properties": {
+        "serviceGroupName": {
+          "type": "string",
+          "description": "The name of the service group.",
+          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "serviceGroupName",
+        "apiVersion"
+      ]
+    },
     "Signal": {
       "type": "object",
       "description": "Represents a signal model used in SLI calculations.",
@@ -718,11 +738,14 @@
           "type": "array",
           "description": "Filters applied to modify signal values.",
           "items": {
-            "$ref": "#/definitions/Filter"
+            "$ref": "#/definitions/Condition"
           },
           "x-ms-identifiers": [
-            "logic",
-            "conditions"
+            "dimensionName",
+            "scalarFunction",
+            "samplingType",
+            "value",
+            "operator"
           ]
         },
         "spatialAggregation": {
@@ -957,22 +980,22 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "lt",
+            "name": "<",
             "value": "lt",
             "description": "Less than the target value."
           },
           {
-            "name": "gt",
+            "name": ">",
             "value": "gt",
             "description": "Greater than the target value."
           },
           {
-            "name": "lte",
+            "name": "<=",
             "value": "lte",
             "description": "Less than or equal to the target value."
           },
           {
-            "name": "gte",
+            "name": ">=",
             "value": "gte",
             "description": "Greater than or equal to the target value."
           }
@@ -1032,22 +1055,22 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "lt",
+            "name": "<",
             "value": "lt",
             "description": "Less than the target value."
           },
           {
-            "name": "gt",
+            "name": ">",
             "value": "gt",
             "description": "Greater than the target value."
           },
           {
-            "name": "lte",
+            "name": "<=",
             "value": "lte",
             "description": "Less than or equal to the target value."
           },
           {
-            "name": "gte",
+            "name": ">=",
             "value": "gte",
             "description": "Greater than or equal to the target value."
           }
@@ -1056,14 +1079,14 @@
     }
   },
   "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
+    "ServiceGroupBaseParameters": {
+      "name": "serviceGroupName",
       "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "description": "The name of the service group.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "x-ms-parameter-location": "method"
     }
   }
 }

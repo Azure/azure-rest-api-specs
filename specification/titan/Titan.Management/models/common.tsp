@@ -5,6 +5,8 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using TypeSpec.Versioning;
+
 @doc("Device type enum")
 union DeviceType {
   @doc("The Server.")

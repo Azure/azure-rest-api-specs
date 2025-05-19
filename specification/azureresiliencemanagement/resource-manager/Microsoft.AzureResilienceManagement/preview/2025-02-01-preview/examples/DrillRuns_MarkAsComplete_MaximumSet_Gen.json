@@ -1,0 +1,30 @@
+{
+  "title": "DrillRuns_MarkAsComplete_MaximumSet",
+  "operationId": "DrillRuns_MarkAsComplete",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2025-02-01-preview",
+    "operation-id": "qmn",
+    "drillName": "drill1",
+    "drillRunName": "drillRun1",
+    "body": {
+      "drillRunStage": "Fault"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "supportedActions": [
+          [
+            "Fault"
+          ]
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

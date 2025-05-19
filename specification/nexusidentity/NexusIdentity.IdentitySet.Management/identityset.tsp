@@ -11,18 +11,27 @@ using Azure.ResourceManager;
 namespace Microsoft.NexusIdentity;
 
 @lroStatus
-@doc("The provisioning state of Identity Set resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+@doc("The current provisioning state.")
+union ProvisioningState {
+  @doc("Accepted Provisioning State")
+  Accepted: "Accepted",
 
-  @doc("The operation is accepted and in progress.")
-  Updating,
+  @doc("Succeeded Provisioning State")
+  Succeeded: "Succeeded",
 
-  @doc("The resource is being deleted.")
-  Deleting,
+  @doc("Updating Provisioning State")
+  Updating: "Updating",
 
-  @doc("The operation is accepted.")
-  Accepted,
+  @doc("Deleting Provisioning State")
+  Deleting: "Deleting",
+
+  @doc("Failed Provisioning State")
+  Failed: "Failed",
+
+  @doc("Canceled Provisioning State")
+  Canceled: "Canceled",
+
+  string,
 }
 
 @doc("Identity Set Properties defines the properties of the Identity Set.")
@@ -55,22 +64,31 @@ model IdentitySetResourceProperties {
   @visibility(Lifecycle.Read)
   appName?: string;
 
+  @doc("The storage account to which data related to role assignments will be stored for notifications")
+  storageAccountName?: string;
+
+  @doc("The URI of the keyvault which stores the keys for encryption and decryption of the sensitive client data")
+  keyVaultId?: string;
+
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
 @doc("Access Type defines the type of access needed for the Roles.")
-enum AccessType {
+union AccessType {
   @doc("SSH access")
-  Ssh,
+  Ssh: "Ssh",
 
   @doc("Web access")
-  Web,
+  Web: "Web",
+
+  string,
 }
 
 @doc("Identity Set resource definition")
 model IdentitySetResource is TrackedResource<IdentitySetResourceProperties> {
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @key
   @segment("identitySets")
   @doc("The name of the Identity Set resource.")
