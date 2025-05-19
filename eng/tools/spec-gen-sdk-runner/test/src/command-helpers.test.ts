@@ -33,10 +33,16 @@ describe("commands.ts", () => {
       });
 
       setPipelineVariables(
+        "path-to-artifact",
+        false,
         "sdk/security/keyvault/azcertificates",
         "Configurations: 'specification/contosowidgetmanager/resource-manager/readme.md', and CommitSHA: 'commitsha', in SpecRepo: 'https://github.com/Azure/azure-rest-api-specs'",
       );
 
+      expect(log.setVsoVariable).toHaveBeenCalledWith(
+        "StagedArtifactsFolder",
+        "path-to-artifact",
+      );
       expect(log.setVsoVariable).toHaveBeenCalledWith(
         "PrBranch",
         "sdkauto/sdk-security/keyvault/azcertificates",
@@ -48,6 +54,21 @@ describe("commands.ts", () => {
       expect(log.setVsoVariable).toHaveBeenCalledWith(
         "PrBody",
         "Configurations: 'specification/contosowidgetmanager/resource-manager/readme.md', and CommitSHA: 'commitsha', in SpecRepo: 'https://github.com/Azure/azure-rest-api-specs'",
+      );
+    });
+    test("should skip PR related variable settings correctly", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setPipelineVariables(
+        "path-to-artifact"
+      );
+
+      expect(log.setVsoVariable).toHaveBeenCalledOnce();
+      expect(log.setVsoVariable).toHaveBeenCalledWith(
+        "StagedArtifactsFolder",
+        "path-to-artifact",
       );
     });
   });

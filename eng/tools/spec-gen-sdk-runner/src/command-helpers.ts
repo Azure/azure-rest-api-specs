@@ -35,20 +35,28 @@ export function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
 
 /**
  * Set the pipeline variables for the SDK pull request.
+ * @param stagedArtifactsFolder - The staged artifacts folder.
+ * @param skipPrVariables - A flag indicating whether to skip setting PR variables.
  * @param packageName - The package name.
  * @param installationInstructions - The installation instructions.
  */
 export function setPipelineVariables(
-  packageName: string,
+  stagedArtifactsFolder: string,
+  skipPrVariables: boolean = true,
+  packageName: string = "",
   installationInstructions: string = "",
 ): void {
-  const branchName = `sdkauto/${packageName?.replace("/", "-")}`;
-  const prTitle = `[AutoPR ${packageName}]`;
-  const prBody = installationInstructions;
-  setVsoVariable("PrBranch", branchName);
-  setVsoVariable("PrTitle", prTitle);
-  setVsoVariable("PrBody", prBody);
+  if (!skipPrVariables) {
+    const branchName = `sdkauto/${packageName?.replace("/", "-")}`;
+    const prTitle = `[AutoPR ${packageName}]`;
+    const prBody = installationInstructions;
+    setVsoVariable("PrBranch", branchName);
+    setVsoVariable("PrTitle", prTitle);
+    setVsoVariable("PrBody", prBody);
+  }
+  setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
 }
+
 /**
  * Parse the arguments.
  * @returns The spec-gen-sdk command input.

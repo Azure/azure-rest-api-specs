@@ -1,10 +1,14 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { detectChangedSpecConfigFiles, groupSpecConfigPaths } from "../../src/spec-helpers.js";
-import * as utils from "../../src/utils.js";
 import { SpecGenSdkCmdInput } from "../../src/types.js";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { type ChangedSpecs, normalizePath } from "../../src/utils.js";
+import {
+  type ChangedSpecs,
+  type SpecConfigs,
+  normalizePath,
+  getChangedFiles,
+} from "../../src/utils.js";
 
 vi.mock("../../src/utils.js", async () => {
   const actual = await vi.importActual<typeof import("../../src/utils.js")>("../../src/utils.js");
@@ -21,6 +25,20 @@ function normalizeResultItem(item: ChangedSpecs): ChangedSpecs {
     ...(item.readmeMd ? { readmeMd: normalizePath(item.readmeMd) } : {}),
     ...(item.typespecProject ? { typespecProject: normalizePath(item.typespecProject) } : {}),
   };
+}
+
+/**
+ * Normalizes all path properties in an array of SpecConfigs objects
+ * @param configsArray - Array of SpecConfigs objects to normalize
+ * @returns A new array with normalized path properties
+ */
+function normalizeSpecConfigsArray(configsArray: SpecConfigs[]): SpecConfigs[] {
+  return configsArray.map((config) => {
+    return {
+      ...(config.readmePath ? { readmePath: normalizePath(config.readmePath) } : {}),
+      ...(config.tspconfigPath ? { tspconfigPath: normalizePath(config.tspconfigPath) } : {}),
+    };
+  });
 }
 
 describe("detectChangedSpecConfigFiles", () => {
@@ -43,13 +61,13 @@ describe("detectChangedSpecConfigFiles", () => {
   });
 
   test("case with empty change files", () => {
-    vi.mocked(utils.getChangedFiles).mockReturnValue([]);
+    vi.mocked(getChangedFiles).mockReturnValue([]);
     const result = detectChangedSpecConfigFiles(mockCommandInput);
     expect(result).toEqual([]);
   });
 
   test("case with readme files", () => {
-    vi.mocked(utils.getChangedFiles).mockReturnValue([
+    vi.mocked(getChangedFiles).mockReturnValue([
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
       "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/widgets.json",
     ]);
@@ -72,7 +90,7 @@ describe("detectChangedSpecConfigFiles", () => {
   });
 
   test("case with tsp files", () => {
-    vi.mocked(utils.getChangedFiles).mockReturnValue([
+    vi.mocked(getChangedFiles).mockReturnValue([
       "specification/contosowidgetmanager/Contoso.Management/main.tsp",
       "specification/contosowidgetmanager/Contoso.Management/client.tsp",
       "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
@@ -95,7 +113,7 @@ describe("detectChangedSpecConfigFiles", () => {
   });
 
   test("case with shared files", () => {
-    vi.mocked(utils.getChangedFiles).mockReturnValue([
+    vi.mocked(getChangedFiles).mockReturnValue([
       "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp",
       "specification/contosowidgetmanager/Contoso.Management/client.tsp",
       "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
@@ -118,7 +136,7 @@ describe("detectChangedSpecConfigFiles", () => {
   });
 
   test("case with readme, tsp, shared files", () => {
-    vi.mocked(utils.getChangedFiles).mockReturnValue([
+    vi.mocked(getChangedFiles).mockReturnValue([
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
       "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/widgets.json",
       "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp",
@@ -162,7 +180,7 @@ describe("groupSpecConfigPaths", () => {
       "specification/compute/resource-manager/readme.md",
     ];
 
-    const result = groupSpecConfigPaths(tspconfigs, readmes);
+    const result = normalizeSpecConfigsArray(groupSpecConfigPaths(tspconfigs, readmes));
 
     expect(result).toHaveLength(3); // 2 from storage, 1 from compute
 
@@ -241,7 +259,7 @@ describe("groupSpecConfigPaths", () => {
       "specification/compute/resource-manager/readme.md", // This will be skipped
     ];
 
-    const result = groupSpecConfigPaths(tspconfigs, readmes, true);
+    const result = normalizeSpecConfigsArray(groupSpecConfigPaths(tspconfigs, readmes, true));
 
     expect(result).toHaveLength(1); // Only one matched pair, unmatched readme is skipped
 
@@ -267,7 +285,7 @@ describe("groupSpecConfigPaths", () => {
       "specification/compute/resource-manager/readme.md", // This will be included
     ];
 
-    const result = groupSpecConfigPaths(tspconfigs, readmes, false);
+    const result = normalizeSpecConfigsArray(groupSpecConfigPaths(tspconfigs, readmes, false));
 
     expect(result).toHaveLength(2); // One matched pair and one unmatched readme
 
@@ -292,7 +310,7 @@ describe("groupSpecConfigPaths", () => {
       "specification/compute/data-plane/readme.md",
     ];
 
-    const result = groupSpecConfigPaths(tspconfigs, readmes);
+    const result = normalizeSpecConfigsArray(groupSpecConfigPaths(tspconfigs, readmes));
     expect(result).toHaveLength(4);
 
     // Configs should be correctly matched
@@ -333,7 +351,7 @@ describe("groupSpecConfigPaths", () => {
       "specification/compute/data-plane/readme.md", // This will be skipped when skipUnmatchedReadme is true
     ];
 
-    const result = groupSpecConfigPaths(tspconfigs, readmes, true);
+    const result = normalizeSpecConfigsArray(groupSpecConfigPaths(tspconfigs, readmes, true));
     expect(result).toHaveLength(2); // Only matched pairs from storage
 
     // Configs should be correctly matched for storage

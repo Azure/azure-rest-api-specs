@@ -58,7 +58,12 @@ export async function generateSdkForSingleSpec(): Promise<number> {
       "missing-package-name";
     packageName = packageName.replace("/", "-");
     const installationInstructions = executionReport.packages[0]?.installationInstructions;
-    setPipelineVariables(packageName, installationInstructions);
+    setPipelineVariables(
+      executionReport.stagedArtifactsFolder,
+      false,
+      packageName,
+      installationInstructions,
+    );
   }
 
   logMessage("ending group logging", LogLevel.EndGroup);
@@ -207,6 +212,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   let succeededCount = 0;
   let executionReport;
   let specConfigPath = "";
+  let stagedArtifactsFolder = "";
 
   // Generate SDKs for each spec
   for (const specConfigs of specConfigsArray) {
@@ -254,6 +260,9 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       // Read the execution report to determine if the generation was successful
       executionReport = getExecutionReport(commandInput);
       const executionResult = executionReport.executionResult;
+      if (executionReport.stagedArtifactsFolder) {
+        stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
+      }
       logMessage(`Runner: command execution result:${executionResult}`);
 
       if (executionResult === "succeeded" || executionResult === "warning") {
@@ -314,5 +323,8 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
     vsoLogIssue(`Runner: error writing markdown file ${markdownFilePath}:${error}`);
     statusCode = 1;
   }
+  // Set the pipeline variables for artifacts location
+  setPipelineVariables(stagedArtifactsFolder);
+
   return statusCode;
 }
