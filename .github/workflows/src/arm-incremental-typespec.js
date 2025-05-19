@@ -2,7 +2,7 @@
 
 // For now, treat all paths as posix, since this is the format returned from git commands
 import debug from "debug";
-import { dirname, join } from "path/posix";
+import { dirname, join, relative, resolve } from "path";
 import { simpleGit } from "simple-git";
 import {
   example,
@@ -11,7 +11,7 @@ import {
   resourceManager,
   swagger,
 } from "../../shared/src/changed-files.js";
-import { getInputFiles } from "../../shared/src/readme.js";
+import { Readme } from "../../shared/src/readme.js";
 import { CoreLogger } from "./core-logger.js";
 
 // Enable simple-git debug logging to improve console output
@@ -92,7 +92,15 @@ export default async function incrementalTypeSpec({ core }) {
     }
 
     // If a readme is changed, to be conservative, handle as if every input file in the readme were changed
-    const inputFiles = await getInputFiles(readmeText, options);
+    const readme = new Readme(resolve(options.cwd ?? "", readmeFile), {
+      content: readmeText,
+      logger: options.logger,
+    });
+    const tags = await readme.getTags();
+    const swaggers = [...tags].flatMap((t) => [...t.inputFiles]);
+    const inputFiles = swaggers.map((s) =>
+      relative(dirname(readme.path), s.path),
+    );
 
     inputFiles.forEach((f) => {
       changedReadmeInputFiles.add(join(dirname(readmeFile), f));
