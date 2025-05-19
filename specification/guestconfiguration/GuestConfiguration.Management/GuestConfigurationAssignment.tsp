@@ -92,7 +92,7 @@ interface GuestConfigurationAssignments {
   >;
 
   /**
-   * List all guest configuration assignments for a subscripotion.
+   * List all guest configuration assignments for a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")
