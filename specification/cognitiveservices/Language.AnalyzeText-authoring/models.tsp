@@ -700,7 +700,7 @@ model TextAnalysisAuthoringProjectDeployment {
   /**
    * Represents the metadata of the assigned Azure resources.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2025_05_01)
   assignedResources: TextAnalysisAuthoringDeploymentResource[];
 }
 
@@ -708,6 +708,7 @@ model TextAnalysisAuthoringProjectDeployment {
  * Represents an Azure resource assigned to a deployment.
  */
 @clientName("TextAuthoringDeploymentResource", "csharp")
+@added(Versions.v2025_05_01)
 model TextAnalysisAuthoringDeploymentResource {
   /**
    * Represents the Azure resource Id.
@@ -739,7 +740,7 @@ model TextAnalysisAuthoringCreateDeploymentOptions {
   /**
    * Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2025_05_01)
   @removed(Versions.v2025_05_15_preview)
   assignedResourceIds?: string[];
 
@@ -753,7 +754,7 @@ model TextAnalysisAuthoringCreateDeploymentOptions {
 /**
  * Represents the options for deleting a project deployment.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("TextAuthoringDeleteDeploymentDetails", "csharp")
 model TextAnalysisAuthoringDeleteDeploymentOptions {
   /**
@@ -948,7 +949,7 @@ model TextAnalysisAuthoringImportProjectJobState {
 @clientName("TextAuthoringProjectTrainedModels", "csharp")
 model TextAnalysisAuthoringProjectTrainedModels {
   /**
-   * The list of projects.
+   * The list of trained models.
    */
   value: TextAnalysisAuthoringProjectTrainedModel[];
 
@@ -1157,7 +1158,7 @@ model TextAnalysisAuthoringLoadSnapshotJobState {
 /**
  * Represents the assigned deployment resources.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("TextAuthoringAssignedDeploymentResources", "csharp")
 model TextAnalysisAuthoringAssignedDeploymentResources {
   /**
@@ -1174,7 +1175,7 @@ model TextAnalysisAuthoringAssignedDeploymentResources {
 /**
  * Represents the assigned deployment resource.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("TextAuthoringAssignedDeploymentResource", "csharp")
 @resource("resources")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
@@ -1196,6 +1197,7 @@ model TextAnalysisAuthoringAssignedDeploymentResource {
  * Represents the options for assigning Azure resources to a project.
  */
 @clientName("TextAuthoringAssignDeploymentResourcesDetails", "csharp")
+@added(Versions.v2025_05_01)
 model TextAnalysisAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
@@ -1207,6 +1209,7 @@ model TextAnalysisAuthoringAssignDeploymentResourcesOptions {
  * Represents metadata for the Azure resource..
  */
 @clientName("TextAuthoringResourceMetadata", "csharp")
+@added(Versions.v2025_05_01)
 model TextAnalysisAuthoringResourceMetadata {
   /**
    * Represents the Azure resource ID.
@@ -1227,7 +1230,7 @@ model TextAnalysisAuthoringResourceMetadata {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("TextAuthoringUnassignDeploymentResourcesDetails", "csharp")
 model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
   /**
@@ -1237,24 +1240,13 @@ model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
 }
 
 /**
- * Represents the state of a assign deployment resources job.
+ * Represents the state of a deployment resources job.
  */
-@added(Versions.v2023_04_15_preview)
-@clientName("TextAuthoringAssignDeploymentResourcesState", "csharp")
+@added(Versions.v2025_05_01)
+@clientName("TextAuthoringDeploymentResourcesState", "csharp")
 @resource("resources/assign/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
-model TextAnalysisAuthoringAssignDeploymentResourcesJobState {
-  ...TextAnalysisAuthoringJobState;
-}
-
-/**
- * Represents the state of a unassign deployment resources job.
- */
-@added(Versions.v2023_04_15_preview)
-@clientName("TextAuthoringUnassignDeploymentResourcesState", "csharp")
-@resource("resources/unassign/jobs")
-@parentResource(TextAnalysisAuthoringProjectMetadata)
-model TextAnalysisAuthoringUnassignDeploymentResourcesJobState {
+model TextAnalysisAuthoringDeploymentResourcesJobState {
   ...TextAnalysisAuthoringJobState;
 }
 
@@ -1361,7 +1353,7 @@ model TextAnalysisAuthoringProjectDeletionJobState {
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("TextAuthoringAssignedResourceDeploymentsMetadata", "csharp")
 model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata {
   /**
@@ -1380,7 +1372,7 @@ model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata {
  */
 @resource("authoring/analyze-text/projects/global/deployments/resources")
 @clientName("TextAuthoringAssignedProjectDeploymentsMetadata", "csharp")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 model TextAnalysisAuthoringAssignedProjectDeploymentsMetadata {
   /**
    * Represents the project name.
@@ -1399,6 +1391,7 @@ model TextAnalysisAuthoringAssignedProjectDeploymentsMetadata {
  * Represents the metadata for an assigned deployment
  */
 @clientName("TextAuthoringAssignedProjectDeploymentMetadata", "csharp")
+@added(Versions.v2025_05_01)
 model TextAnalysisAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents the deployment name.
