@@ -110,6 +110,10 @@ using PureStorage.Block;
   "PureStorageProvisioningState",
   "csharp"
 );
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+  "PureStorageResourceProvisioningState",
+  "csharp"
+); // TODO: this will be removed after the tsp get fixed
 @@clientName(RangeLimits, "PropertyValueRangeLimits", "csharp");
 @@clientName(SoftDeletion, "PureStorageSoftDeletionState", "csharp");
 @@clientName(SoftDeletion.destroyed, "IsDestroyed", "csharp");

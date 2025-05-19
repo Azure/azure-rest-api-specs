@@ -2685,7 +2685,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/LiftrBase.ProvisioningState",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -2777,6 +2777,37 @@
           ]
         }
       }
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "AzureProperties": {
       "type": "object",
@@ -3831,7 +3862,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/LiftrBase.ProvisioningState",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource",
           "readOnly": true
         }
