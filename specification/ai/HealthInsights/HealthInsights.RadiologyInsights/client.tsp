@@ -101,9 +101,7 @@ interface RadiologyInsightsClient {
   "ClinicalDocumentContent",
   "csharp, java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Mips76, 
-  "MIPS_76", 
-  "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips76, "MIPS_76", "java");
 @@clientName(AzureHealthInsights.QualityMeasureType.Mips147,
   "MIPS_147",
   "java"
