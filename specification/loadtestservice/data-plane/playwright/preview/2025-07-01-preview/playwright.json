@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Supported Playwright Service API Endpoints (protocol and hostname, for example:\n  https://{region}.api.playwright.microsoft.com).",
+        "description": "Supported Playwright Service API Endpoints (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.\nYou can also find this value in the Azure Playwright Workspace property, such as `dataplaneUri`.",
         "required": true,
         "type": "string"
       }
@@ -65,7 +65,6 @@
             "description": "The workspace id.",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "minLength": 3,
             "maxLength": 32,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
@@ -125,7 +124,6 @@
             "description": "The workspace id.",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "minLength": 3,
             "maxLength": 32,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
@@ -191,7 +189,6 @@
             "description": "The workspace id.",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "minLength": 3,
             "maxLength": 32,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
@@ -279,7 +276,6 @@
             "description": "The workspace id.",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "minLength": 3,
             "maxLength": 32,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
@@ -344,7 +340,6 @@
             "description": "The workspace id.",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "minLength": 3,
             "maxLength": 32,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
@@ -376,16 +371,6 @@
                 }
               ]
             }
-          },
-          {
-            "name": "runId",
-            "in": "query",
-            "description": "The runId provided by client to track remote script runs. It should match regex ^[a-zA-Z0-9-]{3,24}$",
-            "required": false,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"

@@ -226,7 +226,7 @@ model Identity {
    * User identity ids
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   userAssignedIdentities?: DatabaseIdentity[];
 
   /**
@@ -468,7 +468,7 @@ model RegisterServerDefinition {
    * Destination tier overrides.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   destinationTierOverrides?: DestinationTierOverride[];
 }
 

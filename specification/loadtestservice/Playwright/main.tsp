@@ -13,8 +13,8 @@ using TypeSpec.Versioning;
   "Playwright Service API Endpoint",
   {
     @doc("""
-      Supported Playwright Service API Endpoints (protocol and hostname, for example:
-        https://{region}.api.playwright.microsoft.com).
+      Supported Playwright Service API Endpoints (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.
+      You can also find this value in the Azure Playwright Workspace property, such as `dataplaneUri`.
       """)
     endpoint: string,
   }

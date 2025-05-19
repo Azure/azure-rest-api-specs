@@ -37,18 +37,11 @@ alias GetBrowsersParams = {
   @minLength(3)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @doc("The workspace id.")
-  workspaceId: uuid;
+  workspaceId: string;
 
   @query
   @doc("The os provided by client for remote script runs.")
   os?: OS = OS.Linux;
-
-  @query
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @maxLength(24)
-  @minLength(3)
-  @doc("The runId provided by client to track remote script runs. It should match regex ^[a-zA-Z0-9-]{3,24}$")
-  runId?: string;
 };
 
 alias GetBrowsersResponse = {

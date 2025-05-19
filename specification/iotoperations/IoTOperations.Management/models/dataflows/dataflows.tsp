@@ -38,7 +38,7 @@ model DataflowProperties {
   mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("List of operations including source and destination references as well as transformation.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   operations: DataflowOperation[];
 
   @visibility(Lifecycle.Read)
@@ -89,15 +89,15 @@ model DataflowBuiltInTransformationSettings {
 
   @doc("Enrich data from Broker State Store. Dataset references a key in Broker State Store.")
   @maxItems(1)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   datasets?: DataflowBuiltInTransformationDataset[] = #[];
 
   @doc("Filters input record or datapoints based on condition.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filter?: DataflowBuiltInTransformationFilter[] = #[];
 
   @doc("Maps input to output message.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   map?: DataflowBuiltInTransformationMap[] = #[];
 }
 
