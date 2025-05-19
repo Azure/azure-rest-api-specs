@@ -10,7 +10,6 @@ using Microsoft.Dashboard;
   "requestBodyParameters"
 );
 
-@@clientName(PrivateEndpointConnections.approve::parameters.resource, "body");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateEndpointConnection.properties);
 

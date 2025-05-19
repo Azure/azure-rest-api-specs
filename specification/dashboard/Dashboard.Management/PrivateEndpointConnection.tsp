@@ -25,6 +25,35 @@ model PrivateEndpointConnection
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@armResourceOperations
+interface PrivateEndpointConnectionsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The workspace name of Azure Managed Grafana.
+         */
+        @path
+        @segment("grafana")
+        @pattern("^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$")
+        workspaceName: string,
+      },
+      {
+        /**
+         * The private endpoint connection name of Azure Managed Grafana.
+         */
+        @path
+        @segment("privateEndpointConnections")
+        privateEndpointConnectionName: string,
+      },
+      ErrorResponse
+    > {}
+
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
@@ -36,13 +65,14 @@ interface PrivateEndpointConnections {
    * Manual approve private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  approve is ArmResourceCreateOrReplaceAsync<
+  approve is PrivateEndpointConnectionsOps.CreateOrUpdateAsync<
     PrivateEndpointConnection,
     Response = ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmResourceCreatedResponse<
       Resource = PrivateEndpointConnection,
       LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> &
         Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -65,4 +95,4 @@ interface PrivateEndpointConnections {
   "The private endpoint connection name of Azure Managed Grafana."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.approve::parameters.resource, "");
+@@doc(PrivateEndpointConnections.approve::parameters.body, "");
