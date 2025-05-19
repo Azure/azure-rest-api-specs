@@ -166,7 +166,7 @@ describe("commands.ts", () => {
       
       expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
       expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(["typespec1", "typespec2"], ["readme1", "readme2"]);
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(["typespec1", "typespec2"], ["readme1", "readme2"], false);
       expect(result).toHaveLength(4);
     });
 
@@ -180,7 +180,7 @@ describe("commands.ts", () => {
       const result = getSpecPaths("all-openapis", "/spec/path");
       
       expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith([], ["readme1", "readme2"]);
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith([], ["readme1", "readme2"], false);
       expect(result).toHaveLength(2);
     });
 
@@ -198,7 +198,7 @@ describe("commands.ts", () => {
       
       expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
       expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(["typespec1", "typespec2"], ["readme1", "readme2"]);
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(["typespec1", "typespec2"], ["readme1", "readme2"], true);
       expect(result).toHaveLength(4);
     });
 
@@ -214,7 +214,7 @@ describe("commands.ts", () => {
       expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith([
         "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
         "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml"
-      ], []);
+      ], [], false);
       expect(result).toHaveLength(2);
     });
     
@@ -233,7 +233,7 @@ describe("commands.ts", () => {
       
       expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
       expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(managementTypespecs, resourceManagerReadmes);
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(managementTypespecs, resourceManagerReadmes, true);
       expect(result).toHaveLength(2);
     });
     
@@ -254,7 +254,7 @@ describe("commands.ts", () => {
       
       expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
       expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(dataPlaneTypespecs, dataPlaneReadmes);
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(dataPlaneTypespecs, dataPlaneReadmes, true);
       expect(result).toHaveLength(4);
     });
   });
