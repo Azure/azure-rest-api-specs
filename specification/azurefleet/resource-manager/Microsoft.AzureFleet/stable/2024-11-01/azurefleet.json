@@ -1593,12 +1593,7 @@
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
           "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            ],
-            "type": "object",
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
           }
         }
@@ -2485,8 +2480,7 @@
           "description": "The local storage disk types specified as a list. LocalStorageSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf localStorageSupport is \"Excluded\", this VMAttribute can not be used.",
           "items": {
             "$ref": "#/definitions/LocalStorageDiskType"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "dataDiskCount": {
           "$ref": "#/definitions/VMAttributeMinMaxInteger",
@@ -2517,16 +2511,14 @@
           "description": "The accelerator manufacturers specified as a list. \nacceleratorSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf acceleratorSupport is \"Excluded\", this VMAttribute can not be used.",
           "items": {
             "$ref": "#/definitions/AcceleratorManufacturer"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "acceleratorTypes": {
           "type": "array",
           "description": "The accelerator types specified as a list. acceleratorSupport should be set to \"Included\" or \"Required\" to use this VMAttribute. \nIf acceleratorSupport is \"Excluded\", this VMAttribute can not be used.",
           "items": {
             "$ref": "#/definitions/AcceleratorType"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "acceleratorCount": {
           "$ref": "#/definitions/VMAttributeMinMaxInteger",
@@ -2537,24 +2529,21 @@
           "description": "The VM category specified as a list. Optional parameter.",
           "items": {
             "$ref": "#/definitions/VMCategory"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "architectureTypes": {
           "type": "array",
           "description": "The VM architecture types specified as a list. Optional parameter.",
           "items": {
             "$ref": "#/definitions/ArchitectureType"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "cpuManufacturers": {
           "type": "array",
           "description": "The VM CPU manufacturers specified as a list. Optional parameter.",
           "items": {
             "$ref": "#/definitions/CpuManufacturer"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "burstableSupport": {
           "$ref": "#/definitions/VMAttributeSupport",
@@ -2565,8 +2554,7 @@
           "description": "Specifies which VMSizes should be excluded while building Fleet. Optional parameter.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
