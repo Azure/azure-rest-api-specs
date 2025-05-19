@@ -4,6 +4,7 @@ import { getRunList } from "./processChanges.js";
 import { runChecks, getAutorestErrors } from "./runChecks.js";
 import { correlateRuns } from "./correlateResults.js";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
+import { writeFile } from "node:fs/promises";
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -112,6 +113,7 @@ async function runLintDiff(
   );
 
   if (beforeList.size === 0 && afterList.size === 0) {
+    await writeFile(outFile, "No changes found. Exiting.");
     console.log("No changes found. Exiting.");
     return;
   }

@@ -5,7 +5,6 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./HostPool.tsp";
 import "./Workspace.tsp";
-import "./LegacyOperations.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;

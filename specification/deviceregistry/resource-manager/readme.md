@@ -69,10 +69,5 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)

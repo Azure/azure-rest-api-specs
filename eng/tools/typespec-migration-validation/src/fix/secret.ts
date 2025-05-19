@@ -11,7 +11,7 @@ export function checkSecret(jsonObj: any): string[] {
 
       if (getPropertyName(path)) {
         const [definitionName, propertyName] = getPropertyName(path)!;
-        suggestedFixes.push(`Find a model called "${definitionName}". Add \`@secret\` onto its property "${propertyName}". If the property cannot access directly, add \`@@secret(${definitionName}.${propertyName})\` right after the model.`);
+        suggestedFixes.push(`Find a model called "${definitionName}". Add \`@secret\` onto its property "${propertyName}". If the property cannot access directly, add \`@@secret(${definitionName}.${propertyName});\` right after the model.`);
       }
     }
   }

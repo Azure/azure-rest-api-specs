@@ -21,6 +21,9 @@ updates:
       - dependency-name: "@types/js-yaml"
       - dependency-name: "autorest"
       - dependency-name: "js-yaml"
+      # Only allow patch updates for spec-gen-sdk
+      - dependency-name: "@azure-tools/spec-gen-sdk"
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
     groups:
       # Ships separately from other typespec packages
       typespec-client-generator-cli:

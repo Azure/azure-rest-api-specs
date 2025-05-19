@@ -1712,7 +1712,7 @@
           "$ref": "#/definitions/AcsRouterCommunicationError",
           "description": "Router Communication Inner Error"
         },
-        "errors": {
+        "details": {
           "type": "array",
           "description": "List of Router Communication Errors",
           "items": {
@@ -1724,7 +1724,7 @@
       },
       "required": [
         "innererror",
-        "errors"
+        "details"
       ]
     },
     "AcsRouterEventData": {
@@ -3097,6 +3097,7 @@
           "type": "object",
           "description": "Overview of all configured rules and respective details.",
           "additionalProperties": {
+            "additionalProperties": {},
             "type": "object"
           }
         }

@@ -109,9 +109,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_scvmm']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js scvmm/resource-manager
@@ -124,10 +121,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 
