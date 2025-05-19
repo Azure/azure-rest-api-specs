@@ -4488,8 +4488,12 @@
           "readOnly": true
         },
         "scheduledOperations": {
-          "$ref": "#/definitions/ScheduledOperationsType",
+          "type": "array",
           "description": "The list of scheduled operations.",
+          "items": {
+            "$ref": "#/definitions/ScheduledOperationsType"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",
@@ -5406,8 +5410,12 @@
           ]
         },
         "scheduledOperations": {
-          "$ref": "#/definitions/ScheduledOperationsTypeUpdate",
+          "type": "array",
           "description": "The list of scheduled operations.",
+          "items": {
+            "$ref": "#/definitions/ScheduledOperationsType"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",
@@ -7044,16 +7052,6 @@
             "description": "Sunday value"
           }
         ]
-      }
-    },
-    "DayOfWeekUpdate": {
-      "type": "object",
-      "description": "DayOfWeek resource properties",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/DayOfWeekName",
-          "description": "Name of the day of the week."
-        }
       }
     },
     "DbIormConfig": {
@@ -9356,7 +9354,7 @@
     },
     "ScheduledOperationsType": {
       "type": "object",
-      "description": "The list of scheduled operations.",
+      "description": "The details of scheduled operation.",
       "properties": {
         "dayOfWeek": {
           "$ref": "#/definitions/DayOfWeek",
@@ -9378,28 +9376,6 @@
       "required": [
         "dayOfWeek"
       ]
-    },
-    "ScheduledOperationsTypeUpdate": {
-      "type": "object",
-      "description": "The list of scheduled operations.",
-      "properties": {
-        "dayOfWeek": {
-          "$ref": "#/definitions/DayOfWeekUpdate",
-          "description": "Day of week"
-        },
-        "scheduledStartTime": {
-          "type": "string",
-          "description": "auto start time. value must be of ISO-8601 format HH:mm",
-          "minLength": 1,
-          "maxLength": 50
-        },
-        "scheduledStopTime": {
-          "type": "string",
-          "description": "auto stop time. value must be of ISO-8601 format HH:mm",
-          "minLength": 1,
-          "maxLength": 50
-        }
-      }
     },
     "SessionModeType": {
       "type": "string",
