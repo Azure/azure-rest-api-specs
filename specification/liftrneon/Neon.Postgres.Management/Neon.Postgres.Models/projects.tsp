@@ -1,13 +1,11 @@
 import "./commons.tsp"; // Import common types
 import "./endpoints.tsp"; // Import EndpointProperties type
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using LiftrBase.Data;
 
-namespace Neon.Postgres.Models;
+namespace Neon.Postgres;
 
 @doc("The Project resource type.")
 @added(Neon.Postgres.Versions.v2_preview)
@@ -55,14 +53,14 @@ model ProjectProperties {
   branch?: BranchProperties;
 
   @doc("Roles associated with the project")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   roles?: NeonRoleProperties[];
 
   @doc("Neon Databases associated with the project")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   databases?: NeonDatabaseProperties[];
 
   @doc("Endpoints associated with the project")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   endpoints?: EndpointProperties[];
 }

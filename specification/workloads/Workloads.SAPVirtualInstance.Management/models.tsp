@@ -640,7 +640,7 @@ model SAPSupportedResourceSkusResult {
   /**
    * Gets the list of SAP supported SKUs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedSkus?: SAPSupportedSku[];
 }
 
@@ -726,7 +726,7 @@ model SAPDiskConfiguration {
   /**
    * The list of supported disks for a given VM Sku.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedConfigurations?: DiskDetails[];
 }
 
@@ -831,7 +831,7 @@ model SAPAvailabilityZoneDetailsResult {
   /**
    * Gets the list of availability zone pairs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   availabilityZonePairs?: SAPAvailabilityZonePair[];
 }
 
@@ -968,7 +968,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: ErrorDefinition[];
 }
 
@@ -1093,7 +1093,7 @@ model SAPCentralServerProperties {
    * The list of virtual machines corresponding to the Central Services instance.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   vmDetails?: CentralServerVmDetails[];
 
   /**
@@ -1292,7 +1292,7 @@ model CentralServerVmDetails {
    * Storage details of all the Storage Accounts attached to the ASCS Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageDetails?: StorageInformation[];
 }
 
@@ -1358,7 +1358,7 @@ model SAPDatabaseProperties {
    * The list of virtual machines corresponding to the Database resource.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   vmDetails?: DatabaseVmDetails[];
 
   /**
@@ -1400,7 +1400,7 @@ model DatabaseVmDetails {
    * Storage details of all the Storage Accounts attached to the Database Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageDetails?: StorageInformation[];
 }
 
@@ -1491,7 +1491,7 @@ model SAPApplicationServerProperties {
    * The list of virtual machines.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   vmDetails?: ApplicationServerVmDetails[];
 
   /**
@@ -1539,7 +1539,7 @@ model ApplicationServerVmDetails {
    * Storage details of all the Storage Accounts attached to the App Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageDetails?: StorageInformation[];
 }
 
@@ -1649,7 +1649,7 @@ model SshConfiguration {
   /**
    * The list of SSH public keys used to authenticate with linux based VMs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   publicKeys?: SshPublicKey[];
 }
 
@@ -2116,7 +2116,7 @@ model VirtualMachineResourceNames {
   /**
    * The list of network interface name objects for the selected virtual machine. Currently, only one network interface is supported per virtual machine.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceResourceNames[];
 
   /**
@@ -2178,7 +2178,7 @@ model CentralServerFullResourceNames {
   /**
    * The list of names for all ASCS virtual machines to be deployed. The number of entries in this list should be equal to the number VMs to be created for ASCS layer. At maximum, there can be two virtual machines at this layer: ASCS and ERS.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
@@ -2224,7 +2224,7 @@ model ApplicationServerFullResourceNames {
   /**
    * The list of virtual machine naming details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
@@ -2240,7 +2240,7 @@ model DatabaseServerFullResourceNames {
   /**
    * The list of virtual machine naming details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
