@@ -194,6 +194,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
 
   // Prepare variables
   let statusCode = 0;
+  let pushedSpecConfigCount;
   let markdownContent = "\n";
   markdownContent += `## Batch Run Type\n ${batchType}\n`;
   let failedContent = `## Spec Failures in the Generation Process\n`;
@@ -215,11 +216,12 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       logMessage(`Generating SDK from ${specConfigs.tspconfigPath}`, LogLevel.Group);
     } else if (specConfigs.readmePath) {
       logMessage(`Generating SDK from ${specConfigs.readmePath}`, LogLevel.Group);
-    }    
-
+    }
+    pushedSpecConfigCount = 0;
     if (specConfigs.readmePath) {
       specConfigPath = specConfigs.readmePath;
       specGenSdkCommand.push("--readme-relative-path", specConfigs.readmePath);
+      pushedSpecConfigCount++;
     }
 
     if (specConfigs.tspconfigPath) {
@@ -227,6 +229,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       // as we only input both tspconfig and readme while selecting typespec options for batch runs
       specConfigPath = specConfigs.tspconfigPath;
       specGenSdkCommand.push("--tsp-config-relative-path", specConfigs.tspconfigPath);
+      pushedSpecConfigCount++;
     }
 
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
@@ -239,9 +242,10 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       statusCode = 1;
     }
 
-    // Pop the spec config path from the command
-    specGenSdkCommand.pop();
-    specGenSdkCommand.pop();
+    // Pop the spec config path from specGenSdkCommand
+    for (let index = 0; index < pushedSpecConfigCount * 2; index++) {
+      specGenSdkCommand.pop();
+    }
 
     try {
       // Read the execution report to determine if the generation was successful
