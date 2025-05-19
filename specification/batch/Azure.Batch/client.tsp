@@ -102,6 +102,49 @@ interface BatchClient {
 
 /* C SHARP OVERRIDES */
 // Api overrides
+
+@@access(Azure.Batch.Pools.removeNodes, Access.internal, "csharp");
+@@clientName(BatchClient.removeNodes, "removeNodesInternal", "csharp");
+@@access(Azure.Batch.Pools.resizePool, Access.internal, "csharp");
+@@clientName(BatchClient.resizePool, "resizePoolInternal", "csharp");
+@@access(Azure.Batch.Pools.stopPoolResize, Access.internal, "csharp");
+@@clientName(BatchClient.stopPoolResize, "stopPoolResizeInternal", "csharp");
+@@access(Azure.Batch.Jobs.deleteJob, Access.internal, "csharp");
+@@clientName(BatchClient.deleteJob, "deleteJobInternal", "csharp");
+@@access(Azure.Batch.Jobs.terminateJob, Access.internal, "csharp");
+@@clientName(BatchClient.terminateJob, "terminateJobInternal", "csharp");
+@@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "csharp");
+@@clientName(BatchClient.deleteJobSchedule,
+  "deleteJobScheduleInternal",
+  "csharp"
+);
+@@access(Azure.Batch.JobSchedules.terminateJobSchedule,
+  Access.internal,
+  "csharp"
+);
+@@clientName(BatchClient.terminateJobSchedule,
+  "terminateJobScheduleInternal",
+  "csharp"
+);
+@@access(Azure.Batch.Pools.deletePool, Access.internal, "csharp");
+@@clientName(BatchClient.deletePool, "deletePoolInternal", "csharp");
+@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "csharp");
+@@clientName(BatchClient.deleteCertificate,
+  "deleteCertificateInternal",
+  "csharp"
+);
+@@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "csharp");
+@@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "csharp");
+@@access(Azure.Batch.Nodes.startNode, Access.internal, "csharp");
+@@clientName(BatchClient.startNode, "startNodeInternal", "csharp");
+@@access(Azure.Batch.Nodes.rebootNode, Access.internal, "csharp");
+@@clientName(BatchClient.rebootNode, "rebootNodeInternal", "csharp");
+@@access(Azure.Batch.Nodes.reimageNode, Access.internal, "csharp");
+@@clientName(BatchClient.reimageNode, "reimageNodeInternal", "csharp");
+@@access(Azure.Batch.Jobs.disableJob, Access.internal, "csharp");
+@@clientName(BatchClient.disableJob, "disableJobInternal", "csharp");
+@@access(Azure.Batch.Jobs.enableJob, Access.internal, "csharp");
+@@clientName(BatchClient.enableJob, "enableJobInternal", "csharp");
 @@access(Azure.Batch.Pools.poolExists, Access.internal, "csharp");
 @@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
 @@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
@@ -113,6 +156,18 @@ interface BatchClient {
 @@clientName(BatchClient.getNodeFileProperties,
   "getNodeFilePropertiesInternal",
   "csharp"
+);
+
+/* PYTHON OVERRIDES */
+@@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "python");
+@@clientName(BatchClient.getTaskFileProperties,
+  "getTaskFilePropertiesInternal",
+  "python"
+);
+@@access(Azure.Batch.Nodes.getNodeFileProperties, Access.internal, "python");
+@@clientName(BatchClient.getNodeFileProperties,
+  "getNodeFilePropertiesInternal",
+  "python"
 );
 
 /* GO OVERRIDES */
@@ -204,48 +259,47 @@ interface BatchClient {
   "go"
 );
 @@clientName(Azure.Batch.CommonListParameters.maxresults, "MaxResults", "go");
-@@clientName(Azure.Batch.HttpHeader, "HTTPHeader", "go");
-@@clientName(Azure.Batch.InboundNatPool, "InboundNATPool", "go");
+@@clientName(Azure.Batch.BatchInboundNatPool, "InboundNATPool", "go");
 @@clientName(Azure.Batch.IpAddressProvisioningType,
   "IPAddressProvisioningType",
   "go"
 );
 @@clientName(Azure.Batch.LinuxUserConfiguration.gid, "GID", "go");
 @@clientName(Azure.Batch.NfsMountConfiguration, "NFSMountConfiguration", "go");
-@@clientName(Azure.Batch.PublicIpAddressConfiguration,
+@@clientName(Azure.Batch.BatchPublicIpAddressConfiguration,
   "PublicIPAddressConfiguration",
   "go"
 );
-@@clientName(Azure.Batch.UefiSettings, "UEFISettings", "go");
-@@clientName(Azure.Batch.UefiSettings.vTpmEnabled, "VTPMEnabled", "go");
+@@clientName(Azure.Batch.BatchUefiSettings, "UEFISettings", "go");
+@@clientName(Azure.Batch.BatchUefiSettings.vTpmEnabled, "VTPMEnabled", "go");
 // align model names with method names
-@@clientName(Azure.Batch.BatchJobCreateContent, "CreateJobContent", "go");
-@@clientName(Azure.Batch.BatchJobDisableContent, "DisableJobContent", "go");
-@@clientName(Azure.Batch.BatchJobScheduleCreateContent,
-  "CreateJobScheduleContent",
+@@clientName(Azure.Batch.BatchJobCreateOptions, "CreateJobOptions", "go");
+@@clientName(Azure.Batch.BatchJobDisableOptions, "DisableJobOptions", "go");
+@@clientName(Azure.Batch.BatchJobScheduleCreateOptions,
+  "CreateJobScheduleOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchJobTerminateContent, "TerminateJobContent", "go");
-@@clientName(Azure.Batch.BatchJobUpdateContent, "UpdateJobContent", "go");
-@@clientName(Azure.Batch.BatchJobScheduleUpdateContent,
-  "UpdateJobScheduleContent",
+@@clientName(Azure.Batch.BatchJobTerminateOptions, "TerminateJobOptions", "go");
+@@clientName(Azure.Batch.BatchJobUpdateOptions, "UpdateJobOptions", "go");
+@@clientName(Azure.Batch.BatchJobScheduleUpdateOptions,
+  "UpdateJobScheduleOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchNodeDeallocateContent,
-  "DeallocateNodeContent",
+@@clientName(Azure.Batch.BatchNodeDeallocateOptions,
+  "DeallocateNodeOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchNodeDisableSchedulingContent,
-  "DisableNodeSchedulingContent",
+@@clientName(Azure.Batch.BatchNodeDisableSchedulingOptions,
+  "DisableNodeSchedulingOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolCreateContent, "CreatePoolContent", "go");
-@@clientName(Azure.Batch.BatchPoolEnableAutoScaleContent,
-  "EnablePoolAutoScaleContent",
+@@clientName(Azure.Batch.BatchPoolCreateOptions, "CreatePoolOptions", "go");
+@@clientName(Azure.Batch.BatchPoolEnableAutoScaleOptions,
+  "EnablePoolAutoScaleOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolEvaluateAutoScaleContent,
-  "EvaluatePoolAutoScaleContent",
+@@clientName(Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
+  "EvaluatePoolAutoScaleOptions",
   "go"
 );
 @@clientName(Azure.Batch.BatchPoolListUsageMetricsResult,
@@ -256,31 +310,31 @@ interface BatchClient {
   "ListPoolNodeCountsResult",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolReplaceContent, "ReplacePoolContent", "go");
-@@clientName(Azure.Batch.BatchPoolResizeContent, "ResizePoolContent", "go");
-@@clientName(Azure.Batch.BatchPoolUpdateContent, "UpdatePoolContent", "go");
-@@clientName(Azure.Batch.BatchTaskAddCollectionResult,
-  "AddTaskCollectionResult",
+@@clientName(Azure.Batch.BatchPoolReplaceOptions, "ReplacePoolOptions", "go");
+@@clientName(Azure.Batch.BatchPoolResizeOptions, "ResizePoolOptions", "go");
+@@clientName(Azure.Batch.BatchPoolUpdateOptions, "UpdatePoolOptions", "go");
+@@clientName(Azure.Batch.BatchCreateTaskCollectionResult,
+  "CreateTaskCollectionResult",
   "go"
 );
-@@clientName(Azure.Batch.BatchTaskCreateContent, "CreateTaskContent", "go");
-@@clientName(Azure.Batch.BatchNodeRebootContent, "RebootNodeContent", "go");
-@@clientName(Azure.Batch.BatchNodeReimageContent, "ReimageNodeContent", "go");
-@@clientName(Azure.Batch.BatchNodeRemoveContent, "RemoveNodeContent", "go");
-@@clientName(Azure.Batch.BatchNodeUserCreateContent,
-  "CreateNodeUserContent",
+@@clientName(Azure.Batch.BatchTaskCreateOptions, "CreateTaskOptions", "go");
+@@clientName(Azure.Batch.BatchNodeRebootOptions, "RebootNodeOptions", "go");
+@@clientName(Azure.Batch.BatchNodeReimageOptions, "ReimageNodeOptions", "go");
+@@clientName(Azure.Batch.BatchNodeRemoveOptions, "RemoveNodeOptions", "go");
+@@clientName(Azure.Batch.BatchNodeUserCreateOptions,
+  "CreateNodeUserOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchNodeUserUpdateContent,
-  "UpdateNodeUserContent",
+@@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
+  "UpdateNodeUserOptions",
   "go"
 );
-@@clientName(Azure.Batch.DeleteBatchCertificateError,
+@@clientName(Azure.Batch.BatchCertificateDeleteError,
   "DeleteCertificateError",
   "go"
 );
-@@clientName(Azure.Batch.UploadBatchServiceLogsContent,
-  "UploadNodeLogsContent",
+@@clientName(Azure.Batch.UploadBatchServiceLogsOptions,
+  "UploadNodeLogsOptions",
   "go"
 );
 @@clientName(Azure.Batch.UploadBatchServiceLogsResult,
@@ -293,6 +347,9 @@ interface BatchClient {
   "go"
 );
 @@clientName(Azure.Batch.DisableBatchJobOption, "DisableJobOption", "go");
-@@clientName(Azure.Batch.OnAllBatchTasksComplete, "OnAllTasksComplete", "go");
-@@clientName(Azure.Batch.OnBatchTaskFailure, "OnTaskFailure", "go");
+@@clientName(Azure.Batch.BatchAllTasksCompleteMode,
+  "AllTasksCompleteMode",
+  "go"
+);
+@@clientName(Azure.Batch.BatchTaskFailureMode, "TaskFailureMode", "go");
 @@clientName(Azure.Batch.RecentBatchJob, "RecentJob", "go");
