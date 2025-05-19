@@ -95,27 +95,27 @@ export async function buildState(
     specModels.set(serviceDir, specModel);
   }
 
+  // Build a map of readme.md files and tags affected by the changed files
   const readmeTags = new Map<string, ReadmeAffectedTags>();
   for (const changedSwagger of existingChangedFiles.filter(swagger)) {
     const specModel = specModels.get(getService(changedSwagger))!;
-    const readmeTagMapForChangedFile = await specModel.getAffectedReadmeTags(
+    const affectedReadmes = await specModel.getAffectedReadmeTags(
       resolve(rootPath, changedSwagger),
     );
 
-    for (const [readmePath, tagInfo] of readmeTagMapForChangedFile) {
-      const readme = (await specModel.getReadmes()).get(readmePath)!;
-
-      for (const [tagName] of tagInfo) {
-        const readmeTag = readmeTags.get(readmePath) ?? {
-          readme,
-          changedTags: new Set(),
-        };
-        readmeTag.changedTags.add(tagName);
-        readmeTags.set(readmePath, readmeTag);
+    for (const [readmePath, tags] of affectedReadmes) {
+      const affectedTags = readmeTags.get(readmePath) ?? {
+        readme: (await specModel.getReadmes()).get(readmePath)!,
+        changedTags: new Set(),
+      };
+      for (const [tagName,] of tags) {
+        affectedTags.changedTags.add(tagName);
       }
+      readmeTags.set(readmePath, affectedTags);
     }
   }
 
+  // Deduplicate tags in readme files
   const changedFileAndTagsMap = new Map<string, ReadmeAffectedTags>();
   for (const [readmeFile, tags] of readmeTags.entries()) {
     const tagMap = await tags.readme.getTags();
@@ -124,7 +124,7 @@ export async function buildState(
         tagName: changedTag,
         inputFiles: [...tagMap.get(changedTag)!.inputFiles.keys()],
       }
-    }); 
+    });
 
     const dedupedTags = deduplicateTags(tagsAndInputFiles);
     changedFileAndTagsMap.set(relative(rootPath, readmeFile), {
