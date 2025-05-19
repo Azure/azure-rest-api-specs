@@ -1,0 +1,37 @@
+parameters:
+  "service-dir":
+    default: "sdk/storage"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/Microsoft.BlobStorage/{version-status}/{version}/blob.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-storage-blob"
+    package-name: "{package-dir}"
+    package-mode: dataplane
+    generate-sample: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Storage.Blob"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "azure-storage-blob-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/azure-storage-blob-rest"
+      description: "Azure.Storage.Blob Service"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-storage-blob"
+    namespace: com.azure.storage.blob
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
