@@ -27,7 +27,14 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
   for (const route in document.paths) {
     const path = document.paths[route] as OpenAPI2PathItem;
     const processedPath = processPath(path);
-    newDocument.paths[route] = processedPath;
+    if (configuration.ignorePathCase) {
+      const normalizedRoute = route.replace(/\/resourcegroups\//i, '/resourceGroups/').replace(/\/subscriptions\//i, '/subscriptions/');
+      delete newDocument.paths[route];  
+      newDocument.paths[normalizedRoute] = processedPath;
+    }
+    else {
+      newDocument.paths[route] = processedPath;
+    }
   }
 
   for (const definitionName in document.definitions) {
@@ -238,7 +245,13 @@ function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProper
     processEnumInplace(newProperty as OpenAPI2Schema);
   }
 
-  newProperty
+  const identifiers = (newProperty as any)["x-ms-identifiers"];
+  if (identifiers && Array.isArray(identifiers) && identifiers.length === 0) {
+    delete (newProperty as any)["x-ms-identifiers"];
+  }
+  if ((newProperty as OpenAPI2Schema).uniqueItems === false) {
+    delete (newProperty as OpenAPI2Schema).uniqueItems;
+  }
   if (newProperty["x-ms-mutability"]) {
     newProperty["x-ms-mutability"] = newProperty["x-ms-mutability"].sort((a, b) => a.localeCompare(b));
   }
@@ -290,7 +303,6 @@ function processPageModel(definition: OpenAPI2Schema): OpenAPI2Schema {
   newDefinition.properties!["value"]!.description = "[Placeholder] Discription for value property";
   newDefinition.properties!["nextLink"]!.description = "[Placeholder] Discription for nextLink property";
   (newDefinition.properties!["nextLink"] as any)["format"] = "uri";
-  newDefinition.required = ["value"];
   if (newDefinition.properties!["nextLink"]?.readOnly) {
     delete newDefinition.properties!["nextLink"]?.readOnly;
   }
