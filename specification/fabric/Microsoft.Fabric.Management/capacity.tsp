@@ -95,5 +95,5 @@ interface FabricCapacities {
     ...SubscriptionIdParameter,
     ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
     ...LocationParameter,
-  ): ArmResponse<Page<Quota>> | ErrorResponse;
+  ): ArmResponse<PagedQuota> | ErrorResponse;
 }
