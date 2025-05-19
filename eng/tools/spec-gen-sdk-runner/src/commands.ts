@@ -211,7 +211,10 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   // Generate SDKs for each spec
   for (const specConfigs of specConfigsArray) {
     if (specConfigs.tspconfigPath && specConfigs.readmePath) {
-      logMessage(`Generating SDK from ${specConfigs.tspconfigPath} and ${specConfigs.readmePath}`, LogLevel.Group);
+      logMessage(
+        `Generating SDK from ${specConfigs.tspconfigPath} and ${specConfigs.readmePath}`,
+        LogLevel.Group,
+      );
     } else if (specConfigs.tspconfigPath) {
       logMessage(`Generating SDK from ${specConfigs.tspconfigPath}`, LogLevel.Group);
     } else if (specConfigs.readmePath) {
@@ -259,12 +262,15 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       } else if (executionResult === "notEnabled") {
         notEnabledContent += `${specConfigPath},`;
         notEnabledCount++;
-      } else if (executionReport.isSdkConfigDuplicated) {
-        duplicatedConfigContent += `${specConfigPath},`;
-        duplicatedConfigCount++;
       } else {
         failedContent += `${specConfigPath},`;
         failedCount++;
+      }
+      // Check for duplicated SDK configurations,
+      // the execution result can be "succeeded" or "warning"
+      if (executionReport.isSdkConfigDuplicated) {
+        duplicatedConfigContent += `${specConfigPath},`;
+        duplicatedConfigCount++;
       }
     } catch (error) {
       logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
@@ -289,7 +295,9 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   markdownContent += notEnabledCount
     ? `## Total Specs with SDK not enabled in the Configuration\n ${notEnabledCount}\n`
     : "";
-  markdownContent += duplicatedConfigCount ? `## Total Duplicated SDK Configurations\n ${duplicatedConfigCount}\n` : "";
+  markdownContent += duplicatedConfigCount
+    ? `## Total Duplicated SDK Configurations\n ${duplicatedConfigCount}\n`
+    : "";
   markdownContent += succeededCount ? `## Total Successful Specs\n ${succeededCount}\n` : "";
   markdownContent += `## Total Specs Count\n ${specConfigsArray.length}\n\n`;
 
