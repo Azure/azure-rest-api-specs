@@ -37,8 +37,19 @@ interface NginxConfigurationResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Configurations_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NginxConfigurationResponse>;
-
+  @put
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      NginxConfigurationResponse,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<NginxConfigurationResponse>
+    >,
+    NginxConfigurationRequest,
+    NginxConfigurationResponse | ArmResourceCreatedResponse<
+      NginxConfigurationResponse,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = NginxConfigurationResponse>
+    >,
+    ErrorResponse
+  >;
   /**
    * Reset the NGINX configuration of given NGINX deployment to default
    */

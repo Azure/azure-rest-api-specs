@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Nginx.NginxPlus;
 
@@ -274,6 +275,7 @@ model NginxConfigurationProtectedFileRequest {
   /**
    * The content of the protected file. This value is a PUT only value. If you perform a GET request on this value, it will be empty because it is a protected file.
    */
+  @secret
   content?: string;
 
   /**
@@ -481,6 +483,7 @@ model NginxDeploymentProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NginxNetworkProfile {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   frontEndIPConfiguration?: NginxFrontendIPConfiguration;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -489,10 +492,12 @@ model NginxNetworkProfile {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NginxFrontendIPConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   publicIPAddresses?: NginxPublicIPAddress[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   privateIPAddresses?: NginxPrivateIPAddress[];
@@ -506,8 +511,10 @@ model NginxPublicIPAddress {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NginxPrivateIPAddress {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   privateIPAddress?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   privateIPAllocationMethod?: NginxPrivateIPAllocationMethod;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -709,6 +716,16 @@ model NginxDeploymentUpdateParameters {
   properties?: NginxDeploymentUpdateProperties;
 }
 
+/**
+ * Represents the SKU of a resource.
+ */
+model ResourceSku {
+  /**
+   * The name of the SKU.
+   */
+  name: string;
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NginxDeploymentUpdateProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -751,6 +768,24 @@ model NginxDeploymentUpdatePropertiesNginxAppProtect {
 model NginxDeploymentListResponse is Azure.Core.Page<NginxDeployment>;
 
 /**
+ * Represents a paginated list of operations.
+ */
+@pagedResult
+model OperationListResult {
+  /**
+   * [Placeholder] Description for value property.
+   */
+  @items
+  value?: OperationResult[];
+
+  /**
+   * [Placeholder] Description for nextLink property.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
  * A Nginx.NginxPlus REST API operation.
  */
 model OperationResult {
@@ -768,4 +803,28 @@ model OperationResult {
    * Indicates whether the operation is a data action
    */
   isDataAction?: boolean;
+}
+/**
+ * Represents the display information for an operation.
+ */
+model OperationDisplay {
+  /**
+   * The service provider of the operation.
+   */
+  provider?: string;
+
+  /**
+   * The resource type of the operation.
+   */
+  resource?: string;
+
+  /**
+   * The name of the operation.
+   */
+  operation?: string;
+
+  /**
+   * A description of the operation.
+   */
+  description?: string;
 }

@@ -35,14 +35,24 @@ interface NginxDeploymentApiKeyResponses {
   /**
    * Create or update an API Key for the Nginx deployment in order to access the dataplane API endpoint
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiKeys_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NginxDeploymentApiKeyResponse>;
-
   /**
    * Delete API key for Nginx deployment
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiKeys_CreateOrUpdate")
+  @armResourceCreateOrUpdate(NginxDeploymentApiKeyResponse)
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      NginxDeploymentApiKeyResponse,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<NginxDeploymentApiKeyResponse>
+    >,
+    NginxDeploymentApiKeyRequest,
+    NginxDeploymentApiKeyResponse | ArmResourceCreatedResponse<NginxDeploymentApiKeyResponse>,
+    ErrorResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @operationId("ApiKeys_Delete")
   delete is ArmResourceDeleteSync<NginxDeploymentApiKeyResponse>;
 

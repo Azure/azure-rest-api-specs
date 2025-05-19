@@ -19,8 +19,10 @@ model NginxDeployment
     SegmentName = "nginxDeployments",
     NamePattern = "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$"
   >;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: IdentityProperties;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: ResourceSku;
 }
@@ -50,7 +52,8 @@ interface NginxDeployments {
   update is ArmCustomPatchAsync<
     NginxDeployment,
     PatchModel = NginxDeploymentUpdateParameters,
-    Response = ArmResponse<NginxDeployment> | ArmResourceCreatedResponse<NginxDeployment>
+    Response = ArmResponse<NginxDeployment> | (ArmResourceCreatedResponse<NginxDeployment> &
+      ArmLroLocationHeader)
   >;
 
   /**

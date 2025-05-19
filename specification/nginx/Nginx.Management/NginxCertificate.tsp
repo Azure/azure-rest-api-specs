@@ -21,6 +21,7 @@ model NginxCertificate
     SegmentName = "certificates",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   location?: string;
 }

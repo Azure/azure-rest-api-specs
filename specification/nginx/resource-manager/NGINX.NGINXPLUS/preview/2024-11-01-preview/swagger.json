@@ -1,9 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "NginxManagementClient",
+    "title": "Nginx.NginxPlus",
     "version": "2024-11-01-preview",
-    "description": "// FIXME: (missing-service-description) Add service description",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -72,7 +71,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -339,11 +338,15 @@
             }
           },
           "201": {
-            "description": "Resource 'NginxDeployment' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             },
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -367,7 +370,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -544,7 +547,7 @@
         "tags": [
           "NginxDeploymentApiKeyResponses"
         ],
-        "description": "Create or update an API Key for the Nginx deployment in order to access the dataplane API endpoint",
+        "description": "Create or update an API Key for the Nginx deployment in order to access the dataplane API endpointDelete API key for Nginx deployment",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -577,13 +580,13 @@
             "description": "The API Key object containing fields (e.g. secret text, expiration date) to upsert the key.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
+              "$ref": "#/definitions/NginxDeploymentApiKeyRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NginxDeploymentApiKeyResponse' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
             }
@@ -592,6 +595,13 @@
             "description": "Resource 'NginxDeploymentApiKeyResponse' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -612,7 +622,7 @@
         "tags": [
           "NginxDeploymentApiKeyResponses"
         ],
-        "description": "Delete API key for Nginx deployment",
+        "description": "Delete a NginxDeploymentApiKeyResponse",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1057,13 +1067,13 @@
             "description": "The NGINX configuration",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NginxConfigurationResponse"
+              "$ref": "#/definitions/NginxConfigurationRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NginxConfigurationResponse' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NginxConfigurationResponse"
             }
@@ -1077,11 +1087,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1382,29 +1387,6 @@
         "upgradeChannel"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<NginxDeployment>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NginxDeployment",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ResourceSkuProperty": {
-      "type": "object",
-      "description": "The SKU (Stock Keeping Unit) assigned to this resource.",
-      "properties": {
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        }
-      }
-    },
     "DiagnosticItem": {
       "type": "object",
       "description": "A diagnostic is a message associated with an NGINX config. The Analyzer returns diagnostics with a level indicating the importance of the diagnostic with optional category.",
@@ -1533,8 +1515,7 @@
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NginxCertificateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/NginxCertificateProperties"
         },
         "location": {
           "type": "string"
@@ -1664,7 +1645,9 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "The content of the protected file. This value is a PUT only value. If you perform a GET request on this value, it will be empty because it is a protected file."
+          "format": "password",
+          "description": "The content of the protected file. This value is a PUT only value. If you perform a GET request on this value, it will be empty because it is a protected file.",
+          "x-ms-secret": true
         },
         "virtualPath": {
           "type": "string",
@@ -1689,13 +1672,66 @@
         }
       }
     },
+    "NginxConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxConfigurationRequestProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxConfigurationRequestProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "protectedFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
+          },
+          "x-ms-identifiers": []
+        },
+        "package": {
+          "$ref": "#/definitions/NginxConfigurationPackage"
+        },
+        "rootFile": {
+          "type": "string"
+        }
+      }
+    },
     "NginxConfigurationResponse": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NginxConfigurationResponseProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/NginxConfigurationResponseProperties"
         }
       },
       "allOf": [
@@ -1738,14 +1774,13 @@
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NginxDeploymentProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/NginxDeploymentProperties"
         },
         "identity": {
           "$ref": "#/definitions/IdentityProperties"
         },
         "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty"
+          "$ref": "#/definitions/ResourceSku"
         }
       },
       "allOf": [
@@ -1775,13 +1810,48 @@
         "value"
       ]
     },
+    "NginxDeploymentApiKeyRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxDeploymentApiKeyRequestProperties"
+        }
+      }
+    },
+    "NginxDeploymentApiKeyRequestProperties": {
+      "type": "object",
+      "properties": {
+        "secretText": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret text to be used as a Dataplane API Key. This is a write only property that can never be read back, but the first three characters will be returned in the 'hint' property.",
+          "x-ms-secret": true
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time after which this Dataplane API Key is no longer valid."
+        }
+      }
+    },
     "NginxDeploymentApiKeyResponse": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NginxDeploymentApiKeyResponseProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/NginxDeploymentApiKeyResponseProperties"
         }
       },
       "allOf": [
@@ -1936,7 +2006,7 @@
           }
         },
         "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty"
+          "$ref": "#/definitions/ResourceSku"
         },
         "location": {
           "type": "string"
@@ -2095,6 +2165,64 @@
         }
       }
     },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Represents the display information for an operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The service provider of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource type of the operation."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the operation."
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Represents a paginated list of operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Description for value property.",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "[Placeholder] Description for nextLink property."
+        }
+      }
+    },
+    "OperationResult": {
+      "type": "object",
+      "description": "A Nginx.NginxPlus REST API operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The object that represents the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        }
+      }
+    },
     "ProvisioningState": {
       "type": "string",
       "enum": [
@@ -2150,6 +2278,19 @@
           }
         ]
       }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "description": "Represents the SKU of a resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU."
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ScaleProfile": {
       "type": "object",
