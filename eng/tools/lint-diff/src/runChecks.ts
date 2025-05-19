@@ -1,9 +1,10 @@
 import { join } from "path";
-import { exec, ExecException } from "node:child_process";
 
 import { getOpenapiType } from "./markdown-utils.js";
 import { getPathToDependency, isFailure } from "./util.js";
 import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
+import { execNpmExec, isExecError, ExecError } from "@azure-tools/specs-shared/exec";
+import { debugLogger } from "@azure-tools/specs-shared/logger";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
@@ -34,61 +35,73 @@ export async function runChecks(
     // If the tags array is empty run the loop once but with a null tag
     const coalescedTags = tags?.length ? tags : [null];
     for (const tag of coalescedTags) {
-      let tagArg = tag ? `--tag=${tag} ` : "";
-
-      let autorestCommand =
-        `npm exec --no -- autorest ` +
-        `--v3 ` +
-        `--spectral ` +
-        `--azure-validator ` +
-        `--semantic-validator=false ` +
-        `--model-validator=false ` +
-        `--message-format=json ` +
-        `--openapi-type=${openApiType} ` +
-        `--openapi-subtype=${openApiSubType} ` +
-        `--use=${dependenciesDir} ` +
-        `${tagArg} ` +
-        `${changedFilePath}`;
-
       console.log(`::group::Autorest for type: ${openApiType} readme: ${readme} tag: ${tag}`);
+
+      const autorestArgs = [
+        "autorest",
+        "--v3",
+        "--spectral",
+        "--azure-validator",
+        "--semantic-validator=false",
+        "--model-validator=false",
+        "--message-format=json",
+        `--openapi-type=${openApiType}`,
+        `--openapi-subtype=${openApiSubType}`,
+        `--use=${dependenciesDir}`,
+      ];
+
+      if (tag) {
+        autorestArgs.push(`--tag=${tag}`);
+      }
+      autorestArgs.push(changedFilePath);
+      const autorestCommand = `npm exec -- ${autorestArgs.join(" ")}`;
       console.log(`\tAutorest command: ${autorestCommand}`);
 
-      const executionResult = await executeCommand(autorestCommand);
-      
-      console.log(executionResult.stderr + executionResult.stdout);
+      let lintDiffResult: AutorestRunResult;
+      try {
+        const executionResult = await execNpmExec(autorestArgs, {
+          maxBuffer: MAX_EXEC_BUFFER,
+          logger: debugLogger,
+        });
 
-      const lintDiffResult = {
-        autorestCommand,
-        rootPath: path,
-        readme,
-        tag: tag ? tag : "",
-        openApiType,
-        ...executionResult,
-      };
-      logAutorestExecutionErrors(lintDiffResult);
+        lintDiffResult = {
+          autorestCommand,
+          rootPath: path,
+          readme,
+          tag: tag ? tag : "",
+          openApiType,
+          error: null,
+          ...executionResult,
+        } as AutorestRunResult;
+      } catch (error) {
+        if (!isExecError(error)) { 
+          throw error;
+        }
+
+        const execError = error as ExecError;
+        lintDiffResult = {
+          autorestCommand,
+          rootPath: path,
+          readme,
+          tag: tag ? tag : "",
+          openApiType,
+          error: execError,
+          stdout: execError.stdout || "",
+          stderr: execError.stderr || "",
+        } as AutorestRunResult;
+
+        logAutorestExecutionErrors(lintDiffResult);
+      }
       console.log("::endgroup::");
 
       result.push(lintDiffResult);
-      console.log(`\tAutorest result length: ${lintDiffResult.stderr.length + lintDiffResult.stdout.length}\n`);
+      console.log(
+        `\tAutorest result length: ${lintDiffResult.stderr.length + lintDiffResult.stdout.length}\n`,
+      );
     }
   }
 
   return result;
-}
-
-export async function executeCommand(
-  command: string,
-  cwd: string = ".",
-): Promise<{ error: ExecException | null; stdout: string; stderr: string }> {
-  return new Promise((resolve) => {
-    exec(
-      command,
-      { cwd, encoding: "utf-8", maxBuffer: MAX_EXEC_BUFFER },
-      (error, stdout, stderr) => {
-        resolve({ error, stdout, stderr });
-      },
-    );
-  });
 }
 
 export function getAutorestErrors(runResult: AutorestRunResult): AutoRestMessage[] {
