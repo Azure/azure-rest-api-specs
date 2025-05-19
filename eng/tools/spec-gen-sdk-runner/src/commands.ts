@@ -200,7 +200,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   let failedContent = `## Spec Failures in the Generation Process\n`;
   let succeededContent = `## Successful Specs in the Generation Process\n`;
   let notEnabledContent = `## Specs with SDK Not Enabled\n`;
-  let duplicatedConfigContent = `## Duplicated SDK Configurations in Both 'tspconfig' and 'readme'\n`;
+  let duplicatedConfigContent = `## Specs with Duplicated SDK Configurations (in 'tspconfig.yaml' and 'readme.md')\n`;
   let failedCount = 0;
   let notEnabledCount = 0;
   let duplicatedConfigCount = 0;
@@ -296,7 +296,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
     ? `## Total Specs with SDK not enabled in the Configuration\n ${notEnabledCount}\n`
     : "";
   markdownContent += duplicatedConfigCount
-    ? `## Total Duplicated SDK Configurations\n ${duplicatedConfigCount}\n`
+    ? `## Total Specs with Duplicated SDK Configurations\n ${duplicatedConfigCount}\n`
     : "";
   markdownContent += succeededCount ? `## Total Successful Specs\n ${succeededCount}\n` : "";
   markdownContent += `## Total Specs Count\n ${specConfigsArray.length}\n\n`;
