@@ -122,8 +122,8 @@ union EventHubVideoTranslationEventKind {
 }
 
 @added(ApiVersions.v2025_05_20)
-@doc("Emotional platform voice kind.")
-union EmotionalPlatformVoiceKind {
+@doc("Enable emotional platform voice kind.")
+union EnableEmotionalPlatformVoice {
   string,
 
   /** Let API to decide whether enable emotional voice for the target locale. */
@@ -261,7 +261,7 @@ model IterationInput {
 
   @added(ApiVersions.v2025_05_20)
   @doc("This parameter specifies whether or not enable the emotion for platform voice, by default let server to decide whether enable emotion for better quality for the target locale.")
-  emotionalPlatformVoiceKind?: EmotionalPlatformVoiceKind;
+  enableEmotionalPlatformVoice?: EnableEmotionalPlatformVoice;
 }
 
 @added(ApiVersions.v2025_05_20)
