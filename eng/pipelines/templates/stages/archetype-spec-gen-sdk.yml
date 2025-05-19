@@ -276,4 +276,4 @@ stages:
         parameters:
           ArtifactName: "spec-gen-sdk-logs"
           ArtifactPath: "$(System.DefaultWorkingDirectory)/out/logs"
-          CustomCondition: and(succeeded(), ne(variables['SpecGenSdkArtifactPath'], ''), ne(variables['SpecGenSdkArtifactName'], ''))
+          CustomCondition: succeededOrFailed()
