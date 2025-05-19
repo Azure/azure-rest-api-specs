@@ -35,8 +35,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2025-04' && $(java)
 java:
-  namespace: com.microsoft.azure.management.kubernetesconfiguration.fluxconfiguration.v2025-04-01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/mgmt-v2025-04-01
+  namespace: com.microsoft.azure.management.kubernetesconfiguration.fluxconfiguration.v2025_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/mgmt-v2025_04_01
   regenerate-manager: true
   generate-interface: true
   graal-vm-config: false
