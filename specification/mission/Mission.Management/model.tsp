@@ -8,7 +8,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 
 import "./resourcetypes/approvals/approvals.tsp";
-import "./resourcetypes/catalog/catalog.tsp";
 import "./resourcetypes/community/community.tsp";
 import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
 import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
