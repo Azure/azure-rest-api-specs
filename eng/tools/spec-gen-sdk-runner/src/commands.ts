@@ -14,7 +14,6 @@ import {
   prepareSpecGenSdkCommand,
   setPipelineVariables,
 } from "./command-helpers.js";
-import { spec } from "node:test/reporters";
 
 /**
  * Generate SDK for a single spec.

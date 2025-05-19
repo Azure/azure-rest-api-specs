@@ -220,13 +220,13 @@ describe("commands.ts", () => {
     
     test("should return management plane TypeSpec and resource-manager readme paths for 'all-mgmtplane-typespecs'", () => {
       const managementTypespecs = ["typespec1.Management", "typespec2.Management"];
-      const resourceManagerReadmes = ["readme-rm1", "readme-rm2"];
+      const resourceManagerReadmes = ["resource-manager/readme-rm1", "resource-manager/readme-rm2"];
       
       vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([...managementTypespecs, "typespec3", "typespec4"]);
-      vi.spyOn(utils, "findReadmeFiles").mockReturnValue([...resourceManagerReadmes, "resource-manager/readme", "readme-dp2"]);
+      vi.spyOn(utils, "findReadmeFiles").mockReturnValue([...resourceManagerReadmes, "readme-dp1", "readme-dp2"]);
       vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
-        { tspconfigPath: "typespec1.Management", readmePath: "resource-manager/readme" },
-        { tspconfigPath: undefined, readmePath: "readme-dp2" },
+        { tspconfigPath: "typespec1.Management", readmePath: "resource-manager/readme-rm1" },
+        { tspconfigPath: "typespec2.Management", readmePath: "resource-manager/readme-rm2" },
       ]);
 
       const result = getSpecPaths("all-mgmtplane-typespecs", "/spec/path");
@@ -239,15 +239,15 @@ describe("commands.ts", () => {
     
     test("should return data plane TypeSpec and data-plane readme paths for 'all-dataplane-typespecs'", () => {
       const dataPlaneTypespecs = ["typespec3", "typespec4"];
-      const dataPlaneReadmes = ["readme-dp1", "readme-dp2"];
+      const dataPlaneReadmes = ["data-plane/readme-dp1", "data-plane/readme-dp2"];
       
       vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([...dataPlaneTypespecs, "typespec1.Management", "typespec2.Management"]);
       vi.spyOn(utils, "findReadmeFiles").mockReturnValue([...dataPlaneReadmes, "readme-rm1", "readme-rm2"]);
       vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
         { tspconfigPath: "typespec3", readmePath: undefined },
         { tspconfigPath: "typespec4", readmePath: undefined },
-        { tspconfigPath: undefined, readmePath: "readme-dp1" },
-        { tspconfigPath: undefined, readmePath: "readme-dp2" }
+        { tspconfigPath: undefined, readmePath: "data-plane/readme-dp1" },
+        { tspconfigPath: undefined, readmePath: "data-plane/readme-dp2" }
       ]);
 
       const result = getSpecPaths("all-dataplane-typespecs", "/spec/path");

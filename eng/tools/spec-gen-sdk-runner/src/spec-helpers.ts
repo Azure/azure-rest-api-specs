@@ -188,9 +188,14 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
  * Grouping spec configs by service based on the provided TypeSpec configs and readme files.
  * @param tspconfigs - Array of TypeSpec config file paths.
  * @param readmes - Array of readme file paths.
+ * @param skipUnmatchedReadme - Flag to skip unmatched readme files.
  * @returns An array of SpecConfigs objects containing the paths to the readme and TypeSpec config files.
  */
-export function groupSpecConfigPaths(tspconfigs?: string[], readmes?: string[]): SpecConfigs[] {
+export function groupSpecConfigPaths(
+  tspconfigs?: string[],
+  readmes?: string[],
+  skipUnmatchedReadme: boolean = false,
+): SpecConfigs[] {
   const emptyArray: string[] = [];
   const safeTspConfigs = tspconfigs ?? emptyArray;
   const safeReadmes = readmes ?? emptyArray;
@@ -327,14 +332,14 @@ export function groupSpecConfigPaths(tspconfigs?: string[], readmes?: string[]):
     if (tspconfigFolderMap[folderPath]) {
       cs.specs = tspconfigFolderMap[folderPath];
       cs.typespecProject = path.join(folderPath, "tspconfig.yaml");
+      changedSpecs.push(cs);
       logMessage(`\t tspconfig: ${cs.typespecProject}`);
-    } else {
+    } else if (!skipUnmatchedReadme) {
       cs.readmeMd = path.join(folderPath, "readme.md");
       cs.specs = readmeFolderMap[folderPath];
+      changedSpecs.push(cs);
       logMessage(`\t readme: ${cs.readmeMd}`);
     }
-
-    changedSpecs.push(cs);
   }
 
   // Map ChangedSpecs to SpecConfigs

@@ -1,7 +1,13 @@
-import fs, { read } from "node:fs";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { findReadmeFiles, getArgumentValue, getAllTypeSpecPaths, objectToMap, SpecConfigs } from "./utils.js";
+import {
+  findReadmeFiles,
+  getArgumentValue,
+  getAllTypeSpecPaths,
+  objectToMap,
+  SpecConfigs,
+} from "./utils.js";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
 import {
   APIViewRequestData,
@@ -11,7 +17,6 @@ import {
   SpecGenSdkRequiredSettings,
   VsoLogs,
 } from "./types.js";
-import { group } from "node:console";
 import { groupSpecConfigPaths } from "./spec-helpers.js";
 
 /**
@@ -152,21 +157,33 @@ export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): stri
 export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfigs[] {
   let tspconfigs: string[] = [];
   let readmes: string[] = [];
+  let skipUnmatchedReadmes = false;
   switch (batchType) {
-    case "all-specs":
+    case "all-specs": {
+      tspconfigs = getAllTypeSpecPaths(specRepoPath);
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
+      break;
+    }
     case "all-typespecs": {
       tspconfigs = getAllTypeSpecPaths(specRepoPath);
-      readmes = findReadmeFiles(path.join(specRepoPath, "specification"));      
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
+      skipUnmatchedReadmes = true;
       break;
     }
     case "all-mgmtplane-typespecs": {
       tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => p.includes(".Management"));
-      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) => p.includes("resource-manager"));
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
+        p.includes("resource-manager"),
+      );
+      skipUnmatchedReadmes = true;
       break;
     }
     case "all-dataplane-typespecs": {
       tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => !p.includes(".Management"));
-      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) => p.includes("data-plane"));
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
+        p.includes("data-plane"),
+      );
+      skipUnmatchedReadmes = true;
       break;
     }
     case "all-openapis": {
@@ -181,7 +198,7 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
     }
   }
 
-  return groupSpecConfigPaths(tspconfigs, readmes);
+  return groupSpecConfigPaths(tspconfigs, readmes, skipUnmatchedReadmes);
 }
 
 /**
@@ -255,7 +272,7 @@ export function generateArtifact(
   hasBreakingChange: boolean,
   hasManagementPlaneSpecs: boolean,
   stagedArtifactsFolder: string,
-  apiViewRequestData: APIViewRequestData []
+  apiViewRequestData: APIViewRequestData[],
 ): number {
   const specGenSdkArtifactName = "spec-gen-sdk-artifact";
   const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
@@ -275,7 +292,7 @@ export function generateArtifact(
       labelAction: hasBreakingChange,
       isSpecGenSdkCheckRequired:
         hasManagementPlaneSpecs && SpecGenSdkRequiredSettings[commandInput.sdkLanguage as SdkName],
-      apiViewRequestData: apiViewRequestData
+      apiViewRequestData: apiViewRequestData,
     };
     fs.writeFileSync(
       path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),

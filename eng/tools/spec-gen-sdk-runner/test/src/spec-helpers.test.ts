@@ -164,7 +164,7 @@ describe("groupSpecConfigPaths", () => {
 
     const result = groupSpecConfigPaths(tspconfigs, readmes);
 
-    expect(result).toHaveLength(3); // 2 from storage, 2 from compute
+    expect(result).toHaveLength(3); // 2 from storage, 1 from compute
 
     // Verify the results contain both readme and tspconfig paths as expected
     const storageManagementResult = result.find(
@@ -233,6 +233,52 @@ describe("groupSpecConfigPaths", () => {
     }
   });
 
+  test("should skip unmatched readme files when skipUnmatchedReadme is true", () => {
+    const tspconfigs = ["specification/storage/Storage.Management/tspconfig.yaml"];
+
+    const readmes = [
+      "specification/storage/resource-manager/readme.md",
+      "specification/compute/resource-manager/readme.md", // This will be skipped
+    ];
+
+    const result = groupSpecConfigPaths(tspconfigs, readmes, true);
+
+    expect(result).toHaveLength(1); // Only one matched pair, unmatched readme is skipped
+
+    const storageManagementResult = result.find(
+      (r) =>
+        r.tspconfigPath === "specification/storage/Storage.Management/tspconfig.yaml" &&
+        r.readmePath === "specification/storage/resource-manager/readme.md",
+    );
+    expect(storageManagementResult).toBeDefined();
+
+    // Ensure the unmatched compute readme was skipped
+    const computeResult = result.find(
+      (r) => r.readmePath === "specification/compute/resource-manager/readme.md",
+    );
+    expect(computeResult).toBeUndefined();
+  });
+
+  test("should include unmatched readme files by default when skipUnmatchedReadme is false", () => {
+    const tspconfigs = ["specification/storage/Storage.Management/tspconfig.yaml"];
+
+    const readmes = [
+      "specification/storage/resource-manager/readme.md",
+      "specification/compute/resource-manager/readme.md", // This will be included
+    ];
+
+    const result = groupSpecConfigPaths(tspconfigs, readmes, false);
+
+    expect(result).toHaveLength(2); // One matched pair and one unmatched readme
+
+    // Ensure the unmatched compute readme was included
+    const computeResult = result.find(
+      (r) => r.readmePath === "specification/compute/resource-manager/readme.md",
+    );
+    expect(computeResult).toBeDefined();
+    expect(computeResult?.tspconfigPath).toBeUndefined();
+  });
+
   test("should handle data plane and mgmt path together", () => {
     const tspconfigs = [
       "specification/storage/Storage.Management/tspconfig.yaml",
@@ -265,15 +311,50 @@ describe("groupSpecConfigPaths", () => {
     expect(storageDpResult).toBeDefined();
 
     const computeMgmtResult = result.find(
-      (r) =>
-        r.tspconfigPath === "specification/compute/Compute.Management/tspconfig.yaml"
+      (r) => r.tspconfigPath === "specification/compute/Compute.Management/tspconfig.yaml",
     );
     expect(computeMgmtResult).toBeDefined();
 
     const computeDpResult = result.find(
-      (r) =>
-        r.readmePath === "specification/compute/data-plane/readme.md",
+      (r) => r.readmePath === "specification/compute/data-plane/readme.md",
     );
     expect(computeDpResult).toBeDefined();
+  });
+
+  test("should handle data plane and mgmt path together with skipUnmatchedReadme", () => {
+    const tspconfigs = [
+      "specification/storage/Storage.Management/tspconfig.yaml",
+      "specification/storage/StorageClient/tspconfig.yaml",
+    ];
+
+    const readmes = [
+      "specification/storage/resource-manager/readme.md",
+      "specification/storage/data-plane/readme.md",
+      "specification/compute/data-plane/readme.md", // This will be skipped when skipUnmatchedReadme is true
+    ];
+
+    const result = groupSpecConfigPaths(tspconfigs, readmes, true);
+    expect(result).toHaveLength(2); // Only matched pairs from storage
+
+    // Configs should be correctly matched for storage
+    const storageMgmtResult = result.find(
+      (r) =>
+        r.tspconfigPath === "specification/storage/Storage.Management/tspconfig.yaml" &&
+        r.readmePath === "specification/storage/resource-manager/readme.md",
+    );
+    expect(storageMgmtResult).toBeDefined();
+
+    const storageDpResult = result.find(
+      (r) =>
+        r.tspconfigPath === "specification/storage/StorageClient/tspconfig.yaml" &&
+        r.readmePath === "specification/storage/data-plane/readme.md",
+    );
+    expect(storageDpResult).toBeDefined();
+
+    // The compute readme should be skipped
+    const computeDpResult = result.find(
+      (r) => r.readmePath === "specification/compute/data-plane/readme.md",
+    );
+    expect(computeDpResult).toBeUndefined();
   });
 });

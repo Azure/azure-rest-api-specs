@@ -406,7 +406,24 @@ describe("generateSdkForBatchSpecs", () => {
 
   test("should generate SDKs for all specs successfully", async () => {
     const mockBatchType = "all-specs";
-    const mockSpecPaths = ["typespec1", "typespec2", "readme1", "readme2"];
+    const mockSpecPaths = [
+      {
+        tspconfigPath: "typespec1",
+        readmePath: "readme1"
+      },
+      {
+        tspconfigPath: "typespec2",
+        readmePath: "readme2"
+      },
+      {
+        tspconfigPath: "typespec3",
+        readmePath: "readme3"
+      },
+      {
+        tspconfigPath: "typespec4",
+        readmePath: "readme4"
+      }
+    ];
     const mockExecutionReport = {
       executionResult: "succeeded",
       packages: [],
@@ -456,7 +473,16 @@ describe("generateSdkForBatchSpecs", () => {
 
   test("should handle errors during SDK generation", async () => {
     const mockBatchType = "all-specs";
-    const mockSpecPaths = ["typespec1", "typespec2"];
+    const mockSpecPaths = [
+      {
+        tspconfigPath: "typespec1",
+        readmePath: "readme1"
+      },
+      {
+        tspconfigPath: "typespec2",
+        readmePath: "readme2"
+      }
+    ];
     const mockExecutionReport = {
       executionResult: "failed",
       packages: [],
@@ -486,7 +512,9 @@ describe("generateSdkForBatchSpecs", () => {
     const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
-
+    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
     const result = await generateSdkForBatchSpecs(mockBatchType);
 
     expect(result).toBe(1);
@@ -495,14 +523,14 @@ describe("generateSdkForBatchSpecs", () => {
     const markdownFilePath = path.normalize(
       path.join(mockInput.workingFolder, "out/logs/generation-summary.md"),
     );
-    expect(logSpy).toHaveBeenNthCalledWith(1, `Generating SDK from ${mockSpecPaths[0]}`, "group");
+    expect(logSpy).toHaveBeenNthCalledWith(1, `Generating SDK from ${mockSpecPaths[0].tspconfigPath} and ${mockSpecPaths[0].readmePath}`, "group");
     expect(logSpy).toHaveBeenNthCalledWith(
       3,
       "Runner: error executing command:Error: Command failed",
       LogLevel.Error,
     );
     expect(logSpy).toHaveBeenNthCalledWith(5, "ending group logging", "endgroup");
-    expect(logSpy).toHaveBeenNthCalledWith(6, `Generating SDK from ${mockSpecPaths[1]}`, "group");
+    expect(logSpy).toHaveBeenNthCalledWith(6, `Generating SDK from ${mockSpecPaths[1].tspconfigPath} and ${mockSpecPaths[1].readmePath}`, "group");
     expect(logSpy).toHaveBeenCalledWith(`Runner: markdown file written to ${markdownFilePath}`);
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
 
