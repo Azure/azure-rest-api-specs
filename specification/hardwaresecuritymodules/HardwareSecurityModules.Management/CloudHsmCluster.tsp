@@ -96,16 +96,11 @@ interface CloudHsmClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   validateBackupProperties is ArmResourceActionAsync<
     CloudHsmCluster,
-    {
-      /**
-       * Backup Operation Required properties
-       */
-      @bodyRoot
-      backupRequestProperties?: BackupRequestProperties;
-    },
+    BackupRequestProperties,
     ArmResponse<BackupResult>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = BackupResult> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -114,16 +109,11 @@ interface CloudHsmClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   backup is ArmResourceActionAsync<
     CloudHsmCluster,
-    {
-      /**
-       * Azure storage Resource Uri
-       */
-      @bodyRoot
-      backupRequestProperties?: BackupRequestProperties;
-    },
+    BackupRequestProperties,
     ArmResponse<BackupResult>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = BackupResult> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -132,16 +122,11 @@ interface CloudHsmClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   validateRestoreProperties is ArmResourceActionAsync<
     CloudHsmCluster,
-    {
-      /**
-       * Optional Parameters to validate prior performing a restore operation.
-       */
-      @bodyRoot
-      restoreRequestProperties?: RestoreRequestProperties;
-    },
+    RestoreRequestProperties,
     ArmResponse<RestoreResult>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = RestoreResult> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -245,4 +230,11 @@ interface CloudHsmClusters {
 );
 @@doc(CloudHsmClusters.restore::parameters.body,
   "Restore Operation Required properties"
+);
+@@doc(CloudHsmClusters.validateRestoreProperties::parameters.body,
+  "Optional Parameters to validate prior performing a restore operation."
+);
+@@doc(CloudHsmClusters.backup::parameters.body, "Azure storage Resource Uri");
+@@doc(CloudHsmClusters.validateBackupProperties::parameters.body,
+  "Backup Operation Required properties"
 );

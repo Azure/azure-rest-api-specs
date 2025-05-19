@@ -31,3 +31,12 @@ using Microsoft.HardwareSecurityModules;
 @@flattenProperty(DedicatedHsm.properties);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RestoreResult.properties);
+@@clientName(CloudHsmClusters.validateBackupProperties::parameters.body,
+  "backupRequestProperties"
+);
+@@clientName(CloudHsmClusters.backup::parameters.body,
+  "backupRequestProperties"
+);
+@@clientName(CloudHsmClusters.validateRestoreProperties::parameters.body,
+  "restoreRequestProperties"
+);
