@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Legacy {
-  interface LegacyOperations<
+  interface CustomLegacyOperations<
     ParentParameters extends {},
     ResourceTypeParameter extends {},
     ErrorType extends {} = Microsoft.GuestConfiguration.ErrorResponse
@@ -310,12 +310,5 @@ namespace Azure.ResourceManager.Legacy {
       @bodyRoot
       body: Request,
     ): Response | ErrorType;
-  }
-  /**
-   * @dev Get the provider namespace key-value pair
-   * @template Resource Optional.  The resource to get the provider namespace for.
-   */
-  model Provider<Resource extends {} = TenantActionScope> {
-    ...ProviderNamespace<Resource>;
   }
 }

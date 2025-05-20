@@ -25,7 +25,7 @@ model GuestConfigurationAssignment
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 interface GuestConfigurationAssignmentOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -45,7 +45,7 @@ interface GuestConfigurationAssignmentOps
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 interface GuestConfigurationAssignmentOpsList
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -137,7 +137,7 @@ interface GuestConfigurationAssignments {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
 interface GuestConfigurationHCRPAssignmentOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -236,7 +236,7 @@ interface GuestConfigurationHCRPAssignments {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
 interface GuestConfigurationAssignmentsVMSSOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -335,7 +335,7 @@ interface GuestConfigurationAssignmentsVMSS {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" "" s
 interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
