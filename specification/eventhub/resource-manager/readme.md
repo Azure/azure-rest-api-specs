@@ -350,19 +350,19 @@ directive:
   
   - suppress: ResourceNameRestriction
     from: namespaces.json
-    reason: Not a mandatory check
+    reason: can't add ResourceNameRestriction at this time, as the current API version is old and introducing it could cause breaking changes.
   - suppress: ProvisioningStateMustBeReadOnly
     from: namespaces.json
-    reason: Not a mandatory check
+    reason: Seems like a tool bug, as the visibility is set to read only in the TypeSpec already.
   - suppress: AllTrackedResourcesMustHaveDelete
     from: namespaces.json
-    reason: Not a mandatory check
+    reason: Breaking Change.
   - suppress: TrackedResourcePatchOperation
     from: namespaces.json
-    reason: Not a mandatory check
+    reason: Breaking change.
   - suppress: TrackedResourcesMustHavePut
     from: namespaces.json
-    reason: Not a mandatory check
+    reason: Breaking change.
 
   - suppress: LroLocationHeader
     from: quotaConfiguration-preview.json
