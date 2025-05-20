@@ -68,7 +68,7 @@ input-file:
 
 These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03-01-preview'
+```yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
   - preview/2025-03-01-preview/sites.json
 ```
