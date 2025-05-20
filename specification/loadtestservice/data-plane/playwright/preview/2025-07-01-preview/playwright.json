@@ -62,7 +62,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id.",
+            "description": "The workspace id in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -121,7 +121,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id.",
+            "description": "The workspace id in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -131,10 +131,9 @@
           {
             "name": "accessTokenId",
             "in": "path",
-            "description": "The access-token id.",
+            "description": "The access-token id in GUID format.",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "minLength": 3,
             "maxLength": 36,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
@@ -186,7 +185,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id.",
+            "description": "The workspace id in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -196,10 +195,9 @@
           {
             "name": "accessTokenId",
             "in": "path",
-            "description": "The access-token id.",
+            "description": "The access-token id in GUID format.",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "minLength": 3,
             "maxLength": 36,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
@@ -273,7 +271,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id.",
+            "description": "The workspace id in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -283,10 +281,9 @@
           {
             "name": "accessTokenId",
             "in": "path",
-            "description": "The access-token id.",
+            "description": "The access-token id in GUID format.",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "minLength": 3,
             "maxLength": 36,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
@@ -337,7 +334,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id.",
+            "description": "The workspace id in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -419,8 +416,8 @@
       "description": "Model of an access-token linked to a workspace.",
       "properties": {
         "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The access-token id.",
+          "type": "string",
+          "description": "The access-token id in GUID format.",
           "minLength": 3,
           "maxLength": 36,
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
@@ -555,11 +552,6 @@
           "description": "Inner error."
         }
       }
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
     },
     "PagedAccessToken": {
       "type": "object",

@@ -1,9 +1,5 @@
-// Models ////////////////////
-
-import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 
-using Azure.Core;
 using TypeSpec.Rest;
 
 namespace Playwright;
@@ -15,12 +11,12 @@ namespace Playwright;
 @parentResource(Workspace)
 model AccessToken {
   @key("accessTokenId")
-  @doc("The access-token id.")
+  @doc("The access-token id in GUID format.")
   @minLength(3)
   @maxLength(36)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility(Lifecycle.Read)
-  id: uuid;
+  id: string;
 
   // Standard Azure Resource Name parameter regex pattern - https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.ResourceNameParameter
   @minLength(3)
@@ -73,7 +69,7 @@ union OS {
 @resource("playwrightworkspaces")
 model Workspace {
   @key("workspaceId")
-  @doc("The workspace id.")
+  @doc("The workspace id in GUID format.")
   @maxLength(36)
   @minLength(3)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
