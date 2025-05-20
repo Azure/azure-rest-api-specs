@@ -19,7 +19,3 @@ using Microsoft.GuestConfiguration;
 #suppress "deprecated" ""
 @@flattenProperty(Operation.properties);
 @@clientName(AssignmentReport, "CommonAssignmentReport", "go");
-@@clientName(GuestConfigurationAssignmentProperties,
-  "GuestConfigurationAssignmentData",
-  "csharp"
-);
