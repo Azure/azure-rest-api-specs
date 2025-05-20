@@ -4,9 +4,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
-using Azure.Core;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace KeyVault;
@@ -140,6 +138,16 @@ op getSecrets is KeyVaultOperation<
   SecretListResult
 >;
 
+model SecretNameParameter {
+  /**
+     * The name of the secret.
+     */
+    @path("secret-name")
+    @clientName("name", "go")
+    secretName: string;
+
+}
+
 /**
  * The full secret identifier and attributes are provided in the response. No values are returned for the secrets. This operations requires the secrets/list permission.
  */
@@ -150,13 +158,7 @@ op getSecrets is KeyVaultOperation<
 @get
 op getSecretVersions is KeyVaultOperation<
   {
-    /**
-     * The name of the secret.
-     */
-    @path("secret-name")
-    @clientName("name", "go")
-    secretName: string;
-
+    ...SecretNameParameter,
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
