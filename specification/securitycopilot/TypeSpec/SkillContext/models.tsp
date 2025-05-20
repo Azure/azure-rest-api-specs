@@ -27,7 +27,7 @@ namespace SkillContext
 		properties: Record<string>;
 
 		@doc("TODO")
-		startTime: offsetDateTime;
+		startTime: utcDateTime;
 
 		@doc("Tenant id of tenant in which skill invocation occured")
 		tenantId: string;
@@ -1062,7 +1062,7 @@ namespace SkillContext
 	  object: string;
 
 	  @doc("The creation timestamp.")
-	  created: offsetDateTime; 
+	  created: utcDateTime;
 
 	  @doc("The model used for completion.")
 	  `model`: string;
