@@ -1781,7 +1781,7 @@
           ]
         },
         "authenticationSetting": {
-          "$ref": "#/definitions/stringResourceName",
+          "$ref": "#/definitions/authenticationSettingName",
           "description": "Reference to the name of the authentication setting which is used for querying the data source"
         },
         "azureMonitorWorkspaceResourceId": {
@@ -1810,7 +1810,7 @@
           ]
         },
         "authenticationSetting": {
-          "$ref": "#/definitions/stringResourceName",
+          "$ref": "#/definitions/authenticationSettingName",
           "description": "Reference to the name of the authentication setting which is used for querying the data source"
         },
         "azureResourceId": {
@@ -1927,7 +1927,7 @@
           "maxLength": 5000
         },
         "authenticationSetting": {
-          "$ref": "#/definitions/stringResourceName",
+          "$ref": "#/definitions/authenticationSettingName",
           "description": "Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities."
         },
         "discoverRelationships": {
@@ -2246,7 +2246,7 @@
           "description": "Signal groups which are assigned to this entity"
         },
         "discoveredBy": {
-          "$ref": "#/definitions/stringResourceName",
+          "$ref": "#/definitions/discoveryRuleName",
           "description": "Discovered by which discovery rule. If set, the entity cannot be deleted manually.",
           "readOnly": true
         },
@@ -2529,7 +2529,7 @@
           ]
         },
         "authenticationSetting": {
-          "$ref": "#/definitions/stringResourceName",
+          "$ref": "#/definitions/authenticationSettingName",
           "description": "Reference to the name of the authentication setting which is used for querying the data source"
         },
         "logAnalyticsWorkspaceResourceId": {
@@ -2736,7 +2736,7 @@
           "maxLength": 260
         },
         "parentEntityName": {
-          "$ref": "#/definitions/stringResourceName",
+          "$ref": "#/definitions/entityName",
           "description": "Resource name of the parent entity",
           "x-ms-mutability": [
             "read",
@@ -2744,7 +2744,7 @@
           ]
         },
         "childEntityName": {
-          "$ref": "#/definitions/stringResourceName",
+          "$ref": "#/definitions/entityName",
           "description": "Resource name of the child entity",
           "x-ms-mutability": [
             "read",
@@ -2759,7 +2759,7 @@
           }
         },
         "discoveredBy": {
-          "$ref": "#/definitions/stringResourceName",
+          "$ref": "#/definitions/discoveryRuleName",
           "description": "Discovered by which discovery rule. If set, the relationship cannot be deleted manually.",
           "readOnly": true
         },
@@ -2837,7 +2837,7 @@
           "minItems": 1,
           "maxItems": 1,
           "items": {
-            "$ref": "#/definitions/stringResourceName"
+            "$ref": "#/definitions/signalDefinitionName"
           }
         }
       },
@@ -3090,15 +3090,30 @@
         "threshold"
       ]
     },
+    "authenticationSettingName": {
+      "type": "string",
+      "description": "Type for authentication setting resource name.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "discoveryRuleName": {
+      "type": "string",
+      "description": "Type for discovery rule resource name.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "entityName": {
+      "type": "string",
+      "description": "Type for entity resource name.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "signalDefinitionName": {
+      "type": "string",
+      "description": "Type for signal definition resource name.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
     "string4096": {
       "type": "string",
       "description": "String with max length validation of 4096 characters",
       "maxLength": 4096
-    },
-    "stringResourceName": {
-      "type": "string",
-      "description": "String with regex validation to match the proxy resource name requirements",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
     }
   },
   "parameters": {}
