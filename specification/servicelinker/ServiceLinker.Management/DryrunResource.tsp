@@ -93,9 +93,6 @@ interface LinkersOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
-
-        /** {resourceUri} */
-        @path @segment("{resourceUri}") providers: string,
       },
       KeysOf<ResourceNameParameter<
         Resource = DryrunResource,
@@ -202,6 +199,8 @@ interface Linkers {
        */
       @path
       resourceUri: string;
+
+      ...Azure.ResourceManager.Legacy.Provider;
     },
     Response = ArmResponse<DryrunList>
   >;

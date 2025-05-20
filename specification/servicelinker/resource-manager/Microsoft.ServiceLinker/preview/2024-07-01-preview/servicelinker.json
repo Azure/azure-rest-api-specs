@@ -106,351 +106,6 @@
         }
       }
     },
-    "/{resourceUri}/{providers}/{resourceUri}/dryruns": {
-      "get": {
-        "operationId": "Linkers_ListDryrun",
-        "tags": [
-          "Linkers"
-        ],
-        "description": "list dryrun jobs",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DryrunList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListDryrun": {
-            "$ref": "./examples/ListDryrun.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{dryruns}/{resourceUri}/{dryrunName}": {
-      "get": {
-        "operationId": "Linkers_GetDryrun",
-        "tags": [
-          "Linkers"
-        ],
-        "description": "get a dryrun job",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "description": "The name of the DryrunResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "description": "The name of dryrun.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetDryrun": {
-            "$ref": "./examples/GetDryrun.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Linkers_CreateDryrun",
-        "tags": [
-          "Linkers"
-        ],
-        "description": "create a dryrun job to do necessary check before actual creation",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "description": "The name of the DryrunResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "description": "The name of dryrun.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "dryrun resource.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'DryrunResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'DryrunResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PutDryrun": {
-            "$ref": "./examples/PutDryrun.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "Linkers_UpdateDryrun",
-        "tags": [
-          "Linkers"
-        ],
-        "description": "add a dryrun job to do necessary check before actual creation",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "description": "The name of the DryrunResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "description": "The name of dryrun.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "dryrun resource.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DryrunPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PatchDryrun": {
-            "$ref": "./examples/PatchDryrun.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "Linkers_DeleteDryrun",
-        "tags": [
-          "Linkers"
-        ],
-        "description": "delete a dryrun job",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "description": "The name of the DryrunResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "description": "The name of dryrun.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteDryrun": {
-            "$ref": "./examples/DeleteDryrun.json"
-          }
-        }
-      }
-    },
     "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}": {
       "get": {
         "operationId": "Linker_Get",
@@ -1006,6 +661,316 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns": {
+      "get": {
+        "operationId": "Linkers_ListDryrun",
+        "tags": [
+          "Linkers"
+        ],
+        "description": "list dryrun jobs",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DryrunList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListDryrun": {
+            "$ref": "./examples/ListDryrun.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/Microsoft.ServiceLinker/{dryruns}/{resourceUri}/{dryrunName}": {
+      "get": {
+        "operationId": "Linkers_GetDryrun",
+        "tags": [
+          "Linkers"
+        ],
+        "description": "get a dryrun job",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryruns",
+            "in": "path",
+            "description": "The name of the DryrunResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "description": "The name of dryrun.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDryrun": {
+            "$ref": "./examples/GetDryrun.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Linkers_CreateDryrun",
+        "tags": [
+          "Linkers"
+        ],
+        "description": "create a dryrun job to do necessary check before actual creation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryruns",
+            "in": "path",
+            "description": "The name of the DryrunResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "description": "The name of dryrun.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "dryrun resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DryrunResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'DryrunResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutDryrun": {
+            "$ref": "./examples/PutDryrun.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Linkers_UpdateDryrun",
+        "tags": [
+          "Linkers"
+        ],
+        "description": "add a dryrun job to do necessary check before actual creation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryruns",
+            "in": "path",
+            "description": "The name of the DryrunResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "description": "The name of dryrun.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "dryrun resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DryrunPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchDryrun": {
+            "$ref": "./examples/PatchDryrun.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Linkers_DeleteDryrun",
+        "tags": [
+          "Linkers"
+        ],
+        "description": "delete a dryrun job",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryruns",
+            "in": "path",
+            "description": "The name of the DryrunResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "description": "The name of dryrun.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteDryrun": {
+            "$ref": "./examples/DeleteDryrun.json"
+          }
         }
       }
     },
