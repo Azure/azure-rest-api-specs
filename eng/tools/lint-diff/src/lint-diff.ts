@@ -118,6 +118,12 @@ async function runLintDiff(
     return;
   }
 
+  if (afterList.size === 0) { 
+    await writeFile(outFile, "No applicable files found in after. Exiting.");
+    console.log("No applicable files found in after. Exiting.");
+    return;
+  }
+
   // It may be possible to run these in parallel as they're running against
   // different directories.
   const beforeChecks = await runChecks(beforePath, beforeList);
