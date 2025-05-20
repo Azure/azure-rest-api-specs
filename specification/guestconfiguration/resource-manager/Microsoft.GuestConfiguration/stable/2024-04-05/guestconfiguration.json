@@ -1779,7 +1779,7 @@
       "description": "Guest configuration assignment is an association between a machine and guest configuration.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/GuestConfigurationAssignmentProperties",
+          "$ref": "#/definitions/GuestConfigurationAssignmentData",
           "description": "Properties of the Guest configuration assignment."
         }
       },
@@ -1789,23 +1789,7 @@
         }
       ]
     },
-    "GuestConfigurationAssignmentList": {
-      "type": "object",
-      "description": "The response of the list guest configuration assignment operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Result of the list guest configuration assignment operation.",
-          "items": {
-            "$ref": "#/definitions/GuestConfigurationAssignment"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "GuestConfigurationAssignmentProperties": {
+    "GuestConfigurationAssignmentData": {
       "type": "object",
       "description": "Guest configuration assignment properties.",
       "properties": {
@@ -1878,6 +1862,22 @@
           "x-ms-identifiers": [
             "vmId"
           ]
+        }
+      }
+    },
+    "GuestConfigurationAssignmentList": {
+      "type": "object",
+      "description": "The response of the list guest configuration assignment operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Result of the list guest configuration assignment operation.",
+          "items": {
+            "$ref": "#/definitions/GuestConfigurationAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
