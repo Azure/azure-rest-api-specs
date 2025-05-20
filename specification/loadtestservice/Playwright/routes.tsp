@@ -33,7 +33,7 @@ interface AccessTokens {
 
 alias GetBrowsersParams = {
   @path
-  @maxLength(32)
+  @maxLength(36)
   @minLength(3)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @doc("The workspace id.")
