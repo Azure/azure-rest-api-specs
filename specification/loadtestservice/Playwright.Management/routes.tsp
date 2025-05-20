@@ -13,6 +13,16 @@ interface PlaywrightWorkspaces
       PlaywrightWorkspace,
       PlaywrightWorkspaceProperties
     > {
+  // https://github.com/Azure/azure-openapi-validator/blob/main/docs/delete-response-codes.md
+  delete is ArmResourceDeleteWithoutOkAsync<PlaywrightWorkspace>;
+  // https://github.com/Azure/azure-openapi-validator/blob/main/docs/patch-body-parameters-schema.md
+  update is ArmCustomPatchSync<
+    PlaywrightWorkspace,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      PlaywrightWorkspace,
+      OmitDefaults<PlaywrightWorkspaceProperties>
+    >
+  >;
   checkNameAvailability is checkGlobalNameAvailability;
 }
 

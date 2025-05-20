@@ -518,9 +518,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -676,6 +673,30 @@
     }
   },
   "definitions": {
+    "EnablementStatus": {
+      "type": "string",
+      "description": "The enablement status of a feature.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnablementStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The feature is Enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The feature is Disabled."
+          }
+        ]
+      }
+    },
     "FreeTrialProperties": {
       "type": "object",
       "description": "Subscription-level location-based Playwright quota resource free-trial properties.",
@@ -1004,54 +1025,12 @@
       "description": "The updatable properties of the PlaywrightWorkspace.",
       "properties": {
         "regionalAffinity": {
-          "type": "string",
-          "description": "This property sets the connection region for client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          }
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "This property sets the connection region for client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created."
         },
         "localAuth": {
-          "type": "string",
-          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          }
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations."
         }
       }
     },
