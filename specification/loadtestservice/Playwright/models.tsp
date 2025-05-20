@@ -17,7 +17,7 @@ model AccessToken {
   @key("accessTokenId")
   @doc("The access-token id.")
   @minLength(3)
-  @maxLength(32)
+  @maxLength(36)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility(Lifecycle.Read)
   id: uuid;
@@ -74,7 +74,7 @@ union OS {
 model Workspace {
   @key("workspaceId")
   @doc("The workspace id.")
-  @maxLength(32)
+  @maxLength(36)
   @minLength(3)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility(Lifecycle.Read)
