@@ -35,6 +35,12 @@ directive:
       - $.definitions.SiteUpdateProperties.properties.labels
     from: sites.json
     reason: labels describe user defined tags to be used on Sites.
+  - suppress: ExtensionResourcePathPattern
+    where:
+      - $.paths["/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}"]
+      - $.paths["/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites"]
+    from: sites.json
+    reason:  This approach was necessitated by the current limitations in TypeSpec, which does not support defining parent resources at the tenant level for extension resource types.
 ```
 
 ## Configuration
