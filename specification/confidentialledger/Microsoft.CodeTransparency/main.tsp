@@ -225,6 +225,10 @@ model TransparentStatement {
   @doc("CoseSign1 signature envelope with the receipt embedded in the unprotected header")
   @bodyRoot
   body: bytes;
+
+  @doc("Location of the receipt")
+  @header("Location")
+  location?: string;
 }
 
 @doc("A ledger receipt, see IETF SCITT draft")
