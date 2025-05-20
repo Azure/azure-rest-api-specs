@@ -11,14 +11,15 @@
         "name": "{eventTrackingId}",
         "type": "/providers/Microsoft.ResourceHealth/events",
         "properties": {
-          "eventType": "ServiceIssue",
-          "eventSource": "ResourceHealth",
+          "eventType": "Billing",
+          "eventSubType": "Underbilling",
+          "eventSource": "ServiceHealth",
           "status": "Active",
-          "title": "ACTIVE: Virtual machines in West US",
-          "summary": "An outage alert is being investigated. More information will be provided as it is known.",
+          "title": "Upcoming billing changes to your resources",
+          "summary": "Upcoming billing changes to your resources.",
           "header": "Your service might have been impacted by an Azure service issue",
           "article": {
-            "articleContent": "<html>An outage alert is being investigated. More information will be provided as it is known</html>"
+            "articleContent": "<html>Upcoming billing changes to your resources</html>"
           },
           "links": [
             {
@@ -50,15 +51,15 @@
           "level": "Warning",
           "eventLevel": "Warning",
           "isEventSensitive": false,
-          "impactStartTime": "2025-05-12T14:45:48.1203530Z",
-          "impactMitigationTime": "2025-05-14T15:43:48.1203530Z",
+          "impactStartTime": "2025-06-12T14:45:48.1203530Z",
+          "impactMitigationTime": "2025-07-14T15:43:48.1203530Z",
           "impact": [
             {
-              "impactedService": "Virtual Machines",
-              "impactedServiceGuid": "fd8065f5-ffd0-4756-8788-e6a11bf36257",
+              "impactedService": "Microsoft Cost Management",
+              "impactedServiceGuid": "80853877-1df8-40c2-9c79-44c0d1c95e01",
               "impactedRegions": [
                 {
-                  "impactedRegion": "West US",
+                  "impactedRegion": "Global",
                   "status": "Active",
                   "impactedSubscriptions": [
                     "{subscriptionId}"
@@ -67,37 +68,13 @@
                   "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
                   "updates": [
                     {
-                      "summary": "Update 3 - An outage alert is being investigated. More information will be provided as it is known.",
-                      "updateDateTime": "2025-05-13T15:43:48.1203530Z",
-                      "eventTags": [
-                        "Final PIR"
-                      ]
-                    },
-                    {
-                      "summary": "Update 2 - An outage alert is being investigated. More information will be provided as it is known.",
-                      "updateDateTime": "2025-05-13T10:32:48.1203530Z",
-                      "eventTags": [
-                        "False Positive",
-                        "Preliminary PIR"
-                      ]
-                    },
-                    {
-                      "summary": "Update 1 - An outage alert is being investigated. More information will be provided as it is known.",
-                      "updateDateTime": "2025-05-12T15:00:48.1203530Z",
-                      "eventTags": [
-                        "Action Recommended"
-                      ]
+                      "summary": "Upcoming billing changes to your resources.",
+                      "updateDateTime": "2025-05-13T15:43:48.1203530Z"
                     }
                   ]
                 }
               ]
             }
-          ],
-          "eventTags": [
-            "Action Recommended",
-            "False Positive",
-            "Preliminary PIR",
-            "Final PIR"
           ],
           "recommendedActions": {
             "message": "Recommended actions title",
@@ -120,6 +97,10 @@
               "localeCode": "en"
             }
           ],
+          "newRate": 1.0,
+          "oldRate": 0.88,
+          "currencyType": "USD",
+          "billingId": "595959",
           "isHIR": false,
           "enableMicrosoftSupport": true,
           "enableChatWithUs": false,

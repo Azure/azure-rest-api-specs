@@ -714,6 +714,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/fetchBillingCommunicationDetails": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event_fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId",
+        "description": "Service health event details specific in the subscription by event tracking id. This can be used to fetch sensitive properties for Billing event type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Health Event details in the subscription requested by tracking id.",
+            "schema": {
+              "$ref": "#/definitions/event"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingEventDetailsBySubscriptionIdAndTrackingId": {
+            "$ref": "./examples/Event_fetchBillingCommunicationDetailsBySubscriptionIdAndTrackingId.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ResourceHealth/events": {
       "get": {
         "tags": [
@@ -1141,10 +1180,29 @@
                 "HealthAdvisory",
                 "RCA",
                 "EmergingIssues",
-                "SecurityAdvisory"
+                "SecurityAdvisory",
+                "Billing"
               ],
               "x-ms-enum": {
                 "name": "EventTypeValues",
+                "modelAsString": true
+              }
+            },
+            "eventSubType": {
+              "type": "string",
+              "description": "Sub-type of event.",
+              "enum": [
+                "Retirement",
+                "ForeignExchangeRateChange",
+                "Underbilling",
+                "Overbilling",
+                "PriceChanges",
+                "TaxChanges",
+                "MeterIDChanges",
+                "UnauthorizedPartyAbuse"
+              ],
+              "x-ms-enum": {
+                "name": "EventSubTypeValues",
                 "modelAsString": true
               }
             },
@@ -1360,6 +1418,27 @@
             "impactType": {
               "type": "string",
               "description": "The type of the impact"
+            },
+            "eventTags": {
+              "$ref": "#/definitions/eventTags"
+            },
+            "newRate": {
+              "type": "number",
+              "format": "double",
+              "description": "Billing rate change information - new rate"
+            },
+            "oldRate": {
+              "type": "number",
+              "format": "double",
+              "description": "Billing rate change information - old rate"
+            },
+            "currencyType": {
+              "type": "string",
+              "description": "Billing currency type information. Example: USD, CAD"
+            },
+            "billingId": {
+              "type": "string",
+              "description": "Billing identifier information."
             }
           }
         }
@@ -1501,7 +1580,17 @@
           "type": "string",
           "description": "It provides the Timestamp for the given update for the service health event.",
           "format": "date-time"
+        },
+        "eventTags": {
+          "$ref": "#/definitions/eventTags"
         }
+      }
+    },
+    "eventTags": {
+      "type": "array",
+      "description": "A list of metadata tags associated with the event. Possible values include:\n -Action Recommended: Action may be required by you to avoid possible disruptions or mitigate risks for your services. It is recommended to evaluate these actions and the potential impact on your services. \n- False Positive: After investigation, we've determined your service is healthy and service issues did not impact your services as originally communicated.\n- Preliminary PIR: For our largest, most impactful service issues a Preliminary Post Incident Review (PIR) is published generally within 72 hours of mitigation, to summarize what we have learned so far from the still-in-progress investigation.\n- Final PIR: For service issues, a Final Post Incident Review (PIR) may be published to provide additional details or learnings. Sometimes this requires us to complete an internal retrospective, generally within 14 days of mitigation.",
+      "items": {
+        "type": "string"
       }
     },
     "faq": {
@@ -1677,6 +1766,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "priority": {
+          "description": "Priority of this metadata supported value. Lower number is given higher preference.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
