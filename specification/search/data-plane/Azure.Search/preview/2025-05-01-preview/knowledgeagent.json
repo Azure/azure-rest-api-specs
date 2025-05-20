@@ -55,6 +55,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QuerySourceAuthorizationParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -436,6 +439,15 @@
       "x-ms-parameter-grouping": {
         "name": "request-options"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "QuerySourceAuthorizationParameter": {
+      "name": "x-ms-query-source-authorization",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
+      "x-ms-query-source-authorization": true,
       "x-ms-parameter-location": "method"
     },
     "EndpointParameter": {
