@@ -285,24 +285,24 @@
         "tags": [
           "SaaS"
         ],
-        "operationId": "SaaS_Activate",
-        "description": "List and Activate the saas",
+        "operationId": "validateandactivatesaas",
+        "description": "Validate and Activate the saas",
         "parameters": [
-          {
-            "$ref": "#/parameters/PublisherIdParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ActivateSaaSParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "List and Activate SaaS completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SaaSData"
+              "$ref": "#/definitions/SaaSResourceDetailsResponse"
             }
           },
           "default": {
@@ -2470,10 +2470,23 @@
       "properties": {},
       "description": "Location for NewRelic resource"
     },
-    "PublisherIdParameter": {
+    "ActivateSaaSParameterRequest": {
       "type": "object",
-      "properties": {},
-      "description": "Publisher Id for NewRelic resource"
+      "description": "SaaS guid & PublishedId for Activate and Validate SaaS Resource",
+      "properties": {
+        "saasGuid": {
+          "type": "string",
+          "description": "SaaS guid for Activate and Validate SaaS Resource"
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for NewRelic resource"
+        }
+      },
+      "required": [
+        "saasGuid",
+        "publisherId"
+      ]
     },
     "LogRules": {
       "type": "object",
@@ -3056,49 +3069,26 @@
     "SaaSData": {
       "type": "object",
       "properties": {
-        "saasResourceId": {
+        "saaSResourceId": {
           "type": "string",
           "description": "Id of the Marketplace SaaS Resource"
         }
       },
       "description": "SaaS details"
     },
-    "SaaSInfo": {
+    "SaaSResourceDetailsResponse": {
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SaaSData",
-          "description": "The saas-resource properties"
+        "saasResourceId": {
+          "type": "string",
+          "description": "Id of the Marketplace SaaS Resource"
         }
       },
-      "description": "Response of get SaaSInfo Operation.",
+      "description": "Marketplace SaaS resource details.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "SaaSInfoListResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SaaSInfo"
-          },
-          "x-cadl-name": "SaaSInfo[]",
-          "description": "The SaaSInfo items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Response of get SaaS info operation.",
-      "required": [
-        "value"
       ]
     },
     "PlanDataResource": {
@@ -3761,12 +3751,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "PublisherIdParameter": {
-      "name": "publisherId",
-      "in": "query",
+    "ActivateSaaSParameter": {
+      "name": "request",
+      "in": "body",
       "required": true,
       "description": "PublisherId for NewRelic resource.",
-      "type": "string",
+      "schema": {
+        "$ref": "#/definitions/ActivateSaaSParameterRequest"
+      },
       "x-ms-parameter-location": "method"
     },
     "MetricsRequestParameter": {
