@@ -114,6 +114,7 @@ These settings apply only when `--tag=package-preview-2025-05-04-preview` is spe
 input-file:
   - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
   - Microsoft.Security/preview/2025-05-04-preview/assessments.json
+  - Microsoft.Security/preview/2025-05-04-preview/operations.json
   ```
 
 ### Tag: package-2025-03
