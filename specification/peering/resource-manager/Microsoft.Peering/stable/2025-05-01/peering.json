@@ -2813,17 +2813,25 @@
       "type": "object",
       "properties": {
         "endpoint": {
-          "description": "The endpoint IP address where traffic will be sent to from Azure.",
+          "description": "The endpoint IP address where traffic will be sent to from Azure for the connectivity probe.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "azureRegion": {
-          "description": "The Azure region where traffic will originate from.",
+          "description": "The Azure region where traffic will originate from for the connectivity probe.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "protocol": {
-          "description": "The protocol of the traffic that will be sent.",
+          "description": "The protocol of the traffic that will be sent for the connectivity probe.",
           "enum": [
             "None",
             "ICMP",
@@ -2831,13 +2839,13 @@
           ],
           "type": "string",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "protocol",
-            "modelAsString": true
-          }
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "prefixesToAccesslist": {
-          "description": "Set to contain the prefixes that agents in Azure will send traffic from. For peers to allow into their\r\nnetwork the connectivity probe traffic can reach their endpoint.",
+          "description": "Set to contain the prefixes that agents in Azure will send traffic from. For peers to allow into their\r\nnetwork the connectivity probe traffic can reach their endpoint for the connectivity probe.",
           "type": "array",
           "items": {
             "type": "string"
