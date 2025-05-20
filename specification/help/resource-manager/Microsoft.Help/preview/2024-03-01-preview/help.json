@@ -186,7 +186,7 @@
             "name": "diagnosticResourceRequest",
             "in": "body",
             "description": "The required request body for this insightResource invocation.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/DiagnosticResource"
             }
@@ -316,7 +316,7 @@
             "name": "simplifiedSolutionsRequestBody",
             "in": "body",
             "description": "The required request body for simplified Solutions resource creation.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SimplifiedSolutionsResource"
             }
@@ -446,7 +446,7 @@
             "name": "solutionRequestBody",
             "in": "body",
             "description": "The required request body for this solution resource creation.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SolutionResource"
             }
@@ -525,7 +525,7 @@
             "name": "solutionPatchRequestBody",
             "in": "body",
             "description": "The required request body for updating a solution resource.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SolutionPatchRequestBody"
             }
@@ -600,7 +600,7 @@
           {
             "name": "solutionWarmUpRequestBody",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The required request body for warming up a solution resource.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/SolutionWarmUpRequestBody"
@@ -688,12 +688,15 @@
           {
             "name": "scope",
             "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "troubleshooterName",
             "in": "path",
+            "description": "Troubleshooter resource Name.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -769,7 +772,7 @@
           {
             "name": "continueRequestBody",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The required request body for going to next step in Troubleshooter resource.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/ContinueRequestBody"

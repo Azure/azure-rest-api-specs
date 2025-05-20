@@ -25,6 +25,35 @@ model SolutionResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface SolutionResourcesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+
+        /**
+         * The fully qualified Azure Resource manager identifier of the resource.
+         */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        @path(#{ allowReserved: true })
+        scope: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         * Solution resource Name.
+         */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        @path
+        @segment("solutions")
+        @minLength(1)
+        @maxLength(100)
+        @pattern("^[A-Za-z0-9-+@()_]+$")
+        solutionResourceName: string,
+      }
+    > {}
+
 @armResourceOperations
 interface SolutionResources {
   /**
@@ -42,9 +71,9 @@ interface SolutionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Solution_Create")
-  create is ArmResourceCreateOrReplaceAsync<
+  create is SolutionResourcesOps.CreateOrUpdateAsync<
     SolutionResource,
-    BaseParameters = ScopeParameters<SolutionResource>
+    OptionalRequestBody = true
   >;
 
   /**
@@ -54,14 +83,14 @@ interface SolutionResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   @operationId("Solution_Update")
-  update is ArmCustomPatchAsync<
+  update is SolutionResourcesOps.CustomPatchAsync<
     SolutionResource,
     PatchModel = SolutionPatchRequestBody,
-    BaseParameters = ScopeParameters<SolutionResource>,
     Response = ArmResourceUpdatedResponse<SolutionResource> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SolutionResource>> & {
       @bodyRoot
       _: SolutionResource;
-    })
+    }),
+    OptionalRequestBody = true
   >;
 
   /**
@@ -83,9 +112,12 @@ interface SolutionResources {
 @@minLength(SolutionResource.name, 1);
 @@doc(SolutionResource.name, "Solution resource Name.");
 @@doc(SolutionResource.properties, "Solution result");
-@@doc(SolutionResources.create::parameters.resource,
+@@doc(SolutionResources.create::parameters.body,
   "The required request body for this solution resource creation."
 );
-@@doc(SolutionResources.update::parameters.properties,
+@@doc(SolutionResources.update::parameters.body,
   "The required request body for updating a solution resource."
+);
+@@doc(SolutionResources.warmUp::parameters.body,
+  "The required request body for warming up a solution resource."
 );

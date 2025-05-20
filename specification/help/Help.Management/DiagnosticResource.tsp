@@ -25,6 +25,35 @@ model DiagnosticResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface DiagnosticResourcesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+
+        /**
+         * The fully qualified Azure Resource manager identifier of the resource.
+         */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        @path(#{ allowReserved: true })
+        scope: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         * Unique resource name for insight resources
+         */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        @path
+        @segment("diagnostics")
+        @minLength(1)
+        @maxLength(100)
+        @pattern("^[A-Za-z0-9-+@()_]+$")
+        diagnosticsResourceName: string,
+      }
+    > {}
+
 @armResourceOperations
 interface DiagnosticResources {
   /**
@@ -42,9 +71,9 @@ interface DiagnosticResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Diagnostics_Create")
-  create is ArmResourceCreateOrReplaceAsync<
+  create is DiagnosticResourcesOps.CreateOrUpdateAsync<
     DiagnosticResource,
-    BaseParameters = ScopeParameters<DiagnosticResource>
+    OptionalRequestBody = true
   >;
 }
 
@@ -52,6 +81,6 @@ interface DiagnosticResources {
 @@minLength(DiagnosticResource.name, 1);
 @@doc(DiagnosticResource.name, "Unique resource name for insight resources");
 @@doc(DiagnosticResource.properties, "Diagnostic Resource properties.");
-@@doc(DiagnosticResources.create::parameters.resource,
+@@doc(DiagnosticResources.create::parameters.body,
   "The required request body for this insightResource invocation."
 );

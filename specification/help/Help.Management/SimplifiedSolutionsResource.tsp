@@ -25,6 +25,35 @@ model SimplifiedSolutionsResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface SimplifiedSolutionsResourcesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+
+        /**
+         * The fully qualified Azure Resource manager identifier of the resource.
+         */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        @path(#{ allowReserved: true })
+        scope: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         * Simplified Solutions Resource Name.
+         */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        @path
+        @segment("simplifiedSolutions")
+        @minLength(1)
+        @maxLength(100)
+        @pattern("^[A-Za-z0-9-+@()_]+$")
+        simplifiedSolutionsResourceName: string,
+      }
+    > {}
+
 @armResourceOperations
 interface SimplifiedSolutionsResources {
   /**
@@ -42,9 +71,9 @@ interface SimplifiedSolutionsResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SimplifiedSolutions_Create")
-  create is ArmResourceCreateOrReplaceAsync<
+  create is SimplifiedSolutionsResourcesOps.CreateOrUpdateAsync<
     SimplifiedSolutionsResource,
-    BaseParameters = ScopeParameters<SimplifiedSolutionsResource>
+    OptionalRequestBody = true
   >;
 }
 
@@ -52,6 +81,6 @@ interface SimplifiedSolutionsResources {
 @@minLength(SimplifiedSolutionsResource.name, 1);
 @@doc(SimplifiedSolutionsResource.name, "Simplified Solutions Resource Name.");
 @@doc(SimplifiedSolutionsResource.properties, "Simplified Solutions result");
-@@doc(SimplifiedSolutionsResources.create::parameters.resource,
+@@doc(SimplifiedSolutionsResources.create::parameters.body,
   "The required request body for simplified Solutions resource creation."
 );

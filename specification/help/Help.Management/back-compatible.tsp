@@ -12,22 +12,20 @@ using Microsoft.Help;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SolutionNlpMetadataResource.properties);
 
-@@clientName(DiagnosticResources.create::parameters.resource,
+@@clientName(DiagnosticResources.create::parameters.body,
   "diagnosticResourceRequest"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DiagnosticResource.properties);
 
-@@clientName(SolutionResources.create::parameters.resource,
-  "solutionRequestBody"
-);
-@@clientName(SolutionResources.update::parameters.properties,
+@@clientName(SolutionResources.create::parameters.body, "solutionRequestBody");
+@@clientName(SolutionResources.update::parameters.body,
   "solutionPatchRequestBody"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SolutionResource.properties);
 
-@@clientName(SimplifiedSolutionsResources.create::parameters.resource,
+@@clientName(SimplifiedSolutionsResources.create::parameters.body,
   "simplifiedSolutionsRequestBody"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -39,19 +37,17 @@ using Microsoft.Help;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SolutionResourceSelfHelp.properties);
 
-@@clientName(DiagnosticResources.create::parameters.resource,
+@@clientName(DiagnosticResources.create::parameters.body,
   "diagnosticResourceRequest"
 );
 
-@@clientName(SimplifiedSolutionsResources.create::parameters.resource,
+@@clientName(SimplifiedSolutionsResources.create::parameters.body,
   "simplifiedSolutionsRequestBody"
 );
 
-@@clientName(SolutionResources.create::parameters.resource,
-  "solutionRequestBody"
-);
+@@clientName(SolutionResources.create::parameters.body, "solutionRequestBody");
 
-@@clientName(SolutionResources.update::parameters.properties,
+@@clientName(SolutionResources.update::parameters.body,
   "solutionPatchRequestBody"
 );
 @@clientName(TroubleshooterResources.create::parameters.body,

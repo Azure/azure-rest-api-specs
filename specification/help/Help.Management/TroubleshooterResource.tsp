@@ -25,17 +25,26 @@ model TroubleshooterResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface TroubleshooterResourcesOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
 
-        @path
+        /**
+         * The fully qualified Azure Resource manager identifier of the resource.
+         */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        @path(#{ allowReserved: true })
         scope: string,
 
         ...Azure.ResourceManager.Legacy.Provider,
       },
       {
+        /**
+         * Troubleshooter resource Name.
+         */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required"
         @path
         @segment("troubleshooters")
         @minLength(1)
@@ -111,4 +120,7 @@ interface TroubleshooterResources {
 @@doc(TroubleshooterResource.properties, "Troubleshooter Instance properties.");
 @@doc(TroubleshooterResources.create::parameters.body,
   "The required request body for this Troubleshooter resource creation."
+);
+@@doc(TroubleshooterResources.continue::parameters.body,
+  "The required request body for going to next step in Troubleshooter resource."
 );
