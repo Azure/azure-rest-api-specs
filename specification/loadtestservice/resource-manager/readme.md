@@ -36,15 +36,6 @@ These settings apply only when `--tag=2025-07-01-preview` is specified on the co
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
   - Microsoft.LoadTestService/playwright/preview/2025-07-01-preview/playwright.json
-suppressions:
-  - code: PatchBodyParametersSchema
-    from: playwright.json
-    reason: Seems like a tool bug, as the operations are generated automatically from the TrackedResourceOperations in the TypeSpec which should OmitDefaults for Patch. We want the default property values to be visible for other operations like Put and Get if they're not explicitly set by the end-user.
-  - code: DeleteResponseCodes
-    from: playwright.json
-    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/playwrightWorkspaces/{playwrightWorkspaceName}"].delete
 ```
 
 ### Tag: package-2024-12-01-preview
