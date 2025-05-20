@@ -7,7 +7,7 @@ import {
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsDpPackageDirectorySubRule,
-  TspConfigTsDpPackageNameMatchPatternSubRule,
+  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
@@ -30,7 +30,7 @@ import {
   TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
-  TspConfigTsModularPackageNameMatchPatternSubRule,
+  TspConfigTsMlcDpPackageNameMatchPatternSubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { join } from "path";
@@ -224,7 +224,7 @@ const tsDpPackageNameTestCases = createEmitterOptionTestCases(
   "package-details.name",
   "@azure-rest/aaa-bbb",
   "@azure/aaa-bbb",
-  [new TspConfigTsDpPackageNameMatchPatternSubRule()],
+  [new TspConfigTsRlcDpPackageNameMatchPatternSubRule()],
 );
 
 const tsDpModularPackageNameTestCases = [
@@ -237,7 +237,7 @@ const tsDpModularPackageNameTestCases = [
       { key: "package-details.name", value: "@azure/aaa-bbb" },
     ),
     success: true,
-    subRules: [new TspConfigTsModularPackageNameMatchPatternSubRule()],
+    subRules: [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
   },
   {
     description: `Validate ts's option: package-details.name does not start with "@azure" for modular clients (invalid case)`,
@@ -248,7 +248,7 @@ const tsDpModularPackageNameTestCases = [
       { key: "package-details.name", value: "azure/aaa-bbb" },
     ),
     success: false,
-    subRules: [new TspConfigTsModularPackageNameMatchPatternSubRule()],
+    subRules: [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
   },
 ];
 

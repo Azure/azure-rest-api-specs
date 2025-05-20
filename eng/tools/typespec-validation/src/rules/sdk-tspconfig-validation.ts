@@ -166,7 +166,10 @@ function skipForManagementPlane(folder: string): SkipResult {
   };
 }
 
-function skipForRLCOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
+function skipForRestLevelClientOrManagementPlaneInTsEmitter(
+  config: any,
+  folder: string,
+): SkipResult {
   const isRLCClient =
     config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== true;
   const shouldSkip = isManagementSdk(folder) || isRLCClient;
@@ -186,7 +189,7 @@ function skipForModularOrManagementPlaneInTsEmitter(config: any, folder: string)
     shouldSkip: shouldSkip,
   };
   if (result.shouldSkip)
-    result.reason = "This rule is only applicable for data plane SDKs with rlc client.";
+    result.reason = "This rule is only applicable for data plane SDKs with rest level client.";
   return result;
 }
 
@@ -259,7 +262,7 @@ export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOption
   }
 }
 
-export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsRlcDpPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-ts",
@@ -273,7 +276,7 @@ export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspconfigEmitte
   }
 }
 
-export class TspConfigTsModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMlcDpPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-ts",
@@ -283,7 +286,7 @@ export class TspConfigTsModularPackageNameMatchPatternSubRule extends TspconfigE
   }
 
   protected skip(config: any, folder: string) {
-    return skipForRLCOrManagementPlaneInTsEmitter(config, folder);
+    return skipForRestLevelClientOrManagementPlaneInTsEmitter(config, folder);
   }
 }
 // ----- Go data plane sub rules -----
@@ -494,8 +497,8 @@ export const defaultRules = [
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
   new TspConfigTsDpPackageDirectorySubRule(),
-  new TspConfigTsDpPackageNameMatchPatternSubRule(),
-  new TspConfigTsModularPackageNameMatchPatternSubRule(),
+  new TspConfigTsRlcDpPackageNameMatchPatternSubRule(),
+  new TspConfigTsMlcDpPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
