@@ -3,7 +3,14 @@
     "api-version": "2025-06-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor"
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "planId": "planId",
+      "term": "term",
+      "subscriptionId": "subscriptionId",
+      "resourceGroup": "resourceGroup",
+      "organizationId": "organizationId"
+    }
   },
   "responses": {
     "200": {
@@ -12,6 +19,9 @@
         "name": "myMonitor",
         "type": "Microsoft.Elastic/monitors",
         "kind": "elastic-hosted-deployment",
+        "sku": {
+          "name": "free_Monthly"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "monitoringStatus": "Enabled",
@@ -43,6 +53,11 @@
           "Environment": "Dev"
         },
         "location": "West US 2"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/resourceGroup/providers/Microsoft.Elastic/monitor/monitorname/resubscribe?api-version=2025-06-01"
       }
     }
   }
