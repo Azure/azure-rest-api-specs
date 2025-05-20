@@ -6039,45 +6039,47 @@
         },
         "endpoint": {
           "description": "The endpoint of the QuickBooks server. (i.e. quickbooks.api.intuit.com)",
-          "type": "object",
-          "x-ms-format": "dfe-string"
+          "type": "object"
         },
         "companyId": {
           "description": "The company ID of the QuickBooks company to authorize.",
-          "type": "object",
-          "x-ms-format": "dfe-string"
+          "type": "object"
         },
         "consumerKey": {
           "description": "The consumer key for OAuth 2.0 authentication.",
-          "type": "object",
-          "x-ms-format": "dfe-string"
+          "type": "object"
         },
         "consumerSecret": {
           "description": "The consumer secret for OAuth 2.0 authentication.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "accessToken": {
           "description": "The access token for OAuth 2.0 authentication.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "accessTokenSecret": {
           "description": "The access token secret is deprecated for OAuth 1.0 authentication. Only used for version 1.0.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "refreshToken": {
           "description": "The refresh token for OAuth 2.0 authentication.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
-          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Only used for version 1.0.",
-          "type": "object",
-          "x-ms-format": "dfe-bool"
+          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
+          "type": "object"
         },
         "encryptedCredential": {
-          "type": "string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
-      }
+      },
+      "required": [
+        "endpoint",
+        "companyId",
+        "consumerKey",
+        "consumerSecret"
+      ]
     },
     "ServiceNowLinkedService": {
       "x-ms-discriminator-value": "ServiceNow",
