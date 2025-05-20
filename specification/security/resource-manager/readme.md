@@ -118,9 +118,6 @@ suppressions:
   - code: OperationsAPIImplementation
     from: assessmentMetadata.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
-  - code: AvoidAdditionalProperties
-    from: assessments.json
-    reason: This is a property used across all API versions. changing it would be a breaking change, and is required for the SDK.
   ```
 
 ### Tag: package-2025-03
