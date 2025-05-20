@@ -151,7 +151,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_ListBySubscription",
-        "description": "Retrieves a list of all New Relic monitor resources either within a specific subscription",
+        "description": "Lists all New Relic monitor resources either within a specific subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -285,17 +285,17 @@
         "tags": [
           "SaaS"
         ],
-        "operationId": "SaaS_List",
+        "operationId": "Activate_SaaS",
         "description": "Resolve the token to get the SaaS resource ID and activate the SaaS resource",
         "parameters": [
-          {
-            "$ref": "#/parameters/PublisherIdParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PublisherIdParameter"
           }
         ],
         "responses": {
@@ -414,7 +414,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_CreateOrUpdate",
-        "description": "Creates a new New Relic monitor resource in your Azure subscription. This sets up the integration between Azure and your New Relic account, enabling observability and monitoring of your Azure resources through New Relic",
+        "description": "Creates a new or updates an existing New Relic monitor resource in your Azure subscription. This sets up the integration between Azure and your New Relic account, enabling observability and monitoring of your Azure resources through New Relic",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -484,7 +484,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_Update",
-        "description": "Update an existing New Relic monitor resource from your Azure subscription",
+        "description": "Updates an existing New Relic monitor resource from your Azure subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -836,7 +836,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_ListHosts",
-        "description": "List all VM resources currently being monitored by the New Relic monitor resource, helping you manage observability",
+        "description": "Lists all VM resources currently being monitored by the New Relic monitor resource, helping you manage observability",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -891,7 +891,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_RefreshIngestionKey",
-        "description": "Refreshes the ingestion key for all monitors, linked to the same account associated to the underline monitor.",
+        "description": "Refreshes the ingestion key for all monitors linked to the same account associated to the underlying monitor.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -985,7 +985,7 @@
         "tags": [
           "ConnectedResources"
         ],
-        "summary": "Retrieve marketplace and organization information mapped to the given New Relic monitor resource",
+        "summary": "Retrieves marketplace and organization information mapped to the given New Relic monitor resource",
         "operationId": "BillingInfo_Get",
         "produces": [
           "application/json"
@@ -1283,7 +1283,7 @@
           "TagRules"
         ],
         "operationId": "TagRules_Delete",
-        "description": "Delete a tag rule set for a given New Relic monitor resource, removing fine-grained control over observability based on resource tags",
+        "description": "Deletes a tag rule set for a given New Relic monitor resource, removing fine-grained control over observability based on resource tags",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1415,7 +1415,7 @@
         "tags": [
           "monitoredSubscriptions"
         ],
-        "summary": "List all the subscriptions currently being monitored by the NewRelic monitor resource.",
+        "summary": "Lists all the subscriptions currently being monitored by the NewRelic monitor resource.",
         "operationId": "MonitoredSubscriptions_List",
         "produces": [
           "application/json"
@@ -1468,7 +1468,7 @@
         "tags": [
           "monitoredSubscriptions"
         ],
-        "summary": "List all the subscriptions currently being monitored by the NewRelic monitor resource.",
+        "summary": "Lists all the subscriptions currently being monitored by the NewRelic monitor resource.",
         "operationId": "MonitoredSubscriptions_Get",
         "produces": [
           "application/json"
@@ -1977,7 +1977,7 @@
         "tags": [
           "Resubscribe"
         ],
-        "summary": "Resubscribe the New Relic Organization of the underline Monitor Resource to be billed by Azure Marketplace",
+        "summary": "Resubscribes the New Relic Organization of the underline Monitor Resource to be billed by Azure Marketplace",
         "operationId": "Monitors_Resubscribe",
         "consumes": [
           "application/json"
@@ -3061,7 +3061,7 @@
       "properties": {
         "saaSResourceId": {
           "type": "string",
-          "description": "saas resource id"
+          "description": "SaaS resource id"
         }
       },
       "description": "SaaS details"
