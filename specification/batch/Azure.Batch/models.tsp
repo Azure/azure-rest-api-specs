@@ -32,8 +32,14 @@ union ImageVerificationType {
 @doc("BatchCertificateState enums")
 union BatchCertificateState {
   string,
+
+  @doc("The Certificate is available for use in Pools.")
   Active: "active",
+
+  @doc("The user has requested that the Certificate be deleted, but the delete operation has not yet completed. You may not reference the Certificate when creating or updating Pools.")
   Deleting: "deleting",
+
+  @doc("The user requested that the Certificate be deleted, but there are Pools that still have references to the Certificate, or it is still installed on one or more Nodes. (The latter can occur if the Certificate has been removed from the Pool, but the Compute Node has not yet restarted. Compute Nodes refresh their Certificates only when they restart.) You may use the cancel Certificate delete operation to cancel the delete, or the delete Certificate operation to retry the delete.")
   DeleteFailed: "deletefailed",
 }
 
