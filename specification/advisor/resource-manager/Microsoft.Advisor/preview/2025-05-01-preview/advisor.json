@@ -404,7 +404,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
+    "/{resourceUri}/providers/Microsoft.Advisor/recommendations": {
       "get": {
         "tags": [
           "GetRecommendations"
@@ -413,7 +413,7 @@
         "operationId": "Recommendations_List",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/resourceUriParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -460,8 +460,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListRecommendations": {
-            "$ref": "./examples/ListRecommendations.json"
+            "ListRecommendationsSubscriptionResourceUri": {
+            "$ref": "./examples/ListRecommendationsSubscriptionResourceUri.json"
+          },
+          "ListRecommendationsServiceGroupResourceUri": {
+            "$ref": "./examples/ListRecommendationsServiceGroupResourceUri.json"
           }
         }
       }
@@ -545,8 +548,11 @@
         },
         "deprecated": false,
         "x-ms-examples": {
-          "GetRecommendationDetail": {
-            "$ref": "./examples/GetRecommendationDetail.json"
+           "GetRecommendationDetailSubscriptionResourceUri": {
+            "$ref": "./examples/GetRecommendationDetailSubscriptionResourceUri.json"
+          },
+          "GetRecommendationDetailServiceGroupResourceUri": {
+            "$ref": "./examples/GetRecommendationDetailServiceGroupResourceUri.json"
           }
         }
       },
@@ -1869,6 +1875,13 @@
       "name": "subscriptionId",
       "in": "path",
       "description": "The Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceUriParameter" :{
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
       "required": true,
       "type": "string"
     },
