@@ -11,6 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Marketplace;
 
+@doc("The Microsoft Marketplace product.")
 @tenantResource
 model Product is ProxyResource<ProductProperties> {
   ...ResourceNameParameter<
@@ -20,10 +21,10 @@ model Product is ProxyResource<ProductProperties> {
   >;
 }
 
-/** Properties of the product */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+@doc("The Microsoft Marketplace product properties.")
 model ProductProperties {
-  /** The unique product id */
+  @doc("The unique product id.")
   uniqueProductId: string;
 }
 
