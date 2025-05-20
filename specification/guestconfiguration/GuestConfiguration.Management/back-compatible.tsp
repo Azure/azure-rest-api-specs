@@ -20,5 +20,6 @@ using Microsoft.GuestConfiguration;
 @@flattenProperty(Operation.properties);
 @@clientName(AssignmentReport, "CommonAssignmentReport", "go");
 @@clientName(GuestConfigurationAssignmentProperties,
-  "GuestConfigurationAssignmentData"
+  "GuestConfigurationAssignmentData",
+  "csharp"
 );
