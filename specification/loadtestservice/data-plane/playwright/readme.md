@@ -37,11 +37,11 @@ These settings apply only when `--tag=2025-07-01-preview` is specified on the co
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
   - preview/2025-07-01-preview/playwright.json
-# suppressions:
-#   - code: ValidResponseCodeRequired
-#     from: playwright.json
-#     reason: Need 302 response code as a product requirement to redirect the client for script execution on remote browsers provided by the service.
-#     where:
-#       - $.paths["/playwrightworkspaces/{workspaceId}/browsers"].get.responses
+suppressions:
+  - code: ValidResponseCodeRequired
+    from: playwright.json
+    reason: Need 302 response code as a product requirement to redirect the client for script execution on remote browsers provided by the service.
+    where:
+      - $.paths["/playwrightworkspaces/{workspaceId}/browsers"].get.responses
 ```
 ---
