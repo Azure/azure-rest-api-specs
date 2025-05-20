@@ -8,6 +8,6 @@ if (!targetDir) {
   process.exit(1);
 }
 else {
-    await main(targetDir);
     console.log(`Running oav-runner on ${targetDir}`);
+    await main(targetDir);
 }

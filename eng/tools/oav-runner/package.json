@@ -5,21 +5,22 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "vitest"
+    "test": "vitest --run"
   },
   "bin": {
-    "invoke-oav": "dist/main.js"
+    "invoke-oav": "dist/cli.js"
   },
   "dependencies": {
-    "oav": "3.5.1",
     "@azure-tools/specs-shared": "file:../../../.github/shared",
     "js-yaml": "^4.1.0",
+    "oav": "3.5.1",
     "simple-git": "^3.27.0"
   },
   "devDependencies": {
-    "vitest": "^3.0.7",
+    "@types/glob": "^8.1.0",
+    "@types/node": "~20.11.0",
     "typescript": "~5.8.2",
-    "@types/node": "~20.11.0"
+    "vitest": "^3.0.7"
   },
   "engines": {
     "node": ">=20.0.0",

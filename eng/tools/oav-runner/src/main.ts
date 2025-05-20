@@ -3,10 +3,116 @@
 // The original ordering of this code is pulled directly from the original at
 // openapi-alps#public/rest-api-specs-scripts/src/modelValidationPipeline.ts
 import * as oav from 'oav';
+import * as path from 'path';
+// import * as glob from 'glob';
+import * as fs from 'fs';
 
 // use ,specification, example to filter the changed files to just specs and examples
-import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { getChangedFiles, swagger } from "@azure-tools/specs-shared/changed-files";
 
+export async function main(rootDirectory: string): Promise<Number> {
+    let errors: Array<string> = [];
+
+    console.log(`Executing checks in ${rootDirectory}`);
+
+    const changedFiles = await getChangedFiles({
+      cwd: rootDirectory
+    })
+
+    const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
+
+    // todo: this will have to be hardened a bit. targeting the swagger file selection first
+    // as it is an easily testable operation.
+    for (const swaggerFile of swaggerFiles) {
+      try {
+        oav.validateSpec(swaggerFile, {});
+      }
+      catch (e) {
+        // todo: add error handling beyond logging
+        console.log(e);
+      }
+    }
+
+    if (errors){
+        return 1;
+    }
+    return 0;
+}
+
+
+export async function processFilesToSpecificationList(rootDirectory: string, files: string[]): Promise<Array<string>> {
+    // this is implemented in existing example and spec validation pipeline simply by pulling _all_ of the swagger files
+    // and then filtering them down to just the ones that are in the changed files list.
+
+    // we might have to do that, but as far as I can tell, the "pull everything" approach only works for the nonPR. If its PR
+    // it literally never uses the total result.
+    return files.filter((file) => {
+      if (
+          file.match(/.*\/cadl-project.yaml$/gi) !== null ||
+          file.match(/.*\/package.json$/gi) !== null ||
+          file.match(/.*\/sdk-suppressions.yaml$/gi) !== null ||
+          file.match(/.*\/suppressions.yaml$/gi) !== null ||
+          file.match(/.*\/tspconfig.yaml$/gi) !== null ||
+          file.match(/.*\/cspell.yaml$/gi) !== null
+        ) {
+          return false;
+        }
+        if (file.match(/.*\/scenarios\/*/gi) !== null) {
+          return false;
+        }
+        if (
+          file.match(/.*(json|yaml)$/gi) == null ||
+          file.match(/.*specification\/.*/gi) == null
+        ) {
+          return false;
+        }
+        if (file.match(/.*\/examples\/*/gi) !== null) {
+          return false;
+        }
+        if (file.match(/.*\/quickstart-templates\/*/gi) !== null) {
+          return false;
+        }
+
+        let swaggerResult = swagger(file);
+
+        // if it's a swagger file, we should check to see if it exists
+        // as a deleted file will also show up in the changed files list
+        if (swaggerResult && fs.existsSync(path.join(rootDirectory, file))) {
+          return true
+        }
+        return false;
+      });
+}
+
+
+// keep these around for now, but they are not used in the current implementation
+// the biggest thing is that I'm uncertain if I will need to keep some sort of this globbing around to support when _only_ examples
+// are changed, for instance.
+
+// export const getSwaggers = () => {
+//   const getGlobPath = () =>
+//     path.join(__dirname, "../", "../", "/specification/**/*.json");
+//     return glob.sync(getGlobPath(), {
+//     ignore: [
+//       "**/scenarios/**/*.json",
+//       "**/examples/**/*.json",
+//       "**/quickstart-templates/*.json",
+//       "**/schema/*.json",
+//     ],
+//   });
+// };
+
+// export const getExamples = () => {
+//   const exampleGlobPath = path.join(
+//     __dirname,
+//     "../",
+//     "../",
+//     "/specification/**/examples/**/*.json"
+//   );
+//   return glob.sync(exampleGlobPath);
+// };
+
+// this is some code from modelValidationPipeline.ts that is not used in the current implementation
 // import jsYaml from 'js-yaml';
 
 // // type ErrorType = "error" | "warning";
@@ -36,28 +142,3 @@ import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 // //     }
 // //   }
 // // }
-
-export function greet(name: string): string {
-  return `Hello, ${name}!`;
-}
-
-export async function main(rootDirectory: string): Promise<Number> {
-    let errors: Array<string> = [];
-
-    const oavType = new oav.LiveValidator({}, undefined);
-    console.log(oavType);
-    console.log(rootDirectory);
-
-    let results = await getChangedFiles({
-      cwd: rootDirectory
-    })
-
-    for (const result of results) {
-      console.log(result);
-    }
-
-    if (errors){
-        return 1;
-    }
-    return 0;
-}
