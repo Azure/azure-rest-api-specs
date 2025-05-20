@@ -38,6 +38,9 @@ model WidgetSuite {
 
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
+
+  @doc("The faked shared model list.")
+  sharedModelList?: FakedSharedModel[];
 }
 
 interface Widgets {
