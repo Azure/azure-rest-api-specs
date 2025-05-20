@@ -176,7 +176,7 @@ union JobType {
 
 @doc("A job resource type indicates the kind of jobresource.")
 union JobResourceType {
- @doc("Abstract job resource - invalid.")
+  @doc("Abstract job resource - invalid.")
   Invalid: "Invalid",
 
   @doc("Recovery Orchestration Plan created job resource.")
