@@ -260,35 +260,98 @@
           "$ref": "#/definitions/AssessmentStatus"
         },
         "risk": {
-          "type": "string",
-          "description": "The risk level of the assessment.",
-          "enum": [
-            "Low",
-            "Medium",
-            "High",
-            "Critical"
-          ],
-          "x-ms-enum": {
-            "name": "RiskLevel",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Low",
-                "description": "Low risk"
+          "type": "object",
+          "description": "External model of risk result",
+          "properties": {
+            "riskFactors": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
               },
-              {
-                "value": "Medium",
-                "description": "Medium risk"
-              },
-              {
-                "value": "High",
-                "description": "High risk"
-              },
-              {
-                "value": "Critical",
-                "description": "Critical risk"
+              "description": "The factors of the risk adding base factor"
+            },
+            "level": {
+              "type": "string",
+              "description": "The risk level",
+              "enum": [
+                "Low",
+                "Medium",
+                "High",
+                "Critical"
+              ],
+              "x-ms-enum": {
+                "name": "RiskLevel",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Low",
+                    "description": "Low risk"
+                  },
+                  {
+                    "value": "Medium",
+                    "description": "Medium risk"
+                  },
+                  {
+                    "value": "High",
+                    "description": "High risk"
+                  },
+                  {
+                    "value": "Critical",
+                    "description": "Critical risk"
+                  }
+                ]
               }
-            ]
+            },
+            "attackPathsReferences": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The attack paths references of the risk"
+            },
+            "paths": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Unique identifier for the path"
+                  },
+                  "nodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Node identifier"
+                        },
+                        "nodePropertiesLabel": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Properties associated with the node"
+                        }
+                      }
+                    }
+                  },
+                  "edges": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    },
+                    "description": "Connections between nodes"
+                  }
+                }
+              }
+            },
+            "isContextualRisk": {
+              "type": "boolean",
+              "description": "Indicates if the risk is contextual or static"
+            }
           }
         }
       },
