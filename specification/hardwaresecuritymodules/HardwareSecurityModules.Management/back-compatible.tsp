@@ -29,8 +29,6 @@ using Microsoft.HardwareSecurityModules;
 @@clientName(DedicatedHsms.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DedicatedHsm.properties);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RestoreResult.properties);
 @@clientName(CloudHsmClusters.validateBackupProperties::parameters.body,
   "backupRequestProperties"
 );
