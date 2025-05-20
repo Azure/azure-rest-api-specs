@@ -1,0 +1,80 @@
+{
+  "title": "DataflowGraph_Get_MaximumSet",
+  "operationId": "DataflowGraph_Get",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-123",
+    "dataflowProfileName": "resource-123",
+    "dataflowGraphName": "resource-123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "mode": "Enabled",
+          "requestDiskPersistence": "Enabled",
+          "nodes": [
+            {
+              "type": "Source",
+              "name": "source",
+              "sourceSettings": {
+                "endpointRef": "my-endpoint",
+                "dataSources": [
+                  "source1"
+                ]
+              }
+            },
+            {
+              "type": "Graph",
+              "name": "graph",
+              "graphSettings": {
+                "registryEndpointRef": "my-registry-endpoint",
+                "artifact": "my-wasm-module:1.4.3"
+              }
+            },
+            {
+              "type": "Destination",
+              "name": "destination",
+              "destinationSettings": {
+                "endpointRef": "my-endpoint",
+                "dataDestination": "destination1"
+              }
+            }
+          ],
+          "nodeConnections": [
+            {
+              "from": {
+                "name": "wsqbccd",
+                "schema": {
+                  "serializationFormat": "Delta",
+                  "schemaRef": "gkyqreiunkvdgggy"
+                }
+              },
+              "to": {
+                "name": "dqvkpqshglptwrjfeblfzbofmkfktzbjhidsvqctmbzocbtgtkbgrayg"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123/dataflowGraphs/resource-name123",
+        "name": "iwhrd",
+        "type": "advacc",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
+  }
+}
