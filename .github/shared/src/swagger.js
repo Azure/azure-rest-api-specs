@@ -16,7 +16,7 @@ export class Swagger {
   /** @type {string} absolute path */
   #path;
 
-  /** @type {Set<Swagger> | undefined} */
+  /** @type {Map<string, Swagger> | undefined} */
   #refs;
 
   /** @type {SpecModel | undefined} backpointer to owning SpecModel */
@@ -35,7 +35,7 @@ export class Swagger {
   }
 
   /**
-   * @returns {Promise<Set<Swagger>>}
+   * @returns {Promise<Map<string, Swagger>>}
    */
   async getRefs() {
     if (!this.#refs) {
@@ -50,14 +50,14 @@ export class Swagger {
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 
-      this.#refs = new Set(
-        refPaths.map(
-          (p) =>
-            new Swagger(p, {
-              logger: this.#logger,
-              specModel: this.#specModel,
-            }),
-        ),
+      this.#refs = new Map(
+        refPaths.map((p) => {
+          const swagger = new Swagger(p, {
+            logger: this.#logger,
+            specModel: this.#specModel,
+          });
+          return [swagger.path, swagger];
+        }),
       );
     }
 
@@ -83,7 +83,7 @@ export class Swagger {
           : this.#path,
       refs: options?.includeRefs
         ? await mapAsync(
-            [...(await this.getRefs())].sort((a, b) =>
+            [...(await this.getRefs()).values()].sort((a, b) =>
               a.path.localeCompare(b.path),
             ),
             async (s) =>
