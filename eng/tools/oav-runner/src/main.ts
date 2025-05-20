@@ -74,10 +74,12 @@ export async function processFilesToSpecificationList(rootDirectory: string, fil
         }
 
         let swaggerResult = swagger(file);
+        let targetFile = path.join(rootDirectory, file);
+        console.log(`Checking ${targetFile}`);
 
         // if it's a swagger file, we should check to see if it exists
         // as a deleted file will also show up in the changed files list
-        if (swaggerResult && fs.existsSync(path.join(rootDirectory, file))) {
+        if (swaggerResult && fs.existsSync(targetFile)) {
           return true
         }
         return false;
