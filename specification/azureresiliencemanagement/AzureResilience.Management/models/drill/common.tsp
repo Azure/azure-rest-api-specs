@@ -4,12 +4,11 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
+using OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
@@ -47,6 +46,9 @@ model FaultDetails {
   @minLength(1)
   @maxLength(100)
   faultName: string;
+
+  @doc("ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource and not the actual resource which is to be simulated for faulting.")
+  targetResourceId: armResourceIdentifier;
 }
 
 /**

@@ -5,12 +5,16 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./enums.tsp";
+import "./drillRunChildJob.models.tsp";
+import "./drillRunResources.models.tsp";
+import "./drillRunChaosJob.models.tsp";
+import "./drillRunChaosJobResources.models.tsp";
 
+using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
+using OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
@@ -32,7 +36,7 @@ model DrillRun is ProxyResource<DrillRunProperties> {
 @doc("Properties of the Resiliency DrillRun.")
 model DrillRunProperties extends JobProperties {
   @doc("Discriminator for the Job object hierarchy.")
-  jobType: JobType.DrillOober;
+  jobType: JobType.DrillRun;
 
   @doc("Parent Drill resource.")
   @visibility(Lifecycle.Read)
@@ -47,7 +51,17 @@ model DrillRunProperties extends JobProperties {
   metricValue: string;
 
   @doc("Drill mode.")
+  @visibility(Lifecycle.Read)
   drillMode: DrillMode;
+
+  @doc("Attestation of this Drill Run.")
+  @visibility(Lifecycle.Read)
+  attestation: DrillAttestation;
+
+  @doc("Notes for this Drill.")
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  notes: string[];
 }
 
 @doc("Request body for AddNotes API.")
@@ -104,5 +118,15 @@ model MarkAsCompleteResponse {
   @doc("Matrix of Actions supported on Operations.")
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  supportedActions: string[][];
+  supportedVerbsForStage: SupportedVerbsForStage[];
+}
+
+@doc("Model for supported verbs for stage.")
+model SupportedVerbsForStage {
+  @doc("Name of stage.")
+  drillRunStage: DrillRunStages;
+
+  @doc("Supported Verbs for stage.")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  supportedVerbs: DrillRunOperationVerbs[];
 }

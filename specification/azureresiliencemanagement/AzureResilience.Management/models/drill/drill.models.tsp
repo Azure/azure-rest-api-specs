@@ -6,14 +6,14 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 import "./enums.tsp";
 import "./common.tsp";
-import "../../common/common.tsp";
-import "../../common/Job.tsp";
+import "../common/common.tsp";
+import "../common/Job.tsp";
 
+using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
+using OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
@@ -49,7 +49,7 @@ model DrillProperties {
   ]>;
 
   @doc("Metric properties.")
-  metricsProperties: MetricsProperties;
+  metricsProperties?: MetricsProperties;
 
   @doc("ROPlan properties.")
   roPlanProperties: RoPlanProperties;
@@ -83,6 +83,12 @@ model DrillProperties {
   @doc("Last sync time.")
   @visibility(Lifecycle.Read)
   lastSyncTime: utcDateTime;
+
+  /*
+  @doc("Managed RG v2 properties.")
+  @visibility(Lifecycle.Read)
+  managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
+*/
 
   @doc("The discriminator for the Drill object hierarchy.")
   @visibility(Lifecycle.Create)
@@ -243,20 +249,6 @@ model ChaosExperimentProperties {
   ]>;
 }
 
-/*
-@doc("Definition of associated identity linked with the various resources.")
-model AssociatedIdentity {
-  @doc("Identity type linked with the resource")
-  type: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
-
-  @doc("User assigned identity id linked with the resource")
-  userAssignedIdentity?: armResourceIdentifier<[
-  { 
-    type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-  }]>;
-}
-*/
-
 @doc("Reason why the Drill is in NeedsAttention state, and not ready to run.")
 model AttentionReason {
   @doc("Drill object does not have the necessary RBAC to run the chaos experiment.")
@@ -374,7 +366,7 @@ model IncludeOrUpdateResource {
   resourceId: armResourceIdentifier<[]>;
 
   @doc("Fault properties.")
-  faultProperties: FaultProperties;
+  faultProperties?: FaultProperties;
 }
 
 @doc("Response body of the AddOrUpdateResources API.")
@@ -400,7 +392,7 @@ model FailedDrillResource {
   @doc("Resource Id.")
   resourceId: armResourceIdentifier<[]>;
 
-  @doc("T&C assignment error.")
+  @doc("T and C assignment error.")
   @visibility(Lifecycle.Read)
   tAndcAssignmentError: ErrorDetails;
 

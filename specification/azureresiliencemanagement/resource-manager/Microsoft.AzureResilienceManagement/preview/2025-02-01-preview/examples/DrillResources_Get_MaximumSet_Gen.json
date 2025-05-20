@@ -11,7 +11,7 @@
     "200": {
       "body": {
         "properties": {
-          "resourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/drillResource1",
+          "resourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1",
           "resourceType": "Microsoft.Compute/virtualMachines",
           "inclusionState": "Excluded",
           "roInclusionState": "Excluded",
@@ -19,19 +19,22 @@
           "faultState": "SystemNative",
           "faultProperties": {
             "availableFaults": {
-              "faultUrn": "iqxyrb",
-              "faultName": "miodmhraajzmmashiknlbkgdtxabzxexunwypvexaulzhsspjgflsawwdkqrdodpdteihxuckdyiv"
+              "faultUrn": "urn:csci:microsoft:virtualMachine:shutdown/1.0",
+              "faultName": "shutdown",
+              "targetResourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1"
             },
             "defaultFault": {
-              "faultUrn": "iqxyrb",
-              "faultName": "miodmhraajzmmashiknlbkgdtxabzxexunwypvexaulzhsspjgflsawwdkqrdodpdteihxuckdyiv"
+              "faultUrn": "urn:csci:microsoft:virtualMachine:shutdown/1.0",
+              "faultName": "shutdown",
+              "targetResourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1"
             },
             "overriddenDefaultFault": {
               "faultUrn": "iqxyrb",
-              "faultName": "miodmhraajzmmashiknlbkgdtxabzxexunwypvexaulzhsspjgflsawwdkqrdodpdteihxuckdyiv"
+              "faultName": "miodmhraajzmmashiknlbkgdtxabzxexunwypvexaulzhsspjgflsawwdkqrdodpdteihxuckdyiv",
+              "targetResourceId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/viveksi/providers/Microsoft.Network/networkSecurityGroups/viveksinensg"
             },
             "customFault": {
-              "faultName": "umofuzwgczqwyzcoakmrdrkjknykdonhypxibwrweggltsmjayvnlzroxdfalwkfsqvuqtfwhhzcnemndbgxdiciqs",
+              "faultName": "customScriptFault",
               "scriptResourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Automation/automationAccounts/abhinkAcc/runbooks/viveksi"
             }
           },

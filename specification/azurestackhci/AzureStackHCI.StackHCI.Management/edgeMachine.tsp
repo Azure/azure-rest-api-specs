@@ -74,9 +74,9 @@ interface EdgeMachines {
   /**
    * A long-running resource action.
    */
-  markFailedMachineState is ArmResourceActionAsync<
+  setFailedMachineState is ArmResourceActionAsync<
     EdgeMachine,
-    MarkFailedMachineStateRequest,
+    SetFailedMachineStateRequest,
     EdgeMachine
   >;
 
@@ -139,7 +139,7 @@ model EdgeMachineProperties {
   @Azure.ResourceManager.identifiers(#["labelName"])
   labels?: Labels[];
 
-  @doc("Tracks the ID of the consuming resource, marking the machine as in-use.")
+  @doc("Tracks the ID of the consuming resource, Settingthe machine as in-use.")
   @visibility(Lifecycle.Read)
   claimedBy?: string;
 
@@ -203,8 +203,8 @@ model EdgeMachineValidateRequest {
   additionalInfo?: string;
 }
 
-@doc("The Mark Failed request for Edge Machine..")
-model MarkFailedMachineStateRequest {
+@doc("The Set Failed request for Edge Machine..")
+model SetFailedMachineStateRequest {
   @doc("Failure details to set why edge machine set to Failed state.")
   failureDetails?: FailureDetails;
 }
