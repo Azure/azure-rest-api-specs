@@ -56,7 +56,7 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/{providers}/{resourceUri}/connectors": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/connectors": {
       "get": {
         "operationId": "Linker_List",
         "tags": [
@@ -68,18 +68,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "providers",
+            "name": "resourceUri",
             "in": "path",
             "description": "{resourceUri}",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -104,524 +98,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      }
-    },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}": {
-      "get": {
-        "operationId": "Linker_Get",
-        "tags": [
-          "Linker"
-        ],
-        "description": "Returns Linker resource for a given name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "description": "The name of the LinkerResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkerName",
-            "in": "path",
-            "description": "The name Linker resource.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LinkerResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Linker": {
-            "$ref": "./examples/Linker.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Linker_CreateOrUpdate",
-        "tags": [
-          "Linker"
-        ],
-        "description": "Create or update Linker resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "description": "The name of the LinkerResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkerName",
-            "in": "path",
-            "description": "The name Linker resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Linker details.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkerResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'LinkerResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LinkerResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'LinkerResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LinkerResource"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PutLinker": {
-            "$ref": "./examples/PutLinker.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "Linker_Update",
-        "tags": [
-          "Linker"
-        ],
-        "description": "Operation to update an existing Linker.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "description": "The name of the LinkerResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkerName",
-            "in": "path",
-            "description": "The name Linker resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Linker details.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkerPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LinkerResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'LinkerResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LinkerResource"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PatchLinker": {
-            "$ref": "./examples/PatchLinker.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Linker_Delete",
-        "tags": [
-          "Linker"
-        ],
-        "description": "Delete a Linker.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "description": "The name of the LinkerResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkerName",
-            "in": "path",
-            "description": "The name Linker resource.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteLinker": {
-            "$ref": "./examples/DeleteLinker.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/generateConfigurations": {
-      "post": {
-        "operationId": "Linkers_GenerateConfigurations",
-        "tags": [
-          "Linker"
-        ],
-        "description": "Generate configurations for a Linker.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "description": "The name of the LinkerResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkerName",
-            "in": "path",
-            "description": "The name Linker resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Connection Info, including format, secret store, etc",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GenerateConfiguration": {
-            "$ref": "./examples/LinkerGenerateConfigurations.json"
-          }
-        }
-      }
-    },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/listConfigurations": {
-      "post": {
-        "operationId": "Linker_ListConfigurations",
-        "tags": [
-          "Linker"
-        ],
-        "description": "list source configurations for a Linker.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "description": "The name of the LinkerResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkerName",
-            "in": "path",
-            "description": "The name Linker resource.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetConfiguration": {
-            "$ref": "./examples/GetConfigurations.json"
-          }
-        }
-      }
-    },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/validateLinker": {
-      "post": {
-        "operationId": "Linker_Validate",
-        "tags": [
-          "Linker"
-        ],
-        "description": "Validate a Linker.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providers",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "description": "The name of the LinkerResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkerName",
-            "in": "path",
-            "description": "The name Linker resource.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ValidateOperationResult"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ValidateLinkerSuccess": {
-            "$ref": "./examples/ValidateLinkerSuccess.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/{resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations": {
@@ -707,7 +183,7 @@
         }
       }
     },
-    "/Microsoft.ServiceLinker/{dryruns}/{resourceUri}/{dryrunName}": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns/{dryrunName}": {
       "get": {
         "operationId": "Linkers_GetDryrun",
         "tags": [
@@ -719,23 +195,16 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "dryruns",
-            "in": "path",
-            "description": "The name of the DryrunResource",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "dryrunName",
             "in": "path",
-            "description": "The name of dryrun.",
+            "description": "The name of the DryrunResource",
             "required": true,
             "type": "string"
           }
@@ -771,23 +240,16 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "dryruns",
-            "in": "path",
-            "description": "The name of the DryrunResource",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "dryrunName",
             "in": "path",
-            "description": "The name of dryrun.",
+            "description": "The name of the DryrunResource",
             "required": true,
             "type": "string"
           },
@@ -853,23 +315,16 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "dryruns",
-            "in": "path",
-            "description": "The name of the DryrunResource",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "dryrunName",
             "in": "path",
-            "description": "The name of dryrun.",
+            "description": "The name of the DryrunResource",
             "required": true,
             "type": "string"
           },
@@ -932,23 +387,16 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "dryruns",
-            "in": "path",
-            "description": "The name of the DryrunResource",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "dryrunName",
             "in": "path",
-            "description": "The name of dryrun.",
+            "description": "The name of the DryrunResource",
             "required": true,
             "type": "string"
           }
@@ -972,6 +420,433 @@
             "$ref": "./examples/DeleteDryrun.json"
           }
         }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}": {
+      "get": {
+        "operationId": "Linker_Get",
+        "tags": [
+          "Linker"
+        ],
+        "description": "Returns Linker resource for a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "{resourceUri}",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "description": "The name of the LinkerResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Linker": {
+            "$ref": "./examples/Linker.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Linker_CreateOrUpdate",
+        "tags": [
+          "Linker"
+        ],
+        "description": "Create or update Linker resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "{resourceUri}",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "description": "The name of the LinkerResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Linker details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LinkerResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'LinkerResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutLinker": {
+            "$ref": "./examples/PutLinker.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Linker_Update",
+        "tags": [
+          "Linker"
+        ],
+        "description": "Operation to update an existing Linker.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "{resourceUri}",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "description": "The name of the LinkerResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Linker details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkerPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'LinkerResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchLinker": {
+            "$ref": "./examples/PatchLinker.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Linker_Delete",
+        "tags": [
+          "Linker"
+        ],
+        "description": "Delete a Linker.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "{resourceUri}",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "description": "The name of the LinkerResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteLinker": {
+            "$ref": "./examples/DeleteLinker.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/generateConfigurations": {
+      "post": {
+        "operationId": "Linkers_GenerateConfigurations",
+        "tags": [
+          "Linker"
+        ],
+        "description": "Generate configurations for a Linker.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "{resourceUri}",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "description": "The name of the LinkerResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Connection Info, including format, secret store, etc",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateConfiguration": {
+            "$ref": "./examples/LinkerGenerateConfigurations.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/listConfigurations": {
+      "post": {
+        "operationId": "Linker_ListConfigurations",
+        "tags": [
+          "Linker"
+        ],
+        "description": "list source configurations for a Linker.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "{resourceUri}",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "description": "The name of the LinkerResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfiguration": {
+            "$ref": "./examples/GetConfigurations.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/validateLinker": {
+      "post": {
+        "operationId": "Linker_Validate",
+        "tags": [
+          "Linker"
+        ],
+        "description": "Validate a Linker.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "{resourceUri}",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "linkers",
+            "in": "path",
+            "description": "The name of the LinkerResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateLinkerSuccess": {
+            "$ref": "./examples/ValidateLinkerSuccess.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.ServiceLinker/configurationNames": {

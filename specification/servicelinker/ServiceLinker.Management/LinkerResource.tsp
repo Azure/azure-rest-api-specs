@@ -133,12 +133,15 @@ interface LinkerOps
         ...ApiVersionParameter,
 
         /** {resourceUri} */
-        @path @segment("{resourceUri}") providers: string,
+        @path(#{ allowReserved: true })
+        resourceUri: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = LinkerResource,
         KeyName = "linkers",
-        SegmentName = "Microsoft.ServiceLinker",
+        SegmentName = "linkerName",
         NamePattern = ""
       >>
     > {}
@@ -148,42 +151,12 @@ interface Linker {
   /**
    * Returns Linker resource for a given name.
    */
-  get is LinkerOps.Read<
-    LinkerResource,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name Linker resource.
-       */
-      @path
-      linkerName: string;
-    }
-  >;
+  get is LinkerOps.Read<LinkerResource>;
 
   /**
    * Create or update Linker resource.
    */
-  createOrUpdate is LinkerOps.CreateOrUpdateAsync<
-    LinkerResource,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name Linker resource.
-       */
-      @path
-      linkerName: string;
-    }
-  >;
+  createOrUpdate is LinkerOps.CreateOrUpdateAsync<LinkerResource>;
 
   /**
    * Operation to update an existing Linker.
@@ -192,19 +165,6 @@ interface Linker {
   update is LinkerOps.CustomPatchAsync<
     LinkerResource,
     PatchModel = LinkerPatch,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name Linker resource.
-       */
-      @path
-      linkerName: string;
-    },
     Response = ArmResponse<LinkerResource> | ArmResourceCreatedResponse<LinkerResource>,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
@@ -217,19 +177,6 @@ interface Linker {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is LinkerOps.DeleteWithoutOkAsync<
     LinkerResource,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name Linker resource.
-       */
-      @path
-      linkerName: string;
-    },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
@@ -237,17 +184,7 @@ interface Linker {
   /**
    * Returns list of Linkers which connects to the resource. which supports to config both application and target service during the resource provision.
    */
-  list is LinkerOps.List<
-    LinkerResource,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-    },
-    Response = ArmResponse<ResourceList>
-  >;
+  list is LinkerOps.List<LinkerResource, Response = ArmResponse<ResourceList>>;
 
   /**
    * Validate a Linker.
@@ -256,20 +193,7 @@ interface Linker {
   validate is LinkerOps.ActionAsync<
     LinkerResource,
     void,
-    ArmResponse<ValidateOperationResult>,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name Linker resource.
-       */
-      @path
-      linkerName: string;
-    }
+    ArmResponse<ValidateOperationResult>
   >;
 
   /**
@@ -278,20 +202,7 @@ interface Linker {
   listConfigurations is LinkerOps.ActionSync<
     LinkerResource,
     void,
-    ArmResponse<ConfigurationResult>,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name Linker resource.
-       */
-      @path
-      linkerName: string;
-    }
+    ArmResponse<ConfigurationResult>
   >;
 
   /**
@@ -308,20 +219,7 @@ interface Linker {
       @bodyRoot
       parameters?: ConfigurationInfo;
     },
-    ArmResponse<ConfigurationResult>,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name Linker resource.
-       */
-      @path
-      linkerName: string;
-    }
+    ArmResponse<ConfigurationResult>
   >;
 }
 

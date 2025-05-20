@@ -103,67 +103,42 @@ interface LinkersOps
     > {}
 
 @armResourceOperations
+interface LinkersGetOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+
+        @path(#{ allowReserved: true })
+        resourceUri: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = DryrunResource,
+        KeyName = "dryrunName",
+        SegmentName = "dryruns",
+        NamePattern = ""
+      >>
+    > {}
+@armResourceOperations
 interface Linkers {
   /**
    * get a dryrun job
    */
-  getDryrun is LinkersOps.Read<
-    DryrunResource,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name of dryrun.
-       */
-      @path
-      dryrunName: string;
-    }
-  >;
+  getDryrun is LinkersGetOps.Read<DryrunResource>;
 
   /**
    * create a dryrun job to do necessary check before actual creation
    */
-  createDryrun is LinkersOps.CreateOrUpdateAsync<
-    DryrunResource,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name of dryrun.
-       */
-      @path
-      dryrunName: string;
-    }
-  >;
+  createDryrun is LinkersGetOps.CreateOrUpdateAsync<DryrunResource>;
 
   /**
    * add a dryrun job to do necessary check before actual creation
    */
   @patch(#{ implicitOptionality: false })
-  updateDryrun is LinkersOps.CustomPatchAsync<
+  updateDryrun is LinkersGetOps.CustomPatchAsync<
     DryrunResource,
     PatchModel = DryrunPatch,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name of dryrun.
-       */
-      @path
-      dryrunName: string;
-    },
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -171,22 +146,7 @@ interface Linkers {
   /**
    * delete a dryrun job
    */
-  deleteDryrun is LinkersOps.DeleteSync<
-    DryrunResource,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      /**
-       * The name of dryrun.
-       */
-      @path
-      dryrunName: string;
-    }
-  >;
+  deleteDryrun is LinkersGetOps.DeleteSync<DryrunResource>;
 
   /**
    * list dryrun jobs

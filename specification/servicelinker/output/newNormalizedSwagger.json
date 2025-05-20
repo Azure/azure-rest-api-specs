@@ -17,21 +17,16 @@
     "application/json"
   ],
   "paths": {
-    "/{resourceUri}/{providers}/{resourceUri}/connectors": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/connectors": {
       "get": {
         "operationId": "Linker_List",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -58,16 +53,45 @@
         }
       }
     },
-    "/{resourceUri}/{providers}/{resourceUri}/dryruns": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations": {
       "get": {
-        "operationId": "Linkers_ListDryrun",
+        "operationId": "Linkers_ListDaprConfigurations",
         "parameters": [
           {
-            "name": "providers",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DaprConfigurationList"
+            }
           },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDaprConfigurations": {
+            "$ref": "./examples/GetDaprConfigurations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns": {
+      "get": {
+        "operationId": "Linkers_ListDryrun",
+        "parameters": [
           {
             "name": "resourceUri",
             "in": "path",
@@ -99,27 +123,16 @@
         }
       }
     },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{dryruns}/{resourceUri}/{dryrunName}": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns/{dryrunName}": {
       "get": {
         "operationId": "Linkers_GetDryrun",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "dryrunName",
@@ -152,22 +165,11 @@
         "operationId": "Linkers_CreateDryrun",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "dryrunName",
@@ -218,22 +220,11 @@
         "operationId": "Linkers_UpdateDryrun",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "dryrunName",
@@ -281,22 +272,11 @@
         "operationId": "Linkers_DeleteDryrun",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "dryrunName",
@@ -326,30 +306,19 @@
         }
       }
     },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}": {
       "get": {
         "operationId": "Linker_Get",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -379,25 +348,14 @@
         "operationId": "Linker_CreateOrUpdate",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -445,25 +403,14 @@
         "operationId": "Linker_Update",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -507,25 +454,14 @@
         "operationId": "Linker_Delete",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -559,30 +495,19 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/generateConfigurations": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/generateConfigurations": {
       "post": {
         "operationId": "Linkers_GenerateConfigurations",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -616,30 +541,19 @@
         }
       }
     },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/listConfigurations": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/listConfigurations": {
       "post": {
         "operationId": "Linker_ListConfigurations",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -666,30 +580,19 @@
         }
       }
     },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/validateLinker": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/validateLinker": {
       "post": {
         "operationId": "Linker_Validate",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -718,41 +621,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations": {
-      "get": {
-        "operationId": "Linkers_ListDaprConfigurations",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DaprConfigurationList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetDaprConfigurations": {
-            "$ref": "./examples/GetDaprConfigurations.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     },
     "/providers/Microsoft.ServiceLinker/configurationNames": {

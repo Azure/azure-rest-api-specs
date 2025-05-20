@@ -11,225 +11,6 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns__deleted": {
-      "get": {
-        "operationId": "Linkers_ListDryrun",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListDryrun": {
-            "$ref": "./examples/ListDryrun.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns/{dryrunName}__deleted": {
-      "get": {
-        "operationId": "Linkers_GetDryrun",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetDryrun": {
-            "$ref": "./examples/GetDryrun.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Linkers_CreateDryrun",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PutDryrun": {
-            "$ref": "./examples/PutDryrun.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "Linkers_UpdateDryrun",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DryrunPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PatchDryrun": {
-            "$ref": "./examples/PatchDryrun.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "Linkers_DeleteDryrun",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteDryrun": {
-            "$ref": "./examples/DeleteDryrun.json"
-          }
-        }
-      }
-    },
     "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers__deleted": {
       "get": {
         "operationId": "Linker_List",
@@ -1078,21 +859,16 @@
         }
       }
     },
-    "/{resourceUri}/{providers}/{resourceUri}/connectors__added": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/connectors__added": {
       "get": {
         "operationId": "Linker_List",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -1119,298 +895,19 @@
         }
       }
     },
-    "/{resourceUri}/{providers}/{resourceUri}/dryruns__added": {
-      "get": {
-        "operationId": "Linkers_ListDryrun",
-        "parameters": [
-          {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListDryrun": {
-            "$ref": "./examples/ListDryrun.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{dryruns}/{resourceUri}/{dryrunName}__added": {
-      "get": {
-        "operationId": "Linkers_GetDryrun",
-        "parameters": [
-          {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetDryrun": {
-            "$ref": "./examples/GetDryrun.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Linkers_CreateDryrun",
-        "parameters": [
-          {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PutDryrun": {
-            "$ref": "./examples/PutDryrun.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "Linkers_UpdateDryrun",
-        "parameters": [
-          {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DryrunPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PatchDryrun": {
-            "$ref": "./examples/PatchDryrun.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "Linkers_DeleteDryrun",
-        "parameters": [
-          {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryruns",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dryrunName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteDryrun": {
-            "$ref": "./examples/DeleteDryrun.json"
-          }
-        }
-      }
-    },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}__added": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}__added": {
       "get": {
         "operationId": "Linker_Get",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1440,25 +937,14 @@
         "operationId": "Linker_CreateOrUpdate",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1506,25 +992,14 @@
         "operationId": "Linker_Update",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1568,25 +1043,14 @@
         "operationId": "Linker_Delete",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1620,30 +1084,19 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/generateConfigurations__added": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/generateConfigurations__added": {
       "post": {
         "operationId": "Linkers_GenerateConfigurations",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1677,30 +1130,19 @@
         }
       }
     },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/listConfigurations__added": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/listConfigurations__added": {
       "post": {
         "operationId": "Linker_ListConfigurations",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1727,30 +1169,19 @@
         }
       }
     },
-    "/{resourceUri}/{providers}/Microsoft.ServiceLinker/{linkers}/{resourceUri}/{linkerName}/validateLinker__added": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/validateLinker__added": {
       "post": {
         "operationId": "Linker_Validate",
         "parameters": [
           {
-            "name": "providers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "linkers",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkerName",
+            "name": "linkers",
             "in": "path",
             "required": true,
             "type": "string"
@@ -2280,6 +1711,28 @@
             }
           ]
         ]
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__deleted": true
+            }
+          ]
+        ]
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns/{dryrunName}": {
+      "patch": {
+        "x-ms-long-running-operation-options": {
+          "final-state-via": {
+            "__old": "azure-async-operation",
+            "__new": "original-uri"
+          }
+        }
       }
     }
   },
