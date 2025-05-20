@@ -103,7 +103,7 @@
           "Accounts"
         ],
         "operationId": "Accounts_List",
-        "description": "List all the existing accounts",
+        "description": "Lists all the New Relic accounts linked to your email address, helping you understand the existing accounts that have been created",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -151,7 +151,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_ListBySubscription",
-        "description": "List NewRelicMonitorResource resources by subscription ID",
+        "description": "Retrieves a list of all New Relic monitor resources either within a specific subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -190,7 +190,7 @@
           "Organizations"
         ],
         "operationId": "Organizations_List",
-        "description": "List all the existing organizations",
+        "description": "Lists all the New Relic organizations linked to your email address, helping you understand the existing organizations that have been created",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -238,7 +238,7 @@
           "Plan"
         ],
         "operationId": "Plans_List",
-        "description": "List plans data",
+        "description": "Lists the plans data linked to your organization, providing an overview of the available plans",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -280,13 +280,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/activateSaaS": {
+      "get": {
+        "tags": [
+          "SaaS"
+        ],
+        "operationId": "SaaS_List",
+        "description": "Resolve the token to get the SaaS resource ID and activate the SaaS resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PublisherIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List and Activate SaaS completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaaSInfoListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ActivateSaaS": {
+            "$ref": "./examples/ActivateSaaS.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors": {
       "get": {
         "tags": [
           "Monitors"
         ],
         "operationId": "Monitors_ListByResourceGroup",
-        "description": "List NewRelicMonitorResource resources by resource group",
+        "description": "Retrieves a list of all New Relic monitor resources either a specific resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -328,7 +370,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_Get",
-        "description": "Get a NewRelicMonitorResource",
+        "description": "Retrieves the properties and configuration details of a specific New Relic monitor resource, providing insight into its setup and status",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -372,7 +414,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_CreateOrUpdate",
-        "description": "Create a NewRelicMonitorResource",
+        "description": "Creates a new New Relic monitor resource in your Azure subscription. This sets up the integration between Azure and your New Relic account, enabling observability and monitoring of your Azure resources through New Relic",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -442,7 +484,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_Update",
-        "description": "Update a NewRelicMonitorResource",
+        "description": "Update an existing New Relic monitor resource from your Azure subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -504,7 +546,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_Delete",
-        "description": "Delete a NewRelicMonitorResource",
+        "description": "Deletes an existing New Relic monitor resource from your Azure subscription, removing the integration and stopping the observability of your Azure resources through New Relic",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -570,7 +612,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_GetMetricRules",
-        "description": "Get metric rules",
+        "description": "Retrieves the metric rules that are configured in the New Relic monitor resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -622,7 +664,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_GetMetricStatus",
-        "description": "Get metric status",
+        "description": "Retrieves the metric status that are configured in the New Relic monitor resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -674,7 +716,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_ListAppServices",
-        "description": "List the app service resources currently being monitored by the NewRelic resource.",
+        "description": "Lists the app service resources currently being monitored by the New Relic resource, helping you understand which app services are under monitoring",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -729,7 +771,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_SwitchBilling",
-        "description": "Switches the billing for NewRelic monitor resource.",
+        "description": "Switches the billing for the New Relic Monitor resource to be billed by Azure Marketplace",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -794,7 +836,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_ListHosts",
-        "description": "List the compute vm resources currently being monitored by the NewRelic resource.",
+        "description": "List all VM resources currently being monitored by the New Relic monitor resource, helping you manage observability",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -849,7 +891,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_RefreshIngestionKey",
-        "description": "Refreshes the ingestion key for all monitors linked to the same account associated to this monitor.",
+        "description": "Refreshes the ingestion key for all monitors, linked to the same account associated to the underline monitor.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -892,7 +934,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_ListMonitoredResources",
-        "description": "List the resources currently being monitored by the NewRelic monitor resource.",
+        "description": "Lists all Azure resources that are currently being monitored by the specified New Relic monitor resource, providing insight into the coverage of your observability setup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -943,7 +985,7 @@
         "tags": [
           "ConnectedResources"
         ],
-        "summary": "Get marketplace info mapped to the given monitor.",
+        "summary": "Retrieve marketplace and organization information mapped to the given New Relic monitor resource",
         "operationId": "BillingInfo_Get",
         "produces": [
           "application/json"
@@ -1055,7 +1097,7 @@
           "TagRules"
         ],
         "operationId": "TagRules_ListByNewRelicMonitorResource",
-        "description": "List TagRule resources by NewRelicMonitorResource",
+        "description": "Lists all tag rules associated with a specific New Relic monitor resource, helping you manage and audit the rules that control resource monitoring",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1107,7 +1149,7 @@
           "TagRules"
         ],
         "operationId": "TagRules_Get",
-        "description": "Get a TagRule",
+        "description": "Retrieves the details of the tag rules for a specific New Relic monitor resource, providing insight into its setup and status",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1161,7 +1203,7 @@
           "TagRules"
         ],
         "operationId": "TagRules_CreateOrUpdate",
-        "description": "Create a TagRule",
+        "description": "Creates a new set of tag rules for a specific New Relic monitor resource, determining which Azure resources are monitored based on their tags",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1241,7 +1283,7 @@
           "TagRules"
         ],
         "operationId": "TagRules_Delete",
-        "description": "Delete a TagRule",
+        "description": "Delete a tag rule set for a given New Relic monitor resource, removing fine-grained control over observability based on resource tags",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1309,7 +1351,7 @@
           "TagRules"
         ],
         "operationId": "TagRules_Update",
-        "description": "Update a TagRule",
+        "description": "Updates the tag rules for a specific New Relic monitor resource, allowing you to modify the rules that control which Azure resources are monitored",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1373,7 +1415,7 @@
         "tags": [
           "monitoredSubscriptions"
         ],
-        "summary": "List the subscriptions currently being monitored by the NewRelic monitor resource.",
+        "summary": "List all the subscriptions currently being monitored by the NewRelic monitor resource.",
         "operationId": "MonitoredSubscriptions_List",
         "produces": [
           "application/json"
@@ -1426,7 +1468,7 @@
         "tags": [
           "monitoredSubscriptions"
         ],
-        "summary": "List the subscriptions currently being monitored by the NewRelic monitor resource.",
+        "summary": "List all the subscriptions currently being monitored by the NewRelic monitor resource.",
         "operationId": "MonitoredSubscriptions_Get",
         "produces": [
           "application/json"
@@ -1489,7 +1531,7 @@
         "tags": [
           "monitoredSubscriptions"
         ],
-        "summary": "Add the subscriptions that should be monitored by the NewRelic monitor resource.",
+        "summary": "Add subscriptions to be monitored by the New Relic monitor resource, enabling observability and monitoring.",
         "operationId": "MonitoredSubscriptions_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -1569,7 +1611,7 @@
         "tags": [
           "MonitoredSubscriptions"
         ],
-        "summary": "Updates the subscriptions that are being monitored by the NewRelic monitor resource",
+        "summary": "Update subscriptions to be monitored by the New Relic monitor resource, ensuring optimal observability and performance",
         "operationId": "MonitoredSubscriptions_Update",
         "produces": [
           "application/json"
@@ -1648,7 +1690,7 @@
         "tags": [
           "MonitoredSubscriptions"
         ],
-        "summary": "Updates the subscriptions that are being monitored by the NewRelic monitor resource",
+        "summary": "Delete subscriptions being monitored by the New Relic monitor resource, removing their observability and monitoring capabilities",
         "operationId": "MonitoredSubscriptions_Delete",
         "produces": [
           "application/json"
@@ -1719,7 +1761,7 @@
         "tags": [
           "LinkedResources"
         ],
-        "summary": "List all Azure resources associated to the same NewRelic organization and account as the target resource.",
+        "summary": "Lists all Azure resources that are linked to the same New Relic organization as the specified monitor resource, helping you understand the scope of integration",
         "operationId": "Monitors_ListLinkedResources",
         "produces": [
           "application/json"
@@ -1773,7 +1815,7 @@
           "Monitors"
         ],
         "operationId": "Monitors_VmHostPayload",
-        "description": "Returns the payload that needs to be passed in the request body for installing NewRelic agent on a VM.",
+        "description": "Returns the payload that needs to be passed in the request body for installing the New Relic agent on a VM, providing the necessary configuration details",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1816,12 +1858,126 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/latestLinkedSaaS": {
+      "post": {
+        "tags": [
+          "LatestLinkedSaaS"
+        ],
+        "operationId": "Monitors_LatestLinkedSaaS",
+        "description": "Returns the latest SaaS linked to the newrelic organization of the underlying monitor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LatestLinkedSaaSResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_LatestLinkedSaaS_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_LatestLinkedSaaS_MaximumSet_Gen.json"
+          },
+          "Monitors_LatestLinkedSaaS_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_LatestLinkedSaaS_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/linkSaaS": {
+      "post": {
+        "tags": [
+          "LinkSaaS"
+        ],
+        "summary": "Links a new SaaS to the newrelic organization of the underlying monitor.",
+        "operationId": "Monitors_LinkSaaS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Link SaaS body parameter",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaaSData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResource"
+            }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Monitors_LinkSaaS": {
+            "$ref": "./examples/Monitors_LinkSaaS.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/resubscribe": {
       "post": {
         "tags": [
           "Resubscribe"
         ],
-        "summary": "Resubscribe the NewRelic Organization.",
+        "summary": "Resubscribe the New Relic Organization of the underline Monitor Resource to be billed by Azure Marketplace",
         "operationId": "Monitors_Resubscribe",
         "consumes": [
           "application/json"
@@ -2317,6 +2473,11 @@
       "properties": {},
       "description": "Location for NewRelic resource"
     },
+    "PublisherIdParameter": {
+      "type": "object",
+      "properties": {},
+      "description": "Publisher Id for NewRelic resource"
+    },
     "LogRules": {
       "type": "object",
       "properties": {
@@ -2499,6 +2660,10 @@
         "planData": {
           "$ref": "#/definitions/PlanData",
           "description": "Plan details"
+        },
+        "saaSData": {
+          "$ref": "#/definitions/SaaSData",
+          "description": "SaaS details"
         },
         "liftrResourceCategory": {
           "$ref": "#/definitions/LiftrResourceCategories",
@@ -2731,6 +2896,10 @@
           "$ref": "#/definitions/PlanData",
           "description": "Plan details"
         },
+        "saaSData": {
+          "$ref": "#/definitions/SaaSData",
+          "description": "SaaS details"
+        },
         "orgCreationSource": {
           "$ref": "#/definitions/OrgCreationSource",
           "description": "Source of org creation"
@@ -2886,6 +3055,54 @@
         }
       },
       "description": "Plan data of NewRelic Monitor resource"
+    },
+    "SaaSData": {
+      "type": "object",
+      "properties": {
+        "saaSResourceId": {
+          "type": "string",
+          "description": "saas resource id"
+        }
+      },
+      "description": "SaaS details"
+    },
+    "SaaSInfo": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SaaSData",
+          "description": "The saas-resource properties"
+        }
+      },
+      "description": "Response of get SaaSInfo Operation.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SaaSInfoListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SaaSInfo"
+          },
+          "x-cadl-name": "SaaSInfo[]",
+          "description": "The SaaSInfo items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Response of get SaaS info operation.",
+      "required": [
+        "value"
+      ]
     },
     "PlanDataResource": {
       "type": "object",
@@ -3419,6 +3636,20 @@
       },
       "description": "User Info of NewRelic Monitor resource"
     },
+    "LatestLinkedSaaSResponse": {
+      "type": "object",
+      "properties": {
+        "saaSResourceId": {
+          "type": "string",
+          "description": "SaaS resource id"
+        },
+        "isHiddenSaaS": {
+          "type": "boolean",
+          "description": "Flag indicating if the SaaS resource is hidden"
+        }
+      },
+      "description": "Response of get latest linked SaaS resource operation"
+    },
     "VMExtensionPayload": {
       "type": "object",
       "properties": {
@@ -3530,6 +3761,14 @@
       "in": "query",
       "required": true,
       "description": "Location for NewRelic.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PublisherIdParameter": {
+      "name": "publisherId",
+      "in": "query",
+      "required": true,
+      "description": "PublisherId for NewRelic resource.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
