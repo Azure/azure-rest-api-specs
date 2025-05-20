@@ -26,7 +26,7 @@ model MaintenanceConfiguration
 
 @armResourceOperations
 interface MaintenanceConfigurationOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -37,7 +37,8 @@ interface MaintenanceConfigurationOps
         KeyName = "resourceName",
         SegmentName = "publicMaintenanceConfigurations",
         NamePattern = ""
-      >>
+      >>,
+      MaintenanceError
     > {}
 
 @armResourceOperations
@@ -47,10 +48,7 @@ interface MaintenanceConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PublicMaintenanceConfigurations_Get")
-  get is MaintenanceConfigurationOps.Read<
-    MaintenanceConfiguration,
-    ErrorType = MaintenanceError
-  >;
+  get is MaintenanceConfigurationOps.Read<MaintenanceConfiguration>;
 
   /**
    * Get Public Maintenance Configuration records
@@ -60,13 +58,12 @@ interface MaintenanceConfigurations {
   @operationId("PublicMaintenanceConfigurations_List")
   list is MaintenanceConfigurationOps.List<
     MaintenanceConfiguration,
-    Response = ArmResponse<ListMaintenanceConfigurationsResult>,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<ListMaintenanceConfigurationsResult>
   >;
 }
 @armResourceOperations
 interface MaintenanceConfigurationOperationGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -78,7 +75,8 @@ interface MaintenanceConfigurationOperationGroupOps
         KeyName = "resourceName",
         SegmentName = "maintenanceConfigurations",
         NamePattern = ""
-      >>
+      >>,
+      MaintenanceError
     > {}
 
 @armResourceOperations
@@ -88,20 +86,14 @@ interface MaintenanceConfigurationOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_Get")
-  get is MaintenanceConfigurationOperationGroupOps.Read<
-    MaintenanceConfiguration,
-    ErrorType = MaintenanceError
-  >;
+  get is MaintenanceConfigurationOperationGroupOps.Read<MaintenanceConfiguration>;
 
   /**
    * Create or Update configuration record
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_CreateOrUpdate")
-  createOrUpdate is MaintenanceConfigurationOperationGroupOps.CreateOrUpdateSync<
-    MaintenanceConfiguration,
-    ErrorType = MaintenanceError
-  >;
+  createOrUpdate is MaintenanceConfigurationOperationGroupOps.CreateOrUpdateSync<MaintenanceConfiguration>;
 
   /**
    * Patch configuration record
@@ -111,8 +103,7 @@ interface MaintenanceConfigurationOperationGroup {
   @operationId("MaintenanceConfigurations_Update")
   update is MaintenanceConfigurationOperationGroupOps.CustomPatchSync<
     MaintenanceConfiguration,
-    PatchModel = MaintenanceConfiguration,
-    ErrorType = MaintenanceError
+    PatchModel = MaintenanceConfiguration
   >;
 
   /**
@@ -122,8 +113,7 @@ interface MaintenanceConfigurationOperationGroup {
   @operationId("MaintenanceConfigurations_Delete")
   delete is MaintenanceConfigurationOperationGroupOps.DeleteSync<
     MaintenanceConfiguration,
-    Response = ArmResponse<MaintenanceConfiguration> | ArmDeletedNoContentResponse,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<MaintenanceConfiguration> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -134,8 +124,7 @@ interface MaintenanceConfigurationOperationGroup {
   @segment("maintenanceConfigurations")
   list is MaintenanceConfigurationOperationGroupOps.List<
     MaintenanceConfiguration,
-    Response = ArmResponse<ListMaintenanceConfigurationsResult>,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<ListMaintenanceConfigurationsResult>
   >;
 
   /**
@@ -146,8 +135,7 @@ interface MaintenanceConfigurationOperationGroup {
   @segment("maintenanceConfigurations")
   maintenanceConfigurationsList is MaintenanceConfigurationOperationGroupOps.ResourceListByParent<
     MaintenanceConfiguration,
-    Response = ArmResponse<ListMaintenanceConfigurationsResult>,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<ListMaintenanceConfigurationsResult>
   >;
 }
 

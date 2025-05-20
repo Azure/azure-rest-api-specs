@@ -44,7 +44,7 @@ model ConfigurationAssignment extends Foundations.ProxyResource {
 
 @armResourceOperations
 interface ConfigurationAssignmentOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -82,7 +82,8 @@ interface ConfigurationAssignmentOps
         KeyName = "configurationAssignmentName",
         SegmentName = "configurationAssignments",
         NamePattern = ""
-      >>
+      >>,
+      MaintenanceError
     > {}
 
 @armResourceOperations
@@ -90,26 +91,19 @@ interface ConfigurationAssignments {
   /**
    * Get configuration assignment for resource..
    */
-  getParent is ConfigurationAssignmentOps.Read<
-    ConfigurationAssignment,
-    ErrorType = MaintenanceError
-  >;
+  getParent is ConfigurationAssignmentOps.Read<ConfigurationAssignment>;
 
   /**
    * Register configuration for resource.
    */
-  createOrUpdateParent is ConfigurationAssignmentOps.CreateOrUpdateSync<
-    ConfigurationAssignment,
-    ErrorType = MaintenanceError
-  >;
+  createOrUpdateParent is ConfigurationAssignmentOps.CreateOrUpdateSync<ConfigurationAssignment>;
 
   /**
    * Unregister configuration for resource.
    */
   deleteParent is ConfigurationAssignmentOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -117,13 +111,12 @@ interface ConfigurationAssignments {
    */
   listParent is ConfigurationAssignmentOps.List<
     ConfigurationAssignment,
-    Response = ArmResponse<ListConfigurationAssignmentsResult>,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<ListConfigurationAssignmentsResult>
   >;
 }
 @armResourceOperations
 interface ConfigurationAssignmentOperationGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -151,7 +144,8 @@ interface ConfigurationAssignmentOperationGroupOps
         KeyName = "configurationAssignmentName",
         SegmentName = "configurationAssignments",
         NamePattern = ""
-      >>
+      >>,
+      MaintenanceError
     > {}
 
 @armResourceOperations
@@ -161,20 +155,14 @@ interface ConfigurationAssignmentOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConfigurationAssignments_Get")
-  get is ConfigurationAssignmentOperationGroupOps.Read<
-    ConfigurationAssignment,
-    ErrorType = MaintenanceError
-  >;
+  get is ConfigurationAssignmentOperationGroupOps.Read<ConfigurationAssignment>;
 
   /**
    * Register configuration for resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConfigurationAssignments_CreateOrUpdate")
-  createOrUpdate is ConfigurationAssignmentOperationGroupOps.CreateOrUpdateSync<
-    ConfigurationAssignment,
-    ErrorType = MaintenanceError
-  >;
+  createOrUpdate is ConfigurationAssignmentOperationGroupOps.CreateOrUpdateSync<ConfigurationAssignment>;
 
   /**
    * Unregister configuration for resource.
@@ -183,13 +171,12 @@ interface ConfigurationAssignmentOperationGroup {
   @operationId("ConfigurationAssignments_Delete")
   delete is ConfigurationAssignmentOperationGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
   >;
 }
 @armResourceOperations
 interface ConfigurationAssignmentsForSubscriptionOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -200,7 +187,8 @@ interface ConfigurationAssignmentsForSubscriptionOps
         KeyName = "configurationAssignmentName",
         SegmentName = "configurationAssignments",
         NamePattern = ""
-      >>
+      >>,
+      MaintenanceError
     > {}
 
 @armResourceOperations
@@ -208,18 +196,12 @@ interface ConfigurationAssignmentsForSubscriptions {
   /**
    * Get configuration assignment for resource.
    */
-  get is ConfigurationAssignmentsForSubscriptionOps.Read<
-    ConfigurationAssignment,
-    ErrorType = MaintenanceError
-  >;
+  get is ConfigurationAssignmentsForSubscriptionOps.Read<ConfigurationAssignment>;
 
   /**
    * Register configuration for resource.
    */
-  createOrUpdate is ConfigurationAssignmentsForSubscriptionOps.CreateOrUpdateSync<
-    ConfigurationAssignment,
-    ErrorType = MaintenanceError
-  >;
+  createOrUpdate is ConfigurationAssignmentsForSubscriptionOps.CreateOrUpdateSync<ConfigurationAssignment>;
 
   /**
    * Register configuration for resource.
@@ -227,8 +209,7 @@ interface ConfigurationAssignmentsForSubscriptions {
   @patch(#{ implicitOptionality: false })
   update is ConfigurationAssignmentsForSubscriptionOps.CustomPatchSync<
     ConfigurationAssignment,
-    PatchModel = ConfigurationAssignment,
-    ErrorType = MaintenanceError
+    PatchModel = ConfigurationAssignment
   >;
 
   /**
@@ -236,8 +217,7 @@ interface ConfigurationAssignmentsForSubscriptions {
    */
   delete is ConfigurationAssignmentsForSubscriptionOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -247,13 +227,12 @@ interface ConfigurationAssignmentsForSubscriptions {
   @operationId("ConfigurationAssignmentsWithinSubscription_List")
   list is ConfigurationAssignmentsForSubscriptionOps.List<
     ConfigurationAssignment,
-    Response = ArmResponse<ListConfigurationAssignmentsResult>,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<ListConfigurationAssignmentsResult>
   >;
 }
 @armResourceOperations
 interface ConfigurationAssignmentsForResourceGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -265,7 +244,8 @@ interface ConfigurationAssignmentsForResourceGroupOps
         KeyName = "configurationAssignmentName",
         SegmentName = "configurationAssignments",
         NamePattern = "^.+$"
-      >>
+      >>,
+      MaintenanceError
     > {}
 
 @armResourceOperations
@@ -273,18 +253,12 @@ interface ConfigurationAssignmentsForResourceGroup {
   /**
    * Get configuration assignment for resource..
    */
-  get is ConfigurationAssignmentsForResourceGroupOps.Read<
-    ConfigurationAssignment,
-    ErrorType = MaintenanceError
-  >;
+  get is ConfigurationAssignmentsForResourceGroupOps.Read<ConfigurationAssignment>;
 
   /**
    * Register configuration for resource.
    */
-  createOrUpdate is ConfigurationAssignmentsForResourceGroupOps.CreateOrUpdateSync<
-    ConfigurationAssignment,
-    ErrorType = MaintenanceError
-  >;
+  createOrUpdate is ConfigurationAssignmentsForResourceGroupOps.CreateOrUpdateSync<ConfigurationAssignment>;
 
   /**
    * Register configuration for resource.
@@ -292,8 +266,7 @@ interface ConfigurationAssignmentsForResourceGroup {
   @patch(#{ implicitOptionality: false })
   update is ConfigurationAssignmentsForResourceGroupOps.CustomPatchSync<
     ConfigurationAssignment,
-    PatchModel = ConfigurationAssignment,
-    ErrorType = MaintenanceError
+    PatchModel = ConfigurationAssignment
   >;
 
   /**
@@ -301,8 +274,7 @@ interface ConfigurationAssignmentsForResourceGroup {
    */
   delete is ConfigurationAssignmentsForResourceGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
   >;
 }
 

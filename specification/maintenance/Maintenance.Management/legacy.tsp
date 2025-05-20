@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Legacy {
-  interface LegacyOperations<
+  interface CustomLegacyOperations<
     ParentParameters extends {},
     ResourceTypeParameter extends {},
     ErrorType extends {} = ErrorResponse
@@ -63,8 +63,7 @@ namespace Azure.ResourceManager.Legacy {
     CreateOrUpdateSync<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>,
-      ErrorType extends {} = ErrorResponse
+      Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -121,8 +120,7 @@ namespace Azure.ResourceManager.Legacy {
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       PatchModel extends {} = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,
       Parameters extends {} = {},
-      Response extends {} = ArmResponse<Resource>,
-      ErrorType extends {} = ErrorResponse
+      Response extends {} = ArmResponse<Resource>
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -171,8 +169,7 @@ namespace Azure.ResourceManager.Legacy {
     DeleteSync<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} = ArmDeletedResponse | ArmDeletedNoContentResponse,
-      ErrorType extends {} = ErrorResponse
+      Response extends {} = ArmDeletedResponse | ArmDeletedNoContentResponse
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -185,7 +182,6 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The success response for a get operation.
      */
-    #suppress "shadow"
     @autoRoute
     @doc("Get a {name}", Resource)
     @get
@@ -194,8 +190,7 @@ namespace Azure.ResourceManager.Legacy {
     Read<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} = ArmResponse<Resource>,
-      ErrorType extends {} = ErrorResponse
+      Response extends {} = ArmResponse<Resource>
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -238,8 +233,7 @@ namespace Azure.ResourceManager.Legacy {
     List<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} = ArmResponse<ResourceListResult<Resource>>,
-      ErrorType extends {} = ErrorResponse
+      Response extends {} = ArmResponse<ResourceListResult<Resource>>
     >(...ParentParameters, ...Parameters): Response | ErrorType;
 
     /**
@@ -287,8 +281,7 @@ namespace Azure.ResourceManager.Legacy {
       ParentName extends valueof string = "",
       ParentFriendlyName extends valueof string = "",
       Parameters extends {} = {},
-      Response extends {} = ArmResponse<ResourceListResult<Resource>>,
-      ErrorType extends {} = ErrorResponse
+      Response extends {} = ArmResponse<ResourceListResult<Resource>>
     > is Azure.ResourceManager.Foundations.ArmReadOperation<
       ResourceParentParameters<Resource, BaseParameters> & Parameters,
       Response,
@@ -362,12 +355,5 @@ namespace Azure.ResourceManager.Legacy {
       @bodyRoot
       body: Request,
     ): Response | ErrorType;
-  }
-  /**
-   * @dev Get the provider namespace key-value pair
-   * @template Resource Optional.  The resource to get the provider namespace for.
-   */
-  model Provider<Resource extends {} = TenantActionScope> {
-    ...ProviderNamespace<Resource>;
   }
 }

@@ -26,7 +26,7 @@ model ApplyUpdate
 
 @armResourceOperations
 interface ApplyUpdateOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -64,7 +64,8 @@ interface ApplyUpdateOps
         KeyName = "applyUpdateName",
         SegmentName = "applyUpdates",
         NamePattern = ""
-      >>
+      >>,
+      MaintenanceError
     > {}
 
 @armResourceOperations
@@ -72,11 +73,11 @@ interface ApplyUpdates {
   /**
    * Track maintenance updates to resource with parent
    */
-  getParent is ApplyUpdateOps.Read<ApplyUpdate, ErrorType = MaintenanceError>;
+  getParent is ApplyUpdateOps.Read<ApplyUpdate>;
 }
 @armResourceOperations
 interface ApplyUpdateOperationGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -104,7 +105,8 @@ interface ApplyUpdateOperationGroupOps
         KeyName = "applyUpdateName",
         SegmentName = "applyUpdates",
         NamePattern = ""
-      >>
+      >>,
+      MaintenanceError
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
@@ -115,20 +117,14 @@ interface ApplyUpdateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplyUpdates_Get")
-  get is ApplyUpdateOperationGroupOps.Read<
-    ApplyUpdate,
-    ErrorType = MaintenanceError
-  >;
+  get is ApplyUpdateOperationGroupOps.Read<ApplyUpdate>;
 
   /**
    * Apply maintenance updates to resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplyUpdates_CreateOrUpdateOrCancel")
-  createOrUpdateOrCancel is ApplyUpdateOperationGroupOps.CreateOrUpdateSync<
-    ApplyUpdate,
-    ErrorType = MaintenanceError
-  >;
+  createOrUpdateOrCancel is ApplyUpdateOperationGroupOps.CreateOrUpdateSync<ApplyUpdate>;
 
   /**
    * Get Configuration records within a subscription
@@ -137,8 +133,7 @@ interface ApplyUpdateOperationGroup {
   @operationId("ApplyUpdates_List")
   list is ApplyUpdateOperationGroupOps.ResourceListByParent<
     ApplyUpdate,
-    Response = ArmResponse<ListApplyUpdate>,
-    ErrorType = MaintenanceError
+    Response = ArmResponse<ListApplyUpdate>
   >;
 }
 
