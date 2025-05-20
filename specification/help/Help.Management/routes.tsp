@@ -77,7 +77,8 @@ interface DiscoverySolutionNLPOperationGroup {
   @autoRoute
   discoverSolutions is ArmProviderActionSync<
     Request = DiscoveryNlpRequest,
-    Response = DiscoveryNlpResponse
+    Response = DiscoveryNlpResponse,
+    OptionalRequestBody = true
   >;
   /**
    * Search for relevant Azure Diagnostics, Solutions and Troubleshooters using a natural language issue summary and subscription.
@@ -90,6 +91,7 @@ interface DiscoverySolutionNLPOperationGroup {
     Request = DiscoveryNlpRequest,
     Response = DiscoveryNlpResponse,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    OptionalRequestBody = true
   >;
 }

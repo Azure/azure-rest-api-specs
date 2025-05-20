@@ -72,15 +72,10 @@ interface SolutionResources {
   @operationId("Solution_WarmUp")
   warmUp is ArmResourceActionSync<
     SolutionResource,
-    {
-      /**
-       * The required request body for warming up a solution resource.
-       */
-      @bodyRoot
-      solutionWarmUpRequestBody?: SolutionWarmUpRequestBody;
-    },
+    SolutionWarmUpRequestBody,
     NoContentResponse,
-    BaseParameters = ScopeParameters<SolutionResource>
+    BaseParameters = ScopeParameters<SolutionResource>,
+    OptionalRequestBody = true
   >;
 }
 

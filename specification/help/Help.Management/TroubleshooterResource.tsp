@@ -25,6 +25,26 @@ model TroubleshooterResource
   >;
 }
 
+interface TroubleshooterResourcesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+
+        @path
+        scope: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        @path
+        @segment("troubleshooters")
+        @minLength(1)
+        @maxLength(100)
+        @pattern("([A-Za-z0-9]+(-[A-Za-z0-9]+)+)")
+        troubleshooterName: string,
+      }
+    > {}
+
 @armResourceOperations
 interface TroubleshooterResources {
   /**
@@ -42,9 +62,9 @@ interface TroubleshooterResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Troubleshooters_Create")
-  create is ArmResourceCreateOrReplaceSync<
+  create is TroubleshooterResourcesOps.CreateOrUpdateSync<
     TroubleshooterResource,
-    BaseParameters = ScopeParameters<TroubleshooterResource>
+    OptionalRequestBody = true
   >;
 
   /**
@@ -54,15 +74,10 @@ interface TroubleshooterResources {
   @operationId("Troubleshooters_Continue")
   continue is ArmResourceActionSync<
     TroubleshooterResource,
-    {
-      /**
-       * The required request body for going to next step in Troubleshooter resource.
-       */
-      @bodyRoot
-      continueRequestBody?: ContinueRequestBody;
-    },
+    ContinueRequestBody,
     NoContentResponse,
-    BaseParameters = ScopeParameters<TroubleshooterResource>
+    BaseParameters = ScopeParameters<TroubleshooterResource>,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -94,6 +109,6 @@ interface TroubleshooterResources {
 @@minLength(TroubleshooterResource.name, 1);
 @@doc(TroubleshooterResource.name, "Troubleshooter resource Name.");
 @@doc(TroubleshooterResource.properties, "Troubleshooter Instance properties.");
-@@doc(TroubleshooterResources.create::parameters.resource,
+@@doc(TroubleshooterResources.create::parameters.body,
   "The required request body for this Troubleshooter resource creation."
 );

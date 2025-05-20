@@ -33,9 +33,6 @@ using Microsoft.Help;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SimplifiedSolutionsResource.properties);
 
-@@clientName(TroubleshooterResources.create::parameters.resource,
-  "createTroubleshooterRequestBody"
-);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(TroubleshooterResource.properties);
 
@@ -57,7 +54,7 @@ using Microsoft.Help;
 @@clientName(SolutionResources.update::parameters.properties,
   "solutionPatchRequestBody"
 );
-@@clientName(TroubleshooterResources.create::parameters.resource,
+@@clientName(TroubleshooterResources.create::parameters.body,
   "createTroubleshooterRequestBody"
 );
 @@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutions::parameters.body,
@@ -81,4 +78,10 @@ using Microsoft.Help;
 @@clientName(RestartTroubleshooterResponse,
   "RestartTroubleshooterResult",
   "csharp"
+);
+@@clientName(SolutionResources.warmUp::parameters.body,
+  "solutionWarmUpRequestBody"
+);
+@@clientName(TroubleshooterResources.continue::parameters.body,
+  "continueRequestBody"
 );
