@@ -8,7 +8,7 @@ import { mapAsync } from "./array.js";
  */
 
 export class Tag {
-  /** @type {Set<Swagger>} */
+  /** @type {Map<string, Swagger>} */
   #inputFiles;
 
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -19,7 +19,7 @@ export class Tag {
 
   /**
    * @param {string} name
-   * @param {Set<Swagger>} inputFiles
+   * @param {Map<string, Swagger>} inputFiles
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    */
@@ -30,7 +30,7 @@ export class Tag {
   }
 
   /**
-   * @returns {Set<Swagger>}
+   * @returns {Map<string, Swagger>}
    */
   get inputFiles() {
     return this.#inputFiles;
@@ -51,7 +51,9 @@ export class Tag {
     return {
       name: this.#name,
       inputFiles: await mapAsync(
-        [...this.#inputFiles].sort(),
+        [...this.#inputFiles.values()].sort((a, b) =>
+          a.path.localeCompare(b.path),
+        ),
         async (s) => await s.toJSONAsync(options),
       ),
     };
