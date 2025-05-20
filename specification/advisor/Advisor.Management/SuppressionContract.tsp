@@ -14,9 +14,9 @@ namespace Microsoft.Advisor;
 /**
  * The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter"
 @extensionResource
 @parentResource(ResourceRecommendationBase)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter"
 model SuppressionContract
   is Azure.ResourceManager.ExtensionResource<SuppressionProperties> {
   ...ResourceNameParameter<

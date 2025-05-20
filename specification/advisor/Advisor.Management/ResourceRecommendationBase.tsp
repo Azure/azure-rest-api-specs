@@ -13,8 +13,8 @@ namespace Microsoft.Advisor;
 /**
  * Advisor Recommendation.
  */
-@extensionResource
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter"
+@extensionResource
 model ResourceRecommendationBase
   is Azure.ResourceManager.ExtensionResource<RecommendationProperties> {
   ...ResourceNameParameter<

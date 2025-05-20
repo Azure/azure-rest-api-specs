@@ -346,7 +346,7 @@ model ArmErrorResponse {
 @error
 model ArmNotFoundResponse {
   ...Response<404>;
-  a: ArmErrorResponse;
+  error: ArmErrorResponse;
 }
 
 /**
@@ -487,7 +487,7 @@ model RecommendationProperties {
    * The recommendation metadata.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  metadata?: Record<Record<unknown>>;
+  metadata?: Record<unknown>;
 
   /**
    * The recommendation-type GUID.
@@ -544,19 +544,19 @@ model RecommendationProperties {
    * The list of recommended actions to implement recommendation.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  actions?: Record<Record<unknown>>[];
+  actions?: Record<unknown>[];
 
   /**
    * The automated way to apply recommendation.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  remediation?: Record<Record<unknown>>;
+  remediation?: Record<unknown>;
 
   /**
    * The recommendation metadata properties exposed to customer to provide additional information.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  exposedMetadataProperties?: Record<Record<unknown>>;
+  exposedMetadataProperties?: Record<unknown>;
 
   /**
    * If the Recommendation has Tracking enabled.
@@ -622,7 +622,7 @@ model ResourceMetadata {
    * The action to view resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  action?: Record<Record<unknown>>;
+  action?: Record<unknown>;
 
   /**
    * The singular user friendly name of resource type. eg: virtual machine
@@ -1250,4 +1250,21 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 @@OpenAPI.extension(OperationEntityListResult.value,
   "x-ms-identifiers",
   #["name"]
+);
+@@doc(RecommendationPropertiesResourceWorkload.id, "The Id of the Workload");
+@@doc(RecommendationPropertiesResourceWorkload.name,
+  "The Name of the Workload"
+);
+
+@@doc(RecommendationPropertiesReview.id, "The ARM Resource Id of the Review");
+@@doc(RecommendationPropertiesReview.name, "The Name of the Review");
+@@doc(WorkloadListResult.value, "[Placeholder] Discription for value property");
+@@doc(WorkloadListResult.nextLink,
+  "[Placeholder] Discription for nextLink property"
+);
+@@doc(TriageRecommendationCollection.value,
+  "[Placeholder] Discription for value property"
+);
+@@doc(TriageRecommendationCollection.nextLink,
+  "[Placeholder] Discription for nextLink property"
 );

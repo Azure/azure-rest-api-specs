@@ -177,9 +177,9 @@ interface PredictsOperationGroup {
   /**
    * Predicts a recommendation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @summary("Predicts a recommendation.")
   @autoRoute
-  #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @operationId("Predict")
   predict is ArmProviderActionSync<
     Request = PredictionRequest,
