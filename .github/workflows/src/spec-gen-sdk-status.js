@@ -71,7 +71,7 @@ export async function setSpecGenSdkStatusImpl({
   const specGenSdkChecks = checks.filter(
     (check) =>
       check.app?.name === "Azure Pipelines" &&
-      check.name.includes("SDK Generation"),
+      check.name.includes("spec-gen-sdk"),
   );
 
   core.info(
