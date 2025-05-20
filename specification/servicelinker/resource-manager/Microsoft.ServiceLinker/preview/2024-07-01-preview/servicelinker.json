@@ -2040,7 +2040,8 @@
       "properties": {
         "connectWithKubernetesExtension": {
           "type": "boolean",
-          "description": "True if connection enables app configuration kubernetes extension."
+          "description": "True if connection enables app configuration kubernetes extension.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -2056,7 +2057,8 @@
       "properties": {
         "connectAsKubernetesCsiDriver": {
           "type": "boolean",
-          "description": "True if connect via Kubernetes CSI Driver."
+          "description": "True if connect via Kubernetes CSI Driver.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -2076,7 +2078,8 @@
         },
         "resourceProperties": {
           "$ref": "#/definitions/AzureResourcePropertiesBase",
-          "description": "The azure resource connection related properties."
+          "description": "The azure resource connection related properties.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -2258,7 +2261,8 @@
         },
         "configurationStore": {
           "$ref": "#/definitions/ConfigurationStore",
-          "description": "An option to store configuration into different place"
+          "description": "An option to store configuration into different place",
+          "x-nullable": true
         }
       }
     },
@@ -2285,6 +2289,7 @@
         "properties": {
           "$ref": "#/definitions/ConfigurationNames",
           "description": "The result detail.",
+          "x-nullable": true,
           "x-ms-client-flatten": true
         }
       }
@@ -2367,7 +2372,8 @@
       "properties": {
         "appConfigurationId": {
           "type": "string",
-          "description": "The app configuration id to store configuration"
+          "description": "The app configuration id to store configuration",
+          "x-nullable": true
         }
       }
     },
@@ -2426,23 +2432,28 @@
         },
         "vNetSolution": {
           "$ref": "#/definitions/VNetSolution",
-          "description": "The VNet solution."
+          "description": "The VNet solution.",
+          "x-nullable": true
         },
         "secretStore": {
           "$ref": "#/definitions/SecretStore",
-          "description": "An option to store secret value in secure place"
+          "description": "An option to store secret value in secure place",
+          "x-nullable": true
         },
         "scope": {
           "type": "string",
-          "description": "connection scope in source service."
+          "description": "connection scope in source service.",
+          "x-nullable": true
         },
         "publicNetworkSolution": {
           "$ref": "#/definitions/PublicNetworkSolution",
-          "description": "The network solution."
+          "description": "The network solution.",
+          "x-nullable": true
         },
         "configurationInfo": {
           "$ref": "#/definitions/ConfigurationInfo",
-          "description": "The connection information consumed by applications, including secrets, connection strings."
+          "description": "The connection information consumed by applications, including secrets, connection strings.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -2578,15 +2589,18 @@
       "properties": {
         "version": {
           "type": "string",
-          "description": "The dapr component version"
+          "description": "The dapr component version",
+          "x-nullable": true
         },
         "componentType": {
           "type": "string",
-          "description": "The dapr component type"
+          "description": "The dapr component type",
+          "x-nullable": true
         },
         "secretStoreComponent": {
           "type": "string",
-          "description": "The name of a secret store dapr to retrieve secret"
+          "description": "The name of a secret store dapr to retrieve secret",
+          "x-nullable": true
         },
         "metadata": {
           "type": "array",
@@ -2608,11 +2622,13 @@
         "runtimeVersion": {
           "type": "string",
           "description": "The runtime version supported by the properties",
+          "x-nullable": true,
           "readOnly": true
         },
         "bindingComponentDirection": {
           "$ref": "#/definitions/DaprBindingComponentDirection",
           "description": "The direction supported by the dapr binding component",
+          "x-nullable": true,
           "readOnly": true
         }
       }
@@ -2850,7 +2866,9 @@
         },
         "secret": {
           "type": "string",
-          "description": "Application Secret for EasyAuth Microsoft Entra ID."
+          "format": "password",
+          "description": "Application Secret for EasyAuth Microsoft Entra ID.",
+          "x-ms-secret": true
         },
         "deleteOrUpdateBehavior": {
           "$ref": "#/definitions/DeleteOrUpdateBehavior",
@@ -2911,7 +2929,8 @@
         },
         "version": {
           "type": "string",
-          "description": "Version of the Key Vault secret."
+          "description": "Version of the Key Vault secret.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -2993,23 +3012,28 @@
         },
         "vNetSolution": {
           "$ref": "#/definitions/VNetSolution",
-          "description": "The VNet solution."
+          "description": "The VNet solution.",
+          "x-nullable": true
         },
         "secretStore": {
           "$ref": "#/definitions/SecretStore",
-          "description": "An option to store secret value in secure place"
+          "description": "An option to store secret value in secure place",
+          "x-nullable": true
         },
         "scope": {
           "type": "string",
-          "description": "connection scope in source service."
+          "description": "connection scope in source service.",
+          "x-nullable": true
         },
         "publicNetworkSolution": {
           "$ref": "#/definitions/PublicNetworkSolution",
-          "description": "The network solution."
+          "description": "The network solution.",
+          "x-nullable": true
         },
         "configurationInfo": {
           "$ref": "#/definitions/ConfigurationInfo",
-          "description": "The connection information consumed by applications, including secrets, connection strings."
+          "description": "The connection information consumed by applications, including secrets, connection strings.",
+          "x-nullable": true
         }
       }
     },
@@ -3104,11 +3128,13 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Username or account name for secret auth."
+          "description": "Username or account name for secret auth.",
+          "x-nullable": true
         },
         "secretInfo": {
           "$ref": "#/definitions/SecretInfoBase",
-          "description": "Password or key vault secret for secret auth."
+          "description": "Password or key vault secret for secret auth.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -3160,11 +3186,13 @@
       "properties": {
         "keyVaultId": {
           "type": "string",
-          "description": "The key vault id to store secret"
+          "description": "The key vault id to store secret",
+          "x-nullable": true
         },
         "keyVaultSecretName": {
           "type": "string",
-          "description": "The key vault secret name to store secret, only valid when storing one secret"
+          "description": "The key vault secret name to store secret, only valid when storing one secret",
+          "x-nullable": true
         }
       }
     },
@@ -3225,7 +3253,9 @@
         },
         "certificate": {
           "type": "string",
-          "description": "ServicePrincipal certificate for servicePrincipal auth."
+          "format": "password",
+          "description": "ServicePrincipal certificate for servicePrincipal auth.",
+          "x-ms-secret": true
         },
         "deleteOrUpdateBehavior": {
           "$ref": "#/definitions/DeleteOrUpdateBehavior",
@@ -3269,7 +3299,9 @@
         },
         "secret": {
           "type": "string",
-          "description": "Secret for servicePrincipal auth."
+          "format": "password",
+          "description": "Secret for servicePrincipal auth.",
+          "x-ms-secret": true
         },
         "deleteOrUpdateBehavior": {
           "$ref": "#/definitions/DeleteOrUpdateBehavior",
@@ -3305,7 +3337,8 @@
         },
         "value": {
           "type": "string",
-          "description": "The value of setting"
+          "description": "The value of setting",
+          "x-nullable": true
         },
         "configType": {
           "$ref": "#/definitions/LinkerConfigurationType",
@@ -3314,11 +3347,13 @@
         },
         "keyVaultReferenceIdentity": {
           "type": "string",
-          "description": "The identity for key vault reference, system or user-assigned managed identity ID"
+          "description": "The identity for key vault reference, system or user-assigned managed identity ID",
+          "x-nullable": true
         },
         "description": {
           "type": "string",
-          "description": "Descriptive information for the configuration"
+          "description": "Descriptive information for the configuration",
+          "x-nullable": true
         }
       }
     },
@@ -3472,7 +3507,8 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/VNetSolutionType",
-          "description": "Type of VNet solution."
+          "description": "Type of VNet solution.",
+          "x-nullable": true
         },
         "deleteOrUpdateBehavior": {
           "$ref": "#/definitions/DeleteOrUpdateBehavior",
@@ -3509,15 +3545,18 @@
         "properties": {
           "$ref": "#/definitions/ValidateResult",
           "description": "The validation result detail.",
+          "x-nullable": true,
           "x-ms-client-flatten": true
         },
         "resourceId": {
           "type": "string",
-          "description": "Validated Linker id."
+          "description": "Validated Linker id.",
+          "x-nullable": true
         },
         "status": {
           "type": "string",
-          "description": "Validation operation status."
+          "description": "Validation operation status.",
+          "x-nullable": true
         }
       }
     },
@@ -3527,33 +3566,40 @@
       "properties": {
         "linkerName": {
           "type": "string",
-          "description": "The linker name."
+          "description": "The linker name.",
+          "x-nullable": true
         },
         "isConnectionAvailable": {
           "type": "boolean",
-          "description": "A boolean value indicating whether the connection is available or not"
+          "description": "A boolean value indicating whether the connection is available or not",
+          "x-nullable": true
         },
         "reportStartTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the validation report."
+          "description": "The start time of the validation report.",
+          "x-nullable": true
         },
         "reportEndTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the validation report."
+          "description": "The end time of the validation report.",
+          "x-nullable": true
         },
         "sourceId": {
           "type": "string",
-          "description": "The resource id of the Linker source application."
+          "description": "The resource id of the Linker source application.",
+          "x-nullable": true
         },
         "targetId": {
           "type": "string",
-          "description": "The resource Id of target service."
+          "description": "The resource Id of target service.",
+          "x-nullable": true
         },
         "authType": {
           "$ref": "#/definitions/AuthType",
-          "description": "The authentication type."
+          "description": "The authentication type.",
+          "x-nullable": true
         },
         "validationDetail": {
           "type": "array",
@@ -3577,19 +3623,23 @@
         },
         "description": {
           "type": "string",
-          "description": "The display name of validation item"
+          "description": "The display name of validation item",
+          "x-nullable": true
         },
         "result": {
           "$ref": "#/definitions/ValidationResultStatus",
-          "description": "The result of validation"
+          "description": "The result of validation",
+          "x-nullable": true
         },
         "errorMessage": {
           "type": "string",
-          "description": "The error message of validation result"
+          "description": "The error message of validation result",
+          "x-nullable": true
         },
         "errorCode": {
           "type": "string",
-          "description": "The error code of validation result"
+          "description": "The error code of validation result",
+          "x-nullable": true
         }
       }
     },
@@ -3626,7 +3676,10 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "The actual value of the secret."
+          "format": "password",
+          "description": "The actual value of the secret.",
+          "x-nullable": true,
+          "x-ms-secret": true
         }
       },
       "allOf": [

@@ -425,27 +425,27 @@ model LinkerProperties {
   /**
    * The VNet solution.
    */
-  vNetSolution?: VNetSolution;
+  vNetSolution?: VNetSolution | null;
 
   /**
    * An option to store secret value in secure place
    */
-  secretStore?: SecretStore;
+  secretStore?: SecretStore | null;
 
   /**
    * connection scope in source service.
    */
-  scope?: string;
+  scope?: string | null;
 
   /**
    * The network solution.
    */
-  publicNetworkSolution?: PublicNetworkSolution;
+  publicNetworkSolution?: PublicNetworkSolution | null;
 
   /**
    * The connection information consumed by applications, including secrets, connection strings.
    */
-  configurationInfo?: ConfigurationInfo;
+  configurationInfo?: ConfigurationInfo | null;
 }
 
 /**
@@ -482,7 +482,7 @@ model VNetSolution {
   /**
    * Type of VNet solution.
    */
-  type?: VNetSolutionType;
+  type?: VNetSolutionType | null;
 
   /**
    * Indicates whether to clean up previous operation when Linker is updating or deleting
@@ -497,12 +497,12 @@ model SecretStore {
   /**
    * The key vault id to store secret
    */
-  keyVaultId?: string;
+  keyVaultId?: string | null;
 
   /**
    * The key vault secret name to store secret, only valid when storing one secret
    */
-  keyVaultSecretName?: string;
+  keyVaultSecretName?: string | null;
 }
 
 /**
@@ -585,7 +585,7 @@ model ConfigurationInfo {
   /**
    * An option to store configuration into different place
    */
-  configurationStore?: ConfigurationStore;
+  configurationStore?: ConfigurationStore | null;
 }
 
 /**
@@ -595,17 +595,17 @@ model DaprProperties {
   /**
    * The dapr component version
    */
-  version?: string;
+  version?: string | null;
 
   /**
    * The dapr component type
    */
-  componentType?: string;
+  componentType?: string | null;
 
   /**
    * The name of a secret store dapr to retrieve secret
    */
-  secretStoreComponent?: string;
+  secretStoreComponent?: string | null;
 
   /**
    * Additional dapr metadata
@@ -622,13 +622,13 @@ model DaprProperties {
    * The runtime version supported by the properties
    */
   @visibility(Lifecycle.Read)
-  runtimeVersion?: string;
+  runtimeVersion?: string | null;
 
   /**
    * The direction supported by the dapr binding component
    */
   @visibility(Lifecycle.Read)
-  bindingComponentDirection?: DaprBindingComponentDirection;
+  bindingComponentDirection?: DaprBindingComponentDirection | null;
 }
 
 /**
@@ -668,7 +668,7 @@ model ConfigurationStore {
   /**
    * The app configuration id to store configuration
    */
-  appConfigurationId?: string;
+  appConfigurationId?: string | null;
 }
 
 /**
@@ -692,17 +692,17 @@ model ValidateOperationResult {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: ValidateResult;
+  properties?: ValidateResult | null;
 
   /**
    * Validated Linker id.
    */
-  resourceId?: string;
+  resourceId?: string | null;
 
   /**
    * Validation operation status.
    */
-  status?: string;
+  status?: string | null;
 }
 
 /**
@@ -712,39 +712,39 @@ model ValidateResult {
   /**
    * The linker name.
    */
-  linkerName?: string;
+  linkerName?: string | null;
 
   /**
    * A boolean value indicating whether the connection is available or not
    */
-  isConnectionAvailable?: boolean;
+  isConnectionAvailable?: boolean | null;
 
   /**
    * The start time of the validation report.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  reportStartTimeUtc?: utcDateTime;
+  reportStartTimeUtc?: utcDateTime | null;
 
   /**
    * The end time of the validation report.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  reportEndTimeUtc?: utcDateTime;
+  reportEndTimeUtc?: utcDateTime | null;
 
   /**
    * The resource id of the Linker source application.
    */
-  sourceId?: string;
+  sourceId?: string | null;
 
   /**
    * The resource Id of target service.
    */
-  targetId?: string;
+  targetId?: string | null;
 
   /**
    * The authentication type.
    */
-  authType?: AuthType;
+  authType?: AuthType | null;
 
   /**
    * The detail of validation result
@@ -765,22 +765,22 @@ model ValidationResultItem {
   /**
    * The display name of validation item
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * The result of validation
    */
-  result?: ValidationResultStatus;
+  result?: ValidationResultStatus | null;
 
   /**
    * The error message of validation result
    */
-  errorMessage?: string;
+  errorMessage?: string | null;
 
   /**
    * The error code of validation result
    */
-  errorCode?: string;
+  errorCode?: string | null;
 }
 
 /**
@@ -806,7 +806,7 @@ model SourceConfiguration {
   /**
    * The value of setting
    */
-  value?: string;
+  value?: string | null;
 
   /**
    * The type of setting
@@ -817,12 +817,12 @@ model SourceConfiguration {
   /**
    * The identity for key vault reference, system or user-assigned managed identity ID
    */
-  keyVaultReferenceIdentity?: string;
+  keyVaultReferenceIdentity?: string | null;
 
   /**
    * Descriptive information for the configuration
    */
-  description?: string;
+  description?: string | null;
 }
 
 /**
@@ -837,7 +837,7 @@ model ConfigurationNameItem {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: ConfigurationNames;
+  properties?: ConfigurationNames | null;
 }
 
 /**
@@ -951,7 +951,7 @@ model AzureResource extends TargetServiceBase {
   /**
    * The azure resource connection related properties.
    */
-  resourceProperties?: AzureResourcePropertiesBase;
+  resourceProperties?: AzureResourcePropertiesBase | null;
 
   /**
    * The target service type.
@@ -966,7 +966,7 @@ model AzureKeyVaultProperties extends AzureResourcePropertiesBase {
   /**
    * True if connect via Kubernetes CSI Driver.
    */
-  connectAsKubernetesCsiDriver?: boolean;
+  connectAsKubernetesCsiDriver?: boolean | null;
 
   /**
    * The azure resource type.
@@ -981,7 +981,7 @@ model AzureAppConfigProperties extends AzureResourcePropertiesBase {
   /**
    * True if connection enables app configuration kubernetes extension.
    */
-  connectWithKubernetesExtension?: boolean;
+  connectWithKubernetesExtension?: boolean | null;
 
   /**
    * The azure resource type.
@@ -1067,7 +1067,8 @@ model ValueSecretInfo extends SecretInfoBase {
   /**
    * The actual value of the secret.
    */
-  value?: string;
+  @secret
+  value?: string | null;
 
   /**
    * The secret type.
@@ -1087,7 +1088,7 @@ model KeyVaultSecretReferenceSecretInfo extends SecretInfoBase {
   /**
    * Version of the Key Vault secret.
    */
-  version?: string;
+  version?: string | null;
 
   /**
    * The secret type.
@@ -1142,12 +1143,12 @@ model SecretAuthInfo extends AuthInfoBase {
   /**
    * Username or account name for secret auth.
    */
-  name?: string;
+  name?: string | null;
 
   /**
    * Password or key vault secret for secret auth.
    */
-  secretInfo?: SecretInfoBase;
+  secretInfo?: SecretInfoBase | null;
 
   /**
    * The authentication type.
@@ -1228,6 +1229,7 @@ model ServicePrincipalSecretAuthInfo extends AuthInfoBase {
   /**
    * Secret for servicePrincipal auth.
    */
+  @secret
   secret: string;
 
   /**
@@ -1263,6 +1265,7 @@ model ServicePrincipalCertificateAuthInfo extends AuthInfoBase {
   /**
    * ServicePrincipal certificate for servicePrincipal auth.
    */
+  @secret
   certificate: string;
 
   /**
@@ -1320,6 +1323,7 @@ model EasyAuthMicrosoftEntraIDAuthInfo extends AuthInfoBase {
   /**
    * Application Secret for EasyAuth Microsoft Entra ID.
    */
+  @secret
   secret?: string;
 
   /**
