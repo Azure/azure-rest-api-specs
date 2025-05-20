@@ -48,5 +48,5 @@ namespace Playwright;
 enum Versions {
   @doc("Version 2025-07-01-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2025-07-01-preview`,
+  v2025_07_01_preview: "2025-07-01-preview",
 }
