@@ -590,7 +590,7 @@ input-file:
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
-- Microsoft.Security/preview/2024-10-01-preview/operations.json
+- Microsoft.Security/preview/2025-05-04-preview/operations.json
 - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2025-05-04-preview/assessments.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
