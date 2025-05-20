@@ -1,0 +1,128 @@
+{
+  "title": "FileShares_CreateOrUpdate_MaximumSet",
+  "operationId": "FileShares_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "subscriptionId": "44EEA578-10B8-4489-8B60-2F8BA982F1E2",
+    "resourceGroupName": "rgfileshares",
+    "resourceName": "testfileshare",
+    "resource": {
+      "properties": {
+        "shareName": "testfileshare",
+        "tier": "SSD",
+        "redundancy": "Local",
+        "protocols": [
+          "NFS"
+        ],
+        "provisionedStorageGiB": 80013,
+        "nfsProtocolProperties": {
+          "rootSquash": "NoRootSquash"
+        },
+        "publicEndpointNetworkRuleSet": {
+          "virtualNetworkRules": [
+            {
+              "id": "szgchxzvtnnmgmxwrblakajghfxt"
+            }
+          ]
+        }
+      },
+      "tags": {
+        "key3533": "tagValue"
+      },
+      "location": "ijgwtizkwlhftlkpisezexdrkrffy"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "shareName": "testfileshare",
+          "hostName": "fs-vlp5bkznznf0dkb4z.z16.file.storage.azure.net",
+          "tier": "SSD",
+          "redundancy": "Local",
+          "protocols": [
+            "NFS"
+          ],
+          "provisionedStorageGiB": 80013,
+          "provisionedIOPerSec": 16293,
+          "provisionedThroughputMiBPerSec": 6721016643,
+          "includedBurstIOPerSec": 65925,
+          "maxBurstIOPerSecCredits": 0,
+          "nfsProtocolProperties": {
+            "rootSquash": "NoRootSquash"
+          },
+          "publicEndpointNetworkRuleSet": {
+            "virtualNetworkRules": [
+              {
+                "id": "szgchxzvtnnmgmxwrblakajghfxt"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "key3533": "tagValue"
+        },
+        "location": "ijgwtizkwlhftlkpisezexdrkrffy",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg1Network/providers/Microsoft.FileShares/fileShares/ankushb-pe-fs-01",
+        "name": "testfileshare",
+        "type": "Microsoft.FileShares/fileShares",
+        "systemData": {
+          "createdBy": "testuser",
+          "createdByType": "User",
+          "createdAt": "2025-04-29T23:32:13.130Z",
+          "lastModifiedBy": "kjn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-04-29T23:32:13.131Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "shareName": "testfileshare",
+          "hostName": "fs-vlp5bkznznf0dkb4z.z16.file.storage.azure.net",
+          "tier": "SSD",
+          "redundancy": "Local",
+          "protocols": [
+            "NFS"
+          ],
+          "provisionedStorageGiB": 80013,
+          "provisionedIOPerSec": 16293,
+          "provisionedThroughputMiBPerSec": 6721016643,
+          "includedBurstIOPerSec": 65925,
+          "maxBurstIOPerSecCredits": 0,
+          "nfsProtocolProperties": {
+            "rootSquash": "NoRootSquash"
+          },
+          "publicEndpointNetworkRuleSet": {
+            "virtualNetworkRules": [
+              {
+                "id": "szgchxzvtnnmgmxwrblakajghfxt"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "key3533": "tagValue"
+        },
+        "location": "ijgwtizkwlhftlkpisezexdrkrffy",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg1Network/providers/Microsoft.FileShares/fileShares/ankushb-pe-fs-01",
+        "name": "testfileshare",
+        "type": "Microsoft.FileShares/fileShares",
+        "systemData": {
+          "createdBy": "testuser",
+          "createdByType": "User",
+          "createdAt": "2025-04-29T23:32:13.130Z",
+          "lastModifiedBy": "kjn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-04-29T23:32:13.131Z"
+        }
+      }
+    }
+  }
+}
