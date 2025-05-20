@@ -117,14 +117,21 @@ function createEmitterOptionTestCases(
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
   allowUndefined: boolean = false,
+  isModularLibrary: boolean = false,
 ): Case[] {
   const cases: Case[] = [];
 
   const language = emitterName.split("-").pop();
+  const validPairs = [{ key: key, value: validValue }];
+  const invalidPairs = [{ key: key, value: invalidValue }];
+  if (isModularLibrary && emitterName === "@azure-tools/typespec-ts") {
+    validPairs.push({ key: "is-modular-library", value: isModularLibrary });
+    invalidPairs.push({ key: "is-modular-library", value: isModularLibrary });
+  }
   cases.push({
     description: `Validate ${language}'s option:${key} with valid value ${validValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
+    tspconfigContent: createEmitterOptionExample(emitterName, ...validPairs),
     success: true,
     subRules,
   });
@@ -132,10 +139,7 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with invalid value ${invalidValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, {
-      key: key,
-      value: invalidValue,
-    }),
+    tspconfigContent: createEmitterOptionExample(emitterName, ...invalidPairs),
     success: shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
@@ -143,19 +147,26 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with undefined value`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName),
+    tspconfigContent: isModularLibrary
+      ? createEmitterOptionExample(emitterName, {
+          key: "is-modular-library",
+          value: isModularLibrary,
+        })
+      : createEmitterOptionExample(emitterName),
     success: allowUndefined ? true : shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
 
   if (!allowUndefined && key.includes(".")) {
+    const incompleteKey = key.split(".").slice(0, -1).join(".");
+    const incompletePairs = [{ key: incompleteKey, value: validValue }];
+    if (isModularLibrary && emitterName === "@azure-tools/typespec-ts") {
+      incompletePairs.push({ key: "is-modular-library", value: isModularLibrary });
+    }
     cases.push({
       description: `Validate ${language}'s option:${key} with incomplete key`,
       folder,
-      tspconfigContent: createEmitterOptionExample(emitterName, {
-        key: key.split(".").slice(0, -1).join("."),
-        value: validValue,
-      }),
+      tspconfigContent: createEmitterOptionExample(emitterName, ...incompletePairs),
       success: shouldBeTrueOnFailSubRuleValidation(emitterName),
       subRules,
     });
@@ -227,30 +238,16 @@ const tsDpPackageNameTestCases = createEmitterOptionTestCases(
   [new TspConfigTsRlcDpPackageNameMatchPatternSubRule()],
 );
 
-const tsDpModularPackageNameTestCases = [
-  {
-    description: `Validate ts's option: package-details.name starts with "@azure" for modular clients (valid case)`,
-    folder: "",
-    tspconfigContent: createEmitterOptionExample(
-      "@azure-tools/typespec-ts",
-      { key: "is-modular-library", value: true },
-      { key: "package-details.name", value: "@azure/aaa-bbb" },
-    ),
-    success: true,
-    subRules: [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
-  },
-  {
-    description: `Validate ts's option: package-details.name does not start with "@azure" for modular clients (invalid case)`,
-    folder: "",
-    tspconfigContent: createEmitterOptionExample(
-      "@azure-tools/typespec-ts",
-      { key: "is-modular-library", value: true },
-      { key: "package-details.name", value: "azure/aaa-bbb" },
-    ),
-    success: false,
-    subRules: [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
-  },
-];
+const tsDpModularPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  "",
+  "package-details.name",
+  "@azure/aaa-bbb",
+  "azure/aaa-bbb",
+  [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
+  false,
+  true,
+);
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",

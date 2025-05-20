@@ -281,7 +281,7 @@ export class TspConfigTsMlcDpPackageNameMatchPatternSubRule extends TspconfigEmi
     super(
       "@azure-tools/typespec-ts",
       "package-details.name",
-      new RegExp(/^\@azure\/[a-z]+(?:-[a-z]+)*$/),
+      new RegExp(/^@azure\/(?:[a-z]+-)*[a-z]+$/),
     );
   }
 
