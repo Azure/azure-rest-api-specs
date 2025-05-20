@@ -18,3 +18,4 @@ using Microsoft.GuestConfiguration;
 @@clientName(VmssvmInfo, "VMSSVMInfo");
 #suppress "deprecated" ""
 @@flattenProperty(Operation.properties);
+@@clientName(AssignmentReport, "CommonAssignmentReport", "go");
