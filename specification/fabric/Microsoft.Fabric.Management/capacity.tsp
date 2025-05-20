@@ -20,7 +20,7 @@ model FabricCapacity is TrackedResource<FabricCapacityProperties, false> {
   @key("capacityName")
   @path
   @segment("capacities")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The standard ResourceSkuProperty does not fit our case"
@@ -32,7 +32,7 @@ model FabricCapacity is TrackedResource<FabricCapacityProperties, false> {
 interface FabricCapacities {
   get is ArmResourceRead<FabricCapacity>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FabricCapacity>;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     FabricCapacity,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -56,7 +54,7 @@ model IamRole is TrackedResource<IamRoleProperties> {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IamRole")
 model IamRoleProperties {
   @doc("AWS Properties")
@@ -68,7 +66,7 @@ model IamRoleProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsIamRole")
 model AwsIamRoleProperties {
   @doc("Property arn")
@@ -81,7 +79,6 @@ model AwsIamRoleProperties {
   description?: string;
 
   @doc("A list of Amazon Resource Names (ARNs) of the IAM managed policies that you want to attach to the role. For more information about ARNs, see [Amazon Resource Names (ARNs) and Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *General Reference*.")
-  @extension("x-ms-identifiers", [])
   managedPolicyArns?: string[];
 
   @doc("The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default value of one hour is applied. This setting can have a value from 1 hour to 12 hours. Anyone who assumes the role from the CLI or API can use the ``DurationSeconds`` API parameter or the ``duration-seconds`` CLI parameter to request a longer session. The ``MaxSessionDuration`` setting determines the maximum duration that can be requested using the ``DurationSeconds`` parameter. If users don't specify a value for the ``DurationSeconds`` parameter, their security credentials are valid for one hour by default. This applies when you use the ``AssumeRole*`` API operations or the ``assume-role*`` CLI operations but does not apply when you use those operations to create a console URL. For more information, see [Using IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the *IAM User Guide*.")
@@ -94,7 +91,7 @@ model AwsIamRoleProperties {
   permissionsBoundary?: string;
 
   @doc("Adds or updates an inline policy document that is embedded in the specified IAM role. When you embed an inline policy in a role, the inline policy is used as part of the role's access (permissions) policy. The role's trust policy is created at the same time as the role. You can update a role's trust policy later. For more information about IAM roles, go to [Using Roles to Delegate Permissions and Federate Identities](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html). A role can also have an attached managed policy. For information about policies, see [Managed Policies and Inline Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *User Guide*. For information about limits on the number of inline policies that you can embed with a role, see [Limitations on Entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html) in the *User Guide*.  If an external policy (such as ``AWS::IAM::Policy`` or")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   policies?: Policy[];
 
   @doc("Property roleId")
@@ -104,14 +101,14 @@ model AwsIamRoleProperties {
   roleName?: string;
 
   @doc("A list of tags that are attached to the role. For more information about tagging, see [Tagging IAM resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the *IAM User Guide*.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Policy")
 model Policy {
   @doc("The entire contents of the policy that defines permissions. For more information, see [Overview of JSON policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json).")
@@ -124,7 +121,7 @@ model Policy {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
   @doc("The key name that can be used to look up or retrieve the associated value. For example, ``Department`` or ``Cost Center`` are common choices.")

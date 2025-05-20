@@ -27,9 +27,23 @@ These are the global settings for the computeschedule.
 ```yaml
 openapi-subtype: rpaas
 openapi-type: arm
-tag: package-2024-10-01
+tag: package-2025-05-01
 ```
- 
+
+### Tag: package-2025-05-01
+
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
+input-file:
+  - Microsoft.ComputeSchedule/stable/2025-05-01/computeschedule.json
+suppressions:  
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we don't want copy VMextensionProperties type here and update when dependency changes
+    from: computeschedule.json
+    where: $.definitions.VirtualMachineExtensionData.properties.properties
+```
+
 ### Tag: package-2024-10-01
 
 These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
@@ -50,10 +64,8 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -66,13 +78,6 @@ See configuration in [readme.az.md](./readme.az.md)
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp 
 

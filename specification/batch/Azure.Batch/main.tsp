@@ -5,9 +5,7 @@ import "./routes.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@service({
-  title: "Azure Batch",
-})
+@service(#{ title: "Azure Batch" })
 @versioned(Azure.Batch.Versions)
 @doc("Azure Batch provides Cloud-scale job scheduling and compute management.")
 @server(

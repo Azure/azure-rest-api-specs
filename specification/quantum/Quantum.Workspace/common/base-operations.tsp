@@ -5,11 +5,8 @@
 
 import "./common.tsp";
 
-using OpenAPI;
-using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Rest.Resource;
 using Azure.Core;
 using Azure.Core.Traits;
 
@@ -18,8 +15,7 @@ alias DefaultServiceTraits = NoRepeatableRequests &
   NoClientRequestId;
 alias AzureCoreOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
 
-@useDependency(DefaultAzureCoreVersion)
-namespace Quantum.Workspace.BaseOperations {
+namespace Quantum.Workspace.Services {
   alias ResourceOkOrNoContentResponse<Resource extends TypeSpec.Reflection.Model> = Azure.Core.Foundations.ResourceOkResponse<Resource> | TypeSpec.Http.NoContentResponse;
 
   /** Generic POST operation. */
@@ -45,7 +41,7 @@ namespace Quantum.Workspace.BaseOperations {
     See https://github.com/Azure/typespec-azure/issues/475
     """
   @updatesResource(Resource)
-  @patch
+  @patch(#{ implicitOptionality: true })
   op PatchOperation<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
     Resource,
     {

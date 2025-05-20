@@ -6,10 +6,13 @@ using Azure.ClientGenerator.Core;
 @TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.5`)
 namespace ClientCustomizations;
 
-@client({
-  name: "Client",
-  service: KeyVault,
-})
+@client(
+  {
+    name: "Client",
+    service: KeyVault,
+  },
+  "go"
+)
 interface Client {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   fullBackup is KeyVault.fullBackup;
@@ -17,6 +20,10 @@ interface Client {
   fullRestore is KeyVault.fullRestoreOperation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   selectiveKeyRestore is KeyVault.selectiveKeyRestoreOperation;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  preFullBackup is KeyVault.preFullBackup;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  preFullRestore is KeyVault.preFullRestoreOperation;
 }
 
 @@clientName(KeyVault.SASTokenParameter, "SASTokenParameters", "go");
@@ -25,6 +32,10 @@ interface Client {
   "go"
 );
 @@clientName(KeyVault.SelectiveKeyRestoreOperationParameters.sasTokenParameters,
+  "SASTokenParameters",
+  "go"
+);
+@@clientName(KeyVault.PreRestoreOperationParameters.sasTokenParameters,
   "SASTokenParameters",
   "go"
 );

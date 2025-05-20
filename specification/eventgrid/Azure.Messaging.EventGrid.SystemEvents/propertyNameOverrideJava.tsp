@@ -193,3 +193,8 @@ using Microsoft.EventGrid.SystemEvents;
   "receivedTimestamp",
   "java"
 );
+
+@@clientName(AcsCallEndedEventData.callDurationInSeconds,
+  "callDuration",
+  "java"
+);

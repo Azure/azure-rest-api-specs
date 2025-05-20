@@ -1,0 +1,228 @@
+{
+  "operationId": "AnalyzeConversations",
+  "title": "SuccessfulAnalyzeConversationalAITask",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2025-05-15-preview",
+    "body": {
+      "kind": "ConversationalAI",
+      "parameters": {
+        "projectName": "project1",
+        "deploymentName": "deployment1",
+        "stringIndexType": "Utf16CodeUnit"
+      },
+      "analysisInput": {
+        "conversations": [
+          {
+            "id": "order",
+            "language": "en",
+            "modality": "text",
+            "conversationItems": [
+              {
+                "participantId": "user",
+                "id": "1",
+                "text": "Hi!"
+              },
+              {
+                "participantId": "bot",
+                "id": "2",
+                "text": "Hello, how can I help you?"
+              },
+              {
+                "participantId": "user",
+                "id": "3",
+                "text": "I would like to book a flight from Paris to Berlin on Oct 10th."
+              },
+              {
+                "participantId": "bot",
+                "id": "4",
+                "text": "Do you have any airline preference?"
+              },
+              {
+                "participantId": "user",
+                "id": "5",
+                "text": "No."
+              },
+              {
+                "participantId": "user",
+                "id": "6",
+                "text": "I like New York and Boston."
+              },
+              {
+                "participantId": "user",
+                "id": "7",
+                "text": "Actualy, change the destination to New York."
+              },
+              {
+                "participantId": "user",
+                "id": "8",
+                "text": "Wait, I do not like the food in New York."
+              },
+              {
+                "participantId": "user",
+                "id": "9",
+                "text": "Ok, change the destination back to Berlin."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "ConversationalAIResult",
+        "result": {
+          "conversations": [
+            {
+              "id": "OrderAndQuestion",
+              "intents": [
+                {
+                  "type": "action",
+                  "name": "BookFlight",
+                  "conversationItemRanges": [
+                    {
+                      "offset": 2,
+                      "count": 3
+                    },
+                    {
+                      "offset": 6,
+                      "count": 1
+                    },
+                    {
+                      "offset": 8,
+                      "count": 1
+                    }
+                  ],
+                  "entities": [
+                    {
+                      "name": "Source",
+                      "text": "Paris",
+                      "confidenceScore": 0.8,
+                      "offset": 35,
+                      "length": 5,
+                      "conversationItemIndex": 2,
+                      "conversationItemId": "3"
+                    },
+                    {
+                      "name": "Geography.Location",
+                      "text": "Berlin",
+                      "confidenceScore": 0.8,
+                      "offset": 35,
+                      "length": 6,
+                      "conversationItemIndex": 8,
+                      "conversationItemId": "9",
+                      "extraInformation": [
+                        {
+                          "extraInformationKind": "EntitySubtype",
+                          "value": "geography.location",
+                          "tags": [
+                            {
+                              "name": "City",
+                              "confidenceScore": 1
+                            },
+                            {
+                              "name": "GPE",
+                              "confidenceScore": 1
+                            },
+                            {
+                              "name": "Location",
+                              "confidenceScore": 1
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Geography.Location",
+                      "text": "New York",
+                      "confidenceScore": 0.8,
+                      "offset": 32,
+                      "length": 8,
+                      "conversationItemIndex": 6,
+                      "conversationItemId": "7",
+                      "extraInformation": [
+                        {
+                          "extraInformationKind": "EntitySubtype",
+                          "value": "geography.location",
+                          "tags": [
+                            {
+                              "name": "City",
+                              "confidenceScore": 1
+                            },
+                            {
+                              "name": "GPE",
+                              "confidenceScore": 1
+                            },
+                            {
+                              "name": "Location",
+                              "confidenceScore": 1
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "DateTime",
+                      "text": "Oct 10th",
+                      "confidenceScore": 0.8,
+                      "offset": 54,
+                      "length": 8,
+                      "conversationItemIndex": 2,
+                      "conversationItemId": "3",
+                      "resolutions": [
+                        {
+                          "resolutionKind": "DateTimeResolution",
+                          "dateTimeSubKind": "Date",
+                          "timex": "XXXX-10-10",
+                          "value": "2024-10-10"
+                        },
+                        {
+                          "resolutionKind": "DateTimeResolution",
+                          "dateTimeSubKind": "Date",
+                          "timex": "XXXX-10-10",
+                          "value": "2025-10-10"
+                        }
+                      ],
+                      "extraInformation": [
+                        {
+                          "extraInformationKind": "EntitySubtype",
+                          "value": "datetime.date",
+                          "tags": [
+                            {
+                              "name": "Date",
+                              "confidenceScore": 1
+                            },
+                            {
+                              "name": "Temporal",
+                              "confidenceScore": 1
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "entities": [
+                {
+                  "name": "Geography.Location",
+                  "text": "Boston",
+                  "confidenceScore": 0.8,
+                  "offset": 20,
+                  "length": 8,
+                  "conversationItemId": "6"
+                }
+              ]
+            }
+          ],
+          "warnings": []
+        }
+      }
+    }
+  }
+}

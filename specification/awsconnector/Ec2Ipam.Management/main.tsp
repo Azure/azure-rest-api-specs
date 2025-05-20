@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -56,7 +54,7 @@ model Ec2Ipam is TrackedResource<Ec2IpamProperties> {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2Ipam")
 model Ec2IpamProperties {
   @doc("AWS Properties")
@@ -68,7 +66,7 @@ model Ec2IpamProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2Ipam")
 model AwsEc2IpamProperties {
   @doc("<p>The IPAM's default resource discovery association ID.</p>")
@@ -90,7 +88,7 @@ model AwsEc2IpamProperties {
   ipamRegion?: string;
 
   @doc("<p>The operating Regions for an IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions.</p> <p>For more information about operating Regions, see <a href='https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html'>Create an IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   operatingRegions?: IpamOperatingRegion[];
 
   @doc("<p>The Amazon Web Services account ID of the owner of the IPAM.</p>")
@@ -115,7 +113,7 @@ model AwsEc2IpamProperties {
   stateMessage?: string;
 
   @doc("<p>The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("<p>IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see <a href='http://aws.amazon.com/vpc/pricing/'>Amazon VPC pricing &gt; IPAM tab</a>.</p>")
@@ -166,7 +164,7 @@ union IpamState {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IpamStateEnumValue")
 model IpamStateEnumValue {
   @doc("Property value")
@@ -176,7 +174,7 @@ model IpamStateEnumValue {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IpamOperatingRegion")
 model IpamOperatingRegion {
   @doc("<p>The name of the operating Region.</p>")
@@ -197,7 +195,7 @@ union IpamTier {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IpamTierEnumValue")
 model IpamTierEnumValue {
   @doc("Property value")
@@ -207,7 +205,7 @@ model IpamTierEnumValue {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
   @doc("<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>")

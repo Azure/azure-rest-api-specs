@@ -624,7 +624,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -767,17 +767,12 @@
       "description": "Document Translate Request Content",
       "properties": {
         "document": {
-          "type": "string",
-          "format": "byte",
+          "type": "object",
           "description": "Document to be translated in the form"
         },
         "glossary": {
-          "type": "array",
-          "description": "Glossary-translation memory will be used during translation in the form. ",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
+          "type": "object",
+          "description": "Glossary-translation memory will be used during translation in the form. "
         }
       },
       "required": [

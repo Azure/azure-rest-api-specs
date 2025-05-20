@@ -38,6 +38,19 @@ directive:
   - suppress: TopLevelResourcesListBySubscription
     reason: The list by scope includes also list by subscription, this is an extension resource.
     from: AlertsManagement.json    
+  - suppress: GuidUsage
+    reason: The IDs of investigation entities are GUIDs.
+    from: Issues.json
+    where:
+     - $.definitions.FetchInvestigationResultParameters.properties.investigationId.format
+     - $.definitions.InvestigationMetadata.properties.id.format
+  - suppress: AvoidAdditionalProperties
+    reason: These are property bags that originate from user input (directly or indirectly), such as metric dimensions.
+    from: Issues.json
+    where:
+     - $.definitions.AzureMetricData.properties.dimensions
+     - $.definitions.TransactionEdge.properties.metadata
+     - $.definitions.TransactionNode.properties.metadata
 ```
 
 ``` yaml
@@ -45,6 +58,15 @@ title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
 tag: package-2023-03
+```
+
+### Tag: package-preview-2025-03-01-preview
+
+These settings apply only when `--tag=package-preview-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-03-01-preview'
+input-file:
+  - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
 ```
 
 ### Tag: package-preview-2024-01
@@ -98,6 +120,7 @@ input-file:
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
   - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
+  - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
 ```
 ### Tag: package-2021-08
 

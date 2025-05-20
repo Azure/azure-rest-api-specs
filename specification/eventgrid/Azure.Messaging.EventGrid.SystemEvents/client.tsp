@@ -10,6 +10,7 @@ import "./Microsoft.ContainerRegistry/client.tsp";
 import "./Microsoft.ContainerService/client.tsp";
 import "./Microsoft.DataBox/client.tsp";
 import "./Microsoft.Devices/client.tsp";
+import "./Microsoft.Edge/client.tsp";
 import "./Microsoft.EventGrid/client.tsp";
 import "./Microsoft.EventHub/client.tsp";
 import "./Microsoft.HealthcareApis/client.tsp";

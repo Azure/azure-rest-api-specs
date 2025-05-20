@@ -1,0 +1,56 @@
+{
+  "title": "Update Analyzer",
+  "operationId": "Analyzers_Update",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "analyzerId": "myAnalyzer",
+    "resource": {
+      "description": "Updated analyzer description.",
+      "tags": {
+        "reviewedBy": "Paul"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "analyzerId": "myAnalyzer",
+        "description": "Updated analyzer description.",
+        "tags": {
+          "createdBy": "John",
+          "reviewedBy": "Paul"
+        },
+        "status": "succeeded",
+        "createdAt": "2024-10-14T18:46:36.051Z",
+        "lastModifiedAt": "2024-10-14T18:46:36.051Z",
+        "scenario": "document",
+        "config": {
+          "locales": null,
+          "enableFace": false,
+          "enableOcr": true,
+          "enableLayout": true,
+          "enableBarcode": true,
+          "enableFormula": false,
+          "returnDetails": true
+        },
+        "fieldSchema": {
+          "name": "MyForm",
+          "description": "My custom form",
+          "fields": {
+            "Company": {
+              "type": "string",
+              "description": "Name of company."
+            }
+          },
+          "definitions": {}
+        },
+        "trainingData": {
+          "kind": "blob",
+          "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+          "prefix": "trainingData",
+          "fileListPath": "trainingData/fileList.jsonl"
+        }
+      }
+    }
+  }
+}

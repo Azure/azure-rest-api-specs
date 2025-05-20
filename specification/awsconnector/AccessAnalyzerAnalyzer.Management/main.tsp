@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -57,7 +55,7 @@ model AccessAnalyzerAnalyzer
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AccessAnalyzerAnalyzer")
 model AccessAnalyzerAnalyzerProperties {
   @doc("AWS Properties")
@@ -69,7 +67,7 @@ model AccessAnalyzerAnalyzerProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsAccessAnalyzerAnalyzer")
 model AwsAccessAnalyzerAnalyzerProperties {
   @doc("The configuration for the analyzer")
@@ -79,14 +77,14 @@ model AwsAccessAnalyzerAnalyzerProperties {
   analyzerName?: string;
 
   @doc("Property archiveRules")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   archiveRules?: ArchiveRule[];
 
   @doc("Amazon Resource Name (ARN) of the analyzer")
   arn?: string;
 
   @doc("An array of key-value pairs to apply to this resource.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS")
@@ -96,7 +94,7 @@ model AwsAccessAnalyzerAnalyzerProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of UnusedAccessConfiguration")
 model UnusedAccessConfiguration {
   @doc("The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.")
@@ -106,11 +104,11 @@ model UnusedAccessConfiguration {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ArchiveRule")
 model ArchiveRule {
   @doc("Property filter")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   filter?: Filter[];
 
   @doc("The archive rule name")
@@ -120,7 +118,7 @@ model ArchiveRule {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
   @doc("The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
@@ -133,22 +131,19 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Filter")
 model Filter {
   @doc("Property contains")
-  @extension("x-ms-identifiers", [])
   contains?: string[];
 
   @doc("Property eq")
-  @extension("x-ms-identifiers", [])
   eq?: string[];
 
   @doc("Property exists")
   exists?: boolean;
 
   @doc("Property neq")
-  @extension("x-ms-identifiers", [])
   neq?: string[];
 
   @doc("Property property")

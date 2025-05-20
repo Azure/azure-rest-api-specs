@@ -24,7 +24,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
 @parentResource(ReportResource)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ScopingConfigurationProperties
 )
@@ -32,7 +32,7 @@ model ScopingConfigurationResource
   extends Azure.ResourceManager.Foundations.ProxyResource {
   @key("scopingConfigurationName")
   @segment("scopingConfigurations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The scoping configuration of the specific report.")
   @pattern("^[a-zA-Z0-9_]*$")
   @path

@@ -77,3 +77,21 @@ interface OperationResults {
     ...Foundations.OperationIdParameter,
   ): ArmResponse<OperationStatus> | ErrorResponse;
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Cannot use @armResourceOperations decorator here, the auto-generated routes do not match feature requirements"
+interface LocationBasedOperationResults {
+  /**
+   * Gets the location based operation result.
+   */
+  @summary("Gets the location based operation result status.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/locations/{location}/operationResults/{operationId}")
+  @armResourceRead(ArmResponse<OperationStatus>)
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...LocationResourceParameter,
+    ...Foundations.OperationIdParameter,
+  ): ArmResponse<OperationStatus> | ErrorResponse;
+}

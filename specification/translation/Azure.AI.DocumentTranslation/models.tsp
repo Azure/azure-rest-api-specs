@@ -11,10 +11,10 @@ namespace DocumentTranslation;
 @doc("Document Translate Request Content")
 model DocumentTranslateContent {
   @doc("Document to be translated in the form")
-  document: bytes;
+  document: HttpPart<bytes>;
 
   @doc("Glossary-translation memory will be used during translation in the form. ")
-  glossary?: bytes[];
+  glossary?: HttpPart<bytes[]>;
 }
 
 @doc("Document Translate Result / Response.")
@@ -274,7 +274,7 @@ model TranslationError {
     For example it would be \"documents\" or
     \"document id\" in case of invalid document.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("""
@@ -308,7 +308,7 @@ model InnerTranslationError {
     For example it would be \"documents\" or
     \"document id\" in case of invalid document.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("""
@@ -516,7 +516,7 @@ model DocumentTranslateBody {
   contentType: "multipart/form-data";
 
   @doc("Document Translate Request Content")
-  @body
+  @multipartBody
   body: DocumentTranslateContent;
 
   @doc("Optional boolean parameter to translate text within an image in the document")

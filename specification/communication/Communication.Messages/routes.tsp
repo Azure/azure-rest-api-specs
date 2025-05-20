@@ -45,3 +45,97 @@ interface StreamOperations {
   @doc("Download the Media payload from a User to Business message.")
   getMedia is Operations.ResourceRead<MessageDataStream>;
 }
+
+@added(Versions.c2025_04_01_Preview)
+interface ConversationAdministrationOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @tag("ConversationAdministration")
+  @doc("Creates a new conversation. This is only for create operation.")
+  @createsResource(Conversation)
+  @added(Versions.c2025_04_01_Preview)
+  createConversation is Foundations.ResourceCollectionOperation<
+    Conversation,
+    CreateConversationRequest,
+    CreatedResponse & Conversation
+  >;
+
+  @tag("ConversationAdministration")
+  @doc("Gets the details of a specific conversation.")
+  @added(Versions.c2025_04_01_Preview)
+  getConversation is Operations.ResourceRead<Conversation>;
+
+  @tag("ConversationAdministration")
+  @doc("Deletes a specific conversation.")
+  @added(Versions.c2025_04_01_Preview)
+  deleteConversation is Operations.ResourceDelete<Conversation>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+  @tag("ConversationAdministration")
+  @doc("Terminates a specific conversation.")
+  @added(Versions.c2025_04_01_Preview)
+  @action("terminate")
+  terminateConversation is Operations.ResourceAction<
+    Conversation,
+    {},
+    OkResponse
+  >;
+}
+
+@added(Versions.c2025_04_01_Preview)
+interface ConversationThreadOperations {
+  @tag("ConversationThread")
+  @doc("Adds participants to a specific conversation.")
+  @added(Versions.c2025_04_01_Preview)
+  @action("add")
+  addParticipants is Operations.ResourceCollectionAction<
+    ConversationParticipant,
+    AddParticipantsRequestBody,
+    Response<207> & AddParticipantsResult
+  >;
+
+  @tag("ConversationThread")
+  @doc("remove a participant from a conversation")
+  @added(Versions.c2025_04_01_Preview)
+  @action("remove")
+  removeParticipants is Operations.ResourceCollectionAction<
+    ConversationParticipant,
+    RemoveParticipantsRequestBody,
+    Response<207> & RemoveParticipantsResult
+  >;
+
+  @tag("ConversationThread")
+  @doc("Retrieves list of conversations.")
+  @added(Versions.c2025_04_01_Preview)
+  listConversations is Operations.ResourceList<
+    Conversation,
+    ListConversationsQueryParams
+  >;
+
+  @tag("ConversationThread")
+  @doc("Retrieves list of conversation messages.")
+  @added(Versions.c2025_04_01_Preview)
+  listMessages is Operations.ResourceList<
+    ConversationMessageItem,
+    ListConversationThreadQueryParams
+  >;
+
+  @tag("ConversationThread")
+  @doc("Sends a conversation message from Business to User.")
+  @added(Versions.c2025_04_01_Preview)
+  @action("send")
+  sendMessage is Operations.ResourceCollectionAction<
+    ConversationMessageItem,
+    ConversationThreadSendRequestBody,
+    OkResponse & SendConversationMessageResult
+  >;
+
+  @tag("ConversationThread")
+  @doc("Get AI Analysis of a conversation.")
+  @added(Versions.c2025_04_01_Preview)
+  @action("analyze")
+  analyzeConversation is Operations.ResourceAction<
+    Conversation,
+    {},
+    OkResponse & GetConversationThreadAnalysisResult
+  >;
+}

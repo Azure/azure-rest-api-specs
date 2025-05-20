@@ -83,10 +83,10 @@ model TriggerDisabledNotificationEventFilter
 @doc("TestRunEnded Event condition.")
 model TestRunEndedEventCondition {
   @doc("The test run statuses to send notification for.")
-  testRunStatuses?: Status[];
+  testRunStatuses?: TestRunStatus[];
 
   @doc("The test run results to send notification for.")
-  testRunResults?: PFTestResult[];
+  testRunResults?: PassFailTestResult[];
 }
 
 @added(APIVersions.v2024_12_01_preview)
@@ -99,7 +99,7 @@ model NotificationRule {
   @minLength(2)
   @pattern("^[a-z0-9_-]*$")
   @doc("The unique identifier of the notification rule.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   notificationRuleId: string;
 
   @maxLength(50)

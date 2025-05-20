@@ -14,7 +14,6 @@ using TypeSpec.OpenAPI;
 namespace GitHub.Network;
 
 @doc("GitHub.Network networkSettings resource. Represents the network settings needed for vnet injection.")
-@includeInapplicableMetadataInPayload(false)
 model NetworkSettingsResource
   is Azure.ResourceManager.TrackedResource<NetworkSettingsResourceProperties> {
   @doc("Name of the GitHub.Network resource")
@@ -22,7 +21,7 @@ model NetworkSettingsResource
   @path
   @key("networkSettingsName")
   @segment("networkSettings")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

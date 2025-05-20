@@ -1,7 +1,5 @@
 import { parse as yamlParse } from "yaml";
 
-import { exec } from "child_process";
-import { promisify } from "util";
 
 /**
  * @param yamlContent 
@@ -41,23 +39,4 @@ export function parseYamlContent(yamlContent: string, path: string): {
     message: 'The file has been successfully parsed.'
   };
   
-}
-
-// Promisify the exec function
-const execAsync = promisify(exec);
-
-export async function runGitCommand(command: string): Promise<string> {
-  try {
-    const { stdout, stderr } = await execAsync(command);
-
-    if (stderr) {
-      console.error("Error Output:", stderr);
-    //   throw new Error(stderr);
-    }
-
-    return stdout.trim();
-  } catch (error:any) {
-    console.error("Error details:", error.stderr || error);
-    throw error;
-  }
 }

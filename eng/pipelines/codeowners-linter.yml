@@ -27,8 +27,8 @@ stages:
   - job: Run
     timeoutInMinutes: 120
     pool:
-      name: azsdk-pool-x64
-      demands: ImageOverride -equals ubuntu-22.04
+      name: azsdk-pool
+      demands: ImageOverride -equals ubuntu-24.04
 
     variables:
       CodeownersLinterVersion: '1.0.0-dev.20240926.2'

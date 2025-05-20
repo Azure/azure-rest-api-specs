@@ -1,11 +1,9 @@
 namespace Microsoft.AVS;
 
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface WorkloadNetworkVirtualMachines {
@@ -39,14 +37,14 @@ model WorkloadNetworkVirtualMachine
 @doc("NSX Virtual Machine Properties")
 model WorkloadNetworkVirtualMachineProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkProvisioningState;
 
   @doc("Display name of the VM.")
   displayName?: string;
 
   @doc("Virtual machine type.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmType?: VMTypeEnum;
 }
 

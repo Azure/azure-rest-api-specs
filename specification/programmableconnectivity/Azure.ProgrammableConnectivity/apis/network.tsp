@@ -26,7 +26,7 @@ interface DeviceNetwork {
 model DeviceNetworkRetrievalEndpoint {
   @key
   @doc("Static endpoint")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   network: "network";
 }
 

@@ -13,6 +13,7 @@ import "./VirtualMachineInstance.tsp";
 import "./VmInstanceHybridIdentityMetadata.tsp";
 import "./GuestAgent.tsp";
 import "./BackCompat.tsp";
+import "./custom.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -22,9 +23,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /** The Microsoft.ScVmm Rest API spec. */
 @armProviderNamespace
-@service({
-  title: "ScVmm",
-})
+@service(#{ title: "ScVmm" })
 @versioned(Versions)
 namespace Microsoft.ScVmm;
 
@@ -41,4 +40,10 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_06_01: "2024-06-01",
+
+  /** Service version 2025-03-13. */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_03_13: "2025-03-13",
 }

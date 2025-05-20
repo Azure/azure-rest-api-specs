@@ -21,7 +21,16 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-09-01
+tag: package-2024-09-01
+```
+
+### Tag: package-2024-09-01
+
+These settings apply only when `--tag=package-2024-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09-01'
+input-file:
+- Microsoft.AVS/stable/2024-09-01/vmware.json
 ```
 
 ### Tag: package-2023-09-01
@@ -106,7 +115,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
@@ -128,6 +136,12 @@ directive:
 
 suppressions:
     
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: False positive for paged response.
+    from: vmware.json
+    where:
+      - $.definitions.PagedResourceSku
+
   - code: pathresourceprovidernamepascalcase
     reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
     from: vmware.json
@@ -296,10 +310,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"]
 ```
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## Python
 

@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "./custom.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -17,7 +18,7 @@ model VirtualMachineInstance
   /** Name of the virtual machine instance. */
   @key
   @segment("virtualMachineInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(54)
   @minLength(1)
   @pattern("[a-zA-Z0-9-_\\.]")
@@ -26,7 +27,7 @@ model VirtualMachineInstance
 
   /** Gets or sets the extended location. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the linter"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
@@ -71,9 +72,7 @@ interface VirtualMachineInstances {
   @summary("Updates a virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
@@ -84,9 +83,7 @@ interface VirtualMachineInstances {
   @summary("Deletes an virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,
@@ -104,13 +101,9 @@ interface VirtualMachineInstances {
   list is ArmResourceListByParent<VirtualMachineInstance>;
   /** The operation to power off (stop) a virtual machine instance. */
   @summary("Implements the operation to stop a virtual machine.")
-  stop is ArmResourceActionNoResponseContentAsync<
+  stop is CustomizedArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    {
-      /** The content of the action request */
-      @body
-      body?: StopVirtualMachineOptions;
-    }
+    StopVirtualMachineOptions
   >;
   /** The operation to start a virtual machine instance. */
   @summary("Implements the operation to start a virtual machine.")

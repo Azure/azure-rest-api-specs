@@ -68,27 +68,25 @@ const config = tseslint.config(
       "@typescript-eslint/restrict-template-expressions": "off",
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/no-unsafe-argument": "off",
+      "@typescript-eslint/consistent-indexed-object-style": "off",
+      "@typescript-eslint/no-unnecessary-condition": "off",
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/no-inferrable-types": "off",
+      "@typescript-eslint/no-dynamic-delete": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-explicit-any": "off",
 
       // We want more flexibility with file names.
       // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/filename-case.md
       "unicorn/filename-case": "off",
       "unicorn/prefer-ternary": "off",
+      "unicorn/no-useless-undefined": "off",
+      "unicorn/prevent-abbreviations": "off",
 
       // We prefer to have explicitly import at the top of the file, even if the same element is exported again,
       // which we do in index.ts files.
       // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-export-from.md
       "unicorn/prefer-export-from": ["error", { ignoreUsedVariables: true }],
-
-      // We allow some abbreviations that we like.
-      // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prevent-abbreviations.md
-      "unicorn/prevent-abbreviations": [
-        "error",
-        {
-          allowList: {
-            args: true,
-          },
-        },
-      ],
     },
   }
 );

@@ -1,0 +1,54 @@
+{
+  "title": "StacItems_Update",
+  "operationId": "StacItems_Update",
+  "parameters": {
+    "collectionId": "{{collectionId}}",
+    "itemId": "{{itemId}}",
+    "api-version": "2025-04-30-preview",
+    "body": {
+      "id": "{{itemId}}",
+      "collection": "{{collectionId}}",
+      "type": "Feature",
+      "assets": {
+        "sample_external": null,
+        "sample_user": {
+          "href": "https://sample.blob.core.windows.net/samples/4MB.jp2",
+          "title": "Sample storage account Image (4MB)",
+          "type": "image/jp2",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "properties": {
+        "datetime": "2021-12-15T00:00:00Z",
+        "naip:year": "2021"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "id": "30e6744d-81a3-44e2-8a85-0325365272ae",
+        "status": "Pending",
+        "type": "Update",
+        "statusHistory": [
+          {
+            "status": "Pending",
+            "timestamp": "2024-10-09T09:31:24.1968201Z"
+          }
+        ],
+        "creationTime": "2024-10-09T09:31:24.1968185Z",
+        "additionalInformation": {
+          "totalItems": "0",
+          "totalPendingItems": "0",
+          "totalSuccessfulItems": "0",
+          "totalFailedItems": "0"
+        }
+      }
+    }
+  }
+}

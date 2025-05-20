@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -57,7 +55,7 @@ model Route53ResourceRecordSet
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Route53ResourceRecordSet")
 model Route53ResourceRecordSetProperties {
   @doc("AWS Properties")
@@ -69,7 +67,7 @@ model Route53ResourceRecordSetProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsRoute53ResourceRecordSet")
 model AwsRoute53ResourceRecordSetProperties {
   @doc("<p> <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or an Amazon S3 bucket, that you want to route traffic to. </p> <p>If you're creating resource records sets for a private hosted zone, note the following:</p> <ul> <li> <p>You can't create an alias resource record set in a private hosted zone to route traffic to a CloudFront distribution.</p> </li> <li> <p>For information about creating failover resource record sets in a private hosted zone, see <a href='https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html'>Configuring Failover in a Private Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> </li> </ul>")
@@ -100,7 +98,7 @@ model AwsRoute53ResourceRecordSetProperties {
   region?: ResourceRecordSetRegionEnumValue;
 
   @doc("<p>Information about the resource records to act upon.</p> <note> <p>If you're creating an alias resource record set, omit <code>ResourceRecords</code>.</p> </note>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   resourceRecords?: ResourceRecord[];
 
   @doc("<p> <i>Resource record sets that have a routing policy other than simple:</i> An identifier that differentiates among multiple resource record sets that have the same combination of name and type, such as multiple weighted resource record sets named acme.example.com that have a type of A. In a group of resource record sets that have the same name and type, the value of <code>SetIdentifier</code> must be unique for each resource record set. </p> <p>For information about routing policies, see <a href='https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html'>Choosing a Routing Policy</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>")
@@ -133,7 +131,7 @@ union ResourceRecordSetFailover {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ResourceRecordSetFailoverEnumValue")
 model ResourceRecordSetFailoverEnumValue {
   @doc("Property value")
@@ -187,7 +185,7 @@ union RRType {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RRTypeEnumValue")
 model RRTypeEnumValue {
   @doc("Property value")
@@ -197,7 +195,7 @@ model RRTypeEnumValue {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AliasTarget")
 model AliasTarget {
   @doc("<p> <i>Alias resource record sets only:</i> The value that you specify depends on where you want to route queries:</p> <dl> <dt>Amazon API Gateway custom regional APIs and edge-optimized APIs</dt> <dd> <p>Specify the applicable domain name for your API. You can get the applicable value using the CLI command <a href='https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html'>get-domain-names</a>:</p> <ul> <li> <p>For regional APIs, specify the value of <code>regionalDomainName</code>.</p> </li> <li> <p>For edge-optimized APIs, specify the value of <code>distributionDomainName</code>. This is the name of the associated CloudFront distribution, such as <code>da1b2c3d4e5.cloudfront.net</code>.</p> </li> </ul> <note> <p>The name of the record that you're creating must match a custom domain name for your API, such as <code>api.example.com</code>.</p> </note> </dd> <dt>Amazon Virtual Private Cloud interface VPC endpoint</dt> <dd> <p>Enter the API endpoint for the interface endpoint, such as <code>vpce-123456789abcdef01-example-us-east-1a.elasticloadbalancing.us-east-1.vpce.amazonaws.com</code>. For edge-optimized APIs, this is the domain name for the corresponding CloudFront distribution. You can get the value of <code>DnsName</code> using the CLI command <a href='https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html'>describe-vpc-endpoints</a>.</p> </dd> <dt>CloudFront distribution</dt> <dd> <p>Specify the domain name that CloudFront assigned when you created your distribution.</p> <p>Your CloudFront distribution must include an alternate domain name that matches the name of the resource record set. For example, if the name of the resource record set is <i>acme.example.com</i>, your CloudFront distribution must include <i>acme.example.com</i> as one of the alternate domain names. For more information, see <a href='https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html'>Using Alternate Domain Names (CNAMEs)</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>You can't create a resource record set in a private hosted zone to route traffic to a CloudFront distribution.</p> <note> <p>For failover alias records, you can't specify a CloudFront distribution for both the primary and secondary records. A distribution must include an alternate domain name that matches the name of the record. However, the primary and secondary records have the same name, and you can't include the same alternate domain name in more than one distribution. </p> </note> </dd> <dt>Elastic Beanstalk environment</dt> <dd> <p>If the domain name for your Elastic Beanstalk environment includes the region that you deployed the environment in, you can create an alias record that routes traffic to the environment. For example, the domain name <code>my-environment.<i>us-west-2</i>.elasticbeanstalk.com</code> is a regionalized domain name. </p> <important> <p>For environments that were created before early 2016, the domain name doesn't include the region. To route traffic to these environments, you must create a CNAME record instead of an alias record. Note that you can't create a CNAME record for the root domain name. For example, if your domain name is example.com, you can create a record that routes traffic for acme.example.com to your Elastic Beanstalk environment, but you can't create a record that routes traffic for example.com to your Elastic Beanstalk environment.</p> </important> <p>For Elastic Beanstalk environments that have regionalized subdomains, specify the <code>CNAME</code> attribute for the environment. You can use the following methods to get the value of the CNAME attribute:</p> <ul> <li> <p> <i>Amazon Web Services Management Console</i>: For information about how to get the value by using the console, see <a href='https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customdomains.html'>Using Custom Domains with Elastic Beanstalk</a> in the <i>Elastic Beanstalk Developer Guide</i>.</p> </li> <li> <p> <i>Elastic Beanstalk API</i>: Use the <code>DescribeEnvironments</code> action to get the value of the <code>CNAME</code> attribute. For more information, see <a href='https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironments.html'>DescribeEnvironments</a> in the <i>Elastic Beanstalk API Reference</i>.</p> </li> <li> <p> <i>CLI</i>: Use the <code>describe-environments</code> command to get the value of the <code>CNAME</code> attribute. For more information, see <a href='https://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/describe-environments.html'>describe-environments</a> in the <i>CLI Command Reference</i>.</p> </li> </ul> </dd> <dt>ELB load balancer</dt> <dd> <p>Specify the DNS name that is associated with the load balancer. Get the DNS name by using the Amazon Web Services Management Console, the ELB API, or the CLI. </p> <ul> <li> <p> <b>Amazon Web Services Management Console</b>: Go to the EC2 page, choose <b>Load Balancers</b> in the navigation pane, choose the load balancer, choose the <b>Description</b> tab, and get the value of the <b>DNS name</b> field. </p> <p>If you're routing traffic to a Classic Load Balancer, get the value that begins with <b>dualstack</b>. If you're routing traffic to another type of load balancer, get the value that applies to the record type, A or AAAA.</p> </li> <li> <p> <b>Elastic Load Balancing API</b>: Use <code>DescribeLoadBalancers</code> to get the value of <code>DNSName</code>. For more information, see the applicable guide:</p> <ul> <li> <p>Classic Load Balancers: <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html'>DescribeLoadBalancers</a> </p> </li> <li> <p>Application and Network Load Balancers: <a href='https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html'>DescribeLoadBalancers</a> </p> </li> </ul> </li> <li> <p> <b>CLI</b>: Use <code>describe-load-balancers</code> to get the value of <code>DNSName</code>. For more information, see the applicable guide:</p> <ul> <li> <p>Classic Load Balancers: <a href='http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html'>describe-load-balancers</a> </p> </li> <li> <p>Application and Network Load Balancers: <a href='http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html'>describe-load-balancers</a> </p> </li> </ul> </li> </ul> </dd> <dt>Global Accelerator accelerator</dt> <dd> <p>Specify the DNS name for your accelerator:</p> <ul> <li> <p> <b>Global Accelerator API:</b> To get the DNS name, use <a href='https://docs.aws.amazon.com/global-accelerator/latest/api/API_DescribeAccelerator.html'>DescribeAccelerator</a>.</p> </li> <li> <p> <b>CLI:</b> To get the DNS name, use <a href='https://docs.aws.amazon.com/cli/latest/reference/globalaccelerator/describe-accelerator.html'>describe-accelerator</a>.</p> </li> </ul> </dd> <dt>Amazon S3 bucket that is configured as a static website</dt> <dd> <p>Specify the domain name of the Amazon S3 website endpoint that you created the bucket in, for example, <code>s3-website.us-east-2.amazonaws.com</code>. For more information about valid values, see the table <a href='https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints'>Amazon S3 Website Endpoints</a> in the <i>Amazon Web Services General Reference</i>. For more information about using S3 buckets for websites, see <a href='https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started.html'>Getting Started with Amazon Route 53</a> in the <i>Amazon Route 53 Developer Guide.</i> </p> </dd> <dt>Another Route 53 resource record set</dt> <dd> <p>Specify the value of the <code>Name</code> element for a resource record set in the current hosted zone.</p> <note> <p>If you're creating an alias record that has the same name as the hosted zone (known as the zone apex), you can't specify the domain name for a record for which the value of <code>Type</code> is <code>CNAME</code>. This is because the alias record must have the same type as the record that you're routing traffic to, and creating a CNAME record for the zone apex isn't supported even for an alias record.</p> </note> </dd> </dl>")
@@ -311,7 +309,7 @@ union ResourceRecordSetRegion {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ResourceRecordSetRegionEnumValue")
 model ResourceRecordSetRegionEnumValue {
   @doc("Property value")
@@ -321,7 +319,7 @@ model ResourceRecordSetRegionEnumValue {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CidrRoutingConfig")
 model CidrRoutingConfig {
   @doc("<p>The CIDR collection ID.</p>")
@@ -334,7 +332,7 @@ model CidrRoutingConfig {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of GeoLocation")
 model GeoLocation {
   @doc("<p>The two-letter code for the continent.</p> <p>Amazon Route 53 supports the following continent codes:</p> <ul> <li> <p> <b>AF</b>: Africa</p> </li> <li> <p> <b>AN</b>: Antarctica</p> </li> <li> <p> <b>AS</b>: Asia</p> </li> <li> <p> <b>EU</b>: Europe</p> </li> <li> <p> <b>OC</b>: Oceania</p> </li> <li> <p> <b>NA</b>: North America</p> </li> <li> <p> <b>SA</b>: South America</p> </li> </ul> <p>Constraint: Specifying <code>ContinentCode</code> with either <code>CountryCode</code> or <code>SubdivisionCode</code> returns an <code>InvalidInput</code> error.</p>")
@@ -350,7 +348,7 @@ model GeoLocation {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of GeoProximityLocation")
 model GeoProximityLocation {
   @doc("<p> The Amazon Web Services Region the resource you are directing DNS traffic to, is in. </p>")
@@ -369,7 +367,7 @@ model GeoProximityLocation {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ResourceRecord")
 model ResourceRecord {
   @doc("<p>The current or new DNS record value, not to exceed 4,000 characters. In the case of a <code>DELETE</code> action, if the current value does not match the actual value, an error is returned. For descriptions about how to format <code>Value</code> for different record types, see <a href='https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html'>Supported DNS Resource Record Types</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>You can specify more than one value for all record types except <code>CNAME</code> and <code>SOA</code>. </p> <note> <p>If you're creating an alias resource record set, omit <code>Value</code>.</p> </note>")
@@ -379,7 +377,7 @@ model ResourceRecord {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Coordinates")
 model Coordinates {
   @doc("<p> Specifies a coordinate of the north–south position of a geographic point on the surface of the Earth (-90 - 90). </p>")

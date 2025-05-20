@@ -250,7 +250,7 @@
         "tags": [
           "AutonomousDatabaseCharacterSets"
         ],
-        "description": "List AutonomousDatabaseCharacterSet resources by Location",
+        "description": "List AutonomousDatabaseCharacterSet resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -339,7 +339,7 @@
         "tags": [
           "AutonomousDatabaseNationalCharacterSets"
         ],
-        "description": "List AutonomousDatabaseNationalCharacterSet resources by Location",
+        "description": "List AutonomousDatabaseNationalCharacterSet resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -428,7 +428,7 @@
         "tags": [
           "AutonomousDatabaseVersions"
         ],
-        "description": "List AutonomousDbVersion resources by Location",
+        "description": "List AutonomousDbVersion resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -517,7 +517,7 @@
         "tags": [
           "DbSystemShapes"
         ],
-        "description": "List DbSystemShape resources by Location",
+        "description": "List DbSystemShape resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -606,7 +606,7 @@
         "tags": [
           "DnsPrivateViews"
         ],
-        "description": "List DnsPrivateView resources by Location",
+        "description": "List DnsPrivateView resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -697,7 +697,7 @@
         "tags": [
           "DnsPrivateZones"
         ],
-        "description": "List DnsPrivateZone resources by Location",
+        "description": "List DnsPrivateZone resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -786,7 +786,7 @@
         "tags": [
           "GiVersions"
         ],
-        "description": "List GiVersion resources by Location",
+        "description": "List GiVersion resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -875,7 +875,7 @@
         "tags": [
           "SystemVersions"
         ],
-        "description": "List SystemVersion resources by Location",
+        "description": "List SystemVersion resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1074,6 +1074,10 @@
               "$ref": "#/definitions/OracleSubscription"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1570,6 +1574,10 @@
               "$ref": "#/definitions/AutonomousDatabase"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1742,7 +1750,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/autonomousDatabases/{autonomousdatabasename}/autonomousDatabaseBackups": {
       "get": {
-        "operationId": "AutonomousDatabaseBackups_ListByAutonomousDatabase",
+        "operationId": "AutonomousDatabaseBackups_ListByParent",
         "tags": [
           "AutonomousDatabaseBackups"
         ],
@@ -1783,9 +1791,6 @@
           }
         },
         "x-ms-examples": {
-          "AutonomousDatabaseBackups_ListByAutonomousDatabase": {
-            "$ref": "./examples/autonomousDatabaseBackup_listByParent.json"
-          },
           "List Autonomous Database Backups by Autonomous Database.": {
             "$ref": "./examples/autonomousDatabaseBackup_listByParent.json"
           }
@@ -1911,6 +1916,10 @@
               "$ref": "#/definitions/AutonomousDatabaseBackup"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2594,6 +2603,10 @@
               "$ref": "#/definitions/CloudExadataInfrastructure"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2818,7 +2831,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudExadataInfrastructures/{cloudexadatainfrastructurename}/dbServers": {
       "get": {
-        "operationId": "DbServers_ListByCloudExadataInfrastructure",
+        "operationId": "DbServers_ListByParent",
         "tags": [
           "DbServers"
         ],
@@ -3058,6 +3071,10 @@
               "$ref": "#/definitions/CloudVmCluster"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3291,7 +3308,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters/{cloudvmclustername}/dbNodes": {
       "get": {
-        "operationId": "DbNodes_ListByCloudVmCluster",
+        "operationId": "DbNodes_ListByParent",
         "tags": [
           "DbNodes"
         ],
@@ -3619,7 +3636,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters/{cloudvmclustername}/virtualNetworkAddresses": {
       "get": {
-        "operationId": "VirtualNetworkAddresses_ListByCloudVmCluster",
+        "operationId": "VirtualNetworkAddresses_ListByParent",
         "tags": [
           "VirtualNetworkAddresses"
         ],
@@ -3780,6 +3797,10 @@
               "$ref": "#/definitions/VirtualNetworkAddress"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -4202,30 +4223,19 @@
     },
     "AutonomousDatabaseBackupUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the AutonomousDatabaseBackup.",
+      "description": "AutonomousDatabaseBackup resource definition",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AutonomousDatabaseBackupUpdateProperties",
+          "$ref": "#/definitions/AutonomousDatabaseBackupProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
-      }
-    },
-    "AutonomousDatabaseBackupUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AutonomousDatabaseBackup.",
-      "properties": {
-        "retentionPeriodInDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retention period, in days",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      }
+      ]
     },
     "AutonomousDatabaseBaseProperties": {
       "type": "object",
@@ -7842,7 +7852,7 @@
         "timeUpdated": {
           "type": "string",
           "format": "date-time",
-          "description": "views timeUpdated"
+          "description": "views timeCreated"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -8732,7 +8742,7 @@
         },
         "azureSubscriptionIds": {
           "type": "array",
-          "description": "Azure subscriptions associated with this OracleSubscription",
+          "description": "Azure subscriptions to be added",
           "items": {
             "type": "string"
           },
