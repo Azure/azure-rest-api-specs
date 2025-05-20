@@ -114,13 +114,10 @@ These settings apply only when `--tag=package-preview-2025-05-04-preview` is spe
 input-file:
   - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
   - Microsoft.Security/preview/2025-05-04-preview/assessments.json
-suppressions:
-  - code: OperationsAPIImplementation
-    from: assessmentMetadata.json
-    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
   ```
 
 ### Tag: package-2025-03
+
 These settings apply only when `--tag=package-2025-03` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-03'
