@@ -280,6 +280,192 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/listAuthorizations": {
+      "post": {
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
+        "operationId": "ExpressRouteCircuitAuthorizations_List",
+        "description": "Gets all authorizations in an express route circuit.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the circuit."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ExpressRouteCircuitAuthorization resources.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}/getAuthorization": {
+      "post": {
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
+        "operationId": "ExpressRouteCircuitAuthorizations_Get",
+        "description": "Gets the specified authorization from the specified express route circuit.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the express route circuit."
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the authorization."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the ExpressRouteCircuitAuthorization resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}/addAuthorization": {
+      "post": {
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
+        "operationId": "ExpressRouteCircuitAuthorizations_CreateOrUpdate",
+        "description": "Creates or updates an authorization in the specified express route circuit.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the express route circuit."
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the authorization."
+          },
+          {
+            "name": "authorizationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+            },
+            "description": "Parameters supplied to the create or update express route circuit authorization operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The operation returns the resulting ExpressRouteCircuitAuthorization resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+            }
+          },
+          "200": {
+            "description": "Update successful. The operation returns the resulting ExpressRouteCircuitAuthorization resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationCreate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}": {
       "delete": {
         "tags": [
@@ -1606,6 +1792,7 @@
       "properties": {
         "authorizationKey": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "The authorization key."
         },
         "authorizationUseStatus": {
@@ -1983,6 +2170,7 @@
         },
         "authorizationKey": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "The authorization key."
         },
         "ipv6CircuitConnectionConfig": {
@@ -2247,6 +2435,7 @@
         },
         "authorizationKey": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "The authorizationKey."
         },
         "authorizationStatus": {
