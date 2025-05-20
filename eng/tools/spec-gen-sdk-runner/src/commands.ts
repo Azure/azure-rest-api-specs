@@ -205,14 +205,17 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   let executionReport;
   let specConfigPath = "";
   let stagedArtifactsFolder = "";
+  let serviceFolderPath = "";
 
   // Generate SDKs for each spec
   for (const specConfigs of specConfigsArray) {
     if (specConfigs.tspconfigPath && specConfigs.readmePath) {
-      logMessage(
-        `Generating SDK from ${specConfigs.tspconfigPath} and ${specConfigs.readmePath}`,
-        LogLevel.Group,
-      );
+      serviceFolderPath = specConfigs.tspconfigPath;
+      const segments = specConfigs.tspconfigPath.split("/");
+      if (segments.length > 2) {
+        serviceFolderPath = `${segments[0]}/${segments[1]}`;
+      }
+      logMessage(`Generating SDK from ${serviceFolderPath}`, LogLevel.Group);
     } else if (specConfigs.tspconfigPath) {
       logMessage(`Generating SDK from ${specConfigs.tspconfigPath}`, LogLevel.Group);
     } else if (specConfigs.readmePath) {

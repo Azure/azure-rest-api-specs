@@ -531,7 +531,7 @@ describe("generateSdkForBatchSpecs", () => {
     );
     expect(logSpy).toHaveBeenNthCalledWith(
       1,
-      `Generating SDK from ${mockSpecPaths[0].tspconfigPath} and ${mockSpecPaths[0].readmePath}`,
+      `Generating SDK from ${mockSpecPaths[0].tspconfigPath}`,
       "group",
     );
     expect(logSpy).toHaveBeenNthCalledWith(
@@ -542,7 +542,7 @@ describe("generateSdkForBatchSpecs", () => {
     expect(logSpy).toHaveBeenNthCalledWith(5, "ending group logging", "endgroup");
     expect(logSpy).toHaveBeenNthCalledWith(
       6,
-      `Generating SDK from ${mockSpecPaths[1].tspconfigPath} and ${mockSpecPaths[1].readmePath}`,
+      `Generating SDK from ${mockSpecPaths[1].tspconfigPath}`,
       "group",
     );
     expect(logSpy).toHaveBeenCalledWith(`Runner: markdown file written to ${markdownFilePath}`);
