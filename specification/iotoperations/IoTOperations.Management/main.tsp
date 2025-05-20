@@ -34,15 +34,6 @@ namespace Microsoft.IoTOperations;
 
 /** Api versions */
 enum Versions {
-  /** 2024-06-01-preview */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-06-01-preview`,
-  
-  /** 2024-07-01-preview */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-07-01-preview`,
 
   /** 2024-11-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -111,6 +102,7 @@ interface BrokerAuthorization {
 }
 // /instances/dataflowProfiles resource Operations
 @armResourceOperations
+
 interface DataflowProfile {
   get is ArmResourceRead<DataflowProfileResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowProfileResource>;
@@ -120,6 +112,7 @@ interface DataflowProfile {
 
 // /instance/dataflowProfiles/dataflows resource Operations
 @armResourceOperations
+
 interface Dataflow {
   get is ArmResourceRead<DataflowResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowResource>;
@@ -131,6 +124,7 @@ interface Dataflow {
 
 // /instance/dataflowEndpoints resource Operations
 @armResourceOperations
+
 interface DataflowEndpoint {
   get is ArmResourceRead<DataflowEndpointResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowEndpointResource>;

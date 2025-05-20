@@ -14,6 +14,7 @@ namespace Microsoft.IoTOperations;
 /**
  * dataflowProfile resource type model details.
  */
+
 @doc("Instance dataflowProfile resource")
 @parentResource(InstanceResource)
 model DataflowProfileResource is ProxyResource<DataflowProfileProperties> {
@@ -34,6 +35,7 @@ model DataflowProfileResource is ProxyResource<DataflowProfileProperties> {
   extendedLocation?: ExtendedLocation;
 }
 
+
 @doc("DataflowProfile Resource properties")
 model DataflowProfileProperties {
   @doc("Spec defines the desired identities of NBC diagnostics settings.")
@@ -48,6 +50,7 @@ model DataflowProfileProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
+
 
 @doc("DataflowProfile Diagnostics properties")
 model ProfileDiagnostics {

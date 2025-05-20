@@ -14,6 +14,7 @@ namespace Microsoft.IoTOperations;
 /**
  * dataflow resource type model details.
  */
+
 @doc("Instance dataflowProfile dataflow resource")
 @parentResource(DataflowProfileResource)
 model DataflowResource is ProxyResource<DataflowProperties> {
@@ -34,6 +35,7 @@ model DataflowResource is ProxyResource<DataflowProperties> {
   extendedLocation?: ExtendedLocation;
 }
 
+
 @doc("Dataflow Resource properties")
 model DataflowProperties {
   @doc("Mode for Dataflow. Optional; defaults to Enabled.")
@@ -51,6 +53,7 @@ model DataflowProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
+
 
 @doc("Dataflow Operation properties. NOTE - One only method is allowed to be used for one entry.")
 model DataflowOperation {
@@ -71,6 +74,7 @@ model DataflowOperation {
   destinationSettings?: DataflowDestinationOperationSettings;
 }
 
+
 @doc("Dataflow Operation Type properties")
 union OperationType {
   string,
@@ -84,6 +88,7 @@ union OperationType {
   @doc("Dataflow BuiltIn Transformation Operation")
   BuiltInTransformation: BuiltInTransformation,
 }
+
 
 @doc("Dataflow BuiltIn Transformation properties")
 model DataflowBuiltInTransformationSettings {
@@ -107,6 +112,7 @@ model DataflowBuiltInTransformationSettings {
   map?: DataflowBuiltInTransformationMap[] = #[];
 }
 
+
 @doc("Dataflow BuiltIn Transformation dataset properties")
 model DataflowBuiltInTransformationDataset {
   @doc("The key of the dataset.")
@@ -127,6 +133,7 @@ model DataflowBuiltInTransformationDataset {
   expression?: string;
 }
 
+
 @doc("Dataflow BuiltIn Transformation filter properties")
 model DataflowBuiltInTransformationFilter {
   @doc("The type of dataflow operation.")
@@ -143,6 +150,7 @@ model DataflowBuiltInTransformationFilter {
   expression: string;
 }
 
+
 @doc("Filter Type properties")
 union FilterType {
   string,
@@ -150,6 +158,7 @@ union FilterType {
   @doc("Filter type")
   Filter: "Filter",
 }
+
 
 @doc("Dataflow BuiltIn Transformation map properties")
 model DataflowBuiltInTransformationMap {
@@ -169,6 +178,7 @@ model DataflowBuiltInTransformationMap {
   @doc("Where and how the input fields to be organized in the output record.")
   output: string;
 }
+
 
 @doc("Dataflow type mapping properties")
 union DataflowMappingType {
@@ -190,6 +200,7 @@ union DataflowMappingType {
   BuiltInFunction: "BuiltInFunction",
 }
 
+
 @doc("Serialization Format properties")
 union SourceSerializationFormat {
   string,
@@ -197,6 +208,7 @@ union SourceSerializationFormat {
   @doc("JSON Format")
   Json: "Json",
 }
+
 
 @doc("Transformation Format properties")
 union TransformationSerializationFormat {
@@ -212,6 +224,7 @@ union TransformationSerializationFormat {
   Parquet: "Parquet",
 }
 
+
 @doc("Dataflow Destination Operation properties")
 model DataflowDestinationOperationSettings {
   @doc("Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type.")
@@ -220,6 +233,7 @@ model DataflowDestinationOperationSettings {
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
   dataDestination: NonEmptyString;
 }
+
 
 @doc("Dataflow Source Operation properties")
 model DataflowSourceOperationSettings {
