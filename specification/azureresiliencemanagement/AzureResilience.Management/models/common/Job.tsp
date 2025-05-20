@@ -53,8 +53,21 @@ union JobTriggeredBy {
   string,
 }
 
+@doc("Job User's Comment.")
+model JobUserComment {
+  @doc("The time of user comment.")
+  @visibility(Lifecycle.Read)
+  commentTime: utcDateTime;
+
+  @doc("User Comment")
+  @visibility(Lifecycle.Read)
+  comments?: string;
+}
+
 @doc("Job task details.")
 model JobTaskDetail {
+  ...JobExecutionDetails;
+
   @doc("Identifier of the task.")
   @visibility(Lifecycle.Read)
   taskId: string;
@@ -63,14 +76,20 @@ model JobTaskDetail {
   @visibility(Lifecycle.Read)
   taskName: string;
 
-  @doc("Task duration.")
-  @visibility(Lifecycle.Read)
-  duration: duration;
-
   @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Identifiers of linked jobs to this task.")
   @visibility(Lifecycle.Read)
-  linkedJobIds: armResourceIdentifier[];
+  linkedJobIds?: armResourceIdentifier[];
+
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @doc("List of sub-tasks associated with this job.")
+  @visibility(Lifecycle.Read)
+  userComments?: JobUserComment[];
+
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @doc("List of sub-tasks associated with this job.")
+  @visibility(Lifecycle.Read)
+  subTasksList: JobTaskDetail[];
 }
 
 @doc("Additional information for job.")
@@ -103,42 +122,23 @@ model JobErrorInfo {
 
 @doc("Job Retry Details.")
 model JobRetryDetails {
+  ...JobExecutionDetails;
+
   @doc("The retry attempt number of the job.")
   retryAttempt: int32;
-
-  @doc("The status of the job at the specific retry.")
-  status: JobStatus;
-
-  @doc("The start time of the job for the specific retry.")
-  startTime: utcDateTime;
-
-  @doc("The end time of the job for the specific retry.")
-  endTime: utcDateTime;
-
-  @doc("Details of any errors that occurred during the execution of this job for the specific retry.")
-  errorDetails?: JobErrorInfo;
 }
 
-// Define the main model
-@doc("Definition of a job, including its type, status, timing, and additional details.")
-model BaseJobProperties {
-  @doc("The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.")
-  @visibility(Lifecycle.Read)
-  resourceId: armResourceIdentifier;
-
-  @doc("The operation that this job is intended to perform.")
-  @visibility(Lifecycle.Read)
-  operation: string;
-
-  @doc("The current status of the job.")
+@doc("Job Execution Details.")
+model JobExecutionDetails {
+  @doc("The current status of the job execution.")
   @visibility(Lifecycle.Read)
   status: JobStatus;
 
-  @doc("The start time of the job.")
+  @doc("The start time of the job execution.")
   @visibility(Lifecycle.Read)
   startTime: utcDateTime;
 
-  @doc("The end time of the job.")
+  @doc("The end time of the job execution.")
   @visibility(Lifecycle.Read)
   endTime: utcDateTime;
 
@@ -148,6 +148,20 @@ model BaseJobProperties {
 
   @doc("Details of any errors that occurred during the execution of this job.")
   errorDetails?: JobErrorInfo;
+}
+
+// Define the main model
+@doc("Definition of a job, including its type, status, timing, and additional details.")
+model BaseJobProperties {
+  ...JobExecutionDetails;
+
+  @doc("The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.")
+  @visibility(Lifecycle.Read)
+  resourceId: armResourceIdentifier;
+
+  @doc("The operation that this job is intended to perform.")
+  @visibility(Lifecycle.Read)
+  operation: string;
 
   @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Details of any retries that have been attempted for this job.")

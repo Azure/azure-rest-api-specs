@@ -7,11 +7,11 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./enums.tsp";
 import "./common.tsp";
 
+using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
+using OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
@@ -41,9 +41,11 @@ model DrillResourceProperties {
   inclusionState: DrillResourceInclusionState;
 
   @doc("Inclusion State of the Drill resource in RO")
+  @visibility(Lifecycle.Read)
   roInclusionState: ResourceInclusionState;
 
-  @doc("Inclusion State of the Drill resource in RO")
+  @doc("Exclusion reason of the Drill resource in RO")
+  @visibility(Lifecycle.Read)
   roExclusionReason?: RoExclusionReason;
 
   @doc("Protection Solution Type of the Drill resource")
@@ -51,21 +53,27 @@ model DrillResourceProperties {
   resourceProtectionSolutionType?: ResourceProtectionSolutionType;
 
   @doc("Readiness State of the Drill resource")
+  @visibility(Lifecycle.Read)
   readinessState: DrillResourceReadinessState;
 
   @doc("Fault State of the Drill resource")
+  @visibility(Lifecycle.Read)
   faultState: DrillResourceFaultState;
 
   @doc("Fault Properties")
+  @visibility(Lifecycle.Read)
   faultProperties: FaultProperties;
 
   @doc("HA status of the Drill resource")
+  @visibility(Lifecycle.Read)
   haStatus: HAStatus;
 
   @doc("Attention reason if the Status is 'NeedsAttention'.")
+  @visibility(Lifecycle.Read)
   attentionReason?: DrillResourceAttentionReason;
 
   @doc("Associated Advisor Recommendation link, if HA is not enabled on this resource.")
+  @visibility(Lifecycle.Read)
   advisorHaRecommendationId?: armResourceIdentifier<[
     {
       type: "Microsoft.Advisor/recommendations";
@@ -74,11 +82,11 @@ model DrillResourceProperties {
 
   @doc("Last T&C assignment error, if any.")
   @visibility(Lifecycle.Read)
-  tAndcAssignmentError: ErrorDetails;
+  tAndcAssignmentError?: ErrorDetails;
 
   @doc("Last RBAC assignment error, if any.")
   @visibility(Lifecycle.Read)
-  rbacAssignmentError: ErrorDetails;
+  rbacAssignmentError?: ErrorDetails;
 
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)

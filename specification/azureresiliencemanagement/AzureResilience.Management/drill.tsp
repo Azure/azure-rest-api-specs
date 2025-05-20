@@ -17,8 +17,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
-//interface Operations extends Azure.ResourceManager.Operations {}
-
 @armResourceOperations(Drill)
 interface Drills {
   @route(ServiceGroupRoute)
