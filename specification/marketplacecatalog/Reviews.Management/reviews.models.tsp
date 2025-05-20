@@ -28,6 +28,7 @@ model ProductProperties {
   uniqueProductId: string;
 }
 
+@doc("Response to check user has already submitted a review for the product.")
 model UserHasReview is ProxyResource<UserHasReviewProperties> {
   ...ResourceNameParameter<
     Resource = UserHasReview,
@@ -35,37 +36,28 @@ model UserHasReview is ProxyResource<UserHasReviewProperties> {
     SegmentName = "products"
   >;
 }
-/**
- * Get if the user has already submitted a review for the product.
- */
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
+@doc("Response of the check user has review operation.")
 model UserHasReviewProperties {
-  /**
-   * Indicates whether user has already submitted a review.
-   */
+  @doc("Indicates whether user has already submitted a review.")
   hasReview: boolean;
 
-  /**
-   * The date and time when the review was last updated.
-   */
+  @doc("The date and time when the review was last updated.")
   updatedAt: string;
 }
 
 @armResourceOperations
 interface RatingAndReviewsOperations {
-  /**
-   * Check user has review.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi"
+  @doc("Check user has review.")
   @post
   @operationId("RatingAndReviews_CheckUserHasReview")
   @action("checkUserHasReview")
   checkUserHasReview is ArmProviderActionSync<
     Response = ArmResponse<UserHasReview>,
     Parameters = {
-      /**
-       * Unique Product Id
-       */
+      @doc("Unique Product Id")
       @path
       @segment("products")
       uniqueProductId: string;
