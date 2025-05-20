@@ -66,7 +66,7 @@ op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
 @get
 op listCertificatePropertiesVersions is KeyVaultOperation<
   {
-    ...CertificateNameParameter,
+    ...CertificateNameParameter;
   },
   CertificateListResult
 >;
@@ -81,7 +81,7 @@ op listCertificatePropertiesVersions is KeyVaultOperation<
 @get
 op listDeletedCertificateProperties is KeyVaultOperation<
   {
-   ...IncludePendingParameter,
+    ...IncludePendingParameter;
   },
   DeletedCertificateListResult
 >;

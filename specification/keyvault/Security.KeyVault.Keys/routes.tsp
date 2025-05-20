@@ -189,7 +189,7 @@ model KeyNameParameter {
 @get
 op getKeyVersions is KeyVaultOperation<
   {
-   ...KeyNameParameter,
+    ...KeyNameParameter;
 
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.

@@ -140,12 +140,11 @@ op getSecrets is KeyVaultOperation<
 
 model SecretNameParameter {
   /**
-     * The name of the secret.
-     */
-    @path("secret-name")
-    @clientName("name", "go")
-    secretName: string;
-
+   * The name of the secret.
+   */
+  @path("secret-name")
+  @clientName("name", "go")
+  secretName: string;
 }
 
 /**
@@ -158,7 +157,8 @@ model SecretNameParameter {
 @get
 op getSecretVersions is KeyVaultOperation<
   {
-    ...SecretNameParameter,
+    ...SecretNameParameter;
+
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
