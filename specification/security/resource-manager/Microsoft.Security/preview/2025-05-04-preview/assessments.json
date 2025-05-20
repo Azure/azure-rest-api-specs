@@ -256,99 +256,39 @@
       "type": "object",
       "description": "Describes properties of an assessment.",
       "properties": {
+        "status": {
+          "$ref": "#/definitions/AssessmentStatus"
+        },
         "risk": {
-          "type": "object",
-          "description": "The risk assessment details",
-          "properties": {
-            "attackPathsReferences": {
-              "type": "array",
-              "items": {
-                "type": "string"
+          "type": "string",
+          "description": "The risk level of the assessment.",
+          "enum": [
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ],
+          "x-ms-enum": {
+            "name": "RiskLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Low",
+                "description": "Low risk"
               },
-              "description": "References to attack paths"
-            },
-            "isContextualRisk": {
-              "type": "boolean",
-              "description": "Indicates if the risk is contextual"
-            },
-            "riskFactors": {
-              "type": "array",
-              "items": {
-                "type": "string"
+              {
+                "value": "Medium",
+                "description": "Medium risk"
               },
-              "description": "Factors contributing to the risk assessment"
-            },
-            "paths": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "description": "Path identifier"
-                  },
-                  "nodes": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "Node identifier"
-                        },
-                        "nodePropertiesLabel": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          },
-                          "description": "Node property labels"
-                        }
-                      }
-                    }
-                  },
-                  "edges": {
-                    "type": "array",
-                    "items": {
-                      "type": "object"
-                    },
-                    "description": "Edge connections between nodes"
-                  }
-                }
+              {
+                "value": "High",
+                "description": "High risk"
               },
-              "description": "Risk assessment paths"
-            },
-            "level": {
-              "type": "string",
-              "description": "The risk level",
-              "enum": [
-                "Low",
-                "Medium",
-                "High",
-                "Critical"
-              ],
-              "x-ms-enum": {
-                "name": "RiskLevel",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "Low",
-                    "description": "Low risk"
-                  },
-                  {
-                    "value": "Medium",
-                    "description": "Medium risk"
-                  },
-                  {
-                    "value": "High",
-                    "description": "High risk"
-                  },
-                  {
-                    "value": "Critical",
-                    "description": "Critical risk"
-                  }
-                ]
+              {
+                "value": "Critical",
+                "description": "Critical risk"
               }
-            }
+            ]
           }
         }
       },
