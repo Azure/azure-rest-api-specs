@@ -1060,6 +1060,15 @@
           },
           {
             "$ref": "#/parameters/NGroupsNameParameter"
+          },
+          {
+            "name": "CGslist",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartContainerGroupsRequest"
+            },
+            "description": "The list of CGs."
           }
         ],
         "responses": {
@@ -1105,6 +1114,15 @@
           },
           {
             "$ref": "#/parameters/NGroupsNameParameter"
+          },
+          {
+            "name": "CGslist",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StopContainerGroupsRequest"
+            },
+            "description": "The list of CGs."
           }
         ],
         "responses": {
@@ -1138,6 +1156,15 @@
           },
           {
             "$ref": "#/parameters/NGroupsNameParameter"
+          },
+          {
+            "name": "CGslist",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestartContainerGroupsRequest"
+            },
+            "description": "The list of CGs."
           }
         ],
         "responses": {
@@ -4268,6 +4295,33 @@
           "description": "Gets or sets Krypton use property."
         }
       }
+    },
+    "RestartContainerGroupsRequest": {
+      "type": "object",
+      "description": "Request body specific to the restart CGs API.",
+      "$ref": "#/definitions/ContainerGroupsActionRequest"
+    },
+    "StartContainerGroupsRequest": {
+      "type": "object",
+      "description": "Request body specific to the start CGs API.",
+      "$ref": "#/definitions/ContainerGroupsActionRequest"
+    },
+    "StoptContainerGroupsRequest": {
+      "type": "object",
+      "description": " Request body specific to the stop CGs API.",
+      "$ref": "#/definitions/ContainerGroupsActionRequest"
+    },
+    "ContainerGroupsActionRequest": {
+        "description": "List of container group names for which the action is to be performed. Actions could be start/stop/restart etc. This can be null or empty too.",
+        "type": "object",
+        "properties": {
+          "containerGroupNames": {
+            "type": "array",
+            "description": "List of Container Groups names.",
+            "items": {
+              "type": "string"
+            }
+        }
     }
   },
   "parameters": {
