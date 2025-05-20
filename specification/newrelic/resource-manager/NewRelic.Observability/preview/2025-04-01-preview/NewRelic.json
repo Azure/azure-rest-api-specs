@@ -302,7 +302,7 @@
           "200": {
             "description": "List and Activate SaaS completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SaaSInfoListResponse"
+              "$ref": "#/definitions/SaaSData"
             }
           },
           "default": {
@@ -311,9 +311,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ValidateAndActivateSaaS": {
@@ -3059,9 +3056,9 @@
     "SaaSData": {
       "type": "object",
       "properties": {
-        "saaSResourceId": {
+        "saasResourceId": {
           "type": "string",
-          "description": "saas resource id"
+          "description": "Id of the Marketplace SaaS Resource"
         }
       },
       "description": "SaaS details"
