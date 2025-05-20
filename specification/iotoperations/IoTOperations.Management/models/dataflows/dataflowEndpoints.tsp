@@ -14,7 +14,6 @@ namespace Microsoft.IoTOperations;
 /**
  * dataflowEndpoint resource type model details.
  */
-
 @doc("Instance dataflowEndpoint resource")
 @parentResource(InstanceResource)
 model DataflowEndpointResource is ProxyResource<DataflowEndpointProperties> {
@@ -34,7 +33,6 @@ model DataflowEndpointResource is ProxyResource<DataflowEndpointProperties> {
   @madeOptional(Versions.`2025-07-01-preview`)
   extendedLocation?: ExtendedLocation;
 }
-
 
 @doc("DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")
 model DataflowEndpointProperties {
@@ -72,7 +70,6 @@ model DataflowEndpointProperties {
   provisioningState?: ProvisioningState;
 }
 
-
 @doc("DataflowEndpoint Type properties")
 union EndpointType {
   string,
@@ -100,7 +97,6 @@ union EndpointType {
   OpenTelemetry: "OpenTelemetry",
 }
 
-
 @doc("DataflowEndpoint Host Type properties")
 @added(Versions.`2025-07-01-preview`)
 union DataflowEnpointHostType {
@@ -125,7 +121,6 @@ union DataflowEnpointHostType {
   CustomKafka: "CustomKafka",
 }
 
-
 @doc("Azure Data Explorer endpoint properties")
 model DataflowEndpointDataExplorer {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
@@ -142,7 +137,6 @@ model DataflowEndpointDataExplorer {
   batching?: BatchingConfiguration;
 }
 
-
 @doc("Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.")
 model DataflowEndpointDataExplorerAuthentication {
   @doc("Mode of Authentication.")
@@ -151,12 +145,10 @@ model DataflowEndpointDataExplorerAuthentication {
   ...ManagedIdentity;
 }
 
-
 @doc("DataflowEndpoint Data Explorer Authentication Method properties")
 union DataExplorerAuthMethod {
   ManagedIdentityMethod,
 }
-
 
 @doc("Azure Data Lake endpoint properties")
 model DataflowEndpointDataLakeStorage {
@@ -171,7 +163,6 @@ model DataflowEndpointDataLakeStorage {
   batching?: BatchingConfiguration;
 }
 
-
 @doc("Azure Data Lake endpoint Authentication properties.  NOTE Enum - Only one method is supported for one entry")
 model DataflowEndpointDataLakeStorageAuthentication {
   @doc("Mode of Authentication.")
@@ -184,14 +175,12 @@ model DataflowEndpointDataLakeStorageAuthentication {
   ...ManagedIdentity;
 }
 
-
 #suppress "@azure-tools/typespec-autorest/union-unsupported"
 @doc("DataflowEndpoint Data Lake Storage Authentication Method properties")
 union DataLakeStorageAuthMethod {
   ManagedIdentityMethod,
   AccessTokenMethod,
 }
-
 
 @doc("Microsoft Fabric endpoint properties")
 model DataflowEndpointFabricOneLake {
@@ -212,7 +201,6 @@ model DataflowEndpointFabricOneLake {
   batching?: BatchingConfiguration;
 }
 
-
 @doc("Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry")
 model DataflowEndpointFabricOneLakeAuthentication {
   @doc("Mode of Authentication.")
@@ -221,13 +209,11 @@ model DataflowEndpointFabricOneLakeAuthentication {
   ...ManagedIdentity;
 }
 
-
 #suppress "@azure-tools/typespec-autorest/union-unsupported"
 @doc("DataflowEndpoint Fabric One Lake Authentication Method properties")
 union FabricOneLakeAuthMethod {
   ManagedIdentityMethod,
 }
-
 
 @doc("Microsoft Fabric endpoint Names properties")
 model DataflowEndpointFabricOneLakeNames {
@@ -237,7 +223,6 @@ model DataflowEndpointFabricOneLakeNames {
   @doc("Workspace name.")
   workspaceName: string;
 }
-
 
 @doc("DataflowEndpoint Fabric Path Type properties")
 union DataflowEndpointFabricPathType {
@@ -249,7 +234,6 @@ union DataflowEndpointFabricPathType {
   @doc("TABLES Type")
   Tables: "Tables",
 }
-
 
 @doc("Kafka endpoint properties")
 model DataflowEndpointKafka {
@@ -284,7 +268,6 @@ model DataflowEndpointKafka {
   cloudEventAttributes?: CloudEventAttributeType;
 }
 
-
 @doc("Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry")
 model DataflowEndpointKafkaAuthentication {
   @doc("Mode of Authentication.")
@@ -299,7 +282,6 @@ model DataflowEndpointKafkaAuthentication {
   x509CertificateSettings?: DataflowEndpointAuthenticationX509;
 }
 
-
 @doc("DataflowEndpoint Kafka Authentication Method properties")
 union KafkaAuthMethod {
   ManagedIdentityMethod,
@@ -307,7 +289,6 @@ union KafkaAuthMethod {
   x509CertificateMethod,
   AnonymousMethod,
 }
-
 
 @doc("Kafka endpoint Batching properties")
 model DataflowEndpointKafkaBatching {
@@ -330,7 +311,6 @@ model DataflowEndpointKafkaBatching {
   maxMessages?: int32 = 100000;
 }
 
-
 @doc("Kafka endpoint Compression properties")
 union DataflowEndpointKafkaCompression {
   string,
@@ -348,7 +328,6 @@ union DataflowEndpointKafkaCompression {
   Lz4: "Lz4",
 }
 
-
 @doc("DataflowEndpoint Kafka Acks properties")
 union DataflowEndpointKafkaAcks {
   string,
@@ -362,7 +341,6 @@ union DataflowEndpointKafkaAcks {
   @doc("ALL Option")
   All: "All",
 }
-
 
 @doc("DataflowEndpoint Kafka Partition Strategy properties")
 union DataflowEndpointKafkaPartitionStrategy {
@@ -381,13 +359,11 @@ union DataflowEndpointKafkaPartitionStrategy {
   Property: "Property",
 }
 
-
 @doc("Local persistent volume endpoint properties")
 model DataflowEndpointLocalStorage {
   @doc("Persistent volume claim name.")
   persistentVolumeClaimRef: string;
 }
-
 
 @doc("Broker endpoint properties")
 model DataflowEndpointMqtt {
@@ -430,7 +406,6 @@ model DataflowEndpointMqtt {
   cloudEventAttributes?: CloudEventAttributeType;
 }
 
-
 @doc("Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry.")
 model DataflowEndpointMqttAuthentication {
   @doc("Mode of Authentication.")
@@ -445,7 +420,6 @@ model DataflowEndpointMqttAuthentication {
   x509CertificateSettings?: DataflowEndpointAuthenticationX509;
 }
 
-
 @doc("DataflowEndpoint Mqtt Authentication Method properties")
 union MqttAuthMethod {
   ManagedIdentityMethod,
@@ -453,7 +427,6 @@ union MqttAuthMethod {
   x509CertificateMethod,
   AnonymousMethod,
 }
-
 
 @doc("Broker Retain types")
 union MqttRetainType {
@@ -466,7 +439,6 @@ union MqttRetainType {
   Never: "Never",
 }
 
-
 @doc("How to map events to the cloud.")
 union CloudEventAttributeType {
   string,
@@ -478,7 +450,6 @@ union CloudEventAttributeType {
   CreateOrRemap: "CreateOrRemap",
 }
 
-
 @doc("System and Use Assigned Managed Identity properties")
 model ManagedIdentity {
   @doc("System-assigned managed identity authentication.")
@@ -488,18 +459,15 @@ model ManagedIdentity {
   userAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationUserAssignedManagedIdentity;
 }
 
-
 @doc("DataflowEndpoint Authentication SystemAssignedManagedIdentity properties")
 model DataflowEndpointAuthenticationSystemAssignedManagedIdentity {
   ...BaseSystemAssignedManagedIdentity;
 }
 
-
 @doc("DataflowEndpoint Authentication UserAssignedManagedIdentity properties")
 model DataflowEndpointAuthenticationUserAssignedManagedIdentity {
   ...BaseUserAssignedManagedIdentity;
 }
-
 
 @doc("DataflowEndpoint Authentication Sasl properties")
 model DataflowEndpointAuthenticationSasl {
@@ -510,13 +478,11 @@ model DataflowEndpointAuthenticationSasl {
   secretRef: string;
 }
 
-
 @doc("DataflowEndpoint Authentication Access Token properties")
 model DataflowEndpointAuthenticationAccessToken {
   @doc("Token secret name.")
   secretRef: string;
 }
-
 
 @doc("DataflowEndpoint Authentication Sasl Type properties")
 union DataflowEndpointAuthenticationSaslType {
@@ -532,20 +498,17 @@ union DataflowEndpointAuthenticationSaslType {
   ScramSha512: "ScramSha512",
 }
 
-
 @doc("Service Account Token for BrokerAuthentication")
 model DataflowEndpointAuthenticationServiceAccountToken {
   @doc("Audience of the service account. Optional, defaults to the broker internal service account audience.")
   audience: string;
 }
 
-
 @doc("DataflowEndpoint Authentication X509 properties")
 model DataflowEndpointAuthenticationX509 {
   @doc("Secret reference of the X.509 certificate.")
   secretRef: string;
 }
-
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "CRD type is modeled as empty object"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Prevents adding unwanted properties"
