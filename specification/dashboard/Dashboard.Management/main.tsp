@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.11.0
- * Date: 2025-04-27T01:16:13.945Z
+ * Date: 2025-05-21T07:11:29.261Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -18,6 +18,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
 import "./ManagedPrivateEndpointModel.tsp";
 import "./IntegrationFabric.tsp";
+import "./ManagedDashboard.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -39,11 +40,11 @@ namespace Microsoft.Dashboard;
  */
 enum Versions {
   /**
-   * The 2024-10-01 API version.
+   * The 2024-11-01-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_10_01: "2024-10-01",
+  v2024_11_01_preview: "2024-11-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

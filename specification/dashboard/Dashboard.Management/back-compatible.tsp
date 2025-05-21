@@ -31,7 +31,12 @@ using Microsoft.Dashboard;
 @@clientName(IntegrationFabrics.update::parameters.properties,
   "requestBodyParameters"
 );
-@@clientName(ManagedGrafanaPropertiesUpdateParameters,
-  "ManagedGrafanaPropertiesUpdateContent",
-  "csharp"
+
+@@clientName(ManagedDashboards.create::parameters.resource,
+  "requestBodyParameters"
 );
+@@clientName(ManagedDashboards.update::parameters.properties,
+  "requestBodyParameters"
+);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(ManagedDashboard.properties);
