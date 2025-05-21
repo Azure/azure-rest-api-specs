@@ -160,6 +160,77 @@
         }
       ]
     },
+    "/?restype=service&comp=kerbticket": {
+      "post": {
+        "tags": [
+          "service"
+        ],
+        "operationId": "Service_CreateKerberosTicket",
+        "description": "Creates a new Kerberos ticket.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/KerberosRealm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the File service used to execute the request."
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "restype",
+          "description": "restype",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "service"
+          ]
+        },
+        {
+          "name": "comp",
+          "description": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "kerbticket"
+          ]
+        }
+      ]
+    },
     "/?comp=list": {
       "get": {
         "tags": [
@@ -8674,6 +8745,15 @@
       "in": "header",
       "required": true,
       "description": "NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. It should be full path of the target from the root.The target file must be in the same share and hence the same storage account.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "KerberosRealm": {
+      "name": "x-ms-kerberos-realm",
+      "x-ms-client-name": "kerberosRealm",
+      "in": "header",
+      "required": false,
+      "description": "Optional. Domain or an administrative boundary within which the authentication process is managed.",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
