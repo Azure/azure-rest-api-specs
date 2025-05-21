@@ -66,7 +66,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "SDK Generation",
+            name: "spec-gen-sdk",
             status: "in_progress",
             conclusion: null,
           },
@@ -102,7 +102,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "SDK Generation",
+            name: "spec-gen-sdk",
             status: "completed",
             conclusion: "success",
             details_url:
@@ -150,7 +150,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "SDK Generation",
+            name: "spec-gen-sdk",
             status: "completed",
             conclusion: "success",
             details_url:
@@ -158,7 +158,7 @@ describe("spec-gen-sdk-status", () => {
           },
           {
             app: { name: "Azure Pipelines" },
-            name: "SDK Generation",
+            name: "spec-gen-sdk",
             status: "completed",
             conclusion: "failure",
             details_url:
@@ -220,7 +220,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "SDK Generation",
+            name: "spec-gen-sdk",
             status: "completed",
             conclusion: "success",
             details_url:
@@ -254,7 +254,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "SDK Generation",
+            name: "spec-gen-sdk",
             status: "completed",
             conclusion: "success",
             details_url:
@@ -287,7 +287,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "SDK Generation",
+            name: "spec-gen-sdk",
             status: "completed",
             conclusion: "success",
             details_url:
@@ -295,7 +295,7 @@ describe("spec-gen-sdk-status", () => {
           },
           {
             app: { name: "Azure Pipelines" },
-            name: "SDK Generation",
+            name: "spec-gen-sdk",
             status: "completed",
             conclusion: "failure",
             details_url:
