@@ -27,12 +27,12 @@ model LinkerResource
 
 @armResourceOperations
 interface LinkerResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
         ...LocationParameter,
       },
       KeysOf<ResourceNameParameter<
@@ -128,7 +128,7 @@ interface LinkerResources {
 }
 @armResourceOperations
 interface LinkerOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
 
@@ -136,7 +136,7 @@ interface LinkerOps
         @path(#{ allowReserved: true })
         resourceUri: string,
 
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
       },
       KeysOf<ResourceNameParameter<
         Resource = LinkerResource,

@@ -26,12 +26,12 @@ model DryrunResource is Azure.ResourceManager.ProxyResource<DryrunProperties> {
 
 @armResourceOperations
 interface DryrunResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
         ...LocationParameter,
       },
       KeysOf<ResourceNameParameter<
@@ -90,14 +90,14 @@ interface DryrunResources {
 
 @armResourceOperations
 interface LinkersOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
 
         @path(#{ allowReserved: true })
         resourceUri: string,
 
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
       },
       KeysOf<ResourceNameParameter<
         Resource = DryrunResource,
