@@ -1257,13 +1257,19 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "A provisioning state of the Fleetspace Account."
         },
-        "accountResourceIdentifier": {
-          "description": "The resource identifier of global database account in the Fleetspace Account.",
-          "type": "string"
-        },
-        "accountLocation": {
-          "description": "The location of  global database account in the Fleetspace Account.",
-          "type": "string"
+        "globalDatabaseAccountProperties": {
+          "type": "object",
+          "description": "Configuration for fleetspace Account in the fleetspace.",
+          "properties": {
+            "resourceId": {
+              "description": "The resource identifier of global database account in the Fleetspace Account.",
+              "type": "string"
+            },
+            "armLocation": {
+              "description": "The location of  global database account in the Fleetspace Account.",
+              "type": "string"
+            }
+          }
         }
       }
     }

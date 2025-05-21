@@ -71,7 +71,7 @@ export async function setSpecGenSdkStatusImpl({
   const specGenSdkChecks = checks.filter(
     (check) =>
       check.app?.name === "Azure Pipelines" &&
-      check.name.includes("SDK Generation"),
+      check.name.includes("spec-gen-sdk"),
   );
 
   core.info(
@@ -97,7 +97,7 @@ export async function setSpecGenSdkStatusImpl({
   if (!allCompleted) {
     // At least one check is still running or none found yet, set status to pending
     core.info(
-      "Some SDK generation checks are not completed. Setting status to pending.",
+      "Some spec-gen-sdk checks are not completed. Setting status to pending.",
     );
 
     await github.rest.repos.createCommitStatus({
@@ -117,7 +117,7 @@ export async function setSpecGenSdkStatusImpl({
     });
 
     core.info(
-      `All SDK generation checks completed. Setting status to ${result.state}.`,
+      `All spec-gen-sdk checks completed. Setting status to ${result.state}.`,
     );
 
     await github.rest.repos.createCommitStatus({

@@ -14,9 +14,9 @@ import { LogLevel } from "../../src/log.js";
 
 function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
   return mockFn.mock.calls.map((args: unknown[]) => {
-    const [filePath, ...rest] = args
-    return [String(filePath).replaceAll('\\', '/'), ...rest]
-  })
+    const [filePath, ...rest] = args;
+    return [String(filePath).replaceAll("\\", "/"), ...rest];
+  });
 }
 
 describe("generateSdkForSingleSpec", () => {
@@ -400,8 +400,8 @@ describe("generateSdkForBatchSpecs", () => {
       `Runner: markdown file written to ${markdownFilePath}`,
     );
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
-    
-    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();
   });
 
@@ -451,7 +451,7 @@ describe("generateSdkForBatchSpecs", () => {
     );
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
 
-    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();
   });
 
@@ -507,7 +507,7 @@ describe("generateSdkForBatchSpecs", () => {
     expect(logSpy).toHaveBeenCalledWith(`Runner: markdown file written to ${markdownFilePath}`);
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
 
-    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();
     logSpy.mockRestore();
   });
