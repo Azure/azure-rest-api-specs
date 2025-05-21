@@ -219,10 +219,10 @@ describe("generateSdkForSpecPr", () => {
     });
 
     const statusCode = await generateSdkForSpecPr();
-
+    const serviceFolderPath = commandHelpers.getServiceFolderPath(mockChangedSpecs[0].typespecProject);
     expect(statusCode).toBe(0);
     expect(log.logMessage).toHaveBeenCalledWith(
-      `Generating SDK from ${mockChangedSpecs[0].typespecProject} ${mockChangedSpecs[0].readmeMd}`,
+      `Generating SDK from ${serviceFolderPath}`,
       LogLevel.Group,
     );
     expect(log.logMessage).toHaveBeenCalledWith(`Runner command executed successfully`);
@@ -232,7 +232,7 @@ describe("generateSdkForSpecPr", () => {
     expect(log.logMessage).toHaveBeenCalledWith("ending group logging", LogLevel.EndGroup);
     expect(commandHelpers.logIssuesToPipeline).toHaveBeenCalledWith(
       mockExecutionReport.vsoLogPath,
-      `${mockChangedSpecs[0].typespecProject} ${mockChangedSpecs[0].readmeMd}`,
+      serviceFolderPath,
     );
   });
 
