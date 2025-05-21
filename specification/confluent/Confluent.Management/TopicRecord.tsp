@@ -24,6 +24,47 @@ model TopicRecord is Azure.ResourceManager.ProxyResource<TopicProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface TopicRecordsOps
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
+
+        /**
+         * Organization resource name
+         */
+        @path
+        @segment("organizations")
+        organizationName: string,
+
+        /**
+         * Confluent environment id
+         */
+        @path
+        @segment("environments")
+        environmentId: string,
+
+        /**
+         * Confluent kafka or schema registry cluster id
+         */
+        @path
+        @segment("clusters")
+        clusterId: string,
+      },
+      {
+        /**
+         * Confluent kafka or schema registry topic name
+         */
+        @path
+        @segment("topics")
+        topicName: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
+
 @armResourceOperations
 interface TopicRecords {
   /**
@@ -41,9 +82,9 @@ interface TopicRecords {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Topics_Create")
-  create is ArmResourceCreateOrReplaceSync<
+  create is TopicRecordsOps.CreateOrUpdateSync<
     TopicRecord,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
@@ -51,9 +92,7 @@ interface TopicRecords {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Topics_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    TopicRecord
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<TopicRecord>;
 
   /**
    * Lists of all the topics in a clusters

@@ -9,13 +9,105 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Private;
 
 namespace Azure.ResourceManager.Legacy {
-  interface LegacyOperations<
+  interface CustomLegacyOperations<
     ParentParameters extends {},
     ResourceTypeParameter extends {},
     ErrorType extends {} = ErrorResponse
   > {
+    /**
+     * A long-running resource CreateOrUpdate (PUT)
+     * @template Resource the resource being created or updated
+     * @template LroHeaders Optional.  Allows overriding the lro headers returned on resource create
+     * @template Parameters Optional. Additional parameters after the path parameters
+     * @template Response Optional. The success response(s) for the PUT operation
+     * @template OptionalRequestBody Optional. Indicates whether the request body is optional
+     */
+    @autoRoute
+    @doc("Create a {name}", Resource)
+    @armResourceCreateOrUpdate(Resource)
+    @Azure.Core.Foundations.Private.defaultFinalStateVia(#[
+      "location",
+      "azure-async-operation"
+    ])
+    @put
+    CreateOrUpdateAsync<
+      Resource extends Azure.ResourceManager.CommonTypes.Resource,
+      LroHeaders extends TypeSpec.Reflection.Model = ArmAsyncOperationHeader<FinalResult = Resource> &
+        Azure.Core.Foundations.RetryAfterHeader,
+      Parameters extends {} = {},
+      Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
+        Resource,
+        LroHeaders
+      >,
+      OptionalRequestBody extends valueof boolean = false
+    >(
+      ...ParentParameters,
+      ...ResourceTypeParameter,
+      ...Parameters,
+
+      @doc("Resource create parameters.")
+      @armBodyRoot(OptionalRequestBody)
+      resource: Resource,
+    ): Response | ErrorType;
+
+    /**
+     * A synchronous resource CreateOrUpdate (PUT)
+     * @template Resource the resource being created or updated
+     * @template Parameters Optional. Additional parameters after the path parameters
+     * @template Response Optional. The success response(s) for the PUT operation
+     * @template OptionalRequestBody Optional. Indicates whether the request body is optional
+     */
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+    @autoRoute
+    @doc("Create a {name}", Resource)
+    @armResourceCreateOrUpdate(Resource)
+    @put
+    CreateOrUpdateSync<
+      Resource extends Azure.ResourceManager.CommonTypes.Resource,
+      Parameters extends {} = {},
+      Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>,
+      OptionalRequestBody extends valueof boolean = false
+    >(
+      ...ParentParameters,
+      ...ResourceTypeParameter,
+      ...Parameters,
+
+      @doc("Resource create parameters.")
+      @armBodyRoot(OptionalRequestBody)
+      resource: Resource,
+    ): Response | ErrorType;
+
+    /**
+     * A synchronous resource Update (PATCH)
+     * @template Resource the resource being created or updated
+     * @template PatchModel the PATCH request model
+     * @template Parameters Optional. Additional parameters after the path parameters
+     * @template Response Optional. The success response(s) for the PATCH operation
+     * @template OptionalRequestBody Optional. Indicates whether the request body is optional
+     */
+    @autoRoute
+    @doc("Update a {name}", Resource)
+    @armResourceUpdate(Resource)
+    @patch(#{ implicitOptionality: false })
+    CustomPatchSync<
+      Resource extends Azure.ResourceManager.CommonTypes.Resource,
+      PatchModel extends {} = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,
+      Parameters extends {} = {},
+      Response extends {} = ArmResponse<Resource>,
+      OptionalRequestBody extends valueof boolean = false
+    >(
+      ...ParentParameters,
+      ...ResourceTypeParameter,
+      ...Parameters,
+
+      @doc("Resource create parameters.")
+      @armBodyRoot(OptionalRequestBody)
+      properties: PatchModel,
+    ): Response | ErrorType;
+
     /**
      * A synchronous resource action.
      * @template Resource The resource being acted upon
@@ -87,7 +179,7 @@ namespace Azure.ResourceManager.Legacy {
    * @dev Get the provider namespace key-value pair
    * @template Resource Optional.  The resource to get the provider namespace for.
    */
-  model Provider<Resource extends {} = TenantActionScope> {
+  model CustomProvider<Resource extends {} = TenantActionScope> {
     ...ProviderNamespace<Resource>;
   }
 }

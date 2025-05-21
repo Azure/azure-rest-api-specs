@@ -25,6 +25,47 @@ model ConnectorResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ConnectorResourcesOps
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
+
+        /**
+         * Organization resource name
+         */
+        @path
+        @segment("organizations")
+        organizationName: string,
+
+        /**
+         * Confluent environment id
+         */
+        @path
+        @segment("environments")
+        environmentId: string,
+
+        /**
+         * Confluent kafka or schema registry cluster id
+         */
+        @path
+        @segment("clusters")
+        clusterId: string,
+      },
+      {
+        /**
+         * Confluent connector name
+         */
+        @path
+        @segment("connectors")
+        connectorName: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
+
 @armResourceOperations
 interface ConnectorResources {
   /**
@@ -42,9 +83,9 @@ interface ConnectorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connector_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is ConnectorResourcesOps.CreateOrUpdateSync<
     ConnectorResource,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
@@ -54,7 +95,7 @@ interface ConnectorResources {
   @operationId("Connector_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectorResource,
-    Error = ResourceProviderDefaultErrorResponse
+    Error = ErrorResponse
   >;
 
   /**

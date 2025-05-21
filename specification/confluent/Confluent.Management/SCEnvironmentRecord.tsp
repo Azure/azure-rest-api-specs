@@ -36,6 +36,33 @@ model SCEnvironmentRecord extends Foundations.ProxyResource {
   properties?: EnvironmentProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface SCEnvironmentRecordsOps
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
+
+        /**
+         * Organization resource name
+         */
+        @path
+        @segment("organizations")
+        organizationName: string,
+      },
+      {
+        /**
+         * Confluent environment id
+         */
+        @path
+        @segment("environments")
+        environmentId: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
+
 @armResourceOperations
 interface SCEnvironmentRecords {
   /**
@@ -53,9 +80,9 @@ interface SCEnvironmentRecords {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Environment_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is SCEnvironmentRecordsOps.CreateOrUpdateSync<
     SCEnvironmentRecord,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
@@ -118,7 +145,7 @@ interface SCEnvironmentRecords {
 }
 
 interface SCEnvironmentRecordClusterOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,

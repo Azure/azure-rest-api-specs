@@ -27,7 +27,7 @@ model OrganizationResource
 }
 
 interface OrganizationResourceAPIKeyOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -77,7 +77,7 @@ interface OrganizationResourceAPIKeyActions {
 }
 
 interface OrganizationResourceRoleBindingIdOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -94,6 +94,23 @@ interface OrganizationResourceRoleBindingIdOps
          */
         @path @segment("deleteRoleBinding") roleBindingId: string,
       },
+      ResourceProviderDefaultErrorResponse
+    > {}
+
+interface OrganizationResourceRoleBindingIdOperationGroup
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
+
+        /**
+         * Organization resource name
+         */
+        @path @segment("organizations") organizationName: string,
+      },
+      {},
       ResourceProviderDefaultErrorResponse
     > {}
 
@@ -129,9 +146,9 @@ interface OrganizationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Organization_Create")
-  create is ArmResourceCreateOrReplaceAsync<
+  create is OrganizationResourceRoleBindingIdOperationGroup.CreateOrUpdateAsync<
     OrganizationResource,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
@@ -140,10 +157,10 @@ interface OrganizationResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   @operationId("Organization_Update")
-  update is ArmCustomPatchSync<
+  update is OrganizationResourceRoleBindingIdOperationGroup.CustomPatchSync<
     OrganizationResource,
     PatchModel = OrganizationResourceUpdate,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**

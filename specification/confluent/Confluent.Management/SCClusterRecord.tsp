@@ -36,6 +36,40 @@ model SCClusterRecord extends Foundations.ProxyResource {
   properties?: ClusterProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface SCClusterRecordsOps
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
+
+        /**
+         * Organization resource name
+         */
+        @path
+        @segment("organizations")
+        organizationName: string,
+
+        /**
+         * Confluent environment id
+         */
+        @path
+        @segment("environments")
+        environmentId: string,
+      },
+      {
+        /**
+         * Confluent kafka or schema registry cluster id
+         */
+        @path
+        @segment("clusters")
+        clusterId: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
+
 @armResourceOperations
 interface SCClusterRecords {
   /**
@@ -53,9 +87,9 @@ interface SCClusterRecords {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Cluster_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is SCClusterRecordsOps.CreateOrUpdateSync<
     SCClusterRecord,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
@@ -65,7 +99,7 @@ interface SCClusterRecords {
   @operationId("Cluster_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     SCClusterRecord,
-    Error = ResourceProviderDefaultErrorResponse
+    Error = ErrorResponse
   >;
 
   /**

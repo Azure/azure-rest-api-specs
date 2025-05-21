@@ -13,7 +13,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Confluent;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface MarketplaceAgreementsOperationGroup {
   /**
    * List Confluent marketplace agreements in the subscription.
@@ -44,6 +43,7 @@ interface MarketplaceAgreementsOperationGroup {
     Response = ConfluentAgreementResource,
     Scope = SubscriptionActionScope,
     Parameters = {},
+    OptionalRequestBody = true,
     Error = ResourceProviderDefaultErrorResponse
   >;
 }
