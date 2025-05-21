@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Blob Storage",
-    "version": "2025-07-05",
+    "version": "2025-11-05",
     "x-ms-code-generation-settings": {
       "header": "MIT",
       "strictSpecAdherence": false
@@ -4528,6 +4528,15 @@
               "x-ms-error-code": {
                 "x-ms-client-name": "ErrorCode",
                 "type": "string"
+              },
+              "x-ms-copy-source-error-code": {
+                "x-ms-client-name": "CopySourceErrorCode",
+                "type": "string"
+              },
+              "x-ms-copy-source-status-code": {
+                "x-ms-client-name": "CopySourceStatusCode",
+                "type": "integer",
+                "format": "int32"
               }
             },
             "schema": {
@@ -6167,6 +6176,15 @@
               "x-ms-error-code": {
                 "x-ms-client-name": "ErrorCode",
                 "type": "string"
+              },
+              "x-ms-copy-source-error-code": {
+                "x-ms-client-name": "CopySourceErrorCode",
+                "type": "string"
+              },
+              "x-ms-copy-source-status-code": {
+                "x-ms-client-name": "CopySourceStatusCode",
+                "type": "integer",
+                "format": "int32"
               }
             },
             "schema": {
@@ -6346,6 +6364,15 @@
               "x-ms-error-code": {
                 "x-ms-client-name": "ErrorCode",
                 "type": "string"
+              },
+              "x-ms-copy-source-error-code": {
+                "x-ms-client-name": "CopySourceErrorCode",
+                "type": "string"
+              },
+              "x-ms-copy-source-status-code": {
+                "x-ms-client-name": "CopySourceStatusCode",
+                "type": "integer",
+                "format": "int32"
               }
             },
             "schema": {
@@ -6974,6 +7001,15 @@
               "x-ms-error-code": {
                 "x-ms-client-name": "ErrorCode",
                 "type": "string"
+              },
+              "x-ms-copy-source-error-code": {
+                "x-ms-client-name": "CopySourceErrorCode",
+                "type": "string"
+              },
+              "x-ms-copy-source-status-code": {
+                "x-ms-client-name": "CopySourceStatusCode",
+                "type": "integer",
+                "format": "int32"
               }
             },
             "schema": {
@@ -7819,6 +7855,15 @@
               "x-ms-error-code": {
                 "x-ms-client-name": "ErrorCode",
                 "type": "string"
+              },
+              "x-ms-copy-source-error-code": {
+                "x-ms-client-name": "CopySourceErrorCode",
+                "type": "string"
+              },
+              "x-ms-copy-source-status-code": {
+                "x-ms-client-name": "CopySourceStatusCode",
+                "type": "integer",
+                "format": "int32"
               }
             },
             "schema": {
@@ -8833,6 +8878,15 @@
               "x-ms-error-code": {
                 "x-ms-client-name": "ErrorCode",
                 "type": "string"
+              },
+              "x-ms-copy-source-error-code": {
+                "x-ms-client-name": "CopySourceErrorCode",
+                "type": "string"
+              },
+              "x-ms-copy-source-status-code": {
+                "x-ms-client-name": "CopySourceStatusCode",
+                "type": "integer",
+                "format": "int32"
               }
             },
             "schema": {
@@ -9776,6 +9830,16 @@
       "type": "object",
       "properties": {
         "Message": {
+          "type": "string"
+        },
+        "CopySourceStatusCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "CopySourceErrorCode": {
+          "type": "string"
+        },
+        "CopySourceErrorMessage": {
           "type": "string"
         }
       }
@@ -11226,7 +11290,7 @@
       "type": "string",
       "description": "Specifies the version of the operation to use for this request.",
       "enum": [
-        "2025-07-05"
+        "2025-11-05"
       ]
     },
     "Blob": {
