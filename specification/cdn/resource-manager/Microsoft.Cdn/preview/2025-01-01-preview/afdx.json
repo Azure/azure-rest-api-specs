@@ -2582,6 +2582,9 @@
         "x-ms-examples": {
           "Rules_Create": {
             "$ref": "./examples/Rules_Create.json"
+          },
+          "Rules_Create_AfdUrlSigningAction": {
+            "$ref": "./examples/Rules_Create_AfdUrlSigningAction.json"
           }
         },
         "parameters": [
@@ -3204,7 +3207,13 @@
         "operationId": "Secrets_Create",
         "x-ms-examples": {
           "Secrets_Create": {
-            "$ref": "./examples/Secrets_Create.json"
+            "$ref": "./examples/Secrets_CreateCustomerCertificateType.json"
+          },
+          "Secrets_CreateUrlSigningKeyType": {
+            "$ref": "./examples/Secrets_CreateUrlSigningKeyType.json"
+          },
+          "Secrets_CreateMtlsCertificateChainType": {
+            "$ref": "./examples/Secrets_CreateMtlsCertificateChainType.json"
           }
         },
         "parameters": [
@@ -3333,7 +3342,7 @@
         }
       }
     },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups": {
       "get": {
         "tags": [
           "KeyGroups"
@@ -6692,7 +6701,8 @@
           "x-ms-enum": {
             "name": "EnabledState",
             "modelAsString": true
-          },
+          }
+        },
         "grpcState": {
           "description": "Whether or not gRPC is enabled on this route. Permitted values are 'Enabled' or 'Disabled'",
           "enum": [
@@ -7787,7 +7797,7 @@
       "description": "Reference to another resource along with its state.",
       "type": "object",
       "x-ms-azure-resource": true
-},
+    },
     "AFDTargetGroupListResult": {
       "description": "Result of the request to list target groups. It contains a list of target group objects and a URL link to get the next set of results.",
       "type": "object",
@@ -7965,7 +7975,8 @@
             "$ref": "./cdn.json#/definitions/ResourceReference"
           }
         }
-      }    }
+      }
+    }
   },
   "parameters": {
     "subscriptionIdParameter": {
