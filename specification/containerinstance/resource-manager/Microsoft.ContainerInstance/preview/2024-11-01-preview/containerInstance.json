@@ -1066,7 +1066,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StartContainerGroupsRequest"
+              "$ref": "#/definitions/ContainerGroupNames"
             },
             "description": "The list of CGs."
           }
@@ -1120,7 +1120,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StopContainerGroupsRequest"
+              "$ref": "#/definitions/ContainerGroupNames"
             },
             "description": "The list of CGs."
           }
@@ -1162,7 +1162,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RestartContainerGroupsRequest"
+              "$ref": "#/definitions/ContainerGroupNames"
             },
             "description": "The list of CGs."
           }
@@ -4296,32 +4296,11 @@
         }
       }
     },
-    "RestartContainerGroupsRequest": {
-      "type": "object",
-      "description": "Request body specific to the restart CGs API.",
-      "$ref": "#/definitions/ContainerGroupsActionRequest"
-    },
-    "StartContainerGroupsRequest": {
-      "type": "object",
-      "description": "Request body specific to the start CGs API.",
-      "$ref": "#/definitions/ContainerGroupsActionRequest"
-    },
-    "StoptContainerGroupsRequest": {
-      "type": "object",
-      "description": " Request body specific to the stop CGs API.",
-      "$ref": "#/definitions/ContainerGroupsActionRequest"
-    },
-    "ContainerGroupsActionRequest": {
+    "ContainerGroupNames": {
       "description": "List of container group names for which the action is to be performed. Actions could be start/stop/restart etc. This can be null or empty too.",
-      "type": "object",
-      "properties": {
-        "containerGroupNames": {
-          "type": "array",
-          "description": "List of Container Groups names.",
-          "items": {
-            "type": "string"
-          }
-        }
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     }
   },
