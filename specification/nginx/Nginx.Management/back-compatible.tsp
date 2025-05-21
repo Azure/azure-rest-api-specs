@@ -18,3 +18,13 @@ using Nginx.NginxPlus;
 
 @@clientName(NginxDeployments.createOrUpdate::parameters.resource, "body");
 @@clientName(NginxDeployments.update::parameters.properties, "body");
+@@clientName(AnalysisResultData, "NginxAnalysisResultDetails", "csharp");
+
+@@clientName(NginxConfigurationProtectedFileRequest,
+  "NginxConfigurationProtectedFileContent",
+  "csharp"
+);
+@@clientName(NginxConfigurationProtectedFileRequest,
+  "NginxConfigurationProtectedFileResult",
+  "csharp"
+);
