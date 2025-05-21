@@ -30,7 +30,7 @@ using TypeSpec.Http;
 )
 @doc("DevCenter service")
 @versioned(APIVersions)
-namespace DevCenterService;
+namespace Microsoft.DevCenter;
 
 @doc("DevCenter API versions")
 enum APIVersions {
