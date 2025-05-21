@@ -1378,7 +1378,7 @@ namespace SkillContext
 		@doc("The error message.")
 		message: string;
 		@doc("The error type.")
-		type: ErrorType;
+		type: PluginhostErrorType;
 		@doc("The error code.")
 		errorCode: string;
 		@doc("The error details.")
