@@ -135,16 +135,11 @@ export async function generateSdkForSpecPr(): Promise<number> {
 
       if (executionReport.stagedArtifactsFolder) {
         stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
-      }
-
-      if (executionReport.stagedArtifactsFolder && executionReport.sdkApiViewArtifactFolder) {
-        const apiViewArtifactRelPath = path.relative(executionReport.stagedArtifactsFolder, executionReport.sdkApiViewArtifactFolder);
         for (const pkg of executionReport.packages) {
           if (pkg.apiViewArtifact) {
-            const fileName = path.basename(pkg.apiViewArtifact);
             apiViewRequestData.push({
               packageName: pkg.packageName,
-              filePath: path.join(apiViewArtifactRelPath, fileName),
+              filePath: path.relative(stagedArtifactsFolder, pkg.apiViewArtifact),
             });
           }
         }
@@ -192,6 +187,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   // Prepare variables
   let statusCode = 0;
   let markdownContent = "\n";
+  markdownContent += `## Batch Run Type\n ${batchType}\n`;
   let failedContent = `## Spec Failures in the Generation Process\n`;
   let succeededContent = `## Successful Specs in the Generation Process\n`;
   let notEnabledContent = `## Specs with SDK Not Enabled\n`;
