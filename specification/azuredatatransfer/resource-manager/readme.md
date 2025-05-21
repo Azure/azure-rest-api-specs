@@ -93,6 +93,39 @@ input-file:
   - Microsoft.AzureDataTransfer/preview/2023-10-11-preview/azuredatatransfer.json
 ```
 
+## Suppressions
+
+```yaml
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: azuredatatransfer.json
+    where: $.definitions.ReadPipelineConnection
+    reason:
+      This is due to the migration to make use of [lifecycle visibility transforms](https://typespec.io/docs/language-basics/visibility/#lifecycle-visibility-transforms)
+      typespec (which changed the name), the old OpenAPI v2 JSON spec had this property already in the original model.
+      This is required as the Pipeline and Connection that this references exist across ARM Subscription(s) and Entra Id
+      Tenant boundaries. This metadata is meant to be readOnly and exposed as information to a user. i.e.
+      This connection exists as in tenant id 11111111-1111-1111-1111-111111111111.
+  - code: AvoidAdditionalProperties
+    from: azuredatatransfer.json
+    where: $.definitions.ReadReadPipelineConnectionProperties
+    reason:
+      This was inherited from a new model being created in typespec, the old OpenAPI v2 JSON spec had this
+      property in the original model (just it was an inline model). This is required as the Pipeline and Connection
+      that this references exist across ARM Subscription and Entra Id Tenant boundaries. This metadata is meant to be
+      readOnly and exposed as information to a user. i.e. This connection exists as in tenant id
+      11111111-1111-1111-1111-111111111111.
+  - code: AvoidAdditionalProperties
+    from: azuredatatransfer.json
+    where: $.definitions.ReadReadInternalMetadataProperties
+    reason:
+      This is due to the migration to make use of [lifecycle visibility transforms](https://typespec.io/docs/language-basics/visibility/#lifecycle-visibility-transforms)
+      typespec (which changed the name), the old OpenAPI v2 JSON spec had this property already in the original model.
+      This is required as the Pipeline and Connection that this references exist across ARM Subscription(s) and Entra Id
+      Tenant boundaries. This metadata is meant to be readOnly and exposed as information to a user. i.e.
+      This connection exists as in tenant id 11111111-1111-1111-1111-111111111111.
+```
+
 ---
 
 # Code Generation
