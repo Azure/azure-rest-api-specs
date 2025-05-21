@@ -132,5 +132,5 @@ export function isResolverError(error) {
   if (!(error instanceof Error)) return false;
 
   const e = /** @type {ResolverError} */ (error);
-  return typeof e.ioErrorCode === "string" ;
+  return typeof e.ioErrorCode === "string";
 }

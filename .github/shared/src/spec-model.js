@@ -72,8 +72,8 @@ export class SpecModel {
             continue;
           }
 
-          let refs; 
-          try { 
+          let refs;
+          try {
             refs = await inputFile.getRefs();
           } catch (error) {
             if (isResolverError(error)) {
@@ -86,8 +86,8 @@ Ensure the input-file is valid and all refs are resolvable.`,
                 readme: readme.path,
                 tag: tag.name,
 
-                cause: error
-              }
+                cause: error,
+              };
               throw resolverError;
             }
             throw error;
