@@ -10,8 +10,8 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)
-@service(#{ title: "Contoso Widget Manager" })
-@versioned(Contoso.WidgetManager.Versions)
+@service(#{ title: "Widget" })
+@versioned(Widget.Versions)
 namespace Widget;
 
 @doc("Versions info.")
