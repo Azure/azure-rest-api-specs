@@ -24,7 +24,7 @@ using Nginx.NginxPlus;
   "NginxConfigurationProtectedFileContent",
   "csharp"
 );
-@@clientName(NginxConfigurationProtectedFileRequest,
+@@clientName(NginxConfigurationProtectedFileResponse,
   "NginxConfigurationProtectedFileResult",
   "csharp"
 );
