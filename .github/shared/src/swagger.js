@@ -1,6 +1,6 @@
 // @ts-check
 
-import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
+import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { relative, resolve } from "path";
 import { mapAsync } from "./array.js";
 
@@ -118,6 +118,10 @@ function json(file) {
   // Extension "json" with any case is a valid JSON file
   return typeof file === "string" && file.toLowerCase().endsWith(".json");
 }
+
+/**
+ * @typedef {import("@apidevtools/json-schema-ref-parser").ResolverError} ResolverError
+ */
 
 /**
  * Checks whether an unknown error object is an ExecError.
