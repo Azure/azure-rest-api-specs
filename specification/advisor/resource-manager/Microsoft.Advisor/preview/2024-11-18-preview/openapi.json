@@ -194,7 +194,7 @@
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ArmNotFoundResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             },
             "x-ms-error-response": true
           },
@@ -258,7 +258,7 @@
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ArmNotFoundResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             },
             "x-ms-error-response": true
           },
@@ -386,7 +386,7 @@
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ArmNotFoundResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             },
             "x-ms-error-response": true
           },
@@ -1795,17 +1795,6 @@
           "description": "ARM error response body."
         }
       }
-    },
-    "ArmNotFoundResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ArmErrorResponse"
-        }
-      },
-      "required": [
-        "error"
-      ]
     },
     "AssessmentListResult": {
       "type": "object",

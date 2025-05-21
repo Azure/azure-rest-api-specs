@@ -344,9 +344,12 @@ model ArmErrorResponse {
 }
 
 @error
-model ArmNotFoundResponse {
+model ArmNotFoundBodyResponse {
+  @body error: ArmErrorResponse;
+}
+
+model ArmNotFoundResponse is ArmNotFoundBodyResponse {
   ...Response<404>;
-  error: ArmErrorResponse;
 }
 
 /**
