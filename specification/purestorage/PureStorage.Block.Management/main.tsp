@@ -614,7 +614,7 @@ model AvsStorageContainerProperties {
   @removed(Versions.v1_preview)
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ResourceProvisioningState;  // TODO: the type of this property should be changed to `ProvisioningState`
 }
 
 @armResourceOperations
