@@ -4106,7 +4106,7 @@
       }
     },
     "AzureADAuthenticationAsArmPolicy": {
-      "description": "The policy for using ARM audience token for a container registry.",
+      "description": "The policy for using Azure Resource Manager audience token for a container registry.",
       "type": "object",
       "properties": {
         "status": {
@@ -4653,7 +4653,8 @@
       "properties": {
         "id": {
           "description": "The resource ID of the parent to which the connected registry will be associated.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "syncProperties": {
           "$ref": "#/definitions/SyncProperties",
@@ -6209,7 +6210,7 @@
           "readOnly": true
         },
         "code": {
-          "description": "The code of the status.",
+          "description": "The HTTP status code.",
           "type": "string",
           "readOnly": true
         },
@@ -6279,6 +6280,7 @@
         "gatewayEndpoint": {
           "description": "The gateway endpoint used by the connected registry to communicate with its parent.",
           "type": "string",
+          "format": "uri",
           "readOnly": true
         }
       }
@@ -6355,7 +6357,7 @@
         },
         "azureADAuthenticationAsArmPolicy": {
           "$ref": "#/definitions/AzureADAuthenticationAsArmPolicy",
-          "description": "The policy for using ARM audience token for a container registry."
+          "description": "The policy for using Azure Resource Manager audience token for a container registry."
         },
         "softDeletePolicy": {
           "$ref": "#/definitions/SoftDeletePolicy",
