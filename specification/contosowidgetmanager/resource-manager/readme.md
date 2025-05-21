@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-2021-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-11-01'
 input-file:
-  - stable/2021-11-01/contoso.json
+  - Microsoft.Contoso/stable/2021-11-01/contoso.json
 ```
 
 ### Tag: package-2021-10-01-preview
@@ -42,7 +42,7 @@ These settings apply only when `--tag=package-2021-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-10-01-preview'
 input-file:
-  - preview/2021-10-01-preview/contoso.json
+  - Microsoft.Contoso/preview/2021-10-01-preview/contoso.json
 ```
 
 ---
