@@ -258,7 +258,38 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/AssessmentStatus"
-        },
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityAssessmentPropertiesBase"
+        }
+      ],
+      "required": [
+        "status"
+      ]
+    },
+    "SecurityAssessmentPropertiesResponse": {
+      "type": "object",
+      "description": "Describes properties of an assessment.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AssessmentStatusResponse"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityAssessmentPropertiesBase"
+        }
+      ],
+      "required": [
+        "status"
+      ]
+    },
+    "SecurityAssessmentPropertiesBase": {
+      "type": "object",
+      "description": "Describes properties of an assessment.",
+      "properties": {
         "risk": {
           "type": "object",
           "description": "External model of risk result",
@@ -368,38 +399,7 @@
               "description": "Indicates if the risk is contextual or static"
             }
           }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SecurityAssessmentPropertiesBase"
-        }
-      ],
-      "required": [
-        "status"
-      ]
-    },
-    "SecurityAssessmentPropertiesResponse": {
-      "type": "object",
-      "description": "Describes properties of an assessment.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/AssessmentStatusResponse"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SecurityAssessmentPropertiesBase"
-        }
-      ],
-      "required": [
-        "status"
-      ]
-    },
-    "SecurityAssessmentPropertiesBase": {
-      "type": "object",
-      "description": "Describes properties of an assessment.",
-      "properties": {
+        },
         "resourceDetails": {
           "$ref": "../../../common/v1/types.json#/definitions/ResourceDetails"
         },
