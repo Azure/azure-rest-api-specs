@@ -27,7 +27,16 @@ These are the global settings for the PaloAltoNetworks.Cloudngfw.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-02-06-preview
+tag: package-2024-02-07
+```
+
+### Tag: package-2024-02-07
+
+These settings apply only when `--tag=package-2024-02-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02-07'
+input-file:
+  - PaloAltoNetworks.Cloudngfw/stable/2024-02-07/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2025-02-06-preview
