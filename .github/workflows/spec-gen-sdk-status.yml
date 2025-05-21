@@ -1,4 +1,4 @@
-name: "spec-gen-sdk status"
+name: "SDK Validation Status"
 
 on:
   check_run:
@@ -9,13 +9,13 @@ permissions:
   statuses: write
 
 jobs:
-  spec-gen-sdk-status:
-    # Only run this job when the check run is from Azure Pipelines SDK Generation job in the azure-sdk/public(id: 29ec6040-b234-4e31-b139-33dc4287b756) project
+  sdk-validation-status:
+    # Only run this job when the check run is from Azure Pipelines(SDK Validation) in the azure-sdk/public(id: 29ec6040-b234-4e31-b139-33dc4287b756) project
     if: |
       github.event.check_run.check_suite.app.name == 'Azure Pipelines' &&
-      contains(github.event.check_run.name, 'SDK Generation') &&
+      contains(github.event.check_run.name, 'SDK Validation') &&
       endsWith(github.event.check_run.external_id, '29ec6040-b234-4e31-b139-33dc4287b756')
-    name: "spec-gen-sdk - set status"
+    name: "SDK Validation - Status"
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -23,8 +23,8 @@ jobs:
           sparse-checkout: |
             .github
       
-      - name: "spec-gen-sdk - set status"
-        id: spec-gen-sdk-status
+      - name: "SDK Validation - Status"
+        id: sdk-validation-status
         uses: actions/github-script@v7
         with:
           script: |

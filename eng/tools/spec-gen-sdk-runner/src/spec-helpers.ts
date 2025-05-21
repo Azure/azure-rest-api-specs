@@ -8,6 +8,7 @@ import {
   createCombinedSpecs,
   type SpecResults,
   type ChangedSpecs,
+  type SpecConfigs,
   getLastPathSegment,
 } from "./utils.js";
 import { logMessage } from "./log.js";
@@ -181,4 +182,181 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
   }
 
   return changedSpecs;
+}
+
+/**
+ * Grouping spec configs by service based on the provided TypeSpec configs and readme files.
+ * @param tspconfigs - Array of TypeSpec config file paths.
+ * @param readmes - Array of readme file paths.
+ * @param skipUnmatchedReadme - Flag to skip unmatched readme files.
+ * @returns An array of SpecConfigs objects containing the paths to the readme and TypeSpec config files.
+ */
+export function groupSpecConfigPaths(
+  tspconfigs?: string[],
+  readmes?: string[],
+  skipUnmatchedReadme: boolean = false,
+): SpecConfigs[] {
+  const emptyArray: string[] = [];
+  const safeTspConfigs = tspconfigs ?? emptyArray;
+  const safeReadmes = readmes ?? emptyArray;
+
+  if (skipUnmatchedReadme) {
+    // Explicitly remove the specific readme file from the array
+    // as we don't want to include it for typespec related batch runs
+    const indexToRemove = safeReadmes.indexOf(
+      "specification/awsconnector/resource-manager/readme.md",
+    );
+    if (indexToRemove !== -1) {
+      safeReadmes.splice(indexToRemove, 1);
+    }
+  }
+
+  // Quick return for simple cases
+  if (safeTspConfigs.length === 0 && safeReadmes.length === 0) {
+    return [];
+  } else if (safeTspConfigs.length > 0 && safeReadmes.length === 0) {
+    return safeTspConfigs.map((c) => ({ tspconfigPath: c }));
+  } else if (safeReadmes.length > 0 && safeTspConfigs.length === 0) {
+    return safeReadmes.map((c) => ({ readmePath: c }));
+  }
+
+  // Get folder paths from spec configs
+  const tspconfigFolderPaths: string[] = safeTspConfigs.map((p) =>
+    p.slice(0, Math.max(0, p.lastIndexOf("/"))),
+  );
+  const readmeFolderPaths: string[] = safeReadmes.map((p) =>
+    p.slice(0, Math.max(0, p.lastIndexOf("/"))),
+  );
+
+  // Create plain objects to satisfy the input of groupPathsByService
+  const tspconfigFolderMap: { [folderPath: string]: string[] } = {};
+  for (const folderPath of tspconfigFolderPaths) {
+    tspconfigFolderMap[folderPath] = [];
+  }
+
+  const readmeFolderMap: { [folderPath: string]: string[] } = {};
+  for (const folderPath of readmeFolderPaths) {
+    readmeFolderMap[folderPath] = [];
+  }
+
+  // Group paths by service
+  const serviceMap = groupPathsByService(readmeFolderMap, tspconfigFolderMap);
+
+  const changedSpecs: ChangedSpecs[] = [];
+  const results: SpecResults = {
+    readmeMDResult: readmeFolderMap,
+    typespecProjectResult: tspconfigFolderMap,
+  };
+
+  // Process each service
+  for (const [, info] of serviceMap) {
+    // Case: Resource Manager with .Management
+    if (info.managementPaths.length > 0) {
+      if (info.resourceManagerPaths.length === 1) {
+        // Single resource-manager path - match with all Management paths
+        const newSpecs = createCombinedSpecs(
+          info.resourceManagerPaths[0].path,
+          info.managementPaths,
+          results,
+        );
+        changedSpecs.push(...newSpecs);
+        logMessage(
+          `\t readme folders: ${info.resourceManagerPaths[0].path}, tspconfig folders: ${info.managementPaths}`,
+        );
+        for (const p of info.managementPaths) {
+          delete tspconfigFolderMap[p];
+        }
+        delete readmeFolderMap[info.resourceManagerPaths[0].path];
+      } else {
+        // Multiple resource-manager paths - match by subfolder name
+        for (const rmPath of info.resourceManagerPaths) {
+          const matchingManagements = info.managementPaths.filter((mPath) => {
+            const rmSubPath = rmPath.subPath;
+            const managementName = getLastPathSegment(mPath).replace(".Management", "");
+            return rmSubPath && rmSubPath === managementName;
+          });
+          if (matchingManagements.length > 0) {
+            const newSpecs = createCombinedSpecs(rmPath.path, matchingManagements, results);
+            changedSpecs.push(...newSpecs);
+            logMessage(
+              `\t readme folders: ${rmPath.path}, tspconfig folders: ${matchingManagements}`,
+            );
+            for (const p of matchingManagements) {
+              delete tspconfigFolderMap[p];
+            }
+            delete readmeFolderMap[rmPath.path];
+          }
+        }
+      }
+    }
+
+    // Case: Data Plane matching
+    if (info.dataPlanePaths.length > 0 && info.otherTypeSpecPaths.length > 0) {
+      if (info.dataPlanePaths.length === 1) {
+        // Single data-plane path - match with all non-Management TypeSpec paths
+        const newSpecs = createCombinedSpecs(
+          info.dataPlanePaths[0].path,
+          info.otherTypeSpecPaths,
+          results,
+        );
+        changedSpecs.push(...newSpecs);
+        logMessage(
+          `\t readme folders: ${info.dataPlanePaths[0].path}, tspconfig folders: ${info.otherTypeSpecPaths}`,
+        );
+        for (const p of info.otherTypeSpecPaths) {
+          delete tspconfigFolderMap[p];
+        }
+        delete readmeFolderMap[info.dataPlanePaths[0].path];
+      } else {
+        // Multiple data-plane paths - match by subfolder name
+        for (const dpPath of info.dataPlanePaths) {
+          const matchingTypeSpecs = info.otherTypeSpecPaths.filter((tsPath) => {
+            const dpSubFolder = dpPath.subFolder;
+            const tsLastSegment = getLastPathSegment(tsPath);
+            return dpSubFolder && dpSubFolder === tsLastSegment;
+          });
+          if (matchingTypeSpecs.length > 0) {
+            const newSpecs = createCombinedSpecs(dpPath.path, matchingTypeSpecs, results);
+            changedSpecs.push(...newSpecs);
+            logMessage(
+              `\t readme folders: ${dpPath.path}, tspconfig folders: ${matchingTypeSpecs}`,
+            );
+            for (const p of matchingTypeSpecs) {
+              delete tspconfigFolderMap[p];
+            }
+            delete readmeFolderMap[dpPath.path];
+          }
+        }
+      }
+    }
+  }
+
+  // Process remaining unmatched paths
+  for (const folderPath of new Set([
+    ...Object.keys(readmeFolderMap),
+    ...Object.keys(tspconfigFolderMap),
+  ])) {
+    const cs: ChangedSpecs = {
+      specs: [],
+    };
+
+    if (tspconfigFolderMap[folderPath]) {
+      cs.specs = tspconfigFolderMap[folderPath];
+      cs.typespecProject = path.join(folderPath, "tspconfig.yaml");
+      changedSpecs.push(cs);
+      logMessage(`\t tspconfig: ${cs.typespecProject}`);
+    } else if (!skipUnmatchedReadme) {
+      cs.readmeMd = path.join(folderPath, "readme.md");
+      cs.specs = readmeFolderMap[folderPath];
+      changedSpecs.push(cs);
+      logMessage(`\t readme: ${cs.readmeMd}`);
+    }
+  }
+
+  // Map ChangedSpecs to SpecConfigs
+  const specConfigs = changedSpecs.map((cs) => ({
+    readmePath: cs.readmeMd,
+    tspconfigPath: cs.typespecProject,
+  }));
+  return specConfigs;
 }

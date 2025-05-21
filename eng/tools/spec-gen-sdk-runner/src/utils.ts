@@ -438,6 +438,11 @@ export type ChangedSpecs = {
   specs: string[];
 };
 
+export type SpecConfigs = {
+  readmePath?: string;
+  tspconfigPath?: string;
+};
+
 /**
  * Creates combined specs from readme and typespec paths
  * @param readmePath - Path to the readme file
