@@ -56,50 +56,6 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/connectors": {
-      "get": {
-        "operationId": "Linker_List",
-        "tags": [
-          "Linker"
-        ],
-        "description": "Returns list of Linkers which connects to the resource. which supports to config both application and target service during the resource provision.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "description": "{resourceUri}",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LinkerList": {
-            "$ref": "./examples/LinkerList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/{resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations": {
       "get": {
         "operationId": "Linkers_ListDaprConfigurations",
@@ -113,7 +69,8 @@
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -346,10 +303,7 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            },
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -417,6 +371,50 @@
           "DeleteDryrun": {
             "$ref": "./examples/DeleteDryrun.json"
           }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers": {
+      "get": {
+        "operationId": "Linker_List",
+        "tags": [
+          "Linker"
+        ],
+        "description": "Returns list of Linkers which connects to the resource. which supports to config both application and target service during the resource provision.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "{resourceUri}",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkerList": {
+            "$ref": "./examples/LinkerList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -595,18 +593,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/LinkerResource"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -1583,22 +1569,17 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'DryrunResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/DryrunResource"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1615,7 +1596,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1861,19 +1842,6 @@
           }
         ]
       }
-    },
-    "Azure.ResourceManager.ArmResponse<DryrunResource>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DryrunResource",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "Azure.ResourceManager.ArmResponse<ValidateOperationResult>": {
       "type": "object",
@@ -2540,7 +2508,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "x-nullable": true
         }
       },
       "required": [
@@ -2969,7 +2938,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "x-nullable": true
         }
       },
       "required": [

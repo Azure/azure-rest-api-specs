@@ -263,9 +263,26 @@ union AccessKeyPermissions {
 }
 
 /**
+ * Describes a page of resource object.
+ * @template Resource The resource type.
+ */
+@Azure.Core.pagedResult
+@friendlyName("Paged{name}", Resource)
+@doc("Paged collection of {name} items", Resource)
+model CustomPage<Resource extends TypeSpec.Reflection.Model> {
+  @doc("The {name} items on this page", Resource)
+  @Azure.Core.items
+  value: Resource[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<Resource> | null;
+}
+
+/**
  * The list of dryrun.
  */
-model DryrunList is Azure.Core.Page<DryrunResource>;
+model DryrunList is CustomPage<DryrunResource>;
 
 /**
  * The properties of the dryrun job
@@ -394,7 +411,7 @@ model DryrunPatch {
 /**
  * The list of Linker.
  */
-model ResourceList is Azure.Core.Page<LinkerResource>;
+model ResourceList is CustomPage<LinkerResource>;
 
 /**
  * The properties of the Linker.

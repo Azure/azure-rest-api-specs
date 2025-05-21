@@ -67,8 +67,7 @@ interface DryrunResources {
   updateDryrun is DryrunResourceOps.CustomPatchAsync<
     DryrunResource,
     PatchModel = DryrunPatch,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<DryrunResource> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DryrunResource>>
   >;
 
   /**
@@ -126,10 +125,7 @@ interface Linkers {
   updateDryrun is LinkersOps.CustomPatchAsync<
     DryrunResource,
     PatchModel = DryrunPatch,
-    Response = ArmResourceUpdatedResponse<DryrunResource> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DryrunResource>> & {
-      @bodyRoot
-      _: DryrunResource;
-    })
+    Response = ArmResourceUpdatedResponse<DryrunResource> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DryrunResource>>
   >;
 
   /**

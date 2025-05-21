@@ -20,7 +20,7 @@ interface LinkersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Linkers_ListDaprConfigurations")
-  @route("/{resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations")
+  @route("/{+resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations")
   @get
   listDaprConfigurations(
     ...ApiVersionParameter,

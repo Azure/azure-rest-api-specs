@@ -11,43 +11,6 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers__deleted": {
-      "get": {
-        "operationId": "Linker_List",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ResourceList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "LinkerList": {
-            "$ref": "./examples/LinkerList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/connectors__deleted": {
       "get": {
         "operationId": "Connector_List",
@@ -538,42 +501,6 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/connectors__added": {
-      "get": {
-        "operationId": "Linker_List",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ResourceList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LinkerList": {
-            "$ref": "./examples/LinkerList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/connectors__added": {
       "get": {
         "operationId": "Connector_List",
@@ -1025,7 +952,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1063,27 +990,9 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers": {
       "get": {
-        "parameters": [
-          [
-            "~",
-            {
-              "x-ms-skip-url-encoding__deleted": true
-            }
-          ]
-        ]
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns/{dryrunName}": {
-      "patch": {
-        "responses": {
-          "202": {
-            "schema__added": {
-              "$ref": "#/definitions/DryrunResource"
-            }
-          }
-        }
+        "deprecated__deleted": false
       }
     },
     "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}": {
@@ -1091,15 +1000,7 @@
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation__deleted": true,
-        "responses": {
-          "202__added": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/LinkerResource"
-            }
-          }
-        }
+        "x-ms-long-running-operation__deleted": true
       }
     }
   },
@@ -1112,17 +1013,6 @@
           "x-nullable": true
         }
       }
-    },
-    "Azure.ResourceManager.ArmResponse<DryrunResource>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DryrunResource"
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "Azure.ResourceManager.ArmResponse<ValidateOperationResult>__added": {
       "type": "object",
@@ -1236,12 +1126,7 @@
     "DryrunList": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "nextLink": {
-          "x-nullable__deleted": true
-        }
-      }
+      ]
     },
     "DryrunResource": {
       "allOf": [
@@ -1287,12 +1172,7 @@
     "ResourceList": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "nextLink": {
-          "x-nullable__deleted": true
-        }
-      }
+      ]
     },
     "ServicePrincipalCertificateAuthInfo": {
       "properties": {

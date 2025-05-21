@@ -165,10 +165,9 @@ interface Linker {
   update is LinkerOps.CustomPatchAsync<
     LinkerResource,
     PatchModel = LinkerPatch,
-    Response = ArmResponse<LinkerResource> | ArmResourceCreatedResponse<LinkerResource> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = LinkerResource>> & {
-      @bodyRoot
-      _: LinkerResource;
-    })
+    Response = ArmResponse<LinkerResource> | ArmResourceCreatedResponse<LinkerResource>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LinkerResource> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -185,6 +184,7 @@ interface Linker {
   /**
    * Returns list of Linkers which connects to the resource. which supports to config both application and target service during the resource provision.
    */
+  @segment("linkers")
   list is LinkerOps.List<LinkerResource, Response = ArmResponse<ResourceList>>;
 
   /**

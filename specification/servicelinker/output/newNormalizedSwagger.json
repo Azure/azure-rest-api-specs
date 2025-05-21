@@ -17,42 +17,6 @@
     "application/json"
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/connectors": {
-      "get": {
-        "operationId": "Linker_List",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ResourceList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LinkerList": {
-            "$ref": "./examples/LinkerList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/{resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations": {
       "get": {
         "operationId": "Linkers_ListDaprConfigurations",
@@ -61,7 +25,8 @@
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -250,10 +215,7 @@
             }
           },
           "202": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DryrunResource"
-            }
+            "description": "ignore"
           },
           "default": {
             "description": "ignore",
@@ -307,6 +269,42 @@
           "DeleteDryrun": {
             "$ref": "./examples/DeleteDryrun.json"
           }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers": {
+      "get": {
+        "operationId": "Linker_List",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ResourceList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkerList": {
+            "$ref": "./examples/LinkerList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -436,12 +434,6 @@
             }
           },
           "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/LinkerResource"
-            }
-          },
-          "202": {
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/LinkerResource"
@@ -1151,7 +1143,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1243,17 +1235,6 @@
       "discriminator": "authType",
       "required": [
         "authType"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<DryrunResource>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DryrunResource"
-        }
-      },
-      "required": [
-        "body"
       ]
     },
     "Azure.ResourceManager.ArmResponse<ValidateOperationResult>": {
@@ -1780,7 +1761,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
+          "description": "[Placeholder] Discription for nextLink property",
+          "x-nullable": true
         }
       },
       "required": [
@@ -2163,7 +2145,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
+          "description": "[Placeholder] Discription for nextLink property",
+          "x-nullable": true
         }
       },
       "required": [
