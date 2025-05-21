@@ -1066,7 +1066,15 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ContainerGroupsActionRequest"
+              "type": "object",
+              "properties": {
+                "containerGroupNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "description": "The list of CGs."
           }
@@ -1120,7 +1128,15 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ContainerGroupsActionRequest"
+              "type": "object",
+              "properties": {
+                "containerGroupNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "description": "The list of CGs."
           }
@@ -1162,7 +1178,15 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ContainerGroupsActionRequest"
+              "type": "object",
+              "properties": {
+                "containerGroupNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "description": "The list of CGs."
           }
@@ -4293,16 +4317,6 @@
         "useKrypton": {
           "type": "boolean",
           "description": "Gets or sets Krypton use property."
-        }
-      }
-    },
-    "ContainerGroupsActionRequest": {
-      "description": "List of container group names for which the action is to be performed. Actions could be start/stop/restart etc. This can be null or empty too.",
-      "type": "object",
-      "containerGroupNames": {
-        "type": "array",
-        "items": {
-          "type": "string"
         }
       }
     }
