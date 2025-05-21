@@ -4,4 +4,4 @@ import "@azure-tools/typespec-client-generator-core";
 using Widget;
 using Azure.ClientGenerator.Core;
 
-@@clientName(Widgets, "ContosoWidgets", "csharp");
+@@clientName(Widgets, "AzureWidgets", "csharp");

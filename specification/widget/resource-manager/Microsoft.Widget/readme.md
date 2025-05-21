@@ -1,7 +1,7 @@
-# containerstorage
+# WidgetManagement
 
 > see https://aka.ms/autorest
-This is the AutoRest configuration file for Contoso.
+This is the AutoRest configuration file for WidgetManagement.
 
 ## Getting Started
 
@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-2021-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-11-01'
 input-file:
-  - WidgetManager/stable/2021-11-01/contoso.json
+  - WidgetManager/stable/2021-11-01/widgetmanagement.json
 ```
 
 ### Tag: package-2021-10-01-preview
@@ -42,7 +42,7 @@ These settings apply only when `--tag=package-2021-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-10-01-preview'
 input-file:
-  - WidgetManager/preview/2021-10-01-preview/contoso.json
+  - WidgetManager/preview/2021-10-01-preview/widgetmanagement.json
 ```
 
 ---

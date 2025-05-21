@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)
+@useAuth(AadOauth2Auth<["https://azure.com/.default"]>)
 @service(#{ title: "Widget" })
 @versioned(Widget.Versions)
 namespace Widget;
