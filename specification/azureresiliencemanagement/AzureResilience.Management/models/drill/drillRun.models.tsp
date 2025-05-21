@@ -62,6 +62,11 @@ model DrillRunProperties extends JobProperties {
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   notes: string[];
+
+  @doc("Matrix of Actions supported on Operations.")
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  supportedVerbsForStage: SupportedVerbsForStage[];
 }
 
 @doc("Request body for AddNotes API.")
