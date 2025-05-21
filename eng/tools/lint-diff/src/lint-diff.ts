@@ -102,11 +102,21 @@ async function runLintDiff(
   baseBranch: string,
   compareSha: string,
 ) {
-  const [beforeList, afterList, affectedSwaggers] = await getRunList(
-    beforePath,
-    afterPath,
-    changedFilesPath,
-  );
+  let beforeList, afterList, affectedSwaggers;
+  try {
+    [beforeList, afterList, affectedSwaggers] = await getRunList(
+      beforePath,
+      afterPath,
+      changedFilesPath,
+    );
+  } catch (error) { 
+    console.log("Error evaluating changed files:");
+    console.log(error);
+    console.log("\n");
+    console.error((error as Error).message);
+    process.exitCode = 1;
+    return;
+  }
 
   if (beforeList.size === 0 && afterList.size === 0) {
     await writeFile(outFile, "No changes found. Exiting.");
@@ -124,6 +134,7 @@ async function runLintDiff(
   // different directories.
   const beforeChecks = await runChecks(beforePath, beforeList);
   const afterChecks = await runChecks(afterPath, afterList);
+
 
   // If afterChecks has AutoRest errors, fail the run.
   const autoRestErrors = afterChecks

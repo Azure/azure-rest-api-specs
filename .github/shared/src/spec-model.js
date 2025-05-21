@@ -4,6 +4,7 @@ import { readdir } from "fs/promises";
 import { resolve } from "path";
 import { mapAsync } from "./array.js";
 import { Readme } from "./readme.js";
+import { isResolverError } from "./swagger.js";
 
 /**
  * @typedef {Object} ToJSONOptions
@@ -12,6 +13,12 @@ import { Readme } from "./readme.js";
  *
  * @typedef {import('./swagger.js').Swagger} Swagger
  * @typedef {import('./tag.js').Tag} Tag
+ */
+
+/**
+ * @typedef {Error} SwaggerError
+ * @prop {string} readme
+ * @prop {string} tag
  */
 
 export class SpecModel {
@@ -65,7 +72,27 @@ export class SpecModel {
             continue;
           }
 
-          const refs = await inputFile.getRefs();
+          let refs; 
+          try { 
+            refs = await inputFile.getRefs();
+          } catch (error) {
+            if (isResolverError(error)) {
+              const resolverError = /** @type {SwaggerError} */ {
+                message: `Error resolving refs for input-file: ${inputFile.path}
+Readme: ${readme.path}
+Tag: ${tag.name}
+
+Ensure the input-file is valid and all refs are resolvable.`,
+                readme: readme.path,
+                tag: tag.name,
+
+                cause: error
+              }
+              throw resolverError;
+            }
+            throw error;
+          }
+
           if (refs.get(swaggerPathResolved)) {
             /** @type {Map<string, Tag>} */
             const tags = affectedReadmeTags.get(readme.path) ?? new Map();
