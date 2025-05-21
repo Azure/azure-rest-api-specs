@@ -157,23 +157,6 @@ union ConfigurationChecksTemplateProvisioningState {
   string,
 }
 
-@doc("Represents whether the check is enabled.")
-union ExecutionEnabledStatus {
-  /**
-   * The execution of the check is enabled.
-   */
-  @doc("The execution of the check is enabled.")
-  True: "true",
-
-  /**
-   * The execution of the check is disabled.
-   */
-  @doc("The execution of the check is disabled.")
-  False: "false",
-
-  string,
-}
-
 @doc("Schema for shared parameters to use in 1P resources checks configuration.")
 model SharedParameters {
   /**
@@ -207,12 +190,6 @@ model SharedParameters {
 @doc("The model for list of output parameters to be used in the check.")
 model OutputParameters {
   /**
-   * Name of the output. Default value is Result.
-   */
-  @doc("Name of output.")
-  name: string = "Result";
-
-  /**
    * Condition to be used to evaluate the output and customize the check.
    */
   @doc("Condition to be used to evaluate the output and customize the check.")
@@ -221,8 +198,7 @@ model OutputParameters {
   /**
    * List of parameters
    */
-  @doc("List of parameters.")
-  parameters: SharedParameters;
+  ...SharedParameters;
 }
 
 @doc("Schema for check configuration for allowing customization.")
@@ -241,10 +217,10 @@ model CheckConfiguration {
   originType?: CheckOriginType;
 
   /**
-   * The flag to enable (or) disable the check execution.
+   * The flag that indicates whether the check is enabled or disabled for execution.
    */
-  @doc("The flag to enable (or) disable the check execution.")
-  enabled: ExecutionEnabledStatus;
+  @doc("The status of the check execution.")
+  status: CheckExecutionStatus;
 
   /**
    * List of input parameters to be used in the check.
@@ -259,6 +235,23 @@ model CheckConfiguration {
   @doc("List of output parameters to be used in the check.")
   @Azure.ResourceManager.identifiers(#[])
   outputParameters: OutputParameters[];
+}
+
+@doc("The status of the check execution.")
+union CheckExecutionStatus {
+  /**
+   * The execution of the check is enabled.
+   */
+  @doc("The execution of the check is enabled.")
+  Enabled: "Enabled",
+
+  /**
+   * The execution of the check is disabled.
+   */
+  @doc("The execution of the check is disabled.")
+  Disabled: "Disabled",
+
+  string,
 }
 
 @doc("Schema for role configuration including checks and resources.")

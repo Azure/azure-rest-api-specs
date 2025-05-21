@@ -137,8 +137,8 @@ export async function generateAutoRestErrorReport(
   for (const { result, errors } of autoRestErrors) {
     console.log(`AutoRest errors for ${result.readme} (${result.tag})`);
 
-    outputMarkdown += "Readme: " + result.readme + "\n";
-    outputMarkdown += "Tag: " + result.tag + "\n";
+    outputMarkdown += `Readme: \`${result.readme}\`\n`;
+    outputMarkdown += `Tag: \`${result.tag}\`\n`;
     outputMarkdown += "Errors:\n";
     outputMarkdown += "| Level | Message |\n";
     outputMarkdown += "| ----- | ------- |\n";

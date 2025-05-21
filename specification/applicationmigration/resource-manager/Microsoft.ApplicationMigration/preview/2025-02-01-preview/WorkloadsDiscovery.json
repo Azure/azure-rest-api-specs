@@ -1623,8 +1623,8 @@
       "type": "string",
       "description": "Represents an Enum with boolean values.",
       "enum": [
-        "true",
-        "false"
+        "True",
+        "False"
       ],
       "x-ms-enum": {
         "name": "BoolValue",
@@ -1632,12 +1632,12 @@
         "values": [
           {
             "name": "True",
-            "value": "true",
+            "value": "True",
             "description": "Represents a true boolean value."
           },
           {
             "name": "False",
-            "value": "false",
+            "value": "False",
             "description": "Represents a false boolean value."
           }
         ]
@@ -2076,8 +2076,8 @@
       "type": "string",
       "description": "Represents the presence of custom data types in a DB.",
       "enum": [
-        "true",
-        "false"
+        "True",
+        "False"
       ],
       "x-ms-enum": {
         "name": "HasCustomDataTypes",
@@ -2085,12 +2085,12 @@
         "values": [
           {
             "name": "True",
-            "value": "true",
+            "value": "True",
             "description": "The Database has custom data types."
           },
           {
             "name": "False",
-            "value": "false",
+            "value": "False",
             "description": "The Database does not have custom data types."
           }
         ]
@@ -2100,8 +2100,8 @@
       "type": "string",
       "description": "Represents the presence of Oids in Tables under a DB.",
       "enum": [
-        "true",
-        "false"
+        "True",
+        "False"
       ],
       "x-ms-enum": {
         "name": "HasTablesWithOids",
@@ -2109,12 +2109,12 @@
         "values": [
           {
             "name": "True",
-            "value": "true",
+            "value": "True",
             "description": "The Database has tables with Oids."
           },
           {
             "name": "False",
-            "value": "false",
+            "value": "False",
             "description": "The Database does not have tables with Oids."
           }
         ]
@@ -2368,16 +2368,20 @@
           "type": "string",
           "description": "The database name."
         },
-        "pgSqlInstanceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "discovered PGSQL Instance Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ApplicationMigration/PGSQLSites/PGSQLInstances"
-              }
-            ]
+        "pgSqlInstanceArmIds": {
+          "type": "array",
+          "description": "discovered PGSQL Instance Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ApplicationMigration/PGSQLSites/PGSQLInstances"
+                }
+              ]
+            }
           }
         },
         "encoding": {
@@ -2481,16 +2485,20 @@
           "type": "string",
           "description": "The database name."
         },
-        "pgSqlInstanceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "discovered PGSQL Instance Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ApplicationMigration/PGSQLSites/PGSQLInstances"
-              }
-            ]
+        "pgSqlInstanceArmIds": {
+          "type": "array",
+          "description": "discovered PGSQL Instance Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ApplicationMigration/PGSQLSites/PGSQLInstances"
+                }
+              ]
+            }
           }
         },
         "encoding": {
@@ -2655,16 +2663,20 @@
             "type": "string"
           }
         },
-        "machineId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "discovery Machine Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.OffAzure/serverSites/machines"
-              }
-            ]
+        "machineArmIds": {
+          "type": "array",
+          "description": "discovery Machine Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/serverSites/machines"
+                }
+              ]
+            }
           }
         },
         "hostMachineProperties": {
@@ -2850,16 +2862,20 @@
             "type": "string"
           }
         },
-        "machineId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "discovery Machine Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.OffAzure/serverSites/machines"
-              }
-            ]
+        "machineArmIds": {
+          "type": "array",
+          "description": "discovery Machine Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/serverSites/machines"
+                }
+              ]
+            }
           }
         },
         "hostMachineProperties": {

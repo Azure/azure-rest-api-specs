@@ -42,6 +42,9 @@
       "name": "Operations"
     },
     {
+      "name": "OperationStatus"
+    },
+    {
       "name": "GoalAssignments"
     },
     {
@@ -76,9 +79,63 @@
     },
     {
       "name": "DrillRuns"
+    },
+    {
+      "name": "DrillRunChildJobs"
+    },
+    {
+      "name": "DrillRunResources"
+    },
+    {
+      "name": "ChaosJobs"
+    },
+    {
+      "name": "ChaosJobResources"
+    },
+    {
+      "name": "UnifiedResiliencyItems"
     }
   ],
   "paths": {
+    "/providers/Microsoft.AzureResilienceManagement/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatus_Get",
+        "tags": [
+          "OperationStatus"
+        ],
+        "description": "Returns the current status of an async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationStatus_Get_MaximumSet": {
+            "$ref": "./examples/OperationStatus_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AzureResilienceManagement/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -588,6 +645,53 @@
         }
       }
     },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns": {
+      "get": {
+        "operationId": "DrillRuns_List",
+        "tags": [
+          "DrillRuns"
+        ],
+        "description": "List DrillRun resources by Drill",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRuns_List_MaximumSet": {
+            "$ref": "./examples/DrillRuns_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}": {
       "get": {
         "operationId": "DrillRuns_Get",
@@ -636,6 +740,482 @@
         "x-ms-examples": {
           "DrillRuns_Get_MaximumSet": {
             "$ref": "./examples/DrillRuns_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/chaosJobs": {
+      "get": {
+        "operationId": "ChaosJobs_List",
+        "tags": [
+          "ChaosJobs"
+        ],
+        "description": "List ChaosJob resources by DrillRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChaosJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChaosJobs_List_MaximumSet": {
+            "$ref": "./examples/ChaosJobs_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/chaosJobs/{chaosJobName}": {
+      "get": {
+        "operationId": "ChaosJobs_Get",
+        "tags": [
+          "ChaosJobs"
+        ],
+        "description": "Get a ChaosJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "chaosJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the chaos job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChaosJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChaosJobs_Get_MaximumSet": {
+            "$ref": "./examples/ChaosJobs_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/chaosJobs/{chaosJobName}/chaosJobResources": {
+      "get": {
+        "operationId": "ChaosJobResources_List",
+        "tags": [
+          "ChaosJobResources"
+        ],
+        "description": "List ChaosJobResource resources by ChaosJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "chaosJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the chaos job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChaosJobResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChaosJobResources_List_MaximumSet": {
+            "$ref": "./examples/ChaosJobResources_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/chaosJobs/{chaosJobName}/chaosJobResources/{chaosJobResourceName}": {
+      "get": {
+        "operationId": "ChaosJobResources_Get",
+        "tags": [
+          "ChaosJobResources"
+        ],
+        "description": "Get a ChaosJobResource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "chaosJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the chaos job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "chaosJobResourceName",
+            "in": "path",
+            "description": "The unique name (GUID) of the chaos job resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChaosJobResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChaosJobResources_Get_MaximumSet": {
+            "$ref": "./examples/ChaosJobResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/drillRunChildJobs": {
+      "get": {
+        "operationId": "DrillRunChildJobs_List",
+        "tags": [
+          "DrillRunChildJobs"
+        ],
+        "description": "List DrillRunChildJob resources by DrillRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunChildJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRunChildJobs_List_MaximumSet": {
+            "$ref": "./examples/DrillRunChildJobs_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/drillRunChildJobs/{drillRunChildJobName}": {
+      "get": {
+        "operationId": "DrillRunChildJobs_Get",
+        "tags": [
+          "DrillRunChildJobs"
+        ],
+        "description": "Get a DrillRunChildJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunChildJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the DrillRun child job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunChildJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRunChildJobs_Get_MaximumSet": {
+            "$ref": "./examples/DrillRunChildJobs_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/drillRunResources": {
+      "get": {
+        "operationId": "DrillRunResources_List",
+        "tags": [
+          "DrillRunResources"
+        ],
+        "description": "List DrillRunResource resources by DrillRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRunResources_List_MaximumSet": {
+            "$ref": "./examples/DrillRunResources_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/drillRunResources/{drillRunResourceName}": {
+      "get": {
+        "operationId": "DrillRunResources_Get",
+        "tags": [
+          "DrillRunResources"
+        ],
+        "description": "Get a DrillRunResource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunResourceName",
+            "in": "path",
+            "description": "The unique name (GUID) of the recovery job resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DrillRunResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DrillRunResources_Get_MaximumSet": {
+            "$ref": "./examples/DrillRunResources_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -4013,6 +4593,95 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResiliencyItems": {
+      "get": {
+        "operationId": "UnifiedResiliencyItems_List",
+        "tags": [
+          "UnifiedResiliencyItems"
+        ],
+        "description": "List UnifiedResiliencyItem resources by tenant",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.skipToken"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.top"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnifiedResiliencyItemListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnifiedResiliencyItems_List_MaximumSet": {
+            "$ref": "./examples/UnifiedResiliencyItems_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResiliencyItems/{unifiedResiliencyItemName}": {
+      "get": {
+        "operationId": "UnifiedResiliencyItems_Get",
+        "tags": [
+          "UnifiedResiliencyItems"
+        ],
+        "description": "Get a UnifiedResiliencyItem",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "unifiedResiliencyItemName",
+            "in": "path",
+            "description": "The name of the unified resiliency item.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnifiedResiliencyItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnifiedResiliencyItems_Get_MaximumSet": {
+            "$ref": "./examples/UnifiedResiliencyItems_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/addNotes": {
       "post": {
         "operationId": "DrillRuns_AddNotes",
@@ -4357,32 +5026,21 @@
       "type": "object",
       "description": "Definition of a job, including its type, status, timing, and additional details.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that this job is intended to perform.",
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/JobStatus",
-          "description": "The current status of the job.",
+          "description": "The current status of the job execution.",
           "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the job.",
+          "description": "The start time of the job execution.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the job.",
+          "description": "The end time of the job execution.",
           "readOnly": true
         },
         "duration": {
@@ -4394,6 +5052,17 @@
         "errorDetails": {
           "$ref": "#/definitions/JobErrorInfo",
           "description": "Details of any errors that occurred during the execution of this job."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that this job is intended to perform.",
+          "readOnly": true
         },
         "retryDetails": {
           "type": "array",
@@ -4409,12 +5078,12 @@
         }
       },
       "required": [
-        "resourceId",
-        "operation",
         "status",
         "startTime",
         "endTime",
-        "duration"
+        "duration",
+        "resourceId",
+        "operation"
       ]
     },
     "ChaosExperimentProperties": {
@@ -4481,36 +5150,131 @@
         }
       }
     },
+    "ChaosJob": {
+      "type": "object",
+      "description": "ChaosJob a AzureResilienceProviderHub resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChaosJobProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChaosJobListResult": {
+      "type": "object",
+      "description": "The response of a ChaosJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChaosJob items on this page",
+          "items": {
+            "$ref": "#/definitions/ChaosJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChaosJobProperties": {
+      "type": "object",
+      "description": "Definition of Chaos job properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the recovery child job.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ChaosExperiment"
+    },
+    "ChaosJobResource": {
+      "type": "object",
+      "description": "Represents a chaos job resource in the Azure Resilience Management provider namespace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChaosJobResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChaosJobResourceListResult": {
+      "type": "object",
+      "description": "The response of a ChaosJobResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChaosJobResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ChaosJobResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChaosJobResourceProperties": {
+      "type": "object",
+      "description": "Properties of a Chaos job resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Drill Run Resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ChaosExperiment"
+    },
     "ChildJobProperties": {
       "type": "object",
       "description": "Represents the properties of a child job within the Resiliency Hub.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that this job is intended to perform.",
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/JobStatus",
-          "description": "The current status of the job.",
+          "description": "The current status of the job execution.",
           "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the job.",
+          "description": "The start time of the job execution.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the job.",
+          "description": "The end time of the job execution.",
           "readOnly": true
         },
         "duration": {
@@ -4522,6 +5286,17 @@
         "errorDetails": {
           "$ref": "#/definitions/JobErrorInfo",
           "description": "Details of any errors that occurred during the execution of this job."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that this job is intended to perform.",
+          "readOnly": true
         },
         "retryDetails": {
           "type": "array",
@@ -4570,12 +5345,12 @@
       },
       "discriminator": "jobType",
       "required": [
-        "resourceId",
-        "operation",
         "status",
         "startTime",
         "endTime",
         "duration",
+        "resourceId",
+        "operation",
         "parentJobId",
         "parentJobTaskId",
         "parentJobTaskName",
@@ -4861,6 +5636,11 @@
           "description": "Last sync time.",
           "readOnly": true
         },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed RG v2 properties.",
+          "readOnly": true
+        },
         "drillType": {
           "$ref": "#/definitions/DrillType",
           "description": "The discriminator for the Drill object hierarchy.",
@@ -4872,7 +5652,6 @@
       "discriminator": "drillType",
       "required": [
         "sgId",
-        "metricsProperties",
         "roPlanProperties",
         "chaosExperimentProperties",
         "executionState",
@@ -5014,11 +5793,13 @@
         },
         "roInclusionState": {
           "$ref": "#/definitions/ResourceInclusionState",
-          "description": "Inclusion State of the Drill resource in RO"
+          "description": "Inclusion State of the Drill resource in RO",
+          "readOnly": true
         },
         "roExclusionReason": {
           "$ref": "#/definitions/RoExclusionReason",
-          "description": "Inclusion State of the Drill resource in RO"
+          "description": "Exclusion reason of the Drill resource in RO",
+          "readOnly": true
         },
         "resourceProtectionSolutionType": {
           "$ref": "#/definitions/ResourceProtectionSolutionType",
@@ -5027,28 +5808,34 @@
         },
         "readinessState": {
           "$ref": "#/definitions/DrillResourceReadinessState",
-          "description": "Readiness State of the Drill resource"
+          "description": "Readiness State of the Drill resource",
+          "readOnly": true
         },
         "faultState": {
           "$ref": "#/definitions/DrillResourceFaultState",
-          "description": "Fault State of the Drill resource"
+          "description": "Fault State of the Drill resource",
+          "readOnly": true
         },
         "faultProperties": {
           "$ref": "#/definitions/FaultProperties",
-          "description": "Fault Properties"
+          "description": "Fault Properties",
+          "readOnly": true
         },
         "haStatus": {
           "$ref": "#/definitions/HAStatus",
-          "description": "HA status of the Drill resource"
+          "description": "HA status of the Drill resource",
+          "readOnly": true
         },
         "attentionReason": {
           "$ref": "#/definitions/DrillResourceAttentionReason",
-          "description": "Attention reason if the Status is 'NeedsAttention'."
+          "description": "Attention reason if the Status is 'NeedsAttention'.",
+          "readOnly": true
         },
         "advisorHaRecommendationId": {
           "type": "string",
           "format": "arm-id",
           "description": "Associated Advisor Recommendation link, if HA is not enabled on this resource.",
+          "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -5081,9 +5868,7 @@
         "readinessState",
         "faultState",
         "faultProperties",
-        "haStatus",
-        "tAndcAssignmentError",
-        "rbacAssignmentError"
+        "haStatus"
       ]
     },
     "DrillResourceReadinessState": {
@@ -5117,7 +5902,8 @@
         "InSGNotInDrill",
         "InDrillNotInSG",
         "InRONotInDrill",
-        "InDrillNotInRO"
+        "InDrillNotInRO",
+        "ResourceStateIncompatibleWithFault"
       ],
       "x-ms-enum": {
         "name": "DrillResourceState",
@@ -5142,6 +5928,11 @@
             "name": "InDrillNotInRO",
             "value": "InDrillNotInRO",
             "description": "Resource is in Drill but not part of the ROPlan"
+          },
+          {
+            "name": "ResourceStateIncompatibleWithFault",
+            "value": "ResourceStateIncompatibleWithFault",
+            "description": "Resource is not in a state where it can be faulted."
           }
         ]
       }
@@ -5209,6 +6000,59 @@
         "author"
       ]
     },
+    "DrillRunChildJob": {
+      "type": "object",
+      "description": "DrillRun Child Job a AzureResilienceProviderHub resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DrillRunChildJobProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DrillRunChildJobListResult": {
+      "type": "object",
+      "description": "The response of a DrillRunChildJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DrillRunChildJob items on this page",
+          "items": {
+            "$ref": "#/definitions/DrillRunChildJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DrillRunChildJobProperties": {
+      "type": "object",
+      "description": "Definition of Drill Run child job properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the recovery child job.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChildJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DrillRunChild"
+    },
     "DrillRunFailoverRequest": {
       "type": "object",
       "description": "Request body for Failover API.",
@@ -5220,6 +6064,27 @@
       },
       "required": [
         "failoverProperties"
+      ]
+    },
+    "DrillRunListResult": {
+      "type": "object",
+      "description": "The response of a DrillRun list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DrillRun items on this page",
+          "items": {
+            "$ref": "#/definitions/DrillRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DrillRunOperationVerbs": {
@@ -5276,20 +6141,100 @@
         },
         "drillMode": {
           "$ref": "#/definitions/DrillMode",
-          "description": "Drill mode."
+          "description": "Drill mode.",
+          "readOnly": true
+        },
+        "attestation": {
+          "$ref": "#/definitions/DrillAttestation",
+          "description": "Attestation of this Drill Run.",
+          "readOnly": true
+        },
+        "notes": {
+          "type": "array",
+          "description": "Notes for this Drill.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "supportedVerbsForStage": {
+          "type": "array",
+          "description": "Matrix of Actions supported on Operations.",
+          "items": {
+            "$ref": "#/definitions/SupportedVerbsForStage"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
         "drillUrl",
         "metricValue",
-        "drillMode"
+        "drillMode",
+        "attestation",
+        "notes",
+        "supportedVerbsForStage"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/JobProperties"
         }
       ],
-      "x-ms-discriminator-value": "DrillOober"
+      "x-ms-discriminator-value": "DrillRun"
+    },
+    "DrillRunResource": {
+      "type": "object",
+      "description": "Represents a Drill Run job resource in the Azure Resilience Management provider namespace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DrillRunResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DrillRunResourceListResult": {
+      "type": "object",
+      "description": "The response of a DrillRunResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DrillRunResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DrillRunResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DrillRunResourceProperties": {
+      "type": "object",
+      "description": "Properties of a Drill Run resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Drill Run Resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DrillRunChild"
     },
     "DrillRunStages": {
       "type": "string",
@@ -5461,6 +6406,36 @@
         "message"
       ]
     },
+    "ExclusionReason": {
+      "type": "string",
+      "description": "Enum for the reason why a resource is excluded.",
+      "enum": [
+        "UserSelectedExclusion",
+        "FailedOverResource",
+        "UnsupportedResource"
+      ],
+      "x-ms-enum": {
+        "name": "ExclusionReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserSelectedExclusion",
+            "value": "UserSelectedExclusion",
+            "description": "The resource was excluded by user selection."
+          },
+          {
+            "name": "FailedOverResource",
+            "value": "FailedOverResource",
+            "description": "The resource failed over and is excluded."
+          },
+          {
+            "name": "UnsupportedResource",
+            "value": "UnsupportedResource",
+            "description": "The resource is unsupported and excluded."
+          }
+        ]
+      }
+    },
     "ExclusionState": {
       "type": "string",
       "description": "Enum for the status of the resource in the goal.",
@@ -5553,7 +6528,7 @@
         },
         "tAndcAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
-          "description": "T&C assignment error.",
+          "description": "T and C assignment error.",
           "readOnly": true
         },
         "rbacAssignmentError": {
@@ -5620,6 +6595,42 @@
         "sourceLocations"
       ]
     },
+    "FailoverState": {
+      "type": "string",
+      "description": "A state specific to the resource that helps identify its Failover state.",
+      "enum": [
+        "None",
+        "FailedOver",
+        "FailedOverCommitPending",
+        "FailedOverReprotectPending"
+      ],
+      "x-ms-enum": {
+        "name": "FailoverState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The resource is Not in failedOver state."
+          },
+          {
+            "name": "FailedOver",
+            "value": "FailedOver",
+            "description": "The resource is in failed-over state."
+          },
+          {
+            "name": "FailedOverCommitPending",
+            "value": "FailedOverCommitPending",
+            "description": "The resource is in failover commit pending state."
+          },
+          {
+            "name": "FailedOverReprotectPending",
+            "value": "FailedOverReprotectPending",
+            "description": "The resource is in reprotect pending state."
+          }
+        ]
+      }
+    },
     "FaultDetails": {
       "type": "object",
       "description": "Fault Details",
@@ -5634,11 +6645,17 @@
           "description": "fault name",
           "minLength": 1,
           "maxLength": 100
+        },
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource and not the actual resource which is to be simulated for faulting."
         }
       },
       "required": [
         "faultUrn",
-        "faultName"
+        "faultName",
+        "targetResourceId"
       ]
     },
     "FaultProperties": {
@@ -5646,8 +6663,11 @@
       "description": "Fault Properties",
       "properties": {
         "availableFaults": {
-          "$ref": "#/definitions/FaultDetails",
+          "type": "array",
           "description": "Available faults for this resource.",
+          "items": {
+            "$ref": "#/definitions/FaultDetails"
+          },
           "readOnly": true,
           "x-ms-identifiers": []
         },
@@ -5735,6 +6755,10 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Details of any errors encountered during the operation."
         }
       },
       "required": [
@@ -5763,6 +6787,10 @@
             "$ref": "#/definitions/ServiceLevelResource"
           },
           "x-ms-identifiers": []
+        },
+        "errorDetails": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Details of any errors encountered during the operation."
         }
       }
     },
@@ -5864,6 +6892,14 @@
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation."
         },
+        "exclusionReasonForHighAvailabilityGoals": {
+          "$ref": "#/definitions/ExclusionReason",
+          "description": "Reason for exclusion from high availability goals."
+        },
+        "exclusionReasonForDisasterRecoveryGoals": {
+          "$ref": "#/definitions/ExclusionReason",
+          "description": "Reason for exclusion from disaster recovery goals."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
@@ -5875,7 +6911,9 @@
         "excludedFromHighAvailabilityGoals",
         "manuallyAttestedForHighAvailability",
         "excludedFromDisasterRecoveryGoals",
-        "manuallyAttestedForDisasterRecovery"
+        "manuallyAttestedForDisasterRecovery",
+        "exclusionReasonForHighAvailabilityGoals",
+        "exclusionReasonForDisasterRecoveryGoals"
       ]
     },
     "GoalTemplate": {
@@ -6020,6 +7058,52 @@
         ]
       }
     },
+    "GoalsData": {
+      "type": "object",
+      "description": "Definition of goals data in unified resiliency item.",
+      "properties": {
+        "goalTemplateId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arm id of the goal template."
+        },
+        "goalAssignmentId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arm id of the goal assignment."
+        },
+        "regionalRpoInMinutes": {
+          "$ref": "#/definitions/IsoDuration",
+          "description": "Regional RPO set in resiliency goal in minutes."
+        },
+        "regionalRpaInMinutes": {
+          "$ref": "#/definitions/IsoDuration",
+          "description": "Computed RPA for the service group in minutes."
+        },
+        "regionalRpoStatus": {
+          "$ref": "#/definitions/ResiliencyHealthStatus",
+          "description": "Regional RPO status of the service group."
+        },
+        "regionalRtoInMinutes": {
+          "$ref": "#/definitions/IsoDuration",
+          "description": "Regional RTO set in resiliency goal in minutes."
+        },
+        "regionalRtaInMinutes": {
+          "$ref": "#/definitions/IsoDuration",
+          "description": "Computed RTA for the service group in minutes."
+        },
+        "regionalRtoStatus": {
+          "$ref": "#/definitions/ResiliencyHealthStatus",
+          "description": "Regional RPO status of the service group."
+        }
+      },
+      "required": [
+        "goalTemplateId",
+        "goalAssignmentId",
+        "regionalRpoStatus",
+        "regionalRtoStatus"
+      ]
+    },
     "HAStatus": {
       "type": "string",
       "description": "HA Status",
@@ -6062,8 +7146,7 @@
         }
       },
       "required": [
-        "resourceId",
-        "faultProperties"
+        "resourceId"
       ]
     },
     "InitialConfig": {
@@ -6086,6 +7169,42 @@
             "name": "Complete",
             "value": "Complete",
             "description": "Initial config complete."
+          }
+        ]
+      }
+    },
+    "IsoDuration": {
+      "type": "string",
+      "description": "ISO 8601 duration formats.",
+      "enum": [
+        "PT15M",
+        "PT1H",
+        "PT4H",
+        "PT24H"
+      ],
+      "x-ms-enum": {
+        "name": "IsoDuration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PT15M",
+            "value": "PT15M",
+            "description": "15 minutes."
+          },
+          {
+            "name": "PT1H",
+            "value": "PT1H",
+            "description": "1 hour."
+          },
+          {
+            "name": "PT4H",
+            "value": "PT4H",
+            "description": "4 hours."
+          },
+          {
+            "name": "PT24H",
+            "value": "PT24H",
+            "description": "24 hours."
           }
         ]
       }
@@ -6118,6 +7237,45 @@
         "errorCode"
       ]
     },
+    "JobExecutionDetails": {
+      "type": "object",
+      "description": "Job Execution Details.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The current status of the job execution.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the job execution.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the job execution.",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time elapsed during the execution of this job.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/JobErrorInfo",
+          "description": "Details of any errors that occurred during the execution of this job."
+        }
+      },
+      "required": [
+        "status",
+        "startTime",
+        "endTime",
+        "duration"
+      ]
+    },
     "JobExtendedInfo": {
       "type": "object",
       "description": "Additional information for job.",
@@ -6146,32 +7304,21 @@
       "type": "object",
       "description": "Definition of a job, including its type, status, timing, and additional details.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that this job is intended to perform.",
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/JobStatus",
-          "description": "The current status of the job.",
+          "description": "The current status of the job execution.",
           "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the job.",
+          "description": "The start time of the job execution.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the job.",
+          "description": "The end time of the job execution.",
           "readOnly": true
         },
         "duration": {
@@ -6183,6 +7330,17 @@
         "errorDetails": {
           "$ref": "#/definitions/JobErrorInfo",
           "description": "Details of any errors that occurred during the execution of this job."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that this job is intended to perform.",
+          "readOnly": true
         },
         "retryDetails": {
           "type": "array",
@@ -6209,12 +7367,12 @@
       },
       "discriminator": "jobType",
       "required": [
-        "resourceId",
-        "operation",
         "status",
         "startTime",
         "endTime",
         "duration",
+        "resourceId",
+        "operation",
         "jobType",
         "triggeredBy"
       ]
@@ -6223,32 +7381,21 @@
       "type": "object",
       "description": "Definition of job-resource.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that this job is intended to perform.",
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/JobStatus",
-          "description": "The current status of the job.",
+          "description": "The current status of the job execution.",
           "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the job.",
+          "description": "The start time of the job execution.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the job.",
+          "description": "The end time of the job execution.",
           "readOnly": true
         },
         "duration": {
@@ -6260,6 +7407,17 @@
         "errorDetails": {
           "$ref": "#/definitions/JobErrorInfo",
           "description": "Details of any errors that occurred during the execution of this job."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that this job is intended to perform.",
+          "readOnly": true
         },
         "retryDetails": {
           "type": "array",
@@ -6295,12 +7453,12 @@
       },
       "discriminator": "jobResourceType",
       "required": [
-        "resourceId",
-        "operation",
         "status",
         "startTime",
         "endTime",
         "duration",
+        "resourceId",
+        "operation",
         "jobId",
         "taskId",
         "taskName",
@@ -6314,8 +7472,10 @@
         "Invalid",
         "RecoveryPlan",
         "RecoveryPlanChild",
-        "ValidationOober",
-        "ChaosExperiment"
+        "DrillRun",
+        "DrillRunChild",
+        "ChaosExperiment",
+        "ChaosExperimentChild"
       ],
       "x-ms-enum": {
         "name": "JobResourceType",
@@ -6329,22 +7489,32 @@
           {
             "name": "RecoveryPlan",
             "value": "RecoveryPlan",
-            "description": "Recovery Orchestration Plan created job."
+            "description": "Recovery Orchestration Plan created job resource."
           },
           {
             "name": "RecoveryPlanChild",
             "value": "RecoveryPlanChild",
-            "description": "Recovery Orchestration Plan child created job."
+            "description": "Recovery Orchestration Plan child created job resource."
           },
           {
-            "name": "ValidationOober",
-            "value": "ValidationOober",
-            "description": "Validation Oober job resource which represents a given instance of Validation."
+            "name": "DrillRun",
+            "value": "DrillRun",
+            "description": "Drill Run job resource."
+          },
+          {
+            "name": "DrillRunChild",
+            "value": "DrillRunChild",
+            "description": "Drill Run child job resource."
           },
           {
             "name": "ChaosExperiment",
             "value": "ChaosExperiment",
-            "description": "Chaos job resource created by Validation to represent a Experiment Run."
+            "description": "Chaos job resource created by Drill to represent a Experiment Run."
+          },
+          {
+            "name": "ChaosExperimentChild",
+            "value": "ChaosExperimentChild",
+            "description": "Chaos job's child job resource."
           }
         ]
       }
@@ -6353,35 +7523,45 @@
       "type": "object",
       "description": "Job Retry Details.",
       "properties": {
-        "retryAttempt": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The retry attempt number of the job."
-        },
         "status": {
           "$ref": "#/definitions/JobStatus",
-          "description": "The status of the job at the specific retry."
+          "description": "The current status of the job execution.",
+          "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the job for the specific retry."
+          "description": "The start time of the job execution.",
+          "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the job for the specific retry."
+          "description": "The end time of the job execution.",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time elapsed during the execution of this job.",
+          "readOnly": true
         },
         "errorDetails": {
           "$ref": "#/definitions/JobErrorInfo",
-          "description": "Details of any errors that occurred during the execution of this job for the specific retry."
+          "description": "Details of any errors that occurred during the execution of this job."
+        },
+        "retryAttempt": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The retry attempt number of the job."
         }
       },
       "required": [
-        "retryAttempt",
         "status",
         "startTime",
-        "endTime"
+        "endTime",
+        "duration",
+        "retryAttempt"
       ]
     },
     "JobStatus": {
@@ -6448,6 +7628,33 @@
       "type": "object",
       "description": "Job task details.",
       "properties": {
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The current status of the job execution.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the job execution.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the job execution.",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time elapsed during the execution of this job.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/JobErrorInfo",
+          "description": "Details of any errors that occurred during the execution of this job."
+        },
         "taskId": {
           "type": "string",
           "description": "Identifier of the task.",
@@ -6456,12 +7663,6 @@
         "taskName": {
           "type": "string",
           "description": "Friendly name of the task.",
-          "readOnly": true
-        },
-        "duration": {
-          "type": "string",
-          "format": "duration",
-          "description": "Task duration.",
           "readOnly": true
         },
         "linkedJobIds": {
@@ -6474,13 +7675,34 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "userComments": {
+          "type": "array",
+          "description": "List of sub-tasks associated with this job.",
+          "items": {
+            "$ref": "#/definitions/JobUserComment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "subTasksList": {
+          "type": "array",
+          "description": "List of sub-tasks associated with this job.",
+          "items": {
+            "$ref": "#/definitions/JobTaskDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
+        "status",
+        "startTime",
+        "endTime",
+        "duration",
         "taskId",
         "taskName",
-        "duration",
-        "linkedJobIds"
+        "subTasksList"
       ]
     },
     "JobTriggeredBy": {
@@ -6514,8 +7736,10 @@
         "Invalid",
         "RecoveryPlan",
         "RecoveryPlanChild",
-        "DrillOober",
-        "ChaosExperiment"
+        "DrillRun",
+        "DrillRunChild",
+        "ChaosExperiment",
+        "ChaosExperimentChild"
       ],
       "x-ms-enum": {
         "name": "JobType",
@@ -6537,17 +7761,47 @@
             "description": "Recovery Orchestration Plan child created job."
           },
           {
-            "name": "DrillOober",
-            "value": "DrillOober",
+            "name": "DrillRun",
+            "value": "DrillRun",
             "description": "Drill Oober job which represents a given instance of Drill."
+          },
+          {
+            "name": "DrillRunChild",
+            "value": "DrillRunChild",
+            "description": "Drill Run child job."
           },
           {
             "name": "ChaosExperiment",
             "value": "ChaosExperiment",
             "description": "Chaos job created by Drill to represent a Experiment Run."
+          },
+          {
+            "name": "ChaosExperimentChild",
+            "value": "ChaosExperimentChild",
+            "description": "Chaos job's child job."
           }
         ]
       }
+    },
+    "JobUserComment": {
+      "type": "object",
+      "description": "Job User's Comment.",
+      "properties": {
+        "commentTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of user comment.",
+          "readOnly": true
+        },
+        "comments": {
+          "type": "string",
+          "description": "User Comment",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "commentTime"
+      ]
     },
     "LastRunProperties": {
       "type": "object",
@@ -6583,6 +7837,23 @@
         "lastRunAttestation"
       ]
     },
+    "ManagedOnBehalfOfConfiguration": {
+      "type": "object",
+      "description": "Configuration of the managed on behalf of resource.",
+      "properties": {
+        "moboBrokerResources": {
+          "type": "array",
+          "description": "Associated MoboBrokerResources.",
+          "items": {
+            "$ref": "#/definitions/MoboBrokerResource"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "moboBrokerResources"
+      ]
+    },
     "MarkAsCompleteRequest": {
       "type": "object",
       "description": "Request body for MarkAsComplete API.",
@@ -6600,21 +7871,18 @@
       "type": "object",
       "description": "Response body for MarkAsComplete API.",
       "properties": {
-        "supportedActions": {
+        "supportedVerbsForStage": {
           "type": "array",
           "description": "Matrix of Actions supported on Operations.",
           "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "$ref": "#/definitions/SupportedVerbsForStage"
           },
           "readOnly": true,
           "x-ms-identifiers": []
         }
       },
       "required": [
-        "supportedActions"
+        "supportedVerbsForStage"
       ]
     },
     "MetricsProperties": {
@@ -6695,6 +7963,20 @@
         "metricName",
         "metricId",
         "destinationAmwAccountUrl"
+      ]
+    },
+    "MoboBrokerResource": {
+      "type": "object",
+      "description": "MoboBroker resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the MoboBroker resource.\nExample: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "NotQualifiedReasons": {
@@ -6921,6 +8203,45 @@
             "description": "Drill is not ready to run. Details captured in AttentionReason field."
           }
         ]
+      }
+    },
+    "RecommendationsData": {
+      "type": "object",
+      "description": "Definition of recommendations data in unified resiliency item.",
+      "properties": {
+        "highAvailability": {
+          "$ref": "#/definitions/RecommendationsHighAvailabilityData",
+          "description": "The high availability section of resiliency recommendation."
+        }
+      },
+      "required": [
+        "highAvailability"
+      ]
+    },
+    "RecommendationsHighAvailabilityData": {
+      "type": "object",
+      "description": "Definition of recommendation data related to high availability in unified resiliency item.",
+      "properties": {
+        "includedResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Included resources count for high availability recommendations."
+        },
+        "notIncludedResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Excluded resources count for high availability recommendations."
+        },
+        "notEvaluatedResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Not evaluated resources count for high availability recommendations."
+        },
+        "evaluationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last evaluation date time of high availability recommendation."
+        }
       }
     },
     "RecoveryChildJob": {
@@ -7678,24 +8999,6 @@
           "description": "Original location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
           "readOnly": true
         },
-        "recoveryLocations": {
-          "type": "array",
-          "description": "List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "protectionStatus": {
-          "$ref": "#/definitions/ResourceProtectionStatus",
-          "description": "A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.",
-          "readOnly": true
-        },
-        "replicationRole": {
-          "$ref": "#/definitions/ResourceReplicationRole",
-          "description": "Specifies the role of the resource in the replication process.",
-          "readOnly": true
-        },
         "inclusionState": {
           "$ref": "#/definitions/ResourceInclusionState",
           "description": "A state that indicates the resource status with respect to the recovery orchestration plan."
@@ -7714,9 +9017,27 @@
           },
           "readOnly": true
         },
-        "protectionSolutionSetting": {
+        "protectionStatus": {
+          "$ref": "#/definitions/ResourceProtectionStatus",
+          "description": "A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.",
+          "readOnly": true
+        },
+        "resourceProtectionSolutions": {
+          "type": "array",
+          "description": "A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.",
+          "items": {
+            "$ref": "#/definitions/ResourceProtectionSolutionSettings"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "selectedProtectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the protection solution selected."
+        },
+        "selectedProtectionSolutionSetting": {
           "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting",
-          "description": "Resource protection solution settings associated with the recovery orchestration resource."
+          "description": "Resource protection solution settings of the protection solutions recovery orchestration resource is protected with."
         },
         "recoveryGroupId": {
           "type": "string",
@@ -7735,8 +9056,10 @@
       },
       "required": [
         "resourceId",
+        "needsAttention",
         "protectionStatus",
-        "needsAttention"
+        "resourceProtectionSolutions",
+        "selectedProtectionSolutionType"
       ]
     },
     "RecoveryResourceQualification": {
@@ -7830,6 +9153,36 @@
             "name": "Required",
             "value": "Required",
             "description": "The resource is required for the specified goal."
+          }
+        ]
+      }
+    },
+    "ResiliencyHealthStatus": {
+      "type": "string",
+      "description": "enum for Resiliency health status.",
+      "enum": [
+        "NotEvaluated",
+        "Unhealthy",
+        "Healthy"
+      ],
+      "x-ms-enum": {
+        "name": "ResiliencyHealthStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotEvaluated",
+            "value": "NotEvaluated",
+            "description": "Resource is not evaluated."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Resource is Unhealthy."
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Resource is Healthy."
           }
         ]
       }
@@ -7981,6 +9334,84 @@
         }
       ],
       "x-ms-discriminator-value": "AzureNative"
+    },
+    "ResourceProtectionSolutionSettings": {
+      "type": "object",
+      "description": "Definition of recovery resource resource protection solution settings.",
+      "properties": {
+        "protectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the resource protected with which recovery solution."
+        },
+        "protectionStatus": {
+          "$ref": "#/definitions/ResourceProtectionStatus",
+          "description": "A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
+          "readOnly": true
+        },
+        "activeLocation": {
+          "type": "string",
+          "description": "Active location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
+          "readOnly": true
+        },
+        "recoveryLocations": {
+          "type": "array",
+          "description": "List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "replicationRole": {
+          "$ref": "#/definitions/ResourceReplicationRole",
+          "description": "Specifies the role of the resource in the replication process.",
+          "readOnly": true
+        },
+        "primaryResource": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Primary resource which is getting replicated.",
+          "readOnly": true
+        },
+        "replicaResources": {
+          "type": "array",
+          "description": "List of Replica resources to which replication is happening.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          },
+          "readOnly": true
+        },
+        "isAutoFailover": {
+          "type": "boolean",
+          "description": "Is AutoFailover configured for the resource replication.",
+          "default": false,
+          "readOnly": true
+        },
+        "failoverState": {
+          "$ref": "#/definitions/FailoverState",
+          "description": "Failover state of the recovery orchestration resource.",
+          "readOnly": true
+        },
+        "testFailoverState": {
+          "$ref": "#/definitions/TestFailoverState",
+          "description": "TestFailover state of the recovery orchestration resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "protectionSolutionType",
+        "protectionStatus",
+        "resourceId",
+        "activeLocation",
+        "isAutoFailover"
+      ]
     },
     "ResourceProtectionSolutionType": {
       "type": "string",
@@ -8308,6 +9739,28 @@
         "serviceLevelObjectiveResourceId"
       ]
     },
+    "SupportedVerbsForStage": {
+      "type": "object",
+      "description": "Model for supported verbs for stage.",
+      "properties": {
+        "drillRunStage": {
+          "$ref": "#/definitions/DrillRunStages",
+          "description": "Name of stage."
+        },
+        "supportedVerbs": {
+          "type": "array",
+          "description": "Supported Verbs for stage.",
+          "items": {
+            "$ref": "#/definitions/DrillRunOperationVerbs"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "drillRunStage",
+        "supportedVerbs"
+      ]
+    },
     "SystemMetadata": {
       "type": "object",
       "description": "Internal System Metadata, to be used by internal components only.",
@@ -8331,6 +9784,89 @@
           "maxLength": 1024
         }
       }
+    },
+    "TestFailoverState": {
+      "type": "string",
+      "description": "A state specific to the resource that helps identify its TestFailover state.",
+      "enum": [
+        "None",
+        "TestFailoverCleanupPending"
+      ],
+      "x-ms-enum": {
+        "name": "TestFailoverState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The resource is Not in TestFailedOver state (No test failover cleanup pending)."
+          },
+          {
+            "name": "TestFailoverCleanupPending",
+            "value": "TestFailoverCleanupPending",
+            "description": "he resource is in test failover cleanup pending state."
+          }
+        ]
+      }
+    },
+    "UnifiedResiliencyItem": {
+      "type": "object",
+      "description": "A unified resiliency item represents a computed and aggregated resilience information of Azure Applications.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UnifiedResiliencyItemProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UnifiedResiliencyItemListResult": {
+      "type": "object",
+      "description": "The response of a UnifiedResiliencyItem list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UnifiedResiliencyItem items on this page",
+          "items": {
+            "$ref": "#/definitions/UnifiedResiliencyItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UnifiedResiliencyItemProperties": {
+      "type": "object",
+      "description": "Definition of unified resiliency item property.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "goals": {
+          "$ref": "#/definitions/GoalsData",
+          "description": "Computed and copied data of resiliency goals."
+        },
+        "recommendations": {
+          "$ref": "#/definitions/RecommendationsData",
+          "description": "Computed and copied data of Azure recommendations."
+        }
+      },
+      "required": [
+        "goals",
+        "recommendations"
+      ]
     },
     "UpdateGoalResourceRequest": {
       "type": "object",

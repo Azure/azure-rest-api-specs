@@ -7,7 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models/goals/goalTemplate.tsp";
 import "./models/goals/goalAssignment.tsp";
 import "./models/goals/goalResource.tsp";
-import "./common/common.tsp";
+import "./models/common/common.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
