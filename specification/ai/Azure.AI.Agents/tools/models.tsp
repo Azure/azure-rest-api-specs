@@ -63,8 +63,6 @@ model BingGroundingToolDefinition extends ToolDefinition {
 
 @doc("The fabric data agent tool parameters.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-@removed(Versions.v2025_05_01)
 model FabricDataAgentToolParameters {
   /**
    * The connections attached to this tool. There can be a maximum of 1 connection
@@ -77,8 +75,6 @@ model FabricDataAgentToolParameters {
 
 @doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-@removed(Versions.v2025_05_01)
 model MicrosoftFabricToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'fabric_dataagent'.")
   type: "fabric_dataagent";
@@ -89,8 +85,6 @@ model MicrosoftFabricToolDefinition extends ToolDefinition {
 
 @doc("The sharepoint grounding tool parameters.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-@removed(Versions.v2025_05_01)
 model SharepointGroundingToolParameters {
   /**
    * The connections attached to this tool. There can be a maximum of 1 connection
@@ -103,8 +97,6 @@ model SharepointGroundingToolParameters {
 
 @doc("The input definition information for a sharepoint tool as used to configure an agent.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-@removed(Versions.v2025_05_01)
 model SharepointToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'sharepoint_grounding'.")
   type: "sharepoint_grounding";
@@ -132,8 +124,6 @@ model OpenApiToolDefinition extends ToolDefinition {
 
 @doc("The input definition information for a Bing custom search tool as used to configure an agent.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-@removed(Versions.v2025_05_01)
 model BingCustomSearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'bing_custom_search'.")
   type: "bing_custom_search";
@@ -483,8 +473,6 @@ model RunStepAzureAISearchToolCall extends RunStepToolCall {
   executed SharePoint actions.
   """)
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-@removed(Versions.v2025_05_01)
 model RunStepSharepointToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'sharepoint_grounding'.")
   type: "sharepoint_grounding";
@@ -499,8 +487,6 @@ model RunStepSharepointToolCall extends RunStepToolCall {
   executed Microsoft Fabric operations.
   """)
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-@removed(Versions.v2025_05_01)
 model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'fabric_dataagent'.")
   type: "fabric_dataagent";
@@ -515,8 +501,6 @@ model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
   executed search with bing custom search.
   """)
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-@removed(Versions.v2025_05_01)
 model RunStepBingCustomSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'bing_custom_search'.")
   type: "bing_custom_search";
@@ -709,14 +693,10 @@ union AgentsNamedToolChoiceType {
 
   /** Tool type `fabric_dataagent` */
   @added(Versions.v2025_05_15_preview)
-  @removed(Versions.v1)
-  @removed(Versions.v2025_05_01)
   microsoftFabric: "fabric_dataagent",
 
   /** Tool type `sharepoint_grounding` */
   @added(Versions.v2025_05_15_preview)
-  @removed(Versions.v1)
-  @removed(Versions.v2025_05_01)
   sharepoint: "sharepoint_grounding",
 
   /** Tool type `azure_ai_search` */
@@ -724,8 +704,6 @@ union AgentsNamedToolChoiceType {
 
   /** Tool type `bing_custom_search` */
   @added(Versions.v2025_05_15_preview)
-  @removed(Versions.v1)
-  @removed(Versions.v2025_05_01)
   bingCustomSearch: "bing_custom_search",
 
   /** Tool type `connected_agent` */
@@ -779,8 +757,6 @@ model BingGroundingSearchToolParameters {
  * The bing custom search tool parameters.
  */
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-@removed(Versions.v2025_05_01)
 model BingCustomSearchToolParameters {
   /**
    * The connections attached to this tool. There can be a maximum of 1 connection
