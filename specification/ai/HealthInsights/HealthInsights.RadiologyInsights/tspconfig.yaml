@@ -24,7 +24,7 @@ options:
   "@azure-tools/typespec-python":
     package-pprint-name: '"Azure Health Insights - Radiology Insights"'
     package-mode: "dataplane"
-    package-version: 2.0.0
+    package-version: 1.1.0
     package-dir: "azure-healthinsights-radiologyinsights"
     namespace: "azure.healthinsights.radiologyinsights"
     flavor: azure
@@ -32,6 +32,7 @@ options:
     generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-health-insights-radiologyinsights"
+    package-version: 1.1.0
     namespace: com.azure.health.insights.radiologyinsights
     service-name: "RadiologyInsights"
     partial-update: true
@@ -42,6 +43,7 @@ options:
         final-type: com.azure.health.insights.radiologyinsights.models.RadiologyInsightsInferenceResult
     flavor: azure
     api-version: 2024-10-01
+    service-version-exclude-preview: true
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true
@@ -53,7 +55,6 @@ options:
     package-dir: "health-insights-radiologyinsights-rest"
     emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/health-insights-cancerprofiling-rest"
     generate-metadata: true
-    generate-test: true
     package-details:
       name: "@azure-rest/health-insights-radiologyinsights"
     flavor: azure

@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { runSpecGenSdkCommand, resetGitRepo } from "./utils.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
-import { SpecGenSdkCmdInput } from "./types.js";
+import { APIViewRequestData, SpecGenSdkCmdInput } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 import {
   generateArtifact,
@@ -86,6 +86,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let currentRunHasBreakingChange = false;
   let overallExecutionResult = "";
   let currentExecutionResult = "";
+  let stagedArtifactsFolder = "";
+  const apiViewRequestData: APIViewRequestData [] = [];
 
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
@@ -130,6 +132,19 @@ export async function generateSdkForSpecPr(): Promise<number> {
       // Read the execution report to aggreate the generation results
       executionReport = getExecutionReport(commandInput);
       currentExecutionResult = executionReport.executionResult;
+
+      if (executionReport.stagedArtifactsFolder) {
+        stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
+        for (const pkg of executionReport.packages) {
+          if (pkg.apiViewArtifact) {
+            apiViewRequestData.push({
+              packageName: pkg.packageName,
+              filePath: path.relative(stagedArtifactsFolder, pkg.apiViewArtifact),
+            });
+          }
+        }
+      }
+
       if (overallExecutionResult !== "failed") {
         overallExecutionResult = currentExecutionResult;
       }
@@ -152,6 +167,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
       breakingChangeLabel,
       overallRunHasBreakingChange,
       hasManagementPlaneSpecs,
+      stagedArtifactsFolder,
+      apiViewRequestData
     ) || statusCode;
   return statusCode;
 }
@@ -170,6 +187,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   // Prepare variables
   let statusCode = 0;
   let markdownContent = "\n";
+  markdownContent += `## Batch Run Type\n ${batchType}\n`;
   let failedContent = `## Spec Failures in the Generation Process\n`;
   let succeededContent = `## Successful Specs in the Generation Process\n`;
   let notEnabledContent = `## Specs with SDK Not Enabled\n`;
