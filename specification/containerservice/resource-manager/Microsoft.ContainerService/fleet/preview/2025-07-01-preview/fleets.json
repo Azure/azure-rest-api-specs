@@ -2642,7 +2642,7 @@
           "type": "string",
           "description": "  This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, \"1.30\".\n  By default, this is empty.\n  If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.\n  If upgrade channel is Rapid, Stable or NodeImage, this field must be empty."
         },
-        "enableLongTermSupport": {
+        "longTermSupport": {
           "type": "boolean",
           "description": "  If upgrade channel is not TargetKubernetesVersion, this field must be False.\n  If set to True: Fleet auto upgrade will continue generate update runs for patches of minor versions earlier than N-2 \n  (where N is the latest supported minor version) if those minor versions support Long-Term Support (LTS).\n  By default, this is set to False.\n  For more information on AKS LTS, please see https://learn.microsoft.com/en-us/azure/aks/long-term-support"
         }

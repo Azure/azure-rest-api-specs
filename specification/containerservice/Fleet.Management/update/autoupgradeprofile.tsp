@@ -72,23 +72,23 @@ model AutoUpgradeProfileProperties {
   autoUpgradeProfileStatus?: AutoUpgradeProfileStatus;
 
   @doc("""
-    This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, "1.30".
-    By default, this is empty.
-    If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.
-    If upgrade channel is Rapid, Stable or NodeImage, this field must be empty.
-  """)
+      This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, "1.30".
+      By default, this is empty.
+      If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.
+      If upgrade channel is Rapid, Stable or NodeImage, this field must be empty.
+    """)
   @added(Versions.v2025_07_01_preview)
   targetKubernetesVersion?: string;
 
   @doc("""
-    If upgrade channel is not TargetKubernetesVersion, this field must be False.
-    If set to True: Fleet auto upgrade will continue generate update runs for patches of minor versions earlier than N-2 
-    (where N is the latest supported minor version) if those minor versions support Long-Term Support (LTS).
-    By default, this is set to False.
-    For more information on AKS LTS, please see https://learn.microsoft.com/en-us/azure/aks/long-term-support
-  """)
+      If upgrade channel is not TargetKubernetesVersion, this field must be False.
+      If set to True: Fleet auto upgrade will continue generate update runs for patches of minor versions earlier than N-2 
+      (where N is the latest supported minor version) if those minor versions support Long-Term Support (LTS).
+      By default, this is set to False.
+      For more information on AKS LTS, please see https://learn.microsoft.com/en-us/azure/aks/long-term-support
+    """)
   @added(Versions.v2025_07_01_preview)
-  enableLongTermSupport?: boolean;
+  longTermSupport?: boolean;
 }
 
 @doc("Configuration of how auto upgrade will be run.")
@@ -108,10 +108,10 @@ union UpgradeChannel {
   NodeImage: "NodeImage",
 
   @doc("""
-    Upgrades the clusters Kubernetes version to the latest supported patch version of the specified target Kubernetes version.
-    For information on the behavior of update run for Kubernetes version upgrade, 
-    see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal
-  """)
+      Upgrades the clusters Kubernetes version to the latest supported patch version of the specified target Kubernetes version.
+      For information on the behavior of update run for Kubernetes version upgrade, 
+      see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal
+    """)
   @added(Versions.v2025_07_01_preview)
   TargetKubernetesVersion: "TargetKubernetesVersion",
 }
