@@ -6,7 +6,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 title: FluxConfigClient
 rename-operation-group: FluxConfigOperationStatus:OperationStatus,FluxConfigurations:FluxConfigs
-rename-model: FluxConfigOperationStatusClientImpl:OperationStatusClientImpl,FluxConfigurationClientBuilder:FluxConfigClientBuilder,FluxConfigOperationStatusImpl:OperationStatusImpl,FluxConfigurationClientImpl:FluxConfigClientImpl,FluxConfigurationsClientImpl:FluxConfigsClientImpl,FluxConfigurationPatchProperties:FluxConfigPatchProperties
+rename-model: FluxConfigurationPatchProperties:FluxConfigPatchProperties
 directive:
   - from: fluxconfiguration.json
     where: $.definitions.KustomizationDefinition.properties.wait
