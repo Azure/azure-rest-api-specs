@@ -1,9 +1,10 @@
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { pathExists } from "./util.js";
+import { pathExists, getDependencyVersion, getPathToDependency } from "./util.js";
 import { getRunList } from "./processChanges.js";
 import { runChecks, getAutorestErrors } from "./runChecks.js";
 import { correlateRuns } from "./correlateResults.js";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
+import { writeFile } from "node:fs/promises";
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -78,14 +79,10 @@ export async function main() {
     process.exit(1);
   }
 
-  // const versionResult = await executeCommand("npm exec -- autorest --version");
-  // if (versionResult.error) {
-  //   console.error("Error running autorest --version", versionResult.error);
-  //   process.exit(1);
-  // }
-
-  // console.log("Autorest version:");
-  // console.log(versionResult.stdout);
+  const validatorVersion = await getDependencyVersion(
+    await getPathToDependency("@microsoft.azure/openapi-validator"),
+  );
+  console.log(`Using @microsoft.azure/openapi-validator version: ${validatorVersion}\n`);
 
   await runLintDiff(
     beforeArg as string,
@@ -110,6 +107,18 @@ async function runLintDiff(
     afterPath,
     changedFilesPath,
   );
+
+  if (beforeList.size === 0 && afterList.size === 0) {
+    await writeFile(outFile, "No changes found. Exiting.");
+    console.log("No changes found. Exiting.");
+    return;
+  }
+
+  if (afterList.size === 0) { 
+    await writeFile(outFile, "No applicable files found in after. Exiting.");
+    console.log("No applicable files found in after. Exiting.");
+    return;
+  }
 
   // It may be possible to run these in parallel as they're running against
   // different directories.
@@ -144,5 +153,11 @@ async function runLintDiff(
   if (!pass) {
     process.exitCode = 1;
     console.error(`Lint-diff failed. See workflow summary report in ${outFile} for details.`);
+  }
+
+  if (process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID) {
+    console.log(
+      `See workflow summary at: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`,
+    );
   }
 }

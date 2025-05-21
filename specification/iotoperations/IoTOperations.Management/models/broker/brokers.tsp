@@ -184,7 +184,6 @@ model VolumeClaimSpec {
   storageClassName?: string;
 
   @doc("AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   accessModes?: string[];
 
   @doc("This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field.")
@@ -214,7 +213,7 @@ model VolumeClaimResourceRequirements {
 @doc("VolumeClaimSpecSelector properties")
 model VolumeClaimSpecSelector {
   @doc("MatchExpressions is a list of label selector requirements. The requirements are ANDed.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   matchExpressions?: VolumeClaimSpecSelectorMatchExpressions[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
