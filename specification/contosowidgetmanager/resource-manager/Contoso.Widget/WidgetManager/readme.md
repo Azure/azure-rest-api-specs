@@ -1,17 +1,17 @@
 # containerstorage
 
 > see https://aka.ms/autorest
-This is the AutoRest configuration file for Contoso.
+> This is the AutoRest configuration file for Contoso.
 
 ## Getting Started
 
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
-To see additional help and options, run:
+> To see additional help and options, run:
 
 > `autorest --help`
-For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
+> For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
 ---
 
@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-2021-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-11-01'
 input-file:
-  - Microsoft.Contoso/stable/2021-11-01/contoso.json
+  - stable/2021-11-01/contoso.json
 ```
 
 ### Tag: package-2021-10-01-preview
@@ -42,7 +42,7 @@ These settings apply only when `--tag=package-2021-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-10-01-preview'
 input-file:
-  - Microsoft.Contoso/preview/2021-10-01-preview/contoso.json
+  - preview/2021-10-01-preview/contoso.json
 ```
 
 ---
