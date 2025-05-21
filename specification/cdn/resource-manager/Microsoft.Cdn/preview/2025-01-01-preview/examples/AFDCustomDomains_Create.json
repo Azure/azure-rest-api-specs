@@ -10,7 +10,31 @@
         "hostName": "www.someDomain.net",
         "tlsSettings": {
           "certificateType": "ManagedCertificate",
-          "minimumTlsVersion": "TLS12"
+          "cipherSuiteSetType": "Customized",
+          "minimumTlsVersion": "TLS12",
+          "customizedCipherSuiteSet": {
+            "cipherSuiteSetForTls10": [],
+            "cipherSuiteSetForTls12": [
+              "ECDHE_RSA_AES128_GCM_SHA256"
+            ],
+            "cipherSuiteSetForTls13": [
+              "TLS_AES_128_GCM_SHA256",
+              "TLS_AES_256_GCM_SHA384"
+            ]
+          }
+        },
+        "mtlsSettings": {
+          "secrets": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/name1"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/name2"
+            }
+          ],
+          "otherAllowedFqdn": [
+            "foo.contoso.com"
+          ]
         },
         "azureDnsZone": {
           "id": ""
@@ -29,10 +53,37 @@
           "hostName": "www.contoso.com",
           "tlsSettings": {
             "certificateType": "ManagedCertificate",
+            "cipherSuiteSetType": "Customized",
             "minimumTlsVersion": "TLS12",
+            "customizedCipherSuiteSet": {
+              "cipherSuiteSetForTls10": [],
+              "cipherSuiteSetForTls12": [
+                "ECDHE_RSA_AES128_GCM_SHA256"
+              ],
+              "cipherSuiteSetForTls13": [
+                "TLS_AES_128_GCM_SHA256",
+                "TLS_AES_256_GCM_SHA384"
+              ]
+            },
             "secret": {
               "id": ""
             }
+          },
+          "mtlsSettings": {
+            "secrets": [
+              {
+                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/name1"
+              },
+              {
+                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/name2"
+              }
+            ],
+            "otherAllowedFqdn": [
+              "foo.contoso.com"
+            ],
+            "certificateValidation": "Enabled",
+            "certificatePassthrough": "Disabled",
+            "ocsp": "Enabled"
           },
           "azureDnsZone": {
             "id": ""
@@ -60,10 +111,37 @@
           "hostName": "www.contoso.com",
           "tlsSettings": {
             "certificateType": "ManagedCertificate",
+            "cipherSuiteSetType": "Customized",
             "minimumTlsVersion": "TLS12",
+            "customizedCipherSuiteSet": {
+              "cipherSuiteSetForTls10": [],
+              "cipherSuiteSetForTls12": [
+                "ECDHE_RSA_AES128_GCM_SHA256"
+              ],
+              "cipherSuiteSetForTls13": [
+                "TLS_AES_128_GCM_SHA256",
+                "TLS_AES_256_GCM_SHA384"
+              ]
+            },
             "secret": {
               "id": ""
             }
+          },
+          "mtlsSettings": {
+            "secrets": [
+              {
+                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/name1"
+              },
+              {
+                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/name2"
+              }
+            ],
+            "otherAllowedFqdn": [
+              "foo.contoso.com"
+            ],
+            "certificateValidation": "Enabled",
+            "certificatePassthrough": "Disabled",
+            "ocsp": "Enabled"
           },
           "azureDnsZone": {
             "id": ""
@@ -98,6 +176,22 @@
             "secret": {
               "id": ""
             }
+          },
+          "mtlsSettings": {
+            "secrets": [
+              {
+                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/name1"
+              },
+              {
+                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/name2"
+              }
+            ],
+            "otherAllowedFqdn": [
+              "foo.contoso.com"
+            ],
+            "certificateValidation": "Enabled",
+            "certificatePassthrough": "Disabled",
+            "ocsp": "Enabled"
           },
           "azureDnsZone": {
             "id": ""

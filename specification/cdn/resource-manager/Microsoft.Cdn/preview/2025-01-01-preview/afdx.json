@@ -3333,6 +3333,457 @@
         }
       }
     },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups": {
+      "get": {
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Lists existing AzureFrontDoor KeyGroups.",
+        "operationId": "KeyGroups_ListByProfile",
+        "x-ms-examples": {
+          "KeyGroups_ListByProfile": {
+            "$ref": "./examples/KeyGroups_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyGroupListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups/{keyGroupName}": {
+      "get": {
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Gets an existing KeyGroup within a profile.",
+        "operationId": "KeyGroups_Get",
+        "x-ms-examples": {
+          "KeyGroups_Get": {
+            "$ref": "./examples/KeyGroups_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/keyGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Creates or updates a new KeyGroup within the specified profile.",
+        "operationId": "KeyGroups_CreateUpdate",
+        "x-ms-examples": {
+          "KeyGroups_Create": {
+            "$ref": "./examples/KeyGroups_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/keyGroupNameParameter"
+          },
+          {
+            "name": "keyGroup",
+            "in": "body",
+            "description": "The KeyGroup properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Update succeeded for an existing key group.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new key group has been created.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Deletes an existing KeyGroup within profile.",
+        "operationId": "KeyGroups_Delete",
+        "x-ms-examples": {
+          "KeyGroups_Delete": {
+            "$ref": "./examples/KeyGroups_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/keyGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the key group was not found."
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions": {
+      "get": {
+        "operationId": "DeploymentVersions_ListByProfile",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Lists existing deployment versions by profile",
+        "x-ms-examples": {
+          "DeploymentVersions_ListByProfile": {
+            "$ref": "./examples/DeploymentVersions_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersionListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}": {
+      "get": {
+        "operationId": "DeploymentVersions_Get",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Get an existing DeploymentVersion with the specified version name under the specified subscription, resource group and profile.",
+        "x-ms-examples": {
+          "DeploymentVersions_Get": {
+            "$ref": "./examples/DeploymentVersions_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentVersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersion"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeploymentVersions_Update",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Update an existing DeploymentVersion within a profile.",
+        "x-ms-examples": {
+          "DeploymentVersions_Update": {
+            "$ref": "./examples/DeploymentVersions_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentVersionNameParameter"
+          },
+          {
+            "name": "deploymentVersionUpdateProperties",
+            "in": "body",
+            "description": "Deployment version properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersion"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}/approve": {
+      "post": {
+        "operationId": "DeploymentVersions_Approve",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Approve the deployment of the version",
+        "x-ms-examples": {
+          "DeploymentVersions_Approve": {
+            "$ref": "./examples/DeploymentVersions_Approve.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentVersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}/compare": {
+      "post": {
+        "operationId": "DeploymentVersions_Compare",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Compare the deployment version to another deployment version",
+        "x-ms-examples": {
+          "DeploymentVersions_Compare": {
+            "$ref": "./examples/DeploymentVersions_Compare.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentVersionNameParameter"
+          },
+          {
+            "name": "compareDeploymentVersionsParameter",
+            "in": "body",
+            "description": "The deployment version to be compared to",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompareDeploymentVersionsParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CompareDeploymentVersionsResponse"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsMetrics": {
       "get": {
         "tags": [
@@ -3998,6 +4449,576 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/targetGroups": {
+      "get": {
+        "tags": [
+          "AFDTargetGroups"
+        ],
+        "description": "Lists Target Groups associated with the profile",
+        "operationId": "AFDTargetGroups_ListByProfile",
+        "x-ms-examples": {
+          "AfdTargetGroups_ListByProfile": {
+            "$ref": "./examples/AFDTargetGroups_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/targetGroups/{targetGroupName}": {
+      "get": {
+        "tags": [
+          "AFDTargetGroups"
+        ],
+        "description": "Gets an existing target group within a profile.",
+        "operationId": "AFDTargetGroups_Get",
+        "x-ms-examples": {
+          "AfdTargetGroups_Get": {
+            "$ref": "./examples/AFDTargetGroups_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/targetGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AFDTargetGroups"
+        ],
+        "description": "Creates a new target group within the specified profile.",
+        "operationId": "AFDTargetGroups_Create",
+        "x-ms-examples": {
+          "AfdTargetGroups_Create": {
+            "$ref": "./examples/AFDTargetGroups_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/targetGroupNameParameter"
+          },
+          {
+            "name": "targetGroup",
+            "in": "body",
+            "description": "The target group properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new delivery rule has been created.",
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "AFDTargetGroups"
+        ],
+        "description": "Updates an existing target group within a profile.",
+        "operationId": "AFDTargetGroups_Update",
+        "x-ms-examples": {
+          "AfdTargetGroups_Update": {
+            "$ref": "./examples/AFDTargetGroups_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/targetGroupNameParameter"
+          },
+          {
+            "name": "targetGroupUpdateProperties",
+            "in": "body",
+            "description": "Target group update properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroupUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "AFDTargetGroups"
+        ],
+        "description": "Deletes an existing target group within profile.",
+        "operationId": "AFDTargetGroups_Delete",
+        "x-ms-examples": {
+          "AfdTargetGroups_Delete": {
+            "$ref": "./examples/AFDTargetGroups_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/targetGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/tunnelPolicies": {
+      "get": {
+        "tags": [
+          "TunnelPolicies"
+        ],
+        "description": "Lists tunnel policies associated with the profile",
+        "operationId": "TunnelPolicies_ListByProfile",
+        "x-ms-examples": {
+          "TunnelPolicies_ListByProfile": {
+            "$ref": "./examples/TunnelPolicies_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/tunnelPolicies/{tunnelPolicyName}": {
+      "get": {
+        "tags": [
+          "TunnelPolicies"
+        ],
+        "description": "Gets an existing tunnel policy within a profile.",
+        "operationId": "TunnelPolicies_Get",
+        "x-ms-examples": {
+          "TunnelPolicies_Get": {
+            "$ref": "./examples/TunnelPolicies_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tunnelPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TunnelPolicies"
+        ],
+        "description": "Creates a new tunnel policy within the specified profile.",
+        "operationId": "TunnelPolicies_Create",
+        "x-ms-examples": {
+          "TunnelPolicies_Create": {
+            "$ref": "./examples/TunnelPolicies_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tunnelPolicyNameParameter"
+          },
+          {
+            "name": "tunnelPolicy",
+            "in": "body",
+            "description": "The tunnel policy properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new delivery rule has been created.",
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "TunnelPolicies"
+        ],
+        "description": "Updates an existing tunnel policy within a profile.",
+        "operationId": "TunnelPolicies_Update",
+        "x-ms-examples": {
+          "TunnelPolicies_Update": {
+            "$ref": "./examples/TunnelPolicies_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tunnelPolicyNameParameter"
+          },
+          {
+            "name": "tunnelPolicyUpdateProperties",
+            "in": "body",
+            "description": "Tunnel policy update properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicyUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "TunnelPolicies"
+        ],
+        "description": "Deletes an existing tunnel policy within profile.",
+        "operationId": "TunnelPolicies_Delete",
+        "x-ms-examples": {
+          "TunnelPolicies_Delete": {
+            "$ref": "./examples/TunnelPolicies_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tunnelPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
@@ -4182,6 +5203,65 @@
         }
       }
     },
+    "KeyGroup": {
+      "description": "Contains a list of references of UrlSigningKey type secret objects.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/KeyGroupProperties"
+        }
+      }
+    },
+    "KeyGroupProperties": {
+      "description": "The JSON object that contains the properties of the key group to create.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyGroupUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ]
+    },
+    "KeyGroupUpdatePropertiesParameters": {
+      "description": "The JSON object containing properties of key group to create or update.",
+      "type": "object",
+      "properties": {
+        "keyReferences": {
+          "description": "Names of UrlSigningKey type secret objects",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "./cdn.json#/definitions/ResourceReference"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "KeyGroupListResult": {
+      "description": "Result of the request to list keyGroups. It contains a list of KeyGroup objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/KeyGroup"
+          },
+          "description": "List of AzureFrontDoor KeyGroup within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of KeyGroup objects if there are any."
+        }
+      }
+    },
     "AFDDomainListResult": {
       "description": "Result of the request to list domains. It contains a list of domain objects and a URL link to get the next set of results.",
       "type": "object",
@@ -4266,6 +5346,17 @@
           "readOnly": true,
           "type": "object",
           "$ref": "#/definitions/DomainValidationProperties"
+        },
+        "referencedRoutePaths": {
+          "description": "The JSON object list that contains the overall picture of how routes are used for the shared custom domain across different profiles.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AFDDomainReferencedRoutePath"
+          },
+          "x-ms-identifiers": [
+            "/routeId/id"
+          ]
         }
       }
     },
@@ -4292,6 +5383,11 @@
           "description": "The configuration specifying how to enable HTTPS for the domain - using AzureFrontDoor managed certificate or user's own certificate. If not specified, enabling ssl uses AzureFrontDoor managed certificate by default.",
           "type": "object",
           "$ref": "#/definitions/AFDDomainHttpsParameters"
+        },
+        "mtlsSettings": {
+          "description": "The configuration specifying how to enable mutual TLS for the domain, including specifying allowed FQDN and which server certificate(s) to use.",
+          "type": "object",
+          "$ref": "#/definitions/AFDDomainMtlsParameters"
         },
         "azureDnsZone": {
           "description": "Resource reference to the Azure DNS zone",
@@ -4341,11 +5437,26 @@
             "modelAsString": true
           }
         },
+        "cipherSuiteSetType": {
+          "description": "cipher suite set type that will be used for Https",
+          "enum": [
+            "Customized",
+            "TLS10_2019",
+            "TLS12_2022",
+            "TLS12_2023"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AfdCipherSuiteSetType",
+            "modelAsString": true
+          }
+        },
         "minimumTlsVersion": {
-          "description": "TLS protocol version that will be used for Https",
+          "description": "TLS protocol version that will be used for Https when cipherSuiteSetType is Customized.",
           "enum": [
             "TLS10",
-            "TLS12"
+            "TLS12",
+            "TLS13"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4353,10 +5464,150 @@
             "modelAsString": false
           }
         },
+        "customizedCipherSuiteSet": {
+          "description": "Customized cipher suites object that will be used for Https when cipherSuiteSetType is Customized.",
+          "type": "object",
+          "$ref": "#/definitions/AFDDomainHttpsCustomizedCipherSuiteSet"
+        },
         "secret": {
           "description": "Resource reference to the secret. ie. subs/rg/profile/secret",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
+        }
+      }
+    },
+    "AFDDomainHttpsCustomizedCipherSuiteSet": {
+      "description": "Customized cipher suite set object that will be used for Https when cipherSuiteSetType is Customized.",
+      "type": "object",
+      "properties": {
+        "cipherSuiteSetForTls10": {
+          "description": "Cipher suites for TLS 1.0. Required at least one in minimumTlsVersion TLS 1.0.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ECDHE_RSA_AES128_SHA",
+              "ECDHE_RSA_AES256_SHA",
+              "AES256_SHA",
+              "AES128_SHA"
+            ],
+            "x-ms-enum": {
+              "name": "AfdCustomizedCipherSuiteForTls10",
+              "modelAsString": true
+            }
+          }
+        },
+        "cipherSuiteSetForTls12": {
+          "description": "Cipher suites for TLS 1.2. Required at least one in minimumTlsVersion TLS 1.2, option in minimumTlsVersion TLS 1.0.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ECDHE_RSA_AES128_GCM_SHA256",
+              "ECDHE_RSA_AES256_GCM_SHA384",
+              "DHE_RSA_AES256_GCM_SHA384",
+              "DHE_RSA_AES128_GCM_SHA256",
+              "ECDHE_RSA_AES128_SHA256",
+              "ECDHE_RSA_AES256_SHA384",
+              "AES256_GCM_SHA384",
+              "AES128_GCM_SHA256",
+              "AES256_SHA256",
+              "AES128_SHA256"
+            ],
+            "x-ms-enum": {
+              "name": "AfdCustomizedCipherSuiteForTls12",
+              "modelAsString": true
+            }
+          }
+        },
+        "cipherSuiteSetForTls13": {
+          "description": "Cipher suites for TLS 1.3. Required at least one in minimumTlsVersion TLS 1.0, TLS 1.2, TLS 1.3.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TLS_AES_128_GCM_SHA256",
+              "TLS_AES_256_GCM_SHA384"
+            ],
+            "x-ms-enum": {
+              "name": "AfdCustomizedCipherSuiteForTls13",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "AFDDomainReferencedRoutePath": {
+      "description": "route configuration of the shared custom domain.",
+      "type": "object",
+      "properties": {
+        "routeId": {
+          "description": "Resource reference to the route.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "paths": {
+          "description": "List of paths of the route.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AFDDomainMtlsParameters": {
+      "description": "The JSON object that contains the properties to configure mutual TLS for a custom domain with FQDN. Mutual TLS cannot be configured for custom domains with wildcard host names.",
+      "type": "object",
+      "properties": {
+        "secrets": {
+          "description": "List of one or two of Resource References (ie. subs/rg/profile/secret) to Secrets of type MtlsCertificateChain to use in mutual TLS handshake.",
+          "type": "array",
+          "items": {
+            "$ref": "./cdn.json#/definitions/ResourceReference"
+          }
+        },
+        "otherAllowedFqdn": {
+          "description": "List of FQDN that will be accepted for mutual TLS validation in addition to custom domain's hostname.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "certificateValidation": {
+          "description": "Set to Enabled by default. If set to Disabled, validation of client certificate chain for mutual TLS handshake will be skipped.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnabledState",
+            "modelAsString": true
+          }
+        },
+        "certificatePassthrough": {
+          "description": "Set to Disabled by default. If set to Enabled, then selected client certificate chain(s) are sent directly to origin using reserved header.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnabledState",
+            "modelAsString": true
+          }
+        },
+        "ocsp": {
+          "description": "Set to Enabled by default. If set to Disabled, revocation status of client certificate chain will be checked before establishing mutual TLS connection.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnabledState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4711,7 +5962,8 @@
         "UrlSigningKey",
         "CustomerCertificate",
         "ManagedCertificate",
-        "AzureFirstPartyManagedCertificate"
+        "AzureFirstPartyManagedCertificate",
+        "MtlsCertificateChain"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4868,6 +6120,36 @@
         },
         "thumbprint": {
           "description": "Certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AfdSecretMtlsCertificateChain": {
+      "description": "Server-side certificate used for mTLS validation",
+      "x-ms-discriminator-value": "MtlsCertificateChain",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretParameters"
+        }
+      ],
+      "required": [
+        "secretSource",
+        "secretVersion"
+      ],
+      "properties": {
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{secretName}",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Version of the secret to be used",
+          "type": "string"
+        },
+        "expirationDate": {
+          "description": "Soonest expiration date among certificates in customer's certificate chain in ISO 8601 compliant format yyyy-MM-ddTHH:mm:ss.fffffffK in UTC",
           "type": "string",
           "readOnly": true
         }
@@ -5410,6 +6692,17 @@
           "x-ms-enum": {
             "name": "EnabledState",
             "modelAsString": true
+          },
+        "grpcState": {
+          "description": "Whether or not gRPC is enabled on this route. Permitted values are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AFDRouteGrpcState",
+            "modelAsString": true
           }
         }
       }
@@ -5548,6 +6841,370 @@
             "modelAsString": true
           },
           "default": "Continue"
+        }
+      }
+    },
+    "AfdUrlSigningAction": {
+      "description": "Defines the url signing action for the delivery rule.",
+      "type": "object",
+      "x-ms-discriminator-value": "AfdUrlSigning",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/AfdUrlSigningActionParameters"
+        }
+      }
+    },
+    "AfdUrlSigningActionParameters": {
+      "description": "Defines the parameters for the Url Signing action.",
+      "type": "object",
+      "required": [
+        "typeName",
+        "keyGroupReference"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleAfdUrlSigningActionParameters"
+          ],
+          "x-ms-enum": {
+            "name": "typeName",
+            "modelAsString": true
+          }
+        },
+        "keyGroupReference": {
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups/{keyGroupName}",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "algorithm": {
+          "description": "Algorithm to use for URL signing",
+          "type": "string",
+          "enum": [
+            "SHA256"
+          ],
+          "x-ms-enum": {
+            "name": "algorithm",
+            "modelAsString": true
+          }
+        },
+        "parameterNameOverride": {
+          "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
+          "type": "array",
+          "items": {
+            "$ref": "./cdn.json#/definitions/UrlSigningParamIdentifier"
+          },
+          "x-ms-identifiers": [
+            "paramName"
+          ]
+        }
+      }
+    },
+    "DeploymentVersionChange": {
+      "type": "object",
+      "description": "Deployment change under the profile",
+      "discriminator": "resourceType",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type supported by preview.",
+          "enum": [
+            "Microsoft.Cdn/profiles/afdEndpoints/routes",
+            "Microsoft.Cdn/profiles/originGroups",
+            "Microsoft.Cdn/profiles/originGroups/origins",
+            "Microsoft.Cdn/profiles/ruleSets",
+            "Microsoft.Cdn/profiles/ruleSets/rules",
+            "Microsoft.Cdn/profiles/securityPolicies"
+          ],
+          "x-ms-enum": {
+            "name": "PreviewSupportedResourceType",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id"
+        },
+        "resourceName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceType"
+      ]
+    },
+    "DeploymentVersionRouteChange": {
+      "type": "object",
+      "description": "Deployment change of the route under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/afdEndpoints/routes",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/RouteProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/RouteProperties"
+        }
+      }
+    },
+    "DeploymentVersionAFDOriginGroupChange": {
+      "type": "object",
+      "description": "Deployment change of the origin group under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/originGroups",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/AFDOriginGroupProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/AFDOriginGroupProperties"
+        }
+      }
+    },
+    "DeploymentVersionAFDOriginChange": {
+      "type": "object",
+      "description": "Deployment change of the origin group under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/originGroups/origins",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/AFDOriginProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/AFDOriginProperties"
+        }
+      }
+    },
+    "DeploymentVersionRuleSetChange": {
+      "type": "object",
+      "description": "Deployment change of the rule set under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/ruleSets/rules",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/RuleSetProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/RuleSetProperties"
+        }
+      }
+    },
+    "DeploymentVersionRuleChange": {
+      "type": "object",
+      "description": "Deployment change of the rule under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/ruleSets",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/RuleProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/RuleProperties"
+        }
+      }
+    },
+    "DeploymentVersionSecurityPolicyChange": {
+      "type": "object",
+      "description": "Deployment change of the security policy under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/securityPolicies",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/SecurityPolicyProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/SecurityPolicyProperties"
+        }
+      }
+    },
+    "CompareDeploymentVersionsParameter": {
+      "type": "object",
+      "description": "compare deployment versions request parameter",
+      "properties": {
+        "compareTo": {
+          "type": "string",
+          "description": "the deployment version to be compared to"
+        }
+      },
+      "required": [
+        "compareTo"
+      ]
+    },
+    "CompareDeploymentVersionsResponse": {
+      "type": "object",
+      "description": "compare deployment versions response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The difference between two deployment versions",
+          "items": {
+            "$ref": "#/definitions/DeploymentVersionChange"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentStages": {
+      "description": "The preview and production deployment status of the deployment version under the profile",
+      "type": "object",
+      "properties": {
+        "preview": {
+          "$ref": "#/definitions/DeploymentStageStatus",
+          "readOnly": true,
+          "description": "Deployment status of preview stage."
+        },
+        "production": {
+          "$ref": "#/definitions/DeploymentStageStatus",
+          "readOnly": true,
+          "description": "Deployment status of production stage."
+        }
+      }
+    },
+    "DeploymentStageStatus": {
+      "type": "object",
+      "description": "The deployment status of the deployment version under the profile",
+      "properties": {
+        "rolloutStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of a resource.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentRolloutStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DeploymentVersion": {
+      "type": "object",
+      "description": "Deployment version object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentVersionProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeploymentVersionListResult": {
+      "type": "object",
+      "description": "Result of the request to list deployment versions. It contains a list of deployment versions objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of DeploymentVersions within a profile.",
+          "items": {
+            "$ref": "#/definitions/DeploymentVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of deployment version objects if there are any."
+        }
+      }
+    },
+    "DeploymentVersionProperties": {
+      "type": "object",
+      "description": "The JSON object that contains the properties of the deployment version.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionUpdateProperties"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "approvalTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "approvalStatus": {
+          "type": "string",
+          "enum": [
+            "NotApproved",
+            "Approved"
+          ],
+          "x-ms-enum": {
+            "name": "ApprovalStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "stages": {
+          "$ref": "#/definitions/DeploymentStages",
+          "readOnly": true
+        }
+      }
+    },
+    "DeploymentVersionUpdate": {
+      "type": "object",
+      "description": "The domain JSON object required for deployment version creation or update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentVersionUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeploymentVersionUpdateProperties": {
+      "type": "object",
+      "description": "The JSON object that contains the properties of the deployment version.",
+      "properties": {
+        "description": {
+          "type": "string"
         }
       }
     },
@@ -6130,7 +7787,185 @@
       "description": "Reference to another resource along with its state.",
       "type": "object",
       "x-ms-azure-resource": true
-    }
+},
+    "AFDTargetGroupListResult": {
+      "description": "Result of the request to list target groups. It contains a list of target group objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AFDTargetGroup"
+          },
+          "description": "List of AzureFrontDoor target groups within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of route objects if there are any."
+        }
+      }
+    },
+    "AFDTargetGroup": {
+      "description": "AFDTargetGroup comprises a list of Endpoints that is used for tunnelling protocols to allow certain traffic.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDTargetGroupProperties"
+        }
+      }
+    },
+    "AFDTargetGroupProperties": {
+      "description": "The JSON object that contains the properties of the TargetGroups to create.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDTargetGroupUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "required": [
+        "targetEndpoints"
+      ]
+    },
+    "AFDTargetGroupUpdateParameters": {
+      "description": "The domain JSON object required for TargetGroup creation or update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDTargetGroupUpdatePropertiesParameters"
+        }
+      }
+    },
+    "AFDTargetGroupUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the TargetGroup to create.",
+      "type": "object",
+      "properties": {
+        "targetEndpoints": {
+          "description": "TargetEndpoint list referenced by this target group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetEndpoint"
+          }
+        }
+      }
+    },
+    "TargetEndpoint": {
+      "description": "TargetEndpoint object that forms a traffic endpoint.",
+      "type": "object",
+      "properties": {
+        "targetFqdn": {
+          "description": "The FQDN for traffic endpoint.",
+          "type": "string"
+        },
+        "ports": {
+          "description": "The Ports to be allowed for the FQDN.",
+          "type": "array",
+          "items": {
+            "description": "The value of the port. Must be between 1 and 65535.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 65535,
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "TunnelPolicyListResult": {
+      "description": "Result of the request to list tunnel policies. It contains a list of tunnel policy objects.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TunnelPolicy"
+          },
+          "description": "List of AzureFrontDoor tunnel policies within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of route objects if there are any."
+        }
+      }
+    },
+    "TunnelPolicy": {
+      "description": "Tunnel Policy maps domains to target endpoints to process traffic over the tunnelling protocol.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TunnelPolicyProperties"
+        }
+      }
+    },
+    "TunnelPolicyProperties": {
+      "description": "The JSON object that contains the properties of the tunnel policy to create.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TunnelPolicyUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "required": [
+        "domains"
+      ]
+    },
+    "TunnelPolicyUpdateParameters": {
+      "description": "The domain JSON object required for tunnel policy creation or update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TunnelPolicyUpdatePropertiesParameters"
+        }
+      }
+    },
+    "TunnelPolicyUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the tunnel policy to create.",
+      "type": "object",
+      "properties": {
+        "tunnelType": {
+          "description": "Protocol this tunnel will use for allowing traffic to backends.",
+          "type": "string",
+          "enum": [
+            "HttpConnect"
+          ],
+          "x-ms-enum": {
+            "name": "TunnelType",
+            "modelAsString": true
+          }
+        },
+        "domains": {
+          "description": "Domains referenced by this tunnel policy.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivatedResourceReference"
+          }
+        },
+        "targetGroups": {
+          "description": "Target Groups referenced by this tunnel policy.",
+          "type": "array",
+          "items": {
+            "$ref": "./cdn.json#/definitions/ResourceReference"
+          }
+        }
+      }    }
   },
   "parameters": {
     "subscriptionIdParameter": {
@@ -6168,6 +8003,50 @@
       "maxLength": 260,
       "x-ms-parameter-location": "method",
       "description": "Name of the Azure Front Door Standard or Azure Front Door Premium which is unique within the resource group."
+    },
+    "keyGroupNameParameter": {
+      "name": "keyGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the KeyGroup under the profile."
+    },
+    "deploymentVersionNameParameter": {
+      "name": "versionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the DeploymentVersion under the profile."
+    },
+    "targetGroupNameParameter": {
+      "name": "targetGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Target Group under the profile."
+    },
+    "tunnelPolicyNameParameter": {
+      "name": "tunnelPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Tunnel Policy under the profile."
     }
   }
 }
