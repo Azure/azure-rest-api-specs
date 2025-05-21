@@ -1363,4 +1363,25 @@ namespace SkillContext
 		fallback?: string;
 		product?: string;
 	}
+
+	@doc("Define Error Response Types From Pluginhost")
+	enum ErrorType {
+		DataAccessNotAuthorizedException,
+		SkillException,
+		UserException,
+		PlatformException,
+		Exception
+	}
+
+	@doc("Class of type ErrorResponse. This is used to return error messages from pluginhost.")
+	model ErrorResponse {
+		@doc("The error message.")
+		message: string;
+		@doc("The error type.")
+		type: ErrorType;
+		@doc("The error code.")
+		errorCode: string;
+		@doc("The error details.")
+		errorDetails: string;
+	}
 }
