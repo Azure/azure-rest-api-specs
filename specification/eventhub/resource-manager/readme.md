@@ -353,7 +353,7 @@ directive:
     reason: can't add ResourceNameRestriction at this time, as the current API version is old and introducing it could cause breaking changes.
   - suppress: ProvisioningStateMustBeReadOnly
     from: namespaces.json
-    reason: Seems like a tool bug, as the visibility is set to read only in the TypeSpec already.
+    reason: Breaking change.
   - suppress: AllTrackedResourcesMustHaveDelete
     from: namespaces.json
     reason: Breaking Change.
