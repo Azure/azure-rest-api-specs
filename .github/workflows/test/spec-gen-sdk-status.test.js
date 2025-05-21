@@ -138,7 +138,7 @@ describe("spec-gen-sdk-status", () => {
         repo: "testRepo",
         sha: "testSha",
         state: "success",
-        description: "spec-gen-sdk checks succeeded",
+        description: "SDK Validation CI checks succeeded",
       }),
     );
   });
@@ -243,7 +243,7 @@ describe("spec-gen-sdk-status", () => {
     // Verify summary was written
     expect(writeToActionsSummaryMock).toHaveBeenCalled();
     expect(writeToActionsSummaryMock.mock.calls[0][0]).toContain(
-      "spec-gen-sdk Checks Result",
+      "SDK Validation CI Checks Result",
     );
   });
 
@@ -345,7 +345,7 @@ describe("spec-gen-sdk-status", () => {
         repo: "testRepo",
         sha: "testSha",
         state: "success",
-        description: "spec-gen-sdk checks succeeded",
+        description: "SDK Validation CI checks succeeded",
       }),
     );
   });
