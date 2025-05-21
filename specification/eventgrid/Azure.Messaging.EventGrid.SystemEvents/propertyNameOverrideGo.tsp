@@ -578,4 +578,38 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsUserEngagement, "ACSUserEngagement", "go");
 @@clientName(AcsMessageReactionContent, "ACSMessageReactionContent", "go");
 
+@@clientName(AcsCallEndReasonProperties, "ACSCallEndReasonProperties", "go");
+@@clientName(AcsCallEndedByProperties, "ACSCallEndedByProperties", "go");
+@@clientName(AcsCallEndedByKind, "ACSCallEndedByKind", "go");
+@@clientName(AcsCallEndedEventData, "ACSCallEndedEventData", "go");
+@@clientName(AcsCallGroupProperties, "ACSCallGroupProperties", "go");
+@@clientName(AcsCallParticipantAddedEventData,
+  "ACSCallParticipantAddedEventData",
+  "go"
+);
+@@clientName(AcsCallParticipantEventProperties,
+  "ACSCallParticipantEventProperties",
+  "go"
+);
+@@clientName(AcsCallParticipantProperties,
+  "ACSCallParticipantProperties",
+  "go"
+);
+@@clientName(AcsCallParticipantRemovedEventData,
+  "ACSCallParticipantRemovedEventData",
+  "go"
+);
+@@clientName(AcsCallRoomProperties, "ACSCallRoomProperties", "go");
+@@clientName(AcsCallStartedEventData, "ACSCallStartedEventData", "go");
+@@clientName(AcsCallingEventProperties, "ACSCallingEventProperties", "go");
+@@clientName(AcsChatAzureBotCommandReceivedInThreadEventData,
+  "ACSChatAzureBotCommandReceivedInThreadEventData",
+  "go"
+);
+@@clientName(AcsChatTypingIndicatorReceivedInThreadEventData,
+  "ACSChatTypingIndicatorReceivedInThreadEventData",
+  "go"
+);
+@@clientName(AcsCallParticipantRoleKind, "ACSCallParticipantRoleKind", "go");
+
 // [END] ACS renames (and acronym casing)
