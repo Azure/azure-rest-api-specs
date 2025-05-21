@@ -181,9 +181,9 @@
           "description": "The origin of how the check applied at the role level in the virtual instance.",
           "readOnly": true
         },
-        "enabled": {
-          "$ref": "#/definitions/ExecutionEnabledStatus",
-          "description": "The flag to enable (or) disable the check execution."
+        "status": {
+          "$ref": "#/definitions/CheckExecutionStatus",
+          "description": "The status of the check execution."
         },
         "inputParameters": {
           "type": "array",
@@ -204,7 +204,7 @@
       },
       "required": [
         "checkId",
-        "enabled",
+        "status",
         "outputParameters"
       ]
     },
@@ -288,6 +288,30 @@
             "name": "NotIn",
             "value": "notIn",
             "description": "Check output value must not be in defined value."
+          }
+        ]
+      }
+    },
+    "CheckExecutionStatus": {
+      "type": "string",
+      "description": "The status of the check execution.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CheckExecutionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The execution of the check is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The execution of the check is disabled."
           }
         ]
       }
@@ -522,52 +546,40 @@
         ]
       }
     },
-    "ExecutionEnabledStatus": {
-      "type": "string",
-      "description": "Represents whether the check is enabled.",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "x-ms-enum": {
-        "name": "ExecutionEnabledStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "True",
-            "value": "true",
-            "description": "The execution of the check is enabled."
-          },
-          {
-            "name": "False",
-            "value": "false",
-            "description": "The execution of the check is disabled."
-          }
-        ]
-      }
-    },
     "OutputParameters": {
       "type": "object",
       "description": "The model for list of output parameters to be used in the check.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of output.",
-          "default": "Result"
-        },
         "condition": {
           "$ref": "#/definitions/CheckEvaluationCondition",
           "description": "Condition to be used to evaluate the output and customize the check."
         },
-        "parameters": {
-          "$ref": "#/definitions/SharedParameters",
-          "description": "List of parameters."
+        "name": {
+          "type": "string",
+          "description": "Name of the property.",
+          "readOnly": true
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType",
+          "description": "Data type of the value.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the property.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "Default (or) customized value to be used in the check."
         }
       },
       "required": [
-        "name",
         "condition",
-        "parameters"
+        "name",
+        "dataType",
+        "unit",
+        "value"
       ]
     },
     "RoleConfiguration": {
