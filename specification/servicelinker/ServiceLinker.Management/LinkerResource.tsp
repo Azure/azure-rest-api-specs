@@ -165,9 +165,10 @@ interface Linker {
   update is LinkerOps.CustomPatchAsync<
     LinkerResource,
     PatchModel = LinkerPatch,
-    Response = ArmResponse<LinkerResource> | ArmResourceCreatedResponse<LinkerResource>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = LinkerResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResponse<LinkerResource> | ArmResourceCreatedResponse<
+      LinkerResource,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = LinkerResource>
+    >
   >;
 
   /**
