@@ -8,6 +8,7 @@ import {
   generateArtifact,
   getBreakingChangeInfo,
   getExecutionReport,
+  getServiceFolderPath,
   getSpecPaths,
   logIssuesToPipeline,
   parseArguments,
@@ -111,8 +112,12 @@ export async function generateSdkForSpecPr(): Promise<number> {
     }
     if (changedSpec.readmeMd) {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
-      changedSpecPathText = changedSpecPathText + " " + changedSpec.readmeMd;
+      changedSpecPathText = changedSpec.readmeMd;
       pushedSpecConfigCount++;
+      if (pushedSpecConfigCount === 2) {
+        // If both readme and tspconfig are provided, we need to use the service folder path for the log message
+        changedSpecPathText = getServiceFolderPath(changedSpec.readmeMd);
+      }
       if (changedSpec.readmeMd.includes("resource-manager")) {
         hasManagementPlaneSpecs = true;
       }
@@ -210,11 +215,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   // Generate SDKs for each spec
   for (const specConfigs of specConfigsArray) {
     if (specConfigs.tspconfigPath && specConfigs.readmePath) {
-      serviceFolderPath = specConfigs.tspconfigPath;
-      const segments = specConfigs.tspconfigPath.split("/");
-      if (segments.length > 2) {
-        serviceFolderPath = `${segments[0]}/${segments[1]}`;
-      }
+      serviceFolderPath = getServiceFolderPath(specConfigs.tspconfigPath);
       logMessage(`Generating SDK from ${serviceFolderPath}`, LogLevel.Group);
     } else if (specConfigs.tspconfigPath) {
       logMessage(`Generating SDK from ${specConfigs.tspconfigPath}`, LogLevel.Group);
@@ -281,6 +282,9 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
+    if (specConfigs.tspconfigPath && specConfigs.readmePath) {
+      specConfigPath = serviceFolderPath;
+    }
     logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPath);
   }
   if (failedCount > 0) {

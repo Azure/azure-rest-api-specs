@@ -319,3 +319,19 @@ export function generateArtifact(
   }
   return 0;
 }
+
+/**
+ * Get the service folder path from the spec config path.
+ * @param specConfigPath
+ * @returns The service folder path.
+ */
+export function getServiceFolderPath(specConfigPath: string): string {
+  if (!specConfigPath || specConfigPath.length === 0) {
+    return "";
+  }
+  const segments = specConfigPath.split("/");
+  if (segments.length > 2) {
+    return `${segments[0]}/${segments[1]}`;
+  }
+  return specConfigPath;
+}
