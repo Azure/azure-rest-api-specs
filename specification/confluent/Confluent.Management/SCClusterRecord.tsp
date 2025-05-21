@@ -14,6 +14,7 @@ namespace Microsoft.Confluent;
 /**
  * Details of cluster record
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(SCEnvironmentRecord)

@@ -14,6 +14,7 @@ namespace Microsoft.Confluent;
 /**
  * Details about environment name, metadata and environment id of an environment
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @Azure.ResourceManager.Private.armResourceInternal(EnvironmentProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(OrganizationResource)
