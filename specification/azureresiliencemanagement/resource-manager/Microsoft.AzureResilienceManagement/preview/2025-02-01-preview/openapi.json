@@ -5636,6 +5636,11 @@
           "description": "Last sync time.",
           "readOnly": true
         },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed RG v2 properties.",
+          "readOnly": true
+        },
         "drillType": {
           "$ref": "#/definitions/DrillType",
           "description": "The discriminator for the Drill object hierarchy.",
@@ -6152,6 +6157,15 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "supportedVerbsForStage": {
+          "type": "array",
+          "description": "Matrix of Actions supported on Operations.",
+          "items": {
+            "$ref": "#/definitions/SupportedVerbsForStage"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -6159,7 +6173,8 @@
         "metricValue",
         "drillMode",
         "attestation",
-        "notes"
+        "notes",
+        "supportedVerbsForStage"
       ],
       "allOf": [
         {
@@ -6648,8 +6663,11 @@
       "description": "Fault Properties",
       "properties": {
         "availableFaults": {
-          "$ref": "#/definitions/FaultDetails",
+          "type": "array",
           "description": "Available faults for this resource.",
+          "items": {
+            "$ref": "#/definitions/FaultDetails"
+          },
           "readOnly": true,
           "x-ms-identifiers": []
         },
@@ -7819,6 +7837,23 @@
         "lastRunAttestation"
       ]
     },
+    "ManagedOnBehalfOfConfiguration": {
+      "type": "object",
+      "description": "Configuration of the managed on behalf of resource.",
+      "properties": {
+        "moboBrokerResources": {
+          "type": "array",
+          "description": "Associated MoboBrokerResources.",
+          "items": {
+            "$ref": "#/definitions/MoboBrokerResource"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "moboBrokerResources"
+      ]
+    },
     "MarkAsCompleteRequest": {
       "type": "object",
       "description": "Request body for MarkAsComplete API.",
@@ -7928,6 +7963,20 @@
         "metricName",
         "metricId",
         "destinationAmwAccountUrl"
+      ]
+    },
+    "MoboBrokerResource": {
+      "type": "object",
+      "description": "MoboBroker resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the MoboBroker resource.\nExample: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "NotQualifiedReasons": {
