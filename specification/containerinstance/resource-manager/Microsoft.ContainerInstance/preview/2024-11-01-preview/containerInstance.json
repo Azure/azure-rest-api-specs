@@ -1065,9 +1065,11 @@
             "name": "CGslist",
             "in": "body",
             "required": true,
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ContainerGroupNames"
+            "containerGroupNames": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "description": "The list of CGs."
           }
