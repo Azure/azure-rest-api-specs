@@ -81,10 +81,10 @@ model ProxySiteRefreshBody {
  */
 union HasTablesWithOids {
   @doc("The Database has tables with Oids.")
-  True: "true",
+  True: "True",
 
   @doc("The Database does not have tables with Oids.")
-  False: "false",
+  False: "False",
 
   string,
 }
@@ -94,10 +94,10 @@ union HasTablesWithOids {
  */
 union HasCustomDataTypes {
   @doc("The Database has custom data types.")
-  True: "true",
+  True: "True",
 
   @doc("The Database does not have custom data types.")
-  False: "false",
+  False: "False",
 
   string,
 }
@@ -107,10 +107,10 @@ union HasCustomDataTypes {
  */
 union BoolValue {
   @doc("Represents a true boolean value.")
-  True: "true",
+  True: "True",
 
   @doc("Represents a false boolean value.")
-  False: "false",
+  False: "False",
 
   string,
 }
