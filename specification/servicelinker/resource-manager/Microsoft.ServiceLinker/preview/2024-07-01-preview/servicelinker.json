@@ -154,9 +154,9 @@
           {
             "name": "resourceUri",
             "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -340,22 +340,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'DryrunResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/DryrunResource"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -372,7 +370,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -422,7 +420,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}": {
       "get": {
         "operationId": "Linker_Get",
         "tags": [
@@ -442,7 +440,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "description": "The name of the LinkerResource",
             "required": true,
@@ -488,7 +486,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "description": "The name of the LinkerResource",
             "required": true,
@@ -564,7 +562,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "description": "The name of the LinkerResource",
             "required": true,
@@ -600,6 +598,18 @@
               }
             }
           },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -632,7 +642,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "description": "The name of the LinkerResource",
             "required": true,
@@ -678,7 +688,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/generateConfigurations": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/generateConfigurations": {
       "post": {
         "operationId": "Linkers_GenerateConfigurations",
         "tags": [
@@ -698,7 +708,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "description": "The name of the LinkerResource",
             "required": true,
@@ -735,7 +745,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/listConfigurations": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/listConfigurations": {
       "post": {
         "operationId": "Linker_ListConfigurations",
         "tags": [
@@ -755,7 +765,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "description": "The name of the LinkerResource",
             "required": true,
@@ -783,7 +793,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/validateLinker": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/validateLinker": {
       "post": {
         "operationId": "Linker_Validate",
         "tags": [
@@ -803,7 +813,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "description": "The name of the LinkerResource",
             "required": true,
@@ -1714,6 +1724,28 @@
         ]
       }
     },
+    "ActionType": {
+      "type": "string",
+      "enum": [
+        "enable",
+        "optOut"
+      ],
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "enable",
+            "value": "enable",
+            "description": "Actions are for internal-only APIs."
+          },
+          {
+            "name": "optOut",
+            "value": "optOut"
+          }
+        ]
+      }
+    },
     "AllowType": {
       "type": "string",
       "description": "Whether to allow firewall rules.",
@@ -1855,24 +1887,6 @@
       "required": [
         "body"
       ]
-    },
-    "Azure.ResourceManager.CommonTypes.ActionType": {
-      "type": "string",
-      "description": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
-      "enum": [
-        "Internal"
-      ],
-      "x-ms-enum": {
-        "name": "ActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Internal",
-            "value": "Internal",
-            "description": "Actions are for internal-only APIs."
-          }
-        ]
-      }
     },
     "AzureAppConfigProperties": {
       "type": "object",
@@ -2071,7 +2085,7 @@
           "description": "Indicates whether to clean up previous operation when Linker is updating or deleting"
         },
         "action": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ActionType",
+          "$ref": "#/definitions/ActionType",
           "description": "Optional, indicate whether to apply configurations on source application. If enable, generate configurations and applied to the source application. Default is enable. If optOut, no configuration change will be made on source."
         },
         "customizedKeys": {
@@ -2932,7 +2946,7 @@
           "description": "Indicates whether to clean up previous operation(such as firewall rules) when Linker is updating or deleting"
         },
         "action": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ActionType",
+          "$ref": "#/definitions/ActionType",
           "description": "Optional. Indicates public network solution. If enable, enable public network access of target service with best try. Default is enable. If optOut, opt out public network access configuration."
         },
         "firewallRules": {

@@ -588,6 +588,13 @@ model ConfigurationInfo {
   configurationStore?: ConfigurationStore | null;
 }
 
+union ActionType {
+  /** Actions are for internal-only APIs. */
+  enable: "enable",
+
+  optOut: "optOut",
+  string,
+}
 /**
  * Indicates some additional properties for dapr client type
  */

@@ -96,7 +96,8 @@
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -249,7 +250,10 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
           },
           "default": {
             "description": "ignore",
@@ -264,7 +268,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -306,7 +310,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}": {
       "get": {
         "operationId": "Linker_Get",
         "parameters": [
@@ -318,7 +322,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -355,7 +359,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -410,7 +414,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -432,6 +436,12 @@
             }
           },
           "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
+          "202": {
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/LinkerResource"
@@ -461,7 +471,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -495,7 +505,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/generateConfigurations": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/generateConfigurations": {
       "post": {
         "operationId": "Linkers_GenerateConfigurations",
         "parameters": [
@@ -507,7 +517,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -541,7 +551,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/listConfigurations": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/listConfigurations": {
       "post": {
         "operationId": "Linker_ListConfigurations",
         "parameters": [
@@ -553,7 +563,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -580,7 +590,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkerName/{linkers}/validateLinker": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/validateLinker": {
       "post": {
         "operationId": "Linker_Validate",
         "parameters": [
@@ -592,7 +602,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "linkers",
+            "name": "linkerName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1359,7 +1369,8 @@
         "action": {
           "type": "string",
           "enum": [
-            "Internal"
+            "enable",
+            "optOut"
           ],
           "x-ms-enum": {
             "name": "ActionType",
@@ -2125,7 +2136,8 @@
         "action": {
           "type": "string",
           "enum": [
-            "Internal"
+            "enable",
+            "optOut"
           ],
           "x-ms-enum": {
             "name": "ActionType",

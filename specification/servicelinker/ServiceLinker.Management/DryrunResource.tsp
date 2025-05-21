@@ -88,22 +88,9 @@ interface DryrunResources {
     Response = ArmResponse<DryrunList>
   >;
 }
-@armResourceOperations
-interface LinkersOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = DryrunResource,
-        KeyName = "dryruns",
-        SegmentName = "Microsoft.ServiceLinker",
-        NamePattern = ""
-      >>
-    > {}
 
 @armResourceOperations
-interface LinkersGetOps
+interface LinkersOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -125,43 +112,36 @@ interface Linkers {
   /**
    * get a dryrun job
    */
-  getDryrun is LinkersGetOps.Read<DryrunResource>;
+  getDryrun is LinkersOps.Read<DryrunResource>;
 
   /**
    * create a dryrun job to do necessary check before actual creation
    */
-  createDryrun is LinkersGetOps.CreateOrUpdateAsync<DryrunResource>;
+  createDryrun is LinkersOps.CreateOrUpdateAsync<DryrunResource>;
 
   /**
    * add a dryrun job to do necessary check before actual creation
    */
   @patch(#{ implicitOptionality: false })
-  updateDryrun is LinkersGetOps.CustomPatchAsync<
+  updateDryrun is LinkersOps.CustomPatchAsync<
     DryrunResource,
     PatchModel = DryrunPatch,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<DryrunResource> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DryrunResource>> & {
+      @bodyRoot
+      _: DryrunResource;
+    })
   >;
 
   /**
    * delete a dryrun job
    */
-  deleteDryrun is LinkersGetOps.DeleteSync<DryrunResource>;
+  deleteDryrun is LinkersOps.DeleteSync<DryrunResource>;
 
   /**
    * list dryrun jobs
    */
   listDryrun is LinkersOps.List<
     DryrunResource,
-    Parameters = {
-      /**
-       * The fully qualified Azure Resource manager identifier of the resource to be connected.
-       */
-      @path
-      resourceUri: string;
-
-      ...Azure.ResourceManager.Legacy.Provider;
-    },
     Response = ArmResponse<DryrunList>
   >;
 }

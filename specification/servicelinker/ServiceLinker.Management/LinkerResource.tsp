@@ -140,8 +140,8 @@ interface LinkerOps
       },
       KeysOf<ResourceNameParameter<
         Resource = LinkerResource,
-        KeyName = "linkers",
-        SegmentName = "linkerName",
+        KeyName = "linkerName",
+        SegmentName = "linkers",
         NamePattern = ""
       >>
     > {}
@@ -165,9 +165,10 @@ interface Linker {
   update is LinkerOps.CustomPatchAsync<
     LinkerResource,
     PatchModel = LinkerPatch,
-    Response = ArmResponse<LinkerResource> | ArmResourceCreatedResponse<LinkerResource>,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResponse<LinkerResource> | ArmResourceCreatedResponse<LinkerResource> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = LinkerResource>> & {
+      @bodyRoot
+      _: LinkerResource;
+    })
   >;
 
   /**
