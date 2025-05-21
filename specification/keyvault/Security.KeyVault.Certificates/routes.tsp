@@ -4,13 +4,18 @@ import "@typespec/rest";
 import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
-using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace KeyVault;
+
+model IncludePendingParameter {
+  /**
+   * Specifies whether to include certificates which are not completely provisioned.
+   */
+  @query("includePending")
+  includePending?: boolean;
+}
 
 /**
  * The GetCertificates operation returns the set of certificates resources in the specified key vault. This operation requires the certificates/list permission.
@@ -30,11 +35,7 @@ op getCertificates is KeyVaultOperation<
     @query("maxresults")
     maxresults?: int32;
 
-    /**
-     * Specifies whether to include certificates which are not completely provisioned.
-     */
-    @query("includePending")
-    includePending?: boolean;
+    ...IncludePendingParameter;
   },
   CertificateListResult
 >;
@@ -129,6 +130,7 @@ op setCertificateIssuer is KeyVaultOperation<
      * The name of the issuer. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
 
     /**
@@ -155,6 +157,7 @@ op updateCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
 
     /**
@@ -181,6 +184,7 @@ op getCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
   },
   IssuerBundle
@@ -199,6 +203,7 @@ op deleteCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
   },
   IssuerBundle
@@ -260,6 +265,15 @@ op importCertificate is KeyVaultOperation<
   CertificateBundle
 >;
 
+model CertificateNameParameter {
+  /**
+   * The name of the certificate.
+   */
+  @path("certificate-name")
+  @clientName("name", "go")
+  certificateName: string;
+}
+
 /**
  * The GetCertificateVersions operation returns the versions of a certificate in the specified key vault. This operation requires the certificates/list permission.
  */
@@ -270,12 +284,7 @@ op importCertificate is KeyVaultOperation<
 @get
 op getCertificateVersions is KeyVaultOperation<
   {
-    /**
-     * The name of the certificate.
-     */
-    @path("certificate-name")
-    @clientName("name", "go")
-    certificateName: string;
+    ...CertificateNameParameter;
 
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
@@ -540,11 +549,7 @@ op getDeletedCertificates is KeyVaultOperation<
     @query("maxresults")
     maxresults?: int32;
 
-    /**
-     * Specifies whether to include certificates which are not completely provisioned.
-     */
-    @query("includePending")
-    includePending?: boolean;
+    ...IncludePendingParameter;
   },
   DeletedCertificateListResult
 >;
