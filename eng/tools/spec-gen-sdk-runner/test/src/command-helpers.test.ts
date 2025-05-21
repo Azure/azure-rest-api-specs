@@ -1,6 +1,7 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import * as log from "../../src/log.js";
 import * as utils from "../../src/utils.js";
+import * as specHelpers from "../../src/spec-helpers.js";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import path from "node:path";
@@ -32,10 +33,16 @@ describe("commands.ts", () => {
       });
 
       setPipelineVariables(
+        "path-to-artifact",
+        false,
         "sdk/security/keyvault/azcertificates",
         "Configurations: 'specification/contosowidgetmanager/resource-manager/readme.md', and CommitSHA: 'commitsha', in SpecRepo: 'https://github.com/Azure/azure-rest-api-specs'",
       );
 
+      expect(log.setVsoVariable).toHaveBeenCalledWith(
+        "StagedArtifactsFolder",
+        "path-to-artifact",
+      );
       expect(log.setVsoVariable).toHaveBeenCalledWith(
         "PrBranch",
         "sdkauto/sdk-security/keyvault/azcertificates",
@@ -47,6 +54,21 @@ describe("commands.ts", () => {
       expect(log.setVsoVariable).toHaveBeenCalledWith(
         "PrBody",
         "Configurations: 'specification/contosowidgetmanager/resource-manager/readme.md', and CommitSHA: 'commitsha', in SpecRepo: 'https://github.com/Azure/azure-rest-api-specs'",
+      );
+    });
+    test("should skip PR related variable settings correctly", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setPipelineVariables(
+        "path-to-artifact"
+      );
+
+      expect(log.setVsoVariable).toHaveBeenCalledOnce();
+      expect(log.setVsoVariable).toHaveBeenCalledWith(
+        "StagedArtifactsFolder",
+        "path-to-artifact",
       );
     });
   });
@@ -151,36 +173,110 @@ describe("commands.ts", () => {
   });
 
   describe("getSpecPaths", () => {
-    test("should return all specs for 'all-specs' batch type", () => {
+    test("should return both TypeSpec and readme paths for 'all-specs' batch type", () => {
       vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue(["typespec1", "typespec2"]);
       vi.spyOn(utils, "findReadmeFiles").mockReturnValue(["readme1", "readme2"]);
+      vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
+        { tspconfigPath: "typespec1", readmePath: undefined },
+        { tspconfigPath: "typespec2", readmePath: undefined },
+        { tspconfigPath: undefined, readmePath: "readme1" },
+        { tspconfigPath: undefined, readmePath: "readme2" }
+      ]);
 
       const result = getSpecPaths("all-specs", "/spec/path");
-      expect(result).toEqual(["typespec1", "typespec2", "readme1", "readme2"]);
+      
+      expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
+      expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(["typespec1", "typespec2"], ["readme1", "readme2"], false);
+      expect(result).toHaveLength(4);
     });
 
     test("should return only readme paths for 'all-openapis' batch type", () => {
       vi.spyOn(utils, "findReadmeFiles").mockReturnValue(["readme1", "readme2"]);
+      vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
+        { tspconfigPath: undefined, readmePath: "readme1" },
+        { tspconfigPath: undefined, readmePath: "readme2" }
+      ]);
 
       const result = getSpecPaths("all-openapis", "/spec/path");
-      expect(result).toEqual(["readme1", "readme2"]);
+      
+      expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith([], ["readme1", "readme2"], false);
+      expect(result).toHaveLength(2);
     });
 
-    test("should return only TypeSpec paths for 'all-typespecs' batch type", () => {
+    test("should return both TypeSpec and readme paths for 'all-typespecs' batch type", () => {
       vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue(["typespec1", "typespec2"]);
+      vi.spyOn(utils, "findReadmeFiles").mockReturnValue(["readme1", "readme2"]);
+      vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
+        { tspconfigPath: "typespec1", readmePath: undefined },
+        { tspconfigPath: "typespec2", readmePath: undefined },
+        { tspconfigPath: undefined, readmePath: "readme1" },
+        { tspconfigPath: undefined, readmePath: "readme2" }
+      ]);
 
       const result = getSpecPaths("all-typespecs", "/spec/path");
-      expect(result).toEqual(["typespec1", "typespec2"]);
+      
+      expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
+      expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(["typespec1", "typespec2"], ["readme1", "readme2"], true);
+      expect(result).toHaveLength(4);
     });
 
     test("should return sample TypeSpec paths for 'sample-typespecs' batch type", () => {
       vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue(["typespec1", "typespec2"]);
+      vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
+        { tspconfigPath: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml", readmePath: undefined },
+        { tspconfigPath: "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml", readmePath: undefined }
+      ]);
 
       const result = getSpecPaths("sample-typespecs", "/spec/path");
-      expect(result).toEqual([
+      
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith([
         "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
-        "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
+        "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml"
+      ], [], false);
+      expect(result).toHaveLength(2);
+    });
+    
+    test("should return management plane TypeSpec and resource-manager readme paths for 'all-mgmtplane-typespecs'", () => {
+      const managementTypespecs = ["typespec1.Management", "typespec2.Management"];
+      const resourceManagerReadmes = ["resource-manager/readme-rm1", "resource-manager/readme-rm2"];
+      
+      vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([...managementTypespecs, "typespec3", "typespec4"]);
+      vi.spyOn(utils, "findReadmeFiles").mockReturnValue([...resourceManagerReadmes, "readme-dp1", "readme-dp2"]);
+      vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
+        { tspconfigPath: "typespec1.Management", readmePath: "resource-manager/readme-rm1" },
+        { tspconfigPath: "typespec2.Management", readmePath: "resource-manager/readme-rm2" },
       ]);
+
+      const result = getSpecPaths("all-mgmtplane-typespecs", "/spec/path");
+      
+      expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
+      expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(managementTypespecs, resourceManagerReadmes, true);
+      expect(result).toHaveLength(2);
+    });
+    
+    test("should return data plane TypeSpec and data-plane readme paths for 'all-dataplane-typespecs'", () => {
+      const dataPlaneTypespecs = ["typespec3", "typespec4"];
+      const dataPlaneReadmes = ["data-plane/readme-dp1", "data-plane/readme-dp2"];
+      
+      vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([...dataPlaneTypespecs, "typespec1.Management", "typespec2.Management"]);
+      vi.spyOn(utils, "findReadmeFiles").mockReturnValue([...dataPlaneReadmes, "readme-rm1", "readme-rm2"]);
+      vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
+        { tspconfigPath: "typespec3", readmePath: undefined },
+        { tspconfigPath: "typespec4", readmePath: undefined },
+        { tspconfigPath: undefined, readmePath: "data-plane/readme-dp1" },
+        { tspconfigPath: undefined, readmePath: "data-plane/readme-dp2" }
+      ]);
+
+      const result = getSpecPaths("all-dataplane-typespecs", "/spec/path");
+      
+      expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
+      expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(dataPlaneTypespecs, dataPlaneReadmes, true);
+      expect(result).toHaveLength(4);
     });
   });
 
