@@ -341,7 +341,22 @@
                   "edges": {
                     "type": "array",
                     "items": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Edge identifier"
+                        },
+                        "targetId": {
+                          "type": "string",
+                          "description": "Target node identifier"
+                        },
+                        "sourceId": {
+                          "type": "string",
+                          "description": "Source node identifier"
+                        }
+                      },
+                      "required": ["id", "targetId", "sourceId"]
                     },
                     "description": "Connections between nodes"
                   }
