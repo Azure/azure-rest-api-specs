@@ -150,10 +150,10 @@
           "Promote a read replica to a standalone server with forced data synchronization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the promotion to a standalone server.": {
             "$ref": "./examples/PromoteReplicaAsForcedStandaloneServer.json"
           },
-          "Switch over a read replica to primary server with planned data syncrhonization. Meaning that it waits for data in the read replica to be fully synchronized with its source server before it initiates the switching of roles between the read replica and the primary server.": {
+          "Switch over a read replica to primary server with planned data synchronization. Meaning that it waits for data in the read replica to be fully synchronized with its source server before it initiates the switching of roles between the read replica and the primary server.": {
             "$ref": "./examples/PromoteReplicaAsPlannedSwitchover.json"
           },
-          "Switch over a read replica to primary server with forced data syncrhonization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the switching of roles between the read replica and the primary server.": {
+          "Switch over a read replica to primary server with forced data synchronization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the switching of roles between the read replica and the primary server.": {
             "$ref": "./examples/PromoteReplicaAsForcedSwitchover.json"
           }
         },
@@ -905,7 +905,7 @@
         "throughput": {
           "type": "integer",
           "format": "int32",
-          "description": "Maixmum throughput supported for storage. Required when type of storage is PremiumV2_LRS or UltraSSD_LRS."
+          "description": "Maximum throughput supported for storage. Required when type of storage is PremiumV2_LRS or UltraSSD_LRS."
         },
         "type": {
           "type": "string",
@@ -928,7 +928,7 @@
       "properties": {
         "activeDirectoryAuth": {
           "type": "string",
-          "description": "Inidicates if the server supports Microsoft Entra authentication.",
+          "description": "Indicates if the server supports Microsoft Entra authentication.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -968,15 +968,15 @@
         },
         "primaryUserAssignedIdentityId": {
           "type": "string",
-          "description": "Identifier of the user asigned managed identity used to access the key in Azure Key Vault for data encryption of the primary storage associated to a flexible server."
+          "description": "Identifier of the user assigned managed identity used to access the key in Azure Key Vault for data encryption of the primary storage associated to a flexible server."
         },
         "geoBackupKeyURI": {
           "type": "string",
-          "description": "Identifier of the user asigned managed identity used to access the key in Azure Key Vault for data encryption of the geographically redundant storage associated to a flexible server that is configured to support geographically redundant backups."
+          "description": "Identifier of the user assigned managed identity used to access the key in Azure Key Vault for data encryption of the geographically redundant storage associated to a flexible server that is configured to support geographically redundant backups."
         },
         "geoBackupUserAssignedIdentityId": {
           "type": "string",
-          "description": "Identifier of the user asigned managed identity used to access the key in Azure Key Vault for data encryption of the geographically redundant storage associated to a flexible server that is configured to support geographically redundant backups."
+          "description": "Identifier of the user assigned managed identity used to access the key in Azure Key Vault for data encryption of the geographically redundant storage associated to a flexible server that is configured to support geographically redundant backups."
         },
         "type": {
           "type": "string",
