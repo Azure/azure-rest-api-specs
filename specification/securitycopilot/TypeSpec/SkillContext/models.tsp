@@ -1365,7 +1365,7 @@ namespace SkillContext
 	}
 
 	@doc("Define Error Response Types From Pluginhost")
-	enum ErrorType {
+	enum PluginhostErrorType {
 		DataAccessNotAuthorizedException,
 		SkillException,
 		UserException,
@@ -1374,7 +1374,7 @@ namespace SkillContext
 	}
 
 	@doc("Class of type ErrorResponse. This is used to return error messages from pluginhost.")
-	model ErrorResponse {
+	model PluginhostErrorResponse {
 		@doc("The error message.")
 		message: string;
 		@doc("The error type.")
