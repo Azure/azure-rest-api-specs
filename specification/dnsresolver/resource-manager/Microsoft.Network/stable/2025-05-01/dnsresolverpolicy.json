@@ -1648,14 +1648,14 @@
       "type": "object",
       "properties": {
         "domains": {
-          "description": "The domains in the domain list.",
+          "description": "The domains in the domain list. Will be null if user is using large domain list.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "domainsUrl": {
-          "description": "The URL for bulk upload or download for domain lists containing larger set of domains.",
+          "description": "The URL for bulk upload or download for domain lists containing larger set of domains. This will be populated if domains is empty or null.",
           "type": "string",
           "readOnly": true
         },
