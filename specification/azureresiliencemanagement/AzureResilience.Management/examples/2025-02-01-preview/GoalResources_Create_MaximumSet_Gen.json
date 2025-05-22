@@ -2,24 +2,19 @@
   "title": "GoalResources_Create_MaximumSet",
   "operationId": "GoalResources_Create",
   "parameters": {
+    "serviceGroupName": "sg1",
     "api-version": "2025-02-01-preview",
     "goalAssignmentName": "ga1",
     "goalResourceName": "gr1",
     "properties": {
       "properties": {
-        "resourceArmId": "ArmIdOfResource",
+        "resourceArmId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine",
         "excludedFromHighAvailabilityGoals": "Excluded",
         "manuallyAttestedForHighAvailability": "ManuallyAttested",
         "excludedFromDisasterRecoveryGoals": "Excluded",
         "manuallyAttestedForDisasterRecovery": "ManuallyAttested",
-        "exclusionReasonForHighAvailabilityGoals": {
-          "type": "FailedOverResource",
-          "description": "The resource failed over and is excluded."
-        },
-        "exclusionReasonForDisasterRecoveryGoals": {
-          "type": "UnsupportedResource",
-          "description": "The resource is unsupported and excluded."
-        }
+        "exclusionReasonForHighAvailabilityGoals": "UserSelectedExclusion",
+        "exclusionReasonForDisasterRecoveryGoals": "UnsupportedResource"
       }
     }
   },
@@ -27,21 +22,23 @@
     "200": {
       "body": {
         "properties": {
-          "resourceArmId": "ArmIdOfResource",
+          "resourceArmId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine",
           "excludedFromHighAvailabilityGoals": "Excluded",
           "manuallyAttestedForHighAvailability": "ManuallyAttested",
           "excludedFromDisasterRecoveryGoals": "Excluded",
           "manuallyAttestedForDisasterRecovery": "ManuallyAttested",
+          "exclusionReasonForHighAvailabilityGoals": "UserSelectedExclusion",
+          "exclusionReasonForDisasterRecoveryGoals": "UnsupportedResource",
           "provisioningState": "Succeeded"
         },
         "id": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1/goalResources/gr1",
         "name": "gr1",
-        "type": "lvbclp",
+        "type": "Microsoft.AzureResilienceManagement/goalAssignments/goalResources",
         "systemData": {
-          "createdBy": "dvnfxbuyqhvivfjddjccdtlwajfht",
+          "createdBy": "admin@contoso.com",
           "createdByType": "User",
           "createdAt": "2025-02-06T15:03:42.796Z",
-          "lastModifiedBy": "lndhhaimomorael",
+          "lastModifiedBy": "admin@contoso.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2025-02-06T15:03:42.797Z"
         }
@@ -51,7 +48,7 @@
       "headers": {
         "location": "https://contoso.com/operationstatus",
         "Azure-AsyncOperation": "https://contoso.com/operationstatus",
-        "Retry-After": 100
+        "Retry-After": 30
       }
     }
   }

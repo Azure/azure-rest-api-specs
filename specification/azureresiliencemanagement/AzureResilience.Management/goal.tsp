@@ -39,6 +39,20 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  @doc("Action to exclude a resource from goal assignment.")
+  @route(ServiceGroupRoute)
+  @TypeSpec.Rest.action("updateGoalResources")
+  @post
+  updateGoalResources is ArmResourceActionAsync<
+    GoalAssignment,
+    UpdateGoalResourceRequest,
+    UpdateGoalResourceResponse,
+    ServiceGroupParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
   @route(ServiceGroupRoute)
   delete is ArmResourceDeleteWithoutOkAsync<
     GoalAssignment,
@@ -58,12 +72,9 @@ interface GoalTemplates {
   get is ArmResourceRead<GoalTemplate, ServiceGroupParameters>;
 
   @route(ServiceGroupRoute)
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
     GoalTemplate,
-    ServiceGroupParameters,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    ServiceGroupParameters
   >;
 
   @route(ServiceGroupRoute)
@@ -87,20 +98,6 @@ interface GoalTemplates {
 interface GoalResources {
   @route(ServiceGroupRoute)
   get is ArmResourceRead<GoalResource, ServiceGroupParameters>;
-
-  @doc("Action to exclude a resource from goal assignment.")
-  @route(ServiceGroupRoute)
-  @TypeSpec.Rest.action("update")
-  @post
-  update is ArmResourceActionAsync<
-    GoalResource,
-    UpdateGoalResourceRequest,
-    UpdateGoalResourceResponse,
-    ServiceGroupParameters,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
 
   @route(ServiceGroupRoute)
   list is ArmResourceListByParent<GoalResource, ServiceGroupTenantParameters>;
