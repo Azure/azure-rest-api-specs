@@ -42,9 +42,7 @@ These settings apply only when `--tag=package-2025-03-31` is specified on the co
 
 ```yaml $(tag) == 'package-2025-03-31'
 input-file:
-  - Microsoft.HardwareSecurityModules/stable/2025-03-31/cloudhsm.json
-  - Microsoft.HardwareSecurityModules/stable/2025-03-31/dedicatedhsm.json
-  - Microsoft.HardwareSecurityModules/stable/2025-03-31/operations.json
+  - Microsoft.HardwareSecurityModules/stable/2025-03-31/openapi.json
 ```
 
 ### Tag: package-preview-2024-06
