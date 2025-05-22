@@ -20,6 +20,8 @@ default-api-version: "2025-04-01"
 multiapi: true
 batch:
   - tag: package-2025-04
+  - tag: package-preview-2025-04
+  - tag: package-2025-03
   - tag: package-preview-2025-03
   - tag: package-2020-11
   - tag: package-2020-03-01-only
@@ -31,6 +33,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/
 perform-load: false
+```
+
+### Tag: package-preview-2025-04 and python
+
+These settings apply only when `--tag=package-preview-2025-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2025-04' && $(python)
+namespace: azure.mgmt.containerservice.v2025_04_02_preview
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2025_04_02_preview
 ```
 
 ### Tag: package-2025-04 and python
