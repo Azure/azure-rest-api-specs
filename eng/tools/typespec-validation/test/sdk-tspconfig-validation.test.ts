@@ -7,7 +7,7 @@ import {
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsDpPackageDirectorySubRule,
-  TspConfigTsDpPackageNameMatchPatternSubRule,
+  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
@@ -30,6 +30,7 @@ import {
   TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
+  TspConfigTsMlcDpPackageNameMatchPatternSubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { join } from "path";
@@ -116,14 +117,21 @@ function createEmitterOptionTestCases(
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
   allowUndefined: boolean = false,
+  isModularLibrary: boolean = false,
 ): Case[] {
   const cases: Case[] = [];
 
   const language = emitterName.split("-").pop();
+  const validPairs = [{ key: key, value: validValue }];
+  const invalidPairs = [{ key: key, value: invalidValue }];
+  if (isModularLibrary && emitterName === "@azure-tools/typespec-ts") {
+    validPairs.push({ key: "is-modular-library", value: isModularLibrary });
+    invalidPairs.push({ key: "is-modular-library", value: isModularLibrary });
+  }
   cases.push({
     description: `Validate ${language}'s option:${key} with valid value ${validValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
+    tspconfigContent: createEmitterOptionExample(emitterName, ...validPairs),
     success: true,
     subRules,
   });
@@ -131,10 +139,7 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with invalid value ${invalidValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, {
-      key: key,
-      value: invalidValue,
-    }),
+    tspconfigContent: createEmitterOptionExample(emitterName, ...invalidPairs),
     success: shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
@@ -142,19 +147,26 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with undefined value`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName),
+    tspconfigContent: isModularLibrary
+      ? createEmitterOptionExample(emitterName, {
+          key: "is-modular-library",
+          value: isModularLibrary,
+        })
+      : createEmitterOptionExample(emitterName),
     success: allowUndefined ? true : shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
 
   if (!allowUndefined && key.includes(".")) {
+    const incompleteKey = key.split(".").slice(0, -1).join(".");
+    const incompletePairs = [{ key: incompleteKey, value: validValue }];
+    if (isModularLibrary && emitterName === "@azure-tools/typespec-ts") {
+      incompletePairs.push({ key: "is-modular-library", value: isModularLibrary });
+    }
     cases.push({
       description: `Validate ${language}'s option:${key} with incomplete key`,
       folder,
-      tspconfigContent: createEmitterOptionExample(emitterName, {
-        key: key.split(".").slice(0, -1).join("."),
-        value: validValue,
-      }),
+      tspconfigContent: createEmitterOptionExample(emitterName, ...incompletePairs),
       success: shouldBeTrueOnFailSubRuleValidation(emitterName),
       subRules,
     });
@@ -223,7 +235,18 @@ const tsDpPackageNameTestCases = createEmitterOptionTestCases(
   "package-details.name",
   "@azure-rest/aaa-bbb",
   "@azure/aaa-bbb",
-  [new TspConfigTsDpPackageNameMatchPatternSubRule()],
+  [new TspConfigTsRlcDpPackageNameMatchPatternSubRule()],
+);
+
+const tsDpModularPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  "",
+  "package-details.name",
+  "@azure/aaa-bbb",
+  "azure/aaa-bbb",
+  [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
+  false,
+  true,
 );
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
@@ -549,6 +572,7 @@ describe("tspconfig", function () {
     ...tsManagementPackageNameTestCases,
     ...tsDpPackageDirTestCases,
     ...tsDpPackageNameTestCases,
+    ...tsDpModularPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
