@@ -44,7 +44,7 @@ input-file:
 
 These settings apply only when `--tag=package-2024-05-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04-02-preview'
+```yaml $(tag) == 'package-2024-04-preview'
 input-file:
   - preview/2025-04-02-preview/deploymentsafeguards.json
 ```
