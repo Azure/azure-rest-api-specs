@@ -64,5 +64,5 @@ interface Operations {
     @segment("providers")
     @doc("The provider namespace (this parameter will not show up in operations).")
     provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationEntityListResult> | ArmErrorResponse;
+  ): ArmResponse<OperationEntityListResult> | ArmDefaultErrorResponse;
 }

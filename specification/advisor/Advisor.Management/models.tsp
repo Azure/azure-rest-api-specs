@@ -335,7 +335,6 @@ model ARMErrorResponseBody {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-@error
 model ArmErrorResponse {
   /**
    * ARM error response body.
@@ -344,11 +343,20 @@ model ArmErrorResponse {
 }
 
 @error
-model ArmNotFoundBodyResponse {
+model ArmDefaultErrorResponse {
   @body error: ArmErrorResponse;
 }
 
-model ArmNotFoundResponse is ArmNotFoundBodyResponse {
+model ArmNotFoundResponse is ArmDefaultErrorResponse {
+  ...Response<404>;
+}
+
+@error
+model ArmDefaultErrorResponseWithBody {
+  @body error: ARMErrorResponseBody;
+}
+
+model ArmNotFoundResponseWithBody is ArmDefaultErrorResponseWithBody {
   ...Response<404>;
 }
 

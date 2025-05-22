@@ -34,7 +34,7 @@ interface AdvisorScoreEntities {
   get is ArmResourceRead<
     AdvisorScoreEntity,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Error = ArmErrorResponse
+    Error = ArmDefaultErrorResponse
   >;
 
   /**
@@ -46,7 +46,7 @@ interface AdvisorScoreEntities {
     AdvisorScoreEntity,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<AdvisorScoreResponse>,
-    Error = ArmErrorResponse
+    Error = ArmDefaultErrorResponse
   >;
 }
 

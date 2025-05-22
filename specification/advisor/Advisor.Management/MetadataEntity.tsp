@@ -34,8 +34,8 @@ interface MetadataEntities {
   get is ArmResourceRead<
     MetadataEntity,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Error = ArmErrorResponse,
-    Response = ArmResponse<MetadataEntity> | ArmNotFoundResponse
+    Error = ArmDefaultErrorResponse,
+    Response = ArmResponse<MetadataEntity> | ArmNotFoundResponseWithBody
   >;
 
   /**
@@ -46,7 +46,7 @@ interface MetadataEntities {
   list is ArmResourceListByParent<
     MetadataEntity,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Error = ArmErrorResponse
+    Error = ArmDefaultErrorResponse
   >;
 }
 

@@ -28,7 +28,7 @@ interface ConfigurationsOperationGroup {
     Response = ArmResponse<ConfigurationListResult>,
     Scope = SubscriptionActionScope,
     Parameters = {},
-    Error = ArmErrorResponse
+    Error = ArmDefaultErrorResponse
   >;
   /**
    * Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.
@@ -53,7 +53,7 @@ interface ConfigurationsOperationGroup {
      */
     @bodyRoot
     configContract: ConfigData,
-  ): ArmResponse<ConfigData> | ArmErrorResponse;
+  ): ArmResponse<ConfigData> | ArmDefaultErrorResponse;
 
   /**
    * Retrieve Azure Advisor configurations.
@@ -72,7 +72,7 @@ interface ConfigurationsOperationGroup {
      */
     @path
     resourceGroup: string,
-  ): ArmResponse<ConfigurationListResult> | ArmErrorResponse;
+  ): ArmResponse<ConfigurationListResult> | ArmDefaultErrorResponse;
 
   /**
    * Create/Overwrite Azure Advisor configuration.
@@ -103,7 +103,7 @@ interface ConfigurationsOperationGroup {
      */
     @bodyRoot
     configContract: ConfigData,
-  ): ArmResponse<ConfigData> | ArmErrorResponse;
+  ): ArmResponse<ConfigData> | ArmDefaultErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -119,7 +119,7 @@ interface RecommendationsOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {},
     Response = ArmAcceptedResponse,
-    Error = ArmErrorResponse
+    Error = ArmDefaultErrorResponse
   >;
   /**
    * Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.
@@ -139,7 +139,7 @@ interface RecommendationsOperationGroup {
     @format("uuid")
     @path
     operationId: string,
-  ): ArmAcceptedResponse | NoContentResponse | ArmErrorResponse;
+  ): ArmAcceptedResponse | NoContentResponse | ArmDefaultErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -168,7 +168,7 @@ interface SuppressionsOperationGroup {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Error = ArmErrorResponse
+    Error = ArmDefaultErrorResponse
   >;
 }
 
@@ -186,7 +186,7 @@ interface PredictsOperationGroup {
     Response = PredictionResponse,
     Scope = SubscriptionActionScope,
     Parameters = {},
-    Error = ArmErrorResponse
+    Error = ArmDefaultErrorResponse
   >;
 }
 
