@@ -49,12 +49,12 @@ model Vault extends Foundations.TrackedResource {
 
 @armResourceOperations
 interface VaultOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
       },
       KeysOf<ResourceNameParameter<
         Resource = Vault,
@@ -65,7 +65,7 @@ interface VaultOps
     > {}
 
 interface VaultCreateOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -80,7 +80,7 @@ interface VaultCreateOps
     > {}
 
 interface VaultOperationOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -104,7 +104,7 @@ interface VaultOperationOps
     > {}
 
 interface VaultStatusOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -125,7 +125,7 @@ interface VaultStatusOps
     > {}
 
 interface VaultDeleteOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -261,12 +261,12 @@ interface Vaults {
 }
 @armResourceOperations
 interface GetOperationResultOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.Legacy.CustomProvider,
         ...KeysOf<ResourceNameParameter<
           Resource = Vault,
           KeyName = "vaultName",
