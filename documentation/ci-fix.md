@@ -55,10 +55,11 @@ This check is owned by One Engineering System. See [1ES PoliCheck] for help.
 
 > [!IMPORTANT]
 >
+> - The `SDK Validation Status` check is a meta check that aggregates the results of all `SDK Validation - {Language}`
+    checks and reports a unified status. Re-run any individual `SDK Validation - {Language}` checks will automatically
+    trigger a re-run of this meta check.
 > - The `SDK Validation *` checks are owned by the Shanghai division of the Azure SDK team,
     not the core Redmond Azure SDK team.
-> - Only `SDK Validation Status` check failure will block a specs PR, because this check serves as a meta check for the
-    entire `SDK Validation *` group of checks.
 > - For more information, refer to [SDK Validation FAQ](https://aka.ms/azsdk/sdk-automation-faq).
 
 If you have an issue or with any of checks listed in the first column of the table below:
@@ -87,9 +88,9 @@ Do the following:
 > - If your PR is flagged with any label that matches the pattern `BreakingChange-{Language}-Sdk`, the SDK breaking
      changes will be reviewed by SDK reviewers around two business days after the completion of the first two review steps
      in PR review workflow, i.e. REST API breaking change review and ARM review.
-> - If you want to suppress the SDK breaking changes, refer to [SDK Suppressions](https://aka.ms/azsdk/sdk-suppression).
+> - If you need to suppress the SDK breaking changes, refer to [SDK Suppressions](https://aka.ms/azsdk/sdk-suppression).
 
-If the SDK breaking changes haven't been review after two more business days, you might reach out to the reviewers:
+If the SDK breaking changes haven't been reviewed after two additional business days, you may reach out to the reviewers:
 
 | Language        | Reviewer        | GitHub login                                                  |
 |-----------------|-----------------| ------------------------------------------------------------- |
