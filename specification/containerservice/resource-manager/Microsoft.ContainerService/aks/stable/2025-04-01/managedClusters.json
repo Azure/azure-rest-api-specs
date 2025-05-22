@@ -3279,14 +3279,6 @@
           },
           "x-ms-identifiers": [],
           "description": "Specifications on how to scale the VirtualMachines agent pool to a fixed size."
-        },
-        "autoscale": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/AutoScaleProfile"
-          },
-          "x-ms-identifiers": [],
-          "description": "Specifications on how to auto-scale the VirtualMachines agent pool within a predefined size range."
         }
       },
       "description": "Specifications on how to scale a VirtualMachines agent pool."
@@ -3305,26 +3297,6 @@
         }
       },
       "description": "Specifications on number of machines."
-    },
-    "AutoScaleProfile": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "string",
-          "description": "VM size that AKS will use when creating and scaling e.g. 'Standard_E4s_v3', 'Standard_E16s_v3' or 'Standard_D16s_v5'."
-        },
-        "minCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum number of nodes of the specified sizes."
-        },
-        "maxCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of nodes of the specified sizes."
-        }
-      },
-      "description": "Specifications on auto-scaling."
     },
     "VirtualMachineNodesStatus": {
       "type": "array",
