@@ -1,0 +1,49 @@
+{
+  "operationId": "Connections_Update",
+  "parameters": {
+    "api-version": "2025-05-21",
+    "connection": {},
+    "connectionName": "testConnection",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "tags": {
+      "tag": "value"
+    }
+  },
+  "title": "Updates the connection resource",
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/connections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
+        "location": "East US",
+        "properties": {
+          "justification": "justification",
+          "pipeline": "testdc",
+          "requirementId": "id"
+        },
+        "tags": {
+          "tag": "value"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/connections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
+        "location": "East US",
+        "properties": {
+          "justification": "justification",
+          "pipeline": "testdc",
+          "requirementId": "id"
+        },
+        "tags": {
+          "tag": "value"
+        }
+      },
+      "headers": {
+        "location": "http://management.azure.com/subscriptions/12345/providers/Microsoft.AzureDataTransfer/locations/eastUS?api-version=2025-05-21"
+      }
+    }
+  }
+}
