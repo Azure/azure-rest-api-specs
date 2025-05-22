@@ -555,7 +555,6 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
-    @list
     @route("{containerName}?restype=container&comp=list&flat")
     op listBlobFlatSegment is StorageOperation<
       {
@@ -579,7 +578,6 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
-    @list
     @route("{containerName}?restype=container&comp=list&hierarchy")
     op listBlobHierarchySegment is StorageOperation<
       {
