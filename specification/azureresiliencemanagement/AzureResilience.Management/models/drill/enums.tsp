@@ -304,3 +304,38 @@ union RoExclusionReason {
   @doc("Protection not configured.")
   ProtectionStatus: "ProtectionStatus",
 }
+
+/**
+ * Enum for DrillRun Tasks.
+ */
+@doc("Enum for DrillRun Tasks.")
+union DrillRunTasks {
+  string,
+
+  @doc("Failover task.")
+  Failover: "Failover",
+
+  @doc("Reprotect task.")
+  Reprotect: "Reprotect",
+
+  @doc("FailoverReverse task.")
+  FailoverReverse: "FailoverReverse",
+
+  @doc("ReprotectReverse task.")
+  ReprotectReverse: "ReprotectReverse",
+}
+
+/**
+ * Enum for DrillRun Sub Tasks.
+ */
+@doc("Enum for DrillRun Sub Tasks.")
+union DrillRunSubTasks {
+  string,
+
+  @doc("FaultInjection subtask.")
+  FaultInjection: "FaultInjection",
+
+  @doc("Failover sub task.")
+  Failover: "Failover",
+}
+
