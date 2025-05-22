@@ -77,8 +77,8 @@
           }
         },
         "x-ms-examples": {
-          "Lists DeploymentSafeguards by parent resource.": {
-            "$ref": "./examples/DeploymentSafeguards_Get.json"
+          "List DeploymentSafeguards by parent resource": {
+            "$ref": "./examples/DeploymentSafeguards_List.json"
           }
         },
         "x-ms-pageable": {
@@ -117,12 +117,12 @@
         },
         "x-ms-examples": {
           "Gets a DeploymentSafeguard resource.": {
-            "$ref": "./examples/DeploymentSafeguards_List.json"
+            "$ref": "./examples/DeploymentSafeguards_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "DeploymentSafeguards_Put",
+        "operationId": "DeploymentSafeguards_Create",
         "tags": [
           "DeploymentSafeguards"
         ],
@@ -173,6 +173,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a DeploymentSafeguards resource with a long running operation.": {
+            "$ref": "./examples/DeploymentSafeguards_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
