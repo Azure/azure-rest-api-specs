@@ -332,7 +332,7 @@ model CertificateBundle {
   /**
    * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
    */
-  @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
+  @Versioning.added(KeyVault.Versions.`7.6`)
   preserveCertOrder?: boolean;
 }
 
@@ -823,7 +823,7 @@ model CertificateCreateParameters {
   /**
    * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
    */
-  @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
+  @Versioning.added(KeyVault.Versions.`7.6`)
   preserveCertOrder?: boolean;
 }
 
@@ -879,7 +879,7 @@ model CertificateOperation {
   /**
    * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
    */
-  @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
+  @Versioning.added(KeyVault.Versions.`7.6`)
   preserveCertOrder?: boolean;
 
   /**
@@ -925,7 +925,7 @@ model CertificateImportParameters {
   /**
    * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
    */
-  @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
+  @Versioning.added(KeyVault.Versions.`7.6`)
   preserveCertOrder?: boolean;
 }
 
