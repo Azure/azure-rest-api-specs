@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace WidgetManager;
+namespace WidgetManagement;
 
 /** Employee resource */
 model Employee is TrackedResource<EmployeeProperties> {
