@@ -167,3 +167,13 @@ interface ChaosJobResources {
   @route(ServiceGroupRoute)
   list is ArmResourceListByParent<ChaosJobResource, ServiceGroupParameters>;
 }
+
+@armResourceOperations
+@doc("Operations for managing Chaos job child job.")
+interface ChaosJobChildJobs {
+  @route(ServiceGroupRoute)
+  get is ArmResourceRead<ChaosJobChildJob, ServiceGroupParameters>;
+
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<ChaosJobChildJob, ServiceGroupParameters>;
+}

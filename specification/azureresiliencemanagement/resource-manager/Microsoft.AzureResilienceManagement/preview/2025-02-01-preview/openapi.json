@@ -93,6 +93,9 @@
       "name": "ChaosJobResources"
     },
     {
+      "name": "ChaosJobChildJobs"
+    },
+    {
       "name": "UnifiedResiliencyItems"
     }
   ],
@@ -855,6 +858,127 @@
         "x-ms-examples": {
           "ChaosJobs_Get_MaximumSet": {
             "$ref": "./examples/ChaosJobs_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/chaosJobs/{chaosJobName}/chaosJobChildJobs": {
+      "get": {
+        "operationId": "ChaosJobChildJobs_List",
+        "tags": [
+          "ChaosJobChildJobs"
+        ],
+        "description": "List ChaosJobChildJob resources by ChaosJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "chaosJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the chaos job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChaosJobChildJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/chaosJobs/{chaosJobName}/chaosJobChildJobs/{chaosJobChildJobName}": {
+      "get": {
+        "operationId": "ChaosJobChildJobs_Get",
+        "tags": [
+          "ChaosJobChildJobs"
+        ],
+        "description": "Get a ChaosJobChildJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "drillRunName",
+            "in": "path",
+            "description": "The name of the DrillRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "chaosJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the chaos job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "chaosJobChildJobName",
+            "in": "path",
+            "description": "The unique name (Guid) of the Chaos job child job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChaosJobChildJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -5138,6 +5262,59 @@
         }
       ]
     },
+    "ChaosJobChildJob": {
+      "type": "object",
+      "description": "Chaos job Child job a AzureResilienceProviderHub resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChaosJobChildJobProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChaosJobChildJobListResult": {
+      "type": "object",
+      "description": "The response of a ChaosJobChildJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChaosJobChildJob items on this page",
+          "items": {
+            "$ref": "#/definitions/ChaosJobChildJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChaosJobChildJobProperties": {
+      "type": "object",
+      "description": "Definition of Chaos job child job properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the recovery child job.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChildJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ChaosExperimentChild"
+    },
     "ChaosJobListResult": {
       "type": "object",
       "description": "The response of a ChaosJob list operation.",
@@ -6207,7 +6384,7 @@
           "$ref": "#/definitions/JobResourceProperties"
         }
       ],
-      "x-ms-discriminator-value": "DrillRunChild"
+      "x-ms-discriminator-value": "DrillRun"
     },
     "DrillRunStages": {
       "type": "string",
@@ -7448,9 +7625,7 @@
         "RecoveryPlan",
         "RecoveryPlanChild",
         "DrillRun",
-        "DrillRunChild",
-        "ChaosExperiment",
-        "ChaosExperimentChild"
+        "ChaosExperiment"
       ],
       "x-ms-enum": {
         "name": "JobResourceType",
@@ -7477,19 +7652,9 @@
             "description": "Drill Run job resource."
           },
           {
-            "name": "DrillRunChild",
-            "value": "DrillRunChild",
-            "description": "Drill Run child job resource."
-          },
-          {
             "name": "ChaosExperiment",
             "value": "ChaosExperiment",
             "description": "Chaos job resource created by Drill to represent a Experiment Run."
-          },
-          {
-            "name": "ChaosExperimentChild",
-            "value": "ChaosExperimentChild",
-            "description": "Chaos job's child job resource."
           }
         ]
       }

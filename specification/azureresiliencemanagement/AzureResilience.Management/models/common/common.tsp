@@ -188,14 +188,8 @@ union JobResourceType {
   @doc("Drill Run job resource.")
   DrillRun: "DrillRun",
 
-  @doc("Drill Run child job resource.")
-  DrillRunChild: "DrillRunChild",
-
   @doc("Chaos job resource created by Drill to represent a Experiment Run.")
   ChaosExperiment: "ChaosExperiment",
-
-  @doc("Chaos job's child job resource.")
-  ChaosExperimentChild: "ChaosExperimentChild",
 
   string,
 }
