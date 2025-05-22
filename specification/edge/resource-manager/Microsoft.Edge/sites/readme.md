@@ -53,7 +53,7 @@ tag: package-2025-03-01-preview
 
 These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03-01-preview'
+```yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
   - preview/2025-03-01-preview/sites.json
 ```
@@ -74,17 +74,9 @@ input-file:
 
 See configuration in [readme.az.md](./readme.az.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 
