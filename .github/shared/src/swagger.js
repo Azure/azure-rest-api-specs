@@ -11,13 +11,13 @@ import { readFile } from "fs/promises";
  */
 
 /**
- * @type {import('@apidevtools/json-schema-ref-parser').ResolverOptions} 
+ * @type {import('@apidevtools/json-schema-ref-parser').ResolverOptions}
  */
 const excludeExamples = {
   order: 1,
   canRead: true,
   read: async (
-    /** @type import('@apidevtools/json-schema-ref-parser').FileInfo */ 
+    /** @type import('@apidevtools/json-schema-ref-parser').FileInfo */
     file,
   ) => {
     if (example(file.url)) {

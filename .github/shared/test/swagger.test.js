@@ -12,14 +12,12 @@ describe("Swagger", () => {
     const swagger = new Swagger("bar");
     expect(swagger.path).toBe(resolve("bar"));
 
-    await expect(swagger.getRefs()).rejects.toThrowError(
-      /Error reading file/i,
-    );
+    await expect(swagger.getRefs()).rejects.toThrowError(/Error reading file/i);
   });
 
   it("excludes example files", async () => {
     const swagger = new Swagger(
-      resolve(__dirname, "fixtures/Swagger/ignoreExamples/swagger.json")
+      resolve(__dirname, "fixtures/Swagger/ignoreExamples/swagger.json"),
     );
     const refs = await swagger.getRefs();
 
