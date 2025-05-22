@@ -28,8 +28,7 @@ describe("isResolverError", () => {
     expect(isResolverError(error)).toBe(false);
   });
 
-  it("returns false if input is not an error"),
-    () => {
-      expect(isResolverError(123)).toBe(false);
-    };
+  it("returns false if input is not an error", () => {
+      expect(isResolverError("test")).toBe(false);
+  });
 });
