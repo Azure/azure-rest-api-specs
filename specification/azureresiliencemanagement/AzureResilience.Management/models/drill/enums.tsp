@@ -338,4 +338,3 @@ union DrillRunSubTasks {
   @doc("Failover sub task.")
   Failover: "Failover",
 }
-
