@@ -124,7 +124,7 @@ function json(file) {
  */
 
 /**
- * Checks whether an unknown error object is an ExecError.
+ * Checks whether an unknown error object is a ResolverError.
  * @param {unknown} error
  * @returns {error is ResolverError}
  */

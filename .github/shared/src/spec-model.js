@@ -16,9 +16,10 @@ import { isResolverError } from "./swagger.js";
  */
 
 /**
- * @typedef {Error} SwaggerError
+ * @typedef {Error} SpecError
  * @prop {string} readme
  * @prop {string} tag
+ * @prop {string} source file that caused the error
  */
 
 export class SpecModel {
@@ -77,15 +78,16 @@ export class SpecModel {
             refs = await inputFile.getRefs();
           } catch (error) {
             if (isResolverError(error)) {
-              const resolverError = /** @type {SwaggerError} */ {
-                message: `Error resolving refs for input-file: ${inputFile.path}
+              const resolverError = /** @type {SpecError} */ {
+                message: `Spec Model encountered error resolving refs for input-file: ${inputFile.path}
 Readme: ${readme.path}
 Tag: ${tag.name}
+Error file: ${error.source}
 
 Ensure the input-file is valid and all refs are resolvable.`,
                 readme: readme.path,
                 tag: tag.name,
-
+                source: error.source,
                 cause: error,
               };
               throw resolverError;
