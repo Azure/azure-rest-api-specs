@@ -31,7 +31,7 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resou
 @autoRoute
 @doc("Update a {name}", TResource)
 @armResourceUpdate(TResource)
-@patch
+@patch(#{ implicitOptionality: true })
 op FleetCustomPatchSync<
   TResource extends Foundations.Resource,
   TPatchModel extends TypeSpec.Reflection.Model = TagsUpdateModel<TResource>,
@@ -45,14 +45,13 @@ op FleetCustomPatchSync<
 ): ArmResponse<TResource> | ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "this is a template"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
 @autoRoute
 @doc("Create a {name}", TResource)
 @extension("x-ms-long-running-operation", true)
 @extension(
   "x-ms-long-running-operation-options",
-  {
-    `final-state-via`: "azure-async-operation",
-  }
+  #{ `final-state-via`: "azure-async-operation" }
 )
 @armResourceCreateOrUpdate(TResource)
 @put
@@ -70,14 +69,12 @@ op FleetArmResourceCreateOrUpdateAsync<
 // this is a copy of ArmResourceDeleteAsync that adds the location header to comply with arm linter.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "this is a template"
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "inlining the response with a header does not present a risk"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
 @autoRoute
 @doc("Delete a {name}", TResource)
-@extension("x-ms-long-running-operation", true)
 @extension(
   "x-ms-long-running-operation-options",
-  {
-    `final-state-via`: "azure-async-operation",
-  }
+  #{ `final-state-via`: "azure-async-operation" }
 )
 @armResourceDelete(TResource)
 @delete

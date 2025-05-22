@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "serverName": "pgtestcluster",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-11-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "westus",
+      "sku": {
+        "tier": "GeneralPurpose",
+        "name": "Standard_D4s_v3"
+      },
+      "properties": {
+        "administratorLogin": "cloudsa",
+        "administratorLoginPassword": "password",
+        "version": "16",
+        "createMode": "Create",
+        "cluster": {
+          "clusterSize": 2
+        },
+        "storage": {
+          "tier": "P15",
+          "storageSizeGB": 256,
+          "autoGrow": "Disabled"
+        },
+        "backup": {
+          "backupRetentionDays": 7,
+          "geoRedundantBackup": "Disabled"
+        },
+        "network": {
+          "publicNetworkAccess": "Disabled"
+        },
+        "highAvailability": {
+          "mode": "Disabled"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "Standard_D4s_v3",
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2024-10-10T18:31:50.7304820Z"
+        },
+        "properties": {
+          "cluster": {
+            "clusterSize": 2
+          },
+          "replica": {
+            "role": "Primary",
+            "replicationState": "Active"
+          },
+          "storage": {
+            "iops": 1100,
+            "tier": "P15",
+            "storageSizeGB": 256,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled"
+          },
+          "privateEndpointConnections": [],
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "version": "16",
+          "administratorLogin": "cloudsa",
+          "state": "Ready",
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2024-10-10T18:40:39.0450727+00:00"
+          },
+          "highAvailability": {
+            "mode": "Disabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "Primary"
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestcluster",
+        "name": "pgtestcluster",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    },
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D4s_v3",
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2024-10-10T18:31:50.7304820Z"
+        },
+        "properties": {
+          "cluster": {
+            "clusterSize": 2
+          },
+          "replica": {
+            "role": "Primary",
+            "replicationState": "Active"
+          },
+          "storage": {
+            "iops": 1100,
+            "tier": "P15",
+            "storageSizeGB": 256,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled"
+          },
+          "privateEndpointConnections": [],
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "version": "16",
+          "administratorLogin": "cloudsa",
+          "state": "Ready",
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2024-10-10T18:40:39.0450727+00:00"
+          },
+          "highAvailability": {
+            "mode": "Disabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "Primary"
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestcluster",
+        "name": "pgtestcluster",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    },
+    "202": {}
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "sitef6141",
+    "backupId": "12345",
+    "api-version": "2024-04-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/backups/12345",
+        "name": "sitef6141",
+        "type": "Microsoft.Web/sites",
+        "properties": {
+          "id": 12345,
+          "storageAccountUrl": "DefaultEndpointsProtocol=https;AccountName=storagesample;AccountKey=<account-key>",
+          "blobName": "sitef6141_2024-04-01",
+          "name": "sitef6141_2024-04-01",
+          "status": "InProgress",
+          "sizeInBytes": 56091883,
+          "created": "2022-09-03T17:33:11.641Z",
+          "log": "Succeeded",
+          "databases": [
+            {
+              "databaseType": "SqlAzure",
+              "name": "backenddb",
+              "connectionStringName": "backend",
+              "connectionString": "DSN=data-source-name[;SERVER=value] [;PWD=value] [;UID=value] [;<Attribute>=<value>]"
+            },
+            {
+              "databaseType": "SqlAzure",
+              "name": "statsdb",
+              "connectionStringName": "stats",
+              "connectionString": "DSN=data-source-name[;SERVER=value] [;PWD=value] [;UID=value] [;<Attribute>=<value>]"
+            }
+          ],
+          "scheduled": true,
+          "lastRestoreTimeStamp": "2022-09-04T17:33:11.641Z",
+          "finishedTimeStamp": "2022-09-05T17:33:11.641Z",
+          "websiteSizeInBytes": 56091883
+        }
+      }
+    }
+  }
+}

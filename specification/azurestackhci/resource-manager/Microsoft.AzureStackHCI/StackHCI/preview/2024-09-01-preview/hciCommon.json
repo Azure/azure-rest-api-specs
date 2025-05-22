@@ -1,0 +1,417 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureStackHCI Common",
+    "version": "2024-09-01-preview",
+    "description": "Azure Stack HCI common Rest API spec definitions."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [],
+  "paths": {},
+  "definitions": {
+    "DeploymentMode": {
+      "type": "string",
+      "description": "The deployment mode of EnterpriseCloudEngine(ECE) action for a cluster.",
+      "enum": [
+        "Validate",
+        "Deploy"
+      ],
+      "default": "Deploy",
+      "x-ms-enum": {
+        "name": "DeploymentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Validate",
+            "value": "Validate",
+            "description": "Validate ECE action deployment for a cluster."
+          },
+          {
+            "name": "Deploy",
+            "value": "Deploy",
+            "description": "Deploy ECE action deployment for a cluster."
+          }
+        ]
+      }
+    },
+    "EceReportedProperties": {
+      "type": "object",
+      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
+      "properties": {
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "validation status of AzureStackHCI Cluster Deployment.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of AzureStackHCI Cluster Deployment.",
+          "readOnly": true
+        }
+      }
+    },
+    "EceActionStatus": {
+      "type": "object",
+      "description": "The ECE action plan deployment status for AzureStackHCI Cluster.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of ECE action AzureStackHCI Cluster Deployment.",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of steps of AzureStackHCI Cluster Deployment.",
+          "items": {
+            "$ref": "#/definitions/DeploymentStep"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "NotSpecified",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource provision state is not specified"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      }
+    },
+    "EceDeploymentSecrets": {
+      "type": "object",
+      "description": "Protected parameters list stored in keyvault.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Secret name stored in keyvault."
+        },
+        "eceSecretName": {
+          "$ref": "#/definitions/EceSecrets",
+          "description": "Secret name expected for Enterprise Cloud Engine (ECE) deployment."
+        },
+        "secretLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "Secret URI stored in keyvault."
+        }
+      }
+    },
+    "EceSecrets": {
+      "type": "string",
+      "description": "Secret names allowed for Enterprise Cloud Engine (ECE) deployment.",
+      "enum": [
+        "AzureStackLCMUserCredential",
+        "DefaultARBApplication",
+        "LocalAdminCredential",
+        "WitnessStorageKey"
+      ],
+      "x-ms-enum": {
+        "name": "EceSecrets",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureStackLCMUserCredential",
+            "value": "AzureStackLCMUserCredential",
+            "description": "AzureStackLCMUserCredential used for LCM operations for AzureStackHCI cluster."
+          },
+          {
+            "name": "DefaultARBApplication",
+            "value": "DefaultARBApplication",
+            "description": "DefaultARBApplication used to manage Azure Arc resource bridge (ARB) for AzureStackHCI cluster."
+          },
+          {
+            "name": "LocalAdminCredential",
+            "value": "LocalAdminCredential",
+            "description": "LocalAdminCredential used for admin operations for AzureStackHCI cluster."
+          },
+          {
+            "name": "WitnessStorageKey",
+            "value": "WitnessStorageKey",
+            "description": "WitnessStorageKey used for setting up a cloud witness for AzureStackHCI cluster."
+          }
+        ]
+      }
+    },
+    "DeploymentStep": {
+      "type": "object",
+      "description": "The Step of AzureStackHCI Cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of step.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of step.",
+          "readOnly": true
+        },
+        "fullStepIndex": {
+          "type": "string",
+          "description": "FullStepIndex of step.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "description": "Start time of step.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "description": "End time of step.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of nested steps of AzureStackHCI Cluster Deployment.",
+          "items": {
+            "$ref": "#/definitions/DeploymentStep"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "exception": {
+          "type": "array",
+          "description": "List of exceptions in AzureStackHCI Cluster Deployment.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PrecheckResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the individual test/rule/alert that was executed. Unique, not exposed to the customer.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The health check DisplayName localized of the individual test executed.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Key-value pairs that allow grouping/filtering individual tests.",
+          "type": "object",
+          "properties": {
+            "key": {
+              "description": "Key that allow grouping/filtering individual tests.",
+              "type": "string"
+            },
+            "value": {
+              "description": "Value of the key that allow grouping/filtering individual tests.",
+              "type": "string"
+            }
+          }
+        },
+        "healthCheckTags": {
+          "description": "Key-value pairs that allow grouping/filtering individual tests.",
+          "type": "object"
+        },
+        "title": {
+          "description": "User-facing name; one or more sentences indicating the direct issue.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the check running (i.e. Failed, Succeeded, In Progress). This answers whether the check ran, and passed or failed.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "severity": {
+          "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity.",
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Warning",
+            "Informational",
+            "Hidden"
+          ],
+          "x-ms-enum": {
+            "name": "severity",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Detailed overview of the issue and what impact the issue has on the stamp.",
+          "type": "string"
+        },
+        "remediation": {
+          "description": "Set of steps that can be taken to resolve the issue found.",
+          "type": "string"
+        },
+        "targetResourceID": {
+          "description": "The unique identifier for the affected resource (such as a node or drive).",
+          "type": "string"
+        },
+        "targetResourceName": {
+          "description": "The name of the affected resource.",
+          "type": "string"
+        },
+        "targetResourceType": {
+          "description": "The type of resource being referred to (well-known set of nouns in infrastructure, aligning with Monitoring).",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "The time in which the HealthCheck was called.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "additionalData": {
+          "description": "Property bag of key value pairs for additional information.",
+          "type": "string"
+        },
+        "healthCheckSource": {
+          "description": "The name of the services called for the HealthCheck (I.E. Test-AzureStack, Test-Cluster).",
+          "type": "string"
+        }
+      }
+    },
+    "EdgeDeviceKind": {
+      "type": "string",
+      "description": "Edge device kind.",
+      "enum": [
+        "HCI"
+      ],
+      "default": "HCI",
+      "x-ms-enum": {
+        "name": "EdgeDeviceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "Arc-enabled edge device with HCI OS."
+          }
+        ]
+      }
+    },
+    "HardwareClass": {
+      "type": "string",
+      "description": "Hardware class of the cluster.",
+      "enum": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "default": "Medium",
+      "x-ms-enum": {
+        "name": "HardwareClass",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Small",
+            "value": "Small",
+            "description": "The hardware class is small."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "The hardware class is medium. This corresponds to the default"
+          },
+          {
+            "name": "Large",
+            "value": "Large",
+            "description": "The hardware class is large."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -90,6 +90,10 @@ model EmbeddingItem {
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
   @clientName("promptIndex", "java")
   index: int32;
+
+  @doc("The object type which is always 'embedding'.")
+  @added(ServiceApiVersions.v2024_07_01_Preview)
+  object: "embedding";
 }
 
 @doc("Measurement of the amount of tokens used in this request and response.")

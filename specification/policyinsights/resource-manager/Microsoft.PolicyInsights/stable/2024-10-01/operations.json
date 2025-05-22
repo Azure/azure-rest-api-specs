@@ -1,0 +1,137 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Policy Insights Operations API",
+    "version": "2024-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.PolicyInsights/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists available operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2019-10-01/operations.json#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/Operations_ListOperations.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationsListResults": {
+      "description": "List of available operations.",
+      "type": "object",
+      "properties": {
+        "@odata.count": {
+          "description": "OData entity count; represents the number of operations returned.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1
+        },
+        "value": {
+          "description": "List of available operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name.",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "Resource provider name.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource name on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation name.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Operation description.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "API version to use with the client requests.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

@@ -12,14 +12,13 @@ import "./models/language.detection.tsp";
 import "./models/pii.entity.recognition.tsp";
 import "./models/sentiment.analysis.tsp";
 import "./models/summarization.tsp";
-import "./models/custom.healthcare.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-/** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
+/** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
     {
@@ -30,9 +29,7 @@ using Azure.Core.Traits;
     }
   ]>
 )
-@service({
-  title: "Microsoft Cognitive Language Service - Text Analysis",
-})
+@service(#{ title: "Microsoft Cognitive Language Service - Text Analysis" })
 @server(
   "{Endpoint}/language",
   "Single server endpoint",
@@ -54,9 +51,17 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_01: "2023-04-01",
 
-  /** Version 2023-11-15-preview */
+  /** Version 2024-11-01 */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_11_15_preview: "2023-11-15-preview",
+  v2024_11_01: "2024-11-01",
+
+  /** Version 2024-11-15-preview */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_11_15_preview: "2024-11-15-preview",
+
+  /** Version 2025-05-15-preview */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2025_05_15_preview: "2025-05-15-preview",
 }
 
 alias ServiceTraits = NoRepeatableRequests &
@@ -78,6 +83,7 @@ op analyzeText is RpcOperation<
 
 /** Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @summary("Get analysis status and results")
 op analyzeTextJobStatus is languageOperations.ResourceRead<
   AnalyzeTextJobState,

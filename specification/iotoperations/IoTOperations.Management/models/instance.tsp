@@ -26,20 +26,68 @@ model InstanceResource is TrackedResource<InstanceProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
+
+  ...ManagedServiceIdentityProperty;
 }
 
-@doc("The properties of a Instance resource.")
+@doc("The Instance update model.")
+model InstancePatchModel {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...ManagedServiceIdentityProperty;
+}
+
+@doc("The properties of the Instance resource.")
 model InstanceProperties {
   @doc("Detailed description of the Instance.")
   description?: string;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The Azure IoT Operations version.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
+
+  @doc("The reference to the Schema Registry for this AIO Instance.")
+  schemaRegistryRef: SchemaRegistryRef;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("The features of the AIO Instance.")
+  @added(Versions.`2025-04-01`)
+  features?: Record<InstanceFeature>;
+}
+
+@doc("The features of the AIO Instance.")
+@added(Versions.`2025-04-01`)
+model InstanceFeature {
+  @doc("The state of the feature.")
+  mode?: InstanceFeatureMode;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("The settings of the feature.")
+  settings?: Record<OperationalMode>;
+}
+
+@doc("The enum defining mode of a feature.")
+@added(Versions.`2025-04-01`)
+union InstanceFeatureMode {
+  string,
+
+  @doc("Opt in to enable a stable feature")
+  "Stable",
+
+  @doc("Opt in to enable a preview feature")
+  "Preview",
+
+  @doc("Opt out of a feature")
+  "Disabled",
+}
+
+@doc("The reference to the Schema Registry for this AIO Instance.")
+model SchemaRegistryRef {
+  @doc("The resource ID of the Schema Registry.")
+  resourceId: SchemaRegistryID;
 }

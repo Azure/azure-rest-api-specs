@@ -43,10 +43,13 @@
       "name": "Operations"
     },
     {
-      "name": "Locations"
+      "name": "Addons"
     },
     {
-      "name": "PrivateClouds"
+      "name": "Authorizations"
+    },
+    {
+      "name": "CloudLinks"
     },
     {
       "name": "Clusters"
@@ -55,40 +58,22 @@
       "name": "Datastores"
     },
     {
-      "name": "HcxEnterpriseSites"
-    },
-    {
-      "name": "Authorizations"
-    },
-    {
       "name": "GlobalReachConnections"
     },
     {
-      "name": "WorkloadNetworks"
+      "name": "HcxEnterpriseSites"
     },
     {
-      "name": "WorkloadNetworkSegments"
+      "name": "IscsiPaths"
     },
     {
-      "name": "WorkloadNetworkGateways"
-    },
-    {
-      "name": "WorkloadNetworkVirtualMachines"
-    },
-    {
-      "name": "CloudLinks"
-    },
-    {
-      "name": "Addons"
-    },
-    {
-      "name": "VirtualMachines"
+      "name": "Locations"
     },
     {
       "name": "PlacementPolicies"
     },
     {
-      "name": "ScriptPackages"
+      "name": "PrivateClouds"
     },
     {
       "name": "ScriptCmdlets"
@@ -97,7 +82,22 @@
       "name": "ScriptExecutions"
     },
     {
-      "name": "IscsiPaths"
+      "name": "ScriptPackages"
+    },
+    {
+      "name": "VirtualMachines"
+    },
+    {
+      "name": "WorkloadNetworkGateways"
+    },
+    {
+      "name": "WorkloadNetworkSegments"
+    },
+    {
+      "name": "WorkloadNetworkVirtualMachines"
+    },
+    {
+      "name": "WorkloadNetworks"
     }
   ],
   "paths": {
@@ -394,8 +394,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PrivateCloud"
-            },
-            "x-ms-client-name": "privateCloud"
+            }
           }
         ],
         "responses": {
@@ -465,7 +464,7 @@
           {
             "name": "privateCloudUpdate",
             "in": "body",
-            "description": "The private cloud properties to be updated.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PrivateCloudUpdate"
@@ -474,13 +473,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateCloud"
             }
           },
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "Resource 'PrivateCloud' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/PrivateCloud"
             },
@@ -732,8 +731,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Addon"
-            },
-            "x-ms-client-name": "addon"
+            }
           }
         ],
         "responses": {
@@ -997,8 +995,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExpressRouteAuthorization"
-            },
-            "x-ms-client-name": "authorization"
+            }
           }
         ],
         "responses": {
@@ -1253,8 +1250,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/CloudLink"
-            },
-            "x-ms-client-name": "cloudLink"
+            }
           }
         ],
         "responses": {
@@ -1509,8 +1505,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Cluster"
-            },
-            "x-ms-client-name": "cluster"
+            }
           }
         ],
         "responses": {
@@ -1585,7 +1580,7 @@
           {
             "name": "clusterUpdate",
             "in": "body",
-            "description": "The cluster properties to be updated.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClusterUpdate"
@@ -1594,13 +1589,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
           },
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "Resource 'Cluster' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Cluster"
             },
@@ -1872,8 +1867,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Datastore"
-            },
-            "x-ms-client-name": "datastore"
+            }
           }
         ],
         "responses": {
@@ -2218,8 +2212,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PlacementPolicy"
-            },
-            "x-ms-client-name": "placementPolicy"
+            }
           }
         ],
         "responses": {
@@ -2302,7 +2295,7 @@
           {
             "name": "placementPolicyUpdate",
             "in": "body",
-            "description": "The placement policy properties to be updated.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PlacementPolicyUpdate"
@@ -2317,7 +2310,7 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource operation accepted.",
             "schema": {
               "$ref": "#/definitions/PlacementPolicy"
             },
@@ -2595,7 +2588,7 @@
           {
             "name": "restrictMovement",
             "in": "body",
-            "description": "The body type of the operation request.",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VirtualMachineRestrictMovement"
@@ -2778,8 +2771,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/GlobalReachConnection"
-            },
-            "x-ms-client-name": "globalReachConnection"
+            }
           }
         ],
         "responses": {
@@ -3034,8 +3026,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/HcxEnterpriseSite"
-            },
-            "x-ms-client-name": "hcxEnterpriseSite"
+            }
           }
         ],
         "responses": {
@@ -3663,8 +3654,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScriptExecution"
-            },
-            "x-ms-client-name": "scriptExecution"
+            }
           }
         ],
         "responses": {
@@ -4290,8 +4280,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkDhcp"
-            },
-            "x-ms-client-name": "workloadNetworkDhcp"
+            }
           }
         ],
         "responses": {
@@ -4367,8 +4356,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkDhcp"
-            },
-            "x-ms-client-name": "workloadNetworkDhcp"
+            }
           }
         ],
         "responses": {
@@ -4612,8 +4600,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkDnsService"
-            },
-            "x-ms-client-name": "workloadNetworkDnsService"
+            }
           }
         ],
         "responses": {
@@ -4689,8 +4676,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkDnsService"
-            },
-            "x-ms-client-name": "workloadNetworkDnsService"
+            }
           }
         ],
         "responses": {
@@ -4924,8 +4910,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkDnsZone"
-            },
-            "x-ms-client-name": "workloadNetworkDnsZone"
+            }
           }
         ],
         "responses": {
@@ -5001,8 +4986,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkDnsZone"
-            },
-            "x-ms-client-name": "workloadNetworkDnsZone"
+            }
           }
         ],
         "responses": {
@@ -5341,8 +5325,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkPortMirroring"
-            },
-            "x-ms-client-name": "workloadNetworkPortMirroring"
+            }
           }
         ],
         "responses": {
@@ -5418,8 +5401,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkPortMirroring"
-            },
-            "x-ms-client-name": "workloadNetworkPortMirroring"
+            }
           }
         ],
         "responses": {
@@ -5653,8 +5635,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkPublicIP"
-            },
-            "x-ms-client-name": "workloadNetworkPublicIP"
+            }
           }
         ],
         "responses": {
@@ -5896,8 +5877,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkSegment"
-            },
-            "x-ms-client-name": "workloadNetworkSegment"
+            }
           }
         ],
         "responses": {
@@ -5976,8 +5956,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkSegment"
-            },
-            "x-ms-client-name": "workloadNetworkSegment"
+            }
           }
         ],
         "responses": {
@@ -6329,8 +6308,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkVMGroup"
-            },
-            "x-ms-client-name": "workloadNetworkVMGroup"
+            }
           }
         ],
         "responses": {
@@ -6406,8 +6384,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadNetworkVMGroup"
-            },
-            "x-ms-client-name": "workloadNetworkVMGroup"
+            }
           }
         ],
         "responses": {
@@ -8108,7 +8085,7 @@
         },
         "domain": {
           "type": "string",
-          "description": "The domain's dns name"
+          "description": "The domain's DNS name"
         },
         "baseUserDN": {
           "type": "string",
@@ -9835,7 +9812,7 @@
         },
         "moRefId": {
           "type": "string",
-          "description": "Virtual machine managed object reference id",
+          "description": "vCenter managed object reference ID of the virtual machine",
           "readOnly": true
         },
         "folderPath": {

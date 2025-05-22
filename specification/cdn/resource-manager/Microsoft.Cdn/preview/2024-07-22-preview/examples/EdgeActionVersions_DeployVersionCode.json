@@ -1,0 +1,31 @@
+{
+  "operationId": "EdgeActionVersions_DeployVersionCode",
+  "title": "DeployVersionCode",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-07-22-preview",
+    "edgeActionName": "edgeAction1",
+    "version": "version2",
+    "body": {
+      "name": "zippedFile",
+      "content": "UEsDBBQAAAAIAI1NzkQAAAAABQAAAA=="
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "provisioningState": "Succeeded",
+        "deploymentType": "zip",
+        "validationStatus": "Succeeded",
+        "isDefaultVersion": "True",
+        "lastPackageUpdateTime": "2024-05-25T16:19:23Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2024-07-22-preview"
+      }
+    }
+  }
+}

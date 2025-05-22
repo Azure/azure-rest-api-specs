@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "containerAppName": "testcontainerApp0",
+    "logicAppName": "testcontainerApp0",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testcontainerApp0/providers/Microsoft.App/logicApps/testcontainerApp0/workflows/a1",
+            "name": "testcontainerApp0/a1",
+            "type": "Microsoft.App/logicApps/workflows",
+            "location": "East US",
+            "kind": "Stateful",
+            "properties": {
+              "flowState": "Enabled",
+              "health": {
+                "state": "Healthy"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testcontainerApp0/providers/Microsoft.App/logicApps/testcontainerApp0/workflows/stateful2",
+            "name": "testcontainerApp0/stateful2",
+            "type": "Microsoft.App/logicApps/workflows",
+            "location": "East US",
+            "kind": "Stateful",
+            "properties": {
+              "flowState": "Enabled",
+              "health": {
+                "state": "Unhealthy",
+                "error": {
+                  "code": "InvalidWorkflowJson",
+                  "message": "Invalid character after parsing property name. Expected ':' but got: \". Path '', line 2, position 2."
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

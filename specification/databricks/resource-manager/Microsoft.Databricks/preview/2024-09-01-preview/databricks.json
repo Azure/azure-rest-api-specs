@@ -1,0 +1,1991 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureDatabricksManagementClient",
+    "version": "2024-09-01-preview",
+    "description": "These APIs allow end users to operate on Azure Databricks Workspace resources."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Get",
+        "description": "Gets the workspace.",
+        "x-ms-examples": {
+          "Get a workspace": {
+            "$ref": "./examples/WorkspaceGet.json"
+          },
+          "Get a workspace with custom parameters": {
+            "$ref": "./examples/WorkspaceGetParameters.json"
+          },
+          "Get a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
+            "$ref": "./examples/WorkspaceManagedDiskEncryptionGet.json"
+          },
+          "Get a workspace with Enhanced Security & Compliance Add-On": {
+            "$ref": "./examples/WorkspaceEnhancedSecurityComplianceGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the workspace.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Delete",
+        "description": "Deletes the workspace.",
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/WorkspaceDelete.json"
+          },
+          "Delete a workspace with forceDeletion parameter": {
+            "$ref": "./examples/WorkspaceDeleteForceDeletion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "forceDeletion",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "description": "Optional parameter to retain default unity catalog data. By default the data will retained if Uc is enabled on the workspace."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_CreateOrUpdate",
+        "description": "Creates a new workspace.",
+        "x-ms-examples": {
+          "Create or update workspace": {
+            "$ref": "./examples/WorkspaceCreate.json"
+          },
+          "Create or update workspace with custom parameters": {
+            "$ref": "./examples/WorkspaceCreateWithParameters.json"
+          },
+          "Create a workspace which is ready for Customer-Managed Key (CMK) encryption": {
+            "$ref": "./examples/PrepareEncryption.json"
+          },
+          "Enable Customer-Managed Key (CMK) encryption on a workspace which is prepared for encryption": {
+            "$ref": "./examples/EnableEncryption.json"
+          },
+          "Revert Customer-Managed Key (CMK) encryption to Microsoft Managed Keys encryption on a workspace": {
+            "$ref": "./examples/DisableEncryption.json"
+          },
+          "Create a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
+            "$ref": "./examples/WorkspaceManagedDiskEncryptionCreate.json"
+          },
+          "Update a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
+            "$ref": "./examples/WorkspaceManagedDiskEncryptionUpdate.json"
+          },
+          "Create or update a workspace with Enhanced Security & Compliance Add-On": {
+            "$ref": "./examples/WorkspaceEnhancedSecurityComplianceCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": "Parameters supplied to the create or update a workspace."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created - Returns information about the workspace, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the workspace, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Update",
+        "description": "Updates a workspace.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUpdate"
+            },
+            "description": "The update to the workspace."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the workspace.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a workspace's tags.": {
+            "$ref": "./examples/WorkspaceUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListByResourceGroup",
+        "description": "Gets all the workspaces within a resource group.",
+        "x-ms-examples": {
+          "Lists workspaces": {
+            "$ref": "./examples/WorkspacesListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of workspaces.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Databricks/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListBySubscription",
+        "description": "Gets all the workspaces within a subscription.",
+        "x-ms-examples": {
+          "Lists workspaces": {
+            "$ref": "./examples/WorkspacesListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of workspaces.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Databricks/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "x-ms-examples": {
+          "Operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "summary": "List private link resources",
+        "description": "List private link resources for a given workspace",
+        "operationId": "PrivateLinkResources_List",
+        "x-ms-examples": {
+          "List private link resources": {
+            "$ref": "./examples/ListPrivateLinkResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of private link resources",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesList"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/privateLinkResources/{groupId}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "summary": "Get the specified private link resource",
+        "description": "Get the specified private link resource for the given group id (sub-resource)",
+        "operationId": "PrivateLinkResources_Get",
+        "x-ms-examples": {
+          "Get a private link resource": {
+            "$ref": "./examples/PrivateLinkResourcesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the specified of private link resource",
+            "schema": {
+              "$ref": "#/definitions/GroupIdInformation"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "List private endpoint connections",
+        "description": "List private endpoint connections of the workspace",
+        "operationId": "PrivateEndpointConnections_List",
+        "x-ms-examples": {
+          "List private endpoint connections": {
+            "$ref": "./examples/ListPrivateEndpointConnections.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns list of private endpoint connections for a workspace",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionsList"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Get private endpoint connection",
+        "description": "Get a private endpoint connection properties for a workspace",
+        "operationId": "PrivateEndpointConnections_Get",
+        "x-ms-examples": {
+          "Get a private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnectionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the private endpoint connection properties of a workspace",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PUT",
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Update private endpoint connection status",
+        "description": "Update the status of a private endpoint connection with the specified name",
+        "operationId": "PrivateEndpointConnections_Create",
+        "x-ms-examples": {
+          "Update a private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnectionsUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The private endpoint connection with updated properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted - This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DELETE",
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Remove private endpoint connection",
+        "description": "Remove private endpoint connection with the specified name",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "x-ms-examples": {
+          "Remove a private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnectionsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation."
+          },
+          "200": {
+            "description": "OK - Returns the status of polling request for the delete operation."
+          },
+          "204": {
+            "description": "No Content - PrivateEndpoint does not exist."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "OutboundNetworkDependenciesEndpoints"
+        ],
+        "summary": "Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified Workspace.",
+        "description": "Gets the list of endpoints that VNET Injected Workspace calls Azure Databricks Control Plane. You must configure outbound access with these endpoints. For more information, see https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr",
+        "operationId": "OutboundNetworkDependenciesEndpoints_List",
+        "x-ms-examples": {
+          "List OutboundNetworkDependenciesEndpoints by Workspace": {
+            "$ref": "./examples/OutboundNetworkDependenciesEndpointsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains list of outbound network dependency endpoints",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Workspace": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "The workspace properties."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the resource."
+        },
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Information about workspace."
+    },
+    "WorkspaceProperties": {
+      "properties": {
+        "managedResourceGroupId": {
+          "type": "string",
+          "description": "The managed resource group Id."
+        },
+        "parameters": {
+          "$ref": "#/definitions/WorkspaceCustomParameters",
+          "description": "The workspace's custom parameters."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The workspace provisioning state."
+        },
+        "uiDefinitionUri": {
+          "type": "string",
+          "description": "The blob URI where the UI definition file is located."
+        },
+        "authorizations": {
+          "description": "The workspace provider authorizations.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/WorkspaceProviderAuthorization"
+          }
+        },
+        "createdBy": {
+          "description": "Indicates the Object ID, PUID and Application ID of entity that created the workspace.",
+          "$ref": "#/definitions/CreatedBy"
+        },
+        "updatedBy": {
+          "description": "Indicates the Object ID, PUID and Application ID of entity that last updated the workspace.",
+          "$ref": "#/definitions/CreatedBy"
+        },
+        "createdDateTime": {
+          "description": "Specifies the date and time when the workspace is created.",
+          "$ref": "#/definitions/CreatedDateTime"
+        },
+        "workspaceId": {
+          "readOnly": true,
+          "description": "The unique identifier of the databricks workspace in databricks control plane.",
+          "type": "string"
+        },
+        "workspaceUrl": {
+          "readOnly": true,
+          "description": "The workspace URL which is of the format 'adb-{workspaceId}.{random}.azuredatabricks.net'",
+          "type": "string"
+        },
+        "storageAccountIdentity": {
+          "description": "The details of Managed Identity of Storage Account",
+          "$ref": "#/definitions/ManagedIdentityConfiguration"
+        },
+        "managedDiskIdentity": {
+          "description": "The details of Managed Identity of Disk Encryption Set used for Managed Disk Encryption",
+          "$ref": "#/definitions/ManagedIdentityConfiguration"
+        },
+        "diskEncryptionSetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource Id of the managed disk encryption set."
+        },
+        "encryption": {
+          "type": "object",
+          "description": "Encryption properties for databricks workspace",
+          "properties": {
+            "entities": {
+              "$ref": "#/definitions/EncryptionEntitiesDefinition",
+              "description": "Encryption entities definition for the workspace."
+            }
+          },
+          "required": [
+            "entities"
+          ]
+        },
+        "enhancedSecurityCompliance": {
+          "description": "Contains settings related to the Enhanced Security and Compliance Add-On.",
+          "$ref": "#/definitions/EnhancedSecurityComplianceDefinition"
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "description": "Private endpoint connections created on the workspace",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "The network access type for accessing workspace. Set value to disabled to access workspace only via private link.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PublicNetworkAccess"
+          }
+        },
+        "requiredNsgRules": {
+          "type": "string",
+          "description": "Gets or sets a value indicating whether data plane (clusters) to control plane communication happen over private endpoint. Supported values are 'AllRules' and 'NoAzureDatabricksRules'. 'NoAzureServiceRules' value is for internal use only.",
+          "enum": [
+            "AllRules",
+            "NoAzureDatabricksRules",
+            "NoAzureServiceRules"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RequiredNsgRules"
+          }
+        },
+        "defaultCatalog": {
+          "description": "Properties for Default Catalog configuration during workspace creation.",
+          "$ref": "#/definitions/DefaultCatalogProperties"
+        },
+        "isUcEnabled": {
+          "readOnly": true,
+          "description": "Indicates whether unity catalog enabled for the workspace or not.",
+          "type": "boolean"
+        },
+        "accessConnector": {
+          "description": "Access Connector Resource that is going to be associated with Databricks Workspace",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "arm-id",
+              "description": "The resource ID of Azure Databricks Access Connector Resource.",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.Databricks/accessConnectors"
+                  }
+                ]
+              }
+            },
+            "identityType": {
+              "type": "string",
+              "description": "The identity type of the Access Connector Resource.",
+              "enum": [
+                "SystemAssigned",
+                "UserAssigned"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "IdentityType"
+              }
+            },
+            "userAssignedIdentityId": {
+              "type": "string",
+              "format": "arm-id",
+              "description": "The resource ID of the User Assigned Identity associated with the Access Connector Resource. This is required for type 'UserAssigned' and not valid for type 'SystemAssigned'.",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "id",
+            "identityType"
+          ]
+        },
+        "defaultStorageFirewall": {
+          "description": "Gets or Sets Default Storage Firewall configuration information",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "defaultStorageFirewall"
+          }
+        }
+      },
+      "required": [
+        "managedResourceGroupId"
+      ],
+      "description": "The workspace properties."
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "Resource": {
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The SKU name."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The SKU tier."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "SKU for the resource."
+    },
+    "ProvisioningState": {
+      "description": "Provisioning status of the workspace.",
+      "readOnly": true,
+      "enum": [
+        "Accepted",
+        "Running",
+        "Ready",
+        "Creating",
+        "Created",
+        "Deleting",
+        "Deleted",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "Updating"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PeeringProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PeeringProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ManagedIdentityConfiguration": {
+      "description": "The Managed Identity details for storage account.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The objectId of the Managed Identity that is linked to the Managed Storage account.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The tenant Id where the Managed Identity is created.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of Identity created. It can be either SystemAssigned or UserAssigned.",
+          "readOnly": true
+        }
+      }
+    },
+    "EnhancedSecurityComplianceDefinition": {
+      "type": "object",
+      "description": "Status of settings related to the Enhanced Security and Compliance Add-On.",
+      "properties": {
+        "automaticClusterUpdate": {
+          "type": "string",
+          "description": "Status of automated cluster updates feature.",
+          "$ref": "#/definitions/AutomaticClusterUpdateDefinition"
+        },
+        "complianceSecurityProfile": {
+          "type": "object",
+          "description": "Status of Compliance Security Profile feature.",
+          "$ref": "#/definitions/ComplianceSecurityProfileDefinition"
+        },
+        "enhancedSecurityMonitoring": {
+          "type": "object",
+          "description": "Status of Enhanced Security Monitoring feature.",
+          "$ref": "#/definitions/EnhancedSecurityMonitoringDefinition"
+        }
+      }
+    },
+    "AutomaticClusterUpdateDefinition": {
+      "type": "object",
+      "description": "Status of automated cluster updates feature.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AutomaticClusterUpdateValue"
+          }
+        }
+      }
+    },
+    "EnhancedSecurityMonitoringDefinition": {
+      "type": "object",
+      "description": "Status of Enhanced Security Monitoring feature.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EnhancedSecurityMonitoringValue"
+          }
+        }
+      }
+    },
+    "ComplianceSecurityProfileDefinition": {
+      "type": "object",
+      "description": "Status of Compliance Security Profile feature.",
+      "properties": {
+        "complianceStandards": {
+          "description": "Compliance standards associated with the workspace.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplianceStandardDefinition"
+          }
+        },
+        "value": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ComplianceSecurityProfileValue"
+          }
+        }
+      }
+    },
+    "ComplianceStandardDefinition": {
+      "description": "Compliance standard that can be associated with a workspace. CYBER_ESSENTIAL_PLUS is only available for UK region workspaces",
+      "type": "string",
+      "enum": [
+        "NONE",
+        "HIPAA",
+        "PCI_DSS",
+        "CYBER_ESSENTIAL_PLUS"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ComplianceStandard"
+      }
+    },
+    "WorkspaceCustomParameterType": {
+      "description": "Provisioning status of the workspace.",
+      "readOnly": true,
+      "enum": [
+        "Bool",
+        "Object",
+        "String"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CustomParameterType",
+        "modelAsString": true
+      }
+    },
+    "WorkspaceNoPublicIPBooleanParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "boolean",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "The value which should be used for this field."
+    },
+    "WorkspaceCustomBooleanParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "boolean",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The value which should be used for this field."
+    },
+    "WorkspaceCustomObjectParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "object",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The value which should be used for this field."
+    },
+    "WorkspaceCustomStringParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The Value."
+    },
+    "WorkspaceCustomParameters": {
+      "properties": {
+        "amlWorkspaceId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The ID of a Azure Machine Learning workspace to link with Databricks workspace"
+        },
+        "customVirtualNetworkId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The ID of a Virtual Network where this Databricks Cluster should be created"
+        },
+        "customPublicSubnetName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The name of a Public Subnet within the Virtual Network"
+        },
+        "customPrivateSubnetName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The name of the Private Subnet within the Virtual Network"
+        },
+        "enableNoPublicIp": {
+          "$ref": "#/definitions/WorkspaceNoPublicIPBooleanParameter",
+          "description": "Boolean indicating whether the public IP should be disabled. Default value is true"
+        },
+        "loadBalancerBackendPoolName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Name of the outbound Load Balancer Backend Pool for Secure Cluster Connectivity (No Public IP)."
+        },
+        "loadBalancerId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Resource URI of Outbound Load balancer for Secure Cluster Connectivity (No Public IP) workspace."
+        },
+        "natGatewayName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets."
+        },
+        "publicIpName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Name of the Public IP for No Public IP workspace with managed vNet."
+        },
+        "prepareEncryption": {
+          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
+          "description": "Prepare the workspace for encryption. Enables the Managed Identity for managed storage account."
+        },
+        "encryption": {
+          "$ref": "#/definitions/WorkspaceEncryptionParameter",
+          "description": "Contains the encryption details for Customer-Managed Key (CMK) enabled workspace."
+        },
+        "requireInfrastructureEncryption": {
+          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
+          "description": "A boolean indicating whether or not the DBFS root file system will be enabled with secondary layer of encryption with platform managed keys for data at rest."
+        },
+        "storageAccountName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Default DBFS storage account name."
+        },
+        "storageAccountSkuName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Storage account SKU name, ex: Standard_GRS, Standard_LRS. Refer https://aka.ms/storageskus for valid inputs."
+        },
+        "vnetAddressPrefix": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Address prefix for Managed virtual network. Default value for this input is 10.139."
+        },
+        "resourceTags": {
+          "$ref": "#/definitions/WorkspaceCustomObjectParameter",
+          "readOnly": true,
+          "description": "Tags applied to resources under Managed resource group. These can be updated by updating tags at workspace level."
+        }
+      },
+      "description": "Custom Parameters used for Cluster Creation."
+    },
+    "CreatedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time stamp when the workspace was created.",
+      "readOnly": true
+    },
+    "CreatedBy": {
+      "properties": {
+        "oid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The Object ID that created the workspace.",
+          "readOnly": true
+        },
+        "puid": {
+          "type": "string",
+          "description": "The Personal Object ID corresponding to the object ID above",
+          "readOnly": true
+        },
+        "applicationId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The application ID of the application that initiated the creation of the workspace. For example, Azure Portal.",
+          "readOnly": true
+        }
+      },
+      "description": "Provides details of the entity that created/updated the workspace."
+    },
+    "WorkspaceEncryptionParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "$ref": "#/definitions/Encryption",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "description": "The object that contains details of encryption used on the workspace."
+    },
+    "Encryption": {
+      "properties": {
+        "keySource": {
+          "type": "string",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Default, Microsoft.Keyvault",
+          "enum": [
+            "Default",
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "KeySource",
+            "modelAsString": true
+          },
+          "default": "Default"
+        },
+        "KeyName": {
+          "type": "string",
+          "description": "The name of KeyVault key."
+        },
+        "keyversion": {
+          "type": "string",
+          "description": "The version of KeyVault key.",
+          "x-ms-client-name": "KeyVersion"
+        },
+        "keyvaulturi": {
+          "type": "string",
+          "description": "The Uri of KeyVault.",
+          "x-ms-client-name": "KeyVaultUri"
+        }
+      },
+      "description": "The object that contains details of encryption used on the workspace."
+    },
+    "DefaultCatalogProperties": {
+      "type": "object",
+      "properties": {
+        "initialType": {
+          "type": "string",
+          "description": "Defines the initial type of the default catalog. Possible values (case-insensitive):  HiveMetastore, UnityCatalog",
+          "enum": [
+            "HiveMetastore",
+            "UnityCatalog"
+          ],
+          "x-ms-enum": {
+            "name": "initialType",
+            "modelAsString": true
+          },
+          "default": "HiveMetastore"
+        },
+        "initialName": {
+          "type": "string",
+          "description": "Specifies the initial Name of default catalog. If not specified, the name of the workspace will be used."
+        }
+      },
+      "description": "These properties lets user specify default catalog properties during workspace creation."
+    },
+    "EncryptionEntitiesDefinition": {
+      "properties": {
+        "managedServices": {
+          "type": "object",
+          "description": "Encryption properties for the databricks managed services.",
+          "$ref": "#/definitions/EncryptionV2"
+        },
+        "managedDisk": {
+          "type": "object",
+          "description": "Encryption properties for the databricks managed disks.",
+          "$ref": "#/definitions/ManagedDiskEncryption"
+        }
+      },
+      "description": "Encryption entities for databricks workspace resource."
+    },
+    "EncryptionV2": {
+      "properties": {
+        "keySource": {
+          "type": "string",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Keyvault",
+          "enum": [
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKeySource",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "properties": {
+            "keyVaultUri": {
+              "type": "string",
+              "description": "The Uri of KeyVault."
+            },
+            "keyName": {
+              "type": "string",
+              "description": "The name of KeyVault key."
+            },
+            "keyVersion": {
+              "type": "string",
+              "description": "The version of KeyVault key."
+            }
+          },
+          "required": [
+            "keyVaultUri",
+            "keyName",
+            "keyVersion"
+          ],
+          "description": "Key Vault input properties for encryption."
+        }
+      },
+      "required": [
+        "keySource"
+      ],
+      "description": "The object that contains details of encryption used on the workspace."
+    },
+    "ManagedDiskEncryption": {
+      "type": "object",
+      "properties": {
+        "keySource": {
+          "type": "string",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Keyvault",
+          "enum": [
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKeySource",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "type": "object",
+          "properties": {
+            "keyVaultUri": {
+              "type": "string",
+              "description": "The URI of KeyVault."
+            },
+            "keyName": {
+              "type": "string",
+              "description": "The name of KeyVault key."
+            },
+            "keyVersion": {
+              "type": "string",
+              "description": "The version of KeyVault key."
+            }
+          },
+          "required": [
+            "keyVaultUri",
+            "keyName",
+            "keyVersion"
+          ],
+          "description": "Key Vault input properties for encryption."
+        },
+        "rotationToLatestKeyVersionEnabled": {
+          "type": "boolean",
+          "description": "Indicate whether the latest key version should be automatically used for Managed Disk Encryption."
+        }
+      },
+      "required": [
+        "keySource",
+        "keyVaultProperties"
+      ],
+      "description": "The object that contains details of encryption used on the workspace."
+    },
+    "WorkspaceProviderAuthorization": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The provider's principal identifier. This is the identity that the provider will use to call ARM to manage the workspace resources."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The provider's role definition identifier. This role will define all the permissions that the provider must have on the workspace's container resource group. This role definition cannot have permission to delete the resource group."
+        }
+      },
+      "required": [
+        "principalId",
+        "roleDefinitionId"
+      ],
+      "description": "The workspace provider authorization."
+    },
+    "WorkspaceUpdate": {
+      "description": "An update to a workspace.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "title": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error's code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Indicates which property in the request is responsible for the error.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInfo": {
+      "title": "The code and message for an error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "A machine readable error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "innererror": {
+          "description": "Inner error details if they exist.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorResponse": {
+      "title": "Error response.",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "#/definitions/ErrorInfo"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "WorkspaceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          },
+          "description": "The array of workspaces."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of workspaces."
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: ex Microsoft.Databricks",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description for the resource operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Resource Provider operations supported by the Resource Provider resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "PrivateLinkResourcesList": {
+      "description": "The available private link resources for a workspace",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of available private link resources for a workspace",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupIdInformation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of private link resources."
+        }
+      }
+    },
+    "GroupIdInformation": {
+      "description": "The group information for creating a private endpoint on a workspace",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "properties": {
+          "description": "The group id properties.",
+          "type": "object",
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/GroupIdInformationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "GroupIdInformationProperties": {
+      "description": "The properties for a group information object",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The group id"
+        },
+        "requiredMembers": {
+          "description": "The required members for a specific group id",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "description": "The required DNS zones for a specific group id",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionsList": {
+      "description": "List of private link connections.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of returned private endpoint connection."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of endpoint connections."
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "The private endpoint connection of a workspace",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The private endpoint connection properties.",
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "The properties of a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "title": "Private endpoint",
+          "description": "Private endpoint",
+          "$ref": "#/definitions/PrivateEndpoint"
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "GroupIds from the private link service resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "privateLinkServiceConnectionState": {
+          "title": "Private link service service connection state",
+          "description": "Private endpoint connection state",
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "Provisioning state of the private endpoint connection."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
+    },
+    "PrivateEndpoint": {
+      "description": "The private endpoint property of a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "The current state of a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of a private endpoint connection",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The description for the current state of a private endpoint connection"
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "Actions required for a private endpoint connection"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "EndpointDependency": {
+      "description": "A domain name or IP address the Workspace is reaching at.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "The domain name of the dependency.",
+          "type": "string"
+        },
+        "endpointDetails": {
+          "description": "The Ports used when connecting to domainName.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          }
+        }
+      }
+    },
+    "EndpointDetail": {
+      "description": "Connect information from the Workspace to a single endpoint.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "An IP Address that Domain Name currently resolves to.",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "type": "integer"
+        },
+        "latency": {
+          "format": "double",
+          "description": "The time in milliseconds it takes for the connection to be created from the Workspace to this IpAddress at this Port.",
+          "type": "number"
+        },
+        "isAccessible": {
+          "description": "Whether it is possible to create a connection from the Workspace to this IpAddress at this Port.",
+          "type": "boolean"
+        }
+      }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "description": "Egress endpoints which Workspace connects to for common purposes.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The category of endpoints accessed by the Workspace, e.g. azure-storage, azure-mysql, etc.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The endpoints that Workspace connect to",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          }
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "description": "Collection of outbound network dependency endpoints",
+      "type": "array",
+      "x-ms-identifiers": [],
+      "items": {
+        "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+      }
+    }
+  },
+  "parameters": {
+    "WorkspaceName": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace.",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "PeeringNameParameter": {
+      "name": "peeringName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace vNet peering.",
+      "x-ms-parameter-location": "method"
+    },
+    "GroupId": {
+      "name": "groupId",
+      "in": "path",
+      "description": "The name of the private link resource",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "description": "The name of the private endpoint connection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

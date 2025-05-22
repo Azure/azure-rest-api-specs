@@ -1147,13 +1147,32 @@
     "Boundary": {
       "description": "`GeoJSON GeocodingFeature` object that describe the boundaries of a geographical area. Geometry of the feature is described with `GeoJSON GeometryCollection`.\n\nPlease note, the service typically returns a GeometryCollection with Polygon or MultiPolygon sub-types.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/GeoJsonFeature"
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of a feature must be Feature.",
+          "enum": [
+            "Feature"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureTypeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Feature"
+              }
+            ]
+          }
         },
-        {
+        "geometry": {
+          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/GeoJsonGeometryCollection"
+        },
+        "properties": {
           "$ref": "#/definitions/BoundaryProperties"
         }
+      },
+      "required": [
+        "geometry"
       ]
     },
     "BoundaryProperties": {

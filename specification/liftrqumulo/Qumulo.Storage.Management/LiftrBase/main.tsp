@@ -78,7 +78,7 @@ model MarketplaceDetails {
   /**
    * Marketplace subscription status
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 }
 
@@ -87,6 +87,7 @@ model UserDetails {
   /**
    * User Email
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
   @extension("x-ms-secret", true)
   email: string;
 }

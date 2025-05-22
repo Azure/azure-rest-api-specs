@@ -102,7 +102,7 @@
     "/styles/mapconfigurations": {
       "post": {
         "summary": "Use to create a map configuration.",
-        "description": "\n\nFor more information on what a map configuration is, see the [Creator for indoor maps](/azure/azure-maps/creator-indoor-maps#map-configuration) concepts article.\n\n### Submit Create Request \n\nThe Map Configuration `Create` API is an HTTP `POST` request used to create a new map configuration.",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator retirement**\n>\n> The Azure Maps Creator indoor map service is now deprecated and will be retired on 9/30/25. For more information, see [End of Life Announcement of Azure Maps Creator](https://aka.ms/AzureMapsCreatorDeprecation).\n\nFor more information on what a map configuration is, see the [Creator for indoor maps](/azure/azure-maps/creator-indoor-maps#map-configuration) concepts article.\n\n### Submit Create Request \n\nThe Map Configuration `Create` API is an HTTP `POST` request used to create a new map configuration.",
         "operationId": "MapConfiguration_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -151,7 +151,7 @@
       },
       "get": {
         "summary": "Use to get a list of all map configurations.",
-        "description": "\n\n### Submit List Request \n\nThe Map Configuration `List` API is an HTTP `GET` request used to get a list of all map configurations.\n\n",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator retirement**\n>\n> The Azure Maps Creator indoor map service is now deprecated and will be retired on 9/30/25. For more information, see [End of Life Announcement of Azure Maps Creator](https://aka.ms/AzureMapsCreatorDeprecation).\n\n### Submit List Request \n\nThe Map Configuration `List` API is an HTTP `GET` request used to get a list of all map configurations.\n\n",
         "operationId": "MapConfiguration_List",
         "x-ms-examples": {
           "Get a list of all map configurations": {
@@ -186,7 +186,7 @@
     "/styles/mapconfigurations/{mapConfigurationId}": {
       "get": {
         "summary": "Use to get a map configuration.",
-        "description": "\n\n### Submit Get Request \n\nThe Map Configuration `Get` API is an HTTP `GET` request used to get a map configuration. The response contains a zip file with the map configuration JSON and any image files it references. You can always get the default map configuration using predefined alias `defaultIndoor_{tilesetId}` for a given tileset if you deleted the auto-generated map configuration. The two predefined styles used in default map configuration are `microsoft-maps:indoor_2022-01-01` and `microsoft-maps:indoor_dark_2022-01-01`.\n\n",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator retirement**\n>\n> The Azure Maps Creator indoor map service is now deprecated and will be retired on 9/30/25. For more information, see [End of Life Announcement of Azure Maps Creator](https://aka.ms/AzureMapsCreatorDeprecation).\n\n### Submit Get Request \n\nThe Map Configuration `Get` API is an HTTP `GET` request used to get a map configuration. The response contains a zip file with the map configuration JSON and any image files it references. You can always get the default map configuration using predefined alias `defaultIndoor_{tilesetId}` for a given tileset if you deleted the auto-generated map configuration. The two predefined styles used in default map configuration are `microsoft-maps:indoor_2022-01-01` and `microsoft-maps:indoor_dark_2022-01-01`.\n\n",
         "operationId": "MapConfiguration_Get",
         "x-ms-examples": {
           "Gets the details for a single map configuration": {
@@ -229,7 +229,7 @@
       },
       "delete": {
         "summary": "Use to delete a map configuration.",
-        "description": "\n\nThe Map Configuration `Delete` API is an HTTP `DELETE` request used to delete a map configuration. For more information on what a map configuration is, see the [Creator for indoor maps](/azure/azure-maps/creator-indoor-maps#map-configuration) concepts article.\n\n### Submit Delete Request\n\nAn `HTTP DELETE` request with the `mapConfigurationId` in the path of the request is required to remove an existing map configuration from your Azure Maps account.<br>    \n\n#### Delete request \"Successful\"\n\nThe Map Configuration Delete API returns a HTTP `204 No Content` response with an empty body, if the map configuration was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the map configuration with the passed-in `mapConfigurationId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - MapConfiguration Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator retirement**\n>\n> The Azure Maps Creator indoor map service is now deprecated and will be retired on 9/30/25. For more information, see [End of Life Announcement of Azure Maps Creator](https://aka.ms/AzureMapsCreatorDeprecation).\n\nThe Map Configuration `Delete` API is an HTTP `DELETE` request used to delete a map configuration. For more information on what a map configuration is, see the [Creator for indoor maps](/azure/azure-maps/creator-indoor-maps#map-configuration) concepts article.\n\n### Submit Delete Request\n\nAn `HTTP DELETE` request with the `mapConfigurationId` in the path of the request is required to remove an existing map configuration from your Azure Maps account.<br>    \n\n#### Delete request \"Successful\"\n\nThe Map Configuration Delete API returns a HTTP `204 No Content` response with an empty body, if the map configuration was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the map configuration with the passed-in `mapConfigurationId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - MapConfiguration Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
         "operationId": "MapConfiguration_Delete",
         "x-ms-examples": {
           "Delete a created map configuration": {
@@ -260,7 +260,7 @@
     "/styles/mapconfigurations/operations/{operationId}": {
       "get": {
         "summary": "Use to check the status of the map configuration creation process.",
-        "description": "\n\nThe `Get Operation` API is an HTTP `GET` request used to check the status of the map configuration creation process.\n\n### Submit Operations Request\n\nTo view the current progress of a map configuration operation, you will use a `GET` request where the `operationId` given the path is the ID that represents the operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code is returned with no extra headers. If the operation succeeds, a `200-OK` http status code is returned with the `Resource-Location` in the header.",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator retirement**\n>\n> The Azure Maps Creator indoor map service is now deprecated and will be retired on 9/30/25. For more information, see [End of Life Announcement of Azure Maps Creator](https://aka.ms/AzureMapsCreatorDeprecation).\n\nThe `Get Operation` API is an HTTP `GET` request used to check the status of the map configuration creation process.\n\n### Submit Operations Request\n\nTo view the current progress of a map configuration operation, you will use a `GET` request where the `operationId` given the path is the ID that represents the operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code is returned with no extra headers. If the operation succeeds, a `200-OK` http status code is returned with the `Resource-Location` in the header.",
         "operationId": "MapConfiguration_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {

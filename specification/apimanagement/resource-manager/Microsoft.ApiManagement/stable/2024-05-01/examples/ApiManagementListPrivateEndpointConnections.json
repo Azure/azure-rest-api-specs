@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/connectionName",
+            "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
+            "name": "privateEndpointProxyName",
+            "properties": {
+              "provisioningState": "Pending",
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Pending",
+                "description": "Please approve my request, thanks",
+                "actionsRequired": "None"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/privateEndpointProxyName2",
+            "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
+            "name": "privateEndpointProxyName2",
+            "properties": {
+              "provisioningState": "Pending",
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName2"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Pending",
+                "description": "Please approve my request, thanks",
+                "actionsRequired": "None"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2024-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "gatewayName": "gateway1",
+    "connectionName": "vpnConnection1",
+    "linkConnectionName": "Connection-Link1",
+    "ConnectionSharedKeyParameters": {
+      "properties": {
+        "sharedKey": "ABCDEF123456"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/vpnLinkConnections/Connection-Link1/sharedKeys/default",
+        "type": "Microsoft.Network/vpnGateways/vpnConnections/vpnLinkConnections/sharedKeys",
+        "properties": {
+          "sharedKeyLength": 12
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/vpnLinkConnections/Connection-Link1/sharedKeys/default",
+        "type": "Microsoft.Network/vpnGateways/vpnConnections/vpnLinkConnections/sharedKeys",
+        "properties": {
+          "sharedKeyLength": 12
+        }
+      }
+    }
+  }
+}

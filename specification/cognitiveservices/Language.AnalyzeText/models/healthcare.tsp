@@ -12,16 +12,16 @@ model HealthcareTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_01)
   fhirVersion?: fhirVersion;
 
   /** Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_01)
   documentType?: healthcareDocumentType;
 }
 
 /** The FHIR Spec version. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_01)
 union fhirVersion {
   string,
 
@@ -30,7 +30,7 @@ union fhirVersion {
 }
 
 /** Document type. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_01)
 union healthcareDocumentType {
   string,
 
@@ -76,23 +76,23 @@ model HealthcareLROTask extends AnalyzeTextLROTask {
 model HealthcareResult is PreBuiltResult {
   /** List of result objects for the processed Healthcare documents. */
   @typeChangedFrom(
-    Versions.v2023_11_15_preview,
-    Array<HealthcareEntitiesDocumentResult>
+    Versions.v2024_11_15_preview,
+    HealthcareEntitiesDocumentResult[]
   )
-  documents: Array<HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
+  documents: HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage[];
 }
 
 /** Result object for the processed Healthcare document. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model HealthcareEntitiesDocumentResult is DocumentResult {
   /** Healthcare entities. */
-  entities: Array<HealthcareEntity>;
+  entities: HealthcareEntity[];
 
   /** Healthcare entity relations. */
-  relations: Array<HealthcareRelation>;
+  relations: HealthcareRelation[];
 
   /** JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_01)
   fhirBundle?: FhirBundle;
 }
 
@@ -127,7 +127,7 @@ model HealthcareEntity {
   name?: string;
 
   /** Entity references in known data sources. */
-  links?: Array<HealthcareEntityLink>;
+  links?: HealthcareEntityLink[];
 }
 
 /** Healthcare Entity Category. */
@@ -259,7 +259,7 @@ model HealthcareRelation {
   relationType: relationType;
 
   /** The entities in the relation. */
-  entities: Array<HealthcareRelationEntity>;
+  entities: HealthcareRelationEntity[];
 
   /** Confidence score between 0 and 1 of the extracted relation. */
   @added(Versions.v2023_04_01)
@@ -402,13 +402,13 @@ model HealthcareAssertion {
   association?: Association;
 
   /** Describes temporal information regarding the entity. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_01)
   temporality?: Temporality;
 }
 
 /** Describes temporal information regarding the entity. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_01)
 union Temporality {
   /** Current temporality */
   current: "current",
@@ -488,7 +488,7 @@ model HealthcareLROResult extends AnalyzeTextLROResult {
 }
 
 /** Result object for the processed Healthcare document with detected language. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
   is HealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;

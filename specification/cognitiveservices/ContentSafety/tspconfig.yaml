@@ -12,14 +12,15 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/contentsafety.json"
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
-    examples-directory: ./examples
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-contentsafety"
     package-version: "1.0.0"
-    package-name: "{package-dir}"
+    namespace: "azure.ai.contentsafety"
     package-pprint-name: '"Azure AI Content Safety"'
     flavor: azure
+    generate-test: true
+    generate-sample: true
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.ContentSafety"
     namespace: "{package-dir}"
@@ -28,7 +29,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "ai-content-safety-rest"
-    packageDetails:
+    package-details:
       name: "@azure-rest/ai-content-safety"
       version: "1.0.0"
       description: "ContentSafety Service"
@@ -36,7 +37,6 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-contentsafety"
     namespace: com.azure.ai.contentsafety
-    examples-directory: "{project-root}/examples"
     partial-update: true
     flavor: azure
     api-version: "2023-10-01"
