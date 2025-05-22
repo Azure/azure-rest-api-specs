@@ -272,7 +272,7 @@ union AccessKeyPermissions {
 model CustomPage<Resource extends TypeSpec.Reflection.Model> {
   @doc("The {name} items on this page", Resource)
   @Azure.Core.items
-  value: Resource[];
+  value?: Resource[];
 
   @doc("The link to the next page of items")
   @nextLink
@@ -1157,7 +1157,7 @@ model DatabaseAadAuthInfo {
   /**
    * Username created in the database which is mapped to a user in AAD.
    */
-  userName?: string;
+  userName?: string | null;
 }
 
 /**
