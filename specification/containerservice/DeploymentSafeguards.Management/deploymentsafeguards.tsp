@@ -52,7 +52,7 @@ model DeploymentSafeguardsProperties {
   level: DeploymentSafeguardsLevel;
 
   @doc("User defined list of namespaces to exclude from Deployment Safeguards. Deployments in these namespaces will not be checked against any safeguards")
-  excludedNamespaces: Array<string>;
+  excludedNamespaces?: Array<string>;
 
   @doc("System defined list of namespaces excluded from Deployment Safeguards. These are determined by the underlying provider (such as AKS), and cannot be changed. Deployments in these namespaces will not be checked")
   @visibility(Lifecycle.Read)
