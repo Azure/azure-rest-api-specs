@@ -1,3 +1,4 @@
+import "./Microsoft.ApiManagement/ApiManagement.tsp";
 import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
@@ -130,6 +131,32 @@ using Microsoft.EventGrid.SystemEvents;
 );
 @@clientName(AcsChatMessageEventInThreadBaseProperties,
   "AcsChatMessageEventInThreadBase",
+  "javascript"
+);
+@@clientName(AcsCallingEventProperties, "AcsCallingEvent", "javascript");
+@@clientName(AcsCallParticipantEventProperties,
+  "AcsCallParticipantEvent",
+  "javascript"
+);
+@@clientName(AcsCallParticipantProperties, "AcsCallParticipant", "javascript");
+@@clientName(AcsCallGroupProperties, "AcsCallGroup", "javascript");
+@@clientName(AcsCallRoomProperties, "AcsCallRoom", "javascript");
+@@clientName(AcsCallEndedByProperties, "AcsCallEndedBy", "javascript");
+@@clientName(AcsCallEndReasonProperties, "AcsCallEndReason", "javascript");
+@@clientName(ApiManagementCircuitBreakerProperties,
+  "ApiManagementCircuitBreaker",
+  "javascript"
+);
+@@clientName(ApiManagementGatewayProperties,
+  "ApiManagementGateway",
+  "javascript"
+);
+@@clientName(ApiManagementNearExpiryGatewayTokenProperties,
+  "ApiManagementNearExpiryGatewayToken",
+  "javascript"
+);
+@@clientName(ApiManagementExpiredGatewayTokenProperties,
+  "ApiManagementExpiredGatewayToken",
   "javascript"
 );
 @@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
