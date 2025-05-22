@@ -1,0 +1,447 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-04-01",
+    "title": "StorageManagementClient",
+    "description": "The Azure Storage Management API."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "StorageAccounts NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_List",
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurationList": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationList.json"
+          }
+        },
+        "description": "Gets list of effective NetworkSecurityPerimeterConfiguration for storage account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./storage.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Security Perimeter Configuration List",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "tags": [
+          "StorageAccounts NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurationGet": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationGet.json"
+          }
+        },
+        "description": "Gets effective NetworkSecurityPerimeterConfiguration for association",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./storage.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Security Perimeter Configuration",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+      "post": {
+        "tags": [
+          "StorageAccounts NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+        "description": "Refreshes any information about the association.",
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurationReconcile": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationReconcile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./storage.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request to reconcile the association accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "The Network Security Perimeter configuration resource.",
+      "type": "object",
+      "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Properties of the Network Security Perimeter Configuration",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationList": {
+      "description": "Result of the List Network Security Perimeter configuration operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of Network Security Perimeter configurations",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "Properties of the Network Security Perimeter Configuration",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of Network Security Perimeter configuration propagation",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningIssues": {
+          "description": "List of Provisioning Issues if any",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ProvisioningIssue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter",
+          "readOnly": true
+        },
+        "resourceAssociation": {
+          "description": "Information about resource association",
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Name of the resource association",
+              "type": "string"
+            },
+            "accessMode": {
+              "description": "Access Mode of the resource association",
+              "enum": [
+                "Enforced",
+                "Learning",
+                "Audit"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ResourceAssociationAccessMode",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "profile": {
+          "description": "Network Security Perimeter profile",
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Name of the resource",
+              "type": "string"
+            },
+            "accessRulesVersion": {
+              "description": "Current access rules version",
+              "type": "number"
+            },
+            "accessRules": {
+              "description": "List of Access Rules",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NspAccessRule"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "diagnosticSettingsVersion": {
+              "description": "Diagnostic settings version",
+              "type": "number"
+            },
+            "enabledLogCategories": {
+              "description": "Enabled logging categories",
+              "type": "array",
+              "items": {
+                "description": "Logging category",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ProvisioningIssue": {
+      "description": "Describes provisioning issue for given NetworkSecurityPerimeterConfiguration",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Name of the issue",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of provisioning issue",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "issueType": {
+              "description": "Type of issue",
+              "enum": [
+                "Unknown",
+                "ConfigurationPropagationFailure"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "IssueType",
+                "modelAsString": true
+              }
+            },
+            "severity": {
+              "description": "Severity of the issue.",
+              "enum": [
+                "Warning",
+                "Error"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "Severity",
+                "modelAsString": true
+              }
+            },
+            "description": {
+              "description": "Description of the issue",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "NspAccessRule": {
+      "description": "Information of Access Rule in Network Security Perimeter profile",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of Access Rule",
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "direction": {
+              "description": "Direction of Access Rule",
+              "enum": [
+                "Inbound",
+                "Outbound"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "NspAccessRuleDirection",
+                "modelAsString": true
+              }
+            },
+            "addressPrefixes": {
+              "description": "Address prefixes in the CIDR format for inbound rules",
+              "type": "array",
+              "items": {
+                "description": "IP Address",
+                "type": "string"
+              }
+            },
+            "subscriptions": {
+              "description": "Subscriptions for inbound rules",
+              "type": "array",
+              "items": {
+                "description": "Subscription for inbound rule",
+                "type": "object",
+                "readOnly": true,
+                "properties": {
+                  "id": {
+                    "description": "The ARM identifier of subscription",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "networkSecurityPerimeters": {
+              "description": "NetworkSecurityPerimeters for inbound rules",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/NetworkSecurityPerimeter"
+              }
+            },
+            "fullyQualifiedDomainNames": {
+              "description": "FQDN for outbound rules",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "description": "Fully qualified domain name",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeter": {
+      "description": "NetworkSecurityPerimeter related information",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "description": "The ARM identifier of the resource",
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "description": "Guid of the resource",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "networkSecurityPerimeterConfigurationName": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "description": "The name for Network Security Perimeter configuration",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2024-05-01-preview",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
+    "zones": [
+      "1"
+    ],
+    "containerGroup": {
+      "location": "west us",
+      "properties": {
+        "containers": [
+          {
+            "name": "demo1",
+            "properties": {
+              "configMap": {
+                "keyValuePairs": {
+                  "Newkey": "value"
+                }
+              }
+            }
+          }
+        ],
+        "containerGroupProfile": {
+          "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/democgp",
+          "revision": 1
+        },
+        "standbyPoolProfile": {
+          "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.StandbyPool/standbyContainerGroupPools/demopool"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "isCreatedFromStandbyPool": true,
+          "provisioningState": "Succeeded",
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "image": "nginx",
+                "configMap": {
+                  "keyValuePairs": {
+                    "Newkey": "value"
+                  }
+                },
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
+                  }
+                }
+              }
+            }
+          ],
+          "initContainers": [],
+          "imageRegistryCredentials": [],
+          "containerGroupProfile": {
+            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/democgp",
+            "revision": 1
+          },
+          "osType": "Linux",
+          "instanceView": {
+            "events": [],
+            "state": "Running"
+          }
+        },
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus2"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "isCreatedFromStandbyPool": true,
+          "provisioningState": "Succeeded",
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "image": "nginx",
+                "configMap": {
+                  "keyValuePairs": {
+                    "Newkey": "value"
+                  }
+                },
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
+                  }
+                }
+              }
+            }
+          ],
+          "initContainers": [],
+          "imageRegistryCredentials": [],
+          "containerGroupProfile": {
+            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/democgp",
+            "revision": 1
+          },
+          "osType": "Linux",
+          "instanceView": {
+            "events": [],
+            "state": "Running"
+          }
+        },
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus2"
+      }
+    }
+  }
+}

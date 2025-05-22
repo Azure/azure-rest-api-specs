@@ -25,6 +25,16 @@ directive:
     return {
             "$ref": "commonDefinitions.json#/definitions/SkuInfo"
           }
+- rename-model:
+    from: DevCenterProjectCatalogSettings
+    to: ProjectCatalogSettingsInfo
+- from: devcenter.json
+  where: "$.definitions.DevCenterUpdateProperties.properties.projectCatalogSettings"
+  transform: >-
+    return {
+           "$ref": "#/definitions/ProjectCatalogSettingsInfo",
+           "description": "Dev Center settings to be used when associating a project with a catalog."
+          }
 ```
 
 ### Go multi-api

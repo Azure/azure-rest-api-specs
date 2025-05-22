@@ -1,0 +1,35 @@
+{
+  "title": "Updates a queue",
+  "operationId": "JobRouterAdministrationOperations_UpsertQueue",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "queueId": "MainQueue",
+    "resource": {
+      "distributionPolicyId": "MainDistributionPolicy",
+      "name": "Main"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "MainQueue",
+        "name": "Main",
+        "distributionPolicyId": "MainDistributionPolicy",
+        "labels": {},
+        "exceptionPolicyId": "MainExceptionPolicy",
+        "etag": "etag"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "MainQueue",
+        "name": "Main",
+        "distributionPolicyId": "MainDistributionPolicy",
+        "labels": {},
+        "exceptionPolicyId": "MainExceptionPolicy",
+        "etag": "etag"
+      }
+    }
+  }
+}

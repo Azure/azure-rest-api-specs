@@ -1,0 +1,279 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Metric Batch",
+    "version": "2024-02-01"
+  },
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "flow": "application",
+      "description": "Azure Active Directory OAuth2 Authentication",
+      "scopes": {
+        "https://metrics.monitor.azure.com/.default": "https://metrics.monitor.azure.com/.default"
+      }
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://metrics.monitor.azure.com/.default"
+      ]
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "endpoint",
+        "description": "The regional endpoint to use, for example https://eastus.metrics.monitor.azure.com. The region should match the region of the requested resources. For global resources, the region should be 'global'.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "format": "url",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/metrics:getBatch": {
+      "post": {
+        "tags": [
+          "Metrics"
+        ],
+        "operationId": "MetricsBatch_Batch",
+        "description": "Lists the metric values for multiple resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeParameter"
+          },
+          {
+            "$ref": "#/parameters/IntervalParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamesParameter"
+          },
+          {
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/parameters/AggregationsParameter"
+          },
+          {
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/parameters/RollUpByParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "batchRequest",
+            "in": "body",
+            "required": true,
+            "description": "Metrics batch body including the list of resource ids",
+            "schema": {
+              "$ref": "#/definitions/ResourceIdList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response to a metrics query.",
+            "schema": {
+              "$ref": "#/definitions/MetricResultsResponse"
+            }
+          },
+          "default": {
+            "description": "Describes the format of Error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query Storage Metrics": {
+            "$ref": "./examples/MetricBatchExample.json"
+          },
+          "Query Redis Metrics summary": {
+            "$ref": "./examples/MetricBatchExample2.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "description": "The subscription identifier for the resources in this batch.",
+      "x-ms-parameter-location": "method"
+    },
+    "StartTimeParameter": {
+      "name": "starttime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The start time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'. If you have specified the endtime parameter, then this parameter is required.\nIf only starttime is specified, then endtime defaults to the current time.\nIf no time interval is specified, the default is 1 hour.",
+      "x-ms-parameter-location": "method"
+    },
+    "EndTimeParameter": {
+      "name": "endtime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The end time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'.",
+      "x-ms-parameter-location": "method"
+    },
+    "IntervalParameter": {
+      "name": "interval",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "default": "PT1M",
+      "description": "The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.\n*Examples: PT15M, PT1H, P1D, FULL*",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricNamespaceParameter": {
+      "name": "metricnamespace",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Metric namespace that contains the requested metric names.",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricNamesParameter": {
+      "name": "metricnames",
+      "in": "query",
+      "required": true,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "description": "The names of the metrics (comma separated) to retrieve.",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "definitions": {
+    "ResourceIdList": {
+      "description": "The comma separated list of resource IDs to query metrics for.",
+      "type": "object",
+      "properties": {
+        "resourceids": {
+          "description": "The list of resource IDs to query metrics for.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id"
+          }
+        }
+      },
+      "example": {
+        "resourceids": [
+          "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage1",
+          "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2"
+        ]
+      }
+    },
+    "MetricResultsResponse": {
+      "description": "The metrics result for a resource.",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "The collection of metric data responses per resource, per metric.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "starttime": {
+                "type": "string",
+                "description": "The start time, in datetime format, for which the data was retrieved."
+              },
+              "endtime": {
+                "type": "string",
+                "description": "The end time, in datetime format, for which the data was retrieved."
+              },
+              "interval": {
+                "type": "string",
+                "description": "The interval (window size) for which the metric data was returned in ISO 8601 duration format with a special case for 'FULL' value that returns single datapoint for entire time span requested (*Examples: PT15M, PT1H, P1D, FULL*). \nThis may be adjusted and different from what was originally requested if AutoAdjustTimegrain=true is specified."
+              },
+              "namespace": {
+                "type": "string",
+                "description": "The namespace of the metrics been queried"
+              },
+              "resourceregion": {
+                "type": "string",
+                "description": "The region of the resource been queried for metrics."
+              },
+              "resourceid": {
+                "type": "string",
+                "description": "The resource that has been queried for metrics."
+              },
+              "value": {
+                "type": "array",
+                "items": {
+                  "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/Metric"
+                },
+                "description": "The value of the collection."
+              }
+            },
+            "required": [
+              "starttime",
+              "endtime",
+              "value"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

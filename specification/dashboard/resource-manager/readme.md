@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for Dashboard.
 
 ---
+
 ## Getting Started
+
 To build the SDK for Dashboard, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,17 +17,29 @@ To see additional help and options, run:
 > `autorest --help`
 
 ---
+
 ## Configuration
+
 ### Basic Information
+
 These are the global settings for the Dashboard API.
 
-```yaml
+``` yaml
 title: DashboardManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-10-01-preview
+tag: package-2023-09-01
 ```
 
+
+### Tag: package-2023-09-01
+
+These settings apply only when `--tag=package-2023-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09-01'
+input-file:
+  - Microsoft.Dashboard/stable/2023-09-01/grafana.json
+```
 ### Tag: package-2022-10-01-preview
 
 These settings apply only when `--tag=package-2022-10-01-preview` is specified on the command line.
@@ -39,7 +53,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-08-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-08-01'
+``` yaml $(tag) == 'package-2022-08-01'
 input-file:
   - Microsoft.Dashboard/stable/2022-08-01/grafana.json
 ```
@@ -72,7 +86,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
   - repo: azure-sdk-for-js

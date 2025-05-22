@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-07-01",
+    "parameters": {
+      "operation": "Replace",
+      "properties": {
+        "tags": {
+          "tagKey1": "tag-value-1",
+          "tagKey2": "tag-value-2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/00000000-0000-0000-0000-000000000000",
+        "properties": {
+          "tags": {
+            "tagKey1": "tag-value-1",
+            "tagKey2": "tag-value-2"
+          }
+        }
+      }
+    },
+    "202": {
+      "description": "Accepted",
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/operationresults/c9bbccf4-e16a-4eb7-befb-2e2e5195c347?api-version=2018-08-01"
+      }
+    }
+  }
+}

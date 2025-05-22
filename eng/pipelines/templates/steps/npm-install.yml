@@ -1,4 +1,13 @@
+parameters:
+- name: NodeVersion
+  type: string
+  default: 20.x
 steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: ${{ parameters.NodeVersion }}
+    displayName: "Use Node ${{ parameters.NodeVersion }}"
+
   - script: npm --version --loglevel info
     displayName: npm --version
 
@@ -8,3 +17,4 @@ steps:
   - script: npm ls -a
     displayName: npm ls -a
     condition: succeededOrFailed()
+    continueOnError: true

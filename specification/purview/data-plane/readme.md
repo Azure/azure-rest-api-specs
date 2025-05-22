@@ -26,18 +26,36 @@ These are the global settings for the Azure Purview Catalog API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2023-09
+tag: package-preview-2024-03
 ```
 
+
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Azure.Analytics.Purview.DataMap/preview/2024-03-01-preview/purviewdatamap.json
+```
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Azure.Analytics.Purview.DataMap/preview/2023-10-01-preview/purviewdatamap.json
+```
 
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-09'
+``` yaml $(tag) == 'package-2023-09'
 input-file:
   - Azure.Analytics.Purview.DataMap/stable/2023-09-01/purviewdatamap.json
 ```
+
 ### Tag: package-preview-2023-02
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
@@ -98,6 +116,15 @@ These are the global settings for the Purview Scanning API.
 openapi-type: data-plane
 tag: package-2018-12-01-preview
 title: PurviewScanningClient
+```
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09-01'
+input-file:
+  - Azure.Analytics.Purview.Scanning/stable/2023-09-01/scanningService.json
 ```
 
 ### Tag: package-2022-07-01-preview
@@ -276,6 +303,19 @@ clear-output-folder: true
 See configuration in [readme.python.md](./readme.python.md)
 
 ## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAnonymousParameter
+    from: purviewdatamap.json
+    reason: This rule is irrelevant for data-plane TypeSpec specs.
+  - suppress: AvoidAnonymousTypes
+    from: purviewdatamap.json
+    reason: This rule is irrelevant for data-plane TypeSpec specs.
+  - suppress: IntegerTypeMustHaveFormat
+    from: purviewdatamap.json
+    reason: This rule is irrelevant for SDKs generated directly by TypeSpec.
+```
 
 ``` yaml
 directive:

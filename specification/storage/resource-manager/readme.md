@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Storage.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Storage, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,58 @@ To build the SDK for Storage, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-01
+tag: package-2023-05
+```
+
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.Storage/stable/2023-05-01/blob.json
+  - Microsoft.Storage/stable/2023-05-01/common.json
+  - Microsoft.Storage/stable/2023-05-01/file.json
+  - Microsoft.Storage/stable/2023-05-01/privatelinks.json
+  - Microsoft.Storage/stable/2023-05-01/queue.json
+  - Microsoft.Storage/stable/2023-05-01/storage.json
+  - Microsoft.Storage/stable/2023-05-01/table.json
+  - Microsoft.Storage/stable/2023-05-01/networkSecurityPerimeter.json
+  - Microsoft.Storage/stable/2023-05-01/storageTaskAssignments.json
+
+directive:
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].put
+    suppress: PutResponseCodes
+    reason: This is an existing RP which has the same pattern, 202 response code for async PUT, in stable API version
+    approved-by: "@ramoka178"
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.Storage/stable/2023-04-01/blob.json
+  - Microsoft.Storage/stable/2023-04-01/common.json
+  - Microsoft.Storage/stable/2023-04-01/file.json
+  - Microsoft.Storage/stable/2023-04-01/privatelinks.json
+  - Microsoft.Storage/stable/2023-04-01/queue.json
+  - Microsoft.Storage/stable/2023-04-01/storage.json
+  - Microsoft.Storage/stable/2023-04-01/table.json
+  - Microsoft.Storage/stable/2023-04-01/networkSecurityPerimeter.json
 ```
 ### Tag: package-2023-01
 
@@ -734,7 +774,6 @@ input-file:
 - Microsoft.Storage/stable/2017-06-01/storage.json
 ```
 
-
 ### Tag: package-2016-12
 
 These settings apply only when `--tag=package-2016-12` is specified on the command line.
@@ -791,8 +830,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -802,7 +841,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -817,6 +856,3 @@ swagger-to-sdk:
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
-

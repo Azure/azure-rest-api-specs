@@ -20,7 +20,26 @@ batch:
   - tag: package-migrateengine-2022-05
 ```
 
+### Tag: package-migrate-2023-04
 
+These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-migrate-2023-04'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
+```
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.OffAzure/preview/2023-10-01-preview/migrate.json
+```
 ### Tag: package-2023-06
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
@@ -29,6 +48,25 @@ These settings apply only when `--tag=package-2023-06` is specified on the comma
 input-file:
   - Microsoft.OffAzure/stable/2023-06-06/migrate.json
 ```
+
+### Tag: package-migrate-2023-03
+
+These settings apply only when `--tag=package-migrate-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-migrate-2023-03'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/stable/2023-03-15/migrate.json
+```
+
+### Tag: package-migrate-2023-04
+
+These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-migrate-2023-04'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
+```
+
 ### Tag: package-migrate-2018-02 and java
 
 These settings apply only when `--tag=package-migrate-2018-02 --java` is specified on the command line.
@@ -153,7 +191,34 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-migrate-2019-10
+tag: package-preview-2023-10
+```
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.OffAzure/preview/2023-10-01-preview/migrate.json
+```
+
+### Tag: package-migrate-2023-03
+
+These settings apply only when `--tag=package-migrate-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-migrate-2023-03'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/stable/2023-03-15/migrate.json
+```
+
+### Tag: package-migrate-2023-04
+
+These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-migrate-2023-04'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
 ```
 
 ### Tag: package-migrate-2018-02
@@ -253,6 +318,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
@@ -262,3 +328,7 @@ swagger-to-sdk:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)

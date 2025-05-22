@@ -12,6 +12,7 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2023-05
   - tag: package-2023-01
   - tag: package-2022-09
   - tag: package-2022-05
@@ -26,6 +27,16 @@ batch:
   - tag: package-2016-01
   - tag: package-2015-06
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2023-05 and ruby
+
+These settings apply only when `--tag=package-2023-05 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2023-05' && $(ruby)
+namespace: "Azure::Storage::Mgmt::V2023-05"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
 
 ### Tag: package-2023-01 and ruby

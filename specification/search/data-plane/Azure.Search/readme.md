@@ -26,7 +26,7 @@ These are the global settings for SearchServiceClient and SearchIndexClient.
 title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
-tag: package-2023-10-01-preview
+tag: package-2024-09-01-preview
 
 directive:
   - where:
@@ -130,10 +130,6 @@ directive:
     suppress:
       - RequiredReadOnlyProperties
   - where:
-      -  $.definitions.SearchError.properties.message
-    suppress:
-      - RequiredReadOnlyProperties
-  - where:
       -  $.definitions.SearchIndexerError.properties.errorMessage
     suppress:
       - RequiredReadOnlyProperties
@@ -169,6 +165,118 @@ directive:
       -  $.definitions.SuggestResult.properties["@search.text"]
     suppress:
       - RequiredReadOnlyProperties
+```
+
+### Tag: package-2024-09-01-preview
+
+These settings apply only when `--tag=package-2024-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09-01-preview'
+input-file:
+- preview/2024-09-01-preview/searchservice.json
+- preview/2024-09-01-preview/searchindex.json
+```
+
+### Tag: package-2024-09-searchservice-preview
+
+These settings apply only when `--tag=package-2024-09-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09-searchservice-preview'
+input-file:
+- preview/2024-09-01-preview/searchservice.json
+```
+
+### Tag: package-2024-09-searchindex-preview
+
+These settings apply only when `--tag=package-2024-09-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09-searchindex-preview'
+input-file:
+- preview/2024-09-01-preview/searchindex.json
+```
+
+### Tag: package-2024-07-01
+
+These settings apply only when `--tag=package-2024-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-07-01'
+input-file:
+- stable/2024-07-01/searchservice.json
+- stable/2024-07-01/searchindex.json
+```
+
+### Tag: package-2024-07-searchservice
+
+These settings apply only when `--tag=package-2024-07-searchservice` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-07-searchservice'
+input-file:
+- stable/2024-07-01/searchservice.json
+```
+
+### Tag: package-2024-07-searchindex
+
+These settings apply only when `--tag=package-2024-07-searchindex` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-07-searchindex'
+input-file:
+- stable/2024-07-01/searchindex.json
+```
+
+### Tag: package-2024-05-01-preview
+
+These settings apply only when `--tag=package-2024-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-05-01-preview'
+input-file:
+- preview/2024-05-01-preview/searchservice.json
+- preview/2024-05-01-preview/searchindex.json
+```
+
+### Tag: package-2024-05-searchservice-preview
+
+These settings apply only when `--tag=package-2024-05-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-05-searchservice-preview'
+input-file:
+- preview/2024-05-01-preview/searchservice.json
+```
+
+### Tag: package-2024-05-searchindex-preview
+
+These settings apply only when `--tag=package-2024-05-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-05-searchindex-preview'
+input-file:
+- preview/2024-05-01-preview/searchindex.json
+```
+
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-01-preview'
+input-file:
+- preview/2024-03-01-Preview/searchservice.json
+- preview/2024-03-01-Preview/searchindex.json
+```
+
+### Tag: package-2024-03-searchservice-preview
+
+These settings apply only when `--tag=package-2024-03-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-searchservice-preview'
+input-file:
+- preview/2024-03-01-Preview/searchservice.json
+```
+
+### Tag: package-2024-03-searchindex-preview
+
+These settings apply only when `--tag=package-2024-03-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-searchindex-preview'
+input-file:
+- preview/2024-03-01-Preview/searchindex.json
 ```
 
 ### Tag: package-2023-10-01-preview
@@ -859,6 +967,10 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/2024-05-01-preview/searchservice.json
+  - $(this-folder)/preview/2024-05-01-preview/searchindex.json
+  - $(this-folder)/preview/2024-03-01-Preview/searchservice.json
+  - $(this-folder)/preview/2024-03-01-Preview/searchindex.json
   - $(this-folder)/preview/2023-10-01-Preview/searchservice.json
   - $(this-folder)/preview/2023-10-01-Preview/searchindex.json
   - $(this-folder)/preview/2023-07-01-Preview/searchservice.json

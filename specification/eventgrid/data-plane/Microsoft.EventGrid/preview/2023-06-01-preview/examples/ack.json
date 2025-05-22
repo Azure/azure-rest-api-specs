@@ -8,7 +8,7 @@
     "content-type": "application/json",
     "authorization": "SharedAccessKey 123",
     "api-version": "2023-06-01-preview",
-    "lockTokens": {
+    "acknowledgeOptions": {
       "lockTokens": [
         "CgMKATESCQoHdG9rZW4tMQ=="
       ]
@@ -20,8 +20,10 @@
         "failedLockTokens": [
           {
             "lockToken": "CgMKATESCQoHdG9rZW4tMQ==",
-            "errorCode": "BadToken",
-            "errorDescription": ""
+            "error": {
+              "code": "BadToken",
+              "message": ""
+            }
           }
         ],
         "succeededLockTokens": [

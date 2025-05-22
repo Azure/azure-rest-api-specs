@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2024-02-13",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
+    "body": {
+      "searchFilters": {
+        "pageSize": "10",
+        "pageToken": "asc4fts4ft",
+        "status": "INVITE_STATUS_SENT"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "InvitationList",
+        "metadata": {
+          "first": "https://api.confluent.cloud/iam/v2/invitations",
+          "last": "https://api.confluent.cloud/iam/v2/invitations?page_token=bcAOehAY8F16YD84Z1wT",
+          "prev": "https://api.confluent.cloud/iam/v2/invitations?page_token=YIXRY97wWYmwzrax4dld",
+          "next": "https://api.confluent.cloud/iam/v2/invitations?page_token=UvmDWOB1iwfAIBPj6EYb",
+          "total_size": 123
+        },
+        "data": [
+          {
+            "kind": "Invitation",
+            "id": "dlz-f3a90de",
+            "metadata": {
+              "self": "https://api.confluent.cloud/iam/v2/invitations/i-12345",
+              "resource_name": "crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/invitation=i-12345",
+              "created_at": "2006-01-02T15:04:05-07:00",
+              "updated_at": "2006-01-02T15:04:05-07:00",
+              "deleted_at": "2006-01-02T15:04:05-07:00"
+            },
+            "email": "johndoe@confluent.io",
+            "auth_type": "AUTH_TYPE_SSO",
+            "status": "INVITE_STATUS_SENT",
+            "accepted_at": "2022-07-06T17:21:33Z",
+            "expires_at": "2022-07-07T17:22:39Z"
+          }
+        ]
+      }
+    }
+  }
+}

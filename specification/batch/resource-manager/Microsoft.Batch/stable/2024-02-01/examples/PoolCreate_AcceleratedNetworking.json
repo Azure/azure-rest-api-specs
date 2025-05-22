@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2024-02-01",
+    "parameters": {
+      "properties": {
+        "vmSize": "STANDARD_D1_V2",
+        "networkConfiguration": {
+          "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
+          "enableAcceleratedNetworking": true
+        },
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2016-datacenter-smalldisk",
+              "version": "latest"
+            },
+            "nodeAgentSkuId": "batch.node.windows amd64"
+          }
+        },
+        "scaleSettings": {
+          "fixedScale": {
+            "targetDedicatedNodes": 1,
+            "targetLowPriorityNodes": 0
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8DB46CB72A227E2\""
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8DB46CB72A227E2\"",
+        "properties": {
+          "lastModified": "2023-04-27T02:59:41.8592226Z",
+          "creationTime": "2023-04-27T02:59:41.8592226Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2023-04-27T02:59:41.8592226Z",
+          "allocationState": "Steady",
+          "allocationStateTransitionTime": "2023-04-27T03:00:34.0646502Z",
+          "vmSize": "STANDARD_D1_V2",
+          "interNodeCommunication": "Disabled",
+          "taskSlotsPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2016-datacenter-smalldisk",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64"
+            }
+          },
+          "networkConfiguration": {
+            "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
+            "dynamicVnetAssignmentScope": "none",
+            "enableAcceleratedNetworking": true
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 1,
+              "targetLowPriorityNodes": 0,
+              "resizeTimeout": "PT15M"
+            }
+          },
+          "resizeOperationStatus": {
+            "targetDedicatedNodes": 1,
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2023-04-27T02:59:41.8592226Z"
+          },
+          "currentDedicatedNodes": 1,
+          "currentLowPriorityNodes": 0,
+          "currentNodeCommunicationMode": "Classic"
+        }
+      }
+    }
+  }
+}

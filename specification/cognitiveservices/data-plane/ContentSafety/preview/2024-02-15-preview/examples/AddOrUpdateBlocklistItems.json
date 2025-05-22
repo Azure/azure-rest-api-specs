@@ -1,0 +1,29 @@
+{
+  "title": "Add or Update BlocklistItems To Text Blocklist",
+  "operationId": "TextBlocklists_AddOrUpdateBlocklistItems",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "blocklistName": "TestBlocklist",
+    "body": {
+      "blocklistItems": [
+        {
+          "description": "Hate word",
+          "text": "hate"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "blocklistItems": [
+          {
+            "blocklistItemId": "9511969e-f1e3-4604-9127-05ee16c509ec",
+            "description": "Hate word",
+            "text": "hate"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2024-03-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "deploymentStacksRG",
+    "deploymentStackName": "simpleDeploymentStack",
+    "deploymentStack": {
+      "tags": {
+        "tagkey": "tagVal"
+      },
+      "properties": {
+        "actionOnUnmanage": {
+          "resources": "delete",
+          "resourceGroups": "delete",
+          "managementGroups": "delete"
+        },
+        "denySettings": {
+          "mode": "denyDelete",
+          "excludedPrincipals": [
+            "principal"
+          ],
+          "excludedActions": [
+            "action"
+          ],
+          "applyToChildScopes": false
+        },
+        "templateLink": {
+          "uri": "https://example.com/exampleTemplate.json"
+        },
+        "parameters": {
+          "parameter1": {
+            "value": "a string"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Successful validation result.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+        "name": "simpleDeploymentStack",
+        "type": "Microsoft.Resources/deploymentStacks",
+        "properties": {
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "denySettings": {
+            "mode": "denyDelete",
+            "excludedPrincipals": [
+              "principal"
+            ],
+            "excludedActions": [
+              "action"
+            ],
+            "applyToChildScopes": false
+          },
+          "deploymentScope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG",
+          "description": "A validation description.",
+          "parameters": {
+            "parameter1": {
+              "type": "string",
+              "value": "a string"
+            }
+          },
+          "validatedResources": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Sql/servers/server1"
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Sql/servers/server2"
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "description": "Accepted",
+      "headers": {
+        "Location": "https://example.com",
+        "Retry-After": "15"
+      }
+    },
+    "400": {
+      "description": "Failed validation result.",
+      "body": {
+        "error": {
+          "code": "ErrorCode",
+          "message": "Deployment validation failed"
+        }
+      }
+    }
+  }
+}

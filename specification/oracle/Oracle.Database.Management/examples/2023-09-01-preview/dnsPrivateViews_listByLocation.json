@@ -1,0 +1,44 @@
+{
+  "operationId": "DnsPrivateViews_listByLocation",
+  "title": "DnsPrivateViews_listByLocation",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Oracle.Database/locations/eastus/dnsPrivateViews/ocid1....aaaaaa",
+            "type": "Oracle.Database/locations/dnsPrivateViews",
+            "properties": {
+              "ocid": "ocid1....aaaaaa",
+              "displayName": "example-dns-private-view1",
+              "isProtected": false,
+              "lifecycleState": "Active",
+              "self": "https://api.example.com/view1",
+              "timeCreated": "2023-10-26T12:34:56Z",
+              "timeUpdated": "2023-10-26T14:00:00Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Oracle.Database/locations/eastus/dnsPrivateViews/ocid1....aaaaab",
+            "type": "Oracle.Database/locations/dnsPrivateViews",
+            "properties": {
+              "ocid": "ocid1....aaaaab",
+              "displayName": "example-dns-private-view2",
+              "isProtected": true,
+              "lifecycleState": "Creating",
+              "self": "https://api.example.com/view2",
+              "timeCreated": "2023-10-27T09:45:00Z",
+              "timeUpdated": "2023-10-27T10:30:00Z"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

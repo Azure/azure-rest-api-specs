@@ -2524,7 +2524,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/raiContentFilters": {
-      "post": {
+      "get": {
         "tags": [
           "RaiContentFilters"
         ],
@@ -2559,6 +2559,9 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3634,7 +3637,7 @@
     },
     "DeploymentCapacitySettings": {
       "type": "object",
-      "description": "The maps to reserved Capacity for fungible deployments (MSS).",
+      "description": "Internal use only.",
       "properties": {
         "designatedCapacity": {
           "type": "integer",
@@ -4769,7 +4772,7 @@
           "description": "Deployment active capacity. This value might be different from `capacity` if customer recently updated `capacity`."
         }
       },
-      "description": "Properties of Cognitive Services account deployment model."
+      "description": "Properties of Cognitive Services account deployment model. (Deprecated, please use Deployment.sku instead.)"
     },
     "DeploymentSkuListResult": {
       "type": "object",
@@ -5538,7 +5541,7 @@
             "$ref": "#/definitions/RaiPolicyContentFilter"
           },
           "x-ms-identifiers": [
-            "policyName"
+            "name"
           ],
           "description": "The list of Content Filters."
         }
@@ -5560,7 +5563,7 @@
       "description": "Azure OpenAI Content Filter.",
       "type": "object",
       "properties": {
-        "policyName": {
+        "name": {
           "type": "string",
           "description": "Name of ContentFilter."
         },

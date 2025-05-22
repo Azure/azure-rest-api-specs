@@ -647,6 +647,19 @@
         "modelAsString": true
       }
     },
+    "LedgerSku": {
+      "description": "SKU associated with the ledger resource",
+      "type": "string",
+      "enum": [
+        "Standard",
+        "Basic",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "LedgerSku",
+        "modelAsString": true
+      }
+    },
     "CertBasedSecurityPrincipal": {
       "type": "object",
       "description": "Cert based security principal with Ledger RoleName",
@@ -714,6 +727,10 @@
           "description": "Provisioning state of Ledger Resource",
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "ledgerSku": {
+          "description": "SKU associated with the ledger",
+          "$ref": "#/definitions/LedgerSku"
         },
         "aadBasedSecurityPrincipals": {
           "description": "Array of all AAD based Security Principals.",
