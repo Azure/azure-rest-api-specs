@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AzureTerraformResourceProviderClient",
-    "version": "2023-07-01-preview",
+    "version": "2025-06-01-preview",
     "description": "The Azure Terraform management API provides a RESTful set of web services that used to manage your Azure Terraform resources.",
     "x-typespec-generated": [
       {
@@ -230,6 +230,20 @@
           "type": "boolean",
           "description": "Mask sensitive attributes in the Terraform configuration",
           "default": true
+        },
+        "excludeAzureResource": {
+          "type": "array",
+          "description": "Exclude resources from being exported based on the Azure resource ID pattern (case-insensitive regexp)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeTerraformResource": {
+          "type": "array",
+          "description": "Exclude resources from being exported based on the Terraform resource type",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "discriminator": "type",
