@@ -66,7 +66,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -79,9 +78,6 @@ See configuration in [readme.az.md](./readme.az.md)
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp 
 
