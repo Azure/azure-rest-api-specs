@@ -3434,6 +3434,12 @@
           },
           {
             "$ref": "#/parameters/NfsFileType"
+          },
+          {
+            "$ref": "#/parameters/ContentMD5"
+          },
+          {
+            "$ref": "#/parameters/FilePropertySemantics"
           }
         ],
         "responses": {
@@ -3535,6 +3541,16 @@
                   "name": "NfsFileType",
                   "modelAsString": true
                 }
+              },
+              "Content-MD5": {
+                "type": "string",
+                "format": "byte",
+                "description": "If the file has an MD5 hash and the request is to read the full file, this response header is returned so that the client can check for message content integrity. If the request is to read a specified range and the 'x-ms-range-get-content-md5' is set to true, then the request returns an MD5 hash for the range, as long as the range size is less than or equal to 4 MB. If neither of these sets of conditions is true, then no value is returned for the 'Content-MD5' header."
+              },
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of bytes present in the response body."
               }
             }
           },
@@ -8675,6 +8691,23 @@
       "required": true,
       "description": "NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. It should be full path of the target from the root.The target file must be in the same share and hence the same storage account.",
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "FilePropertySemantics": {
+      "name": "x-ms-file-property-semantics",
+      "x-ms-client-name": "filePropertySemantics",
+      "in": "header",
+      "required": false,
+      "description": "SMB only, default value is New.  New will forcefully add the ARCHIVE attribute flag and alter the permissions specified in x-ms-file-permission to inherit missing permissions from the parent.  Restore will apply changes without further modification.",
+      "type": "string",
+      "enum": [
+        "New",
+        "Restore"
+      ],
+      "x-ms-enum": {
+        "name": "FilePropertySemantics",
+        "modelAsString": false
+      },
       "x-ms-parameter-location": "method"
     }
   }
