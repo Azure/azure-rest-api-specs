@@ -45,7 +45,6 @@ export class Swagger {
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
-   * @param {boolean} [options.ignoreSwaggerExamples]
    */
   constructor(path, options) {
     this.#path = resolve(path);
