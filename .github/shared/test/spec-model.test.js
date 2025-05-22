@@ -187,6 +187,22 @@ describe("SpecModel", () => {
       expect(tagNames[0]).toBe("tag-1");
       expect(tagNames[1]).toBe("tag-2");
     });
+
+    it("throws when an input-file is not found", async () => {
+      const folder = resolve(
+        __dirname,
+        "fixtures/getAffectedReadmeTags/specification/resolver-error",
+      );
+      const specModel = new SpecModel(folder, options);
+
+      expect(
+        specModel.getAffectedReadmeTags(
+          resolve(folder, "data-plane/a.json")
+        ),
+      ).rejects.toThrowError(
+        /Spec Model encountered error resolving refs for input-file/i,
+      );
+    });
   });
 
   describe("getAffectedSwaggers", async () => {
