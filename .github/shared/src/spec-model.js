@@ -80,9 +80,9 @@ export class SpecModel {
             if (isResolverError(error)) {
               const resolverError = /** @type {SpecError} */ {
                 message: `Spec Model encountered error resolving refs for input-file: ${inputFile.path}
-Readme: ${readme.path}
-Tag: ${tag.name}
-Error file: ${error.source}
+\tReadme: ${readme.path}
+\tTag: ${tag.name}
+\tError file: ${error.source}
 
 Ensure the input-file is valid and all refs are resolvable.`,
                 readme: readme.path,
