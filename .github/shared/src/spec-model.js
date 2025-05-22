@@ -92,6 +92,7 @@ Ensure the input-file is valid and all refs are resolvable.`,
               };
               throw resolverError;
             }
+
             throw error;
           }
 

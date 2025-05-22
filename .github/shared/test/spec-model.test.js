@@ -191,17 +191,27 @@ describe("SpecModel", () => {
     it("throws when an input-file is not found", async () => {
       const folder = resolve(
         __dirname,
-        "fixtures/getAffectedReadmeTags/specification/resolver-error",
+        "fixtures/getAffectedReadmeTags/specification/input-file-not-found",
       );
       const specModel = new SpecModel(folder, options);
 
       expect(
-        specModel.getAffectedReadmeTags(
-          resolve(folder, "data-plane/a.json")
-        ),
+        specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
       ).rejects.toThrowError(
         /Spec Model encountered error resolving refs for input-file/i,
       );
+    });
+
+    it("throws when an input-file is invalid JSON", async () => {
+      const folder = resolve(
+        __dirname,
+        "fixtures/getAffectedReadmeTags/specification/input-file-invalid-json",
+      );
+      const specModel = new SpecModel(folder, options);
+
+      expect(
+        specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
+      ).rejects.toThrowError(/is not a valid JSON Schema/i);
     });
   });
 
