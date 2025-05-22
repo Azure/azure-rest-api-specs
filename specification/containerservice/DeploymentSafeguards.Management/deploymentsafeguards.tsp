@@ -78,14 +78,14 @@ union ProvisioningState {
 @armResourceOperations
 interface DeploymentSafeguards {
   @doc("Fetch a deployment safeguard by name")
-  getDeploymentSafeguard is ArmResourceRead<DeploymentSafeguard>;
+  get is ArmResourceRead<DeploymentSafeguard>;
 
   @doc("Creates or updates a deploymentSafeguard")
-  createOrUpdateDeploymentSafeguard is ArmResourceCreateOrUpdateAsync<DeploymentSafeguard>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DeploymentSafeguard>;
 
   @doc("Delete DeploymentSafeguards")
-  deleteDeploymentSafeguard is ArmResourceDeleteWithoutOkAsync<DeploymentSafeguard>;
+  delete is ArmResourceDeleteWithoutOkAsync<DeploymentSafeguard>;
 
   @doc("List DeploymentSafeguards by parent resource")
-  listDeploymentSafeguardByParent is ArmResourceListByParent<DeploymentSafeguard>;
+  list is ArmResourceListByParent<DeploymentSafeguard>;
 }
