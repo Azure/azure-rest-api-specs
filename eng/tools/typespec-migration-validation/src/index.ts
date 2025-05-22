@@ -7,6 +7,7 @@ import yargs from 'yargs';
 import { hideBin } from "yargs/helpers";
 import { diff, diffString } from 'json-diff';
 import { suggestFix, suggestPrompt } from './fix/troubleshooting.js';
+import { configuration } from './configuration.js';
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
@@ -27,6 +28,15 @@ function parseArguments() {
       alias: 'out',
       describe: 'Output folder for analysis results',
       type: 'string',
+    })
+    .option('ignoreDescription', {
+      description: 'Ignore description differences',
+      type: 'boolean',
+      default: true,
+    })
+    .option('ignorePathCase', {
+      description: 'Set case insensitive for the segments before provider, e.g. resourceGroups',
+      type: 'boolean'
     })
     .check((argv) => {
       const positional = argv._;
@@ -62,7 +72,11 @@ function parseArguments() {
 
 export async function main() {
   const args = parseArguments();
-  const { oldPath, newPath, outputFolder } = args;
+  const { oldPath, newPath, outputFolder, ignoreDescription, ignorePathCase } = args;
+  configuration.ignoreDescription = ignoreDescription;
+  if (ignorePathCase !== undefined) {
+    configuration.ignorePathCase = ignorePathCase;
+  }
 
   logHeader(`Processing old swagger from: ${oldPath}...`);
   const mergedOldfile = mergeFiles(oldPath!);
@@ -76,8 +90,8 @@ export async function main() {
 
   logHeader("Comparing old and new Swagger files...");
   if (outputFolder) {
-    fs.writeFileSync(`${outputFolder}/oldSwagger.json`, JSON.stringify(sortedOldFile, null, 2));
-    fs.writeFileSync(`${outputFolder}/newSwagger.json`, JSON.stringify(sortedNewFile, null, 2));
+    fs.writeFileSync(`${outputFolder}/oldNormalizedSwagger.json`, JSON.stringify(sortedOldFile, null, 2));
+    fs.writeFileSync(`${outputFolder}/newNormalizedSwagger.json`, JSON.stringify(sortedNewFile, null, 2));
     const diffForFile = diff(sortedOldFile, sortedNewFile);
     fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
     const suggestedFixes = suggestFix(diffForFile);
