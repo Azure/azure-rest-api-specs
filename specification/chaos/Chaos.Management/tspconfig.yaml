@@ -14,10 +14,9 @@ options:
     omit-unreachable-types: true
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
-    is-modular-library: true
     experimental-extensible-enums: true
     package-dir: "arm-chaos"
-    flavor: "azure"
+    flavor: azure
     package-details:
       name: "@azure/arm-chaos"
   "@azure-tools/typespec-python":
@@ -42,6 +41,11 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-chaos"
+    namespace: "com.azure.resourcemanager.chaos"
+    service-name: "Chaos"
+    flavor: "azure"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
