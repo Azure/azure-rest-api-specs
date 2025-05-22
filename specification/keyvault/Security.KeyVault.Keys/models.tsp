@@ -195,11 +195,11 @@ union JsonWebKeyEncryptionAlgorithm {
   A256_CBCPAD: "A256CBCPAD",
 
   /** CKM AES key wrap. */
-  @added(KeyVault.Versions.`7.6`)
+  @added(KeyVault.Versions.`v7.6`)
   CKM_AES_KEY_WRAP: "CKM_AES_KEY_WRAP",
 
   /** CKM AES key wrap with padding. */
-  @added(KeyVault.Versions.`7.6`)
+  @added(KeyVault.Versions.`v7.6`)
   CKM_AES_KEY_WRAP_PAD: "CKM_AES_KEY_WRAP_PAD",
 }
 
@@ -242,19 +242,19 @@ union JsonWebKeySignatureAlgorithm {
   /**
    * HMAC using SHA-256, as described in  https://tools.ietf.org/html/rfc7518
    */
-  @added(KeyVault.Versions.`7.6`)
+  @added(KeyVault.Versions.`v7.6`)
   HS256: "HS256",
 
   /**
    * HMAC using SHA-384, as described in https://tools.ietf.org/html/rfc7518
    */
-  @added(KeyVault.Versions.`7.6`)
+  @added(KeyVault.Versions.`v7.6`)
   HS384: "HS384",
 
   /**
    * HMAC using SHA-512, as described in https://tools.ietf.org/html/rfc7518
    */
-  @added(KeyVault.Versions.`7.6`)
+  @added(KeyVault.Versions.`v7.6`)
   HS512: "HS512",
 
   /**
@@ -398,7 +398,7 @@ model KeyAttributes {
   /**
    * The key or key version attestation information.
    */
-  @added(KeyVault.Versions.`7.6`)
+  @added(KeyVault.Versions.`v7.6`)
   @visibility(Lifecycle.Read)
   attestation?: KeyAttestation;
 }
@@ -406,7 +406,7 @@ model KeyAttributes {
 /**
  * The key attestation information.
  */
-@added(KeyVault.Versions.`7.6`)
+@added(KeyVault.Versions.`v7.6`)
 model KeyAttestation {
   /**
    * A base64url-encoded string containing certificates in PEM format, used for attestation validation.
