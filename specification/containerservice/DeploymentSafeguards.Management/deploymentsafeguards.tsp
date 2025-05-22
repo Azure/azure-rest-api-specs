@@ -18,43 +18,45 @@ namespace Microsoft.ContainerService;
 @doc("Deployment Safeguards")
 @resource("deploymentSafeguards")
 @singleton("default")
-model DeploymentSafeguard is Azure.ResourceManager.ExtensionResource<DeploymentSafeguardsProperties>{
-    @key("deploymentSafeguardName")
-    @doc("Required default name")
-    @segment("deploymentSafeguards")
-    @visibility(Lifecycle.Read)
-    @pattern("default")
-    @path
-    name: string;
+model DeploymentSafeguard
+  is Azure.ResourceManager.ExtensionResource<DeploymentSafeguardsProperties> {
+  @key("deploymentSafeguardName")
+  @doc("Required default name")
+  @segment("deploymentSafeguards")
+  @visibility(Lifecycle.Read)
+  @pattern("default")
+  @path
+  name: string;
 
-    ...EntityTagProperty;
+  ...EntityTagProperty;
 }
 
 @doc("Specifies the level of Deployment Safeguards")
 union DeploymentSafeguardsLevel {
-    @doc("Best practice violations will only show warnings")
-    Warn: "Warn",
-    @doc("Best practice violations will be denied")
-    Enforce: "Enforce",
-    string,
+  @doc("Best practice violations will only show warnings")
+  Warn: "Warn",
+
+  @doc("Best practice violations will be denied")
+  Enforce: "Enforce",
+
+  string,
 }
 
 @doc("DeploymentSafeguards Properties")
 model DeploymentSafeguardsProperties {
+  @doc("Provisioning State")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 
-    @doc("Provisioning State")
-    @visibility(Lifecycle.Read)
-    provisioningState?: ProvisioningState;
+  @doc("The deployment safeguards level. Possible values are Warn and Enforce")
+  level: DeploymentSafeguardsLevel;
 
-    @doc("The deployment safeguards level. Possible values are Warn and Enforce")
-    level: DeploymentSafeguardsLevel;
+  @doc("User defined list of namespaces to exclude from Deployment Safeguards. Deployments in these namespaces will not be checked against any safeguards")
+  excludedNamespaces: Array<string>;
 
-    @doc("User defined list of namespaces to exclude from Deployment Safeguards. Deployments in these namespaces will not be checked against any safeguards")
-    excludedNamespaces: Array<string>;
-
-    @doc("System defined list of namespaces excluded from Deployment Safeguards. These are determined by the underlying provider (such as AKS), and cannot be changed. Deployments in these namespaces will not be checked")
-    @visibility(Lifecycle.Read)
-    systemExcludedNamespaces: Array<string>;
+  @doc("System defined list of namespaces excluded from Deployment Safeguards. These are determined by the underlying provider (such as AKS), and cannot be changed. Deployments in these namespaces will not be checked")
+  @visibility(Lifecycle.Read)
+  systemExcludedNamespaces: Array<string>;
 }
 
 @lroStatus
@@ -74,16 +76,16 @@ union ProvisioningState {
 }
 
 @armResourceOperations
-interface DeploymentSafeguards{
-    @doc("Fetch a deployment safeguard by name")
-    getDeploymentSafeguard is ArmResourceRead<DeploymentSafeguard>;
+interface DeploymentSafeguards {
+  @doc("Fetch a deployment safeguard by name")
+  getDeploymentSafeguard is ArmResourceRead<DeploymentSafeguard>;
 
-    @doc("Creates or updates a deploymentSafeguard")
-    createOrUpdateDeploymentSafeguard is ArmResourceCreateOrUpdateAsync<DeploymentSafeguard>;
+  @doc("Creates or updates a deploymentSafeguard")
+  createOrUpdateDeploymentSafeguard is ArmResourceCreateOrUpdateAsync<DeploymentSafeguard>;
 
-    @doc("Delete DeploymentSafeguards")
-    deleteDeploymentSafeguard is ArmResourceDeleteWithoutOkAsync<DeploymentSafeguard>;
+  @doc("Delete DeploymentSafeguards")
+  deleteDeploymentSafeguard is ArmResourceDeleteWithoutOkAsync<DeploymentSafeguard>;
 
-    @doc("List DeploymentSafeguards by parent resource")
-    listDeploymentSafeguardByParent is ArmResourceListByParent<DeploymentSafeguard>;
+  @doc("List DeploymentSafeguards by parent resource")
+  listDeploymentSafeguardByParent is ArmResourceListByParent<DeploymentSafeguard>;
 }

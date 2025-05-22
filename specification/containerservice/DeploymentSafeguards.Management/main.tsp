@@ -15,10 +15,9 @@ namespace Microsoft.ContainerService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("Azure Kubernetes Service Deployment Safeguards api versions.")
 /** The available API versions. */
+@doc("Azure Kubernetes Service Deployment Safeguards api versions.")
 enum Versions {
-
   /** 2025-04-02-preview version */
   @doc("Deployment Safeguards api version 2025-04-02-preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
