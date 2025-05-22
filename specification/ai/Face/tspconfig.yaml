@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/face"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -27,10 +26,12 @@ options:
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.Vision.Face
+    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "ai-vision-face-rest"
     generate-metadata: true
-    generate-test: true
     flavor: azure
     package-details:
       name: "@azure-rest/ai-vision-face"

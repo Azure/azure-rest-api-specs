@@ -17,6 +17,10 @@ using Microsoft.ServiceNetworking;
   "com.azure.resourcemanager.servicenetworking",
   "java"
 );
+@@clientName(Microsoft.ServiceNetworking,
+  "ServiceNetworkingMgmtClient",
+  "python"
+);
 
 // csharp
 #suppress "deprecated" "property flatten for SDK backward compatibility"
@@ -45,4 +49,12 @@ using Microsoft.ServiceNetworking;
 @@clientName(TrafficControllerProperties.provisioningState,
   "TrafficControllerProvisioningState",
   "csharp"
+);
+@@clientName(Versions.v2023_11_01,
+  "$DO_NOT_NORMALIZE$V2023_11_01",
+  "javascript"
+);
+@@clientName(Versions.v2025_05_01,
+  "$DO_NOT_NORMALIZE$V2025_05_01",
+  "javascript"
 );

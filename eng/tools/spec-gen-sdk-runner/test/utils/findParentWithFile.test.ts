@@ -2,12 +2,12 @@ import { describe, test, expect } from "vitest";
 import { findParentWithFile } from "../../src/utils.js";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { typespecProjectRegex } from "../../src/change-files.js";
+import { typespecProjectRegex } from "../../src/spec-helpers.js";
 
 describe("findParentWithFile", () => {
   // Get the absolute path to the repo root
   const currentFilePath = fileURLToPath(import.meta.url);
-  const repoRoot = path.resolve(path.dirname(currentFilePath), "../../../../../");
+  const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 
   test("finds file in current directory", () => {
     const result = findParentWithFile(

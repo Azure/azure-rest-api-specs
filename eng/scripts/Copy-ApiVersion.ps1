@@ -107,7 +107,7 @@ This allows reviewers to easily diff subsequent changes against the previous spe
 foreach ($file in Get-ChildItem $newDirectory -File -Recurse) {
     Write-Verbose "Replacing any API versions in $file"
     $content = $file | Get-Content -Raw
-    $content -replace $oldApiVersion, $newApiVersion | Set-Content $file.FullName
+    $content -replace $oldApiVersion, $newApiVersion | Set-Content $file.FullName -NoNewline
 }
 
 # Commit just the version changes.

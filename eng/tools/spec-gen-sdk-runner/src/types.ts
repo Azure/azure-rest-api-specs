@@ -3,12 +3,13 @@
  */
 export interface SpecGenSdkCmdInput {
   workingFolder: string;
-  isTriggeredByPipeline: string;
+  runMode: string;
   localSpecRepoPath: string;
   localSdkRepoPath: string;
   tspConfigPath?: string;
   readmePath?: string;
   sdkRepoName: string;
+  sdkLanguage: string;
   apiVersion?: string;
   prNumber?: string;
   sdkReleaseType?: string;
@@ -16,6 +17,14 @@ export interface SpecGenSdkCmdInput {
   specRepoHttpsUrl: string;
   headRepoHttpsUrl?: string;
   headBranch?: string;
+}
+
+/**
+ * Data for the API view request.
+ */
+export interface APIViewRequestData {
+  packageName: string;
+  filePath: string;
 }
 
 /*
@@ -28,3 +37,35 @@ export type VsoLogs = Map<
     warnings?: string[];
   }
 >;
+
+/**
+ * Represents the result of the spec-gen-sdk generation process.
+ */
+export interface SpecGenSdkArtifactInfo {
+  language: string;
+  result: string;
+  labelAction?: boolean;
+  isSpecGenSdkCheckRequired: boolean;
+  apiViewRequestData: APIViewRequestData [];
+}
+
+/**
+ * Represents supported SDK language identifiers.
+ */
+export type SdkName =
+  | "azure-sdk-for-go"
+  | "azure-sdk-for-java"
+  | "azure-sdk-for-js"
+  | "azure-sdk-for-net"
+  | "azure-sdk-for-python";
+
+/**
+ * Required check settings for all languages.
+ */
+export const SpecGenSdkRequiredSettings: Record<SdkName, boolean> = {
+  "azure-sdk-for-go": true,
+  "azure-sdk-for-java": true,
+  "azure-sdk-for-js": false,
+  "azure-sdk-for-net": false,
+  "azure-sdk-for-python": true,
+};
