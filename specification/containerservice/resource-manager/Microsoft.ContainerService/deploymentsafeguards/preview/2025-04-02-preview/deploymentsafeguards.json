@@ -49,14 +49,14 @@
   "paths": {
     "/{resourceUri}/providers/Microsoft.ContainerService/deploymentSafeguards": {
       "get": {
-        "operationId": "DeploymentSafeguards_ListDeploymentSafeguardByParent",
+        "operationId": "DeploymentSafeguards_List",
         "tags": [
           "DeploymentSafeguards"
         ],
         "description": "List DeploymentSafeguards by parent resource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -72,7 +72,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -83,14 +83,14 @@
     },
     "/{resourceUri}/providers/Microsoft.ContainerService/deploymentSafeguards/default": {
       "get": {
-        "operationId": "DeploymentSafeguards_GetDeploymentSafeguard",
+        "operationId": "DeploymentSafeguards_Get",
         "tags": [
           "DeploymentSafeguards"
         ],
         "description": "Fetch a deployment safeguard by name",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -106,20 +106,25 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a DeploymentSafeguard resource.": {
+            "$ref": "./examples/DeploymentSafeguards_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "DeploymentSafeguards_CreateOrUpdateDeploymentSafeguard",
+        "operationId": "DeploymentSafeguards_CreateOrUpdate",
         "tags": [
           "DeploymentSafeguards"
         ],
         "description": "Creates or updates a deploymentSafeguard",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -161,7 +166,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -171,14 +176,14 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "DeploymentSafeguards_DeleteDeploymentSafeguard",
+        "operationId": "DeploymentSafeguards_Delete",
         "tags": [
           "DeploymentSafeguards"
         ],
         "description": "Delete DeploymentSafeguards",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -205,8 +210,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a DeploymentSafeguard resource asynchronously with a long running operation.": {
+            "$ref": "./examples/DeploymentSafeguards_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -224,20 +234,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -265,7 +275,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
