@@ -29,6 +29,7 @@ vi.mock("node:fs/promises", async () => {
 });
 
 import { readFile } from "fs/promises";
+import { Readme } from "@azure-tools/specs-shared/readme";
 
 vi.mock("../src/util.js", async () => {
   const original = await vi.importActual("../src/util.js");
@@ -361,7 +362,7 @@ describe("generateLintDiffReport", () => {
       stdout: "",
       stderr: "",
       rootPath: "",
-      readme: "file1.md",
+      readme: new Readme("file1.md"),
       tag: "",
     } as AutorestRunResult;
     const afterResult = {
@@ -369,7 +370,7 @@ describe("generateLintDiffReport", () => {
       stdout: JSON.stringify(afterViolation),
       stderr: "",
       rootPath: "",
-      readme: "file1.md",
+      readme: new Readme("file1.md"),
       tag: "",
     } as AutorestRunResult;
 
@@ -419,7 +420,7 @@ describe("generateLintDiffReport", () => {
       stdout: "",
       stderr: "",
       rootPath: "",
-      readme: "file1.md",
+      readme: new Readme("file1.md"),
       tag: "",
     } as AutorestRunResult;
     const afterResult = {
@@ -427,7 +428,7 @@ describe("generateLintDiffReport", () => {
       stdout: JSON.stringify(afterViolation),
       stderr: "",
       rootPath: "",
-      readme: "file1.md",
+      readme: new Readme("file1.md"),
       tag: "",
     } as AutorestRunResult;
 
@@ -485,7 +486,7 @@ describe("generateLintDiffReport", () => {
         stdout: "",
         stderr: "",
         rootPath: "",
-        readme: "file1.md",
+        readme: new Readme("file1.md"),
         tag: "",
       } as AutorestRunResult;
       const afterResult = {
@@ -493,7 +494,7 @@ describe("generateLintDiffReport", () => {
         stdout: JSON.stringify(afterViolation),
         stderr: "",
         rootPath: "",
-        readme: "file1.md",
+        readme: new Readme("file1.md"),
         tag: "",
       } as AutorestRunResult;
 
@@ -543,7 +544,7 @@ describe("generateAutoRestErrorReport", () => {
     const autoRestErrors = [
       {
         result: {
-          readme: "readme.md",
+          readme: new Readme("dummy/rootPath/readme.md"),
           tag: "tag1",
           rootPath: "dummy/rootPath",
           error: null,
@@ -557,7 +558,7 @@ describe("generateAutoRestErrorReport", () => {
       },
       {
         result: {
-          readme: "readme2.md",
+          readme: new Readme("dummy/rootPath/readme2.md"),
           tag: "tag2",
           rootPath: "dummy/rootPath",
           error: null,
