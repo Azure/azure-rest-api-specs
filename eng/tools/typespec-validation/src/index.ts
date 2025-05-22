@@ -57,6 +57,11 @@ export async function main() {
   let success = true;
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
+
+    if (rule instanceof FolderStructureRule) {
+      continue;
+    }
+
     console.log("\nExecuting rule: " + rule.name);
     const result = await rule.execute(absolutePath);
     if (result.stdOutput) console.log(result.stdOutput);
