@@ -4,18 +4,18 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.10.14
- * Date: 2025-04-25T06:56:53.090Z
+ * Version: 0.11.1
+ * Date: 2025-05-22T05:13:56.989Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
+import "./back-compatible.tsp";
 import "./CloudHsmCluster.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./DedicatedHsm.tsp";
-import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -37,11 +37,11 @@ namespace Microsoft.HardwareSecurityModules;
  */
 enum Versions {
   /**
-   * The 2024-06-30-preview API version.
+   * The 2025-03-31 API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_06_30_preview: "2024-06-30-preview",
+  v2025_03_31: "2025-03-31",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
