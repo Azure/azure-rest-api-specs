@@ -167,6 +167,9 @@
         ],
         "operationId": "Service_CreateKerberosTicket",
         "description": "Creates a new Kerberos ticket.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Timeout"
@@ -192,6 +195,9 @@
                 "type": "string",
                 "description": "Indicates the version of the File service used to execute the request."
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/KerberosTicketInfo"
             }
           },
           "default": {
@@ -7672,6 +7678,22 @@
       "x-ms-enum": {
         "name": "ShareRootSquash",
         "modelAsString": false
+      }
+    },
+    "KerberosTicketInfo": {
+      "type": "object",
+      "properties": {
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "x-ms-client-name": "ExpiresOn"
+        },
+        "sessionKey": {
+          "type": "string"
+        },
+        "kerberosServiceTicket": {
+          "type": "string"
+        }
       }
     }
   },
