@@ -26,6 +26,34 @@ model NginxCertificate
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface NginxCertificatesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of targeted NGINX deployment
+         */
+        @path
+        @segment("nginxDeployments")
+        @pattern("^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$")
+        deploymentName: string,
+      },
+      {
+        /**
+         * The name of certificate
+         */
+        @path
+        @segment("certificates")
+        certificateName: string,
+      },
+      ErrorResponse
+    > {}
+
 @armResourceOperations
 interface NginxCertificates {
   /**
@@ -40,7 +68,10 @@ interface NginxCertificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificates_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NginxCertificate>;
+  createOrUpdate is NginxCertificatesOps.CreateOrUpdateAsync<
+    NginxCertificate,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Deletes a certificate from the NGINX deployment
@@ -66,4 +97,4 @@ interface NginxCertificates {
 
 @@doc(NginxCertificate.name, "The name of certificate");
 @@doc(NginxCertificate.properties, "");
-@@doc(NginxCertificates.createOrUpdate::parameters.resource, "The certificate");
+@@doc(NginxCertificates.createOrUpdate::parameters.body, "The certificate");

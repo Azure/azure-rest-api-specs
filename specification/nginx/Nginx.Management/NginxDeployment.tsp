@@ -27,6 +27,27 @@ model NginxDeployment
   sku?: ResourceSku;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface NginxDeploymentsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         * The name of targeted NGINX deployment
+         */
+        @path
+        @segment("nginxDeployments")
+        @pattern("^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$")
+        deploymentName: string,
+      },
+      ErrorResponse
+    > {}
+
 @armResourceOperations
 interface NginxDeployments {
   /**
@@ -41,7 +62,10 @@ interface NginxDeployments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NginxDeployment>;
+  createOrUpdate is NginxDeploymentsOps.CreateOrUpdateAsync<
+    NginxDeployment,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Update the NGINX deployment
@@ -49,11 +73,12 @@ interface NginxDeployments {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   @operationId("Deployments_Update")
-  update is ArmCustomPatchAsync<
+  update is NginxDeploymentsOps.CustomPatchAsync<
     NginxDeployment,
     PatchModel = NginxDeploymentUpdateParameters,
     Response = ArmResponse<NginxDeployment> | (ArmResourceCreatedResponse<NginxDeployment> &
-      ArmLroLocationHeader)
+      ArmLroLocationHeader),
+    OptionalRequestBody = true
   >;
 
   /**
@@ -90,5 +115,5 @@ interface NginxDeployments {
 
 @@doc(NginxDeployment.name, "The name of targeted NGINX deployment");
 @@doc(NginxDeployment.properties, "");
-@@doc(NginxDeployments.createOrUpdate::parameters.resource, "");
-@@doc(NginxDeployments.update::parameters.properties, "");
+@@doc(NginxDeployments.createOrUpdate::parameters.body, "");
+@@doc(NginxDeployments.update::parameters.body, "");

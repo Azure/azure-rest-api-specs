@@ -42,14 +42,15 @@ interface NginxDeploymentApiKeyResponses {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiKeys_CreateOrUpdate")
   @armResourceCreateOrUpdate(NginxDeploymentApiKeyResponse)
-  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+  createOrUpdate is Azure.ResourceManager.Legacy.UpdateOperation<
     ResourceInstanceParameters<
       NginxDeploymentApiKeyResponse,
       Azure.ResourceManager.Foundations.DefaultBaseParameters<NginxDeploymentApiKeyResponse>
     >,
     NginxDeploymentApiKeyRequest,
     NginxDeploymentApiKeyResponse | ArmResourceCreatedResponse<NginxDeploymentApiKeyResponse>,
-    ErrorResponse
+    ErrorResponse,
+    OptionalRequestBody = true
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
@@ -69,6 +70,6 @@ interface NginxDeploymentApiKeyResponses {
 
 @@doc(NginxDeploymentApiKeyResponse.name, "The resource name of the API key");
 @@doc(NginxDeploymentApiKeyResponse.properties, "");
-@@doc(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.resource,
+@@doc(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.properties,
   "The API Key object containing fields (e.g. secret text, expiration date) to upsert the key."
 );
