@@ -176,9 +176,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/KerberosRealm"
           }
         ],
         "responses": {
@@ -8767,15 +8764,6 @@
       "in": "header",
       "required": true,
       "description": "NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. It should be full path of the target from the root.The target file must be in the same share and hence the same storage account.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "KerberosRealm": {
-      "name": "x-ms-kerberos-realm",
-      "x-ms-client-name": "kerberosRealm",
-      "in": "header",
-      "required": false,
-      "description": "Optional. Domain or an administrative boundary within which the authentication process is managed.",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
