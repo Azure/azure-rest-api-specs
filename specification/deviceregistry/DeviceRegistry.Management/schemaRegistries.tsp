@@ -31,7 +31,7 @@ model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
 @added(Versions.v2024_07_01_preview)
 @doc("Defines the schema registry properties.")
 model SchemaRegistryProperties {
-  @doc("Globally unique, immutable, non-reusable id.")
+  @doc("Globally unique, immutable, non-reusable ID.")
   @visibility(Lifecycle.Read)
   uuid?: string;
 
@@ -73,7 +73,7 @@ model Schema is ProxyResource<SchemaProperties> {
 @added(Versions.v2024_07_01_preview)
 @doc("Defines the schema properties.")
 model SchemaProperties {
-  @doc("Globally unique, immutable, non-reusable id.")
+  @doc("Globally unique, immutable, non-reusable ID.")
   @visibility(Lifecycle.Read)
   uuid?: string;
 
@@ -139,7 +139,7 @@ model SchemaVersion is ProxyResource<SchemaVersionProperties> {
 @added(Versions.v2024_07_01_preview)
 @doc("Defines the schema version properties.")
 model SchemaVersionProperties {
-  @doc("Globally unique, immutable, non-reusable id.")
+  @doc("Globally unique, immutable, non-reusable ID.")
   @visibility(Lifecycle.Read)
   uuid?: string;
 

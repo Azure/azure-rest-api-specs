@@ -12,7 +12,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -20,7 +19,7 @@ namespace Microsoft.DeviceRegistry;
 @added(Versions.v2024_07_01_preview)
 @removed(Versions.v2024_10_01_preview)
 model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
-  @doc("Discovered Asset name parameter.")
+  @doc("The name of the discovered asset.")
   @key("discoveredAssetName")
   @segment("discoveredAssets")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
