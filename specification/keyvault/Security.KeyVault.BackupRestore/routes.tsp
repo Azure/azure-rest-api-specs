@@ -72,7 +72,7 @@ op fullBackup is KeyVaultOperation<
  * Pre-backup operation for checking whether the customer can perform a full backup operation.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@added(KeyVault.Versions.`7.6`)
+@added(KeyVault.Versions.`v7.6`)
 @pollingOperation(fullBackupStatus)
 @finalOperation(fullBackupStatus)
 @useFinalStateVia("azure-async-operation")
@@ -128,7 +128,7 @@ op restoreStatus is KeyVaultOperation<
  * Pre-restore operation for checking whether the customer can perform a full restore operation.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@added(KeyVault.Versions.`7.6`)
+@added(KeyVault.Versions.`v7.6`)
 @pollingOperation(restoreStatus)
 @finalOperation(restoreStatus)
 @useFinalStateVia("azure-async-operation")
