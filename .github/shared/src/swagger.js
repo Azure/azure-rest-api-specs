@@ -10,6 +10,23 @@ import { readFile } from "fs/promises";
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
 
+/**
+ * @type {import('@apidevtools/json-schema-ref-parser').ResolverOptions} 
+ */
+const excludeExamples = {
+  order: 1,
+  canRead: true,
+  read: async (
+    /** @type import('@apidevtools/json-schema-ref-parser').FileInfo */ 
+    file,
+  ) => {
+    if (example(file.url)) {
+      return "";
+    }
+    return await readFile(file.url, { encoding: "utf8" });
+  },
+};
+
 export class Swagger {
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
@@ -23,9 +40,6 @@ export class Swagger {
   /** @type {SpecModel | undefined} backpointer to owning SpecModel */
   #specModel;
 
-  /** @type {boolean} ignore examples */
-  #ignoreSwaggerExamples = false;
-
   /**
    * @param {string} path
    * @param {Object} [options]
@@ -37,41 +51,6 @@ export class Swagger {
     this.#path = resolve(path);
     this.#logger = options?.logger;
     this.#specModel = options?.specModel;
-    this.#ignoreSwaggerExamples = !!options?.ignoreSwaggerExamples;
-  }
-
-  /**
-   * @returns import('@apidevtools/json-schema-ref-parser').$RefParserOptions
-   */
-  #getRefParserResolver() {
-    if (!this.#ignoreSwaggerExamples) {
-      // Use default resolver if examples are not ignored
-      return { http: false };
-    }
-
-    return {
-      http: false,
-      file: {
-        order: 1,
-        read: async (
-          /** @type import('@apidevtools/json-schema-ref-parser').FileInfo */ file,
-        ) => {
-          if (example(file.url)) {
-            return "";
-          }
-          return await readFile(file.url, { encoding: "utf8" });
-        },
-      },
-    };
-  }
-
-  /**
-   * @param {string} path
-   * @returns {boolean}
-   */
-  #filterRefPaths(/** @type string */ path) {
-    // Always return true if not ignoring examples
-    return this.#ignoreSwaggerExamples ? !example(path) : true;
   }
 
   /**
@@ -80,13 +59,13 @@ export class Swagger {
   async getRefs() {
     if (!this.#refs) {
       const schema = await $RefParser.resolve(this.#path, {
-        resolve: this.#getRefParserResolver(),
+        resolve: { file: excludeExamples, http: false },
       });
 
       const refPaths = schema
         .paths("file")
         // Exclude examples
-        .filter((p) => this.#filterRefPaths(p))
+        .filter((p) => !example(p))
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 
