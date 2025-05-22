@@ -16,10 +16,10 @@ describe("Swagger", () => {
   });
 });
 
-describe("isResolverError", () => { 
-  it("returns true for resolver errors with ioErrorCode", () => { 
+describe("isResolverError", () => {
+  it("returns true for resolver errors with ioErrorCode", () => {
     const resolverError = new ResolverError(new Error("Test error"));
-    resolverError.ioErrorCode = "ENOENT"; 
+    resolverError.ioErrorCode = "ENOENT";
     expect(isResolverError(resolverError)).toBe(true);
   });
 
@@ -28,7 +28,8 @@ describe("isResolverError", () => {
     expect(isResolverError(error)).toBe(false);
   });
 
-  it("returns false if input is not an error"), () => { 
-    expect(isResolverError(123)).toBe(false);
-  }
-})
+  it("returns false if input is not an error"),
+    () => {
+      expect(isResolverError(123)).toBe(false);
+    };
+});
