@@ -369,7 +369,4 @@ using Microsoft.DataReplication;
   "RecoveryServicesDataReplicationMgmtClient",
   "python"
 );
-@@clientName(Microsoft.DataReplication,
-  "DataReplicationMgmtClient",
-  "java"
-);
+@@clientName(Microsoft.DataReplication, "DataReplicationMgmtClient", "java");
