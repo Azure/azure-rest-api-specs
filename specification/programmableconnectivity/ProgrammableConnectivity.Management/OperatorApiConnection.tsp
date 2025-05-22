@@ -142,6 +142,12 @@ model OperatorApiConnectionProperties {
   purposeReason: string;
 
   /**
+   * The legal basis on which the Application receives data.
+   */
+  @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+  applicationLegalBasisForInputData: LegalBasis;
+
+  /**
    * List of ways the data returned on this API is processed.
    */
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
@@ -540,6 +546,40 @@ union Purpose {
   vendorRecordsManagement: "Vendor Records Management",
   vendorSelectionAssessment: "Vendor Selection Assessment",
   verification: "Verification",
+  string,
+}
+
+/**
+ * Valid values for the legal basis based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+@TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+union LegalBasis {
+  consent: "Consent",
+  contract: "Contract",
+  contractPerformance: "Contract Performance",
+  dataTransferLegalBasis: "Data Transfer Legal Basis",
+  enterIntoContract: "Enter Into Contract",
+  legalBasis: "Legal Basis",
+  legalObligation: "Legal Obligation",
+  legitimateInterest: "Legitimate Interest",
+  legitimateInterestOfController: "Legitimate Interest Of Controller",
+  legitimateInterestOfDataSubject: "Legitimate Interest Of Data Subject",
+  legitimateInterestOfThirdParty: "Legitimate Interest Of Third Party",
+  officialAuthorityOfController: "Official Authority Of Controller",
+  publicInterest: "Public Interest",
+  vitalInterest: "Vital Interest",
+  vitalInterestOfDataSubject: "Vital Interest Of Data Subject",
+  vitalInterestOfNaturalPerson: "Vital Interest Of Natural Person",
+  informedConsent: "Informed Consent",
+  dataControllerContract: "Data Controller Contract",
+  impliedConsent: "Implied Consent",
+  dataSubjectContract: "Data Subject Contract",
+  explicitlyExpressedConsent: "Explicitly Expressed Consent",
+  uninformedConsent: "Uninformed Consent",
+  dataProcessorContract: "Data Processor Contract",
+  expressedConsent: "Expressed Consent",
+  thirdPartyContract: "Third Party Contract",
   string,
 }
 

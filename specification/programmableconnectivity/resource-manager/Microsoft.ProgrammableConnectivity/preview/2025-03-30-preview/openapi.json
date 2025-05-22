@@ -2079,6 +2079,143 @@
         "countryCode"
       ]
     },
+    "LegalBasis": {
+      "type": "string",
+      "description": "Valid values for the legal basis based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.",
+      "enum": [
+        "Consent",
+        "Contract",
+        "Contract Performance",
+        "Data Transfer Legal Basis",
+        "Enter Into Contract",
+        "Legal Basis",
+        "Legal Obligation",
+        "Legitimate Interest",
+        "Legitimate Interest Of Controller",
+        "Legitimate Interest Of Data Subject",
+        "Legitimate Interest Of Third Party",
+        "Official Authority Of Controller",
+        "Public Interest",
+        "Vital Interest",
+        "Vital Interest Of Data Subject",
+        "Vital Interest Of Natural Person",
+        "Informed Consent",
+        "Data Controller Contract",
+        "Implied Consent",
+        "Data Subject Contract",
+        "Explicitly Expressed Consent",
+        "Uninformed Consent",
+        "Data Processor Contract",
+        "Expressed Consent",
+        "Third Party Contract"
+      ],
+      "x-ms-enum": {
+        "name": "LegalBasis",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "consent",
+            "value": "Consent"
+          },
+          {
+            "name": "contract",
+            "value": "Contract"
+          },
+          {
+            "name": "contractPerformance",
+            "value": "Contract Performance"
+          },
+          {
+            "name": "dataTransferLegalBasis",
+            "value": "Data Transfer Legal Basis"
+          },
+          {
+            "name": "enterIntoContract",
+            "value": "Enter Into Contract"
+          },
+          {
+            "name": "legalBasis",
+            "value": "Legal Basis"
+          },
+          {
+            "name": "legalObligation",
+            "value": "Legal Obligation"
+          },
+          {
+            "name": "legitimateInterest",
+            "value": "Legitimate Interest"
+          },
+          {
+            "name": "legitimateInterestOfController",
+            "value": "Legitimate Interest Of Controller"
+          },
+          {
+            "name": "legitimateInterestOfDataSubject",
+            "value": "Legitimate Interest Of Data Subject"
+          },
+          {
+            "name": "legitimateInterestOfThirdParty",
+            "value": "Legitimate Interest Of Third Party"
+          },
+          {
+            "name": "officialAuthorityOfController",
+            "value": "Official Authority Of Controller"
+          },
+          {
+            "name": "publicInterest",
+            "value": "Public Interest"
+          },
+          {
+            "name": "vitalInterest",
+            "value": "Vital Interest"
+          },
+          {
+            "name": "vitalInterestOfDataSubject",
+            "value": "Vital Interest Of Data Subject"
+          },
+          {
+            "name": "vitalInterestOfNaturalPerson",
+            "value": "Vital Interest Of Natural Person"
+          },
+          {
+            "name": "informedConsent",
+            "value": "Informed Consent"
+          },
+          {
+            "name": "dataControllerContract",
+            "value": "Data Controller Contract"
+          },
+          {
+            "name": "impliedConsent",
+            "value": "Implied Consent"
+          },
+          {
+            "name": "dataSubjectContract",
+            "value": "Data Subject Contract"
+          },
+          {
+            "name": "explicitlyExpressedConsent",
+            "value": "Explicitly Expressed Consent"
+          },
+          {
+            "name": "uninformedConsent",
+            "value": "Uninformed Consent"
+          },
+          {
+            "name": "dataProcessorContract",
+            "value": "Data Processor Contract"
+          },
+          {
+            "name": "expressedConsent",
+            "value": "Expressed Consent"
+          },
+          {
+            "name": "thirdPartyContract",
+            "value": "Third Party Contract"
+          }
+        ]
+      }
+    },
     "LocalRepresentative": {
       "type": "object",
       "description": "Model defining a local representative for a country/region.",
@@ -2245,6 +2382,10 @@
           "type": "string",
           "description": "Explanation of the reason that justifies the purpose: specifically why is the API used for the application's use case."
         },
+        "applicationLegalBasisForInputData": {
+          "$ref": "#/definitions/LegalBasis",
+          "description": "The legal basis on which the Application receives data."
+        },
         "dataProcessingList": {
           "type": "array",
           "description": "List of ways the data returned on this API is processed.",
@@ -2262,6 +2403,7 @@
         "planTermsAndConditionsAccepted",
         "purposes",
         "purposeReason",
+        "applicationLegalBasisForInputData",
         "dataProcessingList"
       ]
     },
@@ -2319,6 +2461,10 @@
         "purposeReason": {
           "type": "string",
           "description": "Explanation of the reason that justifies the purpose: specifically why is the API used for the application's use case."
+        },
+        "applicationLegalBasisForInputData": {
+          "$ref": "#/definitions/LegalBasis",
+          "description": "The legal basis on which the Application receives data."
         },
         "dataProcessingList": {
           "type": "array",
