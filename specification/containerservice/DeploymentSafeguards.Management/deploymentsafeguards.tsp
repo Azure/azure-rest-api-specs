@@ -81,7 +81,7 @@ interface DeploymentSafeguards {
   get is ArmResourceRead<DeploymentSafeguard>;
 
   @doc("Creates or updates a deploymentSafeguard")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DeploymentSafeguard>;
+  put is ArmResourceCreateOrUpdateAsync<DeploymentSafeguard>;
 
   @doc("Delete DeploymentSafeguards")
   delete is ArmResourceDeleteWithoutOkAsync<DeploymentSafeguard>;
