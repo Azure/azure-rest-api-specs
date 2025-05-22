@@ -49,3 +49,5 @@ using Microsoft.Advisor;
 @@clientName(PredictsOperationGroup.predict::parameters.body,
   "predictionRequest"
 );
+
+@@clientName(AdvisorScoreEntity, "ScoreEntityForAdvisor", "go");
