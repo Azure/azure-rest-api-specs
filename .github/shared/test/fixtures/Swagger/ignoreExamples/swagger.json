@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "info": {
     "title": "Test Fixture API",
     "version": "1.0.0"
@@ -11,16 +11,12 @@
         "responses": {
           "200": {
             "description": "Successful response",
-            "content": {
+            "schema": {
+              "$ref": "included.json#/definitions/Item"
+            },
+            "examples": {
               "application/json": {
-                "schema": {
-                  "$ref": "included.json#/Item"
-                },
-                "examples": {
-                  "default": {
-                    "$ref": "examples/example.json"
-                  }
-                }
+                "$ref": "examples/example.json"
               }
             }
           }
