@@ -192,6 +192,34 @@ export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOpti
   }
 }
 
+export class TspConfigJavaMgmtPackageDirFormatSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-java",
+      "package-dir",
+      new RegExp(/^azure-resourcemanager-[^\/]+$/) // Matches "azure-resourcemanager-<service-name>" with no restriction on characters after the hyphen
+    );
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder); // Ensures this rule only applies to management plane SDKs
+  }
+}
+
+export class TspConfigJavaMgmtNamespaceFormatSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-java",
+      "namespace",
+      new RegExp(/^com\.azure\.resourcemanager\.[^\.]+$/) // Matches "com.azure.resourcemanager.<service-name>" with no restriction on characters after the last dot
+    );
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder); // Ensures this rule only applies to management plane SDKs
+  }
+}
+
 // ----- TS management modular sub rules -----
 export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -204,10 +232,15 @@ export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extend
 
 export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^arm(?:-[a-z]+)+$/));
+    super(
+      "@azure-tools/typespec-ts",
+      "package-dir",
+      new RegExp(/^arm-[^\/]+$/)
+    );
   }
+
   protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder); 
   }
 }
 
@@ -284,6 +317,7 @@ export class TspConfigGoDpModuleMatchPatternSubRule extends TspconfigEmitterOpti
   }
 }
 
+// ----- Go Mgmt plane sub rules -----
 export class TspConfigGoMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "service-dir", new RegExp(/^sdk\/resourcemanager\/[^\/]*$/));
@@ -451,6 +485,8 @@ export class TspConfigCsharpMgmtPackageDirectorySubRule extends TspconfigEmitter
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzPackageDirectorySubRule(),
+  new TspConfigJavaMgmtPackageDirFormatSubRule(),
+  new TspConfigJavaMgmtNamespaceFormatSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
