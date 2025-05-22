@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace AzureAppConfiguration;
 
@@ -38,6 +40,7 @@ alias KeysRequestParams = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Gets a list of keys.")
+@convenientAPI(false, "csharp")
 @doc("Gets a list of keys.")
 op getKeys is Foundations.ResourceList<
   Key,
@@ -52,6 +55,7 @@ op getKeys is Foundations.ResourceList<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
 @summary("Requests the headers and status of the given resource.")
 @doc("Requests the headers and status of the given resource.")
+@convenientAPI(false, "csharp")
 @route("/keys")
 @head
 op checkKeys is AppConfigOperation<
@@ -87,6 +91,7 @@ alias KeyValuesRequestParams = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Gets a list of key-values.")
+@convenientAPI(false, "csharp")
 @doc("Gets a list of key-values.")
 op getKeyValues is Foundations.ResourceList<
   KeyValue,
@@ -101,6 +106,7 @@ op getKeyValues is Foundations.ResourceList<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
 @summary("Requests the headers and status of the given resource.")
 @doc("Requests the headers and status of the given resource.")
+@convenientAPI(false, "csharp")
 @route("/kv")
 @head
 op checkKeyValues is AppConfigOperation<
@@ -111,6 +117,7 @@ op checkKeyValues is AppConfigOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a single key-value.")
 @doc("Gets a single key-value.")
+@convenientAPI(false, "csharp")
 @get
 op getKeyValue is Foundations.ResourceOperation<
   KeyValue,
@@ -141,6 +148,7 @@ op getKeyValue is Foundations.ResourceOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Creates a key-value.")
 @doc("Creates a key-value.")
+@convenientAPI(false, "csharp")
 @route("/kv/{key}")
 @put
 op putKeyValue is AppConfigOperation<
@@ -174,6 +182,7 @@ op putKeyValue is AppConfigOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Deletes a key-value.")
 @doc("Deletes a key-value.")
+@convenientAPI(false, "csharp")
 @route("/kv/{key}")
 @delete
 op deleteKeyValue is AppConfigOperation<
@@ -196,6 +205,7 @@ op deleteKeyValue is AppConfigOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
 @summary("Requests the headers and status of the given resource.")
 @doc("Requests the headers and status of the given resource.")
+@convenientAPI(false, "csharp")
 @route("/kv/{key}")
 @head
 op checkKeyValue is AppConfigOperation<
@@ -220,6 +230,7 @@ op checkKeyValue is AppConfigOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of key-value snapshots.")
+@convenientAPI(false, "csharp")
 @doc("Gets a list of key-value snapshots.")
 op getSnapshots is Foundations.ResourceList<
   Snapshot,
@@ -244,6 +255,7 @@ op getSnapshots is Foundations.ResourceList<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
 @summary("Requests the headers and status of the given resource.")
 @doc("Requests the headers and status of the given resource.")
+@convenientAPI(false, "csharp")
 @route("/snapshots")
 @head
 op checkSnapshots is AppConfigOperation<
@@ -253,6 +265,7 @@ op checkSnapshots is AppConfigOperation<
 
 @summary("Gets a single key-value snapshot.")
 @doc("Gets a single key-value snapshot.")
+@convenientAPI(false, "csharp")
 op getSnapshot is StandardOps.ResourceRead<
   Snapshot,
   QueryParametersTrait<SelectQueryParam<SnapshotFields>> &
@@ -272,6 +285,7 @@ op getSnapshot is StandardOps.ResourceRead<
 @summary("Creates a key-value snapshot.")
 @doc("Creates a key-value snapshot.")
 @route("/snapshots/{name}")
+@convenientAPI(false, "csharp")
 @pollingOperation(getOperationDetails)
 @createsOrReplacesResource(Snapshot)
 @put
@@ -301,6 +315,7 @@ op createSnapshot is Foundations.LongRunningOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Updates the state of a key-value snapshot.")
 @doc("Updates the state of a key-value snapshot.")
+@convenientAPI(false, "csharp")
 @route("/snapshots/{name}")
 @patch(#{ implicitOptionality: true })
 op updateSnapshot is AppConfigOperation<
@@ -328,6 +343,7 @@ op updateSnapshot is AppConfigOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
 @summary("Requests the headers and status of the given resource.")
 @doc("Requests the headers and status of the given resource.")
+@convenientAPI(false, "csharp")
 @route("/snapshots/{name}")
 @head
 op checkSnapshot is AppConfigOperation<
@@ -352,6 +368,7 @@ alias LabelsRequestParams = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of labels.")
 @doc("Gets a list of labels.")
+@convenientAPI(false, "csharp")
 @route("/labels")
 op getLabels is AppConfigOperation<
   LabelsRequestParams,
@@ -364,6 +381,7 @@ op getLabels is AppConfigOperation<
 @summary("Requests the headers and status of the given resource.")
 @doc("Requests the headers and status of the given resource.")
 @route("/labels")
+@convenientAPI(false, "csharp")
 @head
 op checkLabels is AppConfigOperation<
   LabelsRequestParams,
@@ -375,6 +393,7 @@ op checkLabels is AppConfigOperation<
 @summary("Locks a key-value.")
 @doc("Locks a key-value.")
 @route("/locks/{key}")
+@convenientAPI(false, "csharp")
 @put
 op putLock is AppConfigOperation<
   {
@@ -393,6 +412,7 @@ op putLock is AppConfigOperation<
 @summary("Unlocks a key-value.")
 @doc("Unlocks a key-value.")
 @route("/locks/{key}")
+@convenientAPI(false, "csharp")
 @delete
 op deleteLock is AppConfigOperation<
   {
@@ -430,6 +450,7 @@ alias RevisionsRequestParams = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of key-value revisions.")
 @doc("Gets a list of key-value revisions.")
+@convenientAPI(false, "csharp")
 @route("/revisions")
 @get
 op getRevisions is AppConfigOperation<
@@ -442,6 +463,7 @@ op getRevisions is AppConfigOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
 @summary("Requests the headers and status of the given resource.")
 @doc("Requests the headers and status of the given resource.")
+@convenientAPI(false, "csharp")
 @route("/revisions")
 @head
 op checkRevisions is AppConfigOperation<
@@ -452,6 +474,7 @@ op checkRevisions is AppConfigOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets the state of a long running operation.")
 @doc("Gets the state of a long running operation.")
+@convenientAPI(false, "csharp")
 @route("/operations")
 @get
 op getOperationDetails is AppConfigOperation<
