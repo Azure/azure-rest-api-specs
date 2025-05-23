@@ -111,16 +111,17 @@ async function runLintDiff(
       changedFilesPath,
     );
   } catch (error) {
-    process.exitCode = 1;
-    console.log(error);
-
     if (error instanceof SpecModelError) { 
       console.log("\n\n");
       console.log("❌ Error building Spec Model from changed file list:");
       console.log(`${error}`);
       console.log("Ensure input files and references are valid.");
+
+      process.exitCode = 1;
+      return;
     }
-    return;
+
+    throw error;
   }
 
   if (beforeList.size === 0 && afterList.size === 0) {

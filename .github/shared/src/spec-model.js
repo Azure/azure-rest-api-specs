@@ -72,7 +72,6 @@ export class SpecModel {
             if (error instanceof SpecModelError) {
               error.readme = readme.path;
               error.tag = tag.name;
-              throw error;
             }
 
             throw error;
