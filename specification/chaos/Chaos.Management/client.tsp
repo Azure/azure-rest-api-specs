@@ -33,27 +33,27 @@ interface Experiments {
   executionDetails is Microsoft.Chaos.ExperimentExecutions.getExecutionDetails;
 }
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface Capabilities extends Microsoft.Chaos.Capabilities {}
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface CapabilityTypes extends Microsoft.Chaos.CapabilityTypes {}
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface Operations extends Microsoft.Chaos.Operations {}
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface OperationStatuses extends Microsoft.Chaos.OperationStatuses {}
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface Targets extends Microsoft.Chaos.Targets {}
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface TargetTypes extends Microsoft.Chaos.TargetTypes {}
 
