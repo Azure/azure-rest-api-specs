@@ -26,7 +26,7 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package7.6
+tag: package-7.6
 ```
 
 ### Tag: package-7.6
