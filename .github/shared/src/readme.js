@@ -36,15 +36,15 @@ export class Readme {
   #path;
 
   /**
-   * backpointer to owning SpecModel
+   * SpecModel that contains this Readme
    * @type {SpecModel | undefined}
    */
   #specModel;
 
   /**
-   * @param {string} path
+   * @param {string} path Used for content, unless options.content is specified
    * @param {Object} [options]
-   * @param {string} [options.content]
+   * @param {string} [options.content] If specified, is used instead of reading path from disk
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
    */
@@ -175,7 +175,10 @@ export class Readme {
           inputFiles.set(swagger.path, swagger);
         }
 
-        const tag = new Tag(tagName, inputFiles, { logger: this.#logger });
+        const tag = new Tag(tagName, inputFiles, {
+          logger: this.#logger,
+          readme: this,
+        });
 
         tags.set(tag.name, tag);
       }
@@ -208,6 +211,13 @@ export class Readme {
    */
   get path() {
     return this.#path;
+  }
+
+  /**
+   * @returns {SpecModel | undefined} SpecModel that contains this Readme
+   */
+  get specModel() {
+    return this.#specModel;
   }
 
   /**
