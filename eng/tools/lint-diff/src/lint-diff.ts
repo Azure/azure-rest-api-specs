@@ -5,7 +5,7 @@ import { runChecks, getAutorestErrors } from "./runChecks.js";
 import { correlateRuns } from "./correlateResults.js";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
 import { writeFile } from "node:fs/promises";
-import { SpecModelError } from "@azure-tools/specs-shared/spec-model";
+import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
 
 function usage() {
   console.log("TODO: Write up usage");
