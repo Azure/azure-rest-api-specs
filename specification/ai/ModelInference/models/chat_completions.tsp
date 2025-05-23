@@ -131,15 +131,6 @@ model ChatCompletionsOptions {
     """)
   modalities?: ChatCompletionsModality[];
 
-  @doc("""
-    User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
-    These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
-    [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
-    """)
-  @added(ModelInference.Versions.v2025_05_01)
-  @clientName("UserSecurityContext", "csharp")
-  user_security_context?: UserSecurityContext;
-
   ...Record<unknown>;
 }
 @doc("The modalities that the model is allowed to use for the chat completions response.")
@@ -255,11 +246,6 @@ model CompletionsUsageDetails {
   @doc("The number of tokens corresponding to audio input.")
   @visibility(Lifecycle.Read)
   audio_tokens: int32;
-
-  @doc("The number of tokens corresponding to reasoning.")
-  @added(ModelInference.Versions.v2025_04_01)
-  @visibility(Lifecycle.Read)
-  reasoning_tokens: int32;
 
   @doc("The total number of tokens processed for the completions request and response.")
   @visibility(Lifecycle.Read)
@@ -506,11 +492,6 @@ model StreamingChatResponseMessageUpdate {
   @visibility(Lifecycle.Read)
   content?: string;
 
-  @doc("The reasoning content the model used for generating the response")
-  @added(ModelInference.Versions.v2025_04_01)
-  @visibility(Lifecycle.Read)
-  reasoning_content?: string;
-
   @encodedName("application/json", "tool_calls")
   @doc("""
     The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
@@ -530,12 +511,6 @@ model ChatResponseMessage {
   @doc("The content of the message.")
   @visibility(Lifecycle.Read)
   content: string | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
-  @doc("The reasoning content the model used for generating the response")
-  @added(ModelInference.Versions.v2025_04_01)
-  @visibility(Lifecycle.Read)
-  reasoning_content?: string;
 
   @encodedName("application/json", "tool_calls")
   @doc("""
@@ -799,39 +774,4 @@ model ChatCompletionsAudio {
   @doc("The transcript of the audio file.")
   @visibility(Lifecycle.Read)
   transcript: string;
-}
-
-@doc("""
-  User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
-  These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
-  [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
-  """)
-@added(ModelInference.Versions.v2025_05_01)
-model UserSecurityContext {
-  @doc("The name of the application. Sensitive personal information should not be included in this field.")
-  @maxLength(100)
-  application_name?: string;
-
-  @doc("""
-    This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field.
-    """)
-  @minLength(36)
-  @maxLength(36)
-  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  end_user_id?: string;
-
-  @doc("""
-    The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multi tenant.
-    """)
-  @minLength(36)
-  @maxLength(36)
-  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  end_user_tenant_id?: string;
-
-  @doc("""
-    Captures the original client's IP address, accepting both IPv4 and IPv6 formats.
-    """)
-  @minLength(2)
-  @maxLength(45)
-  source_ip?: string;
 }
