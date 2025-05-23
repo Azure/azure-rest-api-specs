@@ -875,6 +875,10 @@
         "optimizedForFrequentAttach": {
           "type": "boolean",
           "description": "Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine."
+        },
+        "AvailabilityPolicy": {
+          "$ref": "./diskRPCommon.json#/definitions/AvailabilityPolicy",
+          "description": "Determines how platform treats disk failures"
         }
       },
       "description": "Disk resource update properties."
