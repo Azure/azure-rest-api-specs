@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { processFilesToSpecificationList } from '../src/main.js';
+import { processFilesToSpecificationList } from '../src/runner.js';
 import path from 'path';
 
 const ROOT = path.resolve(__dirname, '../../../../')

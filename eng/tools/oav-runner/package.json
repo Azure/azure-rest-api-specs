@@ -3,12 +3,13 @@
   "private": true,
   "type": "module",
   "version": "1.0.0",
+  "main": "dist/src/main.js",
+  "bin": {
+    "oav-runner": "cmd/oav-runner.js"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest --run --disable-console-intercept --printConsoleTrace=true"
-  },
-  "bin": {
-    "oav-runner": "dist/src/cli.js"
   },
   "dependencies": {
     "@azure-tools/specs-shared": "file:../../../.github/shared",
