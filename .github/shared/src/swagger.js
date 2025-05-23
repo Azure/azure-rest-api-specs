@@ -1,13 +1,32 @@
 // @ts-check
 
-import $RefParser from "@apidevtools/json-schema-ref-parser";
+import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { relative, resolve } from "path";
 import { mapAsync } from "./array.js";
+import { SpecModelError } from "./spec-model.js";
+import { readFile } from "fs/promises";
 
 /**
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
+
+/**
+ * @type {import('@apidevtools/json-schema-ref-parser').ResolverOptions}
+ */
+const excludeExamples = {
+  order: 1,
+  canRead: true,
+  read: async (
+    /** @type import('@apidevtools/json-schema-ref-parser').FileInfo */
+    file,
+  ) => {
+    if (example(file.url)) {
+      return "";
+    }
+    return await readFile(file.url, { encoding: "utf8" });
+  },
+};
 
 export class Swagger {
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -39,9 +58,24 @@ export class Swagger {
    */
   async getRefs() {
     if (!this.#refs) {
-      const schema = await $RefParser.resolve(this.#path, {
-        resolve: { http: false },
-      });
+      let schema;
+      try {
+        schema = await $RefParser.resolve(this.#path, {
+          resolve: { file: excludeExamples, http: false },
+        });
+      } catch (error) {
+        if (error instanceof ResolverError) {
+          throw new SpecModelError(
+            `Failed to resolve file for swagger: ${this.#path}`,
+            {
+              cause: error,
+              source: error.source,
+            },
+          );
+        }
+
+        throw error;
+      }
 
       const refPaths = schema
         .paths("file")
