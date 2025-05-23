@@ -1,0 +1,1935 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DnsResolverPolicyManagementClient",
+    "description": "The DNS Resolver Policy Management Client.",
+    "version": "2025-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverPolicies/{dnsResolverPolicyName}": {
+      "put": {
+        "tags": [
+          "DnsResolverPolicies"
+        ],
+        "operationId": "DnsResolverPolicies_CreateOrUpdate",
+        "description": "Creates or updates a DNS resolver policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicy"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver policy has been updated.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicy"
+            }
+          },
+          "201": {
+            "description": "The DNS resolver policy has been created.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicy"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Upsert DNS resolver policy": {
+            "$ref": "./examples/DnsResolverPolicy_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DnsResolverPolicies"
+        ],
+        "operationId": "DnsResolverPolicies_Update",
+        "description": "Updates a DNS resolver policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicyPatch"
+            },
+            "description": "Parameters supplied to the Update operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver policy has been updated.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicy"
+            }
+          },
+          "202": {
+            "description": "The operation to update DNS resolver policy has been accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update DNS resolver policy": {
+            "$ref": "./examples/DnsResolverPolicy_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DnsResolverPolicies"
+        ],
+        "operationId": "DnsResolverPolicies_Delete",
+        "description": "Deletes a DNS resolver policy. WARNING: This operation cannot be undone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The operation to delete DNS resolver policy has been accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The DNS resolver policy was not found."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete DNS resolver policy": {
+            "$ref": "./examples/DnsResolverPolicy_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DnsResolverPolicies"
+        ],
+        "operationId": "DnsResolverPolicies_Get",
+        "description": "Gets properties of a DNS resolver policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver policy was found.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicy"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve DNS resolver policy": {
+            "$ref": "./examples/DnsResolverPolicy_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverPolicies": {
+      "get": {
+        "tags": [
+          "DnsResolverPolicies"
+        ],
+        "operationId": "DnsResolverPolicies_ListByResourceGroup",
+        "description": "Lists DNS resolver policies within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DNS resolver policies in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DNS resolver policies by resource group": {
+            "$ref": "./examples/DnsResolverPolicy_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnsResolverPolicies": {
+      "get": {
+        "tags": [
+          "DnsResolverPolicies"
+        ],
+        "operationId": "DnsResolverPolicies_List",
+        "description": "Lists DNS resolver policies in all resource groups of a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DNS resolver policies in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DNS resolver policies by subscription": {
+            "$ref": "./examples/DnsResolverPolicy_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverPolicies/{dnsResolverPolicyName}/dnsSecurityRules/{dnsSecurityRuleName}": {
+      "put": {
+        "tags": [
+          "DnsSecurityRules"
+        ],
+        "operationId": "DnsSecurityRules_CreateOrUpdate",
+        "description": "Creates or updates a DNS security rule for a DNS resolver policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsSecurityRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsSecurityRule"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS security rule has been updated.",
+            "schema": {
+              "$ref": "#/definitions/DnsSecurityRule"
+            }
+          },
+          "201": {
+            "description": "The DNS security rule has been created.",
+            "schema": {
+              "$ref": "#/definitions/DnsSecurityRule"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Upsert DNS security rule": {
+            "$ref": "./examples/DnsSecurityRule_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DnsSecurityRules"
+        ],
+        "operationId": "DnsSecurityRules_Update",
+        "description": "Updates a DNS security rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsSecurityRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsSecurityRulePatch"
+            },
+            "description": "Parameters supplied to the Update operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS security rule has been updated.",
+            "schema": {
+              "$ref": "#/definitions/DnsSecurityRule"
+            }
+          },
+          "202": {
+            "description": "The operation to update the DNS security rule has been accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update DNS security rule for DNS resolver policy": {
+            "$ref": "./examples/DnsSecurityRule_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DnsSecurityRules"
+        ],
+        "operationId": "DnsSecurityRules_Delete",
+        "description": "Deletes a DNS security rule for a DNS resolver policy. WARNING: This operation cannot be undone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsSecurityRuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The operation to delete the DNS security rule has been accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The DNS security rule was not found."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete DNS security rule for DNS resolver policy": {
+            "$ref": "./examples/DnsSecurityRule_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DnsSecurityRules"
+        ],
+        "operationId": "DnsSecurityRules_Get",
+        "description": "Gets properties of a DNS security rule for a DNS resolver policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsSecurityRuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS security rule was found.",
+            "schema": {
+              "$ref": "#/definitions/DnsSecurityRule"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve DNS security rule for DNS resolver policy": {
+            "$ref": "./examples/DnsSecurityRule_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverPolicies/{dnsResolverPolicyName}/dnsSecurityRules": {
+      "get": {
+        "tags": [
+          "DnsSecurityRules"
+        ],
+        "operationId": "DnsSecurityRules_List",
+        "description": "Lists DNS security rules for a DNS resolver policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DNS security rules for the DNS resolver policy.",
+            "schema": {
+              "$ref": "#/definitions/DnsSecurityRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DNS security rules by DNS resolver policy": {
+            "$ref": "./examples/DnsSecurityRule_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverPolicies/{dnsResolverPolicyName}/virtualNetworkLinks/{dnsResolverPolicyVirtualNetworkLinkName}": {
+      "put": {
+        "tags": [
+          "DnsResolverPolicyVirtualNetworkLinks"
+        ],
+        "operationId": "DnsResolverPolicyVirtualNetworkLinks_CreateOrUpdate",
+        "description": "Creates or updates a DNS resolver policy virtual network link.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyVirtualNetworkLinkNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver policy virtual network link has been updated.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
+            }
+          },
+          "201": {
+            "description": "The DNS resolver policy virtual network link has been created.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Upsert DNS resolver policy virtual network link": {
+            "$ref": "./examples/DnsResolverPolicyVirtualNetworkLink_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DnsResolverPolicyVirtualNetworkLinks"
+        ],
+        "operationId": "DnsResolverPolicyVirtualNetworkLinks_Update",
+        "description": "Updates a DNS resolver policy virtual network link.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyVirtualNetworkLinkNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLinkPatch"
+            },
+            "description": "Parameters supplied to the Update operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver policy virtual network link has been updated.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
+            }
+          },
+          "202": {
+            "description": "The operation to update DNS resolver policy virtual network link has been accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update DNS resolver policy virtual network link": {
+            "$ref": "./examples/DnsResolverPolicyVirtualNetworkLink_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DnsResolverPolicyVirtualNetworkLinks"
+        ],
+        "operationId": "DnsResolverPolicyVirtualNetworkLinks_Delete",
+        "description": "Deletes a DNS resolver policy virtual network link. WARNING: This operation cannot be undone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyVirtualNetworkLinkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The operation to delete the DNS resolver policy virtual network link has been accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The DNS resolver policy virtual network link was not found."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete DNS resolver policy virtual network link": {
+            "$ref": "./examples/DnsResolverPolicyVirtualNetworkLink_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DnsResolverPolicyVirtualNetworkLinks"
+        ],
+        "operationId": "DnsResolverPolicyVirtualNetworkLinks_Get",
+        "description": "Gets properties of a DNS resolver policy virtual network link.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyVirtualNetworkLinkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver policy virtual network link was found.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve DNS resolver policy virtual network link": {
+            "$ref": "./examples/DnsResolverPolicyVirtualNetworkLink_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverPolicies/{dnsResolverPolicyName}/virtualNetworkLinks": {
+      "get": {
+        "tags": [
+          "DnsResolverPolicyVirtualNetworkLinks"
+        ],
+        "operationId": "DnsResolverPolicyVirtualNetworkLinks_List",
+        "description": "Lists DNS resolver policy virtual network links.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DNS resolver policy virtual network links.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLinkListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DNS resolver policy virtual network links by DNS resolver policy": {
+            "$ref": "./examples/DnsResolverPolicyVirtualNetworkLink_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverDomainLists/{dnsResolverDomainListName}": {
+      "put": {
+        "tags": [
+          "DnsResolverDomainLists"
+        ],
+        "operationId": "DnsResolverDomainLists_CreateOrUpdate",
+        "description": "Creates or updates a DNS resolver domain list.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverDomainListNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainList"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver domain list has been updated.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainList"
+            }
+          },
+          "201": {
+            "description": "The DNS resolver domain list has been created.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainList"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Upsert DNS resolver domain list with less than 1000 domains": {
+            "$ref": "./examples/DnsResolverDomainList_Put.json"
+          },
+          "Upsert DNS resolver domain list with bulk number of domains": {
+            "$ref": "./examples/DnsResolverDomainList_BulkDomains_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DnsResolverDomainLists"
+        ],
+        "operationId": "DnsResolverDomainLists_Update",
+        "description": "Updates a DNS resolver domain list.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverDomainListNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainListPatch"
+            },
+            "description": "Parameters supplied to the Update operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver domain list has been updated.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainList"
+            }
+          },
+          "202": {
+            "description": "The operation to update DNS resolver domain list has been accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update DNS resolver domain list": {
+            "$ref": "./examples/DnsResolverDomainList_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DnsResolverDomainLists"
+        ],
+        "operationId": "DnsResolverDomainLists_Delete",
+        "description": "Deletes a DNS resolver domain list. WARNING: This operation cannot be undone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverDomainListNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The operation to delete DNS resolver domain list has been accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The DNS resolver domain list was not found."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete DNS resolver domain list": {
+            "$ref": "./examples/DnsResolverDomainList_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DnsResolverDomainLists"
+        ],
+        "operationId": "DnsResolverDomainLists_Get",
+        "description": "Gets properties of a DNS resolver domain list.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverDomainListNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver domain list was found.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainList"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve DNS resolver domain list with less than 1000 domains": {
+            "$ref": "./examples/DnsResolverDomainList_Get.json"
+          },
+          "Retrieve DNS resolver domain list with bulk number of domains": {
+            "$ref": "./examples/DnsResolverDomainList_BulkDomains_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverDomainLists": {
+      "get": {
+        "tags": [
+          "DnsResolverDomainLists"
+        ],
+        "operationId": "DnsResolverDomainLists_ListByResourceGroup",
+        "description": "Lists DNS resolver domain lists within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DNS resolver domain lists in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainListListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DNS resolver domain lists by resource group": {
+            "$ref": "./examples/DnsResolverDomainList_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnsResolverDomainLists": {
+      "get": {
+        "tags": [
+          "DnsResolverDomainLists"
+        ],
+        "operationId": "DnsResolverDomainLists_List",
+        "description": "Lists DNS resolver domain lists in all resource groups of a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DNS resolver domain lists in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainListListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DNS resolver domain lists by subscription": {
+            "$ref": "./examples/DnsResolverDomainList_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverDomainLists/{dnsResolverDomainListName}/bulk": {
+      "post": {
+        "tags": [
+          "DnsResolverDomainLists"
+        ],
+        "operationId": "DnsResolverDomainLists_Bulk",
+        "description": "Uploads or downloads the list of domains for a DNS Resolver Domain List from a storage link.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DnsResolverDomainListNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainListBulk"
+            },
+            "description": "Parameters supplied to the bulk domain list operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS resolver domain list bulk request was successful.",
+            "schema": {
+              "$ref": "#/definitions/DnsResolverDomainList"
+            }
+          },
+          "202": {
+            "description": "The operation to upload/download domains to the DNS Resolver Domain List has been accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Upload DNS resolver domain list domains": {
+            "$ref": "./examples/DnsResolverDomainList_BulkUpload.json"
+          },
+          "Download DNS resolver domain list domains": {
+            "$ref": "./examples/DnsResolverDomainList_BulkDownload.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsResolverPolicies": {
+      "post": {
+        "tags": [
+          "DnsResolverPolicies"
+        ],
+        "operationId": "DnsResolverPolicies_ListByVirtualNetwork",
+        "description": "Lists DNS resolver policy resource IDs linked to a virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DNS resolver policy resource IDs linked to the virtual network.",
+            "schema": {
+              "$ref": "#/definitions/SubResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DNS resolver policies by virtual network": {
+            "$ref": "./examples/DnsResolverPolicy_ListByVirtualNetwork.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DnsResolverPolicyProperties": {
+      "description": "Represents the properties of a DNS resolver policy.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The current provisioning state of the DNS resolver policy. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "resourceGuid": {
+          "description": "The resourceGuid property of the DNS resolver policy resource.",
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceGuid"
+        }
+      }
+    },
+    "DnsResolverPolicy": {
+      "description": "Describes a DNS resolver policy.",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "description": "ETag of the DNS resolver policy.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the DNS resolver policy.",
+          "$ref": "#/definitions/DnsResolverPolicyProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DnsResolverPolicyPatch": {
+      "description": "Describes a DNS resolver policy for PATCH operation.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Tags for DNS resolver policy."
+        }
+      }
+    },
+    "DnsResolverPolicyListResult": {
+      "description": "The response to an enumeration operation on DNS resolver policies.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Enumeration of the DNS resolver policies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DnsResolverPolicy"
+          }
+        },
+        "nextLink": {
+          "description": "The continuation token for the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DnsSecurityRuleProperties": {
+      "description": "Represents the properties of a DNS security rule.",
+      "type": "object",
+      "required": [
+        "priority",
+        "dnsResolverDomainLists",
+        "action"
+      ],
+      "properties": {
+        "priority": {
+          "description": "The priority of the DNS security rule.",
+          "type": "integer",
+          "format": "int32",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "action": {
+          "description": "The action to take on DNS requests that match the DNS security rule.",
+          "$ref": "#/definitions/DnsSecurityRuleAction"
+        },
+        "dnsResolverDomainLists": {
+          "description": "DNS resolver policy domains lists that the DNS security rule applies to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "dnsSecurityRuleState": {
+          "type": "string",
+          "description": "The state of DNS security rule.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "DnsSecurityRuleState",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "The current provisioning state of the DNS security rule. This is a read-only property and any attempt to set this value will be ignored.",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "DnsSecurityRule": {
+      "description": "Describes a DNS security rule.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "etag": {
+          "description": "ETag of the DNS security rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the DNS security rule.",
+          "$ref": "#/definitions/DnsSecurityRuleProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DnsSecurityRulePatchProperties": {
+      "description": "Represents the updatable properties of a DNS security rule.",
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "The action to take on DNS requests that match the DNS security rule.",
+          "$ref": "#/definitions/DnsSecurityRuleAction"
+        },
+        "dnsResolverDomainLists": {
+          "description": "DNS resolver policy domains lists that the DNS security rule applies to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "dnsSecurityRuleState": {
+          "type": "string",
+          "description": "The state of DNS security rule.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "DnsSecurityRuleState",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "description": "The priority of the DNS security rule.",
+          "type": "integer",
+          "format": "int32",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "DnsSecurityRulePatch": {
+      "description": "Describes a DNS security rule for PATCH operation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Updatable properties of the DNS security rule.",
+          "$ref": "#/definitions/DnsSecurityRulePatchProperties",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Tags for DNS security rule."
+        }
+      }
+    },
+    "DnsSecurityRuleListResult": {
+      "description": "The response to an enumeration operation on DNS security rules within a DNS resolver policy.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Enumeration of the DNS security rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DnsSecurityRule"
+          }
+        },
+        "nextLink": {
+          "description": "The continuation token for the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DnsSecurityRuleAction": {
+      "description": "The action to take on DNS requests that match the DNS security rule.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "type": "string",
+          "description": "The type of action to take.",
+          "enum": [
+            "Allow",
+            "Alert",
+            "Block"
+          ],
+          "x-ms-enum": {
+            "name": "actionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DnsResolverPolicyVirtualNetworkLinkProperties": {
+      "description": "Represents the properties of a DNS resolver policy virtual network link.",
+      "type": "object",
+      "required": [
+        "virtualNetwork"
+      ],
+      "properties": {
+        "virtualNetwork": {
+          "description": "The reference to the virtual network. This cannot be changed after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "$ref": "#/definitions/SubResource"
+        },
+        "provisioningState": {
+          "description": "The current provisioning state of the DNS resolver policy virtual network link. This is a read-only property and any attempt to set this value will be ignored.",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "DnsResolverPolicyVirtualNetworkLink": {
+      "description": "Describes a DNS resolver policy virtual network link.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "etag": {
+          "description": "ETag of the DNS resolver policy virtual network link.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the DNS resolver policy virtual network link.",
+          "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLinkProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DnsResolverPolicyVirtualNetworkLinkPatch": {
+      "description": "Describes a DNS resolver policy virtual network link for PATCH operation.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Tags for the DNS resolver policy virtual network link."
+        }
+      }
+    },
+    "DnsResolverPolicyVirtualNetworkLinkListResult": {
+      "description": "The response to an enumeration operation on DNS resolver policy virtual network links.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Enumeration of the DNS resolver policy virtual network links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
+          }
+        },
+        "nextLink": {
+          "description": "The continuation token for the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DnsResolverDomainListProperties": {
+      "description": "Represents the properties of a DNS resolver domain list.",
+      "type": "object",
+      "properties": {
+        "domains": {
+          "description": "The domains in the domain list. Will be null if user is using large domain list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainsUrl": {
+          "description": "The URL for bulk upload or download for domain lists containing larger set of domains. This will be populated if domains is empty or null.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The current provisioning state of the DNS resolver domain list. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "resourceGuid": {
+          "description": "The resourceGuid property of the DNS resolver domain list resource.",
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceGuid"
+        }
+      }
+    },
+    "DnsResolverDomainList": {
+      "description": "Describes a DNS resolver domain list.",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "description": "ETag of the DNS resolver domain list.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the DNS resolver domain list.",
+          "$ref": "#/definitions/DnsResolverDomainListProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DnsResolverDomainListPatchProperties": {
+      "description": "Represents the updatable properties of a DNS resolver domain list.",
+      "type": "object",
+      "properties": {
+        "domains": {
+          "description": "The domains in the domain list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DnsResolverDomainListPatch": {
+      "description": "Describes a DNS resolver domain list for PATCH operation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Updatable properties of the DNS resolver domain list.",
+          "$ref": "#/definitions/DnsResolverDomainListPatchProperties",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Tags for DNS resolver domain list."
+        }
+      }
+    },
+    "DnsResolverDomainListListResult": {
+      "description": "The response to an enumeration operation on DNS resolver domain lists.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Enumeration of the DNS resolver domain lists.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DnsResolverDomainList"
+          }
+        },
+        "nextLink": {
+          "description": "The continuation token for the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DnsResolverDomainListBulkProperties": {
+      "description": "Describes DNS resolver domain list properties for bulk UPLOAD or DOWNLOAD operations.",
+      "type": "object",
+      "required": [
+        "storageUrl",
+        "action"
+      ],
+      "properties": {
+        "storageUrl": {
+          "description": "The storage account blob file URL to be used in the bulk upload or download request of DNS resolver domain list.",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action to take in the request, Upload or Download.",
+          "$ref": "#/definitions/DnsResolverDomainListBulkActionType"
+        }
+      }
+    },
+    "DnsResolverDomainListBulk": {
+      "description": "Describes a DNS resolver domain list for bulk UPLOAD or DOWNLOAD operations.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of the DNS resolver domain list upload or download request.",
+          "$ref": "#/definitions/DnsResolverDomainListBulkProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "The current provisioning state of the resource.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "DnsResolverDomainListBulkActionType": {
+      "description": "The action type in requests for bulk upload or download of a DNS resolver domain list.",
+      "type": "string",
+      "enum": [
+        "Upload",
+        "Download"
+      ],
+      "x-ms-enum": {
+        "name": "Action",
+        "modelAsString": true
+      }
+    },
+    "ResourceGuid": {
+      "type": "string",
+      "description": "The Guid property of the resource."
+    },
+    "SubResourceListResult": {
+      "description": "The response to an enumeration operation on sub-resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Enumeration of the sub-resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          }
+        },
+        "nextLink": {
+          "description": "The continuation token for the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubResource": {
+      "description": "Reference to another ARM resource.",
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "DnsResolverPolicyNameParameter": {
+      "name": "dnsResolverPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "The name of the DNS resolver policy.",
+      "x-ms-parameter-location": "method"
+    },
+    "DnsSecurityRuleNameParameter": {
+      "name": "dnsSecurityRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "The name of the DNS security rule.",
+      "x-ms-parameter-location": "method"
+    },
+    "DnsResolverPolicyVirtualNetworkLinkNameParameter": {
+      "name": "dnsResolverPolicyVirtualNetworkLinkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "The name of the DNS resolver policy virtual network link for the DNS resolver policy.",
+      "x-ms-parameter-location": "method"
+    },
+    "DnsResolverDomainListNameParameter": {
+      "name": "dnsResolverDomainListName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "The name of the DNS resolver domain list.",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualNetworkNameParameter": {
+      "name": "virtualNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.+$",
+      "minLength": 1,
+      "description": "The name of the virtual network.",
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "The maximum number of results to return. If not specified, returns up to 100 results.",
+      "x-ms-parameter-location": "method"
+    },
+    "IfMatchParameter": {
+      "name": "If-Match",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-client-name": "IfMatch",
+      "description": "ETag of the resource. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.",
+      "x-ms-parameter-location": "method"
+    },
+    "IfNoneMatchParameter": {
+      "name": "If-None-Match",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-client-name": "IfNoneMatch",
+      "description": "Set to '*' to allow a new resource to be created, but to prevent updating an existing resource. Other values will be ignored.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
