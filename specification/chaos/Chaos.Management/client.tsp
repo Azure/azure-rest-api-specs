@@ -1,8 +1,61 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
 using Microsoft.Chaos;
+
+@client(
+  {
+    name: "ChaosManagementClient",
+    service: Microsoft.Chaos,
+  },
+  "java,go"
+)
+@useDependency(Microsoft.Chaos.Versions.v2025_01_01)
+namespace Customization;
+
+@operationGroup("java,go")
+@armResourceOperations
+interface Experiments {
+  get is Microsoft.Chaos.Experiments.get;
+  createOrUpdate is Microsoft.Chaos.Experiments.createOrUpdate;
+  update is Microsoft.Chaos.Experiments.update;
+  delete is Microsoft.Chaos.Experiments.delete;
+  list is Microsoft.Chaos.Experiments.list;
+  listAll is Microsoft.Chaos.Experiments.listAll;
+  cancel is Microsoft.Chaos.Experiments.cancel;
+  start is Microsoft.Chaos.Experiments.start;
+
+  getExecution is Microsoft.Chaos.ExperimentExecutions.getExecution;
+  listAllExecutions is Microsoft.Chaos.ExperimentExecutions.listAllExecutions;
+  executionDetails is Microsoft.Chaos.ExperimentExecutions.getExecutionDetails;
+}
+
+@operationGroup("java,go")
+@armResourceOperations
+interface Capabilities extends Microsoft.Chaos.Capabilities {}
+
+@operationGroup("java,go")
+@armResourceOperations
+interface CapabilityTypes extends Microsoft.Chaos.CapabilityTypes {}
+
+@operationGroup("java,go")
+@armResourceOperations
+interface Operations extends Microsoft.Chaos.Operations {}
+
+@operationGroup("java,go")
+@armResourceOperations
+interface OperationStatuses extends Microsoft.Chaos.OperationStatuses {}
+
+@operationGroup("java,go")
+@armResourceOperations
+interface Targets extends Microsoft.Chaos.Targets {}
+
+@operationGroup("java,go")
+@armResourceOperations
+interface TargetTypes extends Microsoft.Chaos.TargetTypes {}
 
 // csharp
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
@@ -41,6 +94,14 @@ using Microsoft.Chaos;
 
 // java
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "java");
+@@clientName(Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "ResourceIdentity",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.OperationStatusResult,
+  "OperationStatus",
+  "java"
+);
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Experiment.properties);

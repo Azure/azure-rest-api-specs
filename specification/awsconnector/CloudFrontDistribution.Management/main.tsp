@@ -135,7 +135,7 @@ model DistributionConfig {
   originGroups?: OriginGroups;
 
   @doc("A complex type that contains information about origins for this distribution.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   origins?: Origin[];
 
   @doc("The price class that corresponds with the maximum price that you want to pay for CloudFront service. If you specify ``PriceClass_All``, CloudFront responds to requests for your objects from all CloudFront edge locations. If you specify a price class other than ``PriceClass_All``, CloudFront serves your objects from the CloudFront edge location that has the lowest latency among the edge locations in your price class. Viewers who are in or near regions that are excluded from your specified price class may encounter slower performance. For more information about price classes, see [Choosing the Price Class for a CloudFront Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html) in the *Amazon CloudFront Developer Guide*. For information about CloudFront pricing, including how price classes (such as Price Class 100) map to CloudFront regions, see [Amazon CloudFront Pricing](https://docs.aws.amazon.com/cloudfront/pricing/).")
@@ -369,7 +369,7 @@ model Logging {
 @doc("Definition of OriginGroups")
 model OriginGroups {
   @doc("The items (origin groups) in a distribution.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   items?: OriginGroup[];
 
   @doc("The number of origin groups.")

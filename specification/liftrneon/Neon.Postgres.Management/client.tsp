@@ -24,36 +24,30 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(LiftrBase.SingleSignOnStates, "NeonSingleSignOnState", "csharp");
 
-@@clientName(Neon.Postgres.Models.Project, "NeonProject", "csharp");
-@@clientName(Neon.Postgres.Models.ProjectProperties,
+@@clientName(Neon.Postgres.Project, "NeonProject", "csharp");
+@@clientName(Neon.Postgres.ProjectProperties,
   "NeonProjectProperties",
   "csharp"
 );
 
-@@clientName(Neon.Postgres.Models.Branch, "NeonBranch", "csharp");
-@@clientName(Neon.Postgres.Models.BranchProperties,
-  "NeonBranchProperties",
-  "csharp"
-);
+@@clientName(Neon.Postgres.Branch, "NeonBranch", "csharp");
+@@clientName(Neon.Postgres.BranchProperties, "NeonBranchProperties", "csharp");
 
-@@clientName(Neon.Postgres.Models.Endpoint, "NeonEndpoint", "csharp");
-@@clientName(Neon.Postgres.Models.EndpointProperties,
+@@clientName(Neon.Postgres.Endpoint, "NeonEndpoint", "csharp");
+@@clientName(Neon.Postgres.EndpointProperties,
   "NeonEndpointProperties",
   "csharp"
 );
 
-@@clientName(Neon.Postgres.Models.Compute, "NeonCompute", "csharp");
-@@clientName(Neon.Postgres.Models.ComputeProperties,
+@@clientName(Neon.Postgres.Compute, "NeonCompute", "csharp");
+@@clientName(Neon.Postgres.ComputeProperties,
   "NeonComputeProperties",
   "csharp"
 );
 
-@@clientName(Neon.Postgres.Models.ProjectProperties.pgVersion,
+@@clientName(Neon.Postgres.ProjectProperties.pgVersion,
   "postgresVersion",
   "csharp"
 );
 
-@@clientName(Neon.Postgres.Models.ProjectProperties.attributes,
-  "attribute",
-  "csharp"
-);
+@@clientName(Neon.Postgres.ProjectProperties.attributes, "attribute", "csharp");
