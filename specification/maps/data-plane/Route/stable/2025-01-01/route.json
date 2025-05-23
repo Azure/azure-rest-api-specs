@@ -1164,40 +1164,6 @@
         }
       }
     },
-    "RegionTravelSummary": {
-      "description": "Travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada).",
-      "type": "object",
-      "properties": {
-        "countryRegion": {
-          "$ref": "#/definitions/CountryRegion"
-        },
-        "adminDistricts": {
-          "description": "adminDistrict array.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdminDistrict"
-          }
-        },
-        "distanceInMeters": {
-          "description": "Length In Meters property",
-          "type": "number"
-        },
-        "durationInSeconds": {
-          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
-          "format": "int64",
-          "type": "integer"
-        },
-        "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
-          "format": "int64",
-          "type": "integer"
-        },
-        "tollDistanceInMeters": {
-          "description": "The total distance, measured in meters, along the route that includes toll roads.",
-          "type": "number"
-        }
-      }
-    },
     "FeatureTypeEnum": {
       "type": "string",
       "description": "Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
@@ -1788,10 +1754,6 @@
           "items": {
             "$ref": "#/definitions/SubLeg"
           }
-        },
-        "regionTravelSummary": {
-          "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada).",
-          "$ref": "#/definitions/RegionTravelSummary"
         }
       }
     },
