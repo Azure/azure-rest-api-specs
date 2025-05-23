@@ -17,6 +17,11 @@ export async function checkSpecs(rootDirectory: string): Promise<[number, Array<
     const changedFiles = await getChangedFiles({
       cwd: rootDirectory
     })
+    // const changedFiles: string[] = [
+    //     "specification/cdn/resource-manager/Microsoft.Cdn/preview/2024-07-22-preview/edgeaction.json",
+    //     "specification/cdn/resource-manager/Microsoft.Cdn/stable/2024-09-01/afdx.json",
+    //     "specification/cdn/resource-manager/readme.md"
+    // ];
 
     const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
 
@@ -52,7 +57,7 @@ export async function checkSpecs(rootDirectory: string): Promise<[number, Array<
         }
     }
 
-    if (errors){
+    if (errors.length > 0){
         return [1, errors];
     }
     return [0, []];
