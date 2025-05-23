@@ -1,6 +1,5 @@
 
 import { annotateFileError, setSummary } from "@azure-tools/specs-shared/error-reporting";
-import { error } from "console";
 
 export interface ReportableOavError {
   message: string;
