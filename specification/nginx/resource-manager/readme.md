@@ -28,7 +28,22 @@ These are the global settings for the Nginx API.
 title: NginxManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-11-01-preview
+tag: package-2025-03-01-preview
+```
+
+### Tag: package-2025-03-01-preview
+
+These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01-preview'
+input-file:
+  - NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json
+suppressions:
+  - code: GetCollectionResponseSchema
+    from: swagger.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies"]
+    reason: This is by design to avoid high bandwidth consumption
+
 ```
 
 ### Tag: package-2024-11-01-preview
