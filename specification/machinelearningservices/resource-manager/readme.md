@@ -27,7 +27,6 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-
 tag: package-2025-04-01
 ```
 
@@ -79,9 +78,6 @@ suppressions:
     reason: Existing property in previous GA version.
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
-```
-
-tag: package-preview-2025-04
 ```
 
 ### Tag: package-preview-2025-04
