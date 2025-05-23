@@ -157,6 +157,11 @@ export class Readme {
         /** @type {Map<string, Swagger>} */
         const inputFiles = new Map();
 
+        const tag = new Tag(tagName, inputFiles, {
+          logger: this.#logger,
+          readme: this,
+        });
+
         // It's possible for input-file to be a string or an array
         const inputFilePaths = Array.isArray(obj["input-file"])
           ? obj["input-file"]
@@ -170,15 +175,10 @@ export class Readme {
           );
           const swagger = new Swagger(swaggerPathResolved, {
             logger: this.#logger,
-            specModel: this.#specModel,
+            tag,
           });
           inputFiles.set(swagger.path, swagger);
         }
-
-        const tag = new Tag(tagName, inputFiles, {
-          logger: this.#logger,
-          readme: this,
-        });
 
         tags.set(tag.name, tag);
       }

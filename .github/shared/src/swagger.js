@@ -7,7 +7,7 @@ import { mapAsync } from "./array.js";
 import { SpecModelError } from "./spec-model-error.js";
 
 /**
- * @typedef {import('./spec-model.js').SpecModel} SpecModel
+ * @typedef {import('./spec-model.js').Tag} Tag
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
 
@@ -38,19 +38,19 @@ export class Swagger {
   /** @type {Map<string, Swagger> | undefined} */
   #refs;
 
-  /** @type {SpecModel | undefined} backpointer to owning SpecModel */
-  #specModel;
+  /** @type {Tag | undefined} Tag that contains this Swagger */
+  #tag;
 
   /**
    * @param {string} path
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
-   * @param {SpecModel} [options.specModel]
+   * @param {Tag} [options.tag]
    */
   constructor(path, options) {
     this.#path = resolve(path);
     this.#logger = options?.logger;
-    this.#specModel = options?.specModel;
+    this.#tag = options?.tag;
   }
 
   /**
@@ -88,7 +88,7 @@ export class Swagger {
         refPaths.map((p) => {
           const swagger = new Swagger(p, {
             logger: this.#logger,
-            specModel: this.#specModel,
+            tag: this.#tag,
           });
           return [swagger.path, swagger];
         }),
@@ -106,14 +106,21 @@ export class Swagger {
   }
 
   /**
+   * @returns {Tag | undefined} Tag that contains this Swagger
+   */
+  get tag() {
+    return this.#tag;
+  }
+
+  /**
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
     return {
       path:
-        options?.relativePaths && this.#specModel
-          ? relative(this.#specModel.folder, this.#path)
+        options?.relativePaths && this.#tag?.readme?.specModel
+          ? relative(this.#tag?.readme?.specModel.folder, this.#path)
           : this.#path,
       refs: options?.includeRefs
         ? await mapAsync(

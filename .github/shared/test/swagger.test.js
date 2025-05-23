@@ -11,6 +11,7 @@ describe("Swagger", () => {
   it("can be created with mock path", async () => {
     const swagger = new Swagger("bar");
     expect(swagger.path).toBe(resolve("bar"));
+    expect(swagger.tag).toBeUndefined();
 
     await expect(swagger.getRefs()).rejects.toThrowError(
       /Failed to resolve file for swagger/i,

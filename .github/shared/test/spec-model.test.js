@@ -63,6 +63,7 @@ describe("SpecModel", () => {
         "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
       ),
     );
+    expect(inputFiles0[0].tag).toBe(tags[0]);
 
     const refs0 = [...(await inputFiles0[0].getRefs()).values()].sort((a, b) =>
       a.path.localeCompare(b.path),
