@@ -49,6 +49,8 @@ using Microsoft.ServiceFabric;
 @@clientName(PrivateIPAddressVersion, "PrivateIpAddressVersion", "java");
 @@clientName(PublicIPAddressVersion, "PublicIpAddressVersion", "java");
 @@clientName(VMSSExtension, "VmssExtension", "java");
+@@alternateType(VMSSExtensionProperties.settings, unknown, "java");
+@@alternateType(VMSSExtensionProperties.protectedSettings, unknown, "java");
 
 @@clientName(PublicIPAddressConfiguration,
   "IPConfigurationPublicIPAddressConfiguration",
