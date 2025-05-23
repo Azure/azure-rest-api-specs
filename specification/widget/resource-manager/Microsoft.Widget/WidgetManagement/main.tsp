@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.Contoso Resource Provider management API. */
 @armProviderNamespace
-@service(#{ title: "WidgetManagement" })
+@service(#{ title: "WidgetManagement A" })
 @versioned(WidgetManagement.Versions)
 namespace WidgetManagement;
 
