@@ -8218,10 +8218,14 @@
           "readOnly": true,
           "type": "string"
         },
-        "availabilityZone": {
-          "description": "The availability zone where the machine is present. If not set, the VM is not zonal",
+         "zones": {
+         "type": "array",
+         "items": {
           "type": "string"
-        }
+          },
+          "readOnly": true,
+         "description": "The Availability zone in which node is located."
+          }
       },
       "readOnly": true,
       "type": "object"
