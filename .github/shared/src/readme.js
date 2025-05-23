@@ -23,7 +23,7 @@ export class Readme {
    */
   #content;
 
-  /** @type {{globalConfig: Object, tags: Set<Tag>} | undefined} */
+  /** @type {{globalConfig: Object, tags: Map<string, Tag>} | undefined} */
   #data;
 
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -114,8 +114,8 @@ export class Readme {
         {},
       );
 
-      /** @type {Set<Tag>} */
-      const tags = new Set();
+      /** @type {Map<string, Tag>} */
+      const tags = new Map();
       for (const block of yamlBlocks) {
         const tagName =
           block.lang?.match(/yaml.*\$\(tag\) ?== ?'([^']*)'/)?.[1] || "default";
@@ -145,7 +145,7 @@ export class Readme {
         // swaggers means that the previous definition did not have an input-file
         // key. It's possible that the previous defintion had an `input-file: []`
         // or something like it.
-        const existingTag = [...tags].find((t) => t.name == tagName);
+        const existingTag = tags.get(tagName);
         if ((existingTag?.inputFiles?.size ?? 0) > 0) {
           // The tag already exists and has a swagger file. This is an error as
           // there should only be one definition of input-files per tag.
@@ -154,8 +154,8 @@ export class Readme {
           throw new Error(message);
         }
 
-        /** @type {Set<Swagger>} */
-        const inputFiles = new Set();
+        /** @type {Map<string, Swagger>} */
+        const inputFiles = new Map();
 
         // It's possible for input-file to be a string or an array
         const inputFilePaths = Array.isArray(obj["input-file"])
@@ -172,12 +172,12 @@ export class Readme {
             logger: this.#logger,
             specModel: this.#specModel,
           });
-          inputFiles.add(swagger);
+          inputFiles.set(swagger.path, swagger);
         }
 
         const tag = new Tag(tagName, inputFiles, { logger: this.#logger });
 
-        tags.add(tag);
+        tags.set(tag.name, tag);
       }
 
       this.#data = { globalConfig, tags };
@@ -197,7 +197,7 @@ export class Readme {
   }
 
   /**
-   * @returns {Promise<Set<Tag>>}
+   * @returns {Promise<Map<string, Tag>>}
    */
   async getTags() {
     return (await this.#getData()).tags;
@@ -216,7 +216,9 @@ export class Readme {
    */
   async toJSONAsync(options) {
     const tags = await mapAsync(
-      [...(await this.getTags())].sort((a, b) => a.name.localeCompare(b.name)),
+      [...(await this.getTags()).values()].sort((a, b) =>
+        a.name.localeCompare(b.name),
+      ),
       async (t) => await t.toJSONAsync(options),
     );
 

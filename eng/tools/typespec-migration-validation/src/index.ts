@@ -36,8 +36,7 @@ function parseArguments() {
     })
     .option('ignorePathCase', {
       description: 'Set case insensitive for the segments before provider, e.g. resourceGroups',
-      type: 'boolean',
-      default: false,
+      type: 'boolean'
     })
     .check((argv) => {
       const positional = argv._;
@@ -75,7 +74,9 @@ export async function main() {
   const args = parseArguments();
   const { oldPath, newPath, outputFolder, ignoreDescription, ignorePathCase } = args;
   configuration.ignoreDescription = ignoreDescription;
-  configuration.ignorePathCase = ignorePathCase;
+  if (ignorePathCase !== undefined) {
+    configuration.ignorePathCase = ignorePathCase;
+  }
 
   logHeader(`Processing old swagger from: ${oldPath}...`);
   const mergedOldfile = mergeFiles(oldPath!);

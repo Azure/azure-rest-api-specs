@@ -29,257 +29,251 @@ parameters:
     type: string
     default: ''
 
-extends:
-  template: /eng/pipelines/templates/stages/1es-redirect.yml
-  parameters:
-    Use1ESOfficial: false
-    stages:
-    - stage: Build
-      displayName: 'SDK Generation'
-      jobs:
-      - job:
-        timeoutInMinutes: 2400
+stages:
+- stage: Build
+  displayName: 'SDK Generation'
+  jobs:
+  - job:
+    timeoutInMinutes: 2400
 
-        variables:
-          - template: /eng/pipelines/templates/variables/image.yml
-          - name: NodeVersion
-            value: '22.13.x'
-          - name: PythonVersion
-            value: '3.13'
-          - name: PipelineArtifactsName
-            value: 'packages'
-          - name: SpecRepoCommit
-            value: $(Build.SourceVersion)
+    variables:
+      - template: /eng/pipelines/templates/variables/image.yml
+      - name: NodeVersion
+        value: '22.13.x'
+      - name: PythonVersion
+        value: '3.13'
+      - name: PipelineArtifactsName
+        value: 'packages'
+      - name: SpecRepoCommit
+        value: $(Build.SourceVersion)
 
-        pool:
-          name: $(LINUXPOOL)
-          vmImage: $(LINUXVMIMAGE)
-          os: linux
+    pool:
+      name: $(LINUXPOOL)
+      vmImage: $(LINUXVMIMAGE)
+      os: linux
 
-        templateContext:
-          outputParentDirectory: $(System.DefaultWorkingDirectory)/out
-          outputs:
-            - output: pipelineArtifact
-              displayName: Publish logs to Pipeline Artifacts
-              artifactName: "spec-gen-sdk-logs"
-              targetPath: "$(System.DefaultWorkingDirectory)/out/logs"
+    steps:
+      - checkout: none
 
-        steps:
-          - checkout: none
+      - pwsh: |
+          $tspConfigPathPattern = '^specification\/([^\/]+\/)+tspconfig\.yaml$'
+          $readmePathPattern = '^specification\/([^\/]+\/){2,}readme\.md$'
+          if (('${{ parameters.ConfigType }}' -eq 'TypeSpec') -and ('${{ parameters.ConfigPath }}' -notmatch $tspConfigPathPattern)) {
+            Write-Host "##vso[task.logissue type=error]'ConfigPath' must be a valid 'tspconfig.yaml' file path when 'ConfigType' is set to 'TypeSpec'. For example, 'specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml'"
+            Exit 1
+          } elseif (('${{ parameters.ConfigType }}' -eq 'OpenAPI') -and ('${{ parameters.ConfigPath }}' -notmatch $readmePathPattern)) {
+            Write-Host "##vso[task.logissue type=error]'ConfigPath' must be a valid 'readme.md' file path when 'ConfigType' is set to 'OpenAPI'. For example, 'specification/appplatform/resource-manager/readme.md'"
+            Exit 1
+          }
+          if (('$(Build.Reason)' -ne 'PullRequest') -and ('${{ parameters.SpecBatchTypes }}' -eq '')) {
+            if (('${{ parameters.SdkReleaseType }}' -eq 'stable') -and ('${{ parameters.ApiVersion}}' -match 'preview')) {
+              Write-Host "##vso[task.logissue type=error]'SDK release type' must be set to 'beta' for the preview API specifications."
+              Exit 1
+            }
+          }
+          $urlPattern = '^https://github\.com/(?<organization>[^/]+)/(?<repository>[^/]+)'
+          if ('${{ parameters.SpecRepoUrl }}' -match $urlPattern) {
+            $specRepoOwner = $Matches['organization']
+            Write-Host "##vso[task.setvariable variable=SpecRepoOwner]$specRepoOwner"
+            Write-Host "SpecRepoOwner variable set to: $specRepoOwner"
 
-          - pwsh: |
-              $tspConfigPathPattern = '^specification\/([^\/]+\/)+tspconfig\.yaml$'
-              $readmePathPattern = '^specification\/([^\/]+\/){2,}readme\.md$'
-              if (('${{ parameters.ConfigType }}' -eq 'TypeSpec') -and ('${{ parameters.ConfigPath }}' -notmatch $tspConfigPathPattern)) {
-                Write-Host "##vso[task.logissue type=error]'ConfigPath' must be a valid 'tspconfig.yaml' file path when 'ConfigType' is set to 'TypeSpec'. For example, 'specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml'"
-                Exit 1
-              } elseif (('${{ parameters.ConfigType }}' -eq 'OpenAPI') -and ('${{ parameters.ConfigPath }}' -notmatch $readmePathPattern)) {
-                Write-Host "##vso[task.logissue type=error]'ConfigPath' must be a valid 'readme.md' file path when 'ConfigType' is set to 'OpenAPI'. For example, 'specification/appplatform/resource-manager/readme.md'"
-                Exit 1
-              }
-              if (('$(Build.Reason)' -ne 'PullRequest') -and ('${{ parameters.SpecBatchTypes }}' -eq '')) {
-                if (('${{ parameters.SdkReleaseType }}' -eq 'stable') -and ('${{ parameters.ApiVersion}}' -match 'preview')) {
-                  Write-Host "##vso[task.logissue type=error]'SDK release type' must be set to 'beta' for the preview API specifications."
-                  Exit 1
-                }
-              }
-              $urlPattern = '^https://github\.com/(?<organization>[^/]+)/(?<repository>[^/]+)'
-              if ('${{ parameters.SpecRepoUrl }}' -match $urlPattern) {
-                $specRepoOwner = $Matches['organization']
-                Write-Host "##vso[task.setvariable variable=SpecRepoOwner]$specRepoOwner"
-                Write-Host "SpecRepoOwner variable set to: $specRepoOwner"
+            $specRepoName = $Matches['repository']
+            Write-Host "##vso[task.setvariable variable=SpecRepoName]$specRepoName"
+            Write-Host "SpecRepoName variable set to: $specRepoName"
 
-                $specRepoName = $Matches['repository']
-                Write-Host "##vso[task.setvariable variable=SpecRepoName]$specRepoName"
-                Write-Host "SpecRepoName variable set to: $specRepoName"
+            $specRepoDirectory = "$(System.DefaultWorkingDirectory)/$specRepoName"
+            Write-Host "##vso[task.setvariable variable=SpecRepoDirectory]$specRepoDirectory"
+            Write-Host "SpecRepoDirectory variable set to: $specRepoDirectory"
+          }
 
-                $specRepoDirectory = "$(System.DefaultWorkingDirectory)/$specRepoName"
-                Write-Host "##vso[task.setvariable variable=SpecRepoDirectory]$specRepoDirectory"
-                Write-Host "SpecRepoDirectory variable set to: $specRepoDirectory"
-              }
+          if ('${{ parameters.SdkRepoUrl }}' -match $urlPattern) {
+            if ('${{ parameters.SpecRepoUrl }}'.EndsWith('-pr') -and (-not '${{ parameters.SdkRepoUrl }}'.EndsWith('-pr'))) {
+              Write-Host "##vso[task.logissue type=error]SdkRepoUrl must be a private repository if SpecRepoUrl is a private repository."
+              Exit 1
+            }
 
-              if ('${{ parameters.SdkRepoUrl }}' -match $urlPattern) {
-                if ('${{ parameters.SpecRepoUrl }}'.EndsWith('-pr') -and (-not '${{ parameters.SdkRepoUrl }}'.EndsWith('-pr'))) {
-                  Write-Host "##vso[task.logissue type=error]SdkRepoUrl must be a private repository if SpecRepoUrl is a private repository."
-                  Exit 1
-                }
+            $sdkRepoOwner = $Matches['organization']
+            Write-Host "##vso[task.setvariable variable=SdkRepoOwner]$sdkRepoOwner"
+            Write-Host "SdkRepoOwner variable set to: $sdkRepoOwner"
 
-                $sdkRepoOwner = $Matches['organization']
-                Write-Host "##vso[task.setvariable variable=SdkRepoOwner]$sdkRepoOwner"
-                Write-Host "SdkRepoOwner variable set to: $sdkRepoOwner"
+            $sdkRepoName = $Matches['repository']
+            Write-Host "##vso[task.setvariable variable=SdkRepoName]$sdkRepoName"
+            Write-Host "SdkRepoName variable set to: $sdkRepoName"
 
-                $sdkRepoName = $Matches['repository']
-                Write-Host "##vso[task.setvariable variable=SdkRepoName]$sdkRepoName"
-                Write-Host "SdkRepoName variable set to: $sdkRepoName"
+            $sdkRepoDirectory = "$(System.DefaultWorkingDirectory)/$sdkRepoName"
+            Write-Host "##vso[task.setvariable variable=SdkRepoDirectory]$sdkRepoDirectory"
+            Write-Host "SdkRepoDirectory variable set to: $sdkRepoDirectory"
+          }
 
-                $sdkRepoDirectory = "$(System.DefaultWorkingDirectory)/$sdkRepoName"
-                Write-Host "##vso[task.setvariable variable=SdkRepoDirectory]$sdkRepoDirectory"
-                Write-Host "SdkRepoDirectory variable set to: $sdkRepoDirectory"
-              }
+          if ([string]::IsNullOrEmpty($SpecRepoOwner) -or [string]::IsNullOrEmpty($SpecRepoName) -or [string]::IsNullOrEmpty($SdkRepoOwner) -or [string]::IsNullOrEmpty($SdkRepoName)) {
+            Write-Host "##vso[task.logissue type=error]One or more required variables is empty or invalid. Ensure that SpecRepoUrl and SdkRepoUrl are set to valid GitHub repository URLs."
+            Exit 1
+          }
 
-              if ([string]::IsNullOrEmpty($SpecRepoOwner) -or [string]::IsNullOrEmpty($SpecRepoName) -or [string]::IsNullOrEmpty($SdkRepoOwner) -or [string]::IsNullOrEmpty($SdkRepoName)) {
-                Write-Host "##vso[task.logissue type=error]One or more required variables is empty or invalid. Ensure that SpecRepoUrl and SdkRepoUrl are set to valid GitHub repository URLs."
-                Exit 1
-              }
+        displayName: "Create Run Time Variables"
 
-            displayName: "Create Run Time Variables"
+      - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
+        parameters:
+          Paths:
+            - '/*'
+            - '!sdk/**/test-recordings/*'
+            - '!sdk/**/recordings/*'
+            - '!sdk/**/SessionRecords/*'
+            - '!sdk/**/session-records/*'
+          Repositories:
+            - Name: $(SpecRepoOwner)/$(SpecRepoName)
+              Commitish: $(SpecRepoCommit)
+              WorkingDirectory: $(SpecRepoDirectory)
+            - Name: $(SdkRepoOwner)/$(SdkRepoName)
+              Commitish: ${{ parameters.SdkRepoCommit }}
+              WorkingDirectory: $(SdkRepoDirectory)
+          SkipCheckoutNone: true
+          ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
+            TokenToUseForAuth: $(azuresdk-github-pat)
+            PreserveAuthToken: true
 
-          - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
+      - task: NodeTool@0
+        inputs:
+          versionSpec: $(NodeVersion)
+        displayName: 'Install Node.js'
+
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: $(PythonVersion)
+
+      - script: |
+          optional_params=""
+          sdk_gen_info="Configurations: "
+
+          if [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
+            optional_params="$optional_params --tsp-config-relative-path ${{ parameters.ConfigPath }}"
+            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
+          elif [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "OpenAPI" ]; then
+            optional_params="$optional_params --readme-relative-path ${{ parameters.ConfigPath }}"
+            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
+          fi
+
+          updatedSpecRepoCommit="$(SpecRepoCommit)"
+          if [ "$(Build.Reason)" = "PullRequest" ]; then
+            optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
+            specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
+            sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
+            updatedSpecRepoCommit="$(System.PullRequest.SourceCommitId)"
+          fi
+
+          if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
+            optional_params="$optional_params --batch-type ${{ parameters.SpecBatchTypes }}"
+            sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
+          fi
+
+          if [ "${{ parameters.ApiVersion }}" != "" ]; then
+            optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
+            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
+          fi
+          sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
+          echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
+          echo "$sdk_gen_info"
+
+          cd $(SpecRepoDirectory)
+          echo "##[group]Run npm ci"
+          npm ci
+          echo "##[endgroup]"
+          node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
+            --scp $(SpecRepoDirectory) \
+            --sdp $(SdkRepoDirectory) \
+            --wf $(System.DefaultWorkingDirectory) \
+            --lang $(SdkRepoName) \
+            --commit $updatedSpecRepoCommit \
+            --spec-repo-url ${{ parameters.SpecRepoUrl }} \
+            $optional_params || true # return true always to suppress exit error logging
+        displayName: 'Generate SDK'
+
+      - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
+        parameters:
+          ArtifactName: $(SpecGenSdkArtifactName)
+          ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)"
+          CustomCondition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
+
+      - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
+        parameters:
+          ArtifactName: $(PipelineArtifactsName)
+          ArtifactPath: $(StagedArtifactsFolder)
+          CustomCondition: and(succeeded(), ne(variables['StagedArtifactsFolder'], ''))
+
+      - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+        - task: PowerShell@2
+          displayName: Add label to the spec PR
+          condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'add'))
+          inputs:
+            pwsh: true
+            workingDirectory: $(SdkRepoDirectory)
+            filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
+            arguments: >
+              -RepoOwner $(SpecRepoOwner)
+              -RepoName $(SpecRepoName)
+              -IssueNumber "$(System.PullRequest.PullRequestNumber)"
+              -Labels $(BreakingChangeLabel)
+              -AuthToken "$(azuresdk-github-pat)"
+
+        - task: PowerShell@2
+          displayName: Remove label from the spec PR
+          condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'remove'))
+          inputs:
+            pwsh: true
+            workingDirectory: $(SdkRepoDirectory)
+            filePath: $(SdkRepoDirectory)/eng/common/scripts/Remove-IssueLabel.ps1
+            arguments: >
+              -RepoOwner $(SpecRepoOwner)
+              -RepoName $(SpecRepoName)
+              -IssueNumber "$(System.PullRequest.PullRequestNumber)"
+              -LabelName $(BreakingChangeLabel)
+              -AuthToken "$(azuresdk-github-pat)"
+
+        - ${{ if and(eq(parameters.SkipPullRequestCreation, false), ne(variables['Build.Reason'], 'PullRequest')) }}:
+          - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
             parameters:
-              Paths:
-                - '/*'
-                - '!sdk/**/test-recordings/*'
-                - '!sdk/**/recordings/*'
-                - '!sdk/**/SessionRecords/*'
-                - '!sdk/**/session-records/*'
-              Repositories:
-                - Name: $(SpecRepoOwner)/$(SpecRepoName)
-                  Commitish: $(SpecRepoCommit)
-                  WorkingDirectory: $(SpecRepoDirectory)
-                - Name: $(SdkRepoOwner)/$(SdkRepoName)
-                  Commitish: ${{ parameters.SdkRepoCommit }}
-                  WorkingDirectory: $(SdkRepoDirectory)
-              SkipCheckoutNone: true
-              ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
-                TokenToUseForAuth: $(azuresdk-github-pat)
-                PreserveAuthToken: true
+              BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
+              BaseRepoOwner: azure-sdk
+              CommitMsg: $(GeneratedSDKInformation)
+              TargetRepoOwner: $(SdkRepoOwner)
+              TargetRepoName: $(SdkRepoName)
+              PushArgs: "--force"
+              WorkingDirectory: $(SdkRepoDirectory)
+              ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
 
-          - task: NodeTool@0
+          - task: PowerShell@2
+            displayName: Create pull request
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
             inputs:
-              versionSpec: $(NodeVersion)
-            displayName: 'Install Node.js'
+              pwsh: true
+              workingDirectory: $(SdkRepoDirectory)
+              filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
+              arguments: >
+                -RepoOwner "$(SdkRepoOwner)"
+                -RepoName "$(SdkRepoName)"
+                -BaseBranch "main"
+                -PROwner "azure-sdk"
+                -PRBranch "$(PrBranch)-$(Build.BuildId)"
+                -AuthToken "$(azuresdk-github-pat)"
+                -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
+                -PRBody "$(GeneratedSDKInformation)"
+                -OpenAsDraft $true
 
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: $(PythonVersion)
+      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+        - pwsh: |
+            . $(SpecRepoDirectory)/eng/common/scripts/Helpers/ApiView-Helpers.ps1
+            Create-API-Review `
+              -specGenSDKArtifactPath "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)/$(SpecGenSdkArtifactName).json" `
+              -apiviewArtifactName "$(PipelineArtifactsName)" `
+              -buildId "$(Build.BuildId)" `
+              -commitish "$(System.PullRequest.SourceCommitId)" `
+              -repoName "$(SdkRepoOwner)/$(SpecRepoName)" `
+              -pullRequestNumber "$(System.PullRequest.PullRequestNumber)" 
+          displayName: 'Detect API Change and Create API Review'
+          condition: and(succeeded(), ne(variables['SpecGenSdkArtifactPath'], ''), ne(variables['SpecGenSdkArtifactName'], ''))
 
-          - script: |
-              optional_params=""
-              sdk_gen_info="Configurations: "
-
-              if [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
-                optional_params="$optional_params --tsp-config-relative-path ${{ parameters.ConfigPath }}"
-                sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
-              elif [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "OpenAPI" ]; then
-                optional_params="$optional_params --readme-relative-path ${{ parameters.ConfigPath }}"
-                sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
-              fi
-
-              updatedSpecRepoCommit="$(SpecRepoCommit)"
-              if [ "$(Build.Reason)" = "PullRequest" ]; then
-                optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
-                specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
-                sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
-                updatedSpecRepoCommit="$(System.PullRequest.SourceCommitId)"
-              fi
-
-              if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
-                optional_params="$optional_params --batch-type ${{ parameters.SpecBatchTypes }}"
-                sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
-              fi
-
-              if [ "${{ parameters.ApiVersion }}" != "" ]; then
-                optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
-                sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
-              fi
-              sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
-              echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
-              echo "$sdk_gen_info"
-
-              cd $(SpecRepoDirectory)
-              echo "##[group]Run npm ci"
-              npm ci
-              echo "##[endgroup]"
-              node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
-                --scp $(SpecRepoDirectory) \
-                --sdp $(SdkRepoDirectory) \
-                --wf $(System.DefaultWorkingDirectory) \
-                --lang $(SdkRepoName) \
-                --commit $updatedSpecRepoCommit \
-                --spec-repo-url ${{ parameters.SpecRepoUrl }} \
-                $optional_params || true # return true always to suppress exit error logging
-            displayName: 'Generate SDK'
-
-          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
-            parameters:
-              ArtifactName: $(SpecGenSdkArtifactName)
-              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)"
-              CustomCondition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
-
-          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
-            parameters:
-              ArtifactName: $(PipelineArtifactsName)
-              ArtifactPath: $(StagedArtifactsFolder)
-              CustomCondition: and(succeeded(), ne(variables['StagedArtifactsFolder'], ''))
-
-          - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
-            - task: PowerShell@2
-              displayName: Add label to the spec PR
-              condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'add'))
-              inputs:
-                pwsh: true
-                workingDirectory: $(SdkRepoDirectory)
-                filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
-                arguments: >
-                  -RepoOwner $(SpecRepoOwner)
-                  -RepoName $(SpecRepoName)
-                  -IssueNumber "$(System.PullRequest.PullRequestNumber)"
-                  -Labels $(BreakingChangeLabel)
-                  -AuthToken "$(azuresdk-github-pat)"
-
-            - task: PowerShell@2
-              displayName: Remove label from the spec PR
-              condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'remove'))
-              inputs:
-                pwsh: true
-                workingDirectory: $(SdkRepoDirectory)
-                filePath: $(SdkRepoDirectory)/eng/common/scripts/Remove-IssueLabel.ps1
-                arguments: >
-                  -RepoOwner $(SpecRepoOwner)
-                  -RepoName $(SpecRepoName)
-                  -IssueNumber "$(System.PullRequest.PullRequestNumber)"
-                  -LabelName $(BreakingChangeLabel)
-                  -AuthToken "$(azuresdk-github-pat)"
-
-            - ${{ if and(eq(parameters.SkipPullRequestCreation, false), ne(variables['Build.Reason'], 'PullRequest')) }}:
-              - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
-                parameters:
-                  BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
-                  BaseRepoOwner: azure-sdk
-                  CommitMsg: $(GeneratedSDKInformation)
-                  TargetRepoOwner: $(SdkRepoOwner)
-                  TargetRepoName: $(SdkRepoName)
-                  PushArgs: "--force"
-                  WorkingDirectory: $(SdkRepoDirectory)
-                  ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
-
-              - task: PowerShell@2
-                displayName: Create pull request
-                condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
-                inputs:
-                  pwsh: true
-                  workingDirectory: $(SdkRepoDirectory)
-                  filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
-                  arguments: >
-                    -RepoOwner "$(SdkRepoOwner)"
-                    -RepoName "$(SdkRepoName)"
-                    -BaseBranch "main"
-                    -PROwner "azure-sdk"
-                    -PRBranch "$(PrBranch)-$(Build.BuildId)"
-                    -AuthToken "$(azuresdk-github-pat)"
-                    -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-                    -PRBody "$(GeneratedSDKInformation)"
-                    -OpenAsDraft $true
-
-          - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-            - pwsh: |
-                . $(SpecRepoDirectory)/eng/common/scripts/Helpers/ApiView-Helpers.ps1
-                Create-API-Review `
-                  -specGenSDKArtifactPath "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)/$(SpecGenSdkArtifactName).json" `
-                  -apiviewArtifactName "$(PipelineArtifactsName)" `
-                  -buildId "$(Build.BuildId)" `
-                  -commitish "$(System.PullRequest.SourceCommitId)" `
-                  -repoName "$(SdkRepoOwner)/$(SpecRepoName)" `
-                  -pullRequestNumber "$(System.PullRequest.PullRequestNumber)" 
-              displayName: 'Detect API Change and Create API Review'
-              condition: and(succeeded(), ne(variables['SpecGenSdkArtifactPath'], ''), ne(variables['SpecGenSdkArtifactName'], ''))
+      - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
+        parameters:
+          ArtifactName: "spec-gen-sdk-logs"
+          ArtifactPath: "$(System.DefaultWorkingDirectory)/out/logs"
+          CustomCondition: succeededOrFailed()

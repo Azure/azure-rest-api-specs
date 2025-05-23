@@ -12,13 +12,13 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
 @doc("Namespace Asset Endpoint Profile definition.")
 @parentResource(Namespace)
 @added(Versions.v2024_10_01_preview)
+@removed(Versions.v2025_07_01_preview)
 model NamespaceAssetEndpointProfile
   is TrackedResource<AssetEndpointProfileProperties> {
   @doc("Asset Endpoint Profile name parameter.")
@@ -37,7 +37,7 @@ model NamespaceAssetEndpointProfile
   extendedLocation: ExtendedLocation;
 }
 
-alias AssetEndpointProfilePropertiesUpdate = {
+alias NamespaceAssetEndpointProfilePropertiesUpdate = {
   ...OptionalProperties<UpdateableProperties<OmitProperties<
     AssetEndpointProfileProperties,
     "authentication"
@@ -49,6 +49,7 @@ alias AssetEndpointProfilePropertiesUpdate = {
 };
 
 @added(Versions.v2024_10_01_preview)
+@removed(Versions.v2025_07_01_preview)
 @armResourceOperations
 interface NamespaceAssetEndpointProfiles {
   get is ArmResourceRead<NamespaceAssetEndpointProfile>;
@@ -57,7 +58,7 @@ interface NamespaceAssetEndpointProfiles {
     NamespaceAssetEndpointProfile,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       NamespaceAssetEndpointProfile,
-      AssetEndpointProfilePropertiesUpdate
+      NamespaceAssetEndpointProfilePropertiesUpdate
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceAssetEndpointProfile>;

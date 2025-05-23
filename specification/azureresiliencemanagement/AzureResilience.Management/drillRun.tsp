@@ -24,6 +24,9 @@ interface DrillRuns {
   @route(ServiceGroupRoute)
   get is ArmResourceRead<DrillRun, ServiceGroupParameters>;
 
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<DrillRun, ServiceGroupParameters>;
+
   /**
   POST Actions
   */
@@ -123,4 +126,44 @@ interface DrillRuns {
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
+}
+
+@armResourceOperations
+@doc("Operations for managing Drill Run child jobs.")
+interface DrillRunChildJobs {
+  @route(ServiceGroupRoute)
+  get is ArmResourceRead<DrillRunChildJob, ServiceGroupParameters>;
+
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<DrillRunChildJob, ServiceGroupParameters>;
+}
+
+@armResourceOperations
+@doc("Operations for managing Drill Run resources.")
+interface DrillRunResources {
+  @route(ServiceGroupRoute)
+  get is ArmResourceRead<DrillRunResource, ServiceGroupParameters>;
+
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<DrillRunResource, ServiceGroupParameters>;
+}
+
+@armResourceOperations
+@doc("Operations for managing Chaos jobs.")
+interface ChaosJobs {
+  @route(ServiceGroupRoute)
+  get is ArmResourceRead<ChaosJob, ServiceGroupParameters>;
+
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<ChaosJob, ServiceGroupParameters>;
+}
+
+@armResourceOperations
+@doc("Operations for managing Chaos job resources.")
+interface ChaosJobResources {
+  @route(ServiceGroupRoute)
+  get is ArmResourceRead<ChaosJobResource, ServiceGroupParameters>;
+
+  @route(ServiceGroupRoute)
+  list is ArmResourceListByParent<ChaosJobResource, ServiceGroupParameters>;
 }

@@ -4,11 +4,11 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
+using OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
@@ -162,6 +162,9 @@ union DrillResourceState {
 
   @doc("Resource is in Drill but not part of the ROPlan")
   InDrillNotInRO: "InDrillNotInRO",
+
+  @doc("Resource is not in a state where it can be faulted.")
+  ResourceStateIncompatibleWithFault: "ResourceStateIncompatibleWithFault",
 }
 
 /**

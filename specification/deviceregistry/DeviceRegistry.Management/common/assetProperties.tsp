@@ -7,10 +7,7 @@ import "./extendedLocation.tsp";
 import "./provisioningState.tsp";
 import "./topic.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.ResourceManager;
 using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
@@ -103,16 +100,16 @@ model AssetProperties {
 
   @doc("Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration.")
   @removed(Versions.v2024_07_01_preview)
-  @Azure.ResourceManager.identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   dataPoints?: DataPoint[];
 
   @doc("Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.")
   @added(Versions.v2024_07_01_preview)
-  @Azure.ResourceManager.identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   datasets?: Dataset[];
 
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
-  @Azure.ResourceManager.identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   events?: Event[];
 
   @doc("Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.")
@@ -137,7 +134,7 @@ model Dataset {
   topic?: Topic;
 
   @doc("Array of data points that are part of the dataset. Each data point can have per-data point configuration.")
-  @Azure.ResourceManager.identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   dataPoints?: DataPoint[];
 }
 
@@ -279,7 +276,7 @@ union EventObservabilityMode {
 model AssetStatus {
   @doc("Array object to transfer and persist errors that originate from the Edge.")
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   errors?: AssetStatusError[];
 
   @doc("A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.")
@@ -290,13 +287,13 @@ model AssetStatus {
   @doc("Array of dataset statuses that describe the status of each dataset.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_07_01_preview)
-  @Azure.ResourceManager.identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   datasets?: AssetStatusDataset[];
 
   @doc("Array of event statuses that describe the status of each event.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_07_01_preview)
-  @Azure.ResourceManager.identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   events?: AssetStatusEvent[];
 }
 
