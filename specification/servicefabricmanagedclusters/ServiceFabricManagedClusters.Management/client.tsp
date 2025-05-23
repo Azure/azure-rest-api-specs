@@ -74,3 +74,5 @@ using Microsoft.ServiceFabric;
 @@Azure.ResourceManager.identifiers(FaultSimulationListResult.value,
   #["simulationId"]
 );
+
+@@scope(OperationResults.get, "!java");
