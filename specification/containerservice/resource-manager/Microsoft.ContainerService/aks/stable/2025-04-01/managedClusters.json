@@ -1225,6 +1225,9 @@
           },
           "Create Agent Pool with Dedicated Host Group": {
             "$ref": "./examples/AgentPoolsCreate_DedicatedHostGroup.json"
+          },
+          "Create Agent Pool with VirtualMachines pool type": {
+            "$ref": "./examples/AgentPoolsCreate_TypeVirtualMachines.json"
           }
         }
       },
@@ -3259,6 +3262,68 @@
         "clientId"
       ]
     },
+    "VirtualMachinesProfile": {
+      "type": "object",
+      "properties": {
+        "scale": {
+          "$ref": "#/definitions/ScaleProfile",
+          "description": "Specifications on how to scale a VirtualMachines agent pool."
+        }
+      },
+      "description": "Specifications on VirtualMachines agent pool."
+    },
+    "ScaleProfile": {
+      "type": "object",
+      "properties": {
+        "manual": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManualScaleProfile"
+          },
+          "x-ms-identifiers": [],
+          "description": "Specifications on how to scale the VirtualMachines agent pool to a fixed size."
+        }
+      },
+      "description": "Specifications on how to scale a VirtualMachines agent pool."
+    },
+    "ManualScaleProfile": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "description": "VM size that AKS will use when creating and scaling e.g. 'Standard_E4s_v3', 'Standard_E16s_v3' or 'Standard_D16s_v5'."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes."
+        }
+      },
+      "description": "Specifications on number of machines."
+    },
+    "VirtualMachineNodesStatus": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VirtualMachineNodes"
+      },
+      "x-ms-identifiers": [],
+      "description": "The status of nodes in a VirtualMachines agent pool."
+    },
+    "VirtualMachineNodes": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "description": "The VM size of the agents used to host this group of nodes."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes."
+        }
+      },
+      "description": "Current status on a group of nodes of the same vm size."
+    },
     "ManagedClusterAgentPoolProfileProperties": {
       "type": "object",
       "properties": {
@@ -3516,6 +3581,12 @@
         "gatewayProfile": {
           "$ref": "#/definitions/AgentPoolGatewayProfile",
           "description": "Profile specific to a managed agent pool in Gateway mode. This field cannot be set if agent pool mode is not Gateway."
+        },
+        "virtualMachinesProfile": {
+          "$ref": "#/definitions/VirtualMachinesProfile"
+        },
+        "virtualMachineNodesStatus": {
+          "$ref": "#/definitions/VirtualMachineNodesStatus"
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -3641,7 +3712,8 @@
       "type": "string",
       "enum": [
         "VirtualMachineScaleSets",
-        "AvailabilitySet"
+        "AvailabilitySet",
+        "VirtualMachines"
       ],
       "x-ms-enum": {
         "name": "AgentPoolType",
@@ -3654,6 +3726,10 @@
           {
             "value": "AvailabilitySet",
             "description": "Use of this is strongly discouraged."
+          },
+          {
+            "value": "VirtualMachines",
+            "description": "Create an Agent Pool backed by a Single Instance VM orchestration mode."
           }
         ]
       },
