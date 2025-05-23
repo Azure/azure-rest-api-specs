@@ -106,6 +106,9 @@ union HasCustomDataTypes {
  * Represents an Enum with boolean values.
  */
 union BoolValue {
+  @doc("Represents an unknown value.")
+  Unknown: "Unknown",
+
   @doc("Represents a true boolean value.")
   True: "True",
 
