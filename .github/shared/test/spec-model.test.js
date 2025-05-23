@@ -37,6 +37,7 @@ describe("SpecModel", () => {
     const readme = readmes[0];
     expect(readme.toString()).toContain("Readme");
     expect(readme.path).toBe(resolve(folder, "readme.md"));
+    expect(readme.specModel).toBe(specModel);
 
     expect(readme.getGlobalConfig()).resolves.toEqual({
       "openapi-type": "arm",

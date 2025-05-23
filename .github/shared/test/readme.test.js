@@ -16,6 +16,8 @@ describe("readme", () => {
     await expect(readme.getTags()).rejects.toThrowError(
       /no such file or directory/i,
     );
+
+    expect(readme.specModel).toBeUndefined();
   });
 
   it("can be created with string content", async () => {
