@@ -61,3 +61,4 @@ If one or multiple validation error/warning suppression(s) is detected in your P
 - If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
   This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.
 - If the help provided by the previous points is not enough, post to https://aka.ms/azsdk/support/specreview-channel and link to this PR.
+- For guidance on SDK breaking change review, refer to https://aka.ms/ci-fix.

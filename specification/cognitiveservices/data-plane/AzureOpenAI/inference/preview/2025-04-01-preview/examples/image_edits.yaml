@@ -1,0 +1,25 @@
+title: Edits an image given a prompt.
+parameters:
+  endpoint: "{endpoint}"
+  api-version: "2025-04-01-preview"
+  deployment-id: "<deployment-id>"
+  body:
+    image: "<binary-image-data>"
+    mask: "<binary-mask-data>"
+    prompt: "In the style of WordArt, Microsoft Clippy wearing a cowboy hat."
+    n: 1
+    size: "1024x1024"
+    quality: "high"
+responses:
+  "200":
+    body:
+      created: 1698342300
+      data:
+        - b64_json: "iVB..."
+      usage:
+        total_tokens: 100
+        input_tokens: 50
+        output_tokens: 50
+        input_tokens_details:
+          text_tokens: 10
+          image_tokens: 40

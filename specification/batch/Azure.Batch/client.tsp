@@ -353,3 +353,7 @@ interface BatchClient {
 );
 @@clientName(Azure.Batch.BatchTaskFailureMode, "TaskFailureMode", "go");
 @@clientName(Azure.Batch.RecentBatchJob, "RecentJob", "go");
+@@clientName(Azure.Batch.BatchVmDiskSecurityProfile,
+  "VMDiskSecurityProfile",
+  "go"
+);

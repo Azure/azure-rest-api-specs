@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "endpoint": "https://aoairesource.openai.azure.com",
+    "api-key": "{api key}",
+    "api-version": "2025-04-01-preview",
+    "body": {
+      "name": "Math Quiz",
+      "data_source_config": {
+        "type": "custom",
+        "include_sample_schema": true,
+        "item_schema": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string"
+            },
+            "A": {
+              "type": "string"
+            },
+            "B": {
+              "type": "string"
+            },
+            "C": {
+              "type": "string"
+            },
+            "D": {
+              "type": "string"
+            },
+            "answer": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "testing_criteria": [
+        {
+          "type": "string_check",
+          "reference": "{{item.answer}}",
+          "input": "{{sample.output_text}}",
+          "operation": "eq",
+          "name": "string check"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "object": "eval",
+        "id": "eval_6801694950848190b10968bb628b651d",
+        "data_source_config": {
+          "type": "custom",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "item": {
+                "type": "object",
+                "properties": {
+                  "question": {
+                    "type": "string"
+                  },
+                  "A": {
+                    "type": "string"
+                  },
+                  "B": {
+                    "type": "string"
+                  },
+                  "C": {
+                    "type": "string"
+                  },
+                  "D": {
+                    "type": "string"
+                  },
+                  "answer": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": [
+              "item"
+            ]
+          }
+        },
+        "testing_criteria": [
+          {
+            "name": "string check",
+            "type": "string_check",
+            "input": "{{sample.output_text}}",
+            "reference": "{{item.answer}}",
+            "operation": "eq"
+          }
+        ],
+        "name": "Math Quiz",
+        "created_at": 1744922953,
+        "metadata": {}
+      }
+    }
+  }
+}

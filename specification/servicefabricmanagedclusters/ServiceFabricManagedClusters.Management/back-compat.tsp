@@ -15,10 +15,46 @@ using Microsoft.ServiceFabric;
   "ManagedMaintenanceWindowStatuses",
   "java"
 );
+@@clientName(ManagedClusterProperties.adminUserName, "adminUsername", "java");
+@@clientName(ManagedClusterProperties.VMImage, "vmImage", "java");
+@@clientName(ManagedClusterProperties.enableServicePublicIP,
+  "enableServicePublicIp",
+  "java"
+);
+@@clientName(ManagedClusterProperties.publicIPPrefixId,
+  "publicIpPrefixId",
+  "java"
+);
+@@clientName(PublicIPAddressConfiguration.publicIPAddressVersion,
+  "publicIpAddressVersion",
+  "java"
+);
+@@clientName(IpConfiguration.privateIPAddressVersion,
+  "privateIpAddressVersion",
+  "java"
+);
+@@clientName(IpConfiguration.publicIPAddressConfiguration,
+  "publicIpAddressConfiguration",
+  "java"
+);
+@@clientName(NodeTypeProperties.enableNodePublicIP,
+  "enableNodePublicIp",
+  "java"
+);
+@@clientName(IPAddressType, "IpAddressType", "java");
+@@clientName(PublicIPAddressConfiguration,
+  "IpConfigurationPublicIpAddressConfiguration",
+  "java"
+);
+@@clientName(PrivateIPAddressVersion, "PrivateIpAddressVersion", "java");
+@@clientName(PublicIPAddressVersion, "PublicIpAddressVersion", "java");
+@@clientName(VMSSExtension, "VmssExtension", "java");
+@@alternateType(VMSSExtensionProperties.settings, unknown, "java");
+@@alternateType(VMSSExtensionProperties.protectedSettings, unknown, "java");
 
 @@clientName(PublicIPAddressConfiguration,
   "IPConfigurationPublicIPAddressConfiguration",
-  "go, java, javascript, python"
+  "go, javascript, python"
 );
 
 /**
