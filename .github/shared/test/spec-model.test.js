@@ -5,7 +5,7 @@ import { dirname, isAbsolute, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
-import { SpecModel, SpecModelError } from "../src/spec-model.js";
+import { SpecModel } from "../src/spec-model.js";
 import { repoRoot } from "./repo.js";
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
@@ -314,22 +314,6 @@ describe("SpecModel", () => {
 
       expect(actual).toEqual(expected);
     });
-  });
-});
-
-describe("SpecModelError", () => {
-  it("can be turned to a string", () => {
-    const error = new SpecModelError("message", {
-      readme: "readme",
-      tag: "tag",
-      source: "source",
-    });
-    expect(error.toString()).toMatchInlineSnapshot(`
-      "SpecModelError: message
-      	Problem File: source
-      	Readme: readme
-      	Tag: tag"
-    `);
   });
 });
 
