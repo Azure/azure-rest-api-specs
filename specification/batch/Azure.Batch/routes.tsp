@@ -91,8 +91,8 @@ interface Pools {
     {}
   >;
 
-  @summary("Lists all of the Pools which be mounted.")
-  @doc("Lists all of the Pools which be mounted.")
+  @summary("Lists all of the Pools in the specified Account.")
+  @doc("Lists all of the Pools in the specified Account.")
   @route("/pools")
   listPools is ListOperation<
     {
