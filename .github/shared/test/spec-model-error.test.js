@@ -4,17 +4,31 @@ import { describe, expect, it } from "vitest";
 import { SpecModelError } from "../src/spec-model-error.js";
 
 describe("SpecModelError", () => {
-  it("can be turned to a string", () => {
-    const error = new SpecModelError("message", {
-      readme: "readme",
-      tag: "tag",
-      source: "source",
-    });
+  it("toString`", () => {
+    let error = new SpecModelError("test message");
+    expect(error.toString()).toMatchInlineSnapshot(
+      `"SpecModelError: test message"`,
+    );
+
+    error.source = "/test/source.json";
     expect(error.toString()).toMatchInlineSnapshot(`
-      "SpecModelError: message
-      	Problem File: source
-      	Readme: readme
-      	Tag: tag"
+      "SpecModelError: test message
+      	Problem File: /test/source.json"
+    `);
+
+    error.readme = "/test/readme.md";
+    expect(error.toString()).toMatchInlineSnapshot(`
+      "SpecModelError: test message
+      	Problem File: /test/source.json
+      	Readme: /test/readme.md"
+    `);
+
+    error.tag = "2025-01-01";
+    expect(error.toString()).toMatchInlineSnapshot(`
+      "SpecModelError: test message
+      	Problem File: /test/source.json
+      	Readme: /test/readme.md
+      	Tag: 2025-01-01"
     `);
   });
 });
