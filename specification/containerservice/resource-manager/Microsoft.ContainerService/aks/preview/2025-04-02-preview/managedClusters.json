@@ -6806,10 +6806,6 @@
         "azureMonitorProfile": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfile"
         },
-        "safeguardsProfile": {
-          "$ref": "#/definitions/SafeguardsProfile",
-          "description": "The Safeguards profile holds all the safeguards information for a given cluster"
-        },
         "serviceMeshProfile": {
           "$ref": "#/definitions/ServiceMeshProfile"
         },
@@ -10205,47 +10201,6 @@
       "required": [
         "enabled"
       ]
-    },
-    "SafeguardsProfile": {
-      "type": "object",
-      "properties": {
-        "systemExcludedNamespaces": {
-          "readOnly": true,
-          "type": "array",
-          "description": "List of namespaces specified by AKS to be excluded from Safeguards",
-          "items": {
-            "type": "string"
-          }
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of constraints to use"
-        },
-        "level": {
-          "type": "string",
-          "enum": [
-            "Off",
-            "Warning",
-            "Enforcement"
-          ],
-          "x-ms-enum": {
-            "name": "level",
-            "modelAsString": true
-          },
-          "description": "The Safeguards level to be used. By default, Safeguards is enabled for all namespaces except those that AKS excludes via systemExcludedNamespaces"
-        },
-        "excludedNamespaces": {
-          "description": "List of namespaces excluded from Safeguards checks",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "level"
-      ],
-      "description": "The Safeguards profile."
     },
     "ServiceMeshProfile": {
       "type": "object",
