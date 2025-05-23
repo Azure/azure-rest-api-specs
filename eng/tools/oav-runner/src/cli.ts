@@ -1,6 +1,6 @@
 
 import { checkSpecs } from './main.js';
-import { outputAnnotatedErrors,outputSummaryReport } from './formatting.js';
+import { outputAnnotatedErrors, outputSummaryReport } from './formatting.js';
 
 const [ , , targetDir ] = process.argv;
 // todo: properly parse arguments.
@@ -19,7 +19,7 @@ else {
       outputAnnotatedErrors(errorList);
 
       // print the errors in a summary report that we can later output to
-      outputSummaryReport(targetDir, errorList);
+      outputSummaryReport(errorList);
     }
 
     process.exit(exitCode);

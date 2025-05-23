@@ -28,7 +28,8 @@ export async function checkSpecs(rootDirectory: string): Promise<[number, Array<
         if (errorResults.validateSpec && errorResults.validateSpec.errors){
           for(const error of errorResults.validateSpec.errors) {
             errors.push( {
-              message: `${error.code}: ${error.message}`,
+              message: error.message,
+              classificationCode: error.code,
               file: swaggerFile,
               line: error.position?.line,
               column: error.position?.column
@@ -65,6 +66,8 @@ export async function processFilesToSpecificationList(rootDirectory: string, fil
     // we might have to do that, but as far as I can tell, the "pull everything" approach only works for the nonPR. If its PR
     // it literally never uses the total result.
     return files.filter((file) => {
+      // todo: rationalize if this is even necessary given the swagger check
+      // I guess this might filter out files that are not swagger files?
       if (
           file.match(/.*\/cadl-project.yaml$/gi) !== null ||
           file.match(/.*\/package.json$/gi) !== null ||

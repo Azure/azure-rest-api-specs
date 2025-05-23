@@ -24,8 +24,8 @@ export function setSummary(content) {
  * This function is used to ask the github agent to annotate a file in a github PR with an error message.
  * @param {string} repoPath
  * @param {string} line
- * @param {string} col
- * @param {string} message
+ * @param {number} col
+ * @param {number} message
  * @returns {void}
  */
 export function annotateFileError(repoPath, line, col, message) {
