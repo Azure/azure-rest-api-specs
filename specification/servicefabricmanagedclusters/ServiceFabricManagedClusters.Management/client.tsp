@@ -76,3 +76,4 @@ using Microsoft.ServiceFabric;
 );
 
 @@scope(OperationResults.get, "!java");
+@@scope(OperationStatus.get, "!java");
