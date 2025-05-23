@@ -24,6 +24,9 @@ export async function main() {
           // print the errors in a summary report that we can later output to
           outputSummaryReport(errorList);
         }
+        else {
+            consoleLogger.info("No errors found.");
+        }
 
         process.exit(exitCode);
     }

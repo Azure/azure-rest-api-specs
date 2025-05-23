@@ -21,33 +21,35 @@ export async function checkSpecs(rootDirectory: string): Promise<[number, Array<
     const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
 
     for (const swaggerFile of swaggerFiles) {
-      try {
-        const errorResults = await oav.validateSpec(swaggerFile, undefined);
-        if (errorResults.validateSpec && errorResults.validateSpec.errors){
-          for (const error of errorResults.validateSpec.errors) {
-            errors.push( {
-              message: error.message,
-              classificationCode: error.code,
-              file: swaggerFile,
-              line: error.position?.line,
-              column: error.position?.column
-            } as ReportableOavError);
-          }
+        try {
+            const errorResults = await oav.validateSpec(swaggerFile, undefined);
+            if (errorResults.validateSpec && errorResults.validateSpec.errors){
+                for (const error of errorResults.validateSpec.errors) {
+                    errors.push( {
+                        message: error.message,
+                        errorCode: error.code,
+                        file: swaggerFile,
+                        line: error.position?.line,
+                        column: error.position?.column
+                    } as ReportableOavError);
+                }
+            }
         }
-      }
-      catch (e) {
-        if (e instanceof Error) {
-          errors.push( {
-            message: e.message,
-            file: swaggerFile
-          } as ReportableOavError);
-        } else {
-          errors.push( {
-            message: `Unhandled error validating ${swaggerFile}: ${e}`,
-            file: swaggerFile
-          } as ReportableOavError);
+        catch (e) {
+            if (e instanceof Error) {
+                consoleLogger.error(`Error validating ${swaggerFile}: ${e.message}`);
+                errors.push( {
+                    message: e.message,
+                    file: swaggerFile
+                } as ReportableOavError);
+            } else {
+                consoleLogger.error(`Error validating ${swaggerFile}: ${e}`);
+                errors.push( {
+                    message: `Unhandled error validating ${swaggerFile}: ${e}`,
+                    file: swaggerFile
+                } as ReportableOavError);
+            }
         }
-      }
     }
 
     if (errors){
@@ -87,7 +89,6 @@ export async function processFilesToSpecificationList(rootDirectory: string, fil
 
         const swaggerResult = swagger(file);
         const targetFile = path.join(rootDirectory, file);
-        consoleLogger.info(`Checking ${targetFile}`);
 
         // if it's a swagger file, we should check to see if it exists
         // as a deleted file will also show up in the changed files list
@@ -97,62 +98,3 @@ export async function processFilesToSpecificationList(rootDirectory: string, fil
         return false;
       });
 }
-
-
-// keep these around for now, but they are not used in the current implementation
-// the biggest thing is that I'm uncertain if I will need to keep some sort of this globbing around to support when _only_ examples
-// are changed, for instance.
-
-// export const getSwaggers = () => {
-//   const getGlobPath = () =>
-//     path.join(__dirname, "../", "../", "/specification/**/*.json");
-//     return glob.sync(getGlobPath(), {
-//     ignore: [
-//       "**/scenarios/**/*.json",
-//       "**/examples/**/*.json",
-//       "**/quickstart-templates/*.json",
-//       "**/schema/*.json",
-//     ],
-//   });
-// };
-
-// export const getExamples = () => {
-//   const exampleGlobPath = path.join(
-//     __dirname,
-//     "../",
-//     "../",
-//     "/specification/**/examples/**/*.json"
-//   );
-//   return glob.sync(exampleGlobPath);
-// };
-
-// this is some code from modelValidationPipeline.ts that is not used in the current implementation
-// import jsYaml from 'js-yaml';
-
-// // type ErrorType = "error" | "warning";
-
-// // const vsoLogIssueWrapper = (issueType: string, message: string) => {
-// //   return `##vso[task.logissue type=${issueType}]${message}`;
-// // }
-
-// // const prettyPrint = <T extends oav.NodeError<T>>(
-// //   errors: ReadonlyArray<T> | undefined,
-// //   errorType: ErrorType
-// // ) => {
-// //   if (errors !== undefined) {
-// //     for (const error of errors) {
-// //       const yaml = jsYaml.dump(error);
-// //       if (process.env["Agent.Id"]) {
-// //         /* tslint:disable-next-line:no-console no-string-literal */
-// //         console.error(vsoLogIssueWrapper(errorType, errorType));
-// //         /* tslint:disable-next-line:no-console no-string-literal */
-// //         console.error(vsoLogIssueWrapper(errorType, yaml));
-// //       } else {
-// //         /* tslint:disable-next-line:no-console no-string-literal */
-// //         console.error("\x1b[31m", errorType, ":", "\x1b[0m");
-// //         /* tslint:disable-next-line:no-console no-string-literal */
-// //         console.error(yaml);
-// //       }
-// //     }
-// //   }
-// // }

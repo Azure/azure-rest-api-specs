@@ -1,21 +1,29 @@
 
 import { annotateFileError, setSummary } from "@azure-tools/specs-shared/error-reporting";
+import { error } from "console";
 
 export interface ReportableOavError {
   message: string;
   file: string;
-  classificationCode?: string;
+  errorCode?: string;
   line?: number;  // we don't always have a line or column if the spec is invalid
   column?: number;
 }
 
 export function outputAnnotatedErrors(errors: ReportableOavError[]){
     errors.forEach((error) => {
-        if (!error.classificationCode) {
-            annotateFileError(error.message, error.file, error.line ?? 0, error.column ?? 0);
+        let msg: string = `${error.message}`;
+        let prefix = "";
+
+        if (error.errorCode) {
+            prefix = `${error.errorCode}: `;
+            msg = `${prefix}${msg}`;
         }
-        else {
-            annotateFileError(`${error.classificationCode}: ${error.message}`, error.file, error.line ?? 0, error.column ?? 0);
+
+        // we only attempt an in-place annotation if we have the line and column associated with the error
+        // otherwise we just depend upon the summary report to show the error
+        if (error.line && error.column) {
+            annotateFileError(error.file, msg, error.line, error.column);
         }
     });
 }
@@ -23,18 +31,29 @@ export function outputAnnotatedErrors(errors: ReportableOavError[]){
 export function outputSummaryReport(errors: ReportableOavError[], reportName: string = "Swagger SemanticValidation") {
     let builtLines: string[] = [];
 
-    builtLines.push("## 🔥 Error Summary");
-    builtLines.push("⚠️ This check is testing a new version of 'Swagger SemanticValidation'.")
-    builtLines.push("⚠️ Failures are expected, and should be completely ignored by spec authors and reviewers.")
-    builtLines.push(`⚠️ Meaningful results for this PR are in required check '${reportName}'.`)
-    // we should sort the errors by file and error code
+    builtLines.push("## Error Summary");
+    builtLines.push("⚠️ This check is testing a new version of 'Swagger SemanticValidation'. ⚠️")
+    builtLines.push("Failures are expected, and should be completely ignored by spec authors and reviewers.")
+    builtLines.push(`Meaningful results for this PR are in required check '${reportName}'.`)
     builtLines.push("| File | Line#Column | Code | Message |");
     builtLines.push("| --- | --- | --- | --- |");
 
-    // todo: sort the errors by file and error code before we print them
-    errors.forEach((error) => {
-        builtLines.push(`| ${error.file} | ${error.line}#${error.column} | ${error.classificationCode} | ${error.message} |`);
+    // sort the errors by file name then by error code
+    errors.sort((a, b) => {
+        const nameCompare = a.file.localeCompare(b.file);
+        if (nameCompare !== 0) {
+            return nameCompare;
+        }
+        return (a.errorCode || "").localeCompare(b.errorCode || "");
     });
+
+    errors.forEach((error) => {
+        const fmtLineCol = (error.line && error.column) ? `${error.line}#${error.column}` : "N/A";
+        builtLines.push(`| ${error.file} | ${fmtLineCol} | ${error.errorCode} | ${error.message} |`);
+    });
+
+    builtLines.push("\n");
+    builtLines.push("> [!IMPORTANT]\n> Repro any individual file's worth of errors by installing oav@3.5.1 and running `oav validate-spec <spec-file-path>`.");
 
     const summaryResult = builtLines.join('\n');
     setSummary(summaryResult);
