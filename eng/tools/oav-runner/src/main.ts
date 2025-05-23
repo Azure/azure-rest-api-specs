@@ -7,11 +7,10 @@ import * as path from 'path';
 // import * as glob from 'glob';
 import * as fs from 'fs';
 
-// use ,specification, example to filter the changed files to just specs and examples
 import { getChangedFiles, swagger } from "@azure-tools/specs-shared/changed-files";
 
-export async function main(rootDirectory: string): Promise<Number> {
-    let errors: Array<string> = [];
+export async function checkSpecs(rootDirectory: string): Promise<[number, Array<object>]> {
+    let errors: Array<object> = [];
 
     console.log(`Executing checks in ${rootDirectory}`);
 
@@ -21,11 +20,13 @@ export async function main(rootDirectory: string): Promise<Number> {
 
     const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
 
-    // todo: this will have to be hardened a bit. targeting the swagger file selection first
-    // as it is an easily testable operation.
     for (const swaggerFile of swaggerFiles) {
       try {
-        oav.validateSpec(swaggerFile, {});
+        const errorResults = await oav.validateSpec(swaggerFile, undefined);
+
+        if (errorResults.validateSpec && errorResults.validateSpec.errors){
+          errors.push(errorResults.validateSpec.errors);
+        }
       }
       catch (e) {
         // todo: add error handling beyond logging
@@ -34,9 +35,9 @@ export async function main(rootDirectory: string): Promise<Number> {
     }
 
     if (errors){
-        return 1;
+        return [1, errors];
     }
-    return 0;
+    return [0, []];
 }
 
 
@@ -53,23 +54,13 @@ export async function processFilesToSpecificationList(rootDirectory: string, fil
           file.match(/.*\/sdk-suppressions.yaml$/gi) !== null ||
           file.match(/.*\/suppressions.yaml$/gi) !== null ||
           file.match(/.*\/tspconfig.yaml$/gi) !== null ||
-          file.match(/.*\/cspell.yaml$/gi) !== null
-        ) {
-          return false;
-        }
-        if (file.match(/.*\/scenarios\/*/gi) !== null) {
-          return false;
-        }
-        if (
+          file.match(/.*\/cspell.yaml$/gi) !== null ||
+          file.match(/.*\/scenarios\/*/gi) !== null ||
           file.match(/.*(json|yaml)$/gi) == null ||
-          file.match(/.*specification\/.*/gi) == null
+          file.match(/.*specification\/.*/gi) == null ||
+          file.match(/.*\/examples\/*/gi) !== null ||
+          file.match(/.*\/quickstart-templates\/*/gi) !== null
         ) {
-          return false;
-        }
-        if (file.match(/.*\/examples\/*/gi) !== null) {
-          return false;
-        }
-        if (file.match(/.*\/quickstart-templates\/*/gi) !== null) {
           return false;
         }
 

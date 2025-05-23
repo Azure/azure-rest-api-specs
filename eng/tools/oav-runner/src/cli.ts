@@ -1,13 +1,26 @@
 
-import { main } from './main.js';
+import { checkSpecs } from './main.js';
+import { outputAnnotatedErrors,outputSummaryReport } from './formatting.js';
 
 const [ , , targetDir ] = process.argv;
-
+// todo: properly parse arguments.
+//   accept a directory that we will git diff within or a list of files.
+//   parse a second argument into runSpecs or runExamples
 if (!targetDir) {
   console.error('Usage: oav-runner <targetDirectory>');
   process.exit(1);
 }
 else {
     console.log(`Running oav-runner on ${targetDir}`);
-    await main(targetDir);
+    const [exitCode, errorList] = await checkSpecs(targetDir);
+
+    if (errorList){
+      // print the errors so that they will annotate the files on github UI interface
+      outputAnnotatedErrors(errorList);
+
+      // print the errors in a summary report that we can later output to
+      outputSummaryReport(targetDir, errorList);
+    }
+
+    process.exit(exitCode);
 }
