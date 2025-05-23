@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.Spatio;
 
 @@clientName(Microsoft.Spatio, "PlanetaryComputerMgmt", "python");
 @@clientName(Microsoft.Spatio, "PlanetaryComputerMgmtClient", "java");
