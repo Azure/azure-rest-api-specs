@@ -48,7 +48,8 @@ export class Readme {
    * @param {SpecModel} [options.specModel]
    */
   constructor(path, options) {
-    this.#path = resolve(path);
+    this.#path = resolve(options?.specModel?.folder ?? "", path);
+
     this.#content = options?.content;
     this.#logger = options?.logger;
     this.#specModel = options?.specModel;

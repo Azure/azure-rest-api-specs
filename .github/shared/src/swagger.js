@@ -48,7 +48,7 @@ export class Swagger {
    * @param {Tag} [options.tag]
    */
   constructor(path, options) {
-    this.#path = resolve(path);
+    this.#path = resolve(options?.tag?.readme?.path ?? "", path);
     this.#logger = options?.logger;
     this.#tag = options?.tag;
   }
