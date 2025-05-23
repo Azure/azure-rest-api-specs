@@ -364,6 +364,21 @@ using Microsoft.DataReplication;
   "HyperVToAzStackHciProtectedItemCustomPropsUpdate",
   "java"
 );
+@@clientName(HyperVToAzStackHCIReplicationExtensionModelCustomProperties,
+  "HyperVToAzStackHciReplicationExtCustomProps",
+  "java"
+);
+@@clientName(VMwareToAzStackHCIRecoveryPointModelCustomProperties,
+  "VMwareToAzStackHCIRecoveryPointCustomProps",
+  "java"
+);
+@@clientName(ReplicationExtensionModel, "ReplicationExtension", "java");
+@@clientName(PrivateEndpointConnectionProxies, "PrivateEndpointConnProxies", "java");
+@@clientName(JobModelCustomProperties, "JobCustomProperties", "java");
+
+// seems we are not able to rename XXListResult models and anonymous models
+// @@clientName(PrivateEndpointConnectionProxy, "PrivEndptConnProxy", "java");
+// @@clientName(PrivateEndpointConnection, "PrivEndptConn", "java");
 
 @@clientName(Microsoft.DataReplication,
   "RecoveryServicesDataReplicationMgmtClient",
