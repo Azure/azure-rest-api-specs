@@ -52,6 +52,7 @@ describe("SpecModel", () => {
 
     expect(tags[0].toString()).toContain("Tag");
     expect(tags[0].name).toBe("package-2021-10-01-preview");
+    expect(tags[0].readme).toBe(readme);
 
     const inputFiles0 = [...tags[0].inputFiles.values()];
     expect(inputFiles0.length).toBe(1);

@@ -8,11 +8,16 @@ import { Tag } from "../src/tag.js";
 
 describe("Tag", () => {
   it("can be created with mock swaggers", async () => {
-    const tag = new Tag("tag", new Set([new Swagger("swagger")]));
-    expect(tag.name).toBe("tag");
-    expect(tag.inputFiles.size).toBe(1);
+    const inputSwagger = new Swagger("swagger");
+    const inputFiles = new Map([[inputSwagger.path, inputSwagger]]);
 
-    const swagger = [...tag.inputFiles][0];
+    const tag = new Tag("tag", inputFiles);
+
+    expect(tag.name).toBe("tag");
+    expect(tag.readme).toBeUndefined();
+
+    expect(tag.inputFiles.size).toBe(1);
+    const swagger = [...tag.inputFiles.values()][0];
     expect(swagger.path).toBe(resolve("swagger"));
 
     await expect(swagger.getRefs()).rejects.toThrowError(
