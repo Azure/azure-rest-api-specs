@@ -39,6 +39,18 @@ namespace Storage.Blob {
     contentType: ResponseMediaType;
   }) | TError;
 
+  /** Azure Storage Blob basic operation template */
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  op StorageOperationNoBody<
+    TParams extends TypeSpec.Reflection.Model | void,
+    TResponse extends TypeSpec.Reflection.Model | void,
+    TError = StorageError
+  >(
+    ...ApiVersionHeader,
+    ...TParams,
+    ...ClientRequestIdHeader,
+  ): TResponse | TError;
+
   /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
@@ -749,7 +761,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       @head
       @route("{blobName}")
-      op getProperties is StorageOperation<
+      op getProperties is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -826,9 +838,7 @@ namespace Storage.Blob {
           ...ImmutabilityPolicyExpiresOnResponseHeader;
           ...ImmutabilityPolicyModeResponseHeader;
           ...LegalHoldResponseHeader;
-        },
-        "",
-        ""
+        }
       >;
 
       /** If the storage account's soft delete feature is disabled then, when a blob is deleted, it is permanently removed from the storage account. If the storage account's soft delete feature is enabled, then, when a blob is deleted, it is marked for deletion and becomes inaccessible immediately. However, the blob service retains the blob or snapshot for the number of days specified by the DeleteRetentionPolicy section of [Storage service properties] (Set-Blob-Service-Properties.md). After the specified number of days has passed, the blob's data is permanently removed from the storage account. Note that you continue to be charged for the soft-deleted blob's storage until it is permanently removed. Use the List Blobs API and specify the \"include=deleted\" query parameter to discover which blobs and snapshots have been soft deleted. You can then use the Undelete Blob API to restore a soft-deleted blob. All other operations on a soft-deleted blob or snapshot causes the service to return an HTTP status code of 404 (ResourceNotFound). */
@@ -1377,7 +1387,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?PageBlob")
-        op create is StorageOperation<
+        op create is StorageOperationNoBody<
           {
             ...MetadataHeaders;
             ...ContainerNamePathParameter;
@@ -1423,9 +1433,7 @@ namespace Storage.Blob {
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-          },
-          "",
-          ""
+          }
         >;
 
         /** The Upload Pages operation writes a range of pages to a page blob */
@@ -1485,7 +1493,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?comp=page&clear")
-        op clearPages is StorageOperation<
+        op clearPages is StorageOperationNoBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -1521,7 +1529,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?comp=page&update&fromUrl")
-        op uploadPagesFromUrl is StorageOperation<
+        op uploadPagesFromUrl is StorageOperationNoBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -1720,7 +1728,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?AppendBlob")
-        op create is StorageOperation<
+        op create is StorageOperationNoBody<
           {
             ...MetadataHeaders;
             ...ContainerNamePathParameter;
@@ -1947,7 +1955,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?BlockBlob&fromUrl")
-        op putBlobFromUrl is StorageOperation<
+        op putBlobFromUrl is StorageOperationNoBody<
           {
             ...MetadataHeaders;
             ...ContainerNamePathParameter;
