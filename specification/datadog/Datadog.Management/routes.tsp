@@ -40,7 +40,8 @@ interface MarketplaceAgreementsOperationGroup {
     Request = DatadogAgreementResource,
     Response = DatadogAgreementResource,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    OptionalRequestBody = true
   >;
 }
 

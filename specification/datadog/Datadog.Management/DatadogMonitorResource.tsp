@@ -37,6 +37,27 @@ model DatadogMonitorResource
   identity?: IdentityProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@armResourceOperations
+interface DatadogMonitorResourcesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * Monitor resource name
+         */
+        @path
+        @segment("monitors")
+        monitorName: string,
+      },
+      {},
+      ErrorResponse
+    > {}
+
 @armResourceOperations
 interface DatadogMonitorResources {
   /**
@@ -51,7 +72,10 @@ interface DatadogMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_Create")
-  create is ArmResourceCreateOrReplaceAsync<DatadogMonitorResource>;
+  create is DatadogMonitorResourcesOps.CreateOrUpdateAsync<
+    DatadogMonitorResource,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Update a monitor resource.
@@ -59,11 +83,12 @@ interface DatadogMonitorResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   @operationId("Monitors_Update")
-  update is ArmCustomPatchAsync<
+  update is DatadogMonitorResourcesOps.CustomPatchAsync<
     DatadogMonitorResource,
     PatchModel = DatadogMonitorResourceUpdateParameters,
     Response = ArmResponse<DatadogMonitorResource> | (ArmResourceCreatedResponse<DatadogMonitorResource> &
-      ArmLroLocationHeader)
+      ArmLroLocationHeader),
+    OptionalRequestBody = true
   >;
 
   /**
@@ -194,5 +219,5 @@ interface DatadogMonitorResources {
 @@doc(DatadogMonitorResource.properties,
   "Properties specific to the monitor resource."
 );
-@@doc(DatadogMonitorResources.create::parameters.resource, "");
-@@doc(DatadogMonitorResources.update::parameters.properties, "");
+@@doc(DatadogMonitorResources.create::parameters.body, "");
+@@doc(DatadogMonitorResources.update::parameters.body, "");

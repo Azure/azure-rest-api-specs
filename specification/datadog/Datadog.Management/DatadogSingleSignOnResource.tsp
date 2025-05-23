@@ -23,6 +23,34 @@ model DatadogSingleSignOnResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@armResourceOperations
+interface DatadogSingleSignOnResourcesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * Monitor resource name
+         */
+        @path
+        @segment("monitors")
+        monitorName: string,
+      },
+      {
+        /**
+         * Configuration name
+         */
+        @path
+        @segment("singleSignOnConfigurations")
+        configurationName: string,
+      },
+      ErrorResponse
+    > {}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
 interface DatadogSingleSignOnResources {
@@ -38,7 +66,10 @@ interface DatadogSingleSignOnResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SingleSignOnConfigurations_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DatadogSingleSignOnResource>;
+  createOrUpdate is DatadogSingleSignOnResourcesOps.CreateOrUpdateAsync<
+    DatadogSingleSignOnResource,
+    OptionalRequestBody = true
+  >;
 
   /**
    * List the single sign-on configurations for a given monitor resource.
@@ -53,4 +84,4 @@ interface DatadogSingleSignOnResources {
 
 @@doc(DatadogSingleSignOnResource.name, "Configuration name");
 @@doc(DatadogSingleSignOnResource.properties, "");
-@@doc(DatadogSingleSignOnResources.createOrUpdate::parameters.resource, "");
+@@doc(DatadogSingleSignOnResources.createOrUpdate::parameters.body, "");

@@ -25,6 +25,34 @@ model MonitoredSubscriptionProperties
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@armResourceOperations
+interface MonitoredSubscriptionsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * Monitor resource name
+         */
+        @path
+        @segment("monitors")
+        monitorName: string,
+      },
+      {
+        /**
+         * The configuration name. Only 'default' value is supported.
+         */
+        @path
+        @segment("monitoredSubscriptions")
+        configurationName: string,
+      },
+      ErrorResponse
+    > {}
+
 @armResourceOperations
 interface MonitoredSubscriptions {
   /**
@@ -36,22 +64,24 @@ interface MonitoredSubscriptions {
    * Add the subscriptions that should be monitored by the Datadog monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createorUpdate is ArmResourceCreateOrReplaceAsync<
+  createorUpdate is MonitoredSubscriptionsOps.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
     Response = ArmResourceUpdatedResponse<MonitoredSubscriptionProperties> | ArmResourceCreatedResponse<
       MonitoredSubscriptionProperties,
       ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
         Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    OptionalRequestBody = true
   >;
 
   /**
    * Updates the subscriptions that are being monitored by the Datadog monitor resource
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is MonitoredSubscriptionsOps.CustomPatchAsync<
     MonitoredSubscriptionProperties,
-    PatchModel = MonitoredSubscriptionProperties
+    PatchModel = MonitoredSubscriptionProperties,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -78,5 +108,5 @@ interface MonitoredSubscriptions {
 @@doc(MonitoredSubscriptionProperties.properties,
   "The request to update subscriptions needed to be monitored by the Datadog monitor resource."
 );
-@@doc(MonitoredSubscriptions.createorUpdate::parameters.resource, "");
-@@doc(MonitoredSubscriptions.update::parameters.properties, "");
+@@doc(MonitoredSubscriptions.createorUpdate::parameters.body, "");
+@@doc(MonitoredSubscriptions.update::parameters.body, "");

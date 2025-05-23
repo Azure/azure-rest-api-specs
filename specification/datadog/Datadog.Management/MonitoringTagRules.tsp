@@ -25,6 +25,34 @@ model MonitoringTagRules
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@armResourceOperations
+interface TagRulesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * Monitor resource name
+         */
+        @path
+        @segment("monitors")
+        monitorName: string,
+      },
+      {
+        /**
+         * Rule set name
+         */
+        @path
+        @segment("tagRules")
+        ruleSetName: string,
+      },
+      ErrorResponse
+    > {}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
 interface TagRules {
@@ -37,9 +65,10 @@ interface TagRules {
    * Create or update a tag rule set for a given monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is TagRulesOps.CreateOrUpdateAsync<
     MonitoringTagRules,
-    Response = ArmResourceUpdatedResponse<MonitoringTagRules>
+    Response = ArmResourceUpdatedResponse<MonitoringTagRules>,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -55,4 +84,4 @@ interface TagRules {
 @@doc(MonitoringTagRules.properties,
   "Definition of the properties for a TagRules resource."
 );
-@@doc(TagRules.createOrUpdate::parameters.resource, "");
+@@doc(TagRules.createOrUpdate::parameters.body, "");
