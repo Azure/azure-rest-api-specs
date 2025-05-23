@@ -3,6 +3,7 @@
 import { mapAsync } from "./array.js";
 
 /**
+ * @typedef {import('./readme.js').Readme} Readme
  * @typedef {import('./swagger.js').Swagger} Swagger
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
@@ -18,15 +19,23 @@ export class Tag {
   #name;
 
   /**
+   * Readme that contains this Tag
+   * @type {Readme | undefined}
+   */
+  #readme;
+
+  /**
    * @param {string} name
    * @param {Map<string, Swagger>} inputFiles
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
+   * @param {Readme} [options.readme]
    */
   constructor(name, inputFiles, options) {
     this.#name = name;
     this.#inputFiles = inputFiles;
     this.#logger = options?.logger;
+    this.#readme = options?.readme;
   }
 
   /**
@@ -41,6 +50,13 @@ export class Tag {
    */
   get name() {
     return this.#name;
+  }
+
+  /**
+   * @returns {Readme | undefined} Readme that contains this Tag
+   */
+  get readme() {
+    return this.#readme;
   }
 
   /**
