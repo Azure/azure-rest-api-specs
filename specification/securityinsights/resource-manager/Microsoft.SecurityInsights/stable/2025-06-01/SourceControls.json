@@ -405,6 +405,11 @@
           "description": "Service principal metadata.",
           "$ref": "#/definitions/ServicePrincipal"
         },
+        "workloadIdentityFederation": {
+          "description": "Workload Identity metadata.",
+          "$ref": "#/definitions/WorkloadIdentityFederation",
+          "readOnly": true
+        },
         "repositoryAccess": {
           "description": "Repository access credentials. This is write-only object and it never returns back to a user.",
           "x-ms-mutability": [
@@ -548,6 +553,37 @@
           "format": "date-time",
           "description": "Expiration time of service principal credentials.",
           "type": "string"
+        }
+      }
+    },
+    "WorkloadIdentityFederation": {
+      "type": "object",
+      "description": "Workload Identity Federation metadata.",
+      "properties": {
+        "id": {
+          "description": "Id of Workload Identity Federation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant id of Workload Identity Federation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "appId": {
+          "description": "App id of Workload Identity Federation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subject": {
+          "description": "Subject of Workload Identity Federation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "issuer": {
+          "description": "Issuer of Workload Identity Federation.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
