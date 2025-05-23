@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.OnlineExperimentation;
 
@@ -63,6 +64,35 @@ model OnlineExperimentationWorkspaceProperties {
    */
   @visibility(Lifecycle.Read)
   endpoint?: url;
+
+  /**
+   * Public Network Access Control for the online experimentation resource. Defaults to Enabled if not set.
+   * - Enabled: The resource can be accessed from the public internet.
+   * - Disabled: The resource can only be accessed from a private endpoint.
+   */
+  @added(Microsoft.OnlineExperimentation.Versions.v2025_08_01_preview)
+  publicNetworkAccess?: PublicNetworkAccessType;
+
+  /**
+   * The private endpoint connections associated with the online experimentation workspace resource.
+   */
+  @added(Microsoft.OnlineExperimentation.Versions.v2025_08_01_preview)
+  @visibility(Lifecycle.Read)
+  privateEndpointConnections?: PrivateEndpointConnection[];
+}
+
+/**
+ * The public network access type for an online experimentation resource.
+ */
+@added(Microsoft.OnlineExperimentation.Versions.v2025_08_01_preview)
+union PublicNetworkAccessType {
+  /** Enabled: The resource can be accessed from the public internet */
+  Enabled: "Enabled",
+
+  /** Disabled: The resource can only be accessed from a private endpoint. */
+  Disabled: "Disabled",
+
+  string,
 }
 
 /**
