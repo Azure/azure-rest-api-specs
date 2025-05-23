@@ -27,7 +27,21 @@ export function outputAnnotatedErrors(errors: ReportableOavError[]){
     });
 }
 
-export function outputSummaryReport(errors: ReportableOavError[], reportName: string = "Swagger SemanticValidation") {
+export function outputSuccessSummary(swaggerFiles: string[], reportName: string="Swagger SemanticValidation") {
+    let builtLines: string[] = [];
+
+    builtLines.push(`## All specifications passed ${reportName}`);
+    builtLines.push("| File | Status |");
+    builtLines.push("| --- | --- |");
+    for (const swaggerFile of swaggerFiles) {
+        builtLines.push(`| ${swaggerFile} | ✅ |`);
+    }
+
+    const summaryResult = builtLines.join('\n');
+    setSummary(summaryResult);
+}
+
+export function outputErrorSummary(errors: ReportableOavError[], reportName: string = "Swagger SemanticValidation") {
     let builtLines: string[] = [];
 
     builtLines.push("## Error Summary");
@@ -52,7 +66,7 @@ export function outputSummaryReport(errors: ReportableOavError[], reportName: st
     });
 
     builtLines.push("\n");
-    builtLines.push("> [!IMPORTANT]\n> Repro any individual file's worth of errors by installing oav@3.5.1 and running `oav validate-spec <spec-file-path>`.");
+    builtLines.push("> [!IMPORTANT]\n> Repro any individual file's worth of errors by installing `oav@3.5.1` and invoking `oav validate-spec <spec-file-path>`.");
 
     const summaryResult = builtLines.join('\n');
     setSummary(summaryResult);

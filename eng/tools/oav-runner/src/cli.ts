@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { checkSpecs } from './runner.js';
-import { outputAnnotatedErrors, outputSummaryReport } from './formatting.js';
+import { outputAnnotatedErrors, outputErrorSummary, outputSuccessSummary } from './formatting.js';
 import { consoleLogger } from '@azure-tools/specs-shared/logger';
 
 export async function main() {
@@ -15,17 +15,17 @@ export async function main() {
     }
     else {
         consoleLogger.info(`Running oav-runner on ${targetDir}`);
-        const [exitCode, errorList] = await checkSpecs(targetDir);
+        const [exitCode, swaggerFiles, errorList] = await checkSpecs(targetDir);
 
-        if (errorList){
+        if (errorList.length > 0){
           // print the errors so that they will annotate the files on github UI interface
           outputAnnotatedErrors(errorList);
 
           // print the errors in a summary report that we can later output to
-          outputSummaryReport(errorList);
+          outputErrorSummary(errorList);
         }
         else {
-            consoleLogger.info("No errors found.");
+            outputSuccessSummary(swaggerFiles);
         }
 
         process.exit(exitCode);

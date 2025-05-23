@@ -11,7 +11,7 @@ import { consoleLogger } from '@azure-tools/specs-shared/logger';
 import { getChangedFiles, swagger } from "@azure-tools/specs-shared/changed-files";
 import { ReportableOavError } from './formatting.js';
 
-export async function checkSpecs(rootDirectory: string): Promise<[number, Array<ReportableOavError>]> {
+export async function checkSpecs(rootDirectory: string): Promise<[number, string[], ReportableOavError[]]> {
     let errors: Array<ReportableOavError> = [];
 
     const changedFiles = await getChangedFiles({
@@ -58,9 +58,9 @@ export async function checkSpecs(rootDirectory: string): Promise<[number, Array<
     }
 
     if (errors.length > 0){
-        return [1, errors];
+        return [1, swaggerFiles, errors];
     }
-    return [0, []];
+    return [0, swaggerFiles, []];
 }
 
 
