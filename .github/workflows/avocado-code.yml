@@ -29,8 +29,7 @@ jobs:
             "/package.json" \
             "/package-lock.json" \
             "/cadl/examples/" \
-            "/data-plane/[^/]*/examples/" \
-            "/resource-manager/[^/]*/examples/" \
+            '(?=.*/examples/)(?!.*(?:/stable/|/preview/)).*' \
           --includePaths \
             "data-plane" \
             "resource-manager"
