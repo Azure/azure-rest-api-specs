@@ -7,8 +7,10 @@ import {
   getChangedSwaggers,
   buildState,
 } from "../src/processChanges.js";
+import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
 
 import { isWindows } from "./test-util.js";
+import { Readme } from "@azure-tools/specs-shared/readme";
 
 describe("getAffectedServices", () => {
   test.skipIf(isWindows())("returns single service with multiple files", async () => {
@@ -58,32 +60,78 @@ describe("getService", () => {
 
 describe("reconcileChangedFilesAndTags", () => {
   test("if a tag is deleted in after and exists in before, remove the tag from before", () => {
-    const before = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
-    const after = new Map<string, string[]>([["specification/1/readme.md", ["tag1"]]]);
+    const before = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1", "tag2"]),
+        },
+      ],
+    ]);
+    const after = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1"]),
+        },
+      ],
+    ]);
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(
-      new Map<string, string[]>([["specification/1/readme.md", ["tag1"]]]),
+      new Map<string, string[]>([
+        [
+          "specification/1/readme.md",
+          expect.objectContaining({
+            changedTags: new Set<string>(["tag1"]),
+          }),
+        ],
+      ]),
     );
     expect(afterFinal).toEqual(after);
   });
 
   test("does not change if there is no change", () => {
-    const before = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
-    const after = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
+    const before = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1", "tag2"]),
+        },
+      ],
+    ]);
+    const after = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1", "tag2"]),
+        },
+      ],
+    ]);
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(before);
     expect(afterFinal).toEqual(after);
   });
 
-  // TODO: Test this and ensure the behavior matches
   test("keeps a specification in before if it is deleted in after", () => {
-    const before = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
-    const after = new Map<string, string[]>();
+    const before = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1", "tag2"]),
+        },
+      ],
+    ]);
+    const after = new Map<string, ReadmeAffectedTags>();
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
-    expect(beforeFinal).toEqual(beforeFinal);
+    expect(beforeFinal).toEqual(before);
     expect(afterFinal).toEqual(after);
   });
 });
@@ -154,9 +202,12 @@ describe("buildState", () => {
     expect(actual).toMatchInlineSnapshot(`
       [
         Map {
-          "specification/edit-in-place/readme.md" => [
-            "package-2022-12-01",
-          ],
+          "specification/edit-in-place/readme.md" => {
+            "changedTags": Set {
+              "package-2022-12-01",
+            },
+            "readme": Readme {},
+          },
         },
         [
           "specification/edit-in-place/data-plane/swagger.json",
@@ -174,7 +225,10 @@ describe("buildState", () => {
     expect(actual).toMatchInlineSnapshot(`
       [
         Map {
-          "specification/edit-in-place/readme.md" => [],
+          "specification/edit-in-place/readme.md" => {
+            "changedTags": Set {},
+            "readme": Readme {},
+          },
         },
         [],
       ]
