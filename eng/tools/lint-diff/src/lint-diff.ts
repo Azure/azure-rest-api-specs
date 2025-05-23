@@ -5,6 +5,7 @@ import { runChecks, getAutorestErrors } from "./runChecks.js";
 import { correlateRuns } from "./correlateResults.js";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
 import { writeFile } from "node:fs/promises";
+import { SpecModelError } from "@azure-tools/specs-shared/spec-model";
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -109,12 +110,16 @@ async function runLintDiff(
       afterPath,
       changedFilesPath,
     );
-  } catch (error) { 
-    console.log(error);
-    console.log("\n\n");
-    console.log("❌ Error evaluating changed files:");
-    console.log((error as Error).message);
+  } catch (error) {
     process.exitCode = 1;
+    console.log(error);
+
+    if (error instanceof SpecModelError) { 
+      console.log("\n\n");
+      console.log("❌ Error evaluating changed files:");
+      console.log(`${error}`);
+      console.log("Please ensure input files and references are valid.");
+    }
     return;
   }
 
