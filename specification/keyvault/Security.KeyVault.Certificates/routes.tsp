@@ -352,7 +352,7 @@ op updateCertificate is KeyVaultOperation<
      */
     @path("certificate-version")
     @clientName("version", "go")
-    certificateVersion: string;
+    certificateVersion?: string;
 
     /**
      * The parameters for certificate update.
@@ -386,7 +386,7 @@ op getCertificate is KeyVaultOperation<
      */
     @path("certificate-version")
     @clientName("version", "go")
-    certificateVersion: string;
+    certificateVersion?: string;
   },
   CertificateBundle
 >;
