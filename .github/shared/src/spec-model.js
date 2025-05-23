@@ -70,7 +70,7 @@ export class SpecModel {
             refs = await inputFile.getRefs();
           } catch (error) {
             if (error instanceof SpecModelError) {
-              error.readme = readme.path; 
+              error.readme = readme.path;
               error.tag = tag.name;
               throw error;
             }
@@ -245,10 +245,12 @@ export class SpecModelError extends Error {
   }
 
   toString() {
-    return `SpecModelError: ${this.message}` +
+    return (
+      `SpecModelError: ${this.message}` +
       `${this.source ? `\n\tProblem File: ${this.source}` : ""}` +
       `${this.readme ? `\n\tReadme: ${this.readme}` : ""}` +
-      `${this.tag ? `\n\tTag: ${this.tag}` : ""}` ;
+      `${this.tag ? `\n\tTag: ${this.tag}` : ""}`
+    );
   }
 }
 

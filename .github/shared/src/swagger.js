@@ -74,7 +74,6 @@ export class Swagger {
         throw error;
       }
 
-
       const refPaths = schema
         .paths("file")
         // Exclude examples

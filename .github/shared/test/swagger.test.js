@@ -13,7 +13,7 @@ describe("Swagger", () => {
     const swagger = new Swagger("bar");
     expect(swagger.path).toBe(resolve("bar"));
 
-    await expect(swagger.getRefs()).rejects.toThrowError(/Failed to resolve file/i);
+    await expect(swagger.getRefs()).rejects.toThrowError(/Error reading file/i);
   });
 
   it("excludes example files", async () => {

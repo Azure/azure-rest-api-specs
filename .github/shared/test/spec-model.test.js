@@ -197,9 +197,7 @@ describe("SpecModel", () => {
 
       expect(
         specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
-      ).rejects.toThrowError(
-        /Failed to resolve file/i,
-      );
+      ).rejects.toThrowError(/Error reading file/i);
     });
 
     it("throws when an input-file is invalid JSON", async () => {
@@ -320,15 +318,15 @@ describe("SpecModel", () => {
 });
 
 describe("SpecModelError", () => {
-  it ("can be turned to a string" , () => {
-    const error = new SpecModelError("message", { 
+  it("can be turned to a string", () => {
+    const error = new SpecModelError("message", {
       readme: "readme",
       tag: "tag",
       source: "source",
     });
     expect(error.toString()).toMatchInlineSnapshot(`
       "SpecModelError: message
-      	Source File: source
+      	Problem File: source
       	Readme: readme
       	Tag: tag"
     `);
