@@ -245,12 +245,14 @@ export class SpecModelError extends Error {
   }
 
   toString() {
+    /* v8 ignore start */
     return (
       `SpecModelError: ${this.message}` +
       `${this.source ? `\n\tProblem File: ${this.source}` : ""}` +
       `${this.readme ? `\n\tReadme: ${this.readme}` : ""}` +
       `${this.tag ? `\n\tTag: ${this.tag}` : ""}`
     );
+    /* v8 ignore stop */
   }
 }
 

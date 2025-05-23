@@ -197,7 +197,7 @@ describe("SpecModel", () => {
 
       expect(
         specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
-      ).rejects.toThrowError(/Error reading file/i);
+      ).rejects.toThrowError(/Failed to resolve file for swagger/i);
     });
 
     it("throws when an input-file is invalid JSON", async () => {

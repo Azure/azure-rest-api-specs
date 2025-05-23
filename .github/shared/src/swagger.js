@@ -1,6 +1,6 @@
 // @ts-check
 
-import $RefParser from "@apidevtools/json-schema-ref-parser";
+import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { relative, resolve } from "path";
 import { mapAsync } from "./array.js";
 import { SpecModelError } from "./spec-model.js";
@@ -64,11 +64,14 @@ export class Swagger {
           resolve: { file: excludeExamples, http: false },
         });
       } catch (error) {
-        if (isResolverError(error)) {
-          throw new SpecModelError(`Failed to resolve file for swagger: ${this.#path}`, {
-            cause: error,
-            source: error.source,
-          });
+        if (error instanceof ResolverError) {
+          throw new SpecModelError(
+            `Failed to resolve file for swagger: ${this.#path}`,
+            {
+              cause: error,
+              source: error.source,
+            },
+          );
         }
 
         throw error;
@@ -148,20 +151,4 @@ function example(file) {
 function json(file) {
   // Extension "json" with any case is a valid JSON file
   return typeof file === "string" && file.toLowerCase().endsWith(".json");
-}
-
-/**
- * @typedef {import("@apidevtools/json-schema-ref-parser").ResolverError} ResolverError
- */
-
-/**
- * Checks whether an unknown error object is a ResolverError.
- * @param {unknown} error
- * @returns {error is ResolverError}
- */
-export function isResolverError(error) {
-  if (!(error instanceof Error)) return false;
-
-  const e = /** @type {ResolverError} */ (error);
-  return e.name === "ResolverError";
 }
