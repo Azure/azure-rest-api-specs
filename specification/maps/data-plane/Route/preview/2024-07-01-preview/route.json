@@ -1659,34 +1659,6 @@
         ]
       }
     },
-    "AdminDistrict": {
-      "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
-      "type": "object",
-      "properties": {
-        "longName": {
-          "description": "The long name of an address, such as Washington.",
-          "type": "string",
-          "readOnly": true
-        },
-        "distanceInMeters": {
-          "description": "The total distance traveled in meters within the administrative district.",
-          "type": "number",
-          "readOnly": true
-        },
-        "durationInSeconds": {
-          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
     "Leg": {
       "x-ms-client-name": "RouteLeg",
       "description": "Information about a section of a route between two waypoints. More information about the fields contained in a route Leg:",
