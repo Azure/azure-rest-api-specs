@@ -1,10 +1,10 @@
 // @ts-check
 
 import { mapAsync } from "./array.js";
+import { Swagger } from "./swagger.js";
 
 /**
  * @typedef {import('./readme.js').Readme} Readme
- * @typedef {import('./swagger.js').Swagger} Swagger
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
 
@@ -26,16 +26,22 @@ export class Tag {
 
   /**
    * @param {string} name
-   * @param {Map<string, Swagger>} inputFiles
+   * @param {string[]} inputFilePaths
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {Readme} [options.readme]
    */
-  constructor(name, inputFiles, options) {
+  constructor(name, inputFilePaths, options) {
     this.#name = name;
-    this.#inputFiles = inputFiles;
     this.#logger = options?.logger;
     this.#readme = options?.readme;
+
+    this.#inputFiles = new Map(
+      inputFilePaths.map((p) => {
+        let swagger = new Swagger(p, { logger: this.#logger, tag: this });
+        return [swagger.path, swagger];
+      }),
+    );
   }
 
   /**
