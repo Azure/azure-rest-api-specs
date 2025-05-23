@@ -77,6 +77,7 @@ describe("SpecModel", () => {
         "../../../../../common-types/resource-management/v5/types.json",
       ),
     );
+    expect(refs0[0].tag).toBe(tags[0]);
 
     expect(tags[1].name).toBe("package-2021-11-01");
     const inputFiles1 = [...tags[1].inputFiles.values()];
