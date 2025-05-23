@@ -25,7 +25,7 @@ describe("readme", () => {
     const readme = new Readme("readme.md", {
       specModel: new SpecModel("/specs/foo"),
     });
-    expect(readme.path).toBe("/specs/foo/readme.md");
+    expect(readme.path).toBe(resolve("/specs/foo/readme.md"));
   });
 
   // TODO: Test that path is resolved against backpointer

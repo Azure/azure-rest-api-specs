@@ -25,7 +25,7 @@ describe("Swagger", () => {
     const tag = new Tag("2025-01-01", [], { readme });
     const swagger = new Swagger("test.json", { tag });
 
-    expect(swagger.path).toBe("/specs/foo/test.json");
+    expect(swagger.path).toBe(resolve("/specs/foo/test.json"));
   });
 
   // TODO: Test that path is resolved against backpointer
