@@ -116,9 +116,10 @@ model DelayRequestOld {
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Request to ask for a delay in an occurrence")
 model DelayRequest {
-  @doc("The amount of delay the occurrence should apply")
-  delay: duration;
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  @doc("The exact time to delay the operations to")
+  delay: offsetDateTime;
 
-  @doc("The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence occurrence.")
+  @doc("The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence.")
   resourceIds: Array<ValidScheduledActionResourceId>;
 }

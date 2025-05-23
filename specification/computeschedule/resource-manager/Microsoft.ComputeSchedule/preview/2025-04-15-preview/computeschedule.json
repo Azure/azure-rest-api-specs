@@ -1314,7 +1314,7 @@
         "tags": [
           "Occurrences"
         ],
-        "description": "A synchronous resource action.",
+        "description": "A long-running resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1358,6 +1358,20 @@
               "$ref": "#/definitions/ResourceOperationResponse"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1369,7 +1383,11 @@
           "Occurrences_Delay_MaximumSet": {
             "$ref": "./examples/Occurrences_Delay_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences/{occurrenceId}/listResources": {
@@ -1793,12 +1811,12 @@
       "properties": {
         "delay": {
           "type": "string",
-          "format": "duration",
-          "description": "The amount of delay the occurrence should apply"
+          "format": "date-time",
+          "description": "The exact time to delay the operations to"
         },
         "resourceIds": {
           "type": "array",
-          "description": "The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence occurrence.",
+          "description": "The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence.",
           "items": {
             "$ref": "#/definitions/ValidScheduledActionResourceId"
           }
