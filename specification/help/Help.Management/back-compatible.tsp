@@ -1,0 +1,83 @@
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+using Microsoft.Help;
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SolutionMetadataResource.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SolutionPatchRequestBody.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SolutionNlpMetadataResource.properties);
+
+@@clientName(DiagnosticResources.create::parameters.body,
+  "diagnosticResourceRequest"
+);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DiagnosticResource.properties);
+
+@@clientName(SolutionResources.create::parameters.body, "solutionRequestBody");
+@@clientName(SolutionResources.update::parameters.body,
+  "solutionPatchRequestBody"
+);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SolutionResource.properties);
+
+@@clientName(SimplifiedSolutionsResources.create::parameters.body,
+  "simplifiedSolutionsRequestBody"
+);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SimplifiedSolutionsResource.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(TroubleshooterResource.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SolutionResourceSelfHelp.properties);
+
+@@clientName(DiagnosticResources.create::parameters.body,
+  "diagnosticResourceRequest"
+);
+
+@@clientName(SimplifiedSolutionsResources.create::parameters.body,
+  "simplifiedSolutionsRequestBody"
+);
+
+@@clientName(SolutionResources.create::parameters.body, "solutionRequestBody");
+
+@@clientName(SolutionResources.update::parameters.body,
+  "solutionPatchRequestBody"
+);
+@@clientName(TroubleshooterResources.create::parameters.body,
+  "createTroubleshooterRequestBody"
+);
+@@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutions::parameters.body,
+  "discoverSolutionRequest"
+);
+@@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription::parameters.body,
+  "discoverSolutionRequest"
+);
+@@clientName(DiscoveryNlpRequest, "DiscoveryNlpContent", "csharp");
+@@clientName(ResponseOption, "ResponseConfig", "csharp");
+@@clientName(RestartTroubleshooterResponse,
+  "RestartTroubleshooterResult",
+  "csharp"
+);
+@@clientName(TroubleshooterResponse, "TroubleshooterResult", "csharp");
+@@clientName(ResponseOption, "ResponseConfig", "csharp");
+@@clientName(CheckNameAvailabilityResponse,
+  "CheckNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(RestartTroubleshooterResponse,
+  "RestartTroubleshooterResult",
+  "csharp"
+);
+@@clientName(SolutionResources.warmUp::parameters.body,
+  "solutionWarmUpRequestBody"
+);
+@@clientName(TroubleshooterResources.continue::parameters.body,
+  "continueRequestBody"
+);
