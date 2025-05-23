@@ -3,15 +3,11 @@
 import { describe, expect, it } from "vitest";
 
 import { resolve } from "path";
-import { Swagger } from "../src/swagger.js";
 import { Tag } from "../src/tag.js";
 
 describe("Tag", () => {
   it("can be created with mock swaggers", async () => {
-    const inputSwagger = new Swagger("swagger");
-    const inputFiles = new Map([[inputSwagger.path, inputSwagger]]);
-
-    const tag = new Tag("tag", inputFiles);
+    const tag = new Tag("tag", ["swagger"]);
 
     expect(tag.name).toBe("tag");
     expect(tag.readme).toBeUndefined();
