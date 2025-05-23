@@ -2,13 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
-using TypeSpec.Rest;
-using TypeSpec.Http;
+import "@typespec/versioning";
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureTerraform;
 
@@ -64,6 +62,14 @@ model BaseExportModel {
 
   @doc("Mask sensitive attributes in the Terraform configuration")
   maskSensitive?: boolean = true;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Exclude resources from being exported based on the Azure resource ID pattern (case-insensitive regexp)")
+  excludeAzureResource?: string[];
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Exclude resources from being exported based on the Terraform resource type")
+  excludeTerraformResource?: string[];
 }
 
 @doc("Export parameter for resources queried by ARG (Azure Resource Graph)")
