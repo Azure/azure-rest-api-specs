@@ -4,7 +4,6 @@ import { readdir } from "fs/promises";
 import { resolve } from "path";
 import { mapAsync } from "./array.js";
 import { Readme } from "./readme.js";
-import { isResolverError } from "./swagger.js";
 
 /**
  * @typedef {Object} ToJSONOptions
@@ -13,13 +12,6 @@ import { isResolverError } from "./swagger.js";
  *
  * @typedef {import('./swagger.js').Swagger} Swagger
  * @typedef {import('./tag.js').Tag} Tag
- */
-
-/**
- * @typedef {Error} SpecError
- * @prop {string} readme
- * @prop {string} tag
- * @prop {string} source file that caused the error
  */
 
 export class SpecModel {
@@ -77,20 +69,10 @@ export class SpecModel {
           try {
             refs = await inputFile.getRefs();
           } catch (error) {
-            if (isResolverError(error)) {
-              const resolverError = /** @type {SpecError} */ {
-                message: `Spec Model encountered error resolving refs for input-file: ${inputFile.path}
-\tReadme: ${readme.path}
-\tTag: ${tag.name}
-\tError file: ${error.source}
-
-Ensure the input-file is valid and all refs are resolvable.`,
-                readme: readme.path,
-                tag: tag.name,
-                source: error.source,
-                cause: error,
-              };
-              throw resolverError;
+            if (error instanceof SpecModelError) {
+              error.readme = readme.path; 
+              error.tag = tag.name;
+              throw error;
             }
 
             throw error;
@@ -241,6 +223,32 @@ Ensure the input-file is valid and all refs are resolvable.`,
    */
   toString() {
     return `SpecModel(${this.#folder}, {logger: ${this.#logger}}})`;
+  }
+}
+
+export class SpecModelError extends Error {
+  /**
+   * @param {string} message
+   * @param {Object} [options]
+   * @param {string} [options.readme]
+   * @param {string} [options.tag]
+   * @param {string} [options.source]
+   * @param {Error} [options.cause]
+   */
+  constructor(message, { readme, tag, source, cause } = {}) {
+    super(message, { cause });
+
+    this.name = "SpecModelError";
+    this.readme = readme;
+    this.tag = tag;
+    this.source = source;
+  }
+
+  toString() {
+    return `SpecModelError: ${this.message}` +
+      `${this.source ? `\n\tProblem File: ${this.source}` : ""}` +
+      `${this.readme ? `\n\tReadme: ${this.readme}` : ""}` +
+      `${this.tag ? `\n\tTag: ${this.tag}` : ""}` ;
   }
 }
 

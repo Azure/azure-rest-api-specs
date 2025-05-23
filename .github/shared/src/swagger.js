@@ -3,6 +3,7 @@
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { relative, resolve } from "path";
 import { mapAsync } from "./array.js";
+import { SpecModelError } from "./spec-model.js";
 
 /**
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
@@ -39,9 +40,21 @@ export class Swagger {
    */
   async getRefs() {
     if (!this.#refs) {
-      const schema = await $RefParser.resolve(this.#path, {
-        resolve: { http: false },
-      });
+      let schema;
+      try {
+        schema = await $RefParser.resolve(this.#path, {
+          resolve: { http: false },
+        });
+      } catch (error) {
+        if (isResolverError(error)) {
+          throw new SpecModelError(`Failed to resolve file: ${error.source}`, {
+            cause: error,
+            source: error.source,
+          });
+        }
+
+        throw error;
+      }
 
       const refPaths = schema
         .paths("file")

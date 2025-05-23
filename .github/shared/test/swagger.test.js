@@ -11,7 +11,7 @@ describe("Swagger", () => {
     expect(swagger.path).toBe(resolve("bar"));
 
     await expect(swagger.getRefs()).rejects.toThrowError(
-      /no such file or directory/i,
+      /Failed to resolve file/i,
     );
   });
 });
