@@ -70,6 +70,8 @@ export class Swagger {
             {
               cause: error,
               source: error.source,
+              tag: this.#tag?.name,
+              readme: this.#tag?.readme?.path,
             },
           );
         }
