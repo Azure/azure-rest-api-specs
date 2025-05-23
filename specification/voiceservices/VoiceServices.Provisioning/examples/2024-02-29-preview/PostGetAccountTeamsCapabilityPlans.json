@@ -1,0 +1,30 @@
+{
+  "title": "Get the list of capability plans available to this account.",
+  "operationId": "Accounts_GetTeamsCapabilityPlans",
+  "parameters": {
+    "api-version": "2024-02-29-preview",
+    "accountName": "contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "capabilityPlans": [
+          {
+            "name": "capability-plan",
+            "offerTypes": [
+              "Calling"
+            ],
+            "usage": "CallingUserAssignment",
+            "mandatoryCapabilities": [
+              "UserAssignment"
+            ],
+            "choosableCapabilities": [
+              "UserAssignment"
+            ],
+            "supportsTollFree": true
+          }
+        ]
+      }
+    }
+  }
+}

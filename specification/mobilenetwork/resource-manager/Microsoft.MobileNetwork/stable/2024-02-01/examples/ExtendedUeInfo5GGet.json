@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "packetCoreControlPlaneName": "TestPacketCoreCP",
+    "ueId": "84449105622"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/ues/84449105622/extendedInformation/default",
+        "name": "default",
+        "type": "Microsoft.MobileNetwork/packetCoreControlPlanes/ues/extendedInformation",
+        "properties": {
+          "lastReadAt": "2020-01-01T17:18:19.1234567Z",
+          "ratType": "5G",
+          "info": {
+            "supi": "imsi-84449105622",
+            "pei": "imei-123456789012345",
+            "fivegGuti": {
+              "plmn": {
+                "mcc": "001",
+                "mnc": "01"
+              },
+              "amfId": {
+                "regionId": 1,
+                "setId": 1,
+                "pointer": 1
+              },
+              "fivegTmsi": 907
+            },
+            "connectionInfo": {
+              "locationInfo": {
+                "locationType": "EUTRA",
+                "tac": "000001",
+                "plmn": {
+                  "mcc": "001",
+                  "mnc": "01"
+                }
+              },
+              "globalRanNodeId": {
+                "plmnId": {
+                  "mcc": "001",
+                  "mnc": "01"
+                },
+                "gNbId": {
+                  "bitLength": 32,
+                  "gNBValue": "01234567"
+                }
+              },
+              "perUeTnla": "00101.0.macroEnbId-10.232.228.84:36412",
+              "amfUeNgapId": 549755813888,
+              "ranUeNgapId": 12345678,
+              "lastVisitedTai": "00101 000001",
+              "allowedNssai": [
+                {
+                  "sst": 1
+                },
+                {
+                  "sst": 2,
+                  "sd": "abcdef"
+                }
+              ],
+              "ueState": "Connected",
+              "rrcEstablishmentCause": "Emergency",
+              "ueUsageSetting": "DataCentric",
+              "lastActivityTime": "2020-01-01T17:18:19.1234567Z"
+            },
+            "sessionInfo": [
+              {
+                "pduSessionId": 15,
+                "dnn": "internet",
+                "snssai": {
+                  "sst": 1,
+                  "sd": "abcdef"
+                },
+                "ueIpAddress": {
+                  "ipV4Addr": "10.10.0.1"
+                },
+                "pdnType": "IPV4",
+                "ambr": {
+                  "uplink": "2 Gbps",
+                  "downlink": "2 Gbps"
+                },
+                "qosFlow": [
+                  {
+                    "qfi": 9,
+                    "fiveqi": 9
+                  },
+                  {
+                    "qfi": 1,
+                    "fiveqi": 1,
+                    "mbr": {
+                      "uplink": "100.0 Kbps",
+                      "downlink": "10.0 Kbps"
+                    },
+                    "gbr": {
+                      "uplink": "100.0 Mbps",
+                      "downlink": "10.0 Mbps"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

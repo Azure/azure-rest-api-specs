@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "hanasnapshottesting",
+    "vaultName": "HanaSnapshotTest",
+    "fabricName": "Azure",
+    "containerName": "VMAppContainer;compute;hanasnapshottesting;hana-eacan-2",
+    "protectedItemName": "SAPHanaDatabase;hye;hye",
+    "recoveryPointId": "2265668074516978193",
+    "api-version": "2024-07-30-preview",
+    "parameters": {
+      "properties": {
+        "recoveryPointProperties": {
+          "expiryTime": "2025-01-02T00:00:00.0000000Z"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hanasnapshottesting/providers/Microsoft.RecoveryServices/vaults/HanaSnapshotTest/backupFabrics/Azure/protectionContainers/VMAppContainer;compute;hanasnapshottesting;hana-eacan-2/protectedItems/SAPHanaDatabase;hye;hye/recoveryPoints/2265668074516978193",
+        "name": "2265668074516978193",
+        "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+        "properties": {
+          "objectType": "AzureWorkloadSAPHanaRecoveryPoint",
+          "recoveryPointProperties": {
+            "expiryTime": "2025-01-02T00:00:00.0000000Z",
+            "isSoftDeleted": false,
+            "ruleName": "On-Demand"
+          },
+          "recoveryPointTierDetails": [
+            {
+              "status": "Valid",
+              "type": "HardenedRP"
+            }
+          ],
+          "recoveryPointTimeInUTC": "2023-08-18T06:26:36.922Z",
+          "type": "Full"
+        }
+      }
+    }
+  }
+}

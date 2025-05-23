@@ -1,0 +1,71 @@
+{
+  "operationId": "AutonomousDatabaseBackups_CreateOrUpdate",
+  "title": "AutonomousDatabaseBackups_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg000",
+    "autonomousdatabasename": "databasedb1",
+    "adbbackupid": "1711644130",
+    "resource": {
+      "properties": {
+        "autonomousDatabaseOcid": "ocid1.autonomousdatabase.oc1..aaaaa3klq",
+        "displayName": "Nightly Backup",
+        "retentionPeriodInDays": 365
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/autonomousDatabases/databasedb1/autonomousDatabaseBackups/1711644130",
+        "type": "Oracle.Database/autonomousDatabases/autonomousDatabaseBackups",
+        "properties": {
+          "autonomousDatabaseOcid": "ocid1.autonomousdatabase.oc1..aaaaa3klq",
+          "databaseSizeInTbs": 2,
+          "dbVersion": "19.6.0.0",
+          "displayName": "Nightly Backup",
+          "ocid": "ocid1.autonomousdatabasebackup.oc1..aaaaaaaavwpj",
+          "isAutomatic": true,
+          "isRestorable": true,
+          "lifecycleDetails": "Backup completed successfully",
+          "lifecycleState": "Active",
+          "retentionPeriodInDays": 365,
+          "sizeInTbs": 2,
+          "timeAvailableTil": "2025-01-09T20:44:09.466Z",
+          "timeStarted": "2024-01-09T19:44:09.466Z",
+          "timeEnded": "2024-01-09T20:44:09.466Z",
+          "backupType": "Full",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Retry-After": 100
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/autonomousDatabases/databasedb1/autonomousDatabaseBackups/backupdb1",
+        "type": "Oracle.Database/autonomousDatabases/autonomousDatabaseBackups",
+        "properties": {
+          "autonomousDatabaseOcid": "ocid1.autonomousdatabase.oc1..aaaaa3klq",
+          "databaseSizeInTbs": 2,
+          "dbVersion": "19.6.0.0",
+          "displayName": "Nightly Backup",
+          "ocid": "ocid1.autonomousdatabasebackup.oc1..aaaaaaaavwpj",
+          "isAutomatic": true,
+          "isRestorable": true,
+          "lifecycleDetails": "Backup completed successfully",
+          "lifecycleState": "Active",
+          "retentionPeriodInDays": 365,
+          "sizeInTbs": 2,
+          "timeAvailableTil": "2025-01-09T20:44:09.466Z",
+          "timeStarted": "2024-01-09T19:44:09.466Z",
+          "timeEnded": "2024-01-09T20:44:09.466Z",
+          "backupType": "Full",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

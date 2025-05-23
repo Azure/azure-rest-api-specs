@@ -39,7 +39,7 @@ if ($SdkLanguage) {
   $rootPath = Split-Path $specFolderPath -Parent
   $sdkRepoRoot = Join-Path $rootPath "sdk-repos"
   if (!(Test-Path $sdkRepoRoot)) {
-    Write-Error "sdk repos root folder doesn't eixst: $sdkRepoRoot"
+    Write-Error "sdk repos root folder doesn't exist: $sdkRepoRoot"
     exit 1
   }
 

@@ -1,0 +1,1225 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-04-01",
+    "title": "BillingManagementClient",
+    "description": "Billing client provides access to billing resources for Azure subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}": {
+      "get": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Gets a transfer request by ID. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "Transfers_Get",
+        "x-ms-examples": {
+          "TransferGet": {
+            "$ref": "./examples/transfersGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of transfer.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Sends a request to a user in another billing account to transfer billing ownership of their subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "Transfers_Initiate",
+        "x-ms-examples": {
+          "InitiateTransfer": {
+            "$ref": "./examples/transfersInitiate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InitiateTransferRequest"
+            },
+            "description": "Request parameters that are provided to the initiate transfer operation."
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initiated transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "201": {
+            "description": "Initiated transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}/cancel": {
+      "post": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Cancels a transfer request. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "Transfers_Cancel",
+        "x-ms-examples": {
+          "TransferCancel": {
+            "$ref": "./examples/transfersCancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of canceled transfer.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers": {
+      "get": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Lists the transfer requests for an invoice section. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "Transfers_List",
+        "x-ms-examples": {
+          "TransfersList": {
+            "$ref": "./examples/transfersList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transfers initiated from this invoice section.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers/{transferName}": {
+      "get": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Gets a transfer request by ID. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "operationId": "PartnerTransfers_Get",
+        "x-ms-examples": {
+          "PartnerTransferGet": {
+            "$ref": "./examples/partnerTransfersGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of transfer.",
+            "schema": {
+              "$ref": "#/definitions/PartnerTransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Sends a request to a user in a customer's billing account to transfer billing ownership of their subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "operationId": "PartnerTransfers_Initiate",
+        "x-ms-examples": {
+          "InitiatePartnerTransfer": {
+            "$ref": "./examples/partnerTransfersInitiate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerInitiateTransferRequest"
+            },
+            "description": "Request parameters that are provided to the initiate transfer operation."
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initiated transfer details.",
+            "schema": {
+              "$ref": "#/definitions/PartnerTransferDetails"
+            }
+          },
+          "201": {
+            "description": "Initiated transfer details.",
+            "schema": {
+              "$ref": "#/definitions/PartnerTransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers/{transferName}/cancel": {
+      "post": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Cancels a transfer request. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "operationId": "PartnerTransfers_Cancel",
+        "x-ms-examples": {
+          "PartnerTransferCancel": {
+            "$ref": "./examples/partnerTransfersCancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of canceled transfer.",
+            "schema": {
+              "$ref": "#/definitions/PartnerTransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers": {
+      "get": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Lists the transfer requests sent to a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "operationId": "PartnerTransfers_List",
+        "x-ms-examples": {
+          "PartnerTransfersList": {
+            "$ref": "./examples/partnerTransfersList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transfers initiated from this invoice section.",
+            "schema": {
+              "$ref": "#/definitions/PartnerTransferDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/transfers/{transferName}/accept": {
+      "post": {
+        "tags": [
+          "RecipientTransfers"
+        ],
+        "summary": "Accepts a transfer request.",
+        "operationId": "RecipientTransfers_Accept",
+        "x-ms-examples": {
+          "AcceptTransfer": {
+            "$ref": "./examples/recipientTransfersAccept.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcceptTransferRequest"
+            },
+            "description": "Request parameters that are provided to the accept transfer operation."
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the accepted transfer.",
+            "schema": {
+              "$ref": "#/definitions/RecipientTransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/transfers/{transferName}/validate": {
+      "post": {
+        "tags": [
+          "RecipientTransfers"
+        ],
+        "summary": "Validates if a subscription or a reservation can be transferred. Use this operation to validate your subscriptions or reservation before using the accept transfer operation.",
+        "operationId": "RecipientTransfers_Validate",
+        "x-ms-examples": {
+          "ValidateTransfer": {
+            "$ref": "./examples/recipientTransfersValidate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcceptTransferRequest"
+            },
+            "description": "Request parameters that are provided to the validate transfer operation."
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Results of the transfer validation.",
+            "schema": {
+              "$ref": "#/definitions/ValidateTransferListResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/transfers/{transferName}/decline": {
+      "post": {
+        "tags": [
+          "RecipientTransfers"
+        ],
+        "summary": "Declines a transfer request.",
+        "operationId": "RecipientTransfers_Decline",
+        "x-ms-examples": {
+          "DeclineTransfer": {
+            "$ref": "./examples/recipientTransfersDecline.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the declined transfer.",
+            "schema": {
+              "$ref": "#/definitions/RecipientTransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/transfers/{transferName}": {
+      "get": {
+        "tags": [
+          "RecipientTransfers"
+        ],
+        "summary": "Gets a transfer request by ID. The caller must be the recipient of the transfer request.",
+        "operationId": "RecipientTransfers_Get",
+        "x-ms-examples": {
+          "RecipientTransferGet": {
+            "$ref": "./examples/recipientTransfersGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the transfers with given Id.",
+            "schema": {
+              "$ref": "#/definitions/RecipientTransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/transfers": {
+      "get": {
+        "tags": [
+          "RecipientTransfers"
+        ],
+        "summary": "Lists the transfer requests received by the caller.",
+        "operationId": "RecipientTransfers_List",
+        "x-ms-examples": {
+          "RecipientTransfersList": {
+            "$ref": "./examples/recipientTransfersList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transfers received by caller.",
+            "schema": {
+              "$ref": "#/definitions/RecipientTransferDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/TransferItemQueryParameter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InitiateTransferRequest": {
+      "type": "object",
+      "description": "Request parameters to initiate transfer.",
+      "properties": {
+        "properties": {
+          "description": "Request parameters to initiate transfer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InitiateTransferProperties"
+        }
+      }
+    },
+    "InitiateTransferProperties": {
+      "type": "object",
+      "description": "Request parameters to initiate transfer.",
+      "properties": {
+        "recipientEmailId": {
+          "type": "string",
+          "description": "The email ID of the recipient to whom the transfer request is sent."
+        }
+      }
+    },
+    "PartnerInitiateTransferRequest": {
+      "type": "object",
+      "description": "Request parameters to initiate partner transfer.",
+      "properties": {
+        "properties": {
+          "description": "Request parameters to initiate partner transfer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PartnerInitiateTransferProperties"
+        }
+      }
+    },
+    "PartnerInitiateTransferProperties": {
+      "type": "object",
+      "description": "Request parameters to initiate transfer.",
+      "properties": {
+        "recipientEmailId": {
+          "type": "string",
+          "description": "The email ID of the recipient to whom the transfer request is sent."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account."
+        }
+      }
+    },
+    "AcceptTransferRequest": {
+      "type": "object",
+      "description": "Request parameters to accept transfer.",
+      "properties": {
+        "properties": {
+          "description": "Request parameters to accept transfer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AcceptTransferProperties"
+        }
+      }
+    },
+    "AcceptTransferProperties": {
+      "type": "object",
+      "description": "Request parameters to accept transfer.",
+      "properties": {
+        "productDetails": {
+          "description": "Request parameters to accept transfer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProductDetails": {
+      "type": "object",
+      "description": "Details of the product that is transferred.",
+      "properties": {
+        "productType": {
+          "description": "Type of the product that is transferred.",
+          "$ref": "#/definitions/ProductType"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The ID of the product that is transferred."
+        }
+      }
+    },
+    "ProductType": {
+      "type": "string",
+      "description": "The type of product that is transferred.",
+      "enum": [
+        "AzureSubscription",
+        "AzureReservation",
+        "Department",
+        "SavingsPlan",
+        "SAAS"
+      ],
+      "x-ms-enum": {
+        "name": "productType",
+        "modelAsString": true
+      }
+    },
+    "TransferDetails": {
+      "type": "object",
+      "description": "Details of the transfer.",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Details of the transfer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TransferProperties"
+        }
+      }
+    },
+    "PartnerTransferDetails": {
+      "type": "object",
+      "description": "Details of the transfer.",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Details of the transfer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PartnerTransferProperties"
+        }
+      }
+    },
+    "RecipientTransferDetails": {
+      "type": "object",
+      "description": "Details of the transfer.",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Details of the transfer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RecipientTransferProperties"
+        }
+      }
+    },
+    "DetailedTransferStatus": {
+      "type": "object",
+      "description": "Detailed transfer status.",
+      "properties": {
+        "productType": {
+          "type": "string",
+          "$ref": "#/definitions/ProductType",
+          "readOnly": true,
+          "description": "Type of product that is transferred."
+        },
+        "productId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of the product that is transferred."
+        },
+        "productName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the product that is transferred."
+        },
+        "skuDescription": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The SKU of the product that is transferred."
+        },
+        "transferStatus": {
+          "type": "string",
+          "$ref": "#/definitions/ProductTransferStatus",
+          "readOnly": true,
+          "description": "Transfer status."
+        },
+        "errorDetails": {
+          "description": "Error details for transfer execution.",
+          "$ref": "#/definitions/TransferError"
+        }
+      }
+    },
+    "TransferError": {
+      "type": "object",
+      "description": "Error details for transfer execution.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Error message."
+        }
+      }
+    },
+    "EligibleProductType": {
+      "type": "string",
+      "description": "Type of the products that can be transferred.",
+      "enum": [
+        "DevTestAzureSubscription",
+        "StandardAzureSubscription",
+        "AzureReservation"
+      ],
+      "x-ms-enum": {
+        "name": "eligibleProductType",
+        "modelAsString": true
+      }
+    },
+    "TransferProperties": {
+      "description": "Transfer details",
+      "type": "object",
+      "properties": {
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time at which the transfer request expires."
+        },
+        "transferStatus": {
+          "type": "string",
+          "$ref": "#/definitions/TransferStatus",
+          "description": "Overall transfer status.",
+          "readOnly": true
+        },
+        "recipientEmailId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The email ID of the user to whom the transfer request was sent."
+        },
+        "initiatorEmailId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The email ID of the user who sent the transfer request."
+        },
+        "canceledBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The email ID of the user who canceled the transfer request."
+        },
+        "detailedTransferStatus": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Detailed transfer status.",
+          "items": {
+            "$ref": "#/definitions/DetailedTransferStatus"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PartnerTransferProperties": {
+      "description": "Transfer Details.",
+      "type": "object",
+      "properties": {
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time at which the transfer request expires."
+        },
+        "transferStatus": {
+          "type": "string",
+          "$ref": "#/definitions/TransferStatus",
+          "description": "Overall transfer status.",
+          "readOnly": true
+        },
+        "recipientEmailId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The email ID of the user to whom the transfer request was sent."
+        },
+        "initiatorCustomerType": {
+          "type": "string",
+          "$ref": "#/definitions/InitiatorCustomerType",
+          "description": "The type of customer who sent the transfer request.",
+          "readOnly": true
+        },
+        "initiatorEmailId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The email ID of the user who sent the transfer request."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account.",
+          "readOnly": true
+        },
+        "resellerName": {
+          "type": "string",
+          "description": "Optional name of the reseller for transfer requests that are sent from Microsoft Partner Agreement billing account.",
+          "readOnly": true
+        },
+        "canceledBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The email ID of the user who canceled the transfer request."
+        },
+        "detailedTransferStatus": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Detailed transfer status.",
+          "items": {
+            "$ref": "#/definitions/DetailedTransferStatus"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RecipientTransferProperties": {
+      "description": "Transfer Details.",
+      "type": "object",
+      "properties": {
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time at which the transfer request expires."
+        },
+        "allowedProductType": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Type of subscriptions that can be transferred.",
+          "items": {
+            "$ref": "#/definitions/EligibleProductType"
+          }
+        },
+        "transferStatus": {
+          "type": "string",
+          "$ref": "#/definitions/TransferStatus",
+          "description": "Overall transfer status.",
+          "readOnly": true
+        },
+        "recipientEmailId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The email ID of the user to whom the transfer request was sent."
+        },
+        "initiatorEmailId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The email ID of the user who sent the transfer request."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account.",
+          "readOnly": true
+        },
+        "resellerName": {
+          "type": "string",
+          "description": "Optional name of the reseller for transfer requests that are sent from Microsoft Partner Agreement billing account.",
+          "readOnly": true
+        },
+        "initiatorCustomerType": {
+          "type": "string",
+          "description": "The type of customer who sent the transfer request.",
+          "$ref": "#/definitions/InitiatorCustomerType",
+          "readOnly": true
+        },
+        "canceledBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The email ID of the user who canceled the transfer request."
+        },
+        "detailedTransferStatus": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Detailed transfer status.",
+          "items": {
+            "$ref": "#/definitions/DetailedTransferStatus"
+          },
+          "x-ms-identifiers": []
+        },
+        "customerTenantId": {
+          "type": "string",
+          "description": "The customer tenant id.",
+          "readOnly": true
+        },
+        "supportedAccounts": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of supported account types.",
+          "items": {
+            "$ref": "#/definitions/SupportedAccountType"
+          }
+        }
+      }
+    },
+    "InitiatorCustomerType": {
+      "type": "string",
+      "description": "The type of customer of the transfer initiator.",
+      "enum": [
+        "Partner",
+        "EA"
+      ],
+      "x-ms-enum": {
+        "name": "initiatorCustomerType",
+        "modelAsString": true
+      }
+    },
+    "TransferStatus": {
+      "type": "string",
+      "description": "The status of a transfer.",
+      "enum": [
+        "Expired",
+        "Pending",
+        "InProgress",
+        "Completed",
+        "CompletedWithErrors",
+        "Failed",
+        "Canceled",
+        "Declined"
+      ],
+      "x-ms-enum": {
+        "name": "transferStatus",
+        "modelAsString": true
+      }
+    },
+    "ProductTransferStatus": {
+      "type": "string",
+      "description": "The status of a transfer.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "productTransferStatus",
+        "modelAsString": true
+      }
+    },
+    "PartnerTransferDetailsListResult": {
+      "type": "object",
+      "description": "The list of transfers initiated by partner.",
+      "properties": {
+        "value": {
+          "description": "The list of transfers initiated by partner.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PartnerTransferDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecipientTransferDetailsListResult": {
+      "type": "object",
+      "description": "The list of transfers received by caller.",
+      "properties": {
+        "value": {
+          "description": "The list of transfers received by caller.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RecipientTransferDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TransferDetailsListResult": {
+      "type": "object",
+      "description": "The list of transfers initiated by caller.",
+      "properties": {
+        "value": {
+          "description": "The list of transfers initiated by caller.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TransferDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ValidateTransferResponse": {
+      "type": "object",
+      "description": "Transfer validation response.",
+      "properties": {
+        "properties": {
+          "description": "The properties of transfer validation response.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ValidateTransferResponseProperties"
+        }
+      }
+    },
+    "ValidateTransferListResponse": {
+      "type": "object",
+      "description": "Result of transfer validation.",
+      "properties": {
+        "value": {
+          "description": "The list of transfer validation results.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ValidateTransferResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ValidateTransferResponseProperties": {
+      "type": "object",
+      "description": "The properties of transfer validation response.",
+      "properties": {
+        "status": {
+          "description": "The status of validation",
+          "type": "string",
+          "readOnly": true
+        },
+        "productId": {
+          "description": "The product id for which this result applies.",
+          "type": "string",
+          "readOnly": true
+        },
+        "results": {
+          "description": "The array of validation results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationResultProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ValidationResultProperties": {
+      "type": "object",
+      "description": "The properties of the validation result.",
+      "properties": {
+        "level": {
+          "description": "Result Level.",
+          "type": "string",
+          "readOnly": true
+        },
+        "code": {
+          "description": "Result Code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The validation message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportedAccountType": {
+      "type": "string",
+      "description": "The supported account types.",
+      "enum": [
+        "None",
+        "Partner",
+        "Individual",
+        "Enterprise"
+      ],
+      "x-ms-enum": {
+        "name": "supportedAccountType",
+        "modelAsString": true
+      }
+    },
+    "TransferItemQueryParameter": {
+      "description": "Query parameter to enumerate transfer requests.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "State of the transfer request query filter.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "transferNameParameter": {
+      "name": "transferName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID that uniquely identifies a transfer request.",
+      "pattern": "^[a-z0-9]*$"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

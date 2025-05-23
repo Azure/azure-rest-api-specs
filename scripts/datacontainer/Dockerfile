@@ -1,7 +1,8 @@
-FROM mcr.microsoft.com/mirror/docker/library/ubuntu:22.04
+FROM mcr.microsoft.com/cbl-mariner/base/core:2.0
 
-RUN apt-get -y update
-RUN apt-get -y install git
+RUN tdnf -y update && \
+    tdnf -y install git && \
+    tdnf clean all
 
 RUN mkdir -p /usr/data/specrepo/
 

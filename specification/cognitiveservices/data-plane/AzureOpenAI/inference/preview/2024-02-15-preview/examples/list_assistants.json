@@ -1,0 +1,55 @@
+{
+  "title": "Returns a list of assistants.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-02-15-preview",
+    "order": "desc",
+    "limit": 20
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "list",
+        "data": [
+          {
+            "id": "asst_qOKETOiUwLnzEc3i3AGuyDi1",
+            "object": "assistant",
+            "created_at": 1707257477,
+            "name": "Stock Analyst",
+            "description": null,
+            "model": "gpt-4-1106-preview",
+            "instructions": "You are a financial analyst that analyzes stock market prices and other financial data present on user uploaded files or by calling external APIs.",
+            "tools": [
+              {
+                "type": "code_interpreter"
+              }
+            ],
+            "file_ids": [
+              "assistant-mMGvtln6ieqP5DhoFo5vpZge"
+            ],
+            "metadata": {}
+          },
+          {
+            "id": "asst_jBvPFZQ8dMqq4bXb84Gqe8O6",
+            "object": "assistant",
+            "created_at": 1707249683,
+            "name": "Math Tutor",
+            "description": null,
+            "model": "gpt-4-1106-preview",
+            "instructions": "You are a personal math tutor. Answer questions briefly, in a sentence or less.",
+            "tools": [
+              {
+                "type": "code_interpreter"
+              }
+            ],
+            "file_ids": [],
+            "metadata": {}
+          }
+        ],
+        "first_id": "asst_qOKETOiUwLnzEc3i3AGuyDi1",
+        "last_id": "asst_jBvPFZQ8dMqq4bXb84Gqe8O6",
+        "has_more": false
+      }
+    }
+  }
+}

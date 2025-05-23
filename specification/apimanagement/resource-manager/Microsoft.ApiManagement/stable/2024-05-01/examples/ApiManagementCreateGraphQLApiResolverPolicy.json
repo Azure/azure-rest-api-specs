@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "apiId": "5600b57e7e8880006a040001",
+    "resolverId": "5600b57e7e8880006a080001",
+    "policyId": "policy",
+    "If-Match": "*",
+    "parameters": {
+      "properties": {
+        "format": "xml",
+        "value": "<http-data-source><http-request><set-method>GET</set-method><set-backend-service base-url=\"https://some.service.com\" /><set-url>/api/users</set-url></http-request></http-data-source>"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5600b57e7e8880006a040001/resolvers/5600b57e7e8880006a080001/policies/policy",
+        "type": "Microsoft.ApiManagement/service/apis/resolvers/policies",
+        "name": "policy",
+        "properties": {
+          "value": "<http-data-source>\r\n  <http-request>\r\n   <set-method>GET</set-method>\r\n<set-backend-service base-url=\"https://some.service.com\" />\r\n<set-url>/api/users</set-url>\r\n</http-request>\r\n</http-data-source>"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5600b57e7e8880006a040001/resolvers/5600b57e7e8880006a080001/policies/policy",
+        "type": "Microsoft.ApiManagement/service/apis/resolvers/policies",
+        "name": "policy",
+        "properties": {
+          "value": "<http-data-source>\r\n  <http-request>\r\n   <set-method>GET</set-method>\r\n<set-backend-service base-url=\"https://some.service.com\" />\r\n<set-url>/api/users</set-url>\r\n</http-request>\r\n</http-data-source>"
+        }
+      }
+    }
+  }
+}

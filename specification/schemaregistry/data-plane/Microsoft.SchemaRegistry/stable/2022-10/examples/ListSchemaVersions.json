@@ -1,0 +1,22 @@
+{
+  "operationId": "ListSchemaVersions",
+  "title": "List Schema Versions",
+  "parameters": {
+    "endpoint": "mynamespace.servicebus.windows.net",
+    "groupName": "sample-sr-group",
+    "schemaName": "sample-schema-name",
+    "api-version": "2022-10"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "Value": [
+          0,
+          1,
+          2
+        ],
+        "NextLink": "https://mynamespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-schema-name/versions?api-version=2022-10&skip=3"
+      }
+    }
+  }
+}

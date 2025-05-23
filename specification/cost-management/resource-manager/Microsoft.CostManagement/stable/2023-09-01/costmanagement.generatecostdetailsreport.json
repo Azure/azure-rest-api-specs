@@ -1,0 +1,405 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-09-01",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.CostManagement/generateCostDetailsReport": {
+      "post": {
+        "tags": [
+          "CostDetails"
+        ],
+        "operationId": "GenerateCostDetailsReport_CreateOperation",
+        "description": "This API is the replacement for all previously release Usage Details APIs. Request to generate a cost details report for the provided date range, billing period (Only enterprise customers) or Invoice Id asynchronously at a certain scope. The initial call to request a report will return a 202 with a 'Location' and 'Retry-After' header. The 'Location' header will provide the endpoint to poll to get the result of the report generation. The 'Retry-After' provides the duration to wait before polling for the generated report. A call to poll the report operation will provide a 202 response with a 'Location' header if the operation is still in progress. Once the report generation operation completes, the polling endpoint will provide a 200 response along with details on the report blob(s) that are available for download. The details on the file(s) available for download will be available in the polling response body. To Understand cost details (formerly known as usage details) fields found in files ,see https://learn.microsoft.com/en-us/azure/cost-management-billing/automate/understand-usage-details-fields",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "GenerateCostDetailsReportByBillingProfileAndInvoiceId": {
+            "$ref": "./examples/GenerateCostDetailsReportByBillingProfileAndInvoiceId.json"
+          },
+          "GenerateCostDetailsReportBySubscriptionAndTimePeriod": {
+            "$ref": "./examples/GenerateCostDetailsReportBySubscriptionAndTimePeriod.json"
+          },
+          "GenerateCostDetailsReportByCustomerAndTimePeriod": {
+            "$ref": "./examples/GenerateCostDetailsReportByCustomerAndTimePeriod.json"
+          },
+          "GenerateCostDetailsReportByBillingProfileAndInvoiceIdAndCustomerId": {
+            "$ref": "./examples/GenerateCostDetailsReportByBillingProfileAndInvoiceIdAndCustomerId.json"
+          },
+          "GenerateCostDetailsReportByBillingAccountEnterpriseAgreementCustomerAndBillingPeriod": {
+            "$ref": "./examples/GenerateCostDetailsReportByBillingAccountEnterpriseAgreementCustomerAndBillingPeriod.json"
+          },
+          "GenerateCostDetailsReportByDepartmentsAndTimePeriod": {
+            "$ref": "./examples/GenerateCostDetailsReportByDepartmentsAndTimePeriod.json"
+          },
+          "GenerateCostDetailsReportByEnrollmentAccountsAndTimePeriod": {
+            "$ref": "./examples/GenerateCostDetailsReportByEnrollmentAccountsAndTimePeriod.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeUsageDetailsParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateCostDetailsReportRequestDefinition"
+            },
+            "description": "Parameters supplied to the Create cost details operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/CostDetailsOperationResults"
+            }
+          },
+          "202": {
+            "description": "Accepted. Request will be processed. Use the Location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the result of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content. The request has succeeded but returned no results."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GenerateCostDetailsReportErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/costDetailsOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "CostDetails"
+        ],
+        "operationId": "GenerateCostDetailsReport_GetOperationResults",
+        "description": "Get the result of the specified operation. This link is provided in the CostDetails creation request response Location header.",
+        "x-ms-examples": {
+          "Get details of the operation result": {
+            "$ref": "./examples/CostDetailsOperationResultsBySubscriptionScope.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeUsageDetailsParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The target operation Id."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostDetailsOperationResults"
+            }
+          },
+          "202": {
+            "description": "Accepted. The operation is ongoing."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GenerateCostDetailsReportErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 400 Bad Request - Invalid Request Payload. Request payload provided is not in a json format or had an invalid member not accepted in the request payload. \n\n * 400 Bad Request - Invalid request payload:  can only have either timePeriod or invoiceId or billingPeriod. API only allows data to be pulled for either timePeriod or invoiceId or billingPeriod. Customer should provide only one of these parameters. \n\n * 400 Bad Request - Start date must be after . API only allows data to be pulled no older than 13 months from now. \n\n * 400 Bad Request - The maximum allowed date range is 1 months. API only allows data to be pulled for 1 month or less. \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "common-types.json#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "GenerateCostDetailsReportRequestDefinition": {
+      "description": "The definition of a cost detailed report.",
+      "type": "object",
+      "properties": {
+        "metric": {
+          "description": "The type of the detailed report. By default ActualCost is provided",
+          "type": "string",
+          "enum": [
+            "ActualCost",
+            "AmortizedCost"
+          ],
+          "x-ms-enum": {
+            "name": "CostDetailsMetricType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ActualCost",
+                "description": "Actual cost data.",
+                "name": "ActualCostCostDetailsMetricType"
+              },
+              {
+                "value": "AmortizedCost",
+                "description": "Amortized cost data.",
+                "name": "AmortizedCostCostDetailsMetricType"
+              }
+            ]
+          }
+        },
+        "timePeriod": {
+          "description": "The specific date range of cost details requested for the report. This parameter cannot be used alongside either the invoiceId or billingPeriod parameters. If a timePeriod, invoiceId or billingPeriod parameter is not provided in the request body the API will return the current month's cost. API only allows data to be pulled for 1 month or less and no older than 13 months. If no timePeriod or billingPeriod or invoiceId is provided the API defaults to the open month time period",
+          "$ref": "#/definitions/CostDetailsTimePeriod"
+        },
+        "billingPeriod": {
+          "description": "This parameter can be used only by Enterprise Agreement customers. Use the YearMonth(e.g. 202008) format. This parameter cannot be used alongside either the invoiceId or timePeriod parameters. If a timePeriod, invoiceId or billingPeriod parameter is not provided in the request body the API will return the current month's cost.",
+          "type": "string"
+        },
+        "invoiceId": {
+          "description": "This parameter can only be used by Microsoft Customer Agreement customers. Additionally, it can only be used at the Billing Profile or Customer scope. This parameter cannot be used alongside either the billingPeriod or timePeriod parameters. If a timePeriod, invoiceId or billingPeriod parameter is not provided in the request body the API will return the current month's cost.",
+          "type": "string"
+        }
+      }
+    },
+    "CostDetailsTimePeriod": {
+      "description": "The start and end date for pulling data for the cost detailed report. API only allows data to be pulled for 1 month or less and no older than 13 months.",
+      "type": "object",
+      "properties": {
+        "start": {
+          "description": "The start date to pull data from. example format 2020-03-15",
+          "type": "string"
+        },
+        "end": {
+          "description": "The end date to pull data to. example format 2020-03-15",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ]
+    },
+    "CostDetailsOperationResults": {
+      "description": "The result of the long running operation for cost details Api.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id of the long running operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the long running operation.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the long running operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the cost details operation",
+          "type": "string",
+          "enum": [
+            "Completed",
+            "NoDataFound",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "CostDetailsStatusType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Completed",
+                "description": "Operation is Completed.",
+                "name": "CompletedCostDetailsStatusType"
+              },
+              {
+                "value": "NoDataFound",
+                "description": "Operation is Completed and no cost data found.",
+                "name": "NoDataFoundCostDetailsStatusType"
+              },
+              {
+                "value": "Failed",
+                "description": "Operation Failed.",
+                "name": "FailedCostDetailsStatusType"
+              }
+            ]
+          }
+        },
+        "manifest": {
+          "x-ms-client-flatten": true,
+          "description": "The manifest of the report generated by the operation.",
+          "$ref": "#/definitions/ReportManifest"
+        },
+        "validTill": {
+          "description": "The time at which report URL becomes invalid/expires in UTC e.g. 2020-12-08T05:55:59.4394737Z.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "common-types.json#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ReportManifest": {
+      "description": "The manifest of the report generated by the operation.",
+      "type": "object",
+      "properties": {
+        "manifestVersion": {
+          "description": "The Manifest version.",
+          "type": "string"
+        },
+        "dataFormat": {
+          "description": "The data format of the report",
+          "type": "string",
+          "enum": [
+            "Csv"
+          ],
+          "x-ms-enum": {
+            "name": "CostDetailsDataFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Csv",
+                "description": "Csv data format.",
+                "name": "CsvCostDetailsDataFormat"
+              }
+            ]
+          }
+        },
+        "byteCount": {
+          "description": "The total number of bytes in all blobs.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "blobCount": {
+          "description": "The total number of blobs.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "compressData": {
+          "description": "Is the data in compressed format.",
+          "type": "boolean"
+        },
+        "requestContext": {
+          "x-ms-client-flatten": true,
+          "description": "The context of the Cost Details request.",
+          "$ref": "#/definitions/RequestContext"
+        },
+        "blobs": {
+          "description": "List of blob information generated by this operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobInfo"
+          },
+          "x-ms-identifiers": [
+            "blobLink"
+          ]
+        }
+      }
+    },
+    "RequestContext": {
+      "description": "The context of the Cost Details request.",
+      "type": "object",
+      "properties": {
+        "requestScope": {
+          "description": "The request scope of the request.",
+          "type": "string"
+        },
+        "requestBody": {
+          "description": "The request payload body provided in Cost Details call",
+          "$ref": "#/definitions/GenerateCostDetailsReportRequestDefinition"
+        }
+      }
+    },
+    "BlobInfo": {
+      "description": "The blob information generated by this operation.",
+      "type": "object",
+      "properties": {
+        "blobLink": {
+          "description": "Link to the blob to download file.",
+          "type": "string"
+        },
+        "byteCount": {
+          "description": "Bytes in the blob.",
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "scopeUsageDetailsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ARM Resource ID for subscription, billing account, or other billing scopes.Currently Resource Group and Management Group are not supported. For details, see https://aka.ms/costmgmt/scopes.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

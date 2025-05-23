@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
-    "jobName": "testcontainerAppsJob0",
+    "jobName": "testcontainerappsob0",
     "jobExecutionName": "jobExecution1",
     "api-version": "2023-05-02-preview"
   },
@@ -11,37 +11,39 @@
       "headers": {},
       "body": {
         "name": "jobExecution1",
-        "status": "Running",
-        "startTime": "2023-02-13T20:37:30+00:00",
-        "endTime": "2023-02-13T20:47:30+00:00",
-        "template": {
-          "containers": [
-            {
-              "image": "repo/testcontainerAppsJob0:v4",
-              "name": "testcontainerAppsJob0",
-              "resources": {
-                "cpu": 0.2,
-                "memory": "100Mi"
+        "properties": {
+          "status": "Running",
+          "startTime": "2023-02-13T20:37:30+00:00",
+          "endTime": "2023-02-13T20:47:30+00:00",
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerappsob0:v4",
+                "name": "testcontainerappsob0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                }
               }
-            }
-          ],
-          "initContainers": [
-            {
-              "image": "repo/testcontainerAppsJob0:v4",
-              "name": "testinitcontainerAppsJob0",
-              "resources": {
-                "cpu": 0.2,
-                "memory": "100Mi"
-              },
-              "command": [
-                "/bin/sh"
-              ],
-              "args": [
-                "-c",
-                "while true; do echo hello; sleep 10;done"
-              ]
-            }
-          ]
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerappsob0:v4",
+                "name": "testinitcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ]
+          }
         }
       }
     }

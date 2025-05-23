@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "jobName": "testcontainerappsjob0",
+    "jobExecutionName": "jobExecution1",
+    "api-version": "2024-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "jobExecution1",
+        "properties": {
+          "status": "Running",
+          "startTime": "2023-02-13T20:37:30+00:00",
+          "endTime": "2023-02-13T20:47:30+00:00",
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerappsjob0:v4",
+                "name": "testcontainerappsjob0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                }
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerappsjob0:v4",
+                "name": "testinitcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

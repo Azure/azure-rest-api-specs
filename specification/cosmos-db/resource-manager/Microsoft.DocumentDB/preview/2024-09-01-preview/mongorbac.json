@@ -1,0 +1,616 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB API for MongoDB Role Based Access Control Resource Provider REST API",
+    "version": "2024-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbRoleDefinitions/{mongoRoleDefinitionId}": {
+      "get": {
+        "operationId": "MongoDBResources_GetMongoRoleDefinition",
+        "x-ms-examples": {
+          "CosmosDBMongoRoleDefinitionGet": {
+            "$ref": "./examples/CosmosDBMongoDBRoleDefinitionGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Mongo Role Definition with the given Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/mongoRoleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Mongo Role Definition was successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/MongoRoleDefinitionGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "MongoDBResources_CreateUpdateMongoRoleDefinition",
+        "x-ms-examples": {
+          "CosmosDBMongoDBRoleDefinitionCreateUpdate": {
+            "$ref": "./examples/CosmosDBMongoDBRoleDefinitionCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Creates or updates an Azure Cosmos DB Mongo Role Definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/mongoRoleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "createUpdateMongoRoleDefinitionParameters",
+            "in": "body",
+            "required": true,
+            "description": "The properties required to create or update a Role Definition.",
+            "schema": {
+              "$ref": "#/definitions/MongoRoleDefinitionCreateUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Mongo Role Definition create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoRoleDefinitionGetResults"
+            }
+          },
+          "202": {
+            "description": "The Mongo Role Definition create or update request was accepted and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MongoDBResources_DeleteMongoRoleDefinition",
+        "x-ms-examples": {
+          "CosmosDBMongoDBRoleDefinitionDelete": {
+            "$ref": "./examples/CosmosDBMongoDBRoleDefinitionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes an existing Azure Cosmos DB Mongo Role Definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/mongoRoleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Mongo Role Definition delete operation was completed successfully."
+          },
+          "202": {
+            "description": "The Mongo Role Definition delete request was accepted and will complete asynchronously."
+          },
+          "204": {
+            "description": "The requested Mongo Role Definition does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbRoleDefinitions": {
+      "get": {
+        "operationId": "MongoDBResources_ListMongoRoleDefinitions",
+        "x-ms-examples": {
+          "CosmosDBMongoDBRoleDefinitionList": {
+            "$ref": "./examples/CosmosDBMongoDBRoleDefinitionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the list of all Azure Cosmos DB Mongo Role Definitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbUserDefinitions/{mongoUserDefinitionId}": {
+      "get": {
+        "operationId": "MongoDBResources_GetMongoUserDefinition",
+        "x-ms-examples": {
+          "CosmosDBMongoDBUserDefinitionGet": {
+            "$ref": "./examples/CosmosDBMongoDBUserDefinitionGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Mongo User Definition with the given Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/mongoUserDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The User Definition was successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/MongoUserDefinitionGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "MongoDBResources_CreateUpdateMongoUserDefinition",
+        "x-ms-examples": {
+          "CosmosDBMongoDBUserDefinitionCreateUpdate": {
+            "$ref": "./examples/CosmosDBMongoDBUserDefinitionCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Creates or updates an Azure Cosmos DB Mongo User Definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/mongoUserDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "createUpdateMongoUserDefinitionParameters",
+            "in": "body",
+            "required": true,
+            "description": "The properties required to create or update a User Definition.",
+            "schema": {
+              "$ref": "#/definitions/MongoUserDefinitionCreateUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The User Definition create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoUserDefinitionGetResults"
+            }
+          },
+          "202": {
+            "description": "The User Definition create or update request was accepted and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MongoDBResources_DeleteMongoUserDefinition",
+        "x-ms-examples": {
+          "CosmosDBMongoDBUserDefinitionDelete": {
+            "$ref": "./examples/CosmosDBMongoDBUserDefinitionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes an existing Azure Cosmos DB Mongo User Definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/mongoUserDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The User Definition delete operation was completed successfully."
+          },
+          "202": {
+            "description": "The User Definition delete request was accepted and will complete asynchronously."
+          },
+          "204": {
+            "description": "The requested User Definition does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbUserDefinitions": {
+      "get": {
+        "operationId": "MongoDBResources_ListMongoUserDefinitions",
+        "x-ms-examples": {
+          "CosmosDBMongoDBUserDefinitionList": {
+            "$ref": "./examples/CosmosDBMongoDBUserDefinitionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the list of all Azure Cosmos DB Mongo User Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoUserDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MongoRoleDefinitionResource": {
+      "type": "object",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "A user-friendly name for the Role Definition. Must be unique for the database account."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "BuiltInRole",
+            "CustomRole"
+          ],
+          "description": "Indicates whether the Role Definition was built-in or user created.",
+          "x-ms-enum": {
+            "name": "MongoRoleDefinitionType",
+            "modelAsString": false
+          }
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The database name for which access is being granted for this Role Definition."
+        },
+        "privileges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Privilege"
+          },
+          "description": "A set of privileges contained by the Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Scopes higher than Database are not enforceable as privilege."
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Role"
+          },
+          "description": "The set of roles inherited by this Role Definition."
+        }
+      },
+      "description": "Azure Cosmos DB Mongo Role Definition resource object."
+    },
+    "MongoRoleDefinitionCreateUpdateParameters": {
+      "description": "Parameters to create and update an Azure Cosmos DB Mongo Role Definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update an Azure Cosmos DB Mongo Role Definition.",
+          "$ref": "#/definitions/MongoRoleDefinitionResource"
+        }
+      }
+    },
+    "MongoRoleDefinitionGetResults": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MongoRoleDefinitionResource",
+          "description": "Properties related to the Mongo Role Definition."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ],
+      "description": "An Azure Cosmos DB Mongo Role Definition."
+    },
+    "Privilege": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "object",
+          "properties": {
+            "db": {
+              "type": "string",
+              "description": "The database name the role is applied."
+            },
+            "collection": {
+              "type": "string",
+              "description": "The collection name the role is applied."
+            }
+          },
+          "description": "An Azure Cosmos DB Mongo DB Resource."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of actions that are allowed."
+        }
+      },
+      "description": "The set of data plane operations permitted through this Role Definition."
+    },
+    "Role": {
+      "type": "object",
+      "properties": {
+        "db": {
+          "type": "string",
+          "description": "The database name the role is applied."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role name."
+        }
+      },
+      "description": "The set of roles permitted through this Role Definition."
+    },
+    "MongoRoleDefinitionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MongoRoleDefinitionGetResults"
+          },
+          "description": "List of Mongo Role Definitions and their properties."
+        }
+      },
+      "description": "The relevant Mongo Role Definitions."
+    },
+    "MongoUserDefinitionResource": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user name for User Definition."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password for User Definition. Response does not contain user password."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The database name for which access is being granted for this User Definition."
+        },
+        "customData": {
+          "type": "string",
+          "description": "A custom definition for the USer Definition."
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Role"
+          },
+          "description": "The set of roles inherited by the User Definition."
+        },
+        "mechanisms": {
+          "type": "string",
+          "description": "The Mongo Auth mechanism. For now, we only support auth mechanism SCRAM-SHA-256."
+        }
+      },
+      "description": "Azure Cosmos DB Mongo User Definition resource object."
+    },
+    "MongoUserDefinitionCreateUpdateParameters": {
+      "description": "Parameters to create and update an Azure Cosmos DB Mongo User Definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update an Azure Cosmos DB Mongo User Definition.",
+          "$ref": "#/definitions/MongoUserDefinitionResource"
+        }
+      }
+    },
+    "MongoUserDefinitionGetResults": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MongoUserDefinitionResource",
+          "description": "Properties related to the User Definition."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ],
+      "description": "An Azure Cosmos DB User Definition"
+    },
+    "MongoUserDefinitionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MongoUserDefinitionGetResults"
+          },
+          "description": "List of User Definition and their properties"
+        }
+      },
+      "description": "The relevant User Definition."
+    }
+  },
+  "parameters": {
+    "mongoRoleDefinitionIdParameter": {
+      "name": "mongoRoleDefinitionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The ID for the Role Definition {dbName.roleName}."
+    },
+    "mongoUserDefinitionIdParameter": {
+      "name": "mongoUserDefinitionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The ID for the User Definition {dbName.userName}."
+    }
+  }
+}

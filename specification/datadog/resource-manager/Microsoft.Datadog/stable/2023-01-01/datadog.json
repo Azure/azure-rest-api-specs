@@ -153,7 +153,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "CreationSupported_List": {
@@ -1248,7 +1248,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Monitors_GetMonitoredSubscriptions": {
@@ -1573,8 +1573,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogAgreementResource"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1617,6 +1616,10 @@
             "$ref": "#/definitions/CreateResourceSupportedResponse"
           },
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
         }
       }
     },
@@ -1653,8 +1656,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogApiKey"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1738,8 +1740,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogHost"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1879,8 +1880,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MonitoredSubscription"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1916,6 +1916,10 @@
           "items": {
             "$ref": "#/definitions/MonitoredSubscriptionProperties"
           }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
         }
       }
     },
@@ -1967,8 +1971,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -1983,7 +1986,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the SKU in {PlanId} format. For Terraform, the only allowed value is 'linking'.",
+          "description": "Name of the SKU in {PlanId} format. For Terraform, the only allowed value is 'Linked'.",
           "type": "string"
         }
       }
@@ -2354,8 +2357,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2368,8 +2370,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },

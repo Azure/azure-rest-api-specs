@@ -26,7 +26,13 @@ These are the global settings for the storageactions.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2023-01-01
+```
+
+``` yaml
+modelerfour:
+  flatten-models: false
 ```
 
 ### Tag: package-2023-01-01
@@ -49,8 +55,8 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

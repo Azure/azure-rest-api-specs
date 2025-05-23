@@ -1,0 +1,38 @@
+{
+  "title": "DeviceLocation_Verify",
+  "operationId": "DeviceLocation_Verify",
+  "parameters": {
+    "api-version": "2024-02-09-preview",
+    "location": "location",
+    "x-ms-client-request-id": "123e4567-e89b-12d3-a456-426614174000",
+    "apc-gateway-id": "zdgrzzaxlodrvewbksn",
+    "body": {
+      "networkIdentifier": {
+        "identifierType": "ipv4",
+        "identifier": "12.12.12.12"
+      },
+      "latitude": 70,
+      "longitude": -161,
+      "accuracy": 91,
+      "device": {
+        "networkAccessIdentifier": "122345@domain.com",
+        "phoneNumber": "+447000000000",
+        "ipv4Address": {
+          "ipv4": "12.12.12.12",
+          "port": 2442
+        },
+        "ipv6Address": {
+          "ipv6": "3001:0da8:75a3:0000:0000:8a2e:0370:7334",
+          "port": 1643
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "verificationResult": true
+      }
+    }
+  }
+}

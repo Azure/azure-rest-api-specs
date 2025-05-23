@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "containerAppName": "testapp2",
+    "logicAppName": "testapp2",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testapp2/providers/Microsoft.App/logicApps/testapp2/workflowconfigurations/connections",
+        "name": "testapp2/connections",
+        "type": "Microsoft.App/logicApps/workflowsconfiguration",
+        "location": "East US",
+        "properties": {
+          "files": {
+            "connections.json": {
+              "managedApiConnections": {
+                "office365": {
+                  "api": {
+                    "id": "string"
+                  },
+                  "connection": {
+                    "id": "string"
+                  },
+                  "connectionRuntimeUrl": "string",
+                  "authentication": {
+                    "type": "Raw",
+                    "scheme": "Key",
+                    "parameter": "@appsetting('office365-connectionKey')"
+                  }
+                }
+              }
+            }
+          },
+          "health": {
+            "state": "Healthy"
+          }
+        }
+      }
+    }
+  }
+}

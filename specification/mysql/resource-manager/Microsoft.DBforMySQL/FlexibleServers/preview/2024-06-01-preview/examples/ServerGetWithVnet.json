@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "serverName": "mysqltestserver",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storage": {
+            "storageSizeGB": 100,
+            "iops": 600,
+            "autoGrow": "Enabled",
+            "storageSku": "Premium_LRS",
+            "storageRedundancy": "LocalRedundancy"
+          },
+          "version": "5.7",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "mysqltestserver.database.mysql.azure.com",
+          "availabilityZone": "3",
+          "maintenancePolicy": {
+            "patchStrategy": "Regular"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "None",
+          "replicaCapacity": 10,
+          "network": {
+            "publicNetworkAccess": "Disabled",
+            "delegatedSubnetResourceId": "/subscriptions/2941a09d-7bcf-42fe-91ca-1765f521c829/resourceGroups/OrcabrCI-Vnet-Resource-Group/providers/Microsoft.Network/virtualNetworks/OrcabrCI-Vnet/subnets/mysql-subnet"
+          },
+          "backup": {
+            "backupRetentionDays": 7,
+            "backupIntervalHours": 24,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00"
+          },
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "databasePort": 3306
+        },
+        "location": "Southeast Asia",
+        "tags": {
+          "num": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver",
+        "name": "mysqltestserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    }
+  }
+}

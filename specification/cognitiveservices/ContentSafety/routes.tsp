@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
@@ -18,11 +20,48 @@ interface TextOperations {
   @post
   analyzeText is Azure.Core.RpcOperation<
     {
-      @body
+      @bodyRoot
       @doc("The text analysis request.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AnalyzeTextOptions;
     },
     AnalyzeTextResult
+  >;
+
+  @added(ContentSafety.Versions.v2024_09_01)
+  @summary("Shield Prompt")
+  @doc("A synchronous API for shielding prompt from direct and indirect injection attacks.")
+  @route("/text:shieldPrompt")
+  @post
+  shieldPrompt is Azure.Core.RpcOperation<
+    {
+      @bodyRoot
+      @doc("The request body to be detected, which may contain direct or indirect injection attacks.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: ShieldPromptOptions;
+    },
+    ShieldPromptResult
+  >;
+
+  @added(ContentSafety.Versions.v2024_09_01)
+  @summary("Detect Protected Material for Text")
+  @doc("A synchronous API for detecting protected material in the given text.")
+  @route("/text:detectProtectedMaterial")
+  @post
+  detectTextProtectedMaterial is Azure.Core.RpcOperation<
+    {
+      @bodyRoot
+      @doc("The request body to be detected, which may contain protected material.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: DetectTextProtectedMaterialOptions;
+    },
+    DetectTextProtectedMaterialResult
   >;
 }
 
@@ -34,7 +73,10 @@ interface ImageOperations {
   analyzeImage is Azure.Core.RpcOperation<
     {
       @doc("The image analysis request.")
-      @body
+      @bodyRoot
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AnalyzeImageOptions;
     },
     AnalyzeImageResult
@@ -67,7 +109,14 @@ interface TextBlocklists {
   @doc("Add or update blocklistItems to a text blocklist. You can add or update at most 100 blocklistItems in one request.")
   addOrUpdateBlocklistItems is BlockOps.ResourceAction<
     TextBlocklist,
-    AddOrUpdateTextBlocklistItemsOptions,
+    {
+      @doc("Options for adding or updating blocklist items.")
+      @bodyRoot
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AddOrUpdateTextBlocklistItemsOptions;
+    },
     AddOrUpdateTextBlocklistItemsResult
   >;
 
@@ -75,7 +124,14 @@ interface TextBlocklists {
   @doc("Remove blocklistItems from a text blocklist. You can remove at most 100 BlocklistItems in one request.")
   removeBlocklistItems is BlockOps.ResourceAction<
     TextBlocklist,
-    RemoveTextBlocklistItemsOptions,
+    {
+      @doc("Options for removing blocklist items.")
+      @bodyRoot
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: RemoveTextBlocklistItemsOptions;
+    },
     NoContentResponse
   >;
 

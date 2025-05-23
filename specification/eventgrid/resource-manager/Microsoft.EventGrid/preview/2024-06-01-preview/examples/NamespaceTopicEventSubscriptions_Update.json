@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "resourceGroupName": "examplerg",
+    "namespaceName": "exampleNamespaceName1",
+    "topicName": "exampleNamespaceTopicName1",
+    "eventSubscriptionName": "exampleNamespaceTopicEventSubscriptionName1",
+    "api-version": "2024-06-01-preview",
+    "eventSubscriptionUpdateParameters": {
+      "properties": {
+        "deliveryConfiguration": {
+          "deliveryMode": "Queue",
+          "queue": {
+            "receiveLockDurationInSeconds": 60,
+            "maxDeliveryCount": 3,
+            "eventTimeToLive": "P1D"
+          }
+        },
+        "eventDeliverySchema": "CloudEventSchemaV1_0"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deliveryConfiguration": {
+            "deliveryMode": "Queue",
+            "queue": {
+              "receiveLockDurationInSeconds": 60,
+              "maxDeliveryCount": 3,
+              "eventTimeToLive": "P1D"
+            }
+          },
+          "eventDeliverySchema": "CloudEventSchemaV1_0"
+        },
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/exampleNamespaceTopicName1/eventSubscriptions/exampleNamespaceTopicEventSubscriptionName1",
+        "name": "exampleNamespaceTopicEventSubscriptionName1",
+        "type": "Microsoft.EventGrid/namespaces/topics/eventsubscriptions",
+        "systemData": null
+      }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "provisioningState": "Updating",
+          "deliveryConfiguration": {
+            "deliveryMode": "Queue",
+            "queue": {
+              "receiveLockDurationInSeconds": 60,
+              "maxDeliveryCount": 3,
+              "eventTimeToLive": "P1D"
+            }
+          },
+          "eventDeliverySchema": "CloudEventSchemaV1_0"
+        },
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/exampleNamespaceTopicName1/eventSubscriptions/exampleNamespaceTopicEventSubscriptionName1",
+        "name": "exampleNamespaceTopicEventSubscriptionName1",
+        "type": "Microsoft.EventGrid/namespaces/topics/eventsubscriptions",
+        "systemData": null
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.windowsazure.com/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1/topics/exampleNamespaceTopicName1/eventSubscriptions/exampleNamespaceTopicEventSubscriptionName1/operationStatus/7B023877-A473-457B-B462-562F97048FB6?api-version=2024-06-01-preview",
+        "Location": "https://management.windowsazure.com/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1/topics/exampleNamespaceTopicName1/eventSubscriptions/exampleNamespaceTopicEventSubscriptionName1/operationResults/7B023877-A473-457B-B462-562F97048FB6?api-version=2024-06-01-preview",
+        "Retry-After": "60"
+      }
+    }
+  }
+}

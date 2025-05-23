@@ -1,0 +1,23 @@
+- tool: TestTool
+  path: '**'
+  reason: foo-globstar
+
+- tool: TestTool
+  path: '*'
+  reason: foo-star
+
+- tool: TestTool
+  path: foo.json
+  reason: foo-exact
+
+- tool: TestTool
+  path: bar/**
+  reason: foo-bar-globstar
+
+- tool: TestTool
+  path: bar/*
+  reason: foo-bar-star
+
+- tool: TestTool
+  path: bar/bar.json
+  reason: foo-bar-exact

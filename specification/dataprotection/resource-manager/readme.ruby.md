@@ -19,6 +19,17 @@ batch:
   - tag: package-2022-03
   - tag: package-2023-01
   - tag: package-2023-05
+  - tag: package-2025-01
+```
+
+### Tag:  package-2025-01 and ruby
+
+These settings apply only when `--tag= package-2025-01 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == ' package-2025-01' && $(ruby)
+namespace: "Azure::DataProtection::Mgmt::V2025_01_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_data_protection/lib
 ```
 
 ### Tag:  package-2023-05 and ruby

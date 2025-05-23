@@ -26,15 +26,64 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-7.5-preview.1
+tag: package-preview-7.6-preview.2
 ```
 
+### Tag: package-preview-7.6-preview.2
 
+These settings apply only when `--tag=package-preview-7.6-preview.2` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-7.6-preview.2'
+input-file:
+  - Microsoft.KeyVault/preview/7.6-preview.2/backuprestore.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/certificates.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/common.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/keys.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/rbac.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/secrets.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/securitydomain.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/settings.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/storage.json
+```
+
+### Tag: package-preview-7.6-preview.1
+
+These settings apply only when `--tag=package-preview-7.6-preview.1` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-7.6-preview.1'
+input-file:
+  - Microsoft.KeyVault/preview/7.6-preview.1/backuprestore.json
+  - Microsoft.KeyVault/preview/7.6-preview.1/certificates.json
+  - Microsoft.KeyVault/preview/7.6-preview.1/common.json
+  - Microsoft.KeyVault/preview/7.6-preview.1/keys.json
+  - Microsoft.KeyVault/preview/7.6-preview.1/rbac.json
+  - Microsoft.KeyVault/preview/7.6-preview.1/secrets.json
+  - Microsoft.KeyVault/preview/7.6-preview.1/securitydomain.json
+  - Microsoft.KeyVault/preview/7.6-preview.1/settings.json
+  - Microsoft.KeyVault/preview/7.6-preview.1/storage.json
+```
+
+### Tag: package-7.5
+
+These settings apply only when `--tag=package-7.5` is specified on the command line.
+
+``` yaml $(tag) == 'package-7.5'
+input-file:
+  - Microsoft.KeyVault/stable/7.5/backuprestore.json
+  - Microsoft.KeyVault/stable/7.5/certificates.json
+  - Microsoft.KeyVault/stable/7.5/common.json
+  - Microsoft.KeyVault/stable/7.5/keys.json
+  - Microsoft.KeyVault/stable/7.5/rbac.json
+  - Microsoft.KeyVault/stable/7.5/secrets.json
+  - Microsoft.KeyVault/stable/7.5/securitydomain.json
+  - Microsoft.KeyVault/stable/7.5/settings.json
+  - Microsoft.KeyVault/stable/7.5/storage.json
+```
 ### Tag: package-preview-7.5-preview.1
 
 These settings apply only when `--tag=package-preview-7.5-preview.1` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-7.5-preview.1'
+``` yaml $(tag) == 'package-preview-7.5-preview.1'
 input-file:
   - Microsoft.KeyVault/preview/7.5-preview.1/backuprestore.json
   - Microsoft.KeyVault/preview/7.5-preview.1/certificates.json
@@ -46,6 +95,7 @@ input-file:
   - Microsoft.KeyVault/preview/7.5-preview.1/settings.json
   - Microsoft.KeyVault/preview/7.5-preview.1/storage.json
 ```
+
 ### Tag: package-7.4
 
 These settings apply only when `--tag=package-7.4` is specified on the command line.
@@ -218,6 +268,7 @@ These transforms apply to any generator.
 directive:
 # Rename models back to what they were before 7.4 for autorest-based code generators.
 # Generated names were disambiguated for generators not using autorest but still processing x-ms-enum.name.
+# See https://github.com/Azure/azure-rest-api-specs/pull/22435 for details.
 - from: certificates.json
   where: $.definitions.Action
   transform: $.properties.action_type["x-ms-enum"].name = "ActionType";
@@ -317,6 +368,18 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml
 directive:
+  - suppress: IntegerTypeMustHaveFormat
+    from: securitydomain.json
+    reason: KV uses format "unixtime", which is not supported by the linter at the moment.
+  - suppress: IntegerTypeMustHaveFormat
+    from: certificates.json
+    reason: KV uses format "unixtime", which is not supported by the linter at the moment.
+  - suppress: IntegerTypeMustHaveFormat
+    from: keys.json
+    reason: KV uses format "unixtime", which is not supported by the linter at the moment.
+  - suppress: IntegerTypeMustHaveFormat
+    from: secrets.json
+    reason: KV uses format "unixtime", which is not supported by the linter at the moment.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: certificates.json
     where: $.definitions.CertificateOperation.properties.cancellation_requested

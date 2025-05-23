@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./../helpers.tsp";
@@ -10,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
@@ -29,24 +27,25 @@ model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
   @minLength(1)
   @maxLength(50)
   @path
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 @doc("The provisioning state of the UpdateStrategy resource.")
-enum FleetUpdateStrategyProvisioningState {
-  ...ResourceProvisioningState,
+union FleetUpdateStrategyProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("The properties of the UpdateStrategy.")
 model FleetUpdateStrategyProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the UpdateStrategy resource.")
   provisioningState?: FleetUpdateStrategyProvisioningState;
 
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("Defines the update sequence of the clusters.")
   strategy: UpdateRunStrategy;
 }
@@ -56,17 +55,29 @@ model FleetUpdateStrategyProperties {
 interface FleetUpdateStrategies {
   get is ArmResourceRead<FleetUpdateStrategy>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE AT NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FleetUpdateStrategy,
-    BaseParameters<FleetUpdateStrategy> &
+    Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
       IfMatchParameters<FleetUpdateStrategy> &
-      IfNoneMatchParameters<FleetUpdateStrategy>
+      IfNoneMatchParameters<FleetUpdateStrategy>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  delete is FleetArmResourceDeleteAsync<
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  delete is ArmResourceDeleteAsync<
     FleetUpdateStrategy,
-    BaseParameters<FleetUpdateStrategy> & IfMatchParameters<FleetUpdateStrategy>
+    Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
+      IfMatchParameters<FleetUpdateStrategy>
   >;
 
-  listByParent is ArmResourceListByParent<FleetUpdateStrategy>;
+  /** List FleetUpdateStrategy resources by Fleet */
+  listByFleet is ArmResourceListByParent<FleetUpdateStrategy>;
 }

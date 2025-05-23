@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "myenvironment",
+    "name": "mysubscription",
+    "api-version": "2024-08-02-preview",
+    "daprSubscriptionEnvelope": {
+      "properties": {
+        "pubsubName": "mypubsubcomponent",
+        "topic": "inventory",
+        "routes": {
+          "default": "/products"
+        },
+        "scopes": [
+          "warehouseapp",
+          "customersupportapp"
+        ],
+        "bulkSubscribe": {
+          "enabled": true,
+          "maxMessagesCount": 123,
+          "maxAwaitDurationMs": 500
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mysubscription",
+        "name": "mysubscription",
+        "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+        "properties": {
+          "pubsubName": "mypubsubcomponent",
+          "topic": "inventory",
+          "routes": {
+            "rules": [],
+            "default": "/products"
+          },
+          "scopes": [
+            "warehouseapp",
+            "customersupportapp"
+          ],
+          "bulkSubscribe": {
+            "enabled": true,
+            "maxMessagesCount": 123,
+            "maxAwaitDurationMs": 500
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mysubscription",
+        "name": "mysubscription",
+        "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+        "properties": {
+          "pubsubName": "mypubsubcomponent",
+          "topic": "inventory",
+          "routes": {
+            "rules": [],
+            "default": "/products"
+          },
+          "scopes": [
+            "warehouseapp",
+            "customersupportapp"
+          ],
+          "bulkSubscribe": {
+            "enabled": true,
+            "maxMessagesCount": 123,
+            "maxAwaitDurationMs": 500
+          }
+        }
+      }
+    }
+  }
+}
