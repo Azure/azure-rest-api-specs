@@ -187,6 +187,30 @@ describe("SpecModel", () => {
       expect(tagNames[0]).toBe("tag-1");
       expect(tagNames[1]).toBe("tag-2");
     });
+
+    it("throws when an input-file is not found", async () => {
+      const folder = resolve(
+        __dirname,
+        "fixtures/getAffectedReadmeTags/specification/input-file-not-found",
+      );
+      const specModel = new SpecModel(folder, options);
+
+      expect(
+        specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
+      ).rejects.toThrowError(/Failed to resolve file for swagger/i);
+    });
+
+    it("throws when an input-file is invalid JSON", async () => {
+      const folder = resolve(
+        __dirname,
+        "fixtures/getAffectedReadmeTags/specification/input-file-invalid-json",
+      );
+      const specModel = new SpecModel(folder, options);
+
+      expect(
+        specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
+      ).rejects.toThrowError(/is not a valid JSON Schema/i);
+    });
   });
 
   describe("getAffectedSwaggers", async () => {
