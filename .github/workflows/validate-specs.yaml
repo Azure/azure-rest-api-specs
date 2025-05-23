@@ -19,12 +19,6 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Prepend test notice to summary
-        if: always()
-        run: |
-          temp_file=$(mktemp)
-          echo -e "> [!IMPORTANT]\n> This check is testing a new version of 'Swagger SemanticValidation'.\n> Failures are expected, and should be completely ignored by spec authors and reviewers.\n> Meaningful results for this PR are in required check 'Swagger SemanticValidation'.\n" > $GITHUB_STEP_SUMMARY
-
       - name: Validate Swagger Specifications
         run: |
           npm exec --no -- oav-runner $GITHUB_WORKSPACE
