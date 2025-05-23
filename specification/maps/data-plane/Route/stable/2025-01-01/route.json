@@ -760,11 +760,6 @@
                 "description": "Finds the fastest route, without factoring in traffic information."
               },
               {
-                "value": "fastestAvoidClosureWithoutTraffic",
-                "name": "FastestAvoidClosureWithoutTraffic",
-                "description": "The route is calculated to minimize the time and avoid road closures. No traffic information except for road closures is used in the calculation. `Note`: Only supported for driving travelMode."
-              },
-              {
                 "value": "fastestWithTraffic",
                 "name": "FastestWithTraffic",
                 "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
@@ -801,10 +796,6 @@
                 {
                   "value": "routeSummary",
                   "description": "Include only travel time and distance for the route, and do not provide other information."
-                },
-                {
-                  "value": "regionTravelSummary",
-                  "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g., US, Canada) and administrative division or subregion (e.g., \"state\" in US and \"province\" in Canada). `Note`: Only supported for driving and walking travelMode"
                 },
                 {
                   "value": "routePath",
@@ -1164,40 +1155,6 @@
         }
       }
     },
-    "RegionTravelSummary": {
-      "description": "Travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada).",
-      "type": "object",
-      "properties": {
-        "countryRegion": {
-          "$ref": "#/definitions/CountryRegion"
-        },
-        "adminDistricts": {
-          "description": "adminDistrict array.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdminDistrict"
-          }
-        },
-        "distanceInMeters": {
-          "description": "Length In Meters property",
-          "type": "number"
-        },
-        "durationInSeconds": {
-          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
-          "format": "int64",
-          "type": "integer"
-        },
-        "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
-          "format": "int64",
-          "type": "integer"
-        },
-        "tollDistanceInMeters": {
-          "description": "The total distance, measured in meters, along the route that includes toll roads.",
-          "type": "number"
-        }
-      }
-    },
     "FeatureTypeEnum": {
       "type": "string",
       "description": "Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
@@ -1496,7 +1453,7 @@
               "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AdminDistrictTruck"
+                "$ref": "#/definitions/AdminDistrict"
               }
             }
           }
@@ -1698,34 +1655,6 @@
       "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
       "type": "object",
       "properties": {
-        "longName": {
-          "description": "The long name of an address, such as Washington.",
-          "type": "string"
-        },
-        "distanceInMeters": {
-          "description": "The total distance traveled in meters within the administrative district.",
-          "type": "number"
-        },
-        "durationInSeconds": {
-          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
-          "format": "int64",
-          "type": "integer"
-        },
-        "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
-          "format": "int64",
-          "type": "integer"
-        },
-        "tollDistanceInMeters": {
-          "description": "The total distance, measured in meters, along the route that includes toll roads.",
-          "type": "number"
-        }
-      }
-    },
-    "AdminDistrictTruck": {
-      "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
-      "type": "object",
-      "properties": {
         "shortName": {
           "type": "string",
           "description": "The short name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA. This is only available for the US, Canada, and Mexico."
@@ -1788,10 +1717,6 @@
           "items": {
             "$ref": "#/definitions/SubLeg"
           }
-        },
-        "regionTravelSummary": {
-          "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada).",
-          "$ref": "#/definitions/RegionTravelSummary"
         }
       }
     },
