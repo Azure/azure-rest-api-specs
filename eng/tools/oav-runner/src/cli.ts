@@ -1,17 +1,19 @@
+#!/usr/bin/env node
 
 import { checkSpecs } from './main.js';
 import { outputAnnotatedErrors, outputSummaryReport } from './formatting.js';
+import { consoleLogger } from '@azure-tools/specs-shared/logger';
 
 const [ , , targetDir ] = process.argv;
 // todo: properly parse arguments.
 //   accept a directory that we will git diff within or a list of files.
 //   parse a second argument into runSpecs or runExamples
 if (!targetDir) {
-  console.error('Usage: oav-runner <targetDirectory>');
+  consoleLogger.error('Usage: oav-runner <targetDirectory>');
   process.exit(1);
 }
 else {
-    console.log(`Running oav-runner on ${targetDir}`);
+    consoleLogger.info(`Running oav-runner on ${targetDir}`);
     const [exitCode, errorList] = await checkSpecs(targetDir);
 
     if (errorList){

@@ -14,8 +14,6 @@ import { ReportableOavError } from './formatting.js';
 export async function checkSpecs(rootDirectory: string): Promise<[number, Array<ReportableOavError>]> {
     let errors: Array<ReportableOavError> = [];
 
-    consoleLogger.info(`Executing checks in ${rootDirectory}`);
-
     const changedFiles = await getChangedFiles({
       cwd: rootDirectory
     })
@@ -26,7 +24,7 @@ export async function checkSpecs(rootDirectory: string): Promise<[number, Array<
       try {
         const errorResults = await oav.validateSpec(swaggerFile, undefined);
         if (errorResults.validateSpec && errorResults.validateSpec.errors){
-          for(const error of errorResults.validateSpec.errors) {
+          for (const error of errorResults.validateSpec.errors) {
             errors.push( {
               message: error.message,
               classificationCode: error.code,
@@ -62,6 +60,9 @@ export async function checkSpecs(rootDirectory: string): Promise<[number, Array<
 export async function processFilesToSpecificationList(rootDirectory: string, files: string[]): Promise<Array<string>> {
     // this is implemented in existing example and spec validation pipeline simply by pulling _all_ of the swagger files
     // and then filtering them down to just the ones that are in the changed files list.
+
+    consoleLogger.info(`Processing ${files.length} files: `);
+    consoleLogger.info(files.join('\n'));
 
     // we might have to do that, but as far as I can tell, the "pull everything" approach only works for the nonPR. If its PR
     // it literally never uses the total result.

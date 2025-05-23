@@ -25,10 +25,9 @@ jobs:
         if: always()
         run: |
           temp_file=$(mktemp)
-          echo -e "> [!IMPORTANT]\n> This check is testing a new version of 'Swagger SemanticValidation'.\n> Failures are expected, and should be completely ignored by spec authors and reviewers.\n> Meaningful results for this PR are in required check 'Swagger SemanticValidation'.\n" > $GITHUB_STEP_SUMMARY
+          echo -e "> [!IMPORTANT]\n> This check is testing a new version of 'Swagger ModelValidation'.\n> Failures are expected, and should be completely ignored by spec authors and reviewers.\n> Meaningful results for this PR are in required check 'Swagger SemanticValidation'.\n" > $GITHUB_STEP_SUMMARY
 
-      # TODO: Could be github.sha for merge commit
-      # - name: Run LintDiff
+      # - name: Validate Examples
       #   run: |
       #     npm exec --no -- lint-diff \
       #       --before before \
@@ -40,7 +39,7 @@ jobs:
 
       #     echo "⚠️ This check is testing a new version of 'Swagger LintDiff'."
       #     echo "⚠️ Failures are expected, and should be completely ignored by spec authors and reviewers."
-      #     echo "⚠️ Meaningful results for this PR are are in required check 'Swagger LintDiff'."
+      #     echo "⚠️ Meaningful results for this PR are are in required check 'Swagger ModelValidation'."
       #   env:
       #     # Some LintDiff runs are memory intensive and require more than the
       #     # default.

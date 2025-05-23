@@ -20,18 +20,20 @@ export function outputAnnotatedErrors(errors: ReportableOavError[]){
     });
 }
 
-export function outputSummaryReport(errors: ReportableOavError[]){
+export function outputSummaryReport(errors: ReportableOavError[], reportName: string = "Swagger SemanticValidation") {
     let builtLines: string[] = [];
 
     builtLines.push("## 🔥 Error Summary");
-
+    builtLines.push("⚠️ This check is testing a new version of 'Swagger SemanticValidation'.")
+    builtLines.push("⚠️ Failures are expected, and should be completely ignored by spec authors and reviewers.")
+    builtLines.push(`⚠️ Meaningful results for this PR are in required check '${reportName}'.`)
     // we should sort the errors by file and error code
     builtLines.push("| File | Line#Column | Code | Message |");
     builtLines.push("| --- | --- | --- | --- |");
 
     // todo: sort the errors by file and error code before we print them
     errors.forEach((error) => {
-        builtLines.push(`| ${error.file} | ${error.line}:${error.column} | ${error.classificationCode} | ${error.message} |`);
+        builtLines.push(`| ${error.file} | ${error.line}#${error.column} | ${error.classificationCode} | ${error.message} |`);
     });
 
     const summaryResult = builtLines.join('\n');
