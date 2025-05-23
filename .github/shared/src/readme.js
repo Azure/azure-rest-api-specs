@@ -153,9 +153,6 @@ export class Readme {
           throw new Error(message);
         }
 
-        // /** @type {Map<string, Swagger>} */
-        // const inputFiles = new Map();
-
         // It's possible for input-file to be a string or an array
         const inputFilePaths = Array.isArray(obj["input-file"])
           ? obj["input-file"]
