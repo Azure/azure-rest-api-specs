@@ -10,7 +10,7 @@ options:
     emit-lro-options: "none"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-agents.json"
   "@azure-tools/typespec-python":
-    api-version: "v1"
+    api-version: "2025-05-15-preview"
     package-mode: "dataplane"
     package-dir: "azure-ai-agents"
     package-name: "{package-dir}"
@@ -30,6 +30,10 @@ options:
     generate-sample: false
     examples-dir: "{project-dir}/examples"
     clear-output-folder: true
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.Agents.Persistent
+    model-namespace: false
+    api-version: "2025-05-15-preview"
   "@azure-tools/typespec-ts":
     api-version: "v1"
     generateTest: true
