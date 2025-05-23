@@ -2,7 +2,7 @@
 
 import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
-import { relative, resolve } from "path";
+import { dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
 import { SpecModelError } from "./spec-model-error.js";
 
@@ -48,7 +48,8 @@ export class Swagger {
    * @param {Tag} [options.tag]
    */
   constructor(path, options) {
-    this.#path = resolve(options?.tag?.readme?.path ?? "", path);
+    const rootDir = dirname(options?.tag?.readme?.path ?? "");
+    this.#path = resolve(rootDir, path);
     this.#logger = options?.logger;
     this.#tag = options?.tag;
   }

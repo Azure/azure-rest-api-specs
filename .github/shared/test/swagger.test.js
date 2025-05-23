@@ -5,6 +5,8 @@ import { describe, expect, it } from "vitest";
 import { Swagger } from "../src/swagger.js";
 
 import { fileURLToPath } from "url";
+import { Readme } from "../src/readme.js";
+import { Tag } from "../src/tag.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe("Swagger", () => {
@@ -17,6 +19,16 @@ describe("Swagger", () => {
       /Failed to resolve file for swagger/i,
     );
   });
+
+  it("resolves path against Tag.readme", async () => {
+    const readme = new Readme("/specs/foo/readme.md");
+    const tag = new Tag("2025-01-01", [], { readme });
+    const swagger = new Swagger("test.json", { tag });
+
+    expect(swagger.path).toBe("/specs/foo/test.json");
+  });
+
+  // TODO: Test that path is resolved against backpointer
 
   it("excludes example files", async () => {
     const swagger = new Swagger(
