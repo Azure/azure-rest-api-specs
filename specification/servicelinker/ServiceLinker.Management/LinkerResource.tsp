@@ -106,7 +106,7 @@ interface LinkerResources {
   validate is LinkerResourceOps.ActionAsync<
     LinkerResource,
     void,
-    ArmResponse<ValidateOperationResult>
+    ValidateOperationResult
   >;
 
   /**
@@ -195,7 +195,7 @@ interface Linker {
   validate is LinkerOps.ActionAsync<
     LinkerResource,
     void,
-    ArmResponse<ValidateOperationResult>
+    ValidateOperationResult
   >;
 
   /**
