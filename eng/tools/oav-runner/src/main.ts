@@ -7,12 +7,14 @@ import * as path from 'path';
 // import * as glob from 'glob';
 import * as fs from 'fs';
 
+import { consoleLogger } from '@azure-tools/specs-shared/logger';
 import { getChangedFiles, swagger } from "@azure-tools/specs-shared/changed-files";
+import { ReportableOavError } from './formatting.js';
 
-export async function checkSpecs(rootDirectory: string): Promise<[number, Array<object>]> {
-    let errors: Array<object> = [];
+export async function checkSpecs(rootDirectory: string): Promise<[number, Array<ReportableOavError>]> {
+    let errors: Array<ReportableOavError> = [];
 
-    console.log(`Executing checks in ${rootDirectory}`);
+    consoleLogger.info(`Executing checks in ${rootDirectory}`);
 
     const changedFiles = await getChangedFiles({
       cwd: rootDirectory
@@ -23,14 +25,29 @@ export async function checkSpecs(rootDirectory: string): Promise<[number, Array<
     for (const swaggerFile of swaggerFiles) {
       try {
         const errorResults = await oav.validateSpec(swaggerFile, undefined);
-
         if (errorResults.validateSpec && errorResults.validateSpec.errors){
-          errors.push(errorResults.validateSpec.errors);
+          for(const error of errorResults.validateSpec.errors) {
+            errors.push( {
+              message: `${error.code}: ${error.message}`,
+              file: swaggerFile,
+              line: error.position?.line,
+              column: error.position?.column
+            } as ReportableOavError);
+          }
         }
       }
       catch (e) {
-        // todo: add error handling beyond logging
-        console.log(e);
+        if (e instanceof Error) {
+          errors.push( {
+            message: e.message,
+            file: swaggerFile
+          } as ReportableOavError);
+        } else {
+          errors.push( {
+            message: `Unhandled error validating ${swaggerFile}: ${e}`,
+            file: swaggerFile
+          } as ReportableOavError);
+        }
       }
     }
 
@@ -64,9 +81,9 @@ export async function processFilesToSpecificationList(rootDirectory: string, fil
           return false;
         }
 
-        let swaggerResult = swagger(file);
-        let targetFile = path.join(rootDirectory, file);
-        console.log(`Checking ${targetFile}`);
+        const swaggerResult = swagger(file);
+        const targetFile = path.join(rootDirectory, file);
+        consoleLogger.info(`Checking ${targetFile}`);
 
         // if it's a swagger file, we should check to see if it exists
         // as a deleted file will also show up in the changed files list

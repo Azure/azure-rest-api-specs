@@ -1,3 +1,12 @@
+
+export interface ReportableOavError {
+  message: string;
+  file: string;
+  line?: number;  // we don't always have a line or column if the spec is invalid
+  column?: number;
+}
+
+
 // todo: come up with a better type for this
 export function outputAnnotatedErrors(errors: Array<object>){
   // echo "::error file=src/app.js,line=42,col=13::Something went wrong here"
@@ -14,3 +23,4 @@ export function outputSummaryReport(targetDirectory: string, errors: Array<objec
   */
     console.log(`outputting ${errors} to summary report to ${targetDirectory}`);
 }
+
