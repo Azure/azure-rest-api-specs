@@ -65,7 +65,7 @@ export class Swagger {
         });
       } catch (error) {
         if (isResolverError(error)) {
-          throw new SpecModelError(`Failed to resolve file: ${error.source}`, {
+          throw new SpecModelError(`Failed to resolve file for swagger: ${this.#path}`, {
             cause: error,
             source: error.source,
           });
@@ -163,5 +163,5 @@ export function isResolverError(error) {
   if (!(error instanceof Error)) return false;
 
   const e = /** @type {ResolverError} */ (error);
-  return typeof e.ioErrorCode === "string";
+  return e.name === "ResolverError";
 }
