@@ -1,0 +1,286 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KeyVaultClient",
+    "version": "7.6",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{vaultBaseUrl}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "vaultBaseUrl",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://vault.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://vault.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/settings": {
+      "get": {
+        "operationId": "GetSettings",
+        "summary": "List account settings.",
+        "description": "Retrieves a list of all the available account settings that can be configured.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SettingsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List account settings": {
+            "$ref": "./examples/ListSettings-example.json"
+          }
+        }
+      }
+    },
+    "/settings/{setting-name}": {
+      "get": {
+        "operationId": "GetSetting",
+        "summary": "Get specified account setting object.",
+        "description": "Retrieves the setting object of a specified setting name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SettingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get key vault account setting": {
+            "$ref": "./examples/GetSetting-example.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateSetting",
+        "summary": "Updates key vault account setting, stores it, then returns the setting name and value to the client.",
+        "description": "Description of the pool setting to be updated",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SettingNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to update an account setting.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSettingRequest"
+            },
+            "x-ms-client-flatten": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update key vault account setting": {
+            "$ref": "./examples/UpdateSetting-example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/Error",
+          "description": "The key vault server error.",
+          "readOnly": true,
+          "x-ms-client-name": "innerError"
+        }
+      },
+      "x-nullable": true
+    },
+    "KeyVaultError": {
+      "type": "object",
+      "description": "The key vault error exception.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The key vault server error.",
+          "readOnly": true
+        }
+      }
+    },
+    "Setting": {
+      "type": "object",
+      "description": "A Key Vault account setting.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The account setting to be updated"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the pool setting."
+        },
+        "type": {
+          "$ref": "#/definitions/SettingTypeEnum",
+          "description": "The type specifier of the value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "SettingTypeEnum": {
+      "type": "string",
+      "description": "The type specifier of the value.",
+      "enum": [
+        "boolean"
+      ],
+      "x-ms-enum": {
+        "name": "SettingTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "boolean",
+            "value": "boolean",
+            "description": "A boolean setting value."
+          }
+        ]
+      }
+    },
+    "SettingsListResult": {
+      "type": "object",
+      "description": "The settings list result.",
+      "properties": {
+        "settings": {
+          "type": "array",
+          "description": "A response message containing a list of account settings with their associated value.",
+          "items": {
+            "$ref": "#/definitions/Setting"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "UpdateSettingRequest": {
+      "type": "object",
+      "description": "The update settings request object.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value of the pool setting."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "SettingNameParameter": {
+      "name": "setting-name",
+      "in": "path",
+      "description": "The name of the account setting. Must be a valid settings option.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
