@@ -8116,6 +8116,14 @@
       ],
       "description": "A machine. Contains details about the underlying virtual machine. A machine may be visible here but not in kubectl get nodes; if so it may be because the machine has not been registered with the Kubernetes API Server yet.",
       "properties": {
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "The Availability zone in which machine is located."
+        },
         "properties": {
           "$ref": "#/definitions/MachineProperties",
           "description": "The properties of the machine"
@@ -8217,14 +8225,6 @@
           },
           "readOnly": true,
           "type": "string"
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "The Availability zone in which machine is located."
         }
       },
       "readOnly": true,
