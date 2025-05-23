@@ -85,6 +85,7 @@ describe("SpecModel", () => {
     expect(inputFiles1[0].path).toBe(
       resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
     );
+    expect(inputFiles1[0].tag).toBe(tags[1]);
 
     const jsonDefault = await specModel.toJSONAsync();
     const readmePathDefault = jsonDefault.readmes[0].path;
