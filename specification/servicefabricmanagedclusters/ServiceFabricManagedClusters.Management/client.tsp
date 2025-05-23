@@ -9,6 +9,11 @@ using Microsoft.ServiceFabric;
   "python"
 );
 
+@@clientName(Microsoft.ServiceFabric,
+  "ServiceFabricManagedClustersMgmtClient",
+  "java"
+);
+
 #suppress "deprecated" "@flattenProperty decorator for backwards compatibility with existing spec"
 @@flattenProperty(VMSSExtension.properties);
 
