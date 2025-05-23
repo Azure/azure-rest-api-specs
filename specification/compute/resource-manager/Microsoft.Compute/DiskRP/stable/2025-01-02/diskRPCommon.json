@@ -385,6 +385,11 @@
             "name": "ProvisionedBandwidthCopyOption",
             "modelAsString": true
           }
+        },
+        "instantAccessDurationMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If the resource is a snapshot from a Ultra disk, this determines the time in minutes for the snapshot to be retained for faster restore."
         }
       },
       "required": [
@@ -633,6 +638,32 @@
             "description": "No additional authentication would be performed when accessing export/upload URL."
           }
         ]
+      }
+    },
+    "AvailabilityPolicy": {
+      "properties": {
+        "actionOnDiskDelay": {
+         "type": "string",
+          "description": "Determines on how to handle disks with slow IO.",
+          "enum": [
+            "None",
+            "AutomaticReattach"
+          ],
+          "x-ms-enum": {
+            "name": "AvailabilityPolicyDiskDelay",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Defaults to behavior without av policy specified, which is VM restart upon slow disk io.."
+              },
+              {
+                "value": "AutomaticReattach",
+                "description": "Upon a disk io failure or slow response, try detaching then reattaching the disk."
+              }
+            ]
+          }
+        }
       }
     }
   },
