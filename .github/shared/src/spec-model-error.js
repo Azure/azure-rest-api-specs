@@ -2,7 +2,7 @@
 
 export class SpecModelError extends Error {
   /**
-   * Path to the file that caused the error
+   * Path to file that caused the error
    *
    * @type {string|undefined}
    */
