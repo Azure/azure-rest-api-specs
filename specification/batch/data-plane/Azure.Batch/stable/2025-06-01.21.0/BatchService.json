@@ -15691,6 +15691,16 @@
         "resourceId"
       ]
     },
+    "BatchVmDiskSecurityProfile": {
+      "type": "object",
+      "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.",
+      "properties": {
+        "securityEncryptionType": {
+          "$ref": "#/definitions/SecurityEncryptionTypes",
+          "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs."
+        }
+      }
+    },
     "BatchVmImageReference": {
       "type": "object",
       "description": "A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image.\nTo get the list of all Azure Marketplace Image references verified by Azure Batch, see the\n' List Supported Images ' operation.",
@@ -16563,7 +16573,7 @@
           "description": "The storage account type for managed disk."
         },
         "securityProfile": {
-          "$ref": "#/definitions/VmDiskSecurityProfile",
+          "$ref": "#/definitions/BatchVmDiskSecurityProfile",
           "description": "Specifies the security profile settings for the managed disk."
         }
       }
@@ -17612,16 +17622,6 @@
         "scaleSetVmResourceId": {
           "type": "string",
           "description": "The resource ID of the Compute Node's current Virtual Machine Scale Set VM. Only defined if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'."
-        }
-      }
-    },
-    "VmDiskSecurityProfile": {
-      "type": "object",
-      "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.",
-      "properties": {
-        "securityEncryptionType": {
-          "$ref": "#/definitions/SecurityEncryptionTypes",
-          "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs."
         }
       }
     },
