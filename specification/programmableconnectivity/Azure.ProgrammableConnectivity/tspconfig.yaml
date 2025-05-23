@@ -1,6 +1,12 @@
 parameters:
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
   "service-dir":
-    default: "sdk/programmableconnectivity"
+    default: "sdk/communication"
+  "service-directory-name":
+    default: "communication"
   "dependencies":
     default: ""
 emit:
@@ -28,11 +34,17 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    generate-metadata: true
-    package-dir: "programmableconnectivity-rest"
+    package-dir: "communication-programmableconnectivity"
     package-details:
-      name: "@azure-rest/programmableconnectivity"
+      name: "@azure-rest/communication-programmableconnectivity"
+      description: "Azure client library for Azure Programmable Connectivity services"
     flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-communication-programmableconnectivity"
+    package-dir: "azure-communication-programmableconnectivity"
+    namespace: com.azure.communication.programmableconnectivity
+    flavor: azure
+    generate-test: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
