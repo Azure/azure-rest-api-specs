@@ -12,6 +12,10 @@ using KeyVault;
 // Java configuration
 @@clientName(KeyEncryptionAlgorithm, "KeyExportEncryptionAlgorithm", "java");
 @@clientName(KeyReleaseResult, "ReleaseKeyResult", "java");
+@@clientName(JsonWebKeyCurveName.P256, "P_256", "java");
+@@clientName(JsonWebKeyCurveName.P384, "P_384", "java");
+@@clientName(JsonWebKeyCurveName.P521, "P_521", "java");
+@@clientName(JsonWebKeyCurveName.P256_K, "P_256K", "java");
 @@clientName(JsonWebKeyCurveName, "KeyCurveName", "java");
 @@clientName(JsonWebKeyOperation, "KeyOperation", "java");
 @@clientName(JsonWebKeyType, "KeyType", "java");
