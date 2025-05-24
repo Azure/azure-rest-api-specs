@@ -12,6 +12,6 @@ nodejs:
   generate-package-json: true
   generate-readme-md: true
 input-file:
-- Microsoft.ContainerRegistry/stable/2025-04-01/containerregistry.json
-- Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+- Microsoft.ContainerRegistry/preview/2025-05-01-preview/containerregistry.json
+- Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry_build.json
 ```
