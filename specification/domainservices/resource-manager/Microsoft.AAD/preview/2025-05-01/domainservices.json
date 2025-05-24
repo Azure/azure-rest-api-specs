@@ -27,6 +27,67 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend": {
+      "post": {
+        "tags": [
+          "DomainServices"
+        ],
+        "operationId": "DomainServices_Unsuspend",
+        "summary": "Unsuspend Domain Service",
+        "description": "Unsuspends a suspended Domain Service resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DomainServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Domain service unsuspended successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Domain service unsuspended successfully."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Domain service could not be unsuspended (not in a suspended state or not eligible).",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Domain service could not be unsuspended (not in a suspended state or not eligible)."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unsuspend Domain Service": {
+            "$ref": "./examples/UnsuspendDomainService.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AAD/operations": {
       "get": {
         "tags": [
