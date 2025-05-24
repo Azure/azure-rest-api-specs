@@ -1,5 +1,8 @@
-
-import { annotateFileError, setSummary } from "@azure-tools/specs-shared/error-reporting";
+import {
+  annotateFileError,
+  setSummary,
+} from "@azure-tools/specs-shared/error-reporting";
+import { consoleLogger } from "@azure-tools/specs-shared/logger";
 
 export interface ReportableOavError {
   message: string;
@@ -9,73 +12,99 @@ export interface ReportableOavError {
   column?: number;
 }
 
-export function outputAnnotatedErrors(errors: ReportableOavError[]){
-    errors.forEach((error) => {
-        let msg: string = `${error.message}`;
+export function outputAnnotatedErrors(errors: ReportableOavError[]) {
+  errors.forEach((error) => {
+    let msg: string = `${error.message}`;
 
-        if (error.errorCode) {
-            msg = `${error.errorCode}: ${msg}`;
-        }
-
-        // we only attempt an in-place annotation if we have the line and column associated with the error
-        // otherwise we just depend upon the summary report to show the error
-        if (error.line && error.column) {
-            annotateFileError(error.file, msg, error.line, error.column);
-        }
-    });
-}
-
-export function outputSuccessSummary(swaggerFiles: string[], reportName: string) {
-    let builtLines: string[] = [];
-
-    builtLines.push(`## All specifications passed ${reportName}`);
-    builtLines.push("| File | Status |");
-    builtLines.push("| --- | --- |");
-    for (const swaggerFile of swaggerFiles) {
-        builtLines.push(`| ${swaggerFile} | ✅ |`);
+    if (error.errorCode) {
+      msg = `${error.errorCode}: ${msg}`;
     }
 
-    const summaryResult = builtLines.join('\n');
+    // we only attempt an in-place annotation if we have the line and column associated with the error
+    // otherwise we just depend upon the summary report to show the error
+    if (error.line && error.column) {
+      annotateFileError(error.file, msg, error.line, error.column);
+    }
+  });
+}
+
+export function outputSuccessSummary(
+  swaggerFiles: string[],
+  reportName: string,
+) {
+  let builtLines: string[] = [];
+
+  builtLines.push(`## All specifications passed ${reportName}`);
+  builtLines.push("| File | Status |");
+  builtLines.push("| --- | --- |");
+  for (const swaggerFile of swaggerFiles) {
+    builtLines.push(`| ${swaggerFile} | ✅ |`);
+  }
+
+  const summaryResult = builtLines.join("\n");
+
+  if (process.env.GITHUB_STEP_SUMMARY) {
     setSummary(summaryResult);
+  } else {
+    consoleLogger.info(summaryResult);
+  }
 }
 
-export function outputErrorSummary(errors: ReportableOavError[], reportName: string) {
-    let builtLines: string[] = [];
+export function outputErrorSummary(
+  errors: ReportableOavError[],
+  reportName: string,
+) {
+  let builtLines: string[] = [];
 
-    builtLines.push(`## Error Summary - ${reportName}`);
+  builtLines.push(`## Error Summary - ${reportName}`);
 
-    // just mapping the report names we want to migrate to the old names here, so we don't have to pull it through everywhere when we want to change it
-    if (reportName === "Swagger Specifications Validation") {
-        reportName = "Swagger SemanticValidation";
+  // just mapping the report names we want to migrate to the old names here, so we don't have to pull it through everywhere when we want to change it
+  if (reportName === "Swagger Specifications Validation") {
+    reportName = "Swagger SemanticValidation";
+  }
+  if (reportName === "Swagger Examples Validation") {
+    reportName = "Swagger ModelValidation";
+  }
+
+  builtLines.push(
+    `⚠️ This check is testing a new version of '${reportName}'. ⚠️`,
+  );
+  builtLines.push(
+    "Failures are expected, and should be completely ignored by spec authors and reviewers.",
+  );
+  builtLines.push(
+    `Meaningful results for this PR are in required check '${reportName}'.`,
+  );
+  builtLines.push("| File | Line#Column | Code | Message |");
+  builtLines.push("| --- | --- | --- | --- |");
+
+  // sort the errors by file name then by error code
+  errors.sort((a, b) => {
+    const nameCompare = a.file.localeCompare(b.file);
+    if (nameCompare !== 0) {
+      return nameCompare;
     }
-    if (reportName === "Swagger Examples Validation") {
-        reportName = "Swagger ModelValidation";
-    }
+    return (a.errorCode || "").localeCompare(b.errorCode || "");
+  });
 
-    builtLines.push(`⚠️ This check is testing a new version of '${reportName}'. ⚠️`)
-    builtLines.push("Failures are expected, and should be completely ignored by spec authors and reviewers.")
-    builtLines.push(`Meaningful results for this PR are in required check '${reportName}'.`)
-    builtLines.push("| File | Line#Column | Code | Message |");
-    builtLines.push("| --- | --- | --- | --- |");
+  errors.forEach((error) => {
+    const fmtLineCol =
+      error.line && error.column ? `${error.line}#${error.column}` : "N/A";
+    builtLines.push(
+      `| ${error.file} | ${fmtLineCol} | ${error.errorCode} | ${error.message} |`,
+    );
+  });
 
-    // sort the errors by file name then by error code
-    errors.sort((a, b) => {
-        const nameCompare = a.file.localeCompare(b.file);
-        if (nameCompare !== 0) {
-            return nameCompare;
-        }
-        return (a.errorCode || "").localeCompare(b.errorCode || "");
-    });
+  builtLines.push("\n");
+  builtLines.push(
+    "> [!IMPORTANT]\n> Repro any individual file's worth of errors by installing `oav@3.5.1` and invoking `oav validate-spec <spec-file-path>`.",
+  );
 
-    errors.forEach((error) => {
-        const fmtLineCol = (error.line && error.column) ? `${error.line}#${error.column}` : "N/A";
-        builtLines.push(`| ${error.file} | ${fmtLineCol} | ${error.errorCode} | ${error.message} |`);
-    });
+  const summaryResult = builtLines.join("\n");
 
-    builtLines.push("\n");
-    builtLines.push("> [!IMPORTANT]\n> Repro any individual file's worth of errors by installing `oav@3.5.1` and invoking `oav validate-spec <spec-file-path>`.");
-
-    const summaryResult = builtLines.join('\n');
+  if (process.env.GITHUB_STEP_SUMMARY) {
     setSummary(summaryResult);
+  } else {
+    consoleLogger.info(summaryResult);
+  }
 }
-

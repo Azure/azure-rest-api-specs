@@ -9,7 +9,9 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "vitest --run --disable-console-intercept --printConsoleTrace=true"
+    "test": "vitest --run --disable-console-intercept --printConsoleTrace=true",
+    "pretty-check": "prettier \"**/*.ts\" --check",
+    "prettyfy": "prettier \"**/*.ts\" --write"
   },
   "dependencies": {
     "@azure-tools/specs-shared": "file:../../../.github/shared",
@@ -21,7 +23,8 @@
     "@types/glob": "^8.1.0",
     "@types/node": "~20.11.0",
     "typescript": "~5.8.2",
-    "vitest": "^3.0.7"
+    "vitest": "^3.0.7",
+    "prettier": "~3.5.3"
   },
   "engines": {
     "node": ">=20.0.0",
