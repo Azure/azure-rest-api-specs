@@ -29,22 +29,14 @@ openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2022-12-01
 ```
-
-### Tag: package-2025-07-01-preview
-These settings apply only when `--tag=2025-07-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-07-01-preview'
-input-file:
-  - Microsoft.LoadTestService/playwright/preview/2025-07-01-preview/playwright.json
-```
-
 ### Tag: package-2024-12-01-preview
 
 These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
-  - Microsoft.LoadTestService/loadtesting/preview/2024-12-01-preview/loadtestservice.json
+  - preview/2024-12-01-preview/loadtestservice.json
+
 directive:
   - where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/limits/maxMonthlyVirtualUserHours"]
@@ -77,11 +69,11 @@ suppressions:
 
 ### Tag: package-2023-12-01-preview
 
-These settings apply only when `--tag=package-2023-12-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-12-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-2023-12-01-preview'
 input-file:
-  - Microsoft.LoadTestService/loadtesting/preview/2023-12-01-preview/loadtestservice.json
+  - preview/2023-12-01-preview/loadtestservice.json
 suppressions:
   - code: ResourceNameRestriction
     from: loadtestservice.json
@@ -104,7 +96,7 @@ These settings apply only when `--tag=package-2022-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-12-01'
 input-file:
-  - Microsoft.LoadTestService/loadtesting/stable/2022-12-01/loadtestservice.json
+  - stable/2022-12-01/loadtestservice.json
 suppressions:
   - code: ResourceNameRestriction
     from: loadtestservice.json
