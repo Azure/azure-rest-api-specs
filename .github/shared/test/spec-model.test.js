@@ -5,7 +5,7 @@ import { dirname, isAbsolute, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
-import { SpecModel, SpecModelError } from "../src/spec-model.js";
+import { SpecModel } from "../src/spec-model.js";
 import { repoRoot } from "./repo.js";
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
@@ -37,6 +37,7 @@ describe("SpecModel", () => {
     const readme = readmes[0];
     expect(readme.toString()).toContain("Readme");
     expect(readme.path).toBe(resolve(folder, "readme.md"));
+    expect(readme.specModel).toBe(specModel);
 
     expect(readme.getGlobalConfig()).resolves.toEqual({
       "openapi-type": "arm",
@@ -51,6 +52,7 @@ describe("SpecModel", () => {
 
     expect(tags[0].toString()).toContain("Tag");
     expect(tags[0].name).toBe("package-2021-10-01-preview");
+    expect(tags[0].readme).toBe(readme);
 
     const inputFiles0 = [...tags[0].inputFiles.values()];
     expect(inputFiles0.length).toBe(1);
@@ -61,6 +63,7 @@ describe("SpecModel", () => {
         "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
       ),
     );
+    expect(inputFiles0[0].tag).toBe(tags[0]);
 
     const refs0 = [...(await inputFiles0[0].getRefs()).values()].sort((a, b) =>
       a.path.localeCompare(b.path),
@@ -74,6 +77,7 @@ describe("SpecModel", () => {
         "../../../../../common-types/resource-management/v5/types.json",
       ),
     );
+    expect(refs0[0].tag).toBe(tags[0]);
 
     expect(tags[1].name).toBe("package-2021-11-01");
     const inputFiles1 = [...tags[1].inputFiles.values()];
@@ -81,6 +85,7 @@ describe("SpecModel", () => {
     expect(inputFiles1[0].path).toBe(
       resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
     );
+    expect(inputFiles1[0].tag).toBe(tags[1]);
 
     const jsonDefault = await specModel.toJSONAsync();
     const readmePathDefault = jsonDefault.readmes[0].path;
@@ -314,22 +319,6 @@ describe("SpecModel", () => {
 
       expect(actual).toEqual(expected);
     });
-  });
-});
-
-describe("SpecModelError", () => {
-  it("can be turned to a string", () => {
-    const error = new SpecModelError("message", {
-      readme: "readme",
-      tag: "tag",
-      source: "source",
-    });
-    expect(error.toString()).toMatchInlineSnapshot(`
-      "SpecModelError: message
-      	Problem File: source
-      	Readme: readme
-      	Tag: tag"
-    `);
   });
 });
 
