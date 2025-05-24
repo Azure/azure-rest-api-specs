@@ -15,11 +15,9 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    is-modular-library: true
     experimental-extensible-enums: true
-    generate-sample: true
     package-dir: "arm-computeschedule"
-    flavor: "azure"
+    flavor: azure
     package-details:
       name: "@azure/arm-computeschedule"
   "@azure-tools/typespec-csharp":
@@ -32,6 +30,16 @@ options:
     namespace: "com.azure.resourcemanager.computeschedule"
     flavor: "azure"
     service-name: "Compute Schedule"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/computeschedule"
+    package-dir: "armcomputeschedule"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -110,6 +110,7 @@ namespace Microsoft.EventGrid {
   @doc("Details of the Receive operation response.")
   model ReceiveResult {
     @doc("Array of receive responses, one per cloud event.")
+    @visibility(Lifecycle.Read)
     value: ReceiveDetails[];
   }
 
@@ -148,36 +149,44 @@ namespace Microsoft.EventGrid {
   @doc("The result of the Acknowledge operation.")
   model AcknowledgeResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    @visibility(Lifecycle.Read)
     failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully acknowledged cloud events.")
+    @visibility(Lifecycle.Read)
     succeededLockTokens: string[];
   }
 
   @doc("The result of the Release operation.")
   model ReleaseResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    @visibility(Lifecycle.Read)
     failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully released cloud events.")
+    @visibility(Lifecycle.Read)
     succeededLockTokens: string[];
   }
 
   @doc("The result of the Reject operation.")
   model RejectResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    @visibility(Lifecycle.Read)
     failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully rejected cloud events.")
+    @visibility(Lifecycle.Read)
     succeededLockTokens: string[];
   }
 
   @doc("The result of the RenewLock operation.")
   model RenewCloudEventLocksResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    @visibility(Lifecycle.Read)
     failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully renewed locks.")
+    @visibility(Lifecycle.Read)
     succeededLockTokens: string[];
   }
 
