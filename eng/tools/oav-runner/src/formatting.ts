@@ -5,7 +5,7 @@ export interface ReportableOavError {
   message: string;
   file: string;
   errorCode?: string;
-  line?: number;  // we don't always have a line or column if the spec is invalid
+  line?: number;
   column?: number;
 }
 
