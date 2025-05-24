@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2025-01-01-preview"
   },
   "host": "management.azure.com",
@@ -41,11 +41,11 @@
         ],
         "operationId": "Administrators_Create",
         "x-ms-examples": {
-          "Adds an Microsoft Entra Administrator for the server": {
+          "Add a server administrator associated to a Microsoft Entra principal.": {
             "$ref": "./examples/AdministratorAdd.json"
           }
         },
-        "description": "Creates a new server.",
+        "description": "Creates a new server administrator associated to a Microsoft Entra principal.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
@@ -69,7 +69,7 @@
             "schema": {
               "$ref": "#/definitions/ActiveDirectoryAdministratorAdd"
             },
-            "description": "The required parameters for adding an Microsoft Entra Administrator for a server."
+            "description": "Required parameters for adding a server administrator associated to a Microsoft Entra principal."
           }
         ],
         "responses": {
@@ -111,11 +111,11 @@
         ],
         "operationId": "Administrators_Delete",
         "x-ms-examples": {
-          "AdministratorDelete": {
+          "Delete a server administrator associated to a Microsoft Entra principal.": {
             "$ref": "./examples/AdministratorDelete.json"
           }
         },
-        "description": "Deletes an Microsoft Entra Administrator associated with the server.",
+        "description": "Deletes an existing server administrator associated to a Microsoft Entra principal.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -166,11 +166,11 @@
         ],
         "operationId": "Administrators_Get",
         "x-ms-examples": {
-          "ServerGet": {
+          "Get information about a server administrator associated to a Microsoft Entra principal.": {
             "$ref": "./examples/AdministratorGet.json"
           }
         },
-        "description": "Gets information about a server.",
+        "description": "Gets information about a server administrator associated to a Microsoft Entra principal.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -211,11 +211,11 @@
         ],
         "operationId": "Administrators_ListByServer",
         "x-ms-examples": {
-          "AdministratorsListByServer": {
+          "List information about all server administrators associated to Microsoft Entra principals.": {
             "$ref": "./examples/AdministratorsListByServer.json"
           }
         },
-        "description": "List all the AAD administrators for a given server.",
+        "description": "List all server administrators associated to a Microsoft Entra principal.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -257,17 +257,17 @@
         "properties": {
           "$ref": "#/definitions/AdministratorPropertiesForAdd",
           "x-ms-client-flatten": true,
-          "description": "Properties of the Microsoft Entra Administrator."
+          "description": "Properties of the server administrator associated to a Microsoft Entra principal."
         }
       },
-      "description": "Represents an Microsoft Entra Administrator."
+      "description": "Server administrator associated to a Microsoft Entra principal."
     },
     "AdministratorPropertiesForAdd": {
       "type": "object",
       "properties": {
         "principalType": {
           "type": "string",
-          "description": "The principal type used to represent the type of Microsoft Entra Administrator.",
+          "description": "The type of Microsoft Entra principal to which the server administrator is associated.",
           "enum": [
             "Unknown",
             "User",
@@ -286,7 +286,7 @@
         },
         "principalName": {
           "type": "string",
-          "description": "Microsoft Entra Administrator principal name.",
+          "description": "Name of the Microsoft Entra principal.",
           "x-ms-mutability": [
             "create",
             "update",
@@ -295,21 +295,21 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "The tenantId of the Microsoft Entra Administrator.",
+          "description": "Identifier of the tenant in which the Microsoft Entra principal exists.",
           "x-ms-mutability": [
             "create",
             "update"
           ]
         }
       },
-      "description": "The properties of an Microsoft Entra Administrator."
+      "description": "Properties of a server administrator associated to a Microsoft Entra principal."
     },
     "AdministratorProperties": {
       "type": "object",
       "properties": {
         "principalType": {
           "type": "string",
-          "description": "The principal type used to represent the type of Microsoft Entra Administrator.",
+          "description": "Type of Microsoft Entra principal to which the server administrator is associated.",
           "enum": [
             "Unknown",
             "User",
@@ -328,7 +328,7 @@
         },
         "principalName": {
           "type": "string",
-          "description": "Microsoft Entra Administrator principal name.",
+          "description": "Name of the Microsoft Entra principal.",
           "x-ms-mutability": [
             "create",
             "update",
@@ -337,7 +337,7 @@
         },
         "objectId": {
           "type": "string",
-          "description": "The objectId of the Microsoft Entra Administrator.",
+          "description": "Object identifier of the Microsoft Entra principal.",
           "x-ms-mutability": [
             "create",
             "update",
@@ -346,7 +346,7 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "The tenantId of the Microsoft Entra Administrator.",
+          "description": "Identifier of the tenant in which the Microsoft Entra principal exists.",
           "x-ms-mutability": [
             "create",
             "update",
@@ -354,7 +354,7 @@
           ]
         }
       },
-      "description": "The properties of an Microsoft Entra Administrator."
+      "description": "Properties of a server administrator associated to a Microsoft Entra principal."
     },
     "ActiveDirectoryAdministrator": {
       "type": "object",
@@ -362,7 +362,7 @@
         "properties": {
           "$ref": "#/definitions/AdministratorProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of the Microsoft Entra Administrator."
+          "description": "Properties of a server administrator associated to a Microsoft Entra principal."
         }
       },
       "allOf": [
@@ -373,7 +373,7 @@
       "required": [
         "properties"
       ],
-      "description": "Represents an Microsoft Entra Administrator."
+      "description": "Server administrator associated to a Microsoft Entra principal."
     },
     "AdministratorListResult": {
       "type": "object",
@@ -383,14 +383,14 @@
           "items": {
             "$ref": "#/definitions/ActiveDirectoryAdministrator"
           },
-          "description": "The list of Microsoft Entra Administrators"
+          "description": "List of server administrators associated to Microsoft Entra principals."
         },
         "nextLink": {
-          "description": "The link used to get the next page of Microsoft Entra administrators.",
+          "description": "Link used to get the next page of results.",
           "type": "string"
         }
       },
-      "description": "A list of Microsoft Entra Administrators."
+      "description": "List of server administrators associated to Microsoft Entra principals."
     }
   },
   "parameters": {
@@ -399,7 +399,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Guid of the objectId for the administrator.",
+      "description": "Object identifier of the Microsoft Entra principal.",
       "x-ms-parameter-location": "method"
     }
   }

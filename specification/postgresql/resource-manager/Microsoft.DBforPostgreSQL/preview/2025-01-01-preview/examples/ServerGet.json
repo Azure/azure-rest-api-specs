@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "serverName": "testpgflex",
-    "resourceGroupName": "testrg",
     "api-version": "2025-01-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver"
   },
   "responses": {
     "200": {
@@ -13,7 +13,7 @@
           "tier": "GeneralPurpose"
         },
         "systemData": {
-          "createdAt": "2024-12-02T21:26:40.2439205Z"
+          "createdAt": "2025-01-01T18:30:22.123456Z"
         },
         "properties": {
           "replica": {
@@ -38,16 +38,16 @@
             "activeDirectoryAuth": "Disabled",
             "passwordAuth": "Enabled"
           },
-          "fullyQualifiedDomainName": "testpgflex.postgres.database.azure.com",
+          "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
           "version": "16",
           "minorVersion": "8",
-          "administratorLogin": "login",
+          "administratorLogin": "administratorlogin",
           "state": "Ready",
           "availabilityZone": "1",
           "backup": {
             "backupRetentionDays": 7,
             "geoRedundantBackup": "Enabled",
-            "earliestRestoreDate": "2025-02-25T02:11:46.457806+00:00"
+            "earliestRestoreDate": "2025-01-01T18:35:22.123456Z"
           },
           "highAvailability": {
             "mode": "Disabled",
@@ -62,9 +62,9 @@
           "replicationRole": "Primary",
           "replicaCapacity": 5
         },
-        "location": "East US",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testpgflex",
-        "name": "testpgflex",
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
     }

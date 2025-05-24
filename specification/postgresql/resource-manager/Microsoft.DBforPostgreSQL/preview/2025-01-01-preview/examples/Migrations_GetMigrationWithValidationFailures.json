@@ -2,9 +2,9 @@
   "parameters": {
     "api-version": "2025-01-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "testrg",
-    "targetDbServerName": "testtarget",
-    "migrationName": "testmigrationwithvalidationfailure"
+    "resourceGroupName": "exampleresourcegroup",
+    "targetDbServerName": "exampletarget",
+    "migrationName": "examplemigration"
   },
   "responses": {
     "200": {
@@ -18,8 +18,8 @@
               "dbDetails": {},
               "validationDetails": {
                 "status": "Failed",
-                "validationStartTimeInUtc": "2023-10-17T19:19:59.91782Z",
-                "validationEndTimeInUtc": "2023-10-17T19:20:33.1368946Z",
+                "validationStartTimeInUtc": "2025-01-01T18:30:22.123456Z",
+                "validationEndTimeInUtc": "2025-01-01T20:30:22.123456Z",
                 "serverLevelValidationDetails": [
                   {
                     "type": "AuthenticationAndConnectivityValidation",
@@ -36,9 +36,9 @@
                 ],
                 "dbLevelValidationDetails": [
                   {
-                    "databaseName": "c.utf-8",
-                    "startedOn": "2023-10-17T19:20:01.830801Z",
-                    "endedOn": "2023-10-17T19:20:02.810871Z",
+                    "databaseName": "exampledatabase1",
+                    "startedOn": "2025-01-01T18:30:22.123456Z",
+                    "endedOn": "2025-01-01T20:30:22.123456Z",
                     "summary": [
                       {
                         "type": "SchemaValidation",
@@ -61,9 +61,9 @@
                     ]
                   },
                   {
-                    "databaseName": "postgres",
-                    "startedOn": "2023-10-17T19:20:01.8309442Z",
-                    "endedOn": "2023-10-17T19:20:02.8109414Z",
+                    "databaseName": "exampledatabase2",
+                    "startedOn": "2025-01-01T18:30:22.123456Z",
+                    "endedOn": "2025-01-01T20:30:22.123456Z",
                     "summary": [
                       {
                         "type": "SchemaValidation",
@@ -80,9 +80,9 @@
                     ]
                   },
                   {
-                    "databaseName": "readme_to_recover",
-                    "startedOn": "2023-10-17T19:20:01.8309447Z",
-                    "endedOn": "2023-10-17T19:20:02.8109415Z",
+                    "databaseName": "exampledatabase3",
+                    "startedOn": "2025-01-01T18:30:22.123456Z",
+                    "endedOn": "2025-01-01T20:30:22.123456Z",
                     "summary": [
                       {
                         "type": "SchemaValidation",
@@ -99,9 +99,9 @@
                     ]
                   },
                   {
-                    "databaseName": "testdb1",
-                    "startedOn": "2023-10-17T19:20:01.8309448Z",
-                    "endedOn": "2023-10-17T19:20:02.8109416Z",
+                    "databaseName": "exampledatabase4",
+                    "startedOn": "2025-01-01T18:30:22.123456Z",
+                    "endedOn": "2025-01-01T20:30:22.123456Z",
                     "summary": [
                       {
                         "type": "SchemaValidation",
@@ -114,9 +114,9 @@
                     ]
                   },
                   {
-                    "databaseName": "testdb2",
-                    "startedOn": "2023-10-17T19:20:01.830945Z",
-                    "endedOn": "2023-10-17T19:20:02.8109418Z",
+                    "databaseName": "exampledatabase5",
+                    "startedOn": "2025-01-01T18:30:22.123456Z",
+                    "endedOn": "2025-01-01T20:30:22.123456Z",
                     "summary": [
                       {
                         "type": "SchemaValidation",
@@ -129,9 +129,9 @@
                     ]
                   },
                   {
-                    "databaseName": "testSchema",
-                    "startedOn": "2023-10-17T19:20:01.8309464Z",
-                    "endedOn": "2023-10-17T19:20:02.8109419Z",
+                    "databaseName": "exampledatabase6",
+                    "startedOn": "2025-01-01T18:30:22.123456Z",
+                    "endedOn": "2025-01-01T20:30:22.123456Z",
                     "summary": [
                       {
                         "type": "SchemaValidation",
@@ -144,9 +144,9 @@
                     ]
                   },
                   {
-                    "databaseName": "UnknownCollationTest",
-                    "startedOn": "2023-10-17T19:20:01.8309465Z",
-                    "endedOn": "2023-10-17T19:20:02.810942Z",
+                    "databaseName": "exampledatabase7",
+                    "startedOn": "2025-01-01T18:30:22.123456Z",
+                    "endedOn": "2025-01-01T20:30:22.123456Z",
                     "summary": [
                       {
                         "type": "SchemaValidation",
@@ -169,28 +169,28 @@
             }
           },
           "migrationMode": "Offline",
-          "migrationWindowEndTimeInUtc": "2023-10-17T19:21:00.0434143Z",
+          "migrationWindowEndTimeInUtc": "2025-01-01T20:30:22.123456Z",
           "sourceDbServerResourceId": "20.228.214.65:5432@postgres",
-          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testtarget",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampletarget",
           "dbsToMigrate": [
-            "c.utf-8",
-            "postgres",
-            "readme_to_recover",
-            "testdb1",
-            "testdb2",
-            "testSchema",
-            "UnknownCollationTest"
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4",
+            "exampledatabase5",
+            "exampledatabase6",
+            "exampledatabase7"
           ],
           "setupLogicalReplicationOnSourceDbIfNeeded": "True",
           "overwriteDbsInTarget": "True",
-          "migrationWindowStartTimeInUtc": "2023-10-17T19:19:47.4488908Z",
+          "migrationWindowStartTimeInUtc": "2025-01-01T18:30:22.123456Z",
           "triggerCutover": "True",
           "migrateRoles": "False",
           "migrationOption": "Validate"
         },
-        "location": "East US",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testtarget/migrations/testmigrationwithvalidationfailure",
-        "name": "testmigrationwithvalidationfailure",
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampletarget/migrations/examplemigration",
+        "name": "examplemigration",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
       }
     }

@@ -2,17 +2,17 @@
   "parameters": {
     "api-version": "2025-01-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "testrg",
-    "targetDbServerName": "testtarget",
-    "migrationName": "testmigration",
+    "resourceGroupName": "exampleresourcegroup",
+    "targetDbServerName": "exampletarget",
+    "migrationName": "examplemigration",
     "parameters": {
       "properties": {
-        "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
+        "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
         "dbsToMigrate": [
-          "db1",
-          "db2",
-          "db3",
-          "db4"
+          "exampledatabase1",
+          "exampledatabase2",
+          "exampledatabase3",
+          "exampledatabase4"
         ],
         "secretParameters": {
           "adminCredentials": {
@@ -22,8 +22,8 @@
         },
         "migrationMode": "Offline",
         "overwriteDbsInTarget": "True",
-        "sourceDbServerFullyQualifiedDomainName": "testsourcefqdn.example.com",
-        "targetDbServerFullyQualifiedDomainName": "test-target-fqdn.example.com"
+        "sourceDbServerFullyQualifiedDomainName": "examplesource.contoso.com",
+        "targetDbServerFullyQualifiedDomainName": "exampletarget.contoso.com"
       },
       "location": "westus"
     }
@@ -40,19 +40,19 @@
               "currentSubState": "PerformingPreRequisiteSteps"
             }
           },
-          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
-          "sourceDbServerFullyQualifiedDomainName": "testsourcefqdn.example.com",
-          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
-          "targetDbServerFullyQualifiedDomainName": "test-target-fqdn.example.com",
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+          "sourceDbServerFullyQualifiedDomainName": "examplesource.contoso.com",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "targetDbServerFullyQualifiedDomainName": "exampletarget.contoso.com",
           "dbsToMigrate": [
-            "db1",
-            "db2",
-            "db3",
-            "db4"
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4"
           ],
           "setupLogicalReplicationOnSourceDbIfNeeded": "False",
           "overwriteDbsInTarget": "True",
-          "migrationWindowStartTimeInUtc": "2024-10-10T16:05:58.895Z",
+          "migrationWindowStartTimeInUtc": "2025-01-01T18:30:22.123456Z",
           "startDataMigration": "False",
           "triggerCutover": "False",
           "migrateRoles": "False"
@@ -61,8 +61,8 @@
           "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         "location": "westus",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigration",
-        "name": "testmigration",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "name": "examplemigration",
         "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
       }
     },
@@ -77,19 +77,19 @@
               "currentSubState": "PerformingPreRequisiteSteps"
             }
           },
-          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
-          "sourceDbServerFullyQualifiedDomainName": "testsourcefqdn.example.com",
-          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
-          "targetDbServerFullyQualifiedDomainName": "test-target-fqdn.example.com",
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+          "sourceDbServerFullyQualifiedDomainName": "examplesource.contoso.com",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "targetDbServerFullyQualifiedDomainName": "exampletarget.contoso.com",
           "dbsToMigrate": [
-            "db1",
-            "db2",
-            "db3",
-            "db4"
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4"
           ],
           "setupLogicalReplicationOnSourceDbIfNeeded": "False",
           "overwriteDbsInTarget": "True",
-          "migrationWindowStartTimeInUtc": "2024-10-10T16:05:58.895Z",
+          "migrationWindowStartTimeInUtc": "2025-01-01T18:30:22.123456Z",
           "startDataMigration": "False",
           "triggerCutover": "False",
           "migrateRoles": "False"
@@ -98,8 +98,8 @@
           "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         "location": "westus",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigration",
-        "name": "testmigration",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "name": "examplemigration",
         "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
       }
     }

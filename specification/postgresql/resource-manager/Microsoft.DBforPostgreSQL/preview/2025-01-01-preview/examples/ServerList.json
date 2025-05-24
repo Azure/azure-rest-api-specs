@@ -14,7 +14,7 @@
               "tier": "GeneralPurpose"
             },
             "systemData": {
-              "createdAt": "2025-03-03T17:44:30.7095047Z"
+              "createdAt": "2025-01-01T18:30:22.123456Z"
             },
             "properties": {
               "replica": {
@@ -30,8 +30,8 @@
               },
               "network": {
                 "publicNetworkAccess": "Disabled",
-                "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrgn/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-subnet",
-                "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrgn/providers/Microsoft.Network/privateDnsZones/pgtest2.private.postgres.database.azure.com"
+                "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup1/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork1/subnets/examplesubnet1",
+                "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup1/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone1.postgres.database.azure.com"
               },
               "dataEncryption": {
                 "type": "SystemManaged"
@@ -41,16 +41,16 @@
                 "passwordAuth": "Enabled",
                 "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
               },
-              "fullyQualifiedDomainName": "pgtest2.postgres.database.azure.com",
+              "fullyQualifiedDomainName": "exampleserver1.postgres.database.azure.com",
               "version": "16",
               "minorVersion": "8",
-              "administratorLogin": "login",
+              "administratorLogin": "administratorlogin",
               "state": "Ready",
               "availabilityZone": "1",
               "backup": {
                 "backupRetentionDays": 7,
                 "geoRedundantBackup": "Enabled",
-                "earliestRestoreDate": "2025-03-03T17:49:56.9406043+00:00"
+                "earliestRestoreDate": "2025-01-01T18:35:22.123456Z"
               },
               "highAvailability": {
                 "mode": "ZoneRedundant",
@@ -66,12 +66,12 @@
               "replicationRole": "Primary",
               "replicaCapacity": 5
             },
-            "location": "East US",
+            "location": "westus",
             "tags": {
               "VnetServer": "1"
             },
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrgn/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtest2",
-            "name": "pgtest2",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup1/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver1",
+            "name": "exampleserver1",
             "type": "Microsoft.DBforPostgreSQL/flexibleServers"
           },
           {
@@ -80,7 +80,7 @@
               "tier": "GeneralPurpose"
             },
             "systemData": {
-              "createdAt": "2025-03-03T23:41:01.1029493Z"
+              "createdAt": "2025-01-01T19:30:22.123456Z"
             },
             "properties": {
               "replica": {
@@ -106,16 +106,16 @@
                 "passwordAuth": "Enabled",
                 "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
               },
-              "fullyQualifiedDomainName": "pgtest3.postgres.database.azure.com",
+              "fullyQualifiedDomainName": "exampleserver2.postgres.database.azure.com",
               "version": "16",
               "minorVersion": "8",
-              "administratorLogin": "login",
+              "administratorLogin": "administratorlogin",
               "state": "Ready",
               "availabilityZone": "2",
               "backup": {
                 "backupRetentionDays": 7,
                 "geoRedundantBackup": "Enabled",
-                "earliestRestoreDate": "2025-03-03T23:48:24.4917632+00:00"
+                "earliestRestoreDate": "2025-01-01T19:35:22.123456Z"
               },
               "highAvailability": {
                 "mode": "ZoneRedundant",
@@ -131,10 +131,10 @@
               "replicationRole": "Primary",
               "replicaCapacity": 5
             },
-            "location": "East US",
+            "location": "westus",
             "tags": {},
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg6/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtest3",
-            "name": "pgtest3",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup2/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver2",
+            "name": "exampleserver2",
             "type": "Microsoft.DBforPostgreSQL/flexibleServers"
           },
           {
@@ -144,7 +144,7 @@
             },
             "identity": {
               "userAssignedIdentities": {
-                "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrgn/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-user": {
+                "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup3/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity3": {
                   "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
                   "clientId": "tttttt-tttt-tttt-tttt-tttttttttttt"
                 }
@@ -154,7 +154,7 @@
               "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
             },
             "systemData": {
-              "createdAt": "2024-11-23T00:13:34.8647372Z"
+              "createdAt": "2025-01-01T20:30:22.123456Z"
             },
             "properties": {
               "replica": {
@@ -175,24 +175,24 @@
               "dataEncryption": {
                 "primaryEncryptionKeyStatus": "Valid",
                 "type": "AzureKeyVault",
-                "primaryKeyURI": "https://test-vault1.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg2/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-user"
+                "primaryKeyURI": "https://examplekeyvault3.vault.azure.net/keys/examplekey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup3/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity3"
               },
               "authConfig": {
                 "activeDirectoryAuth": "Enabled",
                 "passwordAuth": "Enabled",
                 "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
               },
-              "fullyQualifiedDomainName": "pgtest6.postgres.database.azure.com",
+              "fullyQualifiedDomainName": "exampleserver3.postgres.database.azure.com",
               "version": "16",
               "minorVersion": "8",
-              "administratorLogin": "login",
+              "administratorLogin": "administratorlogin",
               "state": "Ready",
               "availabilityZone": "1",
               "backup": {
                 "backupRetentionDays": 7,
                 "geoRedundantBackup": "Disabled",
-                "earliestRestoreDate": "2025-02-25T01:24:56.2972732+00:00"
+                "earliestRestoreDate": "2025-01-01T20:35:22.123456Z"
               },
               "highAvailability": {
                 "mode": "Disabled",
@@ -207,10 +207,10 @@
               "replicationRole": "Primary",
               "replicaCapacity": 5
             },
-            "location": "East US 2",
+            "location": "westus",
             "tags": {},
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrgn/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtest6",
-            "name": "pgtest6",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup3/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver3",
+            "name": "exampleserver3",
             "type": "Microsoft.DBforPostgreSQL/flexibleServers"
           },
           {
@@ -219,7 +219,7 @@
               "tier": "GeneralPurpose"
             },
             "systemData": {
-              "createdAt": "2025-02-26T21:17:37.5018500Z"
+              "createdAt": "2025-01-01T21:30:22.123456Z"
             },
             "properties": {
               "replica": {
@@ -244,16 +244,16 @@
                 "activeDirectoryAuth": "Disabled",
                 "passwordAuth": "Enabled"
               },
-              "fullyQualifiedDomainName": "pgtest9.postgres.database.azure.com",
+              "fullyQualifiedDomainName": "exampleserver4.postgres.database.azure.com",
               "version": "16",
               "minorVersion": "8",
-              "administratorLogin": "login",
+              "administratorLogin": "administratorlogin",
               "state": "Ready",
               "availabilityZone": "2",
               "backup": {
                 "backupRetentionDays": 7,
                 "geoRedundantBackup": "Disabled",
-                "earliestRestoreDate": "2025-02-26T21:41:19.3357514+00:00"
+                "earliestRestoreDate": "2025-01-01T21:35:22.123456Z"
               },
               "highAvailability": {
                 "mode": "Disabled",
@@ -268,10 +268,10 @@
               "replicationRole": "Primary",
               "replicaCapacity": 5
             },
-            "location": "East US 2",
+            "location": "westus",
             "tags": {},
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg9/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtest9",
-            "name": "pgtest9",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup4/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver4",
+            "name": "exampleserver4",
             "type": "Microsoft.DBforPostgreSQL/flexibleServers"
           }
         ]

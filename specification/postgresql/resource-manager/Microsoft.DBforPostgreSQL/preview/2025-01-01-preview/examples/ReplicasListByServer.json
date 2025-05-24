@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "serverName": "sourcepgservername",
-    "resourceGroupName": "testrg",
     "api-version": "2025-01-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver"
   },
   "responses": {
     "200": {
@@ -15,10 +15,10 @@
               "tier": "GeneralPurpose"
             },
             "properties": {
-              "fullyQualifiedDomainName": "pgtestsvc5rep.postgres.database.azure.com",
+              "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
               "version": "16",
-              "minorVersion": "6",
-              "administratorLogin": "login",
+              "minorVersion": "8",
+              "administratorLogin": "administratorlogin",
               "state": "Ready",
               "availabilityZone": "2",
               "storage": {
@@ -37,7 +37,7 @@
               "backup": {
                 "backupRetentionDays": 7,
                 "geoRedundantBackup": "Disabled",
-                "earliestRestoreDate": "2025-03-03T00:28:17.7279547+00:00"
+                "earliestRestoreDate": "2025-01-01T18:35:22.123456Z"
               },
               "network": {
                 "publicNetworkAccess": "Enabled"
@@ -61,11 +61,8 @@
               }
             },
             "location": "westus",
-            "tags": {
-              "ElasticServer": "1"
-            },
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc5rep",
-            "name": "pgtestsvc5rep",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+            "name": "exampleserver",
             "type": "Microsoft.DBforPostgreSQL/flexibleServers"
           }
         ]
