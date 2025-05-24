@@ -1,13 +1,32 @@
 // @ts-check
 
-import $RefParser from "@apidevtools/json-schema-ref-parser";
+import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
+import { readFile } from "fs/promises";
 import { relative, resolve } from "path";
 import { mapAsync } from "./array.js";
+import { SpecModelError } from "./spec-model-error.js";
 
 /**
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
+
+/**
+ * @type {import('@apidevtools/json-schema-ref-parser').ResolverOptions}
+ */
+const excludeExamples = {
+  order: 1,
+  canRead: true,
+  read: async (
+    /** @type import('@apidevtools/json-schema-ref-parser').FileInfo */
+    file,
+  ) => {
+    if (example(file.url)) {
+      return "";
+    }
+    return await readFile(file.url, { encoding: "utf8" });
+  },
+};
 
 export class Swagger {
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -16,7 +35,7 @@ export class Swagger {
   /** @type {string} absolute path */
   #path;
 
-  /** @type {Set<Swagger> | undefined} */
+  /** @type {Map<string, Swagger> | undefined} */
   #refs;
 
   /** @type {SpecModel | undefined} backpointer to owning SpecModel */
@@ -35,13 +54,28 @@ export class Swagger {
   }
 
   /**
-   * @returns {Promise<Set<Swagger>>}
+   * @returns {Promise<Map<string, Swagger>>}
    */
   async getRefs() {
     if (!this.#refs) {
-      const schema = await $RefParser.resolve(this.#path, {
-        resolve: { http: false },
-      });
+      let schema;
+      try {
+        schema = await $RefParser.resolve(this.#path, {
+          resolve: { file: excludeExamples, http: false },
+        });
+      } catch (error) {
+        if (error instanceof ResolverError) {
+          throw new SpecModelError(
+            `Failed to resolve file for swagger: ${this.#path}`,
+            {
+              cause: error,
+              source: error.source,
+            },
+          );
+        }
+
+        throw error;
+      }
 
       const refPaths = schema
         .paths("file")
@@ -50,14 +84,14 @@ export class Swagger {
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 
-      this.#refs = new Set(
-        refPaths.map(
-          (p) =>
-            new Swagger(p, {
-              logger: this.#logger,
-              specModel: this.#specModel,
-            }),
-        ),
+      this.#refs = new Map(
+        refPaths.map((p) => {
+          const swagger = new Swagger(p, {
+            logger: this.#logger,
+            specModel: this.#specModel,
+          });
+          return [swagger.path, swagger];
+        }),
       );
     }
 
@@ -83,7 +117,7 @@ export class Swagger {
           : this.#path,
       refs: options?.includeRefs
         ? await mapAsync(
-            [...(await this.getRefs())].sort((a, b) =>
+            [...(await this.getRefs()).values()].sort((a, b) =>
               a.path.localeCompare(b.path),
             ),
             async (s) =>
