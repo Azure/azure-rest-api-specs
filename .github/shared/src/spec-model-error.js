@@ -24,9 +24,9 @@ export class SpecModelError extends Error {
    * @param {string} message
    * @param {Object} [options]
    * @param {Error} [options.cause]
-   * @param {string} [options.source]
-   * @param {string} [options.readme]
-   * @param {string} [options.tag]
+   * @param {string} [options.source] Path to file that caused the error
+   * @param {string} [options.readme] Path to readme that caused the error (if known)
+   * @param {string} [options.tag] Name of tag that caused the error (if known)
    */
   constructor(message, options) {
     super(message, { cause: options?.cause });
