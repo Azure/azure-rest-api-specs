@@ -21,8 +21,5 @@ jobs:
 
       - name: Validate Swagger Specifications
         run: |
-          npm exec --no -- oav-runner $GITHUB_WORKSPACE
-        env:
-          # Some LintDiff runs are memory intensive and require more than the
-          # default.
-          NODE_OPTIONS: '--max-old-space-size=8192'
+          npm exec --no -- oav-runner $GITHUB_WORKSPACE specs
+

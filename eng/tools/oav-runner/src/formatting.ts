@@ -12,11 +12,9 @@ export interface ReportableOavError {
 export function outputAnnotatedErrors(errors: ReportableOavError[]){
     errors.forEach((error) => {
         let msg: string = `${error.message}`;
-        let prefix = "";
 
         if (error.errorCode) {
-            prefix = `${error.errorCode}: `;
-            msg = `${prefix}${msg}`;
+            msg = `${error.errorCode}: ${msg}`;
         }
 
         // we only attempt an in-place annotation if we have the line and column associated with the error
@@ -27,7 +25,7 @@ export function outputAnnotatedErrors(errors: ReportableOavError[]){
     });
 }
 
-export function outputSuccessSummary(swaggerFiles: string[], reportName: string="Swagger SemanticValidation") {
+export function outputSuccessSummary(swaggerFiles: string[], reportName: string) {
     let builtLines: string[] = [];
 
     builtLines.push(`## All specifications passed ${reportName}`);
@@ -41,11 +39,20 @@ export function outputSuccessSummary(swaggerFiles: string[], reportName: string=
     setSummary(summaryResult);
 }
 
-export function outputErrorSummary(errors: ReportableOavError[], reportName: string = "Swagger SemanticValidation") {
+export function outputErrorSummary(errors: ReportableOavError[], reportName: string) {
     let builtLines: string[] = [];
 
-    builtLines.push("## Error Summary");
-    builtLines.push("⚠️ This check is testing a new version of 'Swagger SemanticValidation'. ⚠️")
+    builtLines.push(`## Error Summary - ${reportName}`);
+
+    // just mapping the report names we want to migrate to the old names here, so we don't have to pull it through everywhere when we want to change it
+    if (reportName === "Swagger Specifications Validation") {
+        reportName = "Swagger SemanticValidation";
+    }
+    if (reportName === "Swagger Examples Validation") {
+        reportName = "Swagger ModelValidation";
+    }
+
+    builtLines.push(`⚠️ This check is testing a new version of '${reportName}'. ⚠️`)
     builtLines.push("Failures are expected, and should be completely ignored by spec authors and reviewers.")
     builtLines.push(`Meaningful results for this PR are in required check '${reportName}'.`)
     builtLines.push("| File | Line#Column | Code | Message |");
