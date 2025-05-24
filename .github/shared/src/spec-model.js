@@ -4,6 +4,7 @@ import { readdir } from "fs/promises";
 import { resolve } from "path";
 import { mapAsync } from "./array.js";
 import { Readme } from "./readme.js";
+import { SpecModelError } from "./spec-model-error.js";
 
 /**
  * @typedef {Object} ToJSONOptions
@@ -222,36 +223,6 @@ export class SpecModel {
    */
   toString() {
     return `SpecModel(${this.#folder}, {logger: ${this.#logger}}})`;
-  }
-}
-
-export class SpecModelError extends Error {
-  /**
-   * @param {string} message
-   * @param {Object} [options]
-   * @param {string} [options.readme]
-   * @param {string} [options.tag]
-   * @param {string} [options.source]
-   * @param {Error} [options.cause]
-   */
-  constructor(message, { readme, tag, source, cause } = {}) {
-    super(message, { cause });
-
-    this.name = "SpecModelError";
-    this.readme = readme;
-    this.tag = tag;
-    this.source = source;
-  }
-
-  toString() {
-    /* v8 ignore start */
-    return (
-      `SpecModelError: ${this.message}` +
-      `${this.source ? `\n\tProblem File: ${this.source}` : ""}` +
-      `${this.readme ? `\n\tReadme: ${this.readme}` : ""}` +
-      `${this.tag ? `\n\tTag: ${this.tag}` : ""}`
-    );
-    /* v8 ignore stop */
   }
 }
 

@@ -1,10 +1,10 @@
 // @ts-check
 
 import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
+import { readFile } from "fs/promises";
 import { relative, resolve } from "path";
 import { mapAsync } from "./array.js";
-import { SpecModelError } from "./spec-model.js";
-import { readFile } from "fs/promises";
+import { SpecModelError } from "./spec-model-error.js";
 
 /**
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
