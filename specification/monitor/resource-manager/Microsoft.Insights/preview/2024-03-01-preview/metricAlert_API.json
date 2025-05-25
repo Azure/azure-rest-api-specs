@@ -66,6 +66,11 @@
           "criteria"
         ],
         "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["Metric"],
+            "default": "Metric"
+          },
           "windowSize": {
             "type": "string",
             "description": "The period of time that is used to monitor alert activity"
@@ -117,6 +122,11 @@
           "criteria"
         ],
         "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["Query"],
+            "default": "Query"
+          },
           "resolveConfiguration": {
             "$ref": "#/components/schemas/QueryResolveConfiguration"
           },
@@ -229,6 +239,11 @@
           "criteria"
         ],
         "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["Query"],
+            "default": "Query"
+          },
           "resolveConfiguration": {
             "$ref": "#/components/schemas/QueryResolveConfiguration"
           },
@@ -391,10 +406,31 @@
             "description": "The alert rule properties of the resource.",
             "oneOf": [
               {
-                "$ref": "#/components/schemas/MetricAlertsMetricProperties"
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MetricAlertsMetricProperties"
+                  },
+                  {
+                    "required": ["windowSize"],
+                    "not": {
+                      "required": ["resolveConfiguration"]
+                    }
+                  }
+                ]
               },
               {
-                "$ref": "#/components/schemas/MetricAlertsQueryProperties"
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MetricAlertsQueryProperties"
+                  },
+                  {
+                    "not": {
+                      "required": ["windowSize"]
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -407,9 +443,6 @@
       },
       "MetricAlertResourcePatch": {
         "type": "object",
-        "required": [
-          "kind"
-        ],
         "properties": {
           "identity": {
             "$ref": "#/components/schemas/Identity",
@@ -427,10 +460,33 @@
             "description": "The alert rule properties for patch operations.",
             "oneOf": [
               {
-                "$ref": "#/components/schemas/MetricAlertsMetricPropertiesForPatch"
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MetricAlertsMetricPropertiesForPatch"
+                  },
+                  {
+                    "not": {
+                      "required": ["resolveConfiguration"]
+                    }
+                  },
+                  {
+                    "required": ["windowSize"]
+                  }
+                ]
               },
               {
-                "$ref": "#/components/schemas/MetricAlertsQueryPropertiesForPatch"
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MetricAlertsQueryPropertiesForPatch"
+                  },
+                  {
+                    "not": {
+                      "required": ["windowSize"]
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -455,9 +511,6 @@
       },
       "MetricAlertCriteria": {
         "type": "object",
-        "additionalProperties": {
-          "type": "object"
-        },
         "discriminator": {
           "propertyName": "odata.type",
           "mapping": {
@@ -921,6 +974,37 @@
       }
     },
     "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": "The ID of the target subscription."
+      },
+      "ResourceGroupNameParameter": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 90
+        },
+        "description": "The name of the resource group. The name is case insensitive."
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": "The API version to use for this operation."
+      },
       "RuleNameParameter": {
         "name": "ruleName",
         "in": "path",
@@ -928,8 +1012,7 @@
         "schema": {
           "type": "string",
           "description": "The name of the rule."
-        },
-        "x-ms-parameter-location": "method"
+        }
       }
     }
   },
@@ -943,10 +1026,10 @@
         "operationId": "MetricAlerts_ListBySubscription",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/components/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -990,13 +1073,13 @@
         "operationId": "MetricAlerts_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/components/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/components/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1040,16 +1123,16 @@
         "operationId": "MetricAlerts_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/components/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/components/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/components/parameters/RuleNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1109,16 +1192,16 @@
         "operationId": "MetricAlerts_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/components/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/components/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/components/parameters/RuleNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
         "requestBody": {
@@ -1192,16 +1275,16 @@
         "operationId": "MetricAlerts_Update",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/components/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/components/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/components/parameters/RuleNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
         "requestBody": {
@@ -1251,16 +1334,16 @@
         "operationId": "MetricAlerts_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/components/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/components/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/components/parameters/RuleNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
