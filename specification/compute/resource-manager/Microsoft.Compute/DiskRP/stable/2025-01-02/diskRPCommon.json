@@ -493,6 +493,18 @@
             "name": "Architecture",
             "modelAsString": true
           }
+        },
+      "supportedSecurityOption": {
+          "type": "string",
+          "description": "Indicates the security capabilities supported by the disk which can be used to create a Trusted or Confidential VM.",
+          "enum": [
+            "TrustedLaunchSupported",
+            "TrustedLaunchAndConfidentialVMSupported"
+          ],
+          "x-ms-enum": {
+            "name": "SupportedSecurityOption",
+            "modelAsString": true
+          }
         }
       },
       "description": "List of supported capabilities persisted on the disk resource for VM use."
