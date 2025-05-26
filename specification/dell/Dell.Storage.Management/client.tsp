@@ -44,11 +44,11 @@ using LiftrBase.Storage;
 @@clientName(ProvisioningState, "DellFileSystemProvisioningState", "csharp");
 @@clientName(UserDetails, "DellFileSystemUserDetails", "csharp");
 @@clientName(ResourceEncryptionType, "DellFileSystemEncryptionType", "csharp");
-@@clientName(ResourceEncryptionType.MicrosoftManagedKeysMMK,
+@@clientName(ResourceEncryptionType.`Microsoft-managed keys (MMK)`,
   "MicrosoftManagedKeysMmk",
   "csharp"
 );
-@@clientName(ResourceEncryptionType.CustomerManagedKeysCMK,
+@@clientName(ResourceEncryptionType.`Customer-managed keys (CMK)`,
   "CustomerManagedKeysCmk",
   "csharp"
 );
