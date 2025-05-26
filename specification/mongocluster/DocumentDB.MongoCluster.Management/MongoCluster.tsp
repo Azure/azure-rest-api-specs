@@ -495,5 +495,5 @@ union DataApiMode {
 @added(Microsoft.DocumentDB.Versions.v2025_02_01_preview)
 model MessageContent {
   /** The mode to indicate whether the Mongo Data API is enabled for a cluster. */
-  msg?: string;
+  content?: string;
 }
