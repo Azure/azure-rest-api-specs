@@ -473,6 +473,7 @@ model AdministratorProperties {
 
 /** Data API properties. */
 @added(Microsoft.DocumentDB.Versions.v2024_10_01_preview)
+@doc("If true, returns a stream of events that happen during the Run as SSE, terminating at `[DONE]`.")
 model DataApiProperties {
   /** The mode to indicate whether the Mongo Data API is enabled for a cluster. */
   mode?: DataApiMode;
