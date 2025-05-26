@@ -40,7 +40,7 @@ input-file:
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: NewRelic.json
-    reason: Seems like a tool bug, as the visibility is set to read only in the TypeSpec already.
+    reason: Seems like a tool bug, as the visibility is set to read only in definition of ProvisioningState.
 ```
 
 ### Tag: package-2022-07-01
