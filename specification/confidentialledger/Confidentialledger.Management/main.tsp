@@ -24,7 +24,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Microsoft Azure Confidential Compute Ledger Control Plane REST API version 2020-12-01-preview.
+ * Microsoft Azure Confidential Compute Ledger Managed CCF Control Plane REST API version 2024-09-19-preview.
  */
 @armProviderNamespace
 @service(#{ title: "ConfidentialLedger" })

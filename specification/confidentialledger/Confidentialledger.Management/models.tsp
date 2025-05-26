@@ -275,6 +275,7 @@ model LedgerProperties {
   /**
    * Prefix for the write load balancer. Example: write
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   writeLBAddressPrefix?: string;
 
   /**
@@ -296,6 +297,7 @@ model LedgerProperties {
 /**
  * AAD based security principal with associated Ledger RoleName
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AADBasedSecurityPrincipal {
   /**
    * UUID/GUID based Principal Id of the Security Principal
@@ -345,6 +347,7 @@ model ConfidentialLedgerBackup {
   /**
    * SAS URI used to access the backup Fileshare.
    */
+  @secret
   uri: string;
 }
 
@@ -376,6 +379,7 @@ model ConfidentialLedgerRestore {
   /**
    * SAS URI used to access the backup fileshare.
    */
+  @secret
   uri: string;
 }
 
@@ -393,6 +397,7 @@ model ConfidentialLedgerRestoreResponse {
 /**
  * Additional Managed CCF properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ManagedCCFProperties {
   /**
    * Unique name for the Managed CCF.
@@ -462,7 +467,7 @@ model MemberIdentityCertificate {
   /**
    * Anything
    */
-  tags?: unknown;
+  tags?: CertificateTags;
 }
 
 /**
@@ -483,11 +488,13 @@ model DeploymentType {
 /**
  * Object that includes an array of Managed CCF and a possible link for next set.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ManagedCCFList is Azure.Core.Page<ManagedCCF>;
 
 /**
  * Object representing Backup properties of a Managed CCF Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ManagedCCFBackup {
   /**
    * The region where the backup of the managed CCF resource will eventually be restored to.
@@ -497,12 +504,14 @@ model ManagedCCFBackup {
   /**
    * SAS URI used to access the backup Fileshare.
    */
+  @secret
   uri: string;
 }
 
 /**
  * Object representing the backup response of a Managed CCF Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ManagedCCFBackupResponse {
   /**
    * Response body stating if the managed CCF resource is being backed up.
@@ -514,6 +523,7 @@ model ManagedCCFBackupResponse {
 /**
  * Object representing Restore properties of Managed CCF Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ManagedCCFRestore {
   /**
    * Fileshare where the managed CCF resource backup is stored.
@@ -528,12 +538,14 @@ model ManagedCCFRestore {
   /**
    * SAS URI used to access the backup Fileshare.
    */
+  @secret
   uri: string;
 }
 
 /**
  * Object representing the restore response of a Managed CCF Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ManagedCCFRestoreResponse {
   /**
    * Response body stating if the managed CCF resource is being restored.

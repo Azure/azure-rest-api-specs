@@ -13,6 +13,7 @@ namespace Microsoft.ConfidentialLedger;
 /**
  * Managed CCF. Contains the properties of Managed CCF Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ManagedCCF
   is Azure.ResourceManager.TrackedResource<ManagedCCFProperties> {
   ...ResourceNameParameter<
@@ -23,6 +24,7 @@ model ManagedCCF
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface ManagedCCFS {
   /**
@@ -40,7 +42,8 @@ interface ManagedCCFS {
   @operationId("ManagedCCF_Create")
   create is ArmResourceCreateOrReplaceAsync<
     ManagedCCF,
-    Response = ArmResourceUpdatedResponse<ManagedCCF> | CreatedResponse
+    Response = ArmResourceUpdatedResponse<ManagedCCF> | (CreatedResponse &
+      ArmAsyncOperationHeader<FinalResult = ManagedCCF>)
   >;
 
   /**

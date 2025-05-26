@@ -48,7 +48,8 @@ interface ConfidentialLedgers {
   update is ArmCustomPatchAsync<
     ConfidentialLedger,
     PatchModel = ConfidentialLedger,
-    Response = ArmResponse<ConfidentialLedger> | CreatedResponse
+    Response = ArmResponse<ConfidentialLedger> | (CreatedResponse &
+      ArmLroLocationHeader)
   >;
 
   /**

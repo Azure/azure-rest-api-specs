@@ -18,3 +18,4 @@ using Microsoft.ConfidentialLedger;
 @@clientName(ManagedCCFS.update::parameters.properties, "ManagedCCF");
 @@clientName(ManagedCCFS.backup::parameters.body, "ManagedCCF");
 @@clientName(ManagedCCFS.restore::parameters.body, "ManagedCCF");
+@@clientName(checkNameAvailability::parameters.body, "nameAvailabilityRequest");
