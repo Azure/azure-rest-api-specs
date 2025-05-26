@@ -37,10 +37,6 @@ These settings apply only when `--tag=package-2022-07-01-preview` is specified o
 ```yaml $(tag) == 'package-2022-07-01-preview'
 input-file:
   - NewRelic.Observability/preview/2022-07-01-preview/NewRelic.json
-suppressions:
-  - code: ProvisioningStateMustBeReadOnly
-    from: NewRelic.json
-    reason: Seems like a tool bug, as the visibility is set to read only in definition of ProvisioningState.
 ```
 
 ### Tag: package-2022-07-01
@@ -113,6 +109,10 @@ These settings apply only when `--tag=package-2025-05-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
   - NewRelic.Observability/preview/2025-05-01-preview/NewRelic.json
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    from: NewRelic.json
+    reason: Seems like a tool bug, as the visibility is set to read only in definition of ProvisioningState.
 ```
 
 ---
