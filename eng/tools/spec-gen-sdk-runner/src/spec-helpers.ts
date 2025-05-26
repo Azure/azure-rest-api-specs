@@ -200,17 +200,6 @@ export function groupSpecConfigPaths(
   const safeTspConfigs = tspconfigs ?? emptyArray;
   const safeReadmes = readmes ?? emptyArray;
 
-  if (skipUnmatchedReadme) {
-    // Explicitly remove the specific readme file from the array
-    // as we don't want to include it for typespec related batch runs
-    const indexToRemove = safeReadmes.indexOf(
-      "specification/awsconnector/resource-manager/readme.md",
-    );
-    if (indexToRemove !== -1) {
-      safeReadmes.splice(indexToRemove, 1);
-    }
-  }
-
   // Quick return for simple cases
   if (safeTspConfigs.length === 0 && safeReadmes.length === 0) {
     return [];
