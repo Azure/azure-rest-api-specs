@@ -93,6 +93,7 @@ interface DrillRuns {
   addNotes is ArmResourceActionAsync<
     DrillRun,
     DrillRunAddNotesRequest,
+    DrillRunActionResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
