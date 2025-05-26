@@ -467,7 +467,8 @@ model MemberIdentityCertificate {
   /**
    * Anything
    */
-  tags?: CertificateTags;
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  tags?: CertificateTags[];
 }
 
 /**

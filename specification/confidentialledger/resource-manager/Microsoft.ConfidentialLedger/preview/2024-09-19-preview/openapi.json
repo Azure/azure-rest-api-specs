@@ -1740,8 +1740,12 @@
           "description": "Member Identity Certificate Encryption Key"
         },
         "tags": {
-          "$ref": "#/definitions/CertificateTags",
-          "description": "Anything"
+          "type": "array",
+          "description": "Anything",
+          "items": {
+            "$ref": "#/definitions/CertificateTags"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
