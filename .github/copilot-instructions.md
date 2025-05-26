@@ -31,7 +31,7 @@ When helping users migrate Swagger to TypeSpec, first ensure they have:
 npm install
 ```
 
-Skip Step 1 for now. Go to Step 2 directly. The TypeSpec folder name is located at `specification/{service-folder-name}/{service-folder-name}.Management`. The TypeSpec folder name is the same as the service folder name, but in PascalCase. For example, for the `compute` service, the TypeSpec folder should be named `Compute.Management`.
+The TypeSpec folder name is located at `specification/{service-folder-name}/{service-folder-name}.Management`. The TypeSpec folder name is the same as the service folder name, but in PascalCase. For example, for the `compute` service, the TypeSpec folder should be named `Compute.Management`.
 
 ## Step 1: Generate TypeSpec with Converter
 
