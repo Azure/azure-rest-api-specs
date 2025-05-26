@@ -5,7 +5,6 @@ import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
-import { Swagger } from "./swagger.js";
 import { Tag } from "./tag.js";
 
 /**
@@ -36,20 +35,21 @@ export class Readme {
   #path;
 
   /**
-   * backpointer to owning SpecModel
+   * SpecModel that contains this Readme
    * @type {SpecModel | undefined}
    */
   #specModel;
 
   /**
-   * @param {string} path
+   * @param {string} path Used for content, unless options.content is specified
    * @param {Object} [options]
-   * @param {string} [options.content]
+   * @param {string} [options.content] If specified, is used instead of reading path from disk
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
    */
   constructor(path, options) {
-    this.#path = resolve(path);
+    this.#path = resolve(options?.specModel?.folder ?? "", path);
+
     this.#content = options?.content;
     this.#logger = options?.logger;
     this.#specModel = options?.specModel;
@@ -154,28 +154,19 @@ export class Readme {
           throw new Error(message);
         }
 
-        /** @type {Map<string, Swagger>} */
-        const inputFiles = new Map();
-
         // It's possible for input-file to be a string or an array
         const inputFilePaths = Array.isArray(obj["input-file"])
           ? obj["input-file"]
           : [obj["input-file"]];
-        for (const swaggerPath of inputFilePaths) {
-          const swaggerPathNormalized =
-            Readme.#normalizeSwaggerPath(swaggerPath);
-          const swaggerPathResolved = resolve(
-            dirname(this.#path),
-            swaggerPathNormalized,
-          );
-          const swagger = new Swagger(swaggerPathResolved, {
-            logger: this.#logger,
-            specModel: this.#specModel,
-          });
-          inputFiles.set(swagger.path, swagger);
-        }
 
-        const tag = new Tag(tagName, inputFiles, { logger: this.#logger });
+        const swaggerPathsResolved = inputFilePaths
+          .map((p) => Readme.#normalizeSwaggerPath(p))
+          .map((p) => resolve(dirname(this.#path), p));
+
+        const tag = new Tag(tagName, swaggerPathsResolved, {
+          logger: this.#logger,
+          readme: this,
+        });
 
         tags.set(tag.name, tag);
       }
@@ -208,6 +199,13 @@ export class Readme {
    */
   get path() {
     return this.#path;
+  }
+
+  /**
+   * @returns {SpecModel | undefined} SpecModel that contains this Readme
+   */
+  get specModel() {
+    return this.#specModel;
   }
 
   /**
