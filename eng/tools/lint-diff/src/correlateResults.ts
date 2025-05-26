@@ -1,8 +1,8 @@
-import { basename, join } from "path";
-import { readFile } from "fs/promises";
+import { basename, join, relative } from "path";
 import { relativizePath, pathExists, isFailure, isWarning } from "./util.js";
 import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./lintdiff-types.js";
 import { getDefaultTag } from "./markdown-utils.js";
+import { Readme } from "@azure-tools/specs-shared/readme";
 
 export async function correlateRuns(
   beforePath: string,
@@ -12,8 +12,10 @@ export async function correlateRuns(
   const runCorrelations = new Map<string, BeforeAfter>();
   console.log("\nCorrelating runs...");
   for (const results of afterChecks) {
-    const { readme, tag } = results;
-    const key = tag ? `${readme}#${tag}` : readme;
+    const { rootPath, readme, tag } = results;
+    const readmePathRelative = relative(rootPath, readme.path);
+
+    const key = tag ? `${readmePathRelative}#${tag}` : readmePathRelative;
     if (runCorrelations.has(key)) {
       throw new Error(`Duplicate key found correlating autorest runs: ${key}`);
     }
@@ -31,10 +33,10 @@ export async function correlateRuns(
     }
 
     // Look for candidates with a matching default tag from the baseline
-    const beforeReadmePath = join(beforePath, readme);
+    const beforeReadmePath = join(beforePath, readmePathRelative);
     if (await pathExists(beforeReadmePath)) {
-      const readmeContent = await readFile(beforeReadmePath, { encoding: "utf-8" });
-      const defaultTag = getDefaultTag(readmeContent);
+      const beforeReadme = new Readme(beforeReadmePath); 
+      const defaultTag = await getDefaultTag(beforeReadme);
       if (!defaultTag) {
         throw new Error(`No default tag found for readme ${readme} in before state`);
       }
@@ -100,9 +102,13 @@ export function getViolations(
     );
 
     const [newItems, existingItems] = getNewItems(beforeViolations, afterViolations);
+
+    const beforeReadmePath = before ? relative(before?.rootPath, before?.readme.path) : "";
+    const afterReadmePath = relative(after.rootPath, after.readme.path);
+
     console.log("Correlation:");
-    console.log(`\tBefore: Readme: ${before?.readme} Tag: ${before?.tag}`);
-    console.log(`\tAfter: Readme : ${after.readme} Tag: ${after.tag}`);
+    console.log(`\tBefore: Readme: ${beforeReadmePath} Tag: ${before?.tag}`);
+    console.log(`\tAfter: Readme : ${afterReadmePath} Tag: ${after.tag}`);
 
     newViolations.push(...newItems);
     existingViolations.push(...existingItems);
