@@ -80,14 +80,9 @@ interface NginxConfigurationResponses {
   @operationId("Configurations_Analysis")
   analysis is ArmResourceActionSync<
     NginxConfigurationResponse,
-    {
-      /**
-       * The NGINX configuration to analyze
-       */
-      @bodyRoot
-      body?: AnalysisCreate;
-    },
-    ArmResponse<AnalysisResult>
+    AnalysisCreate,
+    ArmResponse<AnalysisResult>,
+    OptionalRequestBody = true
   >;
 }
 
@@ -97,4 +92,7 @@ interface NginxConfigurationResponses {
 @@doc(NginxConfigurationResponse.properties, "");
 @@doc(NginxConfigurationResponses.createOrUpdate::parameters.properties,
   "The NGINX configuration"
+);
+@@doc(NginxConfigurationResponses.analysis::parameters.body,
+  "The NGINX configuration to analyze"
 );
