@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2024-07-01
 ```
 
+### Tag: package-2025-02-01-preview
+
+These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01-preview'
+input-file:
+  - Microsoft.DocumentDB/preview/2025-02-01-preview/mongoCluster.json
+```
+
 ### Tag: package-2024-10-01-preview
 
 These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
@@ -47,7 +56,6 @@ input-file:
   - Microsoft.DocumentDB/stable/2024-07-01/mongoCluster.json
 ```
 
-
 ### Tag: package-2024-06-01-preview
 
 These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
@@ -56,7 +64,6 @@ These settings apply only when `--tag=package-2024-06-01-preview` is specified o
 input-file:
   - Microsoft.DocumentDB/preview/2024-06-01-preview/mongoCluster.json
 ```
-
 
 ### Tag: package-2024-03-01-preview
 
@@ -84,6 +91,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
