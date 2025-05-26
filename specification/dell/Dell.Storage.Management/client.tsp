@@ -60,3 +60,23 @@ using LiftrBase.Storage;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(FileSystemResourceProperties.delegatedSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(FileSystemResourceUpdateProperties.delegatedSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(FileSystemResourceProperties.oneFsUrl,
+  url,
+  "csharp"
+);
+@@alternateType(FileSystemResourceUpdateProperties.delegatedSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(FileSystemResourceUpdate.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
