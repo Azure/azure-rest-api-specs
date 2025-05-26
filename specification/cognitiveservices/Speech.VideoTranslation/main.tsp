@@ -256,7 +256,7 @@ model IterationInput {
   enableOcrCorrectionFromSubtitle?: boolean;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("This parameter specifies the primary color of the subtitles in the video translation output. The value should be provided in the format <bb><gg><rr> or #<bb><gg><rr>, where <bb> represents the blue component, <gg> represents the green component, and <rr> represents the red component of the color. For example, EBA205 or #EBA205 would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal")
+  @doc("This parameter specifies the primary color of the subtitles in the video translation output. The value should be provided in the format <rr><gg><bb> or #<rr><gg><bb>, where <rr> represents the red component of the color, <gg> represents the green component, and <bb> represents the blue component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal")
   subtitlePrimaryColor?: string;
 
   @added(ApiVersions.v2025_05_20)
