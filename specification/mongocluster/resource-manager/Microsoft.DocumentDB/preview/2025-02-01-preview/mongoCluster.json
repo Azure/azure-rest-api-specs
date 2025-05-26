@@ -1389,6 +1389,16 @@
         }
       }
     },
+    "MessageContent": {
+      "type": "object",
+      "description": "Data API properties.",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "description": "The mode to indicate whether the Mongo Data API is enabled for a cluster."
+        }
+      }
+    },
     "MongoCluster": {
       "type": "object",
       "description": "Represents a mongo cluster resource.",
@@ -1500,6 +1510,10 @@
         "dataApi": {
           "$ref": "#/definitions/DataApiProperties",
           "description": "The Data API properties of the mongo cluster."
+        },
+        "msg": {
+          "$ref": "#/definitions/MessageContent",
+          "description": "The mongo cluster test message."
         },
         "privateEndpointConnections": {
           "type": "array",
@@ -1683,6 +1697,10 @@
         "dataApi": {
           "$ref": "#/definitions/DataApiProperties",
           "description": "The Data API properties of the mongo cluster."
+        },
+        "msg": {
+          "$ref": "#/definitions/MessageContent",
+          "description": "The mongo cluster test message."
         },
         "previewFeatures": {
           "type": "array",

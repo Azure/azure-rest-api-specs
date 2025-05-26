@@ -156,6 +156,10 @@ model MongoClusterProperties {
   @added(Versions.v2024_10_01_preview)
   dataApi?: DataApiProperties;
 
+  /** The mongo cluster test message. */
+  @added(Versions.v2025_02_01_preview)
+  msg?: MessageContent;
+
   /** List of private endpoint connections. */
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
@@ -484,4 +488,11 @@ union DataApiMode {
 
   /** Mongo Data API is disabled for the cluster. */
   "Disabled",
+}
+
+/** Data API properties. */
+@added(Microsoft.DocumentDB.Versions.v2025_02_01_preview)
+model MessageContent {
+  /** The mode to indicate whether the Mongo Data API is enabled for a cluster. */
+  msg?: string;
 }
