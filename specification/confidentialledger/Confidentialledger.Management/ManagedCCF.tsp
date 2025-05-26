@@ -1,0 +1,131 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ConfidentialLedger;
+/**
+ * Managed CCF. Contains the properties of Managed CCF Resource.
+ */
+model ManagedCCF
+  is Azure.ResourceManager.TrackedResource<ManagedCCFProperties> {
+  ...ResourceNameParameter<
+    Resource = ManagedCCF,
+    KeyName = "appName",
+    SegmentName = "managedCCFs",
+    NamePattern = "^[a-zA-Z0-9]"
+  >;
+}
+
+@armResourceOperations
+interface ManagedCCFS {
+  /**
+   * Retrieves the properties of a Managed CCF app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ManagedCCF_Get")
+  get is ArmResourceRead<ManagedCCF>;
+
+  /**
+   * Creates a Managed CCF with the specified Managed CCF parameters.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("ManagedCCF_Create")
+  create is ArmResourceCreateOrReplaceAsync<
+    ManagedCCF,
+    Response = ArmResourceUpdatedResponse<ManagedCCF> | CreatedResponse
+  >;
+
+  /**
+   * Updates properties of Managed CCF
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @patch(#{ implicitOptionality: false })
+  @operationId("ManagedCCF_Update")
+  update is ArmCustomPatchAsync<ManagedCCF, PatchModel = ManagedCCF>;
+
+  /**
+   * Deletes an existing Managed CCF.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("ManagedCCF_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ManagedCCF,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Retrieves the properties of all Managed CCF apps.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ManagedCCF_ListByResourceGroup")
+  listByResourceGroup is ArmResourceListByParent<
+    ManagedCCF,
+    Parameters = {
+      /**
+       * The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    Response = ArmResponse<ManagedCCFList>
+  >;
+
+  /**
+   * Retrieves the properties of all Managed CCF.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ManagedCCF_ListBySubscription")
+  listBySubscription is ArmListBySubscription<
+    ManagedCCF,
+    Parameters = {
+      /**
+       * The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    Response = ArmResponse<ManagedCCFList>
+  >;
+
+  /**
+   * Backs up a Managed CCF Resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ManagedCCF_Backup")
+  backup is ArmResourceActionAsync<
+    ManagedCCF,
+    ManagedCCFBackup,
+    ArmResponse<ManagedCCFBackupResponse>
+  >;
+
+  /**
+   * Restores a Managed CCF Resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ManagedCCF_Restore")
+  restore is ArmResourceActionAsync<
+    ManagedCCF,
+    ManagedCCFRestore,
+    ArmResponse<ManagedCCFRestoreResponse>
+  >;
+}
+
+@@doc(ManagedCCF.name, "Name of the Managed CCF");
+@@doc(ManagedCCF.properties, "Properties of Managed CCF Resource.");
+@@doc(ManagedCCFS.create::parameters.resource,
+  "Managed CCF Create Request Body"
+);
+@@doc(ManagedCCFS.update::parameters.properties,
+  "Request body for Updating Managed CCF App"
+);
+@@doc(ManagedCCFS.backup::parameters.body, "Managed CCF Backup Request Body");
+@@doc(ManagedCCFS.restore::parameters.body, "Managed CCF Restore Request Body");
