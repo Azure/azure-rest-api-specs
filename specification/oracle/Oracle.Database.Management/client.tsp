@@ -342,3 +342,7 @@ using Oracle.Database;
   "DBVersion",
   "csharp"
 );
+@@clientName(AzureSubscriptions,
+  "OracleAzureSubscriptionsContent",
+  "csharp"
+);
