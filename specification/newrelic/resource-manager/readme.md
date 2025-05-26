@@ -37,6 +37,10 @@ These settings apply only when `--tag=package-2022-07-01-preview` is specified o
 ```yaml $(tag) == 'package-2022-07-01-preview'
 input-file:
   - NewRelic.Observability/preview/2022-07-01-preview/NewRelic.json
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    from: NewRelic.json
+    reason: Seems like a tool bug, as the visibility is set to read only in the TypeSpec already.
 ```
 
 ### Tag: package-2022-07-01
