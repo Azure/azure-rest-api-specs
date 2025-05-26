@@ -12,13 +12,12 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
 @doc("Discovered Asset Endpoint Profile definition.")
-@removed(Versions.v2024_10_01_preview)
 @added(Versions.v2024_07_01_preview)
+@removed(Versions.v2024_10_01_preview)
 model DiscoveredAssetEndpointProfile
   is TrackedResource<DiscoveredAssetEndpointProfileProperties> {
   @doc("Discovered Asset Endpoint Profile name parameter.")
