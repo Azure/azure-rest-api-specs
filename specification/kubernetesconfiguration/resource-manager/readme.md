@@ -28,10 +28,45 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-2023-05
+tag: package-preview-2024-04
 ```
 
----
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2024-04-01-preview/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
+suppressions:  
+  - code: ResourceNameRestriction
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: AvoidAdditionalProperties
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
+```
+
+### Tag: package-preview-2024-04-only
+
+These settings apply only when `--tag=package-preview-2024-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-04-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2024-04-01-preview/fluxconfiguration.json
+```
 
 ### Tag: package-2023-05
 
@@ -319,33 +354,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_kubernetesconfiguration']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)

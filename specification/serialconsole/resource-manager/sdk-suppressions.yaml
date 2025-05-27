@@ -1,0 +1,53 @@
+suppressions:
+  azure-sdk-for-js:
+    - package: "@azure/arm-serialconsole"
+      breaking-changes:
+        - Class MicrosoftSerialConsoleClient has a new signature
+        - Interface DisableSerialConsoleResult no longer has parameter disabled
+        - Interface EnableSerialConsoleResult no longer has parameter disabled
+        - Interface SerialConsoleStatus no longer has parameter disabled
+        - Removed operation SerialPorts.delete
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/serialconsole/armserialconsole
+      breaking-changes:
+        - Field `Disabled` of struct `DisableSerialConsoleResult` has been removed
+        - Field `Disabled` of struct `EnableSerialConsoleResult` has been removed
+        - Field `Disabled` of struct `Status` has been removed
+        - Field `Value` of struct `MicrosoftSerialConsoleClientDisableConsoleResponse` has been removed
+        - Field `Value` of struct `MicrosoftSerialConsoleClientEnableConsoleResponse` has been removed
+        - Field `Value` of struct `MicrosoftSerialConsoleClientGetConsoleStatusResponse` has been removed
+        - Function `*SerialPortsClient.Delete` has been removed
+  azure-sdk-for-python:
+    - package: azure-mgmt-serialconsole
+      breaking-changes:
+        - The 'CloudErrorBody' method 'validate' was deleted or renamed in the current version
+        - The 'DisableSerialConsoleResult' method 'validate' was deleted or renamed in the current version
+        - The 'EnableSerialConsoleResult' method 'validate' was deleted or renamed in the current version
+        - The 'GetSerialConsoleSubscriptionNotFound' method 'validate' was deleted or renamed in the current version
+        - The 'ProxyResource' method 'validate' was deleted or renamed in the current version
+        - The 'Resource' method 'validate' was deleted or renamed in the current version
+        - The 'SerialConsoleOperations' method 'validate' was deleted or renamed in the current version
+        - The 'SerialConsoleOperationsValueItem' method 'validate' was deleted or renamed in the current version
+        - The 'SerialConsoleOperationsValueItemDisplay' method 'validate' was deleted or renamed in the current version
+        - The 'SerialConsoleStatus' method 'validate' was deleted or renamed in the current version
+        - The 'SerialPort' method 'validate' was deleted or renamed in the current version
+        - The 'SerialPortConnectResult' method 'validate' was deleted or renamed in the current version
+        - The 'SerialPortListResult' method 'validate' was deleted or renamed in the current version
+        - The 'SerialPortsOperations' method '__init__' had its parameter 'client' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'SerialPortsOperations' method '__init__' had its parameter 'client' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'SerialPortsOperations' method '__init__' had its parameter 'config' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'SerialPortsOperations' method '__init__' had its parameter 'config' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'SerialPortsOperations' method '__init__' had its parameter 'deserializer' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'SerialPortsOperations' method '__init__' had its parameter 'deserializer' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'SerialPortsOperations' method '__init__' had its parameter 'serializer' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'SerialPortsOperations' method '__init__' had its parameter 'serializer' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'SerialPortsOperations' method 'delete' was deleted or renamed in the current version
+        - The 'SerialPortsOperations' method 'delete' was deleted or renamed in the current version
+        - The class 'DisableSerialConsoleResult' method '__init__' had its parameters re-ordered from '['self', 'disabled', 'kwargs']' to '['self', 'properties', 'kwargs']' in the current version
+        - The class 'EnableSerialConsoleResult' method '__init__' had its parameters re-ordered from '['self', 'disabled', 'kwargs']' to '['self', 'properties', 'kwargs']' in the current version
+        - The class 'MicrosoftSerialConsoleClient' method '__init__' had its parameter 'base_url' default value changed from 'None' to 'str'
+        - The class 'MicrosoftSerialConsoleClient' method '__init__' had its parameter 'base_url' default value changed from 'None' to 'str'
+        - The class 'SerialConsoleStatus' method '__init__' had its parameters re-ordered from '['self', 'disabled', 'kwargs']' to '['self', 'properties', 'kwargs']' in the current version
+        - The model or publicly exposed class 'DisableSerialConsoleResult' had its instance variable 'disabled' deleted or renamed in the current version
+        - The model or publicly exposed class 'EnableSerialConsoleResult' had its instance variable 'disabled' deleted or renamed in the current version
+        - The model or publicly exposed class 'SerialConsoleStatus' had its instance variable 'disabled' deleted or renamed in the current version

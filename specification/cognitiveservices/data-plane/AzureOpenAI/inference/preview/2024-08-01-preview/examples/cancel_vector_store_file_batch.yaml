@@ -1,0 +1,20 @@
+title: Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.
+parameters:
+  endpoint: "{endpoint}"
+  api-version: 2024-08-01-preview
+  vector_store_id: vs_abc123
+  batch_id: vsfb_abc123
+responses:
+  "200":
+    body:
+      id: vsfb_abc123
+      object: vector_store.file_batch
+      created_at: 1699061776
+      vector_store_id: vs_abc123
+      status: cancelling
+      file_counts:
+        in_progress: 12
+        completed: 3
+        failed: 0
+        cancelled: 0
+        total: 15

@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "workspaceName": "myWorkspace",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "privateEndpointConnectionName": "myWorkspace.23456789-1111-1111-1111-111111111111"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/myResourceGroup/providers/Microsoft.Databricks/workspaces/myWorkspace/PrivateEndpointConnections/myWorkspace.23456789-1111-1111-1111-111111111111",
+        "name": "myWorkspace.23456789-1111-1111-1111-111111111111",
+        "type": "Microsoft.Databricks/workspaces/PrivateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/networkResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Pending",
+            "description": "Please approve my request!",
+            "actionsRequired": "None"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

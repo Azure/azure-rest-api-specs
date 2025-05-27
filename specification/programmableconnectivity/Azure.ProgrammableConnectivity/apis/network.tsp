@@ -14,7 +14,7 @@ interface DeviceNetwork {
   @doc("Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.")
   retrieve is Operations.ResourceAction<
     DeviceNetworkRetrievalEndpoint,
-    NetworkIdentifier,
+    BodyParameter<NetworkIdentifier>,
     NetworkRetrievalResult
   >;
 }
@@ -26,7 +26,7 @@ interface DeviceNetwork {
 model DeviceNetworkRetrievalEndpoint {
   @key
   @doc("Static endpoint")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   network: "network";
 }
 

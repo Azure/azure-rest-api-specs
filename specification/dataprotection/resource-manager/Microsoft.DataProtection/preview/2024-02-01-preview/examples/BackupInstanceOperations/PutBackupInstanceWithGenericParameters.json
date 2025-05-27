@@ -1,0 +1,181 @@
+{
+  "parameters": {
+    "subscriptionId": "97cda027-4279-4cde-b4ff-19afa0021d87",
+    "resourceGroupName": "ESAN-ECYBVTRG",
+    "vaultName": "ESANVault",
+    "api-version": "2024-02-01-preview",
+    "backupInstanceName": "esan-volgroup-bi",
+    "parameters": {
+      "tags": {
+        "key1": "val1"
+      },
+      "properties": {
+        "friendlyName": "esan-volgroup-bi",
+        "dataSourceInfo": {
+          "resourceID": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.ElasticSan/elasticSans/ecy-bvt-adhoc/volumeGroups/esan-volgroup",
+          "resourceUri": "SampleresourceUri123",
+          "datasourceType": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+          "resourceName": "esan-volgroup-bi",
+          "resourceType": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+          "resourceLocation": "eastus2euap",
+          "objectType": "Datasource"
+        },
+        "dataSourceSetInfo": {
+          "resourceID": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.ElasticSan/elasticSans/ecy-bvt-adhoc",
+          "datasourceType": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+          "resourceType": "Microsoft.ElasticSan/elasticSans",
+          "resourceLocation": "eastus2euap",
+          "objectType": "DatasourceSet"
+        },
+        "policyInfo": {
+          "policyId": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.DataProtection/backupVaults/ESANVault/backupPolicies/BVTPolicy",
+          "policyParameters": {
+            "dataStoreParametersList": [
+              {
+                "resourceGroupId": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG",
+                "objectType": "AzureOperationalStoreParameters",
+                "dataStoreType": "OperationalStore"
+              }
+            ],
+            "backupDatasourceParametersList": [
+              {
+                "objectType": "GenericBackupDatasourceParameters",
+                "resourceSelectors": [
+                  "vol1",
+                  "vol2",
+                  "vol3"
+                ]
+              }
+            ]
+          }
+        },
+        "objectType": "BackupInstance"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.DataProtection/backupVaults/ESANVault/operationStatus/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2024-02-01-preview",
+        "Retry-After": "60"
+      },
+      "body": {
+        "id": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.DataProtection/backupVaults/ESANVault/backupInstances/esan-volgroup-bi",
+        "name": "esan-volgroup-bi",
+        "type": "Microsoft.DataProtection/backupVaults/backupInstances",
+        "tags": {
+          "key1": "val1"
+        },
+        "properties": {
+          "friendlyName": "esan-volgroup-bi",
+          "dataSourceInfo": {
+            "resourceID": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.ElasticSan/elasticSans/ecy-bvt-adhoc/volumeGroups/esan-volgroup",
+            "resourceUri": "SampleresourceUri123",
+            "datasourceType": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+            "resourceName": "esan-volgroup-bi",
+            "resourceType": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+            "resourceLocation": "eastus2euap",
+            "objectType": "Datasource"
+          },
+          "dataSourceSetInfo": {
+            "resourceID": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.ElasticSan/elasticSans/ecy-bvt-adhoc",
+            "datasourceType": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+            "resourceType": "Microsoft.ElasticSan/elasticSans",
+            "resourceLocation": "eastus2euap",
+            "objectType": "DatasourceSet"
+          },
+          "policyInfo": {
+            "policyId": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.DataProtection/backupVaults/ESANVault/backupPolicies/BVTPolicy",
+            "policyParameters": {
+              "dataStoreParametersList": [
+                {
+                  "resourceGroupId": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG",
+                  "objectType": "AzureOperationalStoreParameters",
+                  "dataStoreType": "OperationalStore"
+                }
+              ],
+              "backupDatasourceParametersList": [
+                {
+                  "objectType": "GenericBackupDatasourceParameters",
+                  "resourceSelectors": [
+                    "vol1",
+                    "vol2",
+                    "vol3"
+                  ]
+                }
+              ]
+            }
+          },
+          "protectionStatus": {
+            "status": "NotProtected"
+          },
+          "provisioningState": "Provisioning",
+          "objectType": "BackupInstance"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.windowsazure.com/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.DataProtection/backupVaults/ESANVault/operationStatus/YWUzNDFkMzQtZmM5OS00MmUyLWEzNDMtZGJkMDIxZjlmZjgzOzdmYzBiMzhmLTc2NmItNDM5NS05OWQ1LTVmOGEzNzg4MWQzNA==?api-version=2024-02-01-preview",
+        "Location": "https://management.windowsazure.com/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.DataProtection/backupVaults/ESANVault/backupInstances/testInstance1/operationResults/YWUzNDFkMzQtZmM5OS00MmUyLWEzNDMtZGJkMDIxZjlmZjgzOzdmYzBiMzhmLTc2NmItNDM5NS05OWQ1LTVmOGEzNzg4MWQzNA==?api-version=2024-02-01-preview",
+        "Retry-After": "60"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.DataProtection/backupVaults/ESANVault/backupInstances/esan-volgroup-bi",
+        "name": "esan-volgroup-bi",
+        "type": "Microsoft.DataProtection/backupVaults/backupInstances",
+        "tags": {
+          "key1": "val1"
+        },
+        "properties": {
+          "friendlyName": "esan-volgroup-bi",
+          "dataSourceInfo": {
+            "resourceID": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.ElasticSan/elasticSans/ecy-bvt-adhoc/volumeGroups/esan-volgroup",
+            "resourceUri": "SampleresourceUri123",
+            "datasourceType": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+            "resourceName": "esan-volgroup-bi",
+            "resourceType": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+            "resourceLocation": "eastus2euap",
+            "objectType": "Datasource"
+          },
+          "dataSourceSetInfo": {
+            "resourceID": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.ElasticSan/elasticSans/ecy-bvt-adhoc",
+            "datasourceType": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+            "resourceType": "Microsoft.ElasticSan/elasticSans",
+            "resourceLocation": "eastus2euap",
+            "objectType": "DatasourceSet"
+          },
+          "policyInfo": {
+            "policyId": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG/providers/Microsoft.DataProtection/backupVaults/ESANVault/backupPolicies/BVTPolicy",
+            "policyParameters": {
+              "dataStoreParametersList": [
+                {
+                  "resourceGroupId": "/subscriptions/97cda027-4279-4cde-b4ff-19afa0021d87/resourceGroups/ESAN-ECYBVTRG",
+                  "objectType": "AzureOperationalStoreParameters",
+                  "dataStoreType": "OperationalStore"
+                }
+              ],
+              "backupDatasourceParametersList": [
+                {
+                  "objectType": "GenericBackupDatasourceParameters",
+                  "resourceSelectors": [
+                    "vol1",
+                    "vol2",
+                    "vol3"
+                  ]
+                }
+              ]
+            }
+          },
+          "protectionStatus": {
+            "status": "NotProtected"
+          },
+          "provisioningState": "Provisioned",
+          "objectType": "BackupInstance"
+        }
+      }
+    }
+  }
+}

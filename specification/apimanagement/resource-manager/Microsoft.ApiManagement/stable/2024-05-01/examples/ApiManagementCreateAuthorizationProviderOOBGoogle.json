@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "authorizationProviderId": "google",
+    "parameters": {
+      "properties": {
+        "displayName": "google",
+        "identityProvider": "google",
+        "oauth2": {
+          "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apimService1",
+          "grantTypes": {
+            "authorizationCode": {
+              "clientId": "99999999-xxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
+              "clientSecret": "clientsecretvalue",
+              "scopes": "openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/google",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders",
+        "name": "google",
+        "properties": {
+          "displayName": "google",
+          "identityProvider": "google",
+          "oauth2": {
+            "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apimService1",
+            "grantTypes": {
+              "authorizationCode": {
+                "clientId": "99999999-xxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
+                "scopes": "openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+              }
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/google",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders",
+        "name": "google",
+        "properties": {
+          "displayName": "google",
+          "identityProvider": "google",
+          "oauth2": {
+            "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apimService1",
+            "grantTypes": {
+              "authorizationCode": {
+                "clientId": "99999999-xxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
+                "scopes": "openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
+import "@typespec/openapi3";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApiCenter;
 
@@ -157,9 +161,9 @@ union ApiSpecImportSourceFormat {
   @doc("The inlined content of a specification document.") "inline",
 
   @doc("""
-The link to a specification document hosted on a publicly accessible internet
-address.
-""")
+    The link to a specification document hosted on a publicly accessible internet
+    address.
+    """)
   "link",
 }
 
@@ -229,8 +233,12 @@ union EnvironmentServerType {
 @doc("The properties of the service.")
 model ServiceProperties {
   @doc("Provisioning state of the service.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2024_03_15_preview)
+  @doc("Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.")
+  restore?: boolean = false;
 }
 
 @doc("The metadata schema export request.")
@@ -255,6 +263,7 @@ model MetadataSchemaProperties {
   schema: string;
 
   @doc("The assignees")
+  @Azure.ResourceManager.identifiers(#[])
   assignedTo?: MetadataAssignment[];
 }
 
@@ -302,7 +311,7 @@ model ApiProperties {
   summary?: string;
 
   @doc("Current lifecycle stage of the API.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lifecycleStage?: LifecycleStage;
 
   @doc("Terms of service for the API.")
@@ -310,9 +319,11 @@ model ApiProperties {
 
   @doc("The set of external documentation")
   @maxItems(20)
+  @Azure.ResourceManager.identifiers(#[])
   externalDocumentation?: ExternalDocumentation[];
 
   @doc("The set of contacts")
+  @Azure.ResourceManager.identifiers(#[])
   contacts?: Contact[];
 
   @doc("The license information for the API.")
@@ -367,16 +378,16 @@ model License {
   name?: string;
 
   @doc("""
-URL pointing to the license details. The URL field is mutually exclusive of the
-identifier field.
-""")
+    URL pointing to the license details. The URL field is mutually exclusive of the
+    identifier field.
+    """)
   @maxLength(200)
   url?: url;
 
   @doc("""
-SPDX license information for the API. The identifier field is mutually
-exclusive of the URL field.
-""")
+    SPDX license information for the API. The identifier field is mutually
+    exclusive of the URL field.
+    """)
   @maxLength(50)
   identifier?: url;
 }
@@ -405,7 +416,7 @@ model ApiDefinitionProperties {
   description?: string;
 
   @doc("API specification details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   specification?: ApiDefinitionPropertiesSpecification;
 }
 
@@ -477,6 +488,7 @@ model DeploymentProperties {
   customProperties?: CustomProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing service"
 @summary("Custom Properties")
 @doc("The custom metadata defined for API catalog entities.")
 model CustomProperties {}
@@ -534,4 +546,130 @@ model Onboarding {
   @maxItems(1)
   @doc("The location of the development portal")
   developerPortalUri?: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@added(Versions.v2024_03_15_preview)
+@doc("Deleted service properties.")
+model DeletedServiceProperties {
+  @doc("UTC date and time when the service will be automatically purged. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
+  scheduledPurgeDate?: utcDateTime;
+
+  @doc("UTC date and time when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
+  softDeletionDate?: utcDateTime;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@added(Versions.v2024_06_01_preview)
+@doc("API source properties.")
+model ApiSourceProperties {
+  @doc("Indicates if the specification should be imported along with metadata.")
+  importSpecification?: ImportSpecificationOptions = ImportSpecificationOptions.OnDemand;
+
+  @doc("API source configuration for Azure API Management.")
+  azureApiManagementSource?: AzureApiManagementSource;
+
+  /**
+   * The target environment resource ID.
+   */
+  targetEnvironmentId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The target lifecycle stage.
+   */
+  targetLifecycleStage?: LifecycleStage;
+
+  /**
+   * The state of the API source link
+   */
+  @visibility(Lifecycle.Read)
+  linkState?: LinkState;
+}
+
+/**
+ * The API source specification import options.
+ */
+@added(Versions.v2024_06_01_preview)
+union ImportSpecificationOptions {
+  string,
+
+  /**
+   * Indicates that the specification should be never be imported.
+   */
+  Never: "never",
+
+  /**
+   * Indicates that the specification should be imported only by request.
+   */
+  OnDemand: "ondemand",
+
+  /**
+   * Indicates that the specification should always be imported along with metadata.
+   */
+  Always: "always",
+}
+
+/**
+ * API source configuration for Azure API Management.
+ */
+@added(Versions.v2024_06_01_preview)
+model AzureApiManagementSource {
+  /**
+   * API Management service resource ID.
+   */
+  resourceId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The resource ID of the managed identity that has access to the API Management instance.
+   */
+  msiResourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * The link state.
+ */
+@added(Versions.v2024_06_01_preview)
+model LinkState {
+  /**
+   * The state of the link.
+   */
+  state?: ApiSourceLinkState;
+
+  /**
+   * The state message.
+   */
+  message?: string;
+
+  /**
+   * The timestamp of the last update of the link state.
+   */
+  lastUpdatedOn: utcDateTime;
+}
+
+/**
+ * The API source link state.
+ */
+@added(Versions.v2024_06_01_preview)
+union ApiSourceLinkState {
+  string,
+
+  /**
+   * The API source link is initializing.
+   */
+  Initializing: "initializing",
+
+  /***
+   * The API source is syncing.
+   */
+  Syncing: "syncing",
+
+  /**
+   * The API source sync is blocked due to an error.
+   */
+  Error: "error",
+
+  /**
+   * The API source is being deleted.
+   */
+  Deleting: "deleting",
 }

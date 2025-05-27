@@ -1,0 +1,826 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2024-04-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/products": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Lists the products for an invoice section. These don't include products billed based on usage. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_ListByInvoiceSection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of products. It contains a list of available product summaries in reverse chronological order by purchase date.",
+            "schema": {
+              "$ref": "#/definitions/ProductListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductsListByInvoiceSection": {
+            "$ref": "./examples/productsListByInvoiceSection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/products": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Lists the products for a billing profile. These don't include products billed based on usage. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of products. It contains a list of available product summaries in reverse chronological order by purchase date.",
+            "schema": {
+              "$ref": "#/definitions/ProductListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductsListByBillingProfile": {
+            "$ref": "./examples/productsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/products": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Lists the products for a customer. These don't include products billed based on usage.The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_ListByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of products. It contains a list of available product summaries in reverse chronological order by purchase date.",
+            "schema": {
+              "$ref": "#/definitions/ProductListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductsListByCustomer": {
+            "$ref": "./examples/productsListByCustomer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products/{productName}/move": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Moves a product's charges to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported only for products that are purchased with a recurring charge and for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_Move",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/productName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The properties of the product to initiate a transfer.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveProductRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A product.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ProductMove": {
+            "$ref": "./examples/productMove.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products/{productName}/validateMoveEligibility": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Validates if a product's charges can be moved to a new invoice section. This operation is supported only for products that are purchased with a recurring charge and for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_ValidateMoveEligibility",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/productName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The properties of the product to initiate a transfer.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveProductRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of the transfer eligibility validation.",
+            "schema": {
+              "$ref": "#/definitions/MoveProductEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductValidateMoveSuccess": {
+            "$ref": "./examples/productValidateMoveSuccess.json"
+          },
+          "ProductValidateMoveFailure": {
+            "$ref": "./examples/productValidateMoveFailure.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products/{productName}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Gets a product by ID. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/productName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A product.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductsGet": {
+            "$ref": "./examples/productsGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Updates the properties of a Product. Currently, auto renew can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/productName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "A product.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A product.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductsUpdate": {
+            "$ref": "./examples/productsUpdate.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Lists the products for a billing account. These don't include products billed based on usage. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of products. It contains a list of available product summaries in reverse chronological order by purchase date.",
+            "schema": {
+              "$ref": "#/definitions/ProductListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductsListByBillingAccount": {
+            "$ref": "./examples/productsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExternalReference": {
+      "description": "An external reference.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID that uniquely identifies an external reference.",
+          "type": "string",
+          "readOnly": true
+        },
+        "url": {
+          "description": "The URL of the external reference.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
+    "MoveProductEligibilityResult": {
+      "description": "Result of the transfer eligibility validation.",
+      "type": "object",
+      "properties": {
+        "isMoveEligible": {
+          "description": "Specifies whether the subscription is eligible to be transferred.",
+          "type": "boolean"
+        },
+        "errorDetails": {
+          "description": "Error details of the transfer eligibility validation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MoveProductErrorDetails"
+            }
+          ]
+        }
+      }
+    },
+    "MoveProductErrorDetails": {
+      "description": "Error details of the transfer eligibility validation.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code for the product transfer validation.",
+          "enum": [
+            "Other",
+            "BillingAccountInactive",
+            "DestinationBillingProfileInactive",
+            "DestinationBillingProfileNotFound",
+            "DestinationBillingProfilePastDue",
+            "DestinationInvoiceSectionInactive",
+            "DestinationInvoiceSectionNotFound",
+            "InsufficientPermissionOnDestination",
+            "InsufficientPermissionOnSource",
+            "InvalidDestination",
+            "InvalidSource",
+            "MarketplaceNotEnabledOnDestination",
+            "ProductInactive",
+            "ProductNotFound",
+            "ProductTypeNotSupported",
+            "SourceBillingProfilePastDue",
+            "SourceInvoiceSectionInactive"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MoveValidationErrorCode",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Error details of the transfer eligibility validation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MoveProductRequest": {
+      "description": "The properties of the product to initiate a transfer.",
+      "required": [
+        "destinationInvoiceSectionId"
+      ],
+      "type": "object",
+      "properties": {
+        "destinationInvoiceSectionId": {
+          "description": "The destination invoice section id.",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "Product": {
+      "description": "A product.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProductListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "ProductPatch": {
+      "description": "A product.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProductProperties": {
+      "description": "A product.",
+      "type": "object",
+      "properties": {
+        "autoRenew": {
+          "description": "Indicates whether auto renewal is turned on or off for a product.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutoRenew",
+            "modelAsString": true
+          }
+        },
+        "availabilityId": {
+          "description": "The availability of the product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingFrequency": {
+          "description": "The frequency at which the product will be billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile to which the product is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile to which the product is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerId": {
+          "description": "The ID of the customer for whom the product was purchased. The field is applicable only for Microsoft Partner Agreement billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerDisplayName": {
+          "description": "The name of the customer for whom the product was purchased. The field is applicable only for Microsoft Partner Agreement billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endDate": {
+          "description": "The date when the product will be renewed or canceled.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "The ID of the invoice section to which the product is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section to which the product is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastCharge": {
+          "description": "The last month charges.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "lastChargeDate": {
+          "description": "The date of the last charge.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productType": {
+          "description": "The description of the type of product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productTypeId": {
+          "description": "The ID of the type of product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuId": {
+          "description": "The sku ID of the product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuDescription": {
+          "description": "The sku description of the product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchaseDate": {
+          "description": "The date when the product was purchased.",
+          "type": "string",
+          "readOnly": true
+        },
+        "quantity": {
+          "format": "int64",
+          "description": "The quantity purchased for the product.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the product.",
+          "enum": [
+            "Other",
+            "Active",
+            "Disabled",
+            "Deleted",
+            "PastDue",
+            "Expiring",
+            "Expired",
+            "AutoRenew",
+            "Canceled",
+            "Suspended"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProductStatus",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "description": "The id of the tenant in which the product is used.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reseller": {
+          "description": "Reseller for this product. The fields is not available for Microsoft Partner Agreement products.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Reseller"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

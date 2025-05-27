@@ -19,7 +19,7 @@ namespace AzureCommunicationRoutingService;
 @doc("Provides the 'Last-Modified' header to enable conditional (cached) requests")
 model LastModifiedResponseEnvelope {
   @header("Last-Modified")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The last modified timestamp.")
   @encode("rfc7231")
   lastModifiedTimestamp?: utcDateTime;
@@ -29,12 +29,24 @@ model LastModifiedResponseEnvelope {
 
 @doc("Provides the 'If-*' headers to enable conditional (cached) responses for JobRouter.")
 model RouterConditionalRequestHeaders {
-  @visibility("read", "query", "create", "update", "delete")
+  @visibility(
+    Lifecycle.Read,
+    Lifecycle.Query,
+    Lifecycle.Create,
+    Lifecycle.Update,
+    Lifecycle.Delete
+  )
   @header("If-Match")
   @doc("The request should only proceed if an entity matches this string.")
   ifMatch?: string;
 
-  @visibility("read", "query", "create", "update", "delete")
+  @visibility(
+    Lifecycle.Read,
+    Lifecycle.Query,
+    Lifecycle.Create,
+    Lifecycle.Update,
+    Lifecycle.Delete
+  )
   @header("If-Unmodified-Since")
   @doc("The request should only proceed if the entity was not modified after this time.")
   @encode("rfc7231")
@@ -69,261 +81,290 @@ model RouterReturnConditionalResponseHeaders<TVersionAdded extends EnumMember | 
 }
 
 @doc("Describes the various status of a job.")
-enum RouterJobStatus {
+union RouterJobStatus {
+  string,
+
   @doc("Job is waiting to be classified.")
-  pendingClassification,
+  "pendingClassification",
 
   @doc("Job has been queued.")
-  queued,
+  "queued",
 
   @doc("Job has been assigned to a worker.")
-  assigned,
+  "assigned",
 
   @doc("Job has been completed by a worker.")
-  completed,
+  "completed",
 
   @doc("Job has been closed by a worker.")
-  closed,
+  "closed",
 
   @doc("Job has been cancelled.")
-  cancelled,
+  "cancelled",
 
   @doc("Classification process failed for the job.")
-  classificationFailed,
+  "classificationFailed",
 
   @doc("Job has been created.")
-  created,
+  "created",
 
   @doc("Job has been created but not been scheduled yet.")
-  pendingSchedule,
+  "pendingSchedule",
 
   @doc("Job has been scheduled successfully.")
-  scheduled,
+  "scheduled",
 
   @doc("Job scheduling failed.")
-  scheduleFailed,
+  "scheduleFailed",
 
   @doc("Job is in a suspended state and waiting for an update.")
-  waitingForActivation,
+  "waitingForActivation",
 }
 
 @doc("Describes supported operations on label values.")
-enum LabelOperator {
+union LabelOperator {
+  string,
+
   @doc("Equal.")
-  equal,
+  "equal",
 
   @doc("Not Equal.")
-  notEqual,
+  "notEqual",
 
   @doc("Less than.")
-  lessThan,
+  "lessThan",
 
   @doc("Less than or equal.")
-  lessThanOrEqual,
+  "lessThanOrEqual",
 
   @doc("Greater than.")
-  greaterThan,
+  "greaterThan",
 
   @doc("Greater than or equal.")
-  greaterThanOrEqual,
+  "greaterThanOrEqual",
 }
 
 @doc("Describes the status of a worker selector.")
-enum RouterWorkerSelectorStatus {
+union RouterWorkerSelectorStatus {
+  string,
+
   @doc("Worker selector is valid.")
-  active,
+  "active",
 
   @doc("Worker selector is not valid.")
-  expired,
+  "expired",
 }
 
 @doc("Enums used to filters jobs by status.")
-enum RouterJobStatusSelector {
+union RouterJobStatusSelector {
+  string,
+
   @doc("Default")
-  all,
+  all: "all",
 
   @doc("Job is waiting to be classified.")
-  pendingClassification,
+  pendingClassification: "pendingClassification",
 
   @doc("Job has been queued.")
-  queued,
+  queued: "queued",
 
   @doc("Job has been assigned to a worker.")
-  assigned,
+  assigned: "assigned",
 
   @doc("Job has been completed by a worker.")
-  completed,
+  completed: "completed",
 
   @doc("Job has been closed by a worker.")
-  closed,
+  closed: "closed",
 
   @doc("Job has been cancelled.")
-  cancelled,
+  cancelled: "cancelled",
 
   @doc("Classification process failed for the job.")
-  classificationFailed,
+  classificationFailed: "classificationFailed",
 
   @doc("Job has been created.")
-  created,
+  created: "created",
 
   @doc("Job has been created but not been scheduled yet.")
-  pendingSchedule,
+  pendingSchedule: "pendingSchedule",
 
   @doc("Job has been scheduled successfully.")
-  scheduled,
+  scheduled: "scheduled",
 
   @doc("Job scheduling failed.")
-  scheduleFailed,
+  scheduleFailed: "scheduleFailed",
 
   @doc("Job is in a suspended state and waiting for an update.")
-  waitingForActivation,
+  waitingForActivation: "waitingForActivation",
 
   @doc("Job is in a state of PendingClassification or Queued or Assigned or ClassificationFailed or Completed or PendingSchedule or Scheduled or ScheduleFailed or WaitingForActivation.")
-  active,
+  active: "active",
 }
 
 @doc("Enums for worker states.")
-enum RouterWorkerState {
+union RouterWorkerState {
+  string,
+
   @doc("Worker is active and available to take offers.")
-  active,
+  "active",
 
   @doc("Worker is not active, if there are existing offers they are being revoked. No new offers are sent.")
-  draining,
+  "draining",
 
   @doc("Worker is not active. No new offers are sent.")
-  inactive,
+  "inactive",
 }
 
 @doc("Enums used to filters workers by state")
-enum RouterWorkerStateSelector {
+union RouterWorkerStateSelector {
+  string,
+
   @doc("Worker is active and available to take offers.")
-  active,
+  active: "active",
 
   @doc("Worker is not active, if there are existing offers they are being revoked. No new offers are sent.")
-  draining,
+  draining: "draining",
 
   @doc("Worker is not active. No new offers are sent.")
-  inactive,
+  inactive: "inactive",
 
   @doc("Worker is active or draining or inactive.")
-  all,
+  all: "all",
 }
 
 @doc("Supported parameters for scoring workers used with BestWorkerMode.")
-enum ScoringRuleParameterSelector {
+union ScoringRuleParameterSelector {
+  string,
+
   @doc("Parameter to add job labels to scoring payload.  Property is sent as `job`.")
-  jobLabels,
+  jobLabels: "jobLabels",
 
   @doc("Parameter to add worker selectors from a job to scoring payload.  Property is sent as `selectors`.")
-  workerSelectors,
+  workerSelectors: "workerSelectors",
 }
 
 @doc("Available expression languages that can be configured.")
-enum ExpressionRouterRuleLanguage {
+union ExpressionRouterRuleLanguage {
+  string,
+
   @doc("PowerFx")
-  powerFx,
+  "powerFx",
 }
 
 @doc("Discriminators for supported matching mode types.")
-enum JobMatchingModeKind {
+union JobMatchingModeKind {
+  string,
+
   @doc("Discriminator value for QueueAndMatchMode.")
-  queueAndMatch,
+  queueAndMatch: "queueAndMatch",
 
   @doc("Discriminator value for ScheduleAndSuspendMode.")
-  scheduleAndSuspend,
+  scheduleAndSuspend: "scheduleAndSuspend",
 
   @doc("Discriminator value for SuspendMode.")
-  suspend,
+  suspend: "suspend",
 }
 
 @doc("Discriminators for supported router rule types.")
-enum RouterRuleKind {
+union RouterRuleKind {
+  string,
+
   @doc("Discriminator value for DirectMapRouterRule.")
-  directMap,
+  directMap: "directMap",
 
   @doc("Discriminator value for ExpressionRouterRule.")
-  expression,
+  expression: "expression",
 
   @doc("Discriminator value for FunctionRouterRule.")
-  function,
+  function: "function",
 
   @doc("Discriminator value for StaticRouterRule.")
-  static,
+  static: "static",
 
   @doc("Discriminator value for WebhookRouterRule.")
-  webhook,
+  webhook: "webhook",
 }
 
 @doc("Discriminators for supported distribution mode types.")
-enum DistributionModeKind {
+union DistributionModeKind {
+  string,
+
   @doc("Discriminator value for BestWorkerMode.")
-  bestWorker,
+  bestWorker: "bestWorker",
 
   @doc("Discriminator value for LongestIdleMode.")
-  longestIdle,
+  longestIdle: "longestIdle",
 
   @doc("Discriminator value for RoundRobinMode.")
-  roundRobin,
+  roundRobin: "roundRobin",
 }
 
 @doc("Discriminators for supported exception trigger types.")
-enum ExceptionTriggerKind {
+union ExceptionTriggerKind {
+  string,
+
   @doc("Discriminator value for QueueLengthExceptionTrigger.")
-  queueLength,
+  queueLength: "queueLength",
 
   @doc("Discriminator value for WaitTimeExceptionTrigger.")
-  waitTime,
+  waitTime: "waitTime",
 }
 
 @doc("Discriminators for supported exception action types.")
-enum ExceptionActionKind {
+union ExceptionActionKind {
+  string,
+
   @doc("Discriminator value for CancelExceptionAction.")
-  cancel,
+  cancel: "cancel",
 
   @doc("Discriminator value for ManualReclassifyExceptionAction.")
-  manualReclassify,
+  manualReclassify: "manualReclassify",
 
   @doc("Discriminator value for ReclassifyExceptionAction.")
-  reclassify,
+  reclassify: "reclassify",
 }
 
 @doc("Discriminators for supported queue selector attachment types.")
-enum QueueSelectorAttachmentKind {
+union QueueSelectorAttachmentKind {
+  string,
+
   @doc("Discriminator value for ConditionalQueueSelectorAttachment.")
-  conditional,
+  conditional: "conditional",
 
   @doc("Discriminator value for PassThroughQueueSelectorAttachment.")
-  passThrough,
+  passThrough: "passThrough",
 
   @doc("Discriminator value for RuleEngineQueueSelectorAttachment.")
-  ruleEngine,
+  ruleEngine: "ruleEngine",
 
   @doc("Discriminator value for StaticQueueSelectorAttachment.")
-  static,
+  static: "static",
 
   @doc("Discriminator value for WeightedAllocationQueueSelectorAttachment.")
-  weightedAllocation,
+  weightedAllocation: "weightedAllocation",
 }
 
 @doc("Discriminators for supported worker selector attachment types.")
-enum WorkerSelectorAttachmentKind {
+union WorkerSelectorAttachmentKind {
+  string,
+
   @doc("Discriminator value for ConditionalWorkerSelectorAttachment.")
-  conditional,
+  conditional: "conditional",
 
   @doc("Discriminator value for PassThroughWorkerSelectorAttachment.")
-  passThrough,
+  passThrough: "passThrough",
 
   @doc("Discriminator value for RuleEngineWorkerSelectorAttachment.")
-  ruleEngine,
+  ruleEngine: "ruleEngine",
 
   @doc("Discriminator value for StaticWorkerSelectorAttachment.")
-  static,
+  static: "static",
 
   @doc("Discriminator value for WeightedAllocationWorkerSelectorAttachment.")
-  weightedAllocation,
+  weightedAllocation: "weightedAllocation",
 }
 
-@projectedName("java", "ClassificationPolicyInternal")
 @resource("routing/classificationPolicies")
 @doc("A container for the rules that govern how jobs are classified.")
 model ClassificationPolicy {
@@ -331,7 +372,7 @@ model ClassificationPolicy {
 
   @key("classificationPolicyId")
   @doc("Id of a classification policy.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Friendly name of this policy.")
@@ -350,22 +391,20 @@ model ClassificationPolicy {
   workerSelectorAttachments?: WorkerSelectorAttachment[];
 }
 
-@projectedName("java", "RouterRuleInternal")
 @doc("""
-A rule of one of the following types:
-StaticRule:  A rule providing static rules that always return the same result, regardless of input.
-DirectMapRule:  A rule that return the same labels as the input labels.
-ExpressionRule: A rule providing inline expression rules.
-FunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.
-WebhookRule: A rule providing a binding to a webserver following OAuth2.0 authentication protocol.
-""")
+  A rule of one of the following types:
+  StaticRule:  A rule providing static rules that always return the same result, regardless of input.
+  DirectMapRule:  A rule that return the same labels as the input labels.
+  ExpressionRule: A rule providing inline expression rules.
+  FunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.
+  WebhookRule: A rule providing a binding to a webserver following OAuth2.0 authentication protocol.
+  """)
 @discriminator("kind")
 model RouterRule {
   @doc("The type discriminator describing a sub-type of RouterRule")
   kind: RouterRuleKind;
 }
 
-@projectedName("java", "DistributionPolicyInternal")
 @resource("routing/distributionPolicies")
 @doc("Policy governing how jobs are distributed to workers")
 model DistributionPolicy {
@@ -373,7 +412,7 @@ model DistributionPolicy {
 
   @key("distributionPolicyId")
   @doc("Id of a distribution policy.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Friendly name of this policy.")
@@ -386,7 +425,6 @@ model DistributionPolicy {
   mode?: DistributionMode;
 }
 
-@projectedName("java", "DistributionModeInternal")
 @doc("Abstract base class for defining a distribution mode.")
 @discriminator("kind")
 model DistributionMode {
@@ -403,7 +441,6 @@ model DistributionMode {
   kind: DistributionModeKind;
 }
 
-@projectedName("java", "ExceptionPolicyInternal")
 @resource("routing/exceptionPolicies")
 @doc("A policy that defines actions to execute when exception are triggered.")
 model ExceptionPolicy {
@@ -411,7 +448,7 @@ model ExceptionPolicy {
 
   @key("exceptionPolicyId")
   @doc("Id of an exception policy.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Friendly name of this policy.")
@@ -421,7 +458,6 @@ model ExceptionPolicy {
   exceptionRules?: ExceptionRule[];
 }
 
-@projectedName("java", "ExceptionRuleInternal")
 @doc("A rule that defines actions to execute upon a specific trigger.")
 model ExceptionRule {
   @doc("Id of an exception rule.")
@@ -434,7 +470,6 @@ model ExceptionRule {
   actions: ExceptionAction[];
 }
 
-@projectedName("java", "ExceptionTriggerInternal")
 @doc("Abstract base class for defining a trigger for exception rules.")
 @discriminator("kind")
 model ExceptionTrigger {
@@ -451,7 +486,6 @@ model RouterJobNote {
   addedAt?: utcDateTime;
 }
 
-@projectedName("java", "RouterJobInternal")
 @resource("routing/jobs")
 @doc("A unit of work to be routed")
 model RouterJob {
@@ -459,18 +493,18 @@ model RouterJob {
 
   @key("jobId")
   @doc("Id of a job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Reference to an external parent context, eg. call ID.")
   channelReference?: string;
 
   @doc("The status of the job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: RouterJobStatus;
 
   @doc("Timestamp a job was queued in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   enqueuedAt?: utcDateTime;
 
   @doc("The channel identifier. eg. voice, chat, etc.")
@@ -482,7 +516,7 @@ model RouterJob {
   @doc("Id of a queue that this job is queued to.")
   queueId?: string;
 
-  @doc("Priority of this job.")
+  @doc("Priority of this job. Value must be between -100 to 100.")
   priority?: int32;
 
   @doc("Reason code for cancelled or closed jobs.")
@@ -492,7 +526,7 @@ model RouterJob {
   requestedWorkerSelectors?: RouterWorkerSelector[];
 
   @doc("A collection of worker selectors attached by a classification policy, which a worker must satisfy in order to process this job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attachedWorkerSelectors?: RouterWorkerSelector[];
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
@@ -500,7 +534,7 @@ model RouterJob {
   labels?: Record<unknown>;
 
   @doc("A collection of the assignments of the job. Key is AssignmentId.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   assignments?: Record<RouterJobAssignment>;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
@@ -511,14 +545,13 @@ model RouterJob {
   notes?: RouterJobNote[];
 
   @doc("If set, job will be scheduled to be enqueued at a given time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scheduledAt?: utcDateTime;
 
   @doc("If provided, will determine how job matching will be carried out. Default mode: QueueAndMatchMode.")
   matchingMode?: JobMatchingMode;
 }
 
-@projectedName("java", "RouterWorkerSelectorInternal")
 @doc("Describes a condition that must be met against a set of labels for worker selection.")
 model RouterWorkerSelector {
   @doc("The label key to query against.")
@@ -538,11 +571,11 @@ model RouterWorkerSelector {
   expedite?: boolean;
 
   @doc("Status of the worker selector.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: RouterWorkerSelectorStatus;
 
   @doc("The time at which this worker selector expires in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expiresAt?: utcDateTime;
 }
 
@@ -552,7 +585,7 @@ model RouterWorkerSelector {
 model RouterJobAssignment {
   @key
   @doc("Id of a job assignment.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   assignmentId: string;
 
   @doc("Id of the Worker assigned to the job.")
@@ -568,20 +601,18 @@ model RouterJobAssignment {
   closedAt?: utcDateTime;
 }
 
-@projectedName("java", "JobMatchingModeInternal")
 @doc("""
-A matching mode of one of the following types:
-QueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.
-ScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. At specified time, matching of a worker to the job will not start automatically.
-SuspendMode: Used when matching workers to a job needs to be suspended.
-""")
+  A matching mode of one of the following types:
+  QueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.
+  ScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. At specified time, matching of a worker to the job will not start automatically.
+  SuspendMode: Used when matching workers to a job needs to be suspended.
+  """)
 @discriminator("kind")
 model JobMatchingMode {
   @doc("The type discriminator describing a sub-type of JobMatchingMode.")
   kind: JobMatchingModeKind;
 }
 
-@projectedName("java", "ScheduleAndSuspendModeInternal")
 @doc("Describes a matching mode used for scheduling jobs to be queued at a future time. At the specified time, matching worker to a job will not start automatically.")
 model ScheduleAndSuspendMode extends JobMatchingMode {
   @doc("Requested schedule time.")
@@ -591,22 +622,20 @@ model ScheduleAndSuspendMode extends JobMatchingMode {
   kind: JobMatchingModeKind.scheduleAndSuspend;
 }
 
-@projectedName("java", "QueueAndMatchModeInternal")
 @doc("Describes a matching mode where matching worker to a job is automatically started after job is queued successfully.")
 model QueueAndMatchMode extends JobMatchingMode {
   @doc("The type discriminator describing QueueAndMatchMode")
   kind: JobMatchingModeKind.queueAndMatch;
 }
 
-@projectedName("java", "SuspendModeInternal")
 @doc("Describes a matching mode where matching worker to a job is suspended.")
 model SuspendMode extends JobMatchingMode {
   @doc("The type discriminator describing SuspendMode")
   kind: JobMatchingModeKind.suspend;
 }
 
-@projectedName("java", "CancelJobOptionsInternal")
 @access(Access.public, "python")
+@access(Access.public, "java")
 @doc("Request payload for cancelling a job.")
 model CancelJobOptions {
   @doc("A note that will be appended to a job's Notes collection with the current timestamp.")
@@ -616,16 +645,16 @@ model CancelJobOptions {
   dispositionCode?: string;
 }
 
-@projectedName("java", "CompleteJobOptionsInternal")
 @access(Access.public, "python")
+@access(Access.public, "java")
 @doc("Request payload for completing jobs.")
 model CompleteJobOptions {
   @doc("A note that will be appended to a job's Notes collection with the current timestamp.")
   note?: string;
 }
 
-@projectedName("java", "CloseJobOptionsInternal")
 @access(Access.public, "python")
+@access(Access.public, "java")
 @doc("Request payload for closing jobs")
 model CloseJobOptions {
   @doc("Indicates the outcome of a job, populate this field with your own custom values.")
@@ -683,15 +712,14 @@ model AcceptJobOfferResult {
   workerId: string;
 }
 
-@projectedName("java", "DeclineJobOfferOptionsInternal")
 @access(Access.public, "python")
+@access(Access.public, "java")
 @doc("Request payload for declining offers.")
 model DeclineJobOfferOptions {
   @doc("If the RetryOfferAt is not provided, then this job will not be offered again to the worker who declined this job unless the worker is de-registered and re-registered.  If a RetryOfferAt time is provided, then the job will be re-matched to eligible workers at the retry time in UTC.  The worker that declined the job will also be eligible for the job at that time.")
   retryOfferAt?: utcDateTime;
 }
 
-@projectedName("java", "RouterQueueInternal")
 @resource("routing/queues")
 @doc("A queue that can contain jobs to be routed.")
 model RouterQueue {
@@ -699,7 +727,7 @@ model RouterQueue {
 
   @key("queueId")
   @doc("Id of a queue.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Friendly name of this queue.")
@@ -716,7 +744,6 @@ model RouterQueue {
   exceptionPolicyId?: string;
 }
 
-@projectedName("java", "RouterQueueStatisticsInternal")
 @doc("Statistics for the queue.")
 model RouterQueueStatistics {
   @doc("Id of the queue these details are about.")
@@ -732,7 +759,6 @@ model RouterQueueStatistics {
   longestJobWaitTimeMinutes?: float64;
 }
 
-@projectedName("java", "RouterWorkerInternal")
 @resource("routing/workers")
 @doc("An entity for jobs to be routed to.")
 model RouterWorker {
@@ -740,11 +766,11 @@ model RouterWorker {
 
   @key("workerId")
   @doc("Id of a worker.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Current state of a worker.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: RouterWorkerState;
 
   @doc("Collection of queue(s) that this worker can receive work from.")
@@ -765,19 +791,23 @@ model RouterWorker {
   channels?: RouterChannel[];
 
   @doc("A list of active offers issued to this worker.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   offers?: RouterJobOffer[];
 
   @doc("A list of assigned jobs attached to this worker.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   assignedJobs?: RouterWorkerAssignment[];
 
   @doc("A value indicating the workers capacity. A value of '1' means all capacity is consumed. A value of '0' means no capacity is currently consumed.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   loadRatio?: float64;
 
   @doc("A flag indicating this worker is open to receive offers or not.")
   availableForOffers?: boolean;
+
+  @doc("If this is set, the worker will only receive up to this many new offers at a time.")
+  @added(Versions.c2024_01_18_Preview)
+  maxConcurrentOffers?: int32;
 }
 
 @doc("Represents the capacity a job in this channel will consume from a worker.")
@@ -788,7 +818,7 @@ model RouterChannel {
   @doc("The amount of capacity that an instance of a job of this channel will consume of the total worker capacity.")
   capacityCostPerJob: int32;
 
-  @doc("The maximum number of jobs that can be supported concurrently for this channel.")
+  @doc("The maximum number of jobs that can be supported concurrently for this channel. Value must be greater than zero.")
   maxNumberOfJobs?: int32;
 }
 
@@ -798,7 +828,7 @@ model RouterChannel {
 model RouterJobOffer {
   @key
   @doc("Id of an offer.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   offerId: string;
 
   @doc("Id of the job.")
@@ -829,7 +859,6 @@ model RouterWorkerAssignment {
   assignedAt: utcDateTime;
 }
 
-@projectedName("java", "BestWorkerModeInternal")
 @doc("Jobs are distributed to the worker with the strongest abilities available.")
 model BestWorkerMode extends DistributionMode {
   @doc("Define a scoring rule to use, when calculating a score to determine the best worker. If not set, will use a default scoring formula that uses the number of job labels that the worker labels match, as well as the number of label selectors the worker labels match and/or exceed using a logistic function (https://en.wikipedia.org/wiki/Logistic_function).")
@@ -848,7 +877,7 @@ model ScoringRuleOptions {
   batchSize?: int32 = 20;
 
   @doc("List of extra parameters from a job that will be sent as part of the payload to scoring rule. If not set, a job's labels (sent in the payload as `job`) and a job's worker selectors (sent in the payload as `selectors`) are added to the payload of the scoring rule by default. Note: Worker labels are always sent with scoring payload.")
-  scoringParameters?: ScoringRuleParameterSelector[] = [
+  scoringParameters?: ScoringRuleParameterSelector[] = #[
     ScoringRuleParameterSelector.jobLabels,
     ScoringRuleParameterSelector.workerSelectors
   ];
@@ -860,7 +889,6 @@ model ScoringRuleOptions {
   descendingOrder?: boolean = true;
 }
 
-@projectedName("java", "CancelExceptionActionInternal")
 @doc("An action that marks a job as cancelled.")
 model CancelExceptionAction extends ExceptionAction {
   @doc("A note that will be appended to a job's notes collection with the current timestamp.")
@@ -873,7 +901,6 @@ model CancelExceptionAction extends ExceptionAction {
   kind: ExceptionActionKind.cancel;
 }
 
-@projectedName("java", "ExceptionActionInternal")
 @doc("The action to take when the exception is triggered.")
 @discriminator("kind")
 model ExceptionAction {
@@ -884,7 +911,6 @@ model ExceptionAction {
   kind: ExceptionActionKind;
 }
 
-@projectedName("java", "ConditionalQueueSelectorAttachmentInternal")
 @doc("Describes a set of queue selectors that will be attached if the given condition resolves to true.")
 model ConditionalQueueSelectorAttachment extends QueueSelectorAttachment {
   @doc("The condition that must be true for the queue selectors to be attached.")
@@ -897,7 +923,6 @@ model ConditionalQueueSelectorAttachment extends QueueSelectorAttachment {
   kind: QueueSelectorAttachmentKind.conditional;
 }
 
-@projectedName("java", "RouterQueueSelectorInternal")
 @doc("Describes a condition that must be met against a set of labels for queue selection.")
 model RouterQueueSelector {
   @doc("The label key to query against.")
@@ -911,7 +936,6 @@ model RouterQueueSelector {
   value?: unknown;
 }
 
-@projectedName("java", "QueueSelectorAttachmentInternal")
 @doc("An attachment of queue selectors to resolve a queue to a job from a classification policy.")
 @discriminator("kind")
 model QueueSelectorAttachment {
@@ -919,7 +943,6 @@ model QueueSelectorAttachment {
   kind: QueueSelectorAttachmentKind;
 }
 
-@projectedName("java", "ConditionalWorkerSelectorAttachmentInternal")
 @doc("Describes a set of worker selectors that will be attached if the given condition resolves to true.")
 model ConditionalWorkerSelectorAttachment extends WorkerSelectorAttachment {
   @doc("The condition that must be true for the worker selectors to be attached.")
@@ -932,7 +955,6 @@ model ConditionalWorkerSelectorAttachment extends WorkerSelectorAttachment {
   kind: WorkerSelectorAttachmentKind.conditional;
 }
 
-@projectedName("java", "WorkerSelectorAttachmentInternal")
 @doc("An attachment which attaches worker selectors to a job.")
 @discriminator("kind")
 model WorkerSelectorAttachment {
@@ -940,14 +962,12 @@ model WorkerSelectorAttachment {
   kind: WorkerSelectorAttachmentKind;
 }
 
-@projectedName("java", "DirectMapRouterRuleInternal")
 @doc("A rule that return the same labels as the input labels.")
 model DirectMapRouterRule extends RouterRule {
   @doc("The type discriminator describing a sub-type of Rule.")
   kind: RouterRuleKind.directMap;
 }
 
-@projectedName("java", "ExpressionRouterRuleInternal")
 @doc("A rule providing inline expression rules.")
 model ExpressionRouterRule extends RouterRule {
   @doc("The expression language to compile to and execute.")
@@ -960,7 +980,6 @@ model ExpressionRouterRule extends RouterRule {
   kind: RouterRuleKind.expression;
 }
 
-@projectedName("java", "FunctionRouterRuleInternal")
 @doc("A rule providing a binding to an HTTP Triggered Azure Function.")
 model FunctionRouterRule extends RouterRule {
   @doc("URL for Azure Function.")
@@ -985,14 +1004,12 @@ model FunctionRouterRuleCredential {
   clientId?: string;
 }
 
-@projectedName("java", "LongestIdleModeInternal")
 @doc("Jobs are directed to the worker who has been idle longest.")
 model LongestIdleMode extends DistributionMode {
   @doc("The type discriminator describing a sub-type of Mode.")
   kind: DistributionModeKind.longestIdle;
 }
 
-@projectedName("java", "ManualReclassifyExceptionActionInternal")
 @doc("An action that manually reclassifies a job by providing the queue, priority and worker selectors.")
 model ManualReclassifyExceptionAction extends ExceptionAction {
   @doc("Updated QueueId.")
@@ -1018,7 +1035,6 @@ model OAuth2WebhookClientCredential {
   clientSecret?: string;
 }
 
-@projectedName("java", "PassThroughQueueSelectorAttachmentInternal")
 @doc("Attaches a queue selector where the value is passed through from a job's label with the same key.")
 model PassThroughQueueSelectorAttachment extends QueueSelectorAttachment {
   @doc("The label key to query against.")
@@ -1031,7 +1047,6 @@ model PassThroughQueueSelectorAttachment extends QueueSelectorAttachment {
   kind: QueueSelectorAttachmentKind.passThrough;
 }
 
-@projectedName("java", "PassThroughWorkerSelectorAttachmentInternal")
 @doc("Attaches a worker selector where the value is passed through from a job's label with the same key.")
 model PassThroughWorkerSelectorAttachment extends WorkerSelectorAttachment {
   @doc("The label key to query against.")
@@ -1047,7 +1062,6 @@ model PassThroughWorkerSelectorAttachment extends WorkerSelectorAttachment {
   kind: WorkerSelectorAttachmentKind.passThrough;
 }
 
-@projectedName("java", "QueueLengthExceptionTriggerInternal")
 @doc("Trigger for an exception action on exceeding queue length.")
 model QueueLengthExceptionTrigger extends ExceptionTrigger {
   @doc("Threshold of number of jobs ahead in the queue to for this trigger to fire.")
@@ -1057,7 +1071,6 @@ model QueueLengthExceptionTrigger extends ExceptionTrigger {
   kind: ExceptionTriggerKind.queueLength;
 }
 
-@projectedName("java", "QueueWeightedAllocationInternal")
 @doc("Contains the weight percentage and queue selectors to be applied if selected for weighted distributions.")
 model QueueWeightedAllocation {
   @doc("The percentage of this weight, expressed as a fraction of 1.")
@@ -1067,7 +1080,6 @@ model QueueWeightedAllocation {
   queueSelectors: RouterQueueSelector[];
 }
 
-@projectedName("java", "ReclassifyExceptionActionInternal")
 @doc("An action that modifies labels on a job and then reclassifies it.")
 model ReclassifyExceptionAction extends ExceptionAction {
   @doc("The new classification policy that will determine queue, priority and worker selectors.")
@@ -1081,14 +1093,12 @@ model ReclassifyExceptionAction extends ExceptionAction {
   kind: ExceptionActionKind.reclassify;
 }
 
-@projectedName("java", "RoundRobinModeInternal")
 @doc("Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.")
 model RoundRobinMode extends DistributionMode {
   @doc("The type discriminator describing a sub-type of Mode.")
   kind: DistributionModeKind.roundRobin;
 }
 
-@projectedName("java", "RuleEngineQueueSelectorAttachmentInternal")
 @doc("Attaches queue selectors to a job when the RouterRule is resolved.")
 model RuleEngineQueueSelectorAttachment extends QueueSelectorAttachment {
   @doc("A RouterRule that resolves a collection of queue selectors to attach.")
@@ -1098,7 +1108,6 @@ model RuleEngineQueueSelectorAttachment extends QueueSelectorAttachment {
   kind: QueueSelectorAttachmentKind.ruleEngine;
 }
 
-@projectedName("java", "RuleEngineWorkerSelectorAttachmentInternal")
 @doc("Attaches worker selectors to a job when a RouterRule is resolved.")
 model RuleEngineWorkerSelectorAttachment extends WorkerSelectorAttachment {
   @doc("A RouterRule that resolves a collection of worker selectors to attach.")
@@ -1108,7 +1117,6 @@ model RuleEngineWorkerSelectorAttachment extends WorkerSelectorAttachment {
   kind: WorkerSelectorAttachmentKind.ruleEngine;
 }
 
-@projectedName("java", "StaticQueueSelectorAttachmentInternal")
 @doc("Describes a queue selector that will be attached to a job.")
 model StaticQueueSelectorAttachment extends QueueSelectorAttachment {
   @doc("The queue selector to attach.")
@@ -1118,7 +1126,6 @@ model StaticQueueSelectorAttachment extends QueueSelectorAttachment {
   kind: QueueSelectorAttachmentKind.static;
 }
 
-@projectedName("java", "StaticRouterRuleInternal")
 @doc("A rule providing static rules that always return the same result, regardless of input.")
 model StaticRouterRule extends RouterRule {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Unions are currently not allowed in spec."
@@ -1129,7 +1136,6 @@ model StaticRouterRule extends RouterRule {
   kind: RouterRuleKind.static;
 }
 
-@projectedName("java", "StaticWorkerSelectorAttachmentInternal")
 @doc("Describes a worker selector that will be attached to a job.")
 model StaticWorkerSelectorAttachment extends WorkerSelectorAttachment {
   @doc("The worker selector to attach.")
@@ -1139,7 +1145,6 @@ model StaticWorkerSelectorAttachment extends WorkerSelectorAttachment {
   kind: WorkerSelectorAttachmentKind.static;
 }
 
-@projectedName("java", "WaitTimeExceptionTriggerInternal")
 @doc("Trigger for an exception action on exceeding wait time.")
 model WaitTimeExceptionTrigger extends ExceptionTrigger {
   @doc("Threshold for wait time for this trigger.")
@@ -1149,7 +1154,6 @@ model WaitTimeExceptionTrigger extends ExceptionTrigger {
   kind: ExceptionTriggerKind.waitTime;
 }
 
-@projectedName("java", "WebhookRouterRuleInternal")
 @doc("A rule providing a binding to an external web server.")
 model WebhookRouterRule extends RouterRule {
   @doc("Uri for Authorization Server.")
@@ -1165,7 +1169,6 @@ model WebhookRouterRule extends RouterRule {
   kind: RouterRuleKind.webhook;
 }
 
-@projectedName("java", "WeightedAllocationQueueSelectorAttachmentInternal")
 @doc("Describes multiple sets of queue selectors, of which one will be selected and attached according to a weighting.")
 model WeightedAllocationQueueSelectorAttachment
   extends QueueSelectorAttachment {
@@ -1176,7 +1179,6 @@ model WeightedAllocationQueueSelectorAttachment
   kind: QueueSelectorAttachmentKind.weightedAllocation;
 }
 
-@projectedName("java", "WeightedAllocationWorkerSelectorAttachmentInternal")
 @doc("Describes multiple sets of worker selectors, of which one will be selected and attached according to a weighting.")
 model WeightedAllocationWorkerSelectorAttachment
   extends WorkerSelectorAttachment {
@@ -1187,7 +1189,6 @@ model WeightedAllocationWorkerSelectorAttachment
   kind: WorkerSelectorAttachmentKind.weightedAllocation;
 }
 
-@projectedName("java", "WorkerWeightedAllocationInternal")
 @doc("Contains the weight percentage and worker selectors to be applied if selected for weighted distributions.")
 model WorkerWeightedAllocation {
   @doc("The percentage of this weight, expressed as a fraction of 1.")
@@ -1197,12 +1198,12 @@ model WorkerWeightedAllocation {
   workerSelectors: RouterWorkerSelector[];
 }
 
-@projectedName("java", "ReclassifyJobOptionsInternal")
+@clientName("ReclassifyJobOptionsInternal", "java")
 @access(Access.internal)
 @doc("Request payload for reclassifying jobs.")
 model ReclassifyJobOptions {}
 
-@projectedName("java", "ReclassifyJobResultInternal")
+@clientName("ReclassifyJobResultInternal", "java")
 @access(Access.internal)
 @doc("Response payload from reclassifying a job.")
 model ReclassifyJobResult {}
@@ -1210,7 +1211,7 @@ model ReclassifyJobResult {}
 @doc("OK Response payload from reclassifying a job.")
 model ReclassifyJobResultWithOkResponse {
   @doc("Response payload from reclassifying a job.")
-  @body
+  @bodyRoot
   body: ReclassifyJobResult;
 
   @doc("Status code.")
@@ -1218,7 +1219,7 @@ model ReclassifyJobResultWithOkResponse {
   _: 200;
 }
 
-@projectedName("java", "CloseJobResultInternal")
+@clientName("CloseJobResultInternal", "java")
 @access(Access.internal)
 @doc("Response payload from closing a job.")
 model CloseJobResult {}
@@ -1226,7 +1227,7 @@ model CloseJobResult {}
 @doc("Response payload from closing a job synchronously.")
 model CloseJobResultWithOkResponse {
   @doc("Response after closing a job.")
-  @body
+  @bodyRoot
   body: CloseJobResult;
 
   @doc("Status code.")
@@ -1234,7 +1235,7 @@ model CloseJobResultWithOkResponse {
   _: 200;
 }
 
-@projectedName("java", "CancelJobResultInternal")
+@clientName("CancelJobResultInternal", "java")
 @access(Access.internal)
 @doc("Response payload from cancelling a job.")
 model CancelJobResult {}
@@ -1242,7 +1243,7 @@ model CancelJobResult {}
 @doc("OK Response payload from cancelling a job.")
 model CancelJobResultWithOkResponse {
   @doc("Response after cancelling a job.")
-  @body
+  @bodyRoot
   body: CancelJobResult;
 
   @doc("Status code.")
@@ -1250,7 +1251,7 @@ model CancelJobResultWithOkResponse {
   _: 200;
 }
 
-@projectedName("java", "CompleteJobResultInternal")
+@clientName("CompleteJobResultInternal", "java")
 @access(Access.internal)
 @doc("Response payload from completing a job.")
 model CompleteJobResult {}
@@ -1258,7 +1259,7 @@ model CompleteJobResult {}
 @doc("OK Response payload from completing a job.")
 model CompleteJobResultWithOkResponse {
   @doc("Response after completing a job.")
-  @body
+  @bodyRoot
   body: CompleteJobResult;
 
   @doc("Status code.")
@@ -1266,7 +1267,7 @@ model CompleteJobResultWithOkResponse {
   _: 200;
 }
 
-@projectedName("java", "DeclineJobOfferResultInternal")
+@clientName("DeclineJobOfferResultInternal", "java")
 @access(Access.internal)
 @doc("Response payload from declining a job.")
 model DeclineJobOfferResult {}
@@ -1274,7 +1275,7 @@ model DeclineJobOfferResult {}
 @doc("OK Response payload from declining a job.")
 model DeclineJobOfferResultWithOkResponse {
   @doc("Response payload from declining a job.")
-  @body
+  @bodyRoot
   body: DeclineJobOfferResult;
 
   @doc("Status code.")
@@ -1357,4 +1358,8 @@ enum Versions {
   @doc("JobRouter 2023-11-01 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2023_11_01: "2023-11-01",
+
+  @doc("JobRouter 2024-01-18-preview api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_01_18_Preview: "2024-01-18-preview",
 }

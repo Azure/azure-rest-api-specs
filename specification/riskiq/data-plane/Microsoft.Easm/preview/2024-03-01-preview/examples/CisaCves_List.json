@@ -1,0 +1,46 @@
+{
+  "operationId": "CisaCves_GetCisaCves",
+  "title": "CisaCves_GetCisaCves",
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workspaceName": "ThisisaWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalElements": 2,
+        "nextLink": "https://eastus.easm.defender.microsoft.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/workspaces/ThisisaWorkspace/cisacves/api-version=2023-03-01-preview",
+        "value": [
+          {
+            "cveId": "CVE-2000-0000",
+            "vendorProject": "Apache",
+            "product": "Apache",
+            "vulnerabilityName": "Apache HTTP Server-Side Request Forgery (SSRF)",
+            "shortDescription": "A crafted request uri-path can cause mod_proxy to forward the request to an origin server choosen by the remote user. This issue affects Apache HTTP Server 2.4.48 and earlier.",
+            "requiredAction": "Apply updates per vendor instructions.",
+            "notes": "",
+            "dateAdded": "2022-12-09T06:01:35.000+00:00",
+            "dueDate": "2022-12-09T06:01:35.000+00:00",
+            "updatedAt": "2022-12-10T06:01:35.000+00:00",
+            "count": 121
+          },
+          {
+            "cveId": "CVE-2000-0000",
+            "vendorProject": "Apache",
+            "product": "Tomcat",
+            "vulnerabilityName": "Apache Tomcat Remote Code Execution Vulnerability",
+            "shortDescription": "Apache Tomcat contains an unspecified vulnerability that allows for remote code execution if JmxRemoteLifecycleListener is used and an attacker can reach Java Management Extension (JMX) ports. This CVE exists because this listener wasn't updated for consistency with the Oracle patched issues for CVE-2016-3427 which affected credential types.",
+            "requiredAction": "Apply updates per vendor instructions.",
+            "notes": "https://tomcat.apache.org/security-9.html",
+            "dateAdded": "2022-12-09T06:01:35.000+00:00",
+            "dueDate": "2022-12-09T06:01:35.000+00:00",
+            "updatedAt": "2022-12-10T06:01:35.000+00:00",
+            "count": 1
+          }
+        ]
+      }
+    }
+  }
+}

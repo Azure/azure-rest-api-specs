@@ -1,0 +1,363 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2024-04-01"
+  },
+  "paths": {},
+  "definitions": {
+    "ProxyResourceWithTags": {
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "description": "Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Amount": {
+      "description": "The amount.",
+      "type": "object",
+      "properties": {
+        "currency": {
+          "description": "The currency for the amount value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The amount value. For example, if the currency is USD, then a value of 600 would be $600.00.",
+          "type": "number",
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
+    "AddressDetails": {
+      "description": "Address details.",
+      "required": [
+        "addressLine1",
+        "country"
+      ],
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "description": "Address line 1.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "addressLine2": {
+          "description": "Address line 2.",
+          "type": "string"
+        },
+        "addressLine3": {
+          "description": "Address line 3.",
+          "type": "string"
+        },
+        "city": {
+          "description": "Address city.",
+          "type": "string"
+        },
+        "companyName": {
+          "description": "Company name. Optional for MCA Individual (Pay-as-you-go).",
+          "type": "string"
+        },
+        "country": {
+          "description": "Country code uses ISO 3166-1 Alpha-2 format.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "district": {
+          "description": "Address district.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email address.",
+          "type": "string"
+        },
+        "firstName": {
+          "description": "First name. Optional for MCA Enterprise.",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name. Optional for MCA Enterprise.",
+          "type": "string"
+        },
+        "middleName": {
+          "description": "Middle name.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "Phone number.",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal code.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Address region.",
+          "type": "string"
+        },
+        "isValidAddress": {
+          "description": "Indicates if the address is incomplete.",
+          "type": "boolean"
+        }
+      }
+    },
+    "AzurePlan": {
+      "description": "Details of the Azure plan.",
+      "type": "object",
+      "properties": {
+        "productId": {
+          "description": "The ID that uniquely identifies a product.",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The ID that uniquely identifies a sku.",
+          "type": "string"
+        },
+        "skuDescription": {
+          "description": "The sku description.",
+          "type": "string"
+        }
+      }
+    },
+    "IndirectRelationshipInfo": {
+      "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+      "type": "object",
+      "properties": {
+        "billingAccountName": {
+          "description": "The billing account name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The billing profile name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the partner or customer for an indirect motion.",
+          "type": "string"
+        }
+      }
+    },
+    "PatchResource": {
+      "description": "Common fields that are in the patch method request body of all Azure Resource Manager patch resources.",
+      "type": "object"
+    },
+    "Reseller": {
+      "description": "Details of the reseller.",
+      "type": "object",
+      "properties": {
+        "resellerId": {
+          "description": "The MPN ID of the reseller.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The name of the reseller.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {
+    "billingAccountName": {
+      "in": "path",
+      "name": "billingAccountName",
+      "description": "The ID that uniquely identifies a billing account.",
+      "required": true,
+      "type": "string",
+      "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The version of the API to be used with the client request. The current version is 2024-04-01.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "associatedTenantName": {
+      "in": "path",
+      "name": "associatedTenantName",
+      "description": "The ID that uniquely identifies a tenant.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
+    "filter": {
+      "in": "query",
+      "name": "filter",
+      "description": "The filter query option allows clients to filter a collection of resources that are addressed by a request URL.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "orderBy": {
+      "in": "query",
+      "name": "orderBy",
+      "description": "The orderby query option allows clients to request resources in a particular order.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "top": {
+      "in": "query",
+      "name": "top",
+      "description": "The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.",
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method"
+    },
+    "skip": {
+      "in": "query",
+      "name": "skip",
+      "description": "The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.",
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method"
+    },
+    "count": {
+      "in": "query",
+      "name": "count",
+      "description": "The count query option allows clients to request a count of the matching resources included with the resources in the response.",
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "search": {
+      "in": "query",
+      "name": "search",
+      "description": "The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileName": {
+      "in": "path",
+      "name": "billingProfileName",
+      "description": "The ID that uniquely identifies a billing profile.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
+    "customerName": {
+      "in": "path",
+      "name": "customerName",
+      "description": "The ID that uniquely identifies a customer.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
+    "invoiceSectionName": {
+      "in": "path",
+      "name": "invoiceSectionName",
+      "description": "The ID that uniquely identifies an invoice section.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
+    "departmentName": {
+      "in": "path",
+      "name": "departmentName",
+      "description": "The name of the department.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentAccountName": {
+      "in": "path",
+      "name": "enrollmentAccountName",
+      "description": "The name of the enrollment account.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The ID that uniquely identifies a billing subscription.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "client"
+    },
+    "billingRequestName": {
+      "in": "path",
+      "name": "billingRequestName",
+      "description": "The ID that uniquely identifies a billing request.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
+    "billingRoleAssignmentName": {
+      "in": "path",
+      "name": "billingRoleAssignmentName",
+      "description": "The ID that uniquely identifies a role assignment.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$",
+      "x-ms-parameter-location": "method"
+    },
+    "roleDefinitionName": {
+      "in": "path",
+      "name": "roleDefinitionName",
+      "description": "The ID that uniquely identifies a role definition.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
+    "invoiceName": {
+      "in": "path",
+      "name": "invoiceName",
+      "description": "The ID that uniquely identifies an invoice.",
+      "required": true,
+      "type": "string",
+      "pattern": "^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$",
+      "x-ms-parameter-location": "method"
+    },
+    "productName": {
+      "in": "path",
+      "name": "productName",
+      "description": "The ID that uniquely identifies a product.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  }
+}

@@ -1,0 +1,977 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2024-04-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/policies/{policyName}": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Lists the policies for a customer. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_GetByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Service-defined resource names such as 'default' which are reserved resource names.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServiceDefinedResourceName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at customer scope.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PoliciesGetByCustomer": {
+            "$ref": "./examples/policiesGetByCustomer.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/policies/default": {
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Updates the policies for a customer. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_CreateOrUpdateByCustomer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "A policy at customer scope.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at customer scope.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          },
+          "201": {
+            "description": "A policy at customer scope.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PoliciesPutByCustomer": {
+            "$ref": "./examples/policiesPutByCustomer.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Lists the policies for a billing profile. This operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_GetByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at billing profile scope.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfilePolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PoliciesGetByBillingProfile": {
+            "$ref": "./examples/policiesGetByBillingProfile.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Updates the policies for a billing profile. This operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_CreateOrUpdateByBillingProfile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "A policy at billing profile scope.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingProfilePolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at billing profile scope.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfilePolicy"
+            }
+          },
+          "201": {
+            "description": "A policy at billing profile scope.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfilePolicy"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PoliciesPutByBillingProfile": {
+            "$ref": "./examples/policiesPutByBillingProfile.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/policies/default": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Lists the policies for a customer at billing account scope. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_GetByCustomerAtBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at customer scope.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PoliciesGetByCustomerAtBillingAccount": {
+            "$ref": "./examples/policiesGetByCustomerAtBillingAccount.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Updates the policies for a customer at billing account scope. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_CreateOrUpdateByCustomerAtBillingAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "A policy at customer scope.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at customer scope.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          },
+          "201": {
+            "description": "A policy at customer scope.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PoliciesPutByCustomerAtBillingAccount": {
+            "$ref": "./examples/policiesPutByCustomerAtBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/policies/default": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Get the policies for a billing account of Enterprise Agreement type.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_GetByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at billing account scope.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PoliciesGetByBillingAccount": {
+            "$ref": "./examples/policiesGetByBillingAccount.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Update the policies for a billing account of Enterprise Agreement type.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_CreateOrUpdateByBillingAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "A policy at billing account scope.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingAccountPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at billing account scope.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountPolicy"
+            }
+          },
+          "201": {
+            "description": "A policy at billing account scope.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountPolicy"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PoliciesPutByBillingAccount": {
+            "$ref": "./examples/policiesPutByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/policies/default": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Lists the policies that are managed by the Billing Admin for the defined subscriptions. This is supported for Microsoft Online Services Program, Microsoft Customer Agreement and Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_GetBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at subscription scope.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PoliciesGetBySubscription": {
+            "$ref": "./examples/policiesGetBySubscription.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingAccountPolicy": {
+      "description": "A policy at billing account scope.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingAccountPolicyProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BillingAccountPolicyProperties": {
+      "description": "A policy at billing account scope.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "New",
+            "Pending",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "enterpriseAgreementPolicies": {
+          "description": "The policies for Enterprise Agreement enrollments.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnterpriseAgreementPolicies"
+            }
+          ]
+        },
+        "marketplacePurchases": {
+          "description": "The policy that controls whether Azure marketplace purchases are allowed.",
+          "enum": [
+            "Other",
+            "AllAllowed",
+            "Disabled",
+            "NotAllowed",
+            "OnlyFreeAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MarketplacePurchasesPolicy",
+            "modelAsString": true
+          }
+        },
+        "reservationPurchases": {
+          "description": "The policy that controls whether Azure reservation purchases are allowed.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "Disabled",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReservationPurchasesPolicy",
+            "modelAsString": true
+          }
+        },
+        "savingsPlanPurchases": {
+          "description": "The policy that controls whether users with Azure savings plan purchase are allowed.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "Disabled",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SavingsPlanPurchasesPolicy",
+            "modelAsString": true
+          }
+        },
+        "policies": {
+          "description": "List of all policies defined at the billing scope.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySummary"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "BillingProfilePolicy": {
+      "description": "A policy at billing profile scope.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingProfilePolicyProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BillingProfilePolicyProperties": {
+      "description": "A policy at billing profile scope.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "New",
+            "Pending",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "enterpriseAgreementPolicies": {
+          "description": "The policies for Enterprise Agreement enrollments.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnterpriseAgreementPolicies"
+            }
+          ]
+        },
+        "invoiceSectionLabelManagement": {
+          "description": "The policy that controls invoice section label management at invoice section scope. This is allowed by default.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InvoiceSectionLabelManagementPolicy",
+            "modelAsString": true
+          }
+        },
+        "marketplacePurchases": {
+          "description": "The policy that controls whether Azure marketplace purchases are allowed.",
+          "enum": [
+            "Other",
+            "AllAllowed",
+            "Disabled",
+            "NotAllowed",
+            "OnlyFreeAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MarketplacePurchasesPolicy",
+            "modelAsString": true
+          }
+        },
+        "reservationPurchases": {
+          "description": "The policy that controls whether Azure reservation purchases are allowed.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "Disabled",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReservationPurchasesPolicy",
+            "modelAsString": true
+          }
+        },
+        "savingsPlanPurchases": {
+          "description": "The policy that controls whether users with Azure savings plan purchase are allowed.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "Disabled",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SavingsPlanPurchasesPolicy",
+            "modelAsString": true
+          }
+        },
+        "viewCharges": {
+          "description": "The policy that controls whether the users in customer's organization can view charges at pay-as-you-go prices.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ViewChargesPolicy",
+            "modelAsString": true
+          }
+        },
+        "policies": {
+          "description": "List of all policies defined at the billing scope.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySummary"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "CustomerPolicy": {
+      "description": "A policy at customer scope.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomerPolicyProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CustomerPolicyProperties": {
+      "description": "A policy at customer scope.",
+      "required": [
+        "viewCharges"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "New",
+            "Pending",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "viewCharges": {
+          "description": "The policy that controls whether the users in customer's organization can view charges at pay-as-you-go prices.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ViewChargesPolicy",
+            "modelAsString": true
+          }
+        },
+        "policies": {
+          "description": "List of all policies defined at the billing scope.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySummary"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "EnterpriseAgreementPolicies": {
+      "description": "The policies for Enterprise Agreement enrollments.",
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "description": "The state showing the enrollment auth level.",
+          "enum": [
+            "Other",
+            "MicrosoftAccountOnly",
+            "MixedAccount",
+            "OrganizationalAccountCrossTenant",
+            "OrganizationalAccountOnly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnrollmentAuthLevelState",
+            "modelAsString": true
+          }
+        },
+        "accountOwnerViewCharges": {
+          "description": "The policy that controls whether account owner can view charges.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "Disabled",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnrollmentAccountOwnerViewCharges",
+            "modelAsString": true
+          }
+        },
+        "departmentAdminViewCharges": {
+          "description": "The policy that controls whether department admin can view charges.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "Disabled",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnrollmentDepartmentAdminViewCharges",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PolicySummary": {
+      "description": "The summary of the policy.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the policy.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the policy.",
+          "type": "string"
+        },
+        "policyType": {
+          "description": "The type of the policy.",
+          "enum": [
+            "Other",
+            "UserControlled",
+            "SystemControlled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyType",
+            "modelAsString": true
+          }
+        },
+        "scope": {
+          "description": "The scope at which the policy is defined.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionPolicy": {
+      "description": "A policy at subscription scope.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionPolicyProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SubscriptionPolicyProperties": {
+      "description": "A policy at subscription scope.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "New",
+            "Pending",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "policies": {
+          "description": "List of all policies defined at the billing scope.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySummary"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

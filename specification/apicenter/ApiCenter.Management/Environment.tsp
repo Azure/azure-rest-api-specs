@@ -6,7 +6,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
@@ -30,7 +29,10 @@ interface Environments {
   @doc("Checks if specified environment exists.")
   @head
   head(
-    ...ResourceInstanceParameters<Environment, BaseParameters<Environment>>,
+    ...ResourceInstanceParameters<
+      Environment,
+      Foundations.BaseParameters<Environment>
+    >,
   ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing environment.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Environment>;

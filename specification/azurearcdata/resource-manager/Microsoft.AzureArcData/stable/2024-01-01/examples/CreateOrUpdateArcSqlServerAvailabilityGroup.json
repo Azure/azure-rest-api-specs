@@ -1,0 +1,219 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlServerInstanceName": "testSqlServer_INST1",
+    "availabilityGroupName": "testAG",
+    "api-version": "2024-01-01",
+    "sqlServerAvailabilityGroupResource": {
+      "location": "southeastasia",
+      "tags": {
+        "mytag": "myval"
+      },
+      "properties": {
+        "info": {
+          "failureConditionLevel": 3,
+          "healthCheckTimeout": 30000,
+          "basicFeatures": false,
+          "dtcSupport": false,
+          "dbFailover": true,
+          "isDistributed": false,
+          "requiredSynchronizedSecondariesToCommit": 0,
+          "isContained": false,
+          "secondaryRecoveryHealthDescription": null,
+          "replicationPartnerType": null
+        },
+        "replicas": {
+          "value": [
+            {
+              "replicaName": "testSqlServer\\INST1",
+              "configure": {
+                "endpointUrl": "TCP://mytest60-0.mytest60-svc:5022",
+                "sessionTimeout": 10,
+                "replicaCreateDate": null,
+                "replicaModifyDate": null,
+                "backupPriority": 50,
+                "readOnlyRoutingUrl": null,
+                "readWriteRoutingUrl": null
+              }
+            }
+          ]
+        },
+        "databases": {
+          "value": [
+            {
+              "databaseName": "db1"
+            },
+            {
+              "databaseName": "db2"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "southeastasia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlServerInstances/testSqlServer_INST1/availabilityGroups/testAG",
+        "name": "testAG",
+        "type": "Microsoft.AzureArcData/sqlServerInstances/availabilityGroups",
+        "properties": {
+          "availabilityGroupId": "00000000-1111-2222-3333-444444444444",
+          "serverName": "testSqlServer",
+          "instanceName": "INST1",
+          "replicas": {
+            "value": [
+              {
+                "replicaId": "00000000-1111-2222-3333-444444444444",
+                "replicaName": "testSqlServerInstance",
+                "configure": {
+                  "endpointUrl": "TCP://mytest60-0.mytest60-svc:5022",
+                  "availabilityModeDescription": "SYNCHRONOUS_COMMIT",
+                  "failoverModeDescription": "EXTERNAL",
+                  "sessionTimeout": 10,
+                  "primaryRoleAllowConnectionsDescription": "ALL",
+                  "secondaryRoleAllowConnectionsDescription": "ALL",
+                  "replicaCreateDate": null,
+                  "replicaModifyDate": null,
+                  "backupPriority": 50,
+                  "readOnlyRoutingUrl": null,
+                  "readWriteRoutingUrl": null,
+                  "seedingModeDescription": "AUTOMATIC"
+                },
+                "state": {
+                  "availabilityGroupReplicaRole": "SECONDARY",
+                  "operationalStateDescription": "ONLINE",
+                  "recoveryHealthDescription": "ONLINE_IN_PROGRESS",
+                  "synchronizationHealthDescription": "HEALTHY",
+                  "connectedStateDescription": "CONNECTED",
+                  "lastConnectErrorDescription": "",
+                  "lastConnectErrorTimestamp": "2022-05-05T16:26:33.883Z"
+                }
+              }
+            ]
+          },
+          "databases": {
+            "value": [
+              {
+                "databaseName": "db1",
+                "replicaName": "testSqlServer\\INST1",
+                "isLocal": true,
+                "isPrimaryReplica": true,
+                "synchronizationStateDescription": "SYNCHRONIZED",
+                "isCommitParticipant": true,
+                "synchronizationHealthDescription": "HEALTHY",
+                "databaseStateDescription": "ONLINE",
+                "isSuspended": false
+              },
+              {
+                "databaseName": "db2",
+                "replicaName": "testSqlServer\\INST1",
+                "isLocal": true,
+                "isPrimaryReplica": true,
+                "synchronizationStateDescription": "SYNCHRONIZED",
+                "isCommitParticipant": true,
+                "synchronizationHealthDescription": "HEALTHY",
+                "databaseStateDescription": "ONLINE",
+                "isSuspended": false
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "location": "southeastasia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlServerInstances/testSqlServer_INST1/availabilityGroups/testAG",
+        "name": "testAG",
+        "type": "Microsoft.AzureArcData/sqlServerInstances/availabilityGroups",
+        "properties": {
+          "availabilityGroupId": "00000000-1111-2222-3333-444444444444",
+          "serverName": "testSqlServer",
+          "instanceName": "INST1",
+          "replicas": {
+            "value": [
+              {
+                "replicaId": "00000000-1111-2222-3333-444444444444",
+                "replicaName": "testSqlServerInstance",
+                "configure": {
+                  "endpointUrl": "TCP://mytest60-0.mytest60-svc:5022",
+                  "availabilityModeDescription": "SYNCHRONOUS_COMMIT",
+                  "failoverModeDescription": "EXTERNAL",
+                  "sessionTimeout": 10,
+                  "primaryRoleAllowConnectionsDescription": "ALL",
+                  "secondaryRoleAllowConnectionsDescription": "ALL",
+                  "replicaCreateDate": null,
+                  "replicaModifyDate": null,
+                  "backupPriority": 50,
+                  "readOnlyRoutingUrl": null,
+                  "readWriteRoutingUrl": null,
+                  "seedingModeDescription": "AUTOMATIC"
+                },
+                "state": {
+                  "availabilityGroupReplicaRole": "SECONDARY",
+                  "operationalStateDescription": "ONLINE",
+                  "recoveryHealthDescription": "ONLINE_IN_PROGRESS",
+                  "synchronizationHealthDescription": "HEALTHY",
+                  "connectedStateDescription": "CONNECTED",
+                  "lastConnectErrorDescription": "",
+                  "lastConnectErrorTimestamp": "2022-05-05T16:26:33.883Z"
+                }
+              }
+            ]
+          },
+          "databases": {
+            "value": [
+              {
+                "databaseName": "db1",
+                "replicaName": "testSqlServer\\INST1",
+                "isLocal": true,
+                "isPrimaryReplica": true,
+                "synchronizationStateDescription": "SYNCHRONIZED",
+                "isCommitParticipant": true,
+                "synchronizationHealthDescription": "HEALTHY",
+                "databaseStateDescription": "ONLINE",
+                "isSuspended": false
+              },
+              {
+                "databaseName": "db2",
+                "replicaName": "testSqlServer\\INST1",
+                "isLocal": true,
+                "isPrimaryReplica": true,
+                "synchronizationStateDescription": "SYNCHRONIZED",
+                "isCommitParticipant": true,
+                "synchronizationHealthDescription": "HEALTHY",
+                "databaseStateDescription": "ONLINE",
+                "isSuspended": false
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "mobileNetworkName": "testMobileNetwork",
+    "siteName": "testSite",
+    "parameters": {
+      "location": "testLocation",
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSite",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite",
+        "type": "Microsoft.MobileNetwork/mobileNetworks/sites",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "testLocation",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "networkFunctions": []
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2024-04-01"
+      },
+      "body": {
+        "name": "testSite",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite",
+        "type": "Microsoft.MobileNetwork/mobileNetworks/sites",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "testLocation",
+        "properties": {
+          "provisioningState": "Created",
+          "networkFunctions": []
+        }
+      }
+    }
+  }
+}

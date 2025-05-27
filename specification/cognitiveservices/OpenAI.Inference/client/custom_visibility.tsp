@@ -3,11 +3,6 @@ import "../main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-// Azure-specific Chat Completions with extensions should be handled by clients as a conditional selection within the
-// shared Chat Completions route, with the selection gated by the presence or non-presence of additional child
-// configuration options on the request payload options model.
-@@access(Azure.OpenAI.getChatCompletionsWithAzureExtensions, Access.internal);
-
 // In C#, the functionality provided by the `response_format` property used in image generations is handled by unique
 // method signatures for the different response types (i.e. blob URL versus base64 methods).
 @@access(Azure.OpenAI.ImageGenerationResponseFormat, Access.internal, "csharp");
@@ -16,7 +11,7 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.ImageGenerationOptions, Access.public);
 @@usage(Azure.OpenAI.ImageGenerationOptions, Usage.input | Usage.output);
 @@access(Azure.OpenAI.ImageSize, Access.public);
-@@usage(Azure.OpenAI.ImageGenerations, Usage.input | Usage.output);
+@@usage(Azure.OpenAI.ImageGenerations, Usage.output);
 
 // The purpose of this enum is to identify the type of a given result. In C#, this is redundant because we have
 // strongly-typed classes for each possible result.
@@ -28,52 +23,73 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.AudioTranslation, Access.public, "java");
 @@access(Azure.OpenAI.AudioTranslationOptions, Access.public, "java");
 
-@@access(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions,
-  Access.public
-);
-@@usage(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions, Usage.input);
+@@access(Azure.OpenAI.AzureSearchIndexFieldMappingOptions, Access.public);
+@@usage(Azure.OpenAI.AzureSearchIndexFieldMappingOptions, Usage.input);
 
-@@access(Azure.OpenAI.AzureCognitiveSearchQueryType, Access.public);
-@@usage(Azure.OpenAI.AzureCognitiveSearchQueryType, Usage.input);
+@@access(Azure.OpenAI.AzureSearchQueryType, Access.public);
+@@usage(Azure.OpenAI.AzureSearchQueryType, Usage.input);
 
-@@access(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
-  Access.public
-);
-@@usage(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
-  Usage.input
-);
+@@access(Azure.OpenAI.AzureSearchChatExtensionConfiguration, Access.public);
+@@usage(Azure.OpenAI.AzureSearchChatExtensionConfiguration, Usage.input);
 
 // Remap "model" nomenclature to "DeploymentName" in appropriate containers; comments should clarify the dual use
-@@projectedName(Azure.OpenAI.ImageGenerationOptions.`model`,
-  "csharp",
-  "DeploymentName"
+@@clientName(Azure.OpenAI.ImageGenerationOptions.`model`,
+  "DeploymentName",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.ChatResponseMessage.context,
-  "csharp",
-  "AzureExtensionsContext"
+@@clientName(Azure.OpenAI.ChatResponseMessage.context,
+  "AzureExtensionsContext",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.json, "csharp", "Simple");
+@@clientName(Azure.OpenAI.AudioTranscriptionFormat.json, "Simple", "csharp");
 
-@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.verbose_json,
-  "csharp",
-  "Verbose"
+@@clientName(Azure.OpenAI.AudioTranscriptionFormat.verbose_json,
+  "Verbose",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.text,
-  "csharp",
-  "InternalPlainText"
+@@clientName(Azure.OpenAI.AudioTranscriptionFormat.text,
+  "InternalPlainText",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.AudioTranslationFormat.json, "csharp", "Simple");
+@@clientName(Azure.OpenAI.AudioTranslationFormat.json, "Simple", "csharp");
 
-@@projectedName(Azure.OpenAI.AudioTranslationFormat.verbose_json,
-  "csharp",
-  "Verbose"
+@@clientName(Azure.OpenAI.AudioTranslationFormat.verbose_json,
+  "Verbose",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.AudioTranslationFormat.text,
-  "csharp",
-  "InternalPlainText"
+@@clientName(Azure.OpenAI.AudioTranslationFormat.text,
+  "InternalPlainText",
+  "csharp"
+);
+
+@@clientName(Azure.OpenAI.ChatCompletionsOptions.logprobs,
+  "EnableLogProbabilities",
+  "csharp"
+);
+@@clientName(Azure.OpenAI.ChatCompletionsOptions.top_logprobs,
+  "LogProbabilitiesPerToken",
+  "csharp"
+);
+
+@@clientName(Azure.OpenAI.ChatChoice.logprobs, "LogProbabilityInfo", "csharp");
+@@clientName(Azure.OpenAI.ChatChoiceLogProbabilityInfo.content,
+  "TokenLogProbabilityResults",
+  "csharp"
+);
+@@clientName(Azure.OpenAI.ChatTokenLogProbabilityResult.top_logprobs,
+  "TopLogProbabilityEntries",
+  "csharp"
+);
+@@clientName(Azure.OpenAI.ChatTokenLogProbabilityInfo.logprob,
+  "LogProbability",
+  "csharp"
+);
+@@clientName(Azure.OpenAI.ChatTokenLogProbabilityInfo.bytes,
+  "Utf8ByteValues",
+  "csharp"
 );

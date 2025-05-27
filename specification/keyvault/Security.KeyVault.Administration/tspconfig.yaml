@@ -1,0 +1,62 @@
+parameters:
+  "service-dir":
+    default: "sdk/keyvault"
+  "dependencies":
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Microsoft.KeyVault/{version-status}/{version}/administration.json"
+  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
+  "@azure-tools/typespec-python":
+    flavor: azure
+    "basic-setup-py": true
+    "package-version": "4.5.0b1"
+    "package-dir": "azure-keyvault-administration"
+    "namespace": "azure.keyvault.administration"
+    "output-path": "./azure/keyvault/administration/_generated"
+  "@azure-tools/typespec-java":
+    flavor: azure
+    "package-dir": "azure-security-keyvault-administration"
+    "namespace": "com.azure.security.keyvault.administration"
+    "models-subpackage": "implementation.models"
+    "custom-types": "KeyVaultDataAction,KeyVaultRoleDefinitionType,KeyVaultRoleScope,KeyVaultRoleType,KeyVaultSettingType"
+    "custom-types-subpackage": "models"
+    "customization-class": "swagger/src/main/java/AdministrationCustomizations.java"
+    "partial-update": true
+    "generate-tests": false
+    "generate-samples": false
+    "include-api-view-properties": false
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Security.KeyVault.Administration
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Security.KeyVault.Administration"
+    namespace: "Azure.Security.KeyVault.Administration"
+    "output-path": "./src/Generated"
+    flavor: azure
+    use-model-reader-writer: false
+  "@azure-tools/typespec-ts":
+    package-dir: "keyvault-admin"
+    generate-metadata: true
+    src-folder: "src/generated"
+    experimental-extensible-enums: true
+    is-modular-library: true
+    package-details:
+      name: "@azure/keyvault-admin"
+      description: "Azure Key Vault Administration"
+    flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/keyvault/Security.KeyVault.BackupRestore/"
+      - "specification/keyvault/Security.KeyVault.Common/"
+      - "specification/keyvault/Security.KeyVault.RBAC/"
+      - "specification/keyvault/Security.KeyVault.Settings/"

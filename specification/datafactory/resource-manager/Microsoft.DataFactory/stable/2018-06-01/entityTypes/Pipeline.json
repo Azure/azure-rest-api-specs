@@ -1093,7 +1093,7 @@
       }
     },
     "LakeHouseReadSettings": {
-      "description": "Microsoft Fabric LakeHouse Files read settings.",
+      "description": "Microsoft Fabric Lakehouse Files read settings.",
       "type": "object",
       "allOf": [
         {
@@ -1109,12 +1109,12 @@
         "wildcardFolderPath": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Microsoft Fabric LakeHouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
+          "description": "Microsoft Fabric Lakehouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Microsoft Fabric LakeHouse Files wildcardFileName. Type: string (or Expression with resultType string)."
+          "description": "Microsoft Fabric Lakehouse Files wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
@@ -1257,7 +1257,7 @@
       ]
     },
     "LakeHouseWriteSettings": {
-      "description": "Microsoft Fabric LakeHouse Files write settings.",
+      "description": "Microsoft Fabric Lakehouse Files write settings.",
       "type": "object",
       "allOf": [
         {
@@ -1596,6 +1596,16 @@
         "name": "JsonWriteFilePattern",
         "modelAsString": true
       }
+    },
+    "IcebergWriteSettings": {
+      "description": "Iceberg write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {}
     },
     "AvroSource": {
       "description": "A copy activity Avro source.",
@@ -2281,6 +2291,22 @@
       }
     },
     "PostgreSqlSource": {
+      "description": "A copy activity source for PostgreSQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PostgreSqlV2Source": {
       "description": "A copy activity source for PostgreSQL databases.",
       "type": "object",
       "allOf": [
@@ -3262,6 +3288,37 @@
         }
       }
     },
+    "TeradataSink": {
+      "description": "A copy activity Teradata sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "importSettings": {
+          "$ref": "#/definitions/TeradataImportCommand",
+          "description": "Teradata import settings."
+        }
+      }
+    },
+    "TeradataImportCommand": {
+      "description": "Teradata import command settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImportSettings"
+        }
+      ],
+      "properties": {
+        "additionalFormatOptions": {
+          "type": "object",
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "Additional format options for Teradata Copy Command. The format options only applies to direct copy from CSV source. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"timeFormat\": \"HHhMImSSs\" }"
+        }
+      }
+    },
     "TeradataPartitionSettings": {
       "description": "The settings that will be leveraged for teradata source partitioning.",
       "type": "object",
@@ -3612,7 +3669,7 @@
       }
     },
     "AzurePostgreSqlSource": {
-      "description": "A copy activity Azure PostgreSQL source.",
+      "description": "A copy activity Azure Database for PostgreSQL source.",
       "type": "object",
       "allOf": [
         {
@@ -3628,7 +3685,7 @@
       }
     },
     "AzurePostgreSqlSink": {
-      "description": "A copy activity Azure PostgreSQL sink.",
+      "description": "A copy activity Azure Database for PostgreSQL sink.",
       "type": "object",
       "allOf": [
         {
@@ -3640,6 +3697,30 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        },
+        "writeMethod": {
+          "description": "The write behavior for the operation. Default is Bulk Insert.",
+          "type": "string",
+          "enum": [
+            "BulkInsert",
+            "CopyCommand",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "AzurePostgreSqlWriteMethodEnum",
+            "modelAsString": true
+          }
+        },
+        "upsertSettings": {
+          "description": "Azure Database for PostgreSQL upsert option settings",
+          "type": "object",
+          "properties": {
+            "keys": {
+              "type": "object",
+              "x-ms-format": "dfe-list-string",
+              "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
+            }
+          }
         }
       }
     },
@@ -4243,7 +4324,7 @@
       }
     },
     "LakeHouseTableSource": {
-      "description": "A copy activity source for Microsoft Fabric LakeHouse Table.",
+      "description": "A copy activity source for Microsoft Fabric Lakehouse Table.",
       "type": "object",
       "allOf": [
         {
@@ -4373,6 +4454,11 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "storageIntegration": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -4742,6 +4828,25 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "Binary store settings."
+        }
+      }
+    },
+    "IcebergSink": {
+      "description": "A copy activity Iceberg sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Iceberg store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/IcebergWriteSettings",
+          "description": "Iceberg format settings."
         }
       }
     },
@@ -5333,6 +5438,11 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "storageIntegration": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -5670,6 +5780,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5698,6 +5818,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5726,6 +5856,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5873,7 +6013,7 @@
       }
     },
     "LakeHouseTableSink": {
-      "description": "A copy activity for Microsoft Fabric LakeHouse Table sink.",
+      "description": "A copy activity for Microsoft Fabric Lakehouse Table sink.",
       "type": "object",
       "allOf": [
         {
@@ -5884,7 +6024,7 @@
         "tableActionOption": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The type of table action for LakeHouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
+          "description": "The type of table action for Lakehouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
         },
         "partitionOption": {
           "type": "object",
@@ -5984,6 +6124,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The format for TimeSpan values. Type: string (or Expression with resultType string)."
+        },
+        "timeFormat": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The format for Time values. Type: string (or Expression with resultType string)."
+        },
+        "dateFormat": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The format for Date values. Type: string (or Expression with resultType string)."
         },
         "culture": {
           "type": "object",
@@ -7151,7 +7301,7 @@
           "type": "object",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
           "additionalProperties": {
-            "type": "string",
+            "type": "object",
             "x-ms-format": "dfe-string"
           }
         },
@@ -8192,7 +8342,7 @@
           "type": "object",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
           "additionalProperties": {
-            "type": "string",
+            "type": "object",
             "x-ms-format": "dfe-string"
           }
         },
@@ -8261,7 +8411,7 @@
           "type": "object",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
           "additionalProperties": {
-            "type": "string",
+            "type": "object",
             "x-ms-format": "dfe-string"
           }
         },
@@ -8343,6 +8493,10 @@
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         },
+        "continuationSettings": {
+          "description": "Continuation settings for execute data flow activity.",
+          "$ref": "#/definitions/ContinuationSettingsReference"
+        },
         "compute": {
           "description": "Compute properties for data flow activity.",
           "type": "object",
@@ -8383,6 +8537,27 @@
       "required": [
         "dataFlow"
       ]
+    },
+    "ContinuationSettingsReference": {
+      "description": "Continuation settings for execute data flow activity.",
+      "type": "object",
+      "properties": {
+        "continuationTtlInMinutes": {
+          "description": "Continuation TTL in minutes.",
+          "x-ms-format": "dfe-int",
+          "type": "object"
+        },
+        "idleCondition": {
+          "description": "Idle condition.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "customizedCheckpointKey": {
+          "description": "Customized checkpoint key.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        }
+      }
     },
     "ExecutePowerQueryActivityTypeProperties": {
       "description": "Execute power query data flow activity properties.",
@@ -8494,6 +8669,11 @@
           "required": [
             "logDestination"
           ]
+        },
+        "returnMultistatementResult": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Enable to retrieve result sets from multiple SQL statements and the number of rows affected by the DML statement. Supported connector: SnowflakeV2. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -8507,16 +8687,9 @@
           "description": "The query text. Type: string (or Expression with resultType string)."
         },
         "type": {
-          "x-ms-enum": {
-            "name": "ScriptType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Query",
-            "NonQuery"
-          ],
-          "type": "string",
-          "description": "The type of the query. Type: string."
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The type of the query. Please refer to the ScriptType for valid options. Type: string (or Expression with resultType string)."
         },
         "parameters": {
           "type": "array",
@@ -8609,6 +8782,18 @@
           "x-ms-format": "dfe-string",
           "description": "The wait time to get a response from SharePoint Online. Default value is 5 minutes (00:05:00). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
+      }
+    },
+    "ScriptType": {
+      "description": "The type of the ScriptActivityScriptBlock.",
+      "type": "string",
+      "enum": [
+        "Query",
+        "NonQuery"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptType",
+        "modelAsString": true
       }
     },
     "SqlPartitionOption": {
@@ -9079,12 +9264,22 @@
         "SOQLQuery": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Database query. Type: string (or Expression with resultType string)."
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
         },
         "includeDeletedObjects": {
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object",
           "x-ms-format": "dfe-bool"
+        },
+        "pageSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Page size for each http request, too large pageSize will caused timeout, default 300,000. Type: integer (or Expression with resultType integer)."
         }
       }
     },
@@ -9100,7 +9295,12 @@
         "SOQLQuery": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Database query. Type: string (or Expression with resultType string)."
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
         },
         "includeDeletedObjects": {
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
@@ -9192,6 +9392,11 @@
           "type": "object",
           "description": "Expression to filter data from source.",
           "$ref": "#/definitions/ExpressionV2"
+        },
+        "pageSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Page size of the result. Type: integer (or Expression with resultType integer)."
         }
       }
     },
@@ -9208,7 +9413,8 @@
             "Constant",
             "Field",
             "Unary",
-            "Binary"
+            "Binary",
+            "NAry"
           ],
           "type": "string",
           "description": "Type of expressions supported by the system. Type: string."
@@ -9217,9 +9423,14 @@
           "description": "Value for Constant/Field Type: string.",
           "type": "string"
         },
-        "operator": {
-          "description": "Expression operator value Type: string.",
-          "type": "string"
+        "operators": {
+          "description": "Expression operator value Type: list of strings.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string."
+          }
         },
         "operands": {
           "description": "List of nested expressions.",

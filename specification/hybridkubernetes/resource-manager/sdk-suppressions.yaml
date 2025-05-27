@@ -1,0 +1,9 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-hybridkubernetes
+      breaking-changes:
+        - Model ConnectedClusterPatch no longer has parameter properties
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/hybridkubernetes/armhybridkubernetes
+      breaking-changes:
+        - Type of `ConnectedClusterPatch.Properties` has been changed from `any` to `*ConnectedClusterPatchProperties`

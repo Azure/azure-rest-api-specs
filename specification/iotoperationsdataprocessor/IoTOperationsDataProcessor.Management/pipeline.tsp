@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
@@ -28,7 +27,7 @@ model Pipeline is TrackedResource<PipelineProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
@@ -40,20 +39,19 @@ model PipelineProperties {
   @doc("Flag indicating whether the pipeline should be running or not.")
   enabled: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Information about where to pull input data from.")
   input: PipelineInput;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Map of stage ids to stage configurations for all pipeline processing and output stages.")
   stages: Record<PipelineStage>;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
 @doc("Stage configuration for Pipeline input stage.")
 model PipelineInput is Record<unknown> {
   @doc("ARM resource type.")
@@ -66,7 +64,7 @@ model PipelineInput is Record<unknown> {
   next: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
 @doc("Stage configurations for all Pipeline processing and output stages.")
 model PipelineStage is Record<unknown> {
   @doc("ARM resource type.")
@@ -82,10 +80,13 @@ model PipelineStage is Record<unknown> {
 @armResourceOperations
 interface Pipelines {
   get is ArmResourceRead<Pipeline>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Pipeline>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Pipeline,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmCustomPatchSync<Pipeline>;
   delete is ArmResourceDeleteWithoutOkAsync<Pipeline>;
   listByInstance is ArmResourceListByParent<Pipeline>;
 }
-
-// PipelineStages should not use 'is Record<unknown>'. Use 'is Record<string>' instead.TypeSpec(@azure-tools/typespec-azure-core/bad-record-type)

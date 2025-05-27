@@ -26,7 +26,7 @@ using Azure.ClientGenerator.Core;
 @@access(ImageAnalysis.SmartCropsResult, Access.public, "csharp");
 @@access(ImageAnalysis.TagsResult, Access.public, "csharp");
 
-@@projectedName(ImageAnalysis.VisualFeatures, "csharp", "VisualFeaturesImpl");
+@@clientName(ImageAnalysis.VisualFeatures, "VisualFeaturesImpl", "csharp");
 
 @@access(ImageAnalysis.analyzeFromImageData, Access.internal, "java");
 @@access(ImageAnalysis.analyzeFromUrl, Access.internal, "java");

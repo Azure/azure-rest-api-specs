@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./base.tsp";
@@ -62,7 +61,7 @@ model DiagnosticServiceProperties {
   @doc("The destination to collect traces. Diagnostic service will push traces to this endpoint")
   openTelemetryTracesCollectorAddr?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 

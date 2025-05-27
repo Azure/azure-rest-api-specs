@@ -2122,12 +2122,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CloudManagerTenant"
-              },
-              "x-ms-identifiers": [],
-              "x-cadl-name": "CloudManagerTenant[]"
+              "$ref": "#/definitions/CloudManagerTenantList"
             }
           },
           "default": {
@@ -2164,6 +2159,9 @@
             "schema": {
               "$ref": "#/definitions/ProductSerialNumberStatus"
             }
+          },
+          "404": {
+            "description": "The server can not find the requested resource."
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -5035,21 +5033,21 @@
         "changes"
       ]
     },
-    "CloudManagerTenant": {
+    "CloudManagerTenantList": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of Cloud Manager Tenant"
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Cloud Manager Tenant ID"
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "List of Cloud Manager Tenants"
         }
       },
       "description": "Cloud Manager Tenant",
       "required": [
-        "name"
+        "value"
       ]
     },
     "CountriesResponse": {

@@ -401,22 +401,6 @@
         ]
       }
     },
-    "ApiVersion": {
-      "type": "string",
-      "enum": [
-        "2023-03-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "ApiVersion",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_03_01_preview",
-            "value": "2023-03-01-preview"
-          }
-        ]
-      }
-    },
     "AreaGeometry": {
       "type": "object",
       "description": "`GeoJSON` geometry, representing the area circle's center.",
@@ -1299,30 +1283,6 @@
       },
       "required": [
         "countryOrRegion"
-      ]
-    },
-    "Inference": {
-      "type": "object",
-      "description": "An inference made by the model regarding a patient.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The value of the inference, as relevant for the given inference type."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description corresponding to the inference value."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence score for this inference.",
-          "minimum": 0,
-          "maximum": 1
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "InferenceEvidence": {

@@ -26,7 +26,7 @@ These are the global settings for the Azure Communications Gateway Provisioning 
 
 ```yaml
 openapi-type: dataplane
-tag: package-2023-10-01
+tag: package-2024-02-29-preview
 title: AcgProvisioningPlatform
 ```
 
@@ -37,6 +37,15 @@ These settings apply only when `--tag=package-2023-10-01` is specified on the co
 ```yaml $(tag) == 'package-2023-10-01'
 input-file:
   - stable/2023-10-01/swagger.json
+```
+
+### Tag: package-2024-02-29-preview
+
+These settings apply only when `--tag=package-2024-02-29-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-29-preview'
+input-file:
+  - preview/2024-02-29-preview/swagger.json
 ```
 
 # Code Generation

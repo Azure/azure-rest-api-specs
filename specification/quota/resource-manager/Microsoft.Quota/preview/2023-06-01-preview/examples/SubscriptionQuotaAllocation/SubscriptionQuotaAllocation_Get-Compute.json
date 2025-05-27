@@ -1,0 +1,29 @@
+{
+  "operationId": "GroupQuotaSubscriptionAllocation_Get",
+  "parameters": {
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "groupQuotaName": "groupquota1",
+    "resourceName": "standardav2family",
+    "api-version": "2023-06-01-preview",
+    "$filter": "provider eq Microsoft.Compute & location eq westus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Quota/groupQuotas/groupquota1/providers/Microsoft.Compute/locations/westus/quotaAllocations/standardav2family",
+        "type": "Microsoft.Quota/groupQuotas/quotaAllocations",
+        "name": "standardav2family",
+        "properties": {
+          "region": "westus",
+          "limit": 100,
+          "name": {
+            "value": "standardav2family",
+            "localizedValue": "standard Av2 Family vCPUs"
+          },
+          "shareableQuota": 25
+        }
+      }
+    }
+  }
+}

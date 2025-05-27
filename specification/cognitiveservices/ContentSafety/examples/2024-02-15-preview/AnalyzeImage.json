@@ -1,0 +1,36 @@
+{
+  "title": "Analyze Image",
+  "operationId": "ImageOperations_AnalyzeImage",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "body": {
+      "image": {
+        "content": "Y29udGVudDE="
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "categoriesAnalysis": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 2
+          }
+        ]
+      }
+    }
+  }
+}
