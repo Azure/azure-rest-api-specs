@@ -468,3 +468,18 @@ using Oracle.Database;
 );
 @@usage(GiVersionProperties, Usage.input | Usage.output, "csharp");
 @@usage(SystemVersionProperties, Usage.input | Usage.output, "csharp");
+// Addressing Ocid type issue
+@@clientName(AutonomousDatabaseBackupProperties.autonomousDatabaseOcid,
+  "DatabaseOcid",
+  "csharp"
+);
+@@clientName(AutonomousDatabaseBackupProperties.ocid,
+  "DatabaseBackupOcid",
+  "csharp"
+);
+// Address ComputeModel type change
+@@clientName(AutonomousDatabaseBaseProperties.computeModel,
+  "DatabaseComputeModel",
+  "csharp"
+);
+@@clientName(AutonomousDatabaseBaseProperties.ocid, "DatabaseOcid", "csharp");
