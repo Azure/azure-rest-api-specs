@@ -26,14 +26,16 @@ options:
     "namespace": "azure.keyvault.keys._generated"
     "package-dir": "azure-keyvault-keys"
   "@azure-tools/typespec-java":
-    flavor: azure
+    flavor: "azurev2"
+    api-version: "7.5"
     package-dir: "azure-security-keyvault-keys"
-    namespace: "com.azure.security.keyvault.keys"
+    namespace: "com.azure.v2.security.keyvault.keys"
     models-subpackage: "implementation.models"
-    custom-types: "KeyAttestation,KeyCurveName,KeyExportEncryptionAlgorithm,KeyOperation,KeyRotationPolicyAction,KeyType,ReleaseKeyResult"
+    custom-types: "KeyCurveName,KeyExportEncryptionAlgorithm,KeyOperation,KeyRotationPolicyAction,KeyType,ReleaseKeyResult"
     custom-types-subpackage: "models"
     customization-class: "customizations/src/main/java/KeysCustomizations.java"
     use-eclipse-language-server: false
+    use-rest-proxy: false
     generate-tests: false
     generate-samples: false
     include-api-view-properties: false
