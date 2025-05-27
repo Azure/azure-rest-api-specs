@@ -28,10 +28,10 @@ union Strategy {
 
 @doc("Server migration path options.")
 union ServerMigrationPath {
-  @doc("Agent less Migration Path")
+  @doc("Agent less Migration Path. This path does not require an agent to be installed on the source server.")
   Agentless: "agentless",
 
-  @doc("Agent based Migration Path")
+  @doc("Agent based Migration Path. This path requires an agent to be installed on the source server.")
   Agentbased: "agentbased",
 
   string,
@@ -110,25 +110,25 @@ union MigrationEntityTarget {
 
 @doc("Migration Entity Migration Status.")
 union MigrationEntityMigrationStatus {
-  @doc("New migration entity status.")
+  @doc("New migration entity status. This indicates that the migration process for the entity has not yet started and is in the initial planning phase.")
   New: "New",
 
-  @doc("In progress migration entity status.")
+  @doc("In progress migration entity status. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment.")
   InProgress: "InProgress",
 
-  @doc("At Risk migration entity status.")
+  @doc("At Risk migration entity status. This indicates that the migration process for the entity is facing challenges that could potentially delay or complicate the migration.")
   AtRisk: "AtRisk",
 
-  @doc("Failed migration entity status.")
+  @doc("Failed migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully.")
   Failed: "Failed",
 
-  @doc("Cancelled migration entity status.")
+  @doc("Cancelled migration entity status.  This indicates that the migration process for the entity has been intentionally stopped before completion.")
   Cancelled: "Cancelled",
 
-  @doc("Completed migration entity status.")
+  @doc("Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment.")
   Completed: "Completed",
 
-  @doc("None migration entity status.")
+  @doc("None migration entity status. This indicates that the migration entity has not been assigned a specific status, possibly because it is not yet started or is in a state that does not require a status update.")
   None: "None",
 
   string,
@@ -136,25 +136,25 @@ union MigrationEntityMigrationStatus {
 
 @doc("Migration Entity Planning Status.")
 union MigrationEntityPlanningStatus {
-  @doc("New")
+  @doc("New migration entity planning status.")
   New: "New",
 
-  @doc("In progress")
+  @doc("In progress migration entity planning status. This indicates that the migration entity planning is currently underway and tasks are being executed to prepare for the migration.")
   InProgress: "InProgress",
 
-  @doc("At Risk")
+  @doc("At Risk migration entity planning status. This indicates that the migration entity planning is facing challenges that could potentially delay or complicate the planning process.")
   AtRisk: "AtRisk",
 
-  @doc("Failed")
+  @doc("Failed migration entity planning status. This indicates that the migration entity planning has encountered issues and could not be completed successfully.")
   Failed: "Failed",
 
-  @doc("Cancelled")
+  @doc("Cancelled migration entity planning status. This indicates that the migration entity planning has been intentionally stopped before completion.")
   Cancelled: "Cancelled",
 
-  @doc("Completed")
+  @doc("Completed migration entity planning status.   This indicates that the migration entity has been successfully planned and all necessary preparations have been completed.")
   Completed: "Completed",
 
-  @doc("None")
+  @doc("None migration entity planning status.  This indicates that the migration entity has not been assigned a specific planning status, possibly because it is not yet started or is in a state that does not require a status update.")
   None: "None",
 
   string,
@@ -162,16 +162,16 @@ union MigrationEntityPlanningStatus {
 
 @doc("Migration Entity Migration Stage.")
 union MigrationEntityMigrationStage {
-  @doc("New.")
+  @doc("New migration entity migration stage. This indicates that the migration process for the entity has not yet started and is in the initial planning phase.")
   New: "New",
 
-  @doc("Preparation.")
+  @doc("Preparation migration entity migration stage. This indicates that the migration process for the entity is in the preparation phase, where initial tasks are being executed to set up the environment and resources needed for migration.")
   Preparation: "Preparation",
 
-  @doc("Test Migration.")
+  @doc("Test Migration migration entity migration stage.  This indicates that the migration process for the entity is in the testing phase, where tasks are being executed to validate the migration before it is fully implemented.")
   TestMigration: "TestMigration",
 
-  @doc("Migration.")
+  @doc("Migration migration entity migration stage. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment.")
   Migration: "Migration",
 
   string,
@@ -179,25 +179,25 @@ union MigrationEntityMigrationStage {
 
 @doc("Migration Entity Group Migration Status.")
 union MigrationEntityGroupMigrationStatus {
-  @doc("New")
+  @doc("New migration entity group migration status.  This indicates that the migration process for the group has not yet started and is in the initial planning phase.")
   New: "New",
 
-  @doc("In progress")
+  @doc("In progress migration entity group migration status. This indicates that the migration process for the group is currently underway and tasks are being executed to move the entities to their target environment.")
   InProgress: "InProgress",
 
-  @doc("At Risk")
+  @doc("At Risk migration entity group migration status. This indicates that the migration process for the group is facing challenges that could potentially delay or complicate the migration.")
   AtRisk: "AtRisk",
 
-  @doc("Failed")
+  @doc("Failed migration entity group migration status. This indicates that the migration process for the group has encountered issues and could not be completed successfully.")
   Failed: "Failed",
 
-  @doc("Cancelled")
+  @doc("Cancelled migration entity group migration status. This indicates that the migration process for the group has been intentionally stopped before completion.")
   Cancelled: "Cancelled",
 
-  @doc("Completed")
+  @doc("Completed migration entity group migration status. This indicates that the migration process for the group has been successfully finished.")
   Completed: "Completed",
 
-  @doc("None")
+  @doc("None migration entity group migration status. This indicates that the migration group has not been assigned a specific status, possibly because it is not yet started or is in a state that does not require a status update.")
   None: "None",
 
   string,
@@ -205,13 +205,13 @@ union MigrationEntityGroupMigrationStatus {
 
 @doc("Pre Migration, Post Migration, Planning.")
 union StepStage {
-  @doc("Pre Migration.")
+  @doc("Pre Migration. This stage involves all the preparatory tasks that need to be completed before the actual migration begins.")
   PreMigration: "Pre Migration",
 
-  @doc("Post Migration.")
+  @doc("Post Migration. This stage involves all the tasks that need to be completed after the actual migration has finished.")
   PostMigration: "Post  Migration",
 
-  @doc("Planning")
+  @doc("Planning. This stage involves all the tasks that need to be completed during the planning phase of the migration.")
   Planning: "Planning",
 
   string,
@@ -219,10 +219,10 @@ union StepStage {
 
 @doc("TaskType can be either 'User' or 'System'")
 union TaskType {
-  @doc("User task")
+  @doc("User task - typically initiated by a user")
   User: "User",
 
-  @doc("System task")
+  @doc("System task - typically initiated by the system")
   System: "System",
 
   string,
@@ -230,19 +230,19 @@ union TaskType {
 
 @doc("Category defines the type of task")
 union Category {
-  @doc("Tooling setup task")
+  @doc("Tooling setup task - involves setting up the necessary tools and configurations for migration.")
   ToolingSetup: "TOOLINGSETUP",
 
-  @doc("Environment preparation task")
+  @doc("Environment preparation task - involves preparing the environment for migration.")
   EnvironmentPrep: "ENVIRONMENTPREP",
 
-  @doc("Security task")
+  @doc("Security task - involves ensuring the security of the migration process.")
   Security: "SECURITY",
 
-  @doc("Networking task")
+  @doc("Networking task - involves setting up the necessary networking configurations for migration.")
   Networking: "NETWORKING",
 
-  @doc("Workload agent installation task")
+  @doc("Workload agent installation task - involves installing the necessary agents for migration.")
   WorkloadAgentInstall: "WORKLOADAGENTINSTALL",
 
   string,

@@ -84,7 +84,7 @@
         },
         "x-ms-examples": {
           "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+            "$ref": "./examples/example.json"
           }
         },
         "x-ms-pageable": {
@@ -108,37 +108,6 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "skip-token",
-            "in": "header",
-            "description": "Skip Token Header.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "skipToken"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Page Size Query Parameter.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filter Query Parameter.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "totalRecordCount",
-            "in": "query",
-            "description": "Total Record Count Query Parameter.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           },
           {
             "name": "projectName",
@@ -377,37 +346,6 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "skip-token",
-            "in": "header",
-            "description": "Skip Token Header.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "skipToken"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Page Size Query Parameter.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filter Query Parameter.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "totalRecordCount",
-            "in": "query",
-            "description": "Total Record Count Query Parameter.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "projectName",
             "in": "path",
             "description": "Migrate Project Name",
@@ -644,37 +582,6 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "skip-token",
-            "in": "header",
-            "description": "Skip Token Header.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "skipToken"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Page Size Query Parameter.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filter Query Parameter.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "totalRecordCount",
-            "in": "query",
-            "description": "Total Record Count Query Parameter.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "projectName",
             "in": "path",
             "description": "Migrate Project Name",
@@ -909,37 +816,6 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "skip-token",
-            "in": "header",
-            "description": "Skip Token Header.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "skipToken"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Page Size Query Parameter.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filter Query Parameter.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "totalRecordCount",
-            "in": "query",
-            "description": "Total Record Count Query Parameter.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           },
           {
             "name": "projectName",
@@ -1190,27 +1066,27 @@
           {
             "name": "ToolingSetup",
             "value": "TOOLINGSETUP",
-            "description": "Tooling setup task"
+            "description": "Tooling setup task - involves setting up the necessary tools and configurations for migration."
           },
           {
             "name": "EnvironmentPrep",
             "value": "ENVIRONMENTPREP",
-            "description": "Environment preparation task"
+            "description": "Environment preparation task - involves preparing the environment for migration."
           },
           {
             "name": "Security",
             "value": "SECURITY",
-            "description": "Security task"
+            "description": "Security task - involves ensuring the security of the migration process."
           },
           {
             "name": "Networking",
             "value": "NETWORKING",
-            "description": "Networking task"
+            "description": "Networking task - involves setting up the necessary networking configurations for migration."
           },
           {
             "name": "WorkloadAgentInstall",
             "value": "WORKLOADAGENTINSTALL",
-            "description": "Workload agent installation task"
+            "description": "Workload agent installation task - involves installing the necessary agents for migration."
           }
         ]
       }
@@ -1525,37 +1401,37 @@
           {
             "name": "New",
             "value": "New",
-            "description": "New"
+            "description": "New migration entity group migration status.  This indicates that the migration process for the group has not yet started and is in the initial planning phase."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "In progress"
+            "description": "In progress migration entity group migration status. This indicates that the migration process for the group is currently underway and tasks are being executed to move the entities to their target environment."
           },
           {
             "name": "AtRisk",
             "value": "AtRisk",
-            "description": "At Risk"
+            "description": "At Risk migration entity group migration status. This indicates that the migration process for the group is facing challenges that could potentially delay or complicate the migration."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "Failed migration entity group migration status. This indicates that the migration process for the group has encountered issues and could not be completed successfully."
           },
           {
             "name": "Cancelled",
             "value": "Cancelled",
-            "description": "Cancelled"
+            "description": "Cancelled migration entity group migration status. This indicates that the migration process for the group has been intentionally stopped before completion."
           },
           {
             "name": "Completed",
             "value": "Completed",
-            "description": "Completed"
+            "description": "Completed migration entity group migration status. This indicates that the migration process for the group has been successfully finished."
           },
           {
             "name": "None",
             "value": "None",
-            "description": "None"
+            "description": "None migration entity group migration status. This indicates that the migration group has not been assigned a specific status, possibly because it is not yet started or is in a state that does not require a status update."
           }
         ]
       }
@@ -1665,22 +1541,22 @@
           {
             "name": "New",
             "value": "New",
-            "description": "New."
+            "description": "New migration entity migration stage. This indicates that the migration process for the entity has not yet started and is in the initial planning phase."
           },
           {
             "name": "Preparation",
             "value": "Preparation",
-            "description": "Preparation."
+            "description": "Preparation migration entity migration stage. This indicates that the migration process for the entity is in the preparation phase, where initial tasks are being executed to set up the environment and resources needed for migration."
           },
           {
             "name": "TestMigration",
             "value": "TestMigration",
-            "description": "Test Migration."
+            "description": "Test Migration migration entity migration stage.  This indicates that the migration process for the entity is in the testing phase, where tasks are being executed to validate the migration before it is fully implemented."
           },
           {
             "name": "Migration",
             "value": "Migration",
-            "description": "Migration."
+            "description": "Migration migration entity migration stage. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment."
           }
         ]
       }
@@ -1704,37 +1580,37 @@
           {
             "name": "New",
             "value": "New",
-            "description": "New migration entity status."
+            "description": "New migration entity status. This indicates that the migration process for the entity has not yet started and is in the initial planning phase."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "In progress migration entity status."
+            "description": "In progress migration entity status. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment."
           },
           {
             "name": "AtRisk",
             "value": "AtRisk",
-            "description": "At Risk migration entity status."
+            "description": "At Risk migration entity status. This indicates that the migration process for the entity is facing challenges that could potentially delay or complicate the migration."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed migration entity status."
+            "description": "Failed migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully."
           },
           {
             "name": "Cancelled",
             "value": "Cancelled",
-            "description": "Cancelled migration entity status."
+            "description": "Cancelled migration entity status.  This indicates that the migration process for the entity has been intentionally stopped before completion."
           },
           {
             "name": "Completed",
             "value": "Completed",
-            "description": "Completed migration entity status."
+            "description": "Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment."
           },
           {
             "name": "None",
             "value": "None",
-            "description": "None migration entity status."
+            "description": "None migration entity status. This indicates that the migration entity has not been assigned a specific status, possibly because it is not yet started or is in a state that does not require a status update."
           }
         ]
       }
@@ -1758,37 +1634,37 @@
           {
             "name": "New",
             "value": "New",
-            "description": "New"
+            "description": "New migration entity planning status."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "In progress"
+            "description": "In progress migration entity planning status. This indicates that the migration entity planning is currently underway and tasks are being executed to prepare for the migration."
           },
           {
             "name": "AtRisk",
             "value": "AtRisk",
-            "description": "At Risk"
+            "description": "At Risk migration entity planning status. This indicates that the migration entity planning is facing challenges that could potentially delay or complicate the planning process."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "Failed migration entity planning status. This indicates that the migration entity planning has encountered issues and could not be completed successfully."
           },
           {
             "name": "Cancelled",
             "value": "Cancelled",
-            "description": "Cancelled"
+            "description": "Cancelled migration entity planning status. This indicates that the migration entity planning has been intentionally stopped before completion."
           },
           {
             "name": "Completed",
             "value": "Completed",
-            "description": "Completed"
+            "description": "Completed migration entity planning status.   This indicates that the migration entity has been successfully planned and all necessary preparations have been completed."
           },
           {
             "name": "None",
             "value": "None",
-            "description": "None"
+            "description": "None migration entity planning status.  This indicates that the migration entity has not been assigned a specific planning status, possibly because it is not yet started or is in a state that does not require a status update."
           }
         ]
       }
@@ -2302,12 +2178,12 @@
           {
             "name": "Agentless",
             "value": "agentless",
-            "description": "Agent less Migration Path"
+            "description": "Agent less Migration Path. This path does not require an agent to be installed on the source server."
           },
           {
             "name": "Agentbased",
             "value": "agentbased",
-            "description": "Agent based Migration Path"
+            "description": "Agent based Migration Path. This path requires an agent to be installed on the source server."
           }
         ]
       }
@@ -2357,17 +2233,17 @@
           {
             "name": "PreMigration",
             "value": "Pre Migration",
-            "description": "Pre Migration."
+            "description": "Pre Migration. This stage involves all the preparatory tasks that need to be completed before the actual migration begins."
           },
           {
             "name": "PostMigration",
             "value": "Post  Migration",
-            "description": "Post Migration."
+            "description": "Post Migration. This stage involves all the tasks that need to be completed after the actual migration has finished."
           },
           {
             "name": "Planning",
             "value": "Planning",
-            "description": "Planning"
+            "description": "Planning. This stage involves all the tasks that need to be completed during the planning phase of the migration."
           }
         ]
       }
@@ -2488,12 +2364,12 @@
           {
             "name": "User",
             "value": "User",
-            "description": "User task"
+            "description": "User task - typically initiated by a user"
           },
           {
             "name": "System",
             "value": "System",
-            "description": "System task"
+            "description": "System task - typically initiated by the system"
           }
         ]
       }

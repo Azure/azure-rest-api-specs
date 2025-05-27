@@ -25,30 +25,7 @@ interface Waves {
   get is ArmResourceRead<Wave>;
 
   @added(ApiVersions.v2025_03_30_preview)
-  listByParent is ArmResourceListByParent<
-    Wave,
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-
-      @doc("Skip Token Header.")
-      @header
-      skipToken?: string;
-
-      @doc("Page Size Query Parameter.")
-      @query
-      $top?: int32;
-
-      @doc("Filter Query Parameter.")
-      @query
-      $filter?: string;
-
-      @doc("Total Record Count Query Parameter.")
-      @query
-      totalRecordCount?: int32;
-    }
-  >;
+  listByParent is ArmResourceListByParent<Wave>;
 
   @added(ApiVersions.v2025_03_30_preview)
   delete is ArmResourceDeleteWithoutOkAsync<Wave>;
@@ -63,30 +40,7 @@ interface MigrationEntities {
   get is ArmResourceRead<MigrationEntity>;
 
   @added(ApiVersions.v2025_03_30_preview)
-  listByParent is ArmResourceListByParent<
-    MigrationEntity,
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-
-      @doc("Skip Token Header.")
-      @header
-      skipToken?: string;
-
-      @doc("Page Size Query Parameter.")
-      @query
-      $top?: int32;
-
-      @doc("Filter Query Parameter.")
-      @query
-      $filter?: string;
-
-      @doc("Total Record Count Query Parameter.")
-      @query
-      totalRecordCount?: int32;
-    }
-  >;
+  listByParent is ArmResourceListByParent<MigrationEntity>;
 
   @added(ApiVersions.v2025_03_30_preview)
   delete is ArmResourceDeleteWithoutOkAsync<MigrationEntity>;
@@ -101,30 +55,7 @@ interface MigrationEntityGroups {
   get is ArmResourceRead<MigrationEntityGroup>;
 
   @added(ApiVersions.v2025_03_30_preview)
-  listByParent is ArmResourceListByParent<
-    MigrationEntityGroup,
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-
-      @doc("Skip Token Header.")
-      @header
-      skipToken?: string;
-
-      @doc("Page Size Query Parameter.")
-      @query
-      $top?: int32;
-
-      @doc("Filter Query Parameter.")
-      @query
-      $filter?: string;
-
-      @doc("Total Record Count Query Parameter.")
-      @query
-      totalRecordCount?: int32;
-    }
-  >;
+  listByParent is ArmResourceListByParent<MigrationEntityGroup>;
 
   @added(ApiVersions.v2025_03_30_preview)
   delete is ArmResourceDeleteWithoutOkAsync<MigrationEntityGroup>;
@@ -139,30 +70,7 @@ interface MigrationSteps {
   get is ArmResourceRead<MigrationStep>;
 
   @added(ApiVersions.v2025_03_30_preview)
-  listByParent is ArmResourceListByParent<
-    MigrationStep,
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-
-      @doc("Skip Token Header.")
-      @header
-      skipToken?: string;
-
-      @doc("Page Size Query Parameter.")
-      @query
-      $top?: int32;
-
-      @doc("Filter Query Parameter.")
-      @query
-      $filter?: string;
-
-      @doc("Total Record Count Query Parameter.")
-      @query
-      totalRecordCount?: int32;
-    }
-  >;
+  listByParent is ArmResourceListByParent<MigrationStep>;
 
   @added(ApiVersions.v2025_03_30_preview)
   delete is ArmResourceDeleteWithoutOkAsync<MigrationStep>;
