@@ -115,3 +115,5 @@ interface TargetTypes extends Microsoft.Chaos.TargetTypes {}
 @@flattenProperty(CapabilityType.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(ExperimentExecutionDetails.properties);
+
+@@clientName(Microsoft.Chaos.Operations.list, "listAll", "javascript");
