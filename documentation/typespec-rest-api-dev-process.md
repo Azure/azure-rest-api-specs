@@ -148,7 +148,8 @@ For support & help, you can post a message to [TypeSpec parters - teams channel]
 The section describe the process for data-plane SDKs. Management-plane SDKs still follow separate existing `autorest` process.
 
 This assumes you have cloned language SDKs into your local folder at same level of `azure-rest-api-spec`.
-```
+
+```cmd
  \-
    azure-rest-api-specs/
    azure-rest-api-specs-pr/
@@ -156,9 +157,15 @@ This assumes you have cloned language SDKs into your local folder at same level 
    azure-sdk-for-js/
    azure-sdk-for-net/
    azure-sdk-for-python/
-``````
+```
 
- You can then run `./eng/script/TypeSpec-Generate-Sdk.ps1` script to generate the necessary SDK folder and project structure if it does not already exist, and then regenerate the SDK source code.
+ You can then run `tsp-client` script to generate the necessary SDK folder and project structure if it does not already exist, and then regenerate the SDK source code.
+
+Installation:
+
+```node
+npm install -g @azure-tools/typespec-client-generator-cli
+```
 
 Scenarios:
 
@@ -171,7 +178,7 @@ Scenarios:
 
 2. Generate/refresh SDK code for PR submission. The following command will update tsp-location.yaml with commit id and repo info so the build can be generated and verified by the CI and release pipeline.
 
-```
+```cli
    cd specifications/contoso/contoso.widgetmanager
    ..\..\..\eng\script\TypeSpec-Generate-Sdk.ps1 -SdkRepoRootDirectory C:\Github\fork\azure-sdk-for-java\ [commit id] Azure/azure-rest-api-specs
 ```
