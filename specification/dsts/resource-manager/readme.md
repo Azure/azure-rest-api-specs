@@ -26,11 +26,18 @@ These are the global settings for the Microsoft.Dsts.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-04-30-preview
+tag: package-2025-05-23-preview
+```
+
+### Tag: package-2025-05-23-preview
+These settings apply only when `--tag=package-2025-05-23-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-23-preview'
+input-file:
+  - Microsoft.Dsts/preview/2025-05-23-preview/dsts.json
 ```
 
 ### Tag: package-2025-04-30-preview
-
 These settings apply only when `--tag=package-2025-04-30-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-04-30-preview'
