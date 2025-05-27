@@ -28,10 +28,10 @@ union Strategy {
 
 @doc("Server migration path options.")
 union ServerMigrationPath {
-  @doc("Agentlessa")
-  Agentlessa: "agentlessa",
+  @doc("Agent less Migration Path")
+  Agentless: "agentless",
 
-  @doc("Agentbased")
+  @doc("Agent based Migration Path")
   Agentbased: "agentbased",
 
   string,
@@ -110,25 +110,25 @@ union MigrationEntityTarget {
 
 @doc("Migration Entity Migration Status.")
 union MigrationEntityMigrationStatus {
-  @doc("New")
+  @doc("New migration entity status.")
   New: "New",
 
-  @doc("In progress")
+  @doc("In progress migration entity status.")
   InProgress: "InProgress",
 
-  @doc("At Risk")
+  @doc("At Risk migration entity status.")
   AtRisk: "AtRisk",
 
-  @doc("Failed")
+  @doc("Failed migration entity status.")
   Failed: "Failed",
 
-  @doc("Cancelled")
+  @doc("Cancelled migration entity status.")
   Cancelled: "Cancelled",
 
-  @doc("Completed")
+  @doc("Completed migration entity status.")
   Completed: "Completed",
 
-  @doc("None")
+  @doc("None migration entity status.")
   None: "None",
 
   string,
