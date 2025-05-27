@@ -29,6 +29,180 @@ describe("getAzurePipelineArtifact function", () => {
     vi.resetAllMocks();
   });
 
+  it("should pass headers to fetchFailedArtifact when using fallback mechanism", async () => {
+    const testToken = "test-auth-token";
+    const expectedHeaders = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${testToken}`,
+    };
+
+    // Mock initial fetch failure with 404
+    const mockInitialResponse = {
+      ok: false,
+      status: 404,
+      statusText: "Not Found",
+      text: vi.fn().mockResolvedValue("Artifact not found"),
+    };
+
+    // Mock list artifacts response
+    const mockListResponse = {
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        value: [
+          {
+            name: "spec-gen-sdk-artifact-FailedAttempt1",
+            resource: { downloadUrl: "https://example.com/download2" },
+          },
+        ],
+      }),
+      status: 200,
+      statusText: "OK",
+    };
+
+    // Mock response for fetching specific failed artifact
+    const mockFailedArtifactResponse = {
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        resource: {
+          downloadUrl:
+            "https://example.com/failed-artifact-download?format=zip",
+        },
+      }),
+      status: 200,
+      statusText: "OK",
+    };
+
+    // Mock successful download of artifact content
+    const mockContentResponse = {
+      ok: true,
+      text: vi.fn().mockResolvedValue(JSON.stringify({ failedData: true })),
+    };
+
+    // Setup fetch to capture headers and return appropriate responses
+    global.fetch.mockImplementation((url, options) => {
+      // For all calls, verify the headers include the authorization token
+      if (options && options.headers) {
+        expect(options.headers).toEqual(expectedHeaders);
+      }
+
+      // First attempted artifact request with 404
+      if (
+        url.includes(
+          `artifacts?artifactName=${inputs.artifactName}&api-version=7.0`,
+        )
+      ) {
+        return mockInitialResponse;
+      }
+      // List all artifacts request
+      else if (
+        url.includes("artifacts?api-version=7.0") &&
+        !url.includes("artifactName=")
+      ) {
+        return mockListResponse;
+      }
+      // Request for failed artifact
+      else if (
+        url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt1")
+      ) {
+        return mockFailedArtifactResponse;
+      }
+      // Content download request
+      else if (url.includes("format=file&subPath=")) {
+        return mockContentResponse;
+      }
+
+      return {
+        ok: false,
+        status: 404,
+        statusText: "URL not matched in test mock",
+        text: vi.fn().mockResolvedValue("URL not matched in test mock"),
+      };
+    });
+
+    // Call function with fallbackToFailedArtifact set to true
+    const result = await getAzurePipelineArtifact({
+      ...inputs,
+      token: testToken,
+      fallbackToFailedArtifact: true,
+    });
+
+    // Verify result contains the data from the failed artifact
+    expect(result).toEqual({
+      artifactData: JSON.stringify({
+        failedData: true,
+      }),
+    });
+
+    // Verify fetch was called multiple times with the auth headers
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({
+        headers: expectedHeaders,
+      }),
+    );
+  });
+
+  it("should include authorization header when token is provided", async () => {
+    const testToken = "test-auth-token";
+
+    // Mock fetch responses
+    const mockArtifactResponse = {
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        resource: {
+          downloadUrl: "https://dev.azure.com/download?format=zip",
+        },
+      }),
+      text: vi.fn(),
+    };
+
+    const mockContentResponse = {
+      ok: true,
+      text: vi.fn().mockResolvedValue(JSON.stringify({ labelAction: true })),
+    };
+
+    // Setup fetch with a spy to capture the headers
+    global.fetch.mockImplementation((url, options) => {
+      if (url.includes("artifacts?artifactName=")) {
+        // Verify headers contain Authorization
+        expect(options.headers).toHaveProperty(
+          "Authorization",
+          `Bearer ${testToken}`,
+        );
+        return mockArtifactResponse;
+      } else {
+        // Verify headers contain Authorization for the content download as well
+        expect(options.headers).toHaveProperty(
+          "Authorization",
+          `Bearer ${testToken}`,
+        );
+        return mockContentResponse;
+      }
+    });
+
+    // Call function with token
+    const result = await getAzurePipelineArtifact({
+      ...inputs,
+      token: testToken,
+    });
+
+    // Verify result
+    expect(result).toEqual({
+      artifactData: JSON.stringify({ labelAction: true }),
+    });
+
+    // Verify fetch was called with the right headers
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({
+        headers: expect.objectContaining({
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${testToken}`,
+        }),
+      }),
+    );
+  });
+
   it("should handle API failure", async () => {
     // Mock fetch failure
     global.fetch.mockResolvedValue({
@@ -408,6 +582,70 @@ describe("fetchFailedArtifact function", () => {
   // Reset mocks before each test
   beforeEach(() => {
     vi.resetAllMocks();
+  });
+
+  it("should use the provided headers when making requests", async () => {
+    const customHeaders = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer test-token",
+      "Custom-Header": "test-value",
+    };
+
+    // Setup mock responses
+    const mockListResponse = {
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        value: [
+          {
+            name: "spec-gen-sdk-artifact-FailedAttempt1",
+            resource: { downloadUrl: "https://example.com/download1" },
+          },
+        ],
+      }),
+      status: 200,
+      statusText: "OK",
+    };
+
+    const mockFetchResponse = {
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        resource: { downloadUrl: "https://example.com/artifact-download" },
+      }),
+      status: 200,
+      statusText: "OK",
+    };
+
+    // Setup fetch with a spy to capture the headers
+    global.fetch.mockImplementation((url, options) => {
+      // Verify that the custom headers are included in all requests
+      expect(options.headers).toEqual(customHeaders);
+
+      if (
+        url.includes("artifacts?api-version") &&
+        !url.includes("artifactName=")
+      ) {
+        return mockListResponse;
+      } else {
+        return mockFetchResponse;
+      }
+    });
+
+    // Call the function with custom headers
+    const response = await fetchFailedArtifact({
+      ...defaultParams,
+      headers: customHeaders,
+    });
+
+    // Verify response is correct
+    expect(response).toBe(mockFetchResponse);
+
+    // Verify fetch was called with custom headers
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({
+        headers: customHeaders,
+      }),
+    );
   });
 
   it("should fetch the failed artifact successfully", async () => {
