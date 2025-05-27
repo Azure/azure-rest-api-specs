@@ -8,6 +8,10 @@ parameters:
     default: "sdk/loadtesting"
   "service-directory-name":
     default: "loadtestservice"
+  "provider-name":
+    default: "Microsoft.LoadTestService"
+  "service-name":
+    default: "loadtesting"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
@@ -15,7 +19,7 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/loadtestservice.json"
+    output-file: "{azure-resource-provider-folder}/{provider-name}/{service-name}/{version-status}/{version}/loadtestservice.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
@@ -30,3 +34,23 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.LoadTesting"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-loadtesting"
+    namespace: "com.azure.resourcemanager.loadtesting"
+    flavor: azure
+    service-name: Load Test
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/loadtesting"
+    package-dir: "armloadtesting"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
