@@ -1919,11 +1919,15 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "etag": {
+          "type": "string",
+          "description": "Optional ETag."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -2254,31 +2258,6 @@
         },
         "nextLink": {
           "type": "string"
-        }
-      }
-    },
-    "Resource": {
-      "type": "object",
-      "description": "ARM Resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id represents the complete path to the resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name associated with the resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Optional ETag."
         }
       }
     },
@@ -2764,30 +2743,6 @@
           }
         ]
       }
-    },
-    "TrackedResource": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
     },
     "TriggerType": {
       "type": "string",

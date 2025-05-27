@@ -1317,34 +1317,6 @@ model Sku {
 }
 
 /**
- * ARM Resource.
- */
-model Resource {
-  /**
-   * Resource Id represents the complete path to the resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name associated with the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Optional ETag.
-   */
-  etag?: string;
-}
-
-/**
  * Available operation details.
  */
 model ClientDiscoveryValueForSingleApi {
@@ -1459,7 +1431,7 @@ model PatchVault extends PatchTrackedResource {
  * Tracked resource with location.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PatchTrackedResource extends Resource {
+model PatchTrackedResource extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Resource location.
    */
@@ -1470,6 +1442,11 @@ model PatchTrackedResource extends Resource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
+
+  /**
+   * Optional ETag.
+   */
+  etag?: string;
 }
 
 /**
@@ -1669,20 +1646,6 @@ model ResourceCertificateAndAcsDetails extends ResourceCertificateDetails {
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
   authType: "AccessControlService";
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model TrackedResource extends Resource {
-  /**
-   * Resource location.
-   */
-  location: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 model ClientDiscoveryResponse
