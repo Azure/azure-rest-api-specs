@@ -15,12 +15,12 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/Azure.AI.TextTranslation/stable/v3.0/openapi.json"
+    output-file: "{azure-resource-provider-folder}/Azure.AI.TextTranslation/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.Translation.Text"
     clear-output-folder: true
     model-namespace: false
-    namespace: Azure.AI.Translation.Text
+    namespace: "{package-dir}"
     flavor: azure
   "@azure-typespec/http-client-csharp":
     namespace: Azure.AI.Translation.Text
@@ -28,15 +28,16 @@ options:
   "@azure-tools/typespec-python":
     namespace: "azure.ai.translation.text"
     package-dir: "azure-ai-translation-text"
+    package-name: "{package-dir}"
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-translation-text"
     namespace: com.azure.ai.translation.text
-    partial-update: true
+    # partial-update: true
     generate-tests: false
-    customization-class: customization/src/main/java/TextTranslationClientBuilderCustomization.java
+    # customization-class: customization/src/main/java/TextTranslationClientBuilderCustomization.java
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "ai-translation-text-rest"
@@ -45,3 +46,11 @@ options:
       name: "@azure-rest/ai-translation-text"
       description: "Microsoft Translation Text"
     flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/translation"
+    package-dir: "azure-ai-translation-text"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
