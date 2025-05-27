@@ -25,8 +25,8 @@ namespace Microsoft.AzureResilienceManagement;
 @parentResource(Drill)
 @doc("DrillRun resource.")
 model DrillRun is ProxyResource<DrillRunProperties> {
-  @doc("The name of the DrillRun")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @doc("The name of the DrillRun (GUID).")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   @key("drillRunName")
   @segment("drillRuns")
   @path
@@ -43,7 +43,7 @@ model DrillRunProperties extends JobProperties {
   @visibility(Lifecycle.Read)
   drillUrl: armResourceIdentifier<[
     {
-      type: "Microsoft.Resiliency/drills";
+      type: "Microsoft.AzureResilienceManagement/drills";
     }
   ]>;
 
@@ -68,6 +68,10 @@ model DrillRunProperties extends JobProperties {
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   supportedVerbsForStage: SupportedVerbsForStage[];
+
+  @doc("The currently active operationID on this Drill Run. There can be only one active.")
+  @visibility(Lifecycle.Read)
+  currentActiveOperationId: string;
 }
 
 @doc("Request body for AddNotes API.")
@@ -108,7 +112,7 @@ model DrillRunActionResponse {
   @visibility(Lifecycle.Read)
   jobId: armResourceIdentifier<[
     {
-      type: "Microsoft.Resiliency/jobs";
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryJobs";
     }
   ]>;
 }
@@ -116,7 +120,7 @@ model DrillRunActionResponse {
 @doc("Request body for MarkAsComplete API.")
 model MarkAsCompleteRequest {
   @doc("State of the Drill Run.")
-  drillRunStage: DrillRunStages;
+  drillRunStage: DrillRunSubtasks;
 }
 
 @doc("Response body for MarkAsComplete API.")
@@ -130,7 +134,7 @@ model MarkAsCompleteResponse {
 @doc("Model for supported verbs for stage.")
 model SupportedVerbsForStage {
   @doc("Name of stage.")
-  drillRunStage: DrillRunStages;
+  drillRunStage: DrillRunSubtasks;
 
   @doc("Supported Verbs for stage.")
   @OpenAPI.extension("x-ms-identifiers", #[])

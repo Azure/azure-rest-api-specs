@@ -379,6 +379,10 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -720,10 +724,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -775,10 +779,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "body",
@@ -858,10 +862,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -913,18 +917,18 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name (Guid) of the chaos job",
+            "description": "The unique name of the chaos job.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -973,18 +977,18 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name (Guid) of the chaos job",
+            "description": "The unique name of the chaos job.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -1036,18 +1040,18 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name (Guid) of the chaos job",
+            "description": "The unique name of the chaos job.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "chaosJobChildJobName",
@@ -1104,18 +1108,18 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name (Guid) of the chaos job",
+            "description": "The unique name of the chaos job.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -1167,18 +1171,18 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name (Guid) of the chaos job",
+            "description": "The unique name of the chaos job.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "chaosJobResourceName",
@@ -1235,10 +1239,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -1290,10 +1294,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "drillRunChildJobName",
@@ -1350,10 +1354,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -1405,10 +1409,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "drillRunResourceName",
@@ -1468,10 +1472,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "body",
@@ -1554,10 +1558,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "body",
@@ -1640,10 +1644,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -1717,10 +1721,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -1794,10 +1798,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "body",
@@ -1880,10 +1884,10 @@
           {
             "name": "drillRunName",
             "in": "path",
-            "description": "The name of the DrillRun",
+            "description": "The name of the DrillRun (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "body",
@@ -5608,7 +5612,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Resiliency/jobs"
+                "type": "Microsoft.AzureResilienceManagement/drills/drillRuns"
               }
             ]
           }
@@ -6124,7 +6128,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Resiliency/jobs"
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryJobs"
               }
             ]
           }
@@ -6289,7 +6293,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Resiliency/drills"
+                "type": "Microsoft.AzureResilienceManagement/drills"
               }
             ]
           }
@@ -6326,6 +6330,11 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "currentActiveOperationId": {
+          "type": "string",
+          "description": "The currently active operationID on this Drill Run. There can be only one active.",
+          "readOnly": true
         }
       },
       "required": [
@@ -6334,7 +6343,8 @@
         "drillMode",
         "attestation",
         "notes",
-        "supportedVerbsForStage"
+        "supportedVerbsForStage",
+        "currentActiveOperationId"
       ],
       "allOf": [
         {
@@ -6396,68 +6406,56 @@
       ],
       "x-ms-discriminator-value": "DrillRun"
     },
-    "DrillRunStages": {
+    "DrillRunSubtasks": {
       "type": "string",
-      "description": "Enum for Drill stages.",
-      "enum": [
-        "Fault",
-        "Failover",
-        "Reprotect",
-        "Failback",
-        "ReprotectInOriginalLocation"
-      ],
-      "x-ms-enum": {
-        "name": "DrillRunStages",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Fault",
-            "value": "Fault",
-            "description": "Fault stage."
-          },
-          {
-            "name": "Failover",
-            "value": "Failover",
-            "description": "Failover stage."
-          },
-          {
-            "name": "Reprotect",
-            "value": "Reprotect",
-            "description": "Reprotect stage."
-          },
-          {
-            "name": "Failback",
-            "value": "Failback",
-            "description": "Failback stage."
-          },
-          {
-            "name": "ReprotectInOriginalLocation",
-            "value": "ReprotectInOriginalLocation",
-            "description": "ReprotectInOriginalLocation stage."
-          }
-        ]
-      }
-    },
-    "DrillRunSubTasks": {
-      "type": "string",
-      "description": "Enum for DrillRun Sub Tasks.",
+      "description": "Enum for Drill Run Subtasks.",
       "enum": [
         "FaultInjection",
-        "Failover"
+        "Failover",
+        "TestFailover",
+        "TestFailoverCleanup",
+        "Reprotect",
+        "FailoverReverse",
+        "ReprotectReverse"
       ],
       "x-ms-enum": {
-        "name": "DrillRunSubTasks",
+        "name": "DrillRunSubtasks",
         "modelAsString": true,
         "values": [
           {
             "name": "FaultInjection",
             "value": "FaultInjection",
-            "description": "FaultInjection subtask."
+            "description": "FaultInjection Subtasks."
           },
           {
             "name": "Failover",
             "value": "Failover",
-            "description": "Failover sub task."
+            "description": "Failover Subtasks."
+          },
+          {
+            "name": "TestFailover",
+            "value": "TestFailover",
+            "description": "TestFailover Subtasks."
+          },
+          {
+            "name": "TestFailoverCleanup",
+            "value": "TestFailoverCleanup",
+            "description": "TestFailoverCleanup Subtasks."
+          },
+          {
+            "name": "Reprotect",
+            "value": "Reprotect",
+            "description": "Reprotect Subtasks."
+          },
+          {
+            "name": "FailoverReverse",
+            "value": "FailoverReverse",
+            "description": "FailoverReverse Subtasks."
+          },
+          {
+            "name": "ReprotectReverse",
+            "value": "ReprotectReverse",
+            "description": "ReprotectReverse Subtasks."
           }
         ]
       }
@@ -6467,6 +6465,8 @@
       "description": "Enum for DrillRun Tasks.",
       "enum": [
         "Failover",
+        "TestFailover",
+        "TestFailoverCleanup",
         "Reprotect",
         "FailoverReverse",
         "ReprotectReverse"
@@ -6479,6 +6479,16 @@
             "name": "Failover",
             "value": "Failover",
             "description": "Failover task."
+          },
+          {
+            "name": "TestFailover",
+            "value": "TestFailover",
+            "description": "TestFailover tasks."
+          },
+          {
+            "name": "TestFailoverCleanup",
+            "value": "TestFailoverCleanup",
+            "description": "TestFailoverCleanup tasks."
           },
           {
             "name": "Reprotect",
@@ -8069,7 +8079,7 @@
       "description": "Request body for MarkAsComplete API.",
       "properties": {
         "drillRunStage": {
-          "$ref": "#/definitions/DrillRunStages",
+          "$ref": "#/definitions/DrillRunSubtasks",
           "description": "State of the Drill Run."
         }
       },
@@ -9830,7 +9840,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Resiliency/recoveryPlans"
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans"
               }
             ]
           }
@@ -9954,7 +9964,7 @@
       "description": "Model for supported verbs for stage.",
       "properties": {
         "drillRunStage": {
-          "$ref": "#/definitions/DrillRunStages",
+          "$ref": "#/definitions/DrillRunSubtasks",
           "description": "Name of stage."
         },
         "supportedVerbs": {
