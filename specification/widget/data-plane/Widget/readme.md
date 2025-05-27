@@ -4,7 +4,7 @@
 
 This is the AutoRest configuration file for Widget.
 
-## Configuration 
+## Configuration
 
 ### Basic Information
 
