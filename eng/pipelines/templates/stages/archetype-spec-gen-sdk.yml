@@ -198,7 +198,7 @@ stages:
         parameters:
           ArtifactName: $(PipelineArtifactsName)
           ArtifactPath: $(StagedArtifactsFolder)
-          CustomCondition: and(succeeded(), ne(variables['StagedArtifactsFolder'], ''))
+          CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
       - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
         - task: PowerShell@2

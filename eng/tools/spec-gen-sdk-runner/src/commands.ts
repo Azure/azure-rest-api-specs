@@ -191,6 +191,14 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
+  if (
+    batchType === "all-typespecs" ||
+    batchType === "all-mgmtplane-typespecs" ||
+    batchType === "all-dataplane-typespecs"
+  ) {
+    specGenSdkCommand.push("--skip-sdk-gen-from-openapi", "true");
+  }
+
   // Get the spec paths based on the batch run type
   const specConfigsArray: SpecConfigs[] = getSpecPaths(batchType, commandInput.localSpecRepoPath);
 
