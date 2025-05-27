@@ -24,6 +24,26 @@ model GroupIdInformation
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+interface GroupIdInformationsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * Name of the provisioning service to retrieve.
+         */
+        @path
+        @segment("provisioningServices")
+        resourceName: string,
+      },
+      {},
+      ErrorDetails
+    > {}
+
 @armResourceOperations
 interface GroupIdInformations {
   /**
@@ -31,9 +51,17 @@ interface GroupIdInformations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IotDpsResource_GetPrivateLinkResources")
-  getPrivateLinkResources is ArmResourceRead<
+  getPrivateLinkResources is GroupIdInformationsOps.Read<
     GroupIdInformation,
-    Error = ErrorDetails
+    Parameters = {
+      /**
+       * The name of the private link resource
+       */
+      @path
+      @segment("privateLinkResources")
+      groupId: string;
+    },
+    Response = ArmResponse<GroupIdInformation>
   >;
 
   /**
@@ -41,10 +69,9 @@ interface GroupIdInformations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IotDpsResource_ListPrivateLinkResources")
-  listPrivateLinkResources is ArmResourceListByParent<
+  listPrivateLinkResources is GroupIdInformationsOps.List<
     GroupIdInformation,
-    Response = ArmResponse<PrivateLinkResources>,
-    Error = ErrorDetails
+    Response = ArmResponse<PrivateLinkResources>
   >;
 }
 

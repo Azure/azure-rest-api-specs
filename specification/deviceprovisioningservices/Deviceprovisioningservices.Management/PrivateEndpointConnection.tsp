@@ -27,6 +27,26 @@ model PrivateEndpointConnection
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+interface PrivateEndpointConnectionsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * Name of the provisioning service to retrieve.
+         */
+        @path
+        @segment("provisioningServices")
+        resourceName: string,
+      },
+      {},
+      ErrorDetails
+    > {}
+
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
@@ -34,9 +54,17 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IotDpsResource_GetPrivateEndpointConnection")
-  getPrivateEndpointConnection is ArmResourceRead<
+  getPrivateEndpointConnection is PrivateEndpointConnectionsOps.Read<
     PrivateEndpointConnection,
-    Error = ErrorDetails
+    Parameters = {
+      /**
+       * The name of the private endpoint connection
+       */
+      @path
+      @segment("privateEndpointConnections")
+      privateEndpointConnectionName: string;
+    },
+    Response = ArmResponse<PrivateEndpointConnection>
   >;
 
   /**
@@ -44,11 +72,17 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IotDpsResource_CreateOrUpdatePrivateEndpointConnection")
-  createOrUpdatePrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<
+  createOrUpdatePrivateEndpointConnection is PrivateEndpointConnectionsOps.CreateOrUpdateAsync<
     PrivateEndpointConnection,
-    LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Error = ErrorDetails
+    Parameters = {
+      /**
+       * The name of the private endpoint connection
+       */
+      @path
+      @segment("privateEndpointConnections")
+      privateEndpointConnectionName: string;
+    },
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -58,13 +92,20 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("IotDpsResource_DeletePrivateEndpointConnection")
-  deletePrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
+  deletePrivateEndpointConnection is PrivateEndpointConnectionsOps.DeleteAsync<
     PrivateEndpointConnection,
+    Parameters = {
+      /**
+       * The name of the private endpoint connection
+       */
+      @path
+      @segment("privateEndpointConnections")
+      privateEndpointConnectionName: string;
+    },
     Response = ArmResponse<PrivateEndpointConnection> | (ArmDeleteAcceptedLroResponse & {
       @bodyRoot
       _: PrivateEndpointConnection;
-    }) | ArmDeletedNoContentResponse,
-    Error = ErrorDetails
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -72,10 +113,9 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IotDpsResource_ListPrivateEndpointConnections")
-  listPrivateEndpointConnections is ArmResourceListByParent<
+  listPrivateEndpointConnections is PrivateEndpointConnectionsOps.List<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnectionsList>,
-    Error = ErrorDetails
+    Response = ArmResponse<PrivateEndpointConnectionsList>
   >;
 }
 
@@ -85,6 +125,6 @@ interface PrivateEndpointConnections {
 @@doc(PrivateEndpointConnection.properties,
   "The properties of a private endpoint connection"
 );
-@@doc(PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection::parameters.resource,
+@@doc(PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection::parameters.body,
   "The private endpoint connection with updated properties"
 );
