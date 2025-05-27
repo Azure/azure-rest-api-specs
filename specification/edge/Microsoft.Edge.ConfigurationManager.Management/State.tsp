@@ -47,9 +47,7 @@ union State {
 
   @doc("Solution Instance failed to deploy")
   Failed: "Failed",
-
   
-// cspell:ignore undeployed
   @doc("Solution Instance is undeployed")
   Undeployed: "Undeployed",
 
