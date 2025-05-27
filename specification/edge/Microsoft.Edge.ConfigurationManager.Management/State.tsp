@@ -47,7 +47,7 @@ union State {
 
   @doc("Solution Instance failed to deploy")
   Failed: "Failed",
-  
+
   @doc("Solution Instance is undeployed")
   Undeployed: "Undeployed",
 
