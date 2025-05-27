@@ -127,11 +127,13 @@ export class FolderStructureRule implements Rule {
         if (folderStruct.length !== 4) {
           errorOutput +=
             "Invalid folder structure: TypeSpec for data-plane specs must be in a folder exactly one level under 'data-plane', like 'specification/foo/data-plane/Foo'.";
+          success = false;
         }
       } else if (specType === "resource-manager") {
         if (folderStruct.length !== 5) {
           errorOutput +=
             "Invalid folder structure: TypeSpec for resource-manager specs must be in a folder exactly two levels under 'resource-manager', like 'specification/foo/resource-management/Microsoft.Foo/FooManagement'.";
+          success = false;
         }
 
         const rpNamespaceFolder = folderStruct[folderStruct.length - 2];
