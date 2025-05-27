@@ -31,12 +31,13 @@ describe("SpecModel", () => {
     expect(specModel.toString()).toContain("SpecModel");
     expect(specModel.folder).toBe(folder);
 
-    const readmes = [...(await specModel.getReadmes())];
+    const readmes = [...(await specModel.getReadmes()).values()];
     expect(readmes.length).toBe(1);
 
     const readme = readmes[0];
     expect(readme.toString()).toContain("Readme");
     expect(readme.path).toBe(resolve(folder, "readme.md"));
+    expect(readme.specModel).toBe(specModel);
 
     expect(readme.getGlobalConfig()).resolves.toEqual({
       "openapi-type": "arm",
@@ -44,15 +45,16 @@ describe("SpecModel", () => {
       tag: "package-2021-11-01",
     });
 
-    const tags = [...(await readme.getTags())].sort((a, b) =>
+    const tags = [...(await readme.getTags()).values()].sort((a, b) =>
       a.name.localeCompare(b.name),
     );
     expect(tags.length).toBe(2);
 
     expect(tags[0].toString()).toContain("Tag");
     expect(tags[0].name).toBe("package-2021-10-01-preview");
+    expect(tags[0].readme).toBe(readme);
 
-    const inputFiles0 = [...tags[0].inputFiles];
+    const inputFiles0 = [...tags[0].inputFiles.values()];
     expect(inputFiles0.length).toBe(1);
     expect(inputFiles0[0].toString()).toContain("Swagger");
     expect(inputFiles0[0].path).toBe(
@@ -61,8 +63,9 @@ describe("SpecModel", () => {
         "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
       ),
     );
+    expect(inputFiles0[0].tag).toBe(tags[0]);
 
-    const refs0 = [...(await inputFiles0[0].getRefs())].sort((a, b) =>
+    const refs0 = [...(await inputFiles0[0].getRefs()).values()].sort((a, b) =>
       a.path.localeCompare(b.path),
     );
 
@@ -74,13 +77,15 @@ describe("SpecModel", () => {
         "../../../../../common-types/resource-management/v5/types.json",
       ),
     );
+    expect(refs0[0].tag).toBe(tags[0]);
 
     expect(tags[1].name).toBe("package-2021-11-01");
-    const inputFiles1 = [...tags[1].inputFiles];
+    const inputFiles1 = [...tags[1].inputFiles.values()];
     expect(inputFiles1.length).toBe(1);
     expect(inputFiles1[0].path).toBe(
       resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
     );
+    expect(inputFiles1[0].tag).toBe(tags[1]);
 
     const jsonDefault = await specModel.toJSONAsync();
     const readmePathDefault = jsonDefault.readmes[0].path;
@@ -106,7 +111,7 @@ describe("SpecModel", () => {
 
     const specModel = new SpecModel(folder, options);
 
-    const readme = [...(await specModel.getReadmes())][0];
+    const readme = [...(await specModel.getReadmes()).values()][0];
 
     const globalConfig = await readme.getGlobalConfig();
 
@@ -131,7 +136,7 @@ describe("SpecModel", () => {
     const readmes = await specModel.getReadmes();
 
     await expect(
-      mapAsync([...readmes], async (r) => await r.getTags()),
+      mapAsync([...readmes.values()], async (r) => await r.getTags()),
     ).rejects.toThrowError(/multiple.*tag/i);
   });
 
@@ -149,21 +154,18 @@ describe("SpecModel", () => {
         "resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       );
 
-      const actual = await specModel.getAffectedReadmeTags(swaggerPath);
+      const affectedReadmeTags =
+        await specModel.getAffectedReadmeTags(swaggerPath);
 
-      const entries = [...actual];
+      expect(affectedReadmeTags.size).toBe(1);
 
-      expect(entries.length).toBe(1);
+      const readmePath = [...affectedReadmeTags.keys()][0];
+      expect(readmePath).toBe(resolve(folder, "resource-manager/readme.md"));
 
-      const readme = entries[0][0];
-      expect(readme.path).toBe(resolve(folder, "resource-manager/readme.md"));
+      const tagNames = [...[...affectedReadmeTags.values()][0].keys()];
+      expect(tagNames.length).toBe(1);
 
-      const tags = [...entries[0][1]].sort((a, b) =>
-        a.name.localeCompare(b.name),
-      );
-      expect(tags.length).toBe(1);
-
-      expect(tags[0].name).toBe("package-2021-11-01");
+      expect(tagNames[0]).toBe("package-2021-11-01");
     });
 
     it("returns affected readme tags for multiple tags", async () => {
@@ -176,22 +178,43 @@ describe("SpecModel", () => {
 
       const swaggerPath = resolve(folder, "data-plane/shared/shared.json");
 
-      const actual = await specModel.getAffectedReadmeTags(swaggerPath);
+      const affectedReadmeTags =
+        await specModel.getAffectedReadmeTags(swaggerPath);
 
-      const entries = [...actual];
+      expect(affectedReadmeTags.size).toBe(1);
 
-      expect(entries.length).toBe(1);
+      const readmePath = [...affectedReadmeTags.keys()][0];
+      expect(readmePath).toBe(resolve(folder, "data-plane/readme.md"));
 
-      const readme = entries[0][0];
-      expect(readme.path).toBe(resolve(folder, "data-plane/readme.md"));
+      const tagNames = [...[...affectedReadmeTags.values()][0].keys()].sort();
 
-      const tags = [...entries[0][1]].sort((a, b) =>
-        a.name.localeCompare(b.name),
+      expect(tagNames.length).toBe(2);
+      expect(tagNames[0]).toBe("tag-1");
+      expect(tagNames[1]).toBe("tag-2");
+    });
+
+    it("throws when an input-file is not found", async () => {
+      const folder = resolve(
+        __dirname,
+        "fixtures/getAffectedReadmeTags/specification/input-file-not-found",
       );
+      const specModel = new SpecModel(folder, options);
 
-      expect(tags.length).toBe(2);
-      expect(tags[0].name).toBe("tag-1");
-      expect(tags[1].name).toBe("tag-2");
+      expect(
+        specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
+      ).rejects.toThrowError(/Failed to resolve file for swagger/i);
+    });
+
+    it("throws when an input-file is invalid JSON", async () => {
+      const folder = resolve(
+        __dirname,
+        "fixtures/getAffectedReadmeTags/specification/input-file-invalid-json",
+      );
+      const specModel = new SpecModel(folder, options);
+
+      expect(
+        specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
+      ).rejects.toThrowError(/is not a valid JSON Schema/i);
     });
   });
 
@@ -206,9 +229,9 @@ describe("SpecModel", () => {
     it("returns directly referenced swagger", async () => {
       const swaggerPath = resolve(folder, "data-plane/a.json");
 
-      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath))]
-        .map((s) => s.path)
-        .sort();
+      const actual = [
+        ...(await specModel.getAffectedSwaggers(swaggerPath)).keys(),
+      ].sort();
 
       const expected = ["data-plane/a.json"]
         .map((p) => resolve(folder, p))
@@ -228,9 +251,9 @@ describe("SpecModel", () => {
     it("returns correct swaggers for one layer of dependencies", async () => {
       const swaggerPath = resolve(folder, "data-plane/nesting/b.json");
 
-      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath))]
-        .map((s) => s.path)
-        .sort();
+      const actual = [
+        ...(await specModel.getAffectedSwaggers(swaggerPath)).keys(),
+      ].sort();
 
       const expected = ["data-plane/a.json", "data-plane/nesting/b.json"]
         .map((p) => resolve(folder, p))
@@ -242,9 +265,9 @@ describe("SpecModel", () => {
     it("returns correct swaggers for two layers of dependencies", async () => {
       const swaggerPath = resolve(folder, "data-plane/c.json");
 
-      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath))]
-        .map((s) => s.path)
-        .sort();
+      const actual = [
+        ...(await specModel.getAffectedSwaggers(swaggerPath)).keys(),
+      ].sort();
 
       const expected = [
         "data-plane/a.json",
@@ -260,9 +283,9 @@ describe("SpecModel", () => {
     it("returns correct swaggers for three layers of dependencies", async () => {
       const swaggerPath = resolve(folder, "data-plane/d.json");
 
-      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath))]
-        .map((s) => s.path)
-        .sort();
+      const actual = [
+        ...(await specModel.getAffectedSwaggers(swaggerPath)).keys(),
+      ].sort();
 
       const expected = [
         "data-plane/a.json",
@@ -279,9 +302,9 @@ describe("SpecModel", () => {
     it("returns correctly for multiple shared dependencies", async () => {
       const swaggerPath = resolve(folder, "data-plane/shared/shared.json");
 
-      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath))]
-        .map((s) => s.path)
-        .sort();
+      const actual = [
+        ...(await specModel.getAffectedSwaggers(swaggerPath)).keys(),
+      ].sort();
 
       const expected = [
         "data-plane/a.json",
