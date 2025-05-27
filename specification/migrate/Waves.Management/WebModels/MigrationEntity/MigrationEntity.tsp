@@ -1,6 +1,6 @@
-import "../../../Common/ArmModels/AzureResourceProperties.tsp";
+import "../../Common/ArmModels/AzureResourceProperties.tsp";
 import "../Enums/Enums.tsp";
-import "../../../Common/ArmModels/MigrateProject.tsp";
+import "../../Common/ArmModels/MigrateProject.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
