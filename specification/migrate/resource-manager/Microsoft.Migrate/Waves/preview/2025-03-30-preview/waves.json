@@ -1813,15 +1813,19 @@
           }
         },
         "waveIds": {
-          "type": "string",
-          "format": "arm-id",
+          "type": "array",
           "description": "associated Wave Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Migrate/migrateProjects/waves"
-              }
-            ]
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Migrate/migrateProjects/waves"
+                }
+              ]
+            }
           }
         },
         "migrationEntityGroupIds": {

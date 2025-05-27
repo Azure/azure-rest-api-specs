@@ -61,11 +61,11 @@ model MigrationEntityProperties is AzureResourceProperties {
   ]>>;
 
   @doc("associated Wave Id")
-  waveIds?: armResourceIdentifier<[
+  waveIds?: Array<armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/migrateProjects/waves";
     }
-  ]>;
+  ]>>;
 
   @doc("associated Migration Entity Group Id")
   migrationEntityGroupIds?: Array<armResourceIdentifier<[
