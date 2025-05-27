@@ -1536,7 +1536,7 @@ model BatchJobNetworkConfiguration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.")
   @clientName("skipWithdrawFromVnet")
-  skipWithdrawFromVNet: boolean;
+  skipWithdrawFromVNet?: boolean;
 }
 
 @doc("The execution constraints for a Job.")
