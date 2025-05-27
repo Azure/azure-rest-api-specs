@@ -92,8 +92,6 @@ interface MigrationEntities {
   delete is ArmResourceDeleteWithoutOkAsync<MigrationEntity>;
 }
 
-
-
 @armResourceOperations
 interface MigrationEntityGroups {
   @added(ApiVersions.v2025_03_30_preview)
@@ -132,9 +130,8 @@ interface MigrationEntityGroups {
   delete is ArmResourceDeleteWithoutOkAsync<MigrationEntityGroup>;
 }
 
-
 @armResourceOperations
-interface MigrationSteps  {
+interface MigrationSteps {
   @added(ApiVersions.v2025_03_30_preview)
   create is ArmResourceCreateOrUpdateAsync<MigrationStep>;
 
@@ -170,4 +167,3 @@ interface MigrationSteps  {
   @added(ApiVersions.v2025_03_30_preview)
   delete is ArmResourceDeleteWithoutOkAsync<MigrationStep>;
 }
-

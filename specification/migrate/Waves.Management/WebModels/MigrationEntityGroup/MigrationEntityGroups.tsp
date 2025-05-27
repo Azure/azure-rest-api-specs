@@ -54,6 +54,4 @@ model MigrationEntityGroupProperties is AzureResourceProperties {
 
   @doc("Migration Entity Group Status")
   migrationStatus: MigrationEntityGroupMigrationStatus;
-
-
 }

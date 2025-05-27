@@ -28,7 +28,6 @@ model MigrationEntity is ProxyResource<MigrationEntityProperties> {
 
 @doc("Migration Entity Properties class.")
 model MigrationEntityProperties is AzureResourceProperties {
-
   @doc("ARM Resource Identifier for the partner resource.")
   partnerResourceArmId?: string;
 
@@ -60,7 +59,6 @@ model MigrationEntityProperties is AzureResourceProperties {
       type: "Microsoft.Migrate/assessmentProjects";
     }
   ]>>;
-
 
   @doc("associated Wave Id")
   waveIds?: armResourceIdentifier<[
@@ -98,7 +96,7 @@ model MigrationEntityProperties is AzureResourceProperties {
   migrationStatus: MigrationEntityMigrationStatus;
 
   @doc("Planning Status of Migration Entity.")
-  planningStatus: MigrationEntityPlanningStatus;  
+  planningStatus: MigrationEntityPlanningStatus;
 
   @doc("Migration specific properties for the entity.")
   migrationSpecificProperties?: MigrationSpecificPropertiesBase;
@@ -112,18 +110,15 @@ model MigrationSpecificPropertiesBase {
 }
 
 @doc("Represents a Server Migration Specific properties base model.")
-model ServerMigrationSpecificProperties extends MigrationSpecificPropertiesBase {
+model ServerMigrationSpecificProperties
+  extends MigrationSpecificPropertiesBase {
   @doc("Discriminator for migration specific properties.")
   instanceType: MigrationSpecificPropertiesInstanceType.ServerMigration;
 
   drApplianceInventoryId?: armResourceIdentifier<[
-    { type: "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems"; }
+    {
+      type: "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems";
+    }
   ]>;
-
   serverMigrationPath: ServerMigrationPath;
 }
-
-
-
-
-

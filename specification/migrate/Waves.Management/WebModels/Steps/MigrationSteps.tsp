@@ -28,7 +28,6 @@ model MigrationStep is ProxyResource<MigrationStepProperties> {
 
 @doc("Migration Step Properties class.")
 model MigrationStepProperties is AzureResourceProperties {
-
   @doc("associated Wave Id")
   associatedWaveId?: armResourceIdentifier<[
     {
@@ -48,7 +47,7 @@ model MigrationStepProperties is AzureResourceProperties {
     {
       type: "Microsoft.Migrate/migrateProjects/migrationEntityGroups";
     }
-  ]>; 
+  ]>;
 
   @doc("Step Stage")
   stage: StepStage;
@@ -57,7 +56,7 @@ model MigrationStepProperties is AzureResourceProperties {
   taskType: TaskType;
 
   @doc("Category")
-  category: Category; 
+  category: Category;
 
   @doc("Task Status")
   status: TaskStatus;

@@ -21,8 +21,7 @@ using OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The operations endpoint is implemented at a common place required for this resource provider."
 @armProviderNamespace
-@service(#{ title: "Azure Migrate Migration Service"})
+@service(#{ title: "Azure Migrate Migration Service" })
 @versioned(ApiVersions)
 @doc("Azure Migrate Resource Provider management API.")
 namespace Microsoft.Migrate;
-

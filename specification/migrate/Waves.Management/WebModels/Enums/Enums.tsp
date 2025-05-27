@@ -217,8 +217,6 @@ union StepStage {
   string,
 }
 
-
-
 @doc("TaskType can be either 'User' or 'System'")
 union TaskType {
   @doc("User task")
@@ -275,8 +273,6 @@ union TaskStatus {
 
 @doc("Migration Specific Properties Instance Types.")
 union MigrationSpecificPropertiesInstanceType {
-  ServerMigration: "ServerMigration";
-  string;
+  ServerMigration: "ServerMigration",
+  string,
 }
-
-
