@@ -73,16 +73,16 @@ model ProjectSummary {
 union RefreshSummaryState {
   string,
 
-  @doc("Started")
+  @doc("Started State")
   Started: "Started",
 
-  @doc("InProgress")
+  @doc("InProgress State")
   InProgress: "InProgress",
 
-  @doc("Completed")
+  @doc("Completed State")
   Completed: "Completed",
 
-  @doc("Failed")
+  @doc("Failed State")
   Failed: "Failed",
 }
 
@@ -90,25 +90,25 @@ union RefreshSummaryState {
 union Items {
   string,
 
-  @doc("ServerDiscovery")
+  @doc("Server Discovery Item")
   ServerDiscovery: "ServerDiscovery",
 
-  @doc("ServerAssessment")
+  @doc("Server Assessment Item")
   ServerAssessment: "ServerAssessment",
 
-  @doc("ServerMigration")
+  @doc("Server Migration Item")
   ServerMigration: "ServerMigration",
 
-  @doc("Cloudamize")
+  @doc("Cloudamize Item")
   Cloudamize: "Cloudamize",
 
-  @doc("Turbonomic")
+  @doc("Turbonomic Item")
   Turbonomic: "Turbonomic",
 
-  @doc("Zerto")
+  @doc("Zerto Item")
   Zerto: "Zerto",
 
-  @doc("CorentTech")
+  @doc("CorentTech Item")
   CorentTech: "CorentTech",
 
   @doc("ServerAssessmentV1")
@@ -117,52 +117,52 @@ union Items {
   @doc("ServerMigration_Replication")
   ServerMigration_Replication: "ServerMigration_Replication",
 
-  @doc("Carbonite")
+  @doc("Carbonite Item")
   Carbonite: "Carbonite",
 
-  @doc("DataMigrationAssistant")
+  @doc("DataMigrationAssistant Item")
   DataMigrationAssistant: "DataMigrationAssistant",
 
-  @doc("DatabaseMigrationService")
+  @doc("DatabaseMigrationService Item")
   DatabaseMigrationService: "DatabaseMigrationService",
 
-  @doc("Device42")
+  @doc("Device42 Item")
   Device42: "Device42",
 
-  @doc("JetStream")
+  @doc("JetStream Item")
   JetStream: "JetStream",
 
-  @doc("RackWare")
+  @doc("RackWare Item")
   RackWare: "RackWare",
 
-  @doc("UnifyCloud")
+  @doc("UnifyCloud Item")
   UnifyCloud: "UnifyCloud",
 
-  @doc("Flexera")
+  @doc("Flexera Item")
   Flexera: "Flexera",
 
-  @doc("ServerDiscovery_Import")
+  @doc("ServerDiscovery_Import Item.")
   ServerDiscovery_Import: "ServerDiscovery_Import",
 
-  @doc("Lakeside")
+  @doc("Lakeside Item")
   Lakeside: "Lakeside",
 
-  @doc("AppServiceMigrationAssistant")
+  @doc("AppServiceMigrationAssistant Item")
   AppServiceMigrationAssistant: "AppServiceMigrationAssistant",
 
-  @doc("Movere")
+  @doc("Movere Item")
   Movere: "Movere",
 
-  @doc("CloudSphere")
+  @doc("CloudSphere Item")
   CloudSphere: "CloudSphere",
 
-  @doc("Modernization")
+  @doc("Modernization Item")
   Modernization: "Modernization",
 
-  @doc("ServerMigration_DataReplication")
+  @doc("ServerMigration_DataReplication Item")
   ServerMigration_DataReplication: "ServerMigration_DataReplication",
 
-  @doc("Unknown")
+  @doc("Unknown Item")
   Unknown: "Unknown",
 }
 
@@ -170,12 +170,12 @@ union Items {
 union PublicNetworkAccess {
   string,
 
-  @doc("NotSpecified")
+  @doc("NotSpecified Network Access")
   NotSpecified: "NotSpecified",
 
-  @doc("Enabled")
+  @doc("Enabled Network Access")
   Enabled: "Enabled",
 
-  @doc("Disabled")
+  @doc("Disabled Network Access")
   Disabled: "Disabled",
 }
