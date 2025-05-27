@@ -10,12 +10,11 @@ describe("file processing", () => {
       "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json",
       "specification/machinelearningservices/resource-manager/readme.md",
     ];
-
-    const result = await processFilesToSpecificationList(ROOT, changedFiles);
     const expected = [
       "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json",
     ];
 
+    const result = await processFilesToSpecificationList(ROOT, changedFiles);
     expect(result).toEqual(expected);
   });
 
@@ -31,11 +30,34 @@ describe("file processing", () => {
     ]
 
     const result = await processFilesToSpecificationList(ROOT, changedFiles);
-
     expect(result).toEqual(expected);
   });
 
-  it("should process the correct swagger file given only changed readme file", () => {});
+  it("should process the correct swagger file given only changed readme file", async () => {
+    const changedFiles = [
+      "specification/network/resource-manager/readme.md"
+    ]
 
-  it("should handle deleted files without error", () => {});
+    const expected: string[] = [];
+
+    const result = await processFilesToSpecificationList(ROOT, changedFiles);
+    expect(result).toEqual(expected);
+  });
+
+  it("should handle deleted files without error", async () => {
+    const changedFiles = [
+      "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json",
+      // non-existent file. Should not throw and quietly omit
+      "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe1.json"
+    ]
+    const expected =  [
+      "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json",
+    ];
+
+    const result = await processFilesToSpecificationList(ROOT, changedFiles);
+
+    expect(result).toEqual([
+      "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json",
+    ]);
+  });
 });
