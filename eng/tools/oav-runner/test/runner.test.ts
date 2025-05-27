@@ -22,22 +22,18 @@ describe("file processing", () => {
 
   it("should process the correct swagger file given only changed example files", async () => {
     const changedFiles = [
-      "specification/network/resource-manager/Microsoft.Network/stable/2024-07-01/examples/PublicIpPrefixDelete.json"
-    ]
-
+      "specification/network/resource-manager/Microsoft.Network/stable/2024-07-01/examples/PublicIpPrefixDelete.json",
+    ];
     const expected = [
-      "azure-rest-api-specs/specification/network/resource-manager/Microsoft.Network/stable/2024-07-01/publicIpPrefix.json"
-    ]
+      "azure-rest-api-specs/specification/network/resource-manager/Microsoft.Network/stable/2024-07-01/publicIpPrefix.json",
+    ];
 
     const result = await processFilesToSpecificationList(ROOT, changedFiles);
     expect(result).toEqual(expected);
   });
 
   it("should process the correct swagger file given only changed readme file", async () => {
-    const changedFiles = [
-      "specification/network/resource-manager/readme.md"
-    ]
-
+    const changedFiles = ["specification/network/resource-manager/readme.md"];
     const expected: string[] = [];
 
     const result = await processFilesToSpecificationList(ROOT, changedFiles);
@@ -48,16 +44,13 @@ describe("file processing", () => {
     const changedFiles = [
       "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json",
       // non-existent file. Should not throw and quietly omit
-      "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe1.json"
-    ]
-    const expected =  [
+      "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe1.json",
+    ];
+    const expected = [
       "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json",
     ];
 
     const result = await processFilesToSpecificationList(ROOT, changedFiles);
-
-    expect(result).toEqual([
-      "specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json",
-    ]);
+    expect(result).toEqual(expected);
   });
 });
