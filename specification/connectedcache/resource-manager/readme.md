@@ -67,10 +67,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_connectedcache']
 ```
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)

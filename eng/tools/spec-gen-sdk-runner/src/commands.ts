@@ -1,13 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
-import { runSpecGenSdkCommand, resetGitRepo } from "./utils.js";
+import { runSpecGenSdkCommand, resetGitRepo, SpecConfigs } from "./utils.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
-import { SpecGenSdkCmdInput } from "./types.js";
-import { detectChangedSpecConfigFiles } from "./change-files.js";
+import { APIViewRequestData, SpecGenSdkCmdInput } from "./types.js";
+import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
 import {
   generateArtifact,
   getBreakingChangeInfo,
   getExecutionReport,
+  getServiceFolderPath,
   getSpecPaths,
   logIssuesToPipeline,
   parseArguments,
@@ -58,7 +59,12 @@ export async function generateSdkForSingleSpec(): Promise<number> {
       "missing-package-name";
     packageName = packageName.replace("/", "-");
     const installationInstructions = executionReport.packages[0]?.installationInstructions;
-    setPipelineVariables(packageName, installationInstructions);
+    setPipelineVariables(
+      executionReport.stagedArtifactsFolder,
+      false,
+      packageName,
+      installationInstructions,
+    );
   }
 
   logMessage("ending group logging", LogLevel.EndGroup);
@@ -86,6 +92,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let currentRunHasBreakingChange = false;
   let overallExecutionResult = "";
   let currentExecutionResult = "";
+  let stagedArtifactsFolder = "";
+  const apiViewRequestData: APIViewRequestData[] = [];
 
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
@@ -104,8 +112,12 @@ export async function generateSdkForSpecPr(): Promise<number> {
     }
     if (changedSpec.readmeMd) {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
-      changedSpecPathText = changedSpecPathText + " " + changedSpec.readmeMd;
+      changedSpecPathText = changedSpec.readmeMd;
       pushedSpecConfigCount++;
+      if (pushedSpecConfigCount === 2) {
+        // If both readme and tspconfig are provided, we need to use the service folder path for the log message
+        changedSpecPathText = getServiceFolderPath(changedSpec.readmeMd);
+      }
       if (changedSpec.readmeMd.includes("resource-manager")) {
         hasManagementPlaneSpecs = true;
       }
@@ -130,6 +142,19 @@ export async function generateSdkForSpecPr(): Promise<number> {
       // Read the execution report to aggreate the generation results
       executionReport = getExecutionReport(commandInput);
       currentExecutionResult = executionReport.executionResult;
+
+      if (executionReport.stagedArtifactsFolder) {
+        stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
+        for (const pkg of executionReport.packages) {
+          if (pkg.apiViewArtifact) {
+            apiViewRequestData.push({
+              packageName: pkg.packageName,
+              filePath: path.relative(stagedArtifactsFolder, pkg.apiViewArtifact),
+            });
+          }
+        }
+      }
+
       if (overallExecutionResult !== "failed") {
         overallExecutionResult = currentExecutionResult;
       }
@@ -152,6 +177,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
       breakingChangeLabel,
       overallRunHasBreakingChange,
       hasManagementPlaneSpecs,
+      stagedArtifactsFolder,
+      apiViewRequestData,
     ) || statusCode;
   return statusCode;
 }
@@ -164,29 +191,60 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
+  if (
+    batchType === "all-typespecs" ||
+    batchType === "all-mgmtplane-typespecs" ||
+    batchType === "all-dataplane-typespecs"
+  ) {
+    specGenSdkCommand.push("--skip-sdk-gen-from-openapi", "true");
+  }
+
   // Get the spec paths based on the batch run type
-  const specConfigPaths = getSpecPaths(batchType, commandInput.localSpecRepoPath);
+  const specConfigsArray: SpecConfigs[] = getSpecPaths(batchType, commandInput.localSpecRepoPath);
 
   // Prepare variables
   let statusCode = 0;
+  let pushedSpecConfigCount;
   let markdownContent = "\n";
+  markdownContent += `## Batch Run Type\n ${batchType}\n`;
   let failedContent = `## Spec Failures in the Generation Process\n`;
   let succeededContent = `## Successful Specs in the Generation Process\n`;
   let notEnabledContent = `## Specs with SDK Not Enabled\n`;
+  let duplicatedConfigContent = `## Specs with Duplicated SDK Configurations (in 'tspconfig.yaml' and 'readme.md')\n`;
   let failedCount = 0;
   let notEnabledCount = 0;
+  let duplicatedConfigCount = 0;
   let succeededCount = 0;
   let executionReport;
+  let specConfigPath = "";
+  let stagedArtifactsFolder = "";
+  let serviceFolderPath = "";
 
   // Generate SDKs for each spec
-  for (const specConfigPath of specConfigPaths) {
-    logMessage(`Generating SDK from ${specConfigPath}`, LogLevel.Group);
-
-    if (specConfigPath.endsWith("tspconfig.yaml")) {
-      specGenSdkCommand.push("--tsp-config-relative-path", specConfigPath);
-    } else {
-      specGenSdkCommand.push("--readme-relative-path", specConfigPath);
+  for (const specConfigs of specConfigsArray) {
+    if (specConfigs.tspconfigPath && specConfigs.readmePath) {
+      serviceFolderPath = getServiceFolderPath(specConfigs.tspconfigPath);
+      logMessage(`Generating SDK from ${serviceFolderPath}`, LogLevel.Group);
+    } else if (specConfigs.tspconfigPath) {
+      logMessage(`Generating SDK from ${specConfigs.tspconfigPath}`, LogLevel.Group);
+    } else if (specConfigs.readmePath) {
+      logMessage(`Generating SDK from ${specConfigs.readmePath}`, LogLevel.Group);
     }
+    pushedSpecConfigCount = 0;
+    if (specConfigs.readmePath) {
+      specConfigPath = specConfigs.readmePath;
+      specGenSdkCommand.push("--readme-relative-path", specConfigs.readmePath);
+      pushedSpecConfigCount++;
+    }
+
+    if (specConfigs.tspconfigPath) {
+      // Override specConfigPath variable for reporting purposes
+      // as we only input both tspconfig and readme while selecting typespec options for batch runs
+      specConfigPath = specConfigs.tspconfigPath;
+      specGenSdkCommand.push("--tsp-config-relative-path", specConfigs.tspconfigPath);
+      pushedSpecConfigCount++;
+    }
+
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
     try {
       await resetGitRepo(commandInput.localSdkRepoPath);
@@ -197,14 +255,18 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       statusCode = 1;
     }
 
-    // Pop the spec config path from the command
-    specGenSdkCommand.pop();
-    specGenSdkCommand.pop();
+    // Pop the spec config path from specGenSdkCommand
+    for (let index = 0; index < pushedSpecConfigCount * 2; index++) {
+      specGenSdkCommand.pop();
+    }
 
     try {
       // Read the execution report to determine if the generation was successful
       executionReport = getExecutionReport(commandInput);
       const executionResult = executionReport.executionResult;
+      if (executionReport.stagedArtifactsFolder) {
+        stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
+      }
       logMessage(`Runner: command execution result:${executionResult}`);
 
       if (executionResult === "succeeded" || executionResult === "warning") {
@@ -217,11 +279,20 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
         failedContent += `${specConfigPath},`;
         failedCount++;
       }
+      // Check for duplicated SDK configurations,
+      // the execution result can be "succeeded" or "warning"
+      if (executionReport.isSdkConfigDuplicated) {
+        duplicatedConfigContent += `${specConfigPath},`;
+        duplicatedConfigCount++;
+      }
     } catch (error) {
       logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
+    if (specConfigs.tspconfigPath && specConfigs.readmePath) {
+      specConfigPath = serviceFolderPath;
+    }
     logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPath);
   }
   if (failedCount > 0) {
@@ -230,6 +301,9 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   if (notEnabledCount > 0) {
     markdownContent += `${notEnabledContent}\n`;
   }
+  if (duplicatedConfigCount > 0) {
+    markdownContent += `${duplicatedConfigContent}\n`;
+  }
   if (succeededCount > 0) {
     markdownContent += `${succeededContent}\n`;
   }
@@ -237,8 +311,11 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   markdownContent += notEnabledCount
     ? `## Total Specs with SDK not enabled in the Configuration\n ${notEnabledCount}\n`
     : "";
+  markdownContent += duplicatedConfigCount
+    ? `## Total Specs with Duplicated SDK Configurations\n ${duplicatedConfigCount}\n`
+    : "";
   markdownContent += succeededCount ? `## Total Successful Specs\n ${succeededCount}\n` : "";
-  markdownContent += `## Total Specs Count\n ${specConfigPaths.length}\n\n`;
+  markdownContent += `## Total Specs Count\n ${specConfigsArray.length}\n\n`;
 
   // Write the markdown content to a file
   const markdownFilePath = path.join(commandInput.workingFolder, "out/logs/generation-summary.md");
@@ -253,5 +330,8 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
     vsoLogIssue(`Runner: error writing markdown file ${markdownFilePath}:${error}`);
     statusCode = 1;
   }
+  // Set the pipeline variables for artifacts location
+  setPipelineVariables(stagedArtifactsFolder);
+
   return statusCode;
 }
