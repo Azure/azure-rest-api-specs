@@ -190,13 +190,13 @@ stages:
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
-          ArtifactName: $(SpecGenSdkArtifactName)
+          ArtifactName: "$(SpecGenSdkArtifactName)"
           ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)"
           CustomCondition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
-          ArtifactName: $(PipelineArtifactsName)
+          ArtifactName: "$(PipelineArtifactsName)"
           ArtifactPath: $(StagedArtifactsFolder)
           CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
@@ -270,7 +270,7 @@ stages:
               -repoName "$(SdkRepoOwner)/$(SpecRepoName)" `
               -pullRequestNumber "$(System.PullRequest.PullRequestNumber)" 
           displayName: 'Detect API Change and Create API Review'
-          condition: and(succeeded(), ne(variables['SpecGenSdkArtifactPath'], ''), ne(variables['SpecGenSdkArtifactName'], ''))
+          condition: and(succeeded(), ne(variables['SpecGenSdkArtifactPath'], ''), ne(variables['SpecGenSdkArtifactName'], ''), eq(variables['HasAPIViewArtifact'], 'true'))
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
