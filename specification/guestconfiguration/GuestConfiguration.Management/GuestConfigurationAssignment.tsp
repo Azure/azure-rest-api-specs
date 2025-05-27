@@ -21,6 +21,12 @@ model GuestConfigurationAssignment
     SegmentName = "guestConfigurationAssignments",
     NamePattern = ""
   >;
+
+  /**
+   * Region where the VM is located.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  location?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
