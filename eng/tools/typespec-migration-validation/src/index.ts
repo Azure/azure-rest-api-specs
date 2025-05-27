@@ -1,13 +1,21 @@
-import { readFileContent, mergeFiles } from './helper.js';
-import { logHeader, logWarning } from './log.js';
-import { sortOpenAPIDocument } from '@azure-tools/typespec-autorest';
-import fs from 'fs';
-import { processDocument } from './document.js';
-import yargs from 'yargs';
+import { sortOpenAPIDocument } from "@azure-tools/typespec-autorest";
+import fs from "fs";
+import { diff, diffString } from "json-diff";
+import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { diff, diffString } from 'json-diff';
-import { suggestFix, suggestPrompt } from './fix/troubleshooting.js';
-import { configuration } from './configuration.js';
+import { configuration } from "./configuration.js";
+import { processDocument } from "./document.js";
+import { suggestFix, suggestPrompt } from "./fix/troubleshooting.js";
+import { mergeFiles, readFileContent } from "./helper.js";
+import { logHeader, logWarning } from "./log.js";
+
+export interface JsonOutput {
+  suggestions: string[];
+}
+
+export const jsonOutput: JsonOutput = {
+  suggestions: [],
+};
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
@@ -38,6 +46,10 @@ function parseArguments() {
       description: 'Set case insensitive for the segments before provider, e.g. resourceGroups',
       type: 'boolean'
     })
+    .option('jsonOutput', {
+      description: 'Also output in JSON format',
+      type: 'boolean',
+    })
     .check((argv) => {
       const positional = argv._;
       if (!argv.oldPath && positional.length > 0) {
@@ -53,16 +65,16 @@ function parseArguments() {
       if (!argv.oldPath || !argv.newPath) {
         throw new Error('Both oldPath and newPath are required');
       }
-      
+
       // Verify paths exist
       if (!fs.existsSync(argv.oldPath)) {
         throw new Error(`oldPath does not exist: ${argv.oldPath}`);
       }
-      
+
       if (!fs.existsSync(argv.newPath)) {
         throw new Error(`newPath does not exist: ${argv.newPath}`);
       }
-      
+
       return true;
     })
     .help()
@@ -107,6 +119,11 @@ export async function main() {
       suggestedPrompt.forEach(prompt => {
         console.log(prompt);
       });
+    }
+    if (args.jsonOutput) {
+      console.log(`---- Start of Json Output ----
+${JSON.stringify(jsonOutput, null, 2)}
+---- End of Json Output ----`);
     }
     // fs.writeFileSync(`${outputFolder}/diff.md`, `\`\`\`diff\n${diffForFile}\n\`\`\`\n`);
   }
