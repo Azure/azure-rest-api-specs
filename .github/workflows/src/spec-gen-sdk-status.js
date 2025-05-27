@@ -16,6 +16,10 @@ import {
  * @returns {Promise<void>}
  */
 export default async function setSpecGenSdkStatus({ github, context, core }) {
+  const adoToken = process.env.ADO_TOKEN;
+  if (!adoToken) {
+    throw new Error("ADO_TOKEN environment variable is not set");
+  }
   const inputs = await extractInputs(github, context, core);
   const ado_build_id = inputs.ado_build_id;
   const ado_project_url = inputs.ado_project_url;
@@ -165,6 +169,7 @@ async function processResult({ checkRuns, core }) {
       artifactFileName,
       core,
       fallbackToFailedArtifact: true,
+      token: process.env.ADO_TOKEN,
     });
     // Parse the JSON data
     if (!result.artifactData) {
