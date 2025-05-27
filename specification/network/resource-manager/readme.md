@@ -110,7 +110,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
   - code: DeleteResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
-    where: 
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
@@ -137,7 +137,7 @@ directive:
     where: "$.definitions.ProxyResource"
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
-      
+
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.Resource"
     transform: >
@@ -244,7 +244,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
   - code: DeleteResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
-    where: 
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
@@ -3764,7 +3764,7 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: DeleteResponseCodes
     from: networkManagerRoutingConfiguration.json
-    reason: support response code 200 for delete operations 
+    reason: support response code 200 for delete operations
   - suppress: DeleteResponseCodes
     from: networkManagerSecurityUserConfiguration.json
     reason: support response code 200 for delete operations
@@ -3866,7 +3866,7 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: securityPartnerProvider.json
-    reason: name, id and type properties are inherited from the upper level  
+    reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: serviceCommunity.json
     reason: name, id and type properties are inherited from the upper level
@@ -4062,7 +4062,7 @@ directive:
 suppressions:
   - code: ResourceNameRestriction
     from: bastionhost.json
-    reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs. 
+    reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs.
   - code: LroErrorContent
     reason: CloudError does not follow required error schema. Suppress it for now to avoid breaking change because it is referenced by many files.
   - code: ResourceNameRestriction
