@@ -9,14 +9,48 @@ using Oracle.Database;
 
 // CSharp
 @@clientName(DataCollectionOptions, "DiagnosticCollectionConfig", "csharp");
-@@clientName(DbActionResponse, "DBActionResult", "csharp");
+@@clientName(DbActionResponse, "ExascaleDBNodeActionResult", "csharp");
 @@clientName(DbNode, "CloudVmClusterDBNode", "csharp");
 @@clientName(DbNodeProperties, "CloudVmClusterDBNodeProperties", "csharp");
+@@clientName(DbNodeProperties.lifecycleState, "DBNodeLifecycleState", "csharp");
+@@clientName(DbNodeProperties.timeCreated, "CreatedOn", "csharp");
+@@clientName(DbNodeProperties.dbNodeStorageSizeInGbs,
+  "DBNodeStorageSizeInGbs",
+  "csharp"
+);
+@@clientName(DbNodeProperties.dbServerId, "DBServerId", "csharp");
+@@clientName(DbNodeProperties.dbSystemId, "DBSystemId", "csharp");
+
 @@clientName(DbServer, "OracleDBServer", "csharp");
 @@clientName(DbServerProperties, "OracleDBServerProperties", "csharp");
+@@clientName(DbServerProperties.dbNodeIds, "DBNodeIds", "csharp");
+@@clientName(DbServerProperties.dbServerPatchingDetails,
+  "DBServerPatchingDetails",
+  "csharp"
+);
+@@clientName(DbServerProperties.dbNodeStorageSizeInGbs,
+  "DBNodeStorageSizeInGbs",
+  "csharp"
+);
+@@clientName(DbServerProperties.maxDbNodeStorageInGbs,
+  "MaxDBNodeStorageInGbs",
+  "csharp"
+);
 @@clientName(DbSystemShape, "OracleDBSystemShape", "csharp");
 @@clientName(DbSystemShapeProperties,
   "OracleDBSystemShapeProperties",
+  "csharp"
+);
+@@clientName(DbSystemShapeProperties.availableDbNodePerNodeInGbs,
+  "AvailableDBNodePerNodeInGbs",
+  "csharp"
+);
+@@clientName(DbSystemShapeProperties.availableDbNodeStorageInGbs,
+  "AvailableDBNodeStorageInGbs",
+  "csharp"
+);
+@@clientName(DbSystemShapeProperties.minDbNodeStoragePerNodeInGbs,
+  "MinDBNodeStoragePerNodeInGbs",
   "csharp"
 );
 @@clientName(DnsPrivateView, "OracleDnsPrivateView", "csharp");
@@ -29,8 +63,6 @@ using Oracle.Database;
   "OracleDnsPrivateZoneProperties",
   "csharp"
 );
-@@clientName(GiVersion, "OracleGIVersion", "csharp");
-@@clientName(GiVersionProperties, "OracleGIVersionProperties", "csharp");
 @@clientName(SystemVersion, "OracleSystemVersion", "csharp");
 @@clientName(VirtualNetworkAddress,
   "CloudVmClusterVirtualNetworkAddress",
@@ -46,6 +78,7 @@ using Oracle.Database;
   "csharp"
 );
 @@clientName(AddRemoveDbNode, "CloudVmClusterDBNodeContent", "csharp");
+@@clientName(AddRemoveDbNode.dbServers, "DBServers", "csharp");
 @@clientName(ApexDetailsType, "OracleApexDetailsType", "csharp");
 @@clientName(AutonomousDatabaseBaseProperties.dbVersion, "DBVersion", "csharp");
 @@clientName(AutonomousDatabaseBaseProperties.dbWorkload,
@@ -190,8 +223,34 @@ using Oracle.Database;
   utcDateTime,
   "csharp"
 );
+@@clientName(CloudExadataInfrastructureProperties.dbNodeStorageSizeInGbs,
+  "DBNodeStorageSizeInGbs",
+  "csharp"
+);
+@@clientName(CloudExadataInfrastructureProperties.maxDbNodeStorageSizeInGbs,
+  "MaxDBNodeStorageSizeInGbs",
+  "csharp"
+);
+@@clientName(CloudExadataInfrastructureProperties.monthlyDbServerVersion,
+  "MonthlyDBServerVersion",
+  "csharp"
+);
+@@clientName(CloudExadataInfrastructureProperties.dbServerVersion,
+  "DBServerVersion",
+  "csharp"
+);
 @@clientName(CloudVmClusterProperties.timeCreated, "CreatedOn", "csharp");
 @@alternateType(CloudVmClusterProperties.timeCreated, utcDateTime, "csharp");
+@@clientName(CloudVmClusterProperties.dbServers, "DBServers", "csharp");
+@@clientName(CloudVmClusterProperties.timeCreated, "CreatedOn", "csharp");
+@@clientName(CloudVmClusterProperties.dbNodeStorageSizeInGbs,
+  "DBNodeStorageSizeInGbs",
+  "csharp"
+);
+@@clientName(ExadbVmClusterProperties.exascaleDbStorageVaultId,
+  "ExascaleDBStorageVaultId",
+  "csharp"
+);
 @@clientName(VirtualNetworkAddressProperties.timeAssigned,
   "AssignedOn",
   "csharp"
@@ -200,7 +259,7 @@ using Oracle.Database;
   utcDateTime,
   "csharp"
 );
-@@clientName(ComputeModel, "AutonomousDatabaseComputeModel", "csharp");
+@@clientName(ComputeModel, "OracleDatabaseComputeModel", "csharp");
 @@clientName(ComputeModel.ECPU, "Ecpu", "csharp");
 @@clientName(ComputeModel.OCPU, "Ocpu", "csharp");
 @@clientName(ConnectionStringType,
@@ -225,6 +284,8 @@ using Oracle.Database;
 @@clientName(DatabaseEditionType, "OracleDatabaseEditionType", "csharp");
 @@clientName(DataBaseType, "OracleDataBaseType", "csharp");
 @@clientName(DbNodeActionEnum, "DBNodeActionType", "csharp");
+@@clientName(DbServerPatchingStatus, "DBServerPatchingStatus", "csharp");
+@@clientName(DbServerPatchingDetails, "DBServerPatchingDetails", "csharp");
 @@clientName(DbServerPatchingDetails.timePatchingEnded,
   "PatchingEndedOn",
   "csharp"
@@ -264,13 +325,12 @@ using Oracle.Database;
 @@clientName(PortRange, "CloudVmClusterPortRange", "csharp");
 @@clientName(Preference, "MaintenancePreference", "csharp");
 @@clientName(PrivateIpAddressesFilter, "PrivateIPAddressesContent", "csharp");
+@@clientName(PrivateIpAddressesFilter.subnetId, "subnetOcid", "csharp");
 @@clientName(PrivateIpAddressProperties, "PrivateIPAddressResult", "csharp");
-@@alternateType(PrivateIpAddressProperties.subnetId,
-  armResourceIdentifier,
-  "csharp"
-);
+@@clientName(PrivateIpAddressProperties.subnetId, "subnetOcid", "csharp");
 @@clientName(ProtocolType, "ConnectionProtocolType", "csharp");
 @@clientName(ProtocolType.TCP, "Tcp", "csharp");
+@@clientName(ProtocolType.TCPS, "Tcps", "csharp");
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "OracleDatabaseResourceProvisioningState",
   "csharp"
@@ -282,9 +342,15 @@ using Oracle.Database;
   "AutoStartOn",
   "csharp"
 );
-@@alternateType(ScheduledOperationsType.scheduledStartTime, "csharp");
+@@alternateType(ScheduledOperationsType.scheduledStartTime,
+  utcDateTime,
+  "csharp"
+);
 @@clientName(ScheduledOperationsType.scheduledStopTime, "AutoStopOn", "csharp");
-@@alternateType(ScheduledOperationsType.scheduledStopTime, "csharp");
+@@alternateType(ScheduledOperationsType.scheduledStopTime,
+  utcDateTime,
+  "csharp"
+);
 @@clientName(SessionModeType, "ConnectionSessionModeType", "csharp");
 @@clientName(SourceType, "AutonomousDatabaseSourceType", "csharp");
 @@clientName(SyntaxFormatType.Ezconnectplus, "EzconnectPlus", "csharp");
@@ -309,8 +375,6 @@ using Oracle.Database;
   "DnsPrivateViewLifecycleState",
   "csharp"
 );
-@@clientName(DbNodeProperties.lifecycleState, "DBNodeLifecycleState", "csharp");
-@@clientName(DbNodeProperties.timeCreated, "DBNodeTimeCreated", "csharp");
 @@clientName(AutonomousDbVersionProperties,
   "AutonomousDBVersionProperties",
   "csharp"
@@ -321,6 +385,18 @@ using Oracle.Database;
 @@clientName(AutonomousDbVersion, "AutonomousDBVersion", "csharp");
 @@clientName(ExascaleDbNode, "ExascaleDBNode", "csharp");
 @@clientName(ExascaleDbNodeProperties, "ExascaleDBNodeProperties", "csharp");
+@@clientName(ExascaleDbNodeProperties.dbNodeStorageSizeInGbs,
+  "DBNodeStorageSizeInGbs",
+  "csharp"
+);
+@@clientName(ExascaleDbNodeProperties.timeMaintenanceWindowEnd,
+  "MaintenanceWindowEndOn",
+  "csharp"
+);
+@@clientName(ExascaleDbNodeProperties.timeMaintenanceWindowStart,
+  "MaintenanceWindowStartOn",
+  "csharp"
+);
 @@clientName(ExascaleDbStorageVault, "ExascaleDBStorageVault", "csharp");
 @@clientName(ExascaleDbStorageVaultProperties,
   "ExascaleDBStorageVaultProperties",
@@ -329,6 +405,10 @@ using Oracle.Database;
 @@clientName(FlexComponent, "OracleFlexComponent", "csharp");
 @@clientName(FlexComponentProperties,
   "OracleFlexComponentProperties",
+  "csharp"
+);
+@@clientName(FlexComponentProperties.availableDbStorageInGbs,
+  "AvailableDBStorageInGbs",
   "csharp"
 );
 @@clientName(GiVersion, "OracleGIVersion", "csharp");
@@ -342,7 +422,49 @@ using Oracle.Database;
   "DBVersion",
   "csharp"
 );
-@@clientName(AzureSubscriptions,
-  "OracleAzureSubscriptionsContent",
+@@clientName(AzureSubscriptions, "OracleAzureSubscriptionsContent", "csharp");
+@@clientName(MaintenanceWindow, "OracleDatabaseMaintenanceWindow", "csharp");
+@@clientName(DayOfWeek, "OracleDatabaseDayOfWeek", "csharp");
+@@clientName(DayOfWeekName, "OracleDatabaseDayOfWeekName", "csharp");
+@@clientName(DbIormConfig, "DBIormConfig", "csharp");
+@@clientName(DbIormConfig.dbName, "DBName", "csharp");
+@@clientName(DbNodeAction, "DBNodeAction", "csharp");
+@@clientName(DbNodeDetails, "DBNodeDetails", "csharp");
+@@clientName(DbNodeDetails.dbNodeId, "DBNodeId", "csharp");
+@@clientName(DbServerProvisioningState, "DBServerProvisioningState", "csharp");
+@@clientName(EstimatedPatchingTime.estimatedDbServerPatchingTime,
+  "EstimatedDBServerPatchingTime",
   "csharp"
 );
+@@clientName(ExadataIormConfig.dbPlans, "DBPlans", "csharp");
+@@clientName(HardwareType, "FlexComponentHardwareType", "csharp");
+@@clientName(HardwareType.COMPUTE, "Compute", "csharp");
+@@clientName(HardwareType.CELL, "Cell", "csharp");
+@@clientName(RemoveVirtualMachineFromExadbVmClusterDetails.dbNodes,
+  "DBNodes",
+  "csharp"
+);
+@@clientName(ShapeFamily, "GIMinorVersionShapeFamily", "csharp");
+@@clientName(ShapeFamily.ExadbXs, "ExadbXS", "csharp");
+@@clientName(SystemShapes, "OracleDatabaseSystemShape", "csharp");
+@@clientName(SystemShapes.ExaDbXs, "ExadbXS", "csharp");
+@@clientName(ExascaleDbStorageDetails, "ExascaleDBStorageDetails", "csharp");
+@@clientName(ExascaleDbStorageVaultLifecycleState,
+  "ExascaleDBStorageVaultLifecycleState",
+  "csharp"
+);
+@@clientName(ExascaleDbStorageInputDetails,
+  "ExascaleDBStorageInputDetails",
+  "csharp"
+);
+
+@@usage(AutonomousDatabaseCharacterSetProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(AutonomousDatabaseNationalCharacterSetProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(GiVersionProperties, Usage.input | Usage.output, "csharp");
+@@usage(SystemVersionProperties, Usage.input | Usage.output, "csharp");
