@@ -14,6 +14,11 @@ using Microsoft.ServiceFabric;
   "java"
 );
 
+@@clientName(Microsoft.ServiceFabric,
+  "ServiceFabricManagedClustersManagementClient",
+  "javascript"
+);
+
 #suppress "deprecated" "@flattenProperty decorator for backwards compatibility with existing spec"
 @@flattenProperty(VMSSExtension.properties);
 
