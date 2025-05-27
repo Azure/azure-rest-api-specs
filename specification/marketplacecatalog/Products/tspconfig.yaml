@@ -1,0 +1,33 @@
+parameters:  
+  "service-dir":
+    default: "sdk/products"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":    
+    package-dir: "products"
+    namespace: "azure.products"
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    package-dir: "Products"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "products-rest"
+    package-details:
+      name: "@azure-rest/products"
+      description: "Products Service"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "products"
+    namespace: com.products
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
