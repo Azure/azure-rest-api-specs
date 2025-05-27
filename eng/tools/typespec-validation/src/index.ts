@@ -1,5 +1,5 @@
-import { stat } from "node:fs/promises";
 import { ParseArgsConfig, parseArgs } from "node:util";
+import { stat } from "node:fs/promises";
 import { Suppression } from "suppressions";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
@@ -57,7 +57,6 @@ export async function main() {
   let success = true;
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
-
     console.log("\nExecuting rule: " + rule.name);
     const result = await rule.execute(absolutePath);
     if (result.stdOutput) console.log(result.stdOutput);
