@@ -140,10 +140,6 @@ model MongoClusterProperties {
   @added(Versions.v2024_07_01)
   storage?: StorageProperties;
 
-  /** The sharding properties of the mongo cluster. */
-  @added(Versions.v2024_07_01)
-  sharding?: ShardingProperties;
-
   /** The compute properties of the mongo cluster. */
   @added(Versions.v2024_07_01)
   compute?: ComputeProperties;
@@ -217,13 +213,6 @@ model ComputeProperties {
 model StorageProperties {
   /** The size of the data disk assigned to each server. */
   sizeGb?: int64;
-}
-
-/** The sharding properties of the cluster. This includes the shard count and scaling options for the cluster. */
-@added(Versions.v2024_07_01)
-model ShardingProperties {
-  /** Number of shards to provision on the cluster. */
-  shardCount?: int32;
 }
 
 /** The high availability modes for a cluster. */

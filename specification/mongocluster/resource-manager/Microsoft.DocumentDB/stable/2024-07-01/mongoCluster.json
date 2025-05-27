@@ -1569,10 +1569,6 @@
           "$ref": "#/definitions/StorageProperties",
           "description": "The storage properties of the mongo cluster."
         },
-        "sharding": {
-          "$ref": "#/definitions/ShardingProperties",
-          "description": "The sharding properties of the mongo cluster."
-        },
         "compute": {
           "$ref": "#/definitions/ComputeProperties",
           "description": "The compute properties of the mongo cluster."
@@ -1747,10 +1743,6 @@
         "storage": {
           "$ref": "#/definitions/StorageProperties",
           "description": "The storage properties of the mongo cluster."
-        },
-        "sharding": {
-          "$ref": "#/definitions/ShardingProperties",
-          "description": "The sharding properties of the mongo cluster."
         },
         "compute": {
           "$ref": "#/definitions/ComputeProperties",
@@ -2118,17 +2110,6 @@
             "description": "Replication link is re-configuring due to a promotion event."
           }
         ]
-      }
-    },
-    "ShardingProperties": {
-      "type": "object",
-      "description": "The sharding properties of the cluster. This includes the shard count and scaling options for the cluster.",
-      "properties": {
-        "shardCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of shards to provision on the cluster."
-        }
       }
     },
     "StorageProperties": {
