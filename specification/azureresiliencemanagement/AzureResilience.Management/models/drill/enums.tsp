@@ -336,5 +336,3 @@ union DrillRunTasks {
   @doc("ReprotectReverse task.")
   ReprotectReverse: "ReprotectReverse",
 }
-
-
