@@ -1872,6 +1872,10 @@
         "planningStatus": {
           "$ref": "#/definitions/MigrationEntityPlanningStatus",
           "description": "Planning Status of Migration Entity."
+        },
+        "migrationSpecificProperties": {
+          "$ref": "#/definitions/MigrationSpecificPropertiesBase",
+          "description": "Migration specific properties for the entity."
         }
       },
       "required": [
@@ -1883,7 +1887,8 @@
         "migrationStrategy",
         "migrationStage",
         "migrationStatus",
-        "planningStatus"
+        "planningStatus",
+        "migrationSpecificProperties"
       ]
     },
     "MigrationEntityReadiness": {
@@ -1948,6 +1953,37 @@
             "name": "Others",
             "value": "Others",
             "description": "AzureSQLDB. Indicates the Migration Entity target is Others"
+          }
+        ]
+      }
+    },
+    "MigrationSpecificPropertiesBase": {
+      "type": "object",
+      "description": "The base Migration Specific Properties model.",
+      "properties": {
+        "instanceType": {
+          "$ref": "#/definitions/MigrationSpecificPropertiesInstanceType",
+          "description": "Discriminator for migration specific properties."
+        }
+      },
+      "discriminator": "instanceType",
+      "required": [
+        "instanceType"
+      ]
+    },
+    "MigrationSpecificPropertiesInstanceType": {
+      "type": "string",
+      "description": "Migration Specific Properties Instance Types.",
+      "enum": [
+        "ServerMigration"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationSpecificPropertiesInstanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServerMigration",
+            "value": "ServerMigration"
           }
         ]
       }
@@ -2209,6 +2245,60 @@
           }
         ]
       }
+    },
+    "ServerMigrationPath": {
+      "type": "string",
+      "description": "Server migration path options.",
+      "enum": [
+        "agentlessa",
+        "agentbased"
+      ],
+      "x-ms-enum": {
+        "name": "ServerMigrationPath",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Agentlessa",
+            "value": "agentlessa",
+            "description": "Agentlessa"
+          },
+          {
+            "name": "Agentbased",
+            "value": "agentbased",
+            "description": "Agentbased"
+          }
+        ]
+      }
+    },
+    "ServerMigrationSpecificProperties": {
+      "type": "object",
+      "description": "Represents a Server Migration Specific properties base model.",
+      "properties": {
+        "drApplianceInventoryId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems"
+              }
+            ]
+          }
+        },
+        "serverMigrationPath": {
+          "$ref": "#/definitions/ServerMigrationPath"
+        }
+      },
+      "required": [
+        "serverMigrationPath"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrationSpecificPropertiesBase"
+        }
+      ],
+      "x-ms-discriminator-value": "ServerMigration"
     },
     "StepStage": {
       "type": "string",

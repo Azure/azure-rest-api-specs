@@ -99,4 +99,31 @@ model MigrationEntityProperties is AzureResourceProperties {
 
   @doc("Planning Status of Migration Entity.")
   planningStatus: MigrationEntityPlanningStatus;  
+
+  @doc("Migration specific properties for the entity.")
+  migrationSpecificProperties?: MigrationSpecificPropertiesBase;
 }
+
+@doc("The base Migration Specific Properties model.")
+@discriminator("instanceType")
+model MigrationSpecificPropertiesBase {
+  @doc("Discriminator for migration specific properties.")
+  instanceType: MigrationSpecificPropertiesInstanceType;
+}
+
+@doc("Represents a Server Migration Specific properties base model.")
+model ServerMigrationSpecificProperties extends MigrationSpecificPropertiesBase {
+  @doc("Discriminator for migration specific properties.")
+  instanceType: MigrationSpecificPropertiesInstanceType.ServerMigration;
+
+  drApplianceInventoryId?: armResourceIdentifier<[
+    { type: "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems"; }
+  ]>;
+
+  serverMigrationPath: ServerMigrationPath;
+}
+
+
+
+
+

@@ -26,6 +26,17 @@ union Strategy {
   string,
 }
 
+@doc("Server migration path options.")
+union ServerMigrationPath {
+  @doc("Agentlessa")
+  Agentlessa: "agentlessa",
+
+  @doc("Agentbased")
+  Agentbased: "agentbased",
+
+  string,
+}
+
 @doc("Preset stage of the wave.")
 union WaveStage {
   @doc("Planning in progress")
@@ -260,6 +271,12 @@ union TaskStatus {
   Skipped: "SKIPPED",
 
   string,
+}
+
+@doc("Migration Specific Properties Instance Types.")
+union MigrationSpecificPropertiesInstanceType {
+  ServerMigration: "ServerMigration";
+  string;
 }
 
 
