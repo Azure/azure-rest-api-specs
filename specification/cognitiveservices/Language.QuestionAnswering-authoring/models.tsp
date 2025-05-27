@@ -297,6 +297,17 @@ union updateOperationKind {
 }
 
 /**
+ * Collection of files containing project assets the needs to be imported.
+ */
+@added(Versions.v2025_05_15_preview)
+model ImportFiles {
+  /**
+   * Collection of files
+   */
+  files: HttpPart<File>[];
+}
+
+/**
  * Represents the project.
  */
 @resource("authoring/query-knowledgebases/projects")
