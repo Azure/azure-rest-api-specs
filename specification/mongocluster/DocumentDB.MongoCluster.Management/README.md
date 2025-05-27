@@ -43,10 +43,11 @@ mongocluster
 TypeSpec ARM definitions inline the api version changes without needing to clone/copy specs each time.
 
 Use VS Code to edit TypeSpec definition files.
-- If adding a new API version - update `main.tsp` with the API version definition. 
-    - Copy the `examples\` from the previous `stable` or `preview` API version into a new version folder.
-    - For any additions to the API specification, decorate the properties/models/resource etc. with `@added(Versions.v<api-version>)`.
-    - Similarly for removing items, use `@removed(Versions.v<api-version>)` - note that this could trigger a API breaking change error during PR review.
+
+- If adding a new API version - update `main.tsp` with the API version definition.
+  - Copy the `examples\` from the previous `stable` or `preview` API version into a new version folder.
+  - For any additions to the API specification, decorate the properties/models/resource etc. with `@added(Versions.v<api-version>)`.
+  - Similarly for removing items, use `@removed(Versions.v<api-version>)` - note that this could trigger a API breaking change error during PR review.
 - If adding a new resource (proxy or tracked ARM resource), create a new `.tsp` file with the filename matching the resource name, eg. `User.tsp`.
 - Any shared models should be added to `common.tsp`.
 - Make sure to add or update the examples based on the changes that have been made for the new API version.
@@ -70,6 +71,7 @@ The scenarios can be defined using the API version examples and should be run wh
 See complete [documentation](https://github.com/Azure/azure-rest-api-specs/tree/main/documentation/api-scenario)
 
 API scenario file are located alongside examples for each API version
+
 ```
 mongocluster
 └── resource-manager
@@ -94,8 +96,9 @@ See [API scenario definition reference](https://github.com/Azure/azure-rest-api-
 Rule of thumb is to author or generate practical API spec examples that can be turned be compiled into a scenario test.
 
 Example Scenarios:
- - Basic [DONE] - covers common operations such as create, add firewall, data disk scaling, delete operations.
+
+- Basic [DONE] - covers common operations such as create, add firewall, data disk scaling, delete operations.
 
 ## Running API scenarios for Mongo Clusters API
 
-__Full instructions on [wiki page here](https://msdata.visualstudio.com/CosmosDB/_git/pgmongo?path=/docs/pgmongo/mongo_arm/api_specification/typespec-authoring.md&version=GBolivert/arm_spec_docs&_a=preview)__
+**Full instructions on [wiki page here](https://msdata.visualstudio.com/CosmosDB/_git/pgmongo?path=/docs/pgmongo/mongo_arm/api_specification/typespec-authoring.md&version=GBolivert/arm_spec_docs&_a=preview)**
