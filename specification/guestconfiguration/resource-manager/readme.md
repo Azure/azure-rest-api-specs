@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Guest Configuration.
+This is the AutoRest configuration file for Guest Configuration test.
 
 ---
 
