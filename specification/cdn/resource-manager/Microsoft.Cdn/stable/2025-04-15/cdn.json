@@ -64,7 +64,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -106,7 +106,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -155,7 +155,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -225,7 +225,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -290,7 +290,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -343,7 +343,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -400,7 +400,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -463,7 +463,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -518,7 +518,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -568,7 +568,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -614,7 +614,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -660,7 +660,7 @@
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2901,7 +2901,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -3416,7 +3416,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -5993,7 +5993,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -6153,7 +6153,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -6403,7 +6403,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -7138,7 +7138,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -7211,119 +7211,6 @@
           "format": "int32"
         }
       }
-    },
-    "Resource": {
-      "description": "The core properties of ARM resources",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Resource name.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SystemData": {
-      "description": "Read only system data",
-      "readOnly": true,
-      "type": "object",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "An identifier for the identity that created the resource"
-        },
-        "createdByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that created the resource"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "An identifier for the identity that last modified the resource"
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that last modified the resource"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      }
-    },
-    "IdentityType": {
-      "description": "The type of identity that creates/modifies resources",
-      "type": "string",
-      "enum": [
-        "user",
-        "application",
-        "managedIdentity",
-        "key"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true
-      }
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        }
-      },
-      "required": [
-        "location"
-      ]
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
     },
     "QueryStringCachingBehavior": {
       "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
@@ -7404,7 +7291,7 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail"
         }
       }
     },
