@@ -6,6 +6,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
 import "./ops.tsp";
 
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -115,6 +116,7 @@ interface QuestionAnsweringProjects {
    * Import project assets.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GA'd method"
+  @sharedRoute
   @route("/authoring/query-knowledgebases/projects/{projectName}/:import")
   @post
   @pollingOperation(QuestionAnsweringProjects.getImportStatus)
@@ -148,6 +150,47 @@ interface QuestionAnsweringProjects {
     },
     AcceptedResponse,
     {},
+    ErrorResponse
+  >;
+
+  /**
+   * Import project assets from file.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "endpoint has already been GA'd"
+  #suppress "@azure-tools/typespec-azure-core/byos" "method overload `import` already support byos with fileUri"
+  #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "method overload `import` already support byos with fileUri"
+  @added(Versions.v2025_05_15_preview)
+  @sharedRoute
+  @route("/authoring/query-knowledgebases/projects/{projectName}/:import")
+  @pollingOperation(QuestionAnsweringProjects.getImportStatus)
+  importFromFile is Foundations.LongRunningOperation<
+    {
+      @doc("This request has a multi-part body.")
+      @TypeSpec.Http.header("Content-Type")
+      contentType: "multipart/form-data";
+
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
+      @path
+      projectName: string;
+
+      /**
+       * Kind of the asset of the project.
+       */
+      @query("assetKind")
+      assetKind?: AssestKind;
+
+      /**
+       * Collection of files containing project assets the needs to be imported.
+       */
+      @multipartBody
+      body: ImportFiles;
+    },
+    AcceptedResponse,
+    ServiceTraits,
     ErrorResponse
   >;
 

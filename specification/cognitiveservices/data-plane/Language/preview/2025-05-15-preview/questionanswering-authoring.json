@@ -1404,6 +1404,96 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/authoring/query-knowledgebases/projects/{projectName}/:import?_overload=importFromFile": {
+      "post": {
+        "operationId": "QuestionAnsweringProjects_ImportFromFile",
+        "description": "Import project assets from file.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "assetKind",
+            "in": "query",
+            "description": "Kind of the asset of the project.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "qnas",
+              "synonyms"
+            ],
+            "x-ms-enum": {
+              "name": "AssestKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "qnas",
+                  "value": "qnas",
+                  "description": "Question and Answers."
+                },
+                {
+                  "name": "synonyms",
+                  "value": "synonyms",
+                  "description": "Synonyms."
+                }
+              ]
+            }
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "Collection of files",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
   "definitions": {
     "AcceptedResponse": {
       "type": "object",
@@ -1715,6 +1805,23 @@
           "description": "Unique ID of the QnA."
         }
       }
+    },
+    "ImportFiles": {
+      "type": "object",
+      "description": "Collection of files containing project assets the needs to be imported.",
+      "properties": {
+        "files": {
+          "type": "array",
+          "description": "Collection of files",
+          "items": {
+            "type": "object"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "files"
+      ]
     },
     "ImportJobOptions": {
       "type": "object",
