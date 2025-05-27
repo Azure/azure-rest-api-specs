@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-01-01-preview",
+    "api-version": "2024-08-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
     "targetDbServerName": "exampletarget",
@@ -16,12 +16,14 @@
         ],
         "secretParameters": {
           "adminCredentials": {
-            "sourceServerPassword": "examplesourcepassword",
-            "targetServerPassword": "exampletargetpassword"
+            "sourceServerPassword": "xxxxxxxx",
+            "targetServerPassword": "xxxxxxxx"
           }
         },
         "migrationMode": "Offline",
-        "overwriteDbsInTarget": "True"
+        "overwriteDbsInTarget": "True",
+        "sourceDbServerFullyQualifiedDomainName": "examplesource.contoso.com",
+        "targetDbServerFullyQualifiedDomainName": "exampletarget.contoso.com"
       },
       "location": "westus"
     }
@@ -39,7 +41,9 @@
             }
           },
           "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+          "sourceDbServerFullyQualifiedDomainName": "examplesource.contoso.com",
           "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "targetDbServerFullyQualifiedDomainName": "exampletarget.contoso.com",
           "dbsToMigrate": [
             "exampledatabase1",
             "exampledatabase2",
@@ -74,7 +78,9 @@
             }
           },
           "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+          "sourceDbServerFullyQualifiedDomainName": "examplesource.contoso.com",
           "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "targetDbServerFullyQualifiedDomainName": "exampletarget.contoso.com",
           "dbsToMigrate": [
             "exampledatabase1",
             "exampledatabase2",
