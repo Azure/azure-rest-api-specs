@@ -1,0 +1,29 @@
+{
+  "title": "PublicIpAddresses_Get",
+  "operationId": "PublicIpAddresses_Get",
+  "parameters": {
+    "api-version": "2025-05-21-preview",
+    "location": "eastus",
+    "publicIpAddress": "12.34.56.78"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "ipVersion": "IPv4",
+          "ipAddress": "12.34.56.78",
+          "state": "Active",
+          "cloud": "Public",
+          "region": "eastus",
+          "assignedResource": {
+            "resourceType": "Logical",
+            "resourceId": "Microsoft.NetworkServiceManager/locations/eastus/tenant/tenantName"
+          }
+        },
+        "id": "/providers/Microsoft.NetworkServiceManager/locations/eastus/publicIpAddresses/12.34.56.78",
+        "name": "12.34.56.78",
+        "type": "Microsoft.NetworkServiceManager/locations/publicIpAddresses"
+      }
+    }
+  }
+}
