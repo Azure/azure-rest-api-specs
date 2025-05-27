@@ -154,6 +154,17 @@ union BatchPoolLifetimeOption {
   Job: "job",
 }
 
+@doc("The IP families used to specify IP versions available to the pool. enums")
+union IPFamily {
+  string,
+
+  @doc("IPv4 is available to the pool.")
+  IPv4: "IPv4",
+
+  @doc("IPv6 is available to the pool.")
+  IPv6: "IPv6",
+}
+
 @doc("CachingType enums")
 union CachingType {
   string,
@@ -471,6 +482,17 @@ union AllocationState {
   Stopping: "stopping",
 }
 
+@doc("BatchJobDefaultOrder enums")
+union BatchJobDefaultOrder {
+  string,
+
+  @doc("Tasks should be scheduled uniformly from all equal-priority jobs for the pool.")
+  None: "none",
+
+  @doc("If jobs have equal priority, tasks from jobs that were created earlier should be scheduled first.")
+  CreationTime: "creationTime",
+}
+
 @doc("BatchPoolIdentityType enums")
 union BatchPoolIdentityType {
   string,
@@ -645,7 +667,7 @@ union BatchNodeState {
 union UpgradeMode {
   string,
 
-  @doc("TAll virtual machines in the scale set are automatically updated at the same time.")
+  @doc("All virtual machines in the scale set are automatically updated at the same time.")
   Automatic: "automatic",
 
   @doc("You control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.")
@@ -653,6 +675,17 @@ union UpgradeMode {
 
   @doc("The existing instances in a scale set are brought down in batches to be upgraded. Once the upgraded batch is complete, the instances will begin taking traffic again and the next batch will begin. This continues until all instances brought up-to-date.")
   Rolling: "rolling",
+}
+
+@doc("HostEndpointSettingsModeTypes enums")
+union HostEndpointSettingsModeTypes {
+  string,
+
+  @doc("In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints.")
+  Audit: "automatic",
+
+  @doc("Enforce mode is the recommended mode of operation and system will enforce the access control policy. This property cannot be used together with 'inVMAccessControlProfileReferenceId'.")
+  Enforce: "manual",
 }
 
 @doc("SchedulingState enums")
@@ -731,10 +764,13 @@ union BatchNodeDisableSchedulingOption {
 union SecurityEncryptionTypes {
   string,
 
-  @doc("NonPersistedTPM")
+  @doc("EncryptionType of the managed disk is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob. It is not supported in data disks.")
+  DiskWithVMGuestState: "DiskWithVMGuestState",
+
+  @doc("EncryptionType of the managed disk is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob.")
   NonPersistedTPM: "NonPersistedTPM",
 
-  @doc("VMGuestStateOnly")
+  @doc("EncryptionType of the managed disk is set to VMGuestStateOnly for encryption of just the VMGuestState blob.")
   VMGuestStateOnly: "VMGuestStateOnly",
 }
 
@@ -1393,10 +1429,36 @@ model BatchJobScheduleConfiguration {
   recurrenceInterval?: duration;
 }
 
+@doc("Specifies particular host endpoint settings.")
+model HostEndpointSettings {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  @doc("Specifies the reference to the InVMAccessControlProfileVersion resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}.")
+  @clientName("inVmAccessControlProfileReferenceId")
+  inVMAccessControlProfileReferenceId?: string;
+
+  @doc("Specifies the access control policy execution mode.")
+  mode?: HostEndpointSettingsModeTypes;
+}
+
+@doc("Specifies ProxyAgent settings while creating the virtual machine.")
+model ProxyAgentSettings {
+  @doc("Specifies whether Metadata Security Protocol feature should be enabled on the virtual machine or virtual machine scale set. Default is False.")
+  enabled?: boolean;
+
+  @doc("Settings for the IMDS endpoint.")
+  imds?: HostEndpointSettings;
+
+  @doc("Settings for the WireServer endpoint.")
+  wireServer?: HostEndpointSettings;
+}
+
 @doc("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
 model SecurityProfile {
   @doc("This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. For more information on encryption at host requirements, please refer to https://learn.microsoft.com/azure/virtual-machines/disk-encryption#supported-vm-sizes.")
   encryptionAtHost?: boolean;
+
+  @doc("Specifies ProxyAgent settings while creating the virtual machine.")
+  proxyAgentSettings?: ProxyAgentSettings;
 
   @doc("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")
   securityType?: SecurityTypes;
@@ -1419,10 +1481,10 @@ model BatchJobSpecification {
   @doc("The priority of Jobs created under this schedule. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0. This priority is used as the default for all Jobs under the Job Schedule. You can update a Job's priority after it has been created using by using the update Job API.")
   priority?: int32;
 
-  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
+  @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32;
 
   @doc("The display name for Jobs created under this schedule. The name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
@@ -1439,7 +1501,7 @@ model BatchJobSpecification {
   @clientName("taskFailureMode")
   onTaskFailure?: BatchTaskFailureMode;
 
-  @doc("The network configuration for the Job.")
+  @doc("(This property is not available by default. Please contact support for more information) The network configuration for the Job.")
   networkConfiguration?: BatchJobNetworkConfiguration;
 
   @doc("The execution constraints for Jobs created under this schedule.")
@@ -1464,7 +1526,7 @@ model BatchJobSpecification {
   metadata?: BatchMetadataItem[];
 }
 
-@doc("The network configuration for the Job.")
+@doc("(This property is not available by default. Please contact support for more information) The network configuration for the Job.")
 model BatchJobNetworkConfiguration {
   @doc("The ARM resource identifier of the virtual network subnet which Compute Nodes running Tasks from the Job will join for the duration of the Task. The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
   subnetId: string;
@@ -2046,6 +2108,9 @@ model DataDisk {
   @clientName("diskSizeGb", "!go")
   diskSizeGB: int32;
 
+  @doc("The managed disk parameters.")
+  managedDisk?: ManagedDisk;
+
   @doc("The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\".")
   storageAccountType?: StorageAccountType;
 }
@@ -2062,12 +2127,33 @@ model BatchContainerConfiguration {
   containerRegistries?: ContainerRegistryReference[];
 }
 
+@doc("The reference of one of the pool identities to encrypt Disk. This identity will be used to access the key vault.")
+model BatchPoolIdentityReference {
+  @doc("The ARM resource id of the user assigned identity. This reference must be included in the pool identities.")
+  resourceId?: Azure.Core.armResourceIdentifier;
+}
+
+@doc("The Customer Managed Key reference to encrypt the Disk.")
+model DiskCustomerManagedKey {
+  @doc("The reference of one of the pool identities to encrypt Disk. This identity will be used to access the KeyVault.")
+  identityReference?: BatchPoolIdentityReference;
+
+  @doc("Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value.")
+  keyUrl?: string;
+
+  @doc("Set this flag to true to enable auto-updating of the Disk Encryption to the latest key version. Default is false.")
+  rotationToLatestKeyVersionEnabled?: boolean;
+}
+
 @doc("""
   The disk encryption configuration applied on compute nodes in the pool.
   Disk encryption configuration is not supported on Linux pool created with
   Azure Compute Gallery Image.
   """)
 model DiskEncryptionConfiguration {
+  @doc("The Customer Managed Key reference to encrypt the OS Disk. Customer Managed Key will encrypt OS Disk by EncryptionAtRest, and by default we will encrypt the data disk as well. It can be used only when the pool is configured with an identity and OsDisk is set as one of the targets of DiskEncryption.")
+  customerManagedKey?: DiskCustomerManagedKey;
+
   @doc("The list of disk targets Batch Service will encrypt on the compute node. The list of disk targets Batch Service will encrypt on the compute node.")
   targets?: DiskEncryptionTarget[];
 }
@@ -2143,6 +2229,9 @@ model BatchDiffDiskSettings {
 
 @doc("Specifies how Tasks should be distributed across Compute Nodes.")
 model BatchTaskSchedulingPolicy {
+  @doc("The order for scheduling tasks from different jobs with the same priority. If not specified, the default is none.")
+  jobDefaultOrder?: BatchJobDefaultOrder;
+
   @doc("How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.")
   nodeFillType: BatchNodeFillType;
 }
@@ -2222,6 +2311,9 @@ model BatchPublicIpAddressConfiguration {
   @doc("The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.")
   @clientName("IpAddressProvisioningType")
   provision?: IpAddressProvisioningType;
+
+  @doc("The IP families used to specify IP versions available to the pool. IP families are used to determine single-stack or dual-stack pools. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6.")
+  ipFamilies?: IPFamily[];
 
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
   ipAddressIds?: Azure.Core.armResourceIdentifier[];
@@ -2324,8 +2416,17 @@ model WindowsUserConfiguration {
   loginMode?: LoginMode;
 }
 
+@doc("The ARM resource id of the disk encryption set.")
+model DiskEncryptionSetParameters {
+  @doc("The ARM resource id of the disk encryption set. The resource should be in the same subscription as the Batch account.")
+  id?: Azure.Core.armResourceIdentifier;
+}
+
 @doc("The managed disk parameters.")
 model ManagedDisk {
+  @doc("Specifies the customer managed disk encryption set resource id for the managed disk. It can be set only in UserSubscription mode.")
+  diskEncryptionSet?: DiskEncryptionSetParameters;
+
   @doc("The storage account type for managed disk.")
   storageAccountType?: StorageAccountType;
 
@@ -2586,10 +2687,10 @@ model BatchJob {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0.")
   priority?: int32;
 
-  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
+  @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32 = -1;
 
   @doc("The execution constraints for the Job.")
@@ -2623,7 +2724,7 @@ model BatchJob {
   @clientName("taskFailureMode")
   onTaskFailure?: BatchTaskFailureMode;
 
-  @doc("The network configuration for the Job.")
+  @doc("(This property is not available by default. Please contact support for more information) The network configuration for the Job.")
   @visibility(Lifecycle.Read)
   networkConfiguration?: BatchJobNetworkConfiguration;
 
@@ -2654,10 +2755,10 @@ model BatchJobCreateOptions {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0.")
   priority?: int32;
 
-  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
+  @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32 = -1;
 
   @doc("The execution constraints for the Job.")
@@ -2686,7 +2787,7 @@ model BatchJobCreateOptions {
   @clientName("taskFailureMode")
   onTaskFailure?: BatchTaskFailureMode;
 
-  @doc("The network configuration for the Job.")
+  @doc("(This property is not available by default. Please contact support for more information) The network configuration for the Job.")
   networkConfiguration?: BatchJobNetworkConfiguration;
 
   @doc("A list of name-value pairs associated with the Job as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
@@ -2698,10 +2799,10 @@ model BatchJobUpdateOptions {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged.")
   priority?: int32;
 
-  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
+  @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32;
 
   @doc("The execution constraints for the Job. If omitted, the existing execution constraints are left unchanged.")
@@ -2717,7 +2818,7 @@ model BatchJobUpdateOptions {
   @doc("A list of name-value pairs associated with the Job as metadata. If omitted, the existing Job metadata is left unchanged.")
   metadata?: BatchMetadataItem[];
 
-  @doc("The network configuration for the Job.")
+  @doc("(This property is not available by default. Please contact support for more information) The network configuration for the Job.")
   networkConfiguration?: BatchJobNetworkConfiguration;
 }
 
@@ -2966,7 +3067,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   id?: string;
 
-  @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
+  @doc("The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   @visibility(Lifecycle.Read)
   displayName?: string;
 
@@ -3003,7 +3104,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   allocationStateTransitionTime?: utcDateTime;
 
-  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes, see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).")
+  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes).")
   @visibility(Lifecycle.Read)
   vmSize?: string;
 
@@ -3055,7 +3156,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   autoScaleRun?: AutoScaleRun;
 
-  @doc("Whether the Pool permits direct communication between Compute Nodes. This imposes restrictions on which Compute Nodes can be assigned to the Pool. Specifying this value can reduce the chance of the requested number of Compute Nodes to be allocated in the Pool.")
+  @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
   @visibility(Lifecycle.Read)
   enableInterNodeCommunication?: boolean;
 
@@ -3100,7 +3201,7 @@ model BatchPool {
   @clientName("poolStatistics")
   stats?: BatchPoolStatistics;
 
-  @doc("A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
+  @doc("Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.")
   @visibility(Lifecycle.Read)
   mountConfiguration?: MountConfiguration[];
 
@@ -4000,6 +4101,9 @@ model BatchNode {
   @doc("The IP address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes.")
   ipAddress?: ipV4Address;
 
+  @doc("The IPv6 address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes. This property will not be present if the Pool is not configured for IPv6.")
+  ipv6Address?: ipV6Address;
+
   @doc("An identifier which can be passed when adding a Task to request that the Task be scheduled on this Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId?: string;
 
@@ -4187,6 +4291,13 @@ model BatchNodeDisableSchedulingOptions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The remote login settings for a Compute Node.")
 model BatchNodeRemoteLoginSettings {
+  @doc("The IPv6 address used for remote login to the Compute Node.")
+  @clientName("ipv6RemoteLoginIpAddress")
+  ipv6RemoteLoginIPAddress?: ipV6Address;
+
+  @doc("The port used for remote login to the Compute Node.")
+  ipv6RemoteLoginPort?: int32;
+
   @doc("The IP address used for remote login to the Compute Node.")
   @clientName("remoteLoginIpAddress")
   remoteLoginIPAddress: ipV4Address;

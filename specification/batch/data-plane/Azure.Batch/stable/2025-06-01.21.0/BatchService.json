@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Batch",
-    "version": "2024-07-01.20.0",
+    "version": "2025-06-01.21.0",
     "description": "Azure Batch provides Cloud-scale job scheduling and compute management.",
     "x-typespec-generated": [
       {
@@ -5481,8 +5481,8 @@
         "tags": [
           "Pools"
         ],
-        "summary": "Lists all of the Pools which be mounted.",
-        "description": "Lists all of the Pools which be mounted.",
+        "summary": "Lists all of the Pools in the specified Account.",
+        "description": "Lists all of the Pools in the specified Account.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -9739,6 +9739,10 @@
       "type": "string",
       "description": "Represent an IP V4 address serialized as a string.\n\nIt is formatted as four 8-bit fields separated by periods."
     },
+    "Azure.Core.ipV6Address": {
+      "type": "string",
+      "description": "Represent an IP V6 address serialized as a string.\n\nIt is formatted as eight hex decimal values(16-bit) between 0 and FFFF separated by colon. (i.e. `y:y:y:y:y:y:y:y`)"
+    },
     "AzureBlobFileSystemConfiguration": {
       "type": "object",
       "description": "Information used to connect to an Azure Storage Container using Blobfuse.",
@@ -10524,12 +10528,12 @@
         },
         "allowTaskPreemption": {
           "type": "boolean",
-          "description": "Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "maxParallelTasks": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.",
+          "description": "The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.",
           "default": -1
         },
         "constraints": {
@@ -10577,7 +10581,7 @@
         },
         "networkConfiguration": {
           "$ref": "#/definitions/BatchJobNetworkConfiguration",
-          "description": "The network configuration for the Job.",
+          "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job.",
           "readOnly": true
         },
         "metadata": {
@@ -10673,12 +10677,12 @@
         },
         "allowTaskPreemption": {
           "type": "boolean",
-          "description": "Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "maxParallelTasks": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.",
+          "description": "The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.",
           "default": -1
         },
         "constraints": {
@@ -10721,7 +10725,7 @@
         },
         "networkConfiguration": {
           "$ref": "#/definitions/BatchJobNetworkConfiguration",
-          "description": "The network configuration for the Job."
+          "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job."
         },
         "metadata": {
           "type": "array",
@@ -10736,6 +10740,30 @@
         "id",
         "poolInfo"
       ]
+    },
+    "BatchJobDefaultOrder": {
+      "type": "string",
+      "description": "BatchJobDefaultOrder enums",
+      "enum": [
+        "none",
+        "creationTime"
+      ],
+      "x-ms-enum": {
+        "name": "BatchJobDefaultOrder",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "Tasks should be scheduled uniformly from all equal-priority jobs for the pool."
+          },
+          {
+            "name": "CreationTime",
+            "value": "creationTime",
+            "description": "If jobs have equal priority, tasks from jobs that were created earlier should be scheduled first."
+          }
+        ]
+      }
     },
     "BatchJobDisableOptions": {
       "type": "object",
@@ -10971,7 +10999,7 @@
     },
     "BatchJobNetworkConfiguration": {
       "type": "object",
-      "description": "The network configuration for the Job.",
+      "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job.",
       "properties": {
         "subnetId": {
           "type": "string",
@@ -10989,7 +11017,7 @@
     },
     "BatchJobNetworkConfigurationUpdate": {
       "type": "object",
-      "description": "The network configuration for the Job.",
+      "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job.",
       "properties": {
         "subnetId": {
           "type": "string",
@@ -11802,12 +11830,12 @@
         },
         "allowTaskPreemption": {
           "type": "boolean",
-          "description": "Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "maxParallelTasks": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
+          "description": "The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
         },
         "displayName": {
           "type": "string",
@@ -11829,7 +11857,7 @@
         },
         "networkConfiguration": {
           "$ref": "#/definitions/BatchJobNetworkConfiguration",
-          "description": "The network configuration for the Job."
+          "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job."
         },
         "constraints": {
           "$ref": "#/definitions/BatchJobConstraints",
@@ -11883,12 +11911,12 @@
         },
         "allowTaskPreemption": {
           "type": "boolean",
-          "description": "Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "maxParallelTasks": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
+          "description": "The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
         },
         "displayName": {
           "type": "string",
@@ -11910,7 +11938,7 @@
         },
         "networkConfiguration": {
           "$ref": "#/definitions/BatchJobNetworkConfigurationUpdate",
-          "description": "The network configuration for the Job."
+          "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job."
         },
         "constraints": {
           "$ref": "#/definitions/BatchJobConstraints",
@@ -12127,12 +12155,12 @@
         },
         "allowTaskPreemption": {
           "type": "boolean",
-          "description": "Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "maxParallelTasks": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
+          "description": "The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
         },
         "constraints": {
           "$ref": "#/definitions/BatchJobConstraints",
@@ -12157,7 +12185,7 @@
         },
         "networkConfiguration": {
           "$ref": "#/definitions/BatchJobNetworkConfigurationUpdate",
-          "description": "The network configuration for the Job."
+          "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job."
         }
       }
     },
@@ -12218,6 +12246,10 @@
         "ipAddress": {
           "$ref": "#/definitions/Azure.Core.ipV4Address",
           "description": "The IP address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes."
+        },
+        "ipv6Address": {
+          "$ref": "#/definitions/Azure.Core.ipV6Address",
+          "description": "The IPv6 address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes. This property will not be present if the Pool is not configured for IPv6."
         },
         "affinityId": {
           "type": "string",
@@ -12874,6 +12906,16 @@
       "type": "object",
       "description": "The remote login settings for a Compute Node.",
       "properties": {
+        "ipv6RemoteLoginIPAddress": {
+          "$ref": "#/definitions/Azure.Core.ipV6Address",
+          "description": "The IPv6 address used for remote login to the Compute Node.",
+          "x-ms-client-name": "ipv6RemoteLoginIpAddress"
+        },
+        "ipv6RemoteLoginPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port used for remote login to the Compute Node."
+        },
         "remoteLoginIPAddress": {
           "$ref": "#/definitions/Azure.Core.ipV4Address",
           "description": "The IP address used for remote login to the Compute Node.",
@@ -13151,7 +13193,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.",
           "readOnly": true
         },
         "url": {
@@ -13201,7 +13243,7 @@
         },
         "vmSize": {
           "type": "string",
-          "description": "The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes, see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).",
+          "description": "The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes).",
           "readOnly": true
         },
         "virtualMachineConfiguration": {
@@ -13279,7 +13321,7 @@
         },
         "enableInterNodeCommunication": {
           "type": "boolean",
-          "description": "Whether the Pool permits direct communication between Compute Nodes. This imposes restrictions on which Compute Nodes can be assigned to the Pool. Specifying this value can reduce the chance of the requested number of Compute Nodes to be allocated in the Pool.",
+          "description": "Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.",
           "readOnly": true
         },
         "networkConfiguration": {
@@ -13346,7 +13388,7 @@
         },
         "mountConfiguration": {
           "type": "array",
-          "description": "A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.",
+          "description": "Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.",
           "items": {
             "$ref": "#/definitions/MountConfiguration"
           },
@@ -13584,6 +13626,17 @@
       "required": [
         "type"
       ]
+    },
+    "BatchPoolIdentityReference": {
+      "type": "object",
+      "description": "The reference of one of the pool identities to encrypt Disk. This identity will be used to access the key vault.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource id of the user assigned identity. This reference must be included in the pool identities."
+        }
+      }
     },
     "BatchPoolIdentityType": {
       "type": "string",
@@ -14357,6 +14410,13 @@
           "$ref": "#/definitions/IpAddressProvisioningType",
           "description": "The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.",
           "x-ms-client-name": "IpAddressProvisioningType"
+        },
+        "ipFamilies": {
+          "type": "array",
+          "description": "The IP families used to specify IP versions available to the pool. IP families are used to determine single-stack or dual-stack pools. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6.",
+          "items": {
+            "$ref": "#/definitions/IPFamily"
+          }
         },
         "ipAddressIds": {
           "type": "array",
@@ -15405,6 +15465,10 @@
       "type": "object",
       "description": "Specifies how Tasks should be distributed across Compute Nodes.",
       "properties": {
+        "jobDefaultOrder": {
+          "$ref": "#/definitions/BatchJobDefaultOrder",
+          "description": "The order for scheduling tasks from different jobs with the same priority. If not specified, the default is none."
+        },
         "nodeFillType": {
           "$ref": "#/definitions/BatchNodeFillType",
           "description": "How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread."
@@ -15418,6 +15482,10 @@
       "type": "object",
       "description": "Specifies how Tasks should be distributed across Compute Nodes.",
       "properties": {
+        "jobDefaultOrder": {
+          "$ref": "#/definitions/BatchJobDefaultOrder",
+          "description": "The order for scheduling tasks from different jobs with the same priority. If not specified, the default is none."
+        },
         "nodeFillType": {
           "$ref": "#/definitions/BatchNodeFillType",
           "description": "How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread."
@@ -15885,6 +15953,10 @@
           "description": "The initial disk size in gigabytes.",
           "x-ms-client-name": "diskSizeGb"
         },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDisk",
+          "description": "The managed disk parameters."
+        },
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
           "description": "The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\"."
@@ -15967,16 +16039,49 @@
         ]
       }
     },
+    "DiskCustomerManagedKey": {
+      "type": "object",
+      "description": "The Customer Managed Key reference to encrypt the Disk.",
+      "properties": {
+        "identityReference": {
+          "$ref": "#/definitions/BatchPoolIdentityReference",
+          "description": "The reference of one of the pool identities to encrypt Disk. This identity will be used to access the KeyVault."
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value."
+        },
+        "rotationToLatestKeyVersionEnabled": {
+          "type": "boolean",
+          "description": "Set this flag to true to enable auto-updating of the Disk Encryption to the latest key version. Default is false."
+        }
+      }
+    },
     "DiskEncryptionConfiguration": {
       "type": "object",
       "description": "The disk encryption configuration applied on compute nodes in the pool.\nDisk encryption configuration is not supported on Linux pool created with\nAzure Compute Gallery Image.",
       "properties": {
+        "customerManagedKey": {
+          "$ref": "#/definitions/DiskCustomerManagedKey",
+          "description": "The Customer Managed Key reference to encrypt the OS Disk. Customer Managed Key will encrypt OS Disk by EncryptionAtRest, and by default we will encrypt the data disk as well. It can be used only when the pool is configured with an identity and OsDisk is set as one of the targets of DiskEncryption."
+        },
         "targets": {
           "type": "array",
           "description": "The list of disk targets Batch Service will encrypt on the compute node. The list of disk targets Batch Service will encrypt on the compute node.",
           "items": {
             "$ref": "#/definitions/DiskEncryptionTarget"
           }
+        }
+      }
+    },
+    "DiskEncryptionSetParameters": {
+      "type": "object",
+      "description": "The ARM resource id of the disk encryption set.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource id of the disk encryption set. The resource should be in the same subscription as the Batch account."
         }
       }
     },
@@ -16194,6 +16299,69 @@
         "contentLength"
       ]
     },
+    "HostEndpointSettings": {
+      "type": "object",
+      "description": "Specifies particular host endpoint settings.",
+      "properties": {
+        "inVMAccessControlProfileReferenceId": {
+          "type": "string",
+          "description": "Specifies the reference to the InVMAccessControlProfileVersion resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}.",
+          "x-ms-client-name": "inVmAccessControlProfileReferenceId"
+        },
+        "mode": {
+          "$ref": "#/definitions/HostEndpointSettingsModeTypes",
+          "description": "Specifies the access control policy execution mode."
+        }
+      }
+    },
+    "HostEndpointSettingsModeTypes": {
+      "type": "string",
+      "description": "HostEndpointSettingsModeTypes enums",
+      "enum": [
+        "automatic",
+        "manual"
+      ],
+      "x-ms-enum": {
+        "name": "HostEndpointSettingsModeTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Audit",
+            "value": "automatic",
+            "description": "In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints."
+          },
+          {
+            "name": "Enforce",
+            "value": "manual",
+            "description": "Enforce mode is the recommended mode of operation and system will enforce the access control policy. This property cannot be used together with 'inVMAccessControlProfileReferenceId'."
+          }
+        ]
+      }
+    },
+    "IPFamily": {
+      "type": "string",
+      "description": "The IP families used to specify IP versions available to the pool. enums",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "IPFamily",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4 is available to the pool."
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6 is available to the pool."
+          }
+        ]
+      }
+    },
     "ImageVerificationType": {
       "type": "string",
       "description": "ImageVerificationType enums",
@@ -16390,6 +16558,10 @@
       "type": "object",
       "description": "The managed disk parameters.",
       "properties": {
+        "diskEncryptionSet": {
+          "$ref": "#/definitions/DiskEncryptionSetParameters",
+          "description": "Specifies the customer managed disk encryption set resource id for the managed disk. It can be set only in UserSubscription mode."
+        },
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
           "description": "The storage account type for managed disk."
@@ -16742,6 +16914,24 @@
         "name"
       ]
     },
+    "ProxyAgentSettings": {
+      "type": "object",
+      "description": "Specifies ProxyAgent settings while creating the virtual machine.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether Metadata Security Protocol feature should be enabled on the virtual machine or virtual machine scale set. Default is False."
+        },
+        "imds": {
+          "$ref": "#/definitions/HostEndpointSettings",
+          "description": "Settings for the IMDS endpoint."
+        },
+        "wireServer": {
+          "$ref": "#/definitions/HostEndpointSettings",
+          "description": "Settings for the WireServer endpoint."
+        }
+      }
+    },
     "RecentBatchJob": {
       "type": "object",
       "description": "Information about the most recent Job to run under the Job Schedule.",
@@ -16881,6 +17071,7 @@
       "type": "string",
       "description": "SecurityEncryptionTypes enums",
       "enum": [
+        "DiskWithVMGuestState",
         "NonPersistedTPM",
         "VMGuestStateOnly"
       ],
@@ -16889,14 +17080,19 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "DiskWithVMGuestState",
+            "value": "DiskWithVMGuestState",
+            "description": "EncryptionType of the managed disk is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob. It is not supported in data disks."
+          },
+          {
             "name": "NonPersistedTPM",
             "value": "NonPersistedTPM",
-            "description": "NonPersistedTPM"
+            "description": "EncryptionType of the managed disk is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob."
           },
           {
             "name": "VMGuestStateOnly",
             "value": "VMGuestStateOnly",
-            "description": "VMGuestStateOnly"
+            "description": "EncryptionType of the managed disk is set to VMGuestStateOnly for encryption of just the VMGuestState blob."
           }
         ]
       }
@@ -16908,6 +17104,10 @@
         "encryptionAtHost": {
           "type": "boolean",
           "description": "This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. For more information on encryption at host requirements, please refer to https://learn.microsoft.com/azure/virtual-machines/disk-encryption#supported-vm-sizes."
+        },
+        "proxyAgentSettings": {
+          "$ref": "#/definitions/ProxyAgentSettings",
+          "description": "Specifies ProxyAgent settings while creating the virtual machine."
         },
         "securityType": {
           "$ref": "#/definitions/SecurityTypes",
@@ -17041,7 +17241,7 @@
           {
             "name": "Automatic",
             "value": "automatic",
-            "description": "TAll virtual machines in the scale set are automatically updated at the same time."
+            "description": "All virtual machines in the scale set are automatically updated at the same time."
           },
           {
             "name": "Manual",
