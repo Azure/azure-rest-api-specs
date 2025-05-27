@@ -12,12 +12,12 @@ using Azure.ResourceManager;
 namespace Microsoft.Proposal;
 
 model ProductResource is ExtensionResource<ProductResourceProperties> {
-  ...ResourceNameParameter<        
-        Resource = ProductResource,
-        KeyName = "productCode",
-        SegmentName = "products",
-        NamePattern = "^[a-zA-Z0-9-]+$"
-    >;
+  ...ResourceNameParameter<
+    Resource = ProductResource,
+    KeyName = "productCode",
+    SegmentName = "products",
+    NamePattern = "^[a-zA-Z0-9-]+$"
+  >;
 }
 
 @doc("Details of the Proposal Product Item.")
@@ -33,18 +33,26 @@ model ProductResourceProperties {
 @route("/providers/Microsoft.Billing/billingAccounts")
 @armResourceOperations(ProductResource)
 interface ProductResources {
-  get is ArmResourceRead<ProductResource, {
+  get is ArmResourceRead<
+    ProductResource,
+    {
       ...ApiVersionParameter;
+
       /** The name of the billing account */
       @pattern("^[a-zA-Z0-9_:-]+$")
       @path("billingAccountName")
       billingAccountName: string;
-  }>;
-  listByParent is ArmResourceListByParent<ProductResource, {
+    }
+  >;
+  listByParent is ArmResourceListByParent<
+    ProductResource,
+    {
       ...ApiVersionParameter;
+
       /** The name of the billing account */
       @pattern("^[a-zA-Z0-9_:-]+$")
       @path("billingAccountName")
       billingAccountName: string;
-  }>;
+    }
+  >;
 }
