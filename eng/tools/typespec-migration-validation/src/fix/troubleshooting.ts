@@ -61,8 +61,8 @@ export function suggestPrompt(jsonObj: any, jsonOutput: JsonOutput): string[] {
   for (const change of clientNameAdded) {
     const { path, value } = change;
     if (getPropertyName(path)) {
-      const [definitionName, propertyName] = getPropertyName(path)!;
-      suggestedFixes.push(`Find this TypeSpec statement @@clientName(${definitionName}.${propertyName}, "${value}") in file back-compatible.tsp or client.tsp. Delete this statement`);
+      const [definitionName, propertyName] = getPropertyName(path)!; 
+      suggestedFixes.push(`Find this TypeSpec statement @@clientName(${definitionName}.${propertyName}, "${value}") in file back-compatible.tsp or client.tsp. Delete this statement.`);
     }
   }
 
@@ -74,9 +74,7 @@ export function suggestPrompt(jsonObj: any, jsonOutput: JsonOutput): string[] {
 
   if (suggestedFixes.length > 0) {
     jsonOutput.suggestions.push(...suggestedFixes);
-    suggestedFixes.unshift(
-      `You are an expert in TypeSpec. Do the following changes to the TypeSpec file:`,
-    );
+    suggestedFixes.unshift(`You are an expert in TypeSpec. Follow the prompt exactly as written. Do not add any additional suggestions or modifications unless explicitly requested.`);
     for (let i = 1; i < suggestedFixes.length; i++) {
       suggestedFixes[i] = `${i}. ${suggestedFixes[i]}`;
     }
