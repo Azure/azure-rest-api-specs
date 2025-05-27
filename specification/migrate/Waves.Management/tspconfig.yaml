@@ -1,13 +1,13 @@
 emit:
   - "@azure-tools/typespec-autorest"
-output-dir: "{project-root}/../../"
+output-dir: "{project-root}/../"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{output-dir}"
-    output-file: "{azure-resource-provider-folder}/{service-name}/MigrateProjects/{version-status}/{version}/waves.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/Waves/{version-status}/{version}/waves.json"
     azure-resource-provider-folder: ./resource-manager
     use-read-only-status-schema: true
     arm-types-dir: "{project-root}/../../../common-types/resource-management"
