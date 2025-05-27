@@ -41,7 +41,7 @@ model DataflowEndpointProperties {
 
   @doc("The type of the Kafka host. E.g FabricRT, EventGrid.")
   @added(Versions.`2025-07-01-preview`)
-  hostType?: DataflowEnpointHostType;
+  hostType?: DataflowEndpointHostType;
 
   @doc("Azure Data Explorer endpoint.")
   dataExplorerSettings?: DataflowEndpointDataExplorer;
@@ -99,7 +99,7 @@ union EndpointType {
 
 @doc("DataflowEndpoint Host Type properties")
 @added(Versions.`2025-07-01-preview`)
-union DataflowEnpointHostType {
+union DataflowEndpointHostType {
   string,
 
   @doc("Fabric Real-Time Type")
