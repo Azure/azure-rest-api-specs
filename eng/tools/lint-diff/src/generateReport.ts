@@ -1,4 +1,5 @@
 import { writeFile } from "node:fs/promises";
+import { relative } from "node:path";
 import { kebabCase } from "change-case";
 import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
 import { getPathToDependency, getDependencyVersion, relativizePath } from "./util.js";
@@ -20,7 +21,6 @@ export async function generateLintDiffReport(
   baseBranch: string,
   compareSha: string,
 ): Promise<boolean> {
-  
   console.log("Generating LintDiff report...");
 
   let pass = true;
@@ -78,7 +78,7 @@ export async function generateLintDiffReport(
       // New violations with level error or fatal fail the build. If all new
       // violations are warnings, the build passes.
       pass = false;
-    } else { 
+    } else {
       console.log("\t✅ No new violations with error or fatal level. LintDiff will pass.");
     }
 
@@ -137,7 +137,9 @@ export async function generateAutoRestErrorReport(
   for (const { result, errors } of autoRestErrors) {
     console.log(`AutoRest errors for ${result.readme} (${result.tag})`);
 
-    outputMarkdown += `Readme: \`${result.readme}\`\n`;
+    const readmePath = relative(result.rootPath, result.readme.path);
+
+    outputMarkdown += `Readme: \`${readmePath}\`\n`;
     outputMarkdown += `Tag: \`${result.tag}\`\n`;
     outputMarkdown += "Errors:\n";
     outputMarkdown += "| Level | Message |\n";
@@ -262,6 +264,7 @@ export function getName(result: AutorestRunResult) {
 }
 
 export function getPath(result: AutorestRunResult) {
-  const { readme, tag } = result;
-  return tag ? `${readme}#tag-${tag}` : readme;
+  const { rootPath, readme, tag } = result;
+  const readmePathRelative = relative(rootPath, readme.path);
+  return tag ? `${readmePathRelative}#tag-${tag}` : readmePathRelative;
 }

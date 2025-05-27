@@ -2332,7 +2332,7 @@ model ManagedDisk {
   storageAccountType?: StorageAccountType;
 
   @doc("Specifies the security profile settings for the managed disk.")
-  securityProfile?: BatchVMDiskSecurityProfile;
+  securityProfile?: BatchVmDiskSecurityProfile;
 }
 
 @doc("""
@@ -3621,8 +3621,7 @@ model ExitOptions {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.")
-@clientName("VmDiskSecurityProfile")
-model BatchVMDiskSecurityProfile {
+model BatchVmDiskSecurityProfile {
   @doc("Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs.")
   securityEncryptionType?: SecurityEncryptionTypes;
 }
