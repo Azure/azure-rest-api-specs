@@ -252,26 +252,32 @@ union VMPresent {
 }
 
 /**
- * Enum for Drill stages.
+ * Enum for Drill Run Subtasks.
  */
-@doc("Enum for Drill stages.")
-union DrillRunStages {
+@doc("Enum for Drill Run Subtasks.")
+union DrillRunSubtasks {
   string,
 
-  @doc("Fault stage.")
-  Fault: "Fault",
+  @doc("FaultInjection Subtasks.")
+  FaultInjection: "FaultInjection",
 
-  @doc("Failover stage.")
+  @doc("Failover Subtasks.")
   Failover: "Failover",
 
-  @doc("Reprotect stage.")
+  @doc("TestFailover Subtasks.")
+  TestFailover: "TestFailover",
+
+  @doc("TestFailoverCleanup Subtasks.")
+  TestFailoverCleanup: "TestFailoverCleanup",
+
+  @doc("Reprotect Subtasks.")
   Reprotect: "Reprotect",
 
-  @doc("Failback stage.")
-  Failback: "Failback",
+  @doc("FailoverReverse Subtasks.")
+  FailoverReverse: "FailoverReverse",
 
-  @doc("ReprotectInOriginalLocation stage.")
-  ReprotectInOriginalLocation: "ReprotectInOriginalLocation",
+  @doc("ReprotectReverse Subtasks.")
+  ReprotectReverse: "ReprotectReverse",
 }
 
 /**
@@ -303,4 +309,30 @@ union RoExclusionReason {
 
   @doc("Protection not configured.")
   ProtectionStatus: "ProtectionStatus",
+}
+
+/**
+ * Enum for DrillRun Tasks.
+ */
+@doc("Enum for DrillRun Tasks.")
+union DrillRunTasks {
+  string,
+
+  @doc("Failover task.")
+  Failover: "Failover",
+
+  @doc("TestFailover tasks.")
+  TestFailover: "TestFailover",
+
+  @doc("TestFailoverCleanup tasks.")
+  TestFailoverCleanup: "TestFailoverCleanup",
+
+  @doc("Reprotect task.")
+  Reprotect: "Reprotect",
+
+  @doc("FailoverReverse task.")
+  FailoverReverse: "FailoverReverse",
+
+  @doc("ReprotectReverse task.")
+  ReprotectReverse: "ReprotectReverse",
 }

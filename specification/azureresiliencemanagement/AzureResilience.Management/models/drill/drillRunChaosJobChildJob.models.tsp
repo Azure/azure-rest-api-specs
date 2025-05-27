@@ -17,24 +17,24 @@ using OpenAPI;
 namespace Microsoft.AzureResilienceManagement;
 
 /**
- * Resource definition for the DrillRun Chaos job resource.
- * This resource represents a child job of a Drill Run, corresponding to the Chaos stage.
+ * Resource definition for the ChaosJob-ChildJob resource.
+ * This resource represents a child job of a Chaos Job in the Azure Resilience Management provider namespace.
  */
-@parentResource(DrillRun)
-@doc("ChaosJob a AzureResilienceProviderHub resource")
-model ChaosJob is ProxyResource<ChaosJobProperties> {
-  @doc("The unique name of the chaos job.")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("chaosJobName")
-  @segment("chaosJobs")
+@parentResource(ChaosJob)
+@doc("Chaos job Child job a AzureResilienceProviderHub resource")
+model ChaosJobChildJob is ProxyResource<ChaosJobChildJobProperties> {
+  @doc("The unique name (Guid) of the Chaos job child job")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  @key("chaosJobChildJobName")
+  @segment("chaosJobChildJobs")
   @path
   name: string;
 }
 
-@doc("Definition of Chaos job properties.")
-model ChaosJobProperties extends JobProperties {
+@doc("Definition of Chaos job child job properties.")
+model ChaosJobChildJobProperties extends ChildJobProperties {
   @doc("Discriminator for the Job Type hierarchy.")
-  jobType: JobType.ChaosExperiment;
+  jobType: JobType.ChaosExperimentChild;
 
   @doc("The provisioning state of the recovery child job.")
   @visibility(Lifecycle.Read)

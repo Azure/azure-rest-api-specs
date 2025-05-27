@@ -1,10 +1,12 @@
 {
-  "title": "DrillRuns_List_MaximumSet",
-  "operationId": "DrillRuns_List",
+  "title": "ChaosJobChildJobs_List_MaximumSet",
+  "operationId": "ChaosJobChildJobs_List",
   "parameters": {
     "serviceGroupName": "sampleServiceGroupName",
     "api-version": "2025-02-01-preview",
-    "drillName": "drill1"
+    "drillName": "drill1",
+    "drillRunName": "ca92602e-53bf-43d2-ae62-d3fc940474b3",
+    "chaosJobName": "FaultInjection"
   },
   "responses": {
     "200": {
@@ -12,15 +14,11 @@
         "value": [
           {
             "properties": {
-              "drillUrl": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/drills/drill1",
-              "metricValue": "95%",
-              "drillMode": "Failover",
-              "resourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/drillResource1",
-              "operation": "ooberValidation",
+              "provisioningState": "Succeeded",
               "status": "NotStarted",
-              "startTime": "2025-04-22T11:57:19.140Z",
-              "endTime": "2025-04-22T11:57:19.140Z",
-              "duration": "PT27M",
+              "startTime": "2025-05-22T05:29:26.790Z",
+              "endTime": "2025-05-22T05:29:26.790Z",
+              "duration": "PT59M",
               "errorDetails": {
                 "errorCode": "SampleErrorCode",
                 "errorMessage": "Sample error message",
@@ -28,6 +26,8 @@
                   "Sample recommendation"
                 ]
               },
+              "resourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/drillResource1",
+              "operation": "faultInjection",
               "retryDetails": [
                 {
                   "retryAttempt": 20,
@@ -44,17 +44,12 @@
                   "duration": "PT50M"
                 }
               ],
-              "jobType": "njttyrvxv",
-              "triggeredBy": "System",
               "jobExtendedInfo": {
                 "tasksList": [
                   {
                     "taskId": "task1",
                     "taskName": "SampleTask",
                     "duration": "PT36M",
-                    "linkedJobIds": [
-                      "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryJobs/dc6998ef-80ed-4001-b6d4-5325a0309beh"
-                    ],
                     "status": "NotStarted",
                     "startTime": "2025-05-15T12:20:34.406Z",
                     "endTime": "2025-05-15T12:20:34.406Z",
@@ -86,9 +81,6 @@
                         },
                         "taskId": "rjiflmtiwlti",
                         "taskName": "grdozhipbnimwbcbyb",
-                        "linkedJobIds": [
-                          "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryJobs/dc6998ef-80ed-4001-b6d4-5325a0309beh"
-                        ],
                         "userComments": [
                           {
                             "commentTime": "2025-05-15T12:20:34.406Z",
@@ -102,23 +94,16 @@
                 ],
                 "dynamicErrorMessage": "Sample error message"
               },
-              "attestation": "Success",
-              "notes": [
-                "sgw"
-              ],
-              "supportedVerbsForStage": [
-                {
-                  "drillRunStage": "Fault",
-                  "supportedVerbs": [
-                    "Start"
-                  ]
-                }
-              ],
-              "currentActiveOperationId": "53d37cca-e5ba-4da7-8102-c31cf4433f45"
+              "parentJobId": "/providers/Microsoft.AzureResilienceManagement/drills/drill1/drillRuns/ca92602e-53bf-43d2-ae62-d3fc940474b3",
+              "parentJobTaskId": "task1",
+              "parentJobTaskName": "SampleTask",
+              "parentJobResourceId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryJobs/c56888ef-9ced-4001-a6d4-7145a0309bdb",
+              "parentJobRetryAttempt": 2,
+              "jobType": "ChaosExperimentChild"
             },
-            "id": "/providers/Microsoft.AzureResilienceManagement/validations/validation1/validationRuns/run1",
-            "name": "ca92602e-53bf-43d2-ae62-d3fc940474b3",
-            "type": "Microsoft.AzureResilienceManagement/validationRuns",
+            "id": "/providers/Microsoft.AzureResilienceManagement/drills/drill1/drillRuns/ca92602e-53bf-43d2-ae62-d3fc940474b3/chaosJobs/FaultInjection/chaosJobChildJobs/6a62557c-f887-4a9d-bb90-a10babbfd9b2",
+            "name": "6a62557c-f887-4a9d-bb90-a10babbfd9b2",
+            "type": "Microsoft.AzureResilienceManagement/drills/drillRuns/chaosJobs/chaosJobChildJobs",
             "systemData": {
               "createdBy": "dvnfxbuyqhvivfjddjccdtlwajfht",
               "createdByType": "User",
