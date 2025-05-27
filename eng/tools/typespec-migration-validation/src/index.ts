@@ -13,6 +13,10 @@ export interface JsonOutput {
   suggestions: string[];
 }
 
+export const jsonOutput: JsonOutput = {
+  suggestions: [],
+};
+
 function parseArguments() {
   return yargs(hideBin(process.argv))
     .usage('Usage: $0 [options]')
@@ -38,13 +42,13 @@ function parseArguments() {
       type: 'boolean',
       default: true,
     })
-    .option('jsonOutput', {
-      description: 'Also output in JSON format',
-      type: 'boolean',
-    })
     .option('ignorePathCase', {
       description: 'Set case insensitive for the segments before provider, e.g. resourceGroups',
       type: 'boolean'
+    })
+    .option('jsonOutput', {
+      description: 'Also output in JSON format',
+      type: 'boolean',
     })
     .check((argv) => {
       const positional = argv._;
@@ -102,15 +106,14 @@ export async function main() {
     fs.writeFileSync(`${outputFolder}/newNormalizedSwagger.json`, JSON.stringify(sortedNewFile, null, 2));
     const diffForFile = diff(sortedOldFile, sortedNewFile);
     fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
-    const jsonOutput: JsonOutput = { suggestions: [] };
-    const suggestedFixes = suggestFix(diffForFile, jsonOutput);
+    const suggestedFixes = suggestFix(diffForFile);
     if (suggestedFixes.length > 0) {
       logWarning(`Considering these suggested fixes for the diff:`);
       suggestedFixes.forEach(fix => {
         console.log(fix);
       });
     }
-    const suggestedPrompt = suggestPrompt(diffForFile, jsonOutput);
+    const suggestedPrompt = suggestPrompt(diffForFile);
     if (suggestedPrompt.length > 0) {
       logWarning(`Considering these suggested prompts for the diff:`);
       suggestedPrompt.forEach(prompt => {

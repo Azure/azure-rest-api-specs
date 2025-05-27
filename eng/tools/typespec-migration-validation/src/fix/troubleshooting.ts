@@ -1,4 +1,4 @@
-import { JsonOutput } from "../index.js";
+import { jsonOutput } from "../index.js";
 import { checkDefault } from "./default.js";
 import { checkPropertyAttributeAdded, checkPropertyAttributeChanged, checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 import { checkMinMax } from "./minMax.js";
@@ -6,7 +6,7 @@ import { checkNullable } from "./nullable.js";
 import { checkReadOnly } from "./readonly.js";
 import { checkSecret } from "./secret.js";
 
-export function suggestFix(jsonObj: any, jsonOutput: JsonOutput): string[] {
+export function suggestFix(jsonObj: any): string[] {
   const suggestedFixes: string[] = [];
 
   const clientNameStatement = checkPropertyAttributeDeleted('x-ms-client-name', jsonObj);
@@ -45,7 +45,7 @@ ${fix}
   return suggestedFixes;
 }
 
-export function suggestPrompt(jsonObj: any, jsonOutput: JsonOutput): string[] {
+export function suggestPrompt(jsonObj: any): string[] {
   const suggestedFixes: string[] = [];
 
   const clientNameChanges = checkPropertyAttributeChanged('x-ms-client-name', jsonObj);
