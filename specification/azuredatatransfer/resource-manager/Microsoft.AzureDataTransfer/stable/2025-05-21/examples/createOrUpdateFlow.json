@@ -1,0 +1,38 @@
+{
+  "operationId": "Flows_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-05-21",
+    "connectionName": "testConnection",
+    "flow": {
+      "location": "East US",
+      "properties": {
+        "connection": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection"
+        },
+        "flowType": "Standard",
+        "storageAccountName": "testsa",
+        "storageContainerName": "testcontainer"
+      }
+    },
+    "flowName": "testFlow",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Creates or updates the flow resource",
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/flows",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+        "location": "East US"
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/flows",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+        "location": "East US"
+      }
+    }
+  }
+}
