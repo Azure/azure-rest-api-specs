@@ -1,16 +1,16 @@
 {
   "parameters": {
+    "api-version": "2025-01-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "Default",
-    "serverName": "test-svr",
-    "groupName": "plr",
-    "api-version": "2025-01-01-preview"
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "groupName": "exampleprivatelink"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/Default/providers/Microsoft.DBforPostgreSQL/flexibleServers/test-svr/privateLinkResources/plr",
-        "name": "plr",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/privateLinkResources/exampleprivatelink",
+        "name": "exampleprivatelink",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers/privateLinkResources",
         "properties": {
           "groupId": "postgresqlServer",
@@ -18,7 +18,7 @@
             "postgresqlServer"
           ],
           "requiredZoneNames": [
-            "privatelink.meru.com"
+            "privatelink.postgres.database.azure.com"
           ]
         }
       }

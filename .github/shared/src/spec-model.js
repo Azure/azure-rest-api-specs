@@ -4,7 +4,6 @@ import { readdir } from "fs/promises";
 import { resolve } from "path";
 import { mapAsync } from "./array.js";
 import { Readme } from "./readme.js";
-import { SpecModelError } from "./spec-model-error.js";
 
 /**
  * @typedef {Object} ToJSONOptions
@@ -66,18 +65,7 @@ export class SpecModel {
             continue;
           }
 
-          let refs;
-          try {
-            refs = await inputFile.getRefs();
-          } catch (error) {
-            if (error instanceof SpecModelError) {
-              error.readme = readme.path;
-              error.tag = tag.name;
-            }
-
-            throw error;
-          }
-
+          const refs = await inputFile.getRefs();
           if (refs.get(swaggerPathResolved)) {
             /** @type {Map<string, Tag>} */
             const tags = affectedReadmeTags.get(readme.path) ?? new Map();
