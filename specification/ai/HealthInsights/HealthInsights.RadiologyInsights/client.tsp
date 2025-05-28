@@ -101,3 +101,210 @@ interface RadiologyInsightsClient {
   "ClinicalDocumentContent",
   "csharp, java"
 );
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips76, "MIPS_76", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips147,
+  "MIPS_147",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips195,
+  "MIPS_195",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips360,
+  "MIPS_360",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips364,
+  "MIPS_364",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips405,
+  "MIPS_405",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips406,
+  "MIPS_406",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips436,
+  "MIPS_436",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips145,
+  "MIPS_145",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad36,
+  "ACRAD_36",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad37,
+  "ACRAD_37",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad38,
+  "ACRAD_38",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad39,
+  "ACRAD_39",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad40,
+  "ACRAD_40",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad41,
+  "ACRAD_41",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad42,
+  "ACRAD_42",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Mednax55,
+  "MEDNAX_55",
+  "java"
+);
+@@clientName(AzureHealthInsights.QualityMeasureType.Msn13, "MSN_13", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Msn15, "MSN_15", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Qmm26, "QMM_26", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Qmm17, "QMM_17", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Qmm18, "QMM_18", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Qmm19, "QMM_19", "java");
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.BIRADS,
+  "Birads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.C_RADS_COLONIC_FINDINGS,
+  "CRadsColonicFindings",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.CAD_RADS,
+  "CadRads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.LI_RADS,
+  "LiRads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.LUNG_RADS,
+  "LungRads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.NI_RADS,
+  "NiRads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.O_RADS,
+  "ORads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.PI_RADS,
+  "PiRads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TI_RADS,
+  "TiRads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.C_RADS_EXTRACOLONIC_FINDINGS,
+  "CRadsExtracolonicFindings",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.LIFETIME_BREAST_CANCER_RISK,
+  "LifetimeBreastCancerRisk",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.ASCVD_RISK,
+  "AscvdRisk",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.MODIFIED_GAIL_MODEL_RISK,
+  "ModifiedGailModelRisk",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TYRER_CUSICK_MODEL_RISK,
+  "TyrerCusickModelRisk",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.AGATSTON_SCORE,
+  "AgatstonScore",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK,
+  "TenYearChdRisk",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.Z_SCORE,
+  "ZScore",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.T_SCORE,
+  "TScore",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.CALCIUM_VOLUME_SCORE,
+  "CalciumVolumeScore",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.US_LI_RADS_VISUALIZATION_SCORE,
+  "UsLiRadsVisualizationScore",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.US_LI_RADS,
+  "UsLiRads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.CEUS_LI_RADS,
+  "CeusLiRads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TREATMENT_RESPONSE_LI_RADS,
+  "TreatmentResponseLiRads",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.O_RADS_MRI,
+  "ORadsMri",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.CALCIUM_MASS_SCORE,
+  "CalciumMassScore",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.RISK_OF_MALIGNANCY_INDEX,
+  "RiskOfMalignancyIndex",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.HNPCC_MUTATION_RISK,
+  "HnpccMutationRisk",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.ALBERTA_STROKE_PROGRAM_EARLY_CT_SCORE,
+  "AlbertaStrokeProgramEarlyCtScore",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.KELLGREN_LAWRENCE_GRADING_SCALE,
+  "KellgrenLawrenceGradingScale",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TONNIS_CLASSIFICATION,
+  "TonnisClassification",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.CALCIUM_SCORE_UNSPECIFIED,
+  "CalciumScoreUnspecified",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK_OBSERVED_AGE,
+  "TenYearChdRiskObservedAge",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK_ARTERIAL_AGE,
+  "TenYearChdRiskArterialAge",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.FRAX_SCORE,
+  "FraxScore",
+  "csharp"
+);
