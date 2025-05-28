@@ -1,19 +1,52 @@
 {
-  "anyOf": [
-    {
-      "allOf": [
+  "title": "ReleasePolicyExample",
+  "operationId": "CreateKeyWithReleasePolicy",
+  "parameters": {
+    "name": "my-key",
+    "policy": {
+      "anyOf": [
         {
-          "claim": "x-ms-sgx-mrsigner",
-          "condition": "equals",
-          "value": "86788fe40448f2a12e20bf8d5e7a1c3139bc5fdc1432b370c1da3489ab649a85"
-        },
-        {
-          "claim": "x-ms-sgx-is-debuggable",
-          "condition": "equals",
-          "value": "false"
+          "allOf": [
+            {
+              "claim": "x-ms-sgx-mrsigner",
+              "condition": "equals",
+              "value": "86788fe40448f2a12e20bf8d5e7a1c3139bc5fdc1432b370c1"
+            },
+            {
+              "claim": "x-ms-sgx-is-debuggable",
+              "condition": "equals",
+              "value": "false"
+            }
+          ],
+          "authority": "http://localhost:8023/"
         }
-      ],
-      "authority": "http://localhost:8023/"
+      ]
     }
-  ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kid": "https://myvault.vault.azure.net/keys/my-key",
+        "release_policy": {
+          "anyOf": [
+            {
+              "allOf": [
+                {
+                  "claim": "x-ms-sgx-mrsigner",
+                  "condition": "equals",
+                  "value": "86788fe40448f2a12e20bf8d5e7a1c3139bc5fdc1432b370c1"
+                },
+                {
+                  "claim": "x-ms-sgx-is-debuggable",
+                  "condition": "equals",
+                  "value": "false"
+                }
+              ],
+              "authority": "http://localhost:8023/"
+            }
+          ]
+        }
+      }
+    }
+  }
 }
