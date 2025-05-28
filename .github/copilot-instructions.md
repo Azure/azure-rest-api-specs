@@ -237,7 +237,7 @@ changes in `.github` and `.vscode` folders.
 
 ### Step 4: Create SDK locally from TypeSpec
 - Currently supported for Python only. SDK for all other languages is generated using the Azure DevOps pipeline.
-- Prompt user to check if they want to generate SDK locally for Python.
+- Always prompt user to check if they want to generate SDK locally for Python.
     - If the user wants to generate SDK locally:
         - Prompt the user to provide the path to cloned azure-sdk-for-python repository.
         - If the user provides a path to the azure-sdk-for-python repository, check if the repository exists:
