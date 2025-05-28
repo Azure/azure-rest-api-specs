@@ -608,12 +608,12 @@ model CacheNodeEntity {
   @doc("Auto Update Ring Type which is slow or fast etc.")
   autoUpdateRingType?: autoUpdateRingType;
 
-  @doc("Customer requested week of month for mcc install of auto update cycle")
+  @doc("Customer requested week of month for mcc install of auto update cycle. 0 is default no selection. 1-5 are valid weeks of month, 1 is first week, 2 is second week, etc.")
   @minValue(0)
   @maxValue(5)
   autoUpdateRequestedWeek?: int32;
 
-  @doc("Customer requested day of week for mcc install of auto update cycle")
+  @doc("Customer requested day of week for mcc install of auto update cycle. 0 is default no selection. 1-7 are days of week, 1 is Sunday, 2 is Monday, etc.")
   @minValue(0)
   @maxValue(7)
   autoUpdateRequestedDay?: int32;
