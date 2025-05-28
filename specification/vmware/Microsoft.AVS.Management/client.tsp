@@ -45,7 +45,7 @@ interface WorkloadNetworks {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   deleteDhcp is WorkloadNetworkDhcpConfigurations.delete;
 
-  listDnsService is WorkloadNetworkDnsServices.list;
+  listDnsServices is WorkloadNetworkDnsServices.list;
   getDnsService is WorkloadNetworkDnsServices.get;
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -78,20 +78,25 @@ interface WorkloadNetworks {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
   listPublicIPs is WorkloadNetworkPublicIps.list;
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+  @clientName("getPublicIp", "java")
   getPublicIP is WorkloadNetworkPublicIps.get;
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @clientName("createPublicIp", "java")
   createPublicIP is WorkloadNetworkPublicIps.create;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+  @clientName("deletePublicIp", "java")
   deletePublicIP is WorkloadNetworkPublicIps.delete;
 
   listSegments is WorkloadNetworkSegments.list;
   getSegment is WorkloadNetworkSegments.get;
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @clientName("createSegments", "java")
   createSegment is WorkloadNetworkSegments.create;
+  @clientName("updateSegments", "java")
   updateSegment is WorkloadNetworkSegments.update;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   deleteSegment is WorkloadNetworkSegments.deleteSegment;
@@ -222,6 +227,15 @@ interface Skus extends Microsoft.AVS.Skus {}
   "java"
 );
 
+// parameter
+@@clientName(PublicIPIdParameter.publicIPId, "publicIpId", "java");
+@@clientName(WorkloadNetworkPublicIps.create::parameters.resource,
+  "workloadNetworkPublicIp",
+  "java"
+);
+
+@@clientName(Customization, "AvsClient", "java");
+
 // flatten
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.TrackedResource.properties, "java");
@@ -283,3 +297,8 @@ interface Skus extends Microsoft.AVS.Skus {}
 @@flattenProperty(ClusterUpdate.properties, "java");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(PlacementPolicyUpdate.properties, "java");
+
+@@alternateType(ScriptExecutionProperties.namedOutputs,
+  Record<unknown>,
+  "java"
+);
