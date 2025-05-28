@@ -44,9 +44,17 @@ enum Versions {
    */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `v7.5`: "7.5",
+
   /**
    * The 7.6 API version.
    */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `v7.6`: "7.6",
+
+  /**
+ * The 7.6-preview.2 API version.
+ */
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+`v7.6-preview.2`: "7.6-preview.2",
+
 }
