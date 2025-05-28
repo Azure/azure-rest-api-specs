@@ -21,7 +21,8 @@ model Configuration is ProxyResource<NginxConfigurationResponseProperties> {
  */
 @parentResource(NginxDeployment)
 @resource("configurations")
-model NginxConfigurationRequest is ProxyResource<NginxConfigurationRequestProperties> {
+model NginxConfigurationRequest
+  is ProxyResource<NginxConfigurationRequestProperties> {
   ...ResourceNameParameter<Configuration>;
 }
 
@@ -33,6 +34,7 @@ model NginxConfigurationFile {
    * File content.
    */
   content?: string;
+
   /**
    * Virtual path of the file.
    */
@@ -47,10 +49,12 @@ model NginxConfigurationProtectedFileRequest {
    * File content.
    */
   content?: string;
+
   /**
    * Virtual path of the file.
    */
   virtualPath?: string;
+
   /**
    * Content hash of the file.
    */
@@ -65,6 +69,7 @@ model NginxConfigurationProtectedFileResponse {
    * Virtual path of the file.
    */
   virtualPath?: string;
+
   /**
    * Content hash of the file.
    */
@@ -79,6 +84,7 @@ model NginxConfigurationPackage {
    * Package data.
    */
   data?: string;
+
   /**
    * List of protected files in the package.
    */
@@ -92,19 +98,26 @@ model NginxConfigurationResponseProperties {
   /**
    * Provisioning state of the configuration.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
   /**
    * List of configuration files.
    */
+  @OpenAPI.extension("x-ms-identifiers", #["virtualPath"])
   files?: NginxConfigurationFile[];
+
   /**
    * List of protected files.
    */
+  @OpenAPI.extension("x-ms-identifiers", #["virtualPath"])
   protectedFiles?: NginxConfigurationProtectedFileResponse[];
+
   /**
    * Configuration package details.
    */
   package?: NginxConfigurationPackage;
+
   /**
    * Root file of the configuration.
    */
@@ -118,19 +131,26 @@ model NginxConfigurationRequestProperties {
   /**
    * Provisioning state of the configuration.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
   /**
    * List of configuration files.
    */
+  @OpenAPI.extension("x-ms-identifiers", #["virtualPath"])
   files?: NginxConfigurationFile[];
+
   /**
    * List of protected file requests.
    */
+  @OpenAPI.extension("x-ms-identifiers", #["virtualPath"])
   protectedFiles?: NginxConfigurationProtectedFileRequest[];
+
   /**
    * Configuration package data.
    */
   package?: NginxConfigurationPackage;
+
   /**
    * Root file path.
    */
@@ -145,6 +165,7 @@ model NginxConfigurationListResponse {
    * List of configurations.
    */
   value: Configuration[];
+
   /**
    * URL to fetch the next page of configurations.
    */

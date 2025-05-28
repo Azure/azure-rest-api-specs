@@ -28,6 +28,7 @@ model ApiKeyRequest is ProxyResource<ApiKeyRequestProperties> {
 /**
  * Properties returned for an API key resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "We intentionally do not include provisioning state for API keys."
 model ApiKeyResponseProperties {
   /**
    * Hint for the secret (read-only)
@@ -43,6 +44,7 @@ model ApiKeyResponseProperties {
 /**
  * Properties for an API key request.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "We intentionally do not include provisioning state for API keys."
 model ApiKeyRequestProperties {
   /**
    * The secret text for the API key
@@ -85,6 +87,7 @@ interface ApiKeys {
    * Creates a new API key or replaces an existing one.
    * @returns The created or updated API key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "We have different data models by design"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     Resource = ApiKeyRequest,
     Response = ApiKey

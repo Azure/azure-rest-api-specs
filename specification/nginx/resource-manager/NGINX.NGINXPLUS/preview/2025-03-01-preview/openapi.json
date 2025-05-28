@@ -1431,6 +1431,30 @@
     }
   },
   "definitions": {
+    "ActivationState": {
+      "type": "string",
+      "description": "The activation state of the WAF.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ActivationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "WAF is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "WAF is disabled."
+          }
+        ]
+      }
+    },
     "ApiKey": {
       "type": "object",
       "description": "API key resource returned by the service.",
@@ -1592,6 +1616,66 @@
         }
       }
     },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.SkuUpdate": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      }
+    },
+    "Azure.ResourceManager.ResourceSkuProperty": {
+      "type": "object",
+      "description": "The SKU (Stock Keeping Unit) assigned to this resource.",
+      "properties": {
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      }
+    },
     "Certificate": {
       "type": "object",
       "description": "NginxCertificate resource",
@@ -1642,25 +1726,6 @@
       "type": "object",
       "description": "The updatable properties of the Certificate.",
       "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the certificate.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Deleted",
-            "NotSpecified"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "readOnly": true
-        },
         "keyVirtualPath": {
           "type": "string",
           "description": "The virtual path to the key file."
@@ -1741,32 +1806,15 @@
       "type": "object",
       "description": "The updatable properties of the Configuration.",
       "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the configuration.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Deleted",
-            "NotSpecified"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "readOnly": true
-        },
         "files": {
           "type": "array",
           "description": "List of configuration files.",
           "items": {
             "$ref": "#/definitions/NginxConfigurationFile"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "virtualPath"
+          ]
         },
         "protectedFiles": {
           "type": "array",
@@ -1774,7 +1822,9 @@
           "items": {
             "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "virtualPath"
+          ]
         },
         "package": {
           "$ref": "#/definitions/NginxConfigurationPackage",
@@ -1799,24 +1849,18 @@
           "description": "The tenant ID."
         },
         "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/IdentityType",
+          "description": "The identity type."
         },
         "userAssignedIdentities": {
-          "type": "object",
+          "type": "array",
           "description": "User-assigned identities.",
-          "additionalProperties": {
+          "items": {
             "$ref": "#/definitions/UserIdentityProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "principalId"
+          ]
         }
       },
       "required": [
@@ -1826,38 +1870,40 @@
         "userAssignedIdentities"
       ]
     },
-    "IdentityPropertiesUpdate": {
-      "type": "object",
-      "description": "Managed identity properties for the deployment.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
+    "IdentityType": {
+      "type": "string",
+      "description": "The type of managed identity.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "Both system and user assigned managed identities."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
           }
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "User-assigned identities.",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserIdentityPropertiesUpdate"
-          }
-        }
+        ]
       }
     },
     "NginxAppProtect": {
@@ -1931,22 +1977,8 @@
       "description": "Properties of an Nginx certificate resource.",
       "properties": {
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the certificate.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Deleted",
-            "NotSpecified"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         },
         "keyVirtualPath": {
@@ -1977,10 +2009,7 @@
           "$ref": "#/definitions/NginxCertificateErrorResponseBody",
           "description": "Error details for the certificate, if any."
         }
-      },
-      "required": [
-        "provisioningState"
-      ]
+      }
     },
     "NginxConfigurationFile": {
       "type": "object",
@@ -2085,22 +2114,8 @@
       "description": "Properties for an Nginx configuration request.",
       "properties": {
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the configuration.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Deleted",
-            "NotSpecified"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         },
         "files": {
@@ -2109,7 +2124,9 @@
           "items": {
             "$ref": "#/definitions/NginxConfigurationFile"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "virtualPath"
+          ]
         },
         "protectedFiles": {
           "type": "array",
@@ -2117,7 +2134,9 @@
           "items": {
             "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "virtualPath"
+          ]
         },
         "package": {
           "$ref": "#/definitions/NginxConfigurationPackage",
@@ -2134,22 +2153,8 @@
       "description": "Properties returned for an Nginx configuration resource.",
       "properties": {
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the configuration.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Deleted",
-            "NotSpecified"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         },
         "files": {
@@ -2158,7 +2163,9 @@
           "items": {
             "$ref": "#/definitions/NginxConfigurationFile"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "virtualPath"
+          ]
         },
         "protectedFiles": {
           "type": "array",
@@ -2166,7 +2173,9 @@
           "items": {
             "$ref": "#/definitions/NginxConfigurationProtectedFileResponse"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "virtualPath"
+          ]
         },
         "package": {
           "$ref": "#/definitions/NginxConfigurationPackage",
@@ -2187,18 +2196,14 @@
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
-          "$ref": "#/definitions/IdentityProperties",
-          "description": "The identity properties for the deployment."
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         },
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The SKU of the deployment."
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
-      "required": [
-        "identity",
-        "sku"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -2234,7 +2239,9 @@
           "items": {
             "$ref": "#/definitions/NginxDeploymentDefaultWafPolicy"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "filepath"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -2334,22 +2341,8 @@
       "description": "Properties of an Nginx deployment.",
       "properties": {
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the deployment.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Deleted",
-            "NotSpecified"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         },
         "nginxVersion": {
@@ -2394,7 +2387,6 @@
         }
       },
       "required": [
-        "provisioningState",
         "nginxVersion",
         "networkProfile",
         "ipAddress",
@@ -2441,17 +2433,35 @@
         }
       }
     },
+    "NginxDeploymentTag": {
+      "type": "object",
+      "description": "Represents a single tag for an Nginx deployment.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The tag name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The tag value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
     "NginxDeploymentUpdate": {
       "type": "object",
       "description": "The type used for update operations of the NginxDeployment.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/IdentityPropertiesUpdate",
-          "description": "The identity properties for the deployment."
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
         },
         "sku": {
-          "$ref": "#/definitions/ResourceSkuUpdate",
-          "description": "The SKU of the deployment."
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuUpdate",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         },
         "tags": {
           "type": "object",
@@ -2475,14 +2485,15 @@
           "description": "The identity properties for the deployment."
         },
         "tags": {
-          "type": "object",
+          "type": "array",
           "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/NginxDeploymentTag"
+          },
+          "x-ms-identifiers": []
         },
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty",
           "description": "The SKU of the deployment."
         },
         "location": {
@@ -2506,25 +2517,6 @@
       "type": "object",
       "description": "The updatable properties of the NginxDeployment.",
       "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the deployment.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Deleted",
-            "NotSpecified"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "readOnly": true
-        },
         "nginxVersion": {
           "type": "string",
           "description": "The Nginx version."
@@ -2595,6 +2587,7 @@
       "description": "Applying status for a WAF policy.",
       "properties": {
         "code": {
+          "type": "string",
           "description": "The apply status code."
         },
         "displayStatus": {
@@ -2617,6 +2610,7 @@
       "description": "Compilation status for a WAF policy.",
       "properties": {
         "code": {
+          "type": "string",
           "description": "The compilation status code."
         },
         "displayStatus": {
@@ -2641,17 +2635,6 @@
         "properties": {
           "$ref": "#/definitions/NginxDeploymentWafPolicyMetadataProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags for the WAF policy metadata.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location for the WAF policy metadata."
         }
       },
       "allOf": [
@@ -2690,8 +2673,9 @@
           "description": "The file path of the WAF policy metadata."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the WAF policy metadata."
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the WAF policy metadata.",
+          "readOnly": true
         },
         "compilingState": {
           "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatus",
@@ -2704,7 +2688,6 @@
       },
       "required": [
         "filepath",
-        "provisioningState",
         "compilingState",
         "applyingState"
       ]
@@ -2723,8 +2706,9 @@
           "description": "The file path of the WAF policy."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the WAF policy."
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the WAF policy.",
+          "readOnly": true
         },
         "compilingState": {
           "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatus",
@@ -2738,7 +2722,6 @@
       "required": [
         "content",
         "filepath",
-        "provisioningState",
         "compilingState",
         "applyingState"
       ]
@@ -2752,7 +2735,10 @@
           "description": "Public IP addresses.",
           "items": {
             "$ref": "#/definitions/NginxPublicIPAddress"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "privateIPAddresses": {
           "type": "array",
@@ -2760,7 +2746,9 @@
           "items": {
             "$ref": "#/definitions/NginxPrivateIPAddress"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "privateIPAddress"
+          ]
         }
       },
       "required": [
@@ -2777,7 +2765,10 @@
           "description": "Public IP addresses.",
           "items": {
             "$ref": "#/definitions/NginxPublicIPAddress"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "privateIPAddresses": {
           "type": "array",
@@ -2785,7 +2776,9 @@
           "items": {
             "$ref": "#/definitions/NginxPrivateIPAddress"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "privateIPAddress"
+          ]
         }
       }
     },
@@ -2876,15 +2869,8 @@
           "description": "The private IP address."
         },
         "privateIPAllocationMethod": {
-          "type": "string",
-          "description": "The allocation method for the private IP.",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/NginxPrivateIPAllocationMethod",
+          "description": "The allocation method for the private IP."
         },
         "subnetId": {
           "type": "string",
@@ -2896,6 +2882,30 @@
         "privateIPAllocationMethod",
         "subnetId"
       ]
+    },
+    "NginxPrivateIPAllocationMethod": {
+      "type": "string",
+      "description": "The allocation method for a private IP address.",
+      "enum": [
+        "Static",
+        "Dynamic"
+      ],
+      "x-ms-enum": {
+        "name": "NginxPrivateIPAllocationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Static",
+            "value": "Static",
+            "description": "Static private IP allocation method."
+          },
+          {
+            "name": "Dynamic",
+            "value": "Dynamic",
+            "description": "Dynamic private IP allocation method."
+          }
+        ]
+      }
     },
     "NginxPublicIPAddress": {
       "type": "object",
@@ -2942,6 +2952,73 @@
         }
       }
     },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource has been accepted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource has been successfully provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource provisioning operation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource provisioning was canceled."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The resource has been deleted."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Provisioning state was not specified."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ResourceSku": {
       "type": "object",
       "description": "The SKU of the resource.",
@@ -2954,16 +3031,6 @@
       "required": [
         "name"
       ]
-    },
-    "ResourceSkuUpdate": {
-      "type": "object",
-      "description": "The SKU of the resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The SKU name."
-        }
-      }
     },
     "ScaleProfile": {
       "type": "object",
@@ -3020,20 +3087,6 @@
         "principalId",
         "clientId"
       ]
-    },
-    "UserIdentityPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties for a user-assigned identity.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID."
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The client ID."
-        }
-      }
     },
     "WafPolicy": {
       "type": "object",
@@ -3139,15 +3192,8 @@
       "description": "Web application firewall settings.",
       "properties": {
         "activationState": {
-          "type": "string",
-          "description": "The activation state of the WAF.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ActivationState",
+          "description": "The activation state of the WAF."
         }
       },
       "required": [
@@ -3159,15 +3205,8 @@
       "description": "Web application firewall settings.",
       "properties": {
         "activationState": {
-          "type": "string",
-          "description": "The activation state of the WAF.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ActivationState",
+          "description": "The activation state of the WAF."
         }
       }
     },

@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using Rest;
 using Http;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Nginx.NginxPlus;
@@ -15,16 +14,8 @@ namespace Nginx.NginxPlus;
  */
 model NginxDeployment is TrackedResource<NginxDeploymentProperties> {
   ...ResourceNameParameter<NginxDeployment>;
-
-  /**
-   * The identity properties for the deployment.
-   */
-  identity: IdentityProperties;
-
-  /**
-   * The SKU of the deployment.
-   */
-  sku: ResourceSku;
+  ...ManagedServiceIdentityProperty;
+  ...ResourceSkuProperty;
 }
 
 /**
@@ -39,12 +30,12 @@ model NginxDeploymentUpdateParameters {
   /**
    * Resource tags.
    */
-  tags: Record<string>;
+  tags: NginxDeploymentTag[];
 
   /**
    * The SKU of the deployment.
    */
-  sku: ResourceSku;
+  sku: ResourceSkuProperty;
 
   /**
    * The location of the deployment.
@@ -94,17 +85,29 @@ model IdentityProperties {
   /**
    * User-assigned identities.
    */
-  userAssignedIdentities: Record<UserIdentityProperties>;
+  @OpenAPI.extension("x-ms-identifiers", #["principalId"])
+  userAssignedIdentities: UserIdentityProperties[];
 }
 
 /**
  * The type of managed identity.
  */
-alias IdentityType =
-  | "SystemAssigned"
-  | "UserAssigned"
-  | "SystemAssigned, UserAssigned"
-  | "None";
+union IdentityType {
+  /** System assigned managed identity. */
+  SystemAssigned: "SystemAssigned",
+
+  /** User assigned managed identity. */
+  UserAssigned: "UserAssigned",
+
+  /** Both system and user assigned managed identities. */
+  SystemAndUserAssigned: "SystemAssigned, UserAssigned",
+
+  /** No managed identity. */
+  None: "None",
+
+  /** Custom identity type not covered by pre-defined values. */
+  string,
+}
 
 /**
  * Properties for a user-assigned identity.
@@ -138,7 +141,8 @@ model NginxDeploymentProperties {
   /**
    * The provisioning state of the deployment.
    */
-  provisioningState: ProvisioningState;
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 
   /**
    * The Nginx version.
@@ -194,16 +198,37 @@ model NginxDeploymentProperties {
 /**
  * The provisioning state of a resource.
  */
-alias ProvisioningState =
-  | "Accepted"
-  | "Creating"
-  | "Updating"
-  | "Deleting"
-  | "Succeeded"
-  | "Failed"
-  | "Canceled"
-  | "Deleted"
-  | "NotSpecified";
+union ProvisioningState {
+  /** The resource has been accepted. */
+  Accepted: "Accepted",
+
+  /** The resource is being created. */
+  Creating: "Creating",
+
+  /** The resource is being updated. */
+  Updating: "Updating",
+
+  /** The resource is being deleted. */
+  Deleting: "Deleting",
+
+  /** The resource has been successfully provisioned. */
+  Succeeded: "Succeeded",
+
+  /** The resource provisioning operation failed. */
+  Failed: "Failed",
+
+  /** The resource provisioning was canceled. */
+  Canceled: "Canceled",
+
+  /** The resource has been deleted. */
+  Deleted: "Deleted",
+
+  /** Provisioning state was not specified. */
+  NotSpecified: "NotSpecified",
+
+  /** Other provisioning state values. */
+  string,
+}
 
 /**
  * Network profile for the deployment.
@@ -212,6 +237,7 @@ model NginxNetworkProfile {
   /**
    * Frontend IP configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Changing casing style here will break users"
   frontEndIPConfiguration: NginxFrontendIPConfiguration;
 
   /**
@@ -223,21 +249,27 @@ model NginxNetworkProfile {
 /**
  * Frontend IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Changing casing style here will break users"
 model NginxFrontendIPConfiguration {
   /**
    * Public IP addresses.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Changing casing style here will break users"
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   publicIPAddresses: NginxPublicIPAddress[];
 
   /**
    * Private IP addresses.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Changing casing style here will break users"
+  @OpenAPI.extension("x-ms-identifiers", #["privateIPAddress"])
   privateIPAddresses: NginxPrivateIPAddress[];
 }
 
 /**
  * Public IP address reference.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Changing casing style here will break users"
 model NginxPublicIPAddress {
   /**
    * The resource ID of the public IP address.
@@ -248,6 +280,7 @@ model NginxPublicIPAddress {
 /**
  * Private IP address configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Changing casing style here will break users"
 model NginxPrivateIPAddress {
   /**
    * The private IP address.
@@ -268,7 +301,16 @@ model NginxPrivateIPAddress {
 /**
  * The allocation method for a private IP address.
  */
-alias NginxPrivateIPAllocationMethod = "Static" | "Dynamic";
+union NginxPrivateIPAllocationMethod {
+  /** Static private IP allocation method. */
+  Static: "Static",
+
+  /** Dynamic private IP allocation method. */
+  Dynamic: "Dynamic",
+
+  /** Other allocation methods not covered by pre-defined values. */
+  string,
+}
 
 /**
  * Network interface configuration.
@@ -408,7 +450,16 @@ model WebApplicationFirewallSettings {
 /**
  * The activation state of the WAF.
  */
-alias ActivationState = "Enabled" | "Disabled";
+union ActivationState {
+  /** WAF is enabled. */
+  Enabled: "Enabled",
+
+  /** WAF is disabled. */
+  Disabled: "Disabled",
+
+  /** Other activation states not covered by pre-defined values. */
+  string,
+}
 
 /**
  * Web application firewall status.
@@ -517,6 +568,7 @@ model NginxDeploymentDefaultWafPolicyListResponse {
   /**
    * List of default WAF policies.
    */
+  @OpenAPI.extension("x-ms-identifiers", #["filepath"])
   value: NginxDeploymentDefaultWafPolicy[];
 
   /**
@@ -538,6 +590,21 @@ model NginxDeploymentDefaultWafPolicy {
    * The file path where this policy would be placed.
    */
   filepath: string;
+}
+
+/**
+ * Represents a single tag for an Nginx deployment.
+ */
+model NginxDeploymentTag {
+  /**
+   * The tag name.
+   */
+  name: string;
+
+  /**
+   * The tag value.
+   */
+  value: string;
 }
 
 /**
@@ -580,6 +647,7 @@ interface NginxDeployments {
    */
   @post
   @segment("listDefaultWafPolicies")
+  @armResourceCollectionAction
   listDefaultWafPolicies(
     ...ResourceInstanceParameters<NginxDeployment>,
   ): ArmResponse<NginxDeploymentDefaultWafPolicyListResponse>;

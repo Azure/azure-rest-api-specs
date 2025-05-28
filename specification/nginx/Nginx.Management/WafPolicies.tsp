@@ -27,7 +27,8 @@ model NginxDeploymentWafPolicyProperties {
   filepath: string;
 
   /** The provisioning state of the WAF policy. */
-  provisioningState: string;
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 
   /** The compiling status of the WAF policy. */
   compilingState: NginxDeploymentWafPolicyCompilingStatus;
@@ -83,12 +84,6 @@ model WafPolicyMetadataListResponse {
 model NginxDeploymentWafPolicyMetadata
   is ProxyResource<NginxDeploymentWafPolicyMetadataProperties> {
   ...ResourceNameParameter<NginxDeploymentWafPolicyMetadata>;
-
-  /** Resource tags for the WAF policy metadata. */
-  tags?: Record<string>;
-
-  /** Resource location for the WAF policy metadata. */
-  location?: string;
 }
 
 /**
@@ -99,7 +94,8 @@ model NginxDeploymentWafPolicyMetadataProperties {
   filepath: string;
 
   /** The provisioning state of the WAF policy metadata. */
-  provisioningState: string;
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 
   /** The compiling status of the WAF policy metadata. */
   compilingState: NginxDeploymentWafPolicyCompilingStatus;

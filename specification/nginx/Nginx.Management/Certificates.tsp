@@ -4,8 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Rest;
-using Http;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Nginx.NginxPlus;
@@ -23,7 +21,8 @@ model NginxCertificateProperties {
   /**
    * The provisioning state of the certificate.
    */
-  provisioningState: ProvisioningState;
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 
   /**
    * The virtual path to the key file.
