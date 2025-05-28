@@ -138,6 +138,10 @@ model CreateEntryPending {
   @header("Location")
   location?: string;
 
+  @doc("Zone of the operation")
+  @header("Zone")
+  zonee?: string;
+
   @doc("Retry-After seconds value to help with polling")
   @header("Retry-After")
   retryAfter?: int32;
