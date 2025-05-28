@@ -469,7 +469,7 @@ model ExecuteStartRequest {
             computerName: "myFleet000000",
             adminUsername: "adminUser",
             windowsConfiguration: #{
-              additionalUnattendContent: #[
+              additionalContent: #[
                 #{
                   passName: "someValue",
                   content: ""
@@ -500,7 +500,7 @@ model ExecuteStartRequest {
             computerName: "myFleet000000",
             adminUsername: "adminUser",
             windowsConfiguration: #{
-              additionalUnattendContent: #[
+              additionalContent: #[
                 #{
                   passName: "someValue",
                   content: ""
@@ -541,7 +541,7 @@ correlationid: "6ffe188f-6d3e-4efc-995d-7446686f8b91",
   },
   executionParameters: #{}, 
 },
-#{ title: "Create VM request req parameters", description: "Create VM request wiht required parameters example" })
+#{ title: "Create VM request parameters", description: "Create VM request with required parameters example" })
 @doc("The ExecuteCreateRequest request for create operations")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model ExecuteCreateRequest {
