@@ -1422,6 +1422,7 @@ model AffectedObjectDetails {
 /**
  * Type of the affected object details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "special use of enum, to represent constant type"
 enum AffectedObjectDetailsType {
   /**
    * Object type.
