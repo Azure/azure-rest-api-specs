@@ -1,16 +1,28 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 
-using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.Http;
+using Azure.Core.Traits;
 
 namespace Products;
 
+@doc("Marketplace Catalog API")
+model MarketParameter {
+  @query
+  @doc("Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  market: string;
+}
+
+alias ProductsListingTraits = QueryParametersTrait<SelectQueryParameter &
+  FilterQueryParameter &
+  ExpandQueryParameter &
+  MarketParameter>;
+
+alias ListingOperation = ResourceOperations<ProductsListingTraits>;
+
 interface ProductOperations {
-  @summary("GetProducts")
   @doc("Retrieves a list of products available in the marketplace catalog.")
-  @get
-  list is ResourceOperations.ResourceList<ProductSummary>;
+  list is ListingOperation.ResourceList<ProductSummary>;
 }
