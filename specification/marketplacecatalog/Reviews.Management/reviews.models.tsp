@@ -11,23 +11,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Marketplace;
 
-@doc("The Microsoft Marketplace product.")
-@tenantResource
-model Product is ProxyResource<ProductProperties> {
-  ...ResourceNameParameter<
-    Resource = Product,
-    KeyName = "uniqueProductId",
-    SegmentName = "products"
-  >;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("The Microsoft Marketplace product properties.")
-model ProductProperties {
-  @doc("The unique product id.")
-  uniqueProductId: string;
-}
-
 @doc("Response to check user has already submitted a review for the product.")
 model UserHasReview is ProxyResource<UserHasReviewProperties> {
   ...ResourceNameParameter<
