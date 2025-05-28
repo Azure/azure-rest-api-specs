@@ -68,7 +68,9 @@
         "properties": {
           "kind": {
             "type": "string",
-            "enum": ["Metric"],
+            "enum": [
+              "Metric"
+            ],
             "default": "Metric"
           },
           "windowSize": {
@@ -124,7 +126,9 @@
         "properties": {
           "kind": {
             "type": "string",
-            "enum": ["Query"],
+            "enum": [
+              "Query"
+            ],
             "default": "Query"
           },
           "resolveConfiguration": {
@@ -141,7 +145,10 @@
         "properties": {
           "kind": {
             "type": "string",
-            "enum": [ "Metric", "Query" ],
+            "enum": [
+              "Metric",
+              "Query"
+            ],
             "default": "Metric",
             "description": "Indicates the type of metric alert. Defaults to 'Metric' if not specified."
           },
@@ -241,7 +248,9 @@
         "properties": {
           "kind": {
             "type": "string",
-            "enum": ["Query"],
+            "enum": [
+              "Query"
+            ],
             "default": "Query"
           },
           "resolveConfiguration": {
@@ -258,7 +267,10 @@
         "properties": {
           "kind": {
             "type": "string",
-            "enum": [ "Metric", "Query" ],
+            "enum": [
+              "Metric",
+              "Query"
+            ],
             "default": "Metric",
             "description": "Indicates the type of metric alert. Defaults to 'Metric' if not specified."
           },
@@ -412,9 +424,13 @@
                     "$ref": "#/components/schemas/MetricAlertsMetricProperties"
                   },
                   {
-                    "required": ["windowSize"],
+                    "required": [
+                      "windowSize"
+                    ],
                     "not": {
-                      "required": ["resolveConfiguration"]
+                      "required": [
+                        "resolveConfiguration"
+                      ]
                     }
                   }
                 ]
@@ -427,7 +443,9 @@
                   },
                   {
                     "not": {
-                      "required": ["windowSize"]
+                      "required": [
+                        "windowSize"
+                      ]
                     }
                   }
                 ]
@@ -467,11 +485,15 @@
                   },
                   {
                     "not": {
-                      "required": ["resolveConfiguration"]
+                      "required": [
+                        "resolveConfiguration"
+                      ]
                     }
                   },
                   {
-                    "required": ["windowSize"]
+                    "required": [
+                      "windowSize"
+                    ]
                   }
                 ]
               },
@@ -483,7 +505,9 @@
                   },
                   {
                     "not": {
-                      "required": ["windowSize"]
+                      "required": [
+                        "windowSize"
+                      ]
                     }
                   }
                 ]
@@ -640,7 +664,11 @@
           },
           "operator": {
             "type": "string",
-            "enum": [ "Include", "Exclude", "StartsWith" ],
+            "enum": [
+              "Include",
+              "Exclude",
+              "StartsWith"
+            ],
             "description": "Operator for dimension values"
           },
           "values": {
