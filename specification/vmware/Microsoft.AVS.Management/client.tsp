@@ -221,3 +221,65 @@ interface Skus extends Microsoft.AVS.Skus {}
   "publicIpBlock",
   "java"
 );
+
+// flatten
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Azure.ResourceManager.TrackedResource.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+  "java"
+);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
+  "java"
+);
+
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Location.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Cluster.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Datastore.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(HcxEnterpriseSite.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ExpressRouteAuthorization.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(GlobalReachConnection.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetwork.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkSegment.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkGateway.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkPortMirroring.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkVMGroup.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkVirtualMachine.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkDnsService.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkDnsZone.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkPublicIP.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(CloudLink.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(VirtualMachine.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ScriptPackage.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ScriptCmdlet.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ScriptExecution.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(IscsiPath.properties, "java");
+
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(PrivateCloudUpdate.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ClusterUpdate.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(PlacementPolicyUpdate.properties, "java");
