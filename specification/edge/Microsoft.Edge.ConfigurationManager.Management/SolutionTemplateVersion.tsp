@@ -125,7 +125,7 @@ interface SolutionTemplateVersions {
     BulkDeploySolutionParameter
   >;
 
- @doc("Post request for bulk publish")
+  @doc("Post request for bulk publish")
   bulkPublishSolution is ArmResourceActionNoResponseContentAsync<
     SolutionTemplateVersion,
     BulkPublishSolutionParameter
