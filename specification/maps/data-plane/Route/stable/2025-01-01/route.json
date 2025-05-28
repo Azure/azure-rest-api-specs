@@ -1511,9 +1511,6 @@
               "format": "int64",
               "type": "integer"
             },
-            "trafficDataUsed": {
-              "$ref": "#/definitions/TrafficDataUsedEnum"
-            },
             "departureAt": {
               "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
               "type": "string",
@@ -2225,42 +2222,6 @@
             "value": "Right",
             "name": "Right",
             "description": "Right-hand side driving."
-          }
-        ]
-      }
-    },
-    "TrafficDataUsedEnum": {
-      "description": "The type of real-time traffic data used to generate the route.",
-      "type": "string",
-      "enum": [
-        "None",
-        "Flow",
-        "Closure",
-        "FlowAndClosure"
-      ],
-      "x-ms-enum": {
-        "name": "TrafficDataUsedEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "None",
-            "name": "None",
-            "description": "None."
-          },
-          {
-            "value": "Flow",
-            "name": "Flow",
-            "description": "Real-time traffic speeds used to calculate travel time."
-          },
-          {
-            "value": "Closure",
-            "name": "Closure",
-            "description": "Real-time closure data used, if applicable."
-          },
-          {
-            "value": "FlowAndClosure",
-            "name": "FlowAndClosure",
-            "description": "Flow and Closure."
           }
         ]
       }
