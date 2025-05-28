@@ -264,6 +264,10 @@ model IterationInput {
   subtitleOutlineColor?: string;
 
   @added(ApiVersions.v2025_05_20)
+  @doc("Subtitle font size.")
+  subtitleFontSize?: int32;
+
+  @added(ApiVersions.v2025_05_20)
   @doc("This parameter specifies whether or not enable the emotion for platform voice, by default let server to decide whether enable emotion for better quality for the target locale.")
   enableEmotionalPlatformVoice?: EnableEmotionalPlatformVoice;
 }
