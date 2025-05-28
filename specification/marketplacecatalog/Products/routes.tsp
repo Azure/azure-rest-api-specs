@@ -8,17 +8,15 @@ using Azure.Core.Traits;
 
 namespace Products;
 
-@doc("Marketplace Catalog API")
-model MarketParameter {
-  @query
-  @doc("Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
-  market: string;
-}
-
-alias ProductsListingTraits = QueryParametersTrait<SelectQueryParameter &
-  FilterQueryParameter &
+alias ProductsListingTraits = QueryParametersTrait<StorefrontParameter &
+  LanguageParameter &
+  LocationsParameter &
+  MarketParameter &
+  HideKeysParameter &
+  SelectQueryParameter &
+  FilterParameter &
   ExpandQueryParameter &
-  MarketParameter>;
+  OrderByQueryParameter>;
 
 alias ListingOperation = ResourceOperations<ProductsListingTraits>;
 

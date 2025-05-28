@@ -31,16 +31,31 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/StorefrontParameter"
+          },
+          {
+            "$ref": "#/parameters/LanguageParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationsParameter"
+          },
+          {
+            "$ref": "#/parameters/MarketParameter"
+          },
+          {
+            "$ref": "#/parameters/HideKeysParameter"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "$ref": "#/parameters/Azure.Core.FilterParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
           },
           {
-            "$ref": "#/parameters/MarketParameter"
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
           }
         ],
         "responses": {
@@ -70,6 +85,10 @@
     }
   },
   "definitions": {
+    "ApiKeyParameter": {
+      "type": "object",
+      "description": "ApiKey"
+    },
     "Artifact": {
       "type": "object",
       "description": "Plan level resources and configuration files",
@@ -1999,10 +2018,10 @@
       "collectionFormat": "multi",
       "x-ms-parameter-location": "method"
     },
-    "Azure.Core.FilterQueryParameter": {
+    "Azure.Core.FilterParameter": {
       "name": "filter",
       "in": "query",
-      "description": "Filter the result list using the given expression.",
+      "description": "The maximum number of result items per page.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -2017,6 +2036,18 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
+    "Azure.Core.OrderByQueryParameter": {
+      "name": "orderby",
+      "in": "query",
+      "description": "Expressions that specify the order of returned results.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
     "Azure.Core.SelectQueryParameter": {
       "name": "select",
       "in": "query",
@@ -2029,12 +2060,54 @@
       "collectionFormat": "multi",
       "x-ms-parameter-location": "method"
     },
+    "HideKeysParameter": {
+      "name": "hideKeys",
+      "in": "query",
+      "description": "This key is utilized to retrieve preview products and is generated within the Partner Center during the offer publishing process.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "LanguageParameter": {
+      "name": "language",
+      "in": "query",
+      "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+      "required": false,
+      "type": "string",
+      "default": "en",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationsParameter": {
+      "name": "locations",
+      "in": "query",
+      "description": "Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
     "MarketParameter": {
       "name": "market",
       "in": "query",
       "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "StorefrontParameter": {
+      "name": "storefront",
+      "in": "query",
+      "description": "Return products available in Azure Portal Marketplace, AppSource or Azure Marketplace portal. The possible values are: \n- `azure` - Azure Portal Marketplace\n- `amp` - Azure Marketplace portal\n- `appsource` - AppSource portal\nThe default value is 'azure'",
+      "required": false,
+      "type": "string",
+      "default": "azure",
       "x-ms-parameter-location": "method"
     }
   }

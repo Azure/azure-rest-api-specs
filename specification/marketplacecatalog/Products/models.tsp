@@ -1033,3 +1033,46 @@ model Price {
   @doc("Manufacturer's suggested retail price for the item")
   msrp: float32;
 }
+
+// The following section contains query param models
+@doc("Marketplace Catalog API")
+model MarketParameter {
+  @query
+  @doc("Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  market: string;
+}
+
+@doc("Parameters for return storefront products")
+model StorefrontParameter {
+  @query
+  @doc("Return products available in Azure Portal Marketplace, AppSource or Azure Marketplace portal. The possible values are: \n- `azure` - Azure Portal Marketplace\n- `amp` - Azure Marketplace portal\n- `appsource` - AppSource portal\nThe default value is 'azure'")
+  storefront?: string = "azure";
+}
+
+@doc("Parameters for language selection")
+model LanguageParameter {
+  @query
+  @doc("Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"")
+  language?: string = "en";
+}
+
+@doc("Parameters for location filtering")
+model LocationsParameter {
+  @query
+  @doc("Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/")
+  locations?: string[];
+}
+
+@doc("Parameters for preview product keys")
+model HideKeysParameter {
+  @query
+  @doc("This key is utilized to retrieve preview products and is generated within the Partner Center during the offer publishing process.")
+  hideKeys?: string[];
+}
+
+@doc("ApiKey")
+model ApiKeyParameter {
+  @header
+  @doc("ApiKey to access the API")
+  apiKey?: string;
+}
