@@ -3,6 +3,10 @@ import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+
+namespace Products;
 
 @doc("Eligibility for Azure consumption commitment benefit")
 enum AzureBenefit {
@@ -396,6 +400,7 @@ model OfferingProperties {
 }
 
 @doc("Returns a subset of Product attributes")
+@resource("products")
 model ProductSummary {
   @doc("Product display name")
   displayName?: string;
@@ -424,8 +429,9 @@ model ProductSummary {
   @doc("Product publishing stage")
   publishingStage?: PublishingStage;
 
+  @key
   @doc("Unique product identifier")
-  uniqueProductId?: string;
+  uniqueProductId: string;
 
   @doc("The delivery method or deployment model")
   productType: ProductType;
@@ -1026,25 +1032,4 @@ model Price {
 
   @doc("Manufacturer's suggested retail price for the item")
   msrp: float32;
-}
-
-@doc("The API error response object")
-@error
-model ErrorResponse {
-  @body
-  @doc("The API response details")
-  error: ErrorResponseDetails;
-
-  /** The error code returned in the response header. */
-  @header("x-ms-error-code")
-  errorCode: string;
-}
-
-@doc("The API error response details object")
-model ErrorResponseDetails {
-  @doc("The error code description. Such as code=InternalError")
-  code: string;
-
-  @doc("The error message. Such as message=Internal server error")
-  message: string;
 }
