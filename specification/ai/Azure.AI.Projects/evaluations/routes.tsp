@@ -120,6 +120,7 @@ interface Evaluations {
   };
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
   @doc("Poll for the operation results.")
   @route("/operations/{operationId}")
   @get
