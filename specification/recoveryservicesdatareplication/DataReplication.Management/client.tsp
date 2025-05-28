@@ -330,12 +330,6 @@ using Microsoft.DataReplication;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-// Csharp has customization to rename previous anonymous model JobModelCustomPropertiesAffectedObjectDetailsType to AffectedObjectDetailsType
-// https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/recoveryservices-datareplication/Azure.ResourceManager.RecoveryServicesDataReplication/src/Custom/Models/AffectedObjectDetailsType.cs
-@@clientName(AffectedObjectDetailsType,
-  "JobModelCustomPropertiesAffectedObjectDetailsType",
-  "csharp"
-);
 
 // java, avoid model name causing file path too long
 @@clientName(VMwareToAzStackHCIPlannedFailoverModelCustomProperties,
