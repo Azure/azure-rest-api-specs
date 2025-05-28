@@ -312,10 +312,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"]
 ```
 
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
