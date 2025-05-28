@@ -1770,22 +1770,6 @@
       "format": "int64",
       "type": "integer"
     },
-    "Hint": {
-      "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element. `Note`: Only supported for driving travelMode.",
-      "type": "object",
-      "properties": {
-        "hintType": {
-          "description": "hint type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "text": {
-          "description": "hint text.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "Step": {
       "x-ms-client-name": "RouteStep",
       "description": "A route Leg contain turn-by-turn instructions. A step refers to a range of a route between two consecutive maneuverPoint.",
@@ -2459,13 +2443,6 @@
           "description": "The formatted text description of the instruction.",
           "type": "string",
           "readOnly": true
-        },
-        "hints": {
-          "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element and a route step can contain more than one hint. `Note`: Only supported for driving travelMode",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Hint"
-          }
         }
       }
     },
