@@ -120,6 +120,7 @@ interface Evaluations {
   };
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
   @doc("Poll for the operation results.")
   @route("/operations/{operationId}")
   @get
@@ -133,7 +134,7 @@ interface Evaluations {
     @path
     operationId: string,
   ): {
-    @statusCode statusCode: 200;
+    @statusCode statusCode: 200 | 202;
 
     @doc("The operation results.")
     @body

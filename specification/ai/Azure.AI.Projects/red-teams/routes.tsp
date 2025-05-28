@@ -170,6 +170,7 @@ interface RedTeams {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
   @doc("Poll for the operation results.")
   @route("/operations/{operationId}")
   @get
@@ -183,7 +184,7 @@ interface RedTeams {
     @path
     operationId: string,
   ): {
-    @statusCode statusCode: 200;
+    @statusCode statusCode: 200 | 202;
 
     @doc("The operation results.")
     @body
