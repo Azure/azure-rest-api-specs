@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "PostgreSQLServerManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2024-08-01"
   },
   "host": "management.azure.com",
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -41,25 +41,25 @@
         ],
         "operationId": "Servers_Create",
         "x-ms-examples": {
-          "Create a new server": {
+          "Create a new flexible server.": {
             "$ref": "./examples/ServerCreate.json"
           },
-          "Create a new server with active directory authentication enabled": {
-            "$ref": "./examples/ServerCreateWithAadAuthEnabled.json"
+          "Create a new flexible server with Microsoft Entra authentication enabled.": {
+            "$ref": "./examples/ServerCreateWithMicrosoftEntraEnabled.json"
           },
-          "ServerCreateWithDataEncryptionEnabled": {
+          "Create a new flexible server with data encryption based on customer managed key.": {
             "$ref": "./examples/ServerCreateWithDataEncryptionEnabled.json"
           },
-          "Create a database as a point in time restore": {
+          "Create a new flexible server using a point in time restore of a backup of an existing flexible server.": {
             "$ref": "./examples/ServerCreatePointInTimeRestore.json"
           },
-          "Create a database as a geo-restore in geo-paired location": {
+          "Create a new flexible server using a restore of a geographically redundant backup of an existing flexible server, with data encryption based on customer managed key.": {
             "$ref": "./examples/ServerCreateGeoRestoreWithDataEncryptionEnabled.json"
           },
-          "ServerCreateReplica": {
+          "Create a read replica of an existing flexible server.": {
             "$ref": "./examples/ServerCreateReplica.json"
           },
-          "ServerCreateReviveDropped": {
+          "Create a new flexible server using a backup of a flexible server that was deleted or dropped recently.": {
             "$ref": "./examples/ServerCreateReviveDropped.json"
           }
         },
@@ -84,7 +84,7 @@
             "schema": {
               "$ref": "#/definitions/Server"
             },
-            "description": "The required parameters for creating or updating a server."
+            "description": "Parameters required to create a new flexible server or to update an existing flexible server."
           }
         ],
         "responses": {
@@ -126,35 +126,35 @@
         ],
         "operationId": "Servers_Update",
         "x-ms-examples": {
-          "ServerUpdate": {
+          "Update an existing flexible server.": {
             "$ref": "./examples/ServerUpdate.json"
           },
-          "ServerUpdateWithAadAuthEnabled": {
-            "$ref": "./examples/ServerUpdateWithAadAuthEnabled.json"
+          "Update an existing flexible server with Microsoft Entra authentication enabled.": {
+            "$ref": "./examples/ServerUpdateWithMicrosoftEntraEnabled.json"
           },
-          "ServerUpdateWithDataEncryptionEnabled": {
+          "Update an existing flexible server with data encryption based on customer managed key.": {
             "$ref": "./examples/ServerUpdateWithDataEncryptionEnabled.json"
           },
-          "ServerUpdateWithCustomerMaintenanceWindow": {
-            "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
+          "Update an existing flexible server with custom maintenance window.": {
+            "$ref": "./examples/ServerUpdateWithCustomMaintenanceWindow.json"
           },
-          "ServerUpdateWithMajorVersionUpgrade": {
+          "Update an existing flexible server to upgrade the major version of PostgreSQL database engine.": {
             "$ref": "./examples/ServerUpdateWithMajorVersionUpgrade.json"
           },
-          "Promote a replica server as a Standalone server as planned, i.e. it will wait for replication to complete.": {
+          "Promote a read replica to a standalone server with planned data synchronization. Meaning that it waits for data in the read replica to be fully synchronized with its source server before it initiates the promotion to a standalone server.": {
             "$ref": "./examples/PromoteReplicaAsPlannedStandaloneServer.json"
           },
-          "Promote a replica server as a Standalone server as forced, i.e. it will promote a replica server immediately without waiting for primary and replica to be in sync.": {
+          "Promote a read replica to a standalone server with forced data synchronization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the promotion to a standalone server.": {
             "$ref": "./examples/PromoteReplicaAsForcedStandaloneServer.json"
           },
-          "SwitchOver a replica server as planned, i.e. it will wait for replication to complete before promoting replica as Primary and original primary as replica.": {
+          "Switch over a read replica to primary server with planned data synchronization. Meaning that it waits for data in the read replica to be fully synchronized with its source server before it initiates the switching of roles between the read replica and the primary server.": {
             "$ref": "./examples/PromoteReplicaAsPlannedSwitchover.json"
           },
-          "SwitchOver a replica server as forced, i.e. it will replica as Primary and original primary as replica immediately without waiting for primary and replica to be in sync.": {
+          "Switch over a read replica to primary server with forced data synchronization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the switching of roles between the read replica and the primary server.": {
             "$ref": "./examples/PromoteReplicaAsForcedSwitchover.json"
           }
         },
-        "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
+        "description": "Updates an existing server. The request body can contain one or multiple of the properties present in the normal server definition.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -175,7 +175,7 @@
             "schema": {
               "$ref": "#/definitions/ServerForUpdate"
             },
-            "description": "The required parameters for updating a server."
+            "description": "Parameters required to update a flexible server."
           }
         ],
         "responses": {
@@ -211,11 +211,11 @@
         ],
         "operationId": "Servers_Delete",
         "x-ms-examples": {
-          "ServerDelete": {
+          "Delete or drop an existing flexible server.": {
             "$ref": "./examples/ServerDelete.json"
           }
         },
-        "description": "Deletes a server.",
+        "description": "Deletes or drops an existing flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -263,17 +263,17 @@
         ],
         "operationId": "Servers_Get",
         "x-ms-examples": {
-          "ServerGet": {
+          "Get information about an existing flexible server.": {
             "$ref": "./examples/ServerGet.json"
           },
-          "ServerGetWithVnet": {
+          "Get information about an existing flexible server that is integrated into a virtual network provided by customer.": {
             "$ref": "./examples/ServerGetWithVnet.json"
           },
-          "ServerGetWithPrivateEndpoints": {
+          "Get information about an existing flexible server that isn't integrated into a virtual network provided by customer and has private endpoint connections.": {
             "$ref": "./examples/ServerGetWithPrivateEndpoints.json"
           }
         },
-        "description": "Gets information about a server.",
+        "description": "Gets information about an existing flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -311,11 +311,11 @@
         ],
         "operationId": "Servers_ListByResourceGroup",
         "x-ms-examples": {
-          "ServerListByResourceGroup": {
+          "List all flexible servers in a resource group.": {
             "$ref": "./examples/ServerListByResourceGroup.json"
           }
         },
-        "description": "List all the servers in a given resource group.",
+        "description": "Lists all flexible servers in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -353,11 +353,11 @@
         ],
         "operationId": "Servers_List",
         "x-ms-examples": {
-          "ServerList": {
+          "List all flexible servers in a subscription.": {
             "$ref": "./examples/ServerList.json"
           }
         },
-        "description": "List all the servers in a given subscription.",
+        "description": "Lists all flexible servers in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -389,7 +389,7 @@
   "definitions": {
     "ServerVersion": {
       "type": "string",
-      "description": "The version of a server.",
+      "description": "Major version of PostgreSQL database engine.",
       "enum": [
         "16",
         "15",
@@ -405,16 +405,16 @@
     },
     "Replica": {
       "type": "object",
-      "description": "Replica properties of a server",
+      "description": "Replica properties of a flexible server.",
       "properties": {
         "role": {
           "$ref": "#/definitions/ReplicationRole",
-          "description": "Used to indicate role of the server in replication set."
+          "description": "Role of the server in a replication set."
         },
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Replicas allowed for a server.",
+          "description": "Maximum number of read replicas allowed for a flexible server.",
           "readOnly": true
         },
         "replicationState": {
@@ -431,12 +431,12 @@
             "name": "ReplicationState",
             "modelAsString": true
           },
-          "description": "Gets the replication state of a replica server. This property is returned only for replicas api call. Supported values are Active, Catchup, Provisioning, Updating, Broken, Reconfiguring",
+          "description": "Indicates the replication state of a read replica. This property is returned only when the target flexible server is a read replica. Possible  values are Active, Broken, Catchup, Provisioning, Reconfiguring, and Updating",
           "readOnly": true
         },
         "promoteMode": {
           "type": "string",
-          "description": "Sets the promote mode for a replica server. This is a write only property.",
+          "description": "Type of operation to apply on the read replica. This property is write only. Standalone means that the read replica will be promoted to a standalone server, and will become a completely independent entity from the replication set. Switchover means that the read replica will roles with the primary server.",
           "enum": [
             "standalone",
             "switchover"
@@ -451,7 +451,7 @@
         },
         "promoteOption": {
           "type": "string",
-          "description": "Sets the promote options for a replica server. This is a write only property.",
+          "description": "Data synchronization option to use when processing the operation specified in the promoteMode property This property is write only. Planned means that the operation will wait for data in the read replica to be fully synchronized with its source server before it initiates the operation. Forced means that the operation will not wait for data in the read replica to be synchronized with its source server before it initiates the operation.",
           "enum": [
             "planned",
             "forced"
@@ -471,7 +471,7 @@
       "properties": {
         "administratorLogin": {
           "type": "string",
-          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation).",
+          "description": "Name of the login designated as the first password based administrator assigned to your instance of PostgreSQL. Must be specified the first time that you enable password based authentication on a server. Once set to a given value, it cannot be changed for the rest of the life of a server. If you disable password based authentication on a server which had it enabled, this password based role isn't deleted.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -479,7 +479,7 @@
         },
         "administratorLoginPassword": {
           "type": "string",
-          "description": "The administrator login password (required for server creation).",
+          "description": "Password assigned to the administrator login. As long as password authentication is enabled, this password can be changed at any time.",
           "x-ms-secret": true,
           "format": "password",
           "x-ms-mutability": [
@@ -489,16 +489,16 @@
         },
         "version": {
           "$ref": "#/definitions/ServerVersion",
-          "description": "PostgreSQL Server version."
+          "description": "Major version of PostgreSQL database engine."
         },
         "minorVersion": {
           "type": "string",
-          "description": "The minor version of the server.",
+          "description": "Minor version of PostgreSQL database engine.",
           "readOnly": true
         },
         "state": {
           "type": "string",
-          "description": "A state of a server that is visible to user.",
+          "description": "Possible states of a flexible server.",
           "readOnly": true,
           "enum": [
             "Ready",
@@ -516,43 +516,43 @@
         },
         "fullyQualifiedDomainName": {
           "type": "string",
-          "description": "The fully qualified domain name of a server.",
+          "description": "Fully qualified domain name of a flexible server.",
           "readOnly": true
         },
         "storage": {
           "$ref": "#/definitions/Storage",
           "default": null,
-          "description": "Storage properties of a server."
+          "description": "Storage properties of a flexible server."
         },
         "authConfig": {
           "$ref": "#/definitions/AuthConfig",
           "default": null,
-          "description": "AuthConfig properties of a server."
+          "description": "Authentication configuration properties of a flexible server."
         },
         "dataEncryption": {
           "$ref": "#/definitions/DataEncryption",
           "default": null,
-          "description": "Data encryption properties of a server."
+          "description": "Data encryption properties of a flexible server."
         },
         "backup": {
           "$ref": "#/definitions/Backup",
           "default": null,
-          "description": "Backup properties of a server."
+          "description": "Backup properties of a flexible server."
         },
         "network": {
           "$ref": "#/definitions/Network",
           "default": null,
-          "description": "Network properties of a server. This Network property is required to be passed only in case you want the server to be Private access server."
+          "description": "Network properties of a flexible server. Only required if you want your server to be integrated into a virtual network provided by customer."
         },
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
           "default": null,
-          "description": "High availability properties of a server."
+          "description": "High availability properties of a flexible server."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
           "default": null,
-          "description": "Maintenance window properties of a server.",
+          "description": "Maintenance window properties of a flexible server.",
           "x-ms-mutability": [
             "update",
             "read"
@@ -567,7 +567,7 @@
               }
             ]
           },
-          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica' or 'ReviveDropped'. This property is returned only for Replica server",
+          "description": "Identifier of the flexible server to be used as the source of the new flexible server. Required when 'createMode' is 'PointInTimeRestore', 'GeoRestore', 'Replica', or 'ReviveDropped'. This property is returned only when the target flexible server is a read replica.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -576,7 +576,7 @@
         "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'ReviveDropped'.",
+          "description": "Creation time (in ISO8601 format) of the backup which you want to restore in the new flexible server. It's required when 'createMode' is 'PointInTimeRestore', 'GeoRestore', or 'ReviveDropped'.",
           "x-ms-mutability": [
             "create"
           ]
@@ -584,7 +584,7 @@
         "availabilityZone": {
           "type": "string",
           "default": "",
-          "description": "availability zone information of the server.",
+          "description": "Availability zone of a flexible server.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -592,17 +592,17 @@
         },
         "replicationRole": {
           "$ref": "#/definitions/ReplicationRole",
-          "description": "Replication role of the server"
+          "description": "Role of the server in a replication set."
         },
         "replicaCapacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Replicas allowed for a server.",
+          "description": "Maximum number of read replicas allowed for a flexible server.",
           "readOnly": true
         },
         "replica": {
           "$ref": "#/definitions/Replica",
-          "description": "Replica properties of a server. These Replica properties are required to be passed only in case you want to Promote a server.",
+          "description": "Read replica properties of a flexible server. Required only in case that you want to promote a server.",
           "x-ms-mutability": [
             "read",
             "update"
@@ -610,7 +610,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "The mode to create a new PostgreSQL server.",
+          "description": "Creation mode of a new flexible server.",
           "enum": [
             "Default",
             "Create",
@@ -634,27 +634,27 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
-          "description": "List of private endpoint connections associated with the specified resource.",
+          "description": "List of private endpoint connections associated with the specified flexible server.",
           "readOnly": true
         }
       },
-      "description": "The properties of a server."
+      "description": "Properties of a flexible server."
     },
     "Server": {
       "type": "object",
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU (pricing tier) of the server."
+          "description": "Compute tier and size of a flexible server."
         },
         "identity": {
           "$ref": "#/definitions/UserAssignedIdentity",
-          "description": "Describes the identity of the application."
+          "description": "User assigned managed identities assigned to the flexible server."
         },
         "properties": {
           "$ref": "#/definitions/ServerProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of the server."
+          "description": "Properties of a flexible server."
         }
       },
       "allOf": [
@@ -662,14 +662,14 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "Represents a server."
+      "description": "Flexible server."
     },
     "ServerPropertiesForUpdate": {
       "type": "object",
       "properties": {
         "administratorLogin": {
           "type": "string",
-          "description": "The administrator's login name of a server. Can only be specified when the server is trying to switch to password authentication and does not have default administrator login.",
+          "description": "Name of the login designated as the first password based administrator assigned to your instance of PostgreSQL. Must be specified the first time that you enable password based authentication on a server. Once set to a given value, it cannot be changed for the rest of the life of a server. If you disable password based authentication on a server which had it enabled, this password based role isn't deleted.",
           "x-ms-mutability": [
             "update",
             "read"
@@ -677,36 +677,36 @@
         },
         "administratorLoginPassword": {
           "type": "string",
+          "description": "Password assigned to the administrator login. As long as password authentication is enabled, this password can be changed at any time.",
           "x-ms-secret": true,
           "format": "password",
-          "description": "The password of the administrator login.",
           "x-ms-mutability": [
             "update"
           ]
         },
         "version": {
           "$ref": "#/definitions/ServerVersion",
-          "description": "PostgreSQL Server version. Version 16 is currently not supported for MVU."
+          "description": "Major version of PostgreSQL database engine."
         },
         "storage": {
           "$ref": "#/definitions/Storage",
           "default": null,
-          "description": "Storage properties of a server."
+          "description": "Storage properties of a flexible server."
         },
         "backup": {
           "$ref": "#/definitions/Backup",
           "default": null,
-          "description": "Backup properties of a server."
+          "description": "Backup properties of a flexible server."
         },
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
           "default": null,
-          "description": "High availability properties of a server."
+          "description": "High availability properties of a flexible server."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
           "default": null,
-          "description": "Maintenance window properties of a server.",
+          "description": "Maintenance window properties of a flexible server.",
           "x-ms-mutability": [
             "update",
             "read"
@@ -715,16 +715,16 @@
         "authConfig": {
           "$ref": "#/definitions/AuthConfig",
           "default": null,
-          "description": "AuthConfig properties of a server."
+          "description": "Authentication configuration properties of a flexible server."
         },
         "dataEncryption": {
           "$ref": "#/definitions/DataEncryption",
           "default": null,
-          "description": "Data encryption properties of a server."
+          "description": "Data encryption properties of a flexible server."
         },
         "createMode": {
           "type": "string",
-          "description": "The mode to update a new PostgreSQL server.",
+          "description": "Update mode of an existing flexible server.",
           "enum": [
             "Default",
             "Update"
@@ -739,11 +739,11 @@
         },
         "replicationRole": {
           "$ref": "#/definitions/ReplicationRole",
-          "description": "Replication role of the server"
+          "description": "Role of the server in a replication set."
         },
         "replica": {
           "$ref": "#/definitions/Replica",
-          "description": "Replica properties of a server. These Replica properties are required to be passed only in case you want to Promote a server.",
+          "description": "Read replica properties of a flexible server. Required only in case that you want to promote a server.",
           "x-ms-mutability": [
             "read",
             "update"
@@ -752,7 +752,7 @@
         "network": {
           "$ref": "#/definitions/Network",
           "default": null,
-          "description": "Network properties of a server. These are required to be passed only in case if server is a private access server."
+          "description": "Network properties of a flexible server. Only required if you want your server to be integrated into a virtual network provided by customer."
         }
       }
     },
@@ -761,7 +761,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU (pricing tier) of the server."
+          "description": "Compute tier and size of a flexible server."
         },
         "identity": {
           "$ref": "#/definitions/UserAssignedIdentity",
@@ -804,11 +804,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the sku, typically, tier + family + cores, e.g. Standard_D4s_v3."
+          "description": "Name by which is known a given compute size assigned to a flexible server."
         },
         "tier": {
           "type": "string",
-          "description": "The tier of the particular SKU, e.g. Burstable.",
+          "description": "Tier of the compute assigned to a flexible server.",
           "enum": [
             "Burstable",
             "GeneralPurpose",
@@ -824,7 +824,7 @@
         "name",
         "tier"
       ],
-      "description": "Sku information related properties of a server."
+      "description": "Compute information of a flexible server."
     },
     "Storage": {
       "type": "object",
@@ -832,11 +832,11 @@
         "storageSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Max storage allowed for a server."
+          "description": "Size of storage assigned to a flexible server."
         },
         "autoGrow": {
           "type": "string",
-          "description": "Flag to enable / disable Storage Auto grow for flexible server.",
+          "description": "Flag to enable or disable the automatic growth of storage size of a flexible server when available space is nearing zero and conditions allow for automatically growing storage size.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -848,7 +848,7 @@
         },
         "tier": {
           "type": "string",
-          "description": "Name of storage tier for IOPS.",
+          "description": "Storage tier of a flexible server.",
           "enum": [
             "P1",
             "P2",
@@ -873,12 +873,12 @@
         "iops": {
           "type": "integer",
           "format": "int32",
-          "description": "Storage tier IOPS quantity. This property is required to be set for storage Type PremiumV2_LRS"
+          "description": "Maximum IOPS supported for storage. Required when type of storage is PremiumV2_LRS."
         },
         "throughput": {
           "type": "integer",
           "format": "int32",
-          "description": "Storage throughput for the server. This is required to be set for storage Type PremiumV2_LRS"
+          "description": "Maximum throughput supported for storage. Required when type of storage is PremiumV2_LRS."
         },
         "type": {
           "type": "string",
@@ -890,17 +890,17 @@
             "name": "StorageType",
             "modelAsString": true
           },
-          "description": "Storage type for the server. Allowed values are Premium_LRS and PremiumV2_LRS, and default is Premium_LRS if not specified"
+          "description": "Type of storage assigned to a flexible server. Allowed values are Premium_LRS or PremiumV2_LRS. If not specified, it defaults to Premium_LRS."
         }
       },
-      "description": "Storage properties of a server"
+      "description": "Storage properties of a flexible server."
     },
     "AuthConfig": {
       "type": "object",
       "properties": {
         "activeDirectoryAuth": {
           "type": "string",
-          "description": "If Enabled, Azure Active Directory authentication is enabled.",
+          "description": "Indicates if the server supports Microsoft Entra authentication.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -913,7 +913,7 @@
         "passwordAuth": {
           "type": "string",
           "default": "Enabled",
-          "description": "If Enabled, Password authentication is enabled.",
+          "description": "Indicates if the server supports password based authentication.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -926,33 +926,33 @@
         "tenantId": {
           "type": "string",
           "default": "",
-          "description": "Tenant id of the server."
+          "description": "Identifier of the tenant of the delegated resource."
         }
       },
-      "description": "Authentication configuration properties of a server"
+      "description": "Authentication configuration properties of a flexible server."
     },
     "DataEncryption": {
       "type": "object",
       "properties": {
         "primaryKeyURI": {
           "type": "string",
-          "description": "URI for the key in keyvault for data encryption of the primary server."
+          "description": "URI of the key in Azure Key Vault used for data encryption of the primary storage associated to a flexible server."
         },
         "primaryUserAssignedIdentityId": {
           "type": "string",
-          "description": "Resource Id for the User assigned identity to be used for data encryption of the primary server."
+          "description": "Identifier of the user assigned managed identity used to access the key in Azure Key Vault for data encryption of the primary storage associated to a flexible server."
         },
         "geoBackupKeyURI": {
           "type": "string",
-          "description": "URI for the key in keyvault for data encryption for geo-backup of server."
+          "description": "Identifier of the user assigned managed identity used to access the key in Azure Key Vault for data encryption of the geographically redundant storage associated to a flexible server that is configured to support geographically redundant backups."
         },
         "geoBackupUserAssignedIdentityId": {
           "type": "string",
-          "description": "Resource Id for the User assigned identity to be used for data encryption for geo-backup of server."
+          "description": "Identifier of the user assigned managed identity used to access the key in Azure Key Vault for data encryption of the geographically redundant storage associated to a flexible server that is configured to support geographically redundant backups."
         },
         "type": {
           "type": "string",
-          "description": "Data encryption type to depict if it is System Managed vs Azure Key vault.",
+          "description": "Data encryption type used by a flexible server.",
           "enum": [
             "SystemManaged",
             "AzureKeyVault"
@@ -964,7 +964,7 @@
         },
         "primaryEncryptionKeyStatus": {
           "type": "string",
-          "description": "Primary encryption key status for Data encryption enabled server.",
+          "description": "Status of key used by a flexible server configured with data encryption based on customer managed key, to encrypt the primary storage associated to the server.",
           "x-ms-mutability": [
             "read"
           ],
@@ -979,7 +979,7 @@
         },
         "geoBackupEncryptionKeyStatus": {
           "type": "string",
-          "description": "Geo-backup encryption key status for Data encryption enabled server.",
+          "description": "Status of key used by a flexible server configured with data encryption based on customer managed key, to encrypt the geographically redundant storage associated to the server when it is configured to support geographically redundant backups.",
           "x-ms-mutability": [
             "read"
           ],
@@ -993,25 +993,25 @@
           }
         }
       },
-      "description": "Data encryption properties of a server"
+      "description": "Data encryption properties of a flexible server."
     },
     "UserIdentity": {
-      "description": "Describes a single user-assigned identity associated with the application.",
+      "description": "User assigned managed identity associated with a flexible server.",
       "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "the object identifier of the Service Principal which this identity represents."
+          "description": "Identifier of the object of the service principal associated to the user assigned managed identity."
         },
         "clientId": {
           "type": "string",
-          "description": "the client identifier of the Service Principal which this identity represents."
+          "description": "Identifier of the client of the service principal associated to the user assigned managed identity."
         }
       }
     },
     "UserAssignedIdentityMap": {
       "type": "object",
-      "description": "Defines a map that contains user assigned identities.",
+      "description": "Map of user assigned managed identities.",
       "additionalProperties": {
         "$ref": "#/definitions/UserIdentity"
       }
@@ -1021,15 +1021,15 @@
       "properties": {
         "userAssignedIdentities": {
           "$ref": "#/definitions/UserAssignedIdentityMap",
-          "description": "represents user assigned identities map."
+          "description": "Map of user assigned managed identities."
         },
         "principalId": {
           "type": "string",
-          "description": "the identity principal Id of the server."
+          "description": "Identifier of the object of the service principal associated to the user assigned managed identity."
         },
         "type": {
           "type": "string",
-          "description": "the types of identities associated with this resource",
+          "description": "Types of identities associated with a flexible server.",
           "enum": [
             "None",
             "UserAssigned",
@@ -1043,18 +1043,18 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "Tenant id of the server.",
+          "description": "Identifier of the tenant of a flexible server.",
           "readOnly": true
         }
       },
       "required": [
         "type"
       ],
-      "description": "Information describing the identities associated with this application."
+      "description": "Identities associated with a flexible server."
     },
     "ReplicationRole": {
       "type": "string",
-      "description": "Used to indicate role of the server in replication set.",
+      "description": "Role of the flexible server in a replication set.",
       "enum": [
         "None",
         "Primary",
@@ -1073,12 +1073,12 @@
           "type": "integer",
           "format": "int32",
           "default": 7,
-          "description": "Backup retention days for the server."
+          "description": "Backup retention days for the flexible server."
         },
         "geoRedundantBackup": {
           "type": "string",
           "default": "Disabled",
-          "description": "A value indicating whether Geo-Redundant backup is enabled on the server.",
+          "description": "Indicates if the server is configured to create geographically redundant backups.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1095,18 +1095,18 @@
         "earliestRestoreDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The earliest restore point time (ISO8601 format) for server.",
+          "description": "Earliest restore point time (ISO8601 format) for a flexible server.",
           "readOnly": true
         }
       },
-      "description": "Backup properties of a server"
+      "description": "Backup properties of a flexible server."
     },
     "Network": {
       "type": "object",
       "properties": {
         "publicNetworkAccess": {
           "type": "string",
-          "description": "public network access is enabled or not",
+          "description": "Indicates if public network access is enabled or not.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1125,7 +1125,7 @@
               }
             ]
           },
-          "description": "Delegated subnet arm resource id. This is required to be passed during create, in case we want the server to be VNET injected, i.e. Private access server. During update, pass this only if we want to update the value for Private DNS zone."
+          "description": "Resource identifier of the delegated subnet. Required during creation of a new server, in case you want the server to be integrated into your own virtual network. For an update operation, you only have to provide this property if you want to change the value assigned for the private DNS zone."
         },
         "privateDnsZoneArmResourceId": {
           "type": "string",
@@ -1136,10 +1136,10 @@
               }
             ]
           },
-          "description": "Private dns zone arm resource id. This is required to be passed during create, in case we want the server to be VNET injected, i.e. Private access server. During update, pass this only if we want to update the value for Private DNS zone."
+          "description": "Identifier of the private DNS zone. Required during creation of a new server, in case you want the server to be integrated into your own virtual network. For an update operation, you only have to provide this property if you want to change the value assigned for the private DNS zone."
         }
       },
-      "description": "Network properties of a server."
+      "description": "Network properties of a flexible server."
     },
     "HighAvailability": {
       "type": "object",
@@ -1147,7 +1147,7 @@
         "mode": {
           "type": "string",
           "default": "Disabled",
-          "description": "The HA mode for the server.",
+          "description": "High availability mode for a flexible server.",
           "enum": [
             "Disabled",
             "ZoneRedundant",
@@ -1160,7 +1160,7 @@
         },
         "state": {
           "type": "string",
-          "description": "A state of a HA server that is visible to user.",
+          "description": "Possible states of the standby server created when high availability is set to SameZone or ZoneRedundant.",
           "enum": [
             "NotEnabled",
             "CreatingStandby",
@@ -1178,37 +1178,37 @@
         "standbyAvailabilityZone": {
           "type": "string",
           "default": "",
-          "description": "availability zone information of the standby."
+          "description": "Availability zone associated to the standby server created when high availability is set to SameZone or ZoneRedundant."
         }
       },
-      "description": "High availability properties of a server"
+      "description": "High availability properties of a flexible server."
     },
     "MaintenanceWindow": {
       "type": "object",
-      "description": "Maintenance window properties of a server.",
+      "description": "Maintenance window properties of a flexible server.",
       "properties": {
         "customWindow": {
           "type": "string",
           "default": "Disabled",
-          "description": "indicates whether custom window is enabled or disabled"
+          "description": "Indicates whether custom window is enabled or disabled."
         },
         "startHour": {
           "type": "integer",
           "format": "int32",
           "default": 0,
-          "description": "start hour for maintenance window"
+          "description": "Start hour to be used for maintenance window."
         },
         "startMinute": {
           "type": "integer",
           "format": "int32",
           "default": 0,
-          "description": "start minute for maintenance window"
+          "description": "Start minute to be used for maintenance window."
         },
         "dayOfWeek": {
           "type": "integer",
           "format": "int32",
           "default": 0,
-          "description": "day of week for maintenance window"
+          "description": "Day of the week to be used for maintenance window."
         }
       }
     }
