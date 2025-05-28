@@ -36,6 +36,7 @@ model Storage is TrackedResource<StorageProperties> {
 @doc("An abstract representation of data storage kind.")
 model Store {
   @doc("The data storage kind.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: StorageKind;
 }
 
@@ -61,11 +62,6 @@ model StorageProperties {
   subnetId: SubnetId;
 
   ...MoboConfigurationWithMrg;
-
-  // read
-  @doc("The ID of the workspace.")
-  @visibility(Lifecycle.Read)
-  workspaceId?: WorkspaceId;
 }
 
 @armResourceOperations
