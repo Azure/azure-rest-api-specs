@@ -138,14 +138,14 @@ model Resources {
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
-  @doc("baseProfile, Resource properties that common across all resources ")
+  @doc("JSON object that contains VM properties that are common across all VMs in this batch (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
   baseProfile?: Record<unknown>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
-  @doc("resourceOverrides, properties per resource that needs to be overwritten from baseProfile")
+  @doc("JSON array, that contains VM properties that should to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
   resourceOverrides?: Record<unknown>[];
 
-  @doc("Number of resources to be created")
+  @doc("Number of VMs to be created")
   resourceCount: int32;
 
   @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
@@ -425,6 +425,123 @@ model ExecuteStartRequest {
   correlationid: string;
 }
 
+@example(#{
+  resourceConfigParameters: #{
+    baseProfile: #{
+      properties: #{
+        hardwareProfile: #{},
+        provisioningState: 0,
+        storageProfile: #{
+          osDisk: #{
+            osType: 0
+          }
+        },
+        vmExtensions: #[
+          #{
+            properties: #{
+              autoUpgradeMinorVersion: true,
+              protectedSettings: "SomeDecryptedSecretValue",
+              provisioningState: 0,
+              enableAutomaticUpgrade: true,
+              publisher: "Microsoft.Azure.Monitor",
+              type: "AzureMonitorLinuxAgent",
+              typeHandlerVersion: "1.0"
+            }
+          },
+          #{
+            name: "myExtensionName"
+          }
+        ]
+      },
+      resourcegroupName: "RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B",
+      computeApiVersion: "2024-07-01"
+    },
+    resourceOverrides: #[
+      #{
+        name: "myVMPool_523",
+        location: "LocalDev",
+        properties: #{
+          hardwareProfile: #{
+            vmSize: "Standard_F1s"
+          },
+          provisioningState: 0,
+          osProfile: #{
+            computerName: "myFleet000000",
+            adminUsername: "adminUser",
+            windowsConfiguration: #{
+              additionalUnattendContent: #[
+                #{
+                  passName: "someValue",
+                  content: ""
+                },
+                #{
+                  passName: "someOtherValue",
+                  content: "SomeDecryptedSecretValue"
+                }
+              ]
+            },
+            adminPassword: "SomeDecryptedSecretValue"
+          },
+          priority: 0
+        },
+        zones: #[
+          "1"
+        ]
+      },
+      #{
+        name: "myVMPool_524",
+        location: "LocalDev",
+        properties: #{
+          hardwareProfile: #{
+            vmSize: "Standard_F1s"
+          },
+          provisioningState: 0,
+          osProfile: #{
+            computerName: "myFleet000000",
+            adminUsername: "adminUser",
+            windowsConfiguration: #{
+              additionalUnattendContent: #[
+                #{
+                  passName: "someValue",
+                  content: ""
+                },
+                #{
+                  passName: "someOtherValue",
+                  content: "SomeDecryptedSecretValue"
+                }
+              ]
+            },
+            adminPassword: "SomeDecryptedSecretValue"
+          },
+          priority: 0
+        },
+        zones: #[
+          "2"
+        ]
+      }
+    ],
+    resourceCount: 2,
+    resourcePrefix: "tl-VM"
+  },
+  executionParameters: #{
+  retryPolicy: #{
+   retryCount: 2,
+   retryWindowInMinutes: 10
+  }
+ }, 
+correlationid: "6ffe188f-6d3e-4efc-995d-7446686f8b91",
+},
+#{ title: "Create VM request all parameters", description: "Create VM request optional parameters example" })
+@example(#{
+  resourceConfigParameters: #{
+    baseProfile: #{},
+    resourceOverrides: #[],
+    resourceCount: 4,
+    resourcePrefix: "tl-VM"
+  },
+  executionParameters: #{}, 
+},
+#{ title: "Create VM request req parameters", description: "Create VM request wiht required parameters example" })
 @doc("The ExecuteCreateRequest request for create operations")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model ExecuteCreateRequest {
@@ -438,6 +555,38 @@ model ExecuteCreateRequest {
   correlationid?: string;
 }
 
+@example(#{
+  description: "Create VM operation created",
+  type: "VirtualMachines",
+  location: "useast",
+  results : #[
+     #{
+      resourceId: "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B/providers/Microsoft.Compute/virtualMachines/TL13",
+      errorCode: "",
+      errorDetails: "",
+      operation: #{
+        operationId: "5cc987d0-4a3a-4b01-b31a-c99219ece5e2",
+        resourceId: "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B/providers/Microsoft.Compute/virtualMachines/TL13",
+        opType: "Create",
+        subscriptionId: "1d04e8f1-ee04-4056-b0b2-718f5bb45b04",
+        deadline: offsetDateTime.fromISO("2025-04-15T19:47:03.591Z"),
+        deadlineType: "InitiateAt",
+        state: "PendingScheduling",
+        timeZone: "UTC",
+        resourceOperationError: #{
+              errorCode: "",
+              errorDetails: ""
+            },
+        completedAt: offsetDateTime.fromISO("2025-04-15T19:47:03.591Z"),
+        retryPolicy: #{
+          retryCount: 3,
+          retryWindowInMinutes: 10
+        }
+      }
+    }
+  ]
+},
+#{ title: "Create VM response", description: "Create VM response" })
 @doc("The response from a create request")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model CreateResourceOperationResponse {
@@ -456,6 +605,38 @@ model CreateResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
+@example(#{
+  description: "Delete VM operation created",
+  type: "VirtualMachines",
+  location: "useast",
+  results : #[
+     #{
+      resourceId: "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B/providers/Microsoft.Compute/virtualMachines/TL13",
+      errorCode: "",
+      errorDetails: "",
+      operation: #{
+        operationId: "5cc987d0-4a3a-4b01-b31a-c99219ece5e2",
+        resourceId: "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B/providers/Microsoft.Compute/virtualMachines/TL13",
+        opType: "Create",
+        subscriptionId: "1d04e8f1-ee04-4056-b0b2-718f5bb45b04",
+        deadline: offsetDateTime.fromISO("2025-04-15T19:47:03.591Z"),
+        deadlineType: "InitiateAt",
+        state: "PendingScheduling",
+        timeZone: "UTC",
+        resourceOperationError: #{
+              errorCode: "",
+              errorDetails: ""
+            },
+        completedAt: offsetDateTime.fromISO("2025-04-15T19:47:03.591Z"),
+        retryPolicy: #{
+          retryCount: 3,
+          retryWindowInMinutes: 10
+        }
+      }
+    }
+  ]
+},
+#{ title: "Create VM response", description: "Create VM response" })
 @doc("The response from a delete request")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model DeleteResourceOperationResponse {
@@ -474,7 +655,37 @@ model DeleteResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
-@doc("The ExecuteDeleteRequest request for delete operations")
+@example(#{
+ resources: #{
+ ids: #[
+   "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/033328a9-c714-406c-9d90-b98ef0fd29e7",
+   "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/215a631c-46dd-4256-b679-36441782372c",
+   "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/352c5b18-62c4-479c-a3a6-afabf8c6d39a",
+  ]
+ },
+ executionParameters: #{},
+},
+#{ title: "Delete request with optional parameters example", description: "delete VM example" })
+@example(#{
+ resources: #{
+ ids: #[
+   "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/033328a9-c714-406c-9d90-b98ef0fd29e7",
+   "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/215a631c-46dd-4256-b679-36441782372c",
+   "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/352c5b18-62c4-479c-a3a6-afabf8c6d39a",
+  ]
+ },
+ executionParameters: #{
+  retryPolicy: #{
+   retryCount: 2,
+   retryWindowInMinutes: 10
+  }
+ },
+ forceDeletion: true,
+ correlationid: "6ffe188f-6d3e-4efc-995d-7446686f8b91",
+ computeApiVersion: "2024-11-01",
+},
+#{ title: "Delete request required parameters", description: "delete VM example with required parameters" })
+@doc("The ExecuteDeleteRequest for delete VM operation")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model ExecuteDeleteRequest {
   @doc("The execution parameters for the request")
@@ -490,7 +701,7 @@ model ExecuteDeleteRequest {
   forceDeletion?: boolean;
 
   @doc("Microsoft.Compute API version to target when calling delete endpoint.")
-  armApiVersion?: string;
+  computeApiVersion?: string;
 }
 
 // ----------- GetOperationStatus ---------
