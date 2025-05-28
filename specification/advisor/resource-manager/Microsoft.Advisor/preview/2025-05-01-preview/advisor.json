@@ -460,11 +460,70 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-            "ListRecommendationsSubscriptionResourceUri": {
-            "$ref": "./examples/ListRecommendationsSubscriptionResourceUri.json"
-          },
           "ListRecommendationsServiceGroupResourceUri": {
             "$ref": "./examples/ListRecommendationsServiceGroupResourceUri.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
+      "get": {
+        "tags": [
+          "GetRecommendations"
+        ],
+        "description": "Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.",
+        "operationId": "Recommendations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of recommendations per page if a paged version of this API is being used.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The page-continuation token to use with a paged version of this API.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully obtained cached recommendations.",
+            "schema": {
+              "$ref": "#/definitions/ResourceRecommendationBaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+            "ListRecommendationsSubscriptionResourceUri": {
+            "$ref": "./examples/ListRecommendationsSubscriptionResourceUri.json"
           }
         }
       }
