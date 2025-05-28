@@ -1488,36 +1488,6 @@
         }
       }
     },
-    "ViaWaypointProperties": {
-      "x-ms-discriminator-value": "ViaWaypoint",
-      "type": "object",
-      "description": "Specifies the properties of a `ViaWaypoint` which is a waypoint that must be passed through or visited along a route or trip.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeatureProperties"
-        },
-        {
-          "description": "Specifies the properties of a ViaWaypoint which is a waypoint that must be passed through or visited along a route or trip.",
-          "type": "object",
-          "properties": {
-            "names": {
-              "description": "A street, highway or intersection where the maneuver occurs. If the maneuver is complex, there may be more than one name field in the details collection. The name field may also have no value. This can occur if the name is not known or if a street, highway or intersection does not have a name.",
-              "type": "array",
-              "readOnly": true,
-              "items": {
-                "type": "string"
-              }
-            },
-            "routePathPoint": {
-              "$ref": "#/definitions/RoutePathPoint"
-            },
-            "order": {
-              "$ref": "#/definitions/Order"
-            }
-          }
-        }
-      ]
-    },
     "RoutePathProperties": {
       "x-ms-discriminator-value": "RoutePath",
       "type": "object",
@@ -1596,7 +1566,6 @@
       "enum": [
         "ManeuverPoint",
         "Waypoint",
-        "ViaWaypoint",
         "RoutePath"
       ],
       "x-ms-enum": {
@@ -1610,10 +1579,6 @@
           {
             "value": "Waypoint",
             "description": "A waypoint is a specific location or point along a route or trip that serves as a reference or stopping point."
-          },
-          {
-            "value": "ViaWaypoint",
-            "description": "A viaWaypoint is specific waypoint that must be passed through or visited along a route or trip."
           },
           {
             "value": "RoutePath",
@@ -2817,16 +2782,16 @@
       }
     },
     "Order": {
-      "description": "Sequence for visiting waypoints and viaWaypoints.",
+      "description": "Sequence for visiting waypoints.",
       "type": "object",
       "properties": {
         "inputIndex": {
-          "description": "User-provided index for waypoint and viaWaypoint inputs.",
+          "description": "User-provided index for waypoint.",
           "type": "integer",
           "format": "int64"
         },
         "optimizedIndex": {
-          "description": "System-optimized waypoint and viaWaypoint index.",
+          "description": "System-optimized waypoint index.",
           "type": "integer",
           "format": "int64"
         }
