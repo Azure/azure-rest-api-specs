@@ -138,6 +138,9 @@ op getSecrets is KeyVaultOperation<
   SecretListResult
 >;
 
+/**
+ * The name of the secret.
+ */
 model SecretNameParameter {
   /**
    * The name of the secret.

@@ -170,6 +170,9 @@ op getKey is KeyVaultOperation<
   KeyBundle
 >;
 
+/**
+ * The name of the key.
+ */
 model KeyNameParameter {
   /**
    * The name of the key.

@@ -265,6 +265,9 @@ op importCertificate is KeyVaultOperation<
   CertificateBundle
 >;
 
+/**
+ * The name of the certificate.
+ */
 model CertificateNameParameter {
   /**
    * The name of the certificate.
