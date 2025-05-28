@@ -50,7 +50,7 @@ op listApplicationsCustomization is Azure.Batch.ListOperation<
     @doc("Optional parameters for List Applications operation.")
     options?: BatchApplicationsListOptions;
   },
-  Azure.Batch.BatchApplicationListResult
+  Azure.Batch.BatchApplicationListResultMakeThisNameWayTooLongForPylint
 >;
 
 @@override(Azure.Batch.Applications.listApplications,

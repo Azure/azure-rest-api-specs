@@ -27,7 +27,7 @@ interface Applications {
     {
       ...CommonListParameters;
     },
-    BatchApplicationListResult
+    BatchApplicationListResultMakeThisNameWayTooLongForPylint
   >;
 
   @summary("Gets information about the specified Application.")

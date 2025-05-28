@@ -761,7 +761,7 @@ union SecurityTypes {
 
 @doc("The result of listing the applications available in an Account.")
 @pagedResult
-model BatchApplicationListResult {
+model BatchApplicationListResultMakeThisNameWayTooLongForPylint {
   @doc("The list of applications available in the Account.")
   @items
   value?: BatchApplication[];
