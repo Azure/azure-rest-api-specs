@@ -114,6 +114,8 @@ directive:
 
   - suppress: NestedResourcesMustHaveListOperation
     from: providerhub.json
+    where:
+      - $.definitions.OperationsPutContent
     reason: The GET operation for path "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default" returns a list of operations.
 
   - suppress: RequiredPropertiesMissingInResourceModel
