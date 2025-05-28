@@ -8,27 +8,29 @@
     "requestBody": {
       "resourceConfigParameters": {
         "baseProfile": {
-          "hardwareProfile": {},
+          "hardwareProfile": {
+            "name": "F1"
+          },
           "provisioningState": 0,
           "storageProfile": {
             "osDisk": {
               "osType": 0
-            },
-            "vmExtensions": [
-              {
-                "autoUpgradeMinorVersion": true,
-                "protectedSettings": "SomeDecryptedSecretValue",
-                "provisioningState": 0,
-                "enableAutomaticUpgrade": true,
-                "publisher": "Microsoft.Azure.Monitor",
-                "type": "AzureMonitorLinuxAgent",
-                "typeHandlerVersion": "1.0"
-              },
-              {
-                "name": "myExtensionName"
-              }
-            ]
+            }
           },
+          "vmExtensions": [
+            {
+              "autoUpgradeMinorVersion": true,
+              "protectedSettings": "SomeDecryptedSecretValue",
+              "provisioningState": 0,
+              "enableAutomaticUpgrade": true,
+              "publisher": "Microsoft.Azure.Monitor",
+              "type": "AzureMonitorLinuxAgent",
+              "typeHandlerVersion": "1.0"
+            },
+            {
+              "name": "myExtensionName"
+            }
+          ],
           "resourcegroupName": "RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B",
           "computeApiVersion": "2024-07-01"
         },
