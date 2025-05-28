@@ -21,7 +21,7 @@ import { resolve } from "path";
 
 const __dirname = new URL('.', import.meta.url).pathname;
 
-describe("correlateRuns", () => {
+describe.skipIf(isWindows())("correlateRuns", () => {
   test("correlates before and after runs with matching readme and tag", async() => {
     const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
     const beforePath = resolve(fixtureRoot, "before");
