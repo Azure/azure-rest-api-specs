@@ -133,7 +133,7 @@ interface Evaluations {
     @path
     operationId: string,
   ): {
-    @statusCode statusCode: 200;
+    @statusCode statusCode: 200 | 202;
 
     @doc("The operation results.")
     @body
