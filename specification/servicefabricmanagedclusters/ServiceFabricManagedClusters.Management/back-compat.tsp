@@ -380,3 +380,6 @@ using Microsoft.ServiceFabric;
   armResourceIdentifier[],
   "csharp"
 );
+
+@@scope(OperationStatus.get, "!csharp");
+@@scope(OperationResults.get, "!csharp");
