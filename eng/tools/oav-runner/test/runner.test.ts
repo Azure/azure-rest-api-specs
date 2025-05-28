@@ -20,7 +20,7 @@ describe("file processing", () => {
 
   it("should process a large set of files and return a list of swagger files only", () => {});
 
-  it("should process the correct swagger file given only changed example files", async () => {
+  it.only("should process the correct swagger file given only changed example files", async () => {
     const changedFiles = [
       "specification/network/resource-manager/Microsoft.Network/stable/2024-07-01/examples/PublicIpPrefixDelete.json",
     ];

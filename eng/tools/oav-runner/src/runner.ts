@@ -7,9 +7,12 @@ import * as path from "path";
 import * as fs from "fs";
 
 import { consoleLogger } from "@azure-tools/specs-shared/logger";
+import { Swagger } from "@azure-tools/specs-shared/swagger"
+
 import {
   example,
   getChangedFiles,
+  specification,
   swagger,
 } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { ReportableOavError } from "./formatting.js";
@@ -129,6 +132,19 @@ export async function checkSpecs(
   return [0, swaggerFiles, []];
 }
 
+async function getFiles(rootDirectory: string, directory: string): Promise<string[]> {
+  const target = path.join(rootDirectory, directory);
+  const items = await fs.promises.readdir(target, {
+    withFileTypes: true,
+  })
+
+  return items
+    .filter(d => d.isFile() && d.name.endsWith('.json'))
+    .map(d => path.join(target, d.name))
+    .map(d => d.replace(/^.*?(specification\/.*)$/, '$1'))
+    .filter(d => {console.log(d); return specification(d);});
+}
+
 export async function processFilesToSpecificationList(
   rootDirectory: string,
   files: string[],
@@ -136,34 +152,47 @@ export async function processFilesToSpecificationList(
   consoleLogger.info(`Processing ${files.length} files:`);
   consoleLogger.info(files.join("\n"));
 
+  const viewedFiles: Map<string, string[]> = new Map();
+
   let additionalSwaggerFiles: string[] = [];
-  let resultFiles = files.filter((file) => {
-    // todo: rationalize if this is even necessary given the swagger check
-    // I guess this might filter out files that are not swagger files /shrug leave it for now
-    if (
-      file.match(/.*\/cadl-project.yaml$/gi) !== null ||
-      file.match(/.*\/package.json$/gi) !== null ||
-      file.match(/.*\/sdk-suppressions.yaml$/gi) !== null ||
-      file.match(/.*\/suppressions.yaml$/gi) !== null ||
-      file.match(/.*\/tspconfig.yaml$/gi) !== null ||
-      file.match(/.*\/cspell.yaml$/gi) !== null ||
-      file.match(/.*\/scenarios\/*/gi) !== null ||
-      file.match(/.*(json|yaml)$/gi) == null ||
-      file.match(/.*specification\/.*/gi) == null ||
-      file.match(/.*\/examples\/*/gi) !== null ||
-      file.match(/.*\/quickstart-templates\/*/gi) !== null
-    ) {
-      return false;
-    }
+  let resultFiles = files.filter(async (file) => {
+    consoleLogger.info(`Processing file: ${file}`);
 
     if (example(file)) {
-      // if it's an example file, there should be a swagger file associated with it
+      // the containing directory of the example folder is the target swagger directory
+      const swaggerDirectory = path.dirname(path.dirname(file));
 
-      // from there, we need to evaluate all the swagger file paths, adding them to a dictionary
-      // so we don't have to reparse multiple times as we walk this file list
+      consoleLogger.info(
+        `Found example file: ${file}, checking for associated swagger file in directory: ${swaggerDirectory}`);
 
-      // once we have a spec model for each of the swagger files, we simply need to check their refs for the example file
-      // and include the swagger file if it references the example file
+      const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDirectory);
+      consoleLogger.info(
+        `Found ${visibleSwaggerFiles.length} swagger files in directory: ${swaggerDirectory}`,
+      );
+      consoleLogger.info(visibleSwaggerFiles.join("\n"));
+
+      visibleSwaggerFiles.forEach( async (swaggerFile) => {
+        consoleLogger.info(`Checking swagger file: ${swaggerFile}`);
+
+        if (!viewedFiles.has(swaggerFile)) {
+          const swaggerModel = new Swagger(path.join(rootDirectory, swaggerFile));
+          const exampleSwaggers = await swaggerModel.getExamples();
+          const examples = [...exampleSwaggers].map(e => e.path);
+
+          consoleLogger.info(
+            `Found ${examples.length} examples in swagger file: ${swaggerFile}`,
+          );
+          viewedFiles.set(swaggerFile, examples);
+        }
+        else {
+          consoleLogger.info(`Already viewed swagger file: ${swaggerFile}`);
+        }
+
+        // const referencedSwaggers = viewedFiles.get(swaggerFile)
+        // consoleLogger.info(
+        //   `Referenced swagger files for ${swaggerFile}: ${referencedSwaggers?.join("\n")}`
+        // );
+      });
     }
 
     const swaggerResult = swagger(file);
