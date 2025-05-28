@@ -26,7 +26,7 @@ These are the global settings for the PostgreSQL API.
 
 ``` yaml
 title: PostgreSQLManagementClient
-description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
+description: The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.
 openapi-type: arm
 tag: package-flexibleserver-2025-01-01-preview
 ```
@@ -91,11 +91,11 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: TuningOptions.json
     where: $.definitions.SessionsListResult
-    reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
+    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
   - code: RequiredPropertiesMissingInResourceModel
     from: TuningOptions.json
     where: $.definitions.SessionDetailsListResult
-    reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
+    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
 ```
 
 ### Tag: package-flexibleserver-2024-11-01-preview
