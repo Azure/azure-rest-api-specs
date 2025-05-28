@@ -9,6 +9,9 @@ using TypeSpec.Http;
 
 namespace KeyVault;
 
+/**
+ * Specifies whether to include certificates which are not completely provisioned.
+ */
 model IncludePendingParameter {
   /**
    * Specifies whether to include certificates which are not completely provisioned.

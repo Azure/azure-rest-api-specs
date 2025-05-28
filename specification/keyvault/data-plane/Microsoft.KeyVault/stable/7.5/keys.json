@@ -1054,12 +1054,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "key-name",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "keyName"
+            "$ref": "#/parameters/KeyNameParameter"
           },
           {
             "name": "maxresults",
@@ -2511,6 +2506,15 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "KeyNameParameter": {
+      "name": "key-name",
+      "in": "path",
+      "description": "The name of the key.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "keyName"
     }
   }
 }

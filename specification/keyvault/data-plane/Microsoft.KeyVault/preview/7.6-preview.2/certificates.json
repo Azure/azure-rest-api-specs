@@ -72,11 +72,7 @@
             "maximum": 25
           },
           {
-            "name": "includePending",
-            "in": "query",
-            "description": "Specifies whether to include certificates which are not completely provisioned.",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/IncludePendingParameter"
           }
         ],
         "responses": {
@@ -645,12 +641,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "certificate-name",
-            "in": "path",
-            "description": "The name of the certificate.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "certificateName"
+            "$ref": "#/parameters/CertificateNameParameter"
           },
           {
             "name": "maxresults",
@@ -1057,11 +1048,7 @@
             "maximum": 25
           },
           {
-            "name": "includePending",
-            "in": "query",
-            "description": "Specifies whether to include certificates which are not completely provisioned.",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/IncludePendingParameter"
           }
         ],
         "responses": {
@@ -2452,6 +2439,23 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "CertificateNameParameter": {
+      "name": "certificate-name",
+      "in": "path",
+      "description": "The name of the certificate.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "certificateName"
+    },
+    "IncludePendingParameter": {
+      "name": "includePending",
+      "in": "query",
+      "description": "Specifies whether to include certificates which are not completely provisioned.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
     }
   }
 }
