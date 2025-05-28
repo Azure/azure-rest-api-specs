@@ -8,6 +8,7 @@ import * as fs from "fs";
 
 import { consoleLogger } from "@azure-tools/specs-shared/logger";
 import {
+  example,
   getChangedFiles,
   swagger,
 } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
@@ -135,7 +136,8 @@ export async function processFilesToSpecificationList(
   consoleLogger.info(`Processing ${files.length} files:`);
   consoleLogger.info(files.join("\n"));
 
-  return files.filter((file) => {
+  let additionalSwaggerFiles: string[] = [];
+  let resultFiles = files.filter((file) => {
     // todo: rationalize if this is even necessary given the swagger check
     // I guess this might filter out files that are not swagger files /shrug leave it for now
     if (
@@ -154,14 +156,36 @@ export async function processFilesToSpecificationList(
       return false;
     }
 
+    if (example(file)) {
+      // if it's an example file, there should be a swagger file associated with it
+
+      // from there, we need to evaluate all the swagger file paths, adding them to a dictionary
+      // so we don't have to reparse multiple times as we walk this file list
+
+      // once we have a spec model for each of the swagger files, we simply need to check their refs for the example file
+      // and include the swagger file if it references the example file
+    }
+
     const swaggerResult = swagger(file);
     const targetFile = path.join(rootDirectory, file);
 
     // if it's a swagger file, we should check to see if it exists
     // as a deleted file will also show up in the changed files list
     if (swaggerResult && fs.existsSync(targetFile)) {
+      // finally, we should find all swagger files that are AFFECTED by the swagger file, add them to an accompanying list
       return true;
     }
     return false;
   });
+
+  // finally, if we added any AFFECTED swagger files, we should add them to the resultFiles list
+  if (additionalSwaggerFiles.length > 0) {
+    consoleLogger.info(
+      `Adding ${additionalSwaggerFiles.length} additional swagger files:`,
+    );
+    consoleLogger.info(additionalSwaggerFiles.join("\n"));
+    resultFiles = resultFiles.concat(additionalSwaggerFiles);
+  }
+
+  return resultFiles;
 }
