@@ -143,42 +143,6 @@ Note:
 Since the OpenAPI is generated from TypeSpec, to change the OpenAPI, you must update the TypeSpec file and regenerate the OpenAPI and avoid updating OpenAPI directly to keep the consistency between OpenAPI and TypeSpec.
 For support & help, you can post a message to [TypeSpec parters - teams channel](https://teams.microsoft.com/l/channel/19%3a2d4efc54d99e4d00a568da7cf0643c1b%40thread.skype/TypeSpec%2520Partners?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47).
 
-### 5. Generate or Refresh SDK code from a TypeSpec project
+### 5. Generate SDK code from a TypeSpec project
 
-The section describe the process for data-plane SDKs. Management-plane SDKs still follow separate existing `autorest` process.
-
-This assumes you have cloned language SDKs into your local folder at same level of `azure-rest-api-spec`.
-
-```cmd
- \-
-   azure-rest-api-specs/
-   azure-rest-api-specs-pr/
-   azure-sdk-for-java/
-   azure-sdk-for-js/
-   azure-sdk-for-net/
-   azure-sdk-for-python/
-```
-
- You can then run `tsp-client` script to generate the necessary SDK folder and project structure if it does not already exist, and then regenerate the SDK source code.
-
-Installation:
-
-```node
-npm install -g @azure-tools/typespec-client-generator-cli
-```
-
-Scenarios:
-
-1. Test generation of SDK project and code with local TypeSpec changes in your `azure-rest-api-specs` repo. Please note this cannot be used to submit a SDK PR as it does not contain a valid commit id for the TypeSpec file.
-
-```cli
-   cd specifications/contoso/contoso.widgetmanager
-   ..\..\..\eng\script\TypeSpec-Generate-Sdk.ps1 -SdkRepoRootDirectory C:\Github\fork\azure-sdk-for-java\
-```
-
-2. Generate/refresh SDK code for PR submission. The following command will update tsp-location.yaml with commit id and repo info so the build can be generated and verified by the CI and release pipeline.
-
-```cli
-   cd specifications/contoso/contoso.widgetmanager
-   ..\..\..\eng\script\TypeSpec-Generate-Sdk.ps1 -SdkRepoRootDirectory C:\Github\fork\azure-sdk-for-java\ [commit id] Azure/azure-rest-api-specs
-```
+Refer to [Develop client libraries](https://eng.ms/docs/products/azure-developer-experience/develop/sdk-develop?tabs=management) for more details.
