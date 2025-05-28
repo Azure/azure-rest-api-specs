@@ -1672,37 +1672,6 @@
           "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
           "type": "string",
           "format": "date-time"
-        },
-        "subLegs": {
-          "description": "Information about a segments of the route Leg defined by the route Leg waypoints and any intermediate via-waypoints. For example, if the route Leg has two via-waypoints in addition to start and end waypoints, there would be three (3) route sub-legs.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubLeg"
-          }
-        }
-      }
-    },
-    "SubLeg": {
-      "x-ms-client-name": "RouteSubLeg",
-      "description": "Information about a segments of the route Leg defined by the route Leg waypoints and any intermediate via-waypoints. For example, if the route Leg has two via-waypoints in addition to start and end waypoints, there would be three (3) route sub-legs.",
-      "type": "object",
-      "properties": {
-        "routePathRange": {
-          "$ref": "#/definitions/RoutePathRange"
-        },
-        "distanceInMeters": {
-          "description": "The physical distance in meters covered by the sub-leg.",
-          "type": "number"
-        },
-        "durationInSeconds": {
-          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
-          "format": "int64",
-          "type": "integer"
-        },
-        "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
-          "format": "int64",
-          "type": "integer"
         }
       }
     },
