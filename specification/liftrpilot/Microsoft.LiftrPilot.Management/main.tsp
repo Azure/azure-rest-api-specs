@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi3";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-liftr-base";
@@ -8,6 +9,7 @@ import "@azure-tools/typespec-liftr-base";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using LiftrBase;
 
@@ -48,6 +50,13 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
   v2025_05_21_preview: "2025-05-21-preview",
+
+  /** 2025-05-23-preview version (new) */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2025_05_23_preview: "2025-05-23-preview",
 }
 
 /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
@@ -489,4 +498,54 @@ interface TestTrackedSyncResources {
   >;
   listByResourceGroup is ArmResourceListByParent<TestTrackedSyncResource>;
   listBySubscription is ArmListBySubscription<TestTrackedSyncResource>;
+}
+
+@added(Versions.v2025_05_23_preview)
+@doc("Properties specific to SaaS")
+model SaasProperties is BaseResourceProperties;
+
+@added(Versions.v2025_05_23_preview)
+model SaaS is Azure.ResourceManager.TrackedResource<SaasProperties> {
+  @key("saaSResourceName")
+  @pattern("^[a-zA-Z0-9]+$")
+  @segment("saaSResources")
+  @minLength(1)
+  @maxLength(50)
+  @doc("Name of the SaaS resource")
+  @path
+  name: string;
+}
+
+@added(Versions.v2025_05_23_preview)
+@doc("SaaS guid & PublishedId for Activate and Validate SaaS Resource")
+model ActivateSaasParameterRequest {
+  @doc("SaaS guid for Activate and Validate SaaS Resource")
+  saasGuid: string;
+}
+
+@added(Versions.v2025_05_23_preview)
+@doc("Restore resource response for a Test tracked resource.")
+model ActivateSaasResponse {
+  @doc("The partner response for saasId")
+  @visibility(Lifecycle.Read)
+  saasId: string;
+}
+
+@added(Versions.v2025_05_23_preview)
+@armResourceOperations
+interface SaasOperations {
+  @doc("Activate SaaS resource.")
+  @armResourceAction(SaaS)
+  @action("activateSaaS")
+  @post
+  activateSaaS(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ProviderNamespace<SaaS>,
+
+    @bodyRoot
+    @doc("The details for ActivateSaaSParameter request.")
+    @extension("x-ms-parameter-location", "method")
+    request: ActivateSaasParameterRequest,
+  ): ArmResponse<ActivateSaasResponse> | ErrorResponse;
 }
