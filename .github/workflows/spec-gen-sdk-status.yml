@@ -22,10 +22,8 @@ jobs:
           sparse-checkout: |
             .github
 
-      # Only run the login and get token steps when the check run is from azure-rest-api-specs-pr repository
-      - if: |
-          startsWith(github.event.check_run.html_url, 'https://github.com/') &&
-          contains(github.event.check_run.html_url, '/azure-rest-api-specs-pr/')
+      # Only run the login and get token steps when the respository is azure-rest-api-specs-pr
+      - if: github.event.repository.name == 'azure-rest-api-specs-pr'
         name: Azure Login with Workload Identity Federation
         uses: azure/login@v2
         with:
@@ -33,9 +31,7 @@ jobs:
           tenant-id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
           allow-no-subscriptions: true
 
-      - if: |
-          startsWith(github.event.check_run.html_url, 'https://github.com/') &&
-          contains(github.event.check_run.html_url, '/azure-rest-api-specs-pr/')
+      - if: github.event.repository.name == 'azure-rest-api-specs-pr'
         name: Get ADO Token via Managed Identity
         run: |
           # Get token for Azure DevOps resource
