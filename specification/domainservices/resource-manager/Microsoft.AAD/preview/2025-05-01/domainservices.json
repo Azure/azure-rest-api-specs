@@ -57,15 +57,9 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed, including cases where the domain service could not be unsuspended (not in a suspended state or not eligible).",
+            "description": "Error response describing why the operation failed, including cases where the domain service could not be unsuspended (not in a suspended state, not eligible, not found, or other errors).",
             "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Domain service could not be unsuspended (not in a suspended state or not eligible)."
-                }
-              }
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
