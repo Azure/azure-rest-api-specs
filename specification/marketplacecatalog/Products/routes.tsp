@@ -3,7 +3,6 @@ import "@typespec/versioning";
 import "./models.tsp";
 
 using Azure.Core;
-using TypeSpec.Http;
 using Azure.Core.Traits;
 
 namespace Products;
@@ -18,9 +17,9 @@ alias ProductsListingTraits = QueryParametersTrait<StorefrontParameter &
   ExpandQueryParameter &
   OrderByQueryParameter>;
 
-alias ListingOperation = ResourceOperations<ProductsListingTraits>;
+alias ProductsListingOperation = ResourceOperations<ProductsListingTraits>;
 
 interface ProductOperations {
   @doc("Retrieves a list of products available in the marketplace catalog.")
-  list is ListingOperation.ResourceList<ProductSummary>;
+  list is ProductsListingOperation.ResourceList<ProductSummary>;
 }

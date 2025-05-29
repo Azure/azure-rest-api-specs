@@ -1,12 +1,12 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 
-using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 namespace Products;
+
+// TODO: Go back over the enums
 
 @doc("Eligibility for Azure consumption commitment benefit")
 enum AzureBenefit {
