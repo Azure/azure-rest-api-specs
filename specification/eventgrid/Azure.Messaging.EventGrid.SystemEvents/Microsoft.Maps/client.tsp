@@ -29,3 +29,20 @@ using Azure.ClientGenerator.Core;
 @@usage(Microsoft.EventGrid.SystemEvents.MapsGeofenceGeometry, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.MapsGeofenceGeometry, Access.public);
 //Enums
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MapsGeofenceGeometry,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MapsGeofenceEnteredEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MapsGeofenceEventProperties,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MapsGeofenceExitedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MapsGeofenceResultEventData,
+  "csharp"
+);
