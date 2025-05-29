@@ -38,6 +38,19 @@ export class Swagger {
    * @returns {Promise<Set<Swagger>>}
    */
   async getRefs() {
+    await this.populateRefPaths();
+
+    if (this.#refs){
+      return new Set(
+        [...this.#refs].filter(s => !example(s.path))
+      );
+    }
+    else {
+      return new Set();
+    }
+  }
+
+  async populateRefPaths() {
     if (!this.#refs) {
       const schema = await $RefParser.resolve(this.#path, {
         resolve: { http: false },
@@ -45,8 +58,6 @@ export class Swagger {
 
       const refPaths = schema
         .paths("file")
-        // Exclude examples
-        .filter((p) => !example(p))
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 
@@ -60,38 +71,22 @@ export class Swagger {
         ),
       );
     }
-
-    return this.#refs;
   }
 
   /**
    * @returns {Promise<Set<Swagger>>}
    */
   async getExamples() {
-    if (!this.#refs) {
-      const schema = await $RefParser.resolve(this.#path, {
-        resolve: { http: false },
-      });
+    await this.populateRefPaths();
 
-      const refPaths = schema
-        .paths("file")
-        // include only example refs
-        .filter((p) => example(p))
-        // Exclude ourself
-        .filter((p) => resolve(p) !== resolve(this.#path));
-
-      this.#refs = new Set(
-        refPaths.map(
-          (p) =>
-            new Swagger(p, {
-              logger: this.#logger,
-              specModel: this.#specModel,
-            }),
-        ),
+    if (this.#refs){
+      return new Set(
+        [...this.#refs].filter(s => example(s.path))
       );
     }
-
-    return this.#refs;
+    else {
+      return new Set();
+    }
   }
 
   /**
