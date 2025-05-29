@@ -1664,6 +1664,48 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.BillingBenefits/listSellerResources": {
+      "post": {
+        "description": "List maccs by billing account",
+        "operationId": "SellerResource_List",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-examples": {
+          "SellerViewContributors": {
+            "$ref": "./examples/MaccSellerViewContributors.json"
+          },
+          "SellerViewNoContributors": {
+            "$ref": "./examples/MaccSellerViewNoContributors.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SellerResourceListRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Macc"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3560,11 +3602,11 @@
         },
         "primaryUri": {
           "$ref": "#/definitions/ResourceUri",
-          "description": "Fully-qualified identifier of the primary MACC Id."
+          "description": "Fully-qualified identifier of the primary MACC."
         },
         "billingAccountId": {
           "$ref": "#/definitions/BillingAccountResourceId",
-          "description": "Fully-qualified identifier of the billing account where the benefit is applied. Present only for Enterprise Agreement customers."
+          "description": "Fully-qualified identifier of the billing account where the MACC is applied. Present only for Enterprise Agreement customers."
         },
         "commitment": {
           "$ref": "#/definitions/Commitment"
@@ -3848,6 +3890,42 @@
     "ResourceUri": {
       "type": "string",
       "description": "Fully-qualified identifier of the resource."
+    },
+    "SellerResourceListRequest": {
+      "type": "object",
+      "description": "List MACCs under a billing account",
+      "properties": {
+        "properties": {
+          "description": "Request properties to list maccs under a billing account",
+          "$ref": "#/definitions/SellerResourceListRequestProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SellerResourceListRequestProperties": {
+      "type": "object",
+      "description": "Request properties to list maccs under a billing account",
+      "required": [
+        "billingAccountId"
+      ],
+      "properties": {
+        "billingAccountId": {
+          "type": "string",
+          "description": "Fully-qualified identifier of the billing account where the benefit is applied. Present only for Enterprise Agreement customers."
+        },
+        "$filter": {
+          "type": "string",
+          "description": "Filter the response based on this property"
+        },
+        "contributors": {
+          "type": "boolean",
+          "description": "contributors is the only supported value"
+        },
+        "primaryUri": {
+          "$ref": "#/definitions/ResourceUri",
+          "description": "Fully-qualified identifier of the primary MACC."
+        }
+      }
     }
   },
   "parameters": {
@@ -4044,6 +4122,16 @@
       "description": "Request body for validating a benefit",
       "schema": {
         "$ref": "#/definitions/BenefitValidateRequest"
+      }
+    },
+    "SellerResourceListRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body listing macc by billing account",
+      "schema": {
+        "$ref": "#/definitions/SellerResourceListRequest"
       }
     }
   }
