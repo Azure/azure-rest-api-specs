@@ -1885,6 +1885,19 @@
           "type": "boolean",
           "readOnly": true
         },
+        "systemDatastoresAuthMode": {
+          "description": "The auth mode used for accessing the system datastores of the workspace.",
+          "type": "string",
+          "enum": [
+            "AccessKey",
+            "Identity",
+            "UserDelegationSAS"
+          ],
+          "x-ms-enum": {
+            "name": "systemDatastoresAuthMode",
+            "modelAsString": true
+          }
+        },
         "mlFlowTrackingUri": {
           "description": "The URI associated with this workspace that machine learning flow must point at to set up tracking.",
           "type": "string",
@@ -2003,6 +2016,19 @@
         },
         "enableDataIsolation": {
           "type": "boolean"
+        },
+        "systemDatastoresAuthMode": {
+          "description": "The auth mode used for accessing the system datastores of the workspace.",
+          "type": "string",
+          "enum": [
+            "AccessKey",
+            "Identity",
+            "UserDelegationSAS"
+          ],
+          "x-ms-enum": {
+            "name": "systemDatastoresAuthMode",
+            "modelAsString": true
+          }
         },
         "v1LegacyMode": {
           "description": "Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.",
