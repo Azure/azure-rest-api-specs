@@ -16,11 +16,11 @@ namespace Microsoft.IoTOperations;
 model AkriConnectorResource is ProxyResource<AkriConnectorProperties> {
   /** Name of AkriConnector resource. */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
-  @key("akriConnectorName")
+  @key("connectorName")
   @path
   @minLength(3)
   @maxLength(63)
-  @segment("akriConnectors")
+  @segment("connectors")
   name: string;
 
   /** Edge location of the resource. */
