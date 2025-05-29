@@ -125,6 +125,10 @@
         ],
         "summary": "Create or Update a Certificate.",
         "operationId": "ConnectedEnvironmentsCertificates_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -165,6 +169,12 @@
               "$ref": "./CommonDefinitions.json#/definitions/Certificate"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -185,6 +195,10 @@
         ],
         "summary": "Deletes the specified Certificate.",
         "operationId": "ConnectedEnvironmentsCertificates_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -214,6 +228,14 @@
           "200": {
             "description": "Delete operation completed"
           },
+          "202": {
+            "description": "Delete operation is accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Certificate does not exist"
           },
@@ -238,6 +260,10 @@
         "summary": "Update properties of a certificate",
         "description": "Patches a certificate. Currently only patching of tags is supported",
         "operationId": "ConnectedEnvironmentsCertificates_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -277,6 +303,14 @@
             "description": "Certificate updated successfully.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
+          "202": {
+            "description": "Patch operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {

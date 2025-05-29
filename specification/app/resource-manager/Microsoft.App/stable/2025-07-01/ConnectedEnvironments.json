@@ -284,6 +284,15 @@
             "type": "string"
           },
           {
+            "name": "environmentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the connectedEnvironment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironmentPatchResource"
+            }
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -446,6 +455,15 @@
           "readOnly": true
         }
       }
+    },
+    "ConnectedEnvironmentPatchResource": {
+      "type": "object",
+      "description": "Connected environment patch properties",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ResourceTags"
+        }
+      ]
     }
   },
   "securityDefinitions": {
