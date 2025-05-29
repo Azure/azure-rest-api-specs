@@ -1,5 +1,5 @@
 {
-  "title": "AkriConnectorTemplate_Get_MaximumSet",
+  "title": "AkriConnectorTemplate_Get_Managed_Rest",
   "operationId": "AkriConnectorTemplate_Get",
   "parameters": {
     "api-version": "2025-07-01-preview",
@@ -13,15 +13,48 @@
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
-          "aioMetadata": {
-            "aioMinVersion": "1.2.0",
-            "aioMaxVersion": "1.4.0"
-          },
           "runtimeConfiguration": {
-            "runtimeConfigurationType": "HelmConfiguration",
-            "helmConfigurationSettings": {
-              "releaseName": "my-install",
-              "version": "1.0.0"
+            "runtimeConfigurationType": "ManagedConfiguration",
+            "managedConfigurationSettings": {
+              "allocation": {
+                "policy": "Bucketized",
+                "bucketSize": 1
+              },
+              "persistentVolumeClaims": [
+                {
+                  "claimName": "test-pvc",
+                  "mountPath": "/data/connector"
+                }
+              ],
+              "secrets": [
+                {
+                  "secretAlias": "username",
+                  "secretRef": "secret-a",
+                  "secretKey": "username"
+                },
+                {
+                  "secretAlias": "password",
+                  "secretRef": "secret-a",
+                  "secretKey": "password"
+                }
+              ],
+              "trustSettings": {
+                "trustListSecretRef": "trust-list-secret"
+              },
+              "managedConfigurationType": "ImageConfiguration",
+              "imageConfigurationSettings": {
+                "imageName": "samples/akri-connector-minimalist",
+                "tagDigestSettings": {
+                  "tagDigestType": "Tag",
+                  "tag": "0.0.1"
+                },
+                "registrySettings": {
+                  "registrySettingsType": "ContainerRegistry",
+                  "containerRegistrySettings": {
+                    "registry": "mycr.azurecr.io"
+                  }
+                }
+              }
             }
           },
           "diagnostics": {
