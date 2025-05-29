@@ -6,8 +6,6 @@ using TypeSpec.Rest;
 
 namespace Products;
 
-// TODO: Go back over the enums
-
 @doc("Eligibility for Azure consumption commitment benefit")
 enum AzureBenefit {
   @doc("The product is eligible for Azure consumption commitment benefit")
