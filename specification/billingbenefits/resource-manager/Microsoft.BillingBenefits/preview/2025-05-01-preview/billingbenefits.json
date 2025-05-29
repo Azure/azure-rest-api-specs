@@ -3,7 +3,7 @@
   "info": {
     "version": "2025-05-01-preview",
     "title": "Billing benefits RP",
-    "description": "Azure Benefits RP let users create and manage benefits like savings plan."
+    "description": "Azure Benefits RP let users create and manage benefits."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -544,14 +544,24 @@
     },
     "/providers/Microsoft.BillingBenefits/validate": {
       "post": {
-        "description": "Validate savings plan purchase.",
-        "operationId": "ValidatePurchase",
+        "description": "Validate any benefit.",
+        "operationId": "Benefit_Validate",
         "tags": [
-          "Savings plan"
+          "Savings plan",
+          "Macc"
         ],
         "x-ms-examples": {
           "SavingsPlanValidatePurchase": {
             "$ref": "./examples/SavingsPlanValidatePurchase.json"
+          },
+          "MaccValidateCreate": {
+            "$ref": "./examples/MaccValidateCreate.json"
+          },
+          "MaccValidateUpdate": {
+            "$ref": "./examples/MaccValidateUpdate.json"
+          },
+          "MaccValidateCancel": {
+            "$ref": "./examples/MaccValidateCancel.json"
           }
         },
         "parameters": [
@@ -559,14 +569,14 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SavingsPlanPurchaseValidateRequestParameter"
+            "$ref": "#/parameters/BenefitValidateRequestParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request is completed.",
             "schema": {
-              "$ref": "#/definitions/SavingsPlanValidateResponse"
+              "$ref": "#/definitions/BenefitValidateResponse"
             }
           },
           "default": {
@@ -1100,6 +1110,560 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}": {
+      "put": {
+        "description": "Create MACC.",
+        "operationId": "Maccs_Create",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-examples": {
+          "Macc_Create": {
+            "$ref": "./examples/MaccCreate.json"
+          },
+          "Contributor_Create": {
+            "$ref": "./examples/ContributorCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccPutRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been updated.",
+            "schema": {
+              "$ref": "#/definitions/Macc"
+            }
+          },
+          "201": {
+            "description": "The resource has been created.",
+            "schema": {
+              "$ref": "#/definitions/Macc"
+            },
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get a MACC.",
+        "operationId": "Maccs_Get",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-examples": {
+          "Macc_Get": {
+            "$ref": "./examples/MaccGet.json"
+          },
+          "MaccWithShortfall_Get": {
+            "$ref": "./examples/MaccWithShortfallGet.json"
+          },
+          "Contributor_Get": {
+            "$ref": "./examples/ContributorGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/Macc"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update MACC.",
+        "operationId": "Maccs_Update",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "MaccCommitment_Update": {
+            "$ref": "./examples/MaccCommitmentUpdate.json"
+          },
+          "MaccEndDate_Update": {
+            "$ref": "./examples/MaccEndDateUpdate.json"
+          },
+          "MaccEndContributorRule_Update": {
+            "$ref": "./examples/MaccContributorRuleUpdate.json"
+          },
+          "MaccTags_Update": {
+            "$ref": "./examples/MaccTagsUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccPatchRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Macc"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete MACC.",
+        "operationId": "Maccs_Delete",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-examples": {
+          "ServiceSpecificIncentives_Delete": {
+            "$ref": "./examples/MaccDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs": {
+      "get": {
+        "description": "List MACCs under a resource group from primary service admin.",
+        "operationId": "Maccs_ListByResourceGroup",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Maccs_ListByResourceGroup": {
+            "$ref": "./examples/MaccsListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/MaccList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/maccs": {
+      "get": {
+        "description": "List MACCs under a subscription from primary service tenant.",
+        "operationId": "Maccs_ListBySubscription",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Maccs_ListBySubscription": {
+            "$ref": "./examples/MaccsListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/MaccList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/cancel": {
+      "post": {
+        "description": "Cancels MACC.",
+        "operationId": "Maccs_Cancel",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Macc_Cancel": {
+            "$ref": "./examples/MaccCancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Macc"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/contributors/{contributorName}": {
+      "get": {
+        "description": "Get a contributor from primary service admin",
+        "operationId": "Contributors_GetFromPrimary",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-examples": {
+          "Contributor_GetFromPrimary": {
+            "$ref": "./examples/ContributorGetFromPrimary.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContributorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/Contributor"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/contributors": {
+      "get": {
+        "description": "List contributors under from primary service admin",
+        "operationId": "Contributors_ListFromPrimary",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-examples": {
+          "Contributors_ListFromPrimary": {
+            "$ref": "./examples/ContributorsListFromPrimary.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/ContributorList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/chargeShortfall": {
+      "post": {
+        "description": "Charge Shortfall on MACC.",
+        "operationId": "Maccs_ChargeShortfall",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Maccs_ChargeShortfall": {
+            "$ref": "./examples/ChargeShortfall.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ChargeShortfallRequestParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/Macc"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1197,7 +1761,7 @@
           }
         ]
       },
-      "description": "Fully-qualified identifier of the billing profile where the savings plan is applied. Present only for Field-led or Customer-led customers."
+      "description": "Fully-qualified identifier of the billing profile where the benefit is applied. Present only for Field-led or Customer-led customers."
     },
     "CustomerResourceId": {
       "type": "string",
@@ -2961,6 +3525,329 @@
           "$ref": "#/definitions/DisplayName"
         }
       }
+    },
+    "Macc": {
+      "type": "object",
+      "description": "Microsoft Azure Consumption Commitment.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "MACC properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MaccModelProperties"
+        }
+      }
+    },
+    "MaccModelProperties": {
+      "type": "object",
+      "description": "MACC properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/MaccProvisioningState"
+        },
+        "provisioningSubState": {
+          "$ref": "#/definitions/MaccProvisioningSubState"
+        },
+        "entityType": {
+          "$ref": "#/definitions/MaccEntityType"
+        },
+        "productCode": {
+          "$ref": "#/definitions/ProductCode"
+        },
+        "primaryUri": {
+          "$ref": "#/definitions/ResourceUri",
+          "description": "Fully-qualified identifier of the primary MACC Id."
+        },
+        "billingAccountId": {
+          "$ref": "#/definitions/BillingAccountResourceId",
+          "description": "Fully-qualified identifier of the billing account where the benefit is applied. Present only for Enterprise Agreement customers."
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment"
+        },
+        "startAt": {
+          "$ref": "#/definitions/StartAt"
+        },
+        "endAt": {
+          "$ref": "#/definitions/EndAt"
+        },
+        "allowContributors": {
+          "$ref": "#/definitions/AllowContributors"
+        },
+        "systemId": {
+          "$ref": "#/definitions/MaccSystemId"
+        },
+        "shortfall": {
+          "$ref": "#/definitions/Shortfall"
+        },
+        "resourceUri": {
+          "$ref": "#/definitions/ResourceUri"
+        },
+        "primaryBillingAccountId": {
+          "$ref": "#/definitions/BillingAccountResourceId",
+          "description": "Fully-qualified identifier of the billing account of the primary MACC."
+        }
+      }
+    },
+    "Contributor": {
+      "type": "object",
+      "description": "MACC contributor",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "MACC contributor properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MaccModelProperties"
+        }
+      }
+    },
+    "MaccProvisioningState": {
+      "type": "string",
+      "description": "Provisioning states of MACC.",
+      "readOnly": true,
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Succeeded",
+        "Canceled",
+        "Failed",
+        "ShortfallPending"
+      ],
+      "x-ms-enum": {
+        "name": "MaccProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "MaccProvisioningSubState": {
+      "type": "string",
+      "description": "Provisioning sub state of MACC.",
+      "readOnly": true,
+      "enum": [
+        "Unknown",
+        "None",
+        "Expired",
+        "ShortfallCharged"
+      ],
+      "x-ms-enum": {
+        "name": "MaccProvisioningSubState",
+        "modelAsString": true
+      }
+    },
+    "MaccEntityType": {
+      "type": "string",
+      "description": "Represents type of the object being operated on. Possible values are primary or contributor."
+    },
+    "AllowContributors": {
+      "type": "boolean",
+      "default": false,
+      "description": "Setting this to true means multi-entity."
+    },
+    "MaccSystemId": {
+      "type": "string",
+      "description": "This is the globally unique identifier of the MACC which will not change for the lifetime of the MACC."
+    },
+    "Shortfall": {
+      "type": "object",
+      "description": "MACC shortfall",
+      "properties": {
+        "productCode": {
+          "$ref": "#/definitions/ProductCode"
+        },
+        "charge": {
+          "$ref": "#/definitions/Price"
+        },
+        "startAt": {
+          "$ref": "#/definitions/StartAt"
+        },
+        "endAt": {
+          "$ref": "#/definitions/EndAt"
+        }
+      }
+    },
+    "MaccPatchRequest": {
+      "type": "object",
+      "description": "Macc patch request",
+      "properties": {
+        "properties": {
+          "description": "Macc patch request properties",
+          "$ref": "#/definitions/MaccPatchRequestProperties",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MaccPatchRequestProperties": {
+      "type": "object",
+      "description": "Macc patch request properties",
+      "properties": {
+        "commitment": {
+          "$ref": "#/definitions/Commitment"
+        },
+        "endAt": {
+          "$ref": "#/definitions/EndAt"
+        },
+        "allowContributors": {
+          "$ref": "#/definitions/AllowContributors"
+        }
+      }
+    },
+    "ChargeShortfallRequest": {
+      "type": "object",
+      "description": "Charge shortfall request",
+      "properties": {
+        "properties": {
+          "description": "Charge shortfall request properties",
+          "$ref": "#/definitions/Shortfall",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MaccList": {
+      "type": "object",
+      "description": "MACC list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List MACCs.",
+          "items": {
+            "$ref": "#/definitions/Macc"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
+        }
+      }
+    },
+    "ContributorList": {
+      "type": "object",
+      "description": "Contributor list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contributor"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
+        }
+      }
+    },
+    "BenefitValidateRequest": {
+      "type": "object",
+      "description": "Request to validate any benefit.",
+      "properties": {
+        "benefitType": {
+          "$ref": "#/definitions/BenefitType"
+        },
+        "benefits": {
+          "type": "array",
+          "description": "Defines benefits for validation.",
+          "items": {
+            "$ref": "#/definitions/BenefitValidateModel"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "BenefitType": {
+      "type": "string",
+      "description": "Benefit model type."
+    },
+    "BenefitValidateModel": {
+      "type": "object",
+      "description": "Abstract benefit model to validate.",
+      "x-abstract": true,
+      "properties": {}
+    },
+    "MaccValidateModel": {
+      "type": "object",
+      "description": "MACC validate model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitValidateModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "MACC validate properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MaccModelProperties"
+        }
+      }
+    },
+    "SavingsPlanValidateModel": {
+      "type": "object",
+      "description": "Savings plan validate model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitValidateModel"
+        },
+        {
+          "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+        }
+      ]
+    },
+    "BenefitValidateResponse": {
+      "type": "object",
+      "description": "Benefit validate response.",
+      "properties": {
+        "benefits": {
+          "type": "array",
+          "description": "Defines benefit validation response for benefits.",
+          "items": {
+            "$ref": "#/definitions/BenefitValidateResponseProperty"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
+        }
+      }
+    },
+    "BenefitValidateResponseProperty": {
+      "type": "object",
+      "description": "Benefit validate response property",
+      "properties": {
+        "valid": {
+          "type": "boolean",
+          "description": "Indicates if the provided input was valid"
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "Failure reason code if the provided input was invalid"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Failure reason if the provided input was invalid"
+        },
+        "resourceUri": {
+          "$ref": "#/definitions/ResourceUri"
+        }
+      }
+    },
+    "ResourceUri": {
+      "type": "string",
+      "description": "Fully-qualified identifier of the resource."
     }
   },
   "parameters": {
@@ -3100,6 +3987,64 @@
       "required": true,
       "type": "string",
       "description": "The scope at which the benefits are listed."
+    },
+    "MaccNameParameter": {
+      "name": "maccName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "description": "Name of primary MACC."
+    },
+    "ContributorNameParameter": {
+      "name": "contributorName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "description": "Unique name of contributor in the format {contributorCloudSubId}_{resourceGroupName}_{nameInContributorTenant}."
+    },
+    "MaccPutRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for creating MACC.",
+      "schema": {
+        "$ref": "#/definitions/Macc"
+      }
+    },
+    "MaccPatchRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for updating MACC.",
+      "schema": {
+        "$ref": "#/definitions/MaccPatchRequest"
+      }
+    },
+    "ChargeShortfallRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for charging shortfall.",
+      "schema": {
+        "$ref": "#/definitions/ChargeShortfallRequest"
+      }
+    },
+    "BenefitValidateRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for validating a benefit",
+      "schema": {
+        "$ref": "#/definitions/BenefitValidateRequest"
+      }
     }
   }
 }

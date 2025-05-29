@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "benefitType": "MACC",
+      "benefits": [
+        {
+          "properties": {
+            "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+            "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "resourceUri": "R2",
+            "startAt": "2023-07-01T00:00:00Z",
+            "endAt": "2024-07-01T00:00:00Z",
+            "primaryUri": "R1",
+            "systemId": "13810867107109237",
+            "commitment": {
+              "grain": "FullTerm",
+              "amount": 20000,
+              "currencyCode": "USD"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "resourceUri": "R2",
+            "valid": true
+          }
+        ]
+      }
+    }
+  }
+}

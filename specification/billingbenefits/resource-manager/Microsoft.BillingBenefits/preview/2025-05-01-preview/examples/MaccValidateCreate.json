@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "benefitType": "MACC",
+      "benefits": [
+        {
+          "properties": {
+            "entityType": "primary",
+            "systemId": null,
+            "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "resourceUri": "c020e925-2d20-4fc6-bc64-ed6d511535db",
+            "startAt": "2023-07-01T00:00:00Z",
+            "endAt": "2024-07-01T00:00:00Z",
+            "allowContributors": true,
+            "commitment": {
+              "grain": "FullTerm",
+              "currencyCode": "USD",
+              "amount": 10000
+            }
+          }
+        },
+        {
+          "properties": {
+            "entityType": "contributor",
+            "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+            "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "resourceUri": "R2",
+            "startAt": "2023-07-01T00:00:00Z",
+            "endAt": "2024-07-01T00:00:00Z",
+            "primaryUri": "R1",
+            "systemId": "13810867107109237"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "resourceUri": "R1",
+            "valid": true
+          },
+          {
+            "resourceUri": "R2",
+            "valid": false,
+            "reason": "Error message",
+            "reasonCode": "ErrorCode"
+          }
+        ]
+      }
+    }
+  }
+}
