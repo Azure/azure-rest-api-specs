@@ -28,12 +28,14 @@ enum Badge {
 }
 
 @doc("Publisher type")
-enum PublisherType {
+union PublisherType {
   @doc("Product is published by Microsoft (1st party product)")
-  Microsoft,
+  Microsoft: "Microsoft",
 
   @doc("Product is published by Third Party Vendor")
-  ThirdParty,
+  ThirdParty: "ThirdParty",
+
+  string,
 }
 
 @doc("Product publishing stage")

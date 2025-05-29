@@ -7,15 +7,18 @@ using Azure.Core.Traits;
 
 namespace Products;
 
-alias ProductsListingTraits = QueryParametersTrait<StorefrontParameter &
-  LanguageParameter &
-  LocationsParameter &
-  MarketParameter &
-  HideKeysParameter &
-  SelectQueryParameter &
-  FilterParameter &
-  ExpandQueryParameter &
-  OrderByQueryParameter>;
+alias ProductsListingTraits = SupportsClientRequestId &
+  SupportsRepeatableRequests &
+  NoConditionalRequests &
+  QueryParametersTrait<StorefrontParameter &
+    LanguageParameter &
+    LocationsParameter &
+    MarketParameter &
+    HideKeysParameter &
+    SelectQueryParameter &
+    FilterParameter &
+    ExpandQueryParameter &
+    OrderByQueryParameter>;
 
 alias ProductsListingOperation = ResourceOperations<ProductsListingTraits>;
 
