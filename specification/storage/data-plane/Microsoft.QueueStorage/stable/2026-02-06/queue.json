@@ -1753,6 +1753,55 @@
           "type": "string"
         }
       }
+    },
+    "UserDelegationKey": {
+      "type": "object",
+      "required": [
+        "SignedOid",
+        "SignedTid",
+        "SignedStart",
+        "SignedExpiry",
+        "SignedService",
+        "SignedVersion",
+        "Value"
+      ],
+      "description": "A user delegation key",
+      "properties": {
+        "SignedOid": {
+          "description": "The Azure Active Directory object ID in GUID format.",
+          "type": "string"
+        },
+        "SignedTid": {
+          "description": "The Azure Active Directory tenant ID in GUID format",
+          "type": "string"
+        },
+        "SignedStart": {
+          "description": "The date-time the key is active",
+          "type": "string",
+          "format": "date-time"
+        },
+        "SignedExpiry": {
+          "description": "The date-time the key expires",
+          "type": "string",
+          "format": "date-time"
+        },
+        "SignedService": {
+          "description": "Abbreviation of the Azure Storage service that accepts the key",
+          "type": "string"
+        },
+        "SignedVersion": {
+          "description": "The service version that created the key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "The key as a base64 string",
+          "type": "string"
+        },
+        "SignedDelegatedUserTid": {
+          "description": "String, return if DelegatedUserTid is specified. The delegated user tenant ID in Entra ID",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
