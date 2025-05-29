@@ -196,30 +196,30 @@ model StatefulServiceProperties extends ServiceResourceProperties {
   /**
    * The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format "hh:mm:ss".
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-  @OpenAPI.extension("x-ms-format", "duration-constant")
-  replicaRestartWaitDuration?: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  replicaRestartWaitDuration?: duration;
 
   /**
    * The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format "hh:mm:ss".
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-  @OpenAPI.extension("x-ms-format", "duration-constant")
-  quorumLossWaitDuration?: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  quorumLossWaitDuration?: duration;
 
   /**
    * The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format "hh:mm:ss".
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-  @OpenAPI.extension("x-ms-format", "duration-constant")
-  standByReplicaKeepDuration?: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  standByReplicaKeepDuration?: duration;
 
   /**
    * The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format "hh:mm:ss".
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-  @OpenAPI.extension("x-ms-format", "duration-constant")
-  servicePlacementTimeLimit?: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  servicePlacementTimeLimit?: duration;
 
   /**
    * The kind of service (Stateless or Stateful).
