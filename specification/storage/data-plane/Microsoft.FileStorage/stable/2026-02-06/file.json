@@ -7602,6 +7602,28 @@
         "name": "ShareRootSquash",
         "modelAsString": false
       }
+    },
+    "KeyInfo": {
+      "type": "object",
+      "required": [
+        "Start",
+        "Expiry"
+      ],
+      "description": "Key information",
+      "properties": {
+        "Start": {
+          "description": "The date-time the key is active in ISO 8601 UTC time",
+          "type": "string"
+        },
+        "Expiry": {
+          "description": "The date-time the key expires in ISO 8601 UTC time",
+          "type": "string"
+        },
+        "DelegatedUserTid": {
+          "description": "Optional. String, The delegated user tenant ID in Entra ID",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
