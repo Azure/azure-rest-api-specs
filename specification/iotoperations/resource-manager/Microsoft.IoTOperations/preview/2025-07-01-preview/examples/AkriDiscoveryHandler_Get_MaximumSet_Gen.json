@@ -14,22 +14,22 @@
         "properties": {
           "provisioningState": "Succeeded",
           "aioMetadata": {
-            "aioMinVersion": "nxusafsppaikld",
-            "aioMaxVersion": "yrmlixhxsnrgialgwruyk"
+            "aioMinVersion": "1.2.0",
+            "aioMaxVersion": "1.4.0"
           },
           "additionalConfiguration": {
-            "key2206": "ysosuqsgtnwlyq"
+            "key": "value"
           },
           "diagnostics": {
             "logs": {
-              "level": "inypis"
+              "level": "info"
             }
           },
           "mode": "Enabled",
           "discoverableDeviceEndpointTypes": [
             {
-              "endpointType": "chkkpymxhp",
-              "version": "chkkpymxhp"
+              "endpointType": "Microsoft.Rest",
+              "version": "0.0.1"
             }
           ],
           "mqttConnectionConfiguration": {
@@ -39,18 +39,18 @@
                 "audience": "MQ-SAT"
               }
             },
-            "host": "mfxhevl",
+            "host": "aio-broker:18883",
             "protocol": "Mqtt",
-            "keepAliveSeconds": 0,
-            "maxInflightMessages": 0,
-            "sessionExpirySeconds": 0,
+            "keepAliveSeconds": 10,
+            "maxInflightMessages": 100,
+            "sessionExpirySeconds": 60,
             "tls": {
               "mode": "Enabled",
-              "trustedCaCertificateConfigMapRef": "tectjjvukvelsreihwadh"
+              "trustedCaCertificateConfigMapRef": "azure-iot-operations-aio-ca-trust-bundle"
             }
           },
           "imageConfiguration": {
-            "imageName": "vrglpcosiuiulgwqkjbrdxnyjphp",
+            "imageName": "samples/image",
             "imagePullPolicy": "Always",
             "replicas": 4,
             "registrySettings": {
@@ -68,9 +68,14 @@
           },
           "secrets": [
             {
-              "secretKey": "qblyfotyqcojcchpji",
-              "secretAlias": "daizzyhqznrvmmrg",
-              "secretRef": "vqxrhffxxfwqagwjcjimkmzjoxu"
+              "secretAlias": "username",
+              "secretRef": "secret-a",
+              "secretKey": "username"
+            },
+            {
+              "secretAlias": "password",
+              "secretRef": "secret-a",
+              "secretKey": "password"
             }
           ]
         },
