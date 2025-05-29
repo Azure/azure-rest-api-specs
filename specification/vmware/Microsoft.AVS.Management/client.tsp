@@ -217,8 +217,6 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
   "java"
 );
 
-@@clientName(Azure.ResourceManager.Foundations.Sku, "SKU", "go");
-
 // property
 @@clientName(Circuit.expressRouteID, "expressRouteId", "java");
 @@clientName(Circuit.expressRoutePrivatePeeringID,
@@ -234,4 +232,9 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
   "java"
 );
 
-@@alternateType(ScriptExecutionProperties.namedOutputs, Record<unknown>, "java,go");
+@@clientName(Locations.checkTrialAvailability::parameters.sku, "SKU", "go");
+
+@@alternateType(ScriptExecutionProperties.namedOutputs,
+  Record<unknown>,
+  "java,go"
+);
