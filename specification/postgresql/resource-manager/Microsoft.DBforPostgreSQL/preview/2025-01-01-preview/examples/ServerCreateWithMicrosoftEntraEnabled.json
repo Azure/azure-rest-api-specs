@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "serverName": "pgtestsvc4",
-    "resourceGroupName": "testrg",
     "api-version": "2025-01-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
     "parameters": {
       "location": "westus",
       "sku": {
@@ -11,8 +11,8 @@
         "name": "Standard_D4ds_v5"
       },
       "properties": {
-        "administratorLogin": "login",
-        "administratorLoginPassword": "Password1",
+        "administratorLogin": "administratorlogin",
+        "administratorLoginPassword": "examplepassword",
         "version": "16",
         "availabilityZone": "1",
         "createMode": "Create",
@@ -34,15 +34,12 @@
           "geoRedundantBackup": "Disabled"
         },
         "network": {
-          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
-          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourcegroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourcegroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
         },
         "highAvailability": {
           "mode": "ZoneRedundant"
         }
-      },
-      "tags": {
-        "ElasticServer": "1"
       }
     }
   },
@@ -58,10 +55,10 @@
             "role": "Primary",
             "capacity": 5
           },
-          "fullyQualifiedDomainName": "pgtestsvc4.test-private-dns-zone.postgres.database.azure.com",
+          "fullyQualifiedDomainName": "exampleserver.exampleprivatednszone.postgres.database.azure.com",
           "version": "16",
-          "minorVersion": "6",
-          "administratorLogin": "login",
+          "minorVersion": "8",
+          "administratorLogin": "administratorlogin",
           "state": "Ready",
           "availabilityZone": "1",
           "authConfig": {
@@ -82,12 +79,12 @@
           "backup": {
             "backupRetentionDays": 7,
             "geoRedundantBackup": "Disabled",
-            "earliestRestoreDate": "2025-02-26T01:08:06.7197478+00:00"
+            "earliestRestoreDate": "2025-01-01T18:35:22.123456Z"
           },
           "network": {
             "publicNetworkAccess": "Disabled",
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
           },
           "highAvailability": {
             "mode": "ZoneRedundant",
@@ -104,11 +101,8 @@
           "replicaCapacity": 5
         },
         "location": "westus",
-        "tags": {
-          "ElasticServer": "1"
-        },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
-        "name": "pgtestsvc4",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
     },
@@ -123,10 +117,10 @@
             "role": "Primary",
             "capacity": 5
           },
-          "fullyQualifiedDomainName": "pgtestsvc4.test-private-dns-zone.postgres.database.azure.com",
+          "fullyQualifiedDomainName": "exampleserver.exampleprivatednszone.postgres.database.azure.com",
           "version": "16",
-          "minorVersion": "6",
-          "administratorLogin": "login",
+          "minorVersion": "8",
+          "administratorLogin": "administratorlogin",
           "state": "Ready",
           "availabilityZone": "1",
           "authConfig": {
@@ -143,12 +137,12 @@
           "backup": {
             "backupRetentionDays": 7,
             "geoRedundantBackup": "Disabled",
-            "earliestRestoreDate": "2025-02-26T01:08:06.7197478+00:00"
+            "earliestRestoreDate": "2025-01-01T18:35:22.123456Z"
           },
           "network": {
             "publicNetworkAccess": "Disabled",
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
           },
           "highAvailability": {
             "mode": "ZoneRedundant",
@@ -163,11 +157,8 @@
           }
         },
         "location": "westus",
-        "tags": {
-          "ElasticServer": "1"
-        },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
-        "name": "pgtestsvc4",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
     },
