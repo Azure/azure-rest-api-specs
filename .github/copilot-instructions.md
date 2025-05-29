@@ -186,6 +186,7 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
     - Avoid using the `main` branch for pull requests. Prompt the user to create or switch to a new branch if necessary.
     - Display git commands (e.g., `git checkout`, `git add`, `git commit`, `git push`) with a "Run" button instead of 
     asking the user to copy and paste.
+    - Do not run `git diff`
 
 6. **Azure-Specific Rules**:
     - Always use `Azure` as the repo owner in MCP tool calls.
@@ -234,10 +235,37 @@ changes in `.github` and `.vscode` folders.
                 - If the push fails due to authentication, prompt the user to run `gh auth login` and retry the push command.
                 - If the user does not confirm, prompt them to fix the changes and re-run validation.
 
-### Step 4: Manage Pull Requests
-- Check if a pull request exists for the current branch:
+### Step 4: Create SDK locally from TypeSpec
+- Currently supported for Python only. SDK for all other languages is generated using the Azure DevOps pipeline.
+- Always prompt user to check if they want to generate SDK locally for Python.
+    - If the user wants to generate SDK locally:
+        - Prompt the user to provide the path to cloned azure-sdk-for-python repository.
+        - If the user provides a path to the azure-sdk-for-python repository, check if the repository exists:
+            - If the repository exists, start a new process to open vscode in the cloned azure-sdk-for-python repository.
+        - If the user does not have the
+        repository, provide instructions to clone it.
+           - Go to parent directory of current repo root path.
+           - Fork https://github.com/Azure/azure-sdk-for-python repository to the user's GitHub account.
+           - Clone the forked repository to the local machine.
+            ```bash
+            git clone https://github.com/<github-username>/azure-sdk-for-python.git
+            ```
+           - Consider cloned path as the path to the azure-sdk-for-python repository.
+        - Do not ask the user to run tsp compile. Instead ask user to open azure-sdk-for-python repository in vscode and use agent
+         suport in python repo to generate the SDK.
+        - Prompt user to open vscode in the cloned azure-sdk-for-python repository. 
+        - Inform user to use prompt like below to start SDK generation using GitHub copilot agent.
+          "Help me generate SDK for Python from TypeSpec API specification for project < path to TypeSpec project root >."
+- Inform user to provide link to SDK pull request if they generate DSK locally and created a pull request for it. SDK generation
+step below will skip it for the language and reuse the pull request link provided by the user.
+- In some cases, user will come back and make more changes to TypeSpec so start the process from step 1 again.
+- If user provides a link to SDK pull request then link SDK pull request to release plan if a release plan already exists and skip SDK generation for that language.
+- If a release plan does not exits then link the SDK pull request when release plan is created.
+
+### Step 5: Manage Pull Requests
+- Check if a pull request for TypeSpec exists for the current branch:
     - If a pull request exists, inform the user and display its details.
-    - If no pull request exists:
+    - If no pull request exists for TypeSpec:
         - Ensure the current branch name is not "main." If it is, prompt the user to create a new branch using 
         `git checkout -b <branch name>`.
         - Push the changes to the remote branch. If the branch does not exist on GitHub, create it and push the changes.
@@ -248,7 +276,7 @@ changes in `.github` and `.vscode` folders.
 - Retrieve and display the pull request summary, including its status, checks, and comments. Highlight any action items.
     - Retrieve API review links and display their details. Inform the user to check APIView for generated SDK APIs.
 
-### Step 5: Prepare the Release Plan
+### Step 6: Prepare the Release Plan
 - Check if the API spec is ready to generate the SDK. Provide the TypeSpec project root path and pull request number.
 - Verify if a release plan exists for the API spec pull request:
     - If no release plan exists, create one. Prompt the user to provide the following details:
@@ -261,9 +289,12 @@ changes in `.github` and `.vscode` folders.
             - Product service tree ID for the product. This is a GUID type of ID for the product in Service tree.
             - Expected release timeline (e.g., Month YYYY).
             - API version.
+            - SDK release type (beta for preview API versions, stable otherwise).
         - If the user lacks details, suggest using the release planner. More details are available [here](https://eng.ms/docs/products/azure-developer-experience/plan/release-plan-create).
+- If a release plan already exists, retrieve it and display its details to the user. If ReleasePlanLink is not empty, then show the link to user.
 
-### Step 6: Generate SDKs
+### Step 7: Generate SDKs
+- If SDK pull request exists from local SDK generation, then skip SDK generation for that language. Link SDK pull request to release plan.
 - Retrieve the release plan and check if SDK generation has already occurred or if an SDK pull request exists for a language:
     - If an SDK pull request exists, display its details.
     - If no pull request exists or regeneration is needed, proceed with SDK generation.
@@ -280,4 +311,3 @@ changes in `.github` and `.vscode` folders.
     - Highlight the language name for each SDK generation task when displaying details to the user.
     - Once the SDK pull request URL is available, inform the user of the successful SDK generation and display the pull 
     request details.
-
