@@ -31,7 +31,6 @@ using TypeSpec.Versioning;
 namespace Customization;
 
 @operationGroup
-@armResourceOperations
 interface WorkloadNetworks {
   list is Microsoft.AVS.WorkloadNetworks.list;
   get is Microsoft.AVS.WorkloadNetworks.get;
@@ -45,7 +44,7 @@ interface WorkloadNetworks {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   deleteDhcp is WorkloadNetworkDhcpConfigurations.delete;
 
-  listDnsService is WorkloadNetworkDnsServices.list;
+  listDnsServices is WorkloadNetworkDnsServices.list;
   getDnsService is WorkloadNetworkDnsServices.get;
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -91,8 +90,8 @@ interface WorkloadNetworks {
   getSegment is WorkloadNetworkSegments.get;
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createSegment is WorkloadNetworkSegments.create;
-  updateSegment is WorkloadNetworkSegments.update;
+  createSegments is WorkloadNetworkSegments.create;
+  updateSegments is WorkloadNetworkSegments.update;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   deleteSegment is WorkloadNetworkSegments.deleteSegment;
 
@@ -191,21 +190,33 @@ interface ProvisionedNetworks extends Microsoft.AVS.ProvisionedNetworks {}
 @operationGroup
 interface Skus extends Microsoft.AVS.Skus {}
 
-// model
-@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
-  "PrivateCloudIdentity"
-);
-// name conflict with Azure.ResourceManager.CommonTypes.ResourceIdentityType
-// @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
-//   "ResourceIdentityType"
-// );
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 
+// model
 @@clientName(VmVmPlacementPolicyProperties, "VmPlacementPolicyProperties");
+
+@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
+  "PrivateCloudIdentity",
+  "java,go"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
+  "ResourceIdentityType",
+  "java,go"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ResourceIdentityType,
+  "SystemAssignedResourceIdentityType",
+  "java,go"
+);
+
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
 @@clientName(WorkloadNetworkPublicIPProvisioningState,
   "WorkloadNetworkPublicIpProvisioningState",
   "java"
 );
+
+@@clientName(Azure.ResourceManager.Foundations.Sku, "SKU", "go");
 
 // property
 @@clientName(Circuit.expressRouteID, "expressRouteId", "java");
@@ -221,3 +232,5 @@ interface Skus extends Microsoft.AVS.Skus {}
   "publicIpBlock",
   "java"
 );
+
+@@alternateType(ScriptExecutionProperties.namedOutputs, Record<unknown>, "java,go");
