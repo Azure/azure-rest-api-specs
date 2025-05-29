@@ -8,9 +8,6 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
   Access.public
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
-  "csharp"
-);
 @@usage(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
   Usage.output
 );
