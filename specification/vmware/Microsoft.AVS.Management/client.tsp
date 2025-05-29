@@ -30,6 +30,7 @@ using TypeSpec.Versioning;
 @useDependency(Microsoft.AVS.Versions.v2024_09_01)
 namespace Customization;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface WorkloadNetworks {
   list is Microsoft.AVS.WorkloadNetworks.list;
