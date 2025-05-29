@@ -311,6 +311,7 @@ export function generateArtifact(
     setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
     setVsoVariable("BreakingChangeLabelAction", hasBreakingChange ? "add" : "remove");
     setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
+    setVsoVariable("HasAPIViewArtifact", apiViewRequestData.length > 0 ? "true" : "false");
   } catch (error) {
     logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
     vsoLogIssue(`Runner: errors writing breaking change label artifacts:${error}`);
