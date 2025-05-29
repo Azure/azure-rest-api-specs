@@ -38,14 +38,6 @@ export class Swagger {
    * @returns {Promise<Set<Swagger>>}
    */
   async getRefs() {
-    return this.getRefsAndExamples(false);
-  }
-
-  /**
-   * @returns {Promise<Set<Swagger>>}
-   * @param {boolean} includeExamples
-   */
-  async getRefsAndExamples(includeExamples = false) {
     if (!this.#refs) {
       const schema = await $RefParser.resolve(this.#path, {
         resolve: { http: false },
@@ -53,7 +45,8 @@ export class Swagger {
 
       const refPaths = schema
         .paths("file")
-        .filter((p) => includeExamples ? !example(p) : true)
+        // Exclude examples
+        .filter((p) => !example(p))
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 
@@ -75,7 +68,30 @@ export class Swagger {
    * @returns {Promise<Set<Swagger>>}
    */
   async getExamples() {
-    return this.getRefsAndExamples(true);
+    if (!this.#refs) {
+      const schema = await $RefParser.resolve(this.#path, {
+        resolve: { http: false },
+      });
+
+      const refPaths = schema
+        .paths("file")
+        // include only example refs
+        .filter((p) => example(p))
+        // Exclude ourself
+        .filter((p) => resolve(p) !== resolve(this.#path));
+
+      this.#refs = new Set(
+        refPaths.map(
+          (p) =>
+            new Swagger(p, {
+              logger: this.#logger,
+              specModel: this.#specModel,
+            }),
+        ),
+      );
+    }
+
+    return this.#refs;
   }
 
   /**

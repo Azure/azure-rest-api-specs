@@ -55,15 +55,18 @@ export function outputErrorSummary(
   reportName: string,
 ) {
   let builtLines: string[] = [];
+  let checkName: string = "";
 
   builtLines.push(`## Error Summary - ${reportName}`);
 
   // just mapping the report names we want to migrate to the old names here, so we don't have to pull it through everywhere when we want to change it
   if (reportName === "Swagger Specifications Validation") {
     reportName = "Swagger SemanticValidation";
+    checkName = "validate-spec";
   }
   if (reportName === "Swagger Examples Validation") {
     reportName = "Swagger ModelValidation";
+    checkName = "validate-example";
   }
 
   builtLines.push(
@@ -97,7 +100,7 @@ export function outputErrorSummary(
 
   builtLines.push("\n");
   builtLines.push(
-    "> [!IMPORTANT]\n> Repro any individual file's worth of errors by installing `oav@3.5.1` and invoking `oav validate-spec <spec-file-path>`.",
+    `> [!IMPORTANT]\n> Repro any individual file's worth of errors by invoking \`npx oav ${checkName} <spec-file-path>\` from the root of the rest-api-specs repo.`,
   );
 
   const summaryResult = builtLines.join("\n");

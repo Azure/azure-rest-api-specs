@@ -18,14 +18,33 @@ describe("file processing", () => {
     expect(result).toEqual(expected);
   });
 
-  it("should process a large set of files and return a list of swagger files only", () => {});
+  it("should process a larger set of files and return a list of expected resolved swagger files", async () => {
+    const changedFiles = [
+      "specification/appcomplianceautomation/resource-manager/Microsoft.AppComplianceAutomation/stable/2024-06-27/examples/Evidence_CreateOrUpdate.json",
+      "specification/appcomplianceautomation/resource-manager/Microsoft.AppComplianceAutomation/stable/2024-06-27/examples/Evidence_Download.json",
+      "specification/appcomplianceautomation/resource-manager/Microsoft.AppComplianceAutomation/stable/2024-06-27/examples/ListInUseStorageAccountsWithSubscriptions.json",
+      "specification/appcomplianceautomation/resource-manager/Microsoft.AppComplianceAutomation/stable/2024-06-27/examples/Report_GetScopingQuestions.json",
+      "specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2024-05-01/apimapiversionsets.json",
+      "specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2024-05-01/examples/ApiManagementListApiVersionSets.json",
+      "specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2024-05-01/examples/ApiManagementListCaches.json",
+    ];
+    const expected = [
+      "specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2024-05-01/apimapiversionsets.json",
+      "specification/appcomplianceautomation/resource-manager/Microsoft.AppComplianceAutomation/stable/2024-06-27/appcomplianceautomation.json",
+      "specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2024-05-01/apimcaches.json",
+    ];
 
-  it.only("should process the correct swagger file given only changed example files", async () => {
+    const result = await processFilesToSpecificationList(ROOT, changedFiles);
+    expect(result.length).toEqual(expected.length);
+    expect(result).toEqual(expected);
+  });
+
+  it("should process the correct swagger file given only changed example files", async () => {
     const changedFiles = [
       "specification/network/resource-manager/Microsoft.Network/stable/2024-07-01/examples/PublicIpPrefixDelete.json",
     ];
     const expected = [
-      "azure-rest-api-specs/specification/network/resource-manager/Microsoft.Network/stable/2024-07-01/publicIpPrefix.json",
+      "specification/network/resource-manager/Microsoft.Network/stable/2024-07-01/publicIpPrefix.json",
     ];
 
     const result = await processFilesToSpecificationList(ROOT, changedFiles);

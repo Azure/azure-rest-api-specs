@@ -1,13 +1,11 @@
 #!/usr/bin/env node
 
-// The original ordering of this code is pulled directly from the original at
-// openapi-alps#public/rest-api-specs-scripts/src/modelValidationPipeline.ts
 import * as oav from "oav";
 import * as path from "path";
 import * as fs from "fs";
 
 import { consoleLogger } from "@azure-tools/specs-shared/logger";
-import { Swagger } from "@azure-tools/specs-shared/swagger"
+import { Swagger } from "@azure-tools/specs-shared/swagger";
 
 import {
   example,
@@ -25,11 +23,6 @@ export async function checkExamples(
   const changedFiles = await getChangedFiles({
     cwd: rootDirectory,
   });
-  // const changedFiles: string[] = [
-  //     "specification/cdn/resource-manager/Microsoft.Cdn/preview/2024-07-22-preview/edgeaction.json",
-  //     "specification/cdn/resource-manager/Microsoft.Cdn/stable/2024-09-01/afdx.json",
-  //     "specification/cdn/resource-manager/readme.md"
-  // ];
 
   const swaggerFiles = await processFilesToSpecificationList(
     rootDirectory,
@@ -84,11 +77,6 @@ export async function checkSpecs(
   const changedFiles = await getChangedFiles({
     cwd: rootDirectory,
   });
-  // const changedFiles: string[] = [
-  //     "specification/cdn/resource-manager/Microsoft.Cdn/preview/2024-07-22-preview/edgeaction.json",
-  //     "specification/cdn/resource-manager/Microsoft.Cdn/stable/2024-09-01/afdx.json",
-  //     "specification/cdn/resource-manager/readme.md"
-  // ];
 
   const swaggerFiles = await processFilesToSpecificationList(
     rootDirectory,
@@ -132,89 +120,73 @@ export async function checkSpecs(
   return [0, swaggerFiles, []];
 }
 
-async function getFiles(rootDirectory: string, directory: string): Promise<string[]> {
+async function getFiles(
+  rootDirectory: string,
+  directory: string,
+): Promise<string[]> {
   const target = path.join(rootDirectory, directory);
   const items = await fs.promises.readdir(target, {
     withFileTypes: true,
-  })
+  });
 
   return items
-    .filter(d => d.isFile() && d.name.endsWith('.json'))
-    .map(d => path.join(target, d.name))
-    .map(d => d.replace(/^.*?(specification\/.*)$/, '$1'))
-    .filter(d => {console.log(d); return specification(d);});
+    .filter((d) => d.isFile() && d.name.endsWith(".json"))
+    .map((d) => path.join(target, d.name))
+    .map((d) => d.replace(/^.*?(specification\/.*)$/, "$1"))
+    .filter((d) => specification(d));
 }
 
 export async function processFilesToSpecificationList(
   rootDirectory: string,
   files: string[],
 ): Promise<string[]> {
-  consoleLogger.info(`Processing ${files.length} files:`);
-  consoleLogger.info(files.join("\n"));
+  const cachedSwaggerSpecs = new Map<string, string[]>();
+  const resultFiles: string[] = [];
+  const additionalSwaggerFiles: string[] = [];
 
-  const viewedFiles: Map<string, string[]> = new Map();
+  // files from get-changed-files are relative to the root of the repo,
+  // though that context is passed into this from cli arguments.
+  for (const file of files) {
+    const absoluteFilePath = path.join(rootDirectory, file);
 
-  let additionalSwaggerFiles: string[] = [];
-  let resultFiles = files.filter(async (file) => {
-    consoleLogger.info(`Processing file: ${file}`);
-
+    // if the file is an example, we need to find the swagger file that references it
     if (example(file)) {
-      // the containing directory of the example folder is the target swagger directory
-      const swaggerDirectory = path.dirname(path.dirname(file));
+      /*
+        examples exist in the same directory as the swagger file that references them:
 
-      consoleLogger.info(
-        `Found example file: ${file}, checking for associated swagger file in directory: ${swaggerDirectory}`);
+        path/to/swagger/2024-01-01/examples/example.json <-- this is an example file path
+        path/to/swagger/2024-01-01/swagger.json <-- we need to identify this file if it references the example
+        path/to/swagger/2024-01-01/swagger2.json <-- and do nothing with this one
+      */
+      const swaggerDir = path.dirname(path.dirname(file));
 
-      const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDirectory);
-      consoleLogger.info(
-        `Found ${visibleSwaggerFiles.length} swagger files in directory: ${swaggerDirectory}`,
-      );
-      consoleLogger.info(visibleSwaggerFiles.join("\n"));
+      const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
 
-      visibleSwaggerFiles.forEach( async (swaggerFile) => {
-        consoleLogger.info(`Checking swagger file: ${swaggerFile}`);
-
-        if (!viewedFiles.has(swaggerFile)) {
-          const swaggerModel = new Swagger(path.join(rootDirectory, swaggerFile));
-          const exampleSwaggers = await swaggerModel.getExamples();
-          const examples = [...exampleSwaggers].map(e => e.path);
-
-          consoleLogger.info(
-            `Found ${examples.length} examples in swagger file: ${swaggerFile}`,
+      for (const swaggerFile of visibleSwaggerFiles) {
+        if (!cachedSwaggerSpecs.has(swaggerFile)) {
+          const swaggerModel = new Swagger(
+            path.join(rootDirectory, swaggerFile),
           );
-          viewedFiles.set(swaggerFile, examples);
+          const exampleSwaggers = await swaggerModel.getExamples();
+          const examples = [...exampleSwaggers].map((e) => e.path);
+          cachedSwaggerSpecs.set(swaggerFile, examples);
         }
-        else {
-          consoleLogger.info(`Already viewed swagger file: ${swaggerFile}`);
-        }
+        const referencedExamples = cachedSwaggerSpecs.get(swaggerFile);
 
-        // const referencedSwaggers = viewedFiles.get(swaggerFile)
-        // consoleLogger.info(
-        //   `Referenced swagger files for ${swaggerFile}: ${referencedSwaggers?.join("\n")}`
-        // );
-      });
+        // the resolved files are absolute paths, so to compare them to the file we're looking at, we need
+        // to use the absolute path version of the example file.
+        if (referencedExamples?.indexOf(absoluteFilePath) !== -1) {
+          additionalSwaggerFiles.push(swaggerFile);
+        }
+      }
     }
 
-    const swaggerResult = swagger(file);
-    const targetFile = path.join(rootDirectory, file);
-
-    // if it's a swagger file, we should check to see if it exists
-    // as a deleted file will also show up in the changed files list
-    if (swaggerResult && fs.existsSync(targetFile)) {
-      // finally, we should find all swagger files that are AFFECTED by the swagger file, add them to an accompanying list
-      return true;
+    // finally handle our base case where the file we're examining is itself a swagger file
+    if (swagger(file) && fs.existsSync(absoluteFilePath)) {
+      resultFiles.push(file);
     }
-    return false;
-  });
-
-  // finally, if we added any AFFECTED swagger files, we should add them to the resultFiles list
-  if (additionalSwaggerFiles.length > 0) {
-    consoleLogger.info(
-      `Adding ${additionalSwaggerFiles.length} additional swagger files:`,
-    );
-    consoleLogger.info(additionalSwaggerFiles.join("\n"));
-    resultFiles = resultFiles.concat(additionalSwaggerFiles);
   }
 
-  return resultFiles;
+  // combine and make the results unique
+  return Array.from(new Set([...resultFiles, ...additionalSwaggerFiles]));
 }
