@@ -97,4 +97,4 @@ interface NginxCertificates {
 
 @@doc(NginxCertificate.name, "The name of certificate");
 @@doc(NginxCertificate.properties, "");
-@@doc(NginxCertificates.createOrUpdate::parameters.body, "The certificate");
+@@doc(NginxCertificates.createOrUpdate::parameters.resource, "The certificate");

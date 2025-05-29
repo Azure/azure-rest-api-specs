@@ -115,5 +115,5 @@ interface NginxDeployments {
 
 @@doc(NginxDeployment.name, "The name of targeted NGINX deployment");
 @@doc(NginxDeployment.properties, "");
-@@doc(NginxDeployments.createOrUpdate::parameters.body, "");
-@@doc(NginxDeployments.update::parameters.body, "");
+@@doc(NginxDeployments.createOrUpdate::parameters.resource, "");
+@@doc(NginxDeployments.update::parameters.properties, "");

@@ -10,14 +10,14 @@ using Nginx.NginxPlus;
   "body"
 );
 
-@@clientName(NginxCertificates.createOrUpdate::parameters.body, "body");
+@@clientName(NginxCertificates.createOrUpdate::parameters.resource, "body");
 
 @@clientName(NginxConfigurationResponses.createOrUpdate::parameters.properties,
   "body"
 );
 
-@@clientName(NginxDeployments.createOrUpdate::parameters.body, "body");
-@@clientName(NginxDeployments.update::parameters.body, "body");
+@@clientName(NginxDeployments.createOrUpdate::parameters.resource, "body");
+@@clientName(NginxDeployments.update::parameters.properties, "body");
 @@clientName(AnalysisResultData, "NginxAnalysisResultDetails", "csharp");
 
 @@clientName(NginxConfigurationProtectedFileRequest,
