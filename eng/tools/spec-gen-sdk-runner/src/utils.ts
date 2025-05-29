@@ -407,7 +407,7 @@ export function groupPathsByService(
     }
 
     const info = serviceMap.get(serviceName)!;
-    if (folderPath.endsWith(".Management")) {
+    if (folderPath.endsWith(".Management") || folderPath.includes("resource-manager")) {
       info.managementPaths.push(folderPath);
     } else {
       info.otherTypeSpecPaths.push(folderPath);
