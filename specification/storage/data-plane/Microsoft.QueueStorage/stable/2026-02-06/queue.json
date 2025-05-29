@@ -239,6 +239,65 @@
         }
       ]
     },
+    "/?restype=service&comp=userdelegationkey": {
+      "post": {
+        "tags": [
+          "service"
+        ],
+        "operationId": "Service_GetUserDelegationKey",
+        "description": "Retrieves a user delegation key for the Queue service. This is only a valid operation when using bearer token authentication.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KeyInfo"
+          },
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "restype",
+          "description": "restype",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "service"
+          ]
+        },
+        {
+          "name": "comp",
+          "description": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "userdelegationkey"
+          ]
+        }
+      ]
+    },
     "/?comp=list": {
       "get": {
         "tags": [
