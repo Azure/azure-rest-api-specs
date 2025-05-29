@@ -30,8 +30,8 @@ using TypeSpec.Versioning;
 @useDependency(Microsoft.AVS.Versions.v2024_09_01)
 namespace Customization;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
-@armResourceOperations
 interface WorkloadNetworks {
   list is Microsoft.AVS.WorkloadNetworks.list;
   get is Microsoft.AVS.WorkloadNetworks.get;
@@ -196,16 +196,26 @@ interface ProvisionedNetworks extends Microsoft.AVS.ProvisionedNetworks {}
 @operationGroup
 interface Skus extends Microsoft.AVS.Skus {}
 
-// model
-@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
-  "PrivateCloudIdentity"
-);
-// name conflict with Azure.ResourceManager.CommonTypes.ResourceIdentityType
-// @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
-//   "ResourceIdentityType"
-// );
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 
+// model
 @@clientName(VmVmPlacementPolicyProperties, "VmPlacementPolicyProperties");
+
+@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
+  "PrivateCloudIdentity",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
+  "ResourceIdentityType",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ResourceIdentityType,
+  "SystemAssignedResourceIdentityType",
+  "java"
+);
+
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
 @@clientName(WorkloadNetworkPublicIPProvisioningState,
   "WorkloadNetworkPublicIpProvisioningState",
